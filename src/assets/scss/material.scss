@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+@include mat-core();
+@import './material.colors.scss';
+
+$orcid-app-primary: mat-palette($orcid-green);
+$orcid-app-accent: mat-palette($orcid-blue);
+$orcid-app-warn: mat-palette($mat-red);
+$orcid-app-theme: mat-light-theme(
+  $orcid-app-primary,
+  $orcid-app-accent,
+  $orcid-app-warn
+);
+@include angular-material-theme($orcid-app-theme);
