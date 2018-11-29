@@ -1,0 +1,9 @@
+@import '../../app/layout/header/header.component.scss-theme.scss';
+
+@mixin custom-components-theme($theme) {
+  @include header-theme($theme);
+}
+
+@mixin custom-components-typography($custom) {
+  @include header-typography($custom);
+}

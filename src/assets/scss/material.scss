@@ -1,13 +1,24 @@
 @import '~@angular/material/theming';
-@include mat-core();
-@import './material.colors.scss';
+@import './material.custom-components.scss';
+@import './material.theme.scss';
+@import './material.typography.scss';
 
-$orcid-app-primary: mat-palette($orcid-green);
-$orcid-app-accent: mat-palette($orcid-blue);
+// SETUP-FONTS
+@include mat-base-typography($orcid-typography);
+@include mat-checkbox-typography($orcid-typography);
+@include angular-material-typography($orcid-typography);
+@include mat-core($orcid-typography);
+@include custom-components-typography($orcid-typography);
+
+// SETUP-THEME
+$orcid-app-primary: mat-palette($orcid-blue);
+$orcid-app-accent: mat-palette($orcid-green);
 $orcid-app-warn: mat-palette($mat-red);
 $orcid-app-theme: mat-light-theme(
   $orcid-app-primary,
   $orcid-app-accent,
   $orcid-app-warn
 );
+
 @include angular-material-theme($orcid-app-theme);
+@include custom-components-theme($orcid-app-theme);
