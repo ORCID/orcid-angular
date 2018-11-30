@@ -4,6 +4,7 @@ header {
     margin-left: 24px;
     width: 103px;
     padding-top: 12px;
+    cursor: pointer;
   }
 }
 
@@ -26,7 +27,24 @@ nav {
     padding-left: 24px;
     padding-right: 24px;
     height: 50px;
-    font-weight: 700;
+    font-weight: 600;
+    margin-left: -15px;
+    .search-menu {
+      width: 189px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .language {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 105px;
+        height: 50px;
+      }
+    }
+    li {
+      height: 100%;
+    }
   }
 
   .bottom-bar {
@@ -36,10 +54,18 @@ nav {
     flex-direction: column-reverse;
     box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.16);
     height: 40px;
+    margin-left: -15px;
     .secondary-menu {
       display: flex;
       align-items: center;
       height: 100%;
+      .buttons-container {
+        margin-top: 1px;
+        li {
+          height: 38px;
+          padding-bottom: 1px;
+        }
+      }
     }
   }
   ul {
@@ -47,9 +73,15 @@ nav {
     li {
       display: flex;
       align-items: center;
-      padding-left: 15px;
-      padding-right: 15px;
       min-width: 20px;
+      button {
+        height: 100%;
+        width: 100%;
+      }
     }
+  }
+  li,
+  i {
+    cursor: pointer;
   }
 }

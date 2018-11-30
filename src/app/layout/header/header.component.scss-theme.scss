@@ -11,6 +11,21 @@ $config: mat-typography-config();
     color: mat-color($primary, '400-contrast');
     background-color: mat-color($primary);
   }
+  .bottom-bar {
+    color: mat-color($accent, '400-contrast');
+  }
+  ul {
+    li {
+      .active {
+        background-color: mat-color($accent);
+        color: mat-color($primary, '400-contrast');
+      }
+      .select {
+        background-color: mat-color($accent);
+        color: mat-color($primary, '400-contrast');
+      }
+    }
+  }
 }
 
 @mixin header-typography($config) {

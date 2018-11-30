@@ -5,33 +5,36 @@
   <div class="top-bar">
     <div class="main-menu">
       <ul class="buttons-container">
-        <li>Button 1</li>
-        <li>Button 2</li>
-        <li>Button 3</li>
-        <li>Button 4</li>
-        <li>Button 5</li>
+        <li *ngFor="let button of (menu | keyvalue)">
+          <button
+            mat-button
+            (mouseenter)="mouseEnter('button.key')"
+            (mouseleave)="mouseLeave('button.key')"
+          >
+            {{ button.key }}
+          </button>
+        </li>
       </ul>
     </div>
 
     <div class="search-menu">
-      <div class="buttons-container">
-        <div><i class="material-icons"> search </i></div>
-        <div>
-          <i class="material-icons"> language </i> English
+      <i class="material-icons"> search </i>
+      <button mat-button>
+        <div class="language">
+          <i class="material-icons"> language </i>
+          <p>English</p>
           <i class="material-icons"> expand_more </i>
         </div>
-      </div>
+      </button>
     </div>
   </div>
 
   <div class="bottom-bar">
     <div class="secondary-menu">
       <ul class="buttons-container">
-        <li>Button 1</li>
-        <li>Button 2</li>
-        <li>Button 3</li>
-        <li>Button 4</li>
-        <li>Button 5</li>
+        <li><button mat-button>SIGN IN</button></li>
+        <li><button mat-button>REGISTER FOR AN ORCID</button></li>
+        <li><button mat-button>LEARN MORE</button></li>
       </ul>
     </div>
   </div>

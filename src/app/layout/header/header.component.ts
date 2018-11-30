@@ -6,7 +6,24 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  public menu = {
+    'FOR RESEARCHERS': [],
+    'FOR ORGANIZATIONS': [],
+    ABOUT: [],
+    HELP: [],
+    'SIGN IN': [],
+  }
+  constructor() {
+    console.log(Object.keys(this.menu))
+  }
 
   ngOnInit() {}
+
+  mouseEnter(div: string) {
+    console.log('mouse enter : ' + div)
+  }
+
+  mouseLeave(div: string) {
+    console.log('mouse leave :' + div)
+  }
 }
