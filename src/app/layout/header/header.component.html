@@ -1,17 +1,53 @@
 <header>
   <div class="logo"><img src="/assets/vectors/orcid.logo.svg" /></div>
 </header>
-<nav>
+<nav (mouseleave)="mouseLeave()">
   <div class="top-bar">
     <div class="main-menu">
       <ul class="buttons-container">
-        <li *ngFor="let button of (menu | keyvalue)">
+        <li [ngClass]="{ active: menu.researchers.route === currentRoute }">
           <button
             mat-button
-            (mouseenter)="mouseEnter('button.key')"
-            (mouseleave)="mouseLeave('button.key')"
+            (click)="click('researchers')"
+            (mouseenter)="mouseEnter('researchers')"
           >
-            {{ button.key }}
+            FOR RESEARCHERS
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.organizations.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('organizations')"
+            (mouseenter)="mouseEnter('organizations')"
+          >
+            FOR ORGANIZATIONS
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.about.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('about')"
+            (mouseenter)="mouseEnter('about')"
+          >
+            ABOUT
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.help.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('help')"
+            (mouseenter)="mouseEnter('help')"
+          >
+            HELP
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.signIn.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('signIn')"
+            (mouseenter)="mouseEnter('signIn')"
+          >
+            SIGN IN
           </button>
         </li>
       </ul>
@@ -30,11 +66,41 @@
   </div>
 
   <div class="bottom-bar">
-    <div class="secondary-menu">
+    <div class="secondary-menu" *ngIf="menu.researchers.hover">
       <ul class="buttons-container">
         <li><button mat-button>SIGN IN</button></li>
-        <li><button mat-button>REGISTER FOR AN ORCID</button></li>
+        <li><button mat-button>REGISTER FOR AN ORCID ID</button></li>
         <li><button mat-button>LEARN MORE</button></li>
+      </ul>
+    </div>
+
+    <div class="secondary-menu" *ngIf="menu.organizations.hover">
+      <ul class="buttons-container">
+        <li><button mat-button>FUNDERS</button></li>
+        <li><button mat-button>PUBLISHERS</button></li>
+        <li><button mat-button>RESEARCHERS ORGANIZATIONS</button></li>
+        <li><button mat-button>OUTREACH RESOURCES</button></li>
+        <li><button mat-button>INTEGRATE WITH THE ORCID API</button></li>
+      </ul>
+    </div>
+
+    <div class="secondary-menu" *ngIf="menu.about.hover">
+      <ul class="buttons-container">
+        <li><button mat-button>WHAT IS ORCID</button></li>
+        <li><button mat-button>WHO WHE ARE</button></li>
+        <li><button mat-button>WHO WE SERVE</button></li>
+        <li><button mat-button>MEMBERSHIP</button></li>
+        <li><button mat-button>NEWS AND EVENTS</button></li>
+      </ul>
+    </div>
+
+    <div class="secondary-menu" *ngIf="menu.help.hover">
+      <ul class="buttons-container">
+        <li><button mat-button>GET HELP</button></li>
+        <li><button mat-button>FAQ</button></li>
+        <li><button mat-button>KNOWLEDGE BASE</button></li>
+        <li><button mat-button>OUTREACH RESOURCES</button></li>
+        <li><button mat-button>GIVE FEED BACK</button></li>
       </ul>
     </div>
   </div>
