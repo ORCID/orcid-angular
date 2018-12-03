@@ -54,3 +54,16 @@ body {
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
 }
+app-root {
+  display: block;
+  min-height: 100%;
+  position: relative;
+}
+.router-container {
+  padding-bottom: 46px; //remove footer height
+}
+app-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
