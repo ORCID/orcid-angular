@@ -20,5 +20,20 @@ $orcid-app-theme: mat-light-theme(
   $orcid-app-warn
 );
 
+// CUSTOM BACKGROUND COLORS
+$background: map-get($orcid-app-theme, background);
+$background: map_merge(
+  $background,
+  (
+    app-footer: $light-primary-background,
+  )
+);
+$orcid-app-theme: map_merge(
+  $orcid-app-theme,
+  (
+    background: $background,
+  )
+);
+
 @include angular-material-theme($orcid-app-theme);
 @include custom-components-theme($orcid-app-theme);

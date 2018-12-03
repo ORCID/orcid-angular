@@ -1,0 +1,33 @@
+footer {
+  height: 46px;
+  display: flex;
+  justify-content: space-around;
+  bottom: 0;
+  width: 100%;
+
+  ul.buttons-container {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: center;
+    li {
+      height: 100%;
+      display: flex;
+      .button-wrapper {
+        padding: 0 10px;
+        display: flex;
+        .logo {
+          display: flex;
+          align-items: center;
+          margin-left: 12px;
+          img {
+            width: 18px;
+            opacity: 0.57;
+          }
+        }
+      }
+    }
+  }
+}
