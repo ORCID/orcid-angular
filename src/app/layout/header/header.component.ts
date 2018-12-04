@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/operators'
+import { BreakpointObserver } from '@angular/cdk/layout'
+import { Breakpoints } from '@angular/cdk/layout'
 
 @Component({
   selector: 'app-header',
@@ -9,6 +11,7 @@ import { filter } from 'rxjs/operators'
 })
 export class HeaderComponent implements OnInit {
   private currentRoute
+  private mobile
   private menu = {
     researchers: {
       hover: true,
@@ -56,11 +59,20 @@ export class HeaderComponent implements OnInit {
       active: false,
     },
   }
-  constructor(router: Router) {
-    router.events
+  constructor(_router: Router, _breakpointObserver: BreakpointObserver) {
+    _router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(val => {
-        this.currentRoute = router.url
+        this.currentRoute = _router.url
+      })
+    _breakpointObserver
+      .observe([Breakpoints.Handset, Breakpoints.Tablet])
+      .subscribe(state => {
+        if (state.matches) {
+          this.mobile = true
+        } else {
+          this.mobile = false
+        }
       })
   }
 

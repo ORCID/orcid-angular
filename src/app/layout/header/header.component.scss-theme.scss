@@ -14,9 +14,17 @@ $config: mat-typography-config();
   .bottom-bar {
     color: mat-color($accent, '400-contrast');
   }
-  ul {
-    li.active {
-      background-color: mat-color($accent);
+  .active {
+    background-color: mat-color($accent);
+    color: mat-color($primary, '400-contrast');
+  }
+  .mobile {
+    .top-bar {
+      //FIXME ACCESSIBILITY-ISSUE
+      color: map-get($foreground, text);
+      background-color: map-get($background, card);
+    }
+    .active button {
       color: mat-color($primary, '400-contrast');
     }
   }

@@ -11,16 +11,6 @@ header {
 nav {
   display: flex;
   flex-direction: column;
-
-  .buttons-container {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    align-items: center;
-  }
-
   .top-bar {
     display: flex;
     justify-content: space-between;
@@ -83,5 +73,53 @@ nav {
   li,
   i {
     cursor: pointer;
+  }
+  .buttons-container {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: center;
+    max-width: 100%;
+  }
+}
+
+nav.mobile {
+  .top-bar {
+    height: unset;
+  }
+
+  .logo {
+    margin-left: 16px - 10px; // removes menu icon padding
+    width: 103px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .menu-logo-container {
+    margin-left: -10px;
+    display: flex;
+    align-items: center;
+  }
+  .main-menu {
+    height: 61px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .top-bar {
+    margin-left: unset;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.16);
+    .search-menu {
+      width: 70px;
+      margin-right: -10px;
+    }
+  }
+  .icon-button {
+    display: flex;
+    justify-content: space-around;
   }
 }

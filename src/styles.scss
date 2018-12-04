@@ -62,8 +62,13 @@ app-root {
 .router-container {
   padding-bottom: 46px; //remove footer height
 }
+
 app-footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.mobile.router-container {
+  padding-bottom: 195px; //remove footer height
 }
