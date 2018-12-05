@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+$config: mat-typography-config();
+@mixin home-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  main {
+    color: mat-color($foreground, text);
+  }
+}
+
+@mixin home-typography($config) {
+  div {
+    @include mat-typography-level-to-styles($config, body-1);
+  }
+  h1,
+  h2 {
+    @include mat-typography-level-to-styles($config, display-1);
+  }
+}
