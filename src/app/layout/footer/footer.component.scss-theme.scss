@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+$config: mat-typography-config();
+@mixin footer-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  footer {
+    background-color: map-get($background, app-footer);
+    color: mat-color($foreground, secondary-text);
+  }
+}
+
+@mixin footer-typography($config) {
+  footer {
+    font-size: mat-font-size($config, title);
+  }
+}

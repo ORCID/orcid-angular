@@ -1,0 +1,208 @@
+<!-- WEB VERSION -->
+<header *ngIf="!mobile">
+  <div class="logo"><img src="/assets/vectors/orcid.logo.svg" /></div>
+</header>
+<nav (mouseleave)="mouseLeave()" *ngIf="!mobile">
+  <div class="top-bar">
+    <div class="main-menu">
+      <ul class="buttons-container">
+        <li [ngClass]="{ active: menu.researchers.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('researchers')"
+            (mouseenter)="mouseEnter('researchers')"
+          >
+            FOR RESEARCHERS
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.organizations.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('organizations')"
+            (mouseenter)="mouseEnter('organizations')"
+          >
+            FOR ORGANIZATIONS
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.about.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('about')"
+            (mouseenter)="mouseEnter('about')"
+          >
+            ABOUT
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.help.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('help')"
+            (mouseenter)="mouseEnter('help')"
+          >
+            HELP
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.signIn.route === currentRoute }">
+          <button
+            mat-button
+            (click)="click('signIn')"
+            (mouseenter)="mouseEnter('signIn')"
+          >
+            SIGN IN
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="search-menu">
+      <i class="material-icons"> search </i>
+      <button mat-button>
+        <div class="language">
+          <i class="material-icons"> language </i>
+          <p>English</p>
+          <i class="material-icons"> expand_more </i>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="secondary-menu" *ngIf="menu.researchers.hover">
+      <ul class="buttons-container">
+        <li><button mat-button>SIGN IN</button></li>
+        <li><button mat-button>REGISTER FOR AN ORCID ID</button></li>
+        <li><button mat-button>LEARN MORE</button></li>
+      </ul>
+    </div>
+
+    <div class="secondary-menu" *ngIf="menu.organizations.hover">
+      <ul class="buttons-container">
+        <li><button mat-button>FUNDERS</button></li>
+        <li><button mat-button>PUBLISHERS</button></li>
+        <li><button mat-button>RESEARCHERS ORGANIZATIONS</button></li>
+        <li><button mat-button>OUTREACH RESOURCES</button></li>
+        <li><button mat-button>INTEGRATE WITH THE ORCID API</button></li>
+      </ul>
+    </div>
+
+    <div class="secondary-menu" *ngIf="menu.about.hover">
+      <ul class="buttons-container">
+        <li><button mat-button>WHAT IS ORCID</button></li>
+        <li><button mat-button>WHO WHE ARE</button></li>
+        <li><button mat-button>WHO WE SERVE</button></li>
+        <li><button mat-button>MEMBERSHIP</button></li>
+        <li><button mat-button>NEWS AND EVENTS</button></li>
+      </ul>
+    </div>
+
+    <div class="secondary-menu" *ngIf="menu.help.hover">
+      <ul class="buttons-container">
+        <li><button mat-button>GET HELP</button></li>
+        <li><button mat-button>FAQ</button></li>
+        <li><button mat-button>KNOWLEDGE BASE</button></li>
+        <li><button mat-button>OUTREACH RESOURCES</button></li>
+        <li><button mat-button>GIVE FEED BACK</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HANDSET AND TABLET VERSION -->
+<nav class="mobile" *ngIf="mobile">
+  <div class="top-bar">
+    <div class="main-menu">
+      <div class="menu-logo-container">
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+          <div class="icon-button"><i class="material-icons"> menu </i></div>
+        </button>
+
+        <div class="logo"><img src="/assets/vectors/orcid.logo.svg" /></div>
+      </div>
+      <div class="search-menu">
+        <i class="material-icons"> search </i>
+        <button mat-icon-button>
+          <div class="icon-button">
+            <i class="material-icons"> language </i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-menu #appMenu="matMenu" class="mobile">
+    <div [ngClass]="{ active: menu.researchers.route === currentRoute }">
+      <button mat-menu-item [matMenuTriggerFor]="researchers">
+        FOR RESEARCHERS
+      </button>
+    </div>
+
+    <div>
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="organizations"
+        [ngClass]="{ active: menu.organizations.route === currentRoute }"
+      >
+        FOR ORGANIZATIONS
+      </button>
+    </div>
+
+    <div>
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="about"
+        [ngClass]="{ active: menu.about.route === currentRoute }"
+      >
+        ABOUT
+      </button>
+    </div>
+
+    <div>
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="help"
+        [ngClass]="{ active: menu.help.route === currentRoute }"
+      >
+        HELP
+      </button>
+    </div>
+    <div>
+      <button
+        mat-menu-item
+        [ngClass]="{ active: menu.signIn.route === currentRoute }"
+      >
+        SIGN IN
+      </button>
+    </div>
+  </mat-menu>
+
+  <mat-menu #researchers="matMenu" class="mobile">
+    <div><button mat-menu-item>SIGN IN</button></div>
+    <div><button mat-menu-item>REGISTER FOR AN ORCID ID</button></div>
+    <div><button mat-menu-item>LEARN MORE</button></div>
+  </mat-menu>
+
+  <mat-menu #organizations="matMenu" class="mobile">
+    <div><button mat-menu-item>FUNDERS</button></div>
+    <div><button mat-menu-item>PUBLISHERS</button></div>
+    <div><button mat-menu-item>RESEARCHERS ORGANIZATIONS</button></div>
+    <div><button mat-menu-item>OUTREACH RESOURCES</button></div>
+    <div><button mat-menu-item>INTEGRATE WITH THE ORCID API</button></div>
+  </mat-menu>
+
+  <mat-menu #about="matMenu" class="mobile">
+    <div><button mat-menu-item>WHAT IS ORCID</button></div>
+    <div><button mat-menu-item>WHO WHE ARE</button></div>
+    <div><button mat-menu-item>WHO WE SERVE</button></div>
+    <div><button mat-menu-item>MEMBERSHIP</button></div>
+    <div><button mat-menu-item>NEWS AND EVENTS</button></div>
+  </mat-menu>
+
+  <mat-menu #help="matMenu" class="mobile">
+    <div>
+      <button mat-menu-item>GET HELP</button> <button mat-menu-item>FAQ</button>
+    </div>
+    <div><button mat-menu-item>KNOWLEDGE BASE</button></div>
+    <div><button mat-menu-item>OUTREACH RESOURCES</button></div>
+    <div><button mat-menu-item>GIVE FEED BACK</button></div>
+  </mat-menu>
+</nav>
