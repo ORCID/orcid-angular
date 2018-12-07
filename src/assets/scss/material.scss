@@ -26,6 +26,7 @@ $background: map_merge(
   $background,
   (
     app-footer: $light-primary-background,
+    app-news: $dark-primary-background,
     hover: $background-hover,
   )
 );

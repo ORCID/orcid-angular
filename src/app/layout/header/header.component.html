@@ -1,8 +1,8 @@
 <!-- WEB VERSION -->
-<header *ngIf="!mobile">
+<header *ngIf="!tabletOrHandset">
   <div class="logo"><img src="/assets/vectors/orcid.logo.svg" /></div>
 </header>
-<nav (mouseleave)="mouseLeave()" *ngIf="!mobile">
+<nav (mouseleave)="mouseLeave()" *ngIf="!tabletOrHandset">
   <div class="top-bar">
     <div class="main-menu">
       <ul class="buttons-container">
@@ -108,7 +108,7 @@
 </nav>
 
 <!-- HANDSET AND TABLET VERSION -->
-<nav class="mobile" *ngIf="mobile">
+<nav class="tabletOrHandset" *ngIf="tabletOrHandset">
   <div class="top-bar">
     <div class="main-menu">
       <div class="menu-logo-container">
@@ -129,7 +129,7 @@
     </div>
   </div>
 
-  <mat-menu #appMenu="matMenu" class="mobile">
+  <mat-menu #appMenu="matMenu" class="tabletOrHandset">
     <div [ngClass]="{ active: menu.researchers.route === currentRoute }">
       <button mat-menu-item [matMenuTriggerFor]="researchers">
         FOR RESEARCHERS
@@ -175,13 +175,13 @@
     </div>
   </mat-menu>
 
-  <mat-menu #researchers="matMenu" class="mobile">
+  <mat-menu #researchers="matMenu" class="tabletOrHandset">
     <div><button mat-menu-item>SIGN IN</button></div>
     <div><button mat-menu-item>REGISTER FOR AN ORCID ID</button></div>
     <div><button mat-menu-item>LEARN MORE</button></div>
   </mat-menu>
 
-  <mat-menu #organizations="matMenu" class="mobile">
+  <mat-menu #organizations="matMenu" class="tabletOrHandset">
     <div><button mat-menu-item>FUNDERS</button></div>
     <div><button mat-menu-item>PUBLISHERS</button></div>
     <div><button mat-menu-item>RESEARCHERS ORGANIZATIONS</button></div>
@@ -189,7 +189,7 @@
     <div><button mat-menu-item>INTEGRATE WITH THE ORCID API</button></div>
   </mat-menu>
 
-  <mat-menu #about="matMenu" class="mobile">
+  <mat-menu #about="matMenu" class="tabletOrHandset">
     <div><button mat-menu-item>WHAT IS ORCID</button></div>
     <div><button mat-menu-item>WHO WHE ARE</button></div>
     <div><button mat-menu-item>WHO WE SERVE</button></div>
@@ -197,7 +197,7 @@
     <div><button mat-menu-item>NEWS AND EVENTS</button></div>
   </mat-menu>
 
-  <mat-menu #help="matMenu" class="mobile">
+  <mat-menu #help="matMenu" class="tabletOrHandset">
     <div>
       <button mat-menu-item>GET HELP</button> <button mat-menu-item>FAQ</button>
     </div>

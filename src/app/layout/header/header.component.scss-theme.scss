@@ -18,7 +18,7 @@ $config: mat-typography-config();
     background-color: mat-color($accent);
     color: mat-color($primary, '400-contrast');
   }
-  .mobile {
+  .tabletOrHandset {
     .top-bar {
       //FIXME ACCESSIBILITY-ISSUE
       color: map-get($foreground, text);
