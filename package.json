@@ -10,7 +10,6 @@
     "e2e": "ng e2e",
     "format:fix-all": "pretty-quick",
     "format:fix": "pretty-quick --staged",
-    "precommit": "run-s format:check lint",
     "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" "
   },
   "private": true,
@@ -60,5 +59,10 @@
     "tslint": "~5.11.0",
     "tslint-config-prettier": "^1.16.0",
     "typescript": "~2.9.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "run-s format:check lint"
+    }
   }
 }
