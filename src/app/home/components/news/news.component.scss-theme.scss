@@ -29,5 +29,8 @@ $config: mat-typography-config();
     .count {
       @include mat-typography-level-to-styles($config, caption);
     }
+    .author {
+      @include mat-typography-level-to-styles($config, caption);
+    }
   }
 }

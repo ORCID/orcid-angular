@@ -3,30 +3,18 @@
 <h2>LATEST NEWS</h2>
 
 <div class="cart-container">
-  <div class="card">
-    <div class="date">Tue, 06 Nov 2018</div>
-    The Shiba Inu is the smallest of the six original and distinct spitz breeds
-    of dog from Japan. A small, agile dog that copes very well with mountainous
-    terrain, the Shiba Inu was originally bred for hunting.
-  </div>
-  <div class="card">
-    <div class="date">Tue, 06 Nov 2018</div>
-    The Shiba Inu is the smallest of the six original and distinct spitz breeds
-    of dog from Japan. A small, agile dog that copes very well with mountainous
-    terrain, the Shiba Inu was originally bred for hunting.
-  </div>
-  <div class="card">
-    <div class="date">Tue, 06 Nov 2018</div>
-    The Shiba Inu is the smallest of the six original and distinct spitz breeds
-    of dog from Japan. A small, agile dog that copes very well with mountainous
-    terrain, the Shiba Inu was originally bred for hunting.
-  </div>
-  <div class="card">
-    <div class="date">Tue, 06 Nov 2018</div>
-    The Shiba Inu is the smallest of the six original and distinct spitz breeds
-    of dog from Japan. A small, agile dog that copes very well with mountainous
-    terrain, the Shiba Inu was originally bred for hunting.
+  <div
+    matRipple
+    *ngFor="let new of news"
+    class="card"
+    (click)="navigate(new.link)"
+  >
+    <div class="date">{{ new.pubDate[0].slice(0, 22) }}</div>
+    {{ new.title }}
+    <div class="author">by {{ new['dc:creator'] }}</div>
   </div>
 </div>
 
-<button mat-raised-button color="primary">READ MORE</button>
+<button mat-raised-button (click)="moreNews()" color="primary">
+  READ MORE
+</button>

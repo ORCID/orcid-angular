@@ -10,6 +10,18 @@
   }
 }
 
+.handset {
+  :host {
+    padding: 50px 16px 50px 16px;
+    margin-left: -16px;
+    margin-right: -16px;
+
+    .card {
+      flex: 1 1 100%;
+    }
+  }
+}
+
 .tablet {
   :host {
     padding: 50px 24px 50px 24px;
@@ -22,14 +34,6 @@
       margin: 0 0 14px 14px;
       flex: 1 1 33%;
     }
-  }
-}
-
-.handset {
-  :host {
-    padding: 50px 16px 50px 16px;
-    margin-left: -16px;
-    margin-right: -16px;
   }
 }
 
@@ -54,4 +58,8 @@
 button {
   width: 125px;
   margin-left: auto;
+}
+
+.author {
+  margin-top: 8px;
 }
