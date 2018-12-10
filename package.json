@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format:fix-all": "pretty-quick",
-    "format:fix": "pretty-quick --staged",
+    "format:fix-stage": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" "
   },
   "private": true,
@@ -62,7 +62,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-s format:check lint"
+      "pre-commit": "run-s format:fix-stage lint"
     }
   }
 }
