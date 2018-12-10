@@ -1,6 +1,11 @@
-<div class="count">5,566,081 ORCID iDs and counting. See more…</div>
+<div class="count">
+  5,566,081
+  <ng-container i18n="@@public-layout.amount_ids"
+    >ORCID iDs and counting. See more…</ng-container
+  >
+</div>
 
-<h2>LATEST NEWS</h2>
+<h2 i18n="@@home.latest_news">LATEST NEWS</h2>
 
 <div class="cart-container">
   <div
@@ -15,6 +20,11 @@
   </div>
 </div>
 
-<button mat-raised-button (click)="moreNews()" color="primary">
+<button
+  mat-raised-button
+  (click)="moreNews()"
+  color="primary"
+  i18n="@@home.more_news"
+>
   READ MORE
 </button>

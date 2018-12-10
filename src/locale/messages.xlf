@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
+  <file original="ng.template" id="ngi18n">
+    <unit id="public-layout.for_researchers">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:15,17</note>
+        <note category="location">app/layout/header/header.component.html:86,88</note>
+        <note category="location">app/layout/header/header.component.html:199,201</note>
+        <note category="location">app/layout/header/header.component.html:257,259</note>
+      </notes>
+      <segment>
+        <source>
+            FOR RESEARCHERS
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.for_organizations">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:25,27</note>
+        <note category="location">app/layout/header/header.component.html:210,212</note>
+      </notes>
+      <segment>
+        <source>
+            FOR ORGANIZATIONS
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.about">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:35,37</note>
+        <note category="location">app/layout/header/header.component.html:221,223</note>
+      </notes>
+      <segment>
+        <source>
+            ABOUT
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.help">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:45,47</note>
+        <note category="location">app/layout/header/header.component.html:232,234</note>
+      </notes>
+      <segment>
+        <source>
+            HELP
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sign_in">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:55,57</note>
+        <note category="location">app/layout/header/header.component.html:241,243</note>
+        <note category="location">app/layout/header/header.component.html:249</note>
+      </notes>
+      <segment>
+        <source>
+            SIGN IN
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.register">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:81,83</note>
+        <note category="location">app/layout/header/header.component.html:252,254</note>
+      </notes>
+      <segment>
+        <source>
+            REGISTER FOR AN ORCID ID
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.funders">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:95</note>
+        <note category="location">app/layout/header/header.component.html:265</note>
+      </notes>
+      <segment>
+        <source>FUNDERS</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.publishers">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:98,100</note>
+        <note category="location">app/layout/header/header.component.html:268,270</note>
+      </notes>
+      <segment>
+        <source>
+            PUBLISHERS
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.research_organizations">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:103,105</note>
+        <note category="location">app/layout/header/header.component.html:273,275</note>
+      </notes>
+      <segment>
+        <source>
+            RESEARCH ORGANIZATIONS
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.associations">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:108,110</note>
+        <note category="location">app/layout/header/header.component.html:278,280</note>
+      </notes>
+      <segment>
+        <source>
+            ASSOCIATIONS
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.integrators">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:113,115</note>
+        <note category="location">app/layout/header/header.component.html:283,285</note>
+      </notes>
+      <segment>
+        <source>
+            INTEGRATORS
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.what_is_orcid">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:122,124</note>
+        <note category="location">app/layout/header/header.component.html:291,293</note>
+      </notes>
+      <segment>
+        <source>
+            WHAT IS ORCID
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.the_orcid_team">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:127,129</note>
+        <note category="location">app/layout/header/header.component.html:296,298</note>
+      </notes>
+      <segment>
+        <source>
+            THE ORCID TEAM
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.the_orcid_community">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:132,134</note>
+        <note category="location">app/layout/header/header.component.html:301,303</note>
+      </notes>
+      <segment>
+        <source>
+            THE ORCID COMMUNITY
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.membership">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:137,139</note>
+        <note category="location">app/layout/header/header.component.html:306,308</note>
+      </notes>
+      <segment>
+        <source>
+            MEMBERSHIP
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.news">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:141</note>
+        <note category="location">app/layout/header/header.component.html:310</note>
+      </notes>
+      <segment>
+        <source>NEWS</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.events">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:143</note>
+        <note category="location">app/layout/header/header.component.html:312</note>
+      </notes>
+      <segment>
+        <source>EVENTS</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.faq">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:150</note>
+        <note category="location">app/layout/header/header.component.html:317</note>
+      </notes>
+      <segment>
+        <source>FAQ</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.contact_us">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:152,154</note>
+        <note category="location">app/layout/header/header.component.html:319,321</note>
+      </notes>
+      <segment>
+        <source>
+            CONTACT US
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.give_feedback">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:157,159</note>
+        <note category="location">app/layout/header/header.component.html:324,326</note>
+      </notes>
+      <segment>
+        <source>
+            GIVE FEEDBACK
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.knowledge_base">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:162,164</note>
+        <note category="location">app/layout/header/header.component.html:329,331</note>
+      </notes>
+      <segment>
+        <source>
+            KNOWLEDGE BASE
+          </source>
+      </segment>
+    </unit>
+    <unit id="footer.openSource">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:5</note>
+        <note category="location">app/layout/footer/footer.component.html:25</note>
+      </notes>
+      <segment>
+        <source>Contact</source>
+      </segment>
+    </unit>
+    <unit id="footer.privacypolicy">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:10,12</note>
+      </notes>
+      <segment>
+        <source>
+          Privacy Policy
+        </source>
+      </segment>
+    </unit>
+    <unit id="footer.termsofuse">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:17,19</note>
+      </notes>
+      <segment>
+        <source>
+          Terms of use
+        </source>
+      </segment>
+    </unit>
+    <unit id="home.distinguish_yourself">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>
+          DISTINGUISH YOURSELF IN
+        </source>
+      </segment>
+    </unit>
+    <unit id="home.three_easy">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:18</note>
+      </notes>
+      <segment>
+        <source> THREE EASY STEPS </source>
+      </segment>
+    </unit>
+    <unit id="home.orcid_provides">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:21,27</note>
+      </notes>
+      <segment>
+        <source>
+        ORCID provides a persistent digital identifier that distinguishes you
+        from every other researcher and, through integration in key research
+        workflows such as manuscript and grant submission, supports automated
+        linkages between you and your professional activities ensuring that your
+        work is recognized.
+      </source>
+      </segment>
+    </unit>
+    <unit id="home.find_out_more">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:28</note>
+      </notes>
+      <segment>
+        <source> Find out more</source>
+      </segment>
+    </unit>
+    <unit id="home.one">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:32</note>
+      </notes>
+      <segment>
+        <source>1</source>
+      </segment>
+    </unit>
+    <unit id="home.register">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:33</note>
+      </notes>
+      <segment>
+        <source>REGISTER</source>
+      </segment>
+    </unit>
+    <unit id="home.get_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:37</note>
+      </notes>
+      <segment>
+        <source>Get your unique ORCID identifier </source>
+      </segment>
+    </unit>
+    <unit id="home.register_now">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Register now!</source>
+      </segment>
+    </unit>
+    <unit id="home.registration_takes">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:40</note>
+      </notes>
+      <segment>
+        <source>Registration takes 30 seconds.</source>
+      </segment>
+    </unit>
+    <unit id="home.two">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:44</note>
+      </notes>
+      <segment>
+        <source>2</source>
+      </segment>
+    </unit>
+    <unit id="home.add_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:45</note>
+      </notes>
+      <segment>
+        <source>ADD YOUR </source>
+      </segment>
+    </unit>
+    <unit id="home.info">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:46</note>
+      </notes>
+      <segment>
+        <source> INFO</source>
+      </segment>
+    </unit>
+    <unit id="home.enhance_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:49,53</note>
+      </notes>
+      <segment>
+        <source>
+          Enhance your ORCID record with your professional information and link
+          to your other identifiers (such as Scopus or ResearcherID or
+          LinkedIn).
+        </source>
+      </segment>
+    </unit>
+    <unit id="home.three">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:56</note>
+      </notes>
+      <segment>
+        <source>3</source>
+      </segment>
+    </unit>
+    <unit id="home.user_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:58</note>
+      </notes>
+      <segment>
+        <source>USE YOUR </source>
+      </segment>
+    </unit>
+    <unit id="home.orcid_id">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:59</note>
+      </notes>
+      <segment>
+        <source>ORCID ID</source>
+      </segment>
+    </unit>
+    <unit id="home.include_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:61,65</note>
+      </notes>
+      <segment>
+        <source>
+        Include your ORCID identifier on your Webpage, when you submit
+        publications, apply for grants, and in any research workflow to ensure
+        you get credit for your work.
+      </source>
+      </segment>
+    </unit>
+    <unit id="home.members_make">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:69</note>
+      </notes>
+      <segment>
+        <source>MEMBERS MAKE ORCID POSSIBLE!</source>
+      </segment>
+    </unit>
+    <unit id="home.orcid_is">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:72,76</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID is a non-profit organization supported by a global community of
+          organizational members, including research organizations, publishers,
+          funders, professional associations, and other stakeholders in the
+          research ecosystem. </source>
+      </segment>
+    </unit>
+    <unit id="home.curious_about">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:79</note>
+      </notes>
+      <segment>
+        <source>Curious about who our members are?</source>
+      </segment>
+    </unit>
+    <unit id="home.see_our">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:81</note>
+      </notes>
+      <segment>
+        <source>See our complete list of member organizations</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.amount_ids">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:1,3</note>
+      </notes>
+      <segment>
+        <source>
+  5,566,081 ORCID iDs and counting. See more…
+</source>
+      </segment>
+    </unit>
+    <unit id="home.latest_news">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:5</note>
+      </notes>
+      <segment>
+        <source>LATEST NEWS</source>
+      </segment>
+    </unit>
+    <unit id="home.more_news">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:25,27</note>
+      </notes>
+      <segment>
+        <source>
+  READ MORE
+</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

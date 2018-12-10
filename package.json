@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "format:fix-all": "pretty-quick",
     "format:fix-stage": "pretty-quick --staged",
-    "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" "
+    "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" ",
+    "build:prod": "ng run ng-orcid:build:production && ng run ng-orcid:build:production-fr"
   },
   "private": true,
   "dependencies": {
