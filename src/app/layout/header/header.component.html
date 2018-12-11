@@ -61,22 +61,13 @@
 
     <div class="search-menu">
       <i class="material-icons"> search </i>
-      <button mat-button>
-        <div class="language" [matMenuTriggerFor]="languageMenu">
+      <button mat-button [matMenuTriggerFor]="languageMenu">
+        <div class="language">
           <i class="material-icons"> language </i>
           <p>{{ languageMenuOptions[locale] }}</p>
           <i class="material-icons"> expand_more </i>
         </div>
       </button>
-      <mat-menu #languageMenu="matMenu" class="tabletOrHandset">
-        <div
-          *ngFor="let language of (languageMenuOptions | keyvalue)"
-          [ngClass]="{ active: language.key === locale }"
-          (click)="changeLanguage(language.key)"
-        >
-          <button mat-menu-item>{{ language.value }}</button>
-        </div>
-      </mat-menu>
     </div>
   </div>
 
@@ -190,20 +181,9 @@
       </div>
       <div class="search-menu">
         <i class="material-icons"> search </i>
-        <button mat-icon-button>
+        <button mat-icon-button [matMenuTriggerFor]="languageMenu">
           <div class="icon-button">
-            <i class="material-icons" [matMenuTriggerFor]="languageMenu">
-              language
-            </i>
-            <mat-menu #languageMenu="matMenu" class="tabletOrHandset">
-              <div
-                *ngFor="let language of (languageMenuOptions | keyvalue)"
-                [ngClass]="{ active: language.key === locale }"
-                (click)="changeLanguage(language.key)"
-              >
-                <button mat-menu-item>{{ language.value }}</button>
-              </div>
-            </mat-menu>
+            <i class="material-icons"> language </i>
           </div>
         </button>
       </div>
@@ -352,3 +332,13 @@
     </div>
   </mat-menu>
 </nav>
+
+<mat-menu #languageMenu="matMenu">
+  <div
+    *ngFor="let language of (languageMenuOptions | keyvalue)"
+    [ngClass]="{ active: language.key === locale }"
+    (click)="changeLanguage(language.key)"
+  >
+    <button mat-menu-item>{{ language.value }}</button>
+  </div>
+</mat-menu>
