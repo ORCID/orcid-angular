@@ -7,24 +7,30 @@
 
 <h2 i18n="@@home.latest_news">LATEST NEWS</h2>
 
-<div class="cart-container">
-  <div
-    matRipple
-    *ngFor="let new of news"
-    class="card"
-    (click)="navigate(new.link)"
-  >
-    <div class="date">{{ new.pubDate[0].slice(0, 22) }}</div>
-    {{ new.title }}
-    <div class="author">by {{ new['dc:creator'] }}</div>
-  </div>
+<div *ngIf="!news" class="spinner-container">
+  <mat-progress-spinner [color]="primary" mode="indeterminate">
+  </mat-progress-spinner>
 </div>
+<ng-container *ngIf="news">
+  <div class="cart-container" [@listAnimation]="news.length">
+    <div
+      class="card"
+      matRipple
+      *ngFor="let new of news"
+      (click)="navigate(new.link)"
+    >
+      <div class="date">{{ new.pubDate[0].slice(0, 22) }}</div>
+      {{ new.title }}
+      <div class="author">by {{ new['dc:creator'] }}</div>
+    </div>
+  </div>
 
-<button
-  mat-raised-button
-  (click)="moreNews()"
-  color="primary"
-  i18n="@@home.more_news"
->
-  READ MORE
-</button>
+  <button
+    mat-raised-button
+    (click)="moreNews()"
+    color="primary"
+    i18n="@@home.more_news"
+  >
+    READ MORE
+  </button>
+</ng-container>

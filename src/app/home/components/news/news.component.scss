@@ -64,3 +64,11 @@ button {
 .author {
   margin-top: 8px;
 }
+
+.spinner-container {
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+  /* flex-direction: column; */
+  padding-top: 33%;
+}
