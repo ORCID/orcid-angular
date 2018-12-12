@@ -27,7 +27,6 @@ import { query } from '@angular/animations'
 })
 export class NewsComponent implements OnInit {
   news
-  item = 1
   constructor(private _news: NewsService) {}
 
   ngOnInit() {

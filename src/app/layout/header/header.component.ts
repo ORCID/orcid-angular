@@ -3,6 +3,8 @@ import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { Breakpoints } from '@angular/cdk/layout'
+import { Inject } from '@angular/core'
+import { LOCALE_ID } from '@angular/core'
 
 @Component({
   selector: 'app-header',
@@ -10,9 +12,9 @@ import { Breakpoints } from '@angular/cdk/layout'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  private currentRoute
-  private tabletOrHandset
-  private menu = {
+  currentRoute
+  tabletOrHandset
+  menu = {
     researchers: {
       hover: true,
       route: '/',
@@ -59,7 +61,17 @@ export class HeaderComponent implements OnInit {
       active: false,
     },
   }
-  constructor(_router: Router, _breakpointObserver: BreakpointObserver) {
+
+  languageMenuOptions = {
+    fr: 'Français',
+    'en-US': 'English',
+  }
+
+  constructor(
+    _router: Router,
+    _breakpointObserver: BreakpointObserver,
+    @Inject(LOCALE_ID) public locale: string
+  ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(val => {
@@ -96,4 +108,8 @@ export class HeaderComponent implements OnInit {
   }
 
   click(ul: string) {}
+
+  changeLanguage(languageKey: string) {
+    window.location.href = '/' + languageKey
+  }
 }

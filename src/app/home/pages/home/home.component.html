@@ -12,27 +12,54 @@
     }"
   >
     <div class="container">
-      <h1>DISTINGUISH YOURSELF IN THREE EASY STEPS</h1>
+      <h1>
+        <ng-container i18n="@@home.distinguish_yourself">
+          DISTINGUISH YOURSELF IN
+        </ng-container>
+        <ng-container i18n="@@home.three_easy"> THREE EASY STEPS </ng-container>
+      </h1>
 
-      ORCID provides a persistent digital identifier that distinguishes you from
-      every other researcher and, through integration in key research workflows
-      such as manuscript and grant submission, supports automated linkages
-      between you and your professional activities ensuring that your work is
-      recognized. <a> Find out more</a>
+      <ng-container i18n="@@home.orcid_provides">
+        ORCID provides a persistent digital identifier that distinguishes you
+        from every other researcher and, through integration in key research
+        workflows such as manuscript and grant submission, supports automated
+        linkages between you and your professional activities ensuring that your
+        work is recognized.
+      </ng-container>
+      <a i18n="@@home.find_out_more"> Find out more</a>
     </div>
     <div class="container mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell--span-3">1- REGISTER</div>
-      <div class="mdc-layout-grid__cell--span-9">
-        Get your unique ORCID identifier Register now! Registration takes 30
-        seconds.
+      <div class="mdc-layout-grid__cell--span-3">
+        <ng-container i18n="@@home.one">1</ng-container>-
+        <ng-container i18n="@@home.register">REGISTER</ng-container>
       </div>
-      <div class="mdc-layout-grid__cell--span-3">2- ADD YOUR INFO</div>
       <div class="mdc-layout-grid__cell--span-9">
-        Enhance your ORCID record with your professional information and link to
-        your other identifiers (such as Scopus or ResearcherID or LinkedIn).
+        <ng-container i18n="@@home.get_your"
+          >Get your unique ORCID identifier </ng-container
+        ><ng-container i18n="@@home.register_now">Register now!</ng-container
+        ><ng-container i18n="@@home.registration_takes"
+          >Registration takes 30 seconds.</ng-container
+        >
       </div>
-      <div class="mdc-layout-grid__cell--span-3">3- USE YOUR ORCID ID</div>
+      <div class="mdc-layout-grid__cell--span-3">
+        <ng-container i18n="@@home.two">2</ng-container>-
+        <ng-container i18n="@@home.add_your">ADD YOUR </ng-container
+        ><ng-container i18n="@@home.info"> INFO</ng-container>
+      </div>
       <div class="mdc-layout-grid__cell--span-9">
+        <ng-container i18n="@@home.enhance_your">
+          Enhance your ORCID record with your professional information and link
+          to your other identifiers (such as Scopus or ResearcherID or
+          LinkedIn).
+        </ng-container>
+      </div>
+      <div class="mdc-layout-grid__cell--span-3">
+        <ng-container i18n="@@home.three">3</ng-container> -<ng-container
+          i18n="@@home.user_your"
+          >USE YOUR </ng-container
+        ><ng-container i18n="@@home.orcid_id">ORCID ID</ng-container>
+      </div>
+      <div class="mdc-layout-grid__cell--span-9" i18n="@@home.include_your">
         Include your ORCID identifier on your Webpage, when you submit
         publications, apply for grants, and in any research workflow to ensure
         you get credit for your work.
@@ -40,15 +67,20 @@
     </div>
 
     <div class="container">
-      <h2>MEMBERS MAKE ORCID POSSIBLE!</h2>
+      <h2 i18n="@@home.members_make">MEMBERS MAKE ORCID POSSIBLE!</h2>
 
       <div>
-        ORCID is a non-profit organization supported by a global community of
-        organizational members, including research organizations, publishers,
-        funders, professional associations, and other stakeholders in the
-        research ecosystem. <br />
-        Curious about who our members are? See our complete list of member
-        organizations
+        <ng-container i18n="@@home.orcid_is">
+          ORCID is a non-profit organization supported by a global community of
+          organizational members, including research organizations, publishers,
+          funders, professional associations, and other stakeholders in the
+          research ecosystem. </ng-container
+        ><br />
+        <ng-container i18n="@@home.curious_about"
+          >Curious about who our members are?</ng-container
+        ><ng-container i18n="@@home.see_our"
+          >See our complete list of member organizations</ng-container
+        >
       </div>
     </div>
   </main>

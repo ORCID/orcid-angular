@@ -1,6 +1,6 @@
 <!-- WEB VERSION -->
 <header *ngIf="!tabletOrHandset">
-  <div class="logo"><img src="/assets/vectors/orcid.logo.svg" /></div>
+  <div class="logo"><img src="./assets/vectors/orcid.logo.svg" /></div>
 </header>
 <nav (mouseleave)="mouseLeave()" *ngIf="!tabletOrHandset">
   <div class="top-bar">
@@ -11,6 +11,7 @@
             mat-button
             (click)="click('researchers')"
             (mouseenter)="mouseEnter('researchers')"
+            i18n="@@public-layout.for_researchers"
           >
             FOR RESEARCHERS
           </button>
@@ -20,6 +21,7 @@
             mat-button
             (click)="click('organizations')"
             (mouseenter)="mouseEnter('organizations')"
+            i18n="@@public-layout.for_organizations"
           >
             FOR ORGANIZATIONS
           </button>
@@ -29,6 +31,7 @@
             mat-button
             (click)="click('about')"
             (mouseenter)="mouseEnter('about')"
+            i18n="@@public-layout.about"
           >
             ABOUT
           </button>
@@ -38,6 +41,7 @@
             mat-button
             (click)="click('help')"
             (mouseenter)="mouseEnter('help')"
+            i18n="@@public-layout.help"
           >
             HELP
           </button>
@@ -47,6 +51,7 @@
             mat-button
             (click)="click('signIn')"
             (mouseenter)="mouseEnter('signIn')"
+            i18n="@@public-layout.sign_in"
           >
             SIGN IN
           </button>
@@ -56,10 +61,10 @@
 
     <div class="search-menu">
       <i class="material-icons"> search </i>
-      <button mat-button>
+      <button mat-button [matMenuTriggerFor]="languageMenu">
         <div class="language">
           <i class="material-icons"> language </i>
-          <p>English</p>
+          <p>{{ languageMenuOptions[locale] }}</p>
           <i class="material-icons"> expand_more </i>
         </div>
       </button>
@@ -69,39 +74,95 @@
   <div class="bottom-bar">
     <div class="secondary-menu" *ngIf="menu.researchers.hover">
       <ul class="buttons-container">
-        <li><button mat-button>SIGN IN</button></li>
-        <li><button mat-button>REGISTER FOR AN ORCID ID</button></li>
-        <li><button mat-button>LEARN MORE</button></li>
+        <li>
+          <button mat-button i18n="@@public-layout.sign_in">SIGN IN</button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.register">
+            REGISTER FOR AN ORCID ID
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.for_researchers">
+            LEARN MORE
+          </button>
+        </li>
       </ul>
     </div>
-
     <div class="secondary-menu" *ngIf="menu.organizations.hover">
       <ul class="buttons-container">
-        <li><button mat-button>FUNDERS</button></li>
-        <li><button mat-button>PUBLISHERS</button></li>
-        <li><button mat-button>RESEARCHERS ORGANIZATIONS</button></li>
-        <li><button mat-button>OUTREACH RESOURCES</button></li>
-        <li><button mat-button>INTEGRATE WITH THE ORCID API</button></li>
+        <li>
+          <button mat-button i18n="@@public-layout.funders">FUNDERS</button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.publishers">
+            PUBLISHERS
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.research_organizations">
+            RESEARCH ORGANIZATIONS
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.associations">
+            ASSOCIATIONS
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.integrators">
+            INTEGRATORS
+          </button>
+        </li>
       </ul>
     </div>
-
     <div class="secondary-menu" *ngIf="menu.about.hover">
       <ul class="buttons-container">
-        <li><button mat-button>WHAT IS ORCID</button></li>
-        <li><button mat-button>WHO WHE ARE</button></li>
-        <li><button mat-button>WHO WE SERVE</button></li>
-        <li><button mat-button>MEMBERSHIP</button></li>
-        <li><button mat-button>NEWS AND EVENTS</button></li>
+        <li>
+          <button mat-button i18n="@@public-layout.what_is_orcid">
+            WHAT IS ORCID
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.the_orcid_team">
+            THE ORCID TEAM
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.the_orcid_community">
+            THE ORCID COMMUNITY
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.membership">
+            MEMBERSHIP
+          </button>
+        </li>
+        <li><button mat-button i18n="@@public-layout.news">NEWS</button></li>
+        <li>
+          <button mat-button i18n="@@public-layout.events">EVENTS</button>
+        </li>
       </ul>
     </div>
 
     <div class="secondary-menu" *ngIf="menu.help.hover">
       <ul class="buttons-container">
-        <li><button mat-button>GET HELP</button></li>
-        <li><button mat-button>FAQ</button></li>
-        <li><button mat-button>KNOWLEDGE BASE</button></li>
-        <li><button mat-button>OUTREACH RESOURCES</button></li>
-        <li><button mat-button>GIVE FEED BACK</button></li>
+        <li><button mat-button i18n="@@public-layout.faq">FAQ</button></li>
+        <li>
+          <button mat-button i18n="@@public-layout.contact_us">
+            CONTACT US
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.give_feedback">
+            GIVE FEEDBACK
+          </button>
+        </li>
+        <li>
+          <button mat-button i18n="@@public-layout.knowledge_base">
+            KNOWLEDGE BASE
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -116,11 +177,11 @@
           <div class="icon-button"><i class="material-icons"> menu </i></div>
         </button>
 
-        <div class="logo"><img src="/assets/vectors/orcid.logo.svg" /></div>
+        <div class="logo"><img src="./assets/vectors/orcid.logo.svg" /></div>
       </div>
       <div class="search-menu">
         <i class="material-icons"> search </i>
-        <button mat-icon-button>
+        <button mat-icon-button [matMenuTriggerFor]="languageMenu">
           <div class="icon-button">
             <i class="material-icons"> language </i>
           </div>
@@ -131,7 +192,11 @@
 
   <mat-menu #appMenu="matMenu" class="tabletOrHandset">
     <div [ngClass]="{ active: menu.researchers.route === currentRoute }">
-      <button mat-menu-item [matMenuTriggerFor]="researchers">
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="researchers"
+        i18n="@@public-layout.for_researchers"
+      >
         FOR RESEARCHERS
       </button>
     </div>
@@ -141,6 +206,7 @@
         mat-menu-item
         [matMenuTriggerFor]="organizations"
         [ngClass]="{ active: menu.organizations.route === currentRoute }"
+        i18n="@@public-layout.for_organizations"
       >
         FOR ORGANIZATIONS
       </button>
@@ -151,6 +217,7 @@
         mat-menu-item
         [matMenuTriggerFor]="about"
         [ngClass]="{ active: menu.about.route === currentRoute }"
+        i18n="@@public-layout.about"
       >
         ABOUT
       </button>
@@ -161,6 +228,7 @@
         mat-menu-item
         [matMenuTriggerFor]="help"
         [ngClass]="{ active: menu.help.route === currentRoute }"
+        i18n="@@public-layout.help"
       >
         HELP
       </button>
@@ -169,6 +237,7 @@
       <button
         mat-menu-item
         [ngClass]="{ active: menu.signIn.route === currentRoute }"
+        i18n="@@public-layout.sign_in"
       >
         SIGN IN
       </button>
@@ -176,33 +245,100 @@
   </mat-menu>
 
   <mat-menu #researchers="matMenu" class="tabletOrHandset">
-    <div><button mat-menu-item>SIGN IN</button></div>
-    <div><button mat-menu-item>REGISTER FOR AN ORCID ID</button></div>
-    <div><button mat-menu-item>LEARN MORE</button></div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.sign_in">SIGN IN</button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.register">
+        REGISTER FOR AN ORCID ID
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.for_researchers">
+        LEARN MORE
+      </button>
+    </div>
   </mat-menu>
 
   <mat-menu #organizations="matMenu" class="tabletOrHandset">
-    <div><button mat-menu-item>FUNDERS</button></div>
-    <div><button mat-menu-item>PUBLISHERS</button></div>
-    <div><button mat-menu-item>RESEARCHERS ORGANIZATIONS</button></div>
-    <div><button mat-menu-item>OUTREACH RESOURCES</button></div>
-    <div><button mat-menu-item>INTEGRATE WITH THE ORCID API</button></div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.funders">FUNDERS</button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.publishers">
+        PUBLISHERS
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.research_organizations">
+        RESEARCH ORGANIZATIONS
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.associations">
+        ASSOCIATIONS
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.integrators">
+        INTEGRATORS
+      </button>
+    </div>
   </mat-menu>
 
   <mat-menu #about="matMenu" class="tabletOrHandset">
-    <div><button mat-menu-item>WHAT IS ORCID</button></div>
-    <div><button mat-menu-item>WHO WHE ARE</button></div>
-    <div><button mat-menu-item>WHO WE SERVE</button></div>
-    <div><button mat-menu-item>MEMBERSHIP</button></div>
-    <div><button mat-menu-item>NEWS AND EVENTS</button></div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.what_is_orcid">
+        WHAT IS ORCID
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.the_orcid_team">
+        THE ORCID TEAM
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.the_orcid_community">
+        THE ORCID COMMUNITY
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.membership">
+        MEMBERSHIP
+      </button>
+    </div>
+    <div><button mat-menu-item i18n="@@public-layout.news">NEWS</button></div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.events">EVENTS</button>
+    </div>
   </mat-menu>
 
   <mat-menu #help="matMenu" class="tabletOrHandset">
+    <div><button mat-menu-item i18n="@@public-layout.faq">FAQ</button></div>
     <div>
-      <button mat-menu-item>GET HELP</button> <button mat-menu-item>FAQ</button>
+      <button mat-menu-item i18n="@@public-layout.contact_us">
+        CONTACT US
+      </button>
     </div>
-    <div><button mat-menu-item>KNOWLEDGE BASE</button></div>
-    <div><button mat-menu-item>OUTREACH RESOURCES</button></div>
-    <div><button mat-menu-item>GIVE FEED BACK</button></div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.give_feedback">
+        GIVE FEEDBACK
+      </button>
+    </div>
+    <div>
+      <button mat-menu-item i18n="@@public-layout.knowledge_base">
+        KNOWLEDGE BASE
+      </button>
+    </div>
   </mat-menu>
 </nav>
+
+<mat-menu #languageMenu="matMenu">
+  <div
+    *ngFor="let language of (languageMenuOptions | keyvalue)"
+    [ngClass]="{ active: language.key === locale }"
+    (click)="changeLanguage(language.key)"
+  >
+    <button mat-menu-item>{{ language.value }}</button>
+  </div>
+</mat-menu>

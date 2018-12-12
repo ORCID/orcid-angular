@@ -45,6 +45,14 @@
   margin-right: -24px;
 }
 
+.ie.desktop,
+.edge.desktop {
+  :host {
+    display: block;
+    margin: 0;
+    transform: translateX(66px);
+  }
+}
 .date {
   margin-bottom: 10px;
 }
@@ -57,7 +65,7 @@
 }
 
 button {
-  width: 125px;
+  width: 160px;
   margin-left: auto;
 }
 

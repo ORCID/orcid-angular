@@ -1,19 +1,29 @@
 <footer [ngClass]="{ tabletOrHandset: tabletOrHandset }">
   <ul class="buttons-container">
     <li>
-      <button mat-button><div class="button-wrapper">Contact</div></button>
+      <button mat-button>
+        <div class="button-wrapper" i18n="@@footer.contactus">Contact</div>
+      </button>
     </li>
     <li>
-      <button mat-button><div class="button-wrapper">Privacy</div></button>
+      <button mat-button>
+        <div class="button-wrapper" i18n="@@footer.privacypolicy">
+          Privacy Policy
+        </div>
+      </button>
     </li>
     <li>
-      <button mat-button><div class="button-wrapper">Terms of use</div></button>
+      <button mat-button>
+        <div class="button-wrapper" i18n="@@footer.termsofuse">
+          Terms of use
+        </div>
+      </button>
     </li>
     <li>
       <button mat-button>
         <div class="button-wrapper">
-          <div>Open source project</div>
-          <div class="logo"><img src="/assets/vectors/github.logo.svg" /></div>
+          <div i18n="@@footer.openSource">Open source project</div>
+          <div class="logo"><img src="./assets/vectors/github.logo.svg" /></div>
         </div>
       </button>
     </li>
