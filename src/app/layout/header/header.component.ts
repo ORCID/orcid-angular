@@ -11,7 +11,7 @@ import { Breakpoints } from '@angular/cdk/layout'
 })
 export class HeaderComponent implements OnInit {
   private currentRoute
-  private mobile
+  private tabletOrHandset
   private menu = {
     researchers: {
       hover: true,
@@ -69,9 +69,9 @@ export class HeaderComponent implements OnInit {
       .observe([Breakpoints.Handset, Breakpoints.Tablet])
       .subscribe(state => {
         if (state.matches) {
-          this.mobile = true
+          this.tabletOrHandset = true
         } else {
-          this.mobile = false
+          this.tabletOrHandset = false
         }
       })
   }

@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  API_NEWS: 'https://cors.io/?https://orcid.org/blog/feed?format=text',
+  // Use https://cors.io/ to proxy the news endpoint to avoid CORS errors during development/demo
+  BLOG_NEWS: 'https://orcid.org/about/news',
 }
 
 /*

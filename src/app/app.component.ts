@@ -9,16 +9,24 @@ import { Breakpoints } from '@angular/cdk/layout'
 })
 export class AppComponent {
   title = 'ng-orcid'
-  mobile
+  tablet
+  handset
   constructor(private _breakpointObserver: BreakpointObserver) {
     this._breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.Tablet])
       .subscribe(state => {
         if (state.matches) {
-          this.mobile = true
+          this.handset = true
         } else {
-          this.mobile = false
+          this.handset = false
         }
       })
+    this._breakpointObserver.observe([Breakpoints.Tablet]).subscribe(state => {
+      if (state.matches) {
+        this.tablet = true
+      } else {
+        this.tablet = false
+      }
+    })
   }
 }

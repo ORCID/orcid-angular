@@ -1,12 +1,18 @@
 @import '../../app/layout/header/header.component.scss-theme.scss';
 @import '../../app/layout/footer/footer.component.scss-theme.scss';
+@import '../../app/home/pages/home/home.component.scss-theme.scss';
+@import '../../app/home/components/news/news.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include header-theme($theme);
   @include footer-theme($theme);
+  @include home-theme($theme);
+  @include news-theme($theme);
 }
 
 @mixin custom-components-typography($custom) {
   @include header-typography($custom);
   @include footer-typography($custom);
+  @include home-typography($custom);
+  @include news-typography($custom);
 }

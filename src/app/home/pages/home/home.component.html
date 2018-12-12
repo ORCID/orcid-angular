@@ -1,1 +1,66 @@
-<p>home works!</p>
+<div class="home-container mdc-layout-grid__inner">
+  <div
+    [ngClass]="{
+      'mdc-layout-grid__cell--span-1': !tabletOrHandset
+    }"
+  ></div>
+  <main
+    @enterAnimation
+    [ngClass]="{
+      'mdc-layout-grid__cell--span-7': !tabletOrHandset,
+      'mdc-layout-grid__cell--span-12': tabletOrHandset
+    }"
+  >
+    <div class="container">
+      <h1>DISTINGUISH YOURSELF IN THREE EASY STEPS</h1>
+
+      ORCID provides a persistent digital identifier that distinguishes you from
+      every other researcher and, through integration in key research workflows
+      such as manuscript and grant submission, supports automated linkages
+      between you and your professional activities ensuring that your work is
+      recognized. <a> Find out more</a>
+    </div>
+    <div class="container mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell--span-3">1- REGISTER</div>
+      <div class="mdc-layout-grid__cell--span-9">
+        Get your unique ORCID identifier Register now! Registration takes 30
+        seconds.
+      </div>
+      <div class="mdc-layout-grid__cell--span-3">2- ADD YOUR INFO</div>
+      <div class="mdc-layout-grid__cell--span-9">
+        Enhance your ORCID record with your professional information and link to
+        your other identifiers (such as Scopus or ResearcherID or LinkedIn).
+      </div>
+      <div class="mdc-layout-grid__cell--span-3">3- USE YOUR ORCID ID</div>
+      <div class="mdc-layout-grid__cell--span-9">
+        Include your ORCID identifier on your Webpage, when you submit
+        publications, apply for grants, and in any research workflow to ensure
+        you get credit for your work.
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>MEMBERS MAKE ORCID POSSIBLE!</h2>
+
+      <div>
+        ORCID is a non-profit organization supported by a global community of
+        organizational members, including research organizations, publishers,
+        funders, professional associations, and other stakeholders in the
+        research ecosystem. <br />
+        Curious about who our members are? See our complete list of member
+        organizations
+      </div>
+    </div>
+  </main>
+  <div
+    [ngClass]="{
+      'mdc-layout-grid__cell--span-1': !tabletOrHandset
+    }"
+  ></div>
+  <app-news
+    [ngClass]="{
+      'mdc-layout-grid__cell--span-3': !tabletOrHandset,
+      'mdc-layout-grid__cell--span-12': tabletOrHandset
+    }"
+  ></app-news>
+</div>

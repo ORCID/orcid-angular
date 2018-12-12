@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+$config: mat-typography-config();
+@mixin news-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  app-news {
+    background: mat-color($background, app-news);
+    color: mat-color($foreground, text);
+    .date {
+      color: mat-color($foreground, disabled-text);
+    }
+    .card {
+      background: mat-color($background, background);
+    }
+  }
+}
+
+@mixin news-typography($config) {
+  app-news {
+    h2 {
+      @include mat-typography-level-to-styles($config, subheading-1);
+    }
+    .card {
+      @include mat-typography-level-to-styles($config, body-1);
+    }
+    .count {
+      @include mat-typography-level-to-styles($config, caption);
+    }
+    .author {
+      @include mat-typography-level-to-styles($config, caption);
+    }
+  }
+}

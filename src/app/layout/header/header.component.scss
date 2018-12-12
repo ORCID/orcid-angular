@@ -9,6 +9,7 @@ header {
 }
 
 nav {
+  z-index: 2;
   display: flex;
   flex-direction: column;
   .top-bar {
@@ -38,6 +39,7 @@ nav {
   }
 
   .bottom-bar {
+    z-index: 1;
     padding-left: 24px;
     padding-right: 24px;
     display: flex;
@@ -85,7 +87,7 @@ nav {
   }
 }
 
-nav.mobile {
+nav.tabletOrHandset {
   .top-bar {
     height: unset;
   }

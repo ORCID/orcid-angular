@@ -7,15 +7,15 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  mobile
+  tabletOrHandset
   constructor(private _breakpointObserver: BreakpointObserver) {
     this._breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.Tablet])
       .subscribe(state => {
         if (state.matches) {
-          this.mobile = true
+          this.tabletOrHandset = true
         } else {
-          this.mobile = false
+          this.tabletOrHandset = false
         }
       })
   }

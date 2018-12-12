@@ -1,5 +1,5 @@
+@import '~@material/layout-grid/mdc-layout-grid';
 @import './assets/scss/material.scss';
-
 @font-face {
   font-family: 'Noto Sans';
   src: url('./assets/fonts/NotoSans-Regular.woff') format('woff'),
@@ -55,12 +55,14 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 app-root {
-  display: block;
   min-height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .router-container {
   padding-bottom: 46px; //remove footer height
+  height: 100%;
 }
 
 app-footer {
@@ -69,6 +71,7 @@ app-footer {
   width: 100%;
 }
 
-.mobile.router-container {
+.router-container.handset,
+.router-container.tablet {
   padding-bottom: 195px; //remove footer height
 }

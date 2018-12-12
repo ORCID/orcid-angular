@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { HeaderComponent } from './header/header.component'
 import { FooterComponent } from './footer/footer.component'
-import { MatButtonModule, MatMenuModule } from '@angular/material'
+import { MatMenuModule, MatButtonModule } from '@angular/material'
 
 @NgModule({
-  imports: [CommonModule, MatButtonModule, MatMenuModule],
+  imports: [CommonModule, MatMenuModule, MatButtonModule],
   declarations: [HeaderComponent, FooterComponent],
   exports: [HeaderComponent, FooterComponent],
 })
