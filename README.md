@@ -1,9 +1,14 @@
 # NgOrcid
 
+# Set up 
+
+* Navigate to your local orcid folder example : `cd ~/git/orcid` copy or clone this repo git@github.com:ORCID/orcid-angular.git
+
+* Ensure you have npm. If on a mac and you have homebrew `brew install npm`
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
 
 ## Development server
-* Ensure you have npm. If on a mac and you have homebrew `brew install npm`
 
 * Install Angular CLI with `npm install -g @angular/cli` [More info](https://www.npmjs.com/package/@angular/cli#installation)
 
