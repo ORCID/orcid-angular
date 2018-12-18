@@ -11,7 +11,9 @@
     "format:fix-all": "pretty-quick",
     "format:fix-stage": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" ",
-    "build:i18n-file-generator": "node ./src/locale/translate-file-generator",
+    "build:i18n:define": "ng xi18n  --i18n-format=xlf2",
+    "build:i18n:generate": "node ./src/locale/translate-file-generator",
+    "build:i18n": "npm run build:i18n:define && npm run build:i18n:generate",
     "build:prod": "ng run ng-orcid:build:production && ng run ng-orcid:build:production-fr"
   },
   "private": true,
