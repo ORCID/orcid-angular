@@ -162,7 +162,17 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
           element.segment[0].target = []
           element.segment[0].target.push(propsText[element['$'].id])
         } else {
+          element.segment[0].target = element.segment[0].source
           translationNotFound(element['$'].id, saveCode)
+        }
+        if ('en' === saveCode) {
+          if (element.segment[0].target !== element.segment[0].source) {
+            translationNotMatch(
+              element['$'].id,
+              element.segment[0].target,
+              element.segment[0].source
+            )
+          }
         }
       })
       resolve(result)
@@ -179,6 +189,13 @@ function translationNotFound(id, saveCode) {
     unfoundTranslations[saveCode] = []
   }
   unfoundTranslations[saveCode].push(id)
+}
+
+function translationNotMatch(id, expected, got) {
+  if (!unfoundTranslations.unmatchTranslations) {
+    unfoundTranslations.unmatchTranslations = []
+  }
+  unfoundTranslations.unmatchTranslations.push({ id, expected, got })
 }
 
 function getTranslationFileFromGithub(baseUrl, code) {
