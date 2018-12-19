@@ -80,7 +80,7 @@ readMessageFile('./src/locale/messages.xlf', 'utf-8').then(file => {
       generateLanguageFile(language.code, language.code, deepCopy(file))
     )
   ).then(() => {
-    saveJson(reportFile, 'unfound-translations')
+    saveJson(reportFile, 'generator-report')
   })
 })
 
@@ -176,13 +176,11 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
           translationNotFound(element['$'].id, saveCode)
         }
         if ('en' === saveCode) {
-          if (element.segment[0].target !== element.segment[0].source) {
-            translationNotMatch(
-              element['$'].id,
-              element.segment[0].target,
-              element.segment[0].source
-            )
-          }
+          checkIfTranslationMatch(
+            element['$'].id,
+            element.segment[0].target[0],
+            element.segment[0].source[0]
+          )
         }
       })
       resolve(result)
@@ -204,7 +202,16 @@ function translationNotFound(id, saveCode) {
   reportFile[saveCode].notfound.push(id)
 }
 
-function translationNotMatch(id, expected, got) {
+function checkIfTranslationMatch(id, target, source) {
+  let treatedSource = source.replace('\n', '')
+  treatedSource = treatedSource.replace(/\s\s+/g, ' ')
+  treatedSource = treatedSource.trim()
+  if (target !== treatedSource) {
+    reportTranslationNotMatch(id, target, treatedSource)
+  }
+}
+
+function reportTranslationNotMatch(id, expected, got) {
   if (!reportFile.unmatchedTranslations) {
     reportFile.unmatchedTranslations = []
   }

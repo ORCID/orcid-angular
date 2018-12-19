@@ -54,7 +54,7 @@ src/locale/messages.pt.xlf
 src/locale/messages.rl.xlf
 src/locale/messages.ru.xlf
 src/locale/messages.uk.xlf
-src/locale/messages.unfound-translations.json
 src/locale/messages.xx.xlf
 src/locale/messages.zh_CN.xlf
 src/locale/messages.zh_TW.xlf
+src/locale/messages.generator-report.json

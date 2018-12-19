@@ -11,7 +11,7 @@
     "format:fix-all": "pretty-quick",
     "format:fix-stage": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" ",
-    "build:i18n:define": "ng xi18n  --i18n-format=xlf2",
+    "build:i18n:define": "ng xi18n  --i18n-format=xlf2 --output-path locale",
     "build:i18n:generate": "node ./src/locale/translate-file-generator",
     "build:i18n": "npm run build:i18n:define && npm run build:i18n:generate",
     "build:prod": "npm run build:i18n && ng run ng-orcid:build:production && ng run ng-orcid:build:production-fr && ng run ng-orcid:build:production-ar && ng run ng-orcid:build:production-ca && ng run ng-orcid:build:production-cs && ng run ng-orcid:build:production-en && ng run ng-orcid:build:production-en  && ng run ng-orcid:build:production-es  && ng run ng-orcid:build:production-it  && ng run ng-orcid:build:production-ja  && ng run ng-orcid:build:production-ko  && ng run ng-orcid:build:production-lr  && ng run ng-orcid:build:production-pt  && ng run ng-orcid:build:production-rl  && ng run ng-orcid:build:production-ru  && ng run ng-orcid:build:production-uk  && ng run ng-orcid:build:production-xx  && ng run ng-orcid:build:production-zh_CN  && ng run ng-orcid:build:production-zh_TW"
