@@ -5,6 +5,7 @@ import { BreakpointObserver } from '@angular/cdk/layout'
 import { Breakpoints } from '@angular/cdk/layout'
 import { Inject } from '@angular/core'
 import { LOCALE_ID } from '@angular/core'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-header',
@@ -62,10 +63,7 @@ export class HeaderComponent implements OnInit {
     },
   }
 
-  languageMenuOptions = {
-    fr: 'Français',
-    'en-US': 'English',
-  }
+  languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
 
   constructor(
     _router: Router,

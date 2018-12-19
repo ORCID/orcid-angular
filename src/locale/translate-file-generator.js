@@ -68,7 +68,11 @@ languages = [
     code: 'zh_TW',
   },
 ]
-unfoundTranslations = {}
+reportFile = {}
+
+stringReplacements = {
+  '<br />': ' ',
+}
 
 readMessageFile('./src/locale/messages.xlf', 'utf-8').then(file => {
   Promise.all(
@@ -76,7 +80,7 @@ readMessageFile('./src/locale/messages.xlf', 'utf-8').then(file => {
       generateLanguageFile(language.code, language.code, deepCopy(file))
     )
   ).then(() => {
-    saveJson(unfoundTranslations, 'unfound-translations')
+    saveJson(reportFile, 'unfound-translations')
   })
 })
 
@@ -116,7 +120,7 @@ function saveJson(json, name) {
   new Promise((resolve, reject) => {
     fs.writeFile(
       './src/locale/messages.' + name + '.json',
-      JSON.stringify(unfoundTranslations, null, 2),
+      JSON.stringify(reportFile, null, 2),
       function(err) {
         if (err) {
           reject(err)
@@ -160,7 +164,13 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
       result.xliff.file[0].unit.forEach(element => {
         if (propsText[element['$'].id]) {
           element.segment[0].target = []
-          element.segment[0].target.push(propsText[element['$'].id])
+          element.segment[0].target.push(
+            translationTreatment(
+              propsText[element['$'].id],
+              element['$'].id,
+              saveCode
+            )
+          )
         } else {
           element.segment[0].target = element.segment[0].source
           translationNotFound(element['$'].id, saveCode)
@@ -185,24 +195,52 @@ function deepCopy(json) {
 }
 
 function translationNotFound(id, saveCode) {
-  if (!unfoundTranslations[saveCode]) {
-    unfoundTranslations[saveCode] = []
+  if (!reportFile[saveCode]) {
+    reportFile[saveCode] = {}
   }
-  unfoundTranslations[saveCode].push(id)
+  if (!reportFile[saveCode].notfound) {
+    reportFile[saveCode].notfound = []
+  }
+  reportFile[saveCode].notfound.push(id)
 }
 
 function translationNotMatch(id, expected, got) {
-  if (!unfoundTranslations.unmatchTranslations) {
-    unfoundTranslations.unmatchTranslations = []
+  if (!reportFile.unmatchedTranslations) {
+    reportFile.unmatchedTranslations = []
   }
-  unfoundTranslations.unmatchTranslations.push({ id, expected, got })
+  reportFile.unmatchedTranslations.push({ id, expected, got })
 }
 
 function getTranslationFileFromGithub(baseUrl, code) {
   return axios.get(baseUrl + code + '.properties').catch(error => {
-    if (!unfoundTranslations.unexistingFiles) {
-      unfoundTranslations.unexistingFiles = []
+    if (!reportFile.unexistingFiles) {
+      reportFile.unexistingFiles = []
     }
-    unfoundTranslations.unexistingFiles.push(baseUrl + code + '.properties')
+    reportFile.unexistingFiles.push(baseUrl + code + '.properties')
   })
+}
+
+function translationTreatment(translation, id, saveCode) {
+  let replacement = JSON.parse(JSON.stringify(translation))
+  Object.keys(stringReplacements).map((text, index) => {
+    replacement = replacement.replace(text, stringReplacements[text])
+  })
+  reportTranslationTreatment(translation, replacement, saveCode, id)
+  return replacement
+}
+
+function reportTranslationTreatment(translation, replacement, saveCode, id) {
+  if (replacement !== translation) {
+    if (!reportFile[saveCode]) {
+      reportFile[saveCode] = {}
+    }
+    if (!reportFile[saveCode].changed) {
+      reportFile[saveCode].changed = []
+    }
+    reportFile[saveCode].changed.push({
+      id,
+      translation,
+      replacement,
+    })
+  }
 }
