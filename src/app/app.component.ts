@@ -20,7 +20,6 @@ export class AppComponent {
   ) {
     this.ie = _platform.TRIDENT
     this.edge = _platform.EDGE
-    console.log(_platform)
     this._breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.Tablet])
       .subscribe(state => {
