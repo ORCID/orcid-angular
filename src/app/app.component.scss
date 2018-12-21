@@ -8,3 +8,9 @@ app-footer {
   flex: 1 0 auto;
   display: flex;
 }
+
+:host.tabletOrHandset {
+  .router-container {
+    padding-bottom: 195px; //remove footer height
+  }
+}

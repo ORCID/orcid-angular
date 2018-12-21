@@ -169,7 +169,7 @@
 </nav>
 
 <!-- HANDSET AND TABLET VERSION -->
-<nav class="tabletOrHandset" *ngIf="tabletOrHandset">
+<nav *ngIf="tabletOrHandset">
   <div class="top-bar">
     <div class="main-menu">
       <div class="menu-logo-container">
@@ -190,7 +190,7 @@
     </div>
   </div>
 
-  <mat-menu #appMenu="matMenu" class="tabletOrHandset">
+  <mat-menu #appMenu="matMenu">
     <div [ngClass]="{ active: menu.researchers.route === currentRoute }">
       <button
         mat-menu-item
@@ -244,7 +244,7 @@
     </div>
   </mat-menu>
 
-  <mat-menu #researchers="matMenu" class="tabletOrHandset">
+  <mat-menu #researchers="matMenu">
     <div>
       <button mat-menu-item i18n="@@public-layout.sign_in">SIGN IN</button>
     </div>
@@ -260,7 +260,7 @@
     </div>
   </mat-menu>
 
-  <mat-menu #organizations="matMenu" class="tabletOrHandset">
+  <mat-menu #organizations="matMenu">
     <div>
       <button mat-menu-item i18n="@@public-layout.funders">FUNDERS</button>
     </div>
@@ -286,7 +286,7 @@
     </div>
   </mat-menu>
 
-  <mat-menu #about="matMenu" class="tabletOrHandset">
+  <mat-menu #about="matMenu">
     <div>
       <button mat-menu-item i18n="@@public-layout.what_is_orcid">
         What is orcid
@@ -313,7 +313,7 @@
     </div>
   </mat-menu>
 
-  <mat-menu #help="matMenu" class="tabletOrHandset">
+  <mat-menu #help="matMenu">
     <div><button mat-menu-item i18n="@@public-layout.faq">FAQ</button></div>
     <div>
       <button mat-menu-item i18n="@@public-layout.contact_us">

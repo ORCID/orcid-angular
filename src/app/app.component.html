@@ -1,14 +1,5 @@
 <app-header></app-header>
-<div
-  class="router-container mdc-layout-grid"
-  [ngClass]="{
-    handset: handset,
-    tablet: tablet,
-    desktop: !handset && !tablet,
-    ie: ie,
-    edge: edge
-  }"
->
+<div class="router-container mdc-layout-grid">
   <router-outlet> </router-outlet>
 </div>
 <app-footer></app-footer>

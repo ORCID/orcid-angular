@@ -30,6 +30,14 @@
             "scripts": []
           },
           "configurations": {
+            "dev-ar": {
+              "outputPath": "dist/ar/",
+              "i18nFile": "src/locale/messages.ar.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ar",
+              "baseHref": "/ar/",
+              "index": "src/index.rtl.html"
+            },
             "production-en": {
               "fileReplacements": [
                 {
@@ -96,7 +104,8 @@
               "i18nFile": "src/locale/messages.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": "/ar/"
+              "baseHref": "/ar/",
+              "index": "src/index.rtl.html"
             },
             "production-ca": {
               "fileReplacements": [
@@ -428,6 +437,9 @@
             "browserTarget": "ng-orcid:build"
           },
           "configurations": {
+            "dev-ar": {
+              "browserTarget": "ng-orcid:build:dev-ar"
+            },
             "production-fr": {
               "browserTarget": "ng-orcid:build:production-fr"
             },
