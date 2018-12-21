@@ -160,7 +160,6 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
       if (error) {
         reject(error)
       }
-      //console.log(result)
       result.xliff.file[0].unit.forEach(element => {
         if (propsText[element['$'].id]) {
           element.segment[0].target = []
