@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   API_NEWS: 'http://localhost:4100/https://orcid.org/blog/feed',
-  API_WEB: 'http://localhost:4100/https://qa.orcid.org/',
-  // Use https://cors.io/ to proxy the news endpoint to avoid CORS errors during development/demo
+  API_WEB: 'http://localhost:4100/https://orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',

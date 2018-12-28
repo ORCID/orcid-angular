@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
   tabletOrHandset
   menu = {
     researchers: {
-      hover: true,
       route: '/',
       buttons: {
         signIn: {},
@@ -26,6 +25,7 @@ export class HeaderComponent implements OnInit {
       },
     },
     organizations: {
+      route: '.',
       hover: false,
       active: false,
       buttons: {
@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
       },
     },
     about: {
+      route: '.',
       hover: false,
       active: false,
       buttons: {
@@ -48,6 +49,7 @@ export class HeaderComponent implements OnInit {
       },
     },
     help: {
+      route: '.',
       hover: false,
       active: false,
       buttons: {
@@ -58,6 +60,7 @@ export class HeaderComponent implements OnInit {
       },
     },
     signIn: {
+      route: '.',
       hover: false,
       active: false,
     },
@@ -74,6 +77,7 @@ export class HeaderComponent implements OnInit {
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(val => {
         this.currentRoute = _router.url
+        this.setChildOfCurrentRouteAsSecondaryMenu()
       })
     _breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.Tablet])
@@ -100,6 +104,10 @@ export class HeaderComponent implements OnInit {
   }
 
   mouseLeave() {
+    this.setChildOfCurrentRouteAsSecondaryMenu()
+  }
+
+  setChildOfCurrentRouteAsSecondaryMenu() {
     Object.keys(this.menu).forEach(button => {
       this.menu[button].hover = this.menu[button].route === this.currentRoute
     })

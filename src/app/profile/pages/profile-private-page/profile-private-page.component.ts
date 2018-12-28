@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core'
-import { HostBinding } from '@angular/core'
+import { Component, HostBinding, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-profile-private-page',

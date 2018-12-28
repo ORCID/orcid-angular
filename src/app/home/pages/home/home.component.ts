@@ -1,12 +1,6 @@
+import { animate, style, transition, trigger } from '@angular/animations'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Component, OnInit } from '@angular/core'
-import { HostBinding } from '@angular/core'
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout'
-import { trigger } from '@angular/animations'
-import { transition } from '@angular/animations'
-import { query } from '@angular/animations'
-import { style } from '@angular/animations'
-import { stagger } from '@angular/animations'
-import { animate } from '@angular/animations'
 
 @Component({
   selector: 'app-home',

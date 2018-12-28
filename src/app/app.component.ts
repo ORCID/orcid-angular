@@ -1,9 +1,6 @@
-import { Component } from '@angular/core'
-import { BreakpointObserver } from '@angular/cdk/layout'
-import { Breakpoints } from '@angular/cdk/layout'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
-import { Directionality } from '@angular/cdk/bidi'
-import { HostBinding } from '@angular/core'
+import { Component, HostBinding } from '@angular/core'
 
 @Component({
   selector: 'app-root',
