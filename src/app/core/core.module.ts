@@ -7,6 +7,6 @@ import { ErrorHandlerService } from './error-handler/error-handler.service'
 @NgModule({
   imports: [CommonModule, HttpClientModule],
   declarations: [], // Should not declare anything
-  providers: [NewsService, ErrorHandlerService],
+  providers: [],
 })
 export class CoreModule {}

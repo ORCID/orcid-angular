@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:aot": "ng serve --aot",
     "start:cors": "npm-run-all --parallel cors start",
+    "start:aot:cors": "npm-run-all --parallel cors start:aot",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
