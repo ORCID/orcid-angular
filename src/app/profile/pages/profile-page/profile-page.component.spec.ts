@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ProfilePublicPageComponent } from './profile-public-page.component'
+import { ProfilePageComponent } from './profile-page.component'
 
-describe('ProfilePublicPageComponent', () => {
-  let component: ProfilePublicPageComponent
-  let fixture: ComponentFixture<ProfilePublicPageComponent>
+describe('ProfilePageComponent', () => {
+  let component: ProfilePageComponent
+  let fixture: ComponentFixture<ProfilePageComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProfilePublicPageComponent],
+      declarations: [ProfilePageComponent],
     }).compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfilePublicPageComponent)
+    fixture = TestBed.createComponent(ProfilePageComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
