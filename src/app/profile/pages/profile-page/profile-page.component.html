@@ -1,1 +1,13 @@
-<p>profile-page works!</p>
+<div
+  [ngClass]="{
+    'mdc-layout-grid__cell--span-1': !tabletOrHandset
+  }"
+></div>
+<div
+  [ngClass]="{
+    'mdc-layout-grid__cell--span-3': !tabletOrHandset
+  }"
+>
+  <app-profile-general-data [profileGeneralData]="profileGeneralData" [id]="id">
+  </app-profile-general-data>
+</div>

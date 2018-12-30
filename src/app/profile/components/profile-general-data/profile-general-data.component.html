@@ -1,1 +1,4 @@
-<p>profile-general-data works!</p>
+<div *ngIf="profileGeneralData">
+  <div>{{ profileGeneralData.displayName }}</div>
+  <div>{{ environment.BASE_URL + id }}</div>
+</div>

@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   API_NEWS: 'http://localhost:4100/https://orcid.org/blog/feed',
   API_WEB: 'http://localhost:4100/https://orcid.org/',
+  BASE_URL: 'https://orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
