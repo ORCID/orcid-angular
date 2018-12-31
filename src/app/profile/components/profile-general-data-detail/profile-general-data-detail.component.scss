@@ -1,0 +1,52 @@
+@import '../../../../assets/scss/material.theme';
+
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  margin-bottom: 20px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+h3.mat-body-2 {
+  color: $dark-primary-text;
+}
+
+h3.mat-body-2 {
+  color: $dark-primary-text;
+  margin: 0;
+}
+
+.content {
+  color: $dark-secondary-text;
+}
+
+.details {
+  max-height: 0px;
+  opacity: 0;
+  transition: all 0.3s ease-in;
+  z-index: -1;
+}
+.show {
+  max-height: 200px;
+  opacity: 1;
+  z-index: initial;
+}
+
+:host.hide {
+  display: none;
+}

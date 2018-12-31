@@ -1,0 +1,21 @@
+<div class="title-container" (click)="toggle()">
+  <h3 class="mat-body-2">{{ title }}</h3>
+
+  <i class="material-icons" [@rotatedState]="state"> expand_more </i>
+</div>
+
+<div class="container" [ngClass]="{ wrap: this.state === 'close' }">
+  <span
+    class="content"
+    *ngFor="let element of (list | keyvalue); let first = first"
+  >
+    {{ this.state === 'close' ? (!first ? ', ' : '') : '' }}{{ element.key }}
+    <div class="mat-body-1 details" [ngClass]="{ show: this.state === 'open' }">
+      <ng-container *ngIf="this.state !== 'close'">
+        <div>Sources</div>
+        <div>{{ element.value[0]?.source?.sourceName?.content }}</div>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </div>
+  </span>
+</div>

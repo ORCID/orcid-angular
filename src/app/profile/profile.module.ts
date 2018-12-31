@@ -6,14 +6,17 @@ import { ProfileGeneralDataComponent } from './components/profile-general-data/p
 import { ProfileRecordsComponent } from './components/profile-records/profile-records.component'
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component'
 import { ProfileRoutingModule } from './profile-routing.module'
+import { SharedModule } from '../shared/shared.module'
+import { ProfileGeneralDataDetailComponent } from './components/profile-general-data-detail/profile-general-data-detail.component'
 
 @NgModule({
-  imports: [CommonModule, ProfileRoutingModule],
+  imports: [CommonModule, ProfileRoutingModule, SharedModule],
   declarations: [
     ProfileGeneralDataComponent,
     ProfileBiographyComponent,
     ProfileRecordsComponent,
     ProfilePageComponent,
+    ProfileGeneralDataDetailComponent,
   ],
 })
 export class ProfileModule {}

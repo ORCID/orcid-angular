@@ -1,4 +1,38 @@
 <div *ngIf="profileGeneralData">
-  <div>{{ profileGeneralData.displayName }}</div>
-  <div>{{ environment.BASE_URL + id }}</div>
+  <h1 class="mat-h1">{{ profileGeneralData.displayName }}</h1>
+
+  <div>
+    <div>ORCID ID</div>
+    <div>{{ environment.BASE_URL + id }}</div>
+  </div>
+
+  <app-profile-general-data-detail
+    [title]="'Also known as'"
+    [list]="profileGeneralData.publicGroupedOtherNames"
+  ></app-profile-general-data-detail>
+
+  <app-profile-general-data-detail
+    [title]="'Country'"
+    [list]="profileGeneralData.publicGroupedAddresses"
+  ></app-profile-general-data-detail>
+
+  <app-profile-general-data-detail
+    [title]="'Keywords'"
+    [list]="profileGeneralData.publicGroupedKeywords"
+  ></app-profile-general-data-detail>
+
+  <app-profile-general-data-detail
+    [title]="'Websites'"
+    [list]="profileGeneralData.publicGroupedResearcherUrls"
+  ></app-profile-general-data-detail>
+
+  <app-profile-general-data-detail
+    [title]="'Other IDs'"
+    [list]="profileGeneralData.publicGroupedPersonExternalIdentifiers"
+  ></app-profile-general-data-detail>
+
+  <app-profile-general-data-detail
+    [title]="'Emails'"
+    [list]="profileGeneralData.publicGroupedEmails"
+  ></app-profile-general-data-detail>
 </div>
