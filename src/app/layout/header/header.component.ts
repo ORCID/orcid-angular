@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/operators'
-import { BreakpointObserver } from '@angular/cdk/layout'
-import { Breakpoints } from '@angular/cdk/layout'
 import { Inject } from '@angular/core'
 import { LOCALE_ID } from '@angular/core'
 import { environment } from '../../../environments/environment'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 
 @Component({
   selector: 'app-header',

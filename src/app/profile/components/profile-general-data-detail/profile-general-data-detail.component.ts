@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core'
 import { trigger, style, transition, state, animate } from '@angular/animations'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 
 @Component({
   selector: 'app-profile-general-data-detail',
@@ -16,6 +17,8 @@ import { trigger, style, transition, state, animate } from '@angular/animations'
 })
 export class ProfileGeneralDataDetailComponent implements OnInit {
   @Input() title
+  @Input() columnDirection = false
+  handset
   state = 'close'
   _list
 
@@ -24,7 +27,15 @@ export class ProfileGeneralDataDetailComponent implements OnInit {
     this.state = this.state === 'close' ? 'open' : 'close'
   }
 
-  constructor() {}
+  constructor(_breakpointObserver: BreakpointObserver) {
+    _breakpointObserver.observe([Breakpoints.Handset]).subscribe(breakpoint => {
+      if (breakpoint.matches) {
+        this.handset = true
+      } else {
+        this.handset = false
+      }
+    })
+  }
 
   ngOnInit() {}
 

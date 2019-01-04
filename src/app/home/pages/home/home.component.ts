@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations'
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Component, OnInit, Input } from '@angular/core'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 
 @Component({
   selector: 'app-home',

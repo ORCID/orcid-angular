@@ -1,6 +1,6 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
 import { Component, HostBinding } from '@angular/core'
+import { PlatformInfoService } from './core/platform-info/platform-info.service'
 
 @Component({
   selector: 'app-root',
@@ -15,37 +15,14 @@ export class AppComponent {
   @HostBinding('class.tablet') tablet
   @HostBinding('class.desktop') desktop
 
-  constructor(
-    private _breakpointObserver: BreakpointObserver,
-    private _platform: Platform
-  ) {
-    this.ie = _platform.TRIDENT
-    this.edge = _platform.EDGE
-
-    this._breakpointObserver.observe([Breakpoints.Handset]).subscribe(state => {
-      if (state.matches) {
-        this.handset = true
-      } else {
-        this.handset = false
-      }
+  constructor(_platformInfo: PlatformInfoService) {
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.ie = platformInfo.ie
+      this.edge = platformInfo.edge
+      this.tabletOrHandset = platformInfo.tabletOrHandset
+      this.handset = platformInfo.handset
+      this.tablet = platformInfo.tablet
+      this.desktop = platformInfo.desktop
     })
-    this._breakpointObserver.observe([Breakpoints.Tablet]).subscribe(state => {
-      if (state.matches) {
-        this.tablet = true
-      } else {
-        this.tablet = false
-      }
-    })
-    this._breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
-        if (state.matches) {
-          this.tabletOrHandset = true
-          this.desktop = false
-        } else {
-          this.tabletOrHandset = false
-          this.desktop = true
-        }
-      })
   }
 }

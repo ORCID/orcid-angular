@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration=sandbox",
     "start:aot": "ng serve --aot",
     "start:cors": "npm-run-all --parallel cors start",
     "start:aot:cors": "npm-run-all --parallel cors start:aot",

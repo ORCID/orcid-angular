@@ -1,9 +1,23 @@
 <div *ngIf="profileGeneralData">
   <h1 class="mat-h1">{{ profileGeneralData.displayName }}</h1>
 
-  <div>
-    <div>ORCID ID</div>
-    <div>{{ environment.BASE_URL + id }}</div>
+  <div class="idSection">
+    <div class="idSectionHeader">ORCID ID</div>
+    <div class="idSectionContainer mat-body">
+      <img src="./assets/vectors/favicon.svg" alt="" />
+      {{ environment.BASE_URL + id }}
+    </div>
+  </div>
+
+  <div class="printMenu mat-body-2">
+    <i class="material-icons" (click)="goToPrintView()"> print </i>
+    <div (click)="goToPrintView()">Print view</div>
+    <i
+      class="material-icons"
+      matTooltip="Open a version of this ORCID record formatted for printing."
+    >
+      info
+    </i>
   </div>
 
   <app-profile-general-data-detail
@@ -28,11 +42,13 @@
 
   <app-profile-general-data-detail
     [title]="'Other IDs'"
+    [columnDirection]="true"
     [list]="profileGeneralData.publicGroupedPersonExternalIdentifiers"
   ></app-profile-general-data-detail>
 
   <app-profile-general-data-detail
     [title]="'Emails'"
+    [columnDirection]="true"
     [list]="profileGeneralData.publicGroupedEmails"
   ></app-profile-general-data-detail>
 </div>

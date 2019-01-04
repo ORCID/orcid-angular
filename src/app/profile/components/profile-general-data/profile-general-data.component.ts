@@ -16,4 +16,8 @@ export class ProfileGeneralDataComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  goToPrintView() {
+    window.location.href = `${environment.BASE_URL}${this.id}/print`
+  }
 }

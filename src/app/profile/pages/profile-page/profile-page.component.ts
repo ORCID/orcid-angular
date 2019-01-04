@@ -23,6 +23,22 @@ export class ProfilePageComponent implements OnInit {
       })
       _profileService.getPerson(this.id).subscribe(data => {
         this.profileGeneralData = data
+        // Changes publicGroupedAddresses keys for full country names
+        if (this.profileGeneralData.publicGroupedAddresses) {
+          Object.keys(this.profileGeneralData.publicGroupedAddresses).map(
+            key => {
+              if (
+                this.profileGeneralData.countryNames &&
+                this.profileGeneralData.countryNames[key]
+              ) {
+                this.profileGeneralData.publicGroupedAddresses[
+                  this.profileGeneralData.countryNames[key]
+                ] = this.profileGeneralData.publicGroupedAddresses[key]
+                delete this.profileGeneralData.publicGroupedAddresses[key]
+              }
+            }
+          )
+        }
         console.log(this.profileGeneralData)
       })
     })

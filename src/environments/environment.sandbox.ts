@@ -1,6 +1,8 @@
 export const environment = {
-  production: true,
-  API_NEWS: 'https://sandbox.orcid.org/blog/feed',
+  production: false,
+  API_NEWS: 'http://localhost:4100/https://orcid.org/blog/feed',
+  API_WEB: 'http://localhost:4100/https://sandbox.orcid.org/',
+  BASE_URL: 'https://sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
@@ -15,5 +17,10 @@ export const environment = {
     ru: 'Русский',
     'zh-CN': '简体中文',
     'zh-TW': '繁體中文',
+    xx: '** xx',
+    lr: '** lr',
+    rl: '** rl',
+    uk: '** Ukrainian',
+    ca: '** Catalan',
   },
 }
