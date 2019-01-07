@@ -1,3 +1,8 @@
+<div class="progress-spinner-container" *ngIf="!profileGeneralData">
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <div *ngIf="profileGeneralData">
   <h1 class="mat-h1">{{ profileGeneralData.displayName }}</h1>
 

@@ -1,6 +1,8 @@
 <!-- WEB VERSION -->
 <header *ngIf="!tabletOrHandset">
-  <div class="logo"><img src="./assets/vectors/orcid.logo.svg" /></div>
+  <div class="logo" routerLink="/">
+    <img src="./assets/vectors/orcid.logo.svg" />
+  </div>
 </header>
 <nav (mouseleave)="mouseLeave()" *ngIf="!tabletOrHandset">
   <div class="top-bar">
@@ -172,7 +174,7 @@
 <nav *ngIf="tabletOrHandset">
   <div class="top-bar">
     <div class="main-menu">
-      <div class="menu-logo-container">
+      <div class="menu-logo-container" routerLink="/">
         <button mat-icon-button [matMenuTriggerFor]="appMenu">
           <div class="icon-button"><i class="material-icons"> menu </i></div>
         </button>

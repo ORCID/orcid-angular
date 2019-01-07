@@ -6,6 +6,9 @@ header {
     padding-top: 12px;
     cursor: pointer;
   }
+  .logo:focus {
+    outline: none;
+  }
 }
 
 nav {
@@ -109,6 +112,11 @@ nav {
         display: flex;
         align-items: center;
       }
+
+      .menu-logo-container:focus {
+        outline: none;
+      }
+
       .main-menu {
         height: 61px;
         display: flex;
