@@ -14,41 +14,65 @@
     <div (click)="goToPrintView()">Print view</div>
     <i
       class="material-icons"
-      matTooltip="Open a version of this ORCID record formatted for printing."
+      [matTooltip]="public_record_printHelpText.innerHTML"
     >
       info
     </i>
   </div>
 
   <app-profile-general-data-detail
-    [title]="'Also known as'"
+    [title]="public_profile_labelAlsoknownas.innerHTML"
     [list]="profileGeneralData.publicGroupedOtherNames"
   ></app-profile-general-data-detail>
 
   <app-profile-general-data-detail
-    [title]="'Country'"
+    [title]="public_profile_labelCountry.innerHTML"
     [list]="profileGeneralData.publicGroupedAddresses"
   ></app-profile-general-data-detail>
 
   <app-profile-general-data-detail
-    [title]="'Keywords'"
+    [title]="public_profile_labelKeywords.innerHTML"
     [list]="profileGeneralData.publicGroupedKeywords"
   ></app-profile-general-data-detail>
 
   <app-profile-general-data-detail
-    [title]="'Websites'"
+    [title]="public_profile_labelWebsites.innerHTML"
     [list]="profileGeneralData.publicGroupedResearcherUrls"
   ></app-profile-general-data-detail>
 
   <app-profile-general-data-detail
-    [title]="'Other IDs'"
+    [title]="public_profile_labelOtherIDs.innerHTML"
     [columnDirection]="true"
     [list]="profileGeneralData.publicGroupedPersonExternalIdentifiers"
   ></app-profile-general-data-detail>
 
   <app-profile-general-data-detail
-    [title]="'Emails'"
+    [title]="manage_emails.innerHTML"
     [columnDirection]="true"
     [list]="profileGeneralData.publicGroupedEmails"
   ></app-profile-general-data-detail>
+</div>
+
+<div class="staticTranslations">
+  <span #public_record_printHelpText i18n="@@public_record.printHelpText"
+    >Open a version of this ORCID record formatted for printing.</span
+  >
+  <span #public_profile_labelKeywords i18n="@@public_profile.labelKeywords"
+    >Keywords</span
+  >
+  <span #public_profile_labelCountry i18n="@@public_profile.labelCountry"
+    >Country</span
+  >
+  <span
+    #public_profile_labelAlsoknownas
+    i18n="@@public_profile.labelAlsoknownas"
+    >Also known as</span
+  >
+  <span #public_profile_labelWebsites i18n="@@public_profile.labelWebsites"
+    >Websites</span
+  >
+  <span #public_profile_labelOtherIDs i18n="@@public_profile.labelOtherIDs"
+    >Other IDs</span
+  >
+  <span #manage_emails i18n="@@manage.emails">Emails</span>
 </div>

@@ -1,4 +1,4 @@
-<div class="title-container" (click)="toggle()">
+<div class="title-container" (click)="toggle($event)">
   <h3 class="mat-body-2">{{ title }}</h3>
 
   <i class="material-icons" [@rotatedState]="state"> expand_more </i>
