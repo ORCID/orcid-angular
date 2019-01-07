@@ -2,9 +2,9 @@
 
 # Set up
 
-- Navigate to your local orcid folder example : `cd ~/git/orcid` copy or clone this repo git@github.com:ORCID/orcid-angular.git
+- Clone this repo `git clone https://github.com/ORCID/orcid-angular.git`
 
-- Ensure you have npm. If not [install npm](https://www.npmjs.com/get-npm)
+- Ensure you have npm, if not [install npm](https://www.npmjs.com/get-npm)
 
 ## Development server
 
@@ -12,9 +12,9 @@
 
 - Install dependencies `npm install`
 
-- Run `npm start`
+- Run the project `npm start`
 
-- Navigate to `http://localhost:4200/` you will see a local frontend instance connected to sandbox.orcid.org data
+- Navigate to `http://localhost:4200/` you will see a local instance connected to sandbox.orcid.org data
 
 You can also use `npm run start:ar` to test left to right display mode.
 
