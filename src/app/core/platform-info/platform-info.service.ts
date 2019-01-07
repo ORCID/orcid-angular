@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Platform } from '@angular/cdk/platform'
-import { Subject, Observable } from 'rxjs'
+import { Observable, BehaviorSubject } from 'rxjs'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 
 import { PlatformInfo } from '../../types/platform-info.local'
@@ -9,7 +9,7 @@ import { PlatformInfo } from '../../types/platform-info.local'
   providedIn: 'root',
 })
 export class PlatformInfoService {
-  platformSubject = new Subject<PlatformInfo>()
+  platformSubject = new BehaviorSubject<PlatformInfo>(null)
 
   platform: PlatformInfo = {
     desktop: false,

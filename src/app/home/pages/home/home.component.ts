@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit, Input } from '@angular/core'
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+import { PlatformInfoService } from '../../../core'
 
 @Component({
   selector: 'app-home',
@@ -17,16 +17,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 })
 export class HomeComponent implements OnInit {
   tabletOrHandset
-  constructor(_breakpointObserver: BreakpointObserver) {
-    _breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
-        if (state.matches) {
-          this.tabletOrHandset = true
-        } else {
-          this.tabletOrHandset = false
-        }
-      })
+
+  constructor(_platformInfo: PlatformInfoService) {
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.tabletOrHandset = platformInfo.tabletOrHandset
+    })
   }
 
   ngOnInit() {}

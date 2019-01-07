@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core'
 import { trigger, style, transition, state, animate } from '@angular/animations'
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+
+import { PlatformInfoService } from 'src/app/core'
 
 @Component({
   selector: 'app-profile-general-data-detail',
@@ -27,13 +28,9 @@ export class ProfileGeneralDataDetailComponent implements OnInit {
     this.state = this.state === 'close' ? 'open' : 'close'
   }
 
-  constructor(_breakpointObserver: BreakpointObserver) {
-    _breakpointObserver.observe([Breakpoints.Handset]).subscribe(breakpoint => {
-      if (breakpoint.matches) {
-        this.handset = true
-      } else {
-        this.handset = false
-      }
+  constructor(_platformInfo: PlatformInfoService) {
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.handset = platformInfo.handset
     })
   }
 
@@ -45,7 +42,6 @@ export class ProfileGeneralDataDetailComponent implements OnInit {
 
   @Input()
   set list(list: string) {
-    console.log(list)
     this._list = list
     if (list) {
       this.hide = Object.keys(this.list).length === 0

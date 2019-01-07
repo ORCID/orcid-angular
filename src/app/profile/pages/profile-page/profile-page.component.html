@@ -1,11 +1,11 @@
 <div
-  [ngClass]="{
-    'mdc-layout-grid__cell--span-1': !tabletOrHandset
-  }"
+  class="mdc-layout-grid__cell--span-1"
+  *ngIf="!platformInfo?.tabletOrHandset"
 ></div>
 <div
   [ngClass]="{
-    'mdc-layout-grid__cell--span-3': !tabletOrHandset
+    'mdc-layout-grid__cell--span-3': !platformInfo?.tabletOrHandset,
+    'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
   }"
 >
   <app-profile-general-data [profileGeneralData]="profileGeneralData" [id]="id">

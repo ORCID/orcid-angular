@@ -1,8 +1,8 @@
 import { Component, HostBinding, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 
-import { ProfileService } from '../../../core/profile/profile.service'
-import { Person } from '../../../types'
+import { PlatformInfoService, ProfileService } from 'src/app/core'
+import { Person, PlatformInfo } from 'src/app/types'
 
 @Component({
   selector: 'app-profile-page',
@@ -14,10 +14,14 @@ export class ProfilePageComponent implements OnInit {
   id
   affiliations
   profileGeneralData: Person
-  constructor(_profileService: ProfileService, _activeRoute: ActivatedRoute) {
-    _activeRoute.parent.url.subscribe(x => {
-      console.log(x)
-      this.id = x[0].path
+  platformInfo: PlatformInfo
+  constructor(
+    _profileService: ProfileService,
+    _activeRoute: ActivatedRoute,
+    _platformInfo: PlatformInfoService
+  ) {
+    _activeRoute.parent.url.subscribe(route => {
+      this.id = route[0].path
       _profileService.getAffiliations(this.id).subscribe(data => {
         this.affiliations = data
       })
@@ -39,7 +43,9 @@ export class ProfilePageComponent implements OnInit {
             }
           )
         }
-        console.log(this.profileGeneralData)
+      })
+      _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+        this.platformInfo = platformInfo
       })
     })
   }

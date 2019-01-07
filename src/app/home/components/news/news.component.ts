@@ -9,7 +9,7 @@ import {
 import { Component, OnInit } from '@angular/core'
 
 import { environment } from '../../../../environments/environment.sandbox'
-import { NewsService } from '../../../core/news/news.service'
+import { NewsService } from 'src/app/core'
 
 @Component({
   selector: 'app-news',

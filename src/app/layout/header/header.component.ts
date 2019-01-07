@@ -3,8 +3,9 @@ import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { Inject } from '@angular/core'
 import { LOCALE_ID } from '@angular/core'
+
 import { environment } from '../../../environments/environment'
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+import { PlatformInfoService } from 'src/app/core'
 
 @Component({
   selector: 'app-header',
@@ -69,7 +70,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     _router: Router,
-    _breakpointObserver: BreakpointObserver,
+    _platformInfo: PlatformInfoService,
     @Inject(LOCALE_ID) public locale: string
   ) {
     _router.events
@@ -78,15 +79,10 @@ export class HeaderComponent implements OnInit {
         this.currentRoute = _router.url
         this.setChildOfCurrentRouteAsSecondaryMenu()
       })
-    _breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
-        if (state.matches) {
-          this.tabletOrHandset = true
-        } else {
-          this.tabletOrHandset = false
-        }
-      })
+
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.tabletOrHandset = platformInfo.tabletOrHandset
+    })
   }
 
   ngOnInit() {}

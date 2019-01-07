@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration=sandbox",
-    "start:aot": "ng serve --aot",
+    "start": "ng serve --configuration=sandbox --disable-host-check",
+    "start:aot": "ng serve --aot --disable-host-check",
     "start:cors": "npm-run-all --parallel cors start",
     "start:aot:cors": "npm-run-all --parallel cors start:aot",
     "build": "ng build",

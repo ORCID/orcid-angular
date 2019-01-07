@@ -1,7 +1,11 @@
 export const environment = {
-  production: true,
-  // TODO Remove use https://cors.io/ to proxy the news endpoint to avoid CORS errors during demo
-  API_NEWS: 'https://cors.io/?https://orcid.org/blog/feed?format=text',
+  production: false,
+
+  // https://orcid.herokuapp.com is an instance of https://github.com/Rob--W/cors-anywhere hosted on Heroku
+  // to avoid CORS errors while he prototype is not hosted on *.orcid.com domains.
+  API_NEWS: 'https://orcid.herokuapp.com/https://orcid.org/blog/feed',
+  API_WEB: 'https://orcid.herokuapp.com/https://sandbox.orcid.org/',
+  BASE_URL: 'https://sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
