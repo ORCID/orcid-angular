@@ -3,10 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration=sandbox --disable-host-check",
-    "start:aot": "ng serve --aot --configuration=sandbox --disable-host-check",
-    "start:cors": "npm-run-all --parallel cors start",
-    "start:aot:cors": "npm-run-all --parallel cors start:aot",
+
+    "start": "npm-run-all --parallel cors serve",
+    "start:aot": "npm-run-all --parallel cors serve:aot",
+    "serve": "ng serve --configuration=en-sandbox --disable-host-check",
+    "serve:aot": "ng serve --aot --configuration=en-sandbox --disable-host-check",
+
+    "start:ar": "npm-run-all --parallel cors serve:ar",
+    "start:ar:aot": "npm-run-all --parallel cors serve:ar:aot",
+    "serve:ar": "ng serve --configuration=ar-sandbox --disable-host-check",
+    "serve:ar:aot": "ng serve --aot --configuration=ar-sandbox --disable-host-check",
+
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -18,6 +25,8 @@
     "build:i18n:define": "ng xi18n  --i18n-format=xlf2 --output-path locale",
     "build:i18n:generate": "node ./src/locale/translate-file-generator",
     "build:i18n": "npm run build:i18n:define && npm run build:i18n:generate",
+    "build:en": "npm run build:i18n && ng run ng-orcid:build:production-en",
+    "build:ar": "npm run build:i18n && ng run ng-orcid:build:production-en",
     "build:prod": "npm run build:i18n && ng run ng-orcid:build:production-en && ng run ng-orcid:build:production-fr && ng run ng-orcid:build:production-ar && ng run ng-orcid:build:production-ca && ng run ng-orcid:build:production-cs && ng run ng-orcid:build:production-en && ng run ng-orcid:build:production-en  && ng run ng-orcid:build:production-es  && ng run ng-orcid:build:production-it  && ng run ng-orcid:build:production-ja  && ng run ng-orcid:build:production-ko  && ng run ng-orcid:build:production-lr  && ng run ng-orcid:build:production-pt  && ng run ng-orcid:build:production-rl  && ng run ng-orcid:build:production-ru  && ng run ng-orcid:build:production-uk  && ng run ng-orcid:build:production-xx  && ng run ng-orcid:build:production-zh_CN  && ng run ng-orcid:build:production-zh_TW"
   },
   "private": true,

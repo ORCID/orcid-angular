@@ -30,7 +30,7 @@
             "scripts": []
           },
           "configurations": {
-            "sandbox": {
+            "en-sandbox": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -38,7 +38,13 @@
                 }
               ]
             },
-            "dev-ar": {
+            "ar-sandbox": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                }
+              ],
               "outputPath": "dist/ar/",
               "i18nFile": "src/locale/messages.ar.xlf",
               "i18nFormat": "xlf2",
@@ -445,11 +451,11 @@
             "browserTarget": "ng-orcid:build"
           },
           "configurations": {
-            "sandbox": {
-              "browserTarget": "ng-orcid:build:sandbox"
+            "en-sandbox": {
+              "browserTarget": "ng-orcid:build:en-sandbox"
             },
-            "dev-ar": {
-              "browserTarget": "ng-orcid:build:dev-ar"
+            "ar-sandbox": {
+              "browserTarget": "ng-orcid:build:ar-sandbox"
             },
             "production-fr": {
               "browserTarget": "ng-orcid:build:production-fr"
