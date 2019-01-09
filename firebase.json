@@ -72,11 +72,11 @@
       },
       {
         "source": "/zh-CN/**",
-        "destination": "/es/index.html"
+        "destination": "/zh-TW/index.html"
       },
       {
         "source": "/zh-TW/**",
-        "destination": "/es/index.html"
+        "destination": "/zh-TW/index.html"
       }
     ]
   }
