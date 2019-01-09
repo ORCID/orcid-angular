@@ -111,6 +111,6 @@ export class HeaderComponent implements OnInit {
   click(ul: string) {}
 
   changeLanguage(languageKey: string) {
-    window.location.href = '/' + languageKey
+    window.location.href = '/' + languageKey + '/'
   }
 }
