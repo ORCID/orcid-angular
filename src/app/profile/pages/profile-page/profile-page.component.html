@@ -11,3 +11,21 @@
   <app-profile-general-data [profileGeneralData]="profileGeneralData" [id]="id">
   </app-profile-general-data>
 </div>
+
+<div
+  [ngClass]="{
+    'mdc-layout-grid__cell--span-7': !platformInfo?.tabletOrHandset,
+    'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
+  }"
+>
+  <app-profile-biography
+    *ngIf="
+      profileGeneralData &&
+      profileGeneralData.biography &&
+      profileGeneralData.biography.content
+    "
+    [profileGeneralData]="profileGeneralData"
+    [id]="id"
+  >
+  </app-profile-biography>
+</div>
