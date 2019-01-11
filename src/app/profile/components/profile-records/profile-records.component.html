@@ -1,1 +1,16 @@
-<p>profile-records works!</p>
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelState.employment = true"
+    (closed)="panelState.employment = false"
+    [expanded]="panelState.employment"
+  >
+    <mat-expansion-panel-header [ngClass]="{ selected: true }">
+      <h2 class="mat-subheading-2">Employment {{ 3 }}</h2>
+    </mat-expansion-panel-header>
+    <app-profile-records-card></app-profile-records-card>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header> OTHERS </mat-expansion-panel-header>
+    <p>...</p>
+  </mat-expansion-panel>
+</mat-accordion>

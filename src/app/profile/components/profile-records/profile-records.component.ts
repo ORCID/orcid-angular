@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./profile-records.component.scss'],
 })
 export class ProfileRecordsComponent implements OnInit {
+  panelState = {
+    employment: true,
+  }
+
   constructor() {}
 
   ngOnInit() {}

@@ -1,0 +1,40 @@
+<div class="margin-top-1">
+  <div class="title-container" (click)="toggle($event)">
+    <h3 class="mat-subheading-1">AVANTIVA SAN JOSE!</h3>
+    <i class="material-icons" [@rotatedState]="state"> expand_more </i>
+  </div>
+  <div class="general-data mat-body-2">
+    2018-09-01 to present | Social Media Manager
+  </div>
+  <div class="type mat-body-2">Emplotment</div>
+</div>
+
+<div
+  class="secondary-container"
+  [@heightAnimationState]="{
+    value: detailShowData,
+    params: { initialHeight: '80px' }
+  }"
+>
+  <mat-divider class="margin-top-2"></mat-divider>
+  <div class="margin-top-1">
+    <div>Organization identifiers</div>
+    <div>Ringgold: 999999</div>
+    <div class="padding-level-2">AVANTICA: SJ, CR</div>
+    <div class="padding-level-2">
+      Other organization identifiers provided by Ringgold
+    </div>
+    <div class="padding-level-3">ISNI: 0000000999999999</div>
+  </div>
+</div>
+<div class="spinner-container" [@heightAnimationState]="detailShowLoader">
+  <mat-progress-spinner [diameter]="40" color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+<div class="card-footer mat-body-1 margin-top-2">
+  <div>Source: Rosalie J Barcomb</div>
+  <div class="prefered-source">
+    <div><i class="material-icons"> check_circle_outline </i></div>
+    <div>Preferred source</div>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { ProfileRoutingModule } from './profile-routing.module'
 import { SharedModule } from '../shared/shared.module'
 import { ProfileGeneralDataDetailComponent } from './components/profile-general-data-detail/profile-general-data-detail.component'
+import { ProfileRecordsCardComponent } from './components/profile-records-card/profile-records-card.component'
 
 @NgModule({
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
@@ -17,6 +18,7 @@ import { ProfileGeneralDataDetailComponent } from './components/profile-general-
     ProfileRecordsComponent,
     ProfilePageComponent,
     ProfileGeneralDataDetailComponent,
+    ProfileRecordsCardComponent,
   ],
 })
 export class ProfileModule {}
