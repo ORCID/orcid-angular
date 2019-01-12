@@ -5,7 +5,7 @@ import { retry } from 'rxjs/internal/operators/retry'
 
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Person } from '../../types'
+import { Person, Affiliations } from '../../types'
 import { Observable } from 'rxjs'
 
 @Injectable({
@@ -17,9 +17,9 @@ export class ProfileService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getAffiliations(id) {
+  getAffiliations(id): Observable<Affiliations> {
     return this._http
-      .get(environment.API_WEB + `${id}/affiliationGroups.json`)
+      .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
       .pipe(
         retry(3),
         catchError(this._errorHandler.handleError)

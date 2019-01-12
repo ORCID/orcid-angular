@@ -28,5 +28,9 @@
     [id]="id"
   >
   </app-profile-biography>
-  <app-profile-records> </app-profile-records>
+  <app-profile-records
+    *ngIf="profileAffiliationsData"
+    [profileAffiliationsData]="profileAffiliationsData"
+  >
+  </app-profile-records>
 </div>

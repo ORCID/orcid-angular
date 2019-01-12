@@ -1,16 +1,81 @@
 <mat-accordion>
   <mat-expansion-panel
-    (opened)="panelState.employment = true"
-    (closed)="panelState.employment = false"
-    [expanded]="panelState.employment"
+    (opened)="panelState[affiliationGroup.key] = true"
+    (closed)="panelState[affiliationGroup.key] = false"
+    [expanded]="panelState[affiliationGroup.key]"
+    *ngFor="
+      let affiliationGroup of (profileAffiliationsData.affiliationGroups
+        | keyvalue)
+    "
   >
     <mat-expansion-panel-header [ngClass]="{ selected: true }">
-      <h2 class="mat-subheading-2">Employment {{ 3 }}</h2>
+      <h2 class="mat-subheading-2">
+        <!--
+          The translation of the header of each card is handle with a separate template #translatedHeader
+        -->
+        <ng-container
+          [ngTemplateOutlet]="translatedHeader"
+          [ngTemplateOutletContext]="{ affiliationGroup: affiliationGroup }"
+        >
+        </ng-container>
+        ({{
+          profileAffiliationsData.affiliationGroups[affiliationGroup.key]
+            .length
+        }})
+      </h2>
     </mat-expansion-panel-header>
-    <app-profile-records-card></app-profile-records-card>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header> OTHERS </mat-expansion-panel-header>
-    <p>...</p>
+    <app-profile-records-card
+      *ngFor="
+        let affiliation of profileAffiliationsData.affiliationGroups[
+          affiliationGroup.key
+        ]
+      "
+      [title]="affiliation.defaultAffiliation.affiliationName.value"
+      [startDate]="
+        affiliation.defaultAffiliation.startDate | monthDayYearDateToString
+      "
+      [endDate]="
+        affiliation.defaultAffiliation.endDate | monthDayYearDateToString
+      "
+      [role]="affiliation.defaultAffiliation.roleTitle.value"
+      [department]="affiliation.defaultAffiliation.departmentName.value"
+      [type]="affiliation.defaultAffiliation.affiliationType.value | titlecase"
+    ></app-profile-records-card>
   </mat-expansion-panel>
 </mat-accordion>
+
+<ng-template #translatedHeader let-affiliationGroup="affiliationGroup">
+  <ng-container
+    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.DISTINCTION"
+  >
+    DISTINCTION</ng-container
+  >
+  <ng-container
+    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.EDUCATION"
+  >
+    EDUCATION</ng-container
+  >
+  <ng-container
+    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.EMPLOYMENT"
+  >
+    EMPLOYMENT</ng-container
+  >
+  <ng-container
+    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.INVITED_POSITION"
+  >
+    INVITED_POSITION</ng-container
+  >
+  <ng-container
+    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.MEMBERSHIP"
+  >
+    MEMBERSHIP</ng-container
+  >
+  <ng-container
+    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.QUALIFICATION"
+  >
+    QUALIFICATION</ng-container
+  >
+  <ng-container *ngIf="affiliationGroup.key == AffiliationGroupsTypes.SERVICE">
+    SERVICE</ng-container
+  >
+</ng-template>

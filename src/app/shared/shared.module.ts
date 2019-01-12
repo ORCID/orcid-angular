@@ -10,6 +10,7 @@ import {
   MatFormFieldModule,
 } from '@angular/material'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
 
 @NgModule({
   imports: [
@@ -18,12 +19,13 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatProgressSpinnerModule,
     MatExpansionModule,
   ],
-  declarations: [],
+  declarations: [MonthDayYearDateToStringPipe],
   exports: [
     MatDivider,
     MatTooltipModule,
     MatProgressSpinner,
     MatExpansionModule,
+    MonthDayYearDateToStringPipe,
   ],
   providers: [], // Should not provide anything
 })

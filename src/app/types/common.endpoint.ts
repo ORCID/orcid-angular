@@ -87,3 +87,12 @@ export interface Email {
   verified: boolean
   primary: boolean
 }
+
+export interface MonthDayYearDate {
+  errors: [any] // populate with data
+  month: string
+  day: string
+  year: string
+  required: boolean
+  getRequiredMessage: any
+}

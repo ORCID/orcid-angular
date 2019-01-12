@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 
 import { PlatformInfoService, ProfileService } from 'src/app/core'
 import { Person, PlatformInfo } from 'src/app/types'
+import { Affiliations } from '../../../types'
 
 @Component({
   selector: 'app-profile-page',
@@ -12,9 +13,10 @@ import { Person, PlatformInfo } from 'src/app/types'
 export class ProfilePageComponent implements OnInit {
   @HostBinding('class.mdc-layout-grid__inner') grid = true
   id
-  affiliations
+  profileAffiliationsData: Affiliations
   profileGeneralData: Person
   platformInfo: PlatformInfo
+
   constructor(
     _profileService: ProfileService,
     _activeRoute: ActivatedRoute,
@@ -23,7 +25,7 @@ export class ProfilePageComponent implements OnInit {
     _activeRoute.parent.url.subscribe(route => {
       this.id = route[0].path
       _profileService.getAffiliations(this.id).subscribe(data => {
-        this.affiliations = data
+        this.profileAffiliationsData = data
       })
       _profileService.getPerson(this.id).subscribe(data => {
         this.profileGeneralData = data

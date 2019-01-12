@@ -1,12 +1,20 @@
 <div class="margin-top-1">
   <div class="title-container" (click)="toggle($event)">
-    <h3 class="mat-subheading-1">AVANTIVA SAN JOSE!</h3>
+    <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
     <i class="material-icons" [@rotatedState]="state"> expand_more </i>
   </div>
   <div class="general-data mat-body-2">
-    2018-09-01 to present | Social Media Manager
+    <ng-container *ngIf="startDate"
+      >{{ startDate }}
+      <ng-container> to </ng-container>
+      <ng-container *ngIf="endDate">{{ endDate }}</ng-container>
+      <ng-container *ngIf="!endDate">present</ng-container>
+    </ng-container>
+    <ng-container *ngIf="startDate && role"> | </ng-container>
+    {{ role }}
+    <ng-container *ngIf="department"> ({{ department }}) </ng-container>
   </div>
-  <div class="type mat-body-2">Emplotment</div>
+  <div class="type mat-body-2">{{ type }}</div>
 </div>
 
 <div
