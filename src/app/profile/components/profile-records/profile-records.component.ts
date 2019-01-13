@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { Affiliations, AffiliationGroupsTypes } from '../../../types'
+import { Affiliations, AffiliationUIGrouping } from '../../../types'
 
 @Component({
   selector: 'app-profile-records',
@@ -10,7 +10,7 @@ export class ProfileRecordsComponent implements OnInit {
   panelState = {
     employment: true,
   }
-  AffiliationGroupsTypes = AffiliationGroupsTypes
+  affiliationUIGrouping = AffiliationUIGrouping
 
   _profileAffiliationsData: Affiliations
   @Input('profileAffiliationsData')

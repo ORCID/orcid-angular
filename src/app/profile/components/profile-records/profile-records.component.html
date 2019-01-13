@@ -5,7 +5,8 @@
     [expanded]="panelState[affiliationGroup.key]"
     *ngFor="
       let affiliationGroup of (profileAffiliationsData.affiliationGroups
-        | keyvalue)
+        | keyvalue
+        | groupAffiliations)
     "
   >
     <mat-expansion-panel-header [ngClass]="{ selected: true }">
@@ -18,18 +19,11 @@
           [ngTemplateOutletContext]="{ affiliationGroup: affiliationGroup }"
         >
         </ng-container>
-        ({{
-          profileAffiliationsData.affiliationGroups[affiliationGroup.key]
-            .length
-        }})
+        ({{ affiliationGroup.value.length }})
       </h2>
     </mat-expansion-panel-header>
     <app-profile-records-card
-      *ngFor="
-        let affiliation of profileAffiliationsData.affiliationGroups[
-          affiliationGroup.key
-        ]
-      "
+      *ngFor="let affiliation of affiliationGroup.value"
       [title]="affiliation.defaultAffiliation.affiliationName.value"
       [startDate]="
         affiliation.defaultAffiliation.startDate | monthDayYearDateToString
@@ -46,36 +40,28 @@
 
 <ng-template #translatedHeader let-affiliationGroup="affiliationGroup">
   <ng-container
-    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.DISTINCTION"
+    *ngIf="affiliationGroup.key == affiliationUIGrouping.EMPLOYMENT"
   >
-    DISTINCTION</ng-container
-  >
-  <ng-container
-    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.EDUCATION"
-  >
-    EDUCATION</ng-container
+    Employment</ng-container
   >
   <ng-container
-    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.EMPLOYMENT"
+    *ngIf="
+      affiliationGroup.key == affiliationUIGrouping.EDUCATION_AND_QUALIFICATION
+    "
   >
-    EMPLOYMENT</ng-container
-  >
-  <ng-container
-    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.INVITED_POSITION"
-  >
-    INVITED_POSITION</ng-container
+    Education and qualification</ng-container
   >
   <ng-container
-    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.MEMBERSHIP"
+    *ngIf="
+      affiliationGroup.key ==
+      affiliationUIGrouping.INVITED_POSITION_AND_DISTINCTION
+    "
   >
-    MEMBERSHIP</ng-container
+    Invited and distinction</ng-container
   >
   <ng-container
-    *ngIf="affiliationGroup.key == AffiliationGroupsTypes.QUALIFICATION"
+    *ngIf="affiliationGroup.key == affiliationUIGrouping.MEMBERSHIP_AND_SERVICE"
   >
-    QUALIFICATION</ng-container
-  >
-  <ng-container *ngIf="affiliationGroup.key == AffiliationGroupsTypes.SERVICE">
-    SERVICE</ng-container
+    Membership and service</ng-container
   >
 </ng-template>
