@@ -14,31 +14,19 @@
     {{ role }}
     <ng-container *ngIf="department"> ({{ department }}) </ng-container>
   </div>
-  <div class="type mat-body-2">{{ type }}</div>
+  <div class="type mat-body-2">{{ type | titlecase }}</div>
 </div>
 
-<div
-  class="secondary-container"
-  [@heightAnimationState]="{
-    value: detailShowData,
-    params: { initialHeight: '80px' }
-  }"
->
-  <mat-divider class="margin-top-2"></mat-divider>
-  <div class="margin-top-1">
-    <div class="title-secondary-container">Organization identifiers</div>
-    <div>Ringgold: 999999</div>
-    <div class="padding-level-2">AVANTICA: SJ, CR</div>
-    <div class="padding-level-2">
-      Other organization identifiers provided by Ringgold
-    </div>
-    <div class="padding-level-3">ISNI: 0000000999999999</div>
-  </div>
-</div>
-<div class="spinner-container" [@heightAnimationState]="detailShowLoader">
-  <mat-progress-spinner [diameter]="40" color="primary" mode="indeterminate">
-  </mat-progress-spinner>
-</div>
+<app-profile-records-card-detail
+  [id]="id"
+  [detailShowData]="detailShowData"
+  [detailShowLoader]="detailShowLoader"
+  [createdDate]="createdDate"
+  [lastModified]="lastModified"
+  [orgDisambiguated]="orgDisambiguated"
+  [affiliationDetails]="affiliationDetails"
+></app-profile-records-card-detail>
+
 <div class="card-footer mat-body-1 margin-top-2">
   <div>Source: Rosalie J Barcomb</div>
   <div class="prefered-source">

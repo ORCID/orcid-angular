@@ -2,24 +2,25 @@
 @import '~@angular/material/theming';
 
 $config: mat-typography-config();
-@mixin profile-records-card-theme($theme) {
+@mixin profile-records-card-detail-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  app-profile-records-card {
+  app-profile-records-card-detail {
     border-color: map-get($foreground, divider);
-    .title-container {
+    .title-secondary-container {
       color: $dark-primary-text;
     }
-    .general-data,
-    .type,
-    .card-footer {
+    .secondary-container {
       color: $dark-secondary-text;
+    }
+    .secondary-container-primary {
+      color: $dark-primary-text;
     }
   }
 }
 
-@mixin profile-records-card-typography($config) {
+@mixin profile-records-card-detail-typography($config) {
 }

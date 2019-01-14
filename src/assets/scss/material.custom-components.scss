@@ -1,3 +1,4 @@
+@import '../../styles.scss-theme.scss';
 @import '../../app/layout/header/header.component.scss-theme.scss';
 @import '../../app/layout/footer/footer.component.scss-theme.scss';
 @import '../../app/home/pages/home/home.component.scss-theme.scss';
@@ -6,8 +7,11 @@
 @import '../../app/profile/components/profile-general-data-detail/profile-general-data-detail.component.scss-theme.scss';
 @import '../../app/profile/components/profile-records-card/profile-records-card.component.scss-theme.scss';
 @import '../../app/profile/components/profile-records/profile-records.component.scss-theme.scss';
+@import '../../app/profile/components/profile-records-card-detail/profile-records-card-detail.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
+  @include glopbal-theme($theme);
+  @include header-theme($theme);
   @include header-theme($theme);
   @include footer-theme($theme);
   @include home-theme($theme);
@@ -16,6 +20,7 @@
   @include profile-general-data-detail-theme($theme);
   @include profile-records-card-theme($theme);
   @include profile-records-theme($theme);
+  @include profile-records-card-detail-theme($theme);
 }
 
 @mixin custom-components-typography($custom) {
@@ -27,4 +32,5 @@
   @include profile-general-data-detail-typography($custom);
   @include profile-records-card-typography($custom);
   @include profile-records-typography($custom);
+  @include profile-records-card-detail-typography($custom);
 }

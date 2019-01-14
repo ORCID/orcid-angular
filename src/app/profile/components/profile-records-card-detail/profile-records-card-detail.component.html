@@ -1,0 +1,87 @@
+<div
+  class="secondary-container mat-body-2"
+  [@heightAnimationState]="{
+    value: detailShowData,
+    params: { initialHeight: '80px' }
+  }"
+>
+  <mat-divider class="margin-top-2" *ngIf="orgDisambiguated"></mat-divider>
+  <div class="margin-top-1" *ngIf="orgDisambiguated">
+    <div class="title-secondary-container">Organization identifiers</div>
+    <div>
+      {{ orgDisambiguated?.sourceType }}
+      <ng-container
+        *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
+        >:</ng-container
+      >
+      {{ orgDisambiguated?.sourceId }}
+    </div>
+    <div class="padding-level-2">
+      {{ orgDisambiguated?.value }}
+      <ng-container
+        *ngIf="orgDisambiguated && orgDisambiguated.value && regionCityCountry"
+        >:</ng-container
+      >
+      {{ regionCityCountry }}
+    </div>
+    <div class="padding-level-2 secondary-container-primary">
+      Other organization identifiers provided by
+      {{ orgDisambiguated.sourceType | titlecase }}
+    </div>
+    <div
+      *ngFor="let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers"
+      class="padding-level-3"
+    >
+      {{ org.identifierType }}:
+      <ng-container *ngIf="org.preferred && !isUrl(org.preferred)"
+        >{{ org.preferred }} preferred</ng-container
+      >
+      <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
+        <a target="orcid-app" href="{{ org.preferred }} ">
+          {{ org.preferred }} preferred</a
+        >
+      </ng-container>
+
+      <ng-container *ngFor="let id of org.all">
+        <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
+          id
+        }}</ng-container>
+        <ng-container *ngIf="id != org.preferred && isUrl(id)">
+          <a target="orcid-app" href="{{ id }}"> {{ id }}</a>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div
+    *ngIf="
+      affiliationDetails &&
+      affiliationDetails.url &&
+      affiliationDetails.url.value
+    "
+    class="single-line margin-top-2"
+  >
+    <div class="title-secondary-container">URL</div>
+    <a href="{{ affiliationDetails?.url.value }}"
+      >{{ affiliationDetails?.url.value }}
+    </a>
+  </div>
+
+  <mat-divider class="margin-top-2"></mat-divider>
+
+  <div class="date-container mat-small">
+    <div>
+      <div class="date-title mat-small">Added:</div>
+      <div class="mat-small">{{ createdDate | monthDayYearDateToString }}</div>
+    </div>
+    <div>
+      <div class="date-title mat-small">Last Modified:</div>
+      <div class="mat-small">{{ lastModified | monthDayYearDateToString }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="spinner-container" [@heightAnimationState]="detailShowLoader">
+  <mat-progress-spinner [diameter]="40" color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</div>

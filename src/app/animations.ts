@@ -39,12 +39,12 @@ export const heightAnimation = [
 
     transition(
       'close => open',
-      [style({ height: '{{initialHeight}}' }), animate(150)],
+      [style({ height: '{{initialHeight}}' }), animate(250)],
       {
         params: { initialHeight: '0px' },
       }
     ),
-    transition('open => close', animate('150ms')),
+    transition('open => close', [style({ opacity: '0.37' }), animate(250)]),
   ]),
 ]
 

@@ -29,7 +29,8 @@
   >
   </app-profile-biography>
   <app-profile-records
-    *ngIf="profileAffiliationsData"
+    *ngIf="profileAffiliationsData && id"
+    [id]="id"
     [profileAffiliationsData]="profileAffiliationsData"
   >
   </app-profile-records>

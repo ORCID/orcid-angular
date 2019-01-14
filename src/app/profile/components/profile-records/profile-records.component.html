@@ -24,6 +24,7 @@
     </mat-expansion-panel-header>
     <app-profile-records-card
       *ngFor="let affiliation of affiliationGroup.value"
+      [id]="id"
       [title]="affiliation.defaultAffiliation.affiliationName.value"
       [startDate]="
         affiliation.defaultAffiliation.startDate | monthDayYearDateToString
@@ -33,7 +34,16 @@
       "
       [role]="affiliation.defaultAffiliation.roleTitle.value"
       [department]="affiliation.defaultAffiliation.departmentName.value"
-      [type]="affiliation.defaultAffiliation.affiliationType.value | titlecase"
+      [type]="affiliation.defaultAffiliation.affiliationType.value"
+      [disambiguationSource]="
+        affiliation.defaultAffiliation.disambiguationSource?.value
+      "
+      [disambiguatedAffiliationSourceId]="
+        affiliation.defaultAffiliation.disambiguatedAffiliationSourceId?.value
+      "
+      [putCode]="affiliation.defaultAffiliation.putCode.value"
+      [lastModified]="affiliation.defaultAffiliation.lastModified"
+      [createdDate]="affiliation.defaultAffiliation.createdDate"
     ></app-profile-records-card>
   </mat-expansion-panel>
 </mat-accordion>

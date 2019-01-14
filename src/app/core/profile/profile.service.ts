@@ -5,8 +5,13 @@ import { retry } from 'rxjs/internal/operators/retry'
 
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Person, Affiliations } from '../../types'
-import { Observable } from 'rxjs'
+import {
+  Person,
+  Affiliations,
+  OrgDisambiguated,
+  AffiliationsDetails,
+} from '../../types'
+import { Observable, of } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +30,7 @@ export class ProfileService {
         catchError(this._errorHandler.handleError)
       )
   }
+
   getPerson(id): Observable<Person> {
     return this._http
       .get<Person>(environment.API_WEB + `${id}/person.json`)
@@ -33,15 +39,22 @@ export class ProfileService {
         catchError(this._errorHandler.handleError)
       )
   }
-  getAffiliationsDetails(id, affiliationId, type) {
-    return this._http
-      .get(
+
+  getOrgDisambiguated(type, value): Observable<OrgDisambiguated> {
+    if (type && value) {
+      return this._http.get<OrgDisambiguated>(
         environment.API_WEB +
-          `${id}/affiliationDetails.json?id=${affiliationId}&type=${type}`
+          `/orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
       )
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
+    } else {
+      return of(null)
+    }
+  }
+
+  getAffiliationDetails(id, type, value): Observable<AffiliationsDetails> {
+    return this._http.get<AffiliationsDetails>(
+      environment.API_WEB +
+        `${id}/affiliationDetails.json?id=${value}&type=${type}`
+    )
   }
 }

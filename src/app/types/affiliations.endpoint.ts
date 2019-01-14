@@ -1,4 +1,4 @@
-import { MonthDayYearDate } from './common.endpoint'
+import { MonthDayYearDate, Value } from './common.endpoint'
 
 export interface Affiliations {
   affiliationGroups: {
@@ -60,8 +60,8 @@ export interface Affiliation {
   orgDisambiguatedRegion: {} // TODO is this always empty?
   orgDisambiguatedUrl: {} // TODO is this always empty?
   affiliationTypeForDisplay: {} // TODO is this always empty?
-  startDate: {}
-  endDate: {}
+  startDate: MonthDayYearDate
+  endDate: MonthDayYearDate
   sourceName: string
   source: string
   dateSortString: string
@@ -77,11 +77,4 @@ export interface Visibility {
   required: boolean
   getRequiredMessage: any
   visibility: string // Todo make an enum
-}
-
-export interface Value {
-  errors: [any] // TODO is this always empty?
-  value: string
-  required: boolean
-  getRequiredMessage: any
 }

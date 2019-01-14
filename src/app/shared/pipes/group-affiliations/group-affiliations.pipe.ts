@@ -35,6 +35,7 @@ export class GroupAffiliationsPipe implements PipeTransform {
     value: KeyValue<string, AffiliationGroup[]>[],
     args?: any
   ): KeyValue<string, AffiliationGroup[]>[] {
+    // Move grouping to a service and do not apply it through a pipe
     return Object.keys(this.expectedUiOrderGroups).map(expectedUiOrderGroup => {
       return {
         key: expectedUiOrderGroup,

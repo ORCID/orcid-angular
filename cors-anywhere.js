@@ -5,8 +5,11 @@ var cors_proxy = require('cors-anywhere')
 cors_proxy
   .createServer({
     originWhitelist: [], // Allow all origins
-    requireHeader: ['origin'],
     removeHeaders: ['origin'],
+    redirectSameOrigin: true,
+    httpProxyOptions: {
+      xfwd: false,
+    },
   })
   .listen(port, host, function() {
     console.log('Running CORS Anywhere on ' + host + ':' + port)
