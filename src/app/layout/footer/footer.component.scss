@@ -32,9 +32,29 @@ footer {
   }
 }
 
-footer.tabletOrHandset {
-  height: 195px;
-  ul.buttons-container {
-    flex-direction: column;
+.tabletOrHandset {
+  :host {
+    footer {
+      height: 195px;
+      ul.buttons-container {
+        flex-direction: column;
+      }
+    }
+  }
+}
+.tabletOrHandset {
+  :host {
+    footer {
+      ul.buttons-container {
+        li {
+          .button-wrapper {
+            .logo {
+              margin: none;
+              margin-right: 12px;
+            }
+          }
+        }
+      }
+    }
   }
 }

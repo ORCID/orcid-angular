@@ -1,7 +1,6 @@
-import { Component } from '@angular/core'
-import { BreakpointObserver } from '@angular/cdk/layout'
-import { Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
+import { Component, HostBinding } from '@angular/core'
+import { PlatformInfoService } from './core/platform-info/platform-info.service'
 
 @Component({
   selector: 'app-root',
@@ -9,33 +8,21 @@ import { Platform } from '@angular/cdk/platform'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ng-orcid'
-  tablet
-  handset
-  ie
-  edge
-  constructor(
-    private _breakpointObserver: BreakpointObserver,
-    private _platform: Platform
-  ) {
-    this.ie = _platform.TRIDENT
-    this.edge = _platform.EDGE
-    console.log(_platform)
-    this._breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
-        if (state.matches) {
-          this.handset = true
-        } else {
-          this.handset = false
-        }
-      })
-    this._breakpointObserver.observe([Breakpoints.Tablet]).subscribe(state => {
-      if (state.matches) {
-        this.tablet = true
-      } else {
-        this.tablet = false
-      }
+  @HostBinding('class.edge') edge
+  @HostBinding('class.ie') ie
+  @HostBinding('class.tabletOrHandset') tabletOrHandset
+  @HostBinding('class.handset') handset
+  @HostBinding('class.tablet') tablet
+  @HostBinding('class.desktop') desktop
+
+  constructor(_platformInfo: PlatformInfoService) {
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.ie = platformInfo.ie
+      this.edge = platformInfo.edge
+      this.tabletOrHandset = platformInfo.tabletOrHandset
+      this.handset = platformInfo.handset
+      this.tablet = platformInfo.tablet
+      this.desktop = platformInfo.desktop
     })
   }
 }

@@ -7,4 +7,11 @@ app-footer {
 .router-container {
   flex: 1 0 auto;
   display: flex;
+  width: 100%;
+}
+
+:host.tabletOrHandset {
+  .router-container {
+    padding-bottom: 195px; //remove footer height
+  }
 }

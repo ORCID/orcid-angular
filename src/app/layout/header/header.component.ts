@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, NavigationEnd } from '@angular/router'
 import { filter } from 'rxjs/operators'
-import { BreakpointObserver } from '@angular/cdk/layout'
-import { Breakpoints } from '@angular/cdk/layout'
 import { Inject } from '@angular/core'
 import { LOCALE_ID } from '@angular/core'
+
+import { environment } from '../../../environments/environment'
+import { PlatformInfoService } from 'src/app/core'
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,6 @@ export class HeaderComponent implements OnInit {
   tabletOrHandset
   menu = {
     researchers: {
-      hover: true,
       route: '/',
       buttons: {
         signIn: {},
@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
       },
     },
     organizations: {
+      route: '.',
       hover: false,
       active: false,
       buttons: {
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit {
       },
     },
     about: {
+      route: '.',
       hover: false,
       active: false,
       buttons: {
@@ -47,6 +49,7 @@ export class HeaderComponent implements OnInit {
       },
     },
     help: {
+      route: '.',
       hover: false,
       active: false,
       buttons: {
@@ -57,35 +60,29 @@ export class HeaderComponent implements OnInit {
       },
     },
     signIn: {
+      route: '.',
       hover: false,
       active: false,
     },
   }
 
-  languageMenuOptions = {
-    fr: 'Français',
-    'en-US': 'English',
-  }
+  languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
 
   constructor(
     _router: Router,
-    _breakpointObserver: BreakpointObserver,
+    _platformInfo: PlatformInfoService,
     @Inject(LOCALE_ID) public locale: string
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(val => {
         this.currentRoute = _router.url
+        this.setChildOfCurrentRouteAsSecondaryMenu()
       })
-    _breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
-        if (state.matches) {
-          this.tabletOrHandset = true
-        } else {
-          this.tabletOrHandset = false
-        }
-      })
+
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.tabletOrHandset = platformInfo.tabletOrHandset
+    })
   }
 
   ngOnInit() {}
@@ -102,6 +99,10 @@ export class HeaderComponent implements OnInit {
   }
 
   mouseLeave() {
+    this.setChildOfCurrentRouteAsSecondaryMenu()
+  }
+
+  setChildOfCurrentRouteAsSecondaryMenu() {
     Object.keys(this.menu).forEach(button => {
       this.menu[button].hover = this.menu[button].route === this.currentRoute
     })
@@ -110,6 +111,6 @@ export class HeaderComponent implements OnInit {
   click(ul: string) {}
 
   changeLanguage(languageKey: string) {
-    window.location.href = '/' + languageKey
+    window.location.href = '/' + languageKey + '/'
   }
 }

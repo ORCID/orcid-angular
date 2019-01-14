@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core'
-import { environment } from '../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { retry, catchError, flatMap } from 'rxjs/operators'
-// TODO: It might be posuble to return the news response as a JSON from the backend to avoid adding XML2JS in to production bundle.
-import { Parser } from 'xml2js'
+import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+import { catchError, flatMap, retry } from 'rxjs/operators'
+// TODO: It might be possible to return the news response as a JSON from the backend to avoid adding XML2JS in to production bundle.
+import { Parser } from 'xml2js'
+
+import { environment } from '../../../environments/environment'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',

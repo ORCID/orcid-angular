@@ -1,0 +1,27 @@
+@import '../../../../assets/scss/material.theme';
+@import '~@angular/material/theming';
+
+$config: mat-typography-config();
+@mixin profile-general-data-detail-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  app-profile-general-data-detail {
+    h3.mat-body-2 {
+      color: $dark-primary-text;
+    }
+
+    h3.mat-body-2 {
+      color: $dark-primary-text;
+    }
+
+    .content {
+      color: $dark-secondary-text;
+    }
+  }
+}
+
+@mixin profile-general-data-detail-typography($config) {
+}

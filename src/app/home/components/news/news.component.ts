@@ -1,14 +1,15 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations'
 import { Component, OnInit } from '@angular/core'
-import { BreakpointObserver } from '@angular/cdk/layout'
-import { Breakpoints } from '@angular/cdk/layout'
-import { NewsService } from '../../../core/news/news.service'
+
 import { environment } from '../../../../environments/environment.sandbox'
-import { trigger } from '@angular/animations'
-import { transition } from '@angular/animations'
-import { style } from '@angular/animations'
-import { animate } from '@angular/animations'
-import { stagger } from '@angular/animations'
-import { query } from '@angular/animations'
+import { NewsService } from 'src/app/core'
 
 @Component({
   selector: 'app-news',

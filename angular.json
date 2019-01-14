@@ -30,7 +30,29 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "en-sandbox": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                }
+              ]
+            },
+            "ar-sandbox": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                }
+              ],
+              "outputPath": "dist/ar/",
+              "i18nFile": "src/locale/messages.ar.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ar",
+              "baseHref": "/ar/",
+              "index": "src/index.rtl.html"
+            },
+            "production-en": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -46,15 +68,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/en-US/",
-              "baseHref": "/en-US/"
-            },
-            "fr": {
-              "aot": true,
-              "outputPath": "dist/fr/",
-              "i18nFile": "src/locale/messages.fr.xlf",
+              "outputPath": "dist/en/",
+              "i18nFile": "src/locale/messages.en.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "fr"
+              "i18nLocale": "en",
+              "baseHref": "/en/"
             },
             "production-fr": {
               "fileReplacements": [
@@ -78,6 +96,352 @@
               "i18nFormat": "xlf2",
               "i18nLocale": "fr",
               "baseHref": "/fr/"
+            },
+            "production-ar": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/ar/",
+              "i18nFile": "src/locale/messages.ar.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ar",
+              "baseHref": "/ar/",
+              "index": "src/index.rtl.html"
+            },
+            "production-ca": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/ca/",
+              "i18nFile": "src/locale/messages.ca.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ca",
+              "baseHref": "/ca/"
+            },
+            "production-cs": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/cs/",
+              "i18nFile": "src/locale/messages.cs.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "cs",
+              "baseHref": "/cs/"
+            },
+            "production-es": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/es/",
+              "i18nFile": "src/locale/messages.es.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "es",
+              "baseHref": "/es/"
+            },
+            "production-it": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/it/",
+              "i18nFile": "src/locale/messages.it.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "it",
+              "baseHref": "/it/"
+            },
+            "production-ja": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/ja/",
+              "i18nFile": "src/locale/messages.ja.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ja",
+              "baseHref": "/ja/"
+            },
+            "production-ko": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/ko/",
+              "i18nFile": "src/locale/messages.ko.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ko",
+              "baseHref": "/ko/"
+            },
+            "production-lr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/lr/",
+              "i18nFile": "src/locale/messages.lr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "lr",
+              "baseHref": "/lr/"
+            },
+            "production-pt": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/pt/",
+              "i18nFile": "src/locale/messages.pt.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "pt",
+              "baseHref": "/pt/"
+            },
+            "production-rl": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/rl/",
+              "i18nFile": "src/locale/messages.rl.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "rl",
+              "baseHref": "/rl/"
+            },
+            "production-ru": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/ru/",
+              "i18nFile": "src/locale/messages.ru.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ru",
+              "baseHref": "/ru/"
+            },
+            "production-uk": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/uk/",
+              "i18nFile": "src/locale/messages.uk.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "uk",
+              "baseHref": "/uk/"
+            },
+            "production-xx": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/xx/",
+              "i18nFile": "src/locale/messages.xx.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "xx",
+              "baseHref": "/xx/"
+            },
+            "production-zh_CN": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/zh-CN/",
+              "i18nFile": "src/locale/messages.zh_CN.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-CN",
+              "baseHref": "/zh-CN/"
+            },
+            "production-zh_TW": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "aot": true,
+              "outputPath": "dist/zh-TW/",
+              "i18nFile": "src/locale/messages.zh_TW.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-TW",
+              "baseHref": "/zh-TW/"
             }
           }
         },
@@ -87,14 +451,62 @@
             "browserTarget": "ng-orcid:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "ng-orcid:build:production"
+            "en-sandbox": {
+              "browserTarget": "ng-orcid:build:en-sandbox"
             },
-            "fr": {
-              "browserTarget": "ng-orcid:build:fr"
+            "ar-sandbox": {
+              "browserTarget": "ng-orcid:build:ar-sandbox"
             },
             "production-fr": {
               "browserTarget": "ng-orcid:build:production-fr"
+            },
+            "production-ar": {
+              "browserTarget": "ng-orcid:build:production-ar"
+            },
+            "production-ca": {
+              "browserTarget": "ng-orcid:build:production-ca"
+            },
+            "production-cs": {
+              "browserTarget": "ng-orcid:build:production-cs"
+            },
+            "production-en": {
+              "browserTarget": "ng-orcid:build:production-en"
+            },
+            "production-es": {
+              "browserTarget": "ng-orcid:build:production-es"
+            },
+            "production-it": {
+              "browserTarget": "ng-orcid:build:production-it"
+            },
+            "production-ja": {
+              "browserTarget": "ng-orcid:build:production-ja"
+            },
+            "production-ko": {
+              "browserTarget": "ng-orcid:build:production-ko"
+            },
+            "production-lr": {
+              "browserTarget": "ng-orcid:build:production-lr"
+            },
+            "production-pt": {
+              "browserTarget": "ng-orcid:build:production-pt"
+            },
+            "production-rl": {
+              "browserTarget": "ng-orcid:build:production-ru"
+            },
+            "production-ru": {
+              "browserTarget": "ng-orcid:build:production-ru"
+            },
+            "production-uk": {
+              "browserTarget": "ng-orcid:build:production-uk"
+            },
+            "production-xx": {
+              "browserTarget": "ng-orcid:build:production-xx"
+            },
+            "production-zh_CN": {
+              "browserTarget": "ng-orcid:build:production-zh_CN"
+            },
+            "production-zh_TW": {
+              "browserTarget": "ng-orcid:build:production-zh_TW"
             }
           }
         },

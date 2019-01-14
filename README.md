@@ -1,24 +1,22 @@
 # NgOrcid
 
-# Set up 
+# Set up
 
-* Navigate to your local orcid folder example : `cd ~/git/orcid` copy or clone this repo git@github.com:ORCID/orcid-angular.git
+- Clone this repo `git clone https://github.com/ORCID/orcid-angular.git`
 
-* Ensure you have npm. If on a mac and you have homebrew `brew install npm`
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
+- Ensure you have npm, if not [install npm](https://www.npmjs.com/get-npm)
 
 ## Development server
 
-* Install Angular CLI with `npm install -g @angular/cli` [More info](https://www.npmjs.com/package/@angular/cli#installation)
+- Navigate to the project folder
 
-* Install @angular-devkit/build-angular `npm install --save-dev @angular-devkit/build-angular`
+- Install dependencies `npm install`
 
-* Navigate to the angular project `cd ~/git/orcid-angular`
+- Run the project `npm start`
 
-* Run `ng serve` for a dev server. 
+- Navigate to `http://localhost:4200/` you will see a local instance connected to sandbox.orcid.org data
 
-* Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You can also use `npm run start:ar` to test left to right display mode.
 
 ## Code scaffolding
 
@@ -26,16 +24,4 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Run `npm run build:prod` for a production build. The build artifacts will be stored in the `dist/` directory.

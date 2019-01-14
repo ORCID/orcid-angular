@@ -4,9 +4,29 @@
 
 export const environment = {
   production: false,
-  API_NEWS: 'https://cors.io/?https://orcid.org/blog/feed?format=text',
-  // Use https://cors.io/ to proxy the news endpoint to avoid CORS errors during development/demo
+  API_NEWS: 'http://localhost:4100/https://orcid.org/blog/feed',
+  API_WEB: 'http://localhost:4100/https://orcid.org/',
+  BASE_URL: 'https://orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
+  LANGUAGE_MENU_OPTIONS: {
+    ar: 'العربية',
+    cs: 'Čeština',
+    en: 'English',
+    es: 'Español',
+    fr: 'Français',
+    it: 'Italiano',
+    ja: '日本語',
+    ko: '한국어',
+    pt: 'Português',
+    ru: 'Русский',
+    'zh-CN': '简体中文',
+    'zh-TW': '繁體中文',
+    xx: '** xx',
+    lr: '** lr',
+    rl: '** rl',
+    uk: '** Ukrainian',
+    ca: '** Catalan',
+  },
 }
 
 /*

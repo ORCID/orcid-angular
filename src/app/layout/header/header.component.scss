@@ -6,6 +6,9 @@ header {
     padding-top: 12px;
     cursor: pointer;
   }
+  .logo:focus {
+    outline: none;
+  }
 }
 
 nav {
@@ -70,6 +73,9 @@ nav {
         height: 100%;
         width: 100%;
       }
+      button.mat-button {
+        text-transform: uppercase;
+      }
     }
   }
   li,
@@ -87,41 +93,71 @@ nav {
   }
 }
 
-nav.tabletOrHandset {
-  .top-bar {
-    height: unset;
-  }
+// MOBILE AND TABLETS
+.tabletOrHandset {
+  :host {
+    nav {
+      .top-bar {
+        height: unset;
+      }
 
-  .logo {
-    margin-left: 16px - 10px; // removes menu icon padding
-    width: 103px;
-    cursor: pointer;
-    padding: 0;
-  }
-  .menu-logo-container {
-    margin-left: -10px;
-    display: flex;
-    align-items: center;
-  }
-  .main-menu {
-    height: 61px;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-  }
+      .logo {
+        margin-left: 16px - 10px; // removes menu icon padding
+        width: 103px;
+        cursor: pointer;
+        padding: 0;
+      }
+      .menu-logo-container {
+        margin-left: -10px;
+        display: flex;
+        align-items: center;
+      }
 
-  .top-bar {
-    margin-left: unset;
-    padding-left: 16px;
-    padding-right: 16px;
-    box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.16);
-    .search-menu {
-      width: 70px;
-      margin-right: -10px;
+      .menu-logo-container:focus {
+        outline: none;
+      }
+
+      .main-menu {
+        height: 61px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .top-bar {
+        margin-left: unset;
+        padding-left: 16px;
+        padding-right: 16px;
+        box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.16);
+        .search-menu {
+          width: 70px;
+          margin-right: -10px;
+        }
+      }
+      .icon-button {
+        display: flex;
+        justify-content: space-around;
+      }
     }
   }
-  .icon-button {
-    display: flex;
-    justify-content: space-around;
+}
+
+// RIGHT TO LEFT
+body[dir] {
+  :host {
+    header .logo {
+      margin-left: unset;
+      margin-right: 24px;
+    }
+    nav {
+      .top-bar {
+        margin-left: unset;
+        margin-right: -15px;
+      }
+      .bottom-bar {
+        margin-right: -15px;
+        margin-left: unset;
+      }
+    }
   }
 }

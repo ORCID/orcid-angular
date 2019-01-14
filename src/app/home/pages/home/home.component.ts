@@ -1,12 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { HostBinding } from '@angular/core'
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout'
-import { trigger } from '@angular/animations'
-import { transition } from '@angular/animations'
-import { query } from '@angular/animations'
-import { style } from '@angular/animations'
-import { stagger } from '@angular/animations'
-import { animate } from '@angular/animations'
+import { animate, style, transition, trigger } from '@angular/animations'
+import { Component, OnInit, Input } from '@angular/core'
+import { PlatformInfoService } from '../../../core'
 
 @Component({
   selector: 'app-home',
@@ -23,16 +17,11 @@ import { animate } from '@angular/animations'
 })
 export class HomeComponent implements OnInit {
   tabletOrHandset
-  constructor(_breakpointObserver: BreakpointObserver) {
-    _breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
-        if (state.matches) {
-          this.tabletOrHandset = true
-        } else {
-          this.tabletOrHandset = false
-        }
-      })
+
+  constructor(_platformInfo: PlatformInfoService) {
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.tabletOrHandset = platformInfo.tabletOrHandset
+    })
   }
 
   ngOnInit() {}

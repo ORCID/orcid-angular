@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+import { PlatformInfoService } from 'src/app/core'
 
 @Component({
   selector: 'app-footer',
@@ -8,16 +8,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 })
 export class FooterComponent implements OnInit {
   tabletOrHandset
-  constructor(private _breakpointObserver: BreakpointObserver) {
-    this._breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
-        if (state.matches) {
-          this.tabletOrHandset = true
-        } else {
-          this.tabletOrHandset = false
-        }
-      })
+
+  constructor(_platformInfo: PlatformInfoService) {
+    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      this.tabletOrHandset = platformInfo.tabletOrHandset
+    })
   }
 
   ngOnInit() {}

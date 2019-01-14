@@ -80,3 +80,25 @@ button {
   /* flex-direction: column; */
   padding-top: 33%;
 }
+
+// RIGHT TO LEFT
+body[dir] {
+  :host {
+    margin-left: -24px;
+    margin-right: unset;
+  }
+  .tabletOrHandset {
+    :host {
+      margin-left: -16px;
+      margin-right: -16px;
+    }
+  }
+  .ie.desktop,
+  .edge.desktop {
+    :host {
+      display: block;
+      margin: 0;
+      transform: translateX(-66px);
+    }
+  }
+}
