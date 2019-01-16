@@ -1,6 +1,7 @@
-<ng-container *ngFor="let affiliationGroup of profileAffiliationUiGroups">
-  <mat-accordion *ngIf="affiliationGroup.affiliationGroup.length">
+<mat-accordion [multi]="true">
+  <ng-container *ngFor="let affiliationGroup of profileAffiliationUiGroups">
     <mat-expansion-panel
+      *ngIf="affiliationGroup.affiliationGroup.length"
       (opened)="panelState[affiliationGroup.type] = true"
       (closed)="panelState[affiliationGroup.type] = false"
       [expanded]="panelState[affiliationGroup.type]"
@@ -42,8 +43,9 @@
         [createdDate]="affiliation.defaultAffiliation.createdDate"
       ></app-profile-records-card>
     </mat-expansion-panel>
-  </mat-accordion>
-</ng-container>
+  </ng-container>
+</mat-accordion>
+
 <ng-template #translatedHeader let-affiliationGroup="affiliationGroup">
   <ng-container
     *ngIf="affiliationGroup.type == affiliationUIGroupsTypes.EMPLOYMENT"

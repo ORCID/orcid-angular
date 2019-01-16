@@ -17,7 +17,14 @@ export class ProfileRecordsComponent implements OnInit {
   affiliationUIGroupsTypes = AffiliationUIGroupsTypes
 
   @Input() id
-  @Input() profileAffiliationUiGroups
+  @Input()
+  set profileAffiliationUiGroups(value: AffiliationUIGroup[]) {
+    this._profileAffiliationUiGroups = value
+    value.forEach(item => (this.panelState[item.type] = true))
+  }
+  get profileAffiliationUiGroups(): AffiliationUIGroup[] {
+    return this._profileAffiliationUiGroups
+  }
 
   constructor() {}
 
