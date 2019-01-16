@@ -1,5 +1,15 @@
 import { MonthDayYearDate, Value } from './common.endpoint'
 
+export enum AffiliationGroupsTypes {
+  EMPLOYMENT = 'EMPLOYMENT',
+  EDUCATION = 'EDUCATION',
+  QUALIFICATION = 'QUALIFICATION',
+  INVITED_POSITION = 'INVITED_POSITION',
+  DISTINCTION = 'DISTINCTION',
+  MEMBERSHIP = 'MEMBERSHIP',
+  SERVICE = 'SERVICE',
+}
+
 export interface Affiliations {
   affiliationGroups: {
     INVITED_POSITION?: AffiliationGroup[]
@@ -12,21 +22,16 @@ export interface Affiliations {
   }
 }
 
-export enum AffiliationGroupsTypes {
-  EMPLOYMENT = 'EMPLOYMENT',
-  EDUCATION = 'EDUCATION',
-  QUALIFICATION = 'QUALIFICATION',
-  INVITED_POSITION = 'INVITED_POSITION',
-  DISTINCTION = 'DISTINCTION',
-  MEMBERSHIP = 'MEMBERSHIP',
-  SERVICE = 'SERVICE',
-}
-
-export enum AffiliationUIGrouping {
+export enum AffiliationUIGroupsTypes {
   EMPLOYMENT = 'EMPLOYMENT',
   EDUCATION_AND_QUALIFICATION = 'EDUCATION_AND_QUALIFICATION',
   INVITED_POSITION_AND_DISTINCTION = 'INVITED_POSITION_AND_DISTINCTION',
   MEMBERSHIP_AND_SERVICE = 'MEMBERSHIP_AND_SERVICE',
+}
+
+export interface AffiliationUIGroup {
+  type: string
+  affiliationGroup: AffiliationGroup[]
 }
 
 export interface AffiliationGroup {

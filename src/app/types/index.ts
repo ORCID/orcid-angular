@@ -4,7 +4,8 @@ export {
   Affiliations,
   AffiliationGroupsTypes,
   AffiliationGroup,
-  AffiliationUIGrouping,
+  AffiliationUIGroup,
+  AffiliationUIGroupsTypes,
 } from './affiliations.endpoint'
 export { MonthDayYearDate } from './common.endpoint'
 export { OrgDisambiguated } from './orgs.disambiguated.endpoint'

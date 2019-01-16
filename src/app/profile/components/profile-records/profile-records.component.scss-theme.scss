@@ -9,7 +9,7 @@ $config: mat-typography-config();
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   app-profile-records {
-    mat-expansion-panel-header.selected {
+    mat-expansion-panel-header.mat-expansion-header {
       background: mat-color($background, app-news) !important;
     }
   }

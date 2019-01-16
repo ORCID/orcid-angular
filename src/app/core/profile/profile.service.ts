@@ -10,8 +10,12 @@ import {
   Affiliations,
   OrgDisambiguated,
   AffiliationsDetails,
+  AffiliationUIGroup,
 } from '../../types'
 import { Observable, of } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
+import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +23,18 @@ import { Observable, of } from 'rxjs'
 export class ProfileService {
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _affiliationsGroupingService: AffiliationsGroupingService,
+    private _affiliationsSortService: AffiliationsSortService
   ) {}
 
-  getAffiliations(id): Observable<Affiliations> {
+  getAffiliations(id): Observable<AffiliationUIGroup[]> {
     return this._http
       .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
       .pipe(
         retry(3),
+        map(data => this._affiliationsGroupingService.transform(data)),
+        map(data => this._affiliationsSortService.transform(data)),
         catchError(this._errorHandler.handleError)
       )
   }

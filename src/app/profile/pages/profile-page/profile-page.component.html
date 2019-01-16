@@ -13,6 +13,7 @@
 </div>
 
 <div
+  class="records-container"
   [ngClass]="{
     'mdc-layout-grid__cell--span-7': !platformInfo?.tabletOrHandset,
     'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
@@ -29,9 +30,9 @@
   >
   </app-profile-biography>
   <app-profile-records
-    *ngIf="profileAffiliationsData && id"
+    *ngIf="profileAffiliationUiGroups && id"
     [id]="id"
-    [profileAffiliationsData]="profileAffiliationsData"
+    [profileAffiliationUiGroups]="profileAffiliationUiGroups"
   >
   </app-profile-records>
 </div>

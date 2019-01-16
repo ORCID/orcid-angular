@@ -11,7 +11,6 @@ import {
 } from '@angular/material'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
-import { GroupAffiliationsPipe } from './pipes/group-affiliations/group-affiliations.pipe'
 
 @NgModule({
   imports: [
@@ -20,14 +19,13 @@ import { GroupAffiliationsPipe } from './pipes/group-affiliations/group-affiliat
     MatProgressSpinnerModule,
     MatExpansionModule,
   ],
-  declarations: [MonthDayYearDateToStringPipe, GroupAffiliationsPipe],
+  declarations: [MonthDayYearDateToStringPipe],
   exports: [
     MatDivider,
     MatTooltipModule,
     MatProgressSpinner,
     MatExpansionModule,
     MonthDayYearDateToStringPipe,
-    GroupAffiliationsPipe,
   ],
   providers: [], // Should not provide anything
 })

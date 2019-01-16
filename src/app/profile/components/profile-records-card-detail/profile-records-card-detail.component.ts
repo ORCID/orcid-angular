@@ -35,7 +35,6 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
 
   regionCityCountryPipe() {
     if (this.orgDisambiguated) {
-      console.log(this.orgDisambiguated.region)
       this.regionCityCountry = ''
       this.regionCityCountry += this.orgDisambiguated.region
         ? this.orgDisambiguated.region
