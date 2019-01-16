@@ -19,20 +19,33 @@
     'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
   }"
 >
-  <app-profile-biography
+  <div
     *ngIf="
+      profileAffiliationUiGroups &&
       profileGeneralData &&
-      profileGeneralData.biography &&
-      profileGeneralData.biography.content
+      !profileHasBio(profileGeneralData) &&
+      !profileHasRecords(profileAffiliationUiGroups, id)
     "
+    class="mat-subheading-2"
+  >
+    No public information available.
+  </div>
+
+  <app-profile-biography
+    *ngIf="profileHasBio(profileGeneralData)"
     [profileGeneralData]="profileGeneralData"
     [id]="id"
   >
   </app-profile-biography>
   <app-profile-records
-    *ngIf="profileAffiliationUiGroups && id"
+    *ngIf="profileHasRecords(profileAffiliationUiGroups, id)"
     [id]="id"
     [profileAffiliationUiGroups]="profileAffiliationUiGroups"
   >
   </app-profile-records>
+
+  <div class="progress-spinner-container" *ngIf="!profileAffiliationUiGroups">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
 </div>

@@ -51,5 +51,17 @@ export class ProfilePageComponent implements OnInit {
     })
   }
 
+  profileHasBio(profileGeneralData): boolean {
+    return (
+      profileGeneralData &&
+      profileGeneralData.biography &&
+      profileGeneralData.biography.content
+    )
+  }
+
+  profileHasRecords(profileAffiliationUiGroups, id): boolean {
+    return profileAffiliationUiGroups && id
+  }
+
   ngOnInit() {}
 }

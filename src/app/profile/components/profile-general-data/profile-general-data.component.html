@@ -4,7 +4,9 @@
 </div>
 
 <div *ngIf="profileGeneralData">
-  <h1 class="mat-h1">{{ profileGeneralData.displayName }}</h1>
+  <h1 class="mat-h1" *ngIf="profileGeneralData.displayName">
+    {{ profileGeneralData.displayName }}
+  </h1>
 
   <div class="idSection">
     <div class="idSectionHeader">ORCID ID</div>

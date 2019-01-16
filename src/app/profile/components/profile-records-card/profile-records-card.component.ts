@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { rotateAnimation, heightAnimation } from 'src/app/animations'
 import { Input } from '@angular/core'
 import { Affiliation } from '../../../types/affiliations.endpoint'
-import { ProfileService } from 'src/app/core'
+import { ProfileService, PlatformInfoService } from 'src/app/core'
 import { mergeMap } from 'rxjs/operators'
 import { combineLatest } from 'rxjs'
 import { OrgDisambiguated, AffiliationsDetails } from '../../../types'
@@ -34,13 +34,21 @@ export class ProfileRecordsCardComponent implements OnInit {
   detailShowData = 'close'
   orgDisambiguated: OrgDisambiguated
   affiliationDetails: AffiliationsDetails
-  constructor(private _profileService: ProfileService) {}
+  isHanset
+
+  constructor(
+    private _profileService: ProfileService,
+    private _platformInfo: PlatformInfoService
+  ) {
+    this._platformInfo.getPlatformInfo().subscribe(info => {
+      this.isHanset = info.handset
+    })
+  }
 
   ngOnInit() {}
 
   toggle(affiliation: Affiliation) {
     this.state = this.state === 'close' ? 'open' : 'close'
-
     if (this.state === 'open') {
       this.detailShowLoader = 'open'
       this.detailShowData = 'close'
