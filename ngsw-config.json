@@ -1,0 +1,48 @@
+{
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": ["/favicon.ico", "/index.html", "/*.css", "/*.js"]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": ["/assets/**"]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "performanceCache",
+      "urls": [
+        "https://orcid.herokuapp.com/https://orcid.org/blog/feed",
+        "https://orcid.herokuapp.com/https://qa.orcid.org/**/person.json",
+        "https://orcid.herokuapp.com/https://qa.orcid.org/**/affiliationGroups.json"
+      ],
+
+      "cacheConfig": {
+        "maxSize": 50,
+        "maxAge": "7d",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "affiliationDetails",
+      "urls": [
+        "https://orcid.herokuapp.com/https://qa.orcid.org/orgs/disambiguated/*",
+        "https://orcid.herokuapp.com/https://qa.orcid.org/**/affiliationDetails.json*"
+      ],
+      "cacheConfig": {
+        "maxSize": 50,
+        "maxAge": "7d",
+        "strategy": "performance"
+      }
+    }
+  ]
+}

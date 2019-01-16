@@ -44,7 +44,7 @@ export class ProfileService {
     if (type && value) {
       return this._http.get<OrgDisambiguated>(
         environment.API_WEB +
-          `/orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
+          `orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
       )
     } else {
       return of(null)
