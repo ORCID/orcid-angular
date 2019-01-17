@@ -1,8 +1,13 @@
-import { trigger } from '@angular/animations'
-import { state } from '@angular/animations'
-import { transition } from '@angular/animations'
-import { style } from '@angular/animations'
-import { animate } from '@angular/animations'
+import {
+  trigger,
+  animateChild,
+  stagger,
+  state,
+  transition,
+  style,
+  animate,
+  query,
+} from '@angular/animations'
 
 export const rotateAnimation = trigger('rotatedState', [
   state('close', style({ transform: 'rotate(0)' })),
@@ -17,6 +22,7 @@ export const heightAnimation = [
       'close',
       style({
         height: '0px',
+        'max-width': '0',
         opacity: '0',
         overflow: 'hidden',
       })
@@ -44,7 +50,13 @@ export const heightAnimation = [
         params: { initialHeight: '0px' },
       }
     ),
-    transition('open => close', [style({ opacity: '0.37' }), animate(250)]),
+    transition(
+      'open => close',
+      [style({ opacity: '0.37', 'max-width': '{{finalWidth}}' }), animate(250)],
+      {
+        params: { finalWidth: '*' },
+      }
+    ),
   ]),
 ]
 
@@ -69,3 +81,39 @@ export const opacityAnimation = [
     transition('open => close', animate('200ms')),
   ]),
 ]
+
+export const listAnimation = trigger('listAnimation', [
+  transition('* => *', [
+    query(':enter', [
+      style({ opacity: 0 }),
+      stagger(20, [animate('0.2s', style({ opacity: 1 }))]),
+    ]),
+  ]),
+])
+
+export const nestedListAnimation = [
+  trigger('childListAnimation', [
+    transition('* => *', [
+      query(':enter', [
+        style({ opacity: 0 }),
+        stagger(100, [animate('0.2s', style({ opacity: 1 }))]),
+      ]),
+    ]),
+  ]),
+  trigger('parentListAnimation', [
+    transition('*=>*', [
+      query(':enter', [
+        style({ opacity: 0 }),
+        stagger(200, [animate('0.2s', style({ opacity: 1 }))]),
+        query('@childListAnimation', animateChild()),
+      ]),
+    ]),
+  ]),
+]
+
+export const enterAnimation = trigger('enterAnimation', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate(400, style({ opacity: 1 })),
+  ]),
+])

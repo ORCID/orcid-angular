@@ -34,19 +34,9 @@ h3.mat-body-2 {
 }
 
 .details {
-  max-height: 0px;
-  max-width: 0px;
-  opacity: 0;
   transition: max-height 0.3s;
   z-index: -1;
   overflow: hidden;
-}
-.show {
-  max-height: 100px;
-  max-width: 100%;
-  opacity: 1;
-  z-index: initial;
-  transition: max-height 0.2s 0.05s, opacity 0.15s 0.2s;
 }
 
 .mat-body-1.details {

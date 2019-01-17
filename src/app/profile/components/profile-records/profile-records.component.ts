@@ -5,11 +5,13 @@ import {
   AffiliationGroup,
   AffiliationUIGroupsTypes,
 } from '../../../types'
+import { nestedListAnimation } from 'src/app/animations'
 
 @Component({
   selector: 'app-profile-records',
   templateUrl: './profile-records.component.html',
   styleUrls: ['./profile-records.component.scss'],
+  animations: [nestedListAnimation],
 })
 export class ProfileRecordsComponent implements OnInit {
   panelState = {}

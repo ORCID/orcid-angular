@@ -1,14 +1,12 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core'
-import { trigger, style, transition, state, animate } from '@angular/animations'
-
 import { PlatformInfoService } from 'src/app/core'
-import { rotateAnimation } from 'src/app/animations'
+import { rotateAnimation, heightAnimation } from 'src/app/animations'
 
 @Component({
   selector: 'app-profile-general-data-detail',
   templateUrl: './profile-general-data-detail.component.html',
   styleUrls: ['./profile-general-data-detail.component.scss'],
-  animations: [rotateAnimation],
+  animations: [rotateAnimation, heightAnimation],
 })
 export class ProfileGeneralDataDetailComponent implements OnInit {
   @Input() title

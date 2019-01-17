@@ -1,19 +1,12 @@
-import { animate, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit, Input } from '@angular/core'
 import { PlatformInfoService } from '../../../core'
+import { enterAnimation } from 'src/app/animations'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  animations: [
-    trigger('enterAnimation', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate(400, style({ opacity: 1 })),
-      ]),
-    ]),
-  ],
+  animations: [enterAnimation],
 })
 export class HomeComponent implements OnInit {
   tabletOrHandset
