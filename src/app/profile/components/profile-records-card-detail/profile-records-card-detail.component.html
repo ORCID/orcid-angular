@@ -7,7 +7,12 @@
 >
   <mat-divider class="margin-top-2" *ngIf="orgDisambiguated"></mat-divider>
   <div class="margin-top-1" *ngIf="orgDisambiguated">
-    <div class="title-secondary-container">Organization identifiers</div>
+    <div
+      class="title-secondary-container"
+      i18n="@@workspace_affiliations.organization_id"
+    >
+      Organization identifiers
+    </div>
     <div>
       {{ orgDisambiguated?.sourceType }}
       <ng-container
@@ -25,7 +30,9 @@
       {{ regionCityCountry }}
     </div>
     <div class="padding-level-2 secondary-container-primary">
-      Other organization identifiers provided by
+      <ng-container i18n="@@workspace_affiliations.external_ids"
+        >Other organization identifiers provided by</ng-container
+      >
       {{ orgDisambiguated.sourceType | titlecase }}
     </div>
     <div

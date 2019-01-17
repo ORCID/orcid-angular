@@ -16,6 +16,8 @@
             [ngTemplateOutletContext]="{ affiliationGroup: affiliationGroup }"
           >
           </ng-container>
+        </h2>
+        <h2 class="mat-subheading-2 itemsAmount">
           ({{ affiliationGroup.affiliationGroup.length }})
         </h2>
       </mat-expansion-panel-header>
@@ -49,6 +51,7 @@
 <ng-template #translatedHeader let-affiliationGroup="affiliationGroup">
   <ng-container
     *ngIf="affiliationGroup.type == affiliationUIGroupsTypes.EMPLOYMENT"
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.employment"
   >
     Employment</ng-container
   >
@@ -57,21 +60,24 @@
       affiliationGroup.type ==
       affiliationUIGroupsTypes.EDUCATION_AND_QUALIFICATION
     "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.education_qualification"
   >
-    Education and qualification</ng-container
+    Education and qualifications</ng-container
   >
   <ng-container
     *ngIf="
       affiliationGroup.type ==
       affiliationUIGroupsTypes.INVITED_POSITION_AND_DISTINCTION
     "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position"
   >
-    Invited and distinction</ng-container
+    Invited positions and distinctions</ng-container
   >
   <ng-container
     *ngIf="
       affiliationGroup.type == affiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE
     "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.membership_service"
   >
     Membership and service</ng-container
   >

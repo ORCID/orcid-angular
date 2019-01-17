@@ -5,3 +5,16 @@ mat-expansion-panel-header {
 h2.mat-subheading-2 {
   margin: 0;
 }
+
+h2.itemsAmount {
+  margin-left: 3px;
+}
+
+body[dir] {
+  :host {
+    h2.itemsAmount {
+      margin-left: 0px;
+      margin-right: 3px;
+    }
+  }
+}

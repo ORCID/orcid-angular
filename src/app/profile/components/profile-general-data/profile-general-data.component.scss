@@ -19,6 +19,15 @@
   margin-right: 4px;
 }
 
+body[dir] {
+  :host {
+    .idSectionContainer img {
+      margin-right: 0px;
+      margin-left: 4px;
+    }
+  }
+}
+
 .printMenu {
   display: flex;
   margin-top: 12px;

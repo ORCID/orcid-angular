@@ -28,7 +28,5 @@ export class ProfileRecordsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log('records init!', this.profileAffiliationUiGroups)
-  }
+  ngOnInit() {}
 }

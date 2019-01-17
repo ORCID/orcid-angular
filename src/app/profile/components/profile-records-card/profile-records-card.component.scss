@@ -31,6 +31,17 @@ h3 {
   }
 }
 
+body[dir] {
+  :host {
+    .prefered-source > div {
+      i {
+        margin-right: 0px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
 .padding-level-2 {
   padding-left: 8px;
 }

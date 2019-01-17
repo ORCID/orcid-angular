@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 
 import { PlatformInfoService, ProfileService } from 'src/app/core'
 import { Person, PlatformInfo, AffiliationUIGroup } from 'src/app/types'
+import { environment } from '../../../../environments/environment.prod'
 
 @Component({
   selector: 'app-profile-page',
@@ -26,25 +27,33 @@ export class ProfilePageComponent implements OnInit {
       _profileService.getAffiliations(this.id).subscribe(data => {
         this.profileAffiliationUiGroups = data
       })
-      _profileService.getPerson(this.id).subscribe(data => {
-        this.profileGeneralData = data
-        // Changes publicGroupedAddresses keys for full country names
-        if (this.profileGeneralData.publicGroupedAddresses) {
-          Object.keys(this.profileGeneralData.publicGroupedAddresses).map(
-            key => {
-              if (
-                this.profileGeneralData.countryNames &&
-                this.profileGeneralData.countryNames[key]
-              ) {
-                this.profileGeneralData.publicGroupedAddresses[
+      _profileService.getPerson(this.id).subscribe(
+        data => {
+          this.profileGeneralData = data
+          // Changes publicGroupedAddresses keys for full country names
+          if (this.profileGeneralData.publicGroupedAddresses) {
+            Object.keys(this.profileGeneralData.publicGroupedAddresses).map(
+              key => {
+                if (
+                  this.profileGeneralData.countryNames &&
                   this.profileGeneralData.countryNames[key]
-                ] = this.profileGeneralData.publicGroupedAddresses[key]
-                delete this.profileGeneralData.publicGroupedAddresses[key]
+                ) {
+                  this.profileGeneralData.publicGroupedAddresses[
+                    this.profileGeneralData.countryNames[key]
+                  ] = this.profileGeneralData.publicGroupedAddresses[key]
+                  delete this.profileGeneralData.publicGroupedAddresses[key]
+                }
               }
-            }
-          )
+            )
+          }
+        },
+        error => {
+          // Redirects user when orcid is not found
+          if (error.status === 500) {
+            window.location.href = environment.BASE_URL + '404'
+          }
         }
-      })
+      )
       _platformInfo.getPlatformInfo().subscribe(platformInfo => {
         this.platformInfo = platformInfo
       })
@@ -60,7 +69,13 @@ export class ProfilePageComponent implements OnInit {
   }
 
   profileHasRecords(profileAffiliationUiGroups, id): boolean {
-    return profileAffiliationUiGroups && id
+    return (
+      profileAffiliationUiGroups &&
+      profileAffiliationUiGroups.filter(
+        element => element.affiliationGroup.length
+      ).length &&
+      id
+    )
   }
 
   ngOnInit() {}

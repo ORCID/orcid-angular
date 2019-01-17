@@ -31,6 +31,19 @@
   }
 }
 
+body[dir] {
+  :host {
+    .date-container > div {
+      margin-left: 0px;
+      margin-right: 10px;
+      > div {
+        margin-left: 0px;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
 .secondary-container {
   overflow: hidden;
 }

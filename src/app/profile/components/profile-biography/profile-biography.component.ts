@@ -14,7 +14,5 @@ export class ProfileBiographyComponent implements OnInit {
   @Input() id: String
   environment = environment
 
-  ngOnInit() {
-    console.log(this.profileGeneralData)
-  }
+  ngOnInit() {}
 }

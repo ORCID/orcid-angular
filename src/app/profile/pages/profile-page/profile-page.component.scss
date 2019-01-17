@@ -13,3 +13,24 @@
   height: 100%;
   align-items: center;
 }
+
+.ie,
+.edge {
+  :host {
+    .records-container {
+      margin-left: 20px;
+    }
+  }
+}
+
+body[dir] {
+  .ie,
+  .edge {
+    :host {
+      .records-container {
+        margin-left: 0px;
+        margin-right: 20px;
+      }
+    }
+  }
+}
