@@ -20,7 +20,10 @@ export class ErrorHandlerService {
     }
     // return an observable with a user-facing error message
     // TODO display response errors
-    return throwError('Something bad happened; please try again later.')
+    return throwError({
+      error: error,
+      message: 'Something bad happened; please try again later.',
+    })
   }
 
   public xml2jsParser(error) {

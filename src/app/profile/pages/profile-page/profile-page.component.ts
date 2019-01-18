@@ -48,7 +48,7 @@ export class ProfilePageComponent implements OnInit {
         },
         error => {
           // Redirects user when orcid is not found
-          if (error.status === 500) {
+          if (error.error.status === 500) {
             window.location.href = environment.BASE_URL + '404'
           }
         }
