@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core'
-
 import { MonthDayYearDate } from 'src/app/types'
 
 @Pipe({

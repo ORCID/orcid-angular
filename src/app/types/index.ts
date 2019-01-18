@@ -2,6 +2,7 @@ export { Person } from './person.endpoint'
 export { PlatformInfo } from './platform-info.local'
 export {
   Affiliations,
+  Affiliation,
   AffiliationGroupsTypes,
   AffiliationGroup,
   AffiliationUIGroup,

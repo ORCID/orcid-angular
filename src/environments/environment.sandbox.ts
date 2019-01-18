@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  API_NEWS: 'http://localhost:4100/https://orcid.org/blog/feed',
-  API_WEB: 'http://localhost:4100/https://sandbox.orcid.org/',
+  API_NEWS: 'https://orcid.herokuapp.com/https://orcid.org/blog/feed',
+  API_WEB: 'https://orcid.herokuapp.com/https://sandbox.orcid.org/',
   BASE_URL: 'https://sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   LANGUAGE_MENU_OPTIONS: {

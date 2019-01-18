@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import {
-  Affiliations,
-  AffiliationUIGroupsTypes,
   AffiliationGroupsTypes,
+  Affiliations,
   AffiliationUIGroup,
+  AffiliationUIGroupsTypes,
 } from 'src/app/types'
 
 @Injectable({

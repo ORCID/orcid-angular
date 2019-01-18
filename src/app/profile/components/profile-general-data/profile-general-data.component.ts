@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core'
-import { Input } from '@angular/core'
-import { Person } from '../../../types'
-import { environment } from '../../../../environments/environment'
+import { Component, Input, OnInit } from '@angular/core'
 import { listAnimation } from 'src/app/animations'
+import { Person } from 'src/app/types'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-profile-general-data',

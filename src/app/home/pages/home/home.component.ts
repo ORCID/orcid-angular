@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core'
-import { PlatformInfoService } from '../../../core'
+import { Component, OnInit } from '@angular/core'
 import { enterAnimation } from 'src/app/animations'
+import { PlatformInfoService } from 'src/app/core'
 
 @Component({
   selector: 'app-home',

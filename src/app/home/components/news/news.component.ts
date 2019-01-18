@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-
-import { environment } from '../../../../environments/environment.sandbox'
-import { NewsService } from 'src/app/core'
 import { listAnimation } from 'src/app/animations'
+import { NewsService } from 'src/app/core'
+import { environment } from 'src/environments/environment.sandbox'
 
 @Component({
   selector: 'app-news',

@@ -1,9 +1,8 @@
 import { Component, HostBinding, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-
 import { PlatformInfoService, ProfileService } from 'src/app/core'
-import { Person, PlatformInfo, AffiliationUIGroup } from 'src/app/types'
-import { environment } from '../../../../environments/environment.prod'
+import { AffiliationUIGroup, Person, PlatformInfo } from 'src/app/types'
+import { environment } from 'src/environments/environment.prod'
 
 @Component({
   selector: 'app-profile-page',

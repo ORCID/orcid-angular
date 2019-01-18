@@ -1,21 +1,21 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { Observable, of } from 'rxjs'
 import { catchError } from 'rxjs/internal/operators/catchError'
 import { retry } from 'rxjs/internal/operators/retry'
-
-import { environment } from '../../../environments/environment'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { map } from 'rxjs/operators'
 import {
-  Person,
   Affiliations,
-  OrgDisambiguated,
   AffiliationsDetails,
   AffiliationUIGroup,
-} from '../../types'
-import { Observable, of } from 'rxjs'
-import { map } from 'rxjs/operators'
+  OrgDisambiguated,
+  Person,
+} from 'src/app/types'
+import { environment } from 'src/environments/environment'
+
 import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
 import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',

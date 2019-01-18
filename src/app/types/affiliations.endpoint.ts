@@ -78,7 +78,7 @@ export interface Affiliation {
 }
 
 export interface Visibility {
-  errors: [any] // populate with data
+  errors: [any] // TODO define object
   required: boolean
   getRequiredMessage: any
   visibility: string // Todo make an enum

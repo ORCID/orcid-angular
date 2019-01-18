@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core'
-
-import { rotateAnimation, heightAnimation } from 'src/app/animations'
-import { Input } from '@angular/core'
-import { Affiliation } from '../../../types/affiliations.endpoint'
-import { ProfileService, PlatformInfoService } from 'src/app/core'
-import { mergeMap } from 'rxjs/operators'
+import { Component, Input, OnInit } from '@angular/core'
 import { combineLatest } from 'rxjs'
-import { OrgDisambiguated, AffiliationsDetails } from '../../../types'
+import { heightAnimation, rotateAnimation } from 'src/app/animations'
+import { PlatformInfoService, ProfileService } from 'src/app/core'
+
+import {
+  AffiliationsDetails,
+  OrgDisambiguated,
+  Affiliation,
+} from 'src/app/types'
 
 @Component({
   selector: 'app-profile-records-card',

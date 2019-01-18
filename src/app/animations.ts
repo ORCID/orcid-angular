@@ -1,12 +1,12 @@
 import {
-  trigger,
+  animate,
   animateChild,
+  query,
   stagger,
   state,
-  transition,
   style,
-  animate,
-  query,
+  transition,
+  trigger,
 } from '@angular/animations'
 
 export const rotateAnimation = trigger('rotatedState', [

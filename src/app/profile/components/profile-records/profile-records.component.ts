@@ -1,11 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core'
-import {
-  Affiliations,
-  AffiliationUIGroup,
-  AffiliationGroup,
-  AffiliationUIGroupsTypes,
-} from '../../../types'
+import { Component, Input, OnInit } from '@angular/core'
 import { nestedListAnimation } from 'src/app/animations'
+import { AffiliationUIGroup, AffiliationUIGroupsTypes } from 'src/app/types'
 
 @Component({
   selector: 'app-profile-records',

@@ -89,7 +89,7 @@ export interface Email {
 }
 
 export interface MonthDayYearDate {
-  errors: [any] // populate with data
+  errors: [any] // TODO define object
   month: string
   day: string
   year: string

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import { heightAnimation, rotateAnimation } from 'src/app/animations'
 import { PlatformInfoService } from 'src/app/core'
-import { rotateAnimation, heightAnimation } from 'src/app/animations'
 
 @Component({
   selector: 'app-profile-general-data-detail',

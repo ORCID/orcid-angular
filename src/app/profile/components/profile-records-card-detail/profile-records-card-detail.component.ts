@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { Input } from '@angular/core'
-
+import { Component, Input, OnInit } from '@angular/core'
 import { heightAnimation } from 'src/app/animations'
-import { OrgDisambiguated, AffiliationsDetails } from '../../../types'
+import { AffiliationsDetails, OrgDisambiguated } from 'src/app/types'
 
 @Component({
   selector: 'app-profile-records-card-detail',
