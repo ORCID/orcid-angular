@@ -10,6 +10,7 @@ import {
 import { MatTooltipModule } from '@angular/material/tooltip'
 
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
+import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
 
 @NgModule({
   imports: [
@@ -18,13 +19,14 @@ import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-str
     MatProgressSpinnerModule,
     MatExpansionModule,
   ],
-  declarations: [MonthDayYearDateToStringPipe],
+  declarations: [MonthDayYearDateToStringPipe, OfflineMessageComponent],
   exports: [
     MatDivider,
     MatTooltipModule,
     MatProgressSpinner,
     MatExpansionModule,
     MonthDayYearDateToStringPipe,
+    OfflineMessageComponent,
   ],
   providers: [], // Should not provide anything
 })

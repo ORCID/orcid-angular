@@ -8,6 +8,7 @@
 @import '../../app/profile/components/profile-records-card/profile-records-card.component.scss-theme.scss';
 @import '../../app/profile/components/profile-records/profile-records.component.scss-theme.scss';
 @import '../../app/profile/components/profile-records-card-detail/profile-records-card-detail.component.scss-theme.scss';
+@import '../../app/shared/components/offline-message/offline-message.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include glopbal-theme($theme);
@@ -21,6 +22,7 @@
   @include profile-records-card-theme($theme);
   @include profile-records-theme($theme);
   @include profile-records-card-detail-theme($theme);
+  @include offline-message-theme($theme);
 }
 
 @mixin custom-components-typography($custom) {

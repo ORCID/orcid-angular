@@ -15,6 +15,7 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
   @Input() sourceType
   @Input() createdDate
   @Input() lastModified
+  @Input() detailShowOffline
   @Input() url
   @Input('orgDisambiguated')
   set orgDisambiguated(value: OrgDisambiguated) {
@@ -24,6 +25,7 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
   get orgDisambiguated(): OrgDisambiguated {
     return this._orgDisambiguated
   }
+
   @Input() affiliationDetails: AffiliationsDetails
 
   regionCityCountry

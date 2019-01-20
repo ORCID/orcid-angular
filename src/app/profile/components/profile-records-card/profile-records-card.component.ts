@@ -31,6 +31,7 @@ export class ProfileRecordsCardComponent implements OnInit {
   @Input() createdDate
 
   state = 'close'
+  detailShowOffline = 'close'
   detailShowLoader = 'close'
   detailShowData = 'close'
   orgDisambiguated: OrgDisambiguated
@@ -66,15 +67,26 @@ export class ProfileRecordsCardComponent implements OnInit {
         )
       )
 
-      combined.subscribe(response => {
-        this.orgDisambiguated = response[0]
-        this.affiliationDetails = response[1]
-        this.detailShowLoader = 'close-with-none-opacity'
-        this.detailShowData = 'open'
-      })
+      combined.subscribe(
+        response => {
+          this.orgDisambiguated = response[0]
+          this.affiliationDetails = response[1]
+          this.detailShowLoader = 'close-with-none-opacity'
+          this.detailShowData = 'open'
+          this.detailShowOffline = 'close'
+        },
+        error => {
+          if (error.status === 0) {
+            this.detailShowOffline = 'open'
+            this.detailShowLoader = 'close'
+            this.detailShowData = 'close'
+          }
+        }
+      )
     } else {
       this.detailShowLoader = 'close'
       this.detailShowData = 'close'
+      this.detailShowOffline = 'close'
     }
   }
 }
