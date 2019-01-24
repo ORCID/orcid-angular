@@ -9,8 +9,8 @@ import {
   trigger,
 } from '@angular/animations'
 
-export const rotateAnimation = trigger('rotatedState', [
-  state('close', style({ transform: 'rotate(0)' })),
+export const rotateAnimation = trigger('rotateAnimation', [
+  state('*', style({ transform: 'rotate(0deg)' })),
   state('open', style({ transform: 'rotate(180deg)' })),
   transition('open => close', animate('200ms ease-out')),
   transition('close => open', animate('200ms ease-in')),
@@ -19,7 +19,7 @@ export const rotateAnimation = trigger('rotatedState', [
 export const heightAnimation = [
   trigger('heightAnimationState', [
     state(
-      'close',
+      '*',
       style({
         height: '0px',
         'max-width': '0',
@@ -42,7 +42,6 @@ export const heightAnimation = [
         overflow: 'hidden',
       })
     ),
-
     transition(
       'close => open',
       [style({ height: '{{initialHeight}}' }), animate(250)],
@@ -63,7 +62,7 @@ export const heightAnimation = [
 export const opacityAnimation = [
   trigger('opacityAnimationState', [
     state(
-      'close',
+      'close, void',
       style({
         height: '0px',
         opacity: '0',
@@ -92,11 +91,30 @@ export const listAnimation = trigger('listAnimation', [
 ])
 
 export const nestedListAnimation = [
+  trigger('itemChildListAnimation', [
+    transition(':leave', [
+      style({ opacity: 40 }),
+      animate(100, style({ opacity: 0 })),
+    ]),
+  ]),
   trigger('childListAnimation', [
+    // First load
+    transition('void => *', [
+      query(
+        ':enter',
+        [
+          style({ opacity: 0 }),
+          stagger(50, [animate('0.5s', style({ opacity: 1 }))]),
+        ],
+        { optional: true }
+      ),
+    ]),
+
+    // Afther the list is reordered
     transition('* => *', [
-      query(':enter', [
+      query('@itemChildListAnimation', [
         style({ opacity: 0 }),
-        stagger(100, [animate('0.2s', style({ opacity: 1 }))]),
+        stagger(100, [animate('0.5s', style({ opacity: 1 }))]),
       ]),
     ]),
   ]),

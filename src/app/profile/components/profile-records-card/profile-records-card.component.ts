@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core'
 import { combineLatest } from 'rxjs'
 import { heightAnimation, rotateAnimation } from 'src/app/animations'
 import { PlatformInfoService, ProfileService } from 'src/app/core'
-
+import { AnimationEvent } from '@angular/animations'
 import {
   AffiliationsDetails,
   OrgDisambiguated,
@@ -29,7 +29,6 @@ export class ProfileRecordsCardComponent implements OnInit {
   @Input() affiliationType
   @Input() lastModified
   @Input() createdDate
-
   state = 'close'
   detailShowOffline = 'close'
   detailShowLoader = 'close'
@@ -40,7 +39,8 @@ export class ProfileRecordsCardComponent implements OnInit {
 
   constructor(
     private _profileService: ProfileService,
-    private _platformInfo: PlatformInfoService
+    private _platformInfo: PlatformInfoService,
+    private ref: ChangeDetectorRef
   ) {
     this._platformInfo.getPlatformInfo().subscribe(info => {
       this.isHanset = info.handset
@@ -87,6 +87,14 @@ export class ProfileRecordsCardComponent implements OnInit {
       this.detailShowLoader = 'close'
       this.detailShowData = 'close'
       this.detailShowOffline = 'close'
+    }
+  }
+
+  onAnimationEvent(event: AnimationEvent) {
+    // TODO add info about this quick fix for 'first sort' problems with animations
+    if (event.toState === 'void' && this.state === 'open') {
+      this.state = 'close'
+      this.ref.detectChanges()
     }
   }
 }

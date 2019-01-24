@@ -10,6 +10,7 @@ import {
   AffiliationUIGroup,
   OrgDisambiguated,
   Person,
+  Works,
 } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
@@ -28,13 +29,28 @@ export class ProfileService {
     private _affiliationsSortService: AffiliationsSortService
   ) {}
 
-  getAffiliations(id): Observable<AffiliationUIGroup[]> {
+  getAffiliationsAndWorks(id): Observable<AffiliationUIGroup[]> {
     return this._http
       .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
       .pipe(
         retry(3),
         map(data => this._affiliationsGroupingService.transform(data)),
         map(data => this._affiliationsSortService.transform(data)),
+        catchError(this._errorHandler.handleError)
+      )
+  }
+
+  getWorks(id: string): Observable<Works> {
+    const offset = '0'
+    const sort = 'date'
+    const sortAsc = 'false'
+    return this._http
+      .get<Works>(
+        environment.API_WEB +
+          `${id}/worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}`
+      )
+      .pipe(
+        retry(3),
         catchError(this._errorHandler.handleError)
       )
   }

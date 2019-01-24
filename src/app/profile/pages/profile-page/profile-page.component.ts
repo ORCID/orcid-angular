@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, ProfileService } from 'src/app/core'
-import { AffiliationUIGroup, Person, PlatformInfo } from 'src/app/types'
+import { AffiliationUIGroup, Person, PlatformInfo, Works } from 'src/app/types'
 import { environment } from 'src/environments/environment.prod'
 
 @Component({
@@ -13,6 +13,7 @@ export class ProfilePageComponent implements OnInit {
   @HostBinding('class.mdc-layout-grid__inner') grid = true
   id
   profileAffiliationUiGroups: AffiliationUIGroup[]
+  profileWorks: Works
   profileGeneralData: Person
   platformInfo: PlatformInfo
 
@@ -23,9 +24,10 @@ export class ProfilePageComponent implements OnInit {
   ) {
     _activeRoute.parent.url.subscribe(route => {
       this.id = route[0].path
-      _profileService.getAffiliations(this.id).subscribe(data => {
+      _profileService.getAffiliationsAndWorks(this.id).subscribe(data => {
         this.profileAffiliationUiGroups = data
       })
+
       _profileService.getPerson(this.id).subscribe(
         data => {
           this.profileGeneralData = data

@@ -1,5 +1,11 @@
+<div (click)="click()">Temp test sort</div>
 <mat-accordion [multi]="true" @parentListAnimation>
-  <ng-container *ngFor="let affiliationGroup of profileAffiliationUiGroups">
+  <ng-container
+    *ngFor="
+      let affiliationGroup of profileAffiliationUiGroups;
+      trackBy: trackByProfileAffiliationUiGroups
+    "
+  >
     <mat-expansion-panel
       *ngIf="affiliationGroup.affiliationGroup.length"
       (opened)="panelState[affiliationGroup.type] = true"
@@ -21,9 +27,19 @@
           ({{ affiliationGroup.affiliationGroup.length }})
         </h2>
       </mat-expansion-panel-header>
-      <div @childListAnimation>
+
+      <div
+        [@childListAnimation]="
+          affiliationGroup.affiliationGroup[0].groupId +
+          affiliationGroup.affiliationGroup.length
+        "
+      >
         <app-profile-records-card
-          *ngFor="let affiliation of affiliationGroup.affiliationGroup"
+          @itemChildListAnimation
+          *ngFor="
+            let affiliation of affiliationGroup.affiliationGroup;
+            trackBy: trackByAffiliationGroup
+          "
           [id]="id"
           [title]="affiliation.defaultAffiliation.affiliationName.value"
           [startDate]="

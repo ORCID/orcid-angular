@@ -9,17 +9,23 @@ import {
   providedIn: 'root',
 })
 export class AffiliationsSortService {
-  transform(value: AffiliationUIGroup[]): AffiliationUIGroup[] {
-    return this.sort(value)
+  transform(
+    value: AffiliationUIGroup[],
+    ascending = true
+  ): AffiliationUIGroup[] {
+    return this.sort(value, ascending)
   }
 
-  sort(affiliationGroups: AffiliationUIGroup[]): AffiliationUIGroup[] {
+  sort(
+    affiliationGroups: AffiliationUIGroup[],
+    ascending = true
+  ): AffiliationUIGroup[] {
     affiliationGroups.forEach(x => {
       const affiliationGroup: AffiliationGroup[] = x.affiliationGroup
       affiliationGroup.sort((a, b) => {
         const dateA = this.yearMonthDaytoDate(a.defaultAffiliation.startDate)
         const dateB = this.yearMonthDaytoDate(b.defaultAffiliation.startDate)
-        return (dateA.getTime() - dateB.getTime()) * -1
+        return (dateA.getTime() - dateB.getTime()) * (ascending ? -1 : 1)
       })
     })
     return affiliationGroups

@@ -1,7 +1,13 @@
 <div class="margin-top-1">
   <div class="title-container" (click)="toggle($event)">
     <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
-    <i class="material-icons" [@rotatedState]="state"> expand_more </i>
+    <i
+      class="material-icons"
+      [@rotateAnimation]="open"
+      (@rotateAnimation.done)="onAnimationEvent($event)"
+    >
+      expand_more
+    </i>
   </div>
   <div class="general-data mat-body-2">
     <ng-container *ngIf="startDate"
