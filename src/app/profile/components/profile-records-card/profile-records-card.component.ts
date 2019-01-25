@@ -1,6 +1,10 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core'
 import { combineLatest } from 'rxjs'
-import { heightAnimation, rotateAnimation } from 'src/app/animations'
+import {
+  heightAnimation,
+  rotateAnimation,
+  heightAnimationDefaultOpen,
+} from 'src/app/animations'
 import { PlatformInfoService, ProfileService } from 'src/app/core'
 import { AnimationEvent } from '@angular/animations'
 import {
@@ -13,7 +17,7 @@ import {
   selector: 'app-profile-records-card',
   templateUrl: './profile-records-card.component.html',
   styleUrls: ['./profile-records-card.component.scss'],
-  animations: [rotateAnimation, heightAnimation],
+  animations: [rotateAnimation, heightAnimation, heightAnimationDefaultOpen],
 })
 export class ProfileRecordsCardComponent implements OnInit {
   @Input() id
@@ -29,6 +33,8 @@ export class ProfileRecordsCardComponent implements OnInit {
   @Input() affiliationType
   @Input() lastModified
   @Input() createdDate
+  @Input() stackMode = true
+  @Input() stackState = 'open'
   state = 'close'
   detailShowOffline = 'close'
   detailShowLoader = 'close'
@@ -94,7 +100,19 @@ export class ProfileRecordsCardComponent implements OnInit {
     // TODO add info about this quick fix for 'first sort' problems with animations
     if (event.toState === 'void' && this.state === 'open') {
       this.state = 'close'
-      this.ref.detectChanges()
     }
+    if (
+      event.triggerName === 'heightAnimationDefaultOpenState' &&
+      event.toState === 'void' &&
+      this.stackState === 'close'
+    ) {
+      console.log(event)
+      this.stackState = 'open'
+    }
+  }
+
+  toggleStack() {
+    console.log('toggle!')
+    this.stackState = this.stackState === 'open' ? 'close' : 'open'
   }
 }

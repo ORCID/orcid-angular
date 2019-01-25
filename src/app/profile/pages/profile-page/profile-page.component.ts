@@ -24,8 +24,9 @@ export class ProfilePageComponent implements OnInit {
   ) {
     _activeRoute.parent.url.subscribe(route => {
       this.id = route[0].path
-      _profileService.getAffiliationsAndWorks(this.id).subscribe(data => {
-        this.profileAffiliationUiGroups = data
+      _profileService.getRecords(this.id).subscribe(data => {
+        this.profileAffiliationUiGroups = data[0]
+        this.profileWorks = data[1]
       })
 
       _profileService.getPerson(this.id).subscribe(
@@ -71,10 +72,14 @@ export class ProfilePageComponent implements OnInit {
 
   profileHasRecords(profileAffiliationUiGroups, id): boolean {
     return (
-      profileAffiliationUiGroups &&
-      profileAffiliationUiGroups.filter(
-        element => element.affiliationGroup.length
-      ).length &&
+      // Has at lest one affiliation
+      ((profileAffiliationUiGroups &&
+        profileAffiliationUiGroups.filter(
+          element => element.affiliationGroup.length
+        ).length) ||
+        // Or has at lest one work
+        (this.profileWorks && this.profileWorks.groups.length)) &&
+      // And has an ID
       id
     )
   }

@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs'
 import { catchError } from 'rxjs/internal/operators/catchError'
 import { retry } from 'rxjs/internal/operators/retry'
 import { map } from 'rxjs/operators'
+import { combineLatest } from 'rxjs'
 import {
   Affiliations,
   AffiliationsDetails,
@@ -17,6 +18,8 @@ import { environment } from 'src/environments/environment'
 import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
 import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { AffiliationsService } from '../affiliations/affiliations.service'
+import { WorksService } from '../works/works.service'
 
 @Injectable({
   providedIn: 'root',
@@ -25,34 +28,12 @@ export class ProfileService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
-    private _affiliationsGroupingService: AffiliationsGroupingService,
-    private _affiliationsSortService: AffiliationsSortService
+    private _affiliations: AffiliationsService,
+    private _works: WorksService
   ) {}
 
-  getAffiliationsAndWorks(id): Observable<AffiliationUIGroup[]> {
-    return this._http
-      .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
-      .pipe(
-        retry(3),
-        map(data => this._affiliationsGroupingService.transform(data)),
-        map(data => this._affiliationsSortService.transform(data)),
-        catchError(this._errorHandler.handleError)
-      )
-  }
-
-  getWorks(id: string): Observable<Works> {
-    const offset = '0'
-    const sort = 'date'
-    const sortAsc = 'false'
-    return this._http
-      .get<Works>(
-        environment.API_WEB +
-          `${id}/worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}`
-      )
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
+  getRecords(id) {
+    return combineLatest(this._affiliations.get(id), this._works.getWorks(id))
   }
 
   getPerson(id): Observable<Person> {

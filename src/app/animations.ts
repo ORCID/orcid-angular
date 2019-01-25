@@ -43,14 +43,57 @@ export const heightAnimation = [
       })
     ),
     transition(
-      'close => open',
+      '* => open',
       [style({ height: '{{initialHeight}}' }), animate(250)],
       {
         params: { initialHeight: '0px' },
       }
     ),
     transition(
-      'open => close',
+      'open => *',
+      [style({ opacity: '0.37', 'max-width': '{{finalWidth}}' }), animate(250)],
+      {
+        params: { finalWidth: '*' },
+      }
+    ),
+  ]),
+]
+
+export const heightAnimationDefaultOpen = [
+  trigger('heightAnimationDefaultOpenState', [
+    state(
+      'close',
+      style({
+        height: '0px',
+        'max-width': '0',
+        opacity: '0',
+        overflow: 'hidden',
+      })
+    ),
+    state(
+      '*',
+      style({
+        height: '*',
+        opacity: '1',
+      })
+    ),
+    state(
+      'close-with-none-opacity',
+      style({
+        height: '0px',
+        opacity: '1',
+        overflow: 'hidden',
+      })
+    ),
+    transition(
+      '* => open',
+      [style({ height: '{{initialHeight}}' }), animate(250)],
+      {
+        params: { initialHeight: '0px' },
+      }
+    ),
+    transition(
+      'open => *',
       [style({ opacity: '0.37', 'max-width': '{{finalWidth}}' }), animate(250)],
       {
         params: { finalWidth: '*' },

@@ -65,6 +65,52 @@
       </div>
     </mat-expansion-panel>
   </ng-container>
+  <!--
+    _______________________________________________________________________________________________
+  -->
+
+  <mat-expansion-panel
+    *ngIf="profileWorks.groups.length"
+    (opened)="panelState['works'] = true"
+    (closed)="panelState['works'] = false"
+    [expanded]="true"
+  >
+    <mat-expansion-panel-header class="mat-expansion-header">
+      <h2 class="mat-subheading-2">
+        <!--
+          The translation of the header of each card is handle with a separate template #translatedHeader
+        -->
+        <ng-container [ngTemplateOutlet]="translatedHeaderWorks">
+        </ng-container>
+      </h2>
+      <h2 class="mat-subheading-2 itemsAmount">
+        ({{ profileWorks.groups.length }})
+      </h2>
+    </mat-expansion-panel-header>
+
+    <div
+      [@childListAnimation]="
+        profileWorks.groups[0].defaultPutCode + profileWorks.groups[0].length
+      "
+    >
+      <app-profile-records-stack>
+        <app-profile-records-card
+          @itemChildListAnimation
+          *ngFor="let works of profileWorks.groups"
+          [title]="works.works[0].title.value"
+          [stackState]="'close'"
+        >
+        </app-profile-records-card>
+        <app-profile-records-card
+          @itemChildListAnimation
+          *ngFor="let works of profileWorks.groups"
+          [title]="works.works[0].title.value"
+          [stackState]="'close'"
+        >
+        </app-profile-records-card>
+      </app-profile-records-stack>
+    </div>
+  </mat-expansion-panel>
 </mat-accordion>
 
 <ng-template #translatedHeader let-affiliationGroup="affiliationGroup">
@@ -101,3 +147,4 @@
     Membership and service</ng-container
   >
 </ng-template>
+<ng-template #translatedHeaderWorks> Works </ng-template>

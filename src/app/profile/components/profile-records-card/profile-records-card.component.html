@@ -1,45 +1,63 @@
-<div class="margin-top-1">
-  <div class="title-container" (click)="toggle($event)">
-    <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
-    <i
-      class="material-icons"
-      [@rotateAnimation]="open"
-      (@rotateAnimation.done)="onAnimationEvent($event)"
-    >
-      expand_more
-    </i>
-  </div>
-  <div class="general-data mat-body-2">
-    <ng-container *ngIf="startDate"
-      >{{ startDate }}
-      <ng-container> to </ng-container>
-      <ng-container *ngIf="endDate">{{ endDate }}</ng-container>
-      <ng-container *ngIf="!endDate">present</ng-container>
-    </ng-container>
-    <ng-container *ngIf="startDate && role"> | </ng-container>
-    {{ role }}
-    <ng-container *ngIf="department"> ({{ department }}) </ng-container>
-  </div>
-  <div class="type mat-body-2">{{ type | titlecase }}</div>
+<div class="stack-arrow-container">
+  <i
+    (click)="toggleStack()"
+    class="material-icons stack-arrow"
+    [@rotateAnimation]="stackState"
+    (@rotateAnimation.done)="onAnimationEvent($event)"
+  >
+    expand_more
+  </i>
 </div>
 
-<app-profile-records-card-detail
-  [id]="id"
-  [detailShowData]="detailShowData"
-  [detailShowLoader]="detailShowLoader"
-  [createdDate]="createdDate"
-  [lastModified]="lastModified"
-  [orgDisambiguated]="orgDisambiguated"
-  [affiliationDetails]="affiliationDetails"
-  [detailShowOffline]="detailShowOffline"
-></app-profile-records-card-detail>
+<div
+  [@heightAnimationDefaultOpenState]="stackState"
+  (@heightAnimationDefaultOpenState.done)="onAnimationEvent($event)"
+  (@heightAnimationDefaultOpenState.start)="onAnimationEventStart($event)"
+>
+  <div class="margin-top-1">
+    <div class="title-container">
+      <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
+    </div>
+    <div class="general-data mat-body-2">
+      <ng-container *ngIf="startDate"
+        >{{ startDate }}
+        <ng-container> to </ng-container>
+        <ng-container *ngIf="endDate">{{ endDate }}</ng-container>
+        <ng-container *ngIf="!endDate">present</ng-container>
+      </ng-container>
+      <ng-container *ngIf="startDate && role"> | </ng-container>
+      {{ role }}
+      <ng-container *ngIf="department"> ({{ department }}) </ng-container>
+    </div>
+    <div class="type mat-body-2">{{ type | titlecase }}</div>
+    <p class="type mat-body-2" i18n="@@__" (click)="toggle()">Show details</p>
+  </div>
 
-<div class="card-footer mat-body-1 margin-top-2">
+  <app-profile-records-card-detail
+    [id]="id"
+    [detailShowData]="detailShowData"
+    [detailShowLoader]="detailShowLoader"
+    [createdDate]="createdDate"
+    [lastModified]="lastModified"
+    [orgDisambiguated]="orgDisambiguated"
+    [affiliationDetails]="affiliationDetails"
+    [detailShowOffline]="detailShowOffline"
+  ></app-profile-records-card-detail>
+</div>
+
+<div
+  (click)="toggleStack()"
+  class="card-footer mat-body-1 "
+  [ngClass]="{
+    'margin-top-2': !stackMode || (stackMode && stackState == 'open')
+  }"
+>
   <div>Source: Rosalie J Barcomb</div>
   <div class="prefered-source">
     <div><i class="material-icons"> check_circle_outline </i></div>
     <div *ngIf="!isHanset" i18n="@@groups.common.preferred_source">
       Preferred source
     </div>
+    <div>arrow</div>
   </div>
 </div>
