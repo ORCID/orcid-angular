@@ -1,6 +1,5 @@
-<div class="stack-arrow-container">
+<div class="stack-arrow-container" *ngIf="stackMode">
   <i
-    (click)="toggleStack()"
     class="material-icons stack-arrow"
     [@rotateAnimation]="stackState"
     (@rotateAnimation.done)="onAnimationEvent($event)"
@@ -10,13 +9,15 @@
 </div>
 
 <div
-  [@heightAnimationDefaultOpenState]="stackState"
+  [@heightAnimationDefaultOpenState]="stackMode ? stackState : 'open'"
   (@heightAnimationDefaultOpenState.done)="onAnimationEvent($event)"
-  (@heightAnimationDefaultOpenState.start)="onAnimationEventStart($event)"
 >
   <div class="margin-top-1">
     <div class="title-container">
       <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
+    </div>
+    <div class="title-container">
+      <h3 class="mat-body-strong" *ngIf="subtitle">{{ subtitle }}</h3>
     </div>
     <div class="general-data mat-body-2">
       <ng-container *ngIf="startDate"
@@ -25,7 +26,8 @@
         <ng-container *ngIf="endDate">{{ endDate }}</ng-container>
         <ng-container *ngIf="!endDate">present</ng-container>
       </ng-container>
-      <ng-container *ngIf="startDate && role"> | </ng-container>
+      <ng-container *ngIf="date"> {{ date }} </ng-container>
+      <ng-container *ngIf="(startDate || date) && role"> | </ng-container>
       {{ role }}
       <ng-container *ngIf="department"> ({{ department }}) </ng-container>
     </div>
@@ -46,18 +48,17 @@
 </div>
 
 <div
-  (click)="toggleStack()"
   class="card-footer mat-body-1 "
   [ngClass]="{
     'margin-top-2': !stackMode || (stackMode && stackState == 'open')
   }"
 >
-  <div>Source: Rosalie J Barcomb</div>
-  <div class="prefered-source">
+  <div><ng-container i18n="@@_">Source: </ng-container>{{ sourceName }}</div>
+  <div class="prefered-source" *ngIf="isPreferred">
     <div><i class="material-icons"> check_circle_outline </i></div>
     <div *ngIf="!isHanset" i18n="@@groups.common.preferred_source">
-      Preferred source
+      Preferred source (1 of 2)
     </div>
-    <div>arrow</div>
+    <div>Show more</div>
   </div>
 </div>

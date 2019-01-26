@@ -79,11 +79,15 @@
   <div class="date-container mat-small">
     <div>
       <div class="date-title mat-small">Added:</div>
-      <div class="mat-small">{{ createdDate | monthDayYearDateToString }}</div>
+      <div class="mat-small" *ngIf="createdDate">
+        {{ createdDate | monthDayYearDateToString }}
+      </div>
     </div>
     <div>
       <div class="date-title mat-small">Last Modified:</div>
-      <div class="mat-small">{{ lastModified | monthDayYearDateToString }}</div>
+      <div class="mat-small" *ngIf="lastModified">
+        {{ lastModified | monthDayYearDateToString }}
+      </div>
     </div>
   </div>
 </div>

@@ -1,1 +1,14 @@
-<ng-content></ng-content>
+<div *ngFor="let work of profileworksStack?.works">
+  <app-profile-records-card
+    [title]="work.title.value"
+    [subtitle]="work.journalTitle?.value"
+    [sourceName]="work.sourceName"
+    [date]="work.publicationDate | monthDayYearDateToString"
+    [role]="work.workType.value"
+    [stackMode]="true"
+    [stackState]="workCardState[work.putCode.value].stackState"
+    [isPreferred]="profileworksStack.defaultPutCode + '' === work.putCode.value"
+    (click)="onClick(work)"
+  >
+  </app-profile-records-card>
+</div>

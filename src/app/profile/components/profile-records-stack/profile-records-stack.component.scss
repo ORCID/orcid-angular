@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  margin-top: 22px;
+  flex-direction: column;
+  div {
+    app-profile-records-card {
+      margin-top: 0;
+    }
+  }
+}

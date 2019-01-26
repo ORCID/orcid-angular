@@ -12,6 +12,7 @@ import {
   OrgDisambiguated,
   Affiliation,
 } from 'src/app/types'
+import { HostListener } from '@angular/core'
 
 @Component({
   selector: 'app-profile-records-card',
@@ -22,8 +23,11 @@ import {
 export class ProfileRecordsCardComponent implements OnInit {
   @Input() id
   @Input() title
+  @Input() subtitle
   @Input() startDate
+  @Input() date
   @Input() endDate
+  @Input() sourceName
   @Input() role
   @Input() type
   @Input() department
@@ -33,9 +37,10 @@ export class ProfileRecordsCardComponent implements OnInit {
   @Input() affiliationType
   @Input() lastModified
   @Input() createdDate
-  @Input() stackMode = true
+  @Input() stackMode = false
   @Input() stackState = 'open'
-  state = 'close'
+  @Input() state = 'close'
+  @Input() isPreferred = true
   detailShowOffline = 'close'
   detailShowLoader = 'close'
   detailShowData = 'close'
@@ -112,7 +117,6 @@ export class ProfileRecordsCardComponent implements OnInit {
   }
 
   toggleStack() {
-    console.log('toggle!')
     this.stackState = this.stackState === 'open' ? 'close' : 'open'
   }
 }

@@ -6,11 +6,13 @@ import { MonthDayYearDate } from 'src/app/types'
 })
 export class MonthDayYearDateToStringPipe implements PipeTransform {
   transform(value: MonthDayYearDate, args?: any): any {
-    return value.year
-      ? value.year +
+    return value
+      ? value.year
+        ? value.year +
           (value.month
             ? '-' + value.month + (value.day ? '-' + value.day : '')
             : '')
+        : ''
       : ''
   }
 }
