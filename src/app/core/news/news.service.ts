@@ -2,11 +2,10 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, flatMap, retry } from 'rxjs/operators'
-// TODO: It might be possible to return the news response as a JSON from the backend to avoid adding XML2JS in to production bundle.
 import { Parser } from 'xml2js'
 
-import { environment } from '../../../environments/environment'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { environment } from 'src/environments/environment'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +25,8 @@ export class NewsService {
       catchError(this._errorHandler.handleError),
       flatMap(data =>
         Observable.create(observer => {
+          // TODO: It might be possible to return the news response as a JSON from the backend
+          // to avoid adding XML2JS in to production bundle.
           this.parser.parseString(data, (error, parsedData) => {
             if (!error) {
               if (

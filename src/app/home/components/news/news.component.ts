@@ -1,30 +1,13 @@
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations'
 import { Component, OnInit } from '@angular/core'
-
-import { environment } from '../../../../environments/environment.sandbox'
+import { listAnimation } from 'src/app/animations'
 import { NewsService } from 'src/app/core'
+import { environment } from 'src/environments/environment.sandbox'
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
-  animations: [
-    trigger('listAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({ opacity: 0 }),
-          stagger(100, [animate('0.2s', style({ opacity: 1 }))]),
-        ]),
-      ]),
-    ]),
-  ],
+  animations: [listAnimation],
 })
 export class NewsComponent implements OnInit {
   news

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { Person } from 'src/app/types'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-profile-biography',
@@ -7,6 +9,9 @@ import { Component, OnInit } from '@angular/core'
 })
 export class ProfileBiographyComponent implements OnInit {
   constructor() {}
+  @Input() profileGeneralData: Person
+  @Input() id: String
+  environment = environment
 
   ngOnInit() {}
 }

@@ -1,0 +1,38 @@
+<div class="margin-top-1">
+  <div class="title-container" (click)="toggle($event)">
+    <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
+    <i class="material-icons" [@rotatedState]="state"> expand_more </i>
+  </div>
+  <div class="general-data mat-body-2">
+    <ng-container *ngIf="startDate"
+      >{{ startDate }}
+      <ng-container> to </ng-container>
+      <ng-container *ngIf="endDate">{{ endDate }}</ng-container>
+      <ng-container *ngIf="!endDate">present</ng-container>
+    </ng-container>
+    <ng-container *ngIf="startDate && role"> | </ng-container>
+    {{ role }}
+    <ng-container *ngIf="department"> ({{ department }}) </ng-container>
+  </div>
+  <div class="type mat-body-2">{{ type | titlecase }}</div>
+</div>
+
+<app-profile-records-card-detail
+  [id]="id"
+  [detailShowData]="detailShowData"
+  [detailShowLoader]="detailShowLoader"
+  [createdDate]="createdDate"
+  [lastModified]="lastModified"
+  [orgDisambiguated]="orgDisambiguated"
+  [affiliationDetails]="affiliationDetails"
+></app-profile-records-card-detail>
+
+<div class="card-footer mat-body-1 margin-top-2">
+  <div>Source: Rosalie J Barcomb</div>
+  <div class="prefered-source">
+    <div><i class="material-icons"> check_circle_outline </i></div>
+    <div *ngIf="!isHanset" i18n="@@groups.common.preferred_source">
+      Preferred source
+    </div>
+  </div>
+</div>

@@ -3,10 +3,12 @@
   </mat-progress-spinner>
 </div>
 
-<div *ngIf="profileGeneralData">
-  <h1 class="mat-h1">{{ profileGeneralData.displayName }}</h1>
+<div *ngIf="profileGeneralData" @listAnimation>
+  <h1 class="mat-h1" *ngIf="profileGeneralData.displayName">
+    {{ profileGeneralData.displayName }}
+  </h1>
 
-  <div class="idSection">
+  <div class="idSection" *ngIf="environment.BASE_URL">
     <div class="idSectionHeader">ORCID ID</div>
     <div class="idSectionContainer mat-body">
       <img src="./assets/vectors/favicon.svg" alt="" />
@@ -14,7 +16,10 @@
     </div>
   </div>
 
-  <div class="printMenu mat-body-2">
+  <div
+    class="printMenu mat-body-2"
+    *ngIf="public_record_printHelpText.innerHTML"
+  >
     <i class="material-icons" (click)="goToPrintView()"> print </i>
     <div (click)="goToPrintView()">Print view</div>
     <i

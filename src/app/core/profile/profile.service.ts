@@ -1,12 +1,21 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { Observable, of } from 'rxjs'
 import { catchError } from 'rxjs/internal/operators/catchError'
 import { retry } from 'rxjs/internal/operators/retry'
+import { map } from 'rxjs/operators'
+import {
+  Affiliations,
+  AffiliationsDetails,
+  AffiliationUIGroup,
+  OrgDisambiguated,
+  Person,
+} from 'src/app/types'
+import { environment } from 'src/environments/environment'
 
-import { environment } from '../../../environments/environment'
+import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
+import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Person } from '../../types'
-import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +23,22 @@ import { Observable } from 'rxjs'
 export class ProfileService {
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _affiliationsGroupingService: AffiliationsGroupingService,
+    private _affiliationsSortService: AffiliationsSortService
   ) {}
 
-  getAffiliations(id) {
+  getAffiliations(id): Observable<AffiliationUIGroup[]> {
     return this._http
-      .get(environment.API_WEB + `${id}/affiliationGroups.json`)
+      .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
       .pipe(
         retry(3),
+        map(data => this._affiliationsGroupingService.transform(data)),
+        map(data => this._affiliationsSortService.transform(data)),
         catchError(this._errorHandler.handleError)
       )
   }
+
   getPerson(id): Observable<Person> {
     return this._http
       .get<Person>(environment.API_WEB + `${id}/person.json`)
@@ -33,15 +47,22 @@ export class ProfileService {
         catchError(this._errorHandler.handleError)
       )
   }
-  getAffiliationsDetails(id, affiliationId, type) {
-    return this._http
-      .get(
+
+  getOrgDisambiguated(type, value): Observable<OrgDisambiguated> {
+    if (type && value) {
+      return this._http.get<OrgDisambiguated>(
         environment.API_WEB +
-          `${id}/affiliationDetails.json?id=${affiliationId}&type=${type}`
+          `orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
       )
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
+    } else {
+      return of(null)
+    }
+  }
+
+  getAffiliationDetails(id, type, value): Observable<AffiliationsDetails> {
+    return this._http.get<AffiliationsDetails>(
+      environment.API_WEB +
+        `${id}/affiliationDetails.json?id=${value}&type=${type}`
+    )
   }
 }

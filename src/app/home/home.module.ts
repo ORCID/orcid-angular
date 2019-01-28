@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-
-import { HomeRoutingModule } from './home-routing.module'
-import { HomeComponent } from './pages/home/home.component'
-import { NewsComponent } from './components/news/news.component'
+import { NgModule } from '@angular/core'
 import {
   MatButtonModule,
-  MatRippleModule,
   MatProgressSpinnerModule,
+  MatRippleModule,
 } from '@angular/material'
-import { CoreModule } from '../core/core.module'
+import { CoreModule } from 'src/app/core/core.module'
+
+import { NewsComponent } from './components/news/news.component'
+import { HomeRoutingModule } from './home-routing.module'
+import { HomeComponent } from './pages/home/home.component'
 
 @NgModule({
   imports: [

@@ -87,3 +87,19 @@ export interface Email {
   verified: boolean
   primary: boolean
 }
+
+export interface MonthDayYearDate {
+  errors: [any] // TODO define object
+  month: string
+  day: string
+  year: string
+  required: boolean
+  getRequiredMessage: any
+}
+
+export interface Value {
+  errors: [any] // TODO is this always empty?
+  value: string
+  required: boolean
+  getRequiredMessage: any
+}

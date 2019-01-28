@@ -1,1 +1,87 @@
-<p>profile-records works!</p>
+<mat-accordion [multi]="true" @parentListAnimation>
+  <ng-container *ngFor="let affiliationGroup of profileAffiliationUiGroups">
+    <mat-expansion-panel
+      *ngIf="affiliationGroup.affiliationGroup.length"
+      (opened)="panelState[affiliationGroup.type] = true"
+      (closed)="panelState[affiliationGroup.type] = false"
+      [expanded]="panelState[affiliationGroup.type]"
+    >
+      <mat-expansion-panel-header class="mat-expansion-header">
+        <h2 class="mat-subheading-2">
+          <!--
+            The translation of the header of each card is handle with a separate template #translatedHeader
+          -->
+          <ng-container
+            [ngTemplateOutlet]="translatedHeader"
+            [ngTemplateOutletContext]="{ affiliationGroup: affiliationGroup }"
+          >
+          </ng-container>
+        </h2>
+        <h2 class="mat-subheading-2 itemsAmount">
+          ({{ affiliationGroup.affiliationGroup.length }})
+        </h2>
+      </mat-expansion-panel-header>
+      <div @childListAnimation>
+        <app-profile-records-card
+          *ngFor="let affiliation of affiliationGroup.affiliationGroup"
+          [id]="id"
+          [title]="affiliation.defaultAffiliation.affiliationName.value"
+          [startDate]="
+            affiliation.defaultAffiliation.startDate | monthDayYearDateToString
+          "
+          [endDate]="
+            affiliation.defaultAffiliation.endDate | monthDayYearDateToString
+          "
+          [role]="affiliation.defaultAffiliation.roleTitle.value"
+          [department]="affiliation.defaultAffiliation.departmentName.value"
+          [type]="affiliation.defaultAffiliation.affiliationType.value"
+          [disambiguationSource]="
+            affiliation.defaultAffiliation.disambiguationSource?.value
+          "
+          [disambiguatedAffiliationSourceId]="
+            affiliation.defaultAffiliation.disambiguatedAffiliationSourceId
+              ?.value
+          "
+          [putCode]="affiliation.defaultAffiliation.putCode.value"
+          [lastModified]="affiliation.defaultAffiliation.lastModified"
+          [createdDate]="affiliation.defaultAffiliation.createdDate"
+        ></app-profile-records-card>
+      </div>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>
+
+<ng-template #translatedHeader let-affiliationGroup="affiliationGroup">
+  <ng-container
+    *ngIf="affiliationGroup.type == affiliationUIGroupsTypes.EMPLOYMENT"
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.employment"
+  >
+    Employment</ng-container
+  >
+  <ng-container
+    *ngIf="
+      affiliationGroup.type ==
+      affiliationUIGroupsTypes.EDUCATION_AND_QUALIFICATION
+    "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.education_qualification"
+  >
+    Education and qualifications</ng-container
+  >
+  <ng-container
+    *ngIf="
+      affiliationGroup.type ==
+      affiliationUIGroupsTypes.INVITED_POSITION_AND_DISTINCTION
+    "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position"
+  >
+    Invited positions and distinctions</ng-container
+  >
+  <ng-container
+    *ngIf="
+      affiliationGroup.type == affiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE
+    "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.membership_service"
+  >
+    Membership and service</ng-container
+  >
+</ng-template>

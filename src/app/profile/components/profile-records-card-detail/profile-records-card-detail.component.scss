@@ -1,0 +1,57 @@
+.margin-top-1 {
+  margin-top: 8px;
+}
+.margin-top-2 {
+  margin-top: 28px;
+}
+.padding-level-2 {
+  padding-left: 8px;
+}
+.padding-level-3 {
+  padding-left: 16px;
+}
+.spinner-container {
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+  align-items: center;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.date-container > div {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  > div {
+    margin-left: 3px;
+  }
+}
+
+body[dir] {
+  :host {
+    .date-container > div {
+      margin-left: 0px;
+      margin-right: 10px;
+      > div {
+        margin-left: 0px;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+.secondary-container {
+  overflow: hidden;
+}
+
+.single-line {
+  display: flex;
+  flex-direction: row;
+  a {
+    margin-left: 5px;
+  }
+}

@@ -1,5 +1,5 @@
-import { Platform } from '@angular/cdk/platform'
 import { Component, HostBinding } from '@angular/core'
+
 import { PlatformInfoService } from './core/platform-info/platform-info.service'
 
 @Component({

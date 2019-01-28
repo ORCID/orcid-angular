@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core'
-import { Platform } from '@angular/cdk/platform'
-import { Observable, BehaviorSubject } from 'rxjs'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
-
-import { PlatformInfo } from '../../types/platform-info.local'
+import { Platform } from '@angular/cdk/platform'
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { PlatformInfo } from 'src/app/types/platform-info.local'
 
 @Injectable({
   providedIn: 'root',

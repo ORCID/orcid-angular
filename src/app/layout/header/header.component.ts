@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { Router, NavigationEnd } from '@angular/router'
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core'
+import { NavigationEnd, Router } from '@angular/router'
 import { filter } from 'rxjs/operators'
-import { Inject } from '@angular/core'
-import { LOCALE_ID } from '@angular/core'
-
-import { environment } from '../../../environments/environment'
 import { PlatformInfoService } from 'src/app/core'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-header',

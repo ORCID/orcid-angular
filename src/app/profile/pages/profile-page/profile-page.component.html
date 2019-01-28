@@ -11,3 +11,42 @@
   <app-profile-general-data [profileGeneralData]="profileGeneralData" [id]="id">
   </app-profile-general-data>
 </div>
+
+<div
+  class="records-container"
+  [ngClass]="{
+    'mdc-layout-grid__cell--span-7': !platformInfo?.tabletOrHandset,
+    'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
+  }"
+>
+  <div
+    *ngIf="
+      profileAffiliationUiGroups &&
+      profileGeneralData &&
+      !profileHasBio(profileGeneralData) &&
+      !profileHasRecords(profileAffiliationUiGroups, id)
+    "
+    class="mat-subheading-2"
+    i18n="@@public_profile.empty_profile"
+  >
+    No public information available.
+  </div>
+
+  <app-profile-biography
+    *ngIf="profileHasBio(profileGeneralData)"
+    [profileGeneralData]="profileGeneralData"
+    [id]="id"
+  >
+  </app-profile-biography>
+  <app-profile-records
+    *ngIf="profileHasRecords(profileAffiliationUiGroups, id)"
+    [id]="id"
+    [profileAffiliationUiGroups]="profileAffiliationUiGroups"
+  >
+  </app-profile-records>
+
+  <div class="progress-spinner-container" *ngIf="!profileAffiliationUiGroups">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
