@@ -59,6 +59,24 @@ export const heightAnimation = [
   ]),
 ]
 
+// heightAnimationDefaultOpen animations is used as a quick fix for the following Angular animations issue
+// https://github.com/angular/angular/issues/18847
+// The problem:
+// When a list display by a ngFor is reordered, the animation state of the repositioned
+// elements are going to change to void, this only happens the first time the element is moved.
+// The solution:
+// When an animation witch initial state is open, 'heightAnimationDefaultOpen' should be used.
+// When an animation witch initial state is close.  'heightAnimation' should be used.
+// The behavior:
+// This is going to prevent strange behaviors like wrongly expanding an element (which current state should be close)
+// after it's container list is reordered. Or wrongly close an element (witch current state should be open) after it's containing
+// list is reordered.
+// The secondary effects:
+// If an elements witch default state is close, but the user first opens this element and after that reorders the containing list,
+// this element is going to appear closed. Or vice versa for default open elements.
+// This only happens on the first reorder action, and the component state of the element should be updated on
+// the component when a state change from something to void  `*<=>void`.
+
 export const heightAnimationDefaultOpen = [
   trigger('heightAnimationDefaultOpenState', [
     state(
