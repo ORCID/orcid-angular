@@ -10,7 +10,7 @@ import { ProfileRecordsCardComponent } from './components/profile-records-card/p
 import { ProfileRecordsComponent } from './components/profile-records/profile-records.component'
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component'
 import { ProfileRoutingModule } from './profile-routing.module'
-import { ProfileRecordsStackComponent } from './components/profile-records-stack/profile-records-stack.component'
+import { ProfileRecordsWrapperWorksComponent } from './components/profile-records-wrapper-works/profile-records-wrapper-works.component'
 
 @NgModule({
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
@@ -22,7 +22,7 @@ import { ProfileRecordsStackComponent } from './components/profile-records-stack
     ProfileGeneralDataDetailComponent,
     ProfileRecordsCardComponent,
     ProfileRecordsCardDetailComponent,
-    ProfileRecordsStackComponent,
+    ProfileRecordsWrapperWorksComponent,
   ],
 })
 export class ProfileModule {}

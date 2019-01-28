@@ -13,6 +13,8 @@ import {
   Affiliation,
 } from 'src/app/types'
 import { HostListener } from '@angular/core'
+import { Output } from '@angular/core'
+import { EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'app-profile-records-card',
@@ -37,16 +39,27 @@ export class ProfileRecordsCardComponent implements OnInit {
   @Input() affiliationType
   @Input() lastModified
   @Input() createdDate
-  @Input() stackMode = false
   @Input() stackState = 'open'
   @Input() state = 'close'
   @Input() isPreferred = true
+  @Input() stackLength
   detailShowOffline = 'close'
   detailShowLoader = 'close'
   detailShowData = 'close'
   orgDisambiguated: OrgDisambiguated
   affiliationDetails: AffiliationsDetails
   isHanset
+  _stackMode
+
+  @Output() stackModeChange = new EventEmitter()
+  @Input()
+  set stackMode(value) {
+    this._stackMode = value
+    this.stackModeChange.emit(value)
+  }
+  get stackMode() {
+    return this._stackMode
+  }
 
   constructor(
     private _profileService: ProfileService,
@@ -116,12 +129,17 @@ export class ProfileRecordsCardComponent implements OnInit {
       event.toState === 'void' &&
       this.stackState === 'close'
     ) {
-      console.log(event)
       this.stackState = 'open'
     }
   }
 
   toggleStack() {
     this.stackState = this.stackState === 'open' ? 'close' : 'open'
+  }
+
+  toggleStackMode() {
+    if (this.stackLength > 1) {
+      this.stackMode = !this.stackMode
+    }
   }
 }

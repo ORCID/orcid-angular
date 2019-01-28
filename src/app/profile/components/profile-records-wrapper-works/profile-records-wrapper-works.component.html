@@ -1,13 +1,19 @@
-<div *ngFor="let work of profileworksStack?.works">
+<div @childListAnimation *ngFor="let work of profileworksStack?.works">
   <app-profile-records-card
+    [@itemChildListAnimation]="{
+      value: null,
+      params: { maxEnterHeight: '20px' }
+    }"
+    *ngIf="isPrefered(work) || stackMode"
     [title]="work.title.value"
     [subtitle]="work.journalTitle?.value"
     [sourceName]="work.sourceName"
     [date]="work.publicationDate | monthDayYearDateToString"
     [role]="work.workType.value"
-    [stackMode]="true"
+    [stackLength]="profileworksStack.works.length"
+    [(stackMode)]="stackMode"
     [stackState]="workCardState[work.putCode.value].stackState"
-    [isPreferred]="profileworksStack.defaultPutCode + '' === work.putCode.value"
+    [isPreferred]="isPrefered(work)"
     (click)="onClick(work)"
   >
   </app-profile-records-card>

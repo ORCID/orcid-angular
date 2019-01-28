@@ -82,3 +82,9 @@ body[dir] {
   padding: 0 10px;
   box-sizing: border-box;
 }
+
+.prefered-source a {
+  margin-left: 8px;
+  z-index: 1;
+  cursor: pointer;
+}

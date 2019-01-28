@@ -103,20 +103,13 @@ export const heightAnimationDefaultOpen = [
         overflow: 'hidden',
       })
     ),
-    transition(
-      '* => open',
-      [style({ height: '{{initialHeight}}' }), animate(250)],
-      {
-        params: { initialHeight: '0px' },
-      }
-    ),
-    transition(
-      'open => *',
-      [style({ opacity: '0.37', 'max-width': '{{finalWidth}}' }), animate(250)],
-      {
-        params: { finalWidth: '*' },
-      }
-    ),
+    transition('* => open', [style({ height: '0px' }), animate(200)], {}),
+    transition('open => *', [
+      style({
+        opacity: '0.37',
+      }),
+      animate(200),
+    ]),
   ]),
 ]
 
@@ -154,29 +147,39 @@ export const listAnimation = trigger('listAnimation', [
 export const nestedListAnimation = [
   trigger('itemChildListAnimation', [
     transition(':leave', [
-      style({ opacity: 40 }),
-      animate(100, style({ opacity: 0 })),
+      style({ opacity: 0, padding: '*', overflow: 'hidden' }),
+      animate(200, style({ opacity: 0, height: '0px', padding: 0 })),
     ]),
+    transition(
+      ':enter',
+      [
+        style({ opacity: 1, height: '0', padding: 0 }),
+        animate(
+          200,
+          style({
+            opacity: 1,
+            height: '{{maxEnterHeight}}',
+            padding: '*',
+            overflow: 'hidden',
+          })
+        ),
+      ],
+      {
+        params: { maxEnterHeight: '*' },
+      }
+    ),
   ]),
   trigger('childListAnimation', [
-    // First load
-    transition('void => *', [
+    // Afther the list is reordered
+    transition('* => *', [
       query(
-        ':enter',
+        '@itemChildListAnimation',
         [
           style({ opacity: 0 }),
-          stagger(50, [animate('0.5s', style({ opacity: 1 }))]),
+          stagger(100, [animate('0.5s', style({ opacity: 1 }))]),
         ],
         { optional: true }
       ),
-    ]),
-
-    // Afther the list is reordered
-    transition('* => *', [
-      query('@itemChildListAnimation', [
-        style({ opacity: 0 }),
-        stagger(100, [animate('0.5s', style({ opacity: 1 }))]),
-      ]),
     ]),
   ]),
   trigger('parentListAnimation', [
