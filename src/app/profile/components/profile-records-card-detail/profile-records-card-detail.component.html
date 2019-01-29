@@ -1,11 +1,17 @@
 <div
   class="secondary-container mat-body-2"
-  [@heightAnimationState]="{
-    value: detailShowData,
-    params: { initialHeight: '80px' }
-  }"
+  [@heightAnimationState]="detailShowData"
+  (@heightAnimationState.done)="onAnimationEvent($event)"
 >
   <mat-divider class="margin-top-2" *ngIf="orgDisambiguated"></mat-divider>
+
+  <!--
+     Todo: some data section might be moved to the wrappers
+     For example, if only Affiliations uses orgDisambiguated or affiliationDetails those
+    sections might be projected from the wrapper-affiliations to clean up the
+    profile-records-card-details component of nonreusable template section
+  -->
+
   <div class="margin-top-1" *ngIf="orgDisambiguated">
     <div
       class="title-secondary-container"
@@ -92,7 +98,13 @@
   </div>
 </div>
 
-<div class="spinner-container" [@heightAnimationState]="detailShowLoader">
+<div
+  class="spinner-container"
+  [@heightAnimationState]="{
+    value: detailShowLoader,
+    params: { closeOpacity: 0 }
+  }"
+>
   <mat-progress-spinner [diameter]="40" color="primary" mode="indeterminate">
   </mat-progress-spinner>
 </div>

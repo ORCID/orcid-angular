@@ -1,4 +1,4 @@
-<div (click)="click()">Temp test sort</div>
+<div (click)="testSorting()">Temp test sort</div>
 <mat-accordion [multi]="true" @parentListAnimation>
   <ng-container
     *ngFor="
@@ -34,35 +34,14 @@
           affiliationGroup.affiliationGroup.length
         "
       >
-        <app-profile-records-card
-          @itemChildListAnimation
+        <app-profile-records-wrapper-affiliations
           *ngFor="
             let affiliation of affiliationGroup.affiliationGroup;
             trackBy: trackByAffiliationGroup
           "
+          [affiliation]="affiliation"
           [id]="id"
-          [title]="affiliation.defaultAffiliation.affiliationName.value"
-          [startDate]="
-            affiliation.defaultAffiliation.startDate | monthDayYearDateToString
-          "
-          [endDate]="
-            affiliation.defaultAffiliation.endDate | monthDayYearDateToString
-          "
-          [role]="affiliation.defaultAffiliation.roleTitle.value"
-          [department]="affiliation.defaultAffiliation.departmentName.value"
-          [type]="affiliation.defaultAffiliation.affiliationType.value"
-          [disambiguationSource]="
-            affiliation.defaultAffiliation.disambiguationSource?.value
-          "
-          [disambiguatedAffiliationSourceId]="
-            affiliation.defaultAffiliation.disambiguatedAffiliationSourceId
-              ?.value
-          "
-          [putCode]="affiliation.defaultAffiliation.putCode.value"
-          [lastModified]="affiliation.defaultAffiliation.lastModified"
-          [createdDate]="affiliation.defaultAffiliation.createdDate"
-          [sourceName]="affiliation.defaultAffiliation.sourceName"
-        ></app-profile-records-card>
+        ></app-profile-records-wrapper-affiliations>
       </div>
     </mat-expansion-panel>
   </ng-container>

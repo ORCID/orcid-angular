@@ -21,7 +21,6 @@ export class ProfileRecordsComponent implements OnInit {
   _profileAffiliationUiGroups: AffiliationUIGroup[]
   affiliationUIGroupsTypes = AffiliationUIGroupsTypes
   toggle = true
-
   @Input() id
   @Input()
   set profileAffiliationUiGroups(value: AffiliationUIGroup[]) {
@@ -44,6 +43,8 @@ export class ProfileRecordsComponent implements OnInit {
     return this._progileWorks
   }
 
+  constructor(private _affiliationsSortService: AffiliationsSortService) {}
+
   trackByAffiliationGroup(index, item: AffiliationGroup) {
     return item.activePutCode
   }
@@ -51,9 +52,7 @@ export class ProfileRecordsComponent implements OnInit {
     return item.type
   }
 
-  constructor(private _affiliationsSortService: AffiliationsSortService) {}
-
-  click() {
+  testSorting() {
     this.toggle = !this.toggle
     this._profileAffiliationUiGroups = this._affiliationsSortService.transform(
       this._profileAffiliationUiGroups,

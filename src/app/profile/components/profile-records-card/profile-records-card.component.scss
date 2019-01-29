@@ -83,8 +83,11 @@ body[dir] {
   box-sizing: border-box;
 }
 
-.prefered-source a {
-  margin-left: 8px;
+a {
   z-index: 1;
   cursor: pointer;
+}
+
+.prefered-source a {
+  margin-left: 8px;
 }

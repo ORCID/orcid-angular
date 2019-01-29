@@ -37,12 +37,11 @@ export class ProfileRecordsCardComponent implements OnInit {
   @Input() disambiguatedAffiliationSourceId
   @Input() putCode
   @Input() affiliationType
-  @Input() lastModified
-  @Input() createdDate
   @Input() stackState = 'open'
   @Input() state = 'close'
   @Input() isPreferred = true
   @Input() stackLength
+  @Output() toggleDetails = new EventEmitter()
   detailShowOffline = 'close'
   detailShowLoader = 'close'
   detailShowData = 'close'
@@ -73,47 +72,6 @@ export class ProfileRecordsCardComponent implements OnInit {
 
   ngOnInit() {}
 
-  toggle(affiliation: Affiliation) {
-    this.state = this.state === 'close' ? 'open' : 'close'
-    if (this.state === 'open') {
-      this.detailShowLoader = 'open'
-      this.detailShowData = 'close'
-
-      const combined = combineLatest(
-        this._profileService.getOrgDisambiguated(
-          this.disambiguationSource,
-          this.disambiguatedAffiliationSourceId
-        ),
-        this._profileService.getAffiliationDetails(
-          this.id,
-          this.type,
-          this.putCode
-        )
-      )
-
-      combined.subscribe(
-        response => {
-          this.orgDisambiguated = response[0]
-          this.affiliationDetails = response[1]
-          this.detailShowLoader = 'close-with-none-opacity'
-          this.detailShowData = 'open'
-          this.detailShowOffline = 'close'
-        },
-        error => {
-          if (error.status === 0) {
-            this.detailShowOffline = 'open'
-            this.detailShowLoader = 'close'
-            this.detailShowData = 'close'
-          }
-        }
-      )
-    } else {
-      this.detailShowLoader = 'close'
-      this.detailShowData = 'close'
-      this.detailShowOffline = 'close'
-    }
-  }
-
   onAnimationEvent(event: AnimationEvent) {
     // This is a quick fix to solve the current Angular animation problem with ngFor animations on reordering actions.
     // https://github.com/angular/angular/issues/18847
@@ -121,7 +79,9 @@ export class ProfileRecordsCardComponent implements OnInit {
     // When a list display by a ngFor is reordered, the animation state of the repositioned
     // elements are going to change to void, this only happens the first time the element is moved.
     // More info about this problem can be found on src/animations.ts
+
     if (event.toState === 'void' && this.state === 'open') {
+      console.log(event)
       this.state = 'close'
     }
     if (

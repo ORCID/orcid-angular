@@ -32,19 +32,17 @@
       <ng-container *ngIf="department"> ({{ department }}) </ng-container>
     </div>
     <div class="type mat-body-2">{{ type | titlecase }}</div>
-    <p class="type mat-body-2" i18n="@@__" (click)="toggle()">Show details</p>
+    <a i18n="@@__" (click)="toggleDetails.emit()">
+      <ng-container *ngIf="this.state === 'close'" @i18n="@@__"
+        >Show details</ng-container
+      >
+      <ng-container *ngIf="this.state === 'open'" @i18n="@@__"
+        >Hide details</ng-container
+      >
+    </a>
   </div>
 
-  <app-profile-records-card-detail
-    [id]="id"
-    [detailShowData]="detailShowData"
-    [detailShowLoader]="detailShowLoader"
-    [createdDate]="createdDate"
-    [lastModified]="lastModified"
-    [orgDisambiguated]="orgDisambiguated"
-    [affiliationDetails]="affiliationDetails"
-    [detailShowOffline]="detailShowOffline"
-  ></app-profile-records-card-detail>
+  <ng-content></ng-content>
 </div>
 
 <div
