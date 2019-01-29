@@ -33,7 +33,7 @@ export class ProfileService {
   ) {}
 
   getRecords(id) {
-    return combineLatest(this._affiliations.get(id), this._works.getWorks(id))
+    return combineLatest(this._affiliations.get(id), this._works.get(id))
   }
 
   getPerson(id): Observable<Person> {

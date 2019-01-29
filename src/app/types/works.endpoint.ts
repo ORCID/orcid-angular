@@ -33,32 +33,12 @@ export interface ExternalIdentifierId {
   getRequiredMessage?: any
 }
 
-export interface Work {
-  visibility: Value
+export interface Citation {
+  citation: Value
+  citationType: Value
   errors: any[]
-  publicationDate: MonthDayYearDate
-  putCode: Value
-  shortDescription?: any
-  url?: any
-  journalTitle?: any
-  languageCode?: any
-  languageName?: any
-  citation?: any
-  countryCode?: any
-  countryName?: any
-  contributors?: any
-  workExternalIdentifiers: WorkExternalIdentifier[]
-  source: string
-  sourceName: string
-  title: Value
-  subtitle?: any
-  translatedTitle?: any
-  workCategory?: any
-  workType: Value
-  dateSortString?: any
-  createdDate?: any
-  lastModified?: any
-  userSource: boolean
+  getRequiredMessage?: any
+  required: boolean
 }
 
 export interface WorkExternalIdentifier {
@@ -69,4 +49,32 @@ export interface WorkExternalIdentifier {
   relationship: Value
   normalized: Value
   normalizedUrl: Value
+}
+
+export interface Work {
+  visibility: Value
+  errors: any[] // TODO is this always empty?
+  publicationDate: MonthDayYearDate
+  putCode: Value
+  shortDescription?: Value
+  url?: Value
+  journalTitle?: Value
+  languageCode?: Value
+  languageName?: Value
+  citation?: Citation
+  countryCode?: Value
+  countryName?: Value
+  contributors?: [any] // TODO is this always empty?
+  workExternalIdentifiers: WorkExternalIdentifier[]
+  source: string
+  sourceName: string
+  title: Value
+  subtitle?: Value
+  translatedTitle?: any // TODO is this always empty?
+  workCategory?: Value
+  workType: Value
+  dateSortString?: string
+  createdDate?: MonthDayYearDate
+  lastModified?: MonthDayYearDate
+  userSource: boolean
 }

@@ -13,6 +13,8 @@ import { ProfileRoutingModule } from './profile-routing.module'
 import { ProfileRecordsWrapperWorksComponent } from './components/profile-records-wrapper-works/profile-records-wrapper-works.component'
 // tslint:disable-next-line:max-line-length
 import { ProfileRecordsWrapperAffiliationsComponent } from './components/profile-records-wrapper-affiliations/profile-records-wrapper-affiliations.component'
+// tslint:disable-next-line:max-line-length
+import { ProfileRecordsCardDetailLineComponent } from './components/profile-records-card-detail-line/profile-records-card-detail-line.component'
 
 @NgModule({
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
@@ -26,6 +28,7 @@ import { ProfileRecordsWrapperAffiliationsComponent } from './components/profile
     ProfileRecordsCardDetailComponent,
     ProfileRecordsWrapperWorksComponent,
     ProfileRecordsWrapperAffiliationsComponent,
+    ProfileRecordsCardDetailLineComponent,
   ],
 })
 export class ProfileModule {}

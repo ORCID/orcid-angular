@@ -1,0 +1,5 @@
+<h5 class="mat-body-2">
+  {{ title }} <ng-container *ngIf="detail">({{ detail }})</ng-container>
+</h5>
+<p *ngIf="!url">{{ content }}</p>
+<a *ngIf="url" http-ref="url">{{ content }}</a>

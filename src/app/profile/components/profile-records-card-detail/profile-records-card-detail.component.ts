@@ -11,17 +11,17 @@ import { AnimationEvent } from '@angular/animations'
 })
 export class ProfileRecordsCardDetailComponent implements OnInit {
   _orgDisambiguated: OrgDisambiguated
+
+  // What ever input that is not reused by multiple wrappers might be moved out of the component
+
+  // At least used on two wrappers
   @Input() detailShowLoader
-  @Input() sourceType
   @Input() createdDate
   @Input() lastModified
   @Input() detailShowOffline
   @Input() detailShowData
   @Input() url
   _state
-
-  @Output()
-  stateChange = new EventEmitter()
   @Input()
   set state(value) {
     this._state = value
@@ -30,6 +30,12 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
   get state() {
     return this._state
   }
+  @Output()
+  stateChange = new EventEmitter()
+
+  // only used by Affiliations wrapper
+  @Input() sourceType
+  @Input() affiliationDetails: AffiliationsDetails
   @Input()
   set orgDisambiguated(value: OrgDisambiguated) {
     this._orgDisambiguated = value
@@ -39,13 +45,12 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
     return this._orgDisambiguated
   }
 
-  @Input() affiliationDetails: AffiliationsDetails
-
   regionCityCountry
   constructor() {}
 
   ngOnInit() {}
 
+  // TODO move the following function to its own pipe
   regionCityCountryPipe() {
     if (this.orgDisambiguated) {
       this.regionCityCountry = ''
@@ -65,7 +70,9 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
         : ''
     }
   }
-
+  /**
+   * RegEx funtion to check if the elements contains a URL
+   */
   isUrl(element) {
     const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
     const regex = new RegExp(expression)

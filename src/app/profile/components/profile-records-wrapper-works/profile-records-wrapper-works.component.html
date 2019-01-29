@@ -1,4 +1,7 @@
-<div @childListAnimation *ngFor="let work of profileworksStack?.works">
+<div
+  @childListAnimation
+  *ngFor="let work of profileworksStack?.works; trackBy: trackByFn"
+>
   <app-profile-records-card
     [@itemChildListAnimation]="{
       value: null,
@@ -15,6 +18,82 @@
     [stackState]="workCardState[work.putCode.value].stackState"
     [isPreferred]="isPrefered(work)"
     (click)="onClick(work)"
+    [(state)]="workDetailsState[work.putCode.value].state"
+    (toggleDetails)="toggleDetails(work)"
   >
+    <app-profile-records-card-detail
+      [id]="id"
+      [(state)]="workDetailsState[work.putCode.value].state"
+      [detailShowData]="workDetailsState[work.putCode.value].detailShowData"
+      [detailShowLoader]="workDetailsState[work.putCode.value].detailShowLoader"
+      [detailShowOffline]="
+        workDetailsState[work.putCode.value].detailShowOffline
+      "
+      [lastModified]="work.lastModified"
+      [url]="work.url?.value"
+      [createdDate]="work.createdDate"
+    >
+      <!-- DETAIL LINES -->
+      <app-profile-records-card-detail-line
+        *ngIf="work.translatedTitle"
+        [title]="'Translation'"
+        [detail]="work.translatedTitle.languageName"
+        [content]="work.translatedTitle.content"
+      >
+      </app-profile-records-card-detail-line>
+      <app-profile-records-card-detail-line
+        *ngIf="work.languageName"
+        [title]="'Language'"
+        [content]="work.languageName.value"
+      >
+      </app-profile-records-card-detail-line>
+
+      <app-profile-records-card-detail-line
+        *ngIf="work.subtitle"
+        [title]="'Subtitle'"
+        [content]="work.subtitle.value"
+      >
+      </app-profile-records-card-detail-line>
+
+      <app-profile-records-card-detail-line
+        *ngIf="work.subtitle"
+        [title]="'Url'"
+        [content]="work.url.value"
+        [url]="work.url.value"
+      >
+      </app-profile-records-card-detail-line>
+
+      <app-profile-records-card-detail-line
+        *ngIf="work.URL"
+        [title]="'URL'"
+        [content]="work.url.value"
+        [url]="work.url.value"
+      >
+      </app-profile-records-card-detail-line>
+
+      <app-profile-records-card-detail-line
+        *ngIf="work.citation"
+        [title]="'Citation'"
+        [detail]="work.citation.citation.value"
+        [content]="work.citation.citationType.value"
+      >
+      </app-profile-records-card-detail-line>
+
+      <app-profile-records-card-detail-line
+        *ngIf="work.shortDescription"
+        [title]="'Description'"
+        [content]="work.shortDescription.value"
+      >
+      </app-profile-records-card-detail-line>
+
+      <app-profile-records-card-detail-line
+        *ngIf="work.countryName"
+        [title]="'Country of publication'"
+        [content]="work.countryName.value"
+      >
+      </app-profile-records-card-detail-line>
+
+      <!-- END DETAIL LINES -->
+    </app-profile-records-card-detail>
   </app-profile-records-card>
 </div>

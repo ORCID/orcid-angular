@@ -3,7 +3,10 @@
   [@heightAnimationState]="detailShowData"
   (@heightAnimationState.done)="onAnimationEvent($event)"
 >
-  <mat-divider class="margin-top-2" *ngIf="orgDisambiguated"></mat-divider>
+  <!--
+    TODO: If no details to display the following mat-divider should be hidden
+  -->
+  <mat-divider class="margin-top-2"></mat-divider>
 
   <!--
      Todo: some data section might be moved to the wrappers
@@ -79,6 +82,8 @@
       >{{ affiliationDetails?.url.value }}
     </a>
   </div>
+
+  <ng-content></ng-content>
 
   <mat-divider class="margin-top-2"></mat-divider>
 
