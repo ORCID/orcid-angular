@@ -72,27 +72,6 @@ export class ProfileRecordsCardComponent implements OnInit {
 
   ngOnInit() {}
 
-  onAnimationEvent(event: AnimationEvent) {
-    // This is a quick fix to solve the current Angular animation problem with ngFor animations on reordering actions.
-    // https://github.com/angular/angular/issues/18847
-    // The problem:
-    // When a list display by a ngFor is reordered, the animation state of the repositioned
-    // elements are going to change to void, this only happens the first time the element is moved.
-    // More info about this problem can be found on src/animations.ts
-
-    if (event.toState === 'void' && this.state === 'open') {
-      console.log(event)
-      this.state = 'close'
-    }
-    if (
-      event.triggerName === 'heightAnimationDefaultOpenState' &&
-      event.toState === 'void' &&
-      this.stackState === 'close'
-    ) {
-      this.stackState = 'open'
-    }
-  }
-
   toggleStack() {
     this.stackState = this.stackState === 'open' ? 'close' : 'open'
   }

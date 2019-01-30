@@ -1,17 +1,10 @@
 <div class="stack-arrow-container" *ngIf="stackMode">
-  <i
-    class="material-icons stack-arrow"
-    [@rotateAnimation]="stackState"
-    (@rotateAnimation.done)="onAnimationEvent($event)"
-  >
+  <i class="material-icons stack-arrow" [@rotateAnimation]="stackState">
     expand_more
   </i>
 </div>
 
-<div
-  [@heightAnimationDefaultOpenState]="stackMode ? stackState : 'open'"
-  (@heightAnimationDefaultOpenState.done)="onAnimationEvent($event)"
->
+<div [@heightAnimationDefaultOpenState]="stackMode ? stackState : 'open'">
   <div class="margin-top-1">
     <div class="title-container">
       <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
@@ -33,7 +26,6 @@
     </div>
     <div class="type mat-body-2">{{ type | titlecase }}</div>
     <a (click)="toggleDetails.emit()">
-      <!-- TODO Fix closing stack show details wrong message -->
       <ng-container *ngIf="this.state === 'close'" i18n="@@__"
         >Show details</ng-container
       >
