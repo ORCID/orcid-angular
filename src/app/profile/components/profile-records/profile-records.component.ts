@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { nestedListAnimation } from 'src/app/animations'
 import {
   AffiliationUIGroup,
@@ -8,6 +8,9 @@ import {
 } from 'src/app/types'
 import { AffiliationsSortService } from 'src/app/core'
 import { ChangeDetectorRef } from '@angular/core'
+import { PageEvent } from '@angular/material'
+import { WorksService } from '../../../core/works/works.service'
+import { Subscription, timer } from 'rxjs'
 
 @Component({
   selector: 'app-profile-records',
@@ -21,6 +24,8 @@ export class ProfileRecordsComponent implements OnInit {
   _profileAffiliationUiGroups: AffiliationUIGroup[]
   affiliationUIGroupsTypes = AffiliationUIGroupsTypes
   toggle = true
+  profileWorksLoading = false
+  worksPageIndex = 2
   @Input() id
   @Input()
   set profileAffiliationUiGroups(value: AffiliationUIGroup[]) {
@@ -37,13 +42,24 @@ export class ProfileRecordsComponent implements OnInit {
   @Input()
   set profileWorks(value: Works) {
     this._progileWorks = value
+    if (this.profileAffiliationUiGroups && this.worksExpansionPanel) {
+      this.worksExpansionPanel.nativeElement.scrollIntoView()
+      this.profileWorksLoading = false
+    }
     // value.groups.forEach(item => (this.panelState[item.activePutCode] = true))
   }
+
+  @ViewChild('worksExpansionPanel') worksExpansionPanel: ElementRef
   get profileWorks(): Works {
     return this._progileWorks
   }
 
-  constructor(private _affiliationsSortService: AffiliationsSortService) {}
+  workPageChangeTimer: Subscription
+
+  constructor(
+    private _affiliationsSortService: AffiliationsSortService,
+    private _worksService: WorksService
+  ) {}
 
   trackByAffiliationGroup(index, item: AffiliationGroup) {
     return item.activePutCode
@@ -58,6 +74,25 @@ export class ProfileRecordsComponent implements OnInit {
       this._profileAffiliationUiGroups,
       this.toggle
     )
+  }
+  /**
+   * Receives events for Works paginator to call the works endpoint with a new offset
+   * The workPageChangeTimer is used to wait 400ms before calling the endpoint
+   * to allow users to quickly navigate pages indexes without loading all pages
+   *
+   * This function also updated worksPageIndex this is used as the pageIndex by mat-paginator
+   */
+  worksPagesChange(event: PageEvent) {
+    this.worksPageIndex = event.pageIndex
+    if (this.workPageChangeTimer) {
+      this.workPageChangeTimer.unsubscribe()
+    }
+    this.workPageChangeTimer = timer(400).subscribe(t => {
+      this.worksExpansionPanel.nativeElement.scrollIntoView()
+      this.profileWorksLoading = true
+      this._worksService.get(this.id, event.pageIndex * 50)
+      this.workPageChangeTimer.unsubscribe()
+    })
   }
 
   ngOnInit() {}

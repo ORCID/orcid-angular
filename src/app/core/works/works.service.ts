@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { Works, Work } from 'src/app/types'
 import { retry, catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
@@ -10,19 +10,9 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root',
 })
 export class WorksService {
-  constructor(
-    private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
-  ) {}
-  /**
-   * Return a list of Works with partial information.
-   * For full work details getDetails(id, putCode) must be called
-   * @param id user Orcid id
-   */
-  get(id: string): Observable<Works> {
-    const offset = '0'
-    const sort = 'date'
-    const sortAsc = 'false'
+  workSubject = new Subject<Works>()
+
+  getWorksData(id: string, offset, sort, sortAsc): Observable<Works> {
     return this._http
       .get<Works>(
         environment.API_WEB +
@@ -32,6 +22,36 @@ export class WorksService {
         retry(3),
         catchError(this._errorHandler.handleError)
       )
+  }
+
+  constructor(
+    private _http: HttpClient,
+    private _errorHandler: ErrorHandlerService
+  ) {
+    this.workSubject.asObservable().subscribe(data => {
+      console.log('FROM SERVICE ', data)
+    })
+  }
+  /**
+   * Return an observable with a list of Works with partial information.
+   * For full work details getDetails(id, putCode) must be called
+   *
+   * This function might be a recall with different sort parameters
+   * and that will update the same observable.
+   *
+   * @param id user Orcid id
+   */
+  get(
+    id: string,
+    offset = 0,
+    sort = 'date',
+    sortAsc = 'false'
+  ): Observable<Works> {
+    console.log('CALL WITH ', offset)
+    this.getWorksData(id, offset, sort, sortAsc).subscribe(data =>
+      this.workSubject.next(data)
+    )
+    return this.workSubject.asObservable()
   }
 
   /**

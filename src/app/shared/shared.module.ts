@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
 import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { OfflineMessageComponent } from './components/offline-message/offline-me
     MatDividerModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
+    MatPaginatorModule,
   ],
   declarations: [MonthDayYearDateToStringPipe, OfflineMessageComponent],
   exports: [
@@ -27,6 +29,7 @@ import { OfflineMessageComponent } from './components/offline-message/offline-me
     MatExpansionModule,
     MonthDayYearDateToStringPipe,
     OfflineMessageComponent,
+    MatPaginatorModule,
   ],
   providers: [], // Should not provide anything
 })

@@ -23,7 +23,6 @@ export class ProfileRecordsWrapperWorksComponent implements OnInit {
   @Input() id
   @Input()
   set profileworksStack(profileworksStack: WorkGroup) {
-    console.log('STACK ', profileworksStack)
     this._profileworksStack = profileworksStack
     this._profileworksStack.works.forEach(work => {
       this.workCardState[work.putCode.value] = {
@@ -36,7 +35,6 @@ export class ProfileRecordsWrapperWorksComponent implements OnInit {
         state: 'close',
       }
     })
-    console.log('>>> ', this.profileworksStack)
   }
   get profileworksStack() {
     return this._profileworksStack

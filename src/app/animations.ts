@@ -134,7 +134,7 @@ export const listAnimation = trigger('listAnimation', [
   transition('* => *', [
     query(':enter', [
       style({ opacity: 0 }),
-      stagger(20, [animate('0.2s', style({ opacity: 1 }))]),
+      stagger(50, [animate('0.2s', style({ opacity: 1 }))]),
     ]),
   ]),
 ])
@@ -166,13 +166,10 @@ export const nestedListAnimation = [
   ]),
   trigger('childListAnimation', [
     // Afther the list is reordered
-    transition('* => *', [
+    transition('void => *', [
       query(
         '@itemChildListAnimation',
-        [
-          style({ opacity: 0 }),
-          stagger(100, [animate('0.5s', style({ opacity: 1 }))]),
-        ],
+        [style({ opacity: 0 }), animate('0.5s', style({ opacity: 1 }))],
         { optional: true }
       ),
     ]),
