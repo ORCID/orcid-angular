@@ -13,6 +13,10 @@ $config: mat-typography-config();
       color: $dark-primary-text;
     }
 
+    p {
+      color: $dark-secondary-text;
+    }
+
     .secondary-text {
       color: $dark-secondary-text;
     }

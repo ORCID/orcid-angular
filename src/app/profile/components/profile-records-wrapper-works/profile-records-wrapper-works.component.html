@@ -1,14 +1,10 @@
-<div
-  [@itemChildListAnimation]="{
-    value: null,
-    params: { maxEnterHeight: '20px' }
-  }"
->
-  <div
-    @childListAnimation
-    *ngFor="let work of profileworksStack?.works; trackBy: trackByFn"
-  >
+<div>
+  <div *ngFor="let work of profileworksStack?.works; trackBy: trackByFn">
     <app-profile-records-card
+      [@itemChildListAnimation]="{
+        value: null,
+        params: { maxEnterHeight: '20px' }
+      }"
       *ngIf="isPrefered(work) || stackMode"
       [title]="work.title.value"
       [subtitle]="work.journalTitle?.value"
