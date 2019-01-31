@@ -15,11 +15,13 @@
     font-style: italic;
   }
   .title-margin {
-    width: 24%;
+    width: 120px;
   }
 
   margin: 0;
   p {
     margin: 0;
+    word-break: break-all;
+    margin-right: 12px;
   }
 }

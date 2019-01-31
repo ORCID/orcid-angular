@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, HostListener } from '@angular/core'
 import { WorkGroup } from '../../../types'
-import { nestedListAnimation } from 'src/app/animations'
+import { nestedListAnimation, itemMarginAnimation } from 'src/app/animations'
 import { WorksService } from 'src/app/core/works/works.service'
 import { Work } from 'src/app/types/works.endpoint'
 import { merge, of } from 'rxjs'
@@ -9,7 +9,7 @@ import { merge, of } from 'rxjs'
   selector: 'app-profile-records-wrapper-works',
   templateUrl: './profile-records-wrapper-works.component.html',
   styleUrls: ['./profile-records-wrapper-works.scss'],
-  animations: [nestedListAnimation],
+  animations: [nestedListAnimation, itemMarginAnimation],
 })
 export class ProfileRecordsWrapperWorksComponent implements OnInit {
   _profileworksStack: WorkGroup

@@ -191,3 +191,26 @@ export const enterAnimation = trigger('enterAnimation', [
     animate(400, style({ opacity: 1 })),
   ]),
 ])
+
+export const itemMarginAnimation = trigger('itemMargin', [
+  state(
+    'open',
+    style({
+      margin: '20px 0',
+    })
+  ),
+  state(
+    '*',
+    style({
+      margin: '*',
+    })
+  ),
+  transition('open => *', [
+    query('@itemChildListAnimation', animateChild()),
+    animate('100ms'),
+  ]),
+  transition('* => open', [
+    query('@itemChildListAnimation', animateChild()),
+    animate('100ms'),
+  ]),
+])

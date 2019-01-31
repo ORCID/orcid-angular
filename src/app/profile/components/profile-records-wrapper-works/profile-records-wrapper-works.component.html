@@ -1,4 +1,4 @@
-<div>
+<div [@itemMargin]="stackMode ? 'open' : 'close'">
   <div *ngFor="let work of profileworksStack?.works; trackBy: trackByFn">
     <app-profile-records-card
       [@itemChildListAnimation]="{

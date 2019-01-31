@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core'
 import { heightAnimation } from 'src/app/animations'
 import { AffiliationsDetails, OrgDisambiguated } from 'src/app/types'
 import { AnimationEvent } from '@angular/animations'
@@ -46,10 +54,22 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
     return this._orgDisambiguated
   }
 
+  @ViewChild('contentProjection') contentProjection: ElementRef
+
   regionCityCountry
   constructor() {}
 
   ngOnInit() {}
+
+  hasContentProjection() {
+    const detailContentProjection: NodeList = (this.contentProjection
+      .nativeElement as HTMLElement).childNodes
+    for (let x = 0; x < detailContentProjection.length; x++) {
+      if (detailContentProjection.item(x).nodeType !== 8) {
+        return true
+      }
+    }
+  }
 
   // TODO move the following function to its own pipe
   regionCityCountryPipe() {
