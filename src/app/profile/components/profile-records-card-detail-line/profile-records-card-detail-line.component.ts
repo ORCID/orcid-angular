@@ -20,6 +20,7 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
   @Input() copyOnClick = false
   @Input() titleMargin = true
   @Input() secondaryText = false
+  @Input() prefixTitle
   @Input()
   set marginBotton(value) {
     this._marginBotton = value

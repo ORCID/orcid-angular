@@ -6,6 +6,7 @@
     'secondary-text': secondaryText
   }"
 >
+  <div class="prefixTitle" *ngIf="prefixTitle">{{ prefixTitle }}</div>
   {{ title }} <ng-container *ngIf="detail">({{ detail }})</ng-container>
 </h5>
 

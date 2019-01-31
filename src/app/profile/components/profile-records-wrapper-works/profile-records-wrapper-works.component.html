@@ -21,7 +21,12 @@
     >
       <app-profile-records-card-detail-line
         *ngFor="let workExternal of work.workExternalIdentifiers"
-        [title]="workExternal.externalIdentifierType.value + ':'"
+        [prefixTitle]="
+          workExternal.relationship.value === 'part-of'
+            ? workExternal.relationship.value
+            : ''
+        "
+        title="{{workExternal.externalIdentifierType.value + ':' | uppercase}}"
         [content]="workExternal.externalIdentifierId.value"
         [url]="workExternal.url?.value"
         [titleMargin]="false"

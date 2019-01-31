@@ -8,6 +8,11 @@
     margin: 0;
     flex-shrink: 0;
     margin-right: 5px;
+    display: flex;
+  }
+  h5 .prefixTitle {
+    margin-right: 4px;
+    font-style: italic;
   }
   .title-margin {
     width: 24%;

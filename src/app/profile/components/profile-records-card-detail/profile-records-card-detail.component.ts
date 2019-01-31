@@ -21,6 +21,7 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
   @Input() detailShowOffline
   @Input() detailShowData
   @Input() url
+  @Input() prefixTitle
   _state
   @Input()
   set state(value) {
