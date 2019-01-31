@@ -1,19 +1,19 @@
 <ng-container *ngIf="list">
   <div class="title-container" (click)="toggle($event)">
-    <h3 class="mat-body-2">{{ title }}</h3>
+    <h3 class="mat-body-1">{{ title }}</h3>
 
     <i class="material-icons" [@rotateAnimation]="state"> expand_more </i>
   </div>
 
   <div
-    class="container"
+    class="container mat-body-1"
     [ngClass]="{
       'column-direction': columnDirection,
       wrap: this.state === 'close'
     }"
   >
     <span
-      class="content mat-body-2"
+      class="content mat-body-1"
       *ngFor="let element of (list | keyvalue); let last = last"
       >{{ element.key
       }}{{

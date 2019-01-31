@@ -1,5 +1,5 @@
 <h5
-  class="mat-body-2"
+  class="mat-body-1"
   *ngIf="title"
   [ngClass]="{
     'title-margin': titleMargin,
@@ -10,6 +10,7 @@
 </h5>
 
 <p
+  class="mat-body-1"
   *ngIf="!url && copyOnClick"
   appCopyOnClick
   matTooltip="Click to Copy"
@@ -17,6 +18,8 @@
 >
   {{ content }}
 </p>
-<p *ngIf="!url && !copyOnClick">{{ content }}</p>
+<p class="mat-body-1" *ngIf="!url && !copyOnClick">{{ content }}</p>
 
-<a *ngIf="url" href="{{url}}" target="orcid-app">{{ content }}</a>
+<a class="mat-body-1" *ngIf="url" href="{{url}}" target="orcid-app">{{
+  content
+}}</a>
