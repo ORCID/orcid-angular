@@ -23,6 +23,17 @@
       [(state)]="workDetailsState[work.putCode.value].state"
       (toggleDetails)="toggleDetails(work)"
     >
+      <app-profile-records-card-detail-line
+        *ngFor="let workExternal of work.workExternalIdentifiers"
+        [title]="workExternal.externalIdentifierType.value + ':'"
+        [content]="workExternal.externalIdentifierId.value"
+        [url]="workExternal.url?.value"
+        [titleMargin]="false"
+        [secondaryText]="true"
+        [marginBotton]="false"
+      >
+      </app-profile-records-card-detail-line>
+
       <app-profile-records-card-detail
         [id]="id"
         [(state)]="workDetailsState[work.putCode.value].state"

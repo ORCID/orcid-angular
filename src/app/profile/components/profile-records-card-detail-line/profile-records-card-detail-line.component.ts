@@ -1,4 +1,11 @@
-import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Inject,
+  ElementRef,
+  ViewChild,
+  HostBinding,
+} from '@angular/core'
 import { Input } from '@angular/core'
 
 @Component({
@@ -11,6 +18,15 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
   @Input() title
   @Input() detail
   @Input() copyOnClick = false
+  @Input() titleMargin = true
+  @Input() secondaryText = false
+  @Input()
+  set marginBotton(value) {
+    this._marginBotton = value
+  }
+  get marginBotton() {
+    return this._marginBotton
+  }
   _content
   @Input()
   set content(value) {
@@ -20,6 +36,8 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
   get content() {
     return this._content
   }
+
+  @HostBinding('class.margin-botton') _marginBotton = true
 
   @ViewChild('contentLabel') contentLabel: ElementRef
 

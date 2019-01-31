@@ -1,12 +1,18 @@
+.margin-botton:host {
+  margin-bottom: 12px;
+}
 :host {
   display: flex;
   flex-direction: row;
   h5 {
-    margin-right: 4px;
     margin: 0;
-    width: 24%;
     flex-shrink: 0;
+    margin-right: 5px;
   }
+  .title-margin {
+    width: 24%;
+  }
+
   margin: 0;
   p {
     margin: 0;

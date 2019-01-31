@@ -1,6 +1,14 @@
-<h5 class="mat-body-2">
+<h5
+  class="mat-body-2"
+  *ngIf="title"
+  [ngClass]="{
+    'title-margin': titleMargin,
+    'secondary-text': secondaryText
+  }"
+>
   {{ title }} <ng-container *ngIf="detail">({{ detail }})</ng-container>
 </h5>
+
 <p
   *ngIf="!url && copyOnClick"
   appCopyOnClick

@@ -25,7 +25,9 @@
       <ng-container *ngIf="department"> ({{ department }}) </ng-container>
     </div>
     <div class="type mat-body-2">{{ type | titlecase }}</div>
-    <a (click)="toggleDetails.emit()">
+    <ng-content select="app-profile-records-card-detail-line"></ng-content>
+
+    <a class="detail-url" (click)="toggleDetails.emit()">
       <ng-container *ngIf="this.state === 'close'" i18n="@@__"
         >Show details</ng-container
       >
