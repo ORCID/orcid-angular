@@ -25,7 +25,7 @@ export class ProfileRecordsComponent implements OnInit {
   affiliationUIGroupsTypes = AffiliationUIGroupsTypes
   toggle = true
   profileWorksLoading = false
-  worksPageIndex = 2
+  worksPageIndex = 0
   @Input() id
   @Input()
   set profileAffiliationUiGroups(value: AffiliationUIGroup[]) {

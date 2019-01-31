@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core'
 import { Input } from '@angular/core'
 
 @Component({
@@ -10,6 +10,7 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
   @Input() url
   @Input() title
   @Input() detail
+  @Input() copyOnClick = false
   _content
   @Input()
   set content(value) {
@@ -19,6 +20,8 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
   get content() {
     return this._content
   }
+
+  @ViewChild('contentLabel') contentLabel: ElementRef
 
   constructor() {}
 

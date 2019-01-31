@@ -12,6 +12,9 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
 import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { CopyOnClickDirective } from './directives/copy-on-click/copy-on-click.directive'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.component'
 
 @NgModule({
   imports: [
@@ -20,8 +23,14 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatPaginatorModule,
+    MatSnackBarModule,
   ],
-  declarations: [MonthDayYearDateToStringPipe, OfflineMessageComponent],
+  declarations: [
+    MonthDayYearDateToStringPipe,
+    OfflineMessageComponent,
+    CopyOnClickDirective,
+    CopyOnClickComponent,
+  ],
   exports: [
     MatDivider,
     MatTooltipModule,
@@ -30,7 +39,10 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MonthDayYearDateToStringPipe,
     OfflineMessageComponent,
     MatPaginatorModule,
+    CopyOnClickDirective,
+    MatSnackBarModule,
   ],
+  entryComponents: [CopyOnClickComponent],
   providers: [], // Should not provide anything
 })
 export class SharedModule {}

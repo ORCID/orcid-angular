@@ -1,5 +1,14 @@
 <h5 class="mat-body-2">
   {{ title }} <ng-container *ngIf="detail">({{ detail }})</ng-container>
 </h5>
-<p *ngIf="!url">{{ content }}</p>
-<a *ngIf="url" http-ref="url">{{ content }}</a>
+<p
+  *ngIf="!url && copyOnClick"
+  appCopyOnClick
+  matTooltip="Click to Copy"
+  [matTooltipPosition]="'above'"
+>
+  {{ content }}
+</p>
+<p *ngIf="!url && !copyOnClick">{{ content }}</p>
+
+<a *ngIf="url" href="{{url}}" target="orcid-app">{{ content }}</a>
