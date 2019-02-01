@@ -7,10 +7,7 @@
 
 <h2 i18n="@@home.latest_news">LATEST NEWS</h2>
 
-<div *ngIf="!news" class="spinner-container">
-  <mat-progress-spinner [color]="primary" mode="indeterminate">
-  </mat-progress-spinner>
-</div>
+<div *ngIf="!news" class="spinner-container"></div>
 <ng-container *ngIf="news">
   <div class="cart-container" [@listAnimation]="news.length">
     <div

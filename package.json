@@ -14,7 +14,7 @@
     "serve:ar": "ng serve --configuration=ar-sandbox --disable-host-check",
     "serve:ar:aot": "ng serve --aot --configuration=ar-sandbox --disable-host-check",
 
-    "build": "ng build",
+    "build": "npm run build:prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

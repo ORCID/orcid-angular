@@ -49,8 +49,10 @@
   <div><ng-container i18n="@@_">Source: </ng-container>{{ sourceName }}</div>
   <div class="prefered-source" *ngIf="isPreferred">
     <div><i class="material-icons"> check_circle_outline </i></div>
-    <div *ngIf="!isHanset" i18n="@@groups.common.preferred_source">
-      <ng-container i18n="@@_">Preferred source</ng-container>
+    <div *ngIf="!isHanset">
+      <ng-container i18n="@@groups.common.preferred_source"
+        >Preferred source</ng-container
+      >
       <ng-container *ngIf="!stackMode && stackLength > 1">
         (1 <ng-container i18n="@@_"> of </ng-container> {{ stackLength }})
       </ng-container>
