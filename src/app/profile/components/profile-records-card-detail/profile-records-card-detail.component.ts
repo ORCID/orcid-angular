@@ -61,6 +61,9 @@ export class ProfileRecordsCardDetailComponent implements OnInit {
 
   ngOnInit() {}
 
+  // TODO an angular material alternative to check for content projection might be try
+  // More info on https://github.com/angular/angular/issues/26083#issuecomment-459605457
+
   hasContentProjection() {
     const detailContentProjection: NodeList = (this.contentProjection
       .nativeElement as HTMLElement).childNodes
