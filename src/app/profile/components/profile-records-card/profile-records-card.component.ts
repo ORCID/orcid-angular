@@ -65,7 +65,7 @@ export class ProfileRecordsCardComponent implements OnInit {
     private _platformInfo: PlatformInfoService,
     private ref: ChangeDetectorRef
   ) {
-    this._platformInfo.getPlatformInfo().subscribe(info => {
+    this._platformInfo.get().subscribe(info => {
       this.isHanset = info.handset
     })
   }

@@ -1,9 +1,16 @@
-<div [@itemMargin]="stackMode ? 'open' : 'close'">
+<div
+  [@itemMargin]="stackMode ? 'open' : 'close'"
+  (@itemMargin.done)="call($event)"
+>
+  {{ noopAnimation || json }}
   <div *ngFor="let work of profileworksStack?.works; trackBy: trackByFn">
     <app-profile-records-card
       [@itemChildListAnimation]="{
         value: null,
-        params: { maxEnterHeight: '20px' }
+        params: {
+          maxEnterHeight: '20px',
+          animateTime: noopAnimation ? '0ms' : '200ms'
+        }
       }"
       *ngIf="isPrefered(work) || stackMode"
       [title]="work.title.value"

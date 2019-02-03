@@ -56,7 +56,7 @@ export class ProfilePageComponent implements OnInit {
           }
         }
       )
-      _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+      _platformInfo.get().subscribe(platformInfo => {
         this.platformInfo = platformInfo
       })
     })

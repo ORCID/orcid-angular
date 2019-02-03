@@ -143,14 +143,17 @@ export const nestedListAnimation = [
   trigger('itemChildListAnimation', [
     transition(':leave', [
       style({ opacity: 0, padding: '*', overflow: 'hidden' }),
-      animate(200, style({ opacity: 0, height: '0px', padding: 0 })),
+      animate(
+        '{{animateTime}}',
+        style({ opacity: 0, height: '0px', padding: 0 })
+      ),
     ]),
     transition(
       ':enter',
       [
         style({ opacity: 1, height: '0', padding: 0 }),
         animate(
-          200,
+          '{{animateTime}}',
           style({
             opacity: 1,
             height: '{{maxEnterHeight}}',
@@ -160,7 +163,7 @@ export const nestedListAnimation = [
         ),
       ],
       {
-        params: { maxEnterHeight: '*' },
+        params: { maxEnterHeight: '*', animateTime: '200ms' },
       }
     ),
   ]),
@@ -207,10 +210,10 @@ export const itemMarginAnimation = trigger('itemMargin', [
   ),
   transition('open => *', [
     query('@itemChildListAnimation', animateChild()),
-    animate('100ms'),
+    animate('500ms'),
   ]),
   transition('* => open', [
     query('@itemChildListAnimation', animateChild()),
-    animate('100ms'),
+    animate('500ms'),
   ]),
 ])

@@ -4,6 +4,8 @@ import { nestedListAnimation, itemMarginAnimation } from 'src/app/animations'
 import { WorksService } from 'src/app/core/works/works.service'
 import { Work } from 'src/app/types/works.endpoint'
 import { merge, of } from 'rxjs'
+import { PlatformInfoService } from 'src/app/core'
+import { platform } from 'os'
 
 @Component({
   selector: 'app-profile-records-wrapper-works',
@@ -19,6 +21,7 @@ export class ProfileRecordsWrapperWorksComponent implements OnInit {
   createdDate
 
   workInfo: Work
+  noopAnimation = false
 
   @Input() id
   @Input()
@@ -40,7 +43,17 @@ export class ProfileRecordsWrapperWorksComponent implements OnInit {
     return this._profileworksStack
   }
 
-  constructor(private _worksService: WorksService) {}
+  constructor(
+    private _worksService: WorksService,
+    private _platformInfo: PlatformInfoService
+  ) {
+    this._platformInfo.get().subscribe(data => {
+      // TODO Firefox, Explorer and Edge all seem to have proble with :leave on itemChildListAnimation
+      // More info about what is causing this problems must be looked for.
+      //
+      this.noopAnimation = data.firefox || data.edge || data.ie
+    })
+  }
 
   ngOnInit() {}
 
@@ -95,5 +108,9 @@ export class ProfileRecordsWrapperWorksComponent implements OnInit {
 
   trackByFn(index, work: Work) {
     return work.putCode.value
+  }
+
+  call(event) {
+    console.log('>>>', event)
   }
 }
