@@ -19,7 +19,6 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
   @Input() detail
   @Input() copyOnClick = false
   @Input() titleMargin = true
-  @Input() secondaryText = false
   @Input() prefixTitle
   @Input()
   set marginBotton(value) {
@@ -37,7 +36,18 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
     return this._content
   }
 
+  @Input()
+  set secondaryText(value) {
+    this._secondaryText = value
+    this._primaryText = !value
+  }
+  get secondaryText() {
+    return this._secondaryText
+  }
+
   @HostBinding('class.margin-botton') _marginBotton = true
+  @HostBinding('class.secondary-text') _secondaryText = false
+  @HostBinding('class.primary-text') _primaryText = true
 
   @ViewChild('contentLabel') contentLabel: ElementRef
 

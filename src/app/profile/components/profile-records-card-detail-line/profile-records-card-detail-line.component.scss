@@ -26,6 +26,12 @@
   }
 }
 
+.tabletOrHandset {
+  :host.primary-text {
+    flex-direction: column;
+  }
+}
+
 body[dir] :host {
   p {
     margin-right: 0px;
