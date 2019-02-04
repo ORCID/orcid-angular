@@ -96,8 +96,4 @@ export class ProfileRecordsComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  call(event) {
-    console.log(event)
-  }
 }

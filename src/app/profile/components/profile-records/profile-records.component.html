@@ -1,9 +1,5 @@
 <div (click)="testSorting()">Temp test sort</div>
-<mat-accordion
-  [multi]="true"
-  @parentListAnimation
-  (@parentListAnimation.done)="call($event)"
->
+<mat-accordion [multi]="true" @parentListAnimation>
   <ng-container
     *ngFor="
       let affiliationGroup of profileAffiliationUiGroups;
@@ -84,7 +80,6 @@
         [@childListAnimation]="
           profileWorks.groups[0].defaultPutCode + profileWorks.groups[0].length
         "
-        (@childListAnimation.done)="call($event)"
       >
         <app-profile-records-wrapper-works
           *ngFor="let profileworksStack of profileWorks.groups"

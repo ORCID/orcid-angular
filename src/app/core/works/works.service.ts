@@ -27,11 +27,7 @@ export class WorksService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
-  ) {
-    this.workSubject.asObservable().subscribe(data => {
-      console.log('FROM SERVICE ', data)
-    })
-  }
+  ) {}
   /**
    * Return an observable with a list of Works with partial information.
    * For full work details getDetails(id, putCode) must be called
@@ -47,7 +43,6 @@ export class WorksService {
     sort = 'date',
     sortAsc = 'false'
   ): Observable<Works> {
-    console.log('CALL WITH ', offset)
     this.getWorksData(id, offset, sort, sortAsc).subscribe(data =>
       this.workSubject.next(data)
     )

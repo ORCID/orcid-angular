@@ -172,7 +172,12 @@ export const nestedListAnimation = [
     transition('void => *', [
       query(
         '@itemChildListAnimation',
-        [style({ opacity: 0 }), animate('0.5s', style({ opacity: 1 }))],
+        [style({ opacity: 0 }), animate('0.2s', style({ opacity: 1 }))],
+        { optional: true }
+      ),
+      query(
+        '@itemChildListAnimation',
+        [style({ opacity: 0 }), animate('0.2s', style({ opacity: 1 }))],
         { optional: true }
       ),
     ]),
@@ -210,10 +215,10 @@ export const itemMarginAnimation = trigger('itemMargin', [
   ),
   transition('open => *', [
     query('@itemChildListAnimation', animateChild()),
-    animate('500ms'),
+    animate('200ms'),
   ]),
   transition('* => open', [
     query('@itemChildListAnimation', animateChild()),
-    animate('500ms'),
+    animate('200ms'),
   ]),
 ])

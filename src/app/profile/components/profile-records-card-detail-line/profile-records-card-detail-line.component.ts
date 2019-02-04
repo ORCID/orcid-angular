@@ -32,7 +32,6 @@ export class ProfileRecordsCardDetailLineComponent implements OnInit {
   @Input()
   set content(value) {
     this._content = value
-    console.log(value)
   }
   get content() {
     return this._content

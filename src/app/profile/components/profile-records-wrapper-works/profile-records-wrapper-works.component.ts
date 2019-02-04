@@ -109,8 +109,4 @@ export class ProfileRecordsWrapperWorksComponent implements OnInit {
   trackByFn(index, work: Work) {
     return work.putCode.value
   }
-
-  call(event) {
-    console.log('>>>', event)
-  }
 }
