@@ -97,7 +97,6 @@ body[dir] {
   display: flex;
   position: absolute;
   width: 100%;
-  display: -ms-grid;
   -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
   padding: 0 10px;
