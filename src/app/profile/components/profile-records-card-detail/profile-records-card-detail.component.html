@@ -92,13 +92,20 @@
 
   <div class="date-container mat-small">
     <div>
-      <div class="date-title mat-small">Added:</div>
+      <div class="date-title mat-small">
+        <ng-container i18n="@@groups.common.added">Added</ng-container>:
+      </div>
+
       <div class="mat-small" *ngIf="createdDate">
         {{ createdDate | monthDayYearDateToString }}
       </div>
     </div>
     <div>
-      <div class="date-title mat-small">Last Modified:</div>
+      <div class="date-title mat-small">
+        <ng-container i18n="@@groups.common.last_modified"
+          >Last Modified</ng-container
+        >:
+      </div>
       <div class="mat-small" *ngIf="lastModified">
         {{ lastModified | monthDayYearDateToString }}
       </div>

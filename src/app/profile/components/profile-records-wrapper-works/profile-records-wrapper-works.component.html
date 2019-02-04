@@ -1,5 +1,4 @@
 <div [@itemMargin]="stackMode ? 'open' : 'close'">
-  {{ noopAnimation || json }}
   <div *ngFor="let work of profileworksStack?.works; trackBy: trackByFn">
     <app-profile-records-card
       [@itemChildListAnimation]="{

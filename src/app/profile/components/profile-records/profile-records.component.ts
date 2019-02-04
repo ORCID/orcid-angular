@@ -50,6 +50,8 @@ export class ProfileRecordsComponent implements OnInit {
   }
 
   @ViewChild('worksExpansionPanel') worksExpansionPanel: ElementRef
+  @ViewChild('worksExpansionPanel') paginatoOf: ElementRef
+
   get profileWorks(): Works {
     return this._progileWorks
   }

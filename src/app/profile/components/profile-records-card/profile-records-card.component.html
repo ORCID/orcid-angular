@@ -28,10 +28,14 @@
     <ng-content select="app-profile-records-card-detail-line"></ng-content>
 
     <a class="detail-url" (click)="toggleDetails.emit()">
-      <ng-container *ngIf="this.state === 'close'" i18n="@@__"
+      <ng-container
+        *ngIf="this.state === 'close'"
+        i18n="@@public_record.showDetails"
         >Show details</ng-container
       >
-      <ng-container *ngIf="this.state === 'open'" i18n="@@__"
+      <ng-container
+        *ngIf="this.state === 'open'"
+        i18n="@@public_record.hideDetails"
         >Hide details</ng-container
       >
     </a>
@@ -46,7 +50,10 @@
     'margin-top-2': !stackMode || (stackMode && stackState == 'open')
   }"
 >
-  <div><ng-container i18n="@@_">Source: </ng-container>{{ sourceName }}</div>
+  <div>
+    <ng-container i18n="@@groups.common.source">Source</ng-container>:
+    {{ sourceName }}
+  </div>
   <div class="prefered-source" *ngIf="isPreferred">
     <div><i class="material-icons"> check_circle_outline </i></div>
     <div *ngIf="!isHanset">
@@ -54,13 +61,17 @@
         >Preferred source</ng-container
       >
       <ng-container *ngIf="!stackMode && stackLength > 1">
-        (1 <ng-container i18n="@@_"> of </ng-container>
+        (1 <ng-container i18n="@@search_results.of=">of</ng-container>
         {{ stackLength }})&#x200E;
       </ng-container>
     </div>
-    <a (click)="toggleStackMode()" *ngIf="stackLength > 1" i18n="@@_">
-      <ng-container *ngIf="!stackMode"> Show more </ng-container>
-      <ng-container *ngIf="stackMode">Show less</ng-container>
+    <a (click)="toggleStackMode()" *ngIf="stackLength > 1">
+      <ng-container i18n="@@notifications.show_more" *ngIf="!stackMode">
+        Show more
+      </ng-container>
+      <ng-container i18n="@@ng.show_less" *ngIf="stackMode"
+        >Show less</ng-container
+      >
     </a>
   </div>
 </div>

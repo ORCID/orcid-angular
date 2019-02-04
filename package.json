@@ -26,7 +26,8 @@
     "build:i18n:generate": "node ./src/locale/translate-file-generator",
     "build:i18n": "npm run build:i18n:define && npm run build:i18n:generate",
     "build:en": "npm run build:i18n && ng run ng-orcid:build:production-en",
-    "build:ar": "npm run build:i18n && ng run ng-orcid:build:production-en",
+    "build:es": "npm run build:i18n && ng run ng-orcid:build:production-es",
+    "build:ar": "npm run build:i18n && ng run ng-orcid:build:production-ar",
     "build:prod": "npm run build:i18n && ng run ng-orcid:build:production-en && ng run ng-orcid:build:production-fr && ng run ng-orcid:build:production-ar && ng run ng-orcid:build:production-ca && ng run ng-orcid:build:production-cs && ng run ng-orcid:build:production-en && ng run ng-orcid:build:production-en  && ng run ng-orcid:build:production-es  && ng run ng-orcid:build:production-it  && ng run ng-orcid:build:production-ja  && ng run ng-orcid:build:production-ko  && ng run ng-orcid:build:production-lr  && ng run ng-orcid:build:production-pt  && ng run ng-orcid:build:production-rl  && ng run ng-orcid:build:production-ru  && ng run ng-orcid:build:production-uk  && ng run ng-orcid:build:production-xx  && ng run ng-orcid:build:production-zh_CN  && ng run ng-orcid:build:production-zh_TW"
   },
   "private": true,

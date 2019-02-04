@@ -146,4 +146,42 @@
     Membership and service</ng-container
   >
 </ng-template>
-<ng-template #translatedHeaderWorks> Works </ng-template>
+
+<ng-template #translatedHeaderWorks i18n="@@notifications.works_label">
+  Works
+</ng-template>
+
+<!--
+  TODO The following translations files are for mat-paginator
+  but these ones are required to be provided through a service
+  https://github.com/angular/material2/issues/8239
+
+  This requires the translation string to be declared outside the templates
+  There is a currently open issue about this open on the Angular Repo
+  https://github.com/angular/angular/issues/11405
+
+  While Angular have no support for outside template translations an external library
+  like https://github.com/ngx-translate/i18n-polyfill might be applied.
+-->
+
+<ng-template #paginatorNextPageLabel i18n="@@notifications.works_label">
+  Next page
+</ng-template>
+
+<ng-template #paginatorLastPageLabel i18n="@@notifications.works_label">
+  Previous page
+</ng-template>
+
+<ng-template #paginatorFirstPageLabel i18n="@@notifications.works_label">
+  First page
+</ng-template>
+
+<ng-template #paginatorPreviousPageLabel i18n="@@notifications.works_label">
+  Last page
+</ng-template>
+
+<ng-template #paginatorItemsPerPageLabel i18n="@@notifications.works_label">
+  Items per page
+</ng-template>
+
+<ng-template #paginatoOf i18n="@@notifications.works_label"> of </ng-template>
