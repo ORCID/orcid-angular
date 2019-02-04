@@ -1,5 +1,5 @@
 <h5
-  class="mat-body-1"
+  class="mat-body-1 "
   *ngIf="title"
   [ngClass]="{
     'title-margin': titleMargin,
@@ -7,7 +7,8 @@
   }"
 >
   <div class="prefixTitle" *ngIf="prefixTitle">{{ prefixTitle }}</div>
-  {{ title }} <ng-container *ngIf="detail">({{ detail }})</ng-container>
+  {{ title }}
+  <ng-container *ngIf="detail">&#x200E;({{ detail }})&#x200E;</ng-container>
 </h5>
 
 <p

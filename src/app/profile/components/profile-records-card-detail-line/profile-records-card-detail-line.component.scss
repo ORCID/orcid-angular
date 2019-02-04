@@ -25,3 +25,19 @@
     margin-right: 12px;
   }
 }
+
+body[dir] :host {
+  p {
+    margin-right: 0px;
+    margin-left: 12px;
+  }
+  h5 {
+    margin-right: 0px;
+    margin-left: 5px;
+  }
+
+  h5 .prefixTitle {
+    margin-left: 4px;
+    margin-right: 0px;
+  }
+}

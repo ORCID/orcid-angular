@@ -14,6 +14,15 @@ h3 {
   padding-right: 20px;
 }
 
+body[dir] {
+  :host {
+    h3 {
+      padding-right: 0px;
+      padding-left: 20px;
+    }
+  }
+}
+
 .margin-top-1 {
   margin-top: 8px;
 }
@@ -27,6 +36,16 @@ h3 {
   padding-right: 20px;
   box-sizing: border-box;
 }
+
+body[dir] {
+  :host {
+    .card-footer {
+      padding-right: 0px;
+      padding-left: 20px;
+    }
+  }
+}
+
 .prefered-source {
   display: flex;
   justify-content: space-between;
@@ -92,6 +111,19 @@ a {
 
 .prefered-source a {
   margin-left: 8px;
+}
+
+.prefered-source a {
+  margin-left: 8px;
+}
+
+body[dir] {
+  :host {
+    .prefered-source a {
+      margin-left: 0px;
+      margin-right: 8px;
+    }
+  }
 }
 
 .detail-url {

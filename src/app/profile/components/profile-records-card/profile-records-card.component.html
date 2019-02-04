@@ -54,7 +54,8 @@
         >Preferred source</ng-container
       >
       <ng-container *ngIf="!stackMode && stackLength > 1">
-        (1 <ng-container i18n="@@_"> of </ng-container> {{ stackLength }})
+        (1 <ng-container i18n="@@_"> of </ng-container>
+        {{ stackLength }})&#x200E;
       </ng-container>
     </div>
     <a (click)="toggleStackMode()" *ngIf="stackLength > 1" i18n="@@_">
