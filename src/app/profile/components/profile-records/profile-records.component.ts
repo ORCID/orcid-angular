@@ -68,6 +68,13 @@ export class ProfileRecordsComponent implements OnInit {
     return item.type
   }
 
+  /**
+   * The following function is a call to a temporall sorting method.
+   * With the only purpose to have a quick sorting function to test the correct
+   * funtionin of the components on data updates.
+   *
+   * This should be rewritten/removed when the funtionallity of sorting is implemented
+   */
   testSorting() {
     this.toggle = !this.toggle
     this._profileAffiliationUiGroups = this._affiliationsSortService.transform(
