@@ -17,12 +17,16 @@ export class PlatformInfoService {
     handset: false,
     edge: false,
     ie: false,
+    firefox: false,
+    safary: false,
   }
 
   constructor(
     private _breakpointObserver: BreakpointObserver,
     private _platform: Platform
   ) {
+    this.platform.firefox = _platform.FIREFOX
+    this.platform.safary = _platform.SAFARI
     this.platform.ie = _platform.TRIDENT
     this.platform.edge = _platform.EDGE
     this.platformSubject.next(this.platform)
@@ -57,7 +61,7 @@ export class PlatformInfoService {
       })
   }
 
-  public getPlatformInfo(): Observable<PlatformInfo> {
+  public get(): Observable<PlatformInfo> {
     return this.platformSubject.asObservable()
   }
 }

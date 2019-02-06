@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
   tabletOrHandset
 
   constructor(_platformInfo: PlatformInfoService) {
-    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+    _platformInfo.get().subscribe(platformInfo => {
       this.tabletOrHandset = platformInfo.tabletOrHandset
     })
   }

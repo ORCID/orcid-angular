@@ -44,6 +44,17 @@ body[dir] {
   }
 }
 
+body[dir] {
+  :host {
+    .printMenu {
+      * {
+        margin-right: 0px;
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
 .progress-spinner-container {
   display: flex;
   height: 100%;

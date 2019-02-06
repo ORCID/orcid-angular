@@ -2,12 +2,14 @@
 @import './assets/scss/material.scss';
 @font-face {
   font-family: 'Noto Sans';
+  font-display: swap;
   src: url('./assets/fonts/NotoSans-Regular.woff') format('woff'),
     url('./assets/fonts/NotoSans-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Noto Sans';
+  font-display: swap;
   src: url('./assets/fonts/NotoSans-Bold.woff') format('woff'),
     url('./assets/fonts/NotoSans-Bold.ttf') format('truetype');
   font-weight: bold;
@@ -15,6 +17,7 @@
 
 @font-face {
   font-family: 'Material Icons';
+  font-display: swap;
   font-style: normal;
   font-weight: 400;
   src: url(/assets/fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
@@ -26,6 +29,7 @@
 
 .material-icons {
   font-family: 'Material Icons';
+  font-display: swap;
   font-weight: normal;
   font-style: normal;
   font-size: 20px; /* Preferred icon size */
@@ -53,6 +57,7 @@ body {
 body {
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
+  font-display: swap;
 }
 app-root {
   min-height: 100%;

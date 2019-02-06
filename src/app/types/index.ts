@@ -11,3 +11,4 @@ export {
 export { MonthDayYearDate } from './common.endpoint'
 export { OrgDisambiguated } from './orgs.disambiguated.endpoint'
 export { AffiliationsDetails } from './affiliationsDetails.endpoint'
+export { Works, WorkGroup, Work } from './works.endpoint'

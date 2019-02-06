@@ -16,7 +16,7 @@ export class AppComponent {
   @HostBinding('class.desktop') desktop
 
   constructor(_platformInfo: PlatformInfoService) {
-    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+    _platformInfo.get().subscribe(platformInfo => {
       this.ie = platformInfo.ie
       this.edge = platformInfo.edge
       this.tabletOrHandset = platformInfo.tabletOrHandset

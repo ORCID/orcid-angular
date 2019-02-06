@@ -5,10 +5,22 @@
   margin: 0px -10px;
   padding: 16px 10px;
   margin-top: 22px;
+  position: relative;
+  background: white;
 }
 
 h3 {
   margin: 0;
+  padding-right: 20px;
+}
+
+body[dir] {
+  :host {
+    h3 {
+      padding-right: 0px;
+      padding-left: 20px;
+    }
+  }
 }
 
 .margin-top-1 {
@@ -21,7 +33,19 @@ h3 {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
+
+body[dir] {
+  :host {
+    .card-footer {
+      padding-right: 0px;
+      padding-left: 20px;
+    }
+  }
+}
+
 .prefered-source {
   display: flex;
   justify-content: space-between;
@@ -65,4 +89,43 @@ body[dir] {
 .title-container i.material-icons {
   margin-top: 2px;
   max-height: 20px;
+}
+
+.stack-arrow-container {
+  left: 0;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+a {
+  z-index: 1;
+  cursor: pointer;
+}
+
+.prefered-source a {
+  margin-left: 8px;
+}
+
+.prefered-source a {
+  margin-left: 8px;
+}
+
+body[dir] {
+  :host {
+    .prefered-source a {
+      margin-left: 0px;
+      margin-right: 8px;
+    }
+  }
+}
+
+.detail-url {
+  padding-top: 8px;
+  display: block;
 }

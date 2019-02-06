@@ -5,4 +5,6 @@ export interface PlatformInfo {
   handset: boolean
   edge: boolean
   ie: boolean
+  safary: boolean
+  firefox: boolean
 }

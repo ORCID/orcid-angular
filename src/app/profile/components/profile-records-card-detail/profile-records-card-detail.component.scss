@@ -1,5 +1,5 @@
 .margin-top-1 {
-  margin-top: 8px;
+  margin: 8px 0;
 }
 .margin-top-2 {
   margin-top: 28px;
@@ -54,4 +54,13 @@ body[dir] {
   a {
     margin-left: 5px;
   }
+}
+
+app-offline-message {
+  display: block;
+}
+
+.content {
+  padding: 0;
+  padding: 24px 0;
 }

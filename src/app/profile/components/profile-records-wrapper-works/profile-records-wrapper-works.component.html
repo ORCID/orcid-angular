@@ -1,0 +1,120 @@
+<div [@itemMargin]="stackMode ? 'open' : 'close'">
+  <div *ngFor="let work of profileworksStack?.works; trackBy: trackByFn">
+    <app-profile-records-card
+      [@itemChildListAnimation]="{
+        value: null,
+        params: {
+          maxEnterHeight: '20px',
+          animateTime: noopAnimation ? '0ms' : '200ms'
+        }
+      }"
+      *ngIf="isPrefered(work) || stackMode"
+      [title]="work.title.value"
+      [subtitle]="work.journalTitle?.value"
+      [sourceName]="work.sourceName"
+      [date]="work.publicationDate | monthDayYearDateToString"
+      [role]="work.workType.value"
+      [stackLength]="profileworksStack.works.length"
+      [(stackMode)]="stackMode"
+      [stackState]="workCardState[work.putCode.value].stackState"
+      [isPreferred]="isPrefered(work)"
+      (click)="onClick(work)"
+      [(state)]="workDetailsState[work.putCode.value].state"
+      (toggleDetails)="toggleDetails(work)"
+    >
+      <app-profile-records-card-detail-line
+        *ngFor="let workExternal of work.workExternalIdentifiers"
+        [prefixTitle]="
+          workExternal.relationship.value === 'part-of'
+            ? workExternal.relationship.value
+            : ''
+        "
+        title="{{workExternal.externalIdentifierType.value + ':' | uppercase}}"
+        [content]="workExternal.externalIdentifierId.value"
+        [url]="workExternal.url?.value"
+        [titleMargin]="false"
+        [secondaryText]="true"
+        [marginBotton]="false"
+      >
+      </app-profile-records-card-detail-line>
+
+      <app-profile-records-card-detail
+        [id]="id"
+        [(state)]="workDetailsState[work.putCode.value].state"
+        [detailShowData]="workDetailsState[work.putCode.value].detailShowData"
+        [detailShowLoader]="
+          workDetailsState[work.putCode.value].detailShowLoader
+        "
+        [detailShowOffline]="
+          workDetailsState[work.putCode.value].detailShowOffline
+        "
+        [lastModified]="work.lastModified"
+        [url]="work.url?.value"
+        [createdDate]="work.createdDate"
+      >
+        <!-- DETAIL LINES -->
+        <app-profile-records-card-detail-line
+          *ngIf="work.translatedTitle"
+          [title]="'Translation'"
+          [detail]="work.translatedTitle.languageName"
+          [content]="work.translatedTitle.content"
+        >
+        </app-profile-records-card-detail-line>
+        <app-profile-records-card-detail-line
+          *ngIf="work.languageName"
+          [title]="'Language'"
+          [content]="work.languageName.value"
+        >
+        </app-profile-records-card-detail-line>
+
+        <app-profile-records-card-detail-line
+          *ngIf="work.subtitle"
+          [title]="'Subtitle'"
+          [content]="work.subtitle.value"
+        >
+        </app-profile-records-card-detail-line>
+
+        <app-profile-records-card-detail-line
+          *ngIf="work.subtitle"
+          [title]="'Url'"
+          [content]="work.url.value"
+          [url]="work.url.value"
+        >
+        </app-profile-records-card-detail-line>
+
+        <app-profile-records-card-detail-line
+          *ngIf="work.URL"
+          [title]="'URL'"
+          [content]="work.url.value"
+          [url]="work.url.value"
+        >
+        </app-profile-records-card-detail-line>
+
+        <app-profile-records-card-detail-line
+          *ngIf="work.citation"
+          [title]="'Citation'"
+          [detail]="work.citation.citationType.value"
+          [content]="work.citation.citation.value"
+          [copyOnClick]="true"
+        >
+        </app-profile-records-card-detail-line>
+
+        <app-profile-records-card-detail-line
+          *ngIf="work.shortDescription"
+          [title]="'Description'"
+          [content]="work.shortDescription.value"
+        >
+        </app-profile-records-card-detail-line>
+
+        <app-profile-records-card-detail-line
+          *ngIf="work.countryName"
+          [title]="'Country of publication'"
+          [content]="work.countryName.value"
+        >
+        </app-profile-records-card-detail-line>
+
+        <!-- END DETAIL LINES -->
+      </app-profile-records-card-detail>
+    </app-profile-records-card>
+  </div>
+</div>

@@ -77,7 +77,7 @@ export class HeaderComponent implements OnInit {
         this.setChildOfCurrentRouteAsSecondaryMenu()
       })
 
-    _platformInfo.getPlatformInfo().subscribe(platformInfo => {
+    _platformInfo.get().subscribe(platformInfo => {
       this.tabletOrHandset = platformInfo.tabletOrHandset
     })
   }

@@ -9,11 +9,11 @@ $config: mat-typography-config();
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   app-profile-general-data-detail {
-    h3.mat-body-2 {
+    h3.mat-body-1 {
       color: $dark-primary-text;
     }
 
-    h3.mat-body-2 {
+    h3.mat-body-1 {
       color: $dark-primary-text;
     }
 

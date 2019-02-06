@@ -23,7 +23,9 @@
       "urls": [
         "https://orcid.herokuapp.com/https://orcid.org/blog/feed",
         "https://orcid.herokuapp.com/https://qa.orcid.org/**/person.json",
-        "https://orcid.herokuapp.com/https://qa.orcid.org/**/affiliationGroups.json"
+        "https://orcid.herokuapp.com/https://qa.orcid.org/**/affiliationGroups.json",
+        "https://orcid.herokuapp.com/https://qa.orcid.org/**/worksPage.json**",
+        "https://orcid.herokuapp.com/https://qa.orcid.org/**/getWorkInfo.json**"
       ],
 
       "cacheConfig": {

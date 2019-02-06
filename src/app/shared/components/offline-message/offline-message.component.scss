@@ -1,0 +1,11 @@
+.offline-container {
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: max-content max-content max-content;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  a {
+    cursor: pointer;
+  }
+}

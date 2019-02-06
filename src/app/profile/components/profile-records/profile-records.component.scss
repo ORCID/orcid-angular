@@ -18,3 +18,10 @@ body[dir] {
     }
   }
 }
+
+.progress-spinner-container {
+  display: flex;
+  justify-content: space-around;
+  height: 150px;
+  align-items: center;
+}
