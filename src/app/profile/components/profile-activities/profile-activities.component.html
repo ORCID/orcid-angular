@@ -1,0 +1,95 @@
+<!-- The following line is a temporall soting test button -->
+<!-- <div (click)="testSorting()">Temp test sort</div> -->
+<mat-accordion [multi]="true" @parentListAnimation>
+  <ng-container
+    *ngFor="
+      let affiliationGroup of profileAffiliationUiGroups;
+      trackBy: trackByProfileAffiliationUiGroups
+    "
+  >
+    <mat-expansion-panel
+      *ngIf="affiliationGroup.affiliationGroup.length"
+      (opened)="panelState[affiliationGroup.type] = true"
+      (closed)="panelState[affiliationGroup.type] = false"
+      [expanded]="panelState[affiliationGroup.type]"
+    >
+      <mat-expansion-panel-header class="mat-expansion-header">
+        <h2 class="mat-subheading-2">
+          <!--
+            The translation of the header of each card is handle with a separate template #translatedHeader
+          -->
+          <ng-container
+            [ngTemplateOutlet]="translatedHeader"
+            [ngTemplateOutletContext]="{ affiliationGroup: affiliationGroup }"
+          >
+          </ng-container>
+        </h2>
+        <h2 class="mat-subheading-2 itemsAmount">
+          ({{ affiliationGroup.affiliationGroup.length }})
+        </h2>
+      </mat-expansion-panel-header>
+
+      <div
+        [@childListAnimation]="
+          affiliationGroup.affiliationGroup[0].groupId +
+          affiliationGroup.affiliationGroup.length
+        "
+      >
+        <app-profile-activities-affiliation
+          *ngFor="
+            let affiliation of affiliationGroup.affiliationGroup;
+            trackBy: trackByAffiliationGroup
+          "
+          [affiliation]="affiliation"
+          [id]="id"
+        ></app-profile-activities-affiliation>
+      </div>
+    </mat-expansion-panel>
+  </ng-container>
+
+  <app-profile-activities-works
+    [id]="id"
+    [profileWorks]="profileWorks"
+  ></app-profile-activities-works>
+</mat-accordion>
+
+<!--
+  I18N translation labels
+  TODO: Explain the use of these labels
+  _______________________________________________________________________________________________
+-->
+
+<ng-template #translatedHeader let-affiliationGroup="affiliationGroup">
+  <ng-container
+    *ngIf="affiliationGroup.type == affiliationUIGroupsTypes.EMPLOYMENT"
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.employment"
+  >
+    Employment</ng-container
+  >
+  <ng-container
+    *ngIf="
+      affiliationGroup.type ==
+      affiliationUIGroupsTypes.EDUCATION_AND_QUALIFICATION
+    "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.education_qualification"
+  >
+    Education and qualifications</ng-container
+  >
+  <ng-container
+    *ngIf="
+      affiliationGroup.type ==
+      affiliationUIGroupsTypes.INVITED_POSITION_AND_DISTINCTION
+    "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position"
+  >
+    Invited positions and distinctions</ng-container
+  >
+  <ng-container
+    *ngIf="
+      affiliationGroup.type == affiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE
+    "
+    i18n="@@org.orcid.jaxb.model.message.AffiliationType.membership_service"
+  >
+    Membership and service</ng-container
+  >
+</ng-template>

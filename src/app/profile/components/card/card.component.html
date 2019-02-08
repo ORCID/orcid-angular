@@ -1,0 +1,77 @@
+<div class="stack-arrow-container" *ngIf="stackMode">
+  <i class="material-icons stack-arrow" [@rotateAnimation]="stackState">
+    expand_more
+  </i>
+</div>
+
+<div [@heightAnimationDefaultOpenState]="stackMode ? stackState : 'open'">
+  <div class="margin-top-1">
+    <div class="title-container">
+      <h3 class="mat-subheading-1" *ngIf="title">{{ title }}</h3>
+    </div>
+    <div class="title-container">
+      <h3 class="mat-body-1" *ngIf="subtitle">{{ subtitle }}</h3>
+    </div>
+    <div class="general-data mat-body-1">
+      <ng-container *ngIf="startDate"
+        >{{ startDate }}
+        <ng-container> to </ng-container>
+        <ng-container *ngIf="endDate">{{ endDate }}</ng-container>
+        <ng-container *ngIf="!endDate">present</ng-container>
+      </ng-container>
+      <ng-container *ngIf="date"> {{ date }} </ng-container>
+      <ng-container *ngIf="(startDate || date) && role"> | </ng-container>
+      {{ role }}
+      <ng-container *ngIf="department"> ({{ department }}) </ng-container>
+    </div>
+    <div class="type mat-body-2">{{ type | titlecase }}</div>
+    <ng-content select="app-card-detail-line"></ng-content>
+
+    <a class="detail-url" (click)="toggleDetails.emit()">
+      <ng-container
+        *ngIf="this.state === 'close'"
+        i18n="@@public_record.showDetails"
+        >Show details</ng-container
+      >
+      <ng-container
+        *ngIf="this.state === 'open'"
+        i18n="@@public_record.hideDetails"
+        >Hide details</ng-container
+      >
+    </a>
+  </div>
+
+  <ng-content></ng-content>
+</div>
+
+<div
+  class="card-footer mat-body-1 "
+  [ngClass]="{
+    'margin-top-2': !stackMode || (stackMode && stackState == 'open')
+  }"
+>
+  <div>
+    <ng-container i18n="@@groups.common.source">Source</ng-container>:
+    {{ sourceName }}
+  </div>
+  <div class="prefered-source" *ngIf="isPreferred">
+    <div><i class="material-icons"> check_circle_outline </i></div>
+    <div *ngIf="!isHanset">
+      <ng-container i18n="@@groups.common.preferred_source"
+        >Preferred source</ng-container
+      >
+      <ng-container *ngIf="!stackMode && stackLength > 1">
+        (1 <ng-container i18n="@@search_results.of=">of</ng-container>
+        {{ stackLength }})&#x200E;
+      </ng-container>
+    </div>
+    <a (click)="toggleStackMode()" *ngIf="stackLength > 1">
+      <ng-container i18n="@@notifications.show_more" *ngIf="!stackMode">
+        Show more
+      </ng-container>
+      <ng-container i18n="@@ng.show_less" *ngIf="stackMode"
+        >Show less</ng-container
+      >
+    </a>
+  </div>
+</div>

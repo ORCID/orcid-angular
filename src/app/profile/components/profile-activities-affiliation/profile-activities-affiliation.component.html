@@ -1,0 +1,27 @@
+<app-card
+  @itemChildListAnimation
+  [id]="id"
+  [title]="affiliation.defaultAffiliation.affiliationName.value"
+  [startDate]="
+    affiliation.defaultAffiliation.startDate | monthDayYearDateToString
+  "
+  [endDate]="affiliation.defaultAffiliation.endDate | monthDayYearDateToString"
+  [role]="affiliation.defaultAffiliation.roleTitle.value"
+  [department]="affiliation.defaultAffiliation.departmentName.value"
+  [sourceName]="affiliation.defaultAffiliation.sourceName"
+  (toggleDetails)="toggleDetails()"
+  [(state)]="state"
+>
+  <app-card-detail
+    [id]="id"
+    [(state)]="state"
+    [detailShowData]="detailShowData"
+    [detailShowLoader]="detailShowLoader"
+    [orgDisambiguated]="orgDisambiguated"
+    [affiliationDetails]="affiliationDetails"
+    [detailShowOffline]="detailShowOffline"
+    [createdDate]="affiliation.defaultAffiliation.createdDate"
+    [lastModified]="affiliation.defaultAffiliation.lastModified"
+  >
+  </app-card-detail>
+</app-card>

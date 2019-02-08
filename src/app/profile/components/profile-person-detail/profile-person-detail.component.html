@@ -1,0 +1,39 @@
+<ng-container *ngIf="list">
+  <div class="title-container" (click)="toggle($event)">
+    <h3 class="mat-body-1">{{ title }}</h3>
+
+    <i class="material-icons" [@rotateAnimation]="state"> expand_more </i>
+  </div>
+
+  <div
+    class="container mat-body-1"
+    [ngClass]="{
+      'column-direction': columnDirection,
+      wrap: this.state === 'close'
+    }"
+  >
+    <span
+      class="content mat-body-1"
+      *ngFor="let element of (list | keyvalue); let last = last"
+      >{{ element.key
+      }}{{
+        this.state === 'close' && !columnDirection ? (last ? '' : ',') : ''
+      }}
+      <div
+        class="mat-body-1 details"
+        [@heightAnimationState]="{
+          value: state,
+          params: { finalWidth: '100px' }
+        }"
+      >
+        <ng-container>
+          <div class="mat-small">Sources</div>
+          <label class="mat-small"
+            >{{ element.value[0]?.source?.sourceName?.content }}
+          </label>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </div>
+    </span>
+  </div>
+</ng-container>

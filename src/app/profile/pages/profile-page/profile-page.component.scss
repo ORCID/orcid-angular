@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.records-container {
+.activities-container {
   margin-bottom: 40px;
 }
 
@@ -17,7 +17,7 @@
 .ie,
 .edge {
   :host {
-    .records-container {
+    .activities-container {
       margin-left: 20px;
     }
   }
@@ -27,7 +27,7 @@ body[dir] {
   .ie,
   .edge {
     :host {
-      .records-container {
+      .activities-container {
         margin-left: 0px;
         margin-right: 20px;
       }

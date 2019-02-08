@@ -8,12 +8,12 @@
     'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
   }"
 >
-  <app-profile-general-data [profileGeneralData]="profileGeneralData" [id]="id">
-  </app-profile-general-data>
+  <app-profile-person [profileGeneralData]="profileGeneralData" [id]="id">
+  </app-profile-person>
 </div>
 
 <div
-  class="records-container"
+  class="activities-container"
   [ngClass]="{
     'mdc-layout-grid__cell--span-7': !platformInfo?.tabletOrHandset,
     'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
@@ -24,7 +24,7 @@
       profileAffiliationUiGroups &&
       profileGeneralData &&
       !profileHasBio(profileGeneralData) &&
-      !profileHasRecords(profileAffiliationUiGroups, id)
+      !profileHasActivities(profileAffiliationUiGroups, id)
     "
     class="mat-subheading-2"
     i18n="@@public_profile.empty_profile"
@@ -39,13 +39,12 @@
   >
   </app-profile-biography>
 
-  <app-profile-records
-    *ngIf="profileHasRecords(profileAffiliationUiGroups, id)"
+  <app-profile-activities
+    *ngIf="profileHasActivities(profileAffiliationUiGroups, id)"
     [id]="id"
     [profileAffiliationUiGroups]="profileAffiliationUiGroups"
     [profileWorks]="profileWorks"
-  >
-  </app-profile-records>
+  ></app-profile-activities>
 
   <div class="progress-spinner-container" *ngIf="!profileAffiliationUiGroups">
     <mat-progress-spinner color="primary" mode="indeterminate">

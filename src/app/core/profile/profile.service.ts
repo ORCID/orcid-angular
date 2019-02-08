@@ -32,7 +32,7 @@ export class ProfileService {
     private _works: WorksService
   ) {}
 
-  getRecords(id) {
+  getActivities(id) {
     return combineLatest(this._affiliations.get(id), this._works.get(id))
   }
 

@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment.prod'
 })
 export class ProfilePageComponent implements OnInit {
   @HostBinding('class.mdc-layout-grid__inner') grid = true
+
   id
   profileAffiliationUiGroups: AffiliationUIGroup[]
   profileWorks: Works
@@ -24,7 +25,7 @@ export class ProfilePageComponent implements OnInit {
   ) {
     _activeRoute.parent.url.subscribe(route => {
       this.id = route[0].path
-      _profileService.getRecords(this.id).subscribe(data => {
+      _profileService.getActivities(this.id).subscribe(data => {
         this.profileAffiliationUiGroups = data[0]
         this.profileWorks = data[1]
       })
@@ -32,6 +33,7 @@ export class ProfilePageComponent implements OnInit {
       _profileService.getPerson(this.id).subscribe(
         data => {
           this.profileGeneralData = data
+          // TODO move this map to the service
           // Changes publicGroupedAddresses keys for full country names
           if (this.profileGeneralData.publicGroupedAddresses) {
             Object.keys(this.profileGeneralData.publicGroupedAddresses).map(
@@ -70,7 +72,7 @@ export class ProfilePageComponent implements OnInit {
     )
   }
 
-  profileHasRecords(profileAffiliationUiGroups, id): boolean {
+  profileHasActivities(profileAffiliationUiGroups, id): boolean {
     return (
       // Has at lest one affiliation
       ((profileAffiliationUiGroups &&

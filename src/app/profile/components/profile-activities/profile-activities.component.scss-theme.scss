@@ -1,0 +1,19 @@
+@import '../../../../assets/scss/material.theme';
+@import '~@angular/material/theming';
+
+$config: mat-typography-config();
+@mixin profile-activities-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  app-profile-activities {
+    mat-expansion-panel-header.mat-expansion-header {
+      background: mat-color($background, app-news) !important;
+    }
+  }
+}
+
+@mixin profile-activities-typography($config) {
+}
