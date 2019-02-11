@@ -12,9 +12,10 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { ProfileRoutingModule } from './profile-routing.module'
 import { ProfileActivitiesWorkComponent } from './components/profile-activities-work/profile-activities-work.component'
 import { ProfileActivitiesWorksComponent } from './components/profile-activities-works/profile-activities-works.component'
-
 import { ProfileRecordsAffiliationComponent } from './components/profile-activities-affiliation/profile-activities-affiliation.component'
 import { CardDetailLineComponent } from './components/card-detail-line/card-detail-line.component'
+// tslint:disable-next-line:max-line-length
+import { ProfileActivitiesAffiliationsComponent } from './components/profile-activities-affiliations/profile-activities-affiliations.component'
 
 @NgModule({
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
@@ -30,6 +31,7 @@ import { CardDetailLineComponent } from './components/card-detail-line/card-deta
     ProfileActivitiesWorkComponent,
     ProfileRecordsAffiliationComponent,
     CardDetailLineComponent,
+    ProfileActivitiesAffiliationsComponent,
   ],
 })
 export class ProfileModule {}

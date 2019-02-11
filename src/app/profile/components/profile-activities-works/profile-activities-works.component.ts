@@ -3,11 +3,13 @@ import { Works } from 'src/app/types'
 import { PageEvent } from '@angular/material'
 import { Subscription, timer } from 'rxjs'
 import { WorksService } from 'src/app/core/works/works.service'
+import { nestedListAnimation } from 'src/app/animations'
 
 @Component({
   selector: 'app-profile-activities-works',
   templateUrl: './profile-activities-works.component.html',
   styleUrls: ['./profile-activities-works.component.scss'],
+  animations: [nestedListAnimation],
 })
 export class ProfileActivitiesWorksComponent implements OnInit {
   panelState
