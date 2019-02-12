@@ -7,11 +7,12 @@ import { AffiliationUIGroup, Affiliations } from 'src/app/types'
 import { Observable, BehaviorSubject } from 'rxjs'
 import { environment } from 'src/environments/environment'
 import { retry, map, catchError, share, filter, first } from 'rxjs/operators'
+import { ActivityService } from 'src/app/types/activities-service.local'
 
 @Injectable({
   providedIn: 'root',
 })
-export class AffiliationsService {
+export class AffiliationsService implements ActivityService {
   affiliationsSubject = new BehaviorSubject<AffiliationUIGroup[]>(null)
   constructor(
     private _http: HttpClient,
@@ -31,22 +32,22 @@ export class AffiliationsService {
       )
       .subscribe(data => this.affiliationsSubject.next(data))
 
-    return this.affiliationsSubject
-      .asObservable()
-      .pipe(filter(data => data != null))
+    return this.affiliationsSubject.asObservable()
   }
 
-  sort(value) {
-    console.log('Subscribe')
+  sort(value): Observable<AffiliationUIGroup[]> {
     this.affiliationsSubject.pipe(first()).subscribe(data => {
-      console.log('current value', data)
       const x = this._affiliationsSortService.transform(data, value)
-      console.log('After sort ', x)
       this.affiliationsSubject.next(x)
     })
 
-    return this.affiliationsSubject
-      .asObservable()
-      .pipe(filter(data => data != null))
+    return this.affiliationsSubject.asObservable()
+  }
+
+  set(value): Observable<AffiliationUIGroup[]> {
+    throw new Error('Method not implemented.')
+  }
+  update(value): Observable<AffiliationUIGroup[]> {
+    throw new Error('Method not implemented.')
   }
 }

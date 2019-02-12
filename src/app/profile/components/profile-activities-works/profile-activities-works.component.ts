@@ -55,7 +55,7 @@ export class ProfileActivitiesWorksComponent implements OnInit {
     this.workPageChangeTimer = timer(400).subscribe(t => {
       this.worksExpansionPanel.nativeElement.scrollIntoView()
       this.profileWorksLoading = true
-      this._worksService.get(this.id, event.pageIndex * 50)
+      this._worksService.sort(this.id, event.pageIndex * 50)
       this.workPageChangeTimer.unsubscribe()
     })
   }

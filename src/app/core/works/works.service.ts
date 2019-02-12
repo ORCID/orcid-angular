@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { Observable, Subject } from 'rxjs'
-import { Works, Work } from 'src/app/types'
-import { retry, catchError } from 'rxjs/operators'
+import { Observable, BehaviorSubject } from 'rxjs'
+import { Works, Work, ActivityService } from 'src/app/types'
+import { retry, catchError, filter } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { HttpClient } from '@angular/common/http'
@@ -9,8 +9,8 @@ import { HttpClient } from '@angular/common/http'
 @Injectable({
   providedIn: 'root',
 })
-export class WorksService {
-  workSubject = new Subject<Works>()
+export class WorksService implements ActivityService {
+  workSubject = new BehaviorSubject<Works>(null)
 
   getWorksData(id: string, offset, sort, sortAsc): Observable<Works> {
     return this._http
@@ -37,11 +37,11 @@ export class WorksService {
    *
    * @param id user Orcid id
    */
-  get(
+  sort(
     id: string,
     offset = 0,
     sort = 'date',
-    sortAsc = 'false'
+    sortAsc = false
   ): Observable<Works> {
     this.getWorksData(id, offset, sort, sortAsc).subscribe(data =>
       this.workSubject.next(data)
@@ -49,7 +49,16 @@ export class WorksService {
     return this.workSubject.asObservable()
   }
 
+  get(id) {
+    this.getWorksData(id, 0, 'date', 'false').subscribe(data =>
+      this.workSubject.next(data)
+    )
+    return this.workSubject.asObservable()
+  }
+
   /**
+   * TODO Make this function to return details data as part of workSubject
+   *
    * Similar to get() witch to returns a list of Work objects
    * this returns a single Work object but adding the following attributes:
    *
@@ -70,5 +79,12 @@ export class WorksService {
         retry(3),
         catchError(this._errorHandler.handleError)
       )
+  }
+
+  set(value: any): Observable<any> {
+    throw new Error('Method not implemented.')
+  }
+  update(value: any): Observable<any> {
+    throw new Error('Method not implemented.')
   }
 }
