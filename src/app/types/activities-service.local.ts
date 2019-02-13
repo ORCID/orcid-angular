@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs'
 
 export interface ActivityService {
-  get(id: number): Observable<any>
+  get(id: string): Observable<any>
   sort(
     id: string,
     offset: number,

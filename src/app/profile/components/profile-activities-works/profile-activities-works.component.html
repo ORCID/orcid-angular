@@ -1,5 +1,5 @@
 <mat-expansion-panel
-  *ngIf="profileWorks.groups.length"
+  *ngIf="profileWorks && profileWorks.groups.length"
   (opened)="panelState = true"
   (closed)="panelState = false"
   [expanded]="panelState"

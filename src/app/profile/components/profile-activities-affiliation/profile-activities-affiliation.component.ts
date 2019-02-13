@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { Affiliation } from 'src/app/types'
-import { ProfileService } from 'src/app/core'
+import { ProfileService, OrganizationsService } from 'src/app/core'
 import { combineLatest } from 'rxjs'
 import { nestedListAnimation } from 'src/app/animations'
+import { AffiliationsService } from '../../../core/affiliations/affiliations.service'
 
 @Component({
   selector: 'app-profile-activities-affiliation',
@@ -17,6 +18,7 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
   _affiliation
   @Input()
   set affiliation(value) {
+    // console.log(JSON.stringify(value.affiliations[0]))
     this._affiliation = value
     this.type = this.affiliation.defaultAffiliation.affiliationType.value
     this.disambiguatedAffiliationSourceId = this.affiliation.defaultAffiliation
@@ -43,9 +45,12 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
   @Input() id
   @Input() orgDisambiguated
   @Input() detailShowOffline
-  @Input() affiliationDetails
+  affiliationDetails
 
-  constructor(private _profileService: ProfileService) {}
+  constructor(
+    private _affiliationService: AffiliationsService,
+    private _organizationsService: OrganizationsService
+  ) {}
 
   ngOnInit() {}
 
@@ -56,11 +61,11 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
       this.detailShowData = 'close'
 
       const combined = combineLatest(
-        this._profileService.getOrgDisambiguated(
+        this._organizationsService.getOrgDisambiguated(
           this.disambiguationSource,
           this.disambiguatedAffiliationSourceId
         ),
-        this._profileService.getAffiliationDetails(
+        this._affiliationService.getAffiliationDetails(
           this.id,
           this.type,
           this.putCode
@@ -69,6 +74,7 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
 
       combined.subscribe(
         response => {
+          // console.log(JSON.stringify(response[1]))
           this.orgDisambiguated = response[0]
           this.affiliationDetails = response[1]
           this.detailShowLoader = 'close-with-none-opacity'

@@ -62,26 +62,4 @@ export class ProfileService {
       this._works.get(id)
     )
   }
-
-  // Todo move this functions to affiliations service and return data
-  // using affiliation service subject
-  getOrgDisambiguated(type, value): Observable<OrgDisambiguated> {
-    if (type && value) {
-      return this._http.get<OrgDisambiguated>(
-        environment.API_WEB +
-          `orgs/disambiguated/${type}?value=${encodeURIComponent(value)}`
-      )
-    } else {
-      return of(null)
-    }
-  }
-
-  // Todo move this functions to affiliations service and return data
-  // using affiliation service subject
-  getAffiliationDetails(id, type, value): Observable<AffiliationsDetails> {
-    return this._http.get<AffiliationsDetails>(
-      environment.API_WEB +
-        `${id}/affiliationDetails.json?id=${value}&type=${type}`
-    )
-  }
 }

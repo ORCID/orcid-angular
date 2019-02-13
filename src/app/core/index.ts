@@ -8,3 +8,4 @@ export {
   AffiliationsGroupingService,
 } from './affiliations-grouping/affiliations-grouping.service'
 export { WINDOW } from './window/window.service'
+export { OrganizationsService } from './organizations/organizations.service'

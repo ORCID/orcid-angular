@@ -6,6 +6,7 @@ import { Work } from 'src/app/types/works.endpoint'
 import { merge, of } from 'rxjs'
 import { PlatformInfoService } from 'src/app/core'
 import { platform } from 'os'
+import { last, first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-profile-activities-work',
@@ -85,16 +86,8 @@ export class ProfileActivitiesWorkComponent implements OnInit {
 
       this._worksService
         .getDetails(this.id, workParam.putCode.value)
+        .pipe(first())
         .subscribe(data => {
-          this._profileworksStack.works = this._profileworksStack.works.map(
-            work => {
-              if (work.putCode.value === data.putCode.value) {
-                return data
-              } else {
-                return work
-              }
-            }
-          )
           this.workDetailsState[putCode].detailShowData = 'open'
           this.workDetailsState[putCode].detailShowLoader = 'close'
           this.workDetailsState[putCode].detailShowOffline = 'close'
