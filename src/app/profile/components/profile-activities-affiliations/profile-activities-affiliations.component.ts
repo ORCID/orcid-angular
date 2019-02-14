@@ -14,12 +14,8 @@ import { nestedListAnimation } from 'src/app/animations'
   animations: [nestedListAnimation],
 })
 export class ProfileActivitiesAffiliationsComponent implements OnInit {
-  panelState = true
-  toggle = true
-  affiliationUIGroupsTypes = AffiliationUIGroupsTypes
-  _profileAffiliationsGroup: AffiliationUIGroup
-
   @Input() id
+  _profileAffiliationsGroup: AffiliationUIGroup
   @Input()
   set profileAffiliationsGroup(value) {
     this._profileAffiliationsGroup = value
@@ -27,6 +23,10 @@ export class ProfileActivitiesAffiliationsComponent implements OnInit {
   get profileAffiliationsGroup() {
     return this._profileAffiliationsGroup
   }
+  panelState = true
+  affiliationUIGroupsTypes = AffiliationUIGroupsTypes
+  // TODO delete testSorting function and toggle
+  toggle = true
 
   constructor(private _affiliations: AffiliationsService) {}
 

@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment'
 export class ProfileBiographyComponent implements OnInit {
   constructor() {}
   @Input() profileGeneralData: Person
-  @Input() id: String
-  environment = environment
 
   ngOnInit() {}
 }

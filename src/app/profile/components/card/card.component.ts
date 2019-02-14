@@ -19,7 +19,6 @@ import { EventEmitter } from '@angular/core'
   animations: [rotateAnimation, heightAnimation, heightAnimationDefaultOpen],
 })
 export class CardComponent implements OnInit {
-  @Input() id
   @Input() title
   @Input() subtitle
   @Input() startDate
@@ -29,23 +28,12 @@ export class CardComponent implements OnInit {
   @Input() role
   @Input() type
   @Input() department
-  @Input() disambiguationSource
-  @Input() disambiguatedAffiliationSourceId
-  @Input() putCode
-  @Input() affiliationType
   @Input() stackState = 'open'
   @Input() state = 'close'
   @Input() isPreferred = true
   @Input() stackLength
   @Output() toggleDetails = new EventEmitter()
-  detailShowOffline = 'close'
-  detailShowLoader = 'close'
-  detailShowData = 'close'
-  affiliationDetails: AffiliationsDetails
-  isHanset
   _stackMode
-
-  @Output() stackModeChange = new EventEmitter()
   @Input()
   set stackMode(value) {
     this._stackMode = value
@@ -54,12 +42,11 @@ export class CardComponent implements OnInit {
   get stackMode() {
     return this._stackMode
   }
+  @Output() stackModeChange = new EventEmitter()
 
-  constructor(
-    private _profileService: ProfileService,
-    private _platformInfo: PlatformInfoService,
-    private ref: ChangeDetectorRef
-  ) {
+  isHanset
+
+  constructor(private _platformInfo: PlatformInfoService) {
     this._platformInfo.get().subscribe(person => {
       this.isHanset = person.handset
     })

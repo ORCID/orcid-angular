@@ -28,14 +28,10 @@
     <ng-content select="app-card-detail-line"></ng-content>
 
     <a class="detail-url" (click)="toggleDetails.emit()">
-      <ng-container
-        *ngIf="this.state === 'close'"
-        i18n="@@public_record.showDetails"
+      <ng-container *ngIf="state === 'close'" i18n="@@public_record.showDetails"
         >Show details</ng-container
       >
-      <ng-container
-        *ngIf="this.state === 'open'"
-        i18n="@@public_record.hideDetails"
+      <ng-container *ngIf="state === 'open'" i18n="@@public_record.hideDetails"
         >Hide details</ng-container
       >
     </a>

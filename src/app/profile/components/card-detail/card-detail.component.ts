@@ -18,15 +18,11 @@ import { AnimationEvent } from '@angular/animations'
   animations: [heightAnimation],
 })
 export class CardDetailComponent implements OnInit {
-  _orgDisambiguated: OrgDisambiguated
-
   @Input() detailShowLoader
   @Input() createdDate
   @Input() lastModified
   @Input() detailShowOffline
   @Input() detailShowData
-  @Input() url
-  @Input() prefixTitle
   _state
   @Input()
   set state(value) {
@@ -36,9 +32,7 @@ export class CardDetailComponent implements OnInit {
   get state() {
     return this._state
   }
-  @Output()
-  stateChange = new EventEmitter()
-
+  _orgDisambiguated: OrgDisambiguated
   @Input()
   set orgDisambiguated(value: OrgDisambiguated) {
     this._orgDisambiguated = value
@@ -47,16 +41,19 @@ export class CardDetailComponent implements OnInit {
   get orgDisambiguated(): OrgDisambiguated {
     return this._orgDisambiguated
   }
+  @Output()
+  stateChange = new EventEmitter()
+
+  regionCityCountry
 
   @ViewChild('contentProjection') contentProjection: ElementRef
 
-  regionCityCountry
   constructor() {}
 
   ngOnInit() {}
 
   // TODO an angular material alternative to check for content projection might be try
-  // More person on https://github.com/angular/angular/issues/26083#issuecomment-459605457
+  // More info on https://github.com/angular/angular/issues/26083#issuecomment-459605457
 
   hasContentProjection() {
     const detailContentProjection: NodeList = (this.contentProjection

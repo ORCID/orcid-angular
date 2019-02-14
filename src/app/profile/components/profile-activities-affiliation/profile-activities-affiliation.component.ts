@@ -13,13 +13,6 @@ import { first } from 'rxjs/operators'
   animations: [nestedListAnimation, itemMarginAnimation],
 })
 export class ProfileRecordsAffiliationComponent implements OnInit {
-  detailShowData: string
-  detailShowLoader: string
-  affiliationDetailsState = {}
-  affiliationCardState = {}
-  orgDisambiguated = {}
-  detailShowOffline
-  stackMode = false
   _affiliationStack
   @Input()
   set affiliationStack(value: AffiliationGroup) {
@@ -41,6 +34,13 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
     return this._affiliationStack
   }
   @Input() id
+  detailShowData: string
+  detailShowLoader: string
+  affiliationDetailsState = {}
+  affiliationCardState = {}
+  orgDisambiguated = {}
+  detailShowOffline
+  stackMode = false
 
   constructor(
     private _affiliationService: AffiliationsService,

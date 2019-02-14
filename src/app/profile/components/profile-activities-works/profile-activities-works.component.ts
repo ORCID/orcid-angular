@@ -12,13 +12,7 @@ import { nestedListAnimation } from 'src/app/animations'
   animations: [nestedListAnimation],
 })
 export class ProfileActivitiesWorksComponent implements OnInit {
-  panelState
-  _profileWorks: Works
-  profileWorksLoading = false
-  worksPageIndex = 0
-  workPageChangeTimer: Subscription
   @Input() id
-
   @Input()
   set profileWorks(value: Works) {
     this._profileWorks = value
@@ -32,6 +26,11 @@ export class ProfileActivitiesWorksComponent implements OnInit {
   get profileWorks(): Works {
     return this._profileWorks
   }
+  panelState
+  profileWorksLoading = false
+  worksPageIndex = 0
+  workPageChangeTimer: Subscription
+  _profileWorks: Works
 
   @ViewChild('worksExpansionPanel') worksExpansionPanel: ElementRef
   @ViewChild('worksExpansionPanel') paginatoOf: ElementRef

@@ -15,15 +15,6 @@ import { last, first } from 'rxjs/operators'
   animations: [nestedListAnimation, itemMarginAnimation],
 })
 export class ProfileActivitiesWorkComponent implements OnInit {
-  _profileworksStack: WorkGroup
-  workCardState = {}
-  stackMode = false
-  workDetailsState = {}
-  createdDate
-
-  workInfo: Work
-  noopAnimation = false
-
   @Input() id
   @Input()
   set profileworksStack(profileworksStack: WorkGroup) {
@@ -43,6 +34,13 @@ export class ProfileActivitiesWorkComponent implements OnInit {
   get profileworksStack() {
     return this._profileworksStack
   }
+
+  _profileworksStack: WorkGroup
+  workCardState = {}
+  stackMode = false
+  workDetailsState = {}
+  createdDate
+  noopAnimation = false
 
   constructor(
     private _worksService: WorksService,

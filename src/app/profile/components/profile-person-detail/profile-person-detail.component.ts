@@ -11,11 +11,23 @@ import { PlatformInfoService } from 'src/app/core'
 export class ProfileInfoDetailComponent implements OnInit {
   @Input() title
   @Input() columnDirection = false
+  @Input()
+  set list(list: string) {
+    this._list = list
+    if (list) {
+      this.hide = Object.keys(this.list).length === 0
+    }
+  }
+  get list() {
+    return this._list
+  }
+
   handset
   state = 'close'
   _list
 
   @HostBinding('class.hide') hide = true
+
   toggle(btn) {
     this.state = this.state === 'close' ? 'open' : 'close'
   }
@@ -27,16 +39,4 @@ export class ProfileInfoDetailComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  get list() {
-    return this._list
-  }
-
-  @Input()
-  set list(list: string) {
-    this._list = list
-    if (list) {
-      this.hide = Object.keys(this.list).length === 0
-    }
-  }
 }

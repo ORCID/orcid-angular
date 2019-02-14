@@ -35,7 +35,6 @@ export class CardDetailLineComponent implements OnInit {
   get content() {
     return this._content
   }
-
   @Input()
   set secondaryText(value) {
     this._secondaryText = value
@@ -48,7 +47,6 @@ export class CardDetailLineComponent implements OnInit {
   @HostBinding('class.margin-botton') _marginBotton = true
   @HostBinding('class.secondary-text') _secondaryText = false
   @HostBinding('class.primary-text') _primaryText = true
-
   @ViewChild('contentLabel') contentLabel: ElementRef
 
   constructor() {}
