@@ -1,51 +1,46 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { Affiliation } from 'src/app/types'
+import { Affiliation, AffiliationGroup } from 'src/app/types'
 import { ProfileService, OrganizationsService } from 'src/app/core'
 import { combineLatest } from 'rxjs'
-import { nestedListAnimation } from 'src/app/animations'
+import { nestedListAnimation, itemMarginAnimation } from 'src/app/animations'
 import { AffiliationsService } from '../../../core/affiliations/affiliations.service'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-profile-activities-affiliation',
   templateUrl: './profile-activities-affiliation.component.html',
   styleUrls: ['./profile-activities-affiliation.component.scss'],
-  animations: [nestedListAnimation],
+  animations: [nestedListAnimation, itemMarginAnimation],
 })
 export class ProfileRecordsAffiliationComponent implements OnInit {
   detailShowData: string
   detailShowLoader: string
-  state = 'close'
-  _affiliation
+  affiliationDetailsState = {}
+  affiliationCardState = {}
+  orgDisambiguated = {}
+  detailShowOffline
+  stackMode = false
+  _affiliationStack
   @Input()
-  set affiliation(value) {
-    // console.log(JSON.stringify(value.affiliations[0]))
-    this._affiliation = value
-    this.type = this.affiliation.defaultAffiliation.affiliationType.value
-    this.disambiguatedAffiliationSourceId = this.affiliation.defaultAffiliation
-      .disambiguatedAffiliationSourceId
-      ? this.affiliation.defaultAffiliation.disambiguatedAffiliationSourceId
-          .value
-      : ''
-
-    this.disambiguationSource = this.affiliation.defaultAffiliation
-      .disambiguationSource
-      ? this.affiliation.defaultAffiliation.disambiguationSource.value
-      : ''
-
-    this.putCode = this.affiliation.defaultAffiliation.putCode.value
+  set affiliationStack(value: AffiliationGroup) {
+    this._affiliationStack = value
+    value.affiliations.forEach(affiliation => {
+      this.affiliationCardState[affiliation.putCode.value] = {
+        stackState: this.isPrefered(affiliation) ? 'open' : 'close',
+      }
+      this.affiliationDetailsState[affiliation.putCode.value] = {
+        detailShowData: 'close',
+        detailShowLoader: 'close',
+        detailShowOffline: 'close',
+        state: 'close',
+      }
+    })
   }
 
-  get affiliation() {
-    return this._affiliation
+  get affiliationStack(): AffiliationGroup {
+    return this._affiliationStack
   }
-  type
-  disambiguationSource
-  disambiguatedAffiliationSourceId
-  @Input() putCode
   @Input() id
-  @Input() orgDisambiguated
-  @Input() detailShowOffline
-  affiliationDetails
 
   constructor(
     private _affiliationService: AffiliationsService,
@@ -54,45 +49,74 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
 
   ngOnInit() {}
 
-  toggleDetails() {
-    this.state = this.state === 'close' ? 'open' : 'close'
-    if (this.state === 'open') {
-      this.detailShowLoader = 'open'
-      this.detailShowData = 'close'
+  isPrefered(affiliation: Affiliation) {
+    const response =
+      affiliation && this.affiliationStack
+        ? this.affiliationStack.defaultAffiliation.putCode.value ===
+          affiliation.putCode.value
+        : false
+    return response
+  }
+
+  onClick(affiliation) {
+    Object.keys(this.affiliationCardState).forEach(key => {
+      this.affiliationCardState[key].stackState = 'close'
+    })
+    this.affiliationCardState[affiliation.putCode.value].stackState =
+      this.affiliationCardState[affiliation.putCode.value].stackState === 'open'
+        ? 'close'
+        : 'open'
+  }
+
+  toggleDetails(id: string, affiliation: Affiliation) {
+    const putCode = affiliation.putCode.value
+    this.affiliationDetailsState[putCode].state =
+      this.affiliationDetailsState[putCode].state === 'close' ? 'open' : 'close'
+    if (this.affiliationDetailsState[putCode].state === 'open') {
+      this.affiliationDetailsState[putCode].detailShowLoader = 'open'
+      this.affiliationDetailsState[putCode].detailShowData = 'close'
 
       const combined = combineLatest(
         this._organizationsService.getOrgDisambiguated(
-          this.disambiguationSource,
-          this.disambiguatedAffiliationSourceId
+          affiliation.disambiguationSource.value,
+          affiliation.disambiguatedAffiliationSourceId.value
         ),
-        this._affiliationService.getAffiliationDetails(
-          this.id,
-          this.type,
-          this.putCode
+        this._affiliationService.getAffiliationsDetails(
+          id,
+          affiliation.affiliationType.value,
+          putCode
         )
       )
 
-      combined.subscribe(
+      combined.pipe(first()).subscribe(
         response => {
-          // console.log(JSON.stringify(response[1]))
-          this.orgDisambiguated = response[0]
-          this.affiliationDetails = response[1]
-          this.detailShowLoader = 'close-with-none-opacity'
-          this.detailShowData = 'open'
-          this.detailShowOffline = 'close'
+          this.orgDisambiguated[putCode] = response[0]
+          this.affiliationDetailsState[putCode].detailShowLoader =
+            'close-with-none-opacity'
+          this.affiliationDetailsState[putCode].detailShowData = 'open'
+          this.affiliationDetailsState[putCode].detailShowOffline = 'close'
         },
         error => {
           if (error.status === 0) {
-            this.detailShowOffline = 'open'
-            this.detailShowLoader = 'close'
-            this.detailShowData = 'close'
+            this.affiliationDetailsState[putCode].detailShowOffline = 'open'
+            this.affiliationDetailsState[putCode].detailShowLoader = 'close'
+            this.affiliationDetailsState[putCode].detailShowData = 'close'
           }
         }
       )
     } else {
-      this.detailShowLoader = 'close'
-      this.detailShowData = 'close'
-      this.detailShowOffline = 'close'
+      this.affiliationDetailsState[putCode].detailShowLoader = 'close'
+      this.affiliationDetailsState[putCode].detailShowData = 'close'
+      this.affiliationDetailsState[putCode].detailShowOffline = 'close'
     }
+  }
+
+  /**
+   * RegEx funtion to check if the elements contains a URL
+   */
+  isUrl(element) {
+    const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
+    const regex = new RegExp(expression)
+    return element.match(regex)
   }
 }

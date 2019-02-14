@@ -73,8 +73,9 @@ export interface Affiliation {
   createdDate: MonthDayYearDate
   lastModified: MonthDayYearDate
   url: Value
-  orgDisambiguatedExternalIdentifiers: {} // pTODO is this always empty?
+  orgDisambiguatedExternalIdentifiers: {} // TODO is this always empty?
   affiliationExternalIdentifiers: {} // TODO is this always empty?
+  affiliationType: Value
 }
 
 export interface Visibility {

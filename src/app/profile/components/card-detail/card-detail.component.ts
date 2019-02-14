@@ -20,9 +20,6 @@ import { AnimationEvent } from '@angular/animations'
 export class CardDetailComponent implements OnInit {
   _orgDisambiguated: OrgDisambiguated
 
-  // What ever input that is not reused by multiple wrappers might be moved out of the component
-
-  // At least used on two wrappers
   @Input() detailShowLoader
   @Input() createdDate
   @Input() lastModified
@@ -42,9 +39,6 @@ export class CardDetailComponent implements OnInit {
   @Output()
   stateChange = new EventEmitter()
 
-  // only used by Affiliations wrapper
-  @Input() sourceType
-  @Input() affiliationDetails: AffiliationsDetails
   @Input()
   set orgDisambiguated(value: OrgDisambiguated) {
     this._orgDisambiguated = value
@@ -93,14 +87,6 @@ export class CardDetailComponent implements OnInit {
           : this.orgDisambiguated.country
         : ''
     }
-  }
-  /**
-   * RegEx funtion to check if the elements contains a URL
-   */
-  isUrl(element) {
-    const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
-    const regex = new RegExp(expression)
-    return element.match(regex)
   }
 
   onAnimationEvent(event: AnimationEvent) {

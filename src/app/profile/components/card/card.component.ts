@@ -7,11 +7,7 @@ import {
 } from 'src/app/animations'
 import { PlatformInfoService, ProfileService } from 'src/app/core'
 import { AnimationEvent } from '@angular/animations'
-import {
-  AffiliationsDetails,
-  OrgDisambiguated,
-  Affiliation,
-} from 'src/app/types'
+import { AffiliationsDetails, Affiliation } from 'src/app/types'
 import { HostListener } from '@angular/core'
 import { Output } from '@angular/core'
 import { EventEmitter } from '@angular/core'
@@ -45,7 +41,6 @@ export class CardComponent implements OnInit {
   detailShowOffline = 'close'
   detailShowLoader = 'close'
   detailShowData = 'close'
-  orgDisambiguated: OrgDisambiguated
   affiliationDetails: AffiliationsDetails
   isHanset
   _stackMode

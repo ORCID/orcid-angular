@@ -56,6 +56,43 @@ export class AffiliationsService implements ActivityService {
     return this.affiliationsSubject.asObservable()
   }
 
+  getAffiliationsDetails(id, type, putCode): Observable<AffiliationUIGroup[]> {
+    return this.getAffiliationDetails(id, putCode, type).pipe(
+      tap(data => {
+        if (data && data.url && data.url.value) {
+          this.lastEmitedValue.forEach(affiliations => {
+            affiliations.affiliationGroup.map(affiliationsStack => {
+              affiliationsStack.affiliations.map(affiliation => {
+                if (
+                  affiliation.affiliationType.value === type &&
+                  affiliation.putCode.value === putCode
+                ) {
+                  affiliation.url.value = data.url.value
+                }
+              })
+            })
+          })
+        }
+        this.affiliationsSubject.next(this.lastEmitedValue)
+      }),
+      switchMap(() => {
+        return this.affiliationsSubject.asObservable()
+      })
+    )
+  }
+
+  private getAffiliationDetails(id, putCode, type) {
+    return this._http
+      .get<AffiliationsDetails>(
+        environment.API_WEB +
+          `${id}/affiliationDetails.json?id=${putCode}&type=${type}`
+      )
+      .pipe(
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
+  }
+
   private getAffiliations(id: string) {
     return this._http
       .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
@@ -65,13 +102,6 @@ export class AffiliationsService implements ActivityService {
         map(data => this._affiliationsSortService.transform(data)),
         catchError(this._errorHandler.handleError)
       )
-  }
-
-  getAffiliationDetails(id, type, value): Observable<AffiliationsDetails> {
-    return this._http.get<AffiliationsDetails>(
-      environment.API_WEB +
-        `${id}/affiliationDetails.json?id=${value}&type=${type}`
-    )
   }
 
   set(value): Observable<AffiliationUIGroup[]> {

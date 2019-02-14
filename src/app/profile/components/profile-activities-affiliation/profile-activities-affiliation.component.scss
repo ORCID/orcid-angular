@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  margin-top: 22px;
+  flex-direction: column;
+  div {
+    app-card {
+      margin-top: 0;
+    }
+  }
+}
+
+app-card {
+  overflow: hidden;
+}
+
+.margin-top-1 {
+  margin: 8px 0;
+}
+.margin-top-2 {
+  margin-top: 28px;
+}
+.padding-level-2 {
+  padding-left: 8px;
+}
+.padding-level-3 {
+  padding-left: 16px;
+}

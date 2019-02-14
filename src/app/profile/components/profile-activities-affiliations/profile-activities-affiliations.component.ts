@@ -17,9 +17,16 @@ export class ProfileActivitiesAffiliationsComponent implements OnInit {
   panelState = true
   toggle = true
   affiliationUIGroupsTypes = AffiliationUIGroupsTypes
+  _profileAffiliationsGroup: AffiliationUIGroup
 
   @Input() id
-  @Input() profileAffiliationsGroup: AffiliationUIGroup
+  @Input()
+  set profileAffiliationsGroup(value) {
+    this._profileAffiliationsGroup = value
+  }
+  get profileAffiliationsGroup() {
+    return this._profileAffiliationsGroup
+  }
 
   constructor(private _affiliations: AffiliationsService) {}
 
@@ -39,7 +46,7 @@ export class ProfileActivitiesAffiliationsComponent implements OnInit {
    */
   testSorting() {
     this.toggle = !this.toggle
-    this._affiliations.sort(this.toggle)
+    this._affiliations.sort(this.toggle).subscribe(x => {})
   }
 
   ngOnInit() {}

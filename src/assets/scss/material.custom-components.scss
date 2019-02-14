@@ -7,6 +7,7 @@
 @import '../../app/profile/components/profile-person-detail/profile-person-detail.component.scss-theme.scss';
 @import '../../app/profile/components/card/card.component.scss-theme.scss';
 @import '../../app/profile/components/profile-activities/profile-activities.component.scss-theme.scss';
+@import '../../app/profile/components/profile-activities-affiliation/profile-activities-affiliation.component.scss-theme.scss';
 @import '../../app/profile/components/card-detail/card-detail.component.scss-theme.scss';
 @import '../../app/profile/components/card-detail-line/card-detail-line.component.scss-theme.scss';
 @import '../../app/shared/components/offline-message/offline-message.component.scss-theme.scss';
@@ -25,6 +26,7 @@
   @include card-detail-theme($theme);
   @include offline-message-theme($theme);
   @include card-detail-line-theme($theme);
+  @include profile-activities-affiliation-theme($theme);
 }
 
 @mixin custom-components-typography($custom) {
