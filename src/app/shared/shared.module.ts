@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { CopyOnClickDirective } from './directives/copy-on-click/copy-on-click.directive'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.component'
+import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-country.pipe'
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.c
     OfflineMessageComponent,
     CopyOnClickDirective,
     CopyOnClickComponent,
+    RegionCityCountryPipe,
   ],
   exports: [
     MatDivider,
@@ -41,6 +43,7 @@ import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.c
     MatPaginatorModule,
     CopyOnClickDirective,
     MatSnackBarModule,
+    RegionCityCountryPipe,
   ],
   entryComponents: [CopyOnClickComponent],
   providers: [], // Should not provide anything

@@ -32,19 +32,8 @@ export class CardDetailComponent implements OnInit {
   get state() {
     return this._state
   }
-  _orgDisambiguated: OrgDisambiguated
-  @Input()
-  set orgDisambiguated(value: OrgDisambiguated) {
-    this._orgDisambiguated = value
-    this.regionCityCountryPipe()
-  }
-  get orgDisambiguated(): OrgDisambiguated {
-    return this._orgDisambiguated
-  }
   @Output()
   stateChange = new EventEmitter()
-
-  regionCityCountry
 
   @ViewChild('contentProjection') contentProjection: ElementRef
 
@@ -62,27 +51,6 @@ export class CardDetailComponent implements OnInit {
       if (detailContentProjection.item(x).nodeType !== 8) {
         return true
       }
-    }
-  }
-
-  // TODO move the following function to its own pipe
-  regionCityCountryPipe() {
-    if (this.orgDisambiguated) {
-      this.regionCityCountry = ''
-      this.regionCityCountry += this.orgDisambiguated.region
-        ? this.orgDisambiguated.region
-        : ''
-      this.regionCityCountry += this.orgDisambiguated.city
-        ? this.orgDisambiguated.region
-          ? ', ' + this.orgDisambiguated.city
-          : this.orgDisambiguated.city
-        : ''
-
-      this.regionCityCountry += this.orgDisambiguated.country
-        ? this.orgDisambiguated.city
-          ? ', ' + this.orgDisambiguated.country
-          : this.orgDisambiguated.country
-        : ''
     }
   }
 

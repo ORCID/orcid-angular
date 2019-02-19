@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { Affiliation, AffiliationGroup } from 'src/app/types'
 import { ProfileService, OrganizationsService } from 'src/app/core'
-import { combineLatest } from 'rxjs'
+import { combineLatest, forkJoin, of } from 'rxjs'
 import { nestedListAnimation, itemMarginAnimation } from 'src/app/animations'
 import { AffiliationsService } from '../../../core/affiliations/affiliations.service'
 import { first } from 'rxjs/operators'
@@ -34,12 +34,9 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
     return this._affiliationStack
   }
   @Input() id
-  detailShowData: string
-  detailShowLoader: string
   affiliationDetailsState = {}
   affiliationCardState = {}
   orgDisambiguated = {}
-  detailShowOffline
   stackMode = false
 
   constructor(
@@ -59,6 +56,7 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
   }
 
   onClick(affiliation) {
+    console.log(affiliation)
     Object.keys(this.affiliationCardState).forEach(key => {
       this.affiliationCardState[key].stackState = 'close'
     })
@@ -76,19 +74,31 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
       this.affiliationDetailsState[putCode].detailShowLoader = 'open'
       this.affiliationDetailsState[putCode].detailShowData = 'close'
 
-      const combined = combineLatest(
-        this._organizationsService.getOrgDisambiguated(
-          affiliation.disambiguationSource.value,
-          affiliation.disambiguatedAffiliationSourceId.value
-        ),
-        this._affiliationService.getAffiliationsDetails(
-          id,
-          affiliation.affiliationType.value,
-          putCode
+      const combined = []
+      if (affiliation.disambiguationSource) {
+        combined.push(
+          this._organizationsService.getOrgDisambiguated(
+            affiliation.disambiguationSource.value,
+            affiliation.disambiguatedAffiliationSourceId.value
+          )
         )
-      )
+      } else {
+        combined.push(of(null))
+      }
 
-      combined.pipe(first()).subscribe(
+      if (affiliation.affiliationType) {
+        combined.push(
+          this._affiliationService.getAffiliationsDetails(
+            id,
+            affiliation.affiliationType.value,
+            putCode
+          )
+        )
+      } else {
+        combined.push(of(null))
+      }
+
+      combineLatest(combined).subscribe(
         response => {
           this.orgDisambiguated[putCode] = response[0]
           this.affiliationDetailsState[putCode].detailShowLoader =
