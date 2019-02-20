@@ -1,16 +1,6 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { nestedListAnimation } from 'src/app/animations'
-import {
-  AffiliationUIGroup,
-  AffiliationUIGroupsTypes,
-  Works,
-  AffiliationGroup,
-} from 'src/app/types'
-import { AffiliationsSortService } from 'src/app/core'
-import { ChangeDetectorRef } from '@angular/core'
-import { PageEvent } from '@angular/material'
-import { WorksService } from '../../../core/works/works.service'
-import { Subscription, timer } from 'rxjs'
+import { AffiliationUIGroup } from 'src/app/types'
 
 @Component({
   selector: 'app-profile-activities',

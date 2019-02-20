@@ -1,12 +1,11 @@
 import {
   Component,
-  OnInit,
-  Inject,
   ElementRef,
-  ViewChild,
   HostBinding,
+  Input,
+  OnInit,
+  ViewChild,
 } from '@angular/core'
-import { Input } from '@angular/core'
 
 @Component({
   selector: 'app-card-detail-line',

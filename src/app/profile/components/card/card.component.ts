@@ -1,16 +1,10 @@
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core'
-import { combineLatest } from 'rxjs'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import {
   heightAnimation,
-  rotateAnimation,
   heightAnimationDefaultOpen,
+  rotateAnimation,
 } from 'src/app/animations'
-import { PlatformInfoService, ProfileService } from 'src/app/core'
-import { AnimationEvent } from '@angular/animations'
-import { AffiliationsDetails, Affiliation } from 'src/app/types'
-import { HostListener } from '@angular/core'
-import { Output } from '@angular/core'
-import { EventEmitter } from '@angular/core'
+import { PlatformInfoService } from 'src/app/core'
 
 @Component({
   selector: 'app-card',

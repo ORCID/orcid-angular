@@ -1,7 +1,8 @@
-import { Directive, HostListener, Inject, ElementRef } from '@angular/core'
-import { WINDOW } from 'src/app/core'
 import { DOCUMENT } from '@angular/common'
+import { Directive, ElementRef, HostListener, Inject } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
+import { WINDOW } from 'src/app/core'
+
 import { CopyOnClickComponent } from '../../components/copy-on-click/copy-on-click.component'
 
 @Directive({

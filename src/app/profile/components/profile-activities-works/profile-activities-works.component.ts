@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core'
-import { Works, WorkGroup } from 'src/app/types'
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
 import { PageEvent } from '@angular/material'
 import { Subscription, timer } from 'rxjs'
-import { WorksService } from 'src/app/core/works/works.service'
 import { nestedListAnimation } from 'src/app/animations'
+import { WorksService } from 'src/app/core/works/works.service'
+import { WorkGroup, Works } from 'src/app/types'
 
 @Component({
   selector: 'app-profile-activities-works',

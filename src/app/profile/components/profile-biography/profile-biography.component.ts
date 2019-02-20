@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Person } from 'src/app/types'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-profile-biography',

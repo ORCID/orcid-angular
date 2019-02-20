@@ -1,9 +1,9 @@
 import {
+  Address,
+  Biography,
+  Email,
   OtherName,
   ResearcherUrl,
-  Address,
-  Email,
-  Biography,
 } from './common.endpoint'
 
 interface PublicGroupedOtherNames {

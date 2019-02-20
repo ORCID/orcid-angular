@@ -1,4 +1,4 @@
-import { Value, MonthDayYearDate } from './common.endpoint'
+import { MonthDayYearDate, Value } from './common.endpoint'
 
 export interface Works {
   nextOffset: number

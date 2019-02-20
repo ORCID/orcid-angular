@@ -2,10 +2,9 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, flatMap, retry } from 'rxjs/operators'
-import { Parser } from 'xml2js'
-
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { environment } from 'src/environments/environment'
+import { Parser } from 'xml2js'
 
 @Injectable({
   providedIn: 'root',

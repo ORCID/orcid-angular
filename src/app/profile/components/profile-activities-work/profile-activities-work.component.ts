@@ -1,12 +1,10 @@
-import { Component, OnInit, Input, Output, HostListener } from '@angular/core'
-import { WorkGroup } from '../../../types'
-import { nestedListAnimation, itemMarginAnimation } from 'src/app/animations'
-import { WorksService } from 'src/app/core/works/works.service'
-import { Work } from 'src/app/types/works.endpoint'
-import { merge, of } from 'rxjs'
+import { Component, Input, OnInit } from '@angular/core'
+import { first } from 'rxjs/operators'
+import { itemMarginAnimation, nestedListAnimation } from 'src/app/animations'
 import { PlatformInfoService } from 'src/app/core'
-import { platform } from 'os'
-import { last, first } from 'rxjs/operators'
+import { WorksService } from 'src/app/core/works/works.service'
+import { WorkGroup } from 'src/app/types'
+import { Work } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-profile-activities-work',

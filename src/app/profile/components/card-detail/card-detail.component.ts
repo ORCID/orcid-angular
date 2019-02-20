@@ -1,15 +1,14 @@
+import { AnimationEvent } from '@angular/animations'
 import {
   Component,
+  ElementRef,
+  EventEmitter,
   Input,
   OnInit,
   Output,
-  EventEmitter,
   ViewChild,
-  ElementRef,
 } from '@angular/core'
 import { heightAnimation } from 'src/app/animations'
-import { AffiliationsDetails, OrgDisambiguated } from 'src/app/types'
-import { AnimationEvent } from '@angular/animations'
 
 @Component({
   selector: 'app-card-detail',

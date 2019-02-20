@@ -1,24 +1,14 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of } from 'rxjs'
+import { combineLatest, Observable } from 'rxjs'
 import { catchError } from 'rxjs/internal/operators/catchError'
 import { retry } from 'rxjs/internal/operators/retry'
-import { map, tap } from 'rxjs/operators'
-import { combineLatest } from 'rxjs'
-import {
-  Affiliations,
-  AffiliationsDetails,
-  AffiliationUIGroup,
-  OrgDisambiguated,
-  Person,
-  Works,
-} from 'src/app/types'
+import { tap } from 'rxjs/operators'
+import { AffiliationUIGroup, Person, Works } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
-import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
-import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { AffiliationsService } from '../affiliations/affiliations.service'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { WorksService } from '../works/works.service'
 
 @Injectable({

@@ -1,28 +1,18 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { Injectable } from '@angular/core'
+import { Observable, ReplaySubject } from 'rxjs'
+import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
+import {
+  Affiliations,
+  AffiliationsDetails,
+  AffiliationUIGroup,
+} from 'src/app/types'
+import { ActivityService } from 'src/app/types/activities-service.local'
+import { environment } from 'src/environments/environment'
+
 import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
 import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
-import {
-  AffiliationUIGroup,
-  Affiliations,
-  OrgDisambiguated,
-  AffiliationsDetails,
-} from 'src/app/types'
-import { Observable, BehaviorSubject, ReplaySubject, of } from 'rxjs'
-import { environment } from 'src/environments/environment'
-import {
-  retry,
-  map,
-  catchError,
-  share,
-  filter,
-  first,
-  tap,
-  switchMap,
-  combineLatest,
-} from 'rxjs/operators'
-import { ActivityService } from 'src/app/types/activities-service.local'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',

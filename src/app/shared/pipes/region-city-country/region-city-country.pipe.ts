@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { OrgDisambiguated } from '../../../types'
+import { OrgDisambiguated } from 'src/app/types'
 
 @Pipe({
   name: 'regionCityCountry',

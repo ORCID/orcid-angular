@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { combineLatest, of } from 'rxjs'
+import { itemMarginAnimation, nestedListAnimation } from 'src/app/animations'
+import { OrganizationsService, AffiliationsService } from 'src/app/core'
 import { Affiliation, AffiliationGroup } from 'src/app/types'
-import { ProfileService, OrganizationsService } from 'src/app/core'
-import { combineLatest, forkJoin, of } from 'rxjs'
-import { nestedListAnimation, itemMarginAnimation } from 'src/app/animations'
-import { AffiliationsService } from '../../../core/affiliations/affiliations.service'
 import { first } from 'rxjs/operators'
 
 @Component({
@@ -56,7 +55,6 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
   }
 
   onClick(affiliation) {
-    console.log(affiliation)
     Object.keys(this.affiliationCardState).forEach(key => {
       this.affiliationCardState[key].stackState = 'close'
     })
@@ -68,25 +66,37 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
 
   toggleDetails(id: string, affiliation: Affiliation) {
     const putCode = affiliation.putCode.value
-    this.affiliationDetailsState[putCode].state =
-      this.affiliationDetailsState[putCode].state === 'close' ? 'open' : 'close'
-    if (this.affiliationDetailsState[putCode].state === 'open') {
-      this.affiliationDetailsState[putCode].detailShowLoader = 'open'
-      this.affiliationDetailsState[putCode].detailShowData = 'close'
 
-      const combined = []
-      if (affiliation.disambiguationSource) {
-        combined.push(
-          this._organizationsService.getOrgDisambiguated(
-            affiliation.disambiguationSource.value,
-            affiliation.disambiguatedAffiliationSourceId.value
+    // Only if is not loading execute user request
+    if (
+      this.affiliationDetailsState[putCode].detailShowLoader.indexOf('close') >=
+      0
+    ) {
+      // Change current state
+      this.affiliationDetailsState[putCode].state =
+        this.affiliationDetailsState[putCode].state === 'close'
+          ? 'open'
+          : 'close'
+
+      // If is opening calls the server for the affiliation details
+      if (this.affiliationDetailsState[putCode].state === 'open') {
+        this.affiliationDetailsState[putCode].detailShowLoader = 'open'
+        this.affiliationDetailsState[putCode].detailShowData = 'close'
+
+        const combined = []
+
+        // Adds call for disambiguationSource if the affiliation has
+        if (affiliation.disambiguationSource) {
+          combined.push(
+            this._organizationsService.getOrgDisambiguated(
+              affiliation.disambiguationSource.value,
+              affiliation.disambiguatedAffiliationSourceId.value
+            )
           )
-        )
-      } else {
-        combined.push(of(null))
-      }
+        } else {
+          combined.push(of(null))
+        }
 
-      if (affiliation.affiliationType) {
         combined.push(
           this._affiliationService.getAffiliationsDetails(
             id,
@@ -94,30 +104,31 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
             putCode
           )
         )
-      } else {
-        combined.push(of(null))
-      }
 
-      combineLatest(combined).subscribe(
-        response => {
-          this.orgDisambiguated[putCode] = response[0]
-          this.affiliationDetailsState[putCode].detailShowLoader =
-            'close-with-none-opacity'
-          this.affiliationDetailsState[putCode].detailShowData = 'open'
-          this.affiliationDetailsState[putCode].detailShowOffline = 'close'
-        },
-        error => {
-          if (error.status === 0) {
-            this.affiliationDetailsState[putCode].detailShowOffline = 'open'
-            this.affiliationDetailsState[putCode].detailShowLoader = 'close'
-            this.affiliationDetailsState[putCode].detailShowData = 'close'
-          }
-        }
-      )
-    } else {
-      this.affiliationDetailsState[putCode].detailShowLoader = 'close'
-      this.affiliationDetailsState[putCode].detailShowData = 'close'
-      this.affiliationDetailsState[putCode].detailShowOffline = 'close'
+        // Call http requests at the same time
+        combineLatest(combined)
+          .pipe(first())
+          .subscribe(
+            response => {
+              this.orgDisambiguated[putCode] = response[0]
+              this.affiliationDetailsState[putCode].detailShowLoader =
+                'close-with-none-opacity'
+              this.affiliationDetailsState[putCode].detailShowData = 'open'
+              this.affiliationDetailsState[putCode].detailShowOffline = 'close'
+            },
+            error => {
+              if (error.status === 0) {
+                this.affiliationDetailsState[putCode].detailShowOffline = 'open'
+                this.affiliationDetailsState[putCode].detailShowLoader = 'close'
+                this.affiliationDetailsState[putCode].detailShowData = 'close'
+              }
+            }
+          )
+      } else {
+        this.affiliationDetailsState[putCode].detailShowLoader = 'close'
+        this.affiliationDetailsState[putCode].detailShowData = 'close'
+        this.affiliationDetailsState[putCode].detailShowOffline = 'close'
+      }
     }
   }
 

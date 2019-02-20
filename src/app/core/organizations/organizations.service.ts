@@ -1,9 +1,10 @@
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { AffiliationsDetails, OrgDisambiguated } from 'src/app/types'
+import { catchError, retry } from 'rxjs/operators'
+import { OrgDisambiguated } from 'src/app/types'
+
 import { environment } from '../../../environments/environment'
-import { HttpClient } from '@angular/common/http'
-import { retry, catchError, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({

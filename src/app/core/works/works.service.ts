@@ -1,21 +1,11 @@
-import { Injectable } from '@angular/core'
-import { Observable, BehaviorSubject, Subject, ReplaySubject } from 'rxjs'
-import { Works, Work, ActivityService } from 'src/app/types'
-import {
-  retry,
-  catchError,
-  filter,
-  last,
-  first,
-  tap,
-  map,
-  mergeMap,
-  startWith,
-  switchMap,
-} from 'rxjs/operators'
-import { environment } from 'src/environments/environment'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable, ReplaySubject } from 'rxjs'
+import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
+import { ActivityService, Work, Works } from 'src/app/types'
+import { environment } from 'src/environments/environment'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',

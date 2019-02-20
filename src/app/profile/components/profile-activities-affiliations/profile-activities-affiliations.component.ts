@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { nestedListAnimation } from 'src/app/animations'
+import { AffiliationsService } from 'src/app/core/affiliations/affiliations.service'
 import {
+  AffiliationGroup,
   AffiliationUIGroup,
   AffiliationUIGroupsTypes,
-  AffiliationGroup,
 } from 'src/app/types'
-import { AffiliationsService } from 'src/app/core/affiliations/affiliations.service'
-import { nestedListAnimation } from 'src/app/animations'
 
 @Component({
   selector: 'app-profile-activities-affiliations',
