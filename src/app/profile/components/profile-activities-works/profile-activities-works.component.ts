@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core'
-import { Works } from 'src/app/types'
+import { Works, WorkGroup } from 'src/app/types'
 import { PageEvent } from '@angular/material'
 import { Subscription, timer } from 'rxjs'
 import { WorksService } from 'src/app/core/works/works.service'
@@ -57,5 +57,9 @@ export class ProfileActivitiesWorksComponent implements OnInit {
       this._worksService.sort(this.id, event.pageIndex * 50)
       this.workPageChangeTimer.unsubscribe()
     })
+  }
+
+  trackByProfileworksStack(item, value: WorkGroup) {
+    return value.defaultPutCode
   }
 }

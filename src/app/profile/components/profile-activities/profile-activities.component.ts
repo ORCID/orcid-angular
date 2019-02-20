@@ -24,4 +24,8 @@ export class ProfileRecordsComponent implements OnInit {
   @Input() profileAffiliationUiGroups
 
   ngOnInit() {}
+
+  trackByProfileAffiliationUiGroups(index, item: AffiliationUIGroup) {
+    return item.type
+  }
 }

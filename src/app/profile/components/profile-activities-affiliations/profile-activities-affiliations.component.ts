@@ -33,9 +33,6 @@ export class ProfileActivitiesAffiliationsComponent implements OnInit {
   trackByAffiliationGroup(index, item: AffiliationGroup) {
     return item.activePutCode
   }
-  trackByProfileAffiliationUiGroups(index, item: AffiliationUIGroup) {
-    return item.type
-  }
 
   /**
    * The following function is a call to a temporall sorting method.
@@ -46,7 +43,7 @@ export class ProfileActivitiesAffiliationsComponent implements OnInit {
    */
   testSorting() {
     this.toggle = !this.toggle
-    this._affiliations.sort(this.toggle).subscribe(x => {})
+    this._affiliations.sort(this.toggle).subscribe()
   }
 
   ngOnInit() {}

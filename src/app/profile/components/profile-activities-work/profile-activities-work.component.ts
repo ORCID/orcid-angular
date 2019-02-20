@@ -85,7 +85,7 @@ export class ProfileActivitiesWorkComponent implements OnInit {
       this._worksService
         .getDetails(this.id, workParam.putCode.value)
         .pipe(first())
-        .subscribe(data => {
+        .subscribe(() => {
           this.workDetailsState[putCode].detailShowData = 'open'
           this.workDetailsState[putCode].detailShowLoader = 'close'
           this.workDetailsState[putCode].detailShowOffline = 'close'
