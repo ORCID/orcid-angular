@@ -2,11 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
-import {
-  Affiliations,
-  AffiliationsDetails,
-  AffiliationUIGroup,
-} from 'src/app/types'
+import { Affiliations, Affiliation, AffiliationUIGroup } from 'src/app/types'
 import { ActivityService } from 'src/app/types/activities-service.local'
 import { environment } from 'src/environments/environment'
 
@@ -71,9 +67,9 @@ export class AffiliationsService implements ActivityService {
     )
   }
 
-  private getAffiliationDetails(id, putCode, type) {
+  private getAffiliationDetails(id, putCode, type): Observable<Affiliation> {
     return this._http
-      .get<AffiliationsDetails>(
+      .get<Affiliation>(
         environment.API_WEB +
           `${id}/affiliationDetails.json?id=${putCode}&type=${type}`
       )
@@ -83,7 +79,7 @@ export class AffiliationsService implements ActivityService {
       )
   }
 
-  private getAffiliations(id: string) {
+  private getAffiliations(id: string): Observable<AffiliationUIGroup[]> {
     return this._http
       .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
       .pipe(
