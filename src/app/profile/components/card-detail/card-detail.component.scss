@@ -1,0 +1,58 @@
+.margin-top {
+  margin-top: 28px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+  align-items: center;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.date-container > div {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  > div {
+    margin-left: 3px;
+  }
+}
+
+body[dir] {
+  :host {
+    .date-container > div {
+      margin-left: 0px;
+      margin-right: 10px;
+      > div {
+        margin-left: 0px;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+.secondary-container {
+  overflow: hidden;
+}
+
+.single-line {
+  display: flex;
+  flex-direction: row;
+  a {
+    margin-left: 5px;
+  }
+}
+
+app-offline-message {
+  display: block;
+}
+
+.content {
+  padding: 0;
+  padding: 24px 0;
+}

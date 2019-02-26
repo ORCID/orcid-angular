@@ -47,24 +47,25 @@ export interface AffiliationGroup {
 
 export interface Affiliation {
   visibility: Visibility
-  errors: [any] // TODO is this always empty?
+  errors: any[]
   putCode: Value
   affiliationName: Value
   city: Value
   region: Value
   country: Value
   roleTitle: Value
-  countryForDisplay: {} // TODO is this always empty?
+  countryForDisplay?: any // TODO is this always empty?
   departmentName: Value
+  affiliationType: Value
   disambiguatedAffiliationSourceId: Value
   disambiguationSource: Value
-  orgDisambiguatedCity: {} // TODO is this always empty?
-  orgDisambiguatedCountry: {} // TODO is this always empty?
+  orgDisambiguatedCity?: any // TODO is this always empty?
+  orgDisambiguatedCountry?: any // TODO is this always empty?
   orgDisambiguatedId: Value
-  orgDisambiguatedName: {} // TODO is this always empty?
-  orgDisambiguatedRegion: {} // TODO is this always empty?
-  orgDisambiguatedUrl: {} // TODO is this always empty?
-  affiliationTypeForDisplay: {} // TODO is this always empty?
+  orgDisambiguatedName?: any // TODO is this always empty?
+  orgDisambiguatedRegion?: any // TODO is this always empty?
+  orgDisambiguatedUrl?: any // TODO is this always empty?
+  affiliationTypeForDisplay?: any // TODO is this always empty?
   startDate: MonthDayYearDate
   endDate: MonthDayYearDate
   sourceName: string
@@ -73,8 +74,8 @@ export interface Affiliation {
   createdDate: MonthDayYearDate
   lastModified: MonthDayYearDate
   url: Value
-  orgDisambiguatedExternalIdentifiers: {} // pTODO is this always empty?
-  affiliationExternalIdentifiers: {} // TODO is this always empty?
+  orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
+  affiliationExternalIdentifiers?: any // TODO is this always empty?
 }
 
 export interface Visibility {

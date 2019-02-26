@@ -1,0 +1,27 @@
+mat-expansion-panel-header {
+  cursor: pointer;
+}
+
+h2.mat-subheading-2 {
+  margin: 0;
+}
+
+h2.itemsAmount {
+  margin-left: 3px;
+}
+
+body[dir] {
+  :host {
+    h2.itemsAmount {
+      margin-left: 0px;
+      margin-right: 3px;
+    }
+  }
+}
+
+.progress-spinner-container {
+  display: flex;
+  justify-content: space-around;
+  height: 150px;
+  align-items: center;
+}

@@ -1,0 +1,21 @@
+@import '../../../../assets/scss/material.theme';
+@import '~@angular/material/theming';
+
+$config: mat-typography-config();
+@mixin card-detail-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  app-card-detail {
+    border-color: map-get($foreground, divider);
+
+    .detail-container {
+      color: $dark-secondary-text;
+    }
+  }
+}
+
+@mixin card-detail-typography($config) {
+}

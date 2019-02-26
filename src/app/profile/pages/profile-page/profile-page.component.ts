@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment.prod'
 })
 export class ProfilePageComponent implements OnInit {
   @HostBinding('class.mdc-layout-grid__inner') grid = true
+
   id
   profileAffiliationUiGroups: AffiliationUIGroup[]
   profileWorks: Works
@@ -24,30 +25,11 @@ export class ProfilePageComponent implements OnInit {
   ) {
     _activeRoute.parent.url.subscribe(route => {
       this.id = route[0].path
-      _profileService.getRecords(this.id).subscribe(data => {
-        this.profileAffiliationUiGroups = data[0]
-        this.profileWorks = data[1]
-      })
-
-      _profileService.getPerson(this.id).subscribe(
+      _profileService.get(this.id).subscribe(
         data => {
-          this.profileGeneralData = data
-          // Changes publicGroupedAddresses keys for full country names
-          if (this.profileGeneralData.publicGroupedAddresses) {
-            Object.keys(this.profileGeneralData.publicGroupedAddresses).map(
-              key => {
-                if (
-                  this.profileGeneralData.countryNames &&
-                  this.profileGeneralData.countryNames[key]
-                ) {
-                  this.profileGeneralData.publicGroupedAddresses[
-                    this.profileGeneralData.countryNames[key]
-                  ] = this.profileGeneralData.publicGroupedAddresses[key]
-                  delete this.profileGeneralData.publicGroupedAddresses[key]
-                }
-              }
-            )
-          }
+          this.profileGeneralData = data[0]
+          this.profileAffiliationUiGroups = data[1]
+          this.profileWorks = data[2]
         },
         error => {
           // Redirects user when orcid is not found
@@ -56,6 +38,7 @@ export class ProfilePageComponent implements OnInit {
           }
         }
       )
+
       _platformInfo.get().subscribe(platformInfo => {
         this.platformInfo = platformInfo
       })
@@ -70,7 +53,7 @@ export class ProfilePageComponent implements OnInit {
     )
   }
 
-  profileHasRecords(profileAffiliationUiGroups, id): boolean {
+  profileHasActivities(profileAffiliationUiGroups, id): boolean {
     return (
       // Has at lest one affiliation
       ((profileAffiliationUiGroups &&

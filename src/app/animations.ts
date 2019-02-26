@@ -141,40 +141,20 @@ export const listAnimation = trigger('listAnimation', [
 
 export const nestedListAnimation = [
   trigger('itemChildListAnimation', [
-    transition(':leave', [
-      style({ opacity: 0, padding: '*', overflow: 'hidden' }),
-      animate(
-        '{{animateTime}}',
-        style({ opacity: 0, height: '0px', padding: 0 })
-      ),
-    ]),
-    transition(
-      ':enter',
-      [
-        style({ opacity: 1, height: '0', padding: 0 }),
-        animate(
-          '{{animateTime}}',
-          style({
-            opacity: 1,
-            height: '{{maxEnterHeight}}',
-            padding: '*',
-            overflow: 'hidden',
-          })
-        ),
-      ],
-      {
-        params: { maxEnterHeight: '*', animateTime: '200ms' },
-      }
-    ),
+    // leave animation is temporally disable due to angular open issue
+    // https://github.com/angular/angular/issues/18847
+    // The problem:
+    // When a list display by a ngFor is reordered, the animation state of the repositioned
+    // elements are going to change to void, this only happens the first time the element is moved.
+    //
+    // transition(':leave', [
+    //   style({ opacity: 0, padding: '*', overflow: 'hidden' }),
+    //   animate('200ms', style({ opacity: 0, height: '0px', padding: 0 })),
+    // ]),
   ]),
   trigger('childListAnimation', [
     // Afther the list is reordered
     transition('void => *', [
-      query(
-        '@itemChildListAnimation',
-        [style({ opacity: 0 }), animate('0.2s', style({ opacity: 1 }))],
-        { optional: true }
-      ),
       query(
         '@itemChildListAnimation',
         [style({ opacity: 0 }), animate('0.2s', style({ opacity: 1 }))],
@@ -186,8 +166,8 @@ export const nestedListAnimation = [
     transition('*=>*', [
       query(':enter', [
         style({ opacity: 0 }),
-        stagger(200, [animate('0.2s', style({ opacity: 1 }))]),
-        query('@childListAnimation', animateChild()),
+        animate('0.2s', style({ opacity: 1 })),
+        query('@childListAnimation', animateChild(), { optional: true }),
       ]),
     ]),
   ]),

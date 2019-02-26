@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  margin-top: 22px;
+  flex-direction: column;
+  div {
+    app-card {
+      margin-top: 0;
+    }
+  }
+}
+
+app-card {
+  overflow: hidden;
+}

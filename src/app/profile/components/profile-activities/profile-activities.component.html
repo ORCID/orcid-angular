@@ -1,0 +1,18 @@
+<mat-accordion [multi]="true" @parentListAnimation>
+  <ng-container
+    *ngFor="
+      let profileAffiliationsGroup of profileAffiliationUiGroups;
+      trackBy: trackByProfileAffiliationUiGroups
+    "
+  >
+    <app-profile-activities-affiliations
+      [id]="id"
+      [profileAffiliationsGroup]="profileAffiliationsGroup"
+    ></app-profile-activities-affiliations>
+  </ng-container>
+
+  <app-profile-activities-works
+    [id]="id"
+    [profileWorks]="profileWorks"
+  ></app-profile-activities-works>
+</mat-accordion>

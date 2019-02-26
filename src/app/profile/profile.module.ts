@@ -1,34 +1,37 @@
-import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-
 import { SharedModule } from 'src/app/shared/shared.module'
+
+import { CardDetailLineComponent } from './components/card-detail-line/card-detail-line.component'
+import { CardDetailComponent } from './components/card-detail/card-detail.component'
+import { CardComponent } from './components/card/card.component'
+import { ProfileRecordsAffiliationComponent } from './components/profile-activities-affiliation/profile-activities-affiliation.component'
+// tslint:disable-next-line:max-line-length
+import { ProfileActivitiesAffiliationsComponent } from './components/profile-activities-affiliations/profile-activities-affiliations.component'
+import { ProfileActivitiesWorkComponent } from './components/profile-activities-work/profile-activities-work.component'
+import { ProfileActivitiesWorksComponent } from './components/profile-activities-works/profile-activities-works.component'
+import { ProfileRecordsComponent } from './components/profile-activities/profile-activities.component'
 import { ProfileBiographyComponent } from './components/profile-biography/profile-biography.component'
-import { ProfileGeneralDataDetailComponent } from './components/profile-general-data-detail/profile-general-data-detail.component'
-import { ProfileGeneralDataComponent } from './components/profile-general-data/profile-general-data.component'
-import { ProfileRecordsCardDetailComponent } from './components/profile-records-card-detail/profile-records-card-detail.component'
-import { ProfileRecordsCardComponent } from './components/profile-records-card/profile-records-card.component'
-import { ProfileRecordsComponent } from './components/profile-records/profile-records.component'
+import { ProfileInfoDetailComponent } from './components/profile-person-detail/profile-person-detail.component'
+import { ProfileInfoComponent } from './components/profile-person/profile-person.component'
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component'
 import { ProfileRoutingModule } from './profile-routing.module'
-import { ProfileRecordsWrapperWorksComponent } from './components/profile-records-wrapper-works/profile-records-wrapper-works.component'
-// tslint:disable-next-line:max-line-length
-import { ProfileRecordsWrapperAffiliationsComponent } from './components/profile-records-wrapper-affiliations/profile-records-wrapper-affiliations.component'
-// tslint:disable-next-line:max-line-length
-import { ProfileRecordsCardDetailLineComponent } from './components/profile-records-card-detail-line/profile-records-card-detail-line.component'
 
+// tslint:disable-next-line:max-line-length
 @NgModule({
-  imports: [CommonModule, ProfileRoutingModule, SharedModule],
+  imports: [ProfileRoutingModule, SharedModule],
   declarations: [
-    ProfileGeneralDataComponent,
+    ProfileInfoComponent,
     ProfileBiographyComponent,
     ProfileRecordsComponent,
     ProfilePageComponent,
-    ProfileGeneralDataDetailComponent,
-    ProfileRecordsCardComponent,
-    ProfileRecordsCardDetailComponent,
-    ProfileRecordsWrapperWorksComponent,
-    ProfileRecordsWrapperAffiliationsComponent,
-    ProfileRecordsCardDetailLineComponent,
+    ProfileInfoDetailComponent,
+    CardComponent,
+    CardDetailComponent,
+    ProfileActivitiesWorksComponent,
+    ProfileActivitiesWorkComponent,
+    ProfileRecordsAffiliationComponent,
+    CardDetailLineComponent,
+    ProfileActivitiesAffiliationsComponent,
   ],
 })
 export class ProfileModule {}

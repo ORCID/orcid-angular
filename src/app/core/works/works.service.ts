@@ -1,16 +1,104 @@
-import { Injectable } from '@angular/core'
-import { Observable, Subject } from 'rxjs'
-import { Works, Work } from 'src/app/types'
-import { retry, catchError } from 'rxjs/operators'
-import { environment } from 'src/environments/environment'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable, ReplaySubject } from 'rxjs'
+import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
+import { ActivityService, Work, Works } from 'src/app/types'
+import { environment } from 'src/environments/environment'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
 })
-export class WorksService {
-  workSubject = new Subject<Works>()
+export class WorksService implements ActivityService {
+  lastEmitedValue: Works = null
+  workSubject = new ReplaySubject<Works>(1)
+
+  constructor(
+    private _http: HttpClient,
+    private _errorHandler: ErrorHandlerService
+  ) {}
+
+  /**
+   * Return an observable with a list of Works
+   * Arrange according to the requested parameters
+   *
+   * @param id user Orcid id
+   */
+
+  sort(
+    id: string,
+    offset = 0,
+    sort = 'date',
+    sortAsc = false
+  ): Observable<Works> {
+    return this.getWorksData(id, offset, sort, sortAsc).pipe(
+      map(data => {
+        this.lastEmitedValue = data
+        this.workSubject.next(data)
+      }),
+      switchMap(data => this.workSubject.asObservable())
+    )
+  }
+  /**
+   * Return an observable with a list of Works
+   * For full work details getDetails(id, putCode) must be called
+   *
+   * @param id user Orcid id
+   */
+  get(id: string) {
+    return this.getWorksData(id, 0, 'date', 'false').pipe(
+      tap(data => {
+        this.lastEmitedValue = data
+        this.workSubject.next(data)
+      }),
+      switchMap(data => this.workSubject.asObservable())
+    )
+  }
+
+  /**
+   * Similar to get() witch to returns a list of Work objects
+   * this returns the same observable list but with the details of the requested work.
+   *
+   * This would add the following data to the Work:
+   * citation, contributors, countryCode, countryName, createdDate, dateSortString, dateSortString
+   * languageCode, languageName, url, lastModified, shortDescription, subtitle, workCategory
+   *
+   * TODO check why the userSource attribute comes as false on this call
+   *
+   * @param id user Orcid id
+   * @param putCode code of work
+   */
+
+  getDetails(id: string, putCode: string) {
+    return this.getWorkInfo(id, putCode).pipe(
+      tap(workWithDetails => {
+        this.lastEmitedValue.groups.map(works => {
+          works.works = works.works.map(work => {
+            if (work.putCode.value === putCode) {
+              return workWithDetails
+            }
+            return work
+          })
+        })
+        this.workSubject.next(this.lastEmitedValue)
+      }),
+      switchMap(() => {
+        return this.workSubject.asObservable()
+      })
+    )
+  }
+
+  private getWorkInfo(id: string, putCode: string): Observable<Work> {
+    return this._http
+      .get<Work>(
+        environment.API_WEB + `${id}/getWorkInfo.json?workId=${putCode}`
+      )
+      .pipe(
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
+  }
 
   getWorksData(id: string, offset, sort, sortAsc): Observable<Works> {
     return this._http
@@ -24,51 +112,10 @@ export class WorksService {
       )
   }
 
-  constructor(
-    private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
-  ) {}
-  /**
-   * Return an observable with a list of Works with partial information.
-   * For full work details getDetails(id, putCode) must be called
-   *
-   * This function might be a recall with different sort parameters
-   * and that will update the same observable.
-   *
-   * @param id user Orcid id
-   */
-  get(
-    id: string,
-    offset = 0,
-    sort = 'date',
-    sortAsc = 'false'
-  ): Observable<Works> {
-    this.getWorksData(id, offset, sort, sortAsc).subscribe(data =>
-      this.workSubject.next(data)
-    )
-    return this.workSubject.asObservable()
+  set(value: any): Observable<any> {
+    throw new Error('Method not implemented.')
   }
-
-  /**
-   * Similar to get() witch to returns a list of Work objects
-   * this returns a single Work object but adding the following attributes:
-   *
-   * citation, contributors, countryCode, countryName, createdDate, dateSortString, dateSortString
-   * languageCode, languageName, url, lastModified, shortDescription, subtitle, workCategory
-   *
-   * TODO check why the userSource attribute comes as false on this call
-   *
-   * @param id user Orcid id
-   */
-
-  getDetails(id: string, putCode: string): Observable<Work> {
-    return this._http
-      .get<Work>(
-        environment.API_WEB + `${id}/getWorkInfo.json?workId=${putCode}`
-      )
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
+  update(value: any): Observable<any> {
+    throw new Error('Method not implemented.')
   }
 }

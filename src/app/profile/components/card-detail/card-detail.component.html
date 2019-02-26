@@ -1,0 +1,49 @@
+<div
+  class="detail-container mat-body-1"
+  [@heightAnimationState]="detailShowData"
+  (@heightAnimationState.done)="onAnimationEvent($event)"
+>
+  <mat-divider class="margin-top" *ngIf="hasContentProjection()"></mat-divider>
+
+  <div class="content">
+    <div #contentProjection><ng-content></ng-content></div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div class="date-container mat-small">
+    <div>
+      <div class="date-title mat-small">
+        <ng-container i18n="@@groups.common.added">Added</ng-container>:
+      </div>
+
+      <div class="mat-small" *ngIf="createdDate">
+        {{ createdDate | monthDayYearDateToString }}
+      </div>
+    </div>
+    <div>
+      <div class="date-title mat-small">
+        <ng-container i18n="@@groups.common.last_modified"
+          >Last Modified</ng-container
+        >:
+      </div>
+      <div class="mat-small" *ngIf="lastModified">
+        {{ lastModified | monthDayYearDateToString }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="spinner-container"
+  [@heightAnimationState]="{
+    value: detailShowLoader,
+    params: { closeOpacity: 0 }
+  }"
+>
+  <mat-progress-spinner [diameter]="40" color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<app-offline-message
+  [@heightAnimationState]="detailShowOffline"
+></app-offline-message>
