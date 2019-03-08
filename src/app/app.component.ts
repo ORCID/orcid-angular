@@ -15,6 +15,8 @@ export class AppComponent {
   @HostBinding('class.tablet') tablet
   @HostBinding('class.desktop') desktop
 
+  bootstrapLayout = true
+
   constructor(_platformInfo: PlatformInfoService) {
     _platformInfo.get().subscribe(platformInfo => {
       this.ie = platformInfo.ie

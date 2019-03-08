@@ -3,17 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-
     "start": "npm-run-all --parallel cors serve",
     "start:aot": "npm-run-all --parallel cors serve:aot",
     "serve": "ng serve --configuration=en-sandbox --disable-host-check",
     "serve:aot": "ng serve --aot --configuration=en-sandbox --disable-host-check",
-
     "start:ar": "npm-run-all --parallel cors serve:ar",
     "start:ar:aot": "npm-run-all --parallel cors serve:ar:aot",
     "serve:ar": "ng serve --configuration=ar-sandbox --disable-host-check",
     "serve:ar:aot": "ng serve --aot --configuration=ar-sandbox --disable-host-check",
-
     "build": "npm run build:prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -46,6 +43,8 @@
     "@angular/router": "^6.1.0",
     "@angular/service-worker": "^6.1.0",
     "@material/layout-grid": "^0.41.0",
+    "@ng-bootstrap/ng-bootstrap": "^4.1.0",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "properties-to-json": "^0.1.4",
