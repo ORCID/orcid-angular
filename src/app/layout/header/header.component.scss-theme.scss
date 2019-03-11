@@ -6,7 +6,7 @@ $config: mat-typography-config();
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  .app-header {
+  app-header {
     .top-bar {
       //FIXME ACCESSIBILITY-ISSUE
       color: mat-color($primary, '400-contrast');

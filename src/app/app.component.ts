@@ -1,6 +1,16 @@
 import { Component, HostBinding } from '@angular/core'
 
 import { PlatformInfoService } from './core/platform-info/platform-info.service'
+import {
+  ActivatedRoute,
+  Router,
+  RoutesRecognized,
+  ActivationEnd,
+  NavigationEnd,
+  GuardsCheckStart,
+  NavigationStart,
+} from '@angular/router'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-root',
@@ -14,10 +24,9 @@ export class AppComponent {
   @HostBinding('class.handset') handset
   @HostBinding('class.tablet') tablet
   @HostBinding('class.desktop') desktop
+  bootstrapLayout = false
 
-  bootstrapLayout = true
-
-  constructor(_platformInfo: PlatformInfoService) {
+  constructor(_platformInfo: PlatformInfoService, _router: Router) {
     _platformInfo.get().subscribe(platformInfo => {
       this.ie = platformInfo.ie
       this.edge = platformInfo.edge
@@ -25,6 +34,12 @@ export class AppComponent {
       this.handset = platformInfo.handset
       this.tablet = platformInfo.tablet
       this.desktop = platformInfo.desktop
+
+      _router.events.pipe().subscribe(route => {
+        if (route instanceof NavigationStart) {
+          this.bootstrapLayout = route.url === '/bootstrap-home'
+        }
+      })
     })
   }
 }

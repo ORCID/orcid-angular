@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomeModule',
   },
   {
+    path: 'bootstrap-home',
+    loadChildren: './bootstrap-home/bootstrap-home.module#BootstrapHomeModule',
+  },
+  {
     matcher: matcher,
     loadChildren: './profile/profile.module#ProfileModule',
   },

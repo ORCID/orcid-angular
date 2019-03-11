@@ -14,7 +14,7 @@ export class BootstrapHeaderComponent implements OnInit {
   tabletOrHandset
   menu = {
     researchers: {
-      route: '/',
+      route: '/bootstrap-home',
       buttons: {
         signIn: {},
         signUp: {},

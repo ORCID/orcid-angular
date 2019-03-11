@@ -10,6 +10,14 @@ app-footer {
   width: 100%;
 }
 
+.container {
+  // BOOTSTRAP CONTAINER
+  flex: 1 0 auto;
+  display: flex;
+  width: 100%;
+  margin-top: 40px;
+}
+
 :host.tabletOrHandset {
   .router-container {
     padding-bottom: 195px; //remove footer height
