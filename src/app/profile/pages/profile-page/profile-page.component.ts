@@ -10,8 +10,6 @@ import { environment } from 'src/environments/environment.prod'
   styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit {
-  @HostBinding('class.mdc-layout-grid__inner') grid = true
-
   id
   profileAffiliationUiGroups: AffiliationUIGroup[]
   profileWorks: Works

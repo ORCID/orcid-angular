@@ -1,4 +1,10 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  LOCALE_ID,
+  OnInit,
+  HostBinding,
+} from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/core'
