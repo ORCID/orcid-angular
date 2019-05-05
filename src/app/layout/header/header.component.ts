@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment'
 })
 export class HeaderComponent implements OnInit {
   currentRoute
-  tabletOrHandset
+  platformInfo
   menu = {
     researchers: {
       route: '/',
@@ -84,7 +84,7 @@ export class HeaderComponent implements OnInit {
       })
 
     _platformInfo.get().subscribe(platformInfo => {
-      this.tabletOrHandset = platformInfo.tabletOrHandset
+      this.platformInfo = platformInfo
     })
   }
 

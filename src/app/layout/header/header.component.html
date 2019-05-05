@@ -1,12 +1,25 @@
 <!-- WEB VERSION -->
 <header *ngIf="!tabletOrHandset">
-  <div class="logo" routerLink="/">
-    <img src="./assets/vectors/orcid.logo.svg" />
-  </div>
+  <mat-grid-list
+    cols="12"
+    rowHeight="150px"
+    class="logo"
+    routerLink="/"
+    [ngStyle]="{ margin: platformInfo.gridMargin }"
+  >
+    <mat-grid-tile colspan="3">
+      <div class="logo-container">
+        <img src="./assets/vectors/orcid.logo.svg" />
+        <div>Connecting research and researchers</div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="5"> </mat-grid-tile>
+    <mat-grid-tile colspan="3"> <div>SEARCH MENU</div> </mat-grid-tile>
+  </mat-grid-list>
 </header>
-<nav (mouseleave)="mouseLeave()" *ngIf="!tabletOrHandset">
+<nav (mouseleave)="mouseLeave()" *ngIf="!platformInfo.tabletOrHandset">
   <div class="top-bar">
-    <div class="main-menu">
+    <div class="main-menu" [ngStyle]="{ margin: platformInfo.gridMargin }">
       <ul class="buttons-container">
         <li [ngClass]="{ active: menu.researchers.route === currentRoute }">
           <button
@@ -61,7 +74,7 @@
       </ul>
     </div>
 
-    <div class="search-menu">
+    <div class="search-menu" [ngStyle]="{ margin: platformInfo.gridMargin }">
       <i class="material-icons"> search </i>
       <button mat-button [matMenuTriggerFor]="languageMenu">
         <div class="language">
@@ -73,7 +86,7 @@
     </div>
   </div>
 
-  <div class="bottom-bar">
+  <div class="bottom-bar" [ngStyle]="{ margin: platformInfo.gridMargin }">
     <div class="secondary-menu" *ngIf="menu.researchers.hover">
       <ul class="buttons-container">
         <li>
@@ -173,7 +186,7 @@
 <!-- HANDSET AND TABLET VERSION -->
 <nav *ngIf="tabletOrHandset">
   <div class="top-bar">
-    <div class="main-menu">
+    <div class="main-menu" [ngStyle]="{ margin: platformInfo.gridMargin }">
       <div class="menu-logo-container" routerLink="/">
         <button mat-icon-button [matMenuTriggerFor]="appMenu">
           <div class="icon-button"><i class="material-icons"> menu </i></div>

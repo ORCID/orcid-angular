@@ -78,3 +78,7 @@ app-footer {
 .staticTranslations {
   display: none;
 }
+
+:focus {
+  outline: none;
+}

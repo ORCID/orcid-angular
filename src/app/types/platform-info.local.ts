@@ -7,4 +7,7 @@ export interface PlatformInfo {
   ie: boolean
   safary: boolean
   firefox: boolean
+  gridGutter: number
+  gridMargin: string
+  gridColums: number
 }

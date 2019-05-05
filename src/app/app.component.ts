@@ -16,12 +16,10 @@ export class AppComponent {
   @HostBinding('class.handset') handset
   @HostBinding('class.tablet') tablet
   @HostBinding('class.desktop') desktop
-  @HostBinding('style.margin') grid_margin
 
   constructor(_platformInfo: PlatformInfoService) {
     _platformInfo.get().subscribe(platformInfo => {
       this.setPlatformClasses(platformInfo)
-      this.setGridMargin(platformInfo)
     })
   }
 
@@ -32,17 +30,5 @@ export class AppComponent {
     this.handset = platformInfo.handset
     this.tablet = platformInfo.tablet
     this.desktop = platformInfo.desktop
-  }
-
-  setGridMargin(platformInfo: PlatformInfo) {
-    if (platformInfo.desktop) {
-      this.grid_margin = '0 ' + GRID_MARGINS.desktop + 'px'
-    }
-    if (platformInfo.tablet) {
-      this.grid_margin = '0 ' + GRID_MARGINS.tablet + 'px'
-    }
-    if (platformInfo.handset) {
-      this.grid_margin = '0 ' + GRID_MARGINS.handset + 'px'
-    }
   }
 }
