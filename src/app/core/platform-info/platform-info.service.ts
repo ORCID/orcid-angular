@@ -20,9 +20,6 @@ export class PlatformInfoService {
     ie: false,
     firefox: false,
     safary: false,
-    gridGutter: 12,
-    gridColums: 12,
-    gridMargin: '0 0',
   }
 
   constructor(
@@ -38,11 +35,6 @@ export class PlatformInfoService {
     this._breakpointObserver.observe([Breakpoints.Handset]).subscribe(state => {
       if (state.matches) {
         this.platform.handset = true
-        this.platform.gridGutter = GRID_GUTTER.handset
-        this.platform.gridColums = GRID_COLUMNS.handset
-        this.platform.gridMargin = this.gridMarginFromNumber(
-          GRID_MARGINS.handset
-        )
       } else {
         this.platform.handset = false
       }
@@ -51,11 +43,6 @@ export class PlatformInfoService {
     this._breakpointObserver.observe([Breakpoints.Tablet]).subscribe(state => {
       if (state.matches) {
         this.platform.tablet = true
-        this.platform.gridGutter = GRID_GUTTER.tablet
-        this.platform.gridColums = GRID_COLUMNS.tablet
-        this.platform.gridMargin = this.gridMarginFromNumber(
-          GRID_MARGINS.tablet
-        )
       } else {
         this.platform.tablet = false
       }
@@ -70,18 +57,9 @@ export class PlatformInfoService {
         } else {
           this.platform.tabletOrHandset = false
           this.platform.desktop = true
-          this.platform.gridGutter = GRID_GUTTER.desktop
-          this.platform.gridColums = GRID_COLUMNS.desktop
-          this.platform.gridMargin = this.gridMarginFromNumber(
-            GRID_MARGINS.desktop
-          )
         }
         this.platformSubject.next(this.platform)
       })
-  }
-
-  public gridMarginFromNumber(margin: number): string {
-    return '0 ' + margin + 'px'
   }
 
   public get(): Observable<PlatformInfo> {
