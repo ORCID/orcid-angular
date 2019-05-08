@@ -1,3 +1,5 @@
+// Variables
+
 $size4-colums: 4 !default;
 $size8-colums: 8 !default;
 $size12-colums: 12 !default;
@@ -19,6 +21,8 @@ $size12-and-up: 'only screen and (min-width : #{$size8-up-breakpoint})' !default
 // TEMPORALLY ALL HAVE THE SAME GUTTER
 $gutter-width: 1.5rem !default;
 
+// GRID
+
 .container {
   margin: 0 auto;
   max-width: $size4-maxwidth;
@@ -34,7 +38,7 @@ $gutter-width: 1.5rem !default;
 @media #{$size12-and-up} {
   .container {
     max-width: $size12-maxwidth;
-    padding: $size12-margin;
+    padding: 0 $size12-margin;
   }
 }
 
@@ -77,6 +81,7 @@ $gutter-width: 1.5rem !default;
 }
 
 .row {
+  display: flex;
   margin-left: auto;
   margin-right: auto;
 
@@ -88,6 +93,7 @@ $gutter-width: 1.5rem !default;
   }
 
   .col {
+    display: flex;
     float: left;
     box-sizing: border-box;
     padding: 0 $gutter-width / 2;
@@ -153,7 +159,16 @@ $gutter-width: 1.5rem !default;
       }
     }
   }
+  // This properties might be moved to work depending on the size
+  .col.no-gutters {
+    padding: 0;
+  }
+  .col.middle {
+    align-items: center;
+  }
 }
+
+// Helpers
 
 // Positioning
 .valign-wrapper {

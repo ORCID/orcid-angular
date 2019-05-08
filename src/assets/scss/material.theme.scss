@@ -6,10 +6,6 @@ $light-primary-text: rgba(white, 1);
 $light-secondary-text: rgba(white, 0.87);
 $light-disabled-text: rgba(white, 0.5);
 
-$light-primary-background: #f2f2f3;
-$dark-primary-background: #f5f5f5;
-$background-hover: rgba(#9acf1c, 0.15);
-
 $orcid-green: (
   50: #f3f9e4,
   100: #e1f1bb,
@@ -74,3 +70,7 @@ $orcid-blue: (
     A700: $light-primary-text,
   ),
 );
+// / EXTRA COLORS
+$light-primary-background: #f2f2f3;
+$dark-primary-background: #f5f5f5;
+$nav-bar-active: #e3e3e3;

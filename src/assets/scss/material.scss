@@ -27,13 +27,22 @@ $background: map_merge(
   (
     app-footer: $light-primary-background,
     app-news: $dark-primary-background,
-    hover: $background-hover,
+    nav-bar-active: $nav-bar-active,
+  )
+);
+// CUSTOM FOREGROUND COLORS
+$foreground: map-get($orcid-app-theme, foreground);
+$foreground: map_merge(
+  $foreground,
+  (
+    nav-bar-active-text: $dark-primary-text,
   )
 );
 $orcid-app-theme: map_merge(
   $orcid-app-theme,
   (
     background: $background,
+    foreground: $foreground,
   )
 );
 @include angular-material-theme($orcid-app-theme);

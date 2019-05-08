@@ -1,23 +1,35 @@
 <!-- WEB VERSION -->
 <header *ngIf="!tabletOrHandset" class="container">
-  <div class="row valign-wrapper">
-    <div class="logo" routerLink="/" class="col l4 m4 s4">
+  <div class="row">
+    <div class="logo" routerLink="/" class="col l4 m4 s4 middle">
       <div class="logo-container">
         <img src="./assets/vectors/orcid.logo.svg" />
         <div>Connecting research and researchers</div>
       </div>
     </div>
 
-    <div class="col l4 offset-l4 m4 s4">SEARCH MENU</div>
+    <div class="col l4 offset-l4 m4 s4 middle">
+      <div class="search-menu">
+        <i class="material-icons"> search </i>
+        <button mat-button [matMenuTriggerFor]="languageMenu">
+          <div class="language">
+            <i class="material-icons"> language </i>
+            <p>{{ languageMenuOptions[locale] }}</p>
+            <i class="material-icons"> expand_more </i>
+          </div>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
 
 <nav (mouseleave)="mouseLeave()">
   <div class="top-bar">
-    <div class="main-menu">
-      <ul class="buttons-container">
-        <li [ngClass]="{ active: menu.researchers.route === currentRoute }">
+    <div class="container">
+      <ul class="row">
+        <li class="col no-gutters">
           <button
+            [ngClass]="{ active: menu.researchers.route === currentRoute }"
             mat-button
             (click)="click('researchers')"
             (mouseenter)="mouseEnter('researchers')"
@@ -26,8 +38,9 @@
             For Researchers
           </button>
         </li>
-        <li [ngClass]="{ active: menu.organizations.route === currentRoute }">
+        <li class="col no-gutters">
           <button
+            [ngClass]="{ active: menu.organizations.route === currentRoute }"
             mat-button
             (click)="click('organizations')"
             (mouseenter)="mouseEnter('organizations')"
@@ -36,8 +49,9 @@
             For Organizations
           </button>
         </li>
-        <li [ngClass]="{ active: menu.about.route === currentRoute }">
+        <li class="col no-gutters">
           <button
+            [ngClass]="{ active: menu.about.route === currentRoute }"
             mat-button
             (click)="click('about')"
             (mouseenter)="mouseEnter('about')"
@@ -46,8 +60,9 @@
             About
           </button>
         </li>
-        <li [ngClass]="{ active: menu.help.route === currentRoute }">
+        <li class="col no-gutters">
           <button
+            [ngClass]="{ active: menu.help.route === currentRoute }"
             mat-button
             (click)="click('help')"
             (mouseenter)="mouseEnter('help')"
@@ -56,8 +71,9 @@
             Help
           </button>
         </li>
-        <li [ngClass]="{ active: menu.signIn.route === currentRoute }">
+        <li class="col no-gutters">
           <button
+            [ngClass]="{ active: menu.signIn.route === currentRoute }"
             mat-button
             (click)="click('signIn')"
             (mouseenter)="mouseEnter('signIn')"
@@ -68,106 +84,99 @@
         </li>
       </ul>
     </div>
-
-    <div class="search-menu">
-      <i class="material-icons"> search </i>
-      <button mat-button [matMenuTriggerFor]="languageMenu">
-        <div class="language">
-          <i class="material-icons"> language </i>
-          <p>{{ languageMenuOptions[locale] }}</p>
-          <i class="material-icons"> expand_more </i>
-        </div>
-      </button>
-    </div>
   </div>
   <div class="bottom-bar">
-    <div class="secondary-menu" *ngIf="menu.researchers.hover">
-      <ul class="buttons-container">
-        <li>
+    <div class="container" *ngIf="menu.researchers.hover">
+      <ul class="row">
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.sign_in">SIGN IN</button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.register">
             Register for an ORCID iD
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.for_researchers">
             Learn more
           </button>
         </li>
       </ul>
     </div>
-    <div class="secondary-menu" *ngIf="menu.organizations.hover">
-      <ul class="buttons-container">
-        <li>
+    <div class="container" *ngIf="menu.organizations.hover">
+      <ul class="row">
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.funders">Funders</button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.publishers">
             Publishers
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.research_organizations">
             Research Organizations
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.associations">
             Associations
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.integrators">
             Integrators
           </button>
         </li>
       </ul>
     </div>
-    <div class="secondary-menu" *ngIf="menu.about.hover">
-      <ul class="buttons-container">
-        <li>
+    <div class="container" *ngIf="menu.about.hover">
+      <ul class="row">
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.what_is_orcid">
             What is ORCID
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.the_orcid_team">
             The ORCID Team
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.the_orcid_community">
             The ORCID Community
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.membership">
             Membership
           </button>
         </li>
-        <li><button mat-button i18n="@@public-layout.news">News</button></li>
-        <li>
+        <li class="col no-gutters">
+          <button mat-button i18n="@@public-layout.news">News</button>
+        </li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.events">Events</button>
         </li>
       </ul>
     </div>
 
-    <div class="secondary-menu" *ngIf="menu.help.hover">
-      <ul class="buttons-container">
-        <li><button mat-button i18n="@@public-layout.faq">FAQ</button></li>
-        <li>
+    <div class="container" *ngIf="menu.help.hover">
+      <ul class="row">
+        <li class="col no-gutters">
+          <button mat-button i18n="@@public-layout.faq">FAQ</button>
+        </li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.contact_us">
             Contact us
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.give_feedback">
             Give Feedback
           </button>
         </li>
-        <li>
+        <li class="col no-gutters">
           <button mat-button i18n="@@public-layout.knowledge_base">
             Knowledge Base
           </button>
@@ -180,7 +189,7 @@
 <!-- HANDSET AND TABLET VERSION -->
 <nav *ngIf="tabletOrHandset">
   <div class="top-bar">
-    <div class="main-menu">
+    <div class="">
       <div class="menu-logo-container" routerLink="/">
         <button mat-icon-button [matMenuTriggerFor]="appMenu">
           <div class="icon-button"><i class="material-icons"> menu </i></div>

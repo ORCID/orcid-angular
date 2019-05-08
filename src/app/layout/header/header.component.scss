@@ -1,5 +1,52 @@
-header {
+header.container {
+  height: 150px;
   img {
     height: 50px;
+  }
+  .row {
+    height: 100%;
+    img {
+      height: 50px;
+    }
+  }
+}
+
+nav {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .top-bar {
+    height: 60px;
+    .container {
+      height: 100%;
+      .row {
+        height: 100%;
+        .col {
+          height: 100%;
+          button {
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .bottom-bar {
+    height: 60px;
+    .container {
+      height: 100%;
+      .row {
+        height: 100%;
+        .col {
+          height: 100%;
+          button {
+            height: 100%;
+          }
+        }
+      }
+    }
   }
 }

@@ -23,7 +23,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
-            "styles": ["src/styles.scss", "src/assets/scss/grid.scss"],
+            "styles": [
+              "src/assets/scss/material.scss",
+              "src/styles.scss",
+              "src/assets/scss/grid.scss"
+            ],
             "scripts": [],
             "serviceWorker": true,
             "extractCss": true
