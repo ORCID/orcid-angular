@@ -166,6 +166,19 @@ $gutter-width: 1.5rem !default;
   .col.middle {
     align-items: center;
   }
+  .col.baseline {
+    align-items: baseline;
+  }
+}
+.row.horizontal-center {
+  justify-content: center;
+}
+.row.baseline {
+  align-items: baseline;
+}
+
+.row.middle {
+  align-items: center;
 }
 
 // Helpers

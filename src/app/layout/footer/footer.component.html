@@ -1,31 +1,66 @@
-<footer [ngClass]="{ tabletOrHandset: tabletOrHandset }">
-  <ul class="buttons-container">
-    <li>
-      <button mat-button>
-        <div class="button-wrapper" i18n="@@footer.contactus">Contact us</div>
-      </button>
-    </li>
-    <li>
-      <button mat-button>
-        <div class="button-wrapper" i18n="@@footer.privacypolicy">
-          Privacy Policy
-        </div>
-      </button>
-    </li>
-    <li>
-      <button mat-button>
-        <div class="button-wrapper" i18n="@@footer.termsofuse">
-          Terms of Use
-        </div>
-      </button>
-    </li>
-    <li>
-      <button mat-button>
-        <div class="button-wrapper">
-          <div i18n="@@footer.openSource">Open Source Project</div>
-          <div class="logo"><img src="./assets/vectors/github.logo.svg" /></div>
-        </div>
-      </button>
-    </li>
-  </ul>
+<footer>
+  <div class="container">
+    <div class="row horizontal-center logo ">
+      <div class="col baseline">
+        <img src="./assets/vectors/orcid.logo.svg" />
+        <img
+          class="social"
+          src="./assets/vectors/glyphicons-social-32-twitter.svg"
+        />
+        <img
+          class="social"
+          src="./assets/vectors/glyphicons-social-38-rss.svg"
+        />
+        <img
+          class="social"
+          src="./assets/vectors/glyphicons-social-22-github.svg"
+        />
+      </div>
+    </div>
+
+    <div class="row horizontal-center public-domain">
+      <div class="col middle">
+        <img class="social" src="./assets/icons/public-domain.png" /> Except
+        where otherwise specified, the content of this website is published
+        under a CC0 license.
+      </div>
+    </div>
+    <ul class="row horizontal-center links">
+      <li class="col">
+        <button mat-button color="primary">
+          <div class="button-wrapper" i18n="@@footer.contactus">
+            Privacy Policy
+          </div>
+        </button>
+      </li>
+      <li class="col">
+        <button mat-button color="primary">
+          <div class="button-wrapper" i18n="@@footer.privacypolicy">
+            Terms of Use
+          </div>
+        </button>
+      </li>
+      <li class="col">
+        <button mat-button color="primary">
+          <div class="button-wrapper" i18n="@@footer.termsofuse">
+            Dispute procedures
+          </div>
+        </button>
+      </li>
+      <li class="col">
+        <button mat-button color="primary">
+          <div class="button-wrapper" i18n="@@footer.termsofuse">
+            Contact us
+          </div>
+        </button>
+      </li>
+      <li class="col">
+        <button mat-button color="primary">
+          <div class="button-wrapper" i18n="@@...">
+            Trademark & iD guidelines
+          </div>
+        </button>
+      </li>
+    </ul>
+  </div>
 </footer>

@@ -25,9 +25,9 @@ $background: map-get($orcid-app-theme, background);
 $background: map_merge(
   $background,
   (
-    app-footer: $light-primary-background,
     app-news: $dark-primary-background,
     nav-bar-active: $nav-bar-active,
+    highlighted: $grey-background,
   )
 );
 // CUSTOM FOREGROUND COLORS

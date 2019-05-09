@@ -7,7 +7,7 @@ $config: mat-typography-config();
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   footer {
-    background-color: map-get($background, app-footer);
+    background-color: map-get($background, highlighted);
     color: mat-color($foreground, secondary-text);
   }
 }
