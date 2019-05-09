@@ -82,6 +82,7 @@ $gutter-width: 1.5rem !default;
 
 .row {
   display: flex;
+  flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
 
@@ -94,6 +95,7 @@ $gutter-width: 1.5rem !default;
 
   .col {
     display: flex;
+    flex-wrap: wrap;
     float: left;
     box-sizing: border-box;
     padding: 0 $gutter-width / 2;
@@ -169,16 +171,15 @@ $gutter-width: 1.5rem !default;
   .col.baseline {
     align-items: baseline;
   }
+  .col.horizontal-center {
+    justify-content: center;
+  }
 }
 .row.horizontal-center {
   justify-content: center;
 }
 .row.baseline {
   align-items: baseline;
-}
-
-.row.middle {
-  align-items: center;
 }
 
 // Helpers

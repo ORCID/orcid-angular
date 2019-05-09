@@ -1,14 +1,29 @@
-.container {
-  margin-bottom: 48px;
+:host {
+  width: 100%;
+}
+.hero-header {
+  height: 580px;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 72px 0;
+  box-sizing: border-box;
 }
 
-.ie,
-.edge {
-  .home-container {
-    max-width: 100vw;
+.hero-logo {
+  img {
+    height: 72px;
   }
+}
+.hero-title {
+  margin-top: 24px;
+}
+.hero-text {
+  text-align: center;
+  margin-top: 16px;
+}
 
-  :host {
-    display: flex;
-  }
+.hero-call-to-action {
+  width: 444px;
+  height: 36px;
+  margin-top: 32px;
 }

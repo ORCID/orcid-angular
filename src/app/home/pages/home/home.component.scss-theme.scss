@@ -6,8 +6,19 @@ $config: mat-typography-config();
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  main {
-    color: mat-color($foreground, text);
+  $overlay-color: mat-color($background, hero-overlay);
+  app-home {
+    main {
+      color: mat-color($foreground, text);
+    }
+    .hero-header {
+      color: mat-contrast($primary, 500);
+
+      height: 580px;
+
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('/assets/img/hero-header-image.png');
+    }
   }
 }
 

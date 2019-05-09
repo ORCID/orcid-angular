@@ -1,23 +1,37 @@
-<div>
-  <main @enterAnimation>
+<main @enterAnimation>
+  <div class="hero-header">
     <div class="container">
-      <h1>
-        <ng-container i18n="@@home.distinguish_yourself">
-          DISTINGUISH YOURSELF IN
-        </ng-container>
-        <ng-container i18n="@@home.three_easy"> THREE EASY STEPS </ng-container>
-      </h1>
+      <div class="row horizontal-center">
+        <div class="col l12 horizontal-center hero-logo">
+          <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
+        </div>
 
-      <ng-container i18n="@@home.orcid_provides">
-        ORCID provides a persistent digital identifier that distinguishes you
-        from every other researcher and, through integration in key research
-        workflows such as manuscript and grant submission, supports automated
-        linkages between you and your professional activities ensuring that your
-        work is recognized.
-      </ng-container>
-      <a i18n="@@home.find_out_more"> Find out more</a>
+        <h1 class="col l12 horizontal-center hero-title">
+          <ng-container i18n="@@home.distinguish_yourself">
+            DISTINGUISH YOURSELF INTHREE EASY STEPS
+          </ng-container>
+        </h1>
+
+        <div class="col l12 hero-text" i18n="@@home.orcid_provides">
+          ORCID provides a persistent digital identifier that distinguishes you
+          from every other researcher and, through integration in key research
+          workflows such as manuscript and grant submission, supports automated
+          linkages between you and your professional activities ensuring that
+          your work is recognized.
+        </div>
+        <div class="col l12 horizontal-center">
+          <button mat-raised-button color="primary" class="hero-call-to-action">
+            <div class="button-wrapper" i18n="@@home.!!!">
+              find our more about our mission and values
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
-    <div>
+  </div>
+
+  <div class="register-section">
+    <div class="container ">
       <div>
         <ng-container i18n="@@home.one">1</ng-container>-
         <ng-container i18n="@@home.register">REGISTER</ng-container>
@@ -54,24 +68,30 @@
         you get credit for your work.
       </div>
     </div>
+  </div>
 
-    <div class="container">
-      <h2 i18n="@@home.members_make">MEMBERS MAKE ORCID POSSIBLE!</h2>
+  <div class="organization-section">
+    <div class="container ">
+      <h2 i18n="@@home.members_make">
+        Our organizational members make ORCID possible!
+      </h2>
 
       <div>
-        <ng-container i18n="@@home.orcid_is">
+        <div i18n="@@home.orcid_is">
           ORCID is a non-profit organization supported by a global community of
-          organizational members, including research organizations, publishers,
-          funders, professional associations, and other stakeholders in the
-          research ecosystem. </ng-container
-        ><br />
-        <ng-container i18n="@@home.curious_about"
-          >Curious about who our members are?</ng-container
-        ><ng-container i18n="@@home.see_our"
-          >See our complete list of member organizations</ng-container
-        >
+          member organizations, including research institutions, publishers,
+          funders, professional associations, service providers, and other
+          stakeholders in the research ecosystem.
+        </div>
+        <br />
+        <div i18n="@@home.curious_about">
+          Curious about who our members are?
+        </div>
+        <div i18n="@@home.see_our">
+          See our complete list of member organizations
+        </div>
       </div>
     </div>
-  </main>
-  <app-news></app-news>
-</div>
+  </div>
+</main>
+<app-news></app-news>
