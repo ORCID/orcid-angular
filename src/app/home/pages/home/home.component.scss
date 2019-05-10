@@ -29,3 +29,33 @@
   height: 36px;
   margin-top: 32px;
 }
+
+.register-section {
+  padding: 56px 0;
+  height: 400px;
+  box-sizing: border-box;
+  .number-box {
+    .col {
+      justify-content: space-around;
+    }
+    .number-circle {
+      height: 100px;
+      font-size: 1.5em;
+      width: 100px;
+      border-radius: 100%;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 60px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+  }
+
+  .mat-body-1 {
+    height: 146px;
+    text-align: center;
+  }
+  .mat-headline {
+  }
+}

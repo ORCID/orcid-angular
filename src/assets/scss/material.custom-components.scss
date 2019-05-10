@@ -32,7 +32,6 @@
 @mixin custom-components-typography($custom) {
   @include header-typography($custom);
   @include footer-typography($custom);
-  @include home-typography($custom);
   @include news-typography($custom);
   @include profile-person-typography($custom);
   @include profile-person-detail-typography($custom);

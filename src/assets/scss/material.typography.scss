@@ -3,10 +3,10 @@
 $orcid-typography: mat-typography-config(
   $font-family: '"Noto Sans", sans-serif',
   $display-4: mat-typography-level(96px, 96px, 200, $letter-spacing: -1px),
-  $display-3: mat-typography-level(60px, 60px, 300, $letter-spacing: -0.5em),
+  $display-3: mat-typography-level(60px, 80px, 300, $letter-spacing: -0.5em),
   $display-2: mat-typography-level(48px, 48px, 400, $letter-spacing: 0em),
   $display-1: mat-typography-level(34px, 34px, 400, $letter-spacing: 0.25em),
-  $headline: mat-typography-level(24px, 24px, 400, $letter-spacing: 0em),
+  $headline: mat-typography-level(24px, 24px, 700, $letter-spacing: 0em),
   $title: mat-typography-level(20px, 20px, 400, $letter-spacing: 0.15em),
   $subheading-2: mat-typography-level(16px, 28px, 400, $letter-spacing: 0.15em),
   $subheading-1: mat-typography-level(14px, 24px, 400, $letter-spacing: 0.1em),

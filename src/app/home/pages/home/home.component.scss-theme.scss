@@ -19,5 +19,15 @@ $config: mat-typography-config();
       background: linear-gradient($overlay-color, $overlay-color),
         url('/assets/img/hero-header-image.png');
     }
+    .register-section {
+      .number-box {
+        .number-circle {
+          background: mat-color($accent, 400);
+          // ACCESSIBILITY ISSUE of color contrast
+          // using the contrast of primary over accent (white over green)
+          color: mat-contrast($primary, 400);
+        }
+      }
+    }
   }
 }

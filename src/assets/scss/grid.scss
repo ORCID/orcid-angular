@@ -85,6 +85,7 @@ $gutter-width: 1.5rem !default;
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 
   // Clear floating children
   &:after {
