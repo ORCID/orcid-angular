@@ -21,13 +21,3 @@ $config: mat-typography-config();
     }
   }
 }
-
-@mixin home-typography($config) {
-  div {
-    @include mat-typography-level-to-styles($config, body-1);
-  }
-  h1,
-  h2 {
-    @include mat-typography-level-to-styles($config, display-1);
-  }
-}

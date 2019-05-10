@@ -7,7 +7,5 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  a {
-    color: map-get($primary, 400);
-  }
+  /// GLOBAL APP CUSTOM STYLES
 }

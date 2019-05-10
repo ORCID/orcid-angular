@@ -24,6 +24,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
             "styles": [
+              "src/assets/scss/noto-sans.scss",
               "src/assets/scss/material.scss",
               "src/styles.scss",
               "src/assets/scss/grid.scss"
