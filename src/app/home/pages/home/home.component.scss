@@ -7,27 +7,32 @@
   background-position: center;
   padding: 72px 0;
   box-sizing: border-box;
-}
 
-.hero-logo {
-  img {
-    height: 72px;
+  .hero-logo {
+    img {
+      height: 72px;
+    }
   }
-}
-.hero-title.mat-display-3 {
-  margin: 0;
-  margin-top: 24px;
-  text-align: center;
-}
-.hero-text {
-  text-align: center;
-  margin-top: 16px;
-}
+  .hero-title.mat-display-3 {
+    margin: 0;
+    margin-top: 20px;
+    text-align: center;
+  }
 
-.hero-call-to-action {
-  width: 444px;
-  height: 36px;
-  margin-top: 32px;
+  .hero-call-to-action {
+    width: 444px;
+    height: 36px;
+    margin-top: 30px;
+  }
+
+  .mat-body-2,
+  .mat-display-3 {
+    div {
+      max-width: 1024px;
+    }
+    text-align: center;
+    margin-top: 8px;
+  }
 }
 
 .register-section {
