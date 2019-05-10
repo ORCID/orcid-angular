@@ -29,5 +29,8 @@ $config: mat-typography-config();
         }
       }
     }
+    .organization-section {
+      background-color: mat-color($background, highlighted);
+    }
   }
 }

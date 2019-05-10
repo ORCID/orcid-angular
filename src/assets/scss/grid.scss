@@ -10,7 +10,7 @@ $size12-margin: 12px !default;
 
 $size4-maxwidth: unset !default;
 $size8-maxwidth: unset !default;
-$size12-maxwidth: 945px !default;
+$size12-maxwidth: 1304px !default;
 
 $size4-up-breakpoint: 599.99px !default;
 $size8-up-breakpoint: 839.99px !default;
@@ -182,11 +182,6 @@ $gutter-width: 1.5rem !default;
 .row.baseline {
   align-items: baseline;
 }
-
-// Helpers
-
-// Positioning
-.valign-wrapper {
-  display: flex;
+.row.middle {
   align-items: center;
 }
