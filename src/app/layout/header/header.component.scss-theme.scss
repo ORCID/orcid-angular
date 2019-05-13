@@ -33,9 +33,3 @@ $config: mat-typography-config();
     }
   }
 }
-
-@mixin header-typography($config) {
-  .nav {
-    font-size: mat-font-size($config, title);
-  }
-}

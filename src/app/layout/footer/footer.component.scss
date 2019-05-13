@@ -1,3 +1,6 @@
+:host {
+  padding-bottom: 16px;
+}
 ul {
   margin: 0;
   padding: 0;
@@ -29,14 +32,9 @@ ul {
   }
 }
 
-.CC0 {
-  text-align: center;
+.links > :first-child {
+  padding-left: 0;
 }
-
-.row {
-  padding-bottom: 8px;
-}
-
 button {
   height: 24px;
 }

@@ -8,12 +8,5 @@ $config: mat-typography-config();
   $background: map-get($theme, background);
   footer {
     background-color: map-get($background, highlighted);
-    color: mat-color($foreground, secondary-text);
-  }
-}
-
-@mixin footer-typography($config) {
-  footer {
-    font-size: mat-font-size($config, title);
   }
 }
