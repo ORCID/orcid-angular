@@ -1,33 +1,44 @@
-<div class="count">
-  5,566,081
-  <ng-container i18n="@@public-layout.amount_ids"
-    >ORCID iDs and counting.</ng-container
-  >
-</div>
-
-<h2 i18n="@@home.latest_news">LATEST NEWS</h2>
-
-<div *ngIf="!news" class="spinner-container"></div>
-<ng-container *ngIf="news">
-  <div class="cart-container" [@listAnimation]="news.length">
-    <div
-      class="card"
-      matRipple
-      *ngFor="let new of news"
-      (click)="navigate(new.link)"
-    >
-      <div class="date">{{ new.pubDate[0].slice(0, 22) }}</div>
-      {{ new.title }}
-      <div class="author">by {{ new['dc:creator'] }}</div>
+<div class="container">
+  <div class="row title-box">
+    <div class="row">
+      <div class="col l4 baseline">
+        <h2 i18n="@@home.latest_news" class="mat-display-1">LATEST NEWS</h2>
+        <button
+          class="col"
+          mat-button
+          (click)="moreNews()"
+          color="primary"
+          i18n="@@home.more_news"
+        >
+          MORE NEWS
+        </button>
+      </div>
+    </div>
+    <div class="row"><mat-divider class="col l4"></mat-divider></div>
+  </div>
+  <div *ngIf="!news" class="container">
+    <div class="row horizontal-center">
+      <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+      </mat-progress-spinner>
     </div>
   </div>
-
-  <button
-    mat-raised-button
-    (click)="moreNews()"
-    color="primary"
-    i18n="@@home.more_news"
-  >
-    More news
-  </button>
-</ng-container>
+  <ng-container *ngIf="news" class="container">
+    <div class="row" [@listAnimation]="news.length">
+      <div class="col l4" *ngFor="let new of news">
+        <div class="news-box row horizontal-center">
+          <div class="col mat-caption">{{ new.pubDate[0].slice(0, 22) }}</div>
+          <p class="col mat-title">{{ new.title }}</p>
+          <button
+            class="col"
+            mat-raised-button
+            (click)="navigate(new.link)"
+            color="primary"
+            i18n="@@!!!"
+          >
+            FULL ARTICLE
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

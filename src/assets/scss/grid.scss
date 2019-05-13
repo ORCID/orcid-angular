@@ -64,7 +64,6 @@ $gutter-width: 1.5rem !default;
 
 // Mixins to eliminate code repitition
 @mixin reset-offset {
-  margin-left: auto;
   left: auto;
   right: auto;
 }

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core'
 import {
   MatButtonModule,
   MatProgressSpinnerModule,
-  MatRippleModule,
+  MatDividerModule,
 } from '@angular/material'
 import { CoreModule } from 'src/app/core/core.module'
 
@@ -17,8 +17,8 @@ import { HomeComponent } from './pages/home/home.component'
     HomeRoutingModule,
     MatButtonModule,
     CoreModule,
-    MatRippleModule,
     MatProgressSpinnerModule,
+    MatDividerModule,
   ],
   declarations: [HomeComponent, NewsComponent],
 })

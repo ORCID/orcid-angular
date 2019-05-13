@@ -6,31 +6,13 @@ $config: mat-typography-config();
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
+  $overlay-color: mat-color($background, hero-overlay);
   app-news {
-    background: mat-color($background, app-news);
-    color: mat-color($foreground, text);
-    .date {
-      color: mat-color($foreground, disabled-text);
-    }
-    .card {
-      background: mat-color($background, background);
-    }
-  }
-}
-
-@mixin news-typography($config) {
-  app-news {
-    h2 {
-      @include mat-typography-level-to-styles($config, subheading-1);
-    }
-    .card {
-      @include mat-typography-level-to-styles($config, body-1);
-    }
-    .count {
-      @include mat-typography-level-to-styles($config, caption);
-    }
-    .author {
-      @include mat-typography-level-to-styles($config, caption);
+    .news-box {
+      text-align: center;
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('/assets/img/hero-header-image.png');
+      color: mat-contrast($primary, 400);
     }
   }
 }
