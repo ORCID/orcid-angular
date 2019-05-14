@@ -54,8 +54,24 @@ $orcid-blue: (
     900: $light-primary-text,
   ),
 );
-// / EXTRA COLORS
+// /
+// /
+// /
+// EXTRA COLORS
+// /
+// /
+// Highlighted background for the footer and organization members section on the home page
+$light-grey: #f6f6f6;
+// Header main menu active state background
+$grey: #e3e3e3;
+// Header search bar grey backgrounds
+$dark-grey-background: rgba(128, 128, 131, 1);
+// A translucid blue layer used over hero and news images on the homepage
+$blue-overlay: rgba(19, 52, 65, 0.75);
+// /
+// /
+// /
+// NON-USED/DEPRECATED COLORS
+// /
+// /
 $dark-primary-background: #f6f6f6;
-$grey-background: #f6f6f6;
-$nav-bar-active: #e3e3e3;
-$hero-blue-overlay: rgba(19, 52, 65, 0.75);

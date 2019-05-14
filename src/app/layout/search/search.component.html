@@ -1,0 +1,41 @@
+<div class="row end language-menu">
+  <button mat-button [matMenuTriggerFor]="languageMenu" class="col">
+    <div class="row middle space-between">
+      <p class="col">{{ languageMenuOptions[locale] }}</p>
+      <i class="col material-icons"> expand_more </i>
+    </div>
+  </button>
+</div>
+
+<div class="row end">
+  <button mat-button color="primary">ADVACE SEARCH</button>
+</div>
+<form [formGroup]="form" class="row end search-box middle">
+  <div
+    matRipple
+    mat-button
+    [matMenuTriggerFor]="menu"
+    class="col middle search-where"
+  >
+    <div>Registry</div>
+    <mat-icon matSuffix>arrow_drop_down</mat-icon>
+  </div>
+  <div><input placeholder="Search" type="text" /></div>
+  <div matRipple class="col middle search-icon">
+    <mat-icon matSuffix>search</mat-icon>
+  </div>
+</form>
+
+<mat-menu #languageMenu="matMenu">
+  <div
+    *ngFor="let language of (languageMenuOptions | keyvalue)"
+    [ngClass]="{ active: language.key === locale }"
+    (click)="changeLanguage(language.key)"
+  >
+    <button mat-menu-item>{{ language.value }}</button>
+  </div>
+</mat-menu>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Item 1</button> <button mat-menu-item>Item 2</button>
+</mat-menu>

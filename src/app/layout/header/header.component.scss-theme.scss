@@ -17,8 +17,8 @@ $config: mat-typography-config();
       color: mat-color($foreground, 'text');
     }
     .active {
-      background: mat-color($background, 'nav-bar-active');
-      color: mat-color($foreground, 'nav-bar-active-text');
+      background: mat-color($background, 'grey');
+      color: mat-contrast($primary, 500);
       border-radius: 0;
     }
     .tabletOrHandset {

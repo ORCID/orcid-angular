@@ -1,6 +1,6 @@
 <!-- WEB VERSION -->
 <header *ngIf="!tabletOrHandset" class="container">
-  <div class="row">
+  <div class="row baseline">
     <div class="logo" routerLink="/" class="col l4 m4 s4 middle">
       <div class="logo-container">
         <img src="./assets/vectors/orcid.logo.svg" />
@@ -8,18 +8,7 @@
       </div>
     </div>
 
-    <div class="col l4 offset-l4 m4 s4 middle">
-      <div class="search-menu">
-        <i class="material-icons"> search </i>
-        <button mat-button [matMenuTriggerFor]="languageMenu">
-          <div class="language">
-            <i class="material-icons"> language </i>
-            <p>{{ languageMenuOptions[locale] }}</p>
-            <i class="material-icons"> expand_more </i>
-          </div>
-        </button>
-      </div>
-    </div>
+    <div class="col l4 offset-l4 m4 s4 middle"><app-search></app-search></div>
   </div>
 </header>
 
@@ -402,13 +391,3 @@
     </div>
   </mat-menu>
 </nav>
-
-<mat-menu #languageMenu="matMenu">
-  <div
-    *ngFor="let language of (languageMenuOptions | keyvalue)"
-    [ngClass]="{ active: language.key === locale }"
-    (click)="changeLanguage(language.key)"
-  >
-    <button mat-menu-item>{{ language.value }}</button>
-  </div>
-</mat-menu>

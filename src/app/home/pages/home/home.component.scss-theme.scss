@@ -6,7 +6,7 @@ $config: mat-typography-config();
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $overlay-color: mat-color($background, hero-overlay);
+  $overlay-color: mat-color($background, blue-overlay);
   app-home {
     main {
       color: mat-color($foreground, text);
@@ -30,7 +30,7 @@ $config: mat-typography-config();
       }
     }
     .organization-section {
-      background-color: mat-color($background, highlighted);
+      background-color: mat-color($background, light-grey);
     }
   }
 }

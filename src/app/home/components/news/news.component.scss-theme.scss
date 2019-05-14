@@ -6,7 +6,7 @@ $config: mat-typography-config();
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $overlay-color: mat-color($background, hero-overlay);
+  $overlay-color: mat-color($background, blue-overlay);
   app-news {
     .news-box {
       text-align: center;

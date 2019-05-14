@@ -20,25 +20,21 @@ $orcid-app-theme: mat-light-theme(
   $orcid-app-warn
 );
 
-// CUSTOM BACKGROUND COLORS
 $background: map-get($orcid-app-theme, background);
 $background: map_merge(
   $background,
   (
-    app-news: $dark-primary-background,
-    nav-bar-active: $nav-bar-active,
-    highlighted: $grey-background,
-    hero-overlay: $hero-blue-overlay,
+    // CUSTOM BACKGROUND COLORS
+      app-news: $dark-primary-background,
+    grey: $grey,
+    light-grey: $light-grey,
+    blue-overlay: $blue-overlay,
+    dark-grey: $dark-grey-background
   )
 );
 // CUSTOM FOREGROUND COLORS
 $foreground: map-get($orcid-app-theme, foreground);
-$foreground: map_merge(
-  $foreground,
-  (
-    nav-bar-active-text: $dark-primary-text,
-  )
-);
+$foreground: map_merge($foreground, (// FOREGROUND BACKGROUND COLORS));
 $orcid-app-theme: map_merge(
   $orcid-app-theme,
   (

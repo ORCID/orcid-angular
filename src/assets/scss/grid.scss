@@ -179,8 +179,16 @@ $gutter-width: 1.5rem !default;
   justify-content: center;
 }
 .row.baseline {
-  align-items: baseline;
+  align-items: flex-end;
 }
 .row.middle {
   align-items: center;
+}
+
+.row.end {
+  justify-content: flex-end;
+}
+
+.row.space-between {
+  justify-content: space-between;
 }
