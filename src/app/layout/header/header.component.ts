@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   menu = {
     researchers: {
       route: '/',
+      hover: false,
       buttons: {
         signIn: {},
         signUp: {},

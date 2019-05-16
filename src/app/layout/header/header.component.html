@@ -1,5 +1,5 @@
 <!-- WEB VERSION -->
-<header *ngIf="!tabletOrHandset" class="container">
+<header class="container">
   <div class="row baseline">
     <div class="logo" routerLink="/" class="col l4 m4 s4 middle">
       <div class="logo-container">
@@ -228,166 +228,168 @@
 </div>
 
 <!-- HANDSET AND TABLET VERSION -->
-<nav *ngIf="tabletOrHandset">
-  <div class="top-bar">
-    <div class="">
-      <div class="menu-logo-container" routerLink="/">
-        <button mat-icon-button [matMenuTriggerFor]="appMenu">
-          <div class="icon-button"><i class="material-icons"> menu </i></div>
-        </button>
+<!--
+  <nav *ngIf="tabletOrHandset">
+    <div class="top-bar">
+      <div class="">
+        <div class="menu-logo-container" routerLink="/">
+          <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <div class="icon-button"><i class="material-icons"> menu </i></div>
+          </button>
 
-        <div class="logo"><img src="./assets/vectors/orcid.logo.svg" /></div>
+          <div class="logo"><img src="./assets/vectors/orcid.logo.svg" /></div>
+        </div>
+        <div class="search-menu">
+          <i class="material-icons"> search </i>
+          <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+            <div class="icon-button">
+              <i class="material-icons"> language </i>
+            </div>
+          </button>
+        </div>
       </div>
-      <div class="search-menu">
-        <i class="material-icons"> search </i>
-        <button mat-icon-button [matMenuTriggerFor]="languageMenu">
-          <div class="icon-button">
-            <i class="material-icons"> language </i>
-          </div>
+    </div>
+
+    <mat-menu #appMenu="matMenu">
+      <div [ngClass]="{ active: menu.researchers.route === currentRoute }">
+        <button
+          mat-menu-item
+          [matMenuTriggerFor]="researchers"
+          i18n="@@public-layout.for_researchers"
+        >
+          For Researchers
         </button>
       </div>
-    </div>
-  </div>
 
-  <mat-menu #appMenu="matMenu">
-    <div [ngClass]="{ active: menu.researchers.route === currentRoute }">
-      <button
-        mat-menu-item
-        [matMenuTriggerFor]="researchers"
-        i18n="@@public-layout.for_researchers"
-      >
-        For Researchers
-      </button>
-    </div>
+      <div>
+        <button
+          mat-menu-item
+          [matMenuTriggerFor]="organizations"
+          [ngClass]="{ active: menu.organizations.route === currentRoute }"
+          i18n="@@public-layout.for_organizations"
+        >
+          For organizations
+        </button>
+      </div>
 
-    <div>
-      <button
-        mat-menu-item
-        [matMenuTriggerFor]="organizations"
-        [ngClass]="{ active: menu.organizations.route === currentRoute }"
-        i18n="@@public-layout.for_organizations"
-      >
-        For organizations
-      </button>
-    </div>
+      <div>
+        <button
+          mat-menu-item
+          [matMenuTriggerFor]="about"
+          [ngClass]="{ active: menu.about.route === currentRoute }"
+          i18n="@@public-layout.about"
+        >
+          About
+        </button>
+      </div>
 
-    <div>
-      <button
-        mat-menu-item
-        [matMenuTriggerFor]="about"
-        [ngClass]="{ active: menu.about.route === currentRoute }"
-        i18n="@@public-layout.about"
-      >
-        About
-      </button>
-    </div>
+      <div>
+        <button
+          mat-menu-item
+          [matMenuTriggerFor]="help"
+          [ngClass]="{ active: menu.help.route === currentRoute }"
+          i18n="@@public-layout.help"
+        >
+          Help
+        </button>
+      </div>
+      <div>
+        <button
+          mat-menu-item
+          [ngClass]="{ active: menu.signIn.route === currentRoute }"
+          i18n="@@public-layout.sign_in"
+        >
+          Sign in
+        </button>
+      </div>
+    </mat-menu>
 
-    <div>
-      <button
-        mat-menu-item
-        [matMenuTriggerFor]="help"
-        [ngClass]="{ active: menu.help.route === currentRoute }"
-        i18n="@@public-layout.help"
-      >
-        Help
-      </button>
-    </div>
-    <div>
-      <button
-        mat-menu-item
-        [ngClass]="{ active: menu.signIn.route === currentRoute }"
-        i18n="@@public-layout.sign_in"
-      >
-        Sign in
-      </button>
-    </div>
-  </mat-menu>
+    <mat-menu #researchers="matMenu">
+      <div>
+        <button mat-menu-item i18n="@@public-layout.sign_in">SIGN IN</button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.register">
+          Register for an ORCID iD
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.for_researchers">
+          Learn more
+        </button>
+      </div>
+    </mat-menu>
 
-  <mat-menu #researchers="matMenu">
-    <div>
-      <button mat-menu-item i18n="@@public-layout.sign_in">SIGN IN</button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.register">
-        Register for an ORCID iD
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.for_researchers">
-        Learn more
-      </button>
-    </div>
-  </mat-menu>
+    <mat-menu #organizations="matMenu">
+      <div>
+        <button mat-menu-item i18n="@@public-layout.funders">FUNDERS</button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.publishers">
+          Publishers
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.research_organizations">
+          Research Organizations
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.associations">
+          Associations
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.integrators">
+          Integrators
+        </button>
+      </div>
+    </mat-menu>
 
-  <mat-menu #organizations="matMenu">
-    <div>
-      <button mat-menu-item i18n="@@public-layout.funders">FUNDERS</button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.publishers">
-        Publishers
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.research_organizations">
-        Research Organizations
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.associations">
-        Associations
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.integrators">
-        Integrators
-      </button>
-    </div>
-  </mat-menu>
+    <mat-menu #about="matMenu">
+      <div>
+        <button mat-menu-item i18n="@@public-layout.what_is_orcid">
+          What is orcid
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.the_orcid_team">
+          The ORCID team
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.the_orcid_community">
+          The ORCID Community
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.membership">
+          Membership
+        </button>
+      </div>
+      <div><button mat-menu-item i18n="@@public-layout.news">NEWS</button></div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.events">EVENTS</button>
+      </div>
+    </mat-menu>
 
-  <mat-menu #about="matMenu">
-    <div>
-      <button mat-menu-item i18n="@@public-layout.what_is_orcid">
-        What is orcid
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.the_orcid_team">
-        The ORCID team
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.the_orcid_community">
-        The ORCID Community
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.membership">
-        Membership
-      </button>
-    </div>
-    <div><button mat-menu-item i18n="@@public-layout.news">NEWS</button></div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.events">EVENTS</button>
-    </div>
-  </mat-menu>
-
-  <mat-menu #help="matMenu">
-    <div><button mat-menu-item i18n="@@public-layout.faq">FAQ</button></div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.contact_us">
-        Contact us
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.give_feedback">
-        Give Feedback
-      </button>
-    </div>
-    <div>
-      <button mat-menu-item i18n="@@public-layout.knowledge_base">
-        Knowledge Base
-      </button>
-    </div>
-  </mat-menu>
-</nav>
+    <mat-menu #help="matMenu">
+      <div><button mat-menu-item i18n="@@public-layout.faq">FAQ</button></div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.contact_us">
+          Contact us
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.give_feedback">
+          Give Feedback
+        </button>
+      </div>
+      <div>
+        <button mat-menu-item i18n="@@public-layout.knowledge_base">
+          Knowledge Base
+        </button>
+      </div>
+    </mat-menu>
+  </nav>
+-->

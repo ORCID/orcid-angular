@@ -8,7 +8,7 @@ import { disableBindings } from '@angular/core/src/render3'
 })
 export class MultiRowRaisedButtonComponent implements OnInit {
   @Input() color
-  @Input() disableBindings
+  @Input() disabled
   @Input() disableRipple
 
   constructor() {}
