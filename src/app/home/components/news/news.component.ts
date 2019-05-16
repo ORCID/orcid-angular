@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { listAnimation } from 'src/app/animations'
-import { NewsService } from 'src/app/core'
+import { NewsService, PlatformInfoService } from 'src/app/core'
 import { environment } from 'src/environments/environment.sandbox'
 
 @Component({
@@ -11,7 +11,15 @@ import { environment } from 'src/environments/environment.sandbox'
 })
 export class NewsComponent implements OnInit {
   news
-  constructor(private _news: NewsService) {}
+  platform
+  constructor(
+    private _news: NewsService,
+    private _platform: PlatformInfoService
+  ) {
+    _platform.platformSubject.subscribe(data => {
+      this.platform = data
+    })
+  }
 
   ngOnInit() {
     this._news.getNews().subscribe((data: Array<any>) => {

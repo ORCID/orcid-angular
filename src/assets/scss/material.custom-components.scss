@@ -12,6 +12,7 @@
 @import '../../app/profile/components/card-detail/card-detail.component.scss-theme.scss';
 @import '../../app/profile/components/card-detail-line/card-detail-line.component.scss-theme.scss';
 @import '../../app/shared/components/offline-message/offline-message.component.scss-theme.scss';
+@import '../../app/cdk/multi-row-raised-button/multi-row-raised-button/multi-row-raised-button.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include glopbal-theme($theme);
@@ -37,4 +38,5 @@
   @include card-typography($custom);
   @include profile-activities-typography($custom);
   @include card-detail-typography($custom);
+  @include multi-row-raised-button-typography($custom);
 }

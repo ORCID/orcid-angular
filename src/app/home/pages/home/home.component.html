@@ -2,18 +2,24 @@
   <div class="hero-header">
     <div class="container">
       <div class="row horizontal-center">
-        <div class="col l12 horizontal-center hero-logo">
+        <div class="col l12 m8 s4 horizontal-center hero-logo">
           <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
         </div>
 
-        <h1 class="col l12 horizontal-center hero-title mat-display-3">
+        <h1
+          class="col l12 m8 s4 horizontal-center hero-title"
+          [ngClass]="{
+            'mat-display-3': platform.colums12,
+            'mat-display-1': platform.colums8 || platform.colums4
+          }"
+        >
           <div i18n="@@home.distinguish_yourself">
             DISTINGUISH YOURSELF IN THREE EASY STEPS
           </div>
         </h1>
 
         <div
-          class="col l12 mat-body-2 horizontal-center"
+          class="col l12 m8 s4 mat-body-2 horizontal-center"
           i18n="@@home.orcid_provides"
         >
           <div>
@@ -26,12 +32,13 @@
             saving you time and hassle, and reducing the risk of errors.
           </div>
         </div>
-        <div class="col l12 horizontal-center">
-          <button mat-raised-button color="primary" class="hero-call-to-action">
-            <div class="button-wrapper" i18n="@@home.!!!">
-              find our more about our mission and values
-            </div>
-          </button>
+        <div class="col l12 m8 s4 horizontal-center">
+          <app-multi-row-raised-button
+            color="primary"
+            class="hero-call-to-action"
+            i18n="@@home.!!!"
+            >FIND OUR MORE ABOUT OUR MISSION AND VALUES
+          </app-multi-row-raised-button>
         </div>
       </div>
     </div>
@@ -40,46 +47,55 @@
   <div class="register-section">
     <div class="container ">
       <div class="row">
-        <div class="col l4">
+        <div class="col l4 m8 s4">
           <div class="row number-box">
-            <div class="col l12">
+            <div class="col l12 m8 s4">
               <div class="number-circle" i18n="@@home.one">1</div>
             </div>
-            <div class="col l12 mat-headline" i18n="@@home.register">
+            <div class="col l12 m8 s4 mat-headline" i18n="@@home.register">
               REGISTER
             </div>
           </div>
-          <div class="row mat-body-1" i18n="@@!!!">
+          <div
+            class="row mat-body-1 row mat-body-1 horizontal-center"
+            i18n="@@!!!"
+          >
             Get your unique ORCID identifier. It’s free and only takes a minute,
             so register now!
           </div>
         </div>
-        <div class="col l4">
+        <div class="col l4 m8 s4">
           <div class="row number-box">
-            <div class="col l12">
+            <div class="col l12 m8 s4">
               <div class="number-circle" i18n="@@home.two">2</div>
             </div>
-            <div class="col l12 mat-headline" i18n="@@home.add_your">
+            <div class="col l12 m8 s4 mat-headline" i18n="@@home.add_your">
               ADD YOUR INFO
             </div>
           </div>
-          <div class="row mat-body-1" i18n="@@home.enhance_your">
+          <div
+            class="row mat-body-1 horizontal-center"
+            i18n="@@home.enhance_your"
+          >
             The more information connected to your ORCID record, the more you’ll
             benefit from sharing your iD - so give the organizations you trust
             permission to update your record as well as adding your
             affiliations, emails, other names you’re known by, and more.
           </div>
         </div>
-        <div class="col l4">
+        <div class="col l4 m8 s4">
           <div class="row number-box">
-            <div class="col l12" i18n="@@home.three">
+            <div class="col l12 m8 s4" i18n="@@home.three">
               <div class="number-circle">3</div>
             </div>
-            <div class="col l12 mat-headline" i18n="@@home.user_your">
+            <div class="col l12 m8 s4 mat-headline" i18n="@@home.user_your">
               USE YOUR ORCID ID
             </div>
           </div>
-          <div class="row mat-body-1" i18n="@@home.include_your">
+          <div
+            class="row mat-body-1 horizontal-center"
+            i18n="@@home.include_your"
+          >
             Use your iD, when prompted, in systems and platforms from grant
             application to manuscript submission and beyond, to ensure you get
             credit for your contributions.
@@ -90,16 +106,25 @@
   </div>
 
   <div class="organization-section">
+    <div class="col l4 m8 s4">
+      <img
+        *ngIf="platform.colums8 || platform.colums4"
+        class="organization-img"
+        src="assets/img/organizations.png  "
+        alt=""
+      />
+    </div>
     <div class="container ">
       <div class="row middle">
-        <div class="col l4 ">
+        <div class="col l4 m8 s4">
           <img
+            *ngIf="platform.colums12"
             class="organization-img"
             src="assets/img/organizations.png  "
             alt=""
           />
         </div>
-        <div class="col l8 mat-body-2">
+        <div class="col l8 m8 mat-body-2">
           <h2 i18n="@@home.members_make" class="mat-headline">
             Our organizational members make ORCID possible!
           </h2>

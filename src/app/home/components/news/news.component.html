@@ -1,20 +1,21 @@
 <div class="container">
   <div class="row title-box">
     <div class="row">
-      <div class="col l4 baseline">
-        <h2 i18n="@@home.latest_news" class="mat-display-1">LATEST NEWS</h2>
+      <div class="col l4 m8 s4 baseline">
+        <h2 i18n="@@home.latest_news" class="mat-headline">LATEST NEWS</h2>
         <button
           class="col"
           mat-button
           (click)="moreNews()"
           color="primary"
           i18n="@@home.more_news"
+          *ngIf="platform.colums12"
         >
           MORE NEWS
         </button>
       </div>
     </div>
-    <div class="row"><mat-divider class="col l4"></mat-divider></div>
+    <div class="row"><mat-divider class="col l4 m8 s4"></mat-divider></div>
   </div>
   <div *ngIf="!news" class="container">
     <div class="row horizontal-center">
@@ -22,14 +23,20 @@
       </mat-progress-spinner>
     </div>
   </div>
-  <ng-container *ngIf="news" class="container">
-    <div class="row" [@listAnimation]="news.length">
-      <div class="col l4" *ngFor="let new of news">
-        <div class="news-box row horizontal-center">
-          <div class="col mat-caption">{{ new.pubDate[0].slice(0, 22) }}</div>
-          <p class="col mat-title">{{ new.title }}</p>
+</div>
+<div [ngClass]="{ container: platform.colums12 }">
+  <ng-container *ngIf="news">
+    <div class="row news-box" [@listAnimation]="news.length">
+      <div class="col l4 m8 s4" *ngFor="let new of news">
+        <div class="row horizontal-center">
+          <div class="col mat-caption l-auto m8">
+            {{ new.pubDate[0].slice(0, 22) }}
+          </div>
+          <p class="col mat-title l-auto m8 s4 horizontal-center">
+            {{ new.title }}
+          </p>
           <button
-            class="col"
+            class="col l-auto m-auto s-auto"
             mat-raised-button
             (click)="navigate(new.link)"
             color="primary"
@@ -41,4 +48,17 @@
       </div>
     </div>
   </ng-container>
+</div>
+<div class="container mobile-more-news-box">
+  <div class="row horizontal-center" *ngIf="!platform.colums12">
+    <button
+      class="col"
+      mat-button
+      (click)="moreNews()"
+      color="primary"
+      i18n="@@home.more_news"
+    >
+      MORE NEWS
+    </button>
+  </div>
 </div>

@@ -8,7 +8,7 @@ $config: mat-typography-config();
   $background: map-get($theme, background);
   $overlay-color: mat-color($background, blue-overlay);
   app-news {
-    .news-box {
+    .news-box > .col > .row {
       text-align: center;
       background: linear-gradient($overlay-color, $overlay-color),
         url('/assets/img/hero-header-image.png');

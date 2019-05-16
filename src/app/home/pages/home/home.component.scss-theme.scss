@@ -33,4 +33,9 @@ $config: mat-typography-config();
       background-color: mat-color($background, light-grey);
     }
   }
+
+  .colums-8 {
+    app-home {
+    }
+  }
 }

@@ -19,7 +19,7 @@ $size8-and-up: 'only screen and (min-width : #{$size4-up-breakpoint})' !default;
 $size12-and-up: 'only screen and (min-width : #{$size8-up-breakpoint})' !default;
 
 // TEMPORALLY ALL HAVE THE SAME GUTTER
-$gutter-width: 1.5rem !default;
+$gutter-width: 12px !default;
 
 // GRID
 
@@ -43,8 +43,8 @@ $gutter-width: 1.5rem !default;
 }
 
 .col .row {
-  margin-left: (-1 * $gutter-width / 2);
-  margin-right: (-1 * $gutter-width / 2);
+  // margin-left: (-1 * $gutter-width / 2);
+  // margin-right: (-1 * $gutter-width / 2);
 }
 
 .section {
@@ -122,6 +122,9 @@ $gutter-width: 1.5rem !default;
       @include grid-classes('s', $i, $perc);
       $i: $i + 1;
     }
+    .s-auto {
+      width: auto;
+    }
 
     @media #{$size8-and-up} {
       $i: 1;
@@ -131,6 +134,7 @@ $gutter-width: 1.5rem !default;
           width: $perc;
           @include reset-offset;
         }
+
         $i: $i + 1;
       }
 
@@ -139,6 +143,9 @@ $gutter-width: 1.5rem !default;
         $perc: unquote((100 / ($size8-colums / $i)) + '%');
         @include grid-classes('m', $i, $perc);
         $i: $i + 1;
+      }
+      .m-auto {
+        width: auto;
       }
     }
 
@@ -158,6 +165,9 @@ $gutter-width: 1.5rem !default;
         $perc: unquote((100 / ($size12-colums / $i)) + '%');
         @include grid-classes('l', $i, $perc);
         $i: $i + 1;
+      }
+      .l-auto {
+        width: auto;
       }
     }
   }
