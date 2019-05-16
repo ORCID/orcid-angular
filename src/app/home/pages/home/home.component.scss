@@ -20,7 +20,7 @@
   }
 
   .hero-call-to-action {
-    width: 444px;
+    width: 445px;
     height: 36px;
     margin-top: 30px;
   }
@@ -31,6 +31,9 @@
       max-width: 1024px;
     }
     text-align: center;
+  }
+
+  .mat-body-2 {
     margin-top: 8px;
   }
 
@@ -70,6 +73,9 @@
   }
 }
 .organization-section {
+  .mat-display-1 {
+    margin-bottom: 20px;
+  }
   background-image: url('/assets/vectors/orcid.logo.background.svg');
   box-sizing: border-box;
   height: 450px;
@@ -104,9 +110,6 @@
         }
       }
       .hero-call-to-action {
-        white-space: pre-wrap !important;
-        width: auto;
-        height: auto;
         margin-top: 30px;
         .button-wrapper {
           display: flex;
@@ -131,10 +134,13 @@
 
       img {
         width: 100%;
+        min-height: 366px;
+        object-fit: cover;
       }
       .container {
       }
-      .mat-headline {
+
+      .mat-display-1 {
         margin-top: 40px;
         margin-bottom: 7px;
       }

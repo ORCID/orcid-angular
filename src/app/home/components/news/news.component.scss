@@ -15,9 +15,11 @@
 .news-box > .col > .row {
   text-align: center;
   height: 312px;
+
+  padding-top: 32px;
+  box-sizing: border-box;
   :first-child {
     max-height: 115px;
-    padding-top: 32px;
   }
   p {
     margin: 0;
@@ -31,11 +33,18 @@
 
 button {
   height: 36px;
+  padding: 0;
+  .button-text-container {
+    width: 132px;
+  }
 }
-
 .colums-4,
 .colums-8 {
   :host {
+    mat-divider {
+      margin-bottom: 0;
+    }
+
     .news-box > .col {
       padding: 0;
       > .row {
