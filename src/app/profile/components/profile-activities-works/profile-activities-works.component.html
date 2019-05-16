@@ -73,30 +73,33 @@
   like https://github.com/ngx-translate/i18n-polyfill might be applied.
 -->
 
-<ng-template #paginatorNextPageLabel i18n="@@ng-orcid.paginatorNextPageLabel">
+<ng-template #paginatorNextPageLabel i18n="@@ng-orcid.paginatorNextPageLabel?">
   Next page
 </ng-template>
 
-<ng-template #paginatorLastPageLabel i18n="@@ng-orcid.paginatorLastPageLabel">
+<ng-template #paginatorLastPageLabel? i18n="@@ng-orcid.paginatorLastPageLabel?">
   Previous page
 </ng-template>
 
-<ng-template #paginatorFirstPageLabel i18n="@@ng-orcid.paginatorFirstPageLabel">
+<ng-template
+  #paginatorFirstPageLabel?
+  i18n="@@ng-orcid.paginatorFirstPageLabel?"
+>
   First page
 </ng-template>
 
 <ng-template
-  #paginatorPreviousPageLabel
-  i18n="@@ng-orcid.paginatorPreviousPageLabel"
+  #paginatorPreviousPageLabel?
+  i18n="@@ng-orcid.paginatorPreviousPageLabel?"
 >
   Last page
 </ng-template>
 
 <ng-template
-  #paginatorItemsPerPageLabel
-  i18n="@@ng-orcid.paginatorItemsPerPageLabel"
+  #paginatorItemsPerPageLabel?
+  i18n="@@ng-orcid.paginatorItemsPerPageLabel?"
 >
   Items per page
 </ng-template>
 
-<ng-template #paginatoOf i18n="@@ng-orcid.paginatoOf"> of </ng-template>
+<ng-template #paginatoOf i18n="@@ng-orcid.paginatoOf?"> of </ng-template>

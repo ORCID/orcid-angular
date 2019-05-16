@@ -13,30 +13,29 @@
             'mat-display-1': platform.colums8 || platform.colums4
           }"
         >
-          <div i18n="@@home.distinguish_yourself">
-            DISTINGUISH YOURSELF IN THREE EASY STEPS
-          </div>
+          <ng-container i18n="@@home.distinguish_yourself">
+            DISTINGUISH YOURSELF IN
+          </ng-container>
+          <ng-container i18n="@@home.three_easy">THREE EASY STEPS</ng-container>
         </h1>
 
         <div
           class="col l12 m8 s4 mat-body-2 horizontal-center"
           i18n="@@home.orcid_provides"
         >
-          <div>
-            ORCID provides a persistent digital identifier (an ORCID iD) that
-            you own and control, and that distinguishes you from every other
-            researcher. You can connect your iD with your professional
-            information — affiliations, grants, publications, peer review, and
-            more. You can use your iD to share your information with other
-            systems, ensuring you get recognition for all your contributions,
-            saving you time and hassle, and reducing the risk of errors.
-          </div>
+          ORCID provides a persistent digital identifier (an ORCID iD) that you
+          own and control, and that distinguishes you from every other
+          researcher. You can connect your iD with your professional information
+          — affiliations, grants, publications, peer review, and more. You can
+          use your iD to share your information with other systems, ensuring you
+          get recognition for all your contributions, saving you time and
+          hassle, and reducing the risk of errors.
         </div>
         <div class="col l12 m8 s4 horizontal-center">
           <app-multi-row-raised-button
             color="primary"
             class="hero-call-to-action"
-            i18n="@@home.!!!"
+            i18n="@@home.find_out_more"
             >FIND OUT MORE ABOUT OUR MISSION AND VALUES
           </app-multi-row-raised-button>
         </div>
@@ -57,11 +56,13 @@
             </div>
           </div>
           <div class="row mat-body-1 row mat-body-1 horizontal-center">
-            <div i18n="@@!!!">
+            <ng-container i18n="@@home.get_your">
               Get your unique ORCID identifier. It’s free and only takes a
               minute, so
-            </div>
-            <ng-container i18n="@@!!!">register now!</ng-container>
+            </ng-container>
+            <ng-container i18n="@@home.register_now"
+              >register now!</ng-container
+            >
           </div>
         </div>
         <div class="col l4 m8 s4">
@@ -69,8 +70,9 @@
             <div class="col l12 m8 s4">
               <div class="number-circle" i18n="@@home.two">2</div>
             </div>
-            <div class="col l12 m8 s4 mat-headline" i18n="@@home.add_your">
-              ADD YOUR INFO
+            <div class="col l12 m8 s4 mat-headline">
+              <ng-container i18n="@@home.add_your">ADD YOUR </ng-container>
+              <ng-container i18n="@@home.info">INFO</ng-container>
             </div>
           </div>
           <div
@@ -85,11 +87,12 @@
         </div>
         <div class="col l4 m8 s4">
           <div class="row number-box">
-            <div class="col l12 m8 s4" i18n="@@home.three">
-              <div class="number-circle">3</div>
+            <div class="col l12 m8 s4">
+              <div class="number-circle" i18n="@@home.three">3</div>
             </div>
-            <div class="col l12 m8 s4 mat-headline" i18n="@@home.user_your">
-              USE YOUR ORCID ID
+            <div class="col l12 m8 s4 mat-headline">
+              <ng-container i18n="@@home.user_your">USE YOUR</ng-container
+              ><ng-container i18n="@@home.orcid_id"> ORCID ID</ng-container>
             </div>
           </div>
           <div

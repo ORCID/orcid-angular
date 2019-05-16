@@ -75,6 +75,7 @@ stringReplacements = {
 }
 
 readMessageFile('./src/locale/messages.xlf', 'utf-8').then(file => {
+  // TODO: Generate the language file report always in the same order to keep tracking on git
   Promise.all(
     languages.map(language =>
       generateLanguageFile(language.code, language.code, deepCopy(file))

@@ -20,42 +20,46 @@
 
     <div class="row public-domain">
       <div class="col CC0  mat-caption">
-        <img src="./assets/icons/public-domain.png" /> Except where otherwise
-        specified, the content of this website is published under a CC0 license.
+        <img src="./assets/icons/public-domain.png" />
+        <ng-container i18n="@@footer.copyright_cc0_1"
+          >Except where otherwise specified, the content of this website is
+          published under a</ng-container
+        >
+        <ng-container i18n="@@footer.copyright_cc0_2">
+          CC0 license.</ng-container
+        >
       </div>
     </div>
     <ul class="row links">
       <li class="col">
         <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@footer.contactus">
+          <div class="button-wrapper" i18n="@@footer.privacypolicy">
             Privacy Policy
           </div>
         </button>
       </li>
       <li class="col">
         <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@footer.privacypolicy">
+          <div class="button-wrapper" i18n="@@footer.termsofuse">
             Terms of Use
           </div>
         </button>
       </li>
       <li class="col">
         <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@footer.termsofuse">
+          <div class="button-wrapper" i18n="@@ng-orcid.dispute.procedure">
             Dispute procedures
           </div>
         </button>
       </li>
       <li class="col">
         <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@footer.termsofuse">
-            Contact us
-          </div>
+          <div class="button-wrapper" i18n="@@footer.contactus">Contact us</div>
         </button>
       </li>
       <li class="col">
         <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@...">
+          <div class="button-wrapper" i18n="@@ng-orcid.trademark">
             Trademark & iD guidelines
           </div>
         </button>

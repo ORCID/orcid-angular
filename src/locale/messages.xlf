@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
+  <file original="ng.template" id="ngi18n">
+    <unit id="public-layout.for_researchers">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:26,28</note>
+        <note category="location">app/layout/header/header.component.html:95,97</note>
+      </notes>
+      <segment>
+        <source>
+            For Researchers
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.for_organizations">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:37,39</note>
+      </notes>
+      <segment>
+        <source>
+            For Organizations
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.about">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:48,50</note>
+      </notes>
+      <segment>
+        <source>
+            About
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.help">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:59,61</note>
+      </notes>
+      <segment>
+        <source>
+            Help
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sign_in">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:70,72</note>
+        <note category="location">app/layout/header/header.component.html:81,83</note>
+      </notes>
+      <segment>
+        <source>
+            Sign in
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.register">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:86,88</note>
+      </notes>
+      <segment>
+        <source>
+            Register for an ORCID iD
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.funders">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:104,106</note>
+      </notes>
+      <segment>
+        <source>
+            Funders
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.publishers">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:109,111</note>
+      </notes>
+      <segment>
+        <source>
+            Publishers
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.research_organizations">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:118,120</note>
+      </notes>
+      <segment>
+        <source>
+            Research Organizations
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.associations">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:123,125</note>
+      </notes>
+      <segment>
+        <source>
+            Associations
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.integrators">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:128,130</note>
+      </notes>
+      <segment>
+        <source>
+            Integrators
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.what_is_orcid">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:141,143</note>
+      </notes>
+      <segment>
+        <source>
+            What is ORCID
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.the_orcid_team">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:150,152</note>
+      </notes>
+      <segment>
+        <source>
+            The ORCID Team
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.the_orcid_community">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:159,161</note>
+      </notes>
+      <segment>
+        <source>
+            The ORCID Community
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.membership">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:164,166</note>
+      </notes>
+      <segment>
+        <source>
+            Membership
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.news">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:169,171</note>
+      </notes>
+      <segment>
+        <source>
+            News
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.events">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:174,176</note>
+      </notes>
+      <segment>
+        <source>
+            Events
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.faq">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:184,186</note>
+      </notes>
+      <segment>
+        <source>
+            FAQ
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.contact_us">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:189,191</note>
+      </notes>
+      <segment>
+        <source>
+            Contact us
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.give_feedback">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:198,200</note>
+      </notes>
+      <segment>
+        <source>
+            Give Feedback
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.knowledge_base">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:207,209</note>
+      </notes>
+      <segment>
+        <source>
+            Knowledge Base
+          </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.amount_ids">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:222</note>
+      </notes>
+      <segment>
+        <source>ORCID iDs and counting.</source>
+      </segment>
+    </unit>
+    <unit id="footer.copyright_cc0_1">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:25,26</note>
+      </notes>
+      <segment>
+        <source>Except where otherwise specified, the content of this website is
+          published under a</source>
+      </segment>
+    </unit>
+    <unit id="footer.copyright_cc0_2">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:28,29</note>
+      </notes>
+      <segment>
+        <source>
+          CC0 license.</source>
+      </segment>
+    </unit>
+    <unit id="footer.privacypolicy">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:36,38</note>
+      </notes>
+      <segment>
+        <source>
+            Privacy Policy
+          </source>
+      </segment>
+    </unit>
+    <unit id="footer.termsofuse">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:43,45</note>
+      </notes>
+      <segment>
+        <source>
+            Terms of Use
+          </source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.dispute.procedure">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:50,52</note>
+      </notes>
+      <segment>
+        <source>
+            Dispute procedures
+          </source>
+      </segment>
+    </unit>
+    <unit id="footer.contactus">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:57</note>
+      </notes>
+      <segment>
+        <source>Contact us</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.trademark">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:62,64</note>
+      </notes>
+      <segment>
+        <source>
+            Trademark &amp; iD guidelines
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.distinguish_yourself">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>
+            DISTINGUISH YOURSELF IN
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.three_easy">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:19</note>
+      </notes>
+      <segment>
+        <source>THREE EASY STEPS</source>
+      </segment>
+    </unit>
+    <unit id="home.orcid_provides">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:25,33</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID provides a persistent digital identifier (an ORCID iD) that you
+          own and control, and that distinguishes you from every other
+          researcher. You can connect your iD with your professional information
+          — affiliations, grants, publications, peer review, and more. You can
+          use your iD to share your information with other systems, ensuring you
+          get recognition for all your contributions, saving you time and
+          hassle, and reducing the risk of errors.
+        </source>
+      </segment>
+    </unit>
+    <unit id="home.find_out_more">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:39,40</note>
+      </notes>
+      <segment>
+        <source>FIND OUT MORE ABOUT OUR MISSION AND VALUES
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.one">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:52</note>
+      </notes>
+      <segment>
+        <source>1</source>
+      </segment>
+    </unit>
+    <unit id="home.register">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:54,56</note>
+      </notes>
+      <segment>
+        <source>
+              REGISTER
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.get_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:59,62</note>
+      </notes>
+      <segment>
+        <source>
+              Get your unique ORCID identifier. It’s free and only takes a
+              minute, so
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.register_now">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:64</note>
+      </notes>
+      <segment>
+        <source>register now!</source>
+      </segment>
+    </unit>
+    <unit id="home.two">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:71</note>
+      </notes>
+      <segment>
+        <source>2</source>
+      </segment>
+    </unit>
+    <unit id="home.add_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:74</note>
+      </notes>
+      <segment>
+        <source>ADD YOUR </source>
+      </segment>
+    </unit>
+    <unit id="home.info">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:75</note>
+      </notes>
+      <segment>
+        <source>INFO</source>
+      </segment>
+    </unit>
+    <unit id="home.enhance_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:81,86</note>
+      </notes>
+      <segment>
+        <source>
+            The more information connected to your ORCID record, the more you’ll
+            benefit from sharing your iD - so give the organizations you trust
+            permission to update your record as well as adding your
+            affiliations, emails, other names you’re known by, and more.
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.three">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:91</note>
+      </notes>
+      <segment>
+        <source>3</source>
+      </segment>
+    </unit>
+    <unit id="home.user_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:94</note>
+      </notes>
+      <segment>
+        <source>USE YOUR</source>
+      </segment>
+    </unit>
+    <unit id="home.orcid_id">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:95</note>
+      </notes>
+      <segment>
+        <source> ORCID ID</source>
+      </segment>
+    </unit>
+    <unit id="home.include_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:101,105</note>
+      </notes>
+      <segment>
+        <source>
+            Use your iD, when prompted, in systems and platforms from grant
+            application to manuscript submission and beyond, to ensure you get
+            credit for your contributions.
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.members_make">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:131,133</note>
+      </notes>
+      <segment>
+        <source>
+            Our organizational members make ORCID possible!
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.orcid_is">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:136,141</note>
+      </notes>
+      <segment>
+        <source>
+              ORCID is a non-profit organization supported by a global community
+              of member organizations, including research institutions,
+              publishers, funders, professional associations, service providers,
+              and other stakeholders in the research ecosystem.
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.curious_about">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:143,145</note>
+      </notes>
+      <segment>
+        <source>
+              Curious about who our members are?
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.see_our">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:146,148</note>
+      </notes>
+      <segment>
+        <source>
+              See our complete list of member organizations
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.latest_news">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:5</note>
+      </notes>
+      <segment>
+        <source>LATEST NEWS</source>
+      </segment>
+    </unit>
+    <unit id="home.more_news">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source>
+          MORE NEWS
+        </source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.full.orcid">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:44,46</note>
+      </notes>
+      <segment>
+        <source>
+            FULL ARTICLE
+          </source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.more.news">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:60,62</note>
+      </notes>
+      <segment>
+        <source>
+      MORE NEWS
+    </source>
+      </segment>
+    </unit>
+    <unit id="public_profile.empty_profile">
+      <notes>
+        <note category="location">app/profile/pages/profile-page/profile-page.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>
+    No public information available.
+  </source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.clickToCopyCopied?">
+      <notes>
+        <note category="location">app/shared/components/copy-on-click/copy-on-click.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Copied</source>
+      </segment>
+    </unit>
+    <unit id="public_record.printHelpText">
+      <notes>
+        <note category="location">app/profile/components/profile-person/profile-person.component.html:68</note>
+      </notes>
+      <segment>
+        <source>Open a version of this ORCID record formatted for printing.</source>
+      </segment>
+    </unit>
+    <unit id="public_profile.labelKeywords">
+      <notes>
+        <note category="location">app/profile/components/profile-person/profile-person.component.html:71</note>
+      </notes>
+      <segment>
+        <source>Keywords</source>
+      </segment>
+    </unit>
+    <unit id="public_profile.labelCountry">
+      <notes>
+        <note category="location">app/profile/components/profile-person/profile-person.component.html:74</note>
+      </notes>
+      <segment>
+        <source>Country</source>
+      </segment>
+    </unit>
+    <unit id="public_profile.labelAlsoknownas">
+      <notes>
+        <note category="location">app/profile/components/profile-person/profile-person.component.html:79</note>
+      </notes>
+      <segment>
+        <source>Also known as</source>
+      </segment>
+    </unit>
+    <unit id="public_profile.labelWebsites">
+      <notes>
+        <note category="location">app/profile/components/profile-person/profile-person.component.html:82</note>
+      </notes>
+      <segment>
+        <source>Websites</source>
+      </segment>
+    </unit>
+    <unit id="public_profile.labelOtherIDs">
+      <notes>
+        <note category="location">app/profile/components/profile-person/profile-person.component.html:85</note>
+      </notes>
+      <segment>
+        <source>Other IDs</source>
+      </segment>
+    </unit>
+    <unit id="manage.emails">
+      <notes>
+        <note category="location">app/profile/components/profile-person/profile-person.component.html:87</note>
+      </notes>
+      <segment>
+        <source>Emails</source>
+      </segment>
+    </unit>
+    <unit id="public_profile.labelBiography">
+      <notes>
+        <note category="location">app/profile/components/profile-biography/profile-biography.component.html:1,3</note>
+      </notes>
+      <segment>
+        <source>
+  Biography
+</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.present?">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:21</note>
+      </notes>
+      <segment>
+        <source>present</source>
+      </segment>
+    </unit>
+    <unit id="public_record.showDetails">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:36</note>
+      </notes>
+      <segment>
+        <source>Show details</source>
+      </segment>
+    </unit>
+    <unit id="public_record.hideDetails">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:39</note>
+      </notes>
+      <segment>
+        <source>Hide details</source>
+      </segment>
+    </unit>
+    <unit id="groups.common.source">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Source</source>
+      </segment>
+    </unit>
+    <unit id="groups.common.preferred_source">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:61</note>
+      </notes>
+      <segment>
+        <source>Preferred source</source>
+      </segment>
+    </unit>
+    <unit id="search_results.of">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:64</note>
+      </notes>
+      <segment>
+        <source>of</source>
+      </segment>
+    </unit>
+    <unit id="notifications.show_more">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:69,71</note>
+      </notes>
+      <segment>
+        <source>
+        Show more
+      </source>
+      </segment>
+    </unit>
+    <unit id="ng.show_less?">
+      <notes>
+        <note category="location">app/profile/components/card/card.component.html:73</note>
+      </notes>
+      <segment>
+        <source>Show less</source>
+      </segment>
+    </unit>
+    <unit id="groups.common.added">
+      <notes>
+        <note category="location">app/profile/components/card-detail/card-detail.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Added</source>
+      </segment>
+    </unit>
+    <unit id="groups.common.last_modified">
+      <notes>
+        <note category="location">app/profile/components/card-detail/card-detail.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Last Modified</source>
+      </segment>
+    </unit>
+    <unit id="notifications.works_label">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:59,61</note>
+      </notes>
+      <segment>
+        <source>
+  Works
+</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.paginatorNextPageLabel?">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:76,78</note>
+      </notes>
+      <segment>
+        <source>
+  Next page
+</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.paginatorLastPageLabel?">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:80,82</note>
+      </notes>
+      <segment>
+        <source>
+  Previous page
+</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.paginatorFirstPageLabel?">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:87,89</note>
+      </notes>
+      <segment>
+        <source>
+  First page
+</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.paginatorPreviousPageLabel?">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:94,96</note>
+      </notes>
+      <segment>
+        <source>
+  Last page
+</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.paginatorItemsPerPageLabel?">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:101,103</note>
+      </notes>
+      <segment>
+        <source>
+  Items per page
+</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.paginatoOf?">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:105</note>
+      </notes>
+      <segment>
+        <source> of </source>
+      </segment>
+    </unit>
+    <unit id="workspace_affiliations.organization_id">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-affiliation/profile-activities-affiliation.component.html:47,49</note>
+      </notes>
+      <segment>
+        <source>
+            Organization identifiers
+          </source>
+      </segment>
+    </unit>
+    <unit id="workspace_affiliations.external_ids">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-affiliation/profile-activities-affiliation.component.html:70</note>
+      </notes>
+      <segment>
+        <source>Other organization identifiers provided by</source>
+      </segment>
+    </unit>
+    <unit id="org.orcid.jaxb.model.message.AffiliationType.employment">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:58,59</note>
+      </notes>
+      <segment>
+        <source>
+    Employment</source>
+      </segment>
+    </unit>
+    <unit id="org.orcid.jaxb.model.message.AffiliationType.education_qualification">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:67,68</note>
+      </notes>
+      <segment>
+        <source>
+    Education and qualifications</source>
+      </segment>
+    </unit>
+    <unit id="org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:76,77</note>
+      </notes>
+      <segment>
+        <source>
+    Invited positions and distinctions</source>
+      </segment>
+    </unit>
+    <unit id="org.orcid.jaxb.model.message.AffiliationType.membership_service">
+      <notes>
+        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:85,86</note>
+      </notes>
+      <segment>
+        <source>
+    Membership and service</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>
