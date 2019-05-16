@@ -77,6 +77,12 @@ $gutter-width: 12px !default;
   &.push-#{$size}#{$i} {
     left: $perc;
   }
+  [dir='rtl'] & {
+    &.offset-#{$size}#{$i} {
+      margin-right: $perc;
+      margin-left: initial;
+    }
+  }
 }
 
 .row {
