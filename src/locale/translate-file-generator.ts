@@ -1,11 +1,23 @@
-var fs = require('fs')
-parseString = require('xml2js').parseString
-xml2jsBuilder = require('xml2js').Builder
-const util = require('util')
+import * as fs from 'fs'
+import { parseString, Builder } from 'xml2js'
+import { Observable, from, of } from 'rxjs'
+import {
+  concatMap,
+  map,
+  mapTo,
+  tap,
+  concatAll,
+  combineAll,
+  merge,
+  mergeMap,
+  mergeAll,
+  switchMap,
+} from 'rxjs/operators'
+
 const propertiesToJSON = require('properties-to-json')
 const axios = require('axios')
 
-baseGithubTranslationFilesURL = [
+const baseGithubTranslationFilesURL = [
   'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/about_',
   'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_',
   'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_',
@@ -15,7 +27,7 @@ baseGithubTranslationFilesURL = [
   'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_',
 ]
 
-languages = [
+const languages = [
   {
     code: 'ar',
   },
@@ -68,74 +80,115 @@ languages = [
     code: 'zh_TW',
   },
 ]
-reportFile = {}
 
-stringReplacements = {
+const reportFile: { unmatchedTranslations: any; unexistingFiles: any } = {
+  unmatchedTranslations: [],
+  unexistingFiles: [],
+}
+
+const stringReplacements = {
   '<br />': ' ',
 }
 
-readMessageFile('./src/locale/messages.xlf', 'utf-8').then(file => {
-  // TODO: Generate the language file report always in the same order to keep tracking on git
-  Promise.all(
-    languages.map(language =>
-      generateLanguageFile(language.code, language.code, deepCopy(file))
-    )
-  ).then(() => {
-    saveJson(reportFile, 'generator-report')
-  })
-})
-
-function generateLanguageFile(code, saveCode, file) {
-  return Promise.all(
-    baseGithubTranslationFilesURL.map(url =>
-      getTranslationFileFromGithub(url, code)
+// Read message file
+readMessageFile('./src/locale/messages.xlf')
+  // For each language generate a translation file
+  .pipe(
+    switchMap(file =>
+      from(
+        languages.map(language =>
+          generateLanguageFile(language.code, language.code, deepCopy(file))
+        )
+      )
     )
   )
-    .then(data => getProperties(data))
-    .then(propsText =>
-      setLanguagePropertiesToLanguageFile(file, propsText, saveCode)
+  // Generate the next translation file until the last one finish
+  .pipe(concatAll())
+  // Save the translation file
+  .pipe(map(result => saveJsonAsXlf(result.file, result.saveCode)))
+  // Wait until all translations where saved
+  .pipe(combineAll())
+  // Save the translation log
+  .pipe(mergeMap(() => saveJson(reportFile, 'translation.log')))
+  // Start it all
+  .subscribe()
+
+function generateLanguageFile(
+  code,
+  saveCode,
+  file
+): Observable<{
+  file: {}
+  saveCode: any
+}> {
+  return (
+    from(
+      baseGithubTranslationFilesURL.map(url =>
+        getTranslationFileFromGithub(url, code)
+      )
     )
-    .then(result => saveJsonAsXlf(result, saveCode))
-    .then(() =>
-      console.log('successfully create translation file for ' + saveCode)
-    )
+      // Wait until the last read finish before reading the next file
+      .pipe(concatAll())
+      .pipe(
+        tap(() => {
+          console.log(`The langue code '${code}' file was readed`)
+        })
+      )
+      // Wait until all files where read
+      .pipe(combineAll())
+      // Get all the language properties
+      .pipe(map(val => getProperties(val)))
+      // Create a file with translations
+      .pipe(
+        mergeMap(val =>
+          setLanguagePropertiesToLanguageFile(file, val, saveCode)
+        )
+      )
+      // Return file results to be saved
+      .pipe(
+        map(val => {
+          return { file: val, saveCode: saveCode }
+        })
+      )
+  )
 }
 
 function saveJsonAsXlf(json, name) {
-  new Promise((resolve, reject) => {
-    var builder = new xml2jsBuilder()
-    var xml = builder.buildObject(json)
-    fs.writeFile('./src/locale/messages.' + name + '.xlf', xml, function(
-      err,
-      data
-    ) {
-      if (err) {
-        reject(err)
-      }
-      resolve()
+  return of(
+    new Promise((resolve, reject) => {
+      const builder = new Builder()
+      const xml = builder.buildObject(json)
+      fs.writeFile('./src/locale/messages.' + name + '.xlf', xml, err => {
+        if (err) {
+          reject(err)
+        }
+        resolve()
+      })
     })
-  })
+  )
 }
 
 function saveJson(json, name) {
-  new Promise((resolve, reject) => {
-    fs.writeFile(
-      './src/locale/messages.' + name + '.json',
-      JSON.stringify(reportFile, null, 2),
-      function(err) {
-        if (err) {
-          reject(err)
-        } else {
-          resolve()
+  return of(
+    new Promise((resolve, reject) => {
+      fs.writeFile(
+        './src/locale/messages.' + name + '.json',
+        JSON.stringify(reportFile, null, 2),
+        function(err) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve()
+          }
         }
-      }
-    )
-  })
+      )
+    })
+  )
 }
 
-function getProperties(data) {
-  let propsText = {}
-  data.forEach(data => {
+function getProperties(response) {
+  const propsText = {}
+  response.forEach(data => {
     if (data && data.data) {
       Object.assign(propsText, propertiesToJSON(data.data))
     }
@@ -144,22 +197,23 @@ function getProperties(data) {
 }
 
 function readMessageFile(path) {
-  return new Promise((resolve, reject) => {
+  return new Observable(observer => {
     fs.readFile(path, 'utf8', (error, data) => {
       if (error) {
-        reject(error)
+        observer.error(error)
       } else {
-        resolve(data)
+        observer.next(data)
+        observer.complete()
       }
     })
   })
 }
 
 function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
-  return new Promise((resolve, reject) => {
+  return new Observable(observer => {
     parseString(data, (error, result) => {
       if (error) {
-        reject(error)
+        observer.error(error)
       }
       result.xliff.file[0].unit.forEach(element => {
         if (propsText[element['$'].id]) {
@@ -183,7 +237,8 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
           )
         }
       })
-      resolve(result)
+      observer.next(result)
+      observer.complete()
     })
   })
 }
@@ -203,6 +258,11 @@ function translationNotFound(id, saveCode) {
 }
 
 function checkIfTranslationMatch(id, target, source) {
+  if (typeof source !== 'string') {
+    throw new Error(
+      `Translation id "${id}" is not a string. Maybe the i18n attribute is in an HTML tag with nested tags`
+    )
+  }
   let treatedSource = source.replace('\n', '')
   treatedSource = treatedSource.replace(/\s\s+/g, ' ')
   treatedSource = treatedSource.trim()
@@ -212,19 +272,15 @@ function checkIfTranslationMatch(id, target, source) {
 }
 
 function reportTranslationNotMatch(id, expected, got) {
-  if (!reportFile.unmatchedTranslations) {
-    reportFile.unmatchedTranslations = []
-  }
   reportFile.unmatchedTranslations.push({ id, expected, got })
 }
 
 function getTranslationFileFromGithub(baseUrl, code) {
-  return axios.get(baseUrl + code + '.properties').catch(error => {
-    if (!reportFile.unexistingFiles) {
-      reportFile.unexistingFiles = []
-    }
-    reportFile.unexistingFiles.push(baseUrl + code + '.properties')
-  })
+  return from(
+    axios.get(baseUrl + code + '.properties').catch(error => {
+      reportFile.unexistingFiles.push(baseUrl + code + '.properties')
+    })
+  )
 }
 
 function translationTreatment(translation, id, saveCode) {
