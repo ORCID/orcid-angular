@@ -20,7 +20,7 @@
     "format:fix-stage": "pretty-quick --staged",
     "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" ",
     "build:i18n:define": "ng xi18n  --i18n-format=xlf2 --output-path locale",
-    "build:i18n:generate": "node ./src/locale/translate-file-generator",
+    "build:i18n:generate": "tsc --p ./src/locale/local.tsconfig.json && node ./src/locale/translate-file-generator.js",
     "build:i18n": "npm run build:i18n:define && npm run build:i18n:generate",
     "build:en": "npm run build:i18n && ng run ng-orcid:build:production-en",
     "build:es": "npm run build:i18n && ng run ng-orcid:build:production-es",

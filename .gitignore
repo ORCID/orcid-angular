@@ -57,4 +57,4 @@ src/locale/messages.uk.xlf
 src/locale/messages.xx.xlf
 src/locale/messages.zh_CN.xlf
 src/locale/messages.zh_TW.xlf
-src/locale/messages.generator-report.json
+src/locale/translate-file-generator.js
