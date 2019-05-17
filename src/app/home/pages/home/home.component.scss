@@ -20,7 +20,7 @@
   }
 
   .hero-call-to-action {
-    width: 445px;
+    max-width: 445px;
     height: 36px;
     margin-top: 30px;
   }
@@ -70,6 +70,7 @@
     text-align: center;
   }
   .mat-headline {
+    text-align: center;
   }
 }
 .organization-section {
