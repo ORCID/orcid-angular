@@ -1,17 +1,14 @@
 import * as fs from 'fs'
 import { parseString, Builder } from 'xml2js'
-import { Observable, from, of } from 'rxjs'
+import { Observable, from, of, defer } from 'rxjs'
 import {
-  concatMap,
   map,
-  mapTo,
   tap,
   concatAll,
   combineAll,
-  merge,
   mergeMap,
-  mergeAll,
   switchMap,
+  reduce,
 } from 'rxjs/operators'
 
 const propertiesToJSON = require('properties-to-json')
@@ -106,48 +103,47 @@ readMessageFile('./src/locale/messages.xlf')
   .pipe(concatAll())
   // Save the translation file
   .pipe(map(result => saveJsonAsXlf(result.file, result.saveCode)))
-  // Wait until all translations where saved
+  // Waits until all translations are created ??
   .pipe(combineAll())
   // Save the translation log
   .pipe(mergeMap(() => saveJson(reportFile, 'translation.log')))
   // Start it all
   .subscribe()
 
-function generateLanguageFile(
-  code,
-  saveCode,
-  file
-): Observable<{
-  file: {}
-  saveCode: any
-}> {
+function generateLanguageFile(code, saveCode, file) {
   return (
     from(
       baseGithubTranslationFilesURL.map(url =>
         getTranslationFileFromGithub(url, code)
       )
     )
-      // Wait until the last read finish before reading the next file
+      // Wait until all properties files where read
       .pipe(concatAll())
+      // Reduces all the properties files in one list of files
       .pipe(
-        tap(() => {
-          console.log(`The langue code '${code}' file was readed`)
-        })
+        reduce((acc: any[], value: {}) => {
+          acc.push(value)
+          return acc
+        }, new Array())
       )
-      // Wait until all files where read
-      .pipe(combineAll())
-      // Get all the language properties
+      // Transform the list of files in a key-value translation file
       .pipe(map(val => getProperties(val)))
-      // Create a file with translations
+      // Creates an XLF translation based on the properties
       .pipe(
         mergeMap(val =>
           setLanguagePropertiesToLanguageFile(file, val, saveCode)
         )
       )
-      // Return file results to be saved
+      // Return the XLF to be saved
       .pipe(
         map(val => {
           return { file: val, saveCode: saveCode }
+        })
+      )
+      // Report success
+      .pipe(
+        tap(() => {
+          console.log(`The langue code '${code}' file was created`)
         })
       )
   )
@@ -276,11 +272,15 @@ function reportTranslationNotMatch(id, expected, got) {
 }
 
 function getTranslationFileFromGithub(baseUrl, code) {
-  return from(
-    axios.get(baseUrl + code + '.properties').catch(error => {
-      reportFile.unexistingFiles.push(baseUrl + code + '.properties')
-    })
-  )
+  // Defer, avoiding call the promise before the subscription
+  return defer(() => {
+    from(
+      axios.get(baseUrl + code + '.properties').catch(() => {
+        console.log('Unexisting language fie: ' + baseUrl + code)
+        reportFile.unexistingFiles.push(baseUrl + code + '.properties')
+      })
+    )
+  })
 }
 
 function translationTreatment(translation, id, saveCode) {
