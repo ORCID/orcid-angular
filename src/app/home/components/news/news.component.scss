@@ -4,9 +4,7 @@
     margin-top: 52px;
     margin-bottom: 9px;
   }
-  mat-divider {
-    margin-bottom: 36px;
-  }
+
   button {
     margin-left: 4px;
   }
@@ -38,13 +36,18 @@ button {
     width: 132px;
   }
 }
+
+.news-container,
+.spiner-container {
+  margin-top: 36px;
+}
+
 .colums-4,
 .colums-8 {
   :host {
-    mat-divider {
-      margin-bottom: 0;
+    .news-container {
+      margin-top: 0px;
     }
-
     .news-box > .col {
       padding: 0;
       > .row {
