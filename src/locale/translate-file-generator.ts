@@ -78,9 +78,10 @@ const languages = [
   },
 ]
 
-const reportFile: { unmatchedTranslations: any; unexistingFiles: any } = {
-  unmatchedTranslations: [],
-  unexistingFiles: [],
+const reportFile: {
+  language: any
+} = {
+  language: {},
 }
 
 const stringReplacements = {
@@ -244,13 +245,13 @@ function deepCopy(json) {
 }
 
 function translationNotFound(id, saveCode) {
-  if (!reportFile[saveCode]) {
-    reportFile[saveCode] = {}
+  if (!reportFile.language[saveCode]) {
+    reportFile.language[saveCode] = {}
   }
-  if (!reportFile[saveCode].notfound) {
-    reportFile[saveCode].notfound = []
+  if (!reportFile.language[saveCode].notFound) {
+    reportFile.language[saveCode].notFound = []
   }
-  reportFile[saveCode].notfound.push(id)
+  reportFile.language[saveCode].notFound.push(id)
 }
 
 function checkIfTranslationMatch(id, target, source) {
@@ -269,8 +270,14 @@ function checkIfTranslationMatch(id, target, source) {
   }
 }
 
-function reportTranslationNotMatch(id, expected, got) {
-  reportFile.unmatchedTranslations.push({ id, expected, got })
+function reportTranslationNotMatch(id, textOnTemplate, textOnProperty) {
+  if (!reportFile.language['en']) {
+    reportFile.language['en'] = {}
+  }
+  if (!reportFile.language['en'].unmatch) {
+    reportFile.language['en'].unmatch = []
+  }
+  reportFile.language['en'].unmatch.push({ id, textOnTemplate, textOnProperty })
 }
 
 function getTranslationFileFromGithub(baseUrl, code) {
@@ -282,7 +289,15 @@ function getTranslationFileFromGithub(baseUrl, code) {
         return result
       } else {
         console.log('Unexisting language fie: ' + baseUrl + code)
-        reportFile.unexistingFiles.push(baseUrl + code + '.properties')
+        if (!reportFile.language[code]) {
+          reportFile.language[code] = {}
+        }
+        if (!reportFile.language[code].unexistingFiles) {
+          reportFile.language[code].unexistingFiles = []
+        }
+        reportFile.language[code].unexistingFiles.push(
+          baseUrl + code + '.properties'
+        )
         return result
       }
     })
@@ -300,13 +315,13 @@ function translationTreatment(translation, id, saveCode) {
 
 function reportTranslationTreatment(translation, replacement, saveCode, id) {
   if (replacement !== translation) {
-    if (!reportFile[saveCode]) {
-      reportFile[saveCode] = {}
+    if (!reportFile.language[saveCode]) {
+      reportFile.language[saveCode] = {}
     }
-    if (!reportFile[saveCode].changed) {
-      reportFile[saveCode].changed = []
+    if (!reportFile.language[saveCode].changed) {
+      reportFile.language[saveCode].changed = []
     }
-    reportFile[saveCode].changed.push({
+    reportFile.language[saveCode].changed.push({
       id,
       translation,
       replacement,
