@@ -103,7 +103,7 @@ readMessageFile('./src/locale/messages.xlf')
   .pipe(concatAll())
   // Save the translation file
   .pipe(map(result => saveJsonAsXlf(result.file, result.saveCode)))
-  // Waits until all translations are created ??
+  // Waits until all translations are created
   .pipe(combineAll())
   // Save the translation log
   .pipe(mergeMap(() => saveJson(reportFile, 'translation.log')))
@@ -221,16 +221,16 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
               saveCode
             )
           )
+          if ('en' === saveCode) {
+            checkIfTranslationMatch(
+              element['$'].id,
+              element.segment[0].target[0],
+              element.segment[0].source[0]
+            )
+          }
         } else {
           element.segment[0].target = element.segment[0].source
           translationNotFound(element['$'].id, saveCode)
-        }
-        if ('en' === saveCode) {
-          checkIfTranslationMatch(
-            element['$'].id,
-            element.segment[0].target[0],
-            element.segment[0].source[0]
-          )
         }
       })
       observer.next(result)
@@ -259,9 +259,11 @@ function checkIfTranslationMatch(id, target, source) {
       `Translation id "${id}" is not a string. Maybe the i18n attribute is in an HTML tag with nested tags`
     )
   }
-  let treatedSource = source.replace('\n', '')
-  treatedSource = treatedSource.replace(/\s\s+/g, ' ')
-  treatedSource = treatedSource.trim()
+  const treatedSource = source
+    .replace('\n', '')
+    .replace('\r', '')
+    .replace(/\s\s+/g, ' ')
+    .trim()
   if (target !== treatedSource) {
     reportTranslationNotMatch(id, target, treatedSource)
   }
@@ -272,15 +274,19 @@ function reportTranslationNotMatch(id, expected, got) {
 }
 
 function getTranslationFileFromGithub(baseUrl, code) {
-  // Defer, avoiding call the promise before the subscription
-  return defer(() => {
-    from(
-      axios.get(baseUrl + code + '.properties').catch(() => {
+  return from(
+    axios.get(baseUrl + code + '.properties').catch(error => {})
+  ).pipe(
+    map(result => {
+      if (result) {
+        return result
+      } else {
         console.log('Unexisting language fie: ' + baseUrl + code)
         reportFile.unexistingFiles.push(baseUrl + code + '.properties')
-      })
-    )
-  })
+        return result
+      }
+    })
+  )
 }
 
 function translationTreatment(translation, id, saveCode) {
