@@ -93,7 +93,8 @@
               "i18nFile": "src/locale/messages.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
-              "baseHref": "/en/"
+              "baseHref": "/en/",
+              "statsJson": true
             },
             "production-fr": {
               "fileReplacements": [
