@@ -45,8 +45,10 @@
 
 .register-section {
   padding: 56px 0;
-  height: 400px;
   box-sizing: border-box;
+  > .container > .row > .col {
+    height: 100%;
+  }
   .number-box {
     .col {
       justify-content: space-around;
@@ -66,7 +68,7 @@
   }
 
   .mat-body-1 {
-    height: 146px;
+    height: 100%;
     text-align: center;
   }
   .mat-headline {

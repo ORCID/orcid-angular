@@ -16,7 +16,9 @@
           <ng-container i18n="@@home.distinguish_yourself">
             DISTINGUISH YOURSELF IN
           </ng-container>
-          <ng-container i18n="@@home.three_easy">THREE EASY STEPS</ng-container>
+          <ng-container i18n="@@home.three_easy">
+            THREE EASY STEPS</ng-container
+          >
         </h1>
 
         <div
@@ -36,6 +38,7 @@
             color="primary"
             class="hero-call-to-action"
             i18n="@@home.find_out_more"
+            (click)="navigateTo('/about/what-is-orcid/mission')"
             >FIND OUT MORE ABOUT OUR MISSION AND VALUES
           </app-multi-row-raised-button>
         </div>
@@ -60,9 +63,9 @@
               Get your unique ORCID identifier. It’s free and only takes a
               minute, so
             </ng-container>
-            <ng-container i18n="@@home.register_now"
-              >register now!</ng-container
-            >
+            <a i18n="@@home.register_now" (click)="navigateTo('/register')">
+              register now!
+            </a>
           </div>
         </div>
         <div class="col l4 m8 s4">
@@ -143,9 +146,12 @@
             <div i18n="@@home.curious_about">
               Curious about who our members are?
             </div>
-            <div i18n="@@home.see_our">
+            <a
+              i18n="@@home.see_our"
+              (click)="navigateTo('/about/what-is-orcid/mission')"
+            >
               See our complete list of member organizations
-            </div>
+            </a>
           </div>
         </div>
       </div>

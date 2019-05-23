@@ -38,10 +38,16 @@ button {
     width: 132px;
   }
 }
+
+:host {
+  padding-bottom: 50px;
+  display: block;
+}
+
 .colums-4,
 .colums-8 {
   :host {
-    mat-divider {
+    padding: 0 mat-divider {
       margin-bottom: 0;
     }
 
