@@ -17,7 +17,6 @@
 @mixin custom-components-theme($theme) {
   @include glopbal-theme($theme);
   @include header-theme($theme);
-  @include header-theme($theme);
   @include search-theme($theme);
   @include footer-theme($theme);
   @include home-theme($theme);

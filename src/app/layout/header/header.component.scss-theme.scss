@@ -12,23 +12,14 @@ $config: mat-typography-config();
       //FIXME ACCESSIBILITY-ISSUE
       color: mat-color($primary, '500-contrast');
       background-color: mat-color($primary);
-    }
-    .bottom-bar {
-      color: mat-color($foreground, 'text');
-    }
-    .active {
-      background: mat-color($background, 'grey');
-      color: mat-contrast($primary, 500);
-      border-radius: 0;
-    }
-    .tabletOrHandset {
-      .top-bar {
-        //FIXME ACCESSIBILITY-ISSUE
-        color: map-get($foreground, text);
-        background-color: map-get($background, card);
-      }
-      .active button {
-        color: mat-color($primary, '500-contrast');
+      .container {
+        .row {
+          .active {
+            background-color: mat-color($background, light-grey);
+            color: mat-contrast($accent, 500);
+            border-radius: 0;
+          }
+        }
       }
     }
   }

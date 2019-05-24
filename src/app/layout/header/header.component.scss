@@ -21,30 +21,21 @@ nav {
 
   .top-bar {
     height: 60px;
+    margin-bottom: 60px;
     .container {
       height: 100%;
       .row {
         height: 100%;
+        position: relative;
         .col {
           height: 100%;
           button {
             height: 100%;
           }
-        }
-      }
-    }
-  }
-
-  .bottom-bar {
-    height: 48px;
-    .container {
-      height: 100%;
-      .row {
-        height: 100%;
-        .col {
-          height: 100%;
-          button {
-            height: 100%;
+          .row {
+            position: absolute;
+            top: 100%;
+            left: 0;
           }
         }
       }

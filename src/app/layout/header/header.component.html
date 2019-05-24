@@ -26,6 +26,31 @@
           >
             For Researchers
           </button>
+          <ul class="row" *ngIf="menu.researchers.hover">
+            <li class="col no-gutters">
+              <button mat-button color="primary" i18n="@@public-layout.sign_in">
+                SIGN IN
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.register"
+              >
+                Register for an ORCID iD
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.for_researchers"
+              >
+                Learn more
+              </button>
+            </li>
+          </ul>
         </li>
         <li class="col no-gutters">
           <button
@@ -37,6 +62,49 @@
           >
             For Organizations
           </button>
+          <ul class="row" *ngIf="menu.organizations.hover">
+            <li class="col no-gutters">
+              <button mat-button color="primary" i18n="@@public-layout.funders">
+                Funders
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.publishers"
+              >
+                Publishers
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.research_organizations"
+              >
+                Research Organizations
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.associations"
+              >
+                Associations
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.integrators"
+              >
+                Integrators
+              </button>
+            </li>
+          </ul>
         </li>
         <li class="col no-gutters">
           <button
@@ -48,6 +116,54 @@
           >
             About
           </button>
+          <ul class="row" *ngIf="menu.about.hover">
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.what_is_orcid"
+              >
+                What is ORCID
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.the_orcid_team"
+              >
+                The ORCID Team
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.the_orcid_community"
+              >
+                The ORCID Community
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.membership"
+              >
+                Membership
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button mat-button color="primary" i18n="@@public-layout.news">
+                News
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button mat-button color="primary" i18n="@@public-layout.events">
+                Events
+              </button>
+            </li>
+          </ul>
         </li>
         <li class="col no-gutters">
           <button
@@ -59,6 +175,40 @@
           >
             Help
           </button>
+          <ul class="row" *ngIf="menu.help.hover">
+            <li class="col no-gutters">
+              <button mat-button color="primary" i18n="@@public-layout.faq">
+                FAQ
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.contact_us"
+              >
+                Contact us
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.give_feedback"
+              >
+                Give Feedback
+              </button>
+            </li>
+            <li class="col no-gutters">
+              <button
+                mat-button
+                color="primary"
+                i18n="@@public-layout.knowledge_base"
+              >
+                Knowledge Base
+              </button>
+            </li>
+          </ul>
         </li>
         <li class="col no-gutters">
           <button
@@ -69,143 +219,6 @@
             i18n="@@public-layout.sign_in"
           >
             Sign in
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="bottom-bar">
-    <div class="container" *ngIf="menu.researchers.hover">
-      <ul class="row">
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.sign_in">
-            SIGN IN
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.register">
-            Register for an ORCID iD
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button
-            mat-button
-            color="primary"
-            i18n="@@public-layout.for_researchers"
-          >
-            Learn more
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div class="container" *ngIf="menu.organizations.hover">
-      <ul class="row">
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.funders">
-            Funders
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.publishers">
-            Publishers
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button
-            mat-button
-            color="primary"
-            i18n="@@public-layout.research_organizations"
-          >
-            Research Organizations
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button i18n="@@public-layout.associations">
-            Associations
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.integrators">
-            Integrators
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div class="container" *ngIf="menu.about.hover">
-      <ul class="row">
-        <li class="col no-gutters">
-          <button
-            mat-button
-            color="primary"
-            i18n="@@public-layout.what_is_orcid"
-          >
-            What is ORCID
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button
-            mat-button
-            color="primary"
-            i18n="@@public-layout.the_orcid_team"
-          >
-            The ORCID Team
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button
-            mat-button
-            color="primary"
-            i18n="@@public-layout.the_orcid_community"
-          >
-            The ORCID Community
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.membership">
-            Membership
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.news">
-            News
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.events">
-            Events
-          </button>
-        </li>
-      </ul>
-    </div>
-
-    <div class="container" *ngIf="menu.help.hover">
-      <ul class="row">
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.faq">
-            FAQ
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button mat-button color="primary" i18n="@@public-layout.contact_us">
-            Contact us
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button
-            mat-button
-            color="primary"
-            i18n="@@public-layout.give_feedback"
-          >
-            Give Feedback
-          </button>
-        </li>
-        <li class="col no-gutters">
-          <button
-            mat-button
-            color="primary"
-            i18n="@@public-layout.knowledge_base"
-          >
-            Knowledge Base
           </button>
         </li>
       </ul>
