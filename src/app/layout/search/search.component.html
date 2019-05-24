@@ -1,4 +1,4 @@
-<div class="row end language-menu">
+<div class="row end language-menu" *ngIf="platform.colums12">
   <button mat-button [matMenuTriggerFor]="languageMenu" class="col">
     <div class="row middle space-between">
       <p class="col">{{ languageMenuOptions[locale] }}</p>
@@ -7,7 +7,7 @@
   </button>
 </div>
 
-<div class="row end">
+<div class="row end" *ngIf="platform.colums12">
   <button mat-button color="primary">ADVACE SEARCH</button>
 </div>
 <form [formGroup]="form" class="row end search-box middle">
@@ -20,7 +20,7 @@
     <div>Registry</div>
     <mat-icon matSuffix>arrow_drop_down</mat-icon>
   </div>
-  <div><input placeholder="Search" type="text" /></div>
+  <div class="input-box"><input placeholder="Search" type="text" /></div>
   <div matRipple class="col middle search-icon">
     <mat-icon matSuffix>search</mat-icon>
   </div>

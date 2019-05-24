@@ -22,14 +22,14 @@ nav {
   .top-bar {
     height: 60px;
     margin-bottom: 60px;
-    .container {
+    .menu-container {
       height: 100%;
       .row {
         height: 100%;
         position: relative;
         .col {
           height: 100%;
-          button {
+          & button {
             height: 100%;
           }
           .row {
@@ -48,5 +48,82 @@ nav {
     text-align: right;
     display: block;
     margin-bottom: 8px;
+  }
+}
+
+.colums-8,
+.colums-4 {
+  :host {
+    header.container {
+      padding-bottom: 0;
+      .logo-menu-container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        .logo-container {
+          img {
+            height: 38px;
+          }
+        }
+      }
+      height: auto;
+    }
+
+    nav {
+      position: absolute;
+      width: 100%;
+      z-index: 1000;
+      height: 100%;
+      margin-top: -45px;
+      .top-bar {
+        height: auto;
+        .menu-container {
+          padding-top: 32px;
+          padding-bottom: 32px;
+          .row {
+            flex-direction: column;
+            .col {
+              button {
+                width: 100%;
+                text-align: left;
+                &.sign-in-button {
+                  width: auto;
+                  margin-top: 10px;
+                  left: 16px;
+                }
+              }
+
+              .row {
+                flex-direction: column;
+                position: relative;
+                button {
+                  margin-left: 16px;
+                  width: 100%;
+                  text-align: left;
+                }
+                .row {
+                  button {
+                    margin-left: 32px;
+                  }
+                  .row {
+                    button {
+                      margin-left: 64px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .statics {
+      .mat-caption {
+        text-align: right;
+        margin-bottom: 4px;
+        margin-top: 4px;
+      }
+    }
   }
 }

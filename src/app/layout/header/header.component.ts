@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/core'
+import { PlatformInfo, ApplicationMenuItem } from 'src/app/types'
+import { menu } from './menu'
+import { ApplicationMenuItemBasic } from 'src/app/types/menu.local'
 
 @Component({
   selector: 'app-header',
@@ -10,60 +13,11 @@ import { PlatformInfoService } from 'src/app/core'
 })
 export class HeaderComponent implements OnInit {
   currentRoute
-  platformInfo
-  menu = {
-    researchers: {
-      route: '/',
-      hover: false,
-      buttons: {
-        signIn: {},
-        signUp: {},
-        learMore: {},
-      },
-    },
-    organizations: {
-      route: '.',
-      hover: false,
-      active: false,
-      buttons: {
-        funders: {},
-        publishers: {},
-        organizations: {},
-        outreach: {},
-        api: {},
-      },
-    },
-    about: {
-      route: '.',
-      hover: false,
-      active: false,
-      buttons: {
-        what: {},
-        are: {},
-        serve: {},
-        membership: {},
-        events: {},
-      },
-    },
-    help: {
-      route: '.',
-      hover: false,
-      active: false,
-      buttons: {
-        help: {},
-        faq: {},
-        base: {},
-        feedback: {},
-      },
-    },
-    signIn: {
-      route: '.',
-      hover: false,
-      active: false,
-    },
-  }
+  platform: PlatformInfo
+  mobileMenuState = false
+  menu: ApplicationMenuItem[] = this.createMenuList(menu)
 
-  constructor(_router: Router, _platformInfo: PlatformInfoService) {
+  constructor(_router: Router, _platform: PlatformInfoService) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(val => {
@@ -71,22 +25,17 @@ export class HeaderComponent implements OnInit {
         this.setChildOfCurrentRouteAsSecondaryMenu()
       })
 
-    _platformInfo.get().subscribe(platformInfo => {
-      this.platformInfo = platformInfo
+    _platform.get().subscribe(data => {
+      this.platform = data
     })
   }
 
   ngOnInit() {}
 
-  mouseEnter(ul: string) {
-    Object.keys(this.menu).forEach(button => {
-      if (button === ul) {
-        this.menu[button].hover = true
-      } else {
-        this.menu[button].hover = false
-      }
-    })
-    this.menu[ul].hover = true
+  mouseEnter(ul: string[]) {
+    if (this.platform.colums12) {
+      this.updateHover(this.menu, ul)
+    }
   }
 
   mouseLeave() {
@@ -99,5 +48,45 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  click(ul: string) {}
+  click(ul: string[]) {
+    if (!this.platform.colums12) {
+      this.updateHover(this.menu, ul)
+    }
+  }
+
+  updateHover(menuToUpdate: ApplicationMenuItem[], ul: string[]) {
+    if (ul.length) {
+      const current = ul.shift()
+      if (menuToUpdate != null) {
+        menuToUpdate.forEach(button => {
+          if (button.id === current) {
+            button.hover = true
+            this.updateHover(button.buttons, ul)
+          } else {
+            button.hover = false
+          }
+        })
+      }
+    }
+  }
+  createMenuList(
+    menuDefinition: ApplicationMenuItemBasic[]
+  ): ApplicationMenuItem[] {
+    const list: ApplicationMenuItem[] = []
+    if (!menuDefinition || !menuDefinition.length) {
+      return []
+    }
+    menuDefinition.forEach(item => {
+      const newItem: ApplicationMenuItem = {
+        ...item,
+        hover: false,
+        active: false,
+        buttons: this.createMenuList(item.buttons),
+      }
+
+      list.push(newItem)
+    })
+
+    return list
+  }
 }

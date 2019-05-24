@@ -12,14 +12,61 @@ $config: mat-typography-config();
       //FIXME ACCESSIBILITY-ISSUE
       color: mat-color($primary, '500-contrast');
       background-color: mat-color($primary);
-      .container {
+
+      .menu-container {
         .row {
-          .active {
-            background-color: mat-color($background, light-grey);
+          button {
+            & .active {
+              background-color: mat-color($background, light-grey);
+              color: mat-contrast($accent, 500);
+              border-radius: 0;
+            }
+            &.sign-in-button {
+              border-color: white;
+            }
+          }
+
+          .row {
             color: mat-contrast($accent, 500);
-            border-radius: 0;
           }
         }
+      }
+    }
+
+    .colums-8 &,
+    .colums-4 & {
+      .top-bar {
+        background-color: mat-color($primary, 700);
+        .menu-container {
+          .row {
+            button {
+              & .active {
+              }
+              &.sign-in-button {
+              }
+            }
+
+            .row {
+              background-color: mat-color($primary, 600);
+              .row {
+                background-color: mat-color($background, 'light-grey');
+                .row {
+                  background-color: mat-color($background, 'card');
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin app-header-typography($orcid-material, $orcid-custom) {
+  app-header {
+    .top-bar {
+      .menu-container > .row > .col > button {
+        @include mat-typography-level-to-styles($orcid-custom, title-alt);
       }
     }
   }

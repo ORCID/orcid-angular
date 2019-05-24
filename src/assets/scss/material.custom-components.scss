@@ -31,11 +31,12 @@
   @include profile-activities-affiliation-theme($theme);
 }
 
-@mixin custom-components-typography($custom) {
-  @include profile-person-typography($custom);
-  @include profile-person-detail-typography($custom);
-  @include card-typography($custom);
-  @include profile-activities-typography($custom);
-  @include card-detail-typography($custom);
-  @include multi-row-raised-button-typography($custom);
+@mixin custom-components-typography($orcid-material, $orcid-custom) {
+  @include profile-person-typography($orcid-material);
+  @include profile-person-detail-typography($orcid-material);
+  @include card-typography($orcid-material);
+  @include profile-activities-typography($orcid-material);
+  @include card-detail-typography($orcid-material);
+  @include multi-row-raised-button-typography($orcid-material);
+  @include app-header-typography($orcid-material, $orcid-custom);
 }

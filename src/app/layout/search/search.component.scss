@@ -53,6 +53,26 @@
   }
 }
 
+.colums-8,
+.colums-4 {
+  :host {
+    .search-box {
+      .search-where,
+      .search-icon {
+        flex-shrink: 0;
+        border-radius: 0;
+      }
+      flex-wrap: initial;
+      .input-box {
+        flex-grow: 1;
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
 body[dir='rtl'] :host {
   .search-where {
     border-radius: 0 4px 4px 0;
