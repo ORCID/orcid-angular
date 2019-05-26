@@ -60,8 +60,12 @@ export class HeaderComponent implements OnInit {
       if (menuToUpdate != null) {
         menuToUpdate.forEach(button => {
           if (button.id === current) {
-            button.hover = true
-            this.updateHover(button.buttons, ul)
+            if (ul.length > 0) {
+              button.hover = true
+              this.updateHover(button.buttons, ul)
+            } else {
+              button.hover = !button.hover
+            }
           } else {
             button.hover = false
           }
