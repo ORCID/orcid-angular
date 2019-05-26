@@ -9,7 +9,7 @@
           (click)="moreNews()"
           color="primary"
           i18n="@@home.more_news"
-          *ngIf="platform.colums12"
+          *ngIf="platform.columns12"
         >
           MORE NEWS
         </button>
@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-<div [ngClass]="{ container: platform.colums12 }">
+<div [ngClass]="{ container: platform.columns12 }">
   <ng-container *ngIf="news">
     <div class="row news-box" [@listAnimation]="news.length">
       <div class="col l4 m8 s4" *ngFor="let new of news">
@@ -51,7 +51,7 @@
   </ng-container>
 </div>
 <div class="container mobile-more-news-box">
-  <div class="row horizontal-center" *ngIf="!platform.colums12">
+  <div class="row horizontal-center" *ngIf="!platform.columns12">
     <button
       class="col"
       mat-button

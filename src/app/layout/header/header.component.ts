@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {}
 
   mouseEnter(ul: string[]) {
-    if (this.platform.colums12) {
+    if (this.platform.columns12) {
       this.updateHover(this.menu, ul)
     }
   }
@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
   }
 
   click(ul: string[]) {
-    if (!this.platform.colums12) {
+    if (!this.platform.columns12) {
       this.updateHover(this.menu, ul)
     }
   }

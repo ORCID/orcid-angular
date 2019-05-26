@@ -9,8 +9,8 @@
         <h1
           class="col l12 m8 s4 horizontal-center hero-title"
           [ngClass]="{
-            'mat-display-3': platform.colums12,
-            'mat-display-1': platform.colums8 || platform.colums4
+            'mat-display-3': platform.columns12,
+            'mat-display-1': platform.columns8 || platform.columns4
           }"
         >
           <ng-container i18n="@@home.distinguish_yourself">
@@ -114,7 +114,7 @@
   <div class="organization-section">
     <div class="col l4 m8 s4">
       <img
-        *ngIf="platform.colums8 || platform.colums4"
+        *ngIf="platform.columns8 || platform.columns4"
         class="organization-img"
         src="assets/img/organizations.png  "
         alt=""
@@ -124,7 +124,7 @@
       <div class="row middle">
         <div class="col l4 m8 s4">
           <img
-            *ngIf="platform.colums12"
+            *ngIf="platform.columns12"
             class="organization-img"
             src="assets/img/organizations.png  "
             alt=""
