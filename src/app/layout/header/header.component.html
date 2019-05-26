@@ -39,7 +39,12 @@
               (click)="click(parents.concat(item.id))"
               (mouseenter)="mouseEnter(parents.concat(item.id))"
             >
-              {{ item.label }}
+              <div class="button-box">
+                <div>{{ item.label }}</div>
+                <mat-icon *ngIf="item.buttons.length">{{
+                  item.hover ? 'arrow_drop_up' : 'arrow_drop_down'
+                }}</mat-icon>
+              </div>
             </button>
             <ng-container *ngIf="item.hover && item.buttons.length">
               <ng-container
