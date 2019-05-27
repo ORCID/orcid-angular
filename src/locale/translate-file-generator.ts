@@ -95,7 +95,7 @@ readMessageFile('./src/locale/messages.xlf')
     switchMap(file =>
       from(
         languages.map(language =>
-          generateLanguageFile(language.code, language.code, deepCopy(file))
+          generateLanguageFile(language.code, deepCopy(file))
         )
       )
     )
@@ -111,11 +111,11 @@ readMessageFile('./src/locale/messages.xlf')
   // Start it all
   .subscribe()
 
-function generateLanguageFile(code, saveCode, file) {
+function generateLanguageFile(saveCode, file) {
   return (
     from(
       baseGithubTranslationFilesURL.map(url =>
-        getTranslationFileFromGithub(url, code)
+        getTranslationFileFromGithub(url, saveCode)
       )
     )
       // Wait until all properties files where read
@@ -129,6 +129,7 @@ function generateLanguageFile(code, saveCode, file) {
       )
       // Transform the list of files in a key-value translation file
       .pipe(map(val => getProperties(val)))
+      .pipe(tap(val => saveTs(val, saveCode)))
       // Creates an XLF translation based on the properties
       .pipe(
         mergeMap(val =>
@@ -144,7 +145,7 @@ function generateLanguageFile(code, saveCode, file) {
       // Report success
       .pipe(
         tap(() => {
-          console.log(`The langue code '${code}' file was created`)
+          console.log(`The langue code '${saveCode}' file was created`)
         })
       )
   )
@@ -155,12 +156,16 @@ function saveJsonAsXlf(json, name) {
     new Promise((resolve, reject) => {
       const builder = new Builder()
       const xml = builder.buildObject(json)
-      fs.writeFile('./src/locale/messages.' + name + '.xlf', xml, err => {
-        if (err) {
-          reject(err)
+      fs.writeFile(
+        './src/locale/messages.static.' + name + '.xlf',
+        xml,
+        err => {
+          if (err) {
+            reject(err)
+          }
+          resolve()
         }
-        resolve()
-      })
+      )
     })
   )
 }
@@ -170,7 +175,28 @@ function saveJson(json, name) {
     new Promise((resolve, reject) => {
       fs.writeFile(
         './src/locale/messages.' + name + '.json',
-        JSON.stringify(reportFile, null, 2),
+        JSON.stringify(json, null, 2),
+        function(err) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve()
+          }
+        }
+      )
+    })
+  )
+}
+
+function saveTs(json, name) {
+  return of(
+    new Promise((resolve, reject) => {
+      fs.writeFile(
+        './src/locale/messages.dynamic.' + name + '.ts',
+        '// prettier-ignore\n' +
+          '/* tslint:disable */\n' +
+          'export const LOCALE = ' +
+          JSON.stringify(json, null, 2),
         function(err) {
           if (err) {
             reject(err)

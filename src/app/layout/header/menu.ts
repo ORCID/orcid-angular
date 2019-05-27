@@ -1,18 +1,19 @@
 import { ApplicationMenuItemBasic } from 'src/app/types/menu.local'
+import { LOCALE } from '../../../locale/messages.dynamic'
 
 export const menu: ApplicationMenuItemBasic[] = [
   {
-    id: 'researchers',
-    label: 'FOR RESEARCHERS',
+    id: 'public-layout.for_researchers',
+    label: LOCALE['public-layout.for_researchers'],
     route: '/',
     buttons: [
       {
-        id: 'researchers',
-        label: 'FOR RESEARCHERS',
+        id: 'public-layout.for_researchers',
+        label: LOCALE['public-layout.for_researchers'],
       },
       {
-        id: 'signIn',
-        label: 'SIGN IN',
+        id: 'public-layout.sign_in',
+        label: 'public-layout.sign_in',
       },
       {
         id: 'register',

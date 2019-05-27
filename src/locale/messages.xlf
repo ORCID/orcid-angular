@@ -1,221 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
-    <unit id="public-layout.for_researchers">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:26,28</note>
-        <note category="location">app/layout/header/header.component.html:95,97</note>
-      </notes>
-      <segment>
-        <source>
-            For Researchers
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.for_organizations">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:37,39</note>
-      </notes>
-      <segment>
-        <source>
-            For Organizations
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.about">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:48,50</note>
-      </notes>
-      <segment>
-        <source>
-            About
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.help">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:59,61</note>
-      </notes>
-      <segment>
-        <source>
-            Help
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.sign_in">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:70,72</note>
-        <note category="location">app/layout/header/header.component.html:81,83</note>
-      </notes>
-      <segment>
-        <source>
-            Sign in
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.register">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:86,88</note>
-      </notes>
-      <segment>
-        <source>
-            Register for an ORCID iD
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.funders">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:104,106</note>
-      </notes>
-      <segment>
-        <source>
-            Funders
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.publishers">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:109,111</note>
-      </notes>
-      <segment>
-        <source>
-            Publishers
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.research_organizations">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:118,120</note>
-      </notes>
-      <segment>
-        <source>
-            Research Organizations
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.associations">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:123,125</note>
-      </notes>
-      <segment>
-        <source>
-            Associations
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.integrators">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:128,130</note>
-      </notes>
-      <segment>
-        <source>
-            Integrators
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.what_is_orcid">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:141,143</note>
-      </notes>
-      <segment>
-        <source>
-            What is ORCID
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.the_orcid_team">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:150,152</note>
-      </notes>
-      <segment>
-        <source>
-            The ORCID Team
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.the_orcid_community">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:159,161</note>
-      </notes>
-      <segment>
-        <source>
-            The ORCID Community
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.membership">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:164,166</note>
-      </notes>
-      <segment>
-        <source>
-            Membership
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.news">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:169,171</note>
-      </notes>
-      <segment>
-        <source>
-            News
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.events">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:174,176</note>
-      </notes>
-      <segment>
-        <source>
-            Events
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.faq">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:184,186</note>
-      </notes>
-      <segment>
-        <source>
-            FAQ
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.contact_us">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:189,191</note>
-      </notes>
-      <segment>
-        <source>
-            Contact us
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.give_feedback">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:198,200</note>
-      </notes>
-      <segment>
-        <source>
-            Give Feedback
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.knowledge_base">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:207,209</note>
-      </notes>
-      <segment>
-        <source>
-            Knowledge Base
-          </source>
-      </segment>
-    </unit>
     <unit id="public-layout.amount_ids">
       <notes>
-        <note category="location">app/layout/header/header.component.html:222</note>
+        <note category="location">app/layout/header/header.component.html:80</note>
       </notes>
       <segment>
         <source>ORCID iDs and counting.</source>
@@ -287,6 +75,15 @@
           </source>
       </segment>
     </unit>
+    <unit id="home.!!">
+      <notes>
+        <note category="location">app/layout/search/search.component.html:40</note>
+        <note category="location">app/layout/search/search.component.html:41</note>
+      </notes>
+      <segment>
+        <source>Registry</source>
+      </segment>
+    </unit>
     <unit id="home.distinguish_yourself">
       <notes>
         <note category="location">app/home/pages/home/home.component.html:16,18</note>
@@ -299,15 +96,16 @@
     </unit>
     <unit id="home.three_easy">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:19</note>
+        <note category="location">app/home/pages/home/home.component.html:19,20</note>
       </notes>
       <segment>
-        <source>THREE EASY STEPS</source>
+        <source>
+            THREE EASY STEPS</source>
       </segment>
     </unit>
     <unit id="home.orcid_provides">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:25,33</note>
+        <note category="location">app/home/pages/home/home.component.html:27,35</note>
       </notes>
       <segment>
         <source>
@@ -323,7 +121,7 @@
     </unit>
     <unit id="home.find_out_more">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:39,40</note>
+        <note category="location">app/home/pages/home/home.component.html:42,43</note>
       </notes>
       <segment>
         <source>FIND OUT MORE ABOUT OUR MISSION AND VALUES
@@ -332,7 +130,7 @@
     </unit>
     <unit id="home.one">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:52</note>
+        <note category="location">app/home/pages/home/home.component.html:55</note>
       </notes>
       <segment>
         <source>1</source>
@@ -340,7 +138,7 @@
     </unit>
     <unit id="home.register">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:54,56</note>
+        <note category="location">app/home/pages/home/home.component.html:57,59</note>
       </notes>
       <segment>
         <source>
@@ -350,7 +148,7 @@
     </unit>
     <unit id="home.get_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:59,62</note>
+        <note category="location">app/home/pages/home/home.component.html:62,65</note>
       </notes>
       <segment>
         <source>
@@ -361,15 +159,17 @@
     </unit>
     <unit id="home.register_now">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:64</note>
+        <note category="location">app/home/pages/home/home.component.html:66,68</note>
       </notes>
       <segment>
-        <source>register now!</source>
+        <source>
+              register now!
+            </source>
       </segment>
     </unit>
     <unit id="home.two">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:71</note>
+        <note category="location">app/home/pages/home/home.component.html:74</note>
       </notes>
       <segment>
         <source>2</source>
@@ -377,7 +177,7 @@
     </unit>
     <unit id="home.add_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:74</note>
+        <note category="location">app/home/pages/home/home.component.html:77</note>
       </notes>
       <segment>
         <source>ADD YOUR </source>
@@ -385,7 +185,7 @@
     </unit>
     <unit id="home.info">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:75</note>
+        <note category="location">app/home/pages/home/home.component.html:78</note>
       </notes>
       <segment>
         <source>INFO</source>
@@ -393,7 +193,7 @@
     </unit>
     <unit id="home.enhance_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:81,86</note>
+        <note category="location">app/home/pages/home/home.component.html:84,89</note>
       </notes>
       <segment>
         <source>
@@ -406,7 +206,7 @@
     </unit>
     <unit id="home.three">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:91</note>
+        <note category="location">app/home/pages/home/home.component.html:94</note>
       </notes>
       <segment>
         <source>3</source>
@@ -414,7 +214,7 @@
     </unit>
     <unit id="home.user_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:94</note>
+        <note category="location">app/home/pages/home/home.component.html:97</note>
       </notes>
       <segment>
         <source>USE YOUR</source>
@@ -422,7 +222,7 @@
     </unit>
     <unit id="home.orcid_id">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:95</note>
+        <note category="location">app/home/pages/home/home.component.html:98</note>
       </notes>
       <segment>
         <source> ORCID ID</source>
@@ -430,7 +230,7 @@
     </unit>
     <unit id="home.include_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:101,105</note>
+        <note category="location">app/home/pages/home/home.component.html:104,108</note>
       </notes>
       <segment>
         <source>
@@ -442,7 +242,7 @@
     </unit>
     <unit id="home.members_make">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:131,133</note>
+        <note category="location">app/home/pages/home/home.component.html:134,136</note>
       </notes>
       <segment>
         <source>
@@ -452,7 +252,7 @@
     </unit>
     <unit id="home.orcid_is">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:136,141</note>
+        <note category="location">app/home/pages/home/home.component.html:139,144</note>
       </notes>
       <segment>
         <source>
@@ -465,7 +265,7 @@
     </unit>
     <unit id="home.curious_about">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:143,145</note>
+        <note category="location">app/home/pages/home/home.component.html:146,148</note>
       </notes>
       <segment>
         <source>
@@ -475,7 +275,7 @@
     </unit>
     <unit id="home.see_our">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:146,148</note>
+        <note category="location">app/home/pages/home/home.component.html:152,154</note>
       </notes>
       <segment>
         <source>

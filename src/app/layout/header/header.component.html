@@ -41,7 +41,7 @@
             >
               <div class="button-box">
                 <div>{{ item.label }}</div>
-                <mat-icon *ngIf="item.buttons.length">{{
+                <mat-icon *ngIf="!platform.columns12 && item.buttons.length">{{
                   item.hover ? 'arrow_drop_up' : 'arrow_drop_down'
                 }}</mat-icon>
               </div>
