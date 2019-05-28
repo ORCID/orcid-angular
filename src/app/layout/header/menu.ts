@@ -10,6 +10,7 @@ export const menu: ApplicationMenuItemBasic[] = [
       {
         id: 'public-layout.for_researchers',
         label: LOCALE['public-layout.for_researchers'],
+        hideOnDesktop: true,
       },
       {
         id: 'public-layout.sign_in',
@@ -33,6 +34,7 @@ export const menu: ApplicationMenuItemBasic[] = [
       {
         label: LOCALE['public-layout.for_organizations'],
         id: 'organizations',
+        hideOnDesktop: true,
       },
       {
         label: LOCALE['public-layout.funders'],
@@ -138,7 +140,6 @@ export const menu: ApplicationMenuItemBasic[] = [
 
       {
         id: 'integrators',
-
         label: LOCALE['public-layout.integrators'],
 
         buttons: [
@@ -175,7 +176,11 @@ export const menu: ApplicationMenuItemBasic[] = [
     label: LOCALE['public-layout.about'],
 
     buttons: [
-      { id: 'about', label: LOCALE['public-layout.about'] },
+      {
+        id: 'about',
+        label: LOCALE['public-layout.about'],
+        hideOnDesktop: true,
+      },
 
       {
         id: 'what',
@@ -252,7 +257,7 @@ export const menu: ApplicationMenuItemBasic[] = [
     label: LOCALE['public-layout.help'],
 
     buttons: [
-      { id: 'help', label: LOCALE['public-layout.help'] },
+      { id: 'help', label: LOCALE['public-layout.help'], hideOnDesktop: true },
       { id: 'faq', label: LOCALE['public-layout.faq'] },
       { id: 'contact', label: LOCALE['public-layout.contact_us'] },
       { id: 'feedback', label: LOCALE['public-layout.give_feedback'] },
@@ -262,5 +267,6 @@ export const menu: ApplicationMenuItemBasic[] = [
   {
     id: 'signIn',
     label: LOCALE['public-layout.sign_in'],
+    hideOnHandset: true,
   },
 ]

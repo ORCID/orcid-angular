@@ -74,3 +74,4 @@ src/locale/messages.static.xx.xlf
 src/locale/messages.static.zh_CN.xlf
 src/locale/messages.static.zh_TW.xlf
 src/locale/translate-file-generator.js
+src/locale/messages.xlf

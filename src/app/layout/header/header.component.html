@@ -32,6 +32,12 @@
         <ul class="row" *ngIf="!(platform.columns12 && parents.length > 1)">
           <li class="col no-gutters" *ngFor="let item of list">
             <button
+              *ngIf="
+                !(
+                  (item.hideOnDesktop && platform.columns12) ||
+                  (item.hideOnHandset && !platform.columns12)
+                )
+              "
               [ngClass]="{
                 active: item.route === currentRoute
               }"

@@ -3,7 +3,7 @@
   <file original="ng.template" id="ngi18n">
     <unit id="header.signin">
       <notes>
-        <note category="location">app/layout/header/header.component.html:73</note>
+        <note category="location">app/layout/header/header.component.html:74</note>
       </notes>
       <segment>
         <source>SIGN IN</source>
@@ -11,7 +11,7 @@
     </unit>
     <unit id="hheader.register">
       <notes>
-        <note category="location">app/layout/header/header.component.html:74</note>
+        <note category="location">app/layout/header/header.component.html:75</note>
       </notes>
       <segment>
         <source>REGISTER</source>
@@ -19,7 +19,7 @@
     </unit>
     <unit id="public-layout.amount_ids">
       <notes>
-        <note category="location">app/layout/header/header.component.html:87</note>
+        <note category="location">app/layout/header/header.component.html:88</note>
       </notes>
       <segment>
         <source>ORCID iDs and counting.</source>
