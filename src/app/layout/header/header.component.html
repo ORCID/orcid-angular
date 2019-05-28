@@ -40,7 +40,7 @@
               (mouseenter)="mouseEnter(parents.concat(item.id))"
             >
               <div class="button-box">
-                <div>{{ item.label }}</div>
+                <div>{{ item.label | uppercase }}</div>
                 <mat-icon *ngIf="!platform.columns12 && item.buttons.length">{{
                   item.hover ? 'arrow_drop_up' : 'arrow_drop_down'
                 }}</mat-icon>
@@ -70,7 +70,7 @@
     </div>
   </div>
 </nav>
-
+<label i18n="@@public-layout.about">About</label>
 <div class="statics container">
   <div class="row">
     <div class="col l5 m8 s4 push-l7">

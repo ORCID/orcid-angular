@@ -103,7 +103,14 @@ readMessageFile('./src/locale/messages.xlf')
   // Generate the next translation file until the last one finish
   .pipe(concatAll())
   // Save the translation file
-  .pipe(map(result => saveJsonAsXlf(result.file, result.saveCode)))
+  .pipe(
+    mergeMap(result =>
+      from([
+        saveTs(result.values.dynamicValues, result.saveCode),
+        saveJsonAsXlf(result.values.staticValues, result.saveCode),
+      ])
+    )
+  )
   // Waits until all translations are created
   .pipe(combineAll())
   // Save the translation log
@@ -129,7 +136,6 @@ function generateLanguageFile(saveCode, file) {
       )
       // Transform the list of files in a key-value translation file
       .pipe(map(val => getProperties(val)))
-      .pipe(tap(val => saveTs(val, saveCode)))
       // Creates an XLF translation based on the properties
       .pipe(
         mergeMap(val =>
@@ -139,7 +145,7 @@ function generateLanguageFile(saveCode, file) {
       // Return the XLF to be saved
       .pipe(
         map(val => {
-          return { file: val, saveCode: saveCode }
+          return { values: val, saveCode: saveCode }
         })
       )
       // Report success
@@ -152,7 +158,7 @@ function generateLanguageFile(saveCode, file) {
 }
 
 function saveJsonAsXlf(json, name) {
-  return of(
+  return from(
     new Promise((resolve, reject) => {
       const builder = new Builder()
       const xml = builder.buildObject(json)
@@ -171,7 +177,7 @@ function saveJsonAsXlf(json, name) {
 }
 
 function saveJson(json, name) {
-  return of(
+  return from(
     new Promise((resolve, reject) => {
       fs.writeFile(
         './src/locale/messages.' + name + '.json',
@@ -189,7 +195,7 @@ function saveJson(json, name) {
 }
 
 function saveTs(json, name) {
-  return of(
+  return from(
     new Promise((resolve, reject) => {
       fs.writeFile(
         './src/locale/messages.dynamic.' + name + '.ts',
@@ -232,22 +238,36 @@ function readMessageFile(path) {
   })
 }
 
-function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
+function setLanguagePropertiesToLanguageFile(
+  data,
+  propsText,
+  saveCode
+): Observable<{ staticValues: any; dynamicValues: any }> {
   return new Observable(observer => {
-    parseString(data, (error, result) => {
+    const dynamicValues = {}
+    parseString(data, (error, staticValues) => {
       if (error) {
         observer.error(error)
       }
-      result.xliff.file[0].unit.forEach(element => {
+      staticValues.xliff.file[0].unit.forEach(element => {
         if (propsText[element['$'].id]) {
-          element.segment[0].target = []
-          element.segment[0].target.push(
-            translationTreatment(
-              propsText[element['$'].id],
-              element['$'].id,
-              saveCode
-            )
+          const translation = translationTreatment(
+            propsText[element['$'].id],
+            element['$'].id,
+            saveCode
           )
+          element.segment[0].target = []
+          element.segment[0].target.push(translation)
+          element.notes[0].note.forEach(note => {
+            if (
+              note['$']['category'] &&
+              note['$']['category'] === 'location' &&
+              note['_'].indexOf('i18n.pseudo') > 0
+            ) {
+              dynamicValues[element['$'].id] = translation
+            }
+          })
+
           if ('en' === saveCode) {
             checkIfTranslationMatch(
               element['$'].id,
@@ -256,11 +276,21 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
             )
           }
         } else {
+          element.notes[0].note.forEach(note => {
+            if (
+              note['$']['category'] &&
+              note['$']['category'] === 'location' &&
+              note['_'].indexOf('i18n.pseudo') > 0
+            ) {
+              dynamicValues[element['$'].id] = element.segment[0].source[0]
+            }
+          })
+
           element.segment[0].target = element.segment[0].source
           translationNotFound(element['$'].id, saveCode)
         }
       })
-      observer.next(result)
+      observer.next({ staticValues, dynamicValues })
       observer.complete()
     })
   })

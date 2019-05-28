@@ -1,5 +1,5 @@
 import { ApplicationMenuItemBasic } from 'src/app/types/menu.local'
-import { LOCALE } from '../../../locale/messages.dynamic'
+import { LOCALE } from '../../../locale/messages.dynamic.en'
 
 export const menu: ApplicationMenuItemBasic[] = [
   {
@@ -13,125 +13,125 @@ export const menu: ApplicationMenuItemBasic[] = [
       },
       {
         id: 'public-layout.sign_in',
-        label: 'public-layout.sign_in',
+        label: LOCALE['public-layout.sign_in'],
       },
       {
-        id: 'register',
-        label: 'REGISTER FOR AN ORCID ID',
+        id: 'login.registerOrcidId',
+        label: LOCALE['login.registerOrcidId'],
       },
       {
-        id: 'learn',
-        label: 'LEARN MORE',
+        id: 'manage_delegators.learn_more.link.text',
+        label: LOCALE['manage_delegators.learn_more.link.text'],
       },
     ],
   },
   {
     id: 'organizations',
-    label: 'FOR ORGANIZATIONS',
+    label: LOCALE['public-layout.for_organizations'],
 
     buttons: [
       {
-        label: 'FOR ORGANIZATIONS',
+        label: LOCALE['public-layout.for_organizations'],
         id: 'organizations',
       },
       {
-        label: 'FUNDERS',
+        label: LOCALE['public-layout.funders'],
         id: 'funders',
 
         buttons: [
           {
-            label: 'FUNDERS',
+            label: LOCALE['public-layout.funders'],
             id: 'funders',
           },
           {
-            label: 'LEARN MORE',
+            label: LOCALE['manage_delegators.learn_more.link.text'],
             id: 'learn',
           },
           {
-            label: 'OUTREACH RESOURCES',
+            label: LOCALE['ngOrcid.outreach'],
             id: 'outreach',
           },
           {
-            label: 'MEMBERSHIP',
+            label: LOCALE['public-layout.membership'],
             id: 'membership',
           },
         ],
       },
       {
-        label: 'RESEARCH ORGANIZATIONS  ',
+        label: LOCALE['public-layout.research_organizations'],
         id: 'research',
 
         buttons: [
           {
             id: 'research',
-            label: 'RESEARCH ORGANIZATIONS',
+            label: LOCALE['public-layout.research_organizations'],
           },
           {
             id: 'learn',
-            label: 'Learn More',
+            label: LOCALE['manage_delegators.learn_more.link.text'],
           },
           {
             id: 'outreach',
-            label: 'OUTREACH RESOURCES',
+            label: LOCALE['ngOrcid.outreach'],
           },
           {
             id: 'membership',
-            label: 'MEMBERSHIP',
+            label: LOCALE['public-layout.membership'],
           },
           {
             id: 'use',
-            label: 'USE CASES',
+            label: LOCALE['ngOrcid.useCases'],
           },
         ],
       },
       {
         id: 'publishers',
-        label: 'PUBLISHER',
+        label: LOCALE['public-layout.publishers'],
 
         buttons: [
           {
             id: 'publishers',
-            label: 'PUBLISHERS',
+            label: LOCALE['public-layout.publishers'],
           },
           {
             id: 'learn',
-            label: 'LEARN MORE',
+            label: LOCALE['manage_delegators.learn_more.link.text'],
           },
           {
             id: 'outreach',
-            label: 'OUTREACH RESOURCES',
+            label: LOCALE['ngOrcid.outreach'],
           },
           {
             id: 'membership',
-            label: 'MEMBER SHIP',
+            label: LOCALE['public-layout.membership'],
           },
         ],
       },
 
       {
         id: 'associations',
-        label: 'ASSOCIATIONS',
+        label: LOCALE['public-layout.associations'],
 
         buttons: [
           {
             id: 'associations',
-            label: 'ASSOCIATIONS',
+            label: LOCALE['public-layout.associations'],
           },
           {
             id: 'learn',
-            label: 'LEARN MORE',
+            label: LOCALE['manage_delegators.learn_more.link.text'],
           },
           {
             id: 'outreach',
-            label: 'OUTREACH RESOURCES',
+            label: LOCALE['ngOrcid.outreach'],
           },
           {
             id: 'membership',
-            label: 'MEMBERSHIP',
+            label: LOCALE['public-layout.membership'],
           },
           {
             id: 'use',
-            label: 'USE CASES',
+            label: LOCALE['ngOrcid.useCases'],
           },
         ],
       },
@@ -139,32 +139,32 @@ export const menu: ApplicationMenuItemBasic[] = [
       {
         id: 'integrators',
 
-        label: 'INTEGRATORS',
+        label: LOCALE['public-layout.integrators'],
 
         buttons: [
           {
             id: 'integrators',
-            label: 'INTEGRATORS',
+            label: LOCALE['public-layout.integrators'],
           },
           {
             id: 'api',
-            label: 'THE ORCID API',
+            label: LOCALE['ngOrcid.theOrcidApi'],
           },
           {
             id: 'register',
-            label: 'REGISTER A CLIENT APPLICATION ',
+            label: LOCALE['ngOrcid.registerClientApp'],
           },
           {
             id: 'current',
-            label: 'CURRENT INTEGRATORS ',
+            label: LOCALE['ngOrcid.currentIntegrations'],
           },
           {
             id: 'chart',
-            label: 'INTEGRATION CHART ',
+            label: LOCALE['ngOrcid.integrationsChart'],
           },
           {
             id: 'beta',
-            label: 'BETA TESTERS',
+            label: LOCALE['ngOrcid.betaTesters'],
           },
         ],
       },
@@ -172,87 +172,95 @@ export const menu: ApplicationMenuItemBasic[] = [
   },
   {
     id: 'about',
-    label: 'ABOUT',
+    label: LOCALE['public-layout.about'],
 
     buttons: [
-      { id: 'about', label: 'ABOUT' },
+      { id: 'about', label: LOCALE['public-layout.about'] },
 
       {
         id: 'what',
-        label: 'WHAT IS ORCID',
+        label: LOCALE['public-layout.what_is_orcid'],
 
         buttons: [
           {
             id: 'what',
-            label: 'WHAT IS ORCID',
+            label: LOCALE['public-layout.what_is_orcid'],
           },
           {
             id: 'mission',
-            label: 'OUR MISSION',
+            label: LOCALE['public-layout.our_mission'],
           },
           {
             id: 'principles',
-            label: 'OUR PRINCIPLES',
+            label: LOCALE['public-layout.our_principles'],
           },
           {
             id: 'governance',
-            label: 'OUR GOVERNANCE',
+            label: LOCALE['ngOrcid.ourGovernance'],
           },
           {
             id: 'policies',
-            label: 'OUR POLICIES',
+            label: LOCALE['ngOrcid.ourPolicies'],
           },
         ],
       },
-      { id: 'team', label: 'THE ORCID TEAM' },
+      { id: 'team', label: LOCALE['public-layout.the_orcid_team'] },
       {
         id: 'community',
-        label: 'THE ORCID COMMUNITY',
+        label: LOCALE['public-layout.the_orcid_community'],
 
         buttons: [
-          { id: 'community', label: 'THE ORCID COMMUNITY' },
-          { id: 'groups', label: 'WORKING GROUPS' },
-          { id: 'sponsors', label: 'SPONSORS' },
-          { id: 'members', label: 'MEMBERS' },
+          {
+            id: 'community',
+            label: LOCALE['public-layout.the_orcid_community'],
+          },
+          { id: 'groups', label: LOCALE['public-layout.working_groups'] },
+          {
+            id: 'public-layout.sponsors',
+            label: LOCALE['public-layout.sponsors'],
+          },
+          { id: 'members', label: LOCALE['public-layout.members'] },
           // TODO CEHCK WHY  'LAUNCH PARTNERS' IS REPEATED,
-          { id: 'LAUNCH', label: 'LAUNCH PARTNERS' },
-          { id: 'source', label: 'OPEN SOURCE' },
-          { id: 'PARTNERS', label: 'PARTNERS' },
-          { id: 'ADOPTION', label: 'ADOPTION AND INTEGRATION PROGRAM' },
-          { id: 'AMBASSADORS', label: 'AMBASSADORS OUTREACH' },
-          { id: 'GEAR', label: 'ORCID GEAR' },
+          { id: 'LAUNCH', label: LOCALE['public-layout.launch_partners'] },
+          { id: 'source', label: LOCALE['ngOrcid.openSource'] },
+          { id: 'PARTNERS', label: LOCALE['ngOrcid.partners'] },
+          { id: 'ADOPTION', label: LOCALE['ngOrcid.adoptionAndInt'] },
+          { id: 'AMBASSADORS', label: LOCALE['ngOrcid.outreachResources'] },
+          { id: 'GEAR', label: LOCALE['ngOrcid.orcidGear'] },
         ],
       },
 
       {
         id: 'membership',
-        route: 'MEMBERSHIP',
+        route: LOCALE['public-layout.membership'],
         buttons: [
-          { id: 'membership', label: 'MEMBERSHIP' },
+          { id: 'membership', label: LOCALE['public-layout.membership'] },
           // TODO ADD 'MEMBERSHIP & SUBSCRIPTION'
-          { id: 'subscription', label: 'MEMBERSHIP COMPARISON' },
-          { id: 'comparison', label: 'MEMBERSHIP COMPARISON' },
-          { id: 'agreement', label: 'STANDARD MEMBER AGREEMENT' },
-          { id: 'creator', label: 'STANDARD CREATOR MEMBER AGREEMENT' },
-          { id: 'our', label: 'OUR MEMBERS' },
+          { id: 'subscription', label: LOCALE['membershipComparison'] },
+          {
+            id: 'agreement',
+            label: LOCALE['public-layout.standard_member_agreement'],
+          },
+          { id: 'creator', label: LOCALE['standartCreatorAgreement'] },
+          { id: 'our', label: LOCALE['public-layout.our_members'] },
         ],
       },
     ],
   },
   {
     id: 'help',
-    label: 'HELP',
+    label: LOCALE['public-layout.help'],
 
     buttons: [
-      { id: 'help', label: 'HELP' },
-      { id: 'faq', label: 'FAQ' },
-      { id: 'contact', label: 'CONTACT US' },
-      { id: 'feedback', label: 'GIVE FEEDBACK' },
-      { id: 'base', label: 'KNOWLEDGE BASE' },
+      { id: 'help', label: LOCALE['public-layout.help'] },
+      { id: 'faq', label: LOCALE['public-layout.faq'] },
+      { id: 'contact', label: LOCALE['public-layout.contact_us'] },
+      { id: 'feedback', label: LOCALE['public-layout.give_feedback'] },
+      { id: 'base', label: LOCALE['public-layout.knowledge_base'] },
     ],
   },
   {
     id: 'signIn',
-    label: 'SIGN IN',
+    label: LOCALE['public-layout.sign_in'],
   },
 ]
