@@ -4,7 +4,7 @@
     <unit id="public-layout.about">
       <notes>
         <note category="location">app/layout/header/header.component.html:73</note>
-        <note category="location">locale/i18n.pseudo.component.html:3</note>
+        <note category="location">locale/i18n.pseudo.component.html:6</note>
       </notes>
       <segment>
         <source>About</source>
@@ -620,7 +620,7 @@
     </unit>
     <unit id="public-layout.for_researchers">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:1</note>
+        <note category="location">locale/i18n.pseudo.component.html:4</note>
       </notes>
       <segment>
         <source>For Researchers</source>
@@ -628,7 +628,7 @@
     </unit>
     <unit id="public-layout.for_organizations">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:2</note>
+        <note category="location">locale/i18n.pseudo.component.html:5</note>
       </notes>
       <segment>
         <source>For Organizations</source>
@@ -636,7 +636,7 @@
     </unit>
     <unit id="public-layout.help">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:4</note>
+        <note category="location">locale/i18n.pseudo.component.html:7</note>
       </notes>
       <segment>
         <source>Help</source>
@@ -644,7 +644,7 @@
     </unit>
     <unit id="public-layout.sign_in">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:5</note>
+        <note category="location">locale/i18n.pseudo.component.html:8</note>
       </notes>
       <segment>
         <source>Sign in</source>
@@ -652,7 +652,7 @@
     </unit>
     <unit id="login.registerOrcidId">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:6</note>
+        <note category="location">locale/i18n.pseudo.component.html:9</note>
       </notes>
       <segment>
         <source>Register for an ORCID iD</source>
@@ -660,7 +660,7 @@
     </unit>
     <unit id="manage_delegators.learn_more.link.text">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:7</note>
+        <note category="location">locale/i18n.pseudo.component.html:10</note>
       </notes>
       <segment>
         <source>Learn more</source>
@@ -668,7 +668,7 @@
     </unit>
     <unit id="public-layout.funders">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:8</note>
+        <note category="location">locale/i18n.pseudo.component.html:11</note>
       </notes>
       <segment>
         <source>Funders</source>
@@ -676,7 +676,7 @@
     </unit>
     <unit id="public-layout.research_organizations">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:10</note>
+        <note category="location">locale/i18n.pseudo.component.html:12</note>
       </notes>
       <segment>
         <source>Research Organizations</source>
@@ -684,7 +684,7 @@
     </unit>
     <unit id="public-layout.publishers">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:12</note>
+        <note category="location">locale/i18n.pseudo.component.html:13</note>
       </notes>
       <segment>
         <source>Publishers</source>
@@ -692,7 +692,7 @@
     </unit>
     <unit id="public-layout.associations">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:13</note>
+        <note category="location">locale/i18n.pseudo.component.html:14</note>
       </notes>
       <segment>
         <source>Associations</source>
@@ -700,7 +700,7 @@
     </unit>
     <unit id="public-layout.integrators">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:14</note>
+        <note category="location">locale/i18n.pseudo.component.html:15</note>
       </notes>
       <segment>
         <source>Integrators</source>
@@ -708,7 +708,7 @@
     </unit>
     <unit id="public-layout.what_is_orcid">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:15</note>
+        <note category="location">locale/i18n.pseudo.component.html:16</note>
       </notes>
       <segment>
         <source>What is ORCID</source>
@@ -716,7 +716,7 @@
     </unit>
     <unit id="public-layout.the_orcid_team">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:16</note>
+        <note category="location">locale/i18n.pseudo.component.html:17</note>
       </notes>
       <segment>
         <source>The ORCID Team</source>
@@ -724,7 +724,7 @@
     </unit>
     <unit id="public-layout.the_orcid_community">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:17</note>
+        <note category="location">locale/i18n.pseudo.component.html:18</note>
       </notes>
       <segment>
         <source>The ORCID Community</source>
@@ -732,7 +732,7 @@
     </unit>
     <unit id="public-layout.events">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:18</note>
+        <note category="location">locale/i18n.pseudo.component.html:19</note>
       </notes>
       <segment>
         <source>Events</source>
@@ -740,7 +740,7 @@
     </unit>
     <unit id="public-layout.news">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:19</note>
+        <note category="location">locale/i18n.pseudo.component.html:20</note>
       </notes>
       <segment>
         <source>News</source>
@@ -748,7 +748,7 @@
     </unit>
     <unit id="public-layout.faq">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:20</note>
+        <note category="location">locale/i18n.pseudo.component.html:21</note>
       </notes>
       <segment>
         <source>FAQ</source>
@@ -756,7 +756,7 @@
     </unit>
     <unit id="public-layout.give_feedback">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:21</note>
+        <note category="location">locale/i18n.pseudo.component.html:22</note>
       </notes>
       <segment>
         <source>Give Feedback</source>
@@ -764,7 +764,7 @@
     </unit>
     <unit id="public-layout.contact_us">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:22</note>
+        <note category="location">locale/i18n.pseudo.component.html:23</note>
       </notes>
       <segment>
         <source>Contact us </source>
@@ -772,7 +772,7 @@
     </unit>
     <unit id="public-layout.knowledge_base">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:23</note>
+        <note category="location">locale/i18n.pseudo.component.html:24</note>
       </notes>
       <segment>
         <source>Knowledge Base </source>
