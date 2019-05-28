@@ -5,6 +5,7 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ar.properties"
       ],
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -53,7 +54,8 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/javascript_ca.properties"
       ],
       "notFound": [
-        "public-layout.about",
+        "header.signin",
+        "hheader.register",
         "public-layout.amount_ids",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
@@ -100,6 +102,7 @@
         "org.orcid.jaxb.model.message.AffiliationType.membership_service",
         "public-layout.for_researchers",
         "public-layout.for_organizations",
+        "public-layout.about",
         "public-layout.help",
         "public-layout.sign_in",
         "login.registerOrcidId",
@@ -150,6 +153,7 @@
     },
     "cs": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -190,6 +194,11 @@
     },
     "en": {
       "unmatch": [
+        {
+          "id": "header.signin",
+          "textOnTemplate": "Sign in",
+          "textOnProperty": "SIGN IN"
+        },
         {
           "id": "footer.copyright_cc0_2",
           "textOnTemplate": "CC0 license",
@@ -247,6 +256,7 @@
         }
       ],
       "notFound": [
+        "hheader.register",
         "ng-orcid.dispute.procedure",
         "ng-orcid.trademark",
         "home.!!",
@@ -282,29 +292,8 @@
       ]
     },
     "es": {
-      "changed": [
-        {
-          "id": "public-layout.about",
-          "translation": "Quiénes<br />somos",
-          "replacement": "Quiénes somos"
-        },
-        {
-          "id": "public-layout.for_researchers",
-          "translation": "Para<br />investigadores",
-          "replacement": "Para investigadores"
-        },
-        {
-          "id": "public-layout.for_organizations",
-          "translation": "Para<br />organizaciones",
-          "replacement": "Para organizaciones"
-        },
-        {
-          "id": "public-layout.sign_in",
-          "translation": "Iniciar<br />sesión",
-          "replacement": "Iniciar sesión"
-        }
-      ],
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -344,10 +333,33 @@
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
         "ngOrcid.subscribe"
+      ],
+      "changed": [
+        {
+          "id": "public-layout.for_researchers",
+          "translation": "Para<br />investigadores",
+          "replacement": "Para investigadores"
+        },
+        {
+          "id": "public-layout.for_organizations",
+          "translation": "Para<br />organizaciones",
+          "replacement": "Para organizaciones"
+        },
+        {
+          "id": "public-layout.about",
+          "translation": "Quiénes<br />somos",
+          "replacement": "Quiénes somos"
+        },
+        {
+          "id": "public-layout.sign_in",
+          "translation": "Iniciar<br />sesión",
+          "replacement": "Iniciar sesión"
+        }
       ]
     },
     "fr": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -403,6 +415,7 @@
     },
     "it": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -446,6 +459,7 @@
     },
     "ja": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -486,6 +500,7 @@
     },
     "ko": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -533,6 +548,7 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_lr.properties"
       ],
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -573,6 +589,7 @@
     },
     "pt": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -620,6 +637,7 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_rl.properties"
       ],
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -660,6 +678,7 @@
     },
     "ru": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -707,7 +726,8 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_uk.properties"
       ],
       "notFound": [
-        "public-layout.about",
+        "header.signin",
+        "hheader.register",
         "public-layout.amount_ids",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
@@ -754,6 +774,7 @@
         "org.orcid.jaxb.model.message.AffiliationType.membership_service",
         "public-layout.for_researchers",
         "public-layout.for_organizations",
+        "public-layout.about",
         "public-layout.help",
         "public-layout.sign_in",
         "login.registerOrcidId",
@@ -808,6 +829,7 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_xx.properties"
       ],
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -848,6 +870,7 @@
     },
     "zh_CN": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",
@@ -891,6 +914,7 @@
     },
     "zh_TW": {
       "notFound": [
+        "hheader.register",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.dispute.procedure",

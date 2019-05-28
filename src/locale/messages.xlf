@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
-    <unit id="public-layout.about">
+    <unit id="header.signin">
       <notes>
         <note category="location">app/layout/header/header.component.html:73</note>
-        <note category="location">locale/i18n.pseudo.component.html:6</note>
       </notes>
       <segment>
-        <source>About</source>
+        <source>SIGN IN</source>
+      </segment>
+    </unit>
+    <unit id="hheader.register">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:74</note>
+      </notes>
+      <segment>
+        <source>REGISTER</source>
       </segment>
     </unit>
     <unit id="public-layout.amount_ids">
       <notes>
-        <note category="location">app/layout/header/header.component.html:80</note>
+        <note category="location">app/layout/header/header.component.html:87</note>
       </notes>
       <segment>
         <source>ORCID iDs and counting.</source>
@@ -632,6 +639,14 @@
       </notes>
       <segment>
         <source>For Organizations</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.about">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:6</note>
+      </notes>
+      <segment>
+        <source>About</source>
       </segment>
     </unit>
     <unit id="public-layout.help">

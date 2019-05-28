@@ -67,10 +67,17 @@
           context: { $implicit: menu, parents: [] }
         "
       ></ng-container>
+      <ul class="row" *ngIf="!platform.columns12">
+        <li class="col no-gutters">
+          <button mat-stroked-button class="sign-in-button">
+            <ng-container i18n="@@header.signin">SIGN IN</ng-container
+            >/<ng-container i18n="@@hheader.register">REGISTER</ng-container>
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
-<label i18n="@@public-layout.about">About</label>
 <div class="statics container">
   <div class="row">
     <div class="col l5 m8 s4 push-l7">

@@ -232,16 +232,16 @@ export const menu: ApplicationMenuItemBasic[] = [
 
       {
         id: 'membership',
-        route: LOCALE['public-layout.membership'],
+        label: LOCALE['public-layout.membership'],
         buttons: [
           { id: 'membership', label: LOCALE['public-layout.membership'] },
           // TODO ADD 'MEMBERSHIP & SUBSCRIPTION'
-          { id: 'subscription', label: LOCALE['membershipComparison'] },
+          { id: 'subscription', label: LOCALE['ngOrcid.membershipComparison'] },
           {
             id: 'agreement',
             label: LOCALE['public-layout.standard_member_agreement'],
           },
-          { id: 'creator', label: LOCALE['standartCreatorAgreement'] },
+          { id: 'creator', label: LOCALE['ngOrcid.standartCreatorAgreement'] },
           { id: 'our', label: LOCALE['public-layout.our_members'] },
         ],
       },

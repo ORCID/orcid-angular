@@ -1,9 +1,9 @@
 // prettier-ignore
 /* tslint:disable */
 export const LOCALE = {
-  "public-layout.about": "About",
   "public-layout.for_researchers": "For Researchers",
   "public-layout.for_organizations": "For Organizations",
+  "public-layout.about": "About",
   "public-layout.help": "Help",
   "public-layout.sign_in": "Sign in",
   "login.registerOrcidId": "Register for an ORCID iD",

@@ -22,7 +22,7 @@ $config: mat-typography-config();
               border-radius: 0;
             }
             &.sign-in-button {
-              border-color: white;
+              border-color: mat-color($background, background);
             }
           }
 
@@ -47,8 +47,15 @@ $config: mat-typography-config();
             }
 
             .row {
+              button {
+                color: mat-color($primary, '500-contrast');
+              }
+
               background-color: mat-color($primary, 600);
               .row {
+                button {
+                  color: mat-color($accent, '500-contrast');
+                }
                 background-color: mat-color($background, 'light-grey');
                 .row {
                   background-color: mat-color($background, 'card');
@@ -67,6 +74,9 @@ $config: mat-typography-config();
     .top-bar {
       .menu-container > .row > .col > button {
         @include mat-typography-level-to-styles($orcid-custom, title-alt);
+        &.sign-in-button {
+          @include mat-typography-level-to-styles($config, button);
+        }
       }
     }
   }
