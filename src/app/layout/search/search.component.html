@@ -33,6 +33,7 @@
       [(ngModel)]="whatToSearch"
       [placeholder]="searchPlaceHolder"
       type="text"
+      (keyup.enter)="search(whereToSearchSelected, whatToSearch)"
     />
   </div>
   <div

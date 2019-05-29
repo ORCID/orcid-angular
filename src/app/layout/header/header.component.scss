@@ -23,6 +23,8 @@ nav {
     height: 60px;
     margin-bottom: 60px;
     .menu-container {
+      height: 100%;
+      display: flex;
       .row {
         position: relative;
         .col {
@@ -42,6 +44,9 @@ nav {
 .statics {
   .mat-caption {
     text-align: right;
+    [dir='rtl'] :host & {
+      text-align: left;
+    }
     display: block;
     margin-bottom: 8px;
   }
@@ -75,6 +80,7 @@ nav {
       .top-bar {
         height: auto;
         .menu-container {
+          flex-direction: column;
           padding-top: 32px;
           padding-bottom: 32px;
           .row {
@@ -94,6 +100,10 @@ nav {
                   padding-top: 10px;
                   margin-top: 12px;
                   left: 16px;
+                  [dir='rtl'] & {
+                    left: 0;
+                    right: 16px;
+                  }
                 }
                 .button-box {
                   display: flex;
@@ -107,6 +117,10 @@ nav {
                 position: relative;
                 button {
                   margin-left: 16px;
+                  [dir='rtl'] & {
+                    margin-left: auto;
+                    margin-right: 16px;
+                  }
                   width: 100%;
                   text-align: left;
                   padding-top: 8px;
@@ -115,10 +129,18 @@ nav {
                 .row {
                   button {
                     margin-left: 32px;
+                    [dir='rtl'] & {
+                      margin-left: auto;
+                      margin-right: 32px;
+                    }
                   }
                   .row {
                     button {
                       margin-left: 64px;
+                      [dir='rtl'] & {
+                        margin-left: auto;
+                        margin-right: 64px;
+                      }
                     }
                   }
                 }
@@ -131,6 +153,9 @@ nav {
     .statics {
       .mat-caption {
         text-align: right;
+        [dir='rtl'] & {
+          text-align: left;
+        }
         margin-bottom: 4px;
         margin-top: 4px;
       }
@@ -142,9 +167,6 @@ nav {
 .edge {
   :host {
     .menu-container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
     }
   }
 }
