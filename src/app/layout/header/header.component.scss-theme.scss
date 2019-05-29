@@ -8,6 +8,11 @@ $config: mat-typography-config();
   $background: map-get($theme, background);
 
   app-header {
+    .container {
+      .logo-container {
+        color: mat-color($accent, '200-contrast');
+      }
+    }
     .top-bar {
       //FIXME ACCESSIBILITY-ISSUE
       color: mat-color($primary, '500-contrast');
@@ -27,7 +32,7 @@ $config: mat-typography-config();
           }
 
           .row {
-            color: mat-contrast($accent, 500);
+            color: mat-color($primary, 500);
           }
         }
       }
@@ -54,7 +59,7 @@ $config: mat-typography-config();
               background-color: mat-color($primary, 600);
               .row {
                 button {
-                  color: mat-color($accent, '500-contrast');
+                  color: mat-color($primary, 500);
                 }
                 background-color: mat-color($background, 'light-grey');
                 .row {

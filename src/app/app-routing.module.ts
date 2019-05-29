@@ -24,6 +24,10 @@ const routes: Routes = [
     matcher: matcher,
     loadChildren: './profile/profile.module#ProfileModule',
   },
+  {
+    path: '**',
+    redirectTo: '/',
+  },
 ]
 
 @NgModule({

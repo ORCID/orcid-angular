@@ -44,7 +44,11 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ca": {
@@ -148,7 +152,13 @@
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
         "ngOrcid.subscribe",
-        "public-layout.sign_out"
+        "public-layout.sign_out",
+        "ngOrcid.disputeProcedures",
+        "change_email_preferences.privacyPolicy",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "change_email_preferences.termsAnd",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "cs": {
@@ -189,7 +199,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "en": {
@@ -253,6 +266,16 @@
           "id": "groups.common.last_modified",
           "textOnTemplate": "Last modified",
           "textOnProperty": "Last Modified"
+        },
+        {
+          "id": "change_email_preferences.privacyPolicy",
+          "textOnTemplate": "privacy policy",
+          "textOnProperty": "Privacy Policy"
+        },
+        {
+          "id": "change_email_preferences.termsAnd",
+          "textOnTemplate": "terms and conditions of use",
+          "textOnProperty": "Terms and Conditions of Use"
         }
       ],
       "notFound": [
@@ -288,7 +311,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "es": {
@@ -332,7 +358,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ],
       "changed": [
         {
@@ -398,7 +427,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ],
       "changed": [
         {
@@ -454,7 +486,11 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ja": {
@@ -495,7 +531,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ko": {
@@ -539,7 +578,11 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "lr": {
@@ -584,7 +627,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "pt": {
@@ -628,7 +674,11 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "rl": {
@@ -673,7 +723,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ru": {
@@ -717,7 +770,11 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "uk": {
@@ -820,7 +877,13 @@
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
         "ngOrcid.subscribe",
-        "public-layout.sign_out"
+        "public-layout.sign_out",
+        "ngOrcid.disputeProcedures",
+        "change_email_preferences.privacyPolicy",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "change_email_preferences.termsAnd",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "xx": {
@@ -865,7 +928,10 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "zh_CN": {
@@ -909,7 +975,11 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "zh_TW": {
@@ -953,7 +1023,11 @@
         "ngOrcid.membershipComparison",
         "ngOrcid.standartCreatorAgreement",
         "ngOrcid.blog",
-        "ngOrcid.subscribe"
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "developer_tools.public_member.terms.check_2",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     }
   }

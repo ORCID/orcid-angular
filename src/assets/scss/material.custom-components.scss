@@ -1,6 +1,7 @@
 @import '../../styles.scss-theme.scss';
 @import '../../app/layout/header/header.component.scss-theme.scss';
 @import '../../app/layout/search/search.component.scss-theme.scss';
+@import '../../app/layout/menu-icon/menu-icon.component.scss-theme.scss';
 @import '../../app/layout/footer/footer.component.scss-theme.scss';
 @import '../../app/home/pages/home/home.component.scss-theme.scss';
 @import '../../app/home/components/news/news.component.scss-theme.scss';
@@ -29,6 +30,7 @@
   @include offline-message-theme($theme);
   @include card-detail-line-theme($theme);
   @include profile-activities-affiliation-theme($theme);
+  @include app-menu-icon-theme($theme);
 }
 
 @mixin custom-components-typography($orcid-material, $orcid-custom) {

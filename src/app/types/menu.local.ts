@@ -7,6 +7,7 @@ export interface ApplicationMenuItem {
   hideOnDesktop?: boolean
   hideOnHandset?: boolean
   buttons?: ApplicationMenuItem[]
+  activeRoute?: string
 }
 
 export interface ApplicationMenuItemBasic {
@@ -16,4 +17,5 @@ export interface ApplicationMenuItemBasic {
   buttons?: ApplicationMenuItemBasic[]
   hideOnDesktop?: boolean
   hideOnHandset?: boolean
+  activeRoute?: string
 }

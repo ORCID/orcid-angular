@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+$config: mat-typography-config();
+@mixin app-menu-icon-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  app-menu-icon {
+    .hamburger__icon {
+      &.open {
+        span {
+          background: mat-color($accent, '500-contrast');
+        }
+      }
+    }
+    .hamburger__icon {
+      span {
+        background: mat-color($accent, '500-contrast');
+      }
+    }
+  }
+}

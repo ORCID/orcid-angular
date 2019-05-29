@@ -18,6 +18,10 @@
   }
 }
 
+.advance-search-box {
+  margin-bottom: 5.5px;
+}
+
 .search-box {
   > div {
     height: 42px;
@@ -36,10 +40,24 @@
     }
   }
 
+  .input-box {
+    flex-grow: 1;
+    max-width: 240px;
+    input {
+      width: 100%;
+    }
+  }
+
   .search-icon {
     width: 45px;
     height: 42px;
     border-radius: 0 4px 4px 0;
+    padding-left: 9px;
+    mat-icon {
+      font-size: 24px;
+      height: 24px;
+      width: 24px;
+    }
   }
 
   input {
@@ -65,6 +83,7 @@
       flex-wrap: initial;
       .input-box {
         flex-grow: 1;
+        max-width: unset;
         input {
           width: 100%;
         }

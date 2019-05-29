@@ -7,12 +7,11 @@
           Connecting research and researchers
         </div>
       </div>
-      <div
+      <app-menu-icon
         *ngIf="!platform.columns12"
         (click)="mobileMenuState = !mobileMenuState"
-      >
-        Menu
-      </div>
+        [isOpen]="mobileMenuState"
+      ></app-menu-icon>
     </div>
     <div class="col l6 offset-l1 m8 s4 middle" *ngIf="platform.columns12">
       <app-search></app-search>
@@ -39,10 +38,10 @@
                 )
               "
               [ngClass]="{
-                active: item.route === currentRoute
+                active: item.activeRoute === currentRoute
               }"
               mat-button
-              (click)="click(parents.concat(item.id))"
+              (click)="click(parents.concat(item.id), item)"
               (mouseenter)="mouseEnter(parents.concat(item.id))"
             >
               <div class="button-box">
