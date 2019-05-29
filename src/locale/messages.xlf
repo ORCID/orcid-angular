@@ -91,13 +91,14 @@
           </source>
       </segment>
     </unit>
-    <unit id="home.!!">
+    <unit id="!!">
       <notes>
-        <note category="location">app/layout/search/search.component.html:40</note>
-        <note category="location">app/layout/search/search.component.html:41</note>
+        <note category="location">app/layout/search/search.component.html:16,18</note>
       </notes>
       <segment>
-        <source>Registry</source>
+        <source>
+    ADVANCED SEARCH
+  </source>
       </segment>
     </unit>
     <unit id="home.distinguish_yourself">
@@ -1063,6 +1064,30 @@
       </notes>
       <segment>
         <source>Trademark and iD Display Guidelines</source>
+      </segment>
+    </unit>
+    <unit id="layout.public-layout.registry">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:71</note>
+      </notes>
+      <segment>
+        <source>registry</source>
+      </segment>
+    </unit>
+    <unit id="layout.public-layout.website">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:72</note>
+      </notes>
+      <segment>
+        <source>website</source>
+      </segment>
+    </unit>
+    <unit id="orcid_bio_search.btnsearch">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:74</note>
+      </notes>
+      <segment>
+        <source>Search...</source>
       </segment>
     </unit>
   </file>

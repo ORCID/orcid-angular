@@ -1,7 +1,7 @@
 @import './assets/scss/material.theme';
 @import '~@angular/material/theming';
 
-@mixin glopbal-theme($theme) {
+@mixin global-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
@@ -11,5 +11,11 @@
 
   a {
     color: mat-color($primary);
+  }
+}
+
+@mixin global-theme-typography($config) {
+  input {
+    @include mat-typography-level-to-styles($config, input);
   }
 }

@@ -8,20 +8,38 @@
 </div>
 
 <div class="row end advance-search-box" *ngIf="platform.columns12">
-  <button mat-button color="primary" i18n="@@!!">ADVANCED SEARCH</button>
+  <button
+    mat-button
+    color="primary"
+    i18n="@@!!"
+    (click)="goTo('/orcid-search/search')"
+  >
+    ADVANCED SEARCH
+  </button>
 </div>
-<form [formGroup]="form" class="row end search-box middle">
+<form class="row end search-box middle">
   <div
     matRipple
     mat-button
     [matMenuTriggerFor]="menu"
     class="col middle search-where"
   >
-    <div>Registry</div>
+    <div>{{ whereToSearchSelected }}</div>
     <mat-icon matSuffix>arrow_drop_down</mat-icon>
   </div>
-  <div class="input-box"><input placeholder="Search" type="text" /></div>
-  <div matRipple class="col middle search-icon">
+  <div class="input-box">
+    <input
+      name="whatToSearch"
+      [(ngModel)]="whatToSearch"
+      [placeholder]="searchPlaceHolder"
+      type="text"
+    />
+  </div>
+  <div
+    matRipple
+    class="col middle search-icon"
+    (click)="search(whereToSearchSelected, whatToSearch)"
+  >
     <mat-icon matSuffix>search</mat-icon>
   </div>
 </form>
@@ -37,6 +55,11 @@
 </mat-menu>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item i18n="@@home.!!">Registry</button>
-  <button mat-menu-item i18n="@@home.!!">Website</button>
+  <button
+    mat-menu-item
+    *ngFor="let item of whereToSearch"
+    (click)="changeWhereToSearch(item)"
+  >
+    {{ item }}
+  </button>
 </mat-menu>

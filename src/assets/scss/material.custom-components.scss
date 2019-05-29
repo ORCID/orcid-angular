@@ -16,7 +16,7 @@
 @import '../../app/cdk/multi-row-raised-button/multi-row-raised-button/multi-row-raised-button.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
-  @include glopbal-theme($theme);
+  @include global-theme($theme);
   @include header-theme($theme);
   @include search-theme($theme);
   @include footer-theme($theme);
@@ -34,6 +34,7 @@
 }
 
 @mixin custom-components-typography($orcid-material, $orcid-custom) {
+  @include global-theme-typography($orcid-material);
   @include profile-person-typography($orcid-material);
   @include profile-person-detail-typography($orcid-material);
   @include card-typography($orcid-material);

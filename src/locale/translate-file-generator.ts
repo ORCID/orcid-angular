@@ -201,7 +201,7 @@ function saveTs(json, name) {
         './src/locale/messages.dynamic.' + name + '.ts',
         '// prettier-ignore\n' +
           '/* tslint:disable */\n' +
-          'export const LOCALE = ' +
+          'export const LOCALE : {[key:string]: string} = ' +
           JSON.stringify(json, null, 2),
         function(err) {
           if (err) {

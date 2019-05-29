@@ -1,6 +1,6 @@
 // prettier-ignore
 /* tslint:disable */
-export const LOCALE = {
+export const LOCALE : {[key:string]: string} = {
   "public-layout.for_researchers": "For Researchers",
   "public-layout.for_organizations": "For Organizations",
   "public-layout.about": "About",
@@ -55,5 +55,8 @@ export const LOCALE = {
   "developer_tools.public_member.terms.check_2": "Public Client Terms of Service",
   "ngOrcid.publicDataFileUsePolicy": "Public Data File Use Policy",
   "change_email_preferences.termsAnd": "terms and conditions of use",
-  "public-layout.trademarkAndIdDisplayGuidelines": "Trademark and iD Display Guidelines"
+  "public-layout.trademarkAndIdDisplayGuidelines": "Trademark and iD Display Guidelines",
+  "layout.public-layout.registry": "registry",
+  "layout.public-layout.website": "website",
+  "orcid_bio_search.btnsearch": "Search"
 }
