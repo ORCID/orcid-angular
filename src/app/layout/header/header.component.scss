@@ -23,14 +23,10 @@ nav {
     height: 60px;
     margin-bottom: 60px;
     .menu-container {
-      height: 100%;
       .row {
-        height: 100%;
         position: relative;
         .col {
-          height: 100%;
           & button {
-            height: 100%;
           }
           .row {
             position: absolute;
@@ -106,6 +102,7 @@ nav {
               }
 
               .row {
+                top: 0;
                 flex-direction: column;
                 position: relative;
                 button {
@@ -137,6 +134,17 @@ nav {
         margin-bottom: 4px;
         margin-top: 4px;
       }
+    }
+  }
+}
+
+.ie,
+.edge {
+  :host {
+    .menu-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

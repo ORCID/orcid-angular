@@ -82,7 +82,7 @@
       flex-wrap: initial;
       .input-box {
         flex-grow: 1;
-        max-width: unset;
+        max-width: none;
         input {
           width: 100%;
         }
