@@ -7,13 +7,23 @@
           Connecting research and researchers
         </div>
       </div>
-      <app-menu-icon
-        *ngIf="!platform.columns12"
-        (click)="mobileMenuState = !mobileMenuState"
-        [isOpen]="mobileMenuState"
-      ></app-menu-icon>
+      <div class="col no-gutters">
+        <div *ngIf="!platform.columns12" class="row middle no-gutters">
+          <div *ngIf="!mobileMenuState" class="col no-gutters">
+            <app-language class="col"></app-language>
+          </div>
+
+          <app-menu-icon
+            (click)="mobileMenuState = !mobileMenuState"
+            [isOpen]="mobileMenuState"
+          ></app-menu-icon>
+        </div>
+      </div>
     </div>
-    <div class="col l6 offset-l1 m8 s4 middle" *ngIf="platform.columns12">
+    <div
+      class="col l6 offset-l1 m8 s4 middle no-gutters"
+      *ngIf="platform.columns12"
+    >
       <app-search></app-search>
     </div>
   </div>

@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core'
-import { environment } from 'src/environments/environment'
+import { Component, OnInit, Inject } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, WINDOW } from 'src/app/core'
 import { PlatformInfo } from 'src/app/types'
@@ -11,7 +10,6 @@ import { LOCALE } from '../../../locale/messages.dynamic.en'
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  languageMenuOptions
   form: FormGroup
   platform: PlatformInfo
   whereToSearch = [
@@ -22,12 +20,9 @@ export class SearchComponent implements OnInit {
   searchPlaceHolder = LOCALE['orcid_bio_search.btnsearch']
   whatToSearch = ''
   constructor(
-    @Inject(LOCALE_ID) public locale: string,
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService
   ) {
-    this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
-    this.locale = 'en'
     _platform.platformSubject.subscribe(data => {
       this.platform = data
     })
@@ -39,9 +34,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {}
 
-  changeLanguage(languageKey: string) {
-    window.location.href = '/' + languageKey + '/'
-  }
   search(whereToSearch, whatToSearch) {
     if (
       whereToSearch === LOCALE['layout.public-layout.registry'].toUpperCase()

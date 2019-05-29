@@ -1,10 +1,5 @@
 <div class="row end language-menu" *ngIf="platform.columns12">
-  <button mat-button [matMenuTriggerFor]="languageMenu" class="col">
-    <div class="row middle space-between">
-      <p class="col">{{ languageMenuOptions[locale] }}</p>
-      <i class="col material-icons"> expand_more </i>
-    </div>
-  </button>
+  <app-language></app-language>
 </div>
 
 <div class="row end advance-search-box" *ngIf="platform.columns12">
@@ -44,16 +39,6 @@
     <mat-icon matSuffix>search</mat-icon>
   </div>
 </form>
-
-<mat-menu #languageMenu="matMenu">
-  <div
-    *ngFor="let language of (languageMenuOptions | keyvalue)"
-    [ngClass]="{ active: language.key === locale }"
-    (click)="changeLanguage(language.key)"
-  >
-    <button mat-menu-item>{{ language.value }}</button>
-  </div>
-</mat-menu>
 
 <mat-menu #menu="matMenu">
   <button

@@ -1,0 +1,16 @@
+<button mat-button [matMenuTriggerFor]="languageMenu">
+  <div class="row middle space-between button-box">
+    <p class="col no-gutters">{{ languageMenuOptions[locale] }}</p>
+    <i class="col no-gutters material-icons"> expand_more </i>
+  </div>
+</button>
+
+<mat-menu #languageMenu="matMenu">
+  <div
+    *ngFor="let language of (languageMenuOptions | keyvalue)"
+    [ngClass]="{ active: language.key === locale }"
+    (click)="changeLanguage(language.key)"
+  >
+    <button mat-menu-item>{{ language.value }}</button>
+  </div>
+</mat-menu>
