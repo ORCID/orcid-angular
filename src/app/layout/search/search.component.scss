@@ -19,7 +19,9 @@
 }
 
 .advance-search-box {
-  margin-bottom: 5.5px;
+  button {
+    padding: 0;
+  }
 }
 
 .search-box {
@@ -79,6 +81,7 @@
 .columns-4 {
   :host {
     .search-box {
+      padding: 12px 0px;
       .search-where,
       .search-icon {
         flex-shrink: 0;

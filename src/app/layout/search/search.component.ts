@@ -13,11 +13,15 @@ export class SearchComponent implements OnInit {
   form: FormGroup
   platform: PlatformInfo
   whereToSearch = [
-    LOCALE['layout.public-layout.registry'].toUpperCase(),
-    LOCALE['layout.public-layout.website'].toUpperCase(),
+    this.firstLetterUppercase(LOCALE['layout.public-layout.registry']),
+    this.firstLetterUppercase(LOCALE['layout.public-layout.website']),
   ]
-  whereToSearchSelected = LOCALE['layout.public-layout.registry'].toUpperCase()
-  searchPlaceHolder = LOCALE['orcid_bio_search.btnsearch']
+  whereToSearchSelected = this.firstLetterUppercase(
+    LOCALE['layout.public-layout.registry']
+  )
+  searchPlaceHolder = this.firstLetterUppercase(
+    LOCALE['orcid_bio_search.btnsearch']
+  )
   whatToSearch = ''
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -36,7 +40,8 @@ export class SearchComponent implements OnInit {
 
   search(whereToSearch, whatToSearch) {
     if (
-      whereToSearch === LOCALE['layout.public-layout.registry'].toUpperCase()
+      whereToSearch ===
+      this.firstLetterUppercase(LOCALE['layout.public-layout.registry'])
     ) {
       this.window.location.href = '/orcid-search/quick-search/?' + whatToSearch
     } else {
@@ -46,5 +51,9 @@ export class SearchComponent implements OnInit {
 
   goTo(url) {
     this.window.location.href = url
+  }
+
+  firstLetterUppercase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
   }
 }

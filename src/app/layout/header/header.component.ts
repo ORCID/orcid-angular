@@ -38,7 +38,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {}
 
   mouseLeave() {
-    this.setChildOfCurrentRouteAsSecondaryMenu()
+    if (this.platform.columns12) {
+      this.setChildOfCurrentRouteAsSecondaryMenu()
+    }
   }
 
   setChildOfCurrentRouteAsSecondaryMenu() {

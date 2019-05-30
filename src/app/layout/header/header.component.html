@@ -9,8 +9,8 @@
       </div>
       <div class="col no-gutters">
         <div *ngIf="!platform.columns12" class="row middle no-gutters">
-          <div *ngIf="!mobileMenuState" class="col no-gutters">
-            <app-language class="col"></app-language>
+          <div *ngIf="mobileMenuState" class="col no-gutters">
+            <app-language class="col no-gutters"></app-language>
           </div>
 
           <app-menu-icon
