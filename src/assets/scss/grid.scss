@@ -137,7 +137,7 @@ $gutter-width: 12px !default;
       $i: $i + 1;
     }
     .s-auto {
-      width: initial;
+      width: auto;
     }
 
     @media #{$size8-and-up} {
@@ -159,7 +159,7 @@ $gutter-width: 12px !default;
         $i: $i + 1;
       }
       .m-auto {
-        width: initial;
+        width: auto;
       }
     }
 
@@ -181,7 +181,7 @@ $gutter-width: 12px !default;
         $i: $i + 1;
       }
       .l-auto {
-        width: initial;
+        width: auto;
       }
     }
   }

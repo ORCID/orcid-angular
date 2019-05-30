@@ -11,6 +11,9 @@ ul {
   height: 35px;
   padding-top: 24px;
   padding-bottom: 16px;
+  > .col {
+    width: 260px;
+  }
   img {
     height: 41px;
     width: auto;
@@ -21,7 +24,7 @@ ul {
     height: 24px;
     margin-left: 12px;
     [dir] :host & {
-      margin-left: initial;
+      margin-left: auto;
       margin-right: 12px;
     }
   }
@@ -34,7 +37,7 @@ ul {
     height: 15px;
     margin-right: 8px;
     [dir] :host & {
-      margin-right: initial;
+      margin-right: auto;
       margin-left: 8px;
     }
   }
