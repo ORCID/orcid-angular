@@ -137,7 +137,7 @@ $gutter-width: 12px !default;
       $i: $i + 1;
     }
     .s-auto {
-      width: auto;
+      width: initial;
     }
 
     @media #{$size8-and-up} {
@@ -159,7 +159,7 @@ $gutter-width: 12px !default;
         $i: $i + 1;
       }
       .m-auto {
-        width: auto;
+        width: initial;
       }
     }
 
@@ -181,7 +181,7 @@ $gutter-width: 12px !default;
         $i: $i + 1;
       }
       .l-auto {
-        width: auto;
+        width: initial;
       }
     }
   }
@@ -197,6 +197,9 @@ $gutter-width: 12px !default;
   }
   .col.horizontal-center {
     justify-content: center;
+  }
+  .col.space-around {
+    justify-content: space-around;
   }
 }
 .row.horizontal-center {

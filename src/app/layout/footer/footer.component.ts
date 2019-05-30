@@ -7,14 +7,14 @@ import { PlatformInfoService, WINDOW } from 'src/app/core'
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  tabletOrHandset
+  platform
 
   constructor(
     _platformInfo: PlatformInfoService,
     @Inject(WINDOW) private window: Window
   ) {
     _platformInfo.get().subscribe(platformInfo => {
-      this.tabletOrHandset = platformInfo.tabletOrHandset
+      this.platform = platformInfo
     })
   }
 

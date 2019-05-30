@@ -19,7 +19,7 @@
     </div>
 
     <div class="row public-domain space-around">
-      <div class="col CC0  mat-caption">
+      <div class=" CC0  mat-caption">
         <img src="./assets/icons/public-domain.png" />
         <ng-container i18n="@@footer.copyright_cc0_1"
           >Except where otherwise specified, the content of this website is
@@ -31,8 +31,8 @@
       </div>
     </div>
     <ul class="row links space-around">
-      <div class="col">
-        <li class="col no-gutters">
+      <div class="col" [ngClass]="{ 'space-around': !platform.columns12 }">
+        <li class="col s4 l-auto m8 no-gutters ">
           <button mat-button color="primary">
             <div
               class="button-wrapper"
@@ -43,7 +43,7 @@
             </div>
           </button>
         </li>
-        <li class="col no-gutters">
+        <li class="col s4 l-auto m8 no-gutters">
           <button mat-button color="primary">
             <div
               class="button-wrapper"
@@ -54,7 +54,7 @@
             </div>
           </button>
         </li>
-        <li class="col no-gutters">
+        <li class="col s4 l-auto m8 no-gutters">
           <button mat-button color="primary">
             <div
               class="button-wrapper"
@@ -65,7 +65,7 @@
             </div>
           </button>
         </li>
-        <li class="col no-gutters">
+        <li class="col s4 l-auto m8 no-gutters">
           <button mat-button color="primary">
             <div
               class="button-wrapper"
@@ -76,7 +76,7 @@
             </div>
           </button>
         </li>
-        <li class="col no-gutters">
+        <li class="col s4 l-auto m8 no-gutters">
           <button mat-button color="primary">
             <div
               class="button-wrapper"

@@ -30,13 +30,30 @@ ul {
     height: 15px;
     margin-right: 8px;
   }
+
+  .CC0 {
+    text-align: center;
+    .columns-4 :host &,
+    .columns-8 :host & {
+      padding-bottom: 15px;
+    }
+  }
 }
 
 .links {
-  > div > :first-child {
-    padding-left: 0;
+  > div {
+    > :first-child {
+      padding-left: 0;
+    }
+    li {
+      .columns-4 :host &,
+      .columns-8 :host & {
+        justify-content: space-around;
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 0 12px;
+      }
+    }
   }
-}
-.button-wrapper {
-  height: 24px;
 }
