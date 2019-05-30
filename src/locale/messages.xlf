@@ -9,7 +9,7 @@
         <source>SIGN IN</source>
       </segment>
     </unit>
-    <unit id="hheader.register">
+    <unit id="header.register">
       <notes>
         <note category="location">app/layout/header/header.component.html:89</note>
       </notes>
@@ -63,7 +63,7 @@
           </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.dispute.procedure">
+    <unit id="ng-orcid.disputeProcedure">
       <notes>
         <note category="location">app/layout/footer/footer.component.html:50,52</note>
       </notes>
@@ -91,7 +91,7 @@
           </source>
       </segment>
     </unit>
-    <unit id="!!">
+    <unit id="ng-orcid.advanceSearch">
       <notes>
         <note category="location">app/layout/search/search.component.html:11,13</note>
       </notes>
@@ -318,7 +318,7 @@
         </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.full.orcid">
+    <unit id="ng-orcidFullOrcid">
       <notes>
         <note category="location">app/home/components/news/news.component.html:44,46</note>
       </notes>
@@ -328,7 +328,7 @@
             </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.more.news">
+    <unit id="ng-orcid.MoreNews">
       <notes>
         <note category="location">app/home/components/news/news.component.html:61,63</note>
       </notes>
