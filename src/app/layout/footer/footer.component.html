@@ -34,35 +34,55 @@
       <div class="col">
         <li class="col no-gutters">
           <button mat-button color="primary">
-            <div class="button-wrapper" i18n="@@footer.privacypolicy">
+            <div
+              class="button-wrapper"
+              i18n="@@footer.privacypolicy"
+              (click)="goTo('/footer/privacy-policy')"
+            >
               Privacy Policy
             </div>
           </button>
         </li>
         <li class="col no-gutters">
           <button mat-button color="primary">
-            <div class="button-wrapper" i18n="@@footer.termsofuse">
+            <div
+              class="button-wrapper"
+              i18n="@@footer.termsofuse"
+              (click)="goTo('/content/orcid-terms-use')"
+            >
               Terms of Use
             </div>
           </button>
         </li>
         <li class="col no-gutters">
           <button mat-button color="primary">
-            <div class="button-wrapper" i18n="@@ng-orcid.disputeProcedure">
+            <div
+              class="button-wrapper"
+              i18n="@@ng-orcid.disputeProcedure"
+              (click)="goTo('/orcid-dispute-procedures')"
+            >
               Dispute procedures
             </div>
           </button>
         </li>
         <li class="col no-gutters">
           <button mat-button color="primary">
-            <div class="button-wrapper" i18n="@@footer.contactus">
+            <div
+              class="button-wrapper"
+              i18n="@@footer.contactus"
+              (click)="goTo('/hc/en-us/requests/new')"
+            >
               Contact us
             </div>
           </button>
         </li>
         <li class="col no-gutters">
           <button mat-button color="primary">
-            <div class="button-wrapper" i18n="@@ng-orcid.trademark">
+            <div
+              class="button-wrapper"
+              i18n="@@ng-orcid.trademark"
+              (click)="goTo('/trademark-and-id-display-guidelines')"
+            >
               Trademark & iD guidelines
             </div>
           </button>
