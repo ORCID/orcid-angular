@@ -20,6 +20,10 @@ ul {
   img.social {
     height: 24px;
     margin-left: 12px;
+    [dir] :host & {
+      margin-left: initial;
+      margin-right: 12px;
+    }
   }
 }
 
@@ -29,6 +33,10 @@ ul {
     width: 80px;
     height: 15px;
     margin-right: 8px;
+    [dir] :host & {
+      margin-right: initial;
+      margin-left: 8px;
+    }
   }
 
   .CC0 {
