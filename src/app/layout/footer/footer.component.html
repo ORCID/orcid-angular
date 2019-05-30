@@ -1,6 +1,6 @@
 <footer>
   <div class="container">
-    <div class="row logo ">
+    <div class="row logo space-around">
       <div class="col baseline">
         <img src="./assets/vectors/orcid.logo.svg" />
         <img
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="row public-domain">
+    <div class="row public-domain space-around">
       <div class="col CC0  mat-caption">
         <img src="./assets/icons/public-domain.png" />
         <ng-container i18n="@@footer.copyright_cc0_1"
@@ -30,40 +30,44 @@
         >
       </div>
     </div>
-    <ul class="row links">
-      <li class="col">
-        <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@footer.privacypolicy">
-            Privacy Policy
-          </div>
-        </button>
-      </li>
-      <li class="col">
-        <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@footer.termsofuse">
-            Terms of Use
-          </div>
-        </button>
-      </li>
-      <li class="col">
-        <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@ng-orcid.disputeProcedure">
-            Dispute procedures
-          </div>
-        </button>
-      </li>
-      <li class="col">
-        <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@footer.contactus">Contact us</div>
-        </button>
-      </li>
-      <li class="col">
-        <button mat-button color="primary">
-          <div class="button-wrapper" i18n="@@ng-orcid.trademark">
-            Trademark & iD guidelines
-          </div>
-        </button>
-      </li>
+    <ul class="row links space-around">
+      <div class="col">
+        <li class="col no-gutters">
+          <button mat-button color="primary">
+            <div class="button-wrapper" i18n="@@footer.privacypolicy">
+              Privacy Policy
+            </div>
+          </button>
+        </li>
+        <li class="col no-gutters">
+          <button mat-button color="primary">
+            <div class="button-wrapper" i18n="@@footer.termsofuse">
+              Terms of Use
+            </div>
+          </button>
+        </li>
+        <li class="col no-gutters">
+          <button mat-button color="primary">
+            <div class="button-wrapper" i18n="@@ng-orcid.disputeProcedure">
+              Dispute procedures
+            </div>
+          </button>
+        </li>
+        <li class="col no-gutters">
+          <button mat-button color="primary">
+            <div class="button-wrapper" i18n="@@footer.contactus">
+              Contact us
+            </div>
+          </button>
+        </li>
+        <li class="col no-gutters">
+          <button mat-button color="primary">
+            <div class="button-wrapper" i18n="@@ng-orcid.trademark">
+              Trademark & iD guidelines
+            </div>
+          </button>
+        </li>
+      </div>
     </ul>
   </div>
 </footer>

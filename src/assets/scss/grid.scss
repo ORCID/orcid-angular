@@ -102,9 +102,9 @@ $gutter-width: 12px !default;
 
   // Clear floating children
   &:after {
-    content: '';
-    display: table;
-    clear: both;
+    // content: '';
+    // display: table;
+    // clear: both;
   }
 
   .col {
@@ -215,4 +215,8 @@ $gutter-width: 12px !default;
 
 .row.space-between {
   justify-content: space-between;
+}
+
+.row.space-around {
+  justify-content: space-around;
 }
