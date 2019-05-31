@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { NavigationEnd, Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
-import { PlatformInfoService, WINDOW } from 'src/app/core'
+import { PlatformInfoService, WINDOW, UserService } from 'src/app/core'
 import { PlatformInfo, ApplicationMenuItem } from 'src/app/types'
 import { menu } from './menu'
 import { ApplicationMenuItemBasic } from 'src/app/types/menu.local'
@@ -20,7 +20,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     _router: Router,
     _platform: PlatformInfoService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    _userInfo: UserService
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
@@ -32,6 +33,9 @@ export class HeaderComponent implements OnInit {
 
     _platform.get().subscribe(data => {
       this.platform = data
+    })
+    _userInfo.getUserInfo().subscribe(data => {
+      console.log(data)
     })
   }
 
