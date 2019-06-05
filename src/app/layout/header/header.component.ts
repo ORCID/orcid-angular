@@ -2,9 +2,12 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { NavigationEnd, Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { PlatformInfoService, WINDOW, UserService } from 'src/app/core'
-import { PlatformInfo, ApplicationMenuItem } from 'src/app/types'
+import { PlatformInfo, ApplicationMenuItem, UserInfo } from 'src/app/types'
 import { menu } from './menu'
-import { ApplicationMenuItemBasic } from 'src/app/types/menu.local'
+import {
+  ApplicationMenuItemBasic,
+  MenuItemRequirement,
+} from 'src/app/types/menu.local'
 
 @Component({
   selector: 'app-header',
@@ -16,6 +19,7 @@ export class HeaderComponent implements OnInit {
   platform: PlatformInfo
   mobileMenuState = false
   menu: ApplicationMenuItem[] = this.createMenuList(menu)
+  user: UserInfo
 
   constructor(
     _router: Router,
@@ -26,7 +30,6 @@ export class HeaderComponent implements OnInit {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
       .subscribe((val: NavigationStart) => {
-        console.log(val.url)
         this.currentRoute = _router.url
         this.setChildOfCurrentRouteAsSecondaryMenu()
       })
@@ -34,8 +37,8 @@ export class HeaderComponent implements OnInit {
     _platform.get().subscribe(data => {
       this.platform = data
     })
-    _userInfo.getUserInfo().subscribe(data => {
-      console.log(data)
+    _userInfo.getUserInfoOnEachStatusUpdate().subscribe(data => {
+      this.user = data
     })
   }
 
@@ -117,5 +120,63 @@ export class HeaderComponent implements OnInit {
     })
 
     return list
+  }
+
+  checkMenuItemRequirements(requirements: MenuItemRequirement) {
+    if (!requirements) {
+      return true
+    } else if (
+      typeof requirements.desktop !== 'undefined' &&
+      requirements.desktop &&
+      !this.platform.columns12
+    ) {
+      return false
+    } else if (
+      typeof requirements.desktop !== 'undefined' &&
+      !requirements.desktop &&
+      this.platform.columns12
+    ) {
+      return false
+    } else if (
+      typeof requirements.logging !== 'undefined' &&
+      requirements.logging &&
+      !this.user
+    ) {
+      return false
+    } else if (
+      typeof requirements.logging !== 'undefined' &&
+      !requirements.logging &&
+      this.user
+    ) {
+      return false
+    } else if (requirements.requiresAll) {
+      for (const accessKey of requirements.requiresAll) {
+        const key = Object.keys(accessKey)[0]
+        const value = accessKey[key]
+        if (
+          !this.user ||
+          !(
+            this.user[key] === value ||
+            (typeof this.user[key] === 'undefined' && value === 'false')
+          )
+        ) {
+          return false
+        }
+      }
+    } else if (requirements.requiresAny) {
+      for (const accessKey of requirements.requiresAny) {
+        const key = Object.keys(accessKey)[0]
+        const value = accessKey[key]
+        if (
+          this.user &&
+          (this.user[key] === value ||
+            (typeof this.user[key] === 'undefined' && value === 'false'))
+        ) {
+          return true
+        }
+      }
+      return false
+    }
+    return true
   }
 }
