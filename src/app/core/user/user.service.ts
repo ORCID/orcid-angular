@@ -14,6 +14,7 @@ import {
   startWith,
   retryWhen,
 } from 'rxjs/operators'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -25,17 +26,14 @@ export class UserService {
   private $infoOnEachStatusUpdateObservable
 
   private getUserInfo(): Observable<UserInfo> {
-    return this._http.get<UserInfo>(
-      'https://localhost:8443/orcid-web/userInfo.json',
-      {
-        withCredentials: true,
-      }
-    )
+    return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
+      withCredentials: true,
+    })
   }
 
   private getUserStatus() {
     return this._http
-      .get<any>('https://localhost:8443/orcid-web/userStatus.json', {
+      .get<any>(environment.API_WEB + 'userStatus.json', {
         withCredentials: true,
       })
       .pipe(map(response => response.loggedIn))
