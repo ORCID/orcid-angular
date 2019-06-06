@@ -21,7 +21,7 @@ $config: mat-typography-config();
       .menu-container {
         .row {
           button {
-            & .active {
+            &.active {
               background-color: mat-color($background, light-grey);
               color: mat-contrast($accent, 500);
               border-radius: 0;
