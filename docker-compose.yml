@@ -1,0 +1,22 @@
+version: '2.1'
+services:
+  proxy:
+    image: abiosoft/caddy
+    container_name: proxy
+    volumes:
+      - ./Caddyfile:/etc/Caddyfile
+      - ./.caddy:/root/.caddy
+    environment:
+      - ACME_AGREE=true
+    ports:
+      - 80:80
+    restart: always
+    links:
+      - web
+    depends_on:
+      - web
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
