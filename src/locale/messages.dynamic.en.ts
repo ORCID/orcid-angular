@@ -1,6 +1,7 @@
 // prettier-ignore
 /* tslint:disable */
 export const LOCALE : {[key:string]: string} = {
+  "public-layout.sign_out": "Sign out",
   "public-layout.for_researchers": "For Researchers",
   "public-layout.for_organizations": "For Organizations",
   "public-layout.about": "About",
@@ -49,7 +50,6 @@ export const LOCALE : {[key:string]: string} = {
   "ngOrcid.standartCreatorAgreement": "Standard Creator Member Agreement",
   "ngOrcid.blog": "Blog",
   "ngOrcid.subscribe": " Subscribe!",
-  "public-layout.sign_out": "Sign out",
   "ngOrcid.disputeProcedures": "Dispute Procedures",
   "change_email_preferences.privacyPolicy": "privacy policy",
   "developer_tools.public_member.terms.check_2": "Public Client Terms of Service",
