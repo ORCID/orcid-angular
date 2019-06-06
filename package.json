@@ -23,7 +23,6 @@
         "build:prod": "npm run build:i18n && ng run ng-orcid:build:production-en && ng run ng-orcid:build:production-fr && ng run ng-orcid:build:production-ar && ng run ng-orcid:build:production-ca && ng run ng-orcid:build:production-cs && ng run ng-orcid:build:production-en && ng run ng-orcid:build:production-en  && ng run ng-orcid:build:production-es  && ng run ng-orcid:build:production-it  && ng run ng-orcid:build:production-ja  && ng run ng-orcid:build:production-ko  && ng run ng-orcid:build:production-lr  && ng run ng-orcid:build:production-pt  && ng run ng-orcid:build:production-rl  && ng run ng-orcid:build:production-ru  && ng run ng-orcid:build:production-uk  && ng run ng-orcid:build:production-xx  && ng run ng-orcid:build:production-zh_CN  && ng run ng-orcid:build:production-zh_TW",
         "build:sandbox": "npm run build:i18n && ng run ng-orcid:build:sandbox-en && ng run ng-orcid:build:sandbox-fr && ng run ng-orcid:build:sandbox-ar && ng run ng-orcid:build:sandbox-ca && ng run ng-orcid:build:sandbox-cs && ng run ng-orcid:build:sandbox-en && ng run ng-orcid:build:sandbox-en  && ng run ng-orcid:build:sandbox-es  && ng run ng-orcid:build:sandbox-it  && ng run ng-orcid:build:sandbox-ja  && ng run ng-orcid:build:sandbox-ko  && ng run ng-orcid:build:sandbox-lr  && ng run ng-orcid:build:sandbox-pt  && ng run ng-orcid:build:sandbox-rl  && ng run ng-orcid:build:sandbox-ru  && ng run ng-orcid:build:sandbox-uk  && ng run ng-orcid:build:sandbox-xx  && ng run ng-orcid:build:sandbox-zh_CN  && ng run ng-orcid:build:sandbox-zh_TW",
         "build:qa": "npm run build:i18n && ng run ng-orcid:build:qa-en && ng run ng-orcid:build:qa-fr && ng run ng-orcid:build:qa-ar && ng run ng-orcid:build:qa-ca && ng run ng-orcid:build:qa-cs && ng run ng-orcid:build:qa-en && ng run ng-orcid:build:qa-en  && ng run ng-orcid:build:qa-es  && ng run ng-orcid:build:qa-it  && ng run ng-orcid:build:qa-ja  && ng run ng-orcid:build:qa-ko  && ng run ng-orcid:build:qa-lr  && ng run ng-orcid:build:qa-pt  && ng run ng-orcid:build:qa-rl  && ng run ng-orcid:build:qa-ru  && ng run ng-orcid:build:qa-uk  && ng run ng-orcid:build:qa-xx  && ng run ng-orcid:build:qa-zh_CN  && ng run ng-orcid:build:qa-zh_TW",
-        "cors": "cross-env HOST=0.0.0.0 PORT=4100 node cors-anywhere",
         "format:fix-all": "pretty-quick",
         "format:fix-stage": "pretty-quick --staged",
         "format:check": "prettier --config ./.prettierrc --list-different \"**/*{.ts,.js,.json,.css,.scss,html}\" "
@@ -63,7 +62,6 @@
         "@types/xml2js": "^0.4.3",
         "axios": "^0.16.2",
         "codelyzer": "~4.3.0",
-        "cors-anywhere": "^0.4.1",
         "cross-env": "^5.2.0",
         "husky": "^1.1.4",
         "jasmine-core": "~2.99.1",
