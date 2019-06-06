@@ -2,7 +2,7 @@ import { Component, HostBinding, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, ProfileService } from 'src/app/core'
 import { AffiliationUIGroup, Person, PlatformInfo, Works } from 'src/app/types'
-import { environment } from 'src/environments/environment.prod'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-profile-page',
