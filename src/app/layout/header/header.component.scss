@@ -55,7 +55,23 @@ nav {
 .columns-8,
 .columns-4 {
   :host {
+    header.container.fixed-header-mode {
+      padding: 0 8px;
+      > .row {
+        position: fixed;
+        height: 60px;
+        width: 100%;
+        z-index: 10000;
+        background-color: white;
+        left: 0;
+        > .col {
+          margin: 0 8px;
+        }
+      }
+    }
+
     header.container {
+      height: 62px;
       padding-bottom: 0;
       .logo-menu-container {
         padding-top: 8px;
@@ -68,7 +84,19 @@ nav {
           }
         }
       }
-      height: auto;
+      nav {
+        .top-bar {
+          .menu-container {
+            nav {
+              .top-bar {
+                .menu-container {
+                  padding-top: 60px;
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     nav {

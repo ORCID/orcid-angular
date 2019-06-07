@@ -4,11 +4,11 @@
     "scripts": {
         "start": "ng serve --disable-host-check",
         "start:aot": "ng serve --aot --disable-host-check",
-        "start:ar": "ng serve --configuration=ar --disable-host-check",
+        "start:ar": "ng serve --configuration=ar --disable-host-check --port 4201",
         "start:ar:aot": "ng serve --aot --configuration=ar --disable-host-check",
         "start:local": "ng serve --configuration=local-en --disable-host-check",
         "start:local:aot": "ng serve --aot --configuration=local-en --disable-host-check",
-        "start:local:ar": "ng serve --configuration=local-ar --disable-host-check",
+        "start:local:ar": "ng serve --configuration=local-ar --disable-host-check --port 4201",
         "start:local:ar:aot": "ng serve --configuration=local-ar --aot --disable-host-check",
         "test": "ng test",
         "lint": "ng lint",

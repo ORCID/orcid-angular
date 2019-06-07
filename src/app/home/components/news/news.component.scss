@@ -15,7 +15,7 @@
 .news-box > .col > .row {
   text-align: center;
   height: 312px;
-
+  background-size: cover;
   padding-top: 32px;
   box-sizing: border-box;
   :first-child {
@@ -47,7 +47,8 @@ button {
 .columns-4,
 .columns-8 {
   :host {
-    padding: 0 mat-divider {
+    padding: 0;
+    mat-divider {
       margin-bottom: 0;
     }
 
@@ -68,6 +69,21 @@ button {
     .mobile-more-news-box {
       margin-top: 16px;
       margin-bottom: 20px;
+    }
+  }
+}
+
+.columns-12 {
+  :host {
+    .news-box {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      :first-child.col {
+      }
+      .col {
+        max-width: 410px;
+      }
     }
   }
 }
