@@ -144,7 +144,9 @@ nav {
                 flex-direction: column;
                 position: relative;
                 button {
-                  margin-left: 16px;
+                  padding-left: calc(
+                    16px + 16px
+                  ); // TODO: this should be gutter plus 16
                   [dir='rtl'] & {
                     margin-left: auto;
                     margin-right: 16px;
@@ -156,7 +158,8 @@ nav {
                 }
                 .row {
                   button {
-                    margin-left: 32px;
+                    padding-left: calc(16px + 32px);
+                    // TODO: this should be gutter plus 32
                     [dir='rtl'] & {
                       margin-left: auto;
                       margin-right: 32px;
@@ -164,7 +167,8 @@ nav {
                   }
                   .row {
                     button {
-                      margin-left: 64px;
+                      padding-left: calc(16px + 64px);
+                      // TODO: this should be gutter plus 64
                       [dir='rtl'] & {
                         margin-left: auto;
                         margin-right: 64px;
@@ -190,7 +194,6 @@ nav {
     }
   }
 }
-
 .ie,
 .edge {
   :host {
