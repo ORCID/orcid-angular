@@ -14,10 +14,12 @@ import { SearchComponent } from './search/search.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MenuIconComponent } from './menu-icon/menu-icon.component'
 import { LanguageComponent } from './language/language.component'
+import { CoreModule } from '../core/core.module'
 
 @NgModule({
   imports: [
     CommonModule,
+    CoreModule,
     MatMenuModule,
     MatButtonModule,
     RouterModule,
