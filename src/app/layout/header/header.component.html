@@ -12,6 +12,9 @@
           <div *ngIf="mobileMenuState" class="col no-gutters">
             <app-language class="col no-gutters"></app-language>
           </div>
+          <div *ngIf="!mobileMenuState" class="col no-gutters">
+            <app-user-menu></app-user-menu>
+          </div>
 
           <app-menu-icon
             (click)="mobileMenuState = !mobileMenuState"

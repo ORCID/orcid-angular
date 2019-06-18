@@ -8,11 +8,11 @@ import {
   delay,
   catchError,
   filter,
-  share,
   switchMapTo,
   map,
   startWith,
   retryWhen,
+  shareReplay,
 } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 
@@ -23,7 +23,7 @@ export class UserService {
   constructor(private _http: HttpClient) {}
   private currentlyLoggedIn = true
   private loggingStateComesFromTheServer = false
-  private $infoOnEachStatusUpdateObservable
+  private $infoOnEachStatusUpdateObservable: Observable<UserInfo>
 
   private getUserInfo(): Observable<UserInfo> {
     return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
@@ -39,7 +39,7 @@ export class UserService {
       .pipe(map(response => response.loggedIn))
   }
 
-  getUserInfoOnEachStatusUpdate() {
+  getUserInfoOnEachStatusUpdate(): Observable<UserInfo> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
     if (this.$infoOnEachStatusUpdateObservable) {
@@ -80,7 +80,7 @@ export class UserService {
               }
             })
           )
-          .pipe(share()))
+          .pipe(shareReplay(1)))
     }
   }
   private handleErrors(gerUserInfo: Observable<UserInfo>) {

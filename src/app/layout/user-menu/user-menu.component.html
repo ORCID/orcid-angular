@@ -1,0 +1,90 @@
+<button
+  class="user-menu-button"
+  mat-button
+  [matMenuTriggerFor]="menu"
+  aria-label="Example icon-button with a menu"
+  (menuOpened)="state = true"
+  (menuClosed)="state = false"
+>
+  <img src="./assets/vectors/profile-icon.svg" alt="" />
+  <ng-container *ngIf="platform.columns12" class="name-container"
+    >Jane Doe</ng-container
+  >
+  <mat-icon *ngIf="!state && platform.columns12">expand_more</mat-icon>
+  <mat-icon *ngIf="state && platform.columns12">expand_less</mat-icon>
+</button>
+<mat-menu #menu="matMenu" class="user-menu">
+  <div mat-ripple class="row main-button-container" (click)="goto('my-orcid')">
+    <div class="col">
+      <img src="./assets/vectors/profile-icon.svg" alt="" />
+    </div>
+    <div class="col name-container">
+      <div>Jane Doe</div>
+      <div class="mat-caption">View my ORCID record</div>
+    </div>
+  </div>
+  <button mat-menu-item>
+    <mat-icon>inbox</mat-icon>
+    <span i18n="@@workspace.notifications" (click)="goto('inbox')">Inbox</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span i18n="@@public-layout.account_setting" (click)="goto('account')"
+      >Account settings
+    </span>
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="
+      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
+      userInfo['MEMBER_MENU'] == 'true'
+    "
+  >
+    <mat-icon>code</mat-icon>
+    <span
+      i18n="@@ng-orcid.advanceSearch"
+      (click)="goto('group/developer-tools')"
+      >Developer tools
+    </span>
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="
+      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
+      userInfo['MEMBER_MENU'] != 'true'
+    "
+  >
+    <mat-icon>code</mat-icon>
+    <span i18n="@@ng-orcid.advanceSearch" (click)="goto('developer-tools')"
+      >Developer tools
+    </span>
+  </button>
+  <button mat-menu-item *ngIf="userInfo['SELF_SERVICE_MENU']">
+    <mat-icon>build</mat-icon>
+    <span i18n="@@workspace.self_service" (click)="goto('manage-members')"
+      >Member tools
+    </span>
+  </button>
+  <button mat-menu-item *ngIf="userInfo['ADMIN_MENU']">
+    <mat-icon>group</mat-icon>
+    <span
+      i18n="@@admin.members.workspace_link"
+      (click)="goto('/manage-members')"
+      >Manage members</span
+    >
+  </button>
+  <button mat-menu-item *ngIf="userInfo['ADMIN_MENU']">
+    <mat-icon>verified_user</mat-icon>
+    <span i18n="@@admin.workspace_link" (click)="goto('admin-actions')"
+      >Admin page</span
+    >
+  </button>
+  <button mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon>
+    <span i18n="@@public-layout.sign_out" (click)="goto('signout')"
+      >Logout</span
+    >
+  </button>
+</mat-menu>

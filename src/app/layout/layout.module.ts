@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MenuIconComponent } from './menu-icon/menu-icon.component'
 import { LanguageComponent } from './language/language.component'
 import { CoreModule } from '../core/core.module'
+import { UserMenuComponent } from './user-menu/user-menu.component'
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { CoreModule } from '../core/core.module'
     SearchComponent,
     MenuIconComponent,
     LanguageComponent,
+    UserMenuComponent,
   ],
   exports: [HeaderComponent, FooterComponent],
 })

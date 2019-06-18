@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { Observable, timer } from 'rxjs'
-import { switchMapTo, refCount, publishReplay } from 'rxjs/operators'
+import { switchMapTo, shareReplay } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +23,7 @@ export class TogglzService {
     } else {
       return (this.togglz = timer(0, 60 * 1000).pipe(
         switchMapTo(this.getConfig()),
-        publishReplay(1),
-        refCount()
+        shareReplay(1)
       ))
     }
   }
