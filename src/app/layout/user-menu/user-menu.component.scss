@@ -1,14 +1,17 @@
 .main-button-container {
-  padding: 0 16px;
+  cursor: pointer;
   padding-bottom: 8px;
+  padding-top: 4px;
   align-items: center;
   width: auto;
+
   img {
     height: 36px;
     width: 36px;
   }
   .name-container {
     flex-direction: column;
+    align-items: start;
     .mat-title {
       margin: 0;
     }
@@ -17,6 +20,10 @@
 
 :host {
   .user-menu-button {
+    .columns-4 &,
+    .columns-8 & {
+      padding: 0;
+    }
     .user-menu-button-container {
       flex-direction: row;
     }
@@ -28,6 +35,7 @@
       .columns-8 & {
         height: 24px;
         width: 24px;
+        margin: 0;
       }
     }
   }

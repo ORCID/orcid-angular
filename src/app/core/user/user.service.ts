@@ -36,7 +36,8 @@ export class UserService {
       .get<any>(environment.API_WEB + 'userStatus.json', {
         withCredentials: true,
       })
-      .pipe(map(response => response.loggedIn))
+      .pipe(catchError(val => of({})))
+      .pipe(map(response => response.loggedIn || null))
   }
 
   getUserInfoOnEachStatusUpdate(): Observable<UserInfo> {
@@ -57,10 +58,13 @@ export class UserService {
           // and not the initial assumption. (more on this on the following pipe)
           .pipe(
             filter(loggedIn => {
-              this.loggingStateComesFromTheServer = true
-              if (!(loggedIn === this.currentlyLoggedIn)) {
-                this.currentlyLoggedIn = loggedIn
-                return true
+              if (loggedIn) {
+                this.currentlyLoggedIn = false
+                this.loggingStateComesFromTheServer = true
+                if (!(loggedIn === this.currentlyLoggedIn)) {
+                  this.currentlyLoggedIn = loggedIn
+                  return true
+                }
               }
               return false
             })
@@ -92,7 +96,7 @@ export class UserService {
           // This is necessary because in some cases when the userStatus.json responded with { logging = true }
           // and the userInfo.json is called immediately after it responds with an error
           retryWhen(errors =>
-            errors.pipe(delay(1000)).pipe(
+            errors.pipe(delay(2000)).pipe(
               tap(x => {
                 if (
                   !(

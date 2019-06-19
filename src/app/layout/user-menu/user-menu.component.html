@@ -10,19 +10,20 @@
   <ng-container *ngIf="platform.columns12" class="name-container"
     >Jane Doe</ng-container
   >
-  <mat-icon *ngIf="!state && platform.columns12">expand_more</mat-icon>
-  <mat-icon *ngIf="state && platform.columns12">expand_less</mat-icon>
+  <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
 </button>
 <mat-menu #menu="matMenu" class="user-menu">
-  <div mat-ripple class="row main-button-container" (click)="goto('my-orcid')">
-    <div class="col">
-      <img src="./assets/vectors/profile-icon.svg" alt="" />
+  <button mat-button class="main-button" (click)="goto('my-orcid')">
+    <div class="row main-button-container">
+      <div class="col">
+        <img src="./assets/vectors/profile-icon.svg" alt="" />
+      </div>
+      <div class="col name-container">
+        <div class="mat-title">Jane Doe</div>
+        <div class="mat-caption">View my ORCID record</div>
+      </div>
     </div>
-    <div class="col name-container">
-      <div>Jane Doe</div>
-      <div class="mat-caption">View my ORCID record</div>
-    </div>
-  </div>
+  </button>
   <button mat-menu-item>
     <mat-icon>inbox</mat-icon>
     <span i18n="@@workspace.notifications" (click)="goto('inbox')">Inbox</span>
@@ -36,6 +37,7 @@
   <button
     mat-menu-item
     *ngIf="
+      userInfo &&
       (userInfo['IN_DELEGATION_MODE'] == 'false' ||
         userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
       userInfo['MEMBER_MENU'] == 'true'
@@ -51,6 +53,7 @@
   <button
     mat-menu-item
     *ngIf="
+      userInfo &&
       (userInfo['IN_DELEGATION_MODE'] == 'false' ||
         userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
       userInfo['MEMBER_MENU'] != 'true'
@@ -61,13 +64,13 @@
       >Developer tools
     </span>
   </button>
-  <button mat-menu-item *ngIf="userInfo['SELF_SERVICE_MENU']">
+  <button mat-menu-item *ngIf="userInfo && userInfo['SELF_SERVICE_MENU']">
     <mat-icon>build</mat-icon>
     <span i18n="@@workspace.self_service" (click)="goto('manage-members')"
       >Member tools
     </span>
   </button>
-  <button mat-menu-item *ngIf="userInfo['ADMIN_MENU']">
+  <button mat-menu-item *ngIf="userInfo && userInfo['ADMIN_MENU']">
     <mat-icon>group</mat-icon>
     <span
       i18n="@@admin.members.workspace_link"
@@ -75,7 +78,7 @@
       >Manage members</span
     >
   </button>
-  <button mat-menu-item *ngIf="userInfo['ADMIN_MENU']">
+  <button mat-menu-item *ngIf="userInfo && userInfo['ADMIN_MENU']">
     <mat-icon>verified_user</mat-icon>
     <span i18n="@@admin.workspace_link" (click)="goto('admin-actions')"
       >Admin page</span
