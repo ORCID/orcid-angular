@@ -1,16 +1,31 @@
 <button
+  *ngIf="userInfo"
   class="user-menu-button"
   mat-button
+  color="primary"
   [matMenuTriggerFor]="menu"
-  aria-label="Example icon-button with a menu"
   (menuOpened)="state = true"
   (menuClosed)="state = false"
 >
-  <img src="./assets/vectors/profile-icon.svg" alt="" />
+  <img
+    *ngIf="platform.columns12"
+    src="./assets/vectors/profile-icon.svg"
+    alt=""
+  />
   <ng-container *ngIf="platform.columns12" class="name-container"
     >Jane Doe</ng-container
   >
+
   <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
+</button>
+<button
+  (click)="goto('login')"
+  mat-button
+  color="primary"
+  class="name-container"
+  *ngIf="!userInfo"
+>
+  SIGN IN/REGISTER
 </button>
 <mat-menu #menu="matMenu" class="user-menu">
   <button mat-button class="main-button" (click)="goto('my-orcid')">
