@@ -4,6 +4,10 @@
   padding-top: 4px;
   align-items: center;
   width: auto;
+  flex-wrap: nowrap;
+  max-width: 248px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   img {
     height: 36px;
@@ -12,8 +16,13 @@
   .name-container {
     flex-direction: column;
     align-items: start;
+    overflow: hidden;
     .mat-title {
       margin: 0;
+      width: 199px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
     }
   }
 }
