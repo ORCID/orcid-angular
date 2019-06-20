@@ -25,7 +25,8 @@
   class="name-container"
   *ngIf="!userInfo"
 >
-  SIGN IN/REGISTER
+  <ng-container i18n="@@public-layout.sign_in"> SIGN IN</ng-container>/
+  <ng-container i18n="@@header.register">REGISTER</ng-container>
 </button>
 <mat-menu #menu="matMenu" class="user-menu">
   <button mat-button class="main-button" (click)="goto('my-orcid')">
