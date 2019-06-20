@@ -8,6 +8,7 @@ import {
   ApplicationMenuItemBasic,
   MenuItemRequirement,
 } from 'src/app/types/menu.local'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-header',
@@ -38,7 +39,7 @@ export class HeaderComponent implements OnInit {
       this.platform = data
     })
     _userInfo.getUserInfoOnEachStatusUpdate().subscribe(data => {
-      this.user = data
+      this.user = data.userInfo
     })
   }
 
@@ -52,10 +53,10 @@ export class HeaderComponent implements OnInit {
 
   setChildOfCurrentRouteAsSecondaryMenu() {
     this.menu.forEach(button => {
-      if (button.activeRoute) {
-        button.hover = button.activeRoute === this.currentRoute
+      if (button.activeRoute != null) {
+        button.hover = '/' + button.activeRoute === this.currentRoute
       } else {
-        button.hover = button.route === this.currentRoute
+        button.hover = '/' + button.route === this.currentRoute
       }
     })
   }
@@ -68,7 +69,7 @@ export class HeaderComponent implements OnInit {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route) {
-      this.window.location.href = button.route
+      this.window.location.href = environment.BASE_URL + button.route
     }
   }
 
