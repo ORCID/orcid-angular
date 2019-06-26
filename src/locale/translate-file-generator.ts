@@ -258,15 +258,9 @@ function setLanguagePropertiesToLanguageFile(
           )
           element.segment[0].target = []
           element.segment[0].target.push(translation)
-          element.notes[0].note.forEach(note => {
-            if (
-              note['$']['category'] &&
-              note['$']['category'] === 'location' &&
-              note['_'].indexOf('i18n.pseudo') > 0
-            ) {
-              dynamicValues[element['$'].id] = translation
-            }
-          })
+          if (XLFTranslationNoteHas(element, 'location', 'i18n.pseudo')) {
+            dynamicValues[element['$'].id] = translation
+          }
 
           if ('en' === saveCode) {
             checkIfTranslationMatch(
@@ -276,16 +270,9 @@ function setLanguagePropertiesToLanguageFile(
             )
           }
         } else {
-          element.notes[0].note.forEach(note => {
-            if (
-              note['$']['category'] &&
-              note['$']['category'] === 'location' &&
-              note['_'].indexOf('i18n.pseudo') > 0
-            ) {
-              dynamicValues[element['$'].id] = element.segment[0].source[0]
-            }
-          })
-
+          if (XLFTranslationNoteHas(element, 'location', 'i18n.pseudo')) {
+            dynamicValues[element['$'].id] = element.segment[0].source[0]
+          }
           element.segment[0].target = element.segment[0].source
           translationNotFound(element['$'].id, saveCode)
         }
@@ -383,4 +370,21 @@ function reportTranslationTreatment(translation, replacement, saveCode, id) {
       replacement,
     })
   }
+}
+function XLFTranslationNoteHas(element, category, content): boolean {
+  const value = getXLFTranslationNote(element, category)
+  if (value) {
+    return value.indexOf(content) !== -1
+  } else {
+    return false
+  }
+}
+function getXLFTranslationNote(element, noteCategory: string): string {
+  let value
+  element.notes[0].note.forEach(note => {
+    if (note['$']['category'] && note['$']['category'] === 'location') {
+      value = note['_']
+    }
+  })
+  return value
 }
