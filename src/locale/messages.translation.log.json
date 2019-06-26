@@ -2,7 +2,8 @@
   "language": {
     "ar": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ar.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ar.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ar.properties"
       ],
       "notFound": [
         "footer.copyright_cc0_1",
@@ -10,6 +11,10 @@
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -47,23 +52,23 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ca": {
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_ca.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ca.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/javascript_ca.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/javascript_ca.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ca.properties"
       ],
       "notFound": [
+        "confirm-oauth-access.connectingresearchandresearchers",
         "header.signin",
         "header.register",
         "public-layout.sign_out",
         "public-layout.amount_ids",
+        "public-layout.see_more",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "footer.privacypolicy",
@@ -72,6 +77,13 @@
         "footer.contactus",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "public-layout.sign_in",
+        "ng-orcid.view.my.orcid",
+        "workspace.notifications",
+        "public-layout.account_setting",
+        "workspace.self_service",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "public_profile.empty_profile",
@@ -111,7 +123,6 @@
         "public-layout.for_organizations",
         "public-layout.about",
         "public-layout.help",
-        "public-layout.sign_in",
         "login.registerOrcidId",
         "manage_delegators.learn_more.link.text",
         "public-layout.funders",
@@ -159,29 +170,26 @@
         "change_email_preferences.privacyPolicy",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "change_email_preferences.termsAnd",
         "public-layout.trademarkAndIdDisplayGuidelines",
         "layout.public-layout.registry",
         "layout.public-layout.website",
         "orcid_bio_search.btnsearch",
-        "public-layout.edit_your_record",
-        "public-layout.account_setting",
         "workspace.developer_tools",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
-        "workspace.self_service",
         "public-layout.my_orcid",
-        "public-layout.my_orcid_record",
-        "workspace.notifications"
+        "public-layout.my_orcid_record"
       ]
     },
     "cs": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_cs.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -219,7 +227,15 @@
       ]
     },
     "en": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_en.properties"
+      ],
       "unmatch": [
+        {
+          "id": "confirm-oauth-access.connectingresearchandresearchers",
+          "textOnTemplate": "Connecting Research and Researchers",
+          "textOnProperty": "Connecting research and researchers"
+        },
         {
           "id": "header.signin",
           "textOnTemplate": "Sign in",
@@ -236,9 +252,29 @@
           "textOnProperty": "SIGN OUT"
         },
         {
+          "id": "public-layout.see_more",
+          "textOnTemplate": "See more...",
+          "textOnProperty": "See more statics"
+        },
+        {
           "id": "footer.copyright_cc0_2",
           "textOnTemplate": "CC0 license",
           "textOnProperty": "CC0 license."
+        },
+        {
+          "id": "public-layout.sign_in",
+          "textOnTemplate": "Sign in",
+          "textOnProperty": "SIGN IN"
+        },
+        {
+          "id": "public-layout.account_setting",
+          "textOnTemplate": "Account Settings",
+          "textOnProperty": "Account settings"
+        },
+        {
+          "id": "workspace.self_service",
+          "textOnTemplate": "Member Tools",
+          "textOnProperty": "Member tools"
         },
         {
           "id": "home.orcid_provides",
@@ -296,11 +332,6 @@
           "textOnProperty": "Privacy Policy"
         },
         {
-          "id": "change_email_preferences.termsAnd",
-          "textOnTemplate": "terms and conditions of use",
-          "textOnProperty": "Terms and Conditions of Use"
-        },
-        {
           "id": "orcid_bio_search.btnsearch",
           "textOnTemplate": "Search",
           "textOnProperty": "Search..."
@@ -310,6 +341,7 @@
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -345,12 +377,17 @@
       ]
     },
     "es": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_es.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -387,10 +424,14 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ],
       "changed": [
+        {
+          "id": "public-layout.sign_in",
+          "translation": "Iniciar<br />sesión",
+          "replacement": "Iniciar sesión"
+        },
         {
           "id": "public-layout.for_researchers",
           "translation": "Para<br />investigadores",
@@ -405,21 +446,21 @@
           "id": "public-layout.about",
           "translation": "Quiénes<br />somos",
           "replacement": "Quiénes somos"
-        },
-        {
-          "id": "public-layout.sign_in",
-          "translation": "Iniciar<br />sesión",
-          "replacement": "Iniciar sesión"
         }
       ]
     },
     "fr": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_fr.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -456,8 +497,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ],
       "changed": [
         {
@@ -473,12 +513,17 @@
       ]
     },
     "it": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_it.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -516,17 +561,21 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ja": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ja.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -560,17 +609,21 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ko": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ko.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -608,14 +661,14 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "lr": {
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_lr.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_lr.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_lr.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_lr.properties"
       ],
       "notFound": [
         "footer.copyright_cc0_1",
@@ -623,6 +676,9 @@
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -656,18 +712,21 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "admin.members.workspace_link",
-        "admin.workspace_link"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "pt": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_pt.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -705,14 +764,14 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "rl": {
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_rl.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_rl.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_rl.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_rl.properties"
       ],
       "notFound": [
         "footer.copyright_cc0_1",
@@ -720,6 +779,9 @@
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -753,18 +815,21 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "admin.members.workspace_link",
-        "admin.workspace_link"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "ru": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ru.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -802,20 +867,22 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "uk": {
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_uk.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_uk.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_uk.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_uk.properties"
       ],
       "notFound": [
+        "confirm-oauth-access.connectingresearchandresearchers",
         "header.signin",
         "header.register",
         "public-layout.sign_out",
         "public-layout.amount_ids",
+        "public-layout.see_more",
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "footer.privacypolicy",
@@ -824,6 +891,13 @@
         "footer.contactus",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "public-layout.sign_in",
+        "ng-orcid.view.my.orcid",
+        "workspace.notifications",
+        "public-layout.account_setting",
+        "workspace.self_service",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "public_profile.empty_profile",
@@ -863,7 +937,6 @@
         "public-layout.for_organizations",
         "public-layout.about",
         "public-layout.help",
-        "public-layout.sign_in",
         "login.registerOrcidId",
         "manage_delegators.learn_more.link.text",
         "public-layout.funders",
@@ -911,26 +984,20 @@
         "change_email_preferences.privacyPolicy",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "change_email_preferences.termsAnd",
         "public-layout.trademarkAndIdDisplayGuidelines",
         "layout.public-layout.registry",
         "layout.public-layout.website",
         "orcid_bio_search.btnsearch",
-        "public-layout.edit_your_record",
-        "public-layout.account_setting",
         "workspace.developer_tools",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
-        "workspace.self_service",
         "public-layout.my_orcid",
-        "public-layout.my_orcid_record",
-        "workspace.notifications"
+        "public-layout.my_orcid_record"
       ]
     },
     "xx": {
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_xx.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_xx.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_xx.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_xx.properties"
       ],
       "notFound": [
         "footer.copyright_cc0_1",
@@ -938,6 +1005,9 @@
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -971,18 +1041,21 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "admin.members.workspace_link",
-        "admin.workspace_link"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "zh_CN": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_zh_CN.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -1020,17 +1093,21 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     },
     "zh_TW": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_zh_TW.properties"
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
         "ng-orcid.disputeProcedure",
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "workspace.self_service",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -1068,8 +1145,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
-        "workspace.self_service"
+        "public-layout.trademarkAndIdDisplayGuidelines"
       ]
     }
   }

@@ -505,6 +505,23 @@ export const menu: ApplicationMenuItemBasic[] = [
         id: 'public-layout.news',
         label: LOCALE['public-layout.news'],
         route: 'about/news/news',
+        buttons: [
+          {
+            id: 'news',
+            label: LOCALE['public-layout.news'],
+            route: 'about/news/news',
+          },
+          {
+            id: 'blog',
+            label: LOCALE['ngOrcid.blog'],
+            route: 'category/newsletter/blog',
+          },
+          {
+            id: 'subscribe',
+            label: LOCALE['ngOrcid.subscribe'],
+            route: 'newsletter/subscriptions',
+          },
+        ],
       },
       {
         id: 'public-layout.events',
