@@ -1,0 +1,31 @@
+<footer [ngClass]="{ tabletOrHandset: tabletOrHandset }">
+  <ul class="buttons-container">
+    <li>
+      <button mat-button class="btn btn-gray">
+        <div class="button-wrapper " i18n="@@footer.contactus">Contact us</div>
+      </button>
+    </li>
+    <li>
+      <button mat-button class="btn btn-gray">
+        <div class="button-wrapper" i18n="@@footer.privacypolicy">
+          Privacy Policy
+        </div>
+      </button>
+    </li>
+    <li>
+      <button mat-button class="btn btn-gray">
+        <div class="button-wrapper" i18n="@@footer.termsofuse">
+          Terms of Use
+        </div>
+      </button>
+    </li>
+    <li>
+      <button mat-button class="btn btn-gray">
+        <div class="button-wrapper">
+          <div i18n="@@footer.openSource">Open Source Project</div>
+          <div class="logo"><img src="./assets/vectors/github.logo.svg" /></div>
+        </div>
+      </button>
+    </li>
+  </ul>
+</footer>

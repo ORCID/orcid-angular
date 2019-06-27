@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { CoreModule } from './core/core.module'
 import { LayoutModule } from './layout/layout.module'
+import { BootstrapLayoutModule } from './bootstrap-layout/bootstrap-layout.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { LayoutModule } from './layout/layout.module'
     CoreModule,
     BrowserAnimationsModule,
     LayoutModule,
+    BootstrapLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),

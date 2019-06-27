@@ -1,5 +1,13 @@
-<app-header></app-header>
-<div class="router-container mdc-layout-grid">
+<app-header *ngIf="!bootstrapLayout"></app-header>
+<app-bootstrap-header *ngIf="bootstrapLayout"></app-bootstrap-header>
+<div
+  class="router-container"
+  [ngClass]="{
+    'mdc-layout-grid': !bootstrapLayout,
+    container: bootstrapLayout
+  }"
+>
   <router-outlet> </router-outlet>
 </div>
-<app-footer></app-footer>
+<app-footer *ngIf="!bootstrapLayout"></app-footer>
+<app-bootstrap-footer *ngIf="bootstrapLayout"></app-bootstrap-footer>

@@ -1,0 +1,197 @@
+<!-- WEB VERSION -->
+<header *ngIf="!tabletOrHandset">
+  <div class="logo" routerLink="/">
+    <img src="./assets/vectors/orcid.logo.svg" />
+  </div>
+</header>
+<nav (mouseleave)="mouseLeave()" *ngIf="!tabletOrHandset">
+  <div class="top-bar bg-primary">
+    <div class="main-menu">
+      <ul class="buttons-container">
+        <li [ngClass]="{ active: menu.researchers.route === currentRoute }">
+          <button
+            type="button"
+            class="btn btn-success text-white"
+            (click)="click('researchers')"
+            (mouseenter)="mouseEnter('researchers')"
+            i18n="@@public-layout.for_researchers"
+          >
+            For Researchers
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.organizations.route === currentRoute }">
+          <button
+            class="btn btn-primary"
+            (click)="click('organizations')"
+            (mouseenter)="mouseEnter('organizations')"
+            i18n="@@public-layout.for_organizations"
+          >
+            For Organizations
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.about.route === currentRoute }">
+          <button
+            class="btn btn-primary"
+            (click)="click('about')"
+            (mouseenter)="mouseEnter('about')"
+            i18n="@@public-layout.about"
+          >
+            About
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.help.route === currentRoute }">
+          <button
+            class="btn btn-primary"
+            (click)="click('help')"
+            (mouseenter)="mouseEnter('help')"
+            i18n="@@public-layout.help"
+          >
+            Help
+          </button>
+        </li>
+        <li [ngClass]="{ active: menu.signIn.route === currentRoute }">
+          <button
+            class="btn btn-primary"
+            (click)="click('signIn')"
+            (mouseenter)="mouseEnter('signIn')"
+            i18n="@@public-layout.sign_in"
+          >
+            Sign in
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="search-menu">
+      <i class="material-icons text-white"> search </i>
+      <div ngbDropdown class="d-inline-block">
+        <div id="dropdownBasic1" ngbDropdownToggle class="language text-white">
+          <i class="material-icons"> language </i> English
+        </div>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <div
+            *ngFor="let language of (languageMenuOptions | keyvalue)"
+            [ngClass]="{ active: language.key === locale }"
+            (click)="changeLanguage(language.key)"
+          >
+            <button ngbDropdownItem>{{ language.value }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="secondary-menu" *ngIf="menu.researchers.hover">
+      <ul class="buttons-container">
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.sign_in">
+            SIGN IN
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.register">
+            Register for an ORCID iD
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.for_researchers">
+            Learn more
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="secondary-menu" *ngIf="menu.organizations.hover">
+      <ul class="buttons-container">
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.funders">
+            Funders
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.publishers">
+            Publishers
+          </button>
+        </li>
+        <li>
+          <button
+            class="btn btn-light"
+            i18n="@@public-layout.research_organizations"
+          >
+            Research Organizations
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.associations">
+            Associations
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.integrators">
+            Integrators
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="secondary-menu" *ngIf="menu.about.hover">
+      <ul class="buttons-container">
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.what_is_orcid">
+            What is ORCID
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.the_orcid_team">
+            The ORCID Team
+          </button>
+        </li>
+        <li>
+          <button
+            class="btn btn-light"
+            i18n="@@public-layout.the_orcid_community"
+          >
+            The ORCID Community
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.membership">
+            Membership
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.news">
+            News
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.events">
+            Events
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="secondary-menu" *ngIf="menu.help.hover">
+      <ul class="buttons-container">
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.faq">FAQ</button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.contact_us">
+            Contact us
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.give_feedback">
+            Give Feedback
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-light" i18n="@@public-layout.knowledge_base">
+            Knowledge Base
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
