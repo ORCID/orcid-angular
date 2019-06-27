@@ -3,6 +3,7 @@
   <file original="ng.template" id="ngi18n">
     <unit id="confirm-oauth-access.connectingresearchandresearchers">
       <notes>
+        <note category="description">#sentenceCase</note>
         <note category="location">app/layout/header/header.component.html:9,11</note>
       </notes>
       <segment>
@@ -34,7 +35,6 @@
       <notes>
         <note category="description">#upperCase</note>
         <note category="location">app/layout/header/header.component.html:104</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:109</note>
         <note category="location">locale/i18n.pseudo.component.html:56</note>
       </notes>
       <segment>
@@ -166,42 +166,47 @@
         <source>Inbox</source>
       </segment>
     </unit>
-    <unit id="public-layout.account_setting">
+    <unit id="ng-orcid.account.setting">
       <notes>
         <note category="location">app/layout/user-menu/user-menu.component.html:53,54</note>
-        <note category="location">locale/i18n.pseudo.component.html:72</note>
       </notes>
       <segment>
         <source>Account settings
     </source>
       </segment>
     </unit>
-    <unit id="workspace.self_service">
+    <unit id="ng-orcid.self_service">
       <notes>
         <note category="location">app/layout/user-menu/user-menu.component.html:89,90</note>
-        <note category="location">locale/i18n.pseudo.component.html:76</note>
       </notes>
       <segment>
         <source>Member tools
     </source>
       </segment>
     </unit>
-    <unit id="admin.members.workspace_link">
+    <unit id="ng-orcid.manage.members">
       <notes>
+        <note category="description">#sentenceCase</note>
         <note category="location">app/layout/user-menu/user-menu.component.html:97</note>
-        <note category="location">locale/i18n.pseudo.component.html:74</note>
       </notes>
       <segment>
         <source>Manage members</source>
       </segment>
     </unit>
-    <unit id="admin.workspace_link">
+    <unit id="ng-orcid.admin.page">
       <notes>
         <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
-        <note category="location">locale/i18n.pseudo.component.html:75</note>
       </notes>
       <segment>
         <source>Admin page</source>
+      </segment>
+    </unit>
+    <unit id="ng-orcid.logout">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:108</note>
+      </notes>
+      <segment>
+        <source>Logout</source>
       </segment>
     </unit>
     <unit id="home.distinguish_yourself">
@@ -603,6 +608,7 @@
     </unit>
     <unit id="groups.common.last_modified">
       <notes>
+        <note category="description">#titleCase</note>
         <note category="location">app/profile/components/card-detail/card-detail.component.html:26</note>
       </notes>
       <segment>
@@ -1121,7 +1127,7 @@
         <note category="location">locale/i18n.pseudo.component.html:59</note>
       </notes>
       <segment>
-        <source>Privacy Policy</source>
+        <source>privacy policy</source>
       </segment>
     </unit>
     <unit id="developer_tools.public_member.terms.check_2">
@@ -1172,12 +1178,44 @@
         <source>Search...</source>
       </segment>
     </unit>
+    <unit id="public-layout.account_setting">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:72</note>
+      </notes>
+      <segment>
+        <source>Account Settings</source>
+      </segment>
+    </unit>
     <unit id="workspace.developer_tools">
       <notes>
         <note category="location">locale/i18n.pseudo.component.html:73</note>
       </notes>
       <segment>
         <source>Developer tools</source>
+      </segment>
+    </unit>
+    <unit id="admin.members.workspace_link">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:74</note>
+      </notes>
+      <segment>
+        <source>Manage members</source>
+      </segment>
+    </unit>
+    <unit id="admin.workspace_link">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:75</note>
+      </notes>
+      <segment>
+        <source>Admin page</source>
+      </segment>
+    </unit>
+    <unit id="workspace.self_service">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:76</note>
+      </notes>
+      <segment>
+        <source>Member Tools</source>
       </segment>
     </unit>
     <unit id="public-layout.my_orcid">

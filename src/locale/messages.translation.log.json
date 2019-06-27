@@ -1,5 +1,147 @@
 {
   "language": {
+    "en": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_en.properties"
+      ],
+      "changed": [
+        {
+          "id": "confirm-oauth-access.connectingresearchandresearchers",
+          "translation": "Connecting Research and Researchers",
+          "replacement": "Connecting research and researchers"
+        },
+        {
+          "id": "header.signin",
+          "translation": "Sign in",
+          "replacement": "SIGN IN"
+        },
+        {
+          "id": "header.register",
+          "translation": "Register",
+          "replacement": "REGISTER"
+        },
+        {
+          "id": "public-layout.sign_out",
+          "translation": "Sign out",
+          "replacement": "SIGN OUT"
+        },
+        {
+          "id": "public-layout.sign_in",
+          "translation": "Sign in",
+          "replacement": "SIGN IN"
+        },
+        {
+          "id": "home.register_now",
+          "translation": "Register now!",
+          "replacement": "register now!"
+        },
+        {
+          "id": "home.more_news",
+          "translation": "More news",
+          "replacement": "MORE NEWS"
+        },
+        {
+          "id": "groups.common.last_modified",
+          "translation": "Last modified",
+          "replacement": "Last Modified"
+        }
+      ],
+      "unmatch": [
+        {
+          "id": "public-layout.see_more",
+          "textOnTemplate": "See more statics",
+          "textOnProperty": "See more..."
+        },
+        {
+          "id": "footer.copyright_cc0_2",
+          "textOnTemplate": "CC0 license.",
+          "textOnProperty": "CC0 license"
+        },
+        {
+          "id": "home.orcid_provides",
+          "textOnTemplate": "ORCID provides a persistent digital identifier (an ORCID iD) that you own and control, and that distinguishes you from every other researcher. You can connect your iD with your professional information — affiliations, grants, publications, peer review, and more. You can use your iD to share your information with other systems, ensuring you get recognition for all your contributions, saving you time and hassle, and reducing the risk of errors.",
+          "textOnProperty": "ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized."
+        },
+        {
+          "id": "home.find_out_more",
+          "textOnTemplate": "FIND OUT MORE ABOUT OUR MISSION AND VALUES",
+          "textOnProperty": "Find out more"
+        },
+        {
+          "id": "home.get_your",
+          "textOnTemplate": "Get your unique ORCID identifier. It’s free and only takes a minute, so",
+          "textOnProperty": "Get your unique ORCID identifier"
+        },
+        {
+          "id": "home.enhance_your",
+          "textOnTemplate": "The more information connected to your ORCID record, the more you’ll benefit from sharing your iD - so give the organizations you trust permission to update your record as well as adding your affiliations, emails, other names you’re known by, and more.",
+          "textOnProperty": "Enhance your ORCID record with your professional information and link to your other identifiers (such as Scopus or ResearcherID or LinkedIn)."
+        },
+        {
+          "id": "home.include_your",
+          "textOnTemplate": "Use your iD, when prompted, in systems and platforms from grant application to manuscript submission and beyond, to ensure you get credit for your contributions.",
+          "textOnProperty": "Include your ORCID identifier on your Webpage, when you submit publications, apply for grants, and in any research workflow to ensure you get credit for your work."
+        },
+        {
+          "id": "home.members_make",
+          "textOnTemplate": "Our organizational members make ORCID possible!",
+          "textOnProperty": "MEMBERS MAKE ORCID POSSIBLE!"
+        },
+        {
+          "id": "home.orcid_is",
+          "textOnTemplate": "ORCID is a non-profit organization supported by a global community of member organizations, including research institutions, publishers, funders, professional associations, service providers, and other stakeholders in the research ecosystem.",
+          "textOnProperty": "ORCID is a non-profit organization supported by a global community of organizational members, including research organizations, publishers, funders, professional associations, and other stakeholders in the research ecosystem."
+        },
+        {
+          "id": "orcid_bio_search.btnsearch",
+          "textOnTemplate": "Search...",
+          "textOnProperty": "Search"
+        }
+      ],
+      "notFound": [
+        "ng-orcid.disputeProcedure",
+        "ng-orcid.trademark",
+        "ng-orcid.advanceSearch",
+        "ng-orcid.view.my.orcid",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
+        "ng-orcidFullOrcid",
+        "ng-orcid.MoreNews",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "ngOrcid.outreach",
+        "ngOrcid.useCases",
+        "ngOrcid.theOrcidApi",
+        "ngOrcid.registerClientApp",
+        "ngOrcid.currentIntegrations",
+        "ngOrcid.integrationsChart",
+        "ngOrcid.betaTesters",
+        "ngOrcid.ourGovernance",
+        "ngOrcid.ourPolicies",
+        "ngOrcid.openSource",
+        "ngOrcid.partners",
+        "ngOrcid.adoptionAndInt",
+        "ngOrcid.outreachResources",
+        "ngOrcid.orcidGear",
+        "ngOrcid.membershipComparison",
+        "ngOrcid.standartCreatorAgreement",
+        "ngOrcid.blog",
+        "ngOrcid.subscribe",
+        "ngOrcid.disputeProcedures",
+        "ngOrcid.publicDataFileUsePolicy",
+        "public-layout.trademarkAndIdDisplayGuidelines"
+      ]
+    },
     "ar": {
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ar.properties",
@@ -12,9 +154,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -52,7 +196,10 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
+        "workspace.self_service"
       ]
     },
     "ca": {
@@ -80,10 +227,11 @@
         "public-layout.sign_in",
         "ng-orcid.view.my.orcid",
         "workspace.notifications",
-        "public-layout.account_setting",
-        "workspace.self_service",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "public_profile.empty_profile",
@@ -174,7 +322,11 @@
         "layout.public-layout.registry",
         "layout.public-layout.website",
         "orcid_bio_search.btnsearch",
+        "public-layout.account_setting",
         "workspace.developer_tools",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
+        "workspace.self_service",
         "public-layout.my_orcid",
         "public-layout.my_orcid_record"
       ],
@@ -234,6 +386,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -241,158 +398,6 @@
         "ng.show_less?",
         "groups.common.added",
         "groups.common.last_modified",
-        "ng-orcid.paginatorNextPageLabel?",
-        "ng-orcid.paginatorLastPageLabel?",
-        "ng-orcid.paginatorFirstPageLabel?",
-        "ng-orcid.paginatorPreviousPageLabel?",
-        "ng-orcid.paginatorItemsPerPageLabel?",
-        "ng-orcid.paginatoOf?",
-        "ngOrcid.outreach",
-        "ngOrcid.useCases",
-        "ngOrcid.theOrcidApi",
-        "ngOrcid.registerClientApp",
-        "ngOrcid.currentIntegrations",
-        "ngOrcid.integrationsChart",
-        "ngOrcid.betaTesters",
-        "ngOrcid.ourGovernance",
-        "ngOrcid.ourPolicies",
-        "ngOrcid.openSource",
-        "ngOrcid.partners",
-        "ngOrcid.adoptionAndInt",
-        "ngOrcid.outreachResources",
-        "ngOrcid.orcidGear",
-        "ngOrcid.membershipComparison",
-        "ngOrcid.standartCreatorAgreement",
-        "ngOrcid.blog",
-        "ngOrcid.subscribe",
-        "ngOrcid.disputeProcedures",
-        "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
-      ]
-    },
-    "en": {
-      "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_en.properties"
-      ],
-      "unmatch": [
-        {
-          "id": "confirm-oauth-access.connectingresearchandresearchers",
-          "textOnTemplate": "Connecting research and researchers",
-          "textOnProperty": "Connecting Research and Researchers"
-        },
-        {
-          "id": "public-layout.see_more",
-          "textOnTemplate": "See more statics",
-          "textOnProperty": "See more..."
-        },
-        {
-          "id": "footer.copyright_cc0_2",
-          "textOnTemplate": "CC0 license.",
-          "textOnProperty": "CC0 license"
-        },
-        {
-          "id": "public-layout.account_setting",
-          "textOnTemplate": "Account settings",
-          "textOnProperty": "Account Settings"
-        },
-        {
-          "id": "workspace.self_service",
-          "textOnTemplate": "Member tools",
-          "textOnProperty": "Member Tools"
-        },
-        {
-          "id": "home.orcid_provides",
-          "textOnTemplate": "ORCID provides a persistent digital identifier (an ORCID iD) that you own and control, and that distinguishes you from every other researcher. You can connect your iD with your professional information — affiliations, grants, publications, peer review, and more. You can use your iD to share your information with other systems, ensuring you get recognition for all your contributions, saving you time and hassle, and reducing the risk of errors.",
-          "textOnProperty": "ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized."
-        },
-        {
-          "id": "home.find_out_more",
-          "textOnTemplate": "FIND OUT MORE ABOUT OUR MISSION AND VALUES",
-          "textOnProperty": "Find out more"
-        },
-        {
-          "id": "home.get_your",
-          "textOnTemplate": "Get your unique ORCID identifier. It’s free and only takes a minute, so",
-          "textOnProperty": "Get your unique ORCID identifier"
-        },
-        {
-          "id": "home.enhance_your",
-          "textOnTemplate": "The more information connected to your ORCID record, the more you’ll benefit from sharing your iD - so give the organizations you trust permission to update your record as well as adding your affiliations, emails, other names you’re known by, and more.",
-          "textOnProperty": "Enhance your ORCID record with your professional information and link to your other identifiers (such as Scopus or ResearcherID or LinkedIn)."
-        },
-        {
-          "id": "home.include_your",
-          "textOnTemplate": "Use your iD, when prompted, in systems and platforms from grant application to manuscript submission and beyond, to ensure you get credit for your contributions.",
-          "textOnProperty": "Include your ORCID identifier on your Webpage, when you submit publications, apply for grants, and in any research workflow to ensure you get credit for your work."
-        },
-        {
-          "id": "home.members_make",
-          "textOnTemplate": "Our organizational members make ORCID possible!",
-          "textOnProperty": "MEMBERS MAKE ORCID POSSIBLE!"
-        },
-        {
-          "id": "home.orcid_is",
-          "textOnTemplate": "ORCID is a non-profit organization supported by a global community of member organizations, including research institutions, publishers, funders, professional associations, service providers, and other stakeholders in the research ecosystem.",
-          "textOnProperty": "ORCID is a non-profit organization supported by a global community of organizational members, including research organizations, publishers, funders, professional associations, and other stakeholders in the research ecosystem."
-        },
-        {
-          "id": "groups.common.last_modified",
-          "textOnTemplate": "Last Modified",
-          "textOnProperty": "Last modified"
-        },
-        {
-          "id": "change_email_preferences.privacyPolicy",
-          "textOnTemplate": "Privacy Policy",
-          "textOnProperty": "privacy policy"
-        },
-        {
-          "id": "orcid_bio_search.btnsearch",
-          "textOnTemplate": "Search...",
-          "textOnProperty": "Search"
-        }
-      ],
-      "changed": [
-        {
-          "id": "header.signin",
-          "translation": "Sign in",
-          "replacement": "SIGN IN"
-        },
-        {
-          "id": "header.register",
-          "translation": "Register",
-          "replacement": "REGISTER"
-        },
-        {
-          "id": "public-layout.sign_out",
-          "translation": "Sign out",
-          "replacement": "SIGN OUT"
-        },
-        {
-          "id": "public-layout.sign_in",
-          "translation": "Sign in",
-          "replacement": "SIGN IN"
-        },
-        {
-          "id": "home.register_now",
-          "translation": "Register now!",
-          "replacement": "register now!"
-        },
-        {
-          "id": "home.more_news",
-          "translation": "More news",
-          "replacement": "MORE NEWS"
-        }
-      ],
-      "notFound": [
-        "ng-orcid.disputeProcedure",
-        "ng-orcid.trademark",
-        "ng-orcid.advanceSearch",
-        "ng-orcid.view.my.orcid",
-        "ng-orcidFullOrcid",
-        "ng-orcid.MoreNews",
-        "ng-orcid.clickToCopyCopied?",
-        "ng-orcid.present?",
-        "ng.show_less?",
         "ng-orcid.paginatorNextPageLabel?",
         "ng-orcid.paginatorLastPageLabel?",
         "ng-orcid.paginatorFirstPageLabel?",
@@ -480,7 +485,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -517,7 +526,8 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "fr": {
@@ -573,7 +583,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -610,7 +624,8 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "it": {
@@ -656,7 +671,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -694,7 +713,8 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "ja": {
@@ -708,7 +728,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -742,7 +766,8 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "ko": {
@@ -756,7 +781,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -794,7 +823,8 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "lr": {
@@ -803,6 +833,18 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_lr.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_lr.properties"
       ],
+      "changed": [
+        {
+          "id": "confirm-oauth-access.connectingresearchandresearchers",
+          "translation": "LR",
+          "replacement": "Lr"
+        },
+        {
+          "id": "home.register_now",
+          "translation": "LR",
+          "replacement": "lr"
+        }
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
@@ -810,8 +852,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -845,14 +890,9 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
-      ],
-      "changed": [
-        {
-          "id": "home.register_now",
-          "translation": "LR",
-          "replacement": "lr"
-        }
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "admin.members.workspace_link",
+        "admin.workspace_link"
       ]
     },
     "pt": {
@@ -860,6 +900,11 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_pt.properties"
       ],
       "changed": [
+        {
+          "id": "confirm-oauth-access.connectingresearchandresearchers",
+          "translation": "Conectando Pesquisas e Pesquisadores",
+          "replacement": "Conectando pesquisas e pesquisadores"
+        },
         {
           "id": "header.signin",
           "translation": "Entrar",
@@ -898,7 +943,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -936,7 +985,8 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "rl": {
@@ -945,6 +995,18 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_rl.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_rl.properties"
       ],
+      "changed": [
+        {
+          "id": "confirm-oauth-access.connectingresearchandresearchers",
+          "translation": "RL",
+          "replacement": "Rl"
+        },
+        {
+          "id": "home.register_now",
+          "translation": "RL",
+          "replacement": "rl"
+        }
+      ],
       "notFound": [
         "footer.copyright_cc0_1",
         "footer.copyright_cc0_2",
@@ -952,8 +1014,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -987,14 +1052,9 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
-      ],
-      "changed": [
-        {
-          "id": "home.register_now",
-          "translation": "RL",
-          "replacement": "rl"
-        }
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "admin.members.workspace_link",
+        "admin.workspace_link"
       ]
     },
     "ru": {
@@ -1040,7 +1100,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -1078,7 +1142,8 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "uk": {
@@ -1105,10 +1170,11 @@
         "public-layout.sign_in",
         "ng-orcid.view.my.orcid",
         "workspace.notifications",
-        "public-layout.account_setting",
-        "workspace.self_service",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "public_profile.empty_profile",
@@ -1199,7 +1265,11 @@
         "layout.public-layout.registry",
         "layout.public-layout.website",
         "orcid_bio_search.btnsearch",
+        "public-layout.account_setting",
         "workspace.developer_tools",
+        "admin.members.workspace_link",
+        "admin.workspace_link",
+        "workspace.self_service",
         "public-layout.my_orcid",
         "public-layout.my_orcid_record"
       ],
@@ -1229,8 +1299,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "admin.members.workspace_link",
-        "admin.workspace_link",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -1264,7 +1337,9 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "admin.members.workspace_link",
+        "admin.workspace_link"
       ],
       "changed": [
         {
@@ -1285,7 +1360,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -1323,7 +1402,8 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     },
     "zh_TW": {
@@ -1337,7 +1417,11 @@
         "ng-orcid.trademark",
         "ng-orcid.advanceSearch",
         "ng-orcid.view.my.orcid",
-        "workspace.self_service",
+        "ng-orcid.account.setting",
+        "ng-orcid.self_service",
+        "ng-orcid.manage.members",
+        "ng-orcid.admin.page",
+        "ng-orcid.logout",
         "ng-orcidFullOrcid",
         "ng-orcid.MoreNews",
         "ng-orcid.clickToCopyCopied?",
@@ -1375,7 +1459,8 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "public-layout.trademarkAndIdDisplayGuidelines",
+        "workspace.self_service"
       ]
     }
   }

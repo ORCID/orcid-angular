@@ -26,6 +26,9 @@ const baseGithubTranslationFilesURL = [
 ]
 const languages = [
   {
+    code: 'en',
+  },
+  {
     code: 'ar',
   },
   {
@@ -33,9 +36,6 @@ const languages = [
   },
   {
     code: 'cs',
-  },
-  {
-    code: 'en',
   },
   {
     code: 'es',
@@ -379,6 +379,12 @@ function translationTreatment(translation, element, saveCode) {
   if (XLFTranslationNoteHas(element, 'description', '#lowerCase')) {
     replacement = replacement.toLocaleLowerCase()
   }
+  if (XLFTranslationNoteHas(element, 'description', '#titleCase')) {
+    replacement = titleCase(replacement)
+  }
+  if (XLFTranslationNoteHas(element, 'description', '#sentenceCase')) {
+    replacement = sentenceCase(replacement)
+  }
   reportTranslationTreatment(
     translation,
     replacement,
@@ -419,4 +425,18 @@ function getXLFTranslationNote(element, noteCategory: string): string {
     }
   })
   return value
+}
+
+function titleCase(str) {
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map(function(word) {
+      return word.charAt(0).toUpperCase() + word.slice(1)
+    })
+    .join(' ')
+}
+
+function sentenceCase(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 }

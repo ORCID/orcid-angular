@@ -4,10 +4,6 @@ export const LOCALE : {[key:string]: string} = {
   "public-layout.sign_out": "SIGN OUT",
   "public-layout.sign_in": "SIGN IN",
   "workspace.notifications": "Inbox",
-  "public-layout.account_setting": "Account Settings",
-  "workspace.self_service": "Member Tools",
-  "admin.members.workspace_link": "Manage members",
-  "admin.workspace_link": "Admin page",
   "public-layout.for_researchers": "For Researchers",
   "public-layout.for_organizations": "For Organizations",
   "public-layout.about": "About",
@@ -63,7 +59,11 @@ export const LOCALE : {[key:string]: string} = {
   "layout.public-layout.registry": "registry",
   "layout.public-layout.website": "website",
   "orcid_bio_search.btnsearch": "Search",
+  "public-layout.account_setting": "Account Settings",
   "workspace.developer_tools": "Developer tools",
+  "admin.members.workspace_link": "Manage members",
+  "admin.workspace_link": "Admin page",
+  "workspace.self_service": "Member Tools",
   "public-layout.my_orcid": "ORCID Record",
   "public-layout.my_orcid_record": "My ORCID Record"
 }
