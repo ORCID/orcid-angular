@@ -13,6 +13,7 @@
     </unit>
     <unit id="header.signin">
       <notes>
+        <note category="description">#upperCase</note>
         <note category="location">app/layout/header/header.component.html:92</note>
       </notes>
       <segment>
@@ -21,8 +22,9 @@
     </unit>
     <unit id="header.register">
       <notes>
-        <note category="location">app/layout/header/header.component.html:93</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:29</note>
+        <note category="description">#upperCase</note>
+        <note category="location">app/layout/header/header.component.html:94</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:30</note>
       </notes>
       <segment>
         <source>REGISTER</source>
@@ -30,8 +32,9 @@
     </unit>
     <unit id="public-layout.sign_out">
       <notes>
-        <note category="location">app/layout/header/header.component.html:102</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:108</note>
+        <note category="description">#upperCase</note>
+        <note category="location">app/layout/header/header.component.html:104</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:109</note>
         <note category="location">locale/i18n.pseudo.component.html:56</note>
       </notes>
       <segment>
@@ -40,7 +43,7 @@
     </unit>
     <unit id="public-layout.amount_ids">
       <notes>
-        <note category="location">app/layout/header/header.component.html:116</note>
+        <note category="location">app/layout/header/header.component.html:118</note>
       </notes>
       <segment>
         <source>ORCID iDs and counting.</source>
@@ -48,7 +51,7 @@
     </unit>
     <unit id="public-layout.see_more">
       <notes>
-        <note category="location">app/layout/header/header.component.html:119</note>
+        <note category="location">app/layout/header/header.component.html:121</note>
       </notes>
       <segment>
         <source>See more statics</source>
@@ -125,8 +128,8 @@
     <unit id="ng-orcid.advanceSearch">
       <notes>
         <note category="location">app/layout/search/search.component.html:12,14</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:68,69</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:82,83</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:69,70</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:83,84</note>
       </notes>
       <segment>
         <source>
@@ -136,6 +139,7 @@
     </unit>
     <unit id="public-layout.sign_in">
       <notes>
+        <note category="description">#upperCase</note>
         <note category="location">app/layout/user-menu/user-menu.component.html:28</note>
         <note category="location">locale/i18n.pseudo.component.html:8</note>
       </notes>
@@ -145,7 +149,7 @@
     </unit>
     <unit id="ng-orcid.view.my.orcid">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:39,41</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:40,42</note>
       </notes>
       <segment>
         <source>
@@ -155,7 +159,7 @@
     </unit>
     <unit id="workspace.notifications">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:47</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:48</note>
         <note category="location">locale/i18n.pseudo.component.html:80</note>
       </notes>
       <segment>
@@ -164,7 +168,7 @@
     </unit>
     <unit id="public-layout.account_setting">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:52,53</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:53,54</note>
         <note category="location">locale/i18n.pseudo.component.html:72</note>
       </notes>
       <segment>
@@ -174,7 +178,7 @@
     </unit>
     <unit id="workspace.self_service">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:88,89</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:89,90</note>
         <note category="location">locale/i18n.pseudo.component.html:76</note>
       </notes>
       <segment>
@@ -184,7 +188,7 @@
     </unit>
     <unit id="admin.members.workspace_link">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:96</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:97</note>
         <note category="location">locale/i18n.pseudo.component.html:74</note>
       </notes>
       <segment>
@@ -193,7 +197,7 @@
     </unit>
     <unit id="admin.workspace_link">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:102</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
         <note category="location">locale/i18n.pseudo.component.html:75</note>
       </notes>
       <segment>
@@ -275,7 +279,8 @@
     </unit>
     <unit id="home.register_now">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:66,68</note>
+        <note category="description">#lowerCase</note>
+        <note category="location">app/home/pages/home/home.component.html:69,71</note>
       </notes>
       <segment>
         <source>
@@ -285,7 +290,7 @@
     </unit>
     <unit id="home.two">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:74</note>
+        <note category="location">app/home/pages/home/home.component.html:77</note>
       </notes>
       <segment>
         <source>2</source>
@@ -293,7 +298,7 @@
     </unit>
     <unit id="home.add_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:77</note>
+        <note category="location">app/home/pages/home/home.component.html:80</note>
       </notes>
       <segment>
         <source>ADD YOUR </source>
@@ -301,7 +306,7 @@
     </unit>
     <unit id="home.info">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:78</note>
+        <note category="location">app/home/pages/home/home.component.html:81</note>
       </notes>
       <segment>
         <source>INFO</source>
@@ -309,7 +314,7 @@
     </unit>
     <unit id="home.enhance_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:84,89</note>
+        <note category="location">app/home/pages/home/home.component.html:87,92</note>
       </notes>
       <segment>
         <source>
@@ -322,7 +327,7 @@
     </unit>
     <unit id="home.three">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:94</note>
+        <note category="location">app/home/pages/home/home.component.html:97</note>
       </notes>
       <segment>
         <source>3</source>
@@ -330,7 +335,7 @@
     </unit>
     <unit id="home.user_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:97</note>
+        <note category="location">app/home/pages/home/home.component.html:100</note>
       </notes>
       <segment>
         <source>USE YOUR</source>
@@ -338,7 +343,7 @@
     </unit>
     <unit id="home.orcid_id">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:98</note>
+        <note category="location">app/home/pages/home/home.component.html:101</note>
       </notes>
       <segment>
         <source> ORCID ID</source>
@@ -346,7 +351,7 @@
     </unit>
     <unit id="home.include_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:104,108</note>
+        <note category="location">app/home/pages/home/home.component.html:107,111</note>
       </notes>
       <segment>
         <source>
@@ -358,7 +363,7 @@
     </unit>
     <unit id="home.members_make">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:134,136</note>
+        <note category="location">app/home/pages/home/home.component.html:137,139</note>
       </notes>
       <segment>
         <source>
@@ -368,7 +373,7 @@
     </unit>
     <unit id="home.orcid_is">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:139,144</note>
+        <note category="location">app/home/pages/home/home.component.html:142,147</note>
       </notes>
       <segment>
         <source>
@@ -381,7 +386,7 @@
     </unit>
     <unit id="home.curious_about">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:146,148</note>
+        <note category="location">app/home/pages/home/home.component.html:149,151</note>
       </notes>
       <segment>
         <source>
@@ -391,7 +396,7 @@
     </unit>
     <unit id="home.see_our">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:152,154</note>
+        <note category="location">app/home/pages/home/home.component.html:155,157</note>
       </notes>
       <segment>
         <source>
@@ -409,6 +414,7 @@
     </unit>
     <unit id="home.more_news">
       <notes>
+        <note category="description">#upperCase</note>
         <note category="location">app/home/components/news/news.component.html:13,15</note>
       </notes>
       <segment>

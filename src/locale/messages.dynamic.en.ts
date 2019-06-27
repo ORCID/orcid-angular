@@ -1,8 +1,8 @@
 // prettier-ignore
 /* tslint:disable */
 export const LOCALE : {[key:string]: string} = {
-  "public-layout.sign_out": "Sign out",
-  "public-layout.sign_in": "Sign in",
+  "public-layout.sign_out": "SIGN OUT",
+  "public-layout.sign_in": "SIGN IN",
   "workspace.notifications": "Inbox",
   "public-layout.account_setting": "Account Settings",
   "workspace.self_service": "Member Tools",

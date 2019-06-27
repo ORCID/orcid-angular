@@ -239,44 +239,63 @@ function readMessageFile(path) {
 }
 
 function setLanguagePropertiesToLanguageFile(
-  data,
-  propsText,
-  saveCode
+  XlfFile,
+  properties,
+  languageCode
 ): Observable<{ staticValues: any; dynamicValues: any }> {
   return new Observable(observer => {
     const dynamicValues = {}
-    parseString(data, (error, staticValues) => {
+    // Read XLF file as a Json to
+    // 1- Extract the dynamic values with the translations and save the 'dynamicValues' object
+    // 2- Edit the original XLF or the 'staticValues' object  to add the translations
+    parseString(XlfFile, (error, staticValues) => {
       if (error) {
         observer.error(error)
       }
+      // For each translation
       staticValues.xliff.file[0].unit.forEach(element => {
-        if (propsText[element['$'].id]) {
+        // If a the id match one of the translations properties
+        if (properties[element['$'].id]) {
+          // Runs the translation treatment where the text of some translations is modified
           const translation = translationTreatment(
-            propsText[element['$'].id],
-            element['$'].id,
-            saveCode
+            properties[element['$'].id],
+            element,
+            languageCode
           )
+          // The translation is added to the XLF file
           element.segment[0].target = []
           element.segment[0].target.push(translation)
+          // If the translation is located on i18n.pseudo.component
+          // the translation is added to the dynamic translations file
           if (XLFTranslationNoteHas(element, 'location', 'i18n.pseudo')) {
             dynamicValues[element['$'].id] = translation
           }
 
-          if ('en' === saveCode) {
+          // If the language is english, the template text and the translation is compared
+          // to report any difference
+
+          if ('en' === languageCode) {
             checkIfTranslationMatch(
               element['$'].id,
               element.segment[0].target[0],
               element.segment[0].source[0]
             )
           }
+          // If a the id DON'T match any of the translations properties
+          // the same english template text is added as the translations
         } else {
+          element.segment[0].target = element.segment[0].source
+          // If the translation is located on i18n.pseudo.component
+          // the translation is added to the dynamic translations file
           if (XLFTranslationNoteHas(element, 'location', 'i18n.pseudo')) {
             dynamicValues[element['$'].id] = element.segment[0].source[0]
           }
-          element.segment[0].target = element.segment[0].source
-          translationNotFound(element['$'].id, saveCode)
+
+          // reports when a translation id does not match with any translation property
+          translationNotFound(element['$'].id, languageCode)
         }
       })
+      // return and object containing a XLF file and a JSON file with the dynamic values
       observer.next({ staticValues, dynamicValues })
       observer.complete()
     })
@@ -309,7 +328,7 @@ function checkIfTranslationMatch(id, target, source) {
     .replace(/\s\s+/g, ' ')
     .trim()
   if (target !== treatedSource) {
-    reportTranslationNotMatch(id, target, treatedSource)
+    reportTranslationNotMatch(id, treatedSource, target)
   }
 }
 
@@ -347,12 +366,25 @@ function getTranslationFileFromGithub(baseUrl, code) {
   )
 }
 
-function translationTreatment(translation, id, saveCode) {
-  let replacement = JSON.parse(JSON.stringify(translation))
+function translationTreatment(translation, element, saveCode) {
+  let replacement: string = JSON.parse(JSON.stringify(translation))
+  // Check for hardwired replacement on the `stringReplacements` object
   Object.keys(stringReplacements).map((text, index) => {
     replacement = replacement.replace(text, stringReplacements[text])
   })
-  reportTranslationTreatment(translation, replacement, saveCode, id)
+  // Check for notes to find for #upperCase #lowerCase
+  if (XLFTranslationNoteHas(element, 'description', '#upperCase')) {
+    replacement = replacement.toUpperCase()
+  }
+  if (XLFTranslationNoteHas(element, 'description', '#lowerCase')) {
+    replacement = replacement.toLocaleLowerCase()
+  }
+  reportTranslationTreatment(
+    translation,
+    replacement,
+    saveCode,
+    element['$'].id
+  )
   return replacement
 }
 
@@ -382,7 +414,7 @@ function XLFTranslationNoteHas(element, category, content): boolean {
 function getXLFTranslationNote(element, noteCategory: string): string {
   let value
   element.notes[0].note.forEach(note => {
-    if (note['$']['category'] && note['$']['category'] === 'location') {
+    if (note['$']['category'] && note['$']['category'] === noteCategory) {
       value = note['_']
     }
   })
