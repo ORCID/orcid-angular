@@ -254,7 +254,7 @@ function setLanguagePropertiesToLanguageFile(
       }
       // For each translation
       staticValues.xliff.file[0].unit.forEach(element => {
-        // If a the id match one of the translations properties
+        // If an id match one of the translations properties
         if (properties[element['$'].id]) {
           // Runs the translation treatment where the text of some translations is modified
           const translation = translationTreatment(
@@ -271,8 +271,8 @@ function setLanguagePropertiesToLanguageFile(
             dynamicValues[element['$'].id] = translation
           }
 
-          // If the language is english, the template text and the translation is compared
-          // to report any difference
+          // If the translation is located on i18n.pseudo.component
+          // the translation is added to the dynamic translations file
 
           if ('en' === languageCode) {
             checkIfTranslationMatch(
@@ -281,8 +281,8 @@ function setLanguagePropertiesToLanguageFile(
               element.segment[0].source[0]
             )
           }
-          // If a the id DON'T match any of the translations properties
-          // the same english template text is added as the translations
+          // If not any id match any of the translations properties
+          // the same English template text is added as the translations
         } else {
           element.segment[0].target = element.segment[0].source
           // If the translation is located on i18n.pseudo.component
@@ -295,7 +295,7 @@ function setLanguagePropertiesToLanguageFile(
           translationNotFound(element['$'].id, languageCode)
         }
       })
-      // return and object containing a XLF file and a JSON file with the dynamic values
+      // return an object containing an XLF file and a JSON file with the dynamic values
       observer.next({ staticValues, dynamicValues })
       observer.complete()
     })
