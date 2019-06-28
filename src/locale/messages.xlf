@@ -160,7 +160,7 @@
     <unit id="workspace.notifications">
       <notes>
         <note category="location">app/layout/user-menu/user-menu.component.html:48</note>
-        <note category="location">locale/i18n.pseudo.component.html:80</note>
+        <note category="location">locale/i18n.pseudo.component.html:77</note>
       </notes>
       <segment>
         <source>Inbox</source>
@@ -780,7 +780,7 @@
     <unit id="manage_delegators.learn_more.link.text">
       <notes>
         <note category="location">locale/i18n.pseudo.component.html:10</note>
-        <note category="location">locale/i18n.pseudo.component.html:77</note>
+        <note category="location">locale/i18n.pseudo.component.html:74</note>
       </notes>
       <segment>
         <source>Learn more</source>
@@ -906,9 +906,17 @@
         <source>OUTREACH RESOURCES</source>
       </segment>
     </unit>
-    <unit id="ngOrcid.useCases">
+    <unit id="ngOrcid.ambassadors">
       <notes>
         <note category="location">locale/i18n.pseudo.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Ambassadors</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.useCases">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:27</note>
       </notes>
       <segment>
         <source>USE CASES</source>
@@ -916,7 +924,7 @@
     </unit>
     <unit id="public-layout.membership">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:27</note>
+        <note category="location">locale/i18n.pseudo.component.html:28</note>
       </notes>
       <segment>
         <source>Membership</source>
@@ -924,7 +932,7 @@
     </unit>
     <unit id="ngOrcid.theOrcidApi">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:28</note>
+        <note category="location">locale/i18n.pseudo.component.html:29</note>
       </notes>
       <segment>
         <source>THE ORCID API</source>
@@ -932,7 +940,7 @@
     </unit>
     <unit id="ngOrcid.registerClientApp">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:29</note>
+        <note category="location">locale/i18n.pseudo.component.html:30</note>
       </notes>
       <segment>
         <source>REGISTER A CLIENT APPLICATION</source>
@@ -940,7 +948,7 @@
     </unit>
     <unit id="ngOrcid.currentIntegrations">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:30</note>
+        <note category="location">locale/i18n.pseudo.component.html:31</note>
       </notes>
       <segment>
         <source>CURRENT INTEGRATIONS</source>
@@ -948,7 +956,7 @@
     </unit>
     <unit id="ngOrcid.integrationsChart">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:31</note>
+        <note category="location">locale/i18n.pseudo.component.html:32</note>
       </notes>
       <segment>
         <source>INTEGRATION CHART</source>
@@ -956,7 +964,7 @@
     </unit>
     <unit id="ngOrcid.betaTesters">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:32</note>
+        <note category="location">locale/i18n.pseudo.component.html:33</note>
       </notes>
       <segment>
         <source>BETA TESTERS</source>
@@ -964,7 +972,7 @@
     </unit>
     <unit id="public-layout.our_mission">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:33</note>
+        <note category="location">locale/i18n.pseudo.component.html:34</note>
       </notes>
       <segment>
         <source>Our Mission </source>
@@ -972,7 +980,7 @@
     </unit>
     <unit id="public-layout.our_principles">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:34</note>
+        <note category="location">locale/i18n.pseudo.component.html:35</note>
       </notes>
       <segment>
         <source>Our Principles</source>
@@ -980,7 +988,7 @@
     </unit>
     <unit id="ngOrcid.ourGovernance">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:35</note>
+        <note category="location">locale/i18n.pseudo.component.html:36</note>
       </notes>
       <segment>
         <source>OUR GOVERNANCE</source>
@@ -988,7 +996,7 @@
     </unit>
     <unit id="ngOrcid.ourPolicies">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:36</note>
+        <note category="location">locale/i18n.pseudo.component.html:37</note>
       </notes>
       <segment>
         <source>OUR POLICIES</source>
@@ -996,7 +1004,7 @@
     </unit>
     <unit id="public-layout.working_groups">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:37</note>
+        <note category="location">locale/i18n.pseudo.component.html:38</note>
       </notes>
       <segment>
         <source>Working Groups</source>
@@ -1004,7 +1012,7 @@
     </unit>
     <unit id="public-layout.sponsors">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:38</note>
+        <note category="location">locale/i18n.pseudo.component.html:39</note>
       </notes>
       <segment>
         <source>Sponsors</source>
@@ -1012,7 +1020,7 @@
     </unit>
     <unit id="public-layout.launch_partners">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:39</note>
+        <note category="location">locale/i18n.pseudo.component.html:40</note>
       </notes>
       <segment>
         <source>Launch Partners</source>
@@ -1020,7 +1028,7 @@
     </unit>
     <unit id="public-layout.members">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:40</note>
+        <note category="location">locale/i18n.pseudo.component.html:41</note>
       </notes>
       <segment>
         <source>Members</source>
@@ -1028,7 +1036,7 @@
     </unit>
     <unit id="ngOrcid.openSource">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:41</note>
+        <note category="location">locale/i18n.pseudo.component.html:42</note>
       </notes>
       <segment>
         <source>OPEN SOURCE</source>
@@ -1036,7 +1044,7 @@
     </unit>
     <unit id="ngOrcid.partners">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:42</note>
+        <note category="location">locale/i18n.pseudo.component.html:43</note>
       </notes>
       <segment>
         <source>PARTNERS</source>
@@ -1044,18 +1052,10 @@
     </unit>
     <unit id="ngOrcid.adoptionAndInt">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:43</note>
-      </notes>
-      <segment>
-        <source>ADOPTION AND INTEGRATION PROGRAM</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.outreachResources">
-      <notes>
         <note category="location">locale/i18n.pseudo.component.html:44</note>
       </notes>
       <segment>
-        <source>OUTREACH RESOURCES</source>
+        <source>ADOPTION AND INTEGRATION PROGRAM</source>
       </segment>
     </unit>
     <unit id="ngOrcid.orcidGear">
@@ -1116,7 +1116,7 @@
     </unit>
     <unit id="ngOrcid.disputeProcedures">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:58</note>
+        <note category="location">locale/i18n.pseudo.component.html:57</note>
       </notes>
       <segment>
         <source>DISPUTE PROCEDURES</source>
@@ -1124,7 +1124,7 @@
     </unit>
     <unit id="change_email_preferences.privacyPolicy">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:59</note>
+        <note category="location">locale/i18n.pseudo.component.html:58</note>
       </notes>
       <segment>
         <source>privacy policy</source>
@@ -1132,7 +1132,7 @@
     </unit>
     <unit id="developer_tools.public_member.terms.check_2">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:61</note>
+        <note category="location">locale/i18n.pseudo.component.html:60</note>
       </notes>
       <segment>
         <source>Public Client Terms of Service</source>
@@ -1140,7 +1140,7 @@
     </unit>
     <unit id="ngOrcid.publicDataFileUsePolicy">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:63</note>
+        <note category="location">locale/i18n.pseudo.component.html:62</note>
       </notes>
       <segment>
         <source>PUBLIC DATA FILE USE POLICY</source>
@@ -1148,7 +1148,7 @@
     </unit>
     <unit id="public-layout.trademarkAndIdDisplayGuidelines">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:65</note>
+        <note category="location">locale/i18n.pseudo.component.html:64</note>
       </notes>
       <segment>
         <source>Trademark and iD Display Guidelines</source>
@@ -1156,7 +1156,7 @@
     </unit>
     <unit id="layout.public-layout.registry">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:68</note>
+        <note category="location">locale/i18n.pseudo.component.html:66</note>
       </notes>
       <segment>
         <source>registry</source>
@@ -1164,7 +1164,7 @@
     </unit>
     <unit id="layout.public-layout.website">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:69</note>
+        <note category="location">locale/i18n.pseudo.component.html:67</note>
       </notes>
       <segment>
         <source>website</source>
@@ -1172,7 +1172,7 @@
     </unit>
     <unit id="orcid_bio_search.btnsearch">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:71</note>
+        <note category="location">locale/i18n.pseudo.component.html:68</note>
       </notes>
       <segment>
         <source>Search...</source>
@@ -1180,7 +1180,7 @@
     </unit>
     <unit id="public-layout.account_setting">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:72</note>
+        <note category="location">locale/i18n.pseudo.component.html:69</note>
       </notes>
       <segment>
         <source>Account Settings</source>
@@ -1188,7 +1188,7 @@
     </unit>
     <unit id="workspace.developer_tools">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:73</note>
+        <note category="location">locale/i18n.pseudo.component.html:70</note>
       </notes>
       <segment>
         <source>Developer tools</source>
@@ -1196,7 +1196,7 @@
     </unit>
     <unit id="admin.members.workspace_link">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:74</note>
+        <note category="location">locale/i18n.pseudo.component.html:71</note>
       </notes>
       <segment>
         <source>Manage members</source>
@@ -1204,7 +1204,7 @@
     </unit>
     <unit id="admin.workspace_link">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:75</note>
+        <note category="location">locale/i18n.pseudo.component.html:72</note>
       </notes>
       <segment>
         <source>Admin page</source>
@@ -1212,7 +1212,7 @@
     </unit>
     <unit id="workspace.self_service">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:76</note>
+        <note category="location">locale/i18n.pseudo.component.html:73</note>
       </notes>
       <segment>
         <source>Member Tools</source>
@@ -1220,7 +1220,7 @@
     </unit>
     <unit id="public-layout.my_orcid">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:78</note>
+        <note category="location">locale/i18n.pseudo.component.html:75</note>
       </notes>
       <segment>
         <source>ORCID Record</source>
@@ -1228,7 +1228,7 @@
     </unit>
     <unit id="public-layout.my_orcid_record">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:79</note>
+        <note category="location">locale/i18n.pseudo.component.html:76</note>
       </notes>
       <segment>
         <source>My ORCID Record</source>

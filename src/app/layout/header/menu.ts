@@ -427,7 +427,7 @@ export const menu: ApplicationMenuItemBasic[] = [
             label: LOCALE['public-layout.members'],
             route: 'members',
           },
-          // TODO CEHCK WHY  'LAUNCH PARTNERS' IS REPEATED,
+          // TODO CHECK WHY  'LAUNCH PARTNERS' IS REPEATED ON THE ORIGINAL MENU
           {
             id: 'LAUNCH',
             label: LOCALE['public-layout.launch_partners'],
@@ -451,15 +451,14 @@ export const menu: ApplicationMenuItemBasic[] = [
 
           {
             id: 'AMBASSADORS',
-            label: LOCALE['ngOrcid.outreachResources'],
+            label: LOCALE['ngOrcid.ambassadors'],
             route: 'content/orcid-ambassadors',
           },
           {
             id: 'outreach',
             label: LOCALE['ngOrcid.outreach'],
-            route: 'outreach-resources',
+            route: 'content/orcid-ambassadors-1/outreachresources',
           },
-
           {
             id: 'GEAR',
             label: LOCALE['ngOrcid.orcidGear'],
@@ -477,7 +476,7 @@ export const menu: ApplicationMenuItemBasic[] = [
             label: LOCALE['public-layout.membership'],
             route: 'about/membership',
           },
-          // TODO ADD 'MEMBERSHIP & SUBSCRIPTION' have the same URL as memebership
+          // TODO ADD 'MEMBERSHIP & SUBSCRIPTION' have the same URL as membership
 
           {
             id: 'subscription',
