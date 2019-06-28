@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, ProfileService } from 'src/app/core'
 import { AffiliationUIGroup, Person, PlatformInfo, Works } from 'src/app/types'
 import { environment } from 'src/environments/environment.prod'
-import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-profile-page',
@@ -24,28 +23,26 @@ export class ProfilePageComponent implements OnInit {
     _activeRoute: ActivatedRoute,
     _platformInfo: PlatformInfoService
   ) {
-    _activeRoute.parent.url
-      .pipe(filter(route => !!route[0]))
-      .subscribe(route => {
-        this.id = route[0].path
-        _profileService.get(this.id).subscribe(
-          data => {
-            this.profileGeneralData = data[0]
-            this.profileAffiliationUiGroups = data[1]
-            this.profileWorks = data[2]
-          },
-          error => {
-            // Redirects user when orcid is not found
-            if (error.error.status === 500) {
-              window.location.href = environment.BASE_URL + '404'
-            }
+    _activeRoute.parent.url.subscribe(route => {
+      this.id = route[0].path
+      _profileService.get(this.id).subscribe(
+        data => {
+          this.profileGeneralData = data[0]
+          this.profileAffiliationUiGroups = data[1]
+          this.profileWorks = data[2]
+        },
+        error => {
+          // Redirects user when orcid is not found
+          if (error.error.status === 500) {
+            window.location.href = environment.BASE_URL + '404'
           }
-        )
+        }
+      )
 
-        _platformInfo.get().subscribe(platformInfo => {
-          this.platformInfo = platformInfo
-        })
+      _platformInfo.get().subscribe(platformInfo => {
+        this.platformInfo = platformInfo
       })
+    })
   }
 
   profileHasBio(profileGeneralData): boolean {
