@@ -95,7 +95,7 @@
             </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.disputeProcedure">
+    <unit id="ngOrcid.disputeProcedure">
       <notes>
         <note category="location">app/layout/footer/footer.component.html:63,65</note>
       </notes>
@@ -115,7 +115,7 @@
             </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.trademark">
+    <unit id="ngOrcid.trademark">
       <notes>
         <note category="location">app/layout/footer/footer.component.html:85,87</note>
       </notes>
@@ -125,11 +125,11 @@
             </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.advanceSearch">
+    <unit id="ngOrcid.advanceSearch">
       <notes>
         <note category="location">app/layout/search/search.component.html:12,14</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:69,70</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:83,84</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:67,68</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:81,82</note>
       </notes>
       <segment>
         <source>
@@ -147,7 +147,7 @@
         <source> SIGN IN</source>
       </segment>
     </unit>
-    <unit id="ng-orcid.view.my.orcid">
+    <unit id="ngOrcid.viewMyOrcid">
       <notes>
         <note category="location">app/layout/user-menu/user-menu.component.html:40,42</note>
       </notes>
@@ -166,7 +166,7 @@
         <source>Inbox</source>
       </segment>
     </unit>
-    <unit id="ng-orcid.account.setting">
+    <unit id="ngOrcid.accountSetting">
       <notes>
         <note category="location">app/layout/user-menu/user-menu.component.html:53,54</note>
       </notes>
@@ -175,35 +175,35 @@
     </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.self_service">
+    <unit id="ngOrcid.selfService">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:89,90</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:87,88</note>
       </notes>
       <segment>
         <source>Member tools
     </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.manage.members">
+    <unit id="ngOrcid.manageMembers">
       <notes>
         <note category="description">#sentenceCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:97</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:95</note>
       </notes>
       <segment>
         <source>Manage members</source>
       </segment>
     </unit>
-    <unit id="ng-orcid.admin.page">
+    <unit id="ngOrcid.adminPage">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:101</note>
       </notes>
       <segment>
         <source>Admin page</source>
       </segment>
     </unit>
-    <unit id="ng-orcid.logout">
+    <unit id="ngOrcid.logout">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:108</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:106</note>
       </notes>
       <segment>
         <source>Logout</source>
@@ -428,7 +428,7 @@
         </source>
       </segment>
     </unit>
-    <unit id="ng-orcidFullOrcid">
+    <unit id="ngOrcid.fullOrcid">
       <notes>
         <note category="location">app/home/components/news/news.component.html:44,46</note>
       </notes>
@@ -438,7 +438,7 @@
             </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.MoreNews">
+    <unit id="ngOrcid.moreNews">
       <notes>
         <note category="location">app/home/components/news/news.component.html:61,63</note>
       </notes>
@@ -458,7 +458,7 @@
   </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.clickToCopyCopied?">
+    <unit id="ngOrcid.clickToCopyCopied?">
       <notes>
         <note category="location">app/shared/components/copy-on-click/copy-on-click.component.html:1</note>
       </notes>
@@ -532,7 +532,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.present?">
+    <unit id="ngOrcid.present?">
       <notes>
         <note category="location">app/profile/components/card/card.component.html:21</note>
       </notes>
@@ -590,7 +590,7 @@
       </source>
       </segment>
     </unit>
-    <unit id="ng.show_less?">
+    <unit id="ngOrcid.show_less?">
       <notes>
         <note category="location">app/profile/components/card/card.component.html:73</note>
       </notes>
@@ -625,7 +625,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.paginatorNextPageLabel?">
+    <unit id="ngOrcid.paginatorNextPageLabel?">
       <notes>
         <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:76,78</note>
       </notes>
@@ -635,7 +635,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.paginatorLastPageLabel?">
+    <unit id="ngOrcid.paginatorLastPageLabel?">
       <notes>
         <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:80,82</note>
       </notes>
@@ -645,7 +645,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.paginatorFirstPageLabel?">
+    <unit id="ngOrcid.paginatorFirstPageLabel?">
       <notes>
         <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:87,89</note>
       </notes>
@@ -655,7 +655,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.paginatorPreviousPageLabel?">
+    <unit id="ngOrcid.paginatorPreviousPageLabel?">
       <notes>
         <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:94,96</note>
       </notes>
@@ -665,7 +665,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.paginatorItemsPerPageLabel?">
+    <unit id="ngOrcid.paginatorItemsPerPageLabel?">
       <notes>
         <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:101,103</note>
       </notes>
@@ -675,7 +675,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.paginatoOf?">
+    <unit id="ngOrcid.paginatorOf?">
       <notes>
         <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:105</note>
       </notes>

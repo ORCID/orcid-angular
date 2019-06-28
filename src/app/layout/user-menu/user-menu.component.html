@@ -37,7 +37,7 @@
       </div>
       <div class="col name-container">
         <div class="mat-title">{{ displayName }}</div>
-        <div class="mat-caption" i18n="@@ng-orcid.view.my.orcid">
+        <div class="mat-caption" i18n="@@ngOrcid.viewMyOrcid">
           View my ORCID record
         </div>
       </div>
@@ -49,7 +49,7 @@
   </button>
   <button mat-menu-item>
     <mat-icon>settings</mat-icon>
-    <span i18n="@@ng-orcid.account.setting" (click)="goto('account')"
+    <span i18n="@@ngOrcid.accountSetting" (click)="goto('account')"
       >Account settings
     </span>
   </button>
@@ -63,9 +63,7 @@
     "
   >
     <mat-icon>code</mat-icon>
-    <span
-      i18n="@@ng-orcid.advanceSearch"
-      (click)="goto('group/developer-tools')"
+    <span i18n="@@ngOrcid.advanceSearch" (click)="goto('group/developer-tools')"
       >Developer tools
     </span>
   </button>
@@ -79,32 +77,32 @@
     "
   >
     <mat-icon>code</mat-icon>
-    <span i18n="@@ng-orcid.advanceSearch" (click)="goto('developer-tools')"
+    <span i18n="@@ngOrcid.advanceSearch" (click)="goto('developer-tools')"
       >Developer tools
     </span>
   </button>
   <button mat-menu-item *ngIf="userInfo && userInfo['SELF_SERVICE_MENU']">
     <mat-icon>build</mat-icon>
-    <span i18n="@@ng-orcid.self_service" (click)="goto('manage-members')"
+    <span i18n="@@ngOrcid.selfService" (click)="goto('manage-members')"
       >Member tools
     </span>
   </button>
   <button mat-menu-item *ngIf="userInfo && userInfo['ADMIN_MENU']">
     <mat-icon>group</mat-icon>
     <span
-      i18n="#sentenceCase@@ng-orcid.manage.members"
+      i18n="#sentenceCase@@ngOrcid.manageMembers"
       (click)="goto('/manage-members')"
       >Manage members</span
     >
   </button>
   <button mat-menu-item *ngIf="userInfo && userInfo['ADMIN_MENU']">
     <mat-icon>verified_user</mat-icon>
-    <span i18n="@@ng-orcid.admin.page" (click)="goto('admin-actions')"
+    <span i18n="@@ngOrcid.adminPage" (click)="goto('admin-actions')"
       >Admin page</span
     >
   </button>
   <button mat-menu-item>
     <mat-icon>exit_to_app</mat-icon>
-    <span i18n="@@ng-orcid.logout" (click)="goto('signout')">Logout</span>
+    <span i18n="@@ngOrcid.logout" (click)="goto('signout')">Logout</span>
   </button>
 </mat-menu>
