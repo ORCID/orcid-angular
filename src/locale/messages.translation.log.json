@@ -139,7 +139,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "ngOrcid.trademark2"
       ]
     },
     "ar": {
@@ -196,7 +196,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "admin.members.workspace_link",
         "admin.workspace_link",
         "workspace.self_service"
@@ -318,7 +318,7 @@
         "change_email_preferences.privacyPolicy",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "layout.public-layout.registry",
         "layout.public-layout.website",
         "orcid_bio_search.btnsearch",
@@ -424,7 +424,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines"
+        "ngOrcid.trademark2"
       ]
     },
     "es": {
@@ -526,7 +526,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -624,7 +624,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -713,7 +713,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -766,7 +766,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -823,7 +823,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -890,7 +890,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "admin.members.workspace_link",
         "admin.workspace_link"
       ]
@@ -985,7 +985,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -1052,7 +1052,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "admin.members.workspace_link",
         "admin.workspace_link"
       ]
@@ -1142,7 +1142,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -1261,7 +1261,7 @@
         "change_email_preferences.privacyPolicy",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "layout.public-layout.registry",
         "layout.public-layout.website",
         "orcid_bio_search.btnsearch",
@@ -1337,7 +1337,7 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "admin.members.workspace_link",
         "admin.workspace_link"
       ],
@@ -1402,7 +1402,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     },
@@ -1459,7 +1459,7 @@
         "ngOrcid.disputeProcedures",
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
-        "public-layout.trademarkAndIdDisplayGuidelines",
+        "ngOrcid.trademark2",
         "workspace.self_service"
       ]
     }

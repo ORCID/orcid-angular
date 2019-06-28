@@ -389,7 +389,7 @@ export const menu: ApplicationMenuItemBasic[] = [
               },
               {
                 id: 'trademark',
-                label: LOCALE['public-layout.trademarkAndIdDisplayGuidelines'],
+                label: LOCALE['ngOrcid.trademark2'],
                 route: 'trademark-and-id-display-guidelines',
               },
             ],

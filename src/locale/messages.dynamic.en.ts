@@ -55,7 +55,7 @@ export const LOCALE : {[key:string]: string} = {
   "change_email_preferences.privacyPolicy": "privacy policy",
   "developer_tools.public_member.terms.check_2": "Public Client Terms of Service",
   "ngOrcid.publicDataFileUsePolicy": "PUBLIC DATA FILE USE POLICY",
-  "public-layout.trademarkAndIdDisplayGuidelines": "Trademark and iD Display Guidelines",
+  "ngOrcid.trademark2": "Trademark and iD Display Guidelines",
   "layout.public-layout.registry": "registry",
   "layout.public-layout.website": "website",
   "orcid_bio_search.btnsearch": "Search",
