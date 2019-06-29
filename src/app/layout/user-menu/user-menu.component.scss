@@ -32,8 +32,7 @@
 
 :host {
   .user-menu-button {
-    .columns-4 &,
-    .columns-8 & {
+    .columns-4 & {
       padding: 0;
     }
     .user-menu-button-container {
@@ -50,5 +49,14 @@
         margin: 0;
       }
     }
+  }
+  .name-container {
+    .columns-4 & {
+      padding: 0;
+    }
+  }
+
+  .small-login-icon {
+    margin-right: 12px;
   }
 }
