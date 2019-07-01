@@ -49,7 +49,7 @@
         <source>ORCID iDs and counting.</source>
       </segment>
     </unit>
-    <unit id="public-layout.see_more">
+    <unit id="ngOrcid.seeMoreStatics">
       <notes>
         <note category="location">app/layout/header/header.component.html:121</note>
       </notes>
@@ -66,18 +66,17 @@
           published under a</source>
       </segment>
     </unit>
-    <unit id="footer.copyright_cc0_2">
+    <unit id="ngOrcid.copyright">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:28,29</note>
+        <note category="location">app/layout/footer/footer.component.html:28</note>
       </notes>
       <segment>
-        <source>
-          CC0 license.</source>
+        <source> CC0 license.</source>
       </segment>
     </unit>
     <unit id="footer.privacypolicy">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:41,43</note>
+        <note category="location">app/layout/footer/footer.component.html:39,41</note>
       </notes>
       <segment>
         <source>
@@ -87,7 +86,7 @@
     </unit>
     <unit id="footer.termsofuse">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:52,54</note>
+        <note category="location">app/layout/footer/footer.component.html:50,52</note>
       </notes>
       <segment>
         <source>
@@ -97,7 +96,7 @@
     </unit>
     <unit id="ngOrcid.disputeProcedure">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:63,65</note>
+        <note category="location">app/layout/footer/footer.component.html:61,63</note>
       </notes>
       <segment>
         <source>
@@ -107,7 +106,7 @@
     </unit>
     <unit id="footer.contactus">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:74,76</note>
+        <note category="location">app/layout/footer/footer.component.html:72,74</note>
       </notes>
       <segment>
         <source>
@@ -117,7 +116,7 @@
     </unit>
     <unit id="ngOrcid.trademark">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:85,87</note>
+        <note category="location">app/layout/footer/footer.component.html:83,85</note>
       </notes>
       <segment>
         <source>
@@ -244,7 +243,7 @@
         </source>
       </segment>
     </unit>
-    <unit id="home.find_out_more">
+    <unit id="ngOrcid.findOutMore">
       <notes>
         <note category="location">app/home/pages/home/home.component.html:42,43</note>
       </notes>
@@ -271,7 +270,7 @@
             </source>
       </segment>
     </unit>
-    <unit id="home.get_your">
+    <unit id="ngOrcid.getYourOrcid">
       <notes>
         <note category="location">app/home/pages/home/home.component.html:62,65</note>
       </notes>
@@ -366,7 +365,7 @@
           </source>
       </segment>
     </unit>
-    <unit id="home.members_make">
+    <unit id="ngOrcid.membersMakeOrcid">
       <notes>
         <note category="location">app/home/pages/home/home.component.html:137,139</note>
       </notes>
@@ -1170,7 +1169,7 @@
         <source>website</source>
       </segment>
     </unit>
-    <unit id="orcid_bio_search.btnsearch">
+    <unit id="ngOrcid.search">
       <notes>
         <note category="location">locale/i18n.pseudo.component.html:66</note>
       </notes>

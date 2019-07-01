@@ -1,9 +1,6 @@
 {
   "language": {
     "en": {
-      "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_en.properties"
-      ],
       "changed": [
         {
           "id": "confirm-oauth-access.connectingresearchandresearchers",
@@ -48,29 +45,9 @@
       ],
       "unmatch": [
         {
-          "id": "public-layout.see_more",
-          "textOnTemplate": "See more statics",
-          "textOnProperty": "See more..."
-        },
-        {
-          "id": "footer.copyright_cc0_2",
-          "textOnTemplate": "CC0 license.",
-          "textOnProperty": "CC0 license"
-        },
-        {
           "id": "home.orcid_provides",
           "textOnTemplate": "ORCID provides a persistent digital identifier (an ORCID iD) that you own and control, and that distinguishes you from every other researcher. You can connect your iD with your professional information — affiliations, grants, publications, peer review, and more. You can use your iD to share your information with other systems, ensuring you get recognition for all your contributions, saving you time and hassle, and reducing the risk of errors.",
           "textOnProperty": "ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized."
-        },
-        {
-          "id": "home.find_out_more",
-          "textOnTemplate": "FIND OUT MORE ABOUT OUR MISSION AND VALUES",
-          "textOnProperty": "Find out more"
-        },
-        {
-          "id": "home.get_your",
-          "textOnTemplate": "Get your unique ORCID identifier. It’s free and only takes a minute, so",
-          "textOnProperty": "Get your unique ORCID identifier"
         },
         {
           "id": "home.enhance_your",
@@ -83,33 +60,12 @@
           "textOnProperty": "Include your ORCID identifier on your Webpage, when you submit publications, apply for grants, and in any research workflow to ensure you get credit for your work."
         },
         {
-          "id": "home.members_make",
-          "textOnTemplate": "Our organizational members make ORCID possible!",
-          "textOnProperty": "MEMBERS MAKE ORCID POSSIBLE!"
-        },
-        {
           "id": "home.orcid_is",
           "textOnTemplate": "ORCID is a non-profit organization supported by a global community of member organizations, including research institutions, publishers, funders, professional associations, service providers, and other stakeholders in the research ecosystem.",
           "textOnProperty": "ORCID is a non-profit organization supported by a global community of organizational members, including research organizations, publishers, funders, professional associations, and other stakeholders in the research ecosystem."
-        },
-        {
-          "id": "orcid_bio_search.btnsearch",
-          "textOnTemplate": "Search...",
-          "textOnProperty": "Search"
         }
       ],
       "notFound": [
-        "ngOrcid.disputeProcedure",
-        "ngOrcid.trademark",
-        "ngOrcid.advanceSearch",
-        "ngOrcid.viewMyOrcid",
-        "ngOrcid.accountSetting",
-        "ngOrcid.selfService",
-        "ngOrcid.manageMembers",
-        "ngOrcid.adminPage",
-        "ngOrcid.logout",
-        "ngOrcid.fullOrcid",
-        "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
         "ngOrcid.present?",
         "ngOrcid.show_less?",
@@ -119,37 +75,18 @@
         "ngOrcid.paginatorPreviousPageLabel?",
         "ngOrcid.paginatorItemsPerPageLabel?",
         "ngOrcid.paginatorOf?",
-        "ngOrcid.outreach",
-        "ngOrcid.ambassadors",
-        "ngOrcid.useCases",
-        "ngOrcid.theOrcidApi",
-        "ngOrcid.registerClientApp",
-        "ngOrcid.currentIntegrations",
-        "ngOrcid.integrationsChart",
-        "ngOrcid.betaTesters",
-        "ngOrcid.ourGovernance",
-        "ngOrcid.ourPolicies",
-        "ngOrcid.openSource",
-        "ngOrcid.partners",
-        "ngOrcid.adoptionAndInt",
-        "ngOrcid.orcidGear",
-        "ngOrcid.membershipComparison",
-        "ngOrcid.standartCreatorAgreement",
-        "ngOrcid.blog",
-        "ngOrcid.subscribe",
-        "ngOrcid.disputeProcedures",
-        "ngOrcid.publicDataFileUsePolicy",
-        "ngOrcid.trademark2"
+        "ngOrcid.outreach"
       ]
     },
     "ar": {
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ar.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ar.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_ar.properties"
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -159,6 +96,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -197,6 +137,7 @@
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "admin.members.workspace_link",
         "admin.workspace_link",
         "workspace.self_service"
@@ -207,7 +148,7 @@
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_ca.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ca.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/javascript_ca.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ca.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_ca.properties"
       ],
       "notFound": [
         "confirm-oauth-access.connectingresearchandresearchers",
@@ -215,9 +156,9 @@
         "header.register",
         "public-layout.sign_out",
         "public-layout.amount_ids",
-        "public-layout.see_more",
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "footer.privacypolicy",
         "footer.termsofuse",
         "ngOrcid.disputeProcedure",
@@ -232,6 +173,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "public_profile.empty_profile",
@@ -321,7 +265,7 @@
         "ngOrcid.trademark2",
         "layout.public-layout.registry",
         "layout.public-layout.website",
-        "orcid_bio_search.btnsearch",
+        "ngOrcid.search",
         "public-layout.account_setting",
         "workspace.developer_tools",
         "admin.members.workspace_link",
@@ -345,7 +289,7 @@
     },
     "cs": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_cs.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_cs.properties"
       ],
       "changed": [
         {
@@ -380,8 +324,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -391,6 +336,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -424,12 +372,13 @@
         "ngOrcid.subscribe",
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
-        "ngOrcid.trademark2"
+        "ngOrcid.trademark2",
+        "ngOrcid.search"
       ]
     },
     "es": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_es.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_es.properties"
       ],
       "changed": [
         {
@@ -479,8 +428,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -490,6 +440,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -527,12 +480,13 @@
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
     "fr": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_fr.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_fr.properties"
       ],
       "changed": [
         {
@@ -577,8 +531,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -588,6 +543,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -625,12 +583,13 @@
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
     "it": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_it.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_it.properties"
       ],
       "changed": [
         {
@@ -665,8 +624,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -676,6 +636,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -714,16 +677,18 @@
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
     "ja": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ja.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_ja.properties"
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -733,6 +698,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -767,16 +735,18 @@
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
     "ko": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ko.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_ko.properties"
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -786,6 +756,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -824,6 +797,7 @@
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
@@ -831,7 +805,7 @@
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_lr.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_lr.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_lr.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_lr.properties"
       ],
       "changed": [
         {
@@ -846,8 +820,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -857,6 +832,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -891,13 +869,14 @@
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "admin.members.workspace_link",
         "admin.workspace_link"
       ]
     },
     "pt": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_pt.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_pt.properties"
       ],
       "changed": [
         {
@@ -937,8 +916,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -948,6 +928,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -986,6 +969,7 @@
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
@@ -993,7 +977,7 @@
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_rl.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_rl.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_rl.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_rl.properties"
       ],
       "changed": [
         {
@@ -1008,8 +992,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -1019,6 +1004,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -1053,13 +1041,14 @@
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "admin.members.workspace_link",
         "admin.workspace_link"
       ]
     },
     "ru": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_ru.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_ru.properties"
       ],
       "changed": [
         {
@@ -1094,8 +1083,9 @@
         }
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -1105,6 +1095,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -1143,6 +1136,7 @@
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
@@ -1150,7 +1144,7 @@
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_uk.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_uk.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_uk.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_uk.properties"
       ],
       "notFound": [
         "confirm-oauth-access.connectingresearchandresearchers",
@@ -1158,9 +1152,9 @@
         "header.register",
         "public-layout.sign_out",
         "public-layout.amount_ids",
-        "public-layout.see_more",
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "footer.privacypolicy",
         "footer.termsofuse",
         "ngOrcid.disputeProcedure",
@@ -1175,6 +1169,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "public_profile.empty_profile",
@@ -1264,7 +1261,7 @@
         "ngOrcid.trademark2",
         "layout.public-layout.registry",
         "layout.public-layout.website",
-        "orcid_bio_search.btnsearch",
+        "ngOrcid.search",
         "public-layout.account_setting",
         "workspace.developer_tools",
         "admin.members.workspace_link",
@@ -1290,11 +1287,12 @@
       "unexistingFiles": [
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_xx.properties",
         "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_xx.properties",
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_xx.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_xx.properties"
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -1304,6 +1302,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -1338,6 +1339,7 @@
         "ngOrcid.disputeProcedures",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "admin.members.workspace_link",
         "admin.workspace_link"
       ],
@@ -1351,11 +1353,12 @@
     },
     "zh_CN": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_zh_CN.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_zh_CN.properties"
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -1365,6 +1368,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -1403,16 +1409,18 @@
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     },
     "zh_TW": {
       "unexistingFiles": [
-        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_zh_TW.properties"
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcid-translations/orcid-core/src/main/resources/i18n/ng_orcid_zh_TW.properties"
       ],
       "notFound": [
+        "ngOrcid.seeMoreStatics",
         "footer.copyright_cc0_1",
-        "footer.copyright_cc0_2",
+        "ngOrcid.copyright",
         "ngOrcid.disputeProcedure",
         "ngOrcid.trademark",
         "ngOrcid.advanceSearch",
@@ -1422,6 +1430,9 @@
         "ngOrcid.manageMembers",
         "ngOrcid.adminPage",
         "ngOrcid.logout",
+        "ngOrcid.findOutMore",
+        "ngOrcid.getYourOrcid",
+        "ngOrcid.membersMakeOrcid",
         "ngOrcid.fullOrcid",
         "ngOrcid.moreNews",
         "ngOrcid.clickToCopyCopied?",
@@ -1460,6 +1471,7 @@
         "developer_tools.public_member.terms.check_2",
         "ngOrcid.publicDataFileUsePolicy",
         "ngOrcid.trademark2",
+        "ngOrcid.search",
         "workspace.self_service"
       ]
     }
