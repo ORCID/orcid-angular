@@ -111,9 +111,9 @@
 </nav>
 <div class="statics container">
   <div class="row">
-    <div class="col l5 m8 s4 push-l7">
+    <div class="col l5 m8 s4 push-l7" *ngIf="togglz">
       <div class="row middle mat-caption">
-        5,566,081
+        {{ togglz.messages.LIVE_IDS }}
         <ng-container i18n="@@public-layout.amount_ids"
           >ORCID iDs and counting.</ng-container
         >
