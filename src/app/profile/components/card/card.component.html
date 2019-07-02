@@ -17,7 +17,9 @@
         >{{ startDate }}
         <ng-container> to </ng-container>
         <ng-container *ngIf="endDate">{{ endDate }}</ng-container>
-        <ng-container i18n="@@_" *ngIf="!endDate">present</ng-container>
+        <ng-container i18n="@@ng-orcid.present?" *ngIf="!endDate"
+          >present</ng-container
+        >
       </ng-container>
       <ng-container *ngIf="date"> {{ date }} </ng-container>
       <ng-container *ngIf="(startDate || date) && role"> | </ng-container>
@@ -59,7 +61,7 @@
         >Preferred source</ng-container
       >
       <ng-container *ngIf="!stackMode && stackLength > 1">
-        (1 <ng-container i18n="@@search_results.of=">of</ng-container>
+        (1 <ng-container i18n="@@search_results.of">of</ng-container>
         {{ stackLength }})&#x200E;
       </ng-container>
     </div>
@@ -67,7 +69,7 @@
       <ng-container i18n="@@notifications.show_more" *ngIf="!stackMode">
         Show more
       </ng-container>
-      <ng-container i18n="@@ng.show_less" *ngIf="stackMode"
+      <ng-container i18n="@@ng.show_less?" *ngIf="stackMode"
         >Show less</ng-container
       >
     </a>

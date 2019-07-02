@@ -3,6 +3,7 @@ import { Platform } from '@angular/cdk/platform'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { PlatformInfo } from 'src/app/types/platform-info.local'
+import { GRID_GUTTER, GRID_COLUMNS, GRID_MARGINS } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,9 @@ export class PlatformInfoService {
     ie: false,
     firefox: false,
     safary: false,
+    colums4: false,
+    colums8: false,
+    colums12: false,
   }
 
   constructor(
@@ -56,6 +60,25 @@ export class PlatformInfoService {
         } else {
           this.platform.tabletOrHandset = false
           this.platform.desktop = true
+        }
+        this.platformSubject.next(this.platform)
+      })
+
+    this._breakpointObserver
+      .observe(['(min-width: 839.99px)', '(min-width: 599.99px)'])
+      .subscribe(state => {
+        if (state.breakpoints['(min-width: 839.99px)']) {
+          this.platform.colums8 = false
+          this.platform.colums12 = true
+          this.platform.colums4 = false
+        } else if (state.breakpoints['(min-width: 599.99px)']) {
+          this.platform.colums8 = true
+          this.platform.colums12 = false
+          this.platform.colums4 = false
+        } else {
+          this.platform.colums8 = false
+          this.platform.colums12 = false
+          this.platform.colums4 = true
         }
         this.platformSubject.next(this.platform)
       })

@@ -1,30 +1,22 @@
 $dark-primary-text: rgba(black, 0.87);
-$dark-secondary-text: rgba(black, 0.54);
+$dark-secondary-text: rgba(black, 0.6);
 $dark-disabled-text: rgba(black, 0.38);
 
 $light-primary-text: rgba(white, 1);
-$light-secondary-text: rgba(white, 0.87);
-$light-disabled-text: rgba(white, 0.5);
-
-$light-primary-background: #f2f2f3;
-$dark-primary-background: #f5f5f5;
-$background-hover: rgba(#9acf1c, 0.15);
+$light-secondary-text: rgba(white, 0.6);
+$light-disabled-text: rgba(white, 0.38);
 
 $orcid-green: (
-  50: #f3f9e4,
-  100: #e1f1bb,
-  200: #cde78e,
-  300: #b8dd60,
+  50: #f4f9e5,
+  100: #e3f1bf,
+  200: #cfe795,
+  300: #bade67,
   400: #a9d63e,
-  500: #9acf1c,
-  600: #92ca19,
-  700: #88c314,
-  800: #7ebd11,
-  900: #6cb209,
-  A100: #f0ffde,
-  A200: #d9ffab,
-  A400: #c2ff78,
-  A700: #b6ff5e,
+  500: #98ce00,
+  600: #87be00,
+  700: #70aa00,
+  800: #599700,
+  900: #2f7500,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -36,27 +28,19 @@ $orcid-green: (
     700: $dark-primary-text,
     800: $dark-primary-text,
     900: $dark-primary-text,
-    A100: $dark-primary-text,
-    A200: $dark-primary-text,
-    A400: $dark-primary-text,
-    A700: $dark-primary-text,
   ),
 );
 $orcid-blue: (
-  50: #e0f2f6,
-  100: #b3dde8,
-  200: #80c7d8,
-  300: #4db1c8,
-  400: #26a0bd,
-  500: #008fb1,
-  600: #0087aa,
-  700: #007ca1,
-  800: #007298,
-  900: #006088,
-  A100: #b4e5ff,
-  A200: #81d4ff,
-  A400: #4ec2ff,
-  A700: #35b9ff,
+  50: #d0f3ff,
+  100: #adddf2,
+  200: #8ec2db,
+  300: #6ba7c3,
+  400: #4f92b1,
+  500: #2e7f9f,
+  600: #1e708d,
+  700: #085c77,
+  800: #004961,
+  900: #003449,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -68,9 +52,26 @@ $orcid-blue: (
     700: $light-primary-text,
     800: $light-primary-text,
     900: $light-primary-text,
-    A100: $light-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
   ),
 );
+// /
+// /
+// /
+// EXTRA COLORS
+// /
+// /
+// Highlighted background for the footer and organization members section on the home page
+$light-grey: #f6f6f6;
+// Header main menu active state background
+$grey: #e3e3e3;
+// Header search bar grey backgrounds
+$dark-grey-background: rgba(128, 128, 131, 1);
+// A translucid blue layer used over hero and news images on the homepage
+$blue-overlay: rgba(19, 52, 65, 0.75);
+// /
+// /
+// /
+// NON-USED/DEPRECATED COLORS
+// /
+// /
+$dark-primary-background: #f6f6f6;

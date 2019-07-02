@@ -1,24 +1,9 @@
-<div
-  class="mdc-layout-grid__cell--span-1"
-  *ngIf="!platformInfo?.tabletOrHandset"
-></div>
-<div
-  [ngClass]="{
-    'mdc-layout-grid__cell--span-3': !platformInfo?.tabletOrHandset,
-    'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
-  }"
->
+<div>
   <app-profile-person [profileGeneralData]="profileGeneralData" [id]="id">
   </app-profile-person>
 </div>
 
-<div
-  class="activities-container"
-  [ngClass]="{
-    'mdc-layout-grid__cell--span-7': !platformInfo?.tabletOrHandset,
-    'mdc-layout-grid__cell--span-12': platformInfo?.tabletOrHandset
-  }"
->
+<div class="activities-container">
   <div
     *ngIf="
       profileAffiliationUiGroups &&

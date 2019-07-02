@@ -20,20 +20,26 @@ $orcid-app-theme: mat-light-theme(
   $orcid-app-warn
 );
 
-// CUSTOM BACKGROUND COLORS
 $background: map-get($orcid-app-theme, background);
 $background: map_merge(
   $background,
   (
-    app-footer: $light-primary-background,
-    app-news: $dark-primary-background,
-    hover: $background-hover,
+    // CUSTOM BACKGROUND COLORS
+      app-news: $dark-primary-background,
+    grey: $grey,
+    light-grey: $light-grey,
+    blue-overlay: $blue-overlay,
+    dark-grey: $dark-grey-background
   )
 );
+// CUSTOM FOREGROUND COLORS
+$foreground: map-get($orcid-app-theme, foreground);
+$foreground: map_merge($foreground, (// FOREGROUND BACKGROUND COLORS));
 $orcid-app-theme: map_merge(
   $orcid-app-theme,
   (
     background: $background,
+    foreground: $foreground,
   )
 );
 @include angular-material-theme($orcid-app-theme);

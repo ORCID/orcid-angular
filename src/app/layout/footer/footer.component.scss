@@ -1,60 +1,40 @@
-footer {
-  height: 46px;
-  display: flex;
-  justify-content: space-around;
-  bottom: 0;
-  width: 100%;
+:host {
+  padding-bottom: 16px;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-  ul.buttons-container {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    align-items: center;
-    li {
-      height: 100%;
-      display: flex;
-      .button-wrapper {
-        padding: 0 10px;
-        display: flex;
-        .logo {
-          display: flex;
-          align-items: center;
-          margin-left: 12px;
-          img {
-            width: 18px;
-            opacity: 0.57;
-          }
-        }
-      }
-    }
+.logo.row {
+  height: 35px;
+  padding-top: 24px;
+  padding-bottom: 16px;
+  img {
+    height: 38px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  img.social {
+    height: 24px;
+    margin-left: 12px;
   }
 }
 
-.tabletOrHandset {
-  :host {
-    footer {
-      height: 195px;
-      ul.buttons-container {
-        flex-direction: column;
-      }
-    }
+.public-domain {
+  img {
+    object-fit: cover;
+    width: 80px;
+    height: 15px;
+    margin-right: 8px;
   }
 }
-.tabletOrHandset {
-  :host {
-    footer {
-      ul.buttons-container {
-        li {
-          .button-wrapper {
-            .logo {
-              margin: none;
-              margin-right: 12px;
-            }
-          }
-        }
-      }
-    }
-  }
+
+.links > :first-child {
+  padding-left: 0;
+}
+button {
+  height: 24px;
 }

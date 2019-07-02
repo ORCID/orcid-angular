@@ -1,8 +1,7 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/core'
-import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-header',
@@ -11,10 +10,11 @@ import { environment } from 'src/environments/environment'
 })
 export class HeaderComponent implements OnInit {
   currentRoute
-  tabletOrHandset
+  platformInfo
   menu = {
     researchers: {
       route: '/',
+      hover: false,
       buttons: {
         signIn: {},
         signUp: {},
@@ -63,13 +63,7 @@ export class HeaderComponent implements OnInit {
     },
   }
 
-  languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
-
-  constructor(
-    _router: Router,
-    _platformInfo: PlatformInfoService,
-    @Inject(LOCALE_ID) public locale: string
-  ) {
+  constructor(_router: Router, _platformInfo: PlatformInfoService) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(val => {
@@ -78,7 +72,7 @@ export class HeaderComponent implements OnInit {
       })
 
     _platformInfo.get().subscribe(platformInfo => {
-      this.tabletOrHandset = platformInfo.tabletOrHandset
+      this.platformInfo = platformInfo
     })
   }
 
@@ -106,8 +100,4 @@ export class HeaderComponent implements OnInit {
   }
 
   click(ul: string) {}
-
-  changeLanguage(languageKey: string) {
-    window.location.href = '/' + languageKey + '/'
-  }
 }

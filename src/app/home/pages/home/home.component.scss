@@ -1,19 +1,154 @@
-.container,
-.container.mdc-layout-grid__inner {
-  margin-bottom: 48px;
+:host {
+  width: 100%;
 }
+.hero-header {
+  height: 580px;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 72px 0;
+  box-sizing: border-box;
 
-.home-container.mdc-layout-grid__inner {
-  height: 100%;
-}
-
-.ie,
-.edge {
-  .home-container {
-    max-width: 100vw;
+  .hero-logo {
+    img {
+      height: 72px;
+    }
+  }
+  .hero-title {
+    margin: 0;
+    margin-top: 20px;
+    text-align: center;
   }
 
-  :host {
+  .hero-call-to-action {
+    max-width: 445px;
+    height: 36px;
+    margin-top: 30px;
+  }
+
+  .mat-body-2,
+  .hero-title {
+    div {
+      max-width: 1024px;
+    }
+    text-align: center;
+  }
+
+  .mat-body-2 {
+    margin-top: 8px;
+  }
+
+  .button-wrapper {
     display: flex;
+    max-width: 200px;
+  }
+}
+
+.register-section {
+  padding: 56px 0;
+  height: 400px;
+  box-sizing: border-box;
+  .number-box {
+    .col {
+      justify-content: space-around;
+    }
+    .number-circle {
+      height: 100px;
+      font-size: 1.5em;
+      width: 100px;
+      border-radius: 100%;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 60px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+  }
+
+  .mat-body-1 {
+    height: 146px;
+    text-align: center;
+  }
+  .mat-headline {
+    text-align: center;
+  }
+}
+.organization-section {
+  .mat-display-1 {
+    margin-bottom: 20px;
+  }
+  background-image: url('/assets/vectors/orcid.logo.background.svg');
+  box-sizing: border-box;
+  height: 450px;
+  padding: 50px 0;
+  background-repeat: no-repeat;
+  background-position: 90%;
+  body[dir='rtl'] :host & {
+    background-position: 10%;
+  }
+
+  .container {
+    height: 100%;
+    .row {
+      height: 100%;
+      .mat-headline {
+        margin-bottom: 24px;
+      }
+      .organization-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.colums-8,
+.colums-4 {
+  :host {
+    .hero-header {
+      background-size: cover;
+      height: auto;
+      .hero-logo {
+        img {
+          height: 50px;
+        }
+      }
+      .hero-call-to-action {
+        margin-top: 30px;
+        .button-wrapper {
+          display: flex;
+          max-width: 200px;
+        }
+      }
+    }
+
+    .register-section {
+      height: auto;
+      .mat-body-1 {
+        height: auto;
+      }
+      > .container > .row > .col {
+        margin-bottom: 20px;
+      }
+    }
+    .organization-section {
+      background-image: none;
+      height: auto;
+      padding-top: 0;
+
+      img {
+        width: 100%;
+        min-height: 366px;
+        object-fit: cover;
+      }
+      .container {
+      }
+
+      .mat-display-1 {
+        margin-top: 40px;
+        margin-bottom: 7px;
+      }
+    }
   }
 }

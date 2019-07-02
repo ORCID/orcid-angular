@@ -6,32 +6,30 @@ $config: mat-typography-config();
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  .top-bar {
-    //FIXME ACCESSIBILITY-ISSUE
-    color: mat-color($primary, '400-contrast');
-    background-color: mat-color($primary);
-  }
-  .bottom-bar {
-    color: mat-color($accent, '400-contrast');
-  }
-  .active {
-    background-color: mat-color($accent);
-    color: mat-color($primary, '400-contrast');
-  }
-  .tabletOrHandset {
+
+  app-header {
     .top-bar {
       //FIXME ACCESSIBILITY-ISSUE
-      color: map-get($foreground, text);
-      background-color: map-get($background, card);
+      color: mat-color($primary, '500-contrast');
+      background-color: mat-color($primary);
     }
-    .active button {
-      color: mat-color($primary, '400-contrast');
+    .bottom-bar {
+      color: mat-color($foreground, 'text');
     }
-  }
-}
-
-@mixin header-typography($config) {
-  .nav {
-    font-size: mat-font-size($config, title);
+    .active {
+      background: mat-color($background, 'grey');
+      color: mat-contrast($primary, 500);
+      border-radius: 0;
+    }
+    .tabletOrHandset {
+      .top-bar {
+        //FIXME ACCESSIBILITY-ISSUE
+        color: map-get($foreground, text);
+        background-color: map-get($background, card);
+      }
+      .active button {
+        color: mat-color($primary, '500-contrast');
+      }
+    }
   }
 }

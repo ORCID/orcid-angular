@@ -1,104 +1,70 @@
-.handset,
-.tablet {
-  :host {
-    margin-bottom: 50px;
-    flex-wrap: wrap;
-    .cart-container {
-      display: flex;
-      flex-wrap: wrap;
-    }
-  }
-}
-
-.handset {
-  :host {
-    padding: 50px 16px 50px 16px;
-    margin-left: -16px;
-    margin-right: -16px;
-
-    .card {
-      flex: 1 1 100%;
-    }
-  }
-}
-
-.tablet {
-  :host {
-    padding: 50px 24px 50px 24px;
-    margin-left: -24px;
-    margin-right: -24px;
-    .cart-container {
-      margin-left: -16px;
-    }
-    .card {
-      margin: 0 0 14px 14px;
-      flex: 1 1 33%;
-    }
-  }
-}
-
-:host {
-  display: flex;
-  padding: 50px 26px 50px 16px;
-  flex-direction: column;
-  margin-top: -24px;
-  margin-right: -24px;
-}
-
-.ie.desktop,
-.edge.desktop {
-  :host {
-    display: block;
+.title-box {
+  h2 {
     margin: 0;
-    transform: translateX(66px);
+    margin-top: 52px;
+    margin-bottom: 9px;
+  }
+
+  button {
+    margin-left: 4px;
   }
 }
-.date {
-  margin-bottom: 10px;
-}
 
-.card {
-  padding: 19px 16px;
-  box-shadow: 0 3px 6px 0px rgba(0, 0, 0, 0.16);
-  margin-bottom: 14px;
-  cursor: pointer;
-}
+.news-box > .col > .row {
+  text-align: center;
+  height: 312px;
 
-button {
-  width: 160px;
-  margin-left: auto;
-}
-
-.author {
-  margin-top: 8px;
+  padding-top: 32px;
+  box-sizing: border-box;
+  :first-child {
+    max-height: 115px;
+  }
+  p {
+    margin: 0;
+    max-width: 360px;
+  }
 }
 
 .spinner-container {
-  display: flex;
-  height: 100%;
-  justify-content: space-around;
-  /* flex-direction: column; */
-  padding-top: 33%;
+  height: 120px;
 }
 
-// RIGHT TO LEFT
-body[dir] {
+button {
+  height: 36px;
+  padding: 0;
+  .button-text-container {
+    width: 132px;
+  }
+}
+
+.news-container,
+.spiner-container {
+  margin-top: 36px;
+}
+
+.colums-4,
+.colums-8 {
   :host {
-    margin-left: -24px;
-    margin-right: unset;
-  }
-  .tabletOrHandset {
-    :host {
-      margin-left: -16px;
-      margin-right: -16px;
+    .news-container {
+      margin-top: 0px;
     }
-  }
-  .ie.desktop,
-  .edge.desktop {
-    :host {
-      display: block;
-      margin: 0;
-      transform: translateX(-66px);
+    .news-box > .col {
+      padding: 0;
+      > .row {
+        margin-top: 40px;
+        p {
+          margin: 0;
+          max-width: none;
+        }
+        .mat-caption {
+          justify-content: space-around;
+        }
+      }
+    }
+
+    .mobile-more-news-box {
+      margin-top: 16px;
+      margin-bottom: 20px;
     }
   }
 }

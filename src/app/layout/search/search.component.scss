@@ -1,0 +1,63 @@
+:host {
+  width: 100%;
+}
+
+.language-menu {
+  margin-bottom: 18px;
+  button {
+    height: 34px;
+    div {
+      height: 34px;
+      width: auto;
+      padding: 0 12px;
+      .col {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+.search-box {
+  > div {
+    height: 42px;
+  }
+  // border: 1px solid black;
+
+  .search-where {
+    width: 115px;
+    box-sizing: border-box;
+    border-radius: 4px 0 0 4px;
+
+    padding: 0 12px;
+    > div {
+      width: 76px;
+      font-size: 16px;
+    }
+  }
+
+  .search-icon {
+    width: 45px;
+    height: 42px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  input {
+    height: 42px;
+    box-sizing: border-box;
+    padding-left: 12px;
+  }
+  mat-icon {
+    width: 12px;
+    height: 20px;
+  }
+}
+
+body[dir='rtl'] :host {
+  .search-where {
+    border-radius: 0 4px 4px 0;
+  }
+  .search-icon {
+    border-radius: 4px 0 0 4px;
+  }
+}

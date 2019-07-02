@@ -1,5 +1,6 @@
 @import '../../styles.scss-theme.scss';
 @import '../../app/layout/header/header.component.scss-theme.scss';
+@import '../../app/layout/search/search.component.scss-theme.scss';
 @import '../../app/layout/footer/footer.component.scss-theme.scss';
 @import '../../app/home/pages/home/home.component.scss-theme.scss';
 @import '../../app/home/components/news/news.component.scss-theme.scss';
@@ -11,11 +12,13 @@
 @import '../../app/profile/components/card-detail/card-detail.component.scss-theme.scss';
 @import '../../app/profile/components/card-detail-line/card-detail-line.component.scss-theme.scss';
 @import '../../app/shared/components/offline-message/offline-message.component.scss-theme.scss';
+@import '../../app/cdk/multi-row-raised-button/multi-row-raised-button/multi-row-raised-button.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include glopbal-theme($theme);
   @include header-theme($theme);
   @include header-theme($theme);
+  @include search-theme($theme);
   @include footer-theme($theme);
   @include home-theme($theme);
   @include news-theme($theme);
@@ -30,13 +33,10 @@
 }
 
 @mixin custom-components-typography($custom) {
-  @include header-typography($custom);
-  @include footer-typography($custom);
-  @include home-typography($custom);
-  @include news-typography($custom);
   @include profile-person-typography($custom);
   @include profile-person-detail-typography($custom);
   @include card-typography($custom);
   @include profile-activities-typography($custom);
   @include card-detail-typography($custom);
+  @include multi-row-raised-button-typography($custom);
 }

@@ -1,33 +1,67 @@
-<div class="count">
-  5,566,081
-  <ng-container i18n="@@public-layout.amount_ids"
-    >ORCID iDs and counting.</ng-container
-  >
-</div>
-
-<h2 i18n="@@home.latest_news">LATEST NEWS</h2>
-
-<div *ngIf="!news" class="spinner-container"></div>
-<ng-container *ngIf="news">
-  <div class="cart-container" [@listAnimation]="news.length">
-    <div
-      class="card"
-      matRipple
-      *ngFor="let new of news"
-      (click)="navigate(new.link)"
-    >
-      <div class="date">{{ new.pubDate[0].slice(0, 22) }}</div>
-      {{ new.title }}
-      <div class="author">by {{ new['dc:creator'] }}</div>
+<div class="container">
+  <div class="row title-box">
+    <div class="row">
+      <div class="col l6 m8 s3 baseline">
+        <h2 i18n="@@home.latest_news" class="mat-display-1">LATEST NEWS</h2>
+        <button
+          class="col"
+          mat-button
+          (click)="moreNews()"
+          color="primary"
+          i18n="@@home.more_news"
+          *ngIf="platform.colums12"
+        >
+          MORE NEWS
+        </button>
+      </div>
+    </div>
+    <div class="row"><mat-divider class="col l4 m8 s3"></mat-divider></div>
+  </div>
+  <div *ngIf="!news" class="container spiner-container">
+    <div class="row horizontal-center">
+      <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+      </mat-progress-spinner>
     </div>
   </div>
-
-  <button
-    mat-raised-button
-    (click)="moreNews()"
-    color="primary"
-    i18n="@@home.more_news"
-  >
-    More news
-  </button>
-</ng-container>
+</div>
+<div
+  *ngIf="news"
+  [ngClass]="{ container: platform.colums12 }"
+  class="news-container"
+>
+  <div class="row news-box" [@listAnimation]="news.length">
+    <div class="col l4 m8 s4" *ngFor="let new of news">
+      <div class="row horizontal-center">
+        <div class="col mat-caption l-auto m8">
+          {{ new.pubDate[0].slice(0, 22) }}
+        </div>
+        <p class="col mat-headline l-auto m8 s4 horizontal-center">
+          {{ new.title }}
+        </p>
+        <button
+          class="col l-auto m-auto s-auto"
+          mat-raised-button
+          (click)="navigate(new.link)"
+          color="primary"
+        >
+          <div class="button-text-container" i18n="@@ng-orcid.full.orcid">
+            FULL ARTICLE
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mobile-more-news-box">
+  <div class="row horizontal-center" *ngIf="!platform.colums12">
+    <button
+      class="col"
+      mat-button
+      (click)="moreNews()"
+      color="primary"
+      i18n="@@ng-orcid.more.news"
+    >
+      MORE NEWS
+    </button>
+  </div>
+</div>

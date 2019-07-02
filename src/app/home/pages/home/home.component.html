@@ -1,98 +1,156 @@
-<div class="home-container mdc-layout-grid__inner">
-  <div
-    [ngClass]="{
-      'mdc-layout-grid__cell--span-1': !tabletOrHandset
-    }"
-  ></div>
-  <main
-    @enterAnimation
-    [ngClass]="{
-      'mdc-layout-grid__cell--span-7': !tabletOrHandset,
-      'mdc-layout-grid__cell--span-12': tabletOrHandset
-    }"
-  >
+<main @enterAnimation>
+  <div class="hero-header">
     <div class="container">
-      <h1>
-        <ng-container i18n="@@home.distinguish_yourself">
-          DISTINGUISH YOURSELF IN
-        </ng-container>
-        <ng-container i18n="@@home.three_easy"> THREE EASY STEPS </ng-container>
-      </h1>
+      <div class="row horizontal-center">
+        <div class="col l12 m8 s4 horizontal-center hero-logo">
+          <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
+        </div>
 
-      <ng-container i18n="@@home.orcid_provides">
-        ORCID provides a persistent digital identifier that distinguishes you
-        from every other researcher and, through integration in key research
-        workflows such as manuscript and grant submission, supports automated
-        linkages between you and your professional activities ensuring that your
-        work is recognized.
-      </ng-container>
-      <a i18n="@@home.find_out_more"> Find out more</a>
-    </div>
-    <div class="container mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell--span-3">
-        <ng-container i18n="@@home.one">1</ng-container>-
-        <ng-container i18n="@@home.register">REGISTER</ng-container>
-      </div>
-      <div class="mdc-layout-grid__cell--span-9">
-        <ng-container i18n="@@home.get_your"
-          >Get your unique ORCID identifier </ng-container
-        ><ng-container i18n="@@home.register_now">Register now!</ng-container
-        ><ng-container i18n="@@home.registration_takes"
-          >Registration takes 30 seconds.</ng-container
+        <h1
+          class="col l12 m8 s4 horizontal-center hero-title"
+          [ngClass]="{
+            'mat-display-3': platform.colums12,
+            'mat-display-1': platform.colums8 || platform.colums4
+          }"
         >
-      </div>
-      <div class="mdc-layout-grid__cell--span-3">
-        <ng-container i18n="@@home.two">2</ng-container>-
-        <ng-container i18n="@@home.add_your">ADD YOUR </ng-container
-        ><ng-container i18n="@@home.person"> INFO</ng-container>
-      </div>
-      <div class="mdc-layout-grid__cell--span-9">
-        <ng-container i18n="@@home.enhance_your">
-          Enhance your ORCID record with your professional information and link
-          to your other identifiers (such as Scopus or ResearcherID or
-          LinkedIn).
-        </ng-container>
-      </div>
-      <div class="mdc-layout-grid__cell--span-3">
-        <ng-container i18n="@@home.three">3</ng-container> -<ng-container
-          i18n="@@home.user_your"
-          >USE YOUR </ng-container
-        ><ng-container i18n="@@home.orcid_id">ORCID ID</ng-container>
-      </div>
-      <div class="mdc-layout-grid__cell--span-9" i18n="@@home.include_your">
-        Include your ORCID identifier on your Webpage, when you submit
-        publications, apply for grants, and in any research workflow to ensure
-        you get credit for your work.
-      </div>
-    </div>
+          <ng-container i18n="@@home.distinguish_yourself">
+            DISTINGUISH YOURSELF IN
+          </ng-container>
+          <ng-container i18n="@@home.three_easy">THREE EASY STEPS</ng-container>
+        </h1>
 
-    <div class="container">
-      <h2 i18n="@@home.members_make">MEMBERS MAKE ORCID POSSIBLE!</h2>
-
-      <div>
-        <ng-container i18n="@@home.orcid_is">
-          ORCID is a non-profit organization supported by a global community of
-          organizational members, including research organizations, publishers,
-          funders, professional associations, and other stakeholders in the
-          research ecosystem. </ng-container
-        ><br />
-        <ng-container i18n="@@home.curious_about"
-          >Curious about who our members are?</ng-container
-        ><ng-container i18n="@@home.see_our"
-          >See our complete list of member organizations</ng-container
+        <div
+          class="col l12 m8 s4 mat-body-2 horizontal-center"
+          i18n="@@home.orcid_provides"
         >
+          ORCID provides a persistent digital identifier (an ORCID iD) that you
+          own and control, and that distinguishes you from every other
+          researcher. You can connect your iD with your professional information
+          — affiliations, grants, publications, peer review, and more. You can
+          use your iD to share your information with other systems, ensuring you
+          get recognition for all your contributions, saving you time and
+          hassle, and reducing the risk of errors.
+        </div>
+        <div class="col l12 m8 s4 horizontal-center">
+          <app-multi-row-raised-button
+            color="primary"
+            class="hero-call-to-action"
+            i18n="@@home.find_out_more"
+            >FIND OUT MORE ABOUT OUR MISSION AND VALUES
+          </app-multi-row-raised-button>
+        </div>
       </div>
     </div>
-  </main>
-  <div
-    [ngClass]="{
-      'mdc-layout-grid__cell--span-1': !tabletOrHandset
-    }"
-  ></div>
-  <app-news
-    [ngClass]="{
-      'mdc-layout-grid__cell--span-3': !tabletOrHandset,
-      'mdc-layout-grid__cell--span-12': tabletOrHandset
-    }"
-  ></app-news>
-</div>
+  </div>
+
+  <div class="register-section">
+    <div class="container ">
+      <div class="row">
+        <div class="col l4 m8 s4">
+          <div class="row number-box">
+            <div class="col l12 m8 s4">
+              <div class="number-circle" i18n="@@home.one">1</div>
+            </div>
+            <div class="col l12 m8 s4 mat-headline" i18n="@@home.register">
+              REGISTER
+            </div>
+          </div>
+          <div class="row mat-body-1 row mat-body-1 horizontal-center">
+            <ng-container i18n="@@home.get_your">
+              Get your unique ORCID identifier. It’s free and only takes a
+              minute, so
+            </ng-container>
+            <ng-container i18n="@@home.register_now"
+              >register now!</ng-container
+            >
+          </div>
+        </div>
+        <div class="col l4 m8 s4">
+          <div class="row number-box">
+            <div class="col l12 m8 s4">
+              <div class="number-circle" i18n="@@home.two">2</div>
+            </div>
+            <div class="col l12 m8 s4 mat-headline">
+              <ng-container i18n="@@home.add_your">ADD YOUR </ng-container>
+              <ng-container i18n="@@home.info">INFO</ng-container>
+            </div>
+          </div>
+          <div
+            class="row mat-body-1 horizontal-center"
+            i18n="@@home.enhance_your"
+          >
+            The more information connected to your ORCID record, the more you’ll
+            benefit from sharing your iD - so give the organizations you trust
+            permission to update your record as well as adding your
+            affiliations, emails, other names you’re known by, and more.
+          </div>
+        </div>
+        <div class="col l4 m8 s4">
+          <div class="row number-box">
+            <div class="col l12 m8 s4">
+              <div class="number-circle" i18n="@@home.three">3</div>
+            </div>
+            <div class="col l12 m8 s4 mat-headline">
+              <ng-container i18n="@@home.user_your">USE YOUR</ng-container
+              ><ng-container i18n="@@home.orcid_id"> ORCID ID</ng-container>
+            </div>
+          </div>
+          <div
+            class="row mat-body-1 horizontal-center"
+            i18n="@@home.include_your"
+          >
+            Use your iD, when prompted, in systems and platforms from grant
+            application to manuscript submission and beyond, to ensure you get
+            credit for your contributions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="organization-section">
+    <div class="col l4 m8 s4">
+      <img
+        *ngIf="platform.colums8 || platform.colums4"
+        class="organization-img"
+        src="assets/img/organizations.png  "
+        alt=""
+      />
+    </div>
+    <div class="container ">
+      <div class="row middle">
+        <div class="col l4 m8 s4">
+          <img
+            *ngIf="platform.colums12"
+            class="organization-img"
+            src="assets/img/organizations.png  "
+            alt=""
+          />
+        </div>
+        <div class="col l8 m8 mat-body-2">
+          <h2 i18n="@@home.members_make" class="mat-display-1">
+            Our organizational members make ORCID possible!
+          </h2>
+
+          <div>
+            <div i18n="@@home.orcid_is">
+              ORCID is a non-profit organization supported by a global community
+              of member organizations, including research institutions,
+              publishers, funders, professional associations, service providers,
+              and other stakeholders in the research ecosystem.
+            </div>
+            <br />
+            <div i18n="@@home.curious_about">
+              Curious about who our members are?
+            </div>
+            <div i18n="@@home.see_our">
+              See our complete list of member organizations
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-news></app-news>
+</main>

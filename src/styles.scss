@@ -1,20 +1,3 @@
-@import '~@material/layout-grid/mdc-layout-grid';
-@import './assets/scss/material.scss';
-@font-face {
-  font-family: 'Noto Sans';
-  font-display: swap;
-  src: url('./assets/fonts/NotoSans-Regular.woff') format('woff'),
-    url('./assets/fonts/NotoSans-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Noto Sans';
-  font-display: swap;
-  src: url('./assets/fonts/NotoSans-Bold.woff') format('woff'),
-    url('./assets/fonts/NotoSans-Bold.ttf') format('truetype');
-  font-weight: bold;
-}
-
 @font-face {
   font-family: 'Material Icons';
   font-display: swap;
@@ -66,7 +49,7 @@ app-root {
   flex-direction: column;
 }
 .router-container {
-  padding-bottom: 46px; //remove footer height
+  padding-bottom: 146px; //remove footer height
   height: 100%;
 }
 
@@ -78,4 +61,12 @@ app-footer {
 
 .staticTranslations {
   display: none;
+}
+
+:focus {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
 }

@@ -9,11 +9,11 @@ import { PlatformInfoService } from 'src/app/core'
   animations: [enterAnimation],
 })
 export class HomeComponent implements OnInit {
-  tabletOrHandset
+  platform
 
   constructor(_platformInfo: PlatformInfoService) {
     _platformInfo.get().subscribe(platformInfo => {
-      this.tabletOrHandset = platformInfo.tabletOrHandset
+      this.platform = platformInfo
     })
   }
 
