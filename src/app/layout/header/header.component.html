@@ -41,12 +41,7 @@
         <ul class="row" *ngIf="!(platform.columns12 && parents.length > 1)">
           <li class="col no-gutters" *ngFor="let item of list">
             <button
-              *ngIf="
-                !(
-                  (item.hideOnDesktop && platform.columns12) ||
-                  (item.hideOnHandset && !platform.columns12)
-                )
-              "
+              *ngIf="checkMenuItemRequirements(item.requirements) === true"
               [ngClass]="{
                 active: item.activeRoute === currentRoute
               }"
@@ -82,11 +77,24 @@
           context: { $implicit: menu, parents: [] }
         "
       ></ng-container>
-      <ul class="row" *ngIf="!platform.columns12">
-        <li class="col no-gutters">
+      <ul class="row" *ngIf="checkMenuItemRequirements({ desktop: false })">
+        <li
+          class="col no-gutters"
+          *ngIf="checkMenuItemRequirements({ logging: false })"
+        >
           <button mat-stroked-button class="sign-in-button">
             <ng-container i18n="@@header.signin">SIGN IN</ng-container
             >/<ng-container i18n="@@header.register">REGISTER</ng-container>
+          </button>
+        </li>
+        <li
+          class="col no-gutters"
+          *ngIf="checkMenuItemRequirements({ logging: true })"
+        >
+          <button mat-stroked-button class="sign-in-button">
+            <ng-container i18n="@@public-layout.sign_out"
+              >SIGN OUT</ng-container
+            >
           </button>
         </li>
       </ul>

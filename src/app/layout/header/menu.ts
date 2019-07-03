@@ -12,22 +12,143 @@ export const menu: ApplicationMenuItemBasic[] = [
         id: 'public-layout.for_researchers',
         route: '/about/what-is-orcid/mission',
         label: LOCALE['public-layout.for_researchers'],
-        hideOnDesktop: true,
+
+        requirements: { logging: false, desktop: false },
       },
       {
         route: '/signin',
         id: 'public-layout.sign_in',
         label: LOCALE['public-layout.sign_in'],
+        requirements: { logging: false },
       },
       {
         route: '/register',
         id: 'login.registerOrcidId',
         label: LOCALE['login.registerOrcidId'],
+        requirements: { logging: false },
+      },
+      {
+        id: 'public-layout.my_orcid',
+        route: '/my-orcid',
+        label: LOCALE['public-layout.my_orcid'],
+        requirements: {
+          logging: true,
+          requiresAll: [{ IN_DELEGATION_MODE: 'true' }],
+        },
+      },
+      {
+        route: '/my-orcid',
+        id: 'public-layout.my_orcid_record',
+        label: LOCALE['public-layout.my_orcid_record'],
+        requirements: {
+          logging: true,
+          requiresAll: [{ IN_DELEGATION_MODE: 'false' }],
+        },
+      },
+      {
+        route: '/inbox',
+        id: 'workspace.notifications',
+        label: LOCALE['workspace.notifications'],
+        requirements: { logging: true },
+      },
+      {
+        route: '/account',
+        id: 'public-layout.account_setting',
+        label: LOCALE['public-layout.account_setting'],
+        requirements: { logging: true },
+      },
+      {
+        route: '/group/developer-tools',
+        id: 'workspace.developer_tools',
+        label: LOCALE['workspace.developer_tools'],
+        requirements: {
+          logging: true,
+          requiresAll: [
+            {
+              MEMBER_MENU: 'true',
+            },
+          ],
+          requiresAny: [
+            {
+              DELEGATED_BY_ADMIN: 'true',
+            },
+            { IN_DELEGATION_MODE: 'false' },
+          ],
+        },
+      },
+      {
+        route: '/developer-tools',
+        id: 'workspace.developer_tools2',
+        label: LOCALE['workspace.developer_tools'],
+        requirements: {
+          logging: true,
+          requiresAll: [
+            {
+              MEMBER_MENU: 'false',
+            },
+          ],
+          requiresAny: [
+            {
+              DELEGATED_BY_ADMIN: 'true',
+            },
+            { IN_DELEGATION_MODE: 'false' },
+          ],
+        },
+      },
+      {
+        route: '/manage-members',
+        id: 'admin.members.workspace_link',
+        label: LOCALE['admin.members.workspace_link'],
+        requirements: {
+          logging: true,
+          requiresAll: [
+            {
+              ADMIN_MENU: 'true',
+            },
+          ],
+        },
+      },
+      {
+        route: '/admin-actions',
+        id: 'admin.workspace_link',
+        label: LOCALE['admin.workspace_link'],
+        requirements: {
+          logging: true,
+          requiresAll: [
+            {
+              ADMIN_MENU: 'true',
+            },
+          ],
+        },
+      },
+      {
+        route: '/self-service',
+        id: 'workspace.self_service',
+        label: LOCALE['workspace.self_service'],
+        requirements: {
+          logging: true,
+          requiresAll: [
+            {
+              SELF_SERVICE_MENU: 'true',
+            },
+          ],
+        },
+      },
+      {
+        route: '/content/initiative',
+        id: 'manage_delegators.learn_more.link.text',
+        label: LOCALE['manage_delegators.learn_more.link.text'],
+        requirements: {
+          logging: true,
+        },
       },
       {
         route: '/about/what-is-orcid/mission',
         id: 'manage_delegators.learn_more.link.text',
         label: LOCALE['manage_delegators.learn_more.link.text'],
+        requirements: {
+          logging: false,
+        },
       },
     ],
   },
@@ -41,7 +162,7 @@ export const menu: ApplicationMenuItemBasic[] = [
         label: LOCALE['public-layout.for_organizations'],
         id: 'organizations',
         route: '/organizations',
-        hideOnDesktop: true,
+        requirements: { desktop: false },
       },
       {
         label: LOCALE['public-layout.funders'],
@@ -214,7 +335,7 @@ export const menu: ApplicationMenuItemBasic[] = [
       {
         id: 'about',
         label: LOCALE['public-layout.about'],
-        hideOnDesktop: true,
+        requirements: { desktop: false },
       },
 
       {
@@ -380,6 +501,16 @@ export const menu: ApplicationMenuItemBasic[] = [
           },
         ],
       },
+      {
+        id: 'public-layout.news',
+        label: LOCALE['public-layout.news'],
+        route: '/about/news/news',
+      },
+      {
+        id: 'public-layout.events',
+        label: LOCALE['public-layout.events'],
+        route: '/about/events',
+      },
     ],
   },
   {
@@ -391,8 +522,8 @@ export const menu: ApplicationMenuItemBasic[] = [
       {
         id: 'help',
         label: LOCALE['public-layout.help'],
-        hideOnDesktop: true,
         route: '/help',
+        requirements: { desktop: false },
       },
       {
         id: 'faq',
@@ -417,9 +548,15 @@ export const menu: ApplicationMenuItemBasic[] = [
     ],
   },
   {
-    id: 'signIn',
+    id: 'public-layout.sign_in',
     label: LOCALE['public-layout.sign_in'],
-    hideOnHandset: true,
+    requirements: { desktop: true, logging: false },
     route: '/signin',
+  },
+  {
+    id: 'public-layout.sign_out',
+    label: LOCALE['public-layout.sign_out'],
+    requirements: { desktop: true, logging: true },
+    route: '/signout',
   },
 ]

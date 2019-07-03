@@ -4,10 +4,9 @@ export interface ApplicationMenuItem {
   route?: string
   hover: boolean
   active: boolean
-  hideOnDesktop?: boolean
-  hideOnHandset?: boolean
   buttons?: ApplicationMenuItem[]
   activeRoute?: string
+  requirements?: MenuItemRequirement
 }
 
 export interface ApplicationMenuItemBasic {
@@ -15,7 +14,17 @@ export interface ApplicationMenuItemBasic {
   label: string
   route?: string
   buttons?: ApplicationMenuItemBasic[]
-  hideOnDesktop?: boolean
-  hideOnHandset?: boolean
   activeRoute?: string
+  requirements?: MenuItemRequirement
+}
+
+export interface MenuItemRequirement {
+  logging?: boolean
+  desktop?: boolean
+  requiresAll?: Requirement[]
+  requiresAny?: Requirement[]
+}
+
+export interface Requirement {
+  [key: string]: string
 }

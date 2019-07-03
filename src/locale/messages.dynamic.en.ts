@@ -1,6 +1,7 @@
 // prettier-ignore
 /* tslint:disable */
 export const LOCALE : {[key:string]: string} = {
+  "public-layout.sign_out": "Sign out",
   "public-layout.for_researchers": "For Researchers",
   "public-layout.for_organizations": "For Organizations",
   "public-layout.about": "About",
@@ -49,7 +50,6 @@ export const LOCALE : {[key:string]: string} = {
   "ngOrcid.standartCreatorAgreement": "Standard Creator Member Agreement",
   "ngOrcid.blog": "Blog",
   "ngOrcid.subscribe": " Subscribe!",
-  "public-layout.sign_out": "Sign out",
   "ngOrcid.disputeProcedures": "Dispute Procedures",
   "change_email_preferences.privacyPolicy": "privacy policy",
   "developer_tools.public_member.terms.check_2": "Public Client Terms of Service",
@@ -58,5 +58,14 @@ export const LOCALE : {[key:string]: string} = {
   "public-layout.trademarkAndIdDisplayGuidelines": "Trademark and iD Display Guidelines",
   "layout.public-layout.registry": "registry",
   "layout.public-layout.website": "website",
-  "orcid_bio_search.btnsearch": "Search"
+  "orcid_bio_search.btnsearch": "Search",
+  "public-layout.edit_your_record": "Edit your record",
+  "public-layout.account_setting": "Account Settings",
+  "workspace.developer_tools": "Developer tools",
+  "admin.members.workspace_link": "Manage members",
+  "admin.workspace_link": "Admin page",
+  "workspace.self_service": "Member Tools",
+  "public-layout.my_orcid": "ORCID Record",
+  "public-layout.my_orcid_record": "My ORCID Record",
+  "workspace.notifications": "Inbox"
 }

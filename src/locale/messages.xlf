@@ -3,7 +3,7 @@
   <file original="ng.template" id="ngi18n">
     <unit id="header.signin">
       <notes>
-        <note category="location">app/layout/header/header.component.html:88</note>
+        <note category="location">app/layout/header/header.component.html:86</note>
       </notes>
       <segment>
         <source>SIGN IN</source>
@@ -11,15 +11,24 @@
     </unit>
     <unit id="header.register">
       <notes>
-        <note category="location">app/layout/header/header.component.html:89</note>
+        <note category="location">app/layout/header/header.component.html:87</note>
       </notes>
       <segment>
         <source>REGISTER</source>
       </segment>
     </unit>
+    <unit id="public-layout.sign_out">
+      <notes>
+        <note category="location">app/layout/header/header.component.html:96</note>
+        <note category="location">locale/i18n.pseudo.component.html:56</note>
+      </notes>
+      <segment>
+        <source>SIGN OUT</source>
+      </segment>
+    </unit>
     <unit id="public-layout.amount_ids">
       <notes>
-        <note category="location">app/layout/header/header.component.html:102</note>
+        <note category="location">app/layout/header/header.component.html:110</note>
       </notes>
       <segment>
         <source>ORCID iDs and counting.</source>
@@ -679,6 +688,7 @@
     <unit id="manage_delegators.learn_more.link.text">
       <notes>
         <note category="location">locale/i18n.pseudo.component.html:10</note>
+        <note category="location">locale/i18n.pseudo.component.html:82</note>
       </notes>
       <segment>
         <source>Learn more</source>
@@ -1012,14 +1022,6 @@
         <source> Subscribe!</source>
       </segment>
     </unit>
-    <unit id="public-layout.sign_out">
-      <notes>
-        <note category="location">locale/i18n.pseudo.component.html:56</note>
-      </notes>
-      <segment>
-        <source>Sign out</source>
-      </segment>
-    </unit>
     <unit id="ngOrcid.disputeProcedures">
       <notes>
         <note category="location">locale/i18n.pseudo.component.html:58</note>
@@ -1090,6 +1092,78 @@
       </notes>
       <segment>
         <source>Search...</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.edit_your_record">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:76</note>
+      </notes>
+      <segment>
+        <source>Edit your record </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.account_setting">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:77</note>
+      </notes>
+      <segment>
+        <source>Account Settings</source>
+      </segment>
+    </unit>
+    <unit id="workspace.developer_tools">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:78</note>
+      </notes>
+      <segment>
+        <source>Developer tools</source>
+      </segment>
+    </unit>
+    <unit id="admin.members.workspace_link">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:79</note>
+      </notes>
+      <segment>
+        <source>Manage members</source>
+      </segment>
+    </unit>
+    <unit id="admin.workspace_link">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:80</note>
+      </notes>
+      <segment>
+        <source>Admin page</source>
+      </segment>
+    </unit>
+    <unit id="workspace.self_service">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:81</note>
+      </notes>
+      <segment>
+        <source>Member Tools</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.my_orcid">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:83</note>
+      </notes>
+      <segment>
+        <source>ORCID Record</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.my_orcid_record">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:84</note>
+      </notes>
+      <segment>
+        <source>My ORCID Record</source>
+      </segment>
+    </unit>
+    <unit id="workspace.notifications">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:85</note>
+      </notes>
+      <segment>
+        <source>Inbox</source>
       </segment>
     </unit>
   </file>
