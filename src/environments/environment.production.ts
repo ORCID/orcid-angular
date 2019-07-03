@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  API_NEWS: 'https://orcid.org/blog/feed',
-  API_WEB: 'https://orcid.org/',
-  BASE_URL: 'https://orcid.org/',
+  API_NEWS: 'https://orcid.herokuapp.com/https://orcid.org/blog/feed',
+  API_WEB: 'https://localhost:8443/orcid-web/',
+  BASE_URL: 'https://localhost:8443/orcid-web/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',

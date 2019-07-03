@@ -25,7 +25,7 @@
       <notes>
         <note category="description">#upperCase</note>
         <note category="location">app/layout/header/header.component.html:94</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:30</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:29</note>
       </notes>
       <segment>
         <source>REGISTER</source>
@@ -125,18 +125,6 @@
             </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.advanceSearch">
-      <notes>
-        <note category="location">app/layout/search/search.component.html:12,14</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:67,68</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:81,82</note>
-      </notes>
-      <segment>
-        <source>
-    ADVANCED SEARCH
-  </source>
-      </segment>
-    </unit>
     <unit id="public-layout.sign_in">
       <notes>
         <note category="description">#upperCase</note>
@@ -149,7 +137,7 @@
     </unit>
     <unit id="ngOrcid.viewMyOrcid">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:40,42</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:45,47</note>
       </notes>
       <segment>
         <source>
@@ -159,7 +147,7 @@
     </unit>
     <unit id="workspace.notifications">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:48</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:53</note>
         <note category="location">locale/i18n.pseudo.component.html:75</note>
       </notes>
       <segment>
@@ -168,16 +156,26 @@
     </unit>
     <unit id="ngOrcid.accountSetting">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:53,54</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:58,59</note>
       </notes>
       <segment>
         <source>Account settings
     </source>
       </segment>
     </unit>
+    <unit id="ngOrcid.advanceSearch">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:72,73</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:86,87</note>
+      </notes>
+      <segment>
+        <source>Developer tools
+    </source>
+      </segment>
+    </unit>
     <unit id="ngOrcid.selfService">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:87,88</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:92,93</note>
       </notes>
       <segment>
         <source>Member tools
@@ -187,7 +185,7 @@
     <unit id="ngOrcid.manageMembers">
       <notes>
         <note category="description">#sentenceCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:95</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:100</note>
       </notes>
       <segment>
         <source>Manage members</source>
@@ -195,7 +193,7 @@
     </unit>
     <unit id="ngOrcid.adminPage">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:101</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:106</note>
       </notes>
       <segment>
         <source>Admin page</source>
@@ -203,7 +201,7 @@
     </unit>
     <unit id="ngOrcid.logout">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:106</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:111</note>
       </notes>
       <segment>
         <source>Logout</source>

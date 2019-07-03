@@ -7,11 +7,7 @@
   (menuOpened)="state = true"
   (menuClosed)="state = false"
 >
-  <img
-    *ngIf="platform.columns12"
-    src="./assets/vectors/profile-icon.svg"
-    alt=""
-  />
+  <img src="./assets/vectors/profile-icon.svg" alt="" />
   <ng-container *ngIf="platform.columns12" class="name-container">{{
     displayName
   }}</ng-container>

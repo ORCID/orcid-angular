@@ -1,5 +1,12 @@
 header.container {
-  height: 179px;
+  height: 130px;
+  .logo-menu-container {
+    .logo-container {
+      .mat-body-2 {
+        line-height: 16px;
+      }
+    }
+  }
   padding-bottom: 21px;
   img {
     height: 50px;
@@ -80,6 +87,9 @@ nav {
         display: flex;
         justify-content: space-between;
         .logo-container {
+          .mat-body-2 {
+            line-height: 16px;
+          }
           img {
             height: 35px;
           }

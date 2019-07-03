@@ -50,7 +50,7 @@ export const LOCALE : {[key:string]: string} = {
   "public-layout.our_members": "Our Members",
   "ngOrcid.standartCreatorAgreement": "STANDARD CREATOR MEMBER AGREEMENT",
   "ngOrcid.blog": "BLOG",
-  "ngOrcid.subscribe": " SUBSCRIBE!",
+  "ngOrcid.subscribe": "SUBSCRIBE!",
   "ngOrcid.disputeProcedures": "DISPUTE PROCEDURES",
   "change_email_preferences.privacyPolicy": "privacy policy",
   "developer_tools.public_member.terms.check_2": "Public Client Terms of Service",
