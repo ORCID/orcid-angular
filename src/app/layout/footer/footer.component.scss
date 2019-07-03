@@ -1,4 +1,4 @@
-:host {
+footer {
   padding-bottom: 16px;
 }
 ul {
@@ -11,8 +11,11 @@ ul {
   height: 35px;
   padding-top: 24px;
   padding-bottom: 16px;
+  > .col {
+    width: 260px;
+  }
   img {
-    height: 38px;
+    height: 41px;
     width: auto;
     object-fit: cover;
   }
@@ -20,6 +23,10 @@ ul {
   img.social {
     height: 24px;
     margin-left: 12px;
+    [dir] :host & {
+      margin-left: auto;
+      margin-right: 12px;
+    }
   }
 }
 
@@ -29,12 +36,35 @@ ul {
     width: 80px;
     height: 15px;
     margin-right: 8px;
+    [dir] :host & {
+      margin-right: auto;
+      margin-left: 8px;
+    }
+  }
+
+  .CC0 {
+    text-align: center;
+    .columns-4 :host &,
+    .columns-8 :host & {
+      padding-bottom: 15px;
+    }
   }
 }
 
-.links > :first-child {
-  padding-left: 0;
-}
-button {
-  height: 24px;
+.links {
+  > div {
+    > :first-child {
+      padding-left: 0;
+    }
+    li {
+      .columns-4 :host &,
+      .columns-8 :host & {
+        justify-content: space-around;
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 0 12px;
+      }
+    }
+  }
 }

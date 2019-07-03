@@ -45,50 +45,52 @@
     </unit>
     <unit id="footer.privacypolicy">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:36,38</note>
+        <note category="location">app/layout/footer/footer.component.html:41,43</note>
       </notes>
       <segment>
         <source>
-            Privacy Policy
-          </source>
+              Privacy Policy
+            </source>
       </segment>
     </unit>
     <unit id="footer.termsofuse">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:43,45</note>
+        <note category="location">app/layout/footer/footer.component.html:52,54</note>
       </notes>
       <segment>
         <source>
-            Terms of Use
-          </source>
+              Terms of Use
+            </source>
       </segment>
     </unit>
     <unit id="ng-orcid.disputeProcedure">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:50,52</note>
+        <note category="location">app/layout/footer/footer.component.html:63,65</note>
       </notes>
       <segment>
         <source>
-            Dispute procedures
-          </source>
+              Dispute procedures
+            </source>
       </segment>
     </unit>
     <unit id="footer.contactus">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:57</note>
+        <note category="location">app/layout/footer/footer.component.html:74,76</note>
       </notes>
       <segment>
-        <source>Contact us</source>
+        <source>
+              Contact us
+            </source>
       </segment>
     </unit>
     <unit id="ng-orcid.trademark">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:62,64</note>
+        <note category="location">app/layout/footer/footer.component.html:85,87</note>
       </notes>
       <segment>
         <source>
-            Trademark &amp; iD guidelines
-          </source>
+              Trademark &amp; iD guidelines
+            </source>
       </segment>
     </unit>
     <unit id="ng-orcid.advanceSearch">
