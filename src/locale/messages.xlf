@@ -501,6 +501,16 @@
         </source>
       </segment>
     </unit>
+    <unit id="ng-orcid.full.orcid">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:44,46</note>
+      </notes>
+      <segment>
+        <source>
+              FULL ARTICLE
+            </source>
+      </segment>
+    </unit>
     <unit id="ng-orcid.more.news">
       <notes>
         <note category="location">app/home/components/news/news.component.html:61,63</note>

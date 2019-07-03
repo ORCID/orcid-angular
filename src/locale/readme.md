@@ -1,0 +1,8 @@
+The translation script generates the `message.translation.log.json` file, which contains a list of objects for all supported i18n codes, each with the following parameters:
+
+| Parameter       | Description                                                                                                                                                                                                                                 |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| notFound        | A list of unexisting translation IDs on the properties files.                                                                                                                                                                               |
+| unexistingFiles | A list of unexisting translations file URLs on [GitHub](https://github.com/ORCID/ORCID-Source/tree/master/orcid-core/src/main/resources/i18n).                                                                                              |
+| changed         | A list of objects that represent the translations that were altered through the script. Each contains the translation `id`, the original `translation` on the properties files, and the `replacement` that the script sets.                 |
+| unmatch         | This parameter can only be present on the English language `en`, it shows which translations do not match between the templates and the properties files. Each contains the `id` of the translation, `textOnTemplate` and `textOnProperty`. |

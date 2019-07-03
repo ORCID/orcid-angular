@@ -1,0 +1,72 @@
+{
+  "rewrites": [
+    {
+      "source": "/en/**",
+      "destination": "/en/index.html"
+    },
+    {
+      "source": "/ar/**",
+      "destination": "/ar/index.rtl.html"
+    },
+    {
+      "source": "/es/**",
+      "destination": "/es/index.html"
+    },
+    {
+      "source": "/ca/**",
+      "destination": "/ca/index.html"
+    },
+    {
+      "source": "/cs/**",
+      "destination": "/cs/index.html"
+    },
+    {
+      "source": "/fr/**",
+      "destination": "/fr/index.html"
+    },
+    {
+      "source": "/it/**",
+      "destination": "/it/index.html"
+    },
+    {
+      "source": "/ja/**",
+      "destination": "/ja/index.html"
+    },
+    {
+      "source": "/ko/**",
+      "destination": "/ko/index.html"
+    },
+    {
+      "source": "/lr/**",
+      "destination": "/lr/index.html"
+    },
+    {
+      "source": "/pt/**",
+      "destination": "/pt/index.html"
+    },
+    {
+      "source": "/rl/**",
+      "destination": "/rl/index.html"
+    },
+    {
+      "source": "/ru/**",
+      "destination": "/ru/index.html"
+    },
+    {
+      "source": "/uk/**",
+      "destination": "/uk/index.html"
+    },
+    {
+      "source": "/xx/**",
+      "destination": "/xx/index.html"
+    },
+    {
+      "source": "/zh-CN/**",
+      "destination": "/zh-TW/index.html"
+    },
+    {
+      "source": "/zh-TW/**",
+      "destination": "/zh-TW/index.html"
+    }
+  ]
+}

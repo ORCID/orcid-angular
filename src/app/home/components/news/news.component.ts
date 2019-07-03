@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { listAnimation } from 'src/app/animations'
-import { NewsService, PlatformInfoService } from 'src/app/core'
+import { NewsService, PlatformInfoService, WINDOW } from 'src/app/core'
 import { environment } from 'src/environments/environment.sandbox'
 
 @Component({
@@ -14,7 +14,8 @@ export class NewsComponent implements OnInit {
   platform
   constructor(
     private _news: NewsService,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    @Inject(WINDOW) private window: Window
   ) {
     _platform.platformSubject.subscribe(data => {
       this.platform = data
@@ -28,10 +29,10 @@ export class NewsComponent implements OnInit {
   }
 
   navigate(url) {
-    window.location.href = url[0]
+    this.window.location.href = url[0]
   }
 
   moreNews() {
-    window.location.href = environment.BLOG_NEWS
+    this.window.location.href = environment.BLOG_NEWS
   }
 }

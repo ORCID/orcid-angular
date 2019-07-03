@@ -1,0 +1,593 @@
+{
+  "language": {
+    "ar": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ar.properties"
+      ],
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "ca": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_ca.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_ca.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/javascript_ca.properties"
+      ],
+      "notFound": [
+        "public-layout.for_researchers",
+        "public-layout.for_organizations",
+        "public-layout.about",
+        "public-layout.help",
+        "public-layout.sign_in",
+        "public-layout.register",
+        "public-layout.funders",
+        "public-layout.publishers",
+        "public-layout.research_organizations",
+        "public-layout.associations",
+        "public-layout.integrators",
+        "public-layout.what_is_orcid",
+        "public-layout.the_orcid_team",
+        "public-layout.the_orcid_community",
+        "public-layout.membership",
+        "public-layout.news",
+        "public-layout.events",
+        "public-layout.faq",
+        "public-layout.contact_us",
+        "public-layout.give_feedback",
+        "public-layout.knowledge_base",
+        "public-layout.amount_ids",
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "footer.privacypolicy",
+        "footer.termsofuse",
+        "ng-orcid.dispute.procedure",
+        "footer.contactus",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "public_profile.empty_profile",
+        "ng-orcid.clickToCopyCopied?",
+        "public_record.printHelpText",
+        "public_profile.labelKeywords",
+        "public_profile.labelCountry",
+        "public_profile.labelAlsoknownas",
+        "public_profile.labelWebsites",
+        "public_profile.labelOtherIDs",
+        "manage.emails",
+        "public_profile.labelBiography",
+        "ng-orcid.present?",
+        "public_record.showDetails",
+        "public_record.hideDetails",
+        "groups.common.source",
+        "groups.common.preferred_source",
+        "search_results.of",
+        "notifications.show_more",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "notifications.works_label",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "workspace_affiliations.organization_id",
+        "workspace_affiliations.external_ids",
+        "org.orcid.jaxb.model.message.AffiliationType.employment",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "cs": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?"
+      ]
+    },
+    "en": {
+      "unmatch": [
+        {
+          "id": "footer.copyright_cc0_2",
+          "textOnTemplate": "CC0 license",
+          "textOnProperty": "CC0 license."
+        },
+        {
+          "id": "home.orcid_provides",
+          "textOnTemplate": "ORCID provides a persistent digital identifier that distinguishes you from every other researcher and, through integration in key research workflows such as manuscript and grant submission, supports automated linkages between you and your professional activities ensuring that your work is recognized.",
+          "textOnProperty": "ORCID provides a persistent digital identifier (an ORCID iD) that you own and control, and that distinguishes you from every other researcher. You can connect your iD with your professional information — affiliations, grants, publications, peer review, and more. You can use your iD to share your information with other systems, ensuring you get recognition for all your contributions, saving you time and hassle, and reducing the risk of errors."
+        },
+        {
+          "id": "home.find_out_more",
+          "textOnTemplate": "Find out more",
+          "textOnProperty": "FIND OUT MORE ABOUT OUR MISSION AND VALUES"
+        },
+        {
+          "id": "home.get_your",
+          "textOnTemplate": "Get your unique ORCID identifier",
+          "textOnProperty": "Get your unique ORCID identifier. It’s free and only takes a minute, so"
+        },
+        {
+          "id": "home.register_now",
+          "textOnTemplate": "Register now!",
+          "textOnProperty": "register now!"
+        },
+        {
+          "id": "home.enhance_your",
+          "textOnTemplate": "Enhance your ORCID record with your professional information and link to your other identifiers (such as Scopus or ResearcherID or LinkedIn).",
+          "textOnProperty": "The more information connected to your ORCID record, the more you’ll benefit from sharing your iD - so give the organizations you trust permission to update your record as well as adding your affiliations, emails, other names you’re known by, and more."
+        },
+        {
+          "id": "home.include_your",
+          "textOnTemplate": "Include your ORCID identifier on your Webpage, when you submit publications, apply for grants, and in any research workflow to ensure you get credit for your work.",
+          "textOnProperty": "Use your iD, when prompted, in systems and platforms from grant application to manuscript submission and beyond, to ensure you get credit for your contributions."
+        },
+        {
+          "id": "home.members_make",
+          "textOnTemplate": "MEMBERS MAKE ORCID POSSIBLE!",
+          "textOnProperty": "Our organizational members make ORCID possible!"
+        },
+        {
+          "id": "home.orcid_is",
+          "textOnTemplate": "ORCID is a non-profit organization supported by a global community of organizational members, including research organizations, publishers, funders, professional associations, and other stakeholders in the research ecosystem.",
+          "textOnProperty": "ORCID is a non-profit organization supported by a global community of member organizations, including research institutions, publishers, funders, professional associations, service providers, and other stakeholders in the research ecosystem."
+        },
+        {
+          "id": "home.more_news",
+          "textOnTemplate": "More news",
+          "textOnProperty": "MORE NEWS"
+        },
+        {
+          "id": "groups.common.last_modified",
+          "textOnTemplate": "Last modified",
+          "textOnProperty": "Last Modified"
+        }
+      ],
+      "notFound": [
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?"
+      ]
+    },
+    "es": {
+      "changed": [
+        {
+          "id": "public-layout.for_researchers",
+          "translation": "Para<br />investigadores",
+          "replacement": "Para investigadores"
+        },
+        {
+          "id": "public-layout.for_organizations",
+          "translation": "Para<br />organizaciones",
+          "replacement": "Para organizaciones"
+        },
+        {
+          "id": "public-layout.about",
+          "translation": "Quiénes<br />somos",
+          "replacement": "Quiénes somos"
+        },
+        {
+          "id": "public-layout.sign_in",
+          "translation": "Iniciar<br />sesión",
+          "replacement": "Iniciar sesión"
+        }
+      ],
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "fr": {
+      "changed": [
+        {
+          "id": "public-layout.for_researchers",
+          "translation": "Pour les<br /> chercheurs",
+          "replacement": "Pour les  chercheurs"
+        },
+        {
+          "id": "public-layout.for_organizations",
+          "translation": "Pour les<br /> organismes",
+          "replacement": "Pour les  organismes"
+        }
+      ],
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "it": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "ja": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?"
+      ]
+    },
+    "ko": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "lr": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_lr.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_lr.properties"
+      ],
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?"
+      ]
+    },
+    "pt": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "rl": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_rl.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_rl.properties"
+      ],
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?"
+      ]
+    },
+    "ru": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "uk": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_uk.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_uk.properties"
+      ],
+      "notFound": [
+        "public-layout.for_researchers",
+        "public-layout.for_organizations",
+        "public-layout.about",
+        "public-layout.help",
+        "public-layout.sign_in",
+        "public-layout.register",
+        "public-layout.funders",
+        "public-layout.publishers",
+        "public-layout.research_organizations",
+        "public-layout.associations",
+        "public-layout.integrators",
+        "public-layout.what_is_orcid",
+        "public-layout.the_orcid_team",
+        "public-layout.the_orcid_community",
+        "public-layout.membership",
+        "public-layout.news",
+        "public-layout.events",
+        "public-layout.faq",
+        "public-layout.contact_us",
+        "public-layout.give_feedback",
+        "public-layout.knowledge_base",
+        "public-layout.amount_ids",
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "footer.privacypolicy",
+        "footer.termsofuse",
+        "ng-orcid.dispute.procedure",
+        "footer.contactus",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "public_profile.empty_profile",
+        "ng-orcid.clickToCopyCopied?",
+        "public_record.printHelpText",
+        "public_profile.labelKeywords",
+        "public_profile.labelCountry",
+        "public_profile.labelAlsoknownas",
+        "public_profile.labelWebsites",
+        "public_profile.labelOtherIDs",
+        "manage.emails",
+        "public_profile.labelBiography",
+        "ng-orcid.present?",
+        "public_record.showDetails",
+        "public_record.hideDetails",
+        "groups.common.source",
+        "groups.common.preferred_source",
+        "search_results.of",
+        "notifications.show_more",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "notifications.works_label",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "workspace_affiliations.organization_id",
+        "workspace_affiliations.external_ids",
+        "org.orcid.jaxb.model.message.AffiliationType.employment",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "xx": {
+      "unexistingFiles": [
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_xx.properties",
+        "https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_xx.properties"
+      ],
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?"
+      ]
+    },
+    "zh_CN": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    },
+    "zh_TW": {
+      "notFound": [
+        "footer.copyright_cc0_1",
+        "footer.copyright_cc0_2",
+        "ng-orcid.dispute.procedure",
+        "ng-orcid.trademark",
+        "ng-orcid.full.orcid",
+        "ng-orcid.more.news",
+        "ng-orcid.clickToCopyCopied?",
+        "ng-orcid.present?",
+        "ng.show_less?",
+        "groups.common.added",
+        "groups.common.last_modified",
+        "ng-orcid.paginatorNextPageLabel?",
+        "ng-orcid.paginatorLastPageLabel?",
+        "ng-orcid.paginatorFirstPageLabel?",
+        "ng-orcid.paginatorPreviousPageLabel?",
+        "ng-orcid.paginatorItemsPerPageLabel?",
+        "ng-orcid.paginatoOf?",
+        "org.orcid.jaxb.model.message.AffiliationType.education_qualification",
+        "org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position",
+        "org.orcid.jaxb.model.message.AffiliationType.membership_service"
+      ]
+    }
+  }
+}
