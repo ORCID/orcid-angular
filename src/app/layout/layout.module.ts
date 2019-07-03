@@ -12,6 +12,8 @@ import { FooterComponent } from './footer/footer.component'
 import { HeaderComponent } from './header/header.component'
 import { SearchComponent } from './search/search.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MenuIconComponent } from './menu-icon/menu-icon.component'
+import { LanguageComponent } from './language/language.component'
 
 @NgModule({
   imports: [
@@ -24,7 +26,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     ReactiveFormsModule,
     MatRippleModule,
   ],
-  declarations: [HeaderComponent, FooterComponent, SearchComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    SearchComponent,
+    MenuIconComponent,
+    LanguageComponent,
+  ],
   exports: [HeaderComponent, FooterComponent],
 })
 export class LayoutModule {}

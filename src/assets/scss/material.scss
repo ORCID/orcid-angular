@@ -4,11 +4,14 @@
 @import './material.typography.scss';
 
 // SETUP-FONTS
-@include mat-base-typography($orcid-typography);
-@include mat-checkbox-typography($orcid-typography);
-@include angular-material-typography($orcid-typography);
-@include mat-core($orcid-typography);
-@include custom-components-typography($orcid-typography);
+@include mat-base-typography($orcid-material-typography);
+@include mat-checkbox-typography($orcid-material-typography);
+@include angular-material-typography($orcid-material-typography);
+@include mat-core($orcid-material-typography);
+@include custom-components-typography(
+  $orcid-material-typography,
+  $orcid-custom-typography
+);
 
 // SETUP-THEME
 $orcid-app-primary: mat-palette($orcid-blue);
@@ -19,19 +22,18 @@ $orcid-app-theme: mat-light-theme(
   $orcid-app-accent,
   $orcid-app-warn
 );
-
 $background: map-get($orcid-app-theme, background);
 $background: map_merge(
   $background,
   (
     // CUSTOM BACKGROUND COLORS
       app-news: $dark-primary-background,
-    grey: $grey,
     light-grey: $light-grey,
     blue-overlay: $blue-overlay,
     dark-grey: $dark-grey-background
   )
 );
+
 // CUSTOM FOREGROUND COLORS
 $foreground: map-get($orcid-app-theme, foreground);
 $foreground: map_merge($foreground, (// FOREGROUND BACKGROUND COLORS));

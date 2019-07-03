@@ -7,7 +7,7 @@ export interface PlatformInfo {
   ie: boolean
   safary: boolean
   firefox: boolean
-  colums4: boolean
-  colums8: boolean
-  colums12: boolean
+  columns4: boolean
+  columns8: boolean
+  columns12: boolean
 }

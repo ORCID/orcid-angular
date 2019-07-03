@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core'
-import { NavigationEnd, Router } from '@angular/router'
+import { Component, OnInit, Inject } from '@angular/core'
+import { NavigationEnd, Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
-import { PlatformInfoService } from 'src/app/core'
+import { PlatformInfoService, WINDOW } from 'src/app/core'
+import { PlatformInfo, ApplicationMenuItem } from 'src/app/types'
+import { menu } from './menu'
+import { ApplicationMenuItemBasic } from 'src/app/types/menu.local'
 
 @Component({
   selector: 'app-header',
@@ -10,94 +13,105 @@ import { PlatformInfoService } from 'src/app/core'
 })
 export class HeaderComponent implements OnInit {
   currentRoute
-  platformInfo
-  menu = {
-    researchers: {
-      route: '/',
-      hover: false,
-      buttons: {
-        signIn: {},
-        signUp: {},
-        learMore: {},
-      },
-    },
-    organizations: {
-      route: '.',
-      hover: false,
-      active: false,
-      buttons: {
-        funders: {},
-        publishers: {},
-        organizations: {},
-        outreach: {},
-        api: {},
-      },
-    },
-    about: {
-      route: '.',
-      hover: false,
-      active: false,
-      buttons: {
-        what: {},
-        are: {},
-        serve: {},
-        membership: {},
-        events: {},
-      },
-    },
-    help: {
-      route: '.',
-      hover: false,
-      active: false,
-      buttons: {
-        help: {},
-        faq: {},
-        base: {},
-        feedback: {},
-      },
-    },
-    signIn: {
-      route: '.',
-      hover: false,
-      active: false,
-    },
-  }
+  platform: PlatformInfo
+  mobileMenuState = false
+  menu: ApplicationMenuItem[] = this.createMenuList(menu)
 
-  constructor(_router: Router, _platformInfo: PlatformInfoService) {
+  constructor(
+    _router: Router,
+    _platform: PlatformInfoService,
+    @Inject(WINDOW) private window: Window
+  ) {
     _router.events
-      .pipe(filter((event: any) => event instanceof NavigationEnd))
-      .subscribe(val => {
+      .pipe(filter((event: any) => event instanceof NavigationStart))
+      .subscribe((val: NavigationStart) => {
+        console.log(val.url)
         this.currentRoute = _router.url
         this.setChildOfCurrentRouteAsSecondaryMenu()
       })
 
-    _platformInfo.get().subscribe(platformInfo => {
-      this.platformInfo = platformInfo
+    _platform.get().subscribe(data => {
+      this.platform = data
     })
   }
 
   ngOnInit() {}
 
-  mouseEnter(ul: string) {
-    Object.keys(this.menu).forEach(button => {
-      if (button === ul) {
-        this.menu[button].hover = true
-      } else {
-        this.menu[button].hover = false
-      }
-    })
-    this.menu[ul].hover = true
-  }
-
   mouseLeave() {
-    this.setChildOfCurrentRouteAsSecondaryMenu()
+    if (this.platform.columns12) {
+      this.setChildOfCurrentRouteAsSecondaryMenu()
+    }
   }
 
   setChildOfCurrentRouteAsSecondaryMenu() {
-    Object.keys(this.menu).forEach(button => {
-      this.menu[button].hover = this.menu[button].route === this.currentRoute
+    this.menu.forEach(button => {
+      if (button.activeRoute) {
+        button.hover = button.activeRoute === this.currentRoute
+      } else {
+        button.hover = button.route === this.currentRoute
+      }
     })
   }
 
-  click(ul: string) {}
+  click(treeLocation: string[], button: ApplicationMenuItem) {
+    if (!this.platform.columns12) {
+      if (button.route && (!button.buttons || !button.buttons.length)) {
+        this.window.location.href = button.route
+      } else {
+        this.updateMenu(this.menu, treeLocation, true)
+      }
+    } else if (button.route) {
+      this.window.location.href = button.route
+    }
+  }
+
+  mouseEnter(treeLocation: string[]) {
+    if (this.platform.columns12) {
+      this.updateMenu(this.menu, treeLocation)
+    }
+  }
+
+  updateMenu(
+    menuToUpdate: ApplicationMenuItem[],
+    treeLocation: string[],
+    switchState?: boolean
+  ) {
+    if (treeLocation.length) {
+      const current = treeLocation.shift()
+      if (menuToUpdate != null) {
+        menuToUpdate.forEach(button => {
+          if (button.id === current) {
+            if (treeLocation.length > 0) {
+              button.hover = true
+              this.updateMenu(button.buttons, treeLocation, switchState)
+            } else {
+              button.hover = switchState ? !button.hover : true
+            }
+          } else {
+            button.hover = false
+          }
+        })
+      }
+    }
+  }
+  createMenuList(
+    menuDefinition: ApplicationMenuItemBasic[]
+  ): ApplicationMenuItem[] {
+    const list: ApplicationMenuItem[] = []
+    if (!menuDefinition || !menuDefinition.length) {
+      return []
+    }
+    menuDefinition.forEach(item => {
+      const newItem: ApplicationMenuItem = {
+        ...item,
+        hover: false,
+        active: false,
+        buttons: this.createMenuList(item.buttons),
+      }
+
+      list.push(newItem)
+    })
+
+    return list
+  }
 }

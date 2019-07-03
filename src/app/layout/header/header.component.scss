@@ -1,13 +1,13 @@
 header.container {
   height: 179px;
-  padding-bottom: 27px;
+  padding-bottom: 21px;
   img {
     height: 50px;
   }
   .row {
     height: 100%;
     img {
-      height: 50px;
+      height: 67px;
     }
   }
 }
@@ -21,30 +21,19 @@ nav {
 
   .top-bar {
     height: 60px;
-    .container {
+    margin-bottom: 60px;
+    .menu-container {
       height: 100%;
+      display: flex;
       .row {
-        height: 100%;
+        position: relative;
         .col {
-          height: 100%;
-          button {
-            height: 100%;
+          & button {
           }
-        }
-      }
-    }
-  }
-
-  .bottom-bar {
-    height: 48px;
-    .container {
-      height: 100%;
-      .row {
-        height: 100%;
-        .col {
-          height: 100%;
-          button {
-            height: 100%;
+          .row {
+            position: absolute;
+            top: 100%;
+            left: 0;
           }
         }
       }
@@ -55,7 +44,129 @@ nav {
 .statics {
   .mat-caption {
     text-align: right;
+    [dir='rtl'] :host & {
+      text-align: left;
+    }
     display: block;
     margin-bottom: 8px;
+  }
+}
+
+.columns-8,
+.columns-4 {
+  :host {
+    header.container {
+      padding-bottom: 0;
+      .logo-menu-container {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        .logo-container {
+          img {
+            height: 42px;
+          }
+        }
+      }
+      height: auto;
+    }
+
+    nav {
+      position: absolute;
+      width: 100%;
+      z-index: 1000;
+      height: 100%;
+      margin-top: -65px;
+      .top-bar {
+        height: auto;
+        .menu-container {
+          flex-direction: column;
+          padding-top: 32px;
+          padding-bottom: 32px;
+          .row {
+            flex-direction: column;
+            .col {
+              max-width: 100%;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              button {
+                width: 100%;
+                text-align: left;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                &.sign-in-button {
+                  width: auto;
+                  padding-bottom: 10px;
+                  padding-top: 10px;
+                  margin-top: 12px;
+                  left: 16px;
+                  [dir='rtl'] & {
+                    left: 0;
+                    right: 16px;
+                  }
+                }
+                .button-box {
+                  display: flex;
+                  justify-content: space-between;
+                }
+              }
+
+              .row {
+                top: 0;
+                flex-direction: column;
+                position: relative;
+                button {
+                  margin-left: 16px;
+                  [dir='rtl'] & {
+                    margin-left: auto;
+                    margin-right: 16px;
+                  }
+                  width: 100%;
+                  text-align: left;
+                  padding-top: 8px;
+                  padding-bottom: 8px;
+                }
+                .row {
+                  button {
+                    margin-left: 32px;
+                    [dir='rtl'] & {
+                      margin-left: auto;
+                      margin-right: 32px;
+                    }
+                  }
+                  .row {
+                    button {
+                      margin-left: 64px;
+                      [dir='rtl'] & {
+                        margin-left: auto;
+                        margin-right: 64px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .statics {
+      .mat-caption {
+        text-align: right;
+        [dir='rtl'] & {
+          text-align: left;
+        }
+        margin-bottom: 4px;
+        margin-top: 4px;
+      }
+    }
+  }
+}
+
+.ie,
+.edge {
+  :host {
+    .menu-container {
+    }
   }
 }

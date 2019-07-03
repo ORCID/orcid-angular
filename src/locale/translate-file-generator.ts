@@ -95,7 +95,7 @@ readMessageFile('./src/locale/messages.xlf')
     switchMap(file =>
       from(
         languages.map(language =>
-          generateLanguageFile(language.code, language.code, deepCopy(file))
+          generateLanguageFile(language.code, deepCopy(file))
         )
       )
     )
@@ -103,7 +103,14 @@ readMessageFile('./src/locale/messages.xlf')
   // Generate the next translation file until the last one finish
   .pipe(concatAll())
   // Save the translation file
-  .pipe(map(result => saveJsonAsXlf(result.file, result.saveCode)))
+  .pipe(
+    mergeMap(result =>
+      from([
+        saveTs(result.values.dynamicValues, result.saveCode),
+        saveJsonAsXlf(result.values.staticValues, result.saveCode),
+      ])
+    )
+  )
   // Waits until all translations are created
   .pipe(combineAll())
   // Save the translation log
@@ -111,11 +118,11 @@ readMessageFile('./src/locale/messages.xlf')
   // Start it all
   .subscribe()
 
-function generateLanguageFile(code, saveCode, file) {
+function generateLanguageFile(saveCode, file) {
   return (
     from(
       baseGithubTranslationFilesURL.map(url =>
-        getTranslationFileFromGithub(url, code)
+        getTranslationFileFromGithub(url, saveCode)
       )
     )
       // Wait until all properties files where read
@@ -138,39 +145,64 @@ function generateLanguageFile(code, saveCode, file) {
       // Return the XLF to be saved
       .pipe(
         map(val => {
-          return { file: val, saveCode: saveCode }
+          return { values: val, saveCode: saveCode }
         })
       )
       // Report success
       .pipe(
         tap(() => {
-          console.log(`The langue code '${code}' file was created`)
+          console.log(`The langue code '${saveCode}' file was created`)
         })
       )
   )
 }
 
 function saveJsonAsXlf(json, name) {
-  return of(
+  return from(
     new Promise((resolve, reject) => {
       const builder = new Builder()
       const xml = builder.buildObject(json)
-      fs.writeFile('./src/locale/messages.' + name + '.xlf', xml, err => {
-        if (err) {
-          reject(err)
+      fs.writeFile(
+        './src/locale/messages.static.' + name + '.xlf',
+        xml,
+        err => {
+          if (err) {
+            reject(err)
+          }
+          resolve()
         }
-        resolve()
-      })
+      )
     })
   )
 }
 
 function saveJson(json, name) {
-  return of(
+  return from(
     new Promise((resolve, reject) => {
       fs.writeFile(
         './src/locale/messages.' + name + '.json',
-        JSON.stringify(reportFile, null, 2),
+        JSON.stringify(json, null, 2),
+        function(err) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve()
+          }
+        }
+      )
+    })
+  )
+}
+
+function saveTs(json, name) {
+  return from(
+    new Promise((resolve, reject) => {
+      fs.writeFile(
+        './src/locale/messages.dynamic.' + name + '.ts',
+        '// prettier-ignore\n' +
+          '/* tslint:disable */\n' +
+          'export const LOCALE : {[key:string]: string} = ' +
+          JSON.stringify(json, null, 2),
         function(err) {
           if (err) {
             reject(err)
@@ -206,22 +238,36 @@ function readMessageFile(path) {
   })
 }
 
-function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
+function setLanguagePropertiesToLanguageFile(
+  data,
+  propsText,
+  saveCode
+): Observable<{ staticValues: any; dynamicValues: any }> {
   return new Observable(observer => {
-    parseString(data, (error, result) => {
+    const dynamicValues = {}
+    parseString(data, (error, staticValues) => {
       if (error) {
         observer.error(error)
       }
-      result.xliff.file[0].unit.forEach(element => {
+      staticValues.xliff.file[0].unit.forEach(element => {
         if (propsText[element['$'].id]) {
-          element.segment[0].target = []
-          element.segment[0].target.push(
-            translationTreatment(
-              propsText[element['$'].id],
-              element['$'].id,
-              saveCode
-            )
+          const translation = translationTreatment(
+            propsText[element['$'].id],
+            element['$'].id,
+            saveCode
           )
+          element.segment[0].target = []
+          element.segment[0].target.push(translation)
+          element.notes[0].note.forEach(note => {
+            if (
+              note['$']['category'] &&
+              note['$']['category'] === 'location' &&
+              note['_'].indexOf('i18n.pseudo') > 0
+            ) {
+              dynamicValues[element['$'].id] = translation
+            }
+          })
+
           if ('en' === saveCode) {
             checkIfTranslationMatch(
               element['$'].id,
@@ -230,11 +276,21 @@ function setLanguagePropertiesToLanguageFile(data, propsText, saveCode) {
             )
           }
         } else {
+          element.notes[0].note.forEach(note => {
+            if (
+              note['$']['category'] &&
+              note['$']['category'] === 'location' &&
+              note['_'].indexOf('i18n.pseudo') > 0
+            ) {
+              dynamicValues[element['$'].id] = element.segment[0].source[0]
+            }
+          })
+
           element.segment[0].target = element.segment[0].source
           translationNotFound(element['$'].id, saveCode)
         }
       })
-      observer.next(result)
+      observer.next({ staticValues, dynamicValues })
       observer.complete()
     })
   })

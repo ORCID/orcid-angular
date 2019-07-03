@@ -9,7 +9,7 @@
           (click)="moreNews()"
           color="primary"
           i18n="@@home.more_news"
-          *ngIf="platform.colums12"
+          *ngIf="platform.columns12"
         >
           MORE NEWS
         </button>
@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-<div [ngClass]="{ container: platform.colums12 }">
+<div [ngClass]="{ container: platform.columns12 }">
   <ng-container *ngIf="news">
     <div class="row news-box" [@listAnimation]="news.length">
       <div class="col l4 m8 s4" *ngFor="let new of news">
@@ -32,7 +32,7 @@
           <div class="col mat-caption l-auto m8">
             {{ new.pubDate[0].slice(0, 22) }}
           </div>
-          <p class="col mat-headline l-auto m8 s4 horizontal-center">
+          <p class="col mat-headline l12 m8 s4 horizontal-center">
             {{ new.title }}
           </p>
           <button
@@ -41,7 +41,7 @@
             (click)="navigate(new.link)"
             color="primary"
           >
-            <div class="button-text-container" i18n="@@ng-orcid.full.orcid">
+            <div class="button-text-container" i18n="@@ng-orcidFullOrcid">
               FULL ARTICLE
             </div>
           </button>
@@ -51,13 +51,13 @@
   </ng-container>
 </div>
 <div class="container mobile-more-news-box">
-  <div class="row horizontal-center" *ngIf="!platform.colums12">
+  <div class="row horizontal-center" *ngIf="!platform.columns12">
     <button
       class="col"
       mat-button
       (click)="moreNews()"
       color="primary"
-      i18n="@@ng-orcid.more.news"
+      i18n="@@ng-orcid.MoreNews"
     >
       MORE NEWS
     </button>

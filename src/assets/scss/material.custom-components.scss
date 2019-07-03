@@ -1,6 +1,7 @@
 @import '../../styles.scss-theme.scss';
 @import '../../app/layout/header/header.component.scss-theme.scss';
 @import '../../app/layout/search/search.component.scss-theme.scss';
+@import '../../app/layout/menu-icon/menu-icon.component.scss-theme.scss';
 @import '../../app/layout/footer/footer.component.scss-theme.scss';
 @import '../../app/home/pages/home/home.component.scss-theme.scss';
 @import '../../app/home/components/news/news.component.scss-theme.scss';
@@ -15,8 +16,7 @@
 @import '../../app/cdk/multi-row-raised-button/multi-row-raised-button/multi-row-raised-button.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
-  @include glopbal-theme($theme);
-  @include header-theme($theme);
+  @include global-theme($theme);
   @include header-theme($theme);
   @include search-theme($theme);
   @include footer-theme($theme);
@@ -30,13 +30,16 @@
   @include offline-message-theme($theme);
   @include card-detail-line-theme($theme);
   @include profile-activities-affiliation-theme($theme);
+  @include app-menu-icon-theme($theme);
 }
 
-@mixin custom-components-typography($custom) {
-  @include profile-person-typography($custom);
-  @include profile-person-detail-typography($custom);
-  @include card-typography($custom);
-  @include profile-activities-typography($custom);
-  @include card-detail-typography($custom);
-  @include multi-row-raised-button-typography($custom);
+@mixin custom-components-typography($orcid-material, $orcid-custom) {
+  @include global-theme-typography($orcid-material);
+  @include profile-person-typography($orcid-material);
+  @include profile-person-detail-typography($orcid-material);
+  @include card-typography($orcid-material);
+  @include profile-activities-typography($orcid-material);
+  @include card-detail-typography($orcid-material);
+  @include multi-row-raised-button-typography($orcid-material);
+  @include app-header-typography($orcid-material, $orcid-custom);
 }

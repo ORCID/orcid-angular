@@ -18,6 +18,12 @@
   }
 }
 
+.advance-search-box {
+  button {
+    padding: 0;
+  }
+}
+
 .search-box {
   > div {
     height: 42px;
@@ -32,7 +38,14 @@
     padding: 0 12px;
     > div {
       width: 76px;
-      font-size: 16px;
+    }
+  }
+
+  .input-box {
+    flex-grow: 1;
+    max-width: 240px;
+    input {
+      width: 100%;
     }
   }
 
@@ -40,16 +53,49 @@
     width: 45px;
     height: 42px;
     border-radius: 0 4px 4px 0;
+    padding-left: 9px;
+
+    mat-icon {
+      font-size: 24px;
+      height: 24px;
+      width: 24px;
+      [dir='rtl'] :host & {
+        padding-right: 2px;
+      }
+    }
   }
 
   input {
     height: 42px;
     box-sizing: border-box;
     padding-left: 12px;
+    padding-right: 12px;
   }
   mat-icon {
     width: 12px;
     height: 20px;
+  }
+}
+
+.columns-8,
+.columns-4 {
+  :host {
+    .search-box {
+      padding: 12px 0px;
+      .search-where,
+      .search-icon {
+        flex-shrink: 0;
+        border-radius: 0;
+      }
+      flex-wrap: initial;
+      .input-box {
+        flex-grow: 1;
+        max-width: none;
+        input {
+          width: 100%;
+        }
+      }
+    }
   }
 }
 

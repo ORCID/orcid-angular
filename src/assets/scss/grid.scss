@@ -1,8 +1,8 @@
 // Variables
 
-$size4-colums: 4 !default;
-$size8-colums: 8 !default;
-$size12-colums: 12 !default;
+$size4-columns: 4 !default;
+$size8-columns: 8 !default;
+$size12-columns: 12 !default;
 
 $size4-margin: 8px !default;
 $size8-margin: 8px !default;
@@ -10,7 +10,7 @@ $size12-margin: 12px !default;
 
 $size4-maxwidth: unset !default;
 $size8-maxwidth: unset !default;
-$size12-maxwidth: 1034px !default;
+$size12-maxwidth: 1304px !default;
 
 $size4-up-breakpoint: 599.99px !default;
 $size8-up-breakpoint: 839.99px !default;
@@ -80,7 +80,15 @@ $gutter-width: 12px !default;
   [dir='rtl'] & {
     &.offset-#{$size}#{$i} {
       margin-right: $perc;
-      margin-left: initial;
+      margin-left: auto;
+    }
+    &.pull-#{$size}#{$i} {
+      right: auto;
+      left: $perc;
+    }
+    &.push-#{$size}#{$i} {
+      left: auto;
+      right: $perc;
     }
   }
 }
@@ -113,8 +121,8 @@ $gutter-width: 12px !default;
     }
 
     $i: 1;
-    @while $i <= $size4-colums {
-      $perc: unquote((100 / ($size4-colums / $i)) + '%');
+    @while $i <= $size4-columns {
+      $perc: unquote((100 / ($size4-columns / $i)) + '%');
       &.s#{$i} {
         width: $perc;
         @include reset-offset;
@@ -123,8 +131,8 @@ $gutter-width: 12px !default;
     }
 
     $i: 1;
-    @while $i <= $size4-colums {
-      $perc: unquote((100 / ($size4-colums / $i)) + '%');
+    @while $i <= $size4-columns {
+      $perc: unquote((100 / ($size4-columns / $i)) + '%');
       @include grid-classes('s', $i, $perc);
       $i: $i + 1;
     }
@@ -134,8 +142,8 @@ $gutter-width: 12px !default;
 
     @media #{$size8-and-up} {
       $i: 1;
-      @while $i <= $size8-colums {
-        $perc: unquote((100 / ($size8-colums / $i)) + '%');
+      @while $i <= $size8-columns {
+        $perc: unquote((100 / ($size8-columns / $i)) + '%');
         &.m#{$i} {
           width: $perc;
           @include reset-offset;
@@ -145,8 +153,8 @@ $gutter-width: 12px !default;
       }
 
       $i: 1;
-      @while $i <= $size8-colums {
-        $perc: unquote((100 / ($size8-colums / $i)) + '%');
+      @while $i <= $size8-columns {
+        $perc: unquote((100 / ($size8-columns / $i)) + '%');
         @include grid-classes('m', $i, $perc);
         $i: $i + 1;
       }
@@ -157,8 +165,8 @@ $gutter-width: 12px !default;
 
     @media #{$size12-and-up} {
       $i: 1;
-      @while $i <= $size12-colums {
-        $perc: unquote((100 / ($size12-colums / $i)) + '%');
+      @while $i <= $size12-columns {
+        $perc: unquote((100 / ($size12-columns / $i)) + '%');
         &.l#{$i} {
           width: $perc;
           @include reset-offset;
@@ -167,8 +175,8 @@ $gutter-width: 12px !default;
       }
 
       $i: 1;
-      @while $i <= $size12-colums {
-        $perc: unquote((100 / ($size12-colums / $i)) + '%');
+      @while $i <= $size12-columns {
+        $perc: unquote((100 / ($size12-columns / $i)) + '%');
         @include grid-classes('l', $i, $perc);
         $i: $i + 1;
       }

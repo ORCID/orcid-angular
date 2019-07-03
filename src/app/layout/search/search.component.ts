@@ -1,6 +1,8 @@
-import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core'
-import { environment } from 'src/environments/environment'
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { Component, OnInit, Inject } from '@angular/core'
+import { FormGroup } from '@angular/forms'
+import { PlatformInfoService, WINDOW } from 'src/app/core'
+import { PlatformInfo } from 'src/app/types'
+import { LOCALE } from '../../../locale/messages.dynamic.en'
 
 @Component({
   selector: 'app-search',
@@ -8,19 +10,50 @@ import { FormBuilder, FormGroup } from '@angular/forms'
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  languageMenuOptions
   form: FormGroup
-  constructor(@Inject(LOCALE_ID) public locale: string, fb: FormBuilder) {
-    this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
-    this.locale = 'en'
-    this.form = fb.group({
-      whereToSearch: 'REGISTRY',
+  platform: PlatformInfo
+  whereToSearch = [
+    this.firstLetterUppercase(LOCALE['layout.public-layout.registry']),
+    this.firstLetterUppercase(LOCALE['layout.public-layout.website']),
+  ]
+  whereToSearchSelected = this.firstLetterUppercase(
+    LOCALE['layout.public-layout.registry']
+  )
+  searchPlaceHolder = this.firstLetterUppercase(
+    LOCALE['orcid_bio_search.btnsearch']
+  )
+  whatToSearch = ''
+  constructor(
+    @Inject(WINDOW) private window: Window,
+    _platform: PlatformInfoService
+  ) {
+    _platform.platformSubject.subscribe(data => {
+      this.platform = data
     })
+  }
+
+  changeWhereToSearch(item) {
+    this.whereToSearchSelected = item
   }
 
   ngOnInit() {}
 
-  changeLanguage(languageKey: string) {
-    window.location.href = '/' + languageKey + '/'
+  search(whereToSearch, whatToSearch) {
+    if (
+      whereToSearch ===
+      this.firstLetterUppercase(LOCALE['layout.public-layout.registry'])
+    ) {
+      this.window.location.href = '/orcid-search/quick-search/?' + whatToSearch
+    } else {
+      this.window.location.href = '/search/node/' + whatToSearch
+    }
+  }
+
+  goTo(url) {
+    this.window.location.href = url
+  }
+
+  firstLetterUppercase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
   }
 }

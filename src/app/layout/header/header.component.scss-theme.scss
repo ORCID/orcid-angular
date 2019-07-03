@@ -8,27 +8,80 @@ $config: mat-typography-config();
   $background: map-get($theme, background);
 
   app-header {
+    .container {
+      .logo-container {
+        color: mat-color($accent, '200-contrast');
+      }
+    }
     .top-bar {
       //FIXME ACCESSIBILITY-ISSUE
       color: mat-color($primary, '500-contrast');
       background-color: mat-color($primary);
-    }
-    .bottom-bar {
-      color: mat-color($foreground, 'text');
-    }
-    .active {
-      background: mat-color($background, 'grey');
-      color: mat-contrast($primary, 500);
-      border-radius: 0;
-    }
-    .tabletOrHandset {
-      .top-bar {
-        //FIXME ACCESSIBILITY-ISSUE
-        color: map-get($foreground, text);
-        background-color: map-get($background, card);
+
+      .menu-container {
+        .row {
+          button {
+            & .active {
+              background-color: mat-color($background, light-grey);
+              color: mat-contrast($accent, 500);
+              border-radius: 0;
+            }
+            &.sign-in-button {
+              border-color: mat-color($background, background);
+            }
+          }
+
+          .row {
+            color: mat-color($primary, 500);
+          }
+        }
       }
-      .active button {
-        color: mat-color($primary, '500-contrast');
+    }
+
+    .columns-8 &,
+    .columns-4 & {
+      .top-bar {
+        background-color: mat-color($primary, 700);
+        .menu-container {
+          .row {
+            button {
+              & .active {
+              }
+              &.sign-in-button {
+              }
+            }
+
+            .row {
+              button {
+                color: mat-color($primary, '500-contrast');
+              }
+
+              background-color: mat-color($primary, 600);
+              .row {
+                button {
+                  color: mat-color($primary, 500);
+                }
+                background-color: mat-color($background, 'light-grey');
+                .row {
+                  background-color: mat-color($background, 'card');
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin app-header-typography($orcid-material, $orcid-custom) {
+  app-header {
+    .top-bar {
+      .menu-container > .row > .col > button {
+        @include mat-typography-level-to-styles($orcid-custom, title-alt);
+        &.sign-in-button {
+          @include mat-typography-level-to-styles($config, button);
+        }
       }
     }
   }

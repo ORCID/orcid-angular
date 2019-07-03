@@ -1,221 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
-    <unit id="public-layout.for_researchers">
+    <unit id="header.signin">
       <notes>
-        <note category="location">app/layout/header/header.component.html:26,28</note>
-        <note category="location">app/layout/header/header.component.html:95,97</note>
+        <note category="location">app/layout/header/header.component.html:88</note>
       </notes>
       <segment>
-        <source>
-            For Researchers
-          </source>
+        <source>SIGN IN</source>
       </segment>
     </unit>
-    <unit id="public-layout.for_organizations">
+    <unit id="header.register">
       <notes>
-        <note category="location">app/layout/header/header.component.html:37,39</note>
+        <note category="location">app/layout/header/header.component.html:89</note>
       </notes>
       <segment>
-        <source>
-            For Organizations
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.about">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:48,50</note>
-      </notes>
-      <segment>
-        <source>
-            About
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.help">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:59,61</note>
-      </notes>
-      <segment>
-        <source>
-            Help
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.sign_in">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:70,72</note>
-        <note category="location">app/layout/header/header.component.html:81,83</note>
-      </notes>
-      <segment>
-        <source>
-            Sign in
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.register">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:86,88</note>
-      </notes>
-      <segment>
-        <source>
-            Register for an ORCID iD
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.funders">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:104,106</note>
-      </notes>
-      <segment>
-        <source>
-            Funders
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.publishers">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:109,111</note>
-      </notes>
-      <segment>
-        <source>
-            Publishers
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.research_organizations">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:118,120</note>
-      </notes>
-      <segment>
-        <source>
-            Research Organizations
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.associations">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:123,125</note>
-      </notes>
-      <segment>
-        <source>
-            Associations
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.integrators">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:128,130</note>
-      </notes>
-      <segment>
-        <source>
-            Integrators
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.what_is_orcid">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:141,143</note>
-      </notes>
-      <segment>
-        <source>
-            What is ORCID
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.the_orcid_team">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:150,152</note>
-      </notes>
-      <segment>
-        <source>
-            The ORCID Team
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.the_orcid_community">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:159,161</note>
-      </notes>
-      <segment>
-        <source>
-            The ORCID Community
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.membership">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:164,166</note>
-      </notes>
-      <segment>
-        <source>
-            Membership
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.news">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:169,171</note>
-      </notes>
-      <segment>
-        <source>
-            News
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.events">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:174,176</note>
-      </notes>
-      <segment>
-        <source>
-            Events
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.faq">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:184,186</note>
-      </notes>
-      <segment>
-        <source>
-            FAQ
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.contact_us">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:189,191</note>
-      </notes>
-      <segment>
-        <source>
-            Contact us
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.give_feedback">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:198,200</note>
-      </notes>
-      <segment>
-        <source>
-            Give Feedback
-          </source>
-      </segment>
-    </unit>
-    <unit id="public-layout.knowledge_base">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:207,209</note>
-      </notes>
-      <segment>
-        <source>
-            Knowledge Base
-          </source>
+        <source>REGISTER</source>
       </segment>
     </unit>
     <unit id="public-layout.amount_ids">
       <notes>
-        <note category="location">app/layout/header/header.component.html:222</note>
+        <note category="location">app/layout/header/header.component.html:102</note>
       </notes>
       <segment>
         <source>ORCID iDs and counting.</source>
@@ -259,7 +63,7 @@
           </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.dispute.procedure">
+    <unit id="ng-orcid.disputeProcedure">
       <notes>
         <note category="location">app/layout/footer/footer.component.html:50,52</note>
       </notes>
@@ -287,6 +91,16 @@
           </source>
       </segment>
     </unit>
+    <unit id="ng-orcid.advanceSearch">
+      <notes>
+        <note category="location">app/layout/search/search.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source>
+    ADVANCED SEARCH
+  </source>
+      </segment>
+    </unit>
     <unit id="home.distinguish_yourself">
       <notes>
         <note category="location">app/home/pages/home/home.component.html:16,18</note>
@@ -299,15 +113,16 @@
     </unit>
     <unit id="home.three_easy">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:19</note>
+        <note category="location">app/home/pages/home/home.component.html:19,20</note>
       </notes>
       <segment>
-        <source>THREE EASY STEPS</source>
+        <source>
+            THREE EASY STEPS</source>
       </segment>
     </unit>
     <unit id="home.orcid_provides">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:25,33</note>
+        <note category="location">app/home/pages/home/home.component.html:27,35</note>
       </notes>
       <segment>
         <source>
@@ -323,7 +138,7 @@
     </unit>
     <unit id="home.find_out_more">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:39,40</note>
+        <note category="location">app/home/pages/home/home.component.html:42,43</note>
       </notes>
       <segment>
         <source>FIND OUT MORE ABOUT OUR MISSION AND VALUES
@@ -332,7 +147,7 @@
     </unit>
     <unit id="home.one">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:52</note>
+        <note category="location">app/home/pages/home/home.component.html:55</note>
       </notes>
       <segment>
         <source>1</source>
@@ -340,7 +155,7 @@
     </unit>
     <unit id="home.register">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:54,56</note>
+        <note category="location">app/home/pages/home/home.component.html:57,59</note>
       </notes>
       <segment>
         <source>
@@ -350,7 +165,7 @@
     </unit>
     <unit id="home.get_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:59,62</note>
+        <note category="location">app/home/pages/home/home.component.html:62,65</note>
       </notes>
       <segment>
         <source>
@@ -361,15 +176,17 @@
     </unit>
     <unit id="home.register_now">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:64</note>
+        <note category="location">app/home/pages/home/home.component.html:66,68</note>
       </notes>
       <segment>
-        <source>register now!</source>
+        <source>
+              register now!
+            </source>
       </segment>
     </unit>
     <unit id="home.two">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:71</note>
+        <note category="location">app/home/pages/home/home.component.html:74</note>
       </notes>
       <segment>
         <source>2</source>
@@ -377,7 +194,7 @@
     </unit>
     <unit id="home.add_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:74</note>
+        <note category="location">app/home/pages/home/home.component.html:77</note>
       </notes>
       <segment>
         <source>ADD YOUR </source>
@@ -385,7 +202,7 @@
     </unit>
     <unit id="home.info">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:75</note>
+        <note category="location">app/home/pages/home/home.component.html:78</note>
       </notes>
       <segment>
         <source>INFO</source>
@@ -393,7 +210,7 @@
     </unit>
     <unit id="home.enhance_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:81,86</note>
+        <note category="location">app/home/pages/home/home.component.html:84,89</note>
       </notes>
       <segment>
         <source>
@@ -406,7 +223,7 @@
     </unit>
     <unit id="home.three">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:91</note>
+        <note category="location">app/home/pages/home/home.component.html:94</note>
       </notes>
       <segment>
         <source>3</source>
@@ -414,7 +231,7 @@
     </unit>
     <unit id="home.user_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:94</note>
+        <note category="location">app/home/pages/home/home.component.html:97</note>
       </notes>
       <segment>
         <source>USE YOUR</source>
@@ -422,7 +239,7 @@
     </unit>
     <unit id="home.orcid_id">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:95</note>
+        <note category="location">app/home/pages/home/home.component.html:98</note>
       </notes>
       <segment>
         <source> ORCID ID</source>
@@ -430,7 +247,7 @@
     </unit>
     <unit id="home.include_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:101,105</note>
+        <note category="location">app/home/pages/home/home.component.html:104,108</note>
       </notes>
       <segment>
         <source>
@@ -442,7 +259,7 @@
     </unit>
     <unit id="home.members_make">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:131,133</note>
+        <note category="location">app/home/pages/home/home.component.html:134,136</note>
       </notes>
       <segment>
         <source>
@@ -452,7 +269,7 @@
     </unit>
     <unit id="home.orcid_is">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:136,141</note>
+        <note category="location">app/home/pages/home/home.component.html:139,144</note>
       </notes>
       <segment>
         <source>
@@ -465,7 +282,7 @@
     </unit>
     <unit id="home.curious_about">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:143,145</note>
+        <note category="location">app/home/pages/home/home.component.html:146,148</note>
       </notes>
       <segment>
         <source>
@@ -475,7 +292,7 @@
     </unit>
     <unit id="home.see_our">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:146,148</note>
+        <note category="location">app/home/pages/home/home.component.html:152,154</note>
       </notes>
       <segment>
         <source>
@@ -501,7 +318,7 @@
         </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.full.orcid">
+    <unit id="ng-orcidFullOrcid">
       <notes>
         <note category="location">app/home/components/news/news.component.html:44,46</note>
       </notes>
@@ -511,7 +328,7 @@
             </source>
       </segment>
     </unit>
-    <unit id="ng-orcid.more.news">
+    <unit id="ng-orcid.MoreNews">
       <notes>
         <note category="location">app/home/components/news/news.component.html:61,63</note>
       </notes>
@@ -807,6 +624,470 @@
       <segment>
         <source>
     Membership and service</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.for_researchers">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:4</note>
+      </notes>
+      <segment>
+        <source>For Researchers</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.for_organizations">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:5</note>
+      </notes>
+      <segment>
+        <source>For Organizations</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.about">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:6</note>
+      </notes>
+      <segment>
+        <source>About</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.help">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Help</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sign_in">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Sign in</source>
+      </segment>
+    </unit>
+    <unit id="login.registerOrcidId">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:9</note>
+      </notes>
+      <segment>
+        <source>Register for an ORCID iD</source>
+      </segment>
+    </unit>
+    <unit id="manage_delegators.learn_more.link.text">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:10</note>
+      </notes>
+      <segment>
+        <source>Learn more</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.funders">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:11</note>
+      </notes>
+      <segment>
+        <source>Funders</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.research_organizations">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:12</note>
+      </notes>
+      <segment>
+        <source>Research Organizations</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.publishers">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:13</note>
+      </notes>
+      <segment>
+        <source>Publishers</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.associations">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:14</note>
+      </notes>
+      <segment>
+        <source>Associations</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.integrators">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:15</note>
+      </notes>
+      <segment>
+        <source>Integrators</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.what_is_orcid">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:16</note>
+      </notes>
+      <segment>
+        <source>What is ORCID</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.the_orcid_team">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:17</note>
+      </notes>
+      <segment>
+        <source>The ORCID Team</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.the_orcid_community">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:18</note>
+      </notes>
+      <segment>
+        <source>The ORCID Community</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.events">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:19</note>
+      </notes>
+      <segment>
+        <source>Events</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.news">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:20</note>
+      </notes>
+      <segment>
+        <source>News</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.faq">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:21</note>
+      </notes>
+      <segment>
+        <source>FAQ</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.give_feedback">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:22</note>
+      </notes>
+      <segment>
+        <source>Give Feedback</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.contact_us">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Contact us </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.knowledge_base">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:24</note>
+      </notes>
+      <segment>
+        <source>Knowledge Base </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.outreach">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:25</note>
+      </notes>
+      <segment>
+        <source>OUTREACH RESOURCES</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.useCases">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Use Cases</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.membership">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Membership</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.theOrcidApi">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:28</note>
+      </notes>
+      <segment>
+        <source>THE ORCID API</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.registerClientApp">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:29</note>
+      </notes>
+      <segment>
+        <source>REGISTER A CLIENT APPLICATION</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.currentIntegrations">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:30</note>
+      </notes>
+      <segment>
+        <source>CURRENT INTEGRATIONS</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.integrationsChart">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:31</note>
+      </notes>
+      <segment>
+        <source>INTEGRATION CHART</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.betaTesters">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:32</note>
+      </notes>
+      <segment>
+        <source>BETA TESTERS </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.our_mission">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:33</note>
+      </notes>
+      <segment>
+        <source>Our Mission </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.our_principles">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:34</note>
+      </notes>
+      <segment>
+        <source>Our Principles</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.ourGovernance">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:35</note>
+      </notes>
+      <segment>
+        <source>OUR GOVERNANCE</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.ourPolicies">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:36</note>
+      </notes>
+      <segment>
+        <source>OUR POLICIES</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.working_groups">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:37</note>
+      </notes>
+      <segment>
+        <source>Working Groups</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sponsors">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Sponsors</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.launch_partners">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:39</note>
+      </notes>
+      <segment>
+        <source>Launch Partners</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.members">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:40</note>
+      </notes>
+      <segment>
+        <source>Members</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.openSource">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:41</note>
+      </notes>
+      <segment>
+        <source>OPEN SOURCE</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.partners">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:42</note>
+      </notes>
+      <segment>
+        <source>PARTNERS</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.adoptionAndInt">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:43</note>
+      </notes>
+      <segment>
+        <source>ADOPTION AND INTEGRATION PROGRAM</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.outreachResources">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:44</note>
+      </notes>
+      <segment>
+        <source>Outreach Resources</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.orcidGear">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:45</note>
+      </notes>
+      <segment>
+        <source>ORCID GEAR</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.membershipComparison">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:46</note>
+      </notes>
+      <segment>
+        <source>MEMBERSHIP COMPARISON</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.standard_member_agreement">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:48</note>
+      </notes>
+      <segment>
+        <source>Standard Member Agreement</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.our_members">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:50</note>
+      </notes>
+      <segment>
+        <source>Our Members</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.standartCreatorAgreement">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:52</note>
+      </notes>
+      <segment>
+        <source>Standard Creator Member Agreement</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.blog">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Blog</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.subscribe">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:55</note>
+      </notes>
+      <segment>
+        <source> Subscribe!</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sign_out">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:56</note>
+      </notes>
+      <segment>
+        <source>Sign out</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.disputeProcedures">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:58</note>
+      </notes>
+      <segment>
+        <source>Dispute Procedures</source>
+      </segment>
+    </unit>
+    <unit id="change_email_preferences.privacyPolicy">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Privacy Policy</source>
+      </segment>
+    </unit>
+    <unit id="developer_tools.public_member.terms.check_2">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:61</note>
+      </notes>
+      <segment>
+        <source>Public Client Terms of Service</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.publicDataFileUsePolicy">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:63</note>
+      </notes>
+      <segment>
+        <source>Public Data File Use Policy</source>
+      </segment>
+    </unit>
+    <unit id="change_email_preferences.termsAnd">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:65</note>
+      </notes>
+      <segment>
+        <source>Terms and Conditions of Use</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.trademarkAndIdDisplayGuidelines">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:68</note>
+      </notes>
+      <segment>
+        <source>Trademark and iD Display Guidelines</source>
+      </segment>
+    </unit>
+    <unit id="layout.public-layout.registry">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:71</note>
+      </notes>
+      <segment>
+        <source>registry</source>
+      </segment>
+    </unit>
+    <unit id="layout.public-layout.website">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:72</note>
+      </notes>
+      <segment>
+        <source>website</source>
+      </segment>
+    </unit>
+    <unit id="orcid_bio_search.btnsearch">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:74</note>
+      </notes>
+      <segment>
+        <source>Search...</source>
       </segment>
     </unit>
   </file>

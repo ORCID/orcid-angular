@@ -1,6 +1,6 @@
 @import '~@angular/material/theming';
 
-$orcid-typography: mat-typography-config(
+$orcid-material-typography: mat-typography-config(
   $font-family: '"Noto Sans", sans-serif',
   $display-4: mat-typography-level(96px, 96px, 200, $letter-spacing: -1.5px),
   $display-3: mat-typography-level(60px, normal, 300, $letter-spacing: -0.5px),
@@ -16,3 +16,26 @@ $orcid-typography: mat-typography-config(
   $button: mat-typography-level(14px, normal, 700, $letter-spacing: 1.3px),
   $input: mat-typography-level(inherit, 1.125, 400, $letter-spacing: 0.2px),
 );
+
+$orcid-custom-typography: (
+  title-alt: mat-typography-level(18px, normal, 600, $letter-spacing: 1.3px),
+);
+
+// MATERIAL TYPOGRAPHY OVERWRITES
+
+@mixin mat-button-typography($config) {
+  .mat-button,
+  .mat-raised-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button,
+  .mat-fab,
+  .mat-mini-fab {
+    font: {
+      family: mat-font-family($config, button);
+      size: mat-font-size($config, button);
+      weight: mat-font-weight($config, button);
+    }
+    letter-spacing: mat-letter-spacing($config, button) !important;
+  }
+}

@@ -13,9 +13,21 @@ $config: mat-typography-config();
       color: mat-contrast($primary, 500);
     }
 
+    .input-box {
+      input::placeholder {
+        color: mat-contrast($accent, 200);
+      }
+    }
+
     .search-icon {
       background-color: mat-color($background, dark-grey);
       color: mat-contrast($primary, 500);
+    }
+    .columns-4 &,
+    .columns-8 & {
+      .search-box {
+        background-color: mat-color($background, light-grey);
+      }
     }
   }
 }

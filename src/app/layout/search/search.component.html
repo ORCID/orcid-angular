@@ -1,41 +1,52 @@
-<div class="row end language-menu">
-  <button mat-button [matMenuTriggerFor]="languageMenu" class="col">
-    <div class="row middle space-between">
-      <p class="col">{{ languageMenuOptions[locale] }}</p>
-      <i class="col material-icons"> expand_more </i>
-    </div>
-  </button>
+<div class="row end language-menu" *ngIf="platform.columns12">
+  <app-language></app-language>
 </div>
 
-<div class="row end">
-  <button mat-button color="primary">ADVACE SEARCH</button>
+<div class="row end advance-search-box" *ngIf="platform.columns12">
+  <button
+    mat-button
+    color="primary"
+    i18n="@@ng-orcid.advanceSearch"
+    (click)="goTo('/orcid-search/search')"
+  >
+    ADVANCED SEARCH
+  </button>
 </div>
-<form [formGroup]="form" class="row end search-box middle">
+<form class="row end search-box middle">
   <div
     matRipple
     mat-button
     [matMenuTriggerFor]="menu"
     class="col middle search-where"
   >
-    <div>Registry</div>
+    <div>{{ whereToSearchSelected }}</div>
     <mat-icon matSuffix>arrow_drop_down</mat-icon>
   </div>
-  <div><input placeholder="Search" type="text" /></div>
-  <div matRipple class="col middle search-icon">
+  <div class="input-box">
+    <input
+      autocomplete="off"
+      name="whatToSearch"
+      [(ngModel)]="whatToSearch"
+      [placeholder]="searchPlaceHolder"
+      type="text"
+      (keyup.enter)="search(whereToSearchSelected, whatToSearch)"
+    />
+  </div>
+  <div
+    matRipple
+    class="col middle search-icon"
+    (click)="search(whereToSearchSelected, whatToSearch)"
+  >
     <mat-icon matSuffix>search</mat-icon>
   </div>
 </form>
 
-<mat-menu #languageMenu="matMenu">
-  <div
-    *ngFor="let language of (languageMenuOptions | keyvalue)"
-    [ngClass]="{ active: language.key === locale }"
-    (click)="changeLanguage(language.key)"
-  >
-    <button mat-menu-item>{{ language.value }}</button>
-  </div>
-</mat-menu>
-
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>Item 1</button> <button mat-menu-item>Item 2</button>
+  <button
+    mat-menu-item
+    *ngFor="let item of whereToSearch"
+    (click)="changeWhereToSearch(item)"
+  >
+    {{ item }}
+  </button>
 </mat-menu>

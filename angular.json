@@ -64,10 +64,14 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ar.ts"
                 }
               ],
               "outputPath": "dist/ar/",
-              "i18nFile": "src/locale/messages.ar.xlf",
+              "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
               "baseHref": "/ar/",
@@ -90,7 +94,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/en/",
-              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
               "baseHref": "/en/",
@@ -101,6 +105,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.fr.ts"
                 }
               ],
               "optimization": true,
@@ -113,7 +121,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/fr/",
-              "i18nFile": "src/locale/messages.fr.xlf",
+              "i18nFile": "src/locale/messages.static.fr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "fr",
               "baseHref": "/fr/"
@@ -123,6 +131,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ar.ts"
                 }
               ],
               "optimization": true,
@@ -135,7 +147,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/ar/",
-              "i18nFile": "src/locale/messages.ar.xlf",
+              "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
               "baseHref": "/ar/",
@@ -146,6 +158,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ca.ts"
                 }
               ],
               "optimization": true,
@@ -158,7 +174,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/ca/",
-              "i18nFile": "src/locale/messages.ca.xlf",
+              "i18nFile": "src/locale/messages.static.ca.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ca",
               "baseHref": "/ca/"
@@ -168,6 +184,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.cs.ts"
                 }
               ],
               "optimization": true,
@@ -180,7 +200,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/cs/",
-              "i18nFile": "src/locale/messages.cs.xlf",
+              "i18nFile": "src/locale/messages.static.cs.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "cs",
               "baseHref": "/cs/"
@@ -190,6 +210,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.es.ts"
                 }
               ],
               "optimization": true,
@@ -202,7 +226,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/es/",
-              "i18nFile": "src/locale/messages.es.xlf",
+              "i18nFile": "src/locale/messages.static.es.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "es",
               "baseHref": "/es/"
@@ -212,6 +236,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.it.ts"
                 }
               ],
               "optimization": true,
@@ -224,7 +252,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/it/",
-              "i18nFile": "src/locale/messages.it.xlf",
+              "i18nFile": "src/locale/messages.static.it.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "it",
               "baseHref": "/it/"
@@ -234,6 +262,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ja.ts"
                 }
               ],
               "optimization": true,
@@ -246,7 +278,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/ja/",
-              "i18nFile": "src/locale/messages.ja.xlf",
+              "i18nFile": "src/locale/messages.static.ja.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ja",
               "baseHref": "/ja/"
@@ -256,6 +288,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ko.ts"
                 }
               ],
               "optimization": true,
@@ -268,7 +304,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/ko/",
-              "i18nFile": "src/locale/messages.ko.xlf",
+              "i18nFile": "src/locale/messages.static.ko.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ko",
               "baseHref": "/ko/"
@@ -278,6 +314,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.lr.ts"
                 }
               ],
               "optimization": true,
@@ -290,7 +330,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/lr/",
-              "i18nFile": "src/locale/messages.lr.xlf",
+              "i18nFile": "src/locale/messages.static.lr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "lr",
               "baseHref": "/lr/"
@@ -300,6 +340,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.pt.ts"
                 }
               ],
               "optimization": true,
@@ -312,7 +356,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/pt/",
-              "i18nFile": "src/locale/messages.pt.xlf",
+              "i18nFile": "src/locale/messages.static.pt.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "pt",
               "baseHref": "/pt/"
@@ -322,6 +366,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.rl.ts"
                 }
               ],
               "optimization": true,
@@ -334,7 +382,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/rl/",
-              "i18nFile": "src/locale/messages.rl.xlf",
+              "i18nFile": "src/locale/messages.static.rl.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "rl",
               "baseHref": "/rl/"
@@ -344,6 +392,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ru.ts"
                 }
               ],
               "optimization": true,
@@ -356,7 +408,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/ru/",
-              "i18nFile": "src/locale/messages.ru.xlf",
+              "i18nFile": "src/locale/messages.static.ru.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ru",
               "baseHref": "/ru/"
@@ -366,6 +418,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.uk.ts"
                 }
               ],
               "optimization": true,
@@ -378,7 +434,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/uk/",
-              "i18nFile": "src/locale/messages.uk.xlf",
+              "i18nFile": "src/locale/messages.static.uk.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "uk",
               "baseHref": "/uk/"
@@ -388,6 +444,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.xx.ts"
                 }
               ],
               "optimization": true,
@@ -400,7 +460,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/xx/",
-              "i18nFile": "src/locale/messages.xx.xlf",
+              "i18nFile": "src/locale/messages.static.xx.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "xx",
               "baseHref": "/xx/"
@@ -410,6 +470,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_CN.ts"
                 }
               ],
               "optimization": true,
@@ -422,7 +486,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/zh-CN/",
-              "i18nFile": "src/locale/messages.zh_CN.xlf",
+              "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-CN",
               "baseHref": "/zh-CN/"
@@ -432,6 +496,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_TW.ts"
                 }
               ],
               "optimization": true,
@@ -444,7 +512,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "outputPath": "dist/zh-TW/",
-              "i18nFile": "src/locale/messages.zh_TW.xlf",
+              "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-TW",
               "baseHref": "/zh-TW/"
