@@ -3,7 +3,10 @@
     <div routerLink="/" class="col l5 m8 s4 middle logo-menu-container">
       <div class="logo-container">
         <img src="./assets/vectors/orcid.logo.svg" />
-        <div *ngIf="platform.columns12">
+        <div
+          *ngIf="platform.columns12"
+          i18n="#sentenceCase@@confirm-oauth-access.connectingresearchandresearchers"
+        >
           Connecting research and researchers
         </div>
       </div>
@@ -86,8 +89,10 @@
           *ngIf="checkMenuItemRequirements({ logging: false })"
         >
           <button mat-stroked-button class="sign-in-button">
-            <ng-container i18n="@@header.signin">SIGN IN</ng-container
-            >/<ng-container i18n="@@header.register">REGISTER</ng-container>
+            <ng-container i18n="#upperCase@@header.signin">SIGN IN</ng-container
+            >/<ng-container i18n="#upperCase@@header.register"
+              >REGISTER</ng-container
+            >
           </button>
         </li>
         <li
@@ -95,7 +100,7 @@
           *ngIf="checkMenuItemRequirements({ logging: true })"
         >
           <button mat-stroked-button class="sign-in-button">
-            <ng-container i18n="@@public-layout.sign_out"
+            <ng-container i18n="#upperCase@@public-layout.sign_out"
               >SIGN OUT</ng-container
             >
           </button>
@@ -112,7 +117,9 @@
         <ng-container i18n="@@public-layout.amount_ids"
           >ORCID iDs and counting.</ng-container
         >
-        <a href="/statistics">See more statics</a>
+        <a i18n="@@ngOrcid.seeMoreStatics" href="/statistics"
+          >See more statics</a
+        >
       </div>
     </div>
   </div>

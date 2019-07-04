@@ -19,9 +19,7 @@ export class SearchComponent implements OnInit {
   whereToSearchSelected = this.firstLetterUppercase(
     LOCALE['layout.public-layout.registry']
   )
-  searchPlaceHolder = this.firstLetterUppercase(
-    LOCALE['orcid_bio_search.btnsearch']
-  )
+  searchPlaceHolder = this.firstLetterUppercase(LOCALE['ngOrcid.search'])
   whatToSearch = ''
   constructor(
     @Inject(WINDOW) private window: Window,
