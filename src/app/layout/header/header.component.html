@@ -16,7 +16,14 @@
           <div *ngIf="mobileMenuState" class="col no-gutters">
             <app-language class="col no-gutters"></app-language>
           </div>
-          <div *ngIf="!mobileMenuState" class="col no-gutters">
+          <div
+            *ngIf="
+              !mobileMenuState &&
+              togglz &&
+              togglz.messages['ENABLE_USER_MENU'] === 'true'
+            "
+            class="col no-gutters"
+          >
             <app-user-menu></app-user-menu>
           </div>
 

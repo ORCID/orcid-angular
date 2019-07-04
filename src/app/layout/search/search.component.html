@@ -1,5 +1,7 @@
 <div class="row end language-menu" *ngIf="platform.columns12">
-  <app-user-menu></app-user-menu>
+  <app-user-menu
+    *ngIf="togglz && togglz.messages['ENABLE_USER_MENU'] === 'true'"
+  ></app-user-menu>
   <app-language></app-language>
 </div>
 <form class="row end search-box middle">
