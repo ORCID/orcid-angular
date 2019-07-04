@@ -1,0 +1,111 @@
+<button
+  *ngIf="userInfo"
+  class="user-menu-button"
+  mat-button
+  color="primary"
+  [matMenuTriggerFor]="menu"
+  (menuOpened)="state = true"
+  (menuClosed)="state = false"
+>
+  <img
+    *ngIf="platform.columns12"
+    src="./assets/vectors/profile-icon.svg"
+    alt=""
+  />
+  <ng-container *ngIf="platform.columns12" class="name-container">{{
+    displayName
+  }}</ng-container>
+
+  <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
+</button>
+<button
+  (click)="goto('login')"
+  mat-button
+  color="primary"
+  class="name-container"
+  *ngIf="!userInfo"
+>
+  <ng-container i18n="@@public-layout.sign_in"> SIGN IN</ng-container>/
+  <ng-container i18n="@@header.register">REGISTER</ng-container>
+</button>
+<mat-menu #menu="matMenu" class="user-menu">
+  <button mat-button class="main-button" (click)="goto('my-orcid')">
+    <div class="row main-button-container">
+      <div class="col">
+        <img src="./assets/vectors/profile-icon.svg" alt="" />
+      </div>
+      <div class="col name-container">
+        <div class="mat-title">{{ displayName }}</div>
+        <div class="mat-caption" i18n="@@ng-orcid.view.my.orcid">
+          View my ORCID record
+        </div>
+      </div>
+    </div>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>inbox</mat-icon>
+    <span i18n="@@workspace.notifications" (click)="goto('inbox')">Inbox</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span i18n="@@public-layout.account_setting" (click)="goto('account')"
+      >Account settings
+    </span>
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="
+      userInfo &&
+      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
+      userInfo['MEMBER_MENU'] == 'true'
+    "
+  >
+    <mat-icon>code</mat-icon>
+    <span
+      i18n="@@ng-orcid.advanceSearch"
+      (click)="goto('group/developer-tools')"
+      >Developer tools
+    </span>
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="
+      userInfo &&
+      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
+      userInfo['MEMBER_MENU'] != 'true'
+    "
+  >
+    <mat-icon>code</mat-icon>
+    <span i18n="@@ng-orcid.advanceSearch" (click)="goto('developer-tools')"
+      >Developer tools
+    </span>
+  </button>
+  <button mat-menu-item *ngIf="userInfo && userInfo['SELF_SERVICE_MENU']">
+    <mat-icon>build</mat-icon>
+    <span i18n="@@workspace.self_service" (click)="goto('manage-members')"
+      >Member tools
+    </span>
+  </button>
+  <button mat-menu-item *ngIf="userInfo && userInfo['ADMIN_MENU']">
+    <mat-icon>group</mat-icon>
+    <span
+      i18n="@@admin.members.workspace_link"
+      (click)="goto('/manage-members')"
+      >Manage members</span
+    >
+  </button>
+  <button mat-menu-item *ngIf="userInfo && userInfo['ADMIN_MENU']">
+    <mat-icon>verified_user</mat-icon>
+    <span i18n="@@admin.workspace_link" (click)="goto('admin-actions')"
+      >Admin page</span
+    >
+  </button>
+  <button mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon>
+    <span i18n="@@public-layout.sign_out" (click)="goto('signout')"
+      >Logout</span
+    >
+  </button>
+</mat-menu>

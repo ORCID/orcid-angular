@@ -20,10 +20,10 @@ const routes: Routes = [
     path: '',
     loadChildren: './home/home.module#HomeModule',
   },
-  {
-    matcher: matcher,
-    loadChildren: './profile/profile.module#ProfileModule',
-  },
+  // {
+  //   matcher: matcher,
+  //   loadChildren: './profile/profile.module#ProfileModule',
+  // },
   {
     path: '**',
     redirectTo: '/',

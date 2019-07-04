@@ -1,4 +1,4 @@
-import { MonthDayYearDate, Value } from './common.endpoint'
+import { MonthDayYearDate, Value, Visibility } from './common.endpoint'
 
 export enum AffiliationGroupsTypes {
   EMPLOYMENT = 'EMPLOYMENT',
@@ -76,11 +76,4 @@ export interface Affiliation {
   url: Value
   orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
   affiliationExternalIdentifiers?: any // TODO is this always empty?
-}
-
-export interface Visibility {
-  errors: [any] // TODO define object
-  required: boolean
-  getRequiredMessage: any
-  visibility: string // Todo make an enum
 }

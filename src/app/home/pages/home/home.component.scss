@@ -5,6 +5,7 @@
   height: 580px;
   background-repeat: no-repeat;
   background-position: center;
+  background-repeat: repeat;
   padding: 72px 0;
   box-sizing: border-box;
 
@@ -70,6 +71,7 @@
   .mat-body-1 {
     height: 100%;
     text-align: center;
+    max-width: 344px;
   }
   .mat-headline {
     text-align: center;
@@ -150,6 +152,34 @@
       .mat-display-1 {
         margin-top: 40px;
         margin-bottom: 7px;
+      }
+    }
+  }
+}
+.columns-12 {
+  :host {
+    .hero-header {
+      height: auto;
+    }
+    .register-section {
+      > .container {
+        max-width: 1440px;
+      }
+    }
+    .organization-section {
+      img {
+        min-height: 350px;
+      }
+      .mat-display-1 {
+        margin-top: 40px;
+        margin-bottom: 7px;
+      }
+      .text-container {
+        padding-left: 41px;
+        [dir='rtl'] & {
+          padding-left: auto;
+          padding-right: 41px;
+        }
       }
     }
   }

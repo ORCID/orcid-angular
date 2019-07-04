@@ -98,8 +98,15 @@ export interface MonthDayYearDate {
 }
 
 export interface Value {
-  errors: [any] // TODO is this always empty?
+  errors?: [any] // TODO is this always empty?
   value: string
+  required?: boolean
+  getRequiredMessage?: any
+}
+
+export interface Visibility {
+  errors: [any] // TODO define object
   required: boolean
   getRequiredMessage: any
+  visibility: string // Todo make an enum
 }

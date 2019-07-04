@@ -19,3 +19,7 @@
     @include mat-typography-level-to-styles($config, input);
   }
 }
+
+.mat-menu-panel {
+  overflow: hidden !important;
+}
