@@ -48,26 +48,50 @@
             ],
             "scripts": [],
             "serviceWorker": true,
-            "extractCss": true
+            "extractCss": true,
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.local.with.sandbox.ts"
+              }
+            ]
           },
           "configurations": {
-            "en-sandbox": {
+            "ar": {
               "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.sandbox.ts"
-                }
-              ]
-            },
-            "ar-sandbox": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.sandbox.ts"
-                },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
                   "with": "src/locale/messages.dynamic.ar.ts"
+                },
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.with.sandbox.ts"
+                }
+              ],
+              "outputPath": "dist/ar/",
+              "i18nFile": "src/locale/messages.static.ar.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ar",
+              "baseHref": "/ar/",
+              "index": "src/index.rtl.html"
+            },
+            "local-en": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
+            },
+            "local-ar": {
+              "fileReplacements": [
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ar.ts"
+                },
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
                 }
               ],
               "outputPath": "dist/ar/",
@@ -81,7 +105,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 }
               ],
               "optimization": true,
@@ -97,14 +121,13 @@
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
-              "baseHref": "/en/",
-              "statsJson": true
+              "baseHref": "/en/"
             },
             "production-fr": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -130,7 +153,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -157,7 +180,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -183,7 +206,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -209,7 +232,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -235,7 +258,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -261,7 +284,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -287,7 +310,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -313,7 +336,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -339,7 +362,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -365,7 +388,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -391,7 +414,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -417,7 +440,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -443,7 +466,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -469,7 +492,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -495,7 +518,886 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_TW.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/zh-TW/",
+              "i18nFile": "src/locale/messages.static.zh_TW.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-TW",
+              "baseHref": "/zh-TW/"
+            },
+            "qa-en": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/en/",
+              "i18nFile": "src/locale/messages.static.en.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
+            },
+            "qa-fr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.fr.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/fr/",
+              "i18nFile": "src/locale/messages.static.fr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "fr",
+              "baseHref": "/fr/"
+            },
+            "qa-ar": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ar.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ar/",
+              "i18nFile": "src/locale/messages.static.ar.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ar",
+              "baseHref": "/ar/",
+              "index": "src/index.rtl.html"
+            },
+            "qa-ca": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ca.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ca/",
+              "i18nFile": "src/locale/messages.static.ca.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ca",
+              "baseHref": "/ca/"
+            },
+            "qa-cs": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.cs.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/cs/",
+              "i18nFile": "src/locale/messages.static.cs.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "cs",
+              "baseHref": "/cs/"
+            },
+            "qa-es": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.es.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/es/",
+              "i18nFile": "src/locale/messages.static.es.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "es",
+              "baseHref": "/es/"
+            },
+            "qa-it": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.it.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/it/",
+              "i18nFile": "src/locale/messages.static.it.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "it",
+              "baseHref": "/it/"
+            },
+            "qa-ja": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ja.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ja/",
+              "i18nFile": "src/locale/messages.static.ja.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ja",
+              "baseHref": "/ja/"
+            },
+            "qa-ko": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ko.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ko/",
+              "i18nFile": "src/locale/messages.static.ko.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ko",
+              "baseHref": "/ko/"
+            },
+            "qa-lr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.lr.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/lr/",
+              "i18nFile": "src/locale/messages.static.lr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "lr",
+              "baseHref": "/lr/"
+            },
+            "qa-pt": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.pt.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/pt/",
+              "i18nFile": "src/locale/messages.static.pt.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "pt",
+              "baseHref": "/pt/"
+            },
+            "qa-rl": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.rl.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/rl/",
+              "i18nFile": "src/locale/messages.static.rl.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "rl",
+              "baseHref": "/rl/"
+            },
+            "qa-ru": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ru.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ru/",
+              "i18nFile": "src/locale/messages.static.ru.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ru",
+              "baseHref": "/ru/"
+            },
+            "qa-uk": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.uk.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/uk/",
+              "i18nFile": "src/locale/messages.static.uk.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "uk",
+              "baseHref": "/uk/"
+            },
+            "qa-xx": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.xx.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/xx/",
+              "i18nFile": "src/locale/messages.static.xx.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "xx",
+              "baseHref": "/xx/"
+            },
+            "qa-zh_CN": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_CN.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/zh-CN/",
+              "i18nFile": "src/locale/messages.static.zh_CN.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-CN",
+              "baseHref": "/zh-CN/"
+            },
+            "qa-zh_TW": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_TW.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/zh-TW/",
+              "i18nFile": "src/locale/messages.static.zh_TW.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-TW",
+              "baseHref": "/zh-TW/"
+            },
+            "sandbox-en": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/en/",
+              "i18nFile": "src/locale/messages.static.en.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "en",
+              "baseHref": "/en/",
+              "statsJson": true
+            },
+            "sandbox-fr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.fr.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/fr/",
+              "i18nFile": "src/locale/messages.static.fr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "fr",
+              "baseHref": "/fr/"
+            },
+            "sandbox-ar": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ar.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ar/",
+              "i18nFile": "src/locale/messages.static.ar.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ar",
+              "baseHref": "/ar/",
+              "index": "src/index.rtl.html"
+            },
+            "sandbox-ca": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ca.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ca/",
+              "i18nFile": "src/locale/messages.static.ca.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ca",
+              "baseHref": "/ca/"
+            },
+            "sandbox-cs": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.cs.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/cs/",
+              "i18nFile": "src/locale/messages.static.cs.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "cs",
+              "baseHref": "/cs/"
+            },
+            "sandbox-es": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.es.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/es/",
+              "i18nFile": "src/locale/messages.static.es.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "es",
+              "baseHref": "/es/"
+            },
+            "sandbox-it": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.it.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/it/",
+              "i18nFile": "src/locale/messages.static.it.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "it",
+              "baseHref": "/it/"
+            },
+            "sandbox-ja": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ja.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ja/",
+              "i18nFile": "src/locale/messages.static.ja.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ja",
+              "baseHref": "/ja/"
+            },
+            "sandbox-ko": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ko.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ko/",
+              "i18nFile": "src/locale/messages.static.ko.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ko",
+              "baseHref": "/ko/"
+            },
+            "sandbox-lr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.lr.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/lr/",
+              "i18nFile": "src/locale/messages.static.lr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "lr",
+              "baseHref": "/lr/"
+            },
+            "sandbox-pt": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.pt.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/pt/",
+              "i18nFile": "src/locale/messages.static.pt.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "pt",
+              "baseHref": "/pt/"
+            },
+            "sandbox-rl": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.rl.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/rl/",
+              "i18nFile": "src/locale/messages.static.rl.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "rl",
+              "baseHref": "/rl/"
+            },
+            "sandbox-ru": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ru.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ru/",
+              "i18nFile": "src/locale/messages.static.ru.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ru",
+              "baseHref": "/ru/"
+            },
+            "sandbox-uk": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.uk.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/uk/",
+              "i18nFile": "src/locale/messages.static.uk.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "uk",
+              "baseHref": "/uk/"
+            },
+            "sandbox-xx": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.xx.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/xx/",
+              "i18nFile": "src/locale/messages.static.xx.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "xx",
+              "baseHref": "/xx/"
+            },
+            "sandbox-zh_CN": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_CN.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/zh-CN/",
+              "i18nFile": "src/locale/messages.static.zh_CN.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-CN",
+              "baseHref": "/zh-CN/"
+            },
+            "sandbox-zh_TW": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -525,11 +1427,14 @@
             "browserTarget": "ng-orcid:build"
           },
           "configurations": {
-            "en-sandbox": {
-              "browserTarget": "ng-orcid:build:en-sandbox"
+            "ar": {
+              "browserTarget": "ng-orcid:build:ar"
             },
-            "ar-sandbox": {
-              "browserTarget": "ng-orcid:build:ar-sandbox"
+            "local-en": {
+              "browserTarget": "ng-orcid:build:local-en"
+            },
+            "local-ar": {
+              "browserTarget": "ng-orcid:build:local-ar"
             },
             "production-fr": {
               "browserTarget": "ng-orcid:build:production-fr"
@@ -581,6 +1486,108 @@
             },
             "production-zh_TW": {
               "browserTarget": "ng-orcid:build:production-zh_TW"
+            },
+            "sandbox-fr": {
+              "browserTarget": "ng-orcid:build:sandbox-fr"
+            },
+            "sandbox-ar": {
+              "browserTarget": "ng-orcid:build:sandbox-ar"
+            },
+            "sandbox-ca": {
+              "browserTarget": "ng-orcid:build:sandbox-ca"
+            },
+            "sandbox-cs": {
+              "browserTarget": "ng-orcid:build:sandbox-cs"
+            },
+            "sandbox-en": {
+              "browserTarget": "ng-orcid:build:sandbox-en"
+            },
+            "sandbox-es": {
+              "browserTarget": "ng-orcid:build:sandbox-es"
+            },
+            "sandbox-it": {
+              "browserTarget": "ng-orcid:build:sandbox-it"
+            },
+            "sandbox-ja": {
+              "browserTarget": "ng-orcid:build:sandbox-ja"
+            },
+            "sandbox-ko": {
+              "browserTarget": "ng-orcid:build:sandbox-ko"
+            },
+            "sandbox-lr": {
+              "browserTarget": "ng-orcid:build:sandbox-lr"
+            },
+            "sandbox-pt": {
+              "browserTarget": "ng-orcid:build:sandbox-pt"
+            },
+            "sandbox-rl": {
+              "browserTarget": "ng-orcid:build:sandbox-ru"
+            },
+            "sandbox-ru": {
+              "browserTarget": "ng-orcid:build:sandbox-ru"
+            },
+            "sandbox-uk": {
+              "browserTarget": "ng-orcid:build:sandbox-uk"
+            },
+            "sandbox-xx": {
+              "browserTarget": "ng-orcid:build:sandbox-xx"
+            },
+            "sandbox-zh_CN": {
+              "browserTarget": "ng-orcid:build:sandbox-zh_CN"
+            },
+            "sandbox-zh_TW": {
+              "browserTarget": "ng-orcid:build:sandbox-zh_TW"
+            },
+            "qa-fr": {
+              "browserTarget": "ng-orcid:build:qa-fr"
+            },
+            "qa-ar": {
+              "browserTarget": "ng-orcid:build:qa-ar"
+            },
+            "qa-ca": {
+              "browserTarget": "ng-orcid:build:qa-ca"
+            },
+            "qa-cs": {
+              "browserTarget": "ng-orcid:build:qa-cs"
+            },
+            "qa-en": {
+              "browserTarget": "ng-orcid:build:qa-en"
+            },
+            "qa-es": {
+              "browserTarget": "ng-orcid:build:qa-es"
+            },
+            "qa-it": {
+              "browserTarget": "ng-orcid:build:qa-it"
+            },
+            "qa-ja": {
+              "browserTarget": "ng-orcid:build:qa-ja"
+            },
+            "qa-ko": {
+              "browserTarget": "ng-orcid:build:qa-ko"
+            },
+            "qa-lr": {
+              "browserTarget": "ng-orcid:build:qa-lr"
+            },
+            "qa-pt": {
+              "browserTarget": "ng-orcid:build:qa-pt"
+            },
+            "qa-rl": {
+              "browserTarget": "ng-orcid:build:qa-ru"
+            },
+            "qa-ru": {
+              "browserTarget": "ng-orcid:build:qa-ru"
+            },
+            "qa-uk": {
+              "browserTarget": "ng-orcid:build:qa-uk"
+            },
+            "qa-xx": {
+              "browserTarget": "ng-orcid:build:qa-xx"
+            },
+            "qa-zh_CN": {
+              "browserTarget": "ng-orcid:build:qa-zh_CN"
+            },
+            "qa-zh_TW": {
+              "browserTarget": "ng-orcid:build:qa-zh_TW"
             }
           }
         },
