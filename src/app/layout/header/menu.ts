@@ -566,13 +566,21 @@ export const menu: ApplicationMenuItemBasic[] = [
   {
     id: 'public-layout.sign_in',
     label: LOCALE['public-layout.sign_in'],
-    requirements: { desktop: true, logging: false },
+    requirements: {
+      desktop: true,
+      logging: false,
+      togglz: [{ ENABLE_USER_MENU: 'false' }],
+    },
     route: 'signin',
   },
   {
     id: 'public-layout.sign_out',
     label: LOCALE['public-layout.sign_out'],
-    requirements: { desktop: true, logging: true },
+    requirements: {
+      desktop: true,
+      logging: true,
+      togglz: [{ ENABLE_USER_MENU: 'false' }],
+    },
     route: 'signout',
   },
 ]
