@@ -59,8 +59,11 @@ export class HeaderComponent implements OnInit {
   }
 
   setChildOfCurrentRouteAsSecondaryMenu() {
+    // Check all first level menu items
     this.menu.forEach(button => {
-      if (button.activeRoute != null) {
+      // If the activeRoute of the button is equal to the current route show it as hover
+      // Excepts if the current route is the home page
+      if (button.activeRoute != null && this.currentRoute !== '/') {
         button.hover = '/' + button.activeRoute === this.currentRoute
       } else {
         button.hover = '/' + button.route === this.currentRoute
