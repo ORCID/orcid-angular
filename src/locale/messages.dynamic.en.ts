@@ -58,7 +58,7 @@ export const LOCALE : {[key:string]: string} = {
   "ngOrcid.trademark2": "Trademark and iD Display Guidelines",
   "layout.public-layout.registry": "registry",
   "layout.public-layout.website": "website",
-  "orcid_bio_search.btnsearch": "Search",
+  "ngOrcid.search": "Search...",
   "public-layout.account_setting": "Account Settings",
   "workspace.developer_tools": "Developer tools",
   "admin.members.workspace_link": "Manage members",
