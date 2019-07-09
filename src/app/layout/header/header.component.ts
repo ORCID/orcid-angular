@@ -9,6 +9,8 @@ import {
   MenuItemRequirement,
 } from 'src/app/types/menu.local'
 import { environment } from 'src/environments/environment'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { Config } from 'src/app/types/togglz.endpoint'
 
 @Component({
   selector: 'app-header',
@@ -21,12 +23,14 @@ export class HeaderComponent implements OnInit {
   mobileMenuState = false
   menu: ApplicationMenuItem[] = this.createMenuList(menu)
   user: UserInfo
+  togglz: Config
 
   constructor(
     _router: Router,
     _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
-    _userInfo: UserService
+    _userInfo: UserService,
+    _togglz: TogglzService
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
@@ -40,6 +44,9 @@ export class HeaderComponent implements OnInit {
     })
     _userInfo.getUserInfoOnEachStatusUpdate().subscribe(data => {
       this.user = data.userInfo
+    })
+    _togglz.getTogglz().subscribe(data => {
+      this.togglz = data
     })
   }
 

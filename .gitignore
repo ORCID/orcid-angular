@@ -57,3 +57,4 @@ src/locale/messages.dynamic.zh_CN.ts
 src/locale/messages.dynamic.zh_TW.ts
 src/locale/translate-file-generator.js
 *.xlf
+src/locale/messages.translation.log.json

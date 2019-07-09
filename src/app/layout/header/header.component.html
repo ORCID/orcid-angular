@@ -4,6 +4,7 @@
       <div class="logo-container">
         <img src="./assets/vectors/orcid.logo.svg" />
         <div
+          class="mat-body-2"
           *ngIf="platform.columns12"
           i18n="#sentenceCase@@confirm-oauth-access.connectingresearchandresearchers"
         >
@@ -15,7 +16,14 @@
           <div *ngIf="mobileMenuState" class="col no-gutters">
             <app-language class="col no-gutters"></app-language>
           </div>
-          <div *ngIf="!mobileMenuState" class="col no-gutters">
+          <div
+            *ngIf="
+              !mobileMenuState &&
+              togglz &&
+              togglz.messages['ENABLE_USER_MENU'] === 'true'
+            "
+            class="col no-gutters"
+          >
             <app-user-menu></app-user-menu>
           </div>
 
@@ -111,9 +119,9 @@
 </nav>
 <div class="statics container">
   <div class="row">
-    <div class="col l5 m8 s4 push-l7">
+    <div class="col l5 m8 s4 push-l7" *ngIf="togglz">
       <div class="row middle mat-caption">
-        5,566,081
+        {{ togglz.messages.LIVE_IDS }}
         <ng-container i18n="@@public-layout.amount_ids"
           >ORCID iDs and counting.</ng-container
         >

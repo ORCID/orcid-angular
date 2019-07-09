@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, WINDOW } from 'src/app/core'
 import { PlatformInfo } from 'src/app/types'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { Config } from 'src/app/types/togglz.endpoint'
 
 @Component({
   selector: 'app-search',
@@ -12,6 +14,7 @@ import { LOCALE } from '../../../locale/messages.dynamic.en'
 export class SearchComponent implements OnInit {
   form: FormGroup
   platform: PlatformInfo
+  togglz: Config
   whereToSearch = [
     this.firstLetterUppercase(LOCALE['layout.public-layout.registry']),
     this.firstLetterUppercase(LOCALE['layout.public-layout.website']),
@@ -23,10 +26,14 @@ export class SearchComponent implements OnInit {
   whatToSearch = ''
   constructor(
     @Inject(WINDOW) private window: Window,
-    _platform: PlatformInfoService
+    _platform: PlatformInfoService,
+    _togglz: TogglzService
   ) {
     _platform.platformSubject.subscribe(data => {
       this.platform = data
+    })
+    _togglz.getTogglz().subscribe(data => {
+      this.togglz = data
     })
   }
 
