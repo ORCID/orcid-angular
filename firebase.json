@@ -71,6 +71,10 @@
         "destination": "/xx/index.html"
       },
       {
+        "source": "/source/**",
+        "destination": "/source/index.html"
+      },
+      {
         "source": "/zh-CN/**",
         "destination": "/zh-TW/index.html"
       },
