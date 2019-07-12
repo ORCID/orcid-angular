@@ -25,7 +25,8 @@
 }
 
 .search-box {
-  > div {
+  > div,
+  > button {
     height: 42px;
   }
   // border: 1px solid black;

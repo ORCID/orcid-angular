@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row horizontal-center">
         <div class="col l12 m8 s4 horizontal-center hero-logo">
-          <img src="assets/vectors/orcid.logo.icon.svg" alt="" />
+          <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
         </div>
 
         <h1
@@ -54,9 +54,9 @@
             <div class="col l12 m8 s4">
               <div class="number-circle" i18n="@@home.one">1</div>
             </div>
-            <div class="col l12 m8 s4 mat-headline" i18n="@@home.register">
+            <h2 class="col l12 m8 s4 mat-headline" i18n="@@home.register">
               REGISTER
-            </div>
+            </h2>
           </div>
           <div class="row mat-body-1 row mat-body-1 horizontal-center">
             <ng-container i18n="@@ngOrcid.getYourOrcid">
@@ -74,12 +74,16 @@
         <div class="col l4 m8 s4">
           <div class="row number-box">
             <div class="col l12 m8 s4">
-              <div class="number-circle" i18n="@@home.two">2</div>
+              <div class="number-circle" i18n="@@home.two" id="step-two">2</div>
             </div>
-            <div class="col l12 m8 s4 mat-headline">
+            <h2
+              class="col l12 m8 s4 mat-headline"
+              id="add-your-info"
+              aria-labelledby="step-two add-your-info"
+            >
               <ng-container i18n="@@home.add_your">ADD YOUR </ng-container>
               <ng-container i18n="@@home.info">INFO</ng-container>
-            </div>
+            </h2>
           </div>
           <div
             class="row mat-body-1 horizontal-center"
@@ -96,10 +100,14 @@
             <div class="col l12 m8 s4">
               <div class="number-circle" i18n="@@home.three">3</div>
             </div>
-            <div class="col l12 m8 s4 mat-headline">
+            <h2
+              class="col l12 m8 s4 mat-headline"
+              id="user-your-orcid-id"
+              aria-labelledby="user-your-orcid-id"
+            >
               <ng-container i18n="@@home.user_your">USE YOUR</ng-container
               ><ng-container i18n="@@home.orcid_id"> ORCID ID</ng-container>
-            </div>
+            </h2>
           </div>
           <div
             class="row mat-body-1 horizontal-center"
@@ -120,7 +128,7 @@
         *ngIf="platform.columns8 || platform.columns4"
         class="organization-img"
         src="assets/img/organizations.png  "
-        alt=""
+        aria-hidden="true"
       />
     </div>
     <div class="container ">
@@ -129,14 +137,15 @@
           <img
             *ngIf="platform.columns12"
             class="organization-img"
+            aria-hidden="true"
             src="assets/img/organizations.png  "
             alt=""
           />
         </div>
         <div class="col l8 m8 mat-body-2 text-container">
-          <h2 i18n="@@ngOrcid.membersMakeOrcid" class="mat-display-1">
+          <h1 i18n="@@ngOrcid.membersMakeOrcid" class="mat-display-1">
             Our organizational members make ORCID possible!
-          </h2>
+          </h1>
 
           <div>
             <div i18n="@@ngOrcid.orcidIs">
