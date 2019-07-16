@@ -6,6 +6,9 @@
   [matMenuTriggerFor]="menu"
   (menuOpened)="state = true"
   (menuClosed)="state = false"
+  role="navigation"
+  aria-labelledby="user-menu"
+  id="user-menu"
 >
   <img src="./assets/vectors/profile-icon.svg" alt="" />
   <ng-container *ngIf="platform.columns12" class="name-container">{{
@@ -20,6 +23,9 @@
   color="primary"
   class="name-container"
   *ngIf="!userInfo && !platform.columns4"
+  role="navigation"
+  aria-labelledby="sign-in-register"
+  id="sign-in-register"
 >
   <ng-container i18n="#upperCase@@public-layout.sign_in"> SIGN IN</ng-container
   >/<ng-container i18n="#upperCase@@header.register">REGISTER</ng-container>
@@ -31,7 +37,7 @@
 </ng-container>
 
 <mat-menu #menu="matMenu" class="user-menu">
-  <button mat-button class="main-button" (click)="goto('my-orcid')">
+  <button class="main-button" (click)="goto('my-orcid')" mat-menu-item>
     <div class="row main-button-container">
       <div class="col">
         <img src="./assets/vectors/profile-icon.svg" alt="" />

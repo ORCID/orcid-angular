@@ -1,31 +1,34 @@
-.main-button-container {
-  cursor: pointer;
-  padding-bottom: 8px;
-  padding-top: 4px;
-  align-items: center;
-  width: auto;
-  flex-wrap: nowrap;
-  max-width: 248px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  img {
-    height: 36px;
-    width: 36px;
-  }
-  .name-container {
-    flex-direction: column;
-    align-items: start;
+.main-button {
+  height: auto;
+  .main-button-container {
+    cursor: pointer;
+    padding-bottom: 8px;
+    padding-top: 4px;
+    align-items: center;
+    width: auto;
+    flex-wrap: nowrap;
+    max-width: 248px;
     overflow: hidden;
-    .mat-caption {
-      text-align: left;
+    text-overflow: ellipsis;
+
+    img {
+      height: 36px;
+      width: 36px;
     }
-    .mat-title {
-      margin: 0;
-      width: 199px;
+    .name-container {
+      flex-direction: column;
+      align-items: start;
       overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: left;
+      .mat-caption {
+        text-align: left;
+      }
+      .mat-title {
+        margin: 0;
+        width: 199px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+      }
     }
   }
 }
