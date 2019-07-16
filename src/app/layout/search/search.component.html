@@ -8,6 +8,7 @@
   <div id="ariaLabelWhere" hidden>Search on</div>
   <button
     id="whereToSearch"
+    type="button"
     matRipple
     [matMenuTriggerFor]="menu"
     class="col middle search-where mat-body-2"
@@ -18,18 +19,21 @@
     <div id="ariaLabelWhereLocation">{{ whereToSearchSelected }}</div>
     <mat-icon matSuffix role="presentation">arrow_drop_down</mat-icon>
   </button>
-  <div class="input-box">
+  <div
+    class="input-box"
+    (keyup.enter)="search(whereToSearchSelected, whatToSearch)"
+  >
     <input
       autocomplete="off"
       name="whatToSearch"
       [(ngModel)]="whatToSearch"
       [placeholder]="searchPlaceHolder"
       type="text"
-      (keyup.enter)="search(whereToSearchSelected, whatToSearch)"
     />
   </div>
   <button
     aria-label="search"
+    type="button"
     matRipple
     class="col middle search-icon"
     (click)="search(whereToSearchSelected, whatToSearch)"
