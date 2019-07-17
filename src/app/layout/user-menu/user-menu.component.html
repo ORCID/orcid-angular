@@ -7,8 +7,7 @@
   (menuOpened)="state = true"
   (menuClosed)="state = false"
   role="navigation"
-  aria-labelledby="user-menu"
-  id="user-menu"
+  aria-label="User menu"
 >
   <img src="./assets/vectors/profile-icon.svg" alt="" />
   <ng-container *ngIf="platform.columns12" class="name-container">{{
@@ -31,9 +30,15 @@
   >/<ng-container i18n="#upperCase@@header.register">REGISTER</ng-container>
 </button>
 <ng-container *ngIf="!userInfo && platform.columns4">
-  <div (click)="goto('login')" mat-ripple class="col small-login-icon">
+  <button
+    (click)="goto('login')"
+    mat-ripple
+    class="col small-login-icon"
+    role="navigation"
+    aria-label="user menu"
+  >
     <img src="./assets/vectors/profile-icon.svg" alt="" />
-  </div>
+  </button>
 </ng-container>
 
 <mat-menu #menu="matMenu" class="user-menu">

@@ -1,5 +1,11 @@
-<div class="hamburger">
+<button
+  class="hamburger"
+  role="navigation"
+  aria-label="Main menu"
+  aria-haspopup="true"
+  [attr.aria-expanded]="isOpen"
+>
   <div class="hamburger__icon" [ngClass]="{ open: isOpen }">
     <span></span> <span></span> <span></span> <span></span>
   </div>
-</div>
+</button>
