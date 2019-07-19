@@ -62,7 +62,11 @@
 </div>
 
 <!-- MAIN MENU -->
-<nav (mouseleave)="mouseLeave()" *ngIf="mobileMenuState || platform.columns12">
+<nav
+  (mouseleave)="mouseLeave()"
+  *ngIf="mobileMenuState || platform.columns12"
+  aria-label="main menu"
+>
   <div class="top-bar">
     <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
       <ng-template #recursiveList let-list let-parents="parents">
