@@ -53,6 +53,7 @@ ul {
 
 .links {
   > div {
+    justify-content: space-around;
     > :first-child {
       padding-left: 0;
     }
