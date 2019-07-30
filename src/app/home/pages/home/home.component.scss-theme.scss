@@ -17,7 +17,7 @@ $config: mat-typography-config();
       height: 580px;
 
       background: linear-gradient($overlay-color, $overlay-color),
-        url('/assets/img/hero-header-image.png');
+        url('../img/hero-header-image.png');
     }
     .register-section {
       .number-box {

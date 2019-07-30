@@ -11,7 +11,7 @@ $config: mat-typography-config();
     .news-box > .col > .row {
       text-align: center;
       background: linear-gradient($overlay-color, $overlay-color),
-        url('/assets/img/hero-header-image.png');
+        url('../img/hero-header-image.png');
       color: mat-contrast($primary, 400);
     }
   }
