@@ -5,6 +5,7 @@ import { PlatformInfoService, WINDOW } from 'src/app/core'
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  preserveWhitespaces: true,
 })
 export class FooterComponent implements OnInit {
   platform
