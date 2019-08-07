@@ -76,6 +76,9 @@ const languages = [
   {
     code: 'zh_TW',
   },
+  {
+    code: 'source',
+  },
 ]
 
 const reportFile: {
@@ -255,13 +258,22 @@ function setLanguagePropertiesToLanguageFile(
       // For each translation
       staticValues.xliff.file[0].unit.forEach(element => {
         // If an id match one of the translations properties
-        if (properties[element['$'].id]) {
-          // Runs the translation treatment where the text of some translations is modified
-          const translation = translationTreatment(
-            properties[element['$'].id],
-            element,
-            languageCode
-          )
+        if (properties[element['$'].id] || languageCode === 'source') {
+          let translation: string
+          if (languageCode === 'source') {
+            if (element['$'].id.indexOf('ngOrcid') > -1) {
+              translation = '**' + element['$'].id + '**'
+            } else {
+              translation = element.segment[0].source[0]
+            }
+          } else {
+            // Runs the translation treatment where the text of some translations is modified
+            translation = translationTreatment(
+              properties[element['$'].id],
+              element,
+              languageCode
+            )
+          }
           // The translation is added to the XLF file
           element.segment[0].target = []
           element.segment[0].target.push(translation)

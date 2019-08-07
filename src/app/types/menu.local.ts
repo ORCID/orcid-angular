@@ -23,6 +23,7 @@ export interface MenuItemRequirement {
   desktop?: boolean
   requiresAll?: Requirement[]
   requiresAny?: Requirement[]
+  togglz?: Requirement[]
 }
 
 export interface Requirement {

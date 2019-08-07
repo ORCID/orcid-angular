@@ -20,6 +20,7 @@ export const environment = {
     'zh-CN': '简体中文',
     'zh-TW': '繁體中文',
     xx: '** xx',
+    source: '** source',
     lr: '** lr',
     rl: '** rl',
     uk: '** Ukrainian',

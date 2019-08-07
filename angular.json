@@ -488,6 +488,32 @@
               "i18nLocale": "xx",
               "baseHref": "/xx/"
             },
+            "production-source": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.source.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/source/",
+              "i18nFile": "src/locale/messages.static.source.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "source",
+              "baseHref": "/source/"
+            },
             "production-zh_CN": {
               "fileReplacements": [
                 {
@@ -926,6 +952,32 @@
               "i18nFormat": "xlf2",
               "i18nLocale": "xx",
               "baseHref": "/xx/"
+            },
+            "qa-source": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.source.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/source/",
+              "i18nFile": "src/locale/messages.static.source.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "source",
+              "baseHref": "/source/"
             },
             "qa-zh_CN": {
               "fileReplacements": [
@@ -1367,6 +1419,32 @@
               "i18nLocale": "xx",
               "baseHref": "/xx/"
             },
+            "sandbox-source": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sandbox.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.source.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/source/",
+              "i18nFile": "src/locale/messages.static.source.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "source",
+              "baseHref": "/source/"
+            },
             "sandbox-zh_CN": {
               "fileReplacements": [
                 {
@@ -1481,6 +1559,9 @@
             "production-xx": {
               "browserTarget": "ng-orcid:build:production-xx"
             },
+            "production-source": {
+              "browserTarget": "ng-orcid:build:production-source"
+            },
             "production-zh_CN": {
               "browserTarget": "ng-orcid:build:production-zh_CN"
             },
@@ -1532,6 +1613,9 @@
             "sandbox-xx": {
               "browserTarget": "ng-orcid:build:sandbox-xx"
             },
+            "sandbox-source": {
+              "browserTarget": "ng-orcid:build:sandbox-source"
+            },
             "sandbox-zh_CN": {
               "browserTarget": "ng-orcid:build:sandbox-zh_CN"
             },
@@ -1582,6 +1666,9 @@
             },
             "qa-xx": {
               "browserTarget": "ng-orcid:build:qa-xx"
+            },
+            "qa-source": {
+              "browserTarget": "ng-orcid:build:qa-source"
             },
             "qa-zh_CN": {
               "browserTarget": "ng-orcid:build:qa-zh_CN"
