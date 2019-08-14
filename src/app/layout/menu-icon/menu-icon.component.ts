@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'app-menu-icon',
@@ -6,7 +6,17 @@ import { Component, OnInit, Input } from '@angular/core'
   styleUrls: ['./menu-icon.component.scss'],
 })
 export class MenuIconComponent implements OnInit {
-  @Input() isOpen = false
+  isOpenValue = false
+
+  @Input()
+  get isOpen() {
+    return this.isOpenValue
+  }
+  set isOpen(value) {
+    this.isOpenValue = value
+  }
+  @Output() isOpenChange = new EventEmitter<string>()
+
   constructor() {}
 
   ngOnInit() {}
