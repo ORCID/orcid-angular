@@ -1,4 +1,9 @@
-<button mat-button [matMenuTriggerFor]="languageMenu">
+<button
+  mat-button
+  [matMenuTriggerFor]="languageMenu"
+  aria-label="language"
+  role="navigation"
+>
   <div class="row middle space-between button-box">
     <p class="col no-gutters">{{ languageMenuOptions[locale] }}</p>
     <i class="col no-gutters material-icons"> expand_more </i>

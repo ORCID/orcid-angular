@@ -1,26 +1,29 @@
-<footer>
+<footer aria-label="footer">
   <div class="container">
     <div class="row logo space-around">
       <div class="col baseline">
-        <img src="./assets/vectors/orcid.logo.svg" />
+        <img src="./assets/vectors/orcid.logo.svg" alt="Orcid" />
         <img
           class="social"
           src="./assets/vectors/glyphicons-social-32-twitter.svg"
+          alt="Twitter"
         />
         <img
           class="social"
           src="./assets/vectors/glyphicons-social-38-rss.svg"
+          alt="Rss"
         />
         <img
           class="social"
           src="./assets/vectors/glyphicons-social-22-github.svg"
+          alt="Github"
         />
       </div>
     </div>
 
     <div class="row public-domain space-around">
       <div class=" CC0  mat-caption">
-        <img src="./assets/icons/public-domain.png" />
+        <img src="./assets/icons/public-domain.png" alt="public domain" />
         <ng-container i18n="@@footer.copyright_cc0_1"
           >Except where otherwise specified, the content of this website is
           published under a</ng-container
@@ -28,8 +31,8 @@
         <ng-container i18n="@@ngOrcid.copyright"> CC0 license.</ng-container>
       </div>
     </div>
-    <ul class="row links space-around">
-      <div class="col" [ngClass]="{ 'space-around': !platform.columns12 }">
+    <div class="row links space-around">
+      <ul class="col" [ngClass]="{ 'space-around': !platform.columns12 }">
         <li class="col s4 l-auto m8 no-gutters ">
           <button mat-button color="primary">
             <div
@@ -85,7 +88,7 @@
             </div>
           </button>
         </li>
-      </div>
-    </ul>
+      </ul>
+    </div>
   </div>
 </footer>
