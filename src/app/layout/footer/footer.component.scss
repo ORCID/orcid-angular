@@ -1,7 +1,7 @@
 footer {
   padding-bottom: 16px;
 }
-ul {
+.url-lists {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -52,9 +52,9 @@ ul {
 }
 
 .links {
-  > ul {
+  > .url-lists {
     justify-content: space-around;
-    li {
+    a {
       .columns-4 :host &,
       .columns-8 :host & {
         justify-content: space-around;
