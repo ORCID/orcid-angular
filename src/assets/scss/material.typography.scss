@@ -24,6 +24,8 @@ $orcid-custom-typography: (
 // MATERIAL TYPOGRAPHY OVERWRITES
 
 @mixin mat-button-typography($config) {
+  // Add .mat-button-font with the purpose of being able to use just the font
+  .mat-button-font,
   .mat-button,
   .mat-raised-button,
   .mat-icon-button,

@@ -54,9 +54,6 @@ ul {
 .links {
   > ul {
     justify-content: space-around;
-    > :first-child {
-      padding-left: 0;
-    }
     li {
       .columns-4 :host &,
       .columns-8 :host & {
@@ -67,4 +64,19 @@ ul {
       }
     }
   }
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+.links {
+  a {
+    cursor: pointer;
+    padding: 7px 20px;
+  }
+}
+
+.CC0 > a:hover {
+  text-decoration: underline;
 }
