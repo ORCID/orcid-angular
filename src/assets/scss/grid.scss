@@ -223,3 +223,7 @@ $gutter-width: 12px !default;
 .row.space-around {
   justify-content: space-around;
 }
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
