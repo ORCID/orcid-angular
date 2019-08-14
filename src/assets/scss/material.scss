@@ -4,10 +4,9 @@
 @import './material.typography.scss';
 
 // SETUP-FONTS
-@include mat-base-typography($orcid-material-typography);
-@include mat-checkbox-typography($orcid-material-typography);
-@include angular-material-typography($orcid-material-typography);
 @include mat-core($orcid-material-typography);
+@include angular-material-typography($orcid-material-typography);
+
 @include custom-components-typography(
   $orcid-material-typography,
   $orcid-custom-typography
