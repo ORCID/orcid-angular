@@ -25,6 +25,11 @@ const routes: Routes = [
   //   loadChildren: './profile/profile.module#ProfileModule',
   // },
   {
+    path: 'reset-password-email',
+    loadChildren:
+      './password-recovery/password-recovery.module#PasswordRecoveryModule',
+  },
+  {
     path: '**',
     redirectTo: '/',
   },
