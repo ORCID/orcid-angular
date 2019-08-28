@@ -1,17 +1,13 @@
 @import '~@angular/material/theming';
 @import './material.custom-components.scss';
-@import './material.theme.scss';
+@import './material.palettes.scss';
 @import './material.typography.scss';
+@import './material.theming.scss';
+// This document define the Material theme as describe on  https://github.com/angular/components/blob/master/guides/theming.md
 
-// SETUP-FONTS
-@include mat-core($orcid-material-typography);
-@include angular-material-typography($orcid-material-typography);
+// Sets the Orcid typography
 
-@include custom-components-typography(
-  $orcid-material-typography,
-  $orcid-custom-typography
-);
-
+@includemat-core ($orcid-material-typography);
 // SETUP-THEME
 $orcid-app-primary: mat-palette($orcid-blue);
 $orcid-app-accent: mat-palette($orcid-green);
@@ -21,27 +17,17 @@ $orcid-app-theme: mat-light-theme(
   $orcid-app-accent,
   $orcid-app-warn
 );
-$background: map-get($orcid-app-theme, background);
-$background: map_merge(
-  $background,
-  (
-    // CUSTOM BACKGROUND COLORS
-      app-news: $dark-primary-background,
-    light-grey: $light-grey,
-    blue-overlay: $blue-overlay,
-    dark-grey: $dark-grey-background
-  )
-);
-
-// CUSTOM FOREGROUND COLORS
-$foreground: map-get($orcid-app-theme, foreground);
-$foreground: map_merge($foreground, (// FOREGROUND BACKGROUND COLORS));
-$orcid-app-theme: map_merge(
-  $orcid-app-theme,
-  (
-    background: $background,
-    foreground: $foreground,
-  )
-);
+// Change default colors
+// $orcid-app-theme2: orcid-overwrites ($orcid-app-theme);
+// @debug orcid-overwrites($orcid-app-theme);
+$orcid-app-theme: orcid-overwrites($orcid-app-theme);
+// TODO include only the CSS for the used components
 @include angular-material-theme($orcid-app-theme);
+// .
+// .
+// SETUP ORCID COMPONENTS THEME
+@include custom-components-typography(
+  $orcid-material-typography,
+  $orcid-custom-typography
+);
 @include custom-components-theme($orcid-app-theme);
