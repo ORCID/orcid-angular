@@ -1,5 +1,10 @@
 @import '~@angular/material/theming';
 
+// .
+// .
+// MATERIAL TYPOGRAPHY
+// .
+// .
 $orcid-material-typography: mat-typography-config(
   $font-family: '"Noto Sans", sans-serif',
   $display-4: mat-typography-level(96px, 96px, 200, $letter-spacing: -1.5px),
@@ -20,9 +25,11 @@ $orcid-material-typography: mat-typography-config(
 $orcid-custom-typography: (
   title-alt: mat-typography-level(18px, normal, 600, $letter-spacing: 1.3px),
 );
-
+// .
+// .
 // MATERIAL TYPOGRAPHY OVERWRITES
-
+// .
+// .
 @mixin mat-button-typography($config) {
   // Add .mat-button-font with the purpose of being able to use just the font
   .mat-button-font,

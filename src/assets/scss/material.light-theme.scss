@@ -1,6 +1,10 @@
 @import './material.palettes.scss';
-@function orcid-overwrites($orcid-app-theme) {
-  // CUSTOM BACKGROUND COLORS
+@function light-theme-overwrites($orcid-app-theme) {
+  // .
+  // .
+  // OVERWRITE BACKGROUND COLORS
+  // .
+  // .
   $background: map-get($orcid-app-theme, background);
   $background: map_merge(
     $background,
@@ -11,7 +15,11 @@
       dark-grey: $dark-grey-background,
     )
   );
-  // CUSTOM FOREGROUND COLORS
+  // .
+  // .
+  // OVERWRITE FOREGROUND COLORS
+  // .
+  // .
   $foreground: map-get($orcid-app-theme, foreground);
   $foreground: map_merge($foreground, (// FOREGROUND BACKGROUND COLORS));
   $result: map_merge(

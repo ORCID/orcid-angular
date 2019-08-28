@@ -1,13 +1,15 @@
 @import '~@angular/material/theming';
-@import './material.custom-components.scss';
-@import './material.palettes.scss';
+@import './material.orcid-components.scss';
 @import './material.typography.scss';
-@import './material.theming.scss';
-// This document define the Material theme as describe on  https://github.com/angular/components/blob/master/guides/theming.md
+@import './material.light-theme.scss';
 
-// Sets the Orcid typography
-
-@includemat-core ($orcid-material-typography);
+// .
+// .
+// MATERIAL THEMING
+// .
+// .
+// Setup theme as describe on  https://github.com/angular/components/blob/master/guides/theming.md
+@include mat-core($orcid-material-typography);
 // SETUP-THEME
 $orcid-app-primary: mat-palette($orcid-blue);
 $orcid-app-accent: mat-palette($orcid-green);
@@ -17,17 +19,23 @@ $orcid-app-theme: mat-light-theme(
   $orcid-app-accent,
   $orcid-app-warn
 );
-// Change default colors
-// $orcid-app-theme2: orcid-overwrites ($orcid-app-theme);
-// @debug orcid-overwrites($orcid-app-theme);
-$orcid-app-theme: orcid-overwrites($orcid-app-theme);
-// TODO include only the CSS for the used components
+// Light theme color overwrites
+$orcid-app-theme: light-theme-overwrites($orcid-app-theme);
+// TODO include only the CSS for the used components, instead of everything
 @include angular-material-theme($orcid-app-theme);
 // .
 // .
-// SETUP ORCID COMPONENTS THEME
-@include custom-components-typography(
+// ORCID COMPONENTS THEMING
+// .
+// .
+// Theme Orcid components as describe on https://github.com/angular/components/blob/master/guides/theming-your-components.md
+@include orcid-components-typography(
   $orcid-material-typography,
   $orcid-custom-typography
 );
-@include custom-components-theme($orcid-app-theme);
+@include orcid-components-theme($orcid-app-theme);
+// .
+// .
+// MATERIAL COMPONENT OVERWRITES
+// .
+// .
