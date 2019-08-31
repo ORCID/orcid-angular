@@ -2,13 +2,14 @@
 @import './material.orcid-components.scss';
 @import './material.typography.scss';
 @import './material.light-theme.scss';
+@import './material.orcid.overwrites.scss/chips-theme';
 
 // .
 // .
 // MATERIAL THEMING
 // .
 // .
-// Setup the theme as describe on  https://github.com/angular/components/blob/75686e87fc8d5eb3d3e4a1bf6fa771c7467d328d/guides/theming.md
+// Setup the theme as describe on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
 @include mat-core($orcid-material-typography);
 $orcid-app-primary: mat-palette($orcid-blue);
 $orcid-app-accent: mat-palette($orcid-green);
@@ -27,7 +28,7 @@ $orcid-app-theme: light-theme-overwrites($orcid-app-theme);
 // ORCID COMPONENTS THEMING
 // .
 // .
-// More info on https://github.com/angular/components/blob/75686e87fc8d5eb3d3e4a1bf6fa771c7467d328d/guides/theming-your-components.md
+// More info on https://github.com/angular/components/blob/8.1.4/guides/theming-your-components.md
 @include orcid-components-typography(
   $orcid-material-typography,
   $orcid-custom-typography
@@ -38,5 +39,8 @@ $orcid-app-theme: light-theme-overwrites($orcid-app-theme);
 // MATERIAL OVERWRITES
 // .
 // .
-// The following mixings overwrite or extend material styles
+// More info about this on https://github.com/angular/components/blob/8.1.4/guides/customizing-component-styles.md
+// The following mixings and styles overwrite or extend material styles
 @include mat-base-typography-overwrites($orcid-material-typography);
+@import './material.orcid.overwrites.scss/chips.scss';
+@include mat-chips-theme-overwrites($orcid-app-theme);

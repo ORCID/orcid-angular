@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./password-recovery.component.scss'],
 })
 export class PasswordRecoveryComponent implements OnInit {
+  selected = false
   constructor() {}
 
   ngOnInit() {}
+
+  select() {
+    this.selected = !this.selected
+  }
 }
