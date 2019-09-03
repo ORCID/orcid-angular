@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common'
 
 import { PasswordRecoveryRoutingModule } from './password-recovery-routing.module'
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component'
-import { MatInputModule, MatChipsModule } from '@angular/material'
+import {
+  MatInputModule,
+  MatChipsModule,
+  MatButtonModule,
+} from '@angular/material'
 import { MultiRowRaisedButtonModule } from '../cdk/multi-row-raised-button/multi-row-raised-button.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
@@ -15,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     ReactiveFormsModule,
     MatChipsModule,
     MatInputModule,
-    MultiRowRaisedButtonModule,
+    MatButtonModule,
     PasswordRecoveryRoutingModule,
   ],
 })

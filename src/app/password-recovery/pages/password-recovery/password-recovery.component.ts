@@ -8,7 +8,7 @@ import { PasswordRecoveryService } from 'src/app/core/password-recovery/password
   styleUrls: ['./password-recovery.component.scss'],
 })
 export class PasswordRecoveryComponent implements OnInit {
-  selected = false
+  status = false
   value = false
 
   recoveryForm = new FormGroup({
@@ -20,15 +20,19 @@ export class PasswordRecoveryComponent implements OnInit {
 
   ngOnInit() {}
 
+  onChipSelect(event) {
+    console.log(event)
+  }
+
   select() {
-    this.selected = !this.selected
+    this.status = !this.status
   }
 
   onSubmit() {
     console.log(this.recoveryForm.getRawValue())
   }
 
-  click(a) {
+  chipsChange(a) {
     console.log(a)
   }
 }
