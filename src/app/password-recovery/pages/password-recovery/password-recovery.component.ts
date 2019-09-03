@@ -6,10 +6,12 @@ import { PasswordRecoveryService } from 'src/app/core/password-recovery/password
   selector: 'app-password-recovery',
   templateUrl: './password-recovery.component.html',
   styleUrls: ['./password-recovery.component.scss'],
+  preserveWhitespaces: true,
 })
 export class PasswordRecoveryComponent implements OnInit {
   status = false
   value = false
+  email = 'test'
 
   recoveryForm = new FormGroup({
     type: new FormControl(''),
