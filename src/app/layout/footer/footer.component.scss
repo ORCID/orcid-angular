@@ -1,7 +1,7 @@
 footer {
   padding-bottom: 16px;
 }
-ul {
+.url-lists {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -52,12 +52,9 @@ ul {
 }
 
 .links {
-  > ul {
+  > .url-lists {
     justify-content: space-around;
-    > :first-child {
-      padding-left: 0;
-    }
-    li {
+    a {
       .columns-4 :host &,
       .columns-8 :host & {
         justify-content: space-around;
@@ -67,4 +64,19 @@ ul {
       }
     }
   }
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+.links {
+  a {
+    cursor: pointer;
+    padding: 7px 20px;
+  }
+}
+
+.CC0 > a:hover {
+  text-decoration: underline;
 }

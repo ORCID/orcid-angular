@@ -8,5 +8,8 @@ $config: mat-typography-config();
   $background: map-get($theme, background);
   footer {
     background-color: map-get($background, light-grey);
+    a {
+      color: map-get($foreground, text);
+    }
   }
 }

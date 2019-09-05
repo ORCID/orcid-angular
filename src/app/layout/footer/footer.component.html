@@ -28,67 +28,57 @@
           >Except where otherwise specified, the content of this website is
           published under a</ng-container
         >
-        <ng-container i18n="@@ngOrcid.copyright">CC0 license.</ng-container>
+        <a
+          i18n="@@ngOrcid.copyright"
+          href="http://creativecommons.org/publicdomain/zero/1.0/"
+          rel="license noreferrer"
+          target="footer.copyright_cc0"
+          class="mat-button-font"
+          >CC0 license.</a
+        >
       </div>
     </div>
     <div class="row links space-around">
-      <ul class="col" [ngClass]="{ 'space-around': !platform.columns12 }">
-        <li class="col s4 l-auto m8 no-gutters ">
-          <button mat-button color="primary">
-            <div
-              class="button-wrapper"
-              i18n="@@footer.privacypolicy"
-              (click)="goTo('/footer/privacy-policy')"
-            >
-              Privacy Policy
-            </div>
-          </button>
-        </li>
-        <li class="col s4 l-auto m8 no-gutters">
-          <button mat-button color="primary">
-            <div
-              class="button-wrapper"
-              i18n="@@footer.termsofuse"
-              (click)="goTo('/content/orcid-terms-use')"
-            >
-              Terms of Use
-            </div>
-          </button>
-        </li>
-        <li class="col s4 l-auto m8 no-gutters">
-          <button mat-button color="primary">
-            <div
-              class="button-wrapper"
-              i18n="@@ngOrcid.disputeProcedure"
-              (click)="goTo('/orcid-dispute-procedures')"
-            >
-              Dispute procedures
-            </div>
-          </button>
-        </li>
-        <li class="col s4 l-auto m8 no-gutters">
-          <button mat-button color="primary">
-            <div
-              class="button-wrapper"
-              i18n="@@footer.contactus"
-              (click)="goTo('/hc/en-us/requests/new')"
-            >
-              Contact us
-            </div>
-          </button>
-        </li>
-        <li class="col s4 l-auto m8 no-gutters">
-          <button mat-button color="primary">
-            <div
-              class="button-wrapper"
-              i18n="@@ngOrcid.trademark"
-              (click)="goTo('/trademark-and-id-display-guidelines')"
-            >
-              Trademark & iD guidelines
-            </div>
-          </button>
-        </li>
-      </ul>
+      <div
+        class="col mat-button-font url-lists"
+        [ngClass]="{ 'space-around': !platform.columns12 }"
+      >
+        <a
+          class="col s4 l-auto m8  "
+          i18n="@@footer.privacypolicy"
+          (click)="goTo('/footer/privacy-policy')"
+        >
+          Privacy Policy
+        </a>
+        <a
+          class="col s4 l-auto m8 "
+          i18n="@@footer.termsofuse"
+          (click)="goTo('/content/orcid-terms-use')"
+        >
+          Terms of Use
+        </a>
+        <a
+          class="col s4 l-auto m8"
+          i18n="@@ngOrcid.disputeProcedure"
+          (click)="goTo('/orcid-dispute-procedures')"
+        >
+          Dispute procedures
+        </a>
+        <a
+          class="col s4 l-auto m8"
+          i18n="@@footer.contactus"
+          (click)="goTo('/hc/en-us/requests/new')"
+        >
+          Contact us
+        </a>
+        <a
+          class="col s4 l-auto m8"
+          (click)="goTo('/trademark-and-id-display-guidelines')"
+          i18n="@@ngOrcid.trademark"
+        >
+          Trademark & iD guidelines
+        </a>
+      </div>
     </div>
   </div>
 </footer>
