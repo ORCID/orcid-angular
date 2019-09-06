@@ -7,6 +7,7 @@ import {
   MatInputModule,
   MatChipsModule,
   MatButtonModule,
+  MatProgressBarModule,
 } from '@angular/material'
 import { MultiRowRaisedButtonModule } from '../cdk/multi-row-raised-button/multi-row-raised-button.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     MatInputModule,
     MatButtonModule,
     PasswordRecoveryRoutingModule,
+    MatProgressBarModule,
   ],
 })
 export class PasswordRecoveryModule {}
