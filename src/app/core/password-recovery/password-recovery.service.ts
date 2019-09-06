@@ -22,7 +22,18 @@ export class PasswordRecoveryService {
         { withCredentials: true }
       )
       .pipe(
-        retry(0),
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
+  }
+
+  remindOrcidId(data) {
+    return this._http
+      .post<PasswordRecovery>(environment.API_WEB + `forgot-id.json`, data, {
+        withCredentials: true,
+      })
+      .pipe(
+        retry(3),
         catchError(this._errorHandler.handleError)
       )
   }

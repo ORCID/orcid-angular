@@ -50,10 +50,16 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
     const value = this.recoveryForm.getRawValue()
     // Mark all elements as touch to display untouched FormControl errors
     this.recoveryForm.markAllAsTouched()
-    // Only if the local validations pass, call the backend
+    // If the local validations pass, call the backend
     if (this.recoveryForm.valid) {
       this.loading = true
-      this._passwordRecovery.resetPassword(value).subscribe(data => {
+      let $recovery
+      if (this.typeFormControl.value === 'remindOrcidId') {
+        $recovery = this._passwordRecovery.remindOrcidId(value)
+      } else {
+        $recovery = this._passwordRecovery.resetPassword(value)
+      }
+      $recovery.subscribe(data => {
         this.loading = false
         // Sets the list of backend errors to the control
         if (data.errors && data.errors.length) {
