@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core'
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { matFormFieldAnimations } from '@angular/material'
+import { WINDOW } from 'src/app/core'
 
 @Component({
   selector: 'app-password-recovery',
@@ -16,7 +17,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   email = 'test'
   _subscriptAnimationState = ''
   loading = false
-  submited = false
+  submitted = false
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -29,21 +30,16 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
     email: this.emailFormControl,
   })
 
-  constructor(private _passwordRecovery: PasswordRecoveryService) {}
+  constructor(
+    private _passwordRecovery: PasswordRecoveryService,
+    @Inject(WINDOW) private window: Window
+  ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
     // Avoid animations on load.
     this._subscriptAnimationState = 'enter'
-  }
-
-  onChipSelect(event) {
-    console.log(event)
-  }
-
-  select() {
-    this.status = !this.status
   }
 
   onSubmit() {
@@ -67,15 +63,13 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
             backendErrors: data.errors || null,
           })
         } else if (data.successMessage.length) {
-          this.submited = true
+          this.submitted = true
         }
       })
     }
-
-    console.log(value)
   }
 
-  chipsChange(a) {
-    console.log(a)
+  navigateTo(val) {
+    this.window.location.href = val
   }
 }

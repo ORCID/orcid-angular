@@ -94,12 +94,70 @@
                   "with": "src/environments/environment.local.ts"
                 }
               ],
+
+              "aot": true,
               "outputPath": "dist/ar/",
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
               "baseHref": "/ar/",
               "index": "src/index.rtl.html"
+            },
+            "local-fr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.fr.ts"
+                },
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "aot": true,
+              "outputPath": "dist/fr/",
+              "i18nFile": "src/locale/messages.static.fr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "fr",
+              "baseHref": "/fr/"
+            },
+
+            "local-source": {
+              "aot": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.source.ts"
+                },
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "outputPath": "dist/source/",
+              "i18nFile": "src/locale/messages.static.source.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "source",
+              "baseHref": "/source/"
+            },
+
+            "local-xx": {
+              "fileReplacements": [
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.xx.ts"
+                },
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "aot": true,
+              "outputPath": "dist/xx/",
+              "i18nFile": "src/locale/messages.static.xx.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "xx",
+              "baseHref": "/xx/"
             },
             "production-en": {
               "fileReplacements": [
@@ -1513,6 +1571,15 @@
             },
             "local-ar": {
               "browserTarget": "ng-orcid:build:local-ar"
+            },
+            "local-source": {
+              "browserTarget": "ng-orcid:build:local-source"
+            },
+            "local-xx": {
+              "browserTarget": "ng-orcid:build:local-xx"
+            },
+            "local-fr": {
+              "browserTarget": "ng-orcid:build:local-fr"
             },
             "production-fr": {
               "browserTarget": "ng-orcid:build:production-fr"

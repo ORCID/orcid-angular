@@ -257,15 +257,12 @@ function setLanguagePropertiesToLanguageFile(
       }
       // For each translation
       staticValues.xliff.file[0].unit.forEach(element => {
-        // If an id match one of the translations properties
+        // If an id match one of the translations properties or de language code is "source"
         if (properties[element['$'].id] || languageCode === 'source') {
           let translation: string
+          // languageCode 'source' use the key translation value as the text of the translation to debug translation
           if (languageCode === 'source') {
-            if (element['$'].id.indexOf('ngOrcid') > -1) {
-              translation = '**' + element['$'].id + '**'
-            } else {
-              translation = element.segment[0].source[0]
-            }
+            translation = element['$'].id
           } else {
             // Runs the translation treatment where the text of some translations is modified
             translation = translationTreatment(
@@ -362,16 +359,19 @@ function getTranslationFileFromGithub(baseUrl, code) {
       if (result) {
         return result
       } else {
-        console.log('Unexisting language fie: ' + baseUrl + code)
-        if (!reportFile.language[code]) {
-          reportFile.language[code] = {}
+        // Do not report missing "source" files since those are not expect to exist on the orcid-source
+        if (code !== 'source') {
+          console.log('Unexisting language fie: ' + baseUrl + code)
+          if (!reportFile.language[code]) {
+            reportFile.language[code] = {}
+          }
+          if (!reportFile.language[code].unexistingFiles) {
+            reportFile.language[code].unexistingFiles = []
+          }
+          reportFile.language[code].unexistingFiles.push(
+            baseUrl + code + '.properties'
+          )
         }
-        if (!reportFile.language[code].unexistingFiles) {
-          reportFile.language[code].unexistingFiles = []
-        }
-        reportFile.language[code].unexistingFiles.push(
-          baseUrl + code + '.properties'
-        )
         return result
       }
     })
