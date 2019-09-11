@@ -2,9 +2,15 @@ import { storiesOf } from '@storybook/angular'
 import { MatButtonModule, MatChipsModule } from '@angular/material'
 import { action } from '@storybook/addon-actions'
 
-storiesOf('Material Buttons', module).add('Plain', () => ({
-  template: `
-    <h1 id="Material Chips" id="title">Material Chips</h1>
+let matChips = `
+## Select/Unselect
+Sample content
+`
+
+storiesOf('Material Chips', module).add(
+  'Plain',
+  () => ({
+    template: `
     <mat-chip-list
       aria-labelledby="title"
       (change)="matChipListChange($event)"
@@ -43,16 +49,16 @@ storiesOf('Material Buttons', module).add('Plain', () => ({
     </mat-chip-list>
     `,
 
-  props: {
-    matChipListChange: action('log'),
-  },
-  moduleMetadata: {
-    imports: [MatChipsModule],
-  },
-}))
-// .add('Custom outline', () => ({
-//   template: ``,
-//   moduleMetadata: {
-//     imports: [MatChipsModule],
-//   },
-// }))
+    props: {
+      matChipListChange: action('log'),
+    },
+    moduleMetadata: {
+      imports: [MatChipsModule],
+    },
+  }),
+  {
+    notes: {
+      markdown: matChips,
+    },
+  }
+)
