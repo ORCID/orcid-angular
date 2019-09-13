@@ -1,6 +1,8 @@
 import { configure, addParameters, addDecorator } from '@storybook/angular'
 import { withA11y } from '@storybook/addon-a11y'
 
+import '!style-loader!css-loader!sass-loader!./storybook.orcid-theme.scss'
+
 addDecorator(withA11y)
 //
 addParameters({
