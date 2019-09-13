@@ -3,23 +3,15 @@
 @import './material.typography.scss';
 @import './material.light-theme.scss';
 @import './material.orcid.overwrites.scss/chips-theme';
+@import './material.orcid-theme.scss';
 
 // .
 // .
 // MATERIAL THEMING
 // .
 // .
-// Setup the theme as describe on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
+// Style material components more info on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
 @include mat-core($orcid-material-typography);
-$orcid-app-primary: mat-palette($orcid-blue);
-$orcid-app-accent: mat-palette($orcid-green);
-$orcid-app-warn: mat-palette($mat-red);
-$orcid-app-theme: mat-light-theme(
-  $orcid-app-primary,
-  $orcid-app-accent,
-  $orcid-app-warn
-);
-// Light theme color overwrites
 $orcid-app-theme: light-theme-overwrites($orcid-app-theme);
 // TODO: include only the CSS for the used components, instead of everything
 @include angular-material-theme($orcid-app-theme);
