@@ -7,7 +7,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Material Chips', module).add(
+storiesOf('Chips', module).add(
   'Plain',
   () => ({
     template: `

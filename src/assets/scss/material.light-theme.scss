@@ -15,11 +15,13 @@
   $background: map_merge(
     $background,
     (
-      app-news: $dark-primary-background,
+      // COLORS ADDED
+        app-news: $dark-primary-background,
       light-grey: $light-grey,
       blue-overlay: $blue-overlay,
       dark-grey: $dark-grey-background,
-      unselected-chip: white,
+      // COLORS OVERWRITES
+        unselected-chip: white
     )
   );
   // .

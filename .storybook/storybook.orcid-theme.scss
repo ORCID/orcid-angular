@@ -36,14 +36,17 @@
 @mixin story-book-palettes($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
-  $warn: map-get($theme, accent);
+  $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   $overlay-color: mat-color($background, blue-overlay);
+
+  @include extract-palette-styles('primary', $primary);
+  @include extract-palette-styles('accent', $accent);
+  @include extract-palette-styles('warn', $warn);
+  @include extract-palette-styles('foreground', $foreground);
+  @include extract-palette-styles('foreground', $background);
 }
 div {
-  @include extract-palette-styles('primary', $orcid-app-primary);
-  @include extract-palette-styles('accent', $orcid-app-accent);
-  @include extract-palette-styles('warn', $orcid-app-warn);
   @include story-book-palettes($orcid-app-theme);
 }
