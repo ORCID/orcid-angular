@@ -48,7 +48,6 @@ storiesOf('Chips', module).add(
       >
     </mat-chip-list>
     `,
-
     props: {
       matChipListChange: action('log'),
     },
