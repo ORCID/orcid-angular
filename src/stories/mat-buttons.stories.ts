@@ -7,7 +7,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Button', module).add(
+storiesOf('Components|Button', module).add(
   'Plain',
   () => ({
     styles: [

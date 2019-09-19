@@ -7,7 +7,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf(' Fonts', module).add(
+storiesOf('Foundation|Fonts', module).add(
   'Noto Sans',
   () => ({
     template: `

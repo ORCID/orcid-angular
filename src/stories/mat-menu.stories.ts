@@ -7,7 +7,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Menu (drop-down)', module).add(
+storiesOf('Components|Menu', module).add(
   'Basic menu',
   () => ({
     template: `

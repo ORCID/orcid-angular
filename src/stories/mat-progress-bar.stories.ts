@@ -6,7 +6,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Progress Bar', module).add(
+storiesOf('Components|Progress Bar', module).add(
   'Indeterminate',
   () => ({
     template: `

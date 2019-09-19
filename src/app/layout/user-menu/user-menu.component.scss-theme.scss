@@ -6,7 +6,6 @@ $config: mat-typography-config();
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-
   .user-menu {
     .main-button {
       border-bottom: 1px map-get($foreground, divider) solid;

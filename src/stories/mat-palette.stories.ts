@@ -1,13 +1,17 @@
 import { storiesOf } from '@storybook/angular'
 import { MatButtonModule, MatChipsModule } from '@angular/material'
 import { action } from '@storybook/addon-actions'
+import { environment } from '../environments/environment'
 
 let matChips = `
 ## Select/Unselect
 Sample content
 `
+if (environment) {
+  // This ensures that the basePath typeScript feature works with storybook
+}
 
-storiesOf('Palette', module)
+storiesOf('Foundation|Palette', module)
   .add(
     'Primary',
     () => ({
@@ -122,7 +126,7 @@ storiesOf('Palette', module)
     'Foreground',
     () => ({
       template: `
-      <div style="display: flex; width: 300px;">
+      <div style="display: flex; width: 600px;">
       <div
         style="
           width: 300px;
@@ -134,6 +138,12 @@ storiesOf('Palette', module)
         <div class="foreground-palette-disabled-button">disabled-button</div>
         <div class="foreground-palette-disabled-text">disabled-text</div>
         <div class="foreground-palette-elevation">elevation</div>
+        </div>
+        <div
+        style="
+          width: 300px;
+      "
+      >
         <div class="foreground-palette-hint-text">hint-text</div>
         <div class="foreground-palette-secondary-text">secondary-text</div>
         <div class="foreground-palette-icon">icon</div>
@@ -141,7 +151,7 @@ storiesOf('Palette', module)
         <div class="foreground-palette-slider-min">slider-min</div>
         <div class="foreground-palette-50">slider-off-active</div>
 
-      </div>
+        </div>
       </div>
     `,
     }),
@@ -155,7 +165,7 @@ storiesOf('Palette', module)
     'Background',
     () => ({
       template: `
-      <div style="display: flex; width: 300px;">
+      <div style="display: flex; width: 600px;">
       <div
         style="
           width: 300px;
@@ -170,12 +180,17 @@ storiesOf('Palette', module)
         <div class="foreground-palette-disabled-button">disabled-button</div>
         <div class="foreground-palette-raised-button">raised-button</div>
         <div class="foreground-palette-focused-button">focused-button</div>
+        </div>
+        <div
+        style="
+          width: 300px;
+      "
+      >
         <div class="foreground-palette-selected-button">selected-button</div>
         <div class="foreground-palette-selected-disabled-button">selected-disabled-button</div>
         <div class="foreground-palette-disabled-button-toggle">disabled-button-toggle</div>
         <div class="foreground-palette-unselected-chip">unselected-chip <i>custom</i></div>
         <div class="foreground-palette-disabled-list-option">disabled-list-option</div>
-
         <div class="foreground-palette-app-news">app-news <i>added</i></div>
         <div class="foreground-palette-light-grey">light-grey <i>added</i></div>
         <div class="foreground-palette-blue-overlay">blue-overlay <i>added</i></div>
