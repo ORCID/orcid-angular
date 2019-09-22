@@ -1,0 +1,11 @@
+import GetStarted from '../../README.md'
+import { moduleMetadata } from '@storybook/angular'
+import { Description } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="Docs|Get Started"
+  decorators={[moduleMetadata({ imports: [] })]}
+  parameters={{ order: 1 }}
+/>
+
+<Description markdown={GetStarted} />

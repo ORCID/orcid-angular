@@ -18,7 +18,6 @@
 @import '../../app/password-recovery/pages/password-recovery/password-recovery.component.scss-theme.scss';
 
 @mixin orcid-components-theme($theme) {
-  @debug $theme;
   @include global-theme($theme);
   @include header-theme($theme);
   @include search-theme($theme);
