@@ -1,0 +1,11 @@
+import CreateFeatureModule from '../../guides/create-feature-module.md'
+import { moduleMetadata } from '@storybook/angular'
+import { Description } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="Docs|Create a feature module"
+  decorators={[moduleMetadata({ imports: [] })]}
+  parameters={{ order: 2 }}
+/>
+
+<Description markdown={CreateFeatureModule} />
