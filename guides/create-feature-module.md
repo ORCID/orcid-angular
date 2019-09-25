@@ -19,7 +19,7 @@ ng generate module hello-world --routing
 #### 3- Add a new page component to the new module.
 
 There are different types of components sometimes a component might represent a complete view, and sometimes a component can be a small reusable part of a view.
-To make sense of that this project follows the module structure of having a folder called `pages` (which contains complete views) and another folder called `components` (for the small elements) inside the module.
+To make sense of that this project follows the module structure of having a folder called `pages` (which contains complete views) and another folder called `components` (for sub-elements of a page) inside the module.
 
 ```
 
@@ -40,7 +40,7 @@ ng generate component hello-world/pages/hello-world
 And after that, if you want to create a component inside that view you can call
 
 ```
-ng generate component hello-world/components/hello-sub-component
+ng generate component hello-world/components/hello-sub-element
 ```
 
 To read more about this structure please go to [How to define a highly scalable folder structure for your Angular project](https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7)

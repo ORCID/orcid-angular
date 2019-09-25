@@ -11,7 +11,7 @@ import { Story, Meta } from '@storybook/addon-docs/blocks'
 
 While creating new components usually colors from the design foundation are required. This document describes how to apply these colors.
 
-To archive this angular/material use a SASS map `theme` that contains 5 different palettes.
+To archive, this Angular Material use a SASS map `theme` that contains 5 different palettes.
 
 ### Orcid app palettes
 
@@ -32,8 +32,7 @@ The colors of these palettes can be extracted usign the functions `mat-color($pa
 
 ### Light theme palettes
 
-These palettes contain the colors used on many foreground and background elements of angular/material.
-The colors can be extracted usign `mat-color($palette-name, $color-name)`.
+These palettes contain the colors used in many foreground and background elements. The colors can be extracted using the function `mat-color($palette-name, $color-name)`.
 
 ##### foreground
 
@@ -43,11 +42,11 @@ The colors can be extracted usign `mat-color($palette-name, $color-name)`.
 
 <Story id="foundation-palette--background" height="200px" />
 
-### To use the palettes...
+### Apply palettes to new components
 
-A `.scss` file can be created inside the component folder, with the purpose of declaring a theme mixin.
+A `.scss` file can be created inside the component folder, to declare a theme mixin.
 
-Following the name convection of `<component-name>.scss-theme.scss`
+Following the name convection of `<component-name>.scss-theme.scss` (proposed on the post [The complete guide to Angular Material Themes](https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1)), create a new file with the following content:
 
 ```
 @import '~@angular/material/theming';
@@ -65,10 +64,8 @@ Following the name convection of `<component-name>.scss-theme.scss`
 }
 ```
 
-This theming file exposes the lists palettes from the theme into the variables `$primary`, `$accent`, `$warn`, `$foreground` and `$background`.
-To extract the colors `mat-color` and/or `mat-contrast` can be used.
-
-⚠️After declaring this mixing it must be imported and declared on `src/assets/scss/material.orcid-components.scss` to be declared globally for the application.
+This file exposes the palettes from the theme into the variables `$primary`, `$accent`, `$warn`, `$foreground` and `$background`.
+To extract the colors from these palettes use the `mat-color` and/or `mat-contrast` functions.
 
 A simple example of this is the SearchComponent which uses colors from the background, the primary and accent palettes.
 
@@ -92,17 +89,18 @@ A simple example of this is the SearchComponent which uses colors from the backg
 }
 ```
 
+⚠️After declaring this mixing it must be imported and declared in `src/assets/scss/material.orcid-components.scss` to be declared globally for the application.
+
 ## 🔧Adding/overwriting the colors of the palettes
 
 ### Orcid app palettes
 
-The Orcid app palettes and it's contrast can be found on `src/assets/scss/material.palettes.scss`.
-
-The warn palette is directly taken from the material library, if a change is required it can be added to `material.palettes.scss` and declared on `material.orcid-theme.scss`
+The Orcid app palettes and it's contrast can be found in `src/assets/scss/material.palettes.scss`.
+While the warn palette is directly taken from Angular Material.
 
 ### Light theme palettes
 
 Angular material offers a light-theme with [predefined colors](https://github.com/angular/components/blob/8.1.4/src/material/core/theming/_palette.scss#L674-L745). This is used with some modifications.
 If it's required to add or overwrite a color the file to do this is `src/assets/scss/material.light-theme.scss`
 
-⚠️It's recomended to check what other elements are affect when a color is overwrited on the Orcid App and on the Angular Material library.
+⚠️It's recommended to check what other elements on the Orcid App and the Angular Material library are affected when a color is overwritten.
