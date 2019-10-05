@@ -6,7 +6,10 @@ import { PlatformInfo, UserInfo, NameForm } from 'src/app/types'
 @Component({
   selector: 'app-user-menu',
   templateUrl: './user-menu.component.html',
-  styleUrls: ['./user-menu.component.scss'],
+  styleUrls: [
+    './user-menu.component.scss-theme.scss',
+    './user-menu.component.scss',
+  ],
 })
 export class UserMenuComponent implements OnInit {
   state = false

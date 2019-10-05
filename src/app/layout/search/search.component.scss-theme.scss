@@ -1,29 +1,32 @@
 @import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
 @mixin search-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  app-search {
-    .search-where {
-      background-color: mat-color($background, dark-grey);
-      color: mat-contrast($primary, 500);
+
+  .search-where {
+    background-color: mat-color($background, dark-grey);
+    color: mat-contrast($primary, 500);
+  }
+  .input-box {
+    input::placeholder {
+      color: mat-contrast($accent, 200);
     }
-    .input-box {
-      input::placeholder {
-        color: mat-contrast($accent, 200);
-      }
-    }
-    .search-icon {
-      background-color: mat-color($background, dark-grey);
-      color: mat-contrast($primary, 500);
-    }
-    .columns-4 &,
-    .columns-8 & {
-      .search-box {
-        background-color: mat-color($background, light-grey);
-      }
+  }
+  .search-icon {
+    background-color: mat-color($background, dark-grey);
+    color: mat-contrast($primary, 500);
+  }
+  .columns-4,
+  .columns-8 {
+    .search-box & {
+      background-color: mat-color($background, light-grey);
     }
   }
 }
+
+@include search-theme($orcid-app-theme);
