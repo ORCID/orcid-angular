@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment.sandbox'
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss'],
+  styleUrls: ['./news.component.scss-theme.scss', './news.component.scss'],
   animations: [listAnimation],
 })
 export class NewsComponent implements OnInit {

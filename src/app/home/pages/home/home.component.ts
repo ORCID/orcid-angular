@@ -6,7 +6,7 @@ import { BrowserWindowRef } from 'src/app/core/window/window.service'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.scss-theme.scss', './home.component.scss'],
   animations: [enterAnimation],
   preserveWhitespaces: true,
 })

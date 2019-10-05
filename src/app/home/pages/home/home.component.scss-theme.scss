@@ -1,4 +1,6 @@
 @import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
 @mixin home-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -6,35 +8,31 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   $overlay-color: mat-color($background, blue-overlay);
-  app-home {
-    main {
-      color: mat-color($foreground, text);
-    }
-    .hero-header {
-      color: mat-contrast($primary, 500);
 
-      height: 580px;
+  main {
+    color: mat-color($foreground, text);
+  }
+  .hero-header {
+    color: mat-contrast($primary, 500);
 
-      background: linear-gradient($overlay-color, $overlay-color),
-        url('../img/hero-header-image.png');
-    }
-    .register-section {
-      .number-box {
-        .number-circle {
-          background: mat-color($accent, 400);
-          // ACCESSIBILITY ISSUE of color contrast
-          // using the contrast of primary over accent (white over green)
-          color: mat-contrast($primary, 400);
-        }
+    height: 580px;
+
+    background: linear-gradient($overlay-color, $overlay-color),
+      url('../../../../assets/img/hero-header-image.png');
+  }
+  .register-section {
+    .number-box {
+      .number-circle {
+        background: mat-color($accent, 400);
+        // ACCESSIBILITY ISSUE of color contrast
+        // using the contrast of primary over accent (white over green)
+        color: mat-contrast($primary, 400);
       }
     }
-    .organization-section {
-      background-color: mat-color($background, light-grey);
-    }
   }
-
-  .columns-8 {
-    app-home {
-    }
+  .organization-section {
+    background-color: mat-color($background, light-grey);
   }
 }
+
+@include home-theme($orcid-app-theme);
