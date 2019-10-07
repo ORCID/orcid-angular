@@ -10,7 +10,10 @@ import {
 @Component({
   selector: 'app-card-detail-line',
   templateUrl: './card-detail-line.component.html',
-  styleUrls: ['./card-detail-line.component.scss'],
+  styleUrls: [
+    './card-detail-line.component.scss-theme.scss',
+    './card-detail-line.component.scss',
+  ],
 })
 export class CardDetailLineComponent implements OnInit {
   @Input() url

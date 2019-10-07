@@ -5,7 +5,10 @@ import { AffiliationUIGroup } from 'src/app/types'
 @Component({
   selector: 'app-profile-activities',
   templateUrl: './profile-activities.component.html',
-  styleUrls: ['./profile-activities.component.scss'],
+  styleUrls: [
+    './profile-activities.component.scss-theme.scss',
+    './profile-activities.component.scss',
+  ],
   animations: [nestedListAnimation],
 })
 export class ProfileRecordsComponent implements OnInit {

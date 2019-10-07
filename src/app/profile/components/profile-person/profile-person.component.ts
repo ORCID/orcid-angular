@@ -6,7 +6,10 @@ import { environment } from 'src/environments/environment'
 @Component({
   selector: 'app-profile-person',
   templateUrl: './profile-person.component.html',
-  styleUrls: ['./profile-person.component.scss'],
+  styleUrls: [
+    './profile-person.component.scss-theme.scss',
+    './profile-person.component.scss',
+  ],
   animations: [listAnimation],
 })
 export class ProfileInfoComponent implements OnInit {

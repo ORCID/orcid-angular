@@ -13,7 +13,10 @@ import { heightAnimation } from 'src/app/animations'
 @Component({
   selector: 'app-card-detail',
   templateUrl: './card-detail.component.html',
-  styleUrls: ['./card-detail.component.scss'],
+  styleUrls: [
+    './card-detail.component.scss-theme.scss',
+    './card-detail.component.scss',
+  ],
   animations: [heightAnimation],
 })
 export class CardDetailComponent implements OnInit {

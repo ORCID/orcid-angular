@@ -9,7 +9,7 @@ import { PlatformInfoService } from 'src/app/core'
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  styleUrls: ['./card.component.scss-theme.scss', './card.component.scss'],
   animations: [rotateAnimation, heightAnimation, heightAnimationDefaultOpen],
 })
 export class CardComponent implements OnInit {
