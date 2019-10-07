@@ -105,6 +105,9 @@
   "bit": {
     "env": {},
     "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "overrides": {
+      "orcid.angular/orcid-theme": {}
+    }
   }
 }
