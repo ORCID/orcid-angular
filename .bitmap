@@ -54,5 +54,78 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "orcid.angular/types@0.0.1": {
+        "files": [
+            {
+                "relativePath": "src/app/types/activities-service.local.ts",
+                "test": false,
+                "name": "activities-service.local.ts"
+            },
+            {
+                "relativePath": "src/app/types/affiliations.endpoint.ts",
+                "test": false,
+                "name": "affiliations.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/common.endpoint.ts",
+                "test": false,
+                "name": "common.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/index.ts",
+                "test": false,
+                "name": "index.ts"
+            },
+            {
+                "relativePath": "src/app/types/menu.local.ts",
+                "test": false,
+                "name": "menu.local.ts"
+            },
+            {
+                "relativePath": "src/app/types/nameForm.endpoint.ts",
+                "test": false,
+                "name": "nameForm.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/orgs.disambiguated.endpoint.ts",
+                "test": false,
+                "name": "orgs.disambiguated.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/person.endpoint.ts",
+                "test": false,
+                "name": "person.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/platform-info.local.ts",
+                "test": false,
+                "name": "platform-info.local.ts"
+            },
+            {
+                "relativePath": "src/app/types/recover-password.endpoint.ts",
+                "test": false,
+                "name": "recover-password.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/togglz.endpoint.ts",
+                "test": false,
+                "name": "togglz.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/userInfo.endpoint.ts",
+                "test": false,
+                "name": "userInfo.endpoint.ts"
+            },
+            {
+                "relativePath": "src/app/types/works.endpoint.ts",
+                "test": false,
+                "name": "works.endpoint.ts"
+            }
+        ],
+        "mainFile": "src/app/types/index.ts",
+        "trackDir": "src/app/types",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "version": "14.4.0"
 }
