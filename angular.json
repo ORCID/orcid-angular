@@ -79,7 +79,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 }
               ],
               "outputPath": "dist/en/",
@@ -92,7 +92,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -109,7 +109,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -127,7 +127,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -144,7 +144,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -161,7 +161,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -178,7 +178,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -195,7 +195,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -212,7 +212,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -229,7 +229,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -246,7 +246,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -263,7 +263,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -280,7 +280,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -297,7 +297,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -314,7 +314,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -331,7 +331,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -348,7 +348,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -365,7 +365,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -382,7 +382,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 }
               ],
               "optimization": true,
@@ -404,7 +404,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -430,7 +430,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -457,7 +457,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -483,7 +483,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -509,7 +509,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -535,7 +535,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -561,7 +561,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -587,7 +587,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -613,7 +613,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -639,7 +639,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -665,7 +665,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -691,7 +691,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -717,7 +717,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -743,7 +743,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -769,7 +769,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -795,7 +795,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
@@ -821,7 +821,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/environment.local.tomcat.ts"
                 },
                 {
                   "replace": "src/locale/messages.dynamic.en.ts",
