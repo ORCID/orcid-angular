@@ -55,8 +55,7 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
+// tslint:disable-next-line:import-spacing
 import 'zone.js/dist/zone' // Included with Angular CLI.
-
-/***************************************************************************************************
- * APPLICATION IMPORTS
- */
+// tslint:disable-next-line:whitespace
+;(window as any)['global'] = window
