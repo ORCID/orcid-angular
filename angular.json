@@ -64,7 +64,6 @@
                   "with": "src/locale/messages.dynamic.ar.ts"
                 }
               ],
-              "aot": true,
               "outputPath": "dist/ar/",
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
@@ -78,7 +77,6 @@
                   "with": "src/locale/messages.dynamic.en.ts"
                 }
               ],
-              "aot": true,
               "outputPath": "dist/en/",
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
@@ -96,25 +94,40 @@
                   "with": "src/environments/environment.local.ts"
                 }
               ],
-              "aot": true,
               "outputPath": "dist/en/",
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
               "baseHref": "/en/"
             },
-            "local-ar": {
+            "local-fr": {
               "fileReplacements": [
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.ar.ts"
-                },
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.fr.ts"
                 }
               ],
-
+              "outputPath": "dist/fr/",
+              "i18nFile": "src/locale/messages.static.fr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "fr",
+              "baseHref": "/fr/"
+            },
+            "local-ar": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ar.ts"
+                }
+              ],
               "aot": true,
               "outputPath": "dist/ar/",
               "i18nFile": "src/locale/messages.static.ar.xlf",
@@ -123,61 +136,725 @@
               "baseHref": "/ar/",
               "index": "src/index.rtl.html"
             },
-            "local-fr": {
+            "local-ca": {
               "fileReplacements": [
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.fr.ts"
-                },
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ca.ts"
                 }
               ],
-              "aot": true,
-              "outputPath": "dist/fr/",
-              "i18nFile": "src/locale/messages.static.fr.xlf",
+              "outputPath": "dist/ca/",
+              "i18nFile": "src/locale/messages.static.ca.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
+              "i18nLocale": "ca",
+              "baseHref": "/ca/"
             },
-
+            "local-cs": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.cs.ts"
+                }
+              ],
+              "outputPath": "dist/cs/",
+              "i18nFile": "src/locale/messages.static.cs.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "cs",
+              "baseHref": "/cs/"
+            },
+            "local-es": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.es.ts"
+                }
+              ],
+              "outputPath": "dist/es/",
+              "i18nFile": "src/locale/messages.static.es.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "es",
+              "baseHref": "/es/"
+            },
+            "local-it": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.it.ts"
+                }
+              ],
+              "outputPath": "dist/it/",
+              "i18nFile": "src/locale/messages.static.it.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "it",
+              "baseHref": "/it/"
+            },
+            "local-ja": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ja.ts"
+                }
+              ],
+              "outputPath": "dist/ja/",
+              "i18nFile": "src/locale/messages.static.ja.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ja",
+              "baseHref": "/ja/"
+            },
+            "local-ko": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ko.ts"
+                }
+              ],
+              "outputPath": "dist/ko/",
+              "i18nFile": "src/locale/messages.static.ko.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ko",
+              "baseHref": "/ko/"
+            },
+            "local-lr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.lr.ts"
+                }
+              ],
+              "outputPath": "dist/lr/",
+              "i18nFile": "src/locale/messages.static.lr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "lr",
+              "baseHref": "/lr/"
+            },
+            "local-pt": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.pt.ts"
+                }
+              ],
+              "outputPath": "dist/pt/",
+              "i18nFile": "src/locale/messages.static.pt.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "pt",
+              "baseHref": "/pt/"
+            },
+            "local-rl": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.rl.ts"
+                }
+              ],
+              "outputPath": "dist/rl/",
+              "i18nFile": "src/locale/messages.static.rl.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "rl",
+              "baseHref": "/rl/"
+            },
+            "local-ru": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ru.ts"
+                }
+              ],
+              "outputPath": "dist/ru/",
+              "i18nFile": "src/locale/messages.static.ru.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ru",
+              "baseHref": "/ru/"
+            },
+            "local-uk": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.uk.ts"
+                }
+              ],
+              "outputPath": "dist/uk/",
+              "i18nFile": "src/locale/messages.static.uk.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "uk",
+              "baseHref": "/uk/"
+            },
+            "local-xx": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.xx.ts"
+                }
+              ],
+              "outputPath": "dist/xx/",
+              "i18nFile": "src/locale/messages.static.xx.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "xx",
+              "baseHref": "/xx/"
+            },
             "local-source": {
               "fileReplacements": [
                 {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.source.ts"
-                },
-                {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.source.ts"
                 }
               ],
-              "aot": true,
               "outputPath": "dist/source/",
               "i18nFile": "src/locale/messages.static.source.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "source",
               "baseHref": "/source/"
             },
-
-            "local-xx": {
+            "local-zh_CN": {
               "fileReplacements": [
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.xx.ts"
-                },
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_CN.ts"
                 }
               ],
+              "outputPath": "dist/zh-CN/",
+              "i18nFile": "src/locale/messages.static.zh_CN.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-CN",
+              "baseHref": "/zh-CN/"
+            },
+            "local-zh_TW": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_TW.ts"
+                }
+              ],
+              "outputPath": "dist/zh-TW/",
+              "i18nFile": "src/locale/messages.static.zh_TW.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-TW",
+              "baseHref": "/zh-TW/"
+            },
+            "local-tomcat-en": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
               "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/en/",
+              "i18nFile": "src/locale/messages.static.en.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "en",
+              "baseHref": "."
+            },
+            "local-tomcat-fr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.fr.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/fr/",
+              "i18nFile": "src/locale/messages.static.fr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "fr",
+              "baseHref": "."
+            },
+            "local-tomcat-ar": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ar.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ar/",
+              "i18nFile": "src/locale/messages.static.ar.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ar",
+              "baseHref": ".",
+              "index": "src/index.rtl.html"
+            },
+            "local-tomcat-ca": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ca.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ca/",
+              "i18nFile": "src/locale/messages.static.ca.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ca",
+              "baseHref": "."
+            },
+            "local-tomcat-cs": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.cs.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/cs/",
+              "i18nFile": "src/locale/messages.static.cs.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "cs",
+              "baseHref": "."
+            },
+            "local-tomcat-es": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.es.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/es/",
+              "i18nFile": "src/locale/messages.static.es.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "es",
+              "baseHref": "."
+            },
+            "local-tomcat-it": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.it.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/it/",
+              "i18nFile": "src/locale/messages.static.it.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "it",
+              "baseHref": "."
+            },
+            "local-tomcat-ja": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ja.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ja/",
+              "i18nFile": "src/locale/messages.static.ja.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ja",
+              "baseHref": "."
+            },
+            "local-tomcat-ko": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ko.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ko/",
+              "i18nFile": "src/locale/messages.static.ko.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ko",
+              "baseHref": "."
+            },
+            "local-tomcat-lr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.lr.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/lr/",
+              "i18nFile": "src/locale/messages.static.lr.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "lr",
+              "baseHref": "."
+            },
+            "local-tomcat-pt": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.pt.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/pt/",
+              "i18nFile": "src/locale/messages.static.pt.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "pt",
+              "baseHref": "."
+            },
+            "local-tomcat-rl": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.rl.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/rl/",
+              "i18nFile": "src/locale/messages.static.rl.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "rl",
+              "baseHref": "."
+            },
+            "local-tomcat-ru": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.ru.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/ru/",
+              "i18nFile": "src/locale/messages.static.ru.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "ru",
+              "baseHref": "."
+            },
+            "local-tomcat-uk": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.uk.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/uk/",
+              "i18nFile": "src/locale/messages.static.uk.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "uk",
+              "baseHref": "."
+            },
+            "local-tomcat-xx": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.xx.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "outputPath": "dist/xx/",
               "i18nFile": "src/locale/messages.static.xx.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "xx",
-              "baseHref": "/xx/"
+              "baseHref": "."
+            },
+            "local-tomcat-source": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.source.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/source/",
+              "i18nFile": "src/locale/messages.static.source.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "source",
+              "baseHref": "."
+            },
+            "local-tomcat-zh_CN": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_CN.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/zh-CN/",
+              "i18nFile": "src/locale/messages.static.zh_CN.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-CN",
+              "baseHref": "."
+            },
+            "local-tomcat-zh_TW": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.tomcat.ts"
+                },
+                {
+                  "replace": "src/locale/messages.dynamic.en.ts",
+                  "with": "src/locale/messages.dynamic.zh_TW.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "outputPath": "dist/zh-TW/",
+              "i18nFile": "src/locale/messages.static.zh_TW.xlf",
+              "i18nFormat": "xlf2",
+              "i18nLocale": "zh-TW",
+              "baseHref": "."
             },
             "production-en": {
               "fileReplacements": [
@@ -199,7 +876,7 @@
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
-              "baseHref": "/en/"
+              "baseHref": "."
             },
             "production-fr": {
               "fileReplacements": [
@@ -225,7 +902,7 @@
               "i18nFile": "src/locale/messages.static.fr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "fr",
-              "baseHref": "/fr/"
+              "baseHref": "."
             },
             "production-ar": {
               "fileReplacements": [
@@ -251,34 +928,8 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": "/ar/",
+              "baseHref": ".",
               "index": "src/index.rtl.html"
-            },
-            "production-ca": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
-                },
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.ca.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "outputPath": "dist/ca/",
-              "i18nFile": "src/locale/messages.static.ca.xlf",
-              "i18nFormat": "xlf2",
-              "i18nLocale": "ca",
-              "baseHref": "/ca/"
             },
             "production-cs": {
               "fileReplacements": [
@@ -304,7 +955,7 @@
               "i18nFile": "src/locale/messages.static.cs.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "cs",
-              "baseHref": "/cs/"
+              "baseHref": "."
             },
             "production-es": {
               "fileReplacements": [
@@ -330,7 +981,7 @@
               "i18nFile": "src/locale/messages.static.es.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "es",
-              "baseHref": "/es/"
+              "baseHref": "."
             },
             "production-it": {
               "fileReplacements": [
@@ -356,7 +1007,7 @@
               "i18nFile": "src/locale/messages.static.it.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "it",
-              "baseHref": "/it/"
+              "baseHref": "."
             },
             "production-ja": {
               "fileReplacements": [
@@ -382,7 +1033,7 @@
               "i18nFile": "src/locale/messages.static.ja.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ja",
-              "baseHref": "/ja/"
+              "baseHref": "."
             },
             "production-ko": {
               "fileReplacements": [
@@ -408,33 +1059,7 @@
               "i18nFile": "src/locale/messages.static.ko.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ko",
-              "baseHref": "/ko/"
-            },
-            "production-lr": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
-                },
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.lr.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "outputPath": "dist/lr/",
-              "i18nFile": "src/locale/messages.static.lr.xlf",
-              "i18nFormat": "xlf2",
-              "i18nLocale": "lr",
-              "baseHref": "/lr/"
+              "baseHref": "."
             },
             "production-pt": {
               "fileReplacements": [
@@ -460,33 +1085,7 @@
               "i18nFile": "src/locale/messages.static.pt.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "pt",
-              "baseHref": "/pt/"
-            },
-            "production-rl": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
-                },
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.rl.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "outputPath": "dist/rl/",
-              "i18nFile": "src/locale/messages.static.rl.xlf",
-              "i18nFormat": "xlf2",
-              "i18nLocale": "rl",
-              "baseHref": "/rl/"
+              "baseHref": "."
             },
             "production-ru": {
               "fileReplacements": [
@@ -512,59 +1111,7 @@
               "i18nFile": "src/locale/messages.static.ru.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ru",
-              "baseHref": "/ru/"
-            },
-            "production-uk": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
-                },
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.uk.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "outputPath": "dist/uk/",
-              "i18nFile": "src/locale/messages.static.uk.xlf",
-              "i18nFormat": "xlf2",
-              "i18nLocale": "uk",
-              "baseHref": "/uk/"
-            },
-            "production-xx": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
-                },
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.xx.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "outputPath": "dist/xx/",
-              "i18nFile": "src/locale/messages.static.xx.xlf",
-              "i18nFormat": "xlf2",
-              "i18nLocale": "xx",
-              "baseHref": "/xx/"
+              "baseHref": "."
             },
             "production-source": {
               "fileReplacements": [
@@ -590,7 +1137,7 @@
               "i18nFile": "src/locale/messages.static.source.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "source",
-              "baseHref": "/source/"
+              "baseHref": "."
             },
             "production-zh_CN": {
               "fileReplacements": [
@@ -616,7 +1163,7 @@
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-CN",
-              "baseHref": "/zh-CN/"
+              "baseHref": "."
             },
             "production-zh_TW": {
               "fileReplacements": [
@@ -642,7 +1189,7 @@
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-TW",
-              "baseHref": "/zh-TW/"
+              "baseHref": "."
             },
             "qa-en": {
               "fileReplacements": [
@@ -664,7 +1211,7 @@
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
-              "baseHref": "/en/"
+              "baseHref": "."
             },
             "qa-fr": {
               "fileReplacements": [
@@ -690,7 +1237,7 @@
               "i18nFile": "src/locale/messages.static.fr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "fr",
-              "baseHref": "/fr/"
+              "baseHref": "."
             },
             "qa-ar": {
               "fileReplacements": [
@@ -716,7 +1263,7 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": "/ar/",
+              "baseHref": ".",
               "index": "src/index.rtl.html"
             },
             "qa-ca": {
@@ -743,7 +1290,7 @@
               "i18nFile": "src/locale/messages.static.ca.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ca",
-              "baseHref": "/ca/"
+              "baseHref": "."
             },
             "qa-cs": {
               "fileReplacements": [
@@ -769,7 +1316,7 @@
               "i18nFile": "src/locale/messages.static.cs.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "cs",
-              "baseHref": "/cs/"
+              "baseHref": "."
             },
             "qa-es": {
               "fileReplacements": [
@@ -795,7 +1342,7 @@
               "i18nFile": "src/locale/messages.static.es.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "es",
-              "baseHref": "/es/"
+              "baseHref": "."
             },
             "qa-it": {
               "fileReplacements": [
@@ -821,7 +1368,7 @@
               "i18nFile": "src/locale/messages.static.it.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "it",
-              "baseHref": "/it/"
+              "baseHref": "."
             },
             "qa-ja": {
               "fileReplacements": [
@@ -847,7 +1394,7 @@
               "i18nFile": "src/locale/messages.static.ja.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ja",
-              "baseHref": "/ja/"
+              "baseHref": "."
             },
             "qa-ko": {
               "fileReplacements": [
@@ -873,7 +1420,7 @@
               "i18nFile": "src/locale/messages.static.ko.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ko",
-              "baseHref": "/ko/"
+              "baseHref": "."
             },
             "qa-lr": {
               "fileReplacements": [
@@ -899,7 +1446,7 @@
               "i18nFile": "src/locale/messages.static.lr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "lr",
-              "baseHref": "/lr/"
+              "baseHref": "."
             },
             "qa-pt": {
               "fileReplacements": [
@@ -925,7 +1472,7 @@
               "i18nFile": "src/locale/messages.static.pt.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "pt",
-              "baseHref": "/pt/"
+              "baseHref": "."
             },
             "qa-rl": {
               "fileReplacements": [
@@ -951,7 +1498,7 @@
               "i18nFile": "src/locale/messages.static.rl.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "rl",
-              "baseHref": "/rl/"
+              "baseHref": "."
             },
             "qa-ru": {
               "fileReplacements": [
@@ -977,7 +1524,7 @@
               "i18nFile": "src/locale/messages.static.ru.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ru",
-              "baseHref": "/ru/"
+              "baseHref": "."
             },
             "qa-uk": {
               "fileReplacements": [
@@ -1003,7 +1550,7 @@
               "i18nFile": "src/locale/messages.static.uk.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "uk",
-              "baseHref": "/uk/"
+              "baseHref": "."
             },
             "qa-xx": {
               "fileReplacements": [
@@ -1029,7 +1576,7 @@
               "i18nFile": "src/locale/messages.static.xx.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "xx",
-              "baseHref": "/xx/"
+              "baseHref": "."
             },
             "qa-source": {
               "fileReplacements": [
@@ -1055,7 +1602,7 @@
               "i18nFile": "src/locale/messages.static.source.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "source",
-              "baseHref": "/source/"
+              "baseHref": "."
             },
             "qa-zh_CN": {
               "fileReplacements": [
@@ -1081,7 +1628,7 @@
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-CN",
-              "baseHref": "/zh-CN/"
+              "baseHref": "."
             },
             "qa-zh_TW": {
               "fileReplacements": [
@@ -1107,7 +1654,7 @@
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-TW",
-              "baseHref": "/zh-TW/"
+              "baseHref": "."
             },
             "sandbox-en": {
               "fileReplacements": [
@@ -1129,7 +1676,7 @@
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
-              "baseHref": "/en/",
+              "baseHref": ".",
               "statsJson": true
             },
             "sandbox-fr": {
@@ -1156,7 +1703,7 @@
               "i18nFile": "src/locale/messages.static.fr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "fr",
-              "baseHref": "/fr/"
+              "baseHref": "."
             },
             "sandbox-ar": {
               "fileReplacements": [
@@ -1182,7 +1729,7 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": "/ar/",
+              "baseHref": ".",
               "index": "src/index.rtl.html"
             },
             "sandbox-ca": {
@@ -1209,7 +1756,7 @@
               "i18nFile": "src/locale/messages.static.ca.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ca",
-              "baseHref": "/ca/"
+              "baseHref": "."
             },
             "sandbox-cs": {
               "fileReplacements": [
@@ -1235,7 +1782,7 @@
               "i18nFile": "src/locale/messages.static.cs.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "cs",
-              "baseHref": "/cs/"
+              "baseHref": "."
             },
             "sandbox-es": {
               "fileReplacements": [
@@ -1261,7 +1808,7 @@
               "i18nFile": "src/locale/messages.static.es.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "es",
-              "baseHref": "/es/"
+              "baseHref": "."
             },
             "sandbox-it": {
               "fileReplacements": [
@@ -1287,7 +1834,7 @@
               "i18nFile": "src/locale/messages.static.it.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "it",
-              "baseHref": "/it/"
+              "baseHref": "."
             },
             "sandbox-ja": {
               "fileReplacements": [
@@ -1313,7 +1860,7 @@
               "i18nFile": "src/locale/messages.static.ja.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ja",
-              "baseHref": "/ja/"
+              "baseHref": "."
             },
             "sandbox-ko": {
               "fileReplacements": [
@@ -1339,7 +1886,7 @@
               "i18nFile": "src/locale/messages.static.ko.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ko",
-              "baseHref": "/ko/"
+              "baseHref": "."
             },
             "sandbox-lr": {
               "fileReplacements": [
@@ -1365,7 +1912,7 @@
               "i18nFile": "src/locale/messages.static.lr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "lr",
-              "baseHref": "/lr/"
+              "baseHref": "."
             },
             "sandbox-pt": {
               "fileReplacements": [
@@ -1391,7 +1938,7 @@
               "i18nFile": "src/locale/messages.static.pt.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "pt",
-              "baseHref": "/pt/"
+              "baseHref": "."
             },
             "sandbox-rl": {
               "fileReplacements": [
@@ -1417,7 +1964,7 @@
               "i18nFile": "src/locale/messages.static.rl.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "rl",
-              "baseHref": "/rl/"
+              "baseHref": "."
             },
             "sandbox-ru": {
               "fileReplacements": [
@@ -1443,7 +1990,7 @@
               "i18nFile": "src/locale/messages.static.ru.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ru",
-              "baseHref": "/ru/"
+              "baseHref": "."
             },
             "sandbox-uk": {
               "fileReplacements": [
@@ -1469,7 +2016,7 @@
               "i18nFile": "src/locale/messages.static.uk.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "uk",
-              "baseHref": "/uk/"
+              "baseHref": "."
             },
             "sandbox-xx": {
               "fileReplacements": [
@@ -1495,7 +2042,7 @@
               "i18nFile": "src/locale/messages.static.xx.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "xx",
-              "baseHref": "/xx/"
+              "baseHref": "."
             },
             "sandbox-source": {
               "fileReplacements": [
@@ -1521,7 +2068,7 @@
               "i18nFile": "src/locale/messages.static.source.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "source",
-              "baseHref": "/source/"
+              "baseHref": "."
             },
             "sandbox-zh_CN": {
               "fileReplacements": [
@@ -1547,7 +2094,7 @@
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-CN",
-              "baseHref": "/zh-CN/"
+              "baseHref": "."
             },
             "sandbox-zh_TW": {
               "fileReplacements": [
@@ -1573,7 +2120,7 @@
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh-TW",
-              "baseHref": "/zh-TW/"
+              "baseHref": "."
             }
           }
         },
@@ -1586,29 +2133,119 @@
             "ar": {
               "browserTarget": "ng-orcid:build:ar"
             },
-            "local-en": {
-              "browserTarget": "ng-orcid:build:local-en"
+            "local-fr": {
+              "browserTarget": "ng-orcid:build:local-fr"
             },
             "local-ar": {
               "browserTarget": "ng-orcid:build:local-ar"
             },
-            "local-source": {
-              "browserTarget": "ng-orcid:build:local-source"
+            "local-ca": {
+              "browserTarget": "ng-orcid:build:local-ca"
+            },
+            "local-cs": {
+              "browserTarget": "ng-orcid:build:local-cs"
+            },
+            "local-en": {
+              "browserTarget": "ng-orcid:build:local-en"
+            },
+            "local-es": {
+              "browserTarget": "ng-orcid:build:local-es"
+            },
+            "local-it": {
+              "browserTarget": "ng-orcid:build:local-it"
+            },
+            "local-ja": {
+              "browserTarget": "ng-orcid:build:local-ja"
+            },
+            "local-ko": {
+              "browserTarget": "ng-orcid:build:local-ko"
+            },
+            "local-lr": {
+              "browserTarget": "ng-orcid:build:local-lr"
+            },
+            "local-pt": {
+              "browserTarget": "ng-orcid:build:local-pt"
+            },
+            "local-rl": {
+              "browserTarget": "ng-orcid:build:local-ru"
+            },
+            "local-ru": {
+              "browserTarget": "ng-orcid:build:local-ru"
+            },
+            "local-uk": {
+              "browserTarget": "ng-orcid:build:local-uk"
             },
             "local-xx": {
               "browserTarget": "ng-orcid:build:local-xx"
             },
-            "local-fr": {
-              "browserTarget": "ng-orcid:build:local-fr"
+            "local-source": {
+              "browserTarget": "ng-orcid:build:local-source"
+            },
+            "local-zh_CN": {
+              "browserTarget": "ng-orcid:build:local-zh_CN"
+            },
+            "local-zh_TW": {
+              "browserTarget": "ng-orcid:build:local-zh_TW"
+            },
+            "local-tomcat-fr": {
+              "browserTarget": "ng-orcid:build:local-tomcat-fr"
+            },
+            "local-tomcat-ar": {
+              "browserTarget": "ng-orcid:build:local-tomcat-ar"
+            },
+            "local-tomcat-ca": {
+              "browserTarget": "ng-orcid:build:local-tomcat-ca"
+            },
+            "local-tomcat-cs": {
+              "browserTarget": "ng-orcid:build:local-tomcat-cs"
+            },
+            "local-tomcat-en": {
+              "browserTarget": "ng-orcid:build:local-tomcat-en"
+            },
+            "local-tomcat-es": {
+              "browserTarget": "ng-orcid:build:local-tomcat-es"
+            },
+            "local-tomcat-it": {
+              "browserTarget": "ng-orcid:build:local-tomcat-it"
+            },
+            "local-tomcat-ja": {
+              "browserTarget": "ng-orcid:build:local-tomcat-ja"
+            },
+            "local-tomcat-ko": {
+              "browserTarget": "ng-orcid:build:local-tomcat-ko"
+            },
+            "local-tomcat-lr": {
+              "browserTarget": "ng-orcid:build:local-tomcat-lr"
+            },
+            "local-tomcat-pt": {
+              "browserTarget": "ng-orcid:build:local-tomcat-pt"
+            },
+            "local-tomcat-rl": {
+              "browserTarget": "ng-orcid:build:local-tomcat-ru"
+            },
+            "local-tomcat-ru": {
+              "browserTarget": "ng-orcid:build:local-tomcat-ru"
+            },
+            "local-tomcat-uk": {
+              "browserTarget": "ng-orcid:build:local-tomcat-uk"
+            },
+            "local-tomcat-xx": {
+              "browserTarget": "ng-orcid:build:local-tomcat-xx"
+            },
+            "local-tomcat-source": {
+              "browserTarget": "ng-orcid:build:local-tomcat-source"
+            },
+            "local-tomcat-zh_CN": {
+              "browserTarget": "ng-orcid:build:local-tomcat-zh_CN"
+            },
+            "local-tomcat-zh_TW": {
+              "browserTarget": "ng-orcid:build:local-tomcat-zh_TW"
             },
             "production-fr": {
               "browserTarget": "ng-orcid:build:production-fr"
             },
             "production-ar": {
               "browserTarget": "ng-orcid:build:production-ar"
-            },
-            "production-ca": {
-              "browserTarget": "ng-orcid:build:production-ca"
             },
             "production-cs": {
               "browserTarget": "ng-orcid:build:production-cs"
@@ -1628,23 +2265,11 @@
             "production-ko": {
               "browserTarget": "ng-orcid:build:production-ko"
             },
-            "production-lr": {
-              "browserTarget": "ng-orcid:build:production-lr"
-            },
             "production-pt": {
               "browserTarget": "ng-orcid:build:production-pt"
             },
-            "production-rl": {
-              "browserTarget": "ng-orcid:build:production-ru"
-            },
             "production-ru": {
               "browserTarget": "ng-orcid:build:production-ru"
-            },
-            "production-uk": {
-              "browserTarget": "ng-orcid:build:production-uk"
-            },
-            "production-xx": {
-              "browserTarget": "ng-orcid:build:production-xx"
             },
             "production-source": {
               "browserTarget": "ng-orcid:build:production-source"

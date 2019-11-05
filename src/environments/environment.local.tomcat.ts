@@ -1,9 +1,9 @@
 export const environment = {
   production: false,
-  API_NEWS: 'https://localhost:8888/blog/feed',
-  API_WEB: 'https://localhost:8443/orcid-web/',
-  BASE_URL: 'https://localhost:8443/orcid-web/',
-  BLOG_NEWS: 'https://localhost:8888/about/news',
+  API_NEWS: 'https://localhost/blog/feed',
+  API_WEB: 'https://localhost/',
+  BASE_URL: 'https://localhost/',
+  BLOG_NEWS: 'https://localhost/about/news',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
