@@ -15,8 +15,9 @@
 @import '../../app/shared/components/offline-message/offline-message.component.scss-theme.scss';
 @import '../../app/cdk/multi-row-raised-button/multi-row-raised-button/multi-row-raised-button.component.scss-theme.scss';
 @import '../../app/layout/user-menu/user-menu.component.scss-theme.scss';
+@import '../../app/password-recovery/pages/password-recovery/password-recovery.component.scss-theme.scss';
 
-@mixin custom-components-theme($theme) {
+@mixin orcid-components-theme($theme) {
   @include global-theme($theme);
   @include header-theme($theme);
   @include search-theme($theme);
@@ -33,9 +34,10 @@
   @include profile-activities-affiliation-theme($theme);
   @include app-menu-icon-theme($theme);
   @include user-menu-theme($theme);
+  @include password-recovery-theme($theme);
 }
 
-@mixin custom-components-typography($orcid-material, $orcid-custom) {
+@mixin orcid-components-typography($orcid-material, $orcid-custom) {
   @include global-theme-typography($orcid-material);
   @include profile-person-typography($orcid-material);
   @include profile-person-detail-typography($orcid-material);

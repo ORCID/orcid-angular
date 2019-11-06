@@ -1,5 +1,11 @@
 @import '~@angular/material/theming';
-
+// .
+// .
+// MATERIAL TYPOGRAPHY
+// .
+// .
+// Setup Orcid typography
+// More info about material typography on https://github.com/angular/components/blob/75686e87fc8d5eb3d3e4a1bf6fa771c7467d328d/guides/typography.md
 $orcid-material-typography: mat-typography-config(
   $font-family: '"Noto Sans", sans-serif',
   $display-4: mat-typography-level(96px, 96px, 200, $letter-spacing: -1.5px),
@@ -20,19 +26,16 @@ $orcid-material-typography: mat-typography-config(
 $orcid-custom-typography: (
   title-alt: mat-typography-level(18px, normal, 600, $letter-spacing: 1.3px),
 );
-
+// .
+// .
 // MATERIAL TYPOGRAPHY OVERWRITES
-
-@mixin mat-button-typography($config) {
-  // Add .mat-button-font with the purpose of being able to use just the font
-  .mat-button-font,
-  .mat-button,
-  .mat-raised-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button,
-  .mat-fab,
-  .mat-mini-fab {
+// .
+// .
+// Overwrites of the mat-base-typography mixing
+// https://github.com/angular/components/blob/75686e87fc8d5eb3d3e4a1bf6fa771c7467d328d/src/material/core/typography/_typography.scss#L73
+@mixin mat-base-typography-overwrites($config) {
+  // Makes the button's font usable with a class
+  .mat-button-font {
     font: {
       family: mat-font-family($config, button);
       size: mat-font-size($config, button);

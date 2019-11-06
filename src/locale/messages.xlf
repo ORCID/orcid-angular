@@ -439,6 +439,126 @@
     </source>
       </segment>
     </unit>
+    <unit id="ngOrcid.passwordAndOrcid">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:5,7</note>
+      </notes>
+      <segment>
+        <source>
+          Password and ORCID iD Recovery
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.didYouForget">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:18,20</note>
+      </notes>
+      <segment>
+        <source>
+              Did you forget your password or ORCID iD?
+            </source>
+      </segment>
+    </unit>
+    <unit id="check_password_modal.password">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="common.orcid_id">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:35</note>
+      </notes>
+      <segment>
+        <source>ORCID ID</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.pleaseChooseRecovery">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:45</note>
+      </notes>
+      <segment>
+        <source>Please choose a recovery option</source>
+      </segment>
+    </unit>
+    <unit id="oauth_sign_up.labelemail">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:49</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="Email.resendClaim.invalidEmail">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:58</note>
+      </notes>
+      <segment>
+        <source>Please enter a valid email address</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.recoverAccountDetails">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:79,81</note>
+      </notes>
+      <segment>
+        <source>
+            RECOVER ACCOUNT DETAILS
+          </source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_1">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:90</note>
+      </notes>
+      <segment>
+        <source>We have sent a message to</source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_2">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:94</note>
+      </notes>
+      <segment>
+        <source>from reset@notify.orcid.org.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.youCanNow">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:96</note>
+      </notes>
+      <segment>
+        <source>You can now</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.returnToLoginPage">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:100</note>
+      </notes>
+      <segment>
+        <source>return to the login page.</source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_3">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:105,107</note>
+      </notes>
+      <segment>
+        <source>If you do not receive a message within 5 minutes, please check
+              your spam folder. If you still do not see a message,
+              then</source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_4">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:113</note>
+      </notes>
+      <segment>
+        <source>contact us</source>
+      </segment>
+    </unit>
     <unit id="public_profile.empty_profile">
       <notes>
         <note category="location">app/profile/pages/profile-page/profile-page.component.html:16,18</note>

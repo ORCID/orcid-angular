@@ -3,8 +3,8 @@
   font-display: swap;
   font-style: normal;
   font-weight: 400;
-  src: url(./assets/fonts/MaterialIcons-Regular.woff2) format('woff'),
-    url(./assets/fonts/MaterialIcons-Regular.woff) format('woff2');
+  src: url(./assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+    url(./assets/fonts/MaterialIcons-Regular.woff) format('woff');
 }
 
 .material-icons {
@@ -46,7 +46,7 @@ app-root {
   flex-direction: column;
 }
 .router-container {
-  padding-bottom: 146px; //remove footer height
+  padding-bottom: 200px; //remove footer height
   height: 100%;
   .columns-8 &,
   .columns-4 & {

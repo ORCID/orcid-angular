@@ -1,18 +1,16 @@
 @import '~@angular/material/theming';
-@import './material.custom-components.scss';
-@import './material.theme.scss';
+@import './material.orcid-components.scss';
 @import './material.typography.scss';
+@import './material.light-theme.scss';
+@import './material.orcid.overwrites.scss/chips-theme';
 
-// SETUP-FONTS
+// .
+// .
+// MATERIAL THEMING
+// .
+// .
+// Setup the theme as describe on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
 @include mat-core($orcid-material-typography);
-@include angular-material-typography($orcid-material-typography);
-
-@include custom-components-typography(
-  $orcid-material-typography,
-  $orcid-custom-typography
-);
-
-// SETUP-THEME
 $orcid-app-primary: mat-palette($orcid-blue);
 $orcid-app-accent: mat-palette($orcid-green);
 $orcid-app-warn: mat-palette($mat-red);
@@ -21,27 +19,28 @@ $orcid-app-theme: mat-light-theme(
   $orcid-app-accent,
   $orcid-app-warn
 );
-$background: map-get($orcid-app-theme, background);
-$background: map_merge(
-  $background,
-  (
-    // CUSTOM BACKGROUND COLORS
-      app-news: $dark-primary-background,
-    light-grey: $light-grey,
-    blue-overlay: $blue-overlay,
-    dark-grey: $dark-grey-background
-  )
-);
-
-// CUSTOM FOREGROUND COLORS
-$foreground: map-get($orcid-app-theme, foreground);
-$foreground: map_merge($foreground, (// FOREGROUND BACKGROUND COLORS));
-$orcid-app-theme: map_merge(
-  $orcid-app-theme,
-  (
-    background: $background,
-    foreground: $foreground,
-  )
-);
+// Light theme color overwrites
+$orcid-app-theme: light-theme-overwrites($orcid-app-theme);
+// TODO: include only the CSS for the used components, instead of everything
 @include angular-material-theme($orcid-app-theme);
-@include custom-components-theme($orcid-app-theme);
+// .
+// .
+// ORCID COMPONENTS THEMING
+// .
+// .
+// More info on https://github.com/angular/components/blob/8.1.4/guides/theming-your-components.md
+@include orcid-components-typography(
+  $orcid-material-typography,
+  $orcid-custom-typography
+);
+@include orcid-components-theme($orcid-app-theme);
+// .
+// .
+// MATERIAL OVERWRITES
+// .
+// .
+// More info about this on https://github.com/angular/components/blob/8.1.4/guides/customizing-component-styles.md
+// The following mixings and styles overwrite or extend material styles
+@include mat-base-typography-overwrites($orcid-material-typography);
+@import './material.orcid.overwrites.scss/chips.scss';
+@include mat-chips-theme-overwrites($orcid-app-theme);

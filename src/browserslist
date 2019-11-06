@@ -2,11 +2,5 @@
 # For additional information regarding the format and rule options, please see:
 # https://github.com/browserslist/browserslist#queries
 #
-# For IE 9-11 support, please remove 'not' from the last line of the file and adjust as needed
 
-> 0.5%
-last 2 versions
-Firefox ESR
-not dead
-IE 9-11
-ios_saf 8
+> 0.5%, last 2 versions, Firefox ESR, IE 11, ios_saf 8
