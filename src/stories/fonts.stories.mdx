@@ -1,0 +1,60 @@
+import { moduleMetadata } from '@storybook/angular'
+import { Story, Meta } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="Docs|Fonts"
+  decorators={[moduleMetadata({ imports: [] })]}
+  parameters={{}}
+/>
+
+## Fonts
+
+The following list of typography definitions available on the applications
+Those can be simply used as classes on any HTML element.
+
+<Story id="foundation-fonts--noto-sans" height="830px" />
+
+For instance
+
+```
+<h1 class="mat-display-1">
+  LATEST NEWS
+</h1>
+```
+
+## 🔧Adding/overwriting fonts
+
+To modified the classes `font size`, `line height`, or `font weight` the file `src/assets/scss/material.typography.scss` can be updated.
+If a new class is required the list `orcid-custom-typography` can be appended with more definitions.
+
+For instance
+
+Add a new class for giant text
+
+```
+$orcid-custom-typography: (
+  // the parameters are font-size, line-height, and font-weight
+  giant-title: mat-typography-level(250px, normal, 600),
+  ...
+)
+```
+
+more info on [the official docs](https://github.com/angular/components/blob/fde980c8ad57a803c7bf6ca0d909cedccc354f06/guides/typography.md)
+
+#### Importing more fonts
+
+Currently, only some NotoSans fonts files are declared on the application CSS.
+If a new weight or style of NotoSans is needed the file `src/assets/scss/noto-sans.scss`
+has the `notosans-fontface` mixin that can be included to add any of the available fonts on the folder
+`src/assets/fonts/noto-sans`.
+
+For instance
+
+Add a new font file to the CSS to support italics on 400 weight
+
+```
+// added to `src/assets/fonts/noto-sans`
+@include notosans-fontface('Thin', 400, italic);
+```
+
+If any other font family is required it might be manually added into the SASS files or the index.html.

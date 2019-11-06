@@ -81,6 +81,10 @@
       {
         "source": "/zh-TW/**",
         "destination": "/zh-TW/index.html"
+      },
+      {
+        "source": "/storybook/**",
+        "destination": "/storybook/index.html"
       }
     ],
     "headers": [

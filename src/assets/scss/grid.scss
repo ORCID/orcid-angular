@@ -206,14 +206,13 @@ $gutter-width: 12px !default;
   justify-content: center;
 }
 .row.baseline {
+  align-items: baseline;
+}
+.row.end {
   align-items: flex-end;
 }
 .row.middle {
   align-items: center;
-}
-
-.row.end {
-  justify-content: flex-end;
 }
 
 .row.space-between {
@@ -222,6 +221,22 @@ $gutter-width: 12px !default;
 
 .row.space-around {
   justify-content: space-around;
+}
+
+.row.space-between {
+  justify-content: space-between;
+}
+
+.row.space-evenly {
+  justify-content: space-evenly;
+}
+
+.row.h-end {
+  justify-content: flex-end;
+}
+
+.row.h-baseline {
+  justify-content: baseline;
 }
 
 .no-wrap {

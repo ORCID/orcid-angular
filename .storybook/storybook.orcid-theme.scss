@@ -1,0 +1,52 @@
+@import '../src/assets/scss/material.orcid-theme.scss';
+@import '~@angular/material/theming';
+
+//
+//
+// The purpose of the this mixin is to create classes with the primary/accent/warn
+// This is only used and accessible from Storybook
+// To add the palette colors on the application components please refer to
+// https://github.com/angular/components/blob/8.2.0/guides/theming-your-components.md
+//
+@mixin extract-palette-styles($palette-name, $palette) {
+  @each $key, $color in $palette {
+    $string-key: inspect($key);
+    @if type-of($color) == color and not str-index($string-key, 'contrast') {
+      // add the background color for each key
+      .#{$palette-name}-palette-#{$key} {
+        background-color: $color;
+      }
+    } @else if type-of($color) == color {
+      $name: str-slice($key, 1, -10);
+      // add the text color for each key
+      .#{$palette-name}-palette-#{$name} {
+        color: $color;
+      }
+    }
+  }
+}
+
+//
+//
+// The purpose of the this mixin is to create classes with the material light-theme or dark theme-palette
+// This is only used and accessible from Storybook
+// To add the palette colors on the application components please refer to
+// https://github.com/angular/components/blob/8.2.0/guides/theming-your-components.md
+//
+@mixin story-book-palettes($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $overlay-color: mat-color($background, blue-overlay);
+
+  @include extract-palette-styles('primary', $primary);
+  @include extract-palette-styles('accent', $accent);
+  @include extract-palette-styles('warn', $warn);
+  @include extract-palette-styles('foreground', $foreground);
+  @include extract-palette-styles('foreground', $background);
+}
+div {
+  @include story-book-palettes($orcid-app-theme);
+}

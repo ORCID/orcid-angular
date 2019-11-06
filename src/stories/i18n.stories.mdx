@@ -1,0 +1,11 @@
+import A11y from '../../guides/a11y.md'
+import { moduleMetadata } from '@storybook/angular'
+import { Description } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="Docs|Accessibility"
+  decorators={[moduleMetadata({ imports: [] })]}
+  parameters={{ order: 4 }}
+/>
+
+<Description markdown={A11y} />

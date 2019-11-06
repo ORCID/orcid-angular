@@ -1,27 +1,74 @@
-# NgOrcid
+# Get started
 
-# Set up
+## Serve the frond-end locally
 
-- Clone this repo `git clone https://github.com/ORCID/orcid-angular.git`
+1- Clone the repo
 
-- Ensure you have npm, if not [install npm](https://www.npmjs.com/get-npm)
+```
+git clone https://github.com/ORCID/orcid-angular
+```
 
-## Development server
+2- Install its dependencies
 
-- Navigate to the project folder
+```
+cd orcid-angular
+npm install
+```
 
-- Install dependencies `npm install`
+3- Serve the front-end locally
 
-- Run the project `npm start`
+```
+npm run start:local
+```
 
-- Navigate to `http://localhost:4200/` you will see a local instance connected to sandbox.orcid.org data
+To access the backend endpoints this requires to have a copy of [ORCID-Source](https://github.com/ORCID/ORCID-Source) running locally.
 
-You can also use `npm run start:ar` to test left to right display mode.
+## Set up your source code editor (optional)
 
-## Code scaffolding
+The following tools are not required to work on the project but they facilitate the development process, please read more about these tools on the provided url.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1- Download [Visual Studio Code](https://code.visualstudio.com/) and install it
 
-## Build
+2- Download and install [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin) and [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) extensions
 
-Run `npm run build:prod` for a production build. The build artifacts will be stored in the `dist/` directory.
+3- Go to VSCode menu Code/Preferences/Settings search for `Format` and select `esbenp.prettier-vscode`. You might also activate the `Editor: Format On Save` checkbox.
+
+## Build and test the application locally
+
+1- Install firebase tools
+
+```
+npm run install firebase/tools -g
+```
+
+2- Login to your firebase account
+
+```
+firebase login
+```
+
+3- Build and serve the app locally
+
+```
+npm run build:local
+firebase serve
+```
+
+## Build the application for other environments
+
+The following commands are used to build the application for non-local environments
+
+- `npm run build:prod`
+- `npm run build:sandbox`
+- `npm run build:qa`
+
+## Learn more
+
+Please refer to the following documentation for more information:
+
+- Creating a new feature module
+- I18n, Applying translations
+- A11y, Notes about accessibility
+- Theming: How to apply the style-guide colors to new components
+- Fonts: How to use style-guide fonts
+- Creating and reusing components

@@ -1,0 +1,11 @@
+import I18n from '../../guides/i18n.md'
+import { moduleMetadata } from '@storybook/angular'
+import { Description } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="Docs|Internationalization"
+  decorators={[moduleMetadata({ imports: [] })]}
+  parameters={{ order: 3 }}
+/>
+
+<Description markdown={I18n} />
