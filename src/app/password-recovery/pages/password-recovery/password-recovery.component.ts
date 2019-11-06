@@ -7,7 +7,10 @@ import { WINDOW } from 'src/app/core'
 @Component({
   selector: 'app-password-recovery',
   templateUrl: './password-recovery.component.html',
-  styleUrls: ['./password-recovery.component.scss'],
+  styleUrls: [
+    './password-recovery.component.scss-theme.scss',
+    './password-recovery.component.scss',
+  ],
   animations: [matFormFieldAnimations.transitionMessages],
   preserveWhitespaces: true,
 })

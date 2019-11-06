@@ -1,5 +1,4 @@
-@import '~@angular/material/theming';
-@import './material.orcid-components.scss';
+@import '~@angular/material/_theming';
 @import './material.typography.scss';
 @import './material.light-theme.scss';
 @import './material.orcid.overwrites.scss/chips-theme';
@@ -12,20 +11,8 @@
 // .
 // Style material components more info on  https://github.com/angular/components/blob/8.1.4/guides/theming.md
 @include mat-core($orcid-material-typography);
-$orcid-app-theme: light-theme-overwrites($orcid-app-theme);
 // TODO: include only the CSS for the used components, instead of everything
 @include angular-material-theme($orcid-app-theme);
-// .
-// .
-// ORCID COMPONENTS THEMING
-// .
-// .
-// More info on https://github.com/angular/components/blob/8.1.4/guides/theming-your-components.md
-@include orcid-components-typography(
-  $orcid-material-typography,
-  $orcid-custom-typography
-);
-@include orcid-components-theme($orcid-app-theme);
 // .
 // .
 // MATERIAL OVERWRITES

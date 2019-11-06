@@ -1,4 +1,4 @@
-@import '../../../../assets/scss/material.palettes';
+@import 'src/assets/scss/material.orcid-theme.scss';
 @import '~@angular/material/theming';
 
 @mixin offline-message-theme($theme) {
@@ -7,9 +7,8 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  app-offline-message {
-    .offline-container {
-      color: $dark-disabled-text;
-    }
+  .offline-container {
+    color: $dark-disabled-text;
   }
 }
+@include offline-message-theme($orcid-app-theme);

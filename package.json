@@ -108,5 +108,13 @@
     "hooks": {
       "pre-commit": "run-s format:fix-stage lint"
     }
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm",
+    "overrides": {
+      "orcid.angular/orcid-theme": {}
+    }
   }
 }

@@ -5,7 +5,10 @@ import { PlatformInfoService } from 'src/app/core'
 @Component({
   selector: 'app-profile-person-detail',
   templateUrl: './profile-person-detail.component.html',
-  styleUrls: ['./profile-person-detail.component.scss'],
+  styleUrls: [
+    './profile-person-detail.component.scss-theme.scss',
+    './profile-person-detail.component.scss',
+  ],
   animations: [rotateAnimation, heightAnimation],
 })
 export class ProfileInfoDetailComponent implements OnInit {

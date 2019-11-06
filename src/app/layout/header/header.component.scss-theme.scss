@@ -1,5 +1,7 @@
 @import '~@angular/material/theming';
-$config: mat-typography-config();
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import 'src/assets/scss/material.typography.scss';
+
 @mixin header-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -7,69 +9,65 @@ $config: mat-typography-config();
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  app-header {
-    .container {
-      .logo-container {
-        color: mat-color($accent, '200-contrast');
+  .container {
+    .logo-container {
+      color: mat-color($accent, '200-contrast');
+    }
+  }
+  .top-bar {
+    //FIXME ACCESSIBILITY-ISSUE
+    color: mat-color($primary, '500-contrast');
+    background-color: mat-color($primary);
+
+    .menu-container {
+      .row {
+        button {
+          &.active {
+            background-color: mat-color($background, light-grey);
+            color: mat-contrast($accent, 500);
+            border-radius: 0;
+          }
+          &.sign-in-button {
+            border-color: mat-color($background, background);
+          }
+        }
+
+        .row {
+          color: mat-color($primary, 500);
+        }
+      }
+    }
+  }
+
+  .columns-8 :host,
+  .columns-4 :host {
+    header.container.fixed-header-mode {
+      > .row {
+        background-color: mat-color($background, 'card');
       }
     }
     .top-bar {
-      //FIXME ACCESSIBILITY-ISSUE
-      color: mat-color($primary, '500-contrast');
-      background-color: mat-color($primary);
-
+      background-color: mat-color($primary, 700);
       .menu-container {
         .row {
           button {
-            &.active {
-              background-color: mat-color($background, light-grey);
-              color: mat-contrast($accent, 500);
-              border-radius: 0;
+            & .active {
             }
             &.sign-in-button {
-              border-color: mat-color($background, background);
             }
           }
 
-          .row {
-            color: mat-color($primary, 500);
-          }
-        }
-      }
-    }
-
-    .columns-8 &,
-    .columns-4 & {
-      header.container.fixed-header-mode {
-        > .row {
-          background-color: mat-color($background, 'card');
-        }
-      }
-      .top-bar {
-        background-color: mat-color($primary, 700);
-        .menu-container {
           .row {
             button {
-              & .active {
-              }
-              &.sign-in-button {
-              }
+              color: mat-color($primary, '500-contrast');
             }
-
             .row {
               button {
-                color: mat-color($primary, '500-contrast');
+                color: mat-color($primary, 500);
               }
-
-              background-color: mat-color($primary, 600);
+              background-color: mat-color($background, 'light-grey');
               .row {
-                button {
-                  color: mat-color($primary, 500);
-                }
-                background-color: mat-color($background, 'light-grey');
-                .row {
-                  background-color: mat-color($background, 'card');
-                }
+                background-color: mat-color($background, 'card');
               }
             }
           }
@@ -79,15 +77,27 @@ $config: mat-typography-config();
   }
 }
 
-@mixin app-header-typography($orcid-material, $orcid-custom) {
-  app-header {
-    .top-bar {
-      .menu-container > .row > .col > button {
-        @include mat-typography-level-to-styles($orcid-custom, title-alt);
-        &.sign-in-button {
-          @include mat-typography-level-to-styles($config, button);
-        }
+@mixin app-header-typography(
+  $orcid-material-typography,
+  $orcid-custom-typography
+) {
+  .top-bar {
+    .menu-container > .row > .col > button {
+      @include mat-typography-level-to-styles(
+        $orcid-custom-typography,
+        title-alt
+      );
+      &.sign-in-button {
+        @include mat-typography-level-to-styles(
+          $orcid-material-typography,
+          button
+        );
       }
     }
   }
 }
+@include header-theme($orcid-app-theme);
+@include app-header-typography(
+  $orcid-material-typography,
+  $orcid-custom-typography
+);

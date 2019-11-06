@@ -1,5 +1,6 @@
-@import './assets/scss/material.palettes';
 @import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import 'src/assets/scss/material.typography.scss';
 
 @mixin global-theme($theme) {
   $primary: map-get($theme, primary);
@@ -19,6 +20,9 @@
     @include mat-typography-level-to-styles($config, input);
   }
 }
+
+@include global-theme($orcid-app-theme);
+@include global-theme-typography($orcid-material-typography);
 
 .mat-menu-panel {
   overflow: hidden !important;

@@ -1,22 +1,21 @@
-@import '../../../../assets/scss/material.palettes';
+@import 'src/assets/scss/material.orcid-theme.scss';
 @import '~@angular/material/theming';
 
-$config: mat-typography-config();
 @mixin profile-activities-affiliation-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  app-profile-activities-affiliation {
-    .title-secondary-container {
-      color: $dark-primary-text;
-    }
-    .secondary-container {
-      color: $dark-secondary-text;
-    }
-    .secondary-container-primary {
-      color: $dark-primary-text;
-    }
+  .title-secondary-container {
+    color: $dark-primary-text;
+  }
+  .secondary-container {
+    color: $dark-secondary-text;
+  }
+  .secondary-container-primary {
+    color: $dark-primary-text;
   }
 }
+
+@include profile-activities-affiliation-theme($orcid-app-theme);

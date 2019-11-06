@@ -8,7 +8,10 @@ import { first } from 'rxjs/operators'
 @Component({
   selector: 'app-profile-activities-affiliation',
   templateUrl: './profile-activities-affiliation.component.html',
-  styleUrls: ['./profile-activities-affiliation.component.scss'],
+  styleUrls: [
+    './profile-activities-affiliation.component.scss-theme.scss',
+    './profile-activities-affiliation.component.scss',
+  ],
   animations: [nestedListAnimation, itemMarginAnimation],
 })
 export class ProfileRecordsAffiliationComponent implements OnInit {

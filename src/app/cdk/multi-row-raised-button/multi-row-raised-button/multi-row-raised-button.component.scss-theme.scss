@@ -1,20 +1,20 @@
 @import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import 'src/assets/scss/material.typography.scss';
 
-$config: mat-typography-config();
-@mixin card-theme($theme) {
+@mixin multi-row-raised-button-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  app-multi-row-raised-button {
-  }
 }
 
 @mixin multi-row-raised-button-typography($config) {
-  app-multi-row-raised-button {
-    .text-box {
-      @include mat-typography-level-to-styles($config, button);
-    }
+  .text-box {
+    @include mat-typography-level-to-styles($config, button);
   }
 }
+
+@include multi-row-raised-button-theme($orcid-app-theme);
+@include multi-row-raised-button-typography($orcid-material-typography);

@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
-$config: mat-typography-config();
+@import 'src/assets/scss/material.orcid-theme.scss';
+
 @mixin app-menu-icon-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -7,18 +8,18 @@ $config: mat-typography-config();
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  app-menu-icon {
-    .hamburger__icon {
-      &.open {
-        span {
-          background: mat-color($accent, '500-contrast');
-        }
-      }
-    }
-    .hamburger__icon {
+  .hamburger__icon {
+    &.open {
       span {
         background: mat-color($accent, '500-contrast');
       }
     }
   }
+  .hamburger__icon {
+    span {
+      background: mat-color($accent, '500-contrast');
+    }
+  }
 }
+
+@include app-menu-icon-theme($orcid-app-theme);

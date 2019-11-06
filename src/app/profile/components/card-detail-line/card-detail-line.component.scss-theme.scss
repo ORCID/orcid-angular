@@ -1,24 +1,23 @@
-@import '../../../../assets/scss/material.palettes';
+@import 'src/assets/scss/material.orcid-theme.scss';
 @import '~@angular/material/theming';
 
-$config: mat-typography-config();
 @mixin card-detail-line-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  app-card-detail-line {
-    h5 {
-      color: $dark-primary-text;
-    }
+  h5 {
+    color: $dark-primary-text;
+  }
 
-    p {
-      color: $dark-secondary-text;
-    }
+  p {
+    color: $dark-secondary-text;
+  }
 
-    .secondary-text {
-      color: $dark-secondary-text;
-    }
+  .secondary-text {
+    color: $dark-secondary-text;
   }
 }
+
+@include card-detail-line-theme($orcid-app-theme);

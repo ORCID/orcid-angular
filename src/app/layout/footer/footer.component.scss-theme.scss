@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
-$config: mat-typography-config();
+@import 'src/assets/scss/material.orcid-theme.scss';
+
 @mixin footer-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -13,3 +14,4 @@ $config: mat-typography-config();
     }
   }
 }
+@include footer-theme($orcid-app-theme);
