@@ -38,7 +38,7 @@
             color="primary"
             class="hero-call-to-action"
             i18n="@@ngOrcid.findOutMore"
-            (click)="navigateTo('/about/what-is-orcid/mission')"
+            (click)="goto('about/what-is-orcid/mission')"
             >FIND OUT MORE ABOUT OUR MISSION AND VALUES
           </app-multi-row-raised-button>
         </div>
@@ -63,10 +63,7 @@
               Get your unique ORCID identifier. It’s free and only takes a
               minute, so
             </ng-container>
-            <a
-              i18n="#lowerCase@@home.register_now"
-              (click)="navigateTo('/register')"
-            >
+            <a i18n="#lowerCase@@home.register_now" (click)="goto('register')">
               register now!
             </a>
           </div>
@@ -159,10 +156,7 @@
             <div i18n="@@home.curious_about">
               Curious about who our members are?
             </div>
-            <a
-              i18n="@@home.see_our"
-              (click)="navigateTo('/about/what-is-orcid/mission')"
-            >
+            <a i18n="@@home.see_our" (click)="goto('members')">
               See our complete list of member organizations
             </a>
           </div>

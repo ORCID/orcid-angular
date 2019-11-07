@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { enterAnimation } from 'src/app/animations'
 import { WINDOW, PlatformInfoService } from 'src/app/core'
 import { BrowserWindowRef } from 'src/app/core/window/window.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-home',
@@ -22,8 +23,8 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  navigateTo(val) {
-    this.window.location.href = val
+  goto(url) {
+    this.window.location.href = environment.BASE_URL + url
   }
 
   ngOnInit() {}
