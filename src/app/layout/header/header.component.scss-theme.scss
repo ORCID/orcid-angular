@@ -58,6 +58,7 @@
           }
 
           .row {
+            background-color: mat-color($primary, 600);
             button {
               color: mat-color($primary, '500-contrast');
             }

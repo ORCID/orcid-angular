@@ -190,4 +190,20 @@ export class HeaderComponent implements OnInit {
     }
     return true
   }
+
+  isDesktopThirdLevelMenu(parents: any[]) {
+    return parents.length > 1 && this.platform.columns12
+  }
+  isDesktopSecondLevelMenu(parents: any[]) {
+    return parents.length === 1 && this.platform.columns12
+  }
+  isMobileThirdLevelMenu(parents: any[]) {
+    return parents.length > 1 && !this.platform.columns12
+  }
+  menuButtonColor(parents) {
+    return this.isDesktopSecondLevelMenu(parents) ||
+      this.isMobileThirdLevelMenu(parents)
+      ? 'primary'
+      : null
+  }
 }
