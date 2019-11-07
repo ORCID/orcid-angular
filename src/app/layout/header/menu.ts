@@ -504,12 +504,12 @@ export const menu: ApplicationMenuItemBasic[] = [
       {
         id: 'public-layout.news',
         label: LOCALE['public-layout.news'],
-        route: 'about/news/news',
+        route: 'about/news',
         buttons: [
           {
             id: 'news',
             label: LOCALE['public-layout.news'],
-            route: 'about/news/news',
+            route: 'about/news',
           },
           {
             id: 'blog',
