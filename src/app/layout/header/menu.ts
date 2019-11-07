@@ -469,6 +469,7 @@ export const menu: ApplicationMenuItemBasic[] = [
 
       {
         id: 'membership',
+        route: 'about/membership',
         label: LOCALE['public-layout.membership'],
         buttons: [
           {
