@@ -48,7 +48,8 @@ export class SearchComponent implements OnInit {
       whereToSearch ===
       this.firstLetterUppercase(LOCALE['layout.public-layout.registry'])
     ) {
-      this.window.location.href = '/orcid-search/quick-search/?' + whatToSearch
+      this.window.location.href =
+        '/orcid-search/quick-search/?searchQuery=' + whatToSearch
     } else {
       this.window.location.href = '/search/node/' + whatToSearch
     }
