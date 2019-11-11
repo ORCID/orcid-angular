@@ -1,0 +1,26 @@
+.statics {
+  .mat-caption {
+    text-align: left;
+    [dir='rtl'] :host & {
+      text-align: right;
+    }
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+.columns-8,
+.columns-4 {
+  :host {
+    .statics {
+      .mat-caption {
+        text-align: left;
+        [dir='rtl'] & {
+          text-align: right;
+        }
+        margin-bottom: 4px;
+        margin-top: 4px;
+      }
+    }
+  }
+}
