@@ -15,7 +15,7 @@
     <unit id="header.signin">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:119</note>
+        <note category="location">app/layout/header/header.component.html:120</note>
       </notes>
       <segment>
         <source>SIGN IN</source>
@@ -24,7 +24,7 @@
     <unit id="header.register">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:121</note>
+        <note category="location">app/layout/header/header.component.html:122</note>
         <note category="location">app/layout/user-menu/user-menu.component.html:30</note>
       </notes>
       <segment>
@@ -34,32 +34,16 @@
     <unit id="public-layout.sign_out">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:131</note>
+        <note category="location">app/layout/header/header.component.html:132</note>
         <note category="location">locale/i18n.pseudo.component.html:56</note>
       </notes>
       <segment>
         <source>SIGN OUT</source>
       </segment>
     </unit>
-    <unit id="public-layout.amount_ids">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:145</note>
-      </notes>
-      <segment>
-        <source>ORCID iDs and counting.</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.seeMoreStatics">
-      <notes>
-        <note category="location">app/layout/header/header.component.html:148</note>
-      </notes>
-      <segment>
-        <source>See more statics</source>
-      </segment>
-    </unit>
     <unit id="footer.copyright_cc0_1">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:28,29</note>
+        <note category="location">app/layout/footer/footer.component.html:31,32</note>
       </notes>
       <segment>
         <source>Except where otherwise specified, the content of this website is
@@ -68,7 +52,7 @@
     </unit>
     <unit id="ngOrcid.copyright">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:37</note>
+        <note category="location">app/layout/footer/footer.component.html:40</note>
       </notes>
       <segment>
         <source>CC0 license.</source>
@@ -76,7 +60,7 @@
     </unit>
     <unit id="footer.privacypolicy">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:50,52</note>
+        <note category="location">app/layout/footer/footer.component.html:53,55</note>
       </notes>
       <segment>
         <source>
@@ -86,7 +70,7 @@
     </unit>
     <unit id="footer.termsofuse">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:57,59</note>
+        <note category="location">app/layout/footer/footer.component.html:60,62</note>
       </notes>
       <segment>
         <source>
@@ -96,7 +80,7 @@
     </unit>
     <unit id="ngOrcid.disputeProcedure">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:64,66</note>
+        <note category="location">app/layout/footer/footer.component.html:67,69</note>
       </notes>
       <segment>
         <source>
@@ -106,7 +90,7 @@
     </unit>
     <unit id="footer.contactus">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:71,73</note>
+        <note category="location">app/layout/footer/footer.component.html:74,76</note>
       </notes>
       <segment>
         <source>
@@ -116,7 +100,7 @@
     </unit>
     <unit id="ngOrcid.trademark">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:78,80</note>
+        <note category="location">app/layout/footer/footer.component.html:81,83</note>
       </notes>
       <segment>
         <source>
@@ -155,36 +139,33 @@
     </unit>
     <unit id="ngOrcid.accountSetting">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:65,66</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:64</note>
       </notes>
       <segment>
-        <source>Account settings
-    </source>
+        <source>Account settings </source>
       </segment>
     </unit>
     <unit id="ngOrcid.advanceSearch">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:79,80</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:93,94</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:77</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:90</note>
       </notes>
       <segment>
-        <source>Developer tools
-    </source>
+        <source>Developer tools </source>
       </segment>
     </unit>
     <unit id="ngOrcid.selfService">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:99,100</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:98</note>
       </notes>
       <segment>
-        <source>Member tools
-    </source>
+        <source>Member tools </source>
       </segment>
     </unit>
     <unit id="ngOrcid.manageMembers">
       <notes>
         <note category="description">#sentenceCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:107</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:106</note>
       </notes>
       <segment>
         <source>Manage members</source>
@@ -192,7 +173,7 @@
     </unit>
     <unit id="ngOrcid.adminPage">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:113</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:114</note>
       </notes>
       <segment>
         <source>Admin page</source>
@@ -206,8 +187,26 @@
         <source>Logout</source>
       </segment>
     </unit>
+    <unit id="public-layout.amount_ids">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:6,7</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID iDs and counting.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.seeMoreStatics">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:10</note>
+      </notes>
+      <segment>
+        <source>See more statistics</source>
+      </segment>
+    </unit>
     <unit id="home.distinguish_yourself">
       <notes>
+        <note category="description">#sentenceCase</note>
         <note category="location">app/home/pages/home/home.component.html:16,18</note>
       </notes>
       <segment>
@@ -218,6 +217,7 @@
     </unit>
     <unit id="home.three_easy">
       <notes>
+        <note category="description">#lowerCase</note>
         <note category="location">app/home/pages/home/home.component.html:19,20</note>
       </notes>
       <segment>
@@ -282,7 +282,7 @@
     <unit id="home.register_now">
       <notes>
         <note category="description">#lowerCase</note>
-        <note category="location">app/home/pages/home/home.component.html:69,71</note>
+        <note category="location">app/home/pages/home/home.component.html:66,68</note>
       </notes>
       <segment>
         <source>
@@ -292,7 +292,7 @@
     </unit>
     <unit id="home.two">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:77</note>
+        <note category="location">app/home/pages/home/home.component.html:74</note>
       </notes>
       <segment>
         <source>2</source>
@@ -300,7 +300,7 @@
     </unit>
     <unit id="home.user_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:84</note>
+        <note category="location">app/home/pages/home/home.component.html:81</note>
       </notes>
       <segment>
         <source>USE YOUR</source>
@@ -308,7 +308,7 @@
     </unit>
     <unit id="home.orcid_id">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:85</note>
+        <note category="location">app/home/pages/home/home.component.html:82</note>
       </notes>
       <segment>
         <source>ORCID ID</source>
@@ -316,7 +316,7 @@
     </unit>
     <unit id="ngOrcid.includeYourId">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:91,95</note>
+        <note category="location">app/home/pages/home/home.component.html:88,92</note>
       </notes>
       <segment>
         <source>
@@ -328,7 +328,7 @@
     </unit>
     <unit id="home.three">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:100</note>
+        <note category="location">app/home/pages/home/home.component.html:97</note>
       </notes>
       <segment>
         <source>3</source>
@@ -336,7 +336,7 @@
     </unit>
     <unit id="ngOrcid.shareYourOrcid">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:108</note>
+        <note category="location">app/home/pages/home/home.component.html:105</note>
       </notes>
       <segment>
         <source>SHARE YOUR ORCID iD</source>
@@ -344,7 +344,7 @@
     </unit>
     <unit id="ngOrcid.enhanceYourProfile">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:115,120</note>
+        <note category="location">app/home/pages/home/home.component.html:112,117</note>
       </notes>
       <segment>
         <source>
@@ -357,7 +357,7 @@
     </unit>
     <unit id="ngOrcid.membersMakeOrcid">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:147,149</note>
+        <note category="location">app/home/pages/home/home.component.html:144,146</note>
       </notes>
       <segment>
         <source>
@@ -367,7 +367,7 @@
     </unit>
     <unit id="ngOrcid.orcidIs">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:152,157</note>
+        <note category="location">app/home/pages/home/home.component.html:149,154</note>
       </notes>
       <segment>
         <source>
@@ -380,7 +380,7 @@
     </unit>
     <unit id="home.curious_about">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:159,161</note>
+        <note category="location">app/home/pages/home/home.component.html:156,158</note>
       </notes>
       <segment>
         <source>
@@ -390,7 +390,7 @@
     </unit>
     <unit id="home.see_our">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:165,167</note>
+        <note category="location">app/home/pages/home/home.component.html:159,161</note>
       </notes>
       <segment>
         <source>
@@ -451,17 +451,17 @@
     </unit>
     <unit id="ngOrcid.didYouForget">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:18,20</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:13,15</note>
       </notes>
       <segment>
         <source>
-              Did you forget your password or ORCID iD?
-            </source>
+            Did you forget your password or ORCID iD?
+          </source>
       </segment>
     </unit>
     <unit id="check_password_modal.password">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:27</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:28</note>
       </notes>
       <segment>
         <source>Password</source>
@@ -469,7 +469,7 @@
     </unit>
     <unit id="common.orcid_id">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:35</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:36</note>
       </notes>
       <segment>
         <source>ORCID ID</source>
@@ -477,7 +477,7 @@
     </unit>
     <unit id="ngOrcid.pleaseChooseRecovery">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:45</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:46</note>
       </notes>
       <segment>
         <source>Please choose a recovery option</source>
@@ -485,7 +485,7 @@
     </unit>
     <unit id="oauth_sign_up.labelemail">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:49</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:50</note>
       </notes>
       <segment>
         <source>Email</source>
@@ -493,7 +493,7 @@
     </unit>
     <unit id="Email.resendClaim.invalidEmail">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:58</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:59</note>
       </notes>
       <segment>
         <source>Please enter a valid email address</source>
@@ -501,7 +501,7 @@
     </unit>
     <unit id="ngOrcid.recoverAccountDetails">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:79,81</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:80,82</note>
       </notes>
       <segment>
         <source>
@@ -511,7 +511,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_1">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:90</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:91</note>
       </notes>
       <segment>
         <source>We have sent a message to</source>
@@ -519,7 +519,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_2">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:94</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:95</note>
       </notes>
       <segment>
         <source>from reset@notify.orcid.org.</source>
@@ -527,7 +527,7 @@
     </unit>
     <unit id="ngOrcid.youCanNow">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:96</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:97</note>
       </notes>
       <segment>
         <source>You can now</source>
@@ -535,7 +535,7 @@
     </unit>
     <unit id="ngOrcid.returnToLoginPage">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:100</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:101</note>
       </notes>
       <segment>
         <source>return to the login page.</source>
@@ -543,7 +543,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_3">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:105,107</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:106,108</note>
       </notes>
       <segment>
         <source>If you do not receive a message within 5 minutes, please check
@@ -553,7 +553,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_4">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:113</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:114</note>
       </notes>
       <segment>
         <source>contact us</source>

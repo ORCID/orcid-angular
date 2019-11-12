@@ -16,6 +16,7 @@ import { MenuIconComponent } from './menu-icon/menu-icon.component'
 import { LanguageComponent } from './language/language.component'
 import { CoreModule } from '../core/core.module'
 import { UserMenuComponent } from './user-menu/user-menu.component'
+import { StatisticsComponent } from './statistics/statistics.component'
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component'
     MenuIconComponent,
     LanguageComponent,
     UserMenuComponent,
+    StatisticsComponent,
   ],
   exports: [HeaderComponent, FooterComponent],
 })

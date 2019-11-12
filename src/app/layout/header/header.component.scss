@@ -48,17 +48,6 @@ nav {
   }
 }
 
-.statics {
-  .mat-caption {
-    text-align: right;
-    [dir='rtl'] :host & {
-      text-align: left;
-    }
-    display: block;
-    margin-bottom: 8px;
-  }
-}
-
 .columns-8,
 .columns-4 {
   :host {
@@ -169,8 +158,9 @@ nav {
                 }
                 .row {
                   button {
-                    padding-left: calc(16px + 32px);
-                    // TODO: this should be gutter plus 32
+                    padding-left: calc(
+                      16px + 32px
+                    ); // TODO: this should be gutter plus 32
                     [dir='rtl'] & {
                       margin-left: auto;
                       margin-right: 32px;
@@ -178,8 +168,9 @@ nav {
                   }
                   .row {
                     button {
-                      padding-left: calc(16px + 64px);
-                      // TODO: this should be gutter plus 64
+                      padding-left: calc(
+                        16px + 64px
+                      ); // TODO: this should be gutter plus 64
                       [dir='rtl'] & {
                         margin-left: auto;
                         margin-right: 64px;
@@ -191,16 +182,6 @@ nav {
             }
           }
         }
-      }
-    }
-    .statics {
-      .mat-caption {
-        text-align: right;
-        [dir='rtl'] & {
-          text-align: left;
-        }
-        margin-bottom: 4px;
-        margin-top: 4px;
       }
     }
   }
