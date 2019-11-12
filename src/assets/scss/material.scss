@@ -23,3 +23,4 @@
 @include mat-base-typography-overwrites($orcid-material-typography);
 @import './material.orcid.overwrites.scss/chips.scss';
 @include mat-chips-theme-overwrites($orcid-app-theme);
+@import './material.orcid.overwrites.scss/button.scss';

@@ -70,7 +70,7 @@
   <div class="top-bar">
     <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
       <ng-template #recursiveList let-list let-parents="parents">
-        <ul class="row" *ngIf="!(platform.columns12 && parents.length > 1)">
+        <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
           <li class="col no-gutters" *ngFor="let item of list">
             <button
               *ngIf="checkMenuItemRequirements(item.requirements) === true"
@@ -78,6 +78,7 @@
                 active: item.activeRoute === currentRoute
               }"
               mat-button
+              [color]="menuButtonColor(parents)"
               (focus)="mouseEnter(parents.concat(item.id))"
               (click)="click(parents.concat(item.id), item)"
               (mouseenter)="mouseEnter(parents.concat(item.id))"
