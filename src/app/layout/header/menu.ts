@@ -6,7 +6,7 @@ export const menu: ApplicationMenuItemBasic[] = [
     id: 'public-layout.for_researchers',
     label: LOCALE['public-layout.for_researchers'],
     route: 'about/what-is-orcid/mission',
-    activeRoute: '',
+    activeRoute: '/',
     buttons: [
       {
         id: 'public-layout.for_researchers',
