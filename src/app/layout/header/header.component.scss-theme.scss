@@ -23,7 +23,7 @@
       .row {
         button {
           &.active {
-            background-color: mat-color($background, light-grey);
+            background-color: mat-color($background, grey);
             color: mat-contrast($accent, 500);
             border-radius: 0;
           }
