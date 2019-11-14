@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   API_NEWS: 'https://localhost/blog/feed',
   API_WEB: 'https://localhost/',
   BASE_URL: 'https://localhost/',

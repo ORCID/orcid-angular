@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   API_NEWS: 'https://qa.orcid.org/blog/feed',
   API_WEB: 'https://qa.orcid.org/',
   BASE_URL: 'https://qa.orcid.org/',
