@@ -134,8 +134,7 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": "/ar/",
-              "index": "src/index.rtl.html"
+              "baseHref": "/ar/"
             },
             "local-ca": {
               "fileReplacements": [
@@ -464,8 +463,7 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": ".",
-              "index": "src/index.rtl.html"
+              "baseHref": "."
             },
             "local-tomcat-ca": {
               "fileReplacements": [
@@ -929,8 +927,7 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": ".",
-              "index": "src/index.rtl.html"
+              "baseHref": "."
             },
             "production-cs": {
               "fileReplacements": [
@@ -1264,8 +1261,7 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": ".",
-              "index": "src/index.rtl.html"
+              "baseHref": "."
             },
             "qa-ca": {
               "fileReplacements": [
@@ -1730,8 +1726,7 @@
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": ".",
-              "index": "src/index.rtl.html"
+              "baseHref": "."
             },
             "sandbox-ca": {
               "fileReplacements": [
