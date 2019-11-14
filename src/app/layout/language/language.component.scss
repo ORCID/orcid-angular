@@ -1,8 +1,13 @@
-col,
-p {
-  margin: 0;
-}
-
-button {
-  padding: 0 4px;
+:host {
+  > button {
+    padding: 0 7px 0 12px;
+    p {
+      margin: 0;
+      margin-right: 7px;
+    }
+    mat-icon {
+      height: auto;
+      width: auto;
+    }
+  }
 }

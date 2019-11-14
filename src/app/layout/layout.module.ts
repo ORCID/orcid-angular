@@ -29,6 +29,7 @@ import { StatisticsComponent } from './statistics/statistics.component'
     FormsModule,
     ReactiveFormsModule,
     MatRippleModule,
+    MatIconModule,
   ],
   declarations: [
     HeaderComponent,

@@ -94,6 +94,7 @@
                   "with": "src/environments/environment.local.ts"
                 }
               ],
+              "aot": true,
               "outputPath": "dist/en/",
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
