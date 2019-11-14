@@ -187,6 +187,23 @@ export class HeaderComponent implements OnInit {
         }
       }
       return false
+    } else if (typeof requirements.togglz !== 'undefined') {
+      if (!this.togglz || !this.togglz.messages) {
+        return false
+      }
+      let foundAnUnmeetTogglz = false
+      Object.keys(requirements.togglz).forEach(key => {
+        if (Object.keys(this.togglz.messages).indexOf(key)) {
+          if (this.togglz.messages[key] !== requirements.togglz[key]) {
+            foundAnUnmeetTogglz = true
+          }
+        } else {
+          foundAnUnmeetTogglz = true
+        }
+      })
+      if (foundAnUnmeetTogglz) {
+        return false
+      }
     }
     return true
   }
