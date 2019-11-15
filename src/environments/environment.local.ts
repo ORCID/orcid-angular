@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  API_NEWS: 'https://localhost:8888/blog/feed',
+  API_NEWS: 'http://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_WEB: 'https://localhost:8443/orcid-web/',
   BASE_URL: 'https://localhost:8443/orcid-web/',
   BLOG_NEWS: 'https://localhost:8888/about/news',
