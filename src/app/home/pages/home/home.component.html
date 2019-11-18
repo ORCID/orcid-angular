@@ -121,13 +121,15 @@
   </div>
 
   <div class="organization-section">
-    <div class="col l4 m8 s4">
-      <img
-        *ngIf="platform.columns8 || platform.columns4"
-        class="organization-img"
-        src="assets/img/organizations.png  "
-        aria-hidden="true"
-      />
+    <div class="row middle">
+      <div class="col l4 m8 s4 horizontal-center">
+        <img
+          *ngIf="platform.columns8 || platform.columns4"
+          class="organization-img"
+          src="assets/img/organizations.jpg  "
+          aria-hidden="true"
+        />
+      </div>
     </div>
     <div class="container ">
       <div class="row middle">
@@ -136,7 +138,7 @@
             *ngIf="platform.columns12"
             class="organization-img"
             aria-hidden="true"
-            src="assets/img/organizations.png  "
+            src="assets/img/organizations.jpg  "
             alt=""
           />
         </div>

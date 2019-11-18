@@ -11,8 +11,35 @@
 
   .news-box > .col > .row {
     text-align: center;
-    background: linear-gradient($overlay-color, $overlay-color),
-      url('../../../../assets/img/hero-header-image.png');
+
+    // the following is the background image with the overlay
+    // this media queries and images should be shared with the ones on `home.component.scss-theme` with the purpose
+    // of loading a single image for both
+
+    @media screen and (min-width: 2560px) {
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('../../../../assets/img/hero-header-image-3000.jpg');
+    }
+    @media screen and (min-width: 1140px) and (max-width: 2560.999px) {
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('../../../../assets/img/hero-header-image-2560.jpg');
+    }
+    @media screen and (min-width: 839px) and (max-width: 1140.999px) {
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('../../../../assets/img/hero-header-image-1140.jpg');
+    }
+    @media screen and (min-width: 768px) and (max-width: 839px) {
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('../../../../assets/img/hero-header-image-1024.jpg');
+    }
+    @media screen and (min-width: 425px) and (max-width: 768.999px) {
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('../../../../assets/img/hero-header-image-768w.jpg');
+    }
+    @media screen and (max-width: 425.999px) {
+      background: linear-gradient($overlay-color, $overlay-color),
+        url('../../../../assets/img/hero-header-image-425w.jpg');
+    }
     color: mat-contrast($primary, 400);
   }
 }
