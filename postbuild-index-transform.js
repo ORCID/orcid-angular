@@ -1,13 +1,16 @@
 var fs = require('fs')
 module.exports = (targetOptions, indexHtml) => {
-  assetsToPrefetch = [/NotoSans-ExtraBold.*\.woff2/]
-
-  configurationLanguage = getConfLanguage(targetOptions)
-  return getAssetsToPrefetch(assetsToPrefetch, configurationLanguage).then(
-    assetsNames => {
-      return appendAssetsToTheIndex(assetsNames, indexHtml)
-    }
-  )
+  if (targetOptions && targetOptions.target === 'build') {
+    assetsToPrefetch = [/NotoSans-ExtraBold.*\.woff2/]
+    configurationLanguage = getConfLanguage(targetOptions)
+    return getAssetsToPrefetch(assetsToPrefetch, configurationLanguage).then(
+      assetsNames => {
+        return appendAssetsToTheIndex(assetsNames, indexHtml)
+      }
+    )
+  } else {
+    return indexHtml
+  }
 }
 
 function getAssetsToPrefetch(assetsToPrefetch, configurationLanguage) {
