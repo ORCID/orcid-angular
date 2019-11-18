@@ -1,7 +1,14 @@
 var fs = require('fs')
 module.exports = (targetOptions, indexHtml) => {
   if (targetOptions && targetOptions.target === 'build') {
-    assetsToPrefetch = [/NotoSans-ExtraBold.*\.woff2/]
+    assetsToPrefetch = [
+      /MaterialIcons-Regular.*\.woff2/,
+      /NotoSans-Bold.*\.woff2/,
+      /NotoSans-Light.*\.woff2/,
+      /NotoSans-Medium.*\.woff2/,
+      /NotoSans-Regular.*\.woff2/,
+      /orcid.logo.background.*\.svg/,
+    ]
     configurationLanguage = getConfLanguage(targetOptions)
     return getAssetsToPrefetch(assetsToPrefetch, configurationLanguage).then(
       assetsNames => {
@@ -12,6 +19,14 @@ module.exports = (targetOptions, indexHtml) => {
     return indexHtml
   }
 }
+
+// http://localhost:4200/en/assets/icons/public-domain.png
+// http://localhost:4200/en/assets/img/organizations.jpg
+// http://localhost:4200/en/assets/vectors/glyphicons-social-22-github.svg
+// http://localhost:4200/en/assets/vectors/glyphicons-social-32-twitter.svg
+// http://localhost:4200/en/assets/vectors/glyphicons-social-38-rss.svg
+// http://localhost:4200/en/assets/vectors/orcid.logo.icon.svg
+// http://localhost:4200/en/assets/vectors/orcid.logo.svg
 
 function getAssetsToPrefetch(assetsToPrefetch, configurationLanguage) {
   return new Promise((resolve, reject) => {
@@ -40,9 +55,10 @@ function getConfLanguage(targetOptions) {
 }
 
 function appendAssetsToTheIndex(assetsNames, indexHtml) {
+  console.log(JSON.stringify(assetsNames))
   let assetLinks = ''
   assetsNames.forEach(asset => {
-    const assetLink = `<link rel="prefetch" href="${asset}" />`
+    const assetLink = `<link rel="preload" href="${asset}" as="font"/>`
     assetLinks += assetLink
   })
 
