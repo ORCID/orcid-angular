@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "indexTransform": "./postbuild-index-transform.js",
+            "indexTransform": "./scripts/index-transform",
             "outputPath": "dist/ng-orcid",
             "index": "src/index.html",
             "main": "src/main.ts",
