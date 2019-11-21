@@ -1,5 +1,4 @@
-var common = require('./common')
-var fs = require('fs')
+import fs = require('fs')
 
 const SUPPORTED_LANGUAGES = [
   'en',
@@ -21,9 +20,9 @@ const SUPPORTED_LANGUAGES = [
   'uk',
   'ca',
 ]
-module.exports = (targetOptions, indexHtml) => {
-  configurationLanguage = common.getConfLanguage(targetOptions)
-  languageUniqueLength = getLanguageUniqueLength(configurationLanguage)
+export function uniqueIndexLength(indexHtml, target): string {
+  const configurationLanguage = target
+  const languageUniqueLength = getLanguageUniqueLength(configurationLanguage)
   indexHtml += `<!--${'!'.repeat(languageUniqueLength)}-->`
   return indexHtml
 }
