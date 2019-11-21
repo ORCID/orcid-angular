@@ -1,14 +1,14 @@
-import getRepoInfo = require('git-repo-info')
+const getRepoInfo = require('git-repo-info')
 
-export function buildInfo(indexHtml, target): string {
+export function buildInfo(indexHtml, options): string {
   let gitInfo
   try {
     gitInfo = getRepoInfo()
   } catch (err) {}
 
   const config = `
-<!--${target.languageCode}${
-    target.environment ? '-' + target.environment : ''
+<!--${options.languageCode}${
+    options.environment ? '-' + options.environment : ''
   } ${new Date().toJSON()}-->
 ${
     gitInfo

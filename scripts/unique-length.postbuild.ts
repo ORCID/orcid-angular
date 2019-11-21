@@ -1,5 +1,3 @@
-import fs = require('fs')
-
 const SUPPORTED_LANGUAGES = [
   'en',
   'ar',
@@ -20,8 +18,8 @@ const SUPPORTED_LANGUAGES = [
   'uk',
   'ca',
 ]
-export function uniqueIndexLength(indexHtml, target): string {
-  const configurationLanguage = target.languageCode
+export function uniqueLength(indexHtml, options): string {
+  const configurationLanguage = options.languageCode
   const languageUniqueLength = getLanguageUniqueLength(configurationLanguage)
   indexHtml += `<!--${'!'.repeat(languageUniqueLength)}-->`
   return indexHtml
