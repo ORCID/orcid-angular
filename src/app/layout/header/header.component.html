@@ -116,7 +116,11 @@
           class="col no-gutters"
           *ngIf="checkMenuItemRequirements({ logging: false })"
         >
-          <button mat-stroked-button class="sign-in-button">
+          <button
+            mat-stroked-button
+            class="sign-in-button"
+            (click)="goto('signin')"
+          >
             <ng-container i18n="#upperCase@@header.signin">SIGN IN</ng-container
             >/<ng-container i18n="#upperCase@@header.register"
               >REGISTER</ng-container
@@ -127,7 +131,11 @@
           class="col no-gutters"
           *ngIf="checkMenuItemRequirements({ logging: true })"
         >
-          <button mat-stroked-button class="sign-in-button">
+          <button
+            mat-stroked-button
+            class="sign-in-button"
+            (click)="goto('signout')"
+          >
             <ng-container i18n="#upperCase@@public-layout.sign_out"
               >SIGN OUT</ng-container
             >
