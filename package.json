@@ -55,6 +55,7 @@
     "ngx-cookie-service": "^2.2.0",
     "properties-to-json": "^0.1.4",
     "rxjs": "~6.5.2",
+    "stream": "0.0.2",
     "style-loader": "^1.0.0",
     "timers": "^0.1.1",
     "tslib": "^1.10.0",
