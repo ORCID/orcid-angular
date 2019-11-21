@@ -21,7 +21,7 @@ const SUPPORTED_LANGUAGES = [
   'ca',
 ]
 export function uniqueIndexLength(indexHtml, target): string {
-  const configurationLanguage = target
+  const configurationLanguage = target.languageCode
   const languageUniqueLength = getLanguageUniqueLength(configurationLanguage)
   indexHtml += `<!--${'!'.repeat(languageUniqueLength)}-->`
   return indexHtml
@@ -32,7 +32,8 @@ function getLanguageUniqueLength(configurationLanguage) {
     return SUPPORTED_LANGUAGES.indexOf(configurationLanguage)
   } else {
     console.warn(
-      `The language code "${configurationLanguage}" is not listed on the Angular unique.index.length.post-build script, this might produce cache issues`
+      `The language code "${configurationLanguage}" is not listed on the Angular unique.index.length.post-build 
+script, this might produce cache issues`
     )
     return Math.floor(Math.random() * 300) + SUPPORTED_LANGUAGES.length
   }

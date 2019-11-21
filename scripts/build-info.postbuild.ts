@@ -1,13 +1,15 @@
 import getRepoInfo = require('git-repo-info')
 
-export function buildInfoPostbuild(indexHtml, target): string {
+export function buildInfo(indexHtml, target): string {
   let gitInfo
   try {
     gitInfo = getRepoInfo()
   } catch (err) {}
 
   const config = `
-<!--${target} ${new Date().toJSON()}-->
+<!--${target.languageCode}${
+    target.environment ? '-' + target.environment : ''
+  } ${new Date().toJSON()}-->
 ${
     gitInfo
       ? '<!--' + gitInfo.abbreviatedSha + '/' + gitInfo.lastTag + '-->'
