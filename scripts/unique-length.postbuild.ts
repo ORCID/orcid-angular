@@ -30,7 +30,7 @@ function getLanguageUniqueLength(configurationLanguage) {
     return SUPPORTED_LANGUAGES.indexOf(configurationLanguage)
   } else {
     console.warn(
-      `The language code "${configurationLanguage}" is not listed on the Angular unique.index.length.post-build 
+      `The language code "${configurationLanguage}" is not listed on the Angular unique-length.postbuild
 script, this might produce cache issues`
     )
     return Math.floor(Math.random() * 300) + SUPPORTED_LANGUAGES.length
