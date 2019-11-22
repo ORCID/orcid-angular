@@ -4,6 +4,7 @@ export const environment = {
   API_WEB: 'https://sandbox.orcid.org/',
   BASE_URL: 'https://sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
+  GOOGLE_ANALYTICS: 'UA-17492803-5',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
