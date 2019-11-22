@@ -1,38 +1,32 @@
-const SUPPORTED_LANGUAGES = [
-  'en',
-  'ar',
-  'cs',
-  'es',
-  'fr',
-  'it',
-  'ja',
-  'ko',
-  'pt',
-  'ru',
-  'zh-CN',
-  'zh-TW',
-  'xx',
-  'source',
-  'lr',
-  'rl',
-  'uk',
-  'ca',
-]
 export function uniqueLength(indexHtml, options): string {
   const configurationLanguage = options.languageCode
-  const languageUniqueLength = getLanguageUniqueLength(configurationLanguage)
+  const languageUniqueLength = getLanguageUniqueLength(
+    configurationLanguage,
+    options
+  )
   indexHtml += `<!--${'!'.repeat(languageUniqueLength)}-->`
   return indexHtml
 }
 
-function getLanguageUniqueLength(configurationLanguage) {
-  if (SUPPORTED_LANGUAGES.indexOf(configurationLanguage) != -1) {
-    return SUPPORTED_LANGUAGES.indexOf(configurationLanguage)
+function getLanguageUniqueLength(configurationLanguage, options) {
+  let supportedLanguage
+  if (options.environmentVariables) {
+    supportedLanguage = Object.keys(
+      options.environmentVariables.LANGUAGE_MENU_OPTIONS
+    )
+  }
+  if (
+    supportedLanguage &&
+    supportedLanguage.indexOf(configurationLanguage) !== -1
+  ) {
+    return supportedLanguage.indexOf(configurationLanguage)
   } else {
     console.warn(
-      `The language code "${configurationLanguage}" is not listed on the Angular unique-length.postbuild
-script, this might produce cache issues`
+      `The language code "${configurationLanguage}" is not listed on the Angular environment`
     )
-    return Math.floor(Math.random() * 300) + SUPPORTED_LANGUAGES.length
+    console.warn(`this language will not be shown on the menu`)
+    return Math.floor(Math.random() * 300) + supportedLanguage
+      ? supportedLanguage.length
+      : 0
   }
 }

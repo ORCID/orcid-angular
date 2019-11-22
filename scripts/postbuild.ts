@@ -24,11 +24,23 @@ glob(
 function getOptionsObjet(file) {
   const environment = getEnvironmentVar()
   const languageCode = getLanguageCode(file)
+  let environmentVariables
+
+  if (environment === 'production') {
+    environmentVariables = environmentProduction.environment
+  } else if (environment === 'qa') {
+    environmentVariables = environmentQa.environment
+  } else if (environment === 'sandbox') {
+    environmentVariables = environmentSandbox.environment
+  } else {
+    console.warn('the environment variable is invalid')
+  }
+
   return {
     languageCode,
     environment,
     file,
-    environmentProduction,
+    environmentVariables,
   }
 }
 
