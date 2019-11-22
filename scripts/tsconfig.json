@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "lib": ["es6", "dom"],
-    "target": "es6",
+    "lib": ["es2017", "dom"],
+    "target": "es2017",
     "module": "commonjs",
     "strict": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "files": ["translate-file-generator.prebuild.ts", "postbuild"]
+  "include": ["./*", "../environments/environment.*.ts"]
 }

@@ -1,6 +1,5 @@
 import * as fs from 'fs'
 import { parseString, Builder } from 'xml2js'
-import { Observable, from, of, defer } from 'rxjs'
 import {
   map,
   tap,
@@ -10,6 +9,8 @@ import {
   switchMap,
   reduce,
 } from 'rxjs/operators'
+import { Observable } from 'rxjs/internal/Observable'
+import { from } from 'rxjs/internal/observable/from'
 
 const propertiesToJSON = require('properties-to-json')
 const axios = require('axios')
