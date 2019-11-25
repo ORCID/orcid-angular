@@ -59,3 +59,4 @@ src/locale/messages.dynamic.source.ts
 src/locale/translate-file-generator.js
 *.xlf
 src/locale/messages.translation.log.json
+scripts/*.js
