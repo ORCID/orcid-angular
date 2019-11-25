@@ -28,13 +28,14 @@
 
   .mat-body-2,
   .hero-title {
-    max-width: 980px;
+    div {
+      max-width: 1024px;
+    }
     text-align: center;
   }
 
   .mat-body-2 {
-    max-width: 980px;
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   .button-wrapper {
