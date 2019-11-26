@@ -101,7 +101,7 @@
   }
 }
 
-body[dir='rtl'] :host {
+[dir='rtl'] :host {
   .search-where {
     border-radius: 0 4px 4px 0;
   }

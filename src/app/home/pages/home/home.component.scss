@@ -88,7 +88,7 @@
   padding: 50px 0;
   background-repeat: no-repeat;
   background-position: 90%;
-  body[dir='rtl'] :host & {
+  [dir='rtl'] :host & {
     background-position: 10%;
   }
 
