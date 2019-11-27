@@ -10,7 +10,7 @@ h2.itemsAmount {
   margin-left: 3px;
 }
 
-body[dir] {
+[dir] {
   :host {
     h2.itemsAmount {
       margin-left: 0px;

@@ -22,12 +22,12 @@ footer {
 
   a.social {
     margin-left: 12px;
+    [dir] :host & {
+      margin-left: auto;
+      margin-right: 12px;
+    }
     img {
       height: 24px;
-      [dir] :host & {
-        margin-left: auto;
-        margin-right: 12px;
-      }
     }
   }
 }
