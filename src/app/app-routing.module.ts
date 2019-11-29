@@ -18,21 +18,27 @@ export function matcher(segments: UrlSegment[]) {
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './home/home.module#HomeModule',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
   },
   // {
   //   matcher: matcher,
-  //   loadChildren: './profile/profile.module#ProfileModule',
+  //   loadChildren:
+  //   () => import('./profile/profile.module').then(m => m.ProfileModule)
+  // },
+  // {
+  //   path: 'reset-password-email',
+  //   loadChildren:
+  //   () => import('./password-recovery/password-recovery.module').then(m => m.PasswordRecoveryModule)
   // },
   {
-    path: 'reset-password-email',
-    loadChildren:
-      './password-recovery/password-recovery.module#PasswordRecoveryModule',
+    path: 'signin',
+    loadChildren: () =>
+      import('./sign-in/sign-in.module').then(m => m.SignInModule),
   },
-  {
-    path: '**',
-    redirectTo: '/',
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: '/',
+  // },
 ]
 
 @NgModule({
