@@ -118,17 +118,19 @@
     }
   },
   "bit": {
-    "env": {},
+    "env": {
+      "compiler": "bit.envs/compilers/angular@0.2.0"
+    },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
     "overrides": {
-      "orcid.angular/orcid-theme": {            
-        "dependencies" : {
-          "@angular/animations" : "8.1.4",
-          "@angular/cdk" : "8.1.4",
-          "@angular/common" : "8.1.4",
-          "@angular/core" : "8.1.4",
-          "@angular/forms" : "8.1.4"
+      "orcid.angular/orcid-theme": {
+        "dependencies": {
+          "@angular/animations": "8.1.4",
+          "@angular/cdk": "8.1.4",
+          "@angular/common": "8.1.4",
+          "@angular/core": "8.1.4",
+          "@angular/forms": "8.1.4"
         }
       }
     }
