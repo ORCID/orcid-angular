@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { listAnimation } from 'src/app/animations'
-import { NewsService, PlatformInfoService, WINDOW } from 'src/app/core'
+import { NewsService, WINDOW } from 'src/app/core'
 import { environment } from 'src/environments/environment.sandbox'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-news',

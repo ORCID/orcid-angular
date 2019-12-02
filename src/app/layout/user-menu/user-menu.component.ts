@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { UserService, WINDOW, PlatformInfoService } from 'src/app/core'
+import { UserService, WINDOW } from 'src/app/core'
 import { environment } from 'src/environments/environment'
-import { PlatformInfo, UserInfo, NameForm } from 'src/app/types'
+import { UserInfo, NameForm } from 'src/app/types'
+import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-user-menu',

@@ -1,6 +1,6 @@
 import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
 
-import { PlatformInfoService } from './core/platform-info/platform-info.service'
+import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { GRID_MARGINS } from './constants'
 import { PlatformInfo } from './types'
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { PlatformInfoService, WINDOW } from 'src/app/core'
+import { WINDOW } from 'src/app/core'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-footer',

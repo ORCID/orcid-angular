@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { enterAnimation } from 'src/app/animations'
-import { WINDOW, PlatformInfoService } from 'src/app/core'
+import { WINDOW } from 'src/app/core'
 import { BrowserWindowRef } from 'src/app/core/window/window.service'
 import { environment } from 'src/environments/environment'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-home',

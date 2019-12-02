@@ -118,8 +118,10 @@
     }
   },
   "bit": {
-    "env": {
-      "compiler": "bit.envs/compilers/angular@0.2.0"
+    "resolveModules": {
+      "aliases": {
+        "src": "/src"
+      }
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
