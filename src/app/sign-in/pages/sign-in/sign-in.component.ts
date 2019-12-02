@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material'
+import { IsThisYouComponent } from 'src/app/cdk/is-this-you/is-this-you.component'
 
 @Component({
   selector: 'app-sign-in',
@@ -6,7 +8,12 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dialog.open(IsThisYouComponent, {
+      width: `250px`,
+      data: {},
+    })
+  }
 }
