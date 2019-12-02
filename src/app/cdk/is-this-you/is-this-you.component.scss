@@ -28,3 +28,10 @@ td {
   border-bottom: 1px solid #ddd;
   vertical-align: baseline;
 }
+
+:host.columns-8,
+:host.columns-4 {
+  .fixed {
+    flex-direction: column;
+  }
+}

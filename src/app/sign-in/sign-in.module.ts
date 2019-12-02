@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { SignInComponent } from './pages/sign-in/sign-in.component'
 import { IsThisYouModule } from '../cdk/is-this-you/is-this-you.module'
 import { SignInRoutingModule } from './sign-in-routing.module'
-import { MatDialogModule, MatButtonModule } from '@angular/material'
+import { MatDialogModule } from '@angular/material'
 import { IsThisYouComponent } from '../cdk/is-this-you/is-this-you.component'
 
 @NgModule({
@@ -11,8 +11,8 @@ import { IsThisYouComponent } from '../cdk/is-this-you/is-this-you.component'
   imports: [
     CommonModule,
     IsThisYouModule,
-    MatDialogModule,
     SignInRoutingModule,
+    MatDialogModule,
   ],
   entryComponents: [IsThisYouComponent],
 })

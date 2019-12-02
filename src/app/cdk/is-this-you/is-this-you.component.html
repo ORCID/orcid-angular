@@ -7,7 +7,11 @@
     if any of these are you?
   </p>
 
-  <table style="width:100%" class="mat-subheading-2">
+  <table
+    style="width:100%"
+    class="mat-subheading-2"
+    *ngIf="data && data.duplicateRecords"
+  >
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
@@ -15,95 +19,16 @@
       <th>Date Created</th>
       <th>View Record</th>
     </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
+    <tr *ngFor="let record of data.duplicateRecords">
+      <td>{{ record.givenNames }}</td>
+      <td>{{ record.familyNames }}</td>
+      <td>{{ record.institution }}</td>
+      <td>{{ record.added }}</td>
       <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
+        <button mat-button color="primary" (click)="navigateTo(record.orcid)">
+          View Record
+        </button>
       </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">View Record</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
-    </tr>
-    <tr>
-      <td>Jane</td>
-      <td>Smith</td>
-      <td>
-        Academy of Science, UCLA, ORCID Inc., Arizona State University,
-        University of Wisconsin Madison
-      </td>
-      <td>2019-08-06</td>
-      <td><button mat-button color="primary">Primary</button></td>
     </tr>
   </table>
 </div>
