@@ -1,5 +1,5 @@
 @import '~@angular/material/_theming';
-@import 'src/assets/scss/material.orcid-theme.scss';
+@import '../../../assets/scss/material.orcid-theme.scss';
 
 @mixin is-this-you($theme) {
   $primary: map-get($theme, primary);
