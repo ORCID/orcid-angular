@@ -12,7 +12,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.dialog.open(IsThisYouComponent, {
-      width: `250px`,
+      width: `1078px`,
       data: {},
     })
   }
