@@ -16,6 +16,9 @@
     input::placeholder {
       color: mat-contrast($accent, 200);
     }
+    input {
+      border-color: mat-color($background, dark-grey);
+    }
   }
   .search-icon {
     background-color: mat-color($background, dark-grey);
