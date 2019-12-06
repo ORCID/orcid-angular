@@ -19,11 +19,6 @@ export function matcher(segments: UrlSegment[]) {
 const routes: Routes = [
   {
     path: '',
-    component: EnvironmentBannerComponent,
-    outlet: 'banner',
-  },
-  {
-    path: '',
     loadChildren: './home/home.module#HomeModule',
   },
   // {

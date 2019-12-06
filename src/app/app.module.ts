@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { CoreModule } from './core/core.module'
 import { LayoutModule } from './layout/layout.module'
-import { EnvironmentBannerModule } from './environment-banner/environment-banner.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +20,7 @@ import { EnvironmentBannerModule } from './environment-banner/environment-banner
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
-    EnvironmentBannerModule,
+    ...environment.MODULES,
   ],
   providers: [],
   bootstrap: [AppComponent],
