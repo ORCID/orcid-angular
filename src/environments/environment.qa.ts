@@ -1,3 +1,5 @@
+import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-banner.module'
+
 export const environment = {
   production: true,
   API_NEWS: 'https://qa.orcid.org/blog/feed',
@@ -25,4 +27,5 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
+  MODULES: [EnvironmentBannerModule],
 }
