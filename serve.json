@@ -65,12 +65,12 @@
       "destination": "/source/index.html"
     },
     {
-      "source": "/zh-CN/**",
-      "destination": "/zh-TW/index.html"
+      "source": "/zh_CN/**",
+      "destination": "/zh_TW/index.html"
     },
     {
-      "source": "/zh-TW/**",
-      "destination": "/zh-TW/index.html"
+      "source": "/zh_TW/**",
+      "destination": "/zh_TW/index.html"
     }
   ]
 }

@@ -223,4 +223,8 @@ export class HeaderComponent implements OnInit {
       ? 'primary'
       : null
   }
+
+  goto(url) {
+    this.window.location.href = environment.BASE_URL + url
+  }
 }
