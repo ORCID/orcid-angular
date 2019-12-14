@@ -14,10 +14,21 @@ async function launchChromeAndRunLighthouse(url, opts, config = null) {
     args: [`--remote-debugging-port=${PORT}`],
     headless: false,
     slowMo: 50,
+    executablePath:
+      '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   })
 
   const page = await browser.newPage()
   await page.goto(`${url}/signin`)
+
+  const emailInput = await page.$('input[id="userId"]')
+  await emailInput.type('***@gmail.com')
+  const passwordInput = await page.$('input[type="password"]')
+  await passwordInput.type('****')
+  await Promise.all([
+    await page.$eval('#form-sign-in-button', form => form.click()),
+    page.waitForNavigation(),
+  ])
 
   opts.port = browser.port
   console.log('after launch')
