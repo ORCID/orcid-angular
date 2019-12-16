@@ -1,6 +1,47 @@
 import lighthouse from 'lighthouse/lighthouse-core'
 import { launch } from 'chrome-launcher/chrome-launcher'
+import * as firebase from 'firebase'
 const puppeteer = require('puppeteer')
+
+let _firebase
+let _firebaseDB
+async function initializeFirebase() {
+  const firebaseConfig = {
+    apiKey: 'AIzaSyB0JjN2eyKXo0LueC3sxNR3EdID-cgfHpA',
+    authDomain: 'performance-audits.firebaseapp.com',
+    databaseURL: 'https://performance-audits.firebaseio.com',
+    projectId: 'performance-audits',
+    storageBucket: 'performance-audits.appspot.com',
+    messagingSenderId: '477782972360',
+    appId: '1:477782972360:web:2d5f9c6b239943f7cdd2fd',
+    measurementId: 'G-0EL4T6LP5F',
+  }
+  _firebase = await firebase.initializeApp(firebaseConfig)
+  _firebaseDB = await firebase.firestore()
+}
+
+async function addRecord(result) {
+  console.log(result)
+  const fullDataId = await _firebaseDB
+    .collection('audits')
+    .add({ JSON: JSON.stringify(result) })
+    .then(function(docRef) {
+      console.log('Document written with ID: ', docRef.id)
+    })
+    .catch(function(error) {
+      console.error('Error adding document: ', error)
+    })
+
+  const summaryId = await _firebaseDB
+    .collection('summary')
+    .add({ metrics: result.audits.metrics, full: 'fullDataId' })
+    .then(function(docRef) {
+      console.log('Document written with ID: ', docRef.id)
+    })
+    .catch(function(error) {
+      console.error('Error adding document: ', error)
+    })
+}
 
 async function launchChromeAndRunLighthouse(url, opts, config = null) {
   // const chrome = await launch({ chromeFlags: opts.chromeFlags })
@@ -22,7 +63,7 @@ async function launchChromeAndRunLighthouse(url, opts, config = null) {
   await page.goto(`${url}/signin`)
 
   const emailInput = await page.$('input[id="userId"]')
-  await emailInput.type('***@gmail.com')
+  await emailInput.type('****@gmail.com')
   const passwordInput = await page.$('input[type="password"]')
   await passwordInput.type('****')
   await Promise.all([
@@ -50,21 +91,22 @@ const opts = {
 
 async function test() {
   try {
-    console.log(
-      Object.keys(
-        await launchChromeAndRunLighthouse('https://orcid.org/myorcid', opts)
-      ).length
+    await initializeFirebase()
+
+    let result = await launchChromeAndRunLighthouse(
+      'https://orcid.org/myorcid',
+      opts
     )
-    console.log(
-      Object.keys(
-        await launchChromeAndRunLighthouse('https://qa.orcid.org', opts)
-      ).length
+    await addRecord(result)
+
+    result = await launchChromeAndRunLighthouse('https://qa.orcid.org', opts)
+    await addRecord(result)
+
+    result = await launchChromeAndRunLighthouse(
+      'https://sandbox.orcid.org',
+      opts
     )
-    console.log(
-      Object.keys(
-        await launchChromeAndRunLighthouse('https://sandbox.orcid.org', opts)
-      ).length
-    )
+    await addRecord(result)
   } finally {
     // Cleanup
   }
