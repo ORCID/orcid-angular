@@ -1,7 +1,7 @@
 import { FirebaseManager } from './firebase'
 import { Puppeteer } from './puppeteer'
 import { environment } from './environment'
-import * as readlineSync from 'readline-sync'
+import { Result } from './types'
 
 class AuditManager {
   firebase: FirebaseManager
@@ -16,12 +16,12 @@ class AuditManager {
     await this.firebase.initializeFirebase()
   }
 
-  async runAudit() {
-    const audits = []
+  async runAudit(): Promise<Result[]> {
+    const audits: Result[] = []
     for (let audit of environment.ORCID_URLS_TO_AUDIT) {
       await this.puppeteer.launch()
       try {
-        if (audit.auth) {
+        if (audit.auth || audit.loggedAs) {
           await this.puppeteer.login()
         }
         if (audit.loggedAs) {
@@ -29,7 +29,7 @@ class AuditManager {
         }
         const result = await this.puppeteer.runAudit(audit.url)
 
-        audits.push({ audit, result: JSON.stringify(result) })
+        audits.push({ auditDefinition: audit, result: JSON.stringify(result) })
       } catch (e) {
         console.log('Error while executing audit ' + JSON.stringify(audit))
         console.log(JSON.stringify(e))
@@ -46,15 +46,7 @@ class AuditManager {
 ;(async () => {
   const audit = new AuditManager()
   audit.initFirebase()
-  const result = await audit.runAudit()
-
-  const saveTheResult =
-    (readlineSync.keyInYN('Do you want to save the results?') ||
-      readlineSync.keyInYN(
-        'IF NOT THE COLLECTED RESULTS WILL BE LOST! Do you want to save the results?'
-      )) &&
-    readlineSync.keyInYN('PLEASE CONFIRM you want to save the results?')
-  if (saveTheResult) {
-    await audit.firebase.saveResultsArray(result)
-  }
+  const result: Result[] = await audit.runAudit()
+  const date = new Date()
+  await audit.firebase.saveFileResults(result, date)
 })()

@@ -1,5 +1,6 @@
 import * as firebase from 'firebase'
 import { environment } from './environment'
+import { Result, ResultFile, MetadataFile } from './types'
 const fse = require('fs-extra')
 
 export class FirebaseManager {
@@ -11,14 +12,6 @@ export class FirebaseManager {
     this.firebaseDB = await firebase.initializeApp(environment.firebaseConfig)
     this.firebaseDB = await firebase.firestore()
     return this.firebaseDB
-  }
-
-  async saveResultsArray(results) {
-    for (const result of results) {
-      const id = this.generateRecordId(result)
-      await this.saveOnFirebase(result, id)
-      await this.saveFile(result, id)
-    }
   }
 
   async saveOnFirebase(result, id) {
@@ -34,32 +27,59 @@ export class FirebaseManager {
       })
   }
 
-  async saveFile(result, id) {
-    await fse.outputFile(
-      `audits/${environment.testPrefix || 'no-prefix'}/${id}.json`,
-      result.result,
-      err => {
-        if (err) {
-          console.log(`error saving file first load ${id}`)
-        } else {
-          console.log(`saved file first load ${id}`)
-        }
-      }
-    )
+  saveFile(file: string, id: string): string {
+    const fileName = `${id}.json`
+    fse.outputFileSync(`${id}.json`, file)
+    return fileName
   }
 
-  generateRecordId(result) {
-    const date = new Date().toISOString()
+  generateRecordId(result: Result, date: Date): string {
     const user = // A third user
-      result.audit.loggedAs ||
+      result.auditDefinition.loggedAs ||
       // Admin user
-      (result.audit.auth && environment.ORCID_ADMIN_USER) ||
+      (result.auditDefinition.auth && environment.ORCID_ADMIN_USER) ||
       // Without auth
       'no-auth'
 
-    const id = `${environment.testPrefix || 'no-prefix'}.${result.audit.url ||
-      'root'}.${user}.${date}.json`
+    const id = `${result.auditDefinition.url ||
+      'root'}.${user}.${date.toISOString()}`
 
     return id
+  }
+
+  generateFilePath(date: Date): string {
+    const environmentContext = environment.testPrefix || 'no-prefix'
+    return `audits/${environmentContext}/${date.toISOString()}/`
+  }
+
+  async saveFileResults(results: Result[], date: Date) {
+    const metadata: MetadataFile = {
+      resultFiles: [],
+      date: date.toISOString(),
+      executedBy: environment.ORCID_ADMIN_USER,
+      environmentPrefix: environment.prefix,
+    }
+    for (const result of results) {
+      const filePath = this.saveFileResult(result, date)
+      const resultFile: ResultFile = {
+        auditDefinition: result.auditDefinition,
+        filePath,
+      }
+      metadata.resultFiles.push(resultFile)
+    }
+    return this.saveFileMetadata(metadata, date)
+  }
+
+  private saveFileMetadata(metadata: MetadataFile, date: Date) {
+    const path = this.generateFilePath(date)
+    const fileName = `metaData-${date.toISOString()}`
+    return this.saveFile(JSON.stringify(metadata), path + fileName)
+  }
+
+  private saveFileResult(result: Result, date: Date) {
+    const fileName = this.generateRecordId(result, date)
+    const path = this.generateFilePath(date)
+    const filePath = this.saveFile(result.result, path + fileName)
+    return filePath
   }
 }
