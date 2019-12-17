@@ -1,6 +1,6 @@
 import * as firebase from 'firebase'
 import { environment } from './environment'
-import * as fs from 'fs'
+const fse = require('fs-extra')
 
 export class FirebaseManager {
   firebaseDB
@@ -14,7 +14,7 @@ export class FirebaseManager {
   }
 
   async saveResultsArray(results) {
-    for (let result of results) {
+    for (const result of results) {
       const id = this.generateRecordId(result)
       await this.saveOnFirebase(result, id)
       await this.saveFile(result, id)
@@ -23,7 +23,7 @@ export class FirebaseManager {
 
   async saveOnFirebase(result, id) {
     await this.firebaseDB
-      .collection(environment.testPrefix)
+      .collection(environment.testPrefix || 'no-prefix')
       .doc(id)
       .set(result)
       .then(function(docRef) {
@@ -32,16 +32,20 @@ export class FirebaseManager {
       .catch(function(error) {
         console.error('Error adding document: ', error)
       })
-    return this.firebaseDB
   }
 
   async saveFile(result, id) {
-    await fs.writeFile(id, result.result, err => {
-      if (err) {
-        console.log(`error saving file: ${id}`)
+    await fse.outputFile(
+      `audits/${environment.testPrefix || 'no-prefix'}/${id}.json`,
+      result.result,
+      err => {
+        if (err) {
+          console.log(`error saving file first load ${id}`)
+        } else {
+          console.log(`saved file first load ${id}`)
+        }
       }
-      console.log(`saved file: ${id}`)
-    })
+    )
   }
 
   generateRecordId(result) {
@@ -53,9 +57,8 @@ export class FirebaseManager {
       // Without auth
       'no-auth'
 
-    const id = `${environment.testPrefix}.${
-      result.audit.url
-    }.${user}.${date}.json`
+    const id = `${environment.testPrefix || 'no-prefix'}.${result.audit.url ||
+      'root'}.${user}.${date}.json`
 
     return id
   }

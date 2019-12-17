@@ -13,7 +13,6 @@ export interface Environment {
     appId: string
     measurementId: string
   }
-  ORCID_IDS_TO_TEST: string
   ORCID_URLS_TO_AUDIT: {
     url: string
     auth: boolean

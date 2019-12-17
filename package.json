@@ -91,6 +91,7 @@
     "@types/jasmine": "^2.8.16",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@types/puppeteer": "^2.0.0",
     "@types/xml2js": "^0.4.4",
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
@@ -111,13 +112,13 @@
     "pretty-quick": "^1.11.1",
     "protractor": "^5.4.2",
     "puppeteer-tsd": "^0.0.2",
+    "readline-sync": "^1.4.10",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.2",
     "tslint": "~5.11.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "~3.4.5",
-    "readline-sync": "^1.4.10",
-    "@types/puppeteer": "^2.0.0"
+    "fs-extra": "^8.1.0"
   },
   "husky": {
     "hooks": {
