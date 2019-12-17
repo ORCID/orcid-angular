@@ -36,7 +36,7 @@
     "build:report": "webpack-bundle-analyzer dist/en/stats.json",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook -o dist/storybook",
-    "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse.ts"
+    "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts"
   },
   "private": true,
   "dependencies": {
@@ -110,11 +110,14 @@
     "prettier": "1.15.2",
     "pretty-quick": "^1.11.1",
     "protractor": "^5.4.2",
+    "puppeteer-tsd": "^0.0.2",
     "rimraf": "^3.0.0",
     "ts-node": "^8.5.2",
     "tslint": "~5.11.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "~3.4.5"
+    "typescript": "~3.4.5",
+    "readline-sync": "^1.4.10",
+    "@types/puppeteer": "^2.0.0"
   },
   "husky": {
     "hooks": {

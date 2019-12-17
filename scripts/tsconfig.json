@@ -1,12 +1,25 @@
 {
   "compilerOptions": {
-    "lib": ["es2017", "dom"],
-    "target": "es2017",
     "module": "commonjs",
-    "strict": true,
     "noImplicitAny": false,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "sourceMap": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "declaration": true,
+    "target": "es5",
+    "lib": ["es2015", "dom"],
+    "outDir": "./dist",
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": false,
+    "pretty": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnreachableCode": false
   },
-  "include": ["./*", "../environments/environment.*.ts"]
+  "include": [
+    "./*",
+    "../environments/environment.*.ts",
+    "../node_modules/@types/puppeteer/index.d.ts"
+  ]
 }
