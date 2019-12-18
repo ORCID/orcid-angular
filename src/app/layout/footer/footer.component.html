@@ -28,8 +28,7 @@
       <div class=" CC0  mat-caption">
         <img src="./assets/icons/public-domain.png" alt="public domain" />
         <ng-container i18n="@@footer.copyright_cc0_1"
-          >Except where otherwise specified, the content of this website is
-          published under a</ng-container
+          >The text of this website is published under a</ng-container
         >
         <a
           i18n="@@ngOrcid.copyright"
@@ -39,6 +38,10 @@
           class="mat-button-font"
           >CC0 license.</a
         >
+        <ng-container i18n="@@footer.copyright_cc0_3"
+          >Images and marks are subject to copyright and trademark
+          protection</ng-container
+        ><ng-container i18n="@@common.period">.</ng-container>
       </div>
     </div>
     <div class="row links space-around">
@@ -73,7 +76,7 @@
         <a
           class="col s4 l-auto m8"
           i18n="@@footer.contactus"
-          (click)="goTo('/help/contact-us')"
+          (click)="goTo('https://support.orcid.org/hc/en-us/requests/new')"
           routerLink=""
         >
           Contact us
