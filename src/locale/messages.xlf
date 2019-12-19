@@ -15,7 +15,7 @@
     <unit id="header.signin">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:120</note>
+        <note category="location">app/layout/header/header.component.html:124</note>
       </notes>
       <segment>
         <source>SIGN IN</source>
@@ -24,7 +24,7 @@
     <unit id="header.register">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:122</note>
+        <note category="location">app/layout/header/header.component.html:126</note>
         <note category="location">app/layout/user-menu/user-menu.component.html:30</note>
       </notes>
       <segment>
@@ -34,7 +34,7 @@
     <unit id="public-layout.sign_out">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:132</note>
+        <note category="location">app/layout/header/header.component.html:140</note>
         <note category="location">locale/i18n.pseudo.component.html:56</note>
       </notes>
       <segment>
@@ -43,24 +43,41 @@
     </unit>
     <unit id="footer.copyright_cc0_1">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:31,32</note>
+        <note category="location">app/layout/footer/footer.component.html:31</note>
       </notes>
       <segment>
-        <source>Except where otherwise specified, the content of this website is
-          published under a</source>
+        <source>The text of this website is published under a</source>
       </segment>
     </unit>
-    <unit id="ngOrcid.copyright">
+    <unit id="footer.copyright_cc0_2">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:40</note>
+        <note category="location">app/layout/footer/footer.component.html:33</note>
       </notes>
       <segment>
-        <source>CC0 license.</source>
+        <source>CC0 license</source>
+      </segment>
+    </unit>
+    <unit id="common.period">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:35</note>
+        <note category="location">app/layout/footer/footer.component.html:41</note>
+      </notes>
+      <segment>
+        <source>.</source>
+      </segment>
+    </unit>
+    <unit id="footer.copyright_cc0_3">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:38,39</note>
+      </notes>
+      <segment>
+        <source>Images and marks are subject to copyright and trademark
+          protection</source>
       </segment>
     </unit>
     <unit id="footer.privacypolicy">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:54,56</note>
+        <note category="location">app/layout/footer/footer.component.html:55,57</note>
       </notes>
       <segment>
         <source>
@@ -70,7 +87,7 @@
     </unit>
     <unit id="footer.termsofuse">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:62,64</note>
+        <note category="location">app/layout/footer/footer.component.html:63,65</note>
       </notes>
       <segment>
         <source>
@@ -80,7 +97,7 @@
     </unit>
     <unit id="ngOrcid.disputeProcedure">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:70,72</note>
+        <note category="location">app/layout/footer/footer.component.html:71,73</note>
       </notes>
       <segment>
         <source>
@@ -90,7 +107,7 @@
     </unit>
     <unit id="footer.contactus">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:78,80</note>
+        <note category="location">app/layout/footer/footer.component.html:79,81</note>
       </notes>
       <segment>
         <source>
@@ -100,7 +117,7 @@
     </unit>
     <unit id="ngOrcid.trademark">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:86,88</note>
+        <note category="location">app/layout/footer/footer.component.html:87,89</note>
       </notes>
       <segment>
         <source>
@@ -145,10 +162,11 @@
         <source>Account settings </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.advanceSearch">
+    <unit id="workspace.developer_tools">
       <notes>
         <note category="location">app/layout/user-menu/user-menu.component.html:66</note>
         <note category="location">app/layout/user-menu/user-menu.component.html:79</note>
+        <note category="location">locale/i18n.pseudo.component.html:68</note>
       </notes>
       <segment>
         <source>Developer tools </source>
@@ -282,7 +300,7 @@
     <unit id="home.register_now">
       <notes>
         <note category="description">#lowerCase</note>
-        <note category="location">app/home/pages/home/home.component.html:66,68</note>
+        <note category="location">app/home/pages/home/home.component.html:70,72</note>
       </notes>
       <segment>
         <source>
@@ -292,7 +310,7 @@
     </unit>
     <unit id="home.two">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:74</note>
+        <note category="location">app/home/pages/home/home.component.html:78</note>
       </notes>
       <segment>
         <source>2</source>
@@ -300,7 +318,7 @@
     </unit>
     <unit id="home.user_your">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:81</note>
+        <note category="location">app/home/pages/home/home.component.html:85</note>
       </notes>
       <segment>
         <source>USE YOUR</source>
@@ -308,7 +326,7 @@
     </unit>
     <unit id="home.orcid_id">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:82</note>
+        <note category="location">app/home/pages/home/home.component.html:86</note>
       </notes>
       <segment>
         <source>ORCID ID</source>
@@ -316,7 +334,7 @@
     </unit>
     <unit id="ngOrcid.includeYourId">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:88,92</note>
+        <note category="location">app/home/pages/home/home.component.html:92,96</note>
       </notes>
       <segment>
         <source>
@@ -328,7 +346,7 @@
     </unit>
     <unit id="home.three">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:97</note>
+        <note category="location">app/home/pages/home/home.component.html:101</note>
       </notes>
       <segment>
         <source>3</source>
@@ -336,7 +354,7 @@
     </unit>
     <unit id="ngOrcid.shareYourOrcid">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:105</note>
+        <note category="location">app/home/pages/home/home.component.html:109</note>
       </notes>
       <segment>
         <source>SHARE YOUR ORCID iD</source>
@@ -344,7 +362,7 @@
     </unit>
     <unit id="ngOrcid.enhanceYourProfile">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:112,117</note>
+        <note category="location">app/home/pages/home/home.component.html:116,121</note>
       </notes>
       <segment>
         <source>
@@ -357,7 +375,7 @@
     </unit>
     <unit id="ngOrcid.membersMakeOrcid">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:146,148</note>
+        <note category="location">app/home/pages/home/home.component.html:150,152</note>
       </notes>
       <segment>
         <source>
@@ -367,7 +385,7 @@
     </unit>
     <unit id="ngOrcid.orcidIs">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:151,156</note>
+        <note category="location">app/home/pages/home/home.component.html:155,160</note>
       </notes>
       <segment>
         <source>
@@ -380,7 +398,7 @@
     </unit>
     <unit id="home.curious_about">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:158,160</note>
+        <note category="location">app/home/pages/home/home.component.html:162,164</note>
       </notes>
       <segment>
         <source>
@@ -390,7 +408,7 @@
     </unit>
     <unit id="home.see_our">
       <notes>
-        <note category="location">app/home/pages/home/home.component.html:161,163</note>
+        <note category="location">app/home/pages/home/home.component.html:165,167</note>
       </notes>
       <segment>
         <source>
@@ -1295,14 +1313,6 @@
       </notes>
       <segment>
         <source>Account Settings</source>
-      </segment>
-    </unit>
-    <unit id="workspace.developer_tools">
-      <notes>
-        <note category="location">locale/i18n.pseudo.component.html:68</note>
-      </notes>
-      <segment>
-        <source>Developer tools</source>
       </segment>
     </unit>
     <unit id="admin.members.workspace_link">

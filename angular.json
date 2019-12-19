@@ -22,6 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
+            "crossOrigin": "use-credentials",
             "assets": [
               {
                 "glob": "**/*",
@@ -368,11 +369,11 @@
                   "with": "src/locale/messages.dynamic.zh_CN.ts"
                 }
               ],
-              "outputPath": "dist/zh-CN/",
+              "outputPath": "dist/zh_CN/",
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-CN",
-              "baseHref": "/zh-CN/"
+              "i18nLocale": "zh_CN",
+              "baseHref": "/zh_CN/"
             },
             "local-zh_TW": {
               "fileReplacements": [
@@ -385,11 +386,11 @@
                   "with": "src/locale/messages.dynamic.zh_TW.ts"
                 }
               ],
-              "outputPath": "dist/zh-TW/",
+              "outputPath": "dist/zh_TW/",
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-TW",
-              "baseHref": "/zh-TW/"
+              "i18nLocale": "zh_TW",
+              "baseHref": "/zh_TW/"
             },
             "local-tomcat-en": {
               "fileReplacements": [
@@ -823,10 +824,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-CN/",
+              "outputPath": "dist/zh_CN/",
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-CN",
+              "i18nLocale": "zh_CN",
               "baseHref": "."
             },
             "local-tomcat-zh_TW": {
@@ -849,10 +850,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-TW/",
+              "outputPath": "dist/zh_TW/",
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-TW",
+              "i18nLocale": "zh_TW",
               "baseHref": "."
             },
             "production-en": {
@@ -1157,10 +1158,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-CN/",
+              "outputPath": "dist/zh_CN/",
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-CN",
+              "i18nLocale": "zh_CN",
               "baseHref": "."
             },
             "production-zh_TW": {
@@ -1183,10 +1184,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-TW/",
+              "outputPath": "dist/zh_TW/",
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-TW",
+              "i18nLocale": "zh_TW",
               "baseHref": "."
             },
             "qa-en": {
@@ -1621,10 +1622,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-CN/",
+              "outputPath": "dist/zh_CN/",
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-CN",
+              "i18nLocale": "zh_CN",
               "baseHref": "."
             },
             "qa-zh_TW": {
@@ -1647,10 +1648,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-TW/",
+              "outputPath": "dist/zh_TW/",
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-TW",
+              "i18nLocale": "zh_TW",
               "baseHref": "."
             },
             "sandbox-en": {
@@ -2086,10 +2087,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-CN/",
+              "outputPath": "dist/zh_CN/",
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-CN",
+              "i18nLocale": "zh_CN",
               "baseHref": "."
             },
             "sandbox-zh_TW": {
@@ -2112,10 +2113,10 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "outputPath": "dist/zh-TW/",
+              "outputPath": "dist/zh_TW/",
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
-              "i18nLocale": "zh-TW",
+              "i18nLocale": "zh_TW",
               "baseHref": "."
             }
           }

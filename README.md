@@ -66,9 +66,4 @@ The following commands are used to build the application for non-local environme
 
 Please refer to the following documentation for more information:
 
-- Creating a new feature module
-- I18n, Applying translations
-- A11y, Notes about accessibility
-- Theming: How to apply the style-guide colors to new components
-- Fonts: How to use style-guide fonts
-- Creating and reusing components
+https://orcid.github.io/orcid-angular
