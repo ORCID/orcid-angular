@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding, Inject, Optional } from '@angular/core'
-import { PlatformInfoService } from '../platform-info/platform-info.service'
+import { PlatformInfoService } from '../platform-info'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 @Component({
@@ -42,5 +42,9 @@ export class IsThisYouComponent implements OnInit {
     this.columns8 = platformInfo.columns8
     this.columns12 = platformInfo.columns12
     this.columns4 = platformInfo.columns4
+  }
+
+  goto(url) {
+    console.log('navigateTo ' + url)
   }
 }
