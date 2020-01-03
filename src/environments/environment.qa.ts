@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
   API_NEWS: 'https://qa.orcid.org/blog/feed',
-  API_WEB: 'https://qa.orcid.org/',
-  BASE_URL: 'https://qa.orcid.org/',
+  API_WEB: '//qa.orcid.org/',
+  BASE_URL: '//qa.orcid.org/',
   BLOG_NEWS: 'https://qa.orcid.org/about/news',
   GOOGLE_ANALYTICS: 'UA-17492803-6',
   LANGUAGE_MENU_OPTIONS: {
