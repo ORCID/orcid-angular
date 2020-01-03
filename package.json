@@ -118,13 +118,14 @@
     }
   },
   "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm",
     "resolveModules": {
       "aliases": {
         "src": "/src"
       }
     },
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm",
     "overrides": {
       "orcid.angular/orcid-theme": {
         "dependencies": {
@@ -134,7 +135,8 @@
           "@angular/core": "8.2.4",
           "@angular/forms": "8.2.4"
         }
-      }
+      },
+      "orcid.angular/is-this-you": {}
     }
   }
 }
