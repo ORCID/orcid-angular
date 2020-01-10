@@ -1,8 +1,6 @@
-<ng-container *ngIf="data && data.duplicateRecords">
+<div class="container" *ngIf="data && data.duplicateRecords">
+  <h1 class="mat-display-1 modal-title">{{ data.titleLabel || titleLabel }}</h1>
   <div class="non-fixed">
-    <h1 class="mat-display-1 modal-title">
-      {{ data.titleLabel || titleLabel }}
-    </h1>
     <p class="mat-body-1">{{ data.bodyLabel || bodyLabel }}</p>
 
     <table style="width:100%" class="mat-subheading-2">
@@ -21,7 +19,7 @@
         <td>{{ record.institution }}</td>
         <td>{{ record.added }}</td>
         <td>
-          <button mat-button color="primary" (click)="goto(record.orcid)">
+          <button mat-button color="primary" (click)="gotoNewTab(record.orcid)">
             {{ data.viewRecordLabel || viewRecordLabel }}
           </button>
         </td>
@@ -29,11 +27,11 @@
     </table>
   </div>
   <div class="fixed">
-    <button mat-button color="primary">
+    <button mat-button color="primary" (click)="goto('sign-in')">
       {{ data.signinLabel || signinLabel }}
     </button>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="confirmRegistration()">
       {{ data.continueLabel || continueLabel }}
     </button>
   </div>
-</ng-container>
+</div>

@@ -69,4 +69,12 @@ export class IsThisYouComponent implements OnInit {
   goto(url) {
     this.window.location.href = url
   }
+
+  gotoNewTab(id) {
+    this.window.open('/' + id, 'duplicated-check')
+  }
+
+  confirmRegistration() {
+    this.dialogRef.close(true)
+  }
 }
