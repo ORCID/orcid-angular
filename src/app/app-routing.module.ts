@@ -35,6 +35,17 @@ const routes: Routes = [
     loadChildren: () =>
       import('./sign-in/sign-in.module').then(m => m.SignInModule),
   },
+  {
+    path: 'reset-password',
+    loadChildren: () =>
+      import('./password-recovery/password-recovery.module').then(
+        m => m.PasswordRecoveryModule
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: '/',
+  },
   // {
   //   path: '**',
   //   redirectTo: '/',
