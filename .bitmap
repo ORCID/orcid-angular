@@ -4,9 +4,9 @@
     "orcid.angular/is-this-you@0.0.13": {
         "files": [
             {
+                "name": "index.ts",
                 "relativePath": "src/app/cdk/is-this-you/index.ts",
-                "test": false,
-                "name": "index.ts"
+                "test": false
             },
             {
                 "name": "is-this-you.component.html",
@@ -222,6 +222,24 @@
         "trackDir": "src/app/types",
         "origin": "AUTHORED",
         "exported": true
+    },
+    "window": {
+        "files": [
+            {
+                "relativePath": "src/app/cdk/window/index.ts",
+                "test": false,
+                "name": "index.ts"
+            },
+            {
+                "relativePath": "src/app/cdk/window/window.service.ts",
+                "test": false,
+                "name": "window.service.ts"
+            }
+        ],
+        "mainFile": "src/app/cdk/window/index.ts",
+        "trackDir": "src/app/cdk/window",
+        "origin": "AUTHORED",
+        "exported": false
     },
     "version": "14.7.1"
 }
