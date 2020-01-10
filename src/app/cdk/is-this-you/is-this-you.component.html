@@ -21,7 +21,7 @@
         <td>{{ record.institution }}</td>
         <td>{{ record.added }}</td>
         <td>
-          <button mat-button color="primary" (click)="navigateTo(record.orcid)">
+          <button mat-button color="primary" (click)="goto(record.orcid)">
             {{ data.viewRecordLabel || viewRecordLabel }}
           </button>
         </td>

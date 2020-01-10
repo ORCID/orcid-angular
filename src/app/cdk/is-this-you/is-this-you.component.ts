@@ -63,4 +63,8 @@ export class IsThisYouComponent implements OnInit {
     this.columns12 = platformInfo.columns12
     this.columns4 = platformInfo.columns4
   }
+
+  goto(url) {
+    this.window.location.href = url
+  }
 }
