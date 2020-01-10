@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { enterAnimation } from 'src/app/animations'
-import { WINDOW } from 'src/app/core'
-import { BrowserWindowRef } from 'src/app/core/window/window.service'
+import { WINDOW } from '../../../cdk/window'
 import { environment } from 'src/environments/environment'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 

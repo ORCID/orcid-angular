@@ -8,6 +8,7 @@ import {
 } from '@angular/core'
 import { PlatformInfoService } from '../platform-info/platform-info.service'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { WINDOW } from '../window'
 
 @Component({
   selector: 'app-is-this-you',
@@ -43,7 +44,8 @@ export class IsThisYouComponent implements OnInit {
   constructor(
     _platformInfo: PlatformInfoService,
     @Optional() public dialogRef: MatDialogRef<IsThisYouComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data
+    @Optional() @Inject(MAT_DIALOG_DATA) public data,
+    @Inject(WINDOW) private window: Window
   ) {
     _platformInfo.get().subscribe(platformInfo => {
       this.setPlatformClasses(platformInfo)

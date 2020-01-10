@@ -6,7 +6,6 @@ export {
 export {
   AffiliationsGroupingService,
 } from './affiliations-grouping/affiliations-grouping.service'
-export { WINDOW } from './window/window.service'
 export { OrganizationsService } from './organizations/organizations.service'
 export { AffiliationsService } from './affiliations/affiliations.service'
 export { UserService } from './user/user.service'

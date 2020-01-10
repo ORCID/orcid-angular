@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { NavigationEnd, Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
-import { WINDOW, UserService } from 'src/app/core'
+import { UserService } from 'src/app/core'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
 import { menu } from './menu'
 import {
@@ -11,6 +11,7 @@ import {
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-header',
