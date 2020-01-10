@@ -72,7 +72,10 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.dialog.open(IsThisYouComponent, {
       width: `1078px`,
-      data: { duplicateRecords: this.duplicateRecords },
+      data: {
+        duplicateRecords: this.duplicateRecords,
+        titleLabel: 'MY OWN TITTLE',
+      },
     })
   }
 }

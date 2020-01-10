@@ -1,4 +1,11 @@
-import { Component, OnInit, HostBinding, Inject, Optional } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  HostBinding,
+  Inject,
+  Optional,
+  Input,
+} from '@angular/core'
 import { PlatformInfoService } from '../platform-info/platform-info.service'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
@@ -11,6 +18,19 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
   ],
 })
 export class IsThisYouComponent implements OnInit {
+  titleLabel = 'Could this be you?'
+  bodyLabel =
+    // tslint:disable-next-line: max-line-length
+    'We found some accounts with your name, which means you may have already created an ORCID iD using a different email address. Before creating an account, please confirm that none of these records belong to you. Not sure if any of these are you?'
+  contactLabel = 'Contact us.'
+  firstNameLabel = 'First Name'
+  lastNameLabel = 'Last Name'
+  affiliationsLabel = 'Affiliations'
+  dateCreatedLabel = 'Date Created'
+  viewRecordLabel = 'View Record'
+  signinLabel = 'I already have an iD, go back to sign in'
+  continueLabel = 'None of these are me, continue with registration'
+
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
   @HostBinding('class.tabletOrHandset') tabletOrHandset
