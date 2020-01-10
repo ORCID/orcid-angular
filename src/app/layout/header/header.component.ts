@@ -8,10 +8,9 @@ import {
   ApplicationMenuItemBasic,
   MenuItemRequirement,
 } from 'src/app/types/menu.local'
-import { environment } from 'src/environments/environment'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
-import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-header',
@@ -80,7 +79,7 @@ export class HeaderComponent implements OnInit {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route) {
-      this.window.location.href = environment.BASE_URL + button.route
+      this.window.location.href = button.route
     }
   }
 
@@ -226,6 +225,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goto(url) {
-    this.window.location.href = environment.BASE_URL + url
+    this.window.location.href = url
   }
 }
