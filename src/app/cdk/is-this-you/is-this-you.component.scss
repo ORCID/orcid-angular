@@ -39,6 +39,10 @@ th {
   flex-direction: column;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 :host.columns-8,
 :host.columns-4 {
   .fixed {

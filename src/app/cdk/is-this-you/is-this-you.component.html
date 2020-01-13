@@ -1,7 +1,12 @@
 <div class="container" *ngIf="data && data.duplicateRecords">
   <h1 class="mat-display-1 modal-title">{{ data.titleLabel || titleLabel }}</h1>
   <div class="non-fixed">
-    <p class="mat-body-1">{{ data.bodyLabel || bodyLabel }}</p>
+    <p class="mat-body-1">
+      {{ data.bodyLabel || bodyLabel }}
+      <a href="https://support.orcid.org/hc/en-us/requests/new">
+        {{ data.contactLabel || contactLabel }}
+      </a>
+    </p>
 
     <table style="width:100%" class="mat-subheading-2">
       <tr>
