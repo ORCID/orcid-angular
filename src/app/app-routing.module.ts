@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes, UrlSegment } from '@angular/router'
 
 import { isValidOrcidFormat, URL_PRIVATE_PROFILE } from './constants'
+import { EnvironmentBannerComponent } from './environment-banner/environment-banner/environment-banner.component'
 
 export function matcher(segments: UrlSegment[]) {
   if (

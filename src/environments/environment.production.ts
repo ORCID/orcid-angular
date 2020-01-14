@@ -19,4 +19,5 @@ export const environment = {
     zh_CN: '简体中文',
     zh_TW: '繁體中文',
   },
+  MODULES: [],
 }
