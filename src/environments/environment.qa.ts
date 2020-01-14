@@ -1,4 +1,4 @@
-import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-banner.module'
+import { EnvironmentBannerModule } from '../app/environment-banner/environment-banner.module'
 
 export const environment = {
   production: true,
