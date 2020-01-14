@@ -43,24 +43,41 @@
     </unit>
     <unit id="footer.copyright_cc0_1">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:31,32</note>
+        <note category="location">app/layout/footer/footer.component.html:31</note>
       </notes>
       <segment>
-        <source>Except where otherwise specified, the content of this website is
-          published under a</source>
+        <source>The text of this website is published under a</source>
       </segment>
     </unit>
-    <unit id="ngOrcid.copyright">
+    <unit id="footer.copyright_cc0_2">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:40</note>
+        <note category="location">app/layout/footer/footer.component.html:33</note>
       </notes>
       <segment>
-        <source>CC0 license.</source>
+        <source>CC0 license</source>
+      </segment>
+    </unit>
+    <unit id="common.period">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:35</note>
+        <note category="location">app/layout/footer/footer.component.html:41</note>
+      </notes>
+      <segment>
+        <source>.</source>
+      </segment>
+    </unit>
+    <unit id="footer.copyright_cc0_3">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:38,39</note>
+      </notes>
+      <segment>
+        <source>Images and marks are subject to copyright and trademark
+          protection</source>
       </segment>
     </unit>
     <unit id="footer.privacypolicy">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:54,56</note>
+        <note category="location">app/layout/footer/footer.component.html:55,57</note>
       </notes>
       <segment>
         <source>
@@ -70,7 +87,7 @@
     </unit>
     <unit id="footer.termsofuse">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:62,64</note>
+        <note category="location">app/layout/footer/footer.component.html:63,65</note>
       </notes>
       <segment>
         <source>
@@ -80,7 +97,7 @@
     </unit>
     <unit id="ngOrcid.disputeProcedure">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:70,72</note>
+        <note category="location">app/layout/footer/footer.component.html:71,73</note>
       </notes>
       <segment>
         <source>
@@ -90,7 +107,7 @@
     </unit>
     <unit id="footer.contactus">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:78,80</note>
+        <note category="location">app/layout/footer/footer.component.html:79,81</note>
       </notes>
       <segment>
         <source>
@@ -100,7 +117,7 @@
     </unit>
     <unit id="ngOrcid.trademark">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:86,88</note>
+        <note category="location">app/layout/footer/footer.component.html:87,89</note>
       </notes>
       <segment>
         <source>

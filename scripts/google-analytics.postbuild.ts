@@ -5,7 +5,9 @@ export function googleAnalytics(indexHtml, options) {
   ) {
     const googleScript = `  <script
     async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-17492803-6"
+    src="https://www.googletagmanager.com/gtag/js?id=${
+      options.environmentVariables.GOOGLE_ANALYTICS
+    }"
   ></script>
   <script>
     window.dataLayer = window.dataLayer || []
@@ -13,7 +15,7 @@ export function googleAnalytics(indexHtml, options) {
       dataLayer.push(arguments)
     }
     gtag('js', new Date())
-    gtag('config', 'UA-17492803-4')
+    gtag('config', '${options.environmentVariables.GOOGLE_ANALYTICS}')
   </script>`
     const i = indexHtml.indexOf('</head>')
     return `${indexHtml.slice(0, i)}

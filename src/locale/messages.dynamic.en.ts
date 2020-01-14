@@ -4,7 +4,7 @@ export const LOCALE : {[key:string]: string} = {
   "public-layout.sign_out": "SIGN OUT",
   "public-layout.sign_in": "SIGN IN",
   "workspace.notifications": "Inbox",
-  "workspace.developer_tools": "Developer tools ",
+  "workspace.developer_tools": "Developer tools",
   "public-layout.for_researchers": "For Researchers",
   "public-layout.for_organizations": "For Organizations",
   "public-layout.about": "About",
