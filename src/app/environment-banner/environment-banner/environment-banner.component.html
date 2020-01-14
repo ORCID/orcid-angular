@@ -1,18 +1,37 @@
-<div class="alert alert-banner" id="test-warn-div">
+<div class="alert alert-banner  mat-body-1" id="test-warn-div">
   <p>
-    <strong>Warning! sandbox.orcid.org is a test website.</strong>&nbsp;<a
-      href="https://orcid.org"
-      target="orcid.org"
-      >orcid.org</a
+    <ng-container i18n="@@common.js.domain.warn.warning_1"
+      >Warning!</ng-container
     >
-    is the official website. Sandbox only sends email messages to
-    <a href="https://mailinator.com">mailinator.com</a> email addresses, see
-    Sandbox FAQ for
+    <ng-container>{{ hostUrl }}</ng-container>
+    <ng-container i18n="@@common.js.domain.warn.warning_2"
+      >is a test website.
+    </ng-container>
+    <a href="https://orcid.org" target="orcid.org">orcid.org</a>
+    <ng-container i18n="@@common.js.domain.warn.is_the_official">
+      is the official website. Sandbox only sends email messages
+      to</ng-container
+    >
+    <a href="https://mailinator.com" i18n="@@common.js.domain.warn.mailinator"
+      >mailinator.com</a
+    >
+    <ng-container i18n="@@common.js.domain.warn.email_addresses"
+      >addresses, see Sandbox FAQ for</ng-container
+    >
     <a
       href="https://support.orcid.org/hc/articles/360006972573"
       target="common.js.domain.warn.more_information"
+      i18n="@@common.js.domain.warn.more_information"
     >
       more information</a
     >
   </p>
+  <button
+    mat-flat-button
+    color="primary"
+    i18n="@@common.cookies.click_dismiss"
+    (click)="onDismiss()"
+  >
+    Dismiss
+  </button>
 </div>

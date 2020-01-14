@@ -90,6 +90,8 @@ const reportFile: {
 
 const stringReplacements = {
   '<br />': ' ',
+  '\\u0020': '',
+  '\\!': '!',
 }
 
 // Read message file
