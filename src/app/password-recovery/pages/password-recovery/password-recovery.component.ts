@@ -25,6 +25,9 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
+    Validators.pattern(
+      /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+    ),
   ])
   typeFormControl = new FormControl('', [Validators.required])
 
