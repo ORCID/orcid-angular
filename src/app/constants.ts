@@ -24,3 +24,8 @@ export const GRID_COLUMNS = {
   tablet: 8,
   handset: 4,
 }
+
+// On top of Angular email validator that follows RFC rules
+// https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
+// this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
+export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
