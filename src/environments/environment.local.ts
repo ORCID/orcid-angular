@@ -1,3 +1,5 @@
+import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-banner.module'
+
 export const environment = {
   production: false,
   API_NEWS: 'http://www.mocky.io/v2/5dced45b3000007300931ce8',
@@ -24,6 +26,7 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
+  MODULES: [EnvironmentBannerModule],
 }
 
 /*
