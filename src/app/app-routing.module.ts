@@ -27,15 +27,10 @@ const routes: Routes = [
   //   () => import('./profile/profile.module').then(m => m.ProfileModule)
   // },
   // {
-  //   path: 'reset-password-email',
-  //   loadChildren:
-  //   () => import('./password-recovery/password-recovery.module').then(m => m.PasswordRecoveryModule)
+  //   path: 'signin',
+  //   loadChildren: () =>
+  //     import('./sign-in/sign-in.module').then(m => m.SignInModule),
   // },
-  {
-    path: 'signin',
-    loadChildren: () =>
-      import('./sign-in/sign-in.module').then(m => m.SignInModule),
-  },
   {
     path: 'reset-password',
     loadChildren: () =>
