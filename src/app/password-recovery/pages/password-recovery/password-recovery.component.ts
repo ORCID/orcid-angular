@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { matFormFieldAnimations } from '@angular/material'
 import { WINDOW } from 'src/app/core'
+import { TLD_REGEXP } from 'src/app/constants'
 
 @Component({
   selector: 'app-password-recovery',
@@ -25,6 +26,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
+    Validators.pattern(TLD_REGEXP),
   ])
   typeFormControl = new FormControl('', [Validators.required])
 
