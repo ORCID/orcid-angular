@@ -30,6 +30,7 @@
     mat-flat-button
     color="primary"
     i18n="@@common.cookies.click_dismiss"
+    *ngIf="canDismiss"
     (click)="onDismiss()"
   >
     Dismiss

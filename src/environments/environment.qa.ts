@@ -1,5 +1,3 @@
-import { EnvironmentBannerModule } from '../app/environment-banner/environment-banner.module'
-
 export const environment = {
   production: true,
   API_NEWS: 'https://qa.orcid.org/blog/feed',
@@ -7,6 +5,8 @@ export const environment = {
   BASE_URL: '//qa.orcid.org/',
   BLOG_NEWS: 'https://qa.orcid.org/about/news',
   GOOGLE_ANALYTICS: 'UA-17492803-6',
+  SHOW_TEST_WARNING_BANNER: true,
+  CAN_DISABLE_TEST_WARNING_BANNER: true,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
@@ -27,5 +27,4 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
-  MODULES: [EnvironmentBannerModule],
 }

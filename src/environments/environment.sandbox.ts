@@ -7,6 +7,8 @@ export const environment = {
   BASE_URL: '//sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   GOOGLE_ANALYTICS: 'UA-17492803-5',
+  SHOW_TEST_WARNING_BANNER: true,
+  CAN_DISABLE_TEST_WARNING_BANNER: false,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
@@ -27,5 +29,4 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
-  MODULES: [EnvironmentBannerModule],
 }
