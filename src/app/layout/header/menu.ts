@@ -555,7 +555,7 @@ export const menu: ApplicationMenuItemBasic[] = [
       {
         id: 'feedback',
         label: LOCALE['public-layout.give_feedback'],
-        route: 'https://support.orcid.org/hc/en-us/community/topics',
+        route: 'https://support.orcid.org/hc/en-us/articles/360006897594',
       },
       {
         id: 'base',
