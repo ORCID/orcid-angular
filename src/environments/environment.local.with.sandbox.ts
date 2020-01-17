@@ -8,6 +8,8 @@ export const environment = {
   API_WEB: 'https://orcid.herokuapp.com/https://sandbox.orcid.org/',
   BASE_URL: 'https://orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
+  SHOW_TEST_WARNING_BANNER: true,
+  CAN_DISABLE_TEST_WARNING_BANNER: true,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
@@ -28,5 +30,4 @@ export const environment = {
     uk: '** Ukrainian',
     ca: '** Catalan',
   },
-  MODULES: [EnvironmentBannerModule],
 }
