@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
-import { WINDOW } from '../../cdk/window'
+import { WINDOW } from '../../core/window/window.service'
 import { CookieService } from 'ngx-cookie-service'
 import { environment } from '../../../environments/environment'
 

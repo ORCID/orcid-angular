@@ -7,7 +7,7 @@ export const environment = {
   BASE_URL: '//localhost/',
   BLOG_NEWS: 'https://localhost:8888/about/news',
   SHOW_TEST_WARNING_BANNER: true,
-  CAN_DISABLE_TEST_WARNING_BANNER: false,
+  CAN_DISABLE_TEST_WARNING_BANNER: true,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',
