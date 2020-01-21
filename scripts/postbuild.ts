@@ -1,7 +1,4 @@
 import { readFile, indexHtml, saveIndex } from './index-html.postbuild'
-
-import * as environmentLocal from '../src/environments/environment.local'
-import * as environmentTomcat from '../src/environments/environment.local.tomcat'
 import * as environmentProduction from '../src/environments/environment.production'
 import * as environmentQa from '../src/environments/environment.qa'
 import * as environmentSandbox from '../src/environments/environment.sandbox'
