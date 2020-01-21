@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
+    <unit id="common.js.domain.warn.warning_1">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Warning!</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.warning_2">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
+      </notes>
+      <segment>
+        <source>is a test website.
+    </source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.is_the_official">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source>
+      is the official website. Sandbox only sends email messages
+      to</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.mailinator">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
+      </notes>
+      <segment>
+        <source>mailinator.com</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.email_addresses">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
+      </notes>
+      <segment>
+        <source>addresses, see Sandbox FAQ for</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.more_information">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
+      </notes>
+      <segment>
+        <source>
+      more information</source>
+      </segment>
+    </unit>
+    <unit id="common.cookies.click_dismiss">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:34,36</note>
+      </notes>
+      <segment>
+        <source>
+    Dismiss
+  </source>
+      </segment>
+    </unit>
     <unit id="confirm-oauth-access.connectingresearchandresearchers">
       <notes>
         <note category="description">#sentenceCase</note>
@@ -43,24 +105,40 @@
     </unit>
     <unit id="footer.copyright_cc0_1">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:31,32</note>
+        <note category="location">app/layout/footer/footer.component.html:31</note>
       </notes>
       <segment>
-        <source>Except where otherwise specified, the content of this website is
-          published under a</source>
+        <source>The text of this website is published under a</source>
       </segment>
     </unit>
     <unit id="ngOrcid.copyright">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:40</note>
+        <note category="location">app/layout/footer/footer.component.html:39</note>
       </notes>
       <segment>
         <source>CC0 license.</source>
       </segment>
     </unit>
+    <unit id="footer.copyright_cc0_3">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:42,43</note>
+      </notes>
+      <segment>
+        <source>Images and marks are subject to copyright and trademark
+          protection</source>
+      </segment>
+    </unit>
+    <unit id="common.period">
+      <notes>
+        <note category="location">app/layout/footer/footer.component.html:44</note>
+      </notes>
+      <segment>
+        <source>.</source>
+      </segment>
+    </unit>
     <unit id="footer.privacypolicy">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:54,56</note>
+        <note category="location">app/layout/footer/footer.component.html:57,59</note>
       </notes>
       <segment>
         <source>
@@ -70,7 +148,7 @@
     </unit>
     <unit id="footer.termsofuse">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:62,64</note>
+        <note category="location">app/layout/footer/footer.component.html:65,67</note>
       </notes>
       <segment>
         <source>
@@ -80,7 +158,7 @@
     </unit>
     <unit id="ngOrcid.disputeProcedure">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:70,72</note>
+        <note category="location">app/layout/footer/footer.component.html:73,75</note>
       </notes>
       <segment>
         <source>
@@ -90,7 +168,7 @@
     </unit>
     <unit id="footer.contactus">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:78,80</note>
+        <note category="location">app/layout/footer/footer.component.html:81,83</note>
       </notes>
       <segment>
         <source>
@@ -100,7 +178,7 @@
     </unit>
     <unit id="ngOrcid.trademark">
       <notes>
-        <note category="location">app/layout/footer/footer.component.html:86,88</note>
+        <note category="location">app/layout/footer/footer.component.html:89,91</note>
       </notes>
       <segment>
         <source>

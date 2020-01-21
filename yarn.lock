@@ -8760,10 +8760,10 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-ngx-cookie-service@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.2.0.tgz#79fe67863b3b93ee226c9ea8d60e1542c7115a58"
-  integrity sha512-2kaC1itlEMxiMAPJ320hOpcwU9vhvjbKQCZ1Go6bGhYjJtqG7eYvhNP7mM9IhFz1/afG2tBryJPySWmFUGhRpA==
+ngx-cookie-service@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.3.0.tgz#290e6f55047ad9e9f1aa4ddf30d1ab8d41927949"
+  integrity sha512-Cegg6ifVuAwhsdrj0sGDyS9lg2o/Uc6FkR8HLcI40rpNMu5tzMd8w23cUiB81a8jDUr/MC44f1S+G6zmWmoy0A==
 
 nice-try@^1.0.4:
   version "1.0.5"

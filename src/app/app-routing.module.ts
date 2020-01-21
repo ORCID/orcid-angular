@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes, UrlSegment } from '@angular/router'
 
 import { isValidOrcidFormat, URL_PRIVATE_PROFILE } from './constants'
+import { EnvironmentBannerComponent } from './environment-banner/environment-banner/environment-banner.component'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -25,7 +26,7 @@ const routes: Routes = [
   //   loadChildren: './profile/profile.module#ProfileModule',
   // },
   {
-    path: 'reset-password-email',
+    path: 'reset-password',
     loadChildren:
       './password-recovery/password-recovery.module#PasswordRecoveryModule',
   },

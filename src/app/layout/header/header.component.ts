@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route) {
-      this.window.location.href = environment.BASE_URL + button.route
+      this.window.location.href = button.route
     }
   }
 
@@ -225,6 +225,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goto(url) {
-    this.window.location.href = environment.BASE_URL + url
+    this.window.location.href = url
   }
 }
