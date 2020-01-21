@@ -31,6 +31,10 @@ const routes: Routes = [
       './password-recovery/password-recovery.module#PasswordRecoveryModule',
   },
   {
+    path: 'search',
+    loadChildren: './search/search.module#SearchModule',
+  },
+  {
     path: '**',
     redirectTo: '/',
   },
