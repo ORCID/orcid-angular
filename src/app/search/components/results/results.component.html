@@ -1,4 +1,7 @@
-<section class="mat-body-2">
+<section
+  class="mat-body-2"
+  *ngIf="searchResults && searchResults.results.length"
+>
   <div class="row h-end">
     <button mat-button color="primary" class="col">
       ADVANCE SEARCH <mat-icon aria-hidden="true">expand_more</mat-icon>
@@ -35,93 +38,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let orcid of searchResults.results">
           <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
+            <a href="{{orcid.orcid}}"> {{ orcid.orcid }}</a>
           </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
-        </tr>
-        <tr>
-          <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
-          </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
-        </tr>
-        <tr>
-          <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
-          </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
-        </tr>
-        <tr>
-          <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
-          </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
-        </tr>
-        <tr>
-          <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
-          </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
-        </tr>
-        <tr>
-          <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
-          </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
-        </tr>
-        <tr>
-          <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
-          </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
-        </tr>
-        <tr>
-          <td class="orcid-id-column">
-            <a href="https://orcid.org/0000-0002-5648-7220">
-              https://orcid.org/0000-0002-5648-7220</a
-            >
-          </td>
-          <td>Jane</td>
-          <td>Bednářová</td>
-          <td>Jane Doe</td>
-          <td>University Name, Academy Name</td>
+          <td>{{ orcid.firstName }}</td>
+          <td>{{ orcid.lastName }}</td>
+          <td>{{ orcid.otherNames }}</td>
+          <td>{{ orcid.affiliations }}</td>
         </tr>
       </tbody>
     </table>
@@ -130,7 +54,10 @@
   <div class="row h-baseline"><mat-paginator></mat-paginator></div>
 </section>
 
-<section class="col notFoundResults">
+<section
+  class="col notFoundResults"
+  *ngIf="!searchResults || !searchResults.results.length"
+>
   <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />
   <p
     class="row space-around"

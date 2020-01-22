@@ -16,14 +16,15 @@ const propertiesToJSON = require('properties-to-json')
 const axios = require('axios')
 
 const baseGithubTranslationFilesURL = [
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/about_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/email_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/identifiers_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/javascript_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/about_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/messages_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/admin_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/email_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/identifiers_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/javascript_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/test_messages_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/ng_orcid_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/ng_orcid_search_',
 ]
 const languages = [
   {
