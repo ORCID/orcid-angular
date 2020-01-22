@@ -1,0 +1,10 @@
+// Overwrites for:
+// https://github.com/angular/components/blob/8.1.4/src/material/paginator/paginator.scss
+
+mat-paginator {
+  .mat-paginator-container,
+  .mat-paginator-page-size-label {
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
