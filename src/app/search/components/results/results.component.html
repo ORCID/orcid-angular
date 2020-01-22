@@ -4,7 +4,7 @@
       ADVANCE SEARCH <mat-icon aria-hidden="true">expand_more</mat-icon>
     </button>
   </div>
-  <div class="row h-baseline">
+  <div class="row h-baseline" aria-live="polite">
     <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
     12
     <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
@@ -132,7 +132,11 @@
 
 <section class="col notFoundResults">
   <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />
-  <p class="row space-around" i18n="@@ngOrcid.search.noResults">
+  <p
+    class="row space-around"
+    i18n="@@ngOrcid.search.noResults"
+    aria-live="polite"
+  >
     No results found. Please edit your search terms.
   </p>
 </section>
