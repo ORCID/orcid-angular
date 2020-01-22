@@ -8,3 +8,11 @@ mat-paginator {
     margin-left: 0;
   }
 }
+
+[dir='rtl'] mat-paginator {
+  .mat-paginator-container,
+  .mat-paginator-page-size-label {
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
