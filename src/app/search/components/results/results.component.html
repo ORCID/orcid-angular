@@ -1,6 +1,6 @@
 <section
   class="mat-body-2"
-  *ngIf="searchResults && searchResults.results.length"
+  *ngIf="searchResults && searchResults.results && searchResults.results.length"
 >
   <div class="row h-end">
     <button mat-button color="primary" class="col">
@@ -56,7 +56,9 @@
 
 <section
   class="col notFoundResults"
-  *ngIf="!searchResults || !searchResults.results.length"
+  *ngIf="
+    searchResults && (!searchResults.results || !searchResults.results.length)
+  "
 >
   <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />
   <p
@@ -66,4 +68,11 @@
   >
     No results found. Please edit your search terms.
   </p>
+</section>
+
+<section *ngIf="!searchResults">
+  <div class="row horizontal-center">
+    <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+    </mat-progress-spinner>
+  </div>
 </section>

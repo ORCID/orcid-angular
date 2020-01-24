@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { Params } from '@angular/router'
-import { map, delay } from 'rxjs/operators'
-
+import { delay, startWith, switchMap } from 'rxjs/operators'
+import searchResults from '../../../assets/mock-api-data.json'
 @Injectable({
   providedIn: 'root',
 })
@@ -11,17 +11,13 @@ export class SearchService {
 
   search(querryParam: Observable<Params>) {
     return querryParam.pipe(
-      map(params => {
-        console.log(params)
-        return params
-      }),
-      delay(2000),
-      map(params => {
-        return params
+      switchMap(val => {
+        console.log('PARAMS ', val)
+        return of(searchResults).pipe(
+          delay(4000),
+          startWith(<string>null)
+        )
       })
     )
-    // const searchString =
-    // tslint:disable-next-line: max-line-length
-    //   '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^5.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" mm=1}'
   }
 }

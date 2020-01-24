@@ -8,6 +8,7 @@ import {
   MatPaginatorModule,
   MatButtonModule,
   MatIconModule,
+  MatProgressSpinnerModule,
 } from '@angular/material'
 
 @NgModule({
@@ -18,6 +19,7 @@ import {
     MatPaginatorModule,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class SearchModule {}

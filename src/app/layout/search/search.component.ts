@@ -4,7 +4,6 @@ import { PlatformInfoService, WINDOW } from 'src/app/core'
 import { PlatformInfo } from 'src/app/types'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { Config } from 'src/app/types/togglz.endpoint'
 import { Router } from '@angular/router'
 
 @Component({
