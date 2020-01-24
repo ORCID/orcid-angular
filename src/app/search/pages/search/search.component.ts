@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/internal/operators/map'
 import searchResults from '../../../../assets/mock-api-data.json'
+import { SearchService } from 'src/app/core/search/search.service.js'
 
 @Component({
   selector: 'app-search',
@@ -11,11 +10,11 @@ import searchResults from '../../../../assets/mock-api-data.json'
 })
 export class SearchComponent implements OnInit {
   searchResults = searchResults
-  constructor(route: ActivatedRoute) {
-    const id: Observable<string> = route.queryParams.pipe(
-      map(p => p.searchQuery)
-    )
-    id.subscribe(console.log)
+  constructor(route: ActivatedRoute, _searchService: SearchService) {
+    // TODO check how the component is initialized and router is triggered on a second search
+    _searchService.search(route.queryParams).subscribe(data => {
+      console.log('RESULTS FOR ', data)
+    })
   }
 
   ngOnInit() {}
