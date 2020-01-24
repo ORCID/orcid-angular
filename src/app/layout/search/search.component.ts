@@ -15,7 +15,8 @@ import { Router } from '@angular/router'
 export class SearchComponent implements OnInit {
   form: FormGroup
   platform: PlatformInfo
-  togglz: Config
+  togglzEnableUserMenu: boolean
+  togglzOrcidAngularSearch: boolean
   whereToSearch = [
     this.firstLetterUppercase(LOCALE['layout.public-layout.registry']),
     this.firstLetterUppercase(LOCALE['layout.public-layout.website']),
@@ -34,9 +35,12 @@ export class SearchComponent implements OnInit {
     _platform.platformSubject.subscribe(data => {
       this.platform = data
     })
-    _togglz.getTogglz().subscribe(data => {
-      this.togglz = data
-    })
+    _togglz
+      .getStateOf('ENABLE_USER_MENU')
+      .subscribe(value => (this.togglzEnableUserMenu = value))
+    _togglz
+      .getStateOf('ORCID_ANGULAR_SEARCH')
+      .subscribe(value => (this.togglzOrcidAngularSearch = value))
   }
 
   changeWhereToSearch(item) {
@@ -50,12 +54,13 @@ export class SearchComponent implements OnInit {
       whereToSearch ===
       this.firstLetterUppercase(LOCALE['layout.public-layout.registry'])
     ) {
-      // TODO ADD A TOGGLZ FEATURE
-      if (false) {
+      if (!this.togglzOrcidAngularSearch) {
+        // navigate directly the window location
         this.window.location.href =
           '/orcid-search/quick-search/?searchQuery=' + whatToSearch
       } else {
-        this.router.navigate(['/search'], {
+        // navigate using the angular router to never leave the Angular app
+        this.router.navigate(['/orcid-search/search'], {
           queryParams: { searchQuery: whatToSearch },
         })
       }

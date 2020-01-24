@@ -100,7 +100,7 @@
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "en",
-              "baseHref": "."
+              "baseHref": "/"
             },
             "local-fr": {
               "fileReplacements": [

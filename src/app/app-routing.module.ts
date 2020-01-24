@@ -31,7 +31,7 @@ const routes: Routes = [
       './password-recovery/password-recovery.module#PasswordRecoveryModule',
   },
   {
-    path: 'search',
+    path: 'orcid-search/search',
     loadChildren: './search/search.module#SearchModule',
   },
   {
