@@ -21,5 +21,6 @@ import {
     MatIconModule,
     MatProgressSpinnerModule,
   ],
+  exports: [ResultsComponent],
 })
 export class SearchModule {}

@@ -1,3 +1,8 @@
-<div class="container ">
-  <app-results [searchResults]="searchResults">app-results></app-results>
+<div class="container">
+  <div class="row h-end">
+    <button mat-button color="primary" class="col">
+      ADVANCE SEARCH <mat-icon aria-hidden="true">expand_more</mat-icon>
+    </button>
+  </div>
+  <div><app-results [searchResults]="searchResults"></app-results></div>
 </div>
