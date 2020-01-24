@@ -1,68 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
-    <unit id="common.js.domain.warn.warning_1">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
-      </notes>
-      <segment>
-        <source>Warning!</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.warning_2">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
-      </notes>
-      <segment>
-        <source>is a test website.
-    </source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.is_the_official">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
-      </notes>
-      <segment>
-        <source>
-      is the official website. Sandbox only sends email messages
-      to</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.mailinator">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
-      </notes>
-      <segment>
-        <source>mailinator.com</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.email_addresses">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
-      </notes>
-      <segment>
-        <source>email addresses, see Sandbox FAQ for</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.more_information">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
-      </notes>
-      <segment>
-        <source>
-      more information</source>
-      </segment>
-    </unit>
-    <unit id="common.cookies.click_dismiss">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
-      </notes>
-      <segment>
-        <source>
-    Dismiss
-  </source>
-      </segment>
-    </unit>
     <unit id="confirm-oauth-access.connectingresearchandresearchers">
       <notes>
         <note category="description">#sentenceCase</note>
@@ -184,6 +122,68 @@
         <source>
           Trademark &amp; iD guidelines
         </source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.warning_1">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Warning!</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.warning_2">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
+      </notes>
+      <segment>
+        <source>is a test website.
+    </source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.is_the_official">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source>
+      is the official website. Sandbox only sends email messages
+      to</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.mailinator">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
+      </notes>
+      <segment>
+        <source>mailinator.com</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.email_addresses">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
+      </notes>
+      <segment>
+        <source>email addresses, see Sandbox FAQ for</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.more_information">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
+      </notes>
+      <segment>
+        <source>
+      more information</source>
+      </segment>
+    </unit>
+    <unit id="common.cookies.click_dismiss">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
+      </notes>
+      <segment>
+        <source>
+    Dismiss
+  </source>
       </segment>
     </unit>
     <unit id="public-layout.sign_in">
@@ -929,7 +929,7 @@
     </unit>
     <unit id="ngOrcid.search.showing">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:8</note>
+        <note category="location">app/search/components/results/results.component.html:11</note>
       </notes>
       <segment>
         <source>Showing</source>
@@ -937,7 +937,7 @@
     </unit>
     <unit id="ngOrcid.search.of">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:10</note>
+        <note category="location">app/search/components/results/results.component.html:13</note>
       </notes>
       <segment>
         <source>of</source>
@@ -945,7 +945,7 @@
     </unit>
     <unit id="ngOrcid.search.results">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:12</note>
+        <note category="location">app/search/components/results/results.component.html:15</note>
       </notes>
       <segment>
         <source>results.</source>
@@ -953,7 +953,7 @@
     </unit>
     <unit id="ngOrcid.search.orcidID">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:22,24</note>
+        <note category="location">app/search/components/results/results.component.html:25,27</note>
       </notes>
       <segment>
         <source>
@@ -963,7 +963,7 @@
     </unit>
     <unit id="ngOrcid.search.firstName">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:25,27</note>
+        <note category="location">app/search/components/results/results.component.html:28,30</note>
       </notes>
       <segment>
         <source>
@@ -973,7 +973,7 @@
     </unit>
     <unit id="ngOrcid.search.lastName">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:28</note>
+        <note category="location">app/search/components/results/results.component.html:31</note>
       </notes>
       <segment>
         <source>Last Name</source>
@@ -981,7 +981,7 @@
     </unit>
     <unit id="ngOrcid.search.otherNames">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:29,31</note>
+        <note category="location">app/search/components/results/results.component.html:32,34</note>
       </notes>
       <segment>
         <source>
@@ -991,7 +991,7 @@
     </unit>
     <unit id="ngOrcid.search.affiliations">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:32,34</note>
+        <note category="location">app/search/components/results/results.component.html:35,37</note>
       </notes>
       <segment>
         <source>
@@ -1001,7 +1001,7 @@
     </unit>
     <unit id="ngOrcid.search.noResults">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:135,137</note>
+        <note category="location">app/search/components/results/results.component.html:66,68</note>
       </notes>
       <segment>
         <source>
