@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { Params } from '@angular/router'
 import { delay, startWith, switchMap } from 'rxjs/operators'
-import searchResults from '../../../assets/mock-api-data.json'
+import searchResults from '../../../../.mockData/mock-search.json'
 @Injectable({
   providedIn: 'root',
 })
