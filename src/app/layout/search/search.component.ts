@@ -5,6 +5,7 @@ import { PlatformInfo } from 'src/app/types'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-search',
@@ -27,7 +28,8 @@ export class SearchComponent implements OnInit {
   constructor(
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
-    _togglz: TogglzService
+    _togglz: TogglzService,
+    private router: Router
   ) {
     _platform.platformSubject.subscribe(data => {
       this.platform = data
@@ -48,8 +50,15 @@ export class SearchComponent implements OnInit {
       whereToSearch ===
       this.firstLetterUppercase(LOCALE['layout.public-layout.registry'])
     ) {
-      this.window.location.href =
-        '/orcid-search/quick-search/?searchQuery=' + whatToSearch
+      // TODO ADD A TOGGLZ FEATURE
+      if (false) {
+        this.window.location.href =
+          '/orcid-search/quick-search/?searchQuery=' + whatToSearch
+      } else {
+        this.router.navigate(['/search'], {
+          queryParams: { searchQuery: whatToSearch },
+        })
+      }
     } else {
       this.window.location.href = '/search/node/' + whatToSearch
     }
