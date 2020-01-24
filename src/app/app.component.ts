@@ -3,6 +3,8 @@ import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
 import { PlatformInfoService } from './core/platform-info/platform-info.service'
 import { GRID_MARGINS } from './constants'
 import { PlatformInfo } from './types'
+import { Router, NavigationEnd } from '@angular/router'
+import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 
 @Component({
   selector: 'app-root',
@@ -23,12 +25,20 @@ export class AppComponent {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    @Inject(LOCALE_ID) public locale: string
+    @Inject(LOCALE_ID) public locale: string,
+    _router: Router,
+    _googleAnalytics: GoogleAnalyticsService
   ) {
     _platformInfo.get().subscribe(platformInfo => {
       this.setPlatformClasses(platformInfo)
     })
     this.direction = locale === 'ar' ? 'rtl' : null
+
+    _router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        _googleAnalytics.reportPageView(event.urlAfterRedirects)
+      }
+    })
   }
 
   setPlatformClasses(platformInfo: PlatformInfo) {
