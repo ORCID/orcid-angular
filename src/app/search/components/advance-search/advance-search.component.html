@@ -1,0 +1,60 @@
+<div class="row h-end">
+  <button mat-button color="primary" (click)="toggleAdvanceSearch()">
+    ADVANCE SEARCH
+    <mat-icon aria-hidden="true" *ngIf="!showAdvanceSearch"
+      >expand_more</mat-icon
+    >
+    <mat-icon aria-hidden="true" *ngIf="showAdvanceSearch"
+      >expand_less</mat-icon
+    >
+  </button>
+</div>
+
+<section *ngIf="showAdvanceSearch">
+  <div class="row firstRow">
+    <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
+      <mat-label>First Name</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
+      <mat-label>Last Name</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="institution col l4 m5 s4 ">
+      <mat-label>Institution Name</mat-label>
+      <input
+        *ngIf="!isAPhoneScreen"
+        matInput
+        placeholder="Employment, education, or RINGGOLD ID"
+      />
+      <input *ngIf="isAPhoneScreen" matInput />
+
+      <mat-hint *ngIf="isAPhoneScreen"
+        >Employment, education, or RINGGOLD ID</mat-hint
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="keyword col l2 m3 s4 grow">
+      <mat-label>Keyword</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+
+  <div class="row checkbox">
+    <mat-checkbox class="col" color="primary"
+      >Also search other name fields</mat-checkbox
+    >
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline" class="col l3 m4 s4">
+      <mat-label>Orcid iD</mat-label>
+      <input style="width: 100%;" matInput />
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <div class="col l3 m4 s4">
+      <button mat-raised-button color="primary">SEARCH</button>
+    </div>
+  </div>
+</section>

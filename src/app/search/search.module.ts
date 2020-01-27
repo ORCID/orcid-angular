@@ -9,10 +9,14 @@ import {
   MatButtonModule,
   MatIconModule,
   MatProgressSpinnerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatCheckboxModule,
 } from '@angular/material'
+import { AdvanceSearchComponent } from './components/advance-search/advance-search.component'
 
 @NgModule({
-  declarations: [SearchComponent, ResultsComponent],
+  declarations: [SearchComponent, ResultsComponent, AdvanceSearchComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,
@@ -20,6 +24,9 @@ import {
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
   ],
   exports: [ResultsComponent],
 })
