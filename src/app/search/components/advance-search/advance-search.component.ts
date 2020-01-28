@@ -1,5 +1,7 @@
 import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core'
 import { PlatformInfoService } from 'src/app/core'
+import { LOCALE } from '../../../../locale/messages.dynamic.en'
+import { FormControl, Validators, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-advance-search',
@@ -9,7 +11,16 @@ import { PlatformInfoService } from 'src/app/core'
 export class AdvanceSearchComponent implements OnInit {
   isAPhoneScreen = false
   showAdvanceSearch = false
-
+  ngOrcidSearchInstitutionNamePlaceholder =
+    LOCALE['ngOrcid.search.institutionNamePlaceholder']
+  advanceSearch = new FormGroup({
+    firstName: new FormControl('', []),
+    lastName: new FormControl('', []),
+    institution: new FormControl('', []),
+    keyword: new FormControl('', []),
+    otherFields: new FormControl('', []),
+    orcid: new FormControl('', [Validators.required]),
+  })
   constructor(
     _platform: PlatformInfoService,
     @Inject(LOCALE_ID) private locale: string

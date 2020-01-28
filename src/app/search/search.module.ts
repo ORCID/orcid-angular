@@ -15,6 +15,7 @@ import {
 } from '@angular/material'
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component'
 import { BidiModule } from '@angular/cdk/bidi'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [SearchComponent, ResultsComponent, AdvanceSearchComponent],
@@ -29,6 +30,8 @@ import { BidiModule } from '@angular/cdk/bidi'
     MatFormFieldModule,
     MatCheckboxModule,
     BidiModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [ResultsComponent],
 })

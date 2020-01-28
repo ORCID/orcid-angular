@@ -540,7 +540,7 @@
     </unit>
     <unit id="check_password_modal.password">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:28</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:27</note>
       </notes>
       <segment>
         <source>Password</source>
@@ -548,7 +548,7 @@
     </unit>
     <unit id="common.orcid_id">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:36</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:35</note>
       </notes>
       <segment>
         <source>ORCID ID</source>
@@ -556,7 +556,7 @@
     </unit>
     <unit id="ngOrcid.pleaseChooseRecovery">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:46</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:45</note>
       </notes>
       <segment>
         <source>Please choose a recovery option</source>
@@ -564,7 +564,7 @@
     </unit>
     <unit id="oauth_sign_up.labelemail">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:50</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:49</note>
       </notes>
       <segment>
         <source>Email</source>
@@ -572,7 +572,7 @@
     </unit>
     <unit id="Email.resendClaim.invalidEmail">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:60</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:59</note>
       </notes>
       <segment>
         <source>Please enter a valid email address</source>
@@ -580,7 +580,7 @@
     </unit>
     <unit id="ngOrcid.recoverAccountDetails">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:81,83</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:80,82</note>
       </notes>
       <segment>
         <source>
@@ -590,7 +590,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_1">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:92</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:91</note>
       </notes>
       <segment>
         <source>We have sent a message to</source>
@@ -598,7 +598,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_2">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:96</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:95</note>
       </notes>
       <segment>
         <source>from reset@notify.orcid.org.</source>
@@ -606,7 +606,7 @@
     </unit>
     <unit id="ngOrcid.youCanNow">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:98</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:97</note>
       </notes>
       <segment>
         <source>You can now</source>
@@ -614,7 +614,7 @@
     </unit>
     <unit id="ngOrcid.returnToLoginPage">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:102</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:101</note>
       </notes>
       <segment>
         <source>return to the login page.</source>
@@ -622,7 +622,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_3">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:107,109</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:106,108</note>
       </notes>
       <segment>
         <source>If you do not receive a message within 5 minutes, please check
@@ -632,7 +632,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_4">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:115</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:114</note>
       </notes>
       <segment>
         <source>contact us</source>
@@ -929,7 +929,7 @@
     </unit>
     <unit id="ngOrcid.search.showing">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:11</note>
+        <note category="location">app/search/components/results/results.component.html:6</note>
       </notes>
       <segment>
         <source>Showing</source>
@@ -937,7 +937,7 @@
     </unit>
     <unit id="ngOrcid.search.of">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:13</note>
+        <note category="location">app/search/components/results/results.component.html:8</note>
       </notes>
       <segment>
         <source>of</source>
@@ -945,7 +945,7 @@
     </unit>
     <unit id="ngOrcid.search.results">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:15</note>
+        <note category="location">app/search/components/results/results.component.html:10</note>
       </notes>
       <segment>
         <source>results.</source>
@@ -953,7 +953,8 @@
     </unit>
     <unit id="ngOrcid.search.orcidID">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:25,27</note>
+        <note category="location">app/search/components/results/results.component.html:20,22</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:65</note>
       </notes>
       <segment>
         <source>
@@ -963,7 +964,8 @@
     </unit>
     <unit id="ngOrcid.search.firstName">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:28,30</note>
+        <note category="location">app/search/components/results/results.component.html:23,25</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:22</note>
       </notes>
       <segment>
         <source>
@@ -973,7 +975,8 @@
     </unit>
     <unit id="ngOrcid.search.lastName">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:31</note>
+        <note category="location">app/search/components/results/results.component.html:26</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:26</note>
       </notes>
       <segment>
         <source>Last Name</source>
@@ -981,7 +984,7 @@
     </unit>
     <unit id="ngOrcid.search.otherNames">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:32,34</note>
+        <note category="location">app/search/components/results/results.component.html:27,29</note>
       </notes>
       <segment>
         <source>
@@ -991,7 +994,7 @@
     </unit>
     <unit id="ngOrcid.search.affiliations">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:35,37</note>
+        <note category="location">app/search/components/results/results.component.html:30,32</note>
       </notes>
       <segment>
         <source>
@@ -1001,12 +1004,73 @@
     </unit>
     <unit id="ngOrcid.search.noResults">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:66,68</note>
+        <note category="location">app/search/components/results/results.component.html:63,65</note>
       </notes>
       <segment>
         <source>
     No results found. Please edit your search terms.
   </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.advanceSearch">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:4</note>
+      </notes>
+      <segment>
+        <source>ADVANCE SEARCH</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.institutionName">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:31</note>
+      </notes>
+      <segment>
+        <source>Institution Name</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.institutionNamePlaceholder">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:44</note>
+        <note category="location">locale/i18n.pseudo.component.html:78</note>
+      </notes>
+      <segment>
+        <source>Employment, education, or RINGGOLD ID</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.keyword">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:48</note>
+      </notes>
+      <segment>
+        <source>Keyword</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.otherNameFields">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Also search other name fields</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.orcidIdPatterError">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:67,69</note>
+      </notes>
+      <segment>
+        <source>
+        Given value doesn&apos;t match ORCID iD pattern
+      </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.search">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:75,77</note>
+      </notes>
+      <segment>
+        <source>
+        SEARCH
+      </source>
       </segment>
     </unit>
     <unit id="public-layout.for_researchers">
