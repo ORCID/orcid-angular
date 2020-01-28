@@ -1,7 +1,8 @@
-import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core'
+import { Component, OnInit, LOCALE_ID, Inject, Input } from '@angular/core'
 import { PlatformInfoService } from 'src/app/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-advance-search',
@@ -9,6 +10,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms'
   styleUrls: ['./advance-search.component.scss'],
 })
 export class AdvanceSearchComponent implements OnInit {
+  @Input() searchValues
   isAPhoneScreen = false
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder =
@@ -21,18 +23,38 @@ export class AdvanceSearchComponent implements OnInit {
     otherFields: new FormControl('', []),
     orcid: new FormControl('', [Validators.required]),
   })
+
   constructor(
     _platform: PlatformInfoService,
-    @Inject(LOCALE_ID) private locale: string
+    @Inject(LOCALE_ID) private locale: string,
+    private router: Router
   ) {
     _platform.get().subscribe(data => {
       this.isAPhoneScreen = data.columns4
     })
   }
 
+  ngOnInit() {
+    // If the search query is empty or it has advance search parameter values
+    // it opens the advance search by default
+    if (
+      !Object.keys(this.searchValues).length ||
+      this.searchValues['searchQuery'] == null
+    ) {
+      this.showAdvanceSearch = true
+      this.advanceSearch.setValue(this.searchValues)
+    }
+  }
+
   toggleAdvanceSearch() {
     this.showAdvanceSearch = !this.showAdvanceSearch
     this.tempFixForOutlineFormInputCalculation()
+  }
+
+  search() {
+    this.router.navigate(['/orcid-search/search'], {
+      queryParams: this.advanceSearch.value,
+    })
   }
 
   // tslint:disable-next-line: member-ordering
@@ -59,6 +81,4 @@ export class AdvanceSearchComponent implements OnInit {
       }
     }
   }
-
-  ngOnInit() {}
 }

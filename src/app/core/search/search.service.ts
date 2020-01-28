@@ -9,15 +9,11 @@ import searchResults from '../../../../.mockData/mock-search.json'
 export class SearchService {
   constructor() {}
 
-  search(querryParam: Observable<Params>) {
-    return querryParam.pipe(
-      switchMap(val => {
-        console.log('PARAMS ', val)
-        return of(searchResults).pipe(
-          delay(4000),
-          startWith(<string>null)
-        )
-      })
+  search(querryParam: Params) {
+    console.log('PARAMS ', querryParam)
+    return of(searchResults).pipe(
+      delay(300),
+      startWith(<string>null)
     )
   }
 }
