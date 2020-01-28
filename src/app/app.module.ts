@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { CoreModule } from './core/core.module'
 import { LayoutModule } from './layout/layout.module'
+import { BidiModule } from '@angular/cdk/bidi'
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { LayoutModule } from './layout/layout.module'
     CoreModule,
     BrowserAnimationsModule,
     LayoutModule,
+    BidiModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
