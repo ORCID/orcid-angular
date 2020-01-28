@@ -14,6 +14,7 @@ import {
   MatCheckboxModule,
 } from '@angular/material'
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component'
+import { BidiModule } from '@angular/cdk/bidi'
 
 @NgModule({
   declarations: [SearchComponent, ResultsComponent, AdvanceSearchComponent],
@@ -27,6 +28,7 @@ import { AdvanceSearchComponent } from './components/advance-search/advance-sear
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    BidiModule,
   ],
   exports: [ResultsComponent],
 })

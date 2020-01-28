@@ -32,3 +32,4 @@
 @include mat-button-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/menu.scss';
 @include mat-menu-theme-overwrites($orcid-app-theme);
+@import './material.orcid.overwrites.scss/form-field-outline.scss';

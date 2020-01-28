@@ -1,0 +1,18 @@
+[dir='rtl'] [dir='ltr'] {
+  // This SCSS rules are part of a temporal fix for a MatFormField issue.
+  // This is intended to be remove once Angular release the fix
+  // More info on: src\app\search\components\advance-search\advance-search.component.ts
+  .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-right-style: none;
+    border-left-style: solid;
+    border-radius: 5px 0 0 5px;
+  }
+  .mat-form-field {
+    text-align: left;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-left-style: none;
+    border-right-style: solid;
+    border-radius: 0 5px 5px 0;
+  }
+}

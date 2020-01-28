@@ -10,7 +10,10 @@
   </button>
 </div>
 
-<section *ngIf="showAdvanceSearch">
+<section
+  *ngIf="showAdvanceSearch"
+  [dir]="tempFixForOutlineFormInputCalculationIssue_Direction"
+>
   <div class="row firstRow">
     <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
       <mat-label>First Name</mat-label>
