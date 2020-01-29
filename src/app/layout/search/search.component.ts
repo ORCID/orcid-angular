@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, WINDOW } from 'src/app/core'
 import { PlatformInfo } from 'src/app/types'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-search',
@@ -24,12 +24,14 @@ export class SearchComponent implements OnInit {
     LOCALE['layout.public-layout.registry']
   )
   searchPlaceHolder = this.firstLetterUppercase(LOCALE['ngOrcid.search'])
-  whatToSearch = ''
+  whatToSearch: string
   constructor(
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
     _togglz: TogglzService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    public _changeDetection: ChangeDetectorRef
   ) {
     _platform.platformSubject.subscribe(data => {
       this.platform = data
@@ -40,10 +42,22 @@ export class SearchComponent implements OnInit {
     _togglz
       .getStateOf('ORCID_ANGULAR_SEARCH')
       .subscribe(value => (this.togglzOrcidAngularSearch = value))
+
+    this.route.queryParams.subscribe(value => this.setWhatToSearch(value))
   }
 
   changeWhereToSearch(item) {
     this.whereToSearchSelected = item
+  }
+
+  setWhatToSearch(queryParams) {
+    // Set the whatToSearch when it comes on the query parameters
+    if (Object.keys(queryParams).length && queryParams['searchQuery']) {
+      this.whatToSearch = queryParams['searchQuery']
+    } else {
+      // Clean whatToSearch if is and advance search or has no query parameters
+      this.whatToSearch = ''
+    }
   }
 
   ngOnInit() {}
