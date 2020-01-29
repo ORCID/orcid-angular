@@ -85,7 +85,7 @@ This method will lazy load the new features, for more information about the rout
 Serve the application
 
 ```
-npm run start
+yarn start
 ```
 
 and navigate to `localhost:4200/hello-world`
