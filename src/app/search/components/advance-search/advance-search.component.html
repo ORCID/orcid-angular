@@ -31,19 +31,16 @@
       <mat-label i18n="@@ngOrcid.search.institutionName"
         >Institution Name</mat-label
       >
-      <input
-        formControlName="institution"
-        *ngIf="!isAPhoneScreen"
-        matInput
-        placeholder="{{ngOrcidSearchInstitutionNamePlaceholder}}"
-      />
-      <input *ngIf="isAPhoneScreen" matInput formControlName="institution" />
-
       <mat-hint
-        *ngIf="isAPhoneScreen"
         i18n="@@ngOrcid.search.institutionNamePlaceholder"
+        *ngIf="isAPhoneScreen"
         >Employment, education, or RINGGOLD ID</mat-hint
       >
+      <input
+        formControlName="institution"
+        matInput
+        placeholder="{{isAPhoneScreen? null : ngOrcidSearchInstitutionNamePlaceholder}}"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline" class="keyword col l2 m3 s4 grow">
       <mat-label i18n="@@ngOrcid.search.keyword">Keyword</mat-label>
