@@ -1,4 +1,11 @@
-import { Component, OnInit, LOCALE_ID, Inject, Input } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  LOCALE_ID,
+  Inject,
+  Input,
+  Optional,
+} from '@angular/core'
 import { PlatformInfoService } from 'src/app/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
@@ -21,7 +28,7 @@ export class AdvanceSearchComponent implements OnInit {
   constructor(
     _platform: PlatformInfoService,
     @Inject(LOCALE_ID) private locale: string,
-    private router: Router
+    @Optional() private router: Router
   ) {
     _platform.get().subscribe(data => {
       this.isAPhoneScreen = data.columns4
@@ -44,8 +51,9 @@ export class AdvanceSearchComponent implements OnInit {
     // it opens the advance search by default
 
     if (
-      !Object.keys(this.searchValues).length ||
-      this.searchValues['searchQuery'] == null
+      this.searchValues &&
+      (!Object.keys(this.searchValues).length ||
+        this.searchValues['searchQuery'] == null)
     ) {
       this.showAdvanceSearch = true
       this.advanceSearch.setValue(this.searchValues)
