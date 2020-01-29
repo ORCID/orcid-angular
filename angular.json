@@ -23,6 +23,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "crossOrigin": "use-credentials",
+            "aot": true,
             "assets": [
               {
                 "glob": "**/*",
@@ -58,32 +59,6 @@
             ]
           },
           "configurations": {
-            "ar": {
-              "fileReplacements": [
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.ar.ts"
-                }
-              ],
-              "outputPath": "dist/ar/",
-              "i18nFile": "src/locale/messages.static.ar.xlf",
-              "i18nFormat": "xlf2",
-              "i18nLocale": "ar",
-              "baseHref": "/ar/"
-            },
-            "en": {
-              "fileReplacements": [
-                {
-                  "replace": "src/locale/messages.dynamic.en.ts",
-                  "with": "src/locale/messages.dynamic.en.ts"
-                }
-              ],
-              "outputPath": "dist/en/",
-              "i18nFile": "src/locale/messages.static.en.xlf",
-              "i18nFormat": "xlf2",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
             "local-en": {
               "fileReplacements": [
                 {
@@ -95,7 +70,6 @@
                   "with": "src/environments/environment.local.ts"
                 }
               ],
-              "aot": true,
               "outputPath": "dist/en/",
               "i18nFile": "src/locale/messages.static.en.xlf",
               "i18nFormat": "xlf2",
@@ -117,7 +91,7 @@
               "i18nFile": "src/locale/messages.static.fr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "fr",
-              "baseHref": "/fr/"
+              "baseHref": "."
             },
             "local-ar": {
               "fileReplacements": [
@@ -130,12 +104,11 @@
                   "with": "src/locale/messages.dynamic.ar.ts"
                 }
               ],
-              "aot": true,
               "outputPath": "dist/ar/",
               "i18nFile": "src/locale/messages.static.ar.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ar",
-              "baseHref": "/ar/"
+              "baseHref": "."
             },
             "local-ca": {
               "fileReplacements": [
@@ -152,7 +125,7 @@
               "i18nFile": "src/locale/messages.static.ca.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ca",
-              "baseHref": "/ca/"
+              "baseHref": "."
             },
             "local-cs": {
               "fileReplacements": [
@@ -169,7 +142,7 @@
               "i18nFile": "src/locale/messages.static.cs.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "cs",
-              "baseHref": "/cs/"
+              "baseHref": "."
             },
             "local-es": {
               "fileReplacements": [
@@ -186,7 +159,7 @@
               "i18nFile": "src/locale/messages.static.es.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "es",
-              "baseHref": "/es/"
+              "baseHref": "."
             },
             "local-it": {
               "fileReplacements": [
@@ -203,7 +176,7 @@
               "i18nFile": "src/locale/messages.static.it.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "it",
-              "baseHref": "/it/"
+              "baseHref": "."
             },
             "local-ja": {
               "fileReplacements": [
@@ -220,7 +193,7 @@
               "i18nFile": "src/locale/messages.static.ja.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ja",
-              "baseHref": "/ja/"
+              "baseHref": "."
             },
             "local-ko": {
               "fileReplacements": [
@@ -237,7 +210,7 @@
               "i18nFile": "src/locale/messages.static.ko.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ko",
-              "baseHref": "/ko/"
+              "baseHref": "."
             },
             "local-lr": {
               "fileReplacements": [
@@ -254,7 +227,7 @@
               "i18nFile": "src/locale/messages.static.lr.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "lr",
-              "baseHref": "/lr/"
+              "baseHref": "."
             },
             "local-pt": {
               "fileReplacements": [
@@ -271,7 +244,7 @@
               "i18nFile": "src/locale/messages.static.pt.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "pt",
-              "baseHref": "/pt/"
+              "baseHref": "."
             },
             "local-rl": {
               "fileReplacements": [
@@ -288,7 +261,7 @@
               "i18nFile": "src/locale/messages.static.rl.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "rl",
-              "baseHref": "/rl/"
+              "baseHref": "."
             },
             "local-ru": {
               "fileReplacements": [
@@ -305,7 +278,7 @@
               "i18nFile": "src/locale/messages.static.ru.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "ru",
-              "baseHref": "/ru/"
+              "baseHref": "."
             },
             "local-uk": {
               "fileReplacements": [
@@ -322,7 +295,7 @@
               "i18nFile": "src/locale/messages.static.uk.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "uk",
-              "baseHref": "/uk/"
+              "baseHref": "."
             },
             "local-xx": {
               "fileReplacements": [
@@ -339,7 +312,7 @@
               "i18nFile": "src/locale/messages.static.xx.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "xx",
-              "baseHref": "/xx/"
+              "baseHref": "."
             },
             "local-source": {
               "fileReplacements": [
@@ -356,7 +329,7 @@
               "i18nFile": "src/locale/messages.static.source.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "source",
-              "baseHref": "/source/"
+              "baseHref": "."
             },
             "local-zh_CN": {
               "fileReplacements": [
@@ -373,7 +346,7 @@
               "i18nFile": "src/locale/messages.static.zh_CN.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh_CN",
-              "baseHref": "/zh_CN/"
+              "baseHref": "."
             },
             "local-zh_TW": {
               "fileReplacements": [
@@ -390,7 +363,7 @@
               "i18nFile": "src/locale/messages.static.zh_TW.xlf",
               "i18nFormat": "xlf2",
               "i18nLocale": "zh_TW",
-              "baseHref": "/zh_TW/"
+              "baseHref": "."
             },
             "local-tomcat-en": {
               "fileReplacements": [
@@ -404,7 +377,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -430,7 +402,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -456,7 +427,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -482,7 +452,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -508,7 +477,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -534,7 +502,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -560,7 +527,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -586,7 +552,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -612,7 +577,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -638,7 +602,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -664,7 +627,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -690,7 +652,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -716,7 +677,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -742,7 +702,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -768,7 +727,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -794,7 +752,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -820,7 +777,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -846,7 +802,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -868,7 +823,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -894,7 +848,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -920,7 +873,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -946,7 +898,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -972,7 +923,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -998,7 +948,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1024,7 +973,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1050,7 +998,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1076,7 +1023,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1102,7 +1048,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1128,7 +1073,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1154,7 +1098,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1180,7 +1123,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1202,7 +1144,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1228,7 +1169,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1254,7 +1194,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1280,7 +1219,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1306,7 +1244,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1332,7 +1269,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1358,7 +1294,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1384,7 +1319,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1410,7 +1344,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1436,7 +1369,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1462,7 +1394,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1488,7 +1419,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1514,7 +1444,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1540,7 +1469,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1566,7 +1494,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1592,7 +1519,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1618,7 +1544,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1644,7 +1569,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1666,7 +1590,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1693,7 +1616,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1719,7 +1641,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1745,7 +1666,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1771,7 +1691,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1797,7 +1716,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1823,7 +1741,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1849,7 +1766,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1875,7 +1791,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1901,7 +1816,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1927,7 +1841,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1953,7 +1866,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1979,7 +1891,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2005,7 +1916,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2031,7 +1941,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2057,7 +1966,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2083,7 +1991,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2109,7 +2016,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2124,12 +2030,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-orcid:build"
+            "browserTarget": "ng-orcid:build:local-en"
           },
           "configurations": {
-            "ar": {
-              "browserTarget": "ng-orcid:build:ar"
-            },
             "local-fr": {
               "browserTarget": "ng-orcid:build:local-fr"
             },
