@@ -3,6 +3,7 @@ import { PlatformInfoService } from 'src/app/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
+import { ORCID_REGEXP } from 'src/app/constants'
 
 @Component({
   selector: 'app-advance-search',
@@ -15,15 +16,7 @@ export class AdvanceSearchComponent implements OnInit {
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder =
     LOCALE['ngOrcid.search.institutionNamePlaceholder']
-  advanceSearch = new FormGroup({
-    firstName: new FormControl('', []),
-    lastName: new FormControl('', []),
-    institution: new FormControl('', []),
-    keyword: new FormControl('', []),
-    otherFields: new FormControl('', []),
-    orcid: new FormControl('', [Validators.required]),
-  })
-
+  advanceSearch
   constructor(
     _platform: PlatformInfoService,
     @Inject(LOCALE_ID) private locale: string,
@@ -32,6 +25,17 @@ export class AdvanceSearchComponent implements OnInit {
     _platform.get().subscribe(data => {
       this.isAPhoneScreen = data.columns4
     })
+    this.advanceSearch = new FormGroup(
+      {
+        firstName: new FormControl('', []),
+        lastName: new FormControl('', []),
+        institution: new FormControl('', []),
+        keyword: new FormControl('', []),
+        otherFields: new FormControl('', []),
+        orcid: new FormControl('', [Validators.pattern(ORCID_REGEXP)]),
+      },
+      { validators: this.AtLeastOneInputHasValue() }
+    )
   }
 
   ngOnInit() {
@@ -52,9 +56,24 @@ export class AdvanceSearchComponent implements OnInit {
   }
 
   search() {
-    this.router.navigate(['/orcid-search/search'], {
-      queryParams: this.advanceSearch.value,
-    })
+    if (this.advanceSearch.valid) {
+      this.router.navigate(['/orcid-search/search'], {
+        queryParams: this.advanceSearch.value,
+      })
+    }
+  }
+
+  AtLeastOneInputHasValue = () => {
+    return (group: FormGroup) => {
+      if (
+        !Object.keys(group.value).some(
+          x => x !== 'otherFields' && group.value[x] !== ''
+        )
+      ) {
+        return { message: 'Please input at least one value' }
+      }
+      return null
+    }
   }
 
   // tslint:disable-next-line: member-ordering

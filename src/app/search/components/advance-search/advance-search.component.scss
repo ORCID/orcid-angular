@@ -3,7 +3,7 @@
 }
 
 .columns-12 :host {
-  section {
+  form {
     padding: 20px 24px;
   }
 
@@ -17,16 +17,13 @@
   }
 }
 
-section {
-  padding: 22px 4px;
-}
-
 .row.checkbox {
   padding-bottom: 8px;
   margin-bottom: 4px;
 }
 
-section {
+form {
+  padding: 22px 4px;
   border: solid 1px #979797;
   margin-bottom: 40px;
 }

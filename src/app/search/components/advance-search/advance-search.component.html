@@ -12,10 +12,11 @@
   </button>
 </div>
 
-<section
+<form
   *ngIf="showAdvanceSearch"
   [dir]="tempFixForOutlineFormInputCalculationIssue_Direction"
   [formGroup]="advanceSearch"
+  (ngSubmit)="search()"
 >
   <div class="row firstRow">
     <mat-form-field appearance="outline" class="col l3 m4 s4 grow">
@@ -72,14 +73,9 @@
 
   <div class="row">
     <div class="col l3 m4 s4">
-      <button
-        mat-raised-button
-        color="primary"
-        i18n="@@ngOrcid.search.search"
-        (click)="search()"
-      >
+      <button mat-raised-button color="primary" i18n="@@ngOrcid.search.search">
         SEARCH
       </button>
     </div>
   </div>
-</section>
+</form>
