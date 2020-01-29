@@ -9,7 +9,7 @@
   $background: map-get($theme, background);
 
   form {
-    border: solid 1px map-get($foreground, 'divider');
+    border: solid 1px map-get($foreground, 'slider-off-active ');
   }
 }
 
