@@ -16,7 +16,10 @@ import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validato
 @Component({
   selector: 'app-advance-search',
   templateUrl: './advance-search.component.html',
-  styleUrls: ['./advance-search.component.scss'],
+  styleUrls: [
+    './advance-search.component.scss-theme.scss',
+    './advance-search.component.scss',
+  ],
 })
 export class AdvanceSearchComponent implements OnInit {
   @Input() searchValues
