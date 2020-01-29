@@ -4,6 +4,7 @@ import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
+import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
 
 @Component({
   selector: 'app-advance-search',
@@ -34,13 +35,14 @@ export class AdvanceSearchComponent implements OnInit {
         otherFields: new FormControl('', []),
         orcid: new FormControl('', [Validators.pattern(ORCID_REGEXP)]),
       },
-      { validators: this.AtLeastOneInputHasValue() }
+      { validators: AtLeastOneInputHasValue() }
     )
   }
 
   ngOnInit() {
     // If the search query is empty or it has advance search parameter values
     // it opens the advance search by default
+
     if (
       !Object.keys(this.searchValues).length ||
       this.searchValues['searchQuery'] == null
@@ -60,19 +62,6 @@ export class AdvanceSearchComponent implements OnInit {
       this.router.navigate(['/orcid-search/search'], {
         queryParams: this.advanceSearch.value,
       })
-    }
-  }
-
-  AtLeastOneInputHasValue = () => {
-    return (group: FormGroup) => {
-      if (
-        !Object.keys(group.value).some(
-          x => x !== 'otherFields' && group.value[x] !== ''
-        )
-      ) {
-        return { message: 'Please input at least one value' }
-      }
-      return null
     }
   }
 
