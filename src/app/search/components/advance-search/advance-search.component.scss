@@ -34,4 +34,7 @@ button {
 
 .row.orcidInput {
   margin-bottom: 5px;
+  .col {
+    min-width: 295px;
+  }
 }
