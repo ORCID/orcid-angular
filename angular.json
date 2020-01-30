@@ -35,11 +35,6 @@
                 "glob": "src/favicon.ico",
                 "input": "src/",
                 "output": "/assets/"
-              },
-              {
-                "glob": "manifest.json",
-                "input": "src/",
-                "output": "/"
               }
             ],
             "styles": [
