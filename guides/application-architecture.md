@@ -33,7 +33,7 @@ Features should be added as a modules inside the `src/` folder, using the follow
 ng generate module helloworld --routing=true
 ```
 
-For a deeper explanation on how to create a feature module please read [create a feature module](https://github.com/ORCID/orcid-angular/blob/master/guides/create-feature-module.md)
+For a deeper explanation on how to create a feature module please read [create a feature module](https://orcid.github.io/orcid-angular/?path=/docs/docs-create-a-feature-module--page)
 
 ### Share module
 
