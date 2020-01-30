@@ -18,16 +18,16 @@ ng generate module hello-world --routing
 
 #### 3- Add a new page component to the new module.
 
-There are different types of components sometimes a component might represent a complete view, and sometimes a component can be a small reusable part of a view.
+There are different types of components, sometimes a component might represent a complete view and sometimes a component can be a small reusable part of a view.
 To make sense of that this project follows the module structure of having a folder called `pages` (which contains complete views) and another folder called `components` (for sub-elements of a page) inside the module.
 
 ```
 
 -hello-world
 ----components
--------- (component pages folders)
+-------- (contain one or many components folders)
 ----pages
--------- (component pages folders)
+-------- (contain one or many pages folders)
 ----hello-word-routing.module.ts
 ----hello-world.module.ts
 
