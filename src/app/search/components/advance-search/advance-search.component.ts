@@ -6,12 +6,13 @@ import {
   Input,
   Optional,
 } from '@angular/core'
-import { PlatformInfoService } from 'src/app/core'
+import { PlatformInfoService, WINDOW } from 'src/app/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
   selector: 'app-advance-search',
@@ -28,10 +29,13 @@ export class AdvanceSearchComponent implements OnInit {
   ngOrcidSearchInstitutionNamePlaceholder =
     LOCALE['ngOrcid.search.institutionNamePlaceholder']
   advanceSearch
+  togglzAdvanceSearch = false
   constructor(
     _platform: PlatformInfoService,
     @Inject(LOCALE_ID) private locale: string,
-    @Optional() private router: Router
+    @Optional() private router: Router,
+    _togglz: TogglzService,
+    @Inject(WINDOW) private window: Window
   ) {
     _platform.get().subscribe(data => {
       this.isAPhoneScreen = data.columns4
@@ -47,6 +51,9 @@ export class AdvanceSearchComponent implements OnInit {
       },
       { validators: AtLeastOneInputHasValue() }
     )
+    _togglz.getStateOf('ORCID_ANGULAR_ADVANCE_SEARCH').subscribe(value => {
+      this.togglzAdvanceSearch = value
+    })
   }
 
   ngOnInit() {
@@ -64,8 +71,12 @@ export class AdvanceSearchComponent implements OnInit {
   }
 
   toggleAdvanceSearch() {
-    this.showAdvanceSearch = !this.showAdvanceSearch
-    this.tempFixForOutlineFormInputCalculation()
+    if (this.togglzAdvanceSearch) {
+      this.showAdvanceSearch = !this.showAdvanceSearch
+      this.tempFixForOutlineFormInputCalculation()
+    } else {
+      this.window.location.href = '/orcid-search/search'
+    }
   }
 
   search() {
