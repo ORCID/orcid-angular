@@ -12,7 +12,6 @@ import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
-import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
   selector: 'app-advance-search',
