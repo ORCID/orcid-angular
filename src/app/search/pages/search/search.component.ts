@@ -52,7 +52,5 @@ export class SearchComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    console.log('INIT!')
-  }
+  ngOnInit() {}
 }
