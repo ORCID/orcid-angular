@@ -929,7 +929,7 @@
     </unit>
     <unit id="ngOrcid.search.showing">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:6</note>
+        <note category="location">app/search/pages/search/search.component.html:5</note>
       </notes>
       <segment>
         <source>Showing</source>
@@ -937,7 +937,7 @@
     </unit>
     <unit id="ngOrcid.search.of">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:8</note>
+        <note category="location">app/search/pages/search/search.component.html:7</note>
       </notes>
       <segment>
         <source>of</source>
@@ -945,7 +945,7 @@
     </unit>
     <unit id="ngOrcid.search.results">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:10</note>
+        <note category="location">app/search/pages/search/search.component.html:9</note>
       </notes>
       <segment>
         <source>results.</source>
@@ -953,30 +953,28 @@
     </unit>
     <unit id="ngOrcid.search.orcidID">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:20,22</note>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:65</note>
+        <note category="location">app/search/components/results/results.component.html:8,10</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:63</note>
       </notes>
       <segment>
         <source>
-            ORCID ID
-          </source>
+          ORCID ID
+        </source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.firstName">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:23,25</note>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:22</note>
+        <note category="location">app/search/components/results/results.component.html:11</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:23</note>
       </notes>
       <segment>
-        <source>
-            First Name
-          </source>
+        <source>First Name</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.lastName">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:26</note>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:26</note>
+        <note category="location">app/search/components/results/results.component.html:12</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:27</note>
       </notes>
       <segment>
         <source>Last Name</source>
@@ -984,27 +982,27 @@
     </unit>
     <unit id="ngOrcid.search.otherNames">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:27,29</note>
+        <note category="location">app/search/components/results/results.component.html:13,15</note>
       </notes>
       <segment>
         <source>
-            Other Names
-          </source>
+          Other Names
+        </source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.affiliations">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:30,32</note>
+        <note category="location">app/search/components/results/results.component.html:16,18</note>
       </notes>
       <segment>
         <source>
-            Affiliations
-          </source>
+          Affiliations
+        </source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.noResults">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:63,65</note>
+        <note category="location">app/search/components/results/results.component.html:46,48</note>
       </notes>
       <segment>
         <source>
@@ -1022,7 +1020,7 @@
     </unit>
     <unit id="ngOrcid.search.institutionName">
       <notes>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:31</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:32</note>
       </notes>
       <segment>
         <source>Institution Name</source>
@@ -1030,7 +1028,7 @@
     </unit>
     <unit id="ngOrcid.search.institutionNamePlaceholder">
       <notes>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:44</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:37</note>
         <note category="location">locale/i18n.pseudo.component.html:78</note>
       </notes>
       <segment>
@@ -1039,7 +1037,7 @@
     </unit>
     <unit id="ngOrcid.search.keyword">
       <notes>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:48</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:46</note>
       </notes>
       <segment>
         <source>Keyword</source>
@@ -1047,7 +1045,7 @@
     </unit>
     <unit id="ngOrcid.search.otherNameFields">
       <notes>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:59</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:57</note>
       </notes>
       <segment>
         <source>Also search other name fields</source>
@@ -1055,7 +1053,7 @@
     </unit>
     <unit id="ngOrcid.search.orcidIdPatterError">
       <notes>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:67,69</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:65,67</note>
       </notes>
       <segment>
         <source>
@@ -1065,7 +1063,7 @@
     </unit>
     <unit id="ngOrcid.search.search">
       <notes>
-        <note category="location">app/search/components/advance-search/advance-search.component.html:75,77</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:73,75</note>
       </notes>
       <segment>
         <source>
@@ -1560,6 +1558,54 @@
       </notes>
       <segment>
         <source>My ORCID Record</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.firstPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:80</note>
+      </notes>
+      <segment>
+        <source>First page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.itemsPerPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:81</note>
+      </notes>
+      <segment>
+        <source>Items per page:</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.lastPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:82</note>
+      </notes>
+      <segment>
+        <source>Last page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.nextPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:83</note>
+      </notes>
+      <segment>
+        <source>Next page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.previousPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:84</note>
+      </notes>
+      <segment>
+        <source>Previous page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.of">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:85</note>
+      </notes>
+      <segment>
+        <source>of</source>
       </segment>
     </unit>
   </file>

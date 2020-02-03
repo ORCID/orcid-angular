@@ -25,6 +25,7 @@ const baseGithubTranslationFilesURL = [
   'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/test_messages_',
   'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/ng_orcid_',
   'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/ng_orcid_search_',
+  'https://raw.githubusercontent.com/ORCID/ORCID-Source/ngOrcidSearch/orcid-core/src/main/resources/i18n/ng_orcid_material_',
 ]
 const languages = [
   {

@@ -13,6 +13,7 @@ import {
   MatInputModule,
   MatCheckboxModule,
   MatProgressBarModule,
+  MatPaginatorIntl,
 } from '@angular/material'
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component'
 import { BidiModule } from '@angular/cdk/bidi'
