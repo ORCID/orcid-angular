@@ -14,6 +14,8 @@ export class GoogleAnalyticsService {
   reportPageView(url: string) {
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       page_path: url,
+      anonymize_ip: true,
+      sample_rate: '70',
     })
   }
 }
