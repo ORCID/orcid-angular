@@ -29,12 +29,10 @@ export class AdvanceSearchComponent implements OnInit {
   ngOrcidSearchInstitutionNamePlaceholder =
     LOCALE['ngOrcid.search.institutionNamePlaceholder']
   advanceSearch
-  togglzAdvanceSearch = false
   constructor(
     _platform: PlatformInfoService,
     @Inject(LOCALE_ID) private locale: string,
     @Optional() private router: Router,
-    _togglz: TogglzService,
     @Inject(WINDOW) private window: Window
   ) {
     _platform.get().subscribe(data => {
@@ -51,9 +49,6 @@ export class AdvanceSearchComponent implements OnInit {
       },
       { validators: AtLeastOneInputHasValue() }
     )
-    _togglz.getStateOf('ORCID_ANGULAR_ADVANCE_SEARCH').subscribe(value => {
-      this.togglzAdvanceSearch = value
-    })
   }
 
   ngOnInit() {
@@ -71,12 +66,8 @@ export class AdvanceSearchComponent implements OnInit {
   }
 
   toggleAdvanceSearch() {
-    if (this.togglzAdvanceSearch) {
-      this.showAdvanceSearch = !this.showAdvanceSearch
-      this.tempFixForOutlineFormInputCalculation()
-    } else {
-      this.window.location.href = '/orcid-search/search'
-    }
+    this.showAdvanceSearch = !this.showAdvanceSearch
+    this.tempFixForOutlineFormInputCalculation()
   }
 
   search() {
