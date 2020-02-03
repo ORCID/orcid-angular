@@ -16,3 +16,20 @@ mat-paginator {
     margin-right: 0;
   }
 }
+
+.h-baseline {
+  mat-paginator {
+    .mat-paginator-container {
+      justify-content: flex-start;
+    }
+    .mat-paginator-range-label {
+      margin-left: 0;
+    }
+  }
+}
+
+[dir='rtl'] {
+  .h-baseline mat-paginator .mat-paginator-range-label {
+    margin-right: 0;
+  }
+}

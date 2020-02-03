@@ -12,6 +12,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatCheckboxModule,
+  MatProgressBarModule,
 } from '@angular/material'
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component'
 import { BidiModule } from '@angular/cdk/bidi'
@@ -32,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     BidiModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
   ],
   exports: [ResultsComponent, AdvanceSearchComponent],
 })

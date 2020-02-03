@@ -11,9 +11,6 @@ export class SearchService {
 
   search(querryParam: Params) {
     console.log('PARAMS ', querryParam)
-    return of(searchResults).pipe(
-      delay(300),
-      startWith(<string>null)
-    )
+    return of(searchResults).pipe(delay(3000))
   }
 }

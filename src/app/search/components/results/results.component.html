@@ -1,53 +1,36 @@
-<section
-  class="mat-body-2"
+<div
+  class="row table-container"
   *ngIf="searchResults && searchResults.results && searchResults.results.length"
 >
-  <div class="row h-baseline" aria-live="polite">
-    <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
-    12
-    <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
-    12
-    <ng-container i18n="@@ngOrcid.search.results">results.</ng-container>
-  </div>
-  <div class="row h-baseline"><mat-paginator></mat-paginator></div>
-  <div class="row table-container">
-    <table aria-label="Search results">
-      <thead>
-        <tr>
-          <th
-            class="mat-body-2 orcid-id-column"
-            i18n="@@ngOrcid.search.orcidID"
-          >
-            ORCID ID
-          </th>
-          <th class="mat-body-2" i18n="@@ngOrcid.search.firstName">
-            First Name
-          </th>
-          <th class="mat-body-2" i18n="@@ngOrcid.search.lastName">Last Name</th>
-          <th class="mat-body-2" i18n="@@ngOrcid.search.otherNames">
-            Other Names
-          </th>
-          <th class="mat-body-2" i18n="@@ngOrcid.search.affiliations">
-            Affiliations
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let orcid of searchResults.results">
-          <td class="orcid-id-column">
-            <a href="{{orcid.orcid}}"> {{ orcid.orcid }}</a>
-          </td>
-          <td>{{ orcid.firstName }}</td>
-          <td>{{ orcid.lastName }}</td>
-          <td>{{ orcid.otherNames }}</td>
-          <td>{{ orcid.affiliations }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="row h-baseline"><mat-paginator></mat-paginator></div>
-</section>
+  <table aria-label="Search results">
+    <thead>
+      <tr>
+        <th class="mat-body-2 orcid-id-column" i18n="@@ngOrcid.search.orcidID">
+          ORCID ID
+        </th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.firstName">First Name</th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.lastName">Last Name</th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.otherNames">
+          Other Names
+        </th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.affiliations">
+          Affiliations
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orcid of searchResults.results">
+        <td class="orcid-id-column">
+          <a href="{{orcid.orcid}}"> {{ orcid.orcid }}</a>
+        </td>
+        <td>{{ orcid.firstName }}</td>
+        <td>{{ orcid.lastName }}</td>
+        <td>{{ orcid.otherNames }}</td>
+        <td>{{ orcid.affiliations }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <section
   class="col notFoundResults"
