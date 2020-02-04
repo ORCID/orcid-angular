@@ -2,6 +2,8 @@
 
 ## Serve the frond-end locally
 
+Before running the following steps make sure you have `yarn` installed
+
 1- Clone the repo
 
 ```
@@ -12,20 +14,50 @@ git clone https://github.com/ORCID/orcid-angular
 
 ```
 cd orcid-angular
-npm install
+yarn
 ```
 
 3- Serve the front-end locally
 
 ```
-npm run start:local
+yarn start
 ```
 
-To access the backend endpoints this requires to have a copy of [ORCID-Source](https://github.com/ORCID/ORCID-Source) running locally.
+## Serve the frond-end locally using other languages
+
+At the moment the only way to run the application on development time with a translation file is using AOT compilations.
+
+1- First generate the translations files
+
+```
+yarn build:i18n
+```
+
+2- Run the application on the language you want using one of the following options
+
+```
+yarn start:en ## Runs the application in using the english properties
+yarn start:fr ## Runs the application in using the french properties
+yarn start:ar ## Runs the application in using the arabic properties
+yarn start:es ## Runs the application in using the spanish properties
+yarn start:ca ## ... and so on
+yarn start:cs
+yarn start:it
+yarn start:ja
+yarn start:pt
+yarn start:ru
+yarn start:uk
+yarn start:zh_CN
+yarn start:zh_TW
+yarn start:lr ## These last fourth configurations are used only for testing
+yarn start:rl
+yarn start:xx
+yarn start:source
+```
 
 ## Set up your source code editor (optional)
 
-The following tools are not required to work on the project but they facilitate the development process, please read more about these tools on the provided url.
+The following tools are not required to work on the project but they facilitate the development process, please read more about these tools on the provided URLs.
 
 1- Download [Visual Studio Code](https://code.visualstudio.com/) and install it
 
@@ -33,34 +65,13 @@ The following tools are not required to work on the project but they facilitate 
 
 3- Go to VSCode menu Code/Preferences/Settings search for `Format` and select `esbenp.prettier-vscode`. You might also activate the `Editor: Format On Save` checkbox.
 
-## Build and test the application locally
-
-1- Install firebase tools
-
-```
-npm run install firebase/tools -g
-```
-
-2- Login to your firebase account
-
-```
-firebase login
-```
-
-3- Build and serve the app locally
-
-```
-npm run build:local
-firebase serve
-```
-
 ## Build the application for other environments
 
 The following commands are used to build the application for non-local environments
 
-- `npm run build:prod`
-- `npm run build:sandbox`
-- `npm run build:qa`
+- `yarn build:prod`
+- `yarn build:sandbox`
+- `yarn build:qa`
 
 ## Learn more
 
