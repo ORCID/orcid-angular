@@ -6,12 +6,13 @@ import {
   Input,
   Optional,
 } from '@angular/core'
-import { PlatformInfoService, WINDOW } from 'src/app/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-advance-search',

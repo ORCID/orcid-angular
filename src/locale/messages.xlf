@@ -186,103 +186,6 @@
   </source>
       </segment>
     </unit>
-    <unit id="public-layout.sign_in">
-      <notes>
-        <note category="description">#upperCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:29</note>
-        <note category="location">locale/i18n.pseudo.component.html:8</note>
-      </notes>
-      <segment>
-        <source>SIGN IN</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.viewMyOrcid">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:41,43</note>
-      </notes>
-      <segment>
-        <source>
-          View my ORCID record
-        </source>
-      </segment>
-    </unit>
-    <unit id="workspace.notifications">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:49</note>
-        <note category="location">locale/i18n.pseudo.component.html:75</note>
-      </notes>
-      <segment>
-        <source>Inbox</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.accountSetting">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:53</note>
-      </notes>
-      <segment>
-        <source>Account settings </source>
-      </segment>
-    </unit>
-    <unit id="workspace.developer_tools">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:66</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:79</note>
-        <note category="location">locale/i18n.pseudo.component.html:68</note>
-      </notes>
-      <segment>
-        <source>Developer tools </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.selfService">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:87</note>
-      </notes>
-      <segment>
-        <source>Member tools </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.manageMembers">
-      <notes>
-        <note category="description">#sentenceCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:95</note>
-      </notes>
-      <segment>
-        <source>Manage members</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.adminPage">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
-      </notes>
-      <segment>
-        <source>Admin page</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.logout">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:107</note>
-      </notes>
-      <segment>
-        <source>Logout</source>
-      </segment>
-    </unit>
-    <unit id="public-layout.amount_ids">
-      <notes>
-        <note category="location">app/layout/statistics/statistics.component.html:6,7</note>
-      </notes>
-      <segment>
-        <source>
-          ORCID iDs and counting.</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.seeMoreStatics">
-      <notes>
-        <note category="location">app/layout/statistics/statistics.component.html:10</note>
-      </notes>
-      <segment>
-        <source>See more statistics</source>
-      </segment>
-    </unit>
     <unit id="home.distinguish_yourself">
       <notes>
         <note category="description">#sentenceCase</note>
@@ -636,6 +539,103 @@
       </notes>
       <segment>
         <source>contact us</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sign_in">
+      <notes>
+        <note category="description">#upperCase</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:29</note>
+        <note category="location">locale/i18n.pseudo.component.html:8</note>
+      </notes>
+      <segment>
+        <source>SIGN IN</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.viewMyOrcid">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:41,43</note>
+      </notes>
+      <segment>
+        <source>
+          View my ORCID record
+        </source>
+      </segment>
+    </unit>
+    <unit id="workspace.notifications">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:49</note>
+        <note category="location">locale/i18n.pseudo.component.html:75</note>
+      </notes>
+      <segment>
+        <source>Inbox</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.accountSetting">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:53</note>
+      </notes>
+      <segment>
+        <source>Account settings </source>
+      </segment>
+    </unit>
+    <unit id="workspace.developer_tools">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:66</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:79</note>
+        <note category="location">locale/i18n.pseudo.component.html:68</note>
+      </notes>
+      <segment>
+        <source>Developer tools </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.selfService">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:87</note>
+      </notes>
+      <segment>
+        <source>Member tools </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.manageMembers">
+      <notes>
+        <note category="description">#sentenceCase</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:95</note>
+      </notes>
+      <segment>
+        <source>Manage members</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.adminPage">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
+      </notes>
+      <segment>
+        <source>Admin page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.logout">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:107</note>
+      </notes>
+      <segment>
+        <source>Logout</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.amount_ids">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:6,7</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID iDs and counting.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.seeMoreStatics">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:10</note>
+      </notes>
+      <segment>
+        <source>See more statistics</source>
       </segment>
     </unit>
     <unit id="public_profile.empty_profile">
