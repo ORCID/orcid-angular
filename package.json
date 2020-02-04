@@ -53,12 +53,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.2.4",
-    "@angular/cdk": "^8.1.4",
+    "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.4",
     "@angular/compiler": "^8.2.4",
     "@angular/core": "^8.2.4",
     "@angular/forms": "^8.2.4",
-    "@angular/material": "^8.1.4",
+    "@angular/material": "^8.2.3",
     "@angular/platform-browser": "^8.2.4",
     "@angular/platform-browser-dynamic": "^8.2.4",
     "@angular/pwa": "^0.13.9",
@@ -138,11 +138,43 @@
     }
   },
   "bit": {
-    "env": {},
+    "env": {
+      "compiler": "bit.envs/compilers/angular@0.1.9"
+    },
     "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm",
+    "packageManager": "yarn",
+    "resolveModules": {
+      "aliases": {
+        "src": "/src"
+      }
+    },
     "overrides": {
-      "orcid.angular/orcid-theme": {}
+      "orcid.angular/*": {
+        "dependencies": {
+          "@angular/material": "-",
+          "@angular/core": "-",
+          "@angular/animations": "-",
+          "@angular/common": "-",
+          "@angular/cdk": "-",
+          "@angular/forms": "-",
+          "rxjs": "-"
+        },
+        "peerDependencies": {
+          "@angular/material": "^8.0.0",
+          "@angular/core": "^8.0.0",
+          "@angular/animations": "^8.0.0",
+          "@angular/common": "^8.0.0", 
+          "@angular/cdk": "^8.0.0",
+          "@angular/forms": "^8.0.0",
+          "rxjs": "^6.0.0 "
+        }
+      },
+      "orcid.angular/orcid-theme": {
+        "env": {
+          "compiler": "-"
+        },
+        "propagate": true
+      }
     }
   }
 }

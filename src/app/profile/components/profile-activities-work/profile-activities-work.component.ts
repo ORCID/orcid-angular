@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { first } from 'rxjs/operators'
 import { itemMarginAnimation, nestedListAnimation } from 'src/app/animations'
-import { PlatformInfoService } from 'src/app/core'
 import { WorksService } from 'src/app/core/works/works.service'
 import { WorkGroup } from 'src/app/types'
 import { Work } from 'src/app/types/works.endpoint'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-profile-activities-work',

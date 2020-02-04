@@ -1,8 +1,7 @@
 import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
 
-import { PlatformInfoService } from './core/platform-info/platform-info.service'
-import { GRID_MARGINS } from './constants'
-import { PlatformInfo } from './types'
+import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
+import { PlatformInfo } from './cdk/platform-info'
 
 @Component({
   selector: 'app-root',

@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { PlatformInfoService, WINDOW } from 'src/app/core'
-import { PlatformInfo } from 'src/app/types'
+import { WINDOW } from 'src/app/cdk/window'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
+import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-search',

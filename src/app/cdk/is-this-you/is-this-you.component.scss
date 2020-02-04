@@ -1,0 +1,52 @@
+.non-fixed {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+
+.fixed {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+table {
+  text-align: left;
+  th {
+    white-space: nowrap;
+  }
+  .affiliation-colum {
+    width: 280px;
+  }
+}
+th,
+td {
+  border-bottom: 1px solid #ddd;
+  vertical-align: baseline;
+}
+th,
+td {
+  padding-right: 10px;
+}
+
+.container {
+  max-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+:host.columns-8,
+:host.columns-4 {
+  .fixed {
+    flex-direction: column;
+  }
+}
