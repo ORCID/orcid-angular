@@ -2,12 +2,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { PlatformInfo } from 'src/app/types/platform-info.local'
-import { GRID_GUTTER, GRID_COLUMNS, GRID_MARGINS } from 'src/app/constants'
+import { PlatformInfo } from './platform-info.type'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class PlatformInfoService {
   platformSubject = new BehaviorSubject<PlatformInfo>(null)
 
