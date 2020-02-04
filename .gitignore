@@ -60,3 +60,4 @@ src/locale/translate-file-generator.js
 *.xlf
 src/locale/messages.translation.log.json
 scripts/*.js
+sripts/lighthouse/environment.ts.js

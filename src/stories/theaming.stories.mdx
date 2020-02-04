@@ -9,14 +9,14 @@ import { Story, Meta } from '@storybook/addon-docs/blocks'
 
 ## Theaming components
 
-While creating new components usually colors from the design foundation are required. This document describes how to apply these colors.
-
-To archive, this Angular Material use a SASS map `theme` that contains 5 different palettes.
+While creating new components usually colors from the design foundation are required.
+This document describes how to apply these colors with the same Angular Material method that uses a
+`theme` that contains 5 different palettes
 
 ### Orcid app palettes
 
 These palettes define a background and foreground contrast for each hue value of the application colors.
-The colors of these palettes can be extracted usign the functions `mat-color($palette-name, $hue)` or `mat-contrast ( $palette-name, $hue)`.
+The colors of these palettes can be extracted using the functions `mat-color($palette-name, $hue)` or `mat-contrast ( $palette-name, $hue)`.
 
 ##### primary
 
@@ -89,7 +89,7 @@ A simple example of this is the SearchComponent which uses colors from the backg
 }
 ```
 
-⚠️After declaring this mixing it must be imported and declared in `src/assets/scss/material.orcid-components.scss` to be declared globally for the application.
+After declaring this mixing it must be declared in the component decorator on the `styleUrls` array
 
 ## 🔧Adding/overwriting the colors of the palettes
 

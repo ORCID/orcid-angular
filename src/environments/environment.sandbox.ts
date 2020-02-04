@@ -1,5 +1,3 @@
-import { EnvironmentBannerModule } from '../app/environment-banner/environment-banner.module'
-
 export const environment = {
   production: true,
   API_NEWS: 'https://orcid.org/blog/feed',
