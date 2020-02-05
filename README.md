@@ -25,7 +25,7 @@ yarn start
 
 ## Serve the frond-end locally using other languages
 
-At the moment the only way to run the application on development time with a language file is using AOT compilations.
+At the moment the only way to run the application on development time with a translation file is using AOT compilations.
 
 1- First generate the translations files
 
@@ -57,7 +57,7 @@ yarn start:source
 
 ## Set up your source code editor (optional)
 
-The following tools are not required to work on the project but they facilitate the development process, please read more about these tools on the provided url.
+The following tools are not required to work on the project but they facilitate the development process, please read more about these tools on the provided URLs.
 
 1- Download [Visual Studio Code](https://code.visualstudio.com/) and install it
 

@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, Inject } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { matFormFieldAnimations } from '@angular/material'
-import { WINDOW } from 'src/app/core'
+import { WINDOW } from 'src/app/cdk/window'
 import { TLD_REGEXP } from 'src/app/constants'
 
 @Component({

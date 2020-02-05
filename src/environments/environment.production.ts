@@ -4,8 +4,8 @@ export const environment = {
   API_WEB: '//orcid.org/',
   BASE_URL: '//orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
-  GOOGLE_ANALYTICS: 'UA-17492803-4',
   SHOW_TEST_WARNING_BANNER: false,
+  GOOGLE_ANALYTICS: 'UA-17492803-4',
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',

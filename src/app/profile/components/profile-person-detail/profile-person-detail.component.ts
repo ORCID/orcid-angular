@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { heightAnimation, rotateAnimation } from 'src/app/animations'
-import { PlatformInfoService } from 'src/app/core'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-profile-person-detail',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core'
 import { environment } from 'src/environments/environment'
-import { WINDOW } from 'src/app/core'
+import { WINDOW } from 'src/app/cdk/window'
 import { CookieService } from 'ngx-cookie-service'
 
 @Component({

@@ -1,0 +1,42 @@
+<div class="container" *ngIf="data && data.duplicateRecords">
+  <h1 class="mat-display-1 modal-title">{{ data.titleLabel || titleLabel }}</h1>
+  <div class="non-fixed">
+    <p class="mat-body-1">
+      {{ data.bodyLabel || bodyLabel }}
+      <a href="https://support.orcid.org/hc/en-us/requests/new">
+        {{ data.contactLabel || contactLabel }}
+      </a>
+    </p>
+
+    <table style="width:100%" class="mat-subheading-2">
+      <tr>
+        <th>{{ data.firstNameLabel || firstNameLabel }}</th>
+        <th>{{ data.lastNameLabel || lastNameLabel }}</th>
+        <th class="affiliation-colum">
+          {{ data.affiliationsLabel || affiliationsLabel }}
+        </th>
+        <th>{{ data.dateCreatedLabel || dateCreatedLabel }}</th>
+        <th>{{ data.viewRecordLabel || viewRecordLabel }}</th>
+      </tr>
+      <tr *ngFor="let record of data.duplicateRecords">
+        <td>{{ record.givenNames }}</td>
+        <td>{{ record.familyNames }}</td>
+        <td>{{ record.institution }}</td>
+        <td>{{ record.createdDate }}</td>
+        <td>
+          <button mat-button color="primary" (click)="gotoNewTab(record.orcid)">
+            {{ data.viewRecordLabel || viewRecordLabel }}
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="fixed">
+    <button mat-button color="primary" (click)="goto('sign-in')">
+      {{ data.signinLabel || signinLabel }}
+    </button>
+    <button mat-raised-button color="primary" (click)="confirmRegistration()">
+      {{ data.continueLabel || continueLabel }}
+    </button>
+  </div>
+</div>

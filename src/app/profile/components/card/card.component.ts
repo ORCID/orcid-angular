@@ -4,7 +4,7 @@ import {
   heightAnimationDefaultOpen,
   rotateAnimation,
 } from 'src/app/animations'
-import { PlatformInfoService } from 'src/app/core'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-card',

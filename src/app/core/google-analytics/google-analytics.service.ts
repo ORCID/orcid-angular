@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core'
-import { WINDOW } from '../window/window.service'
 import { environment } from 'src/environments/environment'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Injectable({
   providedIn: 'root',

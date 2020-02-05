@@ -6,12 +6,13 @@ import {
   Input,
   Optional,
 } from '@angular/core'
-import { PlatformInfoService, WINDOW } from 'src/app/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
+import { WINDOW } from 'src/app/cdk/window'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 @Component({
   selector: 'app-advance-search',
@@ -51,16 +52,21 @@ export class AdvanceSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    // If the search query is empty or it has advance search parameter values
-    // it opens the advance search by default
-
+    // If the search query is empty and it has advance search parameter values
+    // it opens the advance search with the search parameters
     if (
       this.searchValues &&
-      (!Object.keys(this.searchValues).length ||
-        this.searchValues['searchQuery'] == null)
+      Object.keys(this.searchValues).length &&
+      this.searchValues['searchQuery'] == null
     ) {
       this.showAdvanceSearch = true
       this.advanceSearch.setValue(this.searchValues)
+    }
+
+    // If has no parameters
+    // it opens the advance search empty
+    if (this.searchValues && !Object.keys(this.searchValues).length) {
+      this.showAdvanceSearch = true
     }
   }
 
