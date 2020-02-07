@@ -23,7 +23,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
   ],
 })
 export class AdvanceSearchComponent implements OnInit {
-  @Input() searchValues
+  @Input() searchValues: SearchResults
   isAPhoneScreen = false
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder =
@@ -31,6 +31,7 @@ export class AdvanceSearchComponent implements OnInit {
   advanceSearch
   constructor(
     _platform: PlatformInfoService,
+    private _search: SearchService,
     @Inject(LOCALE_ID) private locale: string,
     @Optional() private router: Router,
     @Inject(WINDOW) private window: Window
@@ -78,7 +79,9 @@ export class AdvanceSearchComponent implements OnInit {
   search() {
     if (this.advanceSearch.valid) {
       this.router.navigate(['/orcid-search/search'], {
-        queryParams: this.advanceSearch.value,
+        queryParams: this._search.trimSearchParameters(
+          this.advanceSearch.value
+        ),
       })
     }
   }
