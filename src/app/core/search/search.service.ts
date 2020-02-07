@@ -64,7 +64,6 @@ export class SearchService {
           )
         }
       }
-      console.log(escapedParams)
       return (
         `?q=${encodeURIComponent(searchParameters.join(' AND '))}` +
         this.handlePagination(querryParam)
