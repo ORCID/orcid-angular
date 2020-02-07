@@ -32,7 +32,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder =
     LOCALE['ngOrcid.search.institutionNamePlaceholder']
-  advanceSearch
+  advanceSearch: FormGroup
   constructor(
     _platform: PlatformInfoService,
     private _search: SearchService,
@@ -64,13 +64,20 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
       this.searchValues['searchQuery'] == null
     ) {
       this.showAdvanceSearch = true
-      this.advanceSearch.setValue(this.searchValues)
+      this.advanceSearch.patchValue(this.searchValues)
     }
 
     // If has no parameters
     // it opens the advance search empty
     if (this.searchValues && !Object.keys(this.searchValues).length) {
       this.showAdvanceSearch = true
+    }
+
+    // If is a quick search
+    // clean and close the advance search
+    if (this.searchValues && this.searchValues['searchQuery']) {
+      this.showAdvanceSearch = false
+      this.advanceSearch.reset()
     }
   }
 
