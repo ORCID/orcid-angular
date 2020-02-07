@@ -88,6 +88,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   }
 
   search() {
+    console.log(this.advanceSearch.value)
     if (this.advanceSearch.valid) {
       this.router.navigate(['/orcid-search/search'], {
         queryParams: this._search.trimSearchParameters(
