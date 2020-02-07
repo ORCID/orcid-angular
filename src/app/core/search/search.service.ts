@@ -11,7 +11,6 @@ export class SearchService {
   constructor(private _http: HttpClient) {}
 
   search(querryParam: SearchParameters): Observable<SearchResults> {
-    console.log(querryParam)
     return this._http.get<SearchResults>(
       `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
         querryParam
