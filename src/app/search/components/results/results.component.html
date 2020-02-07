@@ -32,12 +32,13 @@
   </table>
 </div>
 
+<!-- Use hidden to allow image to be preloaded -->
 <section
   class="col notFoundResults"
-  *ngIf="
-    searchResults &&
-    (!searchResults['expanded-result'] ||
-      !searchResults['expanded-result'].length)
+  [hidden]="
+    !searchResults ||
+    (searchResults['expanded-result'] &&
+      searchResults['expanded-result'].length)
   "
 >
   <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />

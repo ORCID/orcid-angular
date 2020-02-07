@@ -55,6 +55,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
       { validators: AtLeastOneInputHasValue() }
     )
   }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     // it opens the advance search with the search parameters
