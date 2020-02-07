@@ -13,6 +13,8 @@ import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
 import { WINDOW } from 'src/app/cdk/window'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { SearchResults } from 'src/app/types'
+import { SearchService } from 'src/app/core/search/search.service'
 
 @Component({
   selector: 'app-advance-search',
