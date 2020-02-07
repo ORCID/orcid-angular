@@ -14,6 +14,7 @@ export class GoogleAnalyticsService {
   reportPageView(url: string) {
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       page_path: url,
+      page_location: window.location.origin,
     })
   }
 }
