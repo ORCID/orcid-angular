@@ -65,9 +65,6 @@ export class SearchService {
           )
         }
       }
-      if (escapedParams.pageSize) {
-      }
-      console.log(searchParameters)
       console.log(escapedParams)
       return (
         `?q=${encodeURIComponent(searchParameters.join(' AND '))}` +
@@ -77,7 +74,7 @@ export class SearchService {
   }
 
   handlePagination(querryParam: SearchParameters): string {
-    return `&start=${querryParam.resultsOffset ||
+    return `&start=${querryParam.pageIndex * querryParam.pageSize ||
       0}&rows=${querryParam.pageSize || 50}`
   }
 
@@ -91,7 +88,9 @@ export class SearchService {
   trimSearchParameters(value: SearchParameters) {
     const trimParameters = {}
     Object.keys(value).forEach(element => {
-      trimParameters[element] = value[element].trim()
+      if (typeof value[element] === 'string') {
+        trimParameters[element] = value[element].trim()
+      }
     })
     return trimParameters
   }

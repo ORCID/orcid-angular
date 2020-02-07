@@ -5,6 +5,8 @@ import {
   Inject,
   Input,
   Optional,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
@@ -24,7 +26,7 @@ import { SearchService } from 'src/app/core/search/search.service'
     './advance-search.component.scss',
   ],
 })
-export class AdvanceSearchComponent implements OnInit {
+export class AdvanceSearchComponent implements OnInit, OnChanges {
   @Input() searchValues: SearchResults
   isAPhoneScreen = false
   showAdvanceSearch = false
@@ -54,8 +56,7 @@ export class AdvanceSearchComponent implements OnInit {
     )
   }
 
-  ngOnInit() {
-    // If the search query is empty and it has advance search parameter values
+  ngOnChanges(changes: SimpleChanges): void {
     // it opens the advance search with the search parameters
     if (
       this.searchValues &&

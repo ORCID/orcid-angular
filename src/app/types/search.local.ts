@@ -6,6 +6,6 @@ export interface SearchParameters {
   keyword?: string
   otherFields?: string
   orcid?: string
-  resultsOffset?: number
+  pageIndex?: number
   pageSize?: number
 }
