@@ -83,11 +83,16 @@ export class SearchService {
     return escapedText.toLowerCase().trim()
   }
 
+  // Remove empty values and trim strings
   trimSearchParameters(value: SearchParameters) {
     const trimParameters = {}
     Object.keys(value).forEach(element => {
       if (typeof value[element] === 'string') {
-        trimParameters[element] = value[element].trim()
+        if (value[element].trim()) {
+          trimParameters[element] = value[element].trim()
+        }
+      } else {
+        trimParameters[element] = value[element]
       }
     })
     return trimParameters
