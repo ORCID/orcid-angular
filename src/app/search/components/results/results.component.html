@@ -1,6 +1,6 @@
 <div
   class="row table-container"
-  *ngIf="searchResults && searchResults.results && searchResults.results.length"
+  *ngIf="resultsContent && resultsContent.length"
 >
   <table aria-label="Search results">
     <thead>
@@ -19,14 +19,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let orcid of searchResults.results">
+      <tr *ngFor="let orcid of resultsContent">
         <td class="orcid-id-column">
-          <a href="{{orcid.orcid}}"> {{ orcid.orcid }}</a>
+          <a href="{{orcid['orcid-id']}}"> {{ orcid['orcid-id'] }}</a>
         </td>
-        <td>{{ orcid.firstName }}</td>
-        <td>{{ orcid.lastName }}</td>
-        <td>{{ orcid.otherNames }}</td>
-        <td>{{ orcid.affiliations }}</td>
+        <td>{{ orcid['given-names'] }}</td>
+        <td>{{ orcid['family-names'] }}</td>
+        <td>{{ orcid['other-name'] }}</td>
+        <td>{{ orcid['institution-name'] }}</td>
       </tr>
     </tbody>
   </table>
@@ -35,7 +35,9 @@
 <section
   class="col notFoundResults"
   *ngIf="
-    searchResults && (!searchResults.results || !searchResults.results.length)
+    searchResults &&
+    (!searchResults['expanded-result'] ||
+      !searchResults['expanded-result'].length)
   "
 >
   <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />
