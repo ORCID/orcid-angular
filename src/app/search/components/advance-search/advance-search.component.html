@@ -1,5 +1,14 @@
 <div class="row h-end">
-  <button mat-button color="primary" (click)="toggleAdvanceSearch()">
+  <button
+    mat-button
+    color="primary"
+    (click)="toggleAdvanceSearch()"
+    [attr.aria-label]="
+      !showAdvanceSearch
+        ? 'Show advance search form'
+        : 'Hide advance search form'
+    "
+  >
     <ng-container i18n="@@ngOrcid.search.advanceSearch"
       >ADVANCE SEARCH</ng-container
     >
