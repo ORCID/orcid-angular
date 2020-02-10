@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, asNativeElements } from '@angular/core'
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
 import { WINDOW } from 'src/app/cdk/window'
 import { take, filter } from 'rxjs/operators'
@@ -25,6 +25,11 @@ export class SkipMainNavComponent implements OnInit {
   ngOnInit() {}
 
   skipMainMenu() {
-    this.router.navigateByUrl(this.currentUrl + '#main')
+    const content: HTMLDivElement = this.window.document.querySelector('#main')
+    console.log(content.focus)
+
+    if (content) {
+      content.focus()
+    }
   }
 }
