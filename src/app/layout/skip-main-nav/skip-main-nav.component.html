@@ -1,5 +1,5 @@
 <div id="skip-link" *ngIf="this.currentUrl">
-  <a href="javascript:;" (click)="skipMainMenu()" class="a11yLinks"
+  <a [href]="this.currentUrl + '#main'" class="a11yLinks"
     >Skip to main content</a
   >
 </div>
