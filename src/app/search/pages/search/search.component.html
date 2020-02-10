@@ -4,7 +4,7 @@
     class="mat-body-2"
     *ngIf="searchResults && searchResults['num-found'] > 0"
   >
-    <div class="row h-baseline" aria-live="polite">
+    <div class="row h-baseline" role="status" id="resultsInfo">
       <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
       {{ searchResults['expanded-result'].length }}
       <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
@@ -18,6 +18,8 @@
         [pageIndex]="pageIndex"
         [length]="searchResults['num-found']"
         (page)="changePage($event)"
+        aria-labelledby="resultsInfo"
+        role="navigation"
       ></mat-paginator>
       <mat-progress-bar
         mode="indeterminate"
@@ -36,6 +38,7 @@
       [pageIndex]="pageIndex"
       [length]="searchResults['num-found']"
       (page)="changePage($event)"
+      role="navigation"
     ></mat-paginator>
   </div>
 </div>

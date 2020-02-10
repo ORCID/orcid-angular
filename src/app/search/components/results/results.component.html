@@ -1,4 +1,6 @@
 <div
+  role="main"
+  aria-label="search results"
   class="row table-container"
   *ngIf="resultsContent && resultsContent.length"
 >
@@ -42,11 +44,7 @@
   "
 >
   <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />
-  <p
-    class="row space-around"
-    i18n="@@ngOrcid.search.noResults"
-    aria-live="polite"
-  >
+  <p class="row space-around" i18n="@@ngOrcid.search.noResults" aria="alert">
     No results found. Please edit your search terms.
   </p>
 </section>

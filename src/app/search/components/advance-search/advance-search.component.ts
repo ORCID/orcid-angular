@@ -7,6 +7,9 @@ import {
   Optional,
   OnChanges,
   SimpleChanges,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef,
 } from '@angular/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
@@ -28,6 +31,9 @@ import { SearchService } from 'src/app/core/search/search.service'
 })
 export class AdvanceSearchComponent implements OnInit, OnChanges {
   @Input() searchValues: SearchResults
+  @ViewChild('searchForm', { static: false }) searchForm: ElementRef<
+    HTMLElement
+  >
   isAPhoneScreen = false
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder =
@@ -38,7 +44,8 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
     private _search: SearchService,
     @Inject(LOCALE_ID) private locale: string,
     @Optional() private router: Router,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _changeDec: ChangeDetectorRef
   ) {
     _platform.get().subscribe(data => {
       this.isAPhoneScreen = data.columns4
@@ -85,6 +92,10 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   toggleAdvanceSearch() {
     this.showAdvanceSearch = !this.showAdvanceSearch
     this.tempFixForOutlineFormInputCalculation()
+    if (this.showAdvanceSearch) {
+      this._changeDec.detectChanges()
+      this.searchForm.nativeElement.focus()
+    }
   }
 
   search() {
