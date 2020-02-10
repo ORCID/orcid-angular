@@ -4,21 +4,28 @@ import { environment } from '../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { catchError } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private _errorHandler: ErrorHandlerService
+  ) {}
 
   search(querryParam: SearchParameters): Observable<SearchResults> {
-    return this._http.get<SearchResults>(
-      `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
-        querryParam
-      )}`,
-      {
-        headers: { Accept: 'application/json' },
-      }
-    )
+    return this._http
+      .get<SearchResults>(
+        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
+          querryParam
+        )}`,
+        {
+          headers: { Accept: 'application/json' },
+        }
+      )
+      .pipe(catchError(this._errorHandler.handleError))
   }
 
   buildSearchUrl(querryParam: SearchParameters): string {
