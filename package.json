@@ -21,10 +21,8 @@
     "start:zh_CN": "ng serve --configuration=zh_CN --disable-host-check",
     "start:source": "ng serve --configuration=source --disable-host-check",
     "start:zh_TW": "ng serve --configuration=zh_TW --disable-host-check",
-
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "prebuild": "rimraf dist && yarn build:i18n",
     "build": "yarn build:prod",
     "postbuild": "ts-node -P scripts/tsconfig.json scripts/postbuild.ts --env production",
@@ -48,7 +46,10 @@
     "build:report": "webpack-bundle-analyzer dist/en/stats.json",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook -o dist/storybook",
-    "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts"
+    "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts",
+    "e2e" : "cypress open",
+    "e2e:ci" : "cypress run",
+    "e2e:qa" : "cypress open --config baseUrl=https://qa.orcid.org"
   },
   "private": true,
   "dependencies": {
@@ -66,6 +67,7 @@
     "@angular/service-worker": "^8.2.4",
     "core-js": "^2.6.9",
     "css-loader": "^3.2.0",
+    "cypress": "^4.0.1",
     "firebase": "^7.6.0",
     "hammerjs": "^2.0.8",
     "ngx-cookie-service": "^2.3.0",
@@ -163,7 +165,7 @@
           "@angular/material": "^8.0.0",
           "@angular/core": "^8.0.0",
           "@angular/animations": "^8.0.0",
-          "@angular/common": "^8.0.0", 
+          "@angular/common": "^8.0.0",
           "@angular/cdk": "^8.0.0",
           "@angular/forms": "^8.0.0",
           "rxjs": "^6.0.0 "
