@@ -1,8 +1,9 @@
 .non-fixed {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
   flex-grow: 1;
+  margin-bottom: 30px;
 }
 
 .fixed {
@@ -42,6 +43,11 @@ td {
 
 a:hover {
   text-decoration: underline;
+}
+
+.buttonsColumn {
+  padding-left: 16px;
+  width: 1px;
 }
 
 :host.columns-8,
