@@ -16,7 +16,6 @@ import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
-import { WINDOW } from 'src/app/cdk/window'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SearchResults } from 'src/app/types'
 import { SearchService } from 'src/app/core/search/search.service'
@@ -41,10 +40,9 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   advanceSearch: FormGroup
   constructor(
     _platform: PlatformInfoService,
-    private _search: SearchService,
+    @Optional() private _search: SearchService,
     @Inject(LOCALE_ID) private locale: string,
     @Optional() private router: Router,
-    @Inject(WINDOW) private window: Window,
     private _changeDec: ChangeDetectorRef
   ) {
     _platform.get().subscribe(data => {
