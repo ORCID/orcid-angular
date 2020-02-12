@@ -71,7 +71,7 @@ export class IsThisYouComponent implements OnInit {
   }
 
   gotoNewTab(id) {
-    this.window.open('/' + id, 'duplicated-check')
+    this.window.open('/' + id)
   }
 
   confirmRegistration() {

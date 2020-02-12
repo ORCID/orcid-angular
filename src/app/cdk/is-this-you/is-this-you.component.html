@@ -35,10 +35,14 @@
   </div>
   <div class="fixed">
     <button mat-button color="primary" (click)="goto('sign-in')">
-      {{ data.signinLabel || signinLabel }}
+      <div class="wrap-text mat-button-font">
+        {{ data.signinLabel || signinLabel }}
+      </div>
     </button>
     <button mat-raised-button color="primary" (click)="confirmRegistration()">
-      {{ data.continueLabel || continueLabel }}
+      <div class="wrap-text mat-button-font">
+        {{ data.continueLabel || continueLabel }}
+      </div>
     </button>
   </div>
 </div>
