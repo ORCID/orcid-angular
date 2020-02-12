@@ -6,6 +6,15 @@
   margin-bottom: 30px;
 }
 
+.ie {
+  :host {
+    .non-fixed {
+      // Fix IE overlap issue https://trello.com/c/aUfId6QM/6545-is-this-you-modal-ui-issues
+      display: block;
+    }
+  }
+}
+
 .fixed {
   display: flex;
   justify-content: flex-end;
