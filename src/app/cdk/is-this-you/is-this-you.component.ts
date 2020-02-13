@@ -29,8 +29,8 @@ export class IsThisYouComponent implements OnInit {
   affiliationsLabel = 'Affiliations'
   dateCreatedLabel = 'Date Created'
   viewRecordLabel = 'View Record'
-  signinLabel = 'I already have an iD, go back to sign in'
-  continueLabel = 'None of these are me, continue with registration'
+  signinLabel = 'I ALREADY HAVE AN ID, GO BACK TO SIGN IN'
+  continueLabel = 'NONE OF THESE ARE ME, CONTINUE WITH REGISTRATION'
 
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
@@ -71,7 +71,7 @@ export class IsThisYouComponent implements OnInit {
   }
 
   gotoNewTab(id) {
-    this.window.open('/' + id, 'duplicated-check')
+    this.window.open('/' + id)
   }
 
   confirmRegistration() {
