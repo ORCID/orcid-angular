@@ -10,7 +10,6 @@ import { CoreModule } from 'src/app/core/core.module'
 import { NewsComponent } from './components/news/news.component'
 import { HomeRoutingModule } from './home-routing.module'
 import { HomeComponent } from './pages/home/home.component'
-import { MultiRowRaisedButtonModule } from '../cdk/multi-row-raised-button/multi-row-raised-button.module'
 
 @NgModule({
   imports: [
@@ -20,7 +19,6 @@ import { MultiRowRaisedButtonModule } from '../cdk/multi-row-raised-button/multi
     CoreModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MultiRowRaisedButtonModule,
   ],
   declarations: [HomeComponent, NewsComponent],
 })
