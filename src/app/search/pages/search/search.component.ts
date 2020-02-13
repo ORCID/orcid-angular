@@ -5,6 +5,7 @@ import { map, tap, switchMap } from 'rxjs/operators'
 import { PageEvent } from '@angular/material'
 import { SearchResults } from 'src/app/types'
 import { SearchParameters } from 'src/app/types'
+import { Meta } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-search',
@@ -21,8 +22,10 @@ export class SearchComponent implements OnInit {
   constructor(
     route: ActivatedRoute,
     private _searchService: SearchService,
-    @Optional() private router: Router
+    @Optional() private router: Router,
+    meta: Meta
   ) {
+    meta.updateTag({ name: 'robots', content: 'NOINDEX, NOFOLLOW' })
     route.queryParams
       .pipe(
         // Set the query parameters to the advance search
