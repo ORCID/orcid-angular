@@ -1,7 +1,13 @@
-import { Component, OnInit, AfterViewInit, Inject } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Inject,
+  ViewChild,
+} from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
-import { matFormFieldAnimations } from '@angular/material'
+import { MatChip, matFormFieldAnimations } from '@angular/material'
 import { WINDOW } from 'src/app/cdk/window'
 import { TLD_REGEXP } from 'src/app/constants'
 
@@ -22,6 +28,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   _subscriptAnimationState = ''
   loading = false
   submitted = false
+  @ViewChild('passwordChip', { static: true }) passwordChip: MatChip
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -45,6 +52,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // Avoid animations on load.
     this._subscriptAnimationState = 'enter'
+    this.passwordChip.toggleSelected(true)
   }
 
   onSubmit() {
