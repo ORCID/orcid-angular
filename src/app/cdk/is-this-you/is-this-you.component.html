@@ -16,7 +16,9 @@
           {{ data.affiliationsLabel || affiliationsLabel }}
         </th>
         <th>{{ data.dateCreatedLabel || dateCreatedLabel }}</th>
-        <th>{{ data.viewRecordLabel || viewRecordLabel }}</th>
+        <th class="buttonsColumn">
+          {{ data.viewRecordLabel || viewRecordLabel }}
+        </th>
       </tr>
       <tr *ngFor="let record of data.duplicateRecords">
         <td>{{ record.givenNames }}</td>
@@ -32,10 +34,20 @@
     </table>
   </div>
   <div class="fixed">
-    <button mat-button color="primary" (click)="goto('sign-in')">
+    <button
+      mat-button
+      color="primary"
+      class="mat-button-wrap-text mat-button-font-spaced"
+      (click)="goto('sign-in')"
+    >
       {{ data.signinLabel || signinLabel }}
     </button>
-    <button mat-raised-button color="primary" (click)="confirmRegistration()">
+    <button
+      mat-raised-button
+      color="primary"
+      class="mat-button-wrap-text mat-button-font-spaced"
+      (click)="confirmRegistration()"
+    >
       {{ data.continueLabel || continueLabel }}
     </button>
   </div>
