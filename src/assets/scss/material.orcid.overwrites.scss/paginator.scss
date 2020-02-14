@@ -1,0 +1,35 @@
+// Overwrites for:
+// https://github.com/angular/components/blob/8.1.4/src/material/paginator/paginator.scss
+
+mat-paginator {
+  .mat-paginator-container,
+  .mat-paginator-page-size-label {
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
+
+[dir='rtl'] mat-paginator {
+  .mat-paginator-container,
+  .mat-paginator-page-size-label {
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
+
+.h-baseline {
+  mat-paginator {
+    .mat-paginator-container {
+      justify-content: flex-start;
+    }
+    .mat-paginator-range-label {
+      margin-left: 0;
+    }
+  }
+}
+
+[dir='rtl'] {
+  .h-baseline mat-paginator .mat-paginator-range-label {
+    margin-right: 0;
+  }
+}

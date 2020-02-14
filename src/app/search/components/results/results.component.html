@@ -1,0 +1,56 @@
+<div
+  class="row table-container"
+  *ngIf="searchResults && searchResults.results && searchResults.results.length"
+>
+  <table aria-label="Search results">
+    <thead>
+      <tr>
+        <th class="mat-body-2 orcid-id-column" i18n="@@ngOrcid.search.orcidID">
+          ORCID ID
+        </th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.firstName">First Name</th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.lastName">Last Name</th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.otherNames">
+          Other Names
+        </th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.affiliations">
+          Affiliations
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orcid of searchResults.results">
+        <td class="orcid-id-column">
+          <a href="{{orcid.orcid}}"> {{ orcid.orcid }}</a>
+        </td>
+        <td>{{ orcid.firstName }}</td>
+        <td>{{ orcid.lastName }}</td>
+        <td>{{ orcid.otherNames }}</td>
+        <td>{{ orcid.affiliations }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<section
+  class="col notFoundResults"
+  *ngIf="
+    searchResults && (!searchResults.results || !searchResults.results.length)
+  "
+>
+  <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />
+  <p
+    class="row space-around"
+    i18n="@@ngOrcid.search.noResults"
+    aria-live="polite"
+  >
+    No results found. Please edit your search terms.
+  </p>
+</section>
+
+<section *ngIf="!searchResults">
+  <div class="row horizontal-center">
+    <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+    </mat-progress-spinner>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<div class="container">
+  <app-advance-search [searchValues]="searchParams"></app-advance-search>
+  <div class="mat-body-2" *ngIf="searchResults">
+    <div class="row h-baseline" aria-live="polite">
+      <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
+      {{ pageSize }}
+      <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
+      {{ searchResults.totalResults }}
+      <ng-container i18n="@@ngOrcid.search.results">results.</ng-container>
+    </div>
+    <div class="row h-baseline">
+      <mat-paginator
+        [pageSizeOptions]="[50, 100, 200]"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [length]="searchResults.totalResults"
+        (page)="changePage($event)"
+      ></mat-paginator>
+      <mat-progress-bar
+        mode="indeterminate"
+        *ngIf="loadingNewResults"
+      ></mat-progress-bar>
+    </div>
+  </div>
+  <app-results [searchResults]="searchResults"></app-results>
+  <div class="row h-baseline" *ngIf="searchResults">
+    <mat-paginator
+      [pageSizeOptions]="[50, 100, 200]"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [length]="searchResults.totalResults"
+      (page)="changePage($event)"
+    ></mat-paginator>
+  </div>
+</div>

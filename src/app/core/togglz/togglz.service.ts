@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { Observable, timer } from 'rxjs'
-import { switchMapTo, shareReplay } from 'rxjs/operators'
+import { switchMapTo, shareReplay, map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +26,12 @@ export class TogglzService {
         shareReplay(1)
       ))
     }
+  }
+
+  getStateOf(togglzFeatureName: string): Observable<boolean> {
+    this.getTogglz()
+    return this.togglz.pipe(
+      map(data => data.messages[togglzFeatureName] === 'true')
+    )
   }
 }

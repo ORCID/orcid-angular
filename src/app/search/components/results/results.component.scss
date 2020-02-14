@@ -1,0 +1,42 @@
+.table-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    vertical-align: baseline;
+    th,
+    td {
+      padding: 12px 8px 12px 0;
+      vertical-align: baseline;
+      text-align: initial;
+    }
+
+    th,
+    .orcid-id-column {
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      height: 52px;
+    }
+
+    thead tr {
+      height: 44px;
+    }
+  }
+}
+
+.orcid-id-column {
+  width: 305px;
+}
+
+img {
+  max-width: 208px;
+}
+
+.notFoundResults p {
+  text-align: center;
+}

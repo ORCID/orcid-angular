@@ -1,68 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
-    <unit id="common.js.domain.warn.warning_1">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
-      </notes>
-      <segment>
-        <source>Warning!</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.warning_2">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
-      </notes>
-      <segment>
-        <source>is a test website.
-    </source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.is_the_official">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
-      </notes>
-      <segment>
-        <source>
-      is the official website. Sandbox only sends email messages
-      to</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.mailinator">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
-      </notes>
-      <segment>
-        <source>mailinator.com</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.email_addresses">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
-      </notes>
-      <segment>
-        <source>addresses, see Sandbox FAQ for</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.more_information">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
-      </notes>
-      <segment>
-        <source>
-      more information</source>
-      </segment>
-    </unit>
-    <unit id="common.cookies.click_dismiss">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:34,36</note>
-      </notes>
-      <segment>
-        <source>
-    Dismiss
-  </source>
-      </segment>
-    </unit>
     <unit id="confirm-oauth-access.connectingresearchandresearchers">
       <notes>
         <note category="description">#sentenceCase</note>
@@ -186,101 +124,66 @@
         </source>
       </segment>
     </unit>
-    <unit id="public-layout.sign_in">
+    <unit id="common.js.domain.warn.warning_1">
       <notes>
-        <note category="description">#upperCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:29</note>
-        <note category="location">locale/i18n.pseudo.component.html:8</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
       </notes>
       <segment>
-        <source>SIGN IN</source>
+        <source>Warning!</source>
       </segment>
     </unit>
-    <unit id="ngOrcid.viewMyOrcid">
+    <unit id="common.js.domain.warn.warning_2">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:41,43</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
+      </notes>
+      <segment>
+        <source>is a test website.
+    </source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.is_the_official">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
       </notes>
       <segment>
         <source>
-          View my ORCID record
-        </source>
+      is the official website. Sandbox only sends email messages
+      to</source>
       </segment>
     </unit>
-    <unit id="workspace.notifications">
+    <unit id="common.js.domain.warn.mailinator">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:49</note>
-        <note category="location">locale/i18n.pseudo.component.html:75</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
       </notes>
       <segment>
-        <source>Inbox</source>
+        <source>mailinator.com</source>
       </segment>
     </unit>
-    <unit id="ngOrcid.accountSetting">
+    <unit id="common.js.domain.warn.email_addresses">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:53</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
       </notes>
       <segment>
-        <source>Account settings </source>
+        <source>email addresses, see Sandbox FAQ for</source>
       </segment>
     </unit>
-    <unit id="workspace.developer_tools">
+    <unit id="common.js.domain.warn.more_information">
       <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:66</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:79</note>
-        <note category="location">locale/i18n.pseudo.component.html:68</note>
-      </notes>
-      <segment>
-        <source>Developer tools </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.selfService">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:87</note>
-      </notes>
-      <segment>
-        <source>Member tools </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.manageMembers">
-      <notes>
-        <note category="description">#sentenceCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:95</note>
-      </notes>
-      <segment>
-        <source>Manage members</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.adminPage">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
-      </notes>
-      <segment>
-        <source>Admin page</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.logout">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:107</note>
-      </notes>
-      <segment>
-        <source>Logout</source>
-      </segment>
-    </unit>
-    <unit id="public-layout.amount_ids">
-      <notes>
-        <note category="location">app/layout/statistics/statistics.component.html:6,7</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
       </notes>
       <segment>
         <source>
-          ORCID iDs and counting.</source>
+      more information</source>
       </segment>
     </unit>
-    <unit id="ngOrcid.seeMoreStatics">
+    <unit id="common.cookies.click_dismiss">
       <notes>
-        <note category="location">app/layout/statistics/statistics.component.html:10</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
       </notes>
       <segment>
-        <source>See more statistics</source>
+        <source>
+    Dismiss
+  </source>
       </segment>
     </unit>
     <unit id="home.distinguish_yourself">
@@ -540,7 +443,7 @@
     </unit>
     <unit id="check_password_modal.password">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:28</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:27</note>
       </notes>
       <segment>
         <source>Password</source>
@@ -548,7 +451,7 @@
     </unit>
     <unit id="common.orcid_id">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:36</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:35</note>
       </notes>
       <segment>
         <source>ORCID ID</source>
@@ -556,7 +459,7 @@
     </unit>
     <unit id="ngOrcid.pleaseChooseRecovery">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:46</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:45</note>
       </notes>
       <segment>
         <source>Please choose a recovery option</source>
@@ -564,7 +467,7 @@
     </unit>
     <unit id="oauth_sign_up.labelemail">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:50</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:49</note>
       </notes>
       <segment>
         <source>Email</source>
@@ -636,6 +539,103 @@
       </notes>
       <segment>
         <source>contact us</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sign_in">
+      <notes>
+        <note category="description">#upperCase</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:29</note>
+        <note category="location">locale/i18n.pseudo.component.html:8</note>
+      </notes>
+      <segment>
+        <source>SIGN IN</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.viewMyOrcid">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:41,43</note>
+      </notes>
+      <segment>
+        <source>
+          View my ORCID record
+        </source>
+      </segment>
+    </unit>
+    <unit id="workspace.notifications">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:49</note>
+        <note category="location">locale/i18n.pseudo.component.html:75</note>
+      </notes>
+      <segment>
+        <source>Inbox</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.accountSetting">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:53</note>
+      </notes>
+      <segment>
+        <source>Account settings </source>
+      </segment>
+    </unit>
+    <unit id="workspace.developer_tools">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:66</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:79</note>
+        <note category="location">locale/i18n.pseudo.component.html:68</note>
+      </notes>
+      <segment>
+        <source>Developer tools </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.selfService">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:87</note>
+      </notes>
+      <segment>
+        <source>Member tools </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.manageMembers">
+      <notes>
+        <note category="description">#sentenceCase</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:95</note>
+      </notes>
+      <segment>
+        <source>Manage members</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.adminPage">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
+      </notes>
+      <segment>
+        <source>Admin page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.logout">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:107</note>
+      </notes>
+      <segment>
+        <source>Logout</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.amount_ids">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:6,7</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID iDs and counting.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.seeMoreStatics">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:10</note>
+      </notes>
+      <segment>
+        <source>See more statistics</source>
       </segment>
     </unit>
     <unit id="public_profile.empty_profile">
@@ -925,6 +925,150 @@
       <segment>
         <source>
     Membership and service</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.showing">
+      <notes>
+        <note category="location">app/search/pages/search/search.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Showing</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.of">
+      <notes>
+        <note category="location">app/search/pages/search/search.component.html:7</note>
+      </notes>
+      <segment>
+        <source>of</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.results">
+      <notes>
+        <note category="location">app/search/pages/search/search.component.html:9</note>
+      </notes>
+      <segment>
+        <source>results.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.orcidID">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:8,10</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:63</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID ID
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.firstName">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:11</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:23</note>
+      </notes>
+      <segment>
+        <source>First Name</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.lastName">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:12</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Last Name</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.otherNames">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source>
+          Other Names
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.affiliations">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>
+          Affiliations
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.noResults">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:46,48</note>
+      </notes>
+      <segment>
+        <source>
+    No results found. Please edit your search terms.
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.advanceSearch">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:4</note>
+      </notes>
+      <segment>
+        <source>ADVANCE SEARCH</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.institutionName">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:32</note>
+      </notes>
+      <segment>
+        <source>Institution Name</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.institutionNamePlaceholder">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:37</note>
+        <note category="location">locale/i18n.pseudo.component.html:78</note>
+      </notes>
+      <segment>
+        <source>Employment, education, or RINGGOLD ID</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.keyword">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:46</note>
+      </notes>
+      <segment>
+        <source>Keyword</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.otherNameFields">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:57</note>
+      </notes>
+      <segment>
+        <source>Also search other name fields</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.orcidIdPatterError">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:65,67</note>
+      </notes>
+      <segment>
+        <source>
+        Given value doesn&apos;t match ORCID iD pattern
+      </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.search">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:73,75</note>
+      </notes>
+      <segment>
+        <source>
+        SEARCH
+      </source>
       </segment>
     </unit>
     <unit id="public-layout.for_researchers">
@@ -1414,6 +1558,54 @@
       </notes>
       <segment>
         <source>My ORCID Record</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.firstPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:80</note>
+      </notes>
+      <segment>
+        <source>First page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.itemsPerPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:81</note>
+      </notes>
+      <segment>
+        <source>Items per page:</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.lastPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:82</note>
+      </notes>
+      <segment>
+        <source>Last page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.nextPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:83</note>
+      </notes>
+      <segment>
+        <source>Next page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.previousPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:84</note>
+      </notes>
+      <segment>
+        <source>Previous page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.of">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:85</note>
+      </notes>
+      <segment>
+        <source>of</source>
       </segment>
     </unit>
   </file>

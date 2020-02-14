@@ -1,11 +1,10 @@
-import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-banner.module'
-
 export const environment = {
   production: false,
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_WEB: '//localhost/',
   BASE_URL: '//localhost/',
   BLOG_NEWS: 'https://localhost:8888/about/news',
+  GOOGLE_ANALYTICS: 'UA-0000000-00',
   SHOW_TEST_WARNING_BANNER: true,
   CAN_DISABLE_TEST_WARNING_BANNER: true,
   LANGUAGE_MENU_OPTIONS: {

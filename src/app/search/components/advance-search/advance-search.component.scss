@@ -1,0 +1,39 @@
+.row .col {
+  display: block;
+}
+
+.columns-12 :host {
+  form {
+    padding: 20px 24px;
+  }
+
+  .institution.col.l4 {
+    min-width: 355px;
+  }
+
+  .grow {
+    flex-shrink: 1;
+    flex-grow: 1;
+  }
+}
+
+.row.checkbox {
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+form {
+  padding: 22px 4px;
+  margin-bottom: 40px;
+}
+
+button {
+  min-width: 150px;
+}
+
+.row.orcidInput {
+  margin-bottom: 5px;
+  .col {
+    min-width: 295px;
+  }
+}
