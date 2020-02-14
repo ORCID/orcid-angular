@@ -42,14 +42,16 @@ export class FirebaseManager {
       'no-auth'
 
     const id = `${result.auditDefinition.url ||
-      'root'}.${user}.${date.toISOString()}`
+      'root'}.${user}.${date.toISOString().replace(/:/g, '.')}`
 
     return id
   }
 
   generateFilePath(date: Date): string {
     const environmentContext = environment.testPrefix || 'no-prefix'
-    return `audits/${environmentContext}/${date.toISOString()}/`
+    return `audits/${environmentContext}/${date
+      .toISOString()
+      .replace(/:/g, '.')}/`
   }
 
   async saveFileResults(results: Result[], date: Date) {
@@ -72,7 +74,7 @@ export class FirebaseManager {
 
   private saveFileMetadata(metadata: MetadataFile, date: Date) {
     const path = this.generateFilePath(date)
-    const fileName = `metaData-${date.toISOString()}`
+    const fileName = `metaData-${date.toISOString().replace(':', '.')}`
     return this.saveFile(JSON.stringify(metadata), path + fileName)
   }
 
