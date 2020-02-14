@@ -36,7 +36,7 @@ yarn build:i18n
 2- Run the application on the language you want using one of the following options
 
 ```
-yarn start:en ## Runs the application in using the english properties
+yarn start:aot ## Runs the application in using the english properties
 yarn start:fr ## Runs the application in using the french properties
 yarn start:ar ## Runs the application in using the arabic properties
 yarn start:es ## Runs the application in using the spanish properties
@@ -44,6 +44,7 @@ yarn start:ca ## ... and so on
 yarn start:cs
 yarn start:it
 yarn start:ja
+yarn start:ko
 yarn start:pt
 yarn start:ru
 yarn start:uk
