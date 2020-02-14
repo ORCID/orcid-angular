@@ -5,6 +5,11 @@ import {
   Inject,
   Input,
   Optional,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef,
 } from '@angular/core'
 import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
@@ -12,6 +17,8 @@ import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { SearchResults } from 'src/app/types'
+import { SearchService } from 'src/app/core/search/search.service'
 import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
@@ -22,18 +29,22 @@ import { WINDOW } from 'src/app/cdk/window'
     './advance-search.component.scss',
   ],
 })
-export class AdvanceSearchComponent implements OnInit {
-  @Input() searchValues
+export class AdvanceSearchComponent implements OnInit, OnChanges {
+  @Input() searchValues: SearchResults
+  @ViewChild('searchForm', { static: false }) searchForm: ElementRef<
+    HTMLElement
+  >
   isAPhoneScreen = false
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder =
     LOCALE['ngOrcid.search.institutionNamePlaceholder']
-  advanceSearch
+  advanceSearch: FormGroup
   constructor(
     _platform: PlatformInfoService,
+    @Optional() private _search: SearchService,
     @Inject(LOCALE_ID) private locale: string,
     @Optional() private router: Router,
-    @Inject(WINDOW) private window: Window
+    private _changeDec: ChangeDetectorRef
   ) {
     _platform.get().subscribe(data => {
       this.isAPhoneScreen = data.columns4
@@ -50,30 +61,48 @@ export class AdvanceSearchComponent implements OnInit {
       { validators: AtLeastOneInputHasValue() }
     )
   }
+  ngOnInit(): void {}
 
-  ngOnInit() {
-    // If the search query is empty or it has advance search parameter values
-    // it opens the advance search by default
-
+  ngOnChanges(changes: SimpleChanges): void {
+    // it opens the advance search with the search parameters
     if (
       this.searchValues &&
-      (!Object.keys(this.searchValues).length ||
-        this.searchValues['searchQuery'] == null)
+      Object.keys(this.searchValues).length &&
+      this.searchValues['searchQuery'] == null
     ) {
       this.showAdvanceSearch = true
-      this.advanceSearch.setValue(this.searchValues)
+      this.advanceSearch.patchValue(this.searchValues)
+    }
+
+    // If has no parameters
+    // it opens the advance search empty
+    if (this.searchValues && !Object.keys(this.searchValues).length) {
+      this.showAdvanceSearch = true
+    }
+
+    // If is a quick search
+    // clean and close the advance search
+    if (this.searchValues && this.searchValues['searchQuery']) {
+      this.showAdvanceSearch = false
+      this.advanceSearch.reset()
     }
   }
 
   toggleAdvanceSearch() {
     this.showAdvanceSearch = !this.showAdvanceSearch
     this.tempFixForOutlineFormInputCalculation()
+    if (this.showAdvanceSearch) {
+      this._changeDec.detectChanges()
+      this.searchForm.nativeElement.focus()
+    }
   }
 
   search() {
     if (this.advanceSearch.valid) {
       this.router.navigate(['/orcid-search/search'], {
-        queryParams: this.advanceSearch.value,
+        queryParams: this._search.trimSearchParameters(
+          this.advanceSearch.value
+        ),
       })
     }
   }

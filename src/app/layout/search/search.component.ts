@@ -5,6 +5,7 @@ import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
+import { SearchService } from 'src/app/core/search/search.service'
 
 @Component({
   selector: 'app-search',
@@ -27,6 +28,7 @@ export class SearchComponent implements OnInit {
   whatToSearch: string
   constructor(
     @Inject(WINDOW) private window: Window,
+    private _search: SearchService,
     _platform: PlatformInfoService,
     _togglz: TogglzService,
     private router: Router,
@@ -74,7 +76,9 @@ export class SearchComponent implements OnInit {
       } else {
         // navigate using the angular router to never leave the Angular app
         this.router.navigate(['/orcid-search/search'], {
-          queryParams: { searchQuery: whatToSearch },
+          queryParams: {
+            searchQuery: whatToSearch.trim(),
+          },
         })
       }
     } else {

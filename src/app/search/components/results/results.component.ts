@@ -1,4 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core'
+import { SearchResults, ExpandedSearchResultsContent } from 'src/app/types'
 
 @Component({
   selector: 'app-results',
@@ -9,8 +16,15 @@ import { Component, OnInit, Input } from '@angular/core'
   ],
   preserveWhitespaces: true,
 })
-export class ResultsComponent implements OnInit {
-  @Input() searchResults
+export class ResultsComponent implements OnInit, OnChanges {
+  @Input() searchResults: SearchResults
+  resultsContent: ExpandedSearchResultsContent[]
+
   constructor() {}
   ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.resultsContent =
+      this.searchResults && this.searchResults['expanded-result']
+  }
 }

@@ -3,6 +3,7 @@ import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-
 export const environment = {
   production: true,
   API_NEWS: 'https://localhost/blog/feed',
+  API_PUB: '//pub.localhost/v3.0',
   API_WEB: '//localhost/',
   BASE_URL: '//localhost/',
   BLOG_NEWS: 'https://localhost/about/news',

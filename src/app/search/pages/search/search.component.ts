@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
 import { map, tap, switchMap } from 'rxjs/operators'
 import { PageEvent } from '@angular/material'
+import { SearchResults } from 'src/app/types'
+import { SearchParameters } from 'src/app/types'
+import { Meta } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-search',
@@ -10,22 +13,24 @@ import { PageEvent } from '@angular/material'
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  searchResults
+  searchResults: SearchResults
   searchParams
-  pageIndex
-  pageSize
+  pageIndex: number
+  pageSize: number
   loadingNewResults = false
 
   constructor(
     route: ActivatedRoute,
-    _searchService: SearchService,
-    @Optional() private router: Router
+    private _searchService: SearchService,
+    @Optional() private router: Router,
+    meta: Meta
   ) {
+    meta.updateTag({ name: 'robots', content: 'NOINDEX, NOFOLLOW' })
     route.queryParams
       .pipe(
         // Set the query parameters to the advance search
-        tap(value => {
-          this.searchParams = value
+        tap((value: SearchParameters) => {
+          this.searchParams = this._searchService.trimSearchParameters(value)
           this.pageIndex = value.pageIndex || 0
           this.pageSize = value.pageSize || 50
           this.loadingNewResults = true
