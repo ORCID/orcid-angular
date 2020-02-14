@@ -13,7 +13,9 @@ class AuditManager {
   }
 
   async initFirebase() {
-    await this.firebase.initializeFirebase()
+    if (this.firebase.firebaseDB) {
+      await this.firebase.initializeFirebase()
+    }
   }
 
   async runAudit(): Promise<Result[]> {

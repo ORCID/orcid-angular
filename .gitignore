@@ -61,3 +61,9 @@ src/locale/translate-file-generator.js
 src/locale/messages.translation.log.json
 scripts/*.js
 sripts/lighthouse/environment.ts.js
+
+
+## Scripts files
+
+audits/*
+scripts/lighthouse/environment.ts

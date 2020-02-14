@@ -9,7 +9,7 @@ export interface Environment {
   prefix: string
   baseURL: string
   testPrefix: string
-  firebaseConfig: {
+  firebaseConfig?: {
     apiKey: string
     authDomain: string
     databaseURL: string
@@ -19,9 +19,9 @@ export interface Environment {
     appId: string
     measurementId: string
   }
-  ORCID_URLS_TO_AUDIT: Audit[]
-  ORCID_ADMIN_USER: string
-  ORCID_ADMIN_PASSWORD: string
+  ORCID_URLS_TO_AUDIT?: Audit[]
+  ORCID_ADMIN_USER?: string
+  ORCID_ADMIN_PASSWORD?: string
 }
 
 export interface Result {

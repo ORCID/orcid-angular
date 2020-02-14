@@ -1,6 +1,4 @@
 import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
-
-import { GRID_MARGINS } from './constants'
 import { Router, NavigationEnd } from '@angular/router'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'

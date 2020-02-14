@@ -15,6 +15,8 @@ export class GoogleAnalyticsService {
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       page_path: url,
       page_location: window.location.origin,
+      anonymize_ip: true,
+      sample_rate: '70',
     })
   }
 }
