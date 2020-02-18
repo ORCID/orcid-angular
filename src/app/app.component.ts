@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
+import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { PlatformInfo } from './cdk/platform-info'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  showCookieBanner
   direction
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
@@ -25,7 +27,8 @@ export class AppComponent {
     _platformInfo: PlatformInfoService,
     @Inject(LOCALE_ID) public locale: string,
     _router: Router,
-    _googleAnalytics: GoogleAnalyticsService
+    _googleAnalytics: GoogleAnalyticsService,
+    _cookie: CookieService
   ) {
     _platformInfo.get().subscribe(platformInfo => {
       this.setPlatformClasses(platformInfo)
@@ -37,6 +40,8 @@ export class AppComponent {
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
       }
     })
+
+    this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
   }
 
   setPlatformClasses(platformInfo: PlatformInfo) {
