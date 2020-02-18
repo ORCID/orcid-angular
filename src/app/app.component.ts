@@ -2,6 +2,7 @@ import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
 
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
+import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { PlatformInfo } from './cdk/platform-info'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  showCookieBanner
   direction
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
@@ -22,12 +24,15 @@ export class AppComponent {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    @Inject(LOCALE_ID) public locale: string
+    @Inject(LOCALE_ID) public locale: string,
+    _cookie: CookieService
   ) {
     _platformInfo.get().subscribe(platformInfo => {
       this.setPlatformClasses(platformInfo)
     })
     this.direction = locale === 'ar' ? 'rtl' : null
+
+    this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
   }
 
   setPlatformClasses(platformInfo: PlatformInfo) {

@@ -1,5 +1,9 @@
 <div [attr.dir]="direction">
   <router-outlet name="banner"></router-outlet>
+  <app-cookie-banner
+    *ngIf="showCookieBanner"
+    (dismiss)="showCookieBanner = false"
+  ></app-cookie-banner>
   <app-header></app-header>
   <div class="router-container">
     <router-outlet> </router-outlet>

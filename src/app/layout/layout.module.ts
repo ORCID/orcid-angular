@@ -17,6 +17,7 @@ import { LanguageComponent } from './language/language.component'
 import { CoreModule } from '../core/core.module'
 import { UserMenuComponent } from './user-menu/user-menu.component'
 import { StatisticsComponent } from './statistics/statistics.component'
+import { CookieBannerComponent } from './cookie-banner/cookie-banner.component'
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { StatisticsComponent } from './statistics/statistics.component'
     LanguageComponent,
     UserMenuComponent,
     StatisticsComponent,
+    CookieBannerComponent,
   ],
-  exports: [HeaderComponent, FooterComponent],
+  exports: [HeaderComponent, FooterComponent, CookieBannerComponent],
 })
 export class LayoutModule {}
