@@ -27,8 +27,8 @@
         </td>
         <td>{{ orcid['given-names'] }}</td>
         <td>{{ orcid['family-names'] }}</td>
-        <td>{{ orcid['other-name'] }}</td>
-        <td>{{ orcid['institution-name'] }}</td>
+        <td>{{ orcid['other-name'].join(', ') }}</td>
+        <td>{{ orcid['institution-name'].join(', ') }}</td>
       </tr>
     </tbody>
   </table>
