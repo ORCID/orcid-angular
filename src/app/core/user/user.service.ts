@@ -64,8 +64,8 @@ export class UserService {
       return this.$infoOnEachStatusUpdateObservable
     } else {
       return (this.$infoOnEachStatusUpdateObservable =
-        // Every 5 seconds...
-        timer(0, 5 * 1000)
+        // Every 30 seconds...
+        timer(0, 30 * 1000)
           // Check for updates on userStatus.json
           .pipe(switchMapTo(this.getUserStatus()))
           // Check if loggedIn state  has changed since the last time
