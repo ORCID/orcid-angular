@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   API_NEWS: 'https://orcid.org/blog/feed',
-  API_PUB: '//sandbox.qa.orcid.org/v3.0',
+  API_PUB: '//sandbox.orcid.org/v3.0',
   API_WEB: '//sandbox.orcid.org/',
   BASE_URL: '//sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
