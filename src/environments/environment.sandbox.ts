@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   API_NEWS: 'https://orcid.org/blog/feed',
   API_PUB: '//pub.sandbox.orcid.org/v3.0',
-  API_WEB: '//api.sandbox.orcid.org/',
+  API_WEB: '//sandbox.orcid.org/',
   BASE_URL: '//sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   GOOGLE_ANALYTICS: 'UA-17492803-5',
