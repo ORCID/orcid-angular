@@ -18,7 +18,7 @@
         [pageIndex]="pageIndex"
         [length]="searchResults['num-found']"
         (page)="changePage($event)"
-        aria-labelledby="resultsInfo"
+        aria-label="paginator"
         role="navigation"
       ></mat-paginator>
       <mat-progress-bar
@@ -39,6 +39,7 @@
       [length]="searchResults['num-found']"
       (page)="changePage($event)"
       role="navigation"
+      aria-label="paginator"
     ></mat-paginator>
   </div>
 </div>
