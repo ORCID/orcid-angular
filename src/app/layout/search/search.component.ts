@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { Config } from 'src/app/types/togglz.endpoint'
+import { Router, ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
+import { SearchService } from 'src/app/core/search/search.service'
 
 @Component({
   selector: 'app-search',
@@ -14,7 +15,8 @@ import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 export class SearchComponent implements OnInit {
   form: FormGroup
   platform: PlatformInfo
-  togglz: Config
+  togglzEnableUserMenu: boolean
+  togglzOrcidAngularSearch: boolean
   whereToSearch = [
     this.firstLetterUppercase(LOCALE['layout.public-layout.registry']),
     this.firstLetterUppercase(LOCALE['layout.public-layout.website']),
@@ -23,22 +25,41 @@ export class SearchComponent implements OnInit {
     LOCALE['layout.public-layout.registry']
   )
   searchPlaceHolder = this.firstLetterUppercase(LOCALE['ngOrcid.search'])
-  whatToSearch = ''
+  whatToSearch: string
   constructor(
     @Inject(WINDOW) private window: Window,
+    private _search: SearchService,
     _platform: PlatformInfoService,
-    _togglz: TogglzService
+    _togglz: TogglzService,
+    private router: Router,
+    private route: ActivatedRoute,
+    public _changeDetection: ChangeDetectorRef
   ) {
     _platform.platformSubject.subscribe(data => {
       this.platform = data
     })
-    _togglz.getTogglz().subscribe(data => {
-      this.togglz = data
-    })
+    _togglz
+      .getStateOf('ENABLE_USER_MENU')
+      .subscribe(value => (this.togglzEnableUserMenu = value))
+    _togglz
+      .getStateOf('ORCID_ANGULAR_SEARCH')
+      .subscribe(value => (this.togglzOrcidAngularSearch = value))
+
+    this.route.queryParams.subscribe(value => this.setWhatToSearch(value))
   }
 
   changeWhereToSearch(item) {
     this.whereToSearchSelected = item
+  }
+
+  setWhatToSearch(queryParams) {
+    // Set the whatToSearch when it comes on the query parameters
+    if (Object.keys(queryParams).length && queryParams['searchQuery']) {
+      this.whatToSearch = queryParams['searchQuery']
+    } else {
+      // Clean whatToSearch if is and advance search or has no query parameters
+      this.whatToSearch = ''
+    }
   }
 
   ngOnInit() {}
@@ -48,8 +69,18 @@ export class SearchComponent implements OnInit {
       whereToSearch ===
       this.firstLetterUppercase(LOCALE['layout.public-layout.registry'])
     ) {
-      this.window.location.href =
-        '/orcid-search/quick-search/?searchQuery=' + whatToSearch
+      if (!this.togglzOrcidAngularSearch) {
+        // navigate directly the window location
+        this.window.location.href =
+          '/orcid-search/quick-search/?searchQuery=' + whatToSearch
+      } else {
+        // navigate using the angular router to never leave the Angular app
+        this.router.navigate(['/orcid-search/search'], {
+          queryParams: {
+            searchQuery: whatToSearch.trim(),
+          },
+        })
+      }
     } else {
       this.window.location.href = '/search/node/' + whatToSearch
     }

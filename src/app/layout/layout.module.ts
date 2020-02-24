@@ -18,6 +18,7 @@ import { CoreModule } from '../core/core.module'
 import { UserMenuComponent } from './user-menu/user-menu.component'
 import { StatisticsComponent } from './statistics/statistics.component'
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component'
+import { SkipMainNavComponent } from './skip-main-nav/skip-main-nav.component'
 
 @NgModule({
   imports: [
@@ -41,7 +42,13 @@ import { CookieBannerComponent } from './cookie-banner/cookie-banner.component'
     UserMenuComponent,
     StatisticsComponent,
     CookieBannerComponent,
+    SkipMainNavComponent,
   ],
-  exports: [HeaderComponent, FooterComponent, CookieBannerComponent],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    CookieBannerComponent,
+    SkipMainNavComponent,
+  ],
 })
 export class LayoutModule {}

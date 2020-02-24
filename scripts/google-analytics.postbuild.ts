@@ -1,26 +1,12 @@
-export function googleAnalytics(indexHtml, options) {
+export function googleAnalytics(indexHtml: string, options) {
   if (
     options.environmentVariables &&
     options.environmentVariables.GOOGLE_ANALYTICS
   ) {
-    const googleScript = `  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=${
+    return indexHtml.replace(
+      /UA-0000000-00/g,
       options.environmentVariables.GOOGLE_ANALYTICS
-    }"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || []
-    function gtag() {
-      dataLayer.push(arguments)
-    }
-    gtag('js', new Date())
-    gtag('config', '${options.environmentVariables.GOOGLE_ANALYTICS}')
-  </script>`
-    const i = indexHtml.indexOf('</head>')
-    return `${indexHtml.slice(0, i)}
-${googleScript}
-${indexHtml.slice(i)}`
+    )
   } else {
     console.warn(
       'This build will not have google analytics since the UID is not defined on the environment variables'

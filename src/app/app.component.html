@@ -1,4 +1,5 @@
-<div [attr.dir]="direction">
+<app-skip-main-nav></app-skip-main-nav>
+<div [dir]="direction">
   <router-outlet name="banner"></router-outlet>
   <app-cookie-banner
     *ngIf="showCookieBanner"

@@ -3,9 +3,12 @@ import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-
 export const environment = {
   production: true,
   API_NEWS: 'https://localhost/blog/feed',
+  API_PUB: '//pub.localhost/v3.0',
   API_WEB: '//localhost/',
   BASE_URL: '//localhost/',
   BLOG_NEWS: 'https://localhost/about/news',
+  GOOGLE_ANALYTICS: 'UA-0000000-00',
+  SHOW_TEST_WARNING_BANNER: true,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',

@@ -1,68 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file original="ng.template" id="ngi18n">
-    <unit id="common.js.domain.warn.warning_1">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
-      </notes>
-      <segment>
-        <source>Warning!</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.warning_2">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
-      </notes>
-      <segment>
-        <source>is a test website.
-    </source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.is_the_official">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
-      </notes>
-      <segment>
-        <source>
-      is the official website. Sandbox only sends email messages
-      to</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.mailinator">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
-      </notes>
-      <segment>
-        <source>mailinator.com</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.email_addresses">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
-      </notes>
-      <segment>
-        <source>addresses, see Sandbox FAQ for</source>
-      </segment>
-    </unit>
-    <unit id="common.js.domain.warn.more_information">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
-      </notes>
-      <segment>
-        <source>
-      more information</source>
-      </segment>
-    </unit>
-    <unit id="common.cookies.click_dismiss">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:34,36</note>
-      </notes>
-      <segment>
-        <source>
-    Dismiss
-  </source>
-      </segment>
-    </unit>
     <unit id="confirm-oauth-access.connectingresearchandresearchers">
       <notes>
         <note category="description">#sentenceCase</note>
@@ -186,6 +124,444 @@
         </source>
       </segment>
     </unit>
+    <unit id="common.cookies.orcid_uses">
+      <notes>
+        <note category="location">app/layout/cookie-banner/cookie-banner.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>
+      ORCID uses cookies to improve your experience and to help us understand
+      how you use our websites.</source>
+      </segment>
+    </unit>
+    <unit id="common.cookies.learn_more">
+      <notes>
+        <note category="location">app/layout/cookie-banner/cookie-banner.component.html:11,12</note>
+      </notes>
+      <segment>
+        <source>
+      Learn more about how we use cookies</source>
+      </segment>
+    </unit>
+    <unit id="common.cookies.click_dismiss">
+      <notes>
+        <note category="location">app/layout/cookie-banner/cookie-banner.component.html:20,22</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
+      </notes>
+      <segment>
+        <source>
+    Dismiss
+  </source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.warning_1">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Warning!</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.warning_2">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
+      </notes>
+      <segment>
+        <source>is a test website.
+    </source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.is_the_official">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source>
+      is the official website. Sandbox only sends email messages
+      to</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.mailinator">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
+      </notes>
+      <segment>
+        <source>mailinator.com</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.email_addresses">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
+      </notes>
+      <segment>
+        <source>email addresses, see Sandbox FAQ for</source>
+      </segment>
+    </unit>
+    <unit id="common.js.domain.warn.more_information">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
+      </notes>
+      <segment>
+        <source>
+      more information</source>
+      </segment>
+    </unit>
+    <unit id="home.distinguish_yourself">
+      <notes>
+        <note category="description">#sentenceCase</note>
+        <note category="location">app/home/pages/home/home.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>
+            DISTINGUISH YOURSELF IN
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.three_easy">
+      <notes>
+        <note category="description">#lowerCase</note>
+        <note category="location">app/home/pages/home/home.component.html:19,20</note>
+      </notes>
+      <segment>
+        <source>
+            THREE EASY STEPS</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.orcidProvides">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:27,35</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID provides a persistent digital identifier (an ORCID iD) that you
+          own and control, and that distinguishes you from every other
+          researcher. You can connect your iD with your professional information
+          — affiliations, grants, publications, peer review, and more. You can
+          use your iD to share your information with other systems, ensuring you
+          get recognition for all your contributions, saving you time and
+          hassle, and reducing the risk of errors.
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.findOutMore">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:43,45</note>
+      </notes>
+      <segment>
+        <source>
+            FIND OUT MORE ABOUT OUR MISSION AND VALUES
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.one">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:57</note>
+      </notes>
+      <segment>
+        <source>1</source>
+      </segment>
+    </unit>
+    <unit id="home.register">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:59,61</note>
+      </notes>
+      <segment>
+        <source>
+              REGISTER
+            </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.getYourOrcid">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:64,67</note>
+      </notes>
+      <segment>
+        <source>
+              Get your unique ORCID identifier. It’s free and only takes a
+              minute, so
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.register_now">
+      <notes>
+        <note category="description">#lowerCase</note>
+        <note category="location">app/home/pages/home/home.component.html:72,74</note>
+      </notes>
+      <segment>
+        <source>
+              register now!
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.two">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:80</note>
+      </notes>
+      <segment>
+        <source>2</source>
+      </segment>
+    </unit>
+    <unit id="home.user_your">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:87</note>
+      </notes>
+      <segment>
+        <source>USE YOUR</source>
+      </segment>
+    </unit>
+    <unit id="home.orcid_id">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:88</note>
+      </notes>
+      <segment>
+        <source>ORCID ID</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.includeYourId">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:94,98</note>
+      </notes>
+      <segment>
+        <source>
+            Use your iD, when prompted, in systems and platforms from grant
+            application to manuscript submission and beyond, to ensure you get
+            credit for your contributions.
+          </source>
+      </segment>
+    </unit>
+    <unit id="home.three">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:103</note>
+      </notes>
+      <segment>
+        <source>3</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.shareYourOrcid">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:111</note>
+      </notes>
+      <segment>
+        <source>SHARE YOUR ORCID iD</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.enhanceYourProfile">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:118,123</note>
+      </notes>
+      <segment>
+        <source>
+            The more information connected to your ORCID record, the more you’ll
+            benefit from sharing your iD - so give the organizations you trust
+            permission to update your record as well as adding your
+            affiliations, emails, other names you’re known by, and more.
+          </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.membersMakeOrcid">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:152,154</note>
+      </notes>
+      <segment>
+        <source>
+            Our organizational members make ORCID possible!
+          </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.orcidIs">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:157,162</note>
+      </notes>
+      <segment>
+        <source>
+              ORCID is a non-profit organization supported by a global community
+              of member organizations, including research institutions,
+              publishers, funders, professional associations, service providers,
+              and other stakeholders in the research ecosystem.
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.curious_about">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:164,166</note>
+      </notes>
+      <segment>
+        <source>
+              Curious about who our members are?
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.see_our">
+      <notes>
+        <note category="location">app/home/pages/home/home.component.html:167,169</note>
+      </notes>
+      <segment>
+        <source>
+              See our complete list of member organizations
+            </source>
+      </segment>
+    </unit>
+    <unit id="home.latest_news">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:5,7</note>
+      </notes>
+      <segment>
+        <source>
+          LATEST NEWS
+        </source>
+      </segment>
+    </unit>
+    <unit id="home.more_news">
+      <notes>
+        <note category="description">#upperCase</note>
+        <note category="location">app/home/components/news/news.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>
+          MORE NEWS
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.fullOrcid">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:48,50</note>
+      </notes>
+      <segment>
+        <source>
+              FULL ARTICLE
+            </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.moreNews">
+      <notes>
+        <note category="location">app/home/components/news/news.component.html:65,67</note>
+      </notes>
+      <segment>
+        <source>
+      MORE NEWS
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.passwordAndOrcid">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:5,7</note>
+      </notes>
+      <segment>
+        <source>
+          Password and ORCID iD Recovery
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.didYouForget">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source>
+            Did you forget your password or ORCID iD?
+          </source>
+      </segment>
+    </unit>
+    <unit id="check_password_modal.password">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="common.orcid_id">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:35</note>
+      </notes>
+      <segment>
+        <source>ORCID ID</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.pleaseChooseRecovery">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:45</note>
+      </notes>
+      <segment>
+        <source>Please choose a recovery option</source>
+      </segment>
+    </unit>
+    <unit id="oauth_sign_up.labelemail">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:49</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="Email.resendClaim.invalidEmail">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Please enter a valid email address</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.recoverAccountDetails">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:80,82</note>
+      </notes>
+      <segment>
+        <source>
+            RECOVER ACCOUNT DETAILS
+          </source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_1">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:91</note>
+      </notes>
+      <segment>
+        <source>We have sent a message to</source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_2">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:95</note>
+      </notes>
+      <segment>
+        <source>from reset@notify.orcid.org.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.youCanNow">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:97</note>
+      </notes>
+      <segment>
+        <source>You can now</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.returnToLoginPage">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:101</note>
+      </notes>
+      <segment>
+        <source>return to the login page.</source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_3">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:106,108</note>
+      </notes>
+      <segment>
+        <source>If you do not receive a message within 10 minutes, please check
+              your spam folder. If you still do not see a message,
+              then</source>
+      </segment>
+    </unit>
+    <unit id="orcid.frontend.reset.password.email_success_4">
+      <notes>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:114</note>
+      </notes>
+      <segment>
+        <source>contact us</source>
+      </segment>
+    </unit>
     <unit id="public-layout.sign_in">
       <notes>
         <note category="description">#upperCase</note>
@@ -281,361 +657,6 @@
       </notes>
       <segment>
         <source>See more statistics</source>
-      </segment>
-    </unit>
-    <unit id="home.distinguish_yourself">
-      <notes>
-        <note category="description">#sentenceCase</note>
-        <note category="location">app/home/pages/home/home.component.html:16,18</note>
-      </notes>
-      <segment>
-        <source>
-            DISTINGUISH YOURSELF IN
-          </source>
-      </segment>
-    </unit>
-    <unit id="home.three_easy">
-      <notes>
-        <note category="description">#lowerCase</note>
-        <note category="location">app/home/pages/home/home.component.html:19,20</note>
-      </notes>
-      <segment>
-        <source>
-            THREE EASY STEPS</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.orcidProvides">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:27,35</note>
-      </notes>
-      <segment>
-        <source>
-          ORCID provides a persistent digital identifier (an ORCID iD) that you
-          own and control, and that distinguishes you from every other
-          researcher. You can connect your iD with your professional information
-          — affiliations, grants, publications, peer review, and more. You can
-          use your iD to share your information with other systems, ensuring you
-          get recognition for all your contributions, saving you time and
-          hassle, and reducing the risk of errors.
-        </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.findOutMore">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:42,43</note>
-      </notes>
-      <segment>
-        <source>FIND OUT MORE ABOUT OUR MISSION AND VALUES
-          </source>
-      </segment>
-    </unit>
-    <unit id="home.one">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:55</note>
-      </notes>
-      <segment>
-        <source>1</source>
-      </segment>
-    </unit>
-    <unit id="home.register">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:57,59</note>
-      </notes>
-      <segment>
-        <source>
-              REGISTER
-            </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.getYourOrcid">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:62,65</note>
-      </notes>
-      <segment>
-        <source>
-              Get your unique ORCID identifier. It’s free and only takes a
-              minute, so
-            </source>
-      </segment>
-    </unit>
-    <unit id="home.register_now">
-      <notes>
-        <note category="description">#lowerCase</note>
-        <note category="location">app/home/pages/home/home.component.html:70,72</note>
-      </notes>
-      <segment>
-        <source>
-              register now!
-            </source>
-      </segment>
-    </unit>
-    <unit id="home.two">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:78</note>
-      </notes>
-      <segment>
-        <source>2</source>
-      </segment>
-    </unit>
-    <unit id="home.user_your">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:85</note>
-      </notes>
-      <segment>
-        <source>USE YOUR</source>
-      </segment>
-    </unit>
-    <unit id="home.orcid_id">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:86</note>
-      </notes>
-      <segment>
-        <source>ORCID ID</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.includeYourId">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:92,96</note>
-      </notes>
-      <segment>
-        <source>
-            Use your iD, when prompted, in systems and platforms from grant
-            application to manuscript submission and beyond, to ensure you get
-            credit for your contributions.
-          </source>
-      </segment>
-    </unit>
-    <unit id="home.three">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:101</note>
-      </notes>
-      <segment>
-        <source>3</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.shareYourOrcid">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:109</note>
-      </notes>
-      <segment>
-        <source>SHARE YOUR ORCID iD</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.enhanceYourProfile">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:116,121</note>
-      </notes>
-      <segment>
-        <source>
-            The more information connected to your ORCID record, the more you’ll
-            benefit from sharing your iD - so give the organizations you trust
-            permission to update your record as well as adding your
-            affiliations, emails, other names you’re known by, and more.
-          </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.membersMakeOrcid">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:150,152</note>
-      </notes>
-      <segment>
-        <source>
-            Our organizational members make ORCID possible!
-          </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.orcidIs">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:155,160</note>
-      </notes>
-      <segment>
-        <source>
-              ORCID is a non-profit organization supported by a global community
-              of member organizations, including research institutions,
-              publishers, funders, professional associations, service providers,
-              and other stakeholders in the research ecosystem.
-            </source>
-      </segment>
-    </unit>
-    <unit id="home.curious_about">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:162,164</note>
-      </notes>
-      <segment>
-        <source>
-              Curious about who our members are?
-            </source>
-      </segment>
-    </unit>
-    <unit id="home.see_our">
-      <notes>
-        <note category="location">app/home/pages/home/home.component.html:165,167</note>
-      </notes>
-      <segment>
-        <source>
-              See our complete list of member organizations
-            </source>
-      </segment>
-    </unit>
-    <unit id="home.latest_news">
-      <notes>
-        <note category="location">app/home/components/news/news.component.html:5,7</note>
-      </notes>
-      <segment>
-        <source>
-          LATEST NEWS
-        </source>
-      </segment>
-    </unit>
-    <unit id="home.more_news">
-      <notes>
-        <note category="description">#upperCase</note>
-        <note category="location">app/home/components/news/news.component.html:15,17</note>
-      </notes>
-      <segment>
-        <source>
-          MORE NEWS
-        </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.fullOrcid">
-      <notes>
-        <note category="location">app/home/components/news/news.component.html:48,50</note>
-      </notes>
-      <segment>
-        <source>
-              FULL ARTICLE
-            </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.moreNews">
-      <notes>
-        <note category="location">app/home/components/news/news.component.html:65,67</note>
-      </notes>
-      <segment>
-        <source>
-      MORE NEWS
-    </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.passwordAndOrcid">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:5,7</note>
-      </notes>
-      <segment>
-        <source>
-          Password and ORCID iD Recovery
-        </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.didYouForget">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:13,15</note>
-      </notes>
-      <segment>
-        <source>
-            Did you forget your password or ORCID iD?
-          </source>
-      </segment>
-    </unit>
-    <unit id="check_password_modal.password">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:28</note>
-      </notes>
-      <segment>
-        <source>Password</source>
-      </segment>
-    </unit>
-    <unit id="common.orcid_id">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:36</note>
-      </notes>
-      <segment>
-        <source>ORCID ID</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.pleaseChooseRecovery">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:46</note>
-      </notes>
-      <segment>
-        <source>Please choose a recovery option</source>
-      </segment>
-    </unit>
-    <unit id="oauth_sign_up.labelemail">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:50</note>
-      </notes>
-      <segment>
-        <source>Email</source>
-      </segment>
-    </unit>
-    <unit id="Email.resendClaim.invalidEmail">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:59</note>
-      </notes>
-      <segment>
-        <source>Please enter a valid email address</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.recoverAccountDetails">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:80,82</note>
-      </notes>
-      <segment>
-        <source>
-            RECOVER ACCOUNT DETAILS
-          </source>
-      </segment>
-    </unit>
-    <unit id="orcid.frontend.reset.password.email_success_1">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:91</note>
-      </notes>
-      <segment>
-        <source>We have sent a message to</source>
-      </segment>
-    </unit>
-    <unit id="orcid.frontend.reset.password.email_success_2">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:95</note>
-      </notes>
-      <segment>
-        <source>from reset@notify.orcid.org.</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.youCanNow">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:97</note>
-      </notes>
-      <segment>
-        <source>You can now</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.returnToLoginPage">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:101</note>
-      </notes>
-      <segment>
-        <source>return to the login page.</source>
-      </segment>
-    </unit>
-    <unit id="orcid.frontend.reset.password.email_success_3">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:106,108</note>
-      </notes>
-      <segment>
-        <source>If you do not receive a message within 5 minutes, please check
-              your spam folder. If you still do not see a message,
-              then</source>
-      </segment>
-    </unit>
-    <unit id="orcid.frontend.reset.password.email_success_4">
-      <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:114</note>
-      </notes>
-      <segment>
-        <source>contact us</source>
       </segment>
     </unit>
     <unit id="public_profile.empty_profile">
@@ -925,6 +946,150 @@
       <segment>
         <source>
     Membership and service</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.showing">
+      <notes>
+        <note category="location">app/search/pages/search/search.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Showing</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.of">
+      <notes>
+        <note category="location">app/search/pages/search/search.component.html:10</note>
+      </notes>
+      <segment>
+        <source>of</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.results">
+      <notes>
+        <note category="location">app/search/pages/search/search.component.html:12</note>
+      </notes>
+      <segment>
+        <source>results.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.orcidID">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:10,12</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:73</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID ID
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.firstName">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:13</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:33</note>
+      </notes>
+      <segment>
+        <source>First Name</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.lastName">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:14</note>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:37</note>
+      </notes>
+      <segment>
+        <source>Last Name</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.otherNames">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>
+          Other Names
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.affiliations">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:18,20</note>
+      </notes>
+      <segment>
+        <source>
+          Affiliations
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.noResults">
+      <notes>
+        <note category="location">app/search/components/results/results.component.html:47,49</note>
+      </notes>
+      <segment>
+        <source>
+    No results found. Please edit your search terms.
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.advanceSearch">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:14</note>
+      </notes>
+      <segment>
+        <source>ADVANCE SEARCH</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.institutionName">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:42</note>
+      </notes>
+      <segment>
+        <source>Institution Name</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.institutionNamePlaceholder">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:47</note>
+        <note category="location">locale/i18n.pseudo.component.html:78</note>
+      </notes>
+      <segment>
+        <source>Employment, education, or RINGGOLD ID</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.keyword">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:56</note>
+      </notes>
+      <segment>
+        <source>Keyword</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.otherNameFields">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:67</note>
+      </notes>
+      <segment>
+        <source>Also search other name fields</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.orcidIdPatterError">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:75,77</note>
+      </notes>
+      <segment>
+        <source>
+          Given value doesn&apos;t match ORCID iD pattern
+        </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.search.search">
+      <notes>
+        <note category="location">app/search/components/advance-search/advance-search.component.html:87,89</note>
+      </notes>
+      <segment>
+        <source>
+          SEARCH
+        </source>
       </segment>
     </unit>
     <unit id="public-layout.for_researchers">
@@ -1414,6 +1579,54 @@
       </notes>
       <segment>
         <source>My ORCID Record</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.firstPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:80</note>
+      </notes>
+      <segment>
+        <source>First page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.itemsPerPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:81</note>
+      </notes>
+      <segment>
+        <source>Items per page:</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.lastPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:82</note>
+      </notes>
+      <segment>
+        <source>Last page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.nextPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:83</note>
+      </notes>
+      <segment>
+        <source>Next page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.previousPageLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:84</note>
+      </notes>
+      <segment>
+        <source>Previous page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.material.of">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:85</note>
+      </notes>
+      <segment>
+        <source>of</source>
       </segment>
     </unit>
   </file>

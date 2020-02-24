@@ -1,5 +1,6 @@
 import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
-
+import { Router, NavigationEnd } from '@angular/router'
+import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
 import { CookieService } from 'ngx-cookie-service'
@@ -25,7 +26,9 @@ export class AppComponent {
   constructor(
     _platformInfo: PlatformInfoService,
     @Inject(LOCALE_ID) public locale: string,
-    _cookie: CookieService
+    _cookie: CookieService,
+    _router: Router,
+    _googleAnalytics: GoogleAnalyticsService
   ) {
     _platformInfo.get().subscribe(platformInfo => {
       this.setPlatformClasses(platformInfo)
@@ -33,6 +36,11 @@ export class AppComponent {
     this.direction = locale === 'ar' ? 'rtl' : null
 
     this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
+    _router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        _googleAnalytics.reportPageView(event.urlAfterRedirects)
+      }
+    })
   }
 
   setPlatformClasses(platformInfo: PlatformInfo) {

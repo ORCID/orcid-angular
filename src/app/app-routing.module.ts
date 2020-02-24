@@ -39,6 +39,10 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'orcid-search/search',
+    loadChildren: './search/search.module#SearchModule',
+  },
+  {
     path: '**',
     redirectTo: '/',
   },

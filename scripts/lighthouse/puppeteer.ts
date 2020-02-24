@@ -23,9 +23,6 @@ export class Puppeteer {
     this.browser = await puppeteer.launch({
       args: [`--remote-debugging-port=${this.PORT}`],
       headless: false,
-      // slowMo: 50,
-      executablePath:
-        '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     })
   }
 

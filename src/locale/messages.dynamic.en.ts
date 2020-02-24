@@ -5,6 +5,7 @@ export const LOCALE : {[key:string]: string} = {
   "public-layout.sign_in": "SIGN IN",
   "workspace.notifications": "Inbox",
   "workspace.developer_tools": "Developer tools",
+  "ngOrcid.search.institutionNamePlaceholder": "Employment, education, or RINGGOLD ID",
   "public-layout.for_researchers": "For Researchers",
   "public-layout.for_organizations": "For Organizations",
   "public-layout.about": "About",
@@ -65,5 +66,11 @@ export const LOCALE : {[key:string]: string} = {
   "admin.workspace_link": "Admin page",
   "workspace.self_service": "Member Tools",
   "public-layout.my_orcid": "ORCID Record",
-  "public-layout.my_orcid_record": "My ORCID Record"
+  "public-layout.my_orcid_record": "My ORCID Record",
+  "ngOrcid.material.firstPageLabel": "First page",
+  "ngOrcid.material.itemsPerPageLabel": "Items per page:",
+  "ngOrcid.material.lastPageLabel": "Last page",
+  "ngOrcid.material.nextPageLabel": "Next page",
+  "ngOrcid.material.previousPageLabel": "Previous page",
+  "ngOrcid.material.of": "of"
 }

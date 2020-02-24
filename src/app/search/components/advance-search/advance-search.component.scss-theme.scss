@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin advance-results-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  form {
+    border: solid 1px map-get($foreground, 'box-border');
+  }
+}
+
+@include advance-results-theme($orcid-app-theme);

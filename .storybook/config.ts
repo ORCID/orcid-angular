@@ -10,8 +10,6 @@ addParameters({
     hierarchyRootSeparator: /\|/,
 
     storySort: (a, b) => {
-      console.log(a, b)
-
       if (
         a[1].parameters &&
         a[1].parameters.order &&
@@ -31,10 +29,8 @@ addParameters({
         !a[1].parameters.order &&
         (b[1].parameters && !b[1].parameters.order)
       ) {
-        console.log('x', a, b)
         return 0
       } else {
-        console.log('y', a, b)
         return a[1].parameters && !a[1].parameters.order ? 1 : -1
       }
     },

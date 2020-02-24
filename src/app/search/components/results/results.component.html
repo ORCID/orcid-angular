@@ -1,0 +1,57 @@
+<div
+  role="main"
+  aria-label="search results"
+  class="row table-container"
+  *ngIf="resultsContent && resultsContent.length"
+>
+  <table aria-label="Search results">
+    <thead>
+      <tr>
+        <th class="mat-body-2 orcid-id-column" i18n="@@ngOrcid.search.orcidID">
+          ORCID ID
+        </th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.firstName">First Name</th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.lastName">Last Name</th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.otherNames">
+          Other Names
+        </th>
+        <th class="mat-body-2" i18n="@@ngOrcid.search.affiliations">
+          Affiliations
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orcid of resultsContent">
+        <td class="orcid-id-column">
+          <a href="{{orcid['orcid-id']}}"> {{ orcid['orcid-id'] }}</a>
+        </td>
+        <td>{{ orcid['given-names'] }}</td>
+        <td>{{ orcid['family-names'] }}</td>
+        <td>{{ orcid['other-name'].join(', ') }}</td>
+        <td>{{ orcid['institution-name'].join(', ') }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Use hidden to allow image to be preloaded -->
+<section
+  class="col notFoundResults"
+  [hidden]="
+    !searchResults ||
+    (searchResults['expanded-result'] &&
+      searchResults['expanded-result'].length)
+  "
+>
+  <img class="row space-around" src="./assets/vectors/no-results.svg" alt="" />
+  <p class="row space-around" i18n="@@ngOrcid.search.noResults" aria="alert">
+    No results found. Please edit your search terms.
+  </p>
+</section>
+
+<section *ngIf="!searchResults">
+  <div class="row horizontal-center">
+    <mat-progress-spinner color="primary" mode="indeterminate" class="col">
+    </mat-progress-spinner>
+  </div>
+</section>

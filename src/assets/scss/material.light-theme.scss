@@ -15,13 +15,13 @@
   $background: map_merge(
     $background,
     (
-      // COLORS ADDED
+      // COLORS ADDED
         app-news: $dark-primary-background,
       light-grey: $light-grey,
       grey: $grey,
       blue-overlay: $blue-overlay,
       dark-grey: $dark-grey-background,
-      // COLORS OVERWRITES
+      // COLORS OVERWRITES
         unselected-chip: white
     )
   );
@@ -33,7 +33,12 @@
   // Overwrites $mat-light-theme-foreground values
   // https://github.com/angular/components/blob/8.1.4/src/material/core/theming/_palette.scss
   $foreground: map-get($mat-light-theme-object, foreground);
-  $foreground: map_merge($foreground, ());
+  $foreground: map_merge(
+    $foreground,
+    (
+      box-border: $soft-grey,
+    )
+  );
   $result: map_merge(
     $mat-light-theme-object,
     (
