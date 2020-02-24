@@ -1,0 +1,23 @@
+<div class="alert alert-banner  mat-body-1" id="test-warn-div">
+  <p>
+    <ng-container i18n="@@common.cookies.orcid_uses">
+      ORCID uses cookies to improve your experience and to help us understand
+      how you use our websites.</ng-container
+    >
+    <a
+      target="common.cookies.learn_more"
+      href="https://orcid.org/privacy-policy#TrackingTechnology"
+      i18n="@@common.cookies.learn_more"
+    >
+      Learn more about how we use cookies</a
+    >.
+  </p>
+  <button
+    mat-flat-button
+    color="primary"
+    i18n="@@common.cookies.click_dismiss"
+    (click)="onDismiss()"
+  >
+    Dismiss
+  </button>
+</div>
