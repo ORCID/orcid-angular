@@ -213,7 +213,7 @@
       </notes>
       <segment>
         <source>
-            DISTINGUISH YOURSELF IN
+            Distinguish yourself in
           </source>
       </segment>
     </unit>
@@ -224,7 +224,7 @@
       </notes>
       <segment>
         <source>
-            THREE EASY STEPS</source>
+            three easy steps</source>
       </segment>
     </unit>
     <unit id="ngOrcid.orcidProvides">
@@ -475,7 +475,7 @@
         <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:35</note>
       </notes>
       <segment>
-        <source>ORCID ID</source>
+        <source>ORCID iD</source>
       </segment>
     </unit>
     <unit id="ngOrcid.pleaseChooseRecovery">
