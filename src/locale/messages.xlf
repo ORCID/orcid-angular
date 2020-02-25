@@ -1023,7 +1023,7 @@
     </unit>
     <unit id="ngOrcid.search.noResults">
       <notes>
-        <note category="location">app/search/components/results/results.component.html:47,49</note>
+        <note category="location">app/search/components/results/results.component.html:52,54</note>
       </notes>
       <segment>
         <source>
@@ -1053,7 +1053,7 @@
         <note category="location">locale/i18n.pseudo.component.html:78</note>
       </notes>
       <segment>
-        <source>Employment, education, or RINGGOLD ID</source>
+        <source>affiliation or organisation ID</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.keyword">
