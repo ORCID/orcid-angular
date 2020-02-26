@@ -12,34 +12,22 @@ import { LanguageService } from 'src/app/core/language/language.service'
 })
 export class LanguageComponent implements OnInit {
   languageMenuOptions
-  changeLanguageWithoutExtraBackendCallToggl = true
   constructor(
     @Inject(LOCALE_ID) public locale: string,
     @Inject(WINDOW) private window: Window,
     private _cs: CookieService,
-    private _togglz: TogglzService,
     private _language: LanguageService
   ) {
     this.languageMenuOptions = environment.LANGUAGE_MENU_OPTIONS
-    this._togglz
-      .getStateOf('CHANGE_LANGUAGE_WITHOUT_EXTRA_BACKEND_CALL')
-      .subscribe(
-        value => (this.changeLanguageWithoutExtraBackendCallToggl = value)
-      )
   }
 
   // If the togglz feature CHANGE_LANGUAGE_WITHOUT_EXTRA_BACKEND_CALL is enable
   // the cookie will be updated locally and the page will be reloaded
   // if not a backend call and the reload will be executed
   changeLanguage(languageKey: string) {
-    if (this.changeLanguageWithoutExtraBackendCallToggl) {
-      this._cs.set('locale_v3', languageKey, null, '/')
+    this._language.changeLanguage(languageKey).subscribe(() => {
       this.window.location.reload()
-    } else {
-      this._language.changeLanguage(languageKey).subscribe(() => {
-        this.window.location.reload()
-      })
-    }
+    })
   }
 
   ngOnInit() {}
