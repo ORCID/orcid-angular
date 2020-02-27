@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from 'src/app/cdk/window'
 import { PerformanceMarks } from 'src/app/constants'
+
 @Injectable({
   providedIn: 'root',
 })
