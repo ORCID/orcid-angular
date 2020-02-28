@@ -39,9 +39,8 @@ export class SearchService {
       )
     } else if (escapedParams && escapedParams.orcid) {
       // When there is an Orcid id only search the orcid ID
-      return (
-        `?q=orcid:${escapedParams.orcid}` + this.handlePagination(querryParam)
-      )
+      let orcidID = extractOrcidId(escapedParams.orcid)
+      return `?q=orcid:${orcidId}` + this.handlePagination(querryParam)
     } else if (escapedParams) {
       // otherwise do an advance search
       const searchParameters = []
@@ -87,6 +86,15 @@ export class SearchService {
     // per https://lucene.apache.org/solr/guide/6_6/the-standard-query-parser.html#TheStandardQueryParser-EscapingSpecialCharacters
     const escapedText = inputText.replace(/([!^&*()+=\[\]\\/{}|:?~])/g, '\\$1')
     return escapedText.toLowerCase().trim()
+  }
+
+  extractOrcidId(string: any) {
+    let orcidPathRegex = new RegExp('(\\d{4}-){3,}\\d{3}[\\dX]', 'i')
+    let regexResult = orcidPathRegex.exec(string)
+    if (regexResult) {
+      return regexResult[0]
+    }
+    return null
   }
 
   // Remove empty values and trim strings
