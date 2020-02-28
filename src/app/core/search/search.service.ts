@@ -39,7 +39,7 @@ export class SearchService {
       )
     } else if (escapedParams && escapedParams.orcid) {
       // When there is an Orcid id only search the orcid ID
-      let orcidID = extractOrcidId(escapedParams.orcid)
+      let orcidId = this.extractOrcidId(escapedParams.orcid)
       return `?q=orcid:${orcidId}` + this.handlePagination(querryParam)
     } else if (escapedParams) {
       // otherwise do an advance search
