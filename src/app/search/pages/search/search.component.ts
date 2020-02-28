@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
     meta.updateTag({ name: 'robots', content: 'NOINDEX, NOFOLLOW' })
     route.queryParams
       .pipe(
-        // Set the query parameters to the advance search
+        // Set the query parameters to the advanced search
         tap((value: SearchParameters) => {
           this.searchParams = this._searchService.trimSearchParameters(value)
           this.pageIndex = value.pageIndex || 0

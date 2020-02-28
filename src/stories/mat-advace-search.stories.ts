@@ -13,7 +13,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Components|Advance Search', module)
+storiesOf('Components|Advanced Search', module)
   .add(
     'Plain',
     () => ({

@@ -1036,7 +1036,7 @@
         <note category="location">app/search/components/advance-search/advance-search.component.html:14</note>
       </notes>
       <segment>
-        <source>ADVANCE SEARCH</source>
+        <source>ADVANCED SEARCH</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.institutionName">

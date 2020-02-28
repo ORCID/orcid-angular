@@ -64,7 +64,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    // it opens the advance search with the search parameters
+    // it opens the advanced search with the search parameters
     if (
       this.searchValues &&
       Object.keys(this.searchValues).length &&
@@ -75,13 +75,13 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
     }
 
     // If has no parameters
-    // it opens the advance search empty
+    // it opens the advanced search empty
     if (this.searchValues && !Object.keys(this.searchValues).length) {
       this.showAdvanceSearch = true
     }
 
     // If is a quick search
-    // clean and close the advance search
+    // clean and close the advanced search
     if (this.searchValues && this.searchValues['searchQuery']) {
       this.showAdvanceSearch = false
       this.advanceSearch.reset()

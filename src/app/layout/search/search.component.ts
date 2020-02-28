@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
     if (Object.keys(queryParams).length && queryParams['searchQuery']) {
       this.whatToSearch = queryParams['searchQuery']
     } else {
-      // Clean whatToSearch if is and advance search or has no query parameters
+      // Clean whatToSearch if is and advanced search or has no query parameters
       this.whatToSearch = ''
     }
   }
