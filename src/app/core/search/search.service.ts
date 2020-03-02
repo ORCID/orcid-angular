@@ -101,15 +101,15 @@ export class SearchService {
     return null
   }
 
-  // Remove empty values and trim strings
-  trimSearchParameters(value: SearchParameters) {
+  // Remove empty values, trim strings and remove false parameters
+  searchParametersAdapter(value: SearchParameters) {
     const trimParameters = {}
     Object.keys(value).forEach(element => {
       if (typeof value[element] === 'string') {
-        if (value[element].trim()) {
+        if (value[element].trim() && value[element] !== 'false') {
           trimParameters[element] = value[element].trim()
         }
-      } else {
+      } else if (value[element]) {
         trimParameters[element] = value[element]
       }
     })

@@ -30,7 +30,7 @@ export class SearchComponent implements OnInit {
       .pipe(
         // Set the query parameters to the advance search
         tap((value: SearchParameters) => {
-          this.searchParams = this._searchService.trimSearchParameters(value)
+          this.searchParams = this._searchService.searchParametersAdapter(value)
           this.pageIndex = value.pageIndex || 0
           this.pageSize = value.pageSize || 50
           this.loadingNewResults = true
