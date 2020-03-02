@@ -59,10 +59,14 @@ export class SearchService {
         if (escapedParams.otherFields === 'true') {
           searchValue += ` OR other-names:${escapedParams.firstName}`
         }
-        searchParameters.push(searchValue)
+        searchParameters.push(`(${searchValue})`)
       }
       if (escapedParams.lastName) {
-        searchParameters.push(`family-name:${escapedParams.lastName}`)
+        let searchValue = `family-name:${escapedParams.lastName}`
+        if (escapedParams.otherFields === 'true') {
+          searchValue += ` OR other-names:${escapedParams.lastName}`
+        }
+        searchParameters.push(`(${searchValue})`)
       }
       if (escapedParams.keyword) {
         searchParameters.push(`keyword:${escapedParams.keyword}`)
