@@ -53,49 +53,34 @@ export class SearchService {
       )
     } else if (escapedParams) {
       // otherwise do an advance search
-      const nameParameters = []
+      const searchParameters = []
       if (escapedParams.firstName) {
-        nameParameters.push(`given-names:${escapedParams.firstName}`)
+        let searchValue = `given-names:${escapedParams.firstName}`
+        if (escapedParams.otherFields === 'true') {
+          searchValue += ` OR other-names:${escapedParams.firstName}`
+        }
+        searchParameters.push(searchValue)
       }
       if (escapedParams.lastName) {
-        nameParameters.push(`family-name:${escapedParams.lastName}`)
+        searchParameters.push(`family-name:${escapedParams.lastName}`)
       }
-
-      const mustContainParameters = []
       if (escapedParams.keyword) {
-        mustContainParameters.push(`keyword:${escapedParams.keyword}`)
+        searchParameters.push(`keyword:${escapedParams.keyword}`)
       }
       if (escapedParams.institution) {
         // if all chars are numbers, assume it's a ringgold id
         if (escapedParams.institution.match(/^[0-9]*$/)) {
-          mustContainParameters.push(
-            `ringgold-org-id:${escapedParams.institution}`
-          )
+          searchParameters.push(`ringgold-org-id:${escapedParams.institution}`)
         } else if (escapedParams.institution.startsWith('grid.')) {
-          mustContainParameters.push(`grid-org-id:${escapedParams.institution}`)
+          searchParameters.push(`grid-org-id:${escapedParams.institution}`)
         } else {
-          mustContainParameters.push(
+          searchParameters.push(
             `affiliation-org-name:${escapedParams.institution}`
           )
         }
       }
-
-      const canContainParameters = []
-
-      if (escapedParams.otherFields === 'true') {
-        if (escapedParams.firstName) {
-          canContainParameters.push(`${escapedParams.firstName}`)
-        }
-        if (escapedParams.lastName) {
-          canContainParameters.push(`${escapedParams.lastName}`)
-        }
-      }
       return this.encodeUrlWithPagination(
-        `(${mustContainParameters.join(' AND ')}) ${
-          canContainParameters.length
-            ? ' OR other-names:(' + canContainParameters.join(' OR ') + ')'
-            : ''
-        }`,
+        searchParameters.join(' AND '),
         querryParam
       )
     }
