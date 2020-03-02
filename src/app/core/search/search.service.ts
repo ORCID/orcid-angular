@@ -33,7 +33,7 @@ export class SearchService {
       .pipe(catchError(this._errorHandler.handleError))
   }
 
-  buildSearchUrl(querryParam: SearchParameters): string {
+  private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
     Object.keys(querryParam).map(key => {
       escapedParams[key] = this.escapeReservedChar(querryParam[key])
@@ -44,12 +44,11 @@ export class SearchService {
       this.extractOrcidId(escapedParams.searchQuery)
 
     if (escapedParams && orcidId) {
-      // When there is an Orcid id on the "Advance search Orcid iD" or "Quick search input" only: search the orcid ID
-      return this.encodeAndAddPagination(`orcid:${orcidId}`, querryParam)
+      // When there is an Orcid id on the "Advance search Orcid iD" or "Quick search input": only search the orcid ID
+      return this.encodeUrlWithPagination(`orcid:${orcidId}`, querryParam)
     } else if (escapedParams && escapedParams.searchQuery) {
       // When there is a searchQuery parameter with no Orcid iD:  do a quick search
-
-      return this.encodeAndAddPagination(
+      return this.encodeUrlWithPagination(
         this.quickSearchEDisMax + escapedParams.searchQuery,
         querryParam
       )
@@ -81,21 +80,21 @@ export class SearchService {
           )
         }
       }
-      return this.encodeAndAddPagination(
+      return this.encodeUrlWithPagination(
         searchParameters.join(' AND '),
         querryParam
       )
     }
   }
 
-  escapeReservedChar(inputText: any) {
+  private escapeReservedChar(inputText: any) {
     // escape all reserved chars except double quotes
     // per https://lucene.apache.org/solr/guide/6_6/the-standard-query-parser.html#TheStandardQueryParser-EscapingSpecialCharacters
     const escapedText = inputText.replace(/([!^&*()+=\[\]\\/{}|:?~])/g, '\\$1')
     return escapedText.toLowerCase().trim()
   }
 
-  extractOrcidId(string: any) {
+  private extractOrcidId(string: any) {
     const regexResult = ORCID_REGEXP.exec(string)
     if (regexResult) {
       return regexResult[0]
@@ -118,7 +117,7 @@ export class SearchService {
     return trimParameters
   }
 
-  private encodeAndAddPagination(searchStream, querryParam) {
+  private encodeUrlWithPagination(searchStream, querryParam) {
     return (
       `?q=${encodeURIComponent(searchStream)}` +
       this.handlePagination(querryParam)
