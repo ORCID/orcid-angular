@@ -10,6 +10,11 @@ import { ORCID_REGEXP } from 'src/app/constants'
   providedIn: 'root',
 })
 export class SearchService {
+  quickSearchEDisMax = encodeURIComponent(
+    // tslint:disable-next-line: max-line-length
+    '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^5.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" mm=1}'
+  )
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
@@ -33,15 +38,21 @@ export class SearchService {
     Object.keys(querryParam).map(key => {
       escapedParams[key] = this.escapeReservedChar(querryParam[key])
     })
-    if (escapedParams && escapedParams.searchQuery) {
-      // When there is a searchQuery parameter do a quick search
-      return (
-        `?q=${escapedParams.searchQuery}` + this.handlePagination(querryParam)
+
+    const orcidId =
+      this.extractOrcidId(escapedParams.orcid) ||
+      this.extractOrcidId(escapedParams.searchQuery)
+
+    if (escapedParams && orcidId) {
+      // When there is an Orcid id on the "Advance search Orcid iD" or "Quick search input" only: search the orcid ID
+      return this.encodeAndAddPagination(`orcid:${orcidId}`, querryParam)
+    } else if (escapedParams && escapedParams.searchQuery) {
+      // When there is a searchQuery parameter with no Orcid iD:  do a quick search
+
+      return this.encodeAndAddPagination(
+        this.quickSearchEDisMax + escapedParams.searchQuery,
+        querryParam
       )
-    } else if (escapedParams && escapedParams.orcid) {
-      // When there is an Orcid id only search the orcid ID
-      const orcidId = this.extractOrcidId(escapedParams.orcid)
-      return `?q=orcid:${orcidId}` + this.handlePagination(querryParam)
     } else if (escapedParams) {
       // otherwise do an advance search
       const searchParameters = []
@@ -70,16 +81,11 @@ export class SearchService {
           )
         }
       }
-      return (
-        `?q=${encodeURIComponent(searchParameters.join(' AND '))}` +
-        this.handlePagination(querryParam)
+      return this.encodeAndAddPagination(
+        searchParameters.join(' AND '),
+        querryParam
       )
     }
-  }
-
-  handlePagination(querryParam: SearchParameters): string {
-    return `&start=${querryParam.pageIndex * querryParam.pageSize ||
-      0}&rows=${querryParam.pageSize || 50}`
   }
 
   escapeReservedChar(inputText: any) {
@@ -110,5 +116,17 @@ export class SearchService {
       }
     })
     return trimParameters
+  }
+
+  private encodeAndAddPagination(searchStream, querryParam) {
+    return (
+      `?q=${encodeURIComponent(searchStream)}` +
+      this.handlePagination(querryParam)
+    )
+  }
+
+  private handlePagination(querryParam: SearchParameters): string {
+    return `&start=${querryParam.pageIndex * querryParam.pageSize ||
+      0}&rows=${querryParam.pageSize || 50}`
   }
 }
