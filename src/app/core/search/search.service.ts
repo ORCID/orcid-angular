@@ -10,10 +10,9 @@ import { ORCID_REGEXP } from 'src/app/constants'
   providedIn: 'root',
 })
 export class SearchService {
-  quickSearchEDisMax = encodeURIComponent(
+  quickSearchEDisMax =
     // tslint:disable-next-line: max-line-length
     '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^5.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" mm=1}'
-  )
 
   constructor(
     private _http: HttpClient,
@@ -44,10 +43,10 @@ export class SearchService {
       this.extractOrcidId(escapedParams.searchQuery)
 
     if (escapedParams && orcidId) {
-      // When there is an Orcid id on the "Advance search Orcid iD" or "Quick search input": only search the orcid ID
+      // When there is an Orcid id on the `Advance search Orcid iD` or `Quick search input`: only search the orcid ID
       return this.encodeUrlWithPagination(`orcid:${orcidId}`, querryParam)
     } else if (escapedParams && escapedParams.searchQuery) {
-      // When there is a searchQuery parameter with no Orcid iD:  do a quick search
+      // When there is a `searchQuery` parameter with no Orcid iD:  do a quick search
       return this.encodeUrlWithPagination(
         this.quickSearchEDisMax + escapedParams.searchQuery,
         querryParam
