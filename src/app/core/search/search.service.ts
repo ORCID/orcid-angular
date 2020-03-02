@@ -5,6 +5,7 @@ import { Observable } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError } from 'rxjs/operators'
+import { ORCID_REGEXP } from 'src/app/constants'
 @Injectable({
   providedIn: 'root',
 })
@@ -39,7 +40,7 @@ export class SearchService {
       )
     } else if (escapedParams && escapedParams.orcid) {
       // When there is an Orcid id only search the orcid ID
-      let orcidId = this.extractOrcidId(escapedParams.orcid)
+      const orcidId = this.extractOrcidId(escapedParams.orcid)
       return `?q=orcid:${orcidId}` + this.handlePagination(querryParam)
     } else if (escapedParams) {
       // otherwise do an advance search
@@ -89,8 +90,7 @@ export class SearchService {
   }
 
   extractOrcidId(string: any) {
-    let orcidPathRegex = new RegExp('(\\d{4}-){3,}\\d{3}[\\dX]', 'i')
-    let regexResult = orcidPathRegex.exec(string)
+    const regexResult = ORCID_REGEXP.exec(string)
     if (regexResult) {
       return regexResult[0]
     }
