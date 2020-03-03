@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes, UrlSegment } from '@angular/router'
 
-import { isValidOrcidFormat, URL_PRIVATE_PROFILE } from './constants'
+import {
+  isValidOrcidFormat,
+  URL_PRIVATE_PROFILE,
+  ApplicationRoutes,
+} from './constants'
 import { EnvironmentBannerComponent } from './environment-banner/environment-banner/environment-banner.component'
 
 export function matcher(segments: UrlSegment[]) {
@@ -18,7 +22,7 @@ export function matcher(segments: UrlSegment[]) {
 
 const routes: Routes = [
   {
-    path: '',
+    path: ApplicationRoutes.home,
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
   },
   // {
@@ -32,14 +36,14 @@ const routes: Routes = [
   //     import('./sign-in/sign-in.module').then(m => m.SignInModule),
   // },
   {
-    path: 'reset-password',
+    path: ApplicationRoutes.resetPassword,
     loadChildren: () =>
       import('./password-recovery/password-recovery.module').then(
         m => m.PasswordRecoveryModule
       ),
   },
   {
-    path: 'orcid-search/search',
+    path: ApplicationRoutes.search,
     loadChildren: './search/search.module#SearchModule',
   },
   {

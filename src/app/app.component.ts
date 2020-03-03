@@ -1,5 +1,5 @@
 import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
-import { Router, NavigationEnd } from '@angular/router'
+import { Router, NavigationEnd, NavigationStart } from '@angular/router'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
@@ -37,7 +37,11 @@ export class AppComponent {
 
     this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
     _router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        _googleAnalytics.reportNavigationStart(event.url)
+      }
       if (event instanceof NavigationEnd) {
+        _googleAnalytics.reportNavigationEnd(event.url)
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
       }
     })

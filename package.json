@@ -21,7 +21,6 @@
     "start:zh_CN": "ng serve --configuration=zh_CN --disable-host-check",
     "start:source": "ng serve --configuration=source --disable-host-check",
     "start:zh_TW": "ng serve --configuration=zh_TW --disable-host-check",
-
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -64,6 +63,7 @@
     "@angular/pwa": "^0.13.9",
     "@angular/router": "^8.2.4",
     "@angular/service-worker": "^8.2.4",
+    "@types/gtag.js": "^0.0.3",
     "core-js": "^2.6.9",
     "css-loader": "^3.2.0",
     "firebase": "^7.6.0",
@@ -109,6 +109,7 @@
     "babel-loader": "^8.0.6",
     "codelyzer": "^5.1.0",
     "cross-env": "^5.2.1",
+    "fs-extra": "^8.1.0",
     "git-repo-info": "^2.1.1",
     "husky": "^1.3.1",
     "jasmine-core": "~2.99.1",
@@ -129,8 +130,7 @@
     "ts-node": "^8.5.2",
     "tslint": "~5.11.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "~3.4.5",
-    "fs-extra": "^8.1.0"
+    "typescript": "~3.4.5"
   },
   "husky": {
     "hooks": {
@@ -163,7 +163,7 @@
           "@angular/material": "^8.0.0",
           "@angular/core": "^8.0.0",
           "@angular/animations": "^8.0.0",
-          "@angular/common": "^8.0.0", 
+          "@angular/common": "^8.0.0",
           "@angular/cdk": "^8.0.0",
           "@angular/forms": "^8.0.0",
           "rxjs": "^6.0.0 "
