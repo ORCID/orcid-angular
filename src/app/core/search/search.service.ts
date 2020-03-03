@@ -5,10 +5,15 @@ import { Observable } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError } from 'rxjs/operators'
+import { ORCID_REGEXP } from 'src/app/constants'
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
+  quickSearchEDisMax =
+    // tslint:disable-next-line: max-line-length
+    '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^5.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" mm=1}'
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
@@ -27,20 +32,24 @@ export class SearchService {
       .pipe(catchError(this._errorHandler.handleError))
   }
 
-  buildSearchUrl(querryParam: SearchParameters): string {
+  private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
     Object.keys(querryParam).map(key => {
       escapedParams[key] = this.escapeReservedChar(querryParam[key])
     })
-    if (escapedParams && escapedParams.searchQuery) {
-      // When there is a searchQuery parameter do a quick search
-      return (
-        `?q=${escapedParams.searchQuery}` + this.handlePagination(querryParam)
-      )
-    } else if (escapedParams && escapedParams.orcid) {
-      // When there is an Orcid id only search the orcid ID
-      return (
-        `?q=orcid:${escapedParams.orcid}` + this.handlePagination(querryParam)
+
+    const orcidId =
+      this.extractOrcidId(escapedParams.orcid) ||
+      this.extractOrcidId(escapedParams.searchQuery)
+
+    if (escapedParams && orcidId) {
+      // When there is an Orcid id on the `Advance search Orcid iD` or `Quick search input`: only search the orcid ID
+      return this.encodeUrlWithPagination(`orcid:${orcidId}`, querryParam)
+    } else if (escapedParams && escapedParams.searchQuery) {
+      // When there is a `searchQuery` parameter with no Orcid iD:  do a quick search
+      return this.encodeUrlWithPagination(
+        this.quickSearchEDisMax + escapedParams.searchQuery,
+        querryParam
       )
     } else if (escapedParams) {
       // otherwise do an advance search
@@ -50,10 +59,14 @@ export class SearchService {
         if (escapedParams.otherFields === 'true') {
           searchValue += ` OR other-names:${escapedParams.firstName}`
         }
-        searchParameters.push(searchValue)
+        searchParameters.push(`(${searchValue})`)
       }
       if (escapedParams.lastName) {
-        searchParameters.push(`family-name:${escapedParams.lastName}`)
+        let searchValue = `family-name:${escapedParams.lastName}`
+        if (escapedParams.otherFields === 'true') {
+          searchValue += ` OR other-names:${escapedParams.lastName}`
+        }
+        searchParameters.push(`(${searchValue})`)
       }
       if (escapedParams.keyword) {
         searchParameters.push(`keyword:${escapedParams.keyword}`)
@@ -70,37 +83,52 @@ export class SearchService {
           )
         }
       }
-      return (
-        `?q=${encodeURIComponent(searchParameters.join(' AND '))}` +
-        this.handlePagination(querryParam)
+      return this.encodeUrlWithPagination(
+        searchParameters.join(' AND '),
+        querryParam
       )
     }
   }
 
-  handlePagination(querryParam: SearchParameters): string {
-    return `&start=${querryParam.pageIndex * querryParam.pageSize ||
-      0}&rows=${querryParam.pageSize || 50}`
-  }
-
-  escapeReservedChar(inputText: any) {
+  private escapeReservedChar(inputText: any) {
     // escape all reserved chars except double quotes
     // per https://lucene.apache.org/solr/guide/6_6/the-standard-query-parser.html#TheStandardQueryParser-EscapingSpecialCharacters
     const escapedText = inputText.replace(/([!^&*()+=\[\]\\/{}|:?~])/g, '\\$1')
     return escapedText.toLowerCase().trim()
   }
 
-  // Remove empty values and trim strings
-  trimSearchParameters(value: SearchParameters) {
+  private extractOrcidId(string: any) {
+    const regexResult = ORCID_REGEXP.exec(string)
+    if (regexResult) {
+      return regexResult[0]
+    }
+    return null
+  }
+
+  // Remove empty values, trim strings and remove false parameters
+  searchParametersAdapter(value: SearchParameters) {
     const trimParameters = {}
     Object.keys(value).forEach(element => {
       if (typeof value[element] === 'string') {
-        if (value[element].trim()) {
+        if (value[element].trim() && value[element] !== 'false') {
           trimParameters[element] = value[element].trim()
         }
-      } else {
+      } else if (value[element]) {
         trimParameters[element] = value[element]
       }
     })
     return trimParameters
+  }
+
+  private encodeUrlWithPagination(searchStream, querryParam) {
+    return (
+      `?q=${encodeURIComponent(searchStream)}` +
+      this.handlePagination(querryParam)
+    )
+  }
+
+  private handlePagination(querryParam: SearchParameters): string {
+    return `&start=${querryParam.pageIndex * querryParam.pageSize ||
+      0}&rows=${querryParam.pageSize || 50}`
   }
 }
