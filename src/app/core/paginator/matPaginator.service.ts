@@ -2,9 +2,7 @@ import { MatPaginatorIntl } from '@angular/material'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { Injectable } from '@angular/core'
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MatPaginatorIntlImplementation extends MatPaginatorIntl {
   firstPageLabel = LOCALE['ngOrcid.material.firstPageLabel']
   itemsPerPageLabel = LOCALE['ngOrcid.material.itemsPerPageLabel']

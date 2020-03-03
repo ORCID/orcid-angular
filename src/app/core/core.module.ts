@@ -4,6 +4,8 @@ import { CookieService } from 'ngx-cookie-service'
 import { TogglzDirective } from './togglz/togglz.directive'
 import { PlatformInfoModule } from '../cdk/platform-info'
 import { WindowModule, WINDOW_PROVIDERS } from '../cdk/window'
+import { MatPaginatorIntlImplementation } from './paginator/matPaginator.service'
+import { MatPaginatorIntl } from '@angular/material'
 
 @NgModule({
   imports: [
@@ -13,7 +15,11 @@ import { WindowModule, WINDOW_PROVIDERS } from '../cdk/window'
     WindowModule,
   ],
   declarations: [TogglzDirective], // Should only export globally used directives.
-  providers: [WINDOW_PROVIDERS, CookieService],
+  providers: [
+    WINDOW_PROVIDERS,
+    CookieService,
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlImplementation },
+  ],
   exports: [TogglzDirective],
 })
 export class CoreModule {}
