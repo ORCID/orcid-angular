@@ -52,7 +52,7 @@ export class SearchService {
         querryParam
       )
     } else if (escapedParams) {
-      // otherwise do an advance search
+      // otherwise do an advanced search
       const searchParameters = []
       if (escapedParams.firstName) {
         let searchValue = `given-names:${escapedParams.firstName}`

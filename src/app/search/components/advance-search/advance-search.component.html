@@ -1,4 +1,4 @@
-<div role="search" aria-label="Advance search">
+<div role="search" aria-label="Advanced search">
   <div class="row h-end">
     <button
       mat-button
@@ -6,12 +6,12 @@
       (click)="toggleAdvanceSearch()"
       [attr.aria-label]="
         !showAdvanceSearch
-          ? 'Show advance search form'
-          : 'Hide advance search form'
+          ? 'Show advanced search form'
+          : 'Hide advanced search form'
       "
     >
       <ng-container i18n="@@ngOrcid.search.advanceSearch"
-        >ADVANCE SEARCH</ng-container
+        >ADVANCED SEARCH</ng-container
       >
       <mat-icon aria-hidden="true" *ngIf="!showAdvanceSearch"
         >expand_more</mat-icon
