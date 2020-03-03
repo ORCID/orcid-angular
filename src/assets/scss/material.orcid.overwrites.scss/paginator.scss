@@ -28,6 +28,11 @@ mat-paginator {
   }
 }
 
+// Reduce the paginator from been displayed on two rows on most mobile scenarios
+.columns-4 .mat-paginator-range-label {
+  margin-right: 0px;
+}
+
 [dir='rtl'] {
   .h-baseline mat-paginator .mat-paginator-range-label {
     margin-right: 0;
