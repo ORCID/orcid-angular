@@ -24,7 +24,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prebuild": "rimraf dist && yarn build:i18n",
+    "prebuild": "rimraf dist && yarn build:i18n && build:browserslist",
     "build": "yarn build:prod",
     "postbuild": "ts-node -P scripts/tsconfig.json scripts/postbuild.ts --env production",
     "build:i18n:clone": "ts-node -P scripts/tsconfig.json scripts/translate-file-clone.prebuild.ts",
