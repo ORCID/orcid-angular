@@ -19,6 +19,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component'
 import { StatisticsComponent } from './statistics/statistics.component'
 import { SkipMainNavComponent } from './skip-main-nav/skip-main-nav.component'
 import { BannersComponent } from './banners/banners.component'
+import { BannerComponent } from '../cdk/banner/banner.component'
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { BannersComponent } from './banners/banners.component'
     ReactiveFormsModule,
     MatRippleModule,
     MatIconModule,
+    BannerComponent,
   ],
   declarations: [
     HeaderComponent,

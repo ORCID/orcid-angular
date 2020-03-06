@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 import { getUserAgentRegExp } from 'browserslist-useragent-regexp'
 
-// Using browserslist-useragent-regexp a browserlist REGEXP is generate to be used on the application run time
-// This will design wether to show or hide the unsupported browser version banner.
+// Using browserslist-useragent-regexp a browserslist REGEXP is generated to be used on the application run time
+// This will decide wether show or hide the unsupported browser version banner
 
 const regExp = getUserAgentRegExp({
   allowHigherVersions: true,
