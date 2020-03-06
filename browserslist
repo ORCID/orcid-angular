@@ -6,14 +6,17 @@
 #   npx browserslist
 
 # You can also visit this URL to see the list of supported browsers
-# https://browserl.ist/?q=last+2+Chrome+versions%2Clast+3+Firefox+versions%2C+last+2+Edge+versions%2Clast+2+Opera+versions%2Clast+3+Safari+versions%2Clast+3+IOS+versions%2Clast+1+ChromeAndroid+versions%2Clast+1+FirefoxAndroid+versions%2CIE+11
+# hhttps://browserl.ist/?q=last+2+Chrome+versions%2Clast+2+Firefox+versions%2Clast+2+Edge+versions%2Clast+2+Opera+versions%2Clast+3+Safari+versions%2Clast+3+IOS+versions%2Clast+1+ChromeAndroid+versions%2Clast+1+FirefoxAndroid+versions%2Clast+2+Opera+versions%2CIE+11%2CFirefox+ESR%2Cnot+dead
 
 last 2 Chrome versions, 
-last 3 Firefox versions, 
+last 2 Firefox versions, 
 last 2 Edge versions, 
 last 2 Opera versions, 
 last 3 Safari versions, 
 last 3 IOS versions, 
 last 1 ChromeAndroid versions,
 last 1 FirefoxAndroid versions,
-IE 11
+last 2 Opera versions,
+IE 11,
+Firefox ESR, 
+not dead
