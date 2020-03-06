@@ -1,0 +1,37 @@
+<app-banner
+  *ngIf="showCookieBanner"
+  (dismiss)="showCookieBanner = false"
+  [dismissCookie]="'orcidCookiePolicyAlert'"
+  [dismissCookieTime]="365"
+  [canDismiss]="true"
+  ><ng-container i18n="@@common.cookies.orcid_uses">
+    ORCID uses cookies to improve your experience and to help us understand how
+    you use our websites.</ng-container
+  >
+  <a
+    target="common.cookies.learn_more"
+    href="https://orcid.org/privacy-policy#TrackingTechnology"
+    i18n="@@common.cookies.learn_more"
+  >
+    Learn more about how we use cookies</a
+  >.</app-banner
+>
+
+<app-banner *ngIf="showUnsupportedBrowserBanner" [canDismiss]="false"
+  ><ng-container i18n="@@common.old.browser_1">
+    We notice you are using a browser that our site does not support. Some
+    features on this site may not work correctly.</ng-container
+  >
+
+  <ng-container i18n="@@common.old_browser_2">
+    We recommend that you upgrade to a
+  </ng-container>
+
+  <a
+    target="common.old_browser_3"
+    href="https://orcid.org/privacy-policy#TrackingTechnology"
+    i18n="@@common.cookies.learn_more"
+  >
+    supported browser</a
+  >.</app-banner
+>

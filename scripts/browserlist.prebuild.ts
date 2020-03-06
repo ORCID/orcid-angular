@@ -1,0 +1,24 @@
+import * as fs from 'fs'
+import { getUserAgentRegExp } from 'browserslist-useragent-regexp'
+
+// Using browserslist-useragent-regexp a browserlist REGEXP is generate to be used on the application run time
+// This will design wether to show or hide the unsupported browser version banner.
+
+const regExp = getUserAgentRegExp({
+  allowHigherVersions: true,
+  allowZeroSubverions: true,
+})
+
+const fileText = `// tslint:disable-next-line: max-line-length
+export const BROWSERLIST_REGEXP = ${regExp}`
+
+fs.writeFile(
+  './src/app/cdk/platform-info/browserlist.regexp.ts',
+  fileText,
+  err => {
+    if (err) {
+      throw new Error('Error creating browserlist regexp ' + err)
+    }
+    console.log('Browserlist regexp created')
+  }
+)
