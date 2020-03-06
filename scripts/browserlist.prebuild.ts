@@ -10,7 +10,8 @@ const regExp = getUserAgentRegExp({
 })
 
 const fileText = `// tslint:disable-next-line: max-line-length
-export const BROWSERLIST_REGEXP = ${regExp}`
+export const BROWSERLIST_REGEXP = ${regExp}
+`
 
 fs.writeFile(
   './src/app/cdk/platform-info/browserlist.regexp.ts',
