@@ -1,10 +1,7 @@
 <app-skip-main-nav></app-skip-main-nav>
 <div [dir]="direction">
   <router-outlet name="banner"></router-outlet>
-  <app-cookie-banner
-    *ngIf="showCookieBanner"
-    (dismiss)="showCookieBanner = false"
-  ></app-cookie-banner>
+  <app-banners></app-banners>
   <app-header></app-header>
   <div class="router-container">
     <router-outlet> </router-outlet>

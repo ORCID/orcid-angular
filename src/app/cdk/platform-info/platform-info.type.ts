@@ -1,4 +1,5 @@
 export interface PlatformInfo {
+  unsupportedBrowser
   desktop: boolean
   tabletOrHandset: boolean
   tablet: boolean
