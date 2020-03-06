@@ -3,12 +3,14 @@ import { Platform } from '@angular/cdk/platform'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { PlatformInfo } from './platform-info.type'
+import { BROWSERLIST_REGEXP } from './browserlist.regexp'
 
 @Injectable()
 export class PlatformInfoService {
   platformSubject = new BehaviorSubject<PlatformInfo>(null)
 
   platform: PlatformInfo = {
+    unsupportedBrowser: false,
     desktop: false,
     tabletOrHandset: false,
     tablet: false,
@@ -26,6 +28,10 @@ export class PlatformInfoService {
     private _breakpointObserver: BreakpointObserver,
     private _platform: Platform
   ) {
+    if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
+      this.platform.unsupportedBrowser = true
+    }
+
     this.platform.firefox = _platform.FIREFOX
     this.platform.safary = _platform.SAFARI
     this.platform.ie = _platform.TRIDENT

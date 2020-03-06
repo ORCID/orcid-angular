@@ -24,7 +24,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prebuild": "rimraf dist && yarn build:i18n",
+    "prebuild": "rimraf dist && yarn build:i18n && build:browserslist",
     "build": "yarn build:prod",
     "postbuild": "ts-node -P scripts/tsconfig.json scripts/postbuild.ts --env production",
     "build:i18n:extract": "ng xi18n  --i18n-format=xlf2 --output-path locale",
@@ -47,7 +47,8 @@
     "build:report": "webpack-bundle-analyzer dist/en/stats.json",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook -o dist/storybook",
-    "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts"
+    "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts",
+    "build:browserslist": "ts-node -P scripts/tsconfig.json scripts/browserlist.prebuild.ts"
   },
   "private": true,
   "dependencies": {
@@ -64,6 +65,8 @@
     "@angular/router": "^8.2.4",
     "@angular/service-worker": "^8.2.4",
     "@types/gtag.js": "^0.0.3",
+    "browserslist": "^4.9.1",
+    "browserslist-useragent-regexp": "^2.0.1",
     "core-js": "^2.6.9",
     "css-loader": "^3.2.0",
     "firebase": "^7.6.0",

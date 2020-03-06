@@ -11,7 +11,6 @@ import { CookieService } from 'ngx-cookie-service'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  showCookieBanner
   direction
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
@@ -26,7 +25,6 @@ export class AppComponent {
   constructor(
     _platformInfo: PlatformInfoService,
     @Inject(LOCALE_ID) public locale: string,
-    _cookie: CookieService,
     _router: Router,
     _googleAnalytics: GoogleAnalyticsService
   ) {
@@ -35,7 +33,6 @@ export class AppComponent {
     })
     this.direction = locale === 'ar' ? 'rtl' : null
 
-    this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
     _router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         _googleAnalytics.reportNavigationStart(event.url)
