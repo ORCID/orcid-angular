@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators'
   selector: 'app-banners',
   templateUrl: './banners.component.html',
   styleUrls: ['./banners.component.scss'],
+  preserveWhitespaces: true,
 })
 export class BannersComponent implements OnInit {
   showCookieBanner
