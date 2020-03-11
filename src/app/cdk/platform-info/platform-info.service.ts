@@ -28,7 +28,6 @@ export class PlatformInfoService {
     private _breakpointObserver: BreakpointObserver,
     private _platform: Platform
   ) {
-    console.log(navigator.userAgent)
     if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
       this.platform.unsupportedBrowser = true
     }

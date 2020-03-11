@@ -20,6 +20,7 @@ import { StatisticsComponent } from './statistics/statistics.component'
 import { SkipMainNavComponent } from './skip-main-nav/skip-main-nav.component'
 import { BannersComponent } from './banners/banners.component'
 import { BannerComponent } from '../cdk/banner/banner.component'
+import { BannerModule } from '../cdk/banner/banner.module'
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { BannerComponent } from '../cdk/banner/banner.component'
     MatRippleModule,
     MatIconModule,
     BannerComponent,
+    BannerModule,
   ],
   declarations: [
     HeaderComponent,
@@ -44,6 +46,7 @@ import { BannerComponent } from '../cdk/banner/banner.component'
     UserMenuComponent,
     StatisticsComponent,
     SkipMainNavComponent,
+    BannersComponent,
   ],
   exports: [
     HeaderComponent,

@@ -6,6 +6,7 @@ cache:
     - node_modules
 script:
   - npm run build:storybook
+  - npm run build:en
 deploy:
   provider: pages
   skip_cleanup: true
