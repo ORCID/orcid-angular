@@ -1,0 +1,9 @@
+<div
+  class="maintenance-header container"
+  *ngIf="maintenanceMessage"
+  role="banner"
+>
+  <div class="col l12 m8 s4 middle text-container">
+    <p [innerHtml]="maintenanceMessage"></p>
+  </div>
+</div>

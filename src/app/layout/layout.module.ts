@@ -20,6 +20,7 @@ import { StatisticsComponent } from './statistics/statistics.component'
 import { SkipMainNavComponent } from './skip-main-nav/skip-main-nav.component'
 import { BannersComponent } from './banners/banners.component'
 import { BannerModule } from '../cdk/banner/banner.module'
+import { MaintenanceMessageComponent } from './maintenance-message/maintenance-message.component'
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { BannerModule } from '../cdk/banner/banner.module'
     StatisticsComponent,
     SkipMainNavComponent,
     BannersComponent,
+    MaintenanceMessageComponent,
   ],
   exports: [
     HeaderComponent,
