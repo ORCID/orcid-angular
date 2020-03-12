@@ -3,13 +3,14 @@ import {
   Property,
   Properties,
   Files,
+  Languages,
+  MatchingPair,
 } from '../src/app/types/locale.scripts'
 import * as fs from 'fs'
 const propertiesToJSON = require('properties-to-json')
 
-class PropertyFolderImpl implements PropertyFolder {
+abstract class PropertyFolderImpl implements PropertyFolder {
   files: Files
-
   folderPath
   supportedLanguagesFile = [
     'en',
@@ -37,18 +38,21 @@ class PropertyFolderImpl implements PropertyFolder {
     this.propertiesFolderToJson(folderPath)
   }
 
-  public folderToNames(value: string[]) {
-    return ['']
-  }
-  public nameLanguageToFilename(name: string, language: string) {
-    return name + language
-  }
+  /*
+    Returns a list of file name strings without extension or language
+  */
+  abstract folderFileNames(value: string[]): string[]
+
+  /*
+    Mixes the name and the language to create the file name
+  */
+  abstract nameLanguageToFilename(name: string, language: string): string
   /*
     Takes a folder that should contain .properties files, and transform the folder into a .JSON object
   */
   propertiesFolderToJson(folderPath: string): PropertyFolder {
     this.files = {}
-    this.folderToNames(fs.readdirSync(folderPath)).map((fileName: string) => {
+    this.folderFileNames(fs.readdirSync(folderPath)).map((fileName: string) => {
       this.files[fileName] = {}
       this.supportedLanguagesFile.forEach((language: string) => {
         const properties = this.readFileLanguageProperties(fileName, language)
@@ -61,35 +65,113 @@ class PropertyFolderImpl implements PropertyFolder {
   }
 
   /*
-    Inverse operation of propertiesFolderToJson
-  */
-  propertiesJsonToFolder(folderPath: string): boolean {
-    return false
-  }
-
-  /* 
-Clone all the values from a PropertyFolder to another when the matcher is true 
+    Clone translation values from a origin PropertyFolder to this
+    Compares english strings, if they match, the translations on the origin folder are copied
+    It only copies the translations when there is not translation on this PropertyFolder
 */
-  cloneValues(
-    destinationFolder: PropertyFolder,
-    originFolder: PropertyFolder,
-    matcher: (a: Property, b: Property) => boolean
-  ): PropertyFolder {
-    this.files = {
-      shared: {
-        en: {
-          keyString: {
-            value: 'string',
-            language: 'string',
-            fileName: 'string',
-          },
-        },
-      },
-    }
+  cloneValues(originFolder: PropertyFolderImpl): PropertyFolder {
+    const matchingProperties: MatchingPair[] = this.matchingValueEnglishProperties(
+      originFolder
+    )
+    matchingProperties.forEach(matching => {
+      this.supportedLanguagesFile.forEach(language => {
+        if (language !== 'en') {
+          // Creates a language node if there is no one already
+          if (!this.files[matching.a.fileName][language]) {
+            this.files[matching.a.fileName][language] = {}
+          }
+          // Creates a key node if there is no one already
+          if (!this.files[matching.a.fileName][language][matching.a.key]) {
+            const translation = this.getTranslationForProperty(
+              originFolder,
+              matching.b,
+              language
+            )
+            // If there is a translation for the key on the language adds it
+            if (translation) {
+              this.files[matching.a.fileName][language][matching.a.key] = {
+                key: matching.a.key,
+                language: language,
+                fileName: matching.a.fileName,
+                value: translation,
+              }
+            }
+          }
+        }
+      })
+    })
+
     return this
   }
 
-  readFileLanguageProperties(
+  private getTranslationForProperty(
+    originFolder: PropertyFolder,
+    originProperty: Property,
+    language: string
+  ): string {
+    const file = originFolder.files[originProperty.fileName]
+    if (file) {
+      const properties = file[language]
+      if (properties) {
+        const property = properties[originProperty.key]
+        if (property) {
+          return property.value
+        }
+      }
+    }
+    return null
+  }
+
+  private matchingValueEnglishProperties(
+    originFolder: PropertyFolderImpl
+  ): MatchingPair[] {
+    const matchingPairs: MatchingPair[] = []
+    const thisFolderFlat: Properties = this.flatFolder(this, 'en')
+    const originFolderFlat: Properties = this.flatFolder(originFolder, 'en')
+    Object.keys(thisFolderFlat).forEach((thisPropertyKey: string) => {
+      const thisProperty = thisFolderFlat[thisPropertyKey]
+      const originPropertyKey = Object.keys(originFolderFlat).find(
+        (originKey: string) => {
+          return originFolderFlat[originKey].value === thisProperty.value
+        }
+      )
+      if (originPropertyKey) {
+        const originProperty = originFolderFlat[originPropertyKey]
+        matchingPairs.push({ a: thisProperty, b: originProperty })
+      } else {
+        console.warn(
+          `not match for ${thisProperty.fileName}/ ${thisProperty.key}=${
+            thisProperty.value
+          }`
+        )
+      }
+    })
+    return matchingPairs
+  }
+
+  save(dir = './tmp') {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir)
+    }
+    Object.keys(this.files).forEach((fileKey: string) => {
+      const languages: Languages = this.files[fileKey]
+      Object.keys(languages).forEach((languageKey: string) => {
+        const properties: Properties = languages[languageKey]
+        const fileName =
+          dir + '/' + this.nameLanguageToFilename(fileKey, languageKey)
+        let fileContent = ''
+        Object.keys(properties).forEach((propertyKey: string) => {
+          const property: Property = properties[propertyKey]
+          fileContent += `${property.key}=${property.value}\n`
+        })
+        if (fileContent !== '') {
+          fs.writeFileSync(fileName, fileContent)
+        }
+      })
+    })
+  }
+
+  private readFileLanguageProperties(
     fileName: string,
     language: string
   ): void | Properties {
@@ -97,44 +179,45 @@ Clone all the values from a PropertyFolder to another when the matcher is true
       this.folderPath + '/' + this.nameLanguageToFilename(fileName, language)
 
     try {
-      console.warn(filePath, '- reading file')
       const data = fs.readFileSync(filePath, { encoding: 'utf8' })
+      console.warn(filePath, '- was read')
       return this.dataToProperties(data, fileName, language)
     } catch {
       console.warn(filePath, '- does not exists ')
     }
   }
 
-  dataToProperties(data: string, fileName, language): Properties {
+  private dataToProperties(data: string, fileName, language): Properties {
     const properties: Properties = {}
     const jsonData = propertiesToJSON(data)
     Object.keys(jsonData).forEach(
       key =>
-        (properties[key] = { value: jsonData[key], ...{ fileName, language } })
+        (properties[key] = {
+          value: jsonData[key],
+          ...{ key, fileName, language },
+        })
     )
     return properties
   }
-}
 
-class OrcidSourcePropertyFolder extends PropertyFolderImpl {
-  constructor(folderPath: string) {
-    super(folderPath)
-  }
-
-  nameLanguageToFilename(name, language) {
-    return `${name}.${language}.properties`
-  }
-
-  folderToNames(filenames: string[]) {
-    const namesOnly = filenames
-      .filter(file => file.includes('.properties'))
-      .map(value => value.split('.'))
-      .map(value => value.pop() && value)
-      .map(value => value.pop() && value)
-      .map(value => value.join())
-    return namesOnly.filter(
-      (value, index) => namesOnly.indexOf(value) === index
-    )
+  private flatFolder(
+    folder: PropertyFolderImpl,
+    languageToMakeFlat: string
+  ): Properties {
+    const flatFolder: Properties = {}
+    Object.keys(folder.files).forEach((fileKey: string) => {
+      const languages: Languages = folder.files[fileKey]
+      Object.keys(languages).forEach((languageKey: string) => {
+        if (languageToMakeFlat === languageKey) {
+          const properties: Properties = languages[languageKey]
+          Object.keys(properties).forEach((propertyKey: string) => {
+            const property: Property = properties[propertyKey]
+            flatFolder[propertyKey] = property
+          })
+        }
+      })
+    })
+    return flatFolder
   }
 }
 
@@ -147,7 +230,21 @@ class NgOrcidPropertyFolder extends PropertyFolderImpl {
     return `${name}_${language}.properties`
   }
 
-  folderToNames(filenames: string[]) {
+  folderFileNames(filenames: string[]) {
+    return ['messages', 'javascript']
+  }
+}
+
+class OrcidSourcePropertyFolder extends PropertyFolderImpl {
+  constructor(folderPath: string) {
+    super(folderPath)
+  }
+
+  nameLanguageToFilename(name, language) {
+    return `${name}.${language}.properties`
+  }
+
+  folderFileNames(filenames: string[]) {
     const namesOnly = filenames
       .filter(file => file.includes('.properties'))
       .map(value => value.split('.'))
@@ -160,13 +257,21 @@ class NgOrcidPropertyFolder extends PropertyFolderImpl {
   }
 }
 
-const ngOrcid = new OrcidSourcePropertyFolder(
-  'D:/workspace/orcid-angular/src/locale/properties'
-)
-
-const orcidSource = new NgOrcidPropertyFolder(
-  'D:/workspace/ORCID-Source/orcid-core/src/main/resources/i18n'
-)
-
-console.log(orcidSource.files)
-console.log(ngOrcid.files)
+const args = process.argv.slice(2)
+if (args.length !== 2) {
+  console.log(
+    '2 parameters are require: destiny folder path where translations will be added\n' +
+      'and origin folder path where values are going to be copied from'
+  )
+} else if (!fs.readdirSync(args[0]) || !fs.readdirSync(args[1])) {
+  console.log('the destiny or origin folder does no exists ')
+} else {
+  // Open ng orcid
+  const ngOrcid = new OrcidSourcePropertyFolder(args[0])
+  // Open orcid source
+  const orcidSource = new NgOrcidPropertyFolder(args[1])
+  // Clone values from orcid source
+  ngOrcid.cloneValues(orcidSource)
+  // Save generated files on a /temp folder
+  ngOrcid.save()
+}

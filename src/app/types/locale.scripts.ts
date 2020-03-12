@@ -2,6 +2,7 @@ export interface Property {
   value: string
   language: string
   fileName: string
+  key: string
 }
 
 export interface Properties {
@@ -19,10 +20,11 @@ export interface Files {
 export interface PropertyFolder {
   files?: Files
   propertiesFolderToJson: (path: string) => PropertyFolder
-  propertiesJsonToFolder: (path: string) => boolean
-  cloneValues: (
-    destinationFolder: PropertyFolder,
-    originFolder: PropertyFolder,
-    matcher: (a: Property, b: Property) => boolean
-  ) => PropertyFolder
+  save: (dir) => void
+  cloneValues: (originFolder: PropertyFolder) => PropertyFolder
+}
+
+export interface MatchingPair {
+  a: Property
+  b: Property
 }
