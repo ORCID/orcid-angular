@@ -34,4 +34,9 @@ export class TogglzService {
       map(data => data.messages[togglzFeatureName] === 'true')
     )
   }
+
+  getMessageOf(togglzFeatureName: string): Observable<string> {
+    this.getTogglz()
+    return this.togglz.pipe(map(data => data.messages[togglzFeatureName]))
+  }
 }
