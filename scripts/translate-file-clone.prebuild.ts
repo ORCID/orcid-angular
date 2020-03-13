@@ -50,7 +50,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
   /*
     Takes a folder that should contain .properties files, and transform the folder into a .JSON object
   */
-  propertiesFolderToJson(folderPath: string): PropertyFolder {
+  propertiesFolderToJson(folderPath: string = this.folderPath): PropertyFolder {
     this.files = {}
     this.folderFileNames(fs.readdirSync(folderPath)).map((fileName: string) => {
       this.files[fileName] = {}
@@ -126,8 +126,8 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     originFolder: PropertyFolderImpl
   ): MatchingPair[] {
     const matchingPairs: MatchingPair[] = []
-    const thisFolderFlat: Properties = this.flatFolder(this, 'en')
-    const originFolderFlat: Properties = this.flatFolder(originFolder, 'en')
+    const thisFolderFlat: Properties = this.flatFolder('en')
+    const originFolderFlat: Properties = this.flatFolder('en', originFolder)
     Object.keys(thisFolderFlat).forEach((thisPropertyKey: string) => {
       const thisProperty = thisFolderFlat[thisPropertyKey]
       const originPropertyKey = Object.keys(originFolderFlat).find(
@@ -200,9 +200,9 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     return properties
   }
 
-  private flatFolder(
-    folder: PropertyFolderImpl,
-    languageToMakeFlat: string
+  flatFolder(
+    languageToMakeFlat: string,
+    folder: PropertyFolderImpl = this
   ): Properties {
     const flatFolder: Properties = {}
     Object.keys(folder.files).forEach((fileKey: string) => {
@@ -221,7 +221,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
   }
 }
 
-class NgOrcidPropertyFolder extends PropertyFolderImpl {
+export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
   constructor(folderPath: string) {
     super(folderPath)
   }
@@ -235,7 +235,7 @@ class NgOrcidPropertyFolder extends PropertyFolderImpl {
   }
 }
 
-class OrcidSourcePropertyFolder extends PropertyFolderImpl {
+export class NgOrcidPropertyFolder extends PropertyFolderImpl {
   constructor(folderPath: string) {
     super(folderPath)
   }
@@ -267,9 +267,9 @@ if (args.length !== 2) {
   console.log('the destiny or origin folder does no exists ')
 } else {
   // Open ng orcid
-  const ngOrcid = new OrcidSourcePropertyFolder(args[0])
+  const ngOrcid = new NgOrcidPropertyFolder(args[0])
   // Open orcid source
-  const orcidSource = new NgOrcidPropertyFolder(args[1])
+  const orcidSource = new OrcidSourcePropertyFolder(args[1])
   // Clone values from orcid source
   ngOrcid.cloneValues(orcidSource)
   // Save generated files on a /temp folder
