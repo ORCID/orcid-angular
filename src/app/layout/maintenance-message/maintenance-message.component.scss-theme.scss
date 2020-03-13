@@ -1,0 +1,17 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import 'src/assets/scss/material.typography.scss';
+
+@mixin maintenance-message-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .text-container {
+    border-top: mat-color($foreground, 'box-border') 1px solid;
+  }
+}
+
+@include maintenance-message-theme($orcid-app-theme);
