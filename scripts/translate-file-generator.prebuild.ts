@@ -7,26 +7,15 @@ import {
   combineAll,
   mergeMap,
   switchMap,
-  reduce,
 } from 'rxjs/operators'
 import { Observable } from 'rxjs/internal/Observable'
 import { from } from 'rxjs/internal/observable/from'
+import { of } from 'rxjs/internal/observable/of'
+import { NgOrcidPropertyFolder } from './translate-file-clone.prebuild'
+import { Properties } from '../src/app/types/locale.scripts'
 
-const propertiesToJSON = require('properties-to-json')
-const axios = require('axios')
+const ngOrcidFolder = new NgOrcidPropertyFolder('./src/locale/properties')
 
-const baseGithubTranslationFilesURL = [
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/about_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/messages_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/admin_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/email_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/identifiers_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/javascript_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/test_messages_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_search_',
-  'https://raw.githubusercontent.com/ORCID/ORCID-Source/master/orcid-core/src/main/resources/i18n/ng_orcid_material_',
-]
 const languages = [
   {
     code: 'en',
@@ -112,12 +101,12 @@ readMessageFile('./src/locale/messages.xlf')
   .pipe(concatAll())
   // Save the translation file
   .pipe(
-    mergeMap(result =>
-      from([
+    mergeMap(result => {
+      return from([
         saveTs(result.values.dynamicValues, result.saveCode),
         saveJsonAsXlf(result.values.staticValues, result.saveCode),
       ])
-    )
+    })
   )
   // Waits until all translations are created
   .pipe(combineAll())
@@ -128,26 +117,11 @@ readMessageFile('./src/locale/messages.xlf')
 
 function generateLanguageFile(saveCode, file) {
   return (
-    from(
-      baseGithubTranslationFilesURL.map(url =>
-        getTranslationFileFromGithub(url, saveCode)
-      )
-    )
-      // Wait until all properties files where read
-      .pipe(concatAll())
-      // Reduces all the properties files in one list of files
+    of(ngOrcidFolder)
+      .pipe(map(folder => folder.flatFolder(saveCode)))
       .pipe(
-        reduce((acc: any[], value: {}) => {
-          acc.push(value)
-          return acc
-        }, new Array())
-      )
-      // Transform the list of files in a key-value translation file
-      .pipe(map(val => getProperties(val)))
-      // Creates an XLF translation based on the properties
-      .pipe(
-        mergeMap(val =>
-          setLanguagePropertiesToLanguageFile(file, val, saveCode)
+        mergeMap(properties =>
+          setLanguagePropertiesToLanguageFile(file, properties, saveCode)
         )
       )
       // Return the XLF to be saved
@@ -223,16 +197,6 @@ function saveTs(json, name) {
   )
 }
 
-function getProperties(response) {
-  const propsText = {}
-  response.forEach(data => {
-    if (data && data.data) {
-      Object.assign(propsText, propertiesToJSON(data.data))
-    }
-  })
-  return propsText
-}
-
 function readMessageFile(path) {
   return new Observable(observer => {
     fs.readFile(path, 'utf8', (error, data) => {
@@ -248,7 +212,7 @@ function readMessageFile(path) {
 
 function setLanguagePropertiesToLanguageFile(
   XlfFile,
-  properties,
+  properties: Properties,
   languageCode
 ): Observable<{ staticValues: any; dynamicValues: any }> {
   return new Observable(observer => {
@@ -271,7 +235,7 @@ function setLanguagePropertiesToLanguageFile(
           } else {
             // Runs the translation treatment where the text of some translations is modified
             translation = translationTreatment(
-              properties[element['$'].id],
+              properties[element['$'].id].value,
               element,
               languageCode
             )
@@ -354,33 +318,6 @@ function reportTranslationNotMatch(id, textOnTemplate, textOnProperty) {
     reportFile.language['en'].unmatch = []
   }
   reportFile.language['en'].unmatch.push({ id, textOnTemplate, textOnProperty })
-}
-
-function getTranslationFileFromGithub(baseUrl, code) {
-  return from(
-    axios.get(baseUrl + code + '.properties').catch(error => {})
-  ).pipe(
-    map(result => {
-      if (result) {
-        return result
-      } else {
-        // Do not report missing "source" files since those are not expect to exist on the orcid-source
-        if (code !== 'source') {
-          console.log('Unexisting language fie: ' + baseUrl + code)
-          if (!reportFile.language[code]) {
-            reportFile.language[code] = {}
-          }
-          if (!reportFile.language[code].unexistingFiles) {
-            reportFile.language[code].unexistingFiles = []
-          }
-          reportFile.language[code].unexistingFiles.push(
-            baseUrl + code + '.properties'
-          )
-        }
-        return result
-      }
-    })
-  )
 }
 
 function translationTreatment(translation, element, saveCode) {
