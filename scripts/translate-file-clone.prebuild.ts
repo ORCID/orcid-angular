@@ -327,7 +327,6 @@ export class NgOrcidPropertyFolder extends PropertyFolderImpl {
   }
 
   folderFileNames(filenames: string[]) {
-    console.log('HERE', filenames)
     const namesOnly = filenames
       .filter(file => file.includes('.properties'))
       .map(value => value.split('/'))
