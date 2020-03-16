@@ -19,7 +19,7 @@ export interface Files {
 
 export interface PropertyFolder {
   files?: Files
-  propertiesFolderToJson: (path: string) => PropertyFolder
+  propertiesFolderToJson: (path: string, flatFolder: boolean) => PropertyFolder
   save: (dir) => void
   cloneValues: (originFolder: PropertyFolder) => PropertyFolder
 }
