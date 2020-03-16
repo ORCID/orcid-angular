@@ -14,32 +14,39 @@ import { of } from 'rxjs/internal/observable/of'
 import { NgOrcidPropertyFolder } from './translate-file-clone.prebuild'
 import { Properties } from '../src/app/types/locale.scripts'
 
-const ngOrcidFolder = new NgOrcidPropertyFolder(
-  './src/locale/properties',
-  reportUnexistingFiles
-)
-
 const reportFile: {
   language: any
 } = {
   language: {},
 }
 
+// Add language empty objects to always keep the same order
+NgOrcidPropertyFolder.supportedLanguagesFile.map(language => {
+  reportFile.language[language] = {}
+})
+
+// Read the base folder
+const ngOrcidFolder = new NgOrcidPropertyFolder(
+  './src/locale/properties',
+  reportUnexistingFiles
+)
+
+// List of strings that will be replace on when translations are move from the properties to the xlf files
 const stringReplacements = {
   '<br />': ' ',
   '\\u0020': '',
   '\\!': '!',
 }
 
-// Read message file
+// Read the angular generated XLF message file
 readMessageFile('./src/locale/messages.xlf')
   // For each language generate a translation file
   .pipe(
     switchMap(file =>
       from(
-        ngOrcidFolder.supportedLanguagesFile.map(language =>
-          generateLanguageFile(language, deepCopy(file))
-        )
+        NgOrcidPropertyFolder.supportedLanguagesFile.map(language => {
+          return generateLanguageFile(language, deepCopy(file))
+        })
       )
     )
   )
@@ -340,12 +347,14 @@ function sentenceCase(str) {
 }
 
 function reportUnexistingFiles(path, code) {
-  console.warn(`Unexisting language fie: ${path} - ${code}`)
-  if (!reportFile.language[code]) {
-    reportFile.language[code] = {}
+  if (code !== 'source') {
+    console.warn(`Unexisting language fie: ${path} - ${code}`)
+    if (!reportFile.language[code]) {
+      reportFile.language[code] = {}
+    }
+    if (!reportFile.language[code].unexistingFiles) {
+      reportFile.language[code].unexistingFiles = []
+    }
+    reportFile.language[code].unexistingFiles.push(path)
   }
-  if (!reportFile.language[code].unexistingFiles) {
-    reportFile.language[code].unexistingFiles = []
-  }
-  reportFile.language[code].unexistingFiles.push(path)
 }

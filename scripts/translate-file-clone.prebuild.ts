@@ -10,9 +10,15 @@ import * as fs from 'fs'
 const propertiesToJSON = require('properties-to-json')
 
 abstract class PropertyFolderImpl implements PropertyFolder {
-  files: Files
-  folderPath
-  supportedLanguagesFile = [
+  constructor(
+    folderPath: string,
+    reportUnexistingFiles?: (path: string, languageCode: string) => void
+  ) {
+    this.folderPath = folderPath
+    this.reportUnexistingFiles = reportUnexistingFiles
+    this.propertiesFolderToJson(folderPath)
+  }
+  static supportedLanguagesFile = [
     'en',
     'ar',
     'ca',
@@ -32,16 +38,10 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     'zh_TW',
     'source',
   ]
+  files: Files
+  folderPath
 
   reportUnexistingFiles: (path: string, languageCode: string) => void
-  constructor(
-    folderPath: string,
-    reportUnexistingFiles?: (path: string, languageCode: string) => void
-  ) {
-    this.folderPath = folderPath
-    this.propertiesFolderToJson(folderPath)
-    this.reportUnexistingFiles = reportUnexistingFiles
-  }
 
   /*
     Returns a list of file name strings without extension or language
@@ -59,7 +59,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     this.files = {}
     this.folderFileNames(fs.readdirSync(folderPath)).map((fileName: string) => {
       this.files[fileName] = {}
-      this.supportedLanguagesFile.forEach((language: string) => {
+      PropertyFolderImpl.supportedLanguagesFile.forEach((language: string) => {
         const properties = this.readFileLanguageProperties(fileName, language)
         if (properties) {
           this.files[fileName][language] = properties
@@ -81,7 +81,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       originFolder
     )
     matchingProperties.forEach(matching => {
-      this.supportedLanguagesFile.forEach(language => {
+      PropertyFolderImpl.supportedLanguagesFile.forEach(language => {
         if (language !== 'en') {
           // Creates a language node if there is no one already
           if (!this.files[matching.a.fileName][language]) {
