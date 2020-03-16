@@ -8,15 +8,17 @@ import {
 } from '../src/app/types/locale.scripts'
 import * as fs from 'fs'
 const propertiesToJSON = require('properties-to-json')
+const glob = require('glob')
 
 abstract class PropertyFolderImpl implements PropertyFolder {
   constructor(
     folderPath: string,
+    flatFolder = true,
     reportUnexistingFiles?: (path: string, languageCode: string) => void
   ) {
     this.folderPath = folderPath
     this.reportUnexistingFiles = reportUnexistingFiles
-    this.propertiesFolderToJson(folderPath)
+    this.propertiesFolderToJson(folderPath, flatFolder)
   }
   static supportedLanguagesFile = [
     'en',
@@ -55,19 +57,30 @@ abstract class PropertyFolderImpl implements PropertyFolder {
   /*
     Takes a folder that should contain .properties files, and transform the folder into a .JSON object
   */
-  propertiesFolderToJson(folderPath: string = this.folderPath): PropertyFolder {
+  propertiesFolderToJson(
+    folderPath: string = this.folderPath,
+    flatFolder: boolean
+  ): PropertyFolder {
     this.files = {}
-    this.folderFileNames(fs.readdirSync(folderPath)).map((fileName: string) => {
-      this.files[fileName] = {}
-      PropertyFolderImpl.supportedLanguagesFile.forEach((language: string) => {
-        const properties = this.readFileLanguageProperties(fileName, language)
-        if (properties) {
-          this.files[fileName][language] = properties
-        } else if (this.reportUnexistingFiles) {
-          this.reportUnexistingFiles(fileName, language)
-        }
-      })
-    })
+    this.folderFileNames(glob.sync(folderPath + '/**/*.properties')).map(
+      (fileName: string) => {
+        this.files[fileName] = {}
+        PropertyFolderImpl.supportedLanguagesFile.forEach(
+          (language: string) => {
+            const properties = this.readFileLanguageProperties(
+              fileName,
+              language,
+              flatFolder
+            )
+            if (properties) {
+              this.files[fileName][language] = properties
+            } else if (this.reportUnexistingFiles) {
+              this.reportUnexistingFiles(fileName, language)
+            }
+          }
+        )
+      }
+    )
     return this
   }
 
@@ -156,7 +169,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     return matchingPairs
   }
 
-  save(dir = './tmp') {
+  save(dir = './tmp', flatFolder = true) {
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir)
     }
@@ -164,15 +177,19 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       const languages: Languages = this.files[fileKey]
       Object.keys(languages).forEach((languageKey: string) => {
         const properties: Properties = languages[languageKey]
-        const fileName =
-          dir + '/' + this.nameLanguageToFilename(fileKey, languageKey)
+        const fileName = this.getPropertyFilePath(
+          dir,
+          fileKey,
+          languageKey,
+          flatFolder
+        )
         let fileContent = ''
         Object.keys(properties).forEach((propertyKey: string) => {
           const property: Property = properties[propertyKey]
           fileContent += `${property.key}=${property.value}\n`
         })
         if (fileContent !== '') {
-          fs.writeFileSync(fileName, fileContent)
+          this.writeFileSyncRecursive(fileName, fileContent)
         }
       })
     })
@@ -180,11 +197,15 @@ abstract class PropertyFolderImpl implements PropertyFolder {
 
   private readFileLanguageProperties(
     fileName: string,
-    language: string
+    language: string,
+    flatFolder: boolean
   ): void | Properties {
-    const filePath =
-      this.folderPath + '/' + this.nameLanguageToFilename(fileName, language)
-
+    const filePath = this.getPropertyFilePath(
+      this.folderPath,
+      fileName,
+      language,
+      flatFolder
+    )
     try {
       const data = fs.readFileSync(filePath, { encoding: 'utf8' })
       console.warn(filePath, '- was read')
@@ -192,6 +213,45 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     } catch {
       console.warn(filePath, '- does not exists ')
     }
+  }
+
+  private getPropertyFilePath(
+    dir: string,
+    fileName: string,
+    language: string,
+    flatFolder = true
+  ) {
+    if (flatFolder) {
+      return dir + '/' + this.nameLanguageToFilename(fileName, language)
+    } else {
+      return (
+        dir +
+        '/' +
+        fileName +
+        '/' +
+        this.nameLanguageToFilename(fileName, language)
+      )
+    }
+  }
+
+  private writeFileSyncRecursive(
+    filename,
+    content,
+    options = { encoding: 'utf8' }
+  ) {
+    // create folder path if not exists
+    filename
+      .split('/')
+      .slice(0, -1)
+      .reduce((last, folder) => {
+        const folderPath = last ? last + '/' + folder : folder
+        if (!fs.existsSync(folderPath)) {
+          fs.mkdirSync(folderPath)
+        }
+        return folderPath
+      })
+
+    fs.writeFileSync(filename, content, options)
   }
 
   private dataToProperties(data: string, fileName, language): Properties {
@@ -233,7 +293,7 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
     folderPath: string,
     reportUnexistingFiles?: (path: string, languageCode: string) => void
   ) {
-    super(folderPath, reportUnexistingFiles)
+    super(folderPath, true, reportUnexistingFiles)
   }
 
   nameLanguageToFilename(name, language) {
@@ -259,7 +319,7 @@ export class NgOrcidPropertyFolder extends PropertyFolderImpl {
     folderPath: string,
     reportUnexistingFiles?: (path: string, languageCode: string) => void
   ) {
-    super(folderPath, reportUnexistingFiles)
+    super(folderPath, false, reportUnexistingFiles)
   }
 
   nameLanguageToFilename(name, language) {
@@ -267,8 +327,11 @@ export class NgOrcidPropertyFolder extends PropertyFolderImpl {
   }
 
   folderFileNames(filenames: string[]) {
+    console.log('HERE', filenames)
     const namesOnly = filenames
       .filter(file => file.includes('.properties'))
+      .map(value => value.split('/'))
+      .map(value => value.pop())
       .map(value => value.split('.'))
       .map(value => value.pop() && value)
       .map(value => value.pop() && value)
@@ -295,5 +358,5 @@ if (args.length !== 2) {
   // Clone values from orcid source
   ngOrcid.cloneValues(orcidSource)
   // Save generated files on a /temp folder
-  ngOrcid.save()
+  ngOrcid.save('./tmp', false)
 }
