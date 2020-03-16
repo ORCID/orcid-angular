@@ -231,7 +231,7 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
   }
 
   folderFileNames(filenames: string[]) {
-    return ['messages', 'javascript']
+    return ['messages', 'javascript', 'admin', 'about']
   }
 }
 
