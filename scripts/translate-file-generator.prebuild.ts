@@ -249,8 +249,7 @@ function setLanguagePropertiesToLanguageFile(
             dynamicValues[element['$'].id] = translation
           }
 
-          // If the translation is located on i18n.pseudo.component
-          // the translation is added to the dynamic translations file
+          // Check if translations from the template and properties file match
 
           if ('en' === languageCode) {
             checkIfTranslationMatch(
@@ -264,7 +263,6 @@ function setLanguagePropertiesToLanguageFile(
         } else {
           element.segment[0].target = element.segment[0].source
           // If the translation is located on i18n.pseudo.component
-          // the translation is added to the dynamic translations file
           if (XLFTranslationNoteHas(element, 'location', 'i18n.pseudo')) {
             dynamicValues[element['$'].id] = element.segment[0].source[0]
           }
