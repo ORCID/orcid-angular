@@ -14,64 +14,10 @@ import { of } from 'rxjs/internal/observable/of'
 import { NgOrcidPropertyFolder } from './translate-file-clone.prebuild'
 import { Properties } from '../src/app/types/locale.scripts'
 
-const ngOrcidFolder = new NgOrcidPropertyFolder('./src/locale/properties')
-
-const languages = [
-  {
-    code: 'en',
-  },
-  {
-    code: 'ar',
-  },
-  {
-    code: 'ca',
-  },
-  {
-    code: 'cs',
-  },
-  {
-    code: 'es',
-  },
-  {
-    code: 'fr',
-  },
-  {
-    code: 'it',
-  },
-  {
-    code: 'ja',
-  },
-  {
-    code: 'ko',
-  },
-  {
-    code: 'lr',
-  },
-  {
-    code: 'pt',
-  },
-  {
-    code: 'rl',
-  },
-  {
-    code: 'ru',
-  },
-  {
-    code: 'uk',
-  },
-  {
-    code: 'xx',
-  },
-  {
-    code: 'zh_CN',
-  },
-  {
-    code: 'zh_TW',
-  },
-  {
-    code: 'source',
-  },
-]
+const ngOrcidFolder = new NgOrcidPropertyFolder(
+  './src/locale/properties',
+  reportUnexistingFiles
+)
 
 const reportFile: {
   language: any
@@ -91,8 +37,8 @@ readMessageFile('./src/locale/messages.xlf')
   .pipe(
     switchMap(file =>
       from(
-        languages.map(language =>
-          generateLanguageFile(language.code, deepCopy(file))
+        ngOrcidFolder.supportedLanguagesFile.map(language =>
+          generateLanguageFile(language, deepCopy(file))
         )
       )
     )
@@ -391,4 +337,15 @@ function titleCase(str) {
 
 function sentenceCase(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+}
+
+function reportUnexistingFiles(path, code) {
+  console.warn(`Unexisting language fie: ${path} - ${code}`)
+  if (!reportFile.language[code]) {
+    reportFile.language[code] = {}
+  }
+  if (!reportFile.language[code].unexistingFiles) {
+    reportFile.language[code].unexistingFiles = []
+  }
+  reportFile.language[code].unexistingFiles.push(path)
 }

@@ -33,9 +33,14 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     'source',
   ]
 
-  constructor(folderPath: string) {
+  reportUnexistingFiles: (path: string, languageCode: string) => void
+  constructor(
+    folderPath: string,
+    reportUnexistingFiles?: (path: string, languageCode: string) => void
+  ) {
     this.folderPath = folderPath
     this.propertiesFolderToJson(folderPath)
+    this.reportUnexistingFiles = reportUnexistingFiles
   }
 
   /*
@@ -58,6 +63,8 @@ abstract class PropertyFolderImpl implements PropertyFolder {
         const properties = this.readFileLanguageProperties(fileName, language)
         if (properties) {
           this.files[fileName][language] = properties
+        } else if (this.reportUnexistingFiles) {
+          this.reportUnexistingFiles(fileName, language)
         }
       })
     })
@@ -222,8 +229,11 @@ abstract class PropertyFolderImpl implements PropertyFolder {
 }
 
 export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
-  constructor(folderPath: string) {
-    super(folderPath)
+  constructor(
+    folderPath: string,
+    reportUnexistingFiles?: (path: string, languageCode: string) => void
+  ) {
+    super(folderPath, reportUnexistingFiles)
   }
 
   nameLanguageToFilename(name, language) {
@@ -236,8 +246,11 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
 }
 
 export class NgOrcidPropertyFolder extends PropertyFolderImpl {
-  constructor(folderPath: string) {
-    super(folderPath)
+  constructor(
+    folderPath: string,
+    reportUnexistingFiles?: (path: string, languageCode: string) => void
+  ) {
+    super(folderPath, reportUnexistingFiles)
   }
 
   nameLanguageToFilename(name, language) {
