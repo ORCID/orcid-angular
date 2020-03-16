@@ -126,32 +126,49 @@
     </unit>
     <unit id="common.cookies.orcid_uses">
       <notes>
-        <note category="location">app/layout/cookie-banner/cookie-banner.component.html:3,5</note>
+        <note category="location">app/layout/banners/banners.component.html:7,9</note>
       </notes>
       <segment>
         <source>
-      ORCID uses cookies to improve your experience and to help us understand
-      how you use our websites.</source>
+    ORCID uses cookies to improve your experience and to help us understand how
+    you use our websites.</source>
       </segment>
     </unit>
     <unit id="common.cookies.learn_more">
       <notes>
-        <note category="location">app/layout/cookie-banner/cookie-banner.component.html:11,12</note>
+        <note category="location">app/layout/banners/banners.component.html:15,16</note>
       </notes>
       <segment>
         <source>
-      Learn more about how we use cookies</source>
+    Learn more about how we use cookies</source>
       </segment>
     </unit>
-    <unit id="common.cookies.click_dismiss">
+    <unit id="common.old.browser_1">
       <notes>
-        <note category="location">app/layout/cookie-banner/cookie-banner.component.html:20,22</note>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
+        <note category="location">app/layout/banners/banners.component.html:21,23</note>
       </notes>
       <segment>
         <source>
-    Dismiss
+    We notice you are using a browser that our site does not support. Some
+    features on this site may not work correctly.</source>
+      </segment>
+    </unit>
+    <unit id="common.old_browser_2">
+      <notes>
+        <note category="location">app/layout/banners/banners.component.html:26,28</note>
+      </notes>
+      <segment>
+        <source>
+    We recommend that you upgrade to a
   </source>
+      </segment>
+    </unit>
+    <unit id="common.old_browser_3">
+      <notes>
+        <note category="location">app/layout/banners/banners.component.html:34</note>
+      </notes>
+      <segment>
+        <source>supported browser</source>
       </segment>
     </unit>
     <unit id="common.js.domain.warn.warning_1">
@@ -204,6 +221,17 @@
       <segment>
         <source>
       more information</source>
+      </segment>
+    </unit>
+    <unit id="common.cookies.click_dismiss">
+      <notes>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
+        <note category="location">app/cdk/banner/banner.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>
+    Dismiss
+  </source>
       </segment>
     </unit>
     <unit id="home.distinguish_yourself">
@@ -1053,7 +1081,7 @@
         <note category="location">locale/i18n.pseudo.component.html:78</note>
       </notes>
       <segment>
-        <source>affiliation or organisation ID</source>
+        <source>affiliation or organization ID</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.keyword">
