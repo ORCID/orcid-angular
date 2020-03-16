@@ -241,7 +241,16 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
   }
 
   folderFileNames(filenames: string[]) {
-    return ['messages', 'javascript', 'admin', 'about']
+    return [
+      'messages',
+      'javascript',
+      'admin',
+      'about',
+      'ng_orcid',
+      'ng_orcid_search',
+      'ng_orcid_signin',
+      'ng_orcid_material',
+    ]
   }
 }
 
