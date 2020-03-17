@@ -12,7 +12,9 @@
   p {
     display: inline;
   }
-  button {
-    margin-left: 10px;
+  .columns-12 :host & {
+    button {
+      margin-left: 10px;
+    }
   }
 }

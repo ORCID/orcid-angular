@@ -11,16 +11,16 @@ import { CookieService } from 'ngx-cookie-service'
   ],
 })
 export class MaintenanceMessageComponent implements OnInit {
-  maintenanceMessage
+  maintenanceMessageHtml
   closableElements: NodeListOf<Element>
   closableElement: Element
   nonClosableElements: NodeListOf<Element>
   constructor(togglz: TogglzService, private _cookie: CookieService) {
     togglz.getMessageOf('MAINTENANCE_MESSAGE').subscribe(value => {
-      this.maintenanceMessage = value
+      this.maintenanceMessageHtml = value
       const parser = new DOMParser()
       const htmlElement = parser.parseFromString(
-        this.maintenanceMessage,
+        this.maintenanceMessageHtml,
         'text/html'
       )
       this.closableElements = htmlElement.querySelectorAll('div.closable')

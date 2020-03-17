@@ -1,13 +1,16 @@
-<div
-  class="maintenance-header container"
-  *ngIf="maintenanceMessage"
-  role="banner"
->
+<div *ngIf="maintenanceMessageHtml" role="banner" class="container">
   <div
     *ngFor="let node of nonClosableElements"
     class="col l12 m8 s4 middle text-container"
   >
     <div><p [innerHtml]="node.innerHTML"></p></div>
+  </div>
+
+  <div
+    *ngIf="closableElements.length === 0 && nonClosableElements.length === 0"
+    class="col l12 m8 s4 middle text-container"
+  >
+    <p [innerHtml]="maintenanceMessageHtml"></p>
   </div>
 </div>
 
