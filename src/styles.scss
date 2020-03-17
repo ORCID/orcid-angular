@@ -69,6 +69,13 @@ a {
   cursor: pointer;
 }
 
+a.black-url {
+  color: black;
+}
+a.black-url:hover {
+  text-decoration: underline;
+}
+
 button,
 input[type='submit'],
 input[type='reset'] {

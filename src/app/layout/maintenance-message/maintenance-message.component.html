@@ -3,7 +3,21 @@
   *ngIf="maintenanceMessage"
   role="banner"
 >
-  <div class="col l12 m8 s4 middle text-container">
-    <p [innerHtml]="maintenanceMessage"></p>
+  <div
+    *ngFor="let node of nonClosableElements"
+    class="col l12 m8 s4 middle text-container"
+  >
+    <div><p [innerHtml]="node.innerHTML"></p></div>
   </div>
+</div>
+
+<div class="closable-message" *ngIf="closableElement">
+  <p [innerHtml]="closableElement.innerHTML"></p>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="understoodClosableMessage(closableElement)"
+  >
+    UNDERSTOOD
+  </button>
 </div>
