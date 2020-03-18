@@ -1,11 +1,12 @@
 import { Component, OnInit, Optional } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
-import { map, tap, switchMap } from 'rxjs/operators'
+import { tap, switchMap, retry, catchError } from 'rxjs/operators'
 import { PageEvent } from '@angular/material'
 import { SearchResults } from 'src/app/types'
 import { SearchParameters } from 'src/app/types'
 import { Meta } from '@angular/platform-browser'
+import { EMPTY } from 'rxjs'
 
 @Component({
   selector: 'app-search',
@@ -36,7 +37,12 @@ export class SearchComponent implements OnInit {
           this.loadingNewResults = true
         }),
         // Call the backend to get search results
-        switchMap(value => _searchService.search(value))
+        switchMap(value =>
+          _searchService.search(value).pipe(
+            retry(3),
+            catchError(err => EMPTY)
+          )
+        )
       )
       .subscribe(data => {
         this.loadingNewResults = false
