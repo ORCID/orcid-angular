@@ -150,11 +150,16 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     const originFolderFlat: Properties = this.flatFolder('en', originFolder)
     Object.keys(thisFolderFlat).forEach((thisPropertyKey: string) => {
       const thisProperty = thisFolderFlat[thisPropertyKey]
-      const originPropertyKey = Object.keys(originFolderFlat).find(
+      const candidateKeys = Object.keys(originFolderFlat).filter(
         (originKey: string) => {
           return originFolderFlat[originKey].value === thisProperty.value
         }
       )
+      const originPropertyKey: string = this.findTheKeyWithMostTranslations(
+        candidateKeys,
+        originFolder
+      )
+
       if (originPropertyKey) {
         const originProperty = originFolderFlat[originPropertyKey]
         matchingPairs.push({ a: thisProperty, b: originProperty })
@@ -167,6 +172,42 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       }
     })
     return matchingPairs
+  }
+
+  findTheKeyWithMostTranslations(
+    candidateKeys: string[],
+    originFolder: PropertyFolder
+  ): string {
+    if (candidateKeys.length === 0) {
+      return candidateKeys[0]
+    } else {
+      // Setup a score object
+      const scores = {}
+      candidateKeys.forEach(key => (scores[key] = 0))
+
+      // Adds a point for each translation that a key has on every language
+      PropertyFolderImpl.supportedLanguagesFile.forEach(language => {
+        const flatFolder = this.flatFolder(language, originFolder)
+
+        candidateKeys.forEach(key => {
+          if (flatFolder[key]) {
+            scores[key]++
+          }
+        })
+      })
+      console.log(scores)
+
+      // Finds and returns the key with better more translations
+      let betterScoreKey = null
+      Object.keys(scores).forEach(key => {
+        if (!betterScoreKey) {
+          betterScoreKey = scores[key]
+        } else if (scores[betterScoreKey] < scores[key]) {
+          betterScoreKey = scores[key]
+        }
+      })
+      return betterScoreKey
+    }
   }
 
   save(dir = './tmp', flatFolder = true) {
@@ -269,7 +310,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
 
   flatFolder(
     languageToMakeFlat: string,
-    folder: PropertyFolderImpl = this
+    folder: PropertyFolder = this
   ): Properties {
     const flatFolder: Properties = {}
     Object.keys(folder.files).forEach((fileKey: string) => {
