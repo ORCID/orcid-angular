@@ -157,7 +157,8 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       )
       const originPropertyKey: string = this.findTheKeyWithMostTranslations(
         candidateKeys,
-        originFolder
+        originFolder,
+        thisPropertyKey
       )
 
       if (originPropertyKey) {
@@ -176,9 +177,10 @@ abstract class PropertyFolderImpl implements PropertyFolder {
 
   findTheKeyWithMostTranslations(
     candidateKeys: string[],
-    originFolder: PropertyFolder
+    originFolder: PropertyFolder,
+    propertyKey: string
   ): string {
-    if (candidateKeys.length === 0) {
+    if (candidateKeys.length === 1) {
       return candidateKeys[0]
     } else {
       // Setup a score object
@@ -195,17 +197,30 @@ abstract class PropertyFolderImpl implements PropertyFolder {
           }
         })
       })
-      console.log(scores)
 
       // Finds and returns the key with better more translations
       let betterScoreKey = null
+      // If a key with the same name exist as a candidate it gets prioritized
+      // to win over other keys with the same score
+      if (scores[propertyKey]) {
+        betterScoreKey = propertyKey
+      }
       Object.keys(scores).forEach(key => {
         if (!betterScoreKey) {
-          betterScoreKey = scores[key]
+          betterScoreKey = key
         } else if (scores[betterScoreKey] < scores[key]) {
-          betterScoreKey = scores[key]
+          betterScoreKey = key
         }
       })
+      if (propertyKey !== betterScoreKey) {
+        console.warn(`
+From the many properties on Orcid Source that have the same english value of ${propertyKey}
+-----${betterScoreKey} was select as it has translations for ${
+          scores[betterScoreKey]
+        } languages
+      ${JSON.stringify(scores)}
+      `)
+      }
       return betterScoreKey
     }
   }
@@ -384,12 +399,12 @@ export class NgOrcidPropertyFolder extends PropertyFolderImpl {
 
 const args = process.argv.slice(2)
 if (args.length !== 2) {
-  console.log(
+  console.error(
     '2 parameters are require: destiny folder path where translations will be added\n' +
       'and origin folder path where values are going to be copied from'
   )
 } else if (!fs.readdirSync(args[0]) || !fs.readdirSync(args[1])) {
-  console.log('the destiny or origin folder does no exists ')
+  console.error('the destiny or origin folder does no exists ')
 } else {
   // Open ng orcid
   const ngOrcid = new NgOrcidPropertyFolder(args[0])
