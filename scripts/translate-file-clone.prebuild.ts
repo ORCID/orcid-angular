@@ -150,11 +150,17 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     const originFolderFlat: Properties = this.flatFolder('en', originFolder)
     Object.keys(thisFolderFlat).forEach((thisPropertyKey: string) => {
       const thisProperty = thisFolderFlat[thisPropertyKey]
-      const originPropertyKey = Object.keys(originFolderFlat).find(
+      const candidateKeys = Object.keys(originFolderFlat).filter(
         (originKey: string) => {
           return originFolderFlat[originKey].value === thisProperty.value
         }
       )
+      const originPropertyKey: string = this.findTheKeyWithMostTranslations(
+        candidateKeys,
+        originFolder,
+        thisPropertyKey
+      )
+
       if (originPropertyKey) {
         const originProperty = originFolderFlat[originPropertyKey]
         matchingPairs.push({ a: thisProperty, b: originProperty })
@@ -167,6 +173,59 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       }
     })
     return matchingPairs
+  }
+
+  /*
+    Front a list of keys that can be used to clone it's translations
+    Return the one that has translations for more languages
+  */
+  findTheKeyWithMostTranslations(
+    candidateKeys: string[],
+    originFolder: PropertyFolder,
+    propertyKey: string
+  ): string {
+    if (candidateKeys.length === 1) {
+      return candidateKeys[0]
+    } else {
+      // Setup a score object
+      const scores = {}
+      candidateKeys.forEach(key => (scores[key] = 0))
+
+      // Adds a score point for each translation that a key has
+      PropertyFolderImpl.supportedLanguagesFile.forEach(language => {
+        const flatFolder = this.flatFolder(language, originFolder)
+
+        candidateKeys.forEach(key => {
+          if (flatFolder[key]) {
+            scores[key]++
+          }
+        })
+      })
+
+      // Finds and returns the key with more translations
+      let betterScoreKey = null
+      // If a key with the same name exist as a candidate it gets prioritized
+      // to win over other keys with the same score
+      if (scores[propertyKey]) {
+        betterScoreKey = propertyKey
+      }
+      Object.keys(scores).forEach(key => {
+        if (!betterScoreKey) {
+          betterScoreKey = key
+        } else if (scores[betterScoreKey] < scores[key]) {
+          betterScoreKey = key
+        }
+      })
+      if (propertyKey !== betterScoreKey) {
+        console.warn(`
+From the many properties on Orcid Source that have the same english value of ${propertyKey}
+-----${betterScoreKey} was select as it has translations for ${
+          scores[betterScoreKey]
+        } languages
+      `)
+      }
+      return betterScoreKey
+    }
   }
 
   save(dir = './tmp', flatFolder = true) {
@@ -269,7 +328,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
 
   flatFolder(
     languageToMakeFlat: string,
-    folder: PropertyFolderImpl = this
+    folder: PropertyFolder = this
   ): Properties {
     const flatFolder: Properties = {}
     Object.keys(folder.files).forEach((fileKey: string) => {
@@ -343,12 +402,12 @@ export class NgOrcidPropertyFolder extends PropertyFolderImpl {
 
 const args = process.argv.slice(2)
 if (args.length !== 2) {
-  console.log(
+  console.error(
     '2 parameters are require: destiny folder path where translations will be added\n' +
       'and origin folder path where values are going to be copied from'
   )
 } else if (!fs.readdirSync(args[0]) || !fs.readdirSync(args[1])) {
-  console.log('the destiny or origin folder does no exists ')
+  console.error('the destiny or origin folder does no exists ')
 } else {
   // Open ng orcid
   const ngOrcid = new NgOrcidPropertyFolder(args[0])
