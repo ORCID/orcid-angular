@@ -100,7 +100,7 @@ export class SearchService {
   private extractOrcidId(string: any) {
     const regexResult = ORCID_REGEXP.exec(string)
     if (regexResult) {
-      return regexResult[0]
+      return regexResult[0].toUpperCase()
     }
     return null
   }
