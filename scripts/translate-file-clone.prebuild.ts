@@ -222,7 +222,6 @@ From the many properties on Orcid Source that have the same english value of ${p
 -----${betterScoreKey} was select as it has translations for ${
           scores[betterScoreKey]
         } languages
-      ${JSON.stringify(scores)}
       `)
       }
       return betterScoreKey
