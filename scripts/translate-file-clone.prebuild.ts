@@ -175,6 +175,10 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     return matchingPairs
   }
 
+  /*
+    Front a list of keys that can be used to clone it's translations
+    Return the one that has translations for more languages
+  */
   findTheKeyWithMostTranslations(
     candidateKeys: string[],
     originFolder: PropertyFolder,
@@ -187,7 +191,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       const scores = {}
       candidateKeys.forEach(key => (scores[key] = 0))
 
-      // Adds a point for each translation that a key has on every language
+      // Adds a score point for each translation that a key has
       PropertyFolderImpl.supportedLanguagesFile.forEach(language => {
         const flatFolder = this.flatFolder(language, originFolder)
 
@@ -198,7 +202,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
         })
       })
 
-      // Finds and returns the key with better more translations
+      // Finds and returns the key with more translations
       let betterScoreKey = null
       // If a key with the same name exist as a candidate it gets prioritized
       // to win over other keys with the same score
