@@ -1,3 +1,20 @@
 .text-container {
   text-align: center;
 }
+
+.closable-message {
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  p {
+    display: inline;
+  }
+  .columns-12 :host & {
+    button {
+      margin-left: 10px;
+    }
+  }
+}
