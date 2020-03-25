@@ -1,6 +1,7 @@
 export const ApplicationRoutes = {
   search: 'orcid-search/search',
   resetPassword: 'reset-password',
+  register: 'register',
   home: '',
 }
 

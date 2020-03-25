@@ -7,6 +7,7 @@ import {
   ApplicationRoutes,
 } from './constants'
 import { EnvironmentBannerComponent } from './environment-banner/environment-banner/environment-banner.component'
+import { RegisterModule } from './register/register.module'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -41,6 +42,11 @@ const routes: Routes = [
       import('./password-recovery/password-recovery.module').then(
         m => m.PasswordRecoveryModule
       ),
+  },
+  {
+    path: ApplicationRoutes.register,
+    loadChildren: () =>
+      import('./register/register.module').then(m => m.RegisterModule),
   },
   {
     path: ApplicationRoutes.search,
