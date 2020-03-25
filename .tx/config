@@ -1,0 +1,60 @@
+[main]
+host = https://www.transifex.com
+
+[orcid-angular.src-locale-properties-environment-banner-environment-banner-en-properties--master]
+file_filter = src/locale/properties/environment-banner/environment-banner.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/environment-banner/environment-banner.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-home-home-en-properties--master]
+file_filter = src/locale/properties/home/home.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/home/home.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-layout-layout-en-properties--master]
+file_filter = src/locale/properties/layout/layout.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/layout/layout.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-material-material-en-properties--master]
+file_filter = src/locale/properties/material/material.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/material/material.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-password-recovery-password-recovery-en-properties--master]
+file_filter = src/locale/properties/password-recovery/password-recovery.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/password-recovery/password-recovery.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-profile-profile-en-properties--master]
+file_filter = src/locale/properties/profile/profile.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/profile/profile.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-search-search-en-properties--master]
+file_filter = src/locale/properties/search/search.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/search/search.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-signin-signin-en-properties--master]
+file_filter = src/locale/properties/signin/signin.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/signin/signin.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+
