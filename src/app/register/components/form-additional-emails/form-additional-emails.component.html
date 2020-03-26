@@ -1,0 +1,14 @@
+<ng-container [formGroup]="form">
+  <ng-container
+    *ngFor="let additionalEmailControl of (form.controls | keyvalue)"
+  >
+    <mat-form-field appearance="outline">
+      <mat-label>Input</mat-label>
+      <input
+        formControlName="{{additionalEmailControl.key}}"
+        matInput
+      /> </mat-form-field
+  ></ng-container>
+
+  <button mat-button (click)="addAdditionalEmail()">Add</button>
+</ng-container>

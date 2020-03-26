@@ -1,2 +1,6 @@
-<app-form-password></app-form-password>
-<app-form-notifications></app-form-notifications>
+<form [formGroup]="formGroup">
+  <app-form-password formControlName="password"></app-form-password>
+  <app-form-notifications
+    formControlName="notifications"
+  ></app-form-notifications>
+</form>

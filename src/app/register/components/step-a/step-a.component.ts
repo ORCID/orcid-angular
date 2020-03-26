@@ -14,6 +14,7 @@ export class StepAComponent extends BaseStep implements OnInit {
   ngOnInit(): void {
     this.formGroup = this._formBuilder.group({
       personal: [''],
+      additionalEmails: [''],
     })
   }
 }

@@ -1,1 +1,10 @@
-<p>form-visibility works!</p>
+<ng-container [formGroup]="form">
+  <mat-radio-group formControlName="visibility">
+    <mat-radio-button
+      *ngFor="let visibility of visibilityOptions"
+      [value]="visibility"
+    >
+      {{ visibility }}
+    </mat-radio-button>
+  </mat-radio-group>
+</ng-container>

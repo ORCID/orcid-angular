@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-
 import { RegisterRoutingModule } from './register-routing.module'
 import { RegisterComponent } from './pages/register/register.component'
-import { MatStepperModule } from '@angular/material/stepper'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { MatInputModule, MatButtonModule } from '@angular/material'
+import {
+  MatStepperModule,
+  MatInputModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatRadioModule,
+} from '@angular/material'
 import { StepAComponent } from './components/step-a/step-a.component'
 import { StepBComponent } from './components/step-b/step-b.component'
 import { StepCComponent } from './components/step-c/step-c.component'
@@ -15,6 +18,8 @@ import { FormPasswordComponent } from './components/form-password/form-password.
 import { FormNotificationsComponent } from './components/form-notifications/form-notifications.component'
 import { FormVisibilityComponent } from './components/form-visibility/form-visibility.component'
 import { FormTermsComponent } from './components/form-terms/form-terms.component'
+import { FormAdditionalEmailsComponent } from './components/form-additional-emails/form-additional-emails.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -27,6 +32,7 @@ import { FormTermsComponent } from './components/form-terms/form-terms.component
     FormNotificationsComponent,
     FormVisibilityComponent,
     FormTermsComponent,
+    FormAdditionalEmailsComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +43,8 @@ import { FormTermsComponent } from './components/form-terms/form-terms.component
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatRadioModule,
   ],
 })
 export class RegisterModule {}

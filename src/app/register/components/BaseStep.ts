@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms'
 import { Output, Input, EventEmitter } from '@angular/core'
 
-export class BaseStep {
+export abstract class BaseStep {
   public _formGroup: FormGroup
   @Input()
   set formGroup(formGroup: FormGroup) {

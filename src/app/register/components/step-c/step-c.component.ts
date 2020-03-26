@@ -10,11 +10,11 @@ import { BaseStep } from '../BaseStep'
 export class StepCComponent extends BaseStep implements OnInit {
   constructor(private _formBuilder: FormBuilder) {
     super()
+  }
+  ngOnInit() {
     this.formGroup = this._formBuilder.group({
-      terms: [''],
       visibility: [''],
+      terms: [''],
     })
   }
-
-  ngOnInit() {}
 }

@@ -1,1 +1,4 @@
-<app-form-visibility></app-form-visibility> <app-form-terms></app-form-terms>
+<ng-container [formGroup]="formGroup">
+  <app-form-visibility formControlName="visibility"></app-form-visibility>
+  <app-form-terms formControlName="terms"></app-form-terms>
+</ng-container>

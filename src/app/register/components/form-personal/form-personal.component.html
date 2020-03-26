@@ -1,18 +1,18 @@
-<ng-container [formGroup]="basicInfoForm">
+<ng-container [formGroup]="form">
   <mat-form-field appearance="outline">
     <mat-label>Input</mat-label>
-    <input matInput />
+    <input formControlName="firstName" matInput />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Input</mat-label>
-    <input matInput />
+    <input formControlName="lastName" matInput />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Input</mat-label>
-    <input matInput />
+    <input formControlName="primaryEmail" matInput />
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Input</mat-label>
-    <input matInput />
+    <input formControlName="confirmEmail" matInput />
   </mat-form-field>
 </ng-container>
