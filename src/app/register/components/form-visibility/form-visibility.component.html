@@ -1,10 +1,13 @@
 <ng-container [formGroup]="form">
-  <mat-radio-group formControlName="visibility">
-    <mat-radio-button
-      *ngFor="let visibility of visibilityOptions"
-      [value]="visibility"
-    >
-      {{ visibility }}
+  <mat-radio-group formControlName="visibility" color="primary">
+    <mat-radio-button [value]="visibilityOptions[0]">
+      Everyone (87% of users choose this)
+    </mat-radio-button>
+    <mat-radio-button [value]="visibilityOptions[1]">
+      Trusted parties (5% of users choose this)
+    </mat-radio-button>
+    <mat-radio-button [value]="visibilityOptions[2]">
+      Only me (8% of users choose this)
     </mat-radio-button>
   </mat-radio-group>
 </ng-container>

@@ -9,6 +9,7 @@ import {
   MatCheckboxModule,
   MatFormFieldModule,
   MatRadioModule,
+  MatIconModule,
 } from '@angular/material'
 import { StepAComponent } from './components/step-a/step-a.component'
 import { StepBComponent } from './components/step-b/step-b.component'
@@ -45,6 +46,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     MatButtonModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatIconModule,
   ],
 })
 export class RegisterModule {}

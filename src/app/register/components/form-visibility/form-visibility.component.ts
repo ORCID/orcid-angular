@@ -25,7 +25,7 @@ import {
   ],
 })
 export class FormVisibilityComponent extends BaseForm implements OnInit {
-  visibilityOptions = ['elem1', 'elem2', 'elem3']
+  visibilityOptions = ['Everyone', 'Trusted', 'only']
   ngOnInit() {
     this.form = new FormGroup({
       visibility: new FormControl(''),
