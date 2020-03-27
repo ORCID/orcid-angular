@@ -1,0 +1,99 @@
+:host {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  max-width: 460px;
+}
+
+p {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.43;
+}
+
+a {
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: 1.25px;
+  margin: auto;
+}
+
+@media (min-width: 700px) {
+  ::ng-deep .mat-card {
+    border: solid 1px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.main {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sign-in-card {
+  max-width: 640px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mat-button {
+  max-width: 460px;
+  max-height: 40px;
+}
+
+.form-container,
+.success-container {
+  max-width: 460px;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.password {
+  margin-top: 12px;
+}
+
+.sign-in-button {
+  margin-top: 12px;
+}
+
+.chipsError {
+  padding: 0 1em;
+}
+
+.mat-divider-horizontal {
+  position: relative !important;
+}
+
+.sign-in-title {
+  text-align: center;
+  line-height: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.or {
+  text-align: center;
+  font-size: 16px;
+}
+
+.forgot {
+  margin-top: 16px;
+}
+
+.dontHaveOrcid {
+  margin-top: 12px;
+  padding: 0 !important;
+}
+
+.mat-progress-bar {
+  top: -16px;
+}

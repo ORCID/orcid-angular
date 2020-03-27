@@ -30,11 +30,16 @@ const routes: Routes = [
   //   loadChildren:
   //   () => import('./profile/profile.module').then(m => m.ProfileModule)
   // },
-  // {
-  //   path: 'signin',
-  //   loadChildren: () =>
-  //     import('./sign-in/sign-in.module').then(m => m.SignInModule),
-  // },
+  {
+    path: ApplicationRoutes.login,
+    loadChildren: () =>
+      import('./sign-in/sign-in.module').then(m => m.SignInModule),
+  },
+  {
+    path: ApplicationRoutes.signin,
+    loadChildren: () =>
+      import('./sign-in/sign-in.module').then(m => m.SignInModule),
+  },
   {
     path: ApplicationRoutes.resetPassword,
     loadChildren: () =>

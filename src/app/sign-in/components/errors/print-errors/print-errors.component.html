@@ -1,0 +1,43 @@
+<mat-error
+  *ngIf="badCredentials"
+  class="orcid-error"
+  i18n="@@ngOrcid.signin.bad_credentials"
+>
+  <mat-icon inline="true">error</mat-icon>
+  Incorrect username and/or password
+</mat-error>
+<mat-error
+  *ngIf="showDeprecatedError"
+  class="orcid-error"
+  i18n="@@ngOrcid.signin.deprecated_with_primary"
+>
+  <mat-icon inline="true">error</mat-icon>
+  This account is deprecated. Please refer to account:
+  {{ orcidPrimaryDeprecated }}
+</mat-error>
+<mat-error
+  *ngIf="showUnclaimedError"
+  class="orcid-error"
+  i18n="@@ngOrcid.signin.unclaimed_exists_1"
+>
+  <mat-icon inline="true">error</mat-icon>
+  The ORCID record exists but has not been claimed. Would you like to
+  <a
+    i18n="@@orcid.frontend.reset.password.unclaimed_exists_2"
+    (click)="resendClaim()"
+    >resend the claim email?</a
+  >
+</mat-error>
+<mat-error
+  *ngIf="showInvalidUser"
+  class="orcid-error"
+  i18n="@@ngOrcid.signin.unclaimed_exists_1"
+>
+  <mat-icon inline="true">error</mat-icon>
+  Invalid ORCID iD, please
+  <a
+    i18n="@@orcid.frontend.reset.password.invalid_user_type_2"
+    (click)="navigateTo('/help/contact-us')"
+    >contact support</a
+  >
+</mat-error>

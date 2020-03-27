@@ -1,0 +1,116 @@
+<form [formGroup]="twoFactorForm" (ngSubmit)="onSubmit()">
+  <p i18n="@@ngOrcid.signin.2fa.heading">Two-factor authentication</p>
+  <mat-form-field
+    appearance="outline"
+    class="row deactivate"
+    *ngIf="!recoveryCode"
+  >
+    <mat-label i18n="@@ngOrcid.signin.2fa.label">
+      Two-factor authentication code
+    </mat-label>
+    <input
+      matInput
+      #inputVerificationCode
+      formControlName="verificationCode"
+      cdkFocusInitial
+    />
+    <mat-hint align="end"
+      >{{ inputVerificationCode.value?.length || 0 }}/6</mat-hint
+    >
+
+    <mat-error
+      i18n="@@ngOrcid.signin.invalidEmail"
+      *ngIf="verificationFormControl.hasError('required')"
+      >Authentication code is required
+    </mat-error>
+
+    <mat-error
+      i18n="@@ngOrcid.signin.bad_verification_code_length"
+      *ngIf="
+        verificationFormControl.hasError('minlength') ||
+        verificationFormControl.hasError('maxlength')
+      "
+      >Invalid authentication code length
+    </mat-error>
+  </mat-form-field>
+  <p i18n="@@ngOrcid.signin.2fa.instructions_part1">
+    <a
+      role="button"
+      (click)="showAuthenticationCode()"
+      i18n="@@ngOrcid.signin.2fa.instructions_part2"
+      >Enter a code</a
+    >
+    from your two-factor authentication app
+  </p>
+  <p i18n="@@ngOrcid.signin.2fa.no_device1">
+    Don't have your device?
+    <a
+      role="button"
+      (click)="showRecoveryCode()"
+      i18n="@@ngOrcid.signin.2fa.no_device2"
+      >Enter a recovery code
+    </a>
+  </p>
+  <p i18n="@@ngOrcid.signin.2fa.no_device_or_recovery">
+    Don't have your device or recovery code?
+    <a
+      (click)="navigateTo('/help/contact-us')"
+      i18n="@@ngOrcid.signin.2fa.contact_support"
+      >Contact support
+    </a>
+  </p>
+  <mat-form-field
+    appearance="outline"
+    class="row two-factor"
+    *ngIf="recoveryCode"
+  >
+    <mat-label i18n="@@ngOrcid.signin.2fa.Recovery code">
+      Recovery code
+    </mat-label>
+    <input matInput #inputRecoveryCode formControlName="recoveryCode" />
+    <mat-hint align="end"
+      >{{ inputRecoveryCode.value?.length || 0 }}/10</mat-hint
+    >
+    <mat-error
+      i18n="@@ngOrcid.signin.invalidEmail"
+      *ngIf="recoveryCodeFormControl.hasError('required')"
+      >Recovery code is required
+    </mat-error>
+
+    <mat-error
+      i18n="@@ngOrcid.signin.bad_recovery_code_length"
+      *ngIf="
+        recoveryCodeFormControl.hasError('minlength') ||
+        recoveryCodeFormControl.hasError('maxlength')
+      "
+      >Invalid recovery code length
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="row mat-elevation-z0 two-factor"
+    type="submit"
+    [disabled]="loading"
+    i18n="@@ngOrcid.signin.authenticate"
+  >
+    AUTHENTICATE
+  </button>
+</form>
+<mat-error
+  *ngIf="showBadVerificationCode"
+  class="orcid-error"
+  i18n="@@ngOrcid.signin.2fa.bad_verification_code"
+>
+  <mat-icon inline="true">error</mat-icon>
+  Invalid authentication code
+</mat-error>
+<mat-error
+  *ngIf="showBadRecoveryCode"
+  class="orcid-error"
+  i18n="@@ngOrcid.signin.2fa.bad_recovery_code"
+>
+  <mat-icon inline="true">error</mat-icon>
+  Invalid recovery code
+</mat-error>

@@ -1,0 +1,33 @@
+<button
+  mat-raised-button
+  (click)="navigateTo('')"
+  class="institution mat-elevation-z0"
+  type="button"
+  [disabled]="loading"
+  i18n="@@ngOrcid.signin.institutionalAccount"
+>
+  <mat-icon class="institution-icon">ic_account_balance</mat-icon>
+  Access through your institution
+</button>
+<button
+  mat-raised-button
+  (click)="navigateTo('')"
+  class="google mat-elevation-z0"
+  type="button"
+  [disabled]="loading"
+  i18n="@@ngOrcid.signin.google"
+>
+  <mat-icon svgIcon="google"></mat-icon>
+  Sign in with Google
+</button>
+<button
+  mat-raised-button
+  (click)="navigateTo('')"
+  class="facebook mat-elevation-z0"
+  type="button"
+  [disabled]="loading"
+  i18n="@@ngOrcid.signin.facebook"
+>
+  <mat-icon svgIcon="facebook"></mat-icon>
+  Sign in with Facebook
+</button>
