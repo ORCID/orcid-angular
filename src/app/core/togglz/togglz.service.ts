@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { MaintenanceMessage } from 'src/app/types/togglz.endpoint'
+import { Config } from 'src/app/types/togglz.endpoint'
 import { Observable, timer } from 'rxjs'
 import { switchMapTo, shareReplay, map } from 'rxjs/operators'
-import { Config } from 'src/app/types/togglz.local'
+import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Injectable({
   providedIn: 'root',
