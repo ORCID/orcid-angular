@@ -4,6 +4,7 @@ import {
   FormGroup,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
+  Validators,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 
@@ -27,7 +28,7 @@ import { BaseForm } from '../BaseForm'
 export class FormTermsComponent extends BaseForm implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
-      termsOfUse: new FormControl(''),
+      termsOfUse: new FormControl('', Validators.requiredTrue),
     })
   }
 }

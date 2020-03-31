@@ -8,8 +8,11 @@ import {
   ValidationErrors,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
+  Validators,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
+import { TLD_REGEXP } from 'src/app/constants'
+import { RegisterFormValidatorService } from '../../services/register-form-validator.service'
 
 @Component({
   selector: 'app-form-personal',
@@ -30,12 +33,22 @@ import { BaseForm } from '../BaseForm'
 })
 export class FormPersonalComponent extends BaseForm
   implements OnInit, ControlValueAccessor, Validator {
+  constructor(private validator: RegisterFormValidatorService) {
+    super()
+  }
+
   ngOnInit() {
-    this.form = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      primaryEmail: new FormControl(''),
-      confirmEmail: new FormControl(''),
-    })
+    this.form = new FormGroup(
+      {
+        firstName: new FormControl('', Validators.required),
+        lastName: new FormControl(''),
+        primaryEmail: new FormControl('', [
+          Validators.required,
+          Validators.pattern(TLD_REGEXP),
+        ]),
+        confirmEmail: new FormControl('', [Validators.required]),
+      },
+      this.validator.matchValues('primaryEmail', 'confirmEmail')
+    )
   }
 }

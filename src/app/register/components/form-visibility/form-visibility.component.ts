@@ -5,6 +5,7 @@ import {
   FormControl,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
+  Validators,
 } from '@angular/forms'
 
 @Component({
@@ -28,7 +29,7 @@ export class FormVisibilityComponent extends BaseForm implements OnInit {
   visibilityOptions = ['Everyone', 'Trusted', 'only']
   ngOnInit() {
     this.form = new FormGroup({
-      visibility: new FormControl(''),
+      visibility: new FormControl('', Validators.required),
     })
   }
 }

@@ -8,8 +8,10 @@ import {
   Validator,
   AbstractControl,
   ValidationErrors,
+  Validators,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
+import { TLD_REGEXP } from 'src/app/constants'
 
 @Component({
   selector: 'app-form-additional-emails',
@@ -32,7 +34,7 @@ export class FormAdditionalEmailsComponent extends BaseForm implements OnInit {
   addAdditionalEmail(): void {
     this.form.addControl(
       (Object.keys(this.form.controls).length + 1).toString(),
-      new FormControl('')
+      new FormControl('', Validators.pattern(TLD_REGEXP))
     )
   }
 

@@ -21,6 +21,7 @@ import { FormVisibilityComponent } from './components/form-visibility/form-visib
 import { FormTermsComponent } from './components/form-terms/form-terms.component'
 import { FormAdditionalEmailsComponent } from './components/form-additional-emails/form-additional-emails.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { RegisterServicesModule } from './services/register-services.module'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     MatCheckboxModule,
     MatRadioModule,
     MatIconModule,
+    RegisterServicesModule,
   ],
 })
 export class RegisterModule {}

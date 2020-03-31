@@ -17,4 +17,7 @@ export class StepCComponent extends BaseStep implements OnInit {
       terms: [''],
     })
   }
+  register() {
+    console.log(this.formGroup.markAsTouched())
+  }
 }
