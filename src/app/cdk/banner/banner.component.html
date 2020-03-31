@@ -1,5 +1,5 @@
 <div class="alert alert-banner  mat-body-1" id="test-warn-div">
-  <p><ng-content #name></ng-content></p>
+  <p><ng-content></ng-content></p>
   <button
     *ngIf="canDismiss"
     mat-flat-button
@@ -7,6 +7,6 @@
     i18n="@@common.cookies.click_dismiss"
     (click)="onDismiss()"
   >
-    Dismiss
+    <ng-content select="label.closeButton"></ng-content>
   </button>
 </div>

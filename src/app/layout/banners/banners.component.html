@@ -14,8 +14,12 @@
     i18n="@@common.cookies.learn_more"
   >
     Learn more about how we use cookies</a
-  >.</app-banner
->
+  >.
+
+  <label class="closeButton" i18n="@@common.cookies.click_dismiss"
+    >Dismiss</label
+  >
+</app-banner>
 
 <app-banner *ngIf="showUnsupportedBrowserBanner" [canDismiss]="false"
   ><ng-container i18n="@@common.old.browser_1">
@@ -32,5 +36,23 @@
     href="https://support.orcid.org/hc/en-us/articles/360006895074-Technical-requirements-for-using-the-ORCID-site"
     i18n="@@common.old_browser_3"
     >supported browser</a
-  >.</app-banner
+  >.
+
+  <label class="closeButton" i18n="@@common.cookies.click_dismiss"
+    >Dismiss</label
+  >
+</app-banner>
+
+<app-banner
+  *ngIf="closableElementAtDisplay"
+  (dismiss)="understoodClosableMessage(closableElementAtDisplay)"
+  [canDismiss]="true"
+  [dismissCookie]=""
+  [dismissCookieTime]="365"
+  [canDismiss]="true"
 >
+  <span [innerHtml]="closableElementAtDisplay.innerHTML"></span>
+  <label class="closeButton" i18n="@@i18n=@@layout.understood"
+    >Understood</label
+  >
+</app-banner>

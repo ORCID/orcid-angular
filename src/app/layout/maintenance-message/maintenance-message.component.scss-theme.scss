@@ -13,10 +13,6 @@
   .text-container {
     border-top: mat-color($foreground, 'box-border') 1px solid;
   }
-
-  .closable-message {
-    background-color: mat-color($accent, 200);
-  }
 }
 
 @include maintenance-message-theme($orcid-app-theme);
