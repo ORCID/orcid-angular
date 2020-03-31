@@ -143,9 +143,20 @@
     Learn more about how we use cookies</source>
       </segment>
     </unit>
+    <unit id="common.cookies.click_dismiss">
+      <notes>
+        <note category="location">app/layout/banners/banners.component.html:20</note>
+        <note category="location">app/layout/banners/banners.component.html:42</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
+        <note category="location">app/cdk/banner/banner.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>Dismiss</source>
+      </segment>
+    </unit>
     <unit id="common.old.browser_1">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:21,23</note>
+        <note category="location">app/layout/banners/banners.component.html:25,27</note>
       </notes>
       <segment>
         <source>
@@ -155,7 +166,7 @@
     </unit>
     <unit id="common.old_browser_2">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:26,28</note>
+        <note category="location">app/layout/banners/banners.component.html:30,32</note>
       </notes>
       <segment>
         <source>
@@ -165,10 +176,18 @@
     </unit>
     <unit id="common.old_browser_3">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:34</note>
+        <note category="location">app/layout/banners/banners.component.html:38</note>
       </notes>
       <segment>
         <source>supported browser</source>
+      </segment>
+    </unit>
+    <unit id="i18n=@@layout.understood">
+      <notes>
+        <note category="location">app/layout/banners/banners.component.html:56</note>
+      </notes>
+      <segment>
+        <source>Understood</source>
       </segment>
     </unit>
     <unit id="common.js.domain.warn.warning_1">
@@ -221,17 +240,6 @@
       <segment>
         <source>
       more information</source>
-      </segment>
-    </unit>
-    <unit id="common.cookies.click_dismiss">
-      <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
-        <note category="location">app/cdk/banner/banner.component.html:9,11</note>
-      </notes>
-      <segment>
-        <source>
-    Dismiss
-  </source>
       </segment>
     </unit>
     <unit id="home.distinguish_yourself">

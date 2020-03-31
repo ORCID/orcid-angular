@@ -3,7 +3,6 @@ export function hotjarAnalytics(indexHtml: string, options) {
     options.environmentVariables &&
     options.environmentVariables.HOTJAR_ANALYTICS
   ) {
-    console.log(indexHtml)
     return indexHtml.replace(
       /hjid: 0000000/g,
       options.environmentVariables.HOTJAR_ANALYTICS
