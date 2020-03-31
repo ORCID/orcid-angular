@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { take } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Component({
   selector: 'app-banners',
@@ -11,7 +12,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   preserveWhitespaces: true,
 })
 export class BannersComponent implements OnInit {
-  maintenanceMessages
+  maintenanceMessages: MaintenanceMessage
   showCookieBanner
   showUnsupportedBrowserBanner
   closableElementAtDisplay
