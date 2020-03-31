@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { CookieService } from 'ngx-cookie-service'
-import { MaintenanceMessage } from 'src/app/types/togglz.endpoint'
+import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Component({
   selector: 'app-maintenance-message',

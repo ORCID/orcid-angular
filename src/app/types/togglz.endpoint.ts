@@ -1,5 +1,3 @@
-export interface MaintenanceMessage {
-  plainHtml: string
-  closableElements: NodeListOf<Element>
-  nonClosableElements: NodeListOf<Element>
+export interface Config {
+  messages: { [key: string]: string; LIVE_IDS: string }
 }
