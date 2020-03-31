@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { Observable, timer } from 'rxjs'
 import { switchMapTo, shareReplay, map } from 'rxjs/operators'
+import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +39,18 @@ export class TogglzService {
   getMessageOf(togglzFeatureName: string): Observable<string> {
     this.getTogglz()
     return this.togglz.pipe(map(data => data.messages[togglzFeatureName]))
+  }
+
+  getMaintenanceMessages(): Observable<MaintenanceMessage> {
+    return this.getMessageOf('MAINTENANCE_MESSAGE').pipe(
+      map(value => {
+        const plainHtml = value
+        const parser = new DOMParser()
+        const htmlElement = parser.parseFromString(plainHtml, 'text/html')
+        const closableElements = htmlElement.querySelectorAll('div.closable')
+        const nonClosableElements = htmlElement.querySelectorAll('div.regular')
+        return { plainHtml, closableElements, nonClosableElements }
+      })
+    )
   }
 }
