@@ -20,11 +20,13 @@ export class BannersComponent implements OnInit {
     _platformInfo: PlatformInfoService,
     togglz: TogglzService
   ) {
+    // All closable maintenance messages are displayed as banners
     togglz.getMaintenanceMessages().subscribe(value => {
       this.maintenanceMessages = value
       this.updateClosableMessage()
     })
 
+    // Show unsupported browser banner
     _platformInfo
       .get()
       .pipe(take(1))
@@ -32,6 +34,8 @@ export class BannersComponent implements OnInit {
         platform =>
           (this.showUnsupportedBrowserBanner = platform.unsupportedBrowser)
       )
+
+    // Show cookie banner
     this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
   }
 
