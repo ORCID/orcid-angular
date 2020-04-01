@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-icon {
+  font-size: 30px;
+  height: 30px;
+  width: 35px;
+  margin-right: 10px;
+}
+
+.mat-subheading-2 {
+  margin: 0px;
+}

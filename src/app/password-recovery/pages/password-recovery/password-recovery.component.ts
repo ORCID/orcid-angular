@@ -7,11 +7,13 @@ import {
 } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
-import { MatChip, matFormFieldAnimations } from '@angular/material'
+import { MatChip, matFormFieldAnimations, MatSnackBar } from '@angular/material'
 import { WINDOW } from 'src/app/cdk/window'
 import { TLD_REGEXP } from 'src/app/constants'
 import { Observable } from 'rxjs'
 import { PasswordRecovery } from 'src/app/types'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { LOCALE } from 'src/locale/messages.dynamic.en'
 
 @Component({
   selector: 'app-password-recovery',
@@ -24,7 +26,6 @@ import { PasswordRecovery } from 'src/app/types'
   preserveWhitespaces: true,
 })
 export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
-
   serverError = null
   status = false
   value = false
@@ -48,7 +49,8 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _passwordRecovery: PasswordRecoveryService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _snackBar: SnackbarService
   ) {}
 
   ngOnInit() {}
@@ -59,7 +61,6 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    console.log('SUBMIT')
     const value = this.recoveryForm.getRawValue()
     this.serverError = null
     // Mark all elements as touch to display untouched FormControl errors
@@ -81,7 +82,6 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
             this.recoveryForm.controls['email'].setErrors({
               backendErrors: data.errors || null,
             })
-            console.log(this.recoveryForm.errors)
           } else if (data.successMessage.length) {
             this.submitted = true
           }
@@ -89,7 +89,11 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
         error => {
           // Display server errors
           this.loading = false
-          this.serverError = error.message
+          this._snackBar.showErrorMessage(
+            LOCALE['ngOrcid.error'],
+            LOCALE['ngOrcid.passwordError'],
+            error.message
+          )
         }
       )
     }

@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { throwError } from 'rxjs'
-import { LOCALE } from 'src/locale/messages.dynamic.en'
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +21,7 @@ ok: "${error.ok}"
       )
       return throwError({
         error: error,
-        message: `${LOCALE['ngOrcid.error']}  <${error.status} (${error.statusText})>`,
+        message: `<${error.status} (${error.statusText})>`,
       })
     } else {
       // Client side error
@@ -36,7 +35,7 @@ stack: "${error.stack}"
       )
       return throwError({
         error: error,
-        message: `${LOCALE['ngOrcid.error']} ${error.name}`,
+        message: error.name,
       })
     }
   }
