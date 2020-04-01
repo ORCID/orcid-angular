@@ -1,0 +1,16 @@
+@import '~@angular/material/_theming';
+
+@mixin mat-snackbar-overwrites($theme) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $warn: map-get($theme, warn);
+  $divider-color: mat-color($foreground, divider);
+
+  $background: map-get($theme, background);
+  $unselected-background: mat-color($background, unselected-chip);
+  $unselected-foreground: mat-color($foreground, text);
+
+  snack-bar-container.mat-snack-bar-container.error {
+    background-color: mat-color($warn, 700);
+  }
+}

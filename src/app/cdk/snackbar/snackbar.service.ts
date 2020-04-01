@@ -19,6 +19,7 @@ export class SnackbarService {
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
       panelClass: 'error',
+      duration: 5 * 1000,
     })
   }
 }
