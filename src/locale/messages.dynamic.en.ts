@@ -72,5 +72,6 @@ export const LOCALE : {[key:string]: string} = {
   "ngOrcid.material.lastPageLabel": "Last page",
   "ngOrcid.material.nextPageLabel": "Next page",
   "ngOrcid.material.previousPageLabel": "Previous page",
-  "ngOrcid.material.of": "of"
+  "ngOrcid.material.of": "of",
+  "ngOrcid.error": "Oh no! An error occurred"
 }
