@@ -21,7 +21,7 @@ ok: "${error.ok}"
       )
       return throwError({
         error: error,
-        message: `<${error.status} (${error.statusText})>`,
+        message: `${error.status} (${error.statusText})`,
       })
     } else {
       // Client side error

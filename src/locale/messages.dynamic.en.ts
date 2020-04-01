@@ -74,5 +74,5 @@ export const LOCALE : {[key:string]: string} = {
   "ngOrcid.material.previousPageLabel": "Previous page",
   "ngOrcid.material.of": "of",
   "ngOrcid.error": "Oh no! An error occurred",
-  "ngOrcid.passwordError": "We couldn't recover your account detail, please try again, and if this error persists contact support"
+  "ngOrcid.passwordError": "We couldn't recover your account details, please try again, and if this error persists contact support"
 }
