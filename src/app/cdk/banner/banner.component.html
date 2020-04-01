@@ -1,4 +1,4 @@
-<div class="alert alert-banner  mat-body-1">
+<section class="alert alert-banner  mat-body-1" [attr.aria-label]="ariaLabel">
   <p><ng-content></ng-content></p>
   <button
     *ngIf="canDismiss"
@@ -9,4 +9,4 @@
   >
     <ng-content select="label.closeButton"></ng-content>
   </button>
-</div>
+</section>

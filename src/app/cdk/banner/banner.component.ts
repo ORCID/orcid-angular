@@ -11,6 +11,7 @@ export class BannerComponent implements OnInit {
   @Input() canDismiss = false
   @Input() dismissCookieTime = 365
   @Output() dismiss = new EventEmitter()
+  @Input() ariaLabel
 
   constructor(private _cookie: CookieService) {}
 

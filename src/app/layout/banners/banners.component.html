@@ -1,4 +1,5 @@
 <app-banner
+  ariaLabel="Cookies policy"
   *ngIf="showCookieBanner"
   (dismiss)="showCookieBanner = false"
   [dismissCookie]="'orcidCookiePolicyAlert'"
@@ -22,7 +23,10 @@
   >
 </app-banner>
 
-<app-banner *ngIf="showUnsupportedBrowserBanner" [canDismiss]="false"
+<app-banner
+  *ngIf="showUnsupportedBrowserBanner"
+  [canDismiss]="false"
+  ariaLabel="Unsupported browser"
   ><ng-container i18n="@@common.old.browser_1">
     We notice you are using a browser that our site does not support. Some
     features on this site may not work correctly.</ng-container
@@ -52,6 +56,7 @@
   [dismissCookie]=""
   [dismissCookieTime]="365"
   [canDismiss]="true"
+  [ariaLabel]="closableElementAtDisplay.getAttribute('aria-label')"
 >
   <span [innerHtml]="closableElementAtDisplay.innerHTML"></span>
   <label class="closeButton" i18n="@@i18n=@@layout.understood"
