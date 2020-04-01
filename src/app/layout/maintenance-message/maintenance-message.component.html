@@ -1,6 +1,6 @@
-<div
+<section
+  aria-label="Maintenance message"
   *ngIf="maintenanceMessage && maintenanceMessage.plainHtml"
-  role="banner"
   class="container"
 >
   <div
@@ -19,4 +19,4 @@
   >
     <p [innerHtml]="maintenanceMessage.plainHtml"></p>
   </div>
-</div>
+</section>
