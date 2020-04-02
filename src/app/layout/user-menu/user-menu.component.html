@@ -1,35 +1,33 @@
-<button
-  *ngIf="userInfo"
-  class="user-menu-button"
-  mat-button
-  color="primary"
-  [matMenuTriggerFor]="menu"
-  (menuOpened)="state = true"
-  (menuClosed)="state = false"
-  role="navigation"
-  aria-label="User menu"
->
-  <img src="./assets/vectors/profile-icon.svg" alt="" />
-  <ng-container *ngIf="platform.columns12" class="name-container">{{
-    displayName
-  }}</ng-container>
+<section role="navigation">
+  <button
+    *ngIf="userInfo"
+    class="user-menu-button"
+    mat-button
+    color="primary"
+    [matMenuTriggerFor]="menu"
+    (menuOpened)="state = true"
+    (menuClosed)="state = false"
+    aria-label="User menu"
+  >
+    <img src="./assets/vectors/profile-icon.svg" alt="" />
+    <ng-container *ngIf="platform.columns12" class="name-container">{{
+      displayName
+    }}</ng-container>
 
-  <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
-</button>
-<button
-  (click)="goto('login')"
-  mat-button
-  color="primary"
-  class="name-container"
-  *ngIf="!userInfo && !platform.columns4"
-  role="navigation"
-  aria-label="sign-in-register"
-  id="sign-in-register"
->
-  <ng-container i18n="#upperCase@@public-layout.sign_in">SIGN IN</ng-container
-  >/<ng-container i18n="#upperCase@@header.register">REGISTER</ng-container>
-</button>
-
+    <mat-icon *ngIf="platform.columns12">expand_more</mat-icon>
+  </button>
+  <button
+    (click)="goto('login')"
+    mat-button
+    color="primary"
+    class="name-container"
+    *ngIf="!userInfo && !platform.columns4"
+    aria-label="sign in or register"
+  >
+    <ng-container i18n="#upperCase@@public-layout.sign_in">SIGN IN</ng-container
+    >/<ng-container i18n="#upperCase@@header.register">REGISTER</ng-container>
+  </button>
+</section>
 <mat-menu #menu="matMenu" class="user-menu">
   <button class="main-button" (click)="goto('my-orcid')" mat-menu-item>
     <div class="row main-button-container">

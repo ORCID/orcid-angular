@@ -4,13 +4,8 @@
   [ngClass]="{ 'fixed-header-mode': mobileMenuState }"
 >
   <div class="row end">
-    <div class="col l5 m8 s4 middle logo-menu-container">
-      <a
-        routerLink="/"
-        role="banner"
-        class="logo-container"
-        aria-label="orcid logo"
-      >
+    <div class="col l5 m8 s4 middle logo-menu-container" role="banner">
+      <a routerLink="/" class="logo-container" aria-label="orcid mini logo">
         <img
           src="./assets/vectors/orcid.logo.svg"
           alt="orcid logo"
@@ -25,7 +20,7 @@
           Connecting research and researchers
         </div>
       </a>
-      <div class="col no-gutters">
+      <div class="col no-gutters" role="navigation">
         <div *ngIf="!platform.columns12" class="row middle no-gutters">
           <div *ngIf="mobileMenuState" class="col no-gutters">
             <app-language class="col no-gutters"></app-language>

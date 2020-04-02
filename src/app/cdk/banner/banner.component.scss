@@ -29,5 +29,8 @@ button {
   .alert-banner {
     flex-direction: column;
     align-items: flex-end;
+    p {
+      align-self: flex-start;
+    }
   }
 }
