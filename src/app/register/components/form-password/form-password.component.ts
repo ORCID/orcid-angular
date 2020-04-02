@@ -5,6 +5,7 @@ import {
   FormControl,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
+  Validators,
 } from '@angular/forms'
 import { RegisterFormValidatorService } from '../../services/register-form-validator.service'
 
@@ -32,8 +33,8 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   ngOnInit() {
     this.form = new FormGroup(
       {
-        password: new FormControl(''),
-        passwordConfirmation: new FormControl(''),
+        password: new FormControl('', Validators.required),
+        passwordConfirmation: new FormControl('', Validators.required),
       },
       this.validator.matchValues('password', 'passwordConfirmation')
     )

@@ -15,9 +15,12 @@
           <ng-template matStepLabel>Security and visibility</ng-template>
           <app-step-b [(formGroup)]="FormGroupStepB"></app-step-b>
         </mat-step>
-        <mat-step [stepControl]="FormGroupStepC">
+        <mat-step [stepControl]="FormGroupStepC" #lastStep>
           <ng-template matStepLabel>Notifications and terms</ng-template>
-          <app-step-c [(formGroup)]="FormGroupStepC"></app-step-c>
+          <app-step-c
+            [(formGroup)]="FormGroupStepC"
+            (submit)="register()"
+          ></app-step-c>
         </mat-step>
       </mat-vertical-stepper>
 

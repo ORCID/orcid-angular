@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
-import { take } from 'rxjs/operators'
+import { MatStep } from '@angular/material'
 
 @Component({
   selector: 'app-register',
@@ -9,6 +9,8 @@ import { take } from 'rxjs/operators'
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild('lastStep', { static: false }) lastStep: MatStep
+
   platform: PlatformInfo
   FormGroupStepA: FormGroup = new FormGroup({})
   FormGroupStepB: FormGroup = new FormGroup({})
@@ -20,4 +22,8 @@ export class RegisterComponent implements OnInit {
     })
   }
   ngOnInit() {}
+
+  register() {
+    this.lastStep.interacted = true
+  }
 }

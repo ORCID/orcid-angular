@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms'
 import { BaseStep } from '../BaseStep'
 
 @Component({
@@ -8,6 +8,7 @@ import { BaseStep } from '../BaseStep'
   styleUrls: ['./step-c.component.scss'],
 })
 export class StepCComponent extends BaseStep implements OnInit {
+  @Output() submit = new EventEmitter()
   constructor(private _formBuilder: FormBuilder) {
     super()
   }
@@ -17,7 +18,8 @@ export class StepCComponent extends BaseStep implements OnInit {
       terms: [''],
     })
   }
-  register() {
-    console.log(this.formGroup.markAsTouched())
+  register(form: NgForm) {
+    console.log('submit')
+    this.submit.emit()
   }
 }

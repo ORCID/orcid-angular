@@ -1,6 +1,9 @@
-<ng-container [formGroup]="formGroup">
+<form [formGroup]="formGroup" (ngSubmit)="register(form)" #form>
   <app-form-visibility formControlName="visibility"></app-form-visibility>
   <app-form-terms formControlName="terms"></app-form-terms>
-  <button mat-button color="primary" matStepperPrevious>Back</button>
-  <button mat-raised-button color="primary" type="submit">Register</button>
-</ng-container>
+  <app-form-personal></app-form-personal>
+  <button mat-button color="primary" matStepperPrevious type="button">
+    Back
+  </button>
+  <button mat-raised-button color="primary">Register</button>
+</form>
