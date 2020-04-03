@@ -9,10 +9,19 @@ import {
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
   Validators,
+  AsyncValidatorFn,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
-import { TLD_REGEXP } from 'src/app/constants'
+import {
+  TLD_REGEXP,
+  ILLEGAL_NAME_CHARACTERS_REGEXP,
+  URL_REGEXP,
+} from 'src/app/constants'
 import { RegisterFormValidatorService } from '../../services/register-form-validator.service'
+import { Observable } from 'rxjs'
+import { RegisterService } from 'src/app/core/register/register.service'
+import { map } from 'rxjs/operators'
+import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-form-personal',
@@ -33,17 +42,25 @@ import { RegisterFormValidatorService } from '../../services/register-form-valid
 })
 export class FormPersonalComponent extends BaseForm
   implements OnInit, ControlValueAccessor, Validator {
-  constructor(private validator: RegisterFormValidatorService) {
+  constructor(
+    private validator: RegisterFormValidatorService,
+    private _register: RegisterService
+  ) {
     super()
   }
 
   ngOnInit() {
     this.form = new FormGroup(
       {
-        firstName: new FormControl('', Validators.required),
+        firstName: new FormControl('', [
+          Validators.required,
+          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+          OrcidValidators.notPattern(URL_REGEXP),
+        ]),
         lastName: new FormControl(''),
         primaryEmail: new FormControl('', [
           Validators.required,
+          Validators.email,
           Validators.pattern(TLD_REGEXP),
         ]),
         confirmEmail: new FormControl('', [Validators.required]),

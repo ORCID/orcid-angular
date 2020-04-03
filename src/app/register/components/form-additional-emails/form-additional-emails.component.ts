@@ -34,7 +34,7 @@ export class FormAdditionalEmailsComponent extends BaseForm implements OnInit {
   addAdditionalEmail(): void {
     this.form.addControl(
       (Object.keys(this.form.controls).length + 1).toString(),
-      new FormControl('', Validators.pattern(TLD_REGEXP))
+      new FormControl('', [Validators.email, Validators.pattern(TLD_REGEXP)])
     )
   }
 
