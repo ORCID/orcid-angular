@@ -7,7 +7,7 @@ import {
   NG_VALIDATORS,
   Validators,
 } from '@angular/forms'
-import { RegisterFormValidatorService } from '../../services/register-form-validator.service'
+import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-form-password',
@@ -27,7 +27,7 @@ import { RegisterFormValidatorService } from '../../services/register-form-valid
   ],
 })
 export class FormPasswordComponent extends BaseForm implements OnInit {
-  constructor(private validator: RegisterFormValidatorService) {
+  constructor() {
     super()
   }
   ngOnInit() {
@@ -36,7 +36,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
         password: new FormControl('', Validators.required),
         passwordConfirmation: new FormControl('', Validators.required),
       },
-      this.validator.matchValues('password', 'passwordConfirmation')
+      OrcidValidators.matchValues('password', 'passwordConfirmation')
     )
   }
 }

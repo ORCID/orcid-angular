@@ -29,7 +29,6 @@ export abstract class BaseForm implements ControlValueAccessor, Validator {
     isDisabled ? this.form.disable() : this.form.enable()
   }
   validate(c: AbstractControl): ValidationErrors | null {
-    console.log('Basic Info validation', c, this.form.value)
     return this.form.valid
       ? null
       : {
