@@ -52,20 +52,27 @@ export class FormPersonalComponent extends BaseForm
   ngOnInit() {
     this.form = new FormGroup(
       {
-        firstName: new FormControl('', [
+        givenNames: new FormControl('', [
           Validators.required,
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
           OrcidValidators.notPattern(URL_REGEXP),
         ]),
-        lastName: new FormControl(''),
-        primaryEmail: new FormControl('', [
+        familyNames: new FormControl(''),
+        email: new FormControl('', [
           Validators.required,
           Validators.email,
           Validators.pattern(TLD_REGEXP),
         ]),
         confirmEmail: new FormControl('', [Validators.required]),
       },
-      this.validator.matchValues('primaryEmail', 'confirmEmail')
+      {
+        validators: this.validator.matchValues('email', 'confirmEmail'),
+        asyncValidators: [
+          this._register.validator('givenNames'),
+          this._register.validator('familyNames'),
+          this._register.validator('email'),
+        ],
+      }
     )
   }
 }

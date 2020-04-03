@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { FormGroup, ValidatorFn } from '@angular/forms'
 import { RegisterServicesModule } from './register-services.module'
 
 @Injectable({
@@ -7,7 +7,7 @@ import { RegisterServicesModule } from './register-services.module'
 })
 export class RegisterFormValidatorService {
   constructor() {}
-  matchValues(value1: string, value2: string) {
+  matchValues(value1: string, value2: string): ValidatorFn {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[value1]
       const confirmControl = formGroup.controls[value2]
