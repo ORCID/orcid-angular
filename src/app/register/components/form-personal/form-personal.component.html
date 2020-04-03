@@ -2,18 +2,49 @@
   <mat-form-field appearance="outline">
     <mat-label>First name</mat-label>
     <input formControlName="givenNames" matInput />
+    <mat-error *ngIf="form.hasError('required', 'givenNames')">
+      The first name is required
+    </mat-error>
   </mat-form-field>
+
   <mat-icon aria-hidden="true">info</mat-icon>
   <mat-form-field appearance="outline">
     <mat-label>Last name (Optional)</mat-label>
     <input formControlName="familyNames" matInput />
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Primary email</mat-label>
-    <input formControlName="email" matInput />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Confirm primary email</mat-label>
-    <input formControlName="confirmEmail" matInput />
-  </mat-form-field>
+
+  <ng-container formGroupName="emails">
+    <mat-form-field appearance="outline">
+      <mat-label>Primary email</mat-label>
+      <input formControlName="email" matInput />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm primary email</mat-label>
+      <input formControlName="confirmEmail" matInput />
+    </mat-form-field>
+
+    <ng-container formGroupName="additionalEmails">
+      <mat-form-field
+        appearance="outline"
+        *ngFor="
+          let additionalEmailControl of (additionalEmails.controls | keyvalue)
+        "
+      >
+        <mat-label>
+          <ng-container>Additional email</ng-container>
+          {{
+            additionalEmailControl.key !== '1' ? additionalEmailControl.key : ''
+          }}
+          <ng-container>(Optional)</ng-container>
+        </mat-label>
+        <input
+          formControlName="{{additionalEmailControl.key}}"
+          matInput
+        /> </mat-form-field
+    ></ng-container>
+  </ng-container>
+  <mat-icon aria-hidden="true">info</mat-icon>
+  <button mat-button (click)="addAdditionalEmail()" color="primary">
+    <mat-icon aria-hidden="true">add</mat-icon>Add another email
+  </button>
 </ng-container>

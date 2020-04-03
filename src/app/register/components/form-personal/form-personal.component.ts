@@ -17,7 +17,6 @@ import {
   ILLEGAL_NAME_CHARACTERS_REGEXP,
   URL_REGEXP,
 } from 'src/app/constants'
-import { RegisterFormValidatorService } from '../../services/register-form-validator.service'
 import { Observable } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { map } from 'rxjs/operators'
@@ -42,37 +41,62 @@ import { OrcidValidators } from 'src/app/validators'
 })
 export class FormPersonalComponent extends BaseForm
   implements OnInit, ControlValueAccessor, Validator {
-  constructor(
-    private validator: RegisterFormValidatorService,
-    private _register: RegisterService
-  ) {
+  emails: FormGroup = new FormGroup({})
+  additionalEmails: FormGroup = new FormGroup({})
+  constructor(private _register: RegisterService) {
     super()
   }
 
   ngOnInit() {
-    this.form = new FormGroup(
+    this.emails = new FormGroup(
       {
-        givenNames: new FormControl('', [
+        email: new FormControl('', {
+          validators: [
+            Validators.required,
+            Validators.email,
+            Validators.pattern(TLD_REGEXP),
+          ],
+          asyncValidators: [this._register.backendValueValidate('email')],
+          updateOn: 'change',
+        }),
+        confirmEmail: new FormControl('', {
+          validators: [
+            Validators.required,
+            Validators.email,
+            Validators.pattern(TLD_REGEXP),
+          ],
+          updateOn: 'change',
+        }),
+        additionalEmails: this.additionalEmails,
+      },
+      {
+        validators: OrcidValidators.matchValues('email', 'confirmEmail'),
+        asyncValidators: this._register.backendAdditionalEmailsValidate(),
+        updateOn: 'change',
+      }
+    )
+
+    this.form = new FormGroup({
+      givenNames: new FormControl('', {
+        validators: [
           Validators.required,
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
           OrcidValidators.notPattern(URL_REGEXP),
-        ]),
-        familyNames: new FormControl(''),
-        email: new FormControl('', [
-          Validators.required,
-          Validators.email,
-          Validators.pattern(TLD_REGEXP),
-        ]),
-        confirmEmail: new FormControl('', [Validators.required]),
-      },
-      {
-        validators: this.validator.matchValues('email', 'confirmEmail'),
-        asyncValidators: [
-          this._register.validator('givenNames'),
-          this._register.validator('familyNames'),
-          this._register.validator('email'),
         ],
-      }
+        asyncValidators: this._register.backendValueValidate('givenNames'),
+        updateOn: 'change',
+      }),
+      familyNames: new FormControl(''),
+      emails: this.emails,
+    })
+  }
+
+  addAdditionalEmail(): void {
+    this.additionalEmails.addControl(
+      (Object.keys(this.additionalEmails.controls).length + 1).toString(),
+      new FormControl('', {
+        validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
+      })
     )
   }
 }
