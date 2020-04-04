@@ -68,7 +68,7 @@ export class RegisterService {
             const error = {
               backendError: res[controlName].errors,
             }
-            control.setErrors(error)
+            return error
           }
           return null
         })
@@ -78,7 +78,6 @@ export class RegisterService {
 
   backendAdditionalEmailsValidate(): AsyncValidatorFn {
     return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
-      console.log(formGroup)
       const additionalEmailsControls = (<FormGroup>(
         formGroup.controls['additionalEmails']
       )).controls
@@ -86,36 +85,46 @@ export class RegisterService {
 
       const additionalEmailsValue: Value[] = Object.keys(
         additionalEmailsControls
-      ).map(name => {
-        return { value: additionalEmailsControls[name].value }
-      })
+      )
+        .filter(name => additionalEmailsControls[name].value !== '')
+        .map(name => {
+          if (additionalEmailsControls[name].value) {
+            return { value: additionalEmailsControls[name].value }
+          }
+        })
+
+      if (additionalEmailsValue.length === 0) {
+        return of(null)
+      }
 
       const value: { [key: string]: Value[] } | {} = {
         emailsAdditional: additionalEmailsValue,
         email: emailValue,
       }
-
-      console.log('validate', value)
-
       return this.validateRegisterValue('emailsAdditional', value).pipe(
         map(response => {
           // Add errors to additional emails controls
-
           response.emailsAdditional.forEach(responseControl => {
-            // If there is an error for any email on the response
-            if (responseControl.errors && responseControl.errors.length > 0) {
-              // Find the form control with the matching email
-              Object.keys(additionalEmailsControls).map(name => {
+            // Find the form control with the matching email
+            Object.keys(additionalEmailsControls).map(name => {
+              if (
+                additionalEmailsControls[name].value === responseControl.value
+              ) {
+                // If there is an error for any email on the response
+                // add the backend errors to the form control
+                // remove previous error if there are not
                 if (
-                  additionalEmailsControls[name].value === responseControl.value
+                  responseControl.errors &&
+                  responseControl.errors.length > 0
                 ) {
-                  // Add the backend errors to the form control
                   additionalEmailsControls[name].setErrors({
                     backendError: responseControl.errors,
                   })
+                } else {
+                  additionalEmailsControls[name].setErrors(null)
                 }
-              })
-            }
+              }
+            })
           })
           // Add errors to email control
           if (response.email.errors && response.email.errors.length > 0) {
