@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
-import { retry, catchError, map } from 'rxjs/operators'
+import { retry, catchError, map, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import {
   AsyncValidatorFn,
@@ -81,6 +81,7 @@ export class RegisterService {
 
   backendAdditionalEmailsValidate(): AsyncValidatorFn {
     return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
+      console.log('VALIDATE ADDITION EMAISL ON THE BACK____')
       const value: RegisterForm = this.formGroupToEmailRegisterForm(formGroup)
       if (value.emailsAdditional.length === 0) {
         return of(null)
@@ -89,9 +90,22 @@ export class RegisterService {
       return this.validateRegisterValue('emailsAdditional', value).pipe(
         map(response => {
           // Add errors to additional emails controls
-          this.setFormGroupEmailErrors(response, formGroup)
-
-          return null
+          const hasError = this.setFormGroupEmailErrors(
+            response,
+            formGroup,
+            'backendErrors'
+          )
+          if (hasError) {
+            return {
+              backendErrors: true,
+            }
+          } else {
+            return null
+          }
+        }),
+        tap(value => {
+          console.log('BACKEND FORM VALIDATION IS')
+          console.log(value)
         })
       )
     }
@@ -99,8 +113,9 @@ export class RegisterService {
   public setFormGroupEmailErrors(
     registerForm: RegisterForm,
     formGroup: FormGroup,
-    errorGroup = 'backendErrors'
-  ) {
+    errorGroup: string
+  ): boolean {
+    let hasErrors = false
     const additionalEmailsControls = (<FormGroup>(
       formGroup.controls['additionalEmails']
     )).controls
@@ -113,14 +128,11 @@ export class RegisterService {
           // If there is an error for any email on the response
           // add the backend errors to the form control
           // remove previous error if there are not
-          console.log('validate')
-          console.log(additionalEmailsControls[name].value)
-          console.log(responseControl.errors)
-          console.log('already has', additionalEmailsControls[name][errorGroup])
           error = {}
           if (responseControl.errors && responseControl.errors.length > 0) {
             error[errorGroup] = responseControl.errors
             additionalEmailsControls[name].setErrors(error)
+            hasErrors = true
           } else if (additionalEmailsControls[name].hasError(errorGroup)) {
             delete additionalEmailsControls[name].errors[errorGroup]
             additionalEmailsControls[name].updateValueAndValidity()
@@ -133,10 +145,24 @@ export class RegisterService {
     if (registerForm.email.errors && registerForm.email.errors.length > 0) {
       error[errorGroup] = registerForm.email.errors
       formGroup.controls['email'].setErrors(error)
-    } else {
+      hasErrors = true
+    } else if (formGroup.controls['email'].hasError(errorGroup)) {
       error[errorGroup] = null
-      formGroup.controls['email'].setErrors(null)
+      delete formGroup.controls['email'].errors[errorGroup]
+      formGroup.controls['email'].updateValueAndValidity()
     }
+
+    // Add errors to the additional emails formGroup
+
+    if (hasErrors) {
+      error = {}
+      error[errorGroup] = true
+      formGroup.controls['additionalEmails'].setErrors(error)
+    } else if (formGroup.controls['additionalEmails'].hasError(errorGroup)) {
+      delete formGroup.controls['additionalEmails'].errors[errorGroup]
+      formGroup.controls['additionalEmails'].updateValueAndValidity()
+    }
+    return hasErrors
   }
 
   formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm {
@@ -153,7 +179,7 @@ export class RegisterService {
       })
     const value: RegisterForm = {
       emailsAdditional: additionalEmailsValue,
-      email: emailValue,
+      email: { value: emailValue },
     }
     return value
   }

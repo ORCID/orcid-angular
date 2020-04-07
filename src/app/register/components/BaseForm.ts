@@ -17,12 +17,12 @@ export abstract class BaseForm implements ControlValueAccessor, Validator {
   }
   registerOnChange(fn: any): void {
     this.form.valueChanges.subscribe(value => {
-      console.log('on change')
+      // console.log('on change')
       fn(value)
     })
   }
   registerOnTouched(fn: any): void {
-    console.log('on blur')
+    // console.log('on blur')
     this.onTouchedFunction = fn
   }
   setDisabledState?(isDisabled: boolean): void {

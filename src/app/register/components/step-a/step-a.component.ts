@@ -15,9 +15,5 @@ export class StepAComponent extends BaseStep implements OnInit {
     this.formGroup = this._formBuilder.group({
       personal: [''],
     })
-    this.formGroup.statusChanges.subscribe(value => {
-      console.log(value)
-      console.log(this.formGroup)
-    })
   }
 }
