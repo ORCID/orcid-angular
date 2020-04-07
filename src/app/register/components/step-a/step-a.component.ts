@@ -14,7 +14,10 @@ export class StepAComponent extends BaseStep implements OnInit {
   ngOnInit(): void {
     this.formGroup = this._formBuilder.group({
       personal: [''],
-      additionalEmails: [''],
+    })
+    this.formGroup.statusChanges.subscribe(value => {
+      console.log(value)
+      console.log(this.formGroup)
     })
   }
 }

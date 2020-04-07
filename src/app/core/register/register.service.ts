@@ -39,7 +39,7 @@ export class RegisterService {
 
   validateRegisterValue(
     controlName: string,
-    value: { [key: string]: Value | Value[] }
+    value: RegisterForm
   ): Observable<RegisterForm> {
     return this._http
       .post<RegisterForm>(
@@ -59,6 +59,9 @@ export class RegisterService {
     controlName: 'givenNames' | 'familyNames' | 'email'
   ): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (control.value === '') {
+        return of(null)
+      }
       const value = {}
       value[controlName] = control.value
 
@@ -78,64 +81,80 @@ export class RegisterService {
 
   backendAdditionalEmailsValidate(): AsyncValidatorFn {
     return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
-      const additionalEmailsControls = (<FormGroup>(
-        formGroup.controls['additionalEmails']
-      )).controls
-      const emailValue = formGroup.controls['email'].value
-
-      const additionalEmailsValue: Value[] = Object.keys(
-        additionalEmailsControls
-      )
-        .filter(name => additionalEmailsControls[name].value !== '')
-        .map(name => {
-          if (additionalEmailsControls[name].value) {
-            return { value: additionalEmailsControls[name].value }
-          }
-        })
-
-      if (additionalEmailsValue.length === 0) {
+      const value: RegisterForm = this.formGroupToEmailRegisterForm(formGroup)
+      if (value.emailsAdditional.length === 0) {
         return of(null)
       }
 
-      const value: { [key: string]: Value[] } | {} = {
-        emailsAdditional: additionalEmailsValue,
-        email: emailValue,
-      }
       return this.validateRegisterValue('emailsAdditional', value).pipe(
         map(response => {
           // Add errors to additional emails controls
-          response.emailsAdditional.forEach(responseControl => {
-            // Find the form control with the matching email
-            Object.keys(additionalEmailsControls).map(name => {
-              if (
-                additionalEmailsControls[name].value === responseControl.value
-              ) {
-                // If there is an error for any email on the response
-                // add the backend errors to the form control
-                // remove previous error if there are not
-                if (
-                  responseControl.errors &&
-                  responseControl.errors.length > 0
-                ) {
-                  additionalEmailsControls[name].setErrors({
-                    backendError: responseControl.errors,
-                  })
-                } else {
-                  additionalEmailsControls[name].setErrors(null)
-                }
-              }
-            })
-          })
-          // Add errors to email control
-          if (response.email.errors && response.email.errors.length > 0) {
-            formGroup.controls['email'].setErrors({
-              backendError: response.email.errors,
-            })
-          }
+          this.setFormGroupEmailErrors(response, formGroup)
 
           return null
         })
       )
     }
+  }
+  public setFormGroupEmailErrors(
+    registerForm: RegisterForm,
+    formGroup: FormGroup,
+    errorGroup = 'backendErrors'
+  ) {
+    const additionalEmailsControls = (<FormGroup>(
+      formGroup.controls['additionalEmails']
+    )).controls
+
+    let error = {}
+    registerForm.emailsAdditional.forEach(responseControl => {
+      // Find the form control with the matching email
+      Object.keys(additionalEmailsControls).map(name => {
+        if (additionalEmailsControls[name].value === responseControl.value) {
+          // If there is an error for any email on the response
+          // add the backend errors to the form control
+          // remove previous error if there are not
+          console.log('validate')
+          console.log(additionalEmailsControls[name].value)
+          console.log(responseControl.errors)
+          console.log('already has', additionalEmailsControls[name][errorGroup])
+          error = {}
+          if (responseControl.errors && responseControl.errors.length > 0) {
+            error[errorGroup] = responseControl.errors
+            additionalEmailsControls[name].setErrors(error)
+          } else if (additionalEmailsControls[name].hasError(errorGroup)) {
+            delete additionalEmailsControls[name].errors[errorGroup]
+            additionalEmailsControls[name].updateValueAndValidity()
+          }
+        }
+      })
+    })
+    // Add errors to email control
+    error = {}
+    if (registerForm.email.errors && registerForm.email.errors.length > 0) {
+      error[errorGroup] = registerForm.email.errors
+      formGroup.controls['email'].setErrors(error)
+    } else {
+      error[errorGroup] = null
+      formGroup.controls['email'].setErrors(null)
+    }
+  }
+
+  formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm {
+    const additionalEmailsControls = (<FormGroup>(
+      formGroup.controls['additionalEmails']
+    )).controls
+    const emailValue = formGroup.controls['email'].value
+    const additionalEmailsValue: Value[] = Object.keys(additionalEmailsControls)
+      .filter(name => additionalEmailsControls[name].value !== '')
+      .map(name => {
+        if (additionalEmailsControls[name].value) {
+          return { value: additionalEmailsControls[name].value }
+        }
+      })
+    const value: RegisterForm = {
+      emailsAdditional: additionalEmailsValue,
+      email: emailValue,
+    }
+    return value
   }
 }

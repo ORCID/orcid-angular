@@ -10,6 +10,7 @@ import {
   NG_VALIDATORS,
   Validators,
   AsyncValidatorFn,
+  ValidatorFn,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import {
@@ -56,8 +57,7 @@ export class FormPersonalComponent extends BaseForm
             Validators.email,
             Validators.pattern(TLD_REGEXP),
           ],
-          asyncValidators: [this._register.backendValueValidate('email')],
-          updateOn: 'change',
+          asyncValidators: this._register.backendValueValidate('email'),
         }),
         confirmEmail: new FormControl('', {
           validators: [
@@ -65,12 +65,14 @@ export class FormPersonalComponent extends BaseForm
             Validators.email,
             Validators.pattern(TLD_REGEXP),
           ],
-          updateOn: 'change',
         }),
         additionalEmails: this.additionalEmails,
       },
       {
-        validators: OrcidValidators.matchValues('email', 'confirmEmail'),
+        validators: [
+          // this.allEmailsAreUnique(),
+          OrcidValidators.matchValues('email', 'confirmEmail'),
+        ],
         asyncValidators: this._register.backendAdditionalEmailsValidate(),
         updateOn: 'change',
       }
@@ -84,19 +86,56 @@ export class FormPersonalComponent extends BaseForm
           OrcidValidators.notPattern(URL_REGEXP),
         ],
         asyncValidators: this._register.backendValueValidate('givenNames'),
-        updateOn: 'change',
       }),
       familyNames: new FormControl(''),
       emails: this.emails,
     })
+    this.form.statusChanges.subscribe(value => console.log(this.form))
   }
 
   addAdditionalEmail(): void {
+    const controlName = (
+      Object.keys(this.additionalEmails.controls).length + 1
+    ).toString()
     this.additionalEmails.addControl(
-      (Object.keys(this.additionalEmails.controls).length + 1).toString(),
+      controlName,
       new FormControl('', {
         validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
+        // asyncValidators: this._register.backendValueValidate(controlName),
       })
     )
+  }
+
+  allEmailsAreUnique(): ValidatorFn {
+    return (formGroup: FormGroup) => {
+      let hasError = false
+      const registerForm = this._register.formGroupToEmailRegisterForm(
+        formGroup
+      )
+      registerForm.emailsAdditional.forEach((additionalEmail, i) => {
+        additionalEmail.errors = []
+        if (additionalEmail.value === registerForm.email.value) {
+          additionalEmail.errors.push('additionalEmailCantBePrimaryEmail')
+          hasError = true
+        } else {
+          registerForm.emailsAdditional.forEach((element, i2) => {
+            if (i !== i2 && additionalEmail.value === element.value) {
+              additionalEmail.errors.push('duplicatedAdditionalEmail')
+              hasError = true
+            }
+          })
+        }
+      })
+      this._register.setFormGroupEmailErrors(
+        registerForm,
+        formGroup,
+        'allEmailsAreUnique'
+      )
+      if (hasError) {
+        return { notAllEmailsAreUnique: true }
+      } else {
+        return null
+      }
+    }
   }
 }

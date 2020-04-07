@@ -5,22 +5,81 @@
     <mat-error *ngIf="form.hasError('required', 'givenNames')">
       The first name is required
     </mat-error>
+    <mat-error *ngIf="form.hasError('notPattern', 'givenNames')">
+      The first name format is incorrect
+    </mat-error>
+    <mat-error *ngIf="form.hasError('backendError', 'givenNames')">
+      <div *ngFor="let error of form.getError('backendError', 'givenNames')">
+        {{ error }}
+      </div>
+    </mat-error>
   </mat-form-field>
 
   <mat-icon aria-hidden="true">info</mat-icon>
   <mat-form-field appearance="outline">
     <mat-label>Last name (Optional)</mat-label>
     <input formControlName="familyNames" matInput />
+    <mat-error *ngIf="form.hasError('required', 'familyNames')">
+      The first name is required
+    </mat-error>
+    <mat-error *ngIf="form.hasError('backendError', 'familyNames')">
+      <div *ngFor="let error of form.getError('backendError', 'familyNames')">
+        {{ error }}
+      </div>
+    </mat-error>
   </mat-form-field>
 
   <ng-container formGroupName="emails">
     <mat-form-field appearance="outline">
       <mat-label>Primary email</mat-label>
       <input formControlName="email" matInput />
+      <mat-error *ngIf="form.hasError('required', 'emails.email')">
+        The first name is required
+      </mat-error>
+
+      <mat-error
+        *ngIf="
+          form.hasError('email', 'emails.email') ||
+          form.hasError('pattern', 'emails.email')
+        "
+      >
+        Invalid email format
+      </mat-error>
+
+      <mat-error *ngIf="form.hasError('backendError', 'emails.email')">
+        <div
+          *ngFor="let error of form.getError('backendError', 'emails.email')"
+        >
+          {{ error }}
+        </div>
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Confirm primary email</mat-label>
       <input formControlName="confirmEmail" matInput />
+      <mat-error *ngIf="form.hasError('required', 'emails.confirmEmail')">
+        The first name is required
+      </mat-error>
+      <mat-error
+        *ngIf="
+          form.hasError('email', 'emails.confirmEmail') ||
+          form.hasError('pattern', 'emails.confirmEmail')
+        "
+      >
+        Invalid email format
+      </mat-error>
+      <mat-error *ngIf="form.hasError('mismatch', 'emails.confirmEmail')">
+        the emails are not the same
+      </mat-error>
+      <mat-error *ngIf="form.hasError('backendError', 'emails.confirmEmail')">
+        <div
+          *ngFor="
+            let error of form.getError('backendError', 'emails.confirmEmail')
+          "
+        >
+          {{ error }}
+        </div>
+      </mat-error>
     </mat-form-field>
 
     <ng-container formGroupName="additionalEmails">
@@ -37,11 +96,61 @@
           }}
           <ng-container>(Optional)</ng-container>
         </mat-label>
-        <input
-          formControlName="{{additionalEmailControl.key}}"
-          matInput
-        /> </mat-form-field
-    ></ng-container>
+        <input formControlName="{{additionalEmailControl.key}}" matInput />
+        <mat-error
+          *ngIf="
+            form.hasError(
+              'email',
+              'emails.additionalEmails.' + additionalEmailControl.key
+            ) ||
+            form.hasError(
+              'pattern',
+              'emails.additionalEmails.' + additionalEmailControl.key
+            )
+          "
+        >
+          Invalid email format
+        </mat-error>
+        <mat-error
+          *ngIf="
+            form.hasError(
+              'backendErrors',
+              'emails.additionalEmails.' + additionalEmailControl.key
+            )
+          "
+        >
+          <div
+            *ngFor="
+              let error of form.getError(
+                'backendErrors',
+                'emails.additionalEmails.' + additionalEmailControl.key
+              )
+            "
+          >
+            {{ error }}
+          </div>
+        </mat-error>
+        <mat-error
+          *ngIf="
+            form.hasError(
+              'allEmailsAreUnique',
+              'emails.additionalEmails.' + additionalEmailControl.key
+            )
+          "
+        >
+          <div
+            *ngFor="
+              let error of form.getError(
+                'allEmailsAreUnique',
+                'emails.additionalEmails.' + additionalEmailControl.key
+              )
+            "
+          >
+            {{ error }}
+          </div>
+        </mat-error>
+      </mat-form-field></ng-container
+    >
   </ng-container>
   <mat-icon aria-hidden="true">info</mat-icon>
   <button mat-button (click)="addAdditionalEmail()" color="primary">
