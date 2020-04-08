@@ -91,6 +91,7 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- ADDITIONAL EMAILS -->
     <ng-container formGroupName="additionalEmails">
       <mat-form-field
         appearance="outline"
@@ -108,7 +109,7 @@
         <input
           formControlName="{{additionalEmailControl.key}}"
           matInput
-          [errorStateMatcher]="matcher"
+          [errorStateMatcher]="backendErrorsMatcher"
         />
         <mat-error
           *ngIf="
@@ -125,42 +126,24 @@
           Invalid email format
         </mat-error>
         <mat-error
-          *ngIf="
-            this.emails.hasError('backendError') &&
-            this.emails.getError('backendError')['additionalEmails'] &&
-            this.emails.getError('backendError')['additionalEmails'][
-              additionalEmailControl.value
-            ]
-          "
-        >
-          <div
-            *ngFor="
-              let error of this.emails.getError('backendError')[
-                'additionalEmails'
-              ][additionalEmailControl.value].errors
-            "
-          >
-            {{ error }}
-          </div>
-        </mat-error>
-        <mat-error
-          *ngIf="
-            form.hasError(
-              'allEmailsAreUnique',
-              'emails.additionalEmails.' + additionalEmailControl.key
+          *ngFor="
+            let error of getControlErrorAtFormLevel(
+              additionalEmailControl.value,
+              'backendErrors'
             )
           "
         >
-          <div
-            *ngFor="
-              let error of form.getError(
-                'allEmailsAreUnique',
-                'emails.additionalEmails.' + additionalEmailControl.key
-              )
-            "
-          >
-            {{ error }}
-          </div>
+          {{ error }}
+        </mat-error>
+        <mat-error
+          *ngFor="
+            let error of getControlErrorAtFormLevel(
+              additionalEmailControl.value,
+              'emailsAdditional'
+            )
+          "
+        >
+          {{ error }}
         </mat-error>
       </mat-form-field></ng-container
     >

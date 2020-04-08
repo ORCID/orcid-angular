@@ -28,25 +28,29 @@ import { ErrorStateMatcher } from '@angular/material'
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
+  getControlErrorAtForm: (control: FormControl, errorGroup: string) => string[]
+  errorGroup: string
+  constructor(
+    getControlErrorAtForm: (
+      control: FormControl,
+      errorGroup: string
+    ) => string[],
+    errorGroup: string
+  ) {
+    this.getControlErrorAtForm = getControlErrorAtForm
+    this.errorGroup = errorGroup
+  }
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
   ): boolean {
+    const errorsAtFormLevel = this.getControlErrorAtForm(
+      control,
+      this.errorGroup
+    )
     const controlInteracted = control.touched || (form && form.submitted)
     const validControlAtFormLevel = !(
-      control &&
-      control.value &&
-      control.parent.parent.errors &&
-      control.parent.parent.errors['backendErrors'] &&
-      control.parent.parent.errors['backendErrors']['additionalEmails'][
-        control.value
-      ] &&
-      control.parent.parent.errors['backendErrors']['additionalEmails'][
-        control.value
-      ] &&
-      control.parent.parent.errors['backendErrors']['additionalEmails'][
-        control.value
-      ].length > 0
+      errorsAtFormLevel && errorsAtFormLevel.length > 0
     )
     const validControl = control && !control.invalid
 
@@ -76,7 +80,16 @@ export class FormPersonalComponent extends BaseForm
   constructor(private _register: RegisterService) {
     super()
   }
-  matcher = new MyErrorStateMatcher()
+
+  backendErrorsMatcher = new MyErrorStateMatcher(
+    this.getControlErrorAtFormLevel,
+    'backendErrors'
+  )
+  emailsAdditionalErrorsMatcher = new MyErrorStateMatcher(
+    this.getControlErrorAtFormLevel,
+    'emailsAdditional'
+  )
+
   emails: FormGroup = new FormGroup({})
   additionalEmails: FormGroup = new FormGroup({})
 
@@ -118,10 +131,6 @@ export class FormPersonalComponent extends BaseForm
       }),
       familyNames: new FormControl(''),
       emails: this.emails,
-    })
-    this.emails.statusChanges.subscribe(value => console.log(this.emails))
-    this.additionalEmails.statusChanges.subscribe(value => {
-      console.log('additional emails status changed to ', value)
     })
   }
 
@@ -171,5 +180,27 @@ export class FormPersonalComponent extends BaseForm
         return null
       }
     }
+  }
+
+  getControlErrorAtFormLevel(
+    control: FormControl | null,
+    errorGroup: string
+  ): string[] {
+    return (
+      (control &&
+        control.value &&
+        control.parent.parent.errors &&
+        control.parent.parent.errors[errorGroup] &&
+        control.parent.parent.errors[errorGroup]['additionalEmails'][
+          control.value
+        ] &&
+        control.parent.parent.errors[errorGroup]['additionalEmails'][
+          control.value
+        ] &&
+        control.parent.parent.errors[errorGroup]['additionalEmails'][
+          control.value
+        ]) ||
+      []
+    )
   }
 }
