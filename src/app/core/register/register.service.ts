@@ -81,88 +81,98 @@ export class RegisterService {
 
   backendAdditionalEmailsValidate(): AsyncValidatorFn {
     return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
-      console.log('VALIDATE ADDITION EMAISL ON THE BACK____')
       const value: RegisterForm = this.formGroupToEmailRegisterForm(formGroup)
       if (value.emailsAdditional.length === 0) {
         return of(null)
       }
-
       return this.validateRegisterValue('emailsAdditional', value).pipe(
         map(response => {
           // Add errors to additional emails controls
-          const hasError = this.setFormGroupEmailErrors(
-            response,
-            formGroup,
-            'backendErrors'
-          )
-          if (hasError) {
-            return {
-              backendErrors: true,
-            }
-          } else {
-            return null
-          }
+          return this.setFormGroupEmailErrors(response, 'backendErrors')
         }),
-        tap(value => {
+        tap(backedError => {
           console.log('BACKEND FORM VALIDATION IS')
-          console.log(value)
+          console.log(backedError)
         })
       )
     }
   }
+
   public setFormGroupEmailErrors(
     registerForm: RegisterForm,
-    formGroup: FormGroup,
     errorGroup: string
-  ): boolean {
-    let hasErrors = false
-    const additionalEmailsControls = (<FormGroup>(
-      formGroup.controls['additionalEmails']
-    )).controls
+  ) {
+    // let hasErrors = false
+    // const additionalEmailsControls = (<FormGroup>(
+    //   formGroup.controls['additionalEmails']
+    // )).controls
 
-    let error = {}
+    const error = {}
+    error[errorGroup] = {
+      additionalEmails: {},
+      email: [],
+    }
+
     registerForm.emailsAdditional.forEach(responseControl => {
+      if (responseControl.errors && responseControl.errors.length > 0) {
+        console.log(responseControl)
+        error[errorGroup]['additionalEmails'][responseControl.value] =
+          responseControl.errors
+      }
       // Find the form control with the matching email
-      Object.keys(additionalEmailsControls).map(name => {
-        if (additionalEmailsControls[name].value === responseControl.value) {
-          // If there is an error for any email on the response
-          // add the backend errors to the form control
-          // remove previous error if there are not
-          error = {}
-          if (responseControl.errors && responseControl.errors.length > 0) {
-            error[errorGroup] = responseControl.errors
-            additionalEmailsControls[name].setErrors(error)
-            hasErrors = true
-          } else if (additionalEmailsControls[name].hasError(errorGroup)) {
-            delete additionalEmailsControls[name].errors[errorGroup]
-            additionalEmailsControls[name].updateValueAndValidity()
-          }
-        }
-      })
+      // Object.keys(additionalEmailsControls).map(name => {
+      //   if (additionalEmailsControls[name].value === responseControl.value) {
+      //     // If there is an error for any email on the response
+      //     // add the backend errors to the form control
+      //     // remove previous error if there are not
+      //     error = {}
+      //     if (responseControl.errors && responseControl.errors.length > 0) {
+      //       error[errorGroup] = responseControl.errors
+      //       additionalEmailsControls[name].setErrors(error)
+      //       hasErrors = true
+      //     } else if (additionalEmailsControls[name].hasError(errorGroup)) {
+      //       delete additionalEmailsControls[name].errors[errorGroup]
+      //       additionalEmailsControls[name].updateValueAndValidity()
+      //     }
+      //   }
+      // })
     })
     // Add errors to email control
-    error = {}
-    if (registerForm.email.errors && registerForm.email.errors.length > 0) {
-      error[errorGroup] = registerForm.email.errors
-      formGroup.controls['email'].setErrors(error)
-      hasErrors = true
-    } else if (formGroup.controls['email'].hasError(errorGroup)) {
-      error[errorGroup] = null
-      delete formGroup.controls['email'].errors[errorGroup]
-      formGroup.controls['email'].updateValueAndValidity()
+
+    if (
+      registerForm.email &&
+      registerForm.email.errors &&
+      registerForm.email.errors.length > 0
+    ) {
+      error[errorGroup]['email'].push({
+        value: registerForm.email.value,
+        errors: registerForm.email.errors,
+      })
     }
+
+    // error = {}
+    // if (registerForm.email.errors && registerForm.email.errors.length > 0) {
+    //   error[errorGroup] = registerForm.email.errors
+    //   formGroup.controls['email'].setErrors(error)
+    //   hasErrors = true
+    // }
+    //  else if (formGroup.controls['email'].hasError(errorGroup)) {
+    //   error[errorGroup] = null
+    //   delete formGroup.controls['email'].errors[errorGroup]
+    //   formGroup.controls['email'].updateValueAndValidity()
+    // }
 
     // Add errors to the additional emails formGroup
 
-    if (hasErrors) {
-      error = {}
-      error[errorGroup] = true
-      formGroup.controls['additionalEmails'].setErrors(error)
-    } else if (formGroup.controls['additionalEmails'].hasError(errorGroup)) {
-      delete formGroup.controls['additionalEmails'].errors[errorGroup]
-      formGroup.controls['additionalEmails'].updateValueAndValidity()
-    }
-    return hasErrors
+    // if (hasErrors) {
+    //   error = {}
+    //   error[errorGroup] = true
+    //   formGroup.controls['additionalEmails'].setErrors(error)
+    // } else if (formGroup.controls['additionalEmails'].hasError(errorGroup)) {
+    //   delete formGroup.controls['additionalEmails'].errors[errorGroup]
+    //   formGroup.controls['additionalEmails'].updateValueAndValidity()
+    // }
+    return error
   }
 
   formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm {

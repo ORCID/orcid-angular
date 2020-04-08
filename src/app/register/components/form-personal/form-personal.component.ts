@@ -11,6 +11,8 @@ import {
   Validators,
   AsyncValidatorFn,
   ValidatorFn,
+  FormGroupDirective,
+  NgForm,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import {
@@ -22,6 +24,35 @@ import { Observable } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { map } from 'rxjs/operators'
 import { OrcidValidators } from 'src/app/validators'
+import { ErrorStateMatcher } from '@angular/material'
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const controlInteracted = control.touched || (form && form.submitted)
+    const validControlAtFormLevel = !(
+      control &&
+      control.value &&
+      control.parent.parent.errors &&
+      control.parent.parent.errors['backendErrors'] &&
+      control.parent.parent.errors['backendErrors']['additionalEmails'][
+        control.value
+      ] &&
+      control.parent.parent.errors['backendErrors']['additionalEmails'][
+        control.value
+      ] &&
+      control.parent.parent.errors['backendErrors']['additionalEmails'][
+        control.value
+      ].length > 0
+    )
+    const validControl = control && !control.invalid
+
+    return !(validControlAtFormLevel && validControl) && controlInteracted
+  }
+}
 
 @Component({
   selector: 'app-form-personal',
@@ -42,11 +73,12 @@ import { OrcidValidators } from 'src/app/validators'
 })
 export class FormPersonalComponent extends BaseForm
   implements OnInit, ControlValueAccessor, Validator {
-  emails: FormGroup = new FormGroup({})
-  additionalEmails: FormGroup = new FormGroup({})
   constructor(private _register: RegisterService) {
     super()
   }
+  matcher = new MyErrorStateMatcher()
+  emails: FormGroup = new FormGroup({})
+  additionalEmails: FormGroup = new FormGroup({})
 
   ngOnInit() {
     this.emails = new FormGroup(
@@ -69,12 +101,9 @@ export class FormPersonalComponent extends BaseForm
         additionalEmails: this.additionalEmails,
       },
       {
-        validators: [
-          OrcidValidators.matchValues('email', 'confirmEmail'),
-          this.allEmailsAreUnique(),
-        ],
+        validators: [OrcidValidators.matchValues('email', 'confirmEmail')],
         asyncValidators: [this._register.backendAdditionalEmailsValidate()],
-        updateOn: 'blur',
+        updateOn: 'change',
       }
     )
 
@@ -93,7 +122,6 @@ export class FormPersonalComponent extends BaseForm
     this.emails.statusChanges.subscribe(value => console.log(this.emails))
     this.additionalEmails.statusChanges.subscribe(value => {
       console.log('additional emails status changed to ', value)
-      this.additionalEmails.vaida
     })
   }
 
@@ -134,7 +162,6 @@ export class FormPersonalComponent extends BaseForm
 
       const hasError = this._register.setFormGroupEmailErrors(
         registerForm,
-        formGroup,
         'allEmailsAreUnique'
       )
       if (hasError) {

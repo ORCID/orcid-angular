@@ -34,21 +34,28 @@
       <mat-label>Primary email</mat-label>
       <input formControlName="email" matInput />
       <mat-error *ngIf="form.hasError('required', 'emails.email')">
-        The first name is required
+        Email is required
       </mat-error>
 
       <mat-error
         *ngIf="
-          form.hasError('email', 'emails.email') ||
-          form.hasError('pattern', 'emails.email')
+          this.emails.hasError('email', 'email') ||
+          this.emails.hasError('pattern', 'email')
         "
       >
         Invalid email format
       </mat-error>
 
-      <mat-error *ngIf="form.hasError('backendError', 'emails.email')">
+      <mat-error
+        *ngIf="
+          this.emails.hasError('backendError') &&
+          this.emails.getError('backendError')['email']
+        "
+      >
         <div
-          *ngFor="let error of form.getError('backendError', 'emails.email')"
+          *ngFor="
+            let error of this.emails.getError('backendError')['email']['errors']
+          "
         >
           {{ error }}
         </div>
@@ -62,16 +69,18 @@
       </mat-error>
       <mat-error
         *ngIf="
-          form.hasError('email', 'emails.confirmEmail') ||
-          form.hasError('pattern', 'emails.confirmEmail')
+          this.emails.hasError('email', 'confirmEmail') ||
+          this.emails.hasError('pattern', 'confirmEmail')
         "
       >
         Invalid email format
       </mat-error>
-      <mat-error *ngIf="form.hasError('mismatch', 'emails.confirmEmail')">
+      <mat-error *ngIf="this.emails.hasError('mismatch', 'confirmEmail')">
         the emails are not the same
       </mat-error>
-      <mat-error *ngIf="form.hasError('backendError', 'emails.confirmEmail')">
+      <mat-error
+        *ngIf="this.emails.hasError('backendError', 'emails.confirmEmail')"
+      >
         <div
           *ngFor="
             let error of form.getError('backendError', 'emails.confirmEmail')
@@ -96,7 +105,11 @@
           }}
           <ng-container>(Optional)</ng-container>
         </mat-label>
-        <input formControlName="{{additionalEmailControl.key}}" matInput />
+        <input
+          formControlName="{{additionalEmailControl.key}}"
+          matInput
+          [errorStateMatcher]="matcher"
+        />
         <mat-error
           *ngIf="
             form.hasError(
@@ -113,18 +126,18 @@
         </mat-error>
         <mat-error
           *ngIf="
-            form.hasError(
-              'backendErrors',
-              'emails.additionalEmails.' + additionalEmailControl.key
-            )
+            this.emails.hasError('backendError') &&
+            this.emails.getError('backendError')['additionalEmails'] &&
+            this.emails.getError('backendError')['additionalEmails'][
+              additionalEmailControl.value
+            ]
           "
         >
           <div
             *ngFor="
-              let error of form.getError(
-                'backendErrors',
-                'emails.additionalEmails.' + additionalEmailControl.key
-              )
+              let error of this.emails.getError('backendError')[
+                'additionalEmails'
+              ][additionalEmailControl.value].errors
             "
           >
             {{ error }}
