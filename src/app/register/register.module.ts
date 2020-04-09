@@ -20,6 +20,8 @@ import { FormNotificationsComponent } from './components/form-notifications/form
 import { FormVisibilityComponent } from './components/form-visibility/form-visibility.component'
 import { FormTermsComponent } from './components/form-terms/form-terms.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+// tslint:disable-next-line: max-line-length
+import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     FormNotificationsComponent,
     FormVisibilityComponent,
     FormTermsComponent,
+    FormPersonalAdditionalEmailsComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,53 @@
+<!-- ADDITIONAL EMAILS -->
+
+<ng-container [formGroup]="additionalEmails">
+  <mat-form-field
+    appearance="outline"
+    *ngFor="
+      let additionalEmailControl of (additionalEmails.controls | keyvalue)
+    "
+  >
+    <mat-label>
+      <ng-container>Additional email</ng-container>
+      {{ additionalEmailControl.key !== '1' ? additionalEmailControl.key : '' }}
+      <ng-container>(Optional)</ng-container>
+    </mat-label>
+    <input
+      formControlName="{{additionalEmailControl.key}}"
+      matInput
+      [errorStateMatcher]="backendErrorsMatcher"
+    />
+    <mat-error
+      *ngIf="
+        additionalEmails.hasError('email', additionalEmailControl.key) ||
+        additionalEmails.hasError('pattern', additionalEmailControl.key)
+      "
+    >
+      Invalid email format
+    </mat-error>
+    <mat-error
+      *ngFor="
+        let error of getControlErrorAtFormLevel(
+          additionalEmailControl.value,
+          'backendErrors'
+        )
+      "
+    >
+      {{ error }}
+    </mat-error>
+    <mat-error
+      *ngFor="
+        let error of getControlErrorAtFormLevel(
+          additionalEmailControl.value,
+          'emailsAdditional'
+        )
+      "
+    >
+      {{ error }}
+    </mat-error>
+  </mat-form-field></ng-container
+>
+<mat-icon aria-hidden="true">info</mat-icon>
+<button mat-button (click)="addAdditionalEmail()" color="primary">
+  <mat-icon aria-hidden="true">add</mat-icon>Add another email
+</button>

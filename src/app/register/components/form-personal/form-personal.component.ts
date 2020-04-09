@@ -26,38 +26,6 @@ import { map } from 'rxjs/operators'
 import { OrcidValidators } from 'src/app/validators'
 import { ErrorStateMatcher } from '@angular/material'
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  getControlErrorAtForm: (control: FormControl, errorGroup: string) => string[]
-  errorGroup: string
-  constructor(
-    getControlErrorAtForm: (
-      control: FormControl,
-      errorGroup: string
-    ) => string[],
-    errorGroup: string
-  ) {
-    this.getControlErrorAtForm = getControlErrorAtForm
-    this.errorGroup = errorGroup
-  }
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const errorsAtFormLevel = this.getControlErrorAtForm(
-      control,
-      this.errorGroup
-    )
-    const controlInteracted = control.touched || (form && form.submitted)
-    const validControlAtFormLevel = !(
-      errorsAtFormLevel && errorsAtFormLevel.length > 0
-    )
-    const validControl = control && !control.invalid
-
-    return !(validControlAtFormLevel && validControl) && controlInteracted
-  }
-}
-
 @Component({
   selector: 'app-form-personal',
   templateUrl: './form-personal.component.html',
@@ -80,15 +48,6 @@ export class FormPersonalComponent extends BaseForm
   constructor(private _register: RegisterService) {
     super()
   }
-
-  backendErrorsMatcher = new MyErrorStateMatcher(
-    this.getControlErrorAtFormLevel,
-    'backendErrors'
-  )
-  emailsAdditionalErrorsMatcher = new MyErrorStateMatcher(
-    this.getControlErrorAtFormLevel,
-    'emailsAdditional'
-  )
 
   emails: FormGroup = new FormGroup({})
   additionalEmails: FormGroup = new FormGroup({})
@@ -134,19 +93,6 @@ export class FormPersonalComponent extends BaseForm
     })
   }
 
-  addAdditionalEmail(): void {
-    const controlName = (
-      Object.keys(this.additionalEmails.controls).length + 1
-    ).toString()
-    this.additionalEmails.addControl(
-      controlName,
-      new FormControl('', {
-        validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
-        // asyncValidators: this._register.backendValueValidate(controlName),
-      })
-    )
-  }
-
   allEmailsAreUnique(): ValidatorFn {
     return (formGroup: FormGroup) => {
       const registerForm = this._register.formGroupToEmailRegisterForm(
@@ -180,27 +126,5 @@ export class FormPersonalComponent extends BaseForm
         return null
       }
     }
-  }
-
-  getControlErrorAtFormLevel(
-    control: FormControl | null,
-    errorGroup: string
-  ): string[] {
-    return (
-      (control &&
-        control.value &&
-        control.parent.parent.errors &&
-        control.parent.parent.errors[errorGroup] &&
-        control.parent.parent.errors[errorGroup]['additionalEmails'][
-          control.value
-        ] &&
-        control.parent.parent.errors[errorGroup]['additionalEmails'][
-          control.value
-        ] &&
-        control.parent.parent.errors[errorGroup]['additionalEmails'][
-          control.value
-        ]) ||
-      []
-    )
   }
 }
