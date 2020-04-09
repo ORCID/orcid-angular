@@ -1,7 +1,7 @@
 import { OnInit, Input, Component } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { ErrorStateMatcherForFormLevelErrors } from './ErrorStateMatcherForFormLevelErrors'
 import { TLD_REGEXP } from 'src/app/constants'
+import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
 
 @Component({
   selector: 'app-form-personal-additional-emails',
@@ -17,7 +17,7 @@ export class FormPersonalAdditionalEmailsComponent implements OnInit {
   )
   emailsAdditionalErrorsMatcher = new ErrorStateMatcherForFormLevelErrors(
     this.getControlErrorAtFormLevel,
-    'emailsAdditional'
+    'allEmailsAreUnique'
   )
 
   constructor() {}

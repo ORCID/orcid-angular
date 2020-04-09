@@ -22,6 +22,7 @@ export class ErrorStateMatcherForFormLevelErrors implements ErrorStateMatcher {
       control,
       this.errorGroup
     )
+    // console.log(this.errorGroup, errorsAtFormLevel)
     const controlInteracted = control.touched || (form && form.submitted)
     const validControlAtFormLevel = !(
       errorsAtFormLevel && errorsAtFormLevel.length > 0

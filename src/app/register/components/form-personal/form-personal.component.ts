@@ -73,7 +73,10 @@ export class FormPersonalComponent extends BaseForm
         additionalEmails: this.additionalEmails,
       },
       {
-        validators: [OrcidValidators.matchValues('email', 'confirmEmail')],
+        validators: [
+          OrcidValidators.matchValues('email', 'confirmEmail'),
+          this.allEmailsAreUnique(),
+        ],
         asyncValidators: [this._register.backendAdditionalEmailsValidate()],
         updateOn: 'change',
       }
@@ -91,37 +94,44 @@ export class FormPersonalComponent extends BaseForm
       familyNames: new FormControl(''),
       emails: this.emails,
     })
+
+    this.emails.statusChanges.subscribe(value => {
+      console.log(value, this.emails)
+    })
   }
 
   allEmailsAreUnique(): ValidatorFn {
     return (formGroup: FormGroup) => {
+      let hasError = false
       const registerForm = this._register.formGroupToEmailRegisterForm(
         formGroup
       )
 
+      const error = { backendErrors: { additionalEmails: {} } }
+
       registerForm.emailsAdditional.forEach((additionalEmail, i) => {
-        additionalEmail.errors = []
+        if (!error.backendErrors.additionalEmails[additionalEmail.value]) {
+          error.backendErrors.additionalEmails[additionalEmail.value] = []
+        }
+        const additionalEmailsErrors = error.backendErrors.additionalEmails
         if (additionalEmail.value === registerForm.email.value) {
-          additionalEmail.errors.push('additionalEmailCantBePrimaryEmail')
+          hasError = true
+          additionalEmailsErrors[additionalEmail.value] = [
+            'additionalEmailCantBePrimaryEmail',
+          ]
         } else {
           registerForm.emailsAdditional.forEach((element, i2) => {
             if (i !== i2 && additionalEmail.value === element.value) {
-              if (additionalEmail.errors.length === 0) {
-                additionalEmail.errors.push('duplicatedAdditionalEmail')
-              }
+              hasError = true
+              additionalEmailsErrors[additionalEmail.value] = [
+                'duplicatedAdditionalEmail',
+              ]
             }
           })
         }
       })
-      console.log(registerForm)
-
-      const hasError = this._register.setFormGroupEmailErrors(
-        registerForm,
-        'allEmailsAreUnique'
-      )
       if (hasError) {
-        console.log('NOT ALL EMAILS ARE UNIQUE')
-        return { notAllEmailsAreUnique: true }
+        return error
       } else {
         return null
       }

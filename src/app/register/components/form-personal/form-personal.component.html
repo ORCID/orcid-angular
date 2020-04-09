@@ -46,16 +46,9 @@
         Invalid email format
       </mat-error>
 
-      <mat-error
-        *ngIf="
-          this.emails.hasError('backendError') &&
-          this.emails.getError('backendError')['email']
-        "
-      >
+      <mat-error *ngIf="this.emails.hasError('backendError', 'email')">
         <div
-          *ngFor="
-            let error of this.emails.getError('backendError')['email']['errors']
-          "
+          *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
           {{ error }}
         </div>
