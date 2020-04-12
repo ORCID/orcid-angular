@@ -107,6 +107,7 @@ export class RegisterService {
     //   formGroup.controls['additionalEmails']
     // )).controls
 
+    let hasErrors = false
     const error = {}
     error[errorGroup] = {
       additionalEmails: {},
@@ -115,7 +116,7 @@ export class RegisterService {
 
     registerForm.emailsAdditional.forEach(responseControl => {
       if (responseControl.errors && responseControl.errors.length > 0) {
-        console.log(responseControl)
+        hasErrors = true
         error[errorGroup]['additionalEmails'][responseControl.value] =
           responseControl.errors
       }
@@ -144,6 +145,7 @@ export class RegisterService {
       registerForm.email.errors &&
       registerForm.email.errors.length > 0
     ) {
+      hasErrors = true
       error[errorGroup]['email'].push({
         value: registerForm.email.value,
         errors: registerForm.email.errors,
@@ -172,7 +174,8 @@ export class RegisterService {
     //   delete formGroup.controls['additionalEmails'].errors[errorGroup]
     //   formGroup.controls['additionalEmails'].updateValueAndValidity()
     // }
-    return error
+
+    return hasErrors ? error : null
   }
 
   formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm {

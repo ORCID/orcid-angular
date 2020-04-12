@@ -13,6 +13,7 @@ import {
   ValidatorFn,
   FormGroupDirective,
   NgForm,
+  NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import {
@@ -37,14 +38,13 @@ import { ErrorStateMatcher } from '@angular/material'
       multi: true,
     },
     {
-      provide: NG_VALIDATORS,
+      provide: NG_ASYNC_VALIDATORS,
       useExisting: forwardRef(() => FormPersonalComponent),
       multi: true,
     },
   ],
 })
-export class FormPersonalComponent extends BaseForm
-  implements OnInit, ControlValueAccessor, Validator {
+export class FormPersonalComponent extends BaseForm implements OnInit {
   constructor(private _register: RegisterService) {
     super()
   }
@@ -93,10 +93,6 @@ export class FormPersonalComponent extends BaseForm
       }),
       familyNames: new FormControl(''),
       emails: this.emails,
-    })
-
-    this.emails.statusChanges.subscribe(value => {
-      console.log(value, this.emails)
     })
   }
 
