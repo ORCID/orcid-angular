@@ -47,3 +47,7 @@ export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
 export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
 // https://www.regextester.com/96577
 export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([^\w\s\-\'\.\,])/
+// https://regex101.com/r/aoHxNo/1
+export const HAS_NUMBER = /(?=.*[0-9]).*/
+// https://regex101.com/r/NNIuKQ/1
+export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
