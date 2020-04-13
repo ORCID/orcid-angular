@@ -1,13 +1,21 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  forwardRef,
+  ViewChild,
+  TemplateRef,
+} from '@angular/core'
 import { BaseForm } from '../BaseForm'
 import {
   FormGroup,
   FormControl,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   Validators,
+  NG_ASYNC_VALIDATORS,
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms'
 import { OrcidValidators } from 'src/app/validators'
+import { RegisterService } from 'src/app/core/register/register.service'
+import { HAS_NUMBER, HAS_LETTER_OR_SYMBOL } from 'src/app/constants'
 
 @Component({
   selector: 'app-form-password',
@@ -20,23 +28,39 @@ import { OrcidValidators } from 'src/app/validators'
       multi: true,
     },
     {
-      provide: NG_VALIDATORS,
+      provide: NG_ASYNC_VALIDATORS,
       useExisting: forwardRef(() => FormPasswordComponent),
       multi: true,
     },
   ],
 })
 export class FormPasswordComponent extends BaseForm implements OnInit {
-  constructor() {
+  hasNumberPatter = HAS_NUMBER
+  hasLetterOrSymbolPatter = HAS_LETTER_OR_SYMBOL
+  constructor(private _register: RegisterService) {
     super()
   }
   ngOnInit() {
     this.form = new FormGroup(
       {
-        password: new FormControl('', Validators.required),
-        passwordConfirmation: new FormControl('', Validators.required),
+        password: new FormControl('', {
+          validators: [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(this.hasNumberPatter),
+            Validators.pattern(this.hasLetterOrSymbolPatter),
+          ],
+          asyncValidators: [this._register.backendValueValidate('password')],
+        }),
+        passwordConfirm: new FormControl('', Validators.required),
       },
-      OrcidValidators.matchValues('password', 'passwordConfirmation')
+      {
+        validators: OrcidValidators.matchValues('password', 'passwordConfirm'),
+        asyncValidators: this._register.backendPasswordValidate(),
+      }
     )
+    this.form.statusChanges.subscribe(value => {
+      console.log('PASSWORD ERROR: ', this.form.controls['password'])
+    })
   }
 }

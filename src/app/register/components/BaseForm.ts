@@ -31,14 +31,9 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   }
   validate(c: AbstractControl): Observable<ValidationErrors | null> {
     return this.form.statusChanges.pipe(
-      // tap(value => console.log('>>>> ', value)),
       filter(value => value !== 'PENDING'),
       take(1),
-      // tap(value => console.log('----', value)),
       map(() => {
-        console.log('STEP VALUE UPDATE')
-        console.log('VALID ', this.form.valid, this.form.status)
-        console.log('>>>> ', c)
         return this.form.valid
           ? null
           : {
@@ -49,17 +44,5 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
             }
       })
     )
-
-    // subscribe(value => {
-
-    // })
-    // return this.form.valid
-    //   ? of(null)
-    //   : of({
-    //       invalidForm: {
-    //         valid: false,
-    //         message: 'internal form is not valid',
-    //       },
-    //     })
   }
 }

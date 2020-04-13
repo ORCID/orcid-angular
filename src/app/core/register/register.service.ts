@@ -31,6 +31,12 @@ export class RegisterService {
     emailsAdditional: {
       validationEndpoint: 'validateEmailsAdditional',
     },
+    passwordConfirm: {
+      validationEndpoint: 'validatePasswordConfirm',
+    },
+    password: {
+      validationEndpoint: 'validatePassword',
+    },
   }
   constructor(
     private _http: HttpClient,
@@ -56,7 +62,7 @@ export class RegisterService {
   }
 
   backendValueValidate(
-    controlName: 'givenNames' | 'familyNames' | 'email'
+    controlName: 'givenNames' | 'familyNames' | 'email' | 'password'
   ): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value === '') {
@@ -98,15 +104,31 @@ export class RegisterService {
     }
   }
 
+  backendPasswordValidate(): AsyncValidatorFn {
+    return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
+      const value: RegisterForm = this.formGroupToPasswordRegisterForm(
+        formGroup
+      )
+      if (value.password.value === '' || value.passwordConfirm.value === '') {
+        return of(null)
+      }
+      return this.validateRegisterValue('password', value).pipe(
+        map(response => {
+          // Add errors to additional emails controls
+          return this.setFormGroupPasswordErrors(response, 'backendErrors')
+        }),
+        tap(backedError => {
+          console.log('BACKEND FORM VALIDATION IS')
+          console.log(backedError)
+        })
+      )
+    }
+  }
+
   public setFormGroupEmailErrors(
     registerForm: RegisterForm,
     errorGroup: string
   ) {
-    // let hasErrors = false
-    // const additionalEmailsControls = (<FormGroup>(
-    //   formGroup.controls['additionalEmails']
-    // )).controls
-
     let hasErrors = false
     const error = {}
     error[errorGroup] = {
@@ -120,25 +142,7 @@ export class RegisterService {
         error[errorGroup]['additionalEmails'][responseControl.value] =
           responseControl.errors
       }
-      // Find the form control with the matching email
-      // Object.keys(additionalEmailsControls).map(name => {
-      //   if (additionalEmailsControls[name].value === responseControl.value) {
-      //     // If there is an error for any email on the response
-      //     // add the backend errors to the form control
-      //     // remove previous error if there are not
-      //     error = {}
-      //     if (responseControl.errors && responseControl.errors.length > 0) {
-      //       error[errorGroup] = responseControl.errors
-      //       additionalEmailsControls[name].setErrors(error)
-      //       hasErrors = true
-      //     } else if (additionalEmailsControls[name].hasError(errorGroup)) {
-      //       delete additionalEmailsControls[name].errors[errorGroup]
-      //       additionalEmailsControls[name].updateValueAndValidity()
-      //     }
-      //   }
-      // })
     })
-    // Add errors to email control
 
     if (
       registerForm.email &&
@@ -152,28 +156,42 @@ export class RegisterService {
       })
     }
 
-    // error = {}
-    // if (registerForm.email.errors && registerForm.email.errors.length > 0) {
-    //   error[errorGroup] = registerForm.email.errors
-    //   formGroup.controls['email'].setErrors(error)
-    //   hasErrors = true
-    // }
-    //  else if (formGroup.controls['email'].hasError(errorGroup)) {
-    //   error[errorGroup] = null
-    //   delete formGroup.controls['email'].errors[errorGroup]
-    //   formGroup.controls['email'].updateValueAndValidity()
-    // }
+    return hasErrors ? error : null
+  }
 
-    // Add errors to the additional emails formGroup
+  public setFormGroupPasswordErrors(
+    registerForm: RegisterForm,
+    errorGroup: string
+  ) {
+    let hasErrors = false
+    const error = {}
+    error[errorGroup] = {
+      password: [],
+      passwordConfirm: [],
+    }
 
-    // if (hasErrors) {
-    //   error = {}
-    //   error[errorGroup] = true
-    //   formGroup.controls['additionalEmails'].setErrors(error)
-    // } else if (formGroup.controls['additionalEmails'].hasError(errorGroup)) {
-    //   delete formGroup.controls['additionalEmails'].errors[errorGroup]
-    //   formGroup.controls['additionalEmails'].updateValueAndValidity()
-    // }
+    if (
+      registerForm.password &&
+      registerForm.password.errors &&
+      registerForm.password.errors.length > 0
+    ) {
+      hasErrors = true
+      error[errorGroup]['password'].push({
+        value: registerForm.email.value,
+        errors: registerForm.email.errors,
+      })
+    }
+    if (
+      registerForm.passwordConfirm &&
+      registerForm.passwordConfirm.errors &&
+      registerForm.passwordConfirm.errors.length > 0
+    ) {
+      hasErrors = true
+      error[errorGroup]['passwordConfirm'].push({
+        value: registerForm.passwordConfirm.value,
+        errors: registerForm.passwordConfirm.errors,
+      })
+    }
 
     return hasErrors ? error : null
   }
@@ -193,6 +211,17 @@ export class RegisterService {
     const value: RegisterForm = {
       emailsAdditional: additionalEmailsValue,
       email: { value: emailValue },
+    }
+    return value
+  }
+
+  formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm {
+    const password = formGroup.controls['password'].value
+    const passwordConfirmation = formGroup.controls['passwordConfirm'].value
+
+    const value: RegisterForm = {
+      password: { value: password },
+      passwordConfirm: { value: passwordConfirmation },
     }
     return value
   }
