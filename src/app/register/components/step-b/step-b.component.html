@@ -1,5 +1,8 @@
 <form [formGroup]="formGroup">
-  <app-form-password formControlName="password"></app-form-password>
+  <app-form-password
+    formControlName="password"
+    [personalData]="personalData"
+  ></app-form-password>
   <app-form-notifications
     formControlName="notifications"
   ></app-form-notifications>

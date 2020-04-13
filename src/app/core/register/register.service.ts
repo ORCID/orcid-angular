@@ -69,7 +69,7 @@ export class RegisterService {
         return of(null)
       }
       const value = {}
-      value[controlName] = control.value
+      value[controlName] = { value: control.value }
 
       return this.validateRegisterValue(controlName, value).pipe(
         map(res => {
@@ -88,7 +88,7 @@ export class RegisterService {
   backendAdditionalEmailsValidate(): AsyncValidatorFn {
     return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
       const value: RegisterForm = this.formGroupToEmailRegisterForm(formGroup)
-      if (value.emailsAdditional.length === 0) {
+      if (!value.emailsAdditional || value.emailsAdditional.length === 0) {
         return of(null)
       }
       return this.validateRegisterValue('emailsAdditional', value).pipe(
@@ -197,32 +197,46 @@ export class RegisterService {
   }
 
   formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm {
-    const additionalEmailsControls = (<FormGroup>(
-      formGroup.controls['additionalEmails']
-    )).controls
-    const emailValue = formGroup.controls['email'].value
-    const additionalEmailsValue: Value[] = Object.keys(additionalEmailsControls)
-      .filter(name => additionalEmailsControls[name].value !== '')
-      .map(name => {
-        if (additionalEmailsControls[name].value) {
-          return { value: additionalEmailsControls[name].value }
-        }
-      })
-    const value: RegisterForm = {
-      emailsAdditional: additionalEmailsValue,
-      email: { value: emailValue },
+    let additionalEmailsValue: Value[]
+    if (formGroup.controls['additionalEmails']) {
+      const additionalEmailsControls = (<FormGroup>(
+        formGroup.controls['additionalEmails']
+      )).controls
+      additionalEmailsValue = Object.keys(additionalEmailsControls)
+        .filter(name => additionalEmailsControls[name].value !== '')
+        .map(name => {
+          if (additionalEmailsControls[name].value) {
+            return { value: additionalEmailsControls[name].value }
+          }
+        })
+    }
+    let emailValue
+    if (formGroup.controls['email']) {
+      emailValue = formGroup.controls['email'].value
+    }
+
+    const value: RegisterForm = {}
+
+    if (emailValue) {
+      value['email'] = { value: emailValue }
+    }
+    if (additionalEmailsValue) {
+      value['emailsAdditional'] = additionalEmailsValue
     }
     return value
   }
 
-  formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm {
-    const password = formGroup.controls['password'].value
-    const passwordConfirmation = formGroup.controls['passwordConfirm'].value
-
-    const value: RegisterForm = {
-      password: { value: password },
-      passwordConfirm: { value: passwordConfirmation },
+  formGroupToNamesRegisterForm(formGroup: FormGroup): RegisterForm {
+    return {
+      givenNames: { value: formGroup.controls['givenNames'].value },
+      familyNames: { value: formGroup.controls['familyNames'].value },
     }
-    return value
+  }
+
+  formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm {
+    return {
+      password: { value: formGroup.controls['password'].value },
+      passwordConfirm: { value: formGroup.controls['passwordConfirm'].value },
+    }
   }
 }

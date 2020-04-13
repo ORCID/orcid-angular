@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { MatStep } from '@angular/material'
+import { StepperSelectionEvent } from '@angular/cdk/stepper'
+import { RegisterForm } from 'src/app/types/register.endpoint'
 
 @Component({
   selector: 'app-register',
@@ -16,6 +18,7 @@ export class RegisterComponent implements OnInit {
   FormGroupStepB: FormGroup = new FormGroup({})
   FormGroupStepC: FormGroup = new FormGroup({})
   isLinear = true
+  personalData: RegisterForm
   constructor(_platformInfo: PlatformInfoService) {
     _platformInfo.get().subscribe(platform => {
       this.platform = platform
@@ -25,5 +28,8 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.lastStep.interacted = true
+  }
+  selectionChange($event: StepperSelectionEvent) {
+    this.personalData = this.FormGroupStepA.value
   }
 }
