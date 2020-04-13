@@ -234,9 +234,18 @@ export class RegisterService {
   }
 
   formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm {
-    return {
-      password: { value: formGroup.controls['password'].value },
-      passwordConfirm: { value: formGroup.controls['passwordConfirm'].value },
+    let password: Value
+    if (formGroup && formGroup.controls && formGroup.controls['password']) {
+      password = formGroup.controls['password'].value
     }
+    let passwordConfirm: Value
+    if (
+      formGroup &&
+      formGroup.controls &&
+      formGroup.controls['passwordConfirm']
+    ) {
+      passwordConfirm = formGroup.controls['passwordConfirm'].value
+    }
+    return { password, passwordConfirm }
   }
 }

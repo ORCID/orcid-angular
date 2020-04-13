@@ -70,44 +70,34 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   }
 
   passwordDoesNotContainUserEmails(): ValidatorFn {
-    return (formGroup: FormGroup) => {
-      console.log(' PASSWORD _ VALIDATOR')
-      console.log(formGroup)
-      console.log(this.personalData)
-      return null
-      // let hasError = false
-      // const registerForm = this._register.formGroupToEmailRegisterForm(
-      //   formGroup
-      // )
+    return (control: FormControl) => {
+      console.log(' PASSWORD_ VALIDATOR')
+      const password = control.value
+      console.log('>>> REGISTER FORM >>> ', password)
+      let hasError = false
 
-      // const error = { backendErrors: { additionalEmails: {} } }
+      if (this.personalData && password) {
+        Object.keys(this.personalData.emailsAdditional).forEach(key => {
+          const additionalEmail = this.personalData.emailsAdditional[key].value
+          if (additionalEmail === password) {
+            hasError = true
+          }
+        })
+      }
 
-      // registerForm.emailsAdditional.forEach((additionalEmail, i) => {
-      //   if (!error.backendErrors.additionalEmails[additionalEmail.value]) {
-      //     error.backendErrors.additionalEmails[additionalEmail.value] = []
-      //   }
-      //   const additionalEmailsErrors = error.backendErrors.additionalEmails
-      //   if (additionalEmail.value === registerForm.email.value) {
-      //     hasError = true
-      //     additionalEmailsErrors[additionalEmail.value] = [
-      //       'additionalEmailCantBePrimaryEmail',
-      //     ]
-      //   } else {
-      //     registerForm.emailsAdditional.forEach((element, i2) => {
-      //       if (i !== i2 && additionalEmail.value === element.value) {
-      //         hasError = true
-      //         additionalEmailsErrors[additionalEmail.value] = [
-      //           'duplicatedAdditionalEmail',
-      //         ]
-      //       }
-      //     })
-      //   }
-      // })
-      // if (hasError) {
-      //   return error
-      // } else {
-      //   return null
-      // }
+      if (
+        this.personalData &&
+        this.personalData.email &&
+        this.personalData.email.value === password
+      ) {
+        hasError = true
+      }
+
+      if (hasError) {
+        return { passwordIsEqualToTheEmail: true }
+      } else {
+        return null
+      }
     }
   }
 }

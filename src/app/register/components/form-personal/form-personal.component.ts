@@ -105,7 +105,8 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
 
       const error = { backendErrors: { additionalEmails: {} } }
 
-      registerForm.emailsAdditional.forEach((additionalEmail, i) => {
+      Object.keys(registerForm.emailsAdditional).forEach((key, i) => {
+        const additionalEmail = registerForm.emailsAdditional[key]
         if (!error.backendErrors.additionalEmails[additionalEmail.value]) {
           error.backendErrors.additionalEmails[additionalEmail.value] = []
         }
@@ -116,21 +117,38 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
             'additionalEmailCantBePrimaryEmail',
           ]
         } else {
-          registerForm.emailsAdditional.forEach((element, i2) => {
-            if (i !== i2 && additionalEmail.value === element.value) {
-              hasError = true
-              additionalEmailsErrors[additionalEmail.value] = [
-                'duplicatedAdditionalEmail',
-              ]
+          Object.keys(registerForm.emailsAdditional).forEach(
+            (elementKey, i2) => {
+              const element = registerForm.emailsAdditional[elementKey]
+              if (i !== i2 && additionalEmail.value === element.value) {
+                hasError = true
+                additionalEmailsErrors[additionalEmail.value] = [
+                  'duplicatedAdditionalEmail',
+                ]
+              }
             }
-          })
+          )
         }
       })
+
       if (hasError) {
         return error
       } else {
         return null
       }
     }
+  }
+
+  // OVERWRITE
+  registerOnChange(fn: any) {
+    this.form.valueChanges.subscribe(value => {
+      const registerForm = this._register.formGroupToEmailRegisterForm(<
+        FormGroup
+      >this.form.controls['emails'])
+      const namesForm =
+        this._register.formGroupToNamesRegisterForm(this.form) || {}
+
+      fn({ ...registerForm, ...namesForm })
+    })
   }
 }

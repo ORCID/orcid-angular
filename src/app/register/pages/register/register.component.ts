@@ -30,6 +30,8 @@ export class RegisterComponent implements OnInit {
     this.lastStep.interacted = true
   }
   selectionChange($event: StepperSelectionEvent) {
-    this.personalData = this.FormGroupStepA.value
+    if (this.FormGroupStepA.value && this.FormGroupStepA.value.personal) {
+      this.personalData = this.FormGroupStepA.value.personal
+    }
   }
 }
