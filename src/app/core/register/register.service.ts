@@ -11,7 +11,7 @@ import {
   FormControl,
 } from '@angular/forms'
 import { Observable, of } from 'rxjs'
-import { RegisterForm } from 'src/app/types/register.endpoint'
+import { RegisterForm, DuplicatedName } from 'src/app/types/register.endpoint'
 import { Value } from 'src/app/types/common.endpoint'
 
 @Injectable({
@@ -123,6 +123,19 @@ export class RegisterService {
         })
       )
     }
+  }
+
+  public checkDuplicatedResearcher(names: {
+    familyNames: string
+    givenNames: string
+  }) {
+    return this._http.get<DuplicatedName[]>(
+      environment.API_WEB + `dupicateResearcher.json`,
+      {
+        params: names,
+        withCredentials: true,
+      }
+    )
   }
 
   public setFormGroupEmailErrors(
@@ -247,5 +260,18 @@ export class RegisterService {
       passwordConfirm = formGroup.controls['passwordConfirm'].value
     }
     return { password, passwordConfirm }
+  }
+
+  confirmRegistration(
+    registrationForm: RegisterForm,
+    type?: 'shibboleth'
+  ): Observable<any> {
+    return this._http.post(
+      `${environment.API_WEB}${type ? '/' + type : ''}'/registerConfirm.json`,
+      registrationForm,
+      {
+        withCredentials: true,
+      }
+    )
   }
 }

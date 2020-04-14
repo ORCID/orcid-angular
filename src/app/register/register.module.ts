@@ -10,6 +10,7 @@ import {
   MatFormFieldModule,
   MatRadioModule,
   MatIconModule,
+  MatDialogModule,
 } from '@angular/material'
 import { StepAComponent } from './components/step-a/step-a.component'
 import { StepBComponent } from './components/step-b/step-b.component'
@@ -22,6 +23,7 @@ import { FormTermsComponent } from './components/form-terms/form-terms.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 // tslint:disable-next-line: max-line-length
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
+import { IsThisYouModule } from '../cdk/is-this-you'
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { FormPersonalAdditionalEmailsComponent } from './components/form-persona
     FormVisibilityComponent,
     FormTermsComponent,
     FormPersonalAdditionalEmailsComponent,
+    ,
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,8 @@ import { FormPersonalAdditionalEmailsComponent } from './components/form-persona
     MatCheckboxModule,
     MatRadioModule,
     MatIconModule,
+    MatDialogModule,
+    IsThisYouModule,
   ],
 })
 export class RegisterModule {}

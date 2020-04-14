@@ -27,3 +27,12 @@ export interface RegisterForm {
   emailAccessAllowed?: boolean
   redirectUrl?: any
 }
+
+export interface DuplicatedName {
+  orcid: string
+  email: string
+  givenNames: string
+  familyNames: string
+  institution: string
+  createdDate: string
+}
