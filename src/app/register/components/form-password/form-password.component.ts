@@ -64,16 +64,11 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
         asyncValidators: this._register.backendPasswordValidate(),
       }
     )
-    this.form.statusChanges.subscribe(value => {
-      console.log('PASSWORD ERROR: ', this.form.controls['password'])
-    })
   }
 
   passwordDoesNotContainUserEmails(): ValidatorFn {
     return (control: FormControl) => {
-      console.log(' PASSWORD_ VALIDATOR')
       const password = control.value
-      console.log('>>> REGISTER FORM >>> ', password)
       let hasError = false
 
       if (this.personalData && password) {

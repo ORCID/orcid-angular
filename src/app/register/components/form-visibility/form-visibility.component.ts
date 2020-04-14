@@ -6,6 +6,7 @@ import {
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
   Validators,
+  NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 
 @Component({
@@ -19,7 +20,7 @@ import {
       multi: true,
     },
     {
-      provide: NG_VALIDATORS,
+      provide: NG_ASYNC_VALIDATORS,
       useExisting: forwardRef(() => FormVisibilityComponent),
       multi: true,
     },

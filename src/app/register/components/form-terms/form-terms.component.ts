@@ -3,8 +3,8 @@ import {
   FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   Validators,
+  NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 
@@ -19,7 +19,7 @@ import { BaseForm } from '../BaseForm'
       multi: true,
     },
     {
-      provide: NG_VALIDATORS,
+      provide: NG_ASYNC_VALIDATORS,
       useExisting: forwardRef(() => FormTermsComponent),
       multi: true,
     },

@@ -19,7 +19,6 @@ export class StepCComponent extends BaseStep implements OnInit {
     })
   }
   register(form: NgForm) {
-    console.log('submit')
     this.submit.emit()
   }
 }

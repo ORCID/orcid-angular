@@ -5,6 +5,7 @@ import {
   FormControl,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
+  NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 
 @Component({
@@ -18,7 +19,7 @@ import {
       multi: true,
     },
     {
-      provide: NG_VALIDATORS,
+      provide: NG_ASYNC_VALIDATORS,
       useExisting: forwardRef(() => FormNotificationsComponent),
       multi: true,
     },
