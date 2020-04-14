@@ -1,8 +1,10 @@
 <div class="current-sign-in">
-  <p class="current-sign-in-title" i18n="@@ngOrcid.signin.currentlySign">
-    You are currently signed in as
-    <ng-container
-      >{{ displayName }} <a href="{{realUserOrcid}}">{{ realUserOrcid }}</a>
+  <p class="current-sign-in-title">
+    <ng-container i18n="@@ngOrcid.signin.currentlySign">
+      You are currently signed in as
+    </ng-container>
+    <ng-container>
+      {{ displayName }} <a href="{{realUserOrcid}}"> {{ realUserOrcid }} </a>
     </ng-container>
   </p>
 </div>
@@ -12,9 +14,9 @@
   color="primary"
   class="row mat-elevation-z0"
   type="button"
-  i18n="@@ngOrcid.signin.continueAs"
 >
-  Continue as {{ displayName }}
+  <ng-container i18n="@@ngOrcid.signin.continueAs"> Continue as </ng-container>
+  {{ displayName }}
 </button>
 <button
   mat-raised-button

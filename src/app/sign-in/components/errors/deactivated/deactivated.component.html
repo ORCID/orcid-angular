@@ -1,13 +1,17 @@
 <ng-container *ngIf="!showReactivationSent">
-  <mat-error class="orcid-error" i18n="@@ngOrcid.signin.deactivated">
+  <mat-error class="orcid-error">
     <mat-icon inline="true">error</mat-icon>
-    A deactivated ORCID record is associated with this email address; to
-    reactivate your ORCID record please enter your email address and submit the
-    form to start the reactivate process.
+    <ng-container i18n="@@ngOrcid.signin.deactivated">
+      A deactivated ORCID record is associated with this email address; to
+      reactivate your ORCID record please enter your email address and submit
+      the form to start the reactivate process.
+    </ng-container>
   </mat-error>
-  <mat-error class="orcid-error" i18n="@@ngOrcid.signin.deactivatedEnterEmail"
-    >If you can no longer access any emails associated with your iD, please
-    contact
+  <mat-error class="orcid-error">
+    <ng-container i18n="@@ngOrcid.signin.deactivatedEnterEmail">
+      If you can no longer access any emails associated with your iD, please
+      contact
+    </ng-container>
     <a (click)="navigateTo('/help/contact-us')"
       >https://orcid.org/help/contact-us
     </a>
@@ -47,13 +51,12 @@
   </form>
 </ng-container>
 <ng-container *ngIf="showReactivationSent">
-  <mat-error
-    class="orcid-error"
-    i18n="@@ngOrcid.signin.verify.reactivation_sent"
-  >
-    Thank you for reactivating your ORCID record; please complete the process by
-    following the steps in the email we are now sending you. If you don’t
-    receive an email from us, please contact
+  <mat-error class="orcid-error">
+    <ng-container i18n="@@ngOrcid.signin.verify.reactivation_sent">
+      Thank you for reactivating your ORCID record; please complete the process
+      by following the steps in the email we are now sending you. If you don’t
+      receive an email from us, please contact
+    </ng-container>
     <a (click)="navigateTo('/help/contact-us')">
       https://orcid.org/help/contact-us
     </a>

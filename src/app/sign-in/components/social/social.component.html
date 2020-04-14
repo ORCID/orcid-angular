@@ -4,10 +4,11 @@
   class="institution mat-elevation-z0"
   type="button"
   [disabled]="loading"
-  i18n="@@ngOrcid.signin.institutionalAccount"
 >
   <mat-icon class="institution-icon">ic_account_balance</mat-icon>
-  Access through your institution
+  <ng-container i18n="@@ngOrcid.signin.institutionalAccount">
+    Access through your institution
+  </ng-container>
 </button>
 <button
   mat-raised-button
@@ -15,10 +16,11 @@
   class="google mat-elevation-z0"
   type="button"
   [disabled]="loading"
-  i18n="@@ngOrcid.signin.google"
 >
   <mat-icon svgIcon="google"></mat-icon>
-  Sign in with Google
+  <ng-container i18n="@@ngOrcid.signin.google">
+    Sign in with Google
+  </ng-container>
 </button>
 <button
   mat-raised-button
@@ -26,8 +28,9 @@
   class="facebook mat-elevation-z0"
   type="button"
   [disabled]="loading"
-  i18n="@@ngOrcid.signin.facebook"
 >
   <mat-icon svgIcon="facebook"></mat-icon>
-  Sign in with Facebook
+  <ng-container i18n="@@ngOrcid.signin.facebook">
+    Sign in with Facebook
+  </ng-container>
 </button>
