@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { MatStep } from '@angular/material'
-import { StepperSelectionEvent } from '@angular/cdk/stepper'
 import { RegisterForm } from 'src/app/types/register.endpoint'
+import { RegisterService } from 'src/app/core/register/register.service'
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,10 @@ export class RegisterComponent implements OnInit {
   FormGroupStepC: FormGroup = new FormGroup({})
   isLinear = true
   personalData: RegisterForm
-  constructor(_platformInfo: PlatformInfoService) {
+  constructor(
+    _platformInfo: PlatformInfoService,
+    private _register: RegisterService
+  ) {
     _platformInfo.get().subscribe(platform => {
       this.platform = platform
     })
@@ -40,9 +43,22 @@ export class RegisterComponent implements OnInit {
       console.log('WAIT SOMETHING IS NOT VALID SOMEWHERE ')
     }
   }
-  selectionChange($event: StepperSelectionEvent) {
-    if (this.FormGroupStepA.value && this.FormGroupStepA.value.personal) {
-      this.personalData = this.FormGroupStepA.value.personal
-    }
+
+  submitStepA() {
+    // Update the personal data object is required after submit since is an input for StepB
+    this.personalData = this.FormGroupStepA.value.personal
+
+    this._register
+      .checkDuplicatedResearcher({
+        familyNames: this.personalData.familyNames.value,
+        givenNames: this.personalData.givenNames.value,
+      })
+      .subscribe(value => {
+        if (value.length > 0) {
+          this.openDialog(value)
+        } else {
+          // this.confirmRegistration()
+        }
+      })
   }
 }

@@ -6,11 +6,13 @@
         [linear]="isLinear"
         #stepper
         *ngIf="platform.tabletOrHandset"
-        (selectionChange)="selectionChange($event)"
       >
         <mat-step [stepControl]="FormGroupStepA">
           <ng-template matStepLabel>Personal data</ng-template>
-          <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
+          <app-step-a
+            [(formGroup)]="FormGroupStepA"
+            (submit)="submitStepA()"
+          ></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
           <ng-template matStepLabel>Security and visibility</ng-template>
@@ -34,11 +36,13 @@
         #stepper
         *ngIf="platform.desktop"
         labelPosition="bottom"
-        (selectionChange)="selectionChange($event)"
       >
         <mat-step [stepControl]="FormGroupStepA">
           <ng-template matStepLabel>Personal data</ng-template>
-          <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
+          <app-step-a
+            [(formGroup)]="FormGroupStepA"
+            (submit)="submitStepA()"
+          ></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
           <ng-template matStepLabel>Security and visibility</ng-template>
