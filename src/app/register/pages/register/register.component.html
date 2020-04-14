@@ -23,7 +23,7 @@
           <ng-template matStepLabel>Notifications and terms</ng-template>
           <app-step-c
             [(formGroup)]="FormGroupStepC"
-            (submit)="register()"
+            (submit)="register('vertical')"
           ></app-step-c>
         </mat-step>
       </mat-vertical-stepper>
@@ -47,9 +47,12 @@
             [personalData]="personalData"
           ></app-step-b>
         </mat-step>
-        <mat-step [stepControl]="FormGroupStepC">
+        <mat-step [stepControl]="FormGroupStepC" #lastStep>
           <ng-template matStepLabel>Notifications and terms</ng-template>
-          <app-step-c [(formGroup)]="FormGroupStepC"></app-step-c>
+          <app-step-c
+            [(formGroup)]="FormGroupStepC"
+            (submit)="register('horizontal')"
+          ></app-step-c>
         </mat-step>
       </mat-horizontal-stepper>
       -->

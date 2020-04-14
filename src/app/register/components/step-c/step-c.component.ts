@@ -8,7 +8,6 @@ import { BaseStep } from '../BaseStep'
   styleUrls: ['./step-c.component.scss'],
 })
 export class StepCComponent extends BaseStep implements OnInit {
-  @Output() submit = new EventEmitter()
   constructor(private _formBuilder: FormBuilder) {
     super()
   }
@@ -17,8 +16,5 @@ export class StepCComponent extends BaseStep implements OnInit {
       visibility: [''],
       terms: [''],
     })
-  }
-  register(form: NgForm) {
-    this.submit.emit()
   }
 }

@@ -26,8 +26,19 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit() {}
 
-  register() {
-    this.lastStep.interacted = true
+  register(value) {
+    console.log(value)
+    // this.lastStep.interacted = true
+    if (
+      this.FormGroupStepA.valid &&
+      this.FormGroupStepB.valid &&
+      this.FormGroupStepC.valid
+    ) {
+      console.log('REGISTER! ')
+    }
+    {
+      console.log('WAIT SOMETHING IS NOT VALID SOMEWHERE ')
+    }
   }
   selectionChange($event: StepperSelectionEvent) {
     if (this.FormGroupStepA.value && this.FormGroupStepA.value.personal) {
