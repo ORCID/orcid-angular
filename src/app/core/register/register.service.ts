@@ -249,7 +249,7 @@ export class RegisterService {
   formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm {
     let password: Value
     if (formGroup && formGroup.controls && formGroup.controls['password']) {
-      password = formGroup.controls['password'].value
+      password = { value: formGroup.controls['password'].value }
     }
     let passwordConfirm: Value
     if (
@@ -257,9 +257,17 @@ export class RegisterService {
       formGroup.controls &&
       formGroup.controls['passwordConfirm']
     ) {
-      passwordConfirm = formGroup.controls['passwordConfirm'].value
+      passwordConfirm = { value: formGroup.controls['passwordConfirm'].value }
     }
     return { password, passwordConfirm }
+  }
+
+  formGroupToTermOfUserRegisterForm(formGroup: FormGroup) {
+    let termOfUse: Value
+    if (formGroup && formGroup.controls && formGroup.controls['termOfUse']) {
+      termOfUse = { value: formGroup.controls['termOfUse'].value }
+    }
+    return termOfUse
   }
 
   confirmRegistration(

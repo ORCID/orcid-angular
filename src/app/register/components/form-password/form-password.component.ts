@@ -95,4 +95,15 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       }
     }
   }
+
+  // OVERWRITE
+  registerOnChange(fn: any) {
+    this.form.valueChanges.subscribe(value => {
+      const registerForm = this._register.formGroupToPasswordRegisterForm(<
+        FormGroup
+      >this.form)
+
+      fn(registerForm)
+    })
+  }
 }

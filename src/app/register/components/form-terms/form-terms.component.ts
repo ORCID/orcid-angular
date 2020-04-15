@@ -7,6 +7,7 @@ import {
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
+import { RegisterService } from 'src/app/core/register/register.service'
 
 @Component({
   selector: 'app-form-terms',
@@ -26,9 +27,22 @@ import { BaseForm } from '../BaseForm'
   ],
 })
 export class FormTermsComponent extends BaseForm implements OnInit {
+  constructor(private _register: RegisterService) {
+    super()
+  }
   ngOnInit() {
     this.form = new FormGroup({
       termsOfUse: new FormControl('', Validators.requiredTrue),
+    })
+  }
+
+  // OVERWRITE
+  registerOnChange(fn: any) {
+    this.form.valueChanges.subscribe(value => {
+      const registerForm = this._register.formGroupToTermOfUserRegisterForm(<
+        FormGroup
+      >this.form)
+      fn(registerForm)
     })
   }
 }

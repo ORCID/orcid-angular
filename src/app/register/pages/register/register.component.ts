@@ -65,6 +65,14 @@ export class RegisterComponent implements OnInit {
       })
   }
 
+  submitStepB() {
+    console.log(this.FormGroupStepB.value.personal)
+  }
+
+  submitStepC() {
+    console.log(this.FormGroupStepC.value.personal)
+  }
+
   openDialog(duplicateRecords): void {
     const dialogParams = {
       width: `1078px`,

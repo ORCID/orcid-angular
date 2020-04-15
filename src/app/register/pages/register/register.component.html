@@ -49,6 +49,7 @@
           <app-step-b
             [(formGroup)]="FormGroupStepB"
             [personalData]="personalData"
+            (submit)="submitStepB()"
           ></app-step-b>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepC" #lastStep>
@@ -56,6 +57,7 @@
           <app-step-c
             [(formGroup)]="FormGroupStepC"
             (submit)="register('horizontal')"
+            (submit)="submitStepC()"
           ></app-step-c>
         </mat-step>
       </mat-horizontal-stepper>
