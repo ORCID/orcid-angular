@@ -274,4 +274,31 @@ export class RegisterService {
       }
     )
   }
+
+  backendRegisterFormValidate() {
+    return (
+      StepA: FormGroup,
+      StepB: FormGroup,
+      StepC: FormGroup,
+      type?: 'shibboleth'
+    ): Observable<RegisterForm> => {
+      const registerForm = this.formGroupToFullRegistrationForm(
+        StepA,
+        StepB,
+        StepC
+      )
+      return this._http.post<RegisterForm>(
+        `${environment.API_WEB}'/register.json`,
+        registerForm
+      )
+    }
+  }
+
+  formGroupToFullRegistrationForm(
+    StepA: FormGroup,
+    StepB: FormGroup,
+    StepC: FormGroup
+  ): RegisterForm {
+    throw new Error('Method not implemented.')
+  }
 }
