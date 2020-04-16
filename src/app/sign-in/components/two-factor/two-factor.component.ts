@@ -28,8 +28,6 @@ export class TwoFactorComponent implements AfterViewInit {
   @ViewChild('inputRecoveryCode', { static: false })
   inputRecoveryCode: ElementRef
 
-  loading = false
-  contactUs = environment.BASE_URL + 'help/contact-us'
   recoveryCode = false
 
   verificationFormControl = new FormControl('', [
@@ -60,18 +58,14 @@ export class TwoFactorComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    console.log('two factor submitted')
     this.hideErrorMessages()
     this.disableValidators()
 
     if (this.twoFactorForm.valid) {
-      this.loading = true
-
       this.authenticate.emit({
         verificationCode: this.twoFactorForm.value.verificationCode,
         recoveryCode: this.twoFactorForm.value.recoveryCode,
       })
-      this.loading = false
 
       this.enableValidators()
     }

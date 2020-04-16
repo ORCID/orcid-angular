@@ -32,8 +32,7 @@ const routes: Routes = [
   // },
   {
     path: ApplicationRoutes.login,
-    loadChildren: () =>
-      import('./sign-in/sign-in.module').then(m => m.SignInModule),
+    redirectTo: ApplicationRoutes.signin,
   },
   {
     path: ApplicationRoutes.signin,

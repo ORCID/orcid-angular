@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { MatIconRegistry } from '@angular/material'
@@ -10,9 +10,6 @@ import { DomSanitizer } from '@angular/platform-browser'
   styleUrls: ['./social.component.scss'],
 })
 export class SocialComponent implements OnInit {
-  submitted = false
-  loading = false
-
   constructor(
     private _signIn: SignInService,
     @Inject(WINDOW) private window: Window,
@@ -42,8 +39,6 @@ export class SocialComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  onSubmit() {}
 
   navigateTo(val) {
     this.window.location.href = val

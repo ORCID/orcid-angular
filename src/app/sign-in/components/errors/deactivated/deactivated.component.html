@@ -12,15 +12,15 @@
       If you can no longer access any emails associated with your iD, please
       contact
     </ng-container>
-    <a (click)="navigateTo('/help/contact-us')"
-      >https://orcid.org/help/contact-us
+    <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
+      https://orcid.org/help/contact-us
     </a>
   </mat-error>
   <form [formGroup]="deactivatedForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" class="row deactivate">
       <mat-label i18n="@@ngOrcid.signin.email"> Email </mat-label>
       <input matInput formControlName="email" />
-      <mat-hint>example@email.com</mat-hint>
+      <mat-hint i18n="@@ngOrcid.signin.emailHint">example@email.com</mat-hint>
 
       <mat-error
         i18n="@@ngOrcid.signin.requiredEmail"
@@ -57,7 +57,7 @@
       by following the steps in the email we are now sending you. If you don’t
       receive an email from us, please contact
     </ng-container>
-    <a (click)="navigateTo('/help/contact-us')">
+    <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
       https://orcid.org/help/contact-us
     </a>
   </mat-error>

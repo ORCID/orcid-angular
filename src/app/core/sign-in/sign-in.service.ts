@@ -53,20 +53,4 @@ export class SignInService {
         catchError(this._errorHandler.handleError)
       )
   }
-
-  resendClaim(data) {
-    return this._http
-      .get<any>(
-        environment.API_WEB +
-          `resend-claim?email=` +
-          encodeURIComponent(data.username),
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
-  }
 }

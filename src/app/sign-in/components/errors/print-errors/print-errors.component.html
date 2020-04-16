@@ -13,20 +13,24 @@
 </mat-error>
 <mat-error *ngIf="showUnclaimedError" class="orcid-error">
   <mat-icon inline="true">error</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.unclaimed_exists_1">
+  <ng-container i18n="@@ngOrcid.signin.unclaimedExists1">
     The ORCID record exists but has not been claimed. Would you like to
   </ng-container>
-  <a i18n="@@ngOrcid.signin.unclaimed_exists_2" (click)="resendClaim()"
+  <a
+    class="mat-button-font"
+    i18n="@@ngOrcid.signin.unclaimedExists2"
+    (click)="resendClaim()"
     >resend the claim email?</a
   >
 </mat-error>
 <mat-error *ngIf="showInvalidUser" class="orcid-error">
   <mat-icon inline="true">error</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.unclaimed_exists_1">
+  <ng-container i18n="@@ngOrcid.signin.invalidUserType1">
     Invalid ORCID iD, please
   </ng-container>
   <a
-    i18n="@@ngOrcid.signin..invalid_user_type_2"
+    class="mat-button-font"
+    i18n="@@ngOrcid.signin.invalidUserType2"
     (click)="navigateTo('/help/contact-us')"
     >contact support</a
   >

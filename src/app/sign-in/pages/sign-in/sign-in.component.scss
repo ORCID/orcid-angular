@@ -7,25 +7,17 @@ button {
   max-width: 460px;
 }
 
-p {
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.43;
-}
-
-a {
-  font-size: 14px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.43;
-  letter-spacing: 1.25px;
+.mat-button-font {
   margin: auto;
+  letter-spacing: 1.25px;
 }
 
-@media (min-width: 700px) {
-  ::ng-deep .mat-card {
-    border: solid 1px rgba(0, 0, 0, 0.12);
+.columns-8,
+.columns-12 {
+  :host {
+    ::ng-deep .mat-card {
+      border: solid 1px rgba(0, 0, 0, 0.12);
+    }
   }
 }
 
@@ -71,18 +63,16 @@ a {
   position: relative !important;
 }
 
-.sign-in-title {
+.mat-card-title {
   text-align: center;
-  line-height: normal;
-  letter-spacing: normal;
   color: rgba(0, 0, 0, 0.87);
-  font-size: 24px;
-  font-weight: normal;
+  margin-bottom: 24px;
 }
 
-.or {
+.mat-subheading-2 {
   text-align: center;
-  font-size: 16px;
+  margin-top: 24px;
+  margin-bottom: 4px;
 }
 
 .forgot {

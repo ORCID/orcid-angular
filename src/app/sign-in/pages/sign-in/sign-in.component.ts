@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
-import { ThemePalette } from '@angular/material'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { TwoFactorComponent } from '../../components/two-factor/two-factor.component'
@@ -53,7 +52,8 @@ export class SignInComponent implements OnInit {
   usernameFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(
-      '(\\d{4}-){3}\\d{3}[\\dX]|^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'
+      '(\\d{4}-){3}\\d{3}[\\dX]' +
+        '|^.*\\.([a-zA-Z\\-])([a-zA-Z\\-]{0,61})([a-zA-Z\\-])$'
     ),
   ])
   passwordFormControl = new FormControl('', [Validators.required])

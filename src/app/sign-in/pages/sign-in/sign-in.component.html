@@ -10,17 +10,21 @@
         >
           <div class="col l12 m6 s4">
             <div class="form-container">
-              <p class="sign-in-title" i18n="@@ngOrcid.signin.title">Sign in</p>
+              <p class="mat-card-title" i18n="@@ngOrcid.signin.title">
+                Sign in
+              </p>
               <ng-container *ngIf="!isLoggedIn">
                 <mat-form-field appearance="outline" class="row">
                   <mat-label i18n="@@ngOrcid.signin.username">
                     Email or 16-digit ORCID iD
                   </mat-label>
                   <input matInput formControlName="username" />
-                  <mat-hint>example@email.com or 0000-0012-3456-7890</mat-hint>
+                  <mat-hint i18n="@@ngOrcid.signin.usernameHint"
+                    >example@email.com or 0000-0012-3456-7890</mat-hint
+                  >
 
                   <mat-error
-                    i18n="@@ngOrcid.signin.requiredEmail"
+                    i18n="@@ngOrcid.signin.requiredUsername"
                     *ngIf="usernameFormControl.hasError('required')"
                     >Email or 16-digit ORCID iD required
                   </mat-error>
@@ -77,9 +81,8 @@
                 >
                 </app-two-factor>
                 <a
-                  class="row mat-caption display-1 forgot"
+                  class="row mat-button-font display-1 forgot"
                   i18n="@@ngOrcid.signin.forgotYourPassword"
-                  id="forgotYourPassword"
                   (click)="navigateTo('/reset-password')"
                 >
                   Forgot your password or ORCID ID?
@@ -87,24 +90,22 @@
                 <div class="row">
                   <div class="col l6 m6 s4 dontHaveOrcid">
                     <p
-                      class="row mat-caption"
+                      class="row mat-body-1"
                       i18n="@@ngOrcid.signin.dontHaveOrcid"
-                      id="dontHaveOrcid"
                     >
                       Don't have an ORCID iD yet?
                     </p>
                   </div>
                   <div class="col l6 m6 s4 dontHaveOrcid">
                     <a
-                      class="row mat-caption display-1"
+                      class="row mat-button-font display-1"
                       i18n="@@ngOrcid.signin.registerNow"
                       (click)="navigateTo('/register')"
-                      id="registerNow"
                       >Register now
                     </a>
                   </div>
                 </div>
-                <p class="or">or</p>
+                <p class="mat-subheading-2">or</p>
                 <mat-divider></mat-divider>
                 <br />
                 <app-social></app-social>

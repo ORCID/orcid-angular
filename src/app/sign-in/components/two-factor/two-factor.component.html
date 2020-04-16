@@ -25,7 +25,7 @@
     </mat-error>
 
     <mat-error
-      i18n="@@ngOrcid.signin.bad_verification_code_length"
+      i18n="@@ngOrcid.signin.badVerificationCodeLength"
       *ngIf="
         verificationFormControl.hasError('minlength') ||
         verificationFormControl.hasError('maxlength')
@@ -35,33 +35,36 @@
   </mat-form-field>
   <p>
     <a
-      i18n="@@ngOrcid.signin.2fa.instructions_part2"
+      class="mat-button-font enter-code"
       role="button"
       (click)="showAuthenticationCode()"
+      i18n="@@ngOrcid.signin.2fa.instructionsPart1"
       >Enter a code
     </a>
-    <ng-container i18n="@@ngOrcid.signin.2fa.instructions_part1">
+    <ng-container i18n="@@ngOrcid.signin.2fa.instructionsPart2">
       from your two-factor authentication app
     </ng-container>
   </p>
   <p>
-    <ng-container i18n="@@ngOrcid.signin.2fa.no_device1">
+    <ng-container i18n="@@ngOrcid.signin.2fa.noDevice1">
       Don't have your device?
     </ng-container>
     <a
+      class="mat-button-font recover-code"
       role="button"
       (click)="showRecoveryCode()"
-      i18n="@@ngOrcid.signin.2fa.no_device2"
+      i18n="@@ngOrcid.signin.2fa.noDevice2"
       >Enter a recovery code
     </a>
   </p>
   <p>
-    <ng-container i18n="@@ngOrcid.signin.2fa.no_device_or_recovery">
+    <ng-container i18n="@@ngOrcid.signin.2fa.noDeviceOrRecovery">
       Don't have your device or recovery code?
     </ng-container>
     <a
+      class="mat-button-font recover-code"
       (click)="navigateTo('/help/contact-us')"
-      i18n="@@ngOrcid.signin.2fa.contact_support"
+      i18n="@@ngOrcid.signin.2fa.contactSupport"
       >Contact support
     </a>
   </p>
@@ -84,7 +87,7 @@
     </mat-error>
 
     <mat-error
-      i18n="@@ngOrcid.signin.bad_recovery_code_length"
+      i18n="@@ngOrcid.signin.badRecoveryCodeLength"
       *ngIf="
         recoveryCodeFormControl.hasError('minlength') ||
         recoveryCodeFormControl.hasError('maxlength')
@@ -98,7 +101,6 @@
     color="primary"
     class="row mat-elevation-z0 two-factor"
     type="submit"
-    [disabled]="loading"
     i18n="@@ngOrcid.signin.authenticate"
   >
     AUTHENTICATE
@@ -106,13 +108,13 @@
 </form>
 <mat-error *ngIf="showBadVerificationCode" class="orcid-error">
   <mat-icon inline="true">error</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.2fa.bad_verification_code">
+  <ng-container i18n="@@ngOrcid.signin.2fa.badVerificationCode">
     Invalid authentication code
   </ng-container>
 </mat-error>
 <mat-error *ngIf="showBadRecoveryCode" class="orcid-error">
   <mat-icon inline="true">error</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.2fa.bad_recovery_code">
+  <ng-container i18n="@@ngOrcid.signin.2fa.badRecoveryCode">
     Invalid recovery code
   </ng-container>
 </mat-error>

@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { SignInService } from '../../../../core/sign-in/sign-in.service'
 import { WINDOW } from '../../../../cdk/window'
+import { TLD_REGEXP } from '../../../../constants'
 
 @Component({
   selector: 'app-deactivated',
@@ -16,6 +17,7 @@ export class DeactivatedComponent implements OnInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
+    Validators.pattern(TLD_REGEXP),
   ])
 
   deactivatedForm = new FormGroup({

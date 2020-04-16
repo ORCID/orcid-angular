@@ -1,10 +1,13 @@
 <div class="current-sign-in">
-  <p class="current-sign-in-title">
+  <p class="mat-body-1">
     <ng-container i18n="@@ngOrcid.signin.currentlySign">
       You are currently signed in as
     </ng-container>
     <ng-container>
-      {{ displayName }} <a href="{{realUserOrcid}}"> {{ realUserOrcid }} </a>
+      {{ displayName }}
+      <a class="mat-button-font" href="{{realUserOrcid}}">
+        {{ realUserOrcid }}
+      </a>
     </ng-container>
   </p>
 </div>
