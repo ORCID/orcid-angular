@@ -7,24 +7,37 @@ import { throwError } from 'rxjs'
 })
 export class ErrorHandlerService {
   constructor() {}
-  public handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message)
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
+  public handleError(error: Error | HttpErrorResponse) {
+    if (error instanceof HttpErrorResponse) {
+      // Server error
       console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+        `
+__Server error__
+(status:${error.status} (${error.statusText}) url: ${error.url})
+name: "${error.name}"
+message: "${error.message}"
+ok: "${error.ok}"
+`
       )
+      return throwError({
+        error: error,
+        message: `${error.status} (${error.statusText})`,
+      })
+    } else {
+      // Client side error
+      console.error(
+        `
+__Local error__
+(name:${error.name})
+message: "${error.message}"
+stack: "${error.stack}"
+`
+      )
+      return throwError({
+        error: error,
+        message: error.name,
+      })
     }
-    // return an observable with a user-facing error message
-    // TODO display response errors
-    console.error(error)
-    return throwError({
-      error: error,
-      message: 'Something bad happened; please try again later.',
-    })
   }
 
   public xml2jsParser(error) {

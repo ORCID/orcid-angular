@@ -1,0 +1,18 @@
+@import '~@angular/material/_theming';
+@import '../../../../assets/scss/material.orcid-theme.scss';
+
+@mixin snackbar($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $overlay-color: mat-color($background, blue-overlay);
+
+  mat-icon,
+  div {
+    color: mat-contrast($warn, 900);
+  }
+}
+
+@include snackbar($orcid-app-theme);

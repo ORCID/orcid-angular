@@ -550,7 +550,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_1">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:91</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:92</note>
       </notes>
       <segment>
         <source>We have sent a message to</source>
@@ -558,7 +558,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_2">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:95</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:96</note>
       </notes>
       <segment>
         <source>from reset@notify.orcid.org.</source>
@@ -566,7 +566,7 @@
     </unit>
     <unit id="ngOrcid.youCanNow">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:97</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:98</note>
       </notes>
       <segment>
         <source>You can now</source>
@@ -574,7 +574,7 @@
     </unit>
     <unit id="ngOrcid.returnToLoginPage">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:101</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:102</note>
       </notes>
       <segment>
         <source>return to the login page.</source>
@@ -582,7 +582,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_3">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:106,108</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:107,109</note>
       </notes>
       <segment>
         <source>If you do not receive a message within 10 minutes, please check
@@ -592,7 +592,7 @@
     </unit>
     <unit id="orcid.frontend.reset.password.email_success_4">
       <notes>
-        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:114</note>
+        <note category="location">app/password-recovery/pages/password-recovery/password-recovery.component.html:115</note>
       </notes>
       <segment>
         <source>contact us</source>
@@ -693,6 +693,16 @@
       </notes>
       <segment>
         <source>See more statistics</source>
+      </segment>
+    </unit>
+    <unit id="layout.understood">
+      <notes>
+        <note category="location">app/layout/maintenance-message/maintenance-message.component.html:24,26</note>
+      </notes>
+      <segment>
+        <source>
+    UNDERSTOOD
+  </source>
       </segment>
     </unit>
     <unit id="public_profile.empty_profile">
@@ -1663,6 +1673,23 @@
       </notes>
       <segment>
         <source>of</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.error">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:86</note>
+      </notes>
+      <segment>
+        <source>Oh no! An error occurred</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.passwordError">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:88,89</note>
+      </notes>
+      <segment>
+        <source>We couldn&apos;t recover your account details, please try again, and if this error
+  persists contact support</source>
       </segment>
     </unit>
   </file>

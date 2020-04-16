@@ -7,9 +7,13 @@ import {
 } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
-import { MatChip, matFormFieldAnimations } from '@angular/material'
+import { MatChip, matFormFieldAnimations, MatSnackBar } from '@angular/material'
 import { WINDOW } from 'src/app/cdk/window'
 import { TLD_REGEXP } from 'src/app/constants'
+import { Observable } from 'rxjs'
+import { PasswordRecovery } from 'src/app/types'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { LOCALE } from 'src/locale/messages.dynamic.en'
 
 @Component({
   selector: 'app-password-recovery',
@@ -22,6 +26,7 @@ import { TLD_REGEXP } from 'src/app/constants'
   preserveWhitespaces: true,
 })
 export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
+  serverError = null
   status = false
   value = false
   email = 'test'
@@ -35,7 +40,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
     Validators.email,
     Validators.pattern(TLD_REGEXP),
   ])
-  typeFormControl = new FormControl('', [Validators.required])
+  typeFormControl = new FormControl('resetPassword', [Validators.required])
 
   recoveryForm = new FormGroup({
     type: this.typeFormControl,
@@ -44,7 +49,8 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _passwordRecovery: PasswordRecoveryService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _snackBar: SnackbarService
   ) {}
 
   ngOnInit() {}
@@ -52,33 +58,44 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // Avoid animations on load.
     this._subscriptAnimationState = 'enter'
-    this.passwordChip.toggleSelected(true)
   }
 
   onSubmit() {
     const value = this.recoveryForm.getRawValue()
+    this.serverError = null
     // Mark all elements as touch to display untouched FormControl errors
     this.recoveryForm.markAllAsTouched()
     // If the local validations pass, call the backend
     if (this.recoveryForm.valid) {
       this.loading = true
-      let $recovery
+      let $recovery: Observable<PasswordRecovery>
       if (this.typeFormControl.value === 'remindOrcidId') {
         $recovery = this._passwordRecovery.remindOrcidId(value)
       } else {
         $recovery = this._passwordRecovery.resetPassword(value)
       }
-      $recovery.subscribe(data => {
-        this.loading = false
-        // Sets the list of backend errors to the control
-        if (data.errors && data.errors.length) {
-          this.recoveryForm.controls['email'].setErrors({
-            backendErrors: data.errors || null,
-          })
-        } else if (data.successMessage.length) {
-          this.submitted = true
+      $recovery.subscribe(
+        data => {
+          this.loading = false
+          // Sets the list of backend errors to the control
+          if (data.errors && data.errors.length) {
+            this.recoveryForm.controls['email'].setErrors({
+              backendErrors: data.errors || null,
+            })
+          } else if (data.successMessage.length) {
+            this.submitted = true
+          }
+        },
+        error => {
+          // Display server errors
+          this.loading = false
+          this._snackBar.showErrorMessage(
+            LOCALE['ngOrcid.error'],
+            LOCALE['ngOrcid.passwordError'],
+            error.message
+          )
         }
-      })
+      )
     }
   }
 
