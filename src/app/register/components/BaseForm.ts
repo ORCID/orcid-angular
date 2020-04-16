@@ -14,7 +14,8 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   public onTouchedFunction
   constructor() {}
   writeValue(val: any): void {
-    if (val !== null && val !== undefined) {
+    console.log(JSON.stringify(val))
+    if (val != null && val !== undefined && val !== '') {
       this.form.setValue(val, { emitEvent: false })
     }
   }
