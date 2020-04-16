@@ -6,6 +6,7 @@ import {
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
   NG_ASYNC_VALIDATORS,
+  Validators,
 } from '@angular/forms'
 import { RegisterService } from 'src/app/core/register/register.service'
 
@@ -32,10 +33,13 @@ export class FormNotificationsComponent extends BaseForm implements OnInit {
   }
   ngOnInit() {
     this.form = new FormGroup({
-      sendOrcidNews: new FormControl(''),
+      sendOrcidNews: new FormControl(false, {
+        validators: Validators.required,
+      }),
     })
   }
 
+  // OVERWRITE
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe(value => {
       const registerForm = this._register.formGroupToSendOrcidNewsForm(<

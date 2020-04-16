@@ -68,8 +68,7 @@ export class RegisterComponent implements OnInit {
         .subscribe(response => {
           console.log(response)
         })
-    }
-    {
+    } else {
       console.log('WAIT SOMETHING IS NOT VALID SOMEWHERE ')
       console.log('FormGroupStepA', this.FormGroupStepA)
       console.log('FormGroupStepB', this.FormGroupStepB)
@@ -85,6 +84,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submitStepA() {
+    console.log(this.FormGroupStepA)
     // Update the personal data object is required after submit since is an input for StepB
     this.personalData = this.FormGroupStepA.value.personal
 
@@ -103,11 +103,11 @@ export class RegisterComponent implements OnInit {
   }
 
   submitStepB() {
-    console.log(this.FormGroupStepB.value.personal)
+    console.log(this.FormGroupStepB)
   }
 
   submitStepC() {
-    console.log(this.FormGroupStepC.value.personal)
+    console.log(this.FormGroupStepC)
   }
 
   openDialog(duplicateRecords): void {

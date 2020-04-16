@@ -7,14 +7,14 @@ import {
   AsyncValidator,
 } from '@angular/forms'
 import { of, Observable } from 'rxjs'
-import { filter, switchMap, map, tap, take } from 'rxjs/operators'
+import { filter, switchMap, map, tap, take, startWith } from 'rxjs/operators'
 
 export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   public form: FormGroup
   public onTouchedFunction
   constructor() {}
   writeValue(val: any): void {
-    if (val) {
+    if (val !== null && val !== undefined) {
       this.form.setValue(val, { emitEvent: false })
     }
   }
@@ -31,6 +31,10 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   }
   validate(c: AbstractControl): Observable<ValidationErrors | null> {
     return this.form.statusChanges.pipe(
+      startWith(this.form.status),
+      tap(value => {
+        console.log('current value: ', value, c.value)
+      }),
       filter(value => value !== 'PENDING'),
       take(1),
       map(() => {
