@@ -6,8 +6,6 @@ import {
   URL_PRIVATE_PROFILE,
   ApplicationRoutes,
 } from './constants'
-import { EnvironmentBannerComponent } from './environment-banner/environment-banner/environment-banner.component'
-import { RegisterModule } from './register/register.module'
 
 export function matcher(segments: UrlSegment[]) {
   if (

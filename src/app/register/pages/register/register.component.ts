@@ -6,6 +6,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
+import { switchMap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
   FormGroupStepC: FormGroup = new FormGroup({})
   isLinear = true
   personalData: RegisterForm
+  backendForm: RegisterForm
   constructor(
     _platformInfo: PlatformInfoService,
     private _register: RegisterService,
@@ -30,7 +32,9 @@ export class RegisterComponent implements OnInit {
       this.platform = platform
     })
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this._register.getRegisterForm().subscribe()
+  }
 
   register(value) {
     console.log(value)
@@ -40,10 +44,43 @@ export class RegisterComponent implements OnInit {
       this.FormGroupStepB.valid &&
       this.FormGroupStepC.valid
     ) {
-      console.log('REGISTER! ')
+      const form = this._register.formGroupToFullRegistrationForm(
+        this.FormGroupStepA,
+        this.FormGroupStepB,
+        this.FormGroupStepC
+      )
+      console.log(form)
+      this._register
+        .backendRegisterFormValidate(
+          this.FormGroupStepA,
+          this.FormGroupStepB,
+          this.FormGroupStepC
+        )
+        .pipe(
+          switchMap(() =>
+            this._register.register(
+              this.FormGroupStepA,
+              this.FormGroupStepB,
+              this.FormGroupStepC
+            )
+          )
+        )
+        .subscribe(response => {
+          console.log(response)
+        })
     }
     {
       console.log('WAIT SOMETHING IS NOT VALID SOMEWHERE ')
+      console.log('FormGroupStepA', this.FormGroupStepA)
+      console.log('FormGroupStepB', this.FormGroupStepB)
+      console.log('FormGroupStepC', this.FormGroupStepC)
+      console.log({
+        ...this.FormGroupStepA.value.personal,
+        ...this.FormGroupStepB.value.password,
+        ...this.FormGroupStepB.value.sendOrcidNews,
+        ...this.FormGroupStepC.value.activitiesVisibilityDefault,
+        ...this.FormGroupStepC.value.termsOfUse,
+      })
     }
   }
 

@@ -11,13 +11,18 @@ import {
   FormControl,
 } from '@angular/forms'
 import { Observable, of } from 'rxjs'
-import { RegisterForm, DuplicatedName } from 'src/app/types/register.endpoint'
+import {
+  RegisterForm,
+  DuplicatedName,
+  VisibilityValue,
+} from 'src/app/types/register.endpoint'
 import { Value } from 'src/app/types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
+  backendRegistrationForm: RegisterForm
   formInputs = {
     givenNames: {
       validationEndpoint: 'validateGivenNames',
@@ -246,6 +251,20 @@ export class RegisterService {
     }
   }
 
+  formGroupToActivitiesVisibilityForm(formGroup: FormGroup): RegisterForm {
+    let activitiesVisibilityDefault: VisibilityValue
+    if (
+      formGroup &&
+      formGroup.controls &&
+      formGroup.controls['activitiesVisibilityDefault']
+    ) {
+      activitiesVisibilityDefault = {
+        visibility: formGroup.controls['activitiesVisibilityDefault'].value,
+      }
+    }
+    return { activitiesVisibilityDefault }
+  }
+
   formGroupToPasswordRegisterForm(formGroup: FormGroup): RegisterForm {
     let password: Value
     if (formGroup && formGroup.controls && formGroup.controls['password']) {
@@ -262,12 +281,24 @@ export class RegisterService {
     return { password, passwordConfirm }
   }
 
-  formGroupToTermOfUserRegisterForm(formGroup: FormGroup) {
-    let termOfUse: Value
-    if (formGroup && formGroup.controls && formGroup.controls['termOfUse']) {
-      termOfUse = { value: formGroup.controls['termOfUse'].value }
+  formGroupToTermOfUserRegisterForm(formGroup: FormGroup): RegisterForm {
+    let termsOfUse: Value
+    if (formGroup && formGroup.controls && formGroup.controls['termsOfUse']) {
+      termsOfUse = { value: formGroup.controls['termsOfUse'].value }
     }
-    return termOfUse
+    return { termsOfUse }
+  }
+
+  formGroupToSendOrcidNewsForm(formGroup: FormGroup) {
+    let sendOrcidNews: Value
+    if (
+      formGroup &&
+      formGroup.controls &&
+      formGroup.controls['sendOrcidNews']
+    ) {
+      sendOrcidNews = { value: formGroup.controls['sendOrcidNews'].value }
+    }
+    return { sendOrcidNews }
   }
 
   confirmRegistration(
@@ -283,23 +314,49 @@ export class RegisterService {
     )
   }
 
-  backendRegisterFormValidate() {
-    return (
-      StepA: FormGroup,
-      StepB: FormGroup,
-      StepC: FormGroup,
-      type?: 'shibboleth'
-    ): Observable<RegisterForm> => {
-      const registerForm = this.formGroupToFullRegistrationForm(
-        StepA,
-        StepB,
-        StepC
-      )
-      return this._http.post<RegisterForm>(
-        `${environment.API_WEB}'/register.json`,
-        registerForm
-      )
-    }
+  getRegisterForm(): Observable<RegisterForm> {
+    return this._http
+      .get<RegisterForm>(`${environment.API_WEB}register.json`, {
+        withCredentials: true,
+      })
+      .pipe(map(form => (this.backendRegistrationForm = form)))
+  }
+
+  backendRegisterFormValidate(
+    StepA: FormGroup,
+    StepB: FormGroup,
+    StepC: FormGroup,
+    type?: 'shibboleth'
+  ): Observable<RegisterForm> {
+    const registerForm = this.formGroupToFullRegistrationForm(
+      StepA,
+      StepB,
+      StepC
+    )
+    return this._http.post<RegisterForm>(
+      `${environment.API_WEB}register.json`,
+      registerForm
+    )
+  }
+
+  register(
+    StepA: FormGroup,
+    StepB: FormGroup,
+    StepC: FormGroup,
+    type?: 'shibboleth'
+  ): Observable<RegisterForm> {
+    // TODO: @amontenegro Why does the backend require this?
+    this.backendRegistrationForm.valNumClient =
+      this.backendRegistrationForm.valNumServer / 2
+    const registerForm = this.formGroupToFullRegistrationForm(
+      StepA,
+      StepB,
+      StepC
+    )
+    return this._http.post<RegisterForm>(
+      `${environment.API_WEB}registerConfirm.json`,
+      Object.assign(this.backendRegistrationForm, registerForm)
+    )
   }
 
   formGroupToFullRegistrationForm(
@@ -307,6 +364,12 @@ export class RegisterService {
     StepB: FormGroup,
     StepC: FormGroup
   ): RegisterForm {
-    throw new Error('Method not implemented.')
+    return {
+      ...StepA.value.personal,
+      ...StepB.value.password,
+      ...StepB.value.sendOrcidNews,
+      ...StepC.value.activitiesVisibilityDefault,
+      ...StepC.value.termsOfUse,
+    }
   }
 }

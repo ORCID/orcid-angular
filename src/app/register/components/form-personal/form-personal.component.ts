@@ -142,13 +142,13 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   // OVERWRITE
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe(value => {
-      const registerForm = this._register.formGroupToEmailRegisterForm(<
+      const emailsForm = this._register.formGroupToEmailRegisterForm(<
         FormGroup
       >this.form.controls['emails'])
       const namesForm =
         this._register.formGroupToNamesRegisterForm(this.form) || {}
 
-      fn({ ...registerForm, ...namesForm })
+      fn({ ...emailsForm, ...namesForm })
     })
   }
 }

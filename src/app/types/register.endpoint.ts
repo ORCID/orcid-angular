@@ -6,7 +6,7 @@ export interface RegisterForm {
   sendOrcidNews?: Value
   sendMemberUpdateRequests?: Value
   termsOfUse?: Value
-  activitiesVisibilityDefault?: Value
+  activitiesVisibilityDefault?: VisibilityValue
   password?: Value
   passwordConfirm?: Value
   email?: Value
@@ -35,4 +35,11 @@ export interface DuplicatedName {
   familyNames: string
   institution: string
   createdDate: string
+}
+
+export interface VisibilityValue {
+  errors?: any[] // TODO is this always empty?
+  required?: boolean
+  getRequiredMessage?: any
+  visibility: 'PUBLIC' | 'LIMITED' | 'PRIVATE'
 }

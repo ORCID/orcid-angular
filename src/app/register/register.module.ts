@@ -37,7 +37,6 @@ import { IsThisYouModule } from '../cdk/is-this-you'
     FormVisibilityComponent,
     FormTermsComponent,
     FormPersonalAdditionalEmailsComponent,
-    ,
   ],
   imports: [
     CommonModule,

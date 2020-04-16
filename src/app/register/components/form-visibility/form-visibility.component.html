@@ -1,5 +1,8 @@
 <ng-container [formGroup]="form">
-  <mat-radio-group formControlName="visibility" color="primary">
+  <mat-radio-group
+    formControlName="activitiesVisibilityDefault"
+    color="primary"
+  >
     <mat-radio-button [value]="visibilityOptions[0]">
       Everyone (87% of users choose this)
     </mat-radio-button>

@@ -1,6 +1,8 @@
 <form [formGroup]="formGroup" #form>
-  <app-form-visibility formControlName="visibility"></app-form-visibility>
-  <app-form-terms formControlName="terms"></app-form-terms>
+  <app-form-visibility
+    formControlName="activitiesVisibilityDefault"
+  ></app-form-visibility>
+  <app-form-terms formControlName="termsOfUse"></app-form-terms>
   <button mat-button color="primary" matStepperPrevious type="button">
     Back
   </button>

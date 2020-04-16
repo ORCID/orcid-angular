@@ -8,6 +8,7 @@ import {
   Validators,
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
+import { RegisterService } from 'src/app/core/register/register.service'
 
 @Component({
   selector: 'app-form-visibility',
@@ -27,10 +28,24 @@ import {
   ],
 })
 export class FormVisibilityComponent extends BaseForm implements OnInit {
-  visibilityOptions = ['Everyone', 'Trusted', 'only']
+  visibilityOptions = ['PUBLIC', 'LIMITED', 'PRIVATE']
+
+  constructor(private _register: RegisterService) {
+    super()
+  }
   ngOnInit() {
     this.form = new FormGroup({
-      visibility: new FormControl('', Validators.required),
+      activitiesVisibilityDefault: new FormControl('', Validators.required),
+    })
+  }
+
+  // OVERWRITE
+  registerOnChange(fn: any) {
+    this.form.valueChanges.subscribe(value => {
+      const registerForm = this._register.formGroupToActivitiesVisibilityForm(<
+        FormGroup
+      >this.form)
+      fn(registerForm)
     })
   }
 }

@@ -7,6 +7,7 @@ import {
   NG_VALIDATORS,
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
+import { RegisterService } from 'src/app/core/register/register.service'
 
 @Component({
   selector: 'app-form-notifications',
@@ -26,9 +27,21 @@ import {
   ],
 })
 export class FormNotificationsComponent extends BaseForm implements OnInit {
+  constructor(private _register: RegisterService) {
+    super()
+  }
   ngOnInit() {
     this.form = new FormGroup({
-      notifications: new FormControl(''),
+      sendOrcidNews: new FormControl(''),
+    })
+  }
+
+  registerOnChange(fn: any) {
+    this.form.valueChanges.subscribe(value => {
+      const registerForm = this._register.formGroupToSendOrcidNewsForm(<
+        FormGroup
+      >this.form)
+      fn(registerForm)
     })
   }
 }

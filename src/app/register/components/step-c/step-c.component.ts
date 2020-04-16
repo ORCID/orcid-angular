@@ -13,8 +13,8 @@ export class StepCComponent extends BaseStep implements OnInit {
   }
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
-      visibility: [''],
-      terms: [''],
+      activitiesVisibilityDefault: [''],
+      termsOfUse: [''],
     })
   }
 }

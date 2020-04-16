@@ -16,7 +16,7 @@ export class StepBComponent extends BaseStep implements OnInit {
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
       password: [''],
-      notifications: [''],
+      sendOrcidNews: [''],
     })
   }
 }
