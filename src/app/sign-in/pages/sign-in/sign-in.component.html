@@ -1,1 +1,125 @@
-<p>sign-in works!</p>
+<main>
+  <mat-card class="sign-in-card mat-elevation-z0">
+    <mat-card-content>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+      <div class="container">
+        <form
+          class="row space-around"
+          [formGroup]="authorizationForm"
+          (ngSubmit)="!show2FA && onSubmit()"
+        >
+          <div class="col l12 m6 s4">
+            <div class="form-container">
+              <p class="mat-card-title" i18n="@@ngOrcid.signin.title">
+                Sign in
+              </p>
+              <ng-container *ngIf="!isLoggedIn">
+                <mat-form-field appearance="outline" class="row">
+                  <mat-label i18n="@@ngOrcid.signin.username">
+                    Email or 16-digit ORCID iD
+                  </mat-label>
+                  <input matInput formControlName="username" />
+                  <mat-hint i18n="@@ngOrcid.signin.usernameHint"
+                    >example@email.com or 0000-0012-3456-7890</mat-hint
+                  >
+
+                  <mat-error
+                    i18n="@@ngOrcid.signin.requiredUsername"
+                    *ngIf="usernameFormControl.hasError('required')"
+                    >Email or 16-digit ORCID iD required
+                  </mat-error>
+
+                  <mat-error
+                    i18n="@@ngOrcid.signin.invalidEmail"
+                    *ngIf="usernameFormControl.hasError('pattern')"
+                    >Use the format example@email.com or 0000-0001-2345-6789
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="row password">
+                  <mat-label i18n="@@ngOrcid.signin.password"
+                    >Password</mat-label
+                  >
+                  <input matInput formControlName="password" type="password" />
+
+                  <mat-error
+                    i18n="@@ngOrcid.signin.invalidPassword"
+                    *ngIf="passwordFormControl.hasError('required')"
+                    >Invalid password
+                  </mat-error>
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  (click)="onSubmit()"
+                  color="primary"
+                  class="row sign-in-button mat-elevation-z0"
+                  type="submit"
+                  [disabled]="loading"
+                  *ngIf="!show2FA"
+                  i18n="@@ngOrcid.signin.button"
+                >
+                  SIGN IN
+                </button>
+                <app-print-errors
+                  *ngIf="printError"
+                  [badCredentials]="badCredentials"
+                  [showDeprecatedError]="showDeprecatedError"
+                  [showUnclaimedError]="showUnclaimedError"
+                  [showInvalidUser]="showInvalidUser"
+                  [orcidPrimaryDeprecated]="orcidPrimaryDeprecated"
+                  [email]="email"
+                >
+                </app-print-errors>
+                <app-deactivated *ngIf="showDeactivatedError" [email]="email">
+                </app-deactivated>
+                <app-two-factor
+                  *ngIf="show2FA"
+                  [showBadVerificationCode]="showBadVerificationCode"
+                  [showBadRecoveryCode]="showBadRecoveryCode"
+                  (authenticate)="authenticate($event)"
+                >
+                </app-two-factor>
+                <a
+                  class="row mat-button-font display-1 forgot"
+                  i18n="@@ngOrcid.signin.forgotYourPassword"
+                  (click)="navigateTo('/reset-password')"
+                >
+                  Forgot your password or ORCID ID?
+                </a>
+                <div class="row">
+                  <div class="col l6 m6 s4 dontHaveOrcid">
+                    <p
+                      class="row mat-body-1"
+                      i18n="@@ngOrcid.signin.dontHaveOrcid"
+                    >
+                      Don't have an ORCID iD yet?
+                    </p>
+                  </div>
+                  <div class="col l6 m6 s4 dontHaveOrcid">
+                    <a
+                      class="row mat-button-font display-1"
+                      i18n="@@ngOrcid.signin.registerNow"
+                      (click)="navigateTo('/register')"
+                      >Register now
+                    </a>
+                  </div>
+                </div>
+                <p class="mat-subheading-2">or</p>
+                <mat-divider></mat-divider>
+                <br />
+                <app-social></app-social>
+              </ng-container>
+              <app-logged-in
+                *ngIf="isLoggedIn"
+                [displayName]="displayName"
+                [realUserOrcid]="realUserOrcid"
+              >
+              </app-logged-in>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</main>

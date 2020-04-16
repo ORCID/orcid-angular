@@ -35,7 +35,7 @@ export class UserService {
     })
   }
 
-  private getUserStatus() {
+  public getUserStatus() {
     return this._http
       .get<any>(environment.API_WEB + 'userStatus.json', {
         withCredentials: true,
