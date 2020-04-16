@@ -4,6 +4,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment.local'
 import { catchError, retry } from 'rxjs/operators'
 import { SignIn } from '../../types/sign-in.endpoint'
+import { Reactivation } from '../../types/reactivation.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +45,7 @@ export class SignInService {
     let body = new HttpParams()
     body = body.set('email', data.email)
     return this._http
-      .post<any>(environment.API_WEB + `sendReactivation.json`, body, {
+      .post<Reactivation>(environment.API_WEB + `sendReactivation.json`, body, {
         headers,
         withCredentials: true,
       })
