@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
 
   register(value) {
     console.log(value)
-    // this.lastStep.interacted = true
+    this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
       this.FormGroupStepB.valid &&

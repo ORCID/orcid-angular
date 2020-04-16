@@ -35,7 +35,10 @@ export class FormVisibilityComponent extends BaseForm implements OnInit {
   }
   ngOnInit() {
     this.form = new FormGroup({
-      activitiesVisibilityDefault: new FormControl('', Validators.required),
+      activitiesVisibilityDefault: new FormControl(
+        this.visibilityOptions[0],
+        Validators.required
+      ),
     })
   }
 

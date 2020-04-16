@@ -1,13 +1,34 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  forwardRef,
+  SimpleChanges,
+  DoCheck,
+  ElementRef,
+  Optional,
+  Self,
+} from '@angular/core'
 import {
   FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators,
   NG_ASYNC_VALIDATORS,
+  NgForm,
+  FormGroupDirective,
+  NgControl,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import { RegisterService } from 'src/app/core/register/register.service'
+import {
+  ErrorStateMatcher,
+  CanUpdateErrorState,
+  CanUpdateErrorStateCtor,
+  mixinErrorState,
+  CanDisableCtor,
+  HasTabIndexCtor,
+} from '@angular/material'
+import { HasErrorState } from '@angular/material/core/typings/common-behaviors/error-state'
 
 @Component({
   selector: 'app-form-terms',
@@ -26,13 +47,20 @@ import { RegisterService } from 'src/app/core/register/register.service'
     },
   ],
 })
-export class FormTermsComponent extends BaseForm implements OnInit {
-  constructor(private _register: RegisterService) {
+// tslint:disable-next-line: class-name
+export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
+  constructor(
+    private _register: RegisterService,
+    private _errorStateMatcher: ErrorStateMatcher
+  ) {
     super()
   }
+  errorState = false
+
+  termsOfUse = new FormControl('', Validators.requiredTrue)
   ngOnInit() {
     this.form = new FormGroup({
-      termsOfUse: new FormControl('', Validators.requiredTrue),
+      termsOfUse: this.termsOfUse,
     })
   }
 
@@ -44,5 +72,15 @@ export class FormTermsComponent extends BaseForm implements OnInit {
       >this.form)
       fn(registerForm)
     })
+  }
+
+  ngDoCheck(): void {
+    console.log('TEST')
+    console.log(this._errorStateMatcher.isErrorState)
+
+    this.errorState = this._errorStateMatcher.isErrorState(
+      this.termsOfUse,
+      null
+    )
   }
 }

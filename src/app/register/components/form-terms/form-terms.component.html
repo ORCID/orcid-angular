@@ -7,4 +7,7 @@
     agreeing to my data being processed in the US and being publicly accessible
     where marked as “visible to Everyone”.
   </mat-checkbox>
+  <mat-error *ngIf="form.hasError('required', 'termsOfUse') && errorState"
+    >You must accept the terms and conditions.</mat-error
+  >
 </ng-container>
