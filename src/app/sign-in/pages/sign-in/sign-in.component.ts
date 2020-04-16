@@ -5,6 +5,7 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { TwoFactorComponent } from '../../components/two-factor/two-factor.component'
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-sign-in',
@@ -37,16 +38,22 @@ export class SignInComponent implements OnInit {
     private _userInfo: UserService,
     @Inject(WINDOW) private window: Window
   ) {
-    _userInfo.getUserStatus().subscribe(data => {
-      if (data) {
-        this.isLoggedIn = data
-        _userInfo.getUserInfoOnEachStatusUpdate().subscribe(info => {
-          this.displayName = info.displayName
-          this.realUserOrcid =
-            environment.BASE_URL + info.userInfo.REAL_USER_ORCID
-        })
-      }
-    })
+    _userInfo
+      .getUserStatus()
+      .pipe(take(1))
+      .subscribe(data => {
+        if (data) {
+          this.isLoggedIn = data
+          _userInfo
+            .getUserInfoOnEachStatusUpdate()
+            .pipe(take(1))
+            .subscribe(info => {
+              this.displayName = info.displayName
+              this.realUserOrcid =
+                environment.BASE_URL + info.userInfo.REAL_USER_ORCID
+            })
+        }
+      })
   }
 
   usernameFormControl = new FormControl('', [
