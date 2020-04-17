@@ -16,6 +16,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     flatFolder = true,
     reportUnexistingFiles?: (path: string, languageCode: string) => void
   ) {
+    console.log(`Read folder ${folderPath}  ________`)
     this.folderPath = folderPath
     this.reportUnexistingFiles = reportUnexistingFiles
     this.propertiesFolderToJson(folderPath, flatFolder)
@@ -90,6 +91,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     It only copies the translations when there is not translation on this PropertyFolder
 */
   cloneValues(originFolder: PropertyFolderImpl): PropertyFolder {
+    console.log('Clone values from properties ________')
     const matchingProperties: MatchingPair[] = this.matchingValueEnglishProperties(
       originFolder
     )
@@ -176,7 +178,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
   }
 
   /*
-    Front a list of keys that can be used to clone it's translations
+    From a list of keys that can be used to clone it's translations
     Return the one that has translations for more languages
   */
   findTheKeyWithMostTranslations(
@@ -345,6 +347,35 @@ From the many properties on Orcid Source that have the same english value of ${p
     })
     return flatFolder
   }
+
+  generateTestingLanguages() {
+    console.log('Generate testing languages ________')
+    const testingLanguages = ['rl', 'lr', 'xx']
+    Object.keys(this.files).forEach(fileName => {
+      console.log('fileName', fileName)
+      testingLanguages.forEach(testingLangue => {
+        console.log('---testingLangue', testingLangue)
+        // Create the error testing language if does not exist
+        if (!this.files[fileName][testingLangue]) {
+          console.log('---did not had translations file', testingLangue)
+
+          this.files[fileName][testingLangue] = {}
+        }
+        Object.keys(this.files[fileName]['en']).forEach(key => {
+          if (!this.files[fileName][testingLangue][key]) {
+            console.log('---did not had translations for key', key)
+
+            this.files[fileName][testingLangue][key] = {
+              value: 'rl',
+              language: 'rl',
+              fileName: fileName,
+              key: key,
+            }
+          }
+        })
+      })
+    })
+  }
 }
 
 export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
@@ -415,6 +446,8 @@ if (args.length !== 2) {
   const orcidSource = new OrcidSourcePropertyFolder(args[1])
   // Clone values from orcid source
   ngOrcid.cloneValues(orcidSource)
+  // Create rl, lr and xx testing languages
+  ngOrcid.generateTestingLanguages()
   // Save generated files on a /temp folder
   ngOrcid.save('./tmp', false)
 }
