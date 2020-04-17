@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <path id="prefix__a" d="M2 9v7h3V9H2zm6 0v7h3V9H8zM0 21h19v-3H0v3zM14 9v7h3V9h-3zM9.5 0L0 5v2h19V5L9.5 0z"/>
+        <path id="prefix__c" d="M0.001 0.004L20 0.004 20 19.883 0.001 19.883z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" d="M0 0H1440V1024H0z" transform="translate(-498 -913)"/>
+        <g>
+            <g>
+                <path fill="#3B5998" d="M456 0c2.21 0 4 1.79 4 4v28c0 2.142-1.684 3.891-3.8 3.995L456 36H4c-2.21 0-4-1.79-4-4V4c0-2.21 1.79-4 4-4h452z" transform="translate(-498 -913) translate(490 892) translate(0 13)"/>
+                <g transform="translate(-498 -913) translate(490 892) translate(0 13) translate(10 7)">
+                    <mask id="prefix__b" fill="#fff">
+                        <use xlink:href="#prefix__a"/>
+                    </mask>
+                    <g fill="#FFF" mask="url(#prefix__b)">
+                        <path d="M0 0H50V50H0z" transform="translate(-15 -14)"/>
+                    </g>
+                </g>
+            </g>
+            <g>
+                <path fill="#3B5998" d="M456 0c2.21 0 4 1.79 4 4v28c0 2.142-1.684 3.891-3.8 3.995L456 36H4c-2.21 0-4-1.79-4-4V4c0-2.21 1.79-4 4-4h452z" transform="translate(-498 -913) translate(490 892) translate(0 13)"/>
+                <g transform="translate(-498 -913) translate(490 892) translate(0 13) translate(8 8)">
+                    <mask id="prefix__d" fill="#fff">
+                        <use xlink:href="#prefix__c"/>
+                    </mask>
+                    <path fill="#FFFFFE" d="M20 10.004c0-5.523-4.477-10-10-10s-10 4.477-10 10c0 4.992 3.657 9.129 8.438 9.879v-6.988h-2.54v-2.89h2.54V7.8c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.876h2.773l-.443 2.89h-2.33v6.989c4.78-.75 8.437-4.887 8.437-9.879" mask="url(#prefix__d)"/>
+                </g>
+            </g>
+        </g>
+        <path stroke="#000" stroke-opacity=".12" d="M400.5 277.5H1039.5V980.5H400.5z" transform="translate(-498 -913)"/>
+    </g>
+</svg>

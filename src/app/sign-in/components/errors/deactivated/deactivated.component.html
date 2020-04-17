@@ -1,0 +1,64 @@
+<ng-container *ngIf="!showReactivationSent">
+  <mat-error class="orcid-error">
+    <mat-icon inline="true">error</mat-icon>
+    <ng-container i18n="@@ngOrcid.signin.deactivated">
+      A deactivated ORCID record is associated with this email address; to
+      reactivate your ORCID record please enter your email address and submit
+      the form to start the reactivate process.
+    </ng-container>
+  </mat-error>
+  <mat-error class="orcid-error">
+    <ng-container i18n="@@ngOrcid.signin.deactivatedEnterEmail">
+      If you can no longer access any emails associated with your iD, please
+      contact
+    </ng-container>
+    <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
+      https://orcid.org/help/contact-us
+    </a>
+  </mat-error>
+  <form [formGroup]="deactivatedForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="row deactivate">
+      <mat-label i18n="@@ngOrcid.signin.email"> Email </mat-label>
+      <input matInput formControlName="email" />
+      <mat-hint i18n="@@ngOrcid.signin.emailHint">example@email.com</mat-hint>
+
+      <mat-error
+        i18n="@@ngOrcid.signin.requiredEmail"
+        *ngIf="emailFormControl.hasError('required')"
+        >Email is required
+      </mat-error>
+
+      <mat-error
+        i18n="@@ngOrcid.signin.invalidEmail"
+        *ngIf="
+          emailFormControl.hasError('email') ||
+          emailFormControl.hasError('pattern')
+        "
+        >Use the format example@email.com
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      (click)="onSubmit()"
+      color="primary"
+      class="row mat-elevation-z0 deactivate"
+      type="submit"
+      [disabled]="loading"
+      i18n="@@ngOrcid.signin.submit"
+    >
+      SUBMIT
+    </button>
+  </form>
+</ng-container>
+<ng-container *ngIf="showReactivationSent">
+  <mat-error class="orcid-error">
+    <ng-container i18n="@@ngOrcid.signin.verify.reactivation_sent">
+      Thank you for reactivating your ORCID record; please complete the process
+      by following the steps in the email we are now sending you. If you don’t
+      receive an email from us, please contact
+    </ng-container>
+    <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
+      https://orcid.org/help/contact-us
+    </a>
+  </mat-error>
+</ng-container>

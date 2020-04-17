@@ -10,6 +10,7 @@ import {
   MatProgressBarModule,
 } from '@angular/material'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { SnackbarModule } from '../cdk/snackbar/snackbar.module'
 
 @NgModule({
   declarations: [PasswordRecoveryComponent],
@@ -22,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     MatButtonModule,
     PasswordRecoveryRoutingModule,
     MatProgressBarModule,
+    SnackbarModule,
   ],
 })
 export class PasswordRecoveryModule {}

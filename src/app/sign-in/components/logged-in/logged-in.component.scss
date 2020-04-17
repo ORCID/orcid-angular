@@ -1,0 +1,34 @@
+.mat-button-font {
+  margin: auto;
+}
+
+button {
+  width: 100%;
+  max-width: 460px;
+  border: solid 1px rgba(0, 0, 0, 0.12);
+}
+
+.not-you {
+  margin-top: 12px;
+  max-height: 36px;
+  background-color: #ffffff;
+  color: #2e7f9f;
+}
+
+.current-sign-in {
+  overflow: hidden;
+}
+
+.mat-body-1 {
+  float: left;
+  margin-bottom: 64px;
+}
+
+.current-sign-in-display-name {
+  float: right;
+}
+
+.mat-button {
+  max-width: 460px;
+  max-height: 40px;
+}

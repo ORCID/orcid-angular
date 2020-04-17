@@ -1,0 +1,32 @@
+<div class="current-sign-in">
+  <p class="mat-body-1">
+    <ng-container i18n="@@ngOrcid.signin.currentlySign">
+      You are currently signed in as
+    </ng-container>
+    <ng-container>
+      {{ displayName }}
+      <a class="mat-button-font" href="{{realUserOrcid}}">
+        {{ realUserOrcid }}
+      </a>
+    </ng-container>
+  </p>
+</div>
+<button
+  mat-raised-button
+  (click)="navigateTo('/my-orcid')"
+  color="primary"
+  class="row mat-elevation-z0"
+  type="button"
+>
+  <ng-container i18n="@@ngOrcid.signin.continueAs"> Continue as </ng-container>
+  {{ displayName }}
+</button>
+<button
+  mat-raised-button
+  (click)="navigateTo('/signout')"
+  class="not-you mat-elevation-z0"
+  type="button"
+  i18n="@@ngOrcid.signin.notYou"
+>
+  Not you?
+</button>

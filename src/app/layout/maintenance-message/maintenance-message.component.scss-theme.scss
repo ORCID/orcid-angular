@@ -9,6 +9,7 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+  ::ng-deep .closable,
   .text-container {
     border-top: mat-color($foreground, 'box-border') 1px solid;
   }

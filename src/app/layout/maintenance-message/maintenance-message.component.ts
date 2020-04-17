@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { CookieService } from 'ngx-cookie-service'
+import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Component({
   selector: 'app-maintenance-message',
@@ -10,11 +12,15 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   ],
 })
 export class MaintenanceMessageComponent implements OnInit {
-  maintenanceMessage
-  constructor(togglz: TogglzService) {
-    togglz.getMessageOf('MAINTENANCE_MESSAGE').subscribe(value => {
+  maintenanceMessage: MaintenanceMessage
+  closableElement: Element
+
+  constructor(togglz: TogglzService, private _cookie: CookieService) {
+    togglz.getMaintenanceMessages().subscribe(value => {
       this.maintenanceMessage = value
+      console.log(this.maintenanceMessage)
     })
   }
+
   ngOnInit() {}
 }

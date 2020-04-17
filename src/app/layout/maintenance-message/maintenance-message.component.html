@@ -1,9 +1,22 @@
-<div
-  class="maintenance-header container"
-  *ngIf="maintenanceMessage"
-  role="banner"
+<section
+  aria-label="Maintenance message"
+  *ngIf="maintenanceMessage && maintenanceMessage.plainHtml"
+  class="container"
 >
-  <div class="col l12 m8 s4 middle text-container mat-body-2">
-    <p [innerHtml]="maintenanceMessage"></p>
+  <div
+    *ngFor="let node of maintenanceMessage.nonClosableElements"
+    class="col l12 m8 s4 middle text-container"
+  >
+    <div><p [innerHtml]="node.innerHTML"></p></div>
   </div>
-</div>
+
+  <div
+    *ngIf="
+      maintenanceMessage.closableElements.length === 0 &&
+      maintenanceMessage.nonClosableElements.length === 0
+    "
+    class="col l12 m8 s4 middle text-container"
+  >
+    <p [innerHtml]="maintenanceMessage.plainHtml"></p>
+  </div>
+</section>

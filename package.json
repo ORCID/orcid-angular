@@ -71,9 +71,8 @@
     "core-js": "^2.6.9",
     "css-loader": "^3.2.0",
     "firebase": "^7.6.0",
-  
     "hammerjs": "^2.0.8",
-    "ngx-cookie-service": "^2.3.0",
+    "ngx-cookie-service": "^3.0.3",
     "properties-to-json": "^0.1.4",
     "puppeteer": "^2.0.0",
     "rxjs": "~6.5.2",

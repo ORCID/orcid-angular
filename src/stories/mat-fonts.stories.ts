@@ -23,7 +23,8 @@ storiesOf('Foundation|Fonts', module).add(
         <div class="mat-display-1">mat-display-1</div>
         <div class="mat-headline">mat-headline</div>
         <div class="mat-title"> mat-title</div>
-        <div class="mat-subheading-2"> mat-subheading-2</div>
+        <div class="mat-card-title"> mat-title</div>
+        <div class="mat-subheading-2"> mat-card-title</div>
         <div class="mat-subheading-1">mat-subheading-1</div>
         <div class="mat-body-1">mat-body-1</div>
         <div class="mat-body-2">mat-body-2</div>

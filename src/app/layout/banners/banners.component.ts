@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { take } from 'rxjs/operators'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
 @Component({
   selector: 'app-banners',
@@ -10,9 +12,22 @@ import { take } from 'rxjs/operators'
   preserveWhitespaces: true,
 })
 export class BannersComponent implements OnInit {
+  maintenanceMessages: MaintenanceMessage
   showCookieBanner
   showUnsupportedBrowserBanner
-  constructor(_cookie: CookieService, _platformInfo: PlatformInfoService) {
+  closableElementAtDisplay
+  constructor(
+    private _cookie: CookieService,
+    _platformInfo: PlatformInfoService,
+    togglz: TogglzService
+  ) {
+    // All closable maintenance messages are displayed as banners
+    togglz.getMaintenanceMessages().subscribe(value => {
+      this.maintenanceMessages = value
+      this.updateClosableMessage()
+    })
+
+    // Show unsupported browser banner
     _platformInfo
       .get()
       .pipe(take(1))
@@ -20,7 +35,30 @@ export class BannersComponent implements OnInit {
         platform =>
           (this.showUnsupportedBrowserBanner = platform.unsupportedBrowser)
       )
+
+    // Show cookie banner
     this.showCookieBanner = !_cookie.check('orcidCookiePolicyAlert')
+  }
+
+  updateClosableMessage() {
+    if (this.maintenanceMessages && this.maintenanceMessages.closableElements) {
+      this.maintenanceMessages.closableElements.forEach(node => {
+        if (
+          node &&
+          node.id &&
+          !this._cookie.check(node.id) &&
+          !this.closableElementAtDisplay
+        ) {
+          this.closableElementAtDisplay = node
+        }
+      })
+    }
+  }
+
+  understoodClosableMessage(element: Element) {
+    this.closableElementAtDisplay = null
+    this._cookie.set(element.id, 'understood', 365)
+    this.updateClosableMessage()
   }
 
   ngOnInit() {}

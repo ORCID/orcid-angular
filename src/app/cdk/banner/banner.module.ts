@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { NgModule, Input } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { BannerComponent } from './banner.component'
 import { MatButtonModule } from '@angular/material'

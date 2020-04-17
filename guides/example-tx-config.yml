@@ -1,0 +1,64 @@
+filters:
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/environment-banner/environment-banner.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/environment-banner/environment-banner.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/home/home.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/home/home.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/layout/layout.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/layout/layout.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/material/material.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/material/material.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/password-recovery/password-recovery.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/password-recovery/password-recovery.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/profile/profile.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/profile/profile.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/search/search.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/search/search.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/signin/signin.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/signin/signin.<lang>.properties
