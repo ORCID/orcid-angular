@@ -10,7 +10,6 @@ import {
   ViewChild,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { environment } from '../../../../environments/environment.local'
 import { WINDOW } from '../../../cdk/window'
 
 @Component({
