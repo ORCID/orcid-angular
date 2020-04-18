@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import {
-  MatButtonModule,
-  MatProgressSpinnerModule,
-  MatDividerModule,
-} from '@angular/material'
+import { MatButtonModule } from '@angular/material/button'
+import { MatDividerModule } from '@angular/material/divider'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { CoreModule } from 'src/app/core/core.module'
 
 import { NewsComponent } from './components/news/news.component'

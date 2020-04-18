@@ -1,4 +1,4 @@
-import { MatPaginatorIntl } from '@angular/material'
+import { MatPaginatorIntl } from '@angular/material/paginator'
 import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { Injectable } from '@angular/core'
 

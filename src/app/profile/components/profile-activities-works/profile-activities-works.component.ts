@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
-import { PageEvent } from '@angular/material'
+import { PageEvent } from '@angular/material/paginator'
 import { Subscription, timer } from 'rxjs'
 import { nestedListAnimation } from 'src/app/animations'
 import { WorksService } from 'src/app/core/works/works.service'
