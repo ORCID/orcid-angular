@@ -32,9 +32,9 @@ export class ProfileActivitiesWorksComponent implements OnInit {
   workPageChangeTimer: Subscription
   _profileWorks: Works
 
-  @ViewChild('worksExpansionPanel', { static: false })
+  @ViewChild('worksExpansionPanel')
   worksExpansionPanel: ElementRef
-  @ViewChild('worksExpansionPanel', { static: false }) paginatoOf: ElementRef
+  @ViewChild('worksExpansionPanel') paginatoOf: ElementRef
 
   constructor(private _worksService: WorksService) {}
 

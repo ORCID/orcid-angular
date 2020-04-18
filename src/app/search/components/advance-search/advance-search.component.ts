@@ -31,9 +31,7 @@ import { WINDOW } from 'src/app/cdk/window'
 })
 export class AdvanceSearchComponent implements OnInit, OnChanges {
   @Input() searchValues: SearchResults
-  @ViewChild('searchForm', { static: false }) searchForm: ElementRef<
-    HTMLElement
-  >
+  @ViewChild('searchForm') searchForm: ElementRef<HTMLElement>
   isAPhoneScreen = false
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder =
