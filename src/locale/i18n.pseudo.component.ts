@@ -1,3 +1,6 @@
+// This module is required until Angular Support $localize extract values from .ts files
+// https://github.com/angular/angular/pull/32912
+
 import { Component, OnInit, NgModule } from '@angular/core'
 
 @Component({
@@ -14,4 +17,4 @@ export class I18nPseudoComponent implements OnInit {
   imports: [],
   declarations: [I18nPseudoComponent],
 })
-export class HomeModule {}
+export class PseudoModuleForTranslations {}

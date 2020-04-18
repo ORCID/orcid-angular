@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
   <file original="ng.template" id="ngi18n">
     <unit id="confirm-oauth-access.connectingresearchandresearchers">
       <notes>
         <note category="description">#sentenceCase</note>
-        <note category="location">app/layout/header/header.component.html:24,26</note>
+        <note category="location">app/layout/header/header.component.html:19,21</note>
       </notes>
       <segment>
         <source>
@@ -15,7 +15,7 @@
     <unit id="header.signin">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:124</note>
+        <note category="location">app/layout/header/header.component.html:119</note>
       </notes>
       <segment>
         <source>SIGN IN</source>
@@ -24,8 +24,8 @@
     <unit id="header.register">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:126</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:30</note>
+        <note category="location">app/layout/header/header.component.html:121</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:28</note>
       </notes>
       <segment>
         <source>REGISTER</source>
@@ -34,7 +34,7 @@
     <unit id="public-layout.sign_out">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:140</note>
+        <note category="location">app/layout/header/header.component.html:135</note>
         <note category="location">locale/i18n.pseudo.component.html:56</note>
       </notes>
       <segment>
@@ -126,7 +126,7 @@
     </unit>
     <unit id="common.cookies.orcid_uses">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:7,9</note>
+        <note category="location">app/layout/banners/banners.component.html:8,10</note>
       </notes>
       <segment>
         <source>
@@ -136,7 +136,7 @@
     </unit>
     <unit id="common.cookies.learn_more">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:15,16</note>
+        <note category="location">app/layout/banners/banners.component.html:17,18</note>
       </notes>
       <segment>
         <source>
@@ -145,10 +145,9 @@
     </unit>
     <unit id="common.cookies.click_dismiss">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:20</note>
-        <note category="location">app/layout/banners/banners.component.html:42</note>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:35,37</note>
-        <note category="location">app/cdk/banner/banner.component.html:9,11</note>
+        <note category="location">app/layout/banners/banners.component.html:22</note>
+        <note category="location">app/layout/banners/banners.component.html:48</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:47,49</note>
       </notes>
       <segment>
         <source>Dismiss</source>
@@ -156,7 +155,7 @@
     </unit>
     <unit id="common.old.browser_1">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:25,27</note>
+        <note category="location">app/layout/banners/banners.component.html:30,32</note>
       </notes>
       <segment>
         <source>
@@ -166,7 +165,7 @@
     </unit>
     <unit id="common.old_browser_2">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:30,32</note>
+        <note category="location">app/layout/banners/banners.component.html:35,37</note>
       </notes>
       <segment>
         <source>
@@ -176,15 +175,15 @@
     </unit>
     <unit id="common.old_browser_3">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:38</note>
+        <note category="location">app/layout/banners/banners.component.html:44</note>
       </notes>
       <segment>
         <source>supported browser</source>
       </segment>
     </unit>
-    <unit id="i18n=@@layout.understood">
+    <unit id="layout.understood">
       <notes>
-        <note category="location">app/layout/banners/banners.component.html:56</note>
+        <note category="location">app/layout/banners/banners.component.html:62</note>
       </notes>
       <segment>
         <source>Understood</source>
@@ -192,7 +191,7 @@
     </unit>
     <unit id="common.js.domain.warn.warning_1">
       <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:4</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:7</note>
       </notes>
       <segment>
         <source>Warning!</source>
@@ -200,7 +199,7 @@
     </unit>
     <unit id="common.js.domain.warn.warning_2">
       <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:8,9</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,12</note>
       </notes>
       <segment>
         <source>is a test website.
@@ -209,7 +208,7 @@
     </unit>
     <unit id="common.js.domain.warn.is_the_official">
       <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:11,13</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19,21</note>
       </notes>
       <segment>
         <source>
@@ -219,7 +218,7 @@
     </unit>
     <unit id="common.js.domain.warn.mailinator">
       <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:16</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:27</note>
       </notes>
       <segment>
         <source>mailinator.com</source>
@@ -227,7 +226,7 @@
     </unit>
     <unit id="common.js.domain.warn.email_addresses">
       <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:19</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:30</note>
       </notes>
       <segment>
         <source>email addresses, see Sandbox FAQ for</source>
@@ -235,7 +234,7 @@
     </unit>
     <unit id="common.js.domain.warn.more_information">
       <notes>
-        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:25,26</note>
+        <note category="location">app/environment-banner/environment-banner/environment-banner.component.html:37,38</note>
       </notes>
       <segment>
         <source>
@@ -439,43 +438,465 @@
     </unit>
     <unit id="home.latest_news">
       <notes>
-        <note category="location">app/home/components/news/news.component.html:5,7</note>
+        <note category="location">app/home/components/news/news.component.html:6,8</note>
       </notes>
       <segment>
         <source>
-          LATEST NEWS
-        </source>
+            LATEST NEWS
+          </source>
       </segment>
     </unit>
     <unit id="home.more_news">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/home/components/news/news.component.html:15,17</note>
+        <note category="location">app/home/components/news/news.component.html:16,18</note>
       </notes>
       <segment>
         <source>
-          MORE NEWS
-        </source>
+            MORE NEWS
+          </source>
       </segment>
     </unit>
     <unit id="ngOrcid.fullOrcid">
       <notes>
-        <note category="location">app/home/components/news/news.component.html:48,50</note>
+        <note category="location">app/home/components/news/news.component.html:49,51</note>
       </notes>
       <segment>
         <source>
-              FULL ARTICLE
-            </source>
+                FULL ARTICLE
+              </source>
       </segment>
     </unit>
     <unit id="ngOrcid.moreNews">
       <notes>
-        <note category="location">app/home/components/news/news.component.html:65,67</note>
+        <note category="location">app/home/components/news/news.component.html:66,68</note>
       </notes>
       <segment>
         <source>
-      MORE NEWS
+        MORE NEWS
+      </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.heading">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Two-factor authentication</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.label">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:8,10</note>
+      </notes>
+      <segment>
+        <source>
+      Two-factor authentication code
     </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.invalidEmail">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:24,25</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:86,87</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:35,36</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:37,38</note>
+      </notes>
+      <segment>
+        <source>Authentication code is required
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.badVerificationCodeLength">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:33,34</note>
+      </notes>
+      <segment>
+        <source>Invalid authentication code length
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.instructionsPart1">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:42,43</note>
+      </notes>
+      <segment>
+        <source>Enter a code
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.instructionsPart2">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:44,46</note>
+      </notes>
+      <segment>
+        <source>
+      from your two-factor authentication app
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.noDevice1">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:49,51</note>
+      </notes>
+      <segment>
+        <source>
+      Don&apos;t have your device?
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.noDevice2">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:57,58</note>
+      </notes>
+      <segment>
+        <source>Enter a recovery code
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.noDeviceOrRecovery">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:61,63</note>
+      </notes>
+      <segment>
+        <source>
+      Don&apos;t have your device or recovery code?
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.contactSupport">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:68,69</note>
+      </notes>
+      <segment>
+        <source>Contact support
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.Recovery code">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:76,78</note>
+      </notes>
+      <segment>
+        <source>
+      Recovery code
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.badRecoveryCodeLength">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:95,96</note>
+      </notes>
+      <segment>
+        <source>Invalid recovery code length
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.authenticate">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:105,107</note>
+      </notes>
+      <segment>
+        <source>
+    AUTHENTICATE
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.badVerificationCode">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:111,113</note>
+      </notes>
+      <segment>
+        <source>
+    Invalid authentication code
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.2fa.badRecoveryCode">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:117,119</note>
+      </notes>
+      <segment>
+        <source>
+    Invalid recovery code
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.title">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source>
+                Sign in
+              </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.username">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:18,20</note>
+      </notes>
+      <segment>
+        <source>
+                    Email or 16-digit ORCID iD
+                  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.usernameHint">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:23</note>
+      </notes>
+      <segment>
+        <source>example@email.com or 0000-0012-3456-7890</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.requiredUsername">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:29,30</note>
+      </notes>
+      <segment>
+        <source>Email or 16-digit ORCID iD required
+                  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.password">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:41</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.invalidPassword">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:48,49</note>
+      </notes>
+      <segment>
+        <source>Invalid password
+                  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.button">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:61,63</note>
+      </notes>
+      <segment>
+        <source>
+                  SIGN IN
+                </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.forgotYourPassword">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:87,89</note>
+      </notes>
+      <segment>
+        <source>
+                  Forgot your password or ORCID ID?
+                </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.dontHaveOrcid">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:95,97</note>
+      </notes>
+      <segment>
+        <source>
+                      Don&apos;t have an ORCID iD yet?
+                    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.registerNow">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:104,105</note>
+      </notes>
+      <segment>
+        <source>Register now
+                    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.institutionalAccount">
+      <notes>
+        <note category="location">app/sign-in/components/social/social.component.html:8,10</note>
+      </notes>
+      <segment>
+        <source>
+    Access through your institution
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.google">
+      <notes>
+        <note category="location">app/sign-in/components/social/social.component.html:19,21</note>
+      </notes>
+      <segment>
+        <source>
+    Sign in with Google
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.facebook">
+      <notes>
+        <note category="location">app/sign-in/components/social/social.component.html:30,32</note>
+      </notes>
+      <segment>
+        <source>
+    Sign in with Facebook
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.deactivated">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:4,8</note>
+      </notes>
+      <segment>
+        <source>
+      A deactivated ORCID record is associated with this email address; to
+      reactivate your ORCID record please enter your email address and submit
+      the form to start the reactivate process.
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.deactivatedEnterEmail">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:11,14</note>
+      </notes>
+      <segment>
+        <source>
+      If you can no longer access any emails associated with your iD, please
+      contact
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.email">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:21</note>
+      </notes>
+      <segment>
+        <source> Email </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.emailHint">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:23</note>
+      </notes>
+      <segment>
+        <source>example@email.com</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.requiredEmail">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:28,29</note>
+      </notes>
+      <segment>
+        <source>Email is required
+      </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.submit">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:48,50</note>
+      </notes>
+      <segment>
+        <source>
+      SUBMIT
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.verify.reactivation_sent">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:55,59</note>
+      </notes>
+      <segment>
+        <source>
+      Thank you for reactivating your ORCID record; please complete the process
+      by following the steps in the email we are now sending you. If you don’t
+      receive an email from us, please contact
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.currentlySign">
+      <notes>
+        <note category="location">app/sign-in/components/logged-in/logged-in.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>
+      You are currently signed in as
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.continueAs">
+      <notes>
+        <note category="location">app/sign-in/components/logged-in/logged-in.component.html:21</note>
+      </notes>
+      <segment>
+        <source> Continue as </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.notYou">
+      <notes>
+        <note category="location">app/sign-in/components/logged-in/logged-in.component.html:30,32</note>
+      </notes>
+      <segment>
+        <source>
+  Not you?
+</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.bad_credentials">
+      <notes>
+        <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>
+    Incorrect username and/or password
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.deprecated_with_primary">
+      <notes>
+        <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>
+    This account is deprecated. Please refer to account:
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.unclaimedExists1">
+      <notes>
+        <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>
+    The ORCID record exists but has not been claimed. Would you like to
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.unclaimedExists2">
+      <notes>
+        <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:23</note>
+      </notes>
+      <segment>
+        <source>resend the claim email?</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.invalidUserType1">
+      <notes>
+        <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:28,30</note>
+      </notes>
+      <segment>
+        <source>
+    Invalid ORCID iD, please
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.invalidUserType2">
+      <notes>
+        <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:35</note>
+      </notes>
+      <segment>
+        <source>contact support</source>
       </segment>
     </unit>
     <unit id="ngOrcid.passwordAndOrcid">
@@ -596,402 +1017,6 @@
       </notes>
       <segment>
         <source>contact us</source>
-      </segment>
-    </unit>
-    <unit id="public-layout.sign_in">
-      <notes>
-        <note category="description">#upperCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:29</note>
-        <note category="location">locale/i18n.pseudo.component.html:8</note>
-      </notes>
-      <segment>
-        <source>SIGN IN</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.viewMyOrcid">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:41,43</note>
-      </notes>
-      <segment>
-        <source>
-          View my ORCID record
-        </source>
-      </segment>
-    </unit>
-    <unit id="workspace.notifications">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:49</note>
-        <note category="location">locale/i18n.pseudo.component.html:75</note>
-      </notes>
-      <segment>
-        <source>Inbox</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.accountSetting">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:53</note>
-      </notes>
-      <segment>
-        <source>Account settings </source>
-      </segment>
-    </unit>
-    <unit id="workspace.developer_tools">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:66</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:79</note>
-        <note category="location">locale/i18n.pseudo.component.html:68</note>
-      </notes>
-      <segment>
-        <source>Developer tools </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.selfService">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:87</note>
-      </notes>
-      <segment>
-        <source>Member tools </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.manageMembers">
-      <notes>
-        <note category="description">#sentenceCase</note>
-        <note category="location">app/layout/user-menu/user-menu.component.html:95</note>
-      </notes>
-      <segment>
-        <source>Manage members</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.adminPage">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:103</note>
-      </notes>
-      <segment>
-        <source>Admin page</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.logout">
-      <notes>
-        <note category="location">app/layout/user-menu/user-menu.component.html:107</note>
-      </notes>
-      <segment>
-        <source>Logout</source>
-      </segment>
-    </unit>
-    <unit id="public-layout.amount_ids">
-      <notes>
-        <note category="location">app/layout/statistics/statistics.component.html:6,7</note>
-      </notes>
-      <segment>
-        <source>
-          ORCID iDs and counting.</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.seeMoreStatics">
-      <notes>
-        <note category="location">app/layout/statistics/statistics.component.html:10</note>
-      </notes>
-      <segment>
-        <source>See more statistics</source>
-      </segment>
-    </unit>
-    <unit id="layout.understood">
-      <notes>
-        <note category="location">app/layout/maintenance-message/maintenance-message.component.html:24,26</note>
-      </notes>
-      <segment>
-        <source>
-    UNDERSTOOD
-  </source>
-      </segment>
-    </unit>
-    <unit id="public_profile.empty_profile">
-      <notes>
-        <note category="location">app/profile/pages/profile-page/profile-page.component.html:16,18</note>
-      </notes>
-      <segment>
-        <source>
-    No public information available.
-  </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.clickToCopyCopied?">
-      <notes>
-        <note category="location">app/shared/components/copy-on-click/copy-on-click.component.html:1</note>
-      </notes>
-      <segment>
-        <source>Copied</source>
-      </segment>
-    </unit>
-    <unit id="public_record.printHelpText">
-      <notes>
-        <note category="location">app/profile/components/profile-person/profile-person.component.html:68</note>
-      </notes>
-      <segment>
-        <source>Open a version of this ORCID record formatted for printing.</source>
-      </segment>
-    </unit>
-    <unit id="public_profile.labelKeywords">
-      <notes>
-        <note category="location">app/profile/components/profile-person/profile-person.component.html:71</note>
-      </notes>
-      <segment>
-        <source>Keywords</source>
-      </segment>
-    </unit>
-    <unit id="public_profile.labelCountry">
-      <notes>
-        <note category="location">app/profile/components/profile-person/profile-person.component.html:74</note>
-      </notes>
-      <segment>
-        <source>Country</source>
-      </segment>
-    </unit>
-    <unit id="public_profile.labelAlsoknownas">
-      <notes>
-        <note category="location">app/profile/components/profile-person/profile-person.component.html:79</note>
-      </notes>
-      <segment>
-        <source>Also known as</source>
-      </segment>
-    </unit>
-    <unit id="public_profile.labelWebsites">
-      <notes>
-        <note category="location">app/profile/components/profile-person/profile-person.component.html:82</note>
-      </notes>
-      <segment>
-        <source>Websites</source>
-      </segment>
-    </unit>
-    <unit id="public_profile.labelOtherIDs">
-      <notes>
-        <note category="location">app/profile/components/profile-person/profile-person.component.html:85</note>
-      </notes>
-      <segment>
-        <source>Other IDs</source>
-      </segment>
-    </unit>
-    <unit id="manage.emails">
-      <notes>
-        <note category="location">app/profile/components/profile-person/profile-person.component.html:87</note>
-      </notes>
-      <segment>
-        <source>Emails</source>
-      </segment>
-    </unit>
-    <unit id="public_profile.labelBiography">
-      <notes>
-        <note category="location">app/profile/components/profile-biography/profile-biography.component.html:1,3</note>
-      </notes>
-      <segment>
-        <source>
-  Biography
-</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.present?">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:21</note>
-      </notes>
-      <segment>
-        <source>present</source>
-      </segment>
-    </unit>
-    <unit id="public_record.showDetails">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:36</note>
-      </notes>
-      <segment>
-        <source>Show details</source>
-      </segment>
-    </unit>
-    <unit id="public_record.hideDetails">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:39</note>
-      </notes>
-      <segment>
-        <source>Hide details</source>
-      </segment>
-    </unit>
-    <unit id="groups.common.source">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:54</note>
-      </notes>
-      <segment>
-        <source>Source</source>
-      </segment>
-    </unit>
-    <unit id="groups.common.preferred_source">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:61</note>
-      </notes>
-      <segment>
-        <source>Preferred source</source>
-      </segment>
-    </unit>
-    <unit id="search_results.of">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:64</note>
-      </notes>
-      <segment>
-        <source>of</source>
-      </segment>
-    </unit>
-    <unit id="notifications.show_more">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:69,71</note>
-      </notes>
-      <segment>
-        <source>
-        Show more
-      </source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.show_less?">
-      <notes>
-        <note category="location">app/profile/components/card/card.component.html:73</note>
-      </notes>
-      <segment>
-        <source>Show less</source>
-      </segment>
-    </unit>
-    <unit id="groups.common.added">
-      <notes>
-        <note category="location">app/profile/components/card-detail/card-detail.component.html:16</note>
-      </notes>
-      <segment>
-        <source>Added</source>
-      </segment>
-    </unit>
-    <unit id="groups.common.last_modified">
-      <notes>
-        <note category="description">#titleCase</note>
-        <note category="location">app/profile/components/card-detail/card-detail.component.html:26</note>
-      </notes>
-      <segment>
-        <source>Last Modified</source>
-      </segment>
-    </unit>
-    <unit id="notifications.works_label">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:59,61</note>
-      </notes>
-      <segment>
-        <source>
-  Works
-</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.paginatorNextPageLabel?">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:76,78</note>
-      </notes>
-      <segment>
-        <source>
-  Next page
-</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.paginatorLastPageLabel?">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:80,82</note>
-      </notes>
-      <segment>
-        <source>
-  Previous page
-</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.paginatorFirstPageLabel?">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:87,89</note>
-      </notes>
-      <segment>
-        <source>
-  First page
-</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.paginatorPreviousPageLabel?">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:94,96</note>
-      </notes>
-      <segment>
-        <source>
-  Last page
-</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.paginatorItemsPerPageLabel?">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:101,103</note>
-      </notes>
-      <segment>
-        <source>
-  Items per page
-</source>
-      </segment>
-    </unit>
-    <unit id="ngOrcid.paginatorOf?">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-works/profile-activities-works.component.html:105</note>
-      </notes>
-      <segment>
-        <source> of </source>
-      </segment>
-    </unit>
-    <unit id="workspace_affiliations.organization_id">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-affiliation/profile-activities-affiliation.component.html:47,49</note>
-      </notes>
-      <segment>
-        <source>
-            Organization identifiers
-          </source>
-      </segment>
-    </unit>
-    <unit id="workspace_affiliations.external_ids">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-affiliation/profile-activities-affiliation.component.html:70</note>
-      </notes>
-      <segment>
-        <source>Other organization identifiers provided by</source>
-      </segment>
-    </unit>
-    <unit id="org.orcid.jaxb.model.message.AffiliationType.employment">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:58,59</note>
-      </notes>
-      <segment>
-        <source>
-    Employment</source>
-      </segment>
-    </unit>
-    <unit id="org.orcid.jaxb.model.message.AffiliationType.education_qualification">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:67,68</note>
-      </notes>
-      <segment>
-        <source>
-    Education and qualifications</source>
-      </segment>
-    </unit>
-    <unit id="org.orcid.jaxb.model.message.AffiliationType.distinction_invited_position">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:76,77</note>
-      </notes>
-      <segment>
-        <source>
-    Invited positions and distinctions</source>
-      </segment>
-    </unit>
-    <unit id="org.orcid.jaxb.model.message.AffiliationType.membership_service">
-      <notes>
-        <note category="location">app/profile/components/profile-activities-affiliations/profile-activities-affiliations.component.html:85,86</note>
-      </notes>
-      <segment>
-        <source>
-    Membership and service</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.showing">
@@ -1136,6 +1161,103 @@
         <source>
           SEARCH
         </source>
+      </segment>
+    </unit>
+    <unit id="public-layout.sign_in">
+      <notes>
+        <note category="description">#upperCase</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:27</note>
+        <note category="location">locale/i18n.pseudo.component.html:8</note>
+      </notes>
+      <segment>
+        <source>SIGN IN</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.viewMyOrcid">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:39,41</note>
+      </notes>
+      <segment>
+        <source>
+          View my ORCID record
+        </source>
+      </segment>
+    </unit>
+    <unit id="workspace.notifications">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:47</note>
+        <note category="location">locale/i18n.pseudo.component.html:75</note>
+      </notes>
+      <segment>
+        <source>Inbox</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.accountSetting">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:51</note>
+      </notes>
+      <segment>
+        <source>Account settings </source>
+      </segment>
+    </unit>
+    <unit id="workspace.developer_tools">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:64</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:77</note>
+        <note category="location">locale/i18n.pseudo.component.html:68</note>
+      </notes>
+      <segment>
+        <source>Developer tools </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.selfService">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:85</note>
+      </notes>
+      <segment>
+        <source>Member tools </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.manageMembers">
+      <notes>
+        <note category="description">#sentenceCase</note>
+        <note category="location">app/layout/user-menu/user-menu.component.html:93</note>
+      </notes>
+      <segment>
+        <source>Manage members</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.adminPage">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:101</note>
+      </notes>
+      <segment>
+        <source>Admin page</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.logout">
+      <notes>
+        <note category="location">app/layout/user-menu/user-menu.component.html:105</note>
+      </notes>
+      <segment>
+        <source>Logout</source>
+      </segment>
+    </unit>
+    <unit id="public-layout.amount_ids">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:6,7</note>
+      </notes>
+      <segment>
+        <source>
+          ORCID iDs and counting.</source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.seeMoreStatics">
+      <notes>
+        <note category="location">app/layout/statistics/statistics.component.html:10</note>
+      </notes>
+      <segment>
+        <source>See more statistics</source>
       </segment>
     </unit>
     <unit id="public-layout.for_researchers">

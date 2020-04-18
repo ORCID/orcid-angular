@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
-import { MatIconRegistry } from '@angular/material'
+import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 
 @Component({

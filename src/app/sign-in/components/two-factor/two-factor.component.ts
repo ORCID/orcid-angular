@@ -10,7 +10,6 @@ import {
   ViewChild,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { environment } from '../../../../environments/environment.local'
 import { WINDOW } from '../../../cdk/window'
 
 @Component({
@@ -23,9 +22,9 @@ export class TwoFactorComponent implements AfterViewInit {
   @Input() showBadRecoveryCode: boolean
   @Output() authenticate = new EventEmitter<object>()
 
-  @ViewChild('inputVerificationCode', { static: false })
+  @ViewChild('inputVerificationCode')
   inputVerificationCode: ElementRef
-  @ViewChild('inputRecoveryCode', { static: false })
+  @ViewChild('inputRecoveryCode')
   inputRecoveryCode: ElementRef
 
   recoveryCode = false

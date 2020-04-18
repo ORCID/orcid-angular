@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { environment } from '../../../environments/environment.local'
+import { environment } from '../../../environments/environment'
 import { catchError, retry } from 'rxjs/operators'
 import { SignIn } from '../../types/sign-in.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
-import { PageEvent } from '@angular/material'
+import { PageEvent } from '@angular/material/paginator'
 import { Subscription, timer } from 'rxjs'
 import { nestedListAnimation } from 'src/app/animations'
 import { WorksService } from 'src/app/core/works/works.service'
@@ -32,9 +32,9 @@ export class ProfileActivitiesWorksComponent implements OnInit {
   workPageChangeTimer: Subscription
   _profileWorks: Works
 
-  @ViewChild('worksExpansionPanel', { static: false })
+  @ViewChild('worksExpansionPanel')
   worksExpansionPanel: ElementRef
-  @ViewChild('worksExpansionPanel', { static: false }) paginatoOf: ElementRef
+  @ViewChild('worksExpansionPanel') paginatoOf: ElementRef
 
   constructor(private _worksService: WorksService) {}
 

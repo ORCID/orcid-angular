@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { MatDivider, MatDividerModule } from '@angular/material/divider'
+import { MatExpansionModule } from '@angular/material/expansion'
 import {
-  MatDivider,
-  MatDividerModule,
-  MatExpansionModule,
   MatProgressSpinner,
   MatProgressSpinnerModule,
-} from '@angular/material'
+} from '@angular/material/progress-spinner'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
