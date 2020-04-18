@@ -2,16 +2,6 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RegisterRoutingModule } from './register-routing.module'
 import { RegisterComponent } from './pages/register/register.component'
-import {
-  MatStepperModule,
-  MatInputModule,
-  MatButtonModule,
-  MatCheckboxModule,
-  MatFormFieldModule,
-  MatRadioModule,
-  MatIconModule,
-  MatDialogModule,
-} from '@angular/material'
 import { StepAComponent } from './components/step-a/step-a.component'
 import { StepBComponent } from './components/step-b/step-b.component'
 import { StepCComponent } from './components/step-c/step-c.component'
@@ -24,6 +14,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 // tslint:disable-next-line: max-line-length
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
 import { IsThisYouModule } from '../cdk/is-this-you'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatIconModule } from '@angular/material/icon'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatRadioModule } from '@angular/material/radio'
 
 @NgModule({
   declarations: [

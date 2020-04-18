@@ -25,7 +25,6 @@ import { Observable } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { map } from 'rxjs/operators'
 import { OrcidValidators } from 'src/app/validators'
-import { ErrorStateMatcher } from '@angular/material'
 
 @Component({
   selector: 'app-form-personal',

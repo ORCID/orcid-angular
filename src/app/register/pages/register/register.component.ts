@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
-import { MatStep, MatDialog } from '@angular/material'
 import { StepperSelectionEvent } from '@angular/cdk/stepper'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { switchMap } from 'rxjs/operators'
+import { MatStep } from '@angular/material/stepper'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ import { switchMap } from 'rxjs/operators'
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('lastStep', { static: false }) lastStep: MatStep
+  @ViewChild('lastStep') lastStep: MatStep
 
   platform: PlatformInfo
   FormGroupStepA: FormGroup = new FormGroup({})

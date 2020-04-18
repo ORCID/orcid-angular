@@ -1,5 +1,5 @@
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms'
-import { ErrorStateMatcher } from '@angular/material'
+import { ErrorStateMatcher } from '@angular/material/core/error/error-options'
 
 export class ErrorStateMatcherForFormLevelErrors implements ErrorStateMatcher {
   getControlErrorAtForm: (control: FormControl, errorGroup: string) => string[]

@@ -34,7 +34,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
   _subscriptAnimationState = ''
   loading = false
   submitted = false
-  @ViewChild('passwordChip', { static: true }) passwordChip: MatChip
+  @ViewChild('passwordChip') passwordChip: MatChip
 
   emailFormControl = new FormControl('', [
     Validators.required,

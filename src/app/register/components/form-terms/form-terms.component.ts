@@ -1,34 +1,14 @@
-import {
-  Component,
-  OnInit,
-  forwardRef,
-  SimpleChanges,
-  DoCheck,
-  ElementRef,
-  Optional,
-  Self,
-} from '@angular/core'
+import { Component, OnInit, forwardRef, DoCheck } from '@angular/core'
 import {
   FormControl,
   FormGroup,
   NG_VALUE_ACCESSOR,
   Validators,
   NG_ASYNC_VALIDATORS,
-  NgForm,
-  FormGroupDirective,
-  NgControl,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import { RegisterService } from 'src/app/core/register/register.service'
-import {
-  ErrorStateMatcher,
-  CanUpdateErrorState,
-  CanUpdateErrorStateCtor,
-  mixinErrorState,
-  CanDisableCtor,
-  HasTabIndexCtor,
-} from '@angular/material'
-import { HasErrorState } from '@angular/material/core/typings/common-behaviors/error-state'
+import { ErrorStateMatcher } from '@angular/material/core'
 
 @Component({
   selector: 'app-form-terms',
