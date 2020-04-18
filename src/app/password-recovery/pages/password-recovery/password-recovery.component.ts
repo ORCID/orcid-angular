@@ -15,7 +15,6 @@ import { TLD_REGEXP } from 'src/app/constants'
 import { Observable } from 'rxjs'
 import { PasswordRecovery } from 'src/app/types'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
-import { LOCALE } from 'src/locale/messages.dynamic.en'
 
 @Component({
   selector: 'app-password-recovery',
@@ -92,8 +91,9 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
           // Display server errors
           this.loading = false
           this._snackBar.showErrorMessage(
-            LOCALE['ngOrcid.error'],
-            LOCALE['ngOrcid.passwordError'],
+            $localize`:@@ngOrcid.error:Oh no! An error occurred`,
+            // tslint:disable-next-line: max-line-length
+            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details, please try again, and if this error persists contact support`,
             error.message
           )
         }

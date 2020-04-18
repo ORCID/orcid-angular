@@ -11,7 +11,6 @@ import {
   ElementRef,
   ChangeDetectorRef,
 } from '@angular/core'
-import { LOCALE } from '../../../../locale/messages.dynamic.en'
 import { FormControl, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
@@ -34,8 +33,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   @ViewChild('searchForm') searchForm: ElementRef<HTMLElement>
   isAPhoneScreen = false
   showAdvanceSearch = false
-  ngOrcidSearchInstitutionNamePlaceholder =
-    LOCALE['ngOrcid.search.institutionNamePlaceholder']
+  ngOrcidSearchInstitutionNamePlaceholder = $localize`:@@ngOrcid.search.institutionNamePlaceholder:affiliation or organization ID`
   advanceSearch: FormGroup
   constructor(
     _platform: PlatformInfoService,

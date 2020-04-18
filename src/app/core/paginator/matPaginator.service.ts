@@ -1,15 +1,14 @@
 import { MatPaginatorIntl } from '@angular/material/paginator'
-import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { Injectable } from '@angular/core'
 
 @Injectable()
 export class MatPaginatorIntlImplementation extends MatPaginatorIntl {
-  firstPageLabel = LOCALE['ngOrcid.material.firstPageLabel']
-  itemsPerPageLabel = LOCALE['ngOrcid.material.itemsPerPageLabel']
-  lastPageLabel = LOCALE['ngOrcid.material.lastPageLabel']
-  nextPageLabel = LOCALE['ngOrcid.material.nextPageLabel']
-  previousPageLabel = LOCALE['ngOrcid.material.previousPageLabel']
-  ofLabel = LOCALE['ngOrcid.material.of']
+  firstPageLabel = $localize`:@@ngOrcid.material.firstPageLabel:First page`
+  itemsPerPageLabel = $localize`:@@ngOrcid.material.itemsPerPageLabel:Items per page:`
+  lastPageLabel = $localize`:@@ngOrcid.material.lastPageLabel:Last page`
+  nextPageLabel = $localize`:@@ngOrcid.material.nextPageLabel:Next page`
+  previousPageLabel = $localize`:@@ngOrcid.material.previousPageLabel:Previous page`
+  ofLabel = $localize`:@@ngOrcid.material.of:of`
 
   /** The following function was taken from
   / https://github.com/angular/components/blob/dd37ca57406412c1ebeaec56cab5a517f796d4b9/src/material/paginator/paginator-intl.ts
