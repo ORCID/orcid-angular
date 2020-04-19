@@ -1,5 +1,4 @@
 import { storiesOf } from '@storybook/angular'
-import { MatButtonModule, MatChipsModule } from '@angular/material'
 import { action } from '@storybook/addon-actions'
 import { SearchModule } from 'src/app/search/search.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'

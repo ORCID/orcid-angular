@@ -1,6 +1,4 @@
 import { storiesOf } from '@storybook/angular'
-import { MatButtonModule, MatChipsModule } from '@angular/material'
-import { action } from '@storybook/addon-actions'
 import { environment } from '../environments/environment'
 
 let matChips = `
