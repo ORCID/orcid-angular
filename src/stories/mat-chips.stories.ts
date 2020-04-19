@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/angular'
-import { MatButtonModule, MatChipsModule } from '@angular/material'
 import { action } from '@storybook/addon-actions'
+import { MatChipsModule } from '@angular/material/chips'
 
 let matChips = `
 ## Select/Unselect
