@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/angular'
-import { MatMenuModule, MatButtonModule } from '@angular/material'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatButtonModule } from '@angular/material/button'
 
 let matChips = `
 ## Select/Unselect

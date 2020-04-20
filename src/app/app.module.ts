@@ -9,6 +9,7 @@ import { AppComponent } from './app.component'
 import { CoreModule } from './core/core.module'
 import { LayoutModule } from './layout/layout.module'
 import { BidiModule } from '@angular/cdk/bidi'
+import { PseudoModuleForTranslations as PseudoModule } from 'src/locale/i18n.pseudo.component'
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { BidiModule } from '@angular/cdk/bidi'
     BrowserAnimationsModule,
     LayoutModule,
     BidiModule,
+    PseudoModule, // Remove on angular 10 https://bit.ly/3ezbF4v
     // Environmental dependent modules
     environment.SHOW_TEST_WARNING_BANNER ? EnvironmentBannerModule : [],
   ],

@@ -49,7 +49,7 @@ export class CardDetailLineComponent implements OnInit {
   @HostBinding('class.margin-botton') _marginBotton = true
   @HostBinding('class.secondary-text') _secondaryText = false
   @HostBinding('class.primary-text') _primaryText = true
-  @ViewChild('contentLabel', { static: false }) contentLabel: ElementRef
+  @ViewChild('contentLabel') contentLabel: ElementRef
 
   constructor() {}
 

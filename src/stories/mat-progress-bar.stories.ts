@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/angular'
-import { MatProgressBarModule } from '@angular/material'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 let matChips = `
 ## Select/Unselect

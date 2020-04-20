@@ -55,10 +55,7 @@ readMessageFile('./src/locale/messages.xlf')
   // Save the translation file
   .pipe(
     mergeMap(result => {
-      return from([
-        saveTs(result.values.dynamicValues, result.saveCode),
-        saveJsonAsXlf(result.values.staticValues, result.saveCode),
-      ])
+      return from([saveJsonAsXlf(result.file, result.saveCode)])
     })
   )
   // Waits until all translations are created
@@ -79,8 +76,8 @@ function generateLanguageFile(saveCode, file) {
       )
       // Return the XLF to be saved
       .pipe(
-        map(val => {
-          return { values: val, saveCode: saveCode }
+        map(translatedFile => {
+          return { file: translatedFile, saveCode: saveCode }
         })
       )
       // Report success
@@ -129,27 +126,6 @@ function saveJson(json, name) {
   )
 }
 
-function saveTs(json, name) {
-  return from(
-    new Promise((resolve, reject) => {
-      fs.writeFile(
-        './src/locale/messages.dynamic.' + name + '.ts',
-        '// prettier-ignore\n' +
-          '/* tslint:disable */\n' +
-          'export const LOCALE : {[key:string]: string} = ' +
-          JSON.stringify(json, null, 2),
-        function(err) {
-          if (err) {
-            reject(err)
-          } else {
-            resolve()
-          }
-        }
-      )
-    })
-  )
-}
-
 function readMessageFile(path) {
   return new Observable(observer => {
     fs.readFile(path, 'utf8', (error, data) => {
@@ -167,12 +143,10 @@ function setLanguagePropertiesToLanguageFile(
   XlfFile,
   properties: Properties,
   languageCode
-): Observable<{ staticValues: any; dynamicValues: any }> {
+): Observable<any> {
   return new Observable(observer => {
-    const dynamicValues = {}
     // Read XLF file as a Json to
-    // 1- Extract the dynamic values with the translations and save the 'dynamicValues' object
-    // 2- Edit the original XLF or the 'staticValues' object  to add the translations
+    // Edit the original XLF or the 'staticValues' object  to add the translations
     parseString(XlfFile, (error, staticValues) => {
       if (error) {
         observer.error(error)
@@ -196,14 +170,7 @@ function setLanguagePropertiesToLanguageFile(
           // The translation is added to the XLF file
           element.segment[0].target = []
           element.segment[0].target.push(translation)
-          // If the translation is located on i18n.pseudo.component
-          // the translation is added to the dynamic translations file
-          if (XLFTranslationNoteHas(element, 'location', 'i18n.pseudo')) {
-            dynamicValues[element['$'].id] = translation
-          }
-
           // Check if translations from the template and properties file match
-
           if ('en' === languageCode) {
             checkIfTranslationMatch(
               element['$'].id,
@@ -215,17 +182,12 @@ function setLanguagePropertiesToLanguageFile(
           // the same English template text is added as the translations
         } else {
           element.segment[0].target = element.segment[0].source
-          // If the translation is located on i18n.pseudo.component
-          if (XLFTranslationNoteHas(element, 'location', 'i18n.pseudo')) {
-            dynamicValues[element['$'].id] = element.segment[0].source[0]
-          }
-
           // reports when a translation id does not match with any translation property
           translationNotFound(element['$'].id, languageCode)
         }
       })
-      // return an object containing an XLF file and a JSON file with the dynamic values
-      observer.next({ staticValues, dynamicValues })
+      // return an object containing an XLF file
+      observer.next(staticValues)
       observer.complete()
     })
   })

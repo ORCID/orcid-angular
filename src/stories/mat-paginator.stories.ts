@@ -1,11 +1,7 @@
 import { storiesOf } from '@storybook/angular'
-import {
-  MatButtonModule,
-  MatChipsModule,
-  MatPaginatorModule,
-} from '@angular/material'
 import { action } from '@storybook/addon-actions'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 let matChips = `
 ## Select/Unselect

@@ -48,7 +48,8 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.search,
-    loadChildren: './search/search.module#SearchModule',
+    loadChildren: () =>
+      import('./search/search.module').then(m => m.SearchModule),
   },
   {
     path: '**',

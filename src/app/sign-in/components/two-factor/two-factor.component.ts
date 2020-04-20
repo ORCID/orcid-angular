@@ -22,9 +22,9 @@ export class TwoFactorComponent implements AfterViewInit {
   @Input() showBadRecoveryCode: boolean
   @Output() authenticate = new EventEmitter<object>()
 
-  @ViewChild('inputVerificationCode', { static: false })
+  @ViewChild('inputVerificationCode')
   inputVerificationCode: ElementRef
-  @ViewChild('inputRecoveryCode', { static: false })
+  @ViewChild('inputRecoveryCode')
   inputRecoveryCode: ElementRef
 
   recoveryCode = false

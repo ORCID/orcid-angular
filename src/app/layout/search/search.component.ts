@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
-import { LOCALE } from '../../../locale/messages.dynamic.en'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
@@ -18,13 +17,19 @@ export class SearchComponent implements OnInit {
   togglzEnableUserMenu: boolean
   togglzOrcidAngularSearch: boolean
   whereToSearch = [
-    this.firstLetterUppercase(LOCALE['layout.public-layout.registry']),
-    this.firstLetterUppercase(LOCALE['layout.public-layout.website']),
+    this.firstLetterUppercase(
+      $localize`:@@layout.public-layout.registry:registry`
+    ),
+    this.firstLetterUppercase(
+      $localize`:@@layout.public-layout.website:website`
+    ),
   ]
   whereToSearchSelected = this.firstLetterUppercase(
-    LOCALE['layout.public-layout.registry']
+    $localize`:@@layout.public-layout.registry:registry`
   )
-  searchPlaceHolder = this.firstLetterUppercase(LOCALE['ngOrcid.search'])
+  searchPlaceHolder = this.firstLetterUppercase(
+    $localize`:@@ngOrcid.search:Search...`
+  )
   whatToSearch: string
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -67,7 +72,9 @@ export class SearchComponent implements OnInit {
   search(whereToSearch, whatToSearch) {
     if (
       whereToSearch ===
-      this.firstLetterUppercase(LOCALE['layout.public-layout.registry'])
+      this.firstLetterUppercase(
+        $localize`:@@layout.public-layout.registry:registry`
+      )
     ) {
       if (!this.togglzOrcidAngularSearch) {
         // navigate directly the window location
