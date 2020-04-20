@@ -1,21 +1,23 @@
 <ng-container [formGroup]="form">
-  <mat-form-field appearance="outline">
-    <mat-label>First name</mat-label>
-    <input formControlName="givenNames" matInput />
-    <mat-error *ngIf="form.hasError('required', 'givenNames')">
-      The first name is required
-    </mat-error>
-    <mat-error *ngIf="form.hasError('notPattern', 'givenNames')">
-      The first name format is incorrect
-    </mat-error>
-    <mat-error *ngIf="form.hasError('backendError', 'givenNames')">
-      <div *ngFor="let error of form.getError('backendError', 'givenNames')">
-        {{ error }}
-      </div>
-    </mat-error>
-  </mat-form-field>
+  <div class="input-container">
+    <mat-form-field appearance="outline">
+      <mat-label>First name</mat-label>
+      <input formControlName="givenNames" matInput />
+      <mat-error *ngIf="form.hasError('required', 'givenNames')">
+        The first name is required
+      </mat-error>
+      <mat-error *ngIf="form.hasError('notPattern', 'givenNames')">
+        The first name format is incorrect
+      </mat-error>
+      <mat-error *ngIf="form.hasError('backendError', 'givenNames')">
+        <div *ngFor="let error of form.getError('backendError', 'givenNames')">
+          {{ error }}
+        </div>
+      </mat-error>
+    </mat-form-field>
 
-  <mat-icon aria-hidden="true">info</mat-icon>
+    <mat-icon aria-hidden="true">info</mat-icon>
+  </div>
   <mat-form-field appearance="outline">
     <mat-label>Last name (Optional)</mat-label>
     <input formControlName="familyNames" matInput />

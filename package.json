@@ -59,6 +59,7 @@
     "@angular/platform-browser-dynamic": "^9.1.2",
     "@angular/router": "^9.1.2",
     "@angular/service-worker": "^9.1.2",
+    "@material-extended/mde": "^3.0.0",
     "@types/gtag.js": "^0.0.3",
     "browserslist": "^4.9.1",
     "browserslist-useragent-regexp": "^2.0.1",

@@ -1948,6 +1948,11 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.6.4"
 
+"@material-extended/mde@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@material-extended/mde/-/mde-3.0.0.tgz#c17bca40319814e2db49174f4ffe8733a6ec839c"
+  integrity sha512-13uD9qIxXsNWOzHGcC4nCHOrnoVQfyMga8neC6aiwvRb/RA9sAsdaWAN1p+4vFeBZ9nFKQHNSRz3TeV+Ee1QVQ==
+
 "@mdx-js/loader@^1.5.1":
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-1.5.5.tgz#b658534153b3faab8f93ffc790c868dacc5b43d3"
