@@ -16,7 +16,16 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-icon aria-hidden="true">info</mat-icon>
+    <button
+      mat-icon-button
+      aria-label="info about names"
+      type="button"
+      [mdePopoverTriggerFor]="namesPopover"
+      mdePopoverTriggerOn="click"
+      #namesPopoverTrigger="mdePopoverTrigger"
+    >
+      <mat-icon>info</mat-icon>
+    </button>
   </div>
   <mat-form-field appearance="outline">
     <mat-label>Last name (Optional)</mat-label>
@@ -92,3 +101,28 @@
     ></app-form-personal-additional-emails>
   </ng-container>
 </ng-container>
+
+<mde-popover #namesPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
+  <mat-card style="max-width: 300px" class="mat-elevation-z3">
+    <p>First name is your given name or the name you most commonly go by.</p>
+    <p>First name is your given name. Last name is your family name.</p>
+    <p>
+      You will have a chance to add additional names after you have created your
+      account.
+    </p>
+    <a
+      href="https://support.orcid.org/hc/articles/360006973853"
+      target="orcid.frontend.register.help.more_info.link.text"
+      >More information on names</a
+    >
+    <button
+      mat-button
+      color="primary"
+      aria-label="close"
+      (click)="namesPopoverTrigger.closePopover()"
+      cdkFocusInitial
+    >
+      Ok
+    </button>
+  </mat-card>
+</mde-popover>

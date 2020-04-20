@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatRadioModule } from '@angular/material/radio'
 import { MdePopoverModule } from '@material-extended/mde'
+import { MatCardModule } from '@angular/material/card'
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -51,6 +52,7 @@ import { MdePopoverModule } from '@material-extended/mde'
     MatDialogModule,
     IsThisYouModule,
     MdePopoverModule,
+    MatCardModule,
   ],
 })
 export class RegisterModule {}

@@ -2,6 +2,7 @@ import { OnInit, Input, Component } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { TLD_REGEXP } from 'src/app/constants'
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
+import { trigger, style, transition, animate } from '@angular/animations'
 
 @Component({
   selector: 'app-form-personal-additional-emails',
@@ -19,8 +20,6 @@ export class FormPersonalAdditionalEmailsComponent implements OnInit {
     this.getControlErrorAtFormLevel,
     'allEmailsAreUnique'
   )
-
-  constructor() {}
 
   getControlErrorAtFormLevel(
     control: FormControl | null,
@@ -57,5 +56,7 @@ export class FormPersonalAdditionalEmailsComponent implements OnInit {
     )
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.addAdditionalEmail()
+  }
 }
