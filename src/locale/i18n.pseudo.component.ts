@@ -17,4 +17,4 @@ export class I18nPseudoComponent implements OnInit {
   imports: [],
   declarations: [I18nPseudoComponent],
 })
-export class PseudoModuleForTranslations {}
+export class PseudoModule {}

@@ -1,0 +1,40 @@
+.mat-card.orcid-wizard {
+  box-shadow: none;
+  padding: 0;
+  mat-progress-bar {
+    // Makes the progress bar take 100% of card size
+    left: 0px;
+    position: absolute;
+  }
+  .mat-card-title {
+    margin-top: 40px;
+  }
+
+  .mat-card-header {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+  }
+
+  .mat-card-subtitle {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+  }
+  .mat-card-subtitle {
+    margin-bottom: 0;
+  }
+
+  .columns-12 &,
+  .columns-8 & {
+    margin-top: 25px;
+    mat-card-content {
+      margin: 25px 12% 40px 12%; //12% to approximate the margin on designs
+    }
+  }
+  .columns-4 & {
+    mat-card-content {
+      margin: 25px 0 40px 0;
+    }
+  }
+}
