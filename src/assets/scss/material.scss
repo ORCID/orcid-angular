@@ -8,6 +8,7 @@
 @import './material.orcid.overwrites.scss/menu-theme';
 @import './material.orcid.overwrites.scss/snackbar-theme';
 @import './material.orcid.overwrites.scss/paginator.scss';
+@import './material.orcid.overwrites.scss/card-theme';
 
 // .
 // .
@@ -34,3 +35,4 @@
 @include mat-menu-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/form-field-outline.scss';
 @include mat-snackbar-overwrites($orcid-app-theme);
+@include mat-card-theme-overwrites($orcid-app-theme);

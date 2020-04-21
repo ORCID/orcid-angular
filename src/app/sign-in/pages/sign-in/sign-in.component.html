@@ -1,14 +1,14 @@
-<main>
-  <mat-card class="sign-in-card mat-elevation-z0">
+<main class="row horizontal-center">
+  <mat-card class="orcid-wizard col l6 m6 s4">
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     <mat-card-content>
-      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-      <div class="container">
+      <div>
         <form
           class="row space-around"
           [formGroup]="authorizationForm"
           (ngSubmit)="!show2FA && onSubmit()"
         >
-          <div class="col l12 m6 s4">
+          <div>
             <div class="form-container">
               <p class="mat-card-title" i18n="@@ngOrcid.signin.title">
                 Sign in
@@ -81,24 +81,19 @@
                 >
                 </app-two-factor>
                 <a
-                  class="row mat-button-font display-1 forgot"
+                  class="row mat-button-font forgot"
                   i18n="@@ngOrcid.signin.forgotYourPassword"
                   [routerLink]="['/reset-password']"
                 >
                   Forgot your password or ORCID ID?
                 </a>
                 <div class="row">
-                  <div class="col l6 m6 s4 dontHaveOrcid">
-                    <p
-                      class="row mat-body-1"
-                      i18n="@@ngOrcid.signin.dontHaveOrcid"
+                  <div class="dontHaveOrcid mat-body-1">
+                    <ng-container i18n="@@ngOrcid.signin.dontHaveOrcid">
+                      Don't have an ORCID iD yet?</ng-container
                     >
-                      Don't have an ORCID iD yet?
-                    </p>
-                  </div>
-                  <div class="col l6 m6 s4 dontHaveOrcid">
                     <a
-                      class="row mat-button-font display-1"
+                      class="row mat-button-font register-now"
                       i18n="@@ngOrcid.signin.registerNow"
                       (click)="navigateTo('/register')"
                       >Register now
@@ -121,5 +116,7 @@
         </form>
       </div>
     </mat-card-content>
+
+    <mat-card-footer></mat-card-footer>
   </mat-card>
 </main>
