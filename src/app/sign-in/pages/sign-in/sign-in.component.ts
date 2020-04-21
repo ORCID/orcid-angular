@@ -15,6 +15,7 @@ import { take } from 'rxjs/operators'
     './sign-in.component.scss',
   ],
   providers: [TwoFactorComponent],
+  host: { class: 'container' },
 })
 export class SignInComponent implements OnInit {
   loading = false

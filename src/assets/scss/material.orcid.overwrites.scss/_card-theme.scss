@@ -1,0 +1,19 @@
+// Overwrites for
+// https://github.com/angular/components/blob/9.2.x/src/material/card/_card-theme.scss
+
+@import '~@angular/material/_theming';
+
+@mixin mat-card-theme-overwrites($theme) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $divider-color: mat-color($foreground, divider);
+  $background: map-get($theme, background);
+
+  .mat-card.orcid-wizard {
+    box-shadow: none;
+    .columns-12 &,
+    .columns-8 & {
+      border: solid 1px mat-color($foreground, dividers);
+    }
+  }
+}
