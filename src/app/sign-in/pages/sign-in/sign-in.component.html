@@ -1,5 +1,8 @@
 <main class="row horizontal-center">
   <mat-card class="orcid-wizard col l6 m6 s4">
+    <mat-card-header>
+      <mat-card-title i18n="@@ngOrcid.signin.title"> Sign in </mat-card-title>
+    </mat-card-header>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     <mat-card-content>
       <div>
@@ -10,9 +13,6 @@
         >
           <div>
             <div class="form-container">
-              <p class="mat-card-title" i18n="@@ngOrcid.signin.title">
-                Sign in
-              </p>
               <ng-container *ngIf="!isLoggedIn">
                 <mat-form-field appearance="outline" class="row">
                   <mat-label i18n="@@ngOrcid.signin.username">
