@@ -7,7 +7,6 @@
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
   $divider-color: mat-color($foreground, divider);
-
   $background: map-get($theme, background);
 
   .mat-card.orcid-wizard {
@@ -15,26 +14,6 @@
     .columns-12 &,
     .columns-8 & {
       border: solid 1px mat-color($foreground, dividers);
-      margin-top: 40px;
-
-      mat-card-content {
-        margin: 40px 12%; //12% to approximate the margin on designs
-      }
-      mat-progress-bar {
-        // Makes the progress bar take 100% of card size
-        left: 0px;
-        position: absolute;
-      }
-    }
-    .columns-4 & {
-      mat-card-content {
-        margin: 40px 0;
-      }
-      mat-progress-bar {
-        // Makes the progress bar take 100% of card size
-        left: 0px;
-        position: absolute;
-      }
     }
   }
 }

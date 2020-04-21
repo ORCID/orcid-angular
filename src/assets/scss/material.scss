@@ -36,3 +36,4 @@
 @import './material.orcid.overwrites.scss/form-field-outline.scss';
 @include mat-snackbar-overwrites($orcid-app-theme);
 @include mat-card-theme-overwrites($orcid-app-theme);
+@import './material.orcid.overwrites.scss/card.scss';
