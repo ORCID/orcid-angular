@@ -9,7 +9,7 @@ import { AppComponent } from './app.component'
 import { CoreModule } from './core/core.module'
 import { LayoutModule } from './layout/layout.module'
 import { BidiModule } from '@angular/cdk/bidi'
-import { PseudoModuleForTranslations as PseudoModule } from 'src/locale/i18n.pseudo.component'
+import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 
 @NgModule({
   declarations: [AppComponent],
