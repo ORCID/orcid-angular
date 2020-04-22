@@ -6,6 +6,7 @@ import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { TwoFactorComponent } from '../../components/two-factor/two-factor.component'
 import { take } from 'rxjs/operators'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-sign-in',
@@ -37,8 +38,15 @@ export class SignInComponent implements OnInit {
   constructor(
     private _signIn: SignInService,
     private _userInfo: UserService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    _togglz: TogglzService
   ) {
+    _togglz.getStateOf('ORCID_ANGULAR_SIGNIN').subscribe(value => {
+      if (!value) {
+        this.window.location.href = '/login'
+      }
+    })
+
     _userInfo
       .getUserStatus()
       .pipe(take(1))
