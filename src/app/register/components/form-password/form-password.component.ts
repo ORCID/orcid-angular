@@ -38,6 +38,8 @@ import { RegisterForm } from 'src/app/types/register.endpoint'
   ],
 })
 export class FormPasswordComponent extends BaseForm implements OnInit {
+  @ViewChild(`#passwordPopover`) passwordPopover
+  @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
   hasNumberPatter = HAS_NUMBER
   hasLetterOrSymbolPatter = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm

@@ -1,8 +1,7 @@
-import { OnInit, Input, Component } from '@angular/core'
+import { OnInit, Input, Component, ViewChild } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { TLD_REGEXP } from 'src/app/constants'
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
-import { trigger, style, transition, animate } from '@angular/animations'
 
 @Component({
   selector: 'app-form-personal-additional-emails',
@@ -11,6 +10,8 @@ import { trigger, style, transition, animate } from '@angular/animations'
 })
 export class FormPersonalAdditionalEmailsComponent implements OnInit {
   @Input() additionalEmails: FormGroup
+  @ViewChild(`#namesPopover`) namesPopover
+  @ViewChild(`#namesPopoverTrigger`) namesPopoverTrigger
 
   backendErrorsMatcher = new ErrorStateMatcherForFormLevelErrors(
     this.getControlErrorAtFormLevel,
