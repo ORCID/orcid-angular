@@ -26,17 +26,19 @@
 
 mat-vertical-stepper.orcid-stepper-wizard,
 mat-horizontal-stepper.orcid-stepper-wizard {
-  .mat-step {
-    mat-card {
-      mat-form-field,
-      .input-container {
-        width: 100%;
-      }
+  mat-card {
+    mat-form-field,
+    .input-container {
+      width: 100%;
+    }
 
-      .input-container button {
-        position: absolute !important;
-        margin-top: 10px !important;
-      }
+    .input-container button {
+      position: absolute !important;
+      margin-top: 10px !important;
+    }
+
+    p {
+      margin-bottom: 25px;
     }
   }
 }

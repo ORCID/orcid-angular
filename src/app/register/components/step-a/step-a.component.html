@@ -5,12 +5,12 @@
   </mat-card-header>
 
   <mat-card-content>
-    <div>
-      Per ORCID's
+    <p>
+      <ng-container>ORCID's</ng-container>
       <a href="https://orcid.org/content/orcid-terms-use">terms of use</a>, you
       may only register for an ORCID iD for yourself. Already have an ORCID iD?
       <a routerLink="/signin">Sign In</a>
-    </div>
+    </p>
     <form [formGroup]="formGroup">
       <app-form-personal formControlName="personal"></app-form-personal>
       <div class="actions">
