@@ -45,10 +45,14 @@ export class SignInService {
     let body = new HttpParams()
     body = body.set('email', data.email)
     return this._http
-      .post<Reactivation>(environment.API_WEB + `sendReactivation.json`, body, {
-        headers,
-        withCredentials: true,
-      })
+      .post<Reactivation>(
+        environment.BASE_URL + `sendReactivation.json`,
+        body,
+        {
+          headers,
+          withCredentials: true,
+        }
+      )
       .pipe(
         retry(3),
         catchError(this._errorHandler.handleError)
