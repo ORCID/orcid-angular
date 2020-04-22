@@ -1,0 +1,42 @@
+// Overwrites https://github.com/angular/components/blob/9.2.x/src/material/stepper/stepper.scss
+
+.columns-4 {
+  mat-vertical-stepper.orcid-stepper-wizard {
+    .mat-vertical-stepper-header {
+      padding-left: 0px;
+    }
+
+    .mat-vertical-content-container {
+      margin-left: 10px;
+    }
+
+    .mat-step {
+      mat-form-field {
+        width: calc(100% - 8px);
+      }
+      .input-container {
+        width: 100%;
+        button {
+          margin-left: -8px;
+        }
+      }
+    }
+  }
+}
+
+mat-vertical-stepper.orcid-stepper-wizard,
+mat-horizontal-stepper.orcid-stepper-wizard {
+  .mat-step {
+    mat-card {
+      mat-form-field,
+      .input-container {
+        width: 100%;
+      }
+
+      .input-container button {
+        position: absolute !important;
+        margin-top: 10px !important;
+      }
+    }
+  }
+}
