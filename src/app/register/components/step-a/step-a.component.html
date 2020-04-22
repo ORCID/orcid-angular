@@ -1,7 +1,22 @@
-<form [formGroup]="formGroup">
-  <app-form-personal formControlName="personal"></app-form-personal>
-  <div class="actions">
-    <button mat-button color="primary">Back</button>
-    <button mat-raised-button matStepperNext color="primary">Next</button>
-  </div>
-</form>
+<mat-card class="orcid-wizard">
+  <mat-card-header>
+    <mat-card-title>Create your ORCID iD</mat-card-title>
+    <mat-card-subtitle>This is step 1 of 3 </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div>
+      Per ORCID's
+      <a href="https://orcid.org/content/orcid-terms-use">terms of use</a>, you
+      may only register for an ORCID iD for yourself. Already have an ORCID iD?
+      <a routerLink="/signin">Sign In</a>
+    </div>
+    <form [formGroup]="formGroup">
+      <app-form-personal formControlName="personal"></app-form-personal>
+      <div class="actions">
+        <button mat-button color="primary">Back</button>
+        <button mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,12 +1,21 @@
-<form [formGroup]="formGroup">
-  <app-form-password
-    formControlName="password"
-    [personalData]="personalData"
-  ></app-form-password>
-  <app-form-notifications
-    formControlName="sendOrcidNews"
-  ></app-form-notifications>
+<mat-card class="orcid-wizard">
+  <mat-card-header>
+    <mat-card-title>Create your ORCID iD</mat-card-title>
+    <mat-card-subtitle>This is step 2 of 3 </mat-card-subtitle>
+  </mat-card-header>
 
-  <button mat-button color="primary" matStepperPrevious>Back</button>
-  <button mat-raised-button matStepperNext color="primary">Next</button>
-</form>
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <app-form-password
+        formControlName="password"
+        [personalData]="personalData"
+      ></app-form-password>
+      <app-form-notifications
+        formControlName="sendOrcidNews"
+      ></app-form-notifications>
+
+      <button mat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button matStepperNext color="primary">Next</button>
+    </form>
+  </mat-card-content>
+</mat-card>

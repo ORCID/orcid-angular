@@ -1,11 +1,12 @@
 <main class="container ">
   <div class="row space-around">
-    <div class="col l6 m6 s4">
+    <div class="col l6 m8 s4" [ngClass]="{ 'no-gutters': platform.columns4 }">
       <!-- MOBILE PRESENTATION -->
       <mat-vertical-stepper
         [linear]="isLinear"
         #stepper
-        *ngIf="platform.tabletOrHandset"
+        *ngIf="platform.columns8 || platform.columns4"
+        class="orcid-stepper-wizard"
       >
         <mat-step [stepControl]="FormGroupStepA">
           <ng-template matStepLabel>Personal data</ng-template>
@@ -34,8 +35,9 @@
       <mat-horizontal-stepper
         [linear]="isLinear"
         #stepper
-        *ngIf="platform.desktop"
+        *ngIf="platform.columns12"
         labelPosition="bottom"
+        class="orcid-stepper-wizard"
       >
         <mat-step [stepControl]="FormGroupStepA">
           <ng-template matStepLabel>Personal data</ng-template>
