@@ -12,6 +12,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-header',
@@ -25,9 +26,10 @@ export class HeaderComponent implements OnInit {
   menu: ApplicationMenuItem[] = this.createMenuList(menu)
   user: UserInfo
   togglz: Config
+  togglzOrcidAngularSignin: boolean
 
   constructor(
-    _router: Router,
+    private _router: Router,
     _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
     _userInfo: UserService,
@@ -49,6 +51,9 @@ export class HeaderComponent implements OnInit {
     _togglz.getTogglz().subscribe(data => {
       this.togglz = data
     })
+    _togglz
+      .getStateOf('ORCID_ANGULAR_SIGNIN')
+      .subscribe(value => (this.togglzOrcidAngularSignin = value))
   }
 
   ngOnInit() {}
@@ -226,6 +231,14 @@ export class HeaderComponent implements OnInit {
   }
 
   goto(url) {
-    this.window.location.href = url
+    if (url === 'signin') {
+      if (!this.togglzOrcidAngularSignin) {
+        this.window.location.href = environment.BASE_URL + url
+      } else {
+        this._router.navigate(['/signin'])
+      }
+    } else {
+      this.window.location.href = environment.BASE_URL + url
+    }
   }
 }
