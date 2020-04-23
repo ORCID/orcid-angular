@@ -10,7 +10,9 @@
   >
     <mat-form-field appearance="outline">
       <mat-label>
-        <ng-container>Additional email</ng-container>
+        <ng-container i18n="@@register.additionalEmails"
+          >Additional email</ng-container
+        >
         {{
           additionalEmailControl.key !== '1' ? additionalEmailControl.key : ''
         }}
@@ -26,6 +28,7 @@
           additionalEmails.hasError('email', additionalEmailControl.key) ||
           additionalEmails.hasError('pattern', additionalEmailControl.key)
         "
+        i18n="@@register.invalidEmail"
       >
         Invalid email format
       </mat-error>
@@ -36,6 +39,7 @@
             'allEmailsAreUnique'
           )
         "
+        i18n="@@register.additionalEmailsCanBeDuplicated"
       >
         Additional email cannot match primary email
       </mat-error>
@@ -72,19 +76,25 @@
   class="mat-button-font"
 >
   <mat-icon>add</mat-icon>
-  <ng-container>Add another email</ng-container>
+  <ng-container i18n="@@register.additionalEmailAdd"
+    >Add another email</ng-container
+  >
 </a>
 
 <mde-popover #namesPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
   <mat-card style="max-width: 300px" class="mat-elevation-z3">
-    Ensure that you never lose access to your ORCID record by registering all of
-    your email addresses on your account.
+    <ng-container i18n="@@register.additionalEmailInfo"
+      >Ensure that you never lose access to your ORCID record by registering all
+      of your email addresses on your account.</ng-container
+    >
+
     <button
       mat-button
       color="primary"
       aria-label="close"
       (click)="namesPopoverTrigger.closePopover()"
       cdkFocusInitial
+      i18n="@@shared.ok"
     >
       Ok
     </button>

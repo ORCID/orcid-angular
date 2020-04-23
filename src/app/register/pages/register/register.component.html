@@ -9,21 +9,30 @@
         class="orcid-stepper-wizard"
       >
         <mat-step [stepControl]="FormGroupStepA">
-          <ng-template matStepLabel>Personal data</ng-template>
+          <ng-template
+            matStepLabel
+            i18n="@@register.personalData"
+            i18n="@@register.personalData"
+            >Personal data</ng-template
+          >
           <app-step-a
             [(formGroup)]="FormGroupStepA"
             (submit)="submitStepA()"
           ></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
-          <ng-template matStepLabel>Security and visibility</ng-template>
+          <ng-template matStepLabel i18n="@@register.personalSecurityVisibility"
+            >Security and visibility</ng-template
+          >
           <app-step-b
             [(formGroup)]="FormGroupStepB"
             [personalData]="personalData"
           ></app-step-b>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepC" #lastStep>
-          <ng-template matStepLabel>Notifications and terms</ng-template>
+          <ng-template matStepLabel i18n="@@register.personalNotificationsTerm"
+            >Notifications and terms</ng-template
+          >
           <app-step-c
             [(formGroup)]="FormGroupStepC"
             (submit)="register('vertical')"
@@ -40,14 +49,18 @@
         class="orcid-stepper-wizard"
       >
         <mat-step [stepControl]="FormGroupStepA">
-          <ng-template matStepLabel>Personal data</ng-template>
+          <ng-template matStepLabel i18n="@@register.personalData"
+            >Personal data</ng-template
+          >
           <app-step-a
             [(formGroup)]="FormGroupStepA"
             (submit)="submitStepA()"
           ></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
-          <ng-template matStepLabel>Security and visibility</ng-template>
+          <ng-template matStepLabel i18n="@@register.personalSecurityVisibility"
+            >Security and visibility</ng-template
+          >
           <app-step-b
             [(formGroup)]="FormGroupStepB"
             [personalData]="personalData"
@@ -55,7 +68,9 @@
           ></app-step-b>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepC" #lastStep>
-          <ng-template matStepLabel>Notifications and terms</ng-template>
+          <ng-template matStepLabel i18n="@@register.personalNotificationsTerm"
+            >Notifications and terms</ng-template
+          >
           <app-step-c
             [(formGroup)]="FormGroupStepC"
             (submit)="register('horizontal')"
