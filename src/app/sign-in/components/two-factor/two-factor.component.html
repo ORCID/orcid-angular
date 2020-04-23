@@ -19,7 +19,7 @@
     >
 
     <mat-error
-      i18n="@@ngOrcid.signin.invalidEmail"
+      i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
       *ngIf="verificationFormControl.hasError('required')"
       >Authentication code is required
     </mat-error>
@@ -81,7 +81,7 @@
       >{{ inputRecoveryCode.value?.length || 0 }}/10</mat-hint
     >
     <mat-error
-      i18n="@@ngOrcid.signin.invalidEmail"
+      i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
       *ngIf="recoveryCodeFormControl.hasError('required')"
       >Recovery code is required
     </mat-error>
