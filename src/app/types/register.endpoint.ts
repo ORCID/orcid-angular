@@ -43,3 +43,7 @@ export interface VisibilityValue {
   getRequiredMessage?: any
   visibility: 'PUBLIC' | 'LIMITED' | 'PRIVATE'
 }
+export interface RegisterConfirmResponse {
+  errors?: any[]
+  url: string
+}

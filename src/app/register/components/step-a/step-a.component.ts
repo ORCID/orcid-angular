@@ -6,6 +6,7 @@ import { BaseStep } from '../BaseStep'
   selector: 'app-step-a',
   templateUrl: './step-a.component.html',
   styleUrls: ['./step-a.component.scss'],
+  preserveWhitespaces: true,
 })
 export class StepAComponent extends BaseStep implements OnInit {
   constructor(private _formBuilder: FormBuilder) {

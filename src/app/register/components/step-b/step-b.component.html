@@ -1,7 +1,11 @@
 <mat-card class="orcid-wizard">
   <mat-card-header>
-    <mat-card-title>Create your ORCID iD</mat-card-title>
-    <mat-card-subtitle>This is step 2 of 3 </mat-card-subtitle>
+    <mat-card-title role="heading" aria-level="1"
+      >Create your ORCID iD</mat-card-title
+    >
+    <mat-card-subtitle role="header" aria-level="2"
+      >This is step 2 of 3</mat-card-subtitle
+    >
   </mat-card-header>
 
   <mat-card-content>
@@ -13,9 +17,10 @@
       <app-form-notifications
         formControlName="sendOrcidNews"
       ></app-form-notifications>
-
-      <button mat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-raised-button matStepperNext color="primary">Next</button>
+      <div class="step-actions">
+        <button mat-button color="primary" matStepperPrevious>GO BACK</button>
+        <button mat-raised-button matStepperNext color="primary">NEXT</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

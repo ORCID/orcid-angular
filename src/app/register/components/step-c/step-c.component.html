@@ -1,7 +1,11 @@
 <mat-card class="orcid-wizard">
   <mat-card-header>
-    <mat-card-title>Create your ORCID iD</mat-card-title>
-    <mat-card-subtitle>This is step 2 of 3 </mat-card-subtitle>
+    <mat-card-title role="heading" aria-level="1"
+      >Create your ORCID iD</mat-card-title
+    >
+    <mat-card-subtitle role="header" aria-level="2"
+      >This is step 3 of 3</mat-card-subtitle
+    >
   </mat-card-header>
 
   <mat-card-content>
@@ -10,10 +14,12 @@
         formControlName="activitiesVisibilityDefault"
       ></app-form-visibility>
       <app-form-terms formControlName="termsOfUse"></app-form-terms>
-      <button mat-button color="primary" matStepperPrevious type="button">
-        Back
-      </button>
-      <button mat-raised-button color="primary">Register</button>
+      <div class="step-actions">
+        <button mat-button color="primary" matStepperPrevious type="button">
+          GO BACK
+        </button>
+        <button mat-raised-button color="primary">REGISTER</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

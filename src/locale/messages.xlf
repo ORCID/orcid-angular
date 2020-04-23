@@ -499,7 +499,7 @@
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:24,25</note>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:86,87</note>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:35,36</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:34,35</note>
         <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:37,38</note>
       </notes>
       <segment>
@@ -624,27 +624,25 @@
     </unit>
     <unit id="ngOrcid.signin.title">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:13,15</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:4</note>
       </notes>
       <segment>
-        <source>
-                Sign in
-              </source>
+        <source> Sign in </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.username">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:18,20</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:17,19</note>
       </notes>
       <segment>
         <source>
-                    Email or 16-digit ORCID iD
-                  </source>
+                  Email or 16-digit ORCID iD
+                </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.usernameHint">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:23</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:22</note>
       </notes>
       <segment>
         <source>example@email.com or 0000-0012-3456-7890</source>
@@ -652,16 +650,16 @@
     </unit>
     <unit id="ngOrcid.signin.requiredUsername">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:29,30</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:28,29</note>
       </notes>
       <segment>
         <source>Email or 16-digit ORCID iD required
-                  </source>
+                </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.password">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:41</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:39</note>
       </notes>
       <segment>
         <source>Password</source>
@@ -669,50 +667,49 @@
     </unit>
     <unit id="ngOrcid.signin.invalidPassword">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:48,49</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:45,46</note>
       </notes>
       <segment>
         <source>Invalid password
-                  </source>
+                </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.button">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:61,63</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:58,60</note>
       </notes>
       <segment>
         <source>
-                  SIGN IN
-                </source>
+                SIGN IN
+              </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.forgotYourPassword">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:87,89</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:84,86</note>
       </notes>
       <segment>
         <source>
-                  Forgot your password or ORCID ID?
-                </source>
+                Forgot your password or ORCID ID?
+              </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.dontHaveOrcid">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:95,97</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:89,90</note>
       </notes>
       <segment>
         <source>
-                      Don&apos;t have an ORCID iD yet?
-                    </source>
+                    Don&apos;t have an ORCID iD yet?</source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.registerNow">
       <notes>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:104,105</note>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:96,97</note>
       </notes>
       <segment>
         <source>Register now
-                    </source>
+                  </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.institutionalAccount">

@@ -14,6 +14,7 @@ import { RegisterService } from 'src/app/core/register/register.service'
   selector: 'app-form-visibility',
   templateUrl: './form-visibility.component.html',
   styleUrls: ['./form-visibility.component.scss'],
+  preserveWhitespaces: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

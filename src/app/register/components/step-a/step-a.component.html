@@ -1,21 +1,30 @@
 <mat-card class="orcid-wizard">
   <mat-card-header>
-    <mat-card-title>Create your ORCID iD</mat-card-title>
-    <mat-card-subtitle>This is step 1 of 3 </mat-card-subtitle>
+    <mat-card-title role="heading" aria-level="1"
+      >Create your ORCID iD</mat-card-title
+    >
+    <mat-card-subtitle role="header" aria-level="2"
+      >This is step 1 of 3</mat-card-subtitle
+    >
   </mat-card-header>
 
   <mat-card-content>
     <p>
       <ng-container>ORCID's</ng-container>
-      <a href="https://orcid.org/content/orcid-terms-use">terms of use</a>, you
-      may only register for an ORCID iD for yourself. Already have an ORCID iD?
-      <a routerLink="/signin">Sign In</a>
+      <a
+        href="https://orcid.org/content/orcid-terms-use"
+        class="mat-button-font"
+        rel="noopener"
+        target="_blank"
+        >terms of use</a
+      >, you may only register for an ORCID iD for yourself. Already have an
+      ORCID iD? <a routerLink="/signin" class="mat-button-font">Sign In</a>
     </p>
     <form [formGroup]="formGroup">
       <app-form-personal formControlName="personal"></app-form-personal>
-      <div class="actions">
-        <button mat-button color="primary">Back</button>
-        <button mat-raised-button matStepperNext color="primary">Next</button>
+      <div class="step-actions">
+        <button mat-button color="primary">GO BACK</button>
+        <button mat-raised-button matStepperNext color="primary">NEXT</button>
       </div>
     </form>
   </mat-card-content>

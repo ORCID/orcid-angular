@@ -70,13 +70,13 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
 
   passwordDoesNotContainUserEmails(): ValidatorFn {
     return (control: FormControl) => {
-      const password = control.value
+      const password: string = control.value
       let hasError = false
 
       if (this.personalData && password) {
         Object.keys(this.personalData.emailsAdditional).forEach(key => {
           const additionalEmail = this.personalData.emailsAdditional[key].value
-          if (additionalEmail === password) {
+          if (password.indexOf(additionalEmail) >= 0) {
             hasError = true
           }
         })
@@ -85,7 +85,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       if (
         this.personalData &&
         this.personalData.email &&
-        this.personalData.email.value === password
+        password.indexOf(this.personalData.email.value) >= 0
       ) {
         hasError = true
       }

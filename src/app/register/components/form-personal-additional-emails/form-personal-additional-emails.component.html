@@ -33,17 +33,17 @@
         *ngFor="
           let error of getControlErrorAtFormLevel(
             additionalEmailControl.value,
-            'backendErrors'
+            'allEmailsAreUnique'
           )
         "
       >
-        {{ error }}
+        Additional email cannot match primary email
       </mat-error>
       <mat-error
         *ngFor="
           let error of getControlErrorAtFormLevel(
             additionalEmailControl.value,
-            'allEmailsAreUnique'
+            'backendErrors'
           )
         "
       >
@@ -65,8 +65,13 @@
   </div>
 </ng-container>
 
-<a (click)="addAdditionalEmail()" class="mat-button-font">
-  <mat-icon aria-hidden="true">add</mat-icon>
+<a
+  role="button"
+  tabindex="0"
+  (click)="addAdditionalEmail()"
+  class="mat-button-font"
+>
+  <mat-icon>add</mat-icon>
   <ng-container>Add another email</ng-container>
 </a>
 

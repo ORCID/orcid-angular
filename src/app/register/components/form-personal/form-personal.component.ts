@@ -30,6 +30,7 @@ import { OrcidValidators } from 'src/app/validators'
   selector: 'app-form-personal',
   templateUrl: './form-personal.component.html',
   styleUrls: ['./form-personal.component.scss'],
+  preserveWhitespaces: true,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -90,7 +91,12 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
         ],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
-      familyNames: new FormControl(''),
+      familyNames: new FormControl('', {
+        validators: [
+          OrcidValidators.notPattern(URL_REGEXP),
+          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+        ],
+      }),
       emails: this.emails,
     })
   }

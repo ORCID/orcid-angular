@@ -26,6 +26,7 @@ import { ErrorStateMatcher } from '@angular/material/core'
       multi: true,
     },
   ],
+  preserveWhitespaces: true,
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
@@ -55,9 +56,6 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    console.log('TEST')
-    console.log(this._errorStateMatcher.isErrorState)
-
     this.errorState = this._errorStateMatcher.isErrorState(
       this.termsOfUse,
       null

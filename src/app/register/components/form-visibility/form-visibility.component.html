@@ -1,27 +1,36 @@
 <ng-container [formGroup]="form">
   <h3 class="mat-subheading-2">Visibility settings</h3>
   <p>
-    Your ORCID iD connects with your ORCID record that can contain links to your
-    research activities, affiliations, awards, other versions of your name, and
-    more. You control this content and who can see it. More information on
-    visibility settings.
+    <ng-container>
+      ORCID iD connects with your ORCID record that can contain links to your
+      research activities, affiliations, awards, other versions of your name,
+      and more. You control this content and who can see it.
+    </ng-container>
+    <a
+      href="https://support.orcid.org/hc/articles/360006897614"
+      target="_blank"
+      rel="noopener"
+    ></a
+    >More information on visibility settings.
   </p>
   <p>
     By default, who should be able to see information added to your ORCID
     Record?
   </p>
-  <mat-radio-group
-    formControlName="activitiesVisibilityDefault"
-    color="primary"
-  >
-    <mat-radio-button [value]="visibilityOptions[0]">
-      Everyone (87% of users choose this)
-    </mat-radio-button>
-    <mat-radio-button [value]="visibilityOptions[1]">
-      Trusted parties (5% of users choose this)
-    </mat-radio-button>
-    <mat-radio-button [value]="visibilityOptions[2]">
-      Only me (8% of users choose this)
-    </mat-radio-button>
-  </mat-radio-group>
+  <p>
+    <mat-radio-group
+      formControlName="activitiesVisibilityDefault"
+      color="primary"
+    >
+      <mat-radio-button [value]="visibilityOptions[0]">
+        Everyone (87% of users choose this)
+      </mat-radio-button>
+      <mat-radio-button [value]="visibilityOptions[1]">
+        Trusted parties (5% of users choose this)
+      </mat-radio-button>
+      <mat-radio-button [value]="visibilityOptions[2]">
+        Only me (8% of users choose this)
+      </mat-radio-button>
+    </mat-radio-group>
+  </p>
 </ng-container>

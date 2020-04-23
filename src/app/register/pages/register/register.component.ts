@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild, Injectable, Inject } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { StepperSelectionEvent } from '@angular/cdk/stepper'
@@ -8,6 +8,8 @@ import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { switchMap } from 'rxjs/operators'
 import { MatStep } from '@angular/material/stepper'
 import { MatDialog } from '@angular/material/dialog'
+import { WINDOW } from 'src/app/cdk/window'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -27,7 +29,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     _platformInfo: PlatformInfoService,
     private _register: RegisterService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    @Inject(WINDOW) private window: Window
   ) {
     _platformInfo.get().subscribe(platform => {
       this.platform = platform
@@ -38,19 +41,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register(value) {
-    console.log(value)
     this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
       this.FormGroupStepB.valid &&
       this.FormGroupStepC.valid
     ) {
-      const form = this._register.formGroupToFullRegistrationForm(
-        this.FormGroupStepA,
-        this.FormGroupStepB,
-        this.FormGroupStepC
-      )
-      console.log(form)
       this._register
         .backendRegisterFormValidate(
           this.FormGroupStepA,
@@ -67,20 +63,14 @@ export class RegisterComponent implements OnInit {
           )
         )
         .subscribe(response => {
-          console.log(response)
+          if (response.url) {
+            this.window.location.href = response.url
+          } else {
+            // TODO @leomendoza123 HANDLE ERROR show toaster
+          }
         })
     } else {
-      console.log('WAIT SOMETHING IS NOT VALID SOMEWHERE ')
-      console.log('FormGroupStepA', this.FormGroupStepA)
-      console.log('FormGroupStepB', this.FormGroupStepB)
-      console.log('FormGroupStepC', this.FormGroupStepC)
-      console.log({
-        ...this.FormGroupStepA.value.personal,
-        ...this.FormGroupStepB.value.password,
-        ...this.FormGroupStepB.value.sendOrcidNews,
-        ...this.FormGroupStepC.value.activitiesVisibilityDefault,
-        ...this.FormGroupStepC.value.termsOfUse,
-      })
+      // TODO @leomendoza123 HANDLE ERROR show toaster
     }
   }
 
@@ -140,7 +130,6 @@ export class RegisterComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(confirmRegistration => {
       if (confirmRegistration) {
-        // this._register.confirmRegistration(registrationForm)
       }
     })
   }

@@ -15,6 +15,7 @@ import {
   RegisterForm,
   DuplicatedName,
   VisibilityValue,
+  RegisterConfirmResponse,
 } from 'src/app/types/register.endpoint'
 import { Value } from 'src/app/types/common.endpoint'
 
@@ -76,17 +77,22 @@ export class RegisterService {
       const value = {}
       value[controlName] = { value: control.value }
 
-      return this.validateRegisterValue(controlName, value).pipe(
-        map(res => {
-          if (res[controlName].errors && res[controlName].errors.length > 0) {
-            const error = {
-              backendError: res[controlName].errors,
+      return this.validateRegisterValue(controlName, value)
+        .pipe(
+          map(res => {
+            if (res[controlName].errors && res[controlName].errors.length > 0) {
+              const error = {
+                backendError: res[controlName].errors,
+              }
+              return error
             }
-            return error
-          }
-          return null
-        })
-      )
+            return null
+          })
+        )
+        .pipe(
+          retry(3),
+          catchError(this._errorHandler.handleError)
+        )
     }
   }
 
@@ -96,16 +102,17 @@ export class RegisterService {
       if (!value.emailsAdditional || value.emailsAdditional.length === 0) {
         return of(null)
       }
-      return this.validateRegisterValue('emailsAdditional', value).pipe(
-        map(response => {
-          // Add errors to additional emails controls
-          return this.setFormGroupEmailErrors(response, 'backendErrors')
-        }),
-        tap(backedError => {
-          console.log('BACKEND FORM VALIDATION IS')
-          console.log(backedError)
-        })
-      )
+      return this.validateRegisterValue('emailsAdditional', value)
+        .pipe(
+          map(response => {
+            // Add errors to additional emails controls
+            return this.setFormGroupEmailErrors(response, 'backendErrors')
+          })
+        )
+        .pipe(
+          retry(3),
+          catchError(this._errorHandler.handleError)
+        )
     }
   }
 
@@ -117,16 +124,17 @@ export class RegisterService {
       if (value.password.value === '' || value.passwordConfirm.value === '') {
         return of(null)
       }
-      return this.validateRegisterValue('password', value).pipe(
-        map(response => {
-          // Add errors to additional emails controls
-          return this.setFormGroupPasswordErrors(response, 'backendErrors')
-        }),
-        tap(backedError => {
-          console.log('BACKEND FORM VALIDATION IS')
-          console.log(backedError)
-        })
-      )
+      return this.validateRegisterValue('password', value)
+        .pipe(
+          map(response => {
+            // Add errors to additional emails controls
+            return this.setFormGroupPasswordErrors(response, 'backendErrors')
+          })
+        )
+        .pipe(
+          retry(3),
+          catchError(this._errorHandler.handleError)
+        )
     }
   }
 
@@ -134,13 +142,15 @@ export class RegisterService {
     familyNames: string
     givenNames: string
   }) {
-    return this._http.get<DuplicatedName[]>(
-      environment.API_WEB + `dupicateResearcher.json`,
-      {
+    return this._http
+      .get<DuplicatedName[]>(environment.API_WEB + `dupicateResearcher.json`, {
         params: names,
         withCredentials: true,
-      }
-    )
+      })
+      .pipe(
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
   }
 
   public setFormGroupEmailErrors(
@@ -305,13 +315,18 @@ export class RegisterService {
     registrationForm: RegisterForm,
     type?: 'shibboleth'
   ): Observable<any> {
-    return this._http.post(
-      `${environment.API_WEB}${type ? '/' + type : ''}'/registerConfirm.json`,
-      registrationForm,
-      {
-        withCredentials: true,
-      }
-    )
+    return this._http
+      .post(
+        `${environment.API_WEB}${type ? '/' + type : ''}'/registerConfirm.json`,
+        registrationForm,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
   }
 
   getRegisterForm(): Observable<RegisterForm> {
@@ -319,6 +334,10 @@ export class RegisterService {
       .get<RegisterForm>(`${environment.API_WEB}register.json`, {
         withCredentials: true,
       })
+      .pipe(
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
       .pipe(map(form => (this.backendRegistrationForm = form)))
   }
 
@@ -333,10 +352,12 @@ export class RegisterService {
       StepB,
       StepC
     )
-    return this._http.post<RegisterForm>(
-      `${environment.API_WEB}register.json`,
-      registerForm
-    )
+    return this._http
+      .post<RegisterForm>(`${environment.API_WEB}register.json`, registerForm)
+      .pipe(
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
   }
 
   register(
@@ -344,7 +365,7 @@ export class RegisterService {
     StepB: FormGroup,
     StepC: FormGroup,
     type?: 'shibboleth'
-  ): Observable<RegisterForm> {
+  ): Observable<RegisterConfirmResponse> {
     // TODO: @amontenegro Why does the backend require this?
     this.backendRegistrationForm.valNumClient =
       this.backendRegistrationForm.valNumServer / 2
@@ -353,10 +374,15 @@ export class RegisterService {
       StepB,
       StepC
     )
-    return this._http.post<RegisterForm>(
-      `${environment.API_WEB}registerConfirm.json`,
-      Object.assign(this.backendRegistrationForm, registerForm)
-    )
+    return this._http
+      .post<RegisterConfirmResponse>(
+        `${environment.API_WEB}registerConfirm.json`,
+        Object.assign(this.backendRegistrationForm, registerForm)
+      )
+      .pipe(
+        retry(3),
+        catchError(this._errorHandler.handleError)
+      )
   }
 
   formGroupToFullRegistrationForm(

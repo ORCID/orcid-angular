@@ -40,5 +40,11 @@ mat-horizontal-stepper.orcid-stepper-wizard {
     p {
       margin-bottom: 25px;
     }
+    .step-actions {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 28px;
+    }
   }
 }
