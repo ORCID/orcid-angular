@@ -14,7 +14,6 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   public onTouchedFunction
   constructor() {}
   writeValue(val: any): void {
-    console.log(JSON.stringify(val))
     if (val != null && val !== undefined && val !== '') {
       this.form.setValue(val, { emitEvent: false })
     }
@@ -33,9 +32,6 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   validate(c: AbstractControl): Observable<ValidationErrors | null> {
     return this.form.statusChanges.pipe(
       startWith(this.form.status),
-      tap(value => {
-        console.log('current value: ', value, c.value)
-      }),
       filter(value => value !== 'PENDING'),
       take(1),
       map(() => {
