@@ -1207,7 +1207,7 @@
     <unit id="register.invalidEmail">
       <notes>
         <note category="location">app/register/components/form-personal/form-personal.component.html:73,75</note>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:102,104</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:109,111</note>
         <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:32,34</note>
       </notes>
       <segment>
@@ -1218,7 +1218,7 @@
     </unit>
     <unit id="register.confirmEmail">
       <notes>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:87</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:94</note>
       </notes>
       <segment>
         <source>Confirm primary email</source>
@@ -1226,7 +1226,7 @@
     </unit>
     <unit id="register.confirmEmailRequired">
       <notes>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:93,95</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:100,102</note>
       </notes>
       <segment>
         <source>
@@ -1236,7 +1236,7 @@
     </unit>
     <unit id="register.confirmationEmailNotMatch">
       <notes>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:108,110</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:115,117</note>
       </notes>
       <segment>
         <source>
@@ -1359,15 +1359,16 @@
     </unit>
     <unit id="register.quarterlyEmail">
       <notes>
-        <note category="location">app/register/components/form-notifications/form-notifications.component.html:22</note>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:22,23</note>
       </notes>
       <segment>
-        <source>Please send me quarterly emails about new ORCID features and tips.</source>
+        <source>Please send me quarterly emails about new ORCID features and
+      tips.</source>
       </segment>
     </unit>
     <unit id="register.quarterlyEmailVerified">
       <notes>
-        <note category="location">app/register/components/form-notifications/form-notifications.component.html:25,26</note>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:26,27</note>
       </notes>
       <segment>
         <source>To receive these emails, you will also need to verify your primary email
@@ -1376,7 +1377,7 @@
     </unit>
     <unit id="register.reviewAfterRegistered">
       <notes>
-        <note category="location">app/register/components/form-notifications/form-notifications.component.html:31,34</note>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:32,35</note>
       </notes>
       <segment>
         <source>
@@ -1548,6 +1549,14 @@
         <source>
       Ok
     </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.clickToCopyCopied?">
+      <notes>
+        <note category="location">app/shared/components/copy-on-click/copy-on-click.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Copied</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.showing">

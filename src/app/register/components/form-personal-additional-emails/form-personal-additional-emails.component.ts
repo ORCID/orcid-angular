@@ -52,7 +52,6 @@ export class FormPersonalAdditionalEmailsComponent implements OnInit {
       controlName,
       new FormControl('', {
         validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
-        // asyncValidators: this._register.backendValueValidate(controlName),
       })
     )
   }
