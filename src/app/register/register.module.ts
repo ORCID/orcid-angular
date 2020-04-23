@@ -24,6 +24,7 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { MatRadioModule } from '@angular/material/radio'
 import { MdePopoverModule } from '@material-extended/mde'
 import { MatCardModule } from '@angular/material/card'
+import { SharedModule } from '../shared/shared.module'
 @NgModule({
   declarations: [
     RegisterComponent,

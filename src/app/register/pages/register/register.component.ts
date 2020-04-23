@@ -75,31 +75,29 @@ export class RegisterComponent implements OnInit {
   }
 
   submitStepA() {
-    console.log(this.FormGroupStepA)
     // Update the personal data object is required after submit since is an input for StepB
-    this.personalData = this.FormGroupStepA.value.personal
+    if (this.FormGroupStepA.valid) {
+      this.personalData = this.FormGroupStepA.value.personal
 
-    this._register
-      .checkDuplicatedResearcher({
-        familyNames: this.personalData.familyNames.value,
-        givenNames: this.personalData.givenNames.value,
-      })
-      .subscribe(value => {
-        if (value.length > 0) {
-          this.openDialog(value)
-        } else {
-          // continueRegistration
-        }
-      })
+      this._register
+        .checkDuplicatedResearcher({
+          familyNames: this.personalData.familyNames.value,
+          givenNames: this.personalData.givenNames.value,
+        })
+        .subscribe(value => {
+          if (value.length > 0) {
+            this.openDialog(value)
+          } else {
+            // continueRegistration
+          }
+        })
+      // TODO @leomendoza123 HANDLE ERROR show toaster
+    }
   }
 
-  submitStepB() {
-    console.log(this.FormGroupStepB)
-  }
+  submitStepB() {}
 
-  submitStepC() {
-    console.log(this.FormGroupStepC)
-  }
+  submitStepC() {}
 
   openDialog(duplicateRecords): void {
     const dialogParams = {
@@ -109,15 +107,6 @@ export class RegisterComponent implements OnInit {
 
       data: {
         duplicateRecords,
-        // titleLabel: this.titleLabel.nativeElement.innerHTML,
-        // bodyLabel:this.bodyLabel.nativeElement.innerHTML,
-        // contactLabel: this.contactLabel.nativeElement.innerHTML,
-        // firstNameLabel: this.firstNameLabel.nativeElement.innerHTML,
-        // affiliationsLabel: this.affiliationsLabel.nativeElement.innerHTML,
-        // dateCreatedLabel: this.dateCreatedLabel.nativeElement.innerHTML,
-        // viewRecordLabel: this.viewRecordLabel.nativeElement.innerHTML,
-        // signinLabel: this.signinLabel.nativeElement.innerHTML,
-        // continueLabel: this.continueLabel.nativeElement.innerHTML,
       },
     }
 

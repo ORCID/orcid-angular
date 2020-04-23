@@ -78,7 +78,14 @@
         <div
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
-          {{ error }}
+          <ng-container
+            *ngIf="
+              error !== 'orcid.frontend.verify.duplicate_email';
+              else: emailExistError
+            "
+          >
+            {{ error }}
+          </ng-container>
         </div>
       </mat-error>
     </mat-form-field>
@@ -86,7 +93,7 @@
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >
-      <input formControlName="confirmEmail" matInput />
+      <input formControlName="confirmEmail" matInput (paste)="(false)" />
       <mat-error
         *ngIf="form.hasError('required', 'emails.confirmEmail')"
         i18n="@@register.confirmEmailRequired"
@@ -156,3 +163,11 @@
     </button>
   </mat-card>
 </mde-popover>
+
+<!--
+  TODO @leomendoza123 Handle server side errors with a separated shared component
+-->
+<ng-template #emailExistError>
+  This email already exists in our system. Would you like to
+  <a routerLink="/signin">sign in</a><ng-container>?</ng-container>
+</ng-template>
