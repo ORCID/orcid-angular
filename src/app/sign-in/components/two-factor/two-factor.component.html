@@ -19,13 +19,13 @@
     >
 
     <mat-error
-      i18n="@@ngOrcid.signin.invalidEmail"
+      i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
       *ngIf="verificationFormControl.hasError('required')"
       >Authentication code is required
     </mat-error>
 
     <mat-error
-      i18n="@@ngOrcid.signin.badVerificationCodeLength"
+      i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
       *ngIf="
         verificationFormControl.hasError('minlength') ||
         verificationFormControl.hasError('maxlength')
@@ -73,7 +73,7 @@
     class="row two-factor"
     *ngIf="recoveryCode"
   >
-    <mat-label i18n="@@ngOrcid.signin.2fa.Recovery code">
+    <mat-label i18n="@@ngOrcid.signin.2fa.recoveryCode">
       Recovery code
     </mat-label>
     <input matInput #inputRecoveryCode formControlName="recoveryCode" />
@@ -81,13 +81,13 @@
       >{{ inputRecoveryCode.value?.length || 0 }}/10</mat-hint
     >
     <mat-error
-      i18n="@@ngOrcid.signin.invalidEmail"
+      i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
       *ngIf="recoveryCodeFormControl.hasError('required')"
       >Recovery code is required
     </mat-error>
 
     <mat-error
-      i18n="@@ngOrcid.signin.badRecoveryCodeLength"
+      i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
       *ngIf="
         recoveryCodeFormControl.hasError('minlength') ||
         recoveryCodeFormControl.hasError('maxlength')
@@ -101,7 +101,7 @@
     color="primary"
     class="row mat-elevation-z0 two-factor"
     type="submit"
-    i18n="@@ngOrcid.signin.authenticate"
+    i18n="@@ngOrcid.signin.2fa.authenticate"
   >
     AUTHENTICATE
   </button>
