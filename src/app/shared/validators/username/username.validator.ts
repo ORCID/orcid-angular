@@ -1,17 +1,16 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms'
-import { EMAIL_REGEXP, ORCID_REGEXP, TLD_REGEXP } from '../../../constants'
+import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
+import { ORCID_REGEXP, TLD_REGEXP } from '../../../constants'
 
 export class UsernameValidator {
   static orcidOrEmail(control: AbstractControl): ValidationErrors | null {
-    if (!control.value) {
-      return null
-    }
+    const emailErrors = Validators.email(control)
+    const tldError = Validators.pattern(TLD_REGEXP)(control)
+    const orcidError = Validators.pattern(ORCID_REGEXP)(control)
 
     if (
-      !(
-        ORCID_REGEXP.test(control.value) ||
-        (TLD_REGEXP.test(control.value) && EMAIL_REGEXP.test(control.value))
-      )
+      orcidError &&
+      orcidError.pattern &&
+      ((tldError && tldError.pattern) || (emailErrors && emailErrors.email))
     ) {
       return { invalidUserName: true }
     }
