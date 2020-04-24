@@ -13,6 +13,7 @@ import { Config } from 'src/app/types/togglz.endpoint'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-header',
@@ -27,13 +28,15 @@ export class HeaderComponent implements OnInit {
   user: UserInfo
   togglz: Config
   togglzOrcidAngularSignin: boolean
+  signinRegisterButton = true
 
   constructor(
     private _router: Router,
     _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
     _userInfo: UserService,
-    _togglz: TogglzService
+    _togglz: TogglzService,
+    location: Location
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
@@ -54,6 +57,9 @@ export class HeaderComponent implements OnInit {
     _togglz
       .getStateOf('ORCID_ANGULAR_SIGNIN')
       .subscribe(value => (this.togglzOrcidAngularSignin = value))
+    _router.events.subscribe(
+      () => (this.signinRegisterButton = location.path() !== '/signin')
+    )
   }
 
   ngOnInit() {}

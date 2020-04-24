@@ -5,6 +5,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { SearchService } from 'src/app/core/search/search.service'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-search',
@@ -16,6 +17,7 @@ export class SearchComponent implements OnInit {
   platform: PlatformInfo
   togglzEnableUserMenu: boolean
   togglzOrcidAngularSearch: boolean
+  signinRegisterButton = true
   whereToSearch = [
     this.firstLetterUppercase(
       $localize`:@@layout.public-layout.registry:registry`
@@ -38,7 +40,8 @@ export class SearchComponent implements OnInit {
     _togglz: TogglzService,
     private router: Router,
     private route: ActivatedRoute,
-    public _changeDetection: ChangeDetectorRef
+    public _changeDetection: ChangeDetectorRef,
+    location: Location
   ) {
     _platform.platformSubject.subscribe(data => {
       this.platform = data
@@ -50,7 +53,9 @@ export class SearchComponent implements OnInit {
       .getStateOf('ORCID_ANGULAR_SEARCH')
       .subscribe(value => (this.togglzOrcidAngularSearch = value))
 
-    this.route.queryParams.subscribe(value => this.setWhatToSearch(value))
+    router.events.subscribe(
+      () => (this.signinRegisterButton = location.path() !== '/signin')
+    )
   }
 
   changeWhereToSearch(item) {
