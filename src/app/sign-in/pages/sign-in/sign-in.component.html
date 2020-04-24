@@ -25,12 +25,12 @@
                 <mat-error
                   i18n="@@ngOrcid.signin.requiredUsername"
                   *ngIf="usernameFormControl.hasError('required')"
-                  >Email or 16-digit ORCID iD required
+                  >Email or 16-digit ORCID iD is required
                 </mat-error>
 
                 <mat-error
                   i18n="@@ngOrcid.signin.invalidEmail"
-                  *ngIf="usernameFormControl.hasError('pattern')"
+                  *ngIf="usernameFormControl.hasError('invalidUserName')"
                   >Use the format example@email.com or 0000-0001-2345-6789
                 </mat-error>
               </mat-form-field>
