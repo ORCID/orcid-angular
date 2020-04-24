@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { SearchService } from 'src/app/core/search/search.service'
 import { Location } from '@angular/common'
+import { ApplicationRoutes } from '../../constants'
 
 @Component({
   selector: 'app-search',
@@ -54,7 +55,9 @@ export class SearchComponent implements OnInit {
       .subscribe(value => (this.togglzOrcidAngularSearch = value))
 
     router.events.subscribe(
-      () => (this.signinRegisterButton = location.path() !== '/signin')
+      () =>
+        (this.signinRegisterButton =
+          location.path() !== `/${ApplicationRoutes.signin}`)
     )
   }
 

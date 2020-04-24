@@ -14,6 +14,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
 import { Location } from '@angular/common'
+import { ApplicationRoutes } from '../../constants'
 
 @Component({
   selector: 'app-header',
@@ -58,7 +59,9 @@ export class HeaderComponent implements OnInit {
       .getStateOf('ORCID_ANGULAR_SIGNIN')
       .subscribe(value => (this.togglzOrcidAngularSignin = value))
     _router.events.subscribe(
-      () => (this.signinRegisterButton = location.path() !== '/signin')
+      () =>
+        (this.signinRegisterButton =
+          location.path() !== `/${ApplicationRoutes.signin}`)
     )
   }
 
