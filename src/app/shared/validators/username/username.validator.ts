@@ -8,23 +8,19 @@ export class UsernameValidator {
     const orcidError = Validators.pattern(ORCID_REGEXP)(control)
     const orcidUriError = Validators.pattern(ORCID_URI_REGEXP)(control)
 
-    if (control.value.startsWith('http')) {
-      if (
-        orcidUriError &&
-        orcidUriError.pattern &&
-        ((tldError && tldError.pattern) || (emailErrors && emailErrors.email))
-      ) {
-        return { invalidUserName: true }
-      }
-    } else {
-      if (
-        orcidError &&
-        orcidError.pattern &&
-        ((tldError && tldError.pattern) || (emailErrors && emailErrors.email))
-      ) {
-        return { invalidUserName: true }
-      }
-    }
+    control.value.startsWith('http')
+      ? validateUsername(orcidUriError, tldError, emailErrors)
+      : validateUsername(orcidError, tldError, emailErrors)
     return null
+  }
+}
+
+function validateUsername(orcidError, tldError, emailErrors) {
+  if (
+    orcidError &&
+    orcidError.pattern &&
+    ((tldError && tldError.pattern) || (emailErrors && emailErrors.email))
+  ) {
+    return { invalidUserName: true }
   }
 }
