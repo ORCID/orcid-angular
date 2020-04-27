@@ -14,9 +14,9 @@ const glob = require('glob')
 // Run updates on index.html files across languages
 glob
   .sync('./dist/*/index.html', { ignore: './dist/storybook/*' })
-  .forEach(file => {
+  .forEach((file) => {
     const options = getOptionsObjet(file)
-    read(file, data => {
+    read(file, (data) => {
       data = uniqueLength(data, options)
       data = buildInfo(data, options)
       data = googleAnalytics(data, options)
@@ -40,7 +40,7 @@ glob
 // Rename all .js files to concat the language code
 const hashRegExp = RegExp(/[a-z0-9]{20}/gm)
 const replacedHash = {}
-glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach(file => {
+glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   const options = getOptionsObjet(file)
   const hash = file.match(hashRegExp)
   renameSync(file, file.replace('.js', '-' + options.languageCode + '.js'))
@@ -51,9 +51,9 @@ glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach(file => {
 // Replace all the `runtime*.js` references to match updated hash values
 glob
   .sync('./dist/*/runtime-*.js', { ignore: './dist/storybook/*' })
-  .forEach(file => {
+  .forEach((file) => {
     const options = getOptionsObjet(file)
-    read(file, data => {
+    read(file, (data) => {
       data = addLanguageCodeToHashesOnJSFiles(
         data,
         Object.keys(replacedHash),
