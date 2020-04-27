@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment'
 import { catchError, retry } from 'rxjs/operators'
 import { SignIn } from '../../types/sign-in.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
+import { getOrcidNumber } from '../../constants'
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,12 @@ export class SignInService {
     const headers = new HttpHeaders()
     headers.set('Content-Type', 'application/x-www-form-urlencoded')
     let body = new HttpParams()
-    body = body.set('userId', data.username)
+    body = body.set(
+      'userId',
+      data.username.startsWith('http')
+        ? getOrcidNumber(data.username)
+        : data.username
+    )
     body = body.set('password', data.password)
     if (data.verificationCode) {
       body = body.set('verificationCode', data.verificationCode)
