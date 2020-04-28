@@ -47,4 +47,5 @@ export const GRID_COLUMNS = {
 // this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
 export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
 export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
-export const ORCID_URI_REGEXP = /(http[s]?:\/\/)(orcid\.org\/|qa\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dX]$/
+// https://regex101.com/r/V95col/1
+export const ORCID_URI_REGEXP = /(http[s]?:\/\/)(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dX]$/

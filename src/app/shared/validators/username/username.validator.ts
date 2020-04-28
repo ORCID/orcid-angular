@@ -8,10 +8,9 @@ export class UsernameValidator {
     const orcidError = Validators.pattern(ORCID_REGEXP)(control)
     const orcidUriError = Validators.pattern(ORCID_URI_REGEXP)(control)
 
-    control.value.startsWith('http')
+    return control.value.startsWith('http')
       ? validateUsername(orcidUriError, tldError, emailErrors)
       : validateUsername(orcidError, tldError, emailErrors)
-    return null
   }
 }
 
@@ -23,4 +22,6 @@ function validateUsername(orcidError, tldError, emailErrors) {
   ) {
     return { invalidUserName: true }
   }
+
+  return null
 }
