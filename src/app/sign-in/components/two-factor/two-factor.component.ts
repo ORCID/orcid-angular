@@ -16,6 +16,7 @@ import { WINDOW } from '../../../cdk/window'
   selector: 'app-two-factor',
   templateUrl: './two-factor.component.html',
   styleUrls: ['./two-factor.component.scss'],
+  preserveWhitespaces: true,
 })
 export class TwoFactorComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean

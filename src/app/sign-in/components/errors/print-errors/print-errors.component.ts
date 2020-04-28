@@ -5,6 +5,7 @@ import { WINDOW } from '../../../../cdk/window'
   selector: 'app-print-errors',
   templateUrl: './print-errors.component.html',
   styleUrls: ['./print-errors.component.scss'],
+  preserveWhitespaces: true,
 })
 export class PrintErrorsComponent implements OnInit {
   @Input() badCredentials: boolean
