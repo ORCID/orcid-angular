@@ -1,6 +1,6 @@
 import { HttpParameterCodec } from '@angular/common/http'
 
-export class CustomEncoderComponent implements HttpParameterCodec {
+export class CustomEncoder implements HttpParameterCodec {
   encodeKey(key: string): string {
     return encodeURIComponent(key)
   }
