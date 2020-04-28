@@ -74,9 +74,12 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  submitStepA() {
+  afterStepASubmitted() {
+    console.log('SUBMIT')
     // Update the personal data object is required after submit since is an input for StepB
+    console.log(this.FormGroupStepA.value)
     if (this.FormGroupStepA.valid) {
+      console.log('SUBMIT!!')
       this.personalData = this.FormGroupStepA.value.personal
 
       this._register
@@ -121,5 +124,12 @@ export class RegisterComponent implements OnInit {
       if (confirmRegistration) {
       }
     })
+  }
+
+  selectionChange(event: StepperSelectionEvent) {
+    console.log(event)
+    if (event.previouslySelectedIndex === 0) {
+      this.afterStepASubmitted()
+    }
   }
 }

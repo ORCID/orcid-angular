@@ -6,6 +6,7 @@
         [linear]="isLinear"
         #stepper
         *ngIf="platform.columns8 || platform.columns4"
+        (selectionChange)="selectionChange($event)"
         class="orcid-stepper-wizard"
       >
         <mat-step [stepControl]="FormGroupStepA">
@@ -15,10 +16,7 @@
             i18n="@@register.personalData"
             >Personal data</ng-template
           >
-          <app-step-a
-            [(formGroup)]="FormGroupStepA"
-            (submit)="submitStepA()"
-          ></app-step-a>
+          <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
           <ng-template matStepLabel i18n="@@register.personalSecurityVisibility"
@@ -47,15 +45,13 @@
         *ngIf="platform.columns12"
         labelPosition="bottom"
         class="orcid-stepper-wizard"
+        (selectionChange)="selectionChange($event)"
       >
         <mat-step [stepControl]="FormGroupStepA">
           <ng-template matStepLabel i18n="@@register.personalData"
             >Personal data</ng-template
           >
-          <app-step-a
-            [(formGroup)]="FormGroupStepA"
-            (submit)="submitStepA()"
-          ></app-step-a>
+          <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
           <ng-template matStepLabel i18n="@@register.personalSecurityVisibility"
