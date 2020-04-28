@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators'
 import { SignIn } from '../../types/sign-in.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
+import { getOrcidNumber } from '../../constants'
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,9 @@ export class SignInService {
       'application/x-www-form-urlencoded;charset=utf-8'
     )
     let body = new HttpParams({ encoder: new CustomEncoder() })
-      .set('userId', data.username)
+      .set('userId', data.username.startsWith('http')
+        ? getOrcidNumber(data.username)
+        : data.username)
       .set('password', data.password)
     if (data.verificationCode) {
       body = body.set('verificationCode', data.verificationCode)
