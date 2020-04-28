@@ -4,7 +4,7 @@ import * as environmentSandbox from '../src/environments/environment.sandbox'
 import { writeFile, readFile } from 'fs'
 
 export function save(data, options) {
-  writeFile(options.file, data, 'utf8', err => {
+  writeFile(options.file, data, 'utf8', (err) => {
     if (err) {
       console.log(err)
       throw err
