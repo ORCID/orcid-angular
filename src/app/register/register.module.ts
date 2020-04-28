@@ -25,6 +25,7 @@ import { MatRadioModule } from '@angular/material/radio'
 import { MdePopoverModule } from '@material-extended/mde'
 import { MatCardModule } from '@angular/material/card'
 import { SharedModule } from '../shared/shared.module'
+import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -54,6 +55,7 @@ import { SharedModule } from '../shared/shared.module'
     IsThisYouModule,
     MdePopoverModule,
     MatCardModule,
+    RecaptchaModule,
   ],
 })
 export class RegisterModule {}
