@@ -39,27 +39,9 @@ testem.log
 .DS_Store
 Thumbs.db
 .vscode/settings.json
-src/locale/messages.dynamic.ja.ts
-src/locale/messages.dynamic.ar.ts
-src/locale/messages.dynamic.ca.ts
-src/locale/messages.dynamic.cs.ts
-src/locale/messages.dynamic.es.ts
-src/locale/messages.dynamic.fr.ts
-src/locale/messages.dynamic.it.ts
-src/locale/messages.dynamic.ko.ts
-src/locale/messages.dynamic.lr.ts
-src/locale/messages.dynamic.pt.ts
-src/locale/messages.dynamic.rl.ts
-src/locale/messages.dynamic.ru.ts
-src/locale/messages.dynamic.uk.ts
-src/locale/messages.dynamic.xx.ts
-src/locale/messages.dynamic.zh_CN.ts
-src/locale/messages.dynamic.zh_TW.ts
-src/locale/messages.dynamic.source.ts
 src/locale/translate-file-generator.js
 *.xlf
 src/locale/messages.translation.log.json
-scripts/*.js
 sripts/lighthouse/environment.ts.js
 
 
