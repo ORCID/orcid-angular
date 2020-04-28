@@ -30,9 +30,11 @@ export class DeactivatedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.deactivatedForm.patchValue({
-      email: this.email,
-    })
+    if (this.email.includes('@')) {
+      this.deactivatedForm.patchValue({
+        email: this.email,
+      })
+    }
   }
 
   onSubmit() {
@@ -43,7 +45,7 @@ export class DeactivatedComponent implements OnInit {
     if (this.deactivatedForm.valid) {
       this.loading = true
       const $deactivate = this._signIn.reactivation(value)
-      $deactivate.subscribe(data => {
+      $deactivate.subscribe((data) => {
         this.loading = false
         this.showReactivationSent = data.sent
       })
