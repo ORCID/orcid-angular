@@ -1,4 +1,10 @@
-import { OnInit, Input, Component, ViewChild } from '@angular/core'
+import {
+  OnInit,
+  Input,
+  Component,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { TLD_REGEXP } from 'src/app/constants'
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
@@ -8,7 +14,7 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
   templateUrl: './form-personal-additional-emails.component.html',
   styleUrls: ['./form-personal-additional-emails.component.scss'],
 })
-export class FormPersonalAdditionalEmailsComponent implements OnInit {
+export class FormPersonalAdditionalEmailsComponent {
   @Input() additionalEmails: FormGroup
   @ViewChild(`#namesPopover`) namesPopover
   @ViewChild(`#namesPopoverTrigger`) namesPopoverTrigger
@@ -54,9 +60,5 @@ export class FormPersonalAdditionalEmailsComponent implements OnInit {
         validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
       })
     )
-  }
-
-  ngOnInit(): void {
-    this.addAdditionalEmail()
   }
 }

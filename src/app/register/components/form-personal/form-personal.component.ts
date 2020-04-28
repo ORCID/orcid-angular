@@ -50,7 +50,11 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   }
 
   emails: FormGroup = new FormGroup({})
-  additionalEmails: FormGroup = new FormGroup({})
+  additionalEmails: FormGroup = new FormGroup({
+    '0': new FormControl('', {
+      validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
+    }),
+  })
 
   ngOnInit() {
     this.emails = new FormGroup(
