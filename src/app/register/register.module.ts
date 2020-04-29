@@ -24,8 +24,8 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { MatRadioModule } from '@angular/material/radio'
 import { MdePopoverModule } from '@material-extended/mde'
 import { MatCardModule } from '@angular/material/card'
-import { SharedModule } from '../shared/shared.module'
 import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
+import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -38,6 +38,7 @@ import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
     FormVisibilityComponent,
     FormTermsComponent,
     FormPersonalAdditionalEmailsComponent,
+    FormAntiRobotsComponent,
   ],
   imports: [
     CommonModule,

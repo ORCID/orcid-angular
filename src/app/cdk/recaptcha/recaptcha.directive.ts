@@ -12,6 +12,8 @@ import {
   NgZone,
   ElementRef,
   LOCALE_ID,
+  Output,
+  EventEmitter,
 } from '@angular/core'
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
@@ -42,6 +44,8 @@ interface WindowWithCaptcha extends Window {
   ],
 })
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
+  @Output() captchaFail = new EventEmitter<boolean>()
+  @Output() captchaLoaded = new EventEmitter<number>()
   private onChange: (value: string) => void
   private onTouched: (value: string) => void
 
@@ -68,9 +72,12 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
         'expired-callback': (response: string) => {
           this.ngZone.run(() => this.onExpired())
         },
-        // 'error-callback' : TODO @leomendoza123 handle captcha error callback
+        'error-callback': () => {
+          this.ngZone.run(() => this.onCaptchaFail())
+        },
       }
-      this.render(this.element.nativeElement, config)
+      const id = this.render(this.element.nativeElement, config)
+      this.captchaLoaded.emit(id)
     }
   }
 
@@ -84,6 +91,11 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   onSuccess(token: string) {
     this.onChange(token)
     this.onTouched(token)
+  }
+
+  onCaptchaFail() {
+    this.captchaFail.emit(true)
+    // TODO: @leomendoza123 display toaster to show the error
   }
 
   private render(element: HTMLElement, config): number {

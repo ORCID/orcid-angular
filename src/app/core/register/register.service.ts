@@ -311,6 +311,20 @@ export class RegisterService {
     return { sendOrcidNews }
   }
 
+  formGroupToRecaptchaForm(
+    formGroup: FormGroup,
+    widgetId: number
+  ): RegisterForm {
+    let value: RegisterForm
+    if (formGroup && formGroup.controls && formGroup.controls['captcha']) {
+      value = {
+        grecaptcha: { value: formGroup.controls['captcha'].value },
+        grecaptchaWidgetId: { value: widgetId.toString() },
+      }
+    }
+    return value
+  }
+
   confirmRegistration(
     registrationForm: RegisterForm,
     type?: 'shibboleth'
@@ -396,6 +410,7 @@ export class RegisterService {
       ...StepB.value.sendOrcidNews,
       ...StepC.value.activitiesVisibilityDefault,
       ...StepC.value.termsOfUse,
+      ...StepC.value.captcha,
     }
   }
 }

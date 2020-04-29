@@ -1,0 +1,8 @@
+<ng-container [formGroup]="form">
+  <div
+    appRecaptcha
+    (captchaFail)="captchaFail($event)"
+    (captchaLoaded)="captchaLoaded($event)"
+    formControlName="captcha"
+  ></div>
+</ng-container>

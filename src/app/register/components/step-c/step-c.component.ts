@@ -15,6 +15,7 @@ export class StepCComponent extends BaseStep implements OnInit {
     this.formGroup = this._formBuilder.group({
       activitiesVisibilityDefault: [''],
       termsOfUse: [''],
+      captcha: [''],
     })
   }
 }
