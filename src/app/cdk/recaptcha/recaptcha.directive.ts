@@ -2,7 +2,7 @@
 // https://netbasal.com/how-to-integrate-recaptcha-in-your-angular-forms-400c43344d5c
 // and
 // https://github.com/DethAriel/ng-recaptcha
-// Using the Orcid WINDOW injectable
+// Using the Orcid WINDOW injectable, environment and Angular i18n directly
 
 import {
   Directive,
@@ -11,6 +11,7 @@ import {
   OnInit,
   NgZone,
   ElementRef,
+  LOCALE_ID,
 } from '@angular/core'
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
@@ -47,6 +48,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
 
   constructor(
     @Inject(WINDOW) private window: WindowWithCaptcha,
+    @Inject(LOCALE_ID) public locale: string,
     private ngZone: NgZone,
     private element: ElementRef
   ) {}
@@ -91,7 +93,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
 
   addScript() {
     const script = this.window.document.createElement('script')
-    const lang = 'en'
+    const lang = this.locale ? '&hl=' + this.locale : ''
     script.src = `https://www.google.com/recaptcha/api.js?onload=orcidReCaptchaOnLoad&render=explicit${lang}`
     script.async = true
     script.defer = true
