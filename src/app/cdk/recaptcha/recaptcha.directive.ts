@@ -1,3 +1,9 @@
+// This component was build based on
+// https://netbasal.com/how-to-integrate-recaptcha-in-your-angular-forms-400c43344d5c
+// and
+// https://github.com/DethAriel/ng-recaptcha
+// Using the Orcid WINDOW injectable
+
 import {
   Directive,
   Input,
@@ -7,7 +13,7 @@ import {
   ElementRef,
 } from '@angular/core'
 import { WINDOW } from '../window'
-import { ControlValueAccessor } from '@angular/forms'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 
 export interface ReCaptchaConfig {
   theme?: 'dark' | 'light'
@@ -20,16 +26,21 @@ interface WindowWithCaptcha extends Window {
   grecaptcha: {
     render: (ElementRef, ReCaptchaConfig) => number
   }
-  reCaptchaLoad: () => void
+  orcidReCaptchaOnLoad: () => void
 }
 
 @Directive({
   selector: '[appRecaptcha]',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: RecaptchaDirective,
+      multi: true,
+    },
+  ],
 })
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   key = '6LcH3woTAAAAACtvRjiHlFdBR-T7bTM4pZc1Q1TP'
-  @Input() config: ReCaptchaConfig = {}
-  @Input() lang: string
   private onChange: (value: string) => void
   private onTouched: (value: string) => void
   private widgetId: number
@@ -46,12 +57,17 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   }
 
   registerReCaptchaCallback() {
-    this.window.reCaptchaLoad = () => {
+    this.window.orcidReCaptchaOnLoad = () => {
       const config = {
         ...this.config,
         sitekey: this.key,
-        callback: this.onSuccess.bind(this),
-        'expired-callback': this.onExpired.bind(this),
+        callback: (response: string) => {
+          this.ngZone.run(() => this.onSuccess(response))
+        },
+
+        'expired-callback': (response: string) => {
+          this.ngZone.run(() => this.onExpired())
+        },
       }
       this.widgetId = this.render(this.element.nativeElement, config)
     }
@@ -65,10 +81,8 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   }
 
   onSuccess(token: string) {
-    this.ngZone.run(() => {
-      this.onChange(token)
-      this.onTouched(token)
-    })
+    this.onChange(token)
+    this.onTouched(token)
   }
 
   private render(element: HTMLElement, config): number {
@@ -77,8 +91,8 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
 
   addScript() {
     const script = this.window.document.createElement('script')
-    const lang = this.lang ? '&hl=' + this.lang : ''
-    script.src = `https://www.google.com/recaptcha/api.js?onload=reCaptchaLoad&render=explicit${lang}`
+    const lang = 'en'
+    script.src = `https://www.google.com/recaptcha/api.js?onload=orcidReCaptchaOnLoad&render=explicit${lang}`
     script.async = true
     script.defer = true
     this.window.document.body.appendChild(script)
