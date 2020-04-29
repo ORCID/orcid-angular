@@ -6,6 +6,7 @@ export const environment = {
   BASE_URL: '//qa.orcid.org/',
   BLOG_NEWS: 'https://qa.orcid.org/about/news',
   GOOGLE_ANALYTICS: 'UA-17492803-6',
+  GOOGLE_RECAPTCHA: '6LcH3woTAAAAACtvRjiHlFdBR-T7bTM4pZc1Q1TP',
   HOTJAR_ANALYTICS: 'hjid:1229886',
   SHOW_TEST_WARNING_BANNER: true,
   CAN_DISABLE_TEST_WARNING_BANNER: true,

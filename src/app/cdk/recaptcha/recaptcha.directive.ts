@@ -15,6 +15,7 @@ import {
 } from '@angular/core'
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { environment } from 'src/environments/environment'
 
 export interface ReCaptchaConfig {
   theme?: 'dark' | 'light'
@@ -41,10 +42,8 @@ interface WindowWithCaptcha extends Window {
   ],
 })
 export class RecaptchaDirective implements OnInit, ControlValueAccessor {
-  key = '6LcH3woTAAAAACtvRjiHlFdBR-T7bTM4pZc1Q1TP'
   private onChange: (value: string) => void
   private onTouched: (value: string) => void
-  private widgetId: number
 
   constructor(
     @Inject(WINDOW) private window: WindowWithCaptcha,
@@ -61,8 +60,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
   registerReCaptchaCallback() {
     this.window.orcidReCaptchaOnLoad = () => {
       const config = {
-        ...this.config,
-        sitekey: this.key,
+        sitekey: environment.GOOGLE_RECAPTCHA,
         callback: (response: string) => {
           this.ngZone.run(() => this.onSuccess(response))
         },
@@ -70,8 +68,9 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
         'expired-callback': (response: string) => {
           this.ngZone.run(() => this.onExpired())
         },
+        // 'error-callback' : TODO @leomendoza123 handle captcha error callback
       }
-      this.widgetId = this.render(this.element.nativeElement, config)
+      this.render(this.element.nativeElement, config)
     }
   }
 
