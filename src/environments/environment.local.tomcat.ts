@@ -8,7 +8,7 @@ export const environment = {
   BASE_URL: '//localhost/',
   BLOG_NEWS: 'https://localhost/about/news',
   GOOGLE_ANALYTICS: 'UA-0000000-00',
-  GOOGLE_RECAPTCHA: '6LcH3woTAAAAACtvRjiHlFdBR-T7bTM4pZc1Q1TP',
+  GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
   HOTJAR_ANALYTICS: 'hjid:0000000',
   SHOW_TEST_WARNING_BANNER: true,
   LANGUAGE_MENU_OPTIONS: {
