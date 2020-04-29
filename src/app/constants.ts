@@ -46,6 +46,6 @@ export const GRID_COLUMNS = {
 // https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
 // this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
 export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
-export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dXx]$/i
-// https://regex101.com/r/V95col/3
-export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dXx]$/
+export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
+// https://regex101.com/r/V95col/4
+export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dX]$/i
