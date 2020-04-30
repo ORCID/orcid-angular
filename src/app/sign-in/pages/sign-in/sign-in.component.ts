@@ -43,13 +43,13 @@ export class SignInComponent implements OnInit {
     _userInfo
       .getUserStatus()
       .pipe(take(1))
-      .subscribe(data => {
+      .subscribe((data) => {
         if (data) {
           this.isLoggedIn = data
           _userInfo
             .getUserInfoOnEachStatusUpdate()
             .pipe(take(1))
-            .subscribe(info => {
+            .subscribe((info) => {
               this.displayName = info.displayName
               this.realUserOrcid =
                 environment.BASE_URL + info.userInfo.REAL_USER_ORCID
@@ -79,14 +79,11 @@ export class SignInComponent implements OnInit {
     this.authorizationForm.markAllAsTouched()
 
     if (this.authorizationForm.valid) {
+      this.hideErrors()
       this.loading = true
-      if (this.show2FA) {
-        this.showBadVerificationCode = false
-        this.showBadRecoveryCode = false
-      }
 
       const $signIn = this._signIn.signIn(value)
-      $signIn.subscribe(data => {
+      $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
         if (data.success) {
@@ -130,6 +127,18 @@ export class SignInComponent implements OnInit {
       })
       this.onSubmit()
     }
+  }
+
+  hideErrors() {
+    this.showBadVerificationCode = false
+    this.showBadRecoveryCode = false
+    this.showDeprecatedError = false
+    this.showDeactivatedError = false
+    this.showUnclaimedError = false
+    this.showBadVerificationCode = false
+    this.showBadRecoveryCode = false
+    this.showInvalidUser = false
+    this.badCredentials = false
   }
 
   navigateTo(val) {
