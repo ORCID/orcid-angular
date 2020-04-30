@@ -315,12 +315,12 @@ export class RegisterService {
     formGroup: FormGroup,
     widgetId: number
   ): RegisterForm {
-    let value: RegisterForm
+    const value: RegisterForm = {}
+    value.grecaptchaWidgetId = {
+      value: widgetId != null ? widgetId.toString() : null,
+    }
     if (formGroup && formGroup.controls && formGroup.controls['captcha']) {
-      value = {
-        grecaptcha: { value: formGroup.controls['captcha'].value },
-        grecaptchaWidgetId: { value: widgetId.toString() },
-      }
+      value.grecaptcha = { value: formGroup.controls['captcha'].value }
     }
     return value
   }
