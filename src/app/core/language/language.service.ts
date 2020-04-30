@@ -14,9 +14,10 @@ export class LanguageService {
   ) {}
 
   changeLanguage(languageCode: string) {
-    languageCode.replace('-', '_')
     return this._http
-      .get(environment.API_WEB + 'lang.json?lang=' + languageCode)
+      .get(
+        environment.API_WEB + 'lang.json?lang=' + languageCode.replace('-', '_')
+      )
       .pipe(
         retry(3),
         catchError(this._errorHandler.handleError)
