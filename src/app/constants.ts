@@ -1,3 +1,12 @@
+// On top of Angular email validator that follows RFC rules
+// https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
+// this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
+export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
+export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
+// https://regex101.com/r/V95col/4
+// tslint:disable-next-line: max-line-length
+export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dX]$/i
+
 export const ApplicationRoutes = {
   login: 'login',
   signin: 'signin',
@@ -41,11 +50,3 @@ export const GRID_COLUMNS = {
   tablet: 8,
   handset: 4,
 }
-
-// On top of Angular email validator that follows RFC rules
-// https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
-// this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
-export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
-export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
-// https://regex101.com/r/V95col/1
-export const ORCID_URI_REGEXP = /(http[s]?:\/\/)(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dX]$/
