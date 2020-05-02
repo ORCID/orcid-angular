@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+}
+
+button {
+  max-width: 113px;
+  border: solid 1px rgba(0, 0, 0, 0.12);
+}
+
+.institutional-input {
+  margin-top: 24px;
+}
+
+.institutional-button {
+  margin-left: 100px !important;
+}
+
+.go-back {
+  margin-left: 10px;
+}
+
+.remove-border {
+  border: none;
+}
+
+.institutional-logo {
+  img {
+    max-width: 250px;
+  }
+}

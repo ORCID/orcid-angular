@@ -62,3 +62,11 @@ filters:
     source_file: src/locale/properties/signin/signin.en.properties
     # path expression to translation files, must contain <lang> placeholder
     translation_files_expression: src/locale/properties/signin/signin.<lang>.properties
+
+ - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/institutional/institutional.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/institutional/institutional.<lang>.properties

@@ -8,6 +8,7 @@ export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
 export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dX]$/i
 
 export const ApplicationRoutes = {
+  institutional: 'institutional-signin',
   login: 'login',
   signin: 'signin',
   search: 'orcid-search/search',

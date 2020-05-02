@@ -31,6 +31,13 @@ const routes: Routes = [
   //   () => import('./profile/profile.module').then(m => m.ProfileModule)
   // },
   {
+    path: ApplicationRoutes.institutional,
+    loadChildren: () =>
+      import('./institutional/institutional.module').then(
+        m => m.InstitutionalModule
+      ),
+  },
+  {
     path: ApplicationRoutes.login,
     redirectTo: ApplicationRoutes.signin,
   },
