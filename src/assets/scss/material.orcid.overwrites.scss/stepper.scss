@@ -16,9 +16,6 @@
       }
       .input-container {
         width: 100%;
-        button {
-          margin-inline-start: -8px;
-        }
       }
     }
   }
@@ -31,13 +28,15 @@ mat-horizontal-stepper.orcid-stepper-wizard {
     .input-container {
       width: 100%;
       margin-bottom: 10px;
+      button {
+        position: absolute !important;
+        margin-top: 10px !important;
+      }
+      .edge &,
+      .ie & {
+        white-space: nowrap;
+      }
     }
-
-    .input-container button {
-      position: absolute !important;
-      margin-top: 10px !important;
-    }
-
     p {
       margin-bottom: 25px;
     }
