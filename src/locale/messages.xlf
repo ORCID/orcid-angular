@@ -1018,8 +1018,8 @@
     </unit>
     <unit id="register.personalData">
       <notes>
-        <note category="location">app/register/pages/register/register.component.html:16</note>
-        <note category="location">app/register/pages/register/register.component.html:53</note>
+        <note category="location">app/register/pages/register/register.component.html:17</note>
+        <note category="location">app/register/pages/register/register.component.html:52</note>
       </notes>
       <segment>
         <source>Personal data</source>
@@ -1027,8 +1027,8 @@
     </unit>
     <unit id="register.personalSecurityVisibility">
       <notes>
-        <note category="location">app/register/pages/register/register.component.html:25</note>
-        <note category="location">app/register/pages/register/register.component.html:62</note>
+        <note category="location">app/register/pages/register/register.component.html:23</note>
+        <note category="location">app/register/pages/register/register.component.html:58</note>
       </notes>
       <segment>
         <source>Security and visibility</source>
@@ -1036,8 +1036,8 @@
     </unit>
     <unit id="register.personalNotificationsTerm">
       <notes>
-        <note category="location">app/register/pages/register/register.component.html:34</note>
-        <note category="location">app/register/pages/register/register.component.html:72</note>
+        <note category="location">app/register/pages/register/register.component.html:32</note>
+        <note category="location">app/register/pages/register/register.component.html:68</note>
       </notes>
       <segment>
         <source>Notifications and terms</source>
@@ -1098,7 +1098,7 @@
       <notes>
         <note category="location">app/register/components/step-a/step-a.component.html:32</note>
         <note category="location">app/register/components/step-b/step-b.component.html:26,28</note>
-        <note category="location">app/register/components/step-c/step-c.component.html:24,26</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:25,27</note>
       </notes>
       <segment>
         <source>GO BACK</source>
@@ -1133,7 +1133,7 @@
     </unit>
     <unit id="register.register">
       <notes>
-        <note category="location">app/register/components/step-c/step-c.component.html:27,29</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:28,30</note>
       </notes>
       <segment>
         <source>
@@ -1551,12 +1551,12 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.clickToCopyCopied?">
+    <unit id="register.recaptchaRequired">
       <notes>
-        <note category="location">app/shared/components/copy-on-click/copy-on-click.component.html:1</note>
+        <note category="location">app/register/components/form-anti-robots/form-anti-robots.component.html:12</note>
       </notes>
       <segment>
-        <source>Copied</source>
+        <source>Please check the recaptcha box</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.showing">
@@ -2352,6 +2352,89 @@
       <segment>
         <source>We couldn&apos;t recover your account details, please try again, and if this error
   persists contact support</source>
+      </segment>
+    </unit>
+    <unit id="register.titleLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:91</note>
+      </notes>
+      <segment>
+        <source>Could this be you?</source>
+      </segment>
+    </unit>
+    <unit id="register.bodyLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:93,96</note>
+      </notes>
+      <segment>
+        <source>We found some accounts with your name, which means you may have already
+  created an ORCID iD using a different email address. Before creating an
+  account, please confirm that none of these records belong to you. Not sure if
+  any of these are you?</source>
+      </segment>
+    </unit>
+    <unit id="register.contactLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:98</note>
+      </notes>
+      <segment>
+        <source>Contact us.</source>
+      </segment>
+    </unit>
+    <unit id="register.firstNameLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:99</note>
+      </notes>
+      <segment>
+        <source>First Name</source>
+      </segment>
+    </unit>
+    <unit id="register.lastNameLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:100</note>
+      </notes>
+      <segment>
+        <source>Last Name</source>
+      </segment>
+    </unit>
+    <unit id="register.affiliationsLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:102</note>
+      </notes>
+      <segment>
+        <source>Affiliations</source>
+      </segment>
+    </unit>
+    <unit id="register.dateCreatedLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:104</note>
+      </notes>
+      <segment>
+        <source>Date Created</source>
+      </segment>
+    </unit>
+    <unit id="register.viewRecordLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:105</note>
+      </notes>
+      <segment>
+        <source>View Record</source>
+      </segment>
+    </unit>
+    <unit id="register.signinLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:107</note>
+      </notes>
+      <segment>
+        <source>I ALREADY HAVE AN ID, GO BACK TO SIGN IN</source>
+      </segment>
+    </unit>
+    <unit id="register.continueLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:110</note>
+      </notes>
+      <segment>
+        <source>NONE OF THESE ARE ME, CONTINUE WITH REGISTRATION</source>
       </segment>
     </unit>
   </file>
