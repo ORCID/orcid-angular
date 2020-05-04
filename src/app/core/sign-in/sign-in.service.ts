@@ -23,9 +23,7 @@ export class SignInService {
       'application/x-www-form-urlencoded;charset=utf-8'
     )
     let body = new HttpParams({ encoder: new CustomEncoder() })
-      .set('userId', data.username.startsWith('http')
-        ? getOrcidNumber(data.username)
-        : data.username)
+      .set('userId', getOrcidNumber(data.username))
       .set('password', data.password)
     if (data.verificationCode) {
       body = body.set('verificationCode', data.verificationCode)

@@ -2,10 +2,11 @@
 // https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
 // this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
 export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
-export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
-// https://regex101.com/r/V95col/4
+// https://regex101.com/r/9MXmdl/1
+export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
+// https://regex101.com/r/V95col/6
 // tslint:disable-next-line: max-line-length
-export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}-){3,}\d{3}[\dX]$/i
+export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 
 export const ApplicationRoutes = {
   login: 'login',
@@ -25,8 +26,17 @@ export function isValidOrcidFormat(id) {
   return id && regExp.test(id)
 }
 
-export function getOrcidNumber(orcid) {
-  return orcid.match(ORCID_REGEXP)[0]
+export function getOrcidNumber(userId) {
+  const orcidPattern = ORCID_REGEXP;
+  const extId = orcidPattern.exec(userId);
+  if (extId != null) {
+    userId = extId[0].toString().replace(/ /g, '');
+    userId = userId.toString().replace(/-/g, '');
+    const temp = userId.toString().replace(/(.{4})/g, '$1-');
+    const length = temp.length;
+    userId = temp.substring(0, length - 1).toUpperCase();
+  }
+  return userId;
 }
 
 export const URL_PRIVATE_PROFILE = 'myorcid'
