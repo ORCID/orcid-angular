@@ -8,7 +8,7 @@ export class UsernameValidator {
     const orcidError = Validators.pattern(ORCID_REGEXP)(control)
     const orcidUriError = Validators.pattern(ORCID_URI_REGEXP)(control)
 
-    return control.value.startsWith('http')
+    return control.value.length > 19
       ? validateUsername(orcidUriError, tldError, emailErrors)
       : validateUsername(orcidError, tldError, emailErrors)
   }
