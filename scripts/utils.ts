@@ -1,30 +1,16 @@
 import * as environmentProduction from '../src/environments/environment.production'
 import * as environmentQa from '../src/environments/environment.qa'
 import * as environmentSandbox from '../src/environments/environment.sandbox'
-import { writeFile, readFile } from 'fs'
+import { writeFileSync } from 'fs'
 
 export function save(data, options) {
-  writeFile(options.file, data, 'utf8', (err) => {
-    if (err) {
-      console.log(err)
-      throw err
-    }
-  })
-}
-
-export function read(file, callback) {
-  readFile(file, 'utf8', (err, data) => {
-    if (err) {
-      console.log(err)
-      throw err
-    }
-    return callback(data)
-  })
+  writeFileSync(options.file, data, 'utf8')
 }
 
 export function getOptionsObjet(file) {
   const environment = getEnvironmentVar()
   const languageCode = getLanguageCode(file)
+  const folder = getFolderName(file)
   let environmentVariables
 
   if (environment === 'production') {
@@ -42,6 +28,7 @@ export function getOptionsObjet(file) {
     environment,
     file,
     environmentVariables,
+    folder,
   }
 }
 
@@ -57,4 +44,10 @@ export function getEnvironmentVar() {
 }
 function getLanguageCode(file) {
   return file.split('/')[2]
+}
+
+function getFolderName(file) {
+  const folderPathSegments = file.split('/')
+  folderPathSegments.pop()
+  return folderPathSegments.join('/')
 }
