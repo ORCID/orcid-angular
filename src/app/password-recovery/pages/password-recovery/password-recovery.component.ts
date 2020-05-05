@@ -91,9 +91,9 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
           // Display server errors
           this.loading = false
           this._snackBar.showErrorMessage(
-            $localize`:@@ngOrcid.error:Oh no! An error occurred`,
+            $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
             // tslint:disable-next-line: max-line-length
-            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details, please try again, and if this error persists contact support`,
+            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
             error.message
           )
         }

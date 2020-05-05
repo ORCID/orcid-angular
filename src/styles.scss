@@ -99,6 +99,11 @@ a {
   cursor: pointer;
 }
 
+a.white-url {
+  color: white;
+  text-decoration: underline;
+}
+
 a.black-url {
   color: black;
 }
