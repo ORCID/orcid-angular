@@ -30,9 +30,11 @@ export class DeactivatedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.deactivatedForm.patchValue({
-      email: this.email,
-    })
+    if (this.email.includes('@')) {
+      this.deactivatedForm.patchValue({
+        email: this.email,
+      })
+    }
   }
 
   onSubmit() {

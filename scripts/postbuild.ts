@@ -1,56 +1,70 @@
-import { readFile, indexHtml, saveIndex } from './index-html.postbuild'
-import * as environmentProduction from '../src/environments/environment.production'
-import * as environmentQa from '../src/environments/environment.qa'
-import * as environmentSandbox from '../src/environments/environment.sandbox'
+// This file contains some updates made right after Angular Cli
+
+import { uniqueLength } from './unique-length.postbuild'
+import { buildInfo } from './build-info.postbuild'
+import { googleAnalytics } from './google-analytics.postbuild'
+import { hotjarAnalytics } from './hotjar-analytics.postbuild'
+import {
+  addLanguageCodeToHashesOnToHTMLFiles,
+  addLanguageCodeToHashesOnJSFiles,
+} from './uniqueLanguageFilesNames'
+import { getOptionsObjet, save } from './utils'
+import { renameSync, readFileSync } from 'fs'
 const glob = require('glob')
+// Run updates on index.html files across languages
+glob
+  .sync('./dist/*/index.html', { ignore: './dist/storybook/*' })
+  .forEach(file => {
+    const options = getOptionsObjet(file)
+    let data = readFileSync(file, 'utf8')
+    data = uniqueLength(data, options)
+    data = buildInfo(data, options)
+    data = googleAnalytics(data, options)
+    data = hotjarAnalytics(data, options)
+    data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
+    save(data, options)
+  })
 
-glob(
-  './dist/*/index.html',
-  { ignore: './dist/storybook/*' },
-  (er, files: string[]) => {
-    files.forEach(file => {
-      readFile(file, data => {
-        const options = getOptionsObjet(file)
-        data = indexHtml(data, options)
-        saveIndex(data, options)
-      })
-    })
-  }
-)
+// The following code is added to generate unique hash names for each language.
+// Currently Angular 9 localized builds use the same hashes for equivalent files across languages
+// this did not happened on Angular 8, and produce issues with the cache when the language is change
+//
+// More info
+// https://github.com/angular/angular-cli/issues/16526
+//
+// Because of this the following code will concat the language code to all generated .js files
+// for instance `10-es5.<hash>-<language code>.js` and `polyfills-es2015.<hash>-<language code>.js
+// and it also updates the references on the `index.html` file (see line 24) and `runtime*.js` files
 
-function getOptionsObjet(file) {
-  const environment = getEnvironmentVar()
-  const languageCode = getLanguageCode(file)
-  let environmentVariables
+// Rename all .js files to concat the language code
+const hashRegExp = RegExp(/[a-z0-9]{20}/gm)
+const replacedHash = {}
+glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach(file => {
+  const options = getOptionsObjet(file)
+  const hash = file.match(hashRegExp)
+  renameSync(file, file.replace('.js', '-' + options.languageCode + '.js'))
+  // Save all the modified hash to update
+  replacedHash[hash] = true
+})
 
-  if (environment === 'production') {
-    environmentVariables = environmentProduction.environment
-  } else if (environment === 'qa') {
-    environmentVariables = environmentQa.environment
-  } else if (environment === 'sandbox') {
-    environmentVariables = environmentSandbox.environment
-  } else {
-    console.warn('the environment variable is invalid')
-  }
+// Replace all the `runtime*.js` references to match updated hash values
+glob
+  .sync('./dist/*/runtime-*.js', { ignore: './dist/storybook/*' })
+  .forEach(file => {
+    const options = getOptionsObjet(file)
+    let data = readFileSync(file, 'utf8')
+    data = addLanguageCodeToHashesOnJSFiles(
+      data,
+      Object.keys(replacedHash),
+      options
+    )
+    save(data, options)
+  })
 
-  return {
-    languageCode,
-    environment,
-    file,
-    environmentVariables,
-  }
-}
-
-function getEnvironmentVar() {
-  const environmentIndex = process.argv.lastIndexOf('--env')
-  let environment = ''
-
-  if (environmentIndex > -1) {
-    environment = process.argv[environmentIndex + 1]
-  }
-
-  return environment
-}
-function getLanguageCode(file) {
-  return file.split('/')[2]
-}
+// Rename chinese folders to use underscore to allow Orcid Source and Nginx to correctly point these folders
+glob
+  .sync('./dist/*/index.html', { ignore: './dist/storybook/*' })
+  .forEach(file => {
+    const options = getOptionsObjet(file)
+    renameSync(options.folder, options.folder.replace('-', '_'))
+  })

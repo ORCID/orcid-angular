@@ -1,12 +1,12 @@
 <mat-error *ngIf="badCredentials" class="orcid-error">
   <mat-icon inline="true">error</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.bad_credentials">
+  <ng-container i18n="@@ngOrcid.signin.badCredentials">
     Incorrect username and/or password
   </ng-container>
 </mat-error>
 <mat-error *ngIf="showDeprecatedError" class="orcid-error">
   <mat-icon inline="true">error</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.deprecated_with_primary">
+  <ng-container i18n="@@ngOrcid.signin.deprecatedWithPrimary">
     This account is deprecated. Please refer to account:
   </ng-container>
   {{ orcidPrimaryDeprecated }}

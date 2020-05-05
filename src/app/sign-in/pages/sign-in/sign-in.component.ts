@@ -6,6 +6,7 @@ import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { TwoFactorComponent } from '../../components/two-factor/two-factor.component'
 import { take } from 'rxjs/operators'
+import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 
 @Component({
   selector: 'app-sign-in',
@@ -59,10 +60,7 @@ export class SignInComponent implements OnInit {
 
   usernameFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern(
-      '(\\d{4}-){3}\\d{3}[\\dX]' +
-        '|^.*\\.([a-zA-Z\\-])([a-zA-Z\\-]{0,61})([a-zA-Z\\-])$'
-    ),
+    UsernameValidator.orcidOrEmail,
   ])
   passwordFormControl = new FormControl('', [Validators.required])
 
@@ -81,11 +79,8 @@ export class SignInComponent implements OnInit {
     this.authorizationForm.markAllAsTouched()
 
     if (this.authorizationForm.valid) {
+      this.hideErrors()
       this.loading = true
-      if (this.show2FA) {
-        this.showBadVerificationCode = false
-        this.showBadRecoveryCode = false
-      }
 
       const $signIn = this._signIn.signIn(value)
       $signIn.subscribe(data => {
@@ -132,6 +127,18 @@ export class SignInComponent implements OnInit {
       })
       this.onSubmit()
     }
+  }
+
+  hideErrors() {
+    this.showBadVerificationCode = false
+    this.showBadRecoveryCode = false
+    this.showDeprecatedError = false
+    this.showDeactivatedError = false
+    this.showUnclaimedError = false
+    this.showBadVerificationCode = false
+    this.showBadRecoveryCode = false
+    this.showInvalidUser = false
+    this.badCredentials = false
   }
 
   navigateTo(val) {

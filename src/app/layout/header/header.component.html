@@ -109,7 +109,10 @@
       <ul class="row" *ngIf="checkMenuItemRequirements({ desktop: false })">
         <li
           class="col no-gutters"
-          *ngIf="checkMenuItemRequirements({ logging: false })"
+          *ngIf="
+            checkMenuItemRequirements({ logging: false }) &&
+            signinRegisterButton
+          "
         >
           <button
             mat-stroked-button

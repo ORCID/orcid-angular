@@ -507,7 +507,7 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.badVerificationCodeLength">
+    <unit id="ngOrcid.signin.2fa.badVerificationCodeLength">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:33,34</note>
       </notes>
@@ -573,7 +573,7 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.2fa.Recovery code">
+    <unit id="ngOrcid.signin.2fa.recoveryCode">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:76,78</note>
       </notes>
@@ -583,7 +583,7 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.badRecoveryCodeLength">
+    <unit id="ngOrcid.signin.2fa.badRecoveryCodeLength">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:95,96</note>
       </notes>
@@ -592,7 +592,7 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.authenticate">
+    <unit id="ngOrcid.signin.2fa.authenticate">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:105,107</note>
       </notes>
@@ -800,7 +800,7 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.verify.reactivation_sent">
+    <unit id="ngOrcid.signin.verify.reactivationSent">
       <notes>
         <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:55,59</note>
       </notes>
@@ -840,7 +840,7 @@
 </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.bad_credentials">
+    <unit id="ngOrcid.signin.badCredentials">
       <notes>
         <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:3,5</note>
       </notes>
@@ -850,7 +850,7 @@
   </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.deprecated_with_primary">
+    <unit id="ngOrcid.signin.deprecatedWithPrimary">
       <notes>
         <note category="location">app/sign-in/components/errors/print-errors/print-errors.component.html:9,11</note>
       </notes>

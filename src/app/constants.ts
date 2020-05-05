@@ -1,3 +1,21 @@
+// On top of Angular email validator that follows RFC rules
+// https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
+// this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
+export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
+// https://regex101.com/r/9MXmdl/1
+export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
+// https://regex101.com/r/V95col/6
+// tslint:disable-next-line: max-line-length
+export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
+// https://www.regextester.com/94502
+export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
+// https://www.regextester.com/96577
+export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([^\w\s\-\'\.\,])/
+// https://regex101.com/r/aoHxNo/1
+export const HAS_NUMBER = /(?=.*[0-9]).*/
+// https://regex101.com/r/NNIuKQ/1
+export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
+
 export const ApplicationRoutes = {
   login: 'login',
   signin: 'signin',
@@ -15,6 +33,19 @@ export const PerformanceMarks = {
 export function isValidOrcidFormat(id) {
   const regExp = new RegExp('([0-9]{4}-){3}[0-9]{4}')
   return id && regExp.test(id)
+}
+
+export function getOrcidNumber(userId) {
+  const orcidPattern = ORCID_REGEXP
+  const extId = orcidPattern.exec(userId)
+  if (extId != null) {
+    userId = extId[0].toString().replace(/ /g, '')
+    userId = userId.toString().replace(/-/g, '')
+    const temp = userId.toString().replace(/(.{4})/g, '$1-')
+    const length = temp.length
+    userId = temp.substring(0, length - 1).toUpperCase()
+  }
+  return userId
 }
 
 export const URL_PRIVATE_PROFILE = 'myorcid'
@@ -38,18 +69,3 @@ export const GRID_COLUMNS = {
   tablet: 8,
   handset: 4,
 }
-
-// On top of Angular email validator that follows RFC rules
-// https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
-// this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
-export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
-// https://regexr.com/51o43
-export const ORCID_REGEXP = /(\d{4}-){3,}\d{3}[\dX]$/i
-// https://www.regextester.com/94502
-export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
-// https://www.regextester.com/96577
-export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([^\w\s\-\'\.\,])/
-// https://regex101.com/r/aoHxNo/1
-export const HAS_NUMBER = /(?=.*[0-9]).*/
-// https://regex101.com/r/NNIuKQ/1
-export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/

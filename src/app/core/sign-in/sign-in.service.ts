@@ -5,6 +5,8 @@ import { environment } from '../../../environments/environment'
 import { catchError, retry } from 'rxjs/operators'
 import { SignIn } from '../../types/sign-in.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
+import { CustomEncoder } from '../custom-encoder/custom.encoder'
+import { getOrcidNumber } from '../../constants'
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +18,13 @@ export class SignInService {
   ) {}
 
   signIn(data) {
-    const headers = new HttpHeaders()
-    headers.set('Content-Type', 'application/x-www-form-urlencoded')
-    let body = new HttpParams()
-    body = body.set('userId', data.username)
-    body = body.set('password', data.password)
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/x-www-form-urlencoded;charset=utf-8'
+    )
+    let body = new HttpParams({ encoder: new CustomEncoder() })
+      .set('userId', getOrcidNumber(data.username))
+      .set('password', data.password)
     if (data.verificationCode) {
       body = body.set('verificationCode', data.verificationCode)
     }
@@ -41,8 +45,11 @@ export class SignInService {
 
   reactivation(data) {
     const headers = new HttpHeaders()
-    headers.set('Content-Type', 'application/x-www-form-urlencoded')
-    let body = new HttpParams()
+    headers.set(
+      'Content-Type',
+      'application/x-www-form-urlencoded;charset=utf-8'
+    )
+    let body = new HttpParams({ encoder: new CustomEncoder() })
     body = body.set('email', data.email)
     return this._http
       .post<Reactivation>(environment.API_WEB + `sendReactivation.json`, body, {
