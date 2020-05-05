@@ -10,6 +10,7 @@ $notosans-fontface-path: '../fonts/noto-sans' !default;
       url('#{$notosans-fontface-path}/NotoSans-#{$type}.woff') format('woff');
     font-weight: $weight;
     font-style: $style;
+    font-display: swap;
   }
 }
 

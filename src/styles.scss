@@ -1,7 +1,6 @@
 @import 'styles.scss-theme.scss';
 @font-face {
   font-family: 'Material Icons';
-  font-display: swap;
   font-style: normal;
   font-weight: 400;
   src: url(./assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
@@ -40,7 +39,6 @@
 
 .material-icons-outlined {
   font-family: 'Material Icons Outlined';
-  font-display: swap;
   font-weight: normal;
   font-style: normal;
   font-size: 20px; /* Preferred icon size */
