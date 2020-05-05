@@ -26,6 +26,7 @@ import { MdePopoverModule } from '@material-extended/mde'
 import { MatCardModule } from '@angular/material/card'
 import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -57,6 +58,7 @@ import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti
     MdePopoverModule,
     MatCardModule,
     RecaptchaModule,
+    A11yLinkModule,
   ],
 })
 export class RegisterModule {}
