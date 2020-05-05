@@ -120,7 +120,10 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
           error.backendErrors.additionalEmails[additionalEmail.value] = []
         }
         const additionalEmailsErrors = error.backendErrors.additionalEmails
-        if (additionalEmail.value === registerForm.email.value) {
+        if (
+          registerForm.email &&
+          additionalEmail.value === registerForm.email.value
+        ) {
           hasError = true
           additionalEmailsErrors[additionalEmail.value] = [
             'additionalEmailCantBePrimaryEmail',
