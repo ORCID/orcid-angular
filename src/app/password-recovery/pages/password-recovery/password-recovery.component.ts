@@ -54,7 +54,14 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
     private _snackBar: SnackbarService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._snackBar.showErrorMessage(
+      $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
+      // tslint:disable-next-line: max-line-length
+      $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
+      'ERROR MESSAGE'
+    )
+  }
 
   ngAfterViewInit() {
     // Avoid animations on load.

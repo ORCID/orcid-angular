@@ -1,6 +1,17 @@
 <mat-icon>error</mat-icon>
 <div class="box mat-body-1">
   <div class="mat-subheading-2">{{ data.title }}</div>
-  <div>{{ data.message }}</div>
+  <div>
+    {{ data.message }}
+    <a
+      href="https://support.orcid.org/hc/en-us/requests/new"
+      rel="noopener"
+      target="_blank"
+      class="white-url"
+      i18n="@@shared.contactSupport"
+    >
+      contact support.
+    </a>
+  </div>
   <div class="mat-caption">{{ data.error }}</div>
 </div>
