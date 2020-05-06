@@ -19,7 +19,7 @@
                 </mat-label>
                 <input matInput formControlName="username" />
                 <mat-hint i18n="@@ngOrcid.signin.usernameHint"
-                  >example@email.com or 0000-0012-3456-7890</mat-hint
+                  >example@email.com or 0000-0001-2345-6789</mat-hint
                 >
 
                 <mat-error
@@ -30,7 +30,7 @@
 
                 <mat-error
                   i18n="@@ngOrcid.signin.invalidUsername"
-                  *ngIf="usernameFormControl.hasError('invalidUserName')"                 
+                  *ngIf="usernameFormControl.hasError('invalidUserName')"
                   >Use the format example@email.com or 0000-0001-2345-6789
                 </mat-error>
               </mat-form-field>
