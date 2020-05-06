@@ -4,9 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { map, startWith, take } from 'rxjs/operators'
 import { DiscoService } from '../../../core/disco/disco.service'
-import { InstitutionalService } from '../../../core/institutional/institutional.service'
 import { Institutional } from '../../../types/institutional.endpoint'
 import { CookieService } from 'ngx-cookie-service'
+import { environment } from '../../../../environments/environment.local'
+import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
 
 @Component({
   selector: 'app-institutional',
@@ -23,6 +24,7 @@ export class InstitutionalComponent implements OnInit {
   institution: Institutional
   entityID: any
   logoInstitution: any
+  samlIdPCookieTTL = 730
 
   institutionFormControl = new FormControl('', [Validators.required])
 
@@ -31,10 +33,9 @@ export class InstitutionalComponent implements OnInit {
   })
 
   constructor(
-    private _cookie: CookieService,
     @Inject(WINDOW) private window: Window,
-    private _disco: DiscoService,
-    private _institutional: InstitutionalService
+    private _cookie: CookieService,
+    private _disco: DiscoService
   ) {
     this._disco
       .getDiscoFeed()
@@ -42,6 +43,10 @@ export class InstitutionalComponent implements OnInit {
       .subscribe(
         (data) => {
           this.options = data
+          this.institutitonalForm.controls['institution'].setValidators([
+            Validators.required,
+            InstitutionValidator.valueSelected(this.options),
+          ])
           this.clear()
         },
         (error) => {
@@ -53,14 +58,28 @@ export class InstitutionalComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    // this._cookie.set(element.id, 'understood', 365)
+    if (this.institutitonalForm.valid) {
+      const dateCookie = new Date(
+        new Date().getTime() + this.samlIdPCookieTTL * 24 * 60 * 60 * 1000
+      )
+      this._cookie.set(
+        '_saml_idp',
+        this.getCookieSaml(this.entityID),
+        dateCookie !== null ? dateCookie : this.samlIdPCookieTTL
+      )
 
-    this._institutional
-      .login(this.entityID)
-      .pipe(take(1))
-      .subscribe((data) => {
-        console.log(JSON.stringify(data))
-      })
+      const defaultReturn =
+        'https:' +
+        environment.BASE_URL +
+        'Shibboleth.sso/Login?SAMLDS=1&target=' +
+        encodeURIComponent(
+          'https:' + environment.BASE_URL + 'shibboleth/signin'
+        )
+
+      this.navigateTo(
+        defaultReturn + '&entityID=' + encodeURIComponent(this.entityID)
+      )
+    }
   }
 
   private _filter(value: string): string[] {
@@ -121,11 +140,43 @@ export class InstitutionalComponent implements OnInit {
           institutionSelected[0].toLowerCase()
       )
     )[0]
-    console.log(JSON.stringify(this.institution))
     this.entityID = this.institution.entityID
     if (this.institution.Logos) {
       this.logoInstitution = this.institution.Logos[0].value
     }
+  }
+
+  getCookieSaml(entityId) {
+    const Q =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
+    let aE = '',
+      aI,
+      aG,
+      aF,
+      aM,
+      aL,
+      aK,
+      aJ
+    for (let aH = 0; aH < entityId.length; ) {
+      aI = entityId.charCodeAt(aH++)
+      aG = entityId.charCodeAt(aH++)
+      aF = entityId.charCodeAt(aH++)
+      /* tslint:disable:no-bitwise */
+      aM = aI >> 2
+      aL = ((aI & 3) << 4) + (aG >> 4)
+      aK = ((aG & 15) << 2) + (aF >> 6)
+      aJ = aF & 63
+      /* tslint:enable:no-bitwise */
+      if (isNaN(aG)) {
+        aK = aJ = 64
+      } else {
+        if (isNaN(aF)) {
+          aJ = 64
+        }
+      }
+      aE += Q.charAt(aM) + Q.charAt(aL) + Q.charAt(aK) + Q.charAt(aJ)
+    }
+    return aE
   }
 
   navigateTo(val) {

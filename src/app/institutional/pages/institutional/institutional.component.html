@@ -27,7 +27,11 @@
             </a>
           </p>
           <div class="col l12 m8 s4 horizontal-center institutional-logo">
-            <img *ngIf="logoInstitution" src="{{logoInstitution}}" alt="institution logo" />
+            <img
+              *ngIf="logoInstitution"
+              src="{{ logoInstitution }}"
+              alt="institution logo"
+            />
           </div>
           <mat-form-field appearance="outline" class="row institutional-input">
             <mat-label i18n="@@institution.organization"
@@ -39,9 +43,13 @@
               [formControl]="institutionFormControl"
               [matAutocomplete]="auto"
             />
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='selected($event.option.value)'>
+            <mat-autocomplete
+              autoActiveFirstOption
+              #auto="matAutocomplete"
+              (optionSelected)="selected($event.option.value)"
+            >
               <mat-option
-                *ngFor="let option of (filteredOptions | async)"
+                *ngFor="let option of filteredOptions | async"
                 [value]="option"
               >
                 {{ option }}
@@ -62,29 +70,30 @@
               *ngIf="institutionFormControl.hasError('required')"
               >Organization's name is required
             </mat-error>
+            <mat-error
+              i18n="@@institution.invalidInstitution"
+              *ngIf="institutionFormControl.hasError('invalidInstitution')"
+              >Invalid Organization Name
+            </mat-error>
           </mat-form-field>
-          <div class="row">
-            <div class="col l6 m6 s4">
-              <a
-                class="mat-button-font go-back"
-                i18n="@@institutional.goBack"
-                [routerLink]="['/signin']"
-                >Go back
-              </a>
-            </div>
-            <div class="col l6 m6 s4">
-              <button
-                mat-raised-button
-                (click)="onSubmit()"
-                color="primary"
-                class="row mat-elevation-z0 institutional-button"
-                type="submit"
-                [disabled]="loading"
-                i18n="@@institutional.continue"
-              >
-                CONTINUE
-              </button>
-            </div>
+          <div class="institutional-buttons">
+            <a
+              class="mat-button-font go-back"
+              i18n="@@institutional.goBack"
+              [routerLink]="['/signin']"
+              >Go back
+            </a>
+            <button
+              mat-raised-button
+              (click)="onSubmit()"
+              color="primary"
+              class="row mat-elevation-z0"
+              type="submit"
+              [disabled]="loading"
+              i18n="@@institutional.continue"
+            >
+              CONTINUE
+            </button>
           </div>
         </div>
       </form>

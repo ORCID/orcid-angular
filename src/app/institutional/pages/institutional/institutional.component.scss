@@ -11,12 +11,14 @@ button {
   margin-top: 24px;
 }
 
-.institutional-button {
-  margin-left: 100px !important;
+.institutional-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
 .go-back {
-  margin-left: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .remove-border {
@@ -25,6 +27,6 @@ button {
 
 .institutional-logo {
   img {
-    max-width: 250px;
+    max-width: 150px;
   }
 }
