@@ -10,7 +10,7 @@ export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.
 // https://www.regextester.com/94502
 export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
 // https://www.regextester.com/96577
-export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([^\w\s\-\'\.\,])/
+export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 // https://regex101.com/r/aoHxNo/1
 export const HAS_NUMBER = /(?=.*[0-9]).*/
 // https://regex101.com/r/NNIuKQ/1
