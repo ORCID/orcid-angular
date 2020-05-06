@@ -51,14 +51,20 @@ export class FormPersonalAdditionalEmailsComponent {
   }
 
   addAdditionalEmail(): void {
-    const controlName = (
-      Object.keys(this.additionalEmails.controls).length + 1
-    ).toString()
+    const controlName = Object.keys(this.additionalEmails.controls).length + 1
     this.additionalEmails.addControl(
-      controlName,
+      this.zeroPad(controlName, 2),
       new FormControl('', {
         validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
       })
     )
+  }
+
+  parseInt(number: string) {
+    return parseInt(number, 10)
+  }
+
+  zeroPad(num, places) {
+    return String(num).padStart(places, '0')
   }
 }

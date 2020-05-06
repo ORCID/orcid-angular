@@ -14,7 +14,9 @@
           >Additional email</ng-container
         >
         {{
-          additionalEmailControl.key !== '0' ? additionalEmailControl.key : ''
+          additionalEmailControl.key !== '0'
+            ? parseInt(additionalEmailControl.key)
+            : ''
         }}
         <ng-container>(Optional)</ng-container>
       </mat-label>
