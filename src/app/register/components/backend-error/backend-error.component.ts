@@ -10,6 +10,7 @@ enum RegisterBackendErrors {
   selector: 'app-backend-error',
   templateUrl: './backend-error.component.html',
   styleUrls: ['./backend-error.component.scss'],
+  preserveWhitespaces: true,
 })
 export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors
