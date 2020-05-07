@@ -47,40 +47,12 @@ export class RegisterService extends _RegisterServiceMixingBase {
     familyNames: string
     givenNames: string
   }) {
-    return of([
-      {
-        orcid: '0000-0002-7305-2704',
-        email: null,
-        givenNames: 'leonardo',
-        familyNames: 'mendoza',
-        institution: null,
-        createdDate: '2018-12-18 UTC',
-      },
-      {
-        orcid: '0000-0002-1744-6557',
-        email: null,
-        givenNames: 'leonardo',
-        familyNames: 'mendoza',
-        institution: null,
-        createdDate: '2018-12-18 UTC',
-      },
-      {
-        orcid: '0000-0002-1366-7037',
-        email: null,
-        givenNames: 'Leonardo',
-        familyNames: 'Mendoza',
-        institution: null,
-        createdDate: '2020-04-29 UTC',
-      },
-      {
-        orcid: '0000-0002-2036-7905',
-        email: null,
-        givenNames: 'Leonardo',
-        familyNames: 'Mendoza',
-        institution: null,
-        createdDate: '2020-04-15 UTC',
-      },
-    ])
+    return this._http
+      .get<DuplicatedName[]>(environment.API_WEB + `dupicateResearcher.json`, {
+        params: names,
+        withCredentials: true,
+      })
+      .pipe(retry(3), catchError(this._errorHandler.handleError))
   }
 
   confirmRegistration(
@@ -95,10 +67,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
           withCredentials: true,
         }
       )
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
+      .pipe(retry(3), catchError(this._errorHandler.handleError))
   }
 
   getRegisterForm(): Observable<RegisterForm> {
@@ -106,11 +75,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
       .get<RegisterForm>(`${environment.API_WEB}register.json`, {
         withCredentials: true,
       })
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
-      .pipe(map(form => (this.backendRegistrationForm = form)))
+      .pipe(retry(3), catchError(this._errorHandler.handleError))
+      .pipe(map((form) => (this.backendRegistrationForm = form)))
   }
 
   register(
@@ -132,9 +98,6 @@ export class RegisterService extends _RegisterServiceMixingBase {
         `${environment.API_WEB}registerConfirm.json`,
         Object.assign(this.backendRegistrationForm, registerForm)
       )
-      .pipe(
-        retry(3),
-        catchError(this._errorHandler.handleError)
-      )
+      .pipe(retry(3), catchError(this._errorHandler.handleError))
   }
 }
