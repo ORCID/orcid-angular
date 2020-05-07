@@ -1,4 +1,4 @@
-<ng-container *ngIf="!showReactivationSent">
+<ng-container *ngIf="!showReactivationSent || showReactivationSentError">
   <mat-error class="orcid-error">
     <mat-icon inline="true">error</mat-icon>
     <ng-container i18n="@@ngOrcid.signin.deactivated">
@@ -50,15 +50,25 @@
     </button>
   </form>
 </ng-container>
-<ng-container *ngIf="showReactivationSent">
-  <mat-error class="orcid-error">
-    <ng-container i18n="@@ngOrcid.signin.verify.reactivationSent">
-      Thank you for reactivating your ORCID record; please complete the process
-      by following the steps in the email we are now sending you. If you don’t
-      receive an email from us, please contact
-    </ng-container>
-    <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
-      https://orcid.org/help/contact-us
-    </a>
-  </mat-error>
-</ng-container>
+<mat-error
+  *ngIf="showReactivationSent"
+  class="orcid-error"
+>
+  <ng-container i18n="@@ngOrcid.signin.verify.reactivationSent">
+    Thank you for reactivating your ORCID record; please complete the process
+    by following the steps in the email we are now sending you. If you don’t
+    receive an email from us, please contact
+  </ng-container>
+  <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
+    https://orcid.org/help/contact-us
+  </a>
+</mat-error>
+<mat-error
+  *ngIf="showReactivationSentError"
+  class="orcid-error"
+>
+  <mat-icon inline="true">error</mat-icon>
+  <ng-container i18n="@@ngOrcid.signin.verify.reactivationSentError">
+    Please enter a valid email address
+  </ng-container>
+</mat-error>
