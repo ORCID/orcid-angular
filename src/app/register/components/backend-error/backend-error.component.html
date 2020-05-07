@@ -1,0 +1,10 @@
+<ng-container *ngIf="recognizedError[errorCode] === 0">
+  This email already exists in our system. Would you like to
+  <a routerLink="/signin">sign in</a><ng-container>?</ng-container>
+</ng-container>
+
+<ng-container *ngIf="recognizedError[errorCode] === 1">
+  Additional email cannot match primary email
+</ng-container>
+
+<ng-container *ngIf="unrecognizedError"> {{ errorCode }} </ng-container>

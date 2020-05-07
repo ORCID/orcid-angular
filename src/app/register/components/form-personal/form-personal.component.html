@@ -17,7 +17,7 @@
       </mat-error>
       <mat-error *ngIf="form.hasError('backendError', 'givenNames')">
         <div *ngFor="let error of form.getError('backendError', 'givenNames')">
-          {{ error }}
+          <app-backend-error [errorCode]="error"></app-backend-error>
         </div>
       </mat-error>
     </mat-form-field>
@@ -49,7 +49,7 @@
     </mat-error>
     <mat-error *ngIf="form.hasError('backendError', 'familyNames')">
       <div *ngFor="let error of form.getError('backendError', 'familyNames')">
-        {{ error }}
+        <app-backend-error [errorCode]="error"></app-backend-error>
       </div>
     </mat-error>
   </mat-form-field>
@@ -78,14 +78,7 @@
         <div
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
-          <ng-container
-            *ngIf="
-              error !== 'orcid.frontend.verify.duplicate_email';
-              else: emailExistError
-            "
-          >
-            {{ error }}
-          </ng-container>
+          <app-backend-error [errorCode]="error"></app-backend-error>
         </div>
       </mat-error>
     </mat-form-field>
@@ -123,7 +116,7 @@
             let error of form.getError('backendError', 'emails.confirmEmail')
           "
         >
-          {{ error }}
+          <app-backend-error [errorCode]="error"></app-backend-error>
         </div>
       </mat-error>
     </mat-form-field>
@@ -163,11 +156,3 @@
     </button>
   </mat-card>
 </mde-popover>
-
-<!--
-  TODO @leomendoza123 Handle server side errors with a separated shared component
--->
-<ng-template #emailExistError>
-  This email already exists in our system. Would you like to
-  <a routerLink="/signin">sign in</a><ng-container>?</ng-container>
-</ng-template>

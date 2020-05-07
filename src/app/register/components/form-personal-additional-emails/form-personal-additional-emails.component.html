@@ -4,7 +4,7 @@
   <div
     class="input-container"
     *ngFor="
-      let additionalEmailControl of (additionalEmails.controls | keyvalue);
+      let additionalEmailControl of additionalEmails.controls | keyvalue;
       index as i
     "
   >
@@ -21,7 +21,7 @@
         <ng-container>(Optional)</ng-container>
       </mat-label>
       <input
-        formControlName="{{additionalEmailControl.key}}"
+        formControlName="{{ additionalEmailControl.key }}"
         matInput
         [errorStateMatcher]="backendErrorsMatcher"
       />
@@ -34,17 +34,19 @@
       >
         Invalid email format
       </mat-error>
-      <mat-error
-        *ngFor="
-          let error of getControlErrorAtFormLevel(
-            additionalEmailControl.value,
-            'allEmailsAreUnique'
-          )
-        "
-        i18n="@@register.additionalEmailsCanBeDuplicated"
-      >
-        Additional email cannot match primary email
-      </mat-error>
+      <!--
+        <mat-error
+          *ngFor="
+            let error of getControlErrorAtFormLevel(
+              additionalEmailControl.value,
+              'allEmailsAreUnique'
+            )
+          "
+          i18n="@@register.additionalEmailsCanBeDuplicated"
+        >
+          Additional email cannot match primary email
+        </mat-error>
+      -->
       <mat-error
         *ngFor="
           let error of getControlErrorAtFormLevel(
@@ -53,7 +55,7 @@
           )
         "
       >
-        {{ error }}
+        <app-backend-error [errorCode]="error"></app-backend-error>
       </mat-error>
     </mat-form-field>
 

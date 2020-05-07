@@ -23,30 +23,15 @@ export class FormPersonalAdditionalEmailsComponent {
     this.getControlErrorAtFormLevel,
     'backendErrors'
   )
-  emailsAdditionalErrorsMatcher = new ErrorStateMatcherForFormLevelErrors(
-    this.getControlErrorAtFormLevel,
-    'allEmailsAreUnique'
-  )
 
   getControlErrorAtFormLevel(
     control: FormControl | null,
     errorGroup: string
   ): string[] {
     return (
-      (control &&
-        control.value &&
-        control.parent.parent.errors &&
-        control.parent.parent.errors[errorGroup] &&
-        control.parent.parent.errors[errorGroup]['additionalEmails'][
-          control.value
-        ] &&
-        control.parent.parent.errors[errorGroup]['additionalEmails'][
-          control.value
-        ] &&
-        control.parent.parent.errors[errorGroup]['additionalEmails'][
-          control.value
-        ]) ||
-      []
+      control?.parent?.parent?.errors?.[errorGroup]?.['additionalEmails'][
+        control.value
+      ] || []
     )
   }
 
