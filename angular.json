@@ -395,5 +395,8 @@
       }
     }
   },
-  "defaultProject": "ng-orcid"
+  "defaultProject": "ng-orcid",
+  "cli": {
+    "analytics": "5a5330f1-74b5-403d-bd97-0318d391a33a"
+  }
 }
