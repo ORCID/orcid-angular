@@ -16,9 +16,8 @@ export class MaintenanceMessageComponent implements OnInit {
   closableElement: Element
 
   constructor(togglz: TogglzService, private _cookie: CookieService) {
-    togglz.getMaintenanceMessages().subscribe(value => {
+    togglz.getMaintenanceMessages().subscribe((value) => {
       this.maintenanceMessage = value
-      console.log(this.maintenanceMessage)
     })
   }
 

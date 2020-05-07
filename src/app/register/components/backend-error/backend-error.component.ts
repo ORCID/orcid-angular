@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core'
 enum RegisterBackendErrors {
   'orcid.frontend.verify.duplicate_email',
   'additionalEmailCantBePrimaryEmail',
+  'duplicatedAdditionalEmail',
 }
 
 @Component({
@@ -16,9 +17,6 @@ export class BackendErrorComponent implements OnInit {
   unrecognizedError = false
   constructor() {}
   ngOnInit() {
-    console.log(this.recognizedError)
-    console.log(this.recognizedError[this.errorCode])
-
     if (!(this.errorCode in RegisterBackendErrors)) {
       this.unrecognizedError = true
     }

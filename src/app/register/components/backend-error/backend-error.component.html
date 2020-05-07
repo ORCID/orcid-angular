@@ -14,4 +14,11 @@
   Additional email cannot match primary email
 </ng-container>
 
+<ng-container
+  *ngIf="recognizedError[errorCode] === 2"
+  i18n="@@register.additionalEmailMatch"
+>
+  Additional emails can not be duplicated
+</ng-container>
+
 <ng-container *ngIf="unrecognizedError"> {{ errorCode }} </ng-container>
