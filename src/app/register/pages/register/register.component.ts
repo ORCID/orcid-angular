@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window
   ) {
-    _platformInfo.get().subscribe(platform => {
+    _platformInfo.get().subscribe((platform) => {
       this.platform = platform
     })
   }
@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
             )
           )
         )
-        .subscribe(response => {
+        .subscribe((response) => {
           if (response.url) {
             this.window.location.href = response.url
           } else {
@@ -75,11 +75,9 @@ export class RegisterComponent implements OnInit {
   }
 
   afterStepASubmitted() {
-    console.log('SUBMIT')
     // Update the personal data object is required after submit since is an input for StepB
-    console.log(this.FormGroupStepA.value)
+
     if (this.FormGroupStepA.valid) {
-      console.log('SUBMIT!!')
       this.personalData = this.FormGroupStepA.value.personal
 
       this._register
@@ -87,7 +85,7 @@ export class RegisterComponent implements OnInit {
           familyNames: this.personalData.familyNames.value,
           givenNames: this.personalData.givenNames.value,
         })
-        .subscribe(value => {
+        .subscribe((value) => {
           if (value.length > 0) {
             this.openDialog(value)
           } else {
@@ -131,14 +129,13 @@ export class RegisterComponent implements OnInit {
 
     const dialogRef = this._dialog.open(IsThisYouComponent, dialogParams)
 
-    dialogRef.afterClosed().subscribe(confirmRegistration => {
+    dialogRef.afterClosed().subscribe((confirmRegistration) => {
       if (confirmRegistration) {
       }
     })
   }
 
   selectionChange(event: StepperSelectionEvent) {
-    console.log(event)
     if (event.previouslySelectedIndex === 0) {
       this.afterStepASubmitted()
     }
