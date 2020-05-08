@@ -1,3 +1,7 @@
+:host {
+  width: 100%;
+}
+
 .mat-button-font {
   margin: auto;
 }
@@ -9,11 +13,17 @@
 .error-message {
   float: left;
   margin: 0;
+  [dir='rtl'] :host & {
+    float: right;
+  }
 }
 
 .error-length {
   float: right;
   margin: 0;
+  [dir='rtl'] :host & {
+    float: left;
+  }
 }
 
 .orcid-error {
