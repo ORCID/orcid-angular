@@ -15,7 +15,7 @@
     <unit id="header.signin">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:119</note>
+        <note category="location">app/layout/header/header.component.html:122</note>
       </notes>
       <segment>
         <source>SIGN IN</source>
@@ -24,7 +24,7 @@
     <unit id="header.register">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:121</note>
+        <note category="location">app/layout/header/header.component.html:124</note>
         <note category="location">app/layout/user-menu/user-menu.component.html:28</note>
       </notes>
       <segment>
@@ -34,7 +34,7 @@
     <unit id="public-layout.sign_out">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:135</note>
+        <note category="location">app/layout/header/header.component.html:138</note>
         <note category="location">locale/i18n.pseudo.component.html:56</note>
       </notes>
       <segment>
@@ -495,12 +495,9 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.invalidEmail">
+    <unit id="ngOrcid.signin.2fa.verificationCodeRequired">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:24,25</note>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:86,87</note>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:34,35</note>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:37,38</note>
       </notes>
       <segment>
         <source>Authentication code is required
@@ -583,6 +580,15 @@
     </source>
       </segment>
     </unit>
+    <unit id="ngOrcid.signin.2fa.recoveryCodeRequired">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:86,87</note>
+      </notes>
+      <segment>
+        <source>Recovery code is required
+    </source>
+      </segment>
+    </unit>
     <unit id="ngOrcid.signin.2fa.badRecoveryCodeLength">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:95,96</note>
@@ -653,7 +659,16 @@
         <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:28,29</note>
       </notes>
       <segment>
-        <source>Email or 16-digit ORCID iD required
+        <source>Email or 16-digit ORCID iD is required
+                </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.invalidUsername">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:34,35</note>
+      </notes>
+      <segment>
+        <source>Use the format example@email.com or 0000-0001-2345-6789
                 </source>
       </segment>
     </unit>
@@ -790,6 +805,15 @@
       </source>
       </segment>
     </unit>
+    <unit id="ngOrcid.signin.invalidEmail">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:37,38</note>
+      </notes>
+      <segment>
+        <source>Use the format example@email.com
+      </source>
+      </segment>
+    </unit>
     <unit id="ngOrcid.signin.submit">
       <notes>
         <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:48,50</note>
@@ -894,6 +918,16 @@
       </notes>
       <segment>
         <source>contact support</source>
+      </segment>
+    </unit>
+    <unit id="shared.contactSupport">
+      <notes>
+        <note category="location">app/cdk/snackbar/snackbar/snackbar.component.html:12,14</note>
+      </notes>
+      <segment>
+        <source>
+      contact support.
+    </source>
       </segment>
     </unit>
     <unit id="ngOrcid.passwordAndOrcid">
@@ -1019,35 +1053,35 @@
     <unit id="register.personalData">
       <notes>
         <note category="location">app/register/pages/register/register.component.html:17</note>
-        <note category="location">app/register/pages/register/register.component.html:52</note>
+        <note category="location">app/register/pages/register/register.component.html:53</note>
       </notes>
       <segment>
         <source>Personal data</source>
       </segment>
     </unit>
-    <unit id="register.personalSecurityVisibility">
+    <unit id="register.securityAndNotifications">
       <notes>
         <note category="location">app/register/pages/register/register.component.html:23</note>
-        <note category="location">app/register/pages/register/register.component.html:58</note>
+        <note category="location">app/register/pages/register/register.component.html:59</note>
       </notes>
       <segment>
-        <source>Security and visibility</source>
+        <source>Security and notifications</source>
       </segment>
     </unit>
-    <unit id="register.personalNotificationsTerm">
+    <unit id="register.visibilityAndTerm">
       <notes>
         <note category="location">app/register/pages/register/register.component.html:32</note>
         <note category="location">app/register/pages/register/register.component.html:68</note>
       </notes>
       <segment>
-        <source>Notifications and terms</source>
+        <source>Visibility and terms</source>
       </segment>
     </unit>
     <unit id="register.create">
       <notes>
         <note category="location">app/register/components/step-a/step-a.component.html:4</note>
         <note category="location">app/register/components/step-b/step-b.component.html:4</note>
-        <note category="location">app/register/components/step-c/step-c.component.html:4</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:6</note>
       </notes>
       <segment>
         <source>Create your ORCID iD</source>
@@ -1094,19 +1128,9 @@
         <source>Sign In</source>
       </segment>
     </unit>
-    <unit id="shared.back">
-      <notes>
-        <note category="location">app/register/components/step-a/step-a.component.html:32</note>
-        <note category="location">app/register/components/step-b/step-b.component.html:26,28</note>
-        <note category="location">app/register/components/step-c/step-c.component.html:25,27</note>
-      </notes>
-      <segment>
-        <source>GO BACK</source>
-      </segment>
-    </unit>
     <unit id="shared.next">
       <notes>
-        <note category="location">app/register/components/step-a/step-a.component.html:38,40</note>
+        <note category="location">app/register/components/step-a/step-a.component.html:46,48</note>
         <note category="location">app/register/components/step-b/step-b.component.html:34,36</note>
       </notes>
       <segment>
@@ -1123,9 +1147,20 @@
         <source>This is step 2 of 3</source>
       </segment>
     </unit>
+    <unit id="shared.back">
+      <notes>
+        <note category="location">app/register/components/step-b/step-b.component.html:26,28</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:27,29</note>
+      </notes>
+      <segment>
+        <source>
+          GO BACK
+        </source>
+      </segment>
+    </unit>
     <unit id="register.step3">
       <notes>
-        <note category="location">app/register/components/step-c/step-c.component.html:7</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:9</note>
       </notes>
       <segment>
         <source>This is step 3 of 3</source>
@@ -1133,7 +1168,7 @@
     </unit>
     <unit id="register.register">
       <notes>
-        <note category="location">app/register/components/step-c/step-c.component.html:28,30</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:35,37</note>
       </notes>
       <segment>
         <source>
@@ -1181,6 +1216,7 @@
     <unit id="register.optional">
       <notes>
         <note category="location">app/register/components/form-personal/form-personal.component.html:40</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:15</note>
       </notes>
       <segment>
         <source>(Optional)</source>
@@ -1207,8 +1243,8 @@
     <unit id="register.invalidEmail">
       <notes>
         <note category="location">app/register/components/form-personal/form-personal.component.html:73,75</note>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:109,111</note>
-        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:32,34</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:102,104</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:28,30</note>
       </notes>
       <segment>
         <source>
@@ -1218,7 +1254,7 @@
     </unit>
     <unit id="register.confirmEmail">
       <notes>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:94</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:87</note>
       </notes>
       <segment>
         <source>Confirm primary email</source>
@@ -1226,7 +1262,7 @@
     </unit>
     <unit id="register.confirmEmailRequired">
       <notes>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:100,102</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:93,95</note>
       </notes>
       <segment>
         <source>
@@ -1236,12 +1272,32 @@
     </unit>
     <unit id="register.confirmationEmailNotMatch">
       <notes>
-        <note category="location">app/register/components/form-personal/form-personal.component.html:115,117</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:108,110</note>
       </notes>
       <segment>
         <source>
         Email confirmation does not match
       </source>
+      </segment>
+    </unit>
+    <unit id="register.moreInfo">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:151</note>
+      </notes>
+      <segment>
+        <source>More information on names</source>
+      </segment>
+    </unit>
+    <unit id="shared.ok">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:160,162</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:162,164</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:92,94</note>
+      </notes>
+      <segment>
+        <source>
+      Ok
+    </source>
       </segment>
     </unit>
     <unit id="register.password">
@@ -1272,9 +1328,19 @@
       </source>
       </segment>
     </unit>
+    <unit id="register.wrongPasswordPattern">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:25,27</note>
+      </notes>
+      <segment>
+        <source>
+        Password must match all pattern requirements
+      </source>
+      </segment>
+    </unit>
     <unit id="register.passwordLength">
       <notes>
-        <note category="location">app/register/components/form-password/form-password.component.html:49</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:59</note>
       </notes>
       <segment>
         <source>8 or more characters</source>
@@ -1282,7 +1348,7 @@
     </unit>
     <unit id="register.passwordSymbol">
       <notes>
-        <note category="location">app/register/components/form-password/form-password.component.html:61</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:71</note>
       </notes>
       <segment>
         <source>1 letter or symbol</source>
@@ -1290,7 +1356,7 @@
     </unit>
     <unit id="register.passwordNumber">
       <notes>
-        <note category="location">app/register/components/form-password/form-password.component.html:73</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:83</note>
       </notes>
       <segment>
         <source>1 number</source>
@@ -1298,7 +1364,7 @@
     </unit>
     <unit id="register.confirmPassword">
       <notes>
-        <note category="location">app/register/components/form-password/form-password.component.html:78</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:88</note>
       </notes>
       <segment>
         <source>Confirm password</source>
@@ -1306,7 +1372,7 @@
     </unit>
     <unit id="register.passwordConfirmationRequired">
       <notes>
-        <note category="location">app/register/components/form-password/form-password.component.html:86,88</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:93,95</note>
       </notes>
       <segment>
         <source>
@@ -1314,9 +1380,20 @@
     </source>
       </segment>
     </unit>
+    <unit id="register.passwordCantBeEmail">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:99,101</note>
+        <note category="location">locale/i18n.pseudo.component.html:113</note>
+      </notes>
+      <segment>
+        <source>
+      Password must not be the same as your email address
+    </source>
+      </segment>
+    </unit>
     <unit id="register.passwordConfirmationMatch">
       <notes>
-        <note category="location">app/register/components/form-password/form-password.component.html:92,94</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:106,108</note>
       </notes>
       <segment>
         <source>
@@ -1408,6 +1485,14 @@
     </source>
       </segment>
     </unit>
+    <unit id="register.visibilityDescription2">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:16</note>
+      </notes>
+      <segment>
+        <source>More information on visibility settings.</source>
+      </segment>
+    </unit>
     <unit id="register.visibilityDescription3">
       <notes>
         <note category="location">app/register/components/form-visibility/form-visibility.component.html:19,22</note>
@@ -1462,36 +1547,40 @@
         <note category="location">app/register/components/form-terms/form-terms.component.html:8</note>
       </notes>
       <segment>
-        <source>I consent to the </source>
+        <source>I consent to the</source>
       </segment>
     </unit>
     <unit id="register.privacyPolicy">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:15</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:15,17</note>
       </notes>
       <segment>
-        <source>privacy policy </source>
+        <source>
+      privacy policy
+    </source>
       </segment>
     </unit>
     <unit id="register.and">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:16</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:18</note>
       </notes>
       <segment>
-        <source> and </source>
+        <source>and</source>
       </segment>
     </unit>
     <unit id="register.termsAndConditions">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:23</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:26,28</note>
       </notes>
       <segment>
-        <source>terms and conditions </source>
+        <source>
+      terms and conditions
+    </source>
       </segment>
     </unit>
     <unit id="register.use">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:25,26</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:30,31</note>
       </notes>
       <segment>
         <source>of use, including agreeing to my data being processed in the US and being
@@ -1500,7 +1589,7 @@
     </unit>
     <unit id="register.termsRequired">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:32</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:37</note>
       </notes>
       <segment>
         <source>You must accept the terms and conditions</source>
@@ -1508,25 +1597,15 @@
     </unit>
     <unit id="register.additionalEmails">
       <notes>
-        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:14</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:12</note>
       </notes>
       <segment>
         <source>Additional email</source>
       </segment>
     </unit>
-    <unit id="register.additionalEmailsCanBeDuplicated">
-      <notes>
-        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:43,45</note>
-      </notes>
-      <segment>
-        <source>
-        Additional email cannot match primary email
-      </source>
-      </segment>
-    </unit>
     <unit id="register.additionalEmailAdd">
       <notes>
-        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:80</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:69</note>
       </notes>
       <segment>
         <source>Add another email</source>
@@ -1534,21 +1613,11 @@
     </unit>
     <unit id="register.additionalEmailInfo">
       <notes>
-        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:87,88</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:80,81</note>
       </notes>
       <segment>
         <source>Ensure that you never lose access to your ORCID record by registering all
       of your email addresses on your account.</source>
-      </segment>
-    </unit>
-    <unit id="shared.ok">
-      <notes>
-        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:98,100</note>
-      </notes>
-      <segment>
-        <source>
-      Ok
-    </source>
       </segment>
     </unit>
     <unit id="register.recaptchaRequired">
@@ -1557,6 +1626,50 @@
       </notes>
       <segment>
         <source>Please check the recaptcha box</source>
+      </segment>
+    </unit>
+    <unit id="register.emailAlreadyExists">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:3</note>
+      </notes>
+      <segment>
+        <source>This email already exists in our system. Would you like to</source>
+      </segment>
+    </unit>
+    <unit id="register.signinLowerCase">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:6</note>
+      </notes>
+      <segment>
+        <source>sign in</source>
+      </segment>
+    </unit>
+    <unit id="shared.questionMark">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:7</note>
+      </notes>
+      <segment>
+        <source>?</source>
+      </segment>
+    </unit>
+    <unit id="register.additionalEmailMatchPrimary">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source>
+  Additional email cannot match primary email
+</source>
+      </segment>
+    </unit>
+    <unit id="register.additionalEmailMatch">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>
+  Additional emails can not be duplicated
+</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.showing">
@@ -2350,8 +2463,8 @@
         <note category="location">locale/i18n.pseudo.component.html:88,89</note>
       </notes>
       <segment>
-        <source>We couldn&apos;t recover your account details, please try again, and if this error
-  persists contact support</source>
+        <source>We couldn&apos;t recover your account details. Please try again, and if the error
+  persists please</source>
       </segment>
     </unit>
     <unit id="register.titleLabel">
