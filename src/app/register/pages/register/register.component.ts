@@ -92,17 +92,11 @@ export class RegisterComponent implements OnInit {
         .subscribe((value) => {
           if (value.length > 0) {
             this.openDialog(value)
-          } else {
-            // continueRegistration
           }
         })
       // TODO @leomendoza123 HANDLE ERROR show toaster
     }
   }
-
-  submitStepB() {}
-
-  submitStepC() {}
 
   openDialog(duplicateRecords): void {
     const dialogParams = {

@@ -128,7 +128,11 @@
   </ng-container>
 </ng-container>
 
-<mde-popover #namesPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
+<mde-popover
+  #namesPopover="mdePopover"
+  [mdePopoverOverlapTrigger]="false"
+  [mdePopoverCloseOnClick]="true"
+>
   <!--
     @leomendoza123 TODO
     the following message is not translated since is very likely to be change

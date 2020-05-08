@@ -69,3 +69,5 @@ export const GRID_COLUMNS = {
   tablet: 8,
   handset: 4,
 }
+
+export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']

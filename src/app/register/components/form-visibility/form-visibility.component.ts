@@ -9,6 +9,7 @@ import {
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 import { RegisterService } from 'src/app/core/register/register.service'
+import { VISIBILITY_OPTIONS } from 'src/app/constants'
 
 @Component({
   selector: 'app-form-visibility',
@@ -29,7 +30,7 @@ import { RegisterService } from 'src/app/core/register/register.service'
   ],
 })
 export class FormVisibilityComponent extends BaseForm implements OnInit {
-  visibilityOptions = ['PUBLIC', 'LIMITED', 'PRIVATE']
+  visibilityOptions = VISIBILITY_OPTIONS
 
   constructor(private _register: RegisterService) {
     super()
@@ -45,10 +46,10 @@ export class FormVisibilityComponent extends BaseForm implements OnInit {
 
   // OVERWRITE
   registerOnChange(fn: any) {
-    this.form.valueChanges.subscribe(value => {
-      const registerForm = this._register.formGroupToActivitiesVisibilityForm(<
-        FormGroup
-      >this.form)
+    this.form.valueChanges.subscribe((value) => {
+      const registerForm = this._register.formGroupToActivitiesVisibilityForm(
+        <FormGroup>this.form
+      )
       fn(registerForm)
     })
   }

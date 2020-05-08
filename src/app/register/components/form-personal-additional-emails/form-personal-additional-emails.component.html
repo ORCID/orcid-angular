@@ -1,5 +1,3 @@
-<!-- ADDITIONAL EMAILS -->
-
 <ng-container [formGroup]="additionalEmails">
   <div
     class="input-container"
@@ -13,11 +11,7 @@
         <ng-container i18n="@@register.additionalEmails"
           >Additional email</ng-container
         >
-        {{
-          additionalEmailControl.key !== '0'
-            ? parseInt(additionalEmailControl.key)
-            : ''
-        }}
+        {{ i !== 0 ? i : '' }}
         <ng-container i18n="@@register.optional">(Optional)</ng-container>
       </mat-label>
       <input
@@ -34,19 +28,6 @@
       >
         Invalid email format
       </mat-error>
-      <!--
-        <mat-error
-          *ngFor="
-            let error of getControlErrorAtFormLevel(
-              additionalEmailControl.value,
-              'allEmailsAreUnique'
-            )
-          "
-          i18n="@@register.additionalEmailsCanBeDuplicated"
-        >
-          Additional email cannot match primary email
-        </mat-error>
-      -->
       <mat-error
         *ngFor="
           let error of getControlErrorAtFormLevel(
@@ -66,9 +47,18 @@
       type="button"
       [mdePopoverTriggerFor]="namesPopover"
       mdePopoverTriggerOn="click"
-      #namesPopoverTrigger="mdePopoverTrigger"
+      #additionalEmailsPopoverTrigger="mdePopoverTrigger"
     >
       <mat-icon>info</mat-icon>
+    </button>
+    <button
+      *ngIf="i > 0"
+      mat-icon-button
+      aria-label="delete email"
+      type="button"
+      (click)="deleteEmailInput(additionalEmailControl.key)"
+    >
+      <mat-icon>remove_circle_outline</mat-icon>
     </button>
   </div>
 </ng-container>
@@ -80,7 +70,11 @@
   >
 </a>
 
-<mde-popover #namesPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
+<mde-popover
+  #namesPopover="mdePopover"
+  [mdePopoverOverlapTrigger]="false"
+  [mdePopoverCloseOnClick]="true"
+>
   <mat-card class="mat-elevation-z3 orcid-popover">
     <ng-container i18n="@@register.additionalEmailInfo"
       >Ensure that you never lose access to your ORCID record by registering all
@@ -91,9 +85,10 @@
       mat-button
       color="primary"
       aria-label="close"
-      (click)="namesPopoverTrigger.closePopover()"
+      (click)="additionalEmailsPopoverTrigger.closePopover()"
       cdkFocusInitial
       i18n="@@shared.ok"
+      type="button"
     >
       Ok
     </button>

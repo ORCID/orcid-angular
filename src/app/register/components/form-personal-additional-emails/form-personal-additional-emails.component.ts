@@ -4,6 +4,7 @@ import {
   Component,
   ViewChild,
   AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { TLD_REGEXP } from 'src/app/constants'
@@ -14,10 +15,12 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
   templateUrl: './form-personal-additional-emails.component.html',
   styleUrls: ['./form-personal-additional-emails.component.scss'],
 })
-export class FormPersonalAdditionalEmailsComponent {
+export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   @Input() additionalEmails: FormGroup
-  @ViewChild(`#namesPopover`) namesPopover
-  @ViewChild(`#namesPopoverTrigger`) namesPopoverTrigger
+  additionalEmailsPopoverTrigger
+  additionalEmailsCount = 1
+
+  constructor(private _ref: ChangeDetectorRef) {}
 
   backendErrorsMatcher = new ErrorStateMatcherForFormLevelErrors(
     this.getControlErrorAtFormLevel,
@@ -35,8 +38,12 @@ export class FormPersonalAdditionalEmailsComponent {
     )
   }
 
+  deleteEmailInput(id: string): void {
+    this.additionalEmails.removeControl(id)
+  }
+
   addAdditionalEmail(): void {
-    const controlName = Object.keys(this.additionalEmails.controls).length + 1
+    const controlName = ++this.additionalEmailsCount
     this.additionalEmails.addControl(
       this.zeroPad(controlName, 2),
       new FormControl('', {
@@ -51,5 +58,9 @@ export class FormPersonalAdditionalEmailsComponent {
 
   zeroPad(num, places) {
     return String(num).padStart(places, '0')
+  }
+
+  public ngAfterViewInit() {
+    this._ref.detectChanges()
   }
 }

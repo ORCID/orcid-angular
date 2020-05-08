@@ -19,7 +19,7 @@
           <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
-          <ng-template matStepLabel i18n="@@register.SecurityAndNotifications"
+          <ng-template matStepLabel i18n="@@register.securityAndNotifications"
             >Security and notifications</ng-template
           >
           <app-step-b
@@ -28,7 +28,7 @@
           ></app-step-b>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepC" #lastStep>
-          <ng-template matStepLabel i18n="@@register.VisibilityAndTerm"
+          <ng-template matStepLabel i18n="@@register.visibilityAndTerm"
             >Visibility and terms</ng-template
           >
           <app-step-c
@@ -55,17 +55,16 @@
           <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
-          <ng-template matStepLabel i18n="@@register.SecurityAndNotifications"
+          <ng-template matStepLabel i18n="@@register.securityAndNotifications"
             >Security and notifications</ng-template
           >
           <app-step-b
             [(formGroup)]="FormGroupStepB"
             [personalData]="personalData"
-            (submit)="submitStepB()"
           ></app-step-b>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepC" #lastStep>
-          <ng-template matStepLabel i18n="@@register.VisibilityAndTerm"
+          <ng-template matStepLabel i18n="@@register.visibilityAndTerm"
             >Visibility and terms</ng-template
           >
           <app-step-c
