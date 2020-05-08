@@ -28,6 +28,10 @@ import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { BackendErrorComponent } from './components/backend-error/backend-error.component'
+import {
+  MatProgressBar,
+  MatProgressBarModule,
+} from '@angular/material/progress-bar'
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -61,6 +65,7 @@ import { BackendErrorComponent } from './components/backend-error/backend-error.
     MatCardModule,
     RecaptchaModule,
     A11yLinkModule,
+    MatProgressBarModule,
   ],
 })
 export class RegisterModule {}

@@ -1,4 +1,6 @@
 <mat-card class="orcid-wizard">
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1" i18n="@@register.create"
       >Create your ORCID iD</mat-card-title
@@ -25,7 +27,12 @@
         >
           GO BACK
         </button>
-        <button mat-raised-button color="primary" i18n="@@register.register">
+        <button
+          mat-raised-button
+          color="primary"
+          i18n="@@register.register"
+          [disabled]="loading"
+        >
           REGISTER
         </button>
       </div>

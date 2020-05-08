@@ -8,6 +8,7 @@ import { BaseStep } from '../BaseStep'
   styleUrls: ['./step-c.component.scss'],
 })
 export class StepCComponent extends BaseStep implements OnInit {
+  @Input() loading
   constructor(private _formBuilder: FormBuilder) {
     super()
   }

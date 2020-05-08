@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   isLinear = true
   personalData: RegisterForm
   backendForm: RegisterForm
+  loading = false
   constructor(
     _platformInfo: PlatformInfoService,
     private _register: RegisterService,
@@ -41,6 +42,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(value) {
+    this.loading = true
     this.lastStep.interacted = true
     if (
       this.FormGroupStepA.valid &&
@@ -63,6 +65,7 @@ export class RegisterComponent implements OnInit {
           )
         )
         .subscribe((response) => {
+          this.loading = false
           if (response.url) {
             this.window.location.href = response.url
           } else {
@@ -70,6 +73,7 @@ export class RegisterComponent implements OnInit {
           }
         })
     } else {
+      this.loading = false
       // TODO @leomendoza123 HANDLE ERROR show toaster
     }
   }

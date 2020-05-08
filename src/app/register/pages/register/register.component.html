@@ -1,4 +1,4 @@
-<main class="container ">
+<main class="container">
   <div class="row space-around">
     <div class="col l6 m8 s4" [ngClass]="{ 'no-gutters': platform.columns4 }">
       <!-- MOBILE PRESENTATION -->
@@ -19,8 +19,8 @@
           <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
-          <ng-template matStepLabel i18n="@@register.personalSecurityVisibility"
-            >Security and visibility</ng-template
+          <ng-template matStepLabel i18n="@@register.SecurityAndNotifications"
+            >Security and notifications</ng-template
           >
           <app-step-b
             [(formGroup)]="FormGroupStepB"
@@ -28,12 +28,13 @@
           ></app-step-b>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepC" #lastStep>
-          <ng-template matStepLabel i18n="@@register.personalNotificationsTerm"
-            >Notifications and terms</ng-template
+          <ng-template matStepLabel i18n="@@register.VisibilityAndTerm"
+            >Visibility and terms</ng-template
           >
           <app-step-c
             [(formGroup)]="FormGroupStepC"
             (submit)="register('vertical')"
+            [loading]="loading"
           ></app-step-c>
         </mat-step>
       </mat-vertical-stepper>
@@ -54,8 +55,8 @@
           <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepB">
-          <ng-template matStepLabel i18n="@@register.personalSecurityVisibility"
-            >Security and visibility</ng-template
+          <ng-template matStepLabel i18n="@@register.SecurityAndNotifications"
+            >Security and notifications</ng-template
           >
           <app-step-b
             [(formGroup)]="FormGroupStepB"
@@ -64,12 +65,13 @@
           ></app-step-b>
         </mat-step>
         <mat-step [stepControl]="FormGroupStepC" #lastStep>
-          <ng-template matStepLabel i18n="@@register.personalNotificationsTerm"
-            >Notifications and terms</ng-template
+          <ng-template matStepLabel i18n="@@register.VisibilityAndTerm"
+            >Visibility and terms</ng-template
           >
           <app-step-c
             [(formGroup)]="FormGroupStepC"
             (submit)="register('horizontal')"
+            [loading]="loading"
           ></app-step-c>
         </mat-step>
       </mat-horizontal-stepper>
