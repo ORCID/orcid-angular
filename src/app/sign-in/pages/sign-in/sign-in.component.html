@@ -92,15 +92,12 @@
                   <a
                     class="row mat-button-font register-now"
                     i18n="@@ngOrcid.signin.registerNow"
-                    (click)="navigateTo('/register')"
+                    routerLink="/register"
                     >Register now
                   </a>
                 </div>
               </div>
-              <p
-                class="mat-subheading-2"
-                i18n="@@ngOrcid.signin.or"
-              >or</p>
+              <p class="mat-subheading-2" i18n="@@ngOrcid.signin.or">or</p>
               <mat-divider></mat-divider>
               <br />
               <app-social></app-social>

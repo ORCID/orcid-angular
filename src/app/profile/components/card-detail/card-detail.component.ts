@@ -37,7 +37,7 @@ export class CardDetailComponent implements OnInit {
   @Output()
   stateChange = new EventEmitter()
 
-  @ViewChild('contentProjection', { static: true })
+  @ViewChild('contentProjection')
   contentProjection: ElementRef
 
   constructor() {}

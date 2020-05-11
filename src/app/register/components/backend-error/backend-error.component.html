@@ -1,0 +1,24 @@
+<ng-container *ngIf="recognizedError[errorCode] === 0">
+  <ng-container i18n="@@register.emailAlreadyExists"
+    >This email already exists in our system. Would you like to</ng-container
+  >
+
+  <a routerLink="/signin" i18n="@@register.signinLowerCase">sign in</a
+  ><ng-container i18n="@@shared.questionMark">?</ng-container>
+</ng-container>
+
+<ng-container
+  *ngIf="recognizedError[errorCode] === 1"
+  i18n="@@register.additionalEmailMatchPrimary"
+>
+  Additional email cannot match primary email
+</ng-container>
+
+<ng-container
+  *ngIf="recognizedError[errorCode] === 2"
+  i18n="@@register.additionalEmailMatch"
+>
+  Additional emails can not be duplicated
+</ng-container>
+
+<ng-container *ngIf="unrecognizedError"> {{ errorCode }} </ng-container>

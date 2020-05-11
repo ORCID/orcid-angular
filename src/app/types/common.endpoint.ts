@@ -98,7 +98,7 @@ export interface MonthDayYearDate {
 }
 
 export interface Value {
-  errors?: [any] // TODO is this always empty?
+  errors?: any[] // TODO is this always empty?
   value: string
   required?: boolean
   getRequiredMessage?: any
