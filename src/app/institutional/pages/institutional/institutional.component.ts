@@ -25,6 +25,7 @@ export class InstitutionalComponent implements OnInit {
   entityID: any
   logoInstitution: any
   samlIdPCookieTTL = 730
+  numberOfInstitutionsToDisplay = 20
 
   institutionFormControl = new FormControl('', [Validators.required])
 
@@ -50,6 +51,7 @@ export class InstitutionalComponent implements OnInit {
           this.clear()
         },
         (error) => {
+          // TODO @leomendoza123 display error using a toaster
           console.log('Error getting disco feed' + JSON.stringify(error))
         }
       )
@@ -89,19 +91,13 @@ export class InstitutionalComponent implements OnInit {
       if (value === '' && this.retrieveAllFiltered) {
         return this.retrieveAllFiltered
       } else if (value === '') {
-        this.retrieveAllFiltered = this.options
-          .filter((institution) =>
-            institution.DisplayNames.some((displayNames) =>
-              displayNames.value.toLowerCase().includes(filterValue)
-            )
-          )
-          .map((result) => {
-            return result.DisplayNames.filter(
-              (subElement) => subElement.lang === 'en'
-            ).map((en) => {
-              return en.value
-            })
+        this.retrieveAllFiltered = this.options.map((result) => {
+          return result.DisplayNames.filter(
+            (subElement) => subElement.lang === 'en'
+          ).map((en) => {
+            return en.value
           })
+        })
         return this.retrieveAllFiltered
       } else {
         return this.options
@@ -110,7 +106,7 @@ export class InstitutionalComponent implements OnInit {
               displayNames.value.toLowerCase().includes(filterValue)
             )
           )
-          .slice(0, 20)
+          .slice(0, this.numberOfInstitutionsToDisplay)
           .map((result) => {
             return result.DisplayNames.filter(
               (subElement) => subElement.lang === 'en'

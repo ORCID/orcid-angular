@@ -4,7 +4,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatInputModule } from '@angular/material/input'
 import mockAutocomplete from '../../.mockData/mock-autocomplete.json'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import { action } from '@storybook/addon-actions'
 
 storiesOf('Components|Autocomplete', module).add(
   'Plain',
@@ -43,10 +43,16 @@ storiesOf('Components|Autocomplete', module).add(
           </mat-form-field>
     `,
     moduleMetadata: {
-      imports: [BrowserAnimationsModule, MatAutocompleteModule, MatInputModule, MatIconModule],
+      imports: [
+        BrowserAnimationsModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatIconModule,
+      ],
     },
     props: {
       filteredOptions: mockAutocomplete,
+      optionSelected: action(`log`),
     },
   }),
   {
@@ -55,4 +61,3 @@ storiesOf('Components|Autocomplete', module).add(
     },
   }
 )
-
