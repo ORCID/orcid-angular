@@ -34,7 +34,7 @@ export class SearchService {
 
   private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
-    Object.keys(querryParam).map(key => {
+    Object.keys(querryParam).map((key) => {
       escapedParams[key] = this.escapeReservedChar(querryParam[key])
     })
 
@@ -56,6 +56,7 @@ export class SearchService {
       const searchParameters = []
       if (escapedParams.firstName) {
         let searchValue = `given-names:${escapedParams.firstName}`
+        searchValue += ` OR given-and-family-names:${escapedParams.firstName}`
         if (escapedParams.otherFields === 'true') {
           searchValue += ` OR other-names:${escapedParams.firstName}`
         }
@@ -63,6 +64,7 @@ export class SearchService {
       }
       if (escapedParams.lastName) {
         let searchValue = `family-name:${escapedParams.lastName}`
+        searchValue += ` OR given-and-family-names:${escapedParams.lastName}`
         if (escapedParams.otherFields === 'true') {
           searchValue += ` OR other-names:${escapedParams.lastName}`
         }
@@ -108,7 +110,7 @@ export class SearchService {
   // Remove empty values, trim strings and remove false parameters
   searchParametersAdapter(value: SearchParameters) {
     const trimParameters = {}
-    Object.keys(value).forEach(element => {
+    Object.keys(value).forEach((element) => {
       if (typeof value[element] === 'string') {
         if (value[element].trim() && value[element] !== 'false') {
           trimParameters[element] = value[element].trim()
@@ -128,7 +130,8 @@ export class SearchService {
   }
 
   private handlePagination(querryParam: SearchParameters): string {
-    return `&start=${querryParam.pageIndex * querryParam.pageSize ||
-      0}&rows=${querryParam.pageSize || 50}`
+    return `&start=${querryParam.pageIndex * querryParam.pageSize || 0}&rows=${
+      querryParam.pageSize || 50
+    }`
   }
 }
