@@ -24,7 +24,7 @@ export class InstitutionalComponent implements OnInit {
   institution: Institutional
   entityID: any
   logoInstitution: any
-  samlIdPCookieTTL = 730
+  cookieExpirationTime = 730
   numberOfInstitutionsToDisplay = 20
 
   institutionFormControl = new FormControl('', [Validators.required])
@@ -62,12 +62,12 @@ export class InstitutionalComponent implements OnInit {
   onSubmit() {
     if (this.institutitonalForm.valid) {
       const dateCookie = new Date(
-        new Date().getTime() + this.samlIdPCookieTTL * 24 * 60 * 60 * 1000
+        new Date().getTime() + this.cookieExpirationTime * 24 * 60 * 60 * 1000
       )
       this._cookie.set(
         '_saml_idp',
         this.getCookieSaml(this.entityID),
-        dateCookie !== null ? dateCookie : this.samlIdPCookieTTL
+        dateCookie !== null ? dateCookie : this.cookieExpirationTime
       )
 
       const defaultReturn =

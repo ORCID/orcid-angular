@@ -4,10 +4,20 @@
   class="institution mat-elevation-z0"
   type="button"
 >
-  <mat-icon class="institution-icon">ic_account_balance</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.institutionalAccount">
+  <mat-icon
+    [ngClass]="
+      platform.columns4
+        ? 'institution-icon institution-icon-align-top'
+        : 'institution-icon '
+    "
+    >ic_account_balance</mat-icon
+  >
+  <span
+    [ngClass]="platform.columns4 ? 'institution-text' : ''"
+    i18n="@@ngOrcid.signin.institutionalAccount"
+  >
     Access through your institution
-  </ng-container>
+  </span>
 </button>
 <button
   mat-raised-button
@@ -23,7 +33,7 @@
 <button
   mat-raised-button
   (click)="navigateTo('')"
-  class="facebook mat-elevation-z0"
+  class="mat-button-wrap-icon mat-elevation-z0"
   type="button"
 >
   <mat-icon svgIcon="facebook"></mat-icon>

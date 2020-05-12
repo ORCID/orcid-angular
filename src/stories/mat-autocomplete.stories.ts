@@ -52,7 +52,8 @@ storiesOf('Components|Autocomplete', module).add(
     },
     props: {
       filteredOptions: mockAutocomplete,
-      optionSelected: action(`log`),
+      selected: action(`log`),
+      clear: action(`log`),
     },
   }),
   {

@@ -17,14 +17,13 @@ button {
 }
 
 .institution {
-  max-height: 36px;
+  height: auto;
   background-color: #0079ff;
   color: #ffffff;
 }
 
 .facebook {
   margin-top: 12px;
-  max-height: 36px;
   background-color: #3b5998;
   color: #ffffff;
 }
@@ -33,4 +32,18 @@ button {
   margin-left: -79px;
   line-height: 35px !important;
   font-size: 26px !important;
+}
+
+.institution-icon-align-top {
+  margin-top: 6px;
+}
+
+.institution-text {
+  display: block;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  word-break: break-all;
+  white-space: normal;
+  line-height: 24px;
 }
