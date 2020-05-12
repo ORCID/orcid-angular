@@ -26,7 +26,7 @@ export class PlatformInfoService {
 
   constructor(
     private _breakpointObserver: BreakpointObserver,
-    private _platform: Platform
+    _platform: Platform
   ) {
     if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
       this.platform.unsupportedBrowser = true
@@ -38,25 +38,29 @@ export class PlatformInfoService {
     this.platform.edge = _platform.EDGE
     this.platformSubject.next(this.platform)
 
-    this._breakpointObserver.observe([Breakpoints.Handset]).subscribe(state => {
-      if (state.matches) {
-        this.platform.handset = true
-      } else {
-        this.platform.handset = false
-      }
-      this.platformSubject.next(this.platform)
-    })
-    this._breakpointObserver.observe([Breakpoints.Tablet]).subscribe(state => {
-      if (state.matches) {
-        this.platform.tablet = true
-      } else {
-        this.platform.tablet = false
-      }
-      this.platformSubject.next(this.platform)
-    })
+    this._breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((state) => {
+        if (state.matches) {
+          this.platform.handset = true
+        } else {
+          this.platform.handset = false
+        }
+        this.platformSubject.next(this.platform)
+      })
+    this._breakpointObserver
+      .observe([Breakpoints.Tablet])
+      .subscribe((state) => {
+        if (state.matches) {
+          this.platform.tablet = true
+        } else {
+          this.platform.tablet = false
+        }
+        this.platformSubject.next(this.platform)
+      })
     this._breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.Tablet])
-      .subscribe(state => {
+      .subscribe((state) => {
         if (state.matches) {
           this.platform.tabletOrHandset = true
           this.platform.desktop = false
@@ -69,7 +73,7 @@ export class PlatformInfoService {
 
     this._breakpointObserver
       .observe(['(min-width: 839.99px)', '(min-width: 599.99px)'])
-      .subscribe(state => {
+      .subscribe((state) => {
         if (state.breakpoints['(min-width: 839.99px)']) {
           this.platform.columns8 = false
           this.platform.columns12 = true
