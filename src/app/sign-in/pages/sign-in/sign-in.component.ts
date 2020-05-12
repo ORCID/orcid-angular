@@ -5,8 +5,10 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { TwoFactorComponent } from '../../components/two-factor/two-factor.component'
-import { take } from 'rxjs/operators'
+import { take, tap } from 'rxjs/operators'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
+import { ActivatedRoute, Router } from '@angular/router'
+import { OauthParameters } from 'src/app/types'
 
 @Component({
   selector: 'app-sign-in',
@@ -38,7 +40,9 @@ export class SignInComponent implements OnInit {
   constructor(
     private _signIn: SignInService,
     private _userInfo: UserService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    _route: ActivatedRoute,
+    private _router: Router
   ) {
     _userInfo
       .getUserStatus()
@@ -56,6 +60,18 @@ export class SignInComponent implements OnInit {
             })
         }
       })
+
+    _route.queryParams
+      .pipe(
+        // More info about signin query paramter https://members.orcid.org/api/oauth/get-oauthauthorize
+        take(1),
+        tap((value: OauthParameters) => {
+          if (value.show_login === 'false') {
+            this._router.navigate(['/register'], { queryParams: value })
+          }
+        })
+      )
+      .subscribe()
   }
 
   usernameFormControl = new FormControl('', [
@@ -79,11 +95,8 @@ export class SignInComponent implements OnInit {
     this.authorizationForm.markAllAsTouched()
 
     if (this.authorizationForm.valid) {
+      this.hideErrors()
       this.loading = true
-      if (this.show2FA) {
-        this.showBadVerificationCode = false
-        this.showBadRecoveryCode = false
-      }
 
       const $signIn = this._signIn.signIn(value)
       $signIn.subscribe(data => {
@@ -130,6 +143,18 @@ export class SignInComponent implements OnInit {
       })
       this.onSubmit()
     }
+  }
+
+  hideErrors() {
+    this.showBadVerificationCode = false
+    this.showBadRecoveryCode = false
+    this.showDeprecatedError = false
+    this.showDeactivatedError = false
+    this.showUnclaimedError = false
+    this.showBadVerificationCode = false
+    this.showBadRecoveryCode = false
+    this.showInvalidUser = false
+    this.badCredentials = false
   }
 
   navigateTo(val) {

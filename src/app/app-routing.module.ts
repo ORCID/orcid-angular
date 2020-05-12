@@ -6,7 +6,6 @@ import {
   URL_PRIVATE_PROFILE,
   ApplicationRoutes,
 } from './constants'
-import { EnvironmentBannerComponent } from './environment-banner/environment-banner/environment-banner.component'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -52,6 +51,11 @@ const routes: Routes = [
       import('./password-recovery/password-recovery.module').then(
         m => m.PasswordRecoveryModule
       ),
+  },
+  {
+    path: ApplicationRoutes.register,
+    loadChildren: () =>
+      import('./register/register.module').then(m => m.RegisterModule),
   },
   {
     path: ApplicationRoutes.search,

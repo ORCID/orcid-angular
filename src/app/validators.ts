@@ -1,0 +1,46 @@
+import {
+  ValidatorFn,
+  AbstractControl,
+  Validators,
+  FormGroup,
+} from '@angular/forms'
+
+export class OrcidValidators {
+  static notPattern(pattern: string | RegExp): ValidatorFn {
+    return (control: AbstractControl) => {
+      const patterErrors = Validators.pattern(pattern)
+      const result = patterErrors(control)
+
+      if ((result && result.pattern) || control.value === '') {
+        return null
+      } else {
+        return { notPattern: 'the pattern is valid' }
+      }
+    }
+  }
+
+  static matchValues(value1: string, value2: string): ValidatorFn {
+    return (formGroup: FormGroup) => {
+      let hasErrors = false
+      const control = formGroup.controls[value1]
+      const confirmControl = formGroup.controls[value2]
+
+      if (!control || !confirmControl) {
+        return null
+      }
+
+      if (confirmControl.errors && !confirmControl.errors.mismatch) {
+        return null
+      }
+
+      if (control.value !== confirmControl.value) {
+        hasErrors = true
+        confirmControl.setErrors({ mismatch: true })
+      } else if (confirmControl.hasError('mismatch')) {
+        hasErrors = false
+        delete confirmControl.errors['mismatch']
+        confirmControl.updateValueAndValidity()
+      }
+    }
+  }
+}

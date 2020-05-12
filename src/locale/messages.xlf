@@ -15,7 +15,7 @@
     <unit id="header.signin">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:119</note>
+        <note category="location">app/layout/header/header.component.html:122</note>
       </notes>
       <segment>
         <source>SIGN IN</source>
@@ -24,7 +24,7 @@
     <unit id="header.register">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:121</note>
+        <note category="location">app/layout/header/header.component.html:124</note>
         <note category="location">app/layout/user-menu/user-menu.component.html:28</note>
       </notes>
       <segment>
@@ -34,7 +34,7 @@
     <unit id="public-layout.sign_out">
       <notes>
         <note category="description">#upperCase</note>
-        <note category="location">app/layout/header/header.component.html:135</note>
+        <note category="location">app/layout/header/header.component.html:138</note>
         <note category="location">locale/i18n.pseudo.component.html:56</note>
       </notes>
       <segment>
@@ -495,12 +495,9 @@
     </source>
       </segment>
     </unit>
-    <unit id="ngOrcid.signin.invalidEmail">
+    <unit id="ngOrcid.signin.2fa.verificationCodeRequired">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:24,25</note>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:86,87</note>
-        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:34,35</note>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:37,38</note>
       </notes>
       <segment>
         <source>Authentication code is required
@@ -583,6 +580,15 @@
     </source>
       </segment>
     </unit>
+    <unit id="ngOrcid.signin.2fa.recoveryCodeRequired">
+      <notes>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:86,87</note>
+      </notes>
+      <segment>
+        <source>Recovery code is required
+    </source>
+      </segment>
+    </unit>
     <unit id="ngOrcid.signin.2fa.badRecoveryCodeLength">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:95,96</note>
@@ -653,7 +659,16 @@
         <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:28,29</note>
       </notes>
       <segment>
-        <source>Email or 16-digit ORCID iD required
+        <source>Email or 16-digit ORCID iD is required
+                </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.invalidUsername">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:34,35</note>
+      </notes>
+      <segment>
+        <source>Use the format example@email.com or 0000-0001-2345-6789
                 </source>
       </segment>
     </unit>
@@ -790,6 +805,15 @@
       </source>
       </segment>
     </unit>
+    <unit id="ngOrcid.signin.invalidEmail">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:37,38</note>
+      </notes>
+      <segment>
+        <source>Use the format example@email.com
+      </source>
+      </segment>
+    </unit>
     <unit id="ngOrcid.signin.submit">
       <notes>
         <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:48,50</note>
@@ -894,6 +918,16 @@
       </notes>
       <segment>
         <source>contact support</source>
+      </segment>
+    </unit>
+    <unit id="shared.contactSupport">
+      <notes>
+        <note category="location">app/cdk/snackbar/snackbar/snackbar.component.html:12,14</note>
+      </notes>
+      <segment>
+        <source>
+      contact support.
+    </source>
       </segment>
     </unit>
     <unit id="ngOrcid.passwordAndOrcid">
@@ -1014,6 +1048,628 @@
       </notes>
       <segment>
         <source>contact us</source>
+      </segment>
+    </unit>
+    <unit id="register.personalData">
+      <notes>
+        <note category="location">app/register/pages/register/register.component.html:17</note>
+        <note category="location">app/register/pages/register/register.component.html:53</note>
+      </notes>
+      <segment>
+        <source>Personal data</source>
+      </segment>
+    </unit>
+    <unit id="register.securityAndNotifications">
+      <notes>
+        <note category="location">app/register/pages/register/register.component.html:23</note>
+        <note category="location">app/register/pages/register/register.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Security and notifications</source>
+      </segment>
+    </unit>
+    <unit id="register.visibilityAndTerm">
+      <notes>
+        <note category="location">app/register/pages/register/register.component.html:32</note>
+        <note category="location">app/register/pages/register/register.component.html:68</note>
+      </notes>
+      <segment>
+        <source>Visibility and terms</source>
+      </segment>
+    </unit>
+    <unit id="register.create">
+      <notes>
+        <note category="location">app/register/components/step-a/step-a.component.html:4</note>
+        <note category="location">app/register/components/step-b/step-b.component.html:4</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:6</note>
+      </notes>
+      <segment>
+        <source>Create your ORCID iD</source>
+      </segment>
+    </unit>
+    <unit id="register.step1">
+      <notes>
+        <note category="location">app/register/components/step-a/step-a.component.html:7</note>
+      </notes>
+      <segment>
+        <source>This is step 1 of 3</source>
+      </segment>
+    </unit>
+    <unit id="register.orcids">
+      <notes>
+        <note category="location">app/register/components/step-a/step-a.component.html:13</note>
+      </notes>
+      <segment>
+        <source>ORCID&apos;s</source>
+      </segment>
+    </unit>
+    <unit id="register.terms">
+      <notes>
+        <note category="location">app/register/components/step-a/step-a.component.html:20</note>
+      </notes>
+      <segment>
+        <source>terms of use</source>
+      </segment>
+    </unit>
+    <unit id="register.only">
+      <notes>
+        <note category="location">app/register/components/step-a/step-a.component.html:22,23</note>
+      </notes>
+      <segment>
+        <source>, you may only register for an ORCID iD for yourself. Already have an
+        ORCID iD?</source>
+      </segment>
+    </unit>
+    <unit id="register.sign">
+      <notes>
+        <note category="location">app/register/components/step-a/step-a.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Sign In</source>
+      </segment>
+    </unit>
+    <unit id="shared.next">
+      <notes>
+        <note category="location">app/register/components/step-a/step-a.component.html:46,48</note>
+        <note category="location">app/register/components/step-b/step-b.component.html:34,36</note>
+      </notes>
+      <segment>
+        <source>
+          NEXT
+        </source>
+      </segment>
+    </unit>
+    <unit id="register.step2">
+      <notes>
+        <note category="location">app/register/components/step-b/step-b.component.html:7</note>
+      </notes>
+      <segment>
+        <source>This is step 2 of 3</source>
+      </segment>
+    </unit>
+    <unit id="shared.back">
+      <notes>
+        <note category="location">app/register/components/step-b/step-b.component.html:26,28</note>
+        <note category="location">app/register/components/step-c/step-c.component.html:27,29</note>
+      </notes>
+      <segment>
+        <source>
+          GO BACK
+        </source>
+      </segment>
+    </unit>
+    <unit id="register.step3">
+      <notes>
+        <note category="location">app/register/components/step-c/step-c.component.html:9</note>
+      </notes>
+      <segment>
+        <source>This is step 3 of 3</source>
+      </segment>
+    </unit>
+    <unit id="register.register">
+      <notes>
+        <note category="location">app/register/components/step-c/step-c.component.html:35,37</note>
+      </notes>
+      <segment>
+        <source>
+          REGISTER
+        </source>
+      </segment>
+    </unit>
+    <unit id="register.firstName">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:4</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="register.firstNamePassword">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>
+        Please enter your first/given name
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.invalidName">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:15,17</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:47,49</note>
+      </notes>
+      <segment>
+        <source>
+        Invalid name characters or format
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.lastName">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="register.optional">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:40</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:15</note>
+      </notes>
+      <segment>
+        <source>(Optional)</source>
+      </segment>
+    </unit>
+    <unit id="register.primaryEmail">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Primary email</source>
+      </segment>
+    </unit>
+    <unit id="register.primaryEmailRequired">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:64,66</note>
+      </notes>
+      <segment>
+        <source>
+        An email is required
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.invalidEmail">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:73,75</note>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:102,104</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:28,30</note>
+      </notes>
+      <segment>
+        <source>
+        Invalid email format
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.confirmEmail">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:87</note>
+      </notes>
+      <segment>
+        <source>Confirm primary email</source>
+      </segment>
+    </unit>
+    <unit id="register.confirmEmailRequired">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:93,95</note>
+      </notes>
+      <segment>
+        <source>
+        Please confirm your email
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.confirmationEmailNotMatch">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:108,110</note>
+      </notes>
+      <segment>
+        <source>
+        Email confirmation does not match
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.moreInfo">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:151</note>
+      </notes>
+      <segment>
+        <source>More information on names</source>
+      </segment>
+    </unit>
+    <unit id="shared.ok">
+      <notes>
+        <note category="location">app/register/components/form-personal/form-personal.component.html:160,162</note>
+        <note category="location">app/register/components/form-password/form-password.component.html:162,164</note>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:92,94</note>
+      </notes>
+      <segment>
+        <source>
+      Ok
+    </source>
+      </segment>
+    </unit>
+    <unit id="register.password">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="register.passwordRequired">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>
+        A password is required
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.passwordNotEmail">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>
+        Password must not be the same as your email address
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.wrongPasswordPattern">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:25,27</note>
+      </notes>
+      <segment>
+        <source>
+        Password must match all pattern requirements
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.passwordLength">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:59</note>
+      </notes>
+      <segment>
+        <source>8 or more characters</source>
+      </segment>
+    </unit>
+    <unit id="register.passwordSymbol">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:71</note>
+      </notes>
+      <segment>
+        <source>1 letter or symbol</source>
+      </segment>
+    </unit>
+    <unit id="register.passwordNumber">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:83</note>
+      </notes>
+      <segment>
+        <source>1 number</source>
+      </segment>
+    </unit>
+    <unit id="register.confirmPassword">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:88</note>
+      </notes>
+      <segment>
+        <source>Confirm password</source>
+      </segment>
+    </unit>
+    <unit id="register.passwordConfirmationRequired">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:93,95</note>
+      </notes>
+      <segment>
+        <source>
+      Retype your password
+    </source>
+      </segment>
+    </unit>
+    <unit id="register.passwordCantBeEmail">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:99,101</note>
+        <note category="location">locale/i18n.pseudo.component.html:113</note>
+      </notes>
+      <segment>
+        <source>
+      Password must not be the same as your email address
+    </source>
+      </segment>
+    </unit>
+    <unit id="register.passwordConfirmationMatch">
+      <notes>
+        <note category="location">app/register/components/form-password/form-password.component.html:106,108</note>
+      </notes>
+      <segment>
+        <source>
+      The password and confirmed password must match
+    </source>
+      </segment>
+    </unit>
+    <unit id="register.notificationSettings">
+      <notes>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:1,3</note>
+      </notes>
+      <segment>
+        <source>
+  Notification settings
+</source>
+      </segment>
+    </unit>
+    <unit id="register.notificationsDescription1">
+      <notes>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:5,9</note>
+      </notes>
+      <segment>
+        <source>
+  ORCID sends email notifications about items related to your account, security,
+  and privacy, including requests from ORCID member organizations for permission
+  to update your record, and changes made to your record by those organizations.
+</source>
+      </segment>
+    </unit>
+    <unit id="register.notificationsDescription2">
+      <notes>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:11,14</note>
+      </notes>
+      <segment>
+        <source>
+  You can also choose to receive emails from us about new features and tips for
+  making the most of your ORCID record.
+</source>
+      </segment>
+    </unit>
+    <unit id="register.quarterlyEmail">
+      <notes>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:22,23</note>
+      </notes>
+      <segment>
+        <source>Please send me quarterly emails about new ORCID features and
+      tips.</source>
+      </segment>
+    </unit>
+    <unit id="register.quarterlyEmailVerified">
+      <notes>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:26,27</note>
+      </notes>
+      <segment>
+        <source>To receive these emails, you will also need to verify your primary email
+      address.</source>
+      </segment>
+    </unit>
+    <unit id="register.reviewAfterRegistered">
+      <notes>
+        <note category="location">app/register/components/form-notifications/form-notifications.component.html:32,35</note>
+      </notes>
+      <segment>
+        <source>
+  After you&apos;ve registered, you can change your notification settings at any time
+  in the account settings section of your ORCID record.
+</source>
+      </segment>
+    </unit>
+    <unit id="register.visibility">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:2,4</note>
+      </notes>
+      <segment>
+        <source>
+    Visibility settings
+  </source>
+      </segment>
+    </unit>
+    <unit id="register.visibilityDescription1">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:6,10</note>
+      </notes>
+      <segment>
+        <source>
+      ORCID iD connects with your ORCID record that can contain links to your
+      research activities, affiliations, awards, other versions of your name,
+      and more. You control this content and who can see it.
+    </source>
+      </segment>
+    </unit>
+    <unit id="register.visibilityDescription2">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:16</note>
+      </notes>
+      <segment>
+        <source>More information on visibility settings.</source>
+      </segment>
+    </unit>
+    <unit id="register.visibilityDescription3">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:19,22</note>
+      </notes>
+      <segment>
+        <source>
+    By default, who should be able to see information added to your ORCID
+    Record?
+  </source>
+      </segment>
+    </unit>
+    <unit id="register.VisibilityEveryone">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:31,33</note>
+      </notes>
+      <segment>
+        <source>
+        Everyone (87% of users choose this)
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.VisibilityTrusted">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:37,39</note>
+      </notes>
+      <segment>
+        <source>
+        Trusted parties (5% of users choose this)
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.VisibilityPrivate">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:43,45</note>
+      </notes>
+      <segment>
+        <source>
+        Only me (8% of users choose this)
+      </source>
+      </segment>
+    </unit>
+    <unit id="register.termsOfUse">
+      <notes>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Terms of Use</source>
+      </segment>
+    </unit>
+    <unit id="register.consentTo">
+      <notes>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:8</note>
+      </notes>
+      <segment>
+        <source>I consent to the</source>
+      </segment>
+    </unit>
+    <unit id="register.privacyPolicy">
+      <notes>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>
+      privacy policy
+    </source>
+      </segment>
+    </unit>
+    <unit id="register.and">
+      <notes>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:18</note>
+      </notes>
+      <segment>
+        <source>and</source>
+      </segment>
+    </unit>
+    <unit id="register.termsAndConditions">
+      <notes>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:26,28</note>
+      </notes>
+      <segment>
+        <source>
+      terms and conditions
+    </source>
+      </segment>
+    </unit>
+    <unit id="register.use">
+      <notes>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:30,31</note>
+      </notes>
+      <segment>
+        <source>of use, including agreeing to my data being processed in the US and being
+      publicly accessible where marked as “visible to Everyone”.</source>
+      </segment>
+    </unit>
+    <unit id="register.termsRequired">
+      <notes>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:37</note>
+      </notes>
+      <segment>
+        <source>You must accept the terms and conditions</source>
+      </segment>
+    </unit>
+    <unit id="register.additionalEmails">
+      <notes>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:12</note>
+      </notes>
+      <segment>
+        <source>Additional email</source>
+      </segment>
+    </unit>
+    <unit id="register.additionalEmailAdd">
+      <notes>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:69</note>
+      </notes>
+      <segment>
+        <source>Add another email</source>
+      </segment>
+    </unit>
+    <unit id="register.additionalEmailInfo">
+      <notes>
+        <note category="location">app/register/components/form-personal-additional-emails/form-personal-additional-emails.component.html:80,81</note>
+      </notes>
+      <segment>
+        <source>Ensure that you never lose access to your ORCID record by registering all
+      of your email addresses on your account.</source>
+      </segment>
+    </unit>
+    <unit id="register.recaptchaRequired">
+      <notes>
+        <note category="location">app/register/components/form-anti-robots/form-anti-robots.component.html:12</note>
+      </notes>
+      <segment>
+        <source>Please check the recaptcha box</source>
+      </segment>
+    </unit>
+    <unit id="register.emailAlreadyExists">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:3</note>
+      </notes>
+      <segment>
+        <source>This email already exists in our system. Would you like to</source>
+      </segment>
+    </unit>
+    <unit id="register.signinLowerCase">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:6</note>
+      </notes>
+      <segment>
+        <source>sign in</source>
+      </segment>
+    </unit>
+    <unit id="shared.questionMark">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:7</note>
+      </notes>
+      <segment>
+        <source>?</source>
+      </segment>
+    </unit>
+    <unit id="register.additionalEmailMatchPrimary">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:13,15</note>
+      </notes>
+      <segment>
+        <source>
+  Additional email cannot match primary email
+</source>
+      </segment>
+    </unit>
+    <unit id="register.additionalEmailMatch">
+      <notes>
+        <note category="location">app/register/components/backend-error/backend-error.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>
+  Additional emails can not be duplicated
+</source>
       </segment>
     </unit>
     <unit id="ngOrcid.search.showing">
@@ -1807,8 +2463,91 @@
         <note category="location">locale/i18n.pseudo.component.html:88,89</note>
       </notes>
       <segment>
-        <source>We couldn&apos;t recover your account details, please try again, and if this error
-  persists contact support</source>
+        <source>We couldn&apos;t recover your account details. Please try again, and if the error
+  persists please</source>
+      </segment>
+    </unit>
+    <unit id="register.titleLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:91</note>
+      </notes>
+      <segment>
+        <source>Could this be you?</source>
+      </segment>
+    </unit>
+    <unit id="register.bodyLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:93,96</note>
+      </notes>
+      <segment>
+        <source>We found some accounts with your name, which means you may have already
+  created an ORCID iD using a different email address. Before creating an
+  account, please confirm that none of these records belong to you. Not sure if
+  any of these are you?</source>
+      </segment>
+    </unit>
+    <unit id="register.contactLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:98</note>
+      </notes>
+      <segment>
+        <source>Contact us.</source>
+      </segment>
+    </unit>
+    <unit id="register.firstNameLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:99</note>
+      </notes>
+      <segment>
+        <source>First Name</source>
+      </segment>
+    </unit>
+    <unit id="register.lastNameLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:100</note>
+      </notes>
+      <segment>
+        <source>Last Name</source>
+      </segment>
+    </unit>
+    <unit id="register.affiliationsLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:102</note>
+      </notes>
+      <segment>
+        <source>Affiliations</source>
+      </segment>
+    </unit>
+    <unit id="register.dateCreatedLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:104</note>
+      </notes>
+      <segment>
+        <source>Date Created</source>
+      </segment>
+    </unit>
+    <unit id="register.viewRecordLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:105</note>
+      </notes>
+      <segment>
+        <source>View Record</source>
+      </segment>
+    </unit>
+    <unit id="register.signinLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:107</note>
+      </notes>
+      <segment>
+        <source>I ALREADY HAVE AN ID, GO BACK TO SIGN IN</source>
+      </segment>
+    </unit>
+    <unit id="register.continueLabel">
+      <notes>
+        <note category="location">locale/i18n.pseudo.component.html:110</note>
+      </notes>
+      <segment>
+        <source>NONE OF THESE ARE ME, CONTINUE WITH REGISTRATION</source>
       </segment>
     </unit>
   </file>

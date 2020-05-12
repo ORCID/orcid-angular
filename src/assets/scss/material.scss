@@ -34,6 +34,10 @@
 @import './material.orcid.overwrites.scss/menu.scss';
 @include mat-menu-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/form-field-outline.scss';
+@import './material.orcid.overwrites.scss/checkbox.scss';
 @include mat-snackbar-overwrites($orcid-app-theme);
 @include mat-card-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/card.scss';
+@import './material.orcid.overwrites.scss/stepper.scss';
+@import './material.orcid.overwrites.scss/mde-popover.scss';
+@import './material.orcid.overwrites.scss/radio.scss';
