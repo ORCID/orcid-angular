@@ -5,7 +5,8 @@ import { Observable } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError } from 'rxjs/operators'
-import { ORCID_REGEXP } from 'src/app/constants'
+import { containsDiacritics, ORCID_REGEXP } from 'src/app/constants'
+
 @Injectable({
   providedIn: 'root',
 })
@@ -56,7 +57,9 @@ export class SearchService {
       const searchParameters = []
       if (escapedParams.firstName) {
         let searchValue = `given-names:${escapedParams.firstName}`
-        searchValue += ` OR given-and-family-names:${escapedParams.firstName}`
+        if (containsDiacritics(escapedParams.firstName)) {
+          searchValue += ` OR given-and-family-names:${escapedParams.firstName}`
+        }
         if (escapedParams.otherFields === 'true') {
           searchValue += ` OR other-names:${escapedParams.firstName}`
         }
@@ -64,7 +67,9 @@ export class SearchService {
       }
       if (escapedParams.lastName) {
         let searchValue = `family-name:${escapedParams.lastName}`
-        searchValue += ` OR given-and-family-names:${escapedParams.lastName}`
+        if (containsDiacritics(escapedParams.lastName)) {
+          searchValue += ` OR given-and-family-names:${escapedParams.lastName}`
+        }
         if (escapedParams.otherFields === 'true') {
           searchValue += ` OR other-names:${escapedParams.lastName}`
         }
