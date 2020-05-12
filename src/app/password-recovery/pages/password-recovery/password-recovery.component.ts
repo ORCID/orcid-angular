@@ -76,7 +76,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
         $recovery = this._passwordRecovery.resetPassword(value)
       }
       $recovery.subscribe(
-        data => {
+        (data) => {
           this.loading = false
           // Sets the list of backend errors to the control
           if (data.errors && data.errors.length) {
@@ -87,13 +87,13 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
             this.submitted = true
           }
         },
-        error => {
+        (error) => {
           // Display server errors
           this.loading = false
           this._snackBar.showErrorMessage(
             $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
             // tslint:disable-next-line: max-line-length
-            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
+            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try using a different browser. If the error persists using a different browser, please`,
             error.message
           )
         }
