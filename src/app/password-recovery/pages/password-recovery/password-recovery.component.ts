@@ -93,7 +93,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
           this._snackBar.showErrorMessage(
             $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
             // tslint:disable-next-line: max-line-length
-            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try using a different browser. If the error persists using a different browser, please`,
+            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
             error.message,
             {
               message: '/reset-password.couldnt-recover :' + error.message,
