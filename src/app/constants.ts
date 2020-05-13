@@ -19,6 +19,7 @@ export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 export const LATIN_DIACRITICS = /[À-Ͽ]/
 
 export const ApplicationRoutes = {
+  institutional: 'institutional-signin',
   login: 'login',
   signin: 'signin',
   search: 'orcid-search/search',

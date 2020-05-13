@@ -3,6 +3,7 @@ import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
+import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
   selector: 'app-social',
@@ -10,11 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser'
   styleUrls: ['./social.component.scss'],
 })
 export class SocialComponent implements OnInit {
+  platform: PlatformInfo
+
   constructor(
     private _signIn: SignInService,
     @Inject(WINDOW) private window: Window,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    _platform: PlatformInfoService
   ) {
     this.matIconRegistry.addSvgIcon(
       `institutional-access`,
@@ -36,6 +40,10 @@ export class SocialComponent implements OnInit {
         '../../../../assets/vectors/facebook.svg'
       )
     )
+
+    _platform.get().subscribe((data) => {
+      this.platform = data
+    })
   }
 
   ngOnInit() {}
