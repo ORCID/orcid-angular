@@ -24,8 +24,6 @@ export class InstitutionalComponent implements OnInit {
   institution: Institutional
   entityID: any
   logoInstitution: any
-  cookieExpirationTime = 730
-  numberOfInstitutionsToDisplay = 20
 
   institutionFormControl = new FormControl('', [Validators.required])
 
@@ -61,15 +59,6 @@ export class InstitutionalComponent implements OnInit {
 
   onSubmit() {
     if (this.institutitonalForm.valid) {
-      const dateCookie = new Date(
-        new Date().getTime() + this.cookieExpirationTime * 24 * 60 * 60 * 1000
-      )
-      this._cookie.set(
-        '_saml_idp',
-        this.getCookieSaml(this.entityID),
-        dateCookie !== null ? dateCookie : this.cookieExpirationTime
-      )
-
       const defaultReturn =
         'https:' +
         environment.BASE_URL +
@@ -106,7 +95,7 @@ export class InstitutionalComponent implements OnInit {
               displayNames.value.toLowerCase().includes(filterValue)
             )
           )
-          .slice(0, this.numberOfInstitutionsToDisplay)
+          .slice(0, environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT)
           .map((result) => {
             return result.DisplayNames.filter(
               (subElement) => subElement.lang === 'en'
@@ -140,39 +129,6 @@ export class InstitutionalComponent implements OnInit {
     if (this.institution.Logos) {
       this.logoInstitution = this.institution.Logos[0].value
     }
-  }
-
-  getCookieSaml(entityId) {
-    const Q =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
-    let aE = '',
-      aI,
-      aG,
-      aF,
-      aM,
-      aL,
-      aK,
-      aJ
-    for (let aH = 0; aH < entityId.length; ) {
-      aI = entityId.charCodeAt(aH++)
-      aG = entityId.charCodeAt(aH++)
-      aF = entityId.charCodeAt(aH++)
-      /* tslint:disable:no-bitwise */
-      aM = aI >> 2
-      aL = ((aI & 3) << 4) + (aG >> 4)
-      aK = ((aG & 15) << 2) + (aF >> 6)
-      aJ = aF & 63
-      /* tslint:enable:no-bitwise */
-      if (isNaN(aG)) {
-        aK = aJ = 64
-      } else {
-        if (isNaN(aF)) {
-          aJ = 64
-        }
-      }
-      aE += Q.charAt(aM) + Q.charAt(aL) + Q.charAt(aK) + Q.charAt(aJ)
-    }
-    return aE
   }
 
   navigateTo(val) {

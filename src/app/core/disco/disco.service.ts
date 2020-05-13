@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { environment } from '../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { Disco } from '../../types/disco.endpoint'
+import { Institutional } from '../../types/institutional.endpoint'
 
 @Injectable({
   providedIn: 'root',
 })
 export class DiscoService {
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
-  getDiscoFeed(): Observable<any> {
-    return this.http.get<Disco>(
+  getDiscoFeed(): Observable<Institutional[]> {
+    return this._http.get<Institutional[]>(
       environment.BASE_URL + 'Shibboleth.sso/DiscoFeed'
     )
   }

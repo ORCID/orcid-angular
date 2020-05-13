@@ -10,6 +10,7 @@ export const environment = {
   HOTJAR_ANALYTICS: 'hjid:1229886',
   SHOW_TEST_WARNING_BANNER: true,
   CAN_DISABLE_TEST_WARNING_BANNER: true,
+  INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',

@@ -1,28 +1,20 @@
 <button
   mat-raised-button
   [routerLink]="['/institutional-signin']"
-  class="institution mat-elevation-z0"
+  class="institution mat-button-wrap-text-with-icon mat-elevation-z0"
   type="button"
 >
-  <mat-icon
-    [ngClass]="
-      platform.columns4
-        ? 'institution-icon institution-icon-align-top'
-        : 'institution-icon '
-    "
-    >ic_account_balance</mat-icon
-  >
-  <span
-    [ngClass]="platform.columns4 ? 'institution-text' : ''"
+  <mat-icon svgIcon="institutional-access"></mat-icon>
+  <ng-container
     i18n="@@ngOrcid.signin.institutionalAccount"
   >
     Access through your institution
-  </span>
+  </ng-container>
 </button>
 <button
   mat-raised-button
   (click)="navigateTo('')"
-  class="google mat-elevation-z0"
+  class="google mat-button-wrap-text-with-icon mat-elevation-z0"
   type="button"
 >
   <mat-icon svgIcon="google"></mat-icon>
@@ -33,7 +25,7 @@
 <button
   mat-raised-button
   (click)="navigateTo('')"
-  class="mat-button-wrap-icon mat-elevation-z0"
+  class="facebook mat-button-wrap-text-with-icon mat-elevation-z0"
   type="button"
 >
   <mat-icon svgIcon="facebook"></mat-icon>
