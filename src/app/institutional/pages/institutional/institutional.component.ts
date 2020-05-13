@@ -6,7 +6,7 @@ import { map, startWith, take } from 'rxjs/operators'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { Institutional } from '../../../types/institutional.endpoint'
 import { CookieService } from 'ngx-cookie-service'
-import { environment } from '../../../../environments/environment.local'
+import { environment } from '../../../../environments/environment'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
 
 @Component({
