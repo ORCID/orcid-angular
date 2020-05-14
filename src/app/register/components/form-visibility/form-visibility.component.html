@@ -44,5 +44,12 @@
         Only me (8% of users choose this)
       </mat-radio-button>
     </mat-radio-group>
+    <mat-error
+      *ngIf="
+        form.hasError('required', 'activitiesVisibilityDefault') && errorState
+      "
+      i18n="@@register.visibilityRequired"
+      >Please choose a default visibility setting.</mat-error
+    >
   </p>
 </ng-container>
