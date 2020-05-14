@@ -10,10 +10,12 @@
   <mat-error class="orcid-error">
     <ng-container i18n="@@ngOrcid.signin.deactivatedEnterEmail">
       If you can no longer access any emails associated with your iD, please
-      contact
     </ng-container>
-    <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
-      https://orcid.org/help/contact-us
+    <a
+      class="mat-button-font"
+      (click)="navigateTo('/help/contact-us')"
+      i18n="@@ngOrcid.signin.contactSupport"
+      >contact support
     </a>
   </mat-error>
   <form [formGroup]="deactivatedForm" (ngSubmit)="onSubmit()">
@@ -54,10 +56,13 @@
   <ng-container i18n="@@ngOrcid.signin.verify.reactivationSent">
     Thank you for reactivating your ORCID record; please complete the process by
     following the steps in the email we are now sending you. If you don’t
-    receive an email from us, please contact
+    receive an email from us, please
   </ng-container>
-  <a class="mat-button-font" (click)="navigateTo('/help/contact-us')">
-    https://orcid.org/help/contact-us
+  <a
+    class="mat-button-font"
+    (click)="navigateTo('/help/contact-us')"
+    i18n="@@ngOrcid.signin.contactSupport"
+    >contact support
   </a>
 </mat-error>
 <mat-error *ngIf="showReactivationSentError" class="orcid-error">
