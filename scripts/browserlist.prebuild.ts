@@ -6,7 +6,7 @@ import { getUserAgentRegExp } from 'browserslist-useragent-regexp'
 
 const regExp = getUserAgentRegExp({
   allowHigherVersions: true,
-  allowZeroSubverions: true,
+  allowZeroSubversions: true,
 })
 
 const fileText = `// tslint:disable-next-line: max-line-length
@@ -16,7 +16,7 @@ export const BROWSERLIST_REGEXP = ${regExp}
 fs.writeFile(
   './src/app/cdk/platform-info/browserlist.regexp.ts',
   fileText,
-  err => {
+  (err) => {
     if (err) {
       throw new Error('Error creating browserlist regexp ' + err)
     }
