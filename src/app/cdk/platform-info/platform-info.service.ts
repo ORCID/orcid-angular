@@ -24,6 +24,7 @@ export class PlatformInfoService {
     columns12: false,
     rtl: false,
     ltr: true,
+    screenDirection: 'ltr',
   }
 
   constructor(
@@ -32,7 +33,8 @@ export class PlatformInfoService {
     _platform: Platform
   ) {
     this.platform.rtl = locale === 'ar' ? true : false
-    this.platform.ltr = locale === 'ar' ? false : true
+    this.platform.ltr = !this.platform.rtl
+    this.platform.screenDirection = 'rtl'
 
     if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
       this.platform.unsupportedBrowser = true

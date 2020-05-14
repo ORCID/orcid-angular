@@ -7,13 +7,14 @@ import { SnackbarComponent } from './snackbar/snackbar.component'
 import { SnackbarModule } from './snackbar.module'
 import { PlatformInfo, PlatformInfoService } from '../platform-info'
 import { take } from 'rxjs/operators'
+import { ScreenDirection } from 'src/app/types'
 
 @Injectable({
   providedIn: SnackbarModule,
 })
 export class SnackbarService {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right'
-  contentDirection = 'ltr'
+  contentDirection: ScreenDirection = 'ltr'
   constructor(private _snackBar: MatSnackBar, _platform: PlatformInfoService) {
     _platform
       .get()

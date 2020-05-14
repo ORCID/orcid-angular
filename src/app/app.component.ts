@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  direction
+  screenDirection
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
   @HostBinding('class.tabletOrHandset') tabletOrHandset
@@ -29,7 +29,7 @@ export class AppComponent {
   ) {
     _platformInfo.get().subscribe((platformInfo) => {
       this.setPlatformClasses(platformInfo)
-      this.direction = platformInfo.rtl ? 'rtl' : null
+      this.screenDirection = platformInfo.screenDirection
     })
 
     _router.events.subscribe((event) => {

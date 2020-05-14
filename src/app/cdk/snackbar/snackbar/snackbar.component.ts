@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar'
+import { ScreenDirection } from 'src/app/types'
 
 @Component({
   selector: 'app-snackbar',
@@ -11,7 +12,7 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar'
 })
 export class SnackbarComponent implements OnInit {
   @HostBinding('class.mat-body-2') _matBody2 = true
-  @HostBinding('attr.dir') _contentDirection = 'ltr'
+  @HostBinding('attr.dir') _contentDirection: ScreenDirection = 'ltr'
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
     this._contentDirection = data.contentDirection

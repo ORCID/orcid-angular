@@ -1,6 +1,7 @@
 export interface PlatformInfo {
   rtl: boolean
   ltr: boolean
+  screenDirection: 'rtl' | 'ltr'
   unsupportedBrowser: boolean
   desktop: boolean
   tabletOrHandset: boolean
