@@ -9,7 +9,7 @@
 @import './material.orcid.overwrites.scss/snackbar-theme';
 @import './material.orcid.overwrites.scss/paginator.scss';
 @import './material.orcid.overwrites.scss/card-theme';
-
+@import './material.orcid.overwrites.scss/form-field-outline-theme';
 // .
 // .
 // MATERIAL THEMING
@@ -41,3 +41,4 @@
 @import './material.orcid.overwrites.scss/stepper.scss';
 @import './material.orcid.overwrites.scss/mde-popover.scss';
 @import './material.orcid.overwrites.scss/radio.scss';
+@include mat-form-field-outline-theme-overwrites($orcid-app-theme);

@@ -1,0 +1,18 @@
+// This files is an overwrite for
+// https://github.com/angular/components/blob/9.2.3/src/material/form-field/_form-field-outline-theme.scss
+@import '~@angular/cdk/text-field/text-field';
+@import '~@angular/material/_theming';
+
+@mixin mat-form-field-outline-theme-overwrites($theme) {
+  $foreground: map-get($theme, foreground);
+  .mat-form-field-appearance-outline {
+    input {
+      // use material mixing to overwrite the autofill
+      // https://material.angular.io/cdk/text-field/overview#styling-the-autofill-state-of-an-code-lt-input-gt-code-
+      @include cdk-text-field-autofill-color(
+        transparent,
+        mat-color($foreground, mat-color($foreground, text))
+      );
+    }
+  }
+}
