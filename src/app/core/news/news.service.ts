@@ -21,9 +21,9 @@ export class NewsService {
   getNews() {
     return this._http.get(environment.API_NEWS, { responseType: 'text' }).pipe(
       retry(3),
-      catchError(this._errorHandler.handleError),
-      flatMap(data =>
-        Observable.create(observer => {
+      catchError((error) => this._errorHandler.handleError(error)),
+      flatMap((data) =>
+        Observable.create((observer) => {
           // TODO: It might be possible to return the news response as a JSON from the backend
           // to avoid adding XML2JS in to production bundle.
           this.parser.parseString(data, (error, parsedData) => {
