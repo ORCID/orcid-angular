@@ -24,16 +24,15 @@ export class AppComponent {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    @Inject(LOCALE_ID) public locale: string,
     _router: Router,
     _googleAnalytics: GoogleAnalyticsService
   ) {
-    _platformInfo.get().subscribe(platformInfo => {
+    _platformInfo.get().subscribe((platformInfo) => {
       this.setPlatformClasses(platformInfo)
+      this.direction = platformInfo.rtl ? 'rtl' : null
     })
-    this.direction = locale === 'ar' ? 'rtl' : null
 
-    _router.events.subscribe(event => {
+    _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         _googleAnalytics.reportNavigationStart(event.url)
       }
