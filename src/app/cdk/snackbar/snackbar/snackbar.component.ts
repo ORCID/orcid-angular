@@ -11,8 +11,11 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar'
 })
 export class SnackbarComponent implements OnInit {
   @HostBinding('class.mat-body-2') _matBody2 = true
+  @HostBinding('attr.dir') _contentDirection = 'ltr'
 
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {}
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
+    this._contentDirection = data.contentDirection
+  }
 
   ngOnInit() {}
 }
