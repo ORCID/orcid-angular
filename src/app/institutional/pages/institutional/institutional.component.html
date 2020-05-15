@@ -39,7 +39,7 @@
             >
             <input
               matInput
-              aria-label="Institution"
+              [attr.aria-label]="labelInstitution"
               [formControl]="institutionFormControl"
               [matAutocomplete]="auto"
             />
@@ -59,7 +59,7 @@
               mat-button
               matSuffix
               mat-icon-button
-              aria-label="Clear"
+              [attr.aria-label]="labelClear"
               class="remove-border"
               (click)="clear()"
             >

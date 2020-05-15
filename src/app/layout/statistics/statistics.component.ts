@@ -9,9 +9,10 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   preserveWhitespaces: true,
 })
 export class StatisticsComponent implements OnInit {
+  labelStatistics = $localize`:@@layout.statistics:statistics`
   togglz: Config
   constructor(_togglz: TogglzService) {
-    _togglz.getTogglz().subscribe(data => {
+    _togglz.getTogglz().subscribe((data) => {
       this.togglz = data
     })
   }

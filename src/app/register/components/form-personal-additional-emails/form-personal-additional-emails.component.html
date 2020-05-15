@@ -43,7 +43,7 @@
     <button
       *ngIf="i == 0"
       mat-icon-button
-      aria-label="info about names"
+      [attr.aria-label]="labelInfoAboutEmails"
       type="button"
       [mdePopoverTriggerFor]="namesPopover"
       mdePopoverTriggerOn="click"
@@ -54,7 +54,7 @@
     <button
       *ngIf="i > 0"
       mat-icon-button
-      aria-label="delete email"
+      [attr.aria-label]="labelDeleteEmail"
       type="button"
       (click)="deleteEmailInput(additionalEmailControl.key)"
     >
@@ -84,7 +84,7 @@
     <button
       mat-button
       color="primary"
-      aria-label="close"
+      [attr.aria-label]="labelClose"
       (click)="additionalEmailsPopoverTrigger.closePopover()"
       cdkFocusInitial
       i18n="@@shared.ok"

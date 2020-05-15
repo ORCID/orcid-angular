@@ -7,7 +7,7 @@
     [matMenuTriggerFor]="menu"
     (menuOpened)="state = true"
     (menuClosed)="state = false"
-    aria-label="User menu"
+    [attr.aria-label]="labelUserMenu"
   >
     <img src="./assets/vectors/profile-icon.svg" alt="" />
     <ng-container *ngIf="platform.columns12" class="name-container">{{
@@ -22,7 +22,7 @@
     color="primary"
     class="name-container"
     *ngIf="!userInfo && !platform.columns4"
-    aria-label="sign in or register"
+    [attr.aria-label]="labelSigninRegister"
   >
     <ng-container i18n="#upperCase@@public-layout.sign_in">SIGN IN</ng-container
     >/<ng-container i18n="#upperCase@@header.register">REGISTER</ng-container>

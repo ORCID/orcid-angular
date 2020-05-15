@@ -14,6 +14,7 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  labelSearch = $localize`:@@layout.search:Search`
   form: FormGroup
   platform: PlatformInfo
   togglzEnableUserMenu: boolean
@@ -44,15 +45,15 @@ export class SearchComponent implements OnInit {
     public _changeDetection: ChangeDetectorRef,
     location: Location
   ) {
-    _platform.platformSubject.subscribe(data => {
+    _platform.platformSubject.subscribe((data) => {
       this.platform = data
     })
     _togglz
       .getStateOf('ENABLE_USER_MENU')
-      .subscribe(value => (this.togglzEnableUserMenu = value))
+      .subscribe((value) => (this.togglzEnableUserMenu = value))
     _togglz
       .getStateOf('ORCID_ANGULAR_SEARCH')
-      .subscribe(value => (this.togglzOrcidAngularSearch = value))
+      .subscribe((value) => (this.togglzOrcidAngularSearch = value))
 
     router.events.subscribe(
       () =>

@@ -21,6 +21,8 @@ export class UserMenuComponent implements OnInit {
   displayName: string
   platform: PlatformInfo
   togglzOrcidAngularSignin: boolean
+  labelSigninRegister = $localize`:@@layout.signinRegister:sign in or register`
+  labelUserMenu = $localize`:@@layout.userMenu:User menu`
 
   constructor(
     private _router: Router,
@@ -29,16 +31,16 @@ export class UserMenuComponent implements OnInit {
     _platform: PlatformInfoService,
     _togglz: TogglzService
   ) {
-    _userInfo.getUserInfoOnEachStatusUpdate().subscribe(data => {
+    _userInfo.getUserInfoOnEachStatusUpdate().subscribe((data) => {
       this.userInfo = data.userInfo
       this.displayName = data.displayName
     })
-    _platform.get().subscribe(data => {
+    _platform.get().subscribe((data) => {
       this.platform = data
     })
     _togglz
       .getStateOf('ORCID_ANGULAR_SIGNIN')
-      .subscribe(value => (this.togglzOrcidAngularSignin = value))
+      .subscribe((value) => (this.togglzOrcidAngularSignin = value))
   }
 
   ngOnInit() {}

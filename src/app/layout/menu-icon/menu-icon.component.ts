@@ -10,6 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 })
 export class MenuIconComponent implements OnInit {
   isOpenValue = false
+  labelMenu = $localize`:@@layout.menu:main menu`
 
   @Input()
   get isOpen() {

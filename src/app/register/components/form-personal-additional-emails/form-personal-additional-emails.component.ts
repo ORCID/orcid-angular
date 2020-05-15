@@ -16,6 +16,9 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
   styleUrls: ['./form-personal-additional-emails.component.scss'],
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
+  labelInfoAboutEmails = $localize`:@@ariaLabelInfoEmails:info about emails`
+  labelDeleteEmail = $localize`:@@ariaLabelDeleteEmail:delete email`
+  labelClose = $localize`:@@ariaLabelClose:close`
   @Input() additionalEmails: FormGroup
   additionalEmailsPopoverTrigger
   additionalEmailsCount = 1
