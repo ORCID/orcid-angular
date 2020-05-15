@@ -21,7 +21,7 @@ export class UserMenuComponent implements OnInit {
   displayName: string
   platform: PlatformInfo
   togglzOrcidAngularSignin: boolean
-  labelSigninRegister = $localize`:@@layout.ariaLabeSigninRegister:sign in or register`
+  labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:sign in or register`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
 
   constructor(
