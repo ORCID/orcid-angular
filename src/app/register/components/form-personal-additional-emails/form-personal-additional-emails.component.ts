@@ -16,7 +16,7 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
   styleUrls: ['./form-personal-additional-emails.component.scss'],
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
-  labelInfoAboutEmails = $localize`:@@register.register.ariaLabelInfoEmails:info about emails`
+  labelInfoAboutEmails = $localize`:@@register.ariaLabelInfoEmails:info about emails`
   labelDeleteEmail = $localize`:@@register.ariaLabelDeleteEmail:delete email`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   @Input() additionalEmails: FormGroup

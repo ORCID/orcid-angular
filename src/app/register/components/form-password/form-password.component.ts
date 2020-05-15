@@ -38,7 +38,7 @@ import { RegisterForm } from 'src/app/types/register.endpoint'
   ],
 })
 export class FormPasswordComponent extends BaseForm implements OnInit {
-  labelInfo = $localize`:@@register.register.ariaLabelInfoPassword:info about password`
+  labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
