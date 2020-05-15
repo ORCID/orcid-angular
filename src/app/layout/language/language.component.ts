@@ -10,7 +10,7 @@ import { LanguageService } from 'src/app/core/language/language.service'
 })
 export class LanguageComponent implements OnInit {
   languageMenuOptions
-  labelLanguage = $localize`:@@layout.language:language`
+  labelLanguage = $localize`:@@layout.ariaLabelLanguage:language`
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,

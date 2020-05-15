@@ -45,8 +45,8 @@ import { OrcidValidators } from 'src/app/validators'
   ],
 })
 export class FormPersonalComponent extends BaseForm implements OnInit {
-  labelInfoAboutName = $localize`:@@ariaLabelInfo:info about names`
-  labelClose = $localize`:@@ariaLabelClose:close`
+  labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
+  labelClose = $localize`:@@register.ariaLabelClose:close`
   constructor(private _register: RegisterService) {
     super()
   }

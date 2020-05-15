@@ -14,7 +14,7 @@ import { MaintenanceMessage } from 'src/app/types/togglz.local'
 export class MaintenanceMessageComponent implements OnInit {
   maintenanceMessage: MaintenanceMessage
   closableElement: Element
-  labelMaintenance = $localize`:@@layout.maintenance:Maintenance message`
+  labelMaintenance = $localize`:@@layout.ariaLabelMaintenance:Maintenance message`
 
   constructor(togglz: TogglzService, private _cookie: CookieService) {
     togglz.getMaintenanceMessages().subscribe((value) => {

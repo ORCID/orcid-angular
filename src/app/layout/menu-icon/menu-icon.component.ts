@@ -10,7 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 })
 export class MenuIconComponent implements OnInit {
   isOpenValue = false
-  labelMenu = $localize`:@@layout.menu:main menu`
+  labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
   @Input()
   get isOpen() {

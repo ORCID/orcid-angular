@@ -10,7 +10,7 @@ import { WINDOW } from 'src/app/cdk/window'
 })
 export class FooterComponent implements OnInit {
   platform
-  labelFooter = $localize`:@@layout.footer:footer`
+  labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
 
   constructor(
     _platformInfo: PlatformInfoService,

@@ -14,7 +14,7 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  labelSearch = $localize`:@@layout.search:Search`
+  labelSearch = $localize`:@@layout.ariaLabelSearch:Search`
   form: FormGroup
   platform: PlatformInfo
   togglzEnableUserMenu: boolean

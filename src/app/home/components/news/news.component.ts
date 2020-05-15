@@ -14,7 +14,7 @@ import { WINDOW } from 'src/app/cdk/window'
 export class NewsComponent implements OnInit {
   news
   platform
-  labelHomeNews = $localize`:@@home.news:News`
+  labelHomeNews = $localize`:@@home.ariaLabelNews:News`
   constructor(
     private _news: NewsService,
     private _platform: PlatformInfoService,

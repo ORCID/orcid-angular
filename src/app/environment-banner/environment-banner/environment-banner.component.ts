@@ -13,7 +13,7 @@ export class EnvironmentBannerComponent implements OnInit {
   hostUrl
   canDismiss = environment['CAN_DISABLE_TEST_WARNING_BANNER']
   @HostBinding('style.display') display = 'none'
-  labelWarning = $localize`:@@environmentBanner.warning:Warning, testing website`
+  labelWarning = $localize`:@@environmentBanner.ariaLabelWarning:Warning, testing website`
   constructor(
     @Inject(WINDOW) private window: Window,
     private _cs: CookieService
