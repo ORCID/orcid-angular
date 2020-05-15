@@ -95,8 +95,8 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     const matchingProperties: MatchingPair[] = this.matchingValueEnglishProperties(
       originFolder
     )
-    matchingProperties.forEach(matching => {
-      PropertyFolderImpl.supportedLanguagesFile.forEach(language => {
+    matchingProperties.forEach((matching) => {
+      PropertyFolderImpl.supportedLanguagesFile.forEach((language) => {
         if (language !== 'en') {
           // Creates a language node if there is no one already
           if (!this.files[matching.a.fileName][language]) {
@@ -168,9 +168,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
         matchingPairs.push({ a: thisProperty, b: originProperty })
       } else {
         console.warn(
-          `not match for ${thisProperty.fileName}/ ${thisProperty.key}=${
-            thisProperty.value
-          }`
+          `not match for ${thisProperty.fileName}/ ${thisProperty.key}=${thisProperty.value}`
         )
       }
     })
@@ -191,13 +189,13 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     } else {
       // Setup a score object
       const scores = {}
-      candidateKeys.forEach(key => (scores[key] = 0))
+      candidateKeys.forEach((key) => (scores[key] = 0))
 
       // Adds a score point for each translation that a key has
-      PropertyFolderImpl.supportedLanguagesFile.forEach(language => {
+      PropertyFolderImpl.supportedLanguagesFile.forEach((language) => {
         const flatFolder = this.flatFolder(language, originFolder)
 
-        candidateKeys.forEach(key => {
+        candidateKeys.forEach((key) => {
           if (flatFolder[key]) {
             scores[key]++
           }
@@ -211,7 +209,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       if (scores[propertyKey]) {
         betterScoreKey = propertyKey
       }
-      Object.keys(scores).forEach(key => {
+      Object.keys(scores).forEach((key) => {
         if (!betterScoreKey) {
           betterScoreKey = key
         } else if (scores[betterScoreKey] < scores[key]) {
@@ -221,9 +219,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
       if (propertyKey !== betterScoreKey) {
         console.warn(`
 From the many properties on Orcid Source that have the same english value of ${propertyKey}
------${betterScoreKey} was select as it has translations for ${
-          scores[betterScoreKey]
-        } languages
+-----${betterScoreKey} was select as it has translations for ${scores[betterScoreKey]} languages
       `)
       }
       return betterScoreKey
@@ -319,7 +315,7 @@ From the many properties on Orcid Source that have the same english value of ${p
     const properties: Properties = {}
     const jsonData = propertiesToJSON(data)
     Object.keys(jsonData).forEach(
-      key =>
+      (key) =>
         (properties[key] = {
           value: jsonData[key],
           ...{ key, fileName, language },
@@ -351,9 +347,9 @@ From the many properties on Orcid Source that have the same english value of ${p
   generateTestingLanguages() {
     console.log('Generate testing languages ________')
     const testingLanguages = ['rl', 'lr', 'xx']
-    Object.keys(this.files).forEach(fileName => {
+    Object.keys(this.files).forEach((fileName) => {
       console.log('fileName', fileName)
-      testingLanguages.forEach(testingLangue => {
+      testingLanguages.forEach((testingLangue) => {
         console.log('---testingLangue', testingLangue)
         // Create the error testing language if does not exist
         if (!this.files[fileName][testingLangue]) {
@@ -361,16 +357,12 @@ From the many properties on Orcid Source that have the same english value of ${p
 
           this.files[fileName][testingLangue] = {}
         }
-        Object.keys(this.files[fileName]['en']).forEach(key => {
-          if (!this.files[fileName][testingLangue][key]) {
-            console.log('---did not had translations for key', key)
-
-            this.files[fileName][testingLangue][key] = {
-              value: 'rl',
-              language: 'rl',
-              fileName: fileName,
-              key: key,
-            }
+        Object.keys(this.files[fileName]['en']).forEach((key) => {
+          this.files[fileName][testingLangue][key] = {
+            value: testingLangue === 'xx' ? 'X' : testingLangue.toUpperCase(),
+            language: testingLangue,
+            fileName: fileName,
+            key: key,
           }
         })
       })
@@ -418,13 +410,13 @@ export class NgOrcidPropertyFolder extends PropertyFolderImpl {
 
   folderFileNames(filenames: string[]) {
     const namesOnly = filenames
-      .filter(file => file.includes('.properties'))
-      .map(value => value.split('/'))
-      .map(value => value.pop())
-      .map(value => value.split('.'))
-      .map(value => value.pop() && value)
-      .map(value => value.pop() && value)
-      .map(value => value.join())
+      .filter((file) => file.includes('.properties'))
+      .map((value) => value.split('/'))
+      .map((value) => value.pop())
+      .map((value) => value.split('.'))
+      .map((value) => value.pop() && value)
+      .map((value) => value.pop() && value)
+      .map((value) => value.join())
     return namesOnly.filter(
       (value, index) => namesOnly.indexOf(value) === index
     )
