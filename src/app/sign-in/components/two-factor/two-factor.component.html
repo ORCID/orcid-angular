@@ -13,21 +13,21 @@
       #inputVerificationCode
       formControlName="verificationCode"
       cdkFocusInitial
+      appTrim
     />
     <mat-hint align="end"
       >{{ inputVerificationCode.value?.length || 0 }}/6</mat-hint
     >
-    <mat-error
-      *ngIf="verificationFormControl.hasError('required')"
+    <mat-error *ngIf="verificationFormControl.hasError('required')">
+      <p
+        i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
+        class="error-message"
       >
-        <p
-          i18n="@@ngOrcid.signin.2fa.verificationCodeRequired"
-          class="error-message">
-          Authentication code is required
-        </p>
-        <p class="error-length">
-          {{ inputVerificationCode.value?.length || 0 }}/6
-        </p>
+        Authentication code is required
+      </p>
+      <p class="error-length">
+        {{ inputVerificationCode.value?.length || 0 }}/6
+      </p>
     </mat-error>
 
     <mat-error
@@ -36,14 +36,15 @@
         verificationFormControl.hasError('maxlength')
       "
     >
-        <p
+      <p
         i18n="@@ngOrcid.signin.2fa.badVerificationCodeLength"
-        class="error-message">
+        class="error-message"
+      >
         Invalid authentication code length
-        </p>
-        <p class="error-length">
-            {{ inputVerificationCode.value?.length || 0 }}/6
-        </p>
+      </p>
+      <p class="error-length">
+        {{ inputVerificationCode.value?.length || 0 }}/6
+      </p>
     </mat-error>
   </mat-form-field>
   <p>
@@ -89,21 +90,15 @@
     <mat-label i18n="@@ngOrcid.signin.2fa.recoveryCode">
       Recovery code
     </mat-label>
-    <input matInput #inputRecoveryCode formControlName="recoveryCode" />
+    <input matInput #inputRecoveryCode formControlName="recoveryCode" appTrim />
     <mat-hint align="end"
       >{{ inputRecoveryCode.value?.length || 0 }}/10</mat-hint
     >
-    <mat-error
-      *ngIf="recoveryCodeFormControl.hasError('required')"
-      >
-        <p
-          i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired"
-          class="error-message">
-          Recovery code is required
-        </p>
-        <p class="error-length">
-          {{ inputRecoveryCode.value?.length || 0 }}/10
-        </p>
+    <mat-error *ngIf="recoveryCodeFormControl.hasError('required')">
+      <p i18n="@@ngOrcid.signin.2fa.recoveryCodeRequired" class="error-message">
+        Recovery code is required
+      </p>
+      <p class="error-length">{{ inputRecoveryCode.value?.length || 0 }}/10</p>
     </mat-error>
 
     <mat-error
@@ -111,15 +106,14 @@
         recoveryCodeFormControl.hasError('minlength') ||
         recoveryCodeFormControl.hasError('maxlength')
       "
+    >
+      <p
+        i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
+        class="error-message"
       >
-        <p
-          i18n="@@ngOrcid.signin.2fa.badRecoveryCodeLength"
-          class="error-message">
-          Invalid recovery code length
-        </p>
-        <p class="error-length">
-          {{ inputRecoveryCode.value?.length || 0 }}/10
-        </p>
+        Invalid recovery code length
+      </p>
+      <p class="error-length">{{ inputRecoveryCode.value?.length || 0 }}/10</p>
     </mat-error>
   </mat-form-field>
 
