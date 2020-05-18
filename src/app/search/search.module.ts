@@ -18,7 +18,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component'
 import { BidiModule } from '@angular/cdk/bidi'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { TrimDirective } from '../cdk/form-directives/trim.directive'
+import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 
 @NgModule({
   declarations: [SearchComponent, ResultsComponent, AdvanceSearchComponent],
@@ -36,7 +36,7 @@ import { TrimDirective } from '../cdk/form-directives/trim.directive'
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    TrimDirective,
+    FormDirectivesModule,
   ],
   exports: [ResultsComponent, AdvanceSearchComponent],
 })
