@@ -1,4 +1,4 @@
-<mat-icon>error</mat-icon>
+<mat-icon *ngIf="!isIE">error</mat-icon>
 <div class="box mat-body-1">
   <div class="mat-subheading-2">{{ data.title }}</div>
   <div class="error-container">

@@ -94,7 +94,11 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
             $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
             // tslint:disable-next-line: max-line-length
             $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
-            error.message
+            error.message,
+            {
+              message: '/reset-password.couldnt-recover :' + error.message,
+              fatal: true,
+            }
           )
         }
       )

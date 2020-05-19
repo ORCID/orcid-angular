@@ -8,6 +8,7 @@ import { TLD_REGEXP } from '../../../../constants'
   selector: 'app-deactivated',
   templateUrl: './deactivated.component.html',
   styleUrls: ['./deactivated.component.scss'],
+  preserveWhitespaces: true,
 })
 export class DeactivatedComponent implements OnInit {
   @Input() email: string

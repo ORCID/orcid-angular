@@ -25,7 +25,7 @@ export class AffiliationsService implements ActivityService {
 
   get(id: string): Observable<AffiliationUIGroup[]> {
     return this.getAffiliations(id).pipe(
-      tap(data => {
+      tap((data) => {
         this.lastEmitedValue = data
         this.affiliationsSubject.next(data)
       }),
@@ -44,11 +44,11 @@ export class AffiliationsService implements ActivityService {
 
   getAffiliationsDetails(id, type, putCode): Observable<AffiliationUIGroup[]> {
     return this.getAffiliationDetails(id, putCode, type).pipe(
-      tap(data => {
+      tap((data) => {
         if (data && data.url && data.url.value) {
-          this.lastEmitedValue.forEach(affiliations => {
-            affiliations.affiliationGroup.map(affiliationsStack => {
-              affiliationsStack.affiliations.map(affiliation => {
+          this.lastEmitedValue.forEach((affiliations) => {
+            affiliations.affiliationGroup.map((affiliationsStack) => {
+              affiliationsStack.affiliations.map((affiliation) => {
                 if (
                   affiliation.affiliationType.value === type &&
                   affiliation.putCode.value === putCode
@@ -75,7 +75,7 @@ export class AffiliationsService implements ActivityService {
       )
       .pipe(
         retry(3),
-        catchError(this._errorHandler.handleError)
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -84,9 +84,9 @@ export class AffiliationsService implements ActivityService {
       .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
       .pipe(
         retry(3),
-        map(data => this._affiliationsGroupingService.transform(data)),
-        map(data => this._affiliationsSortService.transform(data)),
-        catchError(this._errorHandler.handleError)
+        map((data) => this._affiliationsGroupingService.transform(data)),
+        map((data) => this._affiliationsSortService.transform(data)),
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
