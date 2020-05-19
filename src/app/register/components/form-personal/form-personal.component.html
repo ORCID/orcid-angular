@@ -57,7 +57,7 @@
   <ng-container formGroupName="emails">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.primaryEmail">Primary email</mat-label>
-      <input formControlName="email" matInput />
+      <input formControlName="email" matInput appTrim />
       <mat-error
         *ngIf="form.hasError('required', 'emails.email')"
         i18n="@@register.primaryEmailRequired"
@@ -86,7 +86,12 @@
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >
-      <input formControlName="confirmEmail" matInput (paste)="(false)" />
+      <input
+        formControlName="confirmEmail"
+        matInput
+        (paste)="(false)"
+        appTrim
+      />
       <mat-error
         *ngIf="form.hasError('required', 'emails.confirmEmail')"
         i18n="@@register.confirmEmailRequired"

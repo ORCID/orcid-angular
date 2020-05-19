@@ -37,7 +37,7 @@
         <mat-label i18n="@@ngOrcid.search.lastName">Last Name</mat-label>
         <input matInput formControlName="lastName" />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="institution col l4 m5 s4 ">
+      <mat-form-field appearance="outline" class="institution col l4 m5 s4">
         <mat-label i18n="@@ngOrcid.search.institutionName"
           >Institution Name</mat-label
         >
@@ -49,7 +49,9 @@
         <input
           formControlName="institution"
           matInput
-          placeholder="{{isAPhoneScreen? null : ngOrcidSearchInstitutionNamePlaceholder}}"
+          placeholder="{{
+            isAPhoneScreen ? null : ngOrcidSearchInstitutionNamePlaceholder
+          }}"
         />
       </mat-form-field>
       <mat-form-field appearance="outline" class="keyword col l2 m3 s4 grow">
@@ -71,7 +73,7 @@
     <div class="row orcidInput">
       <mat-form-field appearance="outline" class="col l3 m4 s4">
         <mat-label i18n="@@ngOrcid.search.orcidID">Orcid iD</mat-label>
-        <input formControlName="orcid" style="width: 100%;" matInput />
+        <input formControlName="orcid" style="width: 100%;" matInput appTrim />
         <mat-error i18n="@@ngOrcid.search.orcidIdPatterError">
           Given value doesn't match ORCID iD pattern
         </mat-error>

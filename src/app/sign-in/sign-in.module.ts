@@ -14,6 +14,7 @@ import { DeactivatedComponent } from './components/errors/deactivated/deactivate
 import { TwoFactorComponent } from './components/two-factor/two-factor.component'
 import { LoggedInComponent } from './components/logged-in/logged-in.component'
 import { PrintErrorsComponent } from './components/errors/print-errors/print-errors.component'
+import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PrintErrorsComponent } from './components/errors/print-errors/print-err
     MatProgressBarModule,
     MatDividerModule,
     SignInRoutingModule,
+    FormDirectivesModule,
   ],
   entryComponents: [],
 })

@@ -32,6 +32,7 @@ import {
   MatProgressBar,
   MatProgressBarModule,
 } from '@angular/material/progress-bar'
+import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -66,6 +67,7 @@ import {
     RecaptchaModule,
     A11yLinkModule,
     MatProgressBarModule,
+    FormDirectivesModule,
   ],
 })
 export class RegisterModule {}
