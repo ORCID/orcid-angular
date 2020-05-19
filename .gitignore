@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+src/locale/messages.xlf
 
 # dependencies
 /node_modules
