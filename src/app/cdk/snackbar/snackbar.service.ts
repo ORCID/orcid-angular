@@ -8,6 +8,7 @@ import { SnackbarModule } from './snackbar.module'
 import { PlatformInfo, PlatformInfoService } from '../platform-info'
 import { take } from 'rxjs/operators'
 import { ScreenDirection } from 'src/app/types'
+import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 
 @Injectable({
   providedIn: SnackbarModule,
@@ -15,7 +16,11 @@ import { ScreenDirection } from 'src/app/types'
 export class SnackbarService {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right'
   contentDirection: ScreenDirection = 'ltr'
-  constructor(private _snackBar: MatSnackBar, _platform: PlatformInfoService) {
+  constructor(
+    private _snackBar: MatSnackBar,
+    _platform: PlatformInfoService,
+    private _gtag: GoogleAnalyticsService
+  ) {
     _platform
       .get()
       .pipe(take(1))
@@ -27,7 +32,15 @@ export class SnackbarService {
       })
   }
 
-  showErrorMessage(title: string, message: string, error: string) {
+  showErrorMessage(
+    title: string,
+    message: string,
+    error: string,
+    analyticsReport: {
+      message: string
+      fatal: boolean
+    } = null
+  ) {
     this._snackBar.openFromComponent(SnackbarComponent, {
       data: {
         title: title,
@@ -40,5 +53,8 @@ export class SnackbarService {
       panelClass: 'error',
       duration: 10 * 1000,
     })
+    if (analyticsReport) {
+      this._gtag.reportError(analyticsReport.message, analyticsReport.fatal)
+    }
   }
 }
