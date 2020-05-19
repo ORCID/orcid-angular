@@ -16,11 +16,7 @@ import {
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
-import {
-  TLD_REGEXP,
-  ILLEGAL_NAME_CHARACTERS_REGEXP,
-  URL_REGEXP,
-} from 'src/app/constants'
+import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from 'src/app/constants'
 import { Observable } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { map } from 'rxjs/operators'
@@ -52,7 +48,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
   emails: FormGroup = new FormGroup({})
   additionalEmails: FormGroup = new FormGroup({
     '0': new FormControl('', {
-      validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
+      validators: [OrcidValidators.email],
     }),
   })
 
@@ -60,19 +56,11 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
     this.emails = new FormGroup(
       {
         email: new FormControl('', {
-          validators: [
-            Validators.required,
-            Validators.email,
-            Validators.pattern(TLD_REGEXP),
-          ],
+          validators: [Validators.required, OrcidValidators.email],
           asyncValidators: this._register.backendValueValidate('email'),
         }),
         confirmEmail: new FormControl('', {
-          validators: [
-            Validators.required,
-            Validators.email,
-            Validators.pattern(TLD_REGEXP),
-          ],
+          validators: [Validators.required, OrcidValidators.email],
         }),
         additionalEmails: this.additionalEmails,
       },
@@ -153,10 +141,10 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
 
   // OVERWRITE
   registerOnChange(fn: any) {
-    this.form.valueChanges.subscribe(value => {
-      const emailsForm = this._register.formGroupToEmailRegisterForm(<
-        FormGroup
-      >this.form.controls['emails'])
+    this.form.valueChanges.subscribe((value) => {
+      const emailsForm = this._register.formGroupToEmailRegisterForm(
+        <FormGroup>this.form.controls['emails']
+      )
       const namesForm =
         this._register.formGroupToNamesRegisterForm(this.form) || {}
 

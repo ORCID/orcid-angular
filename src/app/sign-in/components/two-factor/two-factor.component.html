@@ -14,6 +14,7 @@
       formControlName="verificationCode"
       cdkFocusInitial
       appTrim
+      autocomplete="off"
     />
     <mat-hint align="end"
       >{{ inputVerificationCode.value?.length || 0 }}/6</mat-hint
@@ -90,7 +91,14 @@
     <mat-label i18n="@@ngOrcid.signin.2fa.recoveryCode">
       Recovery code
     </mat-label>
-    <input matInput #inputRecoveryCode formControlName="recoveryCode" appTrim />
+    <input matInput #inputRecoveryCode formControlName="recoveryCode"  />
+    <input
+      matInput
+      #inputRecoveryCode
+      formControlName="recoveryCode"
+      appTrim
+      autocomplete="off"
+    />
     <mat-hint align="end"
       >{{ inputRecoveryCode.value?.length || 0 }}/10</mat-hint
     >
