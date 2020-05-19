@@ -7,8 +7,8 @@ import {
   ChangeDetectorRef,
 } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { TLD_REGEXP } from 'src/app/constants'
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
+import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-form-personal-additional-emails',
@@ -47,7 +47,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     this.additionalEmails.addControl(
       this.zeroPad(controlName, 2),
       new FormControl('', {
-        validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
+        validators: [OrcidValidators.email],
       })
     )
   }
