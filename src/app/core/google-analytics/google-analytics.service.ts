@@ -38,6 +38,17 @@ export class GoogleAnalyticsService {
     }
   }
 
+  reportError(description: string, fatal = false) {
+    console.log({
+      description: description,
+      fatal: fatal,
+    })
+    this.gtag('event', 'exception', {
+      description: description,
+      fatal: fatal,
+    })
+  }
+
   removeUrlParameters(url: string) {
     return url.split('?')[0]
   }
@@ -57,7 +68,7 @@ export class GoogleAnalyticsService {
         PerformanceMarks.navigationStartPrefix + url,
         PerformanceMarks.navigationEndPrefix + url
       )
-      this.window.performance.getEntriesByName(url).forEach(value => {
+      this.window.performance.getEntriesByName(url).forEach((value) => {
         timeForNavigation = value.duration
       })
       this.clearPerformanceMarks(url)
