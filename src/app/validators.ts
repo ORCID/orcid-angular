@@ -4,8 +4,19 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms'
+import { EMAIL_REGEXP } from './constants'
 
 export class OrcidValidators {
+  static email = (control: AbstractControl) => {
+    const patterErrors = Validators.pattern(EMAIL_REGEXP)
+    const result = patterErrors(control)
+    if (control.value && result?.pattern) {
+      return { email: true }
+    } else {
+      return null
+    }
+  }
+
   static notPattern(pattern: string | RegExp): ValidatorFn {
     return (control: AbstractControl) => {
       const patterErrors = Validators.pattern(pattern)

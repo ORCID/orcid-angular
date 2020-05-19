@@ -20,7 +20,7 @@ export class LanguageService {
       )
       .pipe(
         retry(3),
-        catchError(this._errorHandler.handleError)
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }

@@ -2,12 +2,13 @@ import { Component, Inject, Input, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { SignInService } from '../../../../core/sign-in/sign-in.service'
 import { WINDOW } from '../../../../cdk/window'
-import { TLD_REGEXP } from '../../../../constants'
+import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-deactivated',
   templateUrl: './deactivated.component.html',
   styleUrls: ['./deactivated.component.scss'],
+  preserveWhitespaces: true,
 })
 export class DeactivatedComponent implements OnInit {
   @Input() email: string
@@ -17,8 +18,7 @@ export class DeactivatedComponent implements OnInit {
 
   emailFormControl = new FormControl('', [
     Validators.required,
-    Validators.email,
-    Validators.pattern(TLD_REGEXP),
+    OrcidValidators.email,
   ])
 
   deactivatedForm = new FormGroup({
