@@ -7,6 +7,7 @@ import { catchError, retry, tap } from 'rxjs/operators'
 import { DeclareOauthSession } from 'src/app/types/declareOauthSession.endpoint'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 import { RequestInfoForm } from 'src/app/types'
+import { ShibbolethSignInData } from '../../types/shibboleth-sign-in-data'
 
 @Injectable({
   providedIn: 'root',
@@ -151,7 +152,7 @@ export class OauthService {
           value: '/authenticate',
           description: 'Get your ORCID iD',
           longDescription:
-            // tslint:disable-next-line: max-line-length
+          // tslint:disable-next-line: max-line-length
             'Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.',
         },
         {
@@ -159,7 +160,7 @@ export class OauthService {
           value: 'openid',
           description: 'Get your ORCID iD',
           longDescription:
-            // tslint:disable-next-line: max-line-length
+          // tslint:disable-next-line: max-line-length
             'Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.',
         },
       ],
@@ -186,5 +187,12 @@ export class OauthService {
         this.oauthSectionDeclared = true
       })
     )
+  }
+
+  loadShibbolethSignInData( ): Observable<ShibbolethSignInData> {
+    return this._http.get<ShibbolethSignInData>(
+      environment.BASE_URL + 'shibboleth/signinData.json',
+      { headers: this.headers }
+    );
   }
 }

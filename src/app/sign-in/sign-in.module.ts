@@ -13,7 +13,8 @@ import { SocialComponent } from './components/social/social.component'
 import { DeactivatedComponent } from './components/errors/deactivated/deactivated.component'
 import { TwoFactorComponent } from './components/two-factor/two-factor.component'
 import { LoggedInComponent } from './components/logged-in/logged-in.component'
-import { PrintErrorsComponent } from './components/errors/print-errors/print-errors.component'
+import { PrintErrorsComponent } from './components/errors/print-errors/print-errors.component';
+import { FormSignInComponent } from './components/form-sign-in/form-sign-in.component'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
@@ -25,6 +26,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     TwoFactorComponent,
     LoggedInComponent,
     PrintErrorsComponent,
+    FormSignInComponent,
   ],
   imports: [
     CommonModule,
@@ -41,5 +43,11 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     A11yLinkModule,
   ],
   entryComponents: [],
+  exports: [
+    FormSignInComponent,
+    PrintErrorsComponent,
+    DeactivatedComponent,
+    TwoFactorComponent,
+  ],
 })
 export class SignInModule {}

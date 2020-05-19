@@ -1,28 +1,27 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { InstitutionalComponent } from './pages/institutional/institutional.component'
+import { InstitutionalLinkingComponent } from './pages/institutional-linking/institutional-linking.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatCardModule } from '@angular/material/card'
-import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { InstitutionalRoutingModule } from './institutional-routing.module';
+import { LinkAccountRoutingModule } from './link-account-routing.module'
+import { SignInModule } from '../sign-in/sign-in.module'
+
 
 @NgModule({
-  declarations: [InstitutionalComponent],
+  declarations: [InstitutionalLinkingComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatAutocompleteModule,
     MatCardModule,
-    MatIconModule,
     MatInputModule,
     MatButtonModule,
     MatProgressBarModule,
-    InstitutionalRoutingModule,
+    LinkAccountRoutingModule,
+    SignInModule,
   ],
 })
-export class InstitutionalModule {}
+export class LinkAccountModule { }

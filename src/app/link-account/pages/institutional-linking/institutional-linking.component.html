@@ -1,0 +1,86 @@
+<main class="row horizontal-center">
+  <mat-card class="orcid-wizard col l6 m6 s4">
+    <mat-card-header>
+      <mat-card-title>
+        <ng-container i18n="@@linking.title.1">
+          Link your
+        </ng-container>
+        {{institutionName}}
+        <ng-container i18n="@@linking.title.2">
+          account to your ORCID record
+        </ng-container>
+      </mat-card-title
+      >
+    </mat-card-header>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content>
+      <div
+        class="form-container"
+        *ngIf="shibbolethSignInData && !shibbolethSignInData.unsupportedInstitution && !shibbolethSignInData.unsupportedInstitution && loadedFeed"
+      >
+        <p class="mat-body-1">
+          <ng-container i18n="@@linking.signed">
+            You are signed into
+          </ng-container>
+          {{institutionName}}
+          <ng-container i18n="@@linking.as">
+            as
+          </ng-container>
+          {{shibbolethSignInData.email ? shibbolethSignInData.email : shibbolethSignInData.firstName + ' ' + shibbolethSignInData.lastName}}
+        </p>
+        <p class="mat-body-1">
+          <ng-container i18n="@@linking.finish">
+            To finish linking this
+          </ng-container>
+          {{institutionName}}
+          <ng-container i18n="@@linking.account">
+            account to ORCID, sign into your ORCID iD below. You will only need to complete this step once. After your
+            account is linked, you will be able to access your ORCID record with your
+          </ng-container>
+          {{institutionName}}
+          <ng-container i18n="@@linking.questions">
+            account. Questions?
+          </ng-container>
+          <a
+            class="mat-button-font"
+            i18n="@@linking.knowledgebase"
+            href="https://support.orcid.org/hc/en-us/articles/360006972693"
+          >Visit our knowledgebase
+          </a>
+        </p>
+        <app-form-sign-in
+          #formSignInComponent
+          [signInType]="'institutional'"
+          [shibbolethSignInData]="shibbolethSignInData"
+          (show2FAEmitter)="show2FAEmitter($event)"
+        >
+          <button
+            mat-raised-button
+            (click)="formSignInComponent.onSubmit()"
+            color="primary"
+            class="row mat-elevation-z0 mat-button-wrap-text"
+            type="submit"
+            [disabled]="loading"
+            *ngIf="!show2FA"
+          >
+            <ng-container i18n="@@linking.button.1">
+              Sign in and link your
+            </ng-container>
+            {{institutionName}}
+            <ng-container i18n="@@linking.button.2">
+              account
+            </ng-container>
+          </button>
+          <button
+            mat-raised-button
+            routerLink="/signin"
+            class="row mat-elevation-z0 display-1"
+            i18n="@@linking.cancel"
+          >
+            Cancel and go back
+          </button>
+        </app-form-sign-in>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</main>

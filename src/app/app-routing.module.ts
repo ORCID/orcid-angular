@@ -44,6 +44,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.institutionalLinking,
+    loadChildren: () =>
+      import('./link-account/link-account.module').then(
+        m => m.LinkAccountModule
+      ),
+  },
+  {
     path: ApplicationRoutes.login,
     redirectTo: ApplicationRoutes.signin,
   },
