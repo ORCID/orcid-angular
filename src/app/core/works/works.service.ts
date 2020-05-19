@@ -33,11 +33,11 @@ export class WorksService implements ActivityService {
     sortAsc = false
   ): Observable<Works> {
     return this.getWorksData(id, offset, sort, sortAsc).pipe(
-      map(data => {
+      map((data) => {
         this.lastEmitedValue = data
         this.workSubject.next(data)
       }),
-      switchMap(data => this.workSubject.asObservable())
+      switchMap((data) => this.workSubject.asObservable())
     )
   }
   /**
@@ -48,11 +48,11 @@ export class WorksService implements ActivityService {
    */
   get(id: string) {
     return this.getWorksData(id, 0, 'date', 'false').pipe(
-      tap(data => {
+      tap((data) => {
         this.lastEmitedValue = data
         this.workSubject.next(data)
       }),
-      switchMap(data => this.workSubject.asObservable())
+      switchMap((data) => this.workSubject.asObservable())
     )
   }
 
@@ -72,9 +72,9 @@ export class WorksService implements ActivityService {
 
   getDetails(id: string, putCode: string) {
     return this.getWorkInfo(id, putCode).pipe(
-      tap(workWithDetails => {
-        this.lastEmitedValue.groups.map(works => {
-          works.works = works.works.map(work => {
+      tap((workWithDetails) => {
+        this.lastEmitedValue.groups.map((works) => {
+          works.works = works.works.map((work) => {
             if (work.putCode.value === putCode) {
               return workWithDetails
             }
@@ -96,7 +96,7 @@ export class WorksService implements ActivityService {
       )
       .pipe(
         retry(3),
-        catchError(this._errorHandler.handleError)
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -108,7 +108,7 @@ export class WorksService implements ActivityService {
       )
       .pipe(
         retry(3),
-        catchError(this._errorHandler.handleError)
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 

@@ -27,13 +27,13 @@ export class ProfileService {
       .get<Person>(environment.API_WEB + `${id}/person.json`)
       .pipe(
         retry(3),
-        catchError(this._errorHandler.handleError)
+        catchError((error) => this._errorHandler.handleError(error))
       )
       .pipe(
-        tap(data => {
+        tap((data) => {
           // Changes publicGroupedAddresses keys for full country names
           if (data.publicGroupedAddresses) {
-            Object.keys(data.publicGroupedAddresses).map(key => {
+            Object.keys(data.publicGroupedAddresses).map((key) => {
               if (data.countryNames && data.countryNames[key]) {
                 data.publicGroupedAddresses[data.countryNames[key]] =
                   data.publicGroupedAddresses[key]

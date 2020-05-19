@@ -30,7 +30,7 @@ export class SearchService {
           headers: { Accept: 'application/json' },
         }
       )
-      .pipe(catchError(this._errorHandler.handleError))
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {

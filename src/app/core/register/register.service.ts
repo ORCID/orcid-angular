@@ -52,7 +52,10 @@ export class RegisterService extends _RegisterServiceMixingBase {
         params: names,
         withCredentials: true,
       })
-      .pipe(retry(3), catchError(this._errorHandler.handleError))
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   confirmRegistration(
@@ -67,7 +70,10 @@ export class RegisterService extends _RegisterServiceMixingBase {
           withCredentials: true,
         }
       )
-      .pipe(retry(3), catchError(this._errorHandler.handleError))
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   getRegisterForm(): Observable<RegisterForm> {
@@ -75,7 +81,10 @@ export class RegisterService extends _RegisterServiceMixingBase {
       .get<RegisterForm>(`${environment.API_WEB}register.json`, {
         withCredentials: true,
       })
-      .pipe(retry(3), catchError(this._errorHandler.handleError))
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
       .pipe(map((form) => (this.backendRegistrationForm = form)))
   }
 
@@ -98,6 +107,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
         `${environment.API_WEB}registerConfirm.json`,
         Object.assign(this.backendRegistrationForm, registerForm)
       )
-      .pipe(retry(3), catchError(this._errorHandler.handleError))
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 }
