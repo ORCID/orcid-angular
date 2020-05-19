@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
-import { Injectable } from '@angular/core'
+import { Injectable, LOCALE_ID, Inject } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { PlatformInfo } from './platform-info.type'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'
@@ -22,12 +22,20 @@ export class PlatformInfoService {
     columns4: false,
     columns8: false,
     columns12: false,
+    rtl: false,
+    ltr: true,
+    screenDirection: 'ltr',
   }
 
   constructor(
+    @Inject(LOCALE_ID) public locale: string,
     private _breakpointObserver: BreakpointObserver,
     _platform: Platform
   ) {
+    this.platform.rtl = locale === 'ar' ? true : false
+    this.platform.ltr = !this.platform.rtl
+    this.platform.screenDirection = 'rtl'
+
     if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
       this.platform.unsupportedBrowser = true
     }
