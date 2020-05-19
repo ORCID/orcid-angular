@@ -60,7 +60,7 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
           asyncValidators: this._register.backendValueValidate('email'),
         }),
         confirmEmail: new FormControl('', {
-          validators: [Validators.required, Validators.email],
+          validators: [Validators.required, OrcidValidators.email],
         }),
         additionalEmails: this.additionalEmails,
       },
