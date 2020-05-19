@@ -477,6 +477,80 @@
       </source>
       </segment>
     </unit>
+    <unit id="institutional.title">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Access through your institution</source>
+      </segment>
+    </unit>
+    <unit id="institutional.account">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:17,21</note>
+      </notes>
+      <segment>
+        <source>
+              You may sign into the ORCID Registry using institutional accounts
+              you already have, like one from your university. If you don&apos;t
+              already have an ORCID iD, you will be prompted to create one.
+            </source>
+      </segment>
+    </unit>
+    <unit id="institutional.learn">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:26,27</note>
+      </notes>
+      <segment>
+        <source>Learn more about different ways to sign in to ORCID.
+            </source>
+      </segment>
+    </unit>
+    <unit id="institution.organization">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Organization&apos;s name</source>
+      </segment>
+    </unit>
+    <unit id="institution.organizationRequired">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:71,72</note>
+      </notes>
+      <segment>
+        <source>Organization&apos;s name is required
+            </source>
+      </segment>
+    </unit>
+    <unit id="institution.invalidInstitution">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:76,77</note>
+      </notes>
+      <segment>
+        <source>Invalid Organization Name
+            </source>
+      </segment>
+    </unit>
+    <unit id="institutional.goBack">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:84,85</note>
+      </notes>
+      <segment>
+        <source>Go back
+            </source>
+      </segment>
+    </unit>
+    <unit id="institutional.continue">
+      <notes>
+        <note category="location">app/institutional/pages/institutional/institutional.component.html:94,96</note>
+      </notes>
+      <segment>
+        <source>
+              CONTINUE
+            </source>
+      </segment>
+    </unit>
     <unit id="ngOrcid.signin.2fa.heading">
       <notes>
         <note category="location">app/sign-in/components/two-factor/two-factor.component.html:2</note>
@@ -497,25 +571,27 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.verificationCodeRequired">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:24,25</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:25,27</note>
       </notes>
       <segment>
-        <source>Authentication code is required
-    </source>
+        <source>
+        Authentication code is required
+      </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.2fa.badVerificationCodeLength">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:33,34</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:42,44</note>
       </notes>
       <segment>
-        <source>Invalid authentication code length
-    </source>
+        <source>
+        Invalid authentication code length
+      </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.2fa.instructionsPart1">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:42,43</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:56,57</note>
       </notes>
       <segment>
         <source>Enter a code
@@ -524,7 +600,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.instructionsPart2">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:44,46</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:58,60</note>
       </notes>
       <segment>
         <source>
@@ -534,7 +610,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.noDevice1">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:49,51</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:63,65</note>
       </notes>
       <segment>
         <source>
@@ -544,7 +620,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.noDevice2">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:57,58</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:71,72</note>
       </notes>
       <segment>
         <source>Enter a recovery code
@@ -553,7 +629,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.noDeviceOrRecovery">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:61,63</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:75,77</note>
       </notes>
       <segment>
         <source>
@@ -563,7 +639,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.contactSupport">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:68,69</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:82,83</note>
       </notes>
       <segment>
         <source>Contact support
@@ -572,7 +648,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.recoveryCode">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:76,78</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:90,92</note>
       </notes>
       <segment>
         <source>
@@ -582,25 +658,27 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.recoveryCodeRequired">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:86,87</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:103,105</note>
       </notes>
       <segment>
-        <source>Recovery code is required
-    </source>
+        <source>
+        Recovery code is required
+      </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.2fa.badRecoveryCodeLength">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:95,96</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:118,120</note>
       </notes>
       <segment>
-        <source>Invalid recovery code length
-    </source>
+        <source>
+        Invalid recovery code length
+      </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.2fa.authenticate">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:105,107</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:131,133</note>
       </notes>
       <segment>
         <source>
@@ -610,7 +688,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.badVerificationCode">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:111,113</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:137,139</note>
       </notes>
       <segment>
         <source>
@@ -620,7 +698,7 @@
     </unit>
     <unit id="ngOrcid.signin.2fa.badRecoveryCode">
       <notes>
-        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:117,119</note>
+        <note category="location">app/sign-in/components/two-factor/two-factor.component.html:143,145</note>
       </notes>
       <segment>
         <source>
@@ -651,7 +729,7 @@
         <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:22</note>
       </notes>
       <segment>
-        <source>example@email.com or 0000-0012-3456-7890</source>
+        <source>example@email.com or 0000-0001-2345-6789</source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.requiredUsername">
@@ -727,9 +805,17 @@
                   </source>
       </segment>
     </unit>
+    <unit id="ngOrcid.signin.or">
+      <notes>
+        <note category="location">app/sign-in/pages/sign-in/sign-in.component.html:100</note>
+      </notes>
+      <segment>
+        <source>or</source>
+      </segment>
+    </unit>
     <unit id="ngOrcid.signin.institutionalAccount">
       <notes>
-        <note category="location">app/sign-in/components/social/social.component.html:8,10</note>
+        <note category="location">app/sign-in/components/social/social.component.html:10,12</note>
       </notes>
       <segment>
         <source>
@@ -739,7 +825,7 @@
     </unit>
     <unit id="ngOrcid.signin.google">
       <notes>
-        <note category="location">app/sign-in/components/social/social.component.html:19,21</note>
+        <note category="location">app/sign-in/components/social/social.component.html:21,23</note>
       </notes>
       <segment>
         <source>
@@ -749,7 +835,7 @@
     </unit>
     <unit id="ngOrcid.signin.facebook">
       <notes>
-        <note category="location">app/sign-in/components/social/social.component.html:30,32</note>
+        <note category="location">app/sign-in/components/social/social.component.html:32,34</note>
       </notes>
       <segment>
         <source>
@@ -771,18 +857,27 @@
     </unit>
     <unit id="ngOrcid.signin.deactivatedEnterEmail">
       <notes>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:11,14</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:11,13</note>
       </notes>
       <segment>
         <source>
       If you can no longer access any emails associated with your iD, please
-      contact
+    </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.contactSupport">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:18,19</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:65,66</note>
+      </notes>
+      <segment>
+        <source>contact support
     </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.email">
       <notes>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:21</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:23</note>
       </notes>
       <segment>
         <source> Email </source>
@@ -790,7 +885,7 @@
     </unit>
     <unit id="ngOrcid.signin.emailHint">
       <notes>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:23</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:25</note>
       </notes>
       <segment>
         <source>example@email.com</source>
@@ -798,7 +893,7 @@
     </unit>
     <unit id="ngOrcid.signin.requiredEmail">
       <notes>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:28,29</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:30,31</note>
       </notes>
       <segment>
         <source>Email is required
@@ -807,7 +902,7 @@
     </unit>
     <unit id="ngOrcid.signin.invalidEmail">
       <notes>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:37,38</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:39,40</note>
       </notes>
       <segment>
         <source>Use the format example@email.com
@@ -816,7 +911,7 @@
     </unit>
     <unit id="ngOrcid.signin.submit">
       <notes>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:48,50</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:50,52</note>
       </notes>
       <segment>
         <source>
@@ -826,14 +921,24 @@
     </unit>
     <unit id="ngOrcid.signin.verify.reactivationSent">
       <notes>
-        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:55,59</note>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:56,60</note>
       </notes>
       <segment>
         <source>
-      Thank you for reactivating your ORCID record; please complete the process
-      by following the steps in the email we are now sending you. If you don’t
-      receive an email from us, please contact
-    </source>
+    Thank you for reactivating your ORCID record; please complete the process by
+    following the steps in the email we are now sending you. If you don’t
+    receive an email from us, please
+  </source>
+      </segment>
+    </unit>
+    <unit id="ngOrcid.signin.verify.reactivationSentError">
+      <notes>
+        <note category="location">app/sign-in/components/errors/deactivated/deactivated.component.html:70,72</note>
+      </notes>
+      <segment>
+        <source>
+    Please enter a valid email address
+  </source>
       </segment>
     </unit>
     <unit id="ngOrcid.signin.currentlySign">
@@ -920,13 +1025,13 @@
         <source>contact support</source>
       </segment>
     </unit>
-    <unit id="shared.contactSupport">
+    <unit id="shared.knowledgeBase">
       <notes>
         <note category="location">app/cdk/snackbar/snackbar/snackbar.component.html:12,14</note>
       </notes>
       <segment>
         <source>
-      contact support.
+      visit our knowledge base.
     </source>
       </segment>
     </unit>
@@ -1534,6 +1639,14 @@
       </source>
       </segment>
     </unit>
+    <unit id="register.visibilityRequired">
+      <notes>
+        <note category="location">app/register/components/form-visibility/form-visibility.component.html:52</note>
+      </notes>
+      <segment>
+        <source>Please choose a default visibility setting.</source>
+      </segment>
+    </unit>
     <unit id="register.termsOfUse">
       <notes>
         <note category="location">app/register/components/form-terms/form-terms.component.html:1</note>
@@ -1570,7 +1683,7 @@
     </unit>
     <unit id="register.termsAndConditions">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:26,28</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:25,27</note>
       </notes>
       <segment>
         <source>
@@ -1580,7 +1693,7 @@
     </unit>
     <unit id="register.use">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:30,31</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:29,30</note>
       </notes>
       <segment>
         <source>of use, including agreeing to my data being processed in the US and being
@@ -1589,7 +1702,7 @@
     </unit>
     <unit id="register.termsRequired">
       <notes>
-        <note category="location">app/register/components/form-terms/form-terms.component.html:37</note>
+        <note category="location">app/register/components/form-terms/form-terms.component.html:36</note>
       </notes>
       <segment>
         <source>You must accept the terms and conditions</source>
@@ -2460,11 +2573,12 @@
     </unit>
     <unit id="ngOrcid.passwordError">
       <notes>
-        <note category="location">locale/i18n.pseudo.component.html:88,89</note>
+        <note category="location">locale/i18n.pseudo.component.html:88,90</note>
       </notes>
       <segment>
         <source>We couldn&apos;t recover your account details. Please try again, and if the error
-  persists please</source>
+  persists please
+</source>
       </segment>
     </unit>
     <unit id="register.titleLabel">
