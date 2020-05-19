@@ -39,7 +39,7 @@ export class SignInService {
       })
       .pipe(
         retry(3),
-        catchError(this._errorHandler.handleError)
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -58,7 +58,7 @@ export class SignInService {
       })
       .pipe(
         retry(3),
-        catchError(this._errorHandler.handleError)
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }

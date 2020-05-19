@@ -25,7 +25,7 @@ export class OrganizationsService {
         )
         .pipe(
           retry(3),
-          catchError(this._errorHandler.handleError)
+          catchError((error) => this._errorHandler.handleError(error))
         )
     } else {
       return of(null)
