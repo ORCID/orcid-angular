@@ -10,6 +10,9 @@ import { MatStep } from '@angular/material/stepper'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW } from 'src/app/cdk/window'
 import { Router } from '@angular/router'
+import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
+import { OauthService } from 'src/app/core/oauth/oauth.service'
+import { OauthRequestInfo } from 'src/app/types'
 
 @Component({
   selector: 'app-register',
@@ -27,11 +30,14 @@ export class RegisterComponent implements OnInit {
   personalData: RegisterForm
   backendForm: RegisterForm
   loading = false
+  requestInfo: OauthRequestInfo
   constructor(
     _platformInfo: PlatformInfoService,
     private _register: RegisterService,
     private _dialog: MatDialog,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _gtag: GoogleAnalyticsService,
+    private _oauth: OauthService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -39,6 +45,9 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit() {
     this._register.getRegisterForm().subscribe()
+    this._oauth
+      .getRequestInfo()
+      .subscribe((value) => (this.requestInfo = value))
   }
 
   register(value) {
