@@ -21,10 +21,13 @@ button.mat-button-wrap-text-with-icon {
   border: solid 1px rgba(0, 0, 0, 0.12);
   margin-top: 12px;
 
-  mat-icon {
+  a {
     position: absolute;
     left: 5%;
     top: 20%;
+    img {
+      width: 24px;
+    }
   }
 
   .columns-4 & {
