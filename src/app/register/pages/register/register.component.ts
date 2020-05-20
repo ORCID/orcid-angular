@@ -10,6 +10,7 @@ import { MatStep } from '@angular/material/stepper'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW } from 'src/app/cdk/window'
 import { Router } from '@angular/router'
+import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,8 @@ export class RegisterComponent implements OnInit {
     _platformInfo: PlatformInfoService,
     private _register: RegisterService,
     private _dialog: MatDialog,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _gtag: GoogleAnalyticsService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -67,7 +69,11 @@ export class RegisterComponent implements OnInit {
         .subscribe((response) => {
           this.loading = false
           if (response.url) {
-            this.window.location.href = response.url
+            this._gtag
+              .reportEvent('RegGrowth', 'New-Registration', 'Website')
+              .subscribe(() => {
+                this.window.location.href = response.url
+              })
           } else {
             // TODO @leomendoza123 HANDLE ERROR show toaster
           }
