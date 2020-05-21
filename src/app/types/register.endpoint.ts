@@ -21,7 +21,7 @@ export interface RegisterForm {
   valNumClient?: number
   grecaptcha?: Value
   grecaptchaWidgetId?: Value
-  linkType?: any
+  linkType?: string
   approved?: boolean
   persistentTokenEnabled?: boolean
   emailAccessAllowed?: boolean

@@ -5,12 +5,14 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
-import { switchMap } from 'rxjs/operators'
+import { switchMap, tap, map } from 'rxjs/operators'
 import { MatStep } from '@angular/material/stepper'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW } from 'src/app/cdk/window'
-import { Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
+import { OauthService } from 'src/app/core/oauth/oauth.service'
+import { OauthRequestInfo, OauthParameters } from 'src/app/types'
 
 @Component({
   selector: 'app-register',
@@ -28,12 +30,15 @@ export class RegisterComponent implements OnInit {
   personalData: RegisterForm
   backendForm: RegisterForm
   loading = false
+  oauthRequestInfo: OauthRequestInfo | null
   constructor(
     _platformInfo: PlatformInfoService,
     private _register: RegisterService,
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
-    private _gtag: GoogleAnalyticsService
+    private _gtag: GoogleAnalyticsService,
+    private _oauth: OauthService,
+    private _route: ActivatedRoute
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -41,6 +46,30 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit() {
     this._register.getRegisterForm().subscribe()
+    this._route.queryParams
+      .pipe(
+        // Check if there is a client_id parameter on the GET parameters
+        map((value: OauthParameters) => !!value.client_id),
+        // If there is a Oauth parameter load the oauth context info
+        switchMap((triggeredByOauth) => {
+          if (triggeredByOauth) {
+            return this._oauth.getRequestInfo().pipe(
+              tap((value) => {
+                if (value) {
+                  this.oauthRequestInfo = value
+                } else {
+                  // TODO @leomendoza123 show toaster error
+                  // for a oauth call the backend was expected to return a oauth context
+                  //
+                  // TODO @leomendoza123 this should be tested once https://trello.com/c/xoTzzqSl/6675-signin-oauth-support is ready
+                  // currently the response is always empty
+                }
+              })
+            )
+          }
+        })
+      )
+      .subscribe()
   }
 
   register(value) {
@@ -62,7 +91,9 @@ export class RegisterComponent implements OnInit {
             this._register.register(
               this.FormGroupStepA,
               this.FormGroupStepB,
-              this.FormGroupStepC
+              this.FormGroupStepC,
+              null, // TODO @leomendoza123 support shibboleth https://github.com/ORCID/orcid-angular/issues/206
+              this.oauthRequestInfo
             )
           )
         )
@@ -70,7 +101,11 @@ export class RegisterComponent implements OnInit {
           this.loading = false
           if (response.url) {
             this._gtag
-              .reportEvent('RegGrowth', 'New-Registration', 'Website')
+              .reportEvent(
+                'RegGrowth',
+                'New-Registration',
+                this.oauthRequestInfo || 'Website'
+              )
               .subscribe(() => {
                 this.window.location.href = response.url
               })

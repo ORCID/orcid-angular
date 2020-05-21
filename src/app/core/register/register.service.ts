@@ -20,6 +20,7 @@ import {
 import { Value } from 'src/app/types/common.endpoint'
 import { RegisterFormAdapterMixin } from './register.form-adapter'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'
+import { OauthRequestInfo } from 'src/app/types'
 
 // Mixing boiler plate
 
@@ -92,7 +93,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
     StepA: FormGroup,
     StepB: FormGroup,
     StepC: FormGroup,
-    type?: 'shibboleth'
+    type?: 'shibboleth',
+    oauthRequestInfo?: OauthRequestInfo
   ): Observable<RegisterConfirmResponse> {
     // TODO: @amontenegro Why does the backend require this?
     this.backendRegistrationForm.valNumClient =
@@ -102,6 +104,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
       StepB,
       StepC
     )
+    this.addOauthContext(registerForm, oauthRequestInfo)
+    this.addShibbolethContext(registerForm, type)
     return this._http
       .post<RegisterConfirmResponse>(
         `${environment.API_WEB}registerConfirm.json`,
@@ -111,5 +115,20 @@ export class RegisterService extends _RegisterServiceMixingBase {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+
+  addOauthContext(
+    registerForm: RegisterForm,
+    oauthRequestInfo?: OauthRequestInfo
+  ): void {
+    if (oauthRequestInfo) {
+      registerForm.referredBy.value = oauthRequestInfo.clientId
+      // @TODO leomendoza123 to be tested once the signin Oauth is read
+      // https://trello.com/c/xoTzzqSl/6675-signin-oauth-support
+    }
+  }
+  addShibbolethContext(registerForm, type?: 'shibboleth'): void {
+    // TODO @leomendoza123 https://github.com/ORCID/orcid-angular/issues/206
+    return
   }
 }
