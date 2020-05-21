@@ -16,7 +16,7 @@ export class OauthService {
 
   public getRequestInfo() {
     return this._http
-      .get<OauthRequestInfo>(
+      .get<OauthRequestInfo | null>(
         environment.API_WEB +
           `oauth/custom/authorize/get_request_info_form.json`,
         {
