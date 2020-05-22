@@ -65,6 +65,7 @@
     "browserslist-useragent-regexp": "^2.0.1",
     "core-js": "^2.6.9",
     "css-loader": "^3.2.0",
+    "cypress": "^4.0.1",
     "firebase": "^7.6.0",
     "ngx-cookie-service": "^3.0.3",
     "properties-to-json": "^0.1.4",
