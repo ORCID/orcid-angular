@@ -32,6 +32,10 @@ export class SignInService {
       loginUrl = 'shibboleth/signin/auth.json'
     }
 
+    if (signInLocal.type && signInLocal.type === TypeSignIn.social) {
+      loginUrl = 'social/signin/auth.json'
+    }
+
     let body = new HttpParams({ encoder: new CustomEncoder() })
       .set('userId', getOrcidNumber(signInLocal.data.username))
       .set('password', signInLocal.data.password)
@@ -46,12 +50,10 @@ export class SignInService {
       signInLocal.type === TypeSignIn.oauth ? 'true' : 'false'
     )
     return this._http
-      .post<SignIn>(environment.API_WEB + loginUrl,
-        body,
-        {
-          headers: this.headers,
-          withCredentials: true,
-        })
+      .post<SignIn>(environment.API_WEB + loginUrl, body, {
+        headers: this.headers,
+        withCredentials: true,
+      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

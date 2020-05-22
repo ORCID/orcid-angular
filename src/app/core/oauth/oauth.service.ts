@@ -7,8 +7,7 @@ import { catchError, retry, tap } from 'rxjs/operators'
 import { DeclareOauthSession } from 'src/app/types/declareOauthSession.endpoint'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 import { RequestInfoForm } from 'src/app/types'
-import { ShibbolethSignInData } from '../../types/shibboleth-sign-in-data'
-import { SignInLocal } from '../../types/sign-in.local'
+import { SignInData } from '../../types/sign-in-data.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -127,9 +126,16 @@ export class OauthService {
       )
   }
 
-  loadShibbolethSignInData(): Observable<ShibbolethSignInData> {
-    return this._http.get<ShibbolethSignInData>(
+  loadShibbolethSignInData(): Observable<SignInData> {
+    return this._http.get<SignInData>(
       environment.BASE_URL + 'shibboleth/signinData.json',
+      { headers: this.headers }
+    )
+  }
+
+  loadSocialSigninData(): Observable<SignInData> {
+    return this._http.get<SignInData>(
+      environment.BASE_URL + 'social/signinData.json',
       { headers: this.headers }
     )
   }

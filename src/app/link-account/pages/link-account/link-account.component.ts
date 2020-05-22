@@ -1,39 +1,43 @@
 import { Component, OnInit } from '@angular/core'
-import { FormGroup } from '@angular/forms'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { OauthService } from '../../../core/oauth/oauth.service'
-import { ShibbolethSignInData } from '../../../types/shibboleth-sign-in-data'
+import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { Institutional } from '../../../types/institutional.endpoint'
-import { TypeSignIn } from '../../../types/sign-in.local'
+import { PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
-  selector: 'app-institutional-linking',
-  templateUrl: './institutional-linking.component.html',
+  selector: 'app-link-account',
+  templateUrl: './link-account.component.html',
   styleUrls: [
-    './institutional-linking.component.scss',
-    './institutional-linking.component.scss-theme.scss',
+    './link-account.component.scss',
+    './link-account.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
-export class InstitutionalLinkingComponent implements OnInit {
+export class LinkAccountComponent implements OnInit {
   loading = false
   show2FA = false
-  shibbolethSignInData: ShibbolethSignInData
+  signInData: SignInData
   institution: Institutional
-  institutionName: string
+  entityId: string
   loadedFeed = false
-  authorizationForm: FormGroup
-  signInType = TypeSignIn.institutional
+  email = ''
 
   constructor(
+    _platformInfo: PlatformInfoService,
     private _disco: DiscoService,
     private _oauthService: OauthService
   ) {
-    this.loadShibbolethSignInData()
+    _platformInfo.get().subscribe((platform) => {
+      if (platform.social) {
+        this.loadSocialSignInData()
+      } else {
+        this.loadShibbolethSignInData()
+      }
+    })
   }
 
-  ngOnInit(): void {
-    this.authorizationForm = new FormGroup({})
-  }
+  ngOnInit(): void {}
 
   loadShibbolethSignInData() {
     this._oauthService
@@ -41,8 +45,8 @@ export class InstitutionalLinkingComponent implements OnInit {
       .pipe()
       .subscribe(
         (data) => {
-          this.shibbolethSignInData = data
-          this.getInstitution(this.shibbolethSignInData.providerId)
+          this.signInData = data
+          this.getInstitution(this.signInData.providerId)
         },
         (error) => {
           // TODO @leomendoza123 display error using a toaster
@@ -57,7 +61,7 @@ export class InstitutionalLinkingComponent implements OnInit {
       .pipe()
       .subscribe(
         (institutions) => {
-          this.institutionName = institutions
+          this.entityId = institutions
             .filter((institution) => institution.entityID === entityId)
             .map((result) => {
               return result.DisplayNames.filter(
@@ -67,6 +71,27 @@ export class InstitutionalLinkingComponent implements OnInit {
               })
             })[0]
             .toString()
+          this.loadedFeed = true
+        },
+        (error) => {
+          // TODO @leomendoza123 display error using a toaster
+          console.log('Error getting disco feed' + JSON.stringify(error))
+        }
+      )
+  }
+
+  loadSocialSignInData() {
+    this._oauthService
+      .loadSocialSigninData()
+      .pipe()
+      .subscribe(
+        (data) => {
+          this.signInData = data
+          this.entityId = data.providerId
+          if (this.entityId === 'facebook' || this.entityId === 'google') {
+            this.entityId =
+              this.entityId.charAt(0).toUpperCase() + this.entityId.slice(1)
+          }
           this.loadedFeed = true
         },
         (error) => {

@@ -15,4 +15,6 @@ export interface PlatformInfo {
   columns8: boolean
   columns12: boolean
   oauthMode: boolean
+  social: boolean
+  institutional: boolean
 }
