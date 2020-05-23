@@ -1,4 +1,4 @@
-interface ZendeskWidget {
+export interface ZendeskWidget {
   (
     type: 'webWidget:on' | 'webWidget' | 'webWidget:get',
     command:
@@ -33,7 +33,7 @@ interface ZendeskField {
   prefill: ZendeskUIString
 }
 
-interface ZendeskSettings {
+export interface ZendeskSettings {
   analytics?: boolean
   cookies?: boolean
   errorReporting?: boolean

@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { ScreenDirection } from 'src/app/types'
+import { ScreenDirection, ZendeskWidget } from 'src/app/types'
 
 @Injectable({
   providedIn: 'root',
