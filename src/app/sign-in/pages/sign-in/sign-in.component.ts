@@ -47,13 +47,13 @@ export class SignInComponent implements OnInit {
     _userInfo
       .getUserStatus()
       .pipe(take(1))
-      .subscribe(data => {
+      .subscribe((data) => {
         if (data) {
           this.isLoggedIn = data
           _userInfo
             .getUserInfoOnEachStatusUpdate()
             .pipe(take(1))
-            .subscribe(info => {
+            .subscribe((info) => {
               this.displayName = info.displayName
               this.realUserOrcid =
                 environment.BASE_URL + info.userInfo.REAL_USER_ORCID
@@ -78,7 +78,7 @@ export class SignInComponent implements OnInit {
     Validators.required,
     UsernameValidator.orcidOrEmail,
   ])
-  passwordFormControl = new FormControl('', [Validators.required])
+  passwordFormControl = new FormControl('', [])
 
   authorizationForm = new FormGroup({
     username: this.usernameFormControl,
@@ -99,7 +99,7 @@ export class SignInComponent implements OnInit {
       this.loading = true
 
       const $signIn = this._signIn.signIn(value)
-      $signIn.subscribe(data => {
+      $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
         if (data.success) {
