@@ -3,12 +3,11 @@
     <ng-container i18n="@@ngOrcid.signin.currentlySign">
       You are currently signed in as
     </ng-container>
-    <ng-container>
-      {{ displayName }}
-      <a class="mat-button-font" href="{{realUserOrcid}}">
-        {{ realUserOrcid }}
-      </a>
-    </ng-container>
+    {{ displayName }}
+    <br />
+    <a class="mat-button-font" href="{{ realUserOrcid }}">
+      {{ realUserOrcid }}
+    </a>
   </p>
 </div>
 <button
