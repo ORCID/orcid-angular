@@ -1,39 +1,34 @@
-<form
-  class="form-container"
-  [formGroup]="authorizationForm"
-  (ngSubmit)="!show2FA && onSubmit()"
->
+<form [formGroup]="authorizationForm" (ngSubmit)="!show2FA && onSubmit()">
   <mat-form-field appearance="outline" class="row">
     <mat-label i18n="@@ngOrcid.signin.username">
       Email or 16-digit ORCID iD
     </mat-label>
-    <input matInput formControlName="username"/>
+    <input matInput formControlName="username" />
     <mat-hint i18n="@@ngOrcid.signin.usernameHint"
-    >example@email.com or 0000-0001-2345-6789
-    </mat-hint
-    >
+      >example@email.com or 0000-0001-2345-6789
+    </mat-hint>
 
     <mat-error
       i18n="@@ngOrcid.signin.requiredUsername"
       *ngIf="usernameFormControl.hasError('required')"
-    >Email or 16-digit ORCID iD is required
+      >Email or 16-digit ORCID iD is required
     </mat-error>
 
     <mat-error
       i18n="@@ngOrcid.signin.invalidUsername"
       *ngIf="usernameFormControl.hasError('invalidUserName')"
-    >Use the format example@email.com or 0000-0001-2345-6789
+      >Use the format example@email.com or 0000-0001-2345-6789
     </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="row password">
     <mat-label i18n="@@ngOrcid.signin.password">Password</mat-label>
-    <input matInput formControlName="password" type="password"/>
+    <input matInput formControlName="password" type="password" />
 
     <mat-error
       i18n="@@ngOrcid.signin.invalidPassword"
       *ngIf="passwordFormControl.hasError('required')"
-    >Invalid password
+      >Invalid password
     </mat-error>
   </mat-form-field>
   <ng-content></ng-content>
@@ -72,7 +67,7 @@
         class="row mat-button-font register-now"
         i18n="@@ngOrcid.signin.registerNow"
         (click)="register()"
-      >Register now
+        >Register now
       </a>
     </div>
   </div>

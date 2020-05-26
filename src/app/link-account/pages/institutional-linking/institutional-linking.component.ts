@@ -13,7 +13,6 @@ import { TypeSignIn } from '../../../types/sing-in.local'
     './institutional-linking.component.scss',
     './institutional-linking.component.scss-theme.scss',
   ],
-  host: { class: 'container' },
 })
 export class InstitutionalLinkingComponent implements OnInit {
   loading = false
