@@ -10,17 +10,19 @@ import {
 } from './uniqueLanguageFilesNames'
 import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
+import { zendeskPlugin } from './zend-desk.postbuild'
 const glob = require('glob')
 // Run updates on index.html files across languages
 glob
   .sync('./dist/*/index.html', { ignore: './dist/storybook/*' })
-  .forEach(file => {
+  .forEach((file) => {
     const options = getOptionsObjet(file)
     let data = readFileSync(file, 'utf8')
     data = uniqueLength(data, options)
     data = buildInfo(data, options)
     data = googleAnalytics(data, options)
     data = hotjarAnalytics(data, options)
+    data = zendeskPlugin(data, options)
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
     save(data, options)
   })
@@ -39,7 +41,7 @@ glob
 // Rename all .js files to concat the language code
 const hashRegExp = RegExp(/[a-z0-9]{20}/gm)
 const replacedHash = {}
-glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach(file => {
+glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   const options = getOptionsObjet(file)
   const hash = file.match(hashRegExp)
   renameSync(file, file.replace('.js', '-' + options.languageCode + '.js'))
@@ -50,7 +52,7 @@ glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach(file => {
 // Replace all the `runtime*.js` references to match updated hash values
 glob
   .sync('./dist/*/runtime-*.js', { ignore: './dist/storybook/*' })
-  .forEach(file => {
+  .forEach((file) => {
     const options = getOptionsObjet(file)
     let data = readFileSync(file, 'utf8')
     data = addLanguageCodeToHashesOnJSFiles(
@@ -64,7 +66,7 @@ glob
 // Rename chinese folders to use underscore to allow Orcid Source and Nginx to correctly point these folders
 glob
   .sync('./dist/*/index.html', { ignore: './dist/storybook/*' })
-  .forEach(file => {
+  .forEach((file) => {
     const options = getOptionsObjet(file)
     renameSync(options.folder, options.folder.replace('-', '_'))
   })

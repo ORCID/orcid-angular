@@ -3,7 +3,17 @@
   align-items: center;
 }
 
+button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  [dir='rtl'] & {
+    left: 0;
+  }
+}
+
 mat-icon {
+  margin-top: 8px;
   font-size: 30px;
   height: 30px;
   width: 35px;

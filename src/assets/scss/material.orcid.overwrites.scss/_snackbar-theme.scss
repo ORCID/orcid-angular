@@ -10,7 +10,7 @@
   $unselected-background: mat-color($background, unselected-chip);
   $unselected-foreground: mat-color($foreground, text);
 
-  snack-bar-container.mat-snack-bar-container.error {
+  snack-bar-container.mat-snack-bar-container.orcid-error {
     background-color: mat-color($warn, 700);
   }
 }
