@@ -27,21 +27,42 @@
     >
       <mat-radio-button
         [value]="visibilityOptions[0]"
-        i18n="@@register.VisibilityEveryone"
+        class="orcid-radio-button-with-icons"
       >
-        Everyone (87% of users choose this)
+        <img
+          src="./assets/vectors/visibility-everyone.svg"
+          aria-hidden="true"
+          alt=""
+        />
+        <ng-container i18n="@@register.VisibilityEveryone"
+          >Everyone (87% of users choose this)</ng-container
+        >
       </mat-radio-button>
       <mat-radio-button
         [value]="visibilityOptions[1]"
-        i18n="@@register.VisibilityTrusted"
+        class="orcid-radio-button-with-icons"
       >
-        Trusted parties (5% of users choose this)
+        <img
+          src="./assets/vectors/visibility-trusted-source.svg"
+          aria-hidden="true"
+          alt=""
+        />
+        <ng-container i18n="@@register.VisibilityTrusted"
+          >Parties (5% of users choose this)</ng-container
+        >
       </mat-radio-button>
       <mat-radio-button
         [value]="visibilityOptions[2]"
-        i18n="@@register.VisibilityPrivate"
+        class="orcid-radio-button-with-icons"
       >
-        Only me (8% of users choose this)
+        <img
+          src="./assets/vectors/visibility-only-me.svg"
+          aria-hidden="true"
+          alt=""
+        />
+        <ng-container i18n="@@register.VisibilityPrivate"
+          >Only me (8% of users choose this)</ng-container
+        >
       </mat-radio-button>
     </mat-radio-group>
     <mat-error
