@@ -15,8 +15,6 @@ export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 export const HAS_NUMBER = /(?=.*[0-9]).*/
 // https://regex101.com/r/NNIuKQ/1
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
-// https://regex101.com/r/OuAIna/1
-export const LATIN_DIACRITICS = /[À-Ͽ]/
 
 export const ApplicationRoutes = {
   institutional: 'institutional-signin',
@@ -36,11 +34,6 @@ export const PerformanceMarks = {
 export function isValidOrcidFormat(id) {
   const regExp = new RegExp('([0-9]{4}-){3}[0-9]{4}')
   return id && regExp.test(id)
-}
-
-export function containsDiacritics(name) {
-  const regExp = new RegExp(LATIN_DIACRITICS)
-  return name && regExp.test(name)
 }
 
 export function getOrcidNumber(userId) {

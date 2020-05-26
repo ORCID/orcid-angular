@@ -13,6 +13,7 @@
       #inputVerificationCode
       formControlName="verificationCode"
       cdkFocusInitial
+      appTrim
       autocomplete="off"
     />
     <mat-hint align="end"
@@ -90,10 +91,12 @@
     <mat-label i18n="@@ngOrcid.signin.2fa.recoveryCode">
       Recovery code
     </mat-label>
+    <input matInput #inputRecoveryCode formControlName="recoveryCode" />
     <input
       matInput
       #inputRecoveryCode
       formControlName="recoveryCode"
+      appTrim
       autocomplete="off"
     />
     <mat-hint align="end"

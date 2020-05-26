@@ -34,7 +34,7 @@ export class PlatformInfoService {
   ) {
     this.platform.rtl = locale === 'ar' ? true : false
     this.platform.ltr = !this.platform.rtl
-    this.platform.screenDirection = 'rtl'
+    this.platform.screenDirection = this.platform.rtl ? 'rtl' : 'ltr'
 
     if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
       this.platform.unsupportedBrowser = true
