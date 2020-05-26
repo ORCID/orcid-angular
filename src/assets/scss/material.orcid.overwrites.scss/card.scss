@@ -1,4 +1,5 @@
 .mat-card.orcid-wizard {
+  width: 100%;
   box-shadow: none;
   padding: 0;
   mat-progress-bar {
@@ -25,6 +26,10 @@
   }
   .mat-card-subtitle {
     margin-bottom: 0;
+  }
+
+  mat-card-content {
+    width: 100%;
   }
 
   .columns-12 &,

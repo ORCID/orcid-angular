@@ -4,6 +4,7 @@ import { GoogleAnalyticsService } from './core/google-analytics/google-analytics
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
 import { CookieService } from 'ngx-cookie-service'
+import { ZendeskService } from './core/zendesk/zendesk.service'
 
 @Component({
   selector: 'app-root',
@@ -25,11 +26,13 @@ export class AppComponent {
   constructor(
     _platformInfo: PlatformInfoService,
     _router: Router,
-    _googleAnalytics: GoogleAnalyticsService
+    _googleAnalytics: GoogleAnalyticsService,
+    _zendesk: ZendeskService
   ) {
     _platformInfo.get().subscribe((platformInfo) => {
       this.setPlatformClasses(platformInfo)
       this.screenDirection = platformInfo.screenDirection
+      _zendesk.setScreenDirection(this.screenDirection)
     })
 
     _router.events.subscribe((event) => {

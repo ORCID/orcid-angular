@@ -16,7 +16,6 @@ storiesOf('Components|Autocomplete', module).add(
             >
             <input
               matInput
-              aria-label="Institution"
               [matAutocomplete]="auto"
             />
             <mat-autocomplete
@@ -35,7 +34,6 @@ storiesOf('Components|Autocomplete', module).add(
               mat-button
               matSuffix
               mat-icon-button
-              aria-label="Autocomplete"
               (click)="clear()"
             >
               <mat-icon>close</mat-icon>

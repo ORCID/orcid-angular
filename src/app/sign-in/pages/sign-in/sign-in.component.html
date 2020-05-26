@@ -38,12 +38,6 @@
               <mat-form-field appearance="outline" class="row password">
                 <mat-label i18n="@@ngOrcid.signin.password">Password</mat-label>
                 <input matInput formControlName="password" type="password" />
-
-                <mat-error
-                  i18n="@@ngOrcid.signin.invalidPassword"
-                  *ngIf="passwordFormControl.hasError('required')"
-                  >Invalid password
-                </mat-error>
               </mat-form-field>
 
               <button

@@ -1,102 +1,113 @@
-<main class="row horizontal-center">
-  <mat-card class="orcid-wizard col l6 m6 s4">
-    <mat-card-header>
-      <mat-card-title i18n="@@institutional.title"
-        >Access through your institution</mat-card-title
-      >
-    </mat-card-header>
-    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-    <mat-card-content>
-      <form
-        class="row space-around"
-        [formGroup]="institutitonalForm"
-        (ngSubmit)="onSubmit()"
-      >
-        <div class="form-container">
-          <p class="mat-body-1">
-            <ng-container i18n="@@institutional.account">
-              You may sign into the ORCID Registry using institutional accounts
-              you already have, like one from your university. If you don't
-              already have an ORCID iD, you will be prompted to create one.
-            </ng-container>
-            <a
-              class="mat-button-font"
-              i18n="@@institutional.learn"
-              href="https://support.orcid.org/hc/en-us/articles/360006972693"
-              >Learn more about different ways to sign in to ORCID.
-            </a>
-          </p>
-          <div class="col l12 m8 s4 horizontal-center institutional-logo">
-            <img
-              *ngIf="logoInstitution"
-              src="{{ logoInstitution }}"
-              alt="institution logo"
-            />
-          </div>
-          <mat-form-field appearance="outline" class="row institutional-input">
-            <mat-label i18n="@@institution.organization"
-              >Organization's name</mat-label
-            >
-            <input
-              matInput
-              [attr.aria-label]="labelInstitution"
-              [formControl]="institutionFormControl"
-              [matAutocomplete]="auto"
-            />
-            <mat-autocomplete
-              autoActiveFirstOption
-              #auto="matAutocomplete"
-              (optionSelected)="selected($event.option.value)"
-            >
-              <mat-option
-                *ngFor="let option of filteredOptions | async"
-                [value]="option"
-              >
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
-            <button
-              mat-button
-              matSuffix
-              mat-icon-button
-              [attr.aria-label]="labelClear"
-              class="remove-border"
-              (click)="clear()"
-            >
-              <mat-icon>close</mat-icon>
-            </button>
-            <mat-error
-              i18n="@@institution.organizationRequired"
-              *ngIf="institutionFormControl.hasError('required')"
-              >Organization's name is required
-            </mat-error>
-            <mat-error
-              i18n="@@institution.invalidInstitution"
-              *ngIf="institutionFormControl.hasError('invalidInstitution')"
-              >Invalid Organization Name
-            </mat-error>
-          </mat-form-field>
-          <div class="institutional-buttons">
-            <a
-              class="mat-button-font go-back"
-              i18n="@@institutional.goBack"
-              [routerLink]="['/signin']"
-              >Go back
-            </a>
-            <button
-              mat-raised-button
-              (click)="onSubmit()"
-              color="primary"
-              class="row mat-elevation-z0"
-              type="submit"
-              [disabled]="loading"
-              i18n="@@institutional.continue"
-            >
-              CONTINUE
-            </button>
-          </div>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+<main>
+  <div class="container">
+    <div class="row space-around">
+      <div class="col l6 m6 s4">
+        <mat-card class="orcid-wizard">
+          <mat-card-header>
+            <mat-card-title i18n="@@institutional.title"
+              >Access through your institution
+            </mat-card-title>
+          </mat-card-header>
+          <mat-progress-bar
+            *ngIf="loading"
+            mode="indeterminate"
+          ></mat-progress-bar>
+          <mat-card-content>
+            <form [formGroup]="institutitonalForm" (ngSubmit)="onSubmit()">
+              <div class="form-container">
+                <p class="mat-body-1">
+                  <ng-container i18n="@@institutional.account">
+                    You may sign into the ORCID Registry using institutional
+                    accounts you already have, like one from your university. If
+                    you don't already have an ORCID iD, you will be prompted to
+                    create one.
+                  </ng-container>
+                  <a
+                    class="mat-button-font"
+                    i18n="@@institutional.learn"
+                    href="https://support.orcid.org/hc/en-us/articles/360006972693"
+                    >Learn more about different ways to sign in to ORCID.
+                  </a>
+                </p>
+                <div class="col l12 m8 s4 horizontal-center institutional-logo">
+                  <img
+                    *ngIf="logoInstitution"
+                    src="{{ logoInstitution }}"
+                    alt="institution logo"
+                  />
+                </div>
+                <mat-form-field
+                  appearance="outline"
+                  class="row institutional-input"
+                >
+                  <mat-label i18n="@@institution.organization"
+                    >Organization's name
+                  </mat-label>
+                  <input
+                    matInput
+                    [attr.aria-label]="labelInstitution"
+                    [formControl]="institutionFormControl"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete
+                    autoActiveFirstOption
+                    #auto="matAutocomplete"
+                    (optionSelected)="selected($event.option.value)"
+                  >
+                    <mat-option
+                      *ngFor="let option of filteredOptions | async"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                  <button
+                    mat-button
+                    matSuffix
+                    mat-icon-button
+                    [attr.aria-label]="labelClear"
+                    class="remove-border"
+                    (click)="clear()"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-error
+                    i18n="@@institution.organizationRequired"
+                    *ngIf="institutionFormControl.hasError('required')"
+                    >Organization's name is required
+                  </mat-error>
+                  <mat-error
+                    i18n="@@institution.invalidInstitution"
+                    *ngIf="
+                      institutionFormControl.hasError('invalidInstitution')
+                    "
+                    >Invalid Organization Name
+                  </mat-error>
+                </mat-form-field>
+                <div class="institutional-buttons">
+                  <a
+                    class="mat-button-font go-back"
+                    i18n="@@institutional.goBack"
+                    [routerLink]="['/signin']"
+                    >Go back
+                  </a>
+                  <button
+                    mat-raised-button
+                    (click)="onSubmit()"
+                    color="primary"
+                    class="row mat-elevation-z0"
+                    type="submit"
+                    [disabled]="loading"
+                    i18n="@@institutional.continue"
+                  >
+                    CONTINUE
+                  </button>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </main>
