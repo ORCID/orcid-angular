@@ -56,7 +56,7 @@ export class SignInComponent implements OnInit {
             .subscribe((info) => {
               this.displayName = info.displayName
               this.realUserOrcid =
-                environment.BASE_URL + info.userInfo.REAL_USER_ORCID
+                'https:' + environment.BASE_URL + info.userInfo.REAL_USER_ORCID
             })
         }
       })
