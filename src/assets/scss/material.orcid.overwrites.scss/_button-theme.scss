@@ -12,4 +12,8 @@
   .mat-button.orcid-button-light-grey {
     background-color: map-get($background, light-grey);
   }
+
+  button.mat-button-wrap-text-with-icon {
+    border: solid 1px mat-color($foreground, dividers);
+  }
 }

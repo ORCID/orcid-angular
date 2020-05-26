@@ -18,16 +18,15 @@ button.mat-button-wrap-text {
 
 button.mat-button-wrap-text-with-icon {
   width: 100%;
-  border: solid 1px rgba(0, 0, 0, 0.12);
   margin-top: 12px;
 
-  a {
+  img {
+    margin: auto;
     position: absolute;
     left: 20px;
-    top: 5px;
-    img {
-      width: 24px;
-    }
+    top: 0;
+    bottom: 0;
+    width: 24px;
   }
 
   .columns-4 & {
@@ -44,29 +43,8 @@ button.mat-button-wrap-text-with-icon {
 }
 
 [dir='rtl'] button.mat-button-wrap-text-with-icon {
-  width: 100%;
-  border: solid 1px rgba(0, 0, 0, 0.12);
-  margin-top: 12px;
-
-  a {
-    position: absolute;
+  img {
     right: 20px;
     left: unset;
-    top: 5px;
-    img {
-      width: 24px;
-    }
-  }
-
-  .columns-4 & {
-    span {
-      display: inline-block;
-      width: 180px;
-      margin: auto;
-      word-break: break-word;
-      white-space: normal;
-      line-height: 24px;
-      min-height: 36px;
-    }
   }
 }
