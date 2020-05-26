@@ -25,10 +25,10 @@ export class SignInService {
     )
   }
 
-  signIn(signInLocal: SignInLocal, type) {
+  signIn(signInLocal: SignInLocal) {
     let loginUrl = 'signin/auth.json'
 
-    if (signInLocal.type && signInLocal.type === 'institutional') {
+    if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
       loginUrl = 'shibboleth/signin/auth.json'
     }
 
