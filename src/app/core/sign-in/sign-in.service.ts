@@ -13,7 +13,7 @@ import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
   providedIn: 'root',
 })
 export class SignInService {
-  private headers: HttpHeaders;
+  private headers: HttpHeaders
 
   constructor(
     private _http: HttpClient,
@@ -28,7 +28,7 @@ export class SignInService {
   signIn(signInLocal: SignInLocal, type) {
     let loginUrl = 'signin/auth.json'
 
-    if (type && type === 'institutional') {
+    if (signInLocal.type && signInLocal.type === 'institutional') {
       loginUrl = 'shibboleth/signin/auth.json'
     }
 

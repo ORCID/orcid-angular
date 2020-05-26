@@ -1,11 +1,24 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core'
-import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ShibbolethSignInData } from '../../../types/shibboleth-sign-in-data'
 import { Router } from '@angular/router'
+import { SingInLocal, TypeSignIn } from '../../../types/sing-in.local'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -14,7 +27,7 @@ import { Router } from '@angular/router'
   providers: [TwoFactorComponent],
 })
 export class FormSignInComponent implements OnInit {
-  @Input() signInType: string
+  @Input() signInType: TypeSignIn
   @Input() shibbolethSignInData: ShibbolethSignInData
   @Output() show2FAEmitter = new EventEmitter<object>()
 
@@ -30,6 +43,7 @@ export class FormSignInComponent implements OnInit {
   showInvalidUser = false
   email: string
   orcidPrimaryDeprecated: string
+  singInLocal: SingInLocal
 
   usernameFormControl = new FormControl('', [
     Validators.required,
@@ -47,13 +61,14 @@ export class FormSignInComponent implements OnInit {
   constructor(
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
-    private _router: Router,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    const value = this.authorizationForm.getRawValue()
+    this.singInLocal = this.authorizationForm.getRawValue()
+    this.singInLocal.type = this.signInType
 
     this.authorizationForm.markAllAsTouched()
 
@@ -61,15 +76,15 @@ export class FormSignInComponent implements OnInit {
       this.hideErrors()
       this.loading = true
 
-      const $signIn = this._signIn.signIn(value, this.signInType)
-      $signIn.subscribe(data => {
+      const $signIn = this._signIn.signIn(this.singInLocal)
+      $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
         if (data.success) {
           this.navigateTo(data.url)
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.show2FA = true
-          this.show2FAEmitter.emit();
+          this.show2FAEmitter.emit()
         } else {
           if (data.deprecated) {
             this.showDeprecatedError = true
@@ -122,7 +137,7 @@ export class FormSignInComponent implements OnInit {
   }
 
   register() {
-    if (this.signInType === 'institutional') {
+    if (this.singInLocal.type === TypeSignIn.institutional) {
       this._router.navigate([
         '/register',
         {
@@ -132,7 +147,8 @@ export class FormSignInComponent implements OnInit {
           lastName: this.shibbolethSignInData.lastNameEncoded,
           providerId: this.shibbolethSignInData.providerIdEncoded,
           accountId: this.shibbolethSignInData.accountIdEncoded,
-        }])
+        },
+      ])
     } else {
       this._router.navigate(['/register'])
     }

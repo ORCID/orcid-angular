@@ -27,7 +27,7 @@
             <ng-container *ngIf="!isLoggedIn">
               <app-form-sign-in
                 #formSignInComponent
-                [signInType]="'personal'"
+                [signInType]="signInType"
                 (show2FAEmitter)="show2FAEmitter($event)"
               >
                 <button

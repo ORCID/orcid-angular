@@ -1,9 +1,8 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from '../../../cdk/window'
 import { take, tap } from 'rxjs/operators'
-import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
 import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
@@ -12,7 +11,6 @@ import { HttpParams } from '@angular/common/http'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-sign-in',
@@ -25,7 +23,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
   preserveWhitespaces: true,
 })
 export class SignInComponent implements OnInit {
-  @ViewChild('firstInput') firstInput: ElementRef
   oauthParameters: OauthParameters
   requestInfoForm: RequestInfoForm
   signInLocal = {} as SignInLocal
@@ -38,6 +35,7 @@ export class SignInComponent implements OnInit {
   orcidPrimaryDeprecated: string
   oauthRequest = false
   show2FA = false
+  signInType = TypeSignIn.personal
 
   constructor(
     _platformInfo: PlatformInfoService,
@@ -71,9 +69,10 @@ export class SignInComponent implements OnInit {
           }
 
           if (this.oauthParameters.email) {
-            this.authorizationForm.patchValue({
-              username: this.oauthParameters.email,
-            })
+            // todo DanielPalafox
+            // this.authorizationForm.patchValue({
+            //   username: this.oauthParameters.email,
+            // })
           }
         })
       )
@@ -106,25 +105,24 @@ export class SignInComponent implements OnInit {
             })
         }
       })
+
+    _route.queryParams
+      .pipe(
+        // More info about signin query paramter https://members.orcid.org/api/oauth/get-oauthauthorize
+        take(1),
+        tap((value: OauthParameters) => {
+          if (value.show_login === 'false') {
+            this._router.navigate(['/register'], { queryParams: value })
+          }
+        })
+      )
+      .subscribe()
   }
-
-  usernameFormControl = new FormControl('', [
-    Validators.required,
-    UsernameValidator.orcidOrEmail,
-  ])
-  passwordFormControl = new FormControl('', [])
-
-  authorizationForm = new FormGroup({
-    username: this.usernameFormControl,
-    password: this.passwordFormControl,
-    recoveryCode: new FormControl(),
-    verificationCode: new FormControl(),
-  })
 
   ngOnInit() {}
 
   show2FAEmitter($event) {
-    this.show2FA = true;
+    this.show2FA = true
   }
 
   loadRequestInfoForm(): void {
@@ -134,9 +132,10 @@ export class SignInComponent implements OnInit {
         // https://github.com/ORCID/orcid-angular/issues/260
         this.requestInfoForm = data
         if (this.requestInfoForm.userId) {
-          this.authorizationForm.patchValue({
-            username: this.requestInfoForm.userId,
-          })
+          // todo Daniel Palafox
+          // this.authorizationForm.patchValue({
+          //   username: this.requestInfoForm.userId,
+          // })
         } else {
           if (
             this.requestInfoForm.userEmail ||
