@@ -1,4 +1,6 @@
-const name = '26may20204'
+const date = require('../../helpers/date')
+
+const name = date()
 describe('"Manual" QA Tests', () => {
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
@@ -20,39 +22,42 @@ describe('"Manual" QA Tests', () => {
     })
 
     it('Registration step 1', () => {
-      cy.get('input[formcontrolname="givenNames"]')
-        .type('ma_test')
-        .should('have.value', 'ma_test')
-      cy.get('input[formcontrolname="familyNames"]')
-        .type(name)
-        .should('have.value', name)
-      cy.get('input[formcontrolname="email"]')
-        .type('ma_test_' + name + '@mailinator.com')
-        .should('have.value', 'ma_test_' + name + '@mailinator.com')
-      cy.get('input[formcontrolname="confirmEmail"]')
-        .type('ma_test_' + name + '@mailinator.com')
-        .should('have.value', 'ma_test_' + name + '@mailinator.com')
-      cy.get('input:visible')
-        .last()
-        .type('00_ma_test_' + name + '@mailinator.com')
-        .should('have.value', '00_ma_test_' + name + '@mailinator.com')
-      cy.get('a[role="button"]').contains('addAdd another email').click()
-      cy.get('input:visible')
-        .last()
-        .type('01_ma_test_' + name + '@mailinator.com')
-        .should('have.value', '01_ma_test_' + name + '@mailinator.com')
-      cy.wait(1000)
-      cy.get('button:visible')
-        .filter('[type="submit"]')
-        // TODO: find a workaround for this mess
-        .click()
-        .click(10, 10, { force: true })
-        .click(10, 10, { force: true })
-        .click(10, 10, { force: true })
-        .click(10, 10, { force: true })
-        .click(10, 10, { force: true })
-        .click(10, 10, { force: true })
-        .click(10, 10, { force: true })
+      // Bypass the duplicated research call to avoid getting the "Is this you modal"
+      cy.server()
+      cy.route({
+        method: 'GET',
+        url: '/dupicateResearcher.json*',
+        response: {},
+      })
+
+      // Only get items inside app-step-a
+      cy.get('app-step-a').within(() => {
+        cy.get('input[formcontrolname="givenNames"]')
+          .type('ma_test')
+          .should('have.value', 'ma_test')
+        cy.get('input[formcontrolname="familyNames"]')
+          .type(name)
+          .should('have.value', name)
+        cy.get('input[formcontrolname="email"]')
+          .type('ma_test_' + name + '@mailinator.com')
+          .should('have.value', 'ma_test_' + name + '@mailinator.com')
+        cy.get('input[formcontrolname="confirmEmail"]')
+          .type('ma_test_' + name + '@mailinator.com')
+          .should('have.value', 'ma_test_' + name + '@mailinator.com')
+        cy.get('input')
+          .last()
+          .type('00_ma_test_' + name + '@mailinator.com')
+          .should('have.value', '00_ma_test_' + name + '@mailinator.com')
+        cy.get('a[role="button"]').contains('addAdd another email').click()
+        cy.get('input')
+          .last()
+          .type('01_ma_test_' + name + '@mailinator.com')
+          .should('have.value', '01_ma_test_' + name + '@mailinator.com')
+        cy.get('button')
+          // Wait until the step is marked as validated
+          .filter('.ng-valid [type="submit"]')
+          .click()
+      })
     })
 
     it('Registration step 2', () => {
@@ -72,8 +77,9 @@ describe('"Manual" QA Tests', () => {
         .filter('[type="checkbox"]')
         .check({ force: true })
         .should('be.checked')
-      cy.wait(1000)
-      cy.get('button:visible').filter('[type="submit"]').click()
+      cy.get('button:visible')
+        .filter('app-step-b.ng-valid [type="submit"]')
+        .click()
     })
 
     it('Registration step 3', () => {
