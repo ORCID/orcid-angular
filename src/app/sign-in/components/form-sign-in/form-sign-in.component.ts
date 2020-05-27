@@ -43,7 +43,7 @@ export class FormSignInComponent implements OnInit {
   showInvalidUser = false
   email: string
   orcidPrimaryDeprecated: string
-  singInLocal: SingInLocal
+  singInLocal = {} as SingInLocal
 
   usernameFormControl = new FormControl('', [
     Validators.required,
@@ -67,7 +67,7 @@ export class FormSignInComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.singInLocal = this.authorizationForm.getRawValue()
+    this.singInLocal.data = this.authorizationForm.getRawValue()
     this.singInLocal.type = this.signInType
 
     this.authorizationForm.markAllAsTouched()
