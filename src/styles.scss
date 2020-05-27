@@ -122,3 +122,7 @@ input[type='reset'] {
 html {
   overflow-y: scroll;
 }
+
+input.edge-autofilled {
+  background-color: transparent !important;
+}
