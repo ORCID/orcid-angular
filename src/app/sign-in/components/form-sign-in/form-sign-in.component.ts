@@ -49,7 +49,7 @@ export class FormSignInComponent implements OnInit {
     Validators.required,
     UsernameValidator.orcidOrEmail,
   ])
-  passwordFormControl = new FormControl('', [Validators.required])
+  passwordFormControl = new FormControl('', [])
 
   authorizationForm = new FormGroup({
     username: this.usernameFormControl,
