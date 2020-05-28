@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, Input } from '@angular/core'
 import { NavigationEnd, Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -22,7 +22,14 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  currentRoute
+  _currentRoute: string
+  @Input() set currentRoute(value) {
+    this._currentRoute = value
+    this.setChildOfCurrentRouteAsSecondaryMenu()
+  }
+  get currentRoute() {
+    return this._currentRoute
+  }
   platform: PlatformInfo
   mobileMenuState = false
   menu: ApplicationMenuItem[] = this.createMenuList(menu)
@@ -39,25 +46,18 @@ export class HeaderComponent implements OnInit {
     _togglz: TogglzService,
     location: Location
   ) {
-    _router.events
-      .pipe(filter((event: any) => event instanceof NavigationStart))
-      .subscribe((val: NavigationStart) => {
-        this.currentRoute = _router.url
-        this.setChildOfCurrentRouteAsSecondaryMenu()
-      })
-
-    _platform.get().subscribe(data => {
+    _platform.get().subscribe((data) => {
       this.platform = data
     })
-    _userInfo.getUserInfoOnEachStatusUpdate().subscribe(data => {
+    _userInfo.getUserInfoOnEachStatusUpdate().subscribe((data) => {
       this.user = data.userInfo
     })
-    _togglz.getTogglz().subscribe(data => {
+    _togglz.getTogglz().subscribe((data) => {
       this.togglz = data
     })
     _togglz
       .getStateOf('ORCID_ANGULAR_SIGNIN')
-      .subscribe(value => (this.togglzOrcidAngularSignin = value))
+      .subscribe((value) => (this.togglzOrcidAngularSignin = value))
     _router.events.subscribe(
       () =>
         (this.signinRegisterButton =
@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
 
   setChildOfCurrentRouteAsSecondaryMenu() {
     // Check all first level menu items
-    this.menu.forEach(button => {
+    this.menu.forEach((button) => {
       // If the activeRoute of the button is equal to the current route show it as hover
       // Excepts if the current route is the home page
       if (button.activeRoute != null && this.currentRoute !== '/') {
@@ -112,7 +112,7 @@ export class HeaderComponent implements OnInit {
     if (treeLocation.length) {
       const current = treeLocation.shift()
       if (menuToUpdate != null) {
-        menuToUpdate.forEach(button => {
+        menuToUpdate.forEach((button) => {
           if (button.id === current) {
             if (treeLocation.length > 0) {
               button.hover = true
@@ -134,7 +134,7 @@ export class HeaderComponent implements OnInit {
     if (!menuDefinition || !menuDefinition.length) {
       return []
     }
-    menuDefinition.forEach(item => {
+    menuDefinition.forEach((item) => {
       const newItem: ApplicationMenuItem = {
         ...item,
         hover: false,
@@ -207,7 +207,7 @@ export class HeaderComponent implements OnInit {
         return false
       }
       let foundAnUnmeetTogglz = false
-      Object.keys(requirements.togglz).forEach(key => {
+      Object.keys(requirements.togglz).forEach((key) => {
         if (Object.keys(this.togglz.messages).indexOf(key)) {
           if (this.togglz.messages[key] !== requirements.togglz[key]) {
             foundAnUnmeetTogglz = true
