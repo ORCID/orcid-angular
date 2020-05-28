@@ -1,6 +1,6 @@
-import { Injectable, Inject, NgZone } from '@angular/core'
+import { Injectable, Inject } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { ScreenDirection, ZendeskWidget } from 'src/app/types'
+import { ZendeskWidget } from 'src/app/types'
 import { PlatformInfo } from 'src/app/cdk/platform-info'
 
 @Injectable({
@@ -9,7 +9,7 @@ import { PlatformInfo } from 'src/app/cdk/platform-info'
 export class ZendeskService {
   zE: ZendeskWidget
 
-  constructor(@Inject(WINDOW) private _window: Window, private _zone: NgZone) {}
+  constructor(@Inject(WINDOW) private _window: Window) {}
 
   hide() {
     this.zE = (<any>this._window).zE
@@ -28,12 +28,6 @@ export class ZendeskService {
           position: { horizontal: 'left', vertical: 'bottom' },
         },
       })
-    }
-    console.log(platform.oauthMode)
-    if (platform.oauthMode) {
-      this.hide()
-    } else if (!platform.oauthMode) {
-      this.show()
     }
   }
 }
