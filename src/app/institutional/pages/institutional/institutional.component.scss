@@ -17,12 +17,8 @@ button {
 
 .institutional-buttons {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-}
-
-.go-back {
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .remove-border {
