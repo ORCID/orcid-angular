@@ -9,6 +9,11 @@ import { take, tap } from 'rxjs/operators'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
+import { Location } from '@angular/common'
+import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
+import { OauthService } from '../../../core/oauth/oauth.service'
+import { HttpParams } from '@angular/common/http'
+import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 
 @Component({
   selector: 'app-sign-in',
@@ -21,6 +26,10 @@ import { OauthParameters } from 'src/app/types'
   host: { class: 'container' },
 })
 export class SignInComponent implements OnInit {
+  oauthParameters: OauthParameters
+  requestInfoForm: RequestInfoForm
+  signInLocal = {} as SignInLocal
+  params: HttpParams
   loading = false
   badCredentials = false
   printError = false
@@ -36,13 +45,16 @@ export class SignInComponent implements OnInit {
   realUserOrcid: string
   email: string
   orcidPrimaryDeprecated: string
+  oauthRequest = false
 
   constructor(
     private _signIn: SignInService,
     private _userInfo: UserService,
+    private _oauthService: OauthService,
     @Inject(WINDOW) private window: Window,
     _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    _location: Location
   ) {
     _userInfo
       .getUserStatus()
@@ -66,8 +78,31 @@ export class SignInComponent implements OnInit {
         // More info about signin query paramter https://members.orcid.org/api/oauth/get-oauthauthorize
         take(1),
         tap((value: OauthParameters) => {
-          if (value.show_login === 'false') {
-            this._router.navigate(['/register'], { queryParams: value })
+          this.oauthParameters = value
+
+          console.log('this.isLoggedIn ' + JSON.stringify(this.isLoggedIn))
+          if (this.isLoggedIn) {
+            this.confirmAccess()
+          }
+
+          if (this.oauthParameters.show_login === 'false') {
+            this._router.navigate(['/register'], {
+              queryParams: this.oauthParameters,
+            })
+          }
+
+          if (
+            this.oauthParameters.oauth === '' ||
+            _location.path().includes('/oauth')
+          ) {
+            this.signInLocal.type = TypeSignIn.oauth
+            this.loadRequestInfoForm()
+          }
+
+          if (this.oauthParameters.email) {
+            this.authorizationForm.patchValue({
+              username: this.oauthParameters.email,
+            })
           }
         })
       )
@@ -90,7 +125,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    const value = this.authorizationForm.getRawValue()
+    this.signInLocal.data = this.authorizationForm.getRawValue()
 
     this.authorizationForm.markAllAsTouched()
 
@@ -98,7 +133,7 @@ export class SignInComponent implements OnInit {
       this.hideErrors()
       this.loading = true
 
-      const $signIn = this._signIn.signIn(value)
+      const $signIn = this._signIn.signIn(this.signInLocal)
       $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
@@ -155,6 +190,33 @@ export class SignInComponent implements OnInit {
     this.showBadRecoveryCode = false
     this.showInvalidUser = false
     this.badCredentials = false
+  }
+
+  loadRequestInfoForm(): void {
+    this._oauthService.loadRequestInfoForm().subscribe((data) => {
+      if (data) {
+        this.requestInfoForm = data
+        if (this.requestInfoForm.userId) {
+          this.authorizationForm.patchValue({
+            username: this.requestInfoForm.userId,
+          })
+        } else {
+          if (
+            this.requestInfoForm.userEmail ||
+            this.requestInfoForm.userFamilyNames ||
+            this.requestInfoForm.userGivenNames
+          ) {
+            this._router.navigate(['/register'], {
+              queryParams: this.oauthParameters,
+            })
+          }
+        }
+      }
+    })
+  }
+
+  confirmAccess() {
+    this.navigateTo('https:' + environment.BASE_URL + 'oauth/confirm_access')
   }
 
   navigateTo(val) {
