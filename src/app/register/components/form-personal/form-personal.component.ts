@@ -1,25 +1,15 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
+import { Component, forwardRef, OnInit } from '@angular/core'
 import {
-  FormGroup,
-  ControlValueAccessor,
-  Validator,
   FormControl,
-  AbstractControl,
-  ValidationErrors,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  Validators,
-  AsyncValidatorFn,
-  ValidatorFn,
-  FormGroupDirective,
-  NgForm,
+  FormGroup,
   NG_ASYNC_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidatorFn,
+  Validators,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from 'src/app/constants'
-import { Observable } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { map } from 'rxjs/operators'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
