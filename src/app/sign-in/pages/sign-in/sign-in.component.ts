@@ -14,6 +14,7 @@ import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { HttpParams } from '@angular/common/http'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
+import { PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
   selector: 'app-sign-in',
@@ -48,6 +49,7 @@ export class SignInComponent implements OnInit {
   oauthRequest = false
 
   constructor(
+    _platformInfo: PlatformInfoService,
     private _signIn: SignInService,
     private _userInfo: UserService,
     private _oauthService: OauthService,
@@ -56,22 +58,12 @@ export class SignInComponent implements OnInit {
     private _router: Router,
     _location: Location
   ) {
-    _userInfo
-      .getUserStatus()
-      .pipe(take(1))
-      .subscribe((data) => {
-        if (data) {
-          this.isLoggedIn = data
-          _userInfo
-            .getUserInfoOnEachStatusUpdate()
-            .pipe(take(1))
-            .subscribe((info) => {
-              this.displayName = info.displayName
-              this.realUserOrcid =
-                'https:' + environment.BASE_URL + info.userInfo.REAL_USER_ORCID
-            })
-        }
-      })
+    _platformInfo.get().subscribe((platform) => {
+      if (platform.oauthMode) {
+        this.signInLocal.type = TypeSignIn.oauth
+        this.loadRequestInfoForm()
+      }
+    })
 
     _route.queryParams
       .pipe(
@@ -80,23 +72,11 @@ export class SignInComponent implements OnInit {
         tap((value: OauthParameters) => {
           this.oauthParameters = value
 
-          console.log('this.isLoggedIn ' + JSON.stringify(this.isLoggedIn))
-          if (this.isLoggedIn) {
-            this.confirmAccess()
-          }
-
+          // TODO handle redirection in the backend
           if (this.oauthParameters.show_login === 'false') {
             this._router.navigate(['/register'], {
               queryParams: this.oauthParameters,
             })
-          }
-
-          if (
-            this.oauthParameters.oauth === '' ||
-            _location.path().includes('/oauth')
-          ) {
-            this.signInLocal.type = TypeSignIn.oauth
-            this.loadRequestInfoForm()
           }
 
           if (this.oauthParameters.email) {
@@ -107,6 +87,26 @@ export class SignInComponent implements OnInit {
         })
       )
       .subscribe()
+
+    _userInfo
+      .getUserStatus()
+      .pipe(take(1))
+      .subscribe((data) => {
+        if (data) {
+          this.isLoggedIn = data
+          if (this.signInLocal.type === TypeSignIn.oauth) {
+            this.confirmAccess()
+          }
+          _userInfo
+            .getUserInfoOnEachStatusUpdate()
+            .pipe(take(1))
+            .subscribe((info) => {
+              this.displayName = info.displayName
+              this.realUserOrcid =
+                'https:' + environment.BASE_URL + info.userInfo.REAL_USER_ORCID
+            })
+        }
+      })
   }
 
   usernameFormControl = new FormControl('', [
