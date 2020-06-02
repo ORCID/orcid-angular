@@ -17,8 +17,10 @@ export class GoogleAnalyticsService {
       page_path: url,
       page_location: window.location.origin,
       anonymize_ip: true,
-      sample_rate: '70',
-      site_speed_sample_rate: '1',
+      sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE ? '100' : '70',
+      site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
+        ? '100'
+        : '1',
     })
   }
 

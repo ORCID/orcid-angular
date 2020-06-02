@@ -6,6 +6,7 @@ export const environment = {
   BASE_URL: '//orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   SHOW_TEST_WARNING_BANNER: false,
+  GOOGLE_ANALYTICS_TESTING_MODE: false,
   GOOGLE_ANALYTICS: 'UA-17492803-4',
   GOOGLE_RECAPTCHA: '6Lfj4AoTAAAAAAjr0x3Gu2RcVpA1-0LJAhV-GRQj',
   HOTJAR_ANALYTICS: 'hjid:1220063',
