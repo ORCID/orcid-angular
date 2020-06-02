@@ -1,4 +1,4 @@
-<main>
+<main id="main">
   <div class="container">
     <div class="row space-around">
       <div class="col l6 m6 s4">
@@ -46,10 +46,12 @@
                   </mat-error>
                 </mat-form-field>
 
-              <mat-form-field appearance="outline" class="row password">
-                <mat-label i18n="@@ngOrcid.signin.password">Password</mat-label>
-                <input matInput formControlName="password" type="password" />
-              </mat-form-field>
+                <mat-form-field appearance="outline" class="row password">
+                  <mat-label i18n="@@ngOrcid.signin.password"
+                    >Password</mat-label
+                  >
+                  <input matInput formControlName="password" type="password" />
+                </mat-form-field>
 
                 <button
                   mat-raised-button
