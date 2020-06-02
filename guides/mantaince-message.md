@@ -23,7 +23,7 @@ For instance:
 
 <div class="closable" id="closable-unique-name">
     The privacy policy wast update on april 2019
-    <a href="https://orcid.org/privacy-policy " target="blank" class="mat-button-font black-url">read more about it</a>
+    <a href="https://orcid.org/privacy-policy" target="blank" class="mat-button-font black-url">read more about it</a>
 </div>
 
 ```
