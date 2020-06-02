@@ -15,6 +15,7 @@ import { TwoFactorComponent } from './components/two-factor/two-factor.component
 import { LoggedInComponent } from './components/logged-in/logged-in.component'
 import { PrintErrorsComponent } from './components/errors/print-errors/print-errors.component'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FormDirectivesModule } from '../cdk/form-directives/form-directives.mod
     MatDividerModule,
     SignInRoutingModule,
     FormDirectivesModule,
+    A11yLinkModule,
   ],
   entryComponents: [],
 })
