@@ -2,7 +2,7 @@
   <div class="input-container">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.firstName">First name</mat-label>
-      <input formControlName="givenNames" matInput />
+      <input formControlName="givenNames" matInput #firstInput />
       <mat-error
         *ngIf="form.hasError('required', 'givenNames')"
         i18n="@@register.firstNamePassword"
@@ -93,6 +93,7 @@
         appTrim
         autocomplete="off"
         type="email"
+        #firstInput
       />
       <mat-error
         *ngIf="form.hasError('required', 'emails.confirmEmail')"
