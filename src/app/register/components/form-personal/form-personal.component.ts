@@ -16,9 +16,7 @@ import {
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from 'src/app/constants'
-import { Observable } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { map } from 'rxjs/operators'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
