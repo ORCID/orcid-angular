@@ -50,7 +50,7 @@ export class SnackbarService {
       },
       horizontalPosition: this.horizontalPosition,
       verticalPosition: 'bottom',
-      panelClass: 'error',
+      panelClass: 'orcid-error',
       duration: 10 * 1000,
     })
     if (analyticsReport) {
