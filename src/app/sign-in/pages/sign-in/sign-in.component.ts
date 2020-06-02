@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
@@ -21,7 +28,8 @@ import { OauthParameters } from 'src/app/types'
   host: { class: 'container' },
   preserveWhitespaces: true,
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, AfterViewInit {
+  @ViewChild('firstInput') firstInput: ElementRef
   loading = false
   badCredentials = false
   printError = false
@@ -89,6 +97,10 @@ export class SignInComponent implements OnInit {
   })
 
   ngOnInit() {}
+
+  ngAfterViewInit(): void {
+    this.firstInput.nativeElement.focus()
+  }
 
   onSubmit() {
     const value = this.authorizationForm.getRawValue()

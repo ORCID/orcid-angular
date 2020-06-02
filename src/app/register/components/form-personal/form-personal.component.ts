@@ -1,18 +1,17 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  forwardRef,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core'
 import {
   FormGroup,
-  ControlValueAccessor,
-  Validator,
   FormControl,
-  AbstractControl,
-  ValidationErrors,
   NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   Validators,
-  AsyncValidatorFn,
   ValidatorFn,
-  FormGroupDirective,
-  NgForm,
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
@@ -40,7 +39,9 @@ import { OrcidValidators } from 'src/app/validators'
     },
   ],
 })
-export class FormPersonalComponent extends BaseForm implements OnInit {
+export class FormPersonalComponent extends BaseForm
+  implements OnInit, AfterViewInit {
+  @ViewChild('firstInput') firstInput: ElementRef
   constructor(private _register: RegisterService) {
     super()
   }
@@ -91,6 +92,13 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
       }),
       emails: this.emails,
     })
+  }
+
+  ngAfterViewInit(): void {
+    // Timeout used to get focus on the first input after the first step loads
+    setTimeout(() => {
+      this.firstInput.nativeElement.focus()
+    }, 100)
   }
 
   allEmailsAreUnique(): ValidatorFn {
