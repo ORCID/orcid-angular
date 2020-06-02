@@ -19,6 +19,7 @@ import { OauthParameters } from 'src/app/types'
   ],
   providers: [TwoFactorComponent],
   host: { class: 'container' },
+  preserveWhitespaces: true,
 })
 export class SignInComponent implements OnInit {
   loading = false
