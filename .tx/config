@@ -64,3 +64,9 @@ source_file = src/locale/properties/institutional/institutional.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
 
+[orcid-angular.src-locale-properties-register-register-en-properties--master]
+file_filter = src/locale/properties/register/register.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/register/register.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
