@@ -1,4 +1,4 @@
-const name = '26may20204'
+const name = '26may20206'
 describe('"Manual" QA Tests', () => {
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
@@ -10,6 +10,9 @@ describe('"Manual" QA Tests', () => {
       cy.get('app-banner').contains(
         'ORCID uses cookies to improve your experience and to help us understand how you use our websites. Learn more about how we use cookies.'
       )
+      cy.wait(3000)
+      cy.getIframeBody('#launcher').find('span').contains('Help').click()
+      cy.pause()
     })
   })
 
@@ -115,7 +118,6 @@ describe('"Manual" QA Tests', () => {
 
   context('Verification 2: Mailinator Tests', () => {
     it('Sign into Mailinator', () => {
-      cy.wait(120000)
       cy.visit('https://mailinator.com')
       cy.get('#addOverlay')
         .type('ma_test_' + name)
@@ -124,7 +126,9 @@ describe('"Manual" QA Tests', () => {
     })
 
     it('Verify there are three emails present', () => {
-      cy.get('tbody:visible').find('tr').should('have.length', 3)
+      cy.get('tbody:visible', { timeout: 120000 })
+        .find('tr')
+        .should('have.length', 3)
     })
 
     it('Click the first message', () => {
@@ -199,7 +203,6 @@ describe('"Manual" QA Tests', () => {
         .type('ma_test_' + name + '@mailinator.com')
         .should('have.value', 'ma_test_' + name + '@mailinator.com')
       cy.get('button:visible').filter('[type="submit"]').click()
-      cy.wait(120000)
     })
   })
 
@@ -211,7 +214,9 @@ describe('"Manual" QA Tests', () => {
           name +
           '#/#inboxpane'
       )
-      cy.get('tbody:visible').find('a').contains('Your ORCID iD')
+      cy.get('tbody:visible', { timeout: 120000 })
+        .find('a')
+        .contains('Your ORCID iD')
     })
     it('Open the reset password message', () => {
       cy.get('tbody')

@@ -19,9 +19,9 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-Cypress.Commands.add('getIframeBody', () => {
+Cypress.Commands.add('getIframeBody', (target) => {
   return cy
-    .get('iframe')
+    .get(target)
     .its('0.contentDocument.body')
     .should('not.be.empty')
     .then(cy.wrap)
