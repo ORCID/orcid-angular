@@ -157,8 +157,8 @@ export class RegisterComponent implements OnInit {
     // On mobile scroll the current step component into view
     if (this.platform.columns4 || this.platform.columns8) {
       setTimeout(() => {
-        // tslint:disable-next-line: whitespace
-        ;(nextStep.nativeElement as HTMLElement).scrollIntoView()
+        const nativeElementNextStep = <HTMLElement>nextStep.nativeElement
+        nativeElementNextStep.scrollIntoView()
       }, 200)
     }
   }
