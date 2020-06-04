@@ -56,13 +56,17 @@ export class RegisterComponent implements OnInit {
           this.FormGroupStepC
         )
         .pipe(
-          switchMap(() =>
-            this._register.register(
+          switchMap((validator: RegisterForm) => {
+            if (validator.errors.length > 0) {
+              // At this point any backend error is unexpected
+              // TODO @leomendoza123 HANDLE ERROR show toaster
+            }
+            return this._register.register(
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC
             )
-          )
+          })
         )
         .subscribe((response) => {
           this.loading = false
