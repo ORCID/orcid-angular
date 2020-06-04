@@ -17,13 +17,17 @@
               i18n="@@register.personalData"
               >Personal data</ng-template
             >
-            <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
+            <app-step-a
+              [(formGroup)]="FormGroupStepA"
+              #stepComponentA
+            ></app-step-a>
           </mat-step>
           <mat-step [stepControl]="FormGroupStepB">
             <ng-template matStepLabel i18n="@@register.securityAndNotifications"
               >Security and notifications</ng-template
             >
             <app-step-b
+              #stepComponentB
               [(formGroup)]="FormGroupStepB"
               [personalData]="personalData"
             ></app-step-b>
@@ -33,6 +37,7 @@
               >Visibility and terms</ng-template
             >
             <app-step-c
+              #stepComponentC
               [(formGroup)]="FormGroupStepC"
               (submit)="register('vertical')"
               [loading]="loading"
@@ -53,13 +58,17 @@
             <ng-template matStepLabel i18n="@@register.personalData"
               >Personal data</ng-template
             >
-            <app-step-a [(formGroup)]="FormGroupStepA"></app-step-a>
+            <app-step-a
+              [(formGroup)]="FormGroupStepA"
+              #stepComponentA
+            ></app-step-a>
           </mat-step>
           <mat-step [stepControl]="FormGroupStepB">
             <ng-template matStepLabel i18n="@@register.securityAndNotifications"
               >Security and notifications</ng-template
             >
             <app-step-b
+              #stepComponentB
               [(formGroup)]="FormGroupStepB"
               [personalData]="personalData"
             ></app-step-b>
@@ -69,6 +78,7 @@
               >Visibility and terms</ng-template
             >
             <app-step-c
+              #stepComponentC
               [(formGroup)]="FormGroupStepC"
               (submit)="register('horizontal')"
               [loading]="loading"
