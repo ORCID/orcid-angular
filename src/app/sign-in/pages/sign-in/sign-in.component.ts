@@ -72,7 +72,8 @@ export class SignInComponent implements OnInit {
         tap((value: OauthParameters) => {
           this.oauthParameters = value
 
-          // TODO @DanielPalafox handle redirection in the backend
+          // TODO @DanielPalafox handle redirection Guard
+          // with the purpose of avoiding the load of the signin module if is not required
           if (this.oauthParameters.show_login === 'false') {
             this._router.navigate(['/register'], {
               queryParams: this.oauthParameters,
@@ -95,11 +96,14 @@ export class SignInComponent implements OnInit {
         if (data) {
           this.isLoggedIn = data
           if (this.signInLocal.type === TypeSignIn.oauth) {
-            // TODO @DanielPalafox handle redirection in the backend
+            // TODO @DanielPalafox handle redirection a Guard
+            //
+            // to prevent loading the signin module or showing the "you are already logged in"
+            // related to https://github.com/ORCID/orcid-angular/issues/261
             this.confirmAccess()
           }
-          // TODO @DanielPalafox check if we can remove the first call to `getUserStatus`
-          // since getUserInfoOnEachStatusUpdate already calls `getUserStatus` and is not great to call the same endpoint two times
+          // TODO @DanielPalafox remove the first call to `getUserStatus`
+          // since `getUserInfoOnEachStatusUpdate` already calls `getUserStatus` and is not great to call the same endpoint two times
           //
           // this might be possible by returning maybe a false from `getUserInfoOnEachStatusUpdate`
           // instead of nothing as it currently does when the user is not signin
@@ -201,6 +205,8 @@ export class SignInComponent implements OnInit {
   loadRequestInfoForm(): void {
     this._oauthService.loadRequestInfoForm().subscribe((data) => {
       if (data) {
+        // TODO @DanielPalafox Handle scenario where the user directly navigates to `/signin?oauth` url
+        // https://github.com/ORCID/orcid-angular/issues/260
         this.requestInfoForm = data
         if (this.requestInfoForm.userId) {
           this.authorizationForm.patchValue({
