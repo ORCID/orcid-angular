@@ -1,17 +1,14 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Inject,
   Input,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core'
-import {
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  Validators,
-} from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
@@ -25,8 +22,10 @@ import { SingInLocal, TypeSignIn } from '../../../types/sing-in.local'
   templateUrl: './form-sign-in.component.html',
   styleUrls: ['./form-sign-in.component.scss'],
   providers: [TwoFactorComponent],
+  preserveWhitespaces: true,
 })
 export class FormSignInComponent implements OnInit {
+  @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
   @Input() shibbolethSignInData: ShibbolethSignInData
   @Output() show2FAEmitter = new EventEmitter<object>()
@@ -65,6 +64,10 @@ export class FormSignInComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.firstInput.nativeElement.focus()
+  }
 
   onSubmit() {
     this.singInLocal.data = this.authorizationForm.getRawValue()
