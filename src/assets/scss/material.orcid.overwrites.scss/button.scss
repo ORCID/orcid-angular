@@ -13,20 +13,7 @@ button.mat-button-wrap-text {
     max-width: 100%;
     text-align: center;
     white-space: normal;
-  }
-}
-
-button.mat-button-wrap-long-texts {
-  width: 100%;
-  margin-top: 12px;
-
-  span {
-    display: inline-block;
-    margin: auto;
     word-break: break-word;
-    white-space: normal;
-    line-height: 24px;
-    min-height: 36px;
   }
 }
 
