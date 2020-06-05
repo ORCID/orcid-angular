@@ -1,27 +1,34 @@
 const date = require('../../helpers/date')
+let name
 
-const name = date()
 describe('"Manual" QA Tests', () => {
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
   })
 
   context('Check the cookies banner', () => {
+    it('Clear cookies', () => {
+      cy.clearCookies()
+    })
+
     it('Visit https://qa.orcid.org/ and find the cookies banner', () => {
       cy.visit('qa.orcid.org')
       cy.get('app-banner').contains(
         'ORCID uses cookies to improve your experience and to help us understand how you use our websites. Learn more about how we use cookies.'
       )
-      cy.wait(3000)
       cy.getIframeBody('#launcher').find('span').contains('Help').click()
-      cy.pause()
     })
   })
 
   context('Registration', () => {
     it('Access the registration page', () => {
       cy.get('button[aria-label="sign in or register"]').click()
-      cy.get('a').contains('Register now').click({ force: true })
+      cy.get('app-sign-in').contains('Register now').click({ force: true })
+    })
+
+    it('Generate name, write it down into a file for later use', () => {
+      name = date()
+      cy.writeFile('./cypress/integration/registry/data/name.txt', date())
     })
 
     it('Registration step 1', () => {
@@ -64,50 +71,62 @@ describe('"Manual" QA Tests', () => {
     })
 
     it('Registration step 2', () => {
-      cy.get('.mat-card-header-text:visible').should(
-        'have.text',
-        'Create your ORCID iDThis is step 2 of 3'
-      )
-      cy.get('input[formcontrolname="password"]')
-        .type('test1234')
-        .should('have.value', 'test1234')
-        .and('have.attr', 'type', 'password')
-      cy.get('input[formcontrolname="passwordConfirm"]')
-        .type('test1234')
-        .should('have.value', 'test1234')
-        .and('have.attr', 'type', 'password')
-      cy.get('input:visible')
-        .filter('[type="checkbox"]')
-        .check({ force: true })
-        .should('be.checked')
-      cy.get('button:visible')
-        .filter('app-step-b.ng-valid [type="submit"]')
-        .click()
+      cy.get('app-step-b').within(() => {
+        cy.get('.mat-card-header-text:visible').should(
+          'have.text',
+          'Create your ORCID iDThis is step 2 of 3'
+        )
+        cy.get('input[formcontrolname="password"]')
+          .type('test1234')
+          .should('have.value', 'test1234')
+          .and('have.attr', 'type', 'password')
+        cy.get('input[formcontrolname="passwordConfirm"]')
+          .type('test1234')
+          .should('have.value', 'test1234')
+          .and('have.attr', 'type', 'password')
+        cy.get('input:visible')
+          .filter('[type="checkbox"]')
+          .check({ force: true })
+          .should('be.checked')
+        cy.get('button:visible')
+          .filter('app-step-b.ng-valid [type="submit"]')
+          .click()
+      })
     })
 
     it('Registration step 3', () => {
-      cy.get('mat-radio-group[formcontrolname="activitiesVisibilityDefault"]')
-        .contains('Everyone')
-        .click()
-        .parent()
-        .should('have.class', 'mat-radio-checked')
-      cy.get('input:visible')
-        .filter('[type="checkbox"]')
-        .check({ force: true })
-        .should('be.checked')
-      cy.pause()
+      cy.get('app-step-c').within(() => {
+        cy.get('mat-radio-group[formcontrolname="activitiesVisibilityDefault"]')
+          .contains('Everyone')
+          .click()
+          .parent()
+          .should('have.class', 'mat-radio-checked')
+        cy.get('input:visible')
+          .filter('[type="checkbox"]')
+          .check({ force: true })
+          .should('be.checked')
+        // Wrap iframe body into a cypress object and perform test within there
+        cy.getIframeBody('iframe').within(() => {
+          cy.get('.recaptcha-checkbox-border').click()
+          cy.get('#recaptcha-anchor', { timeout: 10000 }).should(
+            'have.class',
+            'recaptcha-checkbox-checked'
+          )
+        })
+        cy.get('button:visible').contains('REGISTER').click()
+      })
     })
   })
 
   context('Verification 1: Request Verification Messages', () => {
     it('Send 2nd verification message', () => {
-      cy.contains('Resend verification email').click()
+      cy.contains('Resend verification email', { timeout: 20000 }).click()
       cy.wait(1000)
       cy.get('button').filter('.btn-white-no-border').contains('Close').click()
     })
 
     it('Attempt to edit biography and send 3rd verification message', () => {
-      cy.get('.edit-biography').click({ force: true })
+      cy.get('.edit-biography', { timeout: 20000 }).click({ force: true })
       cy.get('#colorbox #modal-close')
         .contains('Resend verification email')
         .click()
@@ -122,7 +141,21 @@ describe('"Manual" QA Tests', () => {
     })
   })
 
+  // Domain switch to mailinator.com
+
   context('Verification 2: Mailinator Tests', () => {
+    it('Visit Mailinator', () => {
+      cy.visit('https://mailinator.com')
+    })
+
+    it('Retrieve ORCID name', () => {
+      cy.readFile('./cypress/integration/registry/data/name.txt').then(
+        (content) => {
+          name = content
+        }
+      )
+    })
+
     it('Sign into Mailinator', () => {
       cy.visit('https://mailinator.com')
       cy.get('#addOverlay')
@@ -156,6 +189,14 @@ describe('"Manual" QA Tests', () => {
       cy.readFile('./cypress/integration/registry/data/link.txt').then(
         (href) => {
           cy.visit(href)
+        }
+      )
+    })
+
+    it('Retrieve ORCID name', () => {
+      cy.readFile('./cypress/integration/registry/data/name.txt').then(
+        (content) => {
+          name = content
         }
       )
     })
@@ -213,17 +254,32 @@ describe('"Manual" QA Tests', () => {
   })
 
   context('Password reset procedure 2: Mailinator', () => {
-    it('Sign into Mailinator and check that the "About your ORCID iD" message is present', () => {
-      cy.visit(
-        'https://www.mailinator.com/v3/index.jsp?zone=public&query=' +
-          'ma_test_' +
-          name +
-          '#/#inboxpane'
+    it('Visit Mailinator', () => {
+      cy.visit('https://mailinator.com')
+    })
+
+    it('Retrieve ORCID name', () => {
+      cy.readFile('./cypress/integration/registry/data/name.txt').then(
+        (content) => {
+          name = content
+        }
       )
-      cy.get('tbody:visible', { timeout: 120000 })
-        .find('a')
+    })
+
+    it('Sign into Mailinator', () => {
+      cy.get('#addOverlay')
+        .type('ma_test_' + name)
+        .should('have.value', 'ma_test_' + name)
+      cy.get('#go-to-public').click()
+    })
+
+    it('Check that the "About your ORCID iD" message is present', () => {
+      cy.get('tbody:visible')
+        .find('tr', { timeout: 120000 })
+        .should('have.length', 5)
         .contains('Your ORCID iD')
     })
+
     it('Open the reset password message', () => {
       cy.get('tbody')
         .children()
@@ -242,12 +298,23 @@ describe('"Manual" QA Tests', () => {
   })
 
   context('Password reset procedure 3: ', () => {
-    it('Reset password', () => {
+    it('Retrieve ORCID name', () => {
       cy.readFile('./cypress/integration/registry/data/link.txt').then(
         (href) => {
           cy.visit(href)
         }
       )
+    })
+
+    it('Retrieve ORCID name', () => {
+      cy.readFile('./cypress/integration/registry/data/name.txt').then(
+        (content) => {
+          name = content
+        }
+      )
+    })
+
+    it('Reset password', () => {
       cy.get('#passwordField').type(name)
       cy.get('#retypedPassword').type(name)
       cy.get('button:visible').contains('Save changes').click()

@@ -1,4 +1,5 @@
 {
   "baseUrl": "http://localhost:4200",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "failOnStatusCode": false
 }
