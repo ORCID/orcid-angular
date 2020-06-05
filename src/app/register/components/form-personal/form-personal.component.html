@@ -2,7 +2,7 @@
   <div class="input-container">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.firstName">First name</mat-label>
-      <input formControlName="givenNames" matInput />
+      <input formControlName="givenNames" matInput #firstInput />
       <mat-error
         *ngIf="form.hasError('required', 'givenNames')"
         i18n="@@register.firstNamePassword"
@@ -57,7 +57,7 @@
   <ng-container formGroupName="emails">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.primaryEmail">Primary email</mat-label>
-      <input formControlName="email" matInput appTrim />
+      <input formControlName="email" matInput appTrim type="email" />
       <mat-error
         *ngIf="form.hasError('required', 'emails.email')"
         i18n="@@register.primaryEmailRequired"
@@ -86,11 +86,16 @@
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >
+      <!-- "confirm-email" is no really a valid autocomplete valid
+      but it should avoid some browsers like edge chromium to suggest the user email 
+      on this confirmation field  -->
       <input
         formControlName="confirmEmail"
         matInput
         (paste)="(false)"
         appTrim
+        autocomplete="confirm-email"
+        type="email"
       />
       <mat-error
         *ngIf="form.hasError('required', 'emails.confirmEmail')"

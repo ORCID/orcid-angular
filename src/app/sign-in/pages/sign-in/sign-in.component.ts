@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
@@ -25,8 +32,10 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
   ],
   providers: [TwoFactorComponent],
   host: { class: 'container' },
+  preserveWhitespaces: true,
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, AfterViewInit {
+  @ViewChild('firstInput') firstInput: ElementRef
   oauthParameters: OauthParameters
   requestInfoForm: RequestInfoForm
   signInLocal = {} as SignInLocal
@@ -133,6 +142,10 @@ export class SignInComponent implements OnInit {
   })
 
   ngOnInit() {}
+
+  ngAfterViewInit(): void {
+    this.firstInput.nativeElement.focus()
+  }
 
   onSubmit() {
     this.signInLocal.data = this.authorizationForm.getRawValue()

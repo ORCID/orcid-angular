@@ -5,10 +5,17 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
+import {
+  Validators,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms'
 
 const matStepper = `
 For full documentation on how to implement this with an Angular
-form see [the official material docs](https://material.angular.io/components/stepper/overview)
+form see [the official material docs](https://material.angular.io/components/stepper/overview).
 `
 
 storiesOf('Components|Stepper', module)
@@ -16,40 +23,40 @@ storiesOf('Components|Stepper', module)
     'horizontal',
     () => ({
       template: `
-  <mat-horizontal-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form>
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name">
-        </mat-form-field>
-        <div>
-          <button mat-button color="primary" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form>
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input matInput placeholder="Ex. 1 Main St, New York, NY">
-        </mat-form-field>
-        <div>
-          <button mat-button color="primary" matStepperPrevious>Back</button>
-          <button mat-button color="primary" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button color="primary"matStepperPrevious>Back</button>
-        <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
+  <mat-horizontal-stepper  [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup" >
+  <form [formGroup]="firstFormGroup">
+    <ng-template matStepLabel>Fill out your name</ng-template>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input formControlName="first" matInput placeholder="Last name, First name">
+    </mat-form-field>
+    <div>
+      <button mat-button color="primary" matStepperNext>Next</button>
+    </div>
+  </form>
+</mat-step>
+<mat-step [stepControl]="secondFormGroup" >
+  <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>Fill out your address</ng-template>
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input formControlName="second" matInput placeholder="Ex. 1 Main St, New York, NY">
+    </mat-form-field>
+    <div>
+      <button mat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-button color="primary" matStepperNext>Next</button>
+    </div>
+  </form>
+</mat-step>
+<mat-step>
+  <ng-template matStepLabel>Done</ng-template>
+  <p>You are now done.</p>
+  <div>
+    <button mat-button color="primary"matStepperPrevious>Back</button>
+    <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+  </div>
+</mat-step>
   </mat-horizontal-stepper>
   `,
       moduleMetadata: {
@@ -58,7 +65,17 @@ storiesOf('Components|Stepper', module)
           MatButtonModule,
           BrowserAnimationsModule,
           MatInputModule,
+          FormsModule,
+          ReactiveFormsModule,
         ],
+      },
+      props: {
+        firstFormGroup: new FormGroup({
+          first: new FormControl(''),
+        }),
+        secondFormGroup: new FormGroup({
+          second: new FormControl(''),
+        }),
       },
     }),
     {
@@ -72,39 +89,39 @@ storiesOf('Components|Stepper', module)
     () => ({
       template: `
   <mat-vertical-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form>
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name">
-        </mat-form-field>
+    <mat-step [stepControl]="firstFormGroup" >
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Fill out your name</ng-template>
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input formControlName="first" matInput placeholder="Last name, First name">
+          </mat-form-field>
+          <div>
+            <button mat-button color="primary" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" >
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Fill out your address</ng-template>
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input formControlName="second" matInput placeholder="Ex. 1 Main St, New York, NY">
+          </mat-form-field>
+          <div>
+            <button mat-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
         <div>
-          <button mat-button color="primary" matStepperNext>Next</button>
+          <button mat-button color="primary"matStepperPrevious>Back</button>
+          <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
         </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form>
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input matInput placeholder="Ex. 1 Main St, New York, NY">
-        </mat-form-field>
-        <div>
-          <button mat-button color="primary" matStepperPrevious>Back</button>
-          <button mat-button color="primary" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button color="primary"matStepperPrevious>Back</button>
-        <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
+      </mat-step>
   </mat-vertical-stepper>
   `,
       moduleMetadata: {
@@ -113,7 +130,17 @@ storiesOf('Components|Stepper', module)
           MatButtonModule,
           BrowserAnimationsModule,
           MatInputModule,
+          FormsModule,
+          ReactiveFormsModule,
         ],
+      },
+      props: {
+        firstFormGroup: new FormGroup({
+          first: new FormControl(''),
+        }),
+        secondFormGroup: new FormGroup({
+          second: new FormControl(''),
+        }),
       },
     }),
     {

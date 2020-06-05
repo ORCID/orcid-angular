@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Injectable, Inject } from '@angular/core'
+import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { StepperSelectionEvent } from '@angular/cdk/stepper'
@@ -9,7 +9,6 @@ import { switchMap } from 'rxjs/operators'
 import { MatStep } from '@angular/material/stepper'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW } from 'src/app/cdk/window'
-import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -18,7 +17,9 @@ import { Router } from '@angular/router'
 })
 export class RegisterComponent implements OnInit {
   @ViewChild('lastStep') lastStep: MatStep
-
+  @ViewChild('stepComponentA', { read: ElementRef }) stepComponentA: ElementRef
+  @ViewChild('stepComponentB', { read: ElementRef }) stepComponentB: ElementRef
+  @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
   platform: PlatformInfo
   FormGroupStepA: FormGroup = new FormGroup({})
   FormGroupStepB: FormGroup = new FormGroup({})
@@ -56,13 +57,17 @@ export class RegisterComponent implements OnInit {
           this.FormGroupStepC
         )
         .pipe(
-          switchMap(() =>
-            this._register.register(
+          switchMap((validator: RegisterForm) => {
+            if (validator.errors.length > 0) {
+              // At this point any backend error is unexpected
+              // TODO @leomendoza123 HANDLE ERROR show toaster
+            }
+            return this._register.register(
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC
             )
-          )
+          })
         )
         .subscribe((response) => {
           this.loading = false
@@ -136,6 +141,29 @@ export class RegisterComponent implements OnInit {
   selectionChange(event: StepperSelectionEvent) {
     if (event.previouslySelectedIndex === 0) {
       this.afterStepASubmitted()
+    }
+    if (this.platform.columns4 || this.platform.columns8) {
+      this.focusCurrentStep(event)
+    }
+  }
+
+  // Fix to material vertical stepper not focusing current header
+  // related issue https://github.com/angular/components/issues/8881
+  focusCurrentStep(event: StepperSelectionEvent) {
+    let nextStep: ElementRef
+    if (event.selectedIndex === 0) {
+      nextStep = this.stepComponentA
+    } else if (event.selectedIndex === 1) {
+      nextStep = this.stepComponentB
+    } else if (event.selectedIndex === 2) {
+      nextStep = this.stepComponentC
+    }
+    // On mobile scroll the current step component into view
+    if (this.platform.columns4 || this.platform.columns8) {
+      setTimeout(() => {
+        const nativeElementNextStep = <HTMLElement>nextStep.nativeElement
+        nativeElementNextStep.scrollIntoView()
+      }, 200)
     }
   }
 }
