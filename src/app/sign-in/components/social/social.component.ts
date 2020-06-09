@@ -6,7 +6,7 @@ import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 @Component({
   selector: 'app-social',
   templateUrl: './social.component.html',
-  styleUrls: ['./social.component.scss'],
+  styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
 })
 export class SocialComponent implements OnInit {
   platform: PlatformInfo
