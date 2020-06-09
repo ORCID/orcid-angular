@@ -65,7 +65,7 @@ export class FormPersonalComponent extends BaseForm
       },
       {
         validators: [
-          OrcidValidators.matchValues('email', 'confirmEmail'),
+          OrcidValidators.matchValues('email', 'confirmEmail', false),
           this.allEmailsAreUnique(),
         ],
         asyncValidators: [this._register.backendAdditionalEmailsValidate()],
