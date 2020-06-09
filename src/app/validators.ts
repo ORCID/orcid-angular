@@ -44,7 +44,7 @@ export class OrcidValidators {
         return null
       }
 
-      if (control.value !== confirmControl.value) {
+      if (control.value.toLowerCase() !== confirmControl.value.toLowerCase()) {
         hasErrors = true
         confirmControl.setErrors({ mismatch: true })
       } else if (confirmControl.hasError('mismatch')) {
