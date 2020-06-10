@@ -14,6 +14,7 @@
                 src="./assets/vectors/orcid.logo.svg"
                 alt="orcid logo"
                 role="link"
+                i18n="@@authorize.authorizeAccess"
               />
 
               Authorize Access</mat-card-title
@@ -21,15 +22,20 @@
           </mat-card-header>
           <mat-divider></mat-divider>
           <mat-card-content>
-            <p class="mat-caption">You are currently signed in as:</p>
+            <p class="mat-caption" i18n="@@authorize.youAreCurrentlySignin">
+              You are currently signed in as:
+            </p>
             <p class="mat-body-2"><strong>Herman Cote</strong></p>
             <p class="mat-body-2">https://qa.orcid.org/0000-0001-9618-9183</p>
             <div class="mat-body-2">
-              <a class="mat-button-font">Sign out</a>
+              <a class="mat-button-font" i18n="@@public-layout.sign_out"
+                >Sign out</a
+              >
               <a
                 *ngIf="isATrustedIndividual"
                 class="mat-button-font"
                 [matMenuTriggerFor]="menu"
+                i18n="@@authorize.switchAccount"
                 >Switch to another account</a
               >
             </div>
@@ -40,7 +46,7 @@
               <!-- TODO user the right icon-->
               <mat-icon class="material-icons-outlined">info</mat-icon>
             </p>
-            <p class="mat-body-1">
+            <p class="mat-body-1" i18n="@@authorize.hasAskedAccess">
               has asked for the following access to your ORCID record:
             </p>
 
@@ -68,30 +74,44 @@
               </li>
             </ul>
 
-            <button mat-raised-button color="primary">Authorize access</button>
-            <button mat-stroked-button color="primary">Deny access</button>
+            <button
+              mat-raised-button
+              color="primary"
+              i18n="@@authorize.authorize"
+            >
+              Authorize access
+            </button>
+            <button mat-stroked-button color="primary" i18n="@@authorize.deny">
+              Deny access
+            </button>
 
             <p class="mat-caption">
-              If authorized, this organization will have access to your ORCID
-              record, as outlined above and described in further detail in
+              <ng-container i18n="@@authorize.ifAuthorize">
+                If authorized, this organization will have access to your ORCID
+                record, as outlined above and described in further detail
+                in</ng-container
+              >
+
               <a
                 href="https://orcid.org/footer/privacy-policy"
                 target="_blank"
                 rel="noopener"
                 class="mat-button-font"
-                i18n="@@register.privacyPolicy"
+                i18n="@@authorize.privacyPolicy"
                 >ORCID’s privacy policy.</a
               >
             </p>
             <p class="mat-caption">
-              You can manage access permissions for this and other Trusted
-              Organizations in your
+              <ng-container i18n="@@authorize.youCanManage">
+                You can manage access permissions for this and other Trusted
+                Organizations in your
+              </ng-container>
               <a
                 href="/account#manage-permissions"
                 target="_blank"
                 rel="noopener"
                 class="mat-button-font"
-                i18n="@@register.privacyPolicy"
+                i18n="@@authorize.accountSettings"
                 >account settings.</a
               >
             </p>
@@ -103,8 +123,11 @@
 </main>
 
 <mat-menu #menu="matMenu" class="mat-body-1">
-  <div>Switch to another account</div>
-  <div>You have 12 trusted accounts</div>
+  <div i18n="@@authorize.SwitchTo">Switch to another account</div>
+  <div>
+    <ng-container i18n="@@authorize.youHave">You have</ng-container> {{ '12' }}
+    <ng-container i18n="@@authorize.accounts">accounts</ng-container>
+  </div>
   <button
     class="mat-button-wrap-text"
     mat-menu-item
