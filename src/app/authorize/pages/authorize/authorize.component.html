@@ -1,0 +1,121 @@
+<main id="main">
+  <div class="container">
+    <div class="row space-around">
+      <div class="col l5 m6 s4">
+        <mat-card class="orcid-wizard">
+          <mat-card-header>
+            <mat-card-title
+              role="heading"
+              aria-level="1"
+              i18n="@@authorize.title"
+            >
+              <img
+                class="logo"
+                src="./assets/vectors/orcid.logo.svg"
+                alt="orcid logo"
+                role="link"
+              />
+
+              Authorize Access</mat-card-title
+            >
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <p class="mat-caption">You are currently signed in as:</p>
+            <p class="mat-body-2"><strong>Herman Cote</strong></p>
+            <p class="mat-body-2">https://qa.orcid.org/0000-0001-9618-9183</p>
+            <div class="mat-body-2">
+              <a class="mat-button-font">Sign out</a>
+              <a
+                *ngIf="isATrustedIndividual"
+                class="mat-button-font"
+                [matMenuTriggerFor]="menu"
+                >Switch to another account</a
+              >
+            </div>
+            <mat-divider></mat-divider>
+            <!-- TODO UNDERLINE URL -->
+            <p class="mat-body-2">
+              Aalborg University Library
+              <!-- TODO user the right icon-->
+              <mat-icon class="material-icons-outlined">info</mat-icon>
+            </p>
+            <p class="mat-body-1">
+              has asked for the following access to your ORCID record:
+            </p>
+
+            <ul class="mat-body-1">
+              <li>
+                <mat-icon class="material-icons-outlined"
+                  >remove_red_eye</mat-icon
+                >
+                <p>
+                  Read your information with visibility set to Trusted
+                  Organizations
+                </p>
+              </li>
+              <li>
+                <mat-icon class="material-icons-outlined">update</mat-icon>
+                <p>
+                  Add/update your research activities (works, affiliations, etc)
+                </p>
+              </li>
+              <li>
+                <mat-icon class="material-icons-outlined">update</mat-icon>
+                <p>
+                  Add/update information about you (country, keywords, etc.)
+                </p>
+              </li>
+            </ul>
+
+            <button mat-raised-button color="primary">Authorize access</button>
+            <button mat-stroked-button color="primary">Deny access</button>
+
+            <p class="mat-caption">
+              If authorized, this organization will have access to your ORCID
+              record, as outlined above and described in further detail in
+              <a
+                href="https://orcid.org/footer/privacy-policy"
+                target="_blank"
+                rel="noopener"
+                class="mat-button-font"
+                i18n="@@register.privacyPolicy"
+                >ORCID’s privacy policy.</a
+              >
+            </p>
+            <p class="mat-caption">
+              You can manage access permissions for this and other Trusted
+              Organizations in your
+              <a
+                href="/account#manage-permissions"
+                target="_blank"
+                rel="noopener"
+                class="mat-button-font"
+                i18n="@@register.privacyPolicy"
+                >account settings.</a
+              >
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</main>
+
+<mat-menu #menu="matMenu" class="mat-body-1">
+  <div>Switch to another account</div>
+  <div>You have 12 trusted accounts</div>
+  <button
+    class="mat-button-wrap-text"
+    mat-menu-item
+    *ngFor="let account of alternativeAccounts"
+    (click)="changeAccount(account)"
+  >
+    <div>
+      <strong>{{ account }}</strong>
+    </div>
+    <div>
+      0000-0000-0000-000X
+    </div>
+  </button>
+</mat-menu>
