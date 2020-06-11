@@ -64,8 +64,14 @@ readMessageFile('./src/locale/messages.xlf')
   .pipe(
     mergeMap(() => saveJson(reportFile, 'translation.log')),
     tap((reportFile: any) => {
-      console.log(reportFile.language.en)
       if (reportFile.language.en.unmatch || reportFile.language.en.notFound) {
+        console.error(
+          'Unmatch or/and notFound properties on the source english files'
+        )
+        console.error({
+          unmatch: reportFile.language.en.unmatch,
+          notFound: reportFile.language.en.notFound,
+        })
         throw new Error(
           'Unmatch or notFound language properties on source english files check the translation.log file'
         )
