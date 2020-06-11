@@ -20,4 +20,6 @@ export class AuthorizeComponent implements OnInit {
   changeAccount() {
     throw new Error('Unimplemented')
   }
+
+  signout() {}
 }

@@ -21,7 +21,10 @@
             <p class="mat-body-2"><strong>Herman Cote</strong></p>
             <p class="mat-body-2">https://qa.orcid.org/0000-0001-9618-9183</p>
             <div class="mat-body-2" class="user-links">
-              <a class="mat-button-font" i18n="@@public-layout.sign_out"
+              <a
+                class="mat-button-font"
+                i18n="@@public-layout.sign_out"
+                (click)="signout()"
                 >Sign out</a
               >
               <a
@@ -34,7 +37,7 @@
             </div>
             <mat-divider class="orcid-divider"></mat-divider>
             <div class="university-dropdown">
-              <a class="mat-body-2 black-underline-url body-2">
+              <a role="button" class="mat-body-2 black-underline-url body-2">
                 Aalborg University Library
                 <!-- TODO user the right icon-->
               </a>
