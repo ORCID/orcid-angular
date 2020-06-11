@@ -41,3 +41,36 @@
     }
   }
 }
+
+.mat-card.orcid-wizard-2 {
+  mat-card-header {
+    align-items: baseline;
+    justify-content: space-between;
+    .mat-card-logo {
+      order: -1;
+    }
+    .mat-card-header-text {
+      margin: 0;
+      mat-card-title {
+        margin: 0;
+      }
+    }
+    margin-bottom: 16px; // centralize
+  }
+
+  mat-card-content {
+    margin-top: 16px; //centralize
+  }
+
+  .mat-divider-horizontal {
+    position: relative;
+  }
+
+  .columns-12 &,
+  .columns-8 & {
+    padding: 32px; // centralize
+  }
+  .columns-4 & {
+    padding: 16px; // centralize
+  }
+}

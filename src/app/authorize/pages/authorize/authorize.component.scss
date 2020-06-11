@@ -1,3 +1,12 @@
 :host {
   width: 100%;
 }
+
+.logo {
+  width: 130px;
+}
+
+.user-links {
+  display: flex;
+  justify-content: space-between;
+}

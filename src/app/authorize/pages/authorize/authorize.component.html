@@ -2,32 +2,25 @@
   <div class="container">
     <div class="row space-around">
       <div class="col l5 m6 s4">
-        <mat-card class="orcid-wizard">
+        <mat-card class="orcid-wizard-2">
           <mat-card-header>
-            <mat-card-title
-              role="heading"
-              aria-level="1"
-              i18n="@@authorize.title"
-            >
-              <img
-                class="logo"
-                src="./assets/vectors/orcid.logo.svg"
-                alt="orcid logo"
-                role="link"
-                i18n="@@authorize.authorizeAccess"
-              />
-
-              Authorize Access</mat-card-title
-            >
+            <img
+              class="logo mat-card-logo"
+              src="./assets/vectors/orcid.logo.svg"
+              alt="orcid logo"
+              role="link"
+              i18n="@@authorize.authorizeAccess"
+            />
+            <mat-card-title>Authorize Access</mat-card-title>
           </mat-card-header>
-          <mat-divider></mat-divider>
+          <mat-divider class="orcid-divider"></mat-divider>
           <mat-card-content>
             <p class="mat-caption" i18n="@@authorize.youAreCurrentlySignin">
               You are currently signed in as:
             </p>
             <p class="mat-body-2"><strong>Herman Cote</strong></p>
             <p class="mat-body-2">https://qa.orcid.org/0000-0001-9618-9183</p>
-            <div class="mat-body-2">
+            <div class="mat-body-2" class="user-links">
               <a class="mat-button-font" i18n="@@public-layout.sign_out"
                 >Sign out</a
               >
@@ -39,7 +32,7 @@
                 >Switch to another account</a
               >
             </div>
-            <mat-divider></mat-divider>
+            <mat-divider class="orcid-divider"></mat-divider>
             <!-- TODO UNDERLINE URL -->
             <p class="mat-body-2">
               Aalborg University Library
