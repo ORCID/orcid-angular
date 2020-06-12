@@ -4,6 +4,7 @@ import { Injectable, LOCALE_ID, Inject } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { PlatformInfo } from './platform-info.type'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'
+import { WINDOW } from '../window'
 
 @Injectable()
 export class PlatformInfoService {
@@ -25,12 +26,14 @@ export class PlatformInfoService {
     rtl: false,
     ltr: true,
     screenDirection: 'ltr',
+    oauthMode: this.window.location.href.toLowerCase().indexOf('oauth') >= 0,
   }
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,
     private _breakpointObserver: BreakpointObserver,
-    _platform: Platform
+    _platform: Platform,
+    @Inject(WINDOW) private window: Window
   ) {
     this.platform.rtl = locale === 'ar' ? true : false
     this.platform.ltr = !this.platform.rtl
