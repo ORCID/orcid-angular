@@ -16,3 +16,36 @@
   align-items: center;
   cursor: pointer;
 }
+
+ul {
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      margin-bottom: -4px; // Compensates mat icon bottom with space
+      margin-right: 12px;
+      [dir='rtl'] & {
+        margin-right: auto;
+        margin-left: 12px;
+      }
+    }
+  }
+}
+
+button {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-divider {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+p {
+  margin: 0;
+}

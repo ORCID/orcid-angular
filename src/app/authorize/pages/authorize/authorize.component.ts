@@ -5,6 +5,7 @@ import { WINDOW } from 'src/app/cdk/window'
   selector: 'app-authorize',
   templateUrl: './authorize.component.html',
   styleUrls: ['./authorize.component.scss'],
+  preserveWhitespaces: true,
 })
 export class AuthorizeComponent implements OnInit {
   isATrustedIndividual = true
