@@ -32,13 +32,7 @@
                 (click)="signout()"
                 >Sign out</a
               >
-              <a
-                *ngIf="isATrustedIndividual"
-                class="mat-button-font"
-                [matMenuTriggerFor]="menu"
-                i18n="@@authorize.switchAccount"
-                >Switch to another account</a
-              >
+              <app-trusted-individuals-dropdown></app-trusted-individuals-dropdown>
             </div>
             <mat-divider class="orcid-divider"></mat-divider>
 
@@ -118,27 +112,6 @@
     </div>
   </div>
 </main>
-
-<mat-menu #menu="matMenu" class="mat-body-1">
-  <div i18n="@@authorize.SwitchTo">Switch to another account</div>
-  <div>
-    <ng-container i18n="@@authorize.youHave">You have</ng-container> {{ '12' }}
-    <ng-container i18n="@@authorize.accounts">accounts</ng-container>
-  </div>
-  <button
-    class="mat-button-wrap-text"
-    mat-menu-item
-    *ngFor="let account of alternativeAccounts"
-    (click)="changeAccount(account)"
-  >
-    <div>
-      <strong>{{ account }}</strong>
-    </div>
-    <div>
-      0000-0000-0000-000X
-    </div>
-  </button>
-</mat-menu>
 
 <ng-template #updateIconTemplate>
   <mat-icon class="material-icons-outlined">update</mat-icon>

@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { InfoDropDownComponent } from './components/info-drop-down/info-drop-down.component'
+import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 
 @NgModule({
   declarations: [AuthorizeComponent, InfoDropDownComponent],
@@ -24,6 +25,7 @@ import { InfoDropDownComponent } from './components/info-drop-down/info-drop-dow
     MatDividerModule,
     A11yLinkModule,
     MatTooltipModule,
+    TrustedIndividualsDropdownModule,
   ],
 })
 export class AuthorizeModule {}

@@ -19,8 +19,7 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
   userName: string
-  isATrustedIndividual = true
-  alternativeAccounts = ['test', 'test2']
+
   oauthRequest: RequestInfoForm
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -97,10 +96,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
 
   navigateTo(val) {
     this.window.location.href = val
-  }
-
-  changeAccount() {
-    throw new Error('Unimplemented')
   }
 
   signout() {}
