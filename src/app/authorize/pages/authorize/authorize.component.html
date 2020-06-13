@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row space-around">
       <div class="col l5 m6 s4">
-        <mat-card class="orcid-wizard-2">
+        <mat-card
+          class="orcid-wizard-2"
+          *ngIf="oauthRequest && userName && orcidUrl"
+        >
           <mat-card-header>
             <img
               class="logo mat-card-logo"
@@ -18,8 +21,10 @@
             <p class="mat-caption" i18n="@@authorize.youAreCurrentlySignin">
               You are currently signed in as:
             </p>
-            <p class="mat-body-2"><strong>Herman Cote</strong></p>
-            <p class="mat-body-2">https://qa.orcid.org/0000-0001-9618-9183</p>
+            <p class="mat-body-2">
+              <strong>{{ userName }}</strong>
+            </p>
+            <p class="mat-body-2">{{ orcidUrl }}</p>
             <div class="mat-body-2" class="user-links">
               <a
                 class="mat-button-font"
@@ -38,7 +43,7 @@
             <mat-divider class="orcid-divider"></mat-divider>
             <div class="university-dropdown">
               <a role="button" class="mat-body-2 black-underline-url body-2">
-                Aalborg University Library
+                {{ this.oauthRequest.memberName }}
                 <!-- TODO user the right icon-->
               </a>
               <mat-icon class="material-icons-outlined">info</mat-icon>
@@ -49,30 +54,22 @@
 
             <ul class="mat-body-1">
               <mat-divider></mat-divider>
-              <li>
-                <mat-icon class="material-icons-outlined"
-                  >remove_red_eye</mat-icon
-                >
-                <p>
-                  Read your information with visibility set to Trusted
-                  Organizations
-                </p>
-              </li>
-              <mat-divider></mat-divider>
-              <li>
-                <mat-icon class="material-icons-outlined">update</mat-icon>
-                <p>
-                  Add/update your research activities (works, affiliations, etc)
-                </p>
-              </li>
-              <mat-divider></mat-divider>
-              <li>
-                <mat-icon class="material-icons-outlined">update</mat-icon>
-                <p>
-                  Add/update information about you (country, keywords, etc.)
-                </p>
-              </li>
-              <mat-divider></mat-divider>
+              <ng-container *ngFor="let scope of this.oauthRequest.scopes">
+                <li [matTooltip]="scope.longDescription">
+                  <ng-container
+                    [ngTemplateOutlet]="
+                      (getIconName(scope.value) === 'updateIcon' &&
+                        updateIconTemplate) ||
+                      (getIconName(scope.value) === 'orcidIcon' &&
+                        orcidIconTemplate) ||
+                      (getIconName(scope.value) === 'viewIcon' &&
+                        viewIconTemplate)
+                    "
+                  ></ng-container>
+                  <p>{{ scope.description }}</p>
+                </li>
+                <mat-divider></mat-divider>
+              </ng-container>
             </ul>
 
             <button
@@ -143,3 +140,17 @@
     </div>
   </button>
 </mat-menu>
+
+<ng-template #updateIconTemplate>
+  <mat-icon class="material-icons-outlined">update</mat-icon>
+</ng-template>
+
+<ng-template #viewIconTemplate>
+  <mat-icon class="material-icons-outlined">remove_red_eye</mat-icon>
+</ng-template>
+
+<ng-template #orcidIconTemplate>
+  <mat-icon>
+    <img src="/assets/vectors/orcid.logo.black.icon.svg" alt=""
+  /></mat-icon>
+</ng-template>

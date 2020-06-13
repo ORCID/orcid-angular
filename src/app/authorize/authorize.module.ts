@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatDividerModule } from '@angular/material/divider'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   declarations: [AuthorizeComponent],
@@ -21,6 +22,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     MatIconModule,
     MatDividerModule,
     A11yLinkModule,
+    MatTooltipModule,
   ],
 })
 export class AuthorizeModule {}

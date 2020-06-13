@@ -22,7 +22,14 @@ export interface RequestInfoForm {
 
 export interface Scope {
   name: string
-  value: string
+  value: ScopesStrings
   description: string
   longDescription: string
 }
+
+export type ScopesStrings =
+  | 'openid'
+  | '/authenticate'
+  | '/person/update'
+  | '/activities/update'
+  | '/read-limited'

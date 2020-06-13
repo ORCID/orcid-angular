@@ -121,8 +121,7 @@ export class SignInComponent implements OnInit, AfterViewInit {
             .pipe(take(1))
             .subscribe((info) => {
               this.displayName = info.displayName
-              this.realUserOrcid =
-                'https:' + environment.BASE_URL + info.userInfo.REAL_USER_ORCID
+              this.realUserOrcid = info.orcidUrl
             })
         }
       })
