@@ -10,9 +10,10 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatDividerModule } from '@angular/material/divider'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { InfoDropDownComponent } from './components/info-drop-down/info-drop-down.component'
 
 @NgModule({
-  declarations: [AuthorizeComponent],
+  declarations: [AuthorizeComponent, InfoDropDownComponent],
   imports: [
     CommonModule,
     AuthorizeRoutingModule,

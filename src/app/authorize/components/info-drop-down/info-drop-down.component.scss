@@ -1,0 +1,22 @@
+.description-container {
+  padding: 8px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  word-break: break-all;
+  box-sizing: border-box;
+}
+mat-icon {
+  margin-top: 4px; // Compensates mat icon bottom with space
+  margin-left: 4px;
+  [dir='rtl'] & {
+    margin-right: 4px;
+  }
+}
+
+.university-dropdown {
+  display: flex;
+}

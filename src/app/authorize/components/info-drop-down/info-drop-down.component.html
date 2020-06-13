@@ -1,0 +1,15 @@
+<div
+  class="university-dropdown"
+  (click)="show = !show"
+  [ngClass]="{ active: show }"
+>
+  <a role="button" class="mat-body-2 black-underline-url body-2">
+    {{ name }}
+    <!-- TODO user the right icon-->
+  </a>
+  <mat-icon class="material-icons-outlined">info</mat-icon>
+</div>
+
+<div class="description-container" *ngIf="show">
+  {{ description }}
+</div>

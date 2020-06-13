@@ -41,13 +41,12 @@
               >
             </div>
             <mat-divider class="orcid-divider"></mat-divider>
-            <div class="university-dropdown">
-              <a role="button" class="mat-body-2 black-underline-url body-2">
-                {{ this.oauthRequest.memberName }}
-                <!-- TODO user the right icon-->
-              </a>
-              <mat-icon class="material-icons-outlined">info</mat-icon>
-            </div>
+
+            <app-info-drop-down
+              [name]="oauthRequest.memberName"
+              [description]="oauthRequest.clientDescription"
+            ></app-info-drop-down>
+
             <p class="mat-body-1" i18n="@@authorize.hasAskedAccess">
               has asked for the following access to your ORCID record:
             </p>
