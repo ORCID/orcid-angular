@@ -1,3 +1,14 @@
 .text-container {
-  padding: 8px 16px;
+  padding: 12px 16px; //TODO
+  display: block;
+}
+button {
+  height: auto;
+  padding: 12px 16px; //TODO
+}
+button .content {
+  overflow-wrap: break-word;
+  overflow: hidden;
+  line-height: normal;
+  white-space: normal;
 }

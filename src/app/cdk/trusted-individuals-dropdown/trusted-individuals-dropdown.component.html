@@ -1,5 +1,5 @@
 <a
-  *ngIf="hasTrustedIndividual"
+  *ngIf="delegators.length"
   class="mat-button-font"
   [matMenuTriggerFor]="menu"
   i18n="@@authorize.switchAccount"
@@ -7,25 +7,26 @@
 >
 
 <mat-menu #menu="matMenu" class="mat-body-1">
-  <div i18n="@@authorize.SwitchTo" class="header text-container">
+  <strong i18n="@@authorize.SwitchTo" class="header text-container">
     Switch to another account
-  </div>
+  </strong>
   <div class="text-container">
     <ng-container i18n="@@authorize.youHave">You have</ng-container>
     <strong>{{ '12' }}</strong>
     <ng-container i18n="@@authorize.accounts">accounts</ng-container>
   </div>
   <button
-    class="mat-button-wrap-text"
     mat-menu-item
-    *ngFor="let account of alternativeAccounts"
-    (click)="changeAccount(account)"
+    *ngFor="let delegator of delegators"
+    (click)="changeAccount(delegator.giverOrcid.path)"
   >
-    <div>
-      <strong>{{ account }}</strong>
-    </div>
-    <div>
-      0000-0000-0000-000X
+    <div class="content">
+      <div>
+        <strong>{{ delegator.giverName.value }}</strong>
+      </div>
+      <div>
+        {{ delegator.giverOrcid.uri }}
+      </div>
     </div>
   </button>
 </mat-menu>

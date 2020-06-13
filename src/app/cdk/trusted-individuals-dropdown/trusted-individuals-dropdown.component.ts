@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
+import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
 
 @Component({
   selector: 'app-trusted-individuals-dropdown',
@@ -10,9 +12,14 @@ import { Component, OnInit } from '@angular/core'
   preserveWhitespaces: true,
 })
 export class TrustedIndividualsDropdownComponent implements OnInit {
-  hasTrustedIndividual = true
+  delegators: Delegator[]
+
   alternativeAccounts = ['test', 'test2']
-  constructor() {}
+  constructor(private _trustedIndividuals: TrustedIndividualsService) {
+    this._trustedIndividuals.getTrustedIndividuals().subscribe((data) => {
+      this.delegators = data.delegators
+    })
+  }
 
   ngOnInit(): void {}
 
