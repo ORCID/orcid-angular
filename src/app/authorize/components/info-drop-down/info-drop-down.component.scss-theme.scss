@@ -7,8 +7,7 @@
   .description-container {
     background-color: map-get($background, 'background');
   }
-  .university-dropdown.active,
-  .university-dropdown.active > a {
+  .university-dropdown.active {
     color: mat-color($accent, 700);
   }
 }
