@@ -100,6 +100,13 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
 
   signout() {}
 
+  authorize(value = true) {
+    this._oauth.authorize(value).subscribe((data) => {
+      this.navigateTo(data.redirectUrl)
+    })
+    // TODO @leomendoza123 handle error with toaster
+  }
+
   getIconName(scope: ScopesStrings): string {
     if (scope.indexOf('update') >= 0) {
       return 'updateIcon' // Eye material iconname

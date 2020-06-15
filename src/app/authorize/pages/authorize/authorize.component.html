@@ -69,10 +69,16 @@
               mat-raised-button
               color="primary"
               i18n="@@authorize.authorize"
+              (click)="authorize()"
             >
               Authorize access
             </button>
-            <button mat-stroked-button color="primary" i18n="@@authorize.deny">
+            <button
+              mat-stroked-button
+              color="primary"
+              i18n="@@authorize.deny"
+              (click)="authorize(false)"
+            >
               Deny access
             </button>
 
