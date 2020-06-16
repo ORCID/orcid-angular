@@ -6,6 +6,7 @@ import {
   URL_PRIVATE_PROFILE,
   ApplicationRoutes,
 } from './constants'
+import { OauthGuard } from './guards/oauth.guard'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -31,6 +32,7 @@ const routes: Routes = [
   // },
   {
     path: ApplicationRoutes.authorize,
+    canActivateChild: [OauthGuard],
     loadChildren: () =>
       import('./authorize/authorize.module').then((m) => m.AuthorizeModule),
   },
@@ -47,6 +49,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.signin,
+    canActivateChild: [OauthGuard],
     loadChildren: () =>
       import('./sign-in/sign-in.module').then((m) => m.SignInModule),
   },

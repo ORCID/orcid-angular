@@ -26,6 +26,7 @@ export class PlatformInfoService {
     rtl: false,
     ltr: true,
     screenDirection: 'ltr',
+    // TODO leomendoza123 disable oauth mode when is not required
     oauthMode: this.window.location.href.toLowerCase().indexOf('oauth') >= 0,
   }
 

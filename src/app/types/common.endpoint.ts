@@ -110,3 +110,10 @@ export interface Visibility {
   getRequiredMessage?: any
   visibility: string // Todo make an enum
 }
+
+export type ScopesStrings =
+  | 'openid'
+  | '/authenticate'
+  | '/person/update'
+  | '/activities/update'
+  | '/read-limited'
