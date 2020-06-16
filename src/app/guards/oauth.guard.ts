@@ -20,13 +20,14 @@ export class OauthGuard implements CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | UrlTree | boolean {
-    // TODO @angel check if all types of Oauth require at least the following 4 query parameters to be valid
-    console.log(next.queryParams)
+    // TODO @angel check if these are all the oauth parameters we support
+    // if any of this query parameters is present the backend will be call to try
+    // to create an oauth section
     if (
-      'client_id' in next.queryParams &&
-      'response_type' in next.queryParams &&
-      'scope' in next.queryParams &&
-      'redirect_uri' in next.queryParams &&
+      'client_id' in next.queryParams ||
+      'response_type' in next.queryParams ||
+      'scope' in next.queryParams ||
+      'redirect_uri' in next.queryParams ||
       'oauth' in next.queryParams
     ) {
       // Declares the Oauth parameters on the backend

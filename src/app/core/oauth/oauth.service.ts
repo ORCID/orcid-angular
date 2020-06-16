@@ -12,6 +12,7 @@ import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
   providedIn: 'root',
 })
 export class OauthService {
+  private oauthSectionDeclared = false
   private headers: HttpHeaders
   private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)
 
@@ -31,7 +32,7 @@ export class OauthService {
 
   /**
    * @deprecated since declareOauthSession will declare and get the RequestInfoForm data.
-   * the loadRequestInfoFormFromMemory should replace this
+   * the loadRequestInfoFormFromMemory can replace this function
    */
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
@@ -47,6 +48,8 @@ export class OauthService {
   }
 
   authorize(approved: boolean): Observable<RequestInfoForm> {
+    // TODO @leomendoza123 remove mock data and use the following function
+
     // const value: OauthAuthorize = {
     //   tslint:disable-next-line: max-line-length
     //   TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
@@ -110,11 +113,18 @@ export class OauthService {
     })
   }
 
-  // call on by the Oauth Guard
+  // call on by the OauthGuard
   // it send the Oauth query parameters to the backend and gets back the requestInfoForm
   // if the backend has an error declaring the Oauth parameters it will return a string on the errors array
 
   declareOauthSession(value: DeclareOauthSession): Observable<RequestInfoForm> {
+    // The oauth section is declared only one time when the user lands
+    if (this.oauthSectionDeclared) {
+      return this.requestInfoSubject
+    }
+
+    // TODO @leomendoza123 @DanielPalafox remove mock data and use the following function
+
     // return this._http
     //   .post<RequestInfoForm>(
     //     environment.BASE_URL + '/oauth/custom/declare.json',
@@ -125,6 +135,13 @@ export class OauthService {
     //     retry(3),
     //     catchError((error) => this._errorHandler.handleError(error))
     //   )
+    //   .pipe(
+    //     tap((data) => {
+    //       this.requestInfoSubject.next(data)
+    //       this.oauthSectionDeclared = true
+    //     })
+    //   )
+
     return of(<RequestInfoForm>{
       errors: [],
       scopes: [
@@ -154,14 +171,19 @@ export class OauthService {
       responseType: 'code',
       stateParam: null,
       userId: null,
-      userName: null,
-      userOrcid: null,
+      userName: 'logedINTEST',
+      userOrcid: 'logedInTest',
       userEmail: null,
       userGivenNames: null,
       userFamilyNames: null,
       nonce: null,
       clientHavePersistentTokens: true,
       scopesAsString: '/authenticate openid',
-    }).pipe(tap((data) => this.requestInfoSubject.next(data)))
+    }).pipe(
+      tap((data) => {
+        this.requestInfoSubject.next(data)
+        this.oauthSectionDeclared = true
+      })
+    )
   }
 }
