@@ -2,18 +2,18 @@
   *ngIf="delegators.length || switchToMeAccount"
   class="mat-button-font"
   [matMenuTriggerFor]="menu"
-  i18n="@@authorize.switchAccount"
+  i18n="@@delegators.switchAccount"
   >Switch to another account</a
 >
 
 <mat-menu #menu="matMenu" class="mat-body-1 trusted-individuals">
-  <strong i18n="@@authorize.SwitchTo" class="header text-container">
+  <strong class="header text-container" i18n="@@delegators.switchAccount">
     Switch to another account
   </strong>
   <div class="text-container" *ngIf="delegators.length">
-    <ng-container i18n="@@authorize.youHave">You have</ng-container>
+    <ng-container i18n="@@delegators.youHave">You have</ng-container>
     <strong>{{ delegators.length }}</strong>
-    <ng-container i18n="@@authorize.accounts">accounts</ng-container>
+    <ng-container i18n="@@delegators.accounts">accounts</ng-container>
   </div>
   <button
     mat-menu-item
@@ -36,7 +36,7 @@
   >
     <div class="content">
       <div>
-        <strong>Switch back to me</strong>
+        <strong i18n="@@delegators.switchBack">Switch back to me</strong>
       </div>
       <div>
         {{ switchToMeAccount.giverOrcid.uri }}
