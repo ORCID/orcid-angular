@@ -21,20 +21,22 @@
   cursor: pointer;
 }
 
-ul {
-  padding: 0;
+:host {
+  ul {
+    padding: 0;
 
-  li {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
+    li {
+      list-style-type: none;
+      display: flex;
+      align-items: center;
 
-    mat-icon {
-      margin-bottom: -4px; // Compensates mat icon bottom with space
-      margin-right: 12px;
-      [dir='rtl'] & {
-        margin-right: auto;
-        margin-left: 12px;
+      mat-icon {
+        margin-bottom: -4px; // Compensates mat icon bottom with space
+        margin-right: 12px;
+        [dir='rtl'] & {
+          margin-right: 0px;
+          margin-left: 12px;
+        }
       }
     }
   }
