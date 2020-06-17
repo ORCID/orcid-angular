@@ -46,22 +46,26 @@
             </p>
 
             <ul class="mat-body-1">
-              <mat-divider></mat-divider>
-              <ng-container *ngFor="let scope of this.oauthRequest.scopes">
+              <ng-container
+                *ngFor="let scope of this.oauthRequest.scopes; let last = last"
+              >
                 <li [matTooltip]="scope.longDescription">
-                  <ng-container
-                    [ngTemplateOutlet]="
-                      (getIconName(scope.value) === 'updateIcon' &&
-                        updateIconTemplate) ||
-                      (getIconName(scope.value) === 'orcidIcon' &&
-                        orcidIconTemplate) ||
-                      (getIconName(scope.value) === 'viewIcon' &&
-                        viewIconTemplate)
-                    "
-                  ></ng-container>
-                  <p>{{ scope.description }}</p>
+                  <mat-divider></mat-divider>
+                  <div>
+                    <ng-container
+                      [ngTemplateOutlet]="
+                        (getIconName(scope.value) === 'updateIcon' &&
+                          updateIconTemplate) ||
+                        (getIconName(scope.value) === 'orcidIcon' &&
+                          orcidIconTemplate) ||
+                        (getIconName(scope.value) === 'viewIcon' &&
+                          viewIconTemplate)
+                      "
+                    ></ng-container>
+                    <p>{{ scope.description }}</p>
+                  </div>
+                  <mat-divider *ngIf="last"></mat-divider>
                 </li>
-                <mat-divider></mat-divider>
               </ng-container>
             </ul>
 
