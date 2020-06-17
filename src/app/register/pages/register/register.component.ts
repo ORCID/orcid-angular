@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
   personalData: RegisterForm
   backendForm: RegisterForm
   loading = false
-  RequestInfoForm: RequestInfoForm | null
+  requestInfoForm: RequestInfoForm | null
   constructor(
     _platformInfo: PlatformInfoService,
     private _register: RegisterService,
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
             return this._oauth.loadRequestInfoFormFromMemory().pipe(
               tap((value) => {
                 if (value) {
-                  this.RequestInfoForm = value
+                  this.requestInfoForm = value
                 } else {
                   // TODO @leomendoza123 show toaster error
                   // for a oauth call the backend was expected to return a oauth context
@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
               this.FormGroupStepB,
               this.FormGroupStepC,
               null, // TODO @leomendoza123 support shibboleth https://github.com/ORCID/orcid-angular/issues/206
-              this.RequestInfoForm
+              this.requestInfoForm
             )
           })
         )
@@ -112,7 +112,7 @@ export class RegisterComponent implements OnInit {
               .reportEvent(
                 'RegGrowth',
                 'New-Registration',
-                this.oauthRequestInfo || 'Website'
+                this.requestInfoForm || 'Website'
               )
               .subscribe(() => {
                 this.window.location.href = response.url
