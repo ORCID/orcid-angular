@@ -59,7 +59,11 @@ export class PlatformInfoService {
       .pipe(filter((value) => Object.keys(value).length > 0))
       .subscribe((value) => {
         const previousState = this.platform.oauthMode
-        if (value.hasOwnProperty('oauth') || value.hasOwnProperty('Oauth')) {
+        if (
+          value.hasOwnProperty('oauth') ||
+          value.hasOwnProperty('Oauth') ||
+          value.hasOwnProperty('client_id')
+        ) {
           this.platform.oauthMode = true
         } else {
           this.platform.oauthMode = false
