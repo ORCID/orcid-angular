@@ -3,10 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, of, Subject, ReplaySubject } from 'rxjs'
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { RequestInfoForm } from '../../types/request-info-form.endpoint'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { DeclareOauthSession } from 'src/app/types/declareOauthSession.endpoint'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
+import { RequestInfoForm } from 'src/app/types'
 
 @Injectable({
   providedIn: 'root',
