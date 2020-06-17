@@ -13,17 +13,18 @@ import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
 })
 export class TrustedIndividualsDropdownComponent implements OnInit {
   delegators: Delegator[]
+  switchToMeAccount: Delegator
 
-  alternativeAccounts = ['test', 'test2']
   constructor(private _trustedIndividuals: TrustedIndividualsService) {
     this._trustedIndividuals.getTrustedIndividuals().subscribe((data) => {
       this.delegators = data.delegators
+      this.switchToMeAccount = data.me
     })
   }
 
   ngOnInit(): void {}
 
-  changeAccount() {
-    throw new Error('Unimplemented')
+  changeAccount(id) {
+    this._trustedIndividuals.switchAccount(id).subscribe()
   }
 }

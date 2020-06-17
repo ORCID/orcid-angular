@@ -67,7 +67,302 @@ export class TrustedIndividualsService {
           receiverName: null,
           approvalDate: 1586967300968,
         },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
+        {
+          giverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
+            path: '0000-0002-2036-7905',
+            host: 'qa.orcid.org',
+          },
+          giverName: {
+            errors: [],
+            value: 'Leonardo Mendoza',
+            required: true,
+            getRequiredMessage: null,
+          },
+          receiverOrcid: {
+            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
+            path: '0000-0002-9361-1905',
+            host: 'qa.orcid.org',
+          },
+          receiverName: null,
+          approvalDate: 1586967300968,
+        },
       ],
     })
+  }
+
+  // TODO @angel review
+  // since the switch account is returning a 302 witch triggers a redirect to `my-orcid`
+  // and we also trigger a reload, to reload the oauth page
+  // there might be some scenarios where these two different request might not work as expected.
+  switchAccount(id: string) {
+    return (
+      this._http
+        .get(`${environment.API_WEB}switch-user?username=${id}`, {
+          withCredentials: true,
+        })
+        // TODO @leomendoza123 catch 302 error and reload the page
+        .pipe()
+    )
   }
 }

@@ -10,4 +10,5 @@ export interface Delegator {
 
 export interface TrustedIndividuals {
   delegators: Delegator[]
+  me?: Delegator
 }
