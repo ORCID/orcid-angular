@@ -3,9 +3,10 @@ import { WINDOW } from 'src/app/cdk/window'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserService } from 'src/app/core'
-import { Subject } from 'rxjs'
+import { Subject, forkJoin, Observable } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { ScopesStrings } from 'src/app/types/common.endpoint'
+import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 
 @Component({
   selector: 'app-authorize',
@@ -22,7 +23,8 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(WINDOW) private window: Window,
     private _user: UserService,
-    private _oauth: OauthService
+    private _oauth: OauthService,
+    private _gtag: GoogleAnalyticsService
   ) {
     _oauth.loadRequestInfoFormFromMemory().subscribe((data) => {
       this.oauthRequest = data
@@ -46,8 +48,33 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   signout() {}
 
   authorize(value = true) {
+    console.log(value)
     this._oauth.authorize(value).subscribe((data) => {
-      this.navigateTo(data.redirectUrl)
+      let analyticsReports: Observable<void>[] = []
+
+      if (value) {
+        // Create a GA event for each scope
+        analyticsReports = data.scopes.map((scope) =>
+          this._gtag.reportEvent(
+            'RegGrowth',
+            `AuthorizeP_${scope.name}`,
+            this.oauthRequest
+          )
+        )
+      } else {
+        // Create a GA for deny access
+        analyticsReports.push(
+          this._gtag.reportEvent(
+            'Disengagement',
+            `Authorize_Deny`,
+            this.oauthRequest
+          )
+        )
+      }
+      forkJoin(analyticsReports).subscribe(
+        () => (this.window.location.href = data.redirectUrl),
+        () => (this.window.location.href = data.redirectUrl)
+      )
     })
     // TODO @leomendoza123 handle error with toaster
   }

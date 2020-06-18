@@ -53,6 +53,7 @@ export class OauthService {
     // const value: OauthAuthorize = {
     //   tslint:disable-next-line: max-line-length
     //   TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
+    //   TODO @angel by looking into analytics, I can see we have never reported a persistentTokenDisabled
     //   persistentTokenEnabled: true,
     //   tslint:disable-next-line: max-line-length
     //   TODO @angel please confirm that  email access is always allowed know and at some point it was optional https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/resources/freemarker/includes/oauth/scopes_ng2.ftl#L42

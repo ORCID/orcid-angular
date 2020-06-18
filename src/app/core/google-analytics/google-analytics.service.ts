@@ -4,7 +4,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import { PerformanceMarks } from 'src/app/constants'
 import { Observable } from 'rxjs'
 import { catchError } from 'rxjs/operators'
-import { OauthRequestInfo } from 'src/app/types'
+import { RequestInfoForm } from 'src/app/types'
 
 @Injectable({
   providedIn: 'root',
@@ -57,12 +57,12 @@ export class GoogleAnalyticsService {
   public reportEvent(
     event: string,
     event_category: string,
-    event_label: OauthRequestInfo | string,
+    event_label: RequestInfoForm | string,
     value?: number
   ): Observable<void> {
-    // if has OauthRequestInfo add the client string as event_label
+    // if has RequestInfoForm add the client string as event_label
     if (typeof event_label !== 'string') {
-      event_label = this.buildClientString(event_label)
+      event_label = 'OAuth ' + this.buildClientString(event_label)
       // TODO @leomendoza123 this should be tested once https://trello.com/c/xoTzzqSl/6675-signin-oauth-support is ready
     }
     return this.eventObservable(event, {
@@ -146,7 +146,7 @@ export class GoogleAnalyticsService {
     })
   }
 
-  buildClientString(request: OauthRequestInfo) {
+  buildClientString(request: RequestInfoForm) {
     return request.memberName + ' - ' + request.clientName
   }
 }

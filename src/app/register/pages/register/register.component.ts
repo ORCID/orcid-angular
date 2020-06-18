@@ -114,9 +114,10 @@ export class RegisterComponent implements OnInit {
                 'New-Registration',
                 this.requestInfoForm || 'Website'
               )
-              .subscribe(() => {
-                this.window.location.href = response.url
-              })
+              .subscribe(
+                () => (this.window.location.href = response.url),
+                () => (this.window.location.href = response.url)
+              )
           } else {
             // TODO @leomendoza123 HANDLE ERROR show toaster
           }
