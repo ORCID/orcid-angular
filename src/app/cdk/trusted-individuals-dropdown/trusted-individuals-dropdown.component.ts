@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
-import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
+import {
+  Delegator,
+  TrustedIndividuals,
+} from 'src/app/types/trusted-individuals.endpoint'
 
 @Component({
   selector: 'app-trusted-individuals-dropdown',
@@ -12,19 +15,22 @@ import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
   preserveWhitespaces: true,
 })
 export class TrustedIndividualsDropdownComponent implements OnInit {
+  _trustedIndividuals: TrustedIndividuals
   delegators: Delegator[]
   switchToMeAccount: Delegator
-
-  constructor(private _trustedIndividuals: TrustedIndividualsService) {
-    this._trustedIndividuals.getTrustedIndividuals().subscribe((data) => {
-      this.delegators = data.delegators
-      this.switchToMeAccount = data.me
-    })
+  @Input()
+  set trustedIndividuals(value: TrustedIndividuals) {
+    this.delegators = value.delegators
+    this.switchToMeAccount = value.me
+    this._trustedIndividuals = value
   }
-
+  get trustedIndividuals() {
+    return this._trustedIndividuals
+  }
+  @Output() changeUser = new EventEmitter<Delegator>()
   ngOnInit(): void {}
 
-  changeAccount(id) {
-    this._trustedIndividuals.switchAccount(id).subscribe()
+  changeAccount(delegator: Delegator) {
+    this.changeUser.next(delegator)
   }
 }

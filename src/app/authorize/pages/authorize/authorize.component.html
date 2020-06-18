@@ -34,7 +34,10 @@
                 (click)="signout()"
                 >Sign out</a
               >
-              <app-trusted-individuals-dropdown></app-trusted-individuals-dropdown>
+              <app-trusted-individuals-dropdown
+                (changeUser)="changeAccount($event)"
+                [trustedIndividuals]="trustedIndividuals"
+              ></app-trusted-individuals-dropdown>
             </div>
             <mat-divider class="orcid-divider"></mat-divider>
 

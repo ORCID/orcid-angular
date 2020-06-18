@@ -1,5 +1,5 @@
 <a
-  *ngIf="delegators.length || switchToMeAccount"
+  *ngIf="delegators?.length || switchToMeAccount"
   class="mat-button-font"
   [matMenuTriggerFor]="menu"
   i18n="@@delegators.switchAccount"
@@ -7,10 +7,10 @@
 >
 
 <mat-menu #menu="matMenu" class="mat-body-1 trusted-individuals">
-  <strong class="header text-container" i18n="@@delegators.switchAccount">
+  <strong class="header text-container" i18n="@@delegators?.switchAccount">
     Switch to another account
   </strong>
-  <div class="text-container" *ngIf="delegators.length">
+  <div class="text-container" *ngIf="delegators?.length">
     <ng-container i18n="@@delegators.youHave">You have</ng-container>
     <strong>{{ delegators.length }}</strong>
     <ng-container i18n="@@delegators.accounts">accounts</ng-container>
@@ -18,7 +18,7 @@
   <button
     mat-menu-item
     *ngFor="let delegator of delegators"
-    (click)="changeAccount(delegator.giverOrcid.path)"
+    (click)="changeAccount(delegator)"
   >
     <div class="content">
       <div>
@@ -32,7 +32,7 @@
   <button
     mat-menu-item
     *ngIf="switchToMeAccount"
-    (click)="changeAccount(switchToMeAccount.giverOrcid.path)"
+    (click)="changeAccount(switchToMeAccount)"
   >
     <div class="content">
       <div>
