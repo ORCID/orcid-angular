@@ -10,6 +10,7 @@
 <form role="search" class="row h-end search-box middle">
   <div id="ariaLabelWhere" hidden>Search on</div>
   <button
+    *ngIf="!togglzNewInfoSite"
     id="whereToSearch"
     type="button"
     matRipple
@@ -23,7 +24,10 @@
     <mat-icon matSuffix role="presentation">arrow_drop_down</mat-icon>
   </button>
   <div
-    class="input-box"
+    [ngClass]="{
+      'input-box': !togglzNewInfoSite,
+      'input-box-new-info': togglzNewInfoSite
+    }"
     (keyup.enter)="search(whereToSearchSelected, whatToSearch)"
   >
     <input

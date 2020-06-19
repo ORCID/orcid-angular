@@ -51,6 +51,13 @@
       >
         <a
           class="col s4 l-auto m8"
+          (click)="about()"
+          i18n="@@footer.aboutOrcid"
+        >
+          About ORCID
+        </a>
+        <a
+          class="col s4 l-auto m8"
           i18n="@@footer.privacypolicy"
           (click)="goTo('/footer/privacy-policy')"
           routerLink=""
@@ -58,7 +65,7 @@
           Privacy Policy
         </a>
         <a
-          class="col s4 l-auto m8"
+          class="col s4 l-auto m8 "
           i18n="@@footer.termsofuse"
           (click)="goTo('/content/orcid-terms-use')"
           routerLink=""

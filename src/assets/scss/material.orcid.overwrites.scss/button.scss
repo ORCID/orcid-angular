@@ -49,3 +49,7 @@ button.mat-button-wrap-text-with-icon {
     left: unset;
   }
 }
+
+.no-hover-effect.mat-button .mat-button-focus-overlay {
+  background-color: transparent;
+}

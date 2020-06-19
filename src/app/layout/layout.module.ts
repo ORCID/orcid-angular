@@ -19,6 +19,7 @@ import { SkipMainNavComponent } from './skip-main-nav/skip-main-nav.component'
 import { BannersComponent } from './banners/banners.component'
 import { BannerModule } from '../cdk/banner/banner.module'
 import { MaintenanceMessageComponent } from './maintenance-message/maintenance-message.component'
+import { MatDividerModule } from '@angular/material/divider'
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { MaintenanceMessageComponent } from './maintenance-message/maintenance-m
     MatRippleModule,
     MatIconModule,
     BannerModule,
+    MatDividerModule,
   ],
   declarations: [
     HeaderComponent,

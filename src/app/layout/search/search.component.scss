@@ -53,6 +53,16 @@
     }
   }
 
+  .input-box-new-info {
+    flex-grow: 1;
+    max-width: 334px;
+    input {
+      border-radius: 3px;
+      margin-left: 2px;
+      width: 100%;
+    }
+  }
+
   .search-icon {
     width: 40px;
     height: 42px;
@@ -86,13 +96,18 @@
   :host {
     .search-box {
       padding: 12px 0px;
+      justify-content: center;
+      max-width: -webkit-calc(100% - 28px);
+      max-width: -moz-calc(100% - 28px);
+      max-width: calc(100% - 28px);
       .search-where,
       .search-icon {
         flex-shrink: 0;
         border-radius: 0;
       }
       flex-wrap: initial;
-      .input-box {
+      .input-box,
+      .input-box-new-info {
         flex-grow: 1;
         max-width: none;
         input {
