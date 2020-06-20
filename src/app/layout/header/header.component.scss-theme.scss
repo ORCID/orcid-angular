@@ -71,7 +71,7 @@
               color: mat-color($primary, '500-contrast');
             }
             button:hover {
-              background-color: mat-color($accent, 600);
+              background-color: mat-color($accent, 200);
               color: $dark-primary-text;
             }
             .row {
@@ -79,7 +79,7 @@
                 color: mat-color($primary, 500);
               }
               button:hover {
-                background-color: mat-color($accent, 600);
+                background-color: mat-color($accent, 200);
                 color: $dark-primary-text;
               }
               background-color: mat-color($background, 'light-grey');

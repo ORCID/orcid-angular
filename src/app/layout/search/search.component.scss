@@ -25,6 +25,7 @@
 }
 
 .search-box {
+  flex: 1px;
   > div,
   > button {
     height: 42px;
@@ -54,8 +55,7 @@
   }
 
   .input-box-new-info {
-    flex-grow: 1;
-    max-width: 334px;
+    width: 334px;
     input {
       border-radius: 3px;
       margin-left: 2px;
