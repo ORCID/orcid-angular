@@ -1,14 +1,16 @@
+@import '../orcid.spacing.scss';
+
 .mat-card.orcid-wizard {
   width: 100%;
   box-shadow: none;
-  padding: 0;
+  padding: $spacing-0;
   mat-progress-bar {
     // Makes the progress bar take 100% of card size
     left: 0px;
     position: absolute;
   }
   .mat-card-title {
-    margin-top: 40px;
+    margin-top: $spacing-40;
   }
 
   .mat-card-header {
@@ -25,19 +27,19 @@
     text-align: center;
   }
   .mat-card-subtitle {
-    margin-bottom: 0;
+    margin-bottom: $spacing-0;
   }
 
   .columns-12 &,
   .columns-8 & {
-    margin-top: 25px;
+    margin-top: $spacing-24;
     mat-card-content {
-      margin: 25px 12% 40px 12%; //12% to approximate the margin on designs
+      margin: $spacing-24 12% 40px 12%; //12% to approximate the margin on designs
     }
   }
   .columns-4 & {
     mat-card-content {
-      margin: 25px 0 40px 0;
+      margin: $spacing-24 0 40px 0;
     }
   }
 }
@@ -52,10 +54,10 @@
     .mat-card-header-text {
       margin: 0;
       mat-card-title {
-        margin: 0;
+        margin: $spacing-0;
       }
     }
-    margin-bottom: 16px; // centralize
+    margin-bottom: $spacing-base; // centralize
   }
 
   mat-card-content {
@@ -68,9 +70,9 @@
 
   .columns-12 &,
   .columns-8 & {
-    padding: 32px; // centralize
+    padding: $spacing-large; // centralize
   }
   .columns-4 & {
-    padding: 16px; // centralize
+    padding: $spacing-base; // centralize
   }
 }

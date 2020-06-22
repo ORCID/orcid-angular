@@ -1,5 +1,6 @@
+@import '../../../../assets/scss/orcid.spacing.scss';
 #main {
-  margin-top: 40px;
+  margin-top: $spacing-40;
 }
 
 :host {
@@ -35,10 +36,10 @@
         align-items: center;
         mat-icon {
           margin-bottom: -4px; // Compensates mat icon bottom with space
-          margin-right: 12px;
+          margin-right: $spacing-12;
           [dir='rtl'] & {
             margin-right: 0px;
-            margin-left: 12px;
+            margin-left: $spacing-12;
           }
         }
       }
@@ -48,21 +49,17 @@
 
 button {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: $spacing-base;
 }
 
 mat-divider {
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
-p {
-  margin: 0;
+  margin-top: $spacing-12;
+  margin-bottom: $spacing-12;
 }
 
 mat-icon > img {
   height: 20px;
-  margin-top: 2px;
+  margin-top: 2px; // Fix icon component with SVG image
 }
 
 .col {
@@ -71,4 +68,5 @@ mat-icon > img {
 
 app-info-drop-down {
   max-width: 100%;
+  display: block;
 }
