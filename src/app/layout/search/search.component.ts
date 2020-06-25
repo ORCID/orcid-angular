@@ -55,9 +55,14 @@ export class SearchComponent implements OnInit {
     _togglz
       .getStateOf('ORCID_ANGULAR_SEARCH')
       .subscribe((value) => (this.togglzOrcidAngularSearch = value))
-    _togglz
-      .getStateOf('NEW_INFO_SITE')
-      .subscribe((value) => (this.togglzNewInfoSite = value))
+    _togglz.getStateOf('NEW_INFO_SITE').subscribe((value) => {
+      this.togglzNewInfoSite = value
+      if (!this.togglzNewInfoSite) {
+        this.searchPlaceHolder = this.firstLetterUppercase(
+          $localize`:@@ngOrcid.searchNewInfo:Search the ORCID registry`
+        )
+      }
+    })
 
     router.events.subscribe(
       () =>
