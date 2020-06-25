@@ -34,7 +34,7 @@ export class SearchService {
 
   private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
-    Object.keys(querryParam).map(key => {
+    Object.keys(querryParam).map((key) => {
       escapedParams[key] = this.escapeReservedChar(querryParam[key])
     })
 
@@ -108,7 +108,7 @@ export class SearchService {
   // Remove empty values, trim strings and remove false parameters
   searchParametersAdapter(value: SearchParameters) {
     const trimParameters = {}
-    Object.keys(value).forEach(element => {
+    Object.keys(value).forEach((element) => {
       if (typeof value[element] === 'string') {
         if (value[element].trim() && value[element] !== 'false') {
           trimParameters[element] = value[element].trim()
@@ -128,7 +128,8 @@ export class SearchService {
   }
 
   private handlePagination(querryParam: SearchParameters): string {
-    return `&start=${querryParam.pageIndex * querryParam.pageSize ||
-      0}&rows=${querryParam.pageSize || 50}`
+    return `&start=${querryParam.pageIndex * querryParam.pageSize || 0}&rows=${
+      querryParam.pageSize || 50
+    }`
   }
 }

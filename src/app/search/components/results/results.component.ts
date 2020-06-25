@@ -17,6 +17,8 @@ import { SearchResults, ExpandedSearchResultsContent } from 'src/app/types'
   preserveWhitespaces: true,
 })
 export class ResultsComponent implements OnInit, OnChanges {
+  ngOrcidSearchResults = $localize`:@@ngOrcid.search.searchResults:Search Results`
+
   @Input() searchResults: SearchResults
   resultsContent: ExpandedSearchResultsContent[]
 

@@ -1,10 +1,10 @@
 <div
   role="main"
-  aria-label="search results"
+  [attr.aria-label]="ngOrcidSearchResults"
   class="row table-container"
   *ngIf="resultsContent && resultsContent.length"
 >
-  <table aria-label="Search results">
+  <table [attr.aria-label]="ngOrcidSearchResults">
     <thead>
       <tr>
         <th class="mat-body-2 orcid-id-column" i18n="@@ngOrcid.search.orcidID">
@@ -23,7 +23,7 @@
     <tbody>
       <tr *ngFor="let orcid of resultsContent">
         <td class="orcid-id-column">
-          <a href="{{orcid['orcid-id']}}"> {{ orcid['orcid-id'] }}</a>
+          <a href="{{ orcid['orcid-id'] }}"> {{ orcid['orcid-id'] }}</a>
         </td>
         <td>{{ orcid['given-names'] }}</td>
         <td>{{ orcid['family-names'] }}</td>

@@ -1,7 +1,7 @@
 <header role="presentation" class="container">
   <div class="row end">
     <div class="col l5 m8 s4 middle logo-menu-container" role="banner">
-      <a routerLink="/" class="logo-container" aria-label="orcid mini logo">
+      <a routerLink="/" class="logo-container" [attr.aria-label]="labelLogo">
         <img
           src="./assets/vectors/orcid.logo.svg"
           alt="orcid logo"
@@ -57,7 +57,7 @@
 <nav
   (mouseleave)="mouseLeave()"
   *ngIf="mobileMenuState || platform.columns12"
-  aria-label="main menu"
+  [attr.aria-label]="labelMenu"
 >
   <div class="top-bar">
     <div class="menu-container" [ngClass]="{ container: platform.columns12 }">

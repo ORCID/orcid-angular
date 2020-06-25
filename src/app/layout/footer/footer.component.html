@@ -1,5 +1,5 @@
 <app-statistics></app-statistics>
-<footer aria-label="footer">
+<footer [attr.aria-label]="labelFooter">
   <div class="container">
     <div class="row logo space-around">
       <div class="col baseline">
@@ -25,7 +25,7 @@
     </div>
 
     <div class="row public-domain space-around">
-      <div class=" CC0  mat-caption">
+      <div class="CC0 mat-caption">
         <img src="./assets/icons/public-domain.png" alt="public domain" />
         <ng-container i18n="@@footer.copyright_cc0_1"
           >The text of this website is published under a</ng-container
@@ -50,7 +50,7 @@
         [ngClass]="{ 'space-around': !platform.columns12 }"
       >
         <a
-          class="col s4 l-auto m8  "
+          class="col s4 l-auto m8"
           i18n="@@footer.privacypolicy"
           (click)="goTo('/footer/privacy-policy')"
           routerLink=""
@@ -58,7 +58,7 @@
           Privacy Policy
         </a>
         <a
-          class="col s4 l-auto m8 "
+          class="col s4 l-auto m8"
           i18n="@@footer.termsofuse"
           (click)="goTo('/content/orcid-terms-use')"
           routerLink=""

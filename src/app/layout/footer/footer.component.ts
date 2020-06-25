@@ -10,12 +10,13 @@ import { WINDOW } from 'src/app/cdk/window'
 })
 export class FooterComponent implements OnInit {
   platform
+  labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
 
   constructor(
     _platformInfo: PlatformInfoService,
     @Inject(WINDOW) private window: Window
   ) {
-    _platformInfo.get().subscribe(platformInfo => {
+    _platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
     })
   }

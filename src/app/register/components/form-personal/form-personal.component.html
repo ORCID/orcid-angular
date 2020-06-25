@@ -24,7 +24,7 @@
 
     <button
       mat-icon-button
-      aria-label="info about names"
+      [attr.aria-label]="labelInfoAboutName"
       type="button"
       [mdePopoverTriggerFor]="namesPopover"
       mdePopoverTriggerOn="click"
@@ -160,7 +160,7 @@
     <button
       mat-button
       color="primary"
-      aria-label="close"
+      [attr.aria-label]="labelClose"
       (click)="namesPopoverTrigger.closePopover()"
       cdkFocusInitial
       i18n="@@shared.ok"

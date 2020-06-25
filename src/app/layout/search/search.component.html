@@ -2,7 +2,10 @@
   <app-user-menu
     *ngIf="togglzEnableUserMenu && signinRegisterButton"
   ></app-user-menu>
-  <app-language role="navigation" aria-label="Search"></app-language>
+  <app-language
+    role="navigation"
+    [attr.aria-label]="labelSearch"
+  ></app-language>
 </div>
 <form role="search" class="row h-end search-box middle">
   <div id="ariaLabelWhere" hidden>Search on</div>
@@ -29,11 +32,11 @@
       [(ngModel)]="whatToSearch"
       [placeholder]="searchPlaceHolder"
       type="text"
-      aria-label="Search"
+      [attr.aria-label]="labelSearch"
     />
   </div>
   <button
-    aria-label="search"
+    [attr.aria-label]="labelSearch"
     type="button"
     matRipple
     class="col middle search-icon"

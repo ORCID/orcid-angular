@@ -21,7 +21,7 @@ const reportFile: {
 }
 
 // Add language empty objects to always keep the same order
-NgOrcidPropertyFolder.supportedLanguagesFile.map(language => {
+NgOrcidPropertyFolder.supportedLanguagesFile.map((language) => {
   reportFile.language[language] = {}
 })
 
@@ -42,9 +42,9 @@ const stringReplacements = {
 readMessageFile('./src/locale/messages.xlf')
   // For each language generate a translation file
   .pipe(
-    switchMap(file =>
+    switchMap((file) =>
       from(
-        NgOrcidPropertyFolder.supportedLanguagesFile.map(language => {
+        NgOrcidPropertyFolder.supportedLanguagesFile.map((language) => {
           return generateLanguageFile(language, deepCopy(file))
         })
       )
@@ -54,29 +54,45 @@ readMessageFile('./src/locale/messages.xlf')
   .pipe(concatAll())
   // Save the translation file
   .pipe(
-    mergeMap(result => {
+    mergeMap((result) => {
       return from([saveJsonAsXlf(result.file, result.saveCode)])
     })
   )
   // Waits until all translations are created
   .pipe(combineAll())
   // Save the translation log
-  .pipe(mergeMap(() => saveJson(reportFile, 'translation.log')))
+  .pipe(
+    mergeMap(() => saveJson(reportFile, 'translation.log')),
+    tap((reportFile: any) => {
+      if (reportFile.language.en.unmatch || reportFile.language.en.notFound) {
+        console.error(
+          'Unmatch or/and notFound properties on the source english files'
+        )
+        console.error({
+          unmatch: reportFile.language.en.unmatch,
+          notFound: reportFile.language.en.notFound,
+        })
+        throw new Error(
+          'Unmatch or notFound language properties on source english files check the translation.log file'
+        )
+      }
+    })
+  )
   // Start it all
   .subscribe()
 
 function generateLanguageFile(saveCode, file) {
   return (
     of(ngOrcidFolder)
-      .pipe(map(folder => folder.flatFolder(saveCode)))
+      .pipe(map((folder) => folder.flatFolder(saveCode)))
       .pipe(
-        mergeMap(properties =>
+        mergeMap((properties) =>
           setLanguagePropertiesToLanguageFile(file, properties, saveCode)
         )
       )
       // Return the XLF to be saved
       .pipe(
-        map(translatedFile => {
+        map((translatedFile) => {
           return { file: translatedFile, saveCode: saveCode }
         })
       )
@@ -97,7 +113,7 @@ function saveJsonAsXlf(json, name) {
       fs.writeFile(
         './src/locale/messages.static.' + name + '.xlf',
         xml,
-        err => {
+        (err) => {
           if (err) {
             reject(err)
           }
@@ -114,11 +130,11 @@ function saveJson(json, name) {
       fs.writeFile(
         './src/locale/messages.' + name + '.json',
         JSON.stringify(json, null, 2),
-        function(err) {
+        function (err) {
           if (err) {
             reject(err)
           } else {
-            resolve()
+            resolve(json)
           }
         }
       )
@@ -127,7 +143,7 @@ function saveJson(json, name) {
 }
 
 function readMessageFile(path) {
-  return new Observable(observer => {
+  return new Observable((observer) => {
     fs.readFile(path, 'utf8', (error, data) => {
       if (error) {
         observer.error(error)
@@ -144,7 +160,7 @@ function setLanguagePropertiesToLanguageFile(
   properties: Properties,
   languageCode
 ): Observable<any> {
-  return new Observable(observer => {
+  return new Observable((observer) => {
     // Read XLF file as a Json to
     // Edit the original XLF or the 'staticValues' object  to add the translations
     parseString(XlfFile, (error, staticValues) => {
@@ -152,7 +168,7 @@ function setLanguagePropertiesToLanguageFile(
         observer.error(error)
       }
       // For each translation
-      staticValues.xliff.file[0].unit.forEach(element => {
+      staticValues.xliff.file[0].unit.forEach((element) => {
         // If an id match one of the translations properties or de language code is "source"
         if (properties[element['$'].id] || languageCode === 'source') {
           let translation: string
@@ -286,7 +302,7 @@ function XLFTranslationNoteHas(element, category, content): boolean {
 }
 function getXLFTranslationNote(element, noteCategory: string): string {
   let value
-  element.notes[0].note.forEach(note => {
+  element.notes[0].note.forEach((note) => {
     if (note['$']['category'] && note['$']['category'] === noteCategory) {
       value = note['_']
     }
@@ -298,7 +314,7 @@ function titleCase(str) {
   return str
     .toLowerCase()
     .split(' ')
-    .map(function(word) {
+    .map(function (word) {
       return word.charAt(0).toUpperCase() + word.slice(1)
     })
     .join(' ')

@@ -37,6 +37,8 @@ export class HeaderComponent implements OnInit {
   togglz: Config
   togglzOrcidAngularSignin: boolean
   signinRegisterButton = true
+  labelLogo = $localize`:@@layout.ariaLabelLogo:orcid mini logo`
+  labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
   constructor(
     private _router: Router,

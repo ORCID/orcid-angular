@@ -34,6 +34,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   isAPhoneScreen = false
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder = $localize`:@@ngOrcid.search.institutionNamePlaceholder:affiliation or organization ID`
+  ngOrcidSearchAdvanceSearch = $localize`:@@ngOrcid.search.advanceSearch:ADVANCED SEARCH`
   advanceSearch: FormGroup
   constructor(
     _platform: PlatformInfoService,

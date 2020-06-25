@@ -24,6 +24,8 @@ export class InstitutionalComponent implements OnInit {
   institution: Institutional
   entityID: any
   logoInstitution: any
+  labelInstitution = $localize`:@@institutional.ariaLabelInstitution:Institution`
+  labelClear = $localize`:@@institutional.ariaLabelClear:Clear`
 
   institutionFormControl = new FormControl('', [Validators.required])
 
