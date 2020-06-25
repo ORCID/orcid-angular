@@ -2,6 +2,9 @@ import { Injectable, Inject } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from 'src/app/cdk/window'
 import { PerformanceMarks } from 'src/app/constants'
+import { Observable } from 'rxjs'
+import { catchError } from 'rxjs/operators'
+import { RequestInfoForm } from 'src/app/types'
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +54,29 @@ export class GoogleAnalyticsService {
     })
   }
 
+  public reportEvent(
+    event: string,
+    event_category: string,
+    event_label: RequestInfoForm | string,
+    value?: number
+  ): Observable<void> {
+    // if has RequestInfoForm add the client string as event_label
+    if (typeof event_label !== 'string') {
+      event_label = 'OAuth ' + this.buildClientString(event_label)
+      // TODO @leomendoza123 this should be tested once https://trello.com/c/xoTzzqSl/6675-signin-oauth-support is ready
+    }
+    return this.eventObservable(event, {
+      event_category,
+      event_label,
+      value,
+    }).pipe(
+      catchError((err, caught) => {
+        console.error(err)
+        return caught
+      })
+    )
+  }
+
   removeUrlParameters(url: string) {
     return url.split('?')[0]
   }
@@ -88,5 +114,39 @@ export class GoogleAnalyticsService {
       )
       this.window.performance.clearMeasures(url)
     }
+  }
+
+  // see https://medium.com/wizdm-genesys/using-gtag-in-angular-b99a10025fcd
+  private eventObservable(
+    action: string,
+    params?: Gtag.EventParams
+  ): Observable<void> {
+    // Wraps the event call into a Promise
+    return new Observable((observer) => {
+      try {
+        // Triggers a 3s time-out timer
+        const tmr = setTimeout(
+          () => observer.error(new Error('gtag call timed-out')),
+          3000
+        )
+        // Performs the event call resolving with the event callback
+        this.gtag('event', action, {
+          ...params,
+          event_callback: () => {
+            console.log('EVENT FINISH!')
+            clearTimeout(tmr)
+            observer.next()
+            observer.complete()
+          },
+        })
+      } catch (e) {
+        // Rejects the promise on errors
+        observer.error(e)
+      }
+    })
+  }
+
+  buildClientString(request: RequestInfoForm) {
+    return request.memberName + ' - ' + request.clientName
   }
 }

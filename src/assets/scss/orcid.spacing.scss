@@ -1,0 +1,71 @@
+@use 'sass:map';
+
+// The following is list of variables to reuse on other SASS files
+
+$spacing-0: 0px;
+$spacing-4: 4px;
+$spacing-8: 8px;
+$spacing-12: 12px;
+$spacing-16: 16px;
+$spacing-20: 20px;
+$spacing-24: 24px;
+$spacing-28: 28px;
+$spacing-32: 32px;
+$spacing-36: 36px;
+$spacing-40: 40px;
+$spacing-44: 442px;
+$spacing-48: 48px;
+$spacing-64: 64px;
+
+$spacing-xsmall: $spacing-4;
+$spacing-small: $spacing-8;
+$spacing-base: $spacing-16;
+$spacing-large: $spacing-32;
+$spacing-xlarge: $spacing-48;
+$spacing-xxlarge: $spacing-64;
+
+// The following mixing are use to generate padding and margins classes that can be use for elements
+// directly on the HTML
+
+$spacing-sizes: (
+  4: xsmall,
+  8: small,
+  16: base,
+  32: large,
+  48: xlarge,
+  64: xxlarge,
+);
+
+$max: 64;
+$offset: 4;
+$unit: 'px';
+@mixin spacing-generator($className, $styleName) {
+  $i: 0;
+
+  @while $i <= $max {
+    #{$className + $i} {
+      #{$styleName}: #{$i + $unit};
+    }
+    $nameMapIndex: map.get($spacing-sizes, $i);
+    @if $nameMapIndex {
+      #{$className + $nameMapIndex} {
+        #{$styleName}: #{$i + $unit};
+      }
+    }
+    $i: $i + $offset;
+  }
+}
+@mixin spacing {
+  // Margins
+  @include spacing-generator('.m-t-', 'margin-top');
+  @include spacing-generator('.m-r-', 'margin-right');
+  @include spacing-generator('.m-b-', 'margin-bottom');
+  @include spacing-generator('.m-l-', 'margin-left');
+  @include spacing-generator('.m-', 'margin');
+  // Paddings
+  @include spacing-generator('.p-t-', 'padding-top');
+  @include spacing-generator('.p-r-', 'padding-right');
+  @include spacing-generator('.p-b-', 'padding-bottom');
+  @include spacing-generator('.p-l-', 'padding-left');
+  @include spacing-generator('.p-', 'padding');
+}
