@@ -1,0 +1,9 @@
+@mixin angular-material-form-field-typography($config) {
+  .columns-4,
+  .columns-8 {
+    mat-form-field {
+      font-size: mat-font-size($config, body-2) !important;
+      font-weight: mat-font-weight($config, body-2);
+    }
+  }
+}

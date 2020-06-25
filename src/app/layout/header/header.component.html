@@ -1,8 +1,4 @@
-<header
-  role="presentation"
-  class="container"
-  [ngClass]="{ 'fixed-header-mode': mobileMenuState }"
->
+<header role="presentation" class="container">
   <div class="row end">
     <div class="col l5 m8 s4 middle logo-menu-container" role="banner">
       <a routerLink="/" class="logo-container" aria-label="orcid mini logo">
@@ -15,7 +11,8 @@
           role="link"
           class="mat-body-2"
           *ngIf="platform.columns12"
-          i18n="#sentenceCase@@confirm-oauth-access.connectingresearchandresearchers"
+          i18n="
+            #sentenceCase@@confirm-oauth-access.connectingresearchandresearchers"
         >
           Connecting research and researchers
         </div>
