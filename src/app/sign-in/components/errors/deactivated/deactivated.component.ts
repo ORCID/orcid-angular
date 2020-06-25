@@ -15,6 +15,7 @@ export class DeactivatedComponent implements OnInit {
   loading = false
   showReactivationSent = false
   showReactivationSentError = false
+  showReactivationSentErrorMessage: string
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -51,7 +52,10 @@ export class DeactivatedComponent implements OnInit {
       $deactivate.subscribe((data) => {
         this.loading = false
         this.showReactivationSent = data.sent
-        this.showReactivationSentError = data.error
+        if (data.error) {
+          this.showReactivationSentError = true
+          this.showReactivationSentErrorMessage = data.error
+        }
       })
     }
   }

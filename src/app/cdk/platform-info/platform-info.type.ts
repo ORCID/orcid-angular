@@ -14,4 +14,5 @@ export interface PlatformInfo {
   columns4: boolean
   columns8: boolean
   columns12: boolean
+  oauthMode: boolean
 }

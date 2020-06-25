@@ -3,6 +3,12 @@
     <div class="row space-around">
       <div class="col l6 m6 s4">
         <mat-card class="orcid-wizard">
+          <mat-progress-bar
+            role="heading"
+            aria-level="2"
+            *ngIf="loading"
+            mode="indeterminate"
+          ></mat-progress-bar>
           <mat-card-header>
             <mat-card-title
               role="heading"
@@ -12,12 +18,6 @@
               Sign in</mat-card-title
             >
           </mat-card-header>
-          <mat-progress-bar
-            role="heading"
-            aria-level="2"
-            *ngIf="loading"
-            mode="indeterminate"
-          ></mat-progress-bar>
           <mat-card-content>
             <form
               [formGroup]="authorizationForm"
@@ -28,7 +28,12 @@
                   <mat-label i18n="@@ngOrcid.signin.username">
                     Email or 16-digit ORCID iD
                   </mat-label>
-                  <input matInput formControlName="username" appTrim />
+                  <input
+                    matInput
+                    formControlName="username"
+                    appTrim
+                    #firstInput
+                  />
                   <mat-hint i18n="@@ngOrcid.signin.usernameHint"
                     >example@email.com or 0000-0001-2345-6789
                   </mat-hint>

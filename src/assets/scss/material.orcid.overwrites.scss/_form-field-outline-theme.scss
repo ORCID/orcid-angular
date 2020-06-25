@@ -5,14 +5,16 @@
 
 @mixin mat-form-field-outline-theme-overwrites($theme) {
   $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
   .mat-form-field-appearance-outline {
-    input {
-      // use material mixing to overwrite the autofill
-      // https://material.angular.io/cdk/text-field/overview#styling-the-autofill-state-of-an-code-lt-input-gt-code-
-      @include cdk-text-field-autofill-color(
-        transparent,
-        mat-color($foreground, mat-color($foreground, text))
-      );
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px map-get($background, autofill-input) inset !important;
+    }
+    input.edge-autofilled {
+      background-color: map-get($background, autofill-input) !important;
     }
   }
 }

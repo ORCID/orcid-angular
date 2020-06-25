@@ -67,7 +67,7 @@
 </mat-error>
 <mat-error *ngIf="showReactivationSentError" class="orcid-error">
   <mat-icon inline="true">error</mat-icon>
-  <ng-container i18n="@@ngOrcid.signin.verify.reactivationSentError">
-    Please enter a valid email address
+  <ng-container>
+    {{ showReactivationSentErrorMessage }}
   </ng-container>
 </mat-error>

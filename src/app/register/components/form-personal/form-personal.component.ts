@@ -1,25 +1,22 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  forwardRef,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core'
 import {
   FormGroup,
-  ControlValueAccessor,
-  Validator,
   FormControl,
-  AbstractControl,
-  ValidationErrors,
   NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   Validators,
-  AsyncValidatorFn,
   ValidatorFn,
-  FormGroupDirective,
-  NgForm,
   NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
 import { BaseForm } from '../BaseForm'
 import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from 'src/app/constants'
-import { Observable } from 'rxjs'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { map } from 'rxjs/operators'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
@@ -40,7 +37,9 @@ import { OrcidValidators } from 'src/app/validators'
     },
   ],
 })
-export class FormPersonalComponent extends BaseForm implements OnInit {
+export class FormPersonalComponent extends BaseForm
+  implements OnInit, AfterViewInit {
+  @ViewChild('firstInput') firstInput: ElementRef
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
   constructor(private _register: RegisterService) {
@@ -93,6 +92,13 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
       }),
       emails: this.emails,
     })
+  }
+
+  ngAfterViewInit(): void {
+    // Timeout used to get focus on the first input after the first step loads
+    setTimeout(() => {
+      this.firstInput.nativeElement.focus()
+    }, 100)
   }
 
   allEmailsAreUnique(): ValidatorFn {

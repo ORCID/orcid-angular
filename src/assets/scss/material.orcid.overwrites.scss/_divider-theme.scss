@@ -1,0 +1,13 @@
+// Overwrite https://github.com/angular/components/blob/e512581a81aee546a23aa003898399a5068769b8/src/material/divider/_divider-theme.scss
+
+@mixin mat-divider-theme-overwrites($theme) {
+  $accent: map-get($theme, accent);
+
+  .mat-divider.orcid-divider {
+    border-top-color: mat-color($accent);
+  }
+
+  .mat-divider-vertical.orcid-divider {
+    border-right-color: mat-color($accent);
+  }
+}

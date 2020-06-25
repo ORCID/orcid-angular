@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
@@ -9,6 +16,12 @@ import { take, tap } from 'rxjs/operators'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
+import { Location } from '@angular/common'
+import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
+import { OauthService } from '../../../core/oauth/oauth.service'
+import { HttpParams } from '@angular/common/http'
+import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
+import { PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
   selector: 'app-sign-in',
@@ -19,8 +32,14 @@ import { OauthParameters } from 'src/app/types'
   ],
   providers: [TwoFactorComponent],
   host: { class: 'container' },
+  preserveWhitespaces: true,
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, AfterViewInit {
+  @ViewChild('firstInput') firstInput: ElementRef
+  oauthParameters: OauthParameters
+  requestInfoForm: RequestInfoForm
+  signInLocal = {} as SignInLocal
+  params: HttpParams
   loading = false
   badCredentials = false
   printError = false
@@ -36,42 +55,76 @@ export class SignInComponent implements OnInit {
   realUserOrcid: string
   email: string
   orcidPrimaryDeprecated: string
+  oauthRequest = false
 
   constructor(
+    _platformInfo: PlatformInfoService,
     private _signIn: SignInService,
     private _userInfo: UserService,
+    private _oauthService: OauthService,
     @Inject(WINDOW) private window: Window,
     _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    _location: Location
   ) {
-    _userInfo
-      .getUserStatus()
-      .pipe(take(1))
-      .subscribe((data) => {
-        if (data) {
-          this.isLoggedIn = data
-          _userInfo
-            .getUserInfoOnEachStatusUpdate()
-            .pipe(take(1))
-            .subscribe((info) => {
-              this.displayName = info.displayName
-              this.realUserOrcid =
-                'https:' + environment.BASE_URL + info.userInfo.REAL_USER_ORCID
-            })
-        }
-      })
+    _platformInfo.get().subscribe((platform) => {
+      if (platform.oauthMode) {
+        this.signInLocal.type = TypeSignIn.oauth
+        this.loadRequestInfoForm()
+      }
+    })
 
     _route.queryParams
       .pipe(
         // More info about signin query paramter https://members.orcid.org/api/oauth/get-oauthauthorize
         take(1),
         tap((value: OauthParameters) => {
-          if (value.show_login === 'false') {
-            this._router.navigate(['/register'], { queryParams: value })
+          this.oauthParameters = value
+
+          // TODO @DanielPalafox handle redirection Guard
+          // with the purpose of avoiding the load of the signin module if is not required
+          if (this.oauthParameters.show_login === 'false') {
+            this._router.navigate(['/register'], {
+              queryParams: this.oauthParameters,
+            })
+          }
+
+          if (this.oauthParameters.email) {
+            this.authorizationForm.patchValue({
+              username: this.oauthParameters.email,
+            })
           }
         })
       )
       .subscribe()
+
+    _userInfo
+      .getUserStatus()
+      .pipe(take(1))
+      .subscribe((data) => {
+        if (data) {
+          this.isLoggedIn = data
+          if (this.signInLocal.type === TypeSignIn.oauth) {
+            // TODO @DanielPalafox handle redirection a Guard
+            //
+            // to prevent loading the signin module or showing the "you are already logged in"
+            // related to https://github.com/ORCID/orcid-angular/issues/261
+            this.confirmAccess()
+          }
+          // TODO @DanielPalafox remove the first call to `getUserStatus`
+          // since `getUserInfoOnEachStatusUpdate` already calls `getUserStatus` and is not great to call the same endpoint two times
+          //
+          // this might be possible by returning maybe a false from `getUserInfoOnEachStatusUpdate`
+          // instead of nothing as it currently does when the user is not signin
+          _userInfo
+            .getUserInfoOnEachStatusUpdate()
+            .pipe(take(1))
+            .subscribe((info) => {
+              this.displayName = info.displayName
+              this.realUserOrcid = info.orcidUrl
+            })
+        }
+      })
   }
 
   usernameFormControl = new FormControl('', [
@@ -89,8 +142,12 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {}
 
+  ngAfterViewInit(): void {
+    this.firstInput.nativeElement.focus()
+  }
+
   onSubmit() {
-    const value = this.authorizationForm.getRawValue()
+    this.signInLocal.data = this.authorizationForm.getRawValue()
 
     this.authorizationForm.markAllAsTouched()
 
@@ -98,7 +155,7 @@ export class SignInComponent implements OnInit {
       this.hideErrors()
       this.loading = true
 
-      const $signIn = this._signIn.signIn(value)
+      const $signIn = this._signIn.signIn(this.signInLocal)
       $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
@@ -155,6 +212,35 @@ export class SignInComponent implements OnInit {
     this.showBadRecoveryCode = false
     this.showInvalidUser = false
     this.badCredentials = false
+  }
+
+  loadRequestInfoForm(): void {
+    this._oauthService.loadRequestInfoForm().subscribe((data) => {
+      if (data) {
+        // TODO @DanielPalafox Handle scenario where the user directly navigates to `/signin?oauth` url
+        // https://github.com/ORCID/orcid-angular/issues/260
+        this.requestInfoForm = data
+        if (this.requestInfoForm.userId) {
+          this.authorizationForm.patchValue({
+            username: this.requestInfoForm.userId,
+          })
+        } else {
+          if (
+            this.requestInfoForm.userEmail ||
+            this.requestInfoForm.userFamilyNames ||
+            this.requestInfoForm.userGivenNames
+          ) {
+            this._router.navigate(['/register'], {
+              queryParams: this.oauthParameters,
+            })
+          }
+        }
+      }
+    })
+  }
+
+  confirmAccess() {
+    this.navigateTo('https:' + environment.BASE_URL + 'oauth/confirm_access')
   }
 
   navigateTo(val) {
