@@ -1,4 +1,5 @@
 export interface OauthParameters {
+  oauth: string
   show_login: 'false' | 'true'
   email: string
   lang: string

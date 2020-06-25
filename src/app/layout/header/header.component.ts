@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, Input } from '@angular/core'
 import { NavigationEnd, Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -22,7 +22,14 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  currentRoute
+  _currentRoute: string
+  @Input() set currentRoute(value) {
+    this._currentRoute = value
+    this.setChildOfCurrentRouteAsSecondaryMenu()
+  }
+  get currentRoute() {
+    return this._currentRoute
+  }
   platform: PlatformInfo
   mobileMenuState = false
   menu: ApplicationMenuItem[] = this.createMenuList(menu)

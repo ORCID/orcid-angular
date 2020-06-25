@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin trusted-individuals-dropdown($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  .header {
+    background-color: mat-color($primary, 700);
+    color: mat-contrast($primary, 700);
+  }
+}
+
+@include trusted-individuals-dropdown($orcid-app-theme);

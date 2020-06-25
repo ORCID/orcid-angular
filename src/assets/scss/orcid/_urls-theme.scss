@@ -1,0 +1,9 @@
+@import '~@angular/material/_theming';
+
+@mixin mat-button-theme-overwrites($theme) {
+  $accent: map-get($theme, accent);
+  a.black-underline-url {
+    color: mat-contrast($accent, 500);
+    font-weight: 700;
+  }
+}
