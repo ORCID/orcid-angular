@@ -1,0 +1,72 @@
+@import '../../../../assets/scss/orcid.spacing.scss';
+#main {
+  margin-top: $spacing-40;
+}
+
+:host {
+  width: 100%;
+}
+
+.logo {
+  width: 130px;
+}
+
+.user-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.university-dropdown {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+:host {
+  ul {
+    padding: 0;
+
+    li {
+      list-style-type: none;
+      flex-direction: column;
+      align-items: baseline;
+
+      div {
+        display: flex;
+        align-items: center;
+        mat-icon {
+          margin-bottom: -4px; // Compensates mat icon bottom with space
+          margin-right: $spacing-12;
+          [dir='rtl'] & {
+            margin-right: 0px;
+            margin-left: $spacing-12;
+          }
+        }
+      }
+    }
+  }
+}
+
+button {
+  width: 100%;
+  margin-bottom: $spacing-base;
+}
+
+mat-divider {
+  margin-top: $spacing-12;
+  margin-bottom: $spacing-12;
+}
+
+mat-icon > img {
+  height: 20px;
+  margin-top: 2px; // Fix icon component with SVG image
+}
+
+.col {
+  overflow: hidden;
+}
+
+app-info-drop-down {
+  max-width: 100%;
+  display: block;
+}

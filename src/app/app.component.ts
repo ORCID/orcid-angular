@@ -12,7 +12,9 @@ import { ZendeskService } from './core/zendesk/zendesk.service'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  oauthMode = false
   screenDirection
+  currentRoute
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
   @HostBinding('class.tabletOrHandset') tabletOrHandset
@@ -32,12 +34,12 @@ export class AppComponent {
     _platformInfo.get().subscribe((platformInfo) => {
       this.setPlatformClasses(platformInfo)
       this.screenDirection = platformInfo.screenDirection
-      _zendesk.setScreenDirection(this.screenDirection)
+      _zendesk.adaptPluginToPlatform(platformInfo)
     })
-
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         _googleAnalytics.reportNavigationStart(event.url)
+        this.currentRoute = event.url
       }
       if (event instanceof NavigationEnd) {
         _googleAnalytics.reportNavigationEnd(event.url)
@@ -47,6 +49,7 @@ export class AppComponent {
   }
 
   setPlatformClasses(platformInfo: PlatformInfo) {
+    this.oauthMode = platformInfo.oauthMode
     this.ie = platformInfo.ie
     this.edge = platformInfo.edge
     this.tabletOrHandset = platformInfo.tabletOrHandset

@@ -7,6 +7,7 @@ import { SignIn } from '../../types/sign-in.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { getOrcidNumber } from '../../constants'
+import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
 
 @Injectable({
   providedIn: 'root',
@@ -17,21 +18,24 @@ export class SignInService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  signIn(data) {
+  signIn(signInLocal: SignInLocal) {
     const headers = new HttpHeaders().set(
       'Content-Type',
       'application/x-www-form-urlencoded;charset=utf-8'
     )
     let body = new HttpParams({ encoder: new CustomEncoder() })
-      .set('userId', getOrcidNumber(data.username))
-      .set('password', data.password)
-    if (data.verificationCode) {
-      body = body.set('verificationCode', data.verificationCode)
+      .set('userId', getOrcidNumber(signInLocal.data.username))
+      .set('password', signInLocal.data.password)
+    if (signInLocal.data.verificationCode) {
+      body = body.set('verificationCode', signInLocal.data.verificationCode)
     }
-    if (data.recoveryCode) {
-      body = body.set('recoveryCode', data.recoveryCode)
+    if (signInLocal.data.recoveryCode) {
+      body = body.set('recoveryCode', signInLocal.data.recoveryCode)
     }
-    body = body.set('oauthRequest', 'false')
+    body = body.set(
+      'oauthRequest',
+      signInLocal.type === TypeSignIn.oauth ? 'true' : 'false'
+    )
     return this._http
       .post<SignIn>(environment.API_WEB + `signin/auth.json`, body, {
         headers,

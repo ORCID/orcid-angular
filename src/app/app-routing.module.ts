@@ -6,6 +6,7 @@ import {
   URL_PRIVATE_PROFILE,
   ApplicationRoutes,
 } from './constants'
+import { OauthGuard } from './guards/oauth.guard'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -22,7 +23,7 @@ export function matcher(segments: UrlSegment[]) {
 const routes: Routes = [
   {
     path: ApplicationRoutes.home,
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   // {
   //   matcher: matcher,
@@ -30,10 +31,16 @@ const routes: Routes = [
   //   () => import('./profile/profile.module').then(m => m.ProfileModule)
   // },
   {
+    path: ApplicationRoutes.authorize,
+    canActivateChild: [OauthGuard],
+    loadChildren: () =>
+      import('./authorize/authorize.module').then((m) => m.AuthorizeModule),
+  },
+  {
     path: ApplicationRoutes.institutional,
     loadChildren: () =>
       import('./institutional/institutional.module').then(
-        m => m.InstitutionalModule
+        (m) => m.InstitutionalModule
       ),
   },
   {
@@ -42,25 +49,26 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.signin,
+    canActivateChild: [OauthGuard],
     loadChildren: () =>
-      import('./sign-in/sign-in.module').then(m => m.SignInModule),
+      import('./sign-in/sign-in.module').then((m) => m.SignInModule),
   },
   {
     path: ApplicationRoutes.resetPassword,
     loadChildren: () =>
       import('./password-recovery/password-recovery.module').then(
-        m => m.PasswordRecoveryModule
+        (m) => m.PasswordRecoveryModule
       ),
   },
   {
     path: ApplicationRoutes.register,
     loadChildren: () =>
-      import('./register/register.module').then(m => m.RegisterModule),
+      import('./register/register.module').then((m) => m.RegisterModule),
   },
   {
     path: ApplicationRoutes.search,
     loadChildren: () =>
-      import('./search/search.module').then(m => m.SearchModule),
+      import('./search/search.module').then((m) => m.SearchModule),
   },
   {
     path: '**',

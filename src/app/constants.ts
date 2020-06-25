@@ -20,6 +20,7 @@ export const ApplicationRoutes = {
   institutional: 'institutional-signin',
   login: 'login',
   signin: 'signin',
+  authorize: 'oauth/authorize',
   search: 'orcid-search/search',
   resetPassword: 'reset-password',
   register: 'register',
