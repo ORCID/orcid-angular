@@ -43,6 +43,7 @@ export class FormSignInComponent implements OnInit {
   email: string
   orcidPrimaryDeprecated: string
   singInLocal = {} as SingInLocal
+  username: string
 
   usernameFormControl = new FormControl('', [
     Validators.required,
@@ -155,6 +156,12 @@ export class FormSignInComponent implements OnInit {
     } else {
       this._router.navigate(['/register'])
     }
+  }
+
+  updateUsername(email) {
+    this.authorizationForm.patchValue({
+      username: email,
+    })
   }
 
   navigateTo(val) {
