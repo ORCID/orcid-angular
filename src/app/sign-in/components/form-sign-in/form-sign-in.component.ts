@@ -43,7 +43,6 @@ export class FormSignInComponent implements OnInit {
   email: string
   orcidPrimaryDeprecated: string
   singInLocal = {} as SingInLocal
-  username: string
 
   usernameFormControl = new FormControl('', [
     Validators.required,
