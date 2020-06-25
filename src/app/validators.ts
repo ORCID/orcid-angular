@@ -30,7 +30,11 @@ export class OrcidValidators {
     }
   }
 
-  static matchValues(value1: string, value2: string): ValidatorFn {
+  static matchValues(
+    value1: string,
+    value2: string,
+    caseSensitive = true
+  ): ValidatorFn {
     return (formGroup: FormGroup) => {
       let hasErrors = false
       const control = formGroup.controls[value1]
@@ -44,7 +48,14 @@ export class OrcidValidators {
         return null
       }
 
-      if (control.value !== confirmControl.value) {
+      const firstValue = caseSensitive
+        ? control.value
+        : control.value.lowerCase()
+      const secondValue = caseSensitive
+        ? confirmControl.value
+        : confirmControl.value.lowerCase()
+
+      if (firstValue !== secondValue) {
         hasErrors = true
         confirmControl.setErrors({ mismatch: true })
       } else if (confirmControl.hasError('mismatch')) {

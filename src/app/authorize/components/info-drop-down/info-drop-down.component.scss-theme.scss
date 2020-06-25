@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin info-drop-down($theme) {
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  .description-container {
+    background-color: map-get($background, 'background');
+  }
+  .university-dropdown.active {
+    color: mat-color($accent, 700);
+  }
+}
+
+@include info-drop-down($orcid-app-theme);

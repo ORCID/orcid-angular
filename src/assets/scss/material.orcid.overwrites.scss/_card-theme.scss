@@ -9,7 +9,8 @@
   $divider-color: mat-color($foreground, divider);
   $background: map-get($theme, background);
 
-  .mat-card.orcid-wizard {
+  .mat-card.orcid-wizard,
+  .mat-card.orcid-wizard-2 {
     box-shadow: none;
     .columns-12 &,
     .columns-8 & {

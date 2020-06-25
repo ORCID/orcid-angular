@@ -86,15 +86,12 @@
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >
-      <!-- "confirm-email" is no really a valid autocomplete valid
-      but it should avoid some browsers like edge chromium to suggest the user email 
-      on this confirmation field  -->
       <input
         formControlName="confirmEmail"
         matInput
         (paste)="(false)"
         appTrim
-        autocomplete="confirm-email"
+        autocomplete="off"
         type="email"
       />
       <mat-error
