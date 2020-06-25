@@ -24,7 +24,6 @@
 @include global-theme($orcid-app-theme);
 @include global-theme-typography($orcid-material-typography);
 
-// TODO @leomendoza123 check why this was problematic on explorer
-// .mat-menu-panel {
-//   overflow: hidden !important;
-// }
+.mat-menu-panel {
+  overflow-x: hidden !important;
+}
