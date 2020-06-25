@@ -27,17 +27,14 @@
             border-color: mat-color($background, background);
           }
         }
-        button:hover {
+        button:hover,
+        button:focus {
           color: mat-color($accent);
         }
         .row {
           color: mat-color($primary, 500);
         }
       }
-    }
-
-    .divider {
-      max-width: 1280px;
     }
   }
 
@@ -60,7 +57,8 @@
             &.sign-in-button {
             }
           }
-          button:hover {
+          button:hover,
+          button:focus {
             background-color: mat-color($accent, 200);
             color: $dark-primary-text;
           }
@@ -70,7 +68,8 @@
             button {
               color: mat-color($primary, '500-contrast');
             }
-            button:hover {
+            button:hover,
+            button:focus {
               background-color: mat-color($accent, 200);
               color: $dark-primary-text;
             }
@@ -78,7 +77,8 @@
               button {
                 color: mat-color($primary, 500);
               }
-              button:hover {
+              button:hover,
+              button:focus {
                 background-color: mat-color($accent, 200);
                 color: $dark-primary-text;
               }
