@@ -70,6 +70,7 @@
                 active: item.activeRoute === currentRoute
               }"
               mat-button
+              class="no-hover-effect"
               [color]="menuButtonColor(parents)"
               (focus)="mouseEnter(parents.concat(item.id))"
               (click)="click(parents.concat(item.id), item)"
@@ -138,6 +139,7 @@
         </li>
       </ul>
     </div>
+    <mat-divider class="row"></mat-divider>
   </div>
 </nav>
 

@@ -15,23 +15,22 @@
     }
   }
   .top-bar {
-    //FIXME ACCESSIBILITY-ISSUE
-    color: mat-color($primary, '500-contrast');
-    background-color: mat-color($primary);
+    color: mat-color($primary);
 
     .menu-container {
       .row {
         button {
           &.active {
-            background-color: mat-color($background, grey);
-            color: mat-contrast($accent, 500);
-            border-radius: 0;
+            color: mat-color($accent);
           }
           &.sign-in-button {
             border-color: mat-color($background, background);
           }
         }
-
+        button:hover,
+        button:focus {
+          color: mat-color($accent);
+        }
         .row {
           color: mat-color($primary, 500);
         }
@@ -47,7 +46,9 @@
       }
     }
     .top-bar {
-      background-color: mat-color($primary, 700);
+      background-color: mat-color($primary, 900);
+      color: mat-color($primary, '500-contrast');
+
       .menu-container {
         .row {
           button {
@@ -56,15 +57,30 @@
             &.sign-in-button {
             }
           }
+          button:hover,
+          button:focus {
+            background-color: mat-color($accent, 200);
+            color: $dark-primary-text;
+          }
 
           .row {
             background-color: mat-color($primary, 600);
             button {
               color: mat-color($primary, '500-contrast');
             }
+            button:hover,
+            button:focus {
+              background-color: mat-color($accent, 200);
+              color: $dark-primary-text;
+            }
             .row {
               button {
                 color: mat-color($primary, 500);
+              }
+              button:hover,
+              button:focus {
+                background-color: mat-color($accent, 200);
+                color: $dark-primary-text;
               }
               background-color: mat-color($background, 'light-grey');
               .row {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Input } from '@angular/core'
-import { NavigationEnd, Router, NavigationStart } from '@angular/router'
+import { Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
@@ -36,9 +36,26 @@ export class HeaderComponent implements OnInit {
   user: UserInfo
   togglz: Config
   togglzOrcidAngularSignin: boolean
+  togglzNewInfoSite: boolean
   signinRegisterButton = true
   labelLogo = $localize`:@@layout.ariaLabelLogo:orcid mini logo`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
+  newInfoRoutes = [
+    {
+      old: 'about/what-is-orcid/mission',
+      new: 'http://orcidaboutdev.wpengine.com/what-is-orcid/',
+    },
+    {
+      old: 'organizations',
+      new: 'http://orcidaboutdev.wpengine.com/about-membership/',
+    },
+    { old: 'about', new: 'http://orcidaboutdev.wpengine.com/what-is-orcid/' },
+    {
+      old: 'help',
+      new:
+        'http://orcidaboutdev.wpengine.com/help-getting-started-with-your-orcid/',
+    },
+  ]
 
   constructor(
     private _router: Router,
@@ -72,6 +89,9 @@ export class HeaderComponent implements OnInit {
         (this.signinRegisterButton =
           location.path() !== `/${ApplicationRoutes.signin}`)
     )
+    _togglz
+      .getStateOf('NEW_INFO_SITE')
+      .subscribe((value) => (this.togglzNewInfoSite = value))
   }
 
   ngOnInit() {}
@@ -98,12 +118,12 @@ export class HeaderComponent implements OnInit {
   click(treeLocation: string[], button: ApplicationMenuItem) {
     if (!this.platform.columns12) {
       if (button.route && (!button.buttons || !button.buttons.length)) {
-        this.window.location.href = button.route
+        this.newInfo(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route) {
-      this.window.location.href = button.route
+      this.newInfo(button.route)
     }
   }
 
@@ -258,6 +278,21 @@ export class HeaderComponent implements OnInit {
       }
     } else {
       this.window.location.href = environment.BASE_URL + url
+    }
+  }
+
+  newInfo(route) {
+    if (this.togglzNewInfoSite) {
+      const info = this.newInfoRoutes
+        .filter((infoRoute) => infoRoute.old === route)
+        .map((result) => result.new)
+      if (info.length > 0) {
+        this.window.location.href = info[0]
+      } else {
+        this.window.location.href = route
+      }
+    } else {
+      this.window.location.href = route
     }
   }
 }
