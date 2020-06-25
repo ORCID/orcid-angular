@@ -157,6 +157,12 @@ export class FormSignInComponent implements OnInit {
     }
   }
 
+  updateUsername(email) {
+    this.authorizationForm.patchValue({
+      username: email,
+    })
+  }
+
   navigateTo(val) {
     this.window.location.href = val
   }

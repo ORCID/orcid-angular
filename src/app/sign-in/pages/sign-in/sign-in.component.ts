@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -11,6 +11,7 @@ import { HttpParams } from '@angular/common/http'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
+import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.component'
 
 @Component({
   selector: 'app-sign-in',
@@ -23,6 +24,7 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
   preserveWhitespaces: true,
 })
 export class SignInComponent implements OnInit {
+  @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
   oauthParameters: OauthParameters
   requestInfoForm: RequestInfoForm
   signInLocal = {} as SignInLocal
@@ -32,7 +34,6 @@ export class SignInComponent implements OnInit {
   displayName: string
   realUserOrcid: string
   email: string
-  orcidPrimaryDeprecated: string
   oauthRequest = false
   show2FA = false
   signInType = TypeSignIn.personal
@@ -69,10 +70,7 @@ export class SignInComponent implements OnInit {
           }
 
           if (this.oauthParameters.email) {
-            // todo DanielPalafox
-            // this.authorizationForm.patchValue({
-            //   username: this.oauthParameters.email,
-            // })
+            this.formSignInComponent.updateUsername(this.oauthParameters.email)
           }
         })
       )
@@ -132,10 +130,7 @@ export class SignInComponent implements OnInit {
         // https://github.com/ORCID/orcid-angular/issues/260
         this.requestInfoForm = data
         if (this.requestInfoForm.userId) {
-          // todo Daniel Palafox
-          // this.authorizationForm.patchValue({
-          //   username: this.requestInfoForm.userId,
-          // })
+          this.formSignInComponent.updateUsername(this.oauthParameters.email)
         } else {
           if (
             this.requestInfoForm.userEmail ||
