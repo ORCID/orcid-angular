@@ -8,6 +8,7 @@ import { Institutional } from '../../../types/institutional.endpoint'
 import { CookieService } from 'ngx-cookie-service'
 import { environment } from '../../../../environments/environment'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
+import { TypeSignIn } from '../../../types/sing-in.local'
 
 @Component({
   selector: 'app-institutional',
