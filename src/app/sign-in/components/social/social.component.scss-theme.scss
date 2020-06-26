@@ -11,6 +11,10 @@
     color: mat-color($primary, default-contrast);
   }
 
+  .google {
+    border: 1px solid mat-color($background, light-grey);
+  }
+
   .facebook {
     background-color: map-get($background, 'facebook');
     color: mat-color($primary, default-contrast);

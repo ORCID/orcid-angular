@@ -121,9 +121,9 @@ export class UserService {
                 ...{
                   displayName: this.getDisplayName(data.nameForm),
                   orcidUrl:
-                    'https:' +
-                    environment.BASE_URL +
-                    data.userInfo ? data.userInfo.REAL_USER_ORCID : '',
+                    'https:' + environment.BASE_URL + data && data.userInfo
+                      ? data.userInfo.REAL_USER_ORCID
+                      : '',
                 },
               }
             })
