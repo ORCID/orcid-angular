@@ -123,7 +123,7 @@ export class UserService {
                   orcidUrl:
                     'https:' +
                     environment.BASE_URL +
-                    data.userInfo.REAL_USER_ORCID,
+                    data.userInfo ? data.userInfo.REAL_USER_ORCID : '',
                 },
               }
             })
