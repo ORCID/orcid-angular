@@ -47,7 +47,7 @@ const routes: Routes = [
     path: ApplicationRoutes.institutionalLinking,
     loadChildren: () =>
       import('./link-account/link-account.module').then(
-        m => m.LinkAccountModule
+        (m) => m.LinkAccountModule
       ),
   },
   {
@@ -56,7 +56,8 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.signin,
-    canActivateChild: [OauthGuard],
+    // todo @DanielPalafox temporarily disabled for QA
+    // canActivateChild: [OauthGuard],
     loadChildren: () =>
       import('./sign-in/sign-in.module').then((m) => m.SignInModule),
   },
