@@ -8,6 +8,7 @@ import { DeclareOauthSession } from 'src/app/types/declareOauthSession.endpoint'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 import { RequestInfoForm } from 'src/app/types'
 import { ShibbolethSignInData } from '../../types/shibboleth-sign-in-data'
+import { SignInLocal } from '../../types/sign-in.local'
 
 @Injectable({
   providedIn: 'root',
@@ -49,70 +50,29 @@ export class OauthService {
   }
 
   authorize(approved: boolean): Observable<RequestInfoForm> {
-    // TODO @leomendoza123 remove mock data and use the following function
-
-    // const value: OauthAuthorize = {
-    //   tslint:disable-next-line: max-line-length
-    //   TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
-    //   TODO @angel by looking into analytics, I can see we have never reported a persistentTokenDisabled
-    //   persistentTokenEnabled: true,
-    //   tslint:disable-next-line: max-line-length
-    //   TODO @angel please confirm that  email access is always allowed know and at some point it was optional https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/resources/freemarker/includes/oauth/scopes_ng2.ftl#L42
-    //   emailAccessAllowed: true,
-    //   approved,
-    // }
-    // return this._http
-    //   .post<RequestInfoForm>(
-    //     environment.BASE_URL + '/oauth/custom/authorize.json',
-    //     value,
-    //     { headers: this.headers }
-    //   )
-    //   .pipe(
-    //     retry(3),
-    //     catchError((error) => this._errorHandler.handleError(error)),
-    //     tap((requestInfo) => {
-    //       this.requestInfoSubject.next(requestInfo)
-    //     })
-    //   )
-
-    return of(<RequestInfoForm>{
-      errors: [],
-      scopes: [
-        {
-          name: 'AUTHENTICATE',
-          value: '/authenticate',
-          description: 'Get your ORCID iD',
-          longDescription:
-            // tslint:disable-next-line: max-line-length
-            'Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.',
-        },
-        {
-          name: 'OPENID',
-          value: 'openid',
-          description: 'Get your ORCID iD',
-          longDescription:
-            // tslint:disable-next-line: max-line-length
-            'Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.',
-        },
-      ],
-      clientDescription: 'https://developers.google.com/oauthplayground\t',
-      clientId: 'APP-MLXS7JVFJS9FEIFJ',
-      clientName: 'test',
-      clientEmailRequestReason: '',
-      memberName: 'asda',
-      redirectUrl: 'https://developers.google.com/oauthplayground?code=1R3eAY',
-      responseType: 'code',
-      stateParam: null,
-      userId: null,
-      userName: 'Leonardo Mendoza',
-      userOrcid: '0000-0002-2036-7905',
-      userEmail: null,
-      userGivenNames: null,
-      userFamilyNames: null,
-      nonce: null,
-      clientHavePersistentTokens: true,
-      scopesAsString: '/authenticate openid',
-    })
+     const value: OauthAuthorize = {
+       // tslint:disable-next-line: max-line-length
+       // TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
+       // TODO @angel by looking into analytics, I can see we have never reported a persistentTokenDisabled
+       persistentTokenEnabled: true,
+       // tslint:disable-next-line: max-line-length
+       // TODO @angel please confirm that  email access is always allowed know and at some point it was optional https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/resources/freemarker/includes/oauth/scopes_ng2.ftl#L42
+       emailAccessAllowed: true,
+       approved,
+     }
+    return this._http
+      .post<RequestInfoForm>(
+        environment.BASE_URL + 'oauth/custom/authorize.json',
+        value,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap((requestInfo) => {
+          this.requestInfoSubject.next(requestInfo)
+        })
+      )
   }
 
   // call on by the OauthGuard
@@ -120,73 +80,43 @@ export class OauthService {
   // if the backend has an error declaring the Oauth parameters it will return a string on the errors array
 
   declareOauthSession(value: DeclareOauthSession): Observable<RequestInfoForm> {
-    // The oauth section is declared only one time when the user lands
-    if (this.oauthSectionDeclared) {
-      return this.requestInfoSubject
+    return this._http
+      .post<RequestInfoForm>(
+        // tslint:disable-next-line:max-line-length
+        environment.BASE_URL + `oauth/custom/declare.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
+        value,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+      .pipe(
+        tap((data) => {
+          this.requestInfoSubject.next(data)
+          this.oauthSectionDeclared = true
+        })
+      )
+  }
+
+  oauthAuthorize(signInLocal: SignInLocal) {
+    const value: OauthAuthorize = {
+      // tslint:disable-next-line: max-line-length
+      // TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
+      // TODO @angel by looking into analytics, I can see we have never reported a persistentTokenDisabled
+      persistentTokenEnabled: true,
+      // tslint:disable-next-line: max-line-length
+      // TODO @angel please confirm that  email access is always allowed know and at some point it was optional https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/resources/freemarker/includes/oauth/scopes_ng2.ftl#L42
+      emailAccessAllowed: true,
+      approved: true,
+      userName: signInLocal.data.username,
+      password: signInLocal.data.password,
     }
-
-    // TODO @leomendoza123 @DanielPalafox remove mock data and use the following function
-
-    // return this._http
-    //   .post<RequestInfoForm>(
-    //     environment.BASE_URL + '/oauth/custom/declare.json',
-    //     value,
-    //     { headers: this.headers }
-    //   )
-    //   .pipe(
-    //     retry(3),
-    //     catchError((error) => this._errorHandler.handleError(error))
-    //   )
-    //   .pipe(
-    //     tap((data) => {
-    //       this.requestInfoSubject.next(data)
-    //       this.oauthSectionDeclared = true
-    //     })
-    //   )
-
-    return of(<RequestInfoForm>{
-      errors: [],
-      scopes: [
-        {
-          name: 'AUTHENTICATE',
-          value: '/authenticate',
-          description: 'Get your ORCID iD',
-          longDescription:
-          // tslint:disable-next-line: max-line-length
-            'Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.',
-        },
-        {
-          name: 'OPENID',
-          value: 'openid',
-          description: 'Get your ORCID iD',
-          longDescription:
-          // tslint:disable-next-line: max-line-length
-            'Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.',
-        },
-      ],
-      clientDescription: 'https://developers.google.com/oauthplayground\t',
-      clientId: 'APP-MLXS7JVFJS9FEIFJ',
-      clientName: 'test',
-      clientEmailRequestReason: '',
-      memberName: 'asda',
-      redirectUrl: 'https://developers.google.com/oauthplayground?code=1R3eAY',
-      responseType: 'code',
-      stateParam: null,
-      userId: null,
-      userName: 'logedINTEST',
-      userOrcid: 'logedInTest',
-      userEmail: null,
-      userGivenNames: null,
-      userFamilyNames: null,
-      nonce: null,
-      clientHavePersistentTokens: true,
-      scopesAsString: '/authenticate openid',
-    }).pipe(
-      tap((data) => {
-        this.requestInfoSubject.next(data)
-        this.oauthSectionDeclared = true
-      })
-    )
+    return this._http.post<any>(
+      environment.BASE_URL + 'oauth/custom/signin.json',
+      value,
+      { headers: this.headers }
+    );
   }
 
   loadShibbolethSignInData( ): Observable<ShibbolethSignInData> {

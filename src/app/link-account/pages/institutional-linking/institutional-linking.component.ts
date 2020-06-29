@@ -4,7 +4,7 @@ import { DiscoService } from '../../../core/disco/disco.service'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { ShibbolethSignInData } from '../../../types/shibboleth-sign-in-data'
 import { Institutional } from '../../../types/institutional.endpoint'
-import { TypeSignIn } from '../../../types/sing-in.local'
+import { TypeSignIn } from '../../../types/sign-in.local'
 
 @Component({
   selector: 'app-institutional-linking',

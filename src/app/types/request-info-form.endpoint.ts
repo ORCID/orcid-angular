@@ -20,6 +20,8 @@ export interface RequestInfoForm {
   nonce: string
   clientHavePersistentTokens: boolean
   scopesAsString: string
+  error: string
+  errorDescription: string
 }
 
 export interface Scope {
