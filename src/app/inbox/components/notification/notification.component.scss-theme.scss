@@ -2,7 +2,9 @@
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin notification-theme($theme) {
+  $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   :host {
     border: solid map-get($background, light-grey) 1px;
@@ -11,11 +13,29 @@
     background-color: map-get($background, light-grey);
     color: $dark-secondary-text;
   }
-  .notification-green {
-    color: mat-color($accent, 900);
+  :host.green {
+    .notification {
+      color: mat-color($accent, 900);
+    }
+    .notification-background {
+      background-color: mat-color($accent, 900);
+    }
   }
-  .notification-background-green {
-    background-color: mat-color($accent, 900);
+  :host.orange {
+    .notification {
+      color: map-get($foreground, 'state-notice-dark');
+    }
+    .notification-background {
+      background-color: map-get($foreground, 'state-notice-dark');
+    }
+  }
+  :host.blue {
+    .notification {
+      color: mat-color($primary, 900);
+    }
+    .notification-background {
+      background-color: mat-color($primary, 900);
+    }
   }
 }
 
