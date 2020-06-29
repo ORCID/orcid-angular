@@ -7,6 +7,7 @@ import {
   ApplicationRoutes,
 } from './constants'
 import { OauthGuard } from './guards/oauth.guard'
+import { constants } from 'buffer'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -30,6 +31,11 @@ const routes: Routes = [
   //   loadChildren:
   //   () => import('./profile/profile.module').then(m => m.ProfileModule)
   // },
+  {
+    path: ApplicationRoutes.inbox,
+    loadChildren: () =>
+      import('./inbox/inbox.module').then((m) => m.InboxModule),
+  },
   {
     path: ApplicationRoutes.authorize,
     canActivateChild: [OauthGuard],

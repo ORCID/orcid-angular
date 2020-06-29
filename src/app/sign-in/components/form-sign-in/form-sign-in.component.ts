@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
@@ -24,7 +25,7 @@ import { SingInLocal, TypeSignIn } from '../../../types/sing-in.local'
   providers: [TwoFactorComponent],
   preserveWhitespaces: true,
 })
-export class FormSignInComponent implements OnInit {
+export class FormSignInComponent implements OnInit, AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
   @Input() shibbolethSignInData: ShibbolethSignInData

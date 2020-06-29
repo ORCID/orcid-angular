@@ -1,0 +1,41 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-base;
+  border-radius: 4px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: $spacing-small;
+  [dir='rtl'] & {
+    margin-left: $spacing-small;
+    margin-right: none;
+  }
+}
+
+mat-checkbox {
+  margin-right: $spacing-base;
+  [dir='rtl'] & {
+    margin-left: $spacing-base;
+    margin-right: none;
+  }
+}
+:host:not(.archived) {
+  .title {
+    font-weight: bold;
+  }
+}
+
+.notification-type {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}

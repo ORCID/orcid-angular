@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin notification-theme($theme) {
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  :host {
+    border: solid map-get($background, light-grey) 1px;
+  }
+  :host.archived {
+    background-color: map-get($background, light-grey);
+    color: $dark-secondary-text;
+  }
+  .notification-green {
+    color: mat-color($accent, 900);
+  }
+  .notification-background-green {
+    background-color: mat-color($accent, 900);
+  }
+}
+
+@include notification-theme($orcid-app-theme);

@@ -19,6 +19,7 @@ export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 export const ApplicationRoutes = {
   institutionalLinking: 'institutional-linking',
   institutional: 'institutional-signin',
+  inbox: 'inbox',
   login: 'login',
   signin: 'signin',
   authorize: 'oauth/authorize',
