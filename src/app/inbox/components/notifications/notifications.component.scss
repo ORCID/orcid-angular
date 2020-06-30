@@ -3,3 +3,30 @@
 app-notification {
   margin-top: $spacing-base;
 }
+.controls {
+  display: flex;
+  flex-direction: row;
+  margin-left: $spacing-base;
+  align-items: center;
+
+  mat-checkbox {
+    margin-right: $spacing-small;
+    margin-bottom: 4px; // Fix misalignment
+  }
+  .archive-label {
+    margin-right: $spacing-base;
+  }
+}
+mat-icon {
+  padding-top: 4px; // fix margin
+}
+
+.notifications-amount {
+  margin-top: $spacing-large;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .notifications-amount-label {
+    margin-right: $spacing-base;
+  }
+}

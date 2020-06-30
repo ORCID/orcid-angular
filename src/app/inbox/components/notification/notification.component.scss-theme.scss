@@ -9,11 +9,11 @@
   :host {
     border: solid map-get($background, light-grey) 1px;
   }
-  :host.archived {
+  :host.archived .header {
     background-color: map-get($background, light-grey);
     color: $dark-secondary-text;
   }
-  :host.green {
+  :host.green .header {
     .notification {
       color: mat-color($accent, 900);
     }
@@ -21,7 +21,7 @@
       background-color: mat-color($accent, 900);
     }
   }
-  :host.orange {
+  :host.orange .header {
     .notification {
       color: map-get($foreground, 'state-notice-dark');
     }
@@ -29,13 +29,16 @@
       background-color: map-get($foreground, 'state-notice-dark');
     }
   }
-  :host.blue {
+  :host.blue .header {
     .notification {
       color: mat-color($primary, 900);
     }
     .notification-background {
       background-color: mat-color($primary, 900);
     }
+  }
+  .body {
+    border-top: solid map-get($background, light-grey) 1px;
   }
 }
 

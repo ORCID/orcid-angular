@@ -2,11 +2,20 @@
 
 :host {
   display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+}
+.header {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: $spacing-base;
-  border-radius: 4px;
+}
+
+.body {
+  padding: $spacing-base;
+  border-top: solid 1px black;
 }
 
 .dot {

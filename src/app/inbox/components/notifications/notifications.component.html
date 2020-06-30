@@ -1,6 +1,24 @@
-<mat-checkbox></mat-checkbox>
-<button mat-raised-button color="primary">Archive selected</button>
+<div class="controls">
+  <mat-checkbox></mat-checkbox>
+  <div class="archive-label mat-body-1">Select All</div>
+  <button
+    mat-raised-button
+    color="primary"
+    class="mat-button-wrap-text-with-icon"
+  >
+    <mat-icon class="material-icons-outlined">archive</mat-icon>
+    <div>Archive selected</div>
+  </button>
+</div>
+
 <app-notification></app-notification>
 <app-notification></app-notification>
 <app-notification></app-notification>
 <app-notification></app-notification>
+
+<div class="notifications-amount mat-body-1">
+  <div class="notifications-amount-label">
+    Showing <strong>10</strong> of <strong>67</strong>
+  </div>
+  <button mat-raised-button color="primary">Show more notifications</button>
+</div>

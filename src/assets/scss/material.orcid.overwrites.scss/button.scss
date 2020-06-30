@@ -18,13 +18,12 @@ button.mat-button-wrap-text {
 }
 
 button.mat-button-wrap-text-with-icon {
-  width: 100%;
-  margin-top: 12px;
-
-  img {
+  padding-left: 40px; // save space for the icon or image
+  img,
+  mat-icon {
     margin: auto;
     position: absolute;
-    left: 20px;
+    left: 8px;
     top: 0;
     bottom: 0;
     width: 24px;
