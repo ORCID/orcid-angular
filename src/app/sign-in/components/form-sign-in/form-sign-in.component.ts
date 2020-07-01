@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { WINDOW } from '../../../cdk/window'
@@ -57,23 +66,23 @@ export class FormSignInComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
     private _oauthService: OauthService,
-    private _router: Router,
-) {
+    private _router: Router
+  ) {
     this.signInLocal.type = this.signInType
     _platformInfo.get().subscribe((platform) => {
       if (platform.oauthMode) {
         this.signInLocal.type = TypeSignIn.oauth
-        _route.queryParams.subscribe(params => {
+        _route.queryParams.subscribe((params) => {
           this.signInLocal.params = {} as DeclareOauthSession
           this.signInLocal.params.client_id = params['client_id']
           this.signInLocal.params.response_type = params['response_type']
           this.signInLocal.params.scope = params['scope']
           this.signInLocal.params.redirect_uri = params['redirect_uri']
-        });
+        })
       }
     })
 
-    _route.queryParams.subscribe(params => {
+    _route.queryParams.subscribe((params) => {
       if (params['oauth'] === '') {
         this.signInLocal.type = TypeSignIn.oauth
         this.signInLocal.params = {} as DeclareOauthSession
@@ -184,16 +193,13 @@ export class FormSignInComponent implements OnInit {
   }
 
   oauthAuthorize(signInLocal) {
-    this._oauthService.oauthAuthorize(signInLocal).subscribe((res) => {
-      this._router.navigate(['/oauth/authorize'], {
-          queryParams: {
-            client_id: this.signInLocal.params.client_id,
-            response_type: this.signInLocal.params.response_type,
-            scope: this.signInLocal.params.scope,
-            redirect_uri: this.signInLocal.params.redirect_uri,
-          }
-        }
-      )
+    this._router.navigate(['/oauth/authorize'], {
+      queryParams: {
+        client_id: this.signInLocal.params.client_id,
+        response_type: this.signInLocal.params.response_type,
+        scope: this.signInLocal.params.scope,
+        redirect_uri: this.signInLocal.params.redirect_uri,
+      },
     })
   }
 
