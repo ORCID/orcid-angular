@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
+import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -33,7 +33,7 @@ export class SignInComponent implements OnInit {
   isLoggedIn = false
   displayName: string
   realUserOrcid: string
-  email: string
+  email = ''
   oauthRequest = false
   show2FA = false
   signInType = TypeSignIn.personal
@@ -70,7 +70,7 @@ export class SignInComponent implements OnInit {
           }
 
           if (this.oauthParameters.email) {
-            this.formSignInComponent.updateUsername(this.oauthParameters.email)
+            this.email = this.oauthParameters.email
           }
         })
       )

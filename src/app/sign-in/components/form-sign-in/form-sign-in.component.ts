@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
@@ -24,7 +25,7 @@ import { SingInLocal, TypeSignIn } from '../../../types/sing-in.local'
   providers: [TwoFactorComponent],
   preserveWhitespaces: true,
 })
-export class FormSignInComponent implements OnInit {
+export class FormSignInComponent implements OnInit, AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
   @Input() shibbolethSignInData: ShibbolethSignInData
@@ -40,22 +41,12 @@ export class FormSignInComponent implements OnInit {
   showBadVerificationCode = false
   showBadRecoveryCode = false
   showInvalidUser = false
-  email: string
+  @Input() email
   orcidPrimaryDeprecated: string
   singInLocal = {} as SingInLocal
-
-  usernameFormControl = new FormControl('', [
-    Validators.required,
-    UsernameValidator.orcidOrEmail,
-  ])
-  passwordFormControl = new FormControl('', [])
-
-  authorizationForm = new FormGroup({
-    username: this.usernameFormControl,
-    password: this.passwordFormControl,
-    recoveryCode: new FormControl(),
-    verificationCode: new FormControl(),
-  })
+  authorizationForm: FormGroup
+  usernameFormControl: FormControl
+  passwordFormControl: FormControl
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -63,7 +54,20 @@ export class FormSignInComponent implements OnInit {
     private _router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.usernameFormControl = new FormControl(this.email, [
+      Validators.required,
+      UsernameValidator.orcidOrEmail,
+    ])
+    this.passwordFormControl = new FormControl('', [])
+
+    this.authorizationForm = new FormGroup({
+      username: this.usernameFormControl,
+      password: this.passwordFormControl,
+      recoveryCode: new FormControl(),
+      verificationCode: new FormControl(),
+    })
+  }
 
   ngAfterViewInit(): void {
     this.firstInput.nativeElement.focus()
