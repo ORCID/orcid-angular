@@ -37,30 +37,47 @@ export class UserService {
   }>
 
   private getUserInfo(): Observable<UserInfo> {
-    return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
-      withCredentials: true,
+    return of({
+      EFFECTIVE_USER_ORCID: '0000-0002-2036-7905',
+      PRIMARY_EMAIL: 'leomendoza123@gmail.com',
+      DEVELOPER_TOOLS_ENABLED: 'false',
+      IS_PRIMARY_EMAIL_VERIFIED: 'false',
+      LOCKED: 'false',
+      CLAIMED: 'true',
+      HAS_VERIFIED_EMAIL: 'false',
+      REAL_USER_ORCID: '0000-0002-9361-1905',
+      IN_DELEGATION_MODE: 'true',
+      DELEGATED_BY_ADMIN: 'true',
+      LAST_MODIFIED: '2020-05-05 22:12:42.566663',
     })
   }
 
   public getUserStatus() {
-    return this._http
-      .get<UserStatus>(environment.API_WEB + 'userStatus.json', {
-        withCredentials: true,
-      })
-      .pipe(map((response) => response.loggedIn || null))
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+    return of(true)
   }
 
   private getNameForm(): Observable<NameForm> {
-    return this._http.get<NameForm>(
-      environment.API_WEB + 'account/nameForm.json',
-      {
-        withCredentials: true,
-      }
-    )
+    return of({
+      visibility: {
+        errors: [],
+        required: true,
+        getRequiredMessage: null,
+        visibility: 'PUBLIC',
+      },
+      errors: [],
+      givenNames: {
+        errors: [],
+        value: 'Leonardo',
+        required: true,
+        getRequiredMessage: null,
+      },
+      familyName: {
+        errors: [],
+        value: 'Mendoza',
+        required: true,
+        getRequiredMessage: null,
+      },
+    })
   }
 
   getUserInfoOnEachStatusUpdate(): Observable<{

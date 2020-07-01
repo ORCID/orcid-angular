@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { Observable } from 'rxjs'
+import { InboxNotification } from 'src/app/types/notifications.endpoint'
+import { InboxService } from 'src/app/core/inbox/inbox.service'
 
 @Component({
   selector: 'app-notifications',
@@ -6,7 +9,11 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
-  constructor() {}
+  $notifications: Observable<InboxNotification[]>
+
+  constructor(private _inbox: InboxService) {
+    this.$notifications = _inbox.getNotifications()
+  }
 
   ngOnInit(): void {}
 }

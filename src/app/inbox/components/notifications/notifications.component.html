@@ -11,10 +11,10 @@
   </button>
 </div>
 
-<app-notification></app-notification>
-<app-notification></app-notification>
-<app-notification></app-notification>
-<app-notification></app-notification>
+<app-notification
+  *ngFor="let item of $notifications | async"
+  [notification]="item"
+></app-notification>
 
 <div class="notifications-amount mat-body-1">
   <div class="notifications-amount-label">

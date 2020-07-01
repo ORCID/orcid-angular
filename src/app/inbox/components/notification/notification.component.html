@@ -2,15 +2,18 @@
   <div class="notification-type notification mat-caption">
     <mat-checkbox class="larger"></mat-checkbox>
     <span class="dot notification-background mat-body-1"></span>
-    YOUR RECORD
+    {{ notificationTypeLabel(notification) }}
   </div>
   <div class="title mat-body-1">
-    Assert-o-matic has made changes to your ORCID record
+    {{ notificationTitle(notification) }}
   </div>
-  <p class="mat-caption">2019-07-08</p>
+  <p class="mat-caption">{{ notificationDate(notification) }}</p>
   <mat-icon class="material-icons-outlined">archived</mat-icon>
 </div>
+
 <div class="body">
-  Assert-o-matic has updated the Employment section of your record: New items
-  added - ORCID UX Designer
+  <app-notification-your-record
+    *ngIf="notificationType(notification) === 'your-record'"
+    [notification]="notification"
+  ></app-notification-your-record>
 </div>
