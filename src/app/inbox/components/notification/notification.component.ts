@@ -8,6 +8,7 @@ import {
 } from '@angular/core'
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
 import { DateAdapter } from '@angular/material/core'
+import { uiNotificationType } from 'src/app/types/notifications.local'
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -21,27 +22,41 @@ export class NotificationComponent implements OnInit {
   @HostBinding('class.green') green = false
   @HostBinding('class.orange') orange = true
   @HostBinding('class.blue') blue = false
-  @Input() notification: InboxNotification
+  _notification: InboxNotification
+  notificationLabel: string
+  notificationType: uiNotificationType
+  @Input()
+  set notification(notification: InboxNotification) {
+    this._notification = notification
+    this.notificationType = this.getNotificationType(notification)
+    this.setNotificationColor(this.notificationType)
+  }
+  get notification() {
+    return this._notification
+  }
 
   constructor(@Inject(LOCALE_ID) public locale: string) {}
 
-  notificationTypeLabel(notification: InboxNotification) {
-    switch (notification.notificationType) {
-      case 'AMENDED':
+  notificationTypeLabel(notificationType: uiNotificationType) {
+    switch (notificationType) {
+      case 'your-record':
         return 'YOUR RECORD'
-      case 'PERMISSION':
+      case 'permission':
         return 'PERMISSIONS'
       default:
         return 'ANNOUNCEMENT'
     }
   }
 
-  // Used to select which body component to load for each notification
-  notificationType(notification: InboxNotification) {
+  getNotificationType(notification: InboxNotification): uiNotificationType {
     switch (notification.notificationType) {
       case 'AMENDED':
         return 'your-record'
+      case 'ADMINISTRATIVE':
+        return 'your-record'
       case 'PERMISSION':
+        return 'permission'
+      case 'INSTITUTIONAL_CONNECTION':
         return 'permission'
       default:
         return 'announcement'
@@ -49,12 +64,40 @@ export class NotificationComponent implements OnInit {
   }
 
   notificationTitle(notification: InboxNotification) {
-    return `${notification.source.sourceName.content} has made changes to your ORCID record`
+    switch (notification.notificationType) {
+      case 'AMENDED':
+        return `${notification.source.sourceName.content} has made changes to your ORCID record`
+      case 'ADMINISTRATIVE':
+        return `Person ${notification.source.sourceName.content} has made you an Account Delegate for their ORCID record`
+      case 'PERMISSION':
+        return `${notification.source.sourceName.content} has asked for permission to make changes to your ORCID record`
+      case 'INSTITUTIONAL_CONNECTION':
+        return `Connecting an ${notification.source.sourceName.content} account with your ORCID record`
+      default:
+        return 'DEFINE'
+    }
   }
 
   notificationDate(notification: InboxNotification) {
     const date = new Date(notification.createdDate)
     return date.toLocaleDateString(this.locale)
+  }
+
+  setNotificationColor(type: uiNotificationType) {
+    this.blue = false
+    this.orange = false
+    this.green = false
+    switch (type) {
+      case 'your-record':
+        this.green = true
+        break
+      case 'permission':
+        this.orange = true
+        break
+      case 'announcement':
+        this.blue = true
+        break
+    }
   }
 
   ngOnInit(): void {}

@@ -34,14 +34,7 @@ export interface Items {
 }
 
 export interface InboxNotification {
-  notificationType:
-    | 'AMENDED'
-    | 'ADMINISTRATIVE'
-    | 'CUSTOM'
-    | 'SERVICE_ANNOUNCEMENT'
-    | 'TIP'
-    | 'INSTITUTIONAL_CONNECTION'
-    | 'PERMISSION'
+  notificationType: notificationType
   putCode: number
   createdDate: any
   sentDate?: any
@@ -83,6 +76,9 @@ export interface InboxNotificationHtml extends InboxNotification {
 export interface InboxNotificationInstitutional extends InboxNotification {
   notificationType: 'INSTITUTIONAL_CONNECTION'
   idpName: any // ????
+  actionedDate?: any
+  authenticationProviderId
+  authorizationUrl: SourceOrcid
 }
 
 export interface InboxNotificationPermission extends InboxNotification {
@@ -93,3 +89,12 @@ export interface InboxNotificationPermission extends InboxNotification {
   notificationSubject: string
   notificationIntro: string
 }
+
+export type notificationType =
+  | 'AMENDED'
+  | 'ADMINISTRATIVE'
+  | 'CUSTOM'
+  | 'SERVICE_ANNOUNCEMENT'
+  | 'TIP'
+  | 'INSTITUTIONAL_CONNECTION'
+  | 'PERMISSION'

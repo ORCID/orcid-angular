@@ -8,15 +8,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatIconModule } from '@angular/material/icon'
 import { NotificationComponent } from './components/notification/notification.component'
 import { MatButtonModule } from '@angular/material/button'
-import { NotificationYourRecordComponent } from './components/notification-your-record/notification-your-record.component'
+// tslint:disable-next-line: max-line-length
+import { NotificationYourRecordAmendedComponent } from './components/notification-your-record-amended/notification-your-record-amended.component'
 import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
+import { NotificationPermissionComponent } from './components/notification-permission/notification-permission.component'
 
 @NgModule({
   declarations: [
     InboxComponent,
     NotificationsComponent,
     NotificationComponent,
-    NotificationYourRecordComponent,
+    NotificationYourRecordAmendedComponent,
+    NotificationPermissionComponent,
   ],
   imports: [
     CommonModule,

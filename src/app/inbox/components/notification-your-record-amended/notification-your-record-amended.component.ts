@@ -6,11 +6,11 @@ import {
 } from 'src/app/types/notifications.endpoint'
 
 @Component({
-  selector: 'app-notification-your-record',
-  templateUrl: './notification-your-record.component.html',
-  styleUrls: ['./notification-your-record.component.scss'],
+  selector: 'app-notification-your-record-amended',
+  templateUrl: './notification-your-record-amended.component.html',
+  styleUrls: ['./notification-your-record-amended.component.scss'],
 })
-export class NotificationYourRecordComponent implements OnInit {
+export class NotificationYourRecordAmendedComponent implements OnInit {
   private _notification: InboxNotificationAmended
   item: Item
   @Input()

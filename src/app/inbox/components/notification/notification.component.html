@@ -2,7 +2,7 @@
   <div class="notification-type notification mat-caption">
     <mat-checkbox class="larger"></mat-checkbox>
     <span class="dot notification-background mat-body-1"></span>
-    {{ notificationTypeLabel(notification) }}
+    {{ notificationTypeLabel(notificationType) }}
   </div>
   <div class="title mat-body-1">
     {{ notificationTitle(notification) }}
@@ -12,8 +12,12 @@
 </div>
 
 <div class="body">
-  <app-notification-your-record
-    *ngIf="notificationType(notification) === 'your-record'"
+  <app-notification-your-record-amended
+    *ngIf="notification.notificationType === 'AMENDED'"
     [notification]="notification"
-  ></app-notification-your-record>
+  ></app-notification-your-record-amended>
+  <app-notification-permission>
+    *ngIf="notification.notificationType === 'PERMISSION'"
+    [notification]="notification" ></app-notification-permission
+  >
 </div>
