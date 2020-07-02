@@ -14,7 +14,8 @@
               role="heading"
               aria-level="1"
               i18n="@@ngOrcid.signin.title"
-            > Sign in
+            >
+              Sign in
             </mat-card-title>
           </mat-card-header>
           <mat-progress-bar
@@ -26,6 +27,7 @@
           <mat-card-content>
             <ng-container *ngIf="!isLoggedIn">
               <app-form-sign-in
+                [email]="email"
                 #formSignInComponent
                 [signInType]="signInType"
                 (show2FAEmitter)="show2FAEmitter($event)"
@@ -45,7 +47,7 @@
               </app-form-sign-in>
               <p class="mat-subheading-2" i18n="@@ngOrcid.signin.or">or</p>
               <mat-divider></mat-divider>
-              <br/>
+              <br />
               <app-social></app-social>
             </ng-container>
             <app-logged-in

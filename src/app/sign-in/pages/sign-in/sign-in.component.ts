@@ -32,7 +32,7 @@ export class SignInComponent implements OnInit {
   isLoggedIn = false
   displayName: string
   realUserOrcid: string
-  email: string
+  email = ''
   oauthRequest = false
   show2FA = false
   signInType = TypeSignIn.personal
@@ -45,7 +45,6 @@ export class SignInComponent implements OnInit {
     _route: ActivatedRoute,
     private _router: Router
   ) {
-
     _route.queryParams
       .pipe(
         // More info about signin query paramter https://members.orcid.org/api/oauth/get-oauthauthorize
@@ -62,7 +61,7 @@ export class SignInComponent implements OnInit {
           }
 
           if (this.oauthParameters.email) {
-            this.formSignInComponent.updateUsername(this.oauthParameters.email)
+            this.email = this.oauthParameters.email
           }
         })
       )
