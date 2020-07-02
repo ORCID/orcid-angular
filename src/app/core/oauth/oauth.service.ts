@@ -32,6 +32,10 @@ export class OauthService {
     return this.requestInfoSubject
   }
 
+  updateRequestInfoFormInMemory(requestInfoForm: RequestInfoForm) {
+    this.requestInfoSubject.next(requestInfoForm)
+  }
+
   /**
    * @deprecated since declareOauthSession will declare and get the RequestInfoForm data.
    * the loadRequestInfoFormFromMemory can replace this function
@@ -50,16 +54,16 @@ export class OauthService {
   }
 
   authorize(approved: boolean): Observable<RequestInfoForm> {
-     const value: OauthAuthorize = {
-       // tslint:disable-next-line: max-line-length
-       // TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
-       // TODO @angel by looking into analytics, I can see we have never reported a persistentTokenDisabled
-       persistentTokenEnabled: true,
-       // tslint:disable-next-line: max-line-length
-       // TODO @angel please confirm that  email access is always allowed know and at some point it was optional https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/resources/freemarker/includes/oauth/scopes_ng2.ftl#L42
-       emailAccessAllowed: true,
-       approved,
-     }
+    const value: OauthAuthorize = {
+      // tslint:disable-next-line: max-line-length
+      // TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
+      // TODO @angel by looking into analytics, I can see we have never reported a persistentTokenDisabled
+      persistentTokenEnabled: true,
+      // tslint:disable-next-line: max-line-length
+      // TODO @angel please confirm that  email access is always allowed know and at some point it was optional https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/resources/freemarker/includes/oauth/scopes_ng2.ftl#L42
+      emailAccessAllowed: true,
+      approved,
+    }
     return this._http
       .post<RequestInfoForm>(
         environment.BASE_URL + 'oauth/custom/authorize.json',
@@ -80,10 +84,15 @@ export class OauthService {
   // if the backend has an error declaring the Oauth parameters it will return a string on the errors array
 
   declareOauthSession(value: DeclareOauthSession): Observable<RequestInfoForm> {
+    if (this.oauthSectionDeclared) {
+      return this.requestInfoSubject
+    }
+
     return this._http
       .post<RequestInfoForm>(
         // tslint:disable-next-line:max-line-length
-        environment.BASE_URL + `oauth/custom/declare.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
+        environment.BASE_URL +
+          `oauth/custom/init.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
         value,
         { headers: this.headers }
       )
@@ -99,30 +108,24 @@ export class OauthService {
       )
   }
 
-  oauthAuthorize(signInLocal: SignInLocal) {
-    const value: OauthAuthorize = {
-      // tslint:disable-next-line: max-line-length
-      // TODO @angel please confirm that persistentTokenEnabled is always true https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/webapp/static/javascript/ng1Orcid/app/modules/oauthAuthorization/oauthAuthorization.component.ts#L161
-      // TODO @angel by looking into analytics, I can see we have never reported a persistentTokenDisabled
-      persistentTokenEnabled: true,
-      // tslint:disable-next-line: max-line-length
-      // TODO @angel please confirm that  email access is always allowed know and at some point it was optional https://github.com/ORCID/ORCID-Source/blob/master/orcid-web/src/main/resources/freemarker/includes/oauth/scopes_ng2.ftl#L42
-      emailAccessAllowed: true,
-      approved: true,
-      userName: signInLocal.data.username,
-      password: signInLocal.data.password,
-    }
-    return this._http.post<any>(
-      environment.BASE_URL + 'oauth/custom/signin.json',
-      value,
-      { headers: this.headers }
-    );
+  oauthAuthorize(value: DeclareOauthSession): Observable<RequestInfoForm> {
+    return this._http
+      .get<RequestInfoForm>(
+        // tslint:disable-next-line:max-line-length
+        environment.BASE_URL +
+          `oauth/custom/authorize.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
-  loadShibbolethSignInData( ): Observable<ShibbolethSignInData> {
+  loadShibbolethSignInData(): Observable<ShibbolethSignInData> {
     return this._http.get<ShibbolethSignInData>(
       environment.BASE_URL + 'shibboleth/signinData.json',
       { headers: this.headers }
-    );
+    )
   }
 }

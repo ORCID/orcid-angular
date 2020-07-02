@@ -116,7 +116,7 @@ export class FormSignInComponent implements OnInit {
 
         if (data.success) {
           if (data.url.toLowerCase().includes('oauth/authorize')) {
-            this.oauthAuthorize(this.signInLocal)
+            this.oauthAuthorize(this.signInLocal.params)
           } else {
             this.navigateTo(data.url)
           }
@@ -192,14 +192,17 @@ export class FormSignInComponent implements OnInit {
     }
   }
 
-  oauthAuthorize(signInLocal) {
-    this._router.navigate(['/oauth/authorize'], {
-      queryParams: {
-        client_id: this.signInLocal.params.client_id,
-        response_type: this.signInLocal.params.response_type,
-        scope: this.signInLocal.params.scope,
-        redirect_uri: this.signInLocal.params.redirect_uri,
-      },
+  oauthAuthorize(value: DeclareOauthSession) {
+    this._oauthService.oauthAuthorize(value).subscribe((requestInfoForm) => {
+      this._oauthService.updateRequestInfoFormInMemory(requestInfoForm)
+      this._router.navigate(['/oauth/authorize'], {
+        queryParams: {
+          client_id: this.signInLocal.params.client_id,
+          response_type: this.signInLocal.params.response_type,
+          scope: this.signInLocal.params.scope,
+          redirect_uri: this.signInLocal.params.redirect_uri,
+        },
+      })
     })
   }
 

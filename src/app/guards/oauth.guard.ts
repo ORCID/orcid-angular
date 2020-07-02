@@ -36,24 +36,31 @@ export class OauthGuard implements CanActivateChild {
         .pipe(
           map((value) => {
             if (value.errors.length || value.error) {
-              console.log('The backend cant declare the oauth section ')
               // redirect the user to the login if something goes wrong on the backend declaration
-              // TODO @leomendoza123 Throw toaster error
+              // TODO @leomendoza123 Throw toaster error and display error description
               return this._router.createUrlTree(['/signin'])
             } else if (!value.userOrcid || !value.userName) {
               // The users is not logged in
               if (state.url.startsWith('/oauth/authorize')) {
-              // todo validate if it works on ie11
+                // todo validate if it works on ie11
                 return this._router.createUrlTree(['/signin'], {
-                  queryParams:  Object.assign({}, { oauth: '' }, next.queryParams),
+                  queryParams: Object.assign(
+                    {},
+                    { oauth: '' },
+                    next.queryParams
+                  ),
                   queryParamsHandling: 'merge',
-                  preserveFragment: true });
+                  preserveFragment: true,
+                })
               } else if (state.url.startsWith('/signin')) {
                 return true
               }
+            } else if (value.forceLogin) {
+              return this._router.createUrlTree(['/oauth/authorize'], {
+                queryParams: next.queryParams,
+              })
             } else {
               // The users has already login and is ready to authorize
-              console.log('ready to authorize ')
               if (state.url.startsWith('/oauth/authorize')) {
                 return true
               } else if (state.url.startsWith('/signin')) {

@@ -22,6 +22,7 @@ export interface RequestInfoForm {
   scopesAsString: string
   error: string
   errorDescription: string
+  forceLogin: boolean
 }
 
 export interface Scope {
