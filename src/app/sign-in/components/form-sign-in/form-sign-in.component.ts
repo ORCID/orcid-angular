@@ -14,8 +14,11 @@ import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ShibbolethSignInData } from '../../../types/shibboleth-sign-in-data'
-import { Router } from '@angular/router'
-import { SingInLocal, TypeSignIn } from '../../../types/sing-in.local'
+import { ActivatedRoute, Router } from '@angular/router'
+import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
+import { PlatformInfoService } from '../../../cdk/platform-info'
+import { DeclareOauthSession } from '../../../types/declareOauthSession.endpoint'
+import { OauthService } from '../../../core/oauth/oauth.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -42,7 +45,7 @@ export class FormSignInComponent implements OnInit {
   showInvalidUser = false
   email: string
   orcidPrimaryDeprecated: string
-  singInLocal = {} as SingInLocal
+  signInLocal = {} as SignInLocal
 
   usernameFormControl = new FormControl('', [
     Validators.required,
@@ -58,10 +61,29 @@ export class FormSignInComponent implements OnInit {
   })
 
   constructor(
+    _platformInfo: PlatformInfoService,
+    _route: ActivatedRoute,
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
+    private _oauthService: OauthService,
     private _router: Router
-  ) {}
+  ) {
+    this.signInLocal.type = this.signInType
+    _platformInfo.get().subscribe((platform) => {
+      if (platform.oauthMode) {
+        this.signInLocal.type = TypeSignIn.oauth
+        _route.queryParams.subscribe((params) => {
+          this.signInLocal.params = {
+            client_id: params['client_id'],
+            response_type: params['response_type'],
+            scope: params['scope'],
+            redirect_uri: params['redirect_uri'],
+            oauth: '',
+          }
+        })
+      }
+    })
+  }
 
   ngOnInit(): void {}
 
@@ -70,8 +92,7 @@ export class FormSignInComponent implements OnInit {
   }
 
   onSubmit() {
-    this.singInLocal.data = this.authorizationForm.getRawValue()
-    this.singInLocal.type = this.signInType
+    this.signInLocal.data = this.authorizationForm.getRawValue()
 
     this.authorizationForm.markAllAsTouched()
 
@@ -79,12 +100,17 @@ export class FormSignInComponent implements OnInit {
       this.hideErrors()
       this.loading = true
 
-      const $signIn = this._signIn.signIn(this.singInLocal)
+      const $signIn = this._signIn.signIn(this.signInLocal)
       $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
+
         if (data.success) {
-          this.navigateTo(data.url)
+          if (data.url.toLowerCase().includes('oauth/authorize')) {
+            this.updateOauthSession(this.signInLocal.params)
+          } else {
+            this.navigateTo(data.url)
+          }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.show2FA = true
           this.show2FAEmitter.emit()
@@ -140,7 +166,7 @@ export class FormSignInComponent implements OnInit {
   }
 
   register() {
-    if (this.singInLocal.type === TypeSignIn.institutional) {
+    if (this.signInLocal.type === TypeSignIn.institutional) {
       this._router.navigate([
         '/register',
         {
@@ -155,6 +181,21 @@ export class FormSignInComponent implements OnInit {
     } else {
       this._router.navigate(['/register'])
     }
+  }
+
+  updateOauthSession(value: DeclareOauthSession) {
+    this._oauthService
+      .updateOauthSession(value)
+      .subscribe((requestInfoForm) => {
+        this._router.navigate(['/oauth/authorize'], {
+          queryParams: {
+            client_id: this.signInLocal.params.client_id,
+            response_type: this.signInLocal.params.response_type,
+            scope: this.signInLocal.params.scope,
+            redirect_uri: this.signInLocal.params.redirect_uri,
+          },
+        })
+      })
   }
 
   updateUsername(email) {

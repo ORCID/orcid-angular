@@ -58,7 +58,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   signout() {}
 
   authorize(value = true) {
-    console.log(value)
     this._oauth.authorize(value).subscribe((data) => {
       let analyticsReports: Observable<void>[] = []
 

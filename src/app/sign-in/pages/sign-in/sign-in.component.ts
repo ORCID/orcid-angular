@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
+import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -10,7 +10,6 @@ import { OauthService } from '../../../core/oauth/oauth.service'
 import { HttpParams } from '@angular/common/http'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { PlatformInfoService } from '../../../cdk/platform-info'
-import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.component'
 
 @Component({
@@ -40,19 +39,12 @@ export class SignInComponent implements OnInit {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    private _signIn: SignInService,
     private _userInfo: UserService,
     private _oauthService: OauthService,
     @Inject(WINDOW) private window: Window,
     _route: ActivatedRoute,
     private _router: Router
   ) {
-    _platformInfo.get().subscribe((platform) => {
-      if (platform.oauthMode) {
-        this.signInLocal.type = TypeSignIn.oauth
-        this.loadRequestInfoForm()
-      }
-    })
 
     _route.queryParams
       .pipe(

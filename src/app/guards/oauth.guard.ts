@@ -35,23 +35,32 @@ export class OauthGuard implements CanActivateChild {
         .declareOauthSession(<DeclareOauthSession>next.queryParams)
         .pipe(
           map((value) => {
-            if (value.errors.length) {
-              console.log('The backend cant declare the oauth section ')
+            if (value.errors.length || value.error) {
               // redirect the user to the login if something goes wrong on the backend declaration
-              // TODO @leomendoza123 Throw toaster error
+              // TODO @leomendoza123 Throw toaster error and display error description
               return this._router.createUrlTree(['/signin'])
             } else if (!value.userOrcid || !value.userName) {
               // The users is not logged in
               if (state.url.startsWith('/oauth/authorize')) {
+                const params = {
+                  oauth: '',
+                  client_id: next.queryParams['client_id'],
+                  response_type: next.queryParams['response_type'],
+                  scope: next.queryParams['scope'],
+                  redirect_uri: next.queryParams['redirect_uri'],
+                }
                 return this._router.createUrlTree(['/signin'], {
-                  queryParams: next.queryParams,
+                  queryParams: params,
                 })
               } else if (state.url.startsWith('/signin')) {
                 return true
               }
+            } else if (value.forceLogin) {
+              return this._router.createUrlTree(['/oauth/authorize'], {
+                queryParams: next.queryParams,
+              })
             } else {
               // The users has already login and is ready to authorize
-              console.log('ready to authorize ')
               if (state.url.startsWith('/oauth/authorize')) {
                 return true
               } else if (state.url.startsWith('/signin')) {
