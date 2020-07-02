@@ -22,4 +22,9 @@
     *ngIf="notification.notificationType === 'AMENDED'"
     [notification]="notification"
   ></app-notification-your-record-amended>
+
+  <app-notification-html
+    *ngIf="notification.notificationType === 'ADMINISTRATIVE'"
+    [notification]="notification"
+  ></app-notification-html>
 </div>

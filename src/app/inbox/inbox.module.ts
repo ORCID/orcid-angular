@@ -13,6 +13,7 @@ import { NotificationYourRecordAmendedComponent } from './components/notificatio
 import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
 import { NotificationPermissionComponent } from './components/notification-permission/notification-permission.component'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
+import { NotificationHtmlComponent } from './components/notification-html/notification-html.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     NotificationComponent,
     NotificationYourRecordAmendedComponent,
     NotificationPermissionComponent,
+    NotificationHtmlComponent,
   ],
   imports: [
     CommonModule,

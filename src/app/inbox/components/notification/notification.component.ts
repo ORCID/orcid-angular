@@ -68,7 +68,7 @@ export class NotificationComponent implements OnInit {
       case 'AMENDED':
         return `${notification.source.sourceName.content} has made changes to your ORCID record`
       case 'ADMINISTRATIVE':
-        return `Person ${notification.source.sourceName.content} has made you an Account Delegate for their ORCID record`
+        return `${notification.subject}`
       case 'PERMISSION':
         return `${notification.subject}`
       case 'INSTITUTIONAL_CONNECTION':
