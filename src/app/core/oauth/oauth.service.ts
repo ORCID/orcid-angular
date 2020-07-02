@@ -90,8 +90,8 @@ export class OauthService {
 
     return this._http
       .post<RequestInfoForm>(
-        // tslint:disable-next-line:max-line-length
         environment.BASE_URL +
+          // tslint:disable-next-line:max-line-length
           `oauth/custom/init.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
         value,
         { headers: this.headers }
@@ -108,17 +108,22 @@ export class OauthService {
       )
   }
 
-  oauthAuthorize(value: DeclareOauthSession): Observable<RequestInfoForm> {
+  updateOauthSession(value: DeclareOauthSession): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
-        // tslint:disable-next-line:max-line-length
         environment.BASE_URL +
+          // tslint:disable-next-line:max-line-length
           `oauth/custom/authorize.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
         { headers: this.headers }
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
+      )
+      .pipe(
+        tap((data) => {
+          this.requestInfoSubject.next(data)
+        })
       )
   }
 

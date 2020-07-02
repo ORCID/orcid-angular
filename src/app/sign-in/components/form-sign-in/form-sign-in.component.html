@@ -1,5 +1,4 @@
-<!-- todo removed temporarily onSubmit -->
-<form [formGroup]="authorizationForm">
+<form [formGroup]="authorizationForm" (ngSubmit)="(!show2FA)">
   <mat-form-field appearance="outline" class="row">
     <mat-label i18n="@@ngOrcid.signin.username">
       Email or 16-digit ORCID iD

@@ -73,23 +73,14 @@ export class FormSignInComponent implements OnInit {
       if (platform.oauthMode) {
         this.signInLocal.type = TypeSignIn.oauth
         _route.queryParams.subscribe((params) => {
-          this.signInLocal.params = {} as DeclareOauthSession
-          this.signInLocal.params.client_id = params['client_id']
-          this.signInLocal.params.response_type = params['response_type']
-          this.signInLocal.params.scope = params['scope']
-          this.signInLocal.params.redirect_uri = params['redirect_uri']
+          this.signInLocal.params = {
+            client_id: params['client_id'],
+            response_type: params['response_type'],
+            scope: params['scope'],
+            redirect_uri: params['redirect_uri'],
+            oauth: '',
+          }
         })
-      }
-    })
-
-    _route.queryParams.subscribe((params) => {
-      if (params['oauth'] === '') {
-        this.signInLocal.type = TypeSignIn.oauth
-        this.signInLocal.params = {} as DeclareOauthSession
-        this.signInLocal.params.client_id = params['client_id']
-        this.signInLocal.params.response_type = params['response_type']
-        this.signInLocal.params.scope = params['scope']
-        this.signInLocal.params.redirect_uri = params['redirect_uri']
       }
     })
   }
@@ -116,7 +107,7 @@ export class FormSignInComponent implements OnInit {
 
         if (data.success) {
           if (data.url.toLowerCase().includes('oauth/authorize')) {
-            this.oauthAuthorize(this.signInLocal.params)
+            this.updateOauthSession(this.signInLocal.params)
           } else {
             this.navigateTo(data.url)
           }
@@ -192,18 +183,19 @@ export class FormSignInComponent implements OnInit {
     }
   }
 
-  oauthAuthorize(value: DeclareOauthSession) {
-    this._oauthService.oauthAuthorize(value).subscribe((requestInfoForm) => {
-      this._oauthService.updateRequestInfoFormInMemory(requestInfoForm)
-      this._router.navigate(['/oauth/authorize'], {
-        queryParams: {
-          client_id: this.signInLocal.params.client_id,
-          response_type: this.signInLocal.params.response_type,
-          scope: this.signInLocal.params.scope,
-          redirect_uri: this.signInLocal.params.redirect_uri,
-        },
+  updateOauthSession(value: DeclareOauthSession) {
+    this._oauthService
+      .updateOauthSession(value)
+      .subscribe((requestInfoForm) => {
+        this._router.navigate(['/oauth/authorize'], {
+          queryParams: {
+            client_id: this.signInLocal.params.client_id,
+            response_type: this.signInLocal.params.response_type,
+            scope: this.signInLocal.params.scope,
+            redirect_uri: this.signInLocal.params.redirect_uri,
+          },
+        })
       })
-    })
   }
 
   updateUsername(email) {

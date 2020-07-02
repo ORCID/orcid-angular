@@ -42,15 +42,15 @@ export class OauthGuard implements CanActivateChild {
             } else if (!value.userOrcid || !value.userName) {
               // The users is not logged in
               if (state.url.startsWith('/oauth/authorize')) {
-                // todo validate if it works on ie11
+                const params = {
+                  oauth: '',
+                  client_id: next.queryParams['client_id'],
+                  response_type: next.queryParams['response_type'],
+                  scope: next.queryParams['scope'],
+                  redirect_uri: next.queryParams['redirect_uri'],
+                }
                 return this._router.createUrlTree(['/signin'], {
-                  queryParams: Object.assign(
-                    {},
-                    { oauth: '' },
-                    next.queryParams
-                  ),
-                  queryParamsHandling: 'merge',
-                  preserveFragment: true,
+                  queryParams: params,
                 })
               } else if (state.url.startsWith('/signin')) {
                 return true
