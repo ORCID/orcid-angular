@@ -7,17 +7,19 @@
   <div class="title mat-body-1">
     {{ notificationTitle(notification) }}
   </div>
+  {{ 'DEBUG' + notification.notificationType }}
   <p class="mat-caption">{{ notificationDate(notification) }}</p>
   <mat-icon class="material-icons-outlined">archived</mat-icon>
 </div>
 
 <div class="body">
+  <app-notification-permission
+    *ngIf="notification.notificationType === 'PERMISSION'"
+    [notification]="notification"
+  ></app-notification-permission>
+
   <app-notification-your-record-amended
     *ngIf="notification.notificationType === 'AMENDED'"
     [notification]="notification"
   ></app-notification-your-record-amended>
-  <app-notification-permission>
-    *ngIf="notification.notificationType === 'PERMISSION'"
-    [notification]="notification" ></app-notification-permission
-  >
 </div>

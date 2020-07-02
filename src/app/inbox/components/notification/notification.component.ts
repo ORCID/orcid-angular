@@ -70,7 +70,7 @@ export class NotificationComponent implements OnInit {
       case 'ADMINISTRATIVE':
         return `Person ${notification.source.sourceName.content} has made you an Account Delegate for their ORCID record`
       case 'PERMISSION':
-        return `${notification.source.sourceName.content} has asked for permission to make changes to your ORCID record`
+        return `${notification.subject}`
       case 'INSTITUTIONAL_CONNECTION':
         return `Connecting an ${notification.source.sourceName.content} account with your ORCID record`
       default:

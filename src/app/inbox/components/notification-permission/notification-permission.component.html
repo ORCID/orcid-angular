@@ -1,1 +1,15 @@
-<p>notification-permission works!</p>
+<div class="intro">{{ notification.notificationIntro }}</div>
+
+<div>
+  <strong>{{ notification.source.sourceName.content }}</strong>
+  would like your permission to interact with your ORCID Record as a trusted
+  party.
+</div>
+
+<button
+  mat-raised-button
+  color="primary"
+  (click)="navigateTo(notification.authorizationUrl.uri)"
+>
+  Grant permission
+</button>

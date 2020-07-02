@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { NotificationYourRecordAmendedComponent } from './components/notification-your-record-amended/notification-your-record-amended.component'
 import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
 import { NotificationPermissionComponent } from './components/notification-permission/notification-permission.component'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NotificationPermissionComponent } from './components/notification-permi
     MatIconModule,
     MatButtonModule,
     InfoDropDownModule,
+    A11yLinkModule,
   ],
 })
 export class InboxModule {}
