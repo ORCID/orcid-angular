@@ -26,7 +26,8 @@ nav {
     padding: 0;
   }
 
-  .top-bar, .top-bar-new-info {
+  .top-bar,
+  .top-bar-new-info {
     height: 60px;
     margin-bottom: 60px;
     .menu-container {
@@ -36,6 +37,9 @@ nav {
         position: relative;
         .col {
           & button {
+            &.active {
+              border-radius: 0;
+            }
           }
           .row {
             position: absolute;
@@ -69,7 +73,8 @@ nav {
         }
       }
       nav {
-        .top-bar, .top-bar-new-info {
+        .top-bar,
+        .top-bar-new-info {
           .menu-container {
             nav {
               .top-bar {

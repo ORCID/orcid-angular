@@ -24,7 +24,6 @@
           &.active {
             background-color: mat-color($background, grey);
             color: mat-contrast($accent, 500);
-            border-radius: 0;
           }
           &.sign-in-button {
             border-color: mat-color($background, background);
@@ -73,13 +72,6 @@
       background-color: mat-color($primary, 700);
       .menu-container {
         .row {
-          button {
-            & .active {
-            }
-            &.sign-in-button {
-            }
-          }
-
           .row {
             background-color: mat-color($primary, 600);
             button {
@@ -104,12 +96,6 @@
 
       .menu-container {
         .row {
-          button {
-            & .active {
-            }
-            &.sign-in-button {
-            }
-          }
           button:hover,
           button:focus {
             background-color: mat-color($accent, 200);
