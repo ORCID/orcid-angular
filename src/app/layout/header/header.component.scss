@@ -26,7 +26,7 @@ nav {
     padding: 0;
   }
 
-  .top-bar {
+  .top-bar, .top-bar-new-info {
     height: 60px;
     margin-bottom: 60px;
     .menu-container {
@@ -69,7 +69,7 @@ nav {
         }
       }
       nav {
-        .top-bar {
+        .top-bar, .top-bar-new-info {
           .menu-container {
             nav {
               .top-bar {
