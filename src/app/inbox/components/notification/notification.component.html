@@ -23,6 +23,11 @@
     [notification]="notification"
   ></app-notification-your-record-amended>
 
+  <app-notification-permission-institutional-connection
+    *ngIf="notification.notificationType === 'INSTITUTIONAL_CONNECTION'"
+    [notification]="notification"
+  ></app-notification-permission-institutional-connection>
+
   <app-notification-html
     *ngIf="notification.notificationType === 'ADMINISTRATIVE'"
     [notification]="notification"

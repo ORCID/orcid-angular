@@ -1,0 +1,17 @@
+<div class="connect">
+  You can now sign in to ORCID with your {{ notification.idpName }} account.
+</div>
+
+<div>
+  Please complete the process by connecting
+  <strong>{{ notification.source.sourceName.content }}</strong> with your ORCID
+  record.
+</div>
+
+<button
+  mat-raised-button
+  color="primary"
+  (click)="navigateTo(notification.authorizationUrl.uri)"
+>
+  Grant permission
+</button>
