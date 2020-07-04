@@ -29,7 +29,12 @@
   ></app-notification-permission-institutional-connection>
 
   <app-notification-html
-    *ngIf="notification.notificationType === 'ADMINISTRATIVE'"
+    *ngIf="
+      notification.notificationType === 'ADMINISTRATIVE' ||
+      notification.notificationType === 'CUSTOM' ||
+      notification.notificationType === 'SERVICE_ANNOUNCEMENT' ||
+      notification.notificationType === 'TIP'
+    "
     [notification]="notification"
   ></app-notification-html>
 </div>
