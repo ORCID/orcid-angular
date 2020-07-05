@@ -9,6 +9,7 @@ import {
   selector: 'app-notification-your-record-amended',
   templateUrl: './notification-your-record-amended.component.html',
   styleUrls: ['./notification-your-record-amended.component.scss'],
+  preserveWhitespaces: true,
 })
 export class NotificationYourRecordAmendedComponent implements OnInit {
   private _notification: InboxNotificationAmended
@@ -33,13 +34,13 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   getAmendedTypeLabel(item: Item) {
     switch (item.actionType) {
       case 'CREATE':
-        return 'New items added'
+        return 'New item added'
       case 'UPDATE':
-        return 'Items updated'
+        return 'Item updated'
       case 'DELETE':
-        return 'Deleted items'
+        return 'Deleted item'
       default:
-        return 'Other updates'
+        return 'Other update'
     }
   }
 

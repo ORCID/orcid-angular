@@ -541,6 +541,67 @@ export class InboxService {
         },
         subject: 'Your ORCID Record was amended',
       },
+      {
+        putCode: 80100,
+        notificationType: 'AMENDED',
+        createdDate: 1583958233787,
+        sentDate: 1584044446817,
+        readDate: 1593555970787,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-5G54N5YFOKGV5Z0X',
+            path: 'APP-5G54N5YFOKGV5Z0X',
+            host: 'qa.orcid.org',
+          },
+          sourceName: {
+            content: 'ORCID, Inc',
+          },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          "Don't update this client, it's used in the independent tests",
+        encryptedPutCode: null,
+        amendedSection: 'WORK',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'WORK',
+              itemName: 'Binuclear Iridium Complexes in Catalysis',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                external_identifiers: {
+                  externalIdentifier: [
+                    {
+                      type: 'doi',
+                      value: '10.1007/3418_2015_145a',
+                      url: {
+                        value: 'http://doi.org/10.1007/3418_2015_145a',
+                      },
+                      relationship: 'SELF',
+                    },
+                    {
+                      type: 'wosuid',
+                      value: 'WOS:000395376600003',
+                      url: {
+                        value:
+                          'https://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=Publons&SrcAuth=Publons_CEL&KeyUT=WOS:000395376600003&DestLinkType=FullRecord&DestApp=WOS_CPL',
+                      },
+                      relationship: 'SELF',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
     ])
   }
 }

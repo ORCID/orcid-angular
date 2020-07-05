@@ -1,4 +1,15 @@
-import { SourceOrcid } from './common.endpoint'
+import { SourceOrcid, Value } from './common.endpoint'
+
+interface ExternalIdentifier {
+  type: string
+  value: string
+  url: Value
+  relationship: string
+}
+
+export interface ExternalIdentifiers {
+  externalIdentifier: ExternalIdentifier[]
+}
 
 export interface SourceName {
   content: string
@@ -18,6 +29,7 @@ export interface AdditionalInfo {
   org_name?: string
   subject_container_name?: string
   group_name?: string
+  external_identifiers?: ExternalIdentifiers
 }
 
 export interface Item {

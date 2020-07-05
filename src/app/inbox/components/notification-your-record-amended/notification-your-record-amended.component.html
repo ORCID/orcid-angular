@@ -12,30 +12,34 @@
 
 <strong>{{ getAmendedTypeLabel(item) }}</strong>
 
-<ng-container
-  *ngIf="item.additionalInfo && item.additionalInfo['org_name'] != undefined"
->
-  <i>{{ item.additionalInfo['org_name'] }} </i>
-</ng-container>
+<div class="item">
+  <ng-container>-</ng-container>
 
-<ng-container *ngIf="item.itemName != null">{{ item.itemName }}</ng-container>
-
-<ng-container *ngIf="item.additionalInfo">
   <ng-container
-    *ngIf="
-      item.itemName == null && item.additionalInfo['group_name'] != undefined
-    "
-    >{{ item.additionalInfo['group_name'] }}</ng-container
+    *ngIf="item.additionalInfo && item.additionalInfo['org_name'] != undefined"
   >
-  <div *ngIf="item.additionalInfo['external_identifiers'] != undefined">
-    <ul
-      *ngFor="
-        let otherId of item.additionalInfo['external_identifiers'][
-          'externalIdentifier'
-        ]
+    <i>{{ item.additionalInfo['org_name'] }} </i>
+  </ng-container>
+
+  <ng-container *ngIf="item.itemName != null">{{ item.itemName }}</ng-container>
+
+  <ng-container *ngIf="item.additionalInfo">
+    <ng-container
+      *ngIf="
+        item.itemName == null && item.additionalInfo['group_name'] != undefined
       "
+      >{{ item.additionalInfo['group_name'] }}</ng-container
     >
-      <li>{{ otherId.type }}: {{ otherId.value }}</li>
-    </ul>
-  </div>
-</ng-container>
+    <div *ngIf="item.additionalInfo['external_identifiers'] != undefined">
+      <ul
+        *ngFor="
+          let otherId of item.additionalInfo['external_identifiers'][
+            'externalIdentifier'
+          ]
+        "
+      >
+        <li>{{ otherId.type }}: {{ otherId.value }}</li>
+      </ul>
+    </div>
+  </ng-container>
+</div>
