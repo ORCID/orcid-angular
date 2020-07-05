@@ -28,7 +28,9 @@ button.mat-button-wrap-text-with-icon {
     bottom: 0;
     width: 24px;
   }
+}
 
+button.mat-button-wrap-text-with-icon.mobile-fixed-width {
   .columns-4 & {
     span {
       display: inline-block;
@@ -37,7 +39,6 @@ button.mat-button-wrap-text-with-icon {
       word-break: break-word;
       white-space: normal;
       line-height: 24px;
-      min-height: 36px;
     }
   }
 }

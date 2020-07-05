@@ -1,18 +1,21 @@
-<div class="header">
+<div class="header" (click)="toggleNotificationContent()">
   <div class="notification-type notification mat-caption">
     <mat-checkbox class="larger"></mat-checkbox>
     <span class="dot notification-background mat-body-1"></span>
-    {{ notificationTypeLabel(notificationType) }}
+    <ng-container *ngIf="platform.columns12">
+      {{ notificationTypeLabel(notificationType) }}
+    </ng-container>
   </div>
   <div class="title mat-body-1">
     {{ notificationTitle(notification) }}
   </div>
-  {{ 'DEBUG' + notification.notificationType }}
-  <p class="mat-caption">{{ notificationDate(notification) }}</p>
-  <mat-icon class="material-icons-outlined">archived</mat-icon>
+  <div class="date-archive-container">
+    <p class="mat-caption date">{{ notificationDate(notification) }}</p>
+    <mat-icon class="material-icons-outlined">archived</mat-icon>
+  </div>
 </div>
 
-<div class="body">
+<div class="body" *ngIf="showNotificationContent">
   <app-notification-permission
     *ngIf="notification.notificationType === 'PERMISSION'"
     [notification]="notification"

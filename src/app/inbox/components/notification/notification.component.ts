@@ -9,6 +9,7 @@ import {
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
 import { DateAdapter } from '@angular/material/core'
 import { uiNotificationType } from 'src/app/types/notifications.local'
+import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -25,6 +26,8 @@ export class NotificationComponent implements OnInit {
   _notification: InboxNotification
   notificationLabel: string
   notificationType: uiNotificationType
+  platform: PlatformInfo
+  showNotificationContent = false
   @Input()
   set notification(notification: InboxNotification) {
     this._notification = notification
@@ -35,7 +38,12 @@ export class NotificationComponent implements OnInit {
     return this._notification
   }
 
-  constructor(@Inject(LOCALE_ID) public locale: string) {}
+  constructor(
+    @Inject(LOCALE_ID) public locale: string,
+    private _platform: PlatformInfoService
+  ) {
+    _platform.get().subscribe((value) => (this.platform = value))
+  }
 
   notificationTypeLabel(notificationType: uiNotificationType) {
     switch (notificationType) {
@@ -98,6 +106,10 @@ export class NotificationComponent implements OnInit {
         this.blue = true
         break
     }
+  }
+
+  toggleNotificationContent() {
+    this.showNotificationContent = !this.showNotificationContent
   }
 
   ngOnInit(): void {}
