@@ -1,9 +1,341 @@
 import { ApplicationMenuItemBasic } from 'src/app/types/menu.local'
 export const menu: ApplicationMenuItemBasic[] = [
   {
-    id: 'public-layout.about',
+    id: 'public-layout.for_researchers',
+    label: $localize`:@@public-layout.for_researchers:For Researchers`,
+    route: 'about/what-is-orcid/mission',
+    activeRoute: '/',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
+    // buttons: [
+    //   {
+    //     id: 'public-layout.for_researchers',
+    //     route: 'about/what-is-orcid/mission',
+    //     label: $localize`:@@public-layout.for_researchers`,
+
+    //     requirements: { logging: false, desktop: false },
+    //   },
+    //   {
+    //     route: 'signin',
+    //     id: 'public-layout.sign_in',
+    //     label: $localize`:@@public-layout.sign_in`,
+    //     requirements: { logging: false },
+    //   },
+    //   {
+    //     route: 'register',
+    //     id: 'login.registerOrcidId',
+    //     label: $localize`:@@login.registerOrcidId`,
+    //     requirements: { logging: false },
+    //   },
+    //   {
+    //     id: 'public-layout.my_orcid',
+    //     route: 'my-orcid',
+    //     label: $localize`:@@public-layout.my_orcid`,
+    //     requirements: {
+    //       logging: true,
+    //       requiresAll: [{ IN_DELEGATION_MODE: 'true' }],
+    //     },
+    //   },
+    //   {
+    //     route: 'my-orcid',
+    //     id: 'public-layout.my_orcid_record',
+    //     label: $localize`:@@public-layout.my_orcid_record`,
+    //     requirements: {
+    //       logging: true,
+    //       requiresAll: [{ IN_DELEGATION_MODE: 'false' }],
+    //     },
+    //   },
+    //   {
+    //     route: 'inbox',
+    //     id: 'workspace.notifications',
+    //     label: $localize`:@@workspace.notifications`,
+    //     requirements: { logging: true },
+    //   },
+    //   {
+    //     route: 'account',
+    //     id: 'public-layout.account_setting',
+    //     label: $localize`:@@public-layout.account_setting`,
+    //     requirements: { logging: true },
+    //   },
+    //   {
+    //     route: 'group/developer-tools',
+    //     id: 'workspace.developer_tools',
+    //     label: $localize`:@@workspace.developer_tools`,
+    //     requirements: {
+    //       logging: true,
+    //       requiresAll: [
+    //         {
+    //           MEMBER_MENU: 'true',
+    //         },
+    //       ],
+    //       requiresAny: [
+    //         {
+    //           DELEGATED_BY_ADMIN: 'true',
+    //         },
+    //         { IN_DELEGATION_MODE: 'false' },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     route: 'developer-tools',
+    //     id: 'workspace.developer_tools2',
+    //     label: $localize`:@@workspace.developer_tools`,
+    //     requirements: {
+    //       logging: true,
+    //       requiresAll: [
+    //         {
+    //           MEMBER_MENU: 'false',
+    //         },
+    //       ],
+    //       requiresAny: [
+    //         {
+    //           DELEGATED_BY_ADMIN: 'true',
+    //         },
+    //         { IN_DELEGATION_MODE: 'false' },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     route: 'manage-members',
+    //     id: 'admin.members.workspace_link',
+    //     label: $localize`:@@admin.members.workspace_link`,
+    //     requirements: {
+    //       logging: true,
+    //       requiresAll: [
+    //         {
+    //           ADMIN_MENU: 'true',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     route: 'admin-actions',
+    //     id: 'admin.workspace_link',
+    //     label: $localize`:@@admin.workspace_link`,
+    //     requirements: {
+    //       logging: true,
+    //       requiresAll: [
+    //         {
+    //           ADMIN_MENU: 'true',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     route: 'self-service',
+    //     id: 'workspace.self_service',
+    //     label: $localize`:@@workspace.self_service`,
+    //     requirements: {
+    //       logging: true,
+    //       requiresAll: [
+    //         {
+    //           SELF_SERVICE_MENU: 'true',
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     route: 'content/initiative',
+    //     id: 'manage_delegators.learn_more.link.text',
+    //     label: $localize`:@@manage_delegators.learn_more.link.text`,
+    //     requirements: {
+    //       logging: true,
+    //     },
+    //   },
+    //   {
+    //     route: 'about/what-is-orcid/mission',
+    //     id: 'manage_delegators.learn_more.link.text',
+    //     label: $localize`:@@manage_delegators.learn_more.link.text`,
+    //     requirements: {
+    //       logging: false,
+    //     },
+    //   },
+    // ],
+  },
+  {
+    id: 'organizations',
+    route: 'organizations',
+    label: $localize`:@@public-layout.for_organizations:For Organizations`,
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
+    buttons: [
+      {
+        label: $localize`:@@public-layout.for_organizations:For Organizations`,
+        id: 'organizations',
+        route: 'organizations',
+        requirements: { desktop: false },
+      },
+      {
+        label: $localize`:@@public-layout.funders:Funders`,
+        id: 'funders',
+        route: 'organizations/funders',
+
+        buttons: [
+          {
+            label: $localize`:@@public-layout.funders:Funders`,
+            id: 'funders',
+            route: 'organizations/funders', // TODO
+          },
+          {
+            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
+            id: 'learn',
+            route: 'organizations/funders/learnmore',
+          },
+          {
+            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
+            id: 'outreach',
+            route: 'organizations/funders/outreachresources',
+          },
+          {
+            label: $localize`:@@public-layout.membership:Membership`,
+            id: 'membership',
+            route: 'about/membership',
+          },
+        ],
+      },
+      {
+        label: $localize`:@@public-layout.research_organizations:Research Organizations`,
+        id: 'research',
+        route: 'organizations/research-orgs',
+        buttons: [
+          {
+            id: 'research',
+            label: $localize`:@@public-layout.research_organizations:Research Organizations`,
+            route: 'organizations/research-orgs',
+          },
+          {
+            id: 'learn',
+            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
+            route: 'organizations/institutions/learnmore',
+          },
+          {
+            id: 'outreach',
+            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
+            route: 'organizations/institutions/outreachresources',
+          },
+          {
+            id: 'membership',
+            label: $localize`:@@public-layout.membership:Membership`,
+            route: 'about/membership',
+          },
+          {
+            id: 'use',
+            label: $localize`:@@ngOrcid.useCases:USE CASES`,
+            route: 'organizations/institutions/usecases',
+          },
+        ],
+      },
+      {
+        id: 'publishers',
+        label: $localize`:@@public-layout.publishers:Publishers`,
+        route: 'organizations/publishers',
+
+        buttons: [
+          {
+            id: 'publishers',
+            label: $localize`:@@public-layout.publishers:Publishers`,
+            route: 'organizations/publishers',
+          },
+          {
+            id: 'learn',
+            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
+            route: 'organizations/publishers/learnmore',
+          },
+          {
+            id: 'outreach',
+            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
+            route: 'organizations/publishers/outreachresources',
+          },
+          {
+            id: 'membership',
+            label: $localize`:@@public-layout.membership:Membership`,
+            route: 'about/membership',
+          },
+        ],
+      },
+
+      {
+        id: 'associations',
+        label: $localize`:@@public-layout.associations:Associations`,
+        route: 'organizations/associations',
+
+        buttons: [
+          {
+            id: 'associations',
+            label: $localize`:@@public-layout.associations:Associations`,
+            route: 'organizations/associations',
+          },
+          {
+            id: 'learn',
+            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
+            route: 'organizations/associations/learnmore',
+          },
+          {
+            id: 'outreach',
+            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
+            route: 'organizations/associations/outreachresources',
+          },
+          {
+            id: 'membership',
+            label: $localize`:@@public-layout.membership:Membership`,
+            route: 'about/membership',
+          },
+          {
+            id: 'use',
+            label: $localize`:@@ngOrcid.useCases:USE CASES`,
+            route: 'organizations/associations/usecases',
+          },
+        ],
+      },
+
+      {
+        id: 'integrators',
+        label: $localize`:@@public-layout.integrators:Integrators`,
+        route: 'organizations/integrators',
+        buttons: [
+          {
+            id: 'integrators',
+            label: $localize`:@@public-layout.integrators:Integrators`,
+            route: 'organizations/integrators',
+          },
+          {
+            id: 'api',
+            label: $localize`:@@ngOrcid.theOrcidApi:THE ORCID API`,
+            route: 'organizations/integrators/API',
+          },
+          {
+            id: 'register',
+            label: $localize`:@@ngOrcid.registerClientApp:REGISTER A CLIENT APPLICATION`,
+            route: 'content/register-client-application-0',
+          },
+          {
+            id: 'current',
+            label: $localize`:@@ngOrcid.currentIntegrations:CURRENT INTEGRATIONS`,
+            route: 'members',
+          },
+          {
+            id: 'chart',
+            label: $localize`:@@ngOrcid.integrationsChart:INTEGRATION CHART`,
+            route: 'organizations/integrators/integration-chart',
+          },
+          {
+            id: 'beta',
+            label: $localize`:@@ngOrcid.betaTesters:BETA TESTERS`,
+            route: 'content/beta-tester-request',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'about',
     label: $localize`:@@public-layout.about:About`,
     route: 'about',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
     buttons: [
       {
         id: 'about',
@@ -204,183 +536,12 @@ export const menu: ApplicationMenuItemBasic[] = [
     ],
   },
   {
-    id: 'public-layout.membership',
-    route: 'membership',
-    label: $localize`:@@public-layout.membership:Membership`,
-
-    buttons: [
-      {
-        label: $localize`:@@public-layout.for_organizations:For Organizations`,
-        id: 'organizations',
-        route: 'organizations',
-        requirements: { desktop: false },
-      },
-      {
-        label: $localize`:@@public-layout.funders:Funders`,
-        id: 'funders',
-        route: 'organizations/funders',
-
-        buttons: [
-          {
-            label: $localize`:@@public-layout.funders:Funders`,
-            id: 'funders',
-            route: 'organizations/funders', // TODO
-          },
-          {
-            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
-            id: 'learn',
-            route: 'organizations/funders/learnmore',
-          },
-          {
-            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
-            id: 'outreach',
-            route: 'organizations/funders/outreachresources',
-          },
-          {
-            label: $localize`:@@public-layout.membership:Membership`,
-            id: 'membership',
-            route: 'about/membership',
-          },
-        ],
-      },
-      {
-        label: $localize`:@@public-layout.research_organizations:Research Organizations`,
-        id: 'research',
-        route: 'organizations/research-orgs',
-        buttons: [
-          {
-            id: 'research',
-            label: $localize`:@@public-layout.research_organizations:Research Organizations`,
-            route: 'organizations/research-orgs',
-          },
-          {
-            id: 'learn',
-            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
-            route: 'organizations/institutions/learnmore',
-          },
-          {
-            id: 'outreach',
-            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
-            route: 'organizations/institutions/outreachresources',
-          },
-          {
-            id: 'membership',
-            label: $localize`:@@public-layout.membership:Membership`,
-            route: 'about/membership',
-          },
-          {
-            id: 'use',
-            label: $localize`:@@ngOrcid.useCases:USE CASES`,
-            route: 'organizations/institutions/usecases',
-          },
-        ],
-      },
-      {
-        id: 'publishers',
-        label: $localize`:@@public-layout.publishers:Publishers`,
-        route: 'organizations/publishers',
-
-        buttons: [
-          {
-            id: 'publishers',
-            label: $localize`:@@public-layout.publishers:Publishers`,
-            route: 'organizations/publishers',
-          },
-          {
-            id: 'learn',
-            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
-            route: 'organizations/publishers/learnmore',
-          },
-          {
-            id: 'outreach',
-            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
-            route: 'organizations/publishers/outreachresources',
-          },
-          {
-            id: 'membership',
-            label: $localize`:@@public-layout.membership:Membership`,
-            route: 'about/membership',
-          },
-        ],
-      },
-
-      {
-        id: 'associations',
-        label: $localize`:@@public-layout.associations:Associations`,
-        route: 'organizations/associations',
-
-        buttons: [
-          {
-            id: 'associations',
-            label: $localize`:@@public-layout.associations:Associations`,
-            route: 'organizations/associations',
-          },
-          {
-            id: 'learn',
-            label: $localize`:@@manage_delegators.learn_more.link.text:Learn more`,
-            route: 'organizations/associations/learnmore',
-          },
-          {
-            id: 'outreach',
-            label: $localize`:@@ngOrcid.outreach:OUTREACH RESOURCES`,
-            route: 'organizations/associations/outreachresources',
-          },
-          {
-            id: 'membership',
-            label: $localize`:@@public-layout.membership:Membership`,
-            route: 'about/membership',
-          },
-          {
-            id: 'use',
-            label: $localize`:@@ngOrcid.useCases:USE CASES`,
-            route: 'organizations/associations/usecases',
-          },
-        ],
-      },
-
-      {
-        id: 'integrators',
-        label: $localize`:@@public-layout.integrators:Integrators`,
-        route: 'organizations/integrators',
-        buttons: [
-          {
-            id: 'integrators',
-            label: $localize`:@@public-layout.integrators:Integrators`,
-            route: 'organizations/integrators',
-          },
-          {
-            id: 'api',
-            label: $localize`:@@ngOrcid.theOrcidApi:THE ORCID API`,
-            route: 'organizations/integrators/API',
-          },
-          {
-            id: 'register',
-            label: $localize`:@@ngOrcid.registerClientApp:REGISTER A CLIENT APPLICATION`,
-            route: 'content/register-client-application-0',
-          },
-          {
-            id: 'current',
-            label: $localize`:@@ngOrcid.currentIntegrations:CURRENT INTEGRATIONS`,
-            route: 'members',
-          },
-          {
-            id: 'chart',
-            label: $localize`:@@ngOrcid.integrationsChart:INTEGRATION CHART`,
-            route: 'organizations/integrators/integration-chart',
-          },
-          {
-            id: 'beta',
-            label: $localize`:@@ngOrcid.betaTesters:BETA TESTERS`,
-            route: 'content/beta-tester-request',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'public-layout.documentation',
-    label: $localize`:@@public-layout.documentation:Documentation`,
+    id: 'help',
+    label: $localize`:@@public-layout.help:Help`,
     route: 'help',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
     buttons: [
       {
         id: 'help',
@@ -411,163 +572,51 @@ export const menu: ApplicationMenuItemBasic[] = [
     ],
   },
   {
+    id: 'public-layout.about',
+    label: $localize`:@@public-layout.about:About`,
+    route: 'what-is-orcid',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
+    id: 'public-layout.membership',
+    label: $localize`:@@public-layout.membership:Membership`,
+    route: 'about-membership',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
+    id: 'public-layout.documentation',
+    label: $localize`:@@public-layout.documentation:Documentation`,
+    route: 'documentation',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
     id: 'public-layout.community',
     label: $localize`:@@public-layout.community:Community`,
-    route: 'about/what-is-orcid/mission',
+    route: 'orcid-community',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
   },
   {
     id: 'public-layout.newsEvents',
     label: $localize`:@@public-layout.newsEvents:News & Events`,
-    route: 'about/what-is-orcid/mission',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
   },
   {
     id: 'public-layout.for_researchers',
     label: $localize`:@@public-layout.for_researchers:For Researchers`,
-    route: 'about/what-is-orcid/mission',
-    // buttons: [
-    //   {
-    //     id: 'public-layout.for_researchers',
-    //     route: 'about/what-is-orcid/mission',
-    //     label: $localize`:@@public-layout.for_researchers`,
-
-    //     requirements: { logging: false, desktop: false },
-    //   },
-    //   {
-    //     route: 'signin',
-    //     id: 'public-layout.sign_in',
-    //     label: $localize`:@@public-layout.sign_in`,
-    //     requirements: { logging: false },
-    //   },
-    //   {
-    //     route: 'register',
-    //     id: 'login.registerOrcidId',
-    //     label: $localize`:@@login.registerOrcidId`,
-    //     requirements: { logging: false },
-    //   },
-    //   {
-    //     id: 'public-layout.my_orcid',
-    //     route: 'my-orcid',
-    //     label: $localize`:@@public-layout.my_orcid`,
-    //     requirements: {
-    //       logging: true,
-    //       requiresAll: [{ IN_DELEGATION_MODE: 'true' }],
-    //     },
-    //   },
-    //   {
-    //     route: 'my-orcid',
-    //     id: 'public-layout.my_orcid_record',
-    //     label: $localize`:@@public-layout.my_orcid_record`,
-    //     requirements: {
-    //       logging: true,
-    //       requiresAll: [{ IN_DELEGATION_MODE: 'false' }],
-    //     },
-    //   },
-    //   {
-    //     route: 'inbox',
-    //     id: 'workspace.notifications',
-    //     label: $localize`:@@workspace.notifications`,
-    //     requirements: { logging: true },
-    //   },
-    //   {
-    //     route: 'account',
-    //     id: 'public-layout.account_setting',
-    //     label: $localize`:@@public-layout.account_setting`,
-    //     requirements: { logging: true },
-    //   },
-    //   {
-    //     route: 'group/developer-tools',
-    //     id: 'workspace.developer_tools',
-    //     label: $localize`:@@workspace.developer_tools`,
-    //     requirements: {
-    //       logging: true,
-    //       requiresAll: [
-    //         {
-    //           MEMBER_MENU: 'true',
-    //         },
-    //       ],
-    //       requiresAny: [
-    //         {
-    //           DELEGATED_BY_ADMIN: 'true',
-    //         },
-    //         { IN_DELEGATION_MODE: 'false' },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     route: 'developer-tools',
-    //     id: 'workspace.developer_tools2',
-    //     label: $localize`:@@workspace.developer_tools`,
-    //     requirements: {
-    //       logging: true,
-    //       requiresAll: [
-    //         {
-    //           MEMBER_MENU: 'false',
-    //         },
-    //       ],
-    //       requiresAny: [
-    //         {
-    //           DELEGATED_BY_ADMIN: 'true',
-    //         },
-    //         { IN_DELEGATION_MODE: 'false' },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     route: 'manage-members',
-    //     id: 'admin.members.workspace_link',
-    //     label: $localize`:@@admin.members.workspace_link`,
-    //     requirements: {
-    //       logging: true,
-    //       requiresAll: [
-    //         {
-    //           ADMIN_MENU: 'true',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     route: 'admin-actions',
-    //     id: 'admin.workspace_link',
-    //     label: $localize`:@@admin.workspace_link`,
-    //     requirements: {
-    //       logging: true,
-    //       requiresAll: [
-    //         {
-    //           ADMIN_MENU: 'true',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     route: 'self-service',
-    //     id: 'workspace.self_service',
-    //     label: $localize`:@@workspace.self_service`,
-    //     requirements: {
-    //       logging: true,
-    //       requiresAll: [
-    //         {
-    //           SELF_SERVICE_MENU: 'true',
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     route: 'content/initiative',
-    //     id: 'manage_delegators.learn_more.link.text',
-    //     label: $localize`:@@manage_delegators.learn_more.link.text`,
-    //     requirements: {
-    //       logging: true,
-    //     },
-    //   },
-    //   {
-    //     route: 'about/what-is-orcid/mission',
-    //     id: 'manage_delegators.learn_more.link.text',
-    //     label: $localize`:@@manage_delegators.learn_more.link.text`,
-    //     requirements: {
-    //       logging: false,
-    //     },
-    //   },
-    // ],
+    route: 'help-getting-started-with-your-orcid',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
   },
   {
     id: 'public-layout.sign_in',

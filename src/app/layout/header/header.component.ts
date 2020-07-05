@@ -283,16 +283,13 @@ export class HeaderComponent implements OnInit {
 
   newInfo(route) {
     if (this.togglzNewInfoSite) {
-      const info = this.newInfoRoutes
-        .filter((infoRoute) => infoRoute.old === route)
-        .map((result) => result.new)
-      if (info.length > 0) {
-        this.window.location.href = info[0]
-      } else {
-        this.window.location.href = route
-      }
+      this.navigateTo(environment.INFO_SITE + route)
     } else {
-      this.window.location.href = route
+      this.navigateTo(route)
     }
+  }
+
+  navigateTo(val) {
+    this.window.location.href = val
   }
 }
