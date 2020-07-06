@@ -56,7 +56,7 @@ export class OauthGuard implements CanActivateChild {
                 return true
               }
             } else if (value.forceLogin) {
-              return this._router.createUrlTree(['/oauth/authorize'], {
+              return this._router.createUrlTree(['/signin'], {
                 queryParams: next.queryParams,
               })
             } else {
