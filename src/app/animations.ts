@@ -22,35 +22,16 @@ export const heightAnimation = [
       '*',
       style({
         height: '0px',
-        'max-width': '0',
-        opacity: '0',
-        overflow: 'hidden',
       })
     ),
     state(
       'open',
       style({
         height: '*',
-        opacity: '1',
       })
     ),
-    transition(
-      '* => open',
-      [style({ height: '{{initialHeight}}' }), animate(250)],
-      {
-        params: { initialHeight: '0px' },
-      }
-    ),
-    transition(
-      'open => *',
-      [
-        style({ opacity: '{{closeOpacity}}', 'max-width': '{{finalWidth}}' }),
-        animate(250),
-      ],
-      {
-        params: { finalWidth: '*', closeOpacity: '0.37' },
-      }
-    ),
+    transition('* => open', [animate(100, style({ height: '*' }))]),
+    transition('open => *', animate(100, style({ height: '0px' }))),
   ]),
 ]
 

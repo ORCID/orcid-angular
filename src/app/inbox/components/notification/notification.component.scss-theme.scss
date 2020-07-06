@@ -40,6 +40,13 @@
   .body {
     border-top: solid map-get($background, light-grey) 1px;
   }
+
+  .header.cdk-keyboard-focused {
+    background-color: map-get($background, hover);
+  }
+  :host.archived .header.cdk-keyboard-focused {
+    background-color: map-get($background, focused-button);
+  }
 }
 
 @include notification-theme($orcid-app-theme);

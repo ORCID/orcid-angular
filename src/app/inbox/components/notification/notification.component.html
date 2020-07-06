@@ -1,4 +1,4 @@
-<div class="header" (click)="toggleNotificationContent()">
+<button class="header" #header (click)="toggleNotificationContent()">
   <div class="notification-type notification mat-caption">
     <mat-checkbox
       class="larger"
@@ -14,38 +14,46 @@
   </div>
   <div class="date-archive-container">
     <p class="mat-caption date">{{ notificationDate(notification) }}</p>
-    <mat-icon
-      class="material-icons-outlined"
-      [ngClass]="{ hidden: archived }"
+
+    <button
+      mat-icon-button
       (click)="archive(); $event.stopPropagation()"
-      >archived</mat-icon
+      [ngClass]="{ hidden: archived }"
     >
+      <mat-icon class="material-icons-outlined">archived</mat-icon>
+    </button>
   </div>
-</div>
+</button>
 
-<div class="body" *ngIf="showNotificationContent">
-  <app-notification-permission
-    *ngIf="notification.notificationType === 'PERMISSION'"
-    [notification]="notification"
-  ></app-notification-permission>
+<div
+  class="body"
+  [@heightAnimationState]="state"
+  [hidden]="!showNotificationContent"
+>
+  <div class="body-container">
+    <app-notification-permission
+      *ngIf="notification.notificationType === 'PERMISSION'"
+      [notification]="notification"
+    ></app-notification-permission>
 
-  <app-notification-your-record-amended
-    *ngIf="notification.notificationType === 'AMENDED'"
-    [notification]="notification"
-  ></app-notification-your-record-amended>
+    <app-notification-your-record-amended
+      *ngIf="notification.notificationType === 'AMENDED'"
+      [notification]="notification"
+    ></app-notification-your-record-amended>
 
-  <app-notification-permission-institutional-connection
-    *ngIf="notification.notificationType === 'INSTITUTIONAL_CONNECTION'"
-    [notification]="notification"
-  ></app-notification-permission-institutional-connection>
+    <app-notification-permission-institutional-connection
+      *ngIf="notification.notificationType === 'INSTITUTIONAL_CONNECTION'"
+      [notification]="notification"
+    ></app-notification-permission-institutional-connection>
 
-  <app-notification-html
-    *ngIf="
-      notification.notificationType === 'ADMINISTRATIVE' ||
-      notification.notificationType === 'CUSTOM' ||
-      notification.notificationType === 'SERVICE_ANNOUNCEMENT' ||
-      notification.notificationType === 'TIP'
-    "
-    [notification]="notification"
-  ></app-notification-html>
+    <app-notification-html
+      *ngIf="
+        notification.notificationType === 'ADMINISTRATIVE' ||
+        notification.notificationType === 'CUSTOM' ||
+        notification.notificationType === 'SERVICE_ANNOUNCEMENT' ||
+        notification.notificationType === 'TIP'
+      "
+      [notification]="notification"
+    ></app-notification-html>
+  </div>
 </div>
