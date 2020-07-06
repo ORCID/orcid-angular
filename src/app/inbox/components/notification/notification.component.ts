@@ -10,6 +10,7 @@ import { InboxNotification } from 'src/app/types/notifications.endpoint'
 import { DateAdapter } from '@angular/material/core'
 import { uiNotificationType } from 'src/app/types/notifications.local'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
+import { InboxService } from 'src/app/core/inbox/inbox.service'
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -33,6 +34,7 @@ export class NotificationComponent implements OnInit {
     this._notification = notification
     this.notificationType = this.getNotificationType(notification)
     this.setNotificationColor(this.notificationType)
+    this.archived = !!notification.archivedDate
   }
   get notification() {
     return this._notification
@@ -40,7 +42,8 @@ export class NotificationComponent implements OnInit {
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _inbox: InboxService
   ) {
     _platform.get().subscribe((value) => (this.platform = value))
   }
@@ -110,6 +113,10 @@ export class NotificationComponent implements OnInit {
 
   toggleNotificationContent() {
     this.showNotificationContent = !this.showNotificationContent
+  }
+
+  archive() {
+    this._inbox.archive(this.notification.putCode).subscribe()
   }
 
   ngOnInit(): void {}

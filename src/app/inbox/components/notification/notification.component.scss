@@ -5,6 +5,7 @@
   flex-direction: column;
   border-radius: 4px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .header {
@@ -48,8 +49,11 @@ mat-checkbox {
 :host:not(.archived) {
   .title {
     font-weight: bold;
-    flex-grow: 1;
   }
+}
+
+.title {
+  flex-grow: 1;
 }
 
 .columns-12 :host {
@@ -64,6 +68,7 @@ mat-checkbox {
 
 .date {
   margin-left: $spacing-base;
+  font-weight: bold;
 }
 .columns-8 :host {
   .title {
@@ -85,4 +90,8 @@ mat-checkbox {
   font-weight: bold;
   display: flex;
   align-items: center;
+}
+
+.hidden {
+  visibility: hidden;
 }

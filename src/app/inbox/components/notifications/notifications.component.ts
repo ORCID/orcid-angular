@@ -12,7 +12,7 @@ export class NotificationsComponent implements OnInit {
   $notifications: Observable<InboxNotification[]>
 
   constructor(private _inbox: InboxService) {
-    this.$notifications = _inbox.getNotifications()
+    this.$notifications = _inbox.get()
   }
 
   ngOnInit(): void {}

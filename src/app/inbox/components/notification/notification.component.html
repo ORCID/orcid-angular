@@ -1,6 +1,9 @@
 <div class="header" (click)="toggleNotificationContent()">
   <div class="notification-type notification mat-caption">
-    <mat-checkbox class="larger"></mat-checkbox>
+    <mat-checkbox
+      class="larger"
+      (click)="$event.stopPropagation()"
+    ></mat-checkbox>
     <span class="dot notification-background mat-body-1"></span>
     <ng-container *ngIf="platform.columns12">
       {{ notificationTypeLabel(notificationType) }}
@@ -11,7 +14,12 @@
   </div>
   <div class="date-archive-container">
     <p class="mat-caption date">{{ notificationDate(notification) }}</p>
-    <mat-icon class="material-icons-outlined">archived</mat-icon>
+    <mat-icon
+      class="material-icons-outlined"
+      [ngClass]="{ hidden: archived }"
+      (click)="archive(); $event.stopPropagation()"
+      >archived</mat-icon
+    >
   </div>
 </div>
 

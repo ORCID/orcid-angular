@@ -2,8 +2,8 @@
 // tslint:disable: max-line-length
 // tslint:disable: quotemark
 
-import { Injectable, LOCALE_ID, Inject } from '@angular/core'
-import { of } from 'rxjs'
+import { Injectable, LOCALE_ID, Inject, ErrorHandler } from '@angular/core'
+import { of, Observable, ReplaySubject } from 'rxjs'
 import {
   InboxNotification,
   InboxNotificationAmended,
@@ -11,14 +11,68 @@ import {
   InboxNotificationInstitutional,
   InboxNotificationPermission,
 } from '../../types/notifications.endpoint'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { environment } from 'src/environments/environment'
+import { retry } from 'rxjs/internal/operators/retry'
+import { catchError, tap, switchMap } from 'rxjs/operators'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class InboxService {
-  constructor() {}
+  private headers: HttpHeaders
+  private inboxSubject = new ReplaySubject<
+    (
+      | InboxNotificationAmended
+      | InboxNotificationHtml
+      | InboxNotificationInstitutional
+      | InboxNotificationPermission
+    )[]
+  >(1)
 
-  getNotifications(value = 0) {
+  lastEmitedValue: (
+    | InboxNotificationAmended
+    | InboxNotificationHtml
+    | InboxNotificationInstitutional
+    | InboxNotificationPermission
+  )[]
+
+  constructor(
+    private _http: HttpClient,
+    private _errorHandler: ErrorHandlerService
+  ) {
+    this.headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    })
+  }
+
+  get(): Observable<
+    (
+      | InboxNotificationAmended
+      | InboxNotificationHtml
+      | InboxNotificationInstitutional
+      | InboxNotificationPermission
+    )[]
+  > {
+    return this.getNotifications().pipe(
+      tap((data) => {
+        this.lastEmitedValue = data
+        this.inboxSubject.next(data)
+      }),
+      switchMap(() => this.inboxSubject.asObservable())
+    )
+  }
+
+  private getNotifications(): Observable<
+    (
+      | InboxNotificationAmended
+      | InboxNotificationHtml
+      | InboxNotificationInstitutional
+      | InboxNotificationPermission
+    )[]
+  > {
     // MOCK NOTIFICATIONS
     return of<
       (
@@ -602,6 +656,447 @@ export class InboxService {
         },
         subject: 'Your ORCID Record was amended',
       },
+      {
+        putCode: 81774,
+        notificationType: 'AMENDED',
+        createdDate: 1587147439786,
+        sentDate: 1587234047694,
+        readDate: 1593555984665,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-BFU1564HNFNRSX21',
+            path: 'APP-BFU1564HNFNRSX21',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'Small publisher' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
+        encryptedPutCode: null,
+        amendedSection: 'RESEARCH_RESOURCE',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'RESEARCH_RESOURCE',
+              itemName: 'The third best ever Giant Laser Award',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {},
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 81773,
+        notificationType: 'AMENDED',
+        createdDate: 1587147040002,
+        sentDate: 1587147349052,
+        readDate: 1593555983809,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-BFU1564HNFNRSX21',
+            path: 'APP-BFU1564HNFNRSX21',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'Small publisher' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
+        encryptedPutCode: null,
+        amendedSection: 'RESEARCH_RESOURCE',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'RESEARCH_RESOURCE',
+              itemName: 'The second best ever Giant Laser Award',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {},
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 80101,
+        notificationType: 'AMENDED',
+        createdDate: 1583958705300,
+        sentDate: 1584044446819,
+        readDate: 1593555969293,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-5G54N5YFOKGV5Z0X',
+            path: 'APP-5G54N5YFOKGV5Z0X',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'ORCID, Inc' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          "Don't update this client, it's used in the independent tests",
+        encryptedPutCode: null,
+        amendedSection: 'PEER_REVIEW',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'PEER_REVIEW',
+              itemName: 'Chemical communications.',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                subject_container_name: null,
+                group_name: 'Chemical communications.',
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 80100,
+        notificationType: 'AMENDED',
+        createdDate: 1583958233787,
+        sentDate: 1584044446817,
+        readDate: 1593555970787,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-5G54N5YFOKGV5Z0X',
+            path: 'APP-5G54N5YFOKGV5Z0X',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'ORCID, Inc' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          "Don't update this client, it's used in the independent tests",
+        encryptedPutCode: null,
+        amendedSection: 'WORK',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'WORK',
+              itemName: 'Binuclear Iridium Complexes in Catalysis',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                external_identifiers: {
+                  externalIdentifier: [
+                    {
+                      type: 'doi',
+                      value: '10.1007/3418_2015_145a',
+                      url: { value: 'http://doi.org/10.1007/3418_2015_145a' },
+                      relationship: 'SELF',
+                    },
+                    {
+                      type: 'wosuid',
+                      value: 'WOS:000395376600003',
+                      url: {
+                        value:
+                          'https://gateway.webofknowledge.com/gateway/Gateway.cgi?GWVersion=2&SrcApp=Publons&SrcAuth=Publons_CEL&KeyUT=WOS:000395376600003&DestLinkType=FullRecord&DestApp=WOS_CPL',
+                      },
+                      relationship: 'SELF',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 80099,
+        notificationType: 'AMENDED',
+        createdDate: 1583957960661,
+        sentDate: 1584044446815,
+        readDate: 1593555975217,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-5G54N5YFOKGV5Z0X',
+            path: 'APP-5G54N5YFOKGV5Z0X',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'ORCID, Inc' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          "Don't update this client, it's used in the independent tests",
+        encryptedPutCode: null,
+        amendedSection: 'PEER_REVIEW',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'PEER_REVIEW',
+              itemName: 'Chemical communications.',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                subject_container_name: null,
+                group_name: 'Chemical communications.',
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 80098,
+        notificationType: 'AMENDED',
+        createdDate: 1583957954784,
+        sentDate: 1584044446811,
+        readDate: 1593555977063,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-5G54N5YFOKGV5Z0X',
+            path: 'APP-5G54N5YFOKGV5Z0X',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'ORCID, Inc' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          "Don't update this client, it's used in the independent tests",
+        encryptedPutCode: null,
+        amendedSection: 'PEER_REVIEW',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'PEER_REVIEW',
+              itemName: 'Chemical communications.',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                subject_container_name: null,
+                group_name: 'Chemical communications.',
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 80097,
+        notificationType: 'AMENDED',
+        createdDate: 1583957704181,
+        sentDate: 1583957747327,
+        readDate: 1593555979094,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-5G54N5YFOKGV5Z0X',
+            path: 'APP-5G54N5YFOKGV5Z0X',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'ORCID, Inc' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          "Don't update this client, it's used in the independent tests",
+        encryptedPutCode: null,
+        amendedSection: 'PEER_REVIEW',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'PEER_REVIEW',
+              itemName: 'Chemical communications.',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                subject_container_name: null,
+                group_name: 'Chemical communications.',
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 76790,
+        notificationType: 'AMENDED',
+        createdDate: 1579116705960,
+        sentDate: 1579203049150,
+        readDate: 1593555978324,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-BFU1564HNFNRSX21',
+            path: 'APP-BFU1564HNFNRSX21',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'Small publisher' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
+        encryptedPutCode: null,
+        amendedSection: 'EMPLOYMENT',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'EMPLOYMENT',
+              itemName: 'employment:role-titles',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                department: 'employment:department-name',
+                org_name: 'Universities of M',
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 76789,
+        notificationType: 'AMENDED',
+        createdDate: 1579116569942,
+        sentDate: 1579116647542,
+        readDate: 1593555981621,
+        archivedDate: null,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-BFU1564HNFNRSX21',
+            path: 'APP-BFU1564HNFNRSX21',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'Small publisher' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
+        encryptedPutCode: null,
+        amendedSection: 'EMPLOYMENT',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'EMPLOYMENT',
+              itemName: 'employment:role-titles',
+              externalIdentifier: null,
+              actionType: 'CREATE',
+              additionalInfo: {
+                department: 'employment:department-name',
+                org_name: 'Universities of Michiganer',
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
+      {
+        putCode: 68854,
+        notificationType: 'AMENDED',
+        createdDate: 1571331038642,
+        sentDate: 1571339440258,
+        readDate: 1593556475638,
+        archivedDate: 1587171966064,
+        source: {
+          sourceOrcid: null,
+          sourceClientId: {
+            uri: 'https://qa.orcid.org/client/APP-5G54N5YFOKGV5Z0X',
+            path: 'APP-5G54N5YFOKGV5Z0X',
+            host: 'qa.orcid.org',
+          },
+          sourceName: { content: 'ORCID, Inc' },
+          assertionOriginOrcid: null,
+          assertionOriginClientId: null,
+          assertionOriginName: null,
+        },
+        sourceDescription:
+          "Don't update this client, it's used in the independent tests",
+        encryptedPutCode: null,
+        amendedSection: 'PEER_REVIEW',
+        items: {
+          items: [
+            {
+              putCode: null,
+              itemType: 'PEER_REVIEW',
+              itemName: 'Kirjastolehti.',
+              externalIdentifier: null,
+              actionType: 'UPDATE',
+              additionalInfo: {
+                subject_container_name: null,
+                group_name: 'Kirjastolehti.',
+              },
+            },
+          ],
+        },
+        subject: 'Your ORCID Record was amended',
+      },
     ])
+  }
+
+  archive(
+    code: number
+  ): Observable<
+    | InboxNotificationAmended
+    | InboxNotificationHtml
+    | InboxNotificationInstitutional
+    | InboxNotificationPermission
+  > {
+    // return this._http
+    //   .post<
+    //     | InboxNotificationAmended
+    //     | InboxNotificationHtml
+    //     | InboxNotificationInstitutional
+    //     | InboxNotificationPermission
+    //   >(environment.BASE_URL + `inbox/${code}/archive.json`, code, {
+    //     headers: this.headers,
+    //   })
+    return of({ putCode: code } as InboxNotificationAmended).pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error)),
+      // remove the archive notification from and update subject notifications list
+      tap((data) => {
+        this.lastEmitedValue = this.lastEmitedValue.filter(
+          (value) => value.putCode !== data.putCode
+        )
+        this.inboxSubject.next(this.lastEmitedValue)
+      })
+    )
   }
 }
