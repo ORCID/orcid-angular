@@ -1071,7 +1071,7 @@ export class InboxService {
   }
 
   archive(
-    code: number
+    code: number | string
   ): Observable<
     | InboxNotificationAmended
     | InboxNotificationHtml

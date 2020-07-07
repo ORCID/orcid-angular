@@ -88,14 +88,10 @@ export class NotificationsComponent implements OnInit {
     const $archiveList = Object.keys(this.form.controls)
       .map((key) => {
         if (this.form.controls[key].value) {
-          console.log(key)
-          return this._inbox.archive(parseInt(key, 10))
+          return this._inbox.archive(key)
         }
       })
       .filter((value) => value)
-    console.log($archiveList)
-    forkJoin($archiveList).subscribe((value) => {
-      console.log(value)
-    })
+    forkJoin($archiveList).subscribe()
   }
 }
