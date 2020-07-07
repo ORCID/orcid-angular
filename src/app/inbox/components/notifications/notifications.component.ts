@@ -1,5 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core'
-import { Observable, ObjectUnsubscribedError, Subscription } from 'rxjs'
+import {
+  Observable,
+  ObjectUnsubscribedError,
+  Subscription,
+  concat,
+  forkJoin,
+} from 'rxjs'
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
 import { FormBuilder, FormGroup } from '@angular/forms'
@@ -75,6 +81,21 @@ export class NotificationsComponent implements OnInit {
           }
         }
       )
+    })
+  }
+
+  archivedSelected() {
+    const $archiveList = Object.keys(this.form.controls)
+      .map((key) => {
+        if (this.form.controls[key].value) {
+          console.log(key)
+          return this._inbox.archive(parseInt(key, 10))
+        }
+      })
+      .filter((value) => value)
+    console.log($archiveList)
+    forkJoin($archiveList).subscribe((value) => {
+      console.log(value)
     })
   }
 }
