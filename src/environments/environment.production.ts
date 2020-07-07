@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  API_NEWS: 'https://orcid.org/blog/feed',
+  API_NEWS_DEPRECATED: 'https://orcid.org/blog/feed',
+  API_NEWS: 'https://info.orcid.org/feed',
   API_PUB: '//pub.orcid.org/v3.0',
   API_WEB: '//orcid.org/',
   BASE_URL: '//orcid.org/',

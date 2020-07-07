@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
+  API_NEWS_DEPRECATED: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.dev.orcid.org/v3.0',
   API_WEB: '//dev.orcid.org/',
   BASE_URL: '//dev.orcid.org/',
