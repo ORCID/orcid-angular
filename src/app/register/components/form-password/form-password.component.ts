@@ -36,6 +36,7 @@ import { RegisterForm } from 'src/app/types/register.endpoint'
       multi: true,
     },
   ],
+  preserveWhitespaces: true,
 })
 export class FormPasswordComponent extends BaseForm implements OnInit {
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
