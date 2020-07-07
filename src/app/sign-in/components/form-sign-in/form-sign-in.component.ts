@@ -20,6 +20,7 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { DeclareOauthSession } from '../../../types/declareOauthSession.endpoint'
 import { OauthService } from '../../../core/oauth/oauth.service'
+import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -57,7 +58,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
     private _oauthService: OauthService,
-    private _router: Router
+    private _router: Router,
+    private _gtag: GoogleAnalyticsService,
   ) {
     this.signInLocal.type = this.signInType
     _platformInfo.get().subscribe((platform) => {
@@ -111,8 +113,28 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
         if (data.success) {
           if (data.url.toLowerCase().includes('oauth/authorize')) {
+            this._gtag
+              .reportEvent(
+                'RegGrowth',
+                'Sign-In',
+                'OAuth'
+              )
+              .subscribe(
+                () => (this.window.location.href = data.url),
+                () => (this.window.location.href = data.url)
+              )
             this.updateOauthSession(this.signInLocal.params)
           } else {
+            this._gtag
+              .reportEvent(
+                'RegGrowth',
+                'Sign-In',
+                'Website'
+              )
+              .subscribe(
+                () => (this.window.location.href = data.url),
+                () => (this.window.location.href = data.url)
+              )
             this.navigateTo(data.url)
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
