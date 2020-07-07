@@ -7,12 +7,19 @@
 app-notification {
   margin-bottom: $spacing-base;
 }
-.controls {
+.control-container {
   display: flex;
   flex-direction: row;
   margin-left: $spacing-base;
-  align-items: center;
   margin-bottom: $spacing-base;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
   mat-checkbox {
     margin-right: $spacing-small;

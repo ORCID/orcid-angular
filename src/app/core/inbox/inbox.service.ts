@@ -1090,11 +1090,14 @@ export class InboxService {
     return of({ putCode: code } as InboxNotificationAmended).pipe(
       retry(3),
       catchError((error) => this._errorHandler.handleError(error)),
-      // remove the archive notification from and update subject notifications list
+      // set archive notification archived date to 1
+      // when the backend archive the notification
       tap((data) => {
-        this.lastEmitedValue = this.lastEmitedValue.filter(
-          (value) => value.putCode !== data.putCode
-        )
+        this.lastEmitedValue.forEach((value) => {
+          if (value.putCode === code) {
+            value.archivedDate = 1
+          }
+        })
         this.inboxSubject.next(this.lastEmitedValue)
       })
     )

@@ -20,6 +20,7 @@ export class NotificationsComponent implements OnInit {
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
   loading = true
+  showArchived = true
 
   indeterminate = false
   changesSubscription: Subscription
@@ -95,5 +96,9 @@ export class NotificationsComponent implements OnInit {
       })
       .filter((value) => value)
     forkJoin($archiveList).subscribe()
+  }
+
+  toggleShowArchived() {
+    this.showArchived = !this.showArchived
   }
 }

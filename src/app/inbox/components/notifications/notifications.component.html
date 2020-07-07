@@ -1,29 +1,36 @@
-<div class="controls">
-  <mat-checkbox
-    [(ngModel)]="generalCheck"
-    [(indeterminate)]="indeterminate"
-  ></mat-checkbox>
-  <div class="archive-label mat-body-1">Select All</div>
-  <button
-    mat-raised-button
-    color="primary"
-    class="mat-button-wrap-text-with-icon"
-    (click)="archivedSelected()"
-  >
-    <mat-icon class="material-icons-outlined">archive</mat-icon>
-    <div>Archive selected</div>
-  </button>
-
-  <a>Hide archived</a>
+<div class="control-container">
+  <div class="controls">
+    <mat-checkbox
+      [(ngModel)]="generalCheck"
+      [(indeterminate)]="indeterminate"
+    ></mat-checkbox>
+    <div class="archive-label mat-body-1">Select All</div>
+    <button
+      mat-raised-button
+      color="primary"
+      class="mat-button-wrap-text-with-icon"
+      (click)="archivedSelected()"
+    >
+      <mat-icon class="material-icons-outlined">archive</mat-icon>
+      <div>Archive selected</div>
+    </button>
+  </div>
+  <a (click)="toggleShowArchived()"
+    ><ng-container *ngIf="showArchived">Hide archived</ng-container>
+    <ng-container *ngIf="!showArchived">Show archived</ng-container>
+  </a>
 </div>
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
 <ng-container *ngIf="form && notifications" [formGroup]="form">
-  <app-notification
-    *ngFor="let item of notifications"
-    [notification]="item"
-    [formControl]="form.controls[item.putCode]"
-  ></app-notification>
+  <ng-container *ngFor="let item of notifications">
+    <app-notification
+      *ngIf="!item.archivedDate || showArchived"
+      [notification]="item"
+      [formControl]="form.controls[item.putCode]"
+      [archived]="!!item.archivedDate"
+    ></app-notification>
+  </ng-container>
 </ng-container>
 
 <div class="notifications-amount mat-body-1">

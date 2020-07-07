@@ -51,7 +51,7 @@ export class NotificationComponent
   implements OnInit, AfterViewInit, ControlValueAccessor {
   state = 'close'
   @ViewChild('header') header: ElementRef<HTMLElement>
-  @HostBinding('class.archived') archived = false
+  @HostBinding('class.archived') _archived = false
   @HostBinding('class.green') green = false
   @HostBinding('class.orange') orange = true
   @HostBinding('class.blue') blue = false
@@ -66,11 +66,17 @@ export class NotificationComponent
   @HostBinding('class.mat-elevation-z2') showNotificationContent = false
 
   @Input()
+  set archived(value) {
+    this._archived = value
+  }
+  get archived() {
+    return this._archived
+  }
+  @Input()
   set notification(notification: InboxNotification) {
     this._notification = notification
     this.notificationType = this.getNotificationType(notification)
     this.setNotificationColor(this.notificationType)
-    this.archived = !!notification.archivedDate
   }
   get notification() {
     return this._notification
