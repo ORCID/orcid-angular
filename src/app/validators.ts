@@ -50,10 +50,10 @@ export class OrcidValidators {
 
       const firstValue = caseSensitive
         ? control.value
-        : control.value.lowerCase()
+        : control.value.toLowerCase()
       const secondValue = caseSensitive
         ? confirmControl.value
-        : confirmControl.value.lowerCase()
+        : confirmControl.value.toLowerCase()
 
       if (firstValue !== secondValue) {
         hasErrors = true

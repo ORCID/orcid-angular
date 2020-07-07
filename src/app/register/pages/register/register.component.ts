@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { RequestInfoForm, OauthParameters } from 'src/app/types'
+import { EMPTY } from 'rxjs'
 
 @Component({
   selector: 'app-register',
@@ -71,6 +72,7 @@ export class RegisterComponent implements OnInit {
               })
             )
           }
+          return EMPTY
         })
       )
       .subscribe()
