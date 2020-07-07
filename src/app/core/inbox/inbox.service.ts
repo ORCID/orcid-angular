@@ -14,7 +14,7 @@ import {
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
 import { retry } from 'rxjs/internal/operators/retry'
-import { catchError, tap, switchMap } from 'rxjs/operators'
+import { catchError, tap, switchMap, delay } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -1067,7 +1067,7 @@ export class InboxService {
         },
         subject: 'Your ORCID Record was amended',
       },
-    ])
+    ]).pipe(delay(2000))
   }
 
   archive(

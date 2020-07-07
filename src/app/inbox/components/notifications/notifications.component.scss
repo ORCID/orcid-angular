@@ -5,13 +5,14 @@
   max-width: 100%;
 }
 app-notification {
-  margin-top: $spacing-base;
+  margin-bottom: $spacing-base;
 }
 .controls {
   display: flex;
   flex-direction: row;
   margin-left: $spacing-base;
   align-items: center;
+  margin-bottom: $spacing-base;
 
   mat-checkbox {
     margin-right: $spacing-small;
@@ -33,4 +34,9 @@ mat-icon {
   .notifications-amount-label {
     margin-right: $spacing-base;
   }
+}
+
+.no-messages {
+  margin-top: $spacing-base;
+  margin-bottom: $spacing-base;
 }

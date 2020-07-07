@@ -19,6 +19,7 @@ export class NotificationsComponent implements OnInit {
   notifications: InboxNotification[]
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
+  loading = true
 
   indeterminate = false
   changesSubscription: Subscription
@@ -44,8 +45,9 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._fromBuilder.group({})
-
+    this.loading = true
     this._inbox.get().subscribe((value) => {
+      this.loading = false
       // Remove previous setup change detection
       if (this.changesSubscription) {
         this.changesSubscription.unsubscribe()
@@ -88,7 +90,7 @@ export class NotificationsComponent implements OnInit {
     const $archiveList = Object.keys(this.form.controls)
       .map((key) => {
         if (this.form.controls[key].value) {
-          return this._inbox.archive(key)
+          return this._inbox.archive(parseInt(key, 10))
         }
       })
       .filter((value) => value)

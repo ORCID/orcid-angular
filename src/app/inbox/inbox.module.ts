@@ -17,6 +17,7 @@ import { NotificationHtmlComponent } from './components/notification-html/notifi
 // tslint:disable-next-line: max-line-length
 import { NotificationPermissionInstitutionalConnectionComponent } from './components/notification-permission-institutional-connection/notification-permission-institutional-connection.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
     A11yLinkModule,
     ReactiveFormsModule,
     FormsModule,
+    MatProgressBarModule,
   ],
 })
 export class InboxModule {}

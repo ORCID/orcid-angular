@@ -16,6 +16,7 @@
 
   <a>Hide archived</a>
 </div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
 <ng-container *ngIf="form && notifications" [formGroup]="form">
   <app-notification
