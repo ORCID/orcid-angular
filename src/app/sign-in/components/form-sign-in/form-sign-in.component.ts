@@ -199,22 +199,21 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
           .subscribe(
-            () => {
-              this._router.navigate(['/oauth/authorize'], {
-                queryParams: {
-                  client_id: this.signInLocal.params.client_id,
-                  response_type: this.signInLocal.params.response_type,
-                  scope: this.signInLocal.params.scope,
-                  redirect_uri: this.signInLocal.params.redirect_uri,
-                },
-              })
-            },
-            () => {
-              // TODO @DanielPalafox display error using a toaster
-              console.log('Error oauth' + JSON.stringify(requestInfoForm.error))
-            }
+            () => this.oauthAuthorize(),
+            () => this.oauthAuthorize()
           )
       })
+  }
+
+  oauthAuthorize() {
+    this._router.navigate(['/oauth/authorize'], {
+      queryParams: {
+        client_id: this.signInLocal.params.client_id,
+        response_type: this.signInLocal.params.response_type,
+        scope: this.signInLocal.params.scope,
+        redirect_uri: this.signInLocal.params.redirect_uri,
+      },
+    })
   }
 
   updateUsername(email) {
