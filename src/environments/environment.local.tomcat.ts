@@ -2,7 +2,8 @@ import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-
 
 export const environment = {
   production: true,
-  API_NEWS: 'https://localhost/blog/feed',
+  API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
+  API_NEWS_DEPRECATED: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.localhost/v3.0',
   API_WEB: '//localhost/',
   BASE_URL: '//localhost/',

@@ -2,6 +2,7 @@
 // to make the local environment work with Sandbox an alternative needs to be use to avoid CORS errors
 export const environment = {
   production: false,
+  API_NEWS_DEPRECATED: 'https://orcid.herokuapp.com/https://orcid.org/feed',
   API_NEWS: 'https://orcid.herokuapp.com/https://orcid.org/blog/feed',
   API_PUB: '//pub.localhost/v3.0',
   API_WEB: 'https://orcid.herokuapp.com/https://sandbox.orcid.org/',
