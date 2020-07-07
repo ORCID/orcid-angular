@@ -18,6 +18,7 @@
   <a (click)="toggleShowArchived()"
     ><ng-container *ngIf="showArchived">Hide archived</ng-container>
     <ng-container *ngIf="!showArchived">Show archived</ng-container>
+    ({{ archiveNotifications.length }})
   </a>
 </div>
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
@@ -31,6 +32,14 @@
       [archived]="!!item.archivedDate"
     ></app-notification>
   </ng-container>
+</ng-container>
+
+<ng-container
+  *ngIf="
+    (!showArchived && notifications.length == archiveNotifications.length) ||
+    (showArchived && notifications.length == 0)
+  "
+  >There are no messages at the moment.
 </ng-container>
 
 <div class="notifications-amount mat-body-1">

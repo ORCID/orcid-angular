@@ -14,21 +14,25 @@ app-notification {
   margin-bottom: $spacing-base;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  .controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    mat-checkbox {
+      margin-right: $spacing-small;
+      margin-bottom: 4px; // Fix misalignment
+    }
+    .archive-label {
+      margin-right: $spacing-base;
+    }
+  }
+  a {
+    line-height: 32px;
+  }
 }
 
-.controls {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  mat-checkbox {
-    margin-right: $spacing-small;
-    margin-bottom: 4px; // Fix misalignment
-  }
-  .archive-label {
-    margin-right: $spacing-base;
-  }
-}
 mat-icon {
   padding-top: 4px; // fix margin
 }
@@ -38,6 +42,7 @@ mat-icon {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   .notifications-amount-label {
     margin-right: $spacing-base;
   }

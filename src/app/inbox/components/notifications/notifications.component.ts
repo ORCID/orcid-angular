@@ -16,6 +16,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
   styleUrls: ['./notifications.component.scss'],
 })
 export class NotificationsComponent implements OnInit {
+  archiveNotifications: InboxNotification[]
   notifications: InboxNotification[]
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
@@ -63,6 +64,9 @@ export class NotificationsComponent implements OnInit {
         )
       })
       this.notifications = value
+      this.archiveNotifications = this.notifications.filter(
+        (notification) => notification.archivedDate
+      )
       this.generalCheck = false
 
       // detect changes on the checkboxes form
