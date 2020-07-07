@@ -59,7 +59,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _signIn: SignInService,
     private _oauthService: OauthService,
     private _router: Router,
-    private _gtag: GoogleAnalyticsService,
+    private _gtag: GoogleAnalyticsService
   ) {
     this.signInLocal.type = this.signInType
     _platformInfo.get().subscribe((platform) => {
@@ -113,28 +113,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
         if (data.success) {
           if (data.url.toLowerCase().includes('oauth/authorize')) {
-            this._gtag
-              .reportEvent(
-                'RegGrowth',
-                'Sign-In',
-                'OAuth'
-              )
-              .subscribe(
-                () => (this.window.location.href = data.url),
-                () => (this.window.location.href = data.url)
-              )
             this.updateOauthSession(this.signInLocal.params)
           } else {
-            this._gtag
-              .reportEvent(
-                'RegGrowth',
-                'Sign-In',
-                'Website'
-              )
-              .subscribe(
-                () => (this.window.location.href = data.url),
-                () => (this.window.location.href = data.url)
-              )
+            this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
+              () => (this.window.location.href = data.url),
+              () => (this.window.location.href = data.url)
+            )
             this.navigateTo(data.url)
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
@@ -213,6 +197,19 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     this._oauthService
       .updateOauthSession(value)
       .subscribe((requestInfoForm) => {
+        this._gtag
+          .reportEvent(
+            'RegGrowth',
+            'Sign-In',
+            'OAuth ' +
+              requestInfoForm.memberName +
+              ' - ' +
+              requestInfoForm.clientName
+          )
+          .subscribe(
+            () => (this.window.location.href = requestInfoForm.redirectUrl),
+            () => (this.window.location.href = requestInfoForm.redirectUrl)
+          )
         this._router.navigate(['/oauth/authorize'], {
           queryParams: {
             client_id: this.signInLocal.params.client_id,
