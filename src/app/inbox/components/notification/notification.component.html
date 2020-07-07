@@ -1,8 +1,9 @@
 <button class="header" #header (click)="toggleNotificationContent()">
-  <div class="notification-type notification mat-caption">
+  <div class="notification-type notification mat-caption" [formGroup]="form">
     <mat-checkbox
       class="larger"
       (click)="$event.stopPropagation()"
+      formControlName="selected"
     ></mat-checkbox>
     <span class="dot notification-background mat-body-1"></span>
     <ng-container *ngIf="platform.columns12">

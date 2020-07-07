@@ -1,5 +1,8 @@
 <div class="controls">
-  <mat-checkbox></mat-checkbox>
+  <mat-checkbox
+    [(ngModel)]="generalCheck"
+    [(indeterminate)]="indeterminate"
+  ></mat-checkbox>
   <div class="archive-label mat-body-1">Select All</div>
   <button
     mat-raised-button
@@ -9,12 +12,17 @@
     <mat-icon class="material-icons-outlined">archive</mat-icon>
     <div>Archive selected</div>
   </button>
+
+  <a>Hide archived</a>
 </div>
 
-<app-notification
-  *ngFor="let item of $notifications | async"
-  [notification]="item"
-></app-notification>
+<ng-container *ngIf="form && notifications" [formGroup]="form">
+  <app-notification
+    *ngFor="let item of notifications"
+    [notification]="item"
+    [formControl]="form.controls[item.putCode]"
+  ></app-notification>
+</ng-container>
 
 <div class="notifications-amount mat-body-1">
   <div class="notifications-amount-label">

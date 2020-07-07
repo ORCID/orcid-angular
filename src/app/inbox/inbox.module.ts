@@ -16,6 +16,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { NotificationHtmlComponent } from './components/notification-html/notification-html.component'
 // tslint:disable-next-line: max-line-length
 import { NotificationPermissionInstitutionalConnectionComponent } from './components/notification-permission-institutional-connection/notification-permission-institutional-connection.component'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { NotificationPermissionInstitutionalConnectionComponent } from './compon
     MatButtonModule,
     InfoDropDownModule,
     A11yLinkModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
 })
 export class InboxModule {}

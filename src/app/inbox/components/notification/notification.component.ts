@@ -10,6 +10,8 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  ɵbypassSanitizationTrustResourceUrl,
+  forwardRef,
 } from '@angular/core'
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
 import { DateAdapter } from '@angular/material/core'
@@ -19,6 +21,15 @@ import { InboxService } from 'src/app/core/inbox/inbox.service'
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y'
 import { trigger, transition, animate, style } from '@angular/animations'
 import { heightAnimation } from 'src/app/animations'
+import {
+  ControlValueAccessor,
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  NG_ASYNC_VALIDATORS,
+  Validators,
+} from '@angular/forms'
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -27,8 +38,17 @@ import { heightAnimation } from 'src/app/animations'
     './notification.component.scss-theme.scss',
   ],
   animations: heightAnimation,
+
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NotificationComponent),
+      multi: true,
+    },
+  ],
 })
-export class NotificationComponent implements OnInit, AfterViewInit {
+export class NotificationComponent
+  implements OnInit, AfterViewInit, ControlValueAccessor {
   state = 'close'
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') archived = false
@@ -40,6 +60,9 @@ export class NotificationComponent implements OnInit, AfterViewInit {
   notificationLabel: string
   notificationType: uiNotificationType
   platform: PlatformInfo
+  public onTouchedFunction
+
+  form: FormGroup
   @HostBinding('class.mat-elevation-z2') showNotificationContent = false
 
   @Input()
@@ -62,6 +85,9 @@ export class NotificationComponent implements OnInit, AfterViewInit {
     private _ngZone: NgZone
   ) {
     _platform.get().subscribe((value) => (this.platform = value))
+    this.form = new FormGroup({
+      selected: new FormControl(false, Validators.required),
+    })
   }
 
   notificationTypeLabel(notificationType: uiNotificationType) {
@@ -139,12 +165,24 @@ export class NotificationComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit(): void {
-    console.log(this.header)
     this._focusMonitor.monitor(this.header).subscribe((origin) =>
       this._ngZone.run(() => {
-        console.log(origin)
         this._cdr.markForCheck()
       })
     )
+  }
+
+  writeValue(obj: any): void {
+    if (obj != null && obj !== undefined && obj !== '') {
+      this.form.setValue({ selected: obj }, { emitEvent: false })
+    }
+  }
+  registerOnChange(fn: any): void {
+    this.form.valueChanges.subscribe((value) => {
+      fn(value.selected)
+    })
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouchedFunction = fn
   }
 }
