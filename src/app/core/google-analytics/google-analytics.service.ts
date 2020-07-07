@@ -63,7 +63,6 @@ export class GoogleAnalyticsService {
     // if has RequestInfoForm add the client string as event_label
     if (typeof event_label !== 'string') {
       event_label = 'OAuth ' + this.buildClientString(event_label)
-      // TODO @leomendoza123 this should be tested once https://trello.com/c/xoTzzqSl/6675-signin-oauth-support is ready
     }
     return this.eventObservable(event, {
       event_category,
