@@ -21,8 +21,8 @@ export class NewsService {
   ) {}
 
   getNews() {
-    // TODO @leomendoza123 remove when the new new info is stable
-    // that will avoid the extra wait time of the togglz check
+    // TODO @leomendoza123 remove when the toggle call when the new info is stable
+    // that will avoid the wait time of the togglz check
     return this._togglz.getStateOf('NEW_INFO_SITE').pipe(
       take(1),
       switchMap((newInfoStateToggle) => {
