@@ -26,11 +26,12 @@ export class NewsService {
     return this._togglz.getStateOf('NEW_INFO_SITE').pipe(
       take(1),
       switchMap((newInfoStateToggle) => {
+        // Select the correct URL to get the news feed
         let url = environment.API_NEWS
         if (!newInfoStateToggle) {
           url = environment.API_NEWS_DEPRECATED
         }
-
+        // Get the news!
         return this._http.get(url, { responseType: 'text' }).pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
