@@ -162,10 +162,13 @@ export class NotificationComponent
   toggleNotificationContent() {
     this.showNotificationContent = !this.showNotificationContent
     this.state = this.showNotificationContent ? 'open' : 'close'
+    if (this.state === 'open') {
+      this._inbox.flagAsRead(this.notification.putCode)
+    }
   }
 
   archive() {
-    this._inbox.archive(this.notification.putCode).subscribe()
+    this._inbox.flagAsArchive(this.notification.putCode).subscribe()
   }
 
   ngOnInit() {}

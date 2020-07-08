@@ -1,14 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core'
-import {
-  Observable,
-  ObjectUnsubscribedError,
-  Subscription,
-  concat,
-  forkJoin,
-} from 'rxjs'
+import { Component, OnInit } from '@angular/core'
+import { Subscription, forkJoin } from 'rxjs'
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-notifications',
@@ -22,6 +17,7 @@ export class NotificationsComponent implements OnInit {
   _allCheck = false
   loading = true
   showArchived = true
+  moreNotificationsMightExist = false
 
   indeterminate = false
   changesSubscription: Subscription
@@ -49,45 +45,29 @@ export class NotificationsComponent implements OnInit {
     this.form = this._fromBuilder.group({})
     this.loading = true
     this._inbox.get().subscribe((value) => {
+      // get retrieved values
       this.loading = false
-      // Remove previous setup change detection
+      this.notifications = value
+      this.archiveNotifications = this.notifications.filter(
+        (notification) => notification.archivedDate
+      )
+
+      // Remove previous setup change listener (if exist)
       if (this.changesSubscription) {
         this.changesSubscription.unsubscribe()
       }
 
       // setup a new notifications checkboxes form
-      this.form = this._fromBuilder.group({})
-      value.forEach((notification) => {
-        this.form.addControl(
-          notification.putCode.toString(),
-          this._fromBuilder.control(false)
-        )
-      })
-      this.notifications = value
-      this.archiveNotifications = this.notifications.filter(
-        (notification) => notification.archivedDate
-      )
+      this.form = this.setUpCheckboxForm(value)
       this.generalCheck = false
 
       // detect changes on the checkboxes form
-      // to check if the general state is indeterminate
-      this.changesSubscription = this.form.valueChanges.subscribe(
-        (formValue) => {
-          this.indeterminate = false
-          let allState = null
-          Object.keys(formValue).forEach((key) => {
-            if (allState === null) {
-              allState = formValue[key]
-            } else if (allState !== formValue[key]) {
-              this.indeterminate = true
-            }
-          })
-          // update the general state if it becomes undefined
-          if (!this.indeterminate) {
-            this.generalCheck = allState
-          }
-        }
+      this.changesSubscription = this.form.valueChanges.subscribe((formValue) =>
+        this.listenFormChanges(formValue)
       )
+
+      // check if there might be more notifications
+      this.moreNotificationsMightExist = this._inbox.mightHaveMoreNotifications()
     })
   }
 
@@ -95,7 +75,7 @@ export class NotificationsComponent implements OnInit {
     const $archiveList = Object.keys(this.form.controls)
       .map((key) => {
         if (this.form.controls[key].value) {
-          return this._inbox.archive(parseInt(key, 10))
+          return this._inbox.flagAsArchive(parseInt(key, 10))
         }
       })
       .filter((value) => value)
@@ -104,5 +84,46 @@ export class NotificationsComponent implements OnInit {
 
   toggleShowArchived() {
     this.showArchived = !this.showArchived
+  }
+
+  showMore() {
+    // subscribe and take only one value without any action
+    // allowing the previous subscription on ngOnInit to handle the data
+    this.loading = true
+    this._inbox
+      .get(true)
+      .pipe(first())
+      .subscribe(() => {
+        this.loading = false
+      })
+  }
+
+  // Use to check if the general checkbox is on indeterminate stated
+  listenFormChanges(formValue) {
+    this.indeterminate = false
+    let allState = null
+    Object.keys(formValue).forEach((key) => {
+      if (allState === null) {
+        allState = formValue[key]
+      } else if (allState !== formValue[key]) {
+        this.indeterminate = true
+      }
+    })
+    // update the general state if it becomes undefined
+    if (!this.indeterminate) {
+      this.generalCheck = allState
+    }
+  }
+
+  // Create a control for each notification using the putcode as key
+  setUpCheckboxForm(value) {
+    const checkBoxForm = this._fromBuilder.group({})
+    value.forEach((notification) => {
+      checkBoxForm.addControl(
+        notification.putCode.toString(),
+        this._fromBuilder.control(false)
+      )
+    })
+    return checkBoxForm
   }
 }

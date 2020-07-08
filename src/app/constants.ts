@@ -75,3 +75,5 @@ export const GRID_COLUMNS = {
 }
 
 export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']
+
+export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10
