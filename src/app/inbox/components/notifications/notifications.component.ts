@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { Subscription, forkJoin } from 'rxjs'
-import { InboxNotification } from 'src/app/types/notifications.endpoint'
-import { InboxService } from 'src/app/core/inbox/inbox.service'
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { forkJoin, Subscription } from 'rxjs'
 import { first } from 'rxjs/operators'
+import { InboxService } from 'src/app/core/inbox/inbox.service'
+import { InboxNotification } from 'src/app/types/notifications.endpoint'
 
 @Component({
   selector: 'app-notifications',
@@ -69,6 +69,7 @@ export class NotificationsComponent implements OnInit {
       // check if there might be more notifications
       this.moreNotificationsMightExist = this._inbox.mightHaveMoreNotifications()
     })
+    // TODO @leomendoza123 show toaster errors
   }
 
   archivedSelected() {
@@ -80,6 +81,7 @@ export class NotificationsComponent implements OnInit {
       })
       .filter((value) => value)
     forkJoin($archiveList).subscribe()
+    // TODO @leomendoza123 show toaster errors
   }
 
   toggleShowArchived() {
@@ -96,6 +98,7 @@ export class NotificationsComponent implements OnInit {
       .subscribe(() => {
         this.loading = false
       })
+    // TODO @leomendoza123 show toaster errors
   }
 
   // Use to check if the general checkbox is on indeterminate stated

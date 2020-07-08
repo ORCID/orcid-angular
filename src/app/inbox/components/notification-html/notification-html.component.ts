@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { InboxNotificationHtml } from 'src/app/types/notifications.endpoint'
 
 @Component({

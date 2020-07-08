@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Inject } from '@angular/core'
-import { InboxNotificationPermission } from 'src/app/types/notifications.endpoint'
+import { Component, Inject, Input, OnInit } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
+import { InboxNotificationPermission } from 'src/app/types/notifications.endpoint'
 
 @Component({
   selector: 'app-notification-permission',

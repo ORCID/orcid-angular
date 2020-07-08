@@ -1,22 +1,18 @@
-// TODO @leomendoza123 remove
-// tslint:disable: max-line-length
-// tslint:disable: quotemark
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable, ReplaySubject } from 'rxjs'
+import { retry } from 'rxjs/internal/operators/retry'
+import { catchError, switchMap, tap } from 'rxjs/operators'
+import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
+import { environment } from 'src/environments/environment'
 
-import { Injectable, LOCALE_ID, Inject, ErrorHandler } from '@angular/core'
-import { of, Observable, ReplaySubject } from 'rxjs'
 import {
-  InboxNotification,
   InboxNotificationAmended,
   InboxNotificationHtml,
   InboxNotificationInstitutional,
   InboxNotificationPermission,
 } from '../../types/notifications.endpoint'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from 'src/environments/environment'
-import { retry } from 'rxjs/internal/operators/retry'
-import { catchError, tap, switchMap, delay } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -110,6 +106,9 @@ export class InboxService {
       )
   }
 
+  // Check if the maximum amount of notifications was retrieved
+  // this is how is regerminated there might me more notifications
+  // this is the current solution since currently the backend does not retrieve the total amount of notifications
   public mightHaveMoreNotifications() {
     if (!this.lastEmittedValue) {
       return true
