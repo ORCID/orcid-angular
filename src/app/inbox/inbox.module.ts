@@ -18,6 +18,7 @@ import { NotificationHtmlComponent } from './components/notification-html/notifi
 import { NotificationPermissionInstitutionalConnectionComponent } from './components/notification-permission-institutional-connection/notification-permission-institutional-connection.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     ReactiveFormsModule,
     FormsModule,
     MatProgressBarModule,
+    MatTooltipModule,
   ],
 })
 export class InboxModule {}
