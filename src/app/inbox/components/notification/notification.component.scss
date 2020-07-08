@@ -32,17 +32,17 @@
   border-radius: 50%;
   display: inline-block;
   margin-right: $spacing-small;
-  [dir='rtl'] & {
+  [dir='rtl'] :host & {
     margin-left: $spacing-small;
-    margin-right: none;
+    margin-right: auto;
   }
 }
 
 mat-checkbox {
   margin-right: $spacing-base;
-  [dir='rtl'] & {
+  [dir='rtl'] :host & {
     margin-left: $spacing-base;
-    margin-right: none;
+    margin-right: auto;
   }
 }
 :host:not(.archived) {
@@ -60,11 +60,19 @@ mat-checkbox {
   .title {
     margin-left: $spacing-large;
     margin-right: $spacing-base;
+    [dir='rtl'] :host & {
+      margin-right: $spacing-large;
+      margin-left: $spacing-base;
+    }
   }
 }
 
 .date {
   margin-left: $spacing-base;
+  [dir='rtl'] :host & {
+    margin-right: $spacing-base;
+    margin-left: auto;
+  }
   font-weight: bold;
 }
 .columns-8 :host {
@@ -76,6 +84,10 @@ mat-checkbox {
 
 button[mat-icon-button] {
   margin-left: $spacing-large;
+  [dir='rtl'] :host & {
+    margin-right: $spacing-large;
+    margin-left: auto;
+  }
   mat-icon {
     margin-left: 4px; // Fix icon alignment
   }
@@ -85,7 +97,7 @@ button[mat-icon-button] {
   font-weight: bold;
   display: flex;
   align-items: center;
-  text-align: left;
+  text-align: start;
 }
 
 .hidden {

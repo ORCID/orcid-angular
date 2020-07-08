@@ -11,6 +11,10 @@ app-notification {
   display: flex;
   flex-direction: row;
   margin-left: $spacing-base;
+  [dir='rtl'] :host & {
+    margin-left: auto;
+    margin-right: $spacing-base;
+  }
   margin-bottom: $spacing-base;
   align-items: center;
   justify-content: space-between;
@@ -22,10 +26,18 @@ app-notification {
 
     mat-checkbox {
       margin-right: $spacing-small;
+      [dir='rtl'] :host & {
+        margin-right: auto;
+        margin-left: $spacing-small;
+      }
       margin-bottom: 4px; // Fix misalignment
     }
     .archive-label {
       margin-right: $spacing-base;
+      [dir='rtl'] :host & {
+        margin-right: auto;
+        margin-left: $spacing-small;
+      }
     }
   }
   a {
@@ -45,6 +57,10 @@ mat-icon {
   flex-wrap: wrap;
   .notifications-amount-label {
     margin-right: $spacing-base;
+    [dir='rtl'] :host & {
+      margin-right: auto;
+      margin-left: $spacing-small;
+    }
   }
 }
 
