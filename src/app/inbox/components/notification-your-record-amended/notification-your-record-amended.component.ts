@@ -17,10 +17,9 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   @Input()
   set notification(notification: InboxNotificationAmended) {
     this._notification = notification
-    if (notification.items.items.length !== 1) {
+    if (notification.items.items.length >= 1) {
       // TODO leomendoza123 throw error
       // multiple items notifications are not expected for `YOUR-RECORD`
-      console.log('MORE THAN ONE')
     }
     this.item = notification.items.items[0]
   }
@@ -32,16 +31,19 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   ngOnInit(): void {}
 
   getAmendedTypeLabel(item: Item) {
-    switch (item.actionType) {
-      case 'CREATE':
-        return 'New item added'
-      case 'UPDATE':
-        return 'Item updated'
-      case 'DELETE':
-        return 'Deleted item'
-      default:
-        return 'Other update'
+    if (item) {
+      switch (item.actionType) {
+        case 'CREATE':
+          return 'New item added'
+        case 'UPDATE':
+          return 'Item updated'
+        case 'DELETE':
+          return 'Deleted item'
+        default:
+          return 'Other update'
+      }
     }
+    return 'Other update'
   }
 
   getNotificationSectionUpdatedLabel(notification: InboxNotificationAmended) {

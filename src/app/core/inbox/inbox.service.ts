@@ -122,8 +122,8 @@ export class InboxService {
         // when the backend archive the notification
         tap((data) => {
           this.lastEmittedValue.forEach((value) => {
-            if (value.putCode === code) {
-              value.archivedDate = 1
+            if (value.putCode === data.putCode) {
+              value.archivedDate = data.archivedDate
             }
           })
           this.inboxSubject.next(this.lastEmittedValue)

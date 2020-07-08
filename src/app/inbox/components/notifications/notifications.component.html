@@ -34,15 +34,17 @@
   </ng-container>
 </ng-container>
 
-<ng-container
+<div
+  class="no-messages"
   *ngIf="
     notifications &&
     archiveNotifications &&
     ((!showArchived && notifications.length == archiveNotifications.length) ||
       (showArchived && notifications.length == 0))
   "
-  >There are no messages at the moment.
-</ng-container>
+>
+  There are no messages at the moment.
+</div>
 
 <div class="notifications-amount mat-body-1">
   <div class="notifications-amount-label">
