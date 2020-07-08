@@ -99,9 +99,7 @@ export class InboxService {
         environment.BASE_URL +
           `inbox/notifications.json?firstResult=${
             AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel
-          }&maxResults=${
-            AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * (depthLevel + 1)
-          }&includeArchived=true`,
+          }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=true`,
         {
           headers: this.headers,
         }
