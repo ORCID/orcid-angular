@@ -15,7 +15,7 @@
       <div>Archive selected</div>
     </button>
   </div>
-  <a (click)="toggleShowArchived()"
+  <a (click)="toggleShowArchived()" *ngIf="archiveNotifications"
     ><ng-container *ngIf="showArchived">Hide archived</ng-container>
     <ng-container *ngIf="!showArchived">Show archived</ng-container>
     ({{ archiveNotifications.length }})
@@ -36,8 +36,10 @@
 
 <ng-container
   *ngIf="
-    (!showArchived && notifications.length == archiveNotifications.length) ||
-    (showArchived && notifications.length == 0)
+    notifications &&
+    archiveNotifications &&
+    ((!showArchived && notifications.length == archiveNotifications.length) ||
+      (showArchived && notifications.length == 0))
   "
   >There are no messages at the moment.
 </ng-container>
