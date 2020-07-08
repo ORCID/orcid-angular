@@ -59,7 +59,12 @@
   *ngIf="mobileMenuState || platform.columns12"
   [attr.aria-label]="labelMenu"
 >
-  <div class="top-bar">
+  <div
+    [ngClass]="{
+      'top-bar': !togglzNewInfoSite,
+      'top-bar-new-info': togglzNewInfoSite
+    }"
+  >
     <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
       <ng-template #recursiveList let-list let-parents="parents">
         <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
@@ -67,10 +72,10 @@
             <button
               *ngIf="checkMenuItemRequirements(item.requirements) === true"
               [ngClass]="{
-                active: item.activeRoute === currentRoute
+                active: item.activeRoute === currentRoute,
+                'no-hover-effect': togglzNewInfoSite
               }"
               mat-button
-              class="no-hover-effect"
               [color]="menuButtonColor(parents)"
               (focus)="mouseEnter(parents.concat(item.id))"
               (click)="click(parents.concat(item.id), item)"

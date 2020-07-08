@@ -2,12 +2,13 @@
 // to make the local environment work with Sandbox an alternative needs to be use to avoid CORS errors
 export const environment = {
   production: false,
-  API_NEWS: 'https://orcid.herokuapp.com/https://orcid.org/blog/feed',
+  API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
+  API_NEWS_DEPRECATED: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.localhost/v3.0',
   API_WEB: 'https://orcid.herokuapp.com/https://sandbox.orcid.org/',
   BASE_URL: 'https://orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
-  INFO_SITE: 'https://info.orcid.org',
+  INFO_SITE: 'http://orcidaboutdev.wpengine.com/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',

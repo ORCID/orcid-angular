@@ -20,6 +20,7 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { DeclareOauthSession } from '../../../types/declareOauthSession.endpoint'
 import { OauthService } from '../../../core/oauth/oauth.service'
+import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -57,7 +58,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
     private _oauthService: OauthService,
-    private _router: Router
+    private _router: Router,
+    private _gtag: GoogleAnalyticsService
   ) {
     this.signInLocal.type = this.signInType
     _platformInfo.get().subscribe((platform) => {
@@ -113,7 +115,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           if (data.url.toLowerCase().includes('oauth/authorize')) {
             this.updateOauthSession(this.signInLocal.params)
           } else {
-            this.navigateTo(data.url)
+            this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
+              () => this.navigateTo(data.url),
+              () => this.navigateTo(data.url)
+            )
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.show2FA = true
@@ -191,15 +196,24 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     this._oauthService
       .updateOauthSession(value)
       .subscribe((requestInfoForm) => {
-        this._router.navigate(['/oauth/authorize'], {
-          queryParams: {
-            client_id: this.signInLocal.params.client_id,
-            response_type: this.signInLocal.params.response_type,
-            scope: this.signInLocal.params.scope,
-            redirect_uri: this.signInLocal.params.redirect_uri,
-          },
-        })
+        this._gtag
+          .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
+          .subscribe(
+            () => this.oauthAuthorize(),
+            () => this.oauthAuthorize()
+          )
       })
+  }
+
+  oauthAuthorize() {
+    this._router.navigate(['/oauth/authorize'], {
+      queryParams: {
+        client_id: this.signInLocal.params.client_id,
+        response_type: this.signInLocal.params.response_type,
+        scope: this.signInLocal.params.scope,
+        redirect_uri: this.signInLocal.params.redirect_uri,
+      },
+    })
   }
 
   updateUsername(email) {
