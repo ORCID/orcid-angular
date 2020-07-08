@@ -2,14 +2,17 @@
 
 <div>
   <strong>{{ notification.source.sourceName.content }}</strong>
-  would like your permission to interact with your ORCID Record as a trusted
-  party.
+  <ng-container i18n="@@inbox.likeYourPermission"
+    >like your permission to interact with your ORCID Record as a trusted
+    party.</ng-container
+  >
 </div>
 
 <button
   mat-raised-button
   color="primary"
   (click)="navigateTo(notification.authorizationUrl.uri)"
+  i18n="@@inbox.grantPermission"
 >
   Grant permission
 </button>

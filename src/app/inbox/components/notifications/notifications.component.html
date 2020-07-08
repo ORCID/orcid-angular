@@ -8,7 +8,13 @@
       [(indeterminate)]="indeterminate"
       aria-label="select-all"
     ></mat-checkbox>
-    <div class="archive-label mat-body-1" id="select-all">Select All</div>
+    <div
+      class="archive-label mat-body-1"
+      id="select-all"
+      i18n="@@inbox.selectAll"
+    >
+      Select All
+    </div>
     <button
       mat-raised-button
       color="primary"
@@ -16,12 +22,16 @@
       (click)="archivedSelected()"
     >
       <mat-icon class="material-icons-outlined">archive</mat-icon>
-      <div>Archive selected</div>
+      <div i18n="@@inbox.archiveSelected">Archive selected</div>
     </button>
   </div>
   <a (click)="toggleShowArchived()" *ngIf="archiveNotifications?.length"
-    ><ng-container *ngIf="showArchived">Hide archived</ng-container>
-    <ng-container *ngIf="!showArchived">Show archived</ng-container>
+    ><ng-container *ngIf="showArchived" i18n="@@inbox.hideArchived"
+      >Hide archived</ng-container
+    >
+    <ng-container *ngIf="!showArchived" i18n="@@inbox.showArchived"
+      >Show archived</ng-container
+    >
     ({{ archiveNotifications.length }})
   </a>
 </div>
@@ -46,6 +56,7 @@
     ((!showArchived && notifications.length == archiveNotifications.length) ||
       (showArchived && notifications.length == 0))
   "
+  i18n="@@inbox.thereAreNoMessages"
 >
   There are no messages at the moment.
 </div>
@@ -56,6 +67,7 @@
     color="primary"
     *ngIf="moreNotificationsMightExist"
     (click)="showMore()"
+    i18n="@@inbox.showMoreNotifications"
   >
     Show more notifications
   </button>

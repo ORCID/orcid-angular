@@ -10,24 +10,19 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  ɵbypassSanitizationTrustResourceUrl,
   forwardRef,
 } from '@angular/core'
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
-import { DateAdapter } from '@angular/material/core'
 import { uiNotificationType } from 'src/app/types/notifications.local'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
-import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y'
-import { trigger, transition, animate, style } from '@angular/animations'
+import { FocusMonitor } from '@angular/cdk/a11y'
 import { heightAnimation } from 'src/app/animations'
 import {
   ControlValueAccessor,
-  FormBuilder,
   FormGroup,
   FormControl,
   NG_VALUE_ACCESSOR,
-  NG_ASYNC_VALIDATORS,
   Validators,
 } from '@angular/forms'
 @Component({
@@ -62,7 +57,7 @@ export class NotificationComponent
   platform: PlatformInfo
   public onTouchedFunction
 
-  ariaLabelArchived = 'archive'
+  ariaLabelArchived = $localize`:@@inbox.archive:archive`
 
   form: FormGroup
   @HostBinding('class.mat-elevation-z2') showNotificationContent = false
@@ -101,11 +96,11 @@ export class NotificationComponent
   notificationTypeLabel(notificationType: uiNotificationType) {
     switch (notificationType) {
       case 'your-record':
-        return 'YOUR RECORD'
+        return $localize`:@@inbox.yourRecord:YOUR RECORD`
       case 'permission':
-        return 'PERMISSIONS'
+        return $localize`:@@inbox.permissions:PERMISSIONS`
       default:
-        return 'ANNOUNCEMENT'
+        return $localize`:@@inbox.announcement:ANNOUNCEMENT`
     }
   }
 
@@ -127,15 +122,20 @@ export class NotificationComponent
   notificationTitle(notification: InboxNotification) {
     switch (notification.notificationType) {
       case 'AMENDED':
-        return `${notification.source.sourceName.content} has made changes to your ORCID record`
-      case 'ADMINISTRATIVE':
-        return `${notification.subject}`
-      case 'PERMISSION':
-        return `${notification.subject}`
+        return `${
+          notification.source.sourceName.content
+        } ${$localize`:@@inbox.hadMadeChanges:has made changes to your ORCID record`}`
       case 'INSTITUTIONAL_CONNECTION':
-        return `Connecting an ${notification.source.sourceName.content} account with your ORCID record`
+        return `${$localize`:@@inbox.connectingAn:Connecting an`} ${
+          notification.source.sourceName.content
+        } ${$localize`:@@inbox.accountWithYourOrcid:account with your ORCID record`}`
+
+      case 'PERMISSION':
+        // The subject of the permission request is define by the member with the API
+        return `${notification.subject}`
       default:
-        return 'DEFINE'
+        // any subject for HTML notifications define on the backend is define on the backend
+        return `${notification.subject}`
     }
   }
 

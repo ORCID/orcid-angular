@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NotificationPermissionINSTITUTIONALCONNECTIONComponent } from './notification-permission-institutional-connection.component'
+import { NotificationPermissionInstitutionalConnectionComponent } from './notification-permission-institutional-connection.component'
 
 describe('NotificationPermissionINSTITUTIONALCONNECTIONComponent', () => {
-  let component: NotificationPermissionINSTITUTIONALCONNECTIONComponent
-  let fixture: ComponentFixture<NotificationPermissionINSTITUTIONALCONNECTIONComponent>
+  let component: NotificationPermissionInstitutionalConnectionComponent
+  let fixture: ComponentFixture<NotificationPermissionInstitutionalConnectionComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NotificationPermissionINSTITUTIONALCONNECTIONComponent],
+      declarations: [NotificationPermissionInstitutionalConnectionComponent],
     }).compileComponents()
   }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(
-      NotificationPermissionINSTITUTIONALCONNECTIONComponent
+      NotificationPermissionInstitutionalConnectionComponent
     )
     component = fixture.componentInstance
     fixture.detectChanges()

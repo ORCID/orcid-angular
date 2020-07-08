@@ -9,6 +9,7 @@ import { WINDOW } from 'src/app/cdk/window'
   styleUrls: [
     './notification-permission-institutional-connection.component.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class NotificationPermissionInstitutionalConnectionComponent
   implements OnInit {

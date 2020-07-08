@@ -34,13 +34,13 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
     if (item) {
       switch (item.actionType) {
         case 'CREATE':
-          return 'New item added'
+          return $localize`:@@inbox.newItemAdded:New item added`
         case 'UPDATE':
-          return 'Item updated'
+          return $localize`:@@inbox.itemUpdate:Item updated`
         case 'DELETE':
-          return 'Deleted item'
+          return $localize`:@@inbox.deleteItem:Deleted item`
         default:
-          return 'Other update'
+          return $localize`:@@inbox.otherUpdate:Other update`
       }
     }
     return 'Other update'
@@ -49,27 +49,27 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   getNotificationSectionUpdatedLabel(notification: InboxNotificationAmended) {
     switch (notification.amendedSection) {
       case 'AFFILIATION':
-        return 'affiliations'
+        return $localize`:@@inbox.affiliations:affiliations`
       case 'BIO':
-        return 'bio'
+        return $localize`:@@inbox.bio:bio`
       case 'EDUCATION':
-        return 'education'
+        return $localize`:@@inbox.education:education`
       case 'EMPLOYMENT':
-        return 'employment'
+        return $localize`:@@inbox.employment:employment`
       case 'EXTERNAL_IDENTIFIERS':
-        return 'external identifiers'
+        return $localize`:@@inbox.externalIdentifiers:external identifiers`
       case 'FUNDING':
-        return 'funding'
+        return $localize`:@@inbox.funding:funding`
       case 'PEER_REVIEW':
-        return 'peer review'
+        return $localize`:@@inbox.peerReview:peer review`
       case 'PREFERENCES':
-        return 'preferences'
+        return $localize`:@@inbox.preferences:preferences`
       case 'RESEARCH_RESOURCE':
-        return 'research resource'
+        return $localize`:@@inbox.researchResource:research resource`
       case 'WORK':
-        return 'work'
+        return $localize`:@@inbox.work:work`
       default:
-        return 'unknown'
+        return $localize`:@@inbox.unknown:unknown`
     }
   }
 }
