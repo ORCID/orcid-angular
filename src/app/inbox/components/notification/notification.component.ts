@@ -62,6 +62,8 @@ export class NotificationComponent
   platform: PlatformInfo
   public onTouchedFunction
 
+  ariaLabelArchived = 'archive'
+
   form: FormGroup
   @HostBinding('class.mat-elevation-z2') showNotificationContent = false
 

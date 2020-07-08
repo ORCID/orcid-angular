@@ -6,8 +6,9 @@
     <mat-checkbox
       [(ngModel)]="generalCheck"
       [(indeterminate)]="indeterminate"
+      aria-label="select-all"
     ></mat-checkbox>
-    <div class="archive-label mat-body-1">Select All</div>
+    <div class="archive-label mat-body-1" id="select-all">Select All</div>
     <button
       mat-raised-button
       color="primary"
