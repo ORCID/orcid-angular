@@ -8,6 +8,7 @@ import {
 } from './constants'
 import { OauthGuard } from './guards/oauth.guard'
 import { constants } from 'buffer'
+import { AuthenticatedGuard } from './guards/authenticated.guard'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -33,6 +34,7 @@ const routes: Routes = [
   // },
   {
     path: ApplicationRoutes.inbox,
+    canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>
       import('./inbox/inbox.module').then((m) => m.InboxModule),
   },
