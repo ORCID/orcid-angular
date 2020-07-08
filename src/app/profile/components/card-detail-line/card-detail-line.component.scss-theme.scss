@@ -8,15 +8,15 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   h5 {
-    color: $dark-primary-text;
+    color: $orcid-dark-primary-text;
   }
 
   p {
-    color: $dark-secondary-text;
+    color: $orcid-dark-secondary-text;
   }
 
   .secondary-text {
-    color: $dark-secondary-text;
+    color: $orcid-dark-secondary-text;
   }
 }
 

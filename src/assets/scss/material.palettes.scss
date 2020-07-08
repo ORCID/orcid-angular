@@ -3,13 +3,13 @@
 // MATERIAL PALETTES
 // .
 // .
-$dark-primary-text: rgba(black, 0.87);
-$dark-secondary-text: rgba(black, 0.6);
-$dark-disabled-text: rgba(black, 0.38);
+$orcid-dark-primary-text: rgba(black, 0.87);
+$orcid-dark-secondary-text: rgba(black, 0.6);
+$orcid-disabled-text: rgba(black, 0.38);
 
-$light-primary-text: rgba(white, 1);
-$light-secondary-text: rgba(white, 0.6);
-$light-disabled-text: rgba(white, 0.38);
+$orcid-light-primary-text: rgba(white, 1);
+$orcid-light-secondary-text: rgba(white, 0.6);
+$orcid-light-disabled-text: rgba(white, 0.38);
 
 $orcid-green: (
   50: #f4f9e5,
@@ -23,16 +23,16 @@ $orcid-green: (
   800: #599700,
   900: #447405 /*brand-primary-darkest*/,
   contrast: (
-    50: $dark-secondary-text,
-    100: $dark-secondary-text,
-    200: $dark-secondary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $dark-primary-text,
-    600: $dark-primary-text,
-    700: $dark-primary-text,
-    800: $dark-primary-text,
-    900: $dark-primary-text,
+    50: $orcid-dark-secondary-text,
+    100: $orcid-dark-secondary-text,
+    200: $orcid-dark-secondary-text,
+    300: $orcid-dark-primary-text,
+    400: $orcid-dark-primary-text,
+    500: $orcid-dark-primary-text,
+    600: $orcid-dark-primary-text,
+    700: $orcid-dark-primary-text,
+    800: $orcid-dark-primary-text,
+    900: $orcid-dark-primary-text,
   ),
 );
 $orcid-blue: (
@@ -47,16 +47,16 @@ $orcid-blue: (
   800: #004961,
   900: #003449,
   contrast: (
-    50: $dark-secondary-text,
-    100: $dark-secondary-text,
-    200: $dark-secondary-text,
-    300: $dark-primary-text,
-    400: $light-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
+    50: $orcid-dark-secondary-text,
+    100: $orcid-dark-secondary-text,
+    200: $orcid-dark-secondary-text,
+    300: $orcid-dark-primary-text,
+    400: $orcid-light-primary-text,
+    500: $orcid-light-primary-text,
+    600: $orcid-light-primary-text,
+    700: $orcid-light-primary-text,
+    800: $orcid-light-primary-text,
+    900: $orcid-light-primary-text,
   ),
 );
 $orcid-red: (
@@ -75,20 +75,20 @@ $orcid-red: (
   A400: #ff1744,
   A700: #d50000,
   contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $dark-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+    50: $orcid-dark-primary-text,
+    100: $orcid-dark-primary-text,
+    200: $orcid-dark-primary-text,
+    300: $orcid-dark-primary-text,
+    400: $orcid-dark-primary-text,
+    500: $orcid-light-primary-text,
+    600: $orcid-light-primary-text,
+    700: $orcid-light-primary-text,
+    800: $orcid-light-primary-text,
+    900: $orcid-light-primary-text,
+    A100: $orcid-dark-primary-text,
+    A200: $orcid-light-primary-text,
+    A400: $orcid-light-primary-text,
+    A700: $orcid-light-primary-text,
   ),
 );
 // .

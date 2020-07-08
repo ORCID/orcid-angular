@@ -10,8 +10,8 @@
     border: solid map-get($background, light-grey) 1px;
   }
   :host.archived .header {
-    background-color: map-get($background, light-grey);
-    color: $dark-secondary-text;
+    background-color: map-get($background, background);
+    color: $orcid-dark-secondary-text;
   }
   :host.green .header {
     .notification {

@@ -8,15 +8,15 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   h3.mat-body-1 {
-    color: $dark-primary-text;
+    color: $orcid-dark-primary-text;
   }
 
   h3.mat-body-1 {
-    color: $dark-primary-text;
+    color: $orcid-dark-primary-text;
   }
 
   .content {
-    color: $dark-secondary-text;
+    color: $orcid-dark-secondary-text;
   }
 }
 
