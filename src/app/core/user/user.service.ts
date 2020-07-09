@@ -34,6 +34,7 @@ export class UserService {
     nameForm: NameForm
     displayName: string
     orcidUrl: string
+    loggedIn: boolean
   }>
 
   private getUserInfo(): Observable<UserInfo> {
@@ -68,6 +69,7 @@ export class UserService {
     nameForm: NameForm
     displayName: string
     orcidUrl: string
+    loggedIn: boolean
   }> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
@@ -104,7 +106,7 @@ export class UserService {
           .pipe(
             switchMap((loggedIn) => {
               if (!loggedIn) {
-                return of(null)
+                return of(false)
               }
               if (loggedIn) {
                 // return an object with the most recent response of both endpoints
@@ -119,6 +121,7 @@ export class UserService {
               return {
                 ...data,
                 ...{
+                  loggedIn: !!data.userInfo || !!data.nameForm,
                   displayName: this.getDisplayName(data.nameForm),
                   orcidUrl:
                     'https:' + environment.BASE_URL + data && data.userInfo

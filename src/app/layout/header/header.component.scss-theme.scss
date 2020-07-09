@@ -99,7 +99,7 @@
           button:hover,
           button:focus {
             background-color: mat-color($accent, 200);
-            color: $dark-primary-text;
+            color: $orcid-dark-primary-text;
           }
 
           .row {
@@ -110,7 +110,7 @@
             button:hover,
             button:focus {
               background-color: mat-color($accent, 200);
-              color: $dark-primary-text;
+              color: $orcid-dark-primary-text;
             }
             .row {
               button {
@@ -119,7 +119,7 @@
               button:hover,
               button:focus {
                 background-color: mat-color($accent, 200);
-                color: $dark-primary-text;
+                color: $orcid-dark-primary-text;
               }
               background-color: mat-color($background, 'light-grey');
               .row {

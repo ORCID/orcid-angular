@@ -36,11 +36,8 @@
         align-items: center;
         mat-icon {
           margin-bottom: -4px; // Compensates mat icon bottom with space
-          margin-right: $spacing-12;
-          [dir='rtl'] & {
-            margin-right: 0px;
-            margin-left: $spacing-12;
-          }
+          margin-left: $spacing-small;
+          margin-right: $spacing-small;
         }
       }
     }

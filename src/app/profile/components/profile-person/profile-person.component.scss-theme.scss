@@ -13,11 +13,11 @@
     border-color: map-get($accent, 400);
     .idSectionHeader {
       background-color: map-get($accent, 400);
-      color: $light-primary-text;
+      color: $orcid-light-primary-text;
     }
   }
   .printMenu {
-    color: $dark-primary-text;
+    color: $orcid-dark-primary-text;
   }
 }
 

@@ -12,3 +12,10 @@ mat-checkbox.orcid-checkbox-baseline {
     white-space: normal;
   }
 }
+
+mat-checkbox.larger {
+  .mat-checkbox-inner-container {
+    height: 18px;
+    width: 18px;
+  }
+}

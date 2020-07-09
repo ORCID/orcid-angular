@@ -1,0 +1,70 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+:host {
+  display: block;
+  max-width: 100%;
+}
+app-notification {
+  margin-bottom: $spacing-base;
+}
+.control-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: $spacing-base;
+  [dir='rtl'] :host & {
+    margin-left: auto;
+    margin-right: $spacing-base;
+  }
+  margin-bottom: $spacing-base;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    mat-checkbox {
+      margin-right: $spacing-small;
+      [dir='rtl'] :host & {
+        margin-right: auto;
+        margin-left: $spacing-small;
+      }
+      margin-bottom: 4px; // Fix misalignment
+    }
+    .archive-label {
+      margin-right: $spacing-base;
+      [dir='rtl'] :host & {
+        margin-right: auto;
+        margin-left: $spacing-small;
+      }
+    }
+  }
+  a {
+    line-height: 32px;
+  }
+}
+
+mat-icon {
+  padding-top: 4px; // fix margin
+}
+
+.notifications-amount {
+  margin-top: $spacing-large;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  .notifications-amount-label {
+    margin-right: $spacing-base;
+    [dir='rtl'] :host & {
+      margin-right: auto;
+      margin-left: $spacing-small;
+    }
+  }
+}
+
+.no-messages {
+  margin-top: $spacing-base;
+  margin-bottom: $spacing-base;
+}
