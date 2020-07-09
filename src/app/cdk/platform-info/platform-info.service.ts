@@ -31,6 +31,9 @@ export class PlatformInfoService {
     // but the observable return by it takes a while to respond, and this can make the application blink on startup
     // this is the reason why a quick indexOf is run on the window object to quickly check if the app should start on Oauth mode
     oauthMode: this.window.location.href.toLowerCase().indexOf('oauth') >= 0,
+    social: this.window.location.href.toLowerCase().indexOf('social') >= 0,
+    institutional:
+      this.window.location.href.toLowerCase().indexOf('institutional') >= 0,
   }
   platformSubject = new BehaviorSubject<PlatformInfo>(this.platform)
 

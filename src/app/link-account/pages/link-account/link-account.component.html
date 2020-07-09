@@ -8,7 +8,7 @@
               <ng-container i18n="@@linking.title.1">
                 Link your
               </ng-container>
-              {{ institutionName }}
+              {{ entityId }}
               <ng-container i18n="@@linking.title.2">
                 account to your ORCID record
               </ng-container>
@@ -21,38 +21,34 @@
           <mat-card-content>
             <div
               *ngIf="
-                shibbolethSignInData &&
-                !shibbolethSignInData.unsupportedInstitution &&
-                loadedFeed
+                signInData && !signInData.unsupportedInstitution && loadedFeed
               "
             >
               <p class="mat-body-1">
                 <ng-container i18n="@@linking.signed">
                   You are signed into
                 </ng-container>
-                {{ institutionName }}
+                {{ entityId }}
                 <ng-container i18n="@@linking.as">
                   as
                 </ng-container>
                 {{
-                  shibbolethSignInData.email
-                    ? shibbolethSignInData.email
-                    : shibbolethSignInData.firstName +
-                      ' ' +
-                      shibbolethSignInData.lastName
+                  signInData.email
+                    ? signInData.email
+                    : signInData.firstName + ' ' + signInData.lastName
                 }}
               </p>
               <p class="mat-body-1">
                 <ng-container i18n="@@linking.finish">
                   To finish linking this
                 </ng-container>
-                {{ institutionName }}
+                {{ entityId }}
                 <ng-container i18n="@@linking.account">
                   account to ORCID, sign into your ORCID iD below. You will only
                   need to complete this step once. After your account is linked,
                   you will be able to access your ORCID record with your
                 </ng-container>
-                {{ institutionName }}
+                {{ entityId }}
                 <ng-container i18n="@@linking.questions">
                   account. Questions?
                 </ng-container>
@@ -64,9 +60,9 @@
                 </a>
               </p>
               <app-form-sign-in
+                [email]="email"
                 #formSignInComponent
-                [signInType]="signInType"
-                [shibbolethSignInData]="shibbolethSignInData"
+                [signInData]="signInData"
                 (show2FAEmitter)="show2FAEmitter($event)"
               >
                 <button
@@ -81,7 +77,7 @@
                   <ng-container i18n="@@linking.button.1">
                     Sign in and link your
                   </ng-container>
-                  {{ institutionName }}
+                  {{ entityId }}
                   <ng-container i18n="@@linking.button.2">
                     account
                   </ng-container>

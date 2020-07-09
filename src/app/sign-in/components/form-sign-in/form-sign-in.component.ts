@@ -14,7 +14,7 @@ import { UsernameValidator } from '../../../shared/validators/username/username.
 import { WINDOW } from '../../../cdk/window'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
-import { ShibbolethSignInData } from '../../../types/shibboleth-sign-in-data'
+import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { PlatformInfoService } from '../../../cdk/platform-info'
@@ -32,7 +32,7 @@ import { GoogleAnalyticsService } from '../../../core/google-analytics/google-an
 export class FormSignInComponent implements OnInit, AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
-  @Input() shibbolethSignInData: ShibbolethSignInData
+  @Input() signInData: SignInData
   @Output() show2FAEmitter = new EventEmitter<object>()
 
   loading = false
@@ -74,6 +74,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             oauth: '',
           }
         })
+      } else if (platform.social) {
+        this.signInLocal.type = TypeSignIn.social
+      } else if (platform.institutional) {
+        this.signInLocal.type = TypeSignIn.institutional
       }
     })
   }
@@ -179,12 +183,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       this._router.navigate([
         '/register',
         {
-          linkRequest: this.shibbolethSignInData.linkType,
-          emailId: this.shibbolethSignInData.emailEncoded,
-          firstName: this.shibbolethSignInData.firstNameEncoded,
-          lastName: this.shibbolethSignInData.lastNameEncoded,
-          providerId: this.shibbolethSignInData.providerIdEncoded,
-          accountId: this.shibbolethSignInData.accountIdEncoded,
+          linkRequest: this.signInData.linkType,
+          emailId: this.signInData.emailEncoded,
+          firstName: this.signInData.firstNameEncoded,
+          lastName: this.signInData.lastNameEncoded,
+          providerId: this.signInData.providerIdEncoded,
+          accountId: this.signInData.accountIdEncoded,
         },
       ])
     } else {
