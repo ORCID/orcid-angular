@@ -18,4 +18,5 @@ export enum TypeSignIn {
   'personal',
   'institutional',
   'oauth',
+  'social',
 }

@@ -1,4 +1,4 @@
-export interface ShibbolethSignInData {
+export interface SignInData {
   entityID: string
   accountId: string
   accountIdEncoded: string
