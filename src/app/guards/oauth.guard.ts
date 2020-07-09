@@ -42,13 +42,8 @@ export class OauthGuard implements CanActivateChild {
             } else if (!value.userOrcid || !value.userName) {
               // The users is not logged in
               if (state.url.startsWith('/oauth/authorize')) {
-                const params = {
-                  oauth: '',
-                  client_id: next.queryParams['client_id'],
-                  response_type: next.queryParams['response_type'],
-                  scope: next.queryParams['scope'],
-                  redirect_uri: next.queryParams['redirect_uri'],
-                }
+                const params = JSON.parse(JSON.stringify(next.queryParams))
+                params['oauth'] = ''
                 return this._router.createUrlTree(['/signin'], {
                   queryParams: params,
                 })
