@@ -32,36 +32,38 @@ export class OauthGuard implements CanActivateChild {
         .declareOauthSession(<DeclareOauthSession>queryParams)
         .pipe(
           map((value) => {
-            if (!state.url.startsWith('/signin') && value.forceLogin) {
+            // If there are errors, is a forceLogin or the user is not login
+            // makes sure the user is going to the login page
+            if (
+              !state.url.startsWith('/signin') &&
+              // value.forceLogin ||
+              (!value.userOrcid ||
+                !value.userName ||
+                value.errors.length ||
+                value.error)
+            ) {
+              // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
+              // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
+              queryParams['oauth'] = ''
               return this._router.createUrlTree(['/signin'], {
                 queryParams: queryParams,
               })
-            } else if (value.errors.length || value.error) {
-              // redirect the user to the login if something goes wrong on the backend declaration
-              // TODO @leomendoza123 Throw toaster error and display error description
-              return this._router.createUrlTree(['/signin'])
-            } else if (!value.userOrcid || !value.userName) {
-              // The users is not logged in
-              if (state.url.startsWith('/oauth/authorize')) {
-                // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
-                // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
-                queryParams['oauth'] = ''
-                return this._router.createUrlTree(['/signin'], {
-                  queryParams,
-                })
-              } else if (state.url.startsWith('/signin')) {
-                return true
-              }
-            } else {
-              // The users has already login and is ready to authorize
-              if (state.url.startsWith('/oauth/authorize')) {
-                return true
-              } else if (state.url.startsWith('/signin')) {
-                return this._router.createUrlTree(['/oauth/authorize'], {
-                  queryParams: queryParams,
-                })
-              }
+
+              // if no errors, the user is login and is not a force login
+              // make sure the user is going to the authorization page
+            } else if (
+              state.url.startsWith('/signin') &&
+              // !value.forceLogin &&
+              value.userOrcid &&
+              value.userName &&
+              !value.errors.length &&
+              !value.error
+            ) {
+              return this._router.createUrlTree(['/oauth/authorize'], {
+                queryParams: queryParams,
+              })
             }
+            return true
           })
         )
     } else {
@@ -70,9 +72,8 @@ export class OauthGuard implements CanActivateChild {
         return this._router.createUrlTree(['/signin'], {
           queryParams: next.queryParams,
         })
-      } else if (state.url.startsWith('/signin')) {
-        return true
       }
+      return true
     }
   }
 

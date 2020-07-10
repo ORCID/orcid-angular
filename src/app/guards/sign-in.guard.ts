@@ -27,5 +27,6 @@ export class SignInGuard implements CanActivateChild {
         queryParams: queryParams,
       })
     }
+    return true
   }
 }
