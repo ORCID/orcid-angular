@@ -19,59 +19,17 @@ export class TrustedIndividualsService {
   ) {}
 
   getTrustedIndividuals(): Observable<TrustedIndividuals> {
-    // return this._http
-    //   .get<TrustedIndividuals>(`${environment.API_WEB}register.json`, {
-    //     withCredentials: true,
-    //   })
-    //   .pipe(
-    //     retry(3),
-    //     catchError((error) => this._errorHandler.handleError(error))
-    //   )
-
-    return of({
-      delegators: [
+    return this._http
+      .get<TrustedIndividuals>(
+        `${environment.API_WEB}delegators/delegators-and-me.json`,
         {
-          giverOrcid: {
-            uri: 'https://qa.orcid.org/0000-0002-5319-7148',
-            path: '0000-0002-5319-7148',
-            host: 'qa.orcid.org',
-          },
-          giverName: {
-            errors: [],
-            value: 'Given Names Deactivated Family Name Deactivated',
-            required: true,
-            getRequiredMessage: null,
-          },
-          receiverOrcid: {
-            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
-            path: '0000-0002-9361-1905',
-            host: 'qa.orcid.org',
-          },
-          receiverName: null,
-          approvalDate: 1537207920033,
-        },
-        {
-          giverOrcid: {
-            uri: 'https://qa.orcid.org/0000-0002-2036-7905',
-            path: '0000-0002-2036-7905',
-            host: 'qa.orcid.org',
-          },
-          giverName: {
-            errors: [],
-            value: 'Leonardo Mendoza',
-            required: true,
-            getRequiredMessage: null,
-          },
-          receiverOrcid: {
-            uri: 'https://qa.orcid.org/0000-0002-9361-1905',
-            path: '0000-0002-9361-1905',
-            host: 'qa.orcid.org',
-          },
-          receiverName: null,
-          approvalDate: 1586967300968,
-        },
-      ],
-    })
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   // TODO @angel review
