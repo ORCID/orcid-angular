@@ -52,14 +52,6 @@ export class SignInComponent implements OnInit {
         tap((value: OauthParameters) => {
           this.oauthParameters = value
 
-          // TODO @DanielPalafox handle redirection Guard
-          // with the purpose of avoiding the load of the signin module if is not required
-          if (this.oauthParameters.show_login === 'false') {
-            this._router.navigate(['/register'], {
-              queryParams: this.oauthParameters,
-            })
-          }
-
           if (this.oauthParameters.email) {
             this.email = this.oauthParameters.email
           }
@@ -94,18 +86,6 @@ export class SignInComponent implements OnInit {
             })
         }
       })
-
-    _route.queryParams
-      .pipe(
-        // More info about signin query paramter https://members.orcid.org/api/oauth/get-oauthauthorize
-        take(1),
-        tap((value: OauthParameters) => {
-          if (value.show_login === 'false') {
-            this._router.navigate(['/register'], { queryParams: value })
-          }
-        })
-      )
-      .subscribe()
   }
 
   ngOnInit() {}
