@@ -52,7 +52,7 @@ export class InstitutionalComponent implements OnInit {
         },
         (error) => {
           // TODO @leomendoza123 display error using a toaster
-          console.log('Error getting disco feed' + JSON.stringify(error))
+          console.error('Error getting disco feed' + JSON.stringify(error))
         }
       )
   }
