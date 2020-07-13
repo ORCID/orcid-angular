@@ -62,8 +62,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     this.window.location.href = val
   }
 
-  signout() {}
-
   authorize(value = true) {
     this._oauth.authorize(value).subscribe((data) => {
       let analyticsReports: Observable<void>[] = []
