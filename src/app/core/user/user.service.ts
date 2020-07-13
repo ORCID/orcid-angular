@@ -14,6 +14,8 @@ import {
   retryWhen,
   shareReplay,
   retry,
+  repeatWhen,
+  takeUntil,
 } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 import { UserStatus } from '../../types/userStatus.endpoint'
@@ -27,7 +29,7 @@ export class UserService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}
-  private currentlyLoggedIn = true
+  private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
   private $infoOnEachStatusUpdateObservable: Observable<{
     userInfo: UserInfo
@@ -36,6 +38,10 @@ export class UserService {
     orcidUrl: string
     loggedIn: boolean
   }>
+
+  private readonly _stop = new Subject<void>()
+  private readonly _start = new Subject<void>()
+  private bypassStatusNotChangeFilter = false
 
   private getUserInfo(): Observable<UserInfo> {
     return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
@@ -79,21 +85,22 @@ export class UserService {
       return (this.$infoOnEachStatusUpdateObservable =
         // Every 30 seconds...
         timer(0, 30 * 1000)
+          .pipe(
+            takeUntil(this._stop),
+            repeatWhen(() => this._start)
+          )
           // Check for updates on userStatus.json
           .pipe(switchMapTo(this.getUserStatus()))
-          // Check if loggedIn state  has changed since the last time
+          // Filter followup calls if the user status has no change
           //
           // Also turns on the flag loggingStateComesFromTheServer
           // indicating that the current logging state is taken from the server,
           // and not the initial assumption. (more on this on the following pipe)
           .pipe(
             filter((loggedIn) => {
-              if (loggedIn) {
-                this.loggingStateComesFromTheServer = true
-                if (!(loggedIn === this.currentlyLoggedIn)) {
-                  this.currentlyLoggedIn = loggedIn
-                  return true
-                }
+              this.loggingStateComesFromTheServer = true
+              if (!(loggedIn === this.currentlyLoggedIn)) {
+                return true
               }
               return false
             })
@@ -105,6 +112,7 @@ export class UserService {
           // If not return a null value
           .pipe(
             switchMap((loggedIn) => {
+              this.currentlyLoggedIn = loggedIn
               if (!loggedIn) {
                 return of(false)
               }
@@ -134,6 +142,21 @@ export class UserService {
           .pipe(shareReplay(1)))
     }
   }
+
+  refreshUserStatus() {
+    this.stop()
+    this.start()
+  }
+
+  start(): void {
+    this.loggingStateComesFromTheServer = false
+    this.currentlyLoggedIn = null
+    this._start.next()
+  }
+  stop(): void {
+    this._stop.next()
+  }
+
   private getDisplayName(nameForm: NameForm): string {
     if (nameForm != null) {
       if (
