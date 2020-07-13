@@ -40,22 +40,6 @@ export class HeaderComponent implements OnInit {
   signinRegisterButton = true
   labelLogo = $localize`:@@layout.ariaLabelLogo:orcid mini logo`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
-  newInfoRoutes = [
-    {
-      old: 'about/what-is-orcid/mission',
-      new: 'http://orcidaboutdev.wpengine.com/what-is-orcid/',
-    },
-    {
-      old: 'organizations',
-      new: 'http://orcidaboutdev.wpengine.com/about-membership/',
-    },
-    { old: 'about', new: 'http://orcidaboutdev.wpengine.com/what-is-orcid/' },
-    {
-      old: 'help',
-      new:
-        'http://orcidaboutdev.wpengine.com/help-getting-started-with-your-orcid/',
-    },
-  ]
 
   constructor(
     private _router: Router,

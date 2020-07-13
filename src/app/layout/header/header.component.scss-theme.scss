@@ -137,7 +137,8 @@
   $orcid-material-typography,
   $orcid-custom-typography
 ) {
-  .top-bar {
+  .top-bar,
+  .top-bar-new-info {
     .menu-container > .row > .col > button {
       @include mat-typography-level-to-styles(
         $orcid-custom-typography,
