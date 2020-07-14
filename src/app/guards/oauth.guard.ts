@@ -36,7 +36,7 @@ export class OauthGuard implements CanActivateChild {
             // makes sure the user is going to the login page
             if (
               !state.url.startsWith('/signin') &&
-              // value.forceLogin ||
+              // value.forceLogin || TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
               (!value.userOrcid ||
                 !value.userName ||
                 value.errors.length ||
@@ -53,7 +53,7 @@ export class OauthGuard implements CanActivateChild {
               // make sure the user is going to the authorization page
             } else if (
               state.url.startsWith('/signin') &&
-              // !value.forceLogin &&
+              // !value.forceLogin && TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
               value.userOrcid &&
               value.userName &&
               !value.errors.length &&
