@@ -26,7 +26,6 @@ export class SignInComponent implements OnInit {
   @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
   oauthParameters: OauthParameters
   requestInfoForm: RequestInfoForm
-  signInLocal = {} as SignInLocal
   params: HttpParams
   loading = false
   isLoggedIn = false
@@ -60,30 +59,13 @@ export class SignInComponent implements OnInit {
       .subscribe()
 
     _userInfo
-      .getUserStatus()
+      .getUserInfoOnEachStatusUpdate()
       .pipe(take(1))
-      .subscribe((data) => {
-        if (data) {
-          this.isLoggedIn = data
-          if (this.signInLocal.type === TypeSignIn.oauth) {
-            // TODO @DanielPalafox handle redirection a Guard
-            //
-            // to prevent loading the signin module or showing the "you are already logged in"
-            // related to https://github.com/ORCID/orcid-angular/issues/261
-            this.confirmAccess()
-          }
-          // TODO @DanielPalafox remove the first call to `getUserStatus`
-          // since `getUserInfoOnEachStatusUpdate` already calls `getUserStatus` and is not great to call the same endpoint two times
-          //
-          // this might be possible by returning maybe a false from `getUserInfoOnEachStatusUpdate`
-          // instead of nothing as it currently does when the user is not signin
-          _userInfo
-            .getUserInfoOnEachStatusUpdate()
-            .pipe(take(1))
-            .subscribe((info) => {
-              this.displayName = info.displayName
-              this.realUserOrcid = info.orcidUrl
-            })
+      .subscribe((info) => {
+        this.isLoggedIn = info.loggedIn
+        if (this.isLoggedIn) {
+          this.displayName = info.displayName
+          this.realUserOrcid = info.orcidUrl
         }
       })
   }
