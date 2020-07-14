@@ -77,7 +77,7 @@ export class OauthGuard implements CanActivateChild {
     }
   }
 
-  // TODO @angel check if these are all the oauth parameters we support
+  // TODO @leomendoza123 check if these are all the oauth parameters we support
   // if any of this query parameters is present the backend will be call to try
   // to create an oauth section
   isOauthRequest(queryParams: Object) {
