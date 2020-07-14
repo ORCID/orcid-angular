@@ -99,10 +99,6 @@ export class SignInComponent implements OnInit {
     })
   }
 
-  confirmAccess() {
-    this.navigateTo('https:' + environment.BASE_URL + 'oauth/confirm_access')
-  }
-
   navigateTo(val) {
     this.window.location.href = val
   }
