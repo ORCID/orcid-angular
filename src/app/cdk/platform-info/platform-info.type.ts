@@ -1,3 +1,5 @@
+import { Params } from '@angular/router'
+
 export interface PlatformInfo {
   rtl: boolean
   ltr: boolean
@@ -17,4 +19,5 @@ export interface PlatformInfo {
   oauthMode: boolean
   social: boolean
   institutional: boolean
+  queryParameters: Params
 }
