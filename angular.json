@@ -107,6 +107,7 @@
             "vendorChunk": false,
             "buildOptimizer": true,
             "outputPath": "dist",
+            "i18nMissingTranslation": "error",
             "assets": [
               {
                 "glob": "**/*",
