@@ -1,9 +1,9 @@
-import { DeclareOauthSession } from './declareOauthSession.endpoint'
+import { OauthParameters } from '.'
 
 export interface SignInLocal {
   data: FormSignIn
   type: TypeSignIn
-  params: DeclareOauthSession
+  params: OauthParameters
 }
 
 export interface FormSignIn {

@@ -25,6 +25,7 @@ export class PlatformInfoService {
     columns12: false,
     rtl: false,
     ltr: true,
+    queryParameters: {},
     screenDirection: 'ltr',
     // Dirty fix to quickly get the startup OAuth mode:
     // Normally it would be preferred read GET parameters from the ActivatedRoute
@@ -62,6 +63,7 @@ export class PlatformInfoService {
       .pipe(filter((value) => Object.keys(value).length > 0))
       .subscribe((value) => {
         const previousState = this.platform.oauthMode
+        this.platform.queryParameters = value
         if (
           value.hasOwnProperty('oauth') ||
           value.hasOwnProperty('Oauth') ||
