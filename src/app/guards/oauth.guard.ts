@@ -31,11 +31,12 @@ export class OauthGuard implements CanActivateChild {
           // If there are errors, is a forceLogin or the user is not login
           // makes sure the user is going to the login page
           if (
-            (!state.url.startsWith('/signin') && value.forceLogin) ||
-            !value.userOrcid ||
-            !value.userName ||
-            value.errors.length ||
-            value.error
+            !state.url.startsWith('/signin') &&
+            // value.forceLogin || TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
+            (!value.userOrcid ||
+              !value.userName ||
+              value.errors.length ||
+              value.error)
           ) {
             // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
             // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
@@ -48,7 +49,7 @@ export class OauthGuard implements CanActivateChild {
             // make sure the user is going to the authorization page
           } else if (
             state.url.startsWith('/signin') &&
-            !value.forceLogin &&
+            // !value.forceLogin && TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
             value.userOrcid &&
             value.userName &&
             !value.errors.length &&
