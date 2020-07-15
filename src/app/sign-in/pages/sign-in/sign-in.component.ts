@@ -46,7 +46,7 @@ export class SignInComponent implements OnInit {
   ) {
     _route.queryParams
       .pipe(
-        // More info about signin query paramter https://members.orcid.org/api/oauth/get-oauthauthorize
+        // More info about signin query parameters https://members.orcid.org/api/oauth/get-oauthauthorize
         take(1),
         tap((value: OauthParameters) => {
           this.oauthParameters = value

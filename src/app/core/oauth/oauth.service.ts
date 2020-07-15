@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable, of, Subject, ReplaySubject } from 'rxjs'
-import { environment } from '../../../environments/environment'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { Injectable } from '@angular/core'
+import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
+import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
-import { RequestInfoForm, OauthParameters } from 'src/app/types'
+
+import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,9 @@ export class OauthService {
     })
   }
 
+  /**
+   * @deprecated since declareOauthSession will return the same subject one this was created
+   */
   loadRequestInfoFormFromMemory(): Observable<RequestInfoForm> {
     return this.requestInfoSubject
   }
@@ -90,7 +94,7 @@ export class OauthService {
       .post<RequestInfoForm>(
         environment.BASE_URL +
           // tslint:disable-next-line:max-line-length
-          `oauth/custom/init.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
+          `oauth/custom/init.json?${this.objectToUrlParameters(value)}`,
         value,
         { headers: this.headers }
       )
@@ -111,7 +115,7 @@ export class OauthService {
       .get<RequestInfoForm>(
         environment.BASE_URL +
           // tslint:disable-next-line:max-line-length
-          `oauth/custom/authorize.json?client_id=${value.client_id}&response_type=${value.response_type}&scope=${value.scope}&redirect_uri=${value.redirect_uri}`,
+          `oauth/custom/authorize.json?${this.objectToUrlParameters(value)}`,
         { headers: this.headers }
       )
       .pipe(
@@ -137,5 +141,11 @@ export class OauthService {
       environment.BASE_URL + 'social/signinData.json',
       { headers: this.headers }
     )
+  }
+
+  objectToUrlParameters(object: Object) {
+    return Object.keys(object)
+      .map((key) => `${key}=${encodeURIComponent(object[key])}`)
+      .join('&')
   }
 }
