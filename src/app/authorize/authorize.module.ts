@@ -12,6 +12,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 @NgModule({
   declarations: [AuthorizeComponent],
@@ -27,6 +28,7 @@ import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
     MatTooltipModule,
     TrustedIndividualsDropdownModule,
     InfoDropDownModule,
+    MatProgressBarModule,
   ],
 })
 export class AuthorizeModule {}

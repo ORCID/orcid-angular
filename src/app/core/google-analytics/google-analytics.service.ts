@@ -44,10 +44,12 @@ export class GoogleAnalyticsService {
   }
 
   reportError(description: string, fatal = false) {
-    console.log({
-      description: description,
-      fatal: fatal,
-    })
+    console.error(`
+    __Report error GA__
+    description: "${description}"
+    fatal: "${fatal}"
+    `)
+
     this.gtag('event', 'exception', {
       description: description,
       fatal: fatal,
@@ -132,7 +134,6 @@ export class GoogleAnalyticsService {
         this.gtag('event', action, {
           ...params,
           event_callback: () => {
-            console.log('EVENT FINISH!')
             clearTimeout(tmr)
             observer.next()
             observer.complete()

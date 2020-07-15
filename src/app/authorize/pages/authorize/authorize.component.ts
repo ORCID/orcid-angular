@@ -23,6 +23,8 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
   userName: string
+  loadingUserInfo = true
+  loadingTrustedIndividuals = true
 
   oauthRequest: RequestInfoForm
   trustedIndividuals: TrustedIndividuals
@@ -41,12 +43,17 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
       .getUserInfoOnEachStatusUpdate()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
+        this.loadingUserInfo = false
         this.userName = userInfo.displayName
         this.orcidUrl = userInfo.orcidUrl
       })
-    this._trustedIndividuals.getTrustedIndividuals().subscribe((data) => {
-      this.trustedIndividuals = data
-    })
+    this._trustedIndividuals
+      .getTrustedIndividuals()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((data) => {
+        this.loadingTrustedIndividuals = false
+        this.trustedIndividuals = data
+      })
   }
 
   ngOnInit(): void {}
@@ -54,8 +61,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   navigateTo(val) {
     this.window.location.href = val
   }
-
-  signout() {}
 
   authorize(value = true) {
     this._oauth.authorize(value).subscribe((data) => {
@@ -100,7 +105,10 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     }
   }
   changeAccount(delegator: Delegator) {
+    this.loadingTrustedIndividuals = true
+    this.loadingUserInfo = true
     this._trustedIndividuals.switchAccount(delegator).subscribe()
+    // TODO @leomendoza123 handle error with toaster
   }
   ngOnDestroy() {
     this.$destroy.next(true)

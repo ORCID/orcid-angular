@@ -18,6 +18,10 @@
               >Authorize access</mat-card-title
             >
           </mat-card-header>
+          <mat-progress-bar
+            *ngIf="loadingUserInfo || loadingTrustedIndividuals"
+            mode="indeterminate"
+          ></mat-progress-bar>
           <mat-card-content>
             <mat-divider class="orcid-divider"></mat-divider>
             <p
@@ -36,10 +40,11 @@
               <a
                 class="mat-button-font"
                 i18n="@@public-layout.sign_out"
-                (click)="signout()"
+                (click)="navigateTo('signout')"
                 >Sign out</a
               >
               <app-trusted-individuals-dropdown
+                *ngIf="trustedIndividuals"
                 (changeUser)="changeAccount($event)"
                 [trustedIndividuals]="trustedIndividuals"
               ></app-trusted-individuals-dropdown>

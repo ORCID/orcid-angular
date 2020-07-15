@@ -110,7 +110,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       this.hideErrors()
       this.loading = true
 
-      const $signIn = this._signIn.signIn(this.signInLocal)
+      const isOauth = this.signInLocal.type === TypeSignIn.oauth
+      const $signIn = this._signIn.signIn(this.signInLocal, isOauth)
       $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false

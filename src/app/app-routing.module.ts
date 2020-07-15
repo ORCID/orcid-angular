@@ -7,8 +7,8 @@ import {
   ApplicationRoutes,
 } from './constants'
 import { OauthGuard } from './guards/oauth.guard'
-import { constants } from 'buffer'
 import { AuthenticatedGuard } from './guards/authenticated.guard'
+import { SignInGuard } from './guards/sign-in.guard'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -71,8 +71,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.signin,
-    // todo @DanielPalafox temporarily disabled for QA
-    // canActivateChild: [OauthGuard],
+    canActivateChild: [SignInGuard, OauthGuard],
     loadChildren: () =>
       import('./sign-in/sign-in.module').then((m) => m.SignInModule),
   },
