@@ -4,9 +4,8 @@ import { Observable, of, Subject, ReplaySubject } from 'rxjs'
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError, retry, tap } from 'rxjs/operators'
-import { DeclareOauthSession } from 'src/app/types/declareOauthSession.endpoint'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
-import { RequestInfoForm } from 'src/app/types'
+import { RequestInfoForm, OauthParameters } from 'src/app/types'
 import { SignInData } from '../../types/sign-in-data.endpoint'
 
 @Injectable({
@@ -82,7 +81,7 @@ export class OauthService {
   // it send the Oauth query parameters to the backend and gets back the requestInfoForm
   // if the backend has an error declaring the Oauth parameters it will return a string on the errors array
 
-  declareOauthSession(value: DeclareOauthSession): Observable<RequestInfoForm> {
+  declareOauthSession(value: OauthParameters): Observable<RequestInfoForm> {
     if (this.oauthSectionDeclared) {
       return this.requestInfoSubject
     }
@@ -107,7 +106,7 @@ export class OauthService {
       )
   }
 
-  updateOauthSession(value: DeclareOauthSession): Observable<RequestInfoForm> {
+  updateOauthSession(value: OauthParameters): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
         environment.BASE_URL +

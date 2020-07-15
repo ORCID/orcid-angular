@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -7,20 +8,20 @@ import {
   OnInit,
   Output,
   ViewChild,
-  AfterViewInit,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { UsernameValidator } from '../../../shared/validators/username/username.validator'
-import { WINDOW } from '../../../cdk/window'
-import { SignInService } from '../../../core/sign-in/sign-in.service'
-import { TwoFactorComponent } from '../two-factor/two-factor.component'
-import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { ActivatedRoute, Router } from '@angular/router'
-import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
+import { OauthParameters } from 'src/app/types'
+
 import { PlatformInfoService } from '../../../cdk/platform-info'
-import { DeclareOauthSession } from '../../../types/declareOauthSession.endpoint'
-import { OauthService } from '../../../core/oauth/oauth.service'
+import { WINDOW } from '../../../cdk/window'
 import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
+import { OauthService } from '../../../core/oauth/oauth.service'
+import { SignInService } from '../../../core/sign-in/sign-in.service'
+import { UsernameValidator } from '../../../shared/validators/username/username.validator'
+import { SignInData } from '../../../types/sign-in-data.endpoint'
+import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
+import { TwoFactorComponent } from '../two-factor/two-factor.component'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -67,10 +68,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         this.signInLocal.type = TypeSignIn.oauth
         _route.queryParams.subscribe((params) => {
           this.signInLocal.params = {
-            client_id: params['client_id'],
-            response_type: params['response_type'],
-            scope: params['scope'],
-            redirect_uri: params['redirect_uri'],
+            ...(params as OauthParameters),
             oauth: '',
           }
         })
@@ -196,7 +194,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     }
   }
 
-  updateOauthSession(value: DeclareOauthSession) {
+  updateOauthSession(value: OauthParameters) {
     this._oauthService
       .updateOauthSession(value)
       .subscribe((requestInfoForm) => {
