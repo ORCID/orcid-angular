@@ -17,7 +17,7 @@ import { oauthSectionUserIsLoggedIn, oauthSectionHasError } from './constants'
 @Injectable({
   providedIn: 'root',
 })
-export class SignInGuard implements CanActivateChild {
+export class RegisterGuard implements CanActivateChild {
   constructor(
     private _oauth: OauthService,
     private _router: Router,
@@ -42,19 +42,10 @@ export class SignInGuard implements CanActivateChild {
   }
 
   handleOauthSection(queryParams: OauthParameters) {
-    // If the show login parameters is present redirect the user to the register
-    if (queryParams.show_login === 'false') {
-      return of(
-        this._router.createUrlTree(['/register'], {
-          queryParams: queryParams,
-        })
-      )
-    }
     // check if the user is already login or there are errors
     return this._oauth.declareOauthSession(queryParams).pipe(
       map((section) => {
         if (
-          // !section.forceLogin && TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
           oauthSectionUserIsLoggedIn(section) &&
           !oauthSectionHasError(section)
         ) {
