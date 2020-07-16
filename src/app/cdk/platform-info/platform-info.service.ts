@@ -10,6 +10,7 @@ import { WINDOW } from '../window'
 
 @Injectable()
 export class PlatformInfoService {
+  previouslyHadQueryParameters = false
   platform: PlatformInfo = {
     unsupportedBrowser: false,
     desktop: false,
@@ -60,8 +61,17 @@ export class PlatformInfoService {
     this.platformSubject.next(this.platform)
 
     _route.queryParams
-      .pipe(filter((value) => Object.keys(value).length > 0))
+      .pipe(
+        filter(
+          (value) =>
+            // The first value always empty (no matter if it has query parameters)
+            // this filter is a the current fix for that
+            // more info https://github.com/angular/angular/issues/12157
+            Object.keys(value).length > 0 || this.previouslyHadQueryParameters
+        )
+      )
       .subscribe((value) => {
+        this.previouslyHadQueryParameters = true
         const previousState = this.platform.oauthMode
         this.platform.queryParameters = value
         if (
