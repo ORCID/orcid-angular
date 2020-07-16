@@ -22,6 +22,7 @@ import { UsernameValidator } from '../../../shared/validators/username/username.
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -54,7 +55,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   passwordFormControl: FormControl
 
   constructor(
-    _platformInfo: PlatformInfoService,
+    private _platformInfo: PlatformInfoService,
     _route: ActivatedRoute,
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
@@ -178,21 +179,15 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   register() {
-    if (this.signInLocal.type === TypeSignIn.institutional) {
-      this._router.navigate([
-        '/register',
-        {
-          linkRequest: this.signInData.linkType,
-          emailId: this.signInData.emailEncoded,
-          firstName: this.signInData.firstNameEncoded,
-          lastName: this.signInData.lastNameEncoded,
-          providerId: this.signInData.providerIdEncoded,
-          accountId: this.signInData.accountIdEncoded,
-        },
-      ])
-    } else {
-      this._router.navigate(['/register'])
-    }
+    // always send the user with all query parameters
+    this._platformInfo
+      .get()
+      .pipe(take(1))
+      .subscribe((platform) => {
+        this._router.navigate(['/register'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 
   updateOauthSession(value: OauthParameters) {
