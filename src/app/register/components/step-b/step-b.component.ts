@@ -8,15 +8,9 @@ import { RegisterForm } from 'src/app/types/register.endpoint'
   templateUrl: './step-b.component.html',
   styleUrls: ['./step-b.component.scss'],
 })
-export class StepBComponent extends BaseStep implements OnInit {
-  @Input() personalData: RegisterForm
-  constructor(private _formBuilder: FormBuilder) {
+export class StepBComponent extends BaseStep {
+  @Input() personalData
+  constructor() {
     super()
-  }
-  ngOnInit() {
-    this.formGroup = this._formBuilder.group({
-      password: [''],
-      sendOrcidNews: [''],
-    })
   }
 }

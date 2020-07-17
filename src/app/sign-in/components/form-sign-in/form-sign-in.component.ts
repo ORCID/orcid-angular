@@ -23,6 +23,7 @@ import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { take } from 'rxjs/operators'
+import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -116,7 +117,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         this.printError = false
 
         if (data.success) {
-          if (data.url.toLowerCase().includes('oauth/authorize')) {
+          if (isARedirectToTheAuthorizationPage(data)) {
             this.updateOauthSession(this.signInLocal.params)
           } else {
             this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(

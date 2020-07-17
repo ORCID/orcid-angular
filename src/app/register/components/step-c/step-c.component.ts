@@ -7,16 +7,9 @@ import { BaseStep } from '../BaseStep'
   templateUrl: './step-c.component.html',
   styleUrls: ['./step-c.component.scss'],
 })
-export class StepCComponent extends BaseStep implements OnInit {
+export class StepCComponent extends BaseStep {
   @Input() loading
-  constructor(private _formBuilder: FormBuilder) {
+  constructor() {
     super()
-  }
-  ngOnInit() {
-    this.formGroup = this._formBuilder.group({
-      activitiesVisibilityDefault: [''],
-      termsOfUse: [''],
-      captcha: [''],
-    })
   }
 }

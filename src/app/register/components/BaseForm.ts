@@ -6,7 +6,7 @@ import {
   ValidationErrors,
   AsyncValidator,
 } from '@angular/forms'
-import { of, Observable } from 'rxjs'
+import { of, Observable, timer } from 'rxjs'
 import { filter, switchMap, map, tap, take, startWith } from 'rxjs/operators'
 
 export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
@@ -15,11 +15,11 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   constructor() {}
   writeValue(val: any): void {
     if (val != null && val !== undefined && val !== '') {
-      this.form.setValue(val, { emitEvent: false })
+      this.form.setValue(val, { emitEvent: true })
     }
   }
   registerOnChange(fn: any): void {
-    this.form.valueChanges.subscribe(value => {
+    this.form.valueChanges.subscribe((value) => {
       fn(value)
     })
   }
@@ -32,7 +32,7 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   validate(c: AbstractControl): Observable<ValidationErrors | null> {
     return this.form.statusChanges.pipe(
       startWith(this.form.status),
-      filter(value => value !== 'PENDING'),
+      filter((value) => value !== 'PENDING'),
       take(1),
       map(() => {
         return this.form.valid

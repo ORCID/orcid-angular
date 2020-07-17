@@ -1,67 +1,98 @@
-import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Inject,
+  ElementRef,
+  ChangeDetectorRef,
+  AfterViewInit,
+} from '@angular/core'
+import { FormGroup, FormBuilder } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { StepperSelectionEvent } from '@angular/cdk/stepper'
 import { RegisterForm } from 'src/app/types/register.endpoint'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
-import { switchMap, tap, map } from 'rxjs/operators'
+import { switchMap, tap, map, mapTo, take } from 'rxjs/operators'
 import { MatStep } from '@angular/material/stepper'
 import { MatDialog } from '@angular/material/dialog'
 import { WINDOW } from 'src/app/cdk/window'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { RequestInfoForm, OauthParameters } from 'src/app/types'
 import { EMPTY } from 'rxjs'
+import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('lastStep') lastStep: MatStep
   @ViewChild('stepComponentA', { read: ElementRef }) stepComponentA: ElementRef
   @ViewChild('stepComponentB', { read: ElementRef }) stepComponentB: ElementRef
   @ViewChild('stepComponentC', { read: ElementRef }) stepComponentC: ElementRef
   platform: PlatformInfo
-  FormGroupStepA: FormGroup = new FormGroup({})
-  FormGroupStepB: FormGroup = new FormGroup({})
-  FormGroupStepC: FormGroup = new FormGroup({})
+  FormGroupStepA: FormGroup
+  FormGroupStepB: FormGroup
+  FormGroupStepC: FormGroup
   isLinear = true
   personalData: RegisterForm
   backendForm: RegisterForm
   loading = false
   requestInfoForm: RequestInfoForm | null
+  oauthMode: boolean
   constructor(
-    _platformInfo: PlatformInfoService,
+    private _cdref: ChangeDetectorRef,
+    private _platformInfo: PlatformInfoService,
+    private _formBuilder: FormBuilder,
     private _register: RegisterService,
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
     private _gtag: GoogleAnalyticsService,
     private _oauth: OauthService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
     })
   }
   ngOnInit() {
+    console.log('INIT THE MAIN REGISTER VIEW ')
     this._register.getRegisterForm().subscribe()
+
+    this.FormGroupStepA = this._formBuilder.group({
+      personal: [''],
+    })
+    this.FormGroupStepB = this._formBuilder.group({
+      password: [''],
+      sendOrcidNews: [''],
+    })
+    this.FormGroupStepC = this._formBuilder.group({
+      activitiesVisibilityDefault: [''],
+      termsOfUse: [''],
+      captcha: [''],
+    })
+
     this._route.queryParams
       .pipe(
-        // TODO use the
-        // Check if there is a client_id parameter on the GET parameters
-        map((value: OauthParameters) => !!value.client_id),
-        // TODO leomendoza123 use platform service to check if Oauth mode
-        // If there is a Oauth parameter load the oauth context info
-        switchMap((triggeredByOauth) => {
-          if (triggeredByOauth) {
+        switchMap(() =>
+          this._platformInfo
+            .get()
+            .pipe(map((value) => value.oauthMode !== this.oauthMode))
+        ),
+        switchMap((oauthMode) => {
+          if (oauthMode) {
             return this._oauth.loadRequestInfoFormFromMemory().pipe(
               tap((value) => {
                 if (value) {
                   this.requestInfoForm = value
+                  this.FormGroupStepA = this.createFormBasedOnRequestInfoForm(
+                    this.requestInfoForm
+                  )
                 } else {
                   // TODO @leomendoza123 show toaster error
                   // for a oauth call the backend was expected to return a oauth context
@@ -76,6 +107,11 @@ export class RegisterComponent implements OnInit {
         })
       )
       .subscribe()
+  }
+
+  ngAfterViewInit(): void {
+    console.log('After view INIT REGISTER VIEW ')
+    this._cdref.detectChanges()
   }
 
   register(value) {
@@ -117,8 +153,8 @@ export class RegisterComponent implements OnInit {
                 this.requestInfoForm || 'Website'
               )
               .subscribe(
-                () => (this.window.location.href = response.url),
-                () => (this.window.location.href = response.url)
+                () => () => this.afterRegisterRedirectionHandler(response),
+                () => () => this.afterRegisterRedirectionHandler(response)
               )
           } else {
             // TODO @leomendoza123 HANDLE ERROR show toaster
@@ -127,6 +163,21 @@ export class RegisterComponent implements OnInit {
     } else {
       this.loading = false
       // TODO @leomendoza123 HANDLE ERROR show toaster
+    }
+  }
+
+  afterRegisterRedirectionHandler(response) {
+    if (isARedirectToTheAuthorizationPage(response)) {
+      return this._platformInfo
+        .get()
+        .pipe(take(1))
+        .subscribe((platform) => {
+          return this._router.navigate(['/oauth/authorize'], {
+            queryParams: platform.queryParameters,
+          })
+        })
+    } else {
+      this.window.location.href = response.url
     }
   }
 
@@ -212,5 +263,21 @@ export class RegisterComponent implements OnInit {
         nativeElementNextStep.scrollIntoView()
       }, 200)
     }
+  }
+
+  private createFormBasedOnRequestInfoForm(value: RequestInfoForm) {
+    return this._formBuilder.group({
+      personal: [
+        {
+          givenNames: value.userGivenNames,
+          familyNames: value.userFamilyNames,
+          emails: {
+            email: value.userEmail,
+            confirmEmail: value.userEmail,
+            additionalEmails: { '0': '' },
+          },
+        },
+      ],
+    })
   }
 }

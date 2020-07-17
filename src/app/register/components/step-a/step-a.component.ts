@@ -8,13 +8,8 @@ import { BaseStep } from '../BaseStep'
   styleUrls: ['./step-a.component.scss'],
   preserveWhitespaces: true,
 })
-export class StepAComponent extends BaseStep implements OnInit {
-  constructor(private _formBuilder: FormBuilder) {
+export class StepAComponent extends BaseStep {
+  constructor() {
     super()
-  }
-  ngOnInit(): void {
-    this.formGroup = this._formBuilder.group({
-      personal: [''],
-    })
   }
 }

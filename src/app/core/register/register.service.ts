@@ -122,9 +122,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
     requestInfoForm?: RequestInfoForm
   ): void {
     if (requestInfoForm) {
-      registerForm.referredBy.value = requestInfoForm.clientId
-      // @TODO leomendoza123 to be tested once the signin Oauth is read
-      // https://trello.com/c/xoTzzqSl/6675-signin-oauth-support
+      registerForm.referredBy = { value: requestInfoForm.clientId }
     }
   }
   addShibbolethContext(registerForm, type?: 'shibboleth'): void {
