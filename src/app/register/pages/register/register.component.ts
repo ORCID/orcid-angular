@@ -10,7 +10,10 @@ import {
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { StepperSelectionEvent } from '@angular/cdk/stepper'
-import { RegisterForm } from 'src/app/types/register.endpoint'
+import {
+  RegisterForm,
+  RegisterConfirmResponse,
+} from 'src/app/types/register.endpoint'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { switchMap, tap, map, mapTo, take } from 'rxjs/operators'
@@ -61,7 +64,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     })
   }
   ngOnInit() {
-    console.log('INIT THE MAIN REGISTER VIEW ')
     this._register.getRegisterForm().subscribe()
 
     this.FormGroupStepA = this._formBuilder.group({
@@ -110,7 +112,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('After view INIT REGISTER VIEW ')
     this._cdref.detectChanges()
   }
 
@@ -139,7 +140,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.FormGroupStepB,
               this.FormGroupStepC,
               null, // TODO @leomendoza123 support shibboleth https://github.com/ORCID/orcid-angular/issues/206
-              this.requestInfoForm
+              this.requestInfoForm,
+              this.platform.oauthMode // request client service to be update (only when the next navigation wont go outside this app)
             )
           })
         )
@@ -153,8 +155,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 this.requestInfoForm || 'Website'
               )
               .subscribe(
-                () => () => this.afterRegisterRedirectionHandler(response),
-                () => () => this.afterRegisterRedirectionHandler(response)
+                () => this.afterRegisterRedirectionHandler(response),
+                () => this.afterRegisterRedirectionHandler(response)
               )
           } else {
             // TODO @leomendoza123 HANDLE ERROR show toaster
@@ -166,16 +168,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  afterRegisterRedirectionHandler(response) {
+  afterRegisterRedirectionHandler(response: RegisterConfirmResponse) {
     if (isARedirectToTheAuthorizationPage(response)) {
-      return this._platformInfo
+      this._platformInfo
         .get()
         .pipe(take(1))
-        .subscribe((platform) => {
-          return this._router.navigate(['/oauth/authorize'], {
+        .subscribe((platform) =>
+          this._router.navigate(['/oauth/authorize'], {
             queryParams: platform.queryParameters,
           })
-        })
+        )
     } else {
       this.window.location.href = response.url
     }
