@@ -57,4 +57,51 @@ source_file = src/locale/properties/signin/signin.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
 
+[orcid-angular.src-locale-properties-institutional-institutional-en-properties--master]
+file_filter = src/locale/properties/institutional/institutional.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/institutional/institutional.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
 
+[orcid-angular.src-locale-properties-linking-linking-en-properties--master]
+file_filter = src/locale/properties/linking/linking.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/linking/linking.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-register-register-en-properties--master]
+file_filter = src/locale/properties/register/register.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/register/register.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-inbox-inbox-en-properties--master]
+file_filter = src/locale/properties/inbox/inbox.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/inbox/inbox.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-delegators-delegators-en-properties--master]
+file_filter = src/locale/properties/delegators/delegators.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/delegators/delegators.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-authorize-authorize-en-properties--master]
+file_filter = src/locale/properties/authorize/authorize.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/authorize/authorize.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-shared-shared-en-properties--master]
+file_filter = src/locale/properties/shared/shared.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/shared/shared.en.properties
+source_lang = en
+type = UNICODEPROPERTIES

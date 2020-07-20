@@ -11,12 +11,12 @@
   :host {
     border-color: map-get($foreground, divider);
     .title-container {
-      color: $dark-primary-text;
+      color: $orcid-dark-primary-text;
     }
     .general-data,
     .type,
     .card-footer {
-      color: $dark-secondary-text;
+      color: $orcid-dark-secondary-text;
     }
   }
 }

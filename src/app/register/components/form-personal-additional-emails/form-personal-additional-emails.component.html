@@ -18,6 +18,7 @@
         formControlName="{{ additionalEmailControl.key }}"
         matInput
         [errorStateMatcher]="backendErrorsMatcher"
+        appTrim
       />
       <mat-error
         *ngIf="
@@ -43,7 +44,7 @@
     <button
       *ngIf="i == 0"
       mat-icon-button
-      aria-label="info about names"
+      [attr.aria-label]="labelInfoAboutEmails"
       type="button"
       [mdePopoverTriggerFor]="namesPopover"
       mdePopoverTriggerOn="click"
@@ -54,7 +55,7 @@
     <button
       *ngIf="i > 0"
       mat-icon-button
-      aria-label="delete email"
+      [attr.aria-label]="labelDeleteEmail"
       type="button"
       (click)="deleteEmailInput(additionalEmailControl.key)"
     >
@@ -77,14 +78,14 @@
 >
   <mat-card class="mat-elevation-z3 orcid-popover">
     <ng-container i18n="@@register.additionalEmailInfo"
-      >Ensure that you never lose access to your ORCID record by registering all
-      of your email addresses on your account.</ng-container
+      >Ensure that you never lose access to your ORCID record by registering
+      additional email addresses on your account.</ng-container
     >
 
     <button
       mat-button
       color="primary"
-      aria-label="close"
+      [attr.aria-label]="labelClose"
       (click)="additionalEmailsPopoverTrigger.closePopover()"
       cdkFocusInitial
       i18n="@@shared.ok"

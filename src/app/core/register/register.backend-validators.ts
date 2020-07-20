@@ -63,14 +63,12 @@ export function RegisterBackendValidatorMixin<
       return this._http
         .post<RegisterForm>(
           environment.API_WEB +
-            `oauth/custom/register/${
-              this.formInputs[controlName].validationEndpoint
-            }.json`,
+            `oauth/custom/register/${this.formInputs[controlName].validationEndpoint}.json`,
           value
         )
         .pipe(
           retry(3),
-          catchError(this._errorHandler.handleError)
+          catchError((error) => this._errorHandler.handleError(error))
         )
     }
 
@@ -88,7 +86,7 @@ export function RegisterBackendValidatorMixin<
 
         return this.validateRegisterValue(controlName, value)
           .pipe(
-            map(res => {
+            map((res) => {
               if (
                 res[controlName].errors &&
                 res[controlName].errors.length > 0
@@ -103,7 +101,7 @@ export function RegisterBackendValidatorMixin<
           )
           .pipe(
             retry(3),
-            catchError(this._errorHandler.handleError)
+            catchError((error) => this._errorHandler.handleError(error))
           )
       }
     }
@@ -116,14 +114,14 @@ export function RegisterBackendValidatorMixin<
         }
         return this.validateRegisterValue('emailsAdditional', value)
           .pipe(
-            map(response => {
+            map((response) => {
               // Add errors to additional emails controls
               return this.setFormGroupEmailErrors(response, 'backendErrors')
             })
           )
           .pipe(
             retry(3),
-            catchError(this._errorHandler.handleError)
+            catchError((error) => this._errorHandler.handleError(error))
           )
       }
     }
@@ -138,14 +136,14 @@ export function RegisterBackendValidatorMixin<
         }
         return this.validateRegisterValue('password', value)
           .pipe(
-            map(response => {
+            map((response) => {
               // Add errors to additional emails controls
               return this.setFormGroupPasswordErrors(response, 'backendErrors')
             })
           )
           .pipe(
             retry(3),
-            catchError(this._errorHandler.handleError)
+            catchError((error) => this._errorHandler.handleError(error))
           )
       }
     }
@@ -165,7 +163,7 @@ export function RegisterBackendValidatorMixin<
         .post<RegisterForm>(`${environment.API_WEB}register.json`, registerForm)
         .pipe(
           retry(3),
-          catchError(this._errorHandler.handleError)
+          catchError((error) => this._errorHandler.handleError(error))
         )
     }
 
@@ -180,7 +178,7 @@ export function RegisterBackendValidatorMixin<
         email: [],
       }
 
-      registerForm.emailsAdditional.forEach(responseControl => {
+      registerForm.emailsAdditional.forEach((responseControl) => {
         if (responseControl.errors && responseControl.errors.length > 0) {
           hasErrors = true
           error[errorGroup]['additionalEmails'][responseControl.value] =

@@ -9,7 +9,10 @@
 @import './material.orcid.overwrites.scss/snackbar-theme';
 @import './material.orcid.overwrites.scss/paginator.scss';
 @import './material.orcid.overwrites.scss/card-theme';
-
+@import './material.orcid.overwrites.scss/form-field-outline-theme';
+@import './material.orcid.overwrites.scss/_divider-theme.scss';
+@import './orcid/_urls-theme.scss';
+@import './material.orcid.overwrites.scss/form-field-theme';
 // .
 // .
 // MATERIAL THEMING
@@ -27,6 +30,7 @@
 // More info about this on https://github.com/angular/components/blob/8.1.4/guides/customizing-component-styles.md
 // The following mixings and styles overwrite or extend material styles
 @include mat-base-typography-overwrites($orcid-material-typography);
+@include angular-material-form-field-typography($orcid-material-typography);
 @import './material.orcid.overwrites.scss/chips.scss';
 @include mat-chips-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/button.scss';
@@ -41,3 +45,9 @@
 @import './material.orcid.overwrites.scss/stepper.scss';
 @import './material.orcid.overwrites.scss/mde-popover.scss';
 @import './material.orcid.overwrites.scss/radio.scss';
+@import './material.orcid.overwrites.scss/snackbar.scss';
+@include mat-form-field-outline-theme-overwrites($orcid-app-theme);
+@include mat-divider-theme-overwrites($orcid-app-theme);
+@import './material.orcid.overwrites.scss/divider.scss';
+@include mat-button-theme-overwrites($orcid-app-theme);
+@import './orcid/urls.scss';

@@ -7,8 +7,8 @@ import {
   ChangeDetectorRef,
 } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { TLD_REGEXP } from 'src/app/constants'
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
+import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-form-personal-additional-emails',
@@ -16,6 +16,9 @@ import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForF
   styleUrls: ['./form-personal-additional-emails.component.scss'],
 })
 export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
+  labelInfoAboutEmails = $localize`:@@register.ariaLabelInfoEmails:info about emails`
+  labelDeleteEmail = $localize`:@@register.ariaLabelDeleteEmail:delete email`
+  labelClose = $localize`:@@register.ariaLabelClose:close`
   @Input() additionalEmails: FormGroup
   additionalEmailsPopoverTrigger
   additionalEmailsCount = 1
@@ -47,7 +50,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
     this.additionalEmails.addControl(
       this.zeroPad(controlName, 2),
       new FormControl('', {
-        validators: [Validators.email, Validators.pattern(TLD_REGEXP)],
+        validators: [OrcidValidators.email],
       })
     )
   }

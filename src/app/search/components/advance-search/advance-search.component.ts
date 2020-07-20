@@ -16,7 +16,7 @@ import { Router } from '@angular/router'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { SearchResults } from 'src/app/types'
+import { SearchResults, ScreenDirection } from 'src/app/types'
 import { SearchService } from 'src/app/core/search/search.service'
 import { WINDOW } from 'src/app/cdk/window'
 
@@ -34,6 +34,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   isAPhoneScreen = false
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder = $localize`:@@ngOrcid.search.institutionNamePlaceholder:affiliation or organization ID`
+  ngOrcidSearchAdvanceSearch = $localize`:@@ngOrcid.search.advanceSearch:ADVANCED SEARCH`
   advanceSearch: FormGroup
   constructor(
     _platform: PlatformInfoService,
@@ -42,7 +43,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
     @Optional() private router: Router,
     private _changeDec: ChangeDetectorRef
   ) {
-    _platform.get().subscribe(data => {
+    _platform.get().subscribe((data) => {
       this.isAPhoneScreen = data.columns4
     })
     this.advanceSearch = new FormGroup(
@@ -104,7 +105,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   }
 
   // tslint:disable-next-line: member-ordering
-  tempFixForOutlineFormInputCalculationIssue_Direction = 'ltr'
+  tempFixForOutlineFormInputCalculationIssue_Direction: ScreenDirection = 'ltr'
   tempFixForOutlineFormInputCalculation() {
     // This is a temporal way to fix an MatFormField issue
     // that does not allow the correct calculation for the border gap on the outline form inputs on RTL languages.

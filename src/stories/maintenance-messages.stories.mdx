@@ -1,0 +1,11 @@
+import MantainceMessage from '../../guides/mantaince-message.md'
+import { moduleMetadata } from '@storybook/angular'
+import { Description } from '@storybook/addon-docs/blocks'
+
+<Meta
+  title="Docs|Maintenance messages"
+  decorators={[moduleMetadata({ imports: [] })]}
+  parameters={{ order: 6 }}
+/>
+
+<Description markdown={MantainceMessage} />

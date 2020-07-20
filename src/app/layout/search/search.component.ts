@@ -14,10 +14,12 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./search.component.scss-theme.scss', './search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  labelSearch = $localize`:@@layout.ariaLabelSearch:Search`
   form: FormGroup
   platform: PlatformInfo
   togglzEnableUserMenu: boolean
   togglzOrcidAngularSearch: boolean
+  togglzNewInfoSite: boolean
   signinRegisterButton = true
   whereToSearch = [
     this.firstLetterUppercase(
@@ -44,15 +46,23 @@ export class SearchComponent implements OnInit {
     public _changeDetection: ChangeDetectorRef,
     location: Location
   ) {
-    _platform.platformSubject.subscribe(data => {
+    _platform.platformSubject.subscribe((data) => {
       this.platform = data
     })
     _togglz
       .getStateOf('ENABLE_USER_MENU')
-      .subscribe(value => (this.togglzEnableUserMenu = value))
+      .subscribe((value) => (this.togglzEnableUserMenu = value))
     _togglz
       .getStateOf('ORCID_ANGULAR_SEARCH')
-      .subscribe(value => (this.togglzOrcidAngularSearch = value))
+      .subscribe((value) => (this.togglzOrcidAngularSearch = value))
+    _togglz.getStateOf('NEW_INFO_SITE').subscribe((value) => {
+      this.togglzNewInfoSite = value
+      if (!this.togglzNewInfoSite) {
+        this.searchPlaceHolder = this.firstLetterUppercase(
+          $localize`:@@ngOrcid.searchNewInfo:Search the ORCID registry`
+        )
+      }
+    })
 
     router.events.subscribe(
       () =>

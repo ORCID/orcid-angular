@@ -1,7 +1,7 @@
-// On top of Angular email validator that follows RFC rules
-// https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
-// this REGEXP adds the requirement of ending with a TLD as defined on RFC2396
-export const TLD_REGEXP = /^.*\.([a-zA-Z\-])([a-zA-Z\-]{0,61})([a-zA-Z\-])$/
+// Custom email REGEXP
+// https://regex101.com/r/jV4aN7/8
+// tslint:disable-next-line: max-line-length
+export const EMAIL_REGEXP = /^([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."\(\)\[\]\{\}\\/,:;]|(".+"))+@[^@\s\."'\(\)\[\]\{\}\\/,:;]+(\.[^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
 // https://regex101.com/r/9MXmdl/1
 export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://regex101.com/r/V95col/6
@@ -17,8 +17,13 @@ export const HAS_NUMBER = /(?=.*[0-9]).*/
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 
 export const ApplicationRoutes = {
+  institutionalLinking: 'institutional-linking',
+  social: 'social-linking',
+  institutional: 'institutional-signin',
+  inbox: 'inbox',
   login: 'login',
   signin: 'signin',
+  authorize: 'oauth/authorize',
   search: 'orcid-search/search',
   resetPassword: 'reset-password',
   register: 'register',
@@ -71,3 +76,5 @@ export const GRID_COLUMNS = {
 }
 
 export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']
+
+export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10

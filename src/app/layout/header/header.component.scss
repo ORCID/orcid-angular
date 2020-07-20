@@ -26,7 +26,8 @@ nav {
     padding: 0;
   }
 
-  .top-bar {
+  .top-bar,
+  .top-bar-new-info {
     height: 60px;
     margin-bottom: 60px;
     .menu-container {
@@ -36,6 +37,9 @@ nav {
         position: relative;
         .col {
           & button {
+            &.active {
+              border-radius: 0;
+            }
           }
           .row {
             position: absolute;
@@ -51,22 +55,6 @@ nav {
 .columns-8,
 .columns-4 {
   :host {
-    header.container.fixed-header-mode {
-      padding: 0 8px;
-      > .row {
-        position: fixed;
-        height: 60px;
-        width: 100%;
-        z-index: 10000;
-        padding-top: 2px;
-        background-color: white;
-        left: 0;
-        > .col {
-          margin: 0 8px;
-        }
-      }
-    }
-
     header.container {
       height: 62px;
       padding-bottom: 0;
@@ -85,7 +73,8 @@ nav {
         }
       }
       nav {
-        .top-bar {
+        .top-bar,
+        .top-bar-new-info {
           .menu-container {
             nav {
               .top-bar {

@@ -13,5 +13,43 @@ button.mat-button-wrap-text {
     max-width: 100%;
     text-align: center;
     white-space: normal;
+    word-break: break-word;
   }
+}
+
+button.mat-button-wrap-text-with-icon {
+  padding-left: 40px; // save space for the icon or image
+  img,
+  mat-icon {
+    margin: auto;
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+  }
+}
+
+button.mat-button-wrap-text-with-icon.mobile-fixed-width {
+  .columns-4 & {
+    span {
+      display: inline-block;
+      width: 180px;
+      margin: auto;
+      word-break: break-word;
+      white-space: normal;
+      line-height: 24px;
+    }
+  }
+}
+
+[dir='rtl'] button.mat-button-wrap-text-with-icon {
+  img {
+    right: 20px;
+    left: unset;
+  }
+}
+
+.no-hover-effect.mat-button .mat-button-focus-overlay {
+  background-color: transparent;
 }

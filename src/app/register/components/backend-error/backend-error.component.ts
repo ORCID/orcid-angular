@@ -18,6 +18,7 @@ enum RegisterBackendErrors {
 export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors
   @Input() errorCode: string
+  @Input() value?: string
   unrecognizedError = false
   constructor() {}
   ngOnInit() {

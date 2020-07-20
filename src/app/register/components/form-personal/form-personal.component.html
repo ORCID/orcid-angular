@@ -2,7 +2,7 @@
   <div class="input-container">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.firstName">First name</mat-label>
-      <input formControlName="givenNames" matInput />
+      <input formControlName="givenNames" matInput #firstInput />
       <mat-error
         *ngIf="form.hasError('required', 'givenNames')"
         i18n="@@register.firstNamePassword"
@@ -24,7 +24,7 @@
 
     <button
       mat-icon-button
-      aria-label="info about names"
+      [attr.aria-label]="labelInfoAboutName"
       type="button"
       [mdePopoverTriggerFor]="namesPopover"
       mdePopoverTriggerOn="click"
@@ -57,7 +57,7 @@
   <ng-container formGroupName="emails">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.primaryEmail">Primary email</mat-label>
-      <input formControlName="email" matInput />
+      <input formControlName="email" matInput appTrim type="email" />
       <mat-error
         *ngIf="form.hasError('required', 'emails.email')"
         i18n="@@register.primaryEmailRequired"
@@ -78,7 +78,10 @@
         <div
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
-          <app-backend-error [errorCode]="error"></app-backend-error>
+          <app-backend-error
+            [errorCode]="error"
+            [value]="emails.get('email').value"
+          ></app-backend-error>
         </div>
       </mat-error>
     </mat-form-field>
@@ -86,7 +89,14 @@
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >
-      <input formControlName="confirmEmail" matInput (paste)="(false)" />
+      <input
+        formControlName="confirmEmail"
+        matInput
+        (paste)="(false)"
+        appTrim
+        autocomplete="off"
+        type="email"
+      />
       <mat-error
         *ngIf="form.hasError('required', 'emails.confirmEmail')"
         i18n="@@register.confirmEmailRequired"
@@ -138,27 +148,19 @@
     the following message is not translated since is very likely to be change
   -->
   <mat-card class="mat-elevation-z3 orcid-popover">
-    <p>First name is your given name or the name you most commonly go by.</p>
-    <p>Last name is your family name.</p>
-    <p>
+    <p i18n="@@register.firstNameDetail">
+      First name is your given name or the name you most commonly go by.
+    </p>
+    <p i18n="@@register.lastNameDetail">Last name is your family name.</p>
+    <p i18n="@@register.youWillHaveAChance">
       You will have a chance to add additional names after you have created your
       account.
     </p>
     <a
       href="https://support.orcid.org/hc/articles/360006973853"
       target="orcid.frontend.register.help.more_info.link.text"
-      i18n="@@register.moreInfo"
+      i18n="@@register.moreInfoOnNames"
       >More information on names</a
     >
-    <button
-      mat-button
-      color="primary"
-      aria-label="close"
-      (click)="namesPopoverTrigger.closePopover()"
-      cdkFocusInitial
-      i18n="@@shared.ok"
-    >
-      Ok
-    </button>
   </mat-card>
 </mde-popover>

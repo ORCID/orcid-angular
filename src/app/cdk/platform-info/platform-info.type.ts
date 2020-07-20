@@ -1,5 +1,10 @@
+import { Params } from '@angular/router'
+
 export interface PlatformInfo {
-  unsupportedBrowser
+  rtl: boolean
+  ltr: boolean
+  screenDirection: 'rtl' | 'ltr'
+  unsupportedBrowser: boolean
   desktop: boolean
   tabletOrHandset: boolean
   tablet: boolean
@@ -11,4 +16,8 @@ export interface PlatformInfo {
   columns4: boolean
   columns8: boolean
   columns12: boolean
+  oauthMode: boolean
+  social: boolean
+  institutional: boolean
+  queryParameters: Params
 }

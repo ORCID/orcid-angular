@@ -20,6 +20,21 @@
       border-color: mat-color($background, dark-grey);
     }
   }
+  .input-box-new-info {
+    input {
+      border: solid 1px mat-color($background, grey);
+    }
+
+    ::placeholder {
+      color: mat-color($background, grey);
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: mat-color($background, grey);
+    }
+  }
+
   .search-icon {
     background-color: mat-color($background, dark-grey);
     color: mat-contrast($primary, 500);

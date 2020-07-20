@@ -3,3 +3,11 @@
 .mat-radio-button {
   margin-bottom: 10px;
 }
+
+mat-radio-button.orcid-radio-button-with-icons {
+  .mat-radio-label-content {
+    display: flex;
+    align-items: center;
+    white-space: normal;
+  }
+}

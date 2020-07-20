@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+src/locale/messages.xlf
 
 # dependencies
 /node_modules
@@ -49,3 +50,4 @@ sripts/lighthouse/environment.ts.js
 
 audits/*
 scripts/lighthouse/environment.ts
+tx.exe

@@ -1,0 +1,45 @@
+<app-info-drop-down
+  [name]="notification.source.sourceName.content"
+  [description]="notification.sourceDescription"
+></app-info-drop-down>
+
+<!--  https://github.com/ORCID/ORCID-Source/blob/a9868bbc959b151d7c761936b610936faf1b2d84/orcid-web/src/main/resources/freemarker/includes/ng2_templates/notification-body-ng2-template.ftl#L81 -->
+
+<p>
+  has updated the {{ getNotificationSectionUpdatedLabel(notification) }} section
+  of your record:
+</p>
+
+<strong>{{ getAmendedTypeLabel(item) }}</strong>
+
+<div class="item" *ngIf="item">
+  <ng-container>-</ng-container>
+
+  <ng-container
+    *ngIf="item.additionalInfo && item.additionalInfo['org_name'] != undefined"
+  >
+    <i>{{ item.additionalInfo['org_name'] }} </i>
+  </ng-container>
+
+  <ng-container *ngIf="item.itemName != null">{{ item.itemName }}</ng-container>
+
+  <ng-container *ngIf="item.additionalInfo">
+    <ng-container
+      *ngIf="
+        item.itemName == null && item.additionalInfo['group_name'] != undefined
+      "
+      >{{ item.additionalInfo['group_name'] }}</ng-container
+    >
+    <div *ngIf="item.additionalInfo['external_identifiers'] != undefined">
+      <ul
+        *ngFor="
+          let otherId of item.additionalInfo['external_identifiers'][
+            'externalIdentifier'
+          ]
+        "
+      >
+        <li>{{ otherId.type }}: {{ otherId.value }}</li>
+      </ul>
+    </div>
+  </ng-container>
+</div>

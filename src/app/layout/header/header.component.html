@@ -1,11 +1,7 @@
-<header
-  role="presentation"
-  class="container"
-  [ngClass]="{ 'fixed-header-mode': mobileMenuState }"
->
+<header role="presentation" class="container">
   <div class="row end">
     <div class="col l5 m8 s4 middle logo-menu-container" role="banner">
-      <a routerLink="/" class="logo-container" aria-label="orcid mini logo">
+      <a routerLink="/" class="logo-container" [attr.aria-label]="labelLogo">
         <img
           src="./assets/vectors/orcid.logo.svg"
           alt="orcid logo"
@@ -15,7 +11,8 @@
           role="link"
           class="mat-body-2"
           *ngIf="platform.columns12"
-          i18n="#sentenceCase@@confirm-oauth-access.connectingresearchandresearchers"
+          i18n="
+            #sentenceCase@@confirm-oauth-access.connectingresearchandresearchers"
         >
           Connecting research and researchers
         </div>
@@ -60,9 +57,14 @@
 <nav
   (mouseleave)="mouseLeave()"
   *ngIf="mobileMenuState || platform.columns12"
-  aria-label="main menu"
+  [attr.aria-label]="labelMenu"
 >
-  <div class="top-bar">
+  <div
+    [ngClass]="{
+      'top-bar': !togglzNewInfoSite,
+      'top-bar-new-info': togglzNewInfoSite
+    }"
+  >
     <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
       <ng-template #recursiveList let-list let-parents="parents">
         <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
@@ -70,7 +72,8 @@
             <button
               *ngIf="checkMenuItemRequirements(item.requirements) === true"
               [ngClass]="{
-                active: item.activeRoute === currentRoute
+                active: item.activeRoute === currentRoute,
+                'no-hover-effect': togglzNewInfoSite
               }"
               mat-button
               [color]="menuButtonColor(parents)"
@@ -141,6 +144,7 @@
         </li>
       </ul>
     </div>
+    <mat-divider class="row"></mat-divider>
   </div>
 </nav>
 

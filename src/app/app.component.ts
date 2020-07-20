@@ -4,6 +4,7 @@ import { GoogleAnalyticsService } from './core/google-analytics/google-analytics
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
 import { CookieService } from 'ngx-cookie-service'
+import { ZendeskService } from './core/zendesk/zendesk.service'
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ import { CookieService } from 'ngx-cookie-service'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  direction
+  oauthMode = false
+  screenDirection
+  currentRoute
   @HostBinding('class.edge') edge
   @HostBinding('class.ie') ie
   @HostBinding('class.tabletOrHandset') tabletOrHandset
@@ -24,18 +27,19 @@ export class AppComponent {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    @Inject(LOCALE_ID) public locale: string,
     _router: Router,
-    _googleAnalytics: GoogleAnalyticsService
+    _googleAnalytics: GoogleAnalyticsService,
+    _zendesk: ZendeskService
   ) {
-    _platformInfo.get().subscribe(platformInfo => {
+    _platformInfo.get().subscribe((platformInfo) => {
       this.setPlatformClasses(platformInfo)
+      this.screenDirection = platformInfo.screenDirection
+      _zendesk.adaptPluginToPlatform(platformInfo)
     })
-    this.direction = locale === 'ar' ? 'rtl' : null
-
-    _router.events.subscribe(event => {
+    _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         _googleAnalytics.reportNavigationStart(event.url)
+        this.currentRoute = event.url
       }
       if (event instanceof NavigationEnd) {
         _googleAnalytics.reportNavigationEnd(event.url)
@@ -45,6 +49,7 @@ export class AppComponent {
   }
 
   setPlatformClasses(platformInfo: PlatformInfo) {
+    this.oauthMode = platformInfo.oauthMode
     this.ie = platformInfo.ie
     this.edge = platformInfo.edge
     this.tabletOrHandset = platformInfo.tabletOrHandset

@@ -11,10 +11,10 @@ import { MatChip } from '@angular/material/chips'
 import { matFormFieldAnimations } from '@angular/material/form-field'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { WINDOW } from 'src/app/cdk/window'
-import { TLD_REGEXP } from 'src/app/constants'
 import { Observable } from 'rxjs'
 import { PasswordRecovery } from 'src/app/types'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-password-recovery',
@@ -38,8 +38,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
 
   emailFormControl = new FormControl('', [
     Validators.required,
-    Validators.email,
-    Validators.pattern(TLD_REGEXP),
+    OrcidValidators.email,
   ])
   typeFormControl = new FormControl('resetPassword', [Validators.required])
 
@@ -76,7 +75,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
         $recovery = this._passwordRecovery.resetPassword(value)
       }
       $recovery.subscribe(
-        data => {
+        (data) => {
           this.loading = false
           // Sets the list of backend errors to the control
           if (data.errors && data.errors.length) {
@@ -87,14 +86,18 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
             this.submitted = true
           }
         },
-        error => {
+        (error) => {
           // Display server errors
           this.loading = false
           this._snackBar.showErrorMessage(
             $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
             // tslint:disable-next-line: max-line-length
             $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
-            error.message
+            error.message,
+            {
+              message: '/reset-password.couldnt-recover :' + error.message,
+              fatal: true,
+            }
           )
         }
       )

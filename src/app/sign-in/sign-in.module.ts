@@ -14,6 +14,9 @@ import { DeactivatedComponent } from './components/errors/deactivated/deactivate
 import { TwoFactorComponent } from './components/two-factor/two-factor.component'
 import { LoggedInComponent } from './components/logged-in/logged-in.component'
 import { PrintErrorsComponent } from './components/errors/print-errors/print-errors.component'
+import { FormSignInComponent } from './components/form-sign-in/form-sign-in.component'
+import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { PrintErrorsComponent } from './components/errors/print-errors/print-err
     TwoFactorComponent,
     LoggedInComponent,
     PrintErrorsComponent,
+    FormSignInComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,10 @@ import { PrintErrorsComponent } from './components/errors/print-errors/print-err
     MatProgressBarModule,
     MatDividerModule,
     SignInRoutingModule,
+    FormDirectivesModule,
+    A11yLinkModule,
   ],
   entryComponents: [],
+  exports: [FormSignInComponent],
 })
 export class SignInModule {}
