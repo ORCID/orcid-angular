@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, retry, tap, switchMap } from 'rxjs/operators'
 import { SignIn } from '../../types/sign-in.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
@@ -80,6 +80,19 @@ export class SignInService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  singOut() {
+    return this._http
+      .get<SignIn>(environment.API_WEB + 'userStatus.json?logUserOut=true', {
+        headers: this.headers,
+        withCredentials: true,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap(() => this._userService.refreshUserStatus())
       )
   }
 }

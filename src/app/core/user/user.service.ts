@@ -109,7 +109,7 @@ export class UserService {
           switchMap((loggedIn) => {
             this.currentlyLoggedIn = loggedIn
             if (!loggedIn) {
-              return of(false)
+              return of({ loggedIn: false })
             }
             if (loggedIn) {
               // return an object with the most recent response of both endpoints

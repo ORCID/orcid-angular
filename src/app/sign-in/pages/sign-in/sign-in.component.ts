@@ -66,6 +66,9 @@ export class SignInComponent implements OnInit {
         if (this.isLoggedIn) {
           this.displayName = info.displayName
           this.realUserOrcid = info.orcidUrl
+        } else {
+          this.displayName = null
+          this.realUserOrcid = null
         }
       })
   }

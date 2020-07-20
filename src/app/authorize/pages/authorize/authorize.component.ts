@@ -4,7 +4,7 @@ import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserService } from 'src/app/core'
 import { Subject, forkJoin, Observable } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, tap, switchMap, take } from 'rxjs/operators'
 import { ScopesStrings } from 'src/app/types/common.endpoint'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
@@ -12,6 +12,10 @@ import {
   TrustedIndividuals,
   Delegator,
 } from 'src/app/types/trusted-individuals.endpoint'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { map } from 'puppeteer/DeviceDescriptors'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-authorize',
@@ -33,7 +37,10 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _oauth: OauthService,
     private _gtag: GoogleAnalyticsService,
-    private _trustedIndividuals: TrustedIndividualsService
+    private _trustedIndividuals: TrustedIndividualsService,
+    private _signingService: SignInService,
+    private _platformInfo: PlatformInfoService,
+    private _router: Router
   ) {
     _oauth.loadRequestInfoFormFromMemory().subscribe((data) => {
       this.oauthRequest = data
@@ -43,9 +50,14 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
       .getUserInfoOnEachStatusUpdate()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
-        this.loadingUserInfo = false
-        this.userName = userInfo.displayName
-        this.orcidUrl = userInfo.orcidUrl
+        if (userInfo.loggedIn) {
+          this.loadingUserInfo = false
+          this.userName = userInfo.displayName
+          this.orcidUrl = userInfo.orcidUrl
+        } else {
+          this.userName = null
+          this.orcidUrl = null
+        }
       })
     this._trustedIndividuals
       .getTrustedIndividuals()
@@ -60,6 +72,18 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
 
   navigateTo(val) {
     this.window.location.href = val
+  }
+
+  signOut() {
+    this._signingService
+      .singOut()
+      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
+      .subscribe((platform) => {
+        console.log(platform)
+        this._router.navigate(['/signin'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 
   authorize(value = true) {

@@ -3,10 +3,7 @@
     >This email already exists in our system. Would you like to</ng-container
   >
 
-  <a
-    routerLink="/signin"
-    [queryParams]="{ email: value }"
-    i18n="@@register.signinLowerCase"
+  <a (click)="navigateToSignin(value)" i18n="@@register.signinLowerCase"
     >sign in</a
   ><ng-container i18n="@@shared.questionMark">?</ng-container>
 </ng-container>
