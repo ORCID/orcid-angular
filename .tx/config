@@ -99,9 +99,9 @@ source_file = src/locale/properties/authorize/authorize.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-linking-linking-en-properties--master]
-file_filter = src/locale/properties/linking/linking.<lang>.properties
+[orcid-angular.src-locale-properties-shared-shared-en-properties--master]
+file_filter = src/locale/properties/shared/shared.<lang>.properties
 minimum_perc = 0
-source_file = src/locale/properties/linking/linking.en.properties
+source_file = src/locale/properties/shared/shared.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
