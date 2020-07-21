@@ -64,9 +64,9 @@ export class PlatformInfoService {
       .pipe(
         filter(
           (value) =>
-            // The first value always empty (no matter if it has query parameters)
+            // The first ActivatedRoute queryParams value always an empty object (no matter if it has query parameters)
+            // because of the issue https://github.com/angular/angular/issues/12157
             // this filter is a the current fix for that
-            // more info https://github.com/angular/angular/issues/12157
             Object.keys(value).length > 0 || this.previouslyHadQueryParameters
         )
       )

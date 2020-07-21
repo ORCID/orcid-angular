@@ -126,8 +126,10 @@ export class RegisterService extends _RegisterServiceMixingBase {
           if (updateUserService) {
             return this._userService.refreshUserStatus().pipe(
               map((userStatus) => {
-                // TODO lmendoza123
-                // sanity check the user should be logged
+                if (!userStatus.loggedIn && !value.errors) {
+                  // sanity check the user should be logged
+                  // TODO @leomendoza123 show and report error
+                }
                 return value
               })
             )

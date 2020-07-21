@@ -40,7 +40,7 @@ export class BackendErrorComponent implements OnInit {
       .subscribe((platform) => {
         return this._router.navigate(['/signin'], {
           // keeps all parameters to support Oauth request
-          // and set show login to true remove the false version that would otherwise prevent the navigation
+          // and set show login to true
           queryParams: { ...platform.queryParameters, email, show_login: true },
         })
       })

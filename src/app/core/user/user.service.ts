@@ -105,11 +105,10 @@ export class UserService {
           // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
           startWith(true),
           // If the user is logged in get the UserStatus.json and nameForm.json
-          // If not return a null value
           switchMap((loggedIn) => {
             this.currentlyLoggedIn = loggedIn
             if (!loggedIn) {
-              return of({ loggedIn: false })
+              return of({})
             }
             if (loggedIn) {
               // return an object with the most recent response of both endpoints

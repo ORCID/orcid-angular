@@ -42,8 +42,8 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
     // https://github.com/angular/angular/pull/20806
     //
     // using only form.statusChanges observable only would be a better solution for this scenario (see the code before this fix)
-    // but if the form status starts as pending Angular wont report the change because of #14542
-    // and the status can now start as pending with the introduction of values on a Oauth registration thought query parameters
+    // but if the form status starts as `pending` Angular wont report the change because of #14542
+    // and the status might now start as pending with the introduction of Oauth registration
 
     return merge(this.form.statusChanges, timer(0, 1000)).pipe(
       map(() => this.form.status),
