@@ -89,6 +89,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         switchMap((oauthMode) => {
           if (oauthMode) {
             return this._oauth.loadRequestInfoFormFromMemory().pipe(
+              take(1),
               tap((value) => {
                 if (value) {
                   this.requestInfoForm = value

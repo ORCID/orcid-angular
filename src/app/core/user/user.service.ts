@@ -16,11 +16,13 @@ import {
   take,
   tap,
 } from 'rxjs/operators'
-import { NameForm, UserInfo } from 'src/app/types'
+import { NameForm, UserInfo, OauthParameters } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { OauthService } from '../oauth/oauth.service'
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +30,9 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 export class UserService {
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _platform: PlatformInfoService,
+    private _oauth: OauthService
   ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -101,41 +105,77 @@ export class UserService {
             }
             return false
           }),
+          switchMap((loggedIn) => this.handleOauthSectionUpdate(loggedIn)),
           // At the very beginning assumes the user is logged in,
           // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
           startWith(true),
-          // If the user is logged in get the UserStatus.json and nameForm.json
-          switchMap((loggedIn) => {
-            this.currentlyLoggedIn = loggedIn
-            if (!loggedIn) {
-              return of({})
-            }
-            if (loggedIn) {
-              // return an object with the most recent response of both endpoints
-              return forkJoin({
-                userInfo: this.getUserInfo().pipe(this.handleErrors),
-                nameForm: this.getNameForm().pipe(this.handleErrors),
-              })
-            }
-          }),
-          map((data: { userInfo: UserInfo; nameForm: NameForm }) => {
-            // computes the name that should be displayed on the UI
-            return {
-              ...data,
-              ...{
-                loggedIn: !!data.userInfo || !!data.nameForm,
-                displayName: this.getDisplayName(data.nameForm),
-                orcidUrl:
-                  'https:' + environment.BASE_URL + data && data.userInfo
-                    ? data.userInfo.REAL_USER_ORCID
-                    : '',
-              },
-            }
-          }),
-
+          switchMap((loggedIn: boolean) => this.handleUserDataUpdate(loggedIn)),
+          map((data: { userInfo: UserInfo; nameForm: NameForm }) =>
+            this.computesUpdatedUserData(data)
+          ),
           shareReplay(1)
         ))
     }
+  }
+
+  // computes loggedIn State, displayName and orcidUrl based on the data comming from
+  // userInfo and nameForm endpoints
+  private computesUpdatedUserData(data: {
+    userInfo: UserInfo
+    nameForm: NameForm
+  }): {
+    userInfo: UserInfo
+    nameForm: NameForm
+    displayName: string
+    orcidUrl: string
+    loggedIn: boolean
+  } {
+    {
+      return {
+        ...data,
+        ...{
+          loggedIn: !!data.userInfo || !!data.nameForm,
+          displayName: this.getDisplayName(data.nameForm),
+          orcidUrl:
+            'https:' + environment.BASE_URL + data && data.userInfo
+              ? data.userInfo.REAL_USER_ORCID
+              : '',
+        },
+      }
+    }
+  }
+
+  // If the user is logged in get the UserStatus.json and nameForm.json
+  private handleUserDataUpdate(
+    loggedIn: boolean
+  ): Observable<{} | { userInfo: UserInfo; nameForm: NameForm }> {
+    this.currentlyLoggedIn = loggedIn
+    if (loggedIn) {
+      // return an object with the most recent response of both endpoints
+      return forkJoin({
+        userInfo: this.getUserInfo().pipe(this.handleErrors),
+        nameForm: this.getNameForm().pipe(this.handleErrors),
+      })
+    }
+    return of({})
+  }
+
+  // If the user status changes the Oauth section(if exist) needs  to be updated
+  private handleOauthSectionUpdate(loggedIn: boolean): Observable<boolean> {
+    return this._platform.get().pipe(
+      switchMap((platform) => {
+        if (platform.oauthMode) {
+          return this._oauth
+            .declareOauthSession(
+              platform.queryParameters as OauthParameters,
+              true
+            )
+            .pipe(map(() => loggedIn))
+        } else {
+          return of(loggedIn)
+        }
+      })
+    )
   }
 
   refreshUserStatus() {
