@@ -79,7 +79,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
       .singOut()
       .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
       .subscribe((platform) => {
-        console.log(platform)
         this._router.navigate(['/signin'], {
           queryParams: platform.queryParameters,
         })

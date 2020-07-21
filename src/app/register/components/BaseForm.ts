@@ -16,6 +16,12 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   writeValue(val: any): void {
     if (val != null && val !== undefined && val !== '') {
       this.form.setValue(val, { emitEvent: true })
+      // Trigger registerOnChange custom function by calling form.updateValueAndValidity
+      // require since the most form controls extending this class
+      // need to call the xxxxRegisterForm functions to adapt the original angular form value for the backend format
+      setTimeout(() => {
+        this.form.updateValueAndValidity()
+      })
     }
   }
   registerOnChange(fn: any): void {
