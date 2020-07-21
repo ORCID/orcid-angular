@@ -49,13 +49,20 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
       .getUserInfoOnEachStatusUpdate()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
+        this.loadingUserInfo = false
         if (userInfo.loggedIn) {
-          this.loadingUserInfo = false
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.orcidUrl
         } else {
-          this.userName = null
-          this.orcidUrl = null
+          // if the user logouts in the middle of a oauth section on another tab
+          this._platformInfo
+            .get()
+            .pipe(take(1))
+            .subscribe((platform) =>
+              this._router.navigate(['/signin'], {
+                queryParams: platform.queryParameters,
+              })
+            )
         }
       })
     this._trustedIndividuals
