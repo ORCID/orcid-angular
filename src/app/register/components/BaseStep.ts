@@ -1,5 +1,5 @@
+import { EventEmitter, Input, Output } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { Output, Input, EventEmitter } from '@angular/core'
 
 export abstract class BaseStep {
   public _formGroup: FormGroup

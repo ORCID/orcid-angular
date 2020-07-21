@@ -1,24 +1,18 @@
+import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core'
 import {
-  Component,
-  OnInit,
-  forwardRef,
-  ViewChild,
-  TemplateRef,
-  Input,
-} from '@angular/core'
-import { BaseForm } from '../BaseForm'
-import {
-  FormGroup,
   FormControl,
-  Validators,
+  FormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidatorFn,
+  Validators,
 } from '@angular/forms'
-import { OrcidValidators } from 'src/app/validators'
+import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { RegisterService } from 'src/app/core/register/register.service'
-import { HAS_NUMBER, HAS_LETTER_OR_SYMBOL } from 'src/app/constants'
 import { RegisterForm } from 'src/app/types/register.endpoint'
+import { OrcidValidators } from 'src/app/validators'
+
+import { BaseForm } from '../BaseForm'
 
 @Component({
   selector: 'app-form-password',

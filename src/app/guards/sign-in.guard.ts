@@ -7,12 +7,12 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
+import { map, switchMap } from 'rxjs/operators'
 
+import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
 import { OauthParameters } from '../types'
-import { PlatformInfoService } from '../cdk/platform-info'
-import { switchMap, map } from 'rxjs/operators'
-import { oauthSectionUserIsLoggedIn, oauthSectionHasError } from './constants'
+import { oauthSectionHasError, oauthSectionUserIsLoggedIn } from './constants'
 
 @Injectable({
   providedIn: 'root',

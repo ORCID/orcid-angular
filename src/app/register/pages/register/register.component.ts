@@ -1,31 +1,31 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  Inject,
-  ElementRef,
-  ChangeDetectorRef,
-  AfterViewInit,
-} from '@angular/core'
-import { FormGroup, FormBuilder } from '@angular/forms'
-import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { StepperSelectionEvent } from '@angular/cdk/stepper'
 import {
-  RegisterForm,
-  RegisterConfirmResponse,
-} from 'src/app/types/register.endpoint'
-import { RegisterService } from 'src/app/core/register/register.service'
-import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
-import { switchMap, tap, map, mapTo, take } from 'rxjs/operators'
-import { MatStep } from '@angular/material/stepper'
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
-import { WINDOW } from 'src/app/cdk/window'
+import { MatStep } from '@angular/material/stepper'
 import { ActivatedRoute, Router } from '@angular/router'
+import { EMPTY } from 'rxjs'
+import { map, switchMap, take, tap } from 'rxjs/operators'
+import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
+import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
-import { RequestInfoForm, OauthParameters } from 'src/app/types'
-import { EMPTY } from 'rxjs'
-import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
+import { RegisterService } from 'src/app/core/register/register.service'
+import { RequestInfoForm } from 'src/app/types'
+import {
+  RegisterConfirmResponse,
+  RegisterForm,
+} from 'src/app/types/register.endpoint'
 
 @Component({
   selector: 'app-register',

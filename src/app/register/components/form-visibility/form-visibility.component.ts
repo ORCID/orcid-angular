@@ -1,22 +1,16 @@
+import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
-  Component,
-  OnInit,
-  forwardRef,
-  OnChanges,
-  DoCheck,
-} from '@angular/core'
-import { BaseForm } from '../BaseForm'
-import {
-  FormGroup,
   FormControl,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  Validators,
+  FormGroup,
   NG_ASYNC_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  Validators,
 } from '@angular/forms'
-import { RegisterService } from 'src/app/core/register/register.service'
-import { VISIBILITY_OPTIONS } from 'src/app/constants'
 import { ErrorStateMatcher } from '@angular/material/core'
+import { VISIBILITY_OPTIONS } from 'src/app/constants'
+import { RegisterService } from 'src/app/core/register/register.service'
+
+import { BaseForm } from '../BaseForm'
 
 @Component({
   selector: 'app-form-visibility',

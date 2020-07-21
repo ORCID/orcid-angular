@@ -1,21 +1,20 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
-import { WINDOW } from 'src/app/cdk/window'
-import { OauthService } from 'src/app/core/oauth/oauth.service'
-import { RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
-import { UserService } from 'src/app/core'
-import { Subject, forkJoin, Observable } from 'rxjs'
-import { takeUntil, tap, switchMap, take } from 'rxjs/operators'
-import { ScopesStrings } from 'src/app/types/common.endpoint'
-import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
-import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
-import {
-  TrustedIndividuals,
-  Delegator,
-} from 'src/app/types/trusted-individuals.endpoint'
-import { SignInService } from 'src/app/core/sign-in/sign-in.service'
-import { map } from 'puppeteer/DeviceDescriptors'
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
+import { forkJoin, Observable, Subject } from 'rxjs'
+import { switchMap, take, takeUntil } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
+import { UserService } from 'src/app/core'
+import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
+import { OauthService } from 'src/app/core/oauth/oauth.service'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
+import { ScopesStrings } from 'src/app/types/common.endpoint'
+import { RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
+import {
+  Delegator,
+  TrustedIndividuals,
+} from 'src/app/types/trusted-individuals.endpoint'
 
 @Component({
   selector: 'app-authorize',

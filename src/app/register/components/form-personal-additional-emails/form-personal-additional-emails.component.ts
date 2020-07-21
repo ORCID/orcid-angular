@@ -1,14 +1,13 @@
 import {
-  OnInit,
-  Input,
-  Component,
-  ViewChild,
   AfterViewInit,
   ChangeDetectorRef,
+  Component,
+  Input,
 } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
+import { FormControl, FormGroup } from '@angular/forms'
 import { OrcidValidators } from 'src/app/validators'
+
+import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
 
 @Component({
   selector: 'app-form-personal-additional-emails',

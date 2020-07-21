@@ -9,10 +9,11 @@ import {
 import { Observable, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
+import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
 import { OauthParameters } from '../types'
 import { oauthSectionHasError, oauthSectionUserIsLoggedIn } from './constants'
-import { PlatformInfoService } from '../cdk/platform-info'
+
 @Injectable({
   providedIn: 'root',
 })

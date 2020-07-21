@@ -1,16 +1,17 @@
-import { Component, OnInit, forwardRef, DoCheck } from '@angular/core'
-import { BaseForm } from '../BaseForm'
-import { RegisterService } from 'src/app/core/register/register.service'
+import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
+  FormControl,
+  FormGroup,
   NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  FormGroup,
-  FormControl,
-  Validators,
   ValidatorFn,
+  Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { merge, Subject } from 'rxjs'
+import { RegisterService } from 'src/app/core/register/register.service'
+
+import { BaseForm } from '../BaseForm'
 
 @Component({
   selector: 'app-form-anti-robots',

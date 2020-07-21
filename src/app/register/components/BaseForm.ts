@@ -1,13 +1,12 @@
 import {
-  ControlValueAccessor,
-  Validator,
-  FormGroup,
   AbstractControl,
-  ValidationErrors,
   AsyncValidator,
+  ControlValueAccessor,
+  FormGroup,
+  ValidationErrors,
 } from '@angular/forms'
-import { of, Observable, timer, merge } from 'rxjs'
-import { filter, switchMap, map, tap, take, startWith } from 'rxjs/operators'
+import { merge, Observable, timer } from 'rxjs'
+import { filter, map, startWith, take } from 'rxjs/operators'
 
 export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   public form: FormGroup

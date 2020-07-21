@@ -1,14 +1,15 @@
-import { Component, OnInit, forwardRef, DoCheck } from '@angular/core'
+import { Component, DoCheck, forwardRef, OnInit } from '@angular/core'
 import {
   FormControl,
   FormGroup,
+  NG_ASYNC_VALIDATORS,
   NG_VALUE_ACCESSOR,
   Validators,
-  NG_ASYNC_VALIDATORS,
 } from '@angular/forms'
-import { BaseForm } from '../BaseForm'
-import { RegisterService } from 'src/app/core/register/register.service'
 import { ErrorStateMatcher } from '@angular/material/core'
+import { RegisterService } from 'src/app/core/register/register.service'
+
+import { BaseForm } from '../BaseForm'
 
 @Component({
   selector: 'app-form-terms',
@@ -47,10 +48,10 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
 
   // OVERWRITE
   registerOnChange(fn: any) {
-    this.form.valueChanges.subscribe(value => {
-      const registerForm = this._register.formGroupToTermOfUserRegisterForm(<
-        FormGroup
-      >this.form)
+    this.form.valueChanges.subscribe((value) => {
+      const registerForm = this._register.formGroupToTermOfUserRegisterForm(
+        <FormGroup>this.form
+      )
       fn(registerForm)
     })
   }

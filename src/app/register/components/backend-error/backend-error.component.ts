@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core'
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { take } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 // When the error text is not listed on the RegisterBackendErrors enum
 // the error message will be displayed as it comes from the backend

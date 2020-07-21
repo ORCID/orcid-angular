@@ -1,23 +1,24 @@
 import {
-  Component,
-  OnInit,
-  forwardRef,
-  ViewChild,
-  ElementRef,
   AfterViewInit,
+  Component,
+  ElementRef,
+  forwardRef,
+  OnInit,
+  ViewChild,
 } from '@angular/core'
 import {
-  FormGroup,
   FormControl,
-  NG_VALUE_ACCESSOR,
-  Validators,
-  ValidatorFn,
+  FormGroup,
   NG_ASYNC_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidatorFn,
+  Validators,
 } from '@angular/forms'
-import { BaseForm } from '../BaseForm'
 import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from 'src/app/constants'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
+
+import { BaseForm } from '../BaseForm'
 
 @Component({
   selector: 'app-form-personal',
