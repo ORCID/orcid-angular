@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, retry, tap, switchMap } from 'rxjs/operators'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 
@@ -27,9 +27,6 @@ export class OauthService {
     })
   }
 
-  /**
-   * @deprecated since declareOauthSession will return the same subject one this was created
-   */
   loadRequestInfoFormFromMemory(): Observable<RequestInfoForm> {
     return this.requestInfoSubject
   }
@@ -85,8 +82,11 @@ export class OauthService {
   // it send the Oauth query parameters to the backend and gets back the requestInfoForm
   // if the backend has an error declaring the Oauth parameters it will return a string on the errors array
 
-  declareOauthSession(value: OauthParameters): Observable<RequestInfoForm> {
-    if (this.oauthSectionDeclared) {
+  declareOauthSession(
+    queryParameters?: OauthParameters,
+    refreshIfExists = false
+  ): Observable<RequestInfoForm> {
+    if ((this.oauthSectionDeclared && !refreshIfExists) || !queryParameters) {
       return this.requestInfoSubject
     }
 
@@ -94,22 +94,27 @@ export class OauthService {
       .post<RequestInfoForm>(
         environment.BASE_URL +
           // tslint:disable-next-line:max-line-length
-          `oauth/custom/init.json?${this.objectToUrlParameters(value)}`,
-        value,
+          `oauth/custom/init.json?${this.objectToUrlParameters(
+            queryParameters
+          )}`,
+        queryParameters,
         { headers: this.headers }
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-      .pipe(
+        catchError((error) => this._errorHandler.handleError(error)),
         tap((data) => {
           this.requestInfoSubject.next(data)
           this.oauthSectionDeclared = true
-        })
+        }),
+        switchMap(() => this.requestInfoSubject.asObservable())
       )
   }
 
+  /**
+   * @deprecated in favor of using the same `oauth/custom/init.json` endpoint to
+   * initialize Oauth, initialize Oauth after a login or initialize Oauth after a logout
+   */
   updateOauthSession(value: OauthParameters): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
