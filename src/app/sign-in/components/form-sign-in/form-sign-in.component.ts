@@ -118,7 +118,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
         if (data.success) {
           if (isARedirectToTheAuthorizationPage(data)) {
-            this.updateOauthSession(this.signInLocal.params)
+            this.handleOauthLogin()
           } else {
             this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
               () => this.navigateTo(data.url),
@@ -191,9 +191,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
   }
 
-  updateOauthSession(value: OauthParameters) {
+  handleOauthLogin() {
     this._oauthService
-      .updateOauthSession(value)
+      .loadRequestInfoFormFromMemory()
       .subscribe((requestInfoForm) => {
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
