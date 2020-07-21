@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment'
-import { catchError, retry, tap, switchMap } from 'rxjs/operators'
+import { catchError, retry, tap, switchMap, take, map } from 'rxjs/operators'
 import { SignIn } from '../../types/sign-in.endpoint'
 import { Reactivation } from '../../types/reactivation.endpoint'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { getOrcidNumber } from '../../constants'
 import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
 import { UserService } from '../user/user.service'
+import { of } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -59,11 +60,16 @@ export class SignInService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => {
+        switchMap((response) => {
           // At the moment by default the userService wont be refreshed, only on the oauth login
           // other logins that go outside this application, wont require to refresh the user service
           if (updateUserService) {
-            this._userService.refreshUserStatus()
+            return this._userService.refreshUserStatus().pipe(
+              take(1),
+              map(() => response)
+            )
+          } else {
+            return of(response)
           }
         })
       )
