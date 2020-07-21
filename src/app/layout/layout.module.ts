@@ -19,6 +19,8 @@ import { SkipMainNavComponent } from './skip-main-nav/skip-main-nav.component'
 import { BannersComponent } from './banners/banners.component'
 import { BannerModule } from '../cdk/banner/banner.module'
 import { MaintenanceMessageComponent } from './maintenance-message/maintenance-message.component'
+import { MatDividerModule } from '@angular/material/divider'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
 @NgModule({
   imports: [
@@ -33,6 +35,8 @@ import { MaintenanceMessageComponent } from './maintenance-message/maintenance-m
     MatRippleModule,
     MatIconModule,
     BannerModule,
+    MatDividerModule,
+    A11yLinkModule,
   ],
   declarations: [
     HeaderComponent,

@@ -24,6 +24,8 @@ export class InstitutionalComponent implements OnInit {
   institution: Institutional
   entityID: any
   logoInstitution: any
+  labelInstitution = $localize`:@@institutional.ariaLabelInstitution:Institution`
+  labelClear = $localize`:@@institutional.ariaLabelClear:Clear`
 
   institutionFormControl = new FormControl('', [Validators.required])
 
@@ -50,7 +52,7 @@ export class InstitutionalComponent implements OnInit {
         },
         (error) => {
           // TODO @leomendoza123 display error using a toaster
-          console.log('Error getting disco feed' + JSON.stringify(error))
+          console.error('Error getting disco feed' + JSON.stringify(error))
         }
       )
   }

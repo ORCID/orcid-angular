@@ -6,6 +6,7 @@ import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../core/togglz/togglz.service'
 import { Router } from '@angular/router'
+import { ApplicationRoutes } from 'src/app/constants'
 
 @Component({
   selector: 'app-user-menu',
@@ -21,6 +22,9 @@ export class UserMenuComponent implements OnInit {
   displayName: string
   platform: PlatformInfo
   togglzOrcidAngularSignin: boolean
+  togglzOrcidAngularInbox: boolean
+  labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:sign in or register`
+  labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
 
   constructor(
     private _router: Router,
@@ -29,27 +33,29 @@ export class UserMenuComponent implements OnInit {
     _platform: PlatformInfoService,
     _togglz: TogglzService
   ) {
-    _userInfo.getUserInfoOnEachStatusUpdate().subscribe(data => {
+    _userInfo.getUserInfoOnEachStatusUpdate().subscribe((data) => {
       this.userInfo = data.userInfo
       this.displayName = data.displayName
     })
-    _platform.get().subscribe(data => {
+    _platform.get().subscribe((data) => {
       this.platform = data
     })
     _togglz
       .getStateOf('ORCID_ANGULAR_SIGNIN')
-      .subscribe(value => (this.togglzOrcidAngularSignin = value))
+      .subscribe((value) => (this.togglzOrcidAngularSignin = value))
+
+    _togglz
+      .getStateOf('ORCID_ANGULAR_INBOX')
+      .subscribe((value) => (this.togglzOrcidAngularInbox = value))
   }
 
   ngOnInit() {}
 
   goto(url) {
-    if (url === 'signin') {
-      if (!this.togglzOrcidAngularSignin) {
-        this.window.location.href = environment.BASE_URL + url
-      } else {
-        this._router.navigate(['/signin'])
-      }
+    if (url === 'signin' && this.togglzOrcidAngularSignin) {
+      this._router.navigate([ApplicationRoutes.signin])
+    } else if (url === 'inbox' && this.togglzOrcidAngularInbox) {
+      this._router.navigate([ApplicationRoutes.inbox])
     } else {
       this.window.location.href = environment.BASE_URL + url
     }

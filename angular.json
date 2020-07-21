@@ -107,6 +107,7 @@
             "vendorChunk": false,
             "buildOptimizer": true,
             "outputPath": "dist",
+            "i18nMissingTranslation": "error",
             "assets": [
               {
                 "glob": "**/*",
@@ -123,6 +124,7 @@
             "styles": [
               "src/assets/scss/noto-sans.scss",
               "src/assets/scss/material.scss",
+              "src/assets/scss/orcid.scss",
               "src/styles.scss",
               "src/assets/scss/grid.scss"
             ],

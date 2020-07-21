@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core'
-import { NavigationEnd, Router, NavigationStart } from '@angular/router'
+import { Component, OnInit, Inject, Input } from '@angular/core'
+import { Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
@@ -22,14 +22,24 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  currentRoute
+  _currentRoute: string
+  @Input() set currentRoute(value) {
+    this._currentRoute = value
+    this.setChildOfCurrentRouteAsSecondaryMenu()
+  }
+  get currentRoute() {
+    return this._currentRoute
+  }
   platform: PlatformInfo
   mobileMenuState = false
   menu: ApplicationMenuItem[] = this.createMenuList(menu)
   user: UserInfo
   togglz: Config
   togglzOrcidAngularSignin: boolean
+  togglzNewInfoSite: boolean
   signinRegisterButton = true
+  labelLogo = $localize`:@@layout.ariaLabelLogo:orcid mini logo`
+  labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
   constructor(
     private _router: Router,
@@ -63,6 +73,9 @@ export class HeaderComponent implements OnInit {
         (this.signinRegisterButton =
           location.path() !== `/${ApplicationRoutes.signin}`)
     )
+    _togglz
+      .getStateOf('NEW_INFO_SITE')
+      .subscribe((value) => (this.togglzNewInfoSite = value))
   }
 
   ngOnInit() {}
@@ -89,12 +102,12 @@ export class HeaderComponent implements OnInit {
   click(treeLocation: string[], button: ApplicationMenuItem) {
     if (!this.platform.columns12) {
       if (button.route && (!button.buttons || !button.buttons.length)) {
-        this.window.location.href = button.route
+        this.newInfo(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route) {
-      this.window.location.href = button.route
+      this.newInfo(button.route)
     }
   }
 
@@ -250,5 +263,17 @@ export class HeaderComponent implements OnInit {
     } else {
       this.window.location.href = environment.BASE_URL + url
     }
+  }
+
+  newInfo(route) {
+    if (this.togglzNewInfoSite) {
+      this.navigateTo(environment.INFO_SITE + route)
+    } else {
+      this.navigateTo(route)
+    }
+  }
+
+  navigateTo(val) {
+    this.window.location.href = val
   }
 }

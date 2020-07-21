@@ -5,6 +5,9 @@ export const menu: ApplicationMenuItemBasic[] = [
     label: $localize`:@@public-layout.for_researchers:For Researchers`,
     route: 'about/what-is-orcid/mission',
     activeRoute: '/',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
     // buttons: [
     //   {
     //     id: 'public-layout.for_researchers',
@@ -154,7 +157,9 @@ export const menu: ApplicationMenuItemBasic[] = [
     id: 'organizations',
     route: 'organizations',
     label: $localize`:@@public-layout.for_organizations:For Organizations`,
-
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
     buttons: [
       {
         label: $localize`:@@public-layout.for_organizations:For Organizations`,
@@ -328,7 +333,9 @@ export const menu: ApplicationMenuItemBasic[] = [
     id: 'about',
     label: $localize`:@@public-layout.about:About`,
     route: 'about',
-
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
     buttons: [
       {
         id: 'about',
@@ -532,7 +539,9 @@ export const menu: ApplicationMenuItemBasic[] = [
     id: 'help',
     label: $localize`:@@public-layout.help:Help`,
     route: 'help',
-
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'false' },
+    },
     buttons: [
       {
         id: 'help',
@@ -561,6 +570,53 @@ export const menu: ApplicationMenuItemBasic[] = [
         route: 'https://support.orcid.org/hc/en-us',
       },
     ],
+  },
+  {
+    id: 'public-layout.about',
+    label: $localize`:@@public-layout.about:About`,
+    route: 'what-is-orcid',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
+    id: 'public-layout.membership',
+    label: $localize`:@@public-layout.membership:Membership`,
+    route: 'about-membership',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
+    id: 'public-layout.documentation',
+    label: $localize`:@@public-layout.documentation:Documentation`,
+    route: 'documentation',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
+    id: 'public-layout.community',
+    label: $localize`:@@public-layout.community:Community`,
+    route: 'orcid-community',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
+    id: 'public-layout.newsEvents',
+    label: $localize`:@@public-layout.newsEvents:News & Events`,
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
+    id: 'public-layout.for_researchers',
+    label: $localize`:@@public-layout.for_researchers:For Researchers`,
+    route: 'help-getting-started-with-your-orcid',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
   },
   {
     id: 'public-layout.sign_in',

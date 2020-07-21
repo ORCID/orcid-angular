@@ -2,7 +2,7 @@
 <button
   *ngIf="closable"
   mat-icon-button
-  aria-label="close"
+  [attr.aria-label]="labelClose"
   (click)="snackBarRef.dismiss()"
 >
   <mat-icon>close</mat-icon>

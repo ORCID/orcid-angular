@@ -1,0 +1,13 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+:host {
+  width: 100%;
+}
+
+.mat-headline {
+  margin-bottom: $spacing-large;
+}
+main {
+  flex-direction: column;
+  margin-bottom: $spacing-large;
+}

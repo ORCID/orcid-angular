@@ -13,22 +13,24 @@ button.mat-button-wrap-text {
     max-width: 100%;
     text-align: center;
     white-space: normal;
+    word-break: break-word;
   }
 }
 
 button.mat-button-wrap-text-with-icon {
-  width: 100%;
-  margin-top: 12px;
-
-  img {
+  padding-left: 40px; // save space for the icon or image
+  img,
+  mat-icon {
     margin: auto;
     position: absolute;
-    left: 20px;
+    left: 8px;
     top: 0;
     bottom: 0;
     width: 24px;
   }
+}
 
+button.mat-button-wrap-text-with-icon.mobile-fixed-width {
   .columns-4 & {
     span {
       display: inline-block;
@@ -37,7 +39,6 @@ button.mat-button-wrap-text-with-icon {
       word-break: break-word;
       white-space: normal;
       line-height: 24px;
-      min-height: 36px;
     }
   }
 }
@@ -47,4 +48,8 @@ button.mat-button-wrap-text-with-icon {
     right: 20px;
     left: unset;
   }
+}
+
+.no-hover-effect.mat-button .mat-button-focus-overlay {
+  background-color: transparent;
 }

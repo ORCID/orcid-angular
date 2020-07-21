@@ -1,0 +1,109 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: $spacing-base;
+  cursor: pointer;
+
+  .date-archive-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.body-container {
+  padding: $spacing-base;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: $spacing-small;
+  [dir='rtl'] :host & {
+    margin-left: $spacing-small;
+    margin-right: auto;
+  }
+}
+
+mat-checkbox {
+  margin-right: $spacing-base;
+  [dir='rtl'] :host & {
+    margin-left: $spacing-base;
+    margin-right: auto;
+  }
+}
+:host:not(.archived) {
+  .title {
+    font-weight: bold;
+  }
+}
+
+.title {
+  flex-grow: 1;
+  text-align: start;
+}
+
+.columns-12 :host {
+  .title {
+    margin-left: $spacing-large;
+    margin-right: $spacing-base;
+    [dir='rtl'] :host & {
+      margin-right: $spacing-large;
+      margin-left: $spacing-base;
+    }
+  }
+}
+
+.date {
+  margin-left: $spacing-base;
+  [dir='rtl'] :host & {
+    margin-right: $spacing-base;
+    margin-left: auto;
+  }
+  font-weight: bold;
+}
+.columns-8 :host {
+  .title {
+    margin-left: $spacing-base;
+    margin-right: $spacing-base;
+  }
+}
+
+button[mat-icon-button] {
+  margin-left: $spacing-large;
+  [dir='rtl'] :host & {
+    margin-right: $spacing-large;
+    margin-left: auto;
+  }
+  mat-icon {
+    margin-left: 4px; // Fix icon alignment
+  }
+}
+
+.notification-type {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-align: start;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.header:focus {
+  outline: none;
+}
