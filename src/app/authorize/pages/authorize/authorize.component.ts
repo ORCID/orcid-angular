@@ -41,12 +41,15 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     private _platformInfo: PlatformInfoService,
     private _router: Router
   ) {
-    _oauth.loadRequestInfoFormFromMemory().subscribe((data) => {
-      this.oauthRequest = data
-    })
+    _oauth
+      .loadRequestInfoFormFromMemory()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((data) => {
+        this.oauthRequest = data
+      })
 
     this._user
-      .getUserInfoOnEachStatusUpdate()
+      .getUserSection()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
         this.loadingUserInfo = false

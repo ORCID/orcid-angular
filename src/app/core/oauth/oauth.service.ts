@@ -27,8 +27,11 @@ export class OauthService {
     })
   }
 
+  /**
+   * @return the same hot observable as declareOauthSession
+   */
   loadRequestInfoFormFromMemory(): Observable<RequestInfoForm> {
-    return this.requestInfoSubject
+    return this.requestInfoSubject.asObservable()
   }
 
   updateRequestInfoFormInMemory(requestInfoForm: RequestInfoForm) {
@@ -78,15 +81,19 @@ export class OauthService {
       )
   }
 
-  // call on by the OauthGuard
-  // it send the Oauth query parameters to the backend and gets back the requestInfoForm
-  // if the backend has an error declaring the Oauth parameters it will return a string on the errors array
-
+  /**
+   * @param queryParameters Orcid supported OAuth parameters
+   * @param forceRefresh if true updates oauth section even when there is an existing one
+   *
+   * it sends the Oauth query parameters to the backend only on the first call or if `forceRefresh` is true
+   *
+   * @returns a hot observable with the oauth RequestInfoForm
+   */
   declareOauthSession(
-    queryParameters?: OauthParameters,
-    refreshIfExists = false
+    queryParameters: OauthParameters,
+    forceRefresh = false
   ): Observable<RequestInfoForm> {
-    if ((this.oauthSectionDeclared && !refreshIfExists) || !queryParameters) {
+    if ((this.oauthSectionDeclared && !forceRefresh) || !queryParameters) {
       return this.requestInfoSubject
     }
 

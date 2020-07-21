@@ -26,7 +26,7 @@ export class AuthenticatedGuard implements CanActivateChild {
     | boolean
     | UrlTree {
     return this._userInfo
-      .getUserInfoOnEachStatusUpdate()
+      .getUserSection()
       .pipe(
         map(
           (value) =>

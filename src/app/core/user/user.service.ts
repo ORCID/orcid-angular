@@ -76,7 +76,16 @@ export class UserService {
     )
   }
 
-  getUserInfoOnEachStatusUpdate(): Observable<{
+  /**
+   * At the start, every 30 seconds and when the method refreshUserStatus is called
+   * the user login status will be check and if it has changed
+   * the following actions will be taken
+   * - update the backend OAuth  section (if exists)
+   * - retrieve user updated date
+   *
+   * @returns a hot observable with the user section information
+   */
+  getUserSection(): Observable<{
     userInfo: UserInfo
     nameForm: NameForm
     displayName: string
@@ -180,7 +189,7 @@ export class UserService {
 
   refreshUserStatus() {
     this._recheck.next()
-    return this.getUserInfoOnEachStatusUpdate().pipe(
+    return this.getUserSection().pipe(
       // ignore the replay value, and return the latest value
       take(2),
       last()

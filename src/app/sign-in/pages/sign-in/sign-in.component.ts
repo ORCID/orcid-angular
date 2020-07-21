@@ -59,7 +59,7 @@ export class SignInComponent implements OnInit {
       .subscribe()
 
     _userInfo
-      .getUserInfoOnEachStatusUpdate()
+      .getUserSection()
       .pipe(take(1))
       .subscribe((info) => {
         this.isLoggedIn = info.loggedIn

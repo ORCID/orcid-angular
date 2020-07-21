@@ -194,6 +194,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   handleOauthLogin() {
     this._oauthService
       .loadRequestInfoFormFromMemory()
+      .pipe(take(1))
       .subscribe((requestInfoForm) => {
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
