@@ -1,7 +1,7 @@
 <button
   mat-button
   [matMenuTriggerFor]="languageMenu"
-  aria-label="language"
+  [attr.aria-label]="labelLanguage"
   class="orcid-button-light-grey"
 >
   <div class="row middle space-between button-box no-wrap">
@@ -12,7 +12,7 @@
 
 <mat-menu #languageMenu="matMenu">
   <div
-    *ngFor="let language of (languageMenuOptions | keyvalue)"
+    *ngFor="let language of languageMenuOptions | keyvalue"
     (click)="changeLanguage(language.key)"
   >
     <button

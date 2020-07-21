@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { take } from 'rxjs/operators'
+import { take, filter } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
@@ -22,7 +22,7 @@ export class BannersComponent implements OnInit {
     togglz: TogglzService
   ) {
     // All closable maintenance messages are displayed as banners
-    togglz.getMaintenanceMessages().subscribe(value => {
+    togglz.getMaintenanceMessages().subscribe((value) => {
       this.maintenanceMessages = value
       this.updateClosableMessage()
     })
@@ -30,9 +30,12 @@ export class BannersComponent implements OnInit {
     // Show unsupported browser banner
     _platformInfo
       .get()
-      .pipe(take(1))
+      .pipe(
+        filter((platform) => platform.unsupportedBrowser),
+        take(1)
+      )
       .subscribe(
-        platform =>
+        (platform) =>
           (this.showUnsupportedBrowserBanner = platform.unsupportedBrowser)
       )
 
@@ -42,7 +45,7 @@ export class BannersComponent implements OnInit {
 
   updateClosableMessage() {
     if (this.maintenanceMessages && this.maintenanceMessages.closableElements) {
-      this.maintenanceMessages.closableElements.forEach(node => {
+      this.maintenanceMessages.closableElements.forEach((node) => {
         if (
           node &&
           node.id &&

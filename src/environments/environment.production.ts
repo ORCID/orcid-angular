@@ -1,10 +1,12 @@
 export const environment = {
   production: true,
-  API_NEWS: 'https://orcid.org/blog/feed',
+  API_NEWS_DEPRECATED: 'https://orcid.org/blog/feed',
+  API_NEWS: 'https://info.orcid.org/feed',
   API_PUB: '//pub.orcid.org/v3.0',
   API_WEB: '//orcid.org/',
   BASE_URL: '//orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
+  INFO_SITE: 'http://orcidaboutdev.wpengine.com/',
   SHOW_TEST_WARNING_BANNER: false,
   GOOGLE_ANALYTICS_TESTING_MODE: false,
   GOOGLE_ANALYTICS: 'UA-17492803-4',

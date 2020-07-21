@@ -8,13 +8,6 @@
       research activities, affiliations, awards, other versions of your name,
       and more. You control this content and who can see it.
     </ng-container>
-    <a
-      href="https://support.orcid.org/hc/articles/360006897614"
-      target="_blank"
-      rel="noopener"
-      i18n="@@register.visibilityDescription2"
-      >More information on visibility settings.</a
-    >
   </p>
   <p i18n="@@register.visibilityDescription3">
     By default, who should be able to see information added to your ORCID
@@ -34,9 +27,13 @@
           aria-hidden="true"
           alt=""
         />
-        <ng-container i18n="@@register.VisibilityEveryone"
-          >Everyone (87% of users choose this)</ng-container
-        >
+        <div class="inlined">
+          <strong i18n="@@register.VisibilityEveryone">Everyone</strong>
+
+          <ng-container i18n="@@register.VisibilityEveryone2"
+            >(87% of users choose this)</ng-container
+          >
+        </div>
       </mat-radio-button>
       <mat-radio-button
         [value]="visibilityOptions[1]"
@@ -47,9 +44,14 @@
           aria-hidden="true"
           alt=""
         />
-        <ng-container i18n="@@register.VisibilityTrusted"
-          >Parties (5% of users choose this)</ng-container
-        >
+        <div class="inlined">
+          <strong i18n="@@register.VisibilityTrusted"
+            >Trusted Organizations</strong
+          >
+          <ng-container i18n="@@register.VisibilityTrusted2"
+            >(5% of users choose this)</ng-container
+          >
+        </div>
       </mat-radio-button>
       <mat-radio-button
         [value]="visibilityOptions[2]"
@@ -60,9 +62,13 @@
           aria-hidden="true"
           alt=""
         />
-        <ng-container i18n="@@register.VisibilityPrivate"
-          >Only me (8% of users choose this)</ng-container
-        >
+        <div class="inlined">
+          <strong i18n="@@register.VisibilityPrivate">Only me</strong>
+
+          <ng-container i18n="@@register.VisibilityPrivate2"
+            >(8% of users choose this)</ng-container
+          >
+        </div>
       </mat-radio-button>
     </mat-radio-group>
     <mat-error
@@ -71,6 +77,16 @@
       "
       i18n="@@register.visibilityRequired"
       >Please choose a default visibility setting.</mat-error
+    >
+  </p>
+  <p>
+    <a
+      class="mat-button-font"
+      href="https://support.orcid.org/hc/articles/360006897614"
+      target="_blank"
+      rel="noopener"
+      i18n="@@register.visibilityDescription2"
+      >More information on visibility settings.</a
     >
   </p>
 </ng-container>

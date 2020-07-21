@@ -1,0 +1,26 @@
+<div class="connect">
+  <ng-container i18n="@@inbox.youCanNowSignin"
+    >You can now sign in to ORCID with your</ng-container
+  >
+  {{ notification.idpName }}
+  <ng-container i18n="@@inbox.account">account</ng-container>.
+</div>
+
+<div>
+  <ng-container i18n="@@inbox.pleaseCompleteThe"
+    >Please complete the process by connecting</ng-container
+  >
+  <strong>{{ notification.source.sourceName.content }}</strong>
+  <ng-container i18n="@@inbox.yourOrcidRecord">
+    your ORCID record.</ng-container
+  >
+</div>
+
+<button
+  mat-raised-button
+  color="primary"
+  (click)="navigateTo(notification.authorizationUrl.uri)"
+  i18n="@@inbox.grantPermission"
+>
+  Grant permission
+</button>

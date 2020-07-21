@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin social-theme($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .institution {
+    background-color: map-get($background, 'seamlessaccess');
+    color: mat-color($primary, default-contrast);
+  }
+
+  .google {
+    border: 1px solid mat-color($background, gray);
+  }
+
+  .facebook {
+    background-color: map-get($background, 'facebook');
+    color: mat-color($primary, default-contrast);
+  }
+}
+
+@include social-theme($orcid-app-theme);

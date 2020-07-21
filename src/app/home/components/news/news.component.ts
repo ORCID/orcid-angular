@@ -14,12 +14,13 @@ import { WINDOW } from 'src/app/cdk/window'
 export class NewsComponent implements OnInit {
   news
   platform
+  labelHomeNews = $localize`:@@home.ariaLabelNews:News`
   constructor(
     private _news: NewsService,
     private _platform: PlatformInfoService,
     @Inject(WINDOW) private window: Window
   ) {
-    _platform.platformSubject.subscribe(data => {
+    _platform.platformSubject.subscribe((data) => {
       this.platform = data
     })
   }

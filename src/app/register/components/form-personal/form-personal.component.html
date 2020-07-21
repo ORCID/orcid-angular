@@ -24,7 +24,7 @@
 
     <button
       mat-icon-button
-      aria-label="info about names"
+      [attr.aria-label]="labelInfoAboutName"
       type="button"
       [mdePopoverTriggerFor]="namesPopover"
       mdePopoverTriggerOn="click"
@@ -78,7 +78,10 @@
         <div
           *ngFor="let error of this.emails.getError('backendError', 'email')"
         >
-          <app-backend-error [errorCode]="error"></app-backend-error>
+          <app-backend-error
+            [errorCode]="error"
+            [value]="emails.get('email').value"
+          ></app-backend-error>
         </div>
       </mat-error>
     </mat-form-field>
@@ -86,15 +89,12 @@
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >
-      <!-- "confirm-email" is no really a valid autocomplete valid
-      but it should avoid some browsers like edge chromium to suggest the user email 
-      on this confirmation field  -->
       <input
         formControlName="confirmEmail"
         matInput
         (paste)="(false)"
         appTrim
-        autocomplete="confirm-email"
+        autocomplete="off"
         type="email"
       />
       <mat-error
@@ -148,27 +148,19 @@
     the following message is not translated since is very likely to be change
   -->
   <mat-card class="mat-elevation-z3 orcid-popover">
-    <p>First name is your given name or the name you most commonly go by.</p>
-    <p>Last name is your family name.</p>
-    <p>
+    <p i18n="@@register.firstNameDetail">
+      First name is your given name or the name you most commonly go by.
+    </p>
+    <p i18n="@@register.lastNameDetail">Last name is your family name.</p>
+    <p i18n="@@register.youWillHaveAChance">
       You will have a chance to add additional names after you have created your
       account.
     </p>
     <a
       href="https://support.orcid.org/hc/articles/360006973853"
       target="orcid.frontend.register.help.more_info.link.text"
-      i18n="@@register.moreInfo"
+      i18n="@@register.moreInfoOnNames"
       >More information on names</a
     >
-    <button
-      mat-button
-      color="primary"
-      aria-label="close"
-      (click)="namesPopoverTrigger.closePopover()"
-      cdkFocusInitial
-      i18n="@@shared.ok"
-    >
-      Ok
-    </button>
   </mat-card>
 </mde-popover>

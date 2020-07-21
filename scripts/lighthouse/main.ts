@@ -33,8 +33,6 @@ class AuditManager {
 
         audits.push({ auditDefinition: audit, result: JSON.stringify(result) })
       } catch (e) {
-        console.log('Error while executing audit ' + JSON.stringify(audit))
-        console.log(JSON.stringify(e))
         throw e
       } finally {
         await this.puppeteer.kill()

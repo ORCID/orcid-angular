@@ -36,8 +36,11 @@ import { RegisterForm } from 'src/app/types/register.endpoint'
       multi: true,
     },
   ],
+  preserveWhitespaces: true,
 })
 export class FormPasswordComponent extends BaseForm implements OnInit {
+  labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
+  labelClose = $localize`:@@register.ariaLabelClose:close`
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
   hasNumberPatter = HAS_NUMBER
@@ -74,7 +77,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
       let hasError = false
 
       if (this.personalData && password) {
-        Object.keys(this.personalData.emailsAdditional).forEach(key => {
+        Object.keys(this.personalData.emailsAdditional).forEach((key) => {
           const additionalEmail = this.personalData.emailsAdditional[key].value
           if (password.indexOf(additionalEmail) >= 0) {
             hasError = true
@@ -100,10 +103,10 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
 
   // OVERWRITE
   registerOnChange(fn: any) {
-    this.form.valueChanges.subscribe(value => {
-      const registerForm = this._register.formGroupToPasswordRegisterForm(<
-        FormGroup
-      >this.form)
+    this.form.valueChanges.subscribe((value) => {
+      const registerForm = this._register.formGroupToPasswordRegisterForm(
+        <FormGroup>this.form
+      )
 
       fn(registerForm)
     })

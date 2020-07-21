@@ -14,6 +14,7 @@ import { take } from 'rxjs/operators'
 })
 export class SnackbarComponent implements OnInit {
   @HostBinding('attr.dir') _contentDirection: ScreenDirection = 'ltr'
+  labelClose = $localize`:@@shared.ariaLabelClose:Close`
   isIE = false
   closable: boolean
   constructor(

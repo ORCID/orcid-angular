@@ -13,21 +13,35 @@ import {
   startWith,
   retryWhen,
   shareReplay,
+  retry,
+  repeatWhen,
+  takeUntil,
 } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
+import { UserStatus } from '../../types/userStatus.endpoint'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private _http: HttpClient) {}
-  private currentlyLoggedIn = true
+  constructor(
+    private _http: HttpClient,
+    private _errorHandler: ErrorHandlerService
+  ) {}
+  private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
   private $infoOnEachStatusUpdateObservable: Observable<{
     userInfo: UserInfo
     nameForm: NameForm
     displayName: string
+    orcidUrl: string
+    loggedIn: boolean
   }>
+
+  private readonly _stop = new Subject<void>()
+  private readonly _start = new Subject<void>()
+  private bypassStatusNotChangeFilter = false
 
   private getUserInfo(): Observable<UserInfo> {
     return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
@@ -37,11 +51,14 @@ export class UserService {
 
   public getUserStatus() {
     return this._http
-      .get<any>(environment.API_WEB + 'userStatus.json', {
+      .get<UserStatus>(environment.API_WEB + 'userStatus.json', {
         withCredentials: true,
       })
-      .pipe(catchError(val => of({})))
-      .pipe(map(response => response.loggedIn || null))
+      .pipe(map((response) => response.loggedIn || null))
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   private getNameForm(): Observable<NameForm> {
@@ -57,6 +74,8 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     displayName: string
+    orcidUrl: string
+    loggedIn: boolean
   }> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
@@ -66,21 +85,22 @@ export class UserService {
       return (this.$infoOnEachStatusUpdateObservable =
         // Every 30 seconds...
         timer(0, 30 * 1000)
+          .pipe(
+            takeUntil(this._stop),
+            repeatWhen(() => this._start)
+          )
           // Check for updates on userStatus.json
           .pipe(switchMapTo(this.getUserStatus()))
-          // Check if loggedIn state  has changed since the last time
+          // Filter followup calls if the user status has no change
           //
           // Also turns on the flag loggingStateComesFromTheServer
           // indicating that the current logging state is taken from the server,
           // and not the initial assumption. (more on this on the following pipe)
           .pipe(
-            filter(loggedIn => {
-              if (loggedIn) {
-                this.loggingStateComesFromTheServer = true
-                if (!(loggedIn === this.currentlyLoggedIn)) {
-                  this.currentlyLoggedIn = loggedIn
-                  return true
-                }
+            filter((loggedIn) => {
+              this.loggingStateComesFromTheServer = true
+              if (!(loggedIn === this.currentlyLoggedIn)) {
+                return true
               }
               return false
             })
@@ -91,9 +111,10 @@ export class UserService {
           // If the user is logged in get the UserStatus.json and nameForm.json
           // If not return a null value
           .pipe(
-            switchMap(loggedIn => {
+            switchMap((loggedIn) => {
+              this.currentlyLoggedIn = loggedIn
               if (!loggedIn) {
-                return of(null)
+                return of(false)
               }
               if (loggedIn) {
                 // return an object with the most recent response of both endpoints
@@ -107,13 +128,35 @@ export class UserService {
               // computes the name that should be displayed on the UI
               return {
                 ...data,
-                ...{ displayName: this.getDisplayName(data.nameForm) },
+                ...{
+                  loggedIn: !!data.userInfo || !!data.nameForm,
+                  displayName: this.getDisplayName(data.nameForm),
+                  orcidUrl:
+                    'https:' + environment.BASE_URL + data && data.userInfo
+                      ? data.userInfo.REAL_USER_ORCID
+                      : '',
+                },
               }
             })
           )
           .pipe(shareReplay(1)))
     }
   }
+
+  refreshUserStatus() {
+    this.stop()
+    this.start()
+  }
+
+  start(): void {
+    this.loggingStateComesFromTheServer = false
+    this.currentlyLoggedIn = null
+    this._start.next()
+  }
+  stop(): void {
+    this._stop.next()
+  }
+
   private getDisplayName(nameForm: NameForm): string {
     if (nameForm != null) {
       if (
@@ -141,9 +184,9 @@ export class UserService {
           //
           // This is necessary because in some cases when the userStatus.json responded with { logging = true }
           // and the userInfo.json is called immediately after it responds with an error
-          retryWhen(errors =>
+          retryWhen((errors) =>
             errors.pipe(delay(2000)).pipe(
-              tap(x => {
+              tap((x) => {
                 if (
                   !(
                     this.currentlyLoggedIn &&
@@ -158,7 +201,7 @@ export class UserService {
         )
         // This is necessary since the backend responds with a CORS error when a
         // user is not logged in and userInfo.json is called
-        .pipe(catchError(error => of(null)))
+        .pipe(catchError((error) => of(null)))
     )
   }
 }

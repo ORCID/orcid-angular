@@ -8,7 +8,7 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   .offline-container {
-    color: $dark-disabled-text;
+    color: $orcid-disabled-text;
   }
 }
 @include offline-message-theme($orcid-app-theme);

@@ -25,6 +25,7 @@
 }
 
 .search-box {
+  flex: 1px;
   > div,
   > button {
     height: 42px;
@@ -49,6 +50,15 @@
     input {
       border-width: 1px;
       border-style: solid;
+      width: 100%;
+    }
+  }
+
+  .input-box-new-info {
+    width: 334px;
+    input {
+      border-radius: 3px;
+      margin-left: 2px;
       width: 100%;
     }
   }
@@ -86,13 +96,16 @@
   :host {
     .search-box {
       padding: 12px 0px;
+      justify-content: center;
+      max-width: calc(100% - 28px);
       .search-where,
       .search-icon {
         flex-shrink: 0;
         border-radius: 0;
       }
       flex-wrap: initial;
-      .input-box {
+      .input-box,
+      .input-box-new-info {
         flex-grow: 1;
         max-width: none;
         input {

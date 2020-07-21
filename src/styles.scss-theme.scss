@@ -25,5 +25,5 @@
 @include global-theme-typography($orcid-material-typography);
 
 .mat-menu-panel {
-  overflow: hidden !important;
+  overflow-x: hidden !important;
 }

@@ -1,0 +1,74 @@
+<div class="control-container">
+  <div
+    class="controls"
+    *ngIf="notifications?.length || archiveNotifications?.length"
+  >
+    <mat-checkbox
+      [(ngModel)]="generalCheck"
+      [(indeterminate)]="indeterminate"
+      aria-label="select-all"
+    ></mat-checkbox>
+    <div
+      class="archive-label mat-body-1"
+      id="select-all"
+      i18n="@@inbox.selectAll"
+    >
+      Select All
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      class="mat-button-wrap-text-with-icon"
+      (click)="archivedSelected()"
+    >
+      <mat-icon class="material-icons-outlined">archive</mat-icon>
+      <div i18n="@@inbox.archiveSelected">Archive selected</div>
+    </button>
+  </div>
+  <a (click)="toggleShowArchived()" *ngIf="archiveNotifications?.length"
+    ><ng-container *ngIf="showArchived" i18n="@@inbox.hideArchived"
+      >Hide archived</ng-container
+    >
+    <ng-container *ngIf="!showArchived" i18n="@@inbox.showArchived"
+      >Show archived</ng-container
+    >
+    ({{ archiveNotifications.length }})
+  </a>
+</div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+<ng-container *ngIf="form && notifications" [formGroup]="form">
+  <ng-container *ngFor="let item of notifications">
+    <app-notification
+      *ngIf="!item.archivedDate || showArchived"
+      [notification]="item"
+      [formControl]="form.controls[item.putCode]"
+      [archived]="!!item.archivedDate"
+    ></app-notification>
+  </ng-container>
+</ng-container>
+
+<div
+  class="no-messages"
+  *ngIf="
+    notifications &&
+    archiveNotifications &&
+    ((!showArchived && notifications.length == archiveNotifications.length) ||
+      (showArchived && notifications.length == 0))
+  "
+  i18n="@@inbox.thereAreNoMessages"
+>
+  There are no messages at the moment.
+</div>
+
+<div class="notifications-amount mat-body-1">
+  <button
+    mat-raised-button
+    color="primary"
+    *ngIf="moreNotificationsMightExist"
+    (click)="showMore()"
+    i18n="@@inbox.showMoreNotifications"
+  >
+    Show more notifications
+  </button>
+</div>

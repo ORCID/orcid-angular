@@ -40,6 +40,8 @@ import { OrcidValidators } from 'src/app/validators'
 export class FormPersonalComponent extends BaseForm
   implements OnInit, AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
+  labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
+  labelClose = $localize`:@@register.ariaLabelClose:close`
   constructor(private _register: RegisterService) {
     super()
   }
@@ -65,7 +67,7 @@ export class FormPersonalComponent extends BaseForm
       },
       {
         validators: [
-          OrcidValidators.matchValues('email', 'confirmEmail'),
+          OrcidValidators.matchValues('email', 'confirmEmail', false),
           this.allEmailsAreUnique(),
         ],
         asyncValidators: [this._register.backendAdditionalEmailsValidate()],
