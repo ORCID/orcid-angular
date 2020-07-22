@@ -13,13 +13,14 @@ import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
 import { OauthParameters } from '../types'
 import { oauthSectionHasError, oauthSectionUserIsLoggedIn } from './constants'
+import { UserService } from '../core'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizeGuard implements CanActivateChild {
   constructor(
-    private _oauth: OauthService,
+    private _user: UserService,
     private _router: Router,
     private _platform: PlatformInfoService
   ) {}
@@ -47,12 +48,13 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   handleOauthSection(queryParams: OauthParameters) {
-    return this._oauth.declareOauthSession(<OauthParameters>queryParams).pipe(
-      map((value) => {
+    return this._user.getUserSession(queryParams).pipe(
+      map((x) => x.oauthSession),
+      map((session) => {
         if (
           // value.forceLogin || TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
-          !oauthSectionUserIsLoggedIn(value) ||
-          oauthSectionHasError(value)
+          !oauthSectionUserIsLoggedIn(session) ||
+          oauthSectionHasError(session)
         ) {
           // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
           // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route

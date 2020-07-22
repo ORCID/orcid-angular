@@ -28,10 +28,10 @@ export class OauthService {
   }
 
   /**
-   * @return the same hot observable as declareOauthSession
+   * @deprecated in favor of only getting the oauth session data through the user service
    */
   loadRequestInfoFormFromMemory(): Observable<RequestInfoForm> {
-    return this.requestInfoSubject.asObservable()
+    return this.requestInfoSubject
   }
 
   updateRequestInfoFormInMemory(requestInfoForm: RequestInfoForm) {
@@ -85,7 +85,8 @@ export class OauthService {
    * @param queryParameters Orcid supported OAuth parameters
    * @param forceRefresh if true updates oauth section even when there is an existing one
    *
-   * it sends the Oauth query parameters to the backend only on the first call or if `forceRefresh` is true
+   *  it sends the Oauth query parameters to the backend only on the first call or if `forceRefresh` is true
+   *  Important: Avoid calling this method directly, since getting the oauth RequestInfo from the UserService.getSession is preferred
    *
    * @returns a hot observable with the oauth RequestInfoForm
    */
@@ -93,7 +94,7 @@ export class OauthService {
     queryParameters: OauthParameters,
     forceRefresh = false
   ): Observable<RequestInfoForm> {
-    if ((this.oauthSectionDeclared && !forceRefresh) || !queryParameters) {
+    if (this.oauthSectionDeclared && !forceRefresh) {
       return this.requestInfoSubject
     }
 
@@ -114,7 +115,7 @@ export class OauthService {
           this.requestInfoSubject.next(data)
           this.oauthSectionDeclared = true
         }),
-        switchMap(() => this.requestInfoSubject.asObservable())
+        switchMap(() => this.requestInfoSubject)
       )
   }
 

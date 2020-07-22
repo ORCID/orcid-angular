@@ -13,13 +13,13 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
 import { ActivatedRoute, Router } from '@angular/router'
 import { EMPTY } from 'rxjs'
-import { map, switchMap, take, tap } from 'rxjs/operators'
+import { first, map, switchMap, tap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
+import { UserService } from 'src/app/core'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
-import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { RequestInfoForm } from 'src/app/types'
 import {
@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   backendForm: RegisterForm
   loading = false
   requestInfoForm: RequestInfoForm | null
-  oauthMode: boolean
   constructor(
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
@@ -55,7 +54,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
     private _gtag: GoogleAnalyticsService,
-    private _oauth: OauthService,
+    private _user: UserService,
     private _route: ActivatedRoute,
     private _router: Router
   ) {
@@ -82,17 +81,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this._route.queryParams
       .pipe(
         switchMap(() =>
-          this._platformInfo
-            .get()
-            .pipe(map((value) => value.oauthMode !== this.oauthMode))
+          this._platformInfo.get().pipe(map((value) => value.oauthMode))
         ),
         switchMap((oauthMode) => {
           if (oauthMode) {
-            return this._oauth.loadRequestInfoFormFromMemory().pipe(
-              take(1),
-              tap((value) => {
-                if (value) {
-                  this.requestInfoForm = value
+            return this._user.getUserSession().pipe(
+              first(),
+              map((session) => session.oauthSession),
+              tap((requestInfoForm) => {
+                if (requestInfoForm) {
+                  this.requestInfoForm = requestInfoForm
                   this.FormGroupStepA = this.createFormBasedOnRequestInfoForm(
                     this.requestInfoForm
                   )
@@ -105,8 +103,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 }
               })
             )
+          } else {
+            return EMPTY
           }
-          return EMPTY
         })
       )
       .subscribe()
@@ -173,7 +172,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     if (isARedirectToTheAuthorizationPage(response)) {
       this._platformInfo
         .get()
-        .pipe(take(1))
+        .pipe(first())
         .subscribe((platform) =>
           this._router.navigate(['/oauth/authorize'], {
             queryParams: platform.queryParameters,

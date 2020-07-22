@@ -11,19 +11,19 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { first, map } from 'rxjs/operators'
+import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
+import { UserService } from 'src/app/core'
 import { OauthParameters } from 'src/app/types'
 
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
 import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
-import { OauthService } from '../../../core/oauth/oauth.service'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
-import { take } from 'rxjs/operators'
-import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -56,11 +56,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   passwordFormControl: FormControl
 
   constructor(
+    private _user: UserService,
     private _platformInfo: PlatformInfoService,
     _route: ActivatedRoute,
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
-    private _oauthService: OauthService,
     private _router: Router,
     private _gtag: GoogleAnalyticsService
   ) {
@@ -183,7 +183,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     // always send the user with all query parameters
     this._platformInfo
       .get()
-      .pipe(take(1))
+      .pipe(first())
       .subscribe((platform) => {
         this._router.navigate(['/register'], {
           queryParams: platform.queryParameters,
@@ -192,9 +192,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   handleOauthLogin() {
-    this._oauthService
-      .loadRequestInfoFormFromMemory()
-      .pipe(take(1))
+    this._user
+      .getUserSession()
+      .pipe(
+        first(),
+        map((value) => value.oauthSession)
+      )
       .subscribe((requestInfoForm) => {
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)

@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
     _platform.get().subscribe((data) => {
       this.platform = data
     })
-    _userInfo.getUserSection().subscribe((data) => {
+    _userInfo.getUserSession().subscribe((data) => {
       this.user = data.userInfo
     })
     _togglz.getTogglz().subscribe((data) => {

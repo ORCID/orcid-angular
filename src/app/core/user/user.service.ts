@@ -1,6 +1,14 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { forkJoin, merge, Observable, of, Subject, timer } from 'rxjs'
+import {
+  forkJoin,
+  merge,
+  Observable,
+  of,
+  Subject,
+  timer,
+  combineLatest,
+} from 'rxjs'
 import {
   catchError,
   delay,
@@ -16,13 +24,19 @@ import {
   take,
   tap,
 } from 'rxjs/operators'
-import { NameForm, UserInfo, OauthParameters } from 'src/app/types'
+import {
+  NameForm,
+  UserInfo,
+  OauthParameters,
+  RequestInfoForm,
+} from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { OauthService } from '../oauth/oauth.service'
+import { Params } from '@angular/router'
 
 @Injectable({
   providedIn: 'root',
@@ -36,9 +50,10 @@ export class UserService {
   ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
-  private $infoOnEachStatusUpdateObservable: Observable<{
+  private $userSessionObservable: Observable<{
     userInfo: UserInfo
     nameForm: NameForm
+    oauthSession: RequestInfoForm
     displayName: string
     orcidUrl: string
     loggedIn: boolean
@@ -77,29 +92,35 @@ export class UserService {
   }
 
   /**
-   * At the start, every 30 seconds and when the method refreshUserStatus is called
+   * @param queryParams overwrite query parameters provided by the platform service. Used when the call comes from a Guard
+   * since the query params are not yet available on the platform service.
+   *
+   * At the start, every 30 seconds and when the method `refreshUserStatus()` is called
    * the user login status will be check and if it has changed
    * the following actions will be taken
    * - update the backend OAuth  section (if exists)
-   * - retrieve user updated date
+   * - retrieve user session updated data
    *
    * @returns a hot observable with the user section information
    */
-  getUserSection(): Observable<{
+  getUserSession(
+    queryParams?: Params
+  ): Observable<{
     userInfo: UserInfo
     nameForm: NameForm
+    oauthSession: RequestInfoForm
     displayName: string
     orcidUrl: string
     loggedIn: boolean
   }> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
-    if (this.$infoOnEachStatusUpdateObservable) {
-      return this.$infoOnEachStatusUpdateObservable
+    if (this.$userSessionObservable) {
+      return this.$userSessionObservable
     } else {
-      return (this.$infoOnEachStatusUpdateObservable =
+      return (this.$userSessionObservable =
         // Every 30 seconds... or when recheck is trigger
-        merge(timer(0, 30 * 1000), this._recheck).pipe(
+        merge(timer(0, 4 * 1000), this._recheck).pipe(
           // Check for updates on userStatus.json
           switchMapTo(this.getUserStatus()),
           // Filter followup calls if the user status has no change
@@ -114,30 +135,41 @@ export class UserService {
             }
             return false
           }),
-          switchMap((loggedIn) => this.handleOauthSectionUpdate(loggedIn)),
           // At the very beginning assumes the user is logged in,
           // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
           startWith(true),
-          switchMap((loggedIn: boolean) => this.handleUserDataUpdate(loggedIn)),
-          map((data: { userInfo: UserInfo; nameForm: NameForm }) =>
-            this.computesUpdatedUserData(data)
+          switchMap((loggedIn: boolean) =>
+            this.handleUserDataUpdate(loggedIn, queryParams)
           ),
+          map(
+            (data: {
+              userInfo: UserInfo
+              nameForm: NameForm
+              oauthSession: RequestInfoForm
+            }) => this.computesUpdatedUserData(data)
+          ),
+          tap((session) => console.log(session)),
           shareReplay(1)
         ))
     }
   }
 
-  // computes loggedIn State, displayName and orcidUrl based on the data comming from
-  // userInfo and nameForm endpoints
+  /**
+   * computes loggedIn State, displayName, and orcidUrl based on the data coming from
+   * userInfo and nameForm endpoints
+   **/
+
   private computesUpdatedUserData(data: {
     userInfo: UserInfo
     nameForm: NameForm
+    oauthSession: RequestInfoForm
   }): {
     userInfo: UserInfo
     nameForm: NameForm
     displayName: string
     orcidUrl: string
     loggedIn: boolean
+    oauthSession: RequestInfoForm
   } {
     {
       return {
@@ -154,34 +186,69 @@ export class UserService {
     }
   }
 
-  // If the user is logged in get the UserStatus.json and nameForm.json
+  /**
+   * @param  loggedIn true if the user is login, please note that getUserSession will eagerly call this as true on the app first load
+   * @param  queryParams overwrite query parameters provided by the platform service
+   *
+   * calls the appropriated endpoints depending on the logging state
+   *
+   * @returns an observable that with the last response of the calls,
+   * this observable will wait for all the calls to respond before returning the first event
+   */
   private handleUserDataUpdate(
-    loggedIn: boolean
-  ): Observable<{} | { userInfo: UserInfo; nameForm: NameForm }> {
+    loggedIn: boolean,
+    queryParams?: Params
+  ): Observable<
+    | {}
+    | {
+        userInfo?: UserInfo
+        nameForm?: NameForm
+        oauthSession: RequestInfoForm
+      }
+  > {
     this.currentlyLoggedIn = loggedIn
-    if (loggedIn) {
-      // return an object with the most recent response of both endpoints
-      return forkJoin({
-        userInfo: this.getUserInfo().pipe(this.handleErrors),
-        nameForm: this.getNameForm().pipe(this.handleErrors),
-      })
-    }
-    return of({})
-  }
+    const $userInfo = this.getUserInfo().pipe(this.handleErrors)
+    const $nameForm = this.getNameForm().pipe(this.handleErrors)
+    const $oauthSession = this.getOauthSession(queryParams).pipe()
 
-  // If the user status changes the Oauth section(if exist) needs  to be updated
-  private handleOauthSectionUpdate(loggedIn: boolean): Observable<boolean> {
+    if (loggedIn) {
+      return combineLatest([$userInfo, $nameForm, $oauthSession]).pipe(
+        map(([userInfo, nameForm, oauthSession]) => ({
+          userInfo,
+          nameForm,
+          oauthSession,
+        }))
+      )
+    } else {
+      return forkJoin([$oauthSession]).pipe(
+        map(([oauthSession]) => ({
+          oauthSession,
+        }))
+      )
+    }
+  }
+  /**
+   * @param  queryParams? overwrite query parameters provided by the platform service
+   */
+  private getOauthSession(queryParams?: Params): Observable<RequestInfoForm> {
     return this._platform.get().pipe(
+      take(1),
       switchMap((platform) => {
-        if (platform.oauthMode) {
-          return this._oauth
-            .declareOauthSession(
-              platform.queryParameters as OauthParameters,
-              true
-            )
-            .pipe(map(() => loggedIn))
+        console.log(
+          'try to use this Oauth parameters to declare the session ',
+          queryParams || platform.queryParameters
+        )
+        if (
+          (queryParams && Object.keys(queryParams).length) ||
+          (platform.oauthMode && Object.keys(platform.oauthMode).length)
+        ) {
+          return this._oauth.declareOauthSession(
+            (queryParams as OauthParameters) ||
+              (platform.queryParameters as OauthParameters),
+            true
+          )
         } else {
-          return of(loggedIn)
+          return of(undefined)
         }
       })
     )
@@ -189,7 +256,7 @@ export class UserService {
 
   refreshUserStatus() {
     this._recheck.next()
-    return this.getUserSection().pipe(
+    return this.getUserSession().pipe(
       // ignore the replay value, and return the latest value
       take(2),
       last()
