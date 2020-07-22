@@ -16,7 +16,7 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
     if (val != null && val !== undefined && val !== '') {
       this.form.setValue(val, { emitEvent: true })
       // Trigger registerOnChange custom function by calling form.updateValueAndValidity
-      // require since the most form controls extending this class
+      // require since most form controls extending this class
       // need to call the xxxxRegisterForm functions to adapt the original angular form value for the backend format
       setTimeout(() => {
         this.form.updateValueAndValidity()
@@ -41,9 +41,9 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
     // depending of fix
     // https://github.com/angular/angular/pull/20806
     //
-    // using only form.statusChanges observable only would be a better solution for this scenario (see the code before this fix)
-    // but if the form status starts as `pending` Angular wont report the change because of #14542
-    // and the status might now start as pending with the introduction of Oauth registration
+    // using form.statusChanges observable only would be a better solution for this scenario (see the code before this fix)
+    // but if the form status starts as `pending` Angular wont report the status change because of #14542
+    // and the status might now start as `pending` with the introduction of Oauth registration
 
     return merge(this.form.statusChanges, timer(0, 1000)).pipe(
       map(() => this.form.status),
