@@ -12,7 +12,7 @@ import { map, switchMap } from 'rxjs/operators'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
 import { OauthParameters } from '../types'
-import { oauthSectionHasError, oauthSectionUserIsLoggedIn } from './constants'
+import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
 
 @Injectable({
@@ -34,7 +34,7 @@ export class SignInGuard implements CanActivateChild {
     return this._platform.get().pipe(
       switchMap((value) => {
         if (value.oauthMode) {
-          return this.handleOauthSection(queryParams as OauthParameters)
+          return this.handleOauthSession(queryParams as OauthParameters)
         } else {
           return of(true)
         }
@@ -42,7 +42,7 @@ export class SignInGuard implements CanActivateChild {
     )
   }
 
-  handleOauthSection(queryParams: OauthParameters) {
+  handleOauthSession(queryParams: OauthParameters) {
     // If the show login parameters is present redirect the user to the register
     if (queryParams.show_login === 'false') {
       return of(
@@ -54,11 +54,11 @@ export class SignInGuard implements CanActivateChild {
     // check if the user is already login or there are errors
     return this._user.getUserSession(queryParams).pipe(
       map((x) => x.oauthSession),
-      map((section) => {
+      map((session) => {
         if (
           // !section.forceLogin && TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
-          oauthSectionUserIsLoggedIn(section) &&
-          !oauthSectionHasError(section)
+          oauthSessionUserIsLoggedIn(session) &&
+          !oauthSessionHasError(session)
         ) {
           return this._router.createUrlTree(['/oauth/authorize'], {
             queryParams: queryParams,

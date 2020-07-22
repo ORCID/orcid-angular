@@ -1,14 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import {
-  forkJoin,
-  merge,
-  Observable,
-  of,
-  Subject,
-  timer,
-  combineLatest,
-} from 'rxjs'
+import { Params } from '@angular/router'
+import { combineLatest, merge, Observable, of, Subject, timer } from 'rxjs'
 import {
   catchError,
   delay,
@@ -23,20 +16,20 @@ import {
   switchMapTo,
   take,
   tap,
+  first,
 } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import {
   NameForm,
-  UserInfo,
   OauthParameters,
   RequestInfoForm,
+  UserInfo,
 } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { OauthService } from '../oauth/oauth.service'
-import { Params } from '@angular/router'
 
 @Injectable({
   providedIn: 'root',
@@ -98,10 +91,10 @@ export class UserService {
    * At the start, every 30 seconds and when the method `refreshUserStatus()` is called
    * the user login status will be check and if it has changed
    * the following actions will be taken
-   * - update the backend OAuth  section (if exists)
+   * - update the backend OAuth  session (if exists)
    * - retrieve user session updated data
    *
-   * @returns a hot observable with the user section information
+   * @returns a hot observable with the user session information
    */
   getUserSession(
     queryParams?: Params
@@ -148,7 +141,10 @@ export class UserService {
               oauthSession: RequestInfoForm
             }) => this.computesUpdatedUserData(data)
           ),
-          tap((session) => console.log(session)),
+          // Debugger for the user session on development time
+          tap((session) =>
+            !environment.production ? console.log(session) : null
+          ),
           shareReplay(1)
         ))
     }
@@ -177,12 +173,20 @@ export class UserService {
         ...{
           loggedIn: !!data.userInfo || !!data.nameForm,
           displayName: this.getDisplayName(data.nameForm),
-          orcidUrl:
-            'https:' + environment.BASE_URL + data && data.userInfo
-              ? data.userInfo.REAL_USER_ORCID
-              : '',
+          orcidUrl: this.getOrcidUrl(data),
         },
       }
+    }
+  }
+  private getOrcidUrl(data: {
+    userInfo: UserInfo
+    nameForm: NameForm
+    oauthSession: RequestInfoForm
+  }): string {
+    if (data && data.userInfo && data.userInfo.REAL_USER_ORCID) {
+      return 'https:' + environment.BASE_URL + data.userInfo.REAL_USER_ORCID
+    } else {
+      return undefined
     }
   }
 
@@ -220,8 +224,10 @@ export class UserService {
         }))
       )
     } else {
-      return forkJoin([$oauthSession]).pipe(
-        map(([oauthSession]) => ({
+      return combineLatest([of(undefined), of(undefined), $oauthSession]).pipe(
+        map(([userInfo, nameForm, oauthSession]) => ({
+          userInfo,
+          nameForm,
           oauthSession,
         }))
       )
@@ -232,12 +238,8 @@ export class UserService {
    */
   private getOauthSession(queryParams?: Params): Observable<RequestInfoForm> {
     return this._platform.get().pipe(
-      take(1),
+      first(),
       switchMap((platform) => {
-        console.log(
-          'try to use this Oauth parameters to declare the session ',
-          queryParams || platform.queryParameters
-        )
         if (
           (queryParams && Object.keys(queryParams).length) ||
           (platform.oauthMode && Object.keys(platform.oauthMode).length)
@@ -279,7 +281,7 @@ export class UserService {
         )
       }
     } else {
-      return null
+      return undefined
     }
   }
   private handleErrors(gerUserInfo: Observable<UserInfo | NameForm>) {

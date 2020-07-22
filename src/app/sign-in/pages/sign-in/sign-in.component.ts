@@ -60,7 +60,7 @@ export class SignInComponent implements OnInit {
       .getUserSession()
       .pipe(first())
       .subscribe((info) => {
-        this.isLoggedIn = info.loggedIn
+        this.isLoggedIn = info.loggedIn && !info.oauthSession?.forceLogin
         if (this.isLoggedIn) {
           this.displayName = info.displayName
           this.realUserOrcid = info.orcidUrl

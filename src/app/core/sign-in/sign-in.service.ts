@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { environment } from '../../../environments/environment'
-import { catchError, retry, tap, switchMap, take, map } from 'rxjs/operators'
-import { SignIn } from '../../types/sign-in.endpoint'
-import { Reactivation } from '../../types/reactivation.endpoint'
-import { CustomEncoder } from '../custom-encoder/custom.encoder'
-import { getOrcidNumber } from '../../constants'
-import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
-import { UserService } from '../user/user.service'
+import { Injectable } from '@angular/core'
 import { of } from 'rxjs'
+import { catchError, map, retry, switchMap, first } from 'rxjs/operators'
+
+import { environment } from '../../../environments/environment'
+import { getOrcidNumber } from '../../constants'
+import { Reactivation } from '../../types/reactivation.endpoint'
+import { SignIn } from '../../types/sign-in.endpoint'
+import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
+import { CustomEncoder } from '../custom-encoder/custom.encoder'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { UserService } from '../user/user.service'
 
 @Injectable({
   providedIn: 'root',
@@ -65,7 +66,7 @@ export class SignInService {
           // other logins that go outside this application, wont require to refresh the user service
           if (updateUserService) {
             return this._userService.refreshUserStatus().pipe(
-              take(1),
+              first(),
               map(() => response)
             )
           } else {

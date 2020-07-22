@@ -13,7 +13,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class OauthService {
-  private oauthSectionDeclared = false
+  private oauthSessionDeclared = false
   private headers: HttpHeaders
   private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)
 
@@ -83,7 +83,7 @@ export class OauthService {
 
   /**
    * @param queryParameters Orcid supported OAuth parameters
-   * @param forceRefresh if true updates oauth section even when there is an existing one
+   * @param forceRefresh if true updates oauth session even when there is an existing one
    *
    *  it sends the Oauth query parameters to the backend only on the first call or if `forceRefresh` is true
    *  Important: Avoid calling this method directly, since getting the oauth RequestInfo from the UserService.getSession is preferred
@@ -94,7 +94,7 @@ export class OauthService {
     queryParameters: OauthParameters,
     forceRefresh = false
   ): Observable<RequestInfoForm> {
-    if (this.oauthSectionDeclared && !forceRefresh) {
+    if (this.oauthSessionDeclared && !forceRefresh) {
       return this.requestInfoSubject
     }
 
@@ -113,7 +113,7 @@ export class OauthService {
         catchError((error) => this._errorHandler.handleError(error)),
         tap((data) => {
           this.requestInfoSubject.next(data)
-          this.oauthSectionDeclared = true
+          this.oauthSessionDeclared = true
         }),
         switchMap(() => this.requestInfoSubject)
       )

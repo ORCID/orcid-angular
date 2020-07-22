@@ -1,9 +1,9 @@
 import { RequestInfoForm } from '../types'
 
-export function oauthSectionHasError(value: RequestInfoForm) {
+export function oauthSessionHasError(value: RequestInfoForm) {
   return value.errors.length || value.error
 }
 
-export function oauthSectionUserIsLoggedIn(value: RequestInfoForm) {
+export function oauthSessionUserIsLoggedIn(value: RequestInfoForm) {
   return value.userOrcid && value.userName
 }
