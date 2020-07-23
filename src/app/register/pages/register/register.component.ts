@@ -17,7 +17,7 @@ import { first, map, switchMap, tap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { isARedirectToTheAuthorizationPage } from 'src/app/constants'
+import { IsARedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { RegisterService } from 'src/app/core/register/register.service'
@@ -169,7 +169,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   }
 
   afterRegisterRedirectionHandler(response: RegisterConfirmResponse) {
-    if (isARedirectToTheAuthorizationPage(response)) {
+    if (IsARedirectToTheAuthorizationPage(response)) {
       this._platformInfo
         .get()
         .pipe(first())

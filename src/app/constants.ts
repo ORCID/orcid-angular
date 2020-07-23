@@ -79,6 +79,6 @@ export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']
 
 export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10
 
-export function isARedirectToTheAuthorizationPage(data: { url: string }) {
+export function IsARedirectToTheAuthorizationPage(data: { url: string }) {
   return data.url.toLowerCase().includes('oauth/authorize')
 }
