@@ -12,7 +12,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { first, map } from 'rxjs/operators'
-import { IsARedirectToTheAuthorizationPage } from 'src/app/constants'
+import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters } from 'src/app/types'
 
@@ -117,7 +117,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         this.printError = false
 
         if (data.success) {
-          if (IsARedirectToTheAuthorizationPage(data)) {
+          if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin()
           } else {
             this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
