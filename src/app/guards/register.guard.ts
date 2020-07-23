@@ -55,6 +55,11 @@ export class RegisterGuard implements CanActivateChild {
           return this._router.createUrlTree(['/oauth/authorize'], {
             queryParams: queryParams,
           })
+        } else if (oauthSessionHasError(session)) {
+          // errors are handle on the signin guard
+          return this._router.createUrlTree(['/signin'], {
+            queryParams: queryParams,
+          })
         }
         return true
       })

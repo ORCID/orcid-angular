@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, Inject } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivateChild,
@@ -11,9 +11,11 @@ import { map, switchMap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
-import { OauthParameters } from '../types'
+import { OauthParameters, RequestInfoForm } from '../types'
 import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
+import { HttpClient } from '@angular/common/http'
+import { WINDOW } from '../cdk/window'
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +24,8 @@ export class SignInGuard implements CanActivateChild {
   constructor(
     private _user: UserService,
     private _router: Router,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    @Inject(WINDOW) private window: Window
   ) {}
 
   canActivateChild(
@@ -63,9 +66,17 @@ export class SignInGuard implements CanActivateChild {
           return this._router.createUrlTree(['/oauth/authorize'], {
             queryParams: queryParams,
           })
+        } else if (oauthSessionHasError) {
+          this.handleOpenIdErrorCodes(session)
         }
         return true
       })
     )
+  }
+
+  private handleOpenIdErrorCodes(session: RequestInfoForm) {
+    if (session.error) {
+      this.window.location.href = `${session.redirectUrl}/?code=${session.error}`
+    }
   }
 }
