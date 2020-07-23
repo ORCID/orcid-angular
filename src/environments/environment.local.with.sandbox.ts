@@ -2,6 +2,7 @@
 // to make the local environment work with Sandbox an alternative needs to be use to avoid CORS errors
 export const environment = {
   production: false,
+  sessionDebugger: true,
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_NEWS_DEPRECATED: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.localhost/v3.0',

@@ -11,12 +11,14 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { first, map } from 'rxjs/operators'
+import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
+import { UserService } from 'src/app/core'
 import { OauthParameters } from 'src/app/types'
 
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
 import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
-import { OauthService } from '../../../core/oauth/oauth.service'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
@@ -54,11 +56,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   passwordFormControl: FormControl
 
   constructor(
-    _platformInfo: PlatformInfoService,
+    private _user: UserService,
+    private _platformInfo: PlatformInfoService,
     _route: ActivatedRoute,
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
-    private _oauthService: OauthService,
     private _router: Router,
     private _gtag: GoogleAnalyticsService
   ) {
@@ -109,14 +111,14 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       this.loading = true
 
       const isOauth = this.signInLocal.type === TypeSignIn.oauth
-      const $signIn = this._signIn.signIn(this.signInLocal, isOauth)
+      const $signIn = this._signIn.signIn(this.signInLocal, isOauth, isOauth)
       $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
 
         if (data.success) {
-          if (data.url.toLowerCase().includes('oauth/authorize')) {
-            this.updateOauthSession(this.signInLocal.params)
+          if (isRedirectToTheAuthorizationPage(data)) {
+            this.handleOauthLogin()
           } else {
             this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
               () => this.navigateTo(data.url),
@@ -178,26 +180,24 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   register() {
-    if (this.signInLocal.type === TypeSignIn.institutional) {
-      this._router.navigate([
-        '/register',
-        {
-          linkRequest: this.signInData.linkType,
-          emailId: this.signInData.emailEncoded,
-          firstName: this.signInData.firstNameEncoded,
-          lastName: this.signInData.lastNameEncoded,
-          providerId: this.signInData.providerIdEncoded,
-          accountId: this.signInData.accountIdEncoded,
-        },
-      ])
-    } else {
-      this._router.navigate(['/register'])
-    }
+    // always send the user with all query parameters
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/register'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 
-  updateOauthSession(value: OauthParameters) {
-    this._oauthService
-      .updateOauthSession(value)
+  handleOauthLogin() {
+    this._user
+      .getUserSession()
+      .pipe(
+        first(),
+        map((value) => value.oauthSession)
+      )
       .subscribe((requestInfoForm) => {
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
@@ -210,7 +210,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
   oauthAuthorize() {
     this._router.navigate(['/oauth/authorize'], {
-      queryParams: this.signInLocal.params,
+      queryParams: { ...this.signInLocal.params, prompt: undefined },
     })
   }
 

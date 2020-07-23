@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core'
+import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivateChild,
@@ -11,21 +11,18 @@ import { map, switchMap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
-import { OauthParameters, RequestInfoForm } from '../types'
+import { OauthParameters } from '../types'
 import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
-import { HttpClient } from '@angular/common/http'
-import { WINDOW } from '../cdk/window'
 
 @Injectable({
   providedIn: 'root',
 })
-export class SignInGuard implements CanActivateChild {
+export class RegisterGuard implements CanActivateChild {
   constructor(
     private _user: UserService,
     private _router: Router,
-    private _platform: PlatformInfoService,
-    @Inject(WINDOW) private window: Window
+    private _platform: PlatformInfoService
   ) {}
 
   canActivateChild(
@@ -46,14 +43,6 @@ export class SignInGuard implements CanActivateChild {
   }
 
   handleOauthSession(queryParams: OauthParameters) {
-    // If the show login parameters is present redirect the user to the register
-    if (queryParams.show_login === 'false') {
-      return of(
-        this._router.createUrlTree(['/register'], {
-          queryParams: queryParams,
-        })
-      )
-    }
     // check if the user is already login or there are errors
     return this._user.getUserSession(queryParams).pipe(
       map((x) => x.oauthSession),
@@ -66,17 +55,14 @@ export class SignInGuard implements CanActivateChild {
           return this._router.createUrlTree(['/oauth/authorize'], {
             queryParams: queryParams,
           })
-        } else if (oauthSessionHasError) {
-          this.handleOpenIdErrorCodes(session)
+        } else if (oauthSessionHasError(session)) {
+          // errors are handle on the signin guard
+          return this._router.createUrlTree(['/signin'], {
+            queryParams: queryParams,
+          })
         }
         return true
       })
     )
-  }
-
-  private handleOpenIdErrorCodes(session: RequestInfoForm) {
-    if (session.error) {
-      this.window.location.href = `${session.redirectUrl}/?code=${session.error}`
-    }
   }
 }

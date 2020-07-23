@@ -1,16 +1,19 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { forkJoin, Observable, Subject } from 'rxjs'
+import { switchMap, take, takeUntil } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { OauthService } from 'src/app/core/oauth/oauth.service'
-import { RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import { UserService } from 'src/app/core'
-import { Subject, forkJoin, Observable } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-import { ScopesStrings } from 'src/app/types/common.endpoint'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
+import { OauthService } from 'src/app/core/oauth/oauth.service'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
+import { ScopesStrings } from 'src/app/types/common.endpoint'
+import { RequestInfoForm } from 'src/app/types/request-info-form.endpoint'
 import {
-  TrustedIndividuals,
   Delegator,
+  TrustedIndividuals,
 } from 'src/app/types/trusted-individuals.endpoint'
 
 @Component({
@@ -33,19 +36,31 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _oauth: OauthService,
     private _gtag: GoogleAnalyticsService,
-    private _trustedIndividuals: TrustedIndividualsService
+    private _trustedIndividuals: TrustedIndividualsService,
+    private _signingService: SignInService,
+    private _platformInfo: PlatformInfoService,
+    private _router: Router
   ) {
-    _oauth.loadRequestInfoFormFromMemory().subscribe((data) => {
-      this.oauthRequest = data
-    })
-
     this._user
-      .getUserInfoOnEachStatusUpdate()
+      .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userInfo) => {
         this.loadingUserInfo = false
-        this.userName = userInfo.displayName
-        this.orcidUrl = userInfo.orcidUrl
+        this.oauthRequest = userInfo.oauthSession
+        if (userInfo.loggedIn) {
+          this.userName = userInfo.displayName
+          this.orcidUrl = userInfo.orcidUrl
+        } else {
+          // if the user logouts in the middle of a oauth section on another tab
+          this._platformInfo
+            .get()
+            .pipe(take(1))
+            .subscribe((platform) =>
+              this._router.navigate(['/signin'], {
+                queryParams: platform.queryParameters,
+              })
+            )
+        }
       })
     this._trustedIndividuals
       .getTrustedIndividuals()
@@ -60,6 +75,17 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
 
   navigateTo(val) {
     this.window.location.href = val
+  }
+
+  signOut() {
+    this._signingService
+      .singOut()
+      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
+      .subscribe((platform) => {
+        this._router.navigate(['/signin'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 
   authorize(value = true) {

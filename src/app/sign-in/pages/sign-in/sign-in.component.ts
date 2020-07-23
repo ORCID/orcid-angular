@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { UserService } from '../../../core'
 import { environment } from 'src/environments/environment'
 import { WINDOW } from '../../../cdk/window'
-import { take, tap } from 'rxjs/operators'
+import { tap, first } from 'rxjs/operators'
 import { ActivatedRoute, Router } from '@angular/router'
 import { OauthParameters } from 'src/app/types'
 import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
@@ -24,15 +24,16 @@ import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.
 })
 export class SignInComponent implements OnInit {
   @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
-  oauthParameters: OauthParameters
-  requestInfoForm: RequestInfoForm
-  params: HttpParams
-  loading = false
+  oauthParameters: OauthParameters // deprecated
+  requestInfoForm: RequestInfoForm // deprecated
+  params: HttpParams // deprecated
+  loading = false // TODO @Daniel seems like some progress bars depend on this but is never true
   isLoggedIn = false
+  isForceLogin = false
   displayName: string
   realUserOrcid: string
   email = ''
-  oauthRequest = false
+  oauthRequest = false // deprecated
   show2FA = false
   signInType = TypeSignIn.personal
 
@@ -46,26 +47,28 @@ export class SignInComponent implements OnInit {
   ) {
     _route.queryParams
       .pipe(
-        // More info about signin query parameters https://members.orcid.org/api/oauth/get-oauthauthorize
-        take(1),
+        first(),
         tap((value: OauthParameters) => {
           this.oauthParameters = value
-
-          if (this.oauthParameters.email) {
-            this.email = this.oauthParameters.email
+          if (value.email) {
+            this.email = value.email
           }
         })
       )
       .subscribe()
 
     _userInfo
-      .getUserInfoOnEachStatusUpdate()
-      .pipe(take(1))
-      .subscribe((info) => {
-        this.isLoggedIn = info.loggedIn
+      .getUserSession()
+      .pipe(first())
+      .subscribe((session) => {
+        this.isLoggedIn = session.loggedIn
+        this.isForceLogin = session.oauthSession?.forceLogin
         if (this.isLoggedIn) {
-          this.displayName = info.displayName
-          this.realUserOrcid = info.orcidUrl
+          this.displayName = session.displayName
+          this.realUserOrcid = session.orcidUrl
+        } else {
+          this.displayName = null
+          this.realUserOrcid = null
         }
       })
   }
@@ -76,11 +79,13 @@ export class SignInComponent implements OnInit {
     this.show2FA = true
   }
 
+  /**
+   * @deprecated the redirects are now handle on the guards and the email
+   * and the update
+   */
   loadRequestInfoForm(): void {
     this._oauthService.loadRequestInfoForm().subscribe((data) => {
       if (data) {
-        // TODO @DanielPalafox Handle scenario where the user directly navigates to `/signin?oauth` url
-        // https://github.com/ORCID/orcid-angular/issues/260
         this.requestInfoForm = data
         if (this.requestInfoForm.userId) {
           this.formSignInComponent.updateUsername(this.oauthParameters.email)

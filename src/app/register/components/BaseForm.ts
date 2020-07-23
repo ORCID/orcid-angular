@@ -1,13 +1,12 @@
 import {
-  ControlValueAccessor,
-  Validator,
-  FormGroup,
   AbstractControl,
-  ValidationErrors,
   AsyncValidator,
+  ControlValueAccessor,
+  FormGroup,
+  ValidationErrors,
 } from '@angular/forms'
-import { of, Observable } from 'rxjs'
-import { filter, switchMap, map, tap, take, startWith } from 'rxjs/operators'
+import { merge, Observable, timer } from 'rxjs'
+import { filter, map, startWith, take } from 'rxjs/operators'
 
 export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   public form: FormGroup
@@ -15,11 +14,17 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
   constructor() {}
   writeValue(val: any): void {
     if (val != null && val !== undefined && val !== '') {
-      this.form.setValue(val, { emitEvent: false })
+      this.form.setValue(val, { emitEvent: true })
+      // Trigger registerOnChange custom function by calling form.updateValueAndValidity
+      // require since most form controls extending this class
+      // need to call the xxxxRegisterForm functions to adapt the original angular form value for the backend format
+      setTimeout(() => {
+        this.form.updateValueAndValidity()
+      })
     }
   }
   registerOnChange(fn: any): void {
-    this.form.valueChanges.subscribe(value => {
+    this.form.valueChanges.subscribe((value) => {
       fn(value)
     })
   }
@@ -30,9 +35,20 @@ export abstract class BaseForm implements ControlValueAccessor, AsyncValidator {
     isDisabled ? this.form.disable() : this.form.enable()
   }
   validate(c: AbstractControl): Observable<ValidationErrors | null> {
-    return this.form.statusChanges.pipe(
+    // temporal fix
+    // see related issue
+    // https://github.com/angular/angular/issues/14542
+    // depending of fix
+    // https://github.com/angular/angular/pull/20806
+    //
+    // using form.statusChanges observable only would be a better solution for this scenario (see the code before this fix)
+    // but if the form status starts as `pending` Angular wont report the status change because of #14542
+    // and the status might now start as `pending` with the introduction of Oauth registration
+
+    return merge(this.form.statusChanges, timer(0, 1000)).pipe(
+      map(() => this.form.status),
       startWith(this.form.status),
-      filter(value => value !== 'PENDING'),
+      filter((value) => value !== 'PENDING'),
       take(1),
       map(() => {
         return this.form.valid

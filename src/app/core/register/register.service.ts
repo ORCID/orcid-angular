@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
-import { retry, catchError, map, tap } from 'rxjs/operators'
+import { retry, catchError, map, tap, switchMap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import {
   AsyncValidatorFn,
@@ -21,6 +21,7 @@ import { Value } from 'src/app/types/common.endpoint'
 import { RegisterFormAdapterMixin } from './register.form-adapter'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'
 import { RequestInfoForm } from 'src/app/types'
+import { UserService } from '../user/user.service'
 
 // Mixing boiler plate
 
@@ -40,7 +41,11 @@ const _RegisterServiceMixingBase = RegisterBackendValidatorMixin(
 export class RegisterService extends _RegisterServiceMixingBase {
   backendRegistrationForm: RegisterForm
 
-  constructor(_http: HttpClient, _errorHandler: ErrorHandlerService) {
+  constructor(
+    _http: HttpClient,
+    _errorHandler: ErrorHandlerService,
+    private _userService: UserService
+  ) {
     super(_http, _errorHandler)
   }
 
@@ -94,7 +99,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
     StepB: FormGroup,
     StepC: FormGroup,
     type?: 'shibboleth',
-    requestInfoForm?: RequestInfoForm
+    requestInfoForm?: RequestInfoForm,
+    updateUserService = false
   ): Observable<RegisterConfirmResponse> {
     // TODO: @amontenegro Why does the backend require this?
     this.backendRegistrationForm.valNumClient =
@@ -113,7 +119,24 @@ export class RegisterService extends _RegisterServiceMixingBase {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap((value) => {
+          // At the moment by default the userService wont be refreshed, only on the oauth login
+          // other logins that go outside this application, wont require to refresh the user service
+          if (updateUserService) {
+            return this._userService.refreshUserSession().pipe(
+              map((userStatus) => {
+                if (!userStatus.loggedIn && !value.errors) {
+                  // sanity check the user should be logged
+                  // TODO @leomendoza123 show and report error
+                }
+                return value
+              })
+            )
+          } else {
+            return of(value)
+          }
+        })
       )
   }
 
@@ -122,9 +145,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
     requestInfoForm?: RequestInfoForm
   ): void {
     if (requestInfoForm) {
-      registerForm.referredBy.value = requestInfoForm.clientId
-      // @TODO leomendoza123 to be tested once the signin Oauth is read
-      // https://trello.com/c/xoTzzqSl/6675-signin-oauth-support
+      registerForm.referredBy = { value: requestInfoForm.clientId }
     }
   }
   addShibbolethContext(registerForm, type?: 'shibboleth'): void {

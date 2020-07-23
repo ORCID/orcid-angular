@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { take } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 // When the error text is not listed on the RegisterBackendErrors enum
 // the error message will be displayed as it comes from the backend
@@ -20,10 +23,26 @@ export class BackendErrorComponent implements OnInit {
   @Input() errorCode: string
   @Input() value?: string
   unrecognizedError = false
-  constructor() {}
+  constructor(
+    private _platformInfo: PlatformInfoService,
+    private _router: Router
+  ) {}
   ngOnInit() {
     if (!(this.errorCode in RegisterBackendErrors)) {
       this.unrecognizedError = true
     }
+  }
+
+  navigateToSignin(email) {
+    this._platformInfo
+      .get()
+      .pipe(take(1))
+      .subscribe((platform) => {
+        return this._router.navigate(['/signin'], {
+          // keeps all parameters to support Oauth request
+          // and set show login to true
+          queryParams: { ...platform.queryParameters, email, show_login: true },
+        })
+      })
   }
 }

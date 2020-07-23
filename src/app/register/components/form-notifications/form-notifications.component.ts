@@ -1,14 +1,14 @@
-import { Component, OnInit, forwardRef } from '@angular/core'
-import { BaseForm } from '../BaseForm'
+import { Component, forwardRef, OnInit } from '@angular/core'
 import {
-  FormGroup,
   FormControl,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
+  FormGroup,
   NG_ASYNC_VALIDATORS,
+  NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms'
 import { RegisterService } from 'src/app/core/register/register.service'
+
+import { BaseForm } from '../BaseForm'
 
 @Component({
   selector: 'app-form-notifications',
@@ -41,10 +41,10 @@ export class FormNotificationsComponent extends BaseForm implements OnInit {
 
   // OVERWRITE
   registerOnChange(fn: any) {
-    this.form.valueChanges.subscribe(value => {
-      const registerForm = this._register.formGroupToSendOrcidNewsForm(<
-        FormGroup
-      >this.form)
+    this.form.valueChanges.subscribe((value) => {
+      const registerForm = this._register.formGroupToSendOrcidNewsForm(
+        <FormGroup>this.form
+      )
       fn(registerForm)
     })
   }

@@ -33,9 +33,14 @@ export class UserMenuComponent implements OnInit {
     _platform: PlatformInfoService,
     _togglz: TogglzService
   ) {
-    _userInfo.getUserInfoOnEachStatusUpdate().subscribe((data) => {
-      this.userInfo = data.userInfo
-      this.displayName = data.displayName
+    _userInfo.getUserSession().subscribe((data) => {
+      if (data.loggedIn) {
+        this.userInfo = data.userInfo
+        this.displayName = data.displayName
+      } else {
+        this.userInfo = null
+        this.displayName = null
+      }
     })
     _platform.get().subscribe((data) => {
       this.platform = data

@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { Injectable } from '@angular/core'
+import { of } from 'rxjs'
+import { catchError, map, retry, switchMap, first } from 'rxjs/operators'
+
 import { environment } from '../../../environments/environment'
-import { catchError, retry, tap } from 'rxjs/operators'
-import { SignIn } from '../../types/sign-in.endpoint'
-import { Reactivation } from '../../types/reactivation.endpoint'
-import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { getOrcidNumber } from '../../constants'
+import { Reactivation } from '../../types/reactivation.endpoint'
+import { SignIn } from '../../types/sign-in.endpoint'
 import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
+import { CustomEncoder } from '../custom-encoder/custom.encoder'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 
 @Injectable({
@@ -26,8 +28,16 @@ export class SignInService {
       'application/x-www-form-urlencoded;charset=utf-8'
     )
   }
-
-  signIn(signInLocal: SignInLocal, updateUserService = false) {
+  /**
+   * @param  SignInLocal sign in information
+   * @param  updateUserSession default false, set to true if after successfully signing Orcid Angular will still be open
+   * @param  forceSessionUpdate default false, set to true if the user session should be updated even when the user status does not change
+   */
+  signIn(
+    signInLocal: SignInLocal,
+    updateUserSession = false,
+    forceSessionUpdate = false
+  ) {
     let loginUrl = 'signin/auth.json'
 
     if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
@@ -59,11 +69,18 @@ export class SignInService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => {
+        switchMap((response) => {
           // At the moment by default the userService wont be refreshed, only on the oauth login
           // other logins that go outside this application, wont require to refresh the user service
-          if (updateUserService) {
-            this._userService.refreshUserStatus()
+          if (updateUserSession) {
+            return this._userService
+              .refreshUserSession(forceSessionUpdate, true)
+              .pipe(
+                first(),
+                map(() => response)
+              )
+          } else {
+            return of(response)
           }
         })
       )
@@ -80,6 +97,19 @@ export class SignInService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  singOut() {
+    return this._http
+      .get<SignIn>(environment.API_WEB + 'userStatus.json?logUserOut=true', {
+        headers: this.headers,
+        withCredentials: true,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap(() => this._userService.refreshUserSession())
       )
   }
 }

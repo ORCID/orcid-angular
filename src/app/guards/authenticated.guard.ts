@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core'
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
   CanActivateChild,
   Router,
+  RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router'
 import { Observable } from 'rxjs'
-import { UserService } from '../core'
 import { map } from 'rxjs/operators'
+
 import { ApplicationRoutes } from '../constants'
+import { UserService } from '../core'
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,7 @@ export class AuthenticatedGuard implements CanActivateChild {
     | boolean
     | UrlTree {
     return this._userInfo
-      .getUserInfoOnEachStatusUpdate()
+      .getUserSession()
       .pipe(
         map(
           (value) =>

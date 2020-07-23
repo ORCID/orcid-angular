@@ -1,25 +1,49 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { UserInfo, NameForm } from 'src/app/types'
-import { timer, Observable, of, Subject, forkJoin } from 'rxjs'
+import { Injectable } from '@angular/core'
+import { Params } from '@angular/router'
 import {
-  switchMap,
-  tap,
-  delay,
+  combineLatest,
+  merge,
+  Observable,
+  of,
+  ReplaySubject,
+  Subject,
+  timer,
+} from 'rxjs'
+import {
   catchError,
+  delay,
   filter,
-  switchMapTo,
+  first,
+  last,
   map,
-  startWith,
-  retryWhen,
-  shareReplay,
   retry,
-  repeatWhen,
-  takeUntil,
+  retryWhen,
+  startWith,
+  switchMap,
+  take,
+  tap,
+  finalize,
 } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import {
+  NameForm,
+  OauthParameters,
+  RequestInfoForm,
+  UserInfo,
+} from 'src/app/types'
 import { environment } from 'src/environments/environment'
+
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { OauthService } from '../oauth/oauth.service'
+
+interface UserSessionUpdateParameters {
+  checkTrigger:
+    | number
+    | { forceSessionUpdate: boolean; postLoginUpdate: boolean }
+  loggedIn: boolean
+}
 
 @Injectable({
   providedIn: 'root',
@@ -27,21 +51,30 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 export class UserService {
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
-  ) {}
+    private _errorHandler: ErrorHandlerService,
+    private _platform: PlatformInfoService,
+    private _oauth: OauthService
+  ) {
+    this._recheck.subscribe((value) => {
+      console.log(value)
+    })
+  }
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
-  private $infoOnEachStatusUpdateObservable: Observable<{
+  private $userSessionSubject = new ReplaySubject<{
     userInfo: UserInfo
     nameForm: NameForm
+    oauthSession: RequestInfoForm
     displayName: string
     orcidUrl: string
     loggedIn: boolean
-  }>
+  }>(1)
+  sessionInitialized = false
 
-  private readonly _stop = new Subject<void>()
-  private readonly _start = new Subject<void>()
-  private bypassStatusNotChangeFilter = false
+  _recheck = new Subject<{
+    forceSessionUpdate: boolean
+    postLoginUpdate: boolean
+  }>()
 
   private getUserInfo(): Observable<UserInfo> {
     return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
@@ -49,12 +82,12 @@ export class UserService {
     })
   }
 
-  public getUserStatus() {
+  public getUserStatus(): Observable<boolean> {
     return this._http
       .get<UserStatus>(environment.API_WEB + 'userStatus.json', {
         withCredentials: true,
       })
-      .pipe(map((response) => response.loggedIn || null))
+      .pipe(map((response) => !!response.loggedIn))
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -70,91 +103,210 @@ export class UserService {
     )
   }
 
-  getUserInfoOnEachStatusUpdate(): Observable<{
+  /**
+   * @param queryParams overwrite query parameters provided by the platform service. Used when the call comes from a Guard
+   * since the query params are not yet available on the platform service.
+   *
+   * At the start, every 30 seconds and when the method `refreshUserSession()` is called
+   * the user login status will be check and if it has changed
+   * the following actions will be taken
+   * - update the backend OAuth  session (if exists)
+   * - retrieve user session updated data
+   *
+   * @returns a hot observable with the user session information
+   */
+  getUserSession(
+    queryParams?: Params
+  ): Observable<{
     userInfo: UserInfo
     nameForm: NameForm
+    oauthSession: RequestInfoForm
     displayName: string
     orcidUrl: string
     loggedIn: boolean
   }> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
-    if (this.$infoOnEachStatusUpdateObservable) {
-      return this.$infoOnEachStatusUpdateObservable
+    if (this.sessionInitialized) {
+      return this.$userSessionSubject
     } else {
-      return (this.$infoOnEachStatusUpdateObservable =
-        // Every 30 seconds...
-        timer(0, 30 * 1000)
-          .pipe(
-            takeUntil(this._stop),
-            repeatWhen(() => this._start)
-          )
+      this.sessionInitialized = true
+      // trigger every 30 seconds or on _recheck subject event
+      merge(timer(0, 30 * 1000), this._recheck)
+        .pipe(
           // Check for updates on userStatus.json
-          .pipe(switchMapTo(this.getUserStatus()))
+          switchMap((checkTrigger) =>
+            this.getUserStatus().pipe(
+              map((loggedIn) => {
+                return { checkTrigger, loggedIn }
+              })
+            )
+          ),
           // Filter followup calls if the user status has no change
           //
           // Also turns on the flag loggingStateComesFromTheServer
           // indicating that the current logging state is taken from the server,
           // and not the initial assumption. (more on this on the following pipe)
-          .pipe(
-            filter((loggedIn) => {
-              this.loggingStateComesFromTheServer = true
-              if (!(loggedIn === this.currentlyLoggedIn)) {
-                return true
-              }
-              return false
-            })
-          )
+          filter((result) => {
+            this.loggingStateComesFromTheServer = true
+            return this.userStatusHasChange(result)
+          }),
           // At the very beginning assumes the user is logged in,
           // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
-          .pipe(startWith(true))
-          // If the user is logged in get the UserStatus.json and nameForm.json
-          // If not return a null value
-          .pipe(
-            switchMap((loggedIn) => {
-              this.currentlyLoggedIn = loggedIn
-              if (!loggedIn) {
-                return of(false)
-              }
-              if (loggedIn) {
-                // return an object with the most recent response of both endpoints
-                return forkJoin({
-                  userInfo: this.getUserInfo().pipe(this.handleErrors),
-                  nameForm: this.getNameForm().pipe(this.handleErrors),
-                })
-              }
-            }),
-            map((data: { userInfo: UserInfo; nameForm: NameForm }) => {
-              // computes the name that should be displayed on the UI
-              return {
-                ...data,
-                ...{
-                  loggedIn: !!data.userInfo || !!data.nameForm,
-                  displayName: this.getDisplayName(data.nameForm),
-                  orcidUrl:
-                    'https:' + environment.BASE_URL + data && data.userInfo
-                      ? data.userInfo.REAL_USER_ORCID
-                      : '',
-                },
-              }
-            })
-          )
-          .pipe(shareReplay(1)))
+          startWith({ loggedIn: true, checkTrigger: -1 }),
+          switchMap((updateParameters) =>
+            this.handleUserDataUpdate(updateParameters, queryParams)
+          ),
+          map((data) => this.computesUpdatedUserData(data)),
+          // Debugger for the user session on development time
+          tap((session) =>
+            environment.sessionDebugger ? console.log(session) : null
+          ),
+          tap((session) => {
+            this.$userSessionSubject.next(session)
+          })
+        )
+        .subscribe()
+      return this.$userSessionSubject
     }
   }
 
-  refreshUserStatus() {
-    this.stop()
-    this.start()
+  private userStatusHasChange(updateParameters: UserSessionUpdateParameters) {
+    if (
+      !(updateParameters.loggedIn === this.currentlyLoggedIn) ||
+      (typeof updateParameters.checkTrigger !== `number` &&
+        updateParameters.checkTrigger.forceSessionUpdate)
+    ) {
+      return true
+    } else {
+      return false
+    }
   }
 
-  start(): void {
-    this.loggingStateComesFromTheServer = false
-    this.currentlyLoggedIn = null
-    this._start.next()
+  /**
+   * computes loggedIn State, displayName, and orcidUrl based on the data coming from
+   * userInfo and nameForm endpoints
+   **/
+
+  private computesUpdatedUserData(data: {
+    userInfo: UserInfo
+    nameForm: NameForm
+    oauthSession: RequestInfoForm
+  }): {
+    userInfo: UserInfo
+    nameForm: NameForm
+    displayName: string
+    orcidUrl: string
+    loggedIn: boolean
+    oauthSession: RequestInfoForm
+  } {
+    {
+      return {
+        ...data,
+        ...{
+          loggedIn: !!data.userInfo || !!data.nameForm,
+          displayName: this.getDisplayName(data.nameForm),
+          orcidUrl: this.getOrcidUrl(data),
+        },
+      }
+    }
   }
-  stop(): void {
-    this._stop.next()
+  private getOrcidUrl(data: {
+    userInfo: UserInfo
+    nameForm: NameForm
+    oauthSession: RequestInfoForm
+  }): string {
+    if (data && data.userInfo && data.userInfo.REAL_USER_ORCID) {
+      return 'https:' + environment.BASE_URL + data.userInfo.REAL_USER_ORCID
+    } else {
+      return undefined
+    }
+  }
+
+  /**
+   * @param  updateParameters login status and trigger information
+   * @param  queryParams overwrite query parameters provided by the platform service
+   *
+   * calls the appropriated endpoints depending on the logging state
+   *
+   * @returns an observable that with the last response of the calls,
+   * this observable will wait for all the calls to respond before returning the first event
+   */
+  private handleUserDataUpdate(
+    updateParameters?: UserSessionUpdateParameters,
+    queryParams?: Params
+  ): Observable<{
+    userInfo: UserInfo
+    nameForm: NameForm
+    oauthSession: RequestInfoForm
+  }> {
+    this.currentlyLoggedIn = updateParameters.loggedIn
+    const $userInfo = this.getUserInfo().pipe(this.handleErrors)
+    const $nameForm = this.getNameForm().pipe(this.handleErrors)
+    const $oauthSession = this.getOauthSession(
+      updateParameters,
+      queryParams as OauthParameters
+    )
+    if (updateParameters.loggedIn) {
+      return combineLatest([$userInfo, $nameForm, $oauthSession]).pipe(
+        map(([userInfo, nameForm, oauthSession]) => ({
+          userInfo,
+          nameForm,
+          oauthSession,
+        }))
+      )
+    } else {
+      return combineLatest([of(undefined), of(undefined), $oauthSession]).pipe(
+        map(([userInfo, nameForm, oauthSession]) => ({
+          userInfo,
+          nameForm,
+          oauthSession,
+        }))
+      )
+    }
+  }
+  /**
+   * @param  queryParams? overwrite query parameters provided by the platform service
+   */
+  private getOauthSession(
+    updateParameters?: UserSessionUpdateParameters,
+    queryParams?: OauthParameters
+  ): Observable<RequestInfoForm> {
+    return this._platform.get().pipe(
+      first(),
+      switchMap((platform) => {
+        if (
+          (queryParams && Object.keys(queryParams).length) ||
+          (platform.oauthMode && Object.keys(platform.oauthMode).length)
+        ) {
+          const params =
+            queryParams || (platform.queryParameters as OauthParameters)
+          // After a user login remove the promp parameter
+          if (
+            typeof updateParameters.checkTrigger !== `number` &&
+            updateParameters.checkTrigger.postLoginUpdate
+          ) {
+            delete params.prompt
+          }
+          return this._oauth.declareOauthSession(params)
+        } else {
+          return of(undefined)
+        }
+      })
+    )
+  }
+
+  /**
+   * @param forceSessionUpdate=false set to true if the user session should be updated even when the user status does not change
+   * @param postLoginUpdate=false set to true for the `prompt` parameter to be removed from the Oauth session
+   */
+  refreshUserSession(forceSessionUpdate = false, postLoginUpdate = false) {
+    this._recheck.next({ forceSessionUpdate, postLoginUpdate })
+    return this.getUserSession().pipe(
+      // ignore the replay value, and return the latest value
+      take(2),
+      last()
+    )
   }
 
   private getDisplayName(nameForm: NameForm): string {
@@ -173,7 +325,7 @@ export class UserService {
         )
       }
     } else {
-      return null
+      return undefined
     }
   }
   private handleErrors(gerUserInfo: Observable<UserInfo | NameForm>) {
