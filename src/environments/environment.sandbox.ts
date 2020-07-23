@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  sessionDebugger: false,
   API_NEWS_DEPRECATED: 'https://orcid.org/blog/feed',
   API_NEWS: 'https://info.orcid.org/feed',
   API_PUB: '//pub.sandbox.orcid.org/v3.0',

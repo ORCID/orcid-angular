@@ -28,8 +28,16 @@ export class SignInService {
       'application/x-www-form-urlencoded;charset=utf-8'
     )
   }
-
-  signIn(signInLocal: SignInLocal, updateUserService = false) {
+  /**
+   * @param  SignInLocal sign in information
+   * @param  updateUserSession default false, set to true if after successfully signing Orcid Angular will still be open
+   * @param  forceSessionUpdate default false, set to true if the user session should be updated even when the user status does not change
+   */
+  signIn(
+    signInLocal: SignInLocal,
+    updateUserSession = false,
+    forceSessionUpdate = false
+  ) {
     let loginUrl = 'signin/auth.json'
 
     if (signInLocal.type && signInLocal.type === TypeSignIn.institutional) {
@@ -64,11 +72,13 @@ export class SignInService {
         switchMap((response) => {
           // At the moment by default the userService wont be refreshed, only on the oauth login
           // other logins that go outside this application, wont require to refresh the user service
-          if (updateUserService) {
-            return this._userService.refreshUserStatus().pipe(
-              first(),
-              map(() => response)
-            )
+          if (updateUserSession) {
+            return this._userService
+              .refreshUserSession(forceSessionUpdate, true)
+              .pipe(
+                first(),
+                map(() => response)
+              )
           } else {
             return of(response)
           }
@@ -99,7 +109,7 @@ export class SignInService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this._userService.refreshUserStatus())
+        switchMap(() => this._userService.refreshUserSession())
       )
   }
 }

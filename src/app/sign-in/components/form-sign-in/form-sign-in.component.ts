@@ -111,7 +111,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       this.loading = true
 
       const isOauth = this.signInLocal.type === TypeSignIn.oauth
-      const $signIn = this._signIn.signIn(this.signInLocal, isOauth)
+      const $signIn = this._signIn.signIn(this.signInLocal, isOauth, isOauth)
       $signIn.subscribe((data) => {
         this.loading = false
         this.printError = false
@@ -210,7 +210,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
   oauthAuthorize() {
     this._router.navigate(['/oauth/authorize'], {
-      queryParams: this.signInLocal.params,
+      queryParams: { ...this.signInLocal.params, prompt: undefined },
     })
   }
 

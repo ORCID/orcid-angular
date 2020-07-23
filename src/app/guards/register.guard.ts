@@ -48,6 +48,7 @@ export class RegisterGuard implements CanActivateChild {
       map((x) => x.oauthSession),
       map((session) => {
         if (
+          !session.forceLogin &&
           oauthSessionUserIsLoggedIn(session) &&
           !oauthSessionHasError(session)
         ) {

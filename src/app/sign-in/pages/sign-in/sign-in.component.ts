@@ -29,6 +29,7 @@ export class SignInComponent implements OnInit {
   params: HttpParams // deprecated
   loading = false // TODO @Daniel seems like some progress bars depend on this but is never true
   isLoggedIn = false
+  isForceLogin = false
   displayName: string
   realUserOrcid: string
   email = ''
@@ -59,11 +60,12 @@ export class SignInComponent implements OnInit {
     _userInfo
       .getUserSession()
       .pipe(first())
-      .subscribe((info) => {
-        this.isLoggedIn = info.loggedIn && !info.oauthSession?.forceLogin
+      .subscribe((session) => {
+        this.isLoggedIn = session.loggedIn
+        this.isForceLogin = session.oauthSession?.forceLogin
         if (this.isLoggedIn) {
-          this.displayName = info.displayName
-          this.realUserOrcid = info.orcidUrl
+          this.displayName = session.displayName
+          this.realUserOrcid = session.orcidUrl
         } else {
           this.displayName = null
           this.realUserOrcid = null

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap, switchMap } from 'rxjs/operators'
+import { catchError, retry, tap, switchMap, first } from 'rxjs/operators'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 
@@ -13,7 +13,6 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class OauthService {
-  private oauthSessionDeclared = false
   private headers: HttpHeaders
   private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)
 
@@ -33,7 +32,9 @@ export class OauthService {
   loadRequestInfoFormFromMemory(): Observable<RequestInfoForm> {
     return this.requestInfoSubject
   }
-
+  /**
+   * @deprecated in favor of only getting the oauth session data through the user service
+   */
   updateRequestInfoFormInMemory(requestInfoForm: RequestInfoForm) {
     this.requestInfoSubject.next(requestInfoForm)
   }
@@ -83,25 +84,16 @@ export class OauthService {
 
   /**
    * @param queryParameters Orcid supported OAuth parameters
-   * @param forceRefresh if true updates oauth session even when there is an existing one
    *
-   *  it sends the Oauth query parameters to the backend only on the first call or if `forceRefresh` is true
    *  Important: Avoid calling this method directly, since getting the oauth RequestInfo from the UserService.getSession is preferred
    *
-   * @returns a hot observable with the oauth RequestInfoForm
    */
   declareOauthSession(
-    queryParameters: OauthParameters,
-    forceRefresh = false
+    queryParameters: OauthParameters
   ): Observable<RequestInfoForm> {
-    if (this.oauthSessionDeclared && !forceRefresh) {
-      return this.requestInfoSubject
-    }
-
     return this._http
       .post<RequestInfoForm>(
         environment.BASE_URL +
-          // tslint:disable-next-line:max-line-length
           `oauth/custom/init.json?${this.objectToUrlParameters(
             queryParameters
           )}`,
@@ -110,12 +102,7 @@ export class OauthService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        tap((data) => {
-          this.requestInfoSubject.next(data)
-          this.oauthSessionDeclared = true
-        }),
-        switchMap(() => this.requestInfoSubject)
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -134,11 +121,6 @@ export class OauthService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
-      )
-      .pipe(
-        tap((data) => {
-          this.requestInfoSubject.next(data)
-        })
       )
   }
 

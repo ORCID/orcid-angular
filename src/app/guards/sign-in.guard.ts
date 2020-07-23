@@ -56,7 +56,7 @@ export class SignInGuard implements CanActivateChild {
       map((x) => x.oauthSession),
       map((session) => {
         if (
-          // !section.forceLogin && TODO @leomendoza123 https://trello.com/c/xapTqK4F/6875-support-openid-query-parameters
+          !session.forceLogin &&
           oauthSessionUserIsLoggedIn(session) &&
           !oauthSessionHasError(session)
         ) {

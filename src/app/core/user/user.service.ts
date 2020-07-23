@@ -1,22 +1,29 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Params } from '@angular/router'
-import { combineLatest, merge, Observable, of, Subject, timer } from 'rxjs'
+import {
+  combineLatest,
+  merge,
+  Observable,
+  of,
+  ReplaySubject,
+  Subject,
+  timer,
+} from 'rxjs'
 import {
   catchError,
   delay,
   filter,
+  first,
   last,
   map,
   retry,
   retryWhen,
-  shareReplay,
   startWith,
   switchMap,
-  switchMapTo,
   take,
   tap,
-  first,
+  finalize,
 } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import {
@@ -31,6 +38,13 @@ import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 
+interface UserSessionUpdateParameters {
+  checkTrigger:
+    | number
+    | { forceSessionUpdate: boolean; postLoginUpdate: boolean }
+  loggedIn: boolean
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -40,22 +54,27 @@ export class UserService {
     private _errorHandler: ErrorHandlerService,
     private _platform: PlatformInfoService,
     private _oauth: OauthService
-  ) {}
+  ) {
+    this._recheck.subscribe((value) => {
+      console.log(value)
+    })
+  }
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
-  private $userSessionObservable: Observable<{
+  private $userSessionSubject = new ReplaySubject<{
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
     displayName: string
     orcidUrl: string
     loggedIn: boolean
-  }>
+  }>(1)
+  sessionInitialized = false
 
-  private readonly _recheck = new Subject<void>()
-  private readonly _stop = new Subject<void>()
-  private readonly _start = new Subject<void>()
-  private bypassStatusNotChangeFilter = false
+  _recheck = new Subject<{
+    forceSessionUpdate: boolean
+    postLoginUpdate: boolean
+  }>()
 
   private getUserInfo(): Observable<UserInfo> {
     return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
@@ -63,12 +82,12 @@ export class UserService {
     })
   }
 
-  public getUserStatus() {
+  public getUserStatus(): Observable<boolean> {
     return this._http
       .get<UserStatus>(environment.API_WEB + 'userStatus.json', {
         withCredentials: true,
       })
-      .pipe(map((response) => response.loggedIn || null))
+      .pipe(map((response) => !!response.loggedIn))
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -88,7 +107,7 @@ export class UserService {
    * @param queryParams overwrite query parameters provided by the platform service. Used when the call comes from a Guard
    * since the query params are not yet available on the platform service.
    *
-   * At the start, every 30 seconds and when the method `refreshUserStatus()` is called
+   * At the start, every 30 seconds and when the method `refreshUserSession()` is called
    * the user login status will be check and if it has changed
    * the following actions will be taken
    * - update the backend OAuth  session (if exists)
@@ -108,45 +127,59 @@ export class UserService {
   }> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
-    if (this.$userSessionObservable) {
-      return this.$userSessionObservable
+    if (this.sessionInitialized) {
+      return this.$userSessionSubject
     } else {
-      return (this.$userSessionObservable =
-        // Every 30 seconds... or when recheck is trigger
-        merge(timer(0, 4 * 1000), this._recheck).pipe(
+      this.sessionInitialized = true
+      // trigger every 30 seconds or on _recheck subject event
+      merge(timer(0, 30 * 1000), this._recheck)
+        .pipe(
           // Check for updates on userStatus.json
-          switchMapTo(this.getUserStatus()),
+          switchMap((checkTrigger) =>
+            this.getUserStatus().pipe(
+              map((loggedIn) => {
+                return { checkTrigger, loggedIn }
+              })
+            )
+          ),
           // Filter followup calls if the user status has no change
           //
           // Also turns on the flag loggingStateComesFromTheServer
           // indicating that the current logging state is taken from the server,
           // and not the initial assumption. (more on this on the following pipe)
-          filter((loggedIn) => {
+          filter((result) => {
             this.loggingStateComesFromTheServer = true
-            if (!(loggedIn === this.currentlyLoggedIn)) {
-              return true
-            }
-            return false
+            return this.userStatusHasChange(result)
           }),
           // At the very beginning assumes the user is logged in,
           // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
-          startWith(true),
-          switchMap((loggedIn: boolean) =>
-            this.handleUserDataUpdate(loggedIn, queryParams)
+          startWith({ loggedIn: true, checkTrigger: -1 }),
+          switchMap((updateParameters) =>
+            this.handleUserDataUpdate(updateParameters, queryParams)
           ),
-          map(
-            (data: {
-              userInfo: UserInfo
-              nameForm: NameForm
-              oauthSession: RequestInfoForm
-            }) => this.computesUpdatedUserData(data)
-          ),
+          map((data) => this.computesUpdatedUserData(data)),
           // Debugger for the user session on development time
           tap((session) =>
-            !environment.production ? console.log(session) : null
+            environment.sessionDebugger ? console.log(session) : null
           ),
-          shareReplay(1)
-        ))
+          tap((session) => {
+            this.$userSessionSubject.next(session)
+          })
+        )
+        .subscribe()
+      return this.$userSessionSubject
+    }
+  }
+
+  private userStatusHasChange(updateParameters: UserSessionUpdateParameters) {
+    if (
+      !(updateParameters.loggedIn === this.currentlyLoggedIn) ||
+      (typeof updateParameters.checkTrigger !== `number` &&
+        updateParameters.checkTrigger.forceSessionUpdate)
+    ) {
+      return true
+    } else {
+      return false
     }
   }
 
@@ -191,7 +224,7 @@ export class UserService {
   }
 
   /**
-   * @param  loggedIn true if the user is login, please note that getUserSession will eagerly call this as true on the app first load
+   * @param  updateParameters login status and trigger information
    * @param  queryParams overwrite query parameters provided by the platform service
    *
    * calls the appropriated endpoints depending on the logging state
@@ -200,22 +233,21 @@ export class UserService {
    * this observable will wait for all the calls to respond before returning the first event
    */
   private handleUserDataUpdate(
-    loggedIn: boolean,
+    updateParameters?: UserSessionUpdateParameters,
     queryParams?: Params
-  ): Observable<
-    | {}
-    | {
-        userInfo?: UserInfo
-        nameForm?: NameForm
-        oauthSession: RequestInfoForm
-      }
-  > {
-    this.currentlyLoggedIn = loggedIn
+  ): Observable<{
+    userInfo: UserInfo
+    nameForm: NameForm
+    oauthSession: RequestInfoForm
+  }> {
+    this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
-    const $oauthSession = this.getOauthSession(queryParams).pipe()
-
-    if (loggedIn) {
+    const $oauthSession = this.getOauthSession(
+      updateParameters,
+      queryParams as OauthParameters
+    )
+    if (updateParameters.loggedIn) {
       return combineLatest([$userInfo, $nameForm, $oauthSession]).pipe(
         map(([userInfo, nameForm, oauthSession]) => ({
           userInfo,
@@ -236,7 +268,10 @@ export class UserService {
   /**
    * @param  queryParams? overwrite query parameters provided by the platform service
    */
-  private getOauthSession(queryParams?: Params): Observable<RequestInfoForm> {
+  private getOauthSession(
+    updateParameters?: UserSessionUpdateParameters,
+    queryParams?: OauthParameters
+  ): Observable<RequestInfoForm> {
     return this._platform.get().pipe(
       first(),
       switchMap((platform) => {
@@ -244,11 +279,16 @@ export class UserService {
           (queryParams && Object.keys(queryParams).length) ||
           (platform.oauthMode && Object.keys(platform.oauthMode).length)
         ) {
-          return this._oauth.declareOauthSession(
-            (queryParams as OauthParameters) ||
-              (platform.queryParameters as OauthParameters),
-            true
-          )
+          const params =
+            queryParams || (platform.queryParameters as OauthParameters)
+          // After a user login remove the promp parameter
+          if (
+            typeof updateParameters.checkTrigger !== `number` &&
+            updateParameters.checkTrigger.postLoginUpdate
+          ) {
+            delete params.prompt
+          }
+          return this._oauth.declareOauthSession(params)
         } else {
           return of(undefined)
         }
@@ -256,8 +296,12 @@ export class UserService {
     )
   }
 
-  refreshUserStatus() {
-    this._recheck.next()
+  /**
+   * @param forceSessionUpdate=false set to true if the user session should be updated even when the user status does not change
+   * @param postLoginUpdate=false set to true for the `prompt` parameter to be removed from the Oauth session
+   */
+  refreshUserSession(forceSessionUpdate = false, postLoginUpdate = false) {
+    this._recheck.next({ forceSessionUpdate, postLoginUpdate })
     return this.getUserSession().pipe(
       // ignore the replay value, and return the latest value
       take(2),

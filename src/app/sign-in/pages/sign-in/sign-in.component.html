@@ -25,7 +25,7 @@
             mode="indeterminate"
           ></mat-progress-bar>
           <mat-card-content>
-            <ng-container *ngIf="!isLoggedIn">
+            <ng-container *ngIf="!isLoggedIn || isForceLogin">
               <app-form-sign-in
                 [email]="email"
                 #formSignInComponent
@@ -51,7 +51,7 @@
               <app-social></app-social>
             </ng-container>
             <app-logged-in
-              *ngIf="isLoggedIn"
+              *ngIf="isLoggedIn && !isForceLogin"
               [displayName]="displayName"
               [realUserOrcid]="realUserOrcid"
             >
