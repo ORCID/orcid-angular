@@ -1,7 +1,7 @@
 // Custom email REGEXP
-// https://regex101.com/r/jV4aN7/8
+// https://regex101.com/r/jV4aN7/13
 // tslint:disable-next-line: max-line-length
-export const EMAIL_REGEXP = /^([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."\(\)\[\]\{\}\\/,:;]|(".+"))+@[^@\s\."'\(\)\[\]\{\}\\/,:;]+(\.[^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
+export const EMAIL_REGEXP = /^([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."\(\)\[\]\{\}\\/,:;]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
 // https://regex101.com/r/9MXmdl/1
 export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://regex101.com/r/V95col/6
@@ -78,7 +78,3 @@ export const GRID_COLUMNS = {
 export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']
 
 export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10
-
-export function isRedirectToTheAuthorizationPage(data: { url: string }) {
-  return data.url.toLowerCase().includes('oauth/authorize')
-}
