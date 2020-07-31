@@ -78,7 +78,7 @@ export class PlatformInfoService {
         this.platform.queryParameters = queryParameters
         const previousOauthState = this.updateOauthState(queryParameters)
         const previousSocialState = this.updateSocialState(queryParameters)
-        const previousInstitutionalState = this.updateSInstitutionalState(
+        const previousInstitutionalState = this.updatesInstitutionalState(
           queryParameters
         )
         if (
@@ -183,7 +183,7 @@ export class PlatformInfoService {
   /**
    * Based on the query and the current router check if the platform should be handle as institutional linking state
    */
-  private updateSInstitutionalState(queryParameters: Params) {
+  private updatesInstitutionalState(queryParameters: Params) {
     const previousInstitutionalState = this.platform.social
 
     if (

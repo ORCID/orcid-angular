@@ -1,28 +1,21 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { environment } from 'src/environments/environment'
-import { retry, catchError, map, tap, switchMap, first } from 'rxjs/operators'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import {
-  AsyncValidatorFn,
-  AbstractControl,
-  ValidationErrors,
-  FormGroup,
-  FormControl,
-} from '@angular/forms'
+import { Injectable } from '@angular/core'
+import { FormGroup } from '@angular/forms'
 import { Observable, of } from 'rxjs'
-import {
-  RegisterForm,
-  DuplicatedName,
-  VisibilityValue,
-  RegisterConfirmResponse,
-} from 'src/app/types/register.endpoint'
-import { Value } from 'src/app/types/common.endpoint'
-import { RegisterFormAdapterMixin } from './register.form-adapter'
-import { RegisterBackendValidatorMixin } from './register.backend-validators'
+import { catchError, first, map, retry, switchMap } from 'rxjs/operators'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RequestInfoForm } from 'src/app/types'
+import {
+  DuplicatedName,
+  RegisterConfirmResponse,
+  RegisterForm,
+} from 'src/app/types/register.endpoint'
+import { environment } from 'src/environments/environment'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
-import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
+import { RegisterBackendValidatorMixin } from './register.backend-validators'
+import { RegisterFormAdapterMixin } from './register.form-adapter'
 
 // Mixing boiler plate
 
@@ -60,24 +53,6 @@ export class RegisterService extends _RegisterServiceMixingBase {
         params: names,
         withCredentials: true,
       })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  confirmRegistration(
-    registrationForm: RegisterForm,
-    type?: 'shibboleth'
-  ): Observable<any> {
-    return this._http
-      .post(
-        `${environment.API_WEB}${type ? '/' + type : ''}'/registerConfirm.json`,
-        registrationForm,
-        {
-          withCredentials: true,
-        }
-      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -167,8 +142,6 @@ export class RegisterService extends _RegisterServiceMixingBase {
     platform: PlatformInfo,
     registerForm: RegisterForm
   ): RegisterForm {
-    // TODO @leomendoza123 https://github.com/ORCID/orcid-angular/issues/206
-
     if (platform.social) {
       registerForm.linkType = 'social'
       return registerForm
