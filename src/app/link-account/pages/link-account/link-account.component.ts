@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+
+import { PlatformInfoService } from '../../../cdk/platform-info'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { OauthService } from '../../../core/oauth/oauth.service'
-import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { Institutional } from '../../../types/institutional.endpoint'
-import { PlatformInfoService } from '../../../cdk/platform-info'
+import { SignInData } from '../../../types/sign-in-data.endpoint'
 
 @Component({
   selector: 'app-link-account',
@@ -40,19 +41,16 @@ export class LinkAccountComponent implements OnInit {
   ngOnInit(): void {}
 
   loadShibbolethSignInData() {
-    this._oauthService
-      .loadShibbolethSignInData()
-      .pipe()
-      .subscribe(
-        (data) => {
-          this.signInData = data
-          this.getInstitution(this.signInData.providerId)
-        },
-        (error) => {
-          // TODO @leomendoza123 display error using a toaster
-          console.error('Error getting disco feed' + JSON.stringify(error))
-        }
-      )
+    this._oauthService.loadShibbolethSignInData().subscribe(
+      (data) => {
+        this.signInData = data
+        this.getInstitution(this.signInData.providerId)
+      },
+      (error) => {
+        // TODO @leomendoza123 display error using a toaster
+        console.error('Error getting disco feed' + JSON.stringify(error))
+      }
+    )
   }
 
   getInstitution(entityId) {
