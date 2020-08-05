@@ -46,7 +46,7 @@ export class LinkAccountComponent implements OnInit {
       .subscribe(
         (data) => {
           this.signInData = data
-          this.getInstitution(this.signInData.providerId)
+          // this.getInstitution(this.signInData.providerId)
         },
         (error) => {
           // TODO @leomendoza123 display error using a toaster
@@ -55,30 +55,29 @@ export class LinkAccountComponent implements OnInit {
       )
   }
 
-  getInstitution(entityId) {
-    this._disco
-      .getDiscoFeed()
-      .pipe()
-      .subscribe(
-        (institutions) => {
-          this.entityId = institutions
-            .filter((institution) => institution.entityID === entityId)
-            .map((result) => {
-              return result.DisplayNames.filter(
-                (subElement) => subElement.lang === 'en'
-              ).map((en) => {
-                return en.value
-              })
-            })[0]
-            .toString()
-          this.loadedFeed = true
-        },
-        (error) => {
-          // TODO @leomendoza123 display error using a toaster
-          console.error('Error getting disco feed' + JSON.stringify(error))
-        }
-      )
-  }
+  // getInstitution(entityId) {
+  //   this._disco
+  //     .getDiscoFeed()
+  //     .subscribe(
+  //       (institutions) => {
+  //         this.entityId = institutions
+  //           .filter((institution) => institution.entityID === entityId)
+  //           .map((result) => {
+  //             return result.DisplayNames.filter(
+  //               (subElement) => subElement.lang === 'en'
+  //             ).map((en) => {
+  //               return en.value
+  //             })
+  //           })[0]
+  //           .toString()
+  //         this.loadedFeed = true
+  //       },
+  //       (error) => {
+  //         // TODO @leomendoza123 display error using a toaster
+  //         console.error('Error getting disco feed' + JSON.stringify(error))
+  //       }
+  //     )
+  // }
 
   loadSocialSignInData() {
     this._oauthService
