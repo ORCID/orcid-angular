@@ -20,7 +20,7 @@ export class LinkAccountComponent implements OnInit {
   show2FA = false
   signInData: SignInData
   institution: Institutional
-  entityId: string
+  entityDisplayName: string
   loadedFeed = false
   email = ''
 
@@ -58,7 +58,7 @@ export class LinkAccountComponent implements OnInit {
     this._disco.getInstitutionBaseOnID(entityId).subscribe(
       (institution) => {
         this.loadedFeed = true
-        this.entityId = institution.DisplayNames.filter(
+        this.entityDisplayName = institution.DisplayNames.filter(
           (subElement) => subElement.lang === 'en'
         ).map((en) => {
           return en.value
@@ -78,10 +78,14 @@ export class LinkAccountComponent implements OnInit {
       .subscribe(
         (data) => {
           this.signInData = data
-          this.entityId = data.providerId
-          if (this.entityId === 'facebook' || this.entityId === 'google') {
-            this.entityId =
-              this.entityId.charAt(0).toUpperCase() + this.entityId.slice(1)
+          this.entityDisplayName = data.providerId
+          if (
+            this.entityDisplayName === 'facebook' ||
+            this.entityDisplayName === 'google'
+          ) {
+            this.entityDisplayName =
+              this.entityDisplayName.charAt(0).toUpperCase() +
+              this.entityDisplayName.slice(1)
           }
           this.loadedFeed = true
         },
