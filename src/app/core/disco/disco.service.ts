@@ -30,21 +30,20 @@ export class DiscoService {
     return this.getDiscoFeedInstitutionsNames().pipe(
       switchMap((value) => {
         let institutionNames: string[]
-        if (filterInput && filterInput.length > 2) {
+        if (filterInput && filterInput.length > 0) {
           institutionNames = value.filter((institutionName) => {
             institutionName = institutionName.toLowerCase()
             filterInput = filterInput.toLocaleLowerCase()
             return institutionName.indexOf(filterInput.toLowerCase()) === 0
           })
-          console.log(institutionNames)
+          institutionNames = institutionNames.slice(
+            0,
+            environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+          )
         } else {
           institutionNames = value
           console.log(institutionNames)
         }
-        institutionNames = institutionNames.slice(
-          0,
-          environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
-        )
 
         return of(institutionNames)
       })
@@ -59,7 +58,7 @@ export class DiscoService {
     //     catchError((error) => this._errorHandler.handleError(error)),
     //     shareReplay(1)
     //   )
-    return of(discoFeed).pipe(shareReplay(1))
+    return of(discoFeed as Institutional[]).pipe(shareReplay(1))
   }
 
   private getDiscoFeedInstitutionsNames(): Observable<string[]> {

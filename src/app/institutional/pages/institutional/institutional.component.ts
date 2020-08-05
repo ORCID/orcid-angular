@@ -1,13 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { WINDOW } from '../../../cdk/window'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable, of } from 'rxjs'
-import { map, startWith, take, switchMap } from 'rxjs/operators'
+import { map, startWith, take, switchMap, tap, filter } from 'rxjs/operators'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { Institutional } from '../../../types/institutional.endpoint'
 import { CookieService } from 'ngx-cookie-service'
 import { environment } from '../../../../environments/environment'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 
 @Component({
   selector: 'app-institutional',
@@ -17,6 +18,7 @@ import { InstitutionValidator } from '../../../shared/validators/institution/ins
   preserveWhitespaces: true,
 })
 export class InstitutionalComponent implements OnInit {
+  displayAutocompleteOptions = false
   loading = false
   options: string[]
   retrieveAllFiltered: any[]
@@ -26,6 +28,7 @@ export class InstitutionalComponent implements OnInit {
   logoInstitution: any
   labelInstitution = $localize`:@@institutional.ariaLabelInstitution:Institution`
   labelClear = $localize`:@@institutional.ariaLabelClear:Clear`
+  @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger
 
   institutionFormControl = new FormControl('', [Validators.required])
 
@@ -48,9 +51,14 @@ export class InstitutionalComponent implements OnInit {
             InstitutionValidator.valueSelected(institutionsNames),
           ])
           this.filteredOptions = this.institutionFormControl.valueChanges.pipe(
-            startWith(''),
             switchMap((filterInput) =>
               this._disco.getInstitutionsNames(filterInput)
+            ),
+            map((institutions) =>
+              institutions.length >
+              environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+                ? []
+                : institutions
             )
           )
           this.clear()
