@@ -39,7 +39,6 @@ export class DiscoService {
           )
         } else {
           institutionNames = value
-          console.log(institutionNames)
         }
 
         return of(institutionNames)

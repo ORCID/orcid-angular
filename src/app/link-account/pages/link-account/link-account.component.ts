@@ -72,28 +72,25 @@ export class LinkAccountComponent implements OnInit {
   }
 
   loadSocialSignInData() {
-    this._oauthService
-      .loadSocialSigninData()
-      .pipe()
-      .subscribe(
-        (data) => {
-          this.signInData = data
-          this.entityDisplayName = data.providerId
-          if (
-            this.entityDisplayName === 'facebook' ||
-            this.entityDisplayName === 'google'
-          ) {
-            this.entityDisplayName =
-              this.entityDisplayName.charAt(0).toUpperCase() +
-              this.entityDisplayName.slice(1)
-          }
-          this.loadedFeed = true
-        },
-        (error) => {
-          // TODO @leomendoza123 display error using a toaster
-          console.error('Error getting disco feed' + JSON.stringify(error))
+    this._oauthService.loadSocialSigninData().subscribe(
+      (data) => {
+        this.signInData = data
+        this.entityDisplayName = data.providerId
+        if (
+          this.entityDisplayName === 'facebook' ||
+          this.entityDisplayName === 'google'
+        ) {
+          this.entityDisplayName =
+            this.entityDisplayName.charAt(0).toUpperCase() +
+            this.entityDisplayName.slice(1)
         }
-      )
+        this.loadedFeed = true
+      },
+      (error) => {
+        // TODO @leomendoza123 display error using a toaster
+        console.error('Error getting disco feed' + JSON.stringify(error))
+      }
+    )
   }
 
   show2FAEmitter($event) {
