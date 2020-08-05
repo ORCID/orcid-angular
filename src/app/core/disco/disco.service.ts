@@ -1,21 +1,18 @@
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, interval } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import {
-  pluck,
-  share,
-  shareReplay,
-  tap,
+  catchError,
+  first,
   map,
+  retry,
+  shareReplay,
   switchMap,
-  throttle,
 } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'
-import { HttpClient } from '@angular/common/http'
 import { Institutional } from '../../types/institutional.endpoint'
-import { catchError, retry } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { discoFeed } from './disco'
 
 @Injectable({
   providedIn: 'root',
@@ -50,20 +47,48 @@ export class DiscoService {
     )
   }
 
+  getInstitutionBaseOnName(institutionName: string): Observable<Institutional> {
+    institutionName = institutionName.toLowerCase()
+    return this.getDiscoFeed().pipe(
+      first(),
+      map((institutions) => {
+        return institutions.find((institution) =>
+          institution?.DisplayNames?.find(
+            (name) =>
+              name.lang === 'en' &&
+              name.value.toLocaleLowerCase() === institutionName
+          )
+        )
+      })
+    )
+  }
+
+  getInstitutionBaseOnID(entityId: string): Observable<Institutional> {
+    return this.getDiscoFeed().pipe(
+      first(),
+      map((institutions) => {
+        return institutions.find(
+          (institution) => institution?.entityID === entityId
+        )
+      })
+    )
+  }
+
   private getDiscoFeed(): Observable<Institutional[]> {
-    // return this._http
-    //   .get<Institutional[]>(environment.BASE_URL + 'Shibboleth.sso/DiscoFeed')
-    //   .pipe(
-    //     retry(3),
-    //     catchError((error) => this._errorHandler.handleError(error)),
-    //     shareReplay(1)
-    //   )
-    return of(discoFeed as Institutional[]).pipe(shareReplay(1))
+    return this._http
+      .get<Institutional[]>(environment.BASE_URL + 'Shibboleth.sso/DiscoFeed')
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        shareReplay(1)
+      )
   }
 
   private getDiscoFeedInstitutionsNames(): Observable<string[]> {
     return this.getDiscoFeed().pipe(
-      map((value: Institutional[]) => this.discoFeedToInstitutionNames(value)),
+      map((institutions: Institutional[]) =>
+        this.discoFeedToInstitutionNames(institutions)
+      ),
       shareReplay(1)
     )
   }
@@ -71,9 +96,9 @@ export class DiscoService {
   discoFeedToInstitutionNames(institutions: Institutional[]): string[] {
     const names = []
     institutions.map((inst) =>
-      inst.DisplayNames.filter(
-        (subElement) => subElement.lang === 'en'
-      ).map((en) => names.push(en.value))
+      inst.DisplayNames.filter((name) => name.lang === 'en').map((en) =>
+        names.push(en.value)
+      )
     )
     return names
   }

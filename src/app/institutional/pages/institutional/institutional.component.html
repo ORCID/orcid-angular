@@ -8,7 +8,10 @@
               >Access through your institution
             </mat-card-title>
           </mat-card-header>
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          <mat-progress-bar
+            *ngIf="loading"
+            mode="indeterminate"
+          ></mat-progress-bar>
           <mat-card-content>
             <form [formGroup]="institutionalForm" (ngSubmit)="onSubmit()">
               <div class="form-container">

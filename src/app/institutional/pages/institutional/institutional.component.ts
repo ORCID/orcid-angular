@@ -1,14 +1,15 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import { WINDOW } from '../../../cdk/window'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { Observable, of } from 'rxjs'
-import { map, startWith, take, switchMap, tap, filter } from 'rxjs/operators'
-import { DiscoService } from '../../../core/disco/disco.service'
-import { Institutional } from '../../../types/institutional.endpoint'
-import { CookieService } from 'ngx-cookie-service'
-import { environment } from '../../../../environments/environment'
-import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
+import { CookieService } from 'ngx-cookie-service'
+import { Observable } from 'rxjs'
+import { map, switchMap, take } from 'rxjs/operators'
+
+import { environment } from '../../../../environments/environment'
+import { WINDOW } from '../../../cdk/window'
+import { DiscoService } from '../../../core/disco/disco.service'
+import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
+import { Institutional } from '../../../types/institutional.endpoint'
 
 @Component({
   selector: 'app-institutional',
@@ -93,13 +94,18 @@ export class InstitutionalComponent implements OnInit {
     this.institutionalForm.controls['institution'].setValue('')
   }
 
-  selected(institutionSelected) {
+  selected(institutionName) {
     this.logoInstitution = undefined
-    // TODO GET THE ID BY NAME
-    this.entityID = 'x'
-    if (this.institution.Logos) {
-      this.logoInstitution = this.institution.Logos[0].value
-    }
+    this._disco
+      .getInstitutionBaseOnName(institutionName)
+      .subscribe((institution) => {
+        this.institution = institution
+        this.entityID = this.institution.entityID
+
+        if (this.institution.Logos) {
+          this.logoInstitution = this.institution.Logos[0].value
+        }
+      })
   }
 
   navigateTo(val) {
