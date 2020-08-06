@@ -18,15 +18,10 @@
               Sign in
             </mat-card-title>
           </mat-card-header>
-          <mat-progress-bar
-            role="heading"
-            aria-level="2"
-            *ngIf="loading"
-            mode="indeterminate"
-          ></mat-progress-bar>
           <mat-card-content>
             <ng-container *ngIf="!isLoggedIn || isForceLogin">
               <app-form-sign-in
+                (loading)="loading = $event"
                 [email]="email"
                 #formSignInComponent
                 [signInType]="signInType"

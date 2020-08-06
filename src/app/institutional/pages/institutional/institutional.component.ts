@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
-import { map, switchMap, take } from 'rxjs/operators'
+import { map, switchMap, take, tap } from 'rxjs/operators'
 
 import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -42,11 +42,13 @@ export class InstitutionalComponent implements OnInit {
     private _cookie: CookieService,
     private _disco: DiscoService
   ) {
+    this.loading = true
     this._disco
       .getInstitutionsNames()
       .pipe(take(1))
       .subscribe(
         (institutionsNames) => {
+          this.loading = false
           this.institutionalForm.controls['institution'].setValidators([
             Validators.required,
             InstitutionValidator.valueSelected(institutionsNames),
@@ -60,7 +62,12 @@ export class InstitutionalComponent implements OnInit {
               environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
                 ? []
                 : institutions
-            )
+            ),
+            tap(() => {
+              if (!this.institutionFormControl.valid) {
+                this.logoInstitution = undefined
+              }
+            })
           )
           this.clear()
         },
@@ -75,6 +82,7 @@ export class InstitutionalComponent implements OnInit {
 
   onSubmit() {
     if (this.institutionalForm.valid) {
+      this.loading = true
       const defaultReturn =
         'https:' +
         environment.BASE_URL +
@@ -95,10 +103,12 @@ export class InstitutionalComponent implements OnInit {
   }
 
   selected(institutionName) {
+    this.loading = true
     this.logoInstitution = undefined
     this._disco
       .getInstitutionBaseOnName(institutionName)
       .subscribe((institution) => {
+        this.loading = false
         this.institution = institution
         this.entityID = this.institution.entityID
 

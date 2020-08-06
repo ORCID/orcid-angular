@@ -16,12 +16,12 @@ import { SignInData } from '../../../types/sign-in-data.endpoint'
   preserveWhitespaces: true,
 })
 export class LinkAccountComponent implements OnInit {
-  loading = false
   show2FA = false
   signInData: SignInData
   institution: Institutional
   entityDisplayName: string
-  loadedFeed = false
+  loading = true
+  signingLoading = false
   email = ''
 
   constructor(
@@ -57,7 +57,7 @@ export class LinkAccountComponent implements OnInit {
   getInstitution(entityId) {
     this._disco.getInstitutionBaseOnID(entityId).subscribe(
       (institution) => {
-        this.loadedFeed = true
+        this.loading = false
         this.entityDisplayName = institution.DisplayNames.filter(
           (subElement) => subElement.lang === 'en'
         ).map((en) => {
@@ -84,7 +84,7 @@ export class LinkAccountComponent implements OnInit {
             this.entityDisplayName.charAt(0).toUpperCase() +
             this.entityDisplayName.slice(1)
         }
-        this.loadedFeed = true
+        this.loading = false
       },
       (error) => {
         // TODO @leomendoza123 display error using a toaster

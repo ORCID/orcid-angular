@@ -37,8 +37,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   @Input() signInType: TypeSignIn
   @Input() signInData: SignInData
   @Output() show2FAEmitter = new EventEmitter<object>()
+  @Output() loading = new EventEmitter<boolean>()
 
-  loading = false
   badCredentials = false
   printError = false
   show2FA = false
@@ -108,14 +108,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
     if (this.authorizationForm.valid) {
       this.hideErrors()
-      this.loading = true
+      this.loading.next(true)
 
       const isOauth = this.signInLocal.type === TypeSignIn.oauth
-      const $signIn = this._signIn.signIn(this.signInLocal, isOauth, isOauth)
+      const willNotNavigateOutOrcidAngular = isOauth
+      const $signIn = this._signIn.signIn(
+        this.signInLocal,
+        isOauth,
+        willNotNavigateOutOrcidAngular
+      )
       $signIn.subscribe((data) => {
-        this.loading = false
         this.printError = false
-
         if (data.success) {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin()
@@ -126,9 +129,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             )
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
+          this.loading.next(false)
           this.show2FA = true
           this.show2FAEmitter.emit()
         } else {
+          this.loading.next(false)
           if (data.deprecated) {
             this.showDeprecatedError = true
             this.orcidPrimaryDeprecated = data.primary
