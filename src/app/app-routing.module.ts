@@ -10,6 +10,7 @@ import { AuthenticatedGuard } from './guards/authenticated.guard'
 import { SignInGuard } from './guards/sign-in.guard'
 import { AuthorizeGuard } from './guards/authorize.guard'
 import { RegisterGuard } from './guards/register.guard'
+import { LinkAccountGuard } from './guards/link-account.guard'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -47,6 +48,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.institutional,
+    canActivateChild: [LinkAccountGuard],
     loadChildren: () =>
       import('./institutional/institutional.module').then(
         (m) => m.InstitutionalModule
@@ -54,6 +56,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.social,
+    canActivateChild: [LinkAccountGuard],
     loadChildren: () =>
       import('./link-account/link-account.module').then(
         (m) => m.LinkAccountModule
