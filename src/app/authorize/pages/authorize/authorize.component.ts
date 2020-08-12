@@ -116,7 +116,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
         () => (this.window.location.href = data.redirectUrl)
       )
     })
-    // TODO @leomendoza123 handle error with toaster
   }
 
   getIconName(scope: ScopesStrings): string {

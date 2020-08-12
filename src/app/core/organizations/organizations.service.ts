@@ -6,6 +6,7 @@ import { OrgDisambiguated } from 'src/app/types'
 
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,9 @@ export class OrganizationsService {
         )
         .pipe(
           retry(3),
-          catchError((error) => this._errorHandler.handleError(error))
+          catchError((error) =>
+            this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+          )
         )
     } else {
       return of(null)

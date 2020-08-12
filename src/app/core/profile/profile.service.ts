@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment'
 import { AffiliationsService } from '../affiliations/affiliations.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { WorksService } from '../works/works.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,9 @@ export class ProfileService {
       .get<Person>(environment.API_WEB + `${id}/person.json`)
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
       .pipe(
         tap((data) => {

@@ -6,6 +6,7 @@ import { ActivityService, Work, Works } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -96,7 +97,9 @@ export class WorksService implements ActivityService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
   }
 
@@ -108,7 +111,9 @@ export class WorksService implements ActivityService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
   }
 

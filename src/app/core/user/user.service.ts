@@ -23,9 +23,9 @@ import {
   switchMap,
   take,
   tap,
-  finalize,
 } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 import {
   NameForm,
   OauthParameters,
@@ -86,7 +86,9 @@ export class UserService {
       .pipe(map((response) => !!response.loggedIn))
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
   }
 

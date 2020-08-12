@@ -10,6 +10,7 @@ import { retry, catchError, tap, repeatWhen } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { map } from 'puppeteer/DeviceDescriptors'
 import { UserService } from '../user/user.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,9 @@ export class TrustedIndividualsService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        ),
         repeatWhen(() => this.accountSwitchedSubject)
       )
   }
@@ -64,7 +67,7 @@ export class TrustedIndividualsService {
             this.refreshTrustedIndividuals()
             return of(error)
           } else {
-            return this._errorHandler.handleError(error)
+            return this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
           }
         })
       )

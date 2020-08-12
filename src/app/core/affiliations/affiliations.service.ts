@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment'
 import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
 import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -75,7 +76,9 @@ export class AffiliationsService implements ActivityService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
   }
 
@@ -86,7 +89,9 @@ export class AffiliationsService implements ActivityService {
         retry(3),
         map((data) => this._affiliationsGroupingService.transform(data)),
         map((data) => this._affiliationsSortService.transform(data)),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
   }
 

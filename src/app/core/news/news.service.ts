@@ -6,6 +6,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { environment } from 'src/environments/environment'
 import { Parser } from 'xml2js'
 import { TogglzService } from '../togglz/togglz.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,9 @@ export class NewsService {
         // Get the news!
         return this._http.get(url, { responseType: 'text' }).pipe(
           retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
+          catchError((error) =>
+            this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+          ),
           flatMap((data) =>
             Observable.create((observer) => {
               // TODO: It might be possible to return the news response as a JSON from the backend

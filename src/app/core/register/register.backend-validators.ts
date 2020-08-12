@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment'
 import { retry, catchError, map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 interface HasHttpClientAndErrorHandler {
   _http: HttpClient
@@ -68,7 +69,9 @@ export function RegisterBackendValidatorMixin<
         )
         .pipe(
           retry(3),
-          catchError((error) => this._errorHandler.handleError(error))
+          catchError((error) =>
+            this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+          )
         )
     }
 
@@ -84,25 +87,17 @@ export function RegisterBackendValidatorMixin<
         const value = {}
         value[controlName] = { value: control.value }
 
-        return this.validateRegisterValue(controlName, value)
-          .pipe(
-            map((res) => {
-              if (
-                res[controlName].errors &&
-                res[controlName].errors.length > 0
-              ) {
-                const error = {
-                  backendError: res[controlName].errors,
-                }
-                return error
+        return this.validateRegisterValue(controlName, value).pipe(
+          map((res) => {
+            if (res[controlName].errors && res[controlName].errors.length > 0) {
+              const error = {
+                backendError: res[controlName].errors,
               }
-              return null
-            })
-          )
-          .pipe(
-            retry(3),
-            catchError((error) => this._errorHandler.handleError(error))
-          )
+              return error
+            }
+            return null
+          })
+        )
       }
     }
 
@@ -112,17 +107,12 @@ export function RegisterBackendValidatorMixin<
         if (!value.emailsAdditional || value.emailsAdditional.length === 0) {
           return of(null)
         }
-        return this.validateRegisterValue('emailsAdditional', value)
-          .pipe(
-            map((response) => {
-              // Add errors to additional emails controls
-              return this.setFormGroupEmailErrors(response, 'backendErrors')
-            })
-          )
-          .pipe(
-            retry(3),
-            catchError((error) => this._errorHandler.handleError(error))
-          )
+        return this.validateRegisterValue('emailsAdditional', value).pipe(
+          map((response) => {
+            // Add errors to additional emails controls
+            return this.setFormGroupEmailErrors(response, 'backendErrors')
+          })
+        )
       }
     }
 
@@ -134,17 +124,12 @@ export function RegisterBackendValidatorMixin<
         if (value.password.value === '' || value.passwordConfirm.value === '') {
           return of(null)
         }
-        return this.validateRegisterValue('password', value)
-          .pipe(
-            map((response) => {
-              // Add errors to additional emails controls
-              return this.setFormGroupPasswordErrors(response, 'backendErrors')
-            })
-          )
-          .pipe(
-            retry(3),
-            catchError((error) => this._errorHandler.handleError(error))
-          )
+        return this.validateRegisterValue('password', value).pipe(
+          map((response) => {
+            // Add errors to additional emails controls
+            return this.setFormGroupPasswordErrors(response, 'backendErrors')
+          })
+        )
       }
     }
 
@@ -163,7 +148,9 @@ export function RegisterBackendValidatorMixin<
         .post<RegisterForm>(`${environment.API_WEB}register.json`, registerForm)
         .pipe(
           retry(3),
-          catchError((error) => this._errorHandler.handleError(error))
+          catchError((error) =>
+            this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+          )
         )
     }
 

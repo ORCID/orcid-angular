@@ -22,6 +22,7 @@ import { RegisterFormAdapterMixin } from './register.form-adapter'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'
 import { RequestInfoForm } from 'src/app/types'
 import { UserService } from '../user/user.service'
+import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 // Mixing boiler plate
 
@@ -60,7 +61,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
       })
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
   }
 
@@ -78,7 +81,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
   }
 
@@ -89,7 +94,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
       })
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        )
       )
       .pipe(map((form) => (this.backendRegistrationForm = form)))
   }
@@ -119,7 +126,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
+        catchError((error) =>
+          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+        ),
         switchMap((value) => {
           // At the moment by default the userService wont be refreshed, only on the oauth login
           // other logins that go outside this application, wont require to refresh the user service
