@@ -1,13 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core'
-import { WINDOW } from '../../../cdk/window'
+import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { Observable } from 'rxjs'
-import { map, startWith, take } from 'rxjs/operators'
-import { DiscoService } from '../../../core/disco/disco.service'
-import { Institutional } from '../../../types/institutional.endpoint'
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { CookieService } from 'ngx-cookie-service'
+import { Observable } from 'rxjs'
+import { map, switchMap, take, tap } from 'rxjs/operators'
+
 import { environment } from '../../../../environments/environment'
+import { WINDOW } from '../../../cdk/window'
+import { DiscoService } from '../../../core/disco/disco.service'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
+import { Institutional } from '../../../types/institutional.endpoint'
 
 @Component({
   selector: 'app-institutional',
@@ -17,8 +19,9 @@ import { InstitutionValidator } from '../../../shared/validators/institution/ins
   preserveWhitespaces: true,
 })
 export class InstitutionalComponent implements OnInit {
+  displayAutocompleteOptions = false
   loading = false
-  options: any[]
+  options: string[]
   retrieveAllFiltered: any[]
   filteredOptions: Observable<string[]>
   institution: Institutional
@@ -26,10 +29,11 @@ export class InstitutionalComponent implements OnInit {
   logoInstitution: any
   labelInstitution = $localize`:@@institutional.ariaLabelInstitution:Institution`
   labelClear = $localize`:@@institutional.ariaLabelClear:Clear`
+  @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger
 
   institutionFormControl = new FormControl('', [Validators.required])
 
-  institutitonalForm = new FormGroup({
+  institutionalForm = new FormGroup({
     institution: this.institutionFormControl,
   })
 
@@ -38,16 +42,33 @@ export class InstitutionalComponent implements OnInit {
     private _cookie: CookieService,
     private _disco: DiscoService
   ) {
+    this.loading = true
     this._disco
-      .getDiscoFeed()
+      .getInstitutionsNames()
       .pipe(take(1))
       .subscribe(
-        (data) => {
-          this.options = data
-          this.institutitonalForm.controls['institution'].setValidators([
+        (institutionsNames) => {
+          this.loading = false
+          this.institutionalForm.controls['institution'].setValidators([
             Validators.required,
-            InstitutionValidator.valueSelected(this.options),
+            InstitutionValidator.valueSelected(institutionsNames),
           ])
+          this.filteredOptions = this.institutionFormControl.valueChanges.pipe(
+            switchMap((filterInput) =>
+              this._disco.getInstitutionsNames(filterInput)
+            ),
+            map((institutions) =>
+              institutions.length >
+              environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+                ? []
+                : institutions
+            ),
+            tap(() => {
+              if (!this.institutionFormControl.valid) {
+                this.logoInstitution = undefined
+              }
+            })
+          )
           this.clear()
         },
         (error) => {
@@ -60,7 +81,8 @@ export class InstitutionalComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    if (this.institutitonalForm.valid) {
+    if (this.institutionalForm.valid) {
+      this.loading = true
       const defaultReturn =
         'https:' +
         environment.BASE_URL +
@@ -75,62 +97,25 @@ export class InstitutionalComponent implements OnInit {
     }
   }
 
-  private _filter(value: string): string[] {
-    if (value === '' || value.length >= 3) {
-      const filterValue = value.toLowerCase()
-
-      if (value === '' && this.retrieveAllFiltered) {
-        return this.retrieveAllFiltered
-      } else if (value === '') {
-        this.retrieveAllFiltered = this.options.map((result) => {
-          return result.DisplayNames.filter(
-            (subElement) => subElement.lang === 'en'
-          ).map((en) => {
-            return en.value
-          })
-        })
-        return this.retrieveAllFiltered
-      } else {
-        return this.options
-          .filter((institution) =>
-            institution.DisplayNames.some((displayNames) =>
-              displayNames.value.toLowerCase().includes(filterValue)
-            )
-          )
-          .slice(0, environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT)
-          .map((result) => {
-            return result.DisplayNames.filter(
-              (subElement) => subElement.lang === 'en'
-            ).map((en) => {
-              return en.value
-            })
-          })
-      }
-    }
-  }
-
   clear() {
     this.logoInstitution = undefined
-    this.institutitonalForm.controls['institution'].setValue('')
-    this.filteredOptions = this.institutionFormControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value))
-    )
+    this.institutionalForm.controls['institution'].setValue('')
   }
 
-  selected(institutionSelected) {
+  selected(institutionName) {
+    this.loading = true
     this.logoInstitution = undefined
-    this.institution = this.options.filter((institution) =>
-      institution.DisplayNames.some(
-        (displayNames) =>
-          displayNames.value.toLowerCase() ===
-          institutionSelected[0].toLowerCase()
-      )
-    )[0]
-    this.entityID = this.institution.entityID
-    if (this.institution.Logos) {
-      this.logoInstitution = this.institution.Logos[0].value
-    }
+    this._disco
+      .getInstitutionBaseOnName(institutionName)
+      .subscribe((institution) => {
+        this.loading = false
+        this.institution = institution
+        this.entityID = this.institution.entityID
+
+        if (this.institution.Logos) {
+          this.logoInstitution = this.institution.Logos[0].value
+        }
+      })
   }
 
   navigateTo(val) {

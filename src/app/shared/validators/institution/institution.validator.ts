@@ -1,19 +1,16 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms'
 
 export class InstitutionValidator {
-  static valueSelected(myArray: any): ValidatorFn {
+  static valueSelected(institutionsNames: string[]): ValidatorFn {
     return (c: AbstractControl): { [key: string]: boolean } | null => {
-      const institutionName = c.value
+      const institutionName = <string>c.value
       if (institutionName === '') {
         return null
       }
 
-      const pickedOrNot = myArray.filter((institution) =>
-        institution.DisplayNames.some(
-          (displayNames) =>
-            displayNames.value.toString().toLowerCase() ===
-            institutionName.toString().toLowerCase()
-        )
+      const pickedOrNot = institutionsNames.filter(
+        (institution) =>
+          institution.toLowerCase() === institutionName.toString().toLowerCase()
       )
 
       if (pickedOrNot.length === 0) {

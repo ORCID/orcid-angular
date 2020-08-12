@@ -3,32 +3,33 @@
     <div class="row space-around">
       <div class="col l6 m6 s4">
         <mat-card class="orcid-wizard">
+          <mat-progress-bar
+            *ngIf="loading || signingLoading"
+            mode="indeterminate"
+          ></mat-progress-bar>
           <mat-card-header>
             <mat-card-title>
               <ng-container i18n="@@linking.title.1">
                 Link your
               </ng-container>
-              {{ entityId }}
+              {{ entityDisplayName }}
               <ng-container i18n="@@linking.title.2">
                 account to your ORCID record
               </ng-container>
             </mat-card-title>
           </mat-card-header>
-          <mat-progress-bar
-            *ngIf="loading"
-            mode="indeterminate"
-          ></mat-progress-bar>
+
           <mat-card-content>
             <div
               *ngIf="
-                signInData && !signInData.unsupportedInstitution && loadedFeed
+                signInData && !signInData.unsupportedInstitution && !loading
               "
             >
               <p class="mat-body-1">
                 <ng-container i18n="@@linking.signed">
                   You are signed into
                 </ng-container>
-                {{ entityId }}
+                {{ entityDisplayName }}
                 <ng-container i18n="@@linking.as">
                   as
                 </ng-container>
@@ -42,13 +43,13 @@
                 <ng-container i18n="@@linking.finish">
                   To finish linking this
                 </ng-container>
-                {{ entityId }}
+                {{ entityDisplayName }}
                 <ng-container i18n="@@linking.account">
                   account to ORCID, sign into your ORCID iD below. You will only
                   need to complete this step once. After your account is linked,
                   you will be able to access your ORCID record with your
                 </ng-container>
-                {{ entityId }}
+                {{ entityDisplayName }}
                 <ng-container i18n="@@linking.questions">
                   account. Questions?
                 </ng-container>
@@ -60,6 +61,7 @@
                 </a>
               </p>
               <app-form-sign-in
+                (loading)="signingLoading = $event"
                 [email]="email"
                 #formSignInComponent
                 [signInData]="signInData"
@@ -71,13 +73,13 @@
                   color="primary"
                   class="row mat-elevation-z0 mat-button-wrap-text"
                   type="submit"
-                  [disabled]="loading"
+                  [disabled]="loading || signingLoading"
                   *ngIf="!show2FA"
                 >
                   <ng-container i18n="@@linking.button.1">
                     Sign in and link your
                   </ng-container>
-                  {{ entityId }}
+                  {{ entityDisplayName }}
                   <ng-container i18n="@@linking.button.2">
                     account
                   </ng-container>

@@ -16,12 +16,12 @@ import { SignInData } from '../../../types/sign-in-data.endpoint'
   preserveWhitespaces: true,
 })
 export class LinkAccountComponent implements OnInit {
-  loading = false
   show2FA = false
   signInData: SignInData
   institution: Institutional
-  entityId: string
-  loadedFeed = false
+  entityDisplayName: string
+  loading = true
+  signingLoading = false
   email = ''
 
   constructor(
@@ -54,49 +54,42 @@ export class LinkAccountComponent implements OnInit {
   }
 
   getInstitution(entityId) {
-    this._disco
-      .getDiscoFeed()
-      .pipe()
-      .subscribe(
-        (institutions) => {
-          this.entityId = institutions
-            .filter((institution) => institution.entityID === entityId)
-            .map((result) => {
-              return result.DisplayNames.filter(
-                (subElement) => subElement.lang === 'en'
-              ).map((en) => {
-                return en.value
-              })
-            })[0]
-            .toString()
-          this.loadedFeed = true
-        },
-        (error) => {
-          // TODO @leomendoza123 display error using a toaster
-          console.error('Error getting disco feed' + JSON.stringify(error))
-        }
-      )
+    this._disco.getInstitutionBaseOnID(entityId).subscribe(
+      (institution) => {
+        this.loading = false
+        this.entityDisplayName = institution.DisplayNames.filter(
+          (subElement) => subElement.lang === 'en'
+        ).map((en) => {
+          return en.value
+        })[0]
+      },
+      (error) => {
+        // TODO @leomendoza123 display error using a toaster
+        console.error('Error getting disco feed' + JSON.stringify(error))
+      }
+    )
   }
 
   loadSocialSignInData() {
-    this._oauthService
-      .loadSocialSigninData()
-      .pipe()
-      .subscribe(
-        (data) => {
-          this.signInData = data
-          this.entityId = data.providerId
-          if (this.entityId === 'facebook' || this.entityId === 'google') {
-            this.entityId =
-              this.entityId.charAt(0).toUpperCase() + this.entityId.slice(1)
-          }
-          this.loadedFeed = true
-        },
-        (error) => {
-          // TODO @leomendoza123 display error using a toaster
-          console.error('Error getting disco feed' + JSON.stringify(error))
+    this._oauthService.loadSocialSigninData().subscribe(
+      (data) => {
+        this.signInData = data
+        this.entityDisplayName = data.providerId
+        if (
+          this.entityDisplayName === 'facebook' ||
+          this.entityDisplayName === 'google'
+        ) {
+          this.entityDisplayName =
+            this.entityDisplayName.charAt(0).toUpperCase() +
+            this.entityDisplayName.slice(1)
         }
-      )
+        this.loading = false
+      },
+      (error) => {
+        // TODO @leomendoza123 display error using a toaster
+        console.error('Error getting disco feed' + JSON.stringify(error))
+      }
+    )
   }
 
   show2FAEmitter($event) {
