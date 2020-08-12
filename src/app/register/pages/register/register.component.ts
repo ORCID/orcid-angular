@@ -11,9 +11,9 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
-import { ActivatedRoute, Router } from '@angular/router'
-import { EMPTY } from 'rxjs'
-import { first, map, switchMap, tap } from 'rxjs/operators'
+import { ActivatedRoute, Params, Router } from '@angular/router'
+import { EMPTY, of } from 'rxjs'
+import { first, map, mergeMap, switchMap, tap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -78,20 +78,18 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       captcha: [''],
     })
 
-    this._route.queryParams
+    this._platformInfo
+      .get()
       .pipe(
-        switchMap(() =>
-          this._platformInfo.get().pipe(map((value) => value.oauthMode))
-        ),
-        switchMap((oauthMode) => {
-          if (oauthMode) {
+        mergeMap((platform) => {
+          if (platform.oauthMode) {
             return this._user.getUserSession().pipe(
               first(),
               map((session) => session.oauthSession),
               tap((requestInfoForm) => {
                 if (requestInfoForm) {
                   this.requestInfoForm = requestInfoForm
-                  this.FormGroupStepA = this.createFormBasedOnRequestInfoForm(
+                  this.FormGroupStepA = this.prefillRegisterForm(
                     this.requestInfoForm
                   )
                 } else {
@@ -102,6 +100,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                   // currently the response is always empty
                 }
               })
+            )
+          } else if (platform.social || platform.institutional) {
+            return of(
+              (this.FormGroupStepA = this.prefillRegisterForm(
+                this.platform.queryParameters
+              ))
             )
           } else {
             return EMPTY
@@ -115,7 +119,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this._cdref.detectChanges()
   }
 
-  register(value) {
+  register() {
     this.loading = true
     this.lastStep.interacted = true
     if (
@@ -139,7 +143,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC,
-              null, // TODO @leomendoza123 support shibboleth https://github.com/ORCID/orcid-angular/issues/206
               this.requestInfoForm,
               this.platform.oauthMode // request client service to be update (only when the next navigation wont go outside this app)
             )
@@ -267,15 +270,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private createFormBasedOnRequestInfoForm(value: RequestInfoForm) {
+  private prefillRegisterForm(value: RequestInfoForm | Params) {
     return this._formBuilder.group({
       personal: [
         {
-          givenNames: value.userGivenNames,
-          familyNames: value.userFamilyNames,
+          givenNames: value.userGivenNames || value['firstName'] || '',
+          familyNames: value.userFamilyNames || value['lastName'] || '',
           emails: {
-            email: value.userEmail,
-            confirmEmail: value.userEmail,
+            email: value.userEmail || value['email'] || '',
+            confirmEmail: value.userEmail || value['email'] || '',
             additionalEmails: { '0': '' },
           },
         },

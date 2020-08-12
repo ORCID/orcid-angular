@@ -54,11 +54,7 @@ export class UserService {
     private _errorHandler: ErrorHandlerService,
     private _platform: PlatformInfoService,
     private _oauth: OauthService
-  ) {
-    this._recheck.subscribe((value) => {
-      console.log(value)
-    })
-  }
+  ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
   private $userSessionSubject = new ReplaySubject<{

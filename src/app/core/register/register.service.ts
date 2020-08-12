@@ -1,27 +1,21 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { environment } from 'src/environments/environment'
-import { retry, catchError, map, tap, switchMap } from 'rxjs/operators'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import {
-  AsyncValidatorFn,
-  AbstractControl,
-  ValidationErrors,
-  FormGroup,
-  FormControl,
-} from '@angular/forms'
+import { Injectable } from '@angular/core'
+import { FormGroup } from '@angular/forms'
 import { Observable, of } from 'rxjs'
-import {
-  RegisterForm,
-  DuplicatedName,
-  VisibilityValue,
-  RegisterConfirmResponse,
-} from 'src/app/types/register.endpoint'
-import { Value } from 'src/app/types/common.endpoint'
-import { RegisterFormAdapterMixin } from './register.form-adapter'
-import { RegisterBackendValidatorMixin } from './register.backend-validators'
+import { catchError, first, map, retry, switchMap } from 'rxjs/operators'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RequestInfoForm } from 'src/app/types'
+import {
+  DuplicatedName,
+  RegisterConfirmResponse,
+  RegisterForm,
+} from 'src/app/types/register.endpoint'
+import { environment } from 'src/environments/environment'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
+import { RegisterBackendValidatorMixin } from './register.backend-validators'
+import { RegisterFormAdapterMixin } from './register.form-adapter'
 
 // Mixing boiler plate
 
@@ -44,7 +38,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
   constructor(
     _http: HttpClient,
     _errorHandler: ErrorHandlerService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _platform: PlatformInfoService
   ) {
     super(_http, _errorHandler)
   }
@@ -58,24 +53,6 @@ export class RegisterService extends _RegisterServiceMixingBase {
         params: names,
         withCredentials: true,
       })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  confirmRegistration(
-    registrationForm: RegisterForm,
-    type?: 'shibboleth'
-  ): Observable<any> {
-    return this._http
-      .post(
-        `${environment.API_WEB}${type ? '/' + type : ''}'/registerConfirm.json`,
-        registrationForm,
-        {
-          withCredentials: true,
-        }
-      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -98,11 +75,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
     StepA: FormGroup,
     StepB: FormGroup,
     StepC: FormGroup,
-    type?: 'shibboleth',
     requestInfoForm?: RequestInfoForm,
     updateUserService = false
   ): Observable<RegisterConfirmResponse> {
-    // TODO: @amontenegro Why does the backend require this?
     this.backendRegistrationForm.valNumClient =
       this.backendRegistrationForm.valNumServer / 2
     const registerForm = this.formGroupToFullRegistrationForm(
@@ -111,33 +86,48 @@ export class RegisterService extends _RegisterServiceMixingBase {
       StepC
     )
     this.addOauthContext(registerForm, requestInfoForm)
-    this.addShibbolethContext(registerForm, type)
-    return this._http
-      .post<RegisterConfirmResponse>(
-        `${environment.API_WEB}registerConfirm.json`,
-        Object.assign(this.backendRegistrationForm, registerForm)
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap((value) => {
-          // At the moment by default the userService wont be refreshed, only on the oauth login
-          // other logins that go outside this application, wont require to refresh the user service
-          if (updateUserService) {
-            return this._userService.refreshUserSession().pipe(
-              map((userStatus) => {
-                if (!userStatus.loggedIn && !value.errors) {
-                  // sanity check the user should be logged
-                  // TODO @leomendoza123 show and report error
-                }
-                return value
-              })
-            )
-          } else {
-            return of(value)
-          }
-        })
-      )
+    return this._platform.get().pipe(
+      first(),
+      switchMap((platform) => {
+        let url = `${environment.API_WEB}`
+        if (platform.institutional) {
+          url += `shibboleth/`
+        }
+        url += `registerConfirm.json`
+
+        const registerFormWithTypeContext = this.addCreationTypeContext(
+          platform,
+          registerForm
+        )
+
+        return this._http.post<RegisterConfirmResponse>(
+          url,
+          Object.assign(
+            this.backendRegistrationForm,
+            registerFormWithTypeContext
+          )
+        )
+      }),
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error)),
+      switchMap((value) => {
+        // At the moment by default the userService wont be refreshed, only on the oauth login
+        // other logins that go outside this application, wont require to refresh the user service
+        if (updateUserService) {
+          return this._userService.refreshUserSession().pipe(
+            map((userStatus) => {
+              if (!userStatus.loggedIn && !value.errors) {
+                // sanity check the user should be logged
+                // TODO @leomendoza123 show and report error
+              }
+              return value
+            })
+          )
+        } else {
+          return of(value)
+        }
+      })
+    )
   }
 
   addOauthContext(
@@ -148,8 +138,18 @@ export class RegisterService extends _RegisterServiceMixingBase {
       registerForm.referredBy = { value: requestInfoForm.clientId }
     }
   }
-  addShibbolethContext(registerForm, type?: 'shibboleth'): void {
-    // TODO @leomendoza123 https://github.com/ORCID/orcid-angular/issues/206
-    return
+  addCreationTypeContext(
+    platform: PlatformInfo,
+    registerForm: RegisterForm
+  ): RegisterForm {
+    if (platform.social) {
+      registerForm.linkType = 'social'
+      return registerForm
+    } else if (platform.institutional) {
+      registerForm.linkType = 'shibboleth'
+      return registerForm
+    } else {
+      return registerForm
+    }
   }
 }
