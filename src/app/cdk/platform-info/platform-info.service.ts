@@ -4,9 +4,11 @@ import { Injectable, LOCALE_ID, Inject } from '@angular/core'
 import { BehaviorSubject, Observable, Subject } from 'rxjs'
 import { PlatformInfo } from './platform-info.type'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Params, Router } from '@angular/router'
 import { tap, filter } from 'rxjs/operators'
 import { WINDOW } from '../window'
+import { environment } from 'src/environments/environment'
+import { ApplicationRoutes } from 'src/app/constants'
 
 @Injectable()
 export class PlatformInfoService {
@@ -43,6 +45,7 @@ export class PlatformInfoService {
     @Inject(LOCALE_ID) public locale: string,
     private _breakpointObserver: BreakpointObserver,
     _route: ActivatedRoute,
+    private _router: Router,
     _platform: Platform,
     @Inject(WINDOW) private window: Window
   ) {
@@ -70,20 +73,19 @@ export class PlatformInfoService {
             Object.keys(value).length > 0 || this.previouslyHadQueryParameters
         )
       )
-      .subscribe((value) => {
+      .subscribe((queryParameters) => {
         this.previouslyHadQueryParameters = true
-        const previousState = this.platform.oauthMode
-        this.platform.queryParameters = value
+        this.platform.queryParameters = queryParameters
+        const previousOauthState = this.updateOauthState(queryParameters)
+        const previousSocialState = this.updateSocialState(queryParameters)
+        const previousInstitutionalState = this.updatesInstitutionalState(
+          queryParameters
+        )
         if (
-          value.hasOwnProperty('oauth') ||
-          value.hasOwnProperty('Oauth') ||
-          value.hasOwnProperty('client_id')
+          this.platform.oauthMode !== previousOauthState ||
+          this.platform.social !== previousSocialState ||
+          this.platform.institutional !== previousInstitutionalState
         ) {
-          this.platform.oauthMode = true
-        } else {
-          this.platform.oauthMode = false
-        }
-        if (this.platform.oauthMode !== previousState) {
           this.platformSubject.next(this.platform)
         }
       })
@@ -139,6 +141,63 @@ export class PlatformInfoService {
         }
         this.platformSubject.next(this.platform)
       })
+  }
+
+  /**
+   * Based on the query check if the current state is in Oauth mode
+   */
+  private updateOauthState(queryParameters: Params) {
+    const previousOauthState = this.platform.oauthMode
+    this.platform.queryParameters = queryParameters
+    if (
+      queryParameters.hasOwnProperty('oauth') ||
+      queryParameters.hasOwnProperty('Oauth') ||
+      queryParameters.hasOwnProperty('client_id')
+    ) {
+      this.platform.oauthMode = true
+    } else {
+      this.platform.oauthMode = false
+    }
+    return previousOauthState
+  }
+
+  /**
+   * Based on the query and the current router check if the platform should be handle as social linking state
+   */
+  private updateSocialState(queryParameters: Params) {
+    const previousSocialState = this.platform.social
+
+    if (
+      (queryParameters.hasOwnProperty('providerId') &&
+        (queryParameters['providerId'] === 'facebook' ||
+          queryParameters['providerId'] === 'google')) ||
+      this._router.url.indexOf(ApplicationRoutes.social) >= 0
+    ) {
+      this.platform.social = true
+    } else {
+      this.platform.social = false
+    }
+    return previousSocialState
+  }
+
+  /**
+   * Based on the query and the current router check if the platform should be handle as institutional linking state
+   */
+  private updatesInstitutionalState(queryParameters: Params) {
+    const previousInstitutionalState = this.platform.social
+
+    if (
+      (queryParameters.hasOwnProperty('providerId') &&
+        queryParameters['providerId'] &&
+        queryParameters['providerId'] !== 'facebook' &&
+        queryParameters['providerId'] !== 'google') ||
+      this._router.url.indexOf(ApplicationRoutes.institutional) >= 0
+    ) {
+      this.platform.institutional = true
+    } else {
+      this.platform.institutional = false
+    }
+    return previousInstitutionalState
   }
 
   public get(): Observable<PlatformInfo> {
