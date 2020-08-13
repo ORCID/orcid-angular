@@ -45,9 +45,9 @@ export class GoogleAnalyticsService {
 
   reportError(description: string, fatal = false) {
     console.error(`
-    __Report error GA__
-    description: "${description}"
-    fatal: "${fatal}"
+__Report error GA__
+description: "${description}"
+fatal: "${fatal}"
     `)
 
     this.gtag('event', 'exception', {

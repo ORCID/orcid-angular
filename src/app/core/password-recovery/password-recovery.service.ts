@@ -4,7 +4,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { PasswordRecovery } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 import { retry, catchError } from 'rxjs/operators'
-import { RESET_PASSWORD_COULD_NOT_RECOVER_ERROR_REPORT } from 'src/app/errors'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class PasswordRecoveryService {
         catchError((error) =>
           this._errorHandler.handleError(
             error,
-            RESET_PASSWORD_COULD_NOT_RECOVER_ERROR_REPORT
+            ERROR_REPORT.RESET_PASSWORD_COULD_NOT_RECOVER
           )
         )
       )
@@ -43,7 +43,7 @@ export class PasswordRecoveryService {
         catchError((error) =>
           this._errorHandler.handleError(
             error,
-            RESET_PASSWORD_COULD_NOT_RECOVER_ERROR_REPORT
+            ERROR_REPORT.RESET_PASSWORD_COULD_NOT_RECOVER
           )
         )
       )

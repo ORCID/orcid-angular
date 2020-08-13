@@ -7,6 +7,7 @@ import { catchError, switchMap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { ErrorReport } from 'src/app/types'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class ErrorHandlerService {
   }
   public handleError(
     error: Error | HttpErrorResponse,
-    errorReport: ErrorReport
+    errorReport: ErrorReport = ERROR_REPORT.STANDARD
   ) {
     return of({})
       .pipe(
@@ -30,50 +31,52 @@ export class ErrorHandlerService {
           const platformDetails = this.browserSupport + this.checkCSRF()
 
           if (error instanceof HttpErrorResponse) {
-            // Server error
-            console.error(
-              `
-  __Server error__
-  (status:${error.status} (${error.statusText}) url: ${error.url})
-  name: "${error.name}"
-  message: "${error.message}"
-  ok: "${error.ok}"
-  platform"${platformDetails}
-  `
-            )
+            const split = error.url.split('/')
+            const url = split[split.length - 1]
+
             return throwError({
-              error: error,
-              message: `${error.status} (${error.statusText}) ${platformDetails}`,
+              ...error,
+              message: `${error.status}/${error.name}/${platformDetails}/${url}`.replace(
+                / /g,
+                ''
+              ),
             })
           } else {
-            // Client side error
-            console.error(
-              `
-  __Local error__
-  (name:${error.name})
-  message: "${error.message}"
-  stack: "${error.stack}"
-  platform"${platformDetails}
-  `
-            )
             return throwError({
-              error: error,
-              message: error.name + platformDetails,
+              ...error,
+              message: error.name + '.' + error.message + '.' + platformDetails,
             })
           }
         })
       )
       .pipe(
-        catchError(
-          (processedError: {
-            error: Error | HttpErrorResponse
-            message: string
-          }) => {
-            console.log(processedError)
-            this._snackBar.showErrorMessage(processedError, errorReport)
-            return throwError(processedError)
+        catchError((processedError: Error | HttpErrorResponse) => {
+          // Server error
+          if (processedError instanceof HttpErrorResponse) {
+            console.error(
+              `
+__Server error__
+(status:${processedError.status} (${processedError.statusText}) url: ${processedError.url})
+name: "${processedError.name}"
+message: "${processedError.message}"
+ok: "${processedError.ok}"
+            `
+            )
+          } else {
+            // Client side error
+            console.error(
+              `
+__Local error__
+(name:${processedError.name})
+message: "${processedError.message}"
+stack: "${processedError.stack}"
+            `
+            )
           }
-        )
+
+          this._snackBar.showErrorMessage(processedError, errorReport)
+          return throwError(processedError)
+        })
       )
   }
 
@@ -86,13 +89,13 @@ export class ErrorHandlerService {
       .get()
       .pipe(take(1))
       .subscribe((val) => {
-        this.browserSupport = val.unsupportedBrowser ? '/unsupported' : ''
+        this.browserSupport = val.unsupportedBrowser ? 'unsupported' : ''
       })
   }
 
   private checkCSRF() {
     if (!this._cookie.get('XSRF-TOKEN')) {
-      return '/no-XSRF'
+      return 'no-XSRF'
     } else {
       return ''
     }

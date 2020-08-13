@@ -11,7 +11,6 @@ import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
-import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -69,9 +68,7 @@ export class SignInService {
       })
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        ),
+        catchError((error) => this._errorHandler.handleError(error)),
         switchMap((response) => {
           // At the moment by default the userService wont be refreshed, only on the oauth login
           // other logins that go outside this application, wont require to refresh the user service
@@ -99,9 +96,7 @@ export class SignInService {
       })
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        )
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -113,9 +108,7 @@ export class SignInService {
       })
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        ),
+        catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this._userService.refreshUserSession())
       )
   }

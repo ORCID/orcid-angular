@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { retry, catchError } from 'rxjs/operators'
-import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +20,7 @@ export class LanguageService {
       )
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        )
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }

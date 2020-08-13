@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment'
 import { retry, catchError, map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 interface HasHttpClientAndErrorHandler {
   _http: HttpClient
@@ -69,9 +68,7 @@ export function RegisterBackendValidatorMixin<
         )
         .pipe(
           retry(3),
-          catchError((error) =>
-            this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-          )
+          catchError((error) => this._errorHandler.handleError(error))
         )
     }
 
@@ -148,9 +145,7 @@ export function RegisterBackendValidatorMixin<
         .post<RegisterForm>(`${environment.API_WEB}register.json`, registerForm)
         .pipe(
           retry(3),
-          catchError((error) =>
-            this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-          )
+          catchError((error) => this._errorHandler.handleError(error))
         )
     }
 

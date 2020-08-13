@@ -6,7 +6,7 @@ import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError } from 'rxjs/operators'
 import { ORCID_REGEXP } from 'src/app/constants'
-import { STANDARD_ERROR_REPORT } from 'src/app/errors'
+
 @Injectable({
   providedIn: 'root',
 })
@@ -30,11 +30,7 @@ export class SearchService {
           headers: { Accept: 'application/json' },
         }
       )
-      .pipe(
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        )
-      )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {

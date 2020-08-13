@@ -7,6 +7,7 @@ export interface ErrorDisplay {
   actionURL?: string
   contentDirection?: ScreenDirection
   closable?: boolean
+  displayOnlyOnVerboseEnvironment?: boolean
 }
 
 export interface ErrorAnalyticsReport {

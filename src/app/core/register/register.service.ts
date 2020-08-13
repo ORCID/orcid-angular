@@ -22,7 +22,7 @@ import { RegisterFormAdapterMixin } from './register.form-adapter'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'
 import { RequestInfoForm } from 'src/app/types'
 import { UserService } from '../user/user.service'
-import { STANDARD_ERROR_REPORT } from 'src/app/errors'
+import { ERROR_REPORT } from 'src/app/errors'
 
 // Mixing boiler plate
 
@@ -61,29 +61,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
       })
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        )
-      )
-  }
-
-  confirmRegistration(
-    registrationForm: RegisterForm,
-    type?: 'shibboleth'
-  ): Observable<any> {
-    return this._http
-      .post(
-        `${environment.API_WEB}${type ? '/' + type : ''}'/registerConfirm.json`,
-        registrationForm,
-        {
-          withCredentials: true,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        )
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -94,9 +72,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
       })
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        )
+        catchError((error) => this._errorHandler.handleError(error))
       )
       .pipe(map((form) => (this.backendRegistrationForm = form)))
   }
@@ -127,7 +103,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
       .pipe(
         retry(3),
         catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
+          this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)
         ),
         switchMap((value) => {
           // At the moment by default the userService wont be refreshed, only on the oauth login
@@ -137,7 +113,10 @@ export class RegisterService extends _RegisterServiceMixingBase {
               map((userStatus) => {
                 if (!userStatus.loggedIn && !value.errors) {
                   // sanity check the user should be logged
-                  // TODO @leomendoza123 show and report error
+                  this._errorHandler.handleError(
+                    new Error('registerSanityIssue'),
+                    ERROR_REPORT.REGISTER
+                  )
                 }
                 return value
               })

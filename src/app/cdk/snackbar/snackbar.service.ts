@@ -11,6 +11,7 @@ import { PlatformInfoService } from '../platform-info'
 import { SnackbarModule } from './snackbar.module'
 import { SnackbarComponent } from './snackbar/snackbar.component'
 import { HttpErrorResponse } from '@angular/common/http'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: SnackbarModule,
@@ -34,12 +35,13 @@ export class SnackbarService {
       })
   }
 
-  showErrorMessage(
-    error: { error: Error | HttpErrorResponse; message: string },
-    errorReport: ErrorReport
-  ) {
+  showErrorMessage(error: Error | HttpErrorResponse, errorReport: ErrorReport) {
     let mappedDisplay: ErrorDisplay
-    if (errorReport?.display) {
+    if (
+      errorReport?.display &&
+      (!errorReport.display.displayOnlyOnVerboseEnvironment ||
+        environment.VERBOSE_SNACKBAR_ERRORS_REPORTS)
+    ) {
       mappedDisplay = {
         ...errorReport.display,
         contentDirection:
@@ -62,14 +64,8 @@ export class SnackbarService {
     }
 
     if (errorReport?.analytics) {
-      let url = '/'
-      console.log(error)
-      if (error.error instanceof HttpErrorResponse) {
-        const split = error.error.url.split('/')
-        url += split[split.length - 1]
-      }
       this._gtag.reportError(
-        (errorReport.analytics.code + error.message + url).replace(/ /g, ''),
+        `${errorReport.analytics.code}/${error.message}`,
         errorReport.analytics.fatal
       )
     }

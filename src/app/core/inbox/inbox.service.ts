@@ -13,7 +13,6 @@ import {
   InboxNotificationPermission,
 } from '../../types/notifications.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { STANDARD_ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -103,9 +102,7 @@ export class InboxService {
       )
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        )
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -144,9 +141,7 @@ export class InboxService {
       })
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        ),
+        catchError((error) => this._errorHandler.handleError(error)),
         tap((data) => {
           this.lastEmittedValue.forEach((value) => {
             if (value.putCode === data.putCode) {
@@ -177,9 +172,7 @@ export class InboxService {
       })
       .pipe(
         retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, STANDARD_ERROR_REPORT)
-        ),
+        catchError((error) => this._errorHandler.handleError(error)),
         tap((data) => {
           this.lastEmittedValue.forEach((value) => {
             if (value.putCode === data.putCode) {
