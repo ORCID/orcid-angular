@@ -19,7 +19,7 @@ export const ERROR_REPORT: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred!`,
       message: `not verbose`,
       displayOnlyOnVerboseEnvironment: true,
-      action: $localize`:@@shared.knowledgeBase:contact us`,
+      action: $localize`:@@shared.contactSupport:contact support.`,
       actionURL: `https://support.orcid.org/hc/en-us/requests/new`,
     },
     analytics: {
@@ -31,6 +31,8 @@ export const ERROR_REPORT: {
   STANDARD_VERBOSE: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred!`,
+      action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
+      actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
     },
     analytics: {
       code: '002',
@@ -56,9 +58,9 @@ export const ERROR_REPORT: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
       // tslint:disable-next-line:max-line-length
-      message: $localize`:@@ngOrcid.passwordError:We couldn't complete your registration. Please try again, and if the error persists please`,
-      action: $localize`:@@shared.knowledgeBase:contact us`,
-      actionURL: `https://support.orcid.org/hc/en-us/requests/new`,
+      message: $localize`:@@ngOrcid.registerError:We couldn't complete your registration. Please try again, and if the error persists please`,
+      action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
+      actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
     },
     analytics: {
       code: '003',
