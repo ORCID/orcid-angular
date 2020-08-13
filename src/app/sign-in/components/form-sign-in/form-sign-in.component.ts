@@ -190,9 +190,23 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-        this._router.navigate(['/register'], {
-          queryParams: platform.queryParameters,
-        })
+        if (platform.social || platform.institutional) {
+          // TODO @leomendoza123 throw toaster error if this.signInData is undefined
+          const { email, firstName, lastName, providerId } = this.signInData
+          this._router.navigate(['/register'], {
+            queryParams: {
+              ...platform.queryParameters,
+              email,
+              firstName,
+              lastName,
+              providerId,
+            },
+          })
+        } else {
+          this._router.navigate(['/register'], {
+            queryParams: platform.queryParameters,
+          })
+        }
       })
   }
 

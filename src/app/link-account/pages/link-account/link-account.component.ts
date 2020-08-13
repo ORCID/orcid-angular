@@ -44,7 +44,6 @@ export class LinkAccountComponent implements OnInit {
     this._oauthService.loadShibbolethSignInData().subscribe(
       (data) => {
         this.signInData = data
-
         this.getInstitution(this.signInData.providerId)
       },
       (error) => {
