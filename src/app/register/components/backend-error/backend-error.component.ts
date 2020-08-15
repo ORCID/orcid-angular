@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { take } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { MAT_HAMMER_OPTIONS } from '@angular/material/core'
 
 // When the error text is not listed on the RegisterBackendErrors enum
 // the error message will be displayed as it comes from the backend
@@ -10,6 +11,7 @@ enum RegisterBackendErrors {
   'orcid.frontend.verify.duplicate_email',
   'additionalEmailCantBePrimaryEmail',
   'duplicatedAdditionalEmail',
+  'orcid.frontend.verify.deactivated_email',
 }
 
 @Component({
@@ -20,7 +22,19 @@ enum RegisterBackendErrors {
 })
 export class BackendErrorComponent implements OnInit {
   recognizedError = RegisterBackendErrors
-  @Input() errorCode: string
+  _errorCode: string
+  @Input()
+  set errorCode(errorCode: string) {
+    // the backend send a string instead of a for the main email, and a error code for additional emails
+    // this will change the string on the main email to use the code an show the same error use on additional email
+    if (errorCode.indexOf('resend-claim')) {
+      errorCode = RegisterBackendErrors[3]
+    }
+    this._errorCode = errorCode
+  }
+  get errorCode() {
+    return this._errorCode
+  }
   @Input() value?: string
   unrecognizedError = false
   constructor(
