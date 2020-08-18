@@ -24,6 +24,7 @@ import { UsernameValidator } from '../../../shared/validators/username/username.
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -62,7 +63,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
     private _router: Router,
-    private _gtag: GoogleAnalyticsService
+    private _gtag: GoogleAnalyticsService,
+    private _errorHanlder: ErrorHandlerService
   ) {
     this.signInLocal.type = this.signInType
     _platformInfo.get().subscribe((platform) => {
@@ -191,17 +193,20 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .pipe(first())
       .subscribe((platform) => {
         if (platform.social || platform.institutional) {
-          // TODO @leomendoza123 throw toaster error if this.signInData is undefined
-          const { email, firstName, lastName, providerId } = this.signInData
-          this._router.navigate(['/register'], {
-            queryParams: {
-              ...platform.queryParameters,
-              email,
-              firstName,
-              lastName,
-              providerId,
-            },
-          })
+          if (this.signInData) {
+            const { email, firstName, lastName, providerId } = this.signInData
+            this._router.navigate(['/register'], {
+              queryParams: {
+                ...platform.queryParameters,
+                email,
+                firstName,
+                lastName,
+                providerId,
+              },
+            })
+          } else {
+            this._errorHanlder.handleError(new Error('signingMissingData'))
+          }
         } else {
           this._router.navigate(['/register'], {
             queryParams: platform.queryParameters,

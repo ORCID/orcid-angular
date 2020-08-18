@@ -46,36 +46,30 @@ export class InstitutionalComponent implements OnInit {
     this._disco
       .getInstitutionsNames()
       .pipe(take(1))
-      .subscribe(
-        (institutionsNames) => {
-          this.loading = false
-          this.institutionalForm.controls['institution'].setValidators([
-            Validators.required,
-            InstitutionValidator.valueSelected(institutionsNames),
-          ])
-          this.filteredOptions = this.institutionFormControl.valueChanges.pipe(
-            switchMap((filterInput) =>
-              this._disco.getInstitutionsNames(filterInput)
-            ),
-            map((institutions) =>
-              institutions.length >
-              environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
-                ? []
-                : institutions
-            ),
-            tap(() => {
-              if (!this.institutionFormControl.valid) {
-                this.logoInstitution = undefined
-              }
-            })
-          )
-          this.clear()
-        },
-        (error) => {
-          // TODO @leomendoza123 display error using a toaster
-          console.error('Error getting disco feed' + JSON.stringify(error))
-        }
-      )
+      .subscribe((institutionsNames) => {
+        this.loading = false
+        this.institutionalForm.controls['institution'].setValidators([
+          Validators.required,
+          InstitutionValidator.valueSelected(institutionsNames),
+        ])
+        this.filteredOptions = this.institutionFormControl.valueChanges.pipe(
+          switchMap((filterInput) =>
+            this._disco.getInstitutionsNames(filterInput)
+          ),
+          map((institutions) =>
+            institutions.length >
+            environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+              ? []
+              : institutions
+          ),
+          tap(() => {
+            if (!this.institutionFormControl.valid) {
+              this.logoInstitution = undefined
+            }
+          })
+        )
+        this.clear()
+      })
   }
 
   ngOnInit() {}

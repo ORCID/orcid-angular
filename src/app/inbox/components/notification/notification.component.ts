@@ -165,14 +165,12 @@ export class NotificationComponent
     this.showNotificationContent = !this.showNotificationContent
     this.state = this.showNotificationContent ? 'open' : 'close'
     if (this.state === 'open') {
-      this._inbox.flagAsRead(this.notification.putCode)
-      // TODO @leomendoza123 show toaster errors
+      this._inbox.flagAsRead(this.notification.putCode).subscribe()
     }
   }
 
   archive() {
     this._inbox.flagAsArchive(this.notification.putCode).subscribe()
-    // TODO @leomendoza123 show toaster errors
   }
 
   ngOnInit() {}

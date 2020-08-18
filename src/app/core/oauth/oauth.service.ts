@@ -8,6 +8,7 @@ import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -75,7 +76,9 @@ export class OauthService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        ),
         tap((requestInfo) => {
           this.requestInfoSubject.next(requestInfo)
         })
@@ -102,7 +105,9 @@ export class OauthService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
       )
   }
 
@@ -125,17 +130,29 @@ export class OauthService {
   }
 
   loadShibbolethSignInData(): Observable<SignInData> {
-    return this._http.get<SignInData>(
-      environment.BASE_URL + 'shibboleth/signinData.json',
-      { headers: this.headers }
-    )
+    return this._http
+      .get<SignInData>(environment.BASE_URL + 'shibboleth/signinData.json', {
+        headers: this.headers,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
+      )
   }
 
   loadSocialSigninData(): Observable<SignInData> {
-    return this._http.get<SignInData>(
-      environment.BASE_URL + 'social/signinData.json',
-      { headers: this.headers }
-    )
+    return this._http
+      .get<SignInData>(environment.BASE_URL + 'social/signinData.json', {
+        headers: this.headers,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
+      )
   }
 
   objectToUrlParameters(object: Object) {

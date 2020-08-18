@@ -8,7 +8,6 @@ import { MatChipsModule } from '@angular/material/chips'
 import { MatInputModule } from '@angular/material/input'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { SnackbarModule } from '../cdk/snackbar/snackbar.module'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { MatCardModule } from '@angular/material/card'
 
@@ -23,7 +22,6 @@ import { MatCardModule } from '@angular/material/card'
     MatButtonModule,
     PasswordRecoveryRoutingModule,
     MatProgressBarModule,
-    SnackbarModule,
     FormDirectivesModule,
     MatCardModule,
   ],

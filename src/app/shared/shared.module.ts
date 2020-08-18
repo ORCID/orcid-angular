@@ -22,7 +22,6 @@ import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-c
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatPaginatorModule,
-    MatSnackBarModule,
   ],
   declarations: [
     MonthDayYearDateToStringPipe,

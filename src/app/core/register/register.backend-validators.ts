@@ -84,25 +84,17 @@ export function RegisterBackendValidatorMixin<
         const value = {}
         value[controlName] = { value: control.value }
 
-        return this.validateRegisterValue(controlName, value)
-          .pipe(
-            map((res) => {
-              if (
-                res[controlName].errors &&
-                res[controlName].errors.length > 0
-              ) {
-                const error = {
-                  backendError: res[controlName].errors,
-                }
-                return error
+        return this.validateRegisterValue(controlName, value).pipe(
+          map((res) => {
+            if (res[controlName].errors && res[controlName].errors.length > 0) {
+              const error = {
+                backendError: res[controlName].errors,
               }
-              return null
-            })
-          )
-          .pipe(
-            retry(3),
-            catchError((error) => this._errorHandler.handleError(error))
-          )
+              return error
+            }
+            return null
+          })
+        )
       }
     }
 
@@ -112,17 +104,12 @@ export function RegisterBackendValidatorMixin<
         if (!value.emailsAdditional || value.emailsAdditional.length === 0) {
           return of(null)
         }
-        return this.validateRegisterValue('emailsAdditional', value)
-          .pipe(
-            map((response) => {
-              // Add errors to additional emails controls
-              return this.setFormGroupEmailErrors(response, 'backendErrors')
-            })
-          )
-          .pipe(
-            retry(3),
-            catchError((error) => this._errorHandler.handleError(error))
-          )
+        return this.validateRegisterValue('emailsAdditional', value).pipe(
+          map((response) => {
+            // Add errors to additional emails controls
+            return this.setFormGroupEmailErrors(response, 'backendErrors')
+          })
+        )
       }
     }
 
@@ -134,17 +121,12 @@ export function RegisterBackendValidatorMixin<
         if (value.password.value === '' || value.passwordConfirm.value === '') {
           return of(null)
         }
-        return this.validateRegisterValue('password', value)
-          .pipe(
-            map((response) => {
-              // Add errors to additional emails controls
-              return this.setFormGroupPasswordErrors(response, 'backendErrors')
-            })
-          )
-          .pipe(
-            retry(3),
-            catchError((error) => this._errorHandler.handleError(error))
-          )
+        return this.validateRegisterValue('password', value).pipe(
+          map((response) => {
+            // Add errors to additional emails controls
+            return this.setFormGroupPasswordErrors(response, 'backendErrors')
+          })
+        )
       }
     }
 

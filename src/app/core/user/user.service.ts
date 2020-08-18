@@ -23,9 +23,9 @@ import {
   switchMap,
   take,
   tap,
-  finalize,
 } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+
 import {
   NameForm,
   OauthParameters,

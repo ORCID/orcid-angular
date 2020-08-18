@@ -6,6 +6,7 @@ import { PlatformInfoModule } from '../cdk/platform-info'
 import { WindowModule, WINDOW_PROVIDERS } from '../cdk/window'
 import { MatPaginatorIntlImplementation } from './paginator/matPaginator.service'
 import { MatPaginatorIntl } from '@angular/material/paginator'
+import { SnackbarModule } from '../cdk/snackbar/snackbar.module'
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator'
     PlatformInfoModule,
     HttpClientXsrfModule,
     WindowModule,
+    SnackbarModule,
   ],
   declarations: [TogglzDirective], // Should only export globally used directives.
   providers: [

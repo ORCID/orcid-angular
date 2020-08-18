@@ -1,14 +1,14 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
-import { Injectable, LOCALE_ID, Inject } from '@angular/core'
-import { BehaviorSubject, Observable, Subject } from 'rxjs'
-import { PlatformInfo } from './platform-info.type'
-import { BROWSERLIST_REGEXP } from './browserlist.regexp'
+import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { ActivatedRoute, Params, Router } from '@angular/router'
-import { tap, filter } from 'rxjs/operators'
-import { WINDOW } from '../window'
-import { environment } from 'src/environments/environment'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
+
+import { WINDOW } from '../window'
+import { BROWSERLIST_REGEXP } from './browserlist.regexp'
+import { PlatformInfo } from './platform-info.type'
 
 @Injectable()
 export class PlatformInfoService {

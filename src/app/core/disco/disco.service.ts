@@ -13,6 +13,7 @@ import {
 import { environment } from '../../../environments/environment'
 import { Institutional } from '../../types/institutional.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -78,7 +79,9 @@ export class DiscoService {
       .get<Institutional[]>(environment.BASE_URL + 'Shibboleth.sso/DiscoFeed')
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        ),
         shareReplay(1)
       )
   }
