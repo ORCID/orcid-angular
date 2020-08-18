@@ -1,6 +1,6 @@
 import { ScreenDirection } from './screen-directions.local'
 
-export interface ErrorDisplay {
+export interface DisplayMessage {
   title: string
   message?: string
   action?: string
@@ -16,6 +16,6 @@ export interface ErrorAnalyticsReport {
 }
 
 export interface ErrorReport {
-  display?: ErrorDisplay
+  display?: DisplayMessage
   analytics?: ErrorAnalyticsReport
 }

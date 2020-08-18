@@ -5,7 +5,7 @@ import {
 } from '@angular/material/snack-bar'
 import { take } from 'rxjs/operators'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
-import { ErrorDisplay, ErrorReport, ScreenDirection } from 'src/app/types'
+import { DisplayMessage, ErrorReport, ScreenDirection } from 'src/app/types'
 
 import { PlatformInfoService } from '../platform-info'
 import { SnackbarModule } from './snackbar.module'
@@ -35,8 +35,11 @@ export class SnackbarService {
       })
   }
 
-  showErrorMessage(error: Error | HttpErrorResponse, errorReport: ErrorReport) {
-    let mappedDisplay: ErrorDisplay
+  showErrorMessage(
+    error: Error | HttpErrorResponse,
+    errorReport?: ErrorReport
+  ) {
+    let mappedDisplay: DisplayMessage
     if (
       errorReport?.display &&
       (!errorReport.display.displayOnlyOnVerboseEnvironment ||
@@ -53,8 +56,8 @@ export class SnackbarService {
       }
       this._snackBar.openFromComponent(SnackbarComponent, {
         data: {
-          errorDisplay: mappedDisplay,
-          error: error.message,
+          displayMessage: mappedDisplay,
+          caption: error.message,
         },
         horizontalPosition: this.horizontalPosition,
         verticalPosition: 'bottom',
@@ -69,5 +72,17 @@ export class SnackbarService {
         errorReport.analytics.fatal
       )
     }
+  }
+
+  showSuccessMessage(message: DisplayMessage) {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      data: {
+        displayMessage: message,
+      },
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: 'bottom',
+      panelClass: 'orcid-success',
+      duration: (!message.closable ? 15 : 90) * 1000,
+    })
   }
 }

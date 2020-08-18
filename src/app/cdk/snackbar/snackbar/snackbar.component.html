@@ -8,18 +8,18 @@
   <mat-icon>close</mat-icon>
 </button>
 <div class="box mat-body-1">
-  <div class="mat-subheading-2">{{ data.errorDisplay.title }}</div>
+  <div class="mat-subheading-2">{{ data.displayMessage.title }}</div>
   <div class="error-container">
-    {{ data.errorDisplay.message }}
+    {{ data.displayMessage.message }}
     <a
-      *ngIf="data.errorDisplay.action && data.errorDisplay.actionURL"
-      [href]="data.errorDisplay.actionURL"
+      *ngIf="data.displayMessage.action && data.displayMessage.actionURL"
+      [href]="data.displayMessage.actionURL"
       rel="noopener noreferrer"
       target="_blank"
       class="white-url"
     >
-      {{ data.errorDisplay.action }}
+      {{ data.displayMessage.action }}
     </a>
   </div>
-  <div class="mat-caption">{{ data.error }}</div>
+  <div class="mat-caption">{{ data.caption }}</div>
 </div>
