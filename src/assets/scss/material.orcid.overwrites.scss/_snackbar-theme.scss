@@ -13,4 +13,8 @@
   snack-bar-container.mat-snack-bar-container.orcid-error {
     background-color: mat-color($warn, 700);
   }
+
+  snack-bar-container.mat-snack-bar-container.orcid-success {
+    background-color: mat-color($primary, 700);
+  }
 }

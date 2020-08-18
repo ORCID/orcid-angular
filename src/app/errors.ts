@@ -6,6 +6,7 @@ export const ERROR_REPORT: {
   STANDARD_VERBOSE: ErrorReport
   RESET_PASSWORD_COULD_NOT_RECOVER: ErrorReport
   REGISTER: ErrorReport
+  REGISTER_REACTIVATED_EMAIL: ErrorReport
 } = {
   // The JUST_GA error
   // It will report the error only on google analytics
@@ -76,6 +77,20 @@ export const ERROR_REPORT: {
     },
     analytics: {
       code: '003',
+      fatal: true,
+    },
+  },
+
+  REGISTER_REACTIVATED_EMAIL: {
+    display: {
+      title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
+      // tslint:disable-next-line:max-line-length
+      message: $localize`:@@ngOrcid.reactivationError:We couldn't reactivate your email. Please try again, and if the error persists please`,
+      action: $localize`:@@shared.knowledgeBase:contact support.`,
+      actionURL: `https://support.orcid.org/hc/en-us/requests/new`,
+    },
+    analytics: {
+      code: '004',
       fatal: true,
     },
   },
