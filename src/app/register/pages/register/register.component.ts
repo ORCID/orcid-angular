@@ -7,6 +7,7 @@ import {
   Inject,
   OnInit,
   ViewChild,
+  ErrorHandler,
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
@@ -26,6 +27,8 @@ import {
   RegisterConfirmResponse,
   RegisterForm,
 } from 'src/app/types/register.endpoint'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Component({
   selector: 'app-register',
@@ -56,7 +59,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _gtag: GoogleAnalyticsService,
     private _user: UserService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _errorHandler: ErrorHandlerService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -93,11 +97,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                     this.requestInfoForm
                   )
                 } else {
-                  // TODO @leomendoza123 show toaster error
                   // for a oauth call the backend was expected to return a oauth context
-                  //
-                  // TODO @leomendoza123 this should be tested once https://trello.com/c/xoTzzqSl/6675-signin-oauth-support is ready
-                  // currently the response is always empty
+                  this._errorHandler.handleError(new Error('registerOauth'))
                 }
               })
             )
@@ -137,7 +138,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           switchMap((validator: RegisterForm) => {
             if (validator.errors.length > 0) {
               // At this point any backend error is unexpected
-              // TODO @leomendoza123 HANDLE ERROR show toaster
+              this._errorHandler.handleError(
+                new Error('registerUnexpectedValidateFail'),
+                ERROR_REPORT.REGISTER
+              )
             }
             return this._register.register(
               this.FormGroupStepA,
@@ -162,12 +166,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 () => this.afterRegisterRedirectionHandler(response)
               )
           } else {
-            // TODO @leomendoza123 HANDLE ERROR show toaster
+            this._errorHandler.handleError(
+              new Error('registerUnexpectedConfirmation'),
+              ERROR_REPORT.REGISTER
+            )
           }
         })
     } else {
       this.loading = false
-      // TODO @leomendoza123 HANDLE ERROR show toaster
     }
   }
 
@@ -202,7 +208,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.openDialog(value)
           }
         })
-      // TODO @leomendoza123 HANDLE ERROR show toaster
     }
   }
 

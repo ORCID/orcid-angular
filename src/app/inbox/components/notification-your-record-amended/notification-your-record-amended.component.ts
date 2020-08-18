@@ -3,6 +3,7 @@ import {
   InboxNotificationAmended,
   Item,
 } from 'src/app/types/notifications.endpoint'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 
 @Component({
   selector: 'app-notification-your-record-amended',
@@ -17,15 +18,15 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   set notification(notification: InboxNotificationAmended) {
     this._notification = notification
     if (notification.items.items.length >= 1) {
-      // TODO leomendoza123 throw error
       // multiple items notifications are not expected for `YOUR-RECORD`
+      this._errorHandler.handleError(new Error('notificationUnexpectedLength'))
     }
     this.item = notification.items.items[0]
   }
   get notification() {
     return this._notification
   }
-  constructor() {}
+  constructor(private _errorHandler: ErrorHandlerService) {}
 
   ngOnInit(): void {}
 

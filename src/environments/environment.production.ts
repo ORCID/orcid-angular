@@ -15,6 +15,7 @@ export const environment = {
   HOTJAR_ANALYTICS: 'hjid:1220063',
   ZENDESK: 'b8313acd-6439-4894-b431-8c5a2ae9e7cb',
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
+  VERBOSE_SNACKBAR_ERRORS_REPORTS: false,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',

@@ -1,19 +1,17 @@
 import {
-  Component,
-  OnInit,
   AfterViewInit,
+  Component,
   Inject,
+  OnInit,
   ViewChild,
 } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatChip } from '@angular/material/chips'
 import { matFormFieldAnimations } from '@angular/material/form-field'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { WINDOW } from 'src/app/cdk/window'
 import { Observable } from 'rxjs'
+import { WINDOW } from 'src/app/cdk/window'
+import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { PasswordRecovery } from 'src/app/types'
-import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
@@ -49,8 +47,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _passwordRecovery: PasswordRecoveryService,
-    @Inject(WINDOW) private window: Window,
-    private _snackBar: SnackbarService
+    @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit() {}
@@ -89,16 +86,6 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
         (error) => {
           // Display server errors
           this.loading = false
-          this._snackBar.showErrorMessage(
-            $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
-            // tslint:disable-next-line: max-line-length
-            $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
-            error.message,
-            {
-              message: '/reset-password.couldnt-recover :' + error.message,
-              fatal: true,
-            }
-          )
         }
       )
     }

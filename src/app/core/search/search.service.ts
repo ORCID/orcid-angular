@@ -6,6 +6,7 @@ import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError } from 'rxjs/operators'
 import { ORCID_REGEXP } from 'src/app/constants'
+
 @Injectable({
   providedIn: 'root',
 })

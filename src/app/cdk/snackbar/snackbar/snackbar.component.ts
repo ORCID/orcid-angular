@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core'
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar'
-import { ScreenDirection } from 'src/app/types'
+import { ScreenDirection, ErrorDisplay } from 'src/app/types'
 import { PlatformInfoService } from '../../platform-info'
 import { take } from 'rxjs/operators'
 
@@ -19,11 +19,12 @@ export class SnackbarComponent implements OnInit {
   closable: boolean
   constructor(
     public snackBarRef: MatSnackBarRef<SnackbarComponent>,
-    @Inject(MAT_SNACK_BAR_DATA) public data: any,
+    @Inject(MAT_SNACK_BAR_DATA)
+    public data: { error: string; errorDisplay: ErrorDisplay },
     private _platform: PlatformInfoService
   ) {
-    this.closable = data.closable
-    this._contentDirection = data.contentDirection
+    this.closable = data.errorDisplay.closable
+    this._contentDirection = data.errorDisplay.contentDirection
     this._platform
       .get()
       .pipe(take(1))

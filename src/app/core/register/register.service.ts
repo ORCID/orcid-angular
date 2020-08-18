@@ -16,6 +16,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'
 import { RegisterFormAdapterMixin } from './register.form-adapter'
+import { ERROR_REPORT } from 'src/app/errors'
 
 // Mixing boiler plate
 
@@ -118,7 +119,11 @@ export class RegisterService extends _RegisterServiceMixingBase {
             map((userStatus) => {
               if (!userStatus.loggedIn && !value.errors) {
                 // sanity check the user should be logged
-                // TODO @leomendoza123 show and report error
+                // sanity check the user should be logged
+                this._errorHandler.handleError(
+                  new Error('registerSanityIssue'),
+                  ERROR_REPORT.REGISTER
+                )
               }
               return value
             })
