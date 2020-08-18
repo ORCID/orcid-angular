@@ -34,8 +34,10 @@
 </ng-container>
 
 <ng-container>
-  A deactivated ORCID record is associated with this email address.
-  <a (click)="reactivateEmail(value)" i18n="@@register.resendClaim"
+  <ng-container i18n="@@register.deactivated">
+    A deactivated ORCID record is associated with this email address.
+  </ng-container>
+  <a (click)="reactivateEmail(value)" i18n="@@register.resendReactivate"
     >click here to reactivate</a
   ><ng-container i18n="@@shared.questionMark">?</ng-container>
 </ng-container>
