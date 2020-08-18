@@ -33,7 +33,7 @@
   ><ng-container i18n="@@shared.questionMark">?</ng-container>
 </ng-container>
 
-<ng-container>
+<ng-container *ngIf="recognizedError[errorCode] === 4">
   <ng-container i18n="@@register.deactivated">
     A deactivated ORCID record is associated with this email address.
   </ng-container>
