@@ -4,11 +4,21 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms'
-import { EMAIL_REGEXP } from './constants'
+import { EMAIL_REGEXP, EMAIL_REGEXP_GENERIC } from './constants'
 
 export class OrcidValidators {
   static email = (control: AbstractControl) => {
     const patterErrors = Validators.pattern(EMAIL_REGEXP)
+    const result = patterErrors(control)
+    if (control.value && result?.pattern) {
+      return { email: true }
+    } else {
+      return null
+    }
+  }
+
+  static emailGeneric = (control: AbstractControl) => {
+    const patterErrors = Validators.pattern(EMAIL_REGEXP_GENERIC)
     const result = patterErrors(control)
     if (control.value && result?.pattern) {
       return { email: true }
