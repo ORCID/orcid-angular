@@ -21,8 +21,8 @@ export const ERROR_REPORT: {
   // It will report the error on google analytics and will be show to the user **only on QA and local dev environments**
   STANDARD: {
     display: {
-      title: $localize`:@@ngOrcid.error:Oh no! An error occurred!`,
-      message: `not verbose`,
+      title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
+      message: `Internal Orcid QA error please`,
       displayOnlyOnVerboseEnvironment: true,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
       actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
@@ -37,7 +37,7 @@ export const ERROR_REPORT: {
   // It will report the error on google analytics and the snackbar will be show to the user
   STANDARD_VERBOSE: {
     display: {
-      title: $localize`:@@ngOrcid.error:Oh no! An error occurred!`,
+      title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
       message: $localize`:@@shared.standardError:Please try again, and if the error persists please`,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
       actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
@@ -52,7 +52,7 @@ export const ERROR_REPORT: {
   // It will report the error on google analytics and the snackbar will be show to the user
   RESET_PASSWORD_COULD_NOT_RECOVER: {
     display: {
-      title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
+      title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
       // tslint:disable-next-line:max-line-length
       message: $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
@@ -68,7 +68,7 @@ export const ERROR_REPORT: {
   // It will report the error on google analytics and the snackbar will be show to the user
   REGISTER: {
     display: {
-      title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
+      title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
       // tslint:disable-next-line:max-line-length
       message: $localize`:@@ngOrcid.registerError:We couldn't complete your registration. Please try again, and if the error persists please`,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
