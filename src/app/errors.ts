@@ -2,7 +2,7 @@ import { ErrorReport } from './types'
 
 export const ERROR_REPORT: {
   JUST_GA: ErrorReport
-  STANDARD: ErrorReport
+  STANDARD_NO_VERBOSE: ErrorReport
   STANDARD_VERBOSE: ErrorReport
   RESET_PASSWORD_COULD_NOT_RECOVER: ErrorReport
   REGISTER: ErrorReport
@@ -17,10 +17,10 @@ export const ERROR_REPORT: {
     },
   },
 
-  // The STANDARD
+  // The STANDARD_NO_VERBOSE
   // use by default on every not expect HTTP response
   // It will report the error on google analytics and will be show to the user **only on QA and local dev environments**
-  STANDARD: {
+  STANDARD_NO_VERBOSE: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
       message: `Internal Orcid QA error please`,
@@ -86,8 +86,8 @@ export const ERROR_REPORT: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
       // tslint:disable-next-line:max-line-length
       message: $localize`:@@ngOrcid.reactivationError:We couldn't reactivate your email. Please try again, and if the error persists please`,
-      action: $localize`:@@shared.knowledgeBase:contact support.`,
-      actionURL: `https://support.orcid.org/hc/en-us/requests/new`,
+      action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
+      actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
     },
     analytics: {
       code: '004',
