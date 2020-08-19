@@ -23,7 +23,7 @@ export class ErrorHandlerService {
   }
   public handleError(
     error: Error | HttpErrorResponse,
-    errorReport: ErrorReport = ERROR_REPORT.STANDARD
+    errorReport: ErrorReport = ERROR_REPORT.STANDARD_NO_VERBOSE
   ) {
     return of({})
       .pipe(
