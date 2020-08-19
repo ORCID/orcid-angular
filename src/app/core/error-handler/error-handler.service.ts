@@ -44,7 +44,10 @@ export class ErrorHandlerService {
           } else {
             return throwError({
               ...error,
-              message: error.name + '.' + error.message + '.' + platformDetails,
+              message: `${error.name}'/'${error.message}/${platformDetails}`.replace(
+                / /g,
+                ''
+              ),
             })
           }
         })
