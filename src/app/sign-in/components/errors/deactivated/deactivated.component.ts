@@ -19,7 +19,7 @@ export class DeactivatedComponent implements OnInit {
 
   emailFormControl = new FormControl('', [
     Validators.required,
-    OrcidValidators.email,
+    OrcidValidators.emailGeneric,
   ])
 
   deactivatedForm = new FormGroup({

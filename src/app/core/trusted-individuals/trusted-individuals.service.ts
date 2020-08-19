@@ -10,6 +10,7 @@ import { retry, catchError, tap, repeatWhen } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { map } from 'puppeteer/DeviceDescriptors'
 import { UserService } from '../user/user.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -64,7 +65,10 @@ export class TrustedIndividualsService {
             this.refreshTrustedIndividuals()
             return of(error)
           } else {
-            return this._errorHandler.handleError(error)
+            return this._errorHandler.handleError(
+              error,
+              ERROR_REPORT.STANDARD_VERBOSE
+            )
           }
         })
       )

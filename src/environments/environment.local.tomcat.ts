@@ -16,6 +16,7 @@ export const environment = {
   ZENDESK: null,
   SHOW_TEST_WARNING_BANNER: true,
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
+  VERBOSE_SNACKBAR_ERRORS_REPORTS: true,
   LANGUAGE_MENU_OPTIONS: {
     ar: 'العربية',
     cs: 'Čeština',

@@ -21,9 +21,9 @@
       target="_blank"
       rel="noopener noreferrer"
       class="mat-button-font"
-      i18n="@@register.termsAndConditions"
+      i18n="@@register.terms"
     >
-      terms and conditions
+      terms of use
     </a>
     <ng-container i18n="@@register.use"
       >of use, including agreeing to my data being processed in the US and being
@@ -33,6 +33,6 @@
   <mat-error
     *ngIf="form.hasError('required', 'termsOfUse') && errorState"
     i18n="@@register.termsRequired"
-    >You must accept the terms and conditions</mat-error
+    >You must accept the terms of use</mat-error
   >
 </ng-container>

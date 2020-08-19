@@ -69,7 +69,6 @@ export class NotificationsComponent implements OnInit {
       // check if there might be more notifications
       this.moreNotificationsMightExist = this._inbox.mightHaveMoreNotifications()
     })
-    // TODO @leomendoza123 show toaster errors
   }
 
   archivedSelected() {
@@ -81,7 +80,6 @@ export class NotificationsComponent implements OnInit {
       })
       .filter((value) => value)
     forkJoin($archiveList).subscribe()
-    // TODO @leomendoza123 show toaster errors
   }
 
   toggleShowArchived() {
@@ -98,7 +96,6 @@ export class NotificationsComponent implements OnInit {
       .subscribe(() => {
         this.loading = false
       })
-    // TODO @leomendoza123 show toaster errors
   }
 
   // Use to check if the general checkbox is on indeterminate stated

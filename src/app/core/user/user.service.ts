@@ -23,9 +23,9 @@ import {
   switchMap,
   take,
   tap,
-  finalize,
 } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+
 import {
   NameForm,
   OauthParameters,
@@ -37,6 +37,7 @@ import { environment } from 'src/environments/environment'
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 interface UserSessionUpdateParameters {
   checkTrigger:
@@ -86,7 +87,9 @@ export class UserService {
       .pipe(map((response) => !!response.loggedIn))
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
       )
   }
 
@@ -341,7 +344,7 @@ export class UserService {
                     this.loggingStateComesFromTheServer
                   )
                 ) {
-                  throw new Error()
+                  throw new Error('currentlyLoggedInWithErrors')
                 }
               })
             )
@@ -349,6 +352,9 @@ export class UserService {
         )
         // This is necessary since the backend responds with a CORS error when a
         // user is not logged in and userInfo.json is called
+
+        // TODO @angel we need to avoid sending HTTP errors back from the backend on this scenario
+        // so we can better interpret real errors here
         .pipe(catchError((error) => of(null)))
     )
   }

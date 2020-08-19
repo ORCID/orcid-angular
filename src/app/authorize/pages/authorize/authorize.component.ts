@@ -116,7 +116,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
         () => (this.window.location.href = data.redirectUrl)
       )
     })
-    // TODO @leomendoza123 handle error with toaster
   }
 
   getIconName(scope: ScopesStrings): string {
@@ -134,7 +133,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
     this._trustedIndividuals.switchAccount(delegator).subscribe()
-    // TODO @leomendoza123 handle error with toaster
   }
   ngOnDestroy() {
     this.$destroy.next(true)

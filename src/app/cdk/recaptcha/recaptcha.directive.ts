@@ -18,6 +18,9 @@ import {
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { environment } from 'src/environments/environment'
+import { SnackbarService } from '../snackbar/snackbar.service'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 export interface ReCaptchaConfig {
   theme?: 'dark' | 'light'
@@ -53,7 +56,8 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
     @Inject(WINDOW) private window: WindowWithCaptcha,
     @Inject(LOCALE_ID) public locale: string,
     private ngZone: NgZone,
-    private element: ElementRef
+    private element: ElementRef,
+    private _errorHandler: ErrorHandlerService
   ) {}
 
   ngOnInit() {
@@ -95,7 +99,7 @@ export class RecaptchaDirective implements OnInit, ControlValueAccessor {
 
   onCaptchaFail() {
     this.captchaFail.emit(true)
-    // TODO: @leomendoza123 display toaster to show the error
+    this._errorHandler.handleError(new Error('captchaFail')).subscribe()
   }
 
   private render(element: HTMLElement, config): number {

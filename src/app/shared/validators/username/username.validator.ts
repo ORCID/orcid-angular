@@ -4,7 +4,7 @@ import { OrcidValidators } from 'src/app/validators'
 
 export class UsernameValidator {
   static orcidOrEmail(control: AbstractControl): ValidationErrors | null {
-    const emailErrors = OrcidValidators.email(control)
+    const emailErrors = OrcidValidators.emailGeneric(control)
     const orcidError = Validators.pattern(ORCID_REGEXP)(control)
     const orcidUriError = Validators.pattern(ORCID_URI_REGEXP)(control)
 

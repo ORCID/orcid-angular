@@ -17,6 +17,7 @@ export class GoogleAnalyticsService {
 
   reportPageView(url: string) {
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
+      cookie_flags: 'SameSite=None;Secure',
       page_path: url,
       page_location: window.location.origin,
       anonymize_ip: true,
@@ -45,9 +46,9 @@ export class GoogleAnalyticsService {
 
   reportError(description: string, fatal = false) {
     console.error(`
-    __Report error GA__
-    description: "${description}"
-    fatal: "${fatal}"
+__Report error GA__
+description: "${description}"
+fatal: "${fatal}"
     `)
 
     this.gtag('event', 'exception', {
