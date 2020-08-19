@@ -1,7 +1,7 @@
 // Custom email REGEXP
 // https://regex101.com/r/jV4aN7/14
 // tslint:disable-next-line: max-line-length
-export const EMAIL_REGEXP = /^([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."\(\)\[\]\{\}\\/,:;]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
+export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
 
 export const EMAIL_REGEXP_GENERIC = /^\s*?(.+)@(.+?)\s*$/
 // https://regex101.com/r/9MXmdl/1
