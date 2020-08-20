@@ -36,18 +36,12 @@ export class ErrorHandlerService {
 
             return throwError({
               ...error,
-              message: `${error.status}/${error.name}/${platformDetails}/${url}`.replace(
-                / /g,
-                ''
-              ),
+              message: `${error.status}/${error.name}/${platformDetails}/${url}`,
             })
           } else {
             return throwError({
               ...error,
-              message: `${error.name}'/'${error.message}/${platformDetails}`.replace(
-                / /g,
-                ''
-              ),
+              message: `${error.name}'/'${error.message}/${platformDetails}`,
             })
           }
         })
