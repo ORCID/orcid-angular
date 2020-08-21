@@ -105,15 +105,16 @@ export interface Value {
 }
 
 export interface Visibility {
-  errors: any[] // TODO define object
-  required: boolean
+  errors?: any[] // TODO is this always empty?
+  required?: boolean
   getRequiredMessage?: any
-  visibility: string // Todo make an enum
+  visibility: ScopesStrings
 }
-
 export type ScopesStrings =
   | 'openid'
   | '/authenticate'
   | '/person/update'
   | '/activities/update'
   | '/read-limited'
+
+export type VisibilityStrings = 'PUBLIC' | 'LIMITED' | 'PRIVATE'
