@@ -34,10 +34,10 @@
       <div class="row news-box" [@listAnimation]="news.length">
         <div class="col l4 m8 s4" *ngFor="let new of news">
           <div class="row horizontal-center">
-            <div class="col mat-caption l-auto m8">
+            <div class="col mat-caption l-auto m8" dir="ltr">
               {{ new.pubDate[0].slice(0, 22) }}
             </div>
-            <p class="col mat-headline l12 m8 s4 horizontal-center">
+            <p class="col mat-headline l12 m8 s4 horizontal-center" dir="ltr">
               {{ new.title }}
             </p>
             <button
