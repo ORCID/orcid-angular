@@ -1,5 +1,5 @@
 on: push
-name: Build Production
+name: Test Build Production
 jobs:
   build:
     runs-on: ubuntu-latest
