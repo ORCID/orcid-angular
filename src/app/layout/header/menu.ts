@@ -3,7 +3,7 @@ export const menu: ApplicationMenuItemBasic[] = [
   {
     id: 'public-layout.for_researchers',
     label: $localize`:@@public-layout.for_researchers:For Researchers`,
-    route: 'about/what-is-orcid/mission',
+    route: 'help',
     activeRoute: '/',
     requirements: {
       togglz: { NEW_INFO_SITE: 'false' },
