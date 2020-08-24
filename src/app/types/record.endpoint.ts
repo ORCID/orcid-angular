@@ -1,6 +1,5 @@
 import {
   Address,
-  Biography,
   Email,
   OtherName,
   ResearcherUrl,
@@ -50,6 +49,12 @@ export interface Person {
   publicGroupedResearcherUrls: PublicGroupedResearcherUrls
   publicGroupedEmails: PublicGroupedEmails
   publicGroupedPersonExternalIdentifiers: PublicGroupedPersonExternalIdentifiers
+}
+
+export interface Biography {
+  visibility: Visibility
+  biography: Value
+  errors: string[]
 }
 
 export interface Emails {
@@ -173,12 +178,6 @@ export interface Names {
   givenNames: Value
   familyName: Value
   creditName?: any
-}
-
-export interface Biography {
-  visibility: Visibility
-  biography: Value
-  errors: string[]
 }
 
 export interface Preferences {

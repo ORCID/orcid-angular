@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms'
-import { RegisterForm, VisibilityValue } from 'src/app/types/register.endpoint'
-import { Value } from 'src/app/types/common.endpoint'
+import { RegisterForm } from 'src/app/types/register.endpoint'
+import { Value, Visibility } from 'src/app/types/common.endpoint'
 import { Constructor } from 'src/app/types'
 
 export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
@@ -12,8 +12,8 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
           formGroup.controls['additionalEmails']
         )).controls
         additionalEmailsValue = Object.keys(additionalEmailsControls)
-          .filter(name => additionalEmailsControls[name].value !== '')
-          .map(name => {
+          .filter((name) => additionalEmailsControls[name].value !== '')
+          .map((name) => {
             if (additionalEmailsControls[name].value) {
               return { value: additionalEmailsControls[name].value }
             }
@@ -43,7 +43,7 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
     }
 
     formGroupToActivitiesVisibilityForm(formGroup: FormGroup): RegisterForm {
-      let activitiesVisibilityDefault: VisibilityValue
+      let activitiesVisibilityDefault: Visibility
       if (
         formGroup &&
         formGroup.controls &&
