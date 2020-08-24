@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, Inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { take } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -7,6 +7,7 @@ import { ApplicationRoutes } from 'src/app/constants'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { ERROR_REPORT } from 'src/app/errors'
+import { WINDOW } from 'src/app/cdk/window'
 
 // When the error text is not listed on the RegisterBackendErrors enum
 // the error message will be displayed as it comes from the backend
@@ -46,7 +47,8 @@ export class BackendErrorComponent implements OnInit {
     private _router: Router,
     private _snackbar: SnackbarService,
     private _signIn: SignInService,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    @Inject(WINDOW) private window: Window
   ) {}
   ngOnInit() {
     if (!(this.errorCode in RegisterBackendErrors)) {
@@ -55,16 +57,7 @@ export class BackendErrorComponent implements OnInit {
   }
 
   navigateToSignin(email) {
-    this._platformInfo
-      .get()
-      .pipe(take(1))
-      .subscribe((platform) => {
-        return this._router.navigate(['/signin'], {
-          // keeps all parameters to support Oauth request
-          // and set show login to true
-          queryParams: { ...platform.queryParameters, email, show_login: true },
-        })
-      })
+    this.window.location.href = `/resend-claim?email=${email}`
   }
 
   reactivateEmail(email) {
