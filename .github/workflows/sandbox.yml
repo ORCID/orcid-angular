@@ -1,5 +1,5 @@
 on: push
-name: Build Angular
+name: Build Sandbox
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,14 +17,14 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Node ${{ matrix.node-version }}
+      - name: Setup
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install and npm run build
         run: |
           npm i
-          npm run build:prod
+          npm run build:sandbox
       # - name: Push Build to Releases
       #   uses: ncipollo/release-action@v1
       #   with:
