@@ -1,10 +1,7 @@
-on:
-  push:
-    branches:
-      - master
+on: push
 name: Storybook 📚
 jobs:
-  build:
+  storybook:
     runs-on: ubuntu-latest
     strategy:
       matrix:

@@ -1,7 +1,8 @@
 on: push
-name: Test Build Production
+name: Test Build Production 🛠️
 jobs:
-  build:
+  prod-build:
+    needs: code-formatting
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,8 +26,3 @@ jobs:
         run: |
           npm i
           npm run build:prod
-      # - name: Push Build to Releases
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     artifacts: "dist/angular-githubaction/*"
-      #     token: ${{ secrets.TOKEN }}

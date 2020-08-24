@@ -1,7 +1,10 @@
-on: push
-name: Build Sandbox 🛠️
+on:
+  push:
+    branches:
+      - master
+name: Code formatting ✍️ 
 jobs:
-  sandbox-build:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,7 +24,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and npm run build
+      - name: npm install and npm run format
         run: |
           npm i
-          npm run build:sandbox
+          npm run format
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        with:
+          commit_message: Apply formatting changes
+          branch: ${{ github.head_ref }}
+          if: steps.extract_branch.outputs.branch == 'master'

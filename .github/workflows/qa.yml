@@ -1,7 +1,7 @@
 on: push
-name: Build QA
+name: Build QA 🛠️
 jobs:
-  build:
+  qa-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
