@@ -14,7 +14,7 @@
   >
     <span
       class="content mat-body-1"
-      *ngFor="let element of list | keyvalue; let last = last"
+      *ngFor="let element of (list | keyvalue); let last = last"
       >{{ element.key
       }}{{
         this.state === 'close' && !columnDirection ? (last ? '' : ',') : ''

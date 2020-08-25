@@ -41,7 +41,7 @@ export class CardComponent implements OnInit {
   isHanset
 
   constructor(private _platformInfo: PlatformInfoService) {
-    this._platformInfo.get().subscribe((person) => {
+    this._platformInfo.get().subscribe(person => {
       this.isHanset = person.handset
     })
   }

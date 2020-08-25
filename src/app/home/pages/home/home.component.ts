@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     _platformInfo: PlatformInfoService,
     @Inject(WINDOW) private window: Window
   ) {
-    _platformInfo.get().subscribe((platformInfo) => {
+    _platformInfo.get().subscribe(platformInfo => {
       this.platform = platformInfo
     })
   }

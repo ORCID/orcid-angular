@@ -22,15 +22,15 @@ export class ProfilePageComponent implements OnInit {
     _activeRoute: ActivatedRoute,
     _platformInfo: PlatformInfoService
   ) {
-    _activeRoute.parent.url.subscribe((route) => {
+    _activeRoute.parent.url.subscribe(route => {
       this.id = route[0].path
       _profileService.get(this.id).subscribe(
-        (data) => {
+        data => {
           this.profileGeneralData = data[0]
           this.profileAffiliationUiGroups = data[1]
           this.profileWorks = data[2]
         },
-        (error) => {
+        error => {
           // Redirects user when orcid is not found
           if (error.error.status === 500) {
             window.location.href = environment.BASE_URL + '404'
@@ -38,7 +38,7 @@ export class ProfilePageComponent implements OnInit {
         }
       )
 
-      _platformInfo.get().subscribe((platformInfo) => {
+      _platformInfo.get().subscribe(platformInfo => {
         this.platformInfo = platformInfo
       })
     })
@@ -57,7 +57,7 @@ export class ProfilePageComponent implements OnInit {
       // Has at lest one affiliation
       ((profileAffiliationUiGroups &&
         profileAffiliationUiGroups.filter(
-          (element) => element.affiliationGroup.length
+          element => element.affiliationGroup.length
         ).length) ||
         // Or has at lest one work
         (this.profileWorks && this.profileWorks.groups.length)) &&

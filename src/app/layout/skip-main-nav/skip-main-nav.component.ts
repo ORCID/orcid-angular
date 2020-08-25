@@ -16,7 +16,7 @@ export class SkipMainNavComponent implements OnInit {
     @Inject(WINDOW) private window: Window
   ) {
     router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((url: NavigationEnd) => {
         this.currentUrl = url.urlAfterRedirects.replace('#main', '')
       })

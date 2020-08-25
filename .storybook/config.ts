@@ -29,8 +29,7 @@ addParameters({
       } else if (
         a[1].parameters &&
         !a[1].parameters.order &&
-        b[1].parameters &&
-        !b[1].parameters.order
+        (b[1].parameters && !b[1].parameters.order)
       ) {
         return 0
       } else {

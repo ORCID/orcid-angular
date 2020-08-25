@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
   constructor(
     _platformInfo: PlatformInfoService,
     @Inject(WINDOW) private window: Window,
-    _togglz: TogglzService
+    _togglz: TogglzService,
   ) {
     _platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo

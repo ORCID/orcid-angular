@@ -29,7 +29,9 @@ export class Puppeteer {
   async login() {
     this.page = await this.browser.newPage()
     await this.page.goto(
-      `${environment.protocol}${environment.prefix}${environment.baseURL}/${LOGIN_URL}`
+      `${environment.protocol}${environment.prefix}${
+        environment.baseURL
+      }/${LOGIN_URL}`
     )
     const emailInput = await this.page.$('input[id="userId"]')
     await emailInput.type(environment.ORCID_ADMIN_USER)
@@ -37,7 +39,7 @@ export class Puppeteer {
     await passwordInput.type(environment.ORCID_ADMIN_PASSWORD)
 
     await Promise.all([
-      await this.page.$eval('#form-sign-in-button', (form) => {
+      await this.page.$eval('#form-sign-in-button', form => {
         return (form as HTMLElement).click()
       }),
       this.page.waitForNavigation(),
@@ -48,7 +50,9 @@ export class Puppeteer {
   async loginAs(orcidId) {
     this.page = await this.browser.newPage()
     await this.page.goto(
-      `${environment.protocol}${environment.prefix}${environment.baseURL}/switch-user?username=${orcidId}`
+      `${environment.protocol}${environment.prefix}${
+        environment.baseURL
+      }/switch-user?username=${orcidId}`
     )
     this.page.close()
   }
@@ -56,7 +60,9 @@ export class Puppeteer {
   async runAudit(url) {
     await log.setLevel(this.opts.logLevel)
     const result = await lighthouse(
-      `${environment.protocol}${environment.prefix}${environment.baseURL}/${url}`,
+      `${environment.protocol}${environment.prefix}${
+        environment.baseURL
+      }/${url}`,
       this.opts
     )
     return result.lhr
