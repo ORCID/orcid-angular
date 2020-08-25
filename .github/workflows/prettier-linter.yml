@@ -26,7 +26,7 @@ jobs:
           npm i
           npm run format
       - name: Commit changes
-        # if: github.event_name == 'push' && (contains(github.ref, 'tags') || github.ref == 'refs/heads/master')
+        ## if: github.ref == 'refs/heads/master'
         uses: EndBug/add-and-commit@v4
         with:
           message: 'Github actions auto formatting '
