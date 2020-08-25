@@ -1,10 +1,7 @@
-on:
-  push:
-    branches:
-      - master
-name: Code formatting ✍️ 
+on: push
+name: Code formatting ✍️
 jobs:
-  build:
+  code-formatting:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -33,4 +30,4 @@ jobs:
         with:
           commit_message: Apply formatting changes
           branch: ${{ github.head_ref }}
-          if: steps.extract_branch.outputs.branch == 'master'
+          # if: steps.extract_branch.outputs.branch == 'master'

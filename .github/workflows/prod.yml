@@ -2,7 +2,6 @@ on: push
 name: Test Build Production 🛠️
 jobs:
   prod-build:
-    needs: code-formatting
     runs-on: ubuntu-latest
     strategy:
       matrix:
