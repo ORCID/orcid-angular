@@ -40,7 +40,6 @@ export class LinkAccountGuard implements CanActivateChild {
           return this._oauthService.loadShibbolethSignInData()
         }
       }),
-      tap((value) => console.log(value)),
       catchError(() => of(false)),
       map((value) => {
         if (typeof value !== 'boolean' && value.providerId) {
