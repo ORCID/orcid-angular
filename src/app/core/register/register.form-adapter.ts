@@ -12,8 +12,8 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
           formGroup.controls['additionalEmails']
         )).controls
         additionalEmailsValue = Object.keys(additionalEmailsControls)
-          .filter((name) => additionalEmailsControls[name].value !== '')
-          .map((name) => {
+          .filter(name => additionalEmailsControls[name].value !== '')
+          .map(name => {
             if (additionalEmailsControls[name].value) {
               return { value: additionalEmailsControls[name].value }
             }

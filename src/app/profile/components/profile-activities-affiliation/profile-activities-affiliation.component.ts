@@ -19,7 +19,7 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
   @Input()
   set affiliationStack(value: AffiliationGroup) {
     this._affiliationStack = value
-    value.affiliations.forEach((affiliation) => {
+    value.affiliations.forEach(affiliation => {
       this.affiliationCardState[affiliation.putCode.value] = {
         stackState: this.isPrefered(affiliation) ? 'open' : 'close',
       }
@@ -58,7 +58,7 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
   }
 
   onClick(affiliation) {
-    Object.keys(this.affiliationCardState).forEach((key) => {
+    Object.keys(this.affiliationCardState).forEach(key => {
       this.affiliationCardState[key].stackState = 'close'
     })
     this.affiliationCardState[affiliation.putCode.value].stackState =
@@ -112,14 +112,14 @@ export class ProfileRecordsAffiliationComponent implements OnInit {
         combineLatest(combined)
           .pipe(first())
           .subscribe(
-            (response) => {
+            response => {
               this.orgDisambiguated[putCode] = response[0]
               this.affiliationDetailsState[putCode].detailShowLoader =
                 'close-with-none-opacity'
               this.affiliationDetailsState[putCode].detailShowData = 'open'
               this.affiliationDetailsState[putCode].detailShowOffline = 'close'
             },
-            (error) => {
+            error => {
               if (error.status === 0) {
                 this.affiliationDetailsState[putCode].detailShowOffline = 'open'
                 this.affiliationDetailsState[putCode].detailShowLoader = 'close'

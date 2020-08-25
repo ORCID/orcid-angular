@@ -47,7 +47,7 @@ export class IsThisYouComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data,
     @Inject(WINDOW) private window: Window
   ) {
-    _platformInfo.get().subscribe((platformInfo) => {
+    _platformInfo.get().subscribe(platformInfo => {
       this.setPlatformClasses(platformInfo)
     })
   }
