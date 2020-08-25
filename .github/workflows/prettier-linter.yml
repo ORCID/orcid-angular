@@ -26,8 +26,9 @@ jobs:
           npm i
           npm run format
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        uses: EndBug/add-and-commit@v4
         with:
-          commit_message: Apply formatting
-
+          message: 'Github actions auto formatting '
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # if: steps.extract_branch.outputs.branch == 'master'
