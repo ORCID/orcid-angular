@@ -26,8 +26,10 @@ jobs:
           npm i
           npm run format
       - name: Commit changes
+        ##  if: github.ref == 'refs/heads/master'
         uses: EndBug/add-and-commit@v4
         with:
           message: 'Github actions auto formatting '
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
