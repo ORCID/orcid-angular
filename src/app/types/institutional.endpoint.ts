@@ -17,6 +17,6 @@ export interface DisplayName {
 
 export interface Logo {
   value: string
-  height: string,
+  height: string
   width: string
 }
