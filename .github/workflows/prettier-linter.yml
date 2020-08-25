@@ -1,4 +1,4 @@
-on: push
+on: [push, pull_request]
 name: Code formatting ✍️
 jobs:
   code-formatting:
@@ -26,9 +26,10 @@ jobs:
           npm i
           npm run format
       - name: Commit changes
+        # if: github.event_name == 'push' && (contains(github.ref, 'tags') || github.ref == 'refs/heads/master')
         uses: EndBug/add-and-commit@v4
         with:
           message: 'Github actions auto formatting '
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # if: steps.extract_branch.outputs.branch == 'master'
+          
