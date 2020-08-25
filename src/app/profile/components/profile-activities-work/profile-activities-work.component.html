@@ -29,7 +29,9 @@
             ? workExternal.relationship.value
             : ''
         "
-        title="{{workExternal.externalIdentifierType.value + ':' | uppercase}}"
+        title="{{
+          workExternal.externalIdentifierType.value + ':' | uppercase
+        }}"
         [content]="workExternal.externalIdentifierId.value"
         [url]="workExternal.url?.value"
         [titleMargin]="false"
