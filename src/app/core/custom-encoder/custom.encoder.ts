@@ -11,6 +11,7 @@ export class CustomEncoder implements HttpParameterCodec {
     return decodeURIComponent(key)
   }
   decodeValue(key: string) {
-    return decodeURIComponent(key)
+    return decodeURIComponent(key
+    )
   }
 }
