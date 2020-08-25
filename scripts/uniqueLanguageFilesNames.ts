@@ -7,7 +7,7 @@ export function addLanguageCodeToHashesOnToHTMLFiles(data, options) {
 }
 
 export function addLanguageCodeToHashesOnJSFiles(data, hashList, options) {
-  hashList.forEach(oldHash => {
+  hashList.forEach((oldHash) => {
     data = data.replace(oldHash, oldHash + '-' + options.languageCode)
   })
   return data

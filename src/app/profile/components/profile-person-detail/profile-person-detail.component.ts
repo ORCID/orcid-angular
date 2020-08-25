@@ -36,7 +36,7 @@ export class ProfileInfoDetailComponent implements OnInit {
   }
 
   constructor(_platformInfo: PlatformInfoService) {
-    _platformInfo.get().subscribe(platformInfo => {
+    _platformInfo.get().subscribe((platformInfo) => {
       this.handset = platformInfo.handset
     })
   }

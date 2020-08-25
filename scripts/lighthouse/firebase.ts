@@ -19,10 +19,10 @@ export class FirebaseManager {
       .collection(environment.testPrefix || 'no-prefix')
       .doc(id)
       .set(result)
-      .then(function(docRef) {
+      .then(function (docRef) {
         console.log('Document written with ID: ', JSON.stringify(docRef))
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error('Error adding document: ', error)
       })
   }
@@ -41,8 +41,9 @@ export class FirebaseManager {
       // Without auth
       'no-auth'
 
-    const id = `${result.auditDefinition.url ||
-      'root'}.${user}.${date.toISOString().replace(/:/g, '.')}`
+    const id = `${
+      result.auditDefinition.url || 'root'
+    }.${user}.${date.toISOString().replace(/:/g, '.')}`
 
     return id
   }

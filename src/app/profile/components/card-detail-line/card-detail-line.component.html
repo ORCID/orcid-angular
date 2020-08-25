@@ -1,5 +1,5 @@
 <h5
-  class="mat-body-1 "
+  class="mat-body-1"
   *ngIf="title"
   [ngClass]="{
     'title-margin': titleMargin,
@@ -22,6 +22,6 @@
 </p>
 <p class="mat-body-1" *ngIf="!url && !copyOnClick">{{ content }}</p>
 
-<a class="mat-body-1" *ngIf="url" href="{{url}}" target="orcid-app">{{
+<a class="mat-body-1" *ngIf="url" href="{{ url }}" target="orcid-app">{{
   content
 }}</a>
