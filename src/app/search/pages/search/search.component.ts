@@ -19,6 +19,8 @@ export class SearchComponent implements OnInit {
   pageIndex: number
   pageSize: number
   loadingNewResults = false
+  ariaLabelPaginator = $localize`:@@search.paginator:paginator`
+  ariaLabelBottomPaginator = $localize`:@@search.bottomPaginator:bottom paginator`
 
   constructor(
     route: ActivatedRoute,
@@ -37,14 +39,14 @@ export class SearchComponent implements OnInit {
           this.loadingNewResults = true
         }),
         // Call the backend to get search results
-        switchMap(value =>
+        switchMap((value) =>
           _searchService.search(value).pipe(
             retry(3),
-            catchError(err => EMPTY)
+            catchError((err) => EMPTY)
           )
         )
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         this.loadingNewResults = false
         this.searchResults = data
       })
