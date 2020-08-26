@@ -48,7 +48,7 @@ export class DeactivatedComponent implements OnInit {
 
     if (this.deactivatedForm.valid) {
       this.loading = true
-      const $deactivate = this._signIn.reactivation(value)
+      const $deactivate = this._signIn.reactivation(value.email)
       $deactivate.subscribe((data) => {
         this.loading = false
         this.showReactivationSent = data.sent

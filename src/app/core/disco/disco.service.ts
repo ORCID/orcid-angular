@@ -24,42 +24,37 @@ export class DiscoService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getInstitutionsNames(filterInput?: string): Observable<string[]> {
-    return this.getDiscoFeedInstitutionsNames().pipe(
-      switchMap((value) => {
-        let institutionNames: string[]
-        if (filterInput && filterInput.length > 0) {
-          institutionNames = value.filter((institutionName) => {
-            institutionName = institutionName.toLowerCase()
-            filterInput = filterInput.toLocaleLowerCase()
-            return institutionName.indexOf(filterInput.toLowerCase()) === 0
-          })
-          institutionNames = institutionNames.slice(
-            0,
-            environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
-          )
-        } else {
-          institutionNames = value
-        }
-
-        return of(institutionNames)
+  getInstitutionsNames(institutions, filterInput?: string): string[] {
+    const allInstitutionNames = this.getDiscoFeedInstitutionsNames(institutions)
+    let institutionNames: string[]
+    if (filterInput && filterInput.length > 0) {
+      institutionNames = allInstitutionNames.filter((institutionName) => {
+        institutionName = institutionName.toLowerCase()
+        filterInput = filterInput.toLocaleLowerCase()
+        return institutionName.indexOf(filterInput.toLowerCase()) === 0
       })
-    )
+      institutionNames = institutionNames.slice(
+        0,
+        environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
+      )
+    } else {
+      institutionNames = allInstitutionNames
+    }
+
+    return institutionNames
   }
 
-  getInstitutionBaseOnName(institutionName: string): Observable<Institutional> {
+  getInstitutionBaseOnName(
+    institutionName: string,
+    allInstitutions: Institutional[]
+  ): Institutional {
     institutionName = institutionName.toLowerCase()
-    return this.getDiscoFeed().pipe(
-      first(),
-      map((institutions) => {
-        return institutions.find((institution) =>
-          institution?.DisplayNames?.find(
-            (name) =>
-              name.lang === 'en' &&
-              name.value.toLocaleLowerCase() === institutionName
-          )
-        )
-      })
+    return allInstitutions.find((institution) =>
+      institution?.DisplayNames?.find(
+        (name) =>
+          name.lang === 'en' &&
+          name.value.toLocaleLowerCase() === institutionName
+      )
     )
   }
 
@@ -74,7 +69,7 @@ export class DiscoService {
     )
   }
 
-  private getDiscoFeed(): Observable<Institutional[]> {
+  public getDiscoFeed(): Observable<Institutional[]> {
     return this._http
       .get<Institutional[]>(environment.BASE_URL + 'Shibboleth.sso/DiscoFeed')
       .pipe(
@@ -86,16 +81,11 @@ export class DiscoService {
       )
   }
 
-  private getDiscoFeedInstitutionsNames(): Observable<string[]> {
-    return this.getDiscoFeed().pipe(
-      map((institutions: Institutional[]) =>
-        this.discoFeedToInstitutionNames(institutions)
-      ),
-      shareReplay(1)
-    )
+  private getDiscoFeedInstitutionsNames(allInstitutions): string[] {
+    return this.discoFeedToInstitutionNames(allInstitutions)
   }
 
-  discoFeedToInstitutionNames(institutions: Institutional[]): string[] {
+  private discoFeedToInstitutionNames(institutions: Institutional[]): string[] {
     const names = []
     institutions.map((inst) =>
       inst.DisplayNames.filter((name) => name.lang === 'en').map((en) =>
