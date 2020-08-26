@@ -16,6 +16,8 @@ export class BannersComponent implements OnInit {
   showCookieBanner
   showUnsupportedBrowserBanner
   closableElementAtDisplay
+  ariaLabelCookiesPolicy = $localize`:@@layout.ariaLabelCookies:Cookies Policy`
+
   constructor(
     private _cookie: CookieService,
     _platformInfo: PlatformInfoService,
