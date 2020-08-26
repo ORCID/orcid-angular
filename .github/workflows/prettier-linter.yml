@@ -1,7 +1,7 @@
 on: [pull_request]
 name: Code formatting and testing languages✍️
 jobs:
-  code-formatting:
+  code-formatting-testing-languages:
     runs-on: ubuntu-latest
     strategy:
       matrix:
