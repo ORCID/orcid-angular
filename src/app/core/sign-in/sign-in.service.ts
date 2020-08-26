@@ -86,9 +86,9 @@ export class SignInService {
       )
   }
 
-  reactivation(data) {
+  reactivation(email: string) {
     let body = new HttpParams({ encoder: new CustomEncoder() })
-    body = body.set('email', data.email)
+    body = body.set('email', email)
     return this._http
       .post<Reactivation>(environment.API_WEB + `sendReactivation.json`, body, {
         headers: this.headers,
