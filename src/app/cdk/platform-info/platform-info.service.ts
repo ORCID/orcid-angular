@@ -203,4 +203,10 @@ export class PlatformInfoService {
   public get(): Observable<PlatformInfo> {
     return this.platformSubject.asObservable()
   }
+
+  public remove(): void {
+    this.platform.social = false
+    this.platform.institutional = false
+    this.platformSubject.next(this.platform)
+  }
 }
