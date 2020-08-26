@@ -1,5 +1,5 @@
 on: [pull_request]
-name: Code formatting ✍️
+name: Code formatting and testing languages✍️
 jobs:
   code-formatting:
     runs-on: ubuntu-latest
@@ -25,9 +25,19 @@ jobs:
         run: |
           npm i
           npm run format
-      - name: Commit changes
+      - name: Commit formatting changes
         uses: EndBug/add-and-commit@v4
         with:
-          message: 'Github actions auto formatting '
+          message: '🤖 GITHUB ACTIONS: formatting 🤖'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build testing languages
+        run: |
+          npm run build:i18n:generate-testing
+      - name: Commit languages files changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          message: '🤖 GITHUB ACTIONS: testing languages 🤖'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
