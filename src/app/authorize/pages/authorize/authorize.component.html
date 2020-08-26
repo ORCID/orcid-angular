@@ -68,20 +68,19 @@
               <ng-container
                 *ngFor="let scope of this.oauthRequest.scopes; let last = last"
               >
-                <li [matTooltip]="scope.longDescription">
+                <li [matTooltip]="getLongDescription(scope)">
                   <mat-divider></mat-divider>
                   <div>
                     <ng-container
                       [ngTemplateOutlet]="
-                        (getIconName(scope.value) === 'updateIcon' &&
+                        (getIconName(scope) === 'updateIcon' &&
                           updateIconTemplate) ||
-                        (getIconName(scope.value) === 'orcidIcon' &&
+                        (getIconName(scope) === 'orcidIcon' &&
                           orcidIconTemplate) ||
-                        (getIconName(scope.value) === 'viewIcon' &&
-                          viewIconTemplate)
+                        (getIconName(scope) === 'viewIcon' && viewIconTemplate)
                       "
                     ></ng-container>
-                    <div>{{ scope.description }}</div>
+                    <div>{{ getDescription(scope) }}</div>
                   </div>
                   <mat-divider *ngIf="last"></mat-divider>
                 </li>
