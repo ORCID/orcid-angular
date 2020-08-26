@@ -48,7 +48,6 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.institutional,
-    canActivateChild: [LinkAccountGuard],
     loadChildren: () =>
       import('./institutional/institutional.module').then(
         (m) => m.InstitutionalModule
@@ -64,6 +63,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.institutionalLinking,
+    canActivateChild: [LinkAccountGuard],
     loadChildren: () =>
       import('./link-account/link-account.module').then(
         (m) => m.LinkAccountModule

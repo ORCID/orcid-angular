@@ -68,7 +68,7 @@ export class SnackbarService {
 
     if (errorReport?.analytics) {
       this._gtag.reportError(
-        `${errorReport.analytics.code}/${error.message}`,
+        `${errorReport.analytics.code}/${error.message}`.replace(/ /g, ''),
         errorReport.analytics.fatal
       )
     }

@@ -118,3 +118,22 @@ export type ScopesStrings =
   | '/read-limited'
 
 export type VisibilityStrings = 'PUBLIC' | 'LIMITED' | 'PRIVATE'
+
+export type DeprecatedScopesStrings =
+  | '/orcid-works/read-limited'
+  | '/orcid-bio/read-limited'
+  | '/orcid-profile/read-limited'
+  | '/person/read-limited' // NOT DOCUMENTED
+  | '/activities/read-limited' // NOT DOCUMENTED
+  //
+  | '/orcid-works/create'
+  | '/affiliations/create'
+  | '/funding/create'
+  | '/orcid-bio/external-identifiers/create'
+  //
+  | '/orcid-works/update'
+  | '/orcid-bio/update'
+  | '/affiliations/update'
+  | '/funding/update'
+  | '/orcid-bio/external-identifiers/update'
+

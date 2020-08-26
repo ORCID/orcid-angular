@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
-import { map, switchMap, take, tap } from 'rxjs/operators'
+import { first, map, startWith, switchMap, take, tap } from 'rxjs/operators'
 
 import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -25,6 +25,8 @@ export class InstitutionalComponent implements OnInit {
   retrieveAllFiltered: any[]
   filteredOptions: Observable<string[]>
   institution: Institutional
+  institutions: Institutional[]
+  institutionsNames: string[]
   entityID: any
   logoInstitution: any
   labelInstitution = $localize`:@@institutional.ariaLabelInstitution:Institution`
@@ -43,33 +45,36 @@ export class InstitutionalComponent implements OnInit {
     private _disco: DiscoService
   ) {
     this.loading = true
-    this._disco
-      .getInstitutionsNames()
-      .pipe(take(1))
-      .subscribe((institutionsNames) => {
-        this.loading = false
-        this.institutionalForm.controls['institution'].setValidators([
-          Validators.required,
-          InstitutionValidator.valueSelected(institutionsNames),
-        ])
-        this.filteredOptions = this.institutionFormControl.valueChanges.pipe(
-          switchMap((filterInput) =>
-            this._disco.getInstitutionsNames(filterInput)
-          ),
-          map((institutions) =>
-            institutions.length >
+    this._disco.getDiscoFeed().subscribe((res) => {
+      this.loading = false
+      this.institutions = res
+      this.institutionsNames = this._disco.getInstitutionsNames(
+        this.institutions
+      )
+      this.institutionalForm.controls['institution'].setValidators([
+        Validators.required,
+        InstitutionValidator.valueSelected(this.institutionsNames),
+      ])
+      this.filteredOptions = this.institutionFormControl.valueChanges.pipe(
+        startWith(''),
+        map((filterInput) => {
+          const institutionsFiltered = _disco.getInstitutionsNames(
+            this.institutions,
+            filterInput
+          )
+          return institutionsFiltered.length >
             environment.INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT
-              ? []
-              : institutions
-          ),
-          tap(() => {
-            if (!this.institutionFormControl.valid) {
-              this.logoInstitution = undefined
-            }
-          })
-        )
-        this.clear()
-      })
+            ? []
+            : institutionsFiltered
+        }),
+        tap(() => {
+          if (!this.institutionFormControl.valid) {
+            this.logoInstitution = undefined
+          }
+        })
+      )
+      this.clear()
+    })
   }
 
   ngOnInit() {}
@@ -99,17 +104,18 @@ export class InstitutionalComponent implements OnInit {
   selected(institutionName) {
     this.loading = true
     this.logoInstitution = undefined
-    this._disco
-      .getInstitutionBaseOnName(institutionName)
-      .subscribe((institution) => {
-        this.loading = false
-        this.institution = institution
-        this.entityID = this.institution.entityID
+    const institutionSelected = this._disco.getInstitutionBaseOnName(
+      institutionName,
+      this.institutions
+    )
 
-        if (this.institution.Logos) {
-          this.logoInstitution = this.institution.Logos[0].value
-        }
-      })
+    this.loading = false
+    this.institution = institutionSelected
+    this.entityID = this.institution.entityID
+
+    if (this.institution.Logos) {
+      this.logoInstitution = this.institution.Logos[0].value
+    }
   }
 
   navigateTo(val) {

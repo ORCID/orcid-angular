@@ -5,6 +5,7 @@ import { DiscoService } from '../../../core/disco/disco.service'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { Institutional } from '../../../types/institutional.endpoint'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-link-account',
@@ -25,9 +26,10 @@ export class LinkAccountComponent implements OnInit {
   email = ''
 
   constructor(
-    _platformInfo: PlatformInfoService,
+    private _platformInfo: PlatformInfoService,
     private _disco: DiscoService,
-    private _oauthService: OauthService
+    private _oauthService: OauthService,
+    private _router: Router
   ) {
     _platformInfo.get().subscribe((platform) => {
       if (platform.social) {
@@ -76,5 +78,10 @@ export class LinkAccountComponent implements OnInit {
 
   show2FAEmitter($event) {
     this.show2FA = true
+  }
+
+  cancel() {
+    this._platformInfo.remove()
+    this._router.navigate(['/signin'], {})
   }
 }
