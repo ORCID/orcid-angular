@@ -11,10 +11,8 @@ export function buildInfo(indexHtml, options): string {
     options.environment ? '-' + options.environment : ''
   } ${new Date().toJSON()}-->
 ${
-    gitInfo
-      ? '<!--' + gitInfo.abbreviatedSha + '/' + gitInfo.lastTag + '-->'
-      : ''
-  }
+  gitInfo ? '<!--' + gitInfo.abbreviatedSha + '/' + gitInfo.lastTag + '-->' : ''
+}
 `
   return indexHtml + config
 }

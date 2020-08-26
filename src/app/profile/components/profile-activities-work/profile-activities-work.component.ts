@@ -17,7 +17,7 @@ export class ProfileActivitiesWorkComponent implements OnInit {
   @Input()
   set profileworksStack(profileworksStack: WorkGroup) {
     this._profileworksStack = profileworksStack
-    this._profileworksStack.works.forEach(work => {
+    this._profileworksStack.works.forEach((work) => {
       this.workCardState[work.putCode.value] = {
         stackState: this.isPrefered(work) ? 'open' : 'close',
       }
@@ -44,7 +44,7 @@ export class ProfileActivitiesWorkComponent implements OnInit {
     private _worksService: WorksService,
     private _platformInfo: PlatformInfoService
   ) {
-    this._platformInfo.get().subscribe(data => {
+    this._platformInfo.get().subscribe((data) => {
       // TODO Firefox, Explorer and Edge all seem to have proble with :leave on itemChildListAnimation
       // More person about what is causing this problems must be looked for.
       //
@@ -55,7 +55,7 @@ export class ProfileActivitiesWorkComponent implements OnInit {
   ngOnInit() {}
 
   onClick(work) {
-    Object.keys(this.workCardState).forEach(key => {
+    Object.keys(this.workCardState).forEach((key) => {
       this.workCardState[key].stackState = 'close'
     })
     this.workCardState[work.putCode.value].stackState =

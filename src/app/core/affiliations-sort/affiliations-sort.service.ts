@@ -20,7 +20,7 @@ export class AffiliationsSortService {
     affiliationGroups: AffiliationUIGroup[],
     ascending = true
   ): AffiliationUIGroup[] {
-    affiliationGroups.forEach(x => {
+    affiliationGroups.forEach((x) => {
       const affiliationGroup: AffiliationGroup[] = x.affiliationGroup
       affiliationGroup.sort((a, b) => {
         const dateA = this.yearMonthDaytoDate(a.defaultAffiliation.startDate)

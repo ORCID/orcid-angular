@@ -32,18 +32,18 @@ export class TogglzService {
   getStateOf(togglzFeatureName: string): Observable<boolean> {
     this.getTogglz()
     return this.togglz.pipe(
-      map(data => data.messages[togglzFeatureName] === 'true')
+      map((data) => data.messages[togglzFeatureName] === 'true')
     )
   }
 
   getMessageOf(togglzFeatureName: string): Observable<string> {
     this.getTogglz()
-    return this.togglz.pipe(map(data => data.messages[togglzFeatureName]))
+    return this.togglz.pipe(map((data) => data.messages[togglzFeatureName]))
   }
 
   getMaintenanceMessages(): Observable<MaintenanceMessage> {
     return this.getMessageOf('MAINTENANCE_MESSAGE').pipe(
-      map(value => {
+      map((value) => {
         const plainHtml = value
         const parser = new DOMParser()
         const htmlElement = parser.parseFromString(plainHtml, 'text/html')
