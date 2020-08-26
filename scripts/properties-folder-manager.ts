@@ -422,4 +422,3 @@ export class NgOrcidPropertyFolder extends PropertyFolderImpl {
     )
   }
 }
-
