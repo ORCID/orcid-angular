@@ -7,6 +7,7 @@ export const ERROR_REPORT: {
   RESET_PASSWORD_COULD_NOT_RECOVER: ErrorReport
   REGISTER: ErrorReport
   REGISTER_REACTIVATED_EMAIL: ErrorReport
+  OAUTH_PARAMETERS: ErrorReport
 } = {
   // The JUST_GA error
   // It will report the error only on google analytics
@@ -81,6 +82,9 @@ export const ERROR_REPORT: {
     },
   },
 
+  // The REGISTER_REACTIVATED_EMAIL is used only on the /register page
+  // after the user clicks the reactivation link display under the email input
+  // It will report the error on google analytics and the snackbar will be show to the user
   REGISTER_REACTIVATED_EMAIL: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
@@ -92,6 +96,14 @@ export const ERROR_REPORT: {
     analytics: {
       code: '004',
       fatal: true,
+    },
+  },
+
+  // OAUTH_PARAMETERS is used only when the server returns an error related to the OAUTH parameters
+  // It will NOT report the error on google analytics but the snackbar will be show to the user
+  OAUTH_PARAMETERS: {
+    display: {
+      title: $localize`:@@shared.oauthSessionError:Your Oauth request is invalid.`,
     },
   },
 }
