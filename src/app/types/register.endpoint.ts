@@ -1,4 +1,4 @@
-import { Value } from './common.endpoint'
+import { Value, Visibility } from './common.endpoint'
 
 export interface RegisterForm {
   errors?: any[]
@@ -6,7 +6,7 @@ export interface RegisterForm {
   sendOrcidNews?: Value
   sendMemberUpdateRequests?: Value
   termsOfUse?: Value
-  activitiesVisibilityDefault?: VisibilityValue
+  activitiesVisibilityDefault?: Visibility
   password?: Value
   passwordConfirm?: Value
   email?: Value
@@ -37,12 +37,6 @@ export interface DuplicatedName {
   createdDate: string
 }
 
-export interface VisibilityValue {
-  errors?: any[] // TODO is this always empty?
-  required?: boolean
-  getRequiredMessage?: any
-  visibility: 'PUBLIC' | 'LIMITED' | 'PRIVATE'
-}
 export interface RegisterConfirmResponse {
   errors?: any[]
   url: string

@@ -1,3 +1,5 @@
+export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
+
 // Custom email REGEXP
 // https://regex101.com/r/jV4aN7/14
 // tslint:disable-next-line: max-line-length

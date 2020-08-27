@@ -4,7 +4,7 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms'
-import { RegisterForm, VisibilityValue } from 'src/app/types/register.endpoint'
+import { RegisterForm } from 'src/app/types/register.endpoint'
 import { Value } from 'src/app/types/common.endpoint'
 import { Constructor } from 'src/app/types'
 import { Observable, of } from 'rxjs'
