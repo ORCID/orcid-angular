@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-panel-privacy',
   templateUrl: './panel-privacy.component.html',
-  styleUrls: ['./panel-privacy.component.scss']
+  styleUrls: ['./panel-privacy.component.scss'],
 })
 export class PanelPrivacyComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

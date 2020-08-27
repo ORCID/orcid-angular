@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { MyOrcidComponent } from './my-orcid.component';
+import { MyOrcidComponent } from './my-orcid.component'
 
 describe('MyOrcidComponent', () => {
-  let component: MyOrcidComponent;
-  let fixture: ComponentFixture<MyOrcidComponent>;
+  let component: MyOrcidComponent
+  let fixture: ComponentFixture<MyOrcidComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyOrcidComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [MyOrcidComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyOrcidComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(MyOrcidComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

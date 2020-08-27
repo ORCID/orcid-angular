@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { PanelPrivacyComponent } from './panel-privacy.component';
+import { PanelPrivacyComponent } from './panel-privacy.component'
 
 describe('PanelPrivacyComponent', () => {
-  let component: PanelPrivacyComponent;
-  let fixture: ComponentFixture<PanelPrivacyComponent>;
+  let component: PanelPrivacyComponent
+  let fixture: ComponentFixture<PanelPrivacyComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PanelPrivacyComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [PanelPrivacyComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PanelPrivacyComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PanelPrivacyComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
