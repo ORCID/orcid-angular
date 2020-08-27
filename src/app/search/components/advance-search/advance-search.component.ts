@@ -35,6 +35,9 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
   showAdvanceSearch = false
   ngOrcidSearchInstitutionNamePlaceholder = $localize`:@@ngOrcid.search.institutionNamePlaceholder:affiliation or organization ID`
   ngOrcidSearchAdvanceSearch = $localize`:@@ngOrcid.search.advanceSearch:ADVANCED SEARCH`
+  ngOrcidShowAdvanceSearch = $localize`:@@search.showAdvanceSearch:Show advanced search form`
+  ngOrcidHideAdvanceSearch = $localize`:@@search.hideAdvanceSearch:Hide advanced search form`
+
   advanceSearch: FormGroup
   constructor(
     _platform: PlatformInfoService,

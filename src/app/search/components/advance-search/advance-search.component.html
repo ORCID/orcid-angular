@@ -5,9 +5,7 @@
       color="primary"
       (click)="toggleAdvanceSearch()"
       [attr.aria-label]="
-        !showAdvanceSearch
-          ? 'Show advanced search form'
-          : 'Hide advanced search form'
+        !showAdvanceSearch ? ngOrcidShowAdvanceSearch : ngOrcidHideAdvanceSearch
       "
     >
       <ng-container i18n="@@ngOrcid.search.advanceSearch"
