@@ -19,6 +19,8 @@ export class SearchComponent implements OnInit {
   pageIndex: number
   pageSize: number
   loadingNewResults = false
+  ariaLabelPaginator = $localize`:@@search.paginator:paginator`
+  ariaLabelBottomPaginator = $localize`:@@search.bottomPaginator:bottom paginator`
 
   constructor(
     route: ActivatedRoute,
