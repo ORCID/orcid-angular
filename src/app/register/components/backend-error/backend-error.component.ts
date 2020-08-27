@@ -56,8 +56,21 @@ export class BackendErrorComponent implements OnInit {
     }
   }
 
-  navigateToSignin(email) {
+  navigateToClaim(email) {
     this.window.location.href = `/resend-claim?email=${email}`
+  }
+
+  navigateToSignin(email) {
+    this._platformInfo
+      .get()
+      .pipe(take(1))
+      .subscribe((platform) => {
+        return this._router.navigate(['/signin'], {
+          // keeps all parameters to support Oauth request
+          // and set show login to true
+          queryParams: { ...platform.queryParameters, email, show_login: true },
+        })
+      })
   }
 
   reactivateEmail(email) {
@@ -72,7 +85,7 @@ export class BackendErrorComponent implements OnInit {
           .subscribe()
       } else {
         this._snackbar.showSuccessMessage({
-          title: '$localize`:@@register.reactivating:Reactivating your account',
+          title: $localize`:@@register.reactivating:Reactivating your account`,
           // tslint:disable-next-line: max-line-length
           message: $localize`:@@ngOrcid.signin.verify.reactivationSent:Thank you for reactivating your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
           action: $localize`:@@shared.knowledgeBase:contact support.`,

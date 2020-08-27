@@ -37,7 +37,10 @@
           )
         "
       >
-        <app-backend-error [errorCode]="error"></app-backend-error>
+        <app-backend-error
+          [errorCode]="error"
+          [value]="additionalEmailControl.value.value"
+        ></app-backend-error>
       </mat-error>
     </mat-form-field>
 
