@@ -1,4 +1,4 @@
-export { Person } from './person.endpoint'
+export * from './record.endpoint'
 export {
   Affiliations,
   Affiliation,
