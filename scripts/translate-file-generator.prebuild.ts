@@ -11,8 +11,8 @@ import {
 import { Observable } from 'rxjs/internal/Observable'
 import { from } from 'rxjs/internal/observable/from'
 import { of } from 'rxjs/internal/observable/of'
-import { NgOrcidPropertyFolder } from './translate-file-clone.prebuild'
 import { Properties } from '../src/app/types/locale.scripts'
+import { NgOrcidPropertyFolder } from './properties-folder-manager'
 
 const reportFile: {
   language: any

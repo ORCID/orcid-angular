@@ -21,7 +21,7 @@ export class TogglzDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isEnabled().subscribe(enable => {
+    this.isEnabled().subscribe((enable) => {
       if (enable) {
         this.viewContainer.createEmbeddedView(this.templateRef)
       } else {
@@ -32,7 +32,7 @@ export class TogglzDirective implements OnInit {
 
   isEnabled(): Observable<boolean> {
     return this._togglz.getTogglz().pipe(
-      map(features => {
+      map((features) => {
         return features.messages[this.appTogglz] === 'true'
       })
     )

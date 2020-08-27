@@ -30,7 +30,8 @@ import { BaseForm } from '../BaseForm'
     },
   ],
 })
-export class FormAntiRobotsComponent extends BaseForm
+export class FormAntiRobotsComponent
+  extends BaseForm
   implements OnInit, DoCheck {
   captchaFailState = false
   captchaLoadedWithWidgetId: number

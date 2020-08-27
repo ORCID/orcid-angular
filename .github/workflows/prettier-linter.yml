@@ -1,0 +1,43 @@
+on: [pull_request]
+name: Code formatting and testing languages✍️
+jobs:
+  code-formatting-testing-languages:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and npm run format
+        run: |
+          npm i
+          npm run format
+      - name: Commit formatting changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          message: '🤖 GITHUB ACTIONS: formatting 🤖'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build testing languages
+        run: |
+          npm run build:i18n:generate-testing
+      - name: Commit languages files changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          message: '🤖 GITHUB ACTIONS: testing languages 🤖'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
