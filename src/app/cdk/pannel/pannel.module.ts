@@ -9,5 +9,6 @@ import { MatButtonModule } from '@angular/material/button'
 @NgModule({
   declarations: [PanelComponent, PanelElementComponent, PanelPrivacyComponent],
   imports: [CommonModule, MatIconModule, MatButtonModule],
+  exports: [PanelComponent, PanelElementComponent, PanelPrivacyComponent],
 })
 export class PannelModule {}

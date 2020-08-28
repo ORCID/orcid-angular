@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin side-bar-id-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  :host {
+    width: 100%;
+  }
+  .container {
+    background-color: mat-color($background, card);
+    border-color: mat-color($accent, 400);
+  }
+}
+
+@include side-bar-id-theme($orcid-app-theme);

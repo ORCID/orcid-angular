@@ -40,7 +40,7 @@ $orcid-custom-typography: (
   .mat-button-font-spaced {
     // Code from https://github.com/angular/components/blob/8.2.x/src/material/button/_button-theme.scss#L161
     font: {
-      family: mat-font-family($config, button);
+      font-family: mat-font-family($config, button);
       size: mat-font-size($config, button);
       weight: mat-font-weight($config, button);
     }
@@ -54,5 +54,65 @@ $orcid-custom-typography: (
     // This rules are used for wrapped text only
     line-height: 18px !important;
     padding: 9px 16px !important;
+  }
+}
+// .
+// .
+// Orcid typography
+// .
+// .
+
+@mixin orcid-typography($config) {
+  .orc-font-display-large {
+    font-family: mat-font-family($config, button);
+    size: mat-font-size($config, display-4); // 94pxfont-style: normal;
+    letter-spacing: -1.5px;
+  }
+  .orc-font-display {
+    font-family: mat-font-family($config, button);
+    font-size: mat-font-size($config, display-3); // 60px;font-style: normal;
+    letter-spacing: -0.5px;
+  }
+  .orc-font-display-small {
+    font-family: mat-font-family($config, button);
+    font-size: mat-font-size($config, display-2); // 48px;font-style: normal;
+    letter-spacing: normal;
+  }
+  .orc-font-heading-large {
+    font-family: mat-font-family($config, button);
+    font-size: 40px;
+    font-style: normal;
+    letter-spacing: 0.5px;
+  }
+  .orc-font-heading {
+    font-family: mat-font-family($config, button);
+    font-size: mat-font-size($config, display-1); // 32px;font-style: normal;
+    letter-spacing: 0.5px;
+  }
+  .orc-font-heading-small {
+    font-family: mat-font-family($config, button);
+    font-size: mat-font-size($config, headline); // 24px;font-style: normal;
+    letter-spacing: 0.5px;
+  }
+  .orc-font-body-large {
+    font-family: mat-font-family($config, button);
+    font-size: 18px;
+    font-style: normal;
+    letter-spacing: normal;
+  }
+  .orc-font-body {
+    font-family: mat-font-family($config, button);
+    font-size: mat-font-family($config, body-2); // 16px;font-style: normal;
+    letter-spacing: normal;
+  }
+  .orc-font-body-small {
+    font-family: mat-font-family($config, button);
+    font-size: mat-font-family($config, body-1); // 14pxfont-style: normal;
+    letter-spacing: 0.25px;
+  }
+  .orc-font-smallprint {
+    font-family: mat-font-family($config, button);
+    font-size: mat-font-family($config, caption); // 12pxfont-style: normal;
+    letter-spacing: 0.5px;
   }
 }

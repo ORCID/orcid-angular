@@ -136,4 +136,3 @@ export type DeprecatedScopesStrings =
   | '/affiliations/update'
   | '/funding/update'
   | '/orcid-bio/external-identifiers/update'
-

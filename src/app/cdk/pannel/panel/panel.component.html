@@ -1,7 +1,7 @@
 <div class="header">
-  <div>{{ panelTittle }}</div>
+  <ng-content select="[header]"> </ng-content>
   <button mat-icon-button><mat-icon>edit</mat-icon></button>
   <button mat-icon-button><mat-icon>expand_more</mat-icon></button>
   <button mat-icon-button><mat-icon>expand_less</mat-icon></button>
 </div>
-<ng-content> </ng-content>
+<ng-content select="[body]"> </ng-content>

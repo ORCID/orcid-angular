@@ -16,7 +16,7 @@ $orcid-green: (
   100: #e3f1bf,
   200: #cfe795,
   300: #bade67,
-  400: #a9d63e,
+  400: #a6ce39 /*#brand-primary*/,
   500: #98ce00,
   600: #87be00,
   700: #70aa00,
@@ -93,9 +93,12 @@ $orcid-red: (
 );
 // .
 // .
-// EXTRA COLORS
+// EXTRA BACKGROUND AND FOREGROUND COLORS
 // .
 // .
+
+$brand-primary-lightest: #f5f9e8;
+
 // highlighted background for the footer and organization members section on the home page
 $light-grey: #f5f5f5;
 // Header main menu active,
