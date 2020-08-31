@@ -34,7 +34,7 @@ export class LinkAccountComponent implements OnInit {
     _platformInfo.get().subscribe((platform) => {
       if (platform.social) {
         this.loadSocialSignInData()
-      } else {
+      } else if (platform.institutional) {
         this.loadShibbolethSignInData()
       }
     })
