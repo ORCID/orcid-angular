@@ -15,6 +15,7 @@
         <ng-container i18n="@@register.optional">(Optional)</ng-container>
       </mat-label>
       <input
+        #emailInput
         formControlName="{{ additionalEmailControl.key }}"
         matInput
         [errorStateMatcher]="backendErrorsMatcher"
