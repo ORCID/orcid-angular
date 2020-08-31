@@ -30,7 +30,7 @@ jobs:
         with:
           message: '🤖 GITHUB ACTIONS: formatting 🤖'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ORCID_MACHINE }}
 
       - name: build testing languages
         run: |
@@ -40,4 +40,4 @@ jobs:
         with:
           message: '🤖 GITHUB ACTIONS: testing languages 🤖'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ORCID_MACHINE }}
