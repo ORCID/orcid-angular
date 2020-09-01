@@ -10,11 +10,10 @@
             mode="indeterminate"
           ></mat-progress-bar>
           <mat-card-header>
-            <mat-card-title
-              role="heading"
-              aria-level="1"
-            >
-              <ng-container i18n="@@twoFactor.title">ORCID Two-factor authentication</ng-container>
+            <mat-card-title role="heading" aria-level="1">
+              <ng-container i18n="@@twoFactor.title"
+                >ORCID Two-factor authentication</ng-container
+              >
               <button
                 mat-icon-button
                 [attr.aria-label]="labelInfo"
@@ -32,13 +31,15 @@
               >
                 <mat-card class="mat-elevation-z3 orcid-popover">
                   <ng-container i18n="@@twoFactor.enabled"
-                  >Two-factor authentication is currently enabled for your ORCID account,
-                    so an additional code is required even when signing in with another account.
-                  </ng-container
+                    >Two-factor authentication is currently enabled for your
+                    ORCID account, so an additional code is required even when
+                    signing in with another account.
+                  </ng-container>
+                  <a
+                    href="https://support.orcid.org/hc/en-us/articles/360006971673"
+                    target="blank"
+                    i18n="@@twoFactor.learn"
                   >
-                  <a href="https://support.orcid.org/hc/en-us/articles/360006971673"
-                     target="blank"
-                     i18n="@@twoFactor.learn">
                     Learn more
                   </a>
                 </mat-card>

@@ -19,9 +19,8 @@ export class TwoFactorComponent implements OnInit {
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _oauthService: OauthService,
-  ) {
-  }
+    private _oauthService: OauthService
+  ) {}
 
   ngOnInit(): void {
     this.twoFactorForm = new FormGroup({
@@ -58,11 +57,11 @@ export class TwoFactorComponent implements OnInit {
       verificationCode: this.twoFactorForm.get('verificationCode').value,
       recoveryCode: this.twoFactorForm.get('recoveryCode').value,
       redirectUrl: undefined,
-      errors: undefined
-    };
+      errors: undefined,
+    }
 
     this._oauthService.submitCode(twoFactor).subscribe(
-      res => {
+      (res) => {
         this.loading = false
         if (res.errors && res.errors.length > 0) {
           if (res.errors[0].includes('verification')) {
@@ -73,7 +72,8 @@ export class TwoFactorComponent implements OnInit {
         } else if (res.redirectUrl) {
           this.navigateTo(res.redirectUrl)
         }
-      }, error => console.log(error)
+      },
+      (error) => console.log(error)
     )
   }
 

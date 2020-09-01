@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TwoFactorComponent } from './pages/two-factor/two-factor.component';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { TwoFactorComponent } from './pages/two-factor/two-factor.component'
 import { TwoFactorRoutingModule } from './two-factor-routing.module'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatCardModule } from '@angular/material/card'
@@ -11,8 +11,6 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MatFormFieldModule } from '@angular/material/form-field'
-
-
 
 @NgModule({
   declarations: [TwoFactorComponent],
@@ -29,4 +27,4 @@ import { MatFormFieldModule } from '@angular/material/form-field'
     MatFormFieldModule,
   ],
 })
-export class TwoFactorModule { }
+export class TwoFactorModule {}

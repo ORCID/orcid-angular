@@ -167,7 +167,7 @@ export class OauthService {
         retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        ),
+        )
       )
   }
 
