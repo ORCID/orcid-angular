@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
+import { TwoFactor } from '../../types/two-factor.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -152,6 +153,21 @@ export class OauthService {
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
+      )
+  }
+
+  submitCode(twoFactor: TwoFactor) {
+    return this._http
+      .post<TwoFactor>(
+        environment.BASE_URL + 'shibboleth/2FA/submitCode.json',
+        twoFactor,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        ),
       )
   }
 
