@@ -75,9 +75,10 @@
                       [ngTemplateOutlet]="
                         (getIconName(scope) === 'updateIcon' &&
                           updateIconTemplate) ||
+                        (getIconName(scope) === 'viewIcon' &&
+                          viewIconTemplate) ||
                         (getIconName(scope) === 'orcidIcon' &&
-                          orcidIconTemplate) ||
-                        (getIconName(scope) === 'viewIcon' && viewIconTemplate)
+                          orcidIconTemplate)
                       "
                     ></ng-container>
                     <div>{{ getDescription(scope) }}</div>
