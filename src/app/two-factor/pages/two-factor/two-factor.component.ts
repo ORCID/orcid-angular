@@ -72,8 +72,7 @@ export class TwoFactorComponent implements OnInit {
         } else if (res.redirectUrl) {
           this.navigateTo(res.redirectUrl)
         }
-      },
-      (error) => console.log(error)
+      }
     )
   }
 
