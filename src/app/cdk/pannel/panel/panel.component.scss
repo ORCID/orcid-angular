@@ -1,0 +1,24 @@
+:host {
+  border: solid 1px;
+  border-radius: 8px;
+}
+.header,
+.body {
+  padding: 16px;
+  box-sizing: border-box;
+}
+.body {
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+}
