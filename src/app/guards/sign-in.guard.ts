@@ -16,6 +16,8 @@ import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
 import { HttpClient } from '@angular/common/http'
 import { WINDOW } from '../cdk/window'
+import { ERROR_REPORT } from '../errors'
+import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +27,8 @@ export class SignInGuard implements CanActivateChild {
     private _user: UserService,
     private _router: Router,
     private _platform: PlatformInfoService,
-    @Inject(WINDOW) private window: Window
+    private _errorHandler: ErrorHandlerService,
+  @Inject(WINDOW) private window: Window
   ) {}
 
   canActivateChild(
@@ -66,7 +69,7 @@ export class SignInGuard implements CanActivateChild {
           return this._router.createUrlTree(['/oauth/authorize'], {
             queryParams: queryParams,
           })
-        } else if (oauthSessionHasError) {
+        } else if (oauthSessionHasError(session)) {
           this.handleOpenIdErrorCodes(session)
         }
         return true
@@ -75,8 +78,9 @@ export class SignInGuard implements CanActivateChild {
   }
 
   private handleOpenIdErrorCodes(session: RequestInfoForm) {
-    if (session.error) {
-      this.window.location.href = `${session.redirectUrl}/?code=${session.error}`
-    }
+      this._errorHandler.handleError(
+        new Error(`${session.error}.${session.errorDescription}`),
+        ERROR_REPORT.OAUTH_PARAMETERS
+      ).subscribe()
   }
 }

@@ -20,7 +20,7 @@ export interface RequestInfoForm {
   nonce: string
   clientHavePersistentTokens: boolean
   scopesAsString: string
-  error: 'login_required' | 'interaction_required'
+  error: string
   errorDescription: string
   forceLogin: boolean
 }
