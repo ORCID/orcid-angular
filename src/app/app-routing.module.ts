@@ -99,6 +99,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.myOrcid,
+    canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>
       import('./record/record.module').then((m) => m.RecordModule),
   },

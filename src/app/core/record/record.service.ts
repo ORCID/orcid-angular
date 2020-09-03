@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, combineLatest, ReplaySubject, of } from 'rxjs'
 import {
   Person,
   Emails,
@@ -14,14 +14,18 @@ import {
 } from 'src/app/types'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
-import { retry, catchError, tap } from 'rxjs/operators'
+import { retry, catchError, tap, map } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { Address } from 'cluster'
+import { UserRecord } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordService {
+  recordInitialized = false
+  recordSubject$ = new ReplaySubject<UserRecord>(1)
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
@@ -31,6 +35,61 @@ export class RecordService {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   })
+
+  getRecord(id): Observable<UserRecord> {
+    if (!this.recordInitialized) {
+      this.recordInitialized = true
+
+      combineLatest([
+        this.getPerson(id),
+        this.getEmails(),
+        this.getOtherNames(),
+        this.getAddresses(),
+        this.getKeywords(),
+        this.getWebsites(),
+        this.getExternalIdentifier(),
+        this.getNames(),
+        this.getBiography(),
+        this.getPreferences(),
+      ])
+        .pipe(
+          tap(
+            ([
+              person,
+              emails,
+              otherNames,
+              countries,
+              keyword,
+              website,
+              externalIdentifier,
+              names,
+              biography,
+              preferences,
+            ]) => {
+              this.recordSubject$.next({
+                person: person as Person,
+                emails: emails as Emails,
+                otherNames: otherNames as OtherNames,
+                countries: countries as Countries,
+                keyword: keyword as Keywords,
+                website: website as Website,
+                externalIdentifier: externalIdentifier as ExternalIdentifier,
+                names: names as Names,
+                biography: biography as Biography,
+                preferences: preferences as Preferences,
+              })
+            }
+          )
+        )
+        .subscribe()
+    }
+
+    return this.recordSubject$.pipe(
+      tap((session) =>
+        environment.sessionDebugger ? console.log(session) : null
+      )
+    )
+  }
 
   getPerson(id): Observable<Person> {
     return this._http

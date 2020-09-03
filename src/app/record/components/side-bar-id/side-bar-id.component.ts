@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 
 @Component({
   selector: 'app-side-bar-id',
@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core'
   ],
 })
 export class SideBarIdComponent implements OnInit {
+  @Input() id: string
+  privateView = true
   constructor() {}
 
   ngOnInit(): void {}

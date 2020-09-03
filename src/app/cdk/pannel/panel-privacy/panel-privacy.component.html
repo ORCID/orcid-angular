@@ -1,1 +1,14 @@
-<p>panel-privacy works!</p>
+<div class="container">
+  <div
+    class="dot everyone"
+    [ngClass]="{ active: visibility === 'PUBLIC' }"
+  ></div>
+  <div
+    class="dot private"
+    [ngClass]="{ active: visibility === 'LIMITED' }"
+  ></div>
+  <div
+    class="dot trusted"
+    [ngClass]="{ active: visibility === 'PRIVATE' }"
+  ></div>
+</div>

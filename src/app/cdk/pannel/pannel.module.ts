@@ -5,10 +5,11 @@ import { PanelElementComponent } from './panel-element/panel-element.component'
 import { PanelPrivacyComponent } from './panel-privacy/panel-privacy.component'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   declarations: [PanelComponent, PanelElementComponent, PanelPrivacyComponent],
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule],
   exports: [PanelComponent, PanelElementComponent, PanelPrivacyComponent],
 })
 export class PannelModule {}

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
+import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
 @Component({
   selector: 'app-panel-element',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./panel-element.component.scss'],
 })
 export class PanelElementComponent implements OnInit {
+  @Input() visibility: VisibilityStrings
+  @Input() bold: Boolean
   constructor() {}
 
   ngOnInit(): void {}

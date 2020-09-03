@@ -1,11 +1,21 @@
 <div class="header box orc-font-body">
   <ng-content select="[header]"> </ng-content>
   <div class="buttons-container">
-    <button mat-icon-button><mat-icon>edit</mat-icon></button>
-    <button mat-icon-button *ngIf="!openState && editable">
+    <button mat-icon-button *ngIf="editable" matTooltip="Edit">
+      <mat-icon class="material-icons-outlined">edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      *ngIf="!openState && !editable"
+      matTooltip="Show details"
+    >
       <mat-icon>expand_more</mat-icon>
     </button>
-    <button mat-icon-button *ngIf="openState && editable">
+    <button
+      mat-icon-button
+      *ngIf="openState && !editable"
+      matTooltip="Hide details"
+    >
       <mat-icon>expand_less</mat-icon>
     </button>
   </div>

@@ -1,34 +1,73 @@
+<app-side-bar-id
+  [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
+></app-side-bar-id>
 
-<app-side-bar-id></app-side-bar-id>
+<app-panel>
+  <h2 header class="orc-font-body">
+    Also known as
+  </h2>
+  <div body>
+    <app-panel-element
+      *ngFor="let otherNames of userRecord.otherNames.otherNames"
+      [visibility]="otherNames.visibility.visibility"
+      >{{ otherNames.content }}</app-panel-element
+    >
+  </div>
+</app-panel>
+
 <app-panel>
   <h2 header class="orc-font-body">
     Emails
   </h2>
-  <div body>
-    <app-panel-element>Email 1</app-panel-element>
-    <app-panel-element>Email 2</app-panel-element>
-    <app-panel-element>Email 3</app-panel-element>
+  <div body *ngIf="userRecord">
+    <app-panel-element
+      *ngFor="let email of userRecord.emails.emails"
+      [visibility]="email.visibility"
+      [bold]="email.primary"
+      >{{ email.value }}</app-panel-element
+    >
   </div>
 </app-panel>
+
 <app-panel>
   <h2 header class="orc-font-body">
     Website and social links
   </h2>
   <div body>
-    <app-panel-element>Email 1</app-panel-element>
-    <app-panel-element>Email 2</app-panel-element>
-    <app-panel-element>Email 3</app-panel-element>
+    <app-panel-element
+      *ngFor="let website of userRecord.website.websites"
+      [visibility]="website.visibility.visibility"
+      ><a
+        [href]="website.url.value"
+        target="_blank"
+        rel="me nofollow noopener noreferrer"
+        >{{ website.urlName }}</a
+      ></app-panel-element
+    >
   </div>
 </app-panel>
 
-<app-panel>
+<app-panel *ngIf="userRecord.externalIdentifier
+.externalIdentifiers">
   <h2 header class="orc-font-body">
-    Others IDs
+    Other IDs
   </h2>
   <div body>
-    <app-panel-element>Email 1</app-panel-element>
-    <app-panel-element>Email 2</app-panel-element>
-    <app-panel-element>Email 3</app-panel-element>
+    <app-panel-element
+      *ngFor="
+        let externalIdentifier of userRecord.externalIdentifier
+          .externalIdentifiers
+      "
+      [visibility]="externalIdentifier.visibility.visibility"
+      ><a
+        [href]="externalIdentifier.url"
+        target="_blank"
+        rel="me nofollow noopener noreferrer"
+        >{{
+          externalIdentifier.commonName + ': ' + externalIdentifier.reference
+        }}</a
+      ></app-panel-element
+    >
   </div>
 </app-panel>
 
@@ -37,9 +76,11 @@
     Keywords
   </h2>
   <div body>
-    <app-panel-element>Email 1</app-panel-element>
-    <app-panel-element>Email 2</app-panel-element>
-    <app-panel-element>Email 3</app-panel-element>
+    <app-panel-element
+      *ngFor="let keyword of userRecord.keyword.keywords"
+      [visibility]="keyword.visibility.visibility"
+      >{{ keyword.content }}</app-panel-element
+    >
   </div>
 </app-panel>
 
@@ -47,9 +88,5 @@
   <h2 header class="orc-font-body">
     Countries
   </h2>
-  <div body>
-    <app-panel-element>Email 1</app-panel-element>
-    <app-panel-element>Email 2</app-panel-element>
-    <app-panel-element>Email 3</app-panel-element>
-  </div>
+  <div body></div>
 </app-panel>

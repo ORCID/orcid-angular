@@ -1,2 +1,4 @@
-<ng-content></ng-content>
-<p>panel-element works!</p>
+<div class="row-with-privacy">
+  <div class="line" [ngClass]="{'bold': bold}" ><ng-content></ng-content></div>
+  <app-panel-privacy [visibility]="visibility"></app-panel-privacy>
+</div>
