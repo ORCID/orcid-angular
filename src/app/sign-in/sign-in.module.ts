@@ -43,6 +43,6 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     A11yLinkModule,
   ],
   entryComponents: [],
-  exports: [FormSignInComponent],
+  exports: [FormSignInComponent, TwoFactorComponent],
 })
 export class SignInModule {}

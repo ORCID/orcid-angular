@@ -105,3 +105,10 @@ minimum_perc = 0
 source_file = src/locale/properties/shared/shared.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-two-factor-two-factor-en-properties--master]
+file_filter = src/locale/properties/two-factor/two-factor.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/two-factor/two-factor.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
