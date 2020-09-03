@@ -98,6 +98,12 @@ const routes: Routes = [
       import('./search/search.module').then((m) => m.SearchModule),
   },
   {
+    path: ApplicationRoutes.twoFactor,
+    canActivateChild: [LinkAccountGuard],
+    loadChildren: () =>
+      import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
+  },
+  {
     path: '**',
     redirectTo: '/',
   },
