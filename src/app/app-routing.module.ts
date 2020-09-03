@@ -99,6 +99,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.twoFactor,
+    canActivateChild: [LinkAccountGuard],
     loadChildren: () =>
       import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
   },
