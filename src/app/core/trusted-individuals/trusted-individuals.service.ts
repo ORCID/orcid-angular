@@ -61,7 +61,7 @@ export class TrustedIndividualsService {
           // since the response is not a 200 from the server
           // The status is interpreted as a error code 0 since the 302 redirect is cancelled
           if (error.status === 0) {
-            this._userService.refreshUserSession()
+            this._userService.refreshUserSession(true)
             this.refreshTrustedIndividuals()
             return of(error)
           } else {
