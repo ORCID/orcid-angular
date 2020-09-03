@@ -10,7 +10,6 @@ import { Observable, of } from 'rxjs'
 import { map, switchMap, finalize } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
-import { OauthService } from '../core/oauth/oauth.service'
 import { OauthParameters } from '../types'
 import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
@@ -61,7 +60,7 @@ export class AuthorizeGuard implements CanActivateChild {
           session.responseType &&
           session.redirectUrl.includes(session.responseType)
         ) {
-          window.location.href = session.redirectUrl
+          this.window.location.href = session.redirectUrl
         } else if (oauthSessionHasError(session)) {
           this._router
             .navigate(['/signin'], { queryParams: queryParams })
