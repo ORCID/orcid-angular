@@ -60,20 +60,18 @@ export class TwoFactorComponent implements OnInit {
       errors: undefined,
     }
 
-    this._oauthService.submitCode(twoFactor).subscribe(
-      (res) => {
-        this.loading = false
-        if (res.errors && res.errors.length > 0) {
-          if (res.errors[0].includes('verification')) {
-            this.showBadVerificationCode = true
-          } else {
-            this.showBadRecoveryCode = true
-          }
-        } else if (res.redirectUrl) {
-          this.navigateTo(res.redirectUrl)
+    this._oauthService.submitCode(twoFactor).subscribe((res) => {
+      this.loading = false
+      if (res.errors && res.errors.length > 0) {
+        if (res.errors[0].includes('verification')) {
+          this.showBadVerificationCode = true
+        } else {
+          this.showBadRecoveryCode = true
         }
+      } else if (res.redirectUrl) {
+        this.navigateTo(res.redirectUrl)
       }
-    )
+    })
   }
 
   navigateTo(val) {
