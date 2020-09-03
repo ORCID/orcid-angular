@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core'
 })
 export class PanelComponent implements OnInit {
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
-  tooltipLabelHideDetails = $localize`:@@shared.showDetails:Hide details`
+  tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   openState = false
   editable = true
