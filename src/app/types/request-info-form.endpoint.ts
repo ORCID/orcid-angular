@@ -9,7 +9,7 @@ export interface RequestInfoForm {
   clientEmailRequestReason: string
   memberName: string
   redirectUrl: string
-  responseType: string
+  responseType: 'code' | 'token' | 'bearer'
   stateParam: string
   userId?: any
   userName?: any
@@ -20,7 +20,7 @@ export interface RequestInfoForm {
   nonce: string
   clientHavePersistentTokens: boolean
   scopesAsString: string
-  error: 'login_required' | 'interaction_required'
+  error: Errors
   errorDescription: string
   forceLogin: boolean
 }
@@ -31,3 +31,12 @@ export interface Scope {
   description: string
   longDescription: string
 }
+
+type Errors =
+  | 'login_required'
+  | 'interaction_required'
+  | 'invalid_scope'
+  | 'invalid_client'
+  | 'client_locked'
+  | 'oauth_error'
+  | 'invalid_request'

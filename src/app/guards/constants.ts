@@ -1,7 +1,7 @@
 import { RequestInfoForm } from '../types'
 
 export function oauthSessionHasError(value: RequestInfoForm) {
-  return value.errors.length || value.error
+  return value.error || value.errors.length
 }
 
 export function oauthSessionUserIsLoggedIn(value: RequestInfoForm) {
