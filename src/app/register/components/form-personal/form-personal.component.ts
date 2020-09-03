@@ -38,7 +38,8 @@ import { BaseForm } from '../BaseForm'
     },
   ],
 })
-export class FormPersonalComponent extends BaseForm
+export class FormPersonalComponent
+  extends BaseForm
   implements OnInit, AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`

@@ -3,9 +3,7 @@
 ></app-side-bar-id>
 
 <app-panel body *ngIf="userRecord">
-  <h2 header class="orc-font-body" i18n="@@record.alsoKnowAs">
-    Also known as
-  </h2>
+  <h2 header class="orc-font-body" i18n="@@record.alsoKnowAs">Also known as</h2>
   <div body>
     <app-panel-element
       *ngFor="let otherNames of userRecord.otherNames.otherNames"
@@ -16,9 +14,7 @@
 </app-panel>
 
 <app-panel *ngIf="userRecord">
-  <h2 header class="orc-font-body" i18n="@@record.emails">
-    Emails
-  </h2>
+  <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
   <div body>
     <app-panel-element
       *ngFor="let email of userRecord.emails.emails"
@@ -52,9 +48,7 @@
     userRecord && userRecord.externalIdentifier.externalIdentifiers.length !== 0
   "
 >
-  <h2 header class="orc-font-body" i18n="@@record.otherIds">
-    Other IDs
-  </h2>
+  <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
   <div body>
     <app-panel-element
       *ngFor="
@@ -75,9 +69,7 @@
 </app-panel>
 
 <app-panel *ngIf="userRecord">
-  <h2 header class="orc-font-body" i18n="@@record.keywords">
-    Keywords
-  </h2>
+  <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
   <div body>
     <app-panel-element
       *ngFor="let keyword of userRecord.keyword.keywords"
@@ -88,8 +80,6 @@
 </app-panel>
 
 <app-panel *ngIf="userRecord">
-  <h2 header class="orc-font-body" i18n="@@record.countries">
-    Countries
-  </h2>
+  <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
   <div body></div>
 </app-panel>
