@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, Inject } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivateChild,
@@ -16,6 +16,7 @@ import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 import { ERROR_REPORT } from '../errors'
+import { WINDOW } from '../cdk/window'
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,8 @@ export class AuthorizeGuard implements CanActivateChild {
     private _user: UserService,
     private _router: Router,
     private _platform: PlatformInfoService,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    @Inject(WINDOW) private window: Window
   ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -62,6 +64,9 @@ export class AuthorizeGuard implements CanActivateChild {
             ERROR_REPORT.OAUTH_PARAMETERS
           )
           return this.redirectToLoginPage(queryParams)
+          // If the redirectUrl comes with a code from the start redirect the user immediately
+        } else if (session.redirectUrl.includes('?code=')) {
+          this.window.location.href = session.redirectUrl
         } else {
           return true
         }
