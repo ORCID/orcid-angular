@@ -32,12 +32,12 @@ export interface Scope {
   longDescription: string
 }
 
-enum Errors {
-  login_required = 'login_required',
-  interaction_required = 'interaction_required',
-  invalid_scope = 'invalid_scope',
-  invalid_client = 'invalid_client',
-  client_locked = 'client_locked',
-  oauth_error = 'oauth_error',
-  invalid_request = 'invalid_request',
-}
+type Errors =
+  'login_required' |
+  'interaction_required'|
+  'invalid_scope'|
+  'invalid_client'|
+  'client_locked'|
+  'oauth_error'|
+  'invalid_request'
+
