@@ -6,6 +6,9 @@ import { Component, OnInit, Input } from '@angular/core'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
+  tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
+  tooltipLabelHideDetails = $localize`:@@shared.showDetails:Hide details`
+  tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   openState = false
   editable = true
   constructor() {}
