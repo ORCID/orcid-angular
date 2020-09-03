@@ -39,5 +39,5 @@ enum Errors {
   invalid_client = 'invalid_client',
   client_locked = 'client_locked',
   oauth_error = 'oauth_error',
-  invalid_request = 'invalid_request'
+  invalid_request = 'invalid_request',
 }
