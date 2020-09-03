@@ -1,0 +1,21 @@
+.container {
+  font-weight: 500;
+  border: solid 1px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  margin-top: 28px;
+  padding-bottom: 32px;
+  border-radius: 8px;
+  img {
+    margin-top: -32px;
+    height: 64px;
+  }
+  .text-container {
+    margin-top: 8px;
+  }
+  .preview {
+    margin-top: 14px;
+  }
+}
