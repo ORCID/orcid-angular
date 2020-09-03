@@ -227,10 +227,14 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       )
       .subscribe((requestInfoForm) => {
         if (requestInfoForm.error) {
-          this._errorHanlder.handleError(
-            new Error(`${requestInfoForm.error}.${requestInfoForm.errorDescription}`),
-            ERROR_REPORT.OAUTH_PARAMETERS
-          ).subscribe()
+          this._errorHanlder
+            .handleError(
+              new Error(
+                `${requestInfoForm.error}.${requestInfoForm.errorDescription}`
+              ),
+              ERROR_REPORT.OAUTH_PARAMETERS
+            )
+            .subscribe()
           this._user.refreshUserSession(true)
         }
         this._gtag

@@ -28,7 +28,7 @@ export class SignInGuard implements CanActivateChild {
     private _router: Router,
     private _platform: PlatformInfoService,
     private _errorHandler: ErrorHandlerService,
-  @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window
   ) {}
 
   canActivateChild(
@@ -78,9 +78,11 @@ export class SignInGuard implements CanActivateChild {
   }
 
   private handleOpenIdErrorCodes(session: RequestInfoForm) {
-      this._errorHandler.handleError(
+    this._errorHandler
+      .handleError(
         new Error(`${session.error}.${session.errorDescription}`),
         ERROR_REPORT.OAUTH_PARAMETERS
-      ).subscribe()
+      )
+      .subscribe()
   }
 }
