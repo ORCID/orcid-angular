@@ -2,7 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   Input,
+  QueryList,
+  ViewChildren,
 } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { OrcidValidators } from 'src/app/validators'
@@ -18,11 +21,15 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   labelInfoAboutEmails = $localize`:@@register.ariaLabelInfoEmails:info about emails`
   labelDeleteEmail = $localize`:@@register.ariaLabelDeleteEmail:delete email`
   labelClose = $localize`:@@register.ariaLabelClose:close`
+  @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   @Input() additionalEmails: FormGroup
   additionalEmailsPopoverTrigger
   additionalEmailsCount = 1
 
-  constructor(private _ref: ChangeDetectorRef) {}
+  constructor(
+    private _ref: ChangeDetectorRef,
+    private _changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   backendErrorsMatcher = new ErrorStateMatcherForFormLevelErrors(
     this.getControlErrorAtFormLevel,
@@ -52,6 +59,9 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
         validators: [OrcidValidators.email],
       })
     )
+    this._changeDetectorRef.detectChanges()
+    const input = this.inputs.last.nativeElement as HTMLInputElement
+    input.focus()
   }
 
   parseInt(number: string) {
