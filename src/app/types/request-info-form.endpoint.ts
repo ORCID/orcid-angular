@@ -33,11 +33,10 @@ export interface Scope {
 }
 
 type Errors =
-  'login_required' |
-  'interaction_required'|
-  'invalid_scope'|
-  'invalid_client'|
-  'client_locked'|
-  'oauth_error'|
-  'invalid_request'
-
+  | 'login_required'
+  | 'interaction_required'
+  | 'invalid_scope'
+  | 'invalid_client'
+  | 'client_locked'
+  | 'oauth_error'
+  | 'invalid_request'
