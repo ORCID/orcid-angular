@@ -170,7 +170,7 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     const scope = ScopeObject.value
     if (scope === 'openid') {
       // tslint:disable-next-line: max-line-length
-      return $localize`:@@authorize.openidLongDescription:Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.`
+      return $localize`:@@authorize.authenticateLongDescription:Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.`
     }
     if (scope === '/authenticate') {
       // tslint:disable-next-line: max-line-length
