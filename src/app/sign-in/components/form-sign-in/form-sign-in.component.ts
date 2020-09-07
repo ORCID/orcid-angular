@@ -164,6 +164,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   authenticate($event) {
+    this.resetTwoFactor()
     if ($event.recoveryCode) {
       this.authorizationForm.patchValue({
         recoveryCode: $event.recoveryCode,
@@ -255,6 +256,15 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   updateUsername(email) {
     this.authorizationForm.patchValue({
       username: email,
+    })
+  }
+
+  resetTwoFactor() {
+    this.authorizationForm.patchValue({
+      verificationCode: '',
+    })
+    this.authorizationForm.patchValue({
+      recoveryCode: '',
     })
   }
 
