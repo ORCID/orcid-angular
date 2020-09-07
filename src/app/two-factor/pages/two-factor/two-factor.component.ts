@@ -30,6 +30,7 @@ export class TwoFactorComponent implements OnInit {
   }
 
   authenticate($event) {
+    this.resetTwoFactor()
     if ($event.recoveryCode) {
       this.twoFactorForm.patchValue({
         recoveryCode: $event.recoveryCode,
@@ -71,6 +72,15 @@ export class TwoFactorComponent implements OnInit {
       } else if (res.redirectUrl) {
         this.navigateTo(res.redirectUrl)
       }
+    })
+  }
+
+  resetTwoFactor() {
+    this.twoFactorForm.patchValue({
+      verificationCode: ''
+    })
+    this.twoFactorForm.patchValue({
+      recoveryCode: ''
     })
   }
 
