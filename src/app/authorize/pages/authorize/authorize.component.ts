@@ -143,7 +143,7 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   getDescription(ScopeObject: Scope): string {
     const scope = ScopeObject.value
     if (scope === 'openid') {
-      return $localize`:@@authorize.openid:Get your ORCID iD`
+      return $localize`:@@authorize.authenticate:Get your ORCID iD`
     }
 
     if (scope === '/authenticate') {
