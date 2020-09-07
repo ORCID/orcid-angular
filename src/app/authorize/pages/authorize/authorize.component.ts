@@ -127,7 +127,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   }
 
   getIconName(ScopeObject: Scope): string {
-    console.log(ScopeObject.value)
     const scope = ScopeObject.value
     if (scope === 'openid' || scope === '/authenticate') {
       return 'orcidIcon'
