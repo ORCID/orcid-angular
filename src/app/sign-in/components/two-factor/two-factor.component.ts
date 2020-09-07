@@ -85,6 +85,7 @@ export class TwoFactorComponent implements AfterViewInit {
   }
 
   showRecoveryCode() {
+    this.hideErrorMessages()
     this.recoveryCode = true
     setTimeout(() => {
       this.inputRecoveryCode.nativeElement.focus()
@@ -92,6 +93,7 @@ export class TwoFactorComponent implements AfterViewInit {
   }
 
   showAuthenticationCode() {
+    this.hideErrorMessages()
     this.recoveryCode = false
     setTimeout(() => {
       this.inputVerificationCode.nativeElement.focus()
