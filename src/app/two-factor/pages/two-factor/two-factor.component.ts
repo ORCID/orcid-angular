@@ -77,10 +77,10 @@ export class TwoFactorComponent implements OnInit {
 
   resetTwoFactor() {
     this.twoFactorForm.patchValue({
-      verificationCode: ''
+      verificationCode: '',
     })
     this.twoFactorForm.patchValue({
-      recoveryCode: ''
+      recoveryCode: '',
     })
   }
 

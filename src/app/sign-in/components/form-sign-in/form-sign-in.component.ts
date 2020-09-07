@@ -261,10 +261,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
   resetTwoFactor() {
     this.authorizationForm.patchValue({
-      verificationCode: ''
+      verificationCode: '',
     })
     this.authorizationForm.patchValue({
-      recoveryCode: ''
+      recoveryCode: '',
     })
   }
 
