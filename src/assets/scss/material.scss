@@ -29,6 +29,7 @@
 // .
 // More info about this on https://github.com/angular/components/blob/8.1.4/guides/customizing-component-styles.md
 // The following mixings and styles overwrite or extend material styles
+@include orcid-typography($orcid-material-typography);
 @include mat-base-typography-overwrites($orcid-material-typography);
 @include angular-material-form-field-typography($orcid-material-typography);
 @import './material.orcid.overwrites.scss/chips.scss';

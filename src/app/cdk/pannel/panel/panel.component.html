@@ -1,0 +1,25 @@
+<div class="header box orc-font-body">
+  <ng-content select="[header]"> </ng-content>
+  <div class="buttons-container">
+    <button mat-icon-button *ngIf="editable" [matTooltip]="tooltipLabelEdit">
+      <mat-icon class="material-icons-outlined">edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      *ngIf="!openState && !editable"
+      [matTooltip]="tooltipLabelShowDetails"
+    >
+      <mat-icon>expand_more</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      *ngIf="openState && !editable"
+      [matTooltip]="tooltipLabelHideDetails"
+    >
+      <mat-icon>expand_less</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="body">
+  <ng-content select="[body]"> </ng-content>
+</div>

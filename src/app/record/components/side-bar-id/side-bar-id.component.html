@@ -1,0 +1,14 @@
+<div class="container">
+  <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+  <div class="text-container">
+    <div class="orc-font-body-large" dir="ltr">https://orcid.org/</div>
+    <strong class="orc-font-heading-small">{{ id }}</strong>
+  </div>
+  <a
+    [href]="id"
+    class="preview orc-font-smallprint"
+    *ngIf="privateView"
+    i18n="@@record.previewPublicRecord"
+    >Preview public record</a
+  >
+</div>

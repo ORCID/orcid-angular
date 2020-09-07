@@ -89,7 +89,7 @@ export interface Email {
 }
 
 export interface MonthDayYearDate {
-  errors: [any] // TODO define object
+  errors: any[] // TODO define object
   month: string
   day: string
   year: string
@@ -108,7 +108,7 @@ export interface Visibility {
   errors?: any[] // TODO is this always empty?
   required?: boolean
   getRequiredMessage?: any
-  visibility: ScopesStrings
+  visibility: VisibilityStrings
 }
 export type ScopesStrings =
   | 'openid'

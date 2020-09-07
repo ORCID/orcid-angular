@@ -21,6 +21,8 @@ export const HAS_NUMBER = /(?=.*[0-9]).*/
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 
 export const ApplicationRoutes = {
+  myOrcid: 'qa/my-orcid',
+  twoFactor: '2fa-signin',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
   institutional: 'institutional-signin',

@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin panel-privacy-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .container {
+    border-color: map-get($background, 'ui-background-lightest');
+    background-color: map-get($background, 'ui-background-lightest');
+
+    .dot {
+      background-color: map-get($background, 'ui-background');
+    }
+
+    .dot.everyone.active {
+      background-color: map-get($foreground, 'visibility-everyone');
+    }
+    .dot.private.active {
+      background-color: map-get($foreground, 'visibility-private');
+    }
+    .dot.trusted.active {
+      background-color: map-get($foreground, 'visibility-trusted');
+    }
+  }
+}
+
+@include panel-privacy-theme($orcid-app-theme);

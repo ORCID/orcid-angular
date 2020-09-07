@@ -24,6 +24,9 @@
       autofill-input: white,
       facebook: $facebook-blue,
       seamlessaccess: $seamlessaccess-blue,
+      brand-primary-lightest: $brand-primary-lightest,
+      ui-background-lightest: $ui-background-lightest,
+      ui-background: $ui-background,
       // COLORS OVERWRITES
       unselected-chip: white
     )
@@ -41,6 +44,9 @@
     (
       box-border: $soft-grey,
       state-notice-dark: $state-notice-dark,
+      visibility-everyone: $visibility-everyone,
+      visibility-private: $visibility-private,
+      visibility-trusted: $visibility-trusted,
     )
   );
   $result: map_merge(

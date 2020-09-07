@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import { switchMap, take, takeUntil } from 'rxjs/operators'
+import { switchMap, take, takeUntil, map } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -18,6 +18,8 @@ import {
   Delegator,
   TrustedIndividuals,
 } from 'src/app/types/trusted-individuals.endpoint'
+import { UserInfo } from 'os'
+import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-authorize',
@@ -46,7 +48,10 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   ) {
     this._user
       .getUserSession()
-      .pipe(takeUntil(this.$destroy))
+      .pipe(
+        takeUntil(this.$destroy),
+        map((userInfo) => this.removeScopesWithSameDescription(userInfo))
+      )
       .subscribe((userInfo) => {
         this.loadingUserInfo = false
         this.oauthRequest = userInfo.oauthSession
@@ -122,22 +127,23 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   }
 
   getIconName(ScopeObject: Scope): string {
+    console.log(ScopeObject.value)
     const scope = ScopeObject.value
+    if (scope === 'openid' || scope === '/authenticate') {
+      return 'orcidIcon'
+    }
     if (scope.indexOf('update') >= 0) {
       return 'updateIcon' // Eye material iconname
     }
-    if (scope.indexOf('read')) {
+    if (scope.indexOf('read') >= 0) {
       return 'viewIcon'
-    }
-    if (scope === 'openid' || scope === '/authenticate') {
-      return 'orcidIcon'
     }
   }
 
   getDescription(ScopeObject: Scope): string {
     const scope = ScopeObject.value
     if (scope === 'openid') {
-      return $localize`:@@authorize.openid:Get your ORCID iD`
+      return $localize`:@@authorize.authenticate:Get your ORCID iD`
     }
 
     if (scope === '/authenticate') {
@@ -164,7 +170,7 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     const scope = ScopeObject.value
     if (scope === 'openid') {
       // tslint:disable-next-line: max-line-length
-      return $localize`:@@authorize.openidLongDescription:Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.`
+      return $localize`:@@authorize.authenticateLongDescription:Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.`
     }
     if (scope === '/authenticate') {
       // tslint:disable-next-line: max-line-length
@@ -197,5 +203,28 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  private removeScopesWithSameDescription(userInfo: UserSession) {
+    let alreadyHasAuthenticateScope = false
+    userInfo.oauthSession.scopes = userInfo.oauthSession.scopes.filter(
+      (scope) => {
+        if (
+          (scope.value === '/authenticate' || scope.value === 'openid') &&
+          !alreadyHasAuthenticateScope
+        ) {
+          alreadyHasAuthenticateScope = true
+          return true
+        } else if (
+          (scope.value === '/authenticate' || scope.value === 'openid') &&
+          alreadyHasAuthenticateScope
+        ) {
+          return false
+        } else {
+          return true
+        }
+      }
+    )
+    return userInfo
   }
 }

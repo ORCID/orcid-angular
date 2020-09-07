@@ -38,6 +38,7 @@ import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 import { ERROR_REPORT } from 'src/app/errors'
+import { UserSession } from 'src/app/types/session.local'
 
 interface UserSessionUpdateParameters {
   checkTrigger:
@@ -107,16 +108,7 @@ export class UserService {
    *
    * @returns a hot observable with the user session information
    */
-  getUserSession(
-    queryParams?: Params
-  ): Observable<{
-    userInfo: UserInfo
-    nameForm: NameForm
-    oauthSession: RequestInfoForm
-    displayName: string
-    orcidUrl: string
-    loggedIn: boolean
-  }> {
+  getUserSession(queryParams?: Params): Observable<UserSession> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
     if (this.sessionInitialized) {

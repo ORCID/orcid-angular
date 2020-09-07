@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, Inject } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivateChild,
@@ -10,12 +10,12 @@ import { Observable, of } from 'rxjs'
 import { map, switchMap, finalize } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
-import { OauthService } from '../core/oauth/oauth.service'
 import { OauthParameters } from '../types'
 import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 import { ERROR_REPORT } from '../errors'
+import { WINDOW } from '../cdk/window'
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,8 @@ export class AuthorizeGuard implements CanActivateChild {
     private _user: UserService,
     private _router: Router,
     private _platform: PlatformInfoService,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    @Inject(WINDOW) private window: Window
   ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -54,14 +55,30 @@ export class AuthorizeGuard implements CanActivateChild {
     return this._user.getUserSession(queryParams).pipe(
       map((x) => x.oauthSession),
       map((session) => {
-        if (session.forceLogin || !oauthSessionUserIsLoggedIn(session)) {
-          return this.redirectToLoginPage(queryParams)
+        if (
+          session.redirectUrl &&
+          session.responseType &&
+          session.redirectUrl.includes(session.responseType)
+        ) {
+          this.window.location.href = session.redirectUrl
         } else if (oauthSessionHasError(session)) {
-          this._errorHandler.handleError(
-            new Error(`${session.error}.${session.errorDescription}`),
-            ERROR_REPORT.OAUTH_PARAMETERS
-          )
+          this._router
+            .navigate(['/signin'], { queryParams: queryParams })
+            .then((navigated: boolean) => {
+              if (navigated) {
+                this._errorHandler
+                  .handleError(
+                    new Error(`${session.error}.${session.errorDescription}`),
+                    ERROR_REPORT.OAUTH_PARAMETERS
+                  )
+                  .subscribe()
+              }
+            })
+        } else if (session.forceLogin || !oauthSessionUserIsLoggedIn(session)) {
           return this.redirectToLoginPage(queryParams)
+          // If the redirectUrl comes with a code from the start redirect the user immediately
+        } else if (session.redirectUrl.includes('?code=')) {
+          this.window.location.href = session.redirectUrl
         } else {
           return true
         }

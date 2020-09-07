@@ -17,7 +17,10 @@ import { BaseForm } from '../BaseForm'
 @Component({
   selector: 'app-form-password',
   templateUrl: './form-password.component.html',
-  styleUrls: ['./form-password.component.scss'],
+  styleUrls: [
+    './form-password.component.scss-theme.scss',
+    './form-password.component.scss',
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

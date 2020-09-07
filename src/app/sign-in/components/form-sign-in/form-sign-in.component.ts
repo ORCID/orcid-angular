@@ -25,6 +25,8 @@ import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { SignInGuard } from '../../../guards/sign-in.guard'
+import { ERROR_REPORT } from '../../../errors'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -59,12 +61,13 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   constructor(
     private _user: UserService,
     private _platformInfo: PlatformInfoService,
-    _route: ActivatedRoute,
+    private _route: ActivatedRoute,
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
     private _router: Router,
     private _gtag: GoogleAnalyticsService,
-    private _errorHanlder: ErrorHandlerService
+    private _errorHanlder: ErrorHandlerService,
+    private _signInGuard: SignInGuard
   ) {
     this.signInLocal.type = this.signInType
     _platformInfo.get().subscribe((platform) => {
@@ -161,6 +164,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   authenticate($event) {
+    this.resetTwoFactor()
     if ($event.recoveryCode) {
       this.authorizationForm.patchValue({
         recoveryCode: $event.recoveryCode,
@@ -223,6 +227,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         map((value) => value.oauthSession)
       )
       .subscribe((requestInfoForm) => {
+        if (requestInfoForm.error) {
+          this._errorHanlder
+            .handleError(
+              new Error(
+                `${requestInfoForm.error}.${requestInfoForm.errorDescription}`
+              ),
+              ERROR_REPORT.OAUTH_PARAMETERS
+            )
+            .subscribe()
+          this._user.refreshUserSession(true)
+        }
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
           .subscribe(
@@ -241,6 +256,15 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   updateUsername(email) {
     this.authorizationForm.patchValue({
       username: email,
+    })
+  }
+
+  resetTwoFactor() {
+    this.authorizationForm.patchValue({
+      verificationCode: '',
+    })
+    this.authorizationForm.patchValue({
+      recoveryCode: '',
     })
   }
 

@@ -27,13 +27,15 @@
                 <ng-container i18n="@@linking.signed">
                   You are signed into
                 </ng-container>
-                {{ entityDisplayName }}
+                <b>{{ entityDisplayName }}</b>
                 <ng-container i18n="@@linking.as"> as </ng-container>
-                {{
-                  signInData.email
-                    ? signInData.email
-                    : signInData.firstName + ' ' + signInData.lastName
-                }}
+                <b>
+                  {{
+                    signInData.email
+                      ? signInData.email
+                      : signInData.firstName + ' ' + signInData.lastName
+                  }}
+                </b>
               </p>
               <p class="mat-body-1">
                 <ng-container i18n="@@linking.finish">
