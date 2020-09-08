@@ -147,7 +147,7 @@ export class InstitutionalComponent implements OnInit {
     )
     if (!institutions.includes(btoa(this.entityID))) {
       if (institutions.length === 3) {
-        institutions = []
+        institutions.shift()
       }
       institutions.push(btoa(this.entityID))
     }
