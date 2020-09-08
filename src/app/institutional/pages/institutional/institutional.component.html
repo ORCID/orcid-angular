@@ -29,7 +29,27 @@
                     >Learn more about different ways to sign in to ORCID.
                   </a>
                 </p>
-                <div class="col l12 m8 s4 horizontal-center institutional-logo">
+                <div *ngIf="userSelectedInstitutions.length > 0">
+                  <p class="mat-body-1" i18n="@@institutional.suggested">
+                    Use a suggested selection
+                  </p>
+                  <ng-container *ngFor="let institution of userSelectedInstitutions">
+                    <div (click)="selectInstitution(institution)" class="col l12 m8 s4 institutional-logo">
+                      <img
+                        *ngIf="institution.Logos[0]"
+                        src="{{ institution.Logos[0].value }}"
+                        alt="institution logo"
+                      />
+                      <a class="mat-button-font institution-name">
+                          {{ getNameInstitution(institution).value }}
+                      </a>
+                    </div>
+                  </ng-container>
+                  <p class="mat-body-1" i18n="@@institutional.orEnterOrgName">
+                    Or enter your organization's name
+                  </p>
+                </div>
+                <div class="col l12 m8 s4 horizontal-center">
                   <img
                     *ngIf="logoInstitution"
                     src="{{ logoInstitution }}"

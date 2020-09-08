@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
-import { Institutional } from '../../../types/institutional.endpoint'
+import { DisplayName, Institutional } from '../../../types/institutional.endpoint'
 
 @Component({
   selector: 'app-institutional',
@@ -29,6 +29,8 @@ export class InstitutionalComponent implements OnInit {
   institutionsNames: string[]
   entityID: any
   logoInstitution: any
+  cookieExpirationTime = 730
+  userSelectedInstitutions = [] as Institutional[]
   labelInstitution = $localize`:@@institutional.ariaLabelInstitution:Institution`
   labelClear = $localize`:@@institutional.ariaLabelClear:Clear`
   @ViewChild(MatAutocompleteTrigger) autocomplete: MatAutocompleteTrigger
@@ -51,6 +53,7 @@ export class InstitutionalComponent implements OnInit {
       this.institutionsNames = this._disco.getInstitutionsNames(
         this.institutions
       )
+      this.retrieveUserSelectedIdPs()
       this.institutionalForm.controls['institution'].setValidators([
         Validators.required,
         InstitutionValidator.valueSelected(this.institutionsNames),
@@ -80,8 +83,10 @@ export class InstitutionalComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    if (this.institutionalForm.valid) {
+    if (this.institutionalForm.valid || this.entityID) {
       this.loading = true
+
+      this.addUserSelectedIdPs()
       const defaultReturn =
         'https:' +
         environment.BASE_URL +
@@ -113,9 +118,67 @@ export class InstitutionalComponent implements OnInit {
     this.institution = institutionSelected
     this.entityID = this.institution.entityID
 
-    if (this.institution.Logos) {
+    if (this.institution.Logos && !this.isInstitutionLogoDisplayed(this.institution.Logos[0].value)) {
       this.logoInstitution = this.institution.Logos[0].value
     }
+  }
+
+  getNameInstitution(institution: Institutional): DisplayName {
+    return institution.DisplayNames?.find(
+      (name) => name.lang === 'en')
+  }
+
+  addUserSelectedIdPs() {
+    let dataCookie = this._cookie.get('_saml_idp')
+    let institutions = []
+    if (dataCookie) {
+      dataCookie = dataCookie.replace(/^\s+|\s+$/g, '')
+      dataCookie = dataCookie.replace('+', '%20')
+      institutions = dataCookie.split('%20')
+    }
+
+    const dateCookie = new Date(
+      new Date().getTime() + this.cookieExpirationTime * 24 * 60 * 60 * 1000
+    )
+    if (!institutions.includes(btoa(this.entityID))) {
+      if (institutions.length === 3) {
+        institutions = []
+      }
+      institutions.push(btoa(this.entityID))
+    }
+    // Encode cookie base 64
+    this._cookie.set(
+      '_saml_idp',
+      institutions.join('%20'),
+      dateCookie !== null ? dateCookie : this.cookieExpirationTime
+    )
+  }
+
+  retrieveUserSelectedIdPs() {
+    let cookieValues = this._cookie.get('_saml_idp');
+    if (cookieValues) {
+      cookieValues = cookieValues.replace(/^\s+|\s+$/g, '');
+      cookieValues = cookieValues.replace('+', '%20');
+      const institutions = cookieValues.split('%20');
+      for (const inst of institutions) {
+        this._disco.getInstitutionBaseOnID(atob(inst))
+          .subscribe(res => {
+            this.userSelectedInstitutions.push(res)
+          });
+      }
+    }
+  }
+
+  selectInstitution(institution: Institutional) {
+    this.entityID = institution.entityID
+    this.onSubmit()
+  }
+
+  isInstitutionLogoDisplayed(logo): boolean {
+    return this.userSelectedInstitutions.some((institution) =>
+      institution?.Logos?.some(
+        (lo) =>
+          lo.value === logo))
   }
 
   navigateTo(val) {
