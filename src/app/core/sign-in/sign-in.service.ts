@@ -97,7 +97,12 @@ export class SignInService {
       })
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error, ERROR_REPORT.REGISTER_REACTIVATED_EMAIL))
+        catchError((error) =>
+          this._errorHandler.handleError(
+            error,
+            ERROR_REPORT.REGISTER_REACTIVATED_EMAIL
+          )
+        )
       )
   }
 
