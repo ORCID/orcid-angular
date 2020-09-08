@@ -100,8 +100,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     })
 
     if (this.email) {
-      this.authorizationForm.addControl('username', this.usernameFormControl);
-      this.authorizationForm.get('username').updateValueAndValidity();
+      this.authorizationForm.addControl('username', this.usernameFormControl)
+      this.authorizationForm.get('username').updateValueAndValidity()
     }
   }
 
@@ -163,8 +163,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         }
       })
     } else {
-      if (this.usernameFormControl.hasError('required') ||
-        this.usernameFormControl.hasError('invalidUserName')) {
+      if (
+        this.usernameFormControl.hasError('required') ||
+        this.usernameFormControl.hasError('invalidUserName')
+      ) {
         this.firstInput.nativeElement.focus()
       }
     }
@@ -276,11 +278,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   addUsernameValidation() {
-    this.authorizationForm.get('username').setValidators([
-      Validators.required,
-      UsernameValidator.orcidOrEmail,
-    ]);
-    this.authorizationForm.get('username').updateValueAndValidity();
+    this.authorizationForm
+      .get('username')
+      .setValidators([Validators.required, UsernameValidator.orcidOrEmail])
+    this.authorizationForm.get('username').updateValueAndValidity()
   }
 
   navigateTo(val) {
