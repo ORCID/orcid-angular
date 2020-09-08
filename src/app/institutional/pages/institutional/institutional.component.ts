@@ -9,7 +9,10 @@ import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
 import { DiscoService } from '../../../core/disco/disco.service'
 import { InstitutionValidator } from '../../../shared/validators/institution/institution.validator'
-import { DisplayName, Institutional } from '../../../types/institutional.endpoint'
+import {
+  DisplayName,
+  Institutional,
+} from '../../../types/institutional.endpoint'
 
 @Component({
   selector: 'app-institutional',
@@ -118,14 +121,16 @@ export class InstitutionalComponent implements OnInit {
     this.institution = institutionSelected
     this.entityID = this.institution.entityID
 
-    if (this.institution.Logos && !this.isInstitutionLogoDisplayed(this.institution.Logos[0].value)) {
+    if (
+      this.institution.Logos &&
+      !this.isInstitutionLogoDisplayed(this.institution.Logos[0].value)
+    ) {
       this.logoInstitution = this.institution.Logos[0].value
     }
   }
 
   getNameInstitution(institution: Institutional): DisplayName {
-    return institution.DisplayNames?.find(
-      (name) => name.lang === 'en')
+    return institution.DisplayNames?.find((name) => name.lang === 'en')
   }
 
   addUserSelectedIdPs() {
@@ -155,16 +160,15 @@ export class InstitutionalComponent implements OnInit {
   }
 
   retrieveUserSelectedIdPs() {
-    let cookieValues = this._cookie.get('_saml_idp');
+    let cookieValues = this._cookie.get('_saml_idp')
     if (cookieValues) {
-      cookieValues = cookieValues.replace(/^\s+|\s+$/g, '');
-      cookieValues = cookieValues.replace('+', '%20');
-      const institutions = cookieValues.split('%20');
+      cookieValues = cookieValues.replace(/^\s+|\s+$/g, '')
+      cookieValues = cookieValues.replace('+', '%20')
+      const institutions = cookieValues.split('%20')
       for (const inst of institutions) {
-        this._disco.getInstitutionBaseOnID(atob(inst))
-          .subscribe(res => {
-            this.userSelectedInstitutions.push(res)
-          });
+        this._disco.getInstitutionBaseOnID(atob(inst)).subscribe((res) => {
+          this.userSelectedInstitutions.push(res)
+        })
       }
     }
   }
@@ -176,9 +180,8 @@ export class InstitutionalComponent implements OnInit {
 
   isInstitutionLogoDisplayed(logo): boolean {
     return this.userSelectedInstitutions.some((institution) =>
-      institution?.Logos?.some(
-        (lo) =>
-          lo.value === logo))
+      institution?.Logos?.some((lo) => lo.value === logo)
+    )
   }
 
   navigateTo(val) {
