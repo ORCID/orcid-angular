@@ -38,7 +38,9 @@ import { BaseForm } from '../BaseForm'
     },
   ],
 })
-export class FormPersonalComponent extends BaseForm implements OnInit {
+export class FormPersonalComponent
+  extends BaseForm
+  implements OnInit, AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
@@ -92,6 +94,13 @@ export class FormPersonalComponent extends BaseForm implements OnInit {
       }),
       emails: this.emails,
     })
+  }
+
+  ngAfterViewInit(): void {
+    // Timeout used to get focus on the first input after the first step loads
+    setTimeout(() => {
+      this.firstInput.nativeElement.focus()
+    }, 100)
   }
 
   allEmailsAreUnique(): ValidatorFn {
