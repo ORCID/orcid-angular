@@ -11,6 +11,7 @@ import { SignInLocal, TypeSignIn } from '../../types/sign-in.local'
 import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
@@ -96,7 +97,7 @@ export class SignInService {
       })
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error, ERROR_REPORT.REGISTER_REACTIVATED_EMAIL))
       )
   }
 
