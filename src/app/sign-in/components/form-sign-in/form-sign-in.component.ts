@@ -86,7 +86,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
     this.authorizationForm = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
@@ -96,7 +95,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
     if (this.email) {
       this.authorizationForm.patchValue({
-        username: this.email
+        username: this.email,
       })
       this.addUsernameValidation()
     }
@@ -160,8 +159,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         }
       })
     } else {
-      if (this.authorizationForm.get('username').hasError('required') ||
-        this.authorizationForm.get('username').hasError('invalidUserName')) {
+      if (
+        this.authorizationForm.get('username').hasError('required') ||
+        this.authorizationForm.get('username').hasError('invalidUserName')
+      ) {
         this.firstInput.nativeElement.focus()
       }
     }
