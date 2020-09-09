@@ -55,7 +55,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   orcidPrimaryDeprecated: string
   signInLocal = {} as SignInLocal
   authorizationForm: FormGroup
-  usernameFormControl: FormControl
 
   constructor(
     private _user: UserService,
@@ -87,10 +86,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.usernameFormControl = new FormControl(this.email, [
-      Validators.required,
-      UsernameValidator.orcidOrEmail,
-    ])
 
     this.authorizationForm = new FormGroup({
       username: new FormControl(),
@@ -100,8 +95,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     })
 
     if (this.email) {
-      this.authorizationForm.addControl('username', this.usernameFormControl)
-      this.authorizationForm.get('username').updateValueAndValidity()
+      this.authorizationForm.patchValue({
+        username: this.email
+      })
+      this.addUsernameValidation()
     }
   }
 
@@ -163,10 +160,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         }
       })
     } else {
-      if (
-        this.usernameFormControl.hasError('required') ||
-        this.usernameFormControl.hasError('invalidUserName')
-      ) {
+      if (this.authorizationForm.get('username').hasError('required') ||
+        this.authorizationForm.get('username').hasError('invalidUserName')) {
         this.firstInput.nativeElement.focus()
       }
     }

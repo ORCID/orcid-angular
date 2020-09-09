@@ -4,11 +4,15 @@ import { OrcidValidators } from 'src/app/validators'
 
 export class UsernameValidator {
   static orcidOrEmail(control: AbstractControl): ValidationErrors | null {
+    if (control.value === null || control.value === '') {
+      return null
+    }
+
     const emailErrors = OrcidValidators.emailGeneric(control)
     const orcidError = Validators.pattern(ORCID_REGEXP)(control)
     const orcidUriError = Validators.pattern(ORCID_URI_REGEXP)(control)
 
-    return control.value && control.value.length > 19
+    return control.value.length > 19
       ? validateUsername(orcidUriError, emailErrors)
       : validateUsername(orcidError, emailErrors)
   }
