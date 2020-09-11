@@ -40,3 +40,4 @@ type Errors =
   | 'client_locked'
   | 'oauth_error'
   | 'invalid_request'
+  | 'invalid_grant'
