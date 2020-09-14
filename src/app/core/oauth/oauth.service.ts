@@ -156,10 +156,14 @@ export class OauthService {
       )
   }
 
-  submitCode(twoFactor: TwoFactor) {
+  submitCode(twoFactor: TwoFactor, social?) {
+    let url = 'shibboleth/2FA/submitCode.json'
+    if (social) {
+      url = 'social/2FA/submitCode.json'
+    }
     return this._http
       .post<TwoFactor>(
-        environment.BASE_URL + 'shibboleth/2FA/submitCode.json',
+        environment.BASE_URL + url,
         twoFactor,
         { headers: this.headers }
       )
