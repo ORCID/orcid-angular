@@ -162,11 +162,9 @@ export class OauthService {
       url = 'social/2FA/submitCode.json'
     }
     return this._http
-      .post<TwoFactor>(
-        environment.BASE_URL + url,
-        twoFactor,
-        { headers: this.headers }
-      )
+      .post<TwoFactor>(environment.BASE_URL + url, twoFactor, {
+        headers: this.headers,
+      })
       .pipe(
         retry(3),
         catchError((error) =>
