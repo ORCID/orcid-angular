@@ -20,6 +20,7 @@ export const ERROR_REPORT: {
 
   // The STANDARD_NO_VERBOSE
   // use by default on every not expect HTTP response
+  // should be use for non critical HTTP errors and non critical thrown errors
   // It will report the error on google analytics and will be show to the user **only on QA and local dev environments**
   STANDARD_NO_VERBOSE: {
     display: {
@@ -36,6 +37,7 @@ export const ERROR_REPORT: {
   },
 
   // The STANDARD_VERBOSE
+  // should be use for critical HTTP errors and critical thrown errors
   // It will report the error on google analytics and the snackbar will be show to the user
   STANDARD_VERBOSE: {
     display: {
