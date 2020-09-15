@@ -57,6 +57,7 @@ export class BackendErrorComponent implements OnInit {
   }
 
   navigateToClaim(email) {
+    email = encodeURIComponent(email)
     this.window.location.href = `/resend-claim?email=${email}`
   }
 
