@@ -57,7 +57,7 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
         this.oauthRequest = userInfo.oauthSession
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
-          this.orcidUrl = userInfo.orcidUrl
+          this.orcidUrl = userInfo.effectiveOrcidUrl
         } else {
           // if the user logouts in the middle of a oauth section on another tab
           this._platformInfo
@@ -127,7 +127,6 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
   }
 
   getIconName(ScopeObject: Scope): string {
-    console.log(ScopeObject.value)
     const scope = ScopeObject.value
     if (scope === 'openid' || scope === '/authenticate') {
       return 'orcidIcon'

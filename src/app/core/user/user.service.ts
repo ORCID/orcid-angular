@@ -59,14 +59,7 @@ export class UserService {
   ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
-  private $userSessionSubject = new ReplaySubject<{
-    userInfo: UserInfo
-    nameForm: NameForm
-    oauthSession: RequestInfoForm
-    displayName: string
-    orcidUrl: string
-    loggedIn: boolean
-  }>(1)
+  private $userSessionSubject = new ReplaySubject<UserSession>(1)
   sessionInitialized = false
 
   _recheck = new Subject<{
@@ -183,14 +176,7 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
-  }): {
-    userInfo: UserInfo
-    nameForm: NameForm
-    displayName: string
-    orcidUrl: string
-    loggedIn: boolean
-    oauthSession: RequestInfoForm
-  } {
+  }): UserSession {
     {
       return {
         ...data,
@@ -198,20 +184,28 @@ export class UserService {
           loggedIn: !!data.userInfo || !!data.nameForm,
           displayName: this.getDisplayName(data.nameForm),
           orcidUrl: this.getOrcidUrl(data),
+          effectiveOrcidUrl: this.getOrcidUrl(data, true),
         },
       }
     }
   }
-  private getOrcidUrl(data: {
-    userInfo: UserInfo
-    nameForm: NameForm
-    oauthSession: RequestInfoForm
-  }): string {
-    if (data && data.userInfo && data.userInfo.REAL_USER_ORCID) {
-      return 'https:' + environment.BASE_URL + data.userInfo.REAL_USER_ORCID
-    } else {
-      return undefined
+  private getOrcidUrl(
+    data: {
+      userInfo: UserInfo
+      nameForm: NameForm
+      oauthSession: RequestInfoForm
+    },
+    effectiveId = false
+  ): string {
+    if (data && data.userInfo) {
+      const orcidId = effectiveId
+        ? data.userInfo.EFFECTIVE_USER_ORCID
+        : data.userInfo.REAL_USER_ORCID
+      if (orcidId) {
+        return 'https:' + environment.BASE_URL + orcidId
+      }
     }
+    return undefined
   }
 
   /**

@@ -6,5 +6,6 @@ export interface UserSession {
   oauthSession: RequestInfoForm
   displayName: string
   orcidUrl: string
+  effectiveOrcidUrl: string
   loggedIn: boolean
 }
