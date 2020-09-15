@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { TwoFactor } from '../../../types/two-factor.endpoint'
 import { WINDOW } from '../../../cdk/window'
+import { PlatformInfoService } from '../../../cdk/platform-info'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-two-factor-module',
@@ -19,7 +21,8 @@ export class TwoFactorComponent implements OnInit {
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _oauthService: OauthService
+    private _oauthService: OauthService,
+    private _platformInfo: PlatformInfoService
   ) {}
 
   ngOnInit(): void {
@@ -61,18 +64,25 @@ export class TwoFactorComponent implements OnInit {
       errors: undefined,
     }
 
-    this._oauthService.submitCode(twoFactor).subscribe((res) => {
-      this.loading = false
-      if (res.errors && res.errors.length > 0) {
-        if (res.errors[0].includes('verification')) {
-          this.showBadVerificationCode = true
-        } else {
-          this.showBadRecoveryCode = true
-        }
-      } else if (res.redirectUrl) {
-        this.navigateTo(res.redirectUrl)
-      }
-    })
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._oauthService
+          .submitCode(twoFactor, platform.queryParameters.social)
+          .subscribe((res) => {
+            this.loading = false
+            if (res.errors && res.errors.length > 0) {
+              if (res.errors[0].includes('verification')) {
+                this.showBadVerificationCode = true
+              } else {
+                this.showBadRecoveryCode = true
+              }
+            } else if (res.redirectUrl) {
+              this.navigateTo(res.redirectUrl)
+            }
+          })
+      })
   }
 
   resetTwoFactor() {
