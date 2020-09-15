@@ -55,8 +55,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   orcidPrimaryDeprecated: string
   signInLocal = {} as SignInLocal
   authorizationForm: FormGroup
-  usernameFormControl: FormControl
-  passwordFormControl: FormControl
 
   constructor(
     private _user: UserService,
@@ -66,7 +64,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _signIn: SignInService,
     private _router: Router,
     private _gtag: GoogleAnalyticsService,
-    private _errorHanlder: ErrorHandlerService,
+    private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard
   ) {
     this.signInLocal.type = this.signInType
@@ -88,18 +86,19 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.usernameFormControl = new FormControl(this.email, [
-      Validators.required,
-      UsernameValidator.orcidOrEmail,
-    ])
-    this.passwordFormControl = new FormControl('', [])
-
     this.authorizationForm = new FormGroup({
-      username: this.usernameFormControl,
-      password: this.passwordFormControl,
+      username: new FormControl(),
+      password: new FormControl(),
       recoveryCode: new FormControl(),
       verificationCode: new FormControl(),
     })
+
+    if (this.email) {
+      this.authorizationForm.patchValue({
+        username: this.email,
+      })
+      this.addUsernameValidation()
+    }
   }
 
   ngAfterViewInit(): void {
@@ -107,11 +106,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.signInLocal.data = this.authorizationForm.getRawValue()
-
-    this.authorizationForm.markAllAsTouched()
+    this.addUsernameValidation()
 
     if (this.authorizationForm.valid) {
+      this.signInLocal.data = this.authorizationForm.getRawValue()
       this.hideErrors()
       this.loading.next(true)
 
@@ -160,6 +158,13 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           this.printError = true
         }
       })
+    } else {
+      if (
+        this.authorizationForm.get('username').hasError('required') ||
+        this.authorizationForm.get('username').hasError('invalidUserName')
+      ) {
+        this.firstInput.nativeElement.focus()
+      }
     }
   }
 
@@ -209,7 +214,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               },
             })
           } else {
-            this._errorHanlder.handleError(new Error('signingMissingData'))
+            this._errorHandler.handleError(new Error('signingMissingData'))
           }
         } else {
           this._router.navigate(['/register'], {
@@ -228,7 +233,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       )
       .subscribe((requestInfoForm) => {
         if (requestInfoForm.error) {
-          this._errorHanlder
+          this._errorHandler
             .handleError(
               new Error(
                 `${requestInfoForm.error}.${requestInfoForm.errorDescription}`
@@ -266,6 +271,13 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     this.authorizationForm.patchValue({
       recoveryCode: '',
     })
+  }
+
+  addUsernameValidation() {
+    this.authorizationForm
+      .get('username')
+      .setValidators([Validators.required, UsernameValidator.orcidOrEmail])
+    this.authorizationForm.get('username').updateValueAndValidity()
   }
 
   navigateTo(val) {

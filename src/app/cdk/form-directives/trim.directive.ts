@@ -9,7 +9,7 @@ export class TrimDirective implements OnInit {
 
   ngOnInit() {
     this.ngControl.valueChanges.subscribe((value: string) => {
-      if (value !== value.trim()) {
+      if (value && value !== value.trim()) {
         this.ngControl.control.setValue(value.trim())
       }
     })
