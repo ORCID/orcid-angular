@@ -124,18 +124,17 @@ export class OauthService {
   }
 
   handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {
-    // Redirect error that are handle by the client application
     if (
       session.error &&
       OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
         (x) => x === session.error
       )
     ) {
+      // Redirect error that are handle by the client application
       this.window.location.href = `${session.redirectUrl}#error=${session.error}`
       return NEVER
-    }
-    // Send the user to the signin and display a toaster error
-    else if (session.error || (session.errors && session.errors.length)) {
+    } else if (session.error || (session.errors && session.errors.length)) {
+      // Send the user to the signin and display a toaster error
       this._router.navigate(['/signin']).then((navigated: boolean) => {
         if (navigated) {
           this._errorHandler

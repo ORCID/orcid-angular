@@ -61,10 +61,7 @@ export class AuthorizeGuard implements CanActivateChild {
           oauthSession.redirectUrl.includes(oauthSession.responseType)
         ) {
           this.window.location.href = oauthSession.redirectUrl
-        } else if (
-          oauthSession.forceLogin ||
-          !session.oauthSessionIsLoggedIn
-        ) {
+        } else if (oauthSession.forceLogin || !session.oauthSessionIsLoggedIn) {
           return this.redirectToLoginPage(queryParams)
           // If the redirectUrl comes with a code from the start redirect the user immediately
         } else if (oauthSession.redirectUrl.includes('?code=')) {

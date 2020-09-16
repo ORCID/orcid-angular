@@ -196,7 +196,6 @@ export class PlatformInfoService {
     return previousInstitutionalState
   }
 
-  
   public get(): Observable<PlatformInfo> {
     // Dirty fix to quickly get the startup OAuth mode:
     // Normally it would be preferred read GET parameters from the ActivatedRoute

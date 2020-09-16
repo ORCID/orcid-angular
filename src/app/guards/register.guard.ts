@@ -45,7 +45,7 @@ export class RegisterGuard implements CanActivateChild {
     return this._user.getUserSession(queryParams).pipe(
       map((session) => {
         const oauthSession = session.oauthSession
-        
+
         if (
           oauthSession &&
           !oauthSession.forceLogin &&
