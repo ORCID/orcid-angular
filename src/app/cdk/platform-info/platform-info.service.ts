@@ -5,6 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
+import { environment } from 'src/environments/environment'
 
 import { WINDOW } from '../window'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'
@@ -13,7 +14,7 @@ import { PlatformInfo } from './platform-info.type'
 @Injectable()
 export class PlatformInfoService {
   previouslyHadQueryParameters = false
-  platform: PlatformInfo = {
+  private platform: PlatformInfo = {
     unsupportedBrowser: false,
     desktop: false,
     tabletOrHandset: false,
@@ -30,14 +31,9 @@ export class PlatformInfoService {
     ltr: true,
     queryParameters: {},
     screenDirection: 'ltr',
-    // Dirty fix to quickly get the startup OAuth mode:
-    // Normally it would be preferred read GET parameters from the ActivatedRoute
-    // but the observable return by it takes a while to respond, and this can make the application blink on startup
-    // this is the reason why a quick indexOf is run on the window object to quickly check if the app should start on Oauth mode
-    oauthMode: this.window.location.href.toLowerCase().indexOf('oauth') >= 0,
-    social: this.window.location.href.toLowerCase().indexOf('social') >= 0,
-    institutional:
-      this.window.location.href.toLowerCase().indexOf('institutional') >= 0,
+    oauthMode: false,
+    social: false,
+    institutional: false,
   }
   platformSubject = new BehaviorSubject<PlatformInfo>(this.platform)
 
@@ -200,7 +196,20 @@ export class PlatformInfoService {
     return previousInstitutionalState
   }
 
+  
   public get(): Observable<PlatformInfo> {
+    // Dirty fix to quickly get the startup OAuth mode:
+    // Normally it would be preferred read GET parameters from the ActivatedRoute
+    // but the observable return by it takes a while to respond, and this can make the application blink on startup
+    // this is the reason why a quick indexOf is run on the window object to quickly check if the app should start on Oauth mode
+    this.platform = {
+      ...this.platform,
+      oauthMode: this.window.location.href.toLowerCase().indexOf('oauth') >= 0,
+      social: this.window.location.href.toLowerCase().indexOf('social') >= 0,
+      institutional:
+        this.window.location.href.toLowerCase().indexOf('institutional') >= 0,
+    }
+    this.platformSubject.next(this.platform)
     return this.platformSubject.asObservable()
   }
 
