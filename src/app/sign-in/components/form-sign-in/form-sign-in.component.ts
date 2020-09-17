@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { first, map } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
-import { OauthParameters } from 'src/app/types'
+import { OauthParameters, RequestInfoForm } from 'src/app/types'
 
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
@@ -27,6 +27,7 @@ import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { ERROR_REPORT } from '../../../errors'
+import { OauthService } from '../../../core/oauth/oauth.service'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -55,6 +56,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   orcidPrimaryDeprecated: string
   signInLocal = {} as SignInLocal
   authorizationForm: FormGroup
+  usernameFormControl: FormControl
+  passwordFormControl: FormControl
 
   constructor(
     private _user: UserService,
@@ -62,6 +65,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _route: ActivatedRoute,
     @Inject(WINDOW) private window: Window,
     private _signIn: SignInService,
+    private _oauthService: OauthService,
     private _router: Router,
     private _gtag: GoogleAnalyticsService,
     private _errorHandler: ErrorHandlerService,
@@ -81,6 +85,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         this.signInLocal.type = TypeSignIn.social
       } else if (platform.institutional) {
         this.signInLocal.type = TypeSignIn.institutional
+      }
+
+      if (platform.social || platform.institutional) {
+        this._oauthService.loadRequestInfoForm().subscribe((requestInfoForm) => {
+          if (requestInfoForm) {
+            this.signInLocal.type = TypeSignIn.oauth
+          }
+          this._user.getUserSession().subscribe(userSession => {
+            userSession.oauthSession = requestInfoForm
+          })
+        })
       }
     })
   }
@@ -124,7 +139,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         this.printError = false
         if (data.success) {
           if (isRedirectToTheAuthorizationPage(data)) {
-            this.handleOauthLogin()
+            this.handleOauthLogin(data.url)
           } else {
             this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
               () => this.navigateTo(data.url),
@@ -224,27 +239,42 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
   }
 
-  handleOauthLogin() {
+  handleOauthLogin(urlRedirect) {
     this._user
       .getUserSession()
       .pipe(
         first(),
         map((value) => value.oauthSession)
       )
-      .subscribe((requestInfoForm) => {
+      .subscribe((requestInfoForm: RequestInfoForm) => {
+        if (requestInfoForm.error) {
+          this._errorHandler
+            .handleError(
+              new Error(
+                `${requestInfoForm.error}.${requestInfoForm.errorDescription}`
+              ),
+              ERROR_REPORT.OAUTH_PARAMETERS
+            )
+            .subscribe()
+          this._user.refreshUserSession(true)
+        }
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
           .subscribe(
-            () => this.oauthAuthorize(),
-            () => this.oauthAuthorize()
+            () => this.oauthAuthorize(urlRedirect),
+            () => this.oauthAuthorize(urlRedirect)
           )
       })
   }
 
-  oauthAuthorize() {
-    this._router.navigate(['/oauth/authorize'], {
-      queryParams: { ...this.signInLocal.params, prompt: undefined },
-    })
+  oauthAuthorize(urlRedirect) {
+    if (this.signInLocal.params === undefined) {
+      this.navigateTo(urlRedirect)
+    } else {
+      this._router.navigate(['/oauth/authorize'], {
+        queryParams: { ...this.signInLocal.params, prompt: undefined },
+      })
+    }
   }
 
   updateUsername(email) {
