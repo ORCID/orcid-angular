@@ -88,14 +88,16 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       }
 
       if (platform.social || platform.institutional) {
-        this._oauthService.loadRequestInfoForm().subscribe((requestInfoForm) => {
-          if (requestInfoForm) {
-            this.signInLocal.type = TypeSignIn.oauth
-          }
-          this._user.getUserSession().subscribe(userSession => {
-            userSession.oauthSession = requestInfoForm
+        this._oauthService
+          .loadRequestInfoForm()
+          .subscribe((requestInfoForm) => {
+            if (requestInfoForm) {
+              this.signInLocal.type = TypeSignIn.oauth
+            }
+            this._user.getUserSession().subscribe((userSession) => {
+              userSession.oauthSession = requestInfoForm
+            })
           })
-        })
       }
     })
   }
