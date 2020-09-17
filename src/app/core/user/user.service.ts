@@ -273,7 +273,10 @@ export class UserService {
           ) {
             delete params.prompt
           }
-          if (typeof updateParameters.checkTrigger === `number` && updateParameters.checkTrigger === -1) {
+          if (
+            typeof updateParameters.checkTrigger === `number` &&
+            updateParameters.checkTrigger === -1
+          ) {
             return of(undefined)
           }
           return this._oauth.declareOauthSession(params)
