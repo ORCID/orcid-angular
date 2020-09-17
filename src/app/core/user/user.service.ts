@@ -142,6 +142,9 @@ export class UserService {
             this.loggingStateComesFromTheServer = true
             return this.userStatusHasChange(result)
           }),
+          // At the very beginning assumes the user is logged in,
+          // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
+          startWith({ loggedIn: true, checkTrigger: -1 }),
           switchMap((updateParameters) =>
             this.handleUserDataUpdate(updateParameters, queryParams)
           ),
@@ -275,6 +278,9 @@ export class UserService {
             updateParameters.checkTrigger.postLoginUpdate
           ) {
             delete params.prompt
+          }
+          if (typeof updateParameters.checkTrigger === `number` && updateParameters.checkTrigger === -1) {
+            return of(undefined)
           }
           return this._oauth.declareOauthSession(params)
         } else {
