@@ -39,9 +39,9 @@ export class LanguageGuard implements CanActivateChild {
           // tslint:disable-next-line: max-line-length
           Object.keys(queryParams).length && // TODO @leomendoza123 make the platform handle the query parameters of the guards correctly, this line is a temporary quick fix
           platform.oauthMode &&
+          parameterLanguage &&
           this.locale.indexOf(
-            parameterLanguage &&
-              parameterLanguage.toLocaleLowerCase().replace('_', '-')
+            parameterLanguage.toLocaleLowerCase().replace('_', '-')
           ) === -1
         ) {
           return this._language.changeLanguage(parameterLanguage).pipe(
