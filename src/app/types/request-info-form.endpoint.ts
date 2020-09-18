@@ -41,3 +41,4 @@ type Errors =
   | 'oauth_error'
   | 'invalid_request'
   | 'invalid_grant'
+  | 'unsupported_response_type'
