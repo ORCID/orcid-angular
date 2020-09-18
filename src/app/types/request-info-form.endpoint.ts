@@ -11,7 +11,7 @@ export interface RequestInfoForm {
   redirectUrl: string
   responseType: 'code' | 'token' | 'bearer'
   stateParam: string
-  userId?: any
+  userId?: string // Only returned from the backend when an existing Orcid id is set thought a authorization URL
   userName?: any
   userOrcid: string
   userEmail: string
