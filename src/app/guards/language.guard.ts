@@ -47,7 +47,7 @@ export class LanguageGuard implements CanActivateChild {
           return this._language.changeLanguage(parameterLanguage).pipe(
             map((value) => this.window.location.reload()),
             switchMap((value) => NEVER),
-            catchError((value) => of(true)) // When the language change fail ignore and continue 
+            catchError((value) => of(true)) // When the language change fail ignore and continue
           )
         } else {
           return of(true)
