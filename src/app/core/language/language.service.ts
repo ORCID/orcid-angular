@@ -22,6 +22,11 @@ export class LanguageService {
     return of({}).pipe(
       // If the language is not listed on the current frontend environment it wont attempt to change it
       tap(() => {
+        if (!environment.production) {
+          {
+            throw new Error(`change-language-require-production-mode`)
+          }
+        }
         if (
           !Object.keys(environment.LANGUAGE_MENU_OPTIONS).find(
             (x) => x.toLocaleLowerCase().replace('-', '_') === languageCode
