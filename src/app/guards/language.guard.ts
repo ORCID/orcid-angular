@@ -8,7 +8,7 @@ import {
 } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { NEVER, Observable, of } from 'rxjs'
-import { catchError, switchMap, tap } from 'rxjs/operators'
+import { catchError, first, map, switchMap, tap } from 'rxjs/operators'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
 import { LanguageService } from '../core/language/language.service'
@@ -33,8 +33,11 @@ export class LanguageGuard implements CanActivateChild {
     const parameterLanguage = queryParams['lang'] || queryParams['LANG']
 
     return this._platform.get().pipe(
+      first(),
       switchMap((platform) => {
         if (
+          // tslint:disable-next-line: max-line-length
+          Object.keys(queryParams).length && // TODO @leomendoza123 make the platform handle the query parameters of the guards correctly, this line is a temporary quick fix
           platform.oauthMode &&
           this.locale.indexOf(
             parameterLanguage &&
@@ -42,9 +45,9 @@ export class LanguageGuard implements CanActivateChild {
           ) === -1
         ) {
           return this._language.changeLanguage(parameterLanguage).pipe(
-            tap(() => this.window.location.reload()),
-            switchMap(() => NEVER),
-            catchError(() => of(this._router.createUrlTree(['/signin'])))
+            map((value) => this.window.location.reload()),
+            switchMap((value) => NEVER),
+            catchError((value) => of(this._router.createUrlTree(['/signin'])))
           )
         } else {
           return of(true)

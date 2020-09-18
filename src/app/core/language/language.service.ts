@@ -31,9 +31,10 @@ export class LanguageService {
         }
       }),
       switchMap(() =>
-        this._http.get(environment.API_WEB + 'lang.json?lang=' + languageCode)
+        this._http
+          .get(environment.API_WEB + 'lang.json?lang=' + languageCode)
+          .pipe(retry(3))
       ),
-      retry(3),
       catchError((error) =>
         this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
       )
