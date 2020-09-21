@@ -11,6 +11,7 @@ import { SignInGuard } from './guards/sign-in.guard'
 import { AuthorizeGuard } from './guards/authorize.guard'
 import { RegisterGuard } from './guards/register.guard'
 import { LinkAccountGuard } from './guards/link-account.guard'
+import { LanguageGuard } from './guards/language.guard'
 
 export function matcher(segments: UrlSegment[]) {
   if (
@@ -42,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.authorize,
-    canActivateChild: [AuthorizeGuard],
+    canActivateChild: [LanguageGuard, AuthorizeGuard],
     loadChildren: () =>
       import('./authorize/authorize.module').then((m) => m.AuthorizeModule),
   },
@@ -75,7 +76,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.signin,
-    canActivateChild: [SignInGuard],
+    canActivateChild: [LanguageGuard, SignInGuard],
     loadChildren: () =>
       import('./sign-in/sign-in.module').then((m) => m.SignInModule),
   },
@@ -88,7 +89,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.register,
-    canActivateChild: [RegisterGuard],
+    canActivateChild: [LanguageGuard, RegisterGuard],
     loadChildren: () =>
       import('./register/register.module').then((m) => m.RegisterModule),
   },
@@ -99,7 +100,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.myOrcid,
-    canActivateChild: [AuthenticatedGuard],
+    canActivateChild: [LanguageGuard, AuthenticatedGuard],
     loadChildren: () =>
       import('./record/record.module').then((m) => m.RecordModule),
   },
