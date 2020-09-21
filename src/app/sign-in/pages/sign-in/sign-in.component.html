@@ -14,18 +14,21 @@
               role="heading"
               aria-level="1"
               i18n="@@ngOrcid.signin.title"
+              *ngIf="!isOauthError"
             >
               Sign in
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <ng-container *ngIf="!isLoggedIn || isForceLogin">
+            <ng-container *ngIf="!isLoggedIn && !isOauthError || isForceLogin">
               <app-form-sign-in
                 (loading)="loading = $event"
                 [email]="email"
                 #formSignInComponent
                 [signInType]="signInType"
                 (show2FAEmitter)="show2FAEmitter($event)"
+                (isOauthError)="isOauthError = $event"
+                (errorDescription)="errorDescription = $event"
               >
                 <button
                   mat-raised-button
@@ -51,6 +54,11 @@
               [realUserOrcid]="realUserOrcid"
             >
             </app-logged-in>
+            <app-oauth-error
+              *ngIf="isOauthError"
+              [errorDescription]="errorDescription"
+            >
+            </app-oauth-error>
           </mat-card-content>
         </mat-card>
       </div>
