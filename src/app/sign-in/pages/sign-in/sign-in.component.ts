@@ -30,12 +30,14 @@ export class SignInComponent implements OnInit {
   loading = false // TODO @Daniel seems like some progress bars depend on this but is never true
   isLoggedIn = false
   isForceLogin = false
+  isOauthError = false
   displayName: string
   realUserOrcid: string
   email = ''
   oauthRequest = false // deprecated
   show2FA = false
   signInType = TypeSignIn.personal
+  errorDescription: string
 
   constructor(
     _platformInfo: PlatformInfoService,

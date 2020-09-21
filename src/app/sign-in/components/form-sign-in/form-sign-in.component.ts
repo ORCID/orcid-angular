@@ -39,8 +39,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
   @Input() signInData: SignInData
+  @Output() isOauthError = new EventEmitter<boolean>()
   @Output() show2FAEmitter = new EventEmitter<object>()
   @Output() loading = new EventEmitter<boolean>()
+  @Output() errorDescription = new EventEmitter<string>()
 
   badCredentials = false
   printError = false
@@ -232,6 +234,14 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         map((value) => value.oauthSession)
       )
       .subscribe((requestInfoForm) => {
+        if (
+          requestInfoForm.error === 'invalid_grant' ||
+          requestInfoForm.error === 'invalid_scope'
+        ) {
+          this.isOauthError.next(true)
+          this.loading.next(false)
+          this.errorDescription.next(requestInfoForm.errorDescription)
+        }
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
           .subscribe(
