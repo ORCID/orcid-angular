@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap, switchMap, first } from 'rxjs/operators'
+import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
+import { catchError, retry, tap, switchMap, first, map } from 'rxjs/operators'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
 
@@ -10,6 +10,14 @@ import { SignInData } from '../../types/sign-in-data.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { TwoFactor } from '../../types/two-factor.endpoint'
+import { Router } from '@angular/router'
+import { WINDOW } from 'src/app/cdk/window'
+import { Inject } from '@angular/core'
+
+const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
+  'login_required',
+  'interaction_required',
+]
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +28,9 @@ export class OauthService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _router: Router,
+    @Inject(WINDOW) private window: Window
   ) {
     this.headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -108,10 +118,38 @@ export class OauthService {
         retry(3),
         catchError((error) =>
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        )
+        ),
+        switchMap((session) => this.handleSessionErrors(session))
       )
   }
 
+  handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {
+    if (
+      session.error &&
+      OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
+        (x) => x === session.error
+      )
+    ) {
+      // Redirect error that are handle by the client application
+      this.window.location.href = `${session.redirectUrl}#error=${session.error}`
+      return NEVER
+    } else if (session.error || (session.errors && session.errors.length)) {
+      // Send the user to the signin and display a toaster error
+      this._router.navigate(['/signin']).then((navigated: boolean) => {
+        if (navigated) {
+          this._errorHandler
+            .handleError(
+              new Error(
+                `${session.error || session.errors}.${session.errorDescription}`
+              ),
+              ERROR_REPORT.OAUTH_PARAMETERS
+            )
+            .subscribe()
+        }
+      })
+    }
+    return of(session)
+  }
   /**
    * @deprecated in favor of using the same `oauth/custom/init.json` endpoint to
    * initialize Oauth, initialize Oauth after a login or initialize Oauth after a logout

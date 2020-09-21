@@ -185,6 +185,8 @@ export class UserService {
           displayName: this.getDisplayName(data.nameForm),
           orcidUrl: this.getOrcidUrl(data),
           effectiveOrcidUrl: this.getOrcidUrl(data, true),
+          oauthSessionIsLoggedIn:
+            data.oauthSession.userOrcid && data.oauthSession.userName,
         },
       }
     }

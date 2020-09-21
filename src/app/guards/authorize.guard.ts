@@ -11,7 +11,6 @@ import { map, switchMap, finalize } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthParameters } from '../types'
-import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 import { ERROR_REPORT } from '../errors'
@@ -53,32 +52,20 @@ export class AuthorizeGuard implements CanActivateChild {
 
   handleOauthSession(queryParams: OauthParameters) {
     return this._user.getUserSession(queryParams).pipe(
-      map((x) => x.oauthSession),
       map((session) => {
+        const oauthSession = session.oauthSession
         if (
-          session.redirectUrl &&
-          session.responseType &&
-          session.redirectUrl.includes(session.responseType)
+          oauthSession &&
+          oauthSession.redirectUrl &&
+          oauthSession.responseType &&
+          oauthSession.redirectUrl.includes(oauthSession.responseType)
         ) {
-          this.window.location.href = session.redirectUrl
-        } else if (oauthSessionHasError(session)) {
-          this._router
-            .navigate(['/signin'], { queryParams: queryParams })
-            .then((navigated: boolean) => {
-              if (navigated) {
-                this._errorHandler
-                  .handleError(
-                    new Error(`${session.error}.${session.errorDescription}`),
-                    ERROR_REPORT.OAUTH_PARAMETERS
-                  )
-                  .subscribe()
-              }
-            })
-        } else if (session.forceLogin || !oauthSessionUserIsLoggedIn(session)) {
+          this.window.location.href = oauthSession.redirectUrl
+        } else if (oauthSession.forceLogin || !session.oauthSessionIsLoggedIn) {
           return this.redirectToLoginPage(queryParams)
           // If the redirectUrl comes with a code from the start redirect the user immediately
-        } else if (session.redirectUrl.includes('?code=')) {
-          this.window.location.href = session.redirectUrl
+        } else if (oauthSession.redirectUrl.includes('?code=')) {
+          this.window.location.href = oauthSession.redirectUrl
         } else {
           return true
         }

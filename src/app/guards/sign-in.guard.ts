@@ -11,7 +11,6 @@ import { map, switchMap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthParameters, RequestInfoForm } from '../types'
-import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
 import { WINDOW } from '../cdk/window'
 import { ERROR_REPORT } from '../errors'
@@ -57,30 +56,19 @@ export class SignInGuard implements CanActivateChild {
     }
     // check if the user is already login or there are errors
     return this._user.getUserSession(queryParams).pipe(
-      map((x) => x.oauthSession),
       map((session) => {
+        const oauthSession = session.oauthSession
         if (
-          !session.forceLogin &&
-          oauthSessionUserIsLoggedIn(session) &&
-          !oauthSessionHasError(session)
+          oauthSession &&
+          !oauthSession.forceLogin &&
+          session.oauthSessionIsLoggedIn
         ) {
           return this._router.createUrlTree(['/oauth/authorize'], {
             queryParams: queryParams,
           })
-        } else if (oauthSessionHasError(session)) {
-          this.handleOpenIdErrorCodes(session)
         }
         return true
       })
     )
-  }
-
-  private handleOpenIdErrorCodes(session: RequestInfoForm) {
-    this._errorHandler
-      .handleError(
-        new Error(`${session.error}.${session.errorDescription}`),
-        ERROR_REPORT.OAUTH_PARAMETERS
-      )
-      .subscribe()
   }
 }

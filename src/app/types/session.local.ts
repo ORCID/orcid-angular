@@ -4,6 +4,7 @@ export interface UserSession {
   userInfo: UserInfo
   nameForm: NameForm
   oauthSession: RequestInfoForm
+  oauthSessionIsLoggedIn: boolean
   displayName: string
   orcidUrl: string
   effectiveOrcidUrl: string
