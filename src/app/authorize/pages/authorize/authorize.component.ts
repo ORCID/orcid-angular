@@ -158,7 +158,7 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     }
 
     if (scope === '/read-limited') {
-        return $localize`:@@authorize.readLimited:Read your information with visibility set to Trusted Organizations`
+      return $localize`:@@authorize.readLimited:Read your information with visibility set to Trusted Organizations`
     }
 
     // For any unreconized scope just use the description  from the backend
