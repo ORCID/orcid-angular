@@ -285,7 +285,11 @@ export class UserService {
           }
           return this._oauth.declareOauthSession(params)
         } else {
-          return of(undefined)
+          if (platform.social || platform.institutional) {
+            return this._oauth.loadRequestInfoForm()
+          } else {
+            return of(undefined)
+          }
         }
       })
     )
