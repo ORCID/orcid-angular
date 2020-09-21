@@ -45,7 +45,7 @@ export class LinkAccountGuard implements CanActivateChild {
         if (typeof value !== 'boolean' && value.providerId) {
           return true
         } else {
-          return this._router.createUrlTree(['/'])
+          return this._router.createUrlTree(['/signin'])
         }
       })
     )
