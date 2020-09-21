@@ -16,7 +16,7 @@ import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 
-import { PlatformInfoService } from '../../../cdk/platform-info'
+import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
 import { GoogleAnalyticsService } from '../../../core/google-analytics/google-analytics.service'
 import { SignInService } from '../../../core/sign-in/sign-in.service'
@@ -56,6 +56,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   orcidPrimaryDeprecated: string
   signInLocal = {} as SignInLocal
   authorizationForm: FormGroup
+  platform: PlatformInfo
 
   constructor(
     private _user: UserService,
@@ -70,7 +71,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _signInGuard: SignInGuard
   ) {
     this.signInLocal.type = this.signInType
-    _platformInfo.get().subscribe((platform) => {
+    _platformInfo
+        .get()
+        .pipe(first())
+        .subscribe((platform) => {
+      this.platform = platform
       if (platform.oauthMode) {
         this.signInLocal.type = TypeSignIn.oauth
         _route.queryParams.subscribe((params) => {
@@ -86,16 +91,13 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       }
 
       if (platform.social || platform.institutional) {
-        this._oauthService
-          .loadRequestInfoForm()
-          .subscribe((requestInfoForm) => {
-            if (requestInfoForm) {
-              this.signInLocal.type = TypeSignIn.oauth
-            }
-            this._user.getUserSession().subscribe((userSession) => {
-              userSession.oauthSession = requestInfoForm
+        this._user.getUserSession()
+           .pipe(first())
+            .subscribe((userSession) => {
+              if (userSession.oauthSession) {
+                this.signInLocal.type = TypeSignIn.oauth
+              }
             })
-          })
       }
     })
   }
@@ -268,7 +270,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   oauthAuthorize(urlRedirect) {
-    if (this.signInLocal.params === undefined) {
+    if (this.platform.social || this.platform.institutional) {
       this.navigateTo(urlRedirect)
     } else {
       this._router.navigate(['/oauth/authorize'], {
