@@ -72,34 +72,35 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   ) {
     this.signInLocal.type = this.signInType
     _platformInfo
-        .get()
-        .pipe(first())
-        .subscribe((platform) => {
-      this.platform = platform
-      if (platform.oauthMode) {
-        this.signInLocal.type = TypeSignIn.oauth
-        _route.queryParams.subscribe((params) => {
-          this.signInLocal.params = {
-            ...(params as OauthParameters),
-            oauth: '',
-          }
-        })
-      } else if (platform.social) {
-        this.signInLocal.type = TypeSignIn.social
-      } else if (platform.institutional) {
-        this.signInLocal.type = TypeSignIn.institutional
-      }
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this.platform = platform
+        if (platform.oauthMode) {
+          this.signInLocal.type = TypeSignIn.oauth
+          _route.queryParams.subscribe((params) => {
+            this.signInLocal.params = {
+              ...(params as OauthParameters),
+              oauth: '',
+            }
+          })
+        } else if (platform.social) {
+          this.signInLocal.type = TypeSignIn.social
+        } else if (platform.institutional) {
+          this.signInLocal.type = TypeSignIn.institutional
+        }
 
-      if (platform.social || platform.institutional) {
-        this._user.getUserSession()
-           .pipe(first())
+        if (platform.social || platform.institutional) {
+          this._user
+            .getUserSession()
+            .pipe(first())
             .subscribe((userSession) => {
               if (userSession.oauthSession) {
                 this.signInLocal.type = TypeSignIn.oauth
               }
             })
-      }
-    })
+        }
+      })
   }
 
   ngOnInit(): void {
