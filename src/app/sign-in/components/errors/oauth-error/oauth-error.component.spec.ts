@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { OauthErrorComponent } from './oauth-error.component';
+import { OauthErrorComponent } from './oauth-error.component'
 
 describe('OauthErrorComponent', () => {
-  let component: OauthErrorComponent;
-  let fixture: ComponentFixture<OauthErrorComponent>;
+  let component: OauthErrorComponent
+  let fixture: ComponentFixture<OauthErrorComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OauthErrorComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [OauthErrorComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OauthErrorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(OauthErrorComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

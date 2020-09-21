@@ -234,7 +234,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         map((value) => value.oauthSession)
       )
       .subscribe((requestInfoForm) => {
-        if (requestInfoForm.error === 'invalid_grant' || requestInfoForm.error === 'invalid_scope') {
+        if (
+          requestInfoForm.error === 'invalid_grant' ||
+          requestInfoForm.error === 'invalid_scope'
+        ) {
           this.isOauthError.next(true)
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)

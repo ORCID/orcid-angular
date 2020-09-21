@@ -20,7 +20,9 @@
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <ng-container *ngIf="!isLoggedIn && !isOauthError || isForceLogin">
+            <ng-container
+              *ngIf="(!isLoggedIn && !isOauthError) || isForceLogin"
+            >
               <app-form-sign-in
                 (loading)="loading = $event"
                 [email]="email"
