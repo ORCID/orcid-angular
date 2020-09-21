@@ -91,7 +91,7 @@ export const ERROR_REPORT: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
       // tslint:disable-next-line:max-line-length
-      message: $localize`:@@ngOrcid.reactivationError:We couldn't reactivate your email. Please try again, and if the error persists please`,
+      message: $localize`:@@ngOrcid.reactivationAccountError:We couldn't reactivate your ORCID account. Please try again, and if the error persists please`,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
       actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
     },
