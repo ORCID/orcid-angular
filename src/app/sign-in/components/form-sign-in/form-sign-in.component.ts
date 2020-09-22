@@ -253,23 +253,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       )
       .subscribe((requestInfoForm: RequestInfoForm) => {
         if (
-          requestInfoForm.error === 'invalid_grant' ||
-          requestInfoForm.error === 'invalid_client' ||
-          requestInfoForm.error === 'oauth_error'
+          requestInfoForm.error === 'invalid_grant'
         ) {
           this.isOauthError.next(true)
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
-        } else if (requestInfoForm.error) {
-          this._errorHandler
-            .handleError(
-              new Error(
-                `${requestInfoForm.error}.${requestInfoForm.errorDescription}`
-              ),
-              ERROR_REPORT.OAUTH_PARAMETERS
-            )
-            .subscribe()
-          this._user.refreshUserSession(true)
         }
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
