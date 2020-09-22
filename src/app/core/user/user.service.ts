@@ -25,20 +25,19 @@ import {
   tap,
 } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-
+import { ERROR_REPORT } from 'src/app/errors'
 import {
   NameForm,
   OauthParameters,
   RequestInfoForm,
   UserInfo,
 } from 'src/app/types'
+import { UserSession } from 'src/app/types/session.local'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
-import { ERROR_REPORT } from 'src/app/errors'
-import { UserSession } from 'src/app/types/session.local'
 
 interface UserSessionUpdateParameters {
   checkTrigger:

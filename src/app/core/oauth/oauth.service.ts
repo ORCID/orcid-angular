@@ -2,7 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, retry, shareReplay, switchMap, tap } from 'rxjs/operators'
+import {
+  catchError,
+  retry,
+  shareReplay,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -51,10 +58,6 @@ export class OauthService {
     this.requestInfoSubject.next(requestInfoForm)
   }
 
-  /**
-   * @deprecated since declareOauthSession will declare and get the RequestInfoForm data.
-   * the loadRequestInfoFormFromMemory can replace this function
-   */
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
@@ -109,7 +112,7 @@ export class OauthService {
     queryParameters: OauthParameters
   ): Observable<RequestInfoForm> {
     if (!this.declareOauthSession$) {
-      return (this.declareOauthSession$ = this._http
+      this.declareOauthSession$ = this._http
         .post<RequestInfoForm>(
           environment.BASE_URL +
             `oauth/custom/init.json?${this.objectToUrlParameters(
@@ -125,9 +128,10 @@ export class OauthService {
           ),
           switchMap((session) => this.handleSessionErrors(session)),
           shareReplay(1)
-        ))
+        )
+      return this.declareOauthSession$.pipe(take(1))
     } else {
-      return this.declareOauthSession$
+      return this.declareOauthSession$.pipe(take(1))
     }
   }
 
