@@ -279,8 +279,8 @@ export class UserService {
           }
           if (
             typeof updateParameters.checkTrigger === `number` &&
-            updateParameters.checkTrigger === -1
-            && updateParameters.loggedIn === false
+            updateParameters.checkTrigger === -1 &&
+            updateParameters.loggedIn === false
           ) {
             return of(undefined)
           }
