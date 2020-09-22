@@ -17,6 +17,8 @@ import { Inject } from '@angular/core'
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
   'interaction_required',
+  'invalid_scope',
+  'unsupported_response_type'
 ]
 
 @Injectable({
@@ -135,7 +137,12 @@ export class OauthService {
       return NEVER
     } else if (session.error || (session.errors && session.errors.length)) {
       // Send the user to the signin and display a toaster error
-      this._router.navigate(['/signin']).then((navigated: boolean) => {
+      let extra = {}
+      if (session.error === 'oauth_error' || session.error === 'invalid_grant') {
+          extra = {error: session.errorDescription}
+      }
+      this._router.navigate(['/signin'], {queryParams: extra})
+        .then((navigated: boolean) => {
         if (navigated) {
           this._errorHandler
             .handleError(

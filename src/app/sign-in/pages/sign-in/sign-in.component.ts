@@ -68,6 +68,11 @@ export class SignInComponent implements OnInit {
         if (platform.oauthMode && session.oauthSession.userId) {
           this.email = session.oauthSession.userId
         }
+
+        if (platform.queryParameters.error) {
+          this.isOauthError = true
+          this.errorDescription = platform.queryParameters.error
+        }
       })
   }
 
