@@ -277,12 +277,7 @@ export class UserService {
           ) {
             delete params.prompt
           }
-          if (
-            typeof updateParameters.checkTrigger === `number` &&
-            updateParameters.checkTrigger === -1
-          ) {
-            return of(undefined)
-          }
+          // todo there is a separate card to fix this error 7002-qa-console-error-handleoauthsession
           return this._oauth.declareOauthSession(params)
         } else {
           if (platform.social || platform.institutional) {
