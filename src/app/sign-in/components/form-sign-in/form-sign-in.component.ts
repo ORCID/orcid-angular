@@ -97,7 +97,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             .getUserSession()
             .pipe(first())
             .subscribe((userSession) => {
-              if (userSession.oauthSession) {
+              if (
+                userSession.oauthSession &&
+                userSession.oauthSession.clientId
+              ) {
                 this.signInLocal.type = TypeSignIn.oauth
               }
             })
