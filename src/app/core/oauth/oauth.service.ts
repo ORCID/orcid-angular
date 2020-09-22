@@ -18,7 +18,7 @@ const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
   'interaction_required',
   'invalid_scope',
-  'unsupported_response_type'
+  'unsupported_response_type',
 ]
 
 @Injectable({
@@ -138,22 +138,28 @@ export class OauthService {
     } else if (session.error || (session.errors && session.errors.length)) {
       // Send the user to the signin and display a toaster error
       let extra = {}
-      if (session.error === 'oauth_error' || session.error === 'invalid_grant') {
-          extra = {error: session.errorDescription}
+      if (
+        session.error === 'oauth_error' ||
+        session.error === 'invalid_grant'
+      ) {
+        extra = { error: session.errorDescription }
       }
-      this._router.navigate(['/signin'], {queryParams: extra})
+      this._router
+        .navigate(['/signin'], { queryParams: extra })
         .then((navigated: boolean) => {
-        if (navigated) {
-          this._errorHandler
-            .handleError(
-              new Error(
-                `${session.error || session.errors}.${session.errorDescription}`
-              ),
-              ERROR_REPORT.OAUTH_PARAMETERS
-            )
-            .subscribe()
-        }
-      })
+          if (navigated) {
+            this._errorHandler
+              .handleError(
+                new Error(
+                  `${session.error || session.errors}.${
+                    session.errorDescription
+                  }`
+                ),
+                ERROR_REPORT.OAUTH_PARAMETERS
+              )
+              .subscribe()
+          }
+        })
     }
     return of(session)
   }
