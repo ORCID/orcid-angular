@@ -32,19 +32,15 @@ import {
   RequestInfoForm,
   UserInfo,
 } from 'src/app/types'
-import { UserSession } from 'src/app/types/session.local'
+import {
+  UserSession,
+  UserSessionUpdateParameters,
+} from 'src/app/types/session.local'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
-
-interface UserSessionUpdateParameters {
-  checkTrigger:
-    | number
-    | { forceSessionUpdate: boolean; postLoginUpdate: boolean }
-  loggedIn: boolean
-}
 
 @Injectable({
   providedIn: 'root',
@@ -115,28 +111,42 @@ export class UserService {
     } else {
       this.sessionInitialized = true
       // trigger every 30 seconds or on _recheck subject event
-      merge(timer(0, 30 * 1000), this._recheck)
+      merge(
+        timer(0, 30 * 1000).pipe(
+          map((timerUpdate) => {
+            return { timerUpdate }
+          })
+        ),
+        this._recheck
+      )
         .pipe(
           // Check for updates on userStatus.json
           switchMap((checkTrigger) =>
             this.getUserStatus().pipe(
               map((loggedIn) => {
-                return { checkTrigger, loggedIn }
+                return { loggedIn, checkTrigger }
               })
             )
           ),
+          tap((value) => {
+            console.log('trigger ', value)
+          }),
+
           // Filter followup calls if the user status has no change
           //
           // Also turns on the flag loggingStateComesFromTheServer
           // indicating that the current logging state is taken from the server,
           // and not the initial assumption. (more on this on the following pipe)
-          filter((result) => {
+          filter((result: UserSessionUpdateParameters) => {
             this.loggingStateComesFromTheServer = true
             return this.userStatusHasChange(result)
           }),
+          tap((value) => {
+            console.log('userStatusHasChange', value)
+          }),
           // At the very beginning assumes the user is logged in,
           // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
-          startWith({ loggedIn: true, checkTrigger: -1 }),
+          startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
           switchMap((updateParameters) =>
             this.handleUserDataUpdate(updateParameters, queryParams)
           ),
@@ -157,8 +167,7 @@ export class UserService {
   private userStatusHasChange(updateParameters: UserSessionUpdateParameters) {
     if (
       !(updateParameters.loggedIn === this.currentlyLoggedIn) ||
-      (typeof updateParameters.checkTrigger !== `number` &&
-        updateParameters.checkTrigger.forceSessionUpdate)
+      updateParameters.checkTrigger.forceSessionUpdate
     ) {
       return true
     } else {
@@ -241,7 +250,8 @@ export class UserService {
           userInfo,
           nameForm,
           oauthSession,
-        }))
+        })),
+        tap((x) => console.log('combine lattest!'))
       )
     } else {
       return combineLatest([of(undefined), of(undefined), $oauthSession]).pipe(
@@ -270,13 +280,10 @@ export class UserService {
           const params =
             queryParams || (platform.queryParameters as OauthParameters)
           // After a user login remove the promp parameter
-          if (
-            typeof updateParameters.checkTrigger !== `number` &&
-            updateParameters.checkTrigger.postLoginUpdate
-          ) {
+          if (updateParameters.checkTrigger.postLoginUpdate) {
             delete params.prompt
           }
-          return this._oauth.declareOauthSession(params)
+          return this._oauth.declareOauthSession(params, updateParameters)
         } else {
           if (platform.social || platform.institutional) {
             return this._oauth.loadRequestInfoForm()

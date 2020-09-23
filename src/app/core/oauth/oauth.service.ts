@@ -4,16 +4,17 @@ import { Router } from '@angular/router'
 import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
+  last,
   retry,
   shareReplay,
   switchMap,
-  take,
   tap,
 } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
+import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
 import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
@@ -109,9 +110,13 @@ export class OauthService {
    *
    */
   declareOauthSession(
-    queryParameters: OauthParameters
+    queryParameters: OauthParameters,
+    updateParameters?: UserSessionUpdateParameters
   ): Observable<RequestInfoForm> {
-    if (!this.declareOauthSession$) {
+    if (
+      !this.declareOauthSession$ ||
+      updateParameters.checkTrigger.timerUpdate === undefined
+    ) {
       this.declareOauthSession$ = this._http
         .post<RequestInfoForm>(
           environment.BASE_URL +
@@ -129,9 +134,9 @@ export class OauthService {
           switchMap((session) => this.handleSessionErrors(session)),
           shareReplay(1)
         )
-      return this.declareOauthSession$.pipe(take(1))
+      return this.declareOauthSession$.pipe(last())
     } else {
-      return this.declareOauthSession$.pipe(take(1))
+      return this.declareOauthSession$.pipe(last())
     }
   }
 

@@ -10,3 +10,12 @@ export interface UserSession {
   effectiveOrcidUrl: string
   loggedIn: boolean
 }
+
+export interface UserSessionUpdateParameters {
+  checkTrigger: {
+    forceSessionUpdate?: boolean
+    postLoginUpdate?: boolean
+    timerUpdate?: number
+  }
+  loggedIn: boolean
+}
