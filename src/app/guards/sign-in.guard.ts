@@ -51,9 +51,16 @@ export class SignInGuard implements CanActivateChild {
       map((session) => {
         const oauthSession = session.oauthSession
         // If the show login parameters is present redirect the user to the register
-        if (queryParams.show_login && (queryParams.email || queryParams.orcid) &&  !session.oauthSession.userId) {
+        if (
+          queryParams.show_login &&
+          (queryParams.email || queryParams.orcid) &&
+          !session.oauthSession.userId
+        ) {
           return this.redirectToRegister(queryParams)
-        } else if (queryParams.show_login === 'false' && !session.oauthSession.userId) {
+        } else if (
+          queryParams.show_login === 'false' &&
+          !session.oauthSession.userId
+        ) {
           return this.redirectToRegister(queryParams)
         }
 
