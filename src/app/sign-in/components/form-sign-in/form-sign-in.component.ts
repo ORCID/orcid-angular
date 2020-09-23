@@ -97,7 +97,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             .getUserSession()
             .pipe(first())
             .subscribe((userSession) => {
-              if (userSession.oauthSession) {
+              if (
+                userSession.oauthSession &&
+                userSession.oauthSession.clientId
+              ) {
                 this.signInLocal.type = TypeSignIn.oauth
               }
             })
@@ -253,23 +256,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         map((value) => value.oauthSession)
       )
       .subscribe((requestInfoForm: RequestInfoForm) => {
-        if (
-          requestInfoForm.error === 'invalid_grant' ||
-          requestInfoForm.error === 'invalid_scope'
-        ) {
+        if (requestInfoForm.error === 'invalid_grant') {
           this.isOauthError.next(true)
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
-        } else if (requestInfoForm.error) {
-          this._errorHandler
-            .handleError(
-              new Error(
-                `${requestInfoForm.error}.${requestInfoForm.errorDescription}`
-              ),
-              ERROR_REPORT.OAUTH_PARAMETERS
-            )
-            .subscribe()
-          this._user.refreshUserSession(true)
         }
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)

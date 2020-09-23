@@ -51,7 +51,7 @@
               <app-social></app-social>
             </ng-container>
             <app-logged-in
-              *ngIf="isLoggedIn && !isForceLogin"
+              *ngIf="isLoggedIn && !isForceLogin && !isOauthError"
               [displayName]="displayName"
               [realUserOrcid]="realUserOrcid"
             >
