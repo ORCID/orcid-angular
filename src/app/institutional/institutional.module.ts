@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { InstitutionalRoutingModule } from './institutional-routing.module'
+import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 
 @NgModule({
   declarations: [InstitutionalComponent],
@@ -23,6 +24,7 @@ import { InstitutionalRoutingModule } from './institutional-routing.module'
     MatButtonModule,
     MatProgressBarModule,
     InstitutionalRoutingModule,
+    A11yLinkModule
   ],
 })
 export class InstitutionalModule {}

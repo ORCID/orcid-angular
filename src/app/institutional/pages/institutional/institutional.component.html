@@ -36,16 +36,18 @@
                   <ng-container
                     *ngFor="let institution of userSelectedInstitutions"
                   >
-                    <div
-                      (click)="selectInstitution(institution)"
-                      class="col l12 m8 s4 institutional-logo"
-                    >
+                    <div class="col l12 m8 s4 institutional-logo">
                       <img
-                        *ngIf="institution.Logos[0]"
+                        *ngIf="institution.Logos && institution.Logos[0]"
                         src="{{ institution.Logos[0].value }}"
                         alt="institution logo"
+                        (click)="selectInstitution(institution)"
                       />
-                      <a class="mat-button-font institution-name">
+                      <a
+                        class="mat-button-font institution-name"
+                        id="institutionName"
+                        (click)="selectInstitution(institution)"
+                      >
                         {{ getNameInstitution(institution).value }}
                       </a>
                     </div>
