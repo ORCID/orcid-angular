@@ -11,4 +11,5 @@ export interface OauthParameters {
   family_names: string
   state: string
   prompt?: 'login'
+  orcid: string
 }

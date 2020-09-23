@@ -10,9 +10,7 @@ import { Observable, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
-import { OauthService } from '../core/oauth/oauth.service'
 import { OauthParameters } from '../types'
-import { oauthSessionHasError, oauthSessionUserIsLoggedIn } from './constants'
 import { UserService } from '../core'
 
 @Injectable({
@@ -45,19 +43,15 @@ export class RegisterGuard implements CanActivateChild {
   handleOauthSession(queryParams: OauthParameters) {
     // check if the user is already login or there are errors
     return this._user.getUserSession(queryParams).pipe(
-      map((x) => x.oauthSession),
       map((session) => {
+        const oauthSession = session.oauthSession
+
         if (
-          !session.forceLogin &&
-          oauthSessionUserIsLoggedIn(session) &&
-          !oauthSessionHasError(session)
+          oauthSession &&
+          !oauthSession.forceLogin &&
+          session.oauthSessionIsLoggedIn
         ) {
           return this._router.createUrlTree(['/oauth/authorize'], {
-            queryParams: queryParams,
-          })
-        } else if (oauthSessionHasError(session)) {
-          // errors are handle on the signin guard
-          return this._router.createUrlTree(['/signin'], {
             queryParams: queryParams,
           })
         }

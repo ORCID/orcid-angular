@@ -1,15 +1,32 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap, switchMap, first } from 'rxjs/operators'
+import { Inject, Injectable } from '@angular/core'
+import { Router } from '@angular/router'
+import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
+import {
+  catchError,
+  last,
+  retry,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs/operators'
+import { WINDOW } from 'src/app/cdk/window'
+import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
+import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
 import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { ERROR_REPORT } from 'src/app/errors'
 import { TwoFactor } from '../../types/two-factor.endpoint'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
+
+const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
+  'login_required',
+  'interaction_required',
+  'invalid_scope',
+  'unsupported_response_type',
+]
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +34,13 @@ import { TwoFactor } from '../../types/two-factor.endpoint'
 export class OauthService {
   private headers: HttpHeaders
   private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)
+  private declareOauthSession$
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _router: Router,
+    @Inject(WINDOW) private window: Window
   ) {
     this.headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -41,10 +61,6 @@ export class OauthService {
     this.requestInfoSubject.next(requestInfoForm)
   }
 
-  /**
-   * @deprecated since declareOauthSession will declare and get the RequestInfoForm data.
-   * the loadRequestInfoFormFromMemory can replace this function
-   */
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
@@ -91,27 +107,79 @@ export class OauthService {
    *
    *  Important: Avoid calling this method directly, since getting the oauth RequestInfo from the UserService.getSession is preferred
    *
+   *  After the first call to this method it will keep returning the same observable, ignoring new or different queryParameters
+   *  this is not an issue since the Oauth session will only be refresh if the app is reloaded with a new Oauth URL
+   *
    */
   declareOauthSession(
-    queryParameters: OauthParameters
+    queryParameters: OauthParameters,
+    updateParameters?: UserSessionUpdateParameters
   ): Observable<RequestInfoForm> {
-    return this._http
-      .post<RequestInfoForm>(
-        environment.BASE_URL +
-          `oauth/custom/init.json?${this.objectToUrlParameters(
-            queryParameters
-          )}`,
-        queryParameters,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+    if (
+      !this.declareOauthSession$ ||
+      updateParameters.checkTrigger.timerUpdate === undefined
+    ) {
+      this.declareOauthSession$ = this._http
+        .post<RequestInfoForm>(
+          environment.BASE_URL +
+            `oauth/custom/init.json?${this.objectToUrlParameters(
+              queryParameters
+            )}`,
+          queryParameters,
+          { headers: this.headers }
         )
-      )
+        .pipe(
+          retry(3),
+          catchError((error) =>
+            this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+          ),
+          switchMap((session) => this.handleSessionErrors(session)),
+          shareReplay(1)
+        )
+      return this.declareOauthSession$.pipe(last())
+    } else {
+      return this.declareOauthSession$.pipe(last())
+    }
   }
 
+  handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {
+    if (
+      session.error &&
+      OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
+        (x) => x === session.error
+      )
+    ) {
+      // Redirect error that are handle by the client application
+      this.window.location.href = `${session.redirectUrl}#error=${session.error}`
+      return NEVER
+    } else if (session.error || (session.errors && session.errors.length)) {
+      // Send the user to the signin and display a toaster error
+      let extra = {}
+      if (
+        session.error === 'oauth_error' ||
+        session.error === 'invalid_grant'
+      ) {
+        extra = { error: session.errorDescription }
+      }
+      this._router
+        .navigate(['/signin'], { queryParams: extra })
+        .then((navigated: boolean) => {
+          if (navigated) {
+            this._errorHandler
+              .handleError(
+                new Error(
+                  `${session.error || session.errors}.${
+                    session.errorDescription
+                  }`
+                ),
+                ERROR_REPORT.OAUTH_PARAMETERS
+              )
+              .subscribe()
+          }
+        })
+    }
+    return of(session)
+  }
   /**
    * @deprecated in favor of using the same `oauth/custom/init.json` endpoint to
    * initialize Oauth, initialize Oauth after a login or initialize Oauth after a logout
