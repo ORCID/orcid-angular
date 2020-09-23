@@ -1,18 +1,25 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
+import { Router } from '@angular/router'
 import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap, switchMap, first, map } from 'rxjs/operators'
+import {
+  catchError,
+  last,
+  retry,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs/operators'
+import { WINDOW } from 'src/app/cdk/window'
+import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
+import { UserSessionUpdateParameters } from 'src/app/types/session.local'
 
 import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { ERROR_REPORT } from 'src/app/errors'
 import { TwoFactor } from '../../types/two-factor.endpoint'
-import { Router } from '@angular/router'
-import { WINDOW } from 'src/app/cdk/window'
-import { Inject } from '@angular/core'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -27,6 +34,7 @@ const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
 export class OauthService {
   private headers: HttpHeaders
   private requestInfoSubject = new ReplaySubject<RequestInfoForm>(1)
+  private declareOauthSession$
 
   constructor(
     private _http: HttpClient,
@@ -53,10 +61,6 @@ export class OauthService {
     this.requestInfoSubject.next(requestInfoForm)
   }
 
-  /**
-   * @deprecated since declareOauthSession will declare and get the RequestInfoForm data.
-   * the loadRequestInfoFormFromMemory can replace this function
-   */
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
@@ -103,26 +107,39 @@ export class OauthService {
    *
    *  Important: Avoid calling this method directly, since getting the oauth RequestInfo from the UserService.getSession is preferred
    *
+   *  After the first call to this method it will keep returning the same observable, ignoring new or different queryParameters
+   *  this is not an issue since the Oauth session will only be refresh if the app is reloaded with a new Oauth URL
+   *
    */
   declareOauthSession(
-    queryParameters: OauthParameters
+    queryParameters: OauthParameters,
+    updateParameters?: UserSessionUpdateParameters
   ): Observable<RequestInfoForm> {
-    return this._http
-      .post<RequestInfoForm>(
-        environment.BASE_URL +
-          `oauth/custom/init.json?${this.objectToUrlParameters(
-            queryParameters
-          )}`,
-        queryParameters,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) =>
-          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
-        ),
-        switchMap((session) => this.handleSessionErrors(session))
-      )
+    if (
+      !this.declareOauthSession$ ||
+      updateParameters.checkTrigger.timerUpdate === undefined
+    ) {
+      this.declareOauthSession$ = this._http
+        .post<RequestInfoForm>(
+          environment.BASE_URL +
+            `oauth/custom/init.json?${this.objectToUrlParameters(
+              queryParameters
+            )}`,
+          queryParameters,
+          { headers: this.headers }
+        )
+        .pipe(
+          retry(3),
+          catchError((error) =>
+            this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+          ),
+          switchMap((session) => this.handleSessionErrors(session)),
+          shareReplay(1)
+        )
+      return this.declareOauthSession$.pipe(last())
+    } else {
+      return this.declareOauthSession$.pipe(last())
+    }
   }
 
   handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {

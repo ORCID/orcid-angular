@@ -138,10 +138,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
       const isOauth = this.signInLocal.type === TypeSignIn.oauth
       const willNotNavigateOutOrcidAngular = isOauth
+      const forceSessionUpdate = isOauth
       const $signIn = this._signIn.signIn(
         this.signInLocal,
-        isOauth,
-        willNotNavigateOutOrcidAngular
+        willNotNavigateOutOrcidAngular,
+        forceSessionUpdate
       )
       $signIn.subscribe((data) => {
         this.printError = false
