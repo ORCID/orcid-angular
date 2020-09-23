@@ -24,7 +24,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     MatButtonModule,
     MatProgressBarModule,
     InstitutionalRoutingModule,
-    A11yLinkModule
+    A11yLinkModule,
   ],
 })
 export class InstitutionalModule {}
