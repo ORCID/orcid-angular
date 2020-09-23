@@ -79,7 +79,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .subscribe((platform) => {
         this.platform = platform
         if (platform.oauthMode) {
-          this.signInLocal.type = TypeSignIn.oauth
+          this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
               ...(params as OauthParameters),
@@ -101,7 +101,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
                 userSession.oauthSession &&
                 userSession.oauthSession.clientId
               ) {
-                this.signInLocal.type = TypeSignIn.oauth
+                this.signInLocal.isOauth = true
               }
             })
         }
@@ -136,7 +136,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       this.hideErrors()
       this.loading.next(true)
 
-      const isOauth = this.signInLocal.type === TypeSignIn.oauth
+      const isOauth = this.signInLocal.isOauth
       const willNotNavigateOutOrcidAngular = isOauth
       const forceSessionUpdate = isOauth
       const $signIn = this._signIn.signIn(

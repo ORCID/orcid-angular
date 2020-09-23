@@ -60,7 +60,7 @@ export class SignInService {
     }
     body = body.set(
       'oauthRequest',
-      signInLocal.type === TypeSignIn.oauth ? 'true' : 'false'
+      signInLocal.isOauth ? 'true' : 'false'
     )
     return this._http
       .post<SignIn>(environment.API_WEB + loginUrl, body, {
