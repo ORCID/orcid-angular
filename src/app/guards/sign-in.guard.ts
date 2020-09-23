@@ -46,14 +46,6 @@ export class SignInGuard implements CanActivateChild {
   }
 
   handleOauthSession(queryParams: OauthParameters) {
-    // If the show login parameters is present redirect the user to the register
-    if (queryParams.show_login === 'false') {
-      return of(
-        this._router.createUrlTree(['/register'], {
-          queryParams: queryParams,
-        })
-      )
-    }
     // check if the user is already login or there are errors
     return this._user.getUserSession(queryParams).pipe(
       map((session) => {
@@ -64,6 +56,20 @@ export class SignInGuard implements CanActivateChild {
         }
 
         const oauthSession = session.oauthSession
+        // If the show login parameters is present redirect the user to the register
+        if (
+          queryParams.show_login &&
+          (queryParams.email || queryParams.orcid) &&
+          !session.oauthSession.userId
+        ) {
+          return this.redirectToRegister(queryParams)
+        } else if (
+          queryParams.show_login === 'false' &&
+          !session.oauthSession.userId
+        ) {
+          return this.redirectToRegister(queryParams)
+        }
+
         if (
           oauthSession &&
           !oauthSession.forceLogin &&
@@ -76,5 +82,11 @@ export class SignInGuard implements CanActivateChild {
         return true
       })
     )
+  }
+
+  private redirectToRegister(queryParams) {
+    return this._router.createUrlTree(['/register'], {
+      queryParams: queryParams,
+    })
   }
 }
