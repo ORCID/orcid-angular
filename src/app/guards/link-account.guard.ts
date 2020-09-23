@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
-import { map, switchMap, tap, catchError } from 'rxjs/operators'
+import { map, switchMap, tap, catchError, last, take } from 'rxjs/operators'
 
 import { ApplicationRoutes } from '../constants'
 import { UserService } from '../core'
@@ -33,6 +33,7 @@ export class LinkAccountGuard implements CanActivateChild {
     | boolean
     | UrlTree {
     return this._platformInfo.get().pipe(
+      take(1),
       switchMap((platform) => {
         if (platform.social) {
           return this._oauthService.loadSocialSigninData()
@@ -40,13 +41,17 @@ export class LinkAccountGuard implements CanActivateChild {
           return this._oauthService.loadShibbolethSignInData()
         }
       }),
-      catchError(() => of(false)),
       map((value) => {
-        if (typeof value !== 'boolean' && value.providerId) {
+        console.log(value)
+        if (value.providerId) {
           return true
         } else {
           return this._router.createUrlTree(['/signin'])
         }
+      }),
+
+      catchError(() => {
+        return of(this._router.createUrlTree(['/signin']))
       })
     )
   }
