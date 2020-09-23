@@ -34,8 +34,12 @@ export class AppComponent {
     _platformInfo.get().subscribe((platformInfo) => {
       this.setPlatformClasses(platformInfo)
       this.screenDirection = platformInfo.screenDirection
-      _zendesk.adaptPluginToPlatform(platformInfo)
-      !platformInfo.oauthMode ? _zendesk.show() : _zendesk.hide()
+      if (!platformInfo.oauthMode) {
+        _zendesk.show()
+        _zendesk.adaptPluginToPlatform(platformInfo)
+      } else {
+        _zendesk.hide()
+      }
     })
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
