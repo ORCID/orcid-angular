@@ -3,6 +3,7 @@ import { OauthParameters } from '.'
 export interface SignInLocal {
   data: FormSignIn
   type: TypeSignIn
+  isOauth: boolean
   params: OauthParameters
 }
 
@@ -17,6 +18,5 @@ export interface FormSignIn {
 export enum TypeSignIn {
   'personal',
   'institutional',
-  'oauth',
   'social',
 }
