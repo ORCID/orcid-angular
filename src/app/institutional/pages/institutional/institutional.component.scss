@@ -30,10 +30,12 @@ img {
 
 .institutional-logo {
   display: block;
-  cursor: pointer;
   .institution-name {
     display: block;
     padding: 10px;
     margin-bottom: 10px;
+  }
+  img {
+    cursor: pointer;
   }
 }
