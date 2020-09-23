@@ -58,10 +58,7 @@ export class SignInService {
     if (signInLocal.data.recoveryCode) {
       body = body.set('recoveryCode', signInLocal.data.recoveryCode)
     }
-    body = body.set(
-      'oauthRequest',
-      signInLocal.isOauth ? 'true' : 'false'
-    )
+    body = body.set('oauthRequest', signInLocal.isOauth ? 'true' : 'false')
     return this._http
       .post<SignIn>(environment.API_WEB + loginUrl, body, {
         headers: this.headers,
