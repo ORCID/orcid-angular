@@ -283,6 +283,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           familyNames: value.userFamilyNames || value['lastName'] || '',
           emails: {
             email: value.userEmail || value['email'] || '',
+            confirmEmail: '',
             additionalEmails: { '0': '' },
           },
         },
