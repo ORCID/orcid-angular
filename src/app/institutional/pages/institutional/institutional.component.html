@@ -111,17 +111,19 @@
                   </mat-error>
                 </mat-form-field>
                 <div class="institutional-buttons">
-                  <a
-                    class="mat-button-font"
+                  <button
+                    mat-button
+                    color="primary"
+                    type="button"
                     i18n="@@institutional.goBack"
                     [routerLink]="['/signin']"
                     >Go back
-                  </a>
+                  </button>
                   <button
                     mat-raised-button
                     (click)="onSubmit()"
                     color="primary"
-                    class="row mat-elevation-z0"
+                    class="row mat-elevation-z0 continue"
                     type="submit"
                     [disabled]="loading"
                     i18n="@@institutional.continue"
