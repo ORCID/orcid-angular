@@ -228,15 +228,24 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         if (platform.social || platform.institutional) {
           if (this.signInData) {
             const { email, firstName, lastName, providerId } = this.signInData
-            this._router.navigate(['/register'], {
-              queryParams: {
-                ...platform.queryParameters,
-                email,
-                firstName,
-                lastName,
-                providerId,
-              },
-            })
+            this._user
+              .getUserSession()
+              .pipe(first())
+              .subscribe((userSession) => {
+                const params = platform.queryParameters
+                if (userSession.oauthSession) {
+                  params['oauth'] = ''
+                }
+                this._router.navigate(['/register'], {
+                  queryParams: {
+                    ...params,
+                    email,
+                    firstName,
+                    lastName,
+                    providerId,
+                  },
+                })
+              })
           } else {
             this._errorHandler.handleError(new Error('signingMissingData'))
           }
