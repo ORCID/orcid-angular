@@ -228,7 +228,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         if (platform.social || platform.institutional) {
           if (this.signInData) {
             const { email, firstName, lastName, providerId } = this.signInData
-            this._user.getUserSession().subscribe((userSession) => {
+            this._user.getUserSession()
+              .pipe(first())
+              .subscribe((userSession) => {
               const params = platform.queryParameters
               if (userSession.oauthSession) {
                 params['oauth'] = ''
