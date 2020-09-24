@@ -116,7 +116,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                   return of(
                     (this.FormGroupStepA = this.prefillRegisterForm(
                       this.platform.queryParameters
-                    )))
+                    ))
+                  )
                 }
               })
             )
