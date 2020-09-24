@@ -49,6 +49,16 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
 
   deleteEmailInput(id: string): void {
     this.additionalEmails.removeControl(id)
+    this._changeDetectorRef.detectChanges()
+
+    const input = this.inputs.filter(
+      (x) => this.parseInt(x.nativeElement.id) > this.parseInt(id)
+    )?.[0]
+    if (input) {
+      input.nativeElement.focus()
+    } else if (this.inputs.last) {
+      this.inputs.last.nativeElement.focus()
+    }
   }
 
   addAdditionalEmail(): void {
