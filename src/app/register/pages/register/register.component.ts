@@ -85,6 +85,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this._platformInfo
       .get()
       .pipe(
+        first(),
         mergeMap((platform) => {
           if (platform.oauthMode) {
             return this._user.getUserSession().pipe(
