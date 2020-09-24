@@ -85,6 +85,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this._platformInfo
       .get()
       .pipe(
+        first(),
         mergeMap((platform) => {
           if (platform.oauthMode) {
             return this._user.getUserSession().pipe(
@@ -103,10 +104,23 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               })
             )
           } else if (platform.social || platform.institutional) {
-            return of(
-              (this.FormGroupStepA = this.prefillRegisterForm(
-                this.platform.queryParameters
-              ))
+            return this._user.getUserSession().pipe(
+              first(),
+              map((session) => session.oauthSession),
+              tap((requestInfoForm) => {
+                if (requestInfoForm) {
+                  this.requestInfoForm = requestInfoForm
+                  this.FormGroupStepA = this.prefillRegisterForm(
+                    this.requestInfoForm
+                  )
+                } else {
+                  return of(
+                    (this.FormGroupStepA = this.prefillRegisterForm(
+                      this.platform.queryParameters
+                    ))
+                  )
+                }
+              })
             )
           } else {
             return EMPTY
