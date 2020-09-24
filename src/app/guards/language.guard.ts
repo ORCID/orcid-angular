@@ -11,8 +11,8 @@ import { catchError, first, switchMap, tap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
+import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { LanguageService } from '../core/language/language.service'
 import { LanguageContext } from '../types/language.locale'
 
 @Injectable({
@@ -23,7 +23,8 @@ export class LanguageGuard implements CanActivateChild {
     @Inject(LOCALE_ID) public locale: string,
     private _platform: PlatformInfoService,
     private _cookies: CookieService,
-    private _language: LanguageService,
+
+    private _user: UserService,
     @Inject(WINDOW) private window: Window,
     private _router: Router,
     private _errorHandler: ErrorHandlerService
@@ -45,9 +46,11 @@ export class LanguageGuard implements CanActivateChild {
           platform.oauthMode &&
           this.requireLanguageCookieUpdate(langContext)
         ) {
-          return this._language.changeLanguage(langContext.param).pipe(
+          // do initialize the user session to change the language
+          // this will trigger the oauth init.json, which will update the language cookie
+          return this._user.getUserSession(queryParams).pipe(
             tap(() => {
-              // refresh language context after the language change
+              // refresh language context if the language changed
               langContext = this.getLanguageContext(queryParams)
             }),
             switchMap(() => {
