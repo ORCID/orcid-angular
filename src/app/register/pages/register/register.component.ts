@@ -103,7 +103,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 }
               })
             )
-          } else if (platform.social || platform.institutional) {
+          } else if (platform.social || platform.institutional ||
+            platform.queryParameters.providerId === 'facebook' ||
+            platform.queryParameters.providerId === 'google' ||
+            platform.queryParameters.providerId === 'shibboleth'
+          ) {
             return this._user.getUserSession().pipe(
               first(),
               map((session) => session.oauthSession),
@@ -196,11 +200,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       this._platformInfo
         .get()
         .pipe(first())
-        .subscribe((platform) =>
-          this._router.navigate(['/oauth/authorize'], {
-            queryParams: platform.queryParameters,
-          })
-        )
+        .subscribe((platform) => {
+          if (platform.queryParameters.providerId) {
+            this.window.location.href = response.url
+          } else {
+            this._router.navigate(['/oauth/authorize'], {
+              queryParams: platform.queryParameters,
+            })
+          }
+        })
     } else {
       this.window.location.href = response.url
     }
