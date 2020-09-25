@@ -103,7 +103,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 }
               })
             )
-          } else if (platform.social || platform.institutional ||
+          } else if (
+            platform.social ||
+            platform.institutional ||
             platform.queryParameters.providerId === 'facebook' ||
             platform.queryParameters.providerId === 'google' ||
             platform.queryParameters.providerId === 'shibboleth'
