@@ -91,7 +91,10 @@ export class RegisterService extends _RegisterServiceMixingBase {
       first(),
       switchMap((platform) => {
         let url = `${environment.API_WEB}`
-        if (platform.institutional) {
+        if (
+          platform.institutional ||
+          platform.queryParameters.providerId === 'shibboleth'
+        ) {
           url += `shibboleth/`
         }
         url += `registerConfirm.json`
@@ -149,10 +152,17 @@ export class RegisterService extends _RegisterServiceMixingBase {
     platform: PlatformInfo,
     registerForm: RegisterForm
   ): RegisterForm {
-    if (platform.social) {
+    if (
+      platform.social ||
+      platform.queryParameters.providerId === 'facebook' ||
+      platform.queryParameters.providerId === 'google'
+    ) {
       registerForm.linkType = 'social'
       return registerForm
-    } else if (platform.institutional) {
+    } else if (
+      platform.institutional ||
+      platform.queryParameters.providerId === 'shibboleth'
+    ) {
       registerForm.linkType = 'shibboleth'
       return registerForm
     } else {
