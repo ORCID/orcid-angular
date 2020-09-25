@@ -145,7 +145,7 @@ export class InstitutionalComponent implements OnInit {
     const dateCookie = new Date(
       new Date().getTime() + this.cookieExpirationTime * 24 * 60 * 60 * 1000
     )
-    if (!institutions.includes(btoa(this.entityID))) {
+    if (institutions.indexOf(btoa(this.entityID)) !== -1) {
       if (institutions.length === 3) {
         institutions.shift()
       }
