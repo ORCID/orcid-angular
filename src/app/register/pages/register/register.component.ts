@@ -87,7 +87,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       .pipe(
         first(),
         mergeMap((platform) => {
-          if (platform.oauthMode) {
+          if (platform.queryParameters.providerId) {
+            return of(
+              (this.FormGroupStepA = this.prefillRegisterForm(
+                this.platform.queryParameters
+              ))
+            )
+          } else if (platform.oauthMode) {
             return this._user.getUserSession().pipe(
               first(),
               map((session) => session.oauthSession),
@@ -100,31 +106,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 } else {
                   // for a oauth call the backend was expected to return a oauth context
                   this._errorHandler.handleError(new Error('registerOauth'))
-                }
-              })
-            )
-          } else if (
-            platform.social ||
-            platform.institutional ||
-            platform.queryParameters.providerId === 'facebook' ||
-            platform.queryParameters.providerId === 'google' ||
-            platform.queryParameters.providerId === 'shibboleth'
-          ) {
-            return this._user.getUserSession().pipe(
-              first(),
-              map((session) => session.oauthSession),
-              tap((requestInfoForm) => {
-                if (requestInfoForm) {
-                  this.requestInfoForm = requestInfoForm
-                  this.FormGroupStepA = this.prefillRegisterForm(
-                    this.requestInfoForm
-                  )
-                } else {
-                  return of(
-                    (this.FormGroupStepA = this.prefillRegisterForm(
-                      this.platform.queryParameters
-                    ))
-                  )
                 }
               })
             )
