@@ -227,7 +227,13 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .subscribe((platform) => {
         if (platform.social || platform.institutional) {
           if (this.signInData) {
-            const { email, firstName, lastName, providerId } = this.signInData
+            const {
+              email,
+              firstName,
+              lastName,
+              providerId,
+              linkType,
+            } = this.signInData
             this._user
               .getUserSession()
               .pipe(first())
@@ -243,6 +249,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
                     firstName,
                     lastName,
                     providerId,
+                    linkType,
                   },
                 })
               })
