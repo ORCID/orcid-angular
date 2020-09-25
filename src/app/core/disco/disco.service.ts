@@ -31,7 +31,7 @@ export class DiscoService {
       institutionNames = allInstitutionNames.filter((institutionName) => {
         institutionName = institutionName.toLowerCase()
         filterInput = filterInput.toLocaleLowerCase()
-        return institutionName.indexOf(filterInput.toLowerCase()) === 0
+        return institutionName.indexOf(filterInput.toLowerCase()) !== -1
       })
       institutionNames = institutionNames.slice(
         0,
