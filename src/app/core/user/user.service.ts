@@ -283,7 +283,6 @@ export class UserService {
           return this._oauth.declareOauthSession(params, updateParameters)
         } else {
           if (platform.social || platform.institutional) {
-            
             // TODO @leomendoza123 improve oauth mode detection...
             //
             // currently the loadRequestInfoForm is always loaded for institutional and social
