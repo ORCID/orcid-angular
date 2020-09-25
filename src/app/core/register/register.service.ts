@@ -93,7 +93,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
         let url = `${environment.API_WEB}`
         if (
           platform.institutional ||
-          platform.queryParameters.providerId === 'shibboleth'
+          platform.queryParameters.linkType === 'shibboleth'
         ) {
           url += `shibboleth/`
         }
