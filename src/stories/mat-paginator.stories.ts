@@ -8,7 +8,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Components|Paginator', module).add(
+storiesOf('Components/Paginator', module).add(
   'Plain',
   () => ({
     template: `

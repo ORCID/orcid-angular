@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatButtonModule } from '@angular/material/button'
 
-storiesOf('Components|Card', module)
+storiesOf('Components/Card', module)
   .add('Regular', () => ({
     template: `
       <mat-card class="example-card" style="max-width: 400px">

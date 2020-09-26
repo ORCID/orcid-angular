@@ -14,7 +14,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Components|Trusted individuals dropdown', module)
+storiesOf('Components/Trusted individuals dropdown', module)
   .add(
     'plain',
     () => ({
