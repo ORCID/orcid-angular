@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { retry } from 'rxjs/internal/operators/retry'
-import { catchError, switchMap, tap } from 'rxjs/operators'
+import { catchError, switchMap, tap, retry } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
 import { environment } from 'src/environments/environment'
 

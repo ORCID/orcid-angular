@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable } from 'rxjs'
-import { catchError } from 'rxjs/internal/operators/catchError'
-import { retry } from 'rxjs/internal/operators/retry'
-import { tap } from 'rxjs/operators'
+import { catchError, tap, retry } from 'rxjs/operators'
 import { AffiliationUIGroup, Person, Works } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
