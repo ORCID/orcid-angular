@@ -52,7 +52,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
         password: new FormControl('', {
           validators: [
             Validators.required,
-            Validators.minLength(8),
+            Validators.minLength(8), //TODO @leomendoza123 angulae 10 check
             Validators.pattern(this.hasNumberPatter),
             Validators.pattern(this.hasLetterOrSymbolPatter),
             this.passwordDoesNotContainUserEmails(),

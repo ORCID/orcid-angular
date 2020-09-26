@@ -44,7 +44,6 @@ import { OauthErrorComponent } from './components/errors/oauth-error/oauth-error
     FormDirectivesModule,
     A11yLinkModule,
   ],
-  entryComponents: [],
   exports: [FormSignInComponent, TwoFactorComponent],
 })
 export class SignInModule {}

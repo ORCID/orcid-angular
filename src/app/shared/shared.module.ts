@@ -43,7 +43,6 @@ import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-c
     MatSnackBarModule,
     RegionCityCountryPipe,
   ],
-  entryComponents: [CopyOnClickComponent],
   providers: [], // Should not provide anything
 })
 export class SharedModule {}
