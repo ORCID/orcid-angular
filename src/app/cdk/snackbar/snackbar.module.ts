@@ -7,6 +7,5 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 @NgModule({
   declarations: [SnackbarComponent],
   imports: [CommonModule, MatIconModule, MatSnackBarModule],
-  entryComponents: [SnackbarComponent],
 })
 export class SnackbarModule {}
