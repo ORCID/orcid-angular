@@ -93,6 +93,22 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "extends": ["tslint:latest", "tslint-config-prettier"]
+
+
+    
+    
+    "no-t": true,
+    "expect-deprecatio": false,
+    "no-unused-declaration": {
+      "options": [
+        {
+          "declarations": true,
+          "ignored": {},
+          "imports": true
+        }
+      ]
+    },
+
+    "extends": ["tslint:latest", "tslint-config-prettier", "tslint-etc"]
   }
 }
