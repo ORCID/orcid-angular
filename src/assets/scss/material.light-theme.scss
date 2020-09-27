@@ -16,7 +16,7 @@
     $background,
     (
       // COLORS ADDED
-        app-news: $dark-primary-background,
+      app-news: $dark-primary-background,
       light-grey: $light-grey,
       grey: $grey,
       blue-overlay: $blue-overlay,
@@ -28,7 +28,7 @@
       ui-background-lightest: $ui-background-lightest,
       ui-background: $ui-background,
       // COLORS OVERWRITES
-        unselected-chip: white
+      unselected-chip: white
     )
   );
   // .

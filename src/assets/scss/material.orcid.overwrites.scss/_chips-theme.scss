@@ -43,7 +43,10 @@
   .mat-chip.mat-standard-chip.mat-chip-selected.orcid-outline-chip {
     // Overwrites active states to follow material definitions
     // https://material.io/design/interaction/states.html#anatomy
-    @include _mat-chip-element-color($unselected-foreground, $unselected-background);
+    @include _mat-chip-element-color(
+      $unselected-foreground,
+      $unselected-background
+    );
     &.mat-primary {
       &::after {
         background: mat-color($primary, 700);
