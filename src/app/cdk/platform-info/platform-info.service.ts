@@ -5,7 +5,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
-import { environment } from 'src/environments/environment'
 
 import { WINDOW } from '../window'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'

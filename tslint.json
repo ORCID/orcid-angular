@@ -1,5 +1,6 @@
 {
   "rulesDirectory": ["node_modules/codelyzer"],
+  "extends": ["tslint-etc"],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
@@ -94,7 +95,6 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
 
-    "no-t": true,
     "expect-deprecation": false,
     "no-unused-declaration": {
       "options": [
@@ -104,8 +104,6 @@
           "imports": true
         }
       ]
-    },
-
-    "extends": ["tslint:latest", "tslint-config-prettier", "tslint-etc"]
+    }
   }
 }

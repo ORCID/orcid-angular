@@ -12,12 +12,12 @@ export class ZendeskService {
   constructor(@Inject(WINDOW) private _window: Window) {}
 
   hide() {
-    this.zE = (<any>this._window).zE
+    this.zE = (this._window as any).zE
     this.zE('webWidget', 'hide')
   }
 
   show() {
-    this.zE = (<any>this._window).zE
+    this.zE = (this._window as any).zE
     this.zE('webWidget', 'show')
   }
 

@@ -7,7 +7,6 @@ import {
   Inject,
   OnInit,
   ViewChild,
-  ErrorHandler,
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
@@ -274,7 +273,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     // On mobile scroll the current step component into view
     if (this.platform.columns4 || this.platform.columns8) {
       setTimeout(() => {
-        const nativeElementNextStep = <HTMLElement>nextStep.nativeElement
+        const nativeElementNextStep = nextStep.nativeElement as HTMLElement
         nativeElementNextStep.scrollIntoView()
       }, 200)
     }

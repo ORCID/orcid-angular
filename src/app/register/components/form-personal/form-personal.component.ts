@@ -152,7 +152,7 @@ export class FormPersonalComponent extends BaseForm
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const emailsForm = this._register.formGroupToEmailRegisterForm(
-        <FormGroup>this.form.controls['emails']
+        this.form.controls['emails'] as FormGroup
       )
       const namesForm =
         this._register.formGroupToNamesRegisterForm(this.form) || {}

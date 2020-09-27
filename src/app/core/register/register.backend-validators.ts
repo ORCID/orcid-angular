@@ -5,7 +5,6 @@ import {
   ValidationErrors,
 } from '@angular/forms'
 import { RegisterForm } from 'src/app/types/register.endpoint'
-import { Value } from 'src/app/types/common.endpoint'
 import { Constructor } from 'src/app/types'
 import { Observable, of } from 'rxjs'
 import { environment } from 'src/environments/environment'

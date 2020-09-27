@@ -46,7 +46,6 @@ export class OrcidValidators {
     caseSensitive = true
   ): ValidatorFn {
     return (formGroup: FormGroup) => {
-      let hasErrors = false
       const control = formGroup.controls[value1]
       const confirmControl = formGroup.controls[value2]
 
@@ -66,10 +65,8 @@ export class OrcidValidators {
         : confirmControl.value.toLowerCase()
 
       if (firstValue !== secondValue) {
-        hasErrors = true
         confirmControl.setErrors({ mismatch: true })
       } else if (confirmControl.hasError('mismatch')) {
-        hasErrors = false
         delete confirmControl.errors['mismatch']
         confirmControl.updateValueAndValidity()
       }

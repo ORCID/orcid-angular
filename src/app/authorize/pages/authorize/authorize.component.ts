@@ -9,7 +9,6 @@ import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-ana
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
-import { ScopesStrings } from 'src/app/types/common.endpoint'
 import {
   RequestInfoForm,
   Scope,
@@ -18,7 +17,6 @@ import {
   Delegator,
   TrustedIndividuals,
 } from 'src/app/types/trusted-individuals.endpoint'
-import { UserInfo } from 'os'
 import { UserSession } from 'src/app/types/session.local'
 
 @Component({

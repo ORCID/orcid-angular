@@ -10,10 +10,9 @@ import { Observable, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
-import { OauthParameters, RequestInfoForm } from '../types'
+import { OauthParameters } from '../types'
 import { UserService } from '../core'
 import { WINDOW } from '../cdk/window'
-import { ERROR_REPORT } from '../errors'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 
 @Injectable({
@@ -55,7 +54,7 @@ export class SignInGuard implements CanActivateChild {
           !session.oauthSession.userId
         ) {
           return this._router.createUrlTree(['/register'], {
-            queryParams: queryParams,
+            queryParams,
           })
         }
 
@@ -82,7 +81,7 @@ export class SignInGuard implements CanActivateChild {
           session.oauthSessionIsLoggedIn
         ) {
           return this._router.createUrlTree(['/oauth/authorize'], {
-            queryParams: queryParams,
+            queryParams,
           })
         }
         return true
@@ -92,7 +91,7 @@ export class SignInGuard implements CanActivateChild {
 
   private redirectToRegister(queryParams) {
     return this._router.createUrlTree(['/register'], {
-      queryParams: queryParams,
+      queryParams,
     })
   }
 }

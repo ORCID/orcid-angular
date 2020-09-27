@@ -104,13 +104,10 @@ export class RegisterService extends _RegisterServiceMixingBase {
           registerForm
         )
 
-        return this._http.post<RegisterConfirmResponse>(
-          url,
-          Object.assign(
-            this.backendRegistrationForm,
-            registerFormWithTypeContext
-          )
-        )
+        return this._http.post<RegisterConfirmResponse>(url, {
+          ...this.backendRegistrationForm,
+          ...registerFormWithTypeContext,
+        })
       }),
       retry(3),
       catchError((error) =>

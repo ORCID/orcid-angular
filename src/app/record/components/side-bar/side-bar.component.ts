@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { UserService } from 'src/app/core'
-import { Observable, Subject } from 'rxjs'
+import { Subject } from 'rxjs'
 import { UserInfo, NameForm, RequestInfoForm } from 'src/app/types'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'

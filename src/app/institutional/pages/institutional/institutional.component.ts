@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
-import { first, map, startWith, switchMap, take, tap } from 'rxjs/operators'
+import { map, startWith, tap } from 'rxjs/operators'
 
 import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'

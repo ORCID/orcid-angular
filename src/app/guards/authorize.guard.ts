@@ -7,13 +7,12 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
-import { map, switchMap, finalize } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthParameters } from '../types'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { ERROR_REPORT } from '../errors'
 import { WINDOW } from '../cdk/window'
 
 @Injectable({
@@ -81,7 +80,7 @@ export class AuthorizeGuard implements CanActivateChild {
     // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
     queryParams['oauth'] = ''
     return this._router.createUrlTree(['/signin'], {
-      queryParams: queryParams,
+      queryParams,
     })
   }
 }

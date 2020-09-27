@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, combineLatest, ReplaySubject, of } from 'rxjs'
+import { Observable, combineLatest, ReplaySubject } from 'rxjs'
 import {
   Person,
   Emails,
@@ -14,9 +14,8 @@ import {
 } from 'src/app/types'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
-import { retry, catchError, tap, map } from 'rxjs/operators'
+import { retry, catchError, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Address } from 'cluster'
 import { UserRecord } from 'src/app/types/record.local'
 
 @Injectable({

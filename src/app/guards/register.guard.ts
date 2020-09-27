@@ -52,7 +52,7 @@ export class RegisterGuard implements CanActivateChild {
           session.oauthSessionIsLoggedIn
         ) {
           return this._router.createUrlTree(['/oauth/authorize'], {
-            queryParams: queryParams,
+            queryParams,
           })
         }
         return true
