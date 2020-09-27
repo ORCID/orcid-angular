@@ -6,11 +6,11 @@ describe('FormPersonalAdditionalEmailsComponent', () => {
   let component: FormPersonalAdditionalEmailsComponent
   let fixture: ComponentFixture<FormPersonalAdditionalEmailsComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FormPersonalAdditionalEmailsComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormPersonalAdditionalEmailsComponent)

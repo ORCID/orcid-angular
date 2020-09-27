@@ -6,11 +6,11 @@ describe('SkipMainNavComponent', () => {
   let component: SkipMainNavComponent
   let fixture: ComponentFixture<SkipMainNavComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SkipMainNavComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SkipMainNavComponent)

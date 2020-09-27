@@ -6,11 +6,11 @@ describe('InfoDropDownComponent', () => {
   let component: InfoDropDownComponent
   let fixture: ComponentFixture<InfoDropDownComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [InfoDropDownComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InfoDropDownComponent)

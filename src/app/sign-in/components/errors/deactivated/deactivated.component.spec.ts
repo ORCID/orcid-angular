@@ -6,11 +6,11 @@ describe('DeactivatedComponent', () => {
   let component: DeactivatedComponent
   let fixture: ComponentFixture<DeactivatedComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DeactivatedComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DeactivatedComponent)

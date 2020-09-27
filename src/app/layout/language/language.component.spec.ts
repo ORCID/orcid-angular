@@ -6,11 +6,11 @@ describe('LanguageComponent', () => {
   let component: LanguageComponent
   let fixture: ComponentFixture<LanguageComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LanguageComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LanguageComponent)

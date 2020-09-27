@@ -44,10 +44,10 @@ export class ProfileService {
   }
 
   get(id): Observable<[Person, AffiliationUIGroup[], Works]> {
-    return combineLatest(
+    return combineLatest([
       this.getPerson(id),
       this._affiliations.get(id),
-      this._works.get(id)
-    )
+      this._works.get(id),
+    ])
   }
 }

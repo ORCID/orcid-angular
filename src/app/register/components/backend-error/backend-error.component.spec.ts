@@ -6,11 +6,11 @@ describe('BackendErrorComponent', () => {
   let component: BackendErrorComponent
   let fixture: ComponentFixture<BackendErrorComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [BackendErrorComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BackendErrorComponent)

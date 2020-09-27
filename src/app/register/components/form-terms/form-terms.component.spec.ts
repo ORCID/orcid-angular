@@ -6,11 +6,11 @@ describe('FormTermsComponent', () => {
   let component: FormTermsComponent
   let fixture: ComponentFixture<FormTermsComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FormTermsComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormTermsComponent)

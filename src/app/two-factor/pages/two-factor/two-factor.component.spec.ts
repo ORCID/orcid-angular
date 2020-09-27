@@ -6,11 +6,11 @@ describe('TwoFactorComponent', () => {
   let component: TwoFactorComponent
   let fixture: ComponentFixture<TwoFactorComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TwoFactorComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TwoFactorComponent)

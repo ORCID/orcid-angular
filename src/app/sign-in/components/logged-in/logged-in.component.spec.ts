@@ -6,11 +6,11 @@ describe('LoggedInComponent', () => {
   let component: LoggedInComponent
   let fixture: ComponentFixture<LoggedInComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoggedInComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoggedInComponent)

@@ -6,11 +6,11 @@ describe('ProfileInfoComponent', () => {
   let component: ProfileInfoComponent
   let fixture: ComponentFixture<ProfileInfoComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ProfileInfoComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProfileInfoComponent)

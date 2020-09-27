@@ -6,11 +6,11 @@ describe('EnvironmentBannerComponent', () => {
   let component: EnvironmentBannerComponent
   let fixture: ComponentFixture<EnvironmentBannerComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EnvironmentBannerComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EnvironmentBannerComponent)

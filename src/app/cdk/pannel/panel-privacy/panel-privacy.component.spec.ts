@@ -6,11 +6,11 @@ describe('PanelPrivacyComponent', () => {
   let component: PanelPrivacyComponent
   let fixture: ComponentFixture<PanelPrivacyComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PanelPrivacyComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelPrivacyComponent)

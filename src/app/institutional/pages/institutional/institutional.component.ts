@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { CookieService } from 'ngx-cookie-service'
@@ -18,10 +24,10 @@ import {
   selector: 'app-institutional',
   templateUrl: './institutional.component.html',
   styleUrls: ['./institutional.component.scss'],
-  host: { class: 'container' },
   preserveWhitespaces: true,
 })
 export class InstitutionalComponent implements OnInit {
+  @HostBinding('class.container') containerClass = true
   displayAutocompleteOptions = false
   loading = false
   options: string[]

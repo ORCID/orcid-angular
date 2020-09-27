@@ -6,11 +6,11 @@ describe('NotificationPermissionINSTITUTIONALCONNECTIONComponent', () => {
   let component: NotificationPermissionInstitutionalConnectionComponent
   let fixture: ComponentFixture<NotificationPermissionInstitutionalConnectionComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NotificationPermissionInstitutionalConnectionComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(

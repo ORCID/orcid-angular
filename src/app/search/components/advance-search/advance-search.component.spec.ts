@@ -6,11 +6,11 @@ describe('AdvanceSearchComponent', () => {
   let component: AdvanceSearchComponent
   let fixture: ComponentFixture<AdvanceSearchComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AdvanceSearchComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdvanceSearchComponent)

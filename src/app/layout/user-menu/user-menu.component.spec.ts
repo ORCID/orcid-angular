@@ -6,11 +6,11 @@ describe('UserMenuComponent', () => {
   let component: UserMenuComponent
   let fixture: ComponentFixture<UserMenuComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [UserMenuComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserMenuComponent)

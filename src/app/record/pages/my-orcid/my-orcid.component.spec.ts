@@ -6,11 +6,11 @@ describe('MyOrcidComponent', () => {
   let component: MyOrcidComponent
   let fixture: ComponentFixture<MyOrcidComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MyOrcidComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MyOrcidComponent)

@@ -6,11 +6,11 @@ describe('FormVisibilityComponent', () => {
   let component: FormVisibilityComponent
   let fixture: ComponentFixture<FormVisibilityComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FormVisibilityComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormVisibilityComponent)

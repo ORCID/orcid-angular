@@ -6,11 +6,11 @@ describe('OauthErrorComponent', () => {
   let component: OauthErrorComponent
   let fixture: ComponentFixture<OauthErrorComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [OauthErrorComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OauthErrorComponent)

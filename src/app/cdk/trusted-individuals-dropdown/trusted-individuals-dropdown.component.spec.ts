@@ -6,11 +6,11 @@ describe('TrustedIndividualsDropdownComponent', () => {
   let component: TrustedIndividualsDropdownComponent
   let fixture: ComponentFixture<TrustedIndividualsDropdownComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TrustedIndividualsDropdownComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TrustedIndividualsDropdownComponent)

@@ -6,11 +6,11 @@ describe('InboxComponent', () => {
   let component: InboxComponent
   let fixture: ComponentFixture<InboxComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [InboxComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InboxComponent)

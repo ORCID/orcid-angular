@@ -6,11 +6,11 @@ describe('PrintErrorsComponent', () => {
   let component: PrintErrorsComponent
   let fixture: ComponentFixture<PrintErrorsComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PrintErrorsComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PrintErrorsComponent)

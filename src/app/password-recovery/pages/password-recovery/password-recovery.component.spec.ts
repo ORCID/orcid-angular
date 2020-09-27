@@ -6,11 +6,11 @@ describe('PasswordRecoveryComponent', () => {
   let component: PasswordRecoveryComponent
   let fixture: ComponentFixture<PasswordRecoveryComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PasswordRecoveryComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PasswordRecoveryComponent)

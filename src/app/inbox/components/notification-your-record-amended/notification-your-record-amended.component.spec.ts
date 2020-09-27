@@ -6,11 +6,11 @@ describe('NotificationYourRecordAmendedComponent', () => {
   let component: NotificationYourRecordAmendedComponent
   let fixture: ComponentFixture<NotificationYourRecordAmendedComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NotificationYourRecordAmendedComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationYourRecordAmendedComponent)

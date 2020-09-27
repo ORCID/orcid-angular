@@ -6,11 +6,11 @@ describe('SearchComponent', () => {
   let component: SearchComponent
   let fixture: ComponentFixture<SearchComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SearchComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchComponent)

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 
-import { BaseStep } from '../BaseStep'
+import { BaseStepDirective } from '../BaseStep'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
@@ -12,7 +12,7 @@ import { ApplicationRoutes } from 'src/app/constants'
   styleUrls: ['./step-a.component.scss'],
   preserveWhitespaces: true,
 })
-export class StepAComponent extends BaseStep {
+export class StepAComponent extends BaseStepDirective {
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
   }

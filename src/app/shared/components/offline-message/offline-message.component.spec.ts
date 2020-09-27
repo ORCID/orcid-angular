@@ -6,11 +6,11 @@ describe('OfflineMessageComponent', () => {
   let component: OfflineMessageComponent
   let fixture: ComponentFixture<OfflineMessageComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [OfflineMessageComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OfflineMessageComponent)
