@@ -122,8 +122,7 @@ export class InstitutionalComponent implements OnInit {
     this.entityID = this.institution.entityID
 
     if (
-      this.institution &&
-      this.institution.Logos &&
+      this.institution?.Logos &&
       !this.isInstitutionLogoDisplayed(this.institution.Logos[0].value)
     ) {
       this.logoInstitution = this.institution.Logos[0].value
