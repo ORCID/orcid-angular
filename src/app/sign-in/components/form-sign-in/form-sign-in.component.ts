@@ -11,7 +11,7 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { first, map } from 'rxjs/operators'
+import { catchError, first, map } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -150,10 +150,20 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
           } else {
-            this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
-              () => this.navigateTo(data.url),
-              () => this.navigateTo(data.url)
-            )
+            this._gtag
+              .reportEvent('RegGrowth', 'Sign-In', 'Website')
+              .pipe(
+                catchError((err) =>
+                  this._errorHandler.handleError(
+                    err,
+                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                  )
+                )
+              )
+              .subscribe(
+                () => this.navigateTo(data.url),
+                () => this.navigateTo(data.url)
+              )
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.loading.next(false)
@@ -279,6 +289,14 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         }
         this._gtag
           .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
+          .pipe(
+            catchError((err) =>
+              this._errorHandler.handleError(
+                err,
+                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+              )
+            )
+          )
           .subscribe(
             () => this.oauthAuthorize(urlRedirect),
             () => this.oauthAuthorize(urlRedirect)

@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import { switchMap, take, takeUntil, map } from 'rxjs/operators'
+import { switchMap, take, takeUntil, map, catchError } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -20,6 +20,8 @@ import {
 } from 'src/app/types/trusted-individuals.endpoint'
 import { UserInfo } from 'os'
 import { UserSession } from 'src/app/types/session.local'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Component({
   selector: 'app-authorize',
@@ -44,7 +46,8 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
     private _trustedIndividuals: TrustedIndividualsService,
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService,
-    private _router: Router
+    private _router: Router,
+    private _errorHandler: ErrorHandlerService
   ) {
     this._user
       .getUserSession()
@@ -103,20 +106,34 @@ export class AuthorizeComponent implements OnInit, OnDestroy {
       if (value) {
         // Create a GA event for each scope
         analyticsReports = data.scopes.map((scope) =>
-          this._gtag.reportEvent(
-            'RegGrowth',
-            `AuthorizeP_${scope.name}`,
-            this.oauthRequest
-          )
+          this._gtag
+            .reportEvent(
+              'RegGrowth',
+              `AuthorizeP_${scope.name}`,
+              this.oauthRequest
+            )
+            .pipe(
+              catchError((err) =>
+                this._errorHandler.handleError(
+                  err,
+                  ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                )
+              )
+            )
         )
       } else {
         // Create a GA for deny access
         analyticsReports.push(
-          this._gtag.reportEvent(
-            'Disengagement',
-            `Authorize_Deny`,
-            this.oauthRequest
-          )
+          this._gtag
+            .reportEvent('Disengagement', `Authorize_Deny`, this.oauthRequest)
+            .pipe(
+              catchError((err) =>
+                this._errorHandler.handleError(
+                  err,
+                  ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                )
+              )
+            )
         )
       }
       forkJoin(analyticsReports).subscribe(

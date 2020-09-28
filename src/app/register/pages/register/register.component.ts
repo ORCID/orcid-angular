@@ -14,7 +14,14 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
 import { ActivatedRoute, Params, Router } from '@angular/router'
 import { EMPTY, of } from 'rxjs'
-import { first, map, mergeMap, switchMap, tap } from 'rxjs/operators'
+import {
+  catchError,
+  first,
+  map,
+  mergeMap,
+  switchMap,
+  tap,
+} from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -161,6 +168,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
                 'RegGrowth',
                 'New-Registration',
                 this.requestInfoForm || 'Website'
+              )
+              .pipe(
+                catchError((err) =>
+                  this._errorHandler.handleError(
+                    err,
+                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                  )
+                )
               )
               .subscribe(
                 () => this.afterRegisterRedirectionHandler(response),
