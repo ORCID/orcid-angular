@@ -122,7 +122,7 @@ export class InstitutionalComponent implements OnInit {
     this.entityID = this.institution.entityID
 
     if (
-      this.institution.Logos &&
+      this.institution?.Logos &&
       !this.isInstitutionLogoDisplayed(this.institution.Logos[0].value)
     ) {
       this.logoInstitution = this.institution.Logos[0].value
@@ -153,14 +153,14 @@ export class InstitutionalComponent implements OnInit {
     }
     // Encode cookie base 64
     this._cookie.set(
-      '_saml_idp',
+      '_saml_institutional',
       institutions.join('%20'),
       dateCookie !== null ? dateCookie : this.cookieExpirationTime
     )
   }
 
   retrieveUserSelectedIdPs() {
-    let cookieValues = this._cookie.get('_saml_idp')
+    let cookieValues = this._cookie.get('_saml_institutional')
     if (cookieValues) {
       cookieValues = cookieValues.replace(/^\s+|\s+$/g, '')
       cookieValues = cookieValues.replace('+', '%20')
