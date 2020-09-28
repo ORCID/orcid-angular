@@ -3,6 +3,7 @@ import { ErrorReport } from './types'
 export const ERROR_REPORT: {
   JUST_GA: ErrorReport
   STANDARD_NO_VERBOSE: ErrorReport
+  STANDARD_NO_VERBOSE_NO_GA: ErrorReport
   STANDARD_VERBOSE: ErrorReport
   RESET_PASSWORD_COULD_NOT_RECOVER: ErrorReport
   REGISTER: ErrorReport
@@ -33,6 +34,18 @@ export const ERROR_REPORT: {
     analytics: {
       code: '001',
       fatal: true,
+    },
+  },
+
+  // The STANDARD_NO_VERBOSE_NO_QA
+  // Same as STANDARD_NO_VERBOSE, but without google analytics report
+  STANDARD_NO_VERBOSE_NO_GA: {
+    display: {
+      title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
+      message: `Internal Orcid QA, error please`,
+      displayOnlyOnVerboseEnvironment: true,
+      action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
+      actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
     },
   },
 

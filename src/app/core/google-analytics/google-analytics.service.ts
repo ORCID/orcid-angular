@@ -1,10 +1,9 @@
-import { Injectable, Inject } from '@angular/core'
-import { environment } from 'src/environments/environment'
+import { Inject, Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
 import { PerformanceMarks } from 'src/app/constants'
-import { Observable } from 'rxjs'
-import { catchError } from 'rxjs/operators'
 import { RequestInfoForm } from 'src/app/types'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -71,12 +70,7 @@ fatal: "${fatal}"
       event_category,
       event_label,
       value,
-    }).pipe(
-      catchError((err, caught) => {
-        console.error(err)
-        return caught
-      })
-    )
+    })
   }
 
   removeUrlParameters(url: string) {
