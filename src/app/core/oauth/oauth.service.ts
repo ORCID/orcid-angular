@@ -5,6 +5,7 @@ import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
   last,
+  map,
   retry,
   shareReplay,
   switchMap,
@@ -69,6 +70,8 @@ export class OauthService {
         { headers: this.headers }
       )
       .pipe(
+        // Return null if the requestInfo is empty
+        map((requestInfo) => (requestInfo.clientId ? requestInfo : undefined)),
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )

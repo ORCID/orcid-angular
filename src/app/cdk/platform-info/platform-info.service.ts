@@ -1,7 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
+import { ThrowStmt } from '@angular/compiler'
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
-import { ActivatedRoute, Params, Router } from '@angular/router'
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
@@ -29,11 +30,12 @@ export class PlatformInfoService {
     columns12: false,
     rtl: false,
     ltr: true,
-    queryParameters: {},
+    queryParameters: this.getQueryParams(),
     screenDirection: 'ltr',
-    oauthMode: false,
+    hasOauthParameters: false,
     social: false,
     institutional: false,
+    currentRoute: '',
   }
   platformSubject = new BehaviorSubject<PlatformInfo>(this.platform)
 
@@ -72,19 +74,26 @@ export class PlatformInfoService {
       .subscribe((queryParameters) => {
         this.previouslyHadQueryParameters = true
         this.platform.queryParameters = queryParameters
-        const previousOauthState = this.updateOauthState(queryParameters)
+        const previousOauthState = this.hasOauthParameters()
         const previousSocialState = this.updateSocialState(queryParameters)
         const previousInstitutionalState = this.updatesInstitutionalState(
           queryParameters
         )
         if (
-          this.platform.oauthMode !== previousOauthState ||
+          this.platform.hasOauthParameters !== previousOauthState ||
           this.platform.social !== previousSocialState ||
           this.platform.institutional !== previousInstitutionalState
         ) {
           this.platformSubject.next(this.platform)
         }
       })
+
+    _router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.platform.currentRoute = event.url
+        this.platformSubject.next(this.platform)
+      }
+    })
 
     this._breakpointObserver
       .observe([Breakpoints.Handset])
@@ -140,19 +149,19 @@ export class PlatformInfoService {
   }
 
   /**
-   * Based on the query check if the current state is in Oauth mode
+   * @deprecated Based on the query check if the current state is in Oauth mode
    */
   private updateOauthState(queryParameters: Params) {
-    const previousOauthState = this.platform.oauthMode
+    const previousOauthState = this.platform.hasOauthParameters
     this.platform.queryParameters = queryParameters
     if (
       queryParameters.hasOwnProperty('oauth') ||
       queryParameters.hasOwnProperty('Oauth') ||
       queryParameters.hasOwnProperty('client_id')
     ) {
-      this.platform.oauthMode = true
+      this.platform.hasOauthParameters = true
     } else {
-      this.platform.oauthMode = false
+      this.platform.hasOauthParameters = false
     }
     return previousOauthState
   }
@@ -203,7 +212,7 @@ export class PlatformInfoService {
     // this is the reason why a quick indexOf is run on the window object to quickly check if the app should start on Oauth mode
     this.platform = {
       ...this.platform,
-      oauthMode: this.window.location.href.toLowerCase().indexOf('oauth') >= 0,
+      hasOauthParameters: this.hasOauthParameters(),
       social: this.window.location.href.toLowerCase().indexOf('social') >= 0,
       institutional:
         this.window.location.href.toLowerCase().indexOf('institutional') >= 0,
@@ -216,5 +225,35 @@ export class PlatformInfoService {
     this.platform.social = false
     this.platform.institutional = false
     this.platformSubject.next(this.platform)
+  }
+
+  public hasOauthParameters() {
+    // queryParameters can be provided if those come from the router if not the default JS URLSearchParams function will be used
+    // Normally it would be preferred read GET parameters from the ActivatedRoute
+    // but the activeRoute do not provide those while the guards haven't complete
+
+    const params = this.platform.queryParameters
+
+    if (
+      Object.keys(params).length &&
+      (params.hasOwnProperty('client_id') ||
+        params.hasOwnProperty('redirect_uri') ||
+        params.hasOwnProperty('response_type'))
+    ) {
+      return true
+    }
+    return false
+  }
+
+  public getQueryParams(): Params {
+    const params: Params = {}
+    new URLSearchParams(this.window.location.search).forEach(
+      (value, key) => (params[key] = value)
+    )
+    return params
+  }
+
+  public getCurrentRoute(): string {
+    return this._router.url
   }
 }
