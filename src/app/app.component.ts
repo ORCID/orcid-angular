@@ -18,7 +18,7 @@ import { HeadlessOnOauthRoutes } from './constants'
 })
 export class AppComponent {
   headlessMode = false
-  headlessOnOauthPage = true
+  currentRouteIsHeadlessOnOauthPage = true
   screenDirection
   currentRoute
   @HostBinding('class.edge') edge
@@ -44,9 +44,10 @@ export class AppComponent {
       .pipe(
         tap((platformInfo) => {
           this.platformInfo = platformInfo
-          this.headlessOnOauthPage = this.showHeadlessOnOauthPage(
+          this.currentRouteIsHeadlessOnOauthPage = this.showHeadlessOnOauthPage(
             platformInfo.currentRoute
           )
+          // 1- Initial quick check to immediately set headless mode only base on query parameters
           this.setPlatformClasses(platformInfo)
           this.screenDirection = platformInfo.screenDirection
           if (!platformInfo.hasOauthParameters) {
@@ -59,6 +60,7 @@ export class AppComponent {
         switchMap(() => _userService.getUserSession())
       )
       .subscribe((session) => {
+        // 2- Later check to set headless mode based on any existing Oauth session
         this.setPlatformClasses(this.platformInfo, !!session.oauthSession)
         if (session.oauthSession) {
           _zendesk.hide()
@@ -90,7 +92,7 @@ export class AppComponent {
   setPlatformClasses(platformInfo: PlatformInfo, oauthSessionFound?: boolean) {
     this.headlessMode =
       (platformInfo.hasOauthParameters || oauthSessionFound) &&
-      this.headlessOnOauthPage
+      this.currentRouteIsHeadlessOnOauthPage
     this.ie = platformInfo.ie
     this.edge = platformInfo.edge
     this.tabletOrHandset = platformInfo.tabletOrHandset

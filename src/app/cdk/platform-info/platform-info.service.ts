@@ -228,12 +228,7 @@ export class PlatformInfoService {
   }
 
   public hasOauthParameters() {
-    // queryParameters can be provided if those come from the router if not the default JS URLSearchParams function will be used
-    // Normally it would be preferred read GET parameters from the ActivatedRoute
-    // but the activeRoute do not provide those while the guards haven't complete
-
     const params = this.platform.queryParameters
-
     if (
       Object.keys(params).length &&
       (params.hasOwnProperty('client_id') ||

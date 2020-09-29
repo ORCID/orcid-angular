@@ -39,7 +39,6 @@ export class LanguageGuard implements CanActivateChild {
       switchMap((platform) => {
         langContext = this.getLanguageContext(next.queryParams)
         if (
-          // tslint:disable-next-line: max-line-length
           platform.hasOauthParameters &&
           this.requireLanguageCookieUpdate(langContext)
         ) {
