@@ -258,11 +258,11 @@ export class UserService {
       switchMap((platform) => {
         // Declare the oauth session on the backend
         if (platform.hasOauthParameters) {
-          const params = platform.queryParameters as OauthParameters
+          let params = platform.queryParameters as OauthParameters
           // After a user login remove the promp parameter
           // TODO @leomendoza123 how is this handle by signin logins?
           if (updateParameters.checkTrigger.postLoginUpdate) {
-            delete params.prompt
+            params = { ...params, prompt: undefined }
           }
           return this._oauth
             .declareOauthSession(params, updateParameters)
