@@ -82,7 +82,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
-        if (session.oauthSession && this.isQueryParametersEmpty(this.platform.queryParameters)) {
+        if (
+          session.oauthSession &&
+          this.isQueryParametersEmpty(this.platform.queryParameters)
+        ) {
           this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
@@ -121,7 +124,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       verificationCode: new FormControl(),
     })
 
-    if (this.email && this.isQueryParametersEmpty(this.platform.queryParameters)) {
+    if (
+      this.email &&
+      this.isQueryParametersEmpty(this.platform.queryParameters)
+    ) {
       this.authorizationForm.patchValue({
         username: this.email,
       })
@@ -254,7 +260,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
-                if (userSession.oauthSession && this.isQueryParametersEmpty(params)) {
+                if (
+                  userSession.oauthSession &&
+                  this.isQueryParametersEmpty(params)
+                ) {
                   params['oauth'] = ''
                 }
                 this._router.navigate(['/register'], {
@@ -342,7 +351,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   isQueryParametersEmpty(params): boolean {
-    return Object.keys(params).length !== 0;
+    return Object.keys(params).length !== 0
   }
 
   navigateTo(val) {

@@ -60,7 +60,10 @@ export class AuthorizeGuard implements CanActivateChild {
   private redirectToLoginPage(queryParams): Observable<UrlTree> {
     // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
     // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
-    const newQueryParams = Object.keys(queryParams).length !== 0 ? { ...queryParams, oauth: '' } : null;
+    const newQueryParams =
+      Object.keys(queryParams).length !== 0
+        ? { ...queryParams, oauth: '' }
+        : null
     return of(
       this._router.createUrlTree(['/signin'], {
         queryParams: newQueryParams,
