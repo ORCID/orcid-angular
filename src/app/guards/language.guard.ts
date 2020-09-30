@@ -2,15 +2,13 @@ import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivateChild,
-  Router,
   RouterStateSnapshot,
 } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { NEVER, Observable, of } from 'rxjs'
-import { catchError, first, switchMap, tap } from 'rxjs/operators'
+import { catchError, switchMap, tap } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 
-import { PlatformInfoService } from '../cdk/platform-info'
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
