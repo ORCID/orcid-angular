@@ -92,9 +92,6 @@ export class UserService {
   }
 
   /**
-   * @param queryParams overwrite query parameters provided by the platform service. Used when the call comes from a Guard
-   * since the query params are not yet available on the platform service.
-   *
    * At the start, every 30 seconds and when the method `refreshUserSession()` is called
    * the user login status will be check and if it has changed
    * the following actions will be taken
@@ -103,7 +100,7 @@ export class UserService {
    *
    * @returns a hot observable with the user session information
    */
-  getUserSession(queryParams?: Params): Observable<UserSession> {
+  getUserSession(): Observable<UserSession> {
     // If an observable already exists, the same is shared between subscriptions
     // If not creates an observable
     if (this.sessionInitialized) {
@@ -128,10 +125,6 @@ export class UserService {
               })
             )
           ),
-          tap((value) => {
-            console.log('trigger ', value)
-          }),
-
           // Filter followup calls if the user status has no change
           //
           // Also turns on the flag loggingStateComesFromTheServer
@@ -145,7 +138,7 @@ export class UserService {
           // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
           startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
           switchMap((updateParameters) =>
-            this.handleUserDataUpdate(updateParameters, queryParams)
+            this.handleUserDataUpdate(updateParameters)
           ),
           map((data) => this.computesUpdatedUserData(data)),
           // Debugger for the user session on development time
@@ -219,7 +212,6 @@ export class UserService {
 
   /**
    * @param  updateParameters login status and trigger information
-   * @param  queryParams overwrite query parameters provided by the platform service
    *
    * calls the appropriated endpoints depending on the logging state
    *
@@ -227,8 +219,7 @@ export class UserService {
    * this observable will wait for all the calls to respond before returning the first event
    */
   private handleUserDataUpdate(
-    updateParameters?: UserSessionUpdateParameters,
-    queryParams?: Params
+    updateParameters?: UserSessionUpdateParameters
   ): Observable<{
     userInfo: UserInfo
     nameForm: NameForm
@@ -237,18 +228,14 @@ export class UserService {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
-    const $oauthSession = this.getOauthSession(
-      updateParameters,
-      queryParams as OauthParameters
-    )
+    const $oauthSession = this.getOauthSession(updateParameters)
     if (updateParameters.loggedIn) {
       return combineLatest([$userInfo, $nameForm, $oauthSession]).pipe(
         map(([userInfo, nameForm, oauthSession]) => ({
           userInfo,
           nameForm,
           oauthSession,
-        })),
-        tap((x) => console.log('combine lattest!'))
+        }))
       )
     } else {
       return combineLatest([of(undefined), of(undefined), $oauthSession]).pipe(
@@ -261,38 +248,42 @@ export class UserService {
     }
   }
   /**
-   * @param  queryParams? overwrite query parameters provided by the platform service
+   * @param updateParameters login status and trigger information
    */
   private getOauthSession(
-    updateParameters?: UserSessionUpdateParameters,
-    queryParams?: OauthParameters
+    updateParameters?: UserSessionUpdateParameters
   ): Observable<RequestInfoForm> {
     return this._platform.get().pipe(
       first(),
       switchMap((platform) => {
-        if (
-          (queryParams && Object.keys(queryParams).length) ||
-          (platform.oauthMode && Object.keys(platform.oauthMode).length)
-        ) {
-          const params =
-            queryParams || (platform.queryParameters as OauthParameters)
+        // Declare the oauth session on the backend
+        if (platform.hasOauthParameters) {
+          let params = platform.queryParameters as OauthParameters
           // After a user login remove the promp parameter
+          // TODO @leomendoza123 how is this handle by signin logins?
           if (updateParameters.checkTrigger.postLoginUpdate) {
-            delete params.prompt
+            params = { ...params, prompt: undefined }
           }
-          return this._oauth.declareOauthSession(params, updateParameters)
+          return this._oauth
+            .declareOauthSession(params, updateParameters)
+            .pipe(
+              tap(() =>
+                environment.sessionDebugger
+                  ? console.log('Oauth session declare')
+                  : null
+              )
+            )
         } else {
-          if (platform.social || platform.institutional) {
-            // TODO @leomendoza123 improve oauth mode detection...
-            //
-            // currently the loadRequestInfoForm is always loaded for institutional and social
-            // this can produce a confusing state where even though there is not a Oauth session there session
-            // will contain an empty oauth object
-
-            return this._oauth.loadRequestInfoForm()
-          } else {
-            return of(undefined)
-          }
+          // Try to load previously existing Oauth sessions
+          return this._oauth
+            .loadRequestInfoForm()
+            .pipe(
+              tap((requestInfoForm) =>
+                requestInfoForm && environment.sessionDebugger
+                  ? console.log('Oauth session recovered')
+                  : null
+              )
+            )
         }
       })
     )

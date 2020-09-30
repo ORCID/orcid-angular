@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
 import { ActivatedRoute, Params, Router } from '@angular/router'
-import { EMPTY, of } from 'rxjs'
+import { combineLatest, EMPTY, of } from 'rxjs'
 import {
   catchError,
   first,
@@ -36,6 +36,7 @@ import {
 } from 'src/app/types/register.endpoint'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
+import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-register',
@@ -65,9 +66,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     @Inject(WINDOW) private window: Window,
     private _gtag: GoogleAnalyticsService,
     private _user: UserService,
-    private _route: ActivatedRoute,
     private _router: Router,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _userInfo: UserService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -89,35 +90,21 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       captcha: [''],
     })
 
-    this._platformInfo
-      .get()
+    combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(
         first(),
-        mergeMap((platform) => {
+        map(([session, platform]) => {
+          session = session as UserSession
+          platform = platform as PlatformInfo
+
+          // TODO @leomendoza123 move the handle of social/institutional sessions to the user service
           if (platform.queryParameters.providerId) {
-            return of(
-              (this.FormGroupStepA = this.prefillRegisterForm(
-                this.platform.queryParameters
-              ))
+            this.FormGroupStepA = this.prefillRegisterForm(
+              this.platform.queryParameters
             )
-          } else if (platform.oauthMode) {
-            return this._user.getUserSession().pipe(
-              first(),
-              map((session) => session.oauthSession),
-              tap((requestInfoForm) => {
-                if (requestInfoForm) {
-                  this.requestInfoForm = requestInfoForm
-                  this.FormGroupStepA = this.prefillRegisterForm(
-                    this.requestInfoForm
-                  )
-                } else {
-                  // for a oauth call the backend was expected to return a oauth context
-                  this._errorHandler.handleError(new Error('registerOauth'))
-                }
-              })
-            )
-          } else {
-            return EMPTY
+          } else if (session.oauthSession) {
+            this.requestInfoForm = session.oauthSession
+            this.FormGroupStepA = this.prefillRegisterForm(this.requestInfoForm)
           }
         })
       )
@@ -156,7 +143,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.FormGroupStepB,
               this.FormGroupStepC,
               this.requestInfoForm,
-              this.platform.oauthMode // request client service to be update (only when the next navigation wont go outside this app)
+              !!this.requestInfoForm // request client service to be update (only when the next navigation wont go outside this app)
             )
           })
         )

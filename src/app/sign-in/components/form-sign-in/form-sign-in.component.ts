@@ -28,6 +28,8 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { ERROR_REPORT } from '../../../errors'
 import { OauthService } from '../../../core/oauth/oauth.service'
+import { combineLatest } from 'rxjs'
+import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -70,15 +72,18 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _router: Router,
     private _gtag: GoogleAnalyticsService,
     private _errorHandler: ErrorHandlerService,
-    private _signInGuard: SignInGuard
+    private _signInGuard: SignInGuard,
+    private _userInfo: UserService
   ) {
     this.signInLocal.type = this.signInType
-    _platformInfo
-      .get()
+    combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
       .pipe(first())
-      .subscribe((platform) => {
+      .subscribe(([session, platform]) => {
+        session = session as UserSession
+        platform = platform as PlatformInfo
         this.platform = platform
-        if (platform.oauthMode) {
+
+        if (session.oauthSession) {
           this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {

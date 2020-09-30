@@ -1,10 +1,10 @@
 <app-skip-main-nav></app-skip-main-nav>
 <div [dir]="screenDirection">
   <router-outlet name="banner"></router-outlet>
-  <app-banners *ngIf="!oauthMode"></app-banners>
-  <app-header *ngIf="!oauthMode" currentRoute=""></app-header>
+  <app-banners *ngIf="!headlessMode"></app-banners>
+  <app-header *ngIf="!headlessMode" currentRoute=""></app-header>
   <div class="router-container">
     <router-outlet> </router-outlet>
-    <app-footer *ngIf="!oauthMode"></app-footer>
+    <app-footer *ngIf="!headlessMode"></app-footer>
   </div>
 </div>

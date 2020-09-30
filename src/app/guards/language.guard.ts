@@ -33,25 +33,21 @@ export class LanguageGuard implements CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    const queryParams = next.queryParams
-
-    let langContext: LanguageContext = this.getLanguageContext(queryParams)
-
+    let langContext: LanguageContext
     return this._platform.get().pipe(
       first(),
       switchMap((platform) => {
+        langContext = this.getLanguageContext(next.queryParams)
         if (
-          // tslint:disable-next-line: max-line-length
-          Object.keys(queryParams).length && // TODO @leomendoza123 make the platform handle the query parameters of the guards correctly, this line is a temporary quick fix
-          platform.oauthMode &&
+          platform.hasOauthParameters &&
           this.requireLanguageCookieUpdate(langContext)
         ) {
           // do initialize the user session to change the language
           // this will trigger the oauth init.json, which will update the language cookie
-          return this._user.getUserSession(queryParams).pipe(
+          return this._user.getUserSession().pipe(
             tap(() => {
-              // refresh language context if the language changed
-              langContext = this.getLanguageContext(queryParams)
+              // refresh language context if the language cookie have changed
+              langContext = this.getLanguageContext(next.queryParams)
             }),
             switchMap(() => {
               // The browser might be already loading the right language thanks to the query parameter and local cache

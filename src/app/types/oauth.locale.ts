@@ -10,6 +10,6 @@ export interface OauthParameters {
   given_names: string
   family_names: string
   state: string
-  prompt?: 'login'
+  prompt?: 'login' | 'none'
   orcid: string
 }

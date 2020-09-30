@@ -36,6 +36,7 @@ export class LinkAccountGuard implements CanActivateChild {
       take(1),
       switchMap((platform) => {
         if (platform.social) {
+          // TODO @leomendoza123 make the social/shibboleth data part of the user session
           return this._oauthService.loadSocialSigninData()
         } else {
           return this._oauthService.loadShibbolethSignInData()

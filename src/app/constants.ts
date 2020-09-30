@@ -36,6 +36,18 @@ export const ApplicationRoutes = {
   home: '',
 }
 
+export const HeadlessOnOauthRoutes = [
+  ApplicationRoutes.twoFactor,
+  ApplicationRoutes.social,
+  ApplicationRoutes.institutionalLinking,
+  ApplicationRoutes.institutional,
+  ApplicationRoutes.login,
+  ApplicationRoutes.signin,
+  ApplicationRoutes.authorize,
+  ApplicationRoutes.resetPassword,
+  ApplicationRoutes.register,
+]
+
 export const PerformanceMarks = {
   navigationStartPrefix: 'start_',
   navigationEndPrefix: 'ends_',
