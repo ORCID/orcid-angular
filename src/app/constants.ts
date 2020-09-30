@@ -38,7 +38,6 @@ export const ApplicationRoutes = {
 
 export const HeadlessOnOauthRoutes = [
   ApplicationRoutes.twoFactor,
-  ApplicationRoutes.institutionalLinking,
   ApplicationRoutes.social,
   ApplicationRoutes.institutionalLinking,
   ApplicationRoutes.institutional,
