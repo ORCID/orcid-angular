@@ -63,8 +63,7 @@ export class LanguageGuard implements CanActivateChild {
             .pipe(catchError((error) => of(true)))
         }
       }),
-
-      catchError((value) => of(true)) // If the language change endpoint fail ignore and continue
+      catchError((value) => of(true)) // Allow to continue if the language change fails
     )
   }
 
