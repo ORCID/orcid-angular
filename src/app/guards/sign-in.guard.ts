@@ -50,7 +50,7 @@ export class SignInGuard implements CanActivateChild {
     return this._user.getUserSession(queryParams).pipe(
       map((session) => {
         if (
-          queryParams.email &&
+          (queryParams.email || queryParams.orcid) &&
           session.oauthSession &&
           !session.oauthSession.userId
         ) {
