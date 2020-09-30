@@ -82,8 +82,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
-
-        if (session.oauthSession) {
+        if (session.oauthSession && this.isQueryParametersEmpty(this.platform.queryParameters)) {
           this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
@@ -104,7 +103,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             .subscribe((userSession) => {
               if (
                 userSession.oauthSession &&
-                userSession.oauthSession.clientId
+                userSession.oauthSession.clientId &&
+                this.isQueryParametersEmpty(platform.queryParameters)
               ) {
                 this.signInLocal.isOauth = true
               }
@@ -121,7 +121,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       verificationCode: new FormControl(),
     })
 
-    if (this.email) {
+    if (this.email && this.isQueryParametersEmpty(this.platform.queryParameters)) {
       this.authorizationForm.patchValue({
         username: this.email,
       })
@@ -254,7 +254,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
-                if (userSession.oauthSession) {
+                if (userSession.oauthSession && this.isQueryParametersEmpty(params)) {
                   params['oauth'] = ''
                 }
                 this._router.navigate(['/register'], {
@@ -339,6 +339,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .get('username')
       .setValidators([Validators.required, UsernameValidator.orcidOrEmail])
     this.authorizationForm.get('username').updateValueAndValidity()
+  }
+
+  isQueryParametersEmpty(params): boolean {
+    return Object.keys(params).length !== 0;
   }
 
   navigateTo(val) {
