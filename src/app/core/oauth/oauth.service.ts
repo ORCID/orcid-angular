@@ -66,7 +66,7 @@ export class OauthService {
     return this._http
       .get<RequestInfoForm>(
         environment.BASE_URL +
-          'oauth/custom/authorize/get_request_info_form.json',
+          'oauth/custom/requestInfoForm.json',
         { headers: this.headers }
       )
       .pipe(
