@@ -82,7 +82,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
-        
+
         if (session.oauthSession) {
           this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {

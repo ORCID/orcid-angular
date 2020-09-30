@@ -46,8 +46,7 @@ export const HeadlessOnOauthRoutes = [
   ApplicationRoutes.signin,
   ApplicationRoutes.authorize,
   ApplicationRoutes.resetPassword,
-  ApplicationRoutes.register
-  
+  ApplicationRoutes.register,
 ]
 
 export const PerformanceMarks = {
