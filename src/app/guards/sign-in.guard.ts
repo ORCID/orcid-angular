@@ -37,7 +37,10 @@ export class SignInGuard implements CanActivateChild {
     return this._user.getUserSession().pipe(
       map((session) => {
         if (session.oauthSession) {
-          if (queryParams.email && !session.oauthSession.userId) {
+          if (
+            (queryParams.email || queryParams.orcid) &&
+            !session.oauthSession.userId
+          ) {
             return this._router.createUrlTree(['/register'], {
               queryParams: queryParams,
             })
