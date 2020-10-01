@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   sessionDebugger: true,
   API_NEWS_DEPRECATED: 'https://qa.orcid.org/blog/feed',
-  API_NEWS: 'https://info.qa.orcid.org/feed',
+  API_NEWS: 'https://info.qa.orcid.org/feed/',
   API_PUB: '//pub.qa.orcid.org/v3.0',
   API_WEB: '//qa.orcid.org/',
   BASE_URL: '//qa.orcid.org/',
