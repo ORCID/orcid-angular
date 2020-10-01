@@ -65,8 +65,7 @@ export class OauthService {
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
-        environment.BASE_URL +
-          'oauth/custom/authorize/get_request_info_form.json',
+        environment.BASE_URL + 'oauth/custom/requestInfoForm.json',
         { headers: this.headers }
       )
       .pipe(
