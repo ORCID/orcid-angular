@@ -15,6 +15,9 @@ export class SocialComponent implements OnInit {
   platform: PlatformInfo
   baseUri: string
   csrf: string
+  labelInstitutionalButton = $localize`:@@ngOrcid.signin.institutionalAccount:Access through your institution`
+  labelGoogleButton = $localize`:@@ngOrcid.signin.google:Sign in with Google`
+  labelFacebookButton = $localize`:@@ngOrcid.signin.facebook:Sign in with Facebook`
 
   constructor(
     private _signIn: SignInService,
