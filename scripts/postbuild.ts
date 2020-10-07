@@ -11,6 +11,7 @@ import {
 import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
 import { zendeskPlugin } from './zend-desk.postbuild'
+import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
 const glob = require('glob')
 // Run updates on index.html files across languages
 glob
@@ -70,3 +71,6 @@ glob
     const options = getOptionsObjet(file)
     renameSync(options.folder, options.folder.replace('-', '_'))
   })
+
+// Move all assets into a single shared folder
+createShareAssetsFolder()
