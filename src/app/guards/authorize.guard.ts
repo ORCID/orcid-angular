@@ -37,7 +37,7 @@ export class AuthorizeGuard implements CanActivateChild {
             oauthSession &&
             oauthSession.redirectUrl &&
             oauthSession.responseType &&
-            oauthSession.redirectUrl.includes(oauthSession.responseType)
+            oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
           ) {
             this.window.location.href = oauthSession.redirectUrl
             return NEVER
