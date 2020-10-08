@@ -78,4 +78,4 @@ The following commands are used to build the application for non-local environme
 
 Please refer to the following documentation for more information:
 
-https://orcid.github.io/orcid-angular 
+https://orcid.github.io/orcid-angular
