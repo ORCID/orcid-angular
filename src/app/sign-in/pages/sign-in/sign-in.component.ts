@@ -62,7 +62,7 @@ export class SignInComponent implements OnInit {
           this.realUserOrcid = null
         }
 
-        if (session.oauthSession && platform.queryParameters.email) {
+        if (platform.queryParameters.email) {
           this.email = platform.queryParameters.email
         }
         if (session.oauthSession && session.oauthSession.userId) {
