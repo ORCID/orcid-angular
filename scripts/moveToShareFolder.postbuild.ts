@@ -22,4 +22,3 @@ export async function createShareAssetsFolder() {
 
   // await del(['./dist/*/assets', '!./dist/share-assets/assets'])
 }
-
