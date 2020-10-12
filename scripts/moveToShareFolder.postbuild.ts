@@ -1,12 +1,12 @@
 import { src, dest } from 'gulp'
 const flatten = require('gulp-flatten')
-const clean = require('gulp-clean')
-const del = require('del')
+// const clean = require('gulp-clean')
+// const del = require('del')
 
 export async function createShareAssetsFolder() {
   await new Promise((resolve, reject) => {
     src(['./dist/*/*.{js,woff,woff2,jpg,svg,txt}', '!./dist/*/assets/*'])
-      .pipe(clean({ force: true }))
+      // .pipe(clean({ force: true }))
       .pipe(flatten())
       .pipe(dest('./dist/share-assets/', { overwrite: true }))
       .on('end', resolve)
@@ -20,5 +20,6 @@ export async function createShareAssetsFolder() {
       .on('error', reject)
   })
 
-  await del(['./dist/*/assets', '!./dist/share-assets/assets'])
+  // await del(['./dist/*/assets', '!./dist/share-assets/assets'])
 }
+
