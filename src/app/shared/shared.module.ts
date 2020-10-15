@@ -14,7 +14,8 @@ import { CopyOnClickComponent } from './components/copy-on-click/copy-on-click.c
 import { OfflineMessageComponent } from './components/offline-message/offline-message.component'
 import { CopyOnClickDirective } from './directives/copy-on-click/copy-on-click.directive'
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
-import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-country.pipe'
+import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-country.pipe';
+import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +30,7 @@ import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-c
     CopyOnClickDirective,
     CopyOnClickComponent,
     RegionCityCountryPipe,
+    SafeHtmlPipe,
   ],
   exports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-c
     CopyOnClickDirective,
     MatSnackBarModule,
     RegionCityCountryPipe,
+    SafeHtmlPipe,
   ],
   entryComponents: [CopyOnClickComponent],
   providers: [], // Should not provide anything

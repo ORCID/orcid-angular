@@ -23,7 +23,10 @@
 }
 
 .body-container {
-  padding: $spacing-base;
+  max-width: 800px;
+  padding: 32px;
+  margin: auto;
+  font-size: 15px;
 }
 
 .dot {

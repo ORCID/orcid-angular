@@ -1,0 +1,48 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+a {
+  text-decoration: underline;
+}
+
+hr.logo {
+  color: #e0e0e0;
+  border-style: solid;
+  border-width: 2px;
+}
+
+hr.title {
+  color: #447405;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #447405;
+  .dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: $spacing-small;
+    [dir='rtl'] :host & {
+      margin-left: $spacing-small;
+      margin-right: auto;
+    }
+  }
+
+}
+
+.title:first-letter {
+  text-transform: capitalize;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+img {
+  max-width: 120px;
+}

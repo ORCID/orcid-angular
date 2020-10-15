@@ -1,0 +1,34 @@
+<img src="./assets/vectors/orcid.logo.svg" alt="ORCID.org"/>
+<hr class="logo" />
+<p>
+  <ng-container i18n="@@inbox.header.hi">
+    Hi
+  </ng-container>
+    {{ displayName }}
+  <a class="mat-button-font"
+     (click)="navigateTo(baseUri + orcidId)"
+  >
+    ({{baseUri + orcidId}})
+  </a>
+</p>
+<p class="mat-caption">
+  <ng-container i18n="@@inbox.header.gotNewNotifications">
+    You've got new notifications on your ORCID record. To see more details for a particular notification or to take action please
+  </ng-container>
+  <a (click)="navigateTo(baseUri + 'inbox')">
+    <ng-container i18n="@@inbox.header.visit">
+      visit your ORCID notification inbox
+    </ng-container>
+  </a>
+</p>
+<br>
+<h3 i18n="@@inbox.header.newNotifications">
+  Your new notifications
+</h3>
+<hr class="title" />
+<p class="title">
+<!--  todo @DanielPalafox fix dot -->
+  <span class="dot notification-background mat-body-1"></span>
+  {{title}}
+</p>
+<hr class="title" />
