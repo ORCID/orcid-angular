@@ -58,7 +58,7 @@ export class StepAComponent extends BaseStep {
         }
         this._router.navigate([ApplicationRoutes.signin], {
           queryParams: {
-            ...params,
+            ...params
           },
         })
       })
