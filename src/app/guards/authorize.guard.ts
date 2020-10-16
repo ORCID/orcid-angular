@@ -65,6 +65,16 @@ export class AuthorizeGuard implements CanActivateChild {
       ...queryParams,
       oauth: '',
       redirect_uri: oauthSession.redirectUrl,
+      response_type: oauthSession.responseType,
+      state: oauthSession.stateParam,
+      scope: oauthSession.scopesAsString,
+      client_id: oauthSession.clientId,
+      email: oauthSession.userEmail,
+      given_names: oauthSession.userGivenNames,
+      family_names: oauthSession.userFamilyNames,
+      orcid: oauthSession.userOrcid,
+      nonce: oauthSession.nonce,
+      forceLogin: oauthSession.forceLogin,
     }
     return of(
       this._router.createUrlTree(['/signin'], {
