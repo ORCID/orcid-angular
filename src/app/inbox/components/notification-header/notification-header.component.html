@@ -25,11 +25,18 @@
 <h3 i18n="@@inbox.header.newNotifications">
   Your new notifications
 </h3>
-<hr class="title" />
 <div class="header" #header>
-  <span class="dot notification-background mat-body-1"></span>
-  <p class="notification">
-    {{title}}
-  </p>
+  <hr class="notification"/>
+  <div class="title">
+    <span class="dot notification-background mat-body-1"></span>
+    <p class="notification">
+      {{notificationTypeLabel(notificationType)}}
+    </p>
+    <br>
+<!--    todo fix title-->
+    <p>
+      {{title}}
+    </p>
+  </div>
+  <hr class="notification"/>
 </div>
-<hr class="titlet" />

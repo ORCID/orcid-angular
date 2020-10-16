@@ -3,8 +3,7 @@ import { InboxNotification, InboxNotificationAmended } from '../../../types/noti
 import { WINDOW } from '../../../cdk/window'
 import { environment } from '../../../../environments/environment.local'
 import { UserService } from '../../../core'
-import { UserInfo } from '../../../types'
-import { map, take, takeUntil } from 'rxjs/operators'
+import { take } from 'rxjs/operators'
 import { uiNotificationType } from '../../../types/notifications.local'
 
 @Component({
@@ -99,6 +98,17 @@ export class NotificationHeaderComponent implements OnInit {
       case 'announcement':
         this.blue = true
         break
+    }
+  }
+
+  notificationTypeLabel(notificationType: uiNotificationType) {
+    switch (notificationType) {
+      case 'your-record':
+        return $localize`:@@inbox.yourRecord:YOUR RECORD`
+      case 'permission':
+        return $localize`:@@inbox.permissions:PERMISSIONS`
+      default:
+        return $localize`:@@inbox.announcement:ANNOUNCEMENT`
     }
   }
 

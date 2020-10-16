@@ -17,12 +17,16 @@ hr.logo {
 
 
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: $spacing-base;
-  cursor: pointer;
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding-left: $spacing-base;
+  }
+
+  .title:first-letter {
+    text-transform: capitalize;
+  }
 
   hr {
     border-style: solid;
@@ -30,9 +34,7 @@ hr.logo {
   }
 }
 
-.header:first-letter {
-  text-transform: capitalize;
-}
+
 
 .dot {
   height: 8px;
