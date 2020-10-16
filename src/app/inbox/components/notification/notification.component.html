@@ -35,6 +35,10 @@
   [hidden]="!showNotificationContent"
 >
   <div class="body-container">
+    <app-notification-header
+      *ngIf="displayHeaderAndFooter(notification)"
+      [notification]="notification"
+    ></app-notification-header>
     <app-notification-permission
       *ngIf="notification.notificationType === 'PERMISSION'"
       [notification]="notification"
@@ -49,6 +53,9 @@
       *ngIf="notification.notificationType === 'INSTITUTIONAL_CONNECTION'"
       [notification]="notification"
     ></app-notification-permission-institutional-connection>
+    <app-notification-footer
+      *ngIf="displayHeaderAndFooter(notification)"
+    ></app-notification-footer>
 
     <app-notification-html
       *ngIf="

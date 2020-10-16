@@ -196,4 +196,10 @@ export class NotificationComponent
   registerOnTouched(fn: any): void {
     this.onTouchedFunction = fn
   }
+
+  displayHeaderAndFooter(notification: InboxNotification) {
+    return notification.notificationType === 'PERMISSION' ||
+      notification.notificationType === 'AMENDED' ||
+      notification.notificationType === 'INSTITUTIONAL_CONNECTION'
+  }
 }

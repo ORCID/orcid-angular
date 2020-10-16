@@ -1,4 +1,8 @@
 @import 'src/assets/scss/orcid.spacing.scss';
+//todo validate @DanielPalafox
+:host {
+  width: 100%;
+}
 
 a {
   text-decoration: underline;
@@ -10,32 +14,36 @@ hr.logo {
   border-width: 2px;
 }
 
-hr.title {
-  color: #447405;
-  border-style: solid;
-  border-width: 2px;
-}
 
-.title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #447405;
-  .dot {
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: $spacing-small;
-    [dir='rtl'] :host & {
-      margin-left: $spacing-small;
-      margin-right: auto;
-    }
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: $spacing-base;
+  cursor: pointer;
+
+  hr {
+    border-style: solid;
+    border-width: 2px;
   }
-
 }
 
-.title:first-letter {
+.header:first-letter {
   text-transform: capitalize;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: $spacing-small;
+  [dir='rtl'] :host & {
+    margin-left: $spacing-small;
+    margin-right: auto;
+  }
 }
 
 h3 {
