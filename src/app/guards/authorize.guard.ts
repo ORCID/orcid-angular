@@ -7,13 +7,10 @@ import {
   UrlTree,
 } from '@angular/router'
 import { NEVER, Observable, of } from 'rxjs'
-import { map, switchMap, finalize, first } from 'rxjs/operators'
+import { switchMap } from 'rxjs/operators'
 
-import { PlatformInfoService } from '../cdk/platform-info'
-import { OauthParameters } from '../types'
+import { RequestInfoForm } from '../types'
 import { UserService } from '../core'
-import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
-import { ERROR_REPORT } from '../errors'
 import { WINDOW } from '../cdk/window'
 
 @Injectable({
@@ -45,7 +42,7 @@ export class AuthorizeGuard implements CanActivateChild {
             (oauthSession && oauthSession.forceLogin) ||
             !session.oauthSessionIsLoggedIn
           ) {
-            return this.redirectToLoginPage(next.queryParams)
+            return this.redirectToLoginPage(next.queryParams, oauthSession)
             // If the redirectUrl comes with a code from the start redirect the user immediately
           } else if (oauthSession.redirectUrl.includes('?code=')) {
             this.window.location.href = oauthSession.redirectUrl
@@ -57,10 +54,11 @@ export class AuthorizeGuard implements CanActivateChild {
     )
   }
 
-  private redirectToLoginPage(queryParams): Observable<UrlTree> {
+  private redirectToLoginPage(queryParams, oauthSession: RequestInfoForm): Observable<UrlTree> {
     // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
     // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
-    const newQueryParams = { ...queryParams, oauth: '' }
+    // The router is removing parameters from the url it necessary reassigned from the oauth session to preserve all the parameters
+    const newQueryParams = { ...queryParams, oauth: '', redirect_uri: oauthSession.redirectUrl }
     return of(
       this._router.createUrlTree(['/signin'], {
         queryParams: newQueryParams,
