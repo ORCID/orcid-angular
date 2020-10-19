@@ -43,4 +43,24 @@ export class StepAComponent extends BaseStep {
         }
       })
   }
+
+  signIn() {
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        const params = JSON.parse(JSON.stringify(platform.queryParameters))
+        if (params['email']) {
+          delete params['email']
+        }
+        if (params['orcid']) {
+          delete params['orcid']
+        }
+        this._router.navigate([ApplicationRoutes.signin], {
+          queryParams: {
+            ...params
+          },
+        })
+      })
+  }
 }
