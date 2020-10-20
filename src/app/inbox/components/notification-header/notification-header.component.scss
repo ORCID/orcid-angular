@@ -17,11 +17,20 @@ hr.logo {
 
 
 .header {
-  .title {
+  .notification-type {
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    padding-left: $spacing-base;
+    .notification {
+      margin: 6px 0;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+
+  .title {
+    margin: 15px 0;
+    font-weight: bold;
   }
 
   .title:first-letter {

@@ -5,13 +5,13 @@
     Hi
   </ng-container>
     {{ displayName }}
-  <a class="mat-button-font"
+  <a
      (click)="navigateTo(baseUri + orcidId)"
   >
     ({{baseUri + orcidId}})
   </a>
 </p>
-<p class="mat-caption">
+<p>
   <ng-container i18n="@@inbox.header.gotNewNotifications">
     You've got new notifications on your ORCID record. To see more details for a particular notification or to take action please
   </ng-container>
@@ -21,22 +21,19 @@
     </ng-container>
   </a>
 </p>
-<br>
 <h3 i18n="@@inbox.header.newNotifications">
   Your new notifications
 </h3>
 <div class="header" #header>
   <hr class="notification"/>
-  <div class="title">
+  <div class="notification-type">
     <span class="dot notification-background mat-body-1"></span>
     <p class="notification">
       {{notificationTypeLabel(notificationType)}}
     </p>
-    <br>
-<!--    todo fix title-->
-    <p>
-      {{title}}
-    </p>
   </div>
+  <p class="title">
+    {{title}}
+  </p>
   <hr class="notification"/>
 </div>
