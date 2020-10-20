@@ -56,6 +56,11 @@ export class StepAComponent extends BaseStep {
         if (params['orcid']) {
           delete params['orcid']
         }
+
+        if (params['show_login']) {
+          delete params['show_login']
+        }
+
         this._router.navigate([ApplicationRoutes.signin], {
           queryParams: {
             ...params,
