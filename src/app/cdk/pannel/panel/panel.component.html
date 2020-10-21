@@ -1,5 +1,8 @@
-<div class="header box orc-font-body">
-  <ng-content select="[header]"> </ng-content>
+<div
+  class="header box orc-font-body"
+  [ngClass]="{ 'header-bottom': elements.length > 0 }"
+>
+  <ng-content select="[header]"></ng-content>
   <div class="buttons-container">
     <button mat-icon-button *ngIf="editable" [matTooltip]="tooltipLabelEdit">
       <mat-icon class="material-icons-outlined">edit</mat-icon>
@@ -20,6 +23,6 @@
     </button>
   </div>
 </div>
-<div class="body">
-  <ng-content select="[body]"> </ng-content>
+<div class="body" *ngIf="elements.length > 0">
+  <ng-content select="[body]"></ng-content>
 </div>
