@@ -44,7 +44,9 @@
 </app-panel>
 
 <app-panel
-  *ngIf="userRecord" [elements]="userRecord.externalIdentifier.externalIdentifiers">
+  *ngIf="userRecord"
+  [elements]="userRecord.externalIdentifier.externalIdentifiers"
+>
   <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
   <div body>
     <app-panel-element
@@ -82,7 +84,7 @@
     <app-panel-element
       *ngFor="let address of userRecord.countries.addresses"
       [visibility]="address.visibility.visibility"
-    >{{ address.countryName }}</app-panel-element
+      >{{ address.countryName }}</app-panel-element
     >
   </div>
 </app-panel>
