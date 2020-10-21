@@ -58,117 +58,36 @@ export interface Biography {
 }
 
 export interface Emails {
-  emails: {
-    value: string
-    primary: boolean
-    current: boolean
-    verified: boolean
-    visibility: VisibilityStrings
-    source: string
-    sourceName?: any
-    assertionOriginOrcid?: any
-    assertionOriginClientId?: any
-    assertionOriginName?: any
-    errors: any[]
-  }[]
+  emails: Assertion[]
   errors: string[]
 }
 export interface OtherNames {
   errors: String[]
-  otherNames: {
-    visibility: Visibility
-    errors: any[]
-    content: string
-    putCode: string
-    displayIndex: number
-    createdDate: MonthDayYearDate
-    lastModified: MonthDayYearDate
-    source: string
-    sourceName: string
-    assertionOriginOrcid?: any
-    assertionOriginClientId: string
-    assertionOriginName: string
-  }[]
+  otherNames: Assertion[]
   visibility: Visibility
 }
 
 export interface Countries {
   errors: string[]
-  addresses: {
-    visibility: Visibility
-    errors: any[]
-    iso2Country: Value
-    countryName: string
-    putCode: string
-    displayIndex: number
-    createdDate: MonthDayYearDate
-    lastModified: MonthDayYearDate
-    source: string
-    sourceName: string
-    assertionOriginOrcid?: any
-    assertionOriginClientId?: any
-    assertionOriginName?: any
-  }[]
+  addresses: Assertion[]
   visibility: Visibility
 }
 
 export interface Keywords {
   errors: any[]
-  keywords: {
-    visibility: Visibility
-    errors: any[]
-    putCode: string
-    content: string
-    displayIndex: number
-    createdDate: MonthDayYearDate
-    lastModified: MonthDayYearDate
-    source: string
-    sourceName: string
-    assertionOriginOrcid?: any
-    assertionOriginClientId?: any
-    assertionOriginName?: any
-  }[]
+  keywords: Assertion[]
   visibility: Visibility
 }
 
 export interface Website {
   errors: any[]
-  websites: {
-    visibility: Visibility
-    errors: any[]
-    url: Value
-    urlName: string
-    putCode: string
-    displayIndex: number
-    createdDate: MonthDayYearDate
-    lastModified: MonthDayYearDate
-    source: string
-    sourceName: string
-    assertionOriginOrcid?: any
-    assertionOriginClientId?: any
-    assertionOriginName?: any
-  }[]
+  websites: Assertion[]
   visibility: Visibility
 }
 
 export interface ExternalIdentifier {
   errors: any[]
-  externalIdentifiers: {
-    visibility: Visibility
-    errors: any[]
-    commonName: string
-    reference: string
-    url: string
-    source: string
-    sourceName: string
-    displayIndex: number
-    putCode: string
-    createdDate: MonthDayYearDate
-    lastModified: MonthDayYearDate
-    assertionOriginOrcid?: any
-    assertionOriginClientId?: any
-    assertionOriginName?: any
-  }[]
+  externalIdentifiers: Assertion[]
   visibility: Visibility
 }
 
@@ -183,4 +102,29 @@ export interface Names {
 export interface Preferences {
   developer_tools_enabled: boolean
   default_visibility: VisibilityStrings
+}
+
+export interface Assertion {
+  value: string
+  primary: boolean
+  current: boolean
+  verified: boolean
+  visibility: Visibility | VisibilityStrings
+  errors: any[]
+  iso2Country?: Value
+  countryName?: string
+  commonName?: string
+  reference?: string
+  url?: string | Value
+  urlName?: string
+  source: string
+  sourceName: string
+  displayIndex: number
+  putCode: string
+  content?: string
+  createdDate: MonthDayYearDate
+  lastModified: MonthDayYearDate
+  assertionOriginOrcid?: any
+  assertionOriginClientId?: any
+  assertionOriginName?: any
 }
