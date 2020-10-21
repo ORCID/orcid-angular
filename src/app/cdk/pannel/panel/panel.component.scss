@@ -15,8 +15,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: solid 1px;
   height: 56px;
+}
+
+.header-bottom {
+  border-bottom: solid 1px;
 }
 
 .buttons-container {
