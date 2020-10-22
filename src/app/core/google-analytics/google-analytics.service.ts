@@ -18,7 +18,7 @@ export class GoogleAnalyticsService {
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       cookie_flags: 'SameSite=None;Secure',
       page_path: url,
-      page_location: window.location.origin,
+      page_location: window.location.href,
       anonymize_ip: true,
       sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE ? '100' : '70',
       site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE

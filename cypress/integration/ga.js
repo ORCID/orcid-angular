@@ -1,69 +1,47 @@
-// in our cypress.json file we have blocked the www.google-analytics.com host
-// which prevents the GA script from ever loading. however because there
-// is still a global 'window.ga' function, that means we can stub it
-// and ensure its called correctly.
-//
-// if you pop open your dev tools you will see that the network request
-// for the script tag returns 503 because it's been blocked.
-
-// using a global event handler here because likely
-// in your real app you'll always want to stub window.ga
-//
-// if not you could just add a onBeforeLoad() callback
-// to the cy.visit
-
 /// <reference types="cypress" />
 
-Cypress.on('window:before:load', (win) => {
-  // because this is called before any scripts
-  // have loaded - the ga function is undefined
-  // so we need to create it.
-  win.dataLayer = win.dataLayer || []
-  cy.stub(win.dataLayer, 'push')
-    .callsFake((args) => {
-      console.log(args)
-    })
-    .as('ga')
-})
-
 describe('Google Analytics', function () {
-  beforeEach(function () {
-    cy.visit('dev.orcid.org')
+  beforeEach(function () {})
+
+  it('Landing on the homepage and then navigate to the signin page', function () {
+    cy.visit('https://dev.orcid.org')
+    cy.checkGtagInitialization('/')
+    cy.get('#menu-signing-button').click()
+    cy.checkGtagNavigation('/signin')
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(6))
   })
 
-  it('Initialize GA correctly when lands on the homepage', function () {
-    cy.get('@ga')
-      .should('be.calledWith', { 0: 'js', 1: Cypress.sinon.match.date })
-      .and(
-        'be.calledWith',
-        Cypress.sinon.match({
-          0: 'config',
-          1: 'UA-0000000-00',
-          2: {
-            anonymize_ip: true,
-            cookie_flags: 'SameSite=None;Secure',
-            sample_rate: 0,
-            send_page_view: false,
-          },
-        })
-      )
-      .and('be.calledWith', Cypress.sinon.match({ event: 'gtm.dom' }))
-      .and(
-        'be.calledWith',
-        Cypress.sinon.match({ 0: 'event', 1: 'timing_complete' })
-      )
-      .and(
-        'be.calledWith',
-        Cypress.sinon.match({
-          0: 'config',
-          1: 'UA-0000000-00',
-          2: Cypress.sinon.match({
-            page_path: '/',
-          }),
-        })
-      )
-    cy.get('@ga').should('have.callCount', 6)
+  it('Landing on sign in page and goes to the homepage', function () {
+    cy.visit('https://dev.orcid.org/signin')
+    cy.checkGtagInitialization('/signin')
+    cy.get('#home-logo').click()
+    cy.checkGtagNavigation('/')
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(6))
   })
 
+  it('Lands on home page and navigate to the register', function () {
+    cy.visit('https://dev.orcid.org')
+    cy.checkGtagInitialization('/')
+    cy.get('#menu-signing-button').click()
+    cy.checkGtagNavigation('/signin')
+    cy.get('#register-button').click()
+    cy.checkGtagNavigation('/register')
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(8))
+  })
 
+  it('Lands on the Oauth page goes to the register page and finish a registration', function () {
+    cy.visit(
+      'https://dev.orcid.org/oauth/authorize?client_id=APP-MLXS7JVFJS9FEIFJ&response_type=code&scope=/authenticate openid&redirect_uri=https://developers.google.com/oauthplayground'
+    )
+
+    const afterRedirectParameters =
+      'client_id=APP-MLXS7JVFJS9FEIFJ&response_type=code&scope=openid%20%2Fauthenticate&redirect_uri=https:%2F%2Fdevelopers.google.com%2Foauthplayground&oauth=&forceLogin=false'
+
+    cy.checkGtagInitialization('/signin?' + afterRedirectParameters)
+    cy.get('#register-button').click()
+    cy.checkGtagNavigation('/register?' + afterRedirectParameters)
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(6))
+  })
+
+  // TODO @leomendoza123 test register and Oauth events
 })
