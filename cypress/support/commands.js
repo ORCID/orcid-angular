@@ -1,13 +1,11 @@
+// A mach that filters out all the non-api calls that gtag does to the datalayer array
 var isNotAnInternalGtagCall = Cypress.sinon.match(function (value) {
   return !!value & !!value[0] && value[1] !== 'optimize.callback'
 }, 'isNotAnInternalGtagCall')
 
 let gtagApiCallsCount = 0
 Cypress.on('window:before:load', (win) => {
-  console.log('BEFORE LOAD')
-  // because this is called before any scripts
-  // have loaded - the ga function is undefined
-  // so we need to create it.
+  // Stub datalayer push function
   win.dataLayer = win.dataLayer || []
   cy.stub(win.dataLayer, 'push')
     .withArgs(isNotAnInternalGtagCall)
@@ -19,6 +17,8 @@ Cypress.on('window:before:load', (win) => {
 
 Cypress.Commands.add('checkGtagInitialization', (url) => {
   cy.get('@ga')
+    // First two calls done from index.html Gtag script initialization
+    // with send_page_view disable as describe on https://developers.google.com/analytics/devguides/collection/gtagjs
     .should('be.calledWith', { 0: 'js', 1: Cypress.sinon.match.date })
     .and(
       'be.calledWith',
@@ -33,7 +33,7 @@ Cypress.Commands.add('checkGtagInitialization', (url) => {
         },
       })
     )
-
+    // Measure loading time
     .and(
       'be.calledWith',
       Cypress.sinon.match({
@@ -44,6 +44,7 @@ Cypress.Commands.add('checkGtagInitialization', (url) => {
         }),
       })
     )
+    // Register page view as describe on https://developers.google.com/analytics/devguides/collection/gtagjs/single-page-applications#measure_virtual_pageviews
     .and(
       'be.calledWith',
       Cypress.sinon.match({
@@ -62,6 +63,7 @@ Cypress.Commands.add('checkGtagInitialization', (url) => {
 
 Cypress.Commands.add('checkGtagNavigation', (url) => {
   cy.get('@ga')
+    // Measure loading time
     .should(
       'be.calledWith',
       Cypress.sinon.match({
@@ -72,6 +74,7 @@ Cypress.Commands.add('checkGtagNavigation', (url) => {
         }),
       })
     )
+    // Register page view as describe on https://developers.google.com/analytics/devguides/collection/gtagjs/single-page-applications#measure_virtual_pageviews
     .and(
       'be.calledWith',
       Cypress.sinon.match({

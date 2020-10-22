@@ -29,14 +29,12 @@ describe('Google Analytics', function () {
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(8))
   })
 
-  it('Lands on the Oauth page goes to the register page and finish a registration', function () {
+  it('Lands on the Oauth page goes to the register page', function () {
     cy.visit(
       'https://dev.orcid.org/oauth/authorize?client_id=APP-MLXS7JVFJS9FEIFJ&response_type=code&scope=/authenticate openid&redirect_uri=https://developers.google.com/oauthplayground'
     )
-
     const afterRedirectParameters =
       'client_id=APP-MLXS7JVFJS9FEIFJ&response_type=code&scope=openid%20%2Fauthenticate&redirect_uri=https:%2F%2Fdevelopers.google.com%2Foauthplayground&oauth=&forceLogin=false'
-
     cy.checkGtagInitialization('/signin?' + afterRedirectParameters)
     cy.get('#register-button').click()
     cy.checkGtagNavigation('/register?' + afterRedirectParameters)
