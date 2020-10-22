@@ -39,7 +39,7 @@ export class SignInGuard implements CanActivateChild {
         if (session.oauthSession) {
           if (
             (queryParams.email || queryParams.orcid) &&
-            !session.oauthSession.userId
+            !session.oauthSessionIsLoggedIn
           ) {
             return this._router.createUrlTree(['/register'], {
               queryParams: queryParams,
@@ -47,12 +47,12 @@ export class SignInGuard implements CanActivateChild {
           } else if (
             queryParams.show_login &&
             (queryParams.email || queryParams.orcid) &&
-            !session.oauthSession.userId
+            !session.oauthSessionIsLoggedIn
           ) {
             return this.redirectToRegister(queryParams)
           } else if (
             queryParams.show_login === 'false' &&
-            !session.oauthSession.userId
+            !session.oauthSessionIsLoggedIn
           ) {
             return this.redirectToRegister(queryParams)
           } else if (
