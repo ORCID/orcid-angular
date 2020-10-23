@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 mat-icon {
-  margin-top: 4px; // Compensates mat icon bottom with space
+  margin-top: 2px; // Compensates mat icon bottom with space
   margin-left: 4px;
   [dir='rtl'] & {
     margin-right: 4px;
