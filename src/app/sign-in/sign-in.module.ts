@@ -17,7 +17,6 @@ import { PrintErrorsComponent } from './components/errors/print-errors/print-err
 import { FormSignInComponent } from './components/form-sign-in/form-sign-in.component'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
-import { OauthErrorComponent } from './components/errors/oauth-error/oauth-error.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { OauthErrorComponent } from './components/errors/oauth-error/oauth-error
     LoggedInComponent,
     PrintErrorsComponent,
     FormSignInComponent,
-    OauthErrorComponent,
   ],
   imports: [
     CommonModule,
