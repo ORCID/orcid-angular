@@ -6,7 +6,65 @@
     role="link"
     i18n="@@authorize.authorizeAccess"
   />
-  <p class="mat-body-1">
-    {{ error }}
-  </p>
+
+  <!----------------------------------------------------->
+  <!-- REDIRECT URI -->
+  <!-- MISSING REDIRECT URI -->
+  <div *ngIf="errorDescription.indexOf('Please specify a redirect URL') >= 0">
+    MISSING REDIRECT URI
+  </div>
+  <!-- INVALID REDIRECT URI -->
+  <div *ngIf="errorDescription.indexOf('Redirect URI doesn\'t match') >= 0">
+    <div>
+      <!-- Error: The provided redirect URI {{ uri }} does not match the redirect
+      URIs registered by ({{client id}}). -->
+
+    </div>
+    <div>
+        You have reached this page due to an error with the application's
+        integration. Please report this error using the "help" button below or
+        contact the organization requesting your ORCID iD.
+      </div>
+    </div>
+
+    <!----------------------------------------------------->
+    <!-- CLIENT_ID ERRORS -->
+    <!-- INVALID CLIENT ID!!! -->
+    <div *ngIf="errorDescription.indexOf('Client not found') >= 0">
+      INVALID CLIENT ID!!!
+    </div>
+    <!-- INVALID CLIENT ID!!! -->
+    <div *ngIf="error === 'invalid_client'">
+      INVALID CLIENT ID!!!
+    </div>
+    <!-- LOCKED CLIENT ID!!! -->
+    <div *ngIf="error === 'client_locked'">
+      INVALID LOCKED CLIENT ID!!!
+    </div>
+    <!----------------------------------------------------->
+
+    <!-- SCOPES ERRORS -->
+    <!-- INVALID SCOPES: Handle by the thirty party application with the code `invalid_scope` -->
+    <!-- UNAHOTURIZED SCOPES: Handle by the thirty party application with the code `invalid_scope`  -->
+    <!-- MISSING SCOPES!!! -->
+    <div
+      *ngIf="errorDescription.indexOf('Please specify the desired scopes') >= 0"
+    >
+      MISSING SCOPES!!!
+    </div>
+    <!----------------------------------------------------->
+    <!-- RESPONSE TYPE ERRORS-->
+    <!-- INVALID RESPONSE TYPE Handle by the thirty party application with the code `unsupported_response_type` -->
+    <!-- MISSING RESPONSE TYPE -->
+    <div
+      *ngIf="errorDescription.indexOf('Please specify a response type') >= 0"
+    >
+      MISSING RESPONSE TYPE!!!
+    </div>
+
+    <p class="mat-body-1">
+      {{ error }}
+      {{ errorDescription }}
+    </p>
+  </div>
 </div>

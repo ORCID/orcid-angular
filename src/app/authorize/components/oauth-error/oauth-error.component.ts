@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Subject } from 'rxjs'
-import { map, takeUntil } from 'rxjs/operators'
+import { combineLatest, Subject } from 'rxjs'
+import { first, map, takeUntil } from 'rxjs/operators'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { UserService } from 'src/app/core'
+import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-oauth-error',
@@ -9,17 +11,22 @@ import { UserService } from 'src/app/core'
   styleUrls: ['./oauth-error.component.scss'],
 })
 export class OauthErrorComponent implements OnInit {
-  @Input() errorDescription: string
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   error = ''
+  errorDescription = ''
 
-  constructor(private _user: UserService) {
-    this._user
-      .getUserSession()
+  constructor(
+    private _userInfo: UserService,
+    private _platformInfo: PlatformInfoService
+  ) {
+    combineLatest([_userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(takeUntil(this.$destroy))
-      .subscribe((userInfo) => {
-        this.error = userInfo.oauthSession.error
+      .subscribe(([session, platform]) => {
+        session = session as UserSession
+        platform = platform as PlatformInfo
+        this.error = session.oauthSession.error
+        this.errorDescription = session.oauthSession.errorDescription
       })
   }
 
