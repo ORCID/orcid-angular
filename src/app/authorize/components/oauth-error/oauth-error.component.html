@@ -7,39 +7,40 @@
     i18n="@@authorize.authorizeAccess"
   />
 
-  <!----------------------------------------------------->
-  <!-- REDIRECT URI -->
-  <!-- MISSING REDIRECT URI -->
-  <div *ngIf="errorDescription.indexOf('Please specify a redirect URL') >= 0">
-    MISSING REDIRECT URI
-  </div>
-  <!-- INVALID REDIRECT URI -->
-  <div *ngIf="errorDescription.indexOf('Redirect URI doesn\'t match') >= 0">
-    <div>
-      <!-- Error: The provided redirect URI {{ uri }} does not match the redirect
-      URIs registered by ({{client id}}). -->
-
+  <mat-card-content>
+    <!----------------------------------------------------->
+    <!-- REDIRECT URI -->
+    <!-- MISSING REDIRECT URI -->
+    <div *ngIf="errorDescription.indexOf('Please specify a redirect URL') >= 0">
+      <ng-container>Error: No redirect URI provided.</ng-container>
     </div>
-    <div>
-        You have reached this page due to an error with the application's
-        integration. Please report this error using the "help" button below or
-        contact the organization requesting your ORCID iD.
-      </div>
+    <!-- INVALID REDIRECT URI -->
+    <div *ngIf="errorDescription.indexOf('Redirect URI doesn\'t match') >= 0">
+      <ng-container> Error: The provided redirect URI </ng-container
+      ><strong>{{ queryParams.redirect_uri }}</strong>
+      <ng-container
+        >does not match the redirect URIs registered by
+      </ng-container>
+      <strong>({{ queryParams.client_id }}).</strong>
     </div>
 
     <!----------------------------------------------------->
     <!-- CLIENT_ID ERRORS -->
     <!-- INVALID CLIENT ID!!! -->
     <div *ngIf="errorDescription.indexOf('Client not found') >= 0">
-      INVALID CLIENT ID!!!
+      <ng-container>Error: The provided client id </ng-container
+      ><strong>{{ queryParams.client_id }}</strong
+      ><ng-container> is invalid.</ng-container>
     </div>
-    <!-- INVALID CLIENT ID!!! -->
+    <!--  MISSING CLIENT ID!!! -->
     <div *ngIf="error === 'invalid_client'">
-      INVALID CLIENT ID!!!
+      <ng-container>Error: No client id provided.</ng-container>
     </div>
     <!-- LOCKED CLIENT ID!!! -->
     <div *ngIf="error === 'client_locked'">
-      INVALID LOCKED CLIENT ID!!!
+      <ng-container>Error: The provided client id </ng-container
+      ><strong>{{ queryParams.client_id }}</strong>
+      <ng-container>is locked.</ng-container>
     </div>
     <!----------------------------------------------------->
 
@@ -50,7 +51,7 @@
     <div
       *ngIf="errorDescription.indexOf('Please specify the desired scopes') >= 0"
     >
-      MISSING SCOPES!!!
+      <ng-container>Error: No scope provided </ng-container>
     </div>
     <!----------------------------------------------------->
     <!-- RESPONSE TYPE ERRORS-->
@@ -59,12 +60,20 @@
     <div
       *ngIf="errorDescription.indexOf('Please specify a response type') >= 0"
     >
-      MISSING RESPONSE TYPE!!!
+      <ng-container>Error: No response type provided.</ng-container>
     </div>
 
-    <p class="mat-body-1">
-      {{ error }}
-      {{ errorDescription }}
-    </p>
-  </div>
+    <mat-divider></mat-divider>
+    <div>
+      You have reached this page due to an error with the application's
+      integration. Please report this error using the "help" button below or
+      contact the organization requesting your ORCID iD.
+    </div>
+    <mat-divider> </mat-divider>
+  </mat-card-content>
+
+  <p class="mat-body-1 mat-caption">
+    {{ error }} /
+    {{ errorDescription }}
+  </p>
 </div>

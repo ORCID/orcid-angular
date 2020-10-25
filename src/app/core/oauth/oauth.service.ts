@@ -141,7 +141,9 @@ export class OauthService {
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           ),
-          switchMap((session) => this.handleSessionErrors(session)),
+          switchMap((session) =>
+            this.handleSessionErrors(session, queryParameters)
+          ),
           shareReplay(1)
         )
       return this.declareOauthSession$.pipe(last())
@@ -150,7 +152,10 @@ export class OauthService {
     }
   }
 
-  handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {
+  handleSessionErrors(
+    session: RequestInfoForm,
+    queryParameters: OauthParameters
+  ): Observable<RequestInfoForm> {
     if (
       session.error &&
       OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
@@ -163,7 +168,9 @@ export class OauthService {
     } else if (session.error || (session.errors && session.errors.length)) {
       // Send the user to the oauth page to see the error
       this._router
-        .navigate([ApplicationRoutes.authorize])
+        .navigate([ApplicationRoutes.authorize], {
+          queryParams: queryParameters,
+        })
         .then((navigated: boolean) => {
           if (navigated) {
             this._errorHandler

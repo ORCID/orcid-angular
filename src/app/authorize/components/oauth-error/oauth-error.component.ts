@@ -3,6 +3,7 @@ import { combineLatest, Subject } from 'rxjs'
 import { first, map, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { UserService } from 'src/app/core'
+import { OauthParameters } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
 
 @Component({
@@ -15,6 +16,7 @@ export class OauthErrorComponent implements OnInit {
 
   error = ''
   errorDescription = ''
+  queryParams: OauthParameters
 
   constructor(
     private _userInfo: UserService,
@@ -27,6 +29,7 @@ export class OauthErrorComponent implements OnInit {
         platform = platform as PlatformInfo
         this.error = session.oauthSession.error
         this.errorDescription = session.oauthSession.errorDescription
+        this.queryParams = platform.queryParameters as OauthParameters
       })
   }
 
