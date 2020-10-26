@@ -1,1 +1,5 @@
-{}
+{
+  "baseUrl": "http://localhost:4200",
+  "chromeWebSecurity": false,
+  "failOnStatusCode": false
+}
