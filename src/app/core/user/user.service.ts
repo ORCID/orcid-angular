@@ -184,9 +184,9 @@ export class UserService {
           orcidUrl: this.getOrcidUrl(data),
           effectiveOrcidUrl: this.getOrcidUrl(data, true),
           oauthSessionIsLoggedIn:
-            data.oauthSession &&
-            data.oauthSession.userOrcid &&
-            data.oauthSession.userName,
+            !!data.oauthSession &&
+            !!data.oauthSession.userOrcid &&
+            !!data.oauthSession.userName,
         },
       }
     }
