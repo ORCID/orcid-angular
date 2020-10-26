@@ -1,19 +1,14 @@
-<img src="./assets/vectors/orcid.logo.svg" alt="ORCID.org"/>
+<img src="./assets/vectors/orcid.logo.svg" alt="ORCID.org" />
 <hr class="logo" />
 <p>
-  <ng-container i18n="@@inbox.header.hi">
-    Hi
-  </ng-container>
-    {{ displayName }}
-  <a
-     (click)="navigateTo(baseUri + orcidId)"
-  >
-    ({{baseUri + orcidId}})
-  </a>
+  <ng-container i18n="@@inbox.header.hi"> Hi </ng-container>
+  {{ displayName }}
+  <a (click)="navigateTo(baseUri + orcidId)"> ({{ baseUri + orcidId }}) </a>
 </p>
 <p>
   <ng-container i18n="@@inbox.header.gotNewNotifications">
-    You've got new notifications on your ORCID record. To see more details for a particular notification or to take action please
+    You've got new notifications on your ORCID record. To see more details for a
+    particular notification or to take action please
   </ng-container>
   <a (click)="navigateTo(baseUri + 'inbox')">
     <ng-container i18n="@@inbox.header.visit">
@@ -21,19 +16,17 @@
     </ng-container>
   </a>
 </p>
-<h3 i18n="@@inbox.header.newNotifications">
-  Your new notifications
-</h3>
+<h3 i18n="@@inbox.header.newNotifications">Your new notifications</h3>
 <div class="header" #header>
-  <hr class="notification"/>
+  <hr class="notification" />
   <div class="notification-type">
     <span class="dot notification-background mat-body-1"></span>
     <p class="notification">
-      {{notificationTypeLabel(notificationType)}}
+      {{ notificationTypeLabel(notificationType) }}
     </p>
   </div>
   <p class="title">
-    {{title}}
+    {{ title }}
   </p>
-  <hr class="notification"/>
+  <hr class="notification" />
 </div>

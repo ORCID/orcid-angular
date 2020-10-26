@@ -19,8 +19,8 @@ import { NotificationComponent } from './components/notification/notification.co
 import { NotificationsComponent } from './components/notifications/notifications.component'
 import { InboxRoutingModule } from './inbox-routing.module'
 import { InboxComponent } from './pages/inbox/inbox.component'
-import { SharedModule } from '../shared/shared.module';
-import { NotificationFooterComponent } from './components/notification-footer/notification-footer.component';
+import { SharedModule } from '../shared/shared.module'
+import { NotificationFooterComponent } from './components/notification-footer/notification-footer.component'
 import { NotificationHeaderComponent } from './components/notification-header/notification-header.component'
 
 @NgModule({

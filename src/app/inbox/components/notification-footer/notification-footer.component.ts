@@ -6,22 +6,18 @@ import { environment } from '../../../../environments/environment.local'
   selector: 'app-notification-footer',
   templateUrl: './notification-footer.component.html',
   styleUrls: ['./notification-footer.component.scss'],
-  preserveWhitespaces: true
+  preserveWhitespaces: true,
 })
 export class NotificationFooterComponent implements OnInit {
   baseUri: string
 
-  constructor(
-    @Inject(WINDOW) private window: Window
-  ) {
+  constructor(@Inject(WINDOW) private window: Window) {
     this.baseUri = environment.BASE_URL
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   navigateTo(val) {
     this.window.location.href = val
   }
-
 }

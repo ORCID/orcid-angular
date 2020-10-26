@@ -1,5 +1,16 @@
-import { Component, ElementRef, HostBinding, Inject, Input, OnInit, ViewChild } from '@angular/core'
-import { InboxNotification, InboxNotificationAmended } from '../../../types/notifications.endpoint'
+import {
+  Component,
+  ElementRef,
+  HostBinding,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
+import {
+  InboxNotification,
+  InboxNotificationAmended,
+} from '../../../types/notifications.endpoint'
 import { WINDOW } from '../../../cdk/window'
 import { environment } from '../../../../environments/environment.local'
 import { UserService } from '../../../core'
@@ -11,9 +22,9 @@ import { uiNotificationType } from '../../../types/notifications.local'
   templateUrl: './notification-header.component.html',
   styleUrls: [
     './notification-header.component.scss',
-    './notification-header.component.scss-theme.scss'
-    ],
-  preserveWhitespaces: true
+    './notification-header.component.scss-theme.scss',
+  ],
+  preserveWhitespaces: true,
 })
 export class NotificationHeaderComponent implements OnInit {
   @Input() notification: InboxNotificationAmended
@@ -28,10 +39,7 @@ export class NotificationHeaderComponent implements OnInit {
   orcidId: string
   title: string
 
-  constructor(
-    @Inject(WINDOW) private window: Window,
-    _userInfo: UserService,
-  ) {
+  constructor(@Inject(WINDOW) private window: Window, _userInfo: UserService) {
     _userInfo
       .getUserSession()
       .pipe(take(1))

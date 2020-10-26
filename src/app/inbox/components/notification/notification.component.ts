@@ -204,8 +204,10 @@ export class NotificationComponent
   }
 
   displayHeaderAndFooter(notification: InboxNotification) {
-    return notification.notificationType === 'PERMISSION' ||
+    return (
+      notification.notificationType === 'PERMISSION' ||
       notification.notificationType === 'AMENDED' ||
       notification.notificationType === 'INSTITUTIONAL_CONNECTION'
+    )
   }
 }
