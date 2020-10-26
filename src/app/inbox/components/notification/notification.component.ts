@@ -25,6 +25,7 @@ import {
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -45,6 +46,7 @@ import {
 export class NotificationComponent
   implements OnInit, AfterViewInit, ControlValueAccessor {
   state = 'close'
+  togglzEnableNewNotifications: boolean
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') _archived = false
   @HostBinding('class.green') green = false
@@ -80,6 +82,7 @@ export class NotificationComponent
   }
 
   constructor(
+    _togglz: TogglzService,
     @Inject(LOCALE_ID) public locale: string,
     private _platform: PlatformInfoService,
     private _inbox: InboxService,
@@ -87,6 +90,9 @@ export class NotificationComponent
     private _cdr: ChangeDetectorRef,
     private _ngZone: NgZone
   ) {
+    _togglz
+      .getStateOf('ENABLE_NEW_NOTIFICATIONS')
+      .subscribe((value) => (this.togglzEnableNewNotifications = value))
     _platform.get().subscribe((value) => (this.platform = value))
     this.form = new FormGroup({
       selected: new FormControl(false, Validators.required),
