@@ -74,7 +74,7 @@ export class OauthService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap((session) => this.handleSessionErrors(session))
-  )
+      )
   }
 
   authorize(approved: boolean): Observable<RequestInfoForm> {
