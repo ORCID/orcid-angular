@@ -1,5 +1,11 @@
 import { Inject, Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -29,19 +35,15 @@ export class SignInGuard implements CanActivateChild {
     return this._user.getUserSession().pipe(
       map((session) => {
         if (session.oauthSession) {
-          if (
-            (queryParams.email || queryParams.orcid)
-          ) {
-            return this.isUserLoggedInOrExist(session, queryParams);
+          if (queryParams.email || queryParams.orcid) {
+            return this.isUserLoggedInOrExist(session, queryParams)
           } else if (
             queryParams.show_login &&
             (queryParams.email || queryParams.orcid)
           ) {
-            return this.isUserLoggedInOrExist(session, queryParams);
-          } else if (
-            queryParams.show_login === 'false'
-          ) {
-            return this.isUserLoggedInOrExist(session, queryParams);
+            return this.isUserLoggedInOrExist(session, queryParams)
+          } else if (queryParams.show_login === 'false') {
+            return this.isUserLoggedInOrExist(session, queryParams)
           } else if (
             !session.oauthSession.forceLogin &&
             session.oauthSessionIsLoggedIn
@@ -61,7 +63,7 @@ export class SignInGuard implements CanActivateChild {
     if (!userId && !session.oauthSessionIsLoggedIn) {
       return this.redirectToRegister(queryParams)
     }
-    return true;
+    return true
   }
 
   private redirectToRegister(queryParams) {
