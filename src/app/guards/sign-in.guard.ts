@@ -1,19 +1,11 @@
-import { Injectable, Inject } from '@angular/core'
-import {
-  ActivatedRouteSnapshot,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router'
-import { Observable, of } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { Inject, Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
-import { OauthParameters, RequestInfoForm } from '../types'
 import { UserService } from '../core'
 import { WINDOW } from '../cdk/window'
-import { ERROR_REPORT } from '../errors'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 
 @Injectable({
@@ -38,23 +30,18 @@ export class SignInGuard implements CanActivateChild {
       map((session) => {
         if (session.oauthSession) {
           if (
-            (queryParams.email || queryParams.orcid) &&
-            !session.oauthSessionIsLoggedIn
+            (queryParams.email || queryParams.orcid)
           ) {
-            return this._router.createUrlTree(['/register'], {
-              queryParams: queryParams,
-            })
+            return this.isUserLoggedInOrExist(session, queryParams);
           } else if (
             queryParams.show_login &&
-            (queryParams.email || queryParams.orcid) &&
-            !session.oauthSessionIsLoggedIn
+            (queryParams.email || queryParams.orcid)
           ) {
-            return this.redirectToRegister(queryParams)
+            return this.isUserLoggedInOrExist(session, queryParams);
           } else if (
-            queryParams.show_login === 'false' &&
-            !session.oauthSessionIsLoggedIn
+            queryParams.show_login === 'false'
           ) {
-            return this.redirectToRegister(queryParams)
+            return this.isUserLoggedInOrExist(session, queryParams);
           } else if (
             !session.oauthSession.forceLogin &&
             session.oauthSessionIsLoggedIn
@@ -67,6 +54,14 @@ export class SignInGuard implements CanActivateChild {
         return true
       })
     )
+  }
+
+  private isUserLoggedInOrExist(session, queryParams) {
+    const userId = !!session.oauthSession.userId
+    if (!userId && !session.oauthSessionIsLoggedIn) {
+      return this.redirectToRegister(queryParams)
+    }
+    return true;
   }
 
   private redirectToRegister(queryParams) {
