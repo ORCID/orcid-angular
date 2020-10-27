@@ -12,34 +12,38 @@
     <!-- REDIRECT URI -->
     <!-- MISSING REDIRECT URI -->
     <div *ngIf="errorDescription.indexOf('Please specify a redirect URL') >= 0">
-      <ng-container>Error: No redirect URI provided.</ng-container>
+      <div>Error: Incorrect OAuth Link for client id</div>
+      <strong>{{ queryParams.client_id }}</strong>
+      <div>, missing redirect uri parameter</div>
     </div>
     <!-- INVALID REDIRECT URI -->
     <div *ngIf="errorDescription.indexOf('Redirect URI doesn\'t match') >= 0">
-      <ng-container> Error: The provided redirect URI </ng-container
-      ><strong>{{ queryParams.redirect_uri }}</strong>
+      <ng-container> Error: The provided redirect URI </ng-container>
+      <strong>{{ queryParams.redirect_uri }}</strong>
       <ng-container
         >does not match the redirect URIs registered by
       </ng-container>
-      <strong>({{ queryParams.client_id }}).</strong>
+      <strong
+        >{{ oauthSession.clientName }} ({{ queryParams.client_id }}).</strong
+      >
     </div>
 
     <!----------------------------------------------------->
     <!-- CLIENT_ID ERRORS -->
     <!-- INVALID CLIENT ID!!! -->
     <div *ngIf="errorDescription.indexOf('Client not found') >= 0">
-      <ng-container>Error: The provided client id </ng-container
-      ><strong>{{ queryParams.client_id }}</strong
-      ><ng-container> is invalid.</ng-container>
+      <ng-container>Error: The provided client id </ng-container>
+      <strong>{{ queryParams.client_id }}</strong>
+      <ng-container> is invalid.</ng-container>
     </div>
     <!--  MISSING CLIENT ID!!! -->
-    <div *ngIf="error === 'invalid_client'">
-      <ng-container>Error: No client id provided.</ng-container>
+    <div *ngIf="errorDescription.indexOf('Please specify a client id') >= 0">
+      Error: Incorrect OAuth Link, missing client id parameter.
     </div>
     <!-- LOCKED CLIENT ID!!! -->
     <div *ngIf="error === 'client_locked'">
-      <ng-container>Error: The provided client id </ng-container
-      ><strong>{{ queryParams.client_id }}</strong>
+      <ng-container>Error: The provided client id </ng-container>
+      <strong>{{ queryParams.client_id }}</strong>
       <ng-container>is locked.</ng-container>
     </div>
     <!----------------------------------------------------->
@@ -51,7 +55,9 @@
     <div
       *ngIf="errorDescription.indexOf('Please specify the desired scopes') >= 0"
     >
-      <ng-container>Error: No scope provided </ng-container>
+      <div>Error: Incorrect OAuth Link for client id</div>
+      <strong> {{ queryParams.client_id }}</strong
+      ><div>, missing scope parameter.</div>
     </div>
     <!----------------------------------------------------->
     <!-- RESPONSE TYPE ERRORS-->
@@ -60,7 +66,9 @@
     <div
       *ngIf="errorDescription.indexOf('Please specify a response type') >= 0"
     >
-      <ng-container>Error: No response type provided.</ng-container>
+      <div>Error: Incorrect OAuth Link for client id</div>
+      <strong> {{ queryParams.client_id }}</strong
+      ><div>, missing response type parameter.</div>
     </div>
 
     <mat-divider></mat-divider>
