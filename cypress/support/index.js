@@ -1,6 +1,5 @@
-
 import './commands'
-
+import './session.commands'
 Cypress.Commands.add('getIframeBody', (target) => {
   return cy
     .get(target)
