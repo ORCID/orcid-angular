@@ -8,76 +8,82 @@
   />
 
   <mat-card-content>
-    <!----------------------------------------------------->
-    <!-- REDIRECT URI -->
-    <!-- MISSING REDIRECT URI -->
-    <div *ngIf="errorDescription.indexOf('Please specify a redirect URL') >= 0">
-      <div>Error: Incorrect OAuth Link for client id</div>
-      <strong>{{ queryParams.client_id }}</strong>
-      <div>, missing redirect uri parameter</div>
-    </div>
-    <!-- INVALID REDIRECT URI -->
-    <div *ngIf="errorDescription.indexOf('Redirect URI doesn\'t match') >= 0">
-      <ng-container> Error: The provided redirect URI </ng-container>
-      <strong>{{ queryParams.redirect_uri }}</strong>
-      <ng-container
-        >does not match the redirect URIs registered by
-      </ng-container>
-      <strong
-        >{{ oauthSession.clientName }} ({{ queryParams.client_id }}).</strong
+    <div id="error-message">
+      <!----------------------------------------------------->
+      <!-- REDIRECT URI -->
+      <!-- MISSING REDIRECT URI -->
+      <div
+        *ngIf="errorDescription.indexOf('Please specify a redirect URL') >= 0"
       >
-    </div>
+        <ng-container>Error: Incorrect OAuth Link for client id</ng-container>
+        <strong>{{ queryParams.client_id }}</strong
+        ><ng-container>, missing redirect uri parameter</ng-container>
+      </div>
+      <!-- INVALID REDIRECT URI -->
+      <div *ngIf="errorDescription.indexOf('Redirect URI doesn\'t match') >= 0">
+        <ng-container> Error: The provided redirect URI</ng-container>
+        <strong>{{ queryParams.redirect_uri }}</strong>
+        <ng-container
+          >does not match the redirect URIs registered by
+        </ng-container>
+        <strong
+          >{{ oauthSession.clientName }} ({{ queryParams.client_id }}).</strong
+        >
+      </div>
 
-    <!----------------------------------------------------->
-    <!-- CLIENT_ID ERRORS -->
-    <!-- INVALID CLIENT ID!!! -->
-    <div *ngIf="errorDescription.indexOf('Client not found') >= 0">
-      <ng-container>Error: The provided client id </ng-container>
-      <strong>{{ queryParams.client_id }}</strong>
-      <ng-container> is invalid.</ng-container>
-    </div>
-    <!--  MISSING CLIENT ID!!! -->
-    <div *ngIf="errorDescription.indexOf('Please specify a client id') >= 0">
-      Error: Incorrect OAuth Link, missing client id parameter.
-    </div>
-    <!-- LOCKED CLIENT ID!!! -->
-    <div *ngIf="error === 'client_locked'">
-      <ng-container>Error: The provided client id </ng-container>
-      <strong>{{ queryParams.client_id }}</strong>
-      <ng-container>is locked.</ng-container>
-    </div>
-    <!----------------------------------------------------->
+      <!----------------------------------------------------->
+      <!-- CLIENT_ID ERRORS -->
+      <!-- INVALID CLIENT ID!!! -->
+      <div *ngIf="errorDescription.indexOf('Client not found') >= 0">
+        <ng-container>Error: The provided client id</ng-container>
+        <strong>{{ queryParams.client_id }}</strong>
+        <ng-container>is invalid.</ng-container>
+      </div>
+      <!--  MISSING CLIENT ID!!! -->
+      <div *ngIf="errorDescription.indexOf('Please specify a client id') >= 0">
+        Error: Incorrect OAuth Link, missing client id parameter.
+      </div>
+      <!-- LOCKED CLIENT ID!!! -->
+      <div *ngIf="error === 'client_locked'">
+        <ng-container>Error: The provided client id</ng-container>
+        <strong>{{ queryParams.client_id }}</strong>
+        <ng-container>is locked.</ng-container>
+      </div>
+      <!----------------------------------------------------->
 
-    <!-- SCOPES ERRORS -->
-    <!-- INVALID SCOPES: Handle by the thirty party application with the code `invalid_scope` -->
-    <!-- UNAHOTURIZED SCOPES: Handle by the thirty party application with the code `invalid_scope`  -->
-    <!-- MISSING SCOPES!!! -->
-    <div
-      *ngIf="errorDescription.indexOf('Please specify the desired scopes') >= 0"
-    >
-      <div>Error: Incorrect OAuth Link for client id</div>
-      <strong> {{ queryParams.client_id }}</strong
-      ><div>, missing scope parameter.</div>
-    </div>
-    <!----------------------------------------------------->
-    <!-- RESPONSE TYPE ERRORS-->
-    <!-- INVALID RESPONSE TYPE Handle by the thirty party application with the code `unsupported_response_type` -->
-    <!-- MISSING RESPONSE TYPE -->
-    <div
-      *ngIf="errorDescription.indexOf('Please specify a response type') >= 0"
-    >
-      <div>Error: Incorrect OAuth Link for client id</div>
-      <strong> {{ queryParams.client_id }}</strong
-      ><div>, missing response type parameter.</div>
-    </div>
+      <!-- SCOPES ERRORS -->
+      <!-- INVALID SCOPES: Handle by the thirty party application with the code `invalid_scope` -->
+      <!-- UNAHOTURIZED SCOPES: Handle by the thirty party application with the code `invalid_scope`  -->
+      <!-- MISSING SCOPES!!! -->
+      <div
+        *ngIf="
+          errorDescription.indexOf('Please specify the desired scopes') >= 0
+        "
+      >
+        <ng-container>Error: Incorrect OAuth Link for client id</ng-container>
+        <strong> {{ queryParams.client_id }}</strong
+        ><ng-container>, missing scope parameter.</ng-container>
+      </div>
+      <!----------------------------------------------------->
+      <!-- RESPONSE TYPE ERRORS-->
+      <!-- INVALID RESPONSE TYPE Handle by the thirty party application with the code `unsupported_response_type` -->
+      <!-- MISSING RESPONSE TYPE -->
+      <div
+        *ngIf="errorDescription.indexOf('Please specify a response type') >= 0"
+      >
+        <ng-container>Error: Incorrect OAuth Link for client id</ng-container>
+        <strong> {{ queryParams.client_id }}</strong
+        ><ng-container>, missing response type parameter.</ng-container>
+      </div>
 
-    <mat-divider></mat-divider>
-    <div>
-      You have reached this page due to an error with the application's
-      integration. Please report this error using the "help" button below or
-      contact the organization requesting your ORCID iD.
+      <mat-divider></mat-divider>
+      <div>
+        You have reached this page due to an error with the application's
+        integration. Please report this error using the "help" button below or
+        contact the organization requesting your ORCID iD.
+      </div>
+      <mat-divider> </mat-divider>
     </div>
-    <mat-divider> </mat-divider>
   </mat-card-content>
 
   <p class="mat-body-1 mat-caption">

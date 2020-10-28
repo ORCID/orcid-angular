@@ -163,7 +163,9 @@ export class OauthService {
       )
     ) {
       // Redirect error that are handle by the client application
-      this.window.location.href = `${session.redirectUrl}#error=${session.error}`
+      ;(this.window as any).outOfRouterNavigation(
+        `${session.redirectUrl}#error=${session.error}`
+      )
       return NEVER
     } else if (session.error || (session.errors && session.errors.length)) {
       // Send the user to the oauth page to see the error

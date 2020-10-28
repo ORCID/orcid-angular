@@ -1,4 +1,5 @@
 {
   "chromeWebSecurity": false,
-  "failOnStatusCode": false
+  "failOnStatusCode": false,
+  "experimentalNetworkStubbing": true
 }

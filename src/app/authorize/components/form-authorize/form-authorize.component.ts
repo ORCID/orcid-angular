@@ -22,6 +22,7 @@ import {
   selector: 'app-form-authorize',
   templateUrl: './form-authorize.component.html',
   styleUrls: ['./form-authorize.component.scss'],
+  preserveWhitespaces: true,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

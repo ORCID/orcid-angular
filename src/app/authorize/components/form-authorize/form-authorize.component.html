@@ -25,7 +25,7 @@
     </p>
     <div class="m-t-small m-b-8">
       <div class="mat-body-2">
-        <strong>{{ userName }}</strong>
+        <strong id="user-name">{{ userName }}</strong>
       </div>
       <a class="mat-button-font" href="{{ orcidUrl }}" target="_blank">{{
         orcidUrl
@@ -60,7 +60,7 @@
       <ng-container
         *ngFor="let scope of this.oauthRequest.scopes; let last = last"
       >
-        <li [matTooltip]="getLongDescription(scope)">
+        <li [matTooltip]="getLongDescription(scope)" [attr.id]="scope.value">
           <mat-divider></mat-divider>
           <div>
             <ng-container
@@ -99,7 +99,6 @@
         If authorized, this organization will have access to your ORCID record,
         as outlined above and described in further detail in</ng-container
       >
-
       <a
         href="https://orcid.org/footer/privacy-policy"
         target="_blank"
