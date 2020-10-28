@@ -4,7 +4,6 @@ describe('The Dashboard Page', () => {
   beforeEach(() => {
     cy.sessionLogin('testUser')
   })
-
   // TEST SIMPLE OAUTH
   it('shows an "open id" authorization screen', function () {
     cy.visit(
@@ -15,10 +14,10 @@ describe('The Dashboard Page', () => {
     cy.get('#app-name').contains(environment.validApp.name)
     cy.get('li#openid')
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   // TEST ALL POSSIBLE OAUTH ERRORS
-
   it('show error screen on INVALID client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=WRONG&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
@@ -27,8 +26,9 @@ describe('The Dashboard Page', () => {
       'Error: The provided client id WRONG is invalid.'
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on MISSING client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
@@ -37,8 +37,9 @@ describe('The Dashboard Page', () => {
       'Error: Incorrect OAuth Link, missing client id parameter.'
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on LOCKED client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.lockedApp.id}&response_type=code&scope=/authenticate openid&redirect_uri=${environment.validApp.redirectUrl}`
@@ -47,8 +48,9 @@ describe('The Dashboard Page', () => {
       `Error: The provided client id ${environment.lockedApp.id} is locked.`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on INVALID response type', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=WRONG&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`,
@@ -68,7 +70,6 @@ describe('The Dashboard Page', () => {
       )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(2))
   })
-
   it('show error screen on MISSING response type', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
@@ -77,8 +78,9 @@ describe('The Dashboard Page', () => {
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing response type parameter.`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on INVALID redirect URL', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=WRONG`
@@ -87,8 +89,9 @@ describe('The Dashboard Page', () => {
       `Error: The provided redirect URI WRONG does not match the redirect URIs registered by ${environment.validApp.name} (${environment.validApp.id}).`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on MISSING redirect URL', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid`
@@ -97,8 +100,9 @@ describe('The Dashboard Page', () => {
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing redirect uri parameter`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on INVALID scope', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=WRONG&redirect_uri=https://developers.google.com/oauthplayground`,
@@ -116,8 +120,9 @@ describe('The Dashboard Page', () => {
         `${environment.validApp.redirectUrl}` + `#error=invalid_scope`
       )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(2))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on UNAUTHORIZED scope', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=/webhook&redirect_uri=https://developers.google.com/oauthplayground`,
@@ -135,8 +140,9 @@ describe('The Dashboard Page', () => {
         `${environment.validApp.redirectUrl}` + `#error=invalid_scope`
       )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(2))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('show error screen on MISSING redirect URL', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&redirect_uri=${environment.validApp.redirectUrl}`
@@ -145,8 +151,9 @@ describe('The Dashboard Page', () => {
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing scope parameter.`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
   })
-
   it('reports fatal SERVER ERROR on oauth/custom/init.json endpoint', function () {
     cy.server()
     cy.route({
@@ -155,7 +162,6 @@ describe('The Dashboard Page', () => {
       response: 'badResponse',
       status: 500,
     })
-
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
     )

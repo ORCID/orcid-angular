@@ -1,5 +1,6 @@
-import './commands'
+import './google-analytics.commands'
 import './session.commands'
+import './platform.commands'
 Cypress.Commands.add('getIframeBody', (target) => {
   return cy
     .get(target)
