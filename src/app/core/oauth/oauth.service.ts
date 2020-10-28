@@ -21,6 +21,7 @@ import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
 import { TwoFactor } from '../../types/two-factor.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { objectToUrlParameters } from '../../constants'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
@@ -125,9 +126,7 @@ export class OauthService {
       this.declareOauthSession$ = this._http
         .post<RequestInfoForm>(
           environment.BASE_URL +
-            `oauth/custom/init.json?${this.objectToUrlParameters(
-              queryParameters
-            )}`,
+            `oauth/custom/init.json?${objectToUrlParameters(queryParameters)}`,
           queryParameters,
           { headers: this.headers }
         )
@@ -195,7 +194,7 @@ export class OauthService {
       .get<RequestInfoForm>(
         environment.BASE_URL +
           // tslint:disable-next-line:max-line-length
-          `oauth/custom/authorize.json?${this.objectToUrlParameters(value)}`,
+          `oauth/custom/authorize.json?${objectToUrlParameters(value)}`,
         { headers: this.headers }
       )
       .pipe(
@@ -245,11 +244,5 @@ export class OauthService {
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
       )
-  }
-
-  objectToUrlParameters(object: Object) {
-    return Object.keys(object)
-      .map((key) => `${key}=${encodeURIComponent(object[key])}`)
-      .join('&')
   }
 }
