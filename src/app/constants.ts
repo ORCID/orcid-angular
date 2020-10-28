@@ -100,3 +100,9 @@ export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10
 export function isRedirectToTheAuthorizationPage(data: { url: string }) {
   return data.url.toLowerCase().includes('oauth/authorize')
 }
+
+export function objectToUrlParameters(object: Object) {
+  return Object.keys(object)
+    .map((key) => `${key}=${encodeURIComponent(object[key])}`)
+    .join('&')
+}

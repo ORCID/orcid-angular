@@ -184,9 +184,9 @@ export class UserService {
           orcidUrl: this.getOrcidUrl(data),
           effectiveOrcidUrl: this.getOrcidUrl(data, true),
           oauthSessionIsLoggedIn:
-            data.oauthSession &&
-            data.oauthSession.userOrcid &&
-            data.oauthSession.userName,
+            !!data.oauthSession &&
+            !!data.oauthSession.userOrcid &&
+            !!data.oauthSession.userName,
         },
       }
     }
@@ -273,18 +273,8 @@ export class UserService {
                   : null
               )
             )
-        } else {
-          // Try to load previously existing Oauth sessions
-          return this._oauth
-            .loadRequestInfoForm()
-            .pipe(
-              tap((requestInfoForm) =>
-                requestInfoForm && environment.sessionDebugger
-                  ? console.log('Oauth session recovered')
-                  : null
-              )
-            )
         }
+        return of(null)
       })
     )
   }
