@@ -72,7 +72,8 @@ export class OauthService {
         // Return null if the requestInfo is empty
         map((requestInfo) => (requestInfo.clientId ? requestInfo : undefined)),
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap((session) => this.handleSessionErrors(session))
       )
   }
 
@@ -145,42 +146,45 @@ export class OauthService {
   }
 
   handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {
-    if (
-      session.error &&
-      OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
-        (x) => x === session.error
-      )
-    ) {
-      // Redirect error that are handle by the client application
-      this.window.location.href = `${session.redirectUrl}#error=${session.error}`
-      return NEVER
-    } else if (session.error || (session.errors && session.errors.length)) {
-      // Send the user to the signin and display a toaster error
-      let extra = {}
+    if (session) {
       if (
-        session.error === 'oauth_error' ||
-        session.error === 'invalid_grant'
+        session.error &&
+        OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
+          (x) => x === session.error
+        )
       ) {
-        extra = { error: session.errorDescription }
+        // Redirect error that are handle by the client application
+        this.window.location.href = `${session.redirectUrl}#error=${session.error}`
+        return NEVER
+      } else if (session.error || (session.errors && session.errors.length)) {
+        // Send the user to the signin and display a toaster error
+        let extra = {}
+        if (
+          session.error === 'oauth_error' ||
+          session.error === 'invalid_grant'
+        ) {
+          extra = { error: session.errorDescription }
+        }
+        this._router
+          .navigate(['/signin'], { queryParams: extra })
+          .then((navigated: boolean) => {
+            if (navigated) {
+              this._errorHandler
+                .handleError(
+                  new Error(
+                    `${session.error || session.errors}.${
+                      session.errorDescription
+                    }`
+                  ),
+                  ERROR_REPORT.OAUTH_PARAMETERS
+                )
+                .subscribe()
+            }
+          })
       }
-      this._router
-        .navigate(['/signin'], { queryParams: extra })
-        .then((navigated: boolean) => {
-          if (navigated) {
-            this._errorHandler
-              .handleError(
-                new Error(
-                  `${session.error || session.errors}.${
-                    session.errorDescription
-                  }`
-                ),
-                ERROR_REPORT.OAUTH_PARAMETERS
-              )
-              .subscribe()
-          }
-        })
+      return of(session)
     }
-    return of(session)
+    return of(null)
   }
   /**
    * @deprecated in favor of using the same `oauth/custom/init.json` endpoint to
