@@ -17,6 +17,7 @@ import { UserService } from '../user/user.service'
 import { RegisterBackendValidatorMixin } from './register.backend-validators'
 import { RegisterFormAdapterMixin } from './register.form-adapter'
 import { ERROR_REPORT } from 'src/app/errors'
+import { objectToUrlParameters } from '../../constants'
 
 // Mixing boiler plate
 
@@ -97,7 +98,9 @@ export class RegisterService extends _RegisterServiceMixingBase {
         ) {
           url += `shibboleth/`
         }
-        url += `registerConfirm.json`
+        url += `registerConfirm.json?${objectToUrlParameters(
+          platform.queryParameters
+        )}`
 
         const registerFormWithTypeContext = this.addCreationTypeContext(
           platform,

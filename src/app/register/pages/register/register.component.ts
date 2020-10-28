@@ -102,7 +102,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.FormGroupStepA = this.prefillRegisterForm(
               this.platform.queryParameters
             )
-          } else if (session.oauthSession) {
+          } else if (session.oauthSession && Object.keys(this.platform.queryParameters).length > 0) {
             this.requestInfoForm = session.oauthSession
             this.FormGroupStepA = this.prefillRegisterForm(this.requestInfoForm)
           }
