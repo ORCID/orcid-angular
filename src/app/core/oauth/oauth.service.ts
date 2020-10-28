@@ -126,9 +126,7 @@ export class OauthService {
       this.declareOauthSession$ = this._http
         .post<RequestInfoForm>(
           environment.BASE_URL +
-            `oauth/custom/init.json?${objectToUrlParameters(
-              queryParameters
-            )}`,
+            `oauth/custom/init.json?${objectToUrlParameters(queryParameters)}`,
           queryParameters,
           { headers: this.headers }
         )
