@@ -6,7 +6,7 @@ describe('The Dashboard Page', () => {
   })
 
   // TEST SIMPLE OAUTH
-  it('show a simple open id Oauth request', function () {
+  it('shows an "open id" authorization screen', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
     )
@@ -14,7 +14,7 @@ describe('The Dashboard Page', () => {
     cy.get('#user-name').contains(environment.testUser.displayName)
     cy.get('#app-name').contains(environment.validApp.name)
     cy.get('li#openid')
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(3))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
   })
 
   // TEST ALL POSSIBLE OAUTH ERRORS
@@ -26,7 +26,7 @@ describe('The Dashboard Page', () => {
     cy.get('#error-message').contains(
       'Error: The provided client id WRONG is invalid.'
     )
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
   })
 
   it('show error screen on MISSING client id', function () {
@@ -36,7 +36,7 @@ describe('The Dashboard Page', () => {
     cy.get('#error-message').contains(
       'Error: Incorrect OAuth Link, missing client id parameter.'
     )
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
   })
 
   it('show error screen on LOCKED client id', function () {
@@ -46,7 +46,7 @@ describe('The Dashboard Page', () => {
     cy.get('#error-message').contains(
       `Error: The provided client id ${environment.lockedApp.id} is locked.`
     )
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
   })
 
   it('show error screen on INVALID response type', function () {
@@ -76,7 +76,7 @@ describe('The Dashboard Page', () => {
     cy.get('#error-message').contains(
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing response type parameter.`
     )
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
   })
 
   it('show error screen on INVALID redirect URL', function () {
@@ -86,7 +86,7 @@ describe('The Dashboard Page', () => {
     cy.get('#error-message').contains(
       `Error: The provided redirect URI WRONG does not match the redirect URIs registered by ${environment.validApp.name} (${environment.validApp.id}).`
     )
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
   })
 
   it('show error screen on MISSING redirect URL', function () {
@@ -96,7 +96,7 @@ describe('The Dashboard Page', () => {
     cy.get('#error-message').contains(
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing redirect uri parameter`
     )
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
   })
 
   it('show error screen on INVALID scope', function () {
@@ -144,7 +144,7 @@ describe('The Dashboard Page', () => {
     cy.get('#error-message').contains(
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing scope parameter.`
     )
-    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
   })
 
   it('reports fatal SERVER ERROR on oauth/custom/init.json endpoint', function () {

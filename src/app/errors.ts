@@ -117,8 +117,9 @@ export const ERROR_REPORT: {
   // OAUTH_PARAMETERS is used only when the server returns an error related to the OAUTH parameters
   // It will NOT report the error on google analytics but the snackbar will be show to the user
   OAUTH_PARAMETERS: {
-    display: {
-      title: $localize`:@@shared.oauthSessionError:Your Oauth request is invalid.`,
+    analytics: {
+      code: '005',
+      fatal: true,
     },
   },
 }
