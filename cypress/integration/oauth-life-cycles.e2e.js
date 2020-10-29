@@ -57,7 +57,7 @@ describe('Oauth life cycles', () => {
       cy.clearCookies()
     })
   })
-  describe('Open a Oauth url and them forget about it (NOT signed in)', () => {
+  describe('Open a Oauth url and then forget about it (NOT signed in)', () => {
     beforeEach(() => {
       Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
     })
@@ -96,7 +96,7 @@ describe('Oauth life cycles', () => {
       cy.clearCookies()
     })
   })
-  describe('Open a Oauth url and them forget about it (signed in)', () => {
+  describe('Open a Oauth url and then forget about it (signed in)', () => {
     before(() => {
       cy.sessionLogin('testUser')
     })
