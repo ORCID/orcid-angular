@@ -30,7 +30,6 @@ describe('Oauth life cycles', () => {
       cy.hasNoLayout()
       cy.hasZendesk()
     })
-
     it('remove Oauth parameters and expect to forget the Oauth session', function () {
       cy.visit(`${environment.baseUrl}`)
       cy.hasLayout()
@@ -48,11 +47,8 @@ describe('Oauth life cycles', () => {
       cy.hasLayout()
       cy.hasZendesk()
     })
-
     // TODO
-    // it('register user using the autofill form and end on the authorization page', function () {
-
-    // })
+    it('register user using the autofill form and end on the authorization page', function () {})
     after(() => {
       cy.clearCookies()
     })
