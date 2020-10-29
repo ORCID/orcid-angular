@@ -35,11 +35,6 @@
   [hidden]="!showNotificationContent"
 >
   <div class="body-container">
-    <app-notification-header
-      *ngIf="togglzEnableNewNotifications"
-      [notification]="notification"
-    >
-    </app-notification-header>
 
     <app-notification-permission
       *ngIf="notification.notificationType === 'PERMISSION'"
@@ -66,7 +61,5 @@
       [notification]="notification"
     ></app-notification-html>
 
-    <app-notification-footer *ngIf="togglzEnableNewNotifications">
-    </app-notification-footer>
   </div>
 </div>
