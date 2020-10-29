@@ -19,7 +19,7 @@ export class OauthErrorComponent implements OnInit {
   error = ''
   errorDescription = ''
   queryParams: OauthParameters
-  oauthSession : RequestInfoForm
+  oauthSession: RequestInfoForm
 
   constructor(
     private _userInfo: UserService,

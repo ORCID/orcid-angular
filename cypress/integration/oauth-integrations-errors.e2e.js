@@ -7,7 +7,7 @@ describe('Oauth integrations errors', () => {
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
   })
-  after(()=> {
+  after(() => {
     cy.clearCookies()
   })
   it('show error screen on INVALID client id', function () {

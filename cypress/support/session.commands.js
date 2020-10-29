@@ -1,7 +1,5 @@
 import { environment } from '../cypress.env'
 
-
-
 Cypress.Commands.add('sessionLogin', (user) => {
   cy.getCookie('XSRF-TOKEN').then((csrfCookie) => {
     if (!csrfCookie) {
