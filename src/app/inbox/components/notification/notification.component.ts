@@ -202,5 +202,4 @@ export class NotificationComponent
   registerOnTouched(fn: any): void {
     this.onTouchedFunction = fn
   }
-
 }
