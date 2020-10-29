@@ -2,7 +2,7 @@
   <div class="input-container">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.firstName">First name</mat-label>
-      <input formControlName="givenNames" matInput #firstInput />
+      <input id="givenNamesInput" formControlName="givenNames" matInput #firstInput />
       <mat-error
         *ngIf="form.hasError('required', 'givenNames')"
         i18n="@@register.firstNamePassword"
@@ -42,7 +42,7 @@
         >(Optional)</ng-container
       ></mat-label
     >
-    <input formControlName="familyNames" matInput />
+    <input id="familyNamesInput" formControlName="familyNames" matInput />
     <mat-error
       *ngIf="form.hasError('notPattern', 'familyNames')"
       i18n="@@register.invalidName"
@@ -59,7 +59,7 @@
   <ng-container formGroupName="emails">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.primaryEmail">Primary email</mat-label>
-      <input formControlName="email" matInput appTrim type="email" />
+      <input id="emailInput" formControlName="email" matInput appTrim type="email" />
       <mat-error
         *ngIf="form.hasError('required', 'emails.email')"
         i18n="@@register.primaryEmailRequired"

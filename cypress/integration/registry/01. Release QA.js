@@ -1,7 +1,7 @@
 const date = require('../../helpers/date')
 let name
 
-describe('"Manual" QA Tests', () => {
+describe.skip('"Manual" QA Tests', () => {
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
   })

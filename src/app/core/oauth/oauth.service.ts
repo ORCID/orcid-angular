@@ -69,6 +69,9 @@ export class OauthService {
     this.requestInfoSubject.next(requestInfoForm)
   }
 
+  /**
+   * @deprecated Oauth session are not require to be persistent since https://github.com/ORCID/orcid-angular/pull/609
+   */
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
@@ -154,7 +157,7 @@ export class OauthService {
 
   handleSessionErrors(
     session: RequestInfoForm,
-    queryParameters: OauthParameters
+    queryParameters?: OauthParameters
   ): Observable<RequestInfoForm> {
     if (!session) {
       return of(null)
@@ -191,7 +194,7 @@ export class OauthService {
           }
         })
     }
-    return of(null)
+    return of(session)
   }
   /**
    * @deprecated in favor of using the same `oauth/custom/init.json` endpoint to
