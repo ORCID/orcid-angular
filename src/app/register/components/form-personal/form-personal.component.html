@@ -2,7 +2,12 @@
   <div class="input-container">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.firstName">First name</mat-label>
-      <input id="givenNamesInput" formControlName="givenNames" matInput #firstInput />
+      <input
+        id="givenNamesInput"
+        formControlName="givenNames"
+        matInput
+        #firstInput
+      />
       <mat-error
         *ngIf="form.hasError('required', 'givenNames')"
         i18n="@@register.firstNamePassword"
@@ -59,7 +64,13 @@
   <ng-container formGroupName="emails">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@register.primaryEmail">Primary email</mat-label>
-      <input id="emailInput" formControlName="email" matInput appTrim type="email" />
+      <input
+        id="emailInput"
+        formControlName="email"
+        matInput
+        appTrim
+        type="email"
+      />
       <mat-error
         *ngIf="form.hasError('required', 'emails.email')"
         i18n="@@register.primaryEmailRequired"

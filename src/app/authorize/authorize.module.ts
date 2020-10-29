@@ -13,11 +13,15 @@ import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 import { AuthorizeRoutingModule } from './authorize-routing.module'
 import { OauthErrorComponent } from './components/oauth-error/oauth-error.component'
-import { AuthorizeComponent } from './pages/authorize/authorize.component';
+import { AuthorizeComponent } from './pages/authorize/authorize.component'
 import { FormAuthorizeComponent } from './components/form-authorize/form-authorize.component'
 
 @NgModule({
-  declarations: [AuthorizeComponent, OauthErrorComponent, FormAuthorizeComponent],
+  declarations: [
+    AuthorizeComponent,
+    OauthErrorComponent,
+    FormAuthorizeComponent,
+  ],
   imports: [
     CommonModule,
     AuthorizeRoutingModule,
