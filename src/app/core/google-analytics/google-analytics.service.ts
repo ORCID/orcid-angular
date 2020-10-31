@@ -57,7 +57,7 @@ fatal: "${fatal}"
   }
 
   public reportEvent(
-    event: string,
+    action: string,
     event_category: string,
     event_label: RequestInfoForm | string,
     value?: number
@@ -66,7 +66,7 @@ fatal: "${fatal}"
     if (typeof event_label !== 'string') {
       event_label = 'OAuth ' + this.buildClientString(event_label)
     }
-    return this.eventObservable(event, {
+    return this.eventObservable(action, {
       event_category,
       event_label,
       value,

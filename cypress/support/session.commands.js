@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import { environment } from '../cypress.env'
 
 Cypress.Commands.add('sessionLogin', (user) => {
@@ -22,7 +24,61 @@ Cypress.Commands.add('sessionLogin', (user) => {
         }&oauthRequest=false`
       )
       const response = JSON.parse(request.response)
-      cy.wrap(response).its('success').should('be.true')
+        .wrap(response)
+        .its('success')
+        .should('be.true')
     }
   })
+})
+
+Cypress.Commands.add('registerUser', (user) => {
+  return cy
+    .get('#given-names-input')
+    .clear()
+    .type(user.name)
+    .should('have.value', user.name)
+    .get('#family-names-input')
+    .clear()
+    .type(user.familyName)
+    .should('have.value', user.familyName)
+    .get('#email-input')
+    .clear()
+    .type(user.email)
+    .should('have.value', user.email)
+    .get('#confirm-email-input')
+    .clear()
+    .type(user.email)
+    .should('have.value', user.email)
+    .get('#step-a-next-button')
+    .click()
+    .get('#password-input')
+    .clear()
+    .type(user.password)
+    .should('have.value', user.password)
+    .get('#password-confirm-input')
+    .clear()
+    .type(user.password)
+    .should('have.value', user.password)
+    .get('#step-b-next')
+    .click()
+    .get('#visibility-everyone-input')
+    .click()
+    .should('have.class', 'mat-radio-checked')
+    .get('#privacy-input input')
+    .check({ force: true })
+    .should('be.checked')
+    .get('#step-c-register-button')
+    .click()
+    .getIframeBody('iframe')
+    .within(() =>
+      cy
+        .get('.recaptcha-checkbox-border')
+        .click()
+        .get('#recaptcha-anchor', { timeout: 10000 })
+        .should('have.class', 'recaptcha-checkbox-checked')
+    )
+    .get('#step-c-register-button')
+    .click()
+    .get('app-register')
+    .should('not.exist')
 })

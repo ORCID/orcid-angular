@@ -1,3 +1,6 @@
+import { environment } from '../cypress.env'
+import urlMatcher from '../helpers/compareOauthParameters'
+
 // A mach that filters out all the non-api calls that gtag does to the datalayer array
 var isNotAnInternalGtagCall = Cypress.sinon.match(function (value) {
   return !!value & !!value[0] && value[1] !== 'optimize.callback'
@@ -15,7 +18,7 @@ Cypress.on('window:before:load', (win) => {
     .as('ga')
 })
 
-Cypress.Commands.add('checkGtagInitialization', (url) => {
+Cypress.Commands.add('expectGtagInitialization', (url) => {
   cy.get('@ga')
     // First two calls done from index.html Gtag script initialization
     // with send_page_view disable as describe on https://developers.google.com/analytics/devguides/collection/gtagjs
@@ -40,7 +43,7 @@ Cypress.Commands.add('checkGtagInitialization', (url) => {
         0: 'event',
         1: 'timing_complete',
         2: Cypress.sinon.match({
-          page_location: url,
+          page_location: urlMatcher(url),
         }),
       })
     )
@@ -51,17 +54,15 @@ Cypress.Commands.add('checkGtagInitialization', (url) => {
         0: 'config',
         1: Cypress.sinon.match('UA-'),
         2: Cypress.sinon.match({
-          page_path: url,
-          page_location: Cypress.sinon.match(
-            'orcid.org' + url === '/' ? '' : url
-          ),
+          page_path: urlMatcher(url),
+          page_location: urlMatcher(environment.baseUrl + url),
           sample_rate: Cypress.sinon.match.string,
         }),
       })
     )
 })
 
-Cypress.Commands.add('checkGtagNavigation', (url) => {
+Cypress.Commands.add('expectGtagNavigation', (url) => {
   cy.get('@ga')
     // Measure loading time
     .should(
@@ -70,7 +71,7 @@ Cypress.Commands.add('checkGtagNavigation', (url) => {
         0: 'event',
         1: 'timing_complete',
         2: Cypress.sinon.match({
-          page_location: url,
+          page_location: urlMatcher(url),
         }),
       })
     )
@@ -81,9 +82,28 @@ Cypress.Commands.add('checkGtagNavigation', (url) => {
         0: 'config',
         1: Cypress.sinon.match('UA-'),
         2: Cypress.sinon.match({
-          page_location: Cypress.sinon.match(url),
-          page_path: url,
+          page_location: urlMatcher(environment.baseUrl + url),
+          page_path: urlMatcher(url),
         }),
       })
     )
+})
+
+Cypress.Commands.add('expectGtagRegrow', (event) => {
+  return (
+    cy
+      .get('@ga')
+      // Measure loading time
+      .should(
+        'be.calledWith',
+        Cypress.sinon.match({
+          0: 'event',
+          1: 'RegGrowth',
+          2: Cypress.sinon.match({
+            event_category: event.category,
+            event_label: `OAuth ${event.clientName} - ${event.memberName}`,
+          }),
+        })
+      )
+  )
 })
