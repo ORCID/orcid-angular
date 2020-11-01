@@ -77,7 +77,7 @@ export class AuthorizeGuard implements CanActivateChild {
       family_names: oauthSession.userFamilyNames,
       orcid: oauthSession.userOrcid,
       nonce: oauthSession.nonce,
-      forceLogin: oauthSession.forceLogin,
+      forceLogin: oauthSession.forceLogin === 'false' ? false : undefined,
     }
     return of(
       this._router.createUrlTree(['/signin'], {

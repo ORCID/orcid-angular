@@ -22,7 +22,7 @@ export interface RequestInfoForm {
   scopesAsString: string
   error: Errors
   errorDescription: string
-  forceLogin: boolean
+  forceLogin?: 'false' | 'true' | boolean
 }
 
 export interface Scope {

@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import { env } from 'process'
 import { environment } from '../cypress.env'
+const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 
 describe(`Google Analytics`, function () {
   beforeEach(function () {})
@@ -32,11 +33,17 @@ describe(`Google Analytics`, function () {
   })
 
   it(`Lands on the Oauth page goes to the register page`, function () {
-    const oauthParams = `client_id=${environment.validApp.id}&response_type=code&scope=/authenticate openid&redirect_uri=${environment.validApp.redirectUrl}`
+    const oauthParams = oauthUrlBuilder({
+      client_id: environment.validApp.id,
+      response_type: 'code',
+      scope: `/authenticate openid`,
+      redirect_uri: environment.validApp.redirectUrl,
+    })
+
     cy.visit(`${environment.baseUrl}/oauth/authorize?${oauthParams}`)
-    cy.expectGtagInitialization(`/signin?` + oauthParams)
+    cy.expectGtagInitialization(`/signin` + oauthParams + '&oauth')
     cy.get(`#register-button`).click()
-    cy.expectGtagNavigation(`/register?` + oauthParams)
+    cy.expectGtagNavigation(`/register` + oauthParams + '&oauth')
     cy.get(`@ga`).then((value) => expect(value.callCount).to.be.eq(6))
   })
 
