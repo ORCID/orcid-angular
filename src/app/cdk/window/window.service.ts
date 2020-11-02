@@ -22,7 +22,6 @@ export abstract class WindowRef {
 export class BrowserWindowRef extends WindowRef {
   constructor() {
     if (!(window as any).outOfRouterNavigation) {
-      console.log('NAVIGATE OUTSIDE THE APP')
       ;(window as any).outOfRouterNavigation = (value) => {
         window.location.href = value
       }
