@@ -1,4 +1,3 @@
-// Get current central time hyphen separated date
 /// <reference types="cypress" />
 
 module.exports = (expected) => {
@@ -10,11 +9,7 @@ module.exports = (expected) => {
       const sameAmountOfKeys =
         Object.keys(expected.urlParameters).length ===
         Object.keys(urlParams1).length
-      // console.log('_________')
-      // console.log (Path1)
-      // console.log (expected.url)
-      // console.log(urlParams1)
-      // console.log(expected)
+
       return (
         matcher.test(urlParams1) && Path1 === expected.url && sameAmountOfKeys
       )
@@ -26,12 +21,6 @@ module.exports = (expected) => {
       const matcher = Cypress.sinon.match(urlParams2)
       const sameAmountOfKeys =
         Object.keys(urlParams1).length === Object.keys(urlParams2).length
-      console.log(urlParams1, urlParams2)
-      // console.log('_________')
-      // console.log (Path1)
-      // console.log (Path2)
-      // console.log(urlParams1)
-      // console.log(urlParams2)
 
       return matcher.test(urlParams1) && Path1 === Path2 && sameAmountOfKeys
     } else if (value && expected) {

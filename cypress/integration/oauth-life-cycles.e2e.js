@@ -142,7 +142,6 @@ describe('Oauth life cycles', () => {
         response_type: 'code',
         scope: '/authenticate openid',
         redirect_uri: environment.validApp.redirectUrl,
-        // email: environment.notYetRegisteredUser.email,
         family_names: environment.notYetRegisteredUser.familyNames,
         given_names: environment.notYetRegisteredUser.givenNames,
       })
@@ -173,7 +172,6 @@ describe('Oauth life cycles', () => {
         response_type: 'code',
         scope: '/authenticate openid',
         redirect_uri: environment.validApp.redirectUrl,
-        // email: environment.notYetRegisteredUser.email,
         family_names: environment.notYetRegisteredUser.familyNames,
         given_names: environment.notYetRegisteredUser.givenNames,
       })
