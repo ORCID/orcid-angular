@@ -30,11 +30,5 @@ export const environment = {
     ru: 'Русский',
     'zh-CN': '简体中文',
     'zh-TW': '繁體中文',
-    xx: '** xx',
-    src: '** source',
-    lr: '** lr',
-    rl: '** rl',
-    uk: '** Ukrainian',
-    ca: '** Catalan',
   },
 }
