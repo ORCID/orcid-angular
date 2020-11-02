@@ -109,7 +109,7 @@ export class UserService {
       this.sessionInitialized = true
       // trigger every 30 seconds or on _recheck subject event
       merge(
-        timer(0, 30 * 1000).pipe(
+        timer(0, 60 * 1000).pipe(
           map((timerUpdate) => {
             return { timerUpdate }
           })
@@ -259,6 +259,8 @@ export class UserService {
         // Declare the oauth session on the backend
         if (platform.hasOauthParameters) {
           let params = platform.queryParameters as OauthParameters
+          console.log ('__________')
+          console.log (params)
           // After a user login remove the promp parameter
           // TODO @leomendoza123 how is this handle by signin logins?
           if (updateParameters.checkTrigger.postLoginUpdate) {
