@@ -17,6 +17,7 @@ import { HeadlessOnOauthRoutes } from './constants'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  currentlyDisplayingZendesk = true
   headlessMode = false
   currentRouteIsHeadlessOnOauthPage = true
   screenDirection
@@ -47,25 +48,25 @@ export class AppComponent {
           this.currentRouteIsHeadlessOnOauthPage = this.showHeadlessOnOauthPage(
             platformInfo.currentRoute
           )
-          // 1- Initial quick check to immediately set headless mode only base on query parameters
           this.setPlatformClasses(platformInfo)
           this.screenDirection = platformInfo.screenDirection
-          if (!platformInfo.hasOauthParameters) {
+          if (
+            !platformInfo.hasOauthParameters &&
+            !this.currentlyDisplayingZendesk
+          ) {
             _zendesk.show()
             _zendesk.adaptPluginToPlatform(platformInfo)
-          } else {
+            this.currentlyDisplayingZendesk = true
+          } else if (
+            platformInfo.hasOauthParameters &&
+            this.currentlyDisplayingZendesk
+          ) {
             _zendesk.hide()
+            this.currentlyDisplayingZendesk = false
           }
-        }),
-        switchMap(() => _userService.getUserSession())
+        })
       )
-      .subscribe((session) => {
-        // 2- Later check to set headless mode based on any existing Oauth session
-        this.setPlatformClasses(this.platformInfo, !!session.oauthSession)
-        if (session.oauthSession) {
-          _zendesk.hide()
-        }
-      })
+      .subscribe()
 
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
