@@ -12,6 +12,7 @@ import {
   tap,
 } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
+import { ApplicationRoutes } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
@@ -28,6 +29,11 @@ const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'interaction_required',
   'invalid_scope',
   'unsupported_response_type',
+]
+
+const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_ORCID_APP = [
+  'oauth_error',
+  'invalid_grant',
 ]
 
 @Injectable({
@@ -63,6 +69,9 @@ export class OauthService {
     this.requestInfoSubject.next(requestInfoForm)
   }
 
+  /**
+   * @deprecated Oauth session are not require to be persistent since https://github.com/ORCID/orcid-angular/pull/609
+   */
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
@@ -135,7 +144,9 @@ export class OauthService {
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           ),
-          switchMap((session) => this.handleSessionErrors(session)),
+          switchMap((session) =>
+            this.handleSessionErrors(session, queryParameters)
+          ),
           shareReplay(1)
         )
       return this.declareOauthSession$.pipe(last())
@@ -144,46 +155,46 @@ export class OauthService {
     }
   }
 
-  handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {
-    if (session) {
-      if (
-        session.error &&
-        OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
-          (x) => x === session.error
-        )
-      ) {
-        // Redirect error that are handle by the client application
-        this.window.location.href = `${session.redirectUrl}#error=${session.error}`
-        return NEVER
-      } else if (session.error || (session.errors && session.errors.length)) {
-        // Send the user to the signin and display a toaster error
-        let extra = {}
-        if (
-          session.error === 'oauth_error' ||
-          session.error === 'invalid_grant'
-        ) {
-          extra = { error: session.errorDescription }
-        }
-        this._router
-          .navigate(['/signin'], { queryParams: extra })
-          .then((navigated: boolean) => {
-            if (navigated) {
-              this._errorHandler
-                .handleError(
-                  new Error(
-                    `${session.error || session.errors}.${
-                      session.errorDescription
-                    }`
-                  ),
-                  ERROR_REPORT.OAUTH_PARAMETERS
-                )
-                .subscribe()
-            }
-          })
-      }
-      return of(session)
+  handleSessionErrors(
+    session: RequestInfoForm,
+    queryParameters?: OauthParameters
+  ): Observable<RequestInfoForm> {
+    if (!session) {
+      return of(null)
     }
-    return of(null)
+    if (
+      session.error &&
+      OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
+        (x) => x === session.error
+      )
+    ) {
+      // Redirect error that is handle by the client application
+      ;(this.window as any).outOfRouterNavigation(
+        `${session.redirectUrl}#error=${session.error}`
+      )
+      return NEVER
+    } else if (session.error || (session.errors && session.errors.length)) {
+      // Send the user to the oauth page to see the error
+      this._router
+        .navigate([ApplicationRoutes.authorize], {
+          queryParams: queryParameters,
+        })
+        .then((navigated: boolean) => {
+          if (navigated) {
+            this._errorHandler
+              .handleError(
+                new Error(
+                  `${session.error || session.errors}.${
+                    session.errorDescription
+                  }`
+                ),
+                ERROR_REPORT.OAUTH_PARAMETERS
+              )
+              .subscribe()
+          }
+        })
+    }
+    return of(session)
   }
   /**
    * @deprecated in favor of using the same `oauth/custom/init.json` endpoint to

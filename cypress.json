@@ -1,1 +1,5 @@
-{}
+{
+  "chromeWebSecurity": false,
+  "failOnStatusCode": false,
+  "experimentalNetworkStubbing": true
+}

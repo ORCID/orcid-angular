@@ -3,7 +3,11 @@
   (click)="show = !show"
   [ngClass]="{ active: show }"
 >
-  <div role="button" class="mat-body-2 black-underline-url body-2">
+  <div
+    role="button"
+    class="mat-body-2 black-underline-url body-2"
+    id="app-name"
+  >
     {{ name }}
     <!-- TODO user the right icon-->
   </div>

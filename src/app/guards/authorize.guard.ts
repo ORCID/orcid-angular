@@ -30,7 +30,10 @@ export class AuthorizeGuard implements CanActivateChild {
       switchMap((session) => {
         const oauthSession = session.oauthSession
         if (oauthSession) {
-          if (
+          // Session errors are allow to be displayed
+          if (oauthSession.error) {
+            return of(true)
+          } else if (
             oauthSession &&
             oauthSession.redirectUrl &&
             oauthSession.responseType &&
