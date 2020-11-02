@@ -6,10 +6,10 @@ const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 
 describe('Oauth life cycles', () => {
   // TEST SIMPLE OAUTH
-
+  let justRegisteredUser
   describe('Register and authorize', () => {
     it('use an Oauth request that comes with an unregistered email and names', () => {
-      const registeringUser = randomUser()
+      const userToRegister = randomUser()
       let oauthParams = {
         client_id: environment.validApp.id,
         response_type: 'code',
@@ -29,7 +29,7 @@ describe('Oauth life cycles', () => {
       }
 
       let expectedAuthorizationScreen = {
-        displayName: registeringUser.name + ' ' + registeringUser.familyName,
+        displayName: userToRegister.name + ' ' + userToRegister.familyName,
         appName: environment.validApp.name,
         scopes: ['openid'],
       }
@@ -56,7 +56,7 @@ describe('Oauth life cycles', () => {
         .hasNoLayout()
         .hasNoZendesk()
         .expectPreFillRegister(expectedPreFillRegister)
-        .registerUser(registeringUser)
+        .registerUser(userToRegister)
         .expectAuthorizeScreen(expectedAuthorizationScreen)
         .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
         .hasNoLayout()
@@ -69,6 +69,7 @@ describe('Oauth life cycles', () => {
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', urlMatch(expectRedirectUrl))
+      justRegisteredUser = userToRegister
     })
 
     it('use an Oauth request that comes with no user data', () => {
@@ -129,7 +130,38 @@ describe('Oauth life cycles', () => {
         .should('be.calledWith', urlMatch(expectRedirectUrl))
     })
   })
-  describe('Signing and authorize', () => {})
+  describe('Signing and authorize', () => {
+    //TODO: add a programmatically register command to avoid depending on reusing a user register on a previous test.
+
+    it('use an Oauth request that comes with an register email', () => {
+      let oauthParams = {
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri: environment.validApp.redirectUrl,
+        email: justRegisteredUser.email,
+        family_names: justRegisteredUser.familyName,
+        given_names: justRegisteredUser.name,
+      }
+
+      let expectedPreFilledSignin = {
+        username: justRegisteredUser.email,
+      }
+
+      let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+
+      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
+        onBeforeLoad: (win) => {
+          win.outOfRouterNavigation = () => {}
+          cy.stub(win, 'outOfRouterNavigation')
+        },
+      })
+        .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
+        .expectPreFillSignin(expectedPreFilledSignin)
+        .hasNoLayout()
+        .hasNoZendesk()
+    })
+  })
   describe('Forgot password and authorize', () => {})
   describe('Social sign-in and authorize', () => {
     //TODO links account and authorize

@@ -3,7 +3,13 @@
     <mat-label i18n="@@ngOrcid.signin.username">
       Email or 16-digit ORCID iD
     </mat-label>
-    <input matInput formControlName="username" appTrim #firstInput />
+    <input
+      matInput
+      formControlName="username"
+      appTrim
+      #firstInput
+      id="username"
+    />
     <mat-hint i18n="@@ngOrcid.signin.usernameHint"
       >example@email.com or 0000-0001-2345-6789
     </mat-hint>
@@ -23,7 +29,7 @@
 
   <mat-form-field appearance="outline" class="row password">
     <mat-label i18n="@@ngOrcid.signin.password">Password</mat-label>
-    <input matInput formControlName="password" type="password" />
+    <input matInput formControlName="password" type="password" id="password"/>
   </mat-form-field>
   <ng-content></ng-content>
   <app-print-errors

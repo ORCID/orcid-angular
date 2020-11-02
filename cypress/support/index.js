@@ -3,6 +3,7 @@ import './session.commands'
 import './platform.commands'
 import './oauth.commands'
 import './register.commands'
+import './signin.commands'
 Cypress.Commands.add('getIframeBody', (target) => {
   return cy
     .get(target)
