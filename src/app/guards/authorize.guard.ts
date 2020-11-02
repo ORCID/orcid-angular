@@ -65,7 +65,6 @@ export class AuthorizeGuard implements CanActivateChild {
     // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
     // The router is removing parameters from the url it necessary reassigned from the oauth session to preserve all the parameters
 
-    console.log('>>>>>>>>> ', oauthSession.forceLogin)
     const newQueryParams = {
       ...queryParams,
       oauth: '',
@@ -81,7 +80,6 @@ export class AuthorizeGuard implements CanActivateChild {
       nonce: oauthSession.nonce,
       forceLogin: oauthSession.forceLogin ? true : undefined,
     }
-    console.log(newQueryParams)
     return of(
       this._router.createUrlTree(['/signin'], {
         queryParams: newQueryParams,
