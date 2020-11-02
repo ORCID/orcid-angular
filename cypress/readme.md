@@ -1,4 +1,4 @@
-# How to run 
+# How to run
 
 1- Create your own `cypress.env.js` based on the `cypress.env.sample.js` file
 
