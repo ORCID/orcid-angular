@@ -1,18 +1,27 @@
 /// <reference types="cypress" />
 import { environment } from '../cypress.env'
+const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 describe('Oauth integrations errors', () => {
-  beforeEach(() => {
+  before(() => {
     cy.sessionLogin('testUser')
   })
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
   })
+
   after(() => {
     cy.clearCookies()
   })
+
   it('show error screen on INVALID client id', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=WRONG&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: 'WRONG',
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: environment.validApp.redirectUrl,
+        })
     )
     cy.get('#error-message').contains(
       'Error: The provided client id WRONG is invalid.'
@@ -23,7 +32,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on MISSING client id', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: undefined,
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: environment.validApp.redirectUrl,
+        })
     )
     cy.get('#error-message').contains(
       'Error: Incorrect OAuth Link, missing client id parameter.'
@@ -34,7 +49,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on LOCKED client id', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.lockedApp.id}&response_type=code&scope=/authenticate openid&redirect_uri=${environment.validApp.redirectUrl}`
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.lockedApp.id,
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: environment.validApp.redirectUrl,
+        })
     )
     cy.get('#error-message').contains(
       `Error: The provided client id ${environment.lockedApp.id} is locked.`
@@ -45,7 +66,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on INVALID response type', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=WRONG&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`,
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.validApp.id,
+          response_type: 'WRONG',
+          scope: `/authenticate openid`,
+          redirect_uri: environment.validApp.redirectUrl,
+        }),
       {
         onBeforeLoad(win) {
           win.outOfRouterNavigation = () => {}
@@ -64,7 +91,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on MISSING response type', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}`
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.validApp.id,
+          response_type: undefined,
+          scope: `/authenticate openid`,
+          redirect_uri: environment.validApp.redirectUrl,
+        })
     )
     cy.get('#error-message').contains(
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing response type parameter.`
@@ -75,7 +108,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on INVALID redirect URL', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=WRONG`
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.validApp.id,
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: 'WRONG',
+        })
     )
     cy.get('#error-message').contains(
       `Error: The provided redirect URI WRONG does not match the redirect URIs registered by ${environment.validApp.name} (${environment.validApp.id}).`
@@ -86,7 +125,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on MISSING redirect URL', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid`
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.validApp.id,
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: undefined,
+        })
     )
     cy.get('#error-message').contains(
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing redirect uri parameter`
@@ -97,7 +142,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on INVALID scope', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=WRONG&redirect_uri=https://developers.google.com/oauthplayground`,
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.validApp.id,
+          response_type: 'code',
+          scope: `/WRONG`,
+          redirect_uri: environment.validApp.redirectUrl,
+        }),
       {
         onBeforeLoad(win) {
           win.outOfRouterNavigation = () => {}
@@ -117,7 +168,13 @@ describe('Oauth integrations errors', () => {
   })
   it('show error screen on UNAUTHORIZED scope', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=/webhook&redirect_uri=https://developers.google.com/oauthplayground`,
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.validApp.id,
+          response_type: 'code',
+          scope: `/webhook`,
+          redirect_uri: environment.validApp.redirectUrl,
+        }),
       {
         onBeforeLoad(win) {
           win.outOfRouterNavigation = () => {}
@@ -135,9 +192,15 @@ describe('Oauth integrations errors', () => {
     cy.hasNoLayout()
     cy.hasZendesk()
   })
-  it('show error screen on MISSING redirect URL', function () {
+  it('show error screen on MISSING scope', function () {
     cy.visit(
-      `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&redirect_uri=${environment.validApp.redirectUrl}`
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.validApp.id,
+          response_type: 'code',
+          scope: undefined,
+          redirect_uri: environment.validApp.redirectUrl,
+        })
     )
     cy.get('#error-message').contains(
       `Error: Incorrect OAuth Link for client id ${environment.validApp.id}, missing scope parameter.`

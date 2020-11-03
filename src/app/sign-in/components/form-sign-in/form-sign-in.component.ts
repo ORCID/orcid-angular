@@ -156,7 +156,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             this.handleOauthLogin(data.url)
           } else {
             this._gtag
-              .reportEvent('RegGrowth', 'Sign-In', 'Website')
+              .reportEvent('Sign-In', 'RegGrowth', 'Website')
               .pipe(
                 catchError((err) =>
                   this._errorHandler.handleError(
@@ -293,7 +293,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
         this._gtag
-          .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
+          .reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
           .pipe(
             catchError((err) =>
               this._errorHandler.handleError(

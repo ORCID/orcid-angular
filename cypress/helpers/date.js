@@ -11,7 +11,7 @@ module.exports = function () {
       timeZone: 'America/Chicago', // Central time as Orcid servers
     })
     .replace(/[,]/g, '')
-    .replace(/[:]/g, ' ')
+    .replace(/[:]/g, '-')
     .split(' ')
     .join('-')
 }

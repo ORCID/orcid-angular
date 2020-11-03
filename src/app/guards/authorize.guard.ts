@@ -64,6 +64,7 @@ export class AuthorizeGuard implements CanActivateChild {
     // TODO @leomendoza123 @danielPalafox is adding the empty oauth parameters really required?
     // seems is never consumed or check by the frontend and it will never hit the backend on a frontend route
     // The router is removing parameters from the url it necessary reassigned from the oauth session to preserve all the parameters
+
     const newQueryParams = {
       ...queryParams,
       oauth: '',
@@ -77,7 +78,7 @@ export class AuthorizeGuard implements CanActivateChild {
       family_names: oauthSession.userFamilyNames,
       orcid: oauthSession.userOrcid,
       nonce: oauthSession.nonce,
-      forceLogin: oauthSession.forceLogin,
+      forceLogin: oauthSession.forceLogin ? true : undefined,
     }
     return of(
       this._router.createUrlTree(['/signin'], {

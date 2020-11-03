@@ -1,74 +1,156 @@
 /// <reference types="cypress" />
 import { environment } from '../cypress.env'
+const randomUser = require('../helpers/randomUser')
+const urlMatch = require('../helpers/urlMatch')
+const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 
 describe('Oauth life cycles', () => {
   // TEST SIMPLE OAUTH
 
-  describe('Handle request with unregistered email', () => {
-    beforeEach(() => {
-      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
-    })
-    after(() => {
-      cy.clearCookies()
-    })
-    it('sends Oauth request with unregistered email to an auto-filled register page', function () {
-      cy.visit(
-        `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}&email=${environment.notYetRegisteredUser.email}&family_names=${environment.notYetRegisteredUser.familyNames}&given_names=${environment.notYetRegisteredUser.givenNames}`
-      )
-      cy.get('#givenNamesInput').should(
-        'have.value',
-        environment.notYetRegisteredUser.givenNames
-      )
-      cy.get('#familyNamesInput').should(
-        'have.value',
-        environment.notYetRegisteredUser.familyNames
-      )
-      cy.get('#emailInput').should(
-        'have.value',
-        environment.notYetRegisteredUser.email
-      )
-      cy.hasNoLayout()
-      cy.hasZendesk()
-    })
-    it('remove Oauth parameters and expect to forget the Oauth session', function () {
-      cy.visit(`${environment.baseUrl}`)
-      cy.hasLayout()
-      cy.hasZendesk()
+  describe.only('Register and authorize', () => {
+    it('use an Oauth request that comes with an unregistered email and names', () => {
+      const registeringUser = randomUser()
+      let oauthParams = {
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri: environment.validApp.redirectUrl,
+        email: environment.notYetRegisteredUser.email,
+        family_names: environment.notYetRegisteredUser.familyNames,
+        given_names: environment.notYetRegisteredUser.givenNames,
+      }
 
-      cy.visit(`${environment.baseUrl}` + '/signin')
-      cy.hasLayout()
-      cy.hasZendesk()
+      let oauthParamsUrl = oauthUrlBuilder(oauthParams)
 
-      cy.visit(`${environment.baseUrl}` + '/register')
-      cy.hasLayout()
-      cy.hasZendesk()
+      let expectedPreFillRegister = {
+        givenNames: environment.notYetRegisteredUser.givenNames,
+        familyNames: environment.notYetRegisteredUser.familyNames,
+        email: environment.notYetRegisteredUser.email,
+      }
 
-      cy.visit(`${environment.baseUrl}` + '/reset-password')
-      cy.hasLayout()
-      cy.hasZendesk()
+      let expectedAuthorizationScreen = {
+        displayName: registeringUser.name + ' ' + registeringUser.familyName,
+        appName: environment.validApp.name,
+        scopes: ['openid'],
+      }
+
+      let expectRegrowEvent = {
+        category: 'New-Registration',
+        memberName: environment.validApp.name,
+        clientName: environment.validApp.memberName,
+      }
+
+      let expectRedirectUrl = {
+        url: environment.validApp.redirectUrl,
+        urlParameters: { code: Cypress.sinon.match.string },
+      }
+
+      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
+        onBeforeLoad: (win) => {
+          win.outOfRouterNavigation = () => {}
+          cy.stub(win, 'outOfRouterNavigation')
+        },
+      })
+        // TODO: test different entry points
+        .expectGtagInitialization(`/register${oauthParamsUrl}&oauth`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectPreFillRegister(expectedPreFillRegister)
+        .registerUser(registeringUser)
+        .expectAuthorizeScreen(expectedAuthorizationScreen)
+        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectGtagRegrow(expectRegrowEvent)
+        // TODO: test Gtag event to scope after the recently requested changes to those events are ready
+        // TODO: test deny access
+        .get('#authorize-button')
+        .click()
+        .get('#loading-bar')
+        .window()
+        .its('outOfRouterNavigation')
+        .should('be.calledWith', urlMatch(expectRedirectUrl))
     })
-    // TODO
-    it('register user using the autofill form and end on the authorization page', function () {})
-    after(() => {
-      cy.clearCookies()
+
+    it('use an Oauth request that comes with no user data', () => {
+      const registeringUser = randomUser()
+      let oauthParams = {
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri: environment.validApp.redirectUrl,
+      }
+
+      let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+
+      let expectedPreFillRegister = {}
+
+      let expectedAuthorizationScreen = {
+        displayName: registeringUser.name + ' ' + registeringUser.familyName,
+        appName: environment.validApp.name,
+        scopes: ['openid'],
+      }
+
+      let expectRegrowEvent = {
+        category: 'New-Registration',
+        memberName: environment.validApp.name,
+        clientName: environment.validApp.memberName,
+      }
+
+      let expectRedirectUrl = {
+        url: environment.validApp.redirectUrl,
+        urlParameters: { code: Cypress.sinon.match.string },
+      }
+
+      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
+        onBeforeLoad: (win) => {
+          win.outOfRouterNavigation = () => {}
+          cy.stub(win, 'outOfRouterNavigation')
+        },
+      })
+        .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .get('#register-button')
+        .click()
+        .expectGtagNavigation(`/register${oauthParamsUrl}&oauth`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectPreFillRegister(expectedPreFillRegister)
+        .registerUser(registeringUser)
+        .expectAuthorizeScreen(expectedAuthorizationScreen)
+        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectGtagRegrow(expectRegrowEvent)
+        .get('#authorize-button')
+        .click()
+        .get('#loading-bar')
+        .window()
+        .its('outOfRouterNavigation')
+        .should('be.calledWith', urlMatch(expectRedirectUrl))
     })
   })
-  describe('Open a Oauth url and then forget about it (NOT signed in)', () => {
-    beforeEach(() => {
-      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
-    })
-    after(() => {
-      cy.clearCookies()
-    })
-    it('shows an Oauth signing screen', function () {
-      cy.visit(
-        `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}&family_names=${environment.notYetRegisteredUser.familyNames}&given_names=${environment.notYetRegisteredUser.givenNames}`
-      )
+  describe('Signing and authorize', () => {})
+  describe('Forgot password and authorize', () => {})
+  describe('Social sign-in and authorize', () => {
+    //TODO links account and authorize
+  })
+  describe('Institutional sign-in and authorize', () => {})
+  describe('Open a Oauth url and then forget about it', () => {
+    it('While NOT been signed in', function () {
+      const oauthParams = oauthUrlBuilder({
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri: environment.validApp.redirectUrl,
+        family_names: environment.notYetRegisteredUser.familyNames,
+        given_names: environment.notYetRegisteredUser.givenNames,
+      })
+      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParams}`)
       cy.get('app-form-sign-in')
       cy.hasNoLayout()
       cy.hasZendesk()
-    })
-    it('remove Oauth parameters and expect to forget the Oauth session', function () {
       cy.visit(`${environment.baseUrl}`)
       cy.hasLayout()
       cy.hasZendesk()
@@ -80,43 +162,29 @@ describe('Oauth life cycles', () => {
       cy.visit(`${environment.baseUrl}` + '/register')
       cy.hasLayout()
       cy.hasZendesk()
-      cy.get('#givenNamesInput').should('be.empty')
-      cy.get('#familyNamesInput').should('be.empty')
-      cy.get('#emailInput').should('be.empty')
+      cy.expectPreFillRegister({})
 
       cy.visit(`${environment.baseUrl}` + '/reset-password')
       cy.hasLayout()
       cy.hasZendesk()
     })
-    after(() => {
-      cy.clearCookies()
-    })
-  })
-  describe('Open a Oauth url and then forget about it (signed in)', () => {
-    before(() => {
+    it('While been signed in', function () {
+      const oauthParams = oauthUrlBuilder({
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri: environment.validApp.redirectUrl,
+        family_names: environment.notYetRegisteredUser.familyNames,
+        given_names: environment.notYetRegisteredUser.givenNames,
+      })
       cy.sessionLogin('testUser')
-    })
-
-    beforeEach(() => {
-      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
-    })
-
-    after(() => {
-      cy.clearCookies()
-    })
-    it('shows an "open id" authorization screen with user data', function () {
-      cy.visit(
-        `${environment.baseUrl}/oauth/authorize?client_id=${environment.validApp.id}&response_type=code&scope=%2Fauthenticate%20openid&redirect_uri=${environment.validApp.redirectUrl}&family_names=${environment.notYetRegisteredUser.familyNames}&given_names=${environment.notYetRegisteredUser.givenNames}`
-      )
+      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParams}`)
       cy.get('mat-card-title').contains('Authorize access')
-      cy.get('#user-name').contains(environment.testUser.displayName)
-      cy.get('#app-name').contains(environment.validApp.name)
-      cy.get('li#openid')
+
       cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(4))
       cy.hasNoLayout()
       cy.hasZendesk()
-    })
-    it('remove Oauth parameters and expect to forget the Oauth session', function () {
+
       cy.visit(`${environment.baseUrl}`)
       cy.hasLayout()
       cy.hasZendesk()
@@ -126,21 +194,17 @@ describe('Oauth life cycles', () => {
       cy.hasZendesk()
 
       cy.visit(`${environment.baseUrl}` + '/register')
-      cy.get('#givenNamesInput').should('be.empty')
-      cy.get('#familyNamesInput').should('be.empty')
-      cy.get('#emailInput').should('be.empty')
+      cy.hasLayout()
+      cy.hasZendesk()
+      cy.expectPreFillRegister({})
 
       cy.visit(`${environment.baseUrl}` + '/reset-password')
       cy.hasLayout()
       cy.hasZendesk()
     })
-    after(() => {
-      cy.clearCookies()
-    })
   })
-
-  describe('Handle server issues', () => {
-    it('reports fatal SERVER ERROR on oauth/custom/init.json endpoint', function () {
+  describe('Handle server error', () => {
+    it('oauth/custom/init.json endpoint', function () {
       cy.server()
       cy.route({
         method: 'POST',

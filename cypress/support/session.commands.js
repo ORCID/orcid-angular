@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import { environment } from '../cypress.env'
 
 Cypress.Commands.add('sessionLogin', (user) => {
@@ -21,8 +23,10 @@ Cypress.Commands.add('sessionLogin', (user) => {
           environment[user].password
         }&oauthRequest=false`
       )
-      const response = JSON.parse(request.response)
-      cy.wrap(response).its('success').should('be.true')
+      return cy
+        .wrap(JSON.parse(request.response))
+        .its('success')
+        .should('be.true')
     }
   })
 })
