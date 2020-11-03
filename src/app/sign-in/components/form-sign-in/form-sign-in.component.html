@@ -54,7 +54,8 @@
   <a
     class="row mat-button-font forgot"
     i18n="@@ngOrcid.signin.forgotYourPassword"
-    [routerLink]="['/reset-password']"
+    (click)="forgotPassword()"
+    id='forgot-password-button'
   >
     Forgot your password or ORCID ID?
   </a>

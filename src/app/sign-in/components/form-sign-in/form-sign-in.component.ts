@@ -275,6 +275,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
   }
 
+  forgotPassword() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/reset-password'], {
+          queryParams: platform.queryParameters,
+        })
+      })
+  }
+
   handleOauthLogin(urlRedirect) {
     this._user
       .getUserSession()
