@@ -7,3 +7,18 @@ Cypress.Commands.add('expectPreFillSignin', (user) => {
     }
   })
 })
+
+Cypress.Commands.add('signin', (user) => {
+  return cy
+    .location()
+    .should((loc) => {
+      expect(loc.pathname).to.eq('/signin')
+    })
+    .get('#username')
+    .clear()
+    .type(user.username || user.email)
+    .get('#password')
+    .type(user.password)
+    .get('#signing-button')
+    .click()
+})

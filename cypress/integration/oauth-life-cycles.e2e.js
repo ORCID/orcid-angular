@@ -5,8 +5,6 @@ const urlMatch = require('../helpers/urlMatch')
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 
 describe('Oauth life cycles', () => {
-  // TEST SIMPLE OAUTH
-  let justRegisteredUser
   describe('Register and authorize', () => {
     it('use an Oauth request that comes with an unregistered email and names', () => {
       const userToRegister = randomUser()
@@ -70,7 +68,6 @@ describe('Oauth life cycles', () => {
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', urlMatch(expectRedirectUrl))
-      justRegisteredUser = userToRegister
     })
 
     it('use an Oauth request that comes with no user data', () => {
@@ -133,35 +130,113 @@ describe('Oauth life cycles', () => {
     })
   })
   describe('Signing and authorize', () => {
-    //TODO: add a programmatically register command to avoid depending on reusing a user register on a previous test.
+    beforeEach(() => {
+      // TODO add a programmatic register so adding a testing user doesn't last as much
+      const testUser = randomUser()
+      cy.wrap(testUser).as('testUser')
+      cy.visit(`${environment.baseUrl}/register`).registerUser(testUser)
+      cy.clearCookies()
+    })
 
-    it('use an Oauth request that comes with an register email', () => {
-      let oauthParams = {
-        client_id: environment.validApp.id,
-        response_type: 'code',
-        scope: '/authenticate openid',
-        redirect_uri: environment.validApp.redirectUrl,
-        email: justRegisteredUser.email,
-        family_names: justRegisteredUser.familyName,
-        given_names: justRegisteredUser.name,
-      }
+    it.only('use an Oauth request that comes with an register email', () => {
+      cy.get('@testUser').then((testUser) => {
+        let oauthParams = {
+          client_id: environment.validApp.id,
+          response_type: 'code',
+          scope: '/authenticate openid',
+          redirect_uri: environment.validApp.redirectUrl,
+          email: testUser.email,
+          family_names: testUser.familyName,
+          given_names: testUser.name,
+        }
 
-      let expectedPreFilledSignin = {
-        username: justRegisteredUser.email,
-      }
+        let expectedPreFilledSignin = {
+          username: testUser.email,
+        }
 
-      let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+        let expectedAuthorizationScreen = {
+          displayName: testUser.name + ' ' + testUser.familyName,
+          appName: environment.validApp.name,
+          scopes: ['openid'],
+        }
 
-      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
-        onBeforeLoad: (win) => {
-          win.outOfRouterNavigation = () => {}
-          cy.stub(win, 'outOfRouterNavigation')
-        },
+        let expectRedirectUrl = {
+          url: environment.validApp.redirectUrl,
+          urlParameters: { code: Cypress.sinon.match.string },
+        }
+
+        let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+
+        cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
+          onBeforeLoad: (win) => {
+            win.outOfRouterNavigation = () => {}
+            cy.stub(win, 'outOfRouterNavigation')
+          },
+        })
+          .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
+          .expectPreFillSignin(expectedPreFilledSignin)
+          .hasNoLayout()
+          .hasNoZendesk()
+          .signin(testUser)
+          .expectAuthorizeScreen(expectedAuthorizationScreen)
+          .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+          .hasNoLayout()
+          .hasNoZendesk()
+          .get('#authorize-button')
+          .click()
+          .get('#loading-bar')
+          .window()
+          .its('outOfRouterNavigation')
+          .should('be.calledWith', urlMatch(expectRedirectUrl))
       })
-        .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
-        .expectPreFillSignin(expectedPreFilledSignin)
-        .hasNoLayout()
-        .hasNoZendesk()
+    })
+
+    it.only('use an Oauth request that comes with no user data', () => {
+      cy.get('@testUser').then((testUser) => {
+        let oauthParams = {
+          client_id: environment.validApp.id,
+          response_type: 'code',
+          scope: '/authenticate openid',
+          redirect_uri: environment.validApp.redirectUrl,
+        }
+
+        let expectedPreFilledSignin = {}
+
+        let expectedAuthorizationScreen = {
+          displayName: testUser.name + ' ' + testUser.familyName,
+          appName: environment.validApp.name,
+          scopes: ['openid'],
+        }
+
+        let expectRedirectUrl = {
+          url: environment.validApp.redirectUrl,
+          urlParameters: { code: Cypress.sinon.match.string },
+        }
+
+        let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+
+        cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
+          onBeforeLoad: (win) => {
+            win.outOfRouterNavigation = () => {}
+            cy.stub(win, 'outOfRouterNavigation')
+          },
+        })
+          .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
+          .expectPreFillSignin(expectedPreFilledSignin)
+          .hasNoLayout()
+          .hasNoZendesk()
+          .signin(testUser)
+          .expectAuthorizeScreen(expectedAuthorizationScreen)
+          .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+          .hasNoLayout()
+          .hasNoZendesk()
+          .get('#authorize-button')
+          .click()
+          .get('#loading-bar')
+          .window()
+          .its('outOfRouterNavigation')
+          .should('be.calledWith', urlMatch(expectRedirectUrl))
+      })
     })
   })
   describe('Forgot password and authorize', () => {})
