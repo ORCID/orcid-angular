@@ -1,5 +1,9 @@
 <mat-card class="orcid-wizard">
-  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar
+    *ngIf="loading"
+    mode="indeterminate"
+    id="loading-bar"
+  ></mat-progress-bar>
 
   <mat-card-header>
     <mat-card-title role="heading" aria-level="1" i18n="@@register.create"
@@ -40,4 +44,9 @@
       </div>
     </form>
   </mat-card-content>
+  <mat-progress-bar
+    *ngIf="loading"
+    mode="indeterminate"
+    id="bottom-loading-bar"
+  ></mat-progress-bar>
 </mat-card>

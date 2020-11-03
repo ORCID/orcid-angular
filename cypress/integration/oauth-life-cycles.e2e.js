@@ -66,6 +66,7 @@ describe('Oauth life cycles', () => {
         // TODO: test deny access
         .get('#authorize-button')
         .click()
+        .get('#loading-bar')
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', urlMatch(expectRedirectUrl))
@@ -125,6 +126,7 @@ describe('Oauth life cycles', () => {
         .expectGtagRegrow(expectRegrowEvent)
         .get('#authorize-button')
         .click()
+        .get('#loading-bar')
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', urlMatch(expectRedirectUrl))

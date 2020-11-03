@@ -12,7 +12,10 @@
     >
   </mat-card-header>
   <mat-progress-bar
-    *ngIf="loadingUserInfo || loadingTrustedIndividuals"
+    id="loading-bar"
+    *ngIf="
+      loadingUserInfo || loadingTrustedIndividuals || loadingAuthorizeEndpoint
+    "
     mode="indeterminate"
   ></mat-progress-bar>
   <mat-card-content>
