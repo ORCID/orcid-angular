@@ -80,14 +80,15 @@ Cypress.Commands.add('registerUser', (user) => {
 })
 
 Cypress.Commands.add('acceptCaptcha', () => {
-  return cy.getIframeBody('iframe').within(
-    () =>
+  return cy
+    .getIframeBody('iframe')
+    .within(() =>
       cy
         .get('.recaptcha-checkbox-border')
         .click()
         .get('#recaptcha-anchor', { timeout: 10000 })
         .should('have.class', 'recaptcha-checkbox-checked')
-  )
+    )
 })
 
 Cypress.Commands.add('getIframeBody', (target) => {
