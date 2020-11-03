@@ -92,7 +92,7 @@ export class UserService {
   }
 
   /**
-   * At the start, every 30 seconds and when the method `refreshUserSession()` is called
+   * At the start, every 60 seconds and when the method `refreshUserSession()` is called
    * the user login status will be check and if it has changed
    * the following actions will be taken
    * - update the backend OAuth  session (if exists)
@@ -107,9 +107,9 @@ export class UserService {
       return this.$userSessionSubject
     } else {
       this.sessionInitialized = true
-      // trigger every 30 seconds or on _recheck subject event
+      // trigger every 60 seconds or on _recheck subject event
       merge(
-        timer(0, 30 * 1000).pipe(
+        timer(0, 60 * 1000).pipe(
           map((timerUpdate) => {
             return { timerUpdate }
           })

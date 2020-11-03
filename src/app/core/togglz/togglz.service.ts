@@ -22,7 +22,7 @@ export class TogglzService {
     if (this.togglz) {
       return this.togglz
     } else {
-      return (this.togglz = timer(0, 60 * 1000).pipe(
+      return (this.togglz = timer(0, 60 * 1000 * 10).pipe(
         switchMapTo(this.getConfig()),
         shareReplay(1)
       ))
