@@ -41,9 +41,9 @@ describe(`Google Analytics`, function () {
     })
 
     cy.visit(`${environment.baseUrl}/oauth/authorize?${oauthParams}`)
-    cy.expectGtagInitialization(`/signin` + oauthParams + '&oauth')
+    cy.expectGtagInitialization(`/signin` + oauthParams)
     cy.get(`#register-button`).click()
-    cy.expectGtagNavigation(`/register` + oauthParams + '&oauth')
+    cy.expectGtagNavigation(`/register` + oauthParams)
     cy.get(`@ga`).then((value) => expect(value.callCount).to.be.eq(6))
   })
 

@@ -50,13 +50,13 @@ describe('Oauth life cycles', () => {
         },
       })
         // TODO: test different entry points
-        .expectGtagInitialization(`/register${oauthParamsUrl}&oauth`)
+        .expectGtagInitialization(`/register${oauthParamsUrl}`)
         .hasNoLayout()
         .hasNoZendesk()
         .expectPreFillRegister(expectedPreFillRegister)
         .registerUser(userToRegister)
         .expectAuthorizeScreen(expectedAuthorizationScreen)
-        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}`)
         .hasNoLayout()
         .hasNoZendesk()
         .expectGtagRegrow(expectRegrowEvent)
@@ -106,18 +106,18 @@ describe('Oauth life cycles', () => {
           cy.stub(win, 'outOfRouterNavigation')
         },
       })
-        .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
+        .expectGtagInitialization(`/signin${oauthParamsUrl}`)
         .hasNoLayout()
         .hasNoZendesk()
         .get('#register-button')
         .click()
-        .expectGtagNavigation(`/register${oauthParamsUrl}&oauth`)
+        .expectGtagNavigation(`/register${oauthParamsUrl}`)
         .hasNoLayout()
         .hasNoZendesk()
         .expectPreFillRegister(expectedPreFillRegister)
         .registerUser(registeringUser)
         .expectAuthorizeScreen(expectedAuthorizationScreen)
-        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}`)
         .hasNoLayout()
         .hasNoZendesk()
         .expectGtagRegrow(expectRegrowEvent)
@@ -138,7 +138,7 @@ describe('Oauth life cycles', () => {
       cy.clearCookies()
     })
 
-    it.only('use an Oauth request that comes with an register email', () => {
+    it('use an Oauth request that comes with an register email', () => {
       cy.get('@testUser').then((testUser) => {
         let oauthParams = {
           client_id: environment.validApp.id,
@@ -173,13 +173,13 @@ describe('Oauth life cycles', () => {
             cy.stub(win, 'outOfRouterNavigation')
           },
         })
-          .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
+          .expectGtagInitialization(`/signin${oauthParamsUrl}`)
           .expectPreFillSignin(expectedPreFilledSignin)
           .hasNoLayout()
           .hasNoZendesk()
           .signin(testUser)
           .expectAuthorizeScreen(expectedAuthorizationScreen)
-          .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+          .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}`)
           .hasNoLayout()
           .hasNoZendesk()
           .get('#authorize-button')
@@ -191,7 +191,7 @@ describe('Oauth life cycles', () => {
       })
     })
 
-    it.only('use an Oauth request that comes with no user data', () => {
+    it('use an Oauth request that comes with no user data', () => {
       cy.get('@testUser').then((testUser) => {
         let oauthParams = {
           client_id: environment.validApp.id,
@@ -221,13 +221,13 @@ describe('Oauth life cycles', () => {
             cy.stub(win, 'outOfRouterNavigation')
           },
         })
-          .expectGtagInitialization(`/signin${oauthParamsUrl}&oauth`)
+          .expectGtagInitialization(`/signin${oauthParamsUrl}`)
           .expectPreFillSignin(expectedPreFilledSignin)
           .hasNoLayout()
           .hasNoZendesk()
           .signin(testUser)
           .expectAuthorizeScreen(expectedAuthorizationScreen)
-          .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+          .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}`)
           .hasNoLayout()
           .hasNoZendesk()
           .get('#authorize-button')

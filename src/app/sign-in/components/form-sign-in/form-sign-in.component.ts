@@ -88,7 +88,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
               ...(params as OauthParameters),
-              oauth: '',
             }
           })
         } else if (platform.social) {
@@ -254,9 +253,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
-                if (userSession.oauthSession) {
-                  params['oauth'] = ''
-                }
                 this._router.navigate(['/register'], {
                   queryParams: {
                     ...params,
