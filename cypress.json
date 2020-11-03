@@ -1,5 +1,7 @@
 {
   "chromeWebSecurity": false,
   "failOnStatusCode": false,
-  "experimentalNetworkStubbing": true
+  "experimentalNetworkStubbing": true,
+  "viewportWidth": 1000,
+  "viewportHeight": 1000
 }

@@ -7,7 +7,7 @@ const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 describe('Oauth life cycles', () => {
   // TEST SIMPLE OAUTH
 
-  describe('Register and authorize', () => {
+  describe.only('Register and authorize', () => {
     it('use an Oauth request that comes with an unregistered email and names', () => {
       const registeringUser = randomUser()
       let oauthParams = {
@@ -66,6 +66,7 @@ describe('Oauth life cycles', () => {
         // TODO: test deny access
         .get('#authorize-button')
         .click()
+        .get('#loading-bar')
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', urlMatch(expectRedirectUrl))
@@ -124,6 +125,7 @@ describe('Oauth life cycles', () => {
         .expectGtagRegrow(expectRegrowEvent)
         .get('#authorize-button')
         .click()
+        .get('#loading-bar')
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', urlMatch(expectRedirectUrl))

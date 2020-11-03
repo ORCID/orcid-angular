@@ -74,6 +74,8 @@ Cypress.Commands.add('registerUser', (user) => {
     )
     .get('#step-c-register-button')
     .click()
+    .get('#loading-bar')
+    .get('#bottom-loading-bar')
     .get('app-register', { timeout: 100000 })
     .should('not.exist')
 })
