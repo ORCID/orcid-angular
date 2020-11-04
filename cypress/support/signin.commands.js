@@ -19,6 +19,6 @@ Cypress.Commands.add('signin', (user) => {
     .type(user.username || user.email)
     .get('#password')
     .type(user.password)
-    .get('#signing-button')
+    .get('#signin-button')
     .click()
 })

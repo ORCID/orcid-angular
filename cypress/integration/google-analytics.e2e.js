@@ -12,7 +12,7 @@ describe(`Google Analytics`, function () {
   it(`Landing on the homepage and then navigate to the signin page`, function () {
     cy.visit(`${environment.baseUrl}`)
     cy.expectGtagInitialization(`/`)
-    cy.get(`#menu-signing-button`).click()
+    cy.get(`#menu-signin-button `).click()
     cy.expectGtagNavigation(`/signin`)
     cy.get(`@ga`).then((value) => expect(value.callCount).to.be.eq(6))
   })
@@ -28,7 +28,7 @@ describe(`Google Analytics`, function () {
   it(`Lands on home page and navigate to the register`, function () {
     cy.visit(`${environment.baseUrl}`)
     cy.expectGtagInitialization(`/`)
-    cy.get(`#menu-signing-button`).click()
+    cy.get(`#menu-signin-button `).click()
     cy.expectGtagNavigation(`/signin`)
     cy.get(`#register-button`).click()
     cy.expectGtagNavigation(`/register`)
