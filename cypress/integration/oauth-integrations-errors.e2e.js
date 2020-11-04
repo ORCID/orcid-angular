@@ -14,6 +14,22 @@ describe('Oauth integrations errors', () => {
     cy.clearCookies()
   })
 
+  it('Has no detectable a11y critical or serious violations', () => {
+    cy.visit(
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: 'WRONG',
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: environment.validApp.redirectUrl,
+        })
+    )
+    cy.injectAxe()
+    cy.checkA11y(null, {
+      includedImpacts: ['critical', 'serious'],
+    })
+  })
+
   it('show error screen on INVALID client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize` +
@@ -31,6 +47,9 @@ describe('Oauth integrations errors', () => {
     cy.hasNoLayout()
     cy.hasZendesk()
   })
+
+
+
   it('show error screen on MISSING client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize` +
