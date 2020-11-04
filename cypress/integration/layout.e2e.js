@@ -53,3 +53,13 @@ describe(`Header`, function () {
       )
   })
 })
+
+describe.only('Homepage', () => {
+  it('Has no detectable a11y critical or serious violations', () => {
+    cy.visit(`${environment.baseUrl}`)
+    cy.injectAxe()
+    cy.checkA11y(null, {
+      includedImpacts: ['critical'],
+    })
+  })
+})
