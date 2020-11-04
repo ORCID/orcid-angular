@@ -88,7 +88,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
               ...(params as OauthParameters),
-              oauth: '',
             }
           })
         } else if (platform.social) {
@@ -135,6 +134,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     this.addUsernameValidation()
+    this.addUsernameValidation()
+    // fix firefox IOS autofill issue
+    this.authorizationForm.markAllAsTouched()
 
     if (this.authorizationForm.valid) {
       this.signInLocal.data = this.authorizationForm.getRawValue()
@@ -156,7 +158,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             this.handleOauthLogin(data.url)
           } else {
             this._gtag
-              .reportEvent('RegGrowth', 'Sign-In', 'Website')
+              .reportEvent('Sign-In', 'RegGrowth', 'Website')
               .pipe(
                 catchError((err) =>
                   this._errorHandler.handleError(
@@ -254,9 +256,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
-                if (userSession.oauthSession) {
-                  params['oauth'] = ''
-                }
                 this._router.navigate(['/register'], {
                   queryParams: {
                     ...params,
@@ -279,6 +278,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
   }
 
+  forgotPassword() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/reset-password'], {
+          queryParams: platform.queryParameters,
+        })
+      })
+  }
+
   handleOauthLogin(urlRedirect) {
     this._user
       .getUserSession()
@@ -293,7 +303,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
         this._gtag
-          .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
+          .reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
           .pipe(
             catchError((err) =>
               this._errorHandler.handleError(

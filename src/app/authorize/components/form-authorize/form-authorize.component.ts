@@ -1,7 +1,14 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import { switchMap, take, takeUntil, map, catchError } from 'rxjs/operators'
+import {
+  switchMap,
+  take,
+  takeUntil,
+  map,
+  catchError,
+  tap,
+} from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -30,6 +37,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   userName: string
   loadingUserInfo = true
   loadingTrustedIndividuals = true
+  loadingAuthorizeEndpoint = false
 
   oauthRequest: RequestInfoForm
   trustedIndividuals: TrustedIndividuals
@@ -95,6 +103,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   }
 
   authorize(value = true) {
+    this.loadingAuthorizeEndpoint = true
     this._oauth.authorize(value).subscribe((data) => {
       let analyticsReports: Observable<void>[] = []
 
@@ -103,8 +112,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         analyticsReports = data.scopes.map((scope) =>
           this._gtag
             .reportEvent(
-              'RegGrowth',
               `AuthorizeP_${scope.name}`,
+              'RegGrowth',
               this.oauthRequest
             )
             .pipe(
@@ -120,7 +129,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         // Create a GA for deny access
         analyticsReports.push(
           this._gtag
-            .reportEvent('Disengagement', `Authorize_Deny`, this.oauthRequest)
+            .reportEvent(`Authorize_Deny`, 'Disengagement', this.oauthRequest)
             .pipe(
               catchError((err) =>
                 this._errorHandler.handleError(
@@ -131,10 +140,12 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             )
         )
       }
-      forkJoin(analyticsReports).subscribe(
-        () => (this.window.location.href = data.redirectUrl),
-        () => (this.window.location.href = data.redirectUrl)
-      )
+      forkJoin(analyticsReports)
+        .pipe(tap(() => (this.loadingAuthorizeEndpoint = false)))
+        .subscribe(
+          () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
+          () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
+        )
     })
   }
 
