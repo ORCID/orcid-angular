@@ -1,3 +1,5 @@
+import { RequestInfoForm } from './types'
+
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
 // Custom email REGEXP
@@ -105,4 +107,8 @@ export function objectToUrlParameters(object: Object) {
   return Object.keys(object)
     .map((key) => `${key}=${encodeURIComponent(object[key])}`)
     .join('&')
+}
+
+export function buildClientString(requestInfoForm: RequestInfoForm) {
+  return requestInfoForm.memberName + ' - ' + requestInfoForm.clientName
 }

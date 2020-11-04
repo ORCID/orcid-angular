@@ -113,32 +113,35 @@ export class RegisterService extends _RegisterServiceMixingBase {
             this.backendRegistrationForm,
             registerFormWithTypeContext
           )
+        ).pipe(
+          retry(3),
+          catchError((error) =>
+            this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)
+          ),
+          switchMap((value) => {
+            // At the moment by default the userService wont be refreshed, only on the oauth login
+            // other logins that go outside this application, wont require to refresh the user service
+            if (updateUserService) {
+              return this._userService.refreshUserSession(true)
+                .pipe(
+                  first(),
+                  map((userStatus) => {
+                    if (!userStatus.loggedIn && !value.errors) {
+                      // sanity check the user should be logged
+                      // sanity check the user should be logged
+                      this._errorHandler.handleError(
+                        new Error('registerSanityIssue'),
+                        ERROR_REPORT.REGISTER
+                      )
+                    }
+                    return value
+                })
+              )
+            } else {
+              return of(value)
+            }
+          })
         )
-      }),
-      retry(3),
-      catchError((error) =>
-        this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)
-      ),
-      switchMap((value) => {
-        // At the moment by default the userService wont be refreshed, only on the oauth login
-        // other logins that go outside this application, wont require to refresh the user service
-        if (updateUserService) {
-          return this._userService.refreshUserSession().pipe(
-            map((userStatus) => {
-              if (!userStatus.loggedIn && !value.errors) {
-                // sanity check the user should be logged
-                // sanity check the user should be logged
-                this._errorHandler.handleError(
-                  new Error('registerSanityIssue'),
-                  ERROR_REPORT.REGISTER
-                )
-              }
-              return value
-            })
-          )
-        } else {
-          return of(value)
-        }
       })
     )
   }
