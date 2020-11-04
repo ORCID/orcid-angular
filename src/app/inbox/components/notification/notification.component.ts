@@ -25,7 +25,7 @@ import {
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms'
-import { TogglzService } from '../../../core/togglz/togglz.service'
+
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -46,7 +46,6 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
 export class NotificationComponent
   implements OnInit, AfterViewInit, ControlValueAccessor {
   state = 'close'
-  togglzEnableNewNotifications: boolean
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') _archived = false
   @HostBinding('class.green') green = false
@@ -82,7 +81,6 @@ export class NotificationComponent
   }
 
   constructor(
-    _togglz: TogglzService,
     @Inject(LOCALE_ID) public locale: string,
     private _platform: PlatformInfoService,
     private _inbox: InboxService,
