@@ -44,7 +44,8 @@
     "build:storybook": "build-storybook -o dist/storybook",
     "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts",
     "build:browserslist": "ts-node -P scripts/tsconfig.json scripts/browserlist.prebuild.ts",
-    "cypress:open": "cypress open --config-file cypress.json"
+    "cypress:open": "cypress open --config-file cypress.json",
+    "cypress:run": "cypress run --config-file cypress.json"
   },
   "private": true,
   "dependencies": {

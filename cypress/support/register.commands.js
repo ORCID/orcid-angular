@@ -85,7 +85,7 @@ Cypress.Commands.add('acceptCaptcha', () => {
     .within(() =>
       cy
         .get('.recaptcha-checkbox-border')
-        .click()
+        .dblclick()
         .get('#recaptcha-anchor', { timeout: 10000 })
         .should('have.class', 'recaptcha-checkbox-checked')
     )

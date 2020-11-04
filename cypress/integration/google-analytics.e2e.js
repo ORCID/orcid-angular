@@ -4,6 +4,9 @@ import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 
 describe(`Google Analytics`, function () {
+  before(() => {
+    cy.clearCookies()
+  })
   beforeEach(function () {})
 
   it(`Landing on the homepage and then navigate to the signin page`, function () {

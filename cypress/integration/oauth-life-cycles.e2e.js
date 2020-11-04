@@ -5,7 +5,13 @@ const urlMatch = require('../helpers/urlMatch')
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 
 describe('Oauth life cycles', () => {
+  before(() => {
+    cy.clearCookies()
+  })
   describe('Register and authorize', () => {
+    before(() => {
+      cy.clearCookies()
+    })
     it('use an Oauth request that comes with an unregistered email and names', () => {
       const userToRegister = randomUser()
       let oauthParams = {
@@ -130,6 +136,10 @@ describe('Oauth life cycles', () => {
     })
   })
   describe('Signing and authorize', () => {
+    before(() => {
+      cy.clearCookies()
+    })
+
     beforeEach(() => {
       // TODO add a programmatic register so adding a testing user doesn't last as much
       const testUser = randomUser()
@@ -240,6 +250,9 @@ describe('Oauth life cycles', () => {
     })
   })
   describe('Forgot password and authorize', () => {
+    before(() => {
+      cy.clearCookies()
+    })
     beforeEach(() => {
       // TODO add a programmatic register so adding a testing user doesn't last as much
       const testUser = randomUser()
@@ -313,6 +326,9 @@ describe('Oauth life cycles', () => {
     //TODO links account and authorize
   })
   describe('Institutional sign-in and authorize', () => {
+    before(() => {
+      cy.clearCookies()
+    })
     beforeEach(() => {
       // TODO add a programmatic register so adding a testing user doesn't last as much
       const testUser = randomUser()
@@ -384,6 +400,9 @@ describe('Oauth life cycles', () => {
     })
   })
   describe('Open a Oauth url and then forget about it', () => {
+    before(() => {
+      cy.clearCookies()
+    })
     it('While NOT been signed in', function () {
       const oauthParams = oauthUrlBuilder({
         client_id: environment.validApp.id,
@@ -450,6 +469,9 @@ describe('Oauth life cycles', () => {
     })
   })
   describe('Handle server error', () => {
+    before(()=> {
+      cy.clearCookies()
+    })
     it('oauth/custom/init.json endpoint', function () {
       cy.server()
       cy.route({
