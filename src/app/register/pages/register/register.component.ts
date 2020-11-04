@@ -152,8 +152,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           if (response.url) {
             this._gtag
               .reportEvent(
-                'RegGrowth',
                 'New-Registration',
+                'RegGrowth',
                 this.requestInfoForm || 'Website'
               )
               .pipe(
