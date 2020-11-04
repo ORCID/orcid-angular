@@ -108,7 +108,3 @@ export function objectToUrlParameters(object: Object) {
     .map((key) => `${key}=${encodeURIComponent(object[key])}`)
     .join('&')
 }
-
-export function buildClientString(requestInfoForm: RequestInfoForm) {
-  return requestInfoForm.memberName + ' - ' + requestInfoForm.clientName
-}
