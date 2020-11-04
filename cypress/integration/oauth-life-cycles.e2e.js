@@ -143,8 +143,6 @@ describe('Oauth life cycles', () => {
 
       let oauthParamsUrl = oauthUrlBuilder(oauthParams)
 
-    
-
       let expectedPreFillRegister = {}
 
       let expectedAuthorizationScreen = {
@@ -195,6 +193,76 @@ describe('Oauth life cycles', () => {
         .hasNoLayout()
         .hasNoZendesk()
         .expectGtagRegrow(expectRegrowEvent)
+        .get('#authorize-button')
+        .click()
+        .get('#loading-bar')
+        .window()
+        .its('outOfRouterNavigation')
+        .should('be.calledWith', urlMatch(expectRedirectUrl))
+    })
+
+    it('use an Oauth request that comes with a redirect URL with client query parameters', () => {
+      const registeringUser = randomUser()
+      let oauthParams = {
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri:
+          environment.validApp.redirectUrl +
+          '?clientPartyAppState=code&clientPartyAppState=code2',
+        email: environment.notYetRegisteredUser.email,
+        family_names: environment.notYetRegisteredUser.familyNames,
+        given_names: environment.notYetRegisteredUser.givenNames,
+      }
+
+      let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+
+      let expectedPreFillRegister = {
+        givenNames: environment.notYetRegisteredUser.givenNames,
+        familyNames: environment.notYetRegisteredUser.familyNames,
+        email: environment.notYetRegisteredUser.email,
+      }
+
+      let expectedAuthorizationScreen = {
+        displayName: registeringUser.name + ' ' + registeringUser.familyName,
+        appName: environment.validApp.name,
+        scopes: ['openid'],
+      }
+
+      let expectRegrowEvent = {
+        action: 'New-Registration',
+        memberName: environment.validApp.name,
+        clientName: environment.validApp.memberName,
+      }
+
+      let expectRedirectUrl = {
+        url: environment.validApp.redirectUrl,
+        urlParameters: {
+          code: Cypress.sinon.match.string,
+          clientPartyAppState: 'code',
+          clientPartyAppState: `code2`,
+        },
+      }
+
+      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
+        onBeforeLoad: (win) => {
+          win.outOfRouterNavigation = () => {}
+          cy.stub(win, 'outOfRouterNavigation')
+        },
+      })
+        // TODO: test different entry points
+        .expectGtagInitialization(`/register${oauthParamsUrl}&oauth`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectPreFillRegister(expectedPreFillRegister)
+        .registerUser(registeringUser)
+        .expectAuthorizeScreen(expectedAuthorizationScreen)
+        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}&oauth`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectGtagRegrow(expectRegrowEvent)
+        // TODO: test Gtag event to scope after the recently requested changes to those events are ready
+        // TODO: test deny access
         .get('#authorize-button')
         .click()
         .get('#loading-bar')
