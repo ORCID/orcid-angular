@@ -469,7 +469,7 @@ describe('Oauth life cycles', () => {
     })
   })
   describe('Handle server error', () => {
-    before(()=> {
+    before(() => {
       cy.clearCookies()
     })
     it('oauth/custom/init.json endpoint', function () {
