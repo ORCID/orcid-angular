@@ -90,9 +90,6 @@ export class NotificationComponent
     private _cdr: ChangeDetectorRef,
     private _ngZone: NgZone
   ) {
-    _togglz
-      .getStateOf('ENABLE_NEW_NOTIFICATIONS')
-      .subscribe((value) => (this.togglzEnableNewNotifications = value))
     _platform.get().subscribe((value) => (this.platform = value))
     this.form = new FormGroup({
       selected: new FormControl(false, Validators.required),
