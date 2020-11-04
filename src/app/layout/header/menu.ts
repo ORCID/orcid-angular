@@ -606,7 +606,7 @@ export const menu: ApplicationMenuItemBasic[] = [
   {
     id: 'public-layout.newsEvents',
     label: $localize`:@@public-layout.newsEvents:News & Events`,
-    route: '/',
+    route: '',
     requirements: {
       togglz: { NEW_INFO_SITE: 'true' },
     },

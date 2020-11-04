@@ -83,6 +83,7 @@
               (focus)="mouseEnter(parents.concat(item.id))"
               (click)="click(parents.concat(item.id), item)"
               (mouseenter)="mouseEnter(parents.concat(item.id))"
+              [id]="item.id"
             >
               <div class="button-box">
                 <div>{{ item.label | uppercase }}</div>
