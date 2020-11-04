@@ -124,7 +124,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
               // At the moment by default the userService wont be refreshed, only on the oauth login
               // other logins that go outside this application, wont require to refresh the user service
               if (updateUserService) {
-                return this._userService.refreshUserSession(true).pipe(
+                // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
+                return this._userService.refreshUserSession(true, true).pipe(
                   first(),
                   map((userStatus) => {
                     if (!userStatus.loggedIn && !value.errors) {
