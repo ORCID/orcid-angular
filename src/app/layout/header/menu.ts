@@ -606,6 +606,7 @@ export const menu: ApplicationMenuItemBasic[] = [
   {
     id: 'public-layout.newsEvents',
     label: $localize`:@@public-layout.newsEvents:News & Events`,
+    route: '/',
     requirements: {
       togglz: { NEW_INFO_SITE: 'true' },
     },
@@ -613,7 +614,7 @@ export const menu: ApplicationMenuItemBasic[] = [
   {
     id: 'public-layout.for_researchers',
     label: $localize`:@@public-layout.for_researchers:For Researchers`,
-    route: 'help-getting-started-with-your-orcid',
+    route: 'benefits-for-researchers',
     requirements: {
       togglz: { NEW_INFO_SITE: 'true' },
     },
