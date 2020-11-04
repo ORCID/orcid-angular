@@ -48,8 +48,6 @@ describe('Oauth integrations errors', () => {
     cy.hasZendesk()
   })
 
-
-
   it('show error screen on MISSING client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize` +
