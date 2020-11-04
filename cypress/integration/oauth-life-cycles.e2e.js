@@ -209,7 +209,7 @@ describe('Oauth life cycles', () => {
         scope: '/authenticate openid',
         redirect_uri:
           environment.validApp.redirectUrl +
-          '?clientPartyAppState=code&clientPartyAppState=code2',
+          '?clientPartyAppState=code&clientPartyAppState2=code2',
         email: environment.notYetRegisteredUser.email,
         family_names: environment.notYetRegisteredUser.familyNames,
         given_names: environment.notYetRegisteredUser.givenNames,
@@ -240,7 +240,7 @@ describe('Oauth life cycles', () => {
         urlParameters: {
           code: Cypress.sinon.match.string,
           clientPartyAppState: 'code',
-          clientPartyAppState: `code2`,
+          clientPartyAppState2: `code2`,
         },
       }
 
@@ -250,7 +250,6 @@ describe('Oauth life cycles', () => {
           cy.stub(win, 'outOfRouterNavigation')
         },
       })
-        // TODO: test different entry points
         .expectGtagInitialization(`/register${oauthParamsUrl}&oauth`)
         .hasNoLayout()
         .hasNoZendesk()
@@ -261,8 +260,6 @@ describe('Oauth life cycles', () => {
         .hasNoLayout()
         .hasNoZendesk()
         .expectGtagRegrow(expectRegrowEvent)
-        // TODO: test Gtag event to scope after the recently requested changes to those events are ready
-        // TODO: test deny access
         .get('#authorize-button')
         .click()
         .get('#loading-bar')

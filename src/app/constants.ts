@@ -1,5 +1,3 @@
-import { RequestInfoForm } from './types'
-
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
 // Custom email REGEXP
