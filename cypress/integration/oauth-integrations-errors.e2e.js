@@ -3,6 +3,7 @@ import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 describe('Oauth integrations errors', () => {
   before(() => {
+    cy.clearCookies()
     cy.sessionLogin('testUser')
   })
   beforeEach(() => {

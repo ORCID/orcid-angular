@@ -69,7 +69,6 @@ export class AuthorizeGuard implements CanActivateChild {
       map((platform) => {
         const newQueryParams = {
           ...platform.queryParameters,
-          oauth: '',
           // The router is removing parameters from the url it necessary reassigned from the oauth session to preserve all the parameters
           // related to
           redirect_uri: oauthSession.redirectUrl,

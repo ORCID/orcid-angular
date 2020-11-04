@@ -28,6 +28,10 @@ Cypress.Commands.add('expectPreFillRegister', (user) => {
 
 Cypress.Commands.add('registerUser', (user) => {
   return cy
+    .location()
+    .should((loc) => {
+      expect(loc.pathname).to.eq('/register')
+    })
     .get('#given-names-input')
     .clear()
     .type(user.name)
@@ -62,20 +66,35 @@ Cypress.Commands.add('registerUser', (user) => {
     .get('#privacy-input input')
     .check({ force: true })
     .should('be.checked')
-    .get('#step-c-register-button')
-    .click()
-    .getIframeBody('iframe')
-    .within(() =>
-      cy
-        .get('.recaptcha-checkbox-border')
-        .click()
-        .get('#recaptcha-anchor', { timeout: 10000 })
-        .should('have.class', 'recaptcha-checkbox-checked')
-    )
+    .acceptCaptcha()
     .get('#step-c-register-button')
     .click()
     .get('#loading-bar')
     .get('#bottom-loading-bar')
     .get('app-register', { timeout: 100000 })
     .should('not.exist')
+    .location()
+    .should((loc) => {
+      expect(loc.pathname).to.not.eq('/register')
+    })
+})
+
+Cypress.Commands.add('acceptCaptcha', () => {
+  return cy
+    .getIframeBody('iframe')
+    .within(() =>
+      cy
+        .get('.recaptcha-checkbox-border')
+        .dblclick()
+        .get('#recaptcha-anchor', { timeout: 10000 })
+        .should('have.class', 'recaptcha-checkbox-checked')
+    )
+})
+
+Cypress.Commands.add('getIframeBody', (target) => {
+  return cy
+    .get(target)
+    .its('0.contentDocument.body')
+    .should('not.be.empty')
+    .then(cy.wrap)
 })

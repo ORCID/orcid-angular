@@ -1,24 +1,21 @@
 export const environment = {
-  baseUrl: 'https://dev.orcid.org',
+  baseUrl: 'https://qa.orcid.org',
+  infoSiteBaseUrl: 'http://orcidaboutdev.wpengine.com',
   testUser: {
-    // A no-admin
-    username: 'xxx@xxx.com', // email or orcid to login
-    password: 'xxxxx',
-    displayName: 'xxxx', // the name shown publicly
+    username: 'cy-Nov-04-2020-01-18-PM-jQ@gmail.com',
+    password: '12345678Aa',
+    displayName: 'cy-Nov-04-2020-01-18-PM-K全 cy-Nov-04-2020-01-18-PM-Uz',
   },
-  // an app own by a locked member
-  lockedApp: { id: 'APP-XXXXXXXXXXXX' },
-  // a working (no premium) app
+  lockedApp: { id: 'APP-0X2R288COCXIA4UR' },
   validApp: {
-    id: 'APP-XXXXXXXXXXXX',
+    id: 'APP-MLXS7JVFJS9FEIFJ',
     redirectUrl: 'https://developers.google.com/oauthplayground',
-    name: 'XXXXXXXXXXXX',
+    name: 'Healthy client for e2e',
+    memberName: 'Healthy member for e2e',
   },
-  // user information used to be autofill on Oauth request
-  // make user the provided email does not exist on your environment
   notYetRegisteredUser: {
-    familyNames: `XXXXXXXXXXXX`,
-    givenNames: `XXXXXXXXXXXX`,
-    email: `XXXXXXXXXXXX@XXXXXXXXXXXX.com`,
+    familyNames: `StrangeNameSoItDoesNoTExistOnDB`,
+    givenNames: `StrangeNameSoItDoesNoTExistOnDB`,
+    email: `asdasd+asdasd+aasdasd@test.com`,
   },
 }

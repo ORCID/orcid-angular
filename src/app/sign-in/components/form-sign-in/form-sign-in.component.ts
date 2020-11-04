@@ -88,7 +88,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
               ...(params as OauthParameters),
-              oauth: '',
             }
           })
         } else if (platform.social) {
@@ -254,9 +253,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
-                if (userSession.oauthSession) {
-                  params['oauth'] = ''
-                }
                 this._router.navigate(['/register'], {
                   queryParams: {
                     ...params,
@@ -276,6 +272,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             queryParams: platform.queryParameters,
           })
         }
+      })
+  }
+
+  forgotPassword() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/reset-password'], {
+          queryParams: platform.queryParameters,
+        })
       })
   }
 

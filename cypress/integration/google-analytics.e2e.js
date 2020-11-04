@@ -4,12 +4,15 @@ import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 
 describe(`Google Analytics`, function () {
+  before(() => {
+    cy.clearCookies()
+  })
   beforeEach(function () {})
 
   it(`Landing on the homepage and then navigate to the signin page`, function () {
     cy.visit(`${environment.baseUrl}`)
     cy.expectGtagInitialization(`/`)
-    cy.get(`#menu-signing-button`).click()
+    cy.get(`#menu-signin-button `).click()
     cy.expectGtagNavigation(`/signin`)
     cy.get(`@ga`).then((value) => expect(value.callCount).to.be.eq(6))
   })
@@ -25,7 +28,7 @@ describe(`Google Analytics`, function () {
   it(`Lands on home page and navigate to the register`, function () {
     cy.visit(`${environment.baseUrl}`)
     cy.expectGtagInitialization(`/`)
-    cy.get(`#menu-signing-button`).click()
+    cy.get(`#menu-signin-button `).click()
     cy.expectGtagNavigation(`/signin`)
     cy.get(`#register-button`).click()
     cy.expectGtagNavigation(`/register`)
@@ -41,9 +44,9 @@ describe(`Google Analytics`, function () {
     })
 
     cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParams}`)
-    cy.expectGtagInitialization(`/signin` + oauthParams + '&oauth')
+    cy.expectGtagInitialization(`/signin` + oauthParams)
     cy.get(`#register-button`).click()
-    cy.expectGtagNavigation(`/register` + oauthParams + '&oauth')
+    cy.expectGtagNavigation(`/register` + oauthParams)
     cy.get(`@ga`).then((value) => expect(value.callCount).to.be.eq(6))
   })
 
