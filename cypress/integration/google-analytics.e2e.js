@@ -43,7 +43,7 @@ describe(`Google Analytics`, function () {
       redirect_uri: environment.validApp.redirectUrl,
     })
 
-    cy.visit(`${environment.baseUrl}/oauth/authorize?${oauthParams}`)
+    cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParams}`)
     cy.expectGtagInitialization(`/signin` + oauthParams)
     cy.get(`#register-button`).click()
     cy.expectGtagNavigation(`/register` + oauthParams)

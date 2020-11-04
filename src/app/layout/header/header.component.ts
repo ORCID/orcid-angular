@@ -101,12 +101,15 @@ export class HeaderComponent implements OnInit {
 
   click(treeLocation: string[], button: ApplicationMenuItem) {
     if (!this.platform.columns12) {
-      if (button.route && (!button.buttons || !button.buttons.length)) {
+      if (
+        button.route !== undefined &&
+        (!button.buttons || !button.buttons.length)
+      ) {
         this.newInfo(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
-    } else if (button.route) {
+    } else if (button.route !== undefined) {
       this.newInfo(button.route)
     }
   }
@@ -255,13 +258,13 @@ export class HeaderComponent implements OnInit {
   goto(url) {
     if (url === 'signin') {
       if (!this.togglzOrcidAngularSignin) {
-        this.window.location.href = environment.BASE_URL + url
+        ;(this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
       } else {
         this._router.navigate(['/signin'])
         this.mobileMenuState = false
       }
     } else {
-      this.window.location.href = environment.BASE_URL + url
+      ;(this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
     }
   }
 
@@ -274,6 +277,6 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateTo(val) {
-    this.window.location.href = val
+    ;(this.window as any).outOfRouterNavigation(val)
   }
 }

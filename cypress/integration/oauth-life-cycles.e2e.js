@@ -39,7 +39,7 @@ describe('Oauth life cycles', () => {
       }
 
       let expectRegrowEvent = {
-        category: 'New-Registration',
+        action: 'New-Registration',
         memberName: environment.validApp.name,
         clientName: environment.validApp.memberName,
       }
@@ -96,7 +96,7 @@ describe('Oauth life cycles', () => {
       }
 
       let expectRegrowEvent = {
-        category: 'New-Registration',
+        action: 'New-Registration',
         memberName: environment.validApp.name,
         clientName: environment.validApp.memberName,
       }
@@ -118,6 +118,143 @@ describe('Oauth life cycles', () => {
         .get('#register-button')
         .click()
         .expectGtagNavigation(`/register${oauthParamsUrl}`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectPreFillRegister(expectedPreFillRegister)
+        .registerUser(registeringUser)
+        .expectAuthorizeScreen(expectedAuthorizationScreen)
+        .expectGtagNavigation(`/oauth/authorize${oauthParamsUrl}`)
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectGtagRegrow(expectRegrowEvent)
+        .get('#authorize-button')
+        .click()
+        .get('#loading-bar')
+        .window()
+        .its('outOfRouterNavigation')
+        .should('be.calledWith', urlMatch(expectRedirectUrl))
+    })
+
+    it('while login and with `prompt=login` parameter register and authorize', () => {
+      const registeringUser = randomUser()
+      let oauthParams = {
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri: environment.validApp.redirectUrl,
+        prompt: 'login',
+      }
+
+      let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+
+      let expectedPreFillRegister = {}
+
+      let expectedAuthorizationScreen = {
+        displayName: registeringUser.name + ' ' + registeringUser.familyName,
+        appName: environment.validApp.name,
+        scopes: ['openid'],
+      }
+
+      let expectRegrowEvent = {
+        action: 'New-Registration',
+        memberName: environment.validApp.name,
+        clientName: environment.validApp.memberName,
+      }
+
+      let expectRedirectUrl = {
+        url: environment.validApp.redirectUrl,
+        urlParameters: { code: Cypress.sinon.match.string },
+      }
+
+      cy.sessionLogin('testUser')
+      cy.visit(
+        `${environment.baseUrl}/oauth/authorize${oauthParamsUrl}&forceLogin=true`,
+        {
+          onBeforeLoad: (win) => {
+            win.outOfRouterNavigation = () => {}
+            cy.stub(win, 'outOfRouterNavigation')
+          },
+        }
+      )
+        .expectGtagInitialization(
+          `/signin${oauthParamsUrl}&forceLogin=true`
+        )
+        .hasNoLayout()
+        .hasNoZendesk()
+        .get('#register-button')
+        .click()
+        .expectGtagNavigation(
+          `/register${oauthParamsUrl}&forceLogin=true`
+        )
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectPreFillRegister(expectedPreFillRegister)
+        .registerUser(registeringUser)
+        .expectAuthorizeScreen(expectedAuthorizationScreen)
+        .expectGtagNavigation(
+          `/oauth/authorize${oauthParamsUrl}&forceLogin=true`
+        )
+        .hasNoLayout()
+        .hasNoZendesk()
+        .expectGtagRegrow(expectRegrowEvent)
+        .get('#authorize-button')
+        .click()
+        .get('#loading-bar')
+        .window()
+        .its('outOfRouterNavigation')
+        .should('be.calledWith', urlMatch(expectRedirectUrl))
+    })
+
+    it('use an Oauth request that comes with a redirect URL with client query parameters', () => {
+      const registeringUser = randomUser()
+      let oauthParams = {
+        client_id: environment.validApp.id,
+        response_type: 'code',
+        scope: '/authenticate openid',
+        redirect_uri:
+          environment.validApp.redirectUrl +
+          '?clientPartyAppState=code&clientPartyAppState2=code2',
+        email: environment.notYetRegisteredUser.email,
+        family_names: environment.notYetRegisteredUser.familyNames,
+        given_names: environment.notYetRegisteredUser.givenNames,
+      }
+
+      let oauthParamsUrl = oauthUrlBuilder(oauthParams)
+
+      let expectedPreFillRegister = {
+        givenNames: environment.notYetRegisteredUser.givenNames,
+        familyNames: environment.notYetRegisteredUser.familyNames,
+        email: environment.notYetRegisteredUser.email,
+      }
+
+      let expectedAuthorizationScreen = {
+        displayName: registeringUser.name + ' ' + registeringUser.familyName,
+        appName: environment.validApp.name,
+        scopes: ['openid'],
+      }
+
+      let expectRegrowEvent = {
+        action: 'New-Registration',
+        memberName: environment.validApp.name,
+        clientName: environment.validApp.memberName,
+      }
+
+      let expectRedirectUrl = {
+        url: environment.validApp.redirectUrl,
+        urlParameters: {
+          code: Cypress.sinon.match.string,
+          clientPartyAppState: 'code',
+          clientPartyAppState2: `code2`,
+        },
+      }
+
+      cy.visit(`${environment.baseUrl}/oauth/authorize${oauthParamsUrl}`, {
+        onBeforeLoad: (win) => {
+          win.outOfRouterNavigation = () => {}
+          cy.stub(win, 'outOfRouterNavigation')
+        },
+      })
+        .expectGtagInitialization(`/register${oauthParamsUrl}`)
         .hasNoLayout()
         .hasNoZendesk()
         .expectPreFillRegister(expectedPreFillRegister)
