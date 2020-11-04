@@ -176,16 +176,12 @@ describe('Oauth life cycles', () => {
           },
         }
       )
-        .expectGtagInitialization(
-          `/signin${oauthParamsUrl}&forceLogin=true`
-        )
+        .expectGtagInitialization(`/signin${oauthParamsUrl}&forceLogin=true`)
         .hasNoLayout()
         .hasNoZendesk()
         .get('#register-button')
         .click()
-        .expectGtagNavigation(
-          `/register${oauthParamsUrl}&forceLogin=true`
-        )
+        .expectGtagNavigation(`/register${oauthParamsUrl}&forceLogin=true`)
         .hasNoLayout()
         .hasNoZendesk()
         .expectPreFillRegister(expectedPreFillRegister)
