@@ -107,23 +107,24 @@ export class RegisterService extends _RegisterServiceMixingBase {
           registerForm
         )
 
-        return this._http.post<RegisterConfirmResponse>(
-          url,
-          Object.assign(
-            this.backendRegistrationForm,
-            registerFormWithTypeContext
+        return this._http
+          .post<RegisterConfirmResponse>(
+            url,
+            Object.assign(
+              this.backendRegistrationForm,
+              registerFormWithTypeContext
+            )
           )
-        ).pipe(
-          retry(3),
-          catchError((error) =>
-            this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)
-          ),
-          switchMap((value) => {
-            // At the moment by default the userService wont be refreshed, only on the oauth login
-            // other logins that go outside this application, wont require to refresh the user service
-            if (updateUserService) {
-              return this._userService.refreshUserSession(true)
-                .pipe(
+          .pipe(
+            retry(3),
+            catchError((error) =>
+              this._errorHandler.handleError(error, ERROR_REPORT.REGISTER)
+            ),
+            switchMap((value) => {
+              // At the moment by default the userService wont be refreshed, only on the oauth login
+              // other logins that go outside this application, wont require to refresh the user service
+              if (updateUserService) {
+                return this._userService.refreshUserSession(true).pipe(
                   first(),
                   map((userStatus) => {
                     if (!userStatus.loggedIn && !value.errors) {
@@ -135,13 +136,13 @@ export class RegisterService extends _RegisterServiceMixingBase {
                       )
                     }
                     return value
-                })
-              )
-            } else {
-              return of(value)
-            }
-          })
-        )
+                  })
+                )
+              } else {
+                return of(value)
+              }
+            })
+          )
       })
     )
   }

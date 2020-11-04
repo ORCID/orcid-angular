@@ -25,7 +25,10 @@ import {
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { buildClientString, isRedirectToTheAuthorizationPage } from 'src/app/constants'
+import {
+  buildClientString,
+  isRedirectToTheAuthorizationPage,
+} from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { RegisterService } from 'src/app/core/register/register.service'
@@ -154,7 +157,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               .reportEvent(
                 'New-Registration',
                 'RegGrowth',
-                !!this.requestInfoForm ? 'OAuth ' + buildClientString(this.requestInfoForm) : 'Website'
+                !!this.requestInfoForm
+                  ? 'OAuth ' + buildClientString(this.requestInfoForm)
+                  : 'Website'
               )
               .pipe(
                 catchError((err) =>
