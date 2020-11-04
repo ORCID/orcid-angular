@@ -143,8 +143,6 @@ describe('Oauth life cycles', () => {
 
       let oauthParamsUrl = oauthUrlBuilder(oauthParams)
 
-    
-
       let expectedPreFillRegister = {}
 
       let expectedAuthorizationScreen = {
