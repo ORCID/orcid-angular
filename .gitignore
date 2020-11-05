@@ -57,3 +57,4 @@ tx.exe
 
 /cypres/cypress.env.js
 /cypress/videos/*
+/cypress/screenshots/*

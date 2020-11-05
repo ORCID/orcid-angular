@@ -4,7 +4,7 @@ const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
 describe('Oauth integrations errors', () => {
   before(() => {
     cy.clearCookies()
-    cy.sessionLogin('testUser')
+    cy.programmaticSignin('testUser')
   })
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
@@ -25,9 +25,10 @@ describe('Oauth integrations errors', () => {
         })
     )
     cy.injectAxe()
-    cy.checkA11y(null, {
-      includedImpacts: ['critical', 'serious'],
-    })
+      .get('#error-message')
+      .checkA11y(null, {
+        includedImpacts: ['critical', 'serious'],
+      })
   })
 
   it('show error screen on INVALID client id', function () {
