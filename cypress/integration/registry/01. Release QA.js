@@ -1,3 +1,4 @@
+/*
 const date = require('../../helpers/date')
 let name
 
@@ -339,3 +340,4 @@ describe.skip('"Manual" QA Tests', () => {
     })
   })
 })
+*/

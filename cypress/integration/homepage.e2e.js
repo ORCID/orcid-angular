@@ -1,10 +1,19 @@
 /// <reference types="cypress" />
 import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
+const runInfo = require('../helpers/runInfo')
 
-describe(`Header`, function () {
+describe('Homepage' + runInfo(), () => {
+  it('Has no detectable a11y critical violations', () => {
+    cy.visit(`${environment.baseUrl}`)
+    cy.injectAxe()
+    cy.checkA11y(null, {
+      includedImpacts: ['critical'],
+    })
+  })
+
   if (environment.newInfoSiteEnable) {
-    it(`has working navigation buttons to the info site`, function () {
+    it(`has a header with working navigation buttons to the info site`, function () {
       cy.visit(`${environment.baseUrl}`, {
         onBeforeLoad(win) {
           win.outOfRouterNavigation = () => {}
@@ -57,14 +66,4 @@ describe(`Header`, function () {
         )
     })
   }
-})
-
-describe('Homepage', () => {
-  it('Has no detectable a11y critical or serious violations', () => {
-    cy.visit(`${environment.baseUrl}`)
-    cy.injectAxe()
-    cy.checkA11y(null, {
-      includedImpacts: ['critical'],
-    })
-  })
 })

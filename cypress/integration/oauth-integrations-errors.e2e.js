@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
-describe('Oauth integrations errors', () => {
+const runInfo = require('../helpers/runInfo')
+
+describe('Oauth integrations errors' + runInfo(), () => {
   before(() => {
     cy.clearCookies()
     cy.programmaticSignin('testUser')

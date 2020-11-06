@@ -3,8 +3,10 @@ import { environment } from '../cypress.env'
 const randomUser = require('../helpers/randomUser')
 const urlMatch = require('../helpers/urlMatch')
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
+const runInfo = require('../helpers/runInfo')
 
-describe('Oauth life cycles', () => {
+
+describe('Oauth life cycles'+ runInfo(), () => {
   before(() => {
     cy.clearCookies()
   })

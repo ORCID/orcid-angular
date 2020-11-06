@@ -10,3 +10,13 @@ Before the following steps make sure to have npm and yarn installed
 yarn install
 yarn run cypress:open
 ```
+
+
+# How to generate a sharable HTML report
+
+Run the following command and you will find the generated reports on `cypress/reports`
+
+```
+yarn cypress
+```
+
