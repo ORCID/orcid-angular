@@ -90,7 +90,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               ...(params as OauthParameters),
             }
           })
-        } else if (platform.social) {
+        }
+
+        if (platform.social) {
           this.signInLocal.type = TypeSignIn.social
         } else if (platform.institutional) {
           this.signInLocal.type = TypeSignIn.institutional
