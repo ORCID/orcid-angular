@@ -1,9 +1,9 @@
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
 // Custom email REGEXP
-// https://regex101.com/r/jV4aN7/14
+// https://regex101.com/r/jV4aN7/16
 // tslint:disable-next-line: max-line-length
-export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
+export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)+([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
 
 export const EMAIL_REGEXP_GENERIC = /^\s*?(.+)@(.+?)\s*$/
 // https://regex101.com/r/9MXmdl/1
