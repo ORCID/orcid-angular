@@ -6,6 +6,7 @@ import { OauthService } from '../../../core/oauth/oauth.service'
 import { Institutional } from '../../../types/institutional.endpoint'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { Router } from '@angular/router'
+import { ApplicationRoutes } from 'src/app/constants'
 
 @Component({
   selector: 'app-link-account',
@@ -82,6 +83,12 @@ export class LinkAccountComponent implements OnInit {
 
   cancel() {
     this._platformInfo.remove()
-    this._router.navigate(['/signin'], {})
+    this._platformInfo.get().subscribe((platform) => {
+      this._router.navigate([ApplicationRoutes.signin], {
+        queryParams: {
+          ...platform.queryParameters,
+        },
+      })
+    })
   }
 }
