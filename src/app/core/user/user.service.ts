@@ -273,8 +273,13 @@ export class UserService {
                   : null
               )
             )
+        } else {
+          if (platform.social || platform.institutional) {
+            return this._oauth.loadRequestInfoForm()
+          } else {
+            return of(null)
+          }
         }
-        return of(null)
       })
     )
   }
