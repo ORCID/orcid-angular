@@ -102,7 +102,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
             this.FormGroupStepA = this.prefillRegisterForm(
               this.platform.queryParameters
             )
-          } else if (session.oauthSession) {
+          } else if (session.oauthSession && platform.hasOauthParameters) {
             this.requestInfoForm = session.oauthSession
             this.FormGroupStepA = this.prefillRegisterForm(this.requestInfoForm)
           }
@@ -152,8 +152,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           if (response.url) {
             this._gtag
               .reportEvent(
-                'RegGrowth',
                 'New-Registration',
+                'RegGrowth',
                 this.requestInfoForm || 'Website'
               )
               .pipe(

@@ -15,7 +15,6 @@
               aria-level="1"
               i18n="@@ngOrcid.signin.title"
               *ngIf="!isOauthError"
-              id="signing-button"
             >
               Sign in
             </mat-card-title>
@@ -42,6 +41,7 @@
                   [disabled]="loading"
                   *ngIf="!show2FA"
                   i18n="@@ngOrcid.signin.button"
+                  id="signin-button"
                 >
                   SIGN IN
                 </button>
@@ -57,11 +57,6 @@
               [realUserOrcid]="realUserOrcid"
             >
             </app-logged-in>
-            <app-oauth-error
-              *ngIf="isOauthError"
-              [errorDescription]="errorDescription"
-            >
-            </app-oauth-error>
           </mat-card-content>
         </mat-card>
       </div>

@@ -51,3 +51,9 @@ sripts/lighthouse/environment.ts.js
 audits/*
 scripts/lighthouse/environment.ts
 tx.exe
+
+
+## Cypress
+
+/cypres/cypress.env.js
+/cypress/videos/*

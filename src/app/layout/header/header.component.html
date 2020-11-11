@@ -7,6 +7,7 @@
           alt="orcid logo"
           role="link"
           id="home-logo"
+          aria-label="Home"
         />
         <div
           role="link"
@@ -60,7 +61,9 @@
   *ngIf="mobileMenuState || platform.columns12"
   [attr.aria-label]="labelMenu"
 >
+  <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->
   <div
+    [hidden]="togglzNewInfoSite === undefined"
     [ngClass]="{
       'top-bar': !togglzNewInfoSite,
       'top-bar-new-info': togglzNewInfoSite
@@ -81,6 +84,7 @@
               (focus)="mouseEnter(parents.concat(item.id))"
               (click)="click(parents.concat(item.id), item)"
               (mouseenter)="mouseEnter(parents.concat(item.id))"
+              [id]="item.id"
             >
               <div class="button-box">
                 <div>{{ item.label | uppercase }}</div>

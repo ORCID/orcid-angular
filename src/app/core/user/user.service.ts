@@ -92,7 +92,7 @@ export class UserService {
   }
 
   /**
-   * At the start, every 30 seconds and when the method `refreshUserSession()` is called
+   * At the start, every 60 seconds and when the method `refreshUserSession()` is called
    * the user login status will be check and if it has changed
    * the following actions will be taken
    * - update the backend OAuth  session (if exists)
@@ -107,9 +107,9 @@ export class UserService {
       return this.$userSessionSubject
     } else {
       this.sessionInitialized = true
-      // trigger every 30 seconds or on _recheck subject event
+      // trigger every 60 seconds or on _recheck subject event
       merge(
-        timer(0, 30 * 1000).pipe(
+        timer(0, 60 * 1000).pipe(
           map((timerUpdate) => {
             return { timerUpdate }
           })
@@ -259,7 +259,7 @@ export class UserService {
         // Declare the oauth session on the backend
         if (platform.hasOauthParameters) {
           let params = platform.queryParameters as OauthParameters
-          // After a user login remove the promp parameter
+          // After a user login or register while being login remove the promp parameter
           // TODO @leomendoza123 how is this handle by signin logins?
           if (updateParameters.checkTrigger.postLoginUpdate) {
             params = { ...params, prompt: undefined }
@@ -273,18 +273,8 @@ export class UserService {
                   : null
               )
             )
-        } else {
-          // Try to load previously existing Oauth sessions
-          return this._oauth
-            .loadRequestInfoForm()
-            .pipe(
-              tap((requestInfoForm) =>
-                requestInfoForm && environment.sessionDebugger
-                  ? console.log('Oauth session recovered')
-                  : null
-              )
-            )
         }
+        return of(null)
       })
     )
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from '../../../environments/environment.sandbox'
+import { environment } from '../../../environments/environment'
 import { TogglzService } from '../../core/togglz/togglz.service'
 
 @Component({
@@ -36,7 +36,7 @@ export class FooterComponent implements OnInit {
 
   about() {
     if (this.togglzNewInfoSite) {
-      this.goTo(environment.INFO_SITE)
+      this.goTo(environment.INFO_SITE + '/what-is-orcid')
     } else {
       this.goTo('about')
     }

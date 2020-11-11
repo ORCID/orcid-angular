@@ -3,7 +3,6 @@ export interface OauthParameters {
   response_type: string
   scope: string
   redirect_uri: string
-  oauth: string
   show_login: 'false' | 'true'
   email: string
   lang: string
