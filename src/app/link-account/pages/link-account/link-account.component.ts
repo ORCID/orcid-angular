@@ -87,12 +87,26 @@ export class LinkAccountComponent implements OnInit {
 
   cancel() {
     this._platformInfo.remove()
-    this._platformInfo.get().subscribe((platform) => {
-      this._router.navigate([ApplicationRoutes.signin], {
-        queryParams: {
-          ...platform.queryParameters,
-        },
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate([ApplicationRoutes.signin], {
+          queryParams: {
+            ...platform.queryParameters,
+            // The parameters added after a linking + register process are remove
+
+            // TODO leomendoza123
+            // Adding the social/institutional parameters on the URL causes issues
+            // https://trello.com/c/EiZOE6b1/7138
+
+            email: null,
+            firstName: null,
+            lastName: null,
+            linkType: null,
+            providerId: null,
+          },
+        })
       })
-    })
   }
 }
