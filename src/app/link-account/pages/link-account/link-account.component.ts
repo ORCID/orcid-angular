@@ -91,11 +91,10 @@ export class LinkAccountComponent implements OnInit {
         this._router.navigate([ApplicationRoutes.signin], {
           queryParams: {
             ...platform.queryParameters,
+            // The parameters added after a linking + register process are remove
+
             // TODO leomendoza123
             // Mixing the social/institutional parameters on the URL makes can cause issues
-            // Here the parameters added after canceled linking + register are remove
-            // but it might happen that the email came from the Oauth, not a canceled linked subscription
-
             // https://trello.com/c/EiZOE6b1/7138
 
             email: null,
