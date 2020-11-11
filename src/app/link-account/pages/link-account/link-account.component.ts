@@ -98,7 +98,6 @@ export class LinkAccountComponent implements OnInit {
 
             // https://trello.com/c/EiZOE6b1/7138
 
-            
             email: null,
             firstName: null,
             lastName: null,
