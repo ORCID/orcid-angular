@@ -94,7 +94,7 @@ export class LinkAccountComponent implements OnInit {
             // The parameters added after a linking + register process are remove
 
             // TODO leomendoza123
-            // Mixing the social/institutional parameters on the URL makes can cause issues
+            // Mixing the social/institutional parameters on the URL causes issues
             // https://trello.com/c/EiZOE6b1/7138
 
             email: null,
