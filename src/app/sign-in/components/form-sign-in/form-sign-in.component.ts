@@ -263,6 +263,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .subscribe((userSession) => {
                 const params = platform.queryParameters
                 this._router.navigate(['/register'], {
+                  // TODO leomendoza123
+                  // Adding the social/institutional parameters on the URL causes issues
+                  // https://trello.com/c/EiZOE6b1/7138
+
                   queryParams: {
                     ...params,
                     email,
