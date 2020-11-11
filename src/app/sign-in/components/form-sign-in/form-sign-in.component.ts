@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -73,7 +74,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _gtag: GoogleAnalyticsService,
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
-    private _userInfo: UserService
+    private _userInfo: UserService,
+    private cd: ChangeDetectorRef
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -128,10 +130,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
       this.addUsernameValidation()
     }
+    this.cd.detectChanges()
   }
 
   ngAfterViewInit(): void {
     this.firstInput.nativeElement.focus()
+    this.cd.detectChanges()
   }
 
   onSubmit() {

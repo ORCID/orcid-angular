@@ -7,6 +7,7 @@ import { Institutional } from '../../../types/institutional.endpoint'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-link-account',
@@ -83,12 +84,28 @@ export class LinkAccountComponent implements OnInit {
 
   cancel() {
     this._platformInfo.remove()
-    this._platformInfo.get().subscribe((platform) => {
-      this._router.navigate([ApplicationRoutes.signin], {
-        queryParams: {
-          ...platform.queryParameters,
-        },
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate([ApplicationRoutes.signin], {
+          queryParams: {
+            ...platform.queryParameters,
+            // TODO leomendoza123
+            // Mixing the social/institutional parameters on the URL makes can cause issues
+            // Here the parameters added after canceled linking + register are remove
+            // but it might happen that the email came from the Oauth, not a canceled linked subscription
+
+            // https://trello.com/c/EiZOE6b1/7138
+
+            
+            email: null,
+            firstName: null,
+            lastName: null,
+            linkType: null,
+            providerId: null,
+          },
+        })
       })
-    })
   }
 }
