@@ -7,6 +7,7 @@ import { Institutional } from '../../../types/institutional.endpoint'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-link-account',
@@ -32,13 +33,16 @@ export class LinkAccountComponent implements OnInit {
     private _oauthService: OauthService,
     private _router: Router
   ) {
-    _platformInfo.get().subscribe((platform) => {
-      if (platform.social) {
-        this.loadSocialSignInData()
-      } else if (platform.institutional) {
-        this.loadShibbolethSignInData()
-      }
-    })
+    _platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        if (platform.social) {
+          this.loadSocialSignInData()
+        } else if (platform.institutional) {
+          this.loadShibbolethSignInData()
+        }
+      })
   }
 
   ngOnInit(): void {}
@@ -83,12 +87,26 @@ export class LinkAccountComponent implements OnInit {
 
   cancel() {
     this._platformInfo.remove()
-    this._platformInfo.get().subscribe((platform) => {
-      this._router.navigate([ApplicationRoutes.signin], {
-        queryParams: {
-          ...platform.queryParameters,
-        },
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate([ApplicationRoutes.signin], {
+          queryParams: {
+            ...platform.queryParameters,
+            // The parameters added after a linking + register process are remove
+
+            // TODO leomendoza123
+            // Adding the social/institutional parameters on the URL causes issues
+            // https://trello.com/c/EiZOE6b1/7138
+
+            email: null,
+            firstName: null,
+            lastName: null,
+            linkType: null,
+            providerId: null,
+          },
+        })
       })
-    })
   }
 }

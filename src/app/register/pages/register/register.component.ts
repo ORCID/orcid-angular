@@ -98,6 +98,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           platform = platform as PlatformInfo
 
           // TODO @leomendoza123 move the handle of social/institutional sessions to the user service
+
+          // TODO leomendoza123
+          // Adding the social/institutional parameters on the URL causes issues
+          // https://trello.com/c/EiZOE6b1/7138
+
           if (platform.queryParameters.providerId) {
             this.FormGroupStepA = this.prefillRegisterForm(
               this.platform.queryParameters
