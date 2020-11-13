@@ -44,8 +44,12 @@
     "build:storybook": "build-storybook -o dist/storybook",
     "lighthouse": "ts-node -P scripts/tsconfig.json scripts/lighthouse/main.ts",
     "build:browserslist": "ts-node -P scripts/tsconfig.json scripts/browserlist.prebuild.ts",
-    "cypress:open": "cypress open --config-file cypress.json",
-    "cypress:run": "cypress run --config-file cypress.json"
+    "cypress:open": "cypress open",
+    "cypress": "yarn cypress:report:clean && yarn cypress:run && yarn cypress:report:merge  && yarn  cypress:report:html",
+    "cypress:report:clean": "rimraf cypress/reports/temp",
+    "cypress:run": "cypress run",
+    "cypress:report:merge": "mochawesome-merge cypress/reports/temp/mochawesome-report/*.json > cypress/reports/temp/output.json",
+    "cypress:report:html": "marge cypress/reports/temp/output.json -f report --reportDir ./cypress/reports --inline --autoOpen true --overwrite false"
   },
   "private": true,
   "dependencies": {
@@ -129,6 +133,10 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "lighthouse": "^5.6.0",
+    "mocha": "^8.2.1",
+    "mochawesome": "^6.2.1",
+    "mochawesome-merge": "^4.2.0",
+    "mochawesome-report-generator": "^5.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "protractor": "^5.4.2",
