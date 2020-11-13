@@ -19,6 +19,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { NotificationsComponent } from './components/notifications/notifications.component'
 import { InboxRoutingModule } from './inbox-routing.module'
 import { InboxComponent } from './pages/inbox/inbox.component'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { InboxComponent } from './pages/inbox/inbox.component'
     FormsModule,
     MatProgressBarModule,
     MatTooltipModule,
+    SharedModule,
   ],
 })
 export class InboxModule {}
