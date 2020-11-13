@@ -34,11 +34,37 @@ export class FooterComponent implements OnInit {
     this.window.location.href = url
   }
 
-  about() {
-    if (this.togglzNewInfoSite) {
-      this.goTo(environment.INFO_SITE + '/what-is-orcid')
-    } else {
-      this.goTo('about')
-    }
+  privacyPolicy() {
+    !this.togglzNewInfoSite
+      ? this.goTo('/footer/privacy-policy')
+      : this.goTo(`${environment.INFO_SITE}/privacy-policy/`)
+  }
+
+  termsOfUse() {
+    !this.togglzNewInfoSite
+      ? this.goTo('/content/orcid-terms-use')
+      : this.goTo(`${environment.INFO_SITE}/terms-of-use/`)
+  }
+  accessibilityStatement() {
+    !this.togglzNewInfoSite
+      ? this.goTo('/content/orcid-accessibility-statement')
+      : this.goTo(`${environment.INFO_SITE}/accessibility-statement/`)
+  }
+
+  contactUs() {
+    this.goTo('https://support.orcid.org/hc/en-us/requests/new')
+  }
+
+  disputeProcedures() {
+    !this.togglzNewInfoSite
+      ? this.goTo('/orcid-dispute-procedures')
+      : this.goTo(`${environment.INFO_SITE}/dispute-procedures/`)
+  }
+
+  brandGuidelines() {
+    !this.togglzNewInfoSite
+      ? this.goTo('/trademark-and-id-display-guidelines')
+      : this.goTo(`${environment.INFO_SITE}/trademark-and-id-display-guidelines//`)
   }
 }
+  

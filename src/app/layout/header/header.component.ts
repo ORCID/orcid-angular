@@ -105,12 +105,12 @@ export class HeaderComponent implements OnInit {
         button.route !== undefined &&
         (!button.buttons || !button.buttons.length)
       ) {
-        this.newInfo(button.route)
+        this.preNavigate(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route !== undefined) {
-      this.newInfo(button.route)
+      this.preNavigate(button.route)
     }
   }
 
@@ -268,7 +268,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  newInfo(route) {
+  preNavigate(route) {
     if (this.togglzNewInfoSite) {
       this.navigateTo(environment.INFO_SITE + route)
     } else {
