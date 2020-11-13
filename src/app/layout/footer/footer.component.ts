@@ -35,9 +35,7 @@ export class FooterComponent implements OnInit {
   }
 
   privacyPolicy() {
-    !this.togglzNewInfoSite
-      ? this.goTo('/footer/privacy-policy')
-      : this.goTo(`${environment.INFO_SITE}/privacy-policy/`)
+    this.goTo('/footer/privacy-policy')
   }
 
   termsOfUse() {
@@ -56,15 +54,10 @@ export class FooterComponent implements OnInit {
   }
 
   disputeProcedures() {
-    !this.togglzNewInfoSite
-      ? this.goTo('/orcid-dispute-procedures')
-      : this.goTo(`${environment.INFO_SITE}/dispute-procedures/`)
+    this.goTo('/orcid-dispute-procedures')
   }
 
   brandGuidelines() {
-    !this.togglzNewInfoSite
-      ? this.goTo('/trademark-and-id-display-guidelines')
-      : this.goTo(`${environment.INFO_SITE}/trademark-and-id-display-guidelines//`)
+    this.goTo('/trademark-and-id-display-guidelines')
   }
 }
-  
