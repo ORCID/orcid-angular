@@ -1,5 +1,9 @@
 @import 'src/assets/scss/orcid.spacing.scss';
 
+h3 {
+  text-transform: uppercase;
+}
+
 .item {
   margin-top: $spacing-base;
 }
