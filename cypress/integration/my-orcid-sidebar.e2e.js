@@ -1,4 +1,8 @@
 describe('My Orcid sidebar' + runInfo(), () => {
+  describe('Orcid id', () => {
+    it('display the users Orcid', () => {})
+    it('display url to navigate to the public page view', () => {})
+  })
   describe('Emails' + runInfo(), () => {
     it('display a user with only a primary email "unverified"', () => {})
     it('display a user with only a primary email "verified"', () => {})
@@ -26,7 +30,6 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('clicks outside and DONT close the modal ', () => {})
     it('open the terms of use on a separate window ', () => {})
   })
-
   describe('Websites and socials links', () => {
     it('display a user with no items', () => {
       // TODO @dandineen should this look just empty on the modal
@@ -93,25 +96,24 @@ describe('My Orcid sidebar' + runInfo(), () => {
   })
   describe('Keywords', () => {
     it('display a user with no items', () => {
-        // TODO @dandineen should this look just empty on the modal
-      })
-      it('add items and display those with default privacy', () => {
-        // Expect changes to be display outside and inside of the modal
-        // TODO @dandineen no sketch that displays the input box
-      })
-      it('remove/delete', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('Drag and drop to rearrange', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('change privacy', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('make changes and cancel', () => {
-        // Expect changes NOT to be display outside and inside of the modal
-      })
-      it('clicks outside and DONT close the modal ', () => {})
-
+      // TODO @dandineen should this look just empty on the modal
+    })
+    it('add items and display those with default privacy', () => {
+      // Expect changes to be display outside and inside of the modal
+      // TODO @dandineen no sketch that displays the input box
+    })
+    it('remove/delete', () => {
+      // Expect changes to be display outside and inside of the modal
+    })
+    it('Drag and drop to rearrange', () => {
+      // Expect changes to be display outside and inside of the modal
+    })
+    it('change privacy', () => {
+      // Expect changes to be display outside and inside of the modal
+    })
+    it('make changes and cancel', () => {
+      // Expect changes NOT to be display outside and inside of the modal
+    })
+    it('clicks outside and DONT close the modal ', () => {})
   })
 })
