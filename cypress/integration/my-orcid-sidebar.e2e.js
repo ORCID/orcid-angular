@@ -73,6 +73,7 @@ describe('My Orcid sidebar' + runInfo(), () => {
   })
   describe('Other IDs', () => {
     it('display a user with no items', () => {
+      // should be hidden from the side bar https://trello.com/c/JZJ75TWl/35-how-to-add-other-ids-is-confusing
       // TODO @dandineen should this look just empty on the modal
     })
     it('display a user with items and default privacy', () => {})
