@@ -8,6 +8,7 @@ module.exports = function () {
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
+      timeZoneName: 'short',
       timeZone: 'America/Chicago', // Central time as Orcid servers
     })
     .replace(/[,]/g, '')

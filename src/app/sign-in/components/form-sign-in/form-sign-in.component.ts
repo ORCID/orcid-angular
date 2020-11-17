@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -73,7 +74,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _gtag: GoogleAnalyticsService,
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
-    private _userInfo: UserService
+    private _userInfo: UserService,
+    private cd: ChangeDetectorRef
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -128,10 +130,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
       this.addUsernameValidation()
     }
+    this.cd.detectChanges()
   }
 
   ngAfterViewInit(): void {
     this.firstInput.nativeElement.focus()
+    this.cd.detectChanges()
   }
 
   onSubmit() {
@@ -259,6 +263,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .subscribe((userSession) => {
                 const params = platform.queryParameters
                 this._router.navigate(['/register'], {
+                  // TODO leomendoza123
+                  // Adding the social/institutional parameters on the URL causes issues
+                  // https://trello.com/c/EiZOE6b1/7138
+
                   queryParams: {
                     ...params,
                     email,

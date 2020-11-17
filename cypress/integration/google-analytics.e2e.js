@@ -2,8 +2,9 @@
 import { env } from 'process'
 import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
+const runInfo = require('../helpers/runInfo')
 
-describe(`Google Analytics`, function () {
+describe(`Google Analytics${runInfo()}`, function () {
   before(() => {
     cy.clearCookies()
   })
