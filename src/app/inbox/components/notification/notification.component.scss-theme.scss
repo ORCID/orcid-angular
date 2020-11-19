@@ -13,6 +13,9 @@
     background-color: map-get($background, background);
     color: $orcid-dark-secondary-text;
   }
+  :host.read .header {
+    color: $orcid-dark-primary-text;
+  }
   :host.green .header {
     .notification {
       color: mat-color($accent, 900);
