@@ -20,13 +20,22 @@ describe('Homepage' + runInfo(), () => {
           cy.stub(win, 'outOfRouterNavigation')
         },
       })
-      cy.get(`#public-layout\\.about`)
+      cy.get(`.button-wrapper:nth-child(1)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', environment.infoSiteBaseUrl + '/what-is-orcid')
 
-      cy.get(`#public-layout\\.membership`)
+      cy.get(`.button-wrapper:nth-child(2)`)
+        .click()
+        .window()
+        .its('outOfRouterNavigation')
+        .should(
+          'be.calledWith',
+          environment.infoSiteBaseUrl + '/benefits-for-researchers'
+        )
+
+      cy.get(`.button-wrapper:nth-child(3)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
@@ -35,13 +44,13 @@ describe('Homepage' + runInfo(), () => {
           environment.infoSiteBaseUrl + '/about-membership'
         )
 
-      cy.get(`#public-layout\\.documentation`)
+      cy.get(`.button-wrapper:nth-child(4)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', environment.infoSiteBaseUrl + '/documentation')
 
-      cy.get(`#public-layout\\.community`)
+      cy.get(`.button-wrapper:nth-child(5)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
@@ -50,20 +59,11 @@ describe('Homepage' + runInfo(), () => {
           environment.infoSiteBaseUrl + '/orcid-community'
         )
 
-      cy.get(`#public-layout\\.newsEvents`)
+      cy.get(`.button-wrapper:nth-child(6)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', environment.infoSiteBaseUrl + '/')
-
-      cy.get(`#public-layout\\.for_researchers`)
-        .click()
-        .window()
-        .its('outOfRouterNavigation')
-        .should(
-          'be.calledWith',
-          environment.infoSiteBaseUrl + '/benefits-for-researchers'
-        )
     })
   }
 })

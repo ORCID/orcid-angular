@@ -604,7 +604,7 @@ export const menu: ApplicationMenuItemBasic[] = [
     },
   },
   {
-    id: 'public-layout.community',
+    id: 'public-layout.resources',
     label: $localize`:@@public-layout.resources:Resources`,
     route: 'orcid-community',
     requirements: {
