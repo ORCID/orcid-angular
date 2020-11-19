@@ -48,6 +48,7 @@ export class NotificationComponent
   state = 'close'
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') _archived = false
+  @HostBinding('class.read') _read = false
   @HostBinding('class.green') green = false
   @HostBinding('class.orange') orange = true
   @HostBinding('class.blue') blue = false
@@ -66,6 +67,10 @@ export class NotificationComponent
   @Input()
   set archived(value) {
     this._archived = value
+  }
+  @Input()
+  set read(value) {
+    this._read = value
   }
   get archived() {
     return this._archived
