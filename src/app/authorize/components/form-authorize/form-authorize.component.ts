@@ -25,6 +25,7 @@ import {
   TrustedIndividuals,
   Delegator,
 } from 'src/app/types/trusted-individuals.endpoint'
+import { environment } from 'src/environments/environment'
 @Component({
   selector: 'app-form-authorize',
   templateUrl: './form-authorize.component.html',
@@ -32,6 +33,7 @@ import {
   preserveWhitespaces: true,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
+  environment = environment
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
   userName: string
