@@ -263,12 +263,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .subscribe((userSession) => {
                 const params = platform.queryParameters
                 this._router.navigate(['/register'], {
-
                   queryParams: {
                     ...params,
-                    email: (params.email ? params.email : email),
-                    firstName: (params.firstName ? params.firstName : firstName),
-                    lastName: (params.lastName ? params.lastName : lastName),
+                    email: params.email ? params.email : email,
+                    firstName: params.firstName ? params.firstName : firstName,
+                    lastName: params.lastName ? params.lastName : lastName,
                     providerId,
                     linkType,
                   },

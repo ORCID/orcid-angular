@@ -95,9 +95,9 @@ export class LinkAccountComponent implements OnInit {
         this._router.navigate([ApplicationRoutes.signin], {
           queryParams: {
             ...params,
-            email: (params.email ? params.email : undefined),
-            firstName: (params.firstName ? params.firstName : undefined),
-            lastName: (params.lastName ? params.lastName : undefined),
+            email: params.email ? params.email : undefined,
+            firstName: params.firstName ? params.firstName : undefined,
+            lastName: params.lastName ? params.lastName : undefined,
             linkType: undefined,
             providerId: undefined,
           },
