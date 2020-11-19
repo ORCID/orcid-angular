@@ -33,5 +33,4 @@ export class FooterComponent implements OnInit {
   goTo(url) {
     this.window.location.href = url
   }
-
 }
