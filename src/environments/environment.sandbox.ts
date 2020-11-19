@@ -7,7 +7,9 @@ export const environment = {
   API_WEB: '//sandbox.orcid.org/',
   BASE_URL: '//sandbox.orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
-  INFO_SITE: 'http://orcidaboutdev.wpengine.com/',
+  INFO_SITE: '//qa.orcid.org',
+  INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
+    'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: false,
   GOOGLE_ANALYTICS: 'UA-17492803-5',
   GOOGLE_RECAPTCHA: '6LcH3woTAAAAACtvRjiHlFdBR-T7bTM4pZc1Q1TP',

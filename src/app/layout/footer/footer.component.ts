@@ -33,12 +33,4 @@ export class FooterComponent implements OnInit {
   goTo(url) {
     this.window.location.href = url
   }
-
-  about() {
-    if (this.togglzNewInfoSite) {
-      this.goTo(environment.INFO_SITE + '/what-is-orcid')
-    } else {
-      this.goTo('about')
-    }
-  }
 }
