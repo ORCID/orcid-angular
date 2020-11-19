@@ -270,9 +270,12 @@ export class HeaderComponent implements OnInit {
 
   preNavigate(route) {
     if (this.togglzNewInfoSite) {
-      this.navigateTo(environment.INFO_SITE + route)
+      this.navigateTo(
+        environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE +
+          route
+      )
     } else {
-      this.navigateTo(route)
+      this.navigateTo(environment.INFO_SITE + route)
     }
   }
 

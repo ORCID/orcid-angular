@@ -34,30 +34,4 @@ export class FooterComponent implements OnInit {
     this.window.location.href = url
   }
 
-  privacyPolicy() {
-    this.goTo('/footer/privacy-policy')
-  }
-
-  termsOfUse() {
-    !this.togglzNewInfoSite
-      ? this.goTo('/content/orcid-terms-use')
-      : this.goTo(`${environment.INFO_SITE}/terms-of-use/`)
-  }
-  accessibilityStatement() {
-    !this.togglzNewInfoSite
-      ? this.goTo('/content/orcid-accessibility-statement')
-      : this.goTo(`${environment.INFO_SITE}/accessibility-statement/`)
-  }
-
-  contactUs() {
-    this.goTo('https://support.orcid.org/hc/en-us/requests/new')
-  }
-
-  disputeProcedures() {
-    this.goTo('/orcid-dispute-procedures')
-  }
-
-  brandGuidelines() {
-    this.goTo('/trademark-and-id-display-guidelines')
-  }
 }

@@ -580,6 +580,14 @@ export const menu: ApplicationMenuItemBasic[] = [
     },
   },
   {
+    id: 'public-layout.for_researchers',
+    label: $localize`:@@public-layout.for_researchers:For Researchers`,
+    route: 'benefits-for-researchers',
+    requirements: {
+      togglz: { NEW_INFO_SITE: 'true' },
+    },
+  },
+  {
     id: 'public-layout.membership',
     label: $localize`:@@public-layout.membership:Membership`,
     route: 'about-membership',
@@ -597,12 +605,13 @@ export const menu: ApplicationMenuItemBasic[] = [
   },
   {
     id: 'public-layout.community',
-    label: $localize`:@@public-layout.community:Community`,
+    label: $localize`:@@public-layout.resources:Resources`,
     route: 'orcid-community',
     requirements: {
       togglz: { NEW_INFO_SITE: 'true' },
     },
   },
+
   {
     id: 'public-layout.newsEvents',
     label: $localize`:@@public-layout.newsEvents:News & Events`,
@@ -611,14 +620,7 @@ export const menu: ApplicationMenuItemBasic[] = [
       togglz: { NEW_INFO_SITE: 'true' },
     },
   },
-  {
-    id: 'public-layout.for_researchers',
-    label: $localize`:@@public-layout.for_researchers:For Researchers`,
-    route: 'benefits-for-researchers',
-    requirements: {
-      togglz: { NEW_INFO_SITE: 'true' },
-    },
-  },
+
   {
     id: 'public-layout.sign_in',
     label: $localize`:@@public-layout.sign_in:SIGN IN`,
