@@ -105,12 +105,12 @@ export class HeaderComponent implements OnInit {
         button.route !== undefined &&
         (!button.buttons || !button.buttons.length)
       ) {
-        this.newInfo(button.route)
+        this.preNavigate(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route !== undefined) {
-      this.newInfo(button.route)
+      this.preNavigate(button.route)
     }
   }
 
@@ -268,11 +268,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  newInfo(route) {
+  preNavigate(route) {
     if (this.togglzNewInfoSite) {
-      this.navigateTo(environment.INFO_SITE + route)
+      this.navigateTo(
+        environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE +
+          route
+      )
     } else {
-      this.navigateTo(route)
+      this.navigateTo(environment.INFO_SITE + route)
     }
   }
 

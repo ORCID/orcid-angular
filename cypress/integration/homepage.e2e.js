@@ -6,10 +6,10 @@ const runInfo = require('../helpers/runInfo')
 describe('Homepage' + runInfo(), () => {
   it('Has no detectable a11y critical violations', () => {
     cy.visit(`${environment.baseUrl}`)
-    cy.injectAxe()
-    cy.checkA11y(null, {
-      includedImpacts: ['critical'],
-    })
+      .injectAxe()
+      .checkA11y(null, {
+        includedImpacts: ['critical'],
+      })
   })
 
   if (environment.newInfoSiteEnable) {
@@ -20,13 +20,22 @@ describe('Homepage' + runInfo(), () => {
           cy.stub(win, 'outOfRouterNavigation')
         },
       })
-      cy.get(`#public-layout\\.about`)
+        .get(`.button-wrapper:nth-child(1)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', environment.infoSiteBaseUrl + '/what-is-orcid')
 
-      cy.get(`#public-layout\\.membership`)
+        .get(`.button-wrapper:nth-child(2)`)
+        .click()
+        .window()
+        .its('outOfRouterNavigation')
+        .should(
+          'be.calledWith',
+          environment.infoSiteBaseUrl + '/benefits-for-researchers'
+        )
+
+        .get(`.button-wrapper:nth-child(3)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
@@ -35,13 +44,13 @@ describe('Homepage' + runInfo(), () => {
           environment.infoSiteBaseUrl + '/about-membership'
         )
 
-      cy.get(`#public-layout\\.documentation`)
+        .get(`.button-wrapper:nth-child(4)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', environment.infoSiteBaseUrl + '/documentation')
 
-      cy.get(`#public-layout\\.community`)
+        .get(`.button-wrapper:nth-child(5)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
@@ -50,20 +59,11 @@ describe('Homepage' + runInfo(), () => {
           environment.infoSiteBaseUrl + '/orcid-community'
         )
 
-      cy.get(`#public-layout\\.newsEvents`)
+        .get(`.button-wrapper:nth-child(6)`)
         .click()
         .window()
         .its('outOfRouterNavigation')
         .should('be.calledWith', environment.infoSiteBaseUrl + '/')
-
-      cy.get(`#public-layout\\.for_researchers`)
-        .click()
-        .window()
-        .its('outOfRouterNavigation')
-        .should(
-          'be.calledWith',
-          environment.infoSiteBaseUrl + '/benefits-for-researchers'
-        )
     })
   }
 })
