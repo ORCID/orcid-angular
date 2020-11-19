@@ -91,20 +91,15 @@ export class LinkAccountComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
+        const params = platform.queryParameters
         this._router.navigate([ApplicationRoutes.signin], {
           queryParams: {
-            ...platform.queryParameters,
-            // The parameters added after a linking + register process are remove
-
-            // TODO leomendoza123
-            // Adding the social/institutional parameters on the URL causes issues
-            // https://trello.com/c/EiZOE6b1/7138
-
-            email: null,
-            firstName: null,
-            lastName: null,
-            linkType: null,
-            providerId: null,
+            ...params,
+            email: (params.email ? params.email : undefined),
+            firstName: (params.firstName ? params.firstName : undefined),
+            lastName: (params.lastName ? params.lastName : undefined),
+            linkType: undefined,
+            providerId: undefined,
           },
         })
       })
