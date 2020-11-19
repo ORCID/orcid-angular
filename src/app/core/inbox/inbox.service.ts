@@ -151,6 +151,7 @@ export class InboxService {
           this.lastEmittedValue.forEach((value) => {
             if (value.putCode === data.putCode) {
               value.archivedDate = data.archivedDate
+              value.readDate = data.readDate
             }
           })
           this.inboxSubject.next(this.lastEmittedValue)

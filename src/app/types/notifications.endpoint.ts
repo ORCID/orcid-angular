@@ -50,7 +50,7 @@ export interface InboxNotification {
   putCode: number
   createdDate: any
   sentDate?: any
-  readDate: number
+  readDate?: number
   archivedDate?: number
   sourceDescription?: any
   encryptedPutCode?: any

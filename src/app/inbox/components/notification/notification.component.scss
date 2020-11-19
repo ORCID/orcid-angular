@@ -45,7 +45,7 @@ mat-checkbox {
     margin-right: auto;
   }
 }
-:host:not(.archived) {
+:host:not(.archived):not(.read) {
   .title {
     font-weight: bold;
   }
