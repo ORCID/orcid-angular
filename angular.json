@@ -208,7 +208,7 @@
                 }
               ]
             },
-			"int": {
+            "int": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -222,7 +222,7 @@
                 }
               ]
             },
-			"en": {
+            "en": {
               "localize": ["en"]
             },
             "fr": {
@@ -296,7 +296,7 @@
             "sandbox": {
               "browserTarget": "ng-orcid:build:sandbox"
             },
-			"int": {
+            "int": {
               "browserTarget": "ng-orcid:build:int"
             },
             "qa": {
