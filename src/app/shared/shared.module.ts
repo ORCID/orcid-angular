@@ -15,7 +15,7 @@ import { OfflineMessageComponent } from './components/offline-message/offline-me
 import { CopyOnClickDirective } from './directives/copy-on-click/copy-on-click.directive'
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
 import { RegionCityCountryPipe } from './pipes/region-city-country/region-city-country.pipe'
-import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
+import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
 @NgModule({
   imports: [

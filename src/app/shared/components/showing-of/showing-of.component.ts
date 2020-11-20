@@ -4,15 +4,13 @@ import { Component, Input, OnInit } from '@angular/core'
   selector: 'app-showing-of',
   templateUrl: './showing-of.component.html',
   styleUrls: ['./showing-of.component.scss'],
-  preserveWhitespaces: true
+  preserveWhitespaces: true,
 })
 export class ShowingOfComponent implements OnInit {
   @Input() displaying: number
   @Input() total: number
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
