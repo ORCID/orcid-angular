@@ -1,6 +1,7 @@
 import * as environmentProduction from '../src/environments/environment.production'
 import * as environmentQa from '../src/environments/environment.qa'
 import * as environmentSandbox from '../src/environments/environment.sandbox'
+import * as environmentInt from '../src/environments/environment.int'
 import { writeFileSync } from 'fs'
 
 export function save(data, options) {
@@ -19,6 +20,8 @@ export function getOptionsObjet(file) {
     environmentVariables = environmentQa.environment
   } else if (environment === 'sandbox') {
     environmentVariables = environmentSandbox.environment
+  } else if (environment === 'int') {
+    environmentVariables = environmentInt.environment
   } else {
     console.warn('the environment variable is invalid')
   }
