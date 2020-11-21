@@ -168,10 +168,10 @@ export class NotificationComponent
   }
 
   toggleNotificationContent() {
-    this.showNotificationContent = !this.showNotificationContent
-    this.state = this.showNotificationContent ? 'open' : 'close'
+    this.state = !this.showNotificationContent ? 'open' : 'close'
     if (this.state === 'open') {
-      this._inbox.flagAsRead(this.notification.putCode).subscribe()
+      this._inbox.flagAsRead(this.notification.putCode)
+        .subscribe(() => this.showNotificationContent = !this.showNotificationContent)
     }
   }
 
