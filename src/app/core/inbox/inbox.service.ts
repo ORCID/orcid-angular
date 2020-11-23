@@ -189,4 +189,18 @@ export class InboxService {
         })
       )
   }
+
+  totalNumber(archived: boolean) {
+    return this._http
+      .get<any>(
+        environment.BASE_URL + `inbox/totalCount.json?archived=${archived}`,
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
 }
