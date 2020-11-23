@@ -16,7 +16,7 @@ export class NotificationsComponent implements OnInit {
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
   loading = true
-  showArchived = true
+  showArchived = false
   moreNotificationsMightExist = false
   totalNotifications: number
 
