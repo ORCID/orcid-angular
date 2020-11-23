@@ -26,10 +26,10 @@
   }
   :host.orange .header {
     .notification {
-      color: map-get($foreground, 'state-notice-dark');
+      color: map-get($foreground, 'state-notice-darkest');
     }
     .notification-background {
-      background-color: map-get($foreground, 'state-notice-dark');
+      background-color: map-get($foreground, 'state-notice-darkest');
     }
   }
   :host.blue .header {
