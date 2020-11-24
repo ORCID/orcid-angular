@@ -15,7 +15,7 @@ import { UserRecord } from 'src/app/types/record.local'
   ],
 })
 export class SideBarComponent implements OnInit, OnDestroy {
-  @Input() onlyNames = false
+  @Input() onlyOrcidId = false
 
   destroy$: Subject<boolean> = new Subject<boolean>()
   userSession: {

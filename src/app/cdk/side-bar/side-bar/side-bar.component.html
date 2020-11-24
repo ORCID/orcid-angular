@@ -2,21 +2,7 @@
   [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
 ></app-side-bar-id>
 
-<ng-container *ngIf="onlyNames">
-  <app-panel *ngIf="userRecord" [elements]="userRecord.otherNames.otherNames">
-    <h2 header class="orc-font-body" i18n="@@record.alsoKnowAs">
-      Also known as
-    </h2>
-    <div body>
-      <app-panel-element
-        *ngFor="let otherNames of userRecord.otherNames.otherNames"
-        [visibility]="otherNames.visibility.visibility"
-        >{{ otherNames.content }}</app-panel-element
-      >
-    </div>
-  </app-panel>
-</ng-container>
-<ng-container *ngIf="!onlyNames">
+<ng-container *ngIf="!onlyOrcidId">
   <app-panel *ngIf="userRecord" [elements]="userRecord.otherNames.otherNames">
     <h2 header class="orc-font-body" i18n="@@record.alsoKnowAs">
       Also known as
