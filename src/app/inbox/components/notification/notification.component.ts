@@ -176,7 +176,7 @@ export class NotificationComponent
       this._inbox
         .flagAsRead(this.notification.putCode)
         .subscribe(
-          () => (this.showNotificationContent = !this.showNotificationContent),
+          () => (this.showNotificationContent = !this.showNotificationContent)
         )
     } else {
       this.showNotificationContent = !this.showNotificationContent
