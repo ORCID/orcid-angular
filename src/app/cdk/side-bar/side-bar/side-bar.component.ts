@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { UserService } from 'src/app/core'
 import { Observable, Subject } from 'rxjs'
 import { UserInfo, NameForm, RequestInfoForm } from 'src/app/types'
@@ -15,6 +15,8 @@ import { UserRecord } from 'src/app/types/record.local'
   ],
 })
 export class SideBarComponent implements OnInit, OnDestroy {
+  @Input() onlyNames = false
+
   destroy$: Subject<boolean> = new Subject<boolean>()
   userSession: {
     userInfo: UserInfo
