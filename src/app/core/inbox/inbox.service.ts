@@ -151,6 +151,7 @@ export class InboxService {
           this.lastEmittedValue.forEach((value) => {
             if (value.putCode === data.putCode) {
               value.archivedDate = data.archivedDate
+              value.readDate = data.readDate
             }
           })
           this.inboxSubject.next(this.lastEmittedValue)
@@ -186,6 +187,20 @@ export class InboxService {
           })
           this.inboxSubject.next(this.lastEmittedValue)
         })
+      )
+  }
+
+  totalNumber(archived: boolean) {
+    return this._http
+      .get<any>(
+        environment.BASE_URL + `inbox/totalCount.json?archived=${archived}`,
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }

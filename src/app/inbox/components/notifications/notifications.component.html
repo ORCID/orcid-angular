@@ -38,12 +38,13 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
 <ng-container *ngIf="form && notifications" [formGroup]="form">
-  <ng-container *ngFor="let item of notifications">
+  <ng-container *ngFor="let item of notifications; let i = index">
     <app-notification
       *ngIf="!item.archivedDate || showArchived"
       [notification]="item"
       [formControl]="form.controls[item.putCode]"
       [archived]="!!item.archivedDate"
+      [read]="!!item.readDate"
     ></app-notification>
   </ng-container>
 </ng-container>
@@ -62,6 +63,11 @@
 </div>
 
 <div class="notifications-amount mat-body-1">
+  <app-showing-of
+    [displaying]="notifications?.length"
+    [total]="totalNotifications"
+  >
+  </app-showing-of>
   <button
     mat-raised-button
     color="primary"

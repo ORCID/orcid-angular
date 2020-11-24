@@ -25,6 +25,7 @@ import {
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms'
+
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -47,6 +48,7 @@ export class NotificationComponent
   state = 'close'
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') _archived = false
+  @HostBinding('class.read') _read = false
   @HostBinding('class.green') green = false
   @HostBinding('class.orange') orange = true
   @HostBinding('class.blue') blue = false
@@ -65,6 +67,10 @@ export class NotificationComponent
   @Input()
   set archived(value) {
     this._archived = value
+  }
+  @Input()
+  set read(value) {
+    this._read = value
   }
   get archived() {
     return this._archived
@@ -162,10 +168,13 @@ export class NotificationComponent
   }
 
   toggleNotificationContent() {
-    this.showNotificationContent = !this.showNotificationContent
-    this.state = this.showNotificationContent ? 'open' : 'close'
+    this.state = !this.showNotificationContent ? 'open' : 'close'
     if (this.state === 'open') {
-      this._inbox.flagAsRead(this.notification.putCode).subscribe()
+      this._inbox
+        .flagAsRead(this.notification.putCode)
+        .subscribe(
+          () => (this.showNotificationContent = !this.showNotificationContent)
+        )
     }
   }
 

@@ -2,7 +2,7 @@ const date = require('../helpers/date')
 
 module.exports = function () {
   return {
-    email: 'cy-' + date() + '-' + userID() + '@gmail.com',
+    email: 'cy-' + date() + '+' + userID() + '@gmail.com',
     password: '12345678Aa',
     name: 'cy-' + date() + '-' + userID(),
     familyName: 'cy-' + date() + '-' + userID(),

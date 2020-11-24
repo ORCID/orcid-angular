@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
+import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
 import { first, map, startWith, switchMap, take, tap } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -47,7 +49,9 @@ export class InstitutionalComponent implements OnInit {
   constructor(
     @Inject(WINDOW) private window: Window,
     private _cookie: CookieService,
-    private _disco: DiscoService
+    private _disco: DiscoService,
+    private _router: Router,
+    private _platformInfo: PlatformInfoService
   ) {
     this.loading = true
     this._disco.getDiscoFeed().subscribe((res) => {
@@ -81,6 +85,17 @@ export class InstitutionalComponent implements OnInit {
       )
       this.clear()
     })
+  }
+
+  back() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/signin'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 
   ngOnInit() {}

@@ -4,6 +4,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { take, filter } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-banners',
@@ -12,6 +13,7 @@ import { MaintenanceMessage } from 'src/app/types/togglz.local'
   preserveWhitespaces: true,
 })
 export class BannersComponent implements OnInit {
+  environment = environment
   maintenanceMessages: MaintenanceMessage
   showCookieBanner
   showUnsupportedBrowserBanner

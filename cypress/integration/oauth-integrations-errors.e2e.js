@@ -1,9 +1,12 @@
 /// <reference types="cypress" />
 import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
-describe('Oauth integrations errors', () => {
+const runInfo = require('../helpers/runInfo')
+
+describe('Oauth integrations errors' + runInfo(), () => {
   before(() => {
-    cy.sessionLogin('testUser')
+    cy.clearCookies()
+    cy.programmaticSignin('testUser')
   })
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
@@ -11,6 +14,23 @@ describe('Oauth integrations errors', () => {
 
   after(() => {
     cy.clearCookies()
+  })
+
+  it('Has no detectable a11y critical or serious violations', () => {
+    cy.visit(
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: 'WRONG',
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: environment.validApp.redirectUrl,
+        })
+    )
+    cy.injectAxe()
+      .get('#error-message')
+      .checkA11y(null, {
+        includedImpacts: ['critical', 'serious'],
+      })
   })
 
   it('show error screen on INVALID client id', function () {
@@ -30,6 +50,7 @@ describe('Oauth integrations errors', () => {
     cy.hasNoLayout()
     cy.hasZendesk()
   })
+
   it('show error screen on MISSING client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize` +

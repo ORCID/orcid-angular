@@ -16,8 +16,9 @@ export class NotificationsComponent implements OnInit {
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
   loading = true
-  showArchived = true
+  showArchived = false
   moreNotificationsMightExist = false
+  totalNotifications: number
 
   indeterminate = false
   changesSubscription: Subscription
@@ -68,6 +69,10 @@ export class NotificationsComponent implements OnInit {
 
       // check if there might be more notifications
       this.moreNotificationsMightExist = this._inbox.mightHaveMoreNotifications()
+      this._inbox
+        .totalNumber(this.showArchived)
+        .pipe(first())
+        .subscribe((data) => (this.totalNotifications = data))
     })
   }
 
@@ -84,6 +89,10 @@ export class NotificationsComponent implements OnInit {
 
   toggleShowArchived() {
     this.showArchived = !this.showArchived
+    this._inbox
+      .totalNumber(this.showArchived)
+      .pipe(first())
+      .subscribe((data) => (this.totalNotifications = data))
   }
 
   showMore() {

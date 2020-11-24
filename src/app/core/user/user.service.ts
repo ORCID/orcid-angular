@@ -259,7 +259,7 @@ export class UserService {
         // Declare the oauth session on the backend
         if (platform.hasOauthParameters) {
           let params = platform.queryParameters as OauthParameters
-          // After a user login remove the promp parameter
+          // After a user login or register while being login remove the promp parameter
           // TODO @leomendoza123 how is this handle by signin logins?
           if (updateParameters.checkTrigger.postLoginUpdate) {
             params = { ...params, prompt: undefined }

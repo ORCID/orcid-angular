@@ -100,9 +100,9 @@ Cypress.Commands.add('expectGtagRegrow', (event) => {
         'be.calledWith',
         Cypress.sinon.match({
           0: 'event',
-          1: 'RegGrowth',
+          1: event.action,
           2: Cypress.sinon.match({
-            event_category: event.category,
+            event_category: 'RegGrowth',
             event_label: `OAuth ${event.clientName} - ${event.memberName}`,
           }),
         })

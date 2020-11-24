@@ -13,6 +13,9 @@
     background-color: map-get($background, background);
     color: $orcid-dark-secondary-text;
   }
+  :host.read .header {
+    color: $orcid-dark-primary-text;
+  }
   :host.green .header {
     .notification {
       color: mat-color($accent, 900);
@@ -23,10 +26,10 @@
   }
   :host.orange .header {
     .notification {
-      color: map-get($foreground, 'state-notice-dark');
+      color: map-get($foreground, 'state-notice-darkest');
     }
     .notification-background {
-      background-color: map-get($foreground, 'state-notice-dark');
+      background-color: map-get($foreground, 'state-notice-darkest');
     }
   }
   :host.blue .header {

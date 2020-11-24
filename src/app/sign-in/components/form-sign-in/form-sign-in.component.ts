@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -73,7 +74,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _gtag: GoogleAnalyticsService,
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
-    private _userInfo: UserService
+    private _userInfo: UserService,
+    private cd: ChangeDetectorRef
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -88,10 +90,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
               ...(params as OauthParameters),
-              oauth: '',
             }
           })
-        } else if (platform.social) {
+        }
+
+        if (platform.social) {
           this.signInLocal.type = TypeSignIn.social
         } else if (platform.institutional) {
           this.signInLocal.type = TypeSignIn.institutional
@@ -127,14 +130,19 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
       this.addUsernameValidation()
     }
+    this.cd.detectChanges()
   }
 
   ngAfterViewInit(): void {
     this.firstInput.nativeElement.focus()
+    this.cd.detectChanges()
   }
 
   onSubmit() {
     this.addUsernameValidation()
+    this.addUsernameValidation()
+    // fix firefox IOS autofill issue
+    this.authorizationForm.markAllAsTouched()
 
     if (this.authorizationForm.valid) {
       this.signInLocal.data = this.authorizationForm.getRawValue()
@@ -254,10 +262,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
-                if (userSession.oauthSession) {
-                  params['oauth'] = ''
-                }
                 this._router.navigate(['/register'], {
+                  // TODO leomendoza123
+                  // Adding the social/institutional parameters on the URL causes issues
+                  // https://trello.com/c/EiZOE6b1/7138
+
                   queryParams: {
                     ...params,
                     email,
@@ -276,6 +285,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
             queryParams: platform.queryParameters,
           })
         }
+      })
+  }
+
+  forgotPassword() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/reset-password'], {
+          queryParams: platform.queryParameters,
+        })
       })
   }
 
