@@ -48,7 +48,7 @@ export class NotificationsComponent implements OnInit {
   ngOnInit(): void {
     this.form = this._fromBuilder.group({})
     this.loading = true
-    this._inbox.get().subscribe((value) => {
+    this._inbox.get(false, true).subscribe((value) => {
       // get retrieved values
       this.loading = false
       this.notifications = value
@@ -103,7 +103,7 @@ export class NotificationsComponent implements OnInit {
     // allowing the previous subscription on ngOnInit to handle the data
     this.loading = true
     this._inbox
-      .get(true)
+      .get(true, this.showArchived)
       .pipe(first())
       .subscribe(() => {
         this.loading = false
