@@ -1,16 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { forkJoin, Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { WINDOW } from 'src/app/cdk/window';
-import { InboxService } from 'src/app/core/inbox/inbox.service';
-import { InboxNotification } from 'src/app/types/notifications.endpoint';
+import { Component, Inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { forkJoin, Subscription } from 'rxjs'
+import { first } from 'rxjs/operators'
+import { WINDOW } from 'src/app/cdk/window'
+import { InboxService } from 'src/app/core/inbox/inbox.service'
+import { InboxNotification } from 'src/app/types/notifications.endpoint'
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
-  preserveWhitespaces: true
+  preserveWhitespaces: true,
 })
 export class NotificationsComponent implements OnInit {
   archiveNotifications: InboxNotification[]
@@ -144,8 +144,8 @@ export class NotificationsComponent implements OnInit {
       this.notifications &&
       this.archiveNotifications &&
       ((!this.showArchived &&
-        this.notifications.length == this.archiveNotifications.length) ||
-        (this.showArchived && this.notifications.length == 0))
+        this.notifications.length === this.archiveNotifications.length) ||
+        (this.showArchived && this.notifications.length === 0))
     )
   }
 
