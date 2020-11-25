@@ -1,29 +1,33 @@
 <div class="control-container">
-  <div
-    class="controls"
-    *ngIf="notifications?.length || archiveNotifications?.length"
-  >
-    <mat-checkbox
-      [(ngModel)]="generalCheck"
-      [(indeterminate)]="indeterminate"
-      aria-label="select-all"
-    ></mat-checkbox>
-    <div
-      class="archive-label mat-body-1"
-      id="select-all"
-      i18n="@@inbox.selectAll"
+  <div class="controls">
+    <ng-container
+      *ngIf="
+        notifications?.length - archiveNotifications?.length ||
+        (showArchived && archiveNotifications?.length)
+      "
     >
-      Select All
-    </div>
-    <button
-      mat-raised-button
-      color="primary"
-      class="mat-button-wrap-text-with-icon"
-      (click)="archivedSelected()"
-    >
-      <mat-icon class="material-icons-outlined">archive</mat-icon>
-      <div i18n="@@inbox.archiveSelected">Archive selected</div>
-    </button>
+      <mat-checkbox
+        [(ngModel)]="generalCheck"
+        [(indeterminate)]="indeterminate"
+        aria-label="select-all"
+      ></mat-checkbox>
+      <div
+        class="archive-label mat-body-1"
+        id="select-all"
+        i18n="@@inbox.selectAll"
+      >
+        Select All
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        class="mat-button-wrap-text-with-icon"
+        (click)="archivedSelected()"
+      >
+        <mat-icon class="material-icons-outlined">archive</mat-icon>
+        <div i18n="@@inbox.archiveSelected">Archive selected</div>
+      </button>
+    </ng-container>
   </div>
   <a (click)="toggleShowArchived()" *ngIf="archiveNotifications?.length"
     ><ng-container *ngIf="showArchived" i18n="@@inbox.hideArchived"
@@ -50,19 +54,27 @@
 </ng-container>
 
 <div
-  class="no-messages"
-  *ngIf="
-    notifications &&
-    archiveNotifications &&
-    ((!showArchived && notifications.length == archiveNotifications.length) ||
-      (showArchived && notifications.length == 0))
-  "
-  i18n="@@inbox.thereAreNoMessages"
+  class="no-messages orc-font-body-small"
+  *ngIf="isAnEmptyInbox()"
 >
-  There are no messages at the moment.
+  <div i18n="@@inbox.thereAreNoMessages">
+    There are no messages You don’t have any notifications yet.
+  </div>
+  <div>
+    <ng-container i18n="@@inbox.youCanManage">
+      You can manage the frequency of your ORCID notifications in
+      your</ng-container
+    >
+    <a (click)="navigateTo('/account')" i18n="@@inbox.accountSetting">
+      account settings.</a
+    >
+  </div>
 </div>
 
-<div class="notifications-amount mat-body-1">
+<div
+  class="notifications-amount mat-body-1"
+  *ngIf="!isAnEmptyInbox() && notifications"
+>
   <app-showing-of
     [displaying]="notifications?.length"
     [total]="totalNotifications"
