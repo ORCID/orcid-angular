@@ -51,6 +51,18 @@ mat-checkbox {
   }
 }
 
+:host.archived:not(.read) {
+  .title {
+    font-weight: bold;
+  }
+}
+
+:host.archived.read {
+  .title {
+    font-weight: 400;
+  }
+}
+
 .title {
   flex-grow: 1;
   text-align: start;
@@ -73,7 +85,7 @@ mat-checkbox {
     margin-right: $spacing-base;
     margin-left: auto;
   }
-  font-weight: bold;
+  font-weight: 500;
 }
 .columns-8 :host {
   .title {

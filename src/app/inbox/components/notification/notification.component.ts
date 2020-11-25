@@ -68,12 +68,15 @@ export class NotificationComponent
   set archived(value) {
     this._archived = value
   }
+  get archived() {
+    return this._archived
+  }
   @Input()
   set read(value) {
     this._read = value
   }
-  get archived() {
-    return this._archived
+  get read() {
+    return this._read
   }
   @Input()
   set notification(notification: InboxNotification) {
@@ -169,12 +172,14 @@ export class NotificationComponent
 
   toggleNotificationContent() {
     this.state = !this.showNotificationContent ? 'open' : 'close'
-    if (this.state === 'open') {
+    if (this.state === 'open' && !this.notification.readDate) {
       this._inbox
         .flagAsRead(this.notification.putCode)
         .subscribe(
           () => (this.showNotificationContent = !this.showNotificationContent)
         )
+    } else {
+      this.showNotificationContent = !this.showNotificationContent
     }
   }
 
