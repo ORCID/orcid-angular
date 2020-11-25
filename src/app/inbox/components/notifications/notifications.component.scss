@@ -66,5 +66,9 @@ mat-icon {
 
 .no-messages {
   margin-top: $spacing-base;
-  margin-bottom: $spacing-base;
+  margin-bottom: $spacing-large;
+  > :nth-child(1) {
+    font-style: italic;
+    margin-bottom: 24px;
+  }
 }

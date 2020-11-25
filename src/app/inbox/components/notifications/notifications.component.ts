@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { forkJoin, Subscription } from 'rxjs'
 import { first } from 'rxjs/operators'
+import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
 import { InboxNotification } from 'src/app/types/notifications.endpoint'
 
@@ -9,6 +10,7 @@ import { InboxNotification } from 'src/app/types/notifications.endpoint'
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
+  preserveWhitespaces: true,
 })
 export class NotificationsComponent implements OnInit {
   archiveNotifications: InboxNotification[]
@@ -39,7 +41,8 @@ export class NotificationsComponent implements OnInit {
 
   constructor(
     private _inbox: InboxService,
-    private _fromBuilder: FormBuilder
+    private _fromBuilder: FormBuilder,
+    @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit(): void {
@@ -134,5 +137,19 @@ export class NotificationsComponent implements OnInit {
       )
     })
     return checkBoxForm
+  }
+
+  isAnEmptyInbox() {
+    return (
+      this.notifications &&
+      this.archiveNotifications &&
+      ((!this.showArchived &&
+        this.notifications.length === this.archiveNotifications.length) ||
+        (this.showArchived && this.notifications.length === 0))
+    )
+  }
+
+  navigateTo(url) {
+    ;(this.window as any).outOfRouterNavigation(url)
   }
 }
