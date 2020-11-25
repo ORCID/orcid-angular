@@ -48,7 +48,8 @@ export class InboxService {
   }
 
   get(
-    getNextDepthLevel = false
+    getNextDepthLevel = false,
+    includeArchived = false
   ): Observable<
     (
       | InboxNotificationAmended
@@ -61,7 +62,7 @@ export class InboxService {
     if (getNextDepthLevel && this.lastEmittedValue) {
       this.currentLevel++
     }
-    return this.getNotifications(this.currentLevel).pipe(
+    return this.getNotifications(this.currentLevel, includeArchived).pipe(
       tap((data) => {
         if (!this.lastEmittedValue) {
           this.lastEmittedValue = data
@@ -75,7 +76,8 @@ export class InboxService {
   }
 
   private getNotifications(
-    depthLevel
+    depthLevel,
+    includeArchived
   ): Observable<
     (
       | InboxNotificationAmended
@@ -96,7 +98,7 @@ export class InboxService {
         environment.BASE_URL +
           `inbox/notifications.json?firstResult=${
             AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel
-          }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=true`,
+          }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=${includeArchived}`,
         {
           headers: this.headers,
         }
