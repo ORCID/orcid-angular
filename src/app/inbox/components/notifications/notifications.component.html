@@ -53,13 +53,8 @@
   </ng-container>
 </ng-container>
 
-<div
-  class="no-messages orc-font-body-small"
-  *ngIf="isAnEmptyInbox()"
->
-  <div i18n="@@inbox.youDontHave">
-    You don’t have any notifications yet.
-  </div>
+<div class="no-messages orc-font-body-small" *ngIf="isAnEmptyInbox()">
+  <div i18n="@@inbox.youDontHave">You don’t have any notifications yet.</div>
   <div>
     <ng-container i18n="@@inbox.youCanManage">
       You can manage the frequency of your ORCID notifications in
