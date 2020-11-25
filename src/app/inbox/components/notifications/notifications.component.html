@@ -36,7 +36,7 @@
     <ng-container *ngIf="!showArchived" i18n="@@inbox.showArchived"
       >Show archived</ng-container
     >
-    ({{ archiveNotifications.length }})
+    ({{ totalNotifications.all - totalNotifications.nonArchived }})
   </a>
 </div>
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
@@ -44,7 +44,6 @@
 <ng-container *ngIf="form && notifications" [formGroup]="form">
   <ng-container *ngFor="let item of notifications; let i = index">
     <app-notification
-      *ngIf="!item.archivedDate || showArchived"
       [notification]="item"
       [formControl]="form.controls[item.putCode]"
       [archived]="!!item.archivedDate"
@@ -72,7 +71,7 @@
 >
   <app-showing-of
     [displaying]="notifications?.length"
-    [total]="totalNotifications"
+    [total]="totalNotifications.all"
   >
   </app-showing-of>
   <button

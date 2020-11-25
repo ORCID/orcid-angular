@@ -4,6 +4,7 @@ import { Observable, ReplaySubject } from 'rxjs'
 import { retry } from 'rxjs/internal/operators/retry'
 import { catchError, switchMap, tap } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
+import { ERROR_REPORT } from 'src/app/errors'
 import { environment } from 'src/environments/environment'
 
 import {
@@ -11,14 +12,15 @@ import {
   InboxNotificationHtml,
   InboxNotificationInstitutional,
   InboxNotificationPermission,
+  TotalNotificationCount,
 } from '../../types/notifications.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
 })
 export class InboxService {
+  private currentlyIncludingArchive: boolean
   private currentLevel = 0
   private headers: HttpHeaders
   private inboxSubject = new ReplaySubject<
@@ -58,6 +60,13 @@ export class InboxService {
       | InboxNotificationPermission
     )[]
   > {
+    if (this.currentlyIncludingArchive === null) {
+      this.currentlyIncludingArchive = includeArchived
+    } else if (this.currentlyIncludingArchive !== includeArchived) {
+      this.currentlyIncludingArchive = includeArchived
+      this.currentLevel = 0
+      this.lastEmittedValue = null
+    }
     // Only allow to get the next level if the first level was already retrieved
     if (getNextDepthLevel && this.lastEmittedValue) {
       this.currentLevel++
@@ -192,10 +201,10 @@ export class InboxService {
       )
   }
 
-  totalNumber(archived: boolean) {
+  totalNumber() {
     return this._http
-      .get<any>(
-        environment.BASE_URL + `inbox/totalCount.json?archived=${archived}`,
+      .get<TotalNotificationCount>(
+        environment.BASE_URL + `inbox/totalCount.json`,
         {
           headers: this.headers,
         }

@@ -110,3 +110,8 @@ export type notificationType =
   | 'TIP'
   | 'INSTITUTIONAL_CONNECTION'
   | 'PERMISSION'
+
+export interface TotalNotificationCount {
+  all: number
+  nonArchived: number
+}

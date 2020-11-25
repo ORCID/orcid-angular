@@ -4,7 +4,10 @@ import { forkJoin, Subscription } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
-import { InboxNotification } from 'src/app/types/notifications.endpoint'
+import {
+  InboxNotification,
+  TotalNotificationCount,
+} from 'src/app/types/notifications.endpoint'
 
 @Component({
   selector: 'app-notifications',
@@ -20,7 +23,7 @@ export class NotificationsComponent implements OnInit {
   loading = true
   showArchived = false
   moreNotificationsMightExist = false
-  totalNotifications: number
+  totalNotifications: TotalNotificationCount
 
   indeterminate = false
   changesSubscription: Subscription
@@ -52,9 +55,6 @@ export class NotificationsComponent implements OnInit {
       // get retrieved values
       this.loading = false
       this.notifications = value
-      this.archiveNotifications = this.notifications.filter(
-        (notification) => notification.archivedDate
-      )
 
       // Remove previous setup change listener (if exist)
       if (this.changesSubscription) {
@@ -72,9 +72,9 @@ export class NotificationsComponent implements OnInit {
 
       // check if there might be more notifications
       this.moreNotificationsMightExist = this._inbox.mightHaveMoreNotifications()
+
       this._inbox
-        .totalNumber(this.showArchived)
-        .pipe(first())
+        .totalNumber()
         .subscribe((data) => (this.totalNotifications = data))
     })
   }
@@ -92,10 +92,13 @@ export class NotificationsComponent implements OnInit {
 
   toggleShowArchived() {
     this.showArchived = !this.showArchived
+    this.loading = true
     this._inbox
-      .totalNumber(this.showArchived)
+      .get(true, this.showArchived)
       .pipe(first())
-      .subscribe((data) => (this.totalNotifications = data))
+      .subscribe(() => {
+        this.loading = false
+      })
   }
 
   showMore() {
@@ -140,13 +143,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   isAnEmptyInbox() {
-    return (
-      this.notifications &&
-      this.archiveNotifications &&
-      ((!this.showArchived &&
-        this.notifications.length === this.archiveNotifications.length) ||
-        (this.showArchived && this.notifications.length === 0))
-    )
+    return this.notifications && this.notifications.length === 0
   }
 
   navigateTo(url) {
