@@ -20,6 +20,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { InboxRoutingModule } from './inbox-routing.module'
 import { InboxComponent } from './pages/inbox/inbox.component'
 import { SharedModule } from '../shared/shared.module'
+import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SharedModule } from '../shared/shared.module'
     MatProgressBarModule,
     MatTooltipModule,
     SharedModule,
+    SideBarModule,
   ],
 })
 export class InboxModule {}
