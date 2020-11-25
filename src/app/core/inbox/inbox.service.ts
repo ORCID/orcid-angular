@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { retry } from 'rxjs/internal/operators/retry'
-import { catchError, switchMap, tap } from 'rxjs/operators'
+import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
 import { environment } from 'src/environments/environment'
@@ -211,6 +211,10 @@ export class InboxService {
       )
       .pipe(
         retry(3),
+        map((value) => {
+          value.archived = value.all - value.nonArchived
+          return value
+        }),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }

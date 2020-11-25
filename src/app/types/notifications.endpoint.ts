@@ -114,4 +114,5 @@ export type notificationType =
 export interface TotalNotificationCount {
   all: number
   nonArchived: number
+  archived?: number
 }

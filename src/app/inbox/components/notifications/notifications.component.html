@@ -1,11 +1,6 @@
 <div class="control-container">
   <div class="controls">
-    <ng-container
-      *ngIf="
-        notifications?.length - archiveNotifications?.length ||
-        (showArchived && archiveNotifications?.length)
-      "
-    >
+    <ng-container *ngIf="notifications?.length">
       <mat-checkbox
         [(ngModel)]="generalCheck"
         [(indeterminate)]="indeterminate"
@@ -29,14 +24,14 @@
       </button>
     </ng-container>
   </div>
-  <a (click)="toggleShowArchived()" *ngIf="archiveNotifications?.length"
+  <a (click)="toggleShowArchived()" *ngIf="totalNotifications.archived"
     ><ng-container *ngIf="showArchived" i18n="@@inbox.hideArchived"
       >Hide archived</ng-container
     >
     <ng-container *ngIf="!showArchived" i18n="@@inbox.showArchived"
       >Show archived</ng-container
     >
-    ({{ totalNotifications.all - totalNotifications.nonArchived }})
+    ({{ totalNotifications.archived }})
   </a>
 </div>
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
@@ -71,7 +66,9 @@
 >
   <app-showing-of
     [displaying]="notifications?.length"
-    [total]="totalNotifications.all"
+    [total]="
+      showArchived ? totalNotifications.all : totalNotifications.nonArchived
+    "
   >
   </app-showing-of>
   <button

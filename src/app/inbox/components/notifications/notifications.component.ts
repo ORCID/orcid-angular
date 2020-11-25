@@ -16,7 +16,6 @@ import {
   preserveWhitespaces: true,
 })
 export class NotificationsComponent implements OnInit {
-  archiveNotifications: InboxNotification[]
   notifications: InboxNotification[]
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
@@ -51,7 +50,7 @@ export class NotificationsComponent implements OnInit {
   ngOnInit(): void {
     this.form = this._fromBuilder.group({})
     this.loading = true
-    this._inbox.get(false, true).subscribe((value) => {
+    this._inbox.get().subscribe((value) => {
       // get retrieved values
       this.loading = false
       this.notifications = value
