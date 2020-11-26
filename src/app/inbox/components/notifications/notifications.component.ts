@@ -1,7 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { trigger } from '@angular/animations'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { forkJoin, Subscription } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { until } from 'protractor'
+import { forkJoin, Subject, Subscription } from 'rxjs'
+import { first, last, takeUntil } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
 import {
@@ -15,13 +17,13 @@ import {
   styleUrls: ['./notifications.component.scss'],
   preserveWhitespaces: true,
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsComponent implements OnInit, OnDestroy {
   notifications: InboxNotification[]
+  $destroy: Subject<boolean> = new Subject<boolean>()
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
   loading = true
   showArchived = false
-  moreNotificationsMightExist = false
   totalNotifications: TotalNotificationCount
 
   indeterminate = false
@@ -50,40 +52,63 @@ export class NotificationsComponent implements OnInit {
   ngOnInit(): void {
     this.form = this._fromBuilder.group({})
     this.loading = true
-    this._inbox.get().subscribe((value) => {
-      // get retrieved values
-      this.loading = false
-      this.notifications = value
+    this._inbox
+      .get(false)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((value) => {
+        // get retrieved values
 
-      // Remove previous setup change listener (if exist)
-      if (this.changesSubscription) {
-        this.changesSubscription.unsubscribe()
-      }
+        this.notifications = value
 
-      // setup a new notifications checkboxes form
-      this.form = this.setUpCheckboxForm(value)
-      this.generalCheck = false
+        // Remove previous setup change listener (if exist)
+        if (this.changesSubscription) {
+          this.changesSubscription.unsubscribe()
+        }
 
-      // detect changes on the checkboxes form
-      this.changesSubscription = this.form.valueChanges.subscribe((formValue) =>
-        this.listenFormChanges(formValue)
-      )
+        // setup a new notifications checkboxes form
+        this.form = this.setUpCheckboxForm(value)
+        this.generalCheck = false
 
-      // check if there might be more notifications
-      this.moreNotificationsMightExist = this._inbox.mightHaveMoreNotifications()
+        // detect changes on the checkboxes form
+        this.changesSubscription = this.form.valueChanges.subscribe(
+          (formValue) => this.listenFormChanges(formValue)
+        )
 
-      this._inbox
-        .totalNumber()
-        .subscribe((data) => (this.totalNotifications = data))
-    })
+        this._inbox.totalNumber().subscribe((data) => {
+          this.totalNotifications = data
+          if (this.autoLoadMoreNotificationsIfRequired()) {
+            this.showMore()
+          } else {
+            this.loading = false
+          }
+        })
+      })
+  }
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
+  }
+
+  autoLoadMoreNotificationsIfRequired() {
+    if (
+      this.notifications.length === 0 &&
+      !this.showArchived &&
+      this.totalNotifications.nonArchived > 0
+    ) {
+      return true
+    }
   }
 
   archivedSelected() {
-    const $archiveList = Object.keys(this.form.controls)
-      .map((key) => {
-        if (this.form.controls[key].value) {
-          return this._inbox.flagAsArchive(parseInt(key, 10))
-        }
+    const notificationsToArchived = Object.keys(this.form.controls).filter(
+      (key) => this.form.controls[key].value
+    )
+    const $archiveList = notificationsToArchived
+      .map((key, index) => {
+        // Only emit changes when all the queue has been archived
+        console.log(index, notificationsToArchived.length)
+        const emitUpdate = index + 1 === notificationsToArchived.length
+        return this._inbox.flagAsArchive(parseInt(key, 10), emitUpdate)
       })
       .filter((value) => value)
     forkJoin($archiveList).subscribe()
@@ -104,12 +129,7 @@ export class NotificationsComponent implements OnInit {
     // subscribe and take only one value without any action
     // allowing the previous subscription on ngOnInit to handle the data
     this.loading = true
-    this._inbox
-      .get(true, this.showArchived)
-      .pipe(first())
-      .subscribe(() => {
-        this.loading = false
-      })
+    this._inbox.get(true, this.showArchived).pipe(first()).subscribe()
   }
 
   // Use to check if the general checkbox is on indeterminate stated
@@ -120,6 +140,7 @@ export class NotificationsComponent implements OnInit {
       if (allState === null) {
         allState = formValue[key]
       } else if (allState !== formValue[key]) {
+        console.log(formValue)
         this.indeterminate = true
       }
     })
@@ -147,5 +168,13 @@ export class NotificationsComponent implements OnInit {
 
   navigateTo(url) {
     ;(this.window as any).outOfRouterNavigation(url)
+  }
+
+  hasMoreNotificationsToLoad() {
+    return (
+      (this.showArchived
+        ? this.totalNotifications?.all
+        : this.totalNotifications?.nonArchived) > this.notifications.length
+    )
   }
 }

@@ -1,3 +1,12 @@
+<h1 class="mat-headline">
+  <ng-container i18n="@@inbox.notifications">Notifications</ng-container>
+  <ng-container *ngIf="totalNotifications"
+    >({{
+      showArchived ? totalNotifications.all : totalNotifications.nonArchived
+    }})</ng-container
+  >
+</h1>
+
 <div class="control-container">
   <div class="controls">
     <ng-container *ngIf="notifications?.length">
@@ -24,7 +33,7 @@
       </button>
     </ng-container>
   </div>
-  <a (click)="toggleShowArchived()" *ngIf="totalNotifications.archived"
+  <a (click)="toggleShowArchived()" *ngIf="totalNotifications?.archived"
     ><ng-container *ngIf="showArchived" i18n="@@inbox.hideArchived"
       >Hide archived</ng-container
     >
@@ -39,6 +48,7 @@
 <ng-container *ngIf="form && notifications" [formGroup]="form">
   <ng-container *ngFor="let item of notifications; let i = index">
     <app-notification
+      *ngIf="!item.archivedDate || showArchived"
       [notification]="item"
       [formControl]="form.controls[item.putCode]"
       [archived]="!!item.archivedDate"
@@ -67,14 +77,14 @@
   <app-showing-of
     [displaying]="notifications?.length"
     [total]="
-      showArchived ? totalNotifications.all : totalNotifications.nonArchived
+      showArchived ? totalNotifications?.all : totalNotifications?.nonArchived
     "
   >
   </app-showing-of>
   <button
     mat-raised-button
     color="primary"
-    *ngIf="moreNotificationsMightExist"
+    *ngIf="hasMoreNotificationsToLoad()"
     (click)="showMore()"
     i18n="@@inbox.showMoreNotifications"
   >

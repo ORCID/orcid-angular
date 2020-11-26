@@ -20,6 +20,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class InboxService {
+  private nextLoadRequireAFullBackendSyncronization = false
   private currentlyIncludingArchive: boolean
   private currentLevel = 0
   private headers: HttpHeaders
@@ -73,6 +74,11 @@ export class InboxService {
     }
     return this.getNotifications(this.currentLevel, includeArchived).pipe(
       tap((data) => {
+        if (this.nextLoadRequireAFullBackendSyncronization) {
+          this.lastEmittedValue = null
+          this.nextLoadRequireAFullBackendSyncronization = false
+        }
+
         if (!this.lastEmittedValue) {
           this.lastEmittedValue = data
         } else {
@@ -104,10 +110,17 @@ export class InboxService {
           | InboxNotificationPermission
         )[]
       >(
-        environment.BASE_URL +
-          `inbox/notifications.json?firstResult=${
-            AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel
-          }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=${includeArchived}`,
+        !this.nextLoadRequireAFullBackendSyncronization
+          ? // if a complete refresh is not required only load the the new notifications
+            environment.BASE_URL +
+              `inbox/notifications.json?firstResult=${
+                AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel
+              }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=${includeArchived}`
+          : // if a complete refresh is required reload all the notification from index 0
+            `inbox/notifications.json?firstResult=0&maxResults=${
+              AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel +
+              AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL
+            }&includeArchived=${includeArchived}`,
         {
           headers: this.headers,
         }
@@ -120,24 +133,9 @@ export class InboxService {
       )
   }
 
-  // Check if the maximum amount of notifications was retrieved
-  // this is how is regerminated there might me more notifications
-  // this is the current solution since currently the backend does not retrieve the total amount of notifications
-  public mightHaveMoreNotifications() {
-    if (!this.lastEmittedValue) {
-      return true
-    } else if (
-      AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * (this.currentLevel + 1) ===
-      this.lastEmittedValue.length
-    ) {
-      return true
-    } else {
-      return false
-    }
-  }
-
   flagAsArchive(
-    code: number | string
+    code: number | string,
+    emitUpdate = true
   ): Observable<
     | InboxNotificationAmended
     | InboxNotificationHtml
@@ -159,13 +157,23 @@ export class InboxService {
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         ),
         tap((data) => {
-          this.lastEmittedValue.forEach((value) => {
+          this.lastEmittedValue.forEach((value, index) => {
             if (value.putCode === data.putCode) {
-              value.archivedDate = data.archivedDate
-              value.readDate = data.readDate
+              if (this.currentlyIncludingArchive) {
+                value.archivedDate = data.archivedDate
+                value.readDate = data.readDate
+              } else {
+                this.lastEmittedValue.splice(index, 1)
+                // When one or multiple notifications are archived and deleted from the local list
+                // the next load of notifications from the backend will require a complete reload
+                // this is because just concatenating newly loaded items would be accurate
+                this.nextLoadRequireAFullBackendSyncronization = true
+              }
             }
           })
-          this.inboxSubject.next(this.lastEmittedValue)
+          if (emitUpdate) {
+            this.inboxSubject.next(this.lastEmittedValue)
+          }
         })
       )
   }
