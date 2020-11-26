@@ -105,7 +105,6 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     const $archiveList = notificationsToArchived
       .map((key, index) => {
         // Only emit changes when all the queue has been archived
-        console.log(index, notificationsToArchived.length)
         const emitUpdate = index + 1 === notificationsToArchived.length
         return this._inbox.flagAsArchive(parseInt(key, 10), emitUpdate)
       })
@@ -139,7 +138,6 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       if (allState === null) {
         allState = formValue[key]
       } else if (allState !== formValue[key]) {
-        console.log(formValue)
         this.indeterminate = true
       }
     })
