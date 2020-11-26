@@ -98,6 +98,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   archivedSelected() {
+    this.loading = true
     const notificationsToArchived = Object.keys(this.form.controls).filter(
       (key) => this.form.controls[key].value
     )
