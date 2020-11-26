@@ -1,9 +1,7 @@
-import { trigger } from '@angular/animations'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { until } from 'protractor'
 import { forkJoin, Subject, Subscription } from 'rxjs'
-import { first, last, takeUntil } from 'rxjs/operators'
+import { first, takeUntil } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
 import {

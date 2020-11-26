@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import {
   InboxNotificationAmended,
   Item,
 } from 'src/app/types/notifications.endpoint'
-import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 
 @Component({
   selector: 'app-notification-your-record-amended',
