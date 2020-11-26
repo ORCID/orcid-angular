@@ -57,7 +57,10 @@
   </ng-container>
 </ng-container>
 
-<div class="no-messages orc-font-body-small" *ngIf="isAnEmptyInbox()">
+<div
+  class="no-messages orc-font-body-small"
+  *ngIf="isAnEmptyInbox() && totalNotifications?.archived === 0"
+>
   <div i18n="@@inbox.youDontHave">You don’t have any notifications yet.</div>
   <div>
     <ng-container i18n="@@inbox.youCanManage">
@@ -67,6 +70,15 @@
     <a (click)="navigateTo('/account')" i18n="@@inbox.accountSetting">
       account settings.</a
     >
+  </div>
+</div>
+
+<div
+  class="no-messages orc-font-body-small"
+  *ngIf="isAnEmptyInbox() && totalNotifications?.archived > 0"
+>
+  <div i18n="@@inbox.youDontHaveUnarchived">
+    You don't have any unarchived notifications right now.
   </div>
 </div>
 
