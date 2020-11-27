@@ -1,15 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { forkJoin, Subject, Subscription, timer } from 'rxjs'
-import { first, switchMap, take, takeUntil } from 'rxjs/operators'
+import { forkJoin, Subject, Subscription } from 'rxjs'
+import { first, takeUntil, tap } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
 import {
   InboxNotification,
-  InboxNotificationAmended,
-  InboxNotificationHtml,
-  InboxNotificationInstitutional,
-  InboxNotificationPermission,
   TotalNotificationCount,
 } from 'src/app/types/notifications.endpoint'
 
@@ -77,17 +73,14 @@ export class NotificationsComponent implements OnInit, OnDestroy {
         this.changesSubscription = this.form.valueChanges.subscribe(
           (formValue) => this.listenFormChanges(formValue)
         )
-
-        timer(500)
-          .pipe(switchMap(() => this._inbox.totalNumber()))
-          .subscribe((data) => {
-            this.totalNotifications = data
-            if (this.autoLoadMoreNotificationsIfRequired()) {
-              this._inbox.get(false).pipe(first()).subscribe()
-            } else {
-              this.loading = false
-            }
-          })
+        this._inbox.totalNumber().subscribe((data) => {
+          this.totalNotifications = data
+          if (this.autoLoadMoreNotificationsIfRequired()) {
+            this._inbox.get(false).pipe(first()).subscribe()
+          } else {
+            this.loading = false
+          }
+        })
       })
   }
   ngOnDestroy() {
@@ -106,21 +99,23 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   archivedSelected() {
-    const notificationsToArchived = Object.keys(this.form.controls).filter(
-      (key) => this.form.controls[key].value
-    )
-    const $archiveList = notificationsToArchived
-      .map((key, index) => {
-        // Only emit changes when all the queue has been archived
-        const emitUpdate = index + 1 === notificationsToArchived.length
-        return this._inbox
-          .flagAsArchive(parseInt(key, 10), emitUpdate)
-          .pipe(first())
-      })
-      .filter((value) => value)
-    if ($archiveList.length) {
-      this.loading = true
-      forkJoin($archiveList).subscribe()
+    if (!this.loading) {
+      const notificationsToArchived = Object.keys(this.form.controls).filter(
+        (key) => this.form.controls[key].value
+      )
+      const $archiveList = notificationsToArchived
+        .map((key, index) => {
+          return this._inbox
+            .flagAsArchive(parseInt(key, 10), false)
+            .pipe(first())
+        })
+        .filter((value) => value)
+      if ($archiveList.length) {
+        this.loading = true
+        forkJoin($archiveList)
+          .pipe(tap(() => this._inbox.emitUpdate()))
+          .subscribe()
+      }
     }
   }
 
