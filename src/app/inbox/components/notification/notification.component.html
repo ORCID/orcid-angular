@@ -1,6 +1,7 @@
 <button class="header" #header (click)="toggleNotificationContent()">
   <div class="notification-type notification mat-caption" [formGroup]="form">
     <mat-checkbox
+      [ngStyle]="{ visibility: !displayCheckBox && 'hidden' }"
       class="larger"
       (click)="$event.stopPropagation()"
       formControlName="selected"
