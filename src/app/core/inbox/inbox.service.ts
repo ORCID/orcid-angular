@@ -172,10 +172,14 @@ export class InboxService {
             }
           })
           if (emitUpdate) {
-            this.inboxSubject.next(this.lastEmittedValue)
+            this.emitUpdate()
           }
         })
       )
+  }
+
+  emitUpdate() {
+    this.inboxSubject.next(this.lastEmittedValue)
   }
 
   flagAsRead(

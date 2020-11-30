@@ -110,6 +110,7 @@ button[mat-icon-button] {
   display: flex;
   align-items: center;
   text-align: start;
+  flex-shrink: 0;
 }
 
 .hidden {
