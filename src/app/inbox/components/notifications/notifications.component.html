@@ -9,7 +9,7 @@
 
 <div class="control-container">
   <div class="controls">
-    <ng-container *ngIf="notifications?.length">
+    <ng-container *ngIf="notifications && amountOfSelectableItems">
       <mat-checkbox
         [(ngModel)]="generalCheck"
         [(indeterminate)]="indeterminate"
@@ -48,9 +48,16 @@
 <ng-container *ngIf="form && notifications" [formGroup]="form">
   <ng-container *ngFor="let item of notifications; let i = index">
     <app-notification
-      *ngIf="!item.archivedDate || showArchived"
+      *ngIf="!item.archivedDate"
       [notification]="item"
       [formControl]="form.controls[item.putCode]"
+      [archived]="!!item.archivedDate"
+      [read]="!!item.readDate"
+    ></app-notification>
+
+    <app-notification
+      *ngIf="item.archivedDate && showArchived"
+      [notification]="item"
       [archived]="!!item.archivedDate"
       [read]="!!item.readDate"
     ></app-notification>
@@ -59,7 +66,7 @@
 
 <div
   class="no-messages orc-font-body-small"
-  *ngIf="isAnEmptyInbox() && totalNotifications?.archived === 0"
+  *ngIf="isAnEmptyInbox() && totalNotifications?.archived === 0 && !loading"
 >
   <div i18n="@@inbox.youDontHave">You don’t have any notifications yet.</div>
   <div>
@@ -75,7 +82,7 @@
 
 <div
   class="no-messages orc-font-body-small"
-  *ngIf="isAnEmptyInbox() && totalNotifications?.archived > 0"
+  *ngIf="isAnEmptyInbox() && totalNotifications?.archived > 0 && !loading"
 >
   <div i18n="@@inbox.youDontHaveUnarchived">
     You don't have any unarchived notifications right now.
@@ -83,7 +90,7 @@
 </div>
 
 <mat-progress-bar
-  *ngIf="loading && notifications"
+  *ngIf="loading && notifications && !isAnEmptyInbox()"
   mode="indeterminate"
 ></mat-progress-bar>
 

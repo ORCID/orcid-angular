@@ -58,6 +58,7 @@ export class NotificationComponent
   notificationType: uiNotificationType
   platform: PlatformInfo
   public onTouchedFunction
+  displayCheckBox = false
 
   ariaLabelArchived = $localize`:@@inbox.archive:archive`
 
@@ -199,6 +200,7 @@ export class NotificationComponent
 
   writeValue(obj: any): void {
     if (obj != null && obj !== undefined && obj !== '') {
+      this.displayCheckBox = true
       this.form.setValue({ selected: obj }, { emitEvent: false })
     }
   }

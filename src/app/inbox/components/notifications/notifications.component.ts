@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { forkJoin, Subject, Subscription } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { first, takeUntil, tap } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
 import {
@@ -26,6 +26,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   indeterminate = false
   changesSubscription: Subscription
+  amountOfSelectableItems: number
 
   set generalCheck(value: boolean) {
     this._allCheck = value
@@ -65,17 +66,17 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
         // setup a new notifications checkboxes form
         this.form = this.setUpCheckboxForm(value)
+        this.amountOfSelectableItems = Object.keys(this.form.controls).length
         this.generalCheck = false
 
         // detect changes on the checkboxes form
         this.changesSubscription = this.form.valueChanges.subscribe(
           (formValue) => this.listenFormChanges(formValue)
         )
-
         this._inbox.totalNumber().subscribe((data) => {
           this.totalNotifications = data
           if (this.autoLoadMoreNotificationsIfRequired()) {
-            this.showMore()
+            this._inbox.get(false).pipe(first()).subscribe()
           } else {
             this.loading = false
           }
@@ -98,18 +99,24 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   archivedSelected() {
-    this.loading = true
-    const notificationsToArchived = Object.keys(this.form.controls).filter(
-      (key) => this.form.controls[key].value
-    )
-    const $archiveList = notificationsToArchived
-      .map((key, index) => {
-        // Only emit changes when all the queue has been archived
-        const emitUpdate = index + 1 === notificationsToArchived.length
-        return this._inbox.flagAsArchive(parseInt(key, 10), emitUpdate)
-      })
-      .filter((value) => value)
-    forkJoin($archiveList).subscribe()
+    if (!this.loading) {
+      const notificationsToArchived = Object.keys(this.form.controls).filter(
+        (key) => this.form.controls[key].value
+      )
+      const $archiveList = notificationsToArchived
+        .map((key, index) => {
+          return this._inbox
+            .flagAsArchive(parseInt(key, 10), false)
+            .pipe(first())
+        })
+        .filter((value) => value)
+      if ($archiveList.length) {
+        this.loading = true
+        forkJoin($archiveList)
+          .pipe(tap(() => this._inbox.emitUpdate()))
+          .subscribe()
+      }
+    }
   }
 
   toggleShowArchived() {
@@ -148,13 +155,16 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   // Create a control for each notification using the putcode as key
+  // tslint:disable-next-line: max-line-length
   setUpCheckboxForm(value) {
     const checkBoxForm = this._fromBuilder.group({})
     value.forEach((notification) => {
-      checkBoxForm.addControl(
-        notification.putCode.toString(),
-        this._fromBuilder.control(false)
-      )
+      if (!notification.archivedDate) {
+        checkBoxForm.addControl(
+          notification.putCode.toString(),
+          this._fromBuilder.control(false)
+        )
+      }
     })
     return checkBoxForm
   }
