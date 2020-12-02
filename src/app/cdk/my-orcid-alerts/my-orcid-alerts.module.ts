@@ -5,10 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 
 @NgModule({
   declarations: [MyOrcidAlertsComponent],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-  ],
+  imports: [CommonModule, MatToolbarModule],
   exports: [MyOrcidAlertsComponent],
 })
 export class MyOrcidAlertsModule {}

@@ -66,14 +66,17 @@ export class SignInComponent implements OnInit {
         }
 
         if (platform.queryParameters.emailVerified) {
-          this.emailVerified = platform.queryParameters.emailVerified;
-          if (platform.queryParameters.emailVerified && platform.queryParameters.verifiedEmail) {
+          this.emailVerified = platform.queryParameters.emailVerified
+          if (
+            platform.queryParameters.emailVerified &&
+            platform.queryParameters.verifiedEmail
+          ) {
             this.verifiedEmail = platform.queryParameters.verifiedEmail
           }
         }
 
         if (platform.queryParameters.invalidVerifyUrl) {
-          this.invalidVerifyUrl = platform.queryParameters.invalidVerifyUrl;
+          this.invalidVerifyUrl = platform.queryParameters.invalidVerifyUrl
         }
 
         if (platform.queryParameters.email) {

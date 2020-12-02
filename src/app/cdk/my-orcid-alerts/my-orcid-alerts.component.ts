@@ -16,5 +16,4 @@ export class MyOrcidAlertsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
 }
