@@ -7,7 +7,7 @@ export const environment = {
   API_WEB: '//qa.orcid.org/',
   BASE_URL: '//qa.orcid.org/',
   BLOG_NEWS: 'https://qa.orcid.org/about/news',
-  INFO_SITE: '//qa.orcid.org',
+  INFO_SITE: '//qa.orcid.org/',
   INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
     'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
