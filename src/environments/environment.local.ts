@@ -7,7 +7,7 @@ export const environment = {
   API_WEB: '//dev.orcid.org/',
   BASE_URL: '//dev.orcid.org/',
   BLOG_NEWS: 'https://localhost:8888/about/news',
-  INFO_SITE: '//dev.orcid.org/',
+  INFO_SITE: '//qa.orcid.org/',
   // The following variable is temporal and should only be used for URLs that
   // only exist on the new info site, while transitioning.
   // Having this variable allows to easily switch to the old info site
