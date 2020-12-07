@@ -5,6 +5,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-step-a',
@@ -13,6 +14,7 @@ import { ApplicationRoutes } from 'src/app/constants'
   preserveWhitespaces: true,
 })
 export class StepAComponent extends BaseStep {
+  infoSiteBaseUrl = environment.INFO_SITE
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
   }
