@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 
 import { Assertion } from '../../../types'
+import { Value } from '../../../types/common.endpoint'
 import { PlatformInfoService } from '../../platform-info'
 
 @Component({
@@ -11,8 +12,10 @@ import { PlatformInfoService } from '../../platform-info'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
-  @Input() elements: Assertion[]
+  @Input() elements: Assertion[] | Value
   @Input() editModalComponent: ComponentType<any>
+  @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
+
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
@@ -24,6 +27,14 @@ export class PanelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  isArrayAndIsNotEmpty(obj: any ) {
+    return Array.isArray(obj) && obj.length > 0
+  }
+
+  valueIsNotNull(obj: any) {
+    return obj && obj.value
+  }
 
   openModal() {
     if (this.editModalComponent) {

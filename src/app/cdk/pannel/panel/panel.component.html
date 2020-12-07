@@ -1,6 +1,7 @@
 <div
   class="header box orc-font-body"
-  [ngClass]="{ 'header-bottom': elements.length > 0 }"
+  [ngClass]="{
+    'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements) }"
 >
   <ng-content select="[header]"></ng-content>
   <div class="buttons-container">
@@ -29,6 +30,8 @@
     </button>
   </div>
 </div>
-<div class="body" *ngIf="elements.length > 0">
+<div
+  class="body"
+  *ngIf="isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)">
   <ng-content select="[body]"></ng-content>
 </div>

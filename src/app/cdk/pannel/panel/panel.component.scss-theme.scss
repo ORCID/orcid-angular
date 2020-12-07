@@ -13,6 +13,13 @@
     border-color: mat-color($accent, 200);
   }
 
+  :host,
+  .header,
+  .top-bar {
+    border-color: mat-color($background, ui-background);
+    background-color: mat-color($background, ui-background);
+  }
+
   .body {
     background-color: map-get($background, card);
   }

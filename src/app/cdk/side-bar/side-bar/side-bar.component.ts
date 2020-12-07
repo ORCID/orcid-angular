@@ -24,7 +24,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   modalCountryComponent = ModalCountryComponent
 
   destroy$: Subject<boolean> = new Subject<boolean>()
-  userSession: {
+  @Input() userSession: {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
@@ -32,7 +32,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
     orcidUrl: string
     loggedIn: boolean
   }
-  userRecord: UserRecord
+  @Input() userRecord: UserRecord
+
   constructor(private _user: UserService, private _record: RecordService) {}
 
   ngOnInit(): void {

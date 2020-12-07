@@ -1,1 +1,68 @@
-<p>top-bar works!</p>
+<app-panel
+  *ngIf="userRecord"
+  [elements]="userRecord.names.givenNames"
+  [type]="'top-bar'"
+>
+  <h2 header class="orc-font-body" i18n="@@record.names">
+    Names
+  </h2>
+  <div body>
+    <app-panel-element
+      [visibility]="userRecord.names.visibility.visibility"
+    >
+      <span
+        i18n="@@record.publishedName"
+        class="mat-caption description"
+      >
+        Published Name
+      </span>
+      <p class="mat-card-title published-name">
+        <b>
+          {{ userRecord.names.givenNames.value + ' ' + userRecord.names.familyName.value }}
+        </b>
+      </p>
+      <span
+        i18n="@@record.name"
+        class="mat-caption description"
+      >
+        Name
+      </span>
+      <p class="mat-body-1">
+        {{ userRecord.names.givenNames.value + ' ' + userRecord.names.familyName.value }}
+      </p>
+    </app-panel-element>
+    <span
+      i18n="@@record.otherNames"
+      class="mat-caption description"
+    >
+        Other names
+      </span>
+    <app-panel-element
+      *ngFor="let otherNames of userRecord.otherNames.otherNames"
+      [visibility]="otherNames.visibility.visibility"
+    >
+      <p class="mat-body-1">
+        {{ otherNames.content }}
+      </p>
+    </app-panel-element
+    >
+  </div>
+</app-panel>
+<app-panel
+  *ngIf="userRecord"
+  [elements]="userRecord.biography.biography"
+  [type]="'top-bar'"
+>
+  <h2 header class="orc-font-body" i18n="@@record.biography">
+    Biography
+  </h2>
+  <div body *ngIf="!!userRecord.biography.biography">
+    <app-panel-element
+      [visibility]="userRecord.biography.visibility.visibility"
+    >
+      <span class="mat-body-1">
+        {{ userRecord.biography.biography.value }}
+      </span>
+    </app-panel-element>
+  </div>
+</app-panel>

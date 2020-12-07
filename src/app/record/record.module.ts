@@ -10,6 +10,6 @@ import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 
 @NgModule({
   declarations: [MyOrcidComponent, TopBarComponent, MainComponent],
-  imports: [CommonModule, RecordRoutingModule, SideBarModule],
+  imports: [CommonModule, RecordRoutingModule, SideBarModule, PannelModule],
 })
 export class RecordModule {}
