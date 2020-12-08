@@ -110,11 +110,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       let analyticsReports: Observable<void>[] = []
 
       if (value) {
-        // Create a GA event for each scope
-        analyticsReports = data.scopes.map((scope) =>
+        analyticsReports.push(
           this._gtag
             .reportEvent(
-              `AuthorizeP_${scope.name}`,
+              `Authorize`,
               'RegGrowth',
               this.oauthRequest
             )
