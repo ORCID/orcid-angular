@@ -11,10 +11,10 @@
   }
   :host.archived .header {
     background-color: map-get($background, background);
-    color: $orcid-dark-secondary-text;
+    color: $text-dark-mid !important;
   }
   :host.read .header {
-    color: $orcid-dark-primary-text;
+    color: $text-dark-high;
   }
   :host.green .header {
     .notification {
