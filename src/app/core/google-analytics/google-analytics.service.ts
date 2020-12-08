@@ -20,7 +20,7 @@ export class GoogleAnalyticsService {
       page_path: url,
       page_location: window.location.href,
       anonymize_ip: true,
-      sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE ? '100' : '70',
+      sample_rate: '100',
       site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
         ? '100'
         : '1',
