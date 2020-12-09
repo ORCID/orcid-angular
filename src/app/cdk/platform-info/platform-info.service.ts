@@ -176,7 +176,7 @@ export class PlatformInfoService {
       (queryParameters.hasOwnProperty('providerId') &&
         (queryParameters['providerId'] === 'facebook' ||
           queryParameters['providerId'] === 'google')) ||
-      this._router.url.indexOf(ApplicationRoutes.social) >= 0
+      this.window.location.pathname.toLowerCase().indexOf(ApplicationRoutes.social) >= 0
     ) {
       this.platform.social = true
     } else {
