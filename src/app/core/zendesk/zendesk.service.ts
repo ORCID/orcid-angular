@@ -1,10 +1,8 @@
-import { Injectable, Inject } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
+import { PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { ZendeskWidget } from 'src/app/types'
-import { PlatformInfo } from 'src/app/cdk/platform-info'
 import { UserSession } from 'src/app/types/session.local'
-import { timer } from 'rxjs/internal/observable/timer'
-import { map, tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
