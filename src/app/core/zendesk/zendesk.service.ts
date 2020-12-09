@@ -55,8 +55,8 @@ export class ZendeskService {
           suppress: true,
         },
         contactForm: {
-          ticketForms: [{ id: 360003472553 }], // The default ticket form https://orcid.zendesk.com/agent/admin/ticket_forms/edit/360003472553
-
+          // The default ticket form https://orcid.zendesk.com/agent/admin/ticket_forms/edit/360003472553
+          ticketForms: [{ id: 360003472553 }],
           fields: [
             {
               id: 'name',
