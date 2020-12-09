@@ -213,9 +213,10 @@ export class PlatformInfoService {
     this.platform = {
       ...this.platform,
       hasOauthParameters: this.hasOauthParameters(),
-      social: this.window.location.href.toLowerCase().indexOf('social') >= 0,
+      social: this.window.location.pathname.toLowerCase().indexOf('social-linking') >= 0,
       institutional:
-        this.window.location.href.toLowerCase().indexOf('institutional') >= 0,
+        this.window.location.pathname.toLowerCase().indexOf('institutional-linking') >= 0 ||
+        this.window.location.pathname.toLowerCase().indexOf('institutional-signin') >= 0,
     }
     this.platformSubject.next(this.platform)
     return this.platformSubject.asObservable()
