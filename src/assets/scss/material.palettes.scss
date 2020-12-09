@@ -11,9 +11,6 @@ $orcid-light-primary-text: rgba(white, 1);
 $orcid-light-secondary-text: rgba(white, 0.6);
 $orcid-light-disabled-text: rgba(white, 0.38);
 
-$text-dark-mid: rgba(0, 0, 0, 0.6);
-$text-dark-high: rgba(0, 0, 0, 0.9);
-
 $orcid-green: (
   50: #f4f9e5,
   100: #e3f1bf,
@@ -99,6 +96,8 @@ $orcid-red: (
 // EXTRA BACKGROUND AND FOREGROUND COLORS
 // .
 // .
+$text-dark-mid: rgba(0, 0, 0, 0.6);
+$text-dark-high: rgba(0, 0, 0, 0.9);
 
 $brand-primary-lightest: #f5f9e8;
 $ui-background-lightest: #fafafa;
