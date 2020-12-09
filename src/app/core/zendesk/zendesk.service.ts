@@ -87,9 +87,9 @@ export class ZendeskService {
                 '*':
                   errorCode &&
                   `
-_________________ 
+_________________
 The following is an error code for the support staff, please do not delete or modify it.
-Leave your comments above if required. 
+Leave your comments above if required.
 "${errorCode}"`,
               },
             },
