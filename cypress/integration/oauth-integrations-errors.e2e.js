@@ -68,36 +68,36 @@ describe('Oauth integrations errors' + runInfo(), () => {
     cy.hasNoLayout()
     cy.hasZendesk()
   })
-  it('show error screen on LOCKED client id', function () {
+  it('show error screen on DEACTIVATED client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize` +
         oauthUrlBuilder({
-          client_id: environment.lockedApp.id,
+          client_id: environment.deactivatedClientApp.id,
           response_type: 'code',
           scope: `/authenticate openid`,
-          redirect_uri: environment.lockedApp.redirectUrl,
+          redirect_uri: environment.deactivatedClientApp.redirectUrl,
         })
     )
     cy.get('#error-message').contains(
-      `Error: The provided client id ${environment.lockedApp.id} is locked.`
+      `Error: The provided client id ${environment.deactivatedClientApp.id} is locked.`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
     cy.hasNoLayout()
     cy.hasZendesk()
   })
-  it('show error screen on DEACTIVATED client id', function () {
+  it('show error screen on LOCKED member', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize` +
         oauthUrlBuilder({
-          client_id: environment.deactivatedApp.id,
+          client_id: environment.lockedMemberApp.id,
           response_type: 'code',
           scope: `/authenticate openid`,
-          redirect_uri: environment.deactivatedApp.redirectUrl,
+          redirect_uri: environment.lockedMemberApp.redirectUrl,
         })
     )
     cy.get('#error-message').contains(
       `Error: The provided request couldn't be completed because the integration and hence, \
-the client ${environment.deactivatedApp.id} is locked.`
+the client ${environment.lockedMemberApp.id} is locked.`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
     cy.hasNoLayout()

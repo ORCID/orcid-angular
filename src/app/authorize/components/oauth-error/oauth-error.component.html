@@ -60,10 +60,11 @@
         >
           Error: Incorrect OAuth Link, missing client id parameter.
         </div>
-        <!-- LOCKED CLIENT ID!!! -->
+        <!-- LOCKED Member!!! -->
         <div *ngIf="error === 'client_locked'">
-          <ng-container i18n="@@authorize.errorLockedClientID1"
-            >Error: The provided client id</ng-container
+          <ng-container i18n="@@authorize.errorLockedMemberID1"
+            >Error: The provided request couldn't be completed because the
+            integration and hence, the client</ng-container
           >
           <strong>{{ queryParams.client_id }}</strong>
           <ng-container i18n="@@authorize.errorLockedClientID2"
@@ -73,9 +74,8 @@
 
         <!-- Deactivated CLIENT ID!!! -->
         <div *ngIf="error === 'client_deactivated'">
-          <ng-container i18n="@@authorize.errorDeactivatedClientID1"
-            >Error: The provided request couldn't be completed because the
-            integration and hence, the client</ng-container
+          <ng-container i18n="@@authorize.errorLockedClientID1"
+            >Error: The provided client id</ng-container
           >
           <strong>{{ queryParams.client_id }}</strong>
           <ng-container i18n="@@authorize.errorLockedClientID2"
