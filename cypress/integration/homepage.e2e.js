@@ -56,7 +56,7 @@ describe('Homepage' + runInfo(), () => {
         .its('outOfRouterNavigation')
         .should(
           'be.calledWith',
-          environment.infoSiteBaseUrl + '/orcid-community'
+          environment.infoSiteBaseUrl + '/resources'
         )
 
         .get(`.button-wrapper:nth-child(6)`)
