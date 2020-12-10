@@ -54,10 +54,7 @@ describe('Homepage' + runInfo(), () => {
         .click()
         .window()
         .its('outOfRouterNavigation')
-        .should(
-          'be.calledWith',
-          environment.infoSiteBaseUrl + '/resources'
-        )
+        .should('be.calledWith', environment.infoSiteBaseUrl + '/resources')
 
         .get(`.button-wrapper:nth-child(6)`)
         .click()
