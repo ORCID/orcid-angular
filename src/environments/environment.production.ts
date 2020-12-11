@@ -6,8 +6,8 @@ export const environment = {
   API_PUB: '//pub.orcid.org/v3.0',
   API_WEB: '//orcid.org/',
   BASE_URL: '//orcid.org/',
-  BLOG_NEWS: 'https://about-drupal.orcid.org/about/news',
-  INFO_SITE: '//about-drupal.orcid.org/',
+  BLOG_NEWS: 'https://orcid.org/about/news',
+  INFO_SITE: '//orcid.org/',
   INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
     'https://info.orcid.org/',
   SHOW_TEST_WARNING_BANNER: false,
