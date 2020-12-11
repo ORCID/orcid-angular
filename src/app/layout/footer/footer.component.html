@@ -12,7 +12,7 @@
             alt="Twitter"
           />
         </a>
-        <a href="https://orcid.org/blog/feed" class="social">
+        <a href="{{ infoSiteBaseUrl }}blog/feed" class="social">
           <img src="./assets/vectors/glyphicons-social-38-rss.svg" alt="Rss" />
         </a>
         <a href="https://github.com/ORCID" class="social">
@@ -49,6 +49,10 @@
         class="col mat-button-font url-lists"
         [ngClass]="{ 'space-around': !platform.columns12 }"
       >
+        <a class="col s4 l-auto m8" i18n="@@footer.aboutOrcid" href="/about">
+          About ORCID
+        </a>
+
         <a
           class="col s4 l-auto m8"
           i18n="@@footer.privacypolicy"

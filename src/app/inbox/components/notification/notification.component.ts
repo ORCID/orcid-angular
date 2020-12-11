@@ -58,6 +58,7 @@ export class NotificationComponent
   notificationType: uiNotificationType
   platform: PlatformInfo
   public onTouchedFunction
+  displayCheckBox = false
 
   ariaLabelArchived = $localize`:@@inbox.archive:archive`
 
@@ -68,12 +69,15 @@ export class NotificationComponent
   set archived(value) {
     this._archived = value
   }
+  get archived() {
+    return this._archived
+  }
   @Input()
   set read(value) {
     this._read = value
   }
-  get archived() {
-    return this._archived
+  get read() {
+    return this._read
   }
   @Input()
   set notification(notification: InboxNotification) {
@@ -168,10 +172,15 @@ export class NotificationComponent
   }
 
   toggleNotificationContent() {
-    this.showNotificationContent = !this.showNotificationContent
-    this.state = this.showNotificationContent ? 'open' : 'close'
-    if (this.state === 'open') {
-      this._inbox.flagAsRead(this.notification.putCode).subscribe()
+    this.state = !this.showNotificationContent ? 'open' : 'close'
+    if (this.state === 'open' && !this.notification.readDate) {
+      this._inbox
+        .flagAsRead(this.notification.putCode)
+        .subscribe(
+          () => (this.showNotificationContent = !this.showNotificationContent)
+        )
+    } else {
+      this.showNotificationContent = !this.showNotificationContent
     }
   }
 
@@ -191,6 +200,7 @@ export class NotificationComponent
 
   writeValue(obj: any): void {
     if (obj != null && obj !== undefined && obj !== '') {
+      this.displayCheckBox = true
       this.form.setValue({ selected: obj }, { emitEvent: false })
     }
   }
