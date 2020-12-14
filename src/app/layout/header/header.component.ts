@@ -269,7 +269,7 @@ export class HeaderComponent implements OnInit {
   }
 
   preNavigate(route: string) {
-    if (route.indexOf('://')) {
+    if (route.indexOf('://') >= 0) {
       this.navigateTo(route)
     } else if (this.togglzNewInfoSite) {
       this.navigateTo(
