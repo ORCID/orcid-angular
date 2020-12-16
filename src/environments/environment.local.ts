@@ -6,14 +6,14 @@ export const environment = {
   API_PUB: '//pub.dev.orcid.org/v3.0',
   API_WEB: '//dev.orcid.org/',
   BASE_URL: '//dev.orcid.org/',
-  BLOG_NEWS: 'https://localhost:8888/about/news',
+  BLOG_NEWS: 'https://info.orcid.org/',
   INFO_SITE: '//qa.orcid.org/',
   // The following variable is temporal and should only be used for URLs that
   // only exist on the new info site, while transitioning.
   // Having this variable allows to easily switch to the old info site
   // since disabling the togglz 'new info site' will disable all URLs using this variable.
   INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
-    'https://info.qa.orcid.org/',
+    'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
