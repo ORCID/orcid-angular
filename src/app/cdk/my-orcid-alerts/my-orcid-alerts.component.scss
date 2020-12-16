@@ -1,0 +1,14 @@
+mat-toolbar {
+  width: calc(100% - -24px);
+  margin-left: -12px;
+  min-height: 56px;
+
+  mat-toolbar-row {
+    text-align: center;
+
+    p {
+      width: 100%;
+      white-space: pre-wrap;
+    }
+  }
+}

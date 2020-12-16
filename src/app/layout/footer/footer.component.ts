@@ -14,6 +14,7 @@ export class FooterComponent implements OnInit {
   platform
   labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
   togglzNewInfoSite: boolean
+  infoSiteBaseUrl = environment.INFO_SITE
 
   constructor(
     _platformInfo: PlatformInfoService,

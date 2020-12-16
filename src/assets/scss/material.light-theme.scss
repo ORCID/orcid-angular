@@ -43,8 +43,11 @@
     $foreground,
     (
       box-border: $soft-grey,
+      state-notice-light: $state-notice-light,
       state-notice-dark: $state-notice-dark,
       state-notice-darkest: $state-notice-darkest,
+      text-dark-mid: $text-dark-mid,
+      text-dark-high: $text-dark-high,
       visibility-everyone: $visibility-everyone,
       visibility-private: $visibility-private,
       visibility-trusted: $visibility-trusted,
