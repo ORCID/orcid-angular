@@ -1,12 +1,13 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { UserService } from 'src/app/core'
+import { Subject } from 'rxjs'
+import { UserInfo, NameForm, RequestInfoForm } from 'src/app/types'
+import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
-import { NameForm, RequestInfoForm, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
 
 import { ModalCountryComponent } from '../modals/modal-country/modal-country.component'
+import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
 
 @Component({
@@ -33,8 +34,17 @@ export class SideBarComponent implements OnInit, OnDestroy {
     loggedIn: boolean
   }
   @Input() userRecord: UserRecord
+  platform: PlatformInfo
 
-  constructor(private _user: UserService, private _record: RecordService) {}
+  constructor(
+    _platform: PlatformInfoService,
+    private _user: UserService,
+    private _record: RecordService
+  ) {
+    _platform.get().subscribe((data) => {
+      this.platform = data
+    })
+  }
 
   ngOnInit(): void {
     this._user

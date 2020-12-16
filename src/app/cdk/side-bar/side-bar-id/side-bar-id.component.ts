@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core'
 import { Subject } from 'rxjs/internal/Subject'
 import { takeUntil } from 'rxjs/operators'
-import { PlatformInfoService } from '../../platform-info'
+import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { environment } from '../../../../environments/environment'
 
 @Component({
@@ -19,13 +19,17 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
   desktop: boolean
   @Input() id: string
   privateView = true
-  constructor(private _platform: PlatformInfoService) {
-    this._platform
+  platform: PlatformInfo
+
+  constructor(
+    private _platform: PlatformInfoService,
+  ) {
+    _platform
       .get()
       .pipe(takeUntil(this.$destroy))
-      .subscribe((x) => {
-        this.desktop = x.columns12
-      })
+      .subscribe((data) => {
+      this.platform = data
+    })
   }
 
   ngOnInit(): void {}
