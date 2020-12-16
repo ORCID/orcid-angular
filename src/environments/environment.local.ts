@@ -6,7 +6,7 @@ export const environment = {
   API_PUB: '//pub.dev.orcid.org/v3.0',
   API_WEB: '//dev.orcid.org/',
   BASE_URL: '//dev.orcid.org/',
-  BLOG_NEWS: 'https://localhost:8888/about/news',
+  BLOG_NEWS: 'https://info.orcid.org/',
   INFO_SITE: '//qa.orcid.org/',
   // The following variable is temporal and should only be used for URLs that
   // only exist on the new info site, while transitioning.

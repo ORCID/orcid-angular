@@ -6,7 +6,7 @@ export const environment = {
   API_PUB: '//pub.sandbox.orcid.org/v3.0',
   API_WEB: '//sandbox.orcid.org/',
   BASE_URL: '//sandbox.orcid.org/',
-  BLOG_NEWS: 'https://orcid.org/about/news',
+  BLOG_NEWS: 'https://info.orcid.org/',
   INFO_SITE: '//qa.orcid.org/',
   INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
     'https://info.qa.orcid.org/',
