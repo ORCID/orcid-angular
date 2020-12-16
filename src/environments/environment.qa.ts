@@ -9,7 +9,7 @@ export const environment = {
   BLOG_NEWS: 'https://info.orcid.org/',
   INFO_SITE: '//qa.orcid.org/',
   INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
-    'https://info.qa.orcid.org/',
+    'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-17492803-6',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',

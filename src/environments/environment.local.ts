@@ -13,7 +13,7 @@ export const environment = {
   // Having this variable allows to easily switch to the old info site
   // since disabling the togglz 'new info site' will disable all URLs using this variable.
   INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
-    'https://info.qa.orcid.org/',
+    'https://info.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
