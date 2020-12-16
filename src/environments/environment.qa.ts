@@ -6,10 +6,10 @@ export const environment = {
   API_PUB: '//pub.qa.orcid.org/v3.0',
   API_WEB: '//qa.orcid.org/',
   BASE_URL: '//qa.orcid.org/',
-  BLOG_NEWS: 'https://info.orcid.org/',
+  BLOG_NEWS: 'https://info.qa.orcid.org/',
   INFO_SITE: '//qa.orcid.org/',
   INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE:
-    'https://info.orcid.org/',
+    'https://info.qa.orcid.org/',
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-17492803-6',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
