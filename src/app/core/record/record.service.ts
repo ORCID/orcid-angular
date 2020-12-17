@@ -86,7 +86,7 @@ export class RecordService {
 
     return this.recordSubject$.pipe(
       tap((session) =>
-        environment.sessionDebugger ? console.log(session) : null
+        environment.debugger ? console.log(session) : null
       )
     )
   }

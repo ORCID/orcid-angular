@@ -15,6 +15,9 @@ export class GoogleAnalyticsService {
   }
 
   reportPageView(url: string) {
+    if (environment.debugger) {
+      console.info(`GA - Configured ${environment.GOOGLE_ANALYTICS}`)
+    }
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       cookie_flags: 'SameSite=None;Secure',
       page_path: url,
@@ -34,6 +37,9 @@ export class GoogleAnalyticsService {
   reportNavigationEnd(url: string) {
     const duration = this.finishPerformanceMeasurement(url)
     if (duration) {
+      if (environment.debugger) {
+        console.info(`GA - Took ${duration} to load ${url}`)
+      }
       this.gtag('event', 'timing_complete', {
         name: this.removeUrlParameters(url),
         value: Math.round(duration),
@@ -59,17 +65,18 @@ fatal: "${fatal}"
   public reportEvent(
     action: string,
     event_category: string,
-    event_label: RequestInfoForm | string,
-    value?: number
+    event_label: RequestInfoForm | string
   ): Observable<void> {
     // if has RequestInfoForm add the client string as event_label
     if (typeof event_label !== 'string') {
       event_label = 'OAuth ' + this.buildClientString(event_label)
     }
+    if (environment.debugger) {
+      console.info(`GA - Event ${action}/${event_category}/${event_label}/`)
+    }
     return this.eventObservable(action, {
       event_category,
       event_label,
-      value,
     })
   }
 
