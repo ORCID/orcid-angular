@@ -114,5 +114,6 @@ $orcid-custom-typography: (
     font-family: mat-font-family($config, button);
     font-size: mat-font-size($config, caption); // 12pxfont-style: normal;
     letter-spacing: 0.5px;
+    font-weight: normal;
   }
 }

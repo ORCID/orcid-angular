@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
+import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
   selector: 'app-top-bar',
@@ -21,8 +22,14 @@ export class TopBarComponent implements OnInit {
   }
   @Input() userRecord: UserRecord
 
-  constructor() {
+  platform: PlatformInfo
+
+  constructor(
+    private _platform: PlatformInfoService,
+  ) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._platform.get().subscribe((value) => (this.platform = value))
+  }
 }

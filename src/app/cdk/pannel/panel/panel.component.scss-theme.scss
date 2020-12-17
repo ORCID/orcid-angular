@@ -17,7 +17,7 @@
   .header,
   .top-bar {
     border-color: mat-color($background, ui-background);
-    background-color: mat-color($background, ui-background);
+    background-color: mat-color($background, ui-background-lightest);
   }
 
   .body {
