@@ -16,7 +16,7 @@ export class GoogleAnalyticsService {
 
   reportPageView(url: string) {
     if (environment.debugger) {
-      console.info(`GA - Configured ${environment.GOOGLE_ANALYTICS}`)
+      console.info(`GA - Navigation ${url}`)
     }
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       cookie_flags: 'SameSite=None;Secure',
