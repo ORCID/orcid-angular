@@ -107,17 +107,12 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   authorize(value = true) {
     this.loadingAuthorizeEndpoint = true
     this._oauth.authorize(value).subscribe((data) => {
-      let analyticsReports: Observable<void>[] = []
+      const analyticsReports: Observable<void>[] = []
 
       if (value) {
-        // Create a GA event for each scope
-        analyticsReports = data.scopes.map((scope) =>
+        analyticsReports.push(
           this._gtag
-            .reportEvent(
-              `AuthorizeP_${scope.name}`,
-              'RegGrowth',
-              this.oauthRequest
-            )
+            .reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
             .pipe(
               catchError((err) =>
                 this._errorHandler.handleError(
