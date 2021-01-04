@@ -20,6 +20,7 @@ export class OauthErrorComponent implements OnInit {
   errorDescription = ''
   queryParams: OauthParameters
   oauthSession: RequestInfoForm
+  userSession: UserSession
 
   constructor(
     private _userInfo: UserService,
@@ -31,6 +32,7 @@ export class OauthErrorComponent implements OnInit {
       .subscribe(([session, platform]) => {
         session = session as UserSession
         platform = platform as PlatformInfo
+        this.userSession = session
         this.error = session.oauthSession.error
         this.errorDescription = session.oauthSession.errorDescription
         this.queryParams = platform.queryParameters as OauthParameters
@@ -40,6 +42,11 @@ export class OauthErrorComponent implements OnInit {
 
   ngOnInit(): void {
     this._zendesk.show()
+    this._zendesk.autofillTicketForm(
+      this.userSession,
+      'App Oauth URL with issues',
+      this.error + '/' + this.errorDescription
+    )
   }
 
   ngOnDestroy() {
