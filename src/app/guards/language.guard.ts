@@ -38,7 +38,7 @@ export class LanguageGuard implements CanActivateChild {
         // get language context
         langContext = this.getLanguageContext(next.queryParams)
         if (environment.debugger) {
-          console.log('language context', langContext)
+          console.info('language context', langContext)
         }
       }),
       switchMap(() => {
