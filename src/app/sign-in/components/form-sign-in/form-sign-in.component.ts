@@ -140,9 +140,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     this.addUsernameValidation()
-    this.addUsernameValidation()
-    // fix firefox IOS autofill issue
-    this.authorizationForm.markAllAsTouched()
 
     if (this.authorizationForm.valid) {
       this.signInLocal.data = this.authorizationForm.getRawValue()
