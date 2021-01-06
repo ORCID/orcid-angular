@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
 
 import { ApplicationRoutes } from '../constants'
 import { UserService } from '../core'
@@ -25,14 +25,15 @@ export class AuthenticatedGuard implements CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this._userInfo
-      .getUserSession()
-      .pipe(
-        map(
-          (value) =>
-            value.loggedIn ||
-            this._router.createUrlTree([ApplicationRoutes.signin])
-        )
-      )
+    return this._userInfo.getUserSession().pipe(
+      map(
+        (value) =>
+          value.loggedIn ||
+          this._router.createUrlTree([ApplicationRoutes.signin])
+      ),
+      tap((x) => {
+        console.log(x)
+      })
+    )
   }
 }

@@ -3,7 +3,7 @@
 ></app-side-bar-id>
 
 <ng-container *ngIf="!onlyOrcidId">
-  <app-panel *ngIf="userRecord" [elements]="userRecord.otherNames.otherNames">
+  <app-panel *ngIf="userRecord" [elements]="userRecord.otherNames.otherNames" [editModalComponent]="alsoKnowAsModal">
     <h2 header class="orc-font-body" i18n="@@record.alsoKnowAs">
       Also known as
     </h2>
