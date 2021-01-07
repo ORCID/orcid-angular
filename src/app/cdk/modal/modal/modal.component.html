@@ -1,1 +1,20 @@
-<p>modal works!</p>
+<div class="container no-padding">
+  <div class="row">
+    <div class="col s4 l12 no-gutters">
+      <ng-content select="app-modal-header"></ng-content>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s4 l8 no-gutters">
+      <div><ng-content></ng-content></div>
+    </div>
+    <div class="col s4 l4 no-gutters">
+      <ng-content select="app-modal-side-bar"></ng-content>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s4 l12 no-gutters">
+      <ng-content select="app-modal-footer"></ng-content>
+    </div>
+  </div>
+</div>
