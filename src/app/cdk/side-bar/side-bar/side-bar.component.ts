@@ -5,7 +5,7 @@ import { UserInfo, NameForm, RequestInfoForm } from 'src/app/types'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
 import { UserRecord } from 'src/app/types/record.local'
-import { AlsoKnowAsComponent } from '../modals/also-know-as/also-know-as.component'
+import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
 
 @Component({
   selector: 'app-side-bar',
@@ -18,7 +18,7 @@ import { AlsoKnowAsComponent } from '../modals/also-know-as/also-know-as.compone
 export class SideBarComponent implements OnInit, OnDestroy {
   @Input() onlyOrcidId = false
 
-  alsoKnowAsModal = AlsoKnowAsComponent
+  modalEmailComponent = ModalEmailComponent
 
   destroy$: Subject<boolean> = new Subject<boolean>()
   userSession: {

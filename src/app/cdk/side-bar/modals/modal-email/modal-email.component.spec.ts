@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlsoKnowAsComponent } from './also-know-as.component';
+import { ModalEmailComponent } from './modal-email.component';
 
-describe('AlsoKnowAsComponent', () => {
-  let component: AlsoKnowAsComponent;
-  let fixture: ComponentFixture<AlsoKnowAsComponent>;
+describe('ModalEmailComponent', () => {
+  let component: ModalEmailComponent;
+  let fixture: ComponentFixture<ModalEmailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlsoKnowAsComponent ]
+      declarations: [ ModalEmailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AlsoKnowAsComponent);
+    fixture = TestBed.createComponent(ModalEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
