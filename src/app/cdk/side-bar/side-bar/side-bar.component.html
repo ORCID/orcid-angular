@@ -3,7 +3,11 @@
 ></app-side-bar-id>
 
 <ng-container *ngIf="!onlyOrcidId">
-  <app-panel *ngIf="userRecord" [elements]="userRecord.emails.emails" [editModalComponent]="modalEmailComponent">
+  <app-panel
+    *ngIf="userRecord"
+    [elements]="userRecord.emails.emails"
+    [editModalComponent]="modalEmailComponent"
+  >
     <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
     <div body>
       <app-panel-element

@@ -10,7 +10,13 @@ import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [PanelComponent, PanelElementComponent, PanelPrivacyComponent],
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatDialogModule,
+  ],
   exports: [PanelComponent, PanelElementComponent, PanelPrivacyComponent],
 })
 export class PannelModule {}
