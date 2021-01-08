@@ -4,8 +4,8 @@
     Form content
   </app-modal-side-bar>
   <app-modal-footer>
-    <button mat-raised-button color="primary">Save changes</button>
-    <button mat-stroked-button color="primary">Save changes</button>
+    <button mat-raised-button color="primary" (click)="saveEvent()">Save changes</button>
+    <button mat-stroked-button color="primary" (click)="closeEvent()">Cancel</button>
   </app-modal-footer>
 
   <p>

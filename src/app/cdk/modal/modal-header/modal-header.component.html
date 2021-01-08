@@ -1,1 +1,10 @@
-<p>modal-header works!</p>
+<div class="container">
+  <div class="text-container orc-font-heading-small">
+    <ng-content> </ng-content>
+  </div>
+  <button mat-icon-button aria-label="_____">
+    <mat-icon (click)="closeEvent()" class="large-material-icon"
+      >close</mat-icon
+    >
+  </button>
+</div>

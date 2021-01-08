@@ -6,9 +6,9 @@
   </div>
   <div class="row">
     <div class="col s4 l8 no-gutters">
-      <div><ng-content></ng-content></div>
+      <div class="cotainer"><ng-content></ng-content></div>
     </div>
-    <div class="col s4 l4 no-gutters">
+    <div class="col l4 no-gutters" *ngIf="!mobile">
       <ng-content select="app-modal-side-bar"></ng-content>
     </div>
   </div>

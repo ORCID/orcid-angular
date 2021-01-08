@@ -12,4 +12,11 @@ export class ModalEmailComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ModalComponent>) {}
 
   ngOnInit(): void {}
+
+  saveEvent() {
+    this.closeEvent()
+  }
+  closeEvent() {
+    this.dialogRef.close()
+  }
 }
