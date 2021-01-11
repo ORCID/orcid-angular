@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin privacy-selector-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .panel {
+    background-color: map-get($background, light-grey);
+  }
+  ::ng-deep .no-selected svg > g,
+  ::ng-deep .no-selected svg > path {
+    fill: map-get($background, ui-background);
+  }
+  ::ng-deep .panel button {
+    background-color: map-get($foreground, text-light-high);;
+  }
+}
+@include privacy-selector-theme($orcid-app-theme);

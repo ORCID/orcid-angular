@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
+import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
 
 @NgModule({
   declarations: [SideBarComponent, SideBarIdComponent, ModalEmailComponent],
@@ -20,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon'
     MatButtonModule,
     MatInputModule,
     MatIconModule,
+    PrivacySelectorModule
   ],
   exports: [SideBarComponent],
 })

@@ -11,6 +11,7 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 export class ModalEmailComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ModalComponent>) {}
 
+  tempPrivacyState = 'PUBLIC'
   ngOnInit(): void {}
 
   saveEvent() {

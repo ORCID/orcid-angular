@@ -25,9 +25,9 @@
           <input matInput />
         </mat-form-field>
       </div>
-      <div class="col">
-        PRIVACY COMPONENT
-      </div>
+      <app-privacy-selector
+        [(privacy)]="tempPrivacyState"
+      ></app-privacy-selector>
     </div>
 
     <h3 class="row">Other email address</h3>
@@ -38,10 +38,12 @@
         </mat-form-field>
       </div>
       <div class="col">
-        PRIVACY COMPONENT
+        <app-privacy-selector
+          [(privacy)]="tempPrivacyState"
+        ></app-privacy-selector>
       </div>
       <div class="col">
-        DELTE COMPONENT
+        DELETE COMPONENT
       </div>
     </div>
 
