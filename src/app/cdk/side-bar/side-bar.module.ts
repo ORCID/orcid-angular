@@ -7,6 +7,8 @@ import { ModalModule } from '../modal/modal.module'
 import { ModalEmailComponent } from './modals/modal-email/modal-email.component'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
+import { MatInputModule } from '@angular/material/input'
+import { MatIconModule } from '@angular/material/icon'
 
 @NgModule({
   declarations: [SideBarComponent, SideBarIdComponent, ModalEmailComponent],
@@ -16,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button'
     ModalModule,
     MatDialogModule,
     MatButtonModule,
+    MatInputModule,
+    MatIconModule,
   ],
   exports: [SideBarComponent],
 })

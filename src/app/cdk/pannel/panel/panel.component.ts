@@ -19,7 +19,11 @@ export class PanelComponent implements OnInit {
   editable = true
   constructor(private _dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.editModalComponent){
+      this._dialog.open(this.editModalComponent)
+    }
+  }
 
   openModal() {
     console.log('OPEN MODAL')
