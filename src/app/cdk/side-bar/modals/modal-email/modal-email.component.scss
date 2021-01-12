@@ -1,0 +1,20 @@
+.add-more-email {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    margin-inline-end: 8px;
+  }
+}
+
+.email-input-line {
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.actions-wrapper {
+  width: 180px;
+  flex-shrink: 0;
+}

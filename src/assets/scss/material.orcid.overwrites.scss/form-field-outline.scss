@@ -20,3 +20,27 @@
 .mat-form-field-infix {
   border-top: 0.8em solid transparent;
 }
+
+.mat-form-field-appearance-outline.mat-form-field-min {
+  .mat-form-field-wrapper {
+    .mat-form-field-outline {
+      top: 0px;
+    }
+    .mat-form-field-prefix {
+      top: 0.35em;
+
+      mat-icon {
+        margin-inline-end: 8px;
+      }
+    }
+    .mat-form-field-suffix {
+      top: 0px;
+    }
+    .mat-form-field-flex {
+      .mat-form-field-infix {
+        border-top: 0px;
+        padding: 10px 0 10px 0;
+      }
+    }
+  }
+}

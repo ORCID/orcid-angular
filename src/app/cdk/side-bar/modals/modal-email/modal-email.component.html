@@ -10,44 +10,75 @@
     </button>
   </app-modal-footer>
 
-  <p>ORCID works best when you have multiple email addresses.</p>
-  <p>
-    Per the ORCID terms of use you may only add email addresses that you have
-    control over. Each time you add an email address we will send you an email
-    asking you to verify it.
-  </p>
-
   <div class="container">
-    <h3 class="row">Primary email address</h3>
     <div class="row">
       <div class="col">
-        <mat-form-field>
-          <input matInput />
-        </mat-form-field>
+        <p>ORCID works best when you have multiple email addresses.</p>
+        <p>
+          Per the ORCID <a href="/content/orcid-terms-use">terms of use</a> you
+          may only add email addresses that you have control over. Each time you
+          add an email address we will send you an email asking you to verify
+          it.
+        </p>
       </div>
-      <app-privacy-selector
-        [(privacy)]="tempPrivacyState"
-      ></app-privacy-selector>
+    </div>
+    <div class="row">
+      <h3 class="col">Primary email address</h3>
+    </div>
+    <div class="row">
+      <div class="row email-input-line no-wrap">
+        <div class="col l12 m8 s4">
+          <mat-form-field
+            appearance="outline"
+            class="mat-form-field-min"
+            [ngClass]="{ 'email-activated': true }"
+          >
+            <input matInput />
+            <mat-icon matPrefix>verified</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col no-wrap actions-wrapper">
+          <app-privacy-selector
+            [(privacy)]="tempPrivacyState"
+          ></app-privacy-selector>
+        </div>
+      </div>
     </div>
 
-    <h3 class="row">Other email address</h3>
     <div class="row">
-      <div class="col">
-        <mat-form-field>
+      <h3 class="col">Other email address</h3>
+    </div>
+
+    <div class="row email-input-line no-wrap">
+      <div class="col l12 m8 s4">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min"
+          [ngClass]="{ 'email-activated': true }"
+        >
           <input matInput />
+          <mat-icon matPrefix>verified</mat-icon>
+          <a matSuffix class="orc-font-smallprint"> Test</a>
         </mat-form-field>
       </div>
-      <div class="col">
+      <div class="col no-wrap actions-wrapper">
         <app-privacy-selector
           [(privacy)]="tempPrivacyState"
         ></app-privacy-selector>
-      </div>
-      <div class="col">
-        DELETE COMPONENT
+        <button (click)="deleteEmail('this')" mat-icon-button>
+          <mat-icon class="material-icons-outlined large-material-icon"
+            >delete</mat-icon
+          >
+        </button>
       </div>
     </div>
 
-    <a> <mat-icon>add_circle_outline </mat-icon> Add another email address</a>
+    <div class="row">
+      <a class="col add-more-email">
+        <mat-icon class="large-material-icon">add_circle_outline </mat-icon> Add
+        another email address</a
+      >
+    </div>
   </div>
 
   <mat-form-field>

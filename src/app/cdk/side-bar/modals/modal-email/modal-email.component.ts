@@ -6,7 +6,10 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 @Component({
   selector: 'app-modal-email',
   templateUrl: './modal-email.component.html',
-  styleUrls: ['./modal-email.component.scss'],
+  styleUrls: [
+    './modal-email.component.scss-theme.scss',
+    './modal-email.component.scss',
+  ],
 })
 export class ModalEmailComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ModalComponent>) {}
@@ -19,5 +22,9 @@ export class ModalEmailComponent implements OnInit {
   }
   closeEvent() {
     this.dialogRef.close()
+  }
+
+  deleteEmail(email) {
+    console.log(email)
   }
 }
