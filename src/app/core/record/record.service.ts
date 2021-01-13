@@ -11,6 +11,7 @@ import {
   Names,
   Biography,
   Preferences,
+  Assertion,
 } from 'src/app/types'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
@@ -18,6 +19,7 @@ import { retry, catchError, tap, map } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { Address } from 'cluster'
 import { UserRecord } from 'src/app/types/record.local'
+import { RecordEmailsService } from '../record-emails/record-emails.service'
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +30,8 @@ export class RecordService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordEmailsService: RecordEmailsService
   ) {}
 
   headers = new HttpHeaders({
@@ -42,7 +45,7 @@ export class RecordService {
 
       combineLatest([
         this.getPerson(id),
-        this.getEmails(),
+        this._recordEmailsService.getEmails(),
         this.getOtherNames(),
         this.getAddresses(),
         this.getKeywords(),
@@ -109,28 +112,6 @@ export class RecordService {
             })
           }
         })
-      )
-  }
-
-  getEmails(): Observable<Emails> {
-    return this._http
-      .get<Emails>(environment.API_WEB + `account/emails.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postEmails(otherNames: Emails): Observable<Emails> {
-    return this._http
-      .post<Emails>(environment.API_WEB + `account/emails.json`, otherNames, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
