@@ -84,7 +84,7 @@ const routes: Routes = [
       import('./search/search.module').then((m) => m.SearchModule),
   },
   {
-    path: ApplicationRoutes.myOrcid,
+    path: ApplicationRoutes.myOrcidTEMP,
     canActivateChild: [LanguageGuard, AuthenticatedGuard],
     loadChildren: () =>
       import('./record/record.module').then((m) => m.RecordModule),
