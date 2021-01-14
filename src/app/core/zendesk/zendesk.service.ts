@@ -45,9 +45,14 @@ export class ZendeskService {
    * @param errorCode error code to add more context for the support staff
    */
   autofillTicketForm(user?: UserSession, subject?: string, errorCode?: string) {
-    console.log((<any>this._window).zESettings)
-
-    console.log('try to load setting')
+    let uri = '';
+    let uriMatch = this._window.location.href.match(/(?<=redirect_uri=)(.*?)(?=orcidapi)/g)
+    if (!uriMatch) {
+      uriMatch = this._window.location.href.match(/(?<=redirect_uri=)(.*?)/g)
+    }
+    if (uriMatch) {
+      uri = uriMatch[0]
+    }
 
     this.zE('webWidget', 'updateSettings', {
       webWidget: {
@@ -55,8 +60,11 @@ export class ZendeskService {
           suppress: true,
         },
         contactForm: {
-          // The default ticket form https://orcid.zendesk.com/agent/admin/ticket_forms/edit/360003472553
-          ticketForms: [{ id: 360003472553 }],
+          /**
+           * The "Other system" form is used to simplify subsequent reports https://orcid.zendesk.com/agent/admin/ticket_forms/edit/360003482054
+           * If we're plannimg to autofill tickets for users from different places, not just the oauth screen, then we should pass the ticket form id as a param
+           */ 
+          ticketForms: [{ id: 360003482054 }],
           fields: [
             {
               id: 'name',
@@ -80,7 +88,7 @@ export class ZendeskService {
               },
             },
             { id: 'subject', prefill: { '*': subject || '' } },
-
+			      { id: '360039623413', prefill: { '*': uri  || '' } },
             {
               id: 'description',
               prefill: {
