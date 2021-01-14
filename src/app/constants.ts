@@ -1,3 +1,6 @@
+import { ɵConsole } from '@angular/core'
+import { UrlMatcher, UrlMatchResult, UrlSegment } from '@angular/router'
+
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
 // Custom email REGEXP
@@ -21,7 +24,8 @@ export const HAS_NUMBER = /(?=.*[0-9]).*/
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 
 export const ApplicationRoutes = {
-  myOrcid: 'qa/my-orcid',
+  myOrcid: 'my-orcid',
+  myOrcidTEMP: 'qa/my-orcid',
   twoFactor: '2fa-signin',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
@@ -105,4 +109,27 @@ export function objectToUrlParameters(object: Object) {
   return Object.keys(object)
     .map((key) => `${key}=${encodeURIComponent(object[key])}`)
     .join('&')
+}
+
+export function routerPublicPageUrl(segments: UrlSegment[]) {
+  if (
+    (segments[0] && isValidOrcidFormat(segments[0].path)) ||
+    (segments[0] && segments[0].path.toLowerCase() === URL_PRIVATE_PROFILE)
+  ) {
+    return { consumed: [segments[0]] }
+  }
+  return {
+    consumed: [],
+  }
+}
+
+export function routerThirdPartySigninMatch(
+  segments: UrlSegment[]
+): UrlMatchResult {
+  if (
+    (segments[1] && segments[1].path.match(/third-party-signin-completed/)) ||
+    (segments[2] && segments[2].path.match(/third-party-signin-completed/))
+  ) {
+    return { consumed: segments }
+  }
 }

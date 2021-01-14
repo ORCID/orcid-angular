@@ -2,7 +2,7 @@ import { EnvironmentBannerModule } from 'src/app/environment-banner/environment-
 
 export const environment = {
   production: true,
-  sessionDebugger: true,
+  debugger: true,
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_NEWS_DEPRECATED: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.localhost/v3.0',
@@ -12,6 +12,7 @@ export const environment = {
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+  HOTJAR_ANALYTICS: 'hjid:0000000',
   ZENDESK: null,
   SHOW_TEST_WARNING_BANNER: true,
   INSTITUTIONAL_AUTOCOMPLETE_DISPLAY_AMOUNT: 20,
