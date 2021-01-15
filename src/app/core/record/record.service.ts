@@ -1,24 +1,23 @@
-import { Injectable } from '@angular/core'
-import { Observable, combineLatest, ReplaySubject, of } from 'rxjs'
-import {
-  Person,
-  Emails,
-  OtherNames,
-  Countries,
-  Keywords,
-  Website,
-  ExternalIdentifier,
-  Names,
-  Biography,
-  Preferences,
-  Assertion,
-} from 'src/app/types'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from 'src/environments/environment'
-import { retry, catchError, tap, map } from 'rxjs/operators'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Address } from 'cluster'
+import { Injectable } from '@angular/core'
+import { combineLatest, Observable, ReplaySubject } from 'rxjs'
+import { catchError, retry, tap } from 'rxjs/operators'
+import {
+  Biography,
+  Countries,
+  EmailsEndpoint,
+  ExternalIdentifier,
+  Keywords,
+  Names,
+  OtherNames,
+  Person,
+  Preferences,
+  Website,
+} from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
+import { environment } from 'src/environments/environment'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordEmailsService } from '../record-emails/record-emails.service'
 
 @Injectable({
@@ -71,7 +70,7 @@ export class RecordService {
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
-                emails: emails as Emails,
+                emails: emails as EmailsEndpoint,
                 otherNames: otherNames as OtherNames,
                 countries: countries as Countries,
                 keyword: keyword as Keywords,

@@ -8,10 +8,10 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
-import { first, last, map, tap, timeout } from 'rxjs/operators'
+import { first, tap } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { Assertion, Emails, EmailsEndpoint } from 'src/app/types'
+import { Assertion, EmailsEndpoint } from 'src/app/types'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
@@ -93,6 +93,6 @@ export class ModalEmailComponent implements OnInit {
   }
 
   formToBackendJson(fromGroup: FormGroup) {
-    console.log(fromGroup.getRawValue())
+    // this._recordEmails.postEmails(this.backendJson)
   }
 }

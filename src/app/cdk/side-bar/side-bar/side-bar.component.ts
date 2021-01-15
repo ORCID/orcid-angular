@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core'
-import { UserService } from 'src/app/core'
-import { Observable, Subject } from 'rxjs'
-import { UserInfo, NameForm, RequestInfoForm } from 'src/app/types'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
+import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
+import { NameForm, RequestInfoForm, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
+
 import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
 
 @Component({
