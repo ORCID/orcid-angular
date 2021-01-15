@@ -59,11 +59,11 @@ export class ZendeskService {
         },
         contactForm: {
           /**
-           * "Other system" form 
+           * "Other system" form
            * https://orcid.zendesk.com/agent/admin/ticket_forms/edit/360003482054
-           * If we're planning to autofill tickets for users from different places, 
+           * If we're planning to autofill tickets for users from different places,
            * not just the oauth screen, then we should pass the ticket form id as a param
-           */ 
+           */
           ticketForms: [{ id: 360003482054 }],
           fields: [
             {
@@ -88,7 +88,7 @@ export class ZendeskService {
               },
             },
             { id: 'subject', prefill: { '*': subject || '' } },
-            { id: '360039623413', prefill: { '*': uri  || '' } },
+            { id: '360039623413', prefill: { '*': uri || '' } },
             {
               id: 'description',
               prefill: {
