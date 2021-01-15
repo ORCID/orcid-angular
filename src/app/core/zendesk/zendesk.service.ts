@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core'
 import { PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
+import { REDIRECT_URI_REGEXP } from 'src/app/constants'
 import { ZendeskWidget } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
 
@@ -46,10 +47,7 @@ export class ZendeskService {
    */
   autofillTicketForm(user?: UserSession, subject?: string, errorCode?: string) {
     let uri = '';
-    let uriMatch = this._window.location.href.match(/(?<=redirect_uri=)(.*?)(?=orcidapi)/g)
-    if (!uriMatch) {
-      uriMatch = this._window.location.href.match(/(?<=redirect_uri=)(.*?)/g)
-    }
+    let uriMatch = this._window.location.href.match(REDIRECT_URI_REGEXP);
     if (uriMatch) {
       uri = uriMatch[0]
     }
