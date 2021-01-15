@@ -66,7 +66,7 @@ export class RecordEmailsService {
       )
   }
 
-  veryEmail(email: String): Observable<Emails> {
+  verifyEmail(email: String): Observable<Emails> {
     return this._http
       .get<ErrorsListResponse>(
         environment.API_WEB + `account/verifyEmail.json?email=${email}`,

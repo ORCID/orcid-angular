@@ -8,10 +8,10 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
-import { map, tap, timeout } from 'rxjs/operators'
+import { first, last, map, tap, timeout } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { Assertion } from 'src/app/types'
+import { Assertion, Emails, EmailsEndpoint } from 'src/app/types'
 import { OrcidValidators } from 'src/app/validators'
 
 @Component({
@@ -26,20 +26,24 @@ export class ModalEmailComponent implements OnInit {
   emailsForm: FormGroup = new FormGroup({})
   emails: Assertion[]
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
+  backendJson: Object
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     public _recordEmails: RecordEmailsService,
     private _changeDetectorRef: ChangeDetectorRef
   ) {
-    this._recordEmails.getEmails().pipe(
-      map((value) => value.emails),
-      tap((emails) => {
-        emails.forEach((email) => {
-          this.addFormInput(email)
-        })
-      })
-    )
+    this._recordEmails
+      .getEmails()
+      .pipe(
+        tap((value) => {
+          this.backendJson = value
+          this.backendJsonToForm(value)
+          this.emails = value.emails
+        }),
+        first()
+      )
+      .subscribe()
   }
 
   tempPrivacyState = 'PUBLIC'
@@ -55,7 +59,7 @@ export class ModalEmailComponent implements OnInit {
   deleteEmail(email) {
     console.log(email)
   }
-  addFormInput(email, focusAfter = false) {
+  addFormInput(email, focusAfter = true) {
     const controlName = email || 'new'
     this.emailsForm.addControl(
       controlName,
@@ -68,5 +72,27 @@ export class ModalEmailComponent implements OnInit {
       const input = this.inputs.last.nativeElement as HTMLInputElement
       input.focus()
     }
+  }
+
+  backendJsonToForm(emailEndpointJson: EmailsEndpoint) {
+    const emails = emailEndpointJson.emails
+    let group: { [key: string]: FormGroup } = {}
+
+    emails.forEach((email) => {
+      group[email.value] = new FormGroup({
+        email: new FormControl(email.value, {
+          validators: [OrcidValidators.email],
+        }),
+        visibility: new FormControl(email.visibility, {}),
+      })
+      group[email.value].valueChanges.subscribe((value) => {
+        console.log(value)
+      })
+    })
+    this.emailsForm = new FormGroup(group)
+  }
+
+  formToBackendJson(fromGroup: FormGroup) {
+    console.log(fromGroup.getRawValue())
   }
 }

@@ -1,8 +1,8 @@
 <div class="panel">
   <button
     mat-icon-button
-    (click)="private()"
-    [ngClass]="{ 'no-selected': privacy !== 'PRIVATE' }"
+    (click)="public()"
+    [ngClass]="{ 'no-selected': privacy !== 'PUBLIC' }"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -44,8 +44,8 @@
   </button>
   <button
     mat-icon-button
-    (click)="public()"
-    [ngClass]="{ 'no-selected': privacy !== 'PUBLIC' }"
+    (click)="private()"
+    [ngClass]="{ 'no-selected': privacy !== 'PRIVATE' }"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

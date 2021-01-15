@@ -28,20 +28,24 @@
 
     <div class="row">
       <ng-container *ngFor="let email of emails">
-        <div *ngIf="email.primary" class="row email-input-line no-wrap">
+        <div
+          *ngIf="email.primary"
+          class="row email-input-line no-wrap"
+          [formGroupName]="email.value"
+        >
           <div class="col l12 m8 s4">
             <mat-form-field
               appearance="outline"
               class="mat-form-field-min"
               [ngClass]="{ 'email-activated': true }"
             >
-              <input #emailInput matInput />
+              <input #emailInput matInput formControlName="email" />
               <mat-icon matPrefix>verified</mat-icon>
             </mat-form-field>
           </div>
           <div class="col no-wrap actions-wrapper">
             <app-privacy-selector
-              [(privacy)]="tempPrivacyState"
+              formControlName="visibility"
             ></app-privacy-selector>
           </div>
         </div>
@@ -52,22 +56,26 @@
       <h3 class="col">Other email address</h3>
     </div>
 
-    <ng-container *ngFor="let email of $emails | async">
-      <div *ngIf="!email.primary" class="row email-input-line no-wrap">
+    <ng-container *ngFor="let email of emails">
+      <div
+        *ngIf="!email.primary"
+        class="row email-input-line no-wrap"
+        [formGroupName]="email.value"
+      >
         <div class="col l12 m8 s4">
           <mat-form-field
             appearance="outline"
             class="mat-form-field-min"
             [ngClass]="{ 'email-activated': true }"
           >
-            <input #emailInput matInput />
+            <input #emailInput matInput formControlName="email" />
             <mat-icon matPrefix>verified</mat-icon>
             <a matSuffix class="orc-font-smallprint"> Test</a>
           </mat-form-field>
         </div>
         <div class="col no-wrap actions-wrapper">
           <app-privacy-selector
-            [(privacy)]="tempPrivacyState"
+            formControlName="visibility"
           ></app-privacy-selector>
           <button (click)="deleteEmail('this')" mat-icon-button>
             <mat-icon class="material-icons-outlined large-material-icon"
