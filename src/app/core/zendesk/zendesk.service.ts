@@ -46,8 +46,8 @@ export class ZendeskService {
    * @param errorCode error code to add more context for the support staff
    */
   autofillTicketForm(user?: UserSession, subject?: string, errorCode?: string) {
-    let uri = '';
-    let uriMatch = this._window.location.href.match(REDIRECT_URI_REGEXP);
+    let uri = ''
+    const uriMatch = this._window.location.href.match(REDIRECT_URI_REGEXP)
     if (uriMatch) {
       uri = uriMatch[0]
     }
