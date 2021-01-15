@@ -24,7 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     MatIconModule,
     PrivacySelectorModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [SideBarComponent],
 })

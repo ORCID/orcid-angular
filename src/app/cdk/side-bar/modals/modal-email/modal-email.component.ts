@@ -76,7 +76,7 @@ export class ModalEmailComponent implements OnInit {
 
   backendJsonToForm(emailEndpointJson: EmailsEndpoint) {
     const emails = emailEndpointJson.emails
-    let group: { [key: string]: FormGroup } = {}
+    const group: { [key: string]: FormGroup } = {}
 
     emails.forEach((email) => {
       group[email.value] = new FormGroup({

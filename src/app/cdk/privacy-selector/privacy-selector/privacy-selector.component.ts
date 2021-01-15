@@ -53,7 +53,6 @@ export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
     this.privacy = 'PRIVATE'
     this.onChange(this.privacy)
     this.onTouched(this.privacy)
-    
   }
   limited() {
     this.privacy = 'LIMITED'

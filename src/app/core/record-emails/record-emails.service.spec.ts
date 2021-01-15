@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { RecordEmailsService } from './record-emails.service';
+import { RecordEmailsService } from './record-emails.service'
 
 describe('RecordEmailsService', () => {
-  let service: RecordEmailsService;
+  let service: RecordEmailsService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RecordEmailsService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(RecordEmailsService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})

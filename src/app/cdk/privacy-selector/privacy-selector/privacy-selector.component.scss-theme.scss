@@ -15,7 +15,7 @@
     fill: map-get($background, ui-background);
   }
   ::ng-deep .panel button {
-    background-color: map-get($foreground, text-light-high);;
+    background-color: map-get($foreground, text-light-high);
   }
 }
 @include privacy-selector-theme($orcid-app-theme);
