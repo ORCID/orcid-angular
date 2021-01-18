@@ -10,10 +10,11 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalCountryComponent } from './modals/modal-country/modal-country.component'
 
 @NgModule({
-  declarations: [SideBarComponent, SideBarIdComponent, ModalEmailComponent],
+  declarations: [SideBarComponent, SideBarIdComponent, ModalEmailComponent, ModalCountryComponent],
   imports: [
     CommonModule,
     PannelModule,

@@ -1,0 +1,98 @@
+<app-modal>
+  <app-modal-header>Emails</app-modal-header>
+  <app-modal-side-bar> Form content </app-modal-side-bar>
+  <app-modal-footer>
+    <button mat-raised-button color="primary" (click)="saveEvent()">
+      Save changes
+    </button>
+    <button mat-stroked-button color="primary" (click)="closeEvent()">
+      Cancel
+    </button>
+  </app-modal-footer>
+
+  <div class="container" [formGroup]="countryForm">
+    <div class="row">
+      <div class="col">
+        <p>
+          Add countries to your ORCID record to highlight where you conduct your
+          research or where your research is focused. You can add as many
+          countries as you want.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="col">My countries</h3>
+    </div>
+
+    <div class="row">
+      <ng-container *ngFor="let email of emails">
+        <div
+          *ngIf="email.primary"
+          class="row email-input-line no-wrap"
+          [formGroupName]="email.value"
+        >
+          <div class="col l12 m8 s4">
+            <mat-form-field
+              appearance="outline"
+              class="mat-form-field-min"
+              [ngClass]="{ 'email-activated': true }"
+            >
+              <input #emailInput matInput formControlName="email" />
+              <mat-icon matPrefix>verified</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="col no-wrap actions-wrapper">
+            <app-privacy-selector
+              formControlName="visibility"
+            ></app-privacy-selector>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="row">
+      <h3 class="col">Other email address</h3>
+    </div>
+
+    <ng-container *ngFor="let email of emails">
+      <div
+        *ngIf="!email.primary"
+        class="row email-input-line no-wrap"
+        [formGroupName]="email.value"
+      >
+        <div class="col l12 m8 s4">
+          <mat-form-field
+            appearance="outline"
+            class="mat-form-field-min"
+            [ngClass]="{ 'email-activated': true }"
+          >
+            <input #emailInput matInput formControlName="email" />
+            <mat-icon matPrefix>verified</mat-icon>
+            <a matSuffix class="orc-font-smallprint"> Test</a>
+          </mat-form-field>
+        </div>
+        <div class="col no-wrap actions-wrapper">
+          <app-privacy-selector
+            formControlName="visibility"
+          ></app-privacy-selector>
+          <button (click)="deleteEmail('this')" mat-icon-button>
+            <mat-icon class="material-icons-outlined large-material-icon"
+              >delete</mat-icon
+            >
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="row">
+      <a class="col add-more-email">
+        <mat-icon class="large-material-icon">add_circle_outline </mat-icon> Add
+        another email address</a
+      >
+    </div>
+  </div>
+
+  <mat-form-field>
+    <input matInput />
+  </mat-form-field>
+</app-modal>

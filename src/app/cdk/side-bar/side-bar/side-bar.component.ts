@@ -5,7 +5,7 @@ import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import { NameForm, RequestInfoForm, UserInfo } from 'src/app/types'
 import { UserRecord } from 'src/app/types/record.local'
-
+import { ModalCountryComponent } from '../modals/modal-country/modal-country.component'
 import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
 
 @Component({
@@ -20,6 +20,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   @Input() onlyOrcidId = false
 
   modalEmailComponent = ModalEmailComponent
+  modalCountryComponent = ModalCountryComponent
 
   destroy$: Subject<boolean> = new Subject<boolean>()
   userSession: {

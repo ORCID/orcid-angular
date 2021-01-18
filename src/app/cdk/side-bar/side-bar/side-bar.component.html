@@ -19,7 +19,11 @@
     </div>
   </app-panel>
 
-  <app-panel *ngIf="userRecord" [elements]="userRecord.website.websites">
+  <app-panel
+    *ngIf="userRecord"
+    [elements]="userRecord.website.websites"
+    [editModalComponent]="modalCountryComponent"
+  >
     <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
       Website and social links
     </h2>
