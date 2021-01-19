@@ -3,20 +3,11 @@
 ></app-side-bar-id>
 
 <ng-container *ngIf="!onlyOrcidId">
-  <app-panel *ngIf="userRecord" [elements]="userRecord.otherNames.otherNames">
-    <h2 header class="orc-font-body" i18n="@@record.alsoKnowAs">
-      Also known as
-    </h2>
-    <div body>
-      <app-panel-element
-        *ngFor="let otherNames of userRecord.otherNames.otherNames"
-        [visibility]="otherNames.visibility.visibility"
-        >{{ otherNames.content }}</app-panel-element
-      >
-    </div>
-  </app-panel>
-
-  <app-panel *ngIf="userRecord" [elements]="userRecord.emails.emails">
+  <app-panel
+    *ngIf="userRecord"
+    [elements]="userRecord.emails.emails"
+    [editModalComponent]="modalEmailComponent"
+  >
     <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
     <div body>
       <app-panel-element
