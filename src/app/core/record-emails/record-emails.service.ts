@@ -21,11 +21,11 @@ export class RecordEmailsService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}
-  getEmails(): Observable<EmailsEndpoint> {
-    if (this.$emailsSubject) {
-      return this.$emailsSubject
-    } else {
+  getEmails(forceReload = false): Observable<EmailsEndpoint> {
+    if (!this.$emailsSubject) {
       this.$emailsSubject = new ReplaySubject<EmailsEndpoint>(1)
+    } else if (!forceReload) {
+      return this.$emailsSubject
     }
 
     this._http

@@ -63,12 +63,6 @@ export interface OtherNames {
   visibility: Visibility
 }
 
-export interface Countries {
-  errors: string[]
-  addresses: Assertion[]
-  visibility: Visibility
-}
-
 export interface Keywords {
   errors: any[]
   keywords: Assertion[]
@@ -105,7 +99,7 @@ export interface Assertion {
   primary: boolean
   current: boolean
   verified: boolean
-  visibility: Visibility | VisibilityStrings
+  visibility: VisibilityStrings
   source: string
   putCode?: string
   createdDate?: MonthDayYearDate

@@ -1,6 +1,6 @@
 import {
   Biography,
-  Countries,
+  CountriesEndpoint,
   EmailsEndpoint,
   ExternalIdentifier,
   Keywords,
@@ -15,7 +15,7 @@ export interface UserRecord {
   person: Person
   emails: EmailsEndpoint
   otherNames: OtherNames
-  countries: Countries
+  countries: CountriesEndpoint
   keyword: Keywords
   website: Website
   externalIdentifier: ExternalIdentifier

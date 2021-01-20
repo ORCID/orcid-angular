@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion } from '../../../types'
 import { ModalComponent } from '../../modal/modal/modal.component'
+import { ModalCountryComponent } from '../../side-bar/modals/modal-country/modal-country.component'
 
 @Component({
   selector: 'app-panel',
@@ -19,7 +20,11 @@ export class PanelComponent implements OnInit {
   editable = true
   constructor(private _dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.editModalComponent == ModalCountryComponent) {
+      this._dialog.open(this.editModalComponent)
+    }
+  }
 
   openModal() {
     if (this.editModalComponent) {

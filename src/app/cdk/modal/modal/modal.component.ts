@@ -16,7 +16,6 @@ export class ModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dialogRef.disableClose = true
     this._platform
       .get()
       .pipe(first())
@@ -24,4 +23,5 @@ export class ModalComponent implements OnInit {
         this.mobile = platform.handset
       })
   }
+  
 }

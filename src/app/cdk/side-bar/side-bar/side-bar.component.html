@@ -19,11 +19,7 @@
     </div>
   </app-panel>
 
-  <app-panel
-    *ngIf="userRecord"
-    [elements]="userRecord.website.websites"
-    [editModalComponent]="modalCountryComponent"
-  >
+  <app-panel *ngIf="userRecord" [elements]="userRecord.website.websites">
     <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
       Website and social links
     </h2>
@@ -76,7 +72,11 @@
     </div>
   </app-panel>
 
-  <app-panel *ngIf="userRecord" [elements]="userRecord.countries.addresses">
+  <app-panel
+    *ngIf="userRecord"
+    [elements]="userRecord.countries.addresses"
+    [editModalComponent]="modalCountryComponent"
+  >
     <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
     <div body>
       <app-panel-element
