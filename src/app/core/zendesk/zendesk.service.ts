@@ -49,7 +49,7 @@ export class ZendeskService {
     let uri = ''
     const uriMatch = this._window.location.href.match(REDIRECT_URI_REGEXP)
     if (uriMatch) {
-      uri = uriMatch[0]
+      uri = decodeURIComponent(uriMatch[0])
     }
 
     this.zE('webWidget', 'updateSettings', {
