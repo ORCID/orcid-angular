@@ -422,7 +422,7 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
       'notification_delegate',
       'notification_digest',
       'notification_share',
-      'messages'
+      'messages',
     ]
   }
 }
