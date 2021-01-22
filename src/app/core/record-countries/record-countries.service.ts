@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { retry, catchError, tap } from 'rxjs/operators'
+import { retry, catchError, tap, map } from 'rxjs/operators'
 import {
   CountriesEndpoint,
   RecordCountryCodesEndpoint,
@@ -65,6 +65,9 @@ export class RecordCountriesService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap((value) => {
+          this.reverseSort(value)
+        }),
+        tap((value) => {
           this.$addresses.next(value)
         })
       )
@@ -83,7 +86,12 @@ export class RecordCountriesService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap((value) => this.$addresses.next(value))
+        tap(() => this.getAddresses(true))
       )
+  }
+
+  private reverseSort(value: CountriesEndpoint) {
+    value.addresses.sort((a, b) => a.displayIndex - b.displayIndex)
+    value.addresses.reverse()
   }
 }

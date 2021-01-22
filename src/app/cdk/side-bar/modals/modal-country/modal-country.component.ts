@@ -28,32 +28,39 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   addedEmailsCount = 0
   countryForm: FormGroup
   countries: Address[]
+  countriesMap: { [key: string]: Address }
   countryCodes: { key: string; value: string }[]
   originalCountryCodes: RecordCountryCodesEndpoint
   originalBackendCountries: CountriesEndpoint
 
   ngOnInit(): void {
-    console.log ('INIT!')
+    console.log('INIT!')
     this._recordCountryService
       .getAddresses()
       .pipe(first())
       .subscribe((countries: CountriesEndpoint) => {
         this.originalBackendCountries = cloneDeep(countries)
         this.countries = this.originalBackendCountries.addresses
+        this.countriesMap = {}
+        this.originalBackendCountries.addresses.map(
+          (value) => (this.countriesMap[value.putCode] = value)
+        )
+
         this.backendJsonToForm(this.originalBackendCountries)
       })
-    this._recordCountryService.getCountryCodes().pipe(first()).subscribe((codes) => {
-      this.originalCountryCodes = codes
-      this.countryCodes = Object.entries(codes).map((keyValue) => {
-        return { key: keyValue[0], value: keyValue[1] }
+    this._recordCountryService
+      .getCountryCodes()
+      .pipe(first())
+      .subscribe((codes) => {
+        this.originalCountryCodes = codes
+        this.countryCodes = Object.entries(codes).map((keyValue) => {
+          return { key: keyValue[0], value: keyValue[1] }
+        })
       })
-    })
   }
   ngOnDestroy(): void {
-    console.log('DESTROY!');
-    
+    console.log('DESTROY!')
   }
-
 
   backendJsonToForm(emailEndpointJson: CountriesEndpoint) {
     const countries = emailEndpointJson.addresses
@@ -79,8 +86,11 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       addresses: [],
       visibility: this.originalBackendCountries.visibility,
     }
+    this.countries.reverse()
     this.countries
       .map((value) => value.putCode)
+      // Clear empty inputs
+      .filter((key) => countryForm.value[key].country)
       .forEach((key, i) => {
         const countryName = countryForm.value[key].country
         const visibility = countryForm.value[key].visibility
@@ -98,7 +108,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
           } as Address)
         }
       })
-
     return countries
 
     //  const i = this.countries.findIndex((value) => value.putCode === putcode)
@@ -138,5 +147,24 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     const i = this.countries.findIndex((value) => value.putCode === putcode)
     this.countries.splice(i, 1)
     this.countryForm.removeControl(putcode)
+  }
+
+  getSourceName(address: Address) {
+    return address.sourceName || address.source
+  }
+
+  getDate(address: Address) {
+    const x = address.createdDate
+    const date = new Date()
+    if (x.year) {
+      date.setFullYear(Number.parseInt(x.year, 10))
+    }
+    if (x.month) {
+      date.setMonth(Number.parseInt(x.month, 10))
+    }
+    if (x.day) {
+      date.setDate(Number.parseInt(x.day, 10))
+    }
+    return date
   }
 }

@@ -198,6 +198,9 @@ $gutter-width: 12px !default;
   .col.baseline {
     align-items: baseline;
   }
+  .col.top {
+    align-items: flex-start;
+  }
   .col.horizontal-center {
     justify-content: center;
   }
