@@ -48,8 +48,8 @@ export class ZendeskService {
   autofillTicketForm(user?: UserSession, subject?: string, errorCode?: string) {
     let uri = ''
     const uriMatch = this._window.location.href.match(REDIRECT_URI_REGEXP)
-    if (uriMatch) {
-      uri = decodeURIComponent(uriMatch[0])
+    if (uriMatch && uriMatch[0] && uriMatch[0].indexOf('redirect_uri=') === 0) {
+      uri = decodeURIComponent(uriMatch[0].split('redirect_uri=')[1])
     }
 
     this.zE('webWidget', 'updateSettings', {
