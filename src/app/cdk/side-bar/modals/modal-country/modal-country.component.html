@@ -53,7 +53,7 @@
                 {{ countryCode.key }}
               </mat-option>
             </mat-select>
-            <mat-hint>
+            <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
               Source: {{ getSourceName(countriesMap[country.putCode]) }},
               Created: {{ getDate(countriesMap[country.putCode]) | date }}
             </mat-hint>
