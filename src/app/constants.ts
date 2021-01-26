@@ -22,7 +22,7 @@ export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 export const HAS_NUMBER = /(?=.*[0-9]).*/
 // https://regex101.com/r/NNIuKQ/1
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
-// https://regex101.com/r/HqpnrM/1 strips params for OJS links
+// https://regex101.com/r/gznzc6/1 strips params for OJS links
 export const REDIRECT_URI_REGEXP = /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
 
 export const ApplicationRoutes = {
