@@ -51,4 +51,5 @@
 @include mat-divider-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/divider.scss';
 @include mat-button-theme-overwrites($orcid-app-theme);
+@import './material.orcid.overwrites.scss/cdk-drag-drop.scss';
 @import './orcid/urls.scss';
