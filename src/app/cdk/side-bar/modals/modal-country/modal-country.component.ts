@@ -11,6 +11,7 @@ import {
 } from 'src/app/types/record-country.endpoint'
 import { cloneDeep } from 'lodash'
 import { first } from 'rxjs/operators'
+import { VisibilityStrings } from 'src/app/types/common.endpoint'
 @Component({
   selector: 'app-modal-country',
   templateUrl: './modal-country.component.html',
@@ -32,13 +33,14 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   countryCodes: { key: string; value: string }[]
   originalCountryCodes: RecordCountryCodesEndpoint
   originalBackendCountries: CountriesEndpoint
+  defaultVisibility: VisibilityStrings
 
   ngOnInit(): void {
-    console.log('INIT!')
     this._recordCountryService
       .getAddresses()
       .pipe(first())
       .subscribe((countries: CountriesEndpoint) => {
+        this.defaultVisibility = countries.visibility.visibility
         this.originalBackendCountries = cloneDeep(countries)
         this.countries = this.originalBackendCountries.addresses
         this.countriesMap = {}
@@ -71,12 +73,8 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
         country: new FormControl(country.countryName),
         visibility: new FormControl(country.visibility.visibility, {}),
       })
-      group[country.putCode].valueChanges.subscribe((value) => {
-        console.log(value)
-      })
     })
     this.countryForm = new FormGroup(group)
-    this.countryForm.valueChanges.subscribe((value) => console.log(value))
     console.log(group)
   }
 
@@ -134,12 +132,12 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       'new-' + this.addedEmailsCount,
       new FormGroup({
         country: new FormControl(),
-        visibility: new FormControl('PRIVATE', {}),
+        visibility: new FormControl(this.defaultVisibility, {}),
       })
     )
     this.countries.push({
       putCode: 'new-' + this.addedEmailsCount,
-      visibility: { visibility: 'PRIVATE' },
+      visibility: { visibility: this.defaultVisibility },
     } as Address)
     this.addedEmailsCount++
   }

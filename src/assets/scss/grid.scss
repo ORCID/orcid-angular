@@ -245,7 +245,6 @@ $gutter-width: 12px !default;
   justify-content: baseline;
 }
 
-.no-wrap,
-.row .col .no-wrap {
-  flex-wrap: nowrap;
+.no-wrap {
+  flex-wrap: nowrap !important;
 }

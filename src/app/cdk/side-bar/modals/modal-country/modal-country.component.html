@@ -30,19 +30,21 @@
 
     <div
       class="row"
+      id='country-droplist'
       cdkDropList
       (cdkDropListDropped)="drop($event)"
       class="country-wrapper"
     >
       <div
         cdkDrag
-        cdkDragBoundary=".country-wrapper"
+        
+        rootElementSelector="#country-droplist"
         class="row no-wrap"
         [formGroupName]="country.putCode"
         *ngFor="let country of countries"
       >
         <div class="col l12 m8 s4 top country-input-line no-wrap">
-          <img cdkDragHandle src="./assets/vectors/draggable.svg" />
+          <img  src="./assets/vectors/draggable.svg" />
 
           <mat-form-field appearance="outline" class="mat-form-field-min">
             <mat-select formControlName="country">
