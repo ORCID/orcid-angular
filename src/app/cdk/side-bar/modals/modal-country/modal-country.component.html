@@ -30,24 +30,23 @@
 
     <div
       class="row"
-      id='country-droplist'
+      id="country-droplist"
       cdkDropList
       (cdkDropListDropped)="drop($event)"
       class="country-wrapper"
     >
       <div
         cdkDrag
-        
         rootElementSelector="#country-droplist"
         class="row no-wrap"
         [formGroupName]="country.putCode"
         *ngFor="let country of countries"
       >
         <div class="col l12 m8 s4 top country-input-line no-wrap">
-          <img  src="./assets/vectors/draggable.svg" />
+          <img src="./assets/vectors/draggable.svg" />
 
           <mat-form-field appearance="outline" class="mat-form-field-min">
-            <mat-select formControlName="country">
+            <mat-select #countrySelect formControlName="country" >
               <mat-option
                 *ngFor="let countryCode of countryCodes"
                 [value]="countryCode.key"
@@ -75,10 +74,8 @@
     </div>
 
     <div class="row">
-      <a class="col add-more-email">
-        <mat-icon class="large-material-icon" (click)="addCountry()"
-          >add_circle_outline
-        </mat-icon>
+      <a class="col add-more-email" (click)="addCountry()">
+        <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
         Add another email address</a
       >
     </div>

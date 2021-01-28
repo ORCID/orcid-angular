@@ -1,5 +1,13 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
@@ -12,6 +20,7 @@ import {
 import { cloneDeep } from 'lodash'
 import { first } from 'rxjs/operators'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
+import { MatSelect } from '@angular/material/select'
 @Component({
   selector: 'app-modal-country',
   templateUrl: './modal-country.component.html',
@@ -23,7 +32,8 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 export class ModalCountryComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _recordCountryService: RecordCountriesService
+    private _recordCountryService: RecordCountriesService,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {}
 
   addedEmailsCount = 0
@@ -34,6 +44,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   originalCountryCodes: RecordCountryCodesEndpoint
   originalBackendCountries: CountriesEndpoint
   defaultVisibility: VisibilityStrings
+  @ViewChildren('countrySelect') inputs: QueryList<MatSelect>
 
   ngOnInit(): void {
     this._recordCountryService
@@ -140,6 +151,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       visibility: { visibility: this.defaultVisibility },
     } as Address)
     this.addedEmailsCount++
+
+    this._changeDetectorRef.detectChanges()
+    const input = this.inputs.last
+    input.focus()
   }
   deleteEmail(putcode: string) {
     const i = this.countries.findIndex((value) => value.putCode === putcode)
