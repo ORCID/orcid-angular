@@ -25,12 +25,13 @@ $gutter-width: 12px !default;
 
 .container {
   margin: 0 auto;
+  width: 100%;
   max-width: $size4-maxwidth;
   padding: 0 $size4-margin;
   box-sizing: border-box;
 }
 .container.no-padding {
-  padding: 0;
+  padding: 0 !important;
 }
 
 @media #{$size8-and-up} {

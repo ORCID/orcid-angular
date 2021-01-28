@@ -18,9 +18,11 @@ import {
   RecordCountryCodesEndpoint,
 } from 'src/app/types/record-country.endpoint'
 import { cloneDeep } from 'lodash'
-import { first } from 'rxjs/operators'
+import { first, takeUntil } from 'rxjs/operators'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { MatSelect } from '@angular/material/select'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { Subject } from 'rxjs'
 @Component({
   selector: 'app-modal-country',
   templateUrl: './modal-country.component.html',
@@ -30,10 +32,13 @@ import { MatSelect } from '@angular/material/select'
   ],
 })
 export class ModalCountryComponent implements OnInit, OnDestroy {
+  $destroy: Subject<boolean> = new Subject<boolean>()
+
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _platform: PlatformInfoService
   ) {}
 
   addedEmailsCount = 0
@@ -44,6 +49,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   originalCountryCodes: RecordCountryCodesEndpoint
   originalBackendCountries: CountriesEndpoint
   defaultVisibility: VisibilityStrings
+  isMobile: boolean
   @ViewChildren('countrySelect') inputs: QueryList<MatSelect>
 
   ngOnInit(): void {
@@ -70,9 +76,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
           return { key: keyValue[0], value: keyValue[1] }
         })
       })
-  }
-  ngOnDestroy(): void {
-    console.log('DESTROY!')
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((platform) => (this.isMobile = platform.tabletOrHandset))
   }
 
   backendJsonToForm(emailEndpointJson: CountriesEndpoint) {
@@ -179,5 +186,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       date.setDate(Number.parseInt(x.day, 10))
     }
     return date
+  }
+
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
   }
 }

@@ -21,6 +21,12 @@
   border-top: 0.8em solid transparent;
 }
 
+.mat-form-field-appearance-outline.twoLinesHint {
+  .mat-form-field-wrapper {
+    margin-bottom: 1.6em;
+  }
+}
+
 .mat-form-field-appearance-outline.mat-form-field-min {
   .mat-form-field-wrapper {
     .mat-form-field-outline {

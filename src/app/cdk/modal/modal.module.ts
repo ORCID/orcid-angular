@@ -6,6 +6,7 @@ import { ModalFooterComponent } from './modal-footer/modal-footer.component'
 import { ModalSideBarComponent } from './modal-side-bar/modal-side-bar.component'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
+import { MatDividerModule } from '@angular/material/divider'
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button'
     ModalFooterComponent,
     ModalSideBarComponent,
   ],
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatDividerModule],
   exports: [
     ModalComponent,
     ModalHeaderComponent,

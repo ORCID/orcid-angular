@@ -3,6 +3,13 @@
   display: flex;
 }
 
-::ng-deep .container {
-  padding: 0 16px 0 16px;
+.content-wrapper {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-inline-start: 16px;
+  padding-bottom: 40px;
+}
+
+.row {
+  padding: 0 16px 16px 0;
 }

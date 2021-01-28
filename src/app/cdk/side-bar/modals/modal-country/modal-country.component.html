@@ -1,6 +1,8 @@
 <app-modal>
   <app-modal-header>Emails</app-modal-header>
-  <app-modal-side-bar> Form content </app-modal-side-bar>
+  <app-modal-side-bar>
+    <ng-container id="side-bar-title">My countries</ng-container>
+  </app-modal-side-bar>
   <app-modal-footer>
     <button mat-raised-button color="primary" (click)="saveEvent()">
       Save changes
@@ -11,12 +13,12 @@
   </app-modal-footer>
 
   <div
-    class="container"
+    class="container no-padding"
     *ngIf="countryForm && countryCodes"
     [formGroup]="countryForm"
   >
     <div class="row">
-      <div class="col">
+      <div class="col no-gutters">
         <p>
           Add countries to your ORCID record to highlight where you conduct your
           research or where your research is focused. You can add as many
@@ -25,7 +27,7 @@
       </div>
     </div>
     <div class="row">
-      <h3 class="col">My countries</h3>
+      <h3 class="col no-gutters">My countries</h3>
     </div>
 
     <div
@@ -38,15 +40,20 @@
       <div
         cdkDrag
         rootElementSelector="#country-droplist"
-        class="row no-wrap"
+        class="row country-input-line"
+        [ngClass]="{ 'no-wrap': !isMobile }"
         [formGroupName]="country.putCode"
         *ngFor="let country of countries"
       >
-        <div class="col l12 m8 s4 top country-input-line no-wrap">
-          <img src="./assets/vectors/draggable.svg" />
+        <div class="col l12 m8 s4 top no-wrap no-gutters">
+          <img cdkDragHandle src="./assets/vectors/draggable.svg" />
 
-          <mat-form-field appearance="outline" class="mat-form-field-min">
-            <mat-select #countrySelect formControlName="country" >
+          <mat-form-field
+            appearance="outline"
+            class="mat-form-field-min"
+            [ngClass]="{ twoLinesHint: isMobile }"
+          >
+            <mat-select #countrySelect formControlName="country">
               <mat-option
                 *ngFor="let countryCode of countryCodes"
                 [value]="countryCode.key"
@@ -60,7 +67,7 @@
             </mat-hint>
           </mat-form-field>
         </div>
-        <div class="col no-wrap actions-wrapper">
+        <div class="col no-wrap actions-wrapper no-gutters">
           <app-privacy-selector
             formControlName="visibility"
           ></app-privacy-selector>
@@ -74,14 +81,10 @@
     </div>
 
     <div class="row">
-      <a class="col add-more-email" (click)="addCountry()">
+      <a class="col add-more no-gutters" (click)="addCountry()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
         Add another email address</a
       >
     </div>
   </div>
-
-  <mat-form-field>
-    <input matInput />
-  </mat-form-field>
 </app-modal>

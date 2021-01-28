@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
-import { first } from 'rxjs/operators'
+import { Subject } from 'rxjs'
+import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../platform-info'
 
 @Component({
@@ -8,8 +9,10 @@ import { PlatformInfoService } from '../../platform-info'
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
   mobile: boolean
+  $destroy: Subject<boolean> = new Subject<boolean>()
+
   constructor(
     private dialogRef: MatDialogRef<any>,
     private _platform: PlatformInfoService
@@ -18,10 +21,14 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     this._platform
       .get()
-      .pipe(first())
+      .pipe(takeUntil(this.$destroy))
+
       .subscribe((platform) => {
-        this.mobile = platform.handset
+        this.mobile = platform.tabletOrHandset
       })
   }
-  
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.unsubscribe()
+  }
 }

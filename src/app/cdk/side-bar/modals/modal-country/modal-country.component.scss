@@ -1,10 +1,6 @@
+
 .cdk-drag-placeholder {
   opacity: 0;
-}
-
-.country-wrapper {
-  overflow-x: scroll;
-  height: 400px;
 }
 
 .actions-wrapper {
@@ -20,15 +16,21 @@
 }
 
 .country-input-line {
+  margin-top: 20px;
   img {
-    margin-top: 4px;
+    margin-top: 6px;
     cursor: move;
     z-index: 1;
+    margin-right: 18px;
   }
 }
 
 .mat-form-field {
   width: 100%;
+}
+
+.add-more{
+  margin-top: 16px;
 }
 
 ::ng-deep .cdk-drop-list-dragging {
