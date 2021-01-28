@@ -14,8 +14,22 @@
   ::ng-deep .no-selected svg > path {
     fill: map-get($background, ui-background);
   }
+  ::ng-deep .selected svg > g,
+  ::ng-deep .selected svg > path {
+    fill: map-get($foreground, text-light-high);
+  }
   ::ng-deep .panel button {
     background-color: map-get($foreground, text-light-high);
+  }
+
+  ::ng-deep .panel button.private-button.selected {
+    background-color: map-get($foreground, visibility-private);
+  }
+  ::ng-deep .panel button.limited-button.selected {
+    background-color: map-get($foreground, visibility-trusted);
+  }
+  ::ng-deep .panel button.public-button.selected {
+    background-color: map-get($foreground, visibility-everyone);
   }
 }
 @include privacy-selector-theme($orcid-app-theme);

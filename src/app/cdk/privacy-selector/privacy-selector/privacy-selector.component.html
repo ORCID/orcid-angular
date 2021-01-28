@@ -2,12 +2,13 @@
   <button
     mat-icon-button
     (click)="public()"
-    [ngClass]="{ 'no-selected': privacy !== 'PUBLIC' }"
+    [ngClass]="{ 'no-selected': privacy !== 'PUBLIC' , 'selected': privacy === 'PUBLIC' }"
+    class="public-button"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      width="20"
+      height="20"
       viewBox="0 0 32 32"
     >
       <g fill="#00A500" fill-rule="evenodd" transform="translate(2 8)">
@@ -27,12 +28,13 @@
   <button
     mat-icon-button
     (click)="limited()"
-    [ngClass]="{ 'no-selected': privacy !== 'LIMITED' }"
+    [ngClass]="{ 'no-selected': privacy !== 'LIMITED', 'selected': privacy === 'LIMITED'}"
+    class="limited-button"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      width="20"
+      height="20"
       viewBox="0 0 32 32"
     >
       <path
@@ -45,12 +47,13 @@
   <button
     mat-icon-button
     (click)="private()"
-    [ngClass]="{ 'no-selected': privacy !== 'PRIVATE' }"
+    class="private-button"
+    [ngClass]="{ 'no-selected': privacy !== 'PRIVATE', 'selected': privacy === 'PRIVATE' }"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
+      width="20"
+      height="20"
       viewBox="0 0 32 32"
     >
       <path
