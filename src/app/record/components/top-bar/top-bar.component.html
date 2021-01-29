@@ -55,6 +55,7 @@
 <app-panel
   *ngIf="userRecord"
   [elements]="userRecord.names.givenNames"
+  [editModalComponent]="modalNameComponent"
   [type]="'top-bar'"
 >
   <h2 header class="orc-font-body" i18n="@@record.names">
@@ -105,6 +106,7 @@
 <app-panel
   *ngIf="userRecord"
   [elements]="userRecord.biography.biography"
+  [editModalComponent]="modalBiographyComponent"
   [type]="'top-bar'"
 >
   <h2 header class="orc-font-body" i18n="@@record.biography">

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
+import { ModalNameComponent } from './modals/modal-name/modal-name.component'
+import { ModalBiographyComponent } from './modals/modal-biography/modal-biography.component'
 
 @Component({
   selector: 'app-top-bar',
@@ -21,6 +23,9 @@ export class TopBarComponent implements OnInit {
     loggedIn: boolean
   }
   @Input() userRecord: UserRecord
+
+  modalNameComponent = ModalNameComponent
+  modalBiographyComponent = ModalBiographyComponent
 
   platform: PlatformInfo
 

@@ -1,0 +1,98 @@
+<app-modal>
+  <app-modal-header>Names</app-modal-header>
+  <app-modal-side-bar> Form content</app-modal-side-bar>
+  <app-modal-footer>
+    <button mat-raised-button color="primary" (click)="saveEvent()">
+      Save changes
+    </button>
+    <button mat-stroked-button color="primary" (click)="closeEvent()">
+      Cancel
+    </button>
+  </app-modal-footer>
+  <form action="">
+    <div class="mat-body-2 title">
+      <strong>Given and family names </strong><span class="required">*</span>
+    </div>
+    <hr>
+    <p class="orc-font-small-print">
+      Your given and family names. These are used on your ORCID record by default.
+    </p>
+    <div
+      class="input-box"
+    >
+      <label
+        for="givenNames"
+        class="mat-caption"
+        [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"
+      >
+        <strong>Given names </strong>
+        <span class="required">*</span>
+      </label>
+      <input
+        id="givenNames"
+        name="givenName"
+        type="text"
+        class="mat-body-1"
+      />
+      <mat-error
+        class="mat-caption"
+        *ngIf="namesForm.hasError('required', 'givenNames')"
+        i18n="@@register.firstNamePassword"
+      >
+        Please enter your first/given name
+      </mat-error>
+      <mat-error
+        *ngIf="namesForm.hasError('notPattern', 'givenNames')"
+        i18n="@@register.invalidName"
+      >
+        Invalid name characters or format
+      </mat-error>
+    </div>
+    <div
+      class="input-box family-names"
+    >
+      <label
+        for="familyNames"
+        class="mat-caption"
+      >
+        <strong>Family names</strong>
+      </label>
+      <input
+        id="familyNames"
+        name="givenName"
+        type="text"
+        class="mat-body-1"
+      />
+      <mat-error
+        *ngIf="namesForm.hasError('notPattern', 'familyNames')"
+        i18n="@@register.invalidName"
+      >
+        Invalid name characters or format
+      </mat-error>
+    </div>
+    <div class="mat-body-2 title">
+      <strong>Published name</strong>
+    </div>
+    <hr>
+    <p class="orc-font-small-print">
+      Your preferred name format and structure. If added the published name will be used instead of your given and
+      family names.
+    </p>
+    <div
+      class="input-box"
+    >
+      <label for="publishedName" class="mat-caption">
+        <strong>Published name</strong>
+      </label>
+      <input
+        id="publishedName"
+        name="publishedName"
+        type="text"
+        class="mat-body-1"
+      />
+      <mat-hint class="mat-caption">
+        You can format this name however you wish
+      </mat-hint>
+    </div>
+  </form>
+</app-modal>

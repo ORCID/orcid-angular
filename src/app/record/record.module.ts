@@ -8,10 +8,15 @@ import { MainComponent } from './components/main/main.component'
 import { PannelModule } from '../cdk/pannel/pannel.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { MatIconModule } from '@angular/material/icon'
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { ModalNameComponent } from './components/top-bar/modals/modal-name/modal-name.component';
+import { ModalBiographyComponent } from './components/top-bar/modals/modal-biography/modal-biography.component'
+import { ModalModule } from '../cdk/modal/modal.module'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 
 @NgModule({
-  declarations: [MyOrcidComponent, TopBarComponent, MainComponent],
-  imports: [CommonModule, RecordRoutingModule, SideBarModule, PannelModule, MatIconModule, MatButtonModule],
+  declarations: [MyOrcidComponent, TopBarComponent, MainComponent, ModalNameComponent, ModalBiographyComponent],
+  imports: [CommonModule, RecordRoutingModule, SideBarModule, PannelModule, MatIconModule, MatButtonModule, ModalModule, MatFormFieldModule, MatInputModule],
 })
 export class RecordModule {}

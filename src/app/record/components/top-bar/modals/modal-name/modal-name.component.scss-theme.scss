@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin model-name-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  input {
+    border: solid 1px mat-color($background, grey);
+  }
+
+  ::placeholder {
+    color: mat-color($background, grey);
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: mat-color($background, grey);
+  }
+
+  hr {
+    border-color: map-get($foreground, 'brand-primary');
+    color: map-get($foreground, 'brand-primary');
+    background: map-get($foreground, 'brand-primary');
+  }
+
+  mat-error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  mat-hint {
+    color: map-get($foreground, 'text-dark-mid');
+  }
+
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .required {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+}
+@include model-name-theme($orcid-app-theme);
