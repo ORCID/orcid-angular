@@ -14,6 +14,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() loading = false
+
   constructor(
     private dialogRef: MatDialogRef<any>,
     private _platform: PlatformInfoService

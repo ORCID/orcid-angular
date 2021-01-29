@@ -12,8 +12,8 @@ import { PlatformInfoService } from '../../platform-info'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
-  @Input() elements: Assertion[] | Value
   @Input() editModalComponent: ComponentType<any>
+  @Input() elements: Assertion[] | Value
   @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
   @Input() userRecord: UserRecord
 
@@ -38,10 +38,16 @@ export class PanelComponent implements OnInit {
   }
 
   openModal() {
-    this._dialog.open(this.editModalComponent, {
-      height: '500px',
-      width: '800px',
-      data: this.userRecord
-    })
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        if (this.editModalComponent) {
+          this._dialog.open(this.editModalComponent, {
+            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+            data: this.userRecord,
+          })
+        }
+      })
   }
 }
