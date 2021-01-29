@@ -94,5 +94,30 @@
         You can format this name however you wish
       </mat-hint>
     </div>
+    <div class="mat-body-2 title">
+      <strong>My alternative names</strong>
+    </div>
+    <hr>
+    <p class="orc-font-small-print">
+      Other variants of your name. Adding these can help people find you record when searching the ORCID registry
+    </p>
+    <div
+      class="input-box"
+    >
+      <label for="alternativeNames" class="mat-caption">
+        <strong>My alternative names</strong>
+      </label>
+<!--      <div *ngFor="let otherNames of userRecord.otherNames.otherNames">-->
+        <input
+          id="alternativeNames"
+          name="publishedName"
+          type="text"
+          class="mat-body-1"
+        />
+        <mat-hint class="mat-caption">
+          Source: Daniel Palafox, Created: 2021-03-03
+        </mat-hint>
+<!--      </div>-->
+    </div>
   </form>
 </app-modal>

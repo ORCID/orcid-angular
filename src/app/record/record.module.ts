@@ -8,15 +8,37 @@ import { MainComponent } from './components/main/main.component'
 import { PannelModule } from '../cdk/pannel/pannel.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { MatIconModule } from '@angular/material/icon'
-import { MatButtonModule } from '@angular/material/button';
-import { ModalNameComponent } from './components/top-bar/modals/modal-name/modal-name.component';
+import { MatButtonModule } from '@angular/material/button'
+import { ModalNameComponent } from './components/top-bar/modals/modal-name/modal-name.component'
 import { ModalBiographyComponent } from './components/top-bar/modals/modal-biography/modal-biography.component'
 import { ModalModule } from '../cdk/modal/modal.module'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
+import { MatSelectModule } from '@angular/material/select'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
-  declarations: [MyOrcidComponent, TopBarComponent, MainComponent, ModalNameComponent, ModalBiographyComponent],
-  imports: [CommonModule, RecordRoutingModule, SideBarModule, PannelModule, MatIconModule, MatButtonModule, ModalModule, MatFormFieldModule, MatInputModule],
+  declarations: [
+    MyOrcidComponent,
+    TopBarComponent,
+    MainComponent,
+    ModalNameComponent,
+    ModalBiographyComponent
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RecordRoutingModule,
+    SideBarModule,
+    PannelModule,
+    MatIconModule,
+    MatButtonModule,
+    ModalModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+  ],
 })
-export class RecordModule {}
+export class RecordModule {
+}

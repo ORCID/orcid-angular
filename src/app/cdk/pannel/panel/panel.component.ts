@@ -1,9 +1,9 @@
 import { ComponentType } from '@angular/cdk/portal'
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-
 import { Assertion } from '../../../types'
 import { Value } from '../../../types/common.endpoint'
+import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 
 @Component({
@@ -15,6 +15,7 @@ export class PanelComponent implements OnInit {
   @Input() elements: Assertion[] | Value
   @Input() editModalComponent: ComponentType<any>
   @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
+  @Input() userRecord: UserRecord
 
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
@@ -37,8 +38,10 @@ export class PanelComponent implements OnInit {
   }
 
   openModal() {
-    if (this.editModalComponent) {
-      this._dialog.open(this.editModalComponent)
-    }
+    this._dialog.open(this.editModalComponent, {
+      height: '500px',
+      width: '800px',
+      data: this.userRecord
+    })
   }
 }
