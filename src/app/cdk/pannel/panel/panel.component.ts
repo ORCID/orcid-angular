@@ -33,15 +33,8 @@ export class PanelComponent implements OnInit {
   }
 
   openModal() {
-    this._platform
-      .get()
-      .pipe(first())
-      .subscribe((platform) => {
-        if (this.editModalComponent) {
-          this._dialog.open(this.editModalComponent, {
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-          })
-        }
-      })
+    if (this.editModalComponent) {
+      this._dialog.open(this.editModalComponent)
+    }
   }
 }

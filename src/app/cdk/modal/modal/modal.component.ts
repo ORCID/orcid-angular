@@ -10,7 +10,7 @@ import { PlatformInfoService } from '../../platform-info'
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit, OnDestroy {
-  mobile: boolean
+  columns12: boolean
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   constructor(
@@ -24,7 +24,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
 
       .subscribe((platform) => {
-        this.mobile = platform.tabletOrHandset
+        this.columns12 = platform.columns12
       })
   }
   ngOnDestroy(): void {
