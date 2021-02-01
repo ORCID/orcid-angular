@@ -177,16 +177,21 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
   getDate(address: Address) {
     const x = address.createdDate
-    const date = new Date()
-    if (x.year) {
-      date.setFullYear(Number.parseInt(x.year, 10))
+    let date: Date
+    if (x.year && x.month && x.day) {
+      date = new Date(
+        Date.UTC(
+          Number.parseInt(x.year, 10),
+          Number.parseInt(x.month, 10),
+          Number.parseInt(x.day, 10),
+          6
+        )
+      )
     }
-    if (x.month) {
-      date.setMonth(Number.parseInt(x.month, 10))
-    }
-    if (x.day) {
-      date.setDate(Number.parseInt(x.day, 10))
-    }
+
+    console.log(Number.parseInt(x.month, 10))
+    console.log(date)
+
     return date
   }
 
