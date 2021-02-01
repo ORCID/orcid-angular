@@ -1,5 +1,5 @@
 <app-modal>
-  <app-modal-header>Emails</app-modal-header>
+  <app-modal-header>Countries</app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title">My countries</ng-container>
   </app-modal-side-bar>
@@ -12,11 +12,8 @@
     </button>
   </app-modal-footer>
 
-  <div
-    class="container no-padding"
-    *ngIf="countryForm && countryCodes"
-    [formGroup]="countryForm"
-  >
+  <div class="container no-padding" [formGroup]="countryForm">
+    <mat-progress-bar></mat-progress-bar>
     <div class="row">
       <div class="col no-gutters">
         <p>

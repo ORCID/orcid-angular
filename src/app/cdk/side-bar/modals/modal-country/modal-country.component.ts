@@ -95,7 +95,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       })
     })
     this.countryForm = new FormGroup(group)
-    console.log(group)
   }
 
   formToBackend(countryForm: FormGroup): CountriesEndpoint {
@@ -144,7 +143,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     this.dialogRef.close()
   }
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event)
     moveItemInArray(this.countries, event.previousIndex, event.currentIndex)
   }
   addCountry() {
@@ -183,14 +181,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
         Date.UTC(
           Number.parseInt(x.year, 10),
           Number.parseInt(x.month, 10),
-          Number.parseInt(x.day, 10),
-          6
+          Number.parseInt(x.day, 10)
         )
       )
     }
-
-    console.log(Number.parseInt(x.month, 10))
-    console.log(date)
 
     return date
   }
