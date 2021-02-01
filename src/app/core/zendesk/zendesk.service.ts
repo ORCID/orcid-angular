@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core'
 import { PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
+import { REDIRECT_URI_REGEXP } from 'src/app/constants'
 import { ZendeskWidget } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
 
@@ -45,9 +46,11 @@ export class ZendeskService {
    * @param errorCode error code to add more context for the support staff
    */
   autofillTicketForm(user?: UserSession, subject?: string, errorCode?: string) {
-    console.log((<any>this._window).zESettings)
-
-    console.log('try to load setting')
+    let uri = ''
+    const uriMatch = this._window.location.href.match(REDIRECT_URI_REGEXP)
+    if (uriMatch && uriMatch[0] && uriMatch[0].indexOf('redirect_uri=') === 0) {
+      uri = decodeURIComponent(uriMatch[0].split('redirect_uri=')[1])
+    }
 
     this.zE('webWidget', 'updateSettings', {
       webWidget: {
@@ -55,8 +58,13 @@ export class ZendeskService {
           suppress: true,
         },
         contactForm: {
-          // The default ticket form https://orcid.zendesk.com/agent/admin/ticket_forms/edit/360003472553
-          ticketForms: [{ id: 360003472553 }],
+          /**
+           * "Other system" form
+           * https://orcid.zendesk.com/agent/admin/ticket_forms/edit/360003482054
+           * If we're planning to autofill tickets for users from different places,
+           * not just the oauth screen, then we should pass the ticket form id as a param
+           */
+          ticketForms: [{ id: 360003482054 }],
           fields: [
             {
               id: 'name',
@@ -80,7 +88,7 @@ export class ZendeskService {
               },
             },
             { id: 'subject', prefill: { '*': subject || '' } },
-
+            { id: '360039623413', prefill: { '*': uri || '' } },
             {
               id: 'description',
               prefill: {
