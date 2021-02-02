@@ -52,12 +52,16 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
         return $localize`:@@inbox.affiliations:affiliations`
       case 'BIO':
         return $localize`:@@inbox.bio:bio`
+      case 'DISTINCTION':
+        return $localize`:@@inbox.distinction:distinction`
       case 'EDUCATION':
         return $localize`:@@inbox.education:education`
       case 'EMPLOYMENT':
         return $localize`:@@inbox.employment:employment`
       case 'EXTERNAL_IDENTIFIERS':
         return $localize`:@@inbox.externalIdentifiers:external identifiers`
+      case 'INVITED_POSITION':
+        return $localize`:@@inbox.invitedPosition:invited position`
       case 'FUNDING':
         return $localize`:@@inbox.funding:funding`
       case 'PEER_REVIEW':
