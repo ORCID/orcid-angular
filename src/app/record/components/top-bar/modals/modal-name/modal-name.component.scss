@@ -1,9 +1,19 @@
+:host {
+  width: 100%;
+}
+
 hr {
   height: 2px;
   border: 0;
   margin: 0;
 }
 
+.visibility {
+  margin: auto;
+  //small device
+  //width: 100%;
+  //margin: 6px 0;
+}
 
 .title {
   margin-top: 16px;
@@ -24,4 +34,15 @@ hr {
 
 .family-names {
   margin-top: 18px;
+}
+
+.delete {
+  margin-left: auto;
+}
+
+.add-more{
+  margin-top: 16px;
+  span {
+    padding-left: 6px;
+  }
 }

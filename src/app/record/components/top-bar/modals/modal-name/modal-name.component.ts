@@ -21,23 +21,30 @@ export class ModalNameComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRecord = this.data
+    console.log(JSON.stringify(this.userRecord));
     this.namesForm = new FormGroup({
-      givenNames: new FormControl('', {
+      givenNames: new FormControl(this.userRecord.names.givenNames.value, {
         validators: [
           Validators.required,
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
           OrcidValidators.notPattern(URL_REGEXP),
         ],
       }),
-      familyNames: new FormControl('', {
+      familyNames: new FormControl(this.userRecord.names.familyName.value, {
         validators: [
           OrcidValidators.notPattern(URL_REGEXP),
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
         ],
       }),
-      publishedName: new FormControl(),
+      publishedName: new FormControl(this.userRecord.person.displayName),
     })
   }
+
+  onSubmit() {}
+
+  addOtherName() {}
+
+  deleteOtherName(putcode: string) {}
 
   saveEvent() {
     this.closeEvent()

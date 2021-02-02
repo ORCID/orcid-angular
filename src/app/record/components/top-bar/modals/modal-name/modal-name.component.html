@@ -9,7 +9,7 @@
       Cancel
     </button>
   </app-modal-footer>
-  <form action="">
+  <form [formGroup]="namesForm" (ngSubmit)="onSubmit()">
     <div class="mat-body-2 title">
       <strong>Given and family names </strong><span class="required">*</span>
     </div>
@@ -21,7 +21,7 @@
       class="input-box"
     >
       <label
-        for="givenNames"
+        for="given-names-input"
         class="mat-caption"
         [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"
       >
@@ -29,8 +29,8 @@
         <span class="required">*</span>
       </label>
       <input
-        id="givenNames"
-        name="givenName"
+        id="given-names-input"
+        formControlName="givenNames"
         type="text"
         class="mat-body-1"
       />
@@ -52,14 +52,15 @@
       class="input-box family-names"
     >
       <label
-        for="familyNames"
+        for="family-names-input"
         class="mat-caption"
       >
         <strong>Family names</strong>
       </label>
       <input
-        id="familyNames"
-        name="givenName"
+        id="family-names-input"
+        formControlName="familyNames"
+        name="familyNames"
         type="text"
         class="mat-body-1"
       />
@@ -78,21 +79,27 @@
       Your preferred name format and structure. If added the published name will be used instead of your given and
       family names.
     </p>
-    <div
-      class="input-box"
-    >
-      <label for="publishedName" class="mat-caption">
-        <strong>Published name</strong>
-      </label>
-      <input
-        id="publishedName"
-        name="publishedName"
-        type="text"
-        class="mat-body-1"
-      />
-      <mat-hint class="mat-caption">
-        You can format this name however you wish
-      </mat-hint>
+    <div class="row">
+      <div class="input-box">
+        <label for="published-name-input" class="mat-caption">
+          <strong>Published name</strong>
+        </label>
+        <input
+          id="published-name-input"
+          formControlName="publishedName"
+          name="publishedName"
+          type="text"
+          class="mat-body-1"
+        />
+        <mat-hint class="mat-caption">
+          You can format this name however you wish
+        </mat-hint>
+      </div>
+      <div class="col no-wrap actions-wrapper no-gutters visibility">
+        <app-privacy-selector
+          formControlName="visibility"
+        ></app-privacy-selector>
+      </div>
     </div>
     <div class="mat-body-2 title">
       <strong>My alternative names</strong>
@@ -101,23 +108,55 @@
     <p class="orc-font-small-print">
       Other variants of your name. Adding these can help people find you record when searching the ORCID registry
     </p>
-    <div
-      class="input-box"
-    >
-      <label for="alternativeNames" class="mat-caption">
-        <strong>My alternative names</strong>
-      </label>
-<!--      <div *ngFor="let otherNames of userRecord.otherNames.otherNames">-->
-        <input
-          id="alternativeNames"
-          name="publishedName"
-          type="text"
-          class="mat-body-1"
-        />
-        <mat-hint class="mat-caption">
-          Source: Daniel Palafox, Created: 2021-03-03
-        </mat-hint>
-<!--      </div>-->
+    <div class="row">
+      <div class="input-box">
+        <ng-container *ngFor="let otherNames of userRecord.otherNames.otherNames; let i = index">
+        <label for="alternative-names-input" class="mat-caption">
+          <strong>My alternative names</strong>
+        </label>
+          <input
+            id="alternative-names-input"
+            name="publishedName"
+            type="text"
+            class="mat-body-1"
+          />
+          <mat-hint class="mat-caption">
+            <ng-container>Source:</ng-container>
+            {{ otherNames.sourceName + ' ' + otherNames.lastModified.year + '-' + otherNames.lastModified.month + '-' + otherNames.lastModified.day}}
+          </mat-hint>
+          <!--        mobile version -->
+          <!--          <div class="col no-wrap actions-wrapper no-gutters visibility">-->
+          <!--            <app-privacy-selector-->
+          <!--              formControlName="visibility"-->
+          <!--            ></app-privacy-selector>-->
+          <!--            <div class="delete">-->
+          <!--              <button (click)="deleteOtherName(otherNames.putCode)" mat-icon-button>-->
+          <!--                <mat-icon-->
+          <!--                  class="material-icons-outlined large-material-icon">delete-->
+          <!--                </mat-icon>-->
+          <!--              </button>-->
+          <!--            </div>-->
+          <!--          </div>-->
+        </ng-container>
+      </div>
+      <div class="col no-wrap actions-wrapper no-gutters visibility">
+        <app-privacy-selector
+          formControlName="visibility"
+        ></app-privacy-selector>
+        <button (click)="deleteOtherName('caca')" mat-icon-button>
+          <mat-icon class="material-icons-outlined large-material-icon"
+          >delete</mat-icon
+          >
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <a class="col add-more no-gutters" (click)="addOtherName()">
+        <mat-icon class="large-material-icon">add_circle</mat-icon>
+        <span class="mat-body-1">
+            Add another alternative name
+          </span>
+      </a>
     </div>
   </form>
 </app-modal>
