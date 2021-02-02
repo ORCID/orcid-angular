@@ -16,7 +16,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     ModalFooterComponent,
     ModalSideBarComponent,
   ],
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatDividerModule, MatProgressBarModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatProgressBarModule,
+  ],
   exports: [
     ModalComponent,
     ModalHeaderComponent,

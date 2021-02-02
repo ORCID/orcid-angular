@@ -2,7 +2,10 @@
   <button
     mat-icon-button
     (click)="public()"
-    [ngClass]="{ 'no-selected': privacy !== 'PUBLIC' , 'selected': privacy === 'PUBLIC' }"
+    [ngClass]="{
+      'no-selected': privacy !== 'PUBLIC',
+      selected: privacy === 'PUBLIC'
+    }"
     class="public-button"
   >
     <svg
@@ -28,7 +31,10 @@
   <button
     mat-icon-button
     (click)="limited()"
-    [ngClass]="{ 'no-selected': privacy !== 'LIMITED', 'selected': privacy === 'LIMITED'}"
+    [ngClass]="{
+      'no-selected': privacy !== 'LIMITED',
+      selected: privacy === 'LIMITED'
+    }"
     class="limited-button"
   >
     <svg
@@ -48,7 +54,10 @@
     mat-icon-button
     (click)="private()"
     class="private-button"
-    [ngClass]="{ 'no-selected': privacy !== 'PRIVATE', 'selected': privacy === 'PRIVATE' }"
+    [ngClass]="{
+      'no-selected': privacy !== 'PRIVATE',
+      selected: privacy === 'PRIVATE'
+    }"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

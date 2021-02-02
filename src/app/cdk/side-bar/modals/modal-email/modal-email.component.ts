@@ -96,6 +96,4 @@ export class ModalEmailComponent implements OnInit {
   formToBackendJson(fromGroup: FormGroup) {
     // this._recordEmails.postEmails(this.backendJson)
   }
-
-
 }

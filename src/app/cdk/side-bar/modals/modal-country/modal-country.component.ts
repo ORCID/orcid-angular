@@ -116,7 +116,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
         const visibility = countryForm.value[key].visibility
         if (countryForm.value[key]) {
           countries.addresses.push({
-            putCode: key.indexOf('new-') == 0 ? null : key,
+            putCode: key.indexOf('new-') === 0 ? null : key,
             countryName,
             iso2Country: {
               value: this.originalCountryCodes[countryName],
