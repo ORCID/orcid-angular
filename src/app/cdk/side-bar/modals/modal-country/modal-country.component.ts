@@ -1,28 +1,17 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChildren,
-} from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
-import { MatDialogRef } from '@angular/material/dialog'
-import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
-import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
-import {
-  Address,
-  CountriesEndpoint,
-  RecordCountryCodesEndpoint,
-} from 'src/app/types/record-country.endpoint'
-import { cloneDeep } from 'lodash'
-import { first, takeUntil } from 'rxjs/operators'
-import { VisibilityStrings } from 'src/app/types/common.endpoint'
-import { MatSelect } from '@angular/material/select'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { Subject } from 'rxjs'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSelect } from '@angular/material/select';
+import { cloneDeep } from 'lodash';
+import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
+import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component';
+import { PlatformInfoService } from 'src/app/cdk/platform-info';
+import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service';
+import { VisibilityStrings } from 'src/app/types/common.endpoint';
+import { Address, CountriesEndpoint, RecordCountryCodesEndpoint } from 'src/app/types/record-country.endpoint';
+
 @Component({
   selector: 'app-modal-country',
   templateUrl: './modal-country.component.html',
@@ -129,8 +118,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
         }
       })
     return countries
-
-    //  const i = this.countries.findIndex((value) => value.putCode === putcode)
   }
 
   saveEvent() {

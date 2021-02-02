@@ -1,12 +1,9 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { Platform } from 'puppeteer'
-import { first } from 'rxjs/operators'
+
 import { Assertion } from '../../../types'
-import { ModalComponent } from '../../modal/modal/modal.component'
 import { PlatformInfoService } from '../../platform-info'
-import { ModalCountryComponent } from '../../side-bar/modals/modal-country/modal-country.component'
 
 @Component({
   selector: 'app-panel',
@@ -26,11 +23,7 @@ export class PanelComponent implements OnInit {
     private _platform: PlatformInfoService
   ) {}
 
-  ngOnInit(): void {
-    // if (this.editModalComponent == ModalCountryComponent) {
-    //   this.openModal()
-    // }
-  }
+  ngOnInit(): void {}
 
   openModal() {
     if (this.editModalComponent) {

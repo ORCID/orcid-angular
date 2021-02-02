@@ -1,4 +1,3 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
@@ -93,7 +92,5 @@ export class ModalEmailComponent implements OnInit {
     this.emailsForm = new FormGroup(group)
   }
 
-  formToBackendJson(fromGroup: FormGroup) {
-    // this._recordEmails.postEmails(this.backendJson)
-  }
+  formToBackendJson(fromGroup: FormGroup) {}
 }

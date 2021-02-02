@@ -1,7 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
+
 import { PlatformInfoService } from '../../platform-info'
 
 @Component({
