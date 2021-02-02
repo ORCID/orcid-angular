@@ -3,15 +3,15 @@
   (click)="show = !show"
   [ngClass]="{ active: show }"
 >
-  <a role="button" class="mat-body-2 black-underline-url body-2 black-url" id="app-name">
+  <a
+    role="button"
+    class="mat-body-2 black-underline-url body-2 black-url"
+    id="app-name"
+  >
     {{ name }}
     <!-- TODO user the right icon-->
   </a>
-  <mat-icon
-    class="large-material-icon"
-    role="presentation"
-    >help</mat-icon
-  >
+  <mat-icon class="large-material-icon" role="presentation">help</mat-icon>
 </div>
 
 <div class="description-container" *ngIf="show">
