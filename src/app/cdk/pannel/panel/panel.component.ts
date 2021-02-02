@@ -27,9 +27,9 @@ export class PanelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.editModalComponent == ModalCountryComponent) {
-      this.openModal()
-    }
+    // if (this.editModalComponent == ModalCountryComponent) {
+    //   this.openModal()
+    // }
   }
 
   openModal() {

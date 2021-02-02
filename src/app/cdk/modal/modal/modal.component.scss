@@ -32,3 +32,13 @@
     flex-grow: 0;
   }
 }
+
+mat-progress-bar {
+  position: absolute;
+  max-width: 100%;
+  top: 55px;
+}
+
+.header-container {
+  position: relative;
+}

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
@@ -12,7 +12,7 @@ import { PlatformInfoService } from '../../platform-info'
 export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean
   $destroy: Subject<boolean> = new Subject<boolean>()
-
+  @Input() loading = false
   constructor(
     private dialogRef: MatDialogRef<any>,
     private _platform: PlatformInfoService

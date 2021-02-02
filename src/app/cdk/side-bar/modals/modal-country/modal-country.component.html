@@ -1,22 +1,33 @@
-<app-modal>
-  <app-modal-header>Countries</app-modal-header>
+<app-modal [loading]="loadingCountries || loadingCountryCodes">
+  <app-modal-header i18n="@@side-bar.countries">Countries</app-modal-header>
   <app-modal-side-bar>
-    <ng-container id="side-bar-title">My countries</ng-container>
+    <ng-container id="side-bar-title" i18n="@@side-bar.myCountries"
+      >My countries</ng-container
+    >
   </app-modal-side-bar>
   <app-modal-footer>
-    <button mat-raised-button color="primary" (click)="saveEvent()">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@share.saveChanges"
+    >
       Save changes
     </button>
-    <button mat-stroked-button color="primary" (click)="closeEvent()">
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@share.cancel"
+    >
       Cancel
     </button>
   </app-modal-footer>
 
   <div class="container no-padding" [formGroup]="countryForm">
-    <mat-progress-bar></mat-progress-bar>
     <div class="row">
       <div class="col no-gutters">
-        <p>
+        <p i18n="@@side-bar.countriesModalDescription">
           Add countries to your ORCID record to highlight where you conduct your
           research or where your research is focused. You can add as many
           countries as you want.
@@ -24,7 +35,7 @@
       </div>
     </div>
     <div class="row">
-      <h3 class="col no-gutters">My countries</h3>
+      <h3 class="col no-gutters" i18n="@@side-bar.myCountries">My countries</h3>
     </div>
 
     <div
@@ -59,8 +70,10 @@
               </mat-option>
             </mat-select>
             <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-              Source: {{ getSourceName(countriesMap[country.putCode]) }},
-              Created: {{ getDate(countriesMap[country.putCode]) | date }}
+              <ng-container i18n="@@share.source">Source:</ng-container>
+              {{ getSourceName(countriesMap[country.putCode]) }},
+              <ng-container i18n="@@share.created">Created: </ng-container
+              >{{ getDate(countriesMap[country.putCode]) | date }}
             </mat-hint>
           </mat-form-field>
         </div>
@@ -70,7 +83,7 @@
           ></app-privacy-selector>
           <button (click)="deleteEmail(country.putCode)" mat-icon-button>
             <mat-icon class="material-icons-outlined large-material-icon"
-              >delete</mat-icon
+            i18n="@@share.delete" >delete</mat-icon
             >
           </button>
         </div>
@@ -80,7 +93,7 @@
     <div class="row">
       <a class="col add-more no-gutters" (click)="addCountry()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        Add another email address</a
+        <ng-container i18n="@@side-bar.addAnotherEmail"> </ng-container> another email address</a
       >
     </div>
   </div>

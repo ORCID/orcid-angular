@@ -50,6 +50,8 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   originalBackendCountries: CountriesEndpoint
   defaultVisibility: VisibilityStrings
   isMobile: boolean
+  loadingCountries = true
+  loadingCountryCodes = true
   @ViewChildren('countrySelect') inputs: QueryList<MatSelect>
 
   ngOnInit(): void {
@@ -64,8 +66,8 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
         this.originalBackendCountries.addresses.map(
           (value) => (this.countriesMap[value.putCode] = value)
         )
-
         this.backendJsonToForm(this.originalBackendCountries)
+        this.loadingCountries = false
       })
     this._recordCountryService
       .getCountryCodes()
@@ -75,6 +77,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
         this.countryCodes = Object.entries(codes).map((keyValue) => {
           return { key: keyValue[0], value: keyValue[1] }
         })
+        this.loadingCountryCodes = false
       })
     this._platform
       .get()
@@ -131,13 +134,13 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
+    this.loadingCountries = true
     this._recordCountryService
       .postAddresses(this.formToBackend(this.countryForm))
       .subscribe((response) => {
         console.log(response)
+        this.closeEvent()
       })
-
-    this.closeEvent()
   }
   closeEvent() {
     this.dialogRef.close()
