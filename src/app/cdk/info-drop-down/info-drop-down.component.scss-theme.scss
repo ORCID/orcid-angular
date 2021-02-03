@@ -2,13 +2,19 @@
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin info-drop-down($theme) {
+  $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $background: map-get($theme, background);
   .description-container {
     background-color: map-get($background, 'background');
   }
-  .university-dropdown.active {
-    color: mat-color($accent, 700);
+  .university-dropdown.active > a,
+  .university-dropdown.active > mat-icon {
+    color: mat-color($accent, 900) !important;
+  }
+  .university-dropdown > a,
+  .university-dropdown > mat-icon {
+    color: mat-color($primary, 500) !important;
   }
 }
 
