@@ -1,6 +1,10 @@
 <app-modal>
   <app-modal-header>Names</app-modal-header>
-  <app-modal-side-bar> Form content</app-modal-side-bar>
+  <app-modal-side-bar>
+    <ng-container id="side-bar-title"
+    >Given and family names
+    </ng-container>
+  </app-modal-side-bar>
   <app-modal-footer>
     <button mat-raised-button color="primary" (click)="saveEvent()">
       Save changes

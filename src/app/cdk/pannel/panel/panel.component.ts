@@ -22,6 +22,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   openState = false
   editable = true
+
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService

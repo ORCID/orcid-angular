@@ -10,19 +10,6 @@
   $background: map-get($theme, background);
   $config: mat-typography-config();
 
-  input {
-    border: solid 1px mat-color($background, grey);
-  }
-
-  ::placeholder {
-    color: mat-color($background, grey);
-  }
-
-  :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: mat-color($background, grey);
-  }
-
   hr {
     border-color: map-get($foreground, 'brand-primary');
     color: map-get($foreground, 'brand-primary');
