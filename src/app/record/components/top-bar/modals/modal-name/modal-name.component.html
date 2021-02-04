@@ -31,7 +31,7 @@
         <span class="required">*</span>
       </label>
     </div>
-    <div class="col l12 m8 s4 top no-wrap no-gutters">
+    <div class="input-container">
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min"
@@ -40,76 +40,41 @@
           id="given-names-input"
           matInput
           formControlName="givenNames"
-          placeholder=""
+          placeholder="Add given name"
         />
         <mat-error
           class="mat-caption"
           *ngIf="namesForm.hasError('required', 'givenNames')"
-          i18n="@@register.firstNamePassword"
         >
           Please enter your first/given name
         </mat-error>
         <mat-error
           *ngIf="namesForm.hasError('notPattern', 'givenNames')"
-          i18n="@@register.invalidName"
         >
           Invalid name characters or format
         </mat-error>
       </mat-form-field>
     </div>
-    <!--    <div-->
-    <!--      class="input-box"-->
-    <!--    >-->
-    <!--      <label-->
-    <!--        for="given-names-input"-->
-    <!--        class="mat-caption"-->
-    <!--        [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"-->
-    <!--      >-->
-    <!--        <strong>Given names </strong>-->
-    <!--        <span class="required">*</span>-->
-    <!--      </label>-->
-    <!--      <input-->
-    <!--        id="given-names-input"-->
-    <!--        formControlName="givenNames"-->
-    <!--        type="text"-->
-    <!--        class="mat-body-1"-->
-    <!--      />-->
-    <!--      <mat-error-->
-    <!--        class="mat-caption"-->
-    <!--        *ngIf="namesForm.hasError('required', 'givenNames')"-->
-    <!--        i18n="@@register.firstNamePassword"-->
-    <!--      >-->
-    <!--        Please enter your first/given name-->
-    <!--      </mat-error>-->
-    <!--      <mat-error-->
-    <!--        *ngIf="namesForm.hasError('notPattern', 'givenNames')"-->
-    <!--        i18n="@@register.invalidName"-->
-    <!--      >-->
-    <!--        Invalid name characters or format-->
-    <!--      </mat-error>-->
-    <!--    </div>-->
-    <div
-      class="input-box family-names"
-    >
+    <div class="row">
       <label
         for="family-names-input"
         class="mat-caption"
       >
         <strong>Family names</strong>
       </label>
-      <input
-        id="family-names-input"
-        formControlName="familyNames"
-        name="familyNames"
-        type="text"
-        class="mat-body-1"
-      />
-      <mat-error
-        *ngIf="namesForm.hasError('notPattern', 'familyNames')"
-        i18n="@@register.invalidName"
+    </div>
+    <div class="input-container">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
       >
-        Invalid name characters or format
-      </mat-error>
+        <input
+          id="family-names-input"
+          matInput
+          formControlName="familyNames"
+          placeholder="Add family names"
+        />
+      </mat-form-field>
     </div>
     <div class="mat-body-2 title">
       <strong>Published name</strong>
@@ -120,27 +85,55 @@
       family names.
     </p>
     <div class="row">
-      <div class="input-box">
-        <label for="published-name-input" class="mat-caption">
-          <strong>Published name</strong>
-        </label>
-        <input
-          id="published-name-input"
-          formControlName="publishedName"
-          name="publishedName"
-          type="text"
-          class="mat-body-1"
-        />
-        <mat-hint class="mat-caption">
-          You can format this name however you wish
-        </mat-hint>
+      <label
+        for="published-names-input"
+        class="mat-caption"
+      >
+        <strong>Published name</strong>
+      </label>
+    </div>
+    <div class="row">
+      <div class="input-container">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min"
+        >
+          <input
+            id="published-names-input"
+            matInput
+            formControlName="publishedName"
+            placeholder="Add family names"
+          />
+        </mat-form-field>
       </div>
-      <div class="col no-wrap actions-wrapper no-gutters visibility">
+      <div class="col l6 no-wrap actions-wrapper no-gutters visibility">
         <app-privacy-selector
           formControlName="visibility"
         ></app-privacy-selector>
       </div>
     </div>
+    <!--    <div class="row">-->
+    <!--      <div class="input-box">-->
+    <!--        <label for="published-name-input" class="mat-caption">-->
+    <!--          <strong>Published name</strong>-->
+    <!--        </label>-->
+    <!--        <input-->
+    <!--          id="published-name-input"-->
+    <!--          formControlName="publishedName"-->
+    <!--          name="publishedName"-->
+    <!--          type="text"-->
+    <!--          class="mat-body-1"-->
+    <!--        />-->
+    <!--        <mat-hint class="mat-caption">-->
+    <!--          You can format this name however you wish-->
+    <!--        </mat-hint>-->
+    <!--      </div>-->
+    <!--      <div class="col no-wrap actions-wrapper no-gutters visibility">-->
+    <!--        <app-privacy-selector-->
+    <!--          formControlName="visibility"-->
+    <!--        ></app-privacy-selector>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="mat-body-2 title">
       <strong>My alternative names</strong>
     </div>
