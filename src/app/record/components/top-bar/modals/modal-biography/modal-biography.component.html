@@ -2,7 +2,7 @@
   <app-modal-header>
     Biography
   </app-modal-header>
-  <app-modal-side-bar> Form content </app-modal-side-bar>
+  <app-modal-side-bar> Form content</app-modal-side-bar>
   <app-modal-footer>
     <button mat-raised-button color="primary" (click)="saveEvent()">
       Save changes
@@ -11,16 +11,43 @@
       Cancel
     </button>
   </app-modal-footer>
-
-  <p>Biography</p>
-  <hr>
-  <p>
-    Information about yourself, your research interests and other pertinent details that enhance your ORCID record.
-  </p>
-  <p>Visibility</p>
-  <hr>
-  <p>
-    Who can see your biography. The default visibility setting is Private.
-  </p>
-
+  <form [formGroup]="biographyForm" (ngSubmit)="onSubmit()">
+    <div class="mat-body-2 title">
+      <strong>Biography</strong>
+    </div>
+    <hr>
+    <p class="orc-font-small-print">
+      Information about yourself, your research interests and other pertinent details that enhance your ORCID record.
+    </p>
+    <label for="biography" class="mat-caption">
+      <strong>Biography</strong>
+    </label>
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min"
+    >
+      <textarea
+        id="biography"
+        matInput
+        formControlName="biography"
+        placeholder="Add you biography"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="7"
+      >
+      </textarea>
+    </mat-form-field>
+    <div class="mat-body-2 title">
+      <strong>Visibility</strong>
+    </div>
+    <hr>
+    <p class="orc-font-small-print">
+      Who can see your biography. The default visibility setting is Private.
+    </p>
+    <div class="col no-wrap actions-wrapper no-gutters visibility">
+      <app-privacy-selector
+        formControlName="visibility"
+      ></app-privacy-selector>
+    </div>
+  </form>
 </app-modal>

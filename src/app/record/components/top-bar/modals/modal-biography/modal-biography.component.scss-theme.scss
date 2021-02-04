@@ -1,7 +1,8 @@
 @import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
+@import 'src/assets/scss/material.typography';
 
-@mixin model-name-theme($theme) {
+@mixin model-biography-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
@@ -44,9 +45,9 @@
     color: map-get($foreground, 'state-warning-dark');
   }
 
-  input.mat-input-element {
-    font-size: mat-font-size($config, body-1) !important;
+  textarea.mat-input-element {
+    font-size: mat-font-size($config, caption) !important;
   }
 
 }
-@include model-name-theme($orcid-app-theme);
+@include model-biography-theme($orcid-app-theme);

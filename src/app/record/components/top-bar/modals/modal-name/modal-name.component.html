@@ -17,9 +17,7 @@
     <p class="orc-font-small-print">
       Your given and family names. These are used on your ORCID record by default.
     </p>
-    <div
-      class="input-box"
-    >
+    <div class="row">
       <label
         for="given-names-input"
         class="mat-caption"
@@ -28,26 +26,64 @@
         <strong>Given names </strong>
         <span class="required">*</span>
       </label>
-      <input
-        id="given-names-input"
-        formControlName="givenNames"
-        type="text"
-        class="mat-body-1"
-      />
-      <mat-error
-        class="mat-caption"
-        *ngIf="namesForm.hasError('required', 'givenNames')"
-        i18n="@@register.firstNamePassword"
-      >
-        Please enter your first/given name
-      </mat-error>
-      <mat-error
-        *ngIf="namesForm.hasError('notPattern', 'givenNames')"
-        i18n="@@register.invalidName"
-      >
-        Invalid name characters or format
-      </mat-error>
     </div>
+    <div class="col l12 m8 s4 top no-wrap no-gutters">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+      >
+        <input
+          id="given-names-input"
+          matInput
+          formControlName="givenNames"
+          placeholder=""
+        />
+        <mat-error
+          class="mat-caption"
+          *ngIf="namesForm.hasError('required', 'givenNames')"
+          i18n="@@register.firstNamePassword"
+        >
+          Please enter your first/given name
+        </mat-error>
+        <mat-error
+          *ngIf="namesForm.hasError('notPattern', 'givenNames')"
+          i18n="@@register.invalidName"
+        >
+          Invalid name characters or format
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!--    <div-->
+    <!--      class="input-box"-->
+    <!--    >-->
+    <!--      <label-->
+    <!--        for="given-names-input"-->
+    <!--        class="mat-caption"-->
+    <!--        [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"-->
+    <!--      >-->
+    <!--        <strong>Given names </strong>-->
+    <!--        <span class="required">*</span>-->
+    <!--      </label>-->
+    <!--      <input-->
+    <!--        id="given-names-input"-->
+    <!--        formControlName="givenNames"-->
+    <!--        type="text"-->
+    <!--        class="mat-body-1"-->
+    <!--      />-->
+    <!--      <mat-error-->
+    <!--        class="mat-caption"-->
+    <!--        *ngIf="namesForm.hasError('required', 'givenNames')"-->
+    <!--        i18n="@@register.firstNamePassword"-->
+    <!--      >-->
+    <!--        Please enter your first/given name-->
+    <!--      </mat-error>-->
+    <!--      <mat-error-->
+    <!--        *ngIf="namesForm.hasError('notPattern', 'givenNames')"-->
+    <!--        i18n="@@register.invalidName"-->
+    <!--      >-->
+    <!--        Invalid name characters or format-->
+    <!--      </mat-error>-->
+    <!--    </div>-->
     <div
       class="input-box family-names"
     >
@@ -108,12 +144,16 @@
     <p class="orc-font-small-print">
       Other variants of your name. Adding these can help people find you record when searching the ORCID registry
     </p>
-    <div class="row">
-      <div class="input-box">
-        <ng-container *ngFor="let otherNames of userRecord.otherNames.otherNames; let i = index">
-        <label for="alternative-names-input" class="mat-caption">
-          <strong>My alternative names</strong>
-        </label>
+    <ng-container *ngFor="let otherNames of userRecord.otherNames.otherNames; let i = index">
+      <div class="row">
+        <div class="input-box">
+          <label
+            *ngIf="i === 0"
+            for="alternative-names-input"
+            class="mat-caption"
+          >
+            <strong>My alternative names</strong>
+          </label>
           <input
             id="alternative-names-input"
             name="publishedName"
@@ -137,19 +177,20 @@
           <!--              </button>-->
           <!--            </div>-->
           <!--          </div>-->
-        </ng-container>
+        </div>
+        <div class="col no-wrap actions-wrapper no-gutters visibility">
+          <app-privacy-selector
+            formControlName="visibility"
+          ></app-privacy-selector>
+          <button (click)="deleteOtherName('caca')" mat-icon-button>
+            <mat-icon class="material-icons-outlined large-material-icon"
+            >delete
+            </mat-icon
+            >
+          </button>
+        </div>
       </div>
-      <div class="col no-wrap actions-wrapper no-gutters visibility">
-        <app-privacy-selector
-          formControlName="visibility"
-        ></app-privacy-selector>
-        <button (click)="deleteOtherName('caca')" mat-icon-button>
-          <mat-icon class="material-icons-outlined large-material-icon"
-          >delete</mat-icon
-          >
-        </button>
-      </div>
-    </div>
+    </ng-container>
     <div class="row">
       <a class="col add-more no-gutters" (click)="addOtherName()">
         <mat-icon class="large-material-icon">add_circle</mat-icon>

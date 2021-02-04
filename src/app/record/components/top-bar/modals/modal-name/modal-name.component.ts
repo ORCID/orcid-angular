@@ -5,6 +5,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { OrcidValidators } from '../../../../../validators'
 import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
+import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
+import { RecordOtherNamesService } from '../../../../../core/record-other-names/record-other-names.service'
 
 @Component({
   selector: 'app-modal-name',
@@ -17,7 +19,10 @@ export class ModalNameComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UserRecord) { }
+    @Inject(MAT_DIALOG_DATA) public data: UserRecord,
+    public recordNameService: RecordNamesService,
+    public recordOtherNamesService: RecordOtherNamesService,
+    ) { }
 
   ngOnInit(): void {
     this.userRecord = this.data
@@ -37,12 +42,15 @@ export class ModalNameComponent implements OnInit {
         ],
       }),
       publishedName: new FormControl(this.userRecord.person.displayName),
+      visibility: new FormControl(this.userRecord.person.biography.visibility.visibility, {}),
     })
   }
 
   onSubmit() {}
 
-  addOtherName() {}
+  addOtherName() {
+    // this.recordOtherNamesService.postOtherNames()
+  }
 
   deleteOtherName(putcode: string) {}
 

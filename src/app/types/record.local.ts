@@ -1,25 +1,25 @@
 import {
-  Biography,
-  CountriesEndpoint,
-  EmailsEndpoint,
-  ExternalIdentifier,
-  Keywords,
-  Names,
-  OtherNames,
   Person,
-  Preferences,
+  EmailsEndpoint,
+  OtherNamesEndPoint,
+  CountriesEndpoint,
+  Keywords,
   Website,
+  ExternalIdentifier,
+  NamesEndPoint,
+  Preferences,
+  BiographyEndPoint,
 } from '.'
 
 export interface UserRecord {
   person: Person
   emails: EmailsEndpoint
-  otherNames: OtherNames
+  otherNames: OtherNamesEndPoint
   countries: CountriesEndpoint
   keyword: Keywords
   website: Website
   externalIdentifier: ExternalIdentifier
-  names: Names
-  biography: Biography
+  names: NamesEndPoint
+  biography: BiographyEndPoint
   preferences: Preferences
 }

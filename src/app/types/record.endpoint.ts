@@ -1,13 +1,5 @@
-import {
-  Address,
-  Email,
-  OtherName,
-  ResearcherUrl,
-  Visibility,
-  MonthDayYearDate,
-  VisibilityStrings,
-  Value,
-} from './common.endpoint'
+import { Address, Email, MonthDayYearDate, OtherName, ResearcherUrl, Value, Visibility, VisibilityStrings } from './common.endpoint'
+import { BiographyEndPoint } from './record-biography.endpoint'
 
 interface PublicGroupedOtherNames {
   [x: string]: OtherName
@@ -40,7 +32,7 @@ interface PublicGroupedPersonExternalIdentifiers {
 export interface Person {
   title: string
   displayName: string
-  biography: Biography
+  biography: BiographyEndPoint
   publicGroupedOtherNames: PublicGroupedOtherNames
   publicAddress: Address
   countryNames: CountryNames
@@ -49,18 +41,6 @@ export interface Person {
   publicGroupedResearcherUrls: PublicGroupedResearcherUrls
   publicGroupedEmails: PublicGroupedEmails
   publicGroupedPersonExternalIdentifiers: PublicGroupedPersonExternalIdentifiers
-}
-
-export interface Biography {
-  visibility: Visibility
-  biography: Value
-  errors: string[]
-}
-
-export interface OtherNames {
-  errors: String[]
-  otherNames: Assertion[]
-  visibility: Visibility
 }
 
 export interface Keywords {
@@ -79,14 +59,6 @@ export interface ExternalIdentifier {
   errors: any[]
   externalIdentifiers: Assertion[]
   visibility: Visibility
-}
-
-export interface Names {
-  visibility: Visibility
-  errors: any[]
-  givenNames: Value
-  familyName: Value
-  creditName?: any
 }
 
 export interface Preferences {

@@ -3,12 +3,9 @@ import { Injectable } from '@angular/core'
 import { combineLatest, Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import {
-  Biography,
   EmailsEndpoint,
   ExternalIdentifier,
   Keywords,
-  Names,
-  OtherNames,
   Person,
   Preferences,
   Website,
@@ -20,6 +17,12 @@ import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordCountriesService } from '../record-countries/record-countries.service'
 import { RecordEmailsService } from '../record-emails/record-emails.service'
+import { RecordBiographyService } from '../record-biography/record-biography.service'
+import { RecordNamesService } from '../record-names/record-names.service'
+import { RecordOtherNamesService } from '../record-other-names/record-other-names.service'
+import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
+import { NamesEndPoint } from '../../types/record-name.endpoint'
+import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +34,9 @@ export class RecordService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
+    private _recordBiographyService: RecordBiographyService,
+    private _recordNamesService: RecordNamesService,
+    private _recordOtherNamesService: RecordOtherNamesService,
     private _recordEmailsService: RecordEmailsService,
     private _recordCountryService: RecordCountriesService
   ) {}
@@ -47,13 +53,13 @@ export class RecordService {
       combineLatest([
         this.getPerson(id),
         this._recordEmailsService.getEmails(),
-        this.getOtherNames(),
+        this._recordOtherNamesService.getOtherNames(),
         this._recordCountryService.getAddresses(),
         this.getKeywords(),
         this.getWebsites(),
         this.getExternalIdentifier(),
-        this.getNames(),
-        this.getBiography(),
+        this._recordNamesService.getNames(),
+        this._recordBiographyService.getBiography(),
         this.getPreferences(),
       ])
         .pipe(
@@ -73,13 +79,13 @@ export class RecordService {
               this.recordSubject$.next({
                 person: person as Person,
                 emails: emails as EmailsEndpoint,
-                otherNames: otherNames as OtherNames,
+                otherNames: otherNames as OtherNamesEndPoint,
                 countries: countries as CountriesEndpoint,
                 keyword: keyword as Keywords,
                 website: website as Website,
                 externalIdentifier: externalIdentifier as ExternalIdentifier,
-                names: names as Names,
-                biography: biography as Biography,
+                names: names as NamesEndPoint,
+                biography: biography as BiographyEndPoint,
                 preferences: preferences as Preferences,
               })
             }
@@ -113,30 +119,6 @@ export class RecordService {
             })
           }
         })
-      )
-  }
-
-  getOtherNames(): Observable<OtherNames> {
-    return this._http
-      .get<OtherNames>(environment.API_WEB + `my-orcid/otherNamesForms.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postOtherNames(otherNames: OtherNames): Observable<OtherNames> {
-    return this._http
-      .post<OtherNames>(
-        environment.API_WEB + `my-orcid/otherNamesForms.json`,
-        otherNames,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 
@@ -208,56 +190,6 @@ export class RecordService {
       .post<ExternalIdentifier>(
         environment.API_WEB + `my-orcid/externalIdentifiers.json`,
         website,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getNames(): Observable<Names> {
-    return this._http
-      .get<Names>(
-        environment.API_WEB + `account/nameForm.json`,
-
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postNames(names: Names): Observable<Names> {
-    return this._http
-      .post<Names>(environment.API_WEB + `account/nameForm.json`, names, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getBiography(): Observable<Biography> {
-    return this._http
-      .get<Biography>(
-        environment.API_WEB + `account/biographyForm.json`,
-
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postBiography(names: Biography): Observable<Biography> {
-    return this._http
-      .post<Biography>(
-        environment.API_WEB + `account/biographyForm.json`,
-        names,
         { headers: this.headers }
       )
       .pipe(
