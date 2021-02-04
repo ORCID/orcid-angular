@@ -152,7 +152,9 @@ export class NotificationComponent
   notificationDate(notification: InboxNotification) {
     const date = new Date(notification.createdDate)
     return date.toLocaleDateString('en-ZA', {
-      month: '2-digit', day: '2-digit', year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
     })
   }
 
