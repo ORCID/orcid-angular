@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivateChild,
@@ -7,12 +7,15 @@ import {
   UrlTree,
 } from '@angular/router'
 import { NEVER, Observable, of } from 'rxjs'
-import { first, map, switchMap } from 'rxjs/operators'
+import { catchError, map, switchMap } from 'rxjs/operators'
 
-import { RequestInfoForm } from '../types'
-import { UserService } from '../core'
-import { WINDOW } from '../cdk/window'
 import { PlatformInfoService } from '../cdk/platform-info'
+import { WINDOW } from '../cdk/window'
+import { UserService } from '../core'
+import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
+import { GoogleAnalyticsService } from '../core/google-analytics/google-analytics.service'
+import { ERROR_REPORT } from '../errors'
+import { RequestInfoForm } from '../types'
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +25,9 @@ export class AuthorizeGuard implements CanActivateChild {
     private _user: UserService,
     private _router: Router,
     private _platform: PlatformInfoService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _gtag: GoogleAnalyticsService,
+    private _errorHandler: ErrorHandlerService
   ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -41,22 +46,38 @@ export class AuthorizeGuard implements CanActivateChild {
             oauthSession.responseType &&
             oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
           ) {
-            this.window.location.href = oauthSession.redirectUrl
-            return NEVER
+            return this.reportAlreadyAuthorize(session.oauthSession).pipe(
+              catchError(() => this.sendUserToRedirectURL(oauthSession)),
+              switchMap(() => this.sendUserToRedirectURL(oauthSession))
+            )
           } else if (
-            (oauthSession && oauthSession.forceLogin) ||
+            oauthSession.forceLogin ||
             !session.oauthSessionIsLoggedIn
           ) {
             return this.redirectToLoginPage(oauthSession)
-            // If the redirectUrl comes with a code from the start redirect the user immediately
-          } else if (oauthSession.redirectUrl.includes('?code=')) {
-            this.window.location.href = oauthSession.redirectUrl
-            return NEVER
           }
         }
         return of(true)
       })
     )
+  }
+
+  sendUserToRedirectURL(oauthSession: RequestInfoForm) {
+    this.window.location.href = oauthSession.redirectUrl
+    return NEVER
+  }
+
+  reportAlreadyAuthorize(request: RequestInfoForm) {
+    return this._gtag
+      .reportEvent(`Reauthorize`, 'RegGrowth', request)
+      .pipe(
+        catchError((err) =>
+          this._errorHandler.handleError(
+            err,
+            ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+          )
+        )
+      )
   }
 
   private redirectToLoginPage(

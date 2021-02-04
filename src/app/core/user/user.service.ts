@@ -143,7 +143,7 @@ export class UserService {
           map((data) => this.computesUpdatedUserData(data)),
           // Debugger for the user session on development time
           tap((session) =>
-            environment.sessionDebugger ? console.log(session) : null
+            environment.debugger ? console.info(session) : null
           ),
           tap((session) => {
             this.$userSessionSubject.next(session)
@@ -268,8 +268,8 @@ export class UserService {
             .declareOauthSession(params, updateParameters)
             .pipe(
               tap(() =>
-                environment.sessionDebugger
-                  ? console.log('Oauth session declare')
+                environment.debugger
+                  ? console.info('Oauth session declare')
                   : null
               )
             )
