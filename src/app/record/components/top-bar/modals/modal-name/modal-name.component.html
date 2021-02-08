@@ -27,7 +27,7 @@
         class="mat-caption"
         [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"
       >
-        <strong>Given names </strong>
+        <strong>Given names</strong>
         <span class="required">*</span>
       </label>
     </div>
@@ -44,12 +44,12 @@
         />
         <mat-error
           class="mat-caption"
-          *ngIf="namesForm.hasError('required', 'givenNames')"
+          *ngIf="namesForm.get('givenNames').hasError('required')"
         >
           Please enter your first/given name
         </mat-error>
         <mat-error
-          *ngIf="namesForm.hasError('notPattern', 'givenNames')"
+          *ngIf="namesForm.get('givenNames').hasError('notPattern')"
         >
           Invalid name characters or format
         </mat-error>
@@ -105,75 +105,60 @@
             placeholder="Add family names"
           />
         </mat-form-field>
+        <mat-hint class="mat-caption">
+          You can format this name however you wish
+        </mat-hint>
       </div>
-      <div class="col l6 no-wrap actions-wrapper no-gutters visibility">
+      <div class="col no-wrap actions-wrapper no-gutters visibility">
         <app-privacy-selector
           formControlName="visibility"
         ></app-privacy-selector>
       </div>
     </div>
-    <!--    <div class="row">-->
-    <!--      <div class="input-box">-->
-    <!--        <label for="published-name-input" class="mat-caption">-->
-    <!--          <strong>Published name</strong>-->
-    <!--        </label>-->
-    <!--        <input-->
-    <!--          id="published-name-input"-->
-    <!--          formControlName="publishedName"-->
-    <!--          name="publishedName"-->
-    <!--          type="text"-->
-    <!--          class="mat-body-1"-->
-    <!--        />-->
-    <!--        <mat-hint class="mat-caption">-->
-    <!--          You can format this name however you wish-->
-    <!--        </mat-hint>-->
-    <!--      </div>-->
-    <!--      <div class="col no-wrap actions-wrapper no-gutters visibility">-->
-    <!--        <app-privacy-selector-->
-    <!--          formControlName="visibility"-->
-    <!--        ></app-privacy-selector>-->
-    <!--      </div>-->
-    <!--    </div>-->
     <div class="mat-body-2 title">
-      <strong>My alternative names</strong>
+      <strong>Also known as</strong>
     </div>
     <hr>
     <p class="orc-font-small-print">
-      Other variants of your name. Adding these can help people find you record when searching the ORCID registry
+      You can add variants of your name, such as an abbreviated first name, middle names, former names or names in a different character set or language. Adding other names can help people find your record when they search the ORCID registry.
     </p>
-    <ng-container *ngFor="let otherNames of userRecord.otherNames.otherNames; let i = index">
-      <div class="row">
-        <div class="input-box">
-          <label
-            *ngIf="i === 0"
-            for="alternative-names-input"
-            class="mat-caption"
+    <div class="row">
+      <label
+        for="alternative-names-input"
+        class="mat-caption"
+      >
+        <strong>Other names</strong>
+      </label>
+    </div>
+    <div class="row other-names-wrapper"
+         id="country-droplist"
+         cdkDropList
+         (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        cdkDrag
+        rootElementSelector="#country-droplist"
+        class="row country-input-line"
+        [ngClass]="{ 'no-wrap': !isMobile }"
+        *ngFor="let names of otherNames;"
+      >
+        <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+          <img class="icon-drag" cdkDragHandle src="./assets/vectors/draggable.svg"/>
+          <mat-form-field
+            appearance="outline"
+            class="mat-form-field-min"
           >
-            <strong>My alternative names</strong>
-          </label>
-          <input
-            id="alternative-names-input"
-            name="publishedName"
-            type="text"
-            class="mat-body-1"
-          />
-          <mat-hint class="mat-caption">
-            <ng-container>Source:</ng-container>
-            {{ otherNames.sourceName + ' ' + otherNames.lastModified.year + '-' + otherNames.lastModified.month + '-' + otherNames.lastModified.day}}
-          </mat-hint>
-          <!--        mobile version -->
-          <!--          <div class="col no-wrap actions-wrapper no-gutters visibility">-->
-          <!--            <app-privacy-selector-->
-          <!--              formControlName="visibility"-->
-          <!--            ></app-privacy-selector>-->
-          <!--            <div class="delete">-->
-          <!--              <button (click)="deleteOtherName(otherNames.putCode)" mat-icon-button>-->
-          <!--                <mat-icon-->
-          <!--                  class="material-icons-outlined large-material-icon">delete-->
-          <!--                </mat-icon>-->
-          <!--              </button>-->
-          <!--            </div>-->
-          <!--          </div>-->
+            <input
+              id="alternative-names-input"
+              matInput
+              formControlName="publishedName"
+              placeholder="Add family names"
+            />
+            <mat-hint class="mat-caption">
+              <ng-container>Source:</ng-container>
+              {{ getSourceName(names)}}
+            </mat-hint>
+          </mat-form-field>
         </div>
         <div class="col no-wrap actions-wrapper no-gutters visibility">
           <app-privacy-selector
@@ -187,13 +172,26 @@
           </button>
         </div>
       </div>
-    </ng-container>
+    </div>
+    <!--        mobile version -->
+    <!--          <div class="col no-wrap actions-wrapper no-gutters visibility">-->
+    <!--            <app-privacy-selector-->
+    <!--              formControlName="visibility"-->
+    <!--            ></app-privacy-selector>-->
+    <!--            <div class="delete">-->
+    <!--              <button (click)="deleteOtherName(otherNames.putCode)" mat-icon-button>-->
+    <!--                <mat-icon-->
+    <!--                  class="material-icons-outlined large-material-icon">delete-->
+    <!--                </mat-icon>-->
+    <!--              </button>-->
+    <!--            </div>-->
+    <!--          </div>-->
     <div class="row">
       <a class="col add-more no-gutters" (click)="addOtherName()">
         <mat-icon class="large-material-icon">add_circle</mat-icon>
         <span class="mat-body-1">
-            Add another alternative name
-          </span>
+          Add another name
+        </span>
       </a>
     </div>
   </form>

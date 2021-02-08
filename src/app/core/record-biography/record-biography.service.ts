@@ -34,7 +34,7 @@ export class RecordBiographyService {
       )
   }
 
-  postBiography(biography: Biography): Observable<BiographyEndPoint> {
+  postBiography(biography: BiographyEndPoint): Observable<BiographyEndPoint> {
     return this._http
       .post<BiographyEndPoint>(
         environment.API_WEB + `account/biographyForm.json`,

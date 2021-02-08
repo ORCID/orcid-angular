@@ -2,9 +2,11 @@
   <app-modal-header>
     Biography
   </app-modal-header>
-  <ng-container id="side-bar-title"
-    >Biography
-  </ng-container>
+  <app-modal-side-bar>
+    <ng-container id="side-bar-title"
+      >Biography
+    </ng-container>
+  </app-modal-side-bar>
   <app-modal-footer>
     <button mat-raised-button color="primary" (click)="saveEvent()">
       Save changes
@@ -38,6 +40,11 @@
         cdkAutosizeMaxRows="7"
       >
       </textarea>
+      <mat-error
+        *ngIf="biographyForm.get('biography').hasError('notPattern')"
+      >
+        Invalid characters or format
+      </mat-error>
     </mat-form-field>
     <div class="mat-body-2 title">
       <strong>Visibility</strong>

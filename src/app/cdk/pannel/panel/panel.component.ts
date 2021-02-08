@@ -30,7 +30,7 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  isArrayAndIsNotEmpty(obj: any ) {
+  isArrayAndIsNotEmpty(obj: any) {
     return Array.isArray(obj) && obj.length > 0
   }
 
@@ -45,6 +45,7 @@ export class PanelComponent implements OnInit {
       .subscribe((platform) => {
         if (this.editModalComponent) {
           this._dialog.open(this.editModalComponent, {
+            width: '850px',
             maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
             data: this.userRecord,
           })

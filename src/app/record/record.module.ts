@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { PrivacySelectorModule } from '../cdk/privacy-selector/privacy-selector.module'
+import { DragDropModule } from '@angular/cdk/drag-drop'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PrivacySelectorModule } from '../cdk/privacy-selector/privacy-selector.
     MatInputModule,
     MatSelectModule,
     PrivacySelectorModule,
+    DragDropModule,
   ],
 })
 export class RecordModule {
