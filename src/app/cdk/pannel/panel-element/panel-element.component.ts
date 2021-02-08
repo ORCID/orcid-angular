@@ -9,6 +9,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 export class PanelElementComponent implements OnInit {
   @Input() visibility: VisibilityStrings
   @Input() bold: Boolean
+
   constructor() {}
 
   ngOnInit(): void {}

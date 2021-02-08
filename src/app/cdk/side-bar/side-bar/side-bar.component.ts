@@ -5,6 +5,7 @@ import { UserInfo, NameForm, RequestInfoForm } from 'src/app/types'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
 import { UserRecord } from 'src/app/types/record.local'
+import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
 
 @Component({
   selector: 'app-side-bar',
@@ -16,6 +17,8 @@ import { UserRecord } from 'src/app/types/record.local'
 })
 export class SideBarComponent implements OnInit, OnDestroy {
   @Input() onlyOrcidId = false
+
+  modalEmailComponent = ModalEmailComponent
 
   destroy$: Subject<boolean> = new Subject<boolean>()
   userSession: {

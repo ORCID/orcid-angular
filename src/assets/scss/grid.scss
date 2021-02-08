@@ -29,6 +29,10 @@ $gutter-width: 12px !default;
   padding: 0 $size4-margin;
   box-sizing: border-box;
 }
+.container.no-padding {
+  padding: 0;
+}
+
 @media #{$size8-and-up} {
   .container {
     max-width: $size8-maxwidth;
@@ -185,7 +189,6 @@ $gutter-width: 12px !default;
       }
     }
   }
-  // This properties might be moved to work depending on the size
   .col.no-gutters {
     padding: 0;
   }

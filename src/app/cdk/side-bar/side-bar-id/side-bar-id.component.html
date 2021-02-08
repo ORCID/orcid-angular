@@ -2,10 +2,18 @@
   <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
   <div class="text-container">
     <div class="orc-font-body-large" dir="ltr">https://orcid.org/</div>
-    <strong class="orc-font-heading-small">{{ id }}</strong>
+    <strong
+      [ngClass]="{
+        'orc-font-heading-small': desktop,
+        'orc-font-body-large': !desktop
+      }"
+      >{{ id }}</strong
+    >
   </div>
   <a
     [href]="id"
+    target="_blank"
+    rel="noopener noreferrer"
     class="preview orc-font-smallprint"
     *ngIf="privateView"
     i18n="@@record.previewPublicRecord"
