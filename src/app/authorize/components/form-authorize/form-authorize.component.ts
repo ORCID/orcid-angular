@@ -137,12 +137,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             )
         )
       }
-      forkJoin(analyticsReports)
-        .pipe(tap(() => (this.loadingAuthorizeEndpoint = false)))
-        .subscribe(
-          () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
-          () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
-        )
+      forkJoin(analyticsReports).subscribe(
+        () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
+        () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
+      )
     })
   }
 
