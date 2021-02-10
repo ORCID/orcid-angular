@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
@@ -8,23 +8,29 @@ import { RecordBiographyService } from '../../../../../core/record-biography/rec
 import { OrcidValidators } from '../../../../../validators'
 import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from '../../../../../constants'
 import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
-import { VisibilityStrings } from '../../../../../types/common.endpoint'
+import { Visibility, VisibilityStrings } from '../../../../../types/common.endpoint'
+import { first } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-modal-biography',
   templateUrl: './modal-biography.component.html',
   styleUrls: ['./modal-biography.component.scss-theme.scss', './modal-biography.component.scss']
 })
-export class ModalBiographyComponent implements OnInit {
+export class ModalBiographyComponent implements OnInit, OnDestroy {
+  $destroy: Subject<boolean> = new Subject<boolean>()
+
   biographyForm: FormGroup
   userRecord: UserRecord
   biography: String = ''
   biographyVisibility: VisibilityStrings = 'PRIVATE'
   loadingBiography = true
+  defaultVisibility: VisibilityStrings
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
+    private _cdref: ChangeDetectorRef,
     private _recordBiographyService: RecordBiographyService,
   ) {}
 
@@ -48,16 +54,39 @@ export class ModalBiographyComponent implements OnInit {
 
   onSubmit() {}
 
+  backendJsonToForm(biography: BiographyEndPoint) {
+    this.biographyForm.setValue({
+      biography: biography.biography.value,
+      visibility: biography.visibility.visibility
+    })
+  }
+
+
   formToBackend(biographyForm: FormGroup): BiographyEndPoint {
+    const visibility = {
+      errors: [],
+      required: undefined,
+      visibility: biographyForm.get('visibility').value
+    } as Visibility
     return {
       errors: [],
       biography: biographyForm.get('biography').value,
-      visibility: biographyForm.get('visibility').value,
+      visibility:  visibility,
     } as BiographyEndPoint
   }
 
+  getBiography() {
+    this._recordBiographyService
+      .getBiography()
+      .pipe(first())
+      .subscribe((biography: BiographyEndPoint) => {
+        console.log(JSON.stringify(biography))
+        // this.backendJsonToForm(biography)
+        this.loadingBiography = false
+      })
+  }
+
   saveEvent() {
-    this.formToBackend(this.biographyForm)
     this.loadingBiography = true
     this._recordBiographyService
       .postBiography(this.formToBackend(this.biographyForm))
@@ -71,5 +100,10 @@ export class ModalBiographyComponent implements OnInit {
 
   closeEvent() {
     this.dialogRef.close()
+  }
+
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
   }
 }
