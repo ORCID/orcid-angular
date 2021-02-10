@@ -274,28 +274,3 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
     })
   })
 })
-
-export function dragElement(sourceSelector, targetSelector) {
-  return cy.get(targetSelector).then((targetElms) => {
-    const targetRect = targetElms[0].getBoundingClientRect()
-
-    return cy.get(sourceSelector).then((sourceElms) => {
-      const sourceRect = sourceElms[0].getBoundingClientRect()
-
-      sourceElms[0].dispatchEvent(new MouseEvent('mousedown'))
-      sourceElms[0].dispatchEvent(
-        new MouseEvent('mousemove', {
-          clientX: sourceRect.x + 1,
-          clientY: sourceRect.y + 1,
-        })
-      )
-      sourceElms[0].dispatchEvent(
-        new MouseEvent('mousemove', {
-          clientX: targetRect.x + 1,
-          clientY: targetRect.y + 1,
-        })
-      )
-      sourceElms[0].dispatchEvent(new MouseEvent('mouseup'))
-    })
-  })
-}
