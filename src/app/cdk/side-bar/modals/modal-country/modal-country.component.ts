@@ -77,6 +77,15 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
         this.countryCodes = Object.entries(codes).map((keyValue) => {
           return { key: keyValue[0], value: keyValue[1] }
         })
+        this.countryCodes.sort((a, b) => {
+          if (a.key < b.key) {
+            return -1
+          }
+          if (a.key > b.key) {
+            return 1
+          }
+          return 0
+        })
         this.loadingCountryCodes = false
       })
     this._platform

@@ -1,21 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core'
-import {
-  NG_VALUE_ACCESSOR,
-  NG_ASYNC_VALIDATORS,
-  NG_VALIDATORS,
-  ControlValueAccessor,
-  AsyncValidator,
-  Validator,
-  AbstractControl,
-  ValidationErrors,
-} from '@angular/forms'
+import { Component, EventEmitter, forwardRef, OnInit } from '@angular/core'
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
 @Component({
