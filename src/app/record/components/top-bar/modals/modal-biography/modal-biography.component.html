@@ -62,18 +62,18 @@
       </textarea>
       <mat-error
         *ngIf="biographyForm.get('biography').hasError('notPattern')"
-        i18n="topBar.invalidBio"
+        i18n="@@topBar.invalidBio"
       >
         Invalid characters or format
       </mat-error>
     </mat-form-field>
     <div class="mat-body-2 title">
-      <strong i18n="shared.visibility">Visibility</strong>
+      <strong i18n="@@shared.visibility">Visibility</strong>
     </div>
     <hr>
     <p
       class="orc-font-small-print"
-      i18n="shared.whoCanSee"
+      i18n="@@shared.whoCanSeeBio"
     >
       Who can see your biography. The default visibility setting is Private.
     </p>

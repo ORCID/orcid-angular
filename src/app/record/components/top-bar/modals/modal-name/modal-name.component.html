@@ -1,13 +1,13 @@
 <app-modal [loading]="loadingNames">
   <app-modal-header>
-    <ng-container i18n="topBar.names">
+    <ng-container i18n="@@topBar.names">
       Names
     </ng-container>
   </app-modal-header>
   <app-modal-side-bar>
     <ng-container
       id="side-bar-title"
-      i18n="topBar.givenAndFamilyNames"
+      i18n="@@topBar.givenAndFamilyNames"
     >Given and family names
     </ng-container>
   </app-modal-side-bar>
@@ -31,7 +31,7 @@
   </app-modal-footer>
   <form [formGroup]="namesForm" (ngSubmit)="onSubmit()">
     <div class="mat-body-2 title">
-      <strong i18n="topBar.givenAndFamilyNames">
+      <strong i18n="@@topBar.givenAndFamilyNames">
         Given and family names
       </strong>
       <span class="required">*</span>
@@ -39,7 +39,7 @@
     <hr>
     <p
       class="orc-font-small-print"
-      i18n="topBar.yourGivenAndFamilyNames"
+      i18n="@@topBar.yourGivenAndFamilyNames"
     >
       Your given and family names. These are used on your ORCID record by default.
     </p>
@@ -49,7 +49,7 @@
         class="mat-caption"
         [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"
       >
-        <strong i18n="topBar.givenNames">Given names</strong>
+        <strong i18n="@@topBar.givenNames">Given names</strong>
         <span class="required">*</span>
       </label>
     </div>
@@ -84,7 +84,7 @@
         for="family-names-input"
         class="mat-caption"
       >
-        <strong i18n="topBar.familyNames">Family names</strong>
+        <strong i18n="@@topBar.familyNames">Family names</strong>
       </label>
     </div>
     <div class="input-container">
@@ -101,12 +101,12 @@
       </mat-form-field>
     </div>
     <div class="mat-body-2 title">
-      <strong i18n="topBar.publishedName">Published name</strong>
+      <strong i18n="@@topBar.publishedName">Published name</strong>
     </div>
     <hr>
     <p
       class="orc-font-small-print"
-      i18n="topBar.preferredNameFormat"
+      i18n="@@topBar.preferredNameFormat"
     >
       Your preferred name format and structure. If added the published name will be used instead of your given and family names.
     </p>
@@ -115,7 +115,7 @@
         for="published-names-input"
         class="mat-caption"
       >
-        <strong i18n="topBar.publishedName">Published name</strong>
+        <strong i18n="@@topBar.publishedName">Published name</strong>
       </label>
     </div>
     <div class="input-container">
@@ -131,19 +131,19 @@
         />
         <mat-hint
           class="mat-caption"
-          i18n="topBar.youCanFormat"
+          i18n="@@topBar.youCanFormat"
         >
           You can format this name however you wish
         </mat-hint>
       </mat-form-field>
     </div>
     <div class="mat-body-2 title">
-      <strong i18n="shared.visibility">Visibility</strong>
+      <strong i18n="@@shared.visibility">Visibility</strong>
     </div>
     <hr>
     <p
       class="orc-font-small-print"
-      i18n="shared.whoCanSee"
+      i18n="@@shared.whoCanSeeName"
     >
       Who can see your name. The default visibility setting is Private.
     </p>
@@ -155,7 +155,7 @@
       </div>
     </div>
     <div class="mat-body-2 title">
-      <strong i18n="topBar.alsoKnowAs">Also known as</strong>
+      <strong i18n="@@topBar.alsoKnowAs">Also known as</strong>
     </div>
     <hr>
     <p class="orc-font-small-print">
@@ -168,7 +168,7 @@
         for="alternative-names-input"
         class="mat-caption"
       >
-        <strong i18n="topBar.otherNames">Other names</strong>
+        <strong i18n="@@topBar.otherNames">Other names</strong>
       </label>
     </div>
     <div class="row"
@@ -224,7 +224,7 @@
         <mat-icon class="large-material-icon">add_circle</mat-icon>
         <span
           class="mat-body-1"
-          i18n="topBar.addAnotherName"
+          i18n="@@topBar.addAnotherName"
         >
           Add another name
         </span>
