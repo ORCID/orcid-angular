@@ -26,6 +26,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   biographyVisibility: VisibilityStrings = 'PRIVATE'
   loadingBiography = true
   defaultVisibility: VisibilityStrings
+  ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,

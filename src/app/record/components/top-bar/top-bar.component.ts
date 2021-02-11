@@ -34,6 +34,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   modalBiographyComponent = ModalBiographyComponent
 
   platform: PlatformInfo
+  creditName: String = ''
 
   constructor(
     private _platform: PlatformInfoService,
@@ -59,6 +60,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.destroy$))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
+            this.creditName = this.userRecord.names.creditName ? this.userRecord.names.creditName.value : ''
           })
       })
   }

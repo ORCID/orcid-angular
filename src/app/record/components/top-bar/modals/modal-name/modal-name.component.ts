@@ -35,6 +35,10 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   loadingNames = true
   platform: PlatformInfo
 
+  ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
+  ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
+  ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add published name`
+
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
@@ -84,7 +88,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const group: { [key: string]: FormGroup } = {}
 
     otherNames.forEach((otherName) => {
-      console.log('otherName: ' + JSON.stringify(otherName))
       group[otherName.putCode] = new FormGroup({
         otherName: new FormControl(otherName.content),
         visibility: new FormControl(otherName.visibility, {}),

@@ -1,30 +1,50 @@
 <app-modal>
   <app-modal-header>
-    Biography
+    <ng-container i18n="@@topBar.biography">
+      Biography
+    </ng-container>
   </app-modal-header>
   <app-modal-side-bar>
-    <ng-container id="side-bar-title"
-      >Biography
+    <ng-container
+      id="side-bar-title"
+      i18n="@@topBar.biography"
+    >
+      Biography
     </ng-container>
   </app-modal-side-bar>
   <app-modal-footer>
-    <button mat-raised-button color="primary" (click)="saveEvent()">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+    >
       Save changes
     </button>
-    <button mat-stroked-button color="primary" (click)="closeEvent()">
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+    >
       Cancel
     </button>
   </app-modal-footer>
   <form [formGroup]="biographyForm" (ngSubmit)="onSubmit()">
     <div class="mat-body-2 title">
-      <strong>Biography</strong>
+      <strong i18n="@@topBar.biography">
+        Biography
+      </strong>
     </div>
     <hr>
-    <p class="orc-font-small-print">
+    <p
+      class="orc-font-small-print"
+      i18n="@@topBar.information"
+    >
       Information about yourself, your research interests and other pertinent details that enhance your ORCID record.
     </p>
     <label for="biography" class="mat-caption">
-      <strong>Biography</strong>
+      <strong i18n="@@topBar.biography">Biography</strong>
     </label>
     <mat-form-field
       appearance="outline"
@@ -34,7 +54,7 @@
         id="biography"
         matInput
         formControlName="biography"
-        placeholder="Add you biography"
+        placeholder=" {{ ngOrcidAddYourBiography }}"
         cdkTextareaAutosize
         cdkAutosizeMinRows="5"
         cdkAutosizeMaxRows="7"
@@ -42,15 +62,19 @@
       </textarea>
       <mat-error
         *ngIf="biographyForm.get('biography').hasError('notPattern')"
+        i18n="topBar.invalidBio"
       >
         Invalid characters or format
       </mat-error>
     </mat-form-field>
     <div class="mat-body-2 title">
-      <strong>Visibility</strong>
+      <strong i18n="shared.visibility">Visibility</strong>
     </div>
     <hr>
-    <p class="orc-font-small-print">
+    <p
+      class="orc-font-small-print"
+      i18n="shared.whoCanSee"
+    >
       Who can see your biography. The default visibility setting is Private.
     </p>
     <div class="col no-wrap actions-wrapper no-gutters visibility">
