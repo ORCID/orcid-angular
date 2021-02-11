@@ -9,28 +9,31 @@ import { RecordNamesService } from '../../../../../core/record-names/record-name
 import { RecordOtherNamesService } from '../../../../../core/record-other-names/record-other-names.service'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { Subject } from 'rxjs'
-import { PlatformInfoService } from '../../../../../cdk/platform-info'
-import { takeUntil } from 'rxjs/operators'
+import { PlatformInfo, PlatformInfoService } from '../../../../../cdk/platform-info'
 import { Visibility, VisibilityStrings } from '../../../../../types/common.endpoint'
-import { Affiliation, Assertion } from '../../../../../types'
-import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
+import { Assertion } from '../../../../../types'
 import { NamesEndPoint } from '../../../../../types/record-name.endpoint'
+import { OtherNamesEndPoint } from '../../../../../types/record-other-names.endpoint'
+import { first } from 'rxjs/operators'
+import { cloneDeep } from 'lodash'
 
 @Component({
   selector: 'app-modal-name',
   templateUrl: './modal-name.component.html',
-  styleUrls: ['./modal-name.component.scss-theme.scss', './modal-name.component.scss']
+  styleUrls: ['./modal-name.component.scss-theme.scss', './modal-name.component.scss'],
 })
 export class ModalNameComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   namesForm: FormGroup
+  otherNamesForm: FormGroup
   userRecord: UserRecord
   otherNames: Assertion[]
   isMobile: boolean
   defaultVisibility: VisibilityStrings
   addedOtherNameCount = 0
   loadingNames = true
+  platform: PlatformInfo
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -38,58 +41,98 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _platform: PlatformInfoService
-    ) {
+    private _platform: PlatformInfoService,
+  ) {
     this._platform
       .get()
-      .pipe(takeUntil(this.$destroy))
       .subscribe(
-        (platform) => (this.isMobile = platform.columns4 || platform.columns8)
+        (platform) => {
+          this.platform = platform
+          this.isMobile = platform.columns4 || platform.columns8
+        },
       )
   }
 
   ngOnInit(): void {
     this.userRecord = this.data
     this.otherNames = this.userRecord.otherNames.otherNames
-    console.log(JSON.stringify(this.otherNames));
-    this.namesForm = new FormGroup({
-      givenNames: new FormControl(this.userRecord.names.givenNames.value, {
-        validators: [
-          Validators.required,
-          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
-          OrcidValidators.notPattern(URL_REGEXP),
-        ],
-      }),
-      familyNames: new FormControl(this.userRecord.names.familyName.value, {
-        validators: [
-          OrcidValidators.notPattern(URL_REGEXP),
-          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
-        ],
-      }),
-      publishedName: new FormControl(this.userRecord.person.displayName),
-      visibility: new FormControl('', {}),
-    })
+    this._recordNameService
+      .getNames()
+      .pipe(first())
+      .subscribe((names: NamesEndPoint) => {
+        this.defaultVisibility = names.visibility.visibility
+        this._recordOtherNamesService
+          .getOtherNames()
+          .pipe(first())
+          .subscribe((otherNames: OtherNamesEndPoint) => {
+            const originalBackendOtherNames = cloneDeep(otherNames)
+            const otherNamesMap = {}
+            originalBackendOtherNames.otherNames.map(
+              (value) => (otherNamesMap[value.putCode] = value)
+            )
+            this.backendJsonToForm(names, originalBackendOtherNames)
+            this.loadingNames = false
+          })
+      })
   }
 
-  onSubmit() {}
+  onSubmit() {
+  }
 
-  formToBackend(namesForm: FormGroup): any {
-    // const visibility = {
-    //   errors: [],
-    //   required: undefined,
-    //   visibility: namesForm.get('visibility').value
-    // } as Visibility
-    // return {
-    //   errors: [],
-    //   biography: biographyForm.get('biography').value,
-    //   visibility:  visibility,
-    // } as NamesEndPoint
+  backendJsonToForm(namesEndPoint: NamesEndPoint, otherNamesEndpointJson: OtherNamesEndPoint) {
+    const otherNames = otherNamesEndpointJson.otherNames
+    const group: { [key: string]: FormGroup } = {}
+
+    otherNames.forEach((otherName) => {
+      console.log('otherName: ' + JSON.stringify(otherName))
+      group[otherName.putCode] = new FormGroup({
+        otherName: new FormControl(otherName.content),
+        visibility: new FormControl(otherName.visibility, {}),
+      })
+    })
+    this.namesForm = new FormGroup(group)
+
+    const givenNames = namesEndPoint.givenNames.value
+    const familyName = namesEndPoint.familyName.value
+    const publishedName = namesEndPoint.creditName ? namesEndPoint.creditName.value : ''
+    const visibilityName = namesEndPoint.visibility.visibility
+
+    this.namesForm.addControl('givenNames', new FormControl(givenNames, {
+      validators: [
+        Validators.required,
+        OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+        OrcidValidators.notPattern(URL_REGEXP),
+      ],
+    }))
+    this.namesForm.addControl('familyName', new FormControl(familyName, {
+      validators: [
+        OrcidValidators.notPattern(URL_REGEXP),
+        OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+      ],
+    }))
+    this.namesForm.addControl('publishedName', new FormControl(publishedName, {}))
+    this.namesForm.addControl('visibility', new FormControl(visibilityName, {}))
+  }
+
+  formToBackendNames(namesForm: FormGroup): any {
+    const visibility = {
+      errors: [],
+      required: undefined,
+      visibility: namesForm.get('visibility').value,
+    } as Visibility
+    return {
+      errors: [],
+      givenNames: namesForm.get('givenNames').value,
+      familyName: namesForm.get('familyName').value,
+      creditName: namesForm.get('publishedName').value,
+      visibility: visibility,
+    } as NamesEndPoint
   }
 
   saveEvent() {
     this.loadingNames = true
     this._recordNameService
-      .postNames(this.formToBackend(this.namesForm))
+      .postNames(this.formToBackendNames(this.namesForm))
       .subscribe((response) => {
         console.log(response)
         this.closeEvent()
@@ -97,6 +140,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
         console.log(error)
       })
   }
+
   closeEvent() {
     this.dialogRef.close()
   }
@@ -106,26 +150,26 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   }
 
   addOtherName() {
-      this.namesForm.addControl(
-        'new-' + this.addedOtherNameCount,
-        new FormGroup({
-          country: new FormControl(),
-          visibility: new FormControl(this.defaultVisibility, {}),
-        })
-      )
-      this.otherNames.push({
-        putCode: 'new-' + this.addedOtherNameCount,
-        visibility: { visibility: this.defaultVisibility },
-      } as Assertion)
-      this.addedOtherNameCount++
+    this.namesForm.addControl(
+      'new-' + this.addedOtherNameCount,
+      new FormGroup({
+        otherNames: new FormControl(),
+        visibility: new FormControl(this.defaultVisibility, {}),
+      }),
+    )
+    this.otherNames.push({
+      putCode: 'new-' + this.addedOtherNameCount,
+      visibility: { visibility: this.defaultVisibility },
+    } as Assertion)
+    this.addedOtherNameCount++
 
-      this._changeDetectorRef.detectChanges()
-    }
+    this._changeDetectorRef.detectChanges()
+  }
 
-  deleteOtherName(putcode: string) {
-    const i = this.otherNames.findIndex((value) => value.putCode === putcode)
+  deleteOtherName(putCode: string) {
+    const i = this.otherNames.findIndex((value) => value.putCode === putCode)
     this.otherNames.splice(i, 1)
-    this.namesForm.removeControl(putcode)
+    this.namesForm.removeControl(putCode)
   }
 
   getSourceName(names: Assertion) {

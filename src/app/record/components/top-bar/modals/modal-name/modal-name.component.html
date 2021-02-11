@@ -1,4 +1,4 @@
-<app-modal>
+<app-modal [loading]="loadingNames">
   <app-modal-header>Names</app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title"
@@ -71,7 +71,7 @@
         <input
           id="family-names-input"
           matInput
-          formControlName="familyNames"
+          formControlName="familyName"
           placeholder="Add family names"
         />
       </mat-form-field>
@@ -92,24 +92,31 @@
         <strong>Published name</strong>
       </label>
     </div>
-    <div class="row">
-      <div class="input-container">
-        <mat-form-field
-          appearance="outline"
-          class="mat-form-field-min"
-        >
-          <input
-            id="published-names-input"
-            matInput
-            formControlName="publishedName"
-            placeholder="Add family names"
-          />
-        </mat-form-field>
+    <div class="input-container">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+      >
+        <input
+          id="published-names-input"
+          matInput
+          formControlName="publishedName"
+          placeholder="Add family names"
+        />
         <mat-hint class="mat-caption">
           You can format this name however you wish
         </mat-hint>
-      </div>
-      <div class="col no-wrap actions-wrapper no-gutters visibility">
+      </mat-form-field>
+    </div>
+    <div class="mat-body-2 title">
+      <strong>Visibility</strong>
+    </div>
+    <hr>
+    <p class="orc-font-small-print">
+      Who can see your name. The default visibility setting is Private.
+    </p>
+    <div class="row">
+      <div class="col no-wrap actions-wrapper no-gutters">
         <app-privacy-selector
           formControlName="visibility"
         ></app-privacy-selector>
@@ -120,7 +127,9 @@
     </div>
     <hr>
     <p class="orc-font-small-print">
-      You can add variants of your name, such as an abbreviated first name, middle names, former names or names in a different character set or language. Adding other names can help people find your record when they search the ORCID registry.
+      You can add variants of your name, such as an abbreviated first name, middle names, former names or names in a
+      different character set or language. Adding other names can help people find your record when they search the
+      ORCID registry.
     </p>
     <div class="row">
       <label
@@ -130,17 +139,18 @@
         <strong>Other names</strong>
       </label>
     </div>
-    <div class="row other-names-wrapper"
-         id="country-droplist"
+    <div class="row"
+         id="otherName-dropList"
          cdkDropList
          (cdkDropListDropped)="drop($event)"
     >
       <div
         cdkDrag
-        rootElementSelector="#country-droplist"
-        class="row country-input-line"
+        rootElementSelector="#otherName-dropList"
+        class="row other-names-input-line"
         [ngClass]="{ 'no-wrap': !isMobile }"
-        *ngFor="let names of otherNames;"
+        [formGroupName]="otherName.putCode"
+        *ngFor="let otherName of otherNames;"
       >
         <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
           <img class="icon-drag" cdkDragHandle src="./assets/vectors/draggable.svg"/>
@@ -151,20 +161,24 @@
             <input
               id="alternative-names-input"
               matInput
-              formControlName="publishedName"
+              formControlName="otherName"
               placeholder="Add family names"
             />
-            <mat-hint class="mat-caption">
+            <mat-hint class="mat-caption" *ngIf="otherName.putCode.indexOf('new') < 0">
               <ng-container>Source:</ng-container>
-              {{ getSourceName(names)}}
+              {{ getSourceName(otherName)}}
             </mat-hint>
           </mat-form-field>
         </div>
-        <div class="col no-wrap actions-wrapper no-gutters visibility">
+        <div
+          class="col no-wrap actions-wrapper no-gutters"
+          [ngClass]="{ 'privacy': !platform.columns12 }"
+        >
           <app-privacy-selector
+            [ngClass]="{ 'selector': !platform.columns12 }"
             formControlName="visibility"
           ></app-privacy-selector>
-          <button (click)="deleteOtherName('caca')" mat-icon-button>
+          <button (click)="deleteOtherName(otherName.putCode)" mat-icon-button>
             <mat-icon class="material-icons-outlined large-material-icon"
             >delete
             </mat-icon
@@ -173,19 +187,6 @@
         </div>
       </div>
     </div>
-    <!--        mobile version -->
-    <!--          <div class="col no-wrap actions-wrapper no-gutters visibility">-->
-    <!--            <app-privacy-selector-->
-    <!--              formControlName="visibility"-->
-    <!--            ></app-privacy-selector>-->
-    <!--            <div class="delete">-->
-    <!--              <button (click)="deleteOtherName(otherNames.putCode)" mat-icon-button>-->
-    <!--                <mat-icon-->
-    <!--                  class="material-icons-outlined large-material-icon">delete-->
-    <!--                </mat-icon>-->
-    <!--              </button>-->
-    <!--            </div>-->
-    <!--          </div>-->
     <div class="row">
       <a class="col add-more no-gutters" (click)="addOtherName()">
         <mat-icon class="large-material-icon">add_circle</mat-icon>

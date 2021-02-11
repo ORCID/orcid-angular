@@ -21,6 +21,39 @@ label {
   max-width: 402px;
 }
 
+.other-names-input-line {
+  margin-top: 20px;
+  img {
+    margin-top: 6px;
+    cursor: move;
+    z-index: 1;
+    margin-right: 18px;
+  }
+
+  .input-container {
+    max-width: 366px;
+  }
+
+  .privacy {
+    width: 100%;
+
+    button {
+      margin-left: auto;
+    }
+  }
+
+  app-privacy-selector {
+    margin: 0 30px;
+  }
+
+  .selector {
+    margin: 0 !important;
+  }
+}
+
+
+
+
 .icon-drag {
   height: 32px;
   margin: 4px;
@@ -58,13 +91,6 @@ label {
   width: 100%;
 }
 
-.visibility {
-  margin-inline: auto;
-  //small device
-  //width: 100%;
-  //margin: 6px 0;
-}
-
 .title {
   margin-top: 16px;
 }
@@ -99,7 +125,18 @@ label {
 }
 
 .add-more{
+  margin-top: 16px;
+
   span {
     padding-left: 6px;
   }
+}
+
+
+::ng-deep .mat-form-field-subscript-wrapper{
+  margin-top: 4px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+  padding-left: 2px !important;
 }
