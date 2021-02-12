@@ -11,6 +11,7 @@ import { BiographyEndPoint } from '../../../../../types/record-biography.endpoin
 import { Visibility, VisibilityStrings } from '../../../../../types/common.endpoint'
 import { first } from 'rxjs/operators'
 import { Subject } from 'rxjs'
+import { PlatformInfo, PlatformInfoService } from '../../../../../cdk/platform-info'
 
 @Component({
   selector: 'app-modal-biography',
@@ -26,18 +27,29 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   biographyVisibility: VisibilityStrings = 'PRIVATE'
   loadingBiography = true
   defaultVisibility: VisibilityStrings
+  platform: PlatformInfo
+
   ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
 
   constructor(
+    private _platform: PlatformInfoService,
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
     private _cdref: ChangeDetectorRef,
     private _recordBiographyService: RecordBiographyService,
-  ) {}
+  ) {
+    this._platform
+      .get()
+      .subscribe(
+        (platform) => {
+          this.platform = platform
+        },
+      )
+  }
 
   ngOnInit(): void {
     this.userRecord = this.data
-    if (this.userRecord.biography) {
+    if (this.userRecord.biography && this.userRecord.biography.biography) {
       this.biography = this.userRecord.biography.biography.value
       this.biographyVisibility = this.userRecord.biography.visibility.visibility
     }

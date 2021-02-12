@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
+import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 
 @Component({
   selector: 'app-modal-header',
@@ -11,10 +12,20 @@ import { MatDialogRef } from '@angular/material/dialog'
 })
 export class ModalHeaderComponent implements OnInit {
   @Output() close = new EventEmitter<boolean>()
+  platform: PlatformInfo
 
-  constructor(private dialogReg: MatDialogRef<any>) {}
+  constructor(
+    private dialogReg: MatDialogRef<any>,
+    private _platform: PlatformInfoService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._platform
+      .get()
+      .subscribe((platform) => {
+        this.platform = platform
+      })
+  }
 
   closeEvent() {
     this.dialogReg.close()

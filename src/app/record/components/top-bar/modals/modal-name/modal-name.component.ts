@@ -40,12 +40,12 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add published name`
 
   constructor(
+    private _platform: PlatformInfoService,
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _platform: PlatformInfoService,
   ) {
     this._platform
       .get()

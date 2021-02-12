@@ -17,6 +17,19 @@ label {
   margin-inline-end: auto;
 }
 
+.required {
+  margin-left: 3px;
+}
+
+.required-information {
+  margin-left: auto !important;
+  margin-top: 10px !important;
+
+  span {
+   margin-right: 3px !important;
+  }
+}
+
 .input-container {
   max-width: 402px;
 }
@@ -93,6 +106,10 @@ label {
 
 .title {
   margin-top: 16px;
+
+  p {
+    margin: 6px 0;
+  }
 }
 
 .mat-form-field {

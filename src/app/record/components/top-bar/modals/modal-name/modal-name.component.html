@@ -30,11 +30,31 @@
     </button>
   </app-modal-footer>
   <form [formGroup]="namesForm" (ngSubmit)="onSubmit()">
-    <div class="mat-body-2 title">
-      <strong i18n="@@topBar.givenAndFamilyNames">
-        Given and family names
-      </strong>
-      <span class="required">*</span>
+    <div
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+        }"
+    >
+      <div class="row">
+        <p>
+          <strong i18n="@@topBar.givenAndFamilyNames">
+            Given and family names
+          </strong>
+          <span
+            *ngIf="!platform.columns12"
+            class="required"
+          >*</span>
+        </p>
+        <p
+          *ngIf="platform.columns12"
+          class="required-information mat-caption"
+        >
+          <span class="required">*</span>
+          <ng-container i18n="@@shared.requiredInformation">Required information</ng-container>
+        </p>
+      </div>
     </div>
     <hr>
     <p
@@ -100,15 +120,24 @@
         />
       </mat-form-field>
     </div>
-    <div class="mat-body-2 title">
-      <strong i18n="@@topBar.publishedName">Published name</strong>
+    <div
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+        }"
+    >
+      <p>
+        <strong i18n="@@topBar.publishedName">Published name</strong>
+      </p>
     </div>
     <hr>
     <p
       class="orc-font-small-print"
       i18n="@@topBar.preferredNameFormat"
     >
-      Your preferred name format and structure. If added the published name will be used instead of your given and family names.
+      Your preferred name format and structure. If added the published name will be used instead of your given and
+      family names.
     </p>
     <div class="row">
       <label
@@ -137,8 +166,16 @@
         </mat-hint>
       </mat-form-field>
     </div>
-    <div class="mat-body-2 title">
-      <strong i18n="@@shared.visibility">Visibility</strong>
+    <div
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+        }"
+    >
+      <p>
+        <strong i18n="@@shared.visibility">Visibility</strong>
+      </p>
     </div>
     <hr>
     <p
@@ -154,8 +191,16 @@
         ></app-privacy-selector>
       </div>
     </div>
-    <div class="mat-body-2 title">
-      <strong i18n="@@topBar.alsoKnowAs">Also known as</strong>
+    <div
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+        }"
+    >
+      <p>
+        <strong i18n="@@topBar.alsoKnowAs">Also known as</strong>
+      </p>
     </div>
     <hr>
     <p class="orc-font-small-print">
