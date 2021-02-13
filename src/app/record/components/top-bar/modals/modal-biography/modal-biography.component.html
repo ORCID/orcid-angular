@@ -5,11 +5,23 @@
     </ng-container>
   </app-modal-header>
   <app-modal-side-bar>
-    <ng-container
-      id="side-bar-title"
-      i18n="@@topBar.biography"
-    >
-      Biography
+    <ng-container id="side-bar-title">
+      <a
+        class="side-bar"
+        i18n="@@topBar.biography"
+        (click)="toBiography()"
+      >
+        Biography
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-1">
+      <a
+        class="side-bar"
+        i18n="@@shared.visibility"
+        (click)="toVisibility()"
+      >
+        Visibility
+      </a>
     </ng-container>
   </app-modal-side-bar>
   <app-modal-footer>
@@ -32,6 +44,7 @@
   </app-modal-footer>
   <form [formGroup]="biographyForm" (ngSubmit)="onSubmit()">
     <div
+      id="biography"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
@@ -51,7 +64,7 @@
     >
       Information about yourself, your research interests and other pertinent details that enhance your ORCID record.
     </p>
-    <label for="biography" class="mat-caption">
+    <label for="biography-input" class="mat-caption">
       <strong i18n="@@topBar.biography">Biography</strong>
     </label>
     <mat-form-field
@@ -59,7 +72,7 @@
       class="mat-form-field-min"
     >
       <textarea
-        id="biography"
+        id="biography-input"
         matInput
         formControlName="biography"
         placeholder=" {{ ngOrcidAddYourBiography }}"
@@ -76,6 +89,7 @@
       </mat-error>
     </mat-form-field>
     <div
+      id="visibility"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,

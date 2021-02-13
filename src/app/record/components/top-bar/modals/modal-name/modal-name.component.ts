@@ -60,6 +60,14 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userRecord = this.data
     this.otherNames = this.userRecord.otherNames.otherNames
+
+    this.namesForm = new FormGroup({
+      givenNames: new FormControl('', {}),
+      familyName: new FormControl('', {}),
+      publishedName: new FormControl('', {}),
+      visibility: new FormControl('', {}),
+    })
+
     this._recordNameService
       .getNames()
       .pipe(first())
@@ -95,8 +103,9 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     })
     this.namesForm = new FormGroup(group)
 
-    const givenNames = namesEndPoint.givenNames.value
-    const familyName = namesEndPoint.familyName.value
+    console.log(JSON.stringify(namesEndPoint))
+    const givenNames = namesEndPoint.givenNames ? namesEndPoint.givenNames.value : ''
+    const familyName = namesEndPoint.familyName ? namesEndPoint.familyName.value : ''
     const publishedName = namesEndPoint.creditName ? namesEndPoint.creditName.value : ''
     const visibilityName = namesEndPoint.visibility.visibility
 
@@ -183,6 +192,22 @@ export class ModalNameComponent implements OnInit, OnDestroy {
         return names.sourceName
       }
     }
+  }
+
+  toGivenNames() {
+    document.getElementById('given-names').scrollIntoView()
+  }
+
+  toPublishedName() {
+    document.getElementById('published-name').scrollIntoView()
+  }
+
+  toVisibility() {
+    document.getElementById('visibility').scrollIntoView()
+  }
+
+  toAlsoKnownAs() {
+    document.getElementById('also-known-as').scrollIntoView()
   }
 
   ngOnDestroy() {

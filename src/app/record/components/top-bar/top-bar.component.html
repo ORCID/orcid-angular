@@ -66,17 +66,19 @@
     <app-panel-element
       [visibility]="userRecord.names.visibility.visibility"
     >
-      <span
-        i18n="@@record.publishedName"
-        class="mat-caption description"
-      >
-        Published Name
-      </span>
-      <p class="mat-card-title published-name">
-        <b>
-          {{ creditName }}
-        </b>
-      </p>
+      <ng-container *ngIf="creditName">
+        <span
+          i18n="@@record.publishedName"
+          class="mat-caption description"
+        >
+          Published Name
+        </span>
+        <p class="mat-card-title published-name">
+          <b>
+            {{ creditName }}
+          </b>
+        </p>
+      </ng-container>
       <span
         i18n="@@record.name"
         class="mat-caption description"
@@ -84,24 +86,25 @@
         Name
       </span>
       <p class="mat-body-1">
-        {{ userRecord.names.givenNames.value + ' ' + userRecord.names.familyName.value }}
+        {{ givenNames + ' ' + familyName }}
       </p>
     </app-panel-element>
-    <span
-      i18n="@@record.otherNames"
-      class="mat-caption description"
-    >
-        Other names
-      </span>
-    <app-panel-element
-      *ngFor="let otherNames of userRecord.otherNames.otherNames"
-      [visibility]="otherNames.visibility.visibility"
-    >
-      <p class="mat-body-1 other-names">
-        {{ otherNames.content }}
-      </p>
-    </app-panel-element
-    >
+    <ng-container *ngIf="userRecord.otherNames.otherNames.length > 0">
+      <span
+        i18n="@@record.otherNames"
+        class="mat-caption description"
+      >
+          Other names
+        </span>
+      <app-panel-element
+        *ngFor="let otherNames of userRecord.otherNames.otherNames"
+        [visibility]="otherNames.visibility.visibility"
+      >
+        <p class="mat-body-1 other-names">
+          {{ otherNames.content }}
+        </p>
+      </app-panel-element>
+    </ng-container>
   </div>
 </app-panel>
 <app-panel

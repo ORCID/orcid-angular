@@ -34,6 +34,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
   modalBiographyComponent = ModalBiographyComponent
 
   platform: PlatformInfo
+  givenNames: String = ''
+  familyName: String = ''
   creditName: String = ''
 
   constructor(
@@ -60,6 +62,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.destroy$))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
+            this.givenNames = this.userRecord.names.givenNames ? this.userRecord.names.givenNames.value : ''
+            this.familyName = this.userRecord.names.familyName ? this.userRecord.names.familyName.value : ''
             this.creditName = this.userRecord.names.creditName ? this.userRecord.names.creditName.value : ''
           })
       })

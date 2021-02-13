@@ -5,10 +5,40 @@
     </ng-container>
   </app-modal-header>
   <app-modal-side-bar>
-    <ng-container
-      id="side-bar-title"
-      i18n="@@topBar.givenAndFamilyNames"
-    >Given and family names
+    <ng-container id="side-bar-title">
+      <a
+        class="side-bar"
+        i18n="@@topBar.givenAndFamilyNames"
+        (click)="toGivenNames()"
+      >
+        Given and family names
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-1">
+      <a
+        class="side-bar"
+        i18n="@@topBar.publishedName"
+        (click)="toPublishedName()">
+        Published name
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-2">
+      <a
+        class="side-bar"
+        i18n="@@shared.visibility"
+        (click)="toVisibility()"
+      >
+        Visibility
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-3">
+      <a
+        class="side-bar"
+        i18n="@@topBar.alsoKnowAs"
+        (click)="toAlsoKnownAs()"
+      >
+        Other names
+      </a>
     </ng-container>
   </app-modal-side-bar>
   <app-modal-footer>
@@ -31,6 +61,7 @@
   </app-modal-footer>
   <form [formGroup]="namesForm" (ngSubmit)="onSubmit()">
     <div
+      id="given-names"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
@@ -121,6 +152,7 @@
       </mat-form-field>
     </div>
     <div
+      id="published-name"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
@@ -167,6 +199,7 @@
       </mat-form-field>
     </div>
     <div
+      id="visibility"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
@@ -192,6 +225,7 @@
       </div>
     </div>
     <div
+      id="also-known-as"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,

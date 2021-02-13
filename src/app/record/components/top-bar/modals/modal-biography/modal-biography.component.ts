@@ -115,6 +115,14 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     this.dialogRef.close()
   }
 
+  toBiography() {
+    document.getElementById('biography').scrollIntoView()
+  }
+
+  toVisibility() {
+    document.getElementById('visibility').scrollIntoView()
+  }
+
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
