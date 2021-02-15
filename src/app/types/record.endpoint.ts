@@ -57,19 +57,9 @@ export interface Biography {
   errors: string[]
 }
 
-export interface Emails {
-  emails: Assertion[]
-  errors: string[]
-}
 export interface OtherNames {
   errors: String[]
   otherNames: Assertion[]
-  visibility: Visibility
-}
-
-export interface Countries {
-  errors: string[]
-  addresses: Assertion[]
   visibility: Visibility
 }
 
@@ -109,22 +99,26 @@ export interface Assertion {
   primary: boolean
   current: boolean
   verified: boolean
-  visibility: Visibility | VisibilityStrings
-  errors: any[]
+  visibility: VisibilityStrings
+  source: string
+  putCode?: string
+  createdDate?: MonthDayYearDate
+  errors?: any[]
+  lastModified?: MonthDayYearDate
+  displayIndex?: number
   iso2Country?: Value
   countryName?: string
   commonName?: string
   reference?: string
   url?: string | Value
   urlName?: string
-  source: string
-  sourceName: string
-  displayIndex: number
-  putCode: string
   content?: string
-  createdDate: MonthDayYearDate
-  lastModified: MonthDayYearDate
+  sourceName?: string
   assertionOriginOrcid?: any
   assertionOriginClientId?: any
   assertionOriginName?: any
+}
+
+export interface ErrorsListResponse {
+  errors: string[]
 }

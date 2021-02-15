@@ -1,23 +1,25 @@
-import { Injectable } from '@angular/core'
-import { Observable, combineLatest, ReplaySubject, of } from 'rxjs'
-import {
-  Person,
-  Emails,
-  OtherNames,
-  Countries,
-  Keywords,
-  Website,
-  ExternalIdentifier,
-  Names,
-  Biography,
-  Preferences,
-} from 'src/app/types'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from 'src/environments/environment'
-import { retry, catchError, tap, map } from 'rxjs/operators'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Address } from 'cluster'
+import { Injectable } from '@angular/core'
+import { combineLatest, Observable, ReplaySubject } from 'rxjs'
+import { catchError, retry, tap } from 'rxjs/operators'
+import {
+  Biography,
+  EmailsEndpoint,
+  ExternalIdentifier,
+  Keywords,
+  Names,
+  OtherNames,
+  Person,
+  Preferences,
+  Website,
+} from 'src/app/types'
+import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
+import { environment } from 'src/environments/environment'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { RecordCountriesService } from '../record-countries/record-countries.service'
+import { RecordEmailsService } from '../record-emails/record-emails.service'
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +30,9 @@ export class RecordService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordEmailsService: RecordEmailsService,
+    private _recordCountryService: RecordCountriesService
   ) {}
 
   headers = new HttpHeaders({
@@ -42,9 +46,9 @@ export class RecordService {
 
       combineLatest([
         this.getPerson(id),
-        this.getEmails(),
+        this._recordEmailsService.getEmails(),
         this.getOtherNames(),
-        this.getAddresses(),
+        this._recordCountryService.getAddresses(),
         this.getKeywords(),
         this.getWebsites(),
         this.getExternalIdentifier(),
@@ -68,9 +72,9 @@ export class RecordService {
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
-                emails: emails as Emails,
+                emails: emails as EmailsEndpoint,
                 otherNames: otherNames as OtherNames,
-                countries: countries as Countries,
+                countries: countries as CountriesEndpoint,
                 keyword: keyword as Keywords,
                 website: website as Website,
                 externalIdentifier: externalIdentifier as ExternalIdentifier,
@@ -112,28 +116,6 @@ export class RecordService {
       )
   }
 
-  getEmails(): Observable<Emails> {
-    return this._http
-      .get<Emails>(environment.API_WEB + `account/emails.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postEmails(otherNames: Emails): Observable<Emails> {
-    return this._http
-      .post<Emails>(environment.API_WEB + `account/emails.json`, otherNames, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
   getOtherNames(): Observable<OtherNames> {
     return this._http
       .get<OtherNames>(environment.API_WEB + `my-orcid/otherNamesForms.json`, {
@@ -150,30 +132,6 @@ export class RecordService {
       .post<OtherNames>(
         environment.API_WEB + `my-orcid/otherNamesForms.json`,
         otherNames,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getAddresses(): Observable<Countries> {
-    return this._http
-      .get<Countries>(environment.API_WEB + `account/countryForm.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postAddresses(countries: Countries): Observable<OtherNames> {
-    return this._http
-      .post<OtherNames>(
-        environment.API_WEB + `account/countryForm.json`,
-        countries,
         { headers: this.headers }
       )
       .pipe(

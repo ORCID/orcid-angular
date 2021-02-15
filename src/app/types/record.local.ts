@@ -1,21 +1,21 @@
 import {
-  Person,
-  Emails,
-  OtherNames,
-  Countries,
-  Keywords,
-  Website,
-  ExternalIdentifier,
-  Names,
-  Preferences,
   Biography,
+  CountriesEndpoint,
+  EmailsEndpoint,
+  ExternalIdentifier,
+  Keywords,
+  Names,
+  OtherNames,
+  Person,
+  Preferences,
+  Website,
 } from '.'
 
 export interface UserRecord {
   person: Person
-  emails: Emails
+  emails: EmailsEndpoint
   otherNames: OtherNames
-  countries: Countries
+  countries: CountriesEndpoint
   keyword: Keywords
   website: Website
   externalIdentifier: ExternalIdentifier

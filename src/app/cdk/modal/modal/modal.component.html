@@ -1,19 +1,20 @@
-<div class="container no-padding">
-  <div class="row">
-    <div class="col s4 l12 no-gutters">
+<div class="container no-padding" [ngClass]="{ 'columns-4-or-8': !columns12 }">
+  <div class="row header-area no-padding">
+    <div class="col s4 m8 l12 no-gutters header-container">
       <ng-content select="app-modal-header"></ng-content>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     </div>
   </div>
-  <div class="row">
-    <div class="col s4 l8 no-gutters">
-      <div class="cotainer"><ng-content></ng-content></div>
+  <div class="row main-area no-padding">
+    <div class="col s4 m8 l9 no-gutters content-wrapper">
+      <div><ng-content></ng-content></div>
     </div>
-    <div class="col l4 no-gutters" *ngIf="!mobile">
+    <div class="col l3 no-padding" *ngIf="columns12">
       <ng-content select="app-modal-side-bar"></ng-content>
     </div>
   </div>
-  <div class="row">
-    <div class="col s4 l12 no-gutters">
+  <div class="row footer-area no-padding">
+    <div class="col s4 l12">
       <ng-content select="app-modal-footer"></ng-content>
     </div>
   </div>

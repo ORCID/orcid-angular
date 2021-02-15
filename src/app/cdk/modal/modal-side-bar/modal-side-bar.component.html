@@ -1,1 +1,8 @@
-<p>modal-side-bar works!</p>
+<div class="container">
+  <h2 class="orc-font-body-small">Form content</h2>
+  <mat-divider> </mat-divider>
+  <h3 class="orc-font-body-small">
+    <ng-content select="#side-bar-title"> </ng-content>
+  </h3>
+  <ng-content select="#side-bar-urls" class="orc-font-body-small"> </ng-content>
+</div>

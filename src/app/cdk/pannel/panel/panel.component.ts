@@ -1,8 +1,9 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+
 import { Assertion } from '../../../types'
-import { ModalComponent } from '../../modal/modal/modal.component'
+import { PlatformInfoService } from '../../platform-info'
 
 @Component({
   selector: 'app-panel',
@@ -17,12 +18,16 @@ export class PanelComponent implements OnInit {
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   openState = false
   editable = true
-  constructor(private _dialog: MatDialog) {}
+  constructor(
+    private _dialog: MatDialog,
+    private _platform: PlatformInfoService
+  ) {}
 
   ngOnInit(): void {}
 
   openModal() {
-    console.log('OPEN MODAL')
-    this._dialog.open(this.editModalComponent)
+    if (this.editModalComponent) {
+      this._dialog.open(this.editModalComponent)
+    }
   }
 }
