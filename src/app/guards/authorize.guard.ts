@@ -47,10 +47,8 @@ export class AuthorizeGuard implements CanActivateChild {
             oauthSession.redirectUrl.includes(oauthSession.responseType + '=')
           ) {
             return this.reportAlreadyAuthorize(session.oauthSession).pipe(
-              switchMap(() => {
-                this.window.location.href = oauthSession.redirectUrl
-                return NEVER
-              })
+              catchError(() => this.sendUserToRedirectURL(oauthSession)),
+              switchMap(() => this.sendUserToRedirectURL(oauthSession))
             )
           } else if (
             oauthSession.forceLogin ||
@@ -63,6 +61,12 @@ export class AuthorizeGuard implements CanActivateChild {
       })
     )
   }
+
+  sendUserToRedirectURL(oauthSession: RequestInfoForm) {
+    this.window.location.href = oauthSession.redirectUrl
+    return NEVER
+  }
+
   reportAlreadyAuthorize(request: RequestInfoForm) {
     return this._gtag
       .reportEvent(`Reauthorize`, 'RegGrowth', request)
