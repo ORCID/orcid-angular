@@ -140,13 +140,34 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     } as NamesEndPoint
   }
 
+  formToBackendOtherNames(namesForm: FormGroup): any {
+    const visibility = {
+      errors: [],
+      required: undefined,
+      visibility: namesForm.get('visibility').value,
+    } as Visibility
+    return {
+      errors: [],
+      givenNames: namesForm.get('givenNames').value,
+      familyName: namesForm.get('familyName').value,
+      creditName: namesForm.get('publishedName').value,
+      visibility: visibility,
+    } as NamesEndPoint
+  }
+
   saveEvent() {
     this.loadingNames = true
     this._recordNameService
       .postNames(this.formToBackendNames(this.namesForm))
       .subscribe((response) => {
         console.log(response)
-        this.closeEvent()
+        this._recordOtherNamesService
+          .postOtherNames(this.formToBackendOtherNames(this.namesForm))
+          .subscribe((res) => {
+            console.log(res)
+            this.closeEvent()
+            }
+          )
       }, error => {
         console.log(error)
       })
