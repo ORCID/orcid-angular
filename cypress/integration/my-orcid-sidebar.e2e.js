@@ -3,26 +3,32 @@ import { environment } from '../cypress.env'
 const randomUser = require('../helpers/randomUser')
 const runInfo = require('../helpers/runInfo')
 
-describe('My Orcid sidebar' + runInfo(), () => {
-  let userToRegister = randomUser()
+Cypress.Commands.add(
+  'dragTo',
+  { prevSubject: 'element' },
+  (subject, droppableSelector) => {
+    const coords = Cypress.$(droppableSelector)[0].getBoundingClientRect()
+    cy.wrap(subject)
+      .trigger('mousedown', { which: 1 })
+      .trigger('mousemove', { clientX: coords.x + 10, clientY: coords.y + 10 })
+      .trigger('mouseup', { force: true })
+  }
+)
+describe.only('My Orcid sidebar' + runInfo(), () => {
   before(() => {
-    cy.visit(`${environment.baseUrl}/register`)
-    cy.registerUser(userToRegister)
-    cy.request(`${environment.baseUrl}/userInfo.json`).then((response) => {
-      userToRegister.id = response.body.EFFECTIVE_USER_ORCID
-      cy.log(userToRegister)
-    })
-    // cy.programmaticSignin('testUser')
-    // userToRegister = environment['testUser']
+    cy.programmaticSignin('testUser')
   })
   before(() => {
     cy.visit(`${environment.baseUrl}/qa/my-orcid`)
   })
+  beforeEach(() => {
+    Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
+  })
   describe('Orcid id', () => {
     it('display the users Orcid', () => {
       cy.get('app-side-bar-id ').within(() => {
-        cy.contains(userToRegister.id)
-        cy.contains(`https://orcid.org/${userToRegister.id}`)
+        cy.contains(environment.testUser.id)
+        cy.contains(`https://orcid.org/${environment.testUser.id}`)
       })
     })
     it('display url to navigate to the public page view', () => {})
@@ -83,23 +89,153 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('clicks outside and DONT close the modal ', () => {})
   })
   describe('Countries', () => {
-    it('display a user with no items', () => {})
+    before(() => {
+      cy.cleanCountries()
+    })
+    beforeEach(() => {
+      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
+    })
+    after(() => {
+      cy.cleanCountries()
+    })
+    it('display a user with no items', () => {
+      cy.get('#countries-panel').within(() => {
+        cy.get('[body=""]').should('not.exist')
+      })
+    })
     it('add items and display those with default privacy', () => {
-      // Expect changes to be display outside and inside of the modal
+      cy.get('#countries-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#add-link')
+        .click()
+        .get('.mat-form-field-flex')
+        .click()
+        .get('#mat-select-0-panel')
+        .click()
+        .get('#save-countries-button')
+        .click()
+        .get('#countries-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 1)
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy
+            )
+        })
     })
     it('remove/delete', () => {
+      cy.get('#countries-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.delete-button')
+        .click()
+        .get('#save-countries-button')
+        .click()
+        .wait(2000)
+        .get('#countries-panel')
+        .within(() => {
+          cy.get('[body=""]').should('not.exist')
+        })
+
       // Expect changes to be display outside and inside of the modal
+    })
+    it('add multiple countries', () => {
+      cy.get('#countries-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#add-link')
+        .click()
+        .get('.mat-form-field-flex')
+        .eq(0)
+        .click()
+        .get('.mat-option-text')
+        .eq(0)
+        .click()
+        .get('#add-link')
+        .click()
+        .get('.mat-form-field-flex')
+        .eq(1)
+        .click()
+        .get('.mat-option-text')
+        .eq(1)
+        .click()
+        .get('#add-link')
+        .click()
+        .get('.mat-form-field-flex')
+        .eq(2)
+        .click()
+        .get('.mat-option-text')
+        .eq(2)
+        .click()
+        .get('#save-countries-button')
+        .click()
+        .get('#countries-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy
+            )
+        })
     })
     it('Drag and drop to rearrange', () => {
-      // Expect changes to be display outside and inside of the modal
+      // TODO @leomendoza123 drag and drop with cypress and Material cdkDragHandle seems not to work
     })
     it('change privacy', () => {
+      cy.get('#countries-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.public-button')
+        .click({ multiple: true })
+        .get('#save-countries-button')
+        .click()
+        .get('#countries-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should('have.attr', 'aria-label', 'PUBLIC')
+        })
+
       // Expect changes to be display outside and inside of the modal
     })
     it('make changes and cancel', () => {
-      // Expect changes NOT to be display outside and inside of the modal
+      cy.get('#countries-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.private-button')
+        .click({ multiple: true })
+        .get('#cancel-countries-button')
+        .click()
+        .get('#countries-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should('have.attr', 'aria-label', 'PUBLIC')
+        })
     })
-    it('clicks outside and DONT close the modal ', () => {})
   })
   describe('Other IDs', () => {
     it('display a user with no items', () => {
@@ -118,7 +254,6 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('make changes and cancel', () => {
       // Expect changes NOT to be display outside and inside of the modal
     })
-    it('clicks outside and DONT close the modal ', () => {})
   })
   describe('Keywords', () => {
     it('display a user with no items', () => {})
@@ -137,6 +272,5 @@ describe('My Orcid sidebar' + runInfo(), () => {
     it('make changes and cancel', () => {
       // Expect changes NOT to be display outside and inside of the modal
     })
-    it('clicks outside and DONT close the modal ', () => {})
   })
 })
