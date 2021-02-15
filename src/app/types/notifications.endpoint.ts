@@ -64,6 +64,7 @@ export interface InboxNotificationAmended extends InboxNotification {
   amendedSection?:
     | 'AFFILIATION'
     | 'BIO'
+    | 'DISTINCTION'
     | 'EDUCATION'
     | 'EMPLOYMENT'
     | 'EXTERNAL_IDENTIFIERS'
