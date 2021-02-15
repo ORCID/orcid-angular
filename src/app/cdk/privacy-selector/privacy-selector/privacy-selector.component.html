@@ -1,5 +1,6 @@
 <div class="panel">
   <button
+    aria-label="limited public"
     mat-icon-button
     (click)="public()"
     [ngClass]="{
@@ -29,6 +30,7 @@
     </svg>
   </button>
   <button
+    aria-label="visibility limited"
     mat-icon-button
     (click)="limited()"
     [ngClass]="{
@@ -51,6 +53,7 @@
     </svg>
   </button>
   <button
+    aria-label="visibility private"
     mat-icon-button
     (click)="private()"
     class="private-button"

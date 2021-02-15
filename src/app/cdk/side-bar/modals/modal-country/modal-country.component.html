@@ -11,6 +11,7 @@
       color="primary"
       (click)="saveEvent()"
       i18n="@@share.saveChanges"
+      id="save-countries-button"
     >
       Save changes
     </button>
@@ -19,6 +20,7 @@
       color="primary"
       (click)="closeEvent()"
       i18n="@@share.cancel"
+      id="cancel-countries-button"
     >
       Cancel
     </button>
@@ -51,10 +53,15 @@
         class="row country-input-line"
         [ngClass]="{ 'no-wrap': !isMobile }"
         [formGroupName]="country.putCode"
-        *ngFor="let country of countries"
+        *ngFor="let country of countries; index as i"
+        [attr.id]="'draggable-' + i"
       >
         <div class="col l12 m8 s4 top no-wrap no-gutters">
-          <img cdkDragHandle src="./assets/vectors/draggable.svg" />
+          <img
+            cdkDragHandle
+            src="./assets/vectors/draggable.svg"
+            aria-label="drag handle"
+          />
 
           <mat-form-field
             appearance="outline"
@@ -81,7 +88,11 @@
           <app-privacy-selector
             formControlName="visibility"
           ></app-privacy-selector>
-          <button (click)="deleteEmail(country.putCode)" mat-icon-button>
+          <button
+            (click)="deleteEmail(country.putCode)"
+            mat-icon-button
+            class="delete-button"
+          >
             <mat-icon class="material-icons-outlined large-material-icon"
               >delete</mat-icon
             >
@@ -91,7 +102,7 @@
     </div>
 
     <div class="row">
-      <a class="col add-more no-gutters" (click)="addCountry()">
+      <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
         <ng-container i18n="@@side-bar.addAnotherEmail">
           Add another country</ng-container

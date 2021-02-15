@@ -1,4 +1,8 @@
-<div class="container no-padding" [ngClass]="{ 'columns-4-or-8': !columns12 }">
+<div
+  class="container no-padding"
+  [ngClass]="{ 'columns-4-or-8': !columns12 }"
+  id="modal-container"
+>
   <div class="row header-area no-padding">
     <div class="col s4 m8 l12 no-gutters header-container">
       <ng-content select="app-modal-header"></ng-content>
