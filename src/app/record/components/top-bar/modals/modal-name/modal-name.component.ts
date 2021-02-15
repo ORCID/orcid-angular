@@ -103,7 +103,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     })
     this.namesForm = new FormGroup(group)
 
-    console.log(JSON.stringify(namesEndPoint))
     const givenNames = namesEndPoint.givenNames ? namesEndPoint.givenNames.value : ''
     const familyName = namesEndPoint.familyName ? namesEndPoint.familyName.value : ''
     const publishedName = namesEndPoint.creditName ? namesEndPoint.creditName.value : ''

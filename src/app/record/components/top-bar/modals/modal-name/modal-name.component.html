@@ -242,62 +242,64 @@
       different character set or language. Adding other names can help people find your record when they search the
       ORCID registry.
     </p>
-    <div class="row">
-      <label
-        for="alternative-names-input"
-        class="mat-caption"
-      >
-        <strong i18n="@@topBar.otherNames">Other names</strong>
-      </label>
-    </div>
-    <div class="row"
-         id="otherName-dropList"
-         cdkDropList
-         (cdkDropListDropped)="drop($event)"
-    >
-      <div
-        cdkDrag
-        rootElementSelector="#otherName-dropList"
-        class="row other-names-input-line"
-        [ngClass]="{ 'no-wrap': !isMobile }"
-        [formGroupName]="otherName.putCode"
-        *ngFor="let otherName of otherNames;"
-      >
-        <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-          <img class="icon-drag" cdkDragHandle src="./assets/vectors/draggable.svg"/>
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <input
-              id="alternative-names-input"
-              matInput
-              formControlName="otherName"
-              placeholder="Add family names"
-            />
-            <mat-hint class="mat-caption" *ngIf="otherName.putCode.indexOf('new') < 0">
-              <ng-container i18n="@@shared.source">Source:</ng-container>
-              {{ getSourceName(otherName)}}
-            </mat-hint>
-          </mat-form-field>
-        </div>
-        <div
-          class="col no-wrap actions-wrapper no-gutters"
-          [ngClass]="{ 'privacy': !platform.columns12 }"
+    <ng-container *ngIf="otherNames.length > 0">
+      <div class="row">
+        <label
+          for="alternative-names-input"
+          class="mat-caption"
         >
-          <app-privacy-selector
-            [ngClass]="{ 'selector': !platform.columns12 }"
-            formControlName="visibility"
-          ></app-privacy-selector>
-          <button (click)="deleteOtherName(otherName.putCode)" mat-icon-button>
-            <mat-icon class="material-icons-outlined large-material-icon"
-            >delete
-            </mat-icon
+          <strong i18n="@@topBar.otherNames">Other names</strong>
+        </label>
+      </div>
+      <div class="row"
+           id="otherName-dropList"
+           cdkDropList
+           (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          cdkDrag
+          rootElementSelector="#otherName-dropList"
+          class="row other-names-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [formGroupName]="otherName.putCode"
+          *ngFor="let otherName of otherNames;"
+        >
+          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+            <img class="icon-drag" cdkDragHandle src="./assets/vectors/draggable.svg"/>
+            <mat-form-field
+              appearance="outline"
+              class="mat-form-field-min"
             >
-          </button>
+              <input
+                id="alternative-names-input"
+                matInput
+                formControlName="otherName"
+                placeholder="Add family names"
+              />
+              <mat-hint class="mat-caption" *ngIf="otherName.putCode.indexOf('new') < 0">
+                <ng-container i18n="@@shared.source">Source:</ng-container>
+                {{ getSourceName(otherName)}}
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div
+            class="col no-wrap actions-wrapper no-gutters"
+            [ngClass]="{ 'privacy': !platform.columns12 }"
+          >
+            <app-privacy-selector
+              [ngClass]="{ 'selector': !platform.columns12 }"
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button (click)="deleteOtherName(otherName.putCode)" mat-icon-button>
+              <mat-icon class="material-icons-outlined large-material-icon"
+              >delete
+              </mat-icon
+              >
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
     <div class="row">
       <a class="col add-more no-gutters" (click)="addOtherName()">
         <mat-icon class="large-material-icon">add_circle</mat-icon>
