@@ -110,9 +110,10 @@ $orcid-custom-typography: (
     font-size: mat-font-size($config, body-1); // 14pxfont-style: normal;
     letter-spacing: 0.25px;
   }
-  .orc-font-smallprint {
+  .orc-font-small-print {
     font-family: mat-font-family($config, button);
     font-size: mat-font-size($config, caption); // 12pxfont-style: normal;
     letter-spacing: 0.5px;
+    font-weight: normal;
   }
 }

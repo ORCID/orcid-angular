@@ -4,11 +4,11 @@
     [ngClass]="{ active: visibility === 'PUBLIC' }"
   ></div>
   <div
-    class="dot private"
+    class="dot trusted"
     [ngClass]="{ active: visibility === 'LIMITED' }"
   ></div>
   <div
-    class="dot trusted"
+    class="dot private"
     [ngClass]="{ active: visibility === 'PRIVATE' }"
   ></div>
 </div>

@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-
 import { PlatformInfoService } from '../../platform-info'
 
 @Component({
@@ -14,6 +13,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() loading = false
+
   constructor(
     private dialogRef: MatDialogRef<any>,
     private _platform: PlatformInfoService
@@ -23,7 +23,6 @@ export class ModalComponent implements OnInit, OnDestroy {
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))
-
       .subscribe((platform) => {
         this.columns12 = platform.columns12
       })

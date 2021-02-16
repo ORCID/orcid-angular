@@ -17,4 +17,12 @@
       background-color: map-get($background, autofill-input) !important;
     }
   }
+
+  mat-error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  mat-hint {
+    color: map-get($foreground, 'text-dark-mid');
+  }
 }

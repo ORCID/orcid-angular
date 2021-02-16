@@ -1,1 +1,81 @@
-<p>top-bar works!</p>
+<div class="my-orcid-icons" *ngIf="platform.columns12">
+  <button mat-icon-button class="orc-font-small-print">
+    <mat-icon fontSet="material-icons-outlined" class="icon"> print </mat-icon>
+    <ng-container i18n="@@record.printableVersion">
+      Printable version
+    </ng-container>
+  </button>
+  <button mat-icon-button class="orc-font-small-print">
+    <mat-icon fontSet="material-icons-outlined" class="icon">
+      qr_code
+    </mat-icon>
+    <ng-container i18n="@@record.getQR">
+      Get a QR code for your ORCID iD
+    </ng-container>
+  </button>
+  <button mat-icon-button class="orc-font-small-print">
+    <mat-icon fontSet="material-icons-outlined" class="icon"> code </mat-icon>
+    <ng-container i18n="@@record.displayId">
+      Display your iD on other sites
+    </ng-container>
+  </button>
+</div>
+
+<app-panel
+  *ngIf="userRecord"
+  [elements]="userRecord.names.givenNames"
+  [editModalComponent]="modalNameComponent"
+  [userRecord]="userRecord"
+  [type]="'top-bar'"
+>
+  <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
+  <div body>
+    <app-panel-element [visibility]="userRecord.names.visibility.visibility">
+      <ng-container *ngIf="creditName">
+        <span i18n="@@record.publishedName" class="mat-caption description">
+          Published Name
+        </span>
+        <p class="mat-card-title published-name">
+          <b>
+            {{ creditName }}
+          </b>
+        </p>
+      </ng-container>
+      <span i18n="@@record.name" class="mat-caption description"> Name </span>
+      <p class="mat-body-1">
+        {{ givenNames + ' ' + familyName }}
+      </p>
+    </app-panel-element>
+    <ng-container *ngIf="userRecord.otherNames.otherNames.length > 0">
+      <span i18n="@@record.otherNames" class="mat-caption description">
+        Other names
+      </span>
+      <app-panel-element
+        *ngFor="let otherNames of userRecord.otherNames.otherNames"
+        [visibility]="otherNames.visibility.visibility"
+      >
+        <p class="mat-body-1 other-names">
+          {{ otherNames.content }}
+        </p>
+      </app-panel-element>
+    </ng-container>
+  </div>
+</app-panel>
+<app-panel
+  *ngIf="userRecord"
+  [elements]="userRecord.biography.biography"
+  [editModalComponent]="modalBiographyComponent"
+  [userRecord]="userRecord"
+  [type]="'top-bar'"
+>
+  <h2 header class="orc-font-body" i18n="@@record.biography">Biography</h2>
+  <div body *ngIf="!!userRecord.biography.biography">
+    <app-panel-element
+      [visibility]="userRecord.biography.visibility.visibility"
+    >
+      <span class="mat-body-1">
+        {{ userRecord.biography.biography.value }}
+      </span>
+    </app-panel-element>
+  </div>
+</app-panel>

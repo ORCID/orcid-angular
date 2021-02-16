@@ -1,4 +1,7 @@
 <app-side-bar-id
+  [ngClass]="{
+    mobile: !platform.columns12
+  }"
   [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
 ></app-side-bar-id>
 
@@ -7,6 +10,8 @@
     *ngIf="userRecord"
     [elements]="userRecord.emails.emails"
     [editModalComponent]="modalEmailComponent"
+    [type]="'side-bar'"
+    class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
     <div body>
@@ -19,7 +24,12 @@
     </div>
   </app-panel>
 
-  <app-panel *ngIf="userRecord" [elements]="userRecord.website.websites">
+  <app-panel
+    *ngIf="userRecord"
+    [elements]="userRecord.website.websites"
+    [type]="'side-bar'"
+    class="side-bar"
+  >
     <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
       Website and social links
     </h2>
@@ -40,6 +50,8 @@
   <app-panel
     *ngIf="userRecord"
     [elements]="userRecord.externalIdentifier.externalIdentifiers"
+    [type]="'side-bar'"
+    class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
     <div body>
@@ -61,7 +73,12 @@
     </div>
   </app-panel>
 
-  <app-panel *ngIf="userRecord" [elements]="userRecord.keyword.keywords">
+  <app-panel
+    *ngIf="userRecord"
+    [elements]="userRecord.keyword.keywords"
+    [type]="'side-bar'"
+    class="side-bar"
+  >
     <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
     <div body>
       <app-panel-element
@@ -76,6 +93,8 @@
     *ngIf="userRecord"
     [elements]="userRecord.countries.addresses"
     [editModalComponent]="modalCountryComponent"
+    [type]="'side-bar'"
+    class="side-bar"
     id="countries-panel"
   >
     <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>

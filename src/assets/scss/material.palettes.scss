@@ -7,6 +7,9 @@ $orcid-dark-primary-text: rgba(black, 0.87);
 $orcid-dark-secondary-text: rgba(black, 0.6);
 $orcid-disabled-text: rgba(black, 0.38);
 
+$text-dark-mid: rgba(0, 0, 0, 0.6);
+$text-dark-high: rgba(0, 0, 0, 0.9);
+
 $orcid-light-primary-text: rgba(white, 1);
 $orcid-light-secondary-text: rgba(white, 0.6);
 $orcid-light-disabled-text: rgba(white, 0.38);
@@ -123,12 +126,18 @@ $soft-grey: #979797;
 $facebook-blue: #3b5998;
 // https://seamlessaccess.org/
 $seamlessaccess-blue: #216e93;
+//brand zeplin colors
+$brand-primary: #a6ce39;
 // state-notice zepling colors
 $state-notice-light: #ffdf72;
 
 $state-notice-dark: #ff9c00;
 
 $state-notice-darkest: #ff6400;
+
+$state-warning-dark: #d32f2f;
+
+$ui-background: #e0e0e0;
 // .
 // .
 // NON-USED/DEPRECATED COLORS

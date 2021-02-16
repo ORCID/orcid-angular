@@ -1,9 +1,11 @@
 import { ComponentType } from '@angular/cdk/portal'
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-
 import { Assertion } from '../../../types'
+import { Address, Value } from '../../../types/common.endpoint'
+import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-panel',
@@ -11,13 +13,17 @@ import { PlatformInfoService } from '../../platform-info'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
-  @Input() elements: Assertion[]
   @Input() editModalComponent: ComponentType<any>
+  @Input() elements: Assertion[] | Value | Address
+  @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
+  @Input() userRecord: UserRecord
+
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   openState = false
   editable = true
+
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService
@@ -25,9 +31,26 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  isArrayAndIsNotEmpty(obj: any) {
+    return Array.isArray(obj) && obj.length > 0
+  }
+
+  valueIsNotNull(obj: any) {
+    return obj && obj.value
+  }
+
   openModal() {
-    if (this.editModalComponent) {
-      this._dialog.open(this.editModalComponent)
-    }
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        if (this.editModalComponent) {
+          this._dialog.open(this.editModalComponent, {
+            width: '850px',
+            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+            data: this.userRecord,
+          })
+        }
+      })
   }
 }

@@ -6,14 +6,6 @@ export interface CreatedDate {
   value: number
 }
 
-export interface Biography {
-  lastModifiedDate: LastModifiedDate
-  createdDate: CreatedDate
-  content: string
-  visibility: string
-  path?: any
-}
-
 export interface SourceName {
   content: string
 }
