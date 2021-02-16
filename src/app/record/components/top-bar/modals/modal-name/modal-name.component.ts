@@ -71,15 +71,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userRecord = this.data
-    this.otherNames = this.userRecord.otherNames.otherNames
-
-    this.namesForm = new FormGroup({
-      givenNames: new FormControl('', {}),
-      familyName: new FormControl('', {}),
-      publishedName: new FormControl('', {}),
-      visibility: new FormControl('', {}),
-    })
-
     this._recordNameService
       .getNames()
       .pipe(first())
@@ -90,6 +81,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           .pipe(first())
           .subscribe((otherNames: OtherNamesEndPoint) => {
             this.originalBackendOtherNames = cloneDeep(otherNames)
+            this.otherNames = this.userRecord.otherNames.otherNames
             const otherNamesMap = {}
             this.originalBackendOtherNames.otherNames.map(
               (value) => (otherNamesMap[value.putCode] = value)
@@ -110,7 +102,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     otherNames.forEach((otherName) => {
       group[otherName.putCode] = new FormGroup({
         otherName: new FormControl(otherName.content),
-        visibility: new FormControl(otherName.visibility, {}),
+        visibility: new FormControl(otherName.visibility.visibility, {}),
       })
     })
     this.namesForm = new FormGroup(group)

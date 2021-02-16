@@ -20,7 +20,7 @@ import { RecordService } from '../../../core/record/record.service'
 export class TopBarComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>()
 
-  @Input() userSession: {
+  userSession: {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
@@ -28,7 +28,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
     orcidUrl: string
     loggedIn: boolean
   }
-  @Input() userRecord: UserRecord
+  userRecord: UserRecord
 
   modalNameComponent = ModalNameComponent
   modalBiographyComponent = ModalBiographyComponent

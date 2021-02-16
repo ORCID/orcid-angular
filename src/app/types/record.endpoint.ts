@@ -71,7 +71,7 @@ export interface Assertion {
   primary: boolean
   current: boolean
   verified: boolean
-  visibility: VisibilityStrings
+  visibility: Visibility | VisibilityStrings
   source: string
   putCode?: string
   createdDate?: MonthDayYearDate
@@ -84,8 +84,10 @@ export interface Assertion {
   reference?: string
   url?: string | Value
   urlName?: string
+  sourceName: string
   content?: string
-  sourceName?: string
+  createdDate: MonthDayYearDate
+  lastModified: MonthDayYearDate
   assertionOriginOrcid?: any
   assertionOriginClientId?: any
   assertionOriginName?: any
