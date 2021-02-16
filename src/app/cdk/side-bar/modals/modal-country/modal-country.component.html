@@ -10,7 +10,7 @@
       mat-raised-button
       color="primary"
       (click)="saveEvent()"
-      i18n="@@share.saveChanges"
+      i18n="@@shared.saveChanges"
       id="save-countries-button"
     >
       Save changes
@@ -19,7 +19,7 @@
       mat-stroked-button
       color="primary"
       (click)="closeEvent()"
-      i18n="@@share.cancel"
+      i18n="@@shared.cancel"
       id="cancel-countries-button"
     >
       Cancel
@@ -77,9 +77,9 @@
               </mat-option>
             </mat-select>
             <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-              <ng-container i18n="@@share.source">Source:</ng-container>
+              <ng-container i18n="@@shared.source">Source:</ng-container>
               {{ getSourceName(countriesMap[country.putCode]) }},
-              <ng-container i18n="@@share.created">Created: </ng-container
+              <ng-container i18n="@@shared.created">Created: </ng-container
               >{{ getDate(countriesMap[country.putCode]) | date }}
             </mat-hint>
           </mat-form-field>

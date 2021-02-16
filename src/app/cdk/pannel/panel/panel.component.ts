@@ -5,6 +5,7 @@ import { Assertion } from '../../../types'
 import { Value } from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-panel',

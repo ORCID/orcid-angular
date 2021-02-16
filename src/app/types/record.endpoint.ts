@@ -71,12 +71,10 @@ export interface Assertion {
   primary: boolean
   current: boolean
   verified: boolean
-  visibility: Visibility | VisibilityStrings
+  visibility: Visibility
   source: string
   putCode?: string
-  createdDate?: MonthDayYearDate
   errors?: any[]
-  lastModified?: MonthDayYearDate
   displayIndex?: number
   iso2Country?: Value
   countryName?: string
