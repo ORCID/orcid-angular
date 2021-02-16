@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { RecordBiographyService } from './record-biography.service';
+import { RecordBiographyService } from './record-biography.service'
 
 describe('RecordBiographyService', () => {
-  let service: RecordBiographyService;
+  let service: RecordBiographyService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RecordBiographyService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(RecordBiographyService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})

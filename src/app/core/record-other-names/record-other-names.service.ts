@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
@@ -7,7 +7,7 @@ import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
 import { environment } from '../../../environments/environment'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecordOtherNamesService {
   $otherNames: ReplaySubject<OtherNamesEndPoint>
@@ -18,9 +18,8 @@ export class RecordOtherNamesService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-  ) { }
-
+    private _errorHandler: ErrorHandlerService
+  ) {}
 
   getOtherNames(forceReload = false): Observable<OtherNamesEndPoint> {
     if (!this.$otherNames) {
@@ -30,9 +29,12 @@ export class RecordOtherNamesService {
     }
 
     this._http
-      .get<OtherNamesEndPoint>(environment.API_WEB + `my-orcid/otherNamesForms.json`, {
-        headers: this.headers,
-      })
+      .get<OtherNamesEndPoint>(
+        environment.API_WEB + `my-orcid/otherNamesForms.json`,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -45,7 +47,9 @@ export class RecordOtherNamesService {
     return this.$otherNames
   }
 
-  postOtherNames(otherNames: OtherNamesEndPoint): Observable<OtherNamesEndPoint> {
+  postOtherNames(
+    otherNames: OtherNamesEndPoint
+  ): Observable<OtherNamesEndPoint> {
     return this._http
       .post<OtherNamesEndPoint>(
         environment.API_WEB + `my-orcid/otherNamesForms.json`,
@@ -56,6 +60,6 @@ export class RecordOtherNamesService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getOtherNames(true))
-  )
+      )
   }
 }

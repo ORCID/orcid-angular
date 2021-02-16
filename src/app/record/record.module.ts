@@ -26,7 +26,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     TopBarComponent,
     MainComponent,
     ModalNameComponent,
-    ModalBiographyComponent
+    ModalBiographyComponent,
   ],
   imports: [
     CommonModule,
@@ -46,5 +46,4 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     A11yLinkModule,
   ],
 })
-export class RecordModule {
-}
+export class RecordModule {}

@@ -1,21 +1,39 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
 import { OrcidValidators } from '../../../../../validators'
-import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from '../../../../../constants'
+import {
+  ILLEGAL_NAME_CHARACTERS_REGEXP,
+  URL_REGEXP,
+} from '../../../../../constants'
 import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
-import { Visibility, VisibilityStrings } from '../../../../../types/common.endpoint'
+import {
+  Visibility,
+  VisibilityStrings,
+} from '../../../../../types/common.endpoint'
 import { first } from 'rxjs/operators'
 import { Subject } from 'rxjs'
-import { PlatformInfo, PlatformInfoService } from '../../../../../cdk/platform-info'
+import {
+  PlatformInfo,
+  PlatformInfoService,
+} from '../../../../../cdk/platform-info'
 
 @Component({
   selector: 'app-modal-biography',
   templateUrl: './modal-biography.component.html',
-  styleUrls: ['./modal-biography.component.scss-theme.scss', './modal-biography.component.scss']
+  styleUrls: [
+    './modal-biography.component.scss-theme.scss',
+    './modal-biography.component.scss',
+  ],
 })
 export class ModalBiographyComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -35,15 +53,11 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
     private _cdref: ChangeDetectorRef,
-    private _recordBiographyService: RecordBiographyService,
+    private _recordBiographyService: RecordBiographyService
   ) {
-    this._platform
-      .get()
-      .subscribe(
-        (platform) => {
-          this.platform = platform
-        },
-      )
+    this._platform.get().subscribe((platform) => {
+      this.platform = platform
+    })
   }
 
   ngOnInit(): void {
@@ -69,21 +83,20 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   backendJsonToForm(biography: BiographyEndPoint) {
     this.biographyForm.setValue({
       biography: biography.biography.value,
-      visibility: biography.visibility.visibility
+      visibility: biography.visibility.visibility,
     })
   }
-
 
   formToBackend(biographyForm: FormGroup): BiographyEndPoint {
     const visibility = {
       errors: [],
       required: undefined,
-      visibility: biographyForm.get('visibility').value
+      visibility: biographyForm.get('visibility').value,
     } as Visibility
     return {
       errors: [],
       biography: biographyForm.get('biography').value,
-      visibility:  visibility,
+      visibility: visibility,
     } as BiographyEndPoint
   }
 
@@ -102,11 +115,14 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     this.loadingBiography = true
     this._recordBiographyService
       .postBiography(this.formToBackend(this.biographyForm))
-      .subscribe((response) => {
-        this.closeEvent()
-      }, error => {
-        console.log(error)
-      })
+      .subscribe(
+        (response) => {
+          this.closeEvent()
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
   closeEvent() {

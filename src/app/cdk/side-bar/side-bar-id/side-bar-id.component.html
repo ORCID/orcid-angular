@@ -1,10 +1,7 @@
-<div
-  class="container"
-  [ngClass]="{ 'mobile': !platform.columns12 }"
->
+<div class="container" [ngClass]="{ mobile: !platform.columns12 }">
   <img
     [ngClass]="{
-      'mobile': !platform.columns12
+      mobile: !platform.columns12
     }"
     src="assets/vectors/orcid.logo.icon.svg"
     alt="orcid logo"
@@ -14,7 +11,7 @@
       [ngClass]="{
         'orc-font-body-small': !platform.columns12,
         'orc-font-body-large': platform.columns12
-        }"
+      }"
       dir="ltr"
     >
       https: {{ environment.BASE_URL }}
@@ -23,7 +20,7 @@
       [ngClass]="{
         'orc-font-body-large': !platform.columns12,
         'orc-font-heading-small': platform.columns12
-        }"
+      }"
     >
       {{ id }}
     </strong>

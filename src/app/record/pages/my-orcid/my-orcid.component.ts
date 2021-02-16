@@ -15,9 +15,7 @@ import { Subject } from 'rxjs'
 export class MyOrcidComponent implements OnInit {
   platform: PlatformInfo
 
-  constructor(
-    private _platform: PlatformInfoService,
-  ) {}
+  constructor(private _platform: PlatformInfoService) {}
 
   ngOnInit(): void {
     this._platform.get().subscribe((value) => (this.platform = value))

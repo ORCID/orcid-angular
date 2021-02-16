@@ -21,15 +21,13 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
   privateView = true
   platform: PlatformInfo
 
-  constructor(
-    private _platform: PlatformInfoService,
-  ) {
+  constructor(private _platform: PlatformInfoService) {
     _platform
       .get()
       .pipe(takeUntil(this.$destroy))
       .subscribe((data) => {
-      this.platform = data
-    })
+        this.platform = data
+      })
   }
 
   ngOnInit(): void {}

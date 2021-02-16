@@ -14,7 +14,7 @@ import { RecordService } from '../../../core/record/record.service'
   templateUrl: './top-bar.component.html',
   styleUrls: [
     './top-bar.component.scss',
-    './top-bar.component.scss-theme.scss'
+    './top-bar.component.scss-theme.scss',
   ],
 })
 export class TopBarComponent implements OnInit, OnDestroy {
@@ -62,9 +62,15 @@ export class TopBarComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.destroy$))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
-            this.givenNames = this.userRecord.names.givenNames ? this.userRecord.names.givenNames.value : ''
-            this.familyName = this.userRecord.names.familyName ? this.userRecord.names.familyName.value : ''
-            this.creditName = this.userRecord.names.creditName ? this.userRecord.names.creditName.value : ''
+            this.givenNames = this.userRecord.names.givenNames
+              ? this.userRecord.names.givenNames.value
+              : ''
+            this.familyName = this.userRecord.names.familyName
+              ? this.userRecord.names.familyName.value
+              : ''
+            this.creditName = this.userRecord.names.creditName
+              ? this.userRecord.names.creditName.value
+              : ''
           })
       })
   }

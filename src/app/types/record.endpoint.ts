@@ -1,4 +1,13 @@
-import { Address, Email, MonthDayYearDate, OtherName, ResearcherUrl, Value, Visibility, VisibilityStrings } from './common.endpoint'
+import {
+  Address,
+  Email,
+  MonthDayYearDate,
+  OtherName,
+  ResearcherUrl,
+  Value,
+  Visibility,
+  VisibilityStrings,
+} from './common.endpoint'
 import { BiographyEndPoint } from './record-biography.endpoint'
 
 interface PublicGroupedOtherNames {

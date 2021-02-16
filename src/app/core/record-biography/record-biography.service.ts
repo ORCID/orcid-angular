@@ -7,7 +7,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecordBiographyService {
   $biography: ReplaySubject<BiographyEndPoint>
@@ -18,9 +18,8 @@ export class RecordBiographyService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-  ) { }
-
+    private _errorHandler: ErrorHandlerService
+  ) {}
 
   getBiography(forceReload = false): Observable<BiographyEndPoint> {
     if (!this.$biography) {
@@ -32,7 +31,7 @@ export class RecordBiographyService {
     this._http
       .get<BiographyEndPoint>(
         environment.API_WEB + `account/biographyForm.json`,
-        { headers: this.headers },
+        { headers: this.headers }
       )
       .pipe(
         retry(3),
@@ -50,7 +49,7 @@ export class RecordBiographyService {
       .post<BiographyEndPoint>(
         environment.API_WEB + `account/biographyForm.json`,
         biography,
-        { headers: this.headers },
+        { headers: this.headers }
       )
       .pipe(
         retry(3),

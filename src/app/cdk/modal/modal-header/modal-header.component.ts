@@ -20,11 +20,9 @@ export class ModalHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._platform
-      .get()
-      .subscribe((platform) => {
-        this.platform = platform
-      })
+    this._platform.get().subscribe((platform) => {
+      this.platform = platform
+    })
   }
 
   closeEvent() {

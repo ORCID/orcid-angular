@@ -18,9 +18,8 @@ export class RecordNamesService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-  ) {
-  }
+    private _errorHandler: ErrorHandlerService
+  ) {}
 
   getNames(forceReload = false): Observable<NamesEndPoint> {
     if (!this.$names) {
@@ -30,10 +29,9 @@ export class RecordNamesService {
     }
 
     this._http
-      .get<NamesEndPoint>(
-        environment.API_WEB + `account/nameForm.json`,
-        { headers: this.headers },
-      )
+      .get<NamesEndPoint>(environment.API_WEB + `account/nameForm.json`, {
+        headers: this.headers,
+      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -48,14 +46,17 @@ export class RecordNamesService {
 
   postNames(names: NamesEndPoint): Observable<NamesEndPoint> {
     return this._http
-      .post<NamesEndPoint>(environment.API_WEB + `account/nameForm.json`, names, {
-        headers: this.headers,
-      })
+      .post<NamesEndPoint>(
+        environment.API_WEB + `account/nameForm.json`,
+        names,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getNames(true))
       )
   }
-
 }

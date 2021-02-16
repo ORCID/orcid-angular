@@ -1,4 +1,9 @@
-import { CreatedDate, LastModifiedDate, Value, Visibility } from './common.endpoint'
+import {
+  CreatedDate,
+  LastModifiedDate,
+  Value,
+  Visibility,
+} from './common.endpoint'
 
 export interface Biography {
   lastModifiedDate: LastModifiedDate

@@ -1,16 +1,31 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { OrcidValidators } from '../../../../../validators'
-import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from '../../../../../constants'
+import {
+  ILLEGAL_NAME_CHARACTERS_REGEXP,
+  URL_REGEXP,
+} from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
 import { RecordOtherNamesService } from '../../../../../core/record-other-names/record-other-names.service'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { Subject } from 'rxjs'
-import { PlatformInfo, PlatformInfoService } from '../../../../../cdk/platform-info'
-import { Visibility, VisibilityStrings } from '../../../../../types/common.endpoint'
+import {
+  PlatformInfo,
+  PlatformInfoService,
+} from '../../../../../cdk/platform-info'
+import {
+  Visibility,
+  VisibilityStrings,
+} from '../../../../../types/common.endpoint'
 import { Assertion } from '../../../../../types'
 import { NamesEndPoint } from '../../../../../types/record-name.endpoint'
 import { OtherNamesEndPoint } from '../../../../../types/record-other-names.endpoint'
@@ -22,7 +37,10 @@ import { UserService } from '../../../../../core'
 @Component({
   selector: 'app-modal-name',
   templateUrl: './modal-name.component.html',
-  styleUrls: ['./modal-name.component.scss-theme.scss', './modal-name.component.scss'],
+  styleUrls: [
+    './modal-name.component.scss-theme.scss',
+    './modal-name.component.scss',
+  ],
 })
 export class ModalNameComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -50,16 +68,12 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
-    private _changeDetectorRef: ChangeDetectorRef,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {
-    this._platform
-      .get()
-      .subscribe(
-        (platform) => {
-          this.platform = platform
-          this.isMobile = platform.columns4 || platform.columns8
-        },
-      )
+    this._platform.get().subscribe((platform) => {
+      this.platform = platform
+      this.isMobile = platform.columns4 || platform.columns8
+    })
 
     this._userService
       .getUserSession()
@@ -92,10 +106,12 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       })
   }
 
-  onSubmit() {
-  }
+  onSubmit() {}
 
-  backendJsonToForm(namesEndPoint: NamesEndPoint, otherNamesEndpointJson: OtherNamesEndPoint) {
+  backendJsonToForm(
+    namesEndPoint: NamesEndPoint,
+    otherNamesEndpointJson: OtherNamesEndPoint
+  ) {
     const otherNames = otherNamesEndpointJson.otherNames
     const group: { [key: string]: FormGroup } = {}
 
@@ -107,25 +123,40 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     })
     this.namesForm = new FormGroup(group)
 
-    const givenNames = namesEndPoint.givenNames ? namesEndPoint.givenNames.value : ''
-    const familyName = namesEndPoint.familyName ? namesEndPoint.familyName.value : ''
-    const publishedName = namesEndPoint.creditName ? namesEndPoint.creditName.value : ''
+    const givenNames = namesEndPoint.givenNames
+      ? namesEndPoint.givenNames.value
+      : ''
+    const familyName = namesEndPoint.familyName
+      ? namesEndPoint.familyName.value
+      : ''
+    const publishedName = namesEndPoint.creditName
+      ? namesEndPoint.creditName.value
+      : ''
     const visibilityName = namesEndPoint.visibility.visibility
 
-    this.namesForm.addControl('givenNames', new FormControl(givenNames, {
-      validators: [
-        Validators.required,
-        OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
-        OrcidValidators.notPattern(URL_REGEXP),
-      ],
-    }))
-    this.namesForm.addControl('familyName', new FormControl(familyName, {
-      validators: [
-        OrcidValidators.notPattern(URL_REGEXP),
-        OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
-      ],
-    }))
-    this.namesForm.addControl('publishedName', new FormControl(publishedName, {}))
+    this.namesForm.addControl(
+      'givenNames',
+      new FormControl(givenNames, {
+        validators: [
+          Validators.required,
+          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+          OrcidValidators.notPattern(URL_REGEXP),
+        ],
+      })
+    )
+    this.namesForm.addControl(
+      'familyName',
+      new FormControl(familyName, {
+        validators: [
+          OrcidValidators.notPattern(URL_REGEXP),
+          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+        ],
+      })
+    )
+    this.namesForm.addControl(
+      'publishedName',
+      new FormControl(publishedName, {})
+    )
     this.namesForm.addControl('visibility', new FormControl(visibilityName, {}))
   }
 
@@ -176,18 +207,20 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.loadingNames = true
     this._recordNameService
       .postNames(this.formToBackendNames(this.namesForm))
-      .subscribe((response) => {
-        console.log(response)
-        this._recordOtherNamesService
-          .postOtherNames(this.formToBackendOtherNames(this.namesForm))
-          .subscribe((res) => {
-            console.log(res)
-            this.closeEvent()
-            }
-          )
-      }, error => {
-        console.log(error)
-      })
+      .subscribe(
+        (response) => {
+          console.log(response)
+          this._recordOtherNamesService
+            .postOtherNames(this.formToBackendOtherNames(this.namesForm))
+            .subscribe((res) => {
+              console.log(res)
+              this.closeEvent()
+            })
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
   closeEvent() {
@@ -204,7 +237,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       new FormGroup({
         otherName: new FormControl(),
         visibility: new FormControl(this.defaultVisibility, {}),
-      }),
+      })
     )
     this.otherNames.push({
       putCode: 'new-' + this.addedOtherNameCount,
@@ -224,7 +257,15 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   getSourceName(names: Assertion) {
     if (names.sourceName) {
       if (names.lastModified) {
-        return names.sourceName + ' ' + names.lastModified.year + '-' + names.lastModified.month + '-' + names.lastModified.day
+        return (
+          names.sourceName +
+          ' ' +
+          names.lastModified.year +
+          '-' +
+          names.lastModified.month +
+          '-' +
+          names.lastModified.day
+        )
       } else {
         return names.sourceName
       }
