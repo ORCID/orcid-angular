@@ -1,13 +1,14 @@
 import {
   Address,
   Email,
+  MonthDayYearDate,
   OtherName,
   ResearcherUrl,
-  Visibility,
-  MonthDayYearDate,
-  VisibilityStrings,
   Value,
+  Visibility,
+  VisibilityStrings,
 } from './common.endpoint'
+import { BiographyEndPoint } from './record-biography.endpoint'
 
 interface PublicGroupedOtherNames {
   [x: string]: OtherName
@@ -40,7 +41,7 @@ interface PublicGroupedPersonExternalIdentifiers {
 export interface Person {
   title: string
   displayName: string
-  biography: Biography
+  biography: BiographyEndPoint
   publicGroupedOtherNames: PublicGroupedOtherNames
   publicAddress: Address
   countryNames: CountryNames
@@ -49,18 +50,6 @@ export interface Person {
   publicGroupedResearcherUrls: PublicGroupedResearcherUrls
   publicGroupedEmails: PublicGroupedEmails
   publicGroupedPersonExternalIdentifiers: PublicGroupedPersonExternalIdentifiers
-}
-
-export interface Biography {
-  visibility: Visibility
-  biography: Value
-  errors: string[]
-}
-
-export interface OtherNames {
-  errors: String[]
-  otherNames: Assertion[]
-  visibility: Visibility
 }
 
 export interface Keywords {
@@ -81,14 +70,6 @@ export interface ExternalIdentifier {
   visibility: Visibility
 }
 
-export interface Names {
-  visibility: Visibility
-  errors: any[]
-  givenNames: Value
-  familyName: Value
-  creditName?: any
-}
-
 export interface Preferences {
   developer_tools_enabled: boolean
   default_visibility: VisibilityStrings
@@ -99,12 +80,10 @@ export interface Assertion {
   primary: boolean
   current: boolean
   verified: boolean
-  visibility: VisibilityStrings
+  visibility: Visibility
   source: string
   putCode?: string
-  createdDate?: MonthDayYearDate
   errors?: any[]
-  lastModified?: MonthDayYearDate
   displayIndex?: number
   iso2Country?: Value
   countryName?: string
@@ -112,8 +91,10 @@ export interface Assertion {
   reference?: string
   url?: string | Value
   urlName?: string
+  sourceName: string
   content?: string
-  sourceName?: string
+  createdDate: MonthDayYearDate
+  lastModified: MonthDayYearDate
   assertionOriginOrcid?: any
   assertionOriginClientId?: any
   assertionOriginName?: any
