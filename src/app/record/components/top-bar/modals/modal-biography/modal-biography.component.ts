@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UserRecord } from '../../../../../types/record.local'
-import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
 import { OrcidValidators } from '../../../../../validators'
 import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from '../../../../../constants'
@@ -104,7 +103,6 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     this._recordBiographyService
       .postBiography(this.formToBackend(this.biographyForm))
       .subscribe((response) => {
-        console.log(response)
         this.closeEvent()
       }, error => {
         console.log(error)

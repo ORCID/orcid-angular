@@ -14,8 +14,10 @@ import { Visibility, VisibilityStrings } from '../../../../../types/common.endpo
 import { Assertion } from '../../../../../types'
 import { NamesEndPoint } from '../../../../../types/record-name.endpoint'
 import { OtherNamesEndPoint } from '../../../../../types/record-other-names.endpoint'
-import { first } from 'rxjs/operators'
+import { first, takeUntil } from 'rxjs/operators'
 import { cloneDeep } from 'lodash'
+import { UserSession } from '../../../../../types/session.local'
+import { UserService } from '../../../../../core'
 
 @Component({
   selector: 'app-modal-name',
@@ -25,15 +27,17 @@ import { cloneDeep } from 'lodash'
 export class ModalNameComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  platform: PlatformInfo
   namesForm: FormGroup
   otherNamesForm: FormGroup
   userRecord: UserRecord
+  userSession: UserSession
   otherNames: Assertion[]
+  originalBackendOtherNames: OtherNamesEndPoint
   isMobile: boolean
   defaultVisibility: VisibilityStrings
   addedOtherNameCount = 0
   loadingNames = true
-  platform: PlatformInfo
 
   ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
   ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
@@ -43,6 +47,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService,
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
+    private _userService: UserService,
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
@@ -55,6 +60,13 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           this.isMobile = platform.columns4 || platform.columns8
         },
       )
+
+    this._userService
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userSession) => {
+        this.userSession = userSession
+      })
   }
 
   ngOnInit(): void {
@@ -77,12 +89,12 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           .getOtherNames()
           .pipe(first())
           .subscribe((otherNames: OtherNamesEndPoint) => {
-            const originalBackendOtherNames = cloneDeep(otherNames)
+            this.originalBackendOtherNames = cloneDeep(otherNames)
             const otherNamesMap = {}
-            originalBackendOtherNames.otherNames.map(
+            this.originalBackendOtherNames.otherNames.map(
               (value) => (otherNamesMap[value.putCode] = value)
             )
-            this.backendJsonToForm(names, originalBackendOtherNames)
+            this.backendJsonToForm(names, this.originalBackendOtherNames)
             this.loadingNames = false
           })
       })
@@ -140,19 +152,32 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     } as NamesEndPoint
   }
 
-  formToBackendOtherNames(namesForm: FormGroup): any {
-    const visibility = {
+  formToBackendOtherNames(namesForm: FormGroup): OtherNamesEndPoint {
+    const otherNames = {
       errors: [],
-      required: undefined,
-      visibility: namesForm.get('visibility').value,
-    } as Visibility
-    return {
-      errors: [],
-      givenNames: namesForm.get('givenNames').value,
-      familyName: namesForm.get('familyName').value,
-      creditName: namesForm.get('publishedName').value,
-      visibility: visibility,
-    } as NamesEndPoint
+      otherNames: [],
+      visibility: this.originalBackendOtherNames.visibility,
+    }
+    this.otherNames.reverse()
+    this.otherNames
+      .map((value) => value.putCode)
+      .filter((key) => namesForm.value[key].otherName)
+      .forEach((key, i) => {
+        const otherName = namesForm.value[key].otherName
+        const visibility = namesForm.value[key].visibility
+        if (namesForm.value[key]) {
+          otherNames.otherNames.push({
+            putCode: key.indexOf('new-') === 0 ? null : key,
+            content: otherName,
+            displayIndex: i + 1,
+            source: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+            visibility: {
+              visibility,
+            },
+          } as Assertion)
+        }
+      })
+    return otherNames
   }
 
   saveEvent() {
@@ -185,7 +210,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.namesForm.addControl(
       'new-' + this.addedOtherNameCount,
       new FormGroup({
-        otherNames: new FormControl(),
+        otherName: new FormControl(),
         visibility: new FormControl(this.defaultVisibility, {}),
       }),
     )
