@@ -18,7 +18,7 @@ import { RecordService } from '../../../core/record/record.service'
   ],
 })
 export class TopBarComponent implements OnInit, OnDestroy {
-  destroy$: Subject<boolean> = new Subject<boolean>()
+  $destroy: Subject<boolean> = new Subject<boolean>()
 
   userSession: {
     userInfo: UserInfo
@@ -43,7 +43,10 @@ export class TopBarComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _record: RecordService
   ) {
-    _platform.get().subscribe((data) => {
+    _platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((data) => {
       this.platform = data
     })
   }
@@ -51,7 +54,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._user
       .getUserSession()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
 
@@ -59,7 +62,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
           .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
-          .pipe(takeUntil(this.destroy$))
+          .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
             this.givenNames = this.userRecord.names.givenNames
@@ -76,7 +79,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true)
-    this.destroy$.unsubscribe()
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
   }
 }

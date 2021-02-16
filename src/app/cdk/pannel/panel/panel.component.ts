@@ -2,7 +2,7 @@ import { ComponentType } from '@angular/cdk/portal'
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion } from '../../../types'
-import { Value } from '../../../types/common.endpoint'
+import { Address, Value } from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
@@ -14,7 +14,7 @@ import { first } from 'rxjs/operators'
 })
 export class PanelComponent implements OnInit {
   @Input() editModalComponent: ComponentType<any>
-  @Input() elements: Assertion[] | Value
+  @Input() elements: Assertion[] | Value | Address
   @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
   @Input() userRecord: UserRecord
 

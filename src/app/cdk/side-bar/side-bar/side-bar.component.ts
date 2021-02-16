@@ -19,13 +19,14 @@ import { ModalEmailComponent } from '../modals/modal-email/modal-email.component
   ],
 })
 export class SideBarComponent implements OnInit, OnDestroy {
+  $destroy: Subject<boolean> = new Subject<boolean>()
+
   @Input() onlyOrcidId = false
 
   modalEmailComponent = ModalEmailComponent
   modalCountryComponent = ModalCountryComponent
 
-  destroy$: Subject<boolean> = new Subject<boolean>()
-  @Input() userSession: {
+  userSession: {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
@@ -33,7 +34,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     orcidUrl: string
     loggedIn: boolean
   }
-  @Input() userRecord: UserRecord
+  userRecord: UserRecord
   platform: PlatformInfo
 
   constructor(
@@ -41,7 +42,10 @@ export class SideBarComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _record: RecordService
   ) {
-    _platform.get().subscribe((data) => {
+    _platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((data) => {
       this.platform = data
     })
   }
@@ -49,7 +53,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._user
       .getUserSession()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
 
@@ -57,7 +61,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
           .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
-          .pipe(takeUntil(this.destroy$))
+          .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
           })
@@ -65,7 +69,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true)
-    this.destroy$.unsubscribe()
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
   }
 }

@@ -1,8 +1,10 @@
 <div
   class="header box orc-font-body"
   [ngClass]="{
-    'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)
-  }"
+    'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
+    'top-bar': type === 'top-bar',
+    'side-bar': type === 'side-bar'
+    }"
 >
   <ng-content select="[header]"></ng-content>
   <div class="buttons-container">

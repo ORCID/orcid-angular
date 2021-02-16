@@ -11,6 +11,11 @@
   :host {
     background-color: mat-color($background, brand-primary-lightest);
   }
+
+  .side-bar {
+    border-color: mat-color($accent, 200) !important;
+    background-color: mat-color($background, brand-primary-lightest) !important;
+  }
 }
 
 @include side-bar-theme($orcid-app-theme);

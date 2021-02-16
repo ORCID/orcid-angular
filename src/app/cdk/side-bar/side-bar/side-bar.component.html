@@ -11,6 +11,7 @@
     [elements]="userRecord.emails.emails"
     [editModalComponent]="modalEmailComponent"
     [type]="'side-bar'"
+    class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
     <div body>
@@ -27,6 +28,7 @@
     *ngIf="userRecord"
     [elements]="userRecord.website.websites"
     [type]="'side-bar'"
+    class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
       Website and social links
@@ -49,6 +51,7 @@
     *ngIf="userRecord"
     [elements]="userRecord.externalIdentifier.externalIdentifiers"
     [type]="'side-bar'"
+    class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
     <div body>
@@ -74,6 +77,7 @@
     *ngIf="userRecord"
     [elements]="userRecord.keyword.keywords"
     [type]="'side-bar'"
+    class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
     <div body>
@@ -90,6 +94,7 @@
     [elements]="userRecord.countries.addresses"
     [editModalComponent]="modalCountryComponent"
     [type]="'side-bar'"
+    class="side-bar"
     id="countries-panel"
   >
     <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>

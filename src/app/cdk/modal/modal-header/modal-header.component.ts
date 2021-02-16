@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
+import { takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-modal-header',
@@ -10,7 +12,9 @@ import { PlatformInfo, PlatformInfoService } from '../../platform-info'
     './modal-header.component.scss-theme.scss',
   ],
 })
-export class ModalHeaderComponent implements OnInit {
+export class ModalHeaderComponent implements OnInit, OnDestroy {
+  $destroy: Subject<boolean> = new Subject<boolean>()
+
   @Output() close = new EventEmitter<boolean>()
   platform: PlatformInfo
 
@@ -20,13 +24,21 @@ export class ModalHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._platform.get().subscribe((platform) => {
-      this.platform = platform
-    })
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((platform) => {
+        this.platform = platform
+      })
   }
 
   closeEvent() {
     this.dialogReg.close()
     this.close.next()
+  }
+
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
   }
 }

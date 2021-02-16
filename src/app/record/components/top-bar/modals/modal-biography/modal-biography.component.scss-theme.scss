@@ -16,14 +16,6 @@
     background: map-get($foreground, 'brand-primary');
   }
 
-  mat-error {
-    color: map-get($foreground, 'state-warning-dark');
-  }
-
-  mat-hint {
-    color: map-get($foreground, 'text-dark-mid');
-  }
-
   .error {
     color: map-get($foreground, 'state-warning-dark');
   }

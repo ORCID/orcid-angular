@@ -16,7 +16,6 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   environment = environment
-  desktop: boolean
   @Input() id: string
   privateView = true
   platform: PlatformInfo

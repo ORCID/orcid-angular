@@ -33,6 +33,7 @@ import { first, takeUntil } from 'rxjs/operators'
 import { cloneDeep } from 'lodash'
 import { UserSession } from '../../../../../types/session.local'
 import { UserService } from '../../../../../core'
+import { WINDOW } from '../../../../../cdk/window'
 
 @Component({
   selector: 'app-modal-name',
@@ -62,6 +63,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add published name`
 
   constructor(
+    @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
@@ -273,19 +275,19 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   }
 
   toGivenNames() {
-    document.getElementById('given-names').scrollIntoView()
+    this.window.document.getElementById('given-names').scrollIntoView()
   }
 
   toPublishedName() {
-    document.getElementById('published-name').scrollIntoView()
+    this.window.document.getElementById('published-name').scrollIntoView()
   }
 
   toVisibility() {
-    document.getElementById('visibility').scrollIntoView()
+    this.window.document.getElementById('visibility').scrollIntoView()
   }
 
   toAlsoKnownAs() {
-    document.getElementById('also-known-as').scrollIntoView()
+    this.window.document.getElementById('also-known-as').scrollIntoView()
   }
 
   ngOnDestroy() {

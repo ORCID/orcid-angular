@@ -16,16 +16,11 @@ import {
   URL_REGEXP,
 } from '../../../../../constants'
 import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
-import {
-  Visibility,
-  VisibilityStrings,
-} from '../../../../../types/common.endpoint'
-import { first } from 'rxjs/operators'
+import { Visibility, VisibilityStrings } from '../../../../../types/common.endpoint'
+import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
-import {
-  PlatformInfo,
-  PlatformInfoService,
-} from '../../../../../cdk/platform-info'
+import { PlatformInfo, PlatformInfoService } from '../../../../../cdk/platform-info'
+import { WINDOW } from '../../../../../cdk/window'
 
 @Component({
   selector: 'app-modal-biography',
@@ -49,15 +44,21 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
 
   constructor(
+    @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
     private _cdref: ChangeDetectorRef,
-    private _recordBiographyService: RecordBiographyService
+    private _recordBiographyService: RecordBiographyService,
   ) {
-    this._platform.get().subscribe((platform) => {
-      this.platform = platform
-    })
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe(
+        (platform) => {
+          this.platform = platform
+        },
+      )
   }
 
   ngOnInit(): void {
@@ -80,35 +81,17 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
 
   onSubmit() {}
 
-  backendJsonToForm(biography: BiographyEndPoint) {
-    this.biographyForm.setValue({
-      biography: biography.biography.value,
-      visibility: biography.visibility.visibility,
-    })
-  }
-
   formToBackend(biographyForm: FormGroup): BiographyEndPoint {
     const visibility = {
       errors: [],
       required: undefined,
-      visibility: biographyForm.get('visibility').value,
+      visibility: biographyForm.get('visibility').value
     } as Visibility
     return {
       errors: [],
       biography: biographyForm.get('biography').value,
-      visibility: visibility,
+      visibility:  visibility,
     } as BiographyEndPoint
-  }
-
-  getBiography() {
-    this._recordBiographyService
-      .getBiography()
-      .pipe(first())
-      .subscribe((biography: BiographyEndPoint) => {
-        console.log(JSON.stringify(biography))
-        // this.backendJsonToForm(biography)
-        this.loadingBiography = false
-      })
   }
 
   saveEvent() {
@@ -130,11 +113,11 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   }
 
   toBiography() {
-    document.getElementById('biography').scrollIntoView()
+    this.window.document.getElementById('biography').scrollIntoView()
   }
 
   toVisibility() {
-    document.getElementById('visibility').scrollIntoView()
+    this.window.document.getElementById('visibility').scrollIntoView()
   }
 
   ngOnDestroy() {

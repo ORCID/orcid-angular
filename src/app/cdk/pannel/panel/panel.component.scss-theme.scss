@@ -9,15 +9,15 @@
   $background: map-get($theme, background);
 
   :host,
-  .header {
-    border-color: mat-color($accent, 200);
+  .side-bar {
+    border-color: mat-color($accent, 200) !important;
+    background-color: mat-color($background, brand-primary-lightest) !important;
   }
 
   :host,
-  .header,
   .top-bar {
-    border-color: mat-color($background, ui-background);
-    background-color: mat-color($background, ui-background-lightest);
+    border-color: mat-color($background, ui-background) !important;
+    background-color: mat-color($background, ui-background-lightest) !important;
   }
 
   .body {
