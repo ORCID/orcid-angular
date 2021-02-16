@@ -15,6 +15,25 @@ mat-form-field {
 }
 
 .actions-wrapper {
-  width: 180px;
-  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+
+.email-input-line {
+  margin-top: 20px;
+  img {
+    margin-top: 6px;
+    cursor: move;
+    z-index: 1;
+    margin-right: 18px;
+  }
+}
+
+::ng-deep .columns-4-or-8 .mat-form-field {
+  width: 100%;
+  margin-inline-end: auto;
+}
+
+
+.add-more {
+  margin-top: 16px;
 }

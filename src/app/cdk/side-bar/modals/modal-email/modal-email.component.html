@@ -26,12 +26,13 @@
       <h3 class="col">Primary email address</h3>
     </div>
 
+    <!-- PRIMARY EMAIL -->
     <div class="row">
       <ng-container *ngFor="let email of emails">
         <div
           *ngIf="email.primary"
           class="row email-input-line no-wrap"
-          [formGroupName]="email.value"
+          [formGroupName]="email.putCode"
         >
           <div class="col l12 m8 s4">
             <mat-form-field
@@ -39,7 +40,7 @@
               class="mat-form-field-min"
               [ngClass]="{ 'email-activated': true }"
             >
-              <input #emailInput matInput formControlName="email" />
+              <input matInput matInput formControlName="email" />
               <mat-icon matPrefix>verified</mat-icon>
             </mat-form-field>
           </div>
@@ -56,11 +57,13 @@
       <h3 class="col">Other email address</h3>
     </div>
 
+    <!-- ADDITIONAL EMAILS -->
+
     <ng-container *ngFor="let email of emails">
       <div
         *ngIf="!email.primary"
         class="row email-input-line no-wrap"
-        [formGroupName]="email.value"
+        [formGroupName]="email.putCode"
       >
         <div class="col l12 m8 s4">
           <mat-form-field
@@ -71,13 +74,24 @@
             <input #emailInput matInput formControlName="email" />
             <mat-icon matPrefix>verified</mat-icon>
             <a matSuffix class="orc-font-smallprint"> Test</a>
+            <mat-hint *ngIf="email.putCode.indexOf('new') < 0">
+              <ng-container i18n="@@share.source">Source:</ng-container>
+              <!-- {{ getSourceName(countriesMap[country.putCode]) }},
+            <ng-container i18n="@@share.created">Created: </ng-container
+            >{{ getDate(countriesMap[country.putCode]) | date }} -->
+            </mat-hint>
           </mat-form-field>
         </div>
-        <div class="col no-wrap actions-wrapper">
+
+        <div class="col no-wrap actions-wrapper no-gutters">
           <app-privacy-selector
             formControlName="visibility"
           ></app-privacy-selector>
-          <button (click)="deleteEmail('this')" mat-icon-button>
+          <button
+            (click)="deleteEmail(email.putCode)"
+            mat-icon-button
+            class="delete-button"
+          >
             <mat-icon class="material-icons-outlined large-material-icon"
               >delete</mat-icon
             >
@@ -87,14 +101,10 @@
     </ng-container>
 
     <div class="row">
-      <a class="col add-more-email">
+      <a class="col add-more" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon> Add
         another email address</a
       >
     </div>
   </div>
-
-  <mat-form-field>
-    <input matInput />
-  </mat-form-field>
 </app-modal>
