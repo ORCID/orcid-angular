@@ -16,10 +16,16 @@ import {
   URL_REGEXP,
 } from '../../../../../constants'
 import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
-import { Visibility, VisibilityStrings } from '../../../../../types/common.endpoint'
+import {
+  Visibility,
+  VisibilityStrings,
+} from '../../../../../types/common.endpoint'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
-import { PlatformInfo, PlatformInfoService } from '../../../../../cdk/platform-info'
+import {
+  PlatformInfo,
+  PlatformInfoService,
+} from '../../../../../cdk/platform-info'
 import { WINDOW } from '../../../../../cdk/window'
 
 @Component({
@@ -49,16 +55,14 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord,
     private _cdref: ChangeDetectorRef,
-    private _recordBiographyService: RecordBiographyService,
+    private _recordBiographyService: RecordBiographyService
   ) {
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))
-      .subscribe(
-        (platform) => {
-          this.platform = platform
-        },
-      )
+      .subscribe((platform) => {
+        this.platform = platform
+      })
   }
 
   ngOnInit(): void {
@@ -85,12 +89,12 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     const visibility = {
       errors: [],
       required: undefined,
-      visibility: biographyForm.get('visibility').value
+      visibility: biographyForm.get('visibility').value,
     } as Visibility
     return {
       errors: [],
       biography: biographyForm.get('biography').value,
-      visibility:  visibility,
+      visibility: visibility,
     } as BiographyEndPoint
   }
 

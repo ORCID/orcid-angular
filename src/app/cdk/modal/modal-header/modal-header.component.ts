@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { takeUntil } from 'rxjs/operators'

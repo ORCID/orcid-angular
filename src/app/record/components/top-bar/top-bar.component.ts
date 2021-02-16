@@ -47,8 +47,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .get()
       .pipe(takeUntil(this.$destroy))
       .subscribe((data) => {
-      this.platform = data
-    })
+        this.platform = data
+      })
   }
 
   ngOnInit(): void {
