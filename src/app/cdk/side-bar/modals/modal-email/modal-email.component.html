@@ -52,6 +52,33 @@
             ></app-privacy-selector>
           </div>
         </div>
+        <app-alert-message
+          *ngIf="email.primary && !email.verified"
+          class="orc-font-body-small"
+        >
+          <strong class="orc-font-body"
+            >Please verify your primary email address!</strong
+          >
+
+          <p>
+            You need to verify your primary email in order to access all of
+            ORCID’s editing features. <br />
+            To verify your email, click the link in the message sent to:
+          </p>
+          <p class="email-container">{{ email.value }}</p>
+
+          <p>
+            <strong> Need help?</strong> <br />
+            Visit our
+            <a href="https://support.orcid.org/hc/articles/360006973793"
+              >knowledge</a
+            >
+            base or contact
+            <a href="https://support.orcid.org/hc/en-us/requests/new">
+              contact support.
+            </a>
+          </p>
+        </app-alert-message>
       </ng-container>
     </div>
 

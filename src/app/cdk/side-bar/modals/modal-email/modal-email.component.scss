@@ -14,7 +14,6 @@ mat-form-field {
   width: 100%;
 }
 
-
 .actions-wrapper {
   flex-wrap: nowrap;
   flex-shrink: 0;
@@ -41,4 +40,13 @@ mat-form-field {
 
 .add-more {
   margin-top: 16px;
+}
+
+::ng-deep app-alert-message {
+  p {
+    margin: 0;
+  }
+  p.email-container {
+    margin: 16px 0 16px 0;
+  }
 }
