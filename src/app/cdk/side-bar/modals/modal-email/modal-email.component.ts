@@ -38,7 +38,7 @@ export class ModalEmailComponent implements OnInit {
   addedEmailsCount = 0
   emailsForm: FormGroup = new FormGroup({})
   emails: AssertionVisibilityString[]
-  defaultVisibility: VisibilityStrings
+  defaultVisibility: VisibilityStrings = 'PRIVATE'
   backendJson: EmailsEndpoint
   isMobile: boolean
 
@@ -72,14 +72,18 @@ export class ModalEmailComponent implements OnInit {
   }
 
   saveEvent() {
+    const call = this.formToBackend(this.emailsForm)
+    this._recordEmails.postEmails(call).pipe(first()).subscribe()
     this.closeEvent()
   }
   closeEvent() {
     this.dialogRef.close()
   }
 
-  deleteEmail(email) {
-    console.log(email)
+  deleteEmail(putcode: string) {
+    const i = this.emails.findIndex((value) => value.putCode === putcode)
+    this.emails.splice(i, 1)
+    this.emailsForm.removeControl(putcode)
   }
 
   addEmail() {
@@ -126,7 +130,33 @@ export class ModalEmailComponent implements OnInit {
     this.emailsForm = new FormGroup(group)
   }
 
-  formToBackendJson(fromGroup: FormGroup) {}
+  formToBackend(emailForm: FormGroup): EmailsEndpoint {
+    const endpointCall: EmailsEndpoint = {
+      errors: [],
+      emails: [],
+    }
+
+    this.emails
+      .map((email) => email.putCode)
+      // Clear empty inputs
+      .filter((key) => emailForm.value[key].email)
+      .forEach((key, i) => {
+        const value = emailForm.value[key].email
+        const visibility = emailForm.value[key].visibility
+        const primary = this.emails[i].primary
+
+        if (emailForm.value[key]) {
+          endpointCall.emails.push({
+            value,
+            visibility,
+            primary,
+          } as AssertionVisibilityString)
+        }
+      })
+    return endpointCall
+  }
+
+  saveEmails(emails: EmailsEndpoint) {}
 
   makePrimary(newPrimaryEmail: AssertionVisibilityString) {
     this.emails.forEach(
@@ -135,7 +165,10 @@ export class ModalEmailComponent implements OnInit {
   }
 
   verifyEmail(newPrimaryEmail: AssertionVisibilityString) {
-    this._recordEmails.verifyEmail(newPrimaryEmail.value).pipe(first()).subscribe()
+    this._recordEmails
+      .verifyEmail(newPrimaryEmail.value)
+      .pipe(first())
+      .subscribe()
   }
 
   ngOnDestroy() {

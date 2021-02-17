@@ -46,7 +46,7 @@ export class RecordEmailsService {
   postEmails(otherNames: EmailsEndpoint): Observable<EmailsEndpoint> {
     return this._http
       .post<EmailsEndpoint>(
-        environment.API_WEB + `account/edit.json`,
+        environment.API_WEB + `account/emails.json`,
         otherNames,
         {
           headers: this.headers,
@@ -55,7 +55,7 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
+        switchMap(() => this.getEmails(true))
       )
   }
 
