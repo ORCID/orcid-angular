@@ -2,14 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
-import {
-  EmailsEndpoint,
-  ExternalIdentifier,
-  Keywords,
-  Person,
-  Preferences,
-  Website,
-} from 'src/app/types'
+import { EmailsEndpoint, ExternalIdentifier, Keywords, Person, Preferences } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
@@ -23,6 +16,8 @@ import { RecordOtherNamesService } from '../record-other-names/record-other-name
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
 import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
+import { RecordWebsitesService } from '../record-websites/record-websites.service'
+import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +33,8 @@ export class RecordService {
     private _recordNamesService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _recordEmailsService: RecordEmailsService,
-    private _recordCountryService: RecordCountriesService
+    private _recordCountryService: RecordCountriesService,
+    private _recordWebsitesService: RecordWebsitesService
   ) {}
 
   headers = new HttpHeaders({
@@ -56,7 +52,7 @@ export class RecordService {
         this._recordOtherNamesService.getOtherNames(),
         this._recordCountryService.getAddresses(),
         this.getKeywords(),
-        this.getWebsites(),
+        this._recordWebsitesService.getWebsites(),
         this.getExternalIdentifier(),
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
@@ -82,7 +78,7 @@ export class RecordService {
                 otherNames: otherNames as OtherNamesEndPoint,
                 countries: countries as CountriesEndpoint,
                 keyword: keyword as Keywords,
-                website: website as Website,
+                website: website as WebsitesEndPoint,
                 externalIdentifier: externalIdentifier as ExternalIdentifier,
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
@@ -138,30 +134,6 @@ export class RecordService {
       .post<Keywords>(
         environment.API_WEB + `my-orcid/keywordsForms.json`,
         keywords,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getWebsites(): Observable<Website> {
-    return this._http
-      .get<Website>(environment.API_WEB + `my-orcid/websitesForms.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postWebsites(website: Website): Observable<Keywords> {
-    return this._http
-      .post<Keywords>(
-        environment.API_WEB + `my-orcid/websitesForms.json`,
-        website,
         { headers: this.headers }
       )
       .pipe(

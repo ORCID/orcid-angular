@@ -58,12 +58,6 @@ export interface Keywords {
   visibility: Visibility
 }
 
-export interface Website {
-  errors: any[]
-  websites: Assertion[]
-  visibility: Visibility
-}
-
 export interface ExternalIdentifier {
   errors: any[]
   externalIdentifiers: Assertion[]
@@ -89,7 +83,7 @@ export interface Assertion {
   countryName?: string
   commonName?: string
   reference?: string
-  url?: string | Value
+  url?: Value
   urlName?: string
   sourceName: string
   content?: string

@@ -60,7 +60,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
   ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
   ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
-  ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add published name`
+  ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add a published or credit name`
+  ngOrcidAddOtherName = $localize`:@@topBar.addOtherName:Add other name`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -211,11 +212,9 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       .postNames(this.formToBackendNames(this.namesForm))
       .subscribe(
         (response) => {
-          console.log(response)
           this._recordOtherNamesService
             .postOtherNames(this.formToBackendOtherNames(this.namesForm))
             .subscribe((res) => {
-              console.log(res)
               this.closeEvent()
             })
         },

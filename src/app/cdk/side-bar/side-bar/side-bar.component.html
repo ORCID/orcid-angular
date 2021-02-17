@@ -27,6 +27,7 @@
   <app-panel
     *ngIf="userRecord"
     [elements]="userRecord.website.websites"
+    [editModalComponent]="modalWebsitesComponent"
     [type]="'side-bar'"
     class="side-bar"
   >
@@ -38,10 +39,12 @@
         *ngFor="let website of userRecord.website.websites"
         [visibility]="website.visibility.visibility"
         ><a
+          *ngIf="website.url"
           [href]="website.url.value"
+          [ngClass]="{'orc-font-body-small': getWebsite(website).length > 20}"
           target="_blank"
           rel="me nofollow noopener noreferrer"
-          >{{ website.urlName }}</a
+          >{{ getWebsite(website) }}</a
         ></app-panel-element
       >
     </div>
