@@ -13,7 +13,7 @@ Cypress.Commands.add(
       .trigger('mousedown', { which: 1 })
       .trigger('mousemove', { clientX: coords.x + 10, clientY: coords.y + 10 })
       .trigger('mouseup', { force: true })
-  },
+  }
 )
 describe('My Orcid top bar' + runInfo(), () => {
   before(() => {
