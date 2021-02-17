@@ -14,8 +14,11 @@ mat-form-field {
   width: 100%;
 }
 
+
 .actions-wrapper {
   flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: baseline;
 }
 
 .email-input-line {
@@ -29,10 +32,12 @@ mat-form-field {
 }
 
 ::ng-deep .columns-4-or-8 .mat-form-field {
-  width: 100%;
   margin-inline-end: auto;
 }
 
+.email-input-container {
+  max-width: 50%;
+}
 
 .add-more {
   margin-top: 16px;

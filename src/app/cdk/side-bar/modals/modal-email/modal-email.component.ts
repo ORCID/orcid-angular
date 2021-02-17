@@ -16,7 +16,11 @@ import { first, takeUntil, tap } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { Assertion, EmailsEndpoint } from 'src/app/types'
+import {
+  Assertion,
+  AssertionVisibilityString,
+  EmailsEndpoint,
+} from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -33,7 +37,7 @@ export class ModalEmailComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   addedEmailsCount = 0
   emailsForm: FormGroup = new FormGroup({})
-  emails: Assertion[]
+  emails: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings
   backendJson: EmailsEndpoint
   isMobile: boolean
@@ -89,7 +93,7 @@ export class ModalEmailComponent implements OnInit {
     this.emails.push({
       putCode: 'new-' + this.addedEmailsCount,
       visibility: this.defaultVisibility,
-    } as Assertion)
+    } as AssertionVisibilityString)
     console.log(this.emails)
     this.addedEmailsCount++
     this._changeDetectorRef.detectChanges()
@@ -123,6 +127,16 @@ export class ModalEmailComponent implements OnInit {
   }
 
   formToBackendJson(fromGroup: FormGroup) {}
+
+  makePrimary(newPrimaryEmail: AssertionVisibilityString) {
+    this.emails.forEach(
+      (email) => (email.primary = email.value === newPrimaryEmail.value)
+    )
+  }
+
+  verifyEmail(newPrimaryEmail: AssertionVisibilityString) {
+    this._recordEmails.verifyEmail(newPrimaryEmail.value).pipe(first()).subscribe()
+  }
 
   ngOnDestroy() {
     this.$destroy.next(true)

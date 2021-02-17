@@ -1,6 +1,5 @@
-<app-modal>
+<app-modal noSidebar="true">
   <app-modal-header>Emails</app-modal-header>
-  <app-modal-side-bar> Form content </app-modal-side-bar>
   <app-modal-footer>
     <button mat-raised-button color="primary" (click)="saveEvent()">
       Save changes
@@ -36,6 +35,7 @@
         >
           <div class="col l12 m8 s4">
             <mat-form-field
+              *ngIf="!email.verified"
               appearance="outline"
               class="mat-form-field-min"
               [ngClass]="{ 'email-activated': true }"
@@ -43,6 +43,8 @@
               <input matInput matInput formControlName="email" />
               <mat-icon matPrefix>verified</mat-icon>
             </mat-form-field>
+
+            <label *ngIf="email.verified">{{ email.value }}</label>
           </div>
           <div class="col no-wrap actions-wrapper">
             <app-privacy-selector
@@ -65,7 +67,7 @@
         class="row email-input-line no-wrap"
         [formGroupName]="email.putCode"
       >
-        <div class="col l12 m8 s4">
+        <div class="col l12 m8 s4 email-input-container">
           <mat-form-field
             appearance="outline"
             class="mat-form-field-min"
@@ -73,7 +75,7 @@
           >
             <input #emailInput matInput formControlName="email" />
             <mat-icon matPrefix>verified</mat-icon>
-            <a matSuffix class="orc-font-smallprint"> Test</a>
+
             <mat-hint *ngIf="email.putCode.indexOf('new') < 0">
               <ng-container i18n="@@share.source">Source:</ng-container>
               <!-- {{ getSourceName(countriesMap[country.putCode]) }},
@@ -84,6 +86,20 @@
         </div>
 
         <div class="col no-wrap actions-wrapper no-gutters">
+          <a
+            class="orc-font-smallprint"
+            *ngIf="email.verified"
+            (click)="makePrimary(email)"
+          >
+            Make primary</a
+          >
+          <a
+            class="orc-font-smallprint"
+            *ngIf="!email.verified && email.putCode.indexOf('new-') < 0"
+            (click)="verifyEmail(email)"
+          >
+            Resend verification email</a
+          >
           <app-privacy-selector
             formControlName="visibility"
           ></app-privacy-selector>

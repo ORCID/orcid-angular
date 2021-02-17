@@ -75,13 +75,13 @@ export interface Preferences {
   default_visibility: VisibilityStrings
 }
 
-export interface Assertion {
-  value: string
-  primary: boolean
-  current: boolean
-  verified: boolean
-  visibility: Visibility
-  source: string
+interface AssertionBase {
+  value?: string
+  primary?: boolean
+  current?: boolean
+  verified?: boolean
+  visibility: Visibility | VisibilityStrings
+  source?: string
   putCode?: string
   errors?: any[]
   displayIndex?: number
@@ -93,11 +93,19 @@ export interface Assertion {
   urlName?: string
   sourceName: string
   content?: string
-  createdDate: MonthDayYearDate
+  createdDate?: MonthDayYearDate
   lastModified: MonthDayYearDate
   assertionOriginOrcid?: any
   assertionOriginClientId?: any
   assertionOriginName?: any
+}
+
+export interface Assertion extends AssertionBase {
+  visibility: Visibility
+}
+
+export interface AssertionVisibilityString extends AssertionBase {
+  visibility: VisibilityStrings
 }
 
 export interface ErrorsListResponse {

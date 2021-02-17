@@ -1,6 +1,6 @@
-import { Assertion } from '.'
+import { Assertion, AssertionVisibilityString } from '.'
 
 export interface EmailsEndpoint {
-  emails: Assertion[]
+  emails: AssertionVisibilityString[]
   errors: string[]
 }
