@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../modal/modal/modal.component'
@@ -21,7 +27,7 @@ import { URL_REGEXP } from '../../../../constants'
 @Component({
   selector: 'app-modal-websites',
   templateUrl: './modal-websites.component.html',
-  styleUrls: ['./modal-websites.component.scss']
+  styleUrls: ['./modal-websites.component.scss'],
 })
 export class ModalWebsitesComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -76,7 +82,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         this.websites = websites.websites
         const websitesMap = {}
         this.originalBackendWebsites.websites.map(
-          (value) => (websitesMap[value.putCode] = value),
+          (value) => (websitesMap[value.putCode] = value)
         )
         this.backendJsonToForm(this.originalBackendWebsites)
         this.loadingWebsites = false
@@ -85,9 +91,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   onSubmit() {}
 
-  backendJsonToForm(
-    websitesEndPoint: WebsitesEndPoint
-  ) {
+  backendJsonToForm(websitesEndPoint: WebsitesEndPoint) {
     const websites = websitesEndPoint.websites
     const group: { [key: string]: FormGroup } = {}
 
@@ -95,9 +99,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [
-            Validators.pattern(URL_REGEXP)
-            ]
+          validators: [Validators.pattern(URL_REGEXP)],
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
@@ -165,9 +167,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       new FormGroup({
         description: new FormControl(),
         url: new FormControl('', {
-          validators: [
-            Validators.pattern(URL_REGEXP)
-          ]
+          validators: [Validators.pattern(URL_REGEXP)],
         }),
         visibility: new FormControl(this.defaultVisibility, {}),
       })

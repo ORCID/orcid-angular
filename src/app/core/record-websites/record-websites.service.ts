@@ -7,7 +7,7 @@ import { catchError, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecordWebsitesService {
   $websites: ReplaySubject<WebsitesEndPoint>
@@ -19,7 +19,7 @@ export class RecordWebsitesService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
-  ) { }
+  ) {}
 
   getWebsites(forceReload = false): Observable<WebsitesEndPoint> {
     if (!this.$websites) {
@@ -29,9 +29,12 @@ export class RecordWebsitesService {
     }
 
     this._http
-      .get<WebsitesEndPoint>(environment.API_WEB + `my-orcid/websitesForms.json`, {
-        headers: this.headers,
-      })
+      .get<WebsitesEndPoint>(
+        environment.API_WEB + `my-orcid/websitesForms.json`,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

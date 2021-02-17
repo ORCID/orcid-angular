@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ModalCountryComponent } from './modals/modal-country/modal-country.component'
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { MatSelectModule } from '@angular/material/select'
-import { A11yLinkModule } from '../a11y-link/a11y-link.module';
+import { A11yLinkModule } from '../a11y-link/a11y-link.module'
 import { ModalWebsitesComponent } from './modals/modal-websites/modal-websites.component'
 
 @NgModule({

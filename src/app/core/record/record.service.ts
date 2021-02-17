@@ -2,7 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
-import { EmailsEndpoint, ExternalIdentifier, Keywords, Person, Preferences } from 'src/app/types'
+import {
+  EmailsEndpoint,
+  ExternalIdentifier,
+  Keywords,
+  Person,
+  Preferences,
+} from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'

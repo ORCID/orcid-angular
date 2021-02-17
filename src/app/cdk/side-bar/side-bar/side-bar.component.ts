@@ -71,7 +71,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   getWebsite(website: Assertion) {
-    return website.urlName !== null && website.urlName !== '' ? website.urlName : website.url.value
+    return website.urlName !== null && website.urlName !== ''
+      ? website.urlName
+      : website.url.value
   }
 
   ngOnDestroy() {
