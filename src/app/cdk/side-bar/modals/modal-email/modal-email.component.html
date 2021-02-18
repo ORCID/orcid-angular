@@ -33,23 +33,35 @@
           class="row email-input-line no-wrap"
           [formGroupName]="email.putCode"
         >
-          <div class="col l12 m8 s4">
+          <div class="col l12 m8 s4 email-input-container">
             <mat-form-field
               *ngIf="!email.verified"
               appearance="outline"
               class="mat-form-field-min"
-              [ngClass]="{ 'email-activated': true }"
+              [ngClass]="{ 'email-activated': email.verified }"
             >
               <input matInput matInput formControlName="email" />
               <mat-icon matPrefix>verified</mat-icon>
             </mat-form-field>
 
-            <label *ngIf="email.verified">{{ email.value }}</label>
+            <strong
+              class="orc-font-body-large email-activated primary-email-label"
+              *ngIf="email.verified"
+            >
+              <mat-icon class="title-material-icon" matPrefix
+                >verified</mat-icon
+              >
+              {{ email.value }}</strong
+            >
           </div>
-          <div class="col no-wrap actions-wrapper">
-            <app-privacy-selector
-              formControlName="visibility"
-            ></app-privacy-selector>
+          <div class="col no-wrap actions-wrapper no-gutters">
+            <div class="actions-sub-wrapper"></div>
+            <div class="actions-sub-wrapper">
+              <app-privacy-selector
+                formControlName="visibility"
+              ></app-privacy-selector>
+              <div></div>
+            </div>
           </div>
         </div>
         <app-alert-message
@@ -98,48 +110,71 @@
           <mat-form-field
             appearance="outline"
             class="mat-form-field-min"
-            [ngClass]="{ 'email-activated': true }"
+            [ngClass]="{ 'email-activated': email.verified }"
           >
             <input #emailInput matInput formControlName="email" />
             <mat-icon matPrefix>verified</mat-icon>
-
-            <mat-hint *ngIf="email.putCode.indexOf('new') < 0">
-              <ng-container i18n="@@share.source">Source:</ng-container>
-              <!-- {{ getSourceName(countriesMap[country.putCode]) }},
-            <ng-container i18n="@@share.created">Created: </ng-container
-            >{{ getDate(countriesMap[country.putCode]) | date }} -->
-            </mat-hint>
           </mat-form-field>
         </div>
 
         <div class="col no-wrap actions-wrapper no-gutters">
-          <a
-            class="orc-font-smallprint"
-            *ngIf="email.verified"
-            (click)="makePrimary(email)"
-          >
-            Make primary</a
-          >
-          <a
-            class="orc-font-smallprint"
-            *ngIf="!email.verified && email.putCode.indexOf('new-') < 0"
-            (click)="verifyEmail(email)"
-          >
-            Resend verification email</a
-          >
-          <app-privacy-selector
-            formControlName="visibility"
-          ></app-privacy-selector>
-          <button
-            (click)="deleteEmail(email.putCode)"
-            mat-icon-button
-            class="delete-button"
-          >
-            <mat-icon class="material-icons-outlined large-material-icon"
-              >delete</mat-icon
+          <div class="actions-sub-wrapper">
+            <a
+              class="orc-font-smallprint"
+              *ngIf="email.verified"
+              (click)="makePrimary(email)"
             >
-          </button>
+              Make primary</a
+            >
+
+            <ng-container
+              *ngIf="!email.verified && email.putCode.indexOf('new-') < 0"
+            >
+              <a
+                class="orc-font-smallprint disabled"
+                *ngIf="verificationEmailWasSend(email.value)"
+              >
+                Resend verification email</a
+              >
+              <a
+                class="orc-font-smallprint"
+                (click)="verifyEmail(email)"
+                *ngIf="!verificationEmailWasSend(email.value)"
+              >
+                Resend verification email</a
+              >
+            </ng-container>
+          </div>
+
+          <div class="actions-sub-wrapper">
+            <app-privacy-selector
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              (click)="deleteEmail(email.putCode)"
+              mat-icon-button
+              class="delete-button"
+            >
+              <mat-icon class="material-icons-outlined huge-material-icon"
+                >delete</mat-icon
+              >
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="col l12 m8 s4">
+        <app-alert-message
+          *ngIf="verificationEmailWasSend(email.value)"
+          class="orc-font-body-small"
+        >
+          <strong class="orc-font-body"
+            >We’ve sent a verification email to {{ email.value }}</strong
+          >
+          <p>
+            Please check your email inbox (or maybe your spam folder) for an
+            email with a link to complete the process.
+          </p>
+        </app-alert-message>
       </div>
     </ng-container>
 

@@ -6,7 +6,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, ValidatorFn } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatInput } from '@angular/material/input'
 import { MatSelect } from '@angular/material/select'
@@ -34,9 +34,16 @@ import { OrcidValidators } from 'src/app/validators'
 })
 export class ModalEmailComponent implements OnInit {
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
+  verificationsSend: string[] = []
   $destroy: Subject<boolean> = new Subject<boolean>()
   addedEmailsCount = 0
-  emailsForm: FormGroup = new FormGroup({})
+  emailsForm: FormGroup = new FormGroup(
+    {},
+    {
+      validators: [this.allEmailsAreUnique()],
+      updateOn: 'change',
+    }
+  )
   emails: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
   backendJson: EmailsEndpoint
@@ -168,11 +175,36 @@ export class ModalEmailComponent implements OnInit {
     this._recordEmails
       .verifyEmail(newPrimaryEmail.value)
       .pipe(first())
-      .subscribe()
+      .subscribe(() => {
+        this.verificationsSend.push(newPrimaryEmail.value)
+      })
   }
+
+
+  verificationEmailWasSend(email: string) {
+    return this.verificationsSend.indexOf(email) > -1
+  }
+
 
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  allEmailsAreUnique(): ValidatorFn {
+    return (formGroup: FormGroup) => {
+      const duplicatedEmail: string[] = []
+      Object.keys(formGroup.controls).forEach((emailPutCodeX) => {
+        Object.keys(formGroup.controls).forEach((emailPutCodeY) => {
+          if (
+            formGroup.controls[emailPutCodeX].value ===
+            formGroup.controls[emailPutCodeY]
+          ) {
+            duplicatedEmail.push(formGroup.controls[emailPutCodeY].value)
+          }
+        })
+      })
+      return {}
+    }
   }
 }

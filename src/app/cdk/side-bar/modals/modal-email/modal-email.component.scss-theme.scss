@@ -11,8 +11,11 @@
   :host ::ng-deep mat-form-field mat-icon {
     color: map-get($background, ui-background);
   }
-  :host ::ng-deep mat-form-field.email-activated mat-icon {
+  :host ::ng-deep .email-activated mat-icon {
     color: mat-color($accent, 400);
+  }
+  :host ::ng-deep mat-icon {
+    color: mat-color($background, ui-background);
   }
 }
 
