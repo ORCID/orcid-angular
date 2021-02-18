@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
-import { environment } from '../cypress.env'
-const randomUser = require('../helpers/randomUser')
-const runInfo = require('../helpers/runInfo')
+import { environment } from '../../cypress.env'
+const randomUser = require('../../helpers/randomUser')
+const runInfo = require('../../helpers/runInfo')
 
 Cypress.Commands.add(
   'dragTo',
@@ -28,7 +28,7 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
     it('display the users Orcid', () => {
       cy.get('app-side-bar-id ').within(() => {
         cy.contains(environment.testUser.id)
-        cy.contains(`https://orcid.org/${environment.testUser.id}`)
+        cy.contains(`https:${environment.baseUrl}/${environment.testUser.id}`)
       })
     })
     it('display url to navigate to the public page view', () => {})

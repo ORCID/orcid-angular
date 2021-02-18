@@ -27,6 +27,7 @@
   [editModalComponent]="modalNameComponent"
   [userRecord]="userRecord"
   [type]="'top-bar'"
+  id="names-panel"
 >
   <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
   <div body>
@@ -67,13 +68,15 @@
   [editModalComponent]="modalBiographyComponent"
   [userRecord]="userRecord"
   [type]="'top-bar'"
+  id="biography-panel"
 >
   <h2 header class="orc-font-body" i18n="@@record.biography">Biography</h2>
-  <div body *ngIf="!!userRecord.biography.biography">
+  <div body>
     <app-panel-element
+      *ngIf="!!userRecord.biography.biography"
       [visibility]="userRecord.biography.visibility.visibility"
     >
-      <span class="mat-body-1">
+      <span id="biography" class="mat-body-1">
         {{ userRecord.biography.biography.value }}
       </span>
     </app-panel-element>

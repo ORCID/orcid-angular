@@ -1,8 +1,7 @@
-/// <reference types="cypress" />
-import { environment } from '../cypress.env'
+import { environment } from '../../cypress.env'
 
-const randomUser = require('../helpers/randomUser')
-const runInfo = require('../helpers/runInfo')
+const randomUser = require('../../helpers/randomUser')
+const runInfo = require('../../helpers/runInfo')
 
 Cypress.Commands.add(
   'dragTo',
@@ -66,19 +65,51 @@ describe('My Orcid top bar' + runInfo(), () => {
       it('clicks outside and DONT close the modal ', () => {})
     })
   })
-  describe('Biography' + runInfo(), () => {
-    it('display user biography if exists and privacy"', () => {})
-    describe('Biography edit modals' + runInfo(), () => {
-      it('edit user biography"', () => {
-        // Expect changes to be display outside and inside of the modal
+  describe('Biography', () => {
+    before(() => {
+      cy.cleanBiography()
+    })
+    beforeEach(() => {
+      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
+    })
+    after(() => {
+      cy.cleanBiography()
+    })
+    it('display user biography if exists and privacy"', () => {
+      cy.get('#biography-panel').within(() => {
+        cy.get('[body=""]').should('not.exist')
       })
-      it('edit user biography privacy"', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('make changes and cancel', () => {
-        // Expect changes NOT to be display outside and inside of the modal
-      })
-      it('clicks outside and DONT close the modal ', () => {})
+    })
+    it('edit user biography"', () => {
+      cy.get('#biography-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.mat-form-field-flex').type('biography')
+        .get('#save-biography-button')
+        .click()
+        .get('#biography-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .get('#biography')
+            .should('contain', 'biography')
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy,
+            )
+        })
+    })
+    it('edit user biography privacy"', () => {
+      // Expect changes to be display outside and inside of the modal
+    })
+    it('make changes and cancel', () => {
+      // Expect changes NOT to be display outside and inside of the modal
+    })
+    it('clicks outside and DONT close the modal ', () => {
     })
   })
 })
