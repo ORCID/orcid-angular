@@ -86,7 +86,8 @@ describe('My Orcid top bar' + runInfo(), () => {
           cy.get('#edit-button').click()
         })
         .get('#modal-container')
-        .get('.mat-form-field-flex').type('biography')
+        .get('.mat-form-field-flex')
+        .type('biography')
         .get('#save-biography-button')
         .click()
         .get('#biography-panel')
@@ -99,7 +100,7 @@ describe('My Orcid top bar' + runInfo(), () => {
             .should(
               'have.attr',
               'aria-label',
-              environment.testUser.defaultPrivacy,
+              environment.testUser.defaultPrivacy
             )
         })
     })
@@ -109,7 +110,6 @@ describe('My Orcid top bar' + runInfo(), () => {
     it('make changes and cancel', () => {
       // Expect changes NOT to be display outside and inside of the modal
     })
-    it('clicks outside and DONT close the modal ', () => {
-    })
+    it('clicks outside and DONT close the modal ', () => {})
   })
 })

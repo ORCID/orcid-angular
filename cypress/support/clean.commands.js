@@ -31,7 +31,7 @@ Cypress.Commands.add('cleanBiography', (url) => {
           errors: [],
           getRequiredMessage: null,
           required: true,
-          value: ""
+          value: '',
         },
         visibility: {
           errors: [],
