@@ -145,7 +145,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     this._recordCountryService
       .postAddresses(this.formToBackend(this.countryForm))
       .subscribe((response) => {
-        console.log(response)
         this.closeEvent()
       })
   }
