@@ -30,7 +30,7 @@
       <ng-container *ngFor="let email of emails">
         <div
           *ngIf="email.primary"
-          class="row email-input-line no-wrap"
+          class="row email-input-line"
           [formGroupName]="email.putCode"
         >
           <div class="col l12 m8 s4 email-input-container">
@@ -54,7 +54,7 @@
               {{ email.value }}</strong
             >
           </div>
-          <div class="col no-wrap actions-wrapper no-gutters">
+          <div class="col actions-wrapper no-gutters">
             <div class="actions-sub-wrapper"></div>
             <div class="actions-sub-wrapper">
               <app-privacy-selector
@@ -103,21 +103,42 @@
     <ng-container *ngFor="let email of emails">
       <div
         *ngIf="!email.primary"
-        class="row email-input-line no-wrap"
+        class="row email-input-line"
         [formGroupName]="email.putCode"
       >
         <div class="col l12 m8 s4 email-input-container">
           <mat-form-field
             appearance="outline"
             class="mat-form-field-min"
-            [ngClass]="{ 'email-activated': email.verified }"
+            [ngClass]="{
+              'email-activated': showEmailAsVerified(email)
+            }"
           >
             <input #emailInput matInput formControlName="email" />
             <mat-icon matPrefix>verified</mat-icon>
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('backendErrors', [email.putCode, 'email'])
+              "
+            >
+              This email already exists in our system.
+            </mat-error>
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('duplicated', [email.putCode, 'email'])
+              "
+            >
+              Additional emails can not be duplicated
+            </mat-error>
+            <mat-error
+              *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+            >
+              Invalid email format
+            </mat-error>
           </mat-form-field>
         </div>
 
-        <div class="col no-wrap actions-wrapper no-gutters">
+        <div class="col actions-wrapper no-gutters">
           <div class="actions-sub-wrapper">
             <a
               class="orc-font-smallprint"
@@ -128,18 +149,18 @@
             >
 
             <ng-container
-              *ngIf="!email.verified && email.putCode.indexOf('new-') < 0"
+              *ngIf="showNonVerifiedData(email)"
             >
               <a
                 class="orc-font-smallprint disabled"
-                *ngIf="verificationEmailWasSend(email.value)"
+                *ngIf="verificationEmailWasSend(email)"
               >
                 Resend verification email</a
               >
               <a
                 class="orc-font-smallprint"
                 (click)="verifyEmail(email)"
-                *ngIf="!verificationEmailWasSend(email.value)"
+                *ngIf="!verificationEmailWasSend(email)"
               >
                 Resend verification email</a
               >
@@ -164,7 +185,7 @@
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
-          *ngIf="verificationEmailWasSend(email.value)"
+          *ngIf="verificationEmailWasSend(email.value) && showNonVerifiedData(email)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"

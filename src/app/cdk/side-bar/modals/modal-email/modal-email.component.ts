@@ -6,16 +6,24 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { FormControl, FormGroup, ValidatorFn } from '@angular/forms'
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatInput } from '@angular/material/input'
 import { MatSelect } from '@angular/material/select'
 import { cloneDeep } from 'lodash'
-import { Subject } from 'rxjs'
-import { first, takeUntil, tap } from 'rxjs/operators'
+import { Observable, of, Subject } from 'rxjs'
+import { first, map, takeUntil, tap } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
+import { RegisterService } from 'src/app/core/register/register.service'
 import {
   Assertion,
   AssertionVisibilityString,
@@ -37,13 +45,7 @@ export class ModalEmailComponent implements OnInit {
   verificationsSend: string[] = []
   $destroy: Subject<boolean> = new Subject<boolean>()
   addedEmailsCount = 0
-  emailsForm: FormGroup = new FormGroup(
-    {},
-    {
-      validators: [this.allEmailsAreUnique()],
-      updateOn: 'change',
-    }
-  )
+  emailsForm: FormGroup = new FormGroup({})
   emails: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
   backendJson: EmailsEndpoint
@@ -94,25 +96,31 @@ export class ModalEmailComponent implements OnInit {
   }
 
   addEmail() {
+    const newPutCode = 'new-' + this.addedEmailsCount
     this.emailsForm.addControl(
-      'new-' + this.addedEmailsCount,
+      newPutCode,
       new FormGroup({
-        email: new FormControl(),
-        visibility: new FormControl(this.defaultVisibility, {}),
+        email: new FormControl('', {
+          validators: [
+            OrcidValidators.email,
+            this.allEmailsAreUnique(newPutCode),
+          ],
+          asyncValidators: [this._recordEmails.backendEmailValidate()],
+
+          updateOn: 'change',
+        }),
+        visibility: new FormControl('', {}),
       })
     )
     this.emails.push({
-      putCode: 'new-' + this.addedEmailsCount,
+      putCode: newPutCode,
       visibility: this.defaultVisibility,
     } as AssertionVisibilityString)
-    console.log(this.emails)
     this.addedEmailsCount++
     this._changeDetectorRef.detectChanges()
 
     const input = this.inputs.last
-    console.log(this.inputs)
 
-    console.log(input)
     input.nativeElement.focus()
   }
 
@@ -126,15 +134,20 @@ export class ModalEmailComponent implements OnInit {
     emails.forEach((email) => {
       group[email.value] = new FormGroup({
         email: new FormControl(email.value, {
-          validators: [OrcidValidators.email],
+          validators: [
+            OrcidValidators.email,
+            this.allEmailsAreUnique(email.value),
+          ],
+          asyncValidators: [this._recordEmails.backendEmailValidate()],
+          updateOn: 'change',
         }),
         visibility: new FormControl(email.visibility, {}),
       })
-      group[email.value].valueChanges.subscribe((value) => {
-        console.log(value)
-      })
     })
-    this.emailsForm = new FormGroup(group)
+    this.emailsForm = new FormGroup(group, {
+      validators: [],
+      updateOn: 'change',
+    })
   }
 
   formToBackend(emailForm: FormGroup): EmailsEndpoint {
@@ -180,31 +193,71 @@ export class ModalEmailComponent implements OnInit {
       })
   }
 
-
   verificationEmailWasSend(email: string) {
     return this.verificationsSend.indexOf(email) > -1
   }
 
+  showNonVerifiedData(email: Assertion): boolean {
+    return (
+      this.emailsForm.value[email.putCode] &&
+      this.emailsForm.value[email.putCode].email === email.putCode &&
+      !email.verified &&
+      email.putCode.indexOf('new-') < 0
+    )
+  }
 
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
 
-  allEmailsAreUnique(): ValidatorFn {
-    return (formGroup: FormGroup) => {
-      const duplicatedEmail: string[] = []
-      Object.keys(formGroup.controls).forEach((emailPutCodeX) => {
-        Object.keys(formGroup.controls).forEach((emailPutCodeY) => {
-          if (
-            formGroup.controls[emailPutCodeX].value ===
-            formGroup.controls[emailPutCodeY]
-          ) {
-            duplicatedEmail.push(formGroup.controls[emailPutCodeY].value)
-          }
+  allEmailsAreUnique(putCode): ValidatorFn {
+    return (control: AbstractControl) => {
+      const formGroup = this.emailsForm
+      const emailsWithErrorPutCodes: string[] = []
+
+      if (this.emails) {
+        // Add errors error on duplicated emails
+        Object.keys(formGroup.controls).forEach((emailPutCodeX) => {
+          const emailControlX = (formGroup.controls[emailPutCodeX] as FormGroup)
+            .controls['email']
+          Object.keys(formGroup.controls).forEach((emailPutCodeY) => {
+            const emailControlY = (formGroup.controls[
+              emailPutCodeY
+            ] as FormGroup).controls['email']
+
+            // Only if both controls are not empty
+            if (emailControlX.value && emailControlY.value) {
+              const emailYCompleteObject = this.emails.find(
+                (email) => email.putCode === emailPutCodeY
+              )
+
+              if (
+                emailControlX.value === emailControlY.value &&
+                !emailYCompleteObject.primary &&
+                emailPutCodeX !== emailPutCodeY
+              ) {
+                //  emailControlY.setErrors({ duplicated: true })
+                emailsWithErrorPutCodes.push(emailPutCodeY)
+              }
+            }
+          })
         })
-      })
+      }
+      if (emailsWithErrorPutCodes.indexOf(putCode) >= 0) {
+        return {
+          duplicated: true,
+        }
+      }
+
       return {}
     }
+  }
+
+  showEmailAsVerified(email: AssertionVisibilityString): boolean {
+    return (
+      this.emailsForm.value[email.putCode].email === email.putCode &&
+      email.verified
+    )
   }
 }

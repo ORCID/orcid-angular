@@ -70,3 +70,25 @@ mat-form-field {
   }
   margin-bottom: 20px;
 }
+
+::ng-deep .columns-4-or-8 {
+  .mat-form-field {
+    margin-inline-end: auto;
+  }
+
+  .email-input-container {
+    padding: 0;
+    max-width: 100%;
+    padding-inline-end: 24px;
+  }
+
+  .actions-wrapper,
+  .actions-sub-wrapper {
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 10px 0 10px 0;
+  }
+  .actions-sub-wrapper {
+    justify-content: space-between !important;
+  }
+}

@@ -80,7 +80,7 @@ interface AssertionBase {
   primary?: boolean
   current?: boolean
   verified?: boolean
-  visibility: Visibility | VisibilityStrings
+  visibility?: Visibility | VisibilityStrings
   source?: string
   putCode?: string
   errors?: any[]
@@ -91,21 +91,21 @@ interface AssertionBase {
   reference?: string
   url?: string | Value
   urlName?: string
-  sourceName: string
+  sourceName?: string
   content?: string
   createdDate?: MonthDayYearDate
-  lastModified: MonthDayYearDate
+  lastModified?: MonthDayYearDate
   assertionOriginOrcid?: any
   assertionOriginClientId?: any
   assertionOriginName?: any
 }
 
 export interface Assertion extends AssertionBase {
-  visibility: Visibility
+  visibility?: Visibility
 }
 
 export interface AssertionVisibilityString extends AssertionBase {
-  visibility: VisibilityStrings
+  visibility?: VisibilityStrings
 }
 
 export interface ErrorsListResponse {

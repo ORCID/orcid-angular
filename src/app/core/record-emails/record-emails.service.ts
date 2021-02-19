@@ -1,8 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, retry, switchMap, tap } from 'rxjs/operators'
-import { Assertion, EmailsEndpoint, ErrorsListResponse } from 'src/app/types'
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  ValidationErrors,
+} from '@angular/forms'
+import { Observable, of, ReplaySubject } from 'rxjs'
+import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
+import {
+  Assertion,
+  AssertionVisibilityString,
+  EmailsEndpoint,
+  ErrorsListResponse,
+} from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -100,5 +110,40 @@ export class RecordEmailsService {
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails())
       )
+  }
+
+  validateRegisterValue(
+    value: Assertion
+  ): Observable<AssertionVisibilityString> {
+    return this._http
+      .post<AssertionVisibilityString>(
+        environment.API_WEB + `account/validateEmail.json`,
+        value
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  backendEmailValidate(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (control.value === '') {
+        return of(null)
+      }
+      const value: Assertion = { value: control.value }
+
+      return this.validateRegisterValue(value).pipe(
+        map((res) => {
+          if (res.errors.length > 0) {
+            const error = {
+              backendError: res.errors,
+            }
+            return error
+          }
+          return null
+        })
+      )
+    }
   }
 }
