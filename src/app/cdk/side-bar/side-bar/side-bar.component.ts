@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { UserService } from 'src/app/core'
 import { Subject } from 'rxjs'
-import { UserInfo, NameForm, RequestInfoForm } from 'src/app/types'
+import { UserInfo, NameForm, RequestInfoForm, Assertion } from 'src/app/types'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
 import { UserRecord } from 'src/app/types/record.local'
@@ -9,6 +9,7 @@ import { UserRecord } from 'src/app/types/record.local'
 import { ModalCountryComponent } from '../modals/modal-country/modal-country.component'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
+import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
 
 @Component({
   selector: 'app-side-bar',
@@ -23,8 +24,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   @Input() onlyOrcidId = false
 
-  modalEmailComponent = ModalEmailComponent
   modalCountryComponent = ModalCountryComponent
+  modalEmailComponent = ModalEmailComponent
+  modalWebsitesComponent = ModalWebsitesComponent
 
   userSession: {
     userInfo: UserInfo
@@ -66,6 +68,12 @@ export class SideBarComponent implements OnInit, OnDestroy {
             this.userRecord = userRecord
           })
       })
+  }
+
+  getWebsite(website: Assertion) {
+    return website.urlName !== null && website.urlName !== ''
+      ? website.urlName
+      : website.url.value
   }
 
   ngOnDestroy() {
