@@ -13,7 +13,7 @@ Cypress.Commands.add(
       .trigger('mousedown', { which: 1 })
       .trigger('mousemove', { clientX: coords.x + 10, clientY: coords.y + 10 })
       .trigger('mouseup', { force: true })
-  },
+  }
 )
 describe('My Orcid top bar' + runInfo(), () => {
   before(() => {
@@ -102,7 +102,7 @@ describe('My Orcid top bar' + runInfo(), () => {
             .should(
               'have.attr',
               'aria-label',
-              environment.testUser.defaultPrivacy,
+              environment.testUser.defaultPrivacy
             )
         })
     })
@@ -123,12 +123,9 @@ describe('My Orcid top bar' + runInfo(), () => {
             .get('#biography')
             .should('contain', biography)
             .get('app-panel-privacy')
-            .should(
-              'have.attr',
-              'aria-label',
-              'PUBLIC',
-            )
-        })    })
+            .should('have.attr', 'aria-label', 'PUBLIC')
+        })
+    })
     it('make changes and cancel', () => {
       cy.get('#biography-panel')
         .within(() => {
