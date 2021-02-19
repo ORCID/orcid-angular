@@ -1,6 +1,7 @@
 import {
   Address,
   Email,
+  Keyword,
   MonthDayYearDate,
   OtherName,
   ResearcherUrl,
@@ -9,6 +10,10 @@ import {
   VisibilityStrings,
 } from './common.endpoint'
 import { BiographyEndPoint } from './record-biography.endpoint'
+
+interface PublicGroupedKeywords {
+  [x: string]: Keyword
+}
 
 interface PublicGroupedOtherNames {
   [x: string]: OtherName
@@ -20,10 +25,6 @@ interface CountryNames {
 
 interface PublicGroupedAddresses {
   [x: string]: Address
-}
-
-interface PublicGroupedKeywords {
-  [x: string]: any // TODO: DEFINE
 }
 
 interface PublicGroupedResearcherUrls {
@@ -50,12 +51,6 @@ export interface Person {
   publicGroupedResearcherUrls: PublicGroupedResearcherUrls
   publicGroupedEmails: PublicGroupedEmails
   publicGroupedPersonExternalIdentifiers: PublicGroupedPersonExternalIdentifiers
-}
-
-export interface Keywords {
-  errors: any[]
-  keywords: Assertion[]
-  visibility: Visibility
 }
 
 export interface ExternalIdentifier {

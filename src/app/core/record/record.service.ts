@@ -20,6 +20,8 @@ import { RecordBiographyService } from '../record-biography/record-biography.ser
 import { RecordNamesService } from '../record-names/record-names.service'
 import { RecordOtherNamesService } from '../record-other-names/record-other-names.service'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
+import { RecordKeywordService } from '../record-keyword/record-keyword.service'
+import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
 import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { RecordWebsitesService } from '../record-websites/record-websites.service'
@@ -36,6 +38,7 @@ export class RecordService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
     private _recordBiographyService: RecordBiographyService,
+    private _recordKeywordService: RecordKeywordService,
     private _recordNamesService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _recordEmailsService: RecordEmailsService,
@@ -55,9 +58,9 @@ export class RecordService {
       combineLatest([
         this.getPerson(id),
         this._recordEmailsService.getEmails(),
+        this._recordKeywordService.getKeywords(),
         this._recordOtherNamesService.getOtherNames(),
         this._recordCountryService.getAddresses(),
-        this.getKeywords(),
         this._recordWebsitesService.getWebsites(),
         this.getExternalIdentifier(),
         this._recordNamesService.getNames(),
@@ -81,9 +84,9 @@ export class RecordService {
               this.recordSubject$.next({
                 person: person as Person,
                 emails: emails as EmailsEndpoint,
+                keyword: keyword as KeywordEndPoint,
                 otherNames: otherNames as OtherNamesEndPoint,
-                countries: countries as CountriesEndpoint,
-                keyword: keyword as Keywords,
+                countries: countries as CountriesEndpoint,                
                 website: website as WebsitesEndPoint,
                 externalIdentifier: externalIdentifier as ExternalIdentifier,
                 names: names as NamesEndPoint,
@@ -121,30 +124,6 @@ export class RecordService {
             })
           }
         })
-      )
-  }
-
-  getKeywords(): Observable<Keywords> {
-    return this._http
-      .get<Keywords>(environment.API_WEB + `my-orcid/keywordsForms.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postKeywords(keywords: Keywords): Observable<Keywords> {
-    return this._http
-      .post<Keywords>(
-        environment.API_WEB + `my-orcid/keywordsForms.json`,
-        keywords,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 

@@ -16,6 +16,17 @@ export interface Source {
   sourceName: SourceName
 }
 
+export interface Keyword {
+  content: string
+  source: Source
+  putCode: number
+  lastModifiedDate: LastModifiedDate
+  createdDate: CreatedDate
+  visibility: string
+  path?: any
+  displayIndex: number
+}
+
 export interface OtherName {
   content: string
   source: Source
