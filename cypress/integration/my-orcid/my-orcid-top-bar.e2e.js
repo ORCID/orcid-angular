@@ -2,6 +2,7 @@ import { environment } from '../../cypress.env'
 
 const randomUser = require('../../helpers/randomUser')
 const runInfo = require('../../helpers/runInfo')
+const biography = 'My biography'
 
 Cypress.Commands.add(
   'dragTo',
@@ -12,7 +13,7 @@ Cypress.Commands.add(
       .trigger('mousedown', { which: 1 })
       .trigger('mousemove', { clientX: coords.x + 10, clientY: coords.y + 10 })
       .trigger('mouseup', { force: true })
-  }
+  },
 )
 describe('My Orcid top bar' + runInfo(), () => {
   before(() => {
@@ -86,8 +87,9 @@ describe('My Orcid top bar' + runInfo(), () => {
           cy.get('#edit-button').click()
         })
         .get('#modal-container')
-        .get('.mat-form-field-flex')
-        .type('biography')
+        .get('#biography-input')
+        .click()
+        .type(biography, { delay: 0 })
         .get('#save-biography-button')
         .click()
         .get('#biography-panel')
@@ -95,21 +97,56 @@ describe('My Orcid top bar' + runInfo(), () => {
           cy.get('[body=""]')
             .children()
             .get('#biography')
-            .should('contain', 'biography')
+            .should('contain', biography)
             .get('app-panel-privacy')
             .should(
               'have.attr',
               'aria-label',
-              environment.testUser.defaultPrivacy
+              environment.testUser.defaultPrivacy,
             )
         })
     })
     it('edit user biography privacy"', () => {
-      // Expect changes to be display outside and inside of the modal
-    })
+      cy.get('#biography-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.public-button')
+        .click({ multiple: true })
+        .get('#save-biography-button')
+        .click()
+        .get('#biography-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .get('#biography')
+            .should('contain', biography)
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              'PUBLIC',
+            )
+        })    })
     it('make changes and cancel', () => {
-      // Expect changes NOT to be display outside and inside of the modal
+      cy.get('#biography-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.private-button')
+        .click({ multiple: true })
+        .get('#cancel-biography-button')
+        .click()
+        .get('#biography-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('contain', biography)
+            .get('app-panel-privacy')
+            .should('have.attr', 'aria-label', 'PUBLIC')
+        })
     })
-    it('clicks outside and DONT close the modal ', () => {})
   })
 })
