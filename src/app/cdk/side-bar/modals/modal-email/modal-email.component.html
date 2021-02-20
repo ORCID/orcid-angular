@@ -1,7 +1,12 @@
 <app-modal noSidebar="true">
   <app-modal-header>Emails</app-modal-header>
   <app-modal-footer>
-    <button mat-raised-button color="primary" (click)="saveEvent()">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      [disabled]="!this.emailsForm.valid"
+    >
       Save changes
     </button>
     <button mat-stroked-button color="primary" (click)="closeEvent()">
@@ -35,23 +40,22 @@
         >
           <div class="col l12 m8 s4 email-input-container">
             <mat-form-field
-              *ngIf="!email.verified"
+              *ngIf="!showEmailAsVerified(email)"
               appearance="outline"
-              class="mat-form-field-min"
-              [ngClass]="{ 'email-activated': email.verified }"
+              class="mat-form-field-min verify-icon email-activated"
             >
               <input matInput matInput formControlName="email" />
               <mat-icon matPrefix>verified</mat-icon>
             </mat-form-field>
 
             <strong
-              class="orc-font-body-large email-activated primary-email-label"
-              *ngIf="email.verified"
+              class="orc-font-body-large email-activated primary-email-label verify-icon"
+              *ngIf="showEmailAsVerified(email)"
             >
               <mat-icon class="title-material-icon" matPrefix
                 >verified</mat-icon
               >
-              {{ email.value }}</strong
+              {{ emailsForm.value[email.putCode].email }}</strong
             >
           </div>
           <div class="col actions-wrapper no-gutters">
@@ -65,7 +69,7 @@
           </div>
         </div>
         <app-alert-message
-          *ngIf="email.primary && !email.verified"
+          *ngIf="email.primary && !showEmailAsVerified(email)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"
@@ -109,7 +113,7 @@
         <div class="col l12 m8 s4 email-input-container">
           <mat-form-field
             appearance="outline"
-            class="mat-form-field-min"
+            class="mat-form-field-min verify-icon"
             [ngClass]="{
               'email-activated': showEmailAsVerified(email)
             }"
@@ -135,6 +139,14 @@
             >
               Invalid email format
             </mat-error>
+
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('backendError', [email.putCode, 'email'])
+              "
+            >
+              This email is already associated with an ORCID record.
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -142,15 +154,13 @@
           <div class="actions-sub-wrapper">
             <a
               class="orc-font-smallprint"
-              *ngIf="email.verified"
+              *ngIf="showEmailAsVerified(email)"
               (click)="makePrimary(email)"
             >
               Make primary</a
             >
 
-            <ng-container
-              *ngIf="showNonVerifiedData(email)"
-            >
+            <ng-container *ngIf="showNonVerifiedData(email)">
               <a
                 class="orc-font-smallprint disabled"
                 *ngIf="verificationEmailWasSend(email)"
@@ -182,10 +192,11 @@
             </button>
           </div>
         </div>
+        <hr *ngIf="isMobile" />
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
-          *ngIf="verificationEmailWasSend(email.value) && showNonVerifiedData(email)"
+          *ngIf="verificationEmailWasSend(email)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"

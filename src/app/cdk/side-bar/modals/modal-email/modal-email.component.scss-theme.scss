@@ -8,14 +8,15 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  :host ::ng-deep mat-form-field mat-icon {
-    color: map-get($background, ui-background);
-  }
-  :host ::ng-deep .email-activated mat-icon {
+
+  :host ::ng-deep .verify-icon.email-activated mat-icon {
     color: mat-color($accent, 400);
   }
-  :host ::ng-deep mat-icon {
-    color: mat-color($background, ui-background);
+  :host ::ng-deep .verify-icon mat-icon {
+    color: map-get($background, ui-background);
+  }
+  .add-more {
+    color: mat-color($primary, 700);
   }
 }
 

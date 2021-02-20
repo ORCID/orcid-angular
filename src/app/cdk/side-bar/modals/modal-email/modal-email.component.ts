@@ -47,6 +47,7 @@ export class ModalEmailComponent implements OnInit {
   addedEmailsCount = 0
   emailsForm: FormGroup = new FormGroup({})
   emails: AssertionVisibilityString[]
+  originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
   backendJson: EmailsEndpoint
   isMobile: boolean
@@ -64,6 +65,7 @@ export class ModalEmailComponent implements OnInit {
           this.backendJson = cloneDeep(value)
           this.backendJsonToForm(this.backendJson)
           this.emails = this.backendJson.emails
+          this.originalEmailsBackendCopy = cloneDeep(value).emails
         }),
         first()
       )
@@ -78,6 +80,9 @@ export class ModalEmailComponent implements OnInit {
       .subscribe(
         (platform) => (this.isMobile = platform.columns4 || platform.columns8)
       )
+    this.emailsForm.statusChanges.subscribe((value) => {
+      console.log(this.emailsForm.controls)
+    })
   }
 
   saveEvent() {
@@ -109,7 +114,7 @@ export class ModalEmailComponent implements OnInit {
 
           updateOn: 'change',
         }),
-        visibility: new FormControl('', {}),
+        visibility: new FormControl('PRIVATE', {}),
       })
     )
     this.emails.push({
@@ -180,30 +185,13 @@ export class ModalEmailComponent implements OnInit {
 
   makePrimary(newPrimaryEmail: AssertionVisibilityString) {
     this.emails.forEach(
-      (email) => (email.primary = email.value === newPrimaryEmail.value)
+      (email) => (email.primary = email.putCode === newPrimaryEmail.putCode)
     )
-  }
-
-  verifyEmail(newPrimaryEmail: AssertionVisibilityString) {
-    this._recordEmails
-      .verifyEmail(newPrimaryEmail.value)
-      .pipe(first())
-      .subscribe(() => {
-        this.verificationsSend.push(newPrimaryEmail.value)
-      })
-  }
-
-  verificationEmailWasSend(email: string) {
-    return this.verificationsSend.indexOf(email) > -1
-  }
-
-  showNonVerifiedData(email: Assertion): boolean {
-    return (
-      this.emailsForm.value[email.putCode] &&
-      this.emailsForm.value[email.putCode].email === email.putCode &&
-      !email.verified &&
-      email.putCode.indexOf('new-') < 0
-    )
+    Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
+      ;(this.emailsForm.controls[
+        currentControlKey
+      ] as FormGroup).controls.email.updateValueAndValidity()
+    })
   }
 
   ngOnDestroy() {
@@ -244,20 +232,66 @@ export class ModalEmailComponent implements OnInit {
           })
         })
       }
-      if (emailsWithErrorPutCodes.indexOf(putCode) >= 0) {
-        return {
-          duplicated: true,
+      Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
+        const otherEmailControl = (this.emailsForm.controls[
+          currentControlKey
+        ] as FormGroup).controls.email as FormControl
+        if (
+          emailsWithErrorPutCodes.indexOf(currentControlKey) == -1 &&
+          otherEmailControl.errors &&
+          otherEmailControl.errors['duplicated']
+        ) {
+          delete otherEmailControl.errors['duplicated']
+          otherEmailControl.updateValueAndValidity({ onlySelf: true })
+        } else {
+          otherEmailControl.setErrors({
+            duplicated: true,
+          })
         }
-      }
+      })
+
+      // if (emailsWithErrorPutCodes.indexOf(putCode) >= 0) {
+      //   return {
+      //     duplicated: true,
+      //   }
+      // }
 
       return {}
     }
   }
 
-  showEmailAsVerified(email: AssertionVisibilityString): boolean {
-    return (
-      this.emailsForm.value[email.putCode].email === email.putCode &&
-      email.verified
+  verifyEmail(email: AssertionVisibilityString) {
+    const formValue = this.emailsForm.value[email.putCode]?.email
+    const realEmailBackendContext = this.originalEmailsBackendCopy.find(
+      (email) => email.value === formValue
     )
+
+    this._recordEmails
+      .verifyEmail(realEmailBackendContext.value)
+      .pipe(first())
+      .subscribe(() => {
+        this.verificationsSend.push(realEmailBackendContext.value)
+      })
+  }
+
+  showNonVerifiedData(email: AssertionVisibilityString): boolean {
+    const formValue = this.emailsForm.value[email.putCode]?.email
+    const realEmailBackendContext = this.originalEmailsBackendCopy.find(
+      (email) => email.value === formValue
+    )
+    return realEmailBackendContext && !realEmailBackendContext.verified
+  }
+
+  verificationEmailWasSend(email: AssertionVisibilityString) {
+    const formValue = this.emailsForm.value[email.putCode]?.email
+    return this.verificationsSend.indexOf(formValue) > -1
+  }
+
+  showEmailAsVerified(email: AssertionVisibilityString): boolean {
+    const formValue = this.emailsForm.value[email.putCode]?.email
+    const realEmailBackendContext = this.originalEmailsBackendCopy.find(
+      (email) => email.value === formValue
+    )
+    return realEmailBackendContext?.verified
   }
 }

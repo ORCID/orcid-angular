@@ -59,6 +59,9 @@ mat-form-field {
 
 .add-more {
   margin-top: 16px;
+  mat-icon {
+    padding-inline-end: 8px;
+  }
 }
 
 ::ng-deep app-alert-message {
@@ -79,7 +82,7 @@ mat-form-field {
   .email-input-container {
     padding: 0;
     max-width: 100%;
-    padding-inline-end: 24px;
+    padding-inline-end: 0px;
   }
 
   .actions-wrapper,
