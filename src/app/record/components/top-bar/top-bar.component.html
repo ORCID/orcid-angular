@@ -37,13 +37,16 @@
           Published Name
         </span>
         <p class="mat-card-title published-name">
-          <b>
+          <b id="publishedName">
             {{ creditName }}
           </b>
         </p>
       </ng-container>
       <span i18n="@@record.name" class="mat-caption description"> Name </span>
-      <p class="mat-body-1">
+      <p
+        id="givenAndFamilyNames"
+        class="mat-body-1"
+      >
         {{ givenNames + ' ' + familyName }}
       </p>
     </app-panel-element>
@@ -52,6 +55,7 @@
         Other names
       </span>
       <app-panel-element
+        id="other-names"
         *ngFor="let otherNames of userRecord.otherNames.otherNames"
         [visibility]="otherNames.visibility.visibility"
       >

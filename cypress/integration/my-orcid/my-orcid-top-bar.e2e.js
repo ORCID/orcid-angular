@@ -2,6 +2,9 @@ import { environment } from '../../cypress.env'
 
 const randomUser = require('../../helpers/randomUser')
 const runInfo = require('../../helpers/runInfo')
+const givenNames = 'My name'
+const familyNames = 'My family names'
+const publishedNames = 'My published name'
 const biography = 'My biography'
 
 Cypress.Commands.add(
@@ -31,39 +34,111 @@ describe('My Orcid top bar' + runInfo(), () => {
     it('display `Display your iD on other sites` button', () => {})
   })
   describe('Names' + runInfo(), () => {
-    it('display user published name if exists"', () => {})
-    it('display user given names and family names"', () => {})
-    it('display multiple other names if exists with privacy"', () => {})
-
-    describe('Names edit modals' + runInfo(), () => {
-      it('edit user given names"', () => {
-        // Expect changes to be display outside and inside of the modal
+    before(() => {
+      cy.cleanNames()
+      cy.cleanOtherNames()
+    })
+    beforeEach(() => {
+      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
+    })
+    after(() => {
+      cy.cleanNames()
+      cy.cleanOtherNames()
+    })
+    it('display user with names and no other names"', () => {
+      cy.get('#names-panel').within(() => {
+        cy.get('[body=""]')
+          .children()
+          .get('#publishedName')
+          .should('not.be.empty')
+          .get('#givenAndFamilyNames')
+          .should('not.be.empty')
+          .get('#other-names')
+          .should('not.exist')
       })
-      it('edit user family names"', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('edit user published name"', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('edit user names privacy"', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('add other names with default privacy', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('remove/delete other names', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('Drag and drop to rearrange', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('change privacy', () => {
-        // Expect changes to be display outside and inside of the modal
-      })
-      it('make changes and cancel', () => {
-        // Expect changes NOT to be display outside and inside of the modal
-      })
-      it('clicks outside and DONT close the modal ', () => {})
+    })
+    it('edit user given names, family names and published name"', () => {
+      cy.get('#names-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#given-names-input').click().clear()
+        .get('#given-names-input')
+        .click()
+        .type(givenNames, { delay: 0 })
+        .get('#family-names-input').click().clear()
+        .get('#family-names-input')
+        .click()
+        .type(familyNames, { delay: 0 })
+        .get('#published-names-input').click().clear()
+        .get('#published-names-input')
+        .click()
+        .type(publishedNames, { delay: 0 })
+        .get('#save-names-button')
+        .click()
+        .get('#names-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .get('#publishedName')
+            .should('contain', publishedNames)
+            .get('#givenAndFamilyNames')
+            .should('contain', givenNames + ' ' + familyNames)
+            .get('#other-names')
+            .should('not.exist')
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy
+            )
+        })
+    })
+    it('add other names with default privacy', () => {
+      cy.get('#names-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#add-link')
+        .click()
+        .get('#alternative-names-input')
+        .click()
+        .type('Other Name 1',{ delay: 0 })
+        .get('#save-names-button')
+        .click()
+        .get('#names-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy
+            )
+        })
+    })
+    it('remove/delete other names', () => {
+      cy.get('#names-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#delete-button')
+        .click()
+        .get('#save-names-button')
+        .click()
+        .wait(2000)
+        .get('#names-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .get('#publishedName')
+            .should('not.be.empty')
+        })
     })
   })
   describe('Biography', () => {
