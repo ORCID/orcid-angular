@@ -40,17 +40,23 @@
         >
           <div class="col l12 m8 s4 email-input-container">
             <mat-form-field
-              *ngIf="!showEmailAsVerified(email)"
+              *ngIf="!showEmailAsVerified(email.putCode)"
               appearance="outline"
               class="mat-form-field-min verify-icon email-activated"
             >
-              <input matInput matInput formControlName="email" />
+              <input
+                matInput
+                matInput
+                formControlName="email"
+                type="email"
+                appTrim
+              />
               <mat-icon matPrefix>verified</mat-icon>
             </mat-form-field>
 
             <strong
               class="orc-font-body-large email-activated primary-email-label verify-icon"
-              *ngIf="showEmailAsVerified(email)"
+              *ngIf="showEmailAsVerified(email.putCode)"
             >
               <mat-icon class="title-material-icon" matPrefix
                 >verified</mat-icon
@@ -69,7 +75,7 @@
           </div>
         </div>
         <app-alert-message
-          *ngIf="email.primary && !showEmailAsVerified(email)"
+          *ngIf="email.primary && !showEmailAsVerified(email.putCode)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"
@@ -115,10 +121,16 @@
             appearance="outline"
             class="mat-form-field-min verify-icon"
             [ngClass]="{
-              'email-activated': showEmailAsVerified(email)
+              'email-activated': showEmailAsVerified(email.putCode)
             }"
           >
-            <input #emailInput matInput formControlName="email" />
+            <input
+              #emailInput
+              matInput
+              formControlName="email"
+              type="email"
+              appTrim
+            />
             <mat-icon matPrefix>verified</mat-icon>
             <mat-error
               *ngIf="
@@ -154,23 +166,23 @@
           <div class="actions-sub-wrapper">
             <a
               class="orc-font-smallprint"
-              *ngIf="showEmailAsVerified(email)"
+              *ngIf="showEmailAsVerified(email.putCode)"
               (click)="makePrimary(email)"
             >
               Make primary</a
             >
 
-            <ng-container *ngIf="showNonVerifiedData(email)">
+            <ng-container *ngIf="showNonVerifiedData(email.putCode)">
               <a
                 class="orc-font-smallprint disabled"
-                *ngIf="verificationEmailWasSend(email)"
+                *ngIf="verificationEmailWasSend(email.putCode)"
               >
                 Resend verification email</a
               >
               <a
                 class="orc-font-smallprint"
                 (click)="verifyEmail(email)"
-                *ngIf="!verificationEmailWasSend(email)"
+                *ngIf="!verificationEmailWasSend(email.putCode)"
               >
                 Resend verification email</a
               >
@@ -196,7 +208,7 @@
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
-          *ngIf="verificationEmailWasSend(email)"
+          *ngIf="verificationEmailWasSend(email.putCode)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"

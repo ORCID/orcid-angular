@@ -8,27 +8,19 @@ import {
 } from '@angular/core'
 import {
   AbstractControl,
-  AsyncValidatorFn,
   FormControl,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
-import { MatInput } from '@angular/material/input'
-import { MatSelect } from '@angular/material/select'
 import { cloneDeep } from 'lodash'
-import { Observable, of, Subject } from 'rxjs'
-import { first, map, takeUntil, tap } from 'rxjs/operators'
+import { Subject } from 'rxjs'
+import { first, takeUntil, tap } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { RegisterService } from 'src/app/core/register/register.service'
-import {
-  Assertion,
-  AssertionVisibilityString,
-  EmailsEndpoint,
-} from 'src/app/types'
+import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -46,10 +38,10 @@ export class ModalEmailComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   addedEmailsCount = 0
   emailsForm: FormGroup = new FormGroup({})
-  emails: AssertionVisibilityString[]
+  emails: AssertionVisibilityString[] = []
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
-  backendJson: EmailsEndpoint
+
   isMobile: boolean
 
   constructor(
@@ -57,20 +49,7 @@ export class ModalEmailComponent implements OnInit {
     public _recordEmails: RecordEmailsService,
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService
-  ) {
-    this._recordEmails
-      .getEmails()
-      .pipe(
-        tap((value) => {
-          this.backendJson = cloneDeep(value)
-          this.backendJsonToForm(this.backendJson)
-          this.emails = this.backendJson.emails
-          this.originalEmailsBackendCopy = cloneDeep(value).emails
-        }),
-        first()
-      )
-      .subscribe()
-  }
+  ) {}
 
   tempPrivacyState = 'PUBLIC'
   ngOnInit(): void {
@@ -80,78 +59,34 @@ export class ModalEmailComponent implements OnInit {
       .subscribe(
         (platform) => (this.isMobile = platform.columns4 || platform.columns8)
       )
-    this.emailsForm.statusChanges.subscribe((value) => {
-      console.log(this.emailsForm.controls)
-    })
-  }
 
-  saveEvent() {
-    const call = this.formToBackend(this.emailsForm)
-    this._recordEmails.postEmails(call).pipe(first()).subscribe()
-    this.closeEvent()
-  }
-  closeEvent() {
-    this.dialogRef.close()
-  }
-
-  deleteEmail(putcode: string) {
-    const i = this.emails.findIndex((value) => value.putCode === putcode)
-    this.emails.splice(i, 1)
-    this.emailsForm.removeControl(putcode)
-  }
-
-  addEmail() {
-    const newPutCode = 'new-' + this.addedEmailsCount
-    this.emailsForm.addControl(
-      newPutCode,
-      new FormGroup({
-        email: new FormControl('', {
-          validators: [
-            OrcidValidators.email,
-            this.allEmailsAreUnique(newPutCode),
-          ],
-          asyncValidators: [this._recordEmails.backendEmailValidate()],
-
-          updateOn: 'change',
+    this._recordEmails
+      .getEmails()
+      .pipe(
+        tap((value) => {
+          this.originalEmailsBackendCopy = cloneDeep(value).emails
+          this.backendJsonToForm(cloneDeep(value))
         }),
-        visibility: new FormControl('PRIVATE', {}),
-      })
-    )
-    this.emails.push({
-      putCode: newPutCode,
-      visibility: this.defaultVisibility,
-    } as AssertionVisibilityString)
-    this.addedEmailsCount++
-    this._changeDetectorRef.detectChanges()
-
-    const input = this.inputs.last
-
-    input.nativeElement.focus()
+        first()
+      )
+      .subscribe()
   }
 
-  backendJsonToForm(emailEndpointJson: EmailsEndpoint) {
-    const emails = emailEndpointJson.emails.map((email) => {
-      email.putCode = email.value
-      return email
-    })
+  /**
+   * Creates the emails form based on backend data
+   * @param emailEndpointJson: backend date
+
+   */
+  backendJsonToForm(emailEndpointJson: EmailsEndpoint): void {
+    // Create an empty form
     const group: { [key: string]: FormGroup } = {}
-
-    emails.forEach((email) => {
-      group[email.value] = new FormGroup({
-        email: new FormControl(email.value, {
-          validators: [
-            OrcidValidators.email,
-            this.allEmailsAreUnique(email.value),
-          ],
-          asyncValidators: [this._recordEmails.backendEmailValidate()],
-          updateOn: 'change',
-        }),
-        visibility: new FormControl(email.visibility, {}),
-      })
-    })
     this.emailsForm = new FormGroup(group, {
       validators: [],
       updateOn: 'change',
+    })
+
+    emailEndpointJson.emails.map((email: AssertionVisibilityString) => {
+      this.addEmail(email)
     })
   }
 
@@ -181,12 +116,66 @@ export class ModalEmailComponent implements OnInit {
     return endpointCall
   }
 
-  saveEmails(emails: EmailsEndpoint) {}
+  /**
+   * Handle adding an email to the form.
+   * This can be either with a existingEmail (with backend data)
+   * or a new empty email input
+   * @param  existingEmail: use when adding an email that already exists on the backend
+   */
+  addEmail(existingEmail?: AssertionVisibilityString): void {
+    const newPutCode = 'new-' + this.addedEmailsCount
 
-  makePrimary(newPrimaryEmail: AssertionVisibilityString) {
+    // Add email to the emails list
+    this.emails.push({
+      putCode: newPutCode,
+      ...existingEmail,
+    } as AssertionVisibilityString)
+
+    // Add a new control to the formGroup
+    this.emailsForm.addControl(
+      newPutCode,
+      new FormGroup({
+        email: new FormControl(existingEmail ? existingEmail.value : '', {
+          validators: [
+            OrcidValidators.email,
+            this.allEmailsAreUnique(newPutCode),
+          ],
+          asyncValidators: [
+            this._recordEmails.backendEmailValidate(
+              this.originalEmailsBackendCopy
+            ),
+          ],
+
+          updateOn: 'change',
+        }),
+        visibility: new FormControl(
+          existingEmail ? existingEmail.visibility : this.defaultVisibility,
+          {}
+        ),
+      })
+    )
+
+    this.addedEmailsCount++
+    if (!existingEmail) {
+      this._changeDetectorRef.detectChanges()
+      const input = this.inputs.last
+      input.nativeElement.focus()
+    }
+  }
+
+  /**
+   * Mark email as primary, and trigger a validation check on every other email control
+   * @param newPrimaryEmail: the email to make primary
+   * @returns
+   */
+  makePrimary(newPrimaryEmail: AssertionVisibilityString): void {
     this.emails.forEach(
       (email) => (email.primary = email.putCode === newPrimaryEmail.putCode)
     )
+    this.triggerGeneralFormValidation()
+  }
+
+  private triggerGeneralFormValidation() {
     Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
       ;(this.emailsForm.controls[
         currentControlKey
@@ -194,70 +183,102 @@ export class ModalEmailComponent implements OnInit {
     })
   }
 
-  ngOnDestroy() {
-    this.$destroy.next(true)
-    this.$destroy.unsubscribe()
-  }
-
-  allEmailsAreUnique(putCode): ValidatorFn {
-    return (control: AbstractControl) => {
+  /**
+   * Validator function factory that checks if the current control key is duplicated
+   * at the same time remove errors from controls that are not duplicate but are marked as duplicated
+   *
+   * @param {any} controlKey  key to validate and mark as valid or with 'duplicate' error.
+   *
+   * @returns return a validator function
+   */
+  allEmailsAreUnique(controlKey): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = this.emailsForm
-      const emailsWithErrorPutCodes: string[] = []
-
-      if (this.emails) {
-        // Add errors error on duplicated emails
-        Object.keys(formGroup.controls).forEach((emailPutCodeX) => {
-          const emailControlX = (formGroup.controls[emailPutCodeX] as FormGroup)
-            .controls['email']
-          Object.keys(formGroup.controls).forEach((emailPutCodeY) => {
-            const emailControlY = (formGroup.controls[
-              emailPutCodeY
-            ] as FormGroup).controls['email']
-
-            // Only if both controls are not empty
-            if (emailControlX.value && emailControlY.value) {
-              const emailYCompleteObject = this.emails.find(
-                (email) => email.putCode === emailPutCodeY
-              )
-
-              if (
-                emailControlX.value === emailControlY.value &&
-                !emailYCompleteObject.primary &&
-                emailPutCodeX !== emailPutCodeY
-              ) {
-                //  emailControlY.setErrors({ duplicated: true })
-                emailsWithErrorPutCodes.push(emailPutCodeY)
-              }
-            }
-          })
-        })
-      }
-      Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
-        const otherEmailControl = (this.emailsForm.controls[
-          currentControlKey
-        ] as FormGroup).controls.email as FormControl
-        if (
-          emailsWithErrorPutCodes.indexOf(currentControlKey) == -1 &&
-          otherEmailControl.errors &&
-          otherEmailControl.errors['duplicated']
-        ) {
-          delete otherEmailControl.errors['duplicated']
-          otherEmailControl.updateValueAndValidity({ onlySelf: true })
-        } else {
-          otherEmailControl.setErrors({
-            duplicated: true,
-          })
+      const formGroupKeysWithDuplicatedValues: string[] = this.listDuplicateInputKeys(
+        formGroup,
+        this.emails
+      )
+      this.removeDuplicateErrorFromOtherControls(
+        formGroupKeysWithDuplicatedValues,
+        this.emailsForm
+      )
+      if (formGroupKeysWithDuplicatedValues.indexOf(controlKey) >= 0) {
+        return {
+          duplicated: true,
         }
-      })
-
-      // if (emailsWithErrorPutCodes.indexOf(putCode) >= 0) {
-      //   return {
-      //     duplicated: true,
-      //   }
-      // }
-
+      }
       return {}
     }
+  }
+
+  /**
+   * Remove `duplicated` error on controls that are not listed on the list
+   * @param formGroupKeysWithDuplicatedValues: List of controls with duplicated emails
+   */
+  private removeDuplicateErrorFromOtherControls(
+    formGroupKeysWithDuplicatedValues: string[],
+    emailsForm: FormGroup = new FormGroup({})
+  ): void {
+    Object.keys(emailsForm.controls).forEach((currentControlKey) => {
+      const otherEmailControl = (emailsForm.controls[
+        currentControlKey
+      ] as FormGroup).controls.email as FormControl
+      if (
+        formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) == -1 &&
+        otherEmailControl.errors &&
+        otherEmailControl.errors['duplicated']
+      ) {
+        delete otherEmailControl.errors['duplicated']
+        otherEmailControl.updateValueAndValidity({ onlySelf: true })
+      }
+    })
+  }
+
+  /**
+   * Check all the controls on the form, to find duplicated values.
+   * This check will not report the primary emails as duplicated.
+   *
+   * @param formGroup: FormGroup with controls to check
+   * @param emails: Emails list to check when an email is primary
+   * @returns a list of control keys with duplicated emails
+   */
+
+  private listDuplicateInputKeys(
+    formGroup: FormGroup,
+    emails: AssertionVisibilityString[]
+  ) {
+    const formGroupKeysWithDuplicatedValues: string[] = []
+
+    if (this.emails) {
+      // Add errors error on duplicated emails
+      Object.keys(formGroup.controls).forEach((keyX) => {
+        const emailControlX = (formGroup.controls[keyX] as FormGroup).controls[
+          'email'
+        ]
+        Object.keys(formGroup.controls).forEach((keyY) => {
+          const emailControlY = (formGroup.controls[keyY] as FormGroup)
+            .controls['email']
+
+          // Only if both controls are not empty
+          if (emailControlX.value && emailControlY.value) {
+            const emailYCompleteObject = this.emails.find(
+              (email) => email.putCode === keyY
+            )
+
+            if (
+              emailYCompleteObject &&
+              !emailYCompleteObject.primary &&
+              emailControlX.value === emailControlY.value &&
+              keyX !== keyY
+            ) {
+              //  emailControlY.setErrors({ duplicated: true })
+              formGroupKeysWithDuplicatedValues.push(keyY)
+            }
+          }
+        })
+      })
+    }
+    return formGroupKeysWithDuplicatedValues
   }
 
   verifyEmail(email: AssertionVisibilityString) {
@@ -274,24 +295,46 @@ export class ModalEmailComponent implements OnInit {
       })
   }
 
-  showNonVerifiedData(email: AssertionVisibilityString): boolean {
-    const formValue = this.emailsForm.value[email.putCode]?.email
+  saveEvent() {
+    this.triggerGeneralFormValidation()
+    const data = this.formToBackend(this.emailsForm)
+    this._recordEmails.postEmails(data).pipe(first()).subscribe()
+    this.closeEvent()
+  }
+
+  closeEvent() {
+    this.dialogRef.close()
+  }
+
+  deleteEmail(controlKey: string) {
+    const i = this.emails.findIndex((value) => value.putCode === controlKey)
+    this.emails.splice(i, 1)
+    this.emailsForm.removeControl(controlKey)
+  }
+
+  showNonVerifiedData(controlKey: string): boolean {
+    const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
     )
     return realEmailBackendContext && !realEmailBackendContext.verified
   }
 
-  verificationEmailWasSend(email: AssertionVisibilityString) {
-    const formValue = this.emailsForm.value[email.putCode]?.email
+  verificationEmailWasSend(controlKey: string) {
+    const formValue = this.emailsForm.value[controlKey]?.email
     return this.verificationsSend.indexOf(formValue) > -1
   }
 
-  showEmailAsVerified(email: AssertionVisibilityString): boolean {
-    const formValue = this.emailsForm.value[email.putCode]?.email
+  showEmailAsVerified(controlKey: string): boolean {
+    const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
     )
     return realEmailBackendContext?.verified
+  }
+
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
   }
 }

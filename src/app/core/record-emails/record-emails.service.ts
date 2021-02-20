@@ -45,6 +45,13 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        map((value: EmailsEndpoint) => {
+          value.emails
+            .sort(this.sortByEmailByValue)
+            .sort(this.sortByEmailByVerifiedState)
+            .sort(this.sortByEmailPrimaryState)
+          return value
+        }),
         tap((value) => {
           this.$emailsSubject.next(value)
         })
@@ -126,12 +133,22 @@ export class RecordEmailsService {
       )
   }
 
-  backendEmailValidate(): AsyncValidatorFn {
+  backendEmailValidate(
+    emailThatAreAlreadySaveOnTheBackend?: AssertionVisibilityString[]
+  ): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.value === '') {
         return of(null)
       }
       const value: Assertion = { value: control.value }
+
+      const thisEmailIsAlreadyOnTheBackend = emailThatAreAlreadySaveOnTheBackend.filter(
+        (email) => email.value === value.value
+      )
+
+      if (thisEmailIsAlreadyOnTheBackend.length) {
+        return of(null)
+      }
 
       return this.validateRegisterValue(value).pipe(
         map((res) => {
@@ -145,5 +162,33 @@ export class RecordEmailsService {
         })
       )
     }
+  }
+
+  sortByEmailByValue(
+    a: AssertionVisibilityString,
+    b: AssertionVisibilityString
+  ): number {
+    if (a.value < b.value) {
+      return -1
+    }
+    if (a.value > b.value) {
+      return 1
+    }
+    return 0
+  }
+
+  sortByEmailByVerifiedState(
+    a: AssertionVisibilityString,
+    b: AssertionVisibilityString
+  ): number {
+    return a.verified === b.verified ? 0 : a.verified ? -1 : 1
+  }
+
+
+  sortByEmailPrimaryState(
+    a: AssertionVisibilityString,
+    b: AssertionVisibilityString
+  ): number {
+    return a.primary === b.primary ? 0 : a.primary ? -1 : 1
   }
 }
