@@ -9,7 +9,7 @@ Cypress.Commands.add('cleanBiography', (url) => {
           errors: [],
           getRequiredMessage: null,
           required: true,
-          value: ''
+          value: '',
         },
         visibility: {
           errors: [],
@@ -58,7 +58,7 @@ Cypress.Commands.add('cleanNames', (url) => {
           errors: [],
           getRequiredMessage: null,
           required: true,
-          value: ''
+          value: '',
         },
         familyName: {
           errors: [],
@@ -70,7 +70,7 @@ Cypress.Commands.add('cleanNames', (url) => {
           errors: [],
           getRequiredMessage: null,
           required: true,
-          value: ''
+          value: '',
         },
         visibility: {
           errors: [],
