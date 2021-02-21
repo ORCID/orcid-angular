@@ -42,7 +42,7 @@
             <mat-form-field
               *ngIf="!showEmailAsVerified(email.putCode)"
               appearance="outline"
-              class="mat-form-field-min verify-icon email-activated"
+              class="mat-form-field-min verify-icon"
             >
               <input
                 matInput
@@ -52,6 +52,27 @@
                 appTrim
               />
               <mat-icon matPrefix>verified</mat-icon>
+
+              <mat-error
+                *ngIf="
+                  emailsForm.hasError('duplicated', [email.putCode, 'email'])
+                "
+              >
+                Email can not be duplicated
+              </mat-error>
+              <mat-error
+                *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+              >
+                Invalid email format
+              </mat-error>
+
+              <mat-error
+                *ngIf="
+                  emailsForm.hasError('backendError', [email.putCode, 'email'])
+                "
+              >
+                This email is already associated with an ORCID record.
+              </mat-error>
             </mat-form-field>
 
             <strong

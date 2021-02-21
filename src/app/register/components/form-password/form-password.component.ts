@@ -57,7 +57,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
             Validators.pattern(this.hasLetterOrSymbolPatter),
             this.passwordDoesNotContainUserEmails(),
           ],
-          asyncValidators: [this._register.backendValueValidate('email')],
+          asyncValidators: [this._register.backendValueValidate('password')],
         }),
         passwordConfirm: new FormControl('', Validators.required),
       },

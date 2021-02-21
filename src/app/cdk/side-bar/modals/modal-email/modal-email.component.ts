@@ -74,7 +74,7 @@ export class ModalEmailComponent implements OnInit {
 
   /**
    * Creates the emails form based on backend data
-   * @param emailEndpointJson: backend date
+   * @param emailEndpointJson: backend data
 
    */
   backendJsonToForm(emailEndpointJson: EmailsEndpoint): void {
@@ -85,25 +85,36 @@ export class ModalEmailComponent implements OnInit {
       updateOn: 'change',
     })
 
-    emailEndpointJson.emails.map((email: AssertionVisibilityString) => {
+    emailEndpointJson.emails.map((email) => {
       this.addEmail(email)
     })
   }
 
-  formToBackend(emailForm: FormGroup): EmailsEndpoint {
+
+   /**
+    * Transform the FormGroup data into backend data 
+    * @param emailForm: The emails FormGroup 
+    * @param  emails: The local Object data based on the backend JSON structure 
+    * @returns A JSON build for the backend
+    */
+
+  private formToBackend(
+    emailForm: FormGroup,
+    emails: AssertionVisibilityString[]
+  ): EmailsEndpoint {
     const endpointCall: EmailsEndpoint = {
       errors: [],
       emails: [],
     }
 
-    this.emails
+    emails
       .map((email) => email.putCode)
       // Clear empty inputs
       .filter((key) => emailForm.value[key].email)
       .forEach((key, i) => {
         const value = emailForm.value[key].email
         const visibility = emailForm.value[key].visibility
-        const primary = this.emails[i].primary
+        const primary = emails[i].primary
 
         if (emailForm.value[key]) {
           endpointCall.emails.push({
@@ -126,10 +137,12 @@ export class ModalEmailComponent implements OnInit {
     const newPutCode = 'new-' + this.addedEmailsCount
 
     // Add email to the emails list
+    // backend response come with no email putCode, so here we create one to be able to track those on the frontend
     this.emails.push({
       putCode: newPutCode,
       ...existingEmail,
     } as AssertionVisibilityString)
+
 
     // Add a new control to the formGroup
     this.emailsForm.addControl(
@@ -195,8 +208,7 @@ export class ModalEmailComponent implements OnInit {
     return (control: AbstractControl): ValidationErrors | null => {
       const formGroup = this.emailsForm
       const formGroupKeysWithDuplicatedValues: string[] = this.listDuplicateInputKeys(
-        formGroup,
-        this.emails
+        formGroup
       )
       this.removeDuplicateErrorFromOtherControls(
         formGroupKeysWithDuplicatedValues,
@@ -243,41 +255,32 @@ export class ModalEmailComponent implements OnInit {
    * @returns a list of control keys with duplicated emails
    */
 
-  private listDuplicateInputKeys(
-    formGroup: FormGroup,
-    emails: AssertionVisibilityString[]
-  ) {
+  private listDuplicateInputKeys(formGroup: FormGroup) {
     const formGroupKeysWithDuplicatedValues: string[] = []
 
-    if (this.emails) {
-      // Add errors error on duplicated emails
-      Object.keys(formGroup.controls).forEach((keyX) => {
-        const emailControlX = (formGroup.controls[keyX] as FormGroup).controls[
+    // Add errors error on duplicated emails
+    Object.keys(formGroup.controls).forEach((keyX) => {
+      const emailControlX = (formGroup.controls[keyX] as FormGroup).controls[
+        'email'
+      ]
+      Object.keys(formGroup.controls).forEach((keyY) => {
+        const emailControlY = (formGroup.controls[keyY] as FormGroup).controls[
           'email'
         ]
-        Object.keys(formGroup.controls).forEach((keyY) => {
-          const emailControlY = (formGroup.controls[keyY] as FormGroup)
-            .controls['email']
 
-          // Only if both controls are not empty
-          if (emailControlX.value && emailControlY.value) {
-            const emailYCompleteObject = this.emails.find(
-              (email) => email.putCode === keyY
-            )
+        // Only if both controls are not empty
+        if (emailControlX.value && emailControlY.value) {
+          const emailYCompleteObject = this.emails.find(
+            (email) => email.putCode === keyY
+          )
 
-            if (
-              emailYCompleteObject &&
-              !emailYCompleteObject.primary &&
-              emailControlX.value === emailControlY.value &&
-              keyX !== keyY
-            ) {
-              //  emailControlY.setErrors({ duplicated: true })
-              formGroupKeysWithDuplicatedValues.push(keyY)
-            }
+          if (emailControlX.value === emailControlY.value && keyX !== keyY) {
+            formGroupKeysWithDuplicatedValues.push(keyY)
           }
-        })
+        }
       })
-    }
+    })
+
     return formGroupKeysWithDuplicatedValues
   }
 
@@ -296,10 +299,11 @@ export class ModalEmailComponent implements OnInit {
   }
 
   saveEvent() {
-    this.triggerGeneralFormValidation()
-    const data = this.formToBackend(this.emailsForm)
-    this._recordEmails.postEmails(data).pipe(first()).subscribe()
-    this.closeEvent()
+    if (this.emailsForm.valid) {
+      const data = this.formToBackend(this.emailsForm, this.emails)
+      this._recordEmails.postEmails(data).pipe(first()).subscribe()
+      this.closeEvent()
+    }
   }
 
   closeEvent() {
