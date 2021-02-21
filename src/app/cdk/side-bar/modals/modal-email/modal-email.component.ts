@@ -31,6 +31,7 @@ import { OrcidValidators } from 'src/app/validators'
     './modal-email.component.scss-theme.scss',
     './modal-email.component.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class ModalEmailComponent implements OnInit {
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
@@ -90,13 +91,12 @@ export class ModalEmailComponent implements OnInit {
     })
   }
 
-
-   /**
-    * Transform the FormGroup data into backend data 
-    * @param emailForm: The emails FormGroup 
-    * @param  emails: The local Object data based on the backend JSON structure 
-    * @returns A JSON build for the backend
-    */
+  /**
+   * Transform the FormGroup data into backend data
+   * @param emailForm: The emails FormGroup
+   * @param  emails: The local Object data based on the backend JSON structure
+   * @returns A JSON build for the backend
+   */
 
   private formToBackend(
     emailForm: FormGroup,
@@ -134,7 +134,7 @@ export class ModalEmailComponent implements OnInit {
    * @param  existingEmail: use when adding an email that already exists on the backend
    */
   addEmail(existingEmail?: AssertionVisibilityString): void {
-    const newPutCode = 'new-' + this.addedEmailsCount
+    const newPutCode = 'emailInput-' + this.addedEmailsCount
 
     // Add email to the emails list
     // backend response come with no email putCode, so here we create one to be able to track those on the frontend
@@ -142,7 +142,6 @@ export class ModalEmailComponent implements OnInit {
       putCode: newPutCode,
       ...existingEmail,
     } as AssertionVisibilityString)
-
 
     // Add a new control to the formGroup
     this.emailsForm.addControl(

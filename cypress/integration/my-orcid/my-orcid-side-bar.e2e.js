@@ -33,20 +33,127 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
     })
     it('display url to navigate to the public page view', () => {})
   })
-  describe('Emails' + runInfo(), () => {
-    it('display a user with only a primary email "unverified"', () => {})
+  describe.only('Emails' + runInfo(), () => {
+    before(() => {
+      cy.cleanEmails()
+      cy.visit(`${environment.baseUrl}/qa/my-orcid`)
+    })
+    beforeEach(() => {
+      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
+    })
+    after(() => {
+      cy.cleanEmails()
+    })
+
+    it('display a user with only a primary email "unverified"', () => {
+      cy.get('#emails-panel').within(() => {
+        cy.get('[body=""]').children().should('have.length', 1)
+      })
+    })
     it('display a user with only a primary email "verified"', () => {})
     it('display multiple emails "unverified" and "verified"', () => {
       // Expect changes to be display outside and inside of the modal
     })
     describe('Emails edit modals' + runInfo(), () => {
-      it('add additional emails and display those as "unverified" with default privacy', () => {
-        // Expect changes to be display outside and inside of the modal
+      //TODO we need to figure out how to verify emails to improve testing on those
+
+      it('add additional emails and display those as "unverified" as private', () => {
+        const randomUserEmail = randomUser()
+        cy.get('#emails-panel')
+          .within(() => {
+            cy.get('#edit-button').click()
+          })
+          .get('#modal-container')
+          .get('#add-link')
+          .click()
+          .get('#emailInput-1')
+          .type(randomUserEmail.email)
+          .get('.verify-icon:not(.verified) #emailInput-1')
+          .get('#save-emails-button')
+          .click()
+          .get('#emails-panel')
+          .within(() => {
+            cy.get('[body=""]')
+              .children()
+              .should('have.length', 2)
+              .get('app-panel-privacy')
+              .eq(1)
+              .should('have.attr', 'aria-label', 'PRIVATE')
+          })
       })
       it('remove emails', () => {
-        // Expect the primary email to not display the delete button
+        cy.get('#emails-panel')
+          .within(() => {
+            cy.get('#edit-button').click()
+          })
+          .get('#modal-container')
+          .get('.delete-button')
+          .click()
+          .get('#save-emails-button')
+          .click()
+          .wait(2000)
+          .get('#emails-panel')
+          .within(() => {
+            cy.get('[body=""]').children().should('have.length', 1)
+          })
+      })
+
+      it('add multiple emails', () => {
+        const randomUserEmail = randomUser()
+        const randomUserEmail2 = randomUser()
+        const randomUserEmail3 = randomUser()
+        const randomUserEmail4 = randomUser()
+        cy.get('#emails-panel')
+          .within(() => {
+            cy.get('#edit-button').click()
+          })
+          .get('#modal-container')
+          .get('#add-link')
+          .click()
+          .get('#emailInput-1')
+          .type(randomUserEmail.email)
+          .get('#add-link')
+          .click()
+          .get('#emailInput-2')
+          .type(randomUserEmail2.email)
+          .get('#add-link')
+          .click()
+          .get('#emailInput-3')
+          .type(randomUserEmail3.email)
+          .get('#add-link')
+          .click()
+          .get('#emailInput-4')
+          .type(randomUserEmail4.email)
+          .get('#save-emails-button')
+          .click()
+          .get('#emails-panel')
+          .within(() => {
+            cy.get('[body=""]').children().should('have.length', 5)
+          })
+      })
+
+      it('change privacy', () => {
+        cy.get('#emails-panel')
+          .within(() => {
+            cy.get('#edit-button').click()
+          })
+          .get('#modal-container')
+          .get('.public-button')
+          .click({ multiple: true })
+          .get('#save-emails-button')
+          .click()
+          .get('#emails-panel')
+          .within(() => {
+            cy.get('[body=""]')
+              .children()
+              .should('have.length', 5)
+              .get('app-panel-privacy')
+              .should('have.attr', 'aria-label', 'PUBLIC')
+          })
+
         // Expect changes to be display outside and inside of the modal
       })
+
       it('edit a non-primary and display it as "unverified"', () => {
         // Expect changes to be display outside and inside of the modal
       })
@@ -61,12 +168,35 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
         // checks that a secondary email does not have the `make primary` button if not verified
         // Expect changes to be display outside and inside of the modal
       })
-      it('change the email privacy', () => {})
       it('make changes and cancel', () => {
-        // Expect changes NOT to be display outside and inside of the modal
+        cy.get('#emails-panel')
+          .within(() => {
+            cy.get('#edit-button').click()
+          })
+          .get('#modal-container')
+          .get('.private-button')
+          .click({ multiple: true })
+          .get('#cancel-emails-button')
+          .click()
+          .get('#emails-panel')
+          .within(() => {
+            cy.get('[body=""]')
+              .children()
+              .should('have.length', 5)
+              .get('app-panel-privacy')
+              .should('have.attr', 'aria-label', 'PUBLIC')
+          })
       })
-      it('clicks outside and DONT close the modal ', () => {})
-      it('open the terms of use on a separate window ', () => {})
+      it.only('open the terms of use on a separate window ', () => {
+        cy.get('#emails-panel')
+          .within(() => {
+            cy.get('#edit-button').click()
+          })
+          .get('#modal-container')
+          .within(() => {
+            cy.get('a ').should('have.attr', 'target', '_blank')
+          })
+      })
     })
   })
   describe('Websites and socials links', () => {

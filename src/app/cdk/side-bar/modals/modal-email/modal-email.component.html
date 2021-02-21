@@ -7,6 +7,7 @@
       (click)="saveEvent()"
       [disabled]="!this.emailsForm.valid"
       i18n="@@shared.saveChanges"
+      id="save-emails-button"
     >
       Save changes
     </button>
@@ -15,6 +16,7 @@
       color="primary"
       (click)="closeEvent()"
       i18n="@@shared.cancel"
+      id="cancel-emails-button"
     >
       Cancel
     </button>
@@ -27,12 +29,18 @@
           ORCID works best when you have multiple email addresses.
         </p>
         <p>
-          <ng-container i18n="@@side-bar.perOrcid"> Per the ORCID </ng-container
-          ><a href="/content/orcid-terms-use" i18n="@@side-bar.termOfUse"
+          <ng-container i18n="@@side-bar.perOrcid">
+            Per the ORCID
+          </ng-container>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="/content/orcid-terms-use"
+            i18n="@@side-bar.termOfUse"
             >terms of use</a
           >
-          <ng-container i18n="@@side-bar.youMayOnly"
-            >you may only add email addresses that you have control over. Each
+          <ng-container i18n="@@side-bar.youMayOnly">
+            you may only add email addresses that you have control over. Each
             time you add an email address we will send you an email asking you
             to verify it.
           </ng-container>
@@ -119,7 +127,7 @@
             >Please verify your primary email address!</strong
           >
 
-          <p >
+          <p>
             <ng-container i18n="@@side-bar.youNeedToVerify">
               You need to verify your primary email in order to access all of
               ORCID’s editing features.
@@ -175,7 +183,7 @@
             }"
           >
             <input
-              #emailInput
+              [id]="email.putCode"
               matInput
               formControlName="email"
               type="email"
@@ -283,7 +291,7 @@
     </ng-container>
 
     <div class="row">
-      <a class="col add-more" (click)="addEmail()">
+      <a class="col add-more" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
         <ng-container i18n="@@side-bar.anotherEmail">
           Add another email address</ng-container

@@ -1,4 +1,4 @@
-Cypress.Commands.add('cleanCountries', (url) => {
+Cypress.Commands.add('cleanCountries', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
@@ -20,7 +20,7 @@ Cypress.Commands.add('cleanCountries', (url) => {
   })
 })
 
-Cypress.Commands.add('cleanBiography', (url) => {
+Cypress.Commands.add('cleanBiography', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
@@ -39,6 +39,26 @@ Cypress.Commands.add('cleanBiography', (url) => {
           getRequiredMessage: null,
           visibility: 'LIMITED',
         },
+      },
+      headers: {
+        'X-XSRF-TOKEN': cookie.value,
+      },
+    })
+  })
+})
+
+/**
+ * Clean all emails except the primary email
+ * @returns {any}
+ */
+Cypress.Commands.add('cleanEmails', () => {
+  cy.getCookie('XSRF-TOKEN').then((cookie) => {
+    cy.request({
+      method: 'POST',
+      url: '/account/emails.json', // baseUrl is prepended to url
+      body: {
+        emails: [],
+        errors: [],
       },
       headers: {
         'X-XSRF-TOKEN': cookie.value,
