@@ -11,6 +11,7 @@ import { PlatformInfoService } from '../../platform-info'
 })
 export class ModalComponent implements OnInit, OnDestroy {
   columns12: boolean
+  screenDirection: 'rtl' | 'ltr'
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() loading = false
   @Input() noSidebar = false
@@ -26,6 +27,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((platform) => {
         this.columns12 = platform.columns12
+        this.screenDirection = platform.screenDirection
       })
   }
   ngOnDestroy(): void {
