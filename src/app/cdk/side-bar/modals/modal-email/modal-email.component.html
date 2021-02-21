@@ -1,15 +1,21 @@
 <app-modal noSidebar="true">
-  <app-modal-header>Emails</app-modal-header>
+  <app-modal-header i18n="@@record.emails">Emails</app-modal-header>
   <app-modal-footer>
     <button
       mat-raised-button
       color="primary"
       (click)="saveEvent()"
       [disabled]="!this.emailsForm.valid"
+      i18n="@@shared.saveChanges"
     >
       Save changes
     </button>
-    <button mat-stroked-button color="primary" (click)="closeEvent()">
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+    >
       Cancel
     </button>
   </app-modal-footer>
@@ -17,17 +23,24 @@
   <div class="container" [formGroup]="emailsForm">
     <div class="row">
       <div class="col">
-        <p>ORCID works best when you have multiple email addresses.</p>
+        <p i18n="@@side-bar.OrcidWorkBest">
+          ORCID works best when you have multiple email addresses.
+        </p>
         <p>
-          Per the ORCID <a href="/content/orcid-terms-use">terms of use</a> you
-          may only add email addresses that you have control over. Each time you
-          add an email address we will send you an email asking you to verify
-          it.
+          <ng-container i18n="@@side-bar.perOrcid"> Per the ORCID </ng-container
+          ><a href="/content/orcid-terms-use" i18n="@@side-bar.termOfUse"
+            >terms of use</a
+          >
+          <ng-container i18n="@@side-bar.youMayOnly"
+            >you may only add email addresses that you have control over. Each
+            time you add an email address we will send you an email asking you
+            to verify it.
+          </ng-container>
         </p>
       </div>
     </div>
     <div class="row">
-      <h3 class="col">Primary email address</h3>
+      <h3 class="col" i18n="@@side-bar.primaryEmail">Primary email address</h3>
     </div>
 
     <!-- PRIMARY EMAIL -->
@@ -57,11 +70,13 @@
                 *ngIf="
                   emailsForm.hasError('duplicated', [email.putCode, 'email'])
                 "
+                i18n="@@side-bar.emailCanNotBeDuplicated"
               >
                 Email can not be duplicated
               </mat-error>
               <mat-error
                 *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+                i18n="@@side-bar.invalidEmailFormat"
               >
                 Invalid email format
               </mat-error>
@@ -70,6 +85,7 @@
                 *ngIf="
                   emailsForm.hasError('backendError', [email.putCode, 'email'])
                 "
+                i18n="@@side-bar.alreadyAssociated"
               >
                 This email is already associated with an ORCID record.
               </mat-error>
@@ -99,26 +115,39 @@
           *ngIf="email.primary && !showEmailAsVerified(email.putCode)"
           class="orc-font-body-small"
         >
-          <strong class="orc-font-body"
+          <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
             >Please verify your primary email address!</strong
           >
 
-          <p>
-            You need to verify your primary email in order to access all of
-            ORCID’s editing features. <br />
-            To verify your email, click the link in the message sent to:
+          <p >
+            <ng-container i18n="@@side-bar.youNeedToVerify">
+              You need to verify your primary email in order to access all of
+              ORCID’s editing features.
+            </ng-container>
+            <br />
+            <ng-container i18n="@@side-bar.youNeedToVerify2">
+              To verify your email, click the link in the message sent to:
+            </ng-container>
           </p>
           <p class="email-container">{{ email.value }}</p>
 
           <p>
-            <strong> Need help?</strong> <br />
-            Visit our
-            <a href="https://support.orcid.org/hc/articles/360006973793"
-              >knowledge</a
+            <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
+            <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
+            <a
+              href="https://support.orcid.org/hc/articles/360006973793"
+              i18n="@@side-bar.knowledge"
+              >knowledge base
+            </a>
+            <ng-container i18n="@@side-bar.orContact">
+              or contact
+            </ng-container>
+
+            <a
+              i18n="@@side-bar.support"
+              href="https://support.orcid.org/hc/en-us/requests/new"
             >
-            base or contact
-            <a href="https://support.orcid.org/hc/en-us/requests/new">
-              contact support.
+              support.
             </a>
           </p>
         </app-alert-message>
@@ -126,7 +155,7 @@
     </div>
 
     <div class="row">
-      <h3 class="col">Other email address</h3>
+      <h3 class="col" i18n="@@side-bar.otherEmails">Other email address</h3>
     </div>
 
     <!-- ADDITIONAL EMAILS -->
@@ -157,6 +186,7 @@
               *ngIf="
                 emailsForm.hasError('backendErrors', [email.putCode, 'email'])
               "
+              i18n="@@side-bar.alreadyAssociated"
             >
               This email already exists in our system.
             </mat-error>
@@ -164,11 +194,13 @@
               *ngIf="
                 emailsForm.hasError('duplicated', [email.putCode, 'email'])
               "
+              i18n="@@side-bar.additionalEmailsDuplicate"
             >
               Additional emails can not be duplicated
             </mat-error>
             <mat-error
               *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+              i18n="@@side-bar.invalidEmailFormat"
             >
               Invalid email format
             </mat-error>
@@ -177,6 +209,7 @@
               *ngIf="
                 emailsForm.hasError('backendError', [email.putCode, 'email'])
               "
+              i18n="@@side-bar.alreadyAssociated"
             >
               This email is already associated with an ORCID record.
             </mat-error>
@@ -189,6 +222,7 @@
               class="orc-font-smallprint"
               *ngIf="showEmailAsVerified(email.putCode)"
               (click)="makePrimary(email)"
+              i18n="@@side-bar.makePrimary"
             >
               Make primary</a
             >
@@ -197,6 +231,7 @@
               <a
                 class="orc-font-smallprint disabled"
                 *ngIf="verificationEmailWasSend(email.putCode)"
+                i18n="@@side-bar.resendVerification"
               >
                 Resend verification email</a
               >
@@ -204,6 +239,7 @@
                 class="orc-font-smallprint"
                 (click)="verifyEmail(email)"
                 *ngIf="!verificationEmailWasSend(email.putCode)"
+                i18n="@@side-bar.resendVerification"
               >
                 Resend verification email</a
               >
@@ -233,9 +269,12 @@
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"
-            >We’ve sent a verification email to {{ email.value }}</strong
+            ><ng-container i18n="@@side-bar.weHaveSentAEmail"
+              >We’ve sent a verification email to</ng-container
+            >
+            {{ email.value }}</strong
           >
-          <p>
+          <p i18n="@@side-bar.pleaseCheckYour">
             Please check your email inbox (or maybe your spam folder) for an
             email with a link to complete the process.
           </p>
@@ -245,9 +284,11 @@
 
     <div class="row">
       <a class="col add-more" (click)="addEmail()">
-        <mat-icon class="large-material-icon">add_circle_outline </mat-icon> Add
-        another email address</a
-      >
+        <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
+        <ng-container i18n="@@side-bar.anotherEmail">
+          Add another email address</ng-container
+        >
+      </a>
     </div>
   </div>
 </app-modal>
