@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ModalCountryComponent } from './modal-country.component'
+import { ModalKeywordComponent } from './modal-keyword.component'
 
-describe('ModalCountryComponent', () => {
-  let component: ModalCountryComponent
-  let fixture: ComponentFixture<ModalCountryComponent>
+describe('ModalKeywordComponent', () => {
+  let component: ModalKeywordComponent
+  let fixture: ComponentFixture<ModalKeywordComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalCountryComponent],
+      declarations: [ModalKeywordComponent],
     }).compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalCountryComponent)
+    fixture = TestBed.createComponent(ModalKeywordComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

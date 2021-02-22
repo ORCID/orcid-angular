@@ -5,7 +5,6 @@ import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
   ExternalIdentifier,
-  Keywords,
   Person,
   Preferences,
 } from 'src/app/types'
@@ -17,10 +16,10 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordCountriesService } from '../record-countries/record-countries.service'
 import { RecordEmailsService } from '../record-emails/record-emails.service'
 import { RecordBiographyService } from '../record-biography/record-biography.service'
+import { RecordKeywordService } from '../record-keyword/record-keyword.service'
 import { RecordNamesService } from '../record-names/record-names.service'
 import { RecordOtherNamesService } from '../record-other-names/record-other-names.service'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
-import { RecordKeywordService } from '../record-keyword/record-keyword.service'
 import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
 import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'

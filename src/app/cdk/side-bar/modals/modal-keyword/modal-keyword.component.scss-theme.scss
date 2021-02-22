@@ -1,14 +1,14 @@
 @import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
-@mixin modal-country-theme($theme) {
+@mixin modal-keyword-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  ::ng-deep .country-input-line {
+  ::ng-deep .keyword-input-line {
     .mat-form-field-flex {
       background-color: map-get($background, dialog);
     }
@@ -21,4 +21,4 @@
   }
 }
 
-@include modal-country-theme($orcid-app-theme);
+@include modal-keyword-theme($orcid-app-theme);

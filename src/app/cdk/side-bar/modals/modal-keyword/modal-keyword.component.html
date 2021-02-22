@@ -1,8 +1,8 @@
-<app-modal [loading]="loadingCountries || loadingCountryCodes">
-  <app-modal-header i18n="@@side-bar.countries">Countries</app-modal-header>
+<app-modal [loading]="loadingKeywords">
+  <app-modal-header i18n="@@side-bar.keywords">Keywords</app-modal-header>
   <app-modal-side-bar>
-    <ng-container id="side-bar-title" i18n="@@side-bar.myCountries"
-      >My countries</ng-container
+    <ng-container id="side-bar-title" i18n="@@side-bar.myKeywords"
+      >My keywords</ng-container
     >
   </app-modal-side-bar>
   <app-modal-footer>
@@ -11,7 +11,7 @@
       color="primary"
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
-      id="save-countries-button"
+      id="save-keywords-button"
     >
       Save changes
     </button>
@@ -20,94 +20,105 @@
       color="primary"
       (click)="closeEvent()"
       i18n="@@shared.cancel"
-      id="cancel-countries-button"
+      id="cancel-keywords-button"
     >
       Cancel
     </button>
   </app-modal-footer>
-
-  <div class="container no-padding" [formGroup]="countryForm">
-    <div class="row">
-      <div class="col no-gutters">
-        <p i18n="@@side-bar.countriesModalDescription">
-          Add countries to your ORCID record to highlight where you conduct your
-          research or where your research is focused. You can add as many
-          countries as you want.
-        </p>
+<form [formGroup]="keywordsForm" (ngSubmit)="onSubmit()">
+    <p id="my-keywords" class="orc-font-small-print" i18n="@@topBar.addKeywords">
+      Add keywords.
+    </p>
+    <ng-container *ngIf="keywords.length > 0">
+      <div class="row">
+        <label for="url-input" class="mat-caption">
+          <strong i18n="@@topBar.myKeywords">My Keywords</strong>
+        </label>
       </div>
-    </div>
-    <div class="row">
-      <h3 class="col no-gutters" i18n="@@side-bar.myCountries">My countries</h3>
-    </div>
-
-    <div
-      class="row"
-      id="country-droplist"
-      cdkDropList
-      (cdkDropListDropped)="drop($event)"
-      class="country-wrapper"
-    >
       <div
-        cdkDrag
-        rootElementSelector="#country-droplist"
-        class="row country-input-line"
-        [ngClass]="{ 'no-wrap': !isMobile }"
-        [formGroupName]="country.putCode"
-        *ngFor="let country of countries; index as i"
-        [attr.id]="'draggable-' + i"
+        class="row"
+        id="keywords-dropList"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
       >
-        <div class="col l12 m8 s4 top no-wrap no-gutters">
-          <img
-            cdkDragHandle
-            src="./assets/vectors/draggable.svg"
-            aria-label="drag handle"
-          />
-
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min"
-            [ngClass]="{ twoLinesHint: isMobile }"
+        <div
+          cdkDrag
+          rootElementSelector="#keyword-dropList"
+          class="row keyword-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [formGroupName]="keyword.putCode"
+          *ngFor="let keyword of keywords"
+        >
+          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+            <img
+              class="icon-drag"
+              cdkDragHandle
+              src="./assets/vectors/draggable.svg"
+            />
+            <div class="row">
+              <mat-form-field appearance="outline" class="mat-form-field-min">                
+                <input
+                  id="keyword-input"
+                  matInput
+                  formControlName="keyword"
+                  placeholder=" {{ ngOrcidKeyword }}"
+                />
+                <mat-error
+                  *ngIf="
+                    keywordsForm.get(keyword.putCode).hasError('pattern', 'url')
+                  "
+                  i18n="@@topBar.invalidKeyword"
+                >
+                  Invalid keyword
+                </mat-error>
+                <mat-hint
+                  class="mat-caption"
+                  *ngIf="keyword.putCode.indexOf('new') < 0"
+                >
+                  <ng-container i18n="@@shared.source">Source:</ng-container>
+                  {{ getSource(keyword) }}
+                </mat-hint>
+              </mat-form-field>              
+            </div>
+          </div>
+          <div
+            class="col no-wrap actions-wrapper no-gutters"
+            [ngClass]="{ privacy: !platform.columns12 }"
           >
-            <mat-select #countrySelect formControlName="country">
-              <mat-option
-                *ngFor="let countryCode of countryCodes"
-                [value]="countryCode.key"
-              >
-                {{ countryCode.key }}
-              </mat-option>
-            </mat-select>
-            <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-              <ng-container i18n="@@shared.source">Source:</ng-container>
-              {{ getSourceName(countriesMap[country.putCode]) }},
-              <ng-container i18n="@@shared.created">Created: </ng-container
-              >{{ getDate(countriesMap[country.putCode]) | date }}
-            </mat-hint>
-          </mat-form-field>
-        </div>
-        <div class="col no-wrap actions-wrapper no-gutters">
-          <app-privacy-selector
-            formControlName="visibility"
-          ></app-privacy-selector>
-          <button
-            (click)="deleteEmail(country.putCode)"
-            mat-icon-button
-            class="delete-button"
-          >
-            <mat-icon class="material-icons-outlined large-material-icon"
-              >delete</mat-icon
-            >
-          </button>
+            <app-privacy-selector
+              [ngClass]="{ selector: !platform.columns12 }"
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button (click)="deleteKeyword(keyword.putCode)" mat-icon-button>
+              <mat-icon class="material-icons-outlined large-material-icon"
+                >delete
+              </mat-icon>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-
+    </ng-container>
     <div class="row">
-      <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
-        <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container i18n="@@side-bar.addAnotherEmail">
-          Add another country</ng-container
-        >
+      <a class="col add-more no-gutters" (click)="addKeyword()">
+        <mat-icon class="large-material-icon">add_circle</mat-icon>
+        <span class="mat-body-1" i18n="@@topBar.addAnotherKeyword">
+          Add another keyword
+        </span>
       </a>
     </div>
-  </div>
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </app-modal>

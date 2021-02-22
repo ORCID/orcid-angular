@@ -38,7 +38,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   ) {}
 
   addedKeywordsCount = 0
-  keywordForm: FormGroup
+  keywordsForm: FormGroup
   keywords: Keyword[]
   keywordsMap: { [key: string]: Keyword }
   defaultVisibility: VisibilityStrings
@@ -78,7 +78,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
         visibility: new FormControl(keyword.visibility.visibility, {}),
       })
     })
-    this.keywordForm = new FormGroup(group)
+    this.keywordsForm = new FormGroup(group)
   }
 
   formToBackend(keywordsForm: FormGroup): KeywordEndPoint {
@@ -113,7 +113,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   saveEvent() {
     this.loadingKeywords = true
     this._recordKeywordService
-      .postKeyword(this.formToBackend(this.keywordForm))
+      .postKeyword(this.formToBackend(this.keywordsForm))
       .subscribe((response) => {
         this.closeEvent()
       })
@@ -125,7 +125,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     moveItemInArray(this.keywords, event.previousIndex, event.currentIndex)
   }
   addKeyword() {
-    this.keywordForm.addControl(
+    this.keywordsForm.addControl(
       'new-' + this.addedKeywordsCount,
       new FormGroup({
         keyword: new FormControl(),
@@ -145,7 +145,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   deleteKeyword(putcode: string) {
     const i = this.keywords.findIndex((value) => value.putCode === putcode)
     this.keywords.splice(i, 1)
-    this.keywordForm.removeControl(putcode)
+    this.keywordsForm.removeControl(putcode)
   }
 
   getSourceName(keyword: Assertion) {
@@ -156,4 +156,6 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
+
+  onSubmit() {}
 }
