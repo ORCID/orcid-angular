@@ -3,6 +3,6 @@ import { Visibility } from './common.endpoint'
 
 export interface KeywordEndPoint {
   errors: String[]
-  Keywords: Assertion[]
+  keywords: Assertion[]
   visibility: Visibility
 }
