@@ -8,7 +8,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { ModalFooterComponent } from './modal-footer/modal-footer.component'
 import { ModalHeaderComponent } from './modal-header/modal-header.component'
 import { ModalSideBarComponent } from './modal-side-bar/modal-side-bar.component'
-import { ModalComponent } from './modal/modal.component';
+import { ModalComponent } from './modal/modal.component'
 import { AlertMessageComponent } from './alert-message/alert-message.component'
 
 @NgModule({
@@ -31,7 +31,7 @@ import { AlertMessageComponent } from './alert-message/alert-message.component'
     ModalHeaderComponent,
     ModalFooterComponent,
     ModalSideBarComponent,
-    AlertMessageComponent
+    AlertMessageComponent,
   ],
 })
 export class ModalModule {}

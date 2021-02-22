@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChildren,
@@ -33,7 +34,7 @@ import { OrcidValidators } from 'src/app/validators'
   ],
   preserveWhitespaces: true,
 })
-export class ModalEmailComponent implements OnInit {
+export class ModalEmailComponent implements OnInit, OnDestroy {
   @ViewChildren('emailInput') inputs: QueryList<ElementRef>
   verificationsSend: string[] = []
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -178,7 +179,6 @@ export class ModalEmailComponent implements OnInit {
   /**
    * Mark email as primary, and trigger a validation check on every other email control
    * @param newPrimaryEmail: the email to make primary
-   * @returns
    */
   makePrimary(newPrimaryEmail: AssertionVisibilityString): void {
     this.emails.forEach(
@@ -199,7 +199,7 @@ export class ModalEmailComponent implements OnInit {
    * Validator function factory that checks if the current control key is duplicated
    * at the same time remove errors from controls that are not duplicate but are marked as duplicated
    *
-   * @param {any} controlKey  key to validate and mark as valid or with 'duplicate' error.
+   * @param controlKey  key to validate and mark as valid or with 'duplicate' error.
    *
    * @returns return a validator function
    */
@@ -235,7 +235,7 @@ export class ModalEmailComponent implements OnInit {
         currentControlKey
       ] as FormGroup).controls.email as FormControl
       if (
-        formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) == -1 &&
+        formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         otherEmailControl.errors &&
         otherEmailControl.errors['duplicated']
       ) {
@@ -286,7 +286,7 @@ export class ModalEmailComponent implements OnInit {
   verifyEmail(email: AssertionVisibilityString) {
     const formValue = this.emailsForm.value[email.putCode]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
-      (email) => email.value === formValue
+      (emailJson) => emailJson.value === formValue
     )
 
     this._recordEmails

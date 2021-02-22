@@ -184,7 +184,6 @@ export class RecordEmailsService {
     return a.verified === b.verified ? 0 : a.verified ? -1 : 1
   }
 
-
   sortByEmailPrimaryState(
     a: AssertionVisibilityString,
     b: AssertionVisibilityString
