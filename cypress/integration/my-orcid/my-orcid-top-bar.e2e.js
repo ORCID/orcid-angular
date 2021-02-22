@@ -146,6 +146,15 @@ describe('My Orcid top bar' + runInfo(), () => {
             .should('not.be.empty')
         })
     })
+    it('Drag and drop to rearrange', () => {
+      // Expect changes to be display outside and inside of the modal
+    })
+    it('change privacy', () => {
+      // Expect changes to be display outside and inside of the modal
+    })
+    it('make changes and cancel', () => {
+      // Expect changes NOT to be display outside and inside of the modal
+    })
   })
   describe('Biography', () => {
     before(() => {

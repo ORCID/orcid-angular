@@ -1,4 +1,4 @@
-Cypress.Commands.add('cleanBiography', (url) => {
+Cypress.Commands.add('cleanBiography', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
@@ -47,7 +47,7 @@ Cypress.Commands.add('cleanCountries', (url) => {
   })
 })
 
-Cypress.Commands.add('cleanNames', (url) => {
+Cypress.Commands.add('cleanNames', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
@@ -86,7 +86,7 @@ Cypress.Commands.add('cleanNames', (url) => {
   })
 })
 
-Cypress.Commands.add('cleanOtherNames', (url) => {
+Cypress.Commands.add('cleanOtherNames', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
