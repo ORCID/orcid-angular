@@ -14,12 +14,6 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-img {
-  margin-top: 6px;
-  cursor: move;
-  z-index: 1;
-  margin-right: 18px;
-}
 
 ::ng-deep .columns-4-or-8 .mat-form-field {
   width: 100%;
@@ -39,6 +33,16 @@ img {
   width: 100%;
 }
 
+
+.personal-identifier-input-line {
+  margin-top: 20px;
+  img {
+    margin-top: 6px;
+    cursor: move;
+    z-index: 1;
+    margin-right: 18px;
+  }
+}
 ::ng-deep .cdk-drop-list-dragging {
   cursor: move !important;
   .mat-form-field-flex,

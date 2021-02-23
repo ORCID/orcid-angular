@@ -6,7 +6,7 @@ import {
   CountriesEndpoint,
   RecordCountryCodesEndpoint,
 } from 'src/app/types/record-country.endpoint'
-import { PersonalIdentifierEndpoint } from 'src/app/types/record-personal-identifier.endpoint'
+import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -14,7 +14,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class RecordPersonIdentifierService {
-  $externalIdentifiers: ReplaySubject<PersonalIdentifierEndpoint>
+  $externalIdentifiers: ReplaySubject<PersonIdentifierEndpoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export class RecordPersonIdentifierService {
 
   getPersonalIdentifiers(forceReload = false) {
     if (!this.$externalIdentifiers) {
-      this.$externalIdentifiers = new ReplaySubject<PersonalIdentifierEndpoint>(
+      this.$externalIdentifiers = new ReplaySubject<PersonIdentifierEndpoint>(
         1
       )
     } else if (!forceReload) {
@@ -35,7 +35,7 @@ export class RecordPersonIdentifierService {
     }
 
     this._http
-      .get<PersonalIdentifierEndpoint>(
+      .get<PersonIdentifierEndpoint>(
         environment.API_WEB + `my-orcid/externalIdentifiers.json`,
         {
           headers: this.headers,
@@ -44,7 +44,7 @@ export class RecordPersonIdentifierService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        map((value: PersonalIdentifierEndpoint) => {
+        map((value: PersonIdentifierEndpoint) => {
           return value
         }),
         tap((value) => {
@@ -56,10 +56,10 @@ export class RecordPersonIdentifierService {
   }
 
   postPersonalIdentifiers(
-    otherNames: PersonalIdentifierEndpoint
-  ): Observable<PersonalIdentifierEndpoint> {
+    otherNames: PersonIdentifierEndpoint
+  ): Observable<PersonIdentifierEndpoint> {
     return this._http
-      .post<PersonalIdentifierEndpoint>(
+      .post<PersonIdentifierEndpoint>(
         environment.API_WEB + `my-orcid/externalIdentifiers.json`,
         otherNames,
         {

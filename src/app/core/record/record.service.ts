@@ -4,9 +4,9 @@ import { combineLatest, Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
-  ExternalIdentifier,
   Keywords,
   Person,
+  PersonIdentifierEndpoint,
   Preferences,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
@@ -87,7 +87,7 @@ export class RecordService {
                 countries: countries as CountriesEndpoint,
                 keyword: keyword as Keywords,
                 website: website as WebsitesEndPoint,
-                externalIdentifier: externalIdentifier as ExternalIdentifier,
+                externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
                 preferences: preferences as Preferences,
@@ -150,17 +150,6 @@ export class RecordService {
       )
   }
 
-  getExternalIdentifier(): Observable<ExternalIdentifier> {
-    return this._http
-      .get<ExternalIdentifier>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
 
 
   getPreferences(): Observable<Preferences> {

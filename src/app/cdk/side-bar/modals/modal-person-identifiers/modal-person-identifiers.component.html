@@ -59,17 +59,19 @@
       id="ids-list"
       cdkDropList
       (cdkDropListDropped)="drop($event)"
-      class="country-wrapper"
+      class="personal-identifier-wrapper"
     >
       <div
         cdkDrag
-        class="row country-input-line"
+        class="row personal-identifier-input-line"
         [ngClass]="{ 'no-wrap': !isMobile }"
         [formGroupName]="personIdentifier.putCode"
         *ngFor="let personIdentifier of personIdentifiers; index as i"
         [attr.id]="'draggable-' + i"
       >
-        <div class="col l12 m8 s4 middle no-wrap no-gutters personal-identifiers-wrapper">
+        <div
+          class="col l12 m8 s4 middle no-wrap no-gutters personal-identifiers-wrapper"
+        >
           <img
             cdkDragHandle
             src="./assets/vectors/draggable.svg"
@@ -82,7 +84,9 @@
             }}</label
           >
         </div>
-        <div class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper">
+        <div
+          class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
+        >
           <app-privacy-selector
             formControlName="visibility"
           ></app-privacy-selector>
@@ -99,13 +103,6 @@
       </div>
     </div>
 
-    <div class="row">
-      <!-- <a class="col add-more no-gutters" (click)="addPersonalIdentifier()" id="add-link">
-        <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container i18n="@@side-bar.addAnotherEmail">
-          Add another country</ng-container
-        >
-      </a> -->
-    </div>
+    <div class="row"></div>
   </div>
 </app-modal>

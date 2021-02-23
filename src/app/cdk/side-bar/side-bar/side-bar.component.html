@@ -53,11 +53,14 @@
   </app-panel>
 
   <app-panel
-    *ngIf="userRecord && userRecord.externalIdentifier.externalIdentifiers.length"
+    *ngIf="
+      userRecord && userRecord.externalIdentifier.externalIdentifiers.length
+    "
     [elements]="userRecord.externalIdentifier.externalIdentifiers"
     [editModalComponent]="modalPersonalIdentifiers"
     [type]="'side-bar'"
     class="side-bar"
+    id="personal-identifiers-panel"
   >
     <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
     <div body>

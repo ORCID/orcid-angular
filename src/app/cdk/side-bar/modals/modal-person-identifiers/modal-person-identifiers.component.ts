@@ -42,17 +42,16 @@ export class ModalPersonIdentifiersComponent implements OnInit {
   originalPersonalIdentifiers: PersonIdentifierEndpoint
   isMobile: boolean
   loadingPersonalIdentifiers = true
-  @ViewChildren('countrySelect') notNEED: QueryList<MatInput>
 
   ngOnInit(): void {
     this._recordPersonalIdentifiers
       .getPersonalIdentifiers()
       .pipe(first())
-      .subscribe((countries: PersonIdentifierEndpoint) => {
-        this.defaultVisibility = countries.visibility.visibility
-        this.personIdentifiers = cloneDeep(countries.externalIdentifiers)
-        this.originalPersonalIdentifiers = cloneDeep(countries)
-        this.backendJsonToForm(countries)
+      .subscribe((personalIds: PersonIdentifierEndpoint) => {
+        this.defaultVisibility = personalIds.visibility.visibility
+        this.personIdentifiers = cloneDeep(personalIds.externalIdentifiers)
+        this.originalPersonalIdentifiers = cloneDeep(personalIds)
+        this.backendJsonToForm(personalIds)
         this.loadingPersonalIdentifiers = false
       })
 
@@ -118,28 +117,6 @@ export class ModalPersonIdentifiersComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     )
-  }
-
-  /**
-   * Not user at the moment
-   */
-  addPersonalIdentifier(): void {
-    this.personIdentifiersForm.addControl(
-      'new-' + this.addedEmailsCount,
-      new FormGroup({
-        country: new FormControl(),
-        visibility: new FormControl(this.defaultVisibility, {}),
-      })
-    )
-    this.personIdentifiers.push({
-      putCode: 'new-' + this.addedEmailsCount,
-      visibility: { visibility: this.defaultVisibility },
-    } as Assertion)
-    this.addedEmailsCount++
-
-    this._changeDetectorRef.detectChanges()
-    const input = this.notNEED.last
-    input.focus()
   }
 
   deletePersonalIdentifier(putCode: string): void {
