@@ -17,6 +17,7 @@
       color="primary"
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
+      id="save-websites-button"
     >
       Save changes
     </button>
@@ -25,6 +26,7 @@
       color="primary"
       (click)="closeEvent()"
       i18n="@@shared.cancel"
+      id="cancel-websites-button"
     >
       Cancel
     </button>
@@ -105,7 +107,7 @@
               [ngClass]="{ selector: !platform.columns12 }"
               formControlName="visibility"
             ></app-privacy-selector>
-            <button (click)="deleteWebsite(website.putCode)" mat-icon-button>
+            <button id="delete-button" (click)="deleteWebsite(website.putCode)" mat-icon-button>
               <mat-icon class="material-icons-outlined large-material-icon"
                 >delete
               </mat-icon>
@@ -115,7 +117,7 @@
       </div>
     </ng-container>
     <div class="row">
-      <a class="col add-more no-gutters" (click)="addWebsite()">
+      <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
         <mat-icon class="large-material-icon">add_circle</mat-icon>
         <span class="mat-body-1" i18n="@@topBar.addAnotherLink">
           Add another link
