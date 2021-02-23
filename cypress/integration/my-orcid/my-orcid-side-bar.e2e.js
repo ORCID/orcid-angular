@@ -114,7 +114,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
               'aria-label',
               environment.testUser.defaultPrivacy
             )
-        })    })
+        })
+    })
     it('remove/delete', () => {
       cy.get('#websites-panel')
         .within(() => {
@@ -204,7 +205,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
             .should('have.length', 3)
             .get('app-panel-privacy')
             .should('have.attr', 'aria-label', 'PUBLIC')
-        })    })
+        })
+    })
     it('make changes and cancel', () => {
       cy.get('#websites-panel')
         .within(() => {

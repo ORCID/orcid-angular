@@ -107,7 +107,11 @@
               [ngClass]="{ selector: !platform.columns12 }"
               formControlName="visibility"
             ></app-privacy-selector>
-            <button id="delete-button" (click)="deleteWebsite(website.putCode)" mat-icon-button>
+            <button
+              id="delete-button"
+              (click)="deleteWebsite(website.putCode)"
+              mat-icon-button
+            >
               <mat-icon class="material-icons-outlined large-material-icon"
                 >delete
               </mat-icon>
