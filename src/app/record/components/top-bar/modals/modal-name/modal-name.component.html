@@ -47,6 +47,7 @@
       color="primary"
       (click)="closeEvent()"
       i18n="@@shared.cancel"
+      id="cancel-names-button"
     >
       Cancel
     </button>
@@ -256,6 +257,7 @@
               formControlName="visibility"
             ></app-privacy-selector>
             <button
+              id="delete-button"
               (click)="deleteOtherName(otherName.putCode)"
               mat-icon-button
             >
