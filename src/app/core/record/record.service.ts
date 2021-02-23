@@ -150,8 +150,6 @@ export class RecordService {
       )
   }
 
-
-
   getPreferences(): Observable<Preferences> {
     return this._http
       .get<Preferences>(
