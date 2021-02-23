@@ -1,5 +1,7 @@
 <app-modal [loading]="loadingPersonalIdentifiers">
-  <app-modal-header i18n="@@side-bar.countries">Countries</app-modal-header>
+  <app-modal-header i18n="@@side-bar.personalIdentifiers"
+    >Personal identifiers</app-modal-header
+  >
   <app-modal-side-bar>
     <ng-container id="side-bar-title" i18n="@@side-bar.myPersonIdentifiers">
       My person identifiers</ng-container
@@ -11,7 +13,7 @@
       color="primary"
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
-      id="save-countries-button"
+      id="save-pesonal-id-button"
     >
       Save changes
     </button>
@@ -29,7 +31,7 @@
   <div class="container no-padding" [formGroup]="personIdentifiersForm">
     <div class="row">
       <div class="col no-gutters">
-        <p i18n="@@side-bar.countriesModalDescription">
+        <p>
           <ng-container i18n="@@side-bar.person-identifiers-description">
             Person identifiers are other identifiers that systems use to
             identify you, such as ResearcherID or Scopus Author ID. These
@@ -67,7 +69,7 @@
         *ngFor="let personIdentifier of personIdentifiers; index as i"
         [attr.id]="'draggable-' + i"
       >
-        <div class="col l12 m8 s4 middle no-wrap no-gutters">
+        <div class="col l12 m8 s4 middle no-wrap no-gutters personal-identifiers-wrapper">
           <img
             cdkDragHandle
             src="./assets/vectors/draggable.svg"
@@ -80,7 +82,7 @@
             }}</label
           >
         </div>
-        <div class="col no-wrap actions-wrapper no-gutters">
+        <div class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper">
           <app-privacy-selector
             formControlName="visibility"
           ></app-privacy-selector>

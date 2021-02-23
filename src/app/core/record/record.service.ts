@@ -24,7 +24,7 @@ import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { RecordWebsitesService } from '../record-websites/record-websites.service'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
-import { RecordPersonalIdentifierService } from '../record-personal-identifiers/record-personal-identifier.service'
+import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +42,7 @@ export class RecordService {
     private _recordEmailsService: RecordEmailsService,
     private _recordCountryService: RecordCountriesService,
     private _recordWebsitesService: RecordWebsitesService,
-    private _recordPersonalIdentifier: RecordPersonalIdentifierService
+    private _recordPersonalIdentifier: RecordPersonIdentifierService
   ) {}
 
   headers = new HttpHeaders({

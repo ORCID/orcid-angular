@@ -52,7 +52,7 @@
   </app-panel>
 
   <app-panel
-    *ngIf="userRecord"
+    *ngIf="userRecord && userRecord.externalIdentifier.externalIdentifiers.length"
     [elements]="userRecord.externalIdentifier.externalIdentifiers"
     [editModalComponent]="modalPersonalIdentifiers"
     [type]="'side-bar'"
