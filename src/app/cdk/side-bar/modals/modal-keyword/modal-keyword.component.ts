@@ -2,6 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
+  Inject,
   OnDestroy,
   OnInit,
   QueryList,
@@ -9,8 +10,9 @@ import {
 } from '@angular/core'
 import { Assertion } from '../../../../types'
 import { UserService } from '../../../../core'
+import { WINDOW } from '../../../window'
 import { FormControl, FormGroup } from '@angular/forms'
-import { MatDialogRef } from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { MatSelect } from '@angular/material/select'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -46,6 +48,8 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   ngOrcidKeyword = $localize`:@@topBar.keyword:Keyword Title`
 
   constructor(
+    @Inject(WINDOW) private window: Window,
+    @Inject(MAT_DIALOG_DATA) public data: UserRecord,    
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordKeywordService: RecordKeywordService,
     private _changeDetectorRef: ChangeDetectorRef,
@@ -105,12 +109,12 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
       .map((value) => value.putCode)
       .filter((key) => keywordsForm.value[key].content)
       .forEach((key, i) => {
-        const keyword = keywordsForm.value[key].content
+        const content = keywordsForm.value[key].content
         const visibility = keywordsForm.value[key].visibility
         if (keywordsForm.value[key]) {
           keywords.keywords.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
-            value: keyword,
+            content: content,
             displayIndex: i + 1,
             source: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
             visibility: {
@@ -169,6 +173,10 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  toMyKeywords() {
+    this.window.document.getElementById('my-keywords').scrollIntoView()
   }
 
   onSubmit() {}
