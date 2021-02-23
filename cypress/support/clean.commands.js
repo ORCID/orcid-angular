@@ -105,3 +105,19 @@ Cypress.Commands.add('cleanEmails', () => {
     })
   })
 })
+
+Cypress.Commands.add('cleanPersonalIdentifiers', () => {
+  cy.getCookie('XSRF-TOKEN').then((cookie) => {
+    cy.request({
+      method: 'POST',
+      url: '/account/emails.json', // baseUrl is prepended to url
+      body: {
+        errors: [],
+        externalIdentifiers: [],
+      },
+      headers: {
+        'X-XSRF-TOKEN': cookie.value,
+      },
+    })
+  })
+})
