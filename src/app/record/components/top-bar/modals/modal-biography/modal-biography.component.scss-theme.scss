@@ -10,12 +10,6 @@
   $background: map-get($theme, background);
   $config: mat-typography-config();
 
-  hr {
-    border-color: map-get($foreground, 'brand-primary');
-    color: map-get($foreground, 'brand-primary');
-    background: map-get($foreground, 'brand-primary');
-  }
-
   .error {
     color: map-get($foreground, 'state-warning-dark');
   }

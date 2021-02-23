@@ -1,7 +1,16 @@
 @import 'styles.scss-theme.scss';
 
+[dir='rtl'] .material-icons {
+  direction: rtl;
+}
+
 .large-material-icon {
   font-size: 24px;
+}
+
+.title-material-icon {
+  font-size: 32px;
+  height: 32px !important;
 }
 
 html,
@@ -40,6 +49,11 @@ app-footer {
 a {
   text-decoration: none;
   cursor: pointer;
+}
+
+a.disabled {
+  opacity: 80%;
+  pointer-events: none;
 }
 
 a.white-url {

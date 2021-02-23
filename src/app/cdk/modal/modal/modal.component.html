@@ -1,6 +1,7 @@
 <div
   class="container no-padding"
   [ngClass]="{ 'columns-4-or-8': !columns12 }"
+  [dir]="screenDirection"
   id="modal-container"
 >
   <div class="row header-area no-padding">
@@ -10,10 +11,13 @@
     </div>
   </div>
   <div class="row main-area no-padding">
-    <div class="col s4 m8 l9 no-gutters content-wrapper">
+    <div
+      class="col s4 m8 no-gutters content-wrapper"
+      [ngClass]="{ l9: !noSidebar, l12: noSidebar }"
+    >
       <div><ng-content></ng-content></div>
     </div>
-    <div class="col l3 no-padding" *ngIf="columns12">
+    <div class="col l3 no-padding side-bar" *ngIf="columns12 && !noSidebar">
       <ng-content select="app-modal-side-bar"></ng-content>
     </div>
   </div>

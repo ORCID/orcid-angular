@@ -1,8 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, retry, switchMap, tap } from 'rxjs/operators'
-import { Assertion, EmailsEndpoint, ErrorsListResponse } from 'src/app/types'
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  ValidationErrors,
+} from '@angular/forms'
+import { Observable, of, ReplaySubject } from 'rxjs'
+import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
+import {
+  Assertion,
+  AssertionVisibilityString,
+  EmailsEndpoint,
+  ErrorsListResponse,
+} from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -35,6 +45,13 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        map((value: EmailsEndpoint) => {
+          value.emails
+            .sort(this.sortByEmailByValue)
+            .sort(this.sortByEmailByVerifiedState)
+            .sort(this.sortByEmailPrimaryState)
+          return value
+        }),
         tap((value) => {
           this.$emailsSubject.next(value)
         })
@@ -46,7 +63,7 @@ export class RecordEmailsService {
   postEmails(otherNames: EmailsEndpoint): Observable<EmailsEndpoint> {
     return this._http
       .post<EmailsEndpoint>(
-        environment.API_WEB + `account/edit.json`,
+        environment.API_WEB + `account/emails.json`,
         otherNames,
         {
           headers: this.headers,
@@ -55,7 +72,7 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
+        switchMap(() => this.getEmails(true))
       )
   }
 
@@ -100,5 +117,77 @@ export class RecordEmailsService {
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails())
       )
+  }
+
+  validateRegisterValue(
+    value: Assertion
+  ): Observable<AssertionVisibilityString> {
+    return this._http
+      .post<AssertionVisibilityString>(
+        environment.API_WEB + `account/validateEmail.json`,
+        value
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  backendEmailValidate(
+    emailThatAreAlreadySaveOnTheBackend?: AssertionVisibilityString[]
+  ): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (control.value === '') {
+        return of(null)
+      }
+      const value: Assertion = { value: control.value }
+
+      const thisEmailIsAlreadyOnTheBackend = emailThatAreAlreadySaveOnTheBackend.filter(
+        (email) => email.value === value.value
+      )
+
+      if (thisEmailIsAlreadyOnTheBackend.length) {
+        return of(null)
+      }
+
+      return this.validateRegisterValue(value).pipe(
+        map((res) => {
+          if (res.errors.length > 0) {
+            const error = {
+              backendError: res.errors,
+            }
+            return error
+          }
+          return null
+        })
+      )
+    }
+  }
+
+  sortByEmailByValue(
+    a: AssertionVisibilityString,
+    b: AssertionVisibilityString
+  ): number {
+    if (a.value < b.value) {
+      return -1
+    }
+    if (a.value > b.value) {
+      return 1
+    }
+    return 0
+  }
+
+  sortByEmailByVerifiedState(
+    a: AssertionVisibilityString,
+    b: AssertionVisibilityString
+  ): number {
+    return a.verified === b.verified ? 0 : a.verified ? -1 : 1
+  }
+
+  sortByEmailPrimaryState(
+    a: AssertionVisibilityString,
+    b: AssertionVisibilityString
+  ): number {
+    return a.primary === b.primary ? 0 : a.primary ? -1 : 1
   }
 }

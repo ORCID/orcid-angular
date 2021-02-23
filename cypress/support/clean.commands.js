@@ -25,7 +25,7 @@ Cypress.Commands.add('cleanBiography', () => {
   })
 })
 
-Cypress.Commands.add('cleanCountries', (url) => {
+Cypress.Commands.add('cleanCountries', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
@@ -47,7 +47,7 @@ Cypress.Commands.add('cleanCountries', (url) => {
   })
 })
 
-Cypress.Commands.add('cleanNames', () => {
+Cypress.Commands.add('cleanBiography', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
@@ -86,41 +86,18 @@ Cypress.Commands.add('cleanNames', () => {
   })
 })
 
-Cypress.Commands.add('cleanOtherNames', () => {
+/**
+ * Clean all emails except the primary email
+ * @returns {any}
+ */
+Cypress.Commands.add('cleanEmails', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
-      url: '/my-orcid/otherNamesForms.json', // baseUrl is prepended to url
+      url: '/account/emails.json', // baseUrl is prepended to url
       body: {
+        emails: [],
         errors: [],
-        otherNames: [],
-        visibility: {
-          errors: [],
-          required: true,
-          getRequiredMessage: null,
-          visibility: 'LIMITED',
-        },
-      },
-      headers: {
-        'X-XSRF-TOKEN': cookie.value,
-      },
-    })
-  })
-})
-Cypress.Commands.add('cleanWebsites', () => {
-  cy.getCookie('XSRF-TOKEN').then((cookie) => {
-    cy.request({
-      method: 'POST',
-      url: '/my-orcid/websitesForms.json', // baseUrl is prepended to url
-      body: {
-        errors: [],
-        websites: [],
-        visibility: {
-          errors: [],
-          required: true,
-          getRequiredMessage: null,
-          visibility: 'LIMITED',
-        },
       },
       headers: {
         'X-XSRF-TOKEN': cookie.value,
