@@ -54,6 +54,7 @@
   <app-panel
     *ngIf="userRecord"
     [elements]="userRecord.externalIdentifier.externalIdentifiers"
+    [editModalComponent]="modalPersonalIdentifiers"
     [type]="'side-bar'"
     class="side-bar"
   >

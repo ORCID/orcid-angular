@@ -24,6 +24,7 @@ import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { RecordWebsitesService } from '../record-websites/record-websites.service'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
+import { RecordPersonalIdentifierService } from '../record-personal-identifiers/record-personal-identifier.service'
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,8 @@ export class RecordService {
     private _recordOtherNamesService: RecordOtherNamesService,
     private _recordEmailsService: RecordEmailsService,
     private _recordCountryService: RecordCountriesService,
-    private _recordWebsitesService: RecordWebsitesService
+    private _recordWebsitesService: RecordWebsitesService,
+    private _recordPersonalIdentifier: RecordPersonalIdentifierService
   ) {}
 
   headers = new HttpHeaders({
@@ -59,7 +61,7 @@ export class RecordService {
         this._recordCountryService.getAddresses(),
         this.getKeywords(),
         this._recordWebsitesService.getWebsites(),
-        this.getExternalIdentifier(),
+        this._recordPersonalIdentifier.getPersonalIdentifiers(),
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
         this.getPreferences(),
@@ -160,21 +162,6 @@ export class RecordService {
       )
   }
 
-  // Just a place holder for posting external identifiers, since the frontend does never calls this function
-  postExternalIdentifier(
-    website: ExternalIdentifier
-  ): Observable<ExternalIdentifier> {
-    return this._http
-      .post<ExternalIdentifier>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
-        website,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
 
   getPreferences(): Observable<Preferences> {
     return this._http
