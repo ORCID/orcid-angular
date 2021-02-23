@@ -3,6 +3,9 @@ import { environment } from '../../cypress.env'
 const randomUser = require('../../helpers/randomUser')
 const runInfo = require('../../helpers/runInfo')
 
+const description = 'Website description'
+const website = 'https://orcid.org'
+
 Cypress.Commands.add(
   'dragTo',
   { prevSubject: 'element' },
@@ -70,21 +73,158 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
     })
   })
   describe('Websites and socials links', () => {
-    it('display a user with no items', () => {})
+    before(() => {
+      cy.cleanWebsites()
+    })
+    beforeEach(() => {
+      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
+    })
+    after(() => {
+      cy.cleanWebsites()
+    })
+    it('display a user with no items', () => {
+      cy.get('#websites-panel').within(() => {
+        cy.get('[body=""]').should('not.exist')
+      })
+    })
     it('add items and display those with default privacy', () => {
-      // Expect changes to be display outside and inside of the modal
+      cy.get('#websites-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#add-link')
+        .click()
+        .get('#description-input')
+        .click()
+        .type(description, { delay: 0 })
+        .get('#url-input')
+        .click()
+        .type(website, { delay: 0 })
+        .get('#save-websites-button')
+        .click()
+        .get('#websites-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 1)
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy
+            )
+        })
     })
     it('remove/delete', () => {
-      // Expect changes to be display outside and inside of the modal
+      cy.get('#websites-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#delete-button')
+        .click()
+        .get('#save-websites-button')
+        .click()
+        .wait(2000)
+        .get('#websites-panel')
+        .within(() => {
+          cy.get('[body=""]').should('not.exist')
+        })
+    })
+    it('add multiple websites', () => {
+      cy.get('#websites-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('#add-link')
+        .click()
+        .get('.mat-form-field-flex')
+        .eq(0)
+        .click({ multiple: true })
+        .type('Description Website 1', { delay: 0 })
+        .get('.mat-form-field-flex')
+        .eq(1)
+        .click({ multiple: true })
+        .type('https://orcid.org', { delay: 0 })
+        .get('#add-link')
+        .click()
+        .get('.mat-form-field-flex')
+        .click({ multiple: true })
+        .get('.mat-form-field-flex')
+        .eq(2)
+        .click()
+        .type('Description Website 2', { delay: 0 })
+        .get('.mat-form-field-flex')
+        .eq(3)
+        .click({ multiple: true })
+        .type('https://sandbox.orcid.org', { delay: 0 })
+        .get('#add-link')
+        .click()
+        .get('.mat-form-field-flex')
+        .eq(4)
+        .click()
+        .type('Description Website 3', { delay: 0 })
+        .get('.mat-form-field-flex')
+        .eq(5)
+        .click()
+        .type('https://qa.orcid.org', { delay: 0 })
+        .get('#save-websites-button')
+        .click()
+        .get('#websites-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy
+            )
+        })
     })
     it('Drag and drop to rearrange', () => {
       // Expect changes to be display outside and inside of the modal
     })
     it('change privacy', () => {
-      // Expect changes to be display outside and inside of the modal
+      cy.get('#websites-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.public-button')
+        .click({ multiple: true })
+        .get('#save-websites-button')
+        .click()
+        .get('#websites-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should('have.attr', 'aria-label', 'PUBLIC')
+        })
     })
     it('make changes and cancel', () => {
-      // Expect changes NOT to be display outside and inside of the modal
+      cy.get('#websites-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')
+        .get('.private-button')
+        .click({ multiple: true })
+        .get('#cancel-websites-button')
+        .click()
+        .get('#websites-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should('have.attr', 'aria-label', 'PUBLIC')
+        })
     })
     it('clicks outside and DONT close the modal ', () => {})
   })
