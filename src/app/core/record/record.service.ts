@@ -57,9 +57,9 @@ export class RecordService {
       combineLatest([
         this.getPerson(id),
         this._recordEmailsService.getEmails(),
-        this._recordKeywordService.getKeywords(),
         this._recordOtherNamesService.getOtherNames(),
         this._recordCountryService.getAddresses(),
+        this._recordKeywordService.getKeywords(),        
         this._recordWebsitesService.getWebsites(),
         this.getExternalIdentifier(),
         this._recordNamesService.getNames(),
@@ -83,9 +83,9 @@ export class RecordService {
               this.recordSubject$.next({
                 person: person as Person,
                 emails: emails as EmailsEndpoint,
-                keyword: keyword as KeywordEndPoint,
                 otherNames: otherNames as OtherNamesEndPoint,
                 countries: countries as CountriesEndpoint,                
+                keyword: keyword as KeywordEndPoint,                
                 website: website as WebsitesEndPoint,
                 externalIdentifier: externalIdentifier as ExternalIdentifier,
                 names: names as NamesEndPoint,

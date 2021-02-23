@@ -22,6 +22,8 @@ export class RecordKeywordService {
   ) {}
 
   getKeywords(forceReload = false): Observable<KeywordEndPoint> {
+    console.log("getKeywords")
+    console.log("forceReload? " + forceReload)
     if (!this.$keywords) {
       this.$keywords = new ReplaySubject<KeywordEndPoint>(1)
     } else if (!forceReload) {
@@ -39,6 +41,7 @@ export class RecordKeywordService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap((value) => {
+          console.log(value)
           this.$keywords.next(value)
         })
       )

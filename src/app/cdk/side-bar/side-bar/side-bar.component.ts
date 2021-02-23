@@ -79,7 +79,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   getKeyword(keyword: Assertion) {
-    return keyword.value
+    console.log(keyword)
+    return keyword.content
   }
 
   ngOnDestroy() {
