@@ -83,7 +83,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
-        console.log(JSON.stringify(this.userSession))
       })
   }
 
