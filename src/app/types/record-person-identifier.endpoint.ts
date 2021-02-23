@@ -1,4 +1,4 @@
-import { Assertion } from '.';
+import { Assertion } from '.'
 import { MonthDayYearDate, Value, Visibility } from './common.endpoint'
 
 export interface PersonIdentifierEndpoint {

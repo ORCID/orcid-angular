@@ -27,9 +27,7 @@ export class RecordPersonIdentifierService {
 
   getPersonalIdentifiers(forceReload = false) {
     if (!this.$externalIdentifiers) {
-      this.$externalIdentifiers = new ReplaySubject<PersonIdentifierEndpoint>(
-        1
-      )
+      this.$externalIdentifiers = new ReplaySubject<PersonIdentifierEndpoint>(1)
     } else if (!forceReload) {
       return this.$externalIdentifiers
     }
