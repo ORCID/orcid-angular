@@ -1,9 +1,15 @@
-<app-modal [loading]="loadingKeywords">
-  <app-modal-header i18n="@@side-bar.keywords">Keywords</app-modal-header>
-  <app-modal-side-bar>
-    <ng-container id="side-bar-title" i18n="@@side-bar.myKeywords"
-      >My keywords</ng-container
+<app-modal>
+  <app-modal-header>
+    <ng-container i18n="@@topBar.keywords">
+      Keywords</ng-container
     >
+  </app-modal-header>
+  <app-modal-side-bar>
+    <ng-container id="side-bar-title">
+      <a class="side-bar" i18n="@@topBar.myKeywords" (click)="toMyKeywords()">
+        My keywords
+      </a>
+    </ng-container>
   </app-modal-side-bar>
   <app-modal-footer>
     <button
@@ -11,7 +17,6 @@
       color="primary"
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
-      id="save-keywords-button"
     >
       Save changes
     </button>
@@ -20,31 +25,30 @@
       color="primary"
       (click)="closeEvent()"
       i18n="@@shared.cancel"
-      id="cancel-keywords-button"
     >
       Cancel
     </button>
   </app-modal-footer>
-<form [formGroup]="keywordsForm" (ngSubmit)="onSubmit()">
-    <p id="my-keywords" class="orc-font-small-print" i18n="@@topBar.addKeywords">
+  <form [formGroup]="keywordsForm" (ngSubmit)="onSubmit()">
+    <p id="my-keywords" class="orc-font-small-print" i18n="@@topBar.addLinks">
       Add keywords.
     </p>
     <ng-container *ngIf="keywords.length > 0">
       <div class="row">
         <label for="url-input" class="mat-caption">
-          <strong i18n="@@topBar.myKeywords">My Keywords</strong>
+          <strong i18n="@@topBar.myKeywords">My keywords</strong>
         </label>
       </div>
       <div
         class="row"
-        id="keywords-dropList"
+        id="keyword-dropList"
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
         <div
           cdkDrag
           rootElementSelector="#keyword-dropList"
-          class="row keyword-input-line"
+          class="row keywords-input-line"
           [ngClass]="{ 'no-wrap': !isMobile }"
           [formGroupName]="keyword.putCode"
           *ngFor="let keyword of keywords"
@@ -56,29 +60,21 @@
               src="./assets/vectors/draggable.svg"
             />
             <div class="row">
-              <mat-form-field appearance="outline" class="mat-form-field-min">                
+              <mat-form-field appearance="outline" class="mat-form-field-min">
                 <input
-                  id="keyword-input"
+                  id="content-input"
                   matInput
-                  formControlName="keyword"
+                  formControlName="content"
                   placeholder=" {{ ngOrcidKeyword }}"
                 />
-                <mat-error
-                  *ngIf="
-                    keywordsForm.get(keyword.putCode).hasError('pattern', 'url')
-                  "
-                  i18n="@@topBar.invalidKeyword"
-                >
-                  Invalid keyword
-                </mat-error>
                 <mat-hint
                   class="mat-caption"
                   *ngIf="keyword.putCode.indexOf('new') < 0"
                 >
                   <ng-container i18n="@@shared.source">Source:</ng-container>
-                  {{ getSource(keyword) }}
+                  {{ getSourceName(keyword) }}
                 </mat-hint>
-              </mat-form-field>              
+              </mat-form-field>
             </div>
           </div>
           <div

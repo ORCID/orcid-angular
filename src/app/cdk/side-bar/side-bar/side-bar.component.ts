@@ -79,7 +79,6 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   getKeyword(keyword: Assertion) {
-    console.log(keyword)
     return keyword.content
   }
 

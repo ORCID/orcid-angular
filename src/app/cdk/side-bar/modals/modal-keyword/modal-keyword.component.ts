@@ -17,7 +17,7 @@ import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { UserSession } from 'src/app/types/session.local'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordKeywordService } from 'src/app/core/record-keyword/record-keyword.service'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { KeywordEndPoint } from 'src/app/types/record-keyword.endpoint'
@@ -40,7 +40,10 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   originalBackendKeywords: KeywordEndPoint
   isMobile: boolean
   loadingKeywords = true 
-  userSession: UserSession   
+  userSession: UserSession 
+  platform: PlatformInfo  
+
+  ngOrcidKeyword = $localize`:@@topBar.keyword:Keyword Title`
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -52,9 +55,10 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))
-      .subscribe(
-        (platform) => (this.isMobile = platform.columns4 || platform.columns8)
-      )
+      .subscribe((platform) => {
+        this.platform = platform
+        this.isMobile = platform.columns4 || platform.columns8
+      })
     this._userService
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -83,7 +87,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
     keywords.forEach((keyword) => {
       group[keyword.putCode] = new FormGroup({
-        keyword: new FormControl(keyword.value),
+        content: new FormControl(keyword.content),
         visibility: new FormControl(keyword.visibility.visibility, {}),
       })
     })
@@ -139,7 +143,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     this.keywordsForm.addControl(
       'new-' + this.addedKeywordsCount,
       new FormGroup({
-        keyword: new FormControl(),
+        content: new FormControl(),
         visibility: new FormControl(this.defaultVisibility, {}),
       })
     )
