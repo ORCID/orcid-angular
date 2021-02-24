@@ -42,7 +42,6 @@
           *ngFor="let website of userRecord.website.websites"
           [visibility]="website.visibility.visibility"
           ><a
-            *ngIf="website.url"
             [href]="website.url.value"
             [ngClass]="{
               'orc-font-body-small': getWebsite(website).length > 20

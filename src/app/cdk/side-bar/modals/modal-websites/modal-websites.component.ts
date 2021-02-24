@@ -1,9 +1,9 @@
 import {
   ChangeDetectorRef,
-  Component,
+  Component, ElementRef,
   Inject,
   OnDestroy,
-  OnInit,
+  OnInit, QueryList, ViewChildren,
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
@@ -13,7 +13,6 @@ import { RecordWebsitesService } from '../../../../core/record-websites/record-w
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { VisibilityStrings } from '../../../../types/common.endpoint'
 import { WINDOW } from '../../../window'
-import { UserRecord } from '../../../../types/record.local'
 import { first, takeUntil } from 'rxjs/operators'
 import { WebsitesEndPoint } from '../../../../types/record-websites.endpoint'
 import { Assertion } from '../../../../types'
@@ -22,6 +21,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { cloneDeep } from 'lodash'
 import { UserService } from '../../../../core'
 import { URL_REGEXP } from '../../../../constants'
+import { MatInput } from '@angular/material/input'
 
 @Component({
   selector: 'app-modal-websites',
@@ -29,6 +29,8 @@ import { URL_REGEXP } from '../../../../constants'
   styleUrls: ['./modal-websites.component.scss'],
 })
 export class ModalWebsitesComponent implements OnInit, OnDestroy {
+  @ViewChildren('descriptionInput') inputs: QueryList<ElementRef>
+
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   websitesForm: FormGroup
@@ -36,7 +38,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings
   websites: Assertion[]
   originalBackendWebsites: WebsitesEndPoint
-  userRecord: UserRecord
   userSession: UserSession
   isMobile: boolean
   addedWebsiteCount = 0
@@ -47,7 +48,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    @Inject(MAT_DIALOG_DATA) public data: UserRecord,
     public dialogRef: MatDialogRef<ModalComponent>,
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
@@ -71,14 +71,13 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userRecord = this.data
     this._recordWebsitesService
       .getWebsites()
       .pipe(first())
       .subscribe((websites: WebsitesEndPoint) => {
         this.defaultVisibility = websites.visibility.visibility
         this.originalBackendWebsites = cloneDeep(websites)
-        this.websites = websites.websites
+        this.websites = this.originalBackendWebsites.websites
         const websitesMap = {}
         this.originalBackendWebsites.websites.map(
           (value) => (websitesMap[value.putCode] = value)
@@ -98,7 +97,10 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [Validators.pattern(URL_REGEXP)],
+          validators: [
+            Validators.required,
+            Validators.pattern(URL_REGEXP)
+          ],
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
@@ -107,7 +109,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   formToBackend(websitesForm: FormGroup): WebsitesEndPoint {
-    const websites = {
+    const websites: WebsitesEndPoint = {
       errors: [],
       websites: [],
       visibility: this.originalBackendWebsites.visibility,
@@ -167,7 +169,10 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       new FormGroup({
         description: new FormControl(),
         url: new FormControl('', {
-          validators: [Validators.pattern(URL_REGEXP)],
+          validators: [
+            Validators.required,
+            Validators.pattern(URL_REGEXP)
+          ],
         }),
         visibility: new FormControl(this.defaultVisibility, {}),
       })
@@ -179,6 +184,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.addedWebsiteCount++
 
     this._changeDetectorRef.detectChanges()
+    const input = this.inputs.last
+    input.nativeElement.focus()
   }
 
   deleteWebsite(putCode: string) {
