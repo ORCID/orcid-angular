@@ -89,7 +89,9 @@
                 />
                 <mat-error
                   *ngIf="
-                    websitesForm.get(website.putCode).hasError('required', 'url')
+                    websitesForm
+                      .get(website.putCode)
+                      .hasError('required', 'url')
                   "
                   i18n="@@topBar.requiredURL"
                 >

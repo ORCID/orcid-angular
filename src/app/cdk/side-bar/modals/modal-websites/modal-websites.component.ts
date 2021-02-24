@@ -1,9 +1,12 @@
 import {
   ChangeDetectorRef,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   Inject,
   OnDestroy,
-  OnInit, QueryList, ViewChildren,
+  OnInit,
+  QueryList,
+  ViewChildren,
 } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
@@ -97,10 +100,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [
-            Validators.required,
-            Validators.pattern(URL_REGEXP)
-          ],
+          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
@@ -169,10 +169,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       new FormGroup({
         description: new FormControl(),
         url: new FormControl('', {
-          validators: [
-            Validators.required,
-            Validators.pattern(URL_REGEXP)
-          ],
+          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
         }),
         visibility: new FormControl(this.defaultVisibility, {}),
       })
