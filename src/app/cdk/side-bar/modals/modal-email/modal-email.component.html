@@ -1,11 +1,23 @@
-<app-modal>
-  <app-modal-header>Emails</app-modal-header>
-  <app-modal-side-bar> Form content </app-modal-side-bar>
+<app-modal noSidebar="true">
+  <app-modal-header i18n="@@record.emails">Emails</app-modal-header>
   <app-modal-footer>
-    <button mat-raised-button color="primary" (click)="saveEvent()">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      [disabled]="!this.emailsForm.valid"
+      i18n="@@shared.saveChanges"
+      id="save-emails-button"
+    >
       Save changes
     </button>
-    <button mat-stroked-button color="primary" (click)="closeEvent()">
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-emails-button"
+    >
       Cancel
     </button>
   </app-modal-footer>
@@ -13,88 +25,284 @@
   <div class="container" [formGroup]="emailsForm">
     <div class="row">
       <div class="col">
-        <p>ORCID works best when you have multiple email addresses.</p>
+        <p i18n="@@side-bar.OrcidWorkBest">
+          ORCID works best when you have multiple email addresses.
+        </p>
         <p>
-          Per the ORCID <a href="/content/orcid-terms-use">terms of use</a> you
-          may only add email addresses that you have control over. Each time you
-          add an email address we will send you an email asking you to verify
-          it.
+          <ng-container i18n="@@side-bar.perOrcid">
+            Per the ORCID
+          </ng-container>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="/content/orcid-terms-use"
+            i18n="@@side-bar.termOfUse"
+            >terms of use</a
+          >
+          <ng-container i18n="@@side-bar.youMayOnly">
+            you may only add email addresses that you have control over. Each
+            time you add an email address we will send you an email asking you
+            to verify it.
+          </ng-container>
         </p>
       </div>
     </div>
     <div class="row">
-      <h3 class="col">Primary email address</h3>
+      <h3
+        class="col"
+        i18n="@@side-bar.primaryEmail"
+        class="orc-font-body-small"
+      >
+        Primary email address
+      </h3>
     </div>
 
+    <!-- PRIMARY EMAIL -->
     <div class="row">
       <ng-container *ngFor="let email of emails">
         <div
           *ngIf="email.primary"
-          class="row email-input-line no-wrap"
-          [formGroupName]="email.value"
+          class="row email-input-line"
+          [formGroupName]="email.putCode"
         >
-          <div class="col l12 m8 s4">
+          <div class="col l12 m8 s4 email-input-container">
             <mat-form-field
+              *ngIf="!showEmailAsVerified(email.putCode)"
               appearance="outline"
-              class="mat-form-field-min"
-              [ngClass]="{ 'email-activated': true }"
+              class="mat-form-field-min verify-icon"
             >
-              <input #emailInput matInput formControlName="email" />
+              <input
+                matInput
+                matInput
+                formControlName="email"
+                type="email"
+                appTrim
+              />
               <mat-icon matPrefix>verified</mat-icon>
+
+              <mat-error
+                *ngIf="
+                  emailsForm.hasError('duplicated', [email.putCode, 'email'])
+                "
+                i18n="@@side-bar.emailCanNotBeDuplicated"
+              >
+                Email can not be duplicated
+              </mat-error>
+              <mat-error
+                *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+                i18n="@@side-bar.invalidEmailFormat"
+              >
+                Invalid email format
+              </mat-error>
+
+              <mat-error
+                *ngIf="
+                  emailsForm.hasError('backendError', [email.putCode, 'email'])
+                "
+                i18n="@@side-bar.alreadyAssociated"
+              >
+                This email is already associated with an ORCID record.
+              </mat-error>
             </mat-form-field>
+
+            <strong
+              class="orc-font-body-large email-activated primary-email-label verify-icon"
+              *ngIf="showEmailAsVerified(email.putCode)"
+            >
+              <mat-icon class="title-material-icon" matPrefix
+                >verified</mat-icon
+              >
+              {{ emailsForm.value[email.putCode].email }}</strong
+            >
           </div>
-          <div class="col no-wrap actions-wrapper">
-            <app-privacy-selector
-              formControlName="visibility"
-            ></app-privacy-selector>
+          <div class="col actions-wrapper no-gutters">
+            <div class="actions-sub-wrapper"></div>
+            <div class="actions-sub-wrapper">
+              <app-privacy-selector
+                formControlName="visibility"
+              ></app-privacy-selector>
+              <div></div>
+            </div>
           </div>
         </div>
+        <app-alert-message
+          *ngIf="email.primary && !showEmailAsVerified(email.putCode)"
+          class="orc-font-body-small"
+        >
+          <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
+            >Please verify your primary email address!</strong
+          >
+
+          <p>
+            <ng-container i18n="@@side-bar.youNeedToVerify">
+              You need to verify your primary email in order to access all of
+              ORCID’s editing features.
+            </ng-container>
+            <br />
+            <ng-container i18n="@@side-bar.youNeedToVerify2">
+              To verify your email, click the link in the message sent to:
+            </ng-container>
+          </p>
+          <p class="email-container">{{ email.value }}</p>
+
+          <p>
+            <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
+            <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
+            <a
+              href="https://support.orcid.org/hc/articles/360006973793"
+              i18n="@@side-bar.knowledge"
+              >knowledge base
+            </a>
+            <ng-container i18n="@@side-bar.orContact">
+              or contact
+            </ng-container>
+
+            <a
+              i18n="@@side-bar.support"
+              href="https://support.orcid.org/hc/en-us/requests/new"
+            >
+              support.
+            </a>
+          </p>
+        </app-alert-message>
       </ng-container>
     </div>
 
     <div class="row">
-      <h3 class="col">Other email address</h3>
+      <h3 class="col" i18n="@@side-bar.otherEmails">Other email address</h3>
     </div>
+
+    <!-- ADDITIONAL EMAILS -->
 
     <ng-container *ngFor="let email of emails">
       <div
         *ngIf="!email.primary"
-        class="row email-input-line no-wrap"
-        [formGroupName]="email.value"
+        class="row email-input-line"
+        [formGroupName]="email.putCode"
       >
-        <div class="col l12 m8 s4">
+        <div class="col l12 m8 s4 email-input-container">
           <mat-form-field
             appearance="outline"
-            class="mat-form-field-min"
-            [ngClass]="{ 'email-activated': true }"
+            class="mat-form-field-min verify-icon"
+            [ngClass]="{
+              'email-activated': showEmailAsVerified(email.putCode)
+            }"
           >
-            <input #emailInput matInput formControlName="email" />
+            <input
+              [id]="email.putCode"
+              matInput
+              formControlName="email"
+              type="email"
+              appTrim
+            />
             <mat-icon matPrefix>verified</mat-icon>
-            <a matSuffix class="orc-font-smallprint"> Test</a>
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('backendErrors', [email.putCode, 'email'])
+              "
+              i18n="@@side-bar.alreadyAssociated"
+            >
+              This email already exists in our system.
+            </mat-error>
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('duplicated', [email.putCode, 'email'])
+              "
+              i18n="@@side-bar.additionalEmailsDuplicate"
+            >
+              Additional emails can not be duplicated
+            </mat-error>
+            <mat-error
+              *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+              i18n="@@side-bar.invalidEmailFormat"
+            >
+              Invalid email format
+            </mat-error>
+
+            <mat-error
+              *ngIf="
+                emailsForm.hasError('backendError', [email.putCode, 'email'])
+              "
+              i18n="@@side-bar.alreadyAssociated"
+            >
+              This email is already associated with an ORCID record.
+            </mat-error>
           </mat-form-field>
         </div>
-        <div class="col no-wrap actions-wrapper">
-          <app-privacy-selector
-            formControlName="visibility"
-          ></app-privacy-selector>
-          <button (click)="deleteEmail('this')" mat-icon-button>
-            <mat-icon class="material-icons-outlined large-material-icon"
-              >delete</mat-icon
+
+        <div class="col actions-wrapper no-gutters">
+          <div class="actions-sub-wrapper">
+            <a
+              class="orc-font-smallprint"
+              *ngIf="showEmailAsVerified(email.putCode)"
+              (click)="makePrimary(email)"
+              i18n="@@side-bar.makePrimary"
             >
-          </button>
+              Make primary</a
+            >
+
+            <ng-container *ngIf="showNonVerifiedData(email.putCode)">
+              <a
+                class="orc-font-smallprint disabled"
+                *ngIf="verificationEmailWasSend(email.putCode)"
+                i18n="@@side-bar.resendVerification"
+              >
+                Resend verification email</a
+              >
+              <a
+                class="orc-font-smallprint"
+                (click)="verifyEmail(email)"
+                *ngIf="!verificationEmailWasSend(email.putCode)"
+                i18n="@@side-bar.resendVerification"
+              >
+                Resend verification email</a
+              >
+            </ng-container>
+          </div>
+
+          <div class="actions-sub-wrapper">
+            <app-privacy-selector
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              (click)="deleteEmail(email.putCode)"
+              mat-icon-button
+              class="delete-button"
+            >
+              <mat-icon class="material-icons-outlined huge-material-icon"
+                >delete</mat-icon
+              >
+            </button>
+          </div>
         </div>
+        <hr *ngIf="isMobile" />
+      </div>
+      <div class="col l12 m8 s4">
+        <app-alert-message
+          *ngIf="verificationEmailWasSend(email.putCode)"
+          class="orc-font-body-small"
+        >
+          <strong class="orc-font-body"
+            ><ng-container i18n="@@side-bar.weHaveSentAEmail"
+              >We’ve sent a verification email to</ng-container
+            >
+            {{ email.value }}</strong
+          >
+          <p i18n="@@side-bar.pleaseCheckYour">
+            Please check your email inbox (or maybe your spam folder) for an
+            email with a link to complete the process.
+          </p>
+        </app-alert-message>
       </div>
     </ng-container>
 
     <div class="row">
-      <a class="col add-more-email">
-        <mat-icon class="large-material-icon">add_circle_outline </mat-icon> Add
-        another email address</a
-      >
+      <a class="col add-more" id="add-link" (click)="addEmail()">
+        <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
+        <ng-container i18n="@@side-bar.anotherEmail">
+          Add another email address</ng-container
+        >
+      </a>
     </div>
   </div>
-
-  <mat-form-field>
-    <input matInput />
-  </mat-form-field>
 </app-modal>

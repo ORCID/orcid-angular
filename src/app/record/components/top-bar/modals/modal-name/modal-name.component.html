@@ -38,6 +38,7 @@
       color="primary"
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
+      id="save-names-button"
     >
       Save changes
     </button>
@@ -46,6 +47,7 @@
       color="primary"
       (click)="closeEvent()"
       i18n="@@shared.cancel"
+      id="cancel-names-button"
     >
       Cancel
     </button>
@@ -255,6 +257,7 @@
               formControlName="visibility"
             ></app-privacy-selector>
             <button
+              id="delete-button"
               (click)="deleteOtherName(otherName.putCode)"
               mat-icon-button
             >
@@ -267,7 +270,7 @@
       </div>
     </ng-container>
     <div class="row">
-      <a class="col add-more no-gutters" (click)="addOtherName()">
+      <a id="add-link" class="col add-more no-gutters" (click)="addOtherName()">
         <mat-icon class="large-material-icon">add_circle</mat-icon>
         <span class="mat-body-1" i18n="@@topBar.addAnotherName">
           Add another name
