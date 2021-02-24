@@ -48,6 +48,4 @@ describe.only('Affiliations' + runInfo(), () => {
   describe.only('Service' + runInfo(), () => {})
   describe.only('Education' + runInfo(), () => {})
   describe.only('Invited Position' + runInfo(), () => {})
-
-
 })
