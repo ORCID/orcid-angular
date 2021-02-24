@@ -34,13 +34,13 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
     if (item) {
       switch (item.actionType) {
         case 'CREATE':
-          return $localize`:@@inbox.newItemAdded:New item added`
+          return $localize`:@@inbox.newItemAdded:Added`
         case 'UPDATE':
-          return $localize`:@@inbox.itemUpdate:Item updated`
+          return $localize`:@@inbox.itemUpdate:Updated`
         case 'DELETE':
-          return $localize`:@@inbox.deleteItem:Deleted item`
+          return $localize`:@@inbox.deleteItem:Deleted`
         default:
-          return $localize`:@@inbox.otherUpdate:Other update`
+          return $localize`:@@inbox.otherUpdate:Other`
       }
     }
     return 'Other update'
