@@ -100,10 +100,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [
-            Validators.required,
-            Validators.pattern(URL_REGEXP)
-          ],
+          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
@@ -172,10 +169,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       new FormGroup({
         description: new FormControl(),
         url: new FormControl('', {
-          validators: [
-            Validators.required,
-            Validators.pattern(URL_REGEXP)
-          ],
+          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
         }),
         visibility: new FormControl(this.defaultVisibility, {}),
       })
