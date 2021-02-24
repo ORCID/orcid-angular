@@ -21,6 +21,7 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { UserSession } from 'src/app/types/session.local'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordKeywordService } from 'src/app/core/record-keyword/record-keyword.service'
+import { UserRecord } from 'src/app/types/record.local'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { KeywordEndPoint } from 'src/app/types/record-keyword.endpoint'
 
@@ -36,6 +37,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   addedKeywordsCount = 0
+  userRecord: UserRecord
   keywordsForm: FormGroup
   keywords: Assertion[]
   defaultVisibility: VisibilityStrings
@@ -104,8 +106,9 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
       keywords: [],
       visibility: this.originalBackendKeywords.visibility,
     }
-    this.keywords.reverse()
-    this.keywords
+    const toBackendKeywords = cloneDeep(this.keywords)    
+    toBackendKeywords.reverse()
+    toBackendKeywords
       .map((value) => value.putCode)
       .filter((key) => keywordsForm.value[key].content)
       .forEach((key, i) => {
