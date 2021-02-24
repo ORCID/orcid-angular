@@ -105,3 +105,29 @@ Cypress.Commands.add('cleanEmails', () => {
     })
   })
 })
+
+/**
+ * Clean all keywords
+ * @returns {any}
+ */
+Cypress.Commands.add('cleanKeywords', () => {
+  cy.getCookie('XSRF-TOKEN').then((cookie) => {
+    cy.request({
+      method: 'POST',
+      url: '/my-orcid/keywordsForms.json', // baseUrl is prepended to url
+      body: {
+        errors: [],
+        keywords: [],
+        visibility: {
+          errors: [],
+          required: true,
+          getRequiredMessage: null,
+          visibility: 'LIMITED',
+        },
+      },
+      headers: {
+        'X-XSRF-TOKEN': cookie.value,
+      },
+    })
+  })
+})
