@@ -13,7 +13,14 @@ import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from '../../../platform-info'
 import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms'
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms'
 import { VisibilityStrings } from '../../../../types/common.endpoint'
 import { WINDOW } from '../../../window'
 import { first, takeUntil } from 'rxjs/operators'
@@ -100,10 +107,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [
-            Validators.required,
-            Validators.pattern(URL_REGEXP),
-          ],
+          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
           updateOn: 'change',
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
@@ -226,7 +230,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   allUrlsAreUnique(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!_.isUndefined(control.value) && !_.isEmpty(control.value)) {
-        const result = _.groupBy(this.websitesForm.controls, c => c.value.url)
+        const result = _.groupBy(this.websitesForm.controls, (c) => c.value.url)
         for (const prop in result) {
           if (prop === control.value) {
             return {
@@ -238,7 +242,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       return {}
     }
   }
-
 
   ngOnDestroy() {
     this.$destroy.next(true)

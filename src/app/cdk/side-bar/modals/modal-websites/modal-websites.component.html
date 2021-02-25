@@ -107,7 +107,9 @@
                 </mat-error>
                 <mat-error
                   *ngIf="
-                    websitesForm.get(website.putCode).hasError('duplicated','url')
+                    websitesForm
+                      .get(website.putCode)
+                      .hasError('duplicated', 'url')
                   "
                   i18n="@@topBar.urlDuplicated"
                 >
