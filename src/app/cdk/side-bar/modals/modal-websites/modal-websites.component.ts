@@ -9,11 +9,11 @@ import {
   ViewChildren,
 } from '@angular/core'
 import { Subject } from 'rxjs'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
+import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from '../../../platform-info'
 import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms'
 import { VisibilityStrings } from '../../../../types/common.endpoint'
 import { WINDOW } from '../../../window'
 import { first, takeUntil } from 'rxjs/operators'
@@ -22,9 +22,9 @@ import { Assertion } from '../../../../types'
 import { UserSession } from '../../../../types/session.local'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { cloneDeep } from 'lodash'
+import * as _ from 'lodash'
 import { UserService } from '../../../../core'
 import { URL_REGEXP } from '../../../../constants'
-import { MatInput } from '@angular/material/input'
 
 @Component({
   selector: 'app-modal-websites',
@@ -100,7 +100,11 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
+          validators: [
+            Validators.required,
+            Validators.pattern(URL_REGEXP),
+          ],
+          updateOn: 'change',
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
@@ -145,7 +149,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       this._recordWebsitesService
         .postWebsites(this.formToBackend(this.websitesForm))
         .subscribe(
-          (response) => {
+          () => {
             this.closeEvent()
           },
           (error) => {
@@ -164,12 +168,18 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   addWebsite() {
+    const newPutCode = 'new-' + this.addedWebsiteCount
     this.websitesForm.addControl(
-      'new-' + this.addedWebsiteCount,
+      newPutCode,
       new FormGroup({
         description: new FormControl(),
         url: new FormControl('', {
-          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
+          validators: [
+            Validators.required,
+            Validators.pattern(URL_REGEXP),
+            this.allUrlsAreUnique(),
+          ],
+          updateOn: 'change',
         }),
         visibility: new FormControl(this.defaultVisibility, {}),
       })
@@ -212,6 +222,23 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   toMyLinks() {
     this.window.document.getElementById('my-links').scrollIntoView()
   }
+
+  allUrlsAreUnique(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!_.isUndefined(control.value) && !_.isEmpty(control.value)) {
+        const result = _.groupBy(this.websitesForm.controls, c => c.value.url)
+        for (const prop in result) {
+          if (prop === control.value) {
+            return {
+              duplicated: true,
+            }
+          }
+        }
+      }
+      return {}
+    }
+  }
+
 
   ngOnDestroy() {
     this.$destroy.next(true)

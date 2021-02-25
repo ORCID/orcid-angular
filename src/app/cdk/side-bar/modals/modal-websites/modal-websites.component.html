@@ -105,6 +105,14 @@
                 >
                   Invalid URL
                 </mat-error>
+                <mat-error
+                  *ngIf="
+                    websitesForm.get(website.putCode).hasError('duplicated','url')
+                  "
+                  i18n="@@topBar.urlDuplicated"
+                >
+                  URL can not be duplicated
+                </mat-error>
                 <mat-hint
                   class="mat-caption"
                   *ngIf="website.putCode.indexOf('new') < 0"
