@@ -4,30 +4,22 @@
     trackBy: trackByProfileAffiliationUiGroups
   "
 >
-  <div *ngIf="profileAffiliationsGroup.affiliationGroup.length">
-    <!--     (opened)="panelState = true"
-    (closed)="panelState = false"
-    [expanded]="" -->
-
-    <div class="mat-expansion-header">
+  <app-stack-container *ngIf="profileAffiliationsGroup.affiliationGroup.length" class="row">
+    <app-stack-container-header>
       <h4>
         {{ profileAffiliationsGroup.type }}
       </h4>
       <h4 class="itemsAmount">
         ({{ profileAffiliationsGroup.affiliationGroup.length }})
       </h4>
-    </div>
+    </app-stack-container-header>
 
-    <div>
-
-      
-      <app-affiliation
-        *ngFor="
-          let affiliation of profileAffiliationsGroup.affiliationGroup;
-          trackBy: trackByAffiliationGroup
-        "
-        [affiliationStack]="affiliation"
-      ></app-affiliation>
-    </div>
-  </div>
+    <app-affiliation
+      *ngFor="
+        let affiliation of profileAffiliationsGroup.affiliationGroup;
+        trackBy: trackByAffiliationGroup
+      "
+      [affiliationStack]="affiliation"
+    ></app-affiliation>
+  </app-stack-container>
 </ng-container>
