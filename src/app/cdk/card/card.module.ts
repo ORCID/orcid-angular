@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { CardComponent } from 'src/app/profile/components/card/card.component'
-import { CardDetailComponent } from 'src/app/profile/components/card-detail/card-detail.component'
-import { CardDetailLineComponent } from 'src/app/profile/components/card-detail-line/card-detail-line.component'
 import { SharedModule } from 'src/app/shared/shared.module'
 import { StackContainerComponent } from './stack-container/stack-container.component'
 import { StackContainerHeaderComponent } from './stack-container-header/stack-container-header.component'
 import { MatIconModule } from '@angular/material/icon'
+import { CardDetailComponent } from './card-detail/card-detail.component'
+import { CardComponent } from './card/card.component'
+import { CardDetailLineComponent } from './card-detail-line/card-detail-line.component'
+import { CardHeaderComponent } from './card-header/card-header.component';
+import { CardDataComponent } from './card-data/card-data.component';
+import { CardSourceComponent } from './card-source/card-source.component';
+import { CardOtherSourcesComponent } from './card-other-sources/card-other-sources.component'
 
 @NgModule({
   declarations: [
@@ -15,6 +19,10 @@ import { MatIconModule } from '@angular/material/icon'
     CardDetailLineComponent,
     StackContainerComponent,
     StackContainerHeaderComponent,
+    CardHeaderComponent,
+    CardDataComponent,
+    CardSourceComponent,
+    CardOtherSourcesComponent,
   ],
   exports: [
     CardComponent,
@@ -22,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon'
     CardDetailLineComponent,
     StackContainerComponent,
     StackContainerHeaderComponent,
+    CardHeaderComponent,
   ],
   imports: [CommonModule, SharedModule, MatIconModule],
 })

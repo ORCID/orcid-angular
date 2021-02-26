@@ -2,7 +2,6 @@
   <div *ngFor="let affiliation of affiliationStack.affiliations">
     <app-card
       *ngIf="isPrefered(affiliation) || stackMode"
-      [title]="affiliation.affiliationName.value"
       [startDate]="affiliation.startDate | monthDayYearDateToString"
       [endDate]="affiliation.endDate | monthDayYearDateToString"
       [role]="affiliation.roleTitle.value"
@@ -17,6 +16,7 @@
       (click)="onClick(affiliation)"
       [isPreferred]="isPrefered(affiliation)"
     >
+      <app-card-header>{{ affiliation.affiliationName.value }}</app-card-header>
       <app-card-detail
         [(state)]="affiliationDetailsState[affiliation.putCode.value].state"
         [detailShowData]="

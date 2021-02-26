@@ -13,8 +13,6 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
   animations: [rotateAnimation, heightAnimation, heightAnimationDefaultOpen],
 })
 export class CardComponent implements OnInit {
-  @Input() title
-  @Input() subtitle
   @Input() startDate
   @Input() date
   @Input() endDate
