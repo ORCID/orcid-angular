@@ -10,4 +10,4 @@ import { SharedModule } from 'src/app/shared/shared.module'
   exports: [CardComponent, CardDetailComponent, CardDetailLineComponent],
   imports: [CommonModule, SharedModule],
 })
-export class ActivitiesModule {}
+export class CardModule {}
