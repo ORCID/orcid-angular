@@ -85,15 +85,12 @@
     class="side-bar"
     id="keywords-panel"
   >
-    <h2 header class="orc-font-body" i18n="@@record.keywords">
-      Keywords
-    </h2>
+    <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
     <div body>
       <app-panel-element
         *ngFor="let keyword of userRecord.keyword.keywords"
         [visibility]="keyword.visibility.visibility"
-        >{{ getKeyword(keyword) }}      
-        </app-panel-element
+        >{{ getKeyword(keyword) }}</app-panel-element
       >
     </div>
   </app-panel>

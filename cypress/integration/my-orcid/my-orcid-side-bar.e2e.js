@@ -526,76 +526,13 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
     })
   })
   describe('Keywords', () => {
-    before(() => {
-      cy.cleanKeywords()
-    })
-    beforeEach(() => {
-      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
-    })
-    after(() => {
-      cy.cleanKeywords()
-    })
-    it('display a user with no items', () => {
-      cy.get('#keywords-panel').within(() => {
-        cy.get('[body=""]').should('not.exist')
-      })
-    })
+    it('display a user with no items', () => {})
     it('add items and display those with default privacy', () => {
       // Expect changes to be display outside and inside of the modal
-      cy.get('#keywords-panel')
-        .within(() => {
-          cy.get('#edit-button').click()
-        })
-        .get('#modal-container')
-        .get('#add-keyword')
-        .click()
-        .get('#content-input')
-        .click()
-        .type('keyword1', { delay: 0 })
-        .get('#save-keywords-button')
-        .click()
-        .get('#keywords-panel')
-        .within(() => {
-          cy.get('[body=""]')
-            .children()
-            .should('have.length', 1)
-            .get('app-panel-privacy')
-            .should(
-              'have.attr',
-              'aria-label',
-              environment.testUser.defaultPrivacy
-            )
-        })
     })
     it('remove/delete', () => {
       // Expect changes to be display outside and inside of the modal
-      cy.get('#keywords-panel')
-        .within(() => {
-          cy.get('#edit-button').click()
-        })
-        .get('#modal-container')
-        .get('#delete-keyword-button')
-        .click()
-        .get('#save-keywords-button')
-        .click()
-        .wait(2000)
-        .get('#keywords-panel')
-        .within(() => {
-          cy.get('[body=""]').should('not.exist')
-        })
-
     })
-
-
-
-
-
-
-
-
-
-
-
     it('Drag and drop to rearrange', () => {
       // Expect changes to be display outside and inside of the modal
     })
