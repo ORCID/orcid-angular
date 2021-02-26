@@ -47,7 +47,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   userSession: UserSession
   platform: PlatformInfo
 
-  ngOrcidKeyword = $localize`:@@topBar.keyword:Keyword Title`
+  ngOrcidKeyword = $localize`:@@topBar.keyword:Keyword`
 
   constructor(
     @Inject(WINDOW) private window: Window,
