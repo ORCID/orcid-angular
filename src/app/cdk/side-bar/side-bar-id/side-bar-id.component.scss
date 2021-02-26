@@ -18,6 +18,9 @@
   .preview {
     margin-top: 14px;
   }
+  strong {
+    word-wrap: anywhere;
+  }
 }
 :host {
   box-sizing: border-box;
