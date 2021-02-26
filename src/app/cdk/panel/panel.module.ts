@@ -20,4 +20,4 @@ import { PanelComponent } from './panel/panel.component'
   ],
   exports: [PanelComponent, PanelElementComponent, PanelPrivacyComponent],
 })
-export class PannelModule {}
+export class PanelModule {}

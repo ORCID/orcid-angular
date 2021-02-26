@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { SideBarComponent } from './side-bar/side-bar.component'
 import { SideBarIdComponent } from './side-bar-id/side-bar-id.component'
-import { PannelModule } from '../pannel/pannel.module'
+import { PanelModule } from '../panel/panel.module'
 import { ModalModule } from '../modal/modal.module'
 import { ModalEmailComponent } from './modals/modal-email/modal-email.component'
 import { MatDialogModule } from '@angular/material/dialog'
@@ -27,7 +27,7 @@ import { ModalWebsitesComponent } from './modals/modal-websites/modal-websites.c
   ],
   imports: [
     CommonModule,
-    PannelModule,
+    PanelModule,
     ModalModule,
     MatDialogModule,
     MatButtonModule,

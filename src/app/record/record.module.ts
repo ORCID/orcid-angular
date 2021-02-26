@@ -5,7 +5,7 @@ import { RecordRoutingModule } from './record-routing.module'
 import { MyOrcidComponent } from './pages/my-orcid/my-orcid.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
 import { MainComponent } from './components/main/main.component'
-import { PannelModule } from '../cdk/pannel/pannel.module'
+import { PanelModule } from '../cdk/panel/panel.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
@@ -40,7 +40,7 @@ import { SharedModule } from '../shared/shared.module'
     ReactiveFormsModule,
     RecordRoutingModule,
     SideBarModule,
-    PannelModule,
+    PanelModule,
     MatIconModule,
     MatButtonModule,
     ModalModule,
