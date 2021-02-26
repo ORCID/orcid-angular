@@ -10,7 +10,7 @@ export enum AffiliationGroupsTypes {
   SERVICE = 'SERVICE',
 }
 
-export interface Affiliations {
+export interface AffiliationsEndpoint {
   affiliationGroups: {
     INVITED_POSITION?: AffiliationGroup[]
     EMPLOYMENT?: AffiliationGroup[]

@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core'
-import {
-  AffiliationGroupsTypes,
-  Affiliations,
-  AffiliationUIGroup,
-  AffiliationUIGroupsTypes,
-} from 'src/app/types'
+import { AffiliationUIGroupsTypes, AffiliationGroupsTypes, AffiliationUIGroup, AffiliationsEndpoint} from 'src/app/types/record-affiliation.endpoint'
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class AffiliationsGroupingService {
+export class RecordAffiliationsGroupingService {
   expectedUiOrderGroups = []
   constructor() {
     // The expectedUiOrderGroups list need to be ordered on the expeted order to be displayed
@@ -30,7 +26,7 @@ export class AffiliationsGroupingService {
     ] = [AffiliationGroupsTypes.MEMBERSHIP, AffiliationGroupsTypes.SERVICE]
   }
 
-  transform(value: Affiliations, args?: any): AffiliationUIGroup[] {
+  transform(value: AffiliationsEndpoint, args?: any): AffiliationUIGroup[] {
     return Object.keys(this.expectedUiOrderGroups).map(
       (expectedUiOrderGroup) => {
         return {

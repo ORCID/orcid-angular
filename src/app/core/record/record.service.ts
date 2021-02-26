@@ -24,6 +24,8 @@ import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { RecordWebsitesService } from '../record-websites/record-websites.service'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
+import { RecordAffiliationService } from '../record-affiliations/record-affiliations.service'
+import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +42,8 @@ export class RecordService {
     private _recordOtherNamesService: RecordOtherNamesService,
     private _recordEmailsService: RecordEmailsService,
     private _recordCountryService: RecordCountriesService,
-    private _recordWebsitesService: RecordWebsitesService
+    private _recordWebsitesService: RecordWebsitesService,
+    private _recordAffiliations: RecordAffiliationService
   ) {}
 
   headers = new HttpHeaders({
@@ -62,6 +65,7 @@ export class RecordService {
         this.getExternalIdentifier(),
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
+        this._recordAffiliations.getAffiliations(),
         this.getPreferences(),
       ])
         .pipe(
@@ -76,6 +80,7 @@ export class RecordService {
               externalIdentifier,
               names,
               biography,
+              affiliations,
               preferences,
             ]) => {
               this.recordSubject$.next({
@@ -88,6 +93,7 @@ export class RecordService {
                 externalIdentifier: externalIdentifier as ExternalIdentifier,
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
+                affiliations: affiliations as AffiliationUIGroup[],
                 preferences: preferences as Preferences,
               })
             }

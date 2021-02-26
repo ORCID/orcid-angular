@@ -2,35 +2,48 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
-import { Affiliations, Affiliation, AffiliationUIGroup } from 'src/app/types'
 import { ActivityService } from 'src/app/types/activities-service.local'
+import {
+  AffiliationUIGroup,
+  AffiliationsEndpoint,
+  Affiliation,
+} from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
-import { AffiliationsGroupingService } from '../affiliations-grouping/affiliations-grouping.service'
-import { AffiliationsSortService } from '../affiliations-sort/affiliations-sort.service'
+import { AffiliationsSortService } from '../record-affiliations-sort/record-affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
 
 @Injectable({
   providedIn: 'root',
 })
-export class AffiliationsService implements ActivityService {
+export class RecordAffiliationService {
   affiliationsSubject = new ReplaySubject<AffiliationUIGroup[]>(1)
   lastEmitedValue: AffiliationUIGroup[]
+
+  $affiliations: ReplaySubject<AffiliationUIGroup[]>
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
-    private _affiliationsGroupingService: AffiliationsGroupingService,
+    private _affiliationsGroupingService: RecordAffiliationsGroupingService,
     private _affiliationsSortService: AffiliationsSortService
   ) {}
 
-  get(id: string): Observable<AffiliationUIGroup[]> {
-    return this.getAffiliations(id).pipe(
-      tap((data) => {
-        this.lastEmitedValue = data
-        this.affiliationsSubject.next(data)
-      }),
-      switchMap(() => this.affiliationsSubject.asObservable())
-    )
+  getAffiliations(): Observable<AffiliationUIGroup[]> {
+    if (!this.$affiliations) {
+      this.$affiliations = new ReplaySubject(1)
+      this.getGroupAndSortAffiliations()
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          tap((value) => {
+            this.$affiliations.next(value)
+          })
+        )
+        .subscribe()
+    }
+    return this.$affiliations.asObservable()
   }
 
   sort(value): Observable<AffiliationUIGroup[]> {
@@ -42,8 +55,8 @@ export class AffiliationsService implements ActivityService {
     return this.affiliationsSubject.asObservable()
   }
 
-  getAffiliationsDetails(id, type, putCode): Observable<AffiliationUIGroup[]> {
-    return this.getAffiliationDetails(id, putCode, type).pipe(
+  getAffiliationsDetails(type, putCode): Observable<AffiliationUIGroup[]> {
+    return this.getAffiliationDetails(putCode, type).pipe(
       tap((data) => {
         if (data && data.url && data.url.value) {
           this.lastEmitedValue.forEach((affiliations) => {
@@ -67,11 +80,11 @@ export class AffiliationsService implements ActivityService {
     )
   }
 
-  private getAffiliationDetails(id, putCode, type): Observable<Affiliation> {
+  private getAffiliationDetails(putCode, type): Observable<Affiliation> {
     return this._http
       .get<Affiliation>(
         environment.API_WEB +
-          `${id}/affiliationDetails.json?id=${putCode}&type=${type}`
+          `affiliations/affiliationDetails.json?id=${putCode}&type=${type}`
       )
       .pipe(
         retry(3),
@@ -79,9 +92,11 @@ export class AffiliationsService implements ActivityService {
       )
   }
 
-  private getAffiliations(id: string): Observable<AffiliationUIGroup[]> {
+  private getGroupAndSortAffiliations(): Observable<AffiliationUIGroup[]> {
     return this._http
-      .get<Affiliations>(environment.API_WEB + `${id}/affiliationGroups.json`)
+      .get<AffiliationsEndpoint>(
+        environment.API_WEB + `affiliations/affiliationGroups.json`
+      )
       .pipe(
         retry(3),
         map((data) => this._affiliationsGroupingService.transform(data)),

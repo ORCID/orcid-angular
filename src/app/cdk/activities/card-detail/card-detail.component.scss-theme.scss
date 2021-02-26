@@ -1,0 +1,18 @@
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import '~@angular/material/theming';
+
+@mixin card-detail-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  :host {
+    border-color: map-get($foreground, divider);
+    .detail-container {
+      color: $orcid-dark-secondary-text;
+    }
+  }
+}
+
+@include card-detail-theme($orcid-app-theme);

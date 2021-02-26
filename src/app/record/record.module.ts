@@ -19,6 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { PrivacySelectorModule } from '../cdk/privacy-selector/privacy-selector.module'
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
+import { AffiliationsComponent } from './components/affiliations/affiliations.component'
+import { AffiliationComponent } from './components/affiliation/affiliation.component'
+import { ActivitiesModule } from '../cdk/activities/card.module'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     MainComponent,
     ModalNameComponent,
     ModalBiographyComponent,
+    AffiliationsComponent,
+    AffiliationComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +50,8 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     PrivacySelectorModule,
     DragDropModule,
     A11yLinkModule,
+    ActivitiesModule,
+    SharedModule,
   ],
 })
 export class RecordModule {}

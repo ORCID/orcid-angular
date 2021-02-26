@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core'
 import {
-  AffiliationGroup,
-  AffiliationUIGroup,
   MonthDayYearDate,
 } from 'src/app/types'
+import { AffiliationUIGroup, AffiliationGroup } from 'src/app/types/record-affiliation.endpoint'
 
 @Injectable({
   providedIn: 'root',

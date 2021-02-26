@@ -5,6 +5,7 @@ import { BiographyEndPoint } from './record-biography.endpoint'
 import { CountriesEndpoint } from './record-country.endpoint'
 import { EmailsEndpoint } from './record-email.endpoint'
 import { WebsitesEndPoint } from './record-websites.endpoint'
+import { AffiliationUIGroup } from './record-affiliation.endpoint'
 
 export interface UserRecord {
   person: Person
@@ -17,4 +18,5 @@ export interface UserRecord {
   names: NamesEndPoint
   biography: BiographyEndPoint
   preferences: Preferences
+  affiliations: AffiliationUIGroup[]
 }

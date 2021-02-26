@@ -1,12 +1,4 @@
 export * from './record.endpoint'
-export {
-  Affiliations,
-  Affiliation,
-  AffiliationGroupsTypes,
-  AffiliationGroup,
-  AffiliationUIGroup,
-  AffiliationUIGroupsTypes,
-} from './affiliations.endpoint'
 export { MonthDayYearDate } from './common.endpoint'
 export { OrgDisambiguated } from './orgs.disambiguated.endpoint'
 export { Works, WorkGroup, Work } from './works.endpoint'

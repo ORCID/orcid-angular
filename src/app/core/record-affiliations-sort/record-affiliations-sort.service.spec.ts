@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 
-import { AffiliationsSortService } from './affiliations-sort.service'
+import { AffiliationsSortService } from './record-affiliations-sort.service'
 
 describe('AffiliationsSortService', () => {
   beforeEach(() => TestBed.configureTestingModule({}))
