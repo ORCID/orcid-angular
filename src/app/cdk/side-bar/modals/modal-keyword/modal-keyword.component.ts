@@ -43,15 +43,15 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings
   originalBackendKeywords: KeywordEndPoint
   isMobile: boolean
-  loadingKeywords = true 
-  userSession: UserSession 
-  platform: PlatformInfo  
+  loadingKeywords = true
+  userSession: UserSession
+  platform: PlatformInfo
 
   ngOrcidKeyword = $localize`:@@topBar.keyword:Keyword Title`
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    @Inject(MAT_DIALOG_DATA) public data: UserRecord,    
+    @Inject(MAT_DIALOG_DATA) public data: UserRecord,
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordKeywordService: RecordKeywordService,
     private _changeDetectorRef: ChangeDetectorRef,
@@ -72,7 +72,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
         this.userSession = userSession
       })
   }
-  
+
   ngOnInit(): void {
     this._recordKeywordService
       .getKeywords()
@@ -80,11 +80,10 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
       .subscribe((keywords: KeywordEndPoint) => {
         this.defaultVisibility = keywords.visibility.visibility
         this.originalBackendKeywords = cloneDeep(keywords)
-        this.keywords = this.originalBackendKeywords.keywords        
+        this.keywords = this.originalBackendKeywords.keywords
         this.backendJsonToForm(this.originalBackendKeywords)
         this.loadingKeywords = false
-      })    
-    
+      })
   }
 
   backendJsonToForm(keywordEndpointJson: KeywordEndPoint) {
@@ -106,7 +105,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
       keywords: [],
       visibility: this.originalBackendKeywords.visibility,
     }
-    const toBackendKeywords = cloneDeep(this.keywords)    
+    const toBackendKeywords = cloneDeep(this.keywords)
     toBackendKeywords.reverse()
     toBackendKeywords
       .map((value) => value.putCode)
@@ -160,7 +159,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     } as Assertion)
     this.addedKeywordsCount++
 
-    this._changeDetectorRef.detectChanges()    
+    this._changeDetectorRef.detectChanges()
   }
 
   deleteKeyword(putcode: string) {
@@ -171,7 +170,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
   getSourceName(keyword: Assertion) {
     return keyword.sourceName || keyword.source
-  }  
+  }
 
   ngOnDestroy() {
     this.$destroy.next(true)

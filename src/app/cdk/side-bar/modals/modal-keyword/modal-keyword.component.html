@@ -1,8 +1,6 @@
 <app-modal>
   <app-modal-header>
-    <ng-container i18n="@@topBar.keywords">
-      Keywords</ng-container
-    >
+    <ng-container i18n="@@topBar.keywords"> Keywords</ng-container>
   </app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title">
@@ -87,10 +85,11 @@
               [ngClass]="{ selector: !platform.columns12 }"
               formControlName="visibility"
             ></app-privacy-selector>
-            <button 
-              (click)="deleteKeyword(keyword.putCode)" 
+            <button
+              (click)="deleteKeyword(keyword.putCode)"
               mat-icon-button
-              class="delete-button">
+              class="delete-button"
+            >
               <mat-icon class="material-icons-outlined large-material-icon"
                 >delete
               </mat-icon>
@@ -100,7 +99,11 @@
       </div>
     </ng-container>
     <div class="row">
-      <a id="add-keyword" class="col add-more no-gutters" (click)="addKeyword()">
+      <a
+        id="add-keyword"
+        class="col add-more no-gutters"
+        (click)="addKeyword()"
+      >
         <mat-icon class="large-material-icon">add_circle</mat-icon>
         <span class="mat-body-1" i18n="@@topBar.addAnotherKeyword">
           Add another keyword

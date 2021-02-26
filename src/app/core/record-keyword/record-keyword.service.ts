@@ -47,9 +47,7 @@ export class RecordKeywordService {
     return this.$keywords
   }
 
-  postKeywords(
-    keywords: KeywordEndPoint
-  ): Observable<KeywordEndPoint> {
+  postKeywords(keywords: KeywordEndPoint): Observable<KeywordEndPoint> {
     return this._http
       .post<KeywordEndPoint>(
         environment.API_WEB + `my-orcid/keywordsForms.json`,
