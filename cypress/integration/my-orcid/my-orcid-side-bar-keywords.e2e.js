@@ -26,7 +26,7 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
   })
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
-  })  
+  })
   describe('Keywords', () => {
     before(() => {
       cy.cleanKeywords()
@@ -67,7 +67,7 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
               'have.attr',
               'aria-label',
               environment.testUser.defaultPrivacy
-            )            
+            )
         })
         .get('#keywords-panel')
         .within(() => {
@@ -75,9 +75,7 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
             .children()
             .should('have.length', 1)
             .get('.line')
-            .contains(
-              'keyword1'
-            )            
+            .contains('keyword1')
         })
     })
     it('remove/delete', () => {
@@ -101,33 +99,33 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
         .within(() => {
           cy.get('#edit-button').click()
         })
-        .get('#modal-container')        
+        .get('#modal-container')
         .get('#add-keyword')
-        .click()        
+        .click()
         .get('.mat-form-field-flex')
         .eq(0)
         .click({ multiple: true })
-        .type('Keyword1', { delay: 50 })        
+        .type('Keyword1', { delay: 50 })
         .get('#add-keyword')
         .click()
-        .get('.mat-form-field-flex')        
+        .get('.mat-form-field-flex')
         .eq(1)
         .click({ multiple: true })
-        .type('Keyword2', { delay: 50 })        
+        .type('Keyword2', { delay: 50 })
         .get('#add-keyword')
         .click()
-        .get('.mat-form-field-flex')        
+        .get('.mat-form-field-flex')
         .eq(2)
         .click({ multiple: true })
         .type('Keyword3', { delay: 50 })
         .get('#save-keywords-button')
         .click()
-        .wait(1000)        
+        .wait(1000)
         .get('#keywords-panel')
         .within(() => {
           cy.contains('Keyword1')
           cy.contains('Keyword2')
-          cy.contains('Keyword3')          
+          cy.contains('Keyword3')
           cy.get('[body=""]')
             .children()
             .should('have.length', 3)
@@ -152,7 +150,7 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
         .click({ multiple: true })
         .get('#save-keywords-button')
         .click()
-        .wait(1000) 
+        .wait(1000)
         .get('#keywords-panel')
         .within(() => {
           cy.get('[body=""]')
