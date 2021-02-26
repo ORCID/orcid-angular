@@ -67,7 +67,17 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
               'have.attr',
               'aria-label',
               environment.testUser.defaultPrivacy
-            )
+            )            
+        })
+        .get('#keywords-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 1)
+            .get('.line')
+            .contains(
+              'keyword1'
+            )            
         })
     })
     it('remove/delete', () => {
@@ -115,6 +125,9 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
         .wait(1000)        
         .get('#keywords-panel')
         .within(() => {
+          cy.contains('Keyword1')
+          cy.contains('Keyword2')
+          cy.contains('Keyword3')          
           cy.get('[body=""]')
             .children()
             .should('have.length', 3)
