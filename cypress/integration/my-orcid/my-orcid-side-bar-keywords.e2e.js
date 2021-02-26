@@ -53,7 +53,7 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
         .click()
         .get('#content-input')
         .click()
-        .type('keyword1', { delay: 5 })
+        .type('keyword1', { delay: 100 })
         .get('#save-keywords-button')
         .click()
         .get('#keywords-panel')
@@ -69,8 +69,6 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
             )
         })
     })
-
-
     it('remove/delete', () => {
       cy.get('#keywords-panel')
         .within(() => {
@@ -86,9 +84,46 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
         .within(() => {
           cy.get('[body=""]').should('not.exist')
         })
-
-      // Expect changes to be display outside and inside of the modal
     })
-
+    it('add multiple keywords', () => {
+      cy.get('#keywords-panel')
+        .within(() => {
+          cy.get('#edit-button').click()
+        })
+        .get('#modal-container')        
+        .get('#add-keyword')
+        .click()        
+        .get('.mat-form-field-flex')
+        .eq(0)
+        .click({ multiple: true })
+        .type('Keyword1', { delay: 100 })        
+        .get('#add-keyword')
+        .click()
+        .get('.mat-form-field-flex')        
+        .eq(1)
+        .click({ multiple: true })
+        .type('Keyword2', { delay: 100 })        
+        .get('#add-keyword')
+        .click()
+        .get('.mat-form-field-flex')        
+        .eq(2)
+        .click({ multiple: true })
+        .type('Keyword3', { delay: 100 })
+        .get('#save-keywords-button')
+        .click()
+        .get('#keywords-panel')
+        .within(() => {
+          cy.get('[body=""]')
+            .children()
+            .should('have.length', 3)
+            .get('app-panel-privacy')
+            .should(
+              'have.attr',
+              'aria-label',
+              environment.testUser.defaultPrivacy
+            )
+        })
+    })
+      // Expect changes to be display outside and inside of the modal
   })
 })
