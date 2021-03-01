@@ -3,3 +3,28 @@
     width: 100%;
   }
 }
+
+:host {
+  width: 100%;
+  background: orange;
+}
+
+.header-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  padding-left: 14px;
+  padding-right: 14px;
+  .text-container,
+  .inline-intial-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    button {
+      margin-inline-end: 4px;
+    }
+  }
+}

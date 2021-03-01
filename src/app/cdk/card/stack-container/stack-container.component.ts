@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-stack-container',
   templateUrl: './stack-container.component.html',
-  styleUrls: ['./stack-container.component.scss']
+  styleUrls: [
+    './stack-container.component.scss',
+    './tack-container.component.scss-theme.scss',
+  ],
 })
 export class StackContainerComponent implements OnInit {
+  expandedContent: boolean = true
+  @Input() title
+  @Input() currentAmount
+  @Input() total
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  add() {}
+  sort() {}
+  collapse() {
+    this.expandedContent = !this.expandedContent
   }
-
+  ngOnInit(): void {}
 }
