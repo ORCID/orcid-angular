@@ -1,6 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
+  ElementRef,
   Component,
   Inject,
   OnDestroy,
@@ -34,7 +35,9 @@ import { KeywordEndPoint } from 'src/app/types/record-keyword.endpoint'
   ],
 })
 export class ModalKeywordComponent implements OnInit, OnDestroy {
-  $destroy: Subject<boolean> = new Subject<boolean>()
+  $destroy: Subject<boolean> = new Subject<boolean>()  
+  @ViewChildren('keywordInput') inputs: QueryList<ElementRef>
+
 
   addedKeywordsCount = 0
   userRecord: UserRecord
@@ -146,20 +149,23 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   }
 
   addKeyword() {
+    const newPutCode = 'new-' + this.addedKeywordsCount
+
     this.keywordsForm.addControl(
-      'new-' + this.addedKeywordsCount,
+      newPutCode,
       new FormGroup({
         content: new FormControl(),
         visibility: new FormControl(this.defaultVisibility, {}),
       })
     )
     this.keywords.push({
-      putCode: 'new-' + this.addedKeywordsCount,
+      putCode: newPutCode,
       visibility: { visibility: this.defaultVisibility },
     } as Assertion)
     this.addedKeywordsCount++
-
     this._changeDetectorRef.detectChanges()
+    const input = this.inputs.last
+    input.nativeElement.focus()
   }
 
   deleteKeyword(putcode: string) {
