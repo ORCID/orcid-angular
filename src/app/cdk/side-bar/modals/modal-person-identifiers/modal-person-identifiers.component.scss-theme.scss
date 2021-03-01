@@ -8,7 +8,6 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-
   :host ::ng-deep mat-form-field mat-icon {
     color: map-get($background, ui-background);
   }
