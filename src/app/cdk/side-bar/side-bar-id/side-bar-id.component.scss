@@ -14,10 +14,12 @@
   }
   .text-container {
     margin-top: 8px;
-    word-wrap: break-word;
   }
   .preview {
     margin-top: 14px;
+  }
+  strong {
+    word-wrap: anywhere;
   }
 }
 :host {
