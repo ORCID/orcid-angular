@@ -35,9 +35,8 @@ import { KeywordEndPoint } from 'src/app/types/record-keyword.endpoint'
   ],
 })
 export class ModalKeywordComponent implements OnInit, OnDestroy {
-  $destroy: Subject<boolean> = new Subject<boolean>()  
+  $destroy: Subject<boolean> = new Subject<boolean>()
   @ViewChildren('keywordInput') inputs: QueryList<ElementRef>
-
 
   addedKeywordsCount = 0
   userRecord: UserRecord
