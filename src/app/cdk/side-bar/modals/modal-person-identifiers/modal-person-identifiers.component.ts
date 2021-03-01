@@ -34,11 +34,8 @@ export class ModalPersonIdentifiersComponent implements OnInit {
     private _platform: PlatformInfoService
   ) {}
 
-  addedEmailsCount = 0
   personIdentifiersForm: FormGroup = new FormGroup({})
   personIdentifiers: Assertion[]
-  personIdentifiersMap: { [key: string]: Assertion }
-  defaultVisibility: VisibilityStrings
   originalPersonalIdentifiers: PersonIdentifierEndpoint
   isMobile: boolean
   loadingPersonalIdentifiers = true
@@ -48,7 +45,6 @@ export class ModalPersonIdentifiersComponent implements OnInit {
       .getPersonalIdentifiers()
       .pipe(first())
       .subscribe((personalIds: PersonIdentifierEndpoint) => {
-        this.defaultVisibility = personalIds.visibility.visibility
         this.personIdentifiers = cloneDeep(personalIds.externalIdentifiers)
         this.originalPersonalIdentifiers = cloneDeep(personalIds)
         this.backendJsonToForm(personalIds)
@@ -81,6 +77,7 @@ export class ModalPersonIdentifiersComponent implements OnInit {
       externalIdentifiers: [],
       visibility: this.originalPersonalIdentifiers.visibility,
     }
+    this._changeDetectorRef.detach()
     this.personIdentifiers.reverse()
     this.personIdentifiers
       .map((value) => value.putCode)

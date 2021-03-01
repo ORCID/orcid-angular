@@ -113,6 +113,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       websites: [],
       visibility: this.originalBackendWebsites.visibility,
     }
+    this._changeDetectorRef.detach()
     this.websites.reverse()
     this.websites
       .map((value) => value.putCode)

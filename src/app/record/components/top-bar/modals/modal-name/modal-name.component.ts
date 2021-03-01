@@ -184,6 +184,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       otherNames: [],
       visibility: this.originalBackendOtherNames.visibility,
     }
+    this._changeDetectorRef.detach()
     this.otherNames.reverse()
     this.otherNames
       .map((value) => value.putCode)
