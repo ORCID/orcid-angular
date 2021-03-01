@@ -1,0 +1,45 @@
+:host {
+  width: 100%;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+
+app-panel {
+  width: 100%;
+  margin-top: 16px;
+
+  p {
+    margin-top: 0;
+  }
+
+  .other-names {
+    margin-bottom: 0;
+  }
+}
+
+.orc-font-body {
+  margin: unset;
+}
+
+.my-orcid-icons {
+  width: 100%;
+  text-align: right;
+
+  button {
+    width: auto;
+    margin-right: 40px;
+    padding-right: 3px;
+
+    .icon {
+      font-size: 20px;
+      margin-right: 6px;
+    }
+  }
+  button:last-child {
+    margin-right: 0;
+  }
+
+  .mat-icon-button {
+    border-radius: 0;
+  }
+}

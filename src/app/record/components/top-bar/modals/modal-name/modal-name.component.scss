@@ -1,0 +1,153 @@
+:host {
+  width: 100%;
+}
+
+label {
+  margin: 6px 0 3px 0;
+}
+
+::ng-deep .columns-4-or-8 .mat-form-field {
+  width: 100%;
+  margin-inline-end: auto;
+}
+
+.required {
+  margin-left: 3px;
+}
+
+.required-information {
+  margin-left: auto !important;
+  margin-top: 10px !important;
+
+  span {
+    margin-right: 3px !important;
+  }
+}
+
+.input-container {
+  max-width: 402px;
+}
+
+.other-names-input-line {
+  margin-top: 20px;
+  img {
+    margin-top: 6px;
+    cursor: move;
+    z-index: 1;
+    margin-right: 18px;
+  }
+
+  .input-container {
+    max-width: 366px;
+  }
+
+  .privacy {
+    width: 100%;
+
+    button {
+      margin-left: auto;
+    }
+  }
+
+  app-privacy-selector {
+    margin: 0 30px;
+  }
+
+  .selector {
+    margin: 0 !important;
+  }
+}
+
+.icon-drag {
+  height: 32px;
+  margin: 4px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.actions-wrapper {
+  flex-wrap: nowrap;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+::ng-deep .cdk-drop-list-dragging {
+  cursor: move !important;
+  .mat-form-field-flex,
+  .mat-select-trigger,
+  .mat-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button {
+    cursor: move !important;
+  }
+}
+
+::ng-deep .cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.title {
+  margin-top: 16px;
+
+  p {
+    margin: 6px 0;
+  }
+}
+
+.mat-form-field {
+  padding: 0 !important;
+}
+
+.input-box {
+  flex-grow: 1;
+  max-width: 402px;
+  input {
+    width: 100%;
+    height: 40px;
+    margin: 4px 0;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 12px;
+  }
+}
+
+.family-names {
+  margin-top: 18px;
+}
+
+.delete {
+  margin-left: auto;
+}
+
+.other-names-wrapper {
+  margin: 20px 0 30px 0;
+}
+
+.add-more {
+  margin-top: 16px;
+
+  span {
+    padding-left: 6px;
+  }
+}
+
+::ng-deep .mat-form-field-subscript-wrapper {
+  margin-top: 4px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+  padding-left: 2px !important;
+}
+
+.side-bar {
+  text-decoration: underline;
+}

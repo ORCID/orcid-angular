@@ -1,25 +1,20 @@
-import {
-  Person,
-  Emails,
-  OtherNames,
-  Countries,
-  Keywords,
-  Website,
-  ExternalIdentifier,
-  Names,
-  Preferences,
-  Biography,
-} from '.'
+import { Person, Keywords, ExternalIdentifier, Preferences } from '.'
+import { OtherNamesEndPoint } from './record-other-names.endpoint'
+import { NamesEndPoint } from './record-name.endpoint'
+import { BiographyEndPoint } from './record-biography.endpoint'
+import { CountriesEndpoint } from './record-country.endpoint'
+import { EmailsEndpoint } from './record-email.endpoint'
+import { WebsitesEndPoint } from './record-websites.endpoint'
 
 export interface UserRecord {
   person: Person
-  emails: Emails
-  otherNames: OtherNames
-  countries: Countries
+  emails: EmailsEndpoint
+  otherNames: OtherNamesEndPoint
+  countries: CountriesEndpoint
   keyword: Keywords
-  website: Website
+  website: WebsitesEndPoint
   externalIdentifier: ExternalIdentifier
-  names: Names
-  biography: Biography
+  names: NamesEndPoint
+  biography: BiographyEndPoint
   preferences: Preferences
 }

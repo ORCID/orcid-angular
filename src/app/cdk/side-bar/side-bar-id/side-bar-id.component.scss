@@ -1,6 +1,6 @@
 .container {
   font-weight: 500;
-  border: solid 1px;
+  border: solid 2px;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -15,17 +15,27 @@
     margin-left: auto;
     margin-right: auto;
   }
+  img,
+  .mobile {
+    margin-top: -24px;
+    height: 48px;
+  }
   .text-container {
     margin-top: 8px;
   }
   .preview {
     margin-top: 14px;
+    text-decoration: underline;
   }
   strong,
   .url {
     word-wrap: anywhere;
   }
 }
+.mobile {
+  height: 131px;
+}
+
 :host {
   box-sizing: border-box;
 }

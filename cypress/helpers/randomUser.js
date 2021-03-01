@@ -6,6 +6,7 @@ module.exports = function () {
     password: '12345678Aa',
     name: 'cy-' + date() + '-' + userID(),
     familyName: 'cy-' + date() + '-' + userID(),
+    id: undefined,
   }
 }
 
