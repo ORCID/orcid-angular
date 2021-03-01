@@ -24,6 +24,9 @@
     margin-top: 14px;
     text-decoration: underline;
   }
+  strong {
+    word-wrap: anywhere;
+  }
 }
 .mobile {
   height: 131px;
