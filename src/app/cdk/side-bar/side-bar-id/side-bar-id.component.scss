@@ -11,6 +11,9 @@
   img {
     margin-top: -32px;
     height: 64px;
+    width: 64px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .text-container {
     margin-top: 8px;
@@ -18,7 +21,8 @@
   .preview {
     margin-top: 14px;
   }
-  strong {
+  strong,
+  .url {
     word-wrap: anywhere;
   }
 }
