@@ -15,8 +15,15 @@ import {
 })
 export class AffiliationComponent implements OnInit {
   _affiliationStack
-  affiliationDetailsState = {}
-  affiliationCardState = {}
+  affiliationDetailsState: {
+    [key: string]: {
+      detailShowData: 'open' | 'close'
+      detailShowLoader: 'open' | 'close' | 'close-with-none-opacity'
+      detailShowOffline: 'open' | 'close'
+      state: 'open' | 'close'
+    }
+  } = {}
+  affiliationCardState: { [key: string]: { stackState: 'open' | 'close' } } = {}
   orgDisambiguated = {}
   stackMode = false
 
@@ -115,7 +122,6 @@ export class AffiliationComponent implements OnInit {
     }
   }
 
-
   onClick(affiliation) {
     Object.keys(this.affiliationCardState).forEach((key) => {
       this.affiliationCardState[key].stackState = 'close'
@@ -125,7 +131,6 @@ export class AffiliationComponent implements OnInit {
         ? 'close'
         : 'open'
   }
-
 
   /**
    * RegEx funtion to check if the elements contains a URL

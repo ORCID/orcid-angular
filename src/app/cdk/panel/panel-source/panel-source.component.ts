@@ -9,18 +9,18 @@ import { PlatformInfoService } from '../../platform-info'
 export class PanelSourceComponent implements OnInit {
   @Input() isPreferred = true
   @Input() sourceName
-  _stackMode
   @Input() stackLength
   @Input() stackState = 'open'
+  _stackMode
   @Input()
-  set stackMode(value) {
+  set stackMode(value: boolean) {
     this._stackMode = value
     this.stackModeChange.emit(value)
   }
-  get stackMode() {
+  get stackMode(): boolean {
     return this._stackMode
   }
-  @Output() stackModeChange = new EventEmitter()
+  @Output() stackModeChange = new EventEmitter<boolean>()
   isHanset: boolean
 
   constructor(private _platformInfo: PlatformInfoService) {

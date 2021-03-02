@@ -13,10 +13,10 @@
   >
     <app-affiliation
       *ngFor="
-        let affiliation of profileAffiliationsGroup.affiliationGroup;
+        let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
         trackBy: trackByAffiliationGroup
       "
-      [affiliationStack]="affiliation"
+      [affiliationStack]="affiliationGroup"
     ></app-affiliation>
   </app-panels>
 </ng-container>
