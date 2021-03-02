@@ -15,14 +15,14 @@
     id="emails-panel"
   >
     <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
-    <div body>
+    <app-panel-data>
       <app-panel-element
         *ngFor="let email of userRecord.emails.emails"
         [visibility]="email.visibility"
         [bold]="email.primary"
         >{{ email.value }}</app-panel-element
       >
-    </div>
+    </app-panel-data>
   </app-panel>
 
   <app-panel
@@ -36,7 +36,7 @@
     <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
       Website and social links
     </h2>
-    <div body>
+    <app-panel-data>
       <app-panel-element
         *ngFor="let website of userRecord.website.websites"
         [visibility]="website.visibility.visibility"
@@ -49,7 +49,7 @@
           >{{ getWebsite(website) }}</a
         ></app-panel-element
       >
-    </div>
+    </app-panel-data>
   </app-panel>
 
   <app-panel
@@ -59,7 +59,7 @@
     class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
-    <div body>
+    <app-panel-data>
       <app-panel-element
         *ngFor="
           let externalIdentifier of userRecord.externalIdentifier
@@ -75,7 +75,7 @@
           }}</a
         ></app-panel-element
       >
-    </div>
+    </app-panel-data>
   </app-panel>
 
   <app-panel
@@ -85,13 +85,13 @@
     class="side-bar"
   >
     <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
-    <div body>
+    <app-panel-data>
       <app-panel-element
         *ngFor="let keyword of userRecord.keyword.keywords"
         [visibility]="keyword.visibility.visibility"
         >{{ keyword.content }}</app-panel-element
       >
-    </div>
+    </app-panel-data>
   </app-panel>
 
   <app-panel
@@ -103,12 +103,12 @@
     id="countries-panel"
   >
     <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
-    <div body>
+    <app-panel-data>
       <app-panel-element
         *ngFor="let address of userRecord.countries.addresses"
         [visibility]="address.visibility.visibility"
         >{{ address.countryName }}</app-panel-element
       >
-    </div>
+    </app-panel-data>
   </app-panel>
 </ng-container>

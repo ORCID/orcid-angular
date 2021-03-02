@@ -52,6 +52,8 @@ import { SharedModule } from '../shared/shared.module'
     A11yLinkModule,
     CardModule,
     SharedModule,
+    MatIconModule,
+    MatButtonModule,
   ],
 })
 export class RecordModule {}

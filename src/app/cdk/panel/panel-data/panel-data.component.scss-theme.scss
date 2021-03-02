@@ -1,0 +1,27 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin panel-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  :host,
+  .side-bar {
+    border-color: mat-color($accent, 200) !important;
+    background-color: mat-color($background, brand-primary-lightest) !important;
+  }
+
+  :host,
+  .top-bar {
+    border-color: mat-color($background, ui-background) !important;
+    background-color: mat-color($background, ui-background-lightest) !important;
+  }
+
+  .body {
+    background-color: map-get($background, card);
+  }
+}
+@include panel-theme($orcid-app-theme);

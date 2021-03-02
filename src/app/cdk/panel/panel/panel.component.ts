@@ -6,6 +6,7 @@ import { Address, Value } from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
+import { AffiliationGroup } from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
   selector: 'app-panel',
@@ -14,7 +15,7 @@ import { first } from 'rxjs/operators'
 })
 export class PanelComponent implements OnInit {
   @Input() editModalComponent: ComponentType<any>
-  @Input() elements: Assertion[] | Value | Address
+  @Input() elements: Assertion[] | Value | Address | AffiliationGroup
   @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
   @Input() userRecord: UserRecord
 
