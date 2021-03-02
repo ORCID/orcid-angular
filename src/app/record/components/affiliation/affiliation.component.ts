@@ -30,7 +30,7 @@ export class AffiliationComponent implements OnInit {
     this._affiliationStack = value
     value.affiliations.forEach((affiliation) => {
       this.affiliationCardState[affiliation.putCode.value] = {
-        stackState: this.isPrefered(affiliation) ? 'open' : 'close',
+        stackState: this.isPreferred(affiliation) ? 'open' : 'close',
       }
       this.affiliationDetailsState[affiliation.putCode.value] = {
         detailShowData: 'close',
@@ -45,7 +45,7 @@ export class AffiliationComponent implements OnInit {
     return this._affiliationStack
   }
 
-  isPrefered(affiliation: Affiliation) {
+  isPreferred(affiliation: Affiliation) {
     const response =
       affiliation && this.affiliationStack
         ? this.affiliationStack.defaultAffiliation.putCode.value ===

@@ -103,7 +103,16 @@
             </div>
           </div>
         </app-panel-data>
-        <app-panel-data> SOURCES </app-panel-data>
+        <app-panel-source
+          [isPreferred]="isPreferred(affiliation)"
+          [sourceName]="affiliation.sourceName"
+          [stackLength]="affiliationStack.affiliations.length"
+          [stackState]="
+            affiliationCardState[affiliation.putCode.value].stackState
+          "
+          [(stackMode)]="stackMode"
+        >
+        </app-panel-source>
       </div>
     </app-panel>
     <!-- <app-card
