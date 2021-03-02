@@ -21,7 +21,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { AffiliationsComponent } from './components/affiliations/affiliations.component'
 import { AffiliationComponent } from './components/affiliation/affiliation.component'
-import { CardModule } from '../cdk/card/card.module'
 import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
@@ -50,7 +49,6 @@ import { SharedModule } from '../shared/shared.module'
     PrivacySelectorModule,
     DragDropModule,
     A11yLinkModule,
-    CardModule,
     SharedModule,
     MatIconModule,
     MatButtonModule,

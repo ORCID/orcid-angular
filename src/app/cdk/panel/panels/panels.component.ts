@@ -1,14 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'app-stack-container',
-  templateUrl: './stack-container.component.html',
-  styleUrls: [
-    './stack-container.component.scss',
-    './tack-container.component.scss-theme.scss',
-  ],
+  selector: 'app-panels',
+  templateUrl: './panels.component.html',
+  styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
 })
-export class StackContainerComponent implements OnInit {
+export class PanelsComponent implements OnInit {
   expandedContent: boolean = true
   @Input() title
   @Input() currentAmount
