@@ -4,10 +4,6 @@
   }
 }
 
-:host {
-  width: 100%;
-}
-
 .header-container {
   width: 100%;
   display: flex;
@@ -17,6 +13,7 @@
   height: 56px;
   padding-left: 14px;
   padding-right: 14px;
+  border-radius: 4px;
   .text-container,
   .inline-intial-side {
     display: flex;
