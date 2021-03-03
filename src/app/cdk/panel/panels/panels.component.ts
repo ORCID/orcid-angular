@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core'
   styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
 })
 export class PanelsComponent implements OnInit {
-  expandedContent: boolean = true
+  expandedContent = true
   @Input() title
   @Input() currentAmount
   @Input() total

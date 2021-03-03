@@ -17,7 +17,7 @@ import {
 })
 export class PanelDataComponent implements OnInit {
   @HostBinding('class.border-bottom') borderBottomClass = false
-  @Input() set borderBottom (borderBottom: boolean) {
+  @Input() set borderBottom(borderBottom: boolean) {
     this.borderBottomClass = borderBottom
   }
 

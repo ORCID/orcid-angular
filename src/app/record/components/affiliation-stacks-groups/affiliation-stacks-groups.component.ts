@@ -4,7 +4,10 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
-import { AffiliationGroup, AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import {
+  AffiliationGroup,
+  AffiliationUIGroup,
+} from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 

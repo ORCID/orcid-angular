@@ -21,7 +21,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { SharedModule } from '../shared/shared.module'
 import { AffiliationStackComponent } from './components/affiliation-stack/affiliation-stack.component'
-import { AffiliationStacksGroupsComponent } from './components/affiliation-stacks-groups/affiliation-stacks-groups.component';
+import { AffiliationStacksGroupsComponent } from './components/affiliation-stacks-groups/affiliation-stacks-groups.component'
 import { AffiliationComponent } from './components/affiliation/affiliation.component'
 
 @NgModule({

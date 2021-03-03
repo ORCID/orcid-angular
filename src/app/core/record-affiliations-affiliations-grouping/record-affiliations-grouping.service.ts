@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core'
-import { AffiliationUIGroupsTypes, AffiliationGroupsTypes, AffiliationUIGroup, AffiliationsEndpoint} from 'src/app/types/record-affiliation.endpoint'
-
+import {
+  AffiliationUIGroupsTypes,
+  AffiliationGroupsTypes,
+  AffiliationUIGroup,
+  AffiliationsEndpoint,
+} from 'src/app/types/record-affiliation.endpoint'
 
 @Injectable({
   providedIn: 'root',
