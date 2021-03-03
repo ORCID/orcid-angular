@@ -6,7 +6,10 @@ import { Address, Value } from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
-import { AffiliationGroup } from 'src/app/types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  AffiliationGroup,
+} from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
   selector: 'app-panel',
@@ -15,7 +18,7 @@ import { AffiliationGroup } from 'src/app/types/record-affiliation.endpoint'
 })
 export class PanelComponent implements OnInit {
   @Input() editModalComponent: ComponentType<any>
-  @Input() elements: Assertion[] | Value | Address | AffiliationGroup
+  @Input() elements: Assertion[] | Value | Address | Affiliation
   @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
   @Input() userRecord: UserRecord
 
@@ -32,12 +35,12 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  isArrayAndIsNotEmpty(obj: any) {
+  isArrayAndIsNotEmpty(obj: Assertion[] | Value | Address | Affiliation) {
     return Array.isArray(obj) && obj.length > 0
   }
 
   valueIsNotNull(obj: any) {
-    return obj && obj.value
+    return obj && (obj.value || obj.putCode)
   }
 
   openModal() {

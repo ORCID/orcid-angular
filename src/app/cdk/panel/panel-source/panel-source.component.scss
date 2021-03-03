@@ -1,0 +1,11 @@
+.card-footer,
+.card-footer > div {
+  display: flex;
+  flex-direction: row;
+}
+
+.prefered-source {
+  display: flex;
+  flex-direction: row;
+  margin-inline-start: 20px;
+}

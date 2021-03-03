@@ -1,226 +1,86 @@
-<!-- A single affiliation
-That might have N equivalent affiliations with with different sources  -->
+<app-panel-data class="defaul-data-loaded" [borderBottom]="true">
+  <a (click)="toggleDetails.next(affiliation)">Show more details</a>
 
-<div>
-  <div *ngFor="let affiliation of affiliationStack.affiliations">
-    <!-- Show an affiliations only when either of the following is true
-    a- The affiliation is the preferred one.
-    b- The affiliation is not preferred, but the user clicked (show more source) button
-    -->
-    <ng-container
-      *ngIf="
-        affiliationCardState[affiliation.putCode.value]?.stackState ===
-          'open' || stackMode
-      "
-    >
-      <app-panel [elements]="affiliationStack.affiliations">
-        <h2 header class="orc-font-body" i18n="@@record.emails">
-          {{ affiliation.roleTitle }}
-        </h2>
-        <div body>
-          <!-- DEFAULT DATA PANEL______________ -->
-          <app-panel-data class="defaul-data-loaded" [borderBottom]="true">
-            <a (click)="toggleDetails(affiliation)">Show more details</a>
-
-            <div class="general-data mat-body-1">
-              <ng-container *ngIf="affiliation.startDate.year"
-                >{{ affiliation.startDate | monthDayYearDateToString }}
-                <ng-container> to </ng-container>
-                <ng-container *ngIf="affiliation.endDate">{{
-                  affiliation.endDate | monthDayYearDateToString
-                }}</ng-container>
-                <ng-container
-                  i18n="@@ngOrcid.present?"
-                  *ngIf="!affiliation.endDate"
-                  >present</ng-container
-                >
-              </ng-container>
-              <ng-container
-                *ngIf="
-                  affiliation.startDate.year && affiliation.roleTitle.value
-                "
-              >
-                |
-              </ng-container>
-              {{ affiliation.roleTitle.value }}
-              <ng-container *ngIf="affiliation.departmentName.value">
-                ({{ affiliation.departmentName.value }})
-              </ng-container>
-            </div>
-            <div class="type mat-body-2">
-              {{ affiliation.affiliationType.value | titlecase }}
-            </div>
-          </app-panel-data>
-
-          <!-- DETAILS PANEL______________ -->
-          <app-panel-data
-            [borderBottom]="true"
-            *ngIf="
-              affiliationDetailsState[affiliation.putCode.value].state ===
-              'open'
-            "
-          >
-            <div
-              class="margin-top-1"
-              *ngIf="
-                orgDisambiguated[affiliation.putCode.value];
-                let orgDisambiguated
-              "
-            >
-              <div
-                class="title-secondary-container"
-                i18n="@@workspace_affiliations.organization_id"
-              >
-                Organization identifiers
-              </div>
-              <div>
-                {{ orgDisambiguated?.sourceType }}
-                <ng-container
-                  *ngIf="
-                    orgDisambiguated.sourceType && orgDisambiguated.sourceId
-                  "
-                  >:</ng-container
-                >
-                {{ orgDisambiguated?.sourceId }}
-              </div>
-              <div class="padding-level-2">
-                {{ orgDisambiguated?.value }}
-                <ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
-                  >:</ng-container
-                >
-                {{ orgDisambiguated | regionCityCountry }}
-              </div>
-              <div class="padding-level-2 secondary-container-primary">
-                <ng-container i18n="@@workspace_affiliations.external_ids"
-                  >Other organization identifiers provided by</ng-container
-                >
-                {{ orgDisambiguated.sourceType | titlecase }}
-              </div>
-              <div
-                *ngFor="
-                  let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers
-                "
-                class="padding-level-3"
-              >
-                {{ org.identifierType }}:
-                <ng-container *ngIf="org.preferred && !isUrl(org.preferred)"
-                  >{{ org.preferred }} preferred</ng-container
-                >
-                <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
-                  <a target="orcid-app" href="{{ org.preferred }} ">
-                    {{ org.preferred }} preferred</a
-                  >
-                </ng-container>
-
-                <ng-container *ngFor="let id of org.all">
-                  <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
-                    id
-                  }}</ng-container>
-                  <ng-container *ngIf="id != org.preferred && isUrl(id)">
-                    <a target="orcid-app" href="{{ id }}"> {{ id }}</a>
-                  </ng-container>
-                </ng-container>
-              </div>
-            </div>
-          </app-panel-data>
-          <app-panel-source
-            [isPreferred]="isPreferred(affiliation)"
-            [sourceName]="affiliation.sourceName"
-            [stackLength]="affiliationStack.affiliations.length"
-            [stackState]="
-              affiliationCardState[affiliation.putCode.value].stackState
-            "
-            [(stackMode)]="stackMode"
-          >
-          </app-panel-source>
-        </div>
-      </app-panel>
-    </ng-container>
-    <!-- <app-card
-
-      <app-card-detail
-        [(state)]="affiliationDetailsState[affiliation.putCode.value].state"
-        [detailShowData]="
-          affiliationDetailsState[affiliation.putCode.value].detailShowData
-        "
-        [detailShowLoader]="
-          affiliationDetailsState[affiliation.putCode.value].detailShowLoader
-        "
-        [detailShowOffline]="
-          affiliationDetailsState[affiliation.putCode.value].detailShowOffline
-        "
-        [createdDate]="affiliation.createdDate"
-        [lastModified]="affiliation.lastModified"
+  <div class="general-data mat-body-1">
+    <ng-container *ngIf="affiliation.startDate.year"
+      >{{ affiliation.startDate | monthDayYearDateToString }}
+      <ng-container> to </ng-container>
+      <ng-container *ngIf="affiliation.endDate">{{
+        affiliation.endDate | monthDayYearDateToString
+      }}</ng-container>
+      <ng-container i18n="@@ngOrcid.present?" *ngIf="!affiliation.endDate"
+        >present</ng-container
       >
-        <div
-          class="margin-top-1"
-          *ngIf="
-            orgDisambiguated[affiliation.putCode.value];
-            let orgDisambiguated
-          "
-        >
-          <div
-            class="title-secondary-container"
-            i18n="@@workspace_affiliations.organization_id"
-          >
-            Organization identifiers
-          </div>
-          <div>
-            {{ orgDisambiguated?.sourceType }}
-            <ng-container
-              *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
-              >:</ng-container
-            >
-            {{ orgDisambiguated?.sourceId }}
-          </div>
-          <div class="padding-level-2">
-            {{ orgDisambiguated?.value }}
-            <ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
-              >:</ng-container
-            >
-            {{ orgDisambiguated | regionCityCountry }}
-          </div>
-          <div class="padding-level-2 secondary-container-primary">
-            <ng-container i18n="@@workspace_affiliations.external_ids"
-              >Other organization identifiers provided by</ng-container
-            >
-            {{ orgDisambiguated.sourceType | titlecase }}
-          </div>
-          <div
-            *ngFor="
-              let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers
-            "
-            class="padding-level-3"
-          >
-            {{ org.identifierType }}:
-            <ng-container *ngIf="org.preferred && !isUrl(org.preferred)"
-              >{{ org.preferred }} preferred</ng-container
-            >
-            <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
-              <a target="orcid-app" href="{{ org.preferred }} ">
-                {{ org.preferred }} preferred</a
-              >
-            </ng-container>
-
-            <ng-container *ngFor="let id of org.all">
-              <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
-                id
-              }}</ng-container>
-              <ng-container *ngIf="id != org.preferred && isUrl(id)">
-                <a target="orcid-app" href="{{ id }}"> {{ id }}</a>
-              </ng-container>
-            </ng-container>
-          </div>
-        </div>
-
-        <app-card-detail-line
-          *ngIf="affiliation.url.value"
-          [title]="'URL'"
-          [content]="affiliation.url.value"
-          [url]="affiliation.url.value"
-        >
-        </app-card-detail-line>
-      </app-card-detail>
-    </app-card> -->
+    </ng-container>
+    <ng-container
+      *ngIf="affiliation.startDate.year && affiliation.roleTitle.value"
+    >
+      |
+    </ng-container>
+    {{ affiliation.roleTitle.value }}
+    <ng-container *ngIf="affiliation.departmentName.value">
+      ({{ affiliation.departmentName.value }})
+    </ng-container>
   </div>
-</div>
+  <div class="type mat-body-2">
+    {{ affiliation.affiliationType.value | titlecase }}
+  </div>
+</app-panel-data>
+
+<app-panel-data
+  [borderBottom]="true"
+  *ngIf="affiliationDetailsState.state === 'open'"
+>
+  <div class="margin-top-1" *ngIf="orgDisambiguated">
+    <div
+      class="title-secondary-container"
+      i18n="@@workspace_affiliations.organization_id"
+    >
+      Organization identifiers
+    </div>
+    <div>
+      {{ orgDisambiguated?.sourceType }}
+      <ng-container
+        *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
+        >:</ng-container
+      >
+      {{ orgDisambiguated?.sourceId }}
+    </div>
+    <div class="padding-level-2">
+      {{ orgDisambiguated?.value }}
+      <ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
+        >:</ng-container
+      >
+      {{ orgDisambiguated | regionCityCountry }}
+    </div>
+    <div class="padding-level-2 secondary-container-primary">
+      <ng-container i18n="@@workspace_affiliations.external_ids"
+        >Other organization identifiers provided by</ng-container
+      >
+      {{ orgDisambiguated.sourceType | titlecase }}
+    </div>
+    <div
+      *ngFor="let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers"
+      class="padding-level-3"
+    >
+      {{ org.identifierType }}:
+      <ng-container *ngIf="org.preferred && !isUrl(org.preferred)"
+        >{{ org.preferred }} preferred</ng-container
+      >
+      <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
+        <a target="orcid-app" href="{{ org.preferred }} ">
+          {{ org.preferred }} preferred</a
+        >
+      </ng-container>
+
+      <ng-container *ngFor="let id of org.all">
+        <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
+          id
+        }}</ng-container>
+        <ng-container *ngIf="id != org.preferred && isUrl(id)">
+          <a target="orcid-app" href="{{ id }}"> {{ id }}</a>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</app-panel-data>

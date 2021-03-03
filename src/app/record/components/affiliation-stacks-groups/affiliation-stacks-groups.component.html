@@ -11,12 +11,12 @@
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
     [total]="profileAffiliationsGroup.affiliationGroup.length"
   >
-    <app-affiliation
+    <app-affiliation-stack
       *ngFor="
         let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
         trackBy: trackByAffiliationGroup
       "
       [affiliationStack]="affiliationGroup"
-    ></app-affiliation>
+    ></app-affiliation-stack>
   </app-panels>
 </ng-container>

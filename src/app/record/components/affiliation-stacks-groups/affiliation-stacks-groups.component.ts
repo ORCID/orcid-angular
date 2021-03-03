@@ -10,10 +10,10 @@ import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-affiliations',
-  templateUrl: './affiliations.component.html',
-  styleUrls: ['./affiliations.component.scss'],
+  templateUrl: './affiliation-stacks-groups.component.html',
+  styleUrls: ['./affiliation-stacks-groups.component.scss'],
 })
-export class AffiliationsComponent implements OnInit {
+export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
