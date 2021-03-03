@@ -20,12 +20,10 @@
       </ng-container>
     </div>
     <a (click)="toggleStackMode()" *ngIf="stackLength > 1">
-      <ng-container i18n="@@notifications.show_more" *ngIf="!stackMode">
+      <ng-container i18n="@@shared.showMore" *ngIf="!stackMode">
         Show more
       </ng-container>
-      <ng-container i18n="@@ngOrcid.show_less?" *ngIf="stackMode"
-        >Show less</ng-container
-      >
+      <ng-container *ngIf="stackMode" i18n="@@shared.showLess">Show less</ng-container>
     </a>
   </div>
 </app-panel-data>

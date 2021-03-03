@@ -8,9 +8,7 @@
       <ng-container *ngIf="affiliation.endDate">{{
         affiliation.endDate | monthDayYearDateToString
       }}</ng-container>
-      <ng-container i18n="@@ngOrcid.present?" *ngIf="!affiliation.endDate"
-        >present</ng-container
-      >
+      <ng-container *ngIf="!affiliation.endDate">present</ng-container>
     </ng-container>
     <ng-container
       *ngIf="affiliation.startDate.year && affiliation.roleTitle.value"
