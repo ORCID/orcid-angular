@@ -6,3 +6,11 @@
 :host {
   width: 100%;
 }
+
+app-panel.stack-shadow {
+  -webkit-box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
+  -moz-box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
+  box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
+  display: block;
+  position: relative;
+}

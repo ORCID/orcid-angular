@@ -1,9 +1,48 @@
 <!-- A single affiliation
 That might have N equivalent affiliations with with different sources  -->
 
-<div>
-  <div *ngFor="let affiliation of affiliationStack.affiliations">
-    <app-panel [elements]="affiliation">
+<ng-container
+  *ngFor="
+    let affiliation of affiliationStack.affiliations;
+    let i = index;
+    let last = last
+  "
+>
+  <app-panel
+    [elements]="affiliation"
+    [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
+    [ngClass]="{ 'stack-shadow': !last }"
+    [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
+    [hasNestedPanels]="true" 
+  >
+    <h2 header class="orc-font-body" i18n="@@record.emails">
+      {{ affiliation.affiliationName.value }}
+    </h2>
+
+    <app-affiliation
+      [affiliation]="affiliation"
+      [affiliationCardState]="affiliationCardState[affiliation.putCode.value]"
+      [affiliationDetailsState]="
+        affiliationDetailsState[affiliation.putCode.value]
+      "
+      (toggleDetails)="toggleDetails($event)"
+      [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
+    >
+    </app-affiliation>
+    <app-panel-source
+      [isPreferred]="isPreferred(affiliation)"
+      [sourceName]="affiliation.sourceName"
+      [stackLength]="affiliationStack.affiliations.length"
+      [stackState]="affiliationCardState.stackState"
+      [(stackMode)]="stackMode"
+    >
+    </app-panel-source>
+
+    <app-panel
+      [elements]="affiliation"
+      [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
+      [ngClass]="{ 'stack-shadow': !last }"
+    >
       <h2 header class="orc-font-body" i18n="@@record.emails">
         {{ affiliation.affiliationName.value }}
       </h2>
@@ -27,5 +66,5 @@ That might have N equivalent affiliations with with different sources  -->
       >
       </app-panel-source>
     </app-panel>
-  </div>
-</div>
+  </app-panel>
+</ng-container>

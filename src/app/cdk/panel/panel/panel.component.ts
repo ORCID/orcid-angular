@@ -2,7 +2,11 @@ import { ComponentType } from '@angular/cdk/portal'
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion } from '../../../types'
-import { Address, Value } from '../../../types/common.endpoint'
+import {
+  Address,
+  Value,
+  VisibilityStrings,
+} from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
@@ -21,6 +25,8 @@ export class PanelComponent implements OnInit {
   @Input() elements: Assertion[] | Value | Address | Affiliation
   @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
   @Input() userRecord: UserRecord
+  @Input() visibility: VisibilityStrings
+  @Input() hasNestedPanels: false
 
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`

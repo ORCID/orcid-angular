@@ -19,4 +19,10 @@
 .buttons-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.nested-panels{
+  padding: 30px;// TODO @Daniel
+
 }

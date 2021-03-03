@@ -8,6 +8,17 @@
 >
   <ng-content select="[header]"></ng-content>
   <div class="buttons-container">
+    <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
+    <app-panel-privacy
+      *ngIf="visibility"
+      [visibility]="visibility"
+    ></app-panel-privacy>
+
+    <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
+    <ng-content select="[custom-controls]"></ng-content>
+
+    <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
+
     <button
       mat-icon-button
       *ngIf="editable"
@@ -17,6 +28,9 @@
     >
       <mat-icon class="material-icons-outlined">edit</mat-icon>
     </button>
+
+    <!-- [EXPAND BUTTONS] FOR ALL SIDEBAR PANELS -->
+
     <button
       mat-icon-button
       *ngIf="!openState && !editable"
@@ -37,5 +51,11 @@
   class="body"
   *ngIf="isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)"
 >
+  <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
   <ng-content></ng-content>
+
+  <!-- [NESTED PANELS] FOR PEER REVIEWS AND RESEARCH RESOURCES -->
+  <div class="nested-panels" *ngIf="hasNestedPanels">
+    <ng-content select="app-panel"></ng-content>
+  </div>
 </div>
