@@ -507,9 +507,22 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
         })
     })
   })
-  describe('Other IDs', () => {
+  describe('Personal identifiers', () => {
+    // TODO
+    // We need to create a mechanism to add keywords while e2e testing.
+    before(() => {
+      cy.cleanPersonalIdentifiers()
+    })
+    beforeEach(() => {
+      Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
+    })
+    after(() => {
+      cy.cleanPersonalIdentifiers()
+    })
+
     it('display a user with no items', () => {
-      // should be hidden from the side bar https://trello.com/c/JZJ75TWl/35-how-to-add-other-ids-is-confusing
+      // Users with not personal ids should not show this panel
+      cy.get('#personal-identifiers-panel').should('not.exist')
     })
     it('display a user with items and default privacy', () => {})
     it('remove/delete', () => {

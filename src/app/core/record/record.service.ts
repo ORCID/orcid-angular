@@ -5,7 +5,9 @@ import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
   ExternalIdentifier,
+  Keywords,
   Person,
+  PersonIdentifierEndpoint,
   Preferences,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
@@ -25,6 +27,7 @@ import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { RecordWebsitesService } from '../record-websites/record-websites.service'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
+import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +45,8 @@ export class RecordService {
     private _recordOtherNamesService: RecordOtherNamesService,
     private _recordEmailsService: RecordEmailsService,
     private _recordCountryService: RecordCountriesService,
-    private _recordWebsitesService: RecordWebsitesService
+    private _recordWebsitesService: RecordWebsitesService,
+    private _recordPersonalIdentifier: RecordPersonIdentifierService
   ) {}
 
   headers = new HttpHeaders({
@@ -61,7 +65,7 @@ export class RecordService {
         this._recordCountryService.getAddresses(),
         this._recordKeywordService.getKeywords(),
         this._recordWebsitesService.getWebsites(),
-        this.getExternalIdentifier(),
+        this._recordPersonalIdentifier.getPersonalIdentifiers(),
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
         this.getPreferences(),
@@ -87,7 +91,7 @@ export class RecordService {
                 countries: countries as CountriesEndpoint,
                 keyword: keyword as KeywordEndPoint,
                 website: website as WebsitesEndPoint,
-                externalIdentifier: externalIdentifier as ExternalIdentifier,
+                externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
                 preferences: preferences as Preferences,
@@ -131,12 +135,22 @@ export class RecordService {
       .get<ExternalIdentifier>(
         environment.API_WEB + `my-orcid/externalIdentifiers.json`,
         { headers: this.headers }
-      )
-      .pipe(
+      ).pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
+
+  getKeywords(): Observable<Keywords> {
+    return this._http
+      .get<Keywords>(environment.API_WEB + `my-orcid/keywordsForms.json`, {
+        headers: this.headers,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }      
 
   // Just a place holder for posting external identifiers, since the frontend does never calls this function
   postExternalIdentifier(
@@ -153,6 +167,19 @@ export class RecordService {
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
+
+  postKeywords(keywords: Keywords): Observable<Keywords> {
+    return this._http
+      .post<Keywords>(
+        environment.API_WEB + `my-orcid/keywordsForms.json`,
+        keywords,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }       
 
   getPreferences(): Observable<Preferences> {
     return this._http

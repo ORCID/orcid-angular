@@ -11,6 +11,7 @@ import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
 import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
 import { ModalKeywordComponent } from '../modals/modal-keyword/modal-keyword.component'
+import { ModalPersonIdentifiersComponent } from '../modals/modal-person-identifiers/modal-person-identifiers.component'
 
 @Component({
   selector: 'app-side-bar',
@@ -29,6 +30,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   modalEmailComponent = ModalEmailComponent
   modalWebsitesComponent = ModalWebsitesComponent
   modalKeywordComponent = ModalKeywordComponent
+  modalPersonalIdentifiers = ModalPersonIdentifiersComponent
 
   userSession: {
     userInfo: UserInfo
