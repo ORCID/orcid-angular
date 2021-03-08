@@ -58,12 +58,6 @@ export interface Keywords {
   visibility: Visibility
 }
 
-export interface ExternalIdentifier {
-  errors: any[]
-  externalIdentifiers: Assertion[]
-  visibility: Visibility
-}
-
 export interface Preferences {
   developer_tools_enabled: boolean
   default_visibility: VisibilityStrings

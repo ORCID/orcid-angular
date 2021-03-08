@@ -14,21 +14,6 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.country-input-line {
-  margin-top: 20px;
-  img {
-    margin-top: 6px;
-    cursor: move;
-    z-index: 1;
-    margin-inline-end: 18px;
-  }
-}
-
-.mat-form-field {
-  width: 100%;
-  margin-inline-end: 16px;
-}
-
 ::ng-deep .columns-4-or-8 .mat-form-field {
   width: 100%;
   margin-inline-end: auto;
@@ -38,6 +23,24 @@
   margin-top: 16px;
 }
 
+::ng-deep .columns-4-or-8 .personal-identifiers-wrapper {
+  margin: 16px 0 16px 0;
+}
+
+::ng-deep .columns-4-or-8 .personal-identifiers-controls-wrapper {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.personal-identifier-input-line {
+  margin-top: 20px;
+  img {
+    margin-top: 6px;
+    cursor: move;
+    z-index: 1;
+    margin-inline-end: 18px;
+  }
+}
 ::ng-deep .cdk-drop-list-dragging {
   cursor: move !important;
   .mat-form-field-flex,

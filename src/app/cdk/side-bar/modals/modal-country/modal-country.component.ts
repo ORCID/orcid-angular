@@ -115,6 +115,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       addresses: [],
       visibility: this.originalBackendCountries.visibility,
     }
+    this._changeDetectorRef.detach()
     this.countries.reverse()
     this.countries
       .map((value) => value.putCode)
