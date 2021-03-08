@@ -56,8 +56,11 @@
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="
+        userRecord && userRecord.externalIdentifier.externalIdentifiers.length
+      "
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
+      [editModalComponent]="modalPersonalIdentifiers"
       [type]="'side-bar'"
       class="side-bar"
       id="personal-identifiers-panel"
@@ -83,23 +86,23 @@
         >
       </app-panel-data>
     </app-panel>
-
     <app-panel
       *ngIf="userRecord"
       [elements]="userRecord.keyword.keywords"
+      [editModalComponent]="modalKeywordComponent"
       [type]="'side-bar'"
       class="side-bar"
+      id="keywords-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
-      <app-panel-data>
+      <div body>
         <app-panel-element
           *ngFor="let keyword of userRecord.keyword.keywords"
           [visibility]="keyword.visibility.visibility"
-          >{{ keyword.content }}</app-panel-element
+          >{{ getKeyword(keyword) }}</app-panel-element
         >
-      </app-panel-data>
+      </div>
     </app-panel>
-
     <app-panel
       *ngIf="userRecord"
       [elements]="userRecord.countries.addresses"

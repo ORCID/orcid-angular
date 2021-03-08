@@ -4,6 +4,7 @@ import { combineLatest, Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
+  ExternalIdentifier,
   Keywords,
   Person,
   PersonIdentifierEndpoint,
@@ -17,9 +18,11 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordCountriesService } from '../record-countries/record-countries.service'
 import { RecordEmailsService } from '../record-emails/record-emails.service'
 import { RecordBiographyService } from '../record-biography/record-biography.service'
+import { RecordKeywordService } from '../record-keyword/record-keyword.service'
 import { RecordNamesService } from '../record-names/record-names.service'
 import { RecordOtherNamesService } from '../record-other-names/record-other-names.service'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
+import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
 import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { RecordWebsitesService } from '../record-websites/record-websites.service'
@@ -39,6 +42,7 @@ export class RecordService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
     private _recordBiographyService: RecordBiographyService,
+    private _recordKeywordService: RecordKeywordService,
     private _recordNamesService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _recordEmailsService: RecordEmailsService,
@@ -62,7 +66,7 @@ export class RecordService {
         this._recordEmailsService.getEmails(),
         this._recordOtherNamesService.getOtherNames(),
         this._recordCountryService.getAddresses(),
-        this.getKeywords(),
+        this._recordKeywordService.getKeywords(),
         this._recordWebsitesService.getWebsites(),
         this._recordPersonalIdentifier.getPersonalIdentifiers(),
         this._recordNamesService.getNames(),
@@ -90,7 +94,7 @@ export class RecordService {
                 emails: emails as EmailsEndpoint,
                 otherNames: otherNames as OtherNamesEndPoint,
                 countries: countries as CountriesEndpoint,
-                keyword: keyword as Keywords,
+                keyword: keyword as KeywordEndPoint,
                 website: website as WebsitesEndPoint,
                 externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
                 names: names as NamesEndPoint,
@@ -132,11 +136,39 @@ export class RecordService {
       )
   }
 
+  getExternalIdentifier(): Observable<ExternalIdentifier> {
+    return this._http
+      .get<ExternalIdentifier>(
+        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
   getKeywords(): Observable<Keywords> {
     return this._http
       .get<Keywords>(environment.API_WEB + `my-orcid/keywordsForms.json`, {
         headers: this.headers,
       })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  // Just a place holder for posting external identifiers, since the frontend does never calls this function
+  postExternalIdentifier(
+    website: ExternalIdentifier
+  ): Observable<ExternalIdentifier> {
+    return this._http
+      .post<ExternalIdentifier>(
+        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
+        website,
+        { headers: this.headers }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
