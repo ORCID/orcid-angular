@@ -16,6 +16,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import { MatSelectModule } from '@angular/material/select'
 import { A11yLinkModule } from '../a11y-link/a11y-link.module'
 import { ModalWebsitesComponent } from './modals/modal-websites/modal-websites.component'
+import { ModalPersonIdentifiersComponent } from './modals/modal-person-identifiers/modal-person-identifiers.component'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ModalWebsitesComponent } from './modals/modal-websites/modal-websites.c
     ModalEmailComponent,
     ModalCountryComponent,
     ModalWebsitesComponent,
+    ModalPersonIdentifiersComponent,
   ],
   imports: [
     CommonModule,

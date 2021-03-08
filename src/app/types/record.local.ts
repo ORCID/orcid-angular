@@ -1,4 +1,4 @@
-import { Person, Keywords, ExternalIdentifier, Preferences } from '.'
+import { Person, Keywords, Preferences, PersonIdentifierEndpoint } from '.'
 import { OtherNamesEndPoint } from './record-other-names.endpoint'
 import { NamesEndPoint } from './record-name.endpoint'
 import { BiographyEndPoint } from './record-biography.endpoint'
@@ -14,7 +14,7 @@ export interface UserRecord {
   countries: CountriesEndpoint
   keyword: Keywords
   website: WebsitesEndPoint
-  externalIdentifier: ExternalIdentifier
+  externalIdentifier: PersonIdentifierEndpoint
   names: NamesEndPoint
   biography: BiographyEndPoint
   preferences: Preferences

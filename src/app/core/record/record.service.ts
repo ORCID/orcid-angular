@@ -4,9 +4,9 @@ import { combineLatest, Observable, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
-  ExternalIdentifier,
   Keywords,
   Person,
+  PersonIdentifierEndpoint,
   Preferences,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
@@ -26,6 +26,7 @@ import { RecordWebsitesService } from '../record-websites/record-websites.servic
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { RecordAffiliationService } from '../record-affiliations/record-affiliations.service'
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +44,8 @@ export class RecordService {
     private _recordEmailsService: RecordEmailsService,
     private _recordCountryService: RecordCountriesService,
     private _recordWebsitesService: RecordWebsitesService,
-    private _recordAffiliations: RecordAffiliationService
+    private _recordAffiliations: RecordAffiliationService,
+    private _recordPersonalIdentifier: RecordPersonIdentifierService
   ) {}
 
   headers = new HttpHeaders({
@@ -62,7 +64,7 @@ export class RecordService {
         this._recordCountryService.getAddresses(),
         this.getKeywords(),
         this._recordWebsitesService.getWebsites(),
-        this.getExternalIdentifier(),
+        this._recordPersonalIdentifier.getPersonalIdentifiers(),
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
         this._recordAffiliations.getAffiliations(),
@@ -90,7 +92,7 @@ export class RecordService {
                 countries: countries as CountriesEndpoint,
                 keyword: keyword as Keywords,
                 website: website as WebsitesEndPoint,
-                externalIdentifier: externalIdentifier as ExternalIdentifier,
+                externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
                 affiliations: affiliations as AffiliationUIGroup[],
@@ -146,34 +148,6 @@ export class RecordService {
       .post<Keywords>(
         environment.API_WEB + `my-orcid/keywordsForms.json`,
         keywords,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getExternalIdentifier(): Observable<ExternalIdentifier> {
-    return this._http
-      .get<ExternalIdentifier>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  // Just a place holder for posting external identifiers, since the frontend does never calls this function
-  postExternalIdentifier(
-    website: ExternalIdentifier
-  ): Observable<ExternalIdentifier> {
-    return this._http
-      .post<ExternalIdentifier>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
-        website,
         { headers: this.headers }
       )
       .pipe(
