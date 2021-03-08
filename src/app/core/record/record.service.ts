@@ -135,7 +135,8 @@ export class RecordService {
       .get<ExternalIdentifier>(
         environment.API_WEB + `my-orcid/externalIdentifiers.json`,
         { headers: this.headers }
-      ).pipe(
+      )
+      .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
@@ -150,7 +151,7 @@ export class RecordService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
-  }      
+  }
 
   // Just a place holder for posting external identifiers, since the frontend does never calls this function
   postExternalIdentifier(
@@ -179,7 +180,7 @@ export class RecordService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
-  }       
+  }
 
   getPreferences(): Observable<Preferences> {
     return this._http

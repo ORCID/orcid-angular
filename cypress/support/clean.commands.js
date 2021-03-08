@@ -140,7 +140,7 @@ Cypress.Commands.add('cleanPersonalIdentifiers', () => {
       body: {
         errors: [],
         externalIdentifiers: [],
-        },
+      },
       headers: {
         'X-XSRF-TOKEN': cookie.value,
       },
