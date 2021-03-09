@@ -49,7 +49,7 @@ export class RecordAffiliationService {
   }
 
   // Getting the "affiliations details" seems like a waste of network resources.
-  // This will only return a url which on the first call comes as null. 
+  // This will only return a url which on the first call comes as null.
   getAffiliationsDetails(type, putCode): Observable<AffiliationUIGroup[]> {
     return this.getAffiliationDetails(putCode, type).pipe(
       tap((data) => {

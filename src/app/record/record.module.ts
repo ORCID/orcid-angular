@@ -22,8 +22,8 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { SharedModule } from '../shared/shared.module'
 import { AffiliationStackComponent } from './components/affiliation-stack/affiliation-stack.component'
 import { AffiliationStacksGroupsComponent } from './components/affiliation-stacks-groups/affiliation-stacks-groups.component'
-import { AffiliationComponent } from './components/affiliation/affiliation.component';
-import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component';
+import { AffiliationComponent } from './components/affiliation/affiliation.component'
+import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
 import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
 
 @NgModule({
