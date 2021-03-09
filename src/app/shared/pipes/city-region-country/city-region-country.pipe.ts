@@ -2,21 +2,21 @@ import { Pipe, PipeTransform } from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
 
 @Pipe({
-  name: 'regionCityCountry',
+  name: 'cityRegionCountry',
 })
-export class RegionCityCountryPipe implements PipeTransform {
+export class CityRegionCountry implements PipeTransform {
   transform(orgDisambiguated: OrgDisambiguated, args?: any): string {
     let value = ''
     if (orgDisambiguated) {
-      value += orgDisambiguated.region ? orgDisambiguated.region : ''
-      value += orgDisambiguated.city
-        ? orgDisambiguated.region
-          ? ', ' + orgDisambiguated.city
-          : orgDisambiguated.city
+      value += orgDisambiguated.city ? orgDisambiguated.city : ''
+      value += orgDisambiguated.region
+        ? orgDisambiguated.city
+          ? ', ' + orgDisambiguated.region
+          : orgDisambiguated.region
         : ''
 
       value += orgDisambiguated.country
-        ? orgDisambiguated.city
+        ? (value)
           ? ', ' + orgDisambiguated.country
           : orgDisambiguated.country
         : ''

@@ -1,5 +1,6 @@
+import { ThrowStmt } from '@angular/compiler'
 import { Component, Input, OnInit } from '@angular/core'
-import { combineLatest, of } from 'rxjs'
+import { combineLatest, Observable, of } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
@@ -15,7 +16,7 @@ import {
   styleUrls: ['./affiliation-stack.component.scss'],
 })
 export class AffiliationStackComponent implements OnInit {
-  _affiliationStack
+  _affiliationStack: AffiliationGroup
   affiliationDetailsState: {
     [key: string]: {
       detailShowData: 'open' | 'close'
@@ -25,7 +26,7 @@ export class AffiliationStackComponent implements OnInit {
     }
   } = {}
   affiliationCardState: { [key: string]: { stackState: 'open' | 'close' } } = {}
-  orgDisambiguated: { [key: string]: OrgDisambiguated } = {}
+  orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackMode = false
 
   constructor(
@@ -83,7 +84,9 @@ export class AffiliationStackComponent implements OnInit {
 
         const combined = []
 
-        let $affiliationDisambiguationSource = of(null)
+        let $affiliationDisambiguationSource: Observable<
+          false | OrgDisambiguated
+        > = of(false)
         // Adds call for disambiguationSource if the affiliation has
         if (affiliation.disambiguationSource) {
           $affiliationDisambiguationSource = this._organizationsService.getOrgDisambiguated(
@@ -101,12 +104,13 @@ export class AffiliationStackComponent implements OnInit {
           .pipe(first())
           .subscribe(
             (response) => {
-              this.orgDisambiguated[putCode] = response[0]
+              console.log(response)
+
+              this.orgDisambiguated[putCode] = response[0] || null
               this.affiliationDetailsState[putCode].detailShowLoader =
                 'close-with-none-opacity'
               this.affiliationDetailsState[putCode].detailShowData = 'open'
               this.affiliationDetailsState[putCode].detailShowOffline = 'close'
-              console.log(this.orgDisambiguated)
             },
             (error) => {
               if (error.status === 0) {
@@ -141,6 +145,10 @@ export class AffiliationStackComponent implements OnInit {
     const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
     const regex = new RegExp(expression)
     return element.match(regex)
+  }
+
+  trackByAffiliationStack(index, item: Affiliation) {
+    return item.putCode.value
   }
 
   ngOnInit(): void {}

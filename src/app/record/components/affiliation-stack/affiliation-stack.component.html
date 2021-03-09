@@ -5,7 +5,8 @@ That might have N equivalent affiliations with with different sources  -->
   *ngFor="
     let affiliation of affiliationStack.affiliations;
     let i = index;
-    let last = last
+    let last = last;
+    trackBy: trackByAffiliationStack
   "
 >
   <app-panel
@@ -15,7 +16,17 @@ That might have N equivalent affiliations with with different sources  -->
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
   >
     <h2 header class="orc-font-body" i18n="@@record.emails">
-      {{ affiliation.affiliationName.value }}
+      {{ affiliation.affiliationName.value }}:
+
+      <ng-container *ngIf="affiliation.city.value">
+        {{ affiliation.city.value }},
+      </ng-container>
+      <ng-container *ngIf="affiliation.region.value">
+        {{ affiliation.region.value }},
+      </ng-container>
+      <ng-container *ngIf="affiliation.country.value">
+        {{ affiliation.country.value }}
+      </ng-container>
     </h2>
 
     <app-affiliation
@@ -30,7 +41,7 @@ That might have N equivalent affiliations with with different sources  -->
     </app-affiliation>
     <app-panel-source
       [isPreferred]="isPreferred(affiliation)"
-      [sourceName]="affiliation.sourceName"
+      [sourceName]="affiliation.sourceName || affiliation.source"
       [stackLength]="affiliationStack.affiliations.length"
       [stackState]="affiliationCardState.stackState"
       [(stackMode)]="stackMode"

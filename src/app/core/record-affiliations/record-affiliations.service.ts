@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment'
 import { AffiliationsSortService } from '../record-affiliations-sort/record-affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
+import { cloneDeep } from 'lodash'
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,7 @@ export class RecordAffiliationService {
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((value) => {
+            this.lastEmitedValue = cloneDeep(value)
             this.$affiliations.next(value)
           })
         )
@@ -46,15 +48,8 @@ export class RecordAffiliationService {
     return this.$affiliations.asObservable()
   }
 
-  sort(value): Observable<AffiliationUIGroup[]> {
-    const lastEmitedValue = this._affiliationsSortService.transform(
-      this.lastEmitedValue,
-      value
-    )
-    this.affiliationsSubject.next(lastEmitedValue)
-    return this.affiliationsSubject.asObservable()
-  }
-
+  // Getting the "affiliations details" seems like a waste of network resources.
+  // This will only return a url which on the first call comes as null. 
   getAffiliationsDetails(type, putCode): Observable<AffiliationUIGroup[]> {
     return this.getAffiliationDetails(putCode, type).pipe(
       tap((data) => {
@@ -72,10 +67,10 @@ export class RecordAffiliationService {
             })
           })
         }
-        this.affiliationsSubject.next(this.lastEmitedValue)
+        this.$affiliations.next(this.lastEmitedValue)
       }),
       switchMap(() => {
-        return this.affiliationsSubject.asObservable()
+        return this.$affiliations.asObservable()
       })
     )
   }

@@ -1,4 +1,9 @@
-import { MonthDayYearDate, Value, Visibility } from './common.endpoint'
+import {
+  ExternalIdentifier,
+  MonthDayYearDate,
+  Value,
+  Visibility,
+} from './common.endpoint'
 
 export enum AffiliationGroupsTypes {
   EMPLOYMENT = 'EMPLOYMENT',
@@ -75,5 +80,5 @@ export interface Affiliation {
   lastModified: MonthDayYearDate
   url: Value
   orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
-  affiliationExternalIdentifiers?: any // TODO is this always empty?
+  affiliationExternalIdentifiers?: ExternalIdentifier[]
 }

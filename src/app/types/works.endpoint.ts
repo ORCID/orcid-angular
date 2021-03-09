@@ -1,4 +1,4 @@
-import { MonthDayYearDate, Value } from './common.endpoint'
+import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
 
 export interface Works {
   nextOffset: number
@@ -16,22 +16,7 @@ export interface WorkGroup {
   works: Work[]
 }
 
-export interface ExternalIdentifier {
-  errors: any[]
-  externalIdentifierId: ExternalIdentifierId
-  externalIdentifierType: Value
-  url: Value
-  relationship: Value
-  normalized: Value
-  normalizedUrl: Value
-}
 
-export interface ExternalIdentifierId {
-  errors: any[]
-  value: string
-  required: boolean
-  getRequiredMessage?: any
-}
 
 export interface Citation {
   citation: Value
@@ -41,15 +26,6 @@ export interface Citation {
   required: boolean
 }
 
-export interface WorkExternalIdentifier {
-  errors: any[]
-  externalIdentifierId: Value
-  externalIdentifierType: Value
-  url: Value
-  relationship: Value
-  normalized: Value
-  normalizedUrl: Value
-}
 
 export interface Work {
   visibility: Value
@@ -65,7 +41,7 @@ export interface Work {
   countryCode?: Value
   countryName?: Value
   contributors?: [any] // TODO is this always empty?
-  workExternalIdentifiers: WorkExternalIdentifier[]
+  workExternalIdentifiers: ExternalIdentifier[]
   source: string
   sourceName: string
   title: Value
