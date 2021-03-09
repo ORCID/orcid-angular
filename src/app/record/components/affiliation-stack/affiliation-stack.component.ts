@@ -39,7 +39,7 @@ export class AffiliationStackComponent implements OnInit {
 
     this._affiliationStack = value
     value.affiliations.forEach((affiliation) => {
-      if (this.stackCardsState[affiliation.putCode.value] === undefined){
+      if (this.stackCardsState[affiliation.putCode.value] === undefined) {
         this.stackCardsState[affiliation.putCode.value] = {
           stackState: this.isPreferred(affiliation) ? true : false,
         }
@@ -132,8 +132,8 @@ export class AffiliationStackComponent implements OnInit {
   }
 
   changeStackDisplayedCard(affiliation: Affiliation) {
-    console.log(affiliation);
-    
+    console.log(affiliation)
+
     Object.keys(this.stackCardsState).forEach((key) => {
       this.stackCardsState[key].stackState = false
     })

@@ -24,8 +24,7 @@ export class PanelSourceComponent implements OnInit {
   isHanset: boolean
 
   @Output() makePrimary = new EventEmitter<void>()
-  @Input()  displayAsMainStackCard : boolean
-
+  @Input() displayAsMainStackCard: boolean
 
   @Output() displayAsMainStackCardChange = new EventEmitter<void>()
 
@@ -47,8 +46,8 @@ export class PanelSourceComponent implements OnInit {
   }
 
   clickDisplayAsMainStackCard() {
-    console.log('EMIT');
-    
+    console.log('EMIT')
+
     this.displayAsMainStackCardChange.next()
   }
 }

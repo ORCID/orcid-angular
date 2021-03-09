@@ -16,8 +16,8 @@ import {
   ],
 })
 export class PanelDataComponent implements OnInit {
-  @HostBinding('class.orc-font-body-small') fontSmall = true;
-  @HostBinding('class.border-bottom') borderBottomClass = false;
+  @HostBinding('class.orc-font-body-small') fontSmall = true
+  @HostBinding('class.border-bottom') borderBottomClass = false
   @Input() set borderBottom(borderBottom: boolean) {
     this.borderBottomClass = borderBottom
   }
