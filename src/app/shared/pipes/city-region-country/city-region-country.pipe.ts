@@ -16,7 +16,7 @@ export class CityRegionCountry implements PipeTransform {
         : ''
 
       value += orgDisambiguated.country
-        ? (value)
+        ? value
           ? ', ' + orgDisambiguated.country
           : orgDisambiguated.country
         : ''

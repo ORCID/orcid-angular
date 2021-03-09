@@ -131,7 +131,6 @@ export interface ExternalIdentifierId {
   getRequiredMessage?: any
 }
 
-
 export type ScopesStrings =
   | 'openid'
   | '/authenticate'

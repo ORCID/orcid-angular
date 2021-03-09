@@ -16,8 +16,6 @@ export interface WorkGroup {
   works: Work[]
 }
 
-
-
 export interface Citation {
   citation: Value
   citationType: Value
@@ -25,7 +23,6 @@ export interface Citation {
   getRequiredMessage?: any
   required: boolean
 }
-
 
 export interface Work {
   visibility: Value
