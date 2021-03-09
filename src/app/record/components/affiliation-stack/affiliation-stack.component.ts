@@ -19,13 +19,12 @@ export class AffiliationStackComponent implements OnInit {
   _affiliationStack: AffiliationGroup
   affiliationDetailsState: {
     [key: string]: {
-      detailShowData: 'open' | 'close'
-      detailShowLoader: 'open' | 'close' | 'close-with-none-opacity'
-      detailShowOffline: 'open' | 'close'
-      state: 'open' | 'close'
+      detailShowData: boolean
+      detailShowLoader: boolean
+      state: boolean
     }
   } = {}
-  affiliationCardState: { [key: string]: { stackState: 'open' | 'close' } } = {}
+  stackCardsState: { [key: string]: { stackState: boolean } } = {}
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackMode = false
 
@@ -36,16 +35,23 @@ export class AffiliationStackComponent implements OnInit {
 
   @Input()
   set affiliationStack(value: AffiliationGroup) {
+    console.log('SET AFFILIATION STACK')
+
     this._affiliationStack = value
     value.affiliations.forEach((affiliation) => {
-      this.affiliationCardState[affiliation.putCode.value] = {
-        stackState: this.isPreferred(affiliation) ? 'open' : 'close',
+      if (this.stackCardsState[affiliation.putCode.value] === undefined){
+        this.stackCardsState[affiliation.putCode.value] = {
+          stackState: this.isPreferred(affiliation) ? true : false,
+        }
       }
-      this.affiliationDetailsState[affiliation.putCode.value] = {
-        detailShowData: 'close',
-        detailShowLoader: 'close',
-        detailShowOffline: 'close',
-        state: 'close',
+      if (
+        this.affiliationDetailsState[affiliation.putCode.value] === undefined
+      ) {
+        this.affiliationDetailsState[affiliation.putCode.value] = {
+          detailShowData: false,
+          detailShowLoader: false,
+          state: false,
+        }
       }
     })
   }
@@ -64,23 +70,20 @@ export class AffiliationStackComponent implements OnInit {
   }
 
   toggleDetails(affiliation: Affiliation) {
+    console.log('TOGGLE DETAILS')
+
     const putCode = affiliation.putCode.value
 
     // Only if is not loading execute user request
-    if (
-      this.affiliationDetailsState[putCode].detailShowLoader.indexOf('close') >=
-      0
-    ) {
+    if (!this.affiliationDetailsState[putCode].detailShowLoader) {
       // Change current state
-      this.affiliationDetailsState[putCode].state =
-        this.affiliationDetailsState[putCode].state === 'close'
-          ? 'open'
-          : 'close'
+      this.affiliationDetailsState[putCode].state = !this
+        .affiliationDetailsState[putCode].state
 
       // If is opening calls the server for the affiliation details
-      if (this.affiliationDetailsState[putCode].state === 'open') {
-        this.affiliationDetailsState[putCode].detailShowLoader = 'open'
-        this.affiliationDetailsState[putCode].detailShowData = 'close'
+      if (this.affiliationDetailsState[putCode].state) {
+        this.affiliationDetailsState[putCode].detailShowLoader = true
+        this.affiliationDetailsState[putCode].detailShowData = true
 
         const combined = []
 
@@ -107,35 +110,34 @@ export class AffiliationStackComponent implements OnInit {
               console.log(response)
 
               this.orgDisambiguated[putCode] = response[0] || null
-              this.affiliationDetailsState[putCode].detailShowLoader =
-                'close-with-none-opacity'
-              this.affiliationDetailsState[putCode].detailShowData = 'open'
-              this.affiliationDetailsState[putCode].detailShowOffline = 'close'
+              this.affiliationDetailsState[putCode].detailShowData = true
+              this.affiliationDetailsState[putCode].detailShowLoader = false
             },
             (error) => {
               if (error.status === 0) {
-                this.affiliationDetailsState[putCode].detailShowOffline = 'open'
-                this.affiliationDetailsState[putCode].detailShowLoader = 'close'
-                this.affiliationDetailsState[putCode].detailShowData = 'close'
+                // this.affiliationDetailsState[putCode].detailShowLoader = false
+                // this.affiliationDetailsState[putCode].detailShowData = false
               }
             }
           )
       } else {
-        this.affiliationDetailsState[putCode].detailShowLoader = 'close'
-        this.affiliationDetailsState[putCode].detailShowData = 'close'
-        this.affiliationDetailsState[putCode].detailShowOffline = 'close'
+        this.affiliationDetailsState[putCode].detailShowLoader = false
+        this.affiliationDetailsState[putCode].detailShowData = false
       }
     }
   }
 
-  onClick(affiliation) {
-    Object.keys(this.affiliationCardState).forEach((key) => {
-      this.affiliationCardState[key].stackState = 'close'
+  makePrimaryCard(affiliation: Affiliation) {
+    console.log(this.stackCardsState)
+  }
+
+  changeStackDisplayedCard(affiliation: Affiliation) {
+    console.log(affiliation);
+    
+    Object.keys(this.stackCardsState).forEach((key) => {
+      this.stackCardsState[key].stackState = false
     })
-    this.affiliationCardState[affiliation.putCode.value].stackState =
-      this.affiliationCardState[affiliation.putCode.value].stackState === 'open'
-        ? 'close'
-        : 'open'
+    this.stackCardsState[affiliation.putCode.value].stackState = true
   }
 
   /**
@@ -151,5 +153,7 @@ export class AffiliationStackComponent implements OnInit {
     return item.putCode.value
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('INIT ', this.affiliationStack.defaultAffiliation.putCode.value)
+  }
 }

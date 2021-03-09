@@ -1,8 +1,10 @@
-
-<app-panel-data class="defaul-data-loaded" [borderBottom]="true">
+<app-panel-data
+  class="defaul-data-loaded orc-font-body-small"
+  [borderBottom]="true"
+>
   <a (click)="toggleDetails.next(affiliation)">Show more details</a>
 
-  <div class="general-data mat-body-1">
+  <div class="general-data">
     <ng-container *ngIf="affiliation.startDate.year"
       >{{ affiliation.startDate | monthDayYearDateToString }}
       <ng-container> to </ng-container>
@@ -21,7 +23,7 @@
       ({{ affiliation.departmentName.value }})
     </ng-container>
   </div>
-  <div class="type mat-body-2">
+  <div class="type">
     {{ affiliation.affiliationType.value | titlecase }}
   </div>
   <app-display-external-ids
@@ -29,13 +31,10 @@
   ></app-display-external-ids>
 </app-panel-data>
 
-<app-panel-data
-  [borderBottom]="true"
-  *ngIf="affiliationDetailsState.state === 'open'"
->
+<app-panel-data [borderBottom]="true" *ngIf="affiliationDetailsState.state">
   <div class="margin-top-1" *ngIf="orgDisambiguated">
     <app-display-attribute>
-      <h3>Organization identifiers</h3>
+      <h3 class="orc-font-body-small">Organization identifiers</h3>
       <div>
         <div>
           {{ orgDisambiguated?.sourceType }}
@@ -64,7 +63,7 @@
     </app-display-attribute>
 
     <app-display-attribute>
-      <h3>
+      <h3 class="orc-font-body-small">
         <ng-container i18n="@@workspace_affiliations.external_ids"
           >Other organization identifiers provided by</ng-container
         >
@@ -96,14 +95,14 @@
     </app-display-attribute>
 
     <app-display-attribute>
-      <h3>Added</h3>
+      <h3 class="orc-font-body-small">Added</h3>
       <div>
         {{ affiliation.createdDate | monthDayYearDateToString }}
       </div>
     </app-display-attribute>
 
     <app-display-attribute>
-      <h3>Last modified</h3>
+      <h3 class="orc-font-body-small">Last modified</h3>
       <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>
     </app-display-attribute>
   </div>

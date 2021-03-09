@@ -10,13 +10,11 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 export class AffiliationComponent implements OnInit {
   @Input() affiliation: Affiliation
   @Input() affiliationDetailsState: {
-    detailShowData: 'open' | 'close'
-    detailShowLoader: 'open' | 'close' | 'close-with-none-opacity'
-    detailShowOffline: 'open' | 'close'
-    state: 'open' | 'close'
+    detailShowData: boolean,
+    detailShowLoader: boolean,
+    state: boolean,
   }
   @Output() toggleDetails = new EventEmitter<Affiliation>()
-  @Input() affiliationCardState: { stackState: 'open' | 'close' }
   @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
 

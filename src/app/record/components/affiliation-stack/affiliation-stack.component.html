@@ -14,6 +14,7 @@ That might have N equivalent affiliations with with different sources  -->
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
     [ngClass]="{ 'stack-shadow': !last }"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
+    *ngIf="isPreferred(affiliation) || stackMode"
   >
     <h2 header class="orc-font-body" i18n="@@record.emails">
       {{ affiliation.affiliationName.value }}:
@@ -30,8 +31,8 @@ That might have N equivalent affiliations with with different sources  -->
     </h2>
 
     <app-affiliation
+      *ngIf="stackCardsState[affiliation.putCode.value].stackState"
       [affiliation]="affiliation"
-      [affiliationCardState]="affiliationCardState[affiliation.putCode.value]"
       [affiliationDetailsState]="
         affiliationDetailsState[affiliation.putCode.value]
       "
@@ -43,8 +44,10 @@ That might have N equivalent affiliations with with different sources  -->
       [isPreferred]="isPreferred(affiliation)"
       [sourceName]="affiliation.sourceName || affiliation.source"
       [stackLength]="affiliationStack.affiliations.length"
-      [stackState]="affiliationCardState.stackState"
       [(stackMode)]="stackMode"
+      (makePrimary)="makePrimaryCard($event)"
+      [displayAsMainStackCard]="stackCardsState[affiliation.putCode.value].stackState"
+      (displayAsMainStackCardChange)="changeStackDisplayedCard(affiliation)"
     >
     </app-panel-source>
   </app-panel>

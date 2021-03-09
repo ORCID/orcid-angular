@@ -11,6 +11,7 @@ import {
   selector: 'app-panel-data-line',
   templateUrl: './panel-data-line.component.html',
   styleUrls: ['./panel-data-line.component.scss'],
+  preserveWhitespaces: true
 })
 export class PanelDataLineComponent implements OnInit {
   @Input() url

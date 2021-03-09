@@ -4,28 +4,36 @@
     'margin-top-2': !stackMode || (stackMode && stackState == 'open')
   }"
 >
-  <div>
+  <a *ngIf="!displayAsMainStackCard" (click)="clickDisplayAsMainStackCard()">
+    <ng-container i18n="@@groups.common.source">Source</ng-container>:
+    {{ sourceName }}
+  </a>
+  <div *ngIf="displayAsMainStackCard">
     <ng-container i18n="@@groups.common.source">Source</ng-container>:
     {{ sourceName }}
   </div>
+
   <div class="prefered-source" *ngIf="isPreferred && stackLength > 1">
     <div><i class="material-icons"> grade </i></div>
-    <div *ngIf="!isHanset">
+    <div>
       <ng-container i18n="@@groups.common.preferred_source"
         >Preferred source</ng-container
       >
-      <ng-container *ngIf="!stackMode && stackLength > 1">
-        (1 <ng-container i18n="@@search_results.of">of</ng-container>
+      <a *ngIf="!stackMode && stackLength > 1" (click)="toggleStackMode()">
+        (<ng-container i18n="@@search_results.of">of</ng-container>
         {{ stackLength }})&#x200E;
-      </ng-container>
+      </a>
     </div>
-    <a (click)="toggleStackMode()" *ngIf="stackLength > 1">
-      <ng-container i18n="@@shared.showMore" *ngIf="!stackMode">
-        Show more
-      </ng-container>
-      <ng-container *ngIf="stackMode" i18n="@@shared.showLess"
-        >Show less</ng-container
+    <a (click)="toggleStackMode()" *ngIf="stackLength > 1 && stackMode">
+      <ng-container i18n="@@shared.showLess"
+        >(Close other sources)</ng-container
       >
+    </a>
+  </div>
+
+  <div class="prefered-source" *ngIf="!isPreferred && stackLength > 1">
+    <a (click)="clickMakePrimary()" *ngIf="stackLength > 1">
+      Make preferred source
     </a>
   </div>
 </app-panel-data>
