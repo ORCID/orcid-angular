@@ -12,7 +12,7 @@ That might have N equivalent affiliations with with different sources  -->
   <app-panel
     [elements]="affiliation"
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
-    [ngClass]="{ 'stack-mode': !last && stackMode}"
+    [ngClass]="{ 'stack-mode': !last && stackMode }"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     *ngIf="isPreferred(affiliation) || stackMode"
     type="main"
