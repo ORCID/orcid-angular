@@ -35,7 +35,11 @@
     </div>
 
     <div class="prefered-source" *ngIf="!isPreferred && stackLength > 1">
-      <a (click)="clickMakePrimary()" *ngIf="stackLength > 1" i18n="@@record.closeOtherSources">
+      <a
+        (click)="clickMakePrimary()"
+        *ngIf="stackLength > 1"
+        i18n="@@record.closeOtherSources"
+      >
         Make preferred source
       </a>
     </div>

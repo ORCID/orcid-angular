@@ -98,7 +98,6 @@ export class AffiliationStackComponent implements OnInit {
   }
 
   toggleDetails(affiliation: Affiliation) {
-
     const putCode = affiliation.putCode.value
 
     // Only if is not loading execute user request
