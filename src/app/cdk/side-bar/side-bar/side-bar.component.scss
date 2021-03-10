@@ -2,6 +2,9 @@
   width: 100%;
   padding: 14px;
   box-sizing: border-box;
+  > div {
+    width: 100%;
+  }
 }
 
 app-panel {

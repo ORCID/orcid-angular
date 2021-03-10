@@ -5,6 +5,7 @@ import { PlatformInfoService } from '../../platform-info'
   selector: 'app-panel-source',
   templateUrl: './panel-source.component.html',
   styleUrls: ['./panel-source.component.scss'],
+  preserveWhitespaces: true,
 })
 export class PanelSourceComponent implements OnInit {
   @Input() isPreferred = true

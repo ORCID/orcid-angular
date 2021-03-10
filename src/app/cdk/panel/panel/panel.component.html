@@ -2,7 +2,7 @@
   class="header box orc-font-body"
   [ngClass]="{
     'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
-    'top-bar': type === 'top-bar',
+    'top-bar-or-main': type === 'top-bar' || type === 'main' ,
     'side-bar': type === 'side-bar'
   }"
 >

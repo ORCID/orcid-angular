@@ -15,7 +15,7 @@
   }
 
   :host,
-  .top-bar {
+  .top-bar-or-main {
     border-color: mat-color($background, ui-background) !important;
     background-color: mat-color($background, ui-background-lightest) !important;
   }

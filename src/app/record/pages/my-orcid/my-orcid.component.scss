@@ -6,3 +6,9 @@ h2 {
   margin-top: 32px;
   margin-bottom: 20px;
 }
+
+.columns-12 :host {
+  app-main {
+    padding-inline-start: 12px !important;
+  }
+}

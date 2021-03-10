@@ -12,9 +12,10 @@ That might have N equivalent affiliations with with different sources  -->
   <app-panel
     [elements]="affiliation"
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
-    [ngClass]="{ 'stack-shadow': !last }"
+    [ngClass]="{ 'stack-mode': !last && stackMode}"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     *ngIf="isPreferred(affiliation) || stackMode"
+    type="main"
   >
     <h2 header class="orc-font-body" i18n="@@record.emails">
       {{ affiliation.affiliationName.value }}:

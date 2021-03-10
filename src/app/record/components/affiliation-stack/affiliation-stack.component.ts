@@ -1,5 +1,5 @@
 import { ThrowStmt } from '@angular/compiler'
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { combineLatest, Observable, of } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
@@ -13,9 +13,24 @@ import {
 @Component({
   selector: 'app-affiliation-stack',
   templateUrl: './affiliation-stack.component.html',
-  styleUrls: ['./affiliation-stack.component.scss'],
+  styleUrls: [
+    './affiliation-stack.component.scss',
+    './affiliation-stack.component.scss-theme.scss',
+  ],
 })
 export class AffiliationStackComponent implements OnInit {
+  @HostBinding('class.stack-mode') stackModeClass = false
+
+  _stackMode = false
+  set stackMode(mode: boolean) {
+    this._stackMode = mode
+    this.stackModeClass = this._stackMode
+    this.setAffiliationsInitialStates(this.affiliationStack, true)
+  }
+  get stackMode(): boolean {
+    return this._stackMode
+  }
+
   _affiliationStack: AffiliationGroup
   affiliationDetailsState: {
     [key: string]: {
@@ -26,7 +41,6 @@ export class AffiliationStackComponent implements OnInit {
   } = {}
   stackCardsState: { [key: string]: { stackState: boolean } } = {}
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
-  stackMode = false
 
   constructor(
     private _affiliationService: RecordAffiliationService,
@@ -35,25 +49,39 @@ export class AffiliationStackComponent implements OnInit {
 
   @Input()
   set affiliationStack(value: AffiliationGroup) {
-    console.log('SET AFFILIATION STACK')
-
     this._affiliationStack = value
+    this.setAffiliationsInitialStates(value)
+  }
+
+  private setAffiliationsInitialStates(value: AffiliationGroup, force = false) {
     value.affiliations.forEach((affiliation) => {
-      if (this.stackCardsState[affiliation.putCode.value] === undefined) {
-        this.stackCardsState[affiliation.putCode.value] = {
-          stackState: this.isPreferred(affiliation) ? true : false,
-        }
-      }
-      if (
-        this.affiliationDetailsState[affiliation.putCode.value] === undefined
-      ) {
-        this.affiliationDetailsState[affiliation.putCode.value] = {
-          detailShowData: false,
-          detailShowLoader: false,
-          state: false,
-        }
-      }
+      this.setDefaultPanelState(affiliation, force)
+      this.setDefaultPanelDetailsState(affiliation, force)
     })
+  }
+
+  private setDefaultPanelDetailsState(affiliation: Affiliation, force = false) {
+    if (
+      this.affiliationDetailsState[affiliation.putCode.value] === undefined ||
+      force
+    ) {
+      this.affiliationDetailsState[affiliation.putCode.value] = {
+        detailShowData: false,
+        detailShowLoader: false,
+        state: false,
+      }
+    }
+  }
+
+  private setDefaultPanelState(affiliation: Affiliation, force = false) {
+    if (
+      this.stackCardsState[affiliation.putCode.value] === undefined ||
+      force
+    ) {
+      this.stackCardsState[affiliation.putCode.value] = {
+        stackState: this.isPreferred(affiliation) ? true : false,
+      }
+    }
   }
 
   get affiliationStack(): AffiliationGroup {

@@ -23,7 +23,7 @@ import {
 export class PanelComponent implements OnInit {
   @Input() editModalComponent: ComponentType<any>
   @Input() elements: Assertion[] | Value | Address | Affiliation
-  @Input() type: 'top-bar' | 'side-bar' | 'affiliations'
+  @Input() type: 'top-bar' | 'side-bar' | 'affiliations' | 'main'
   @Input() userRecord: UserRecord
   @Input() visibility: VisibilityStrings
   @Input() hasNestedPanels: false

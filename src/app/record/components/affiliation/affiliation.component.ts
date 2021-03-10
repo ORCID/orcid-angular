@@ -6,6 +6,7 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
   selector: 'app-affiliation',
   templateUrl: './affiliation.component.html',
   styleUrls: ['./affiliation.component.scss'],
+  preserveWhitespaces: true,
 })
 export class AffiliationComponent implements OnInit {
   @Input() affiliation: Affiliation
