@@ -10,9 +10,9 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 export class AffiliationComponent implements OnInit {
   @Input() affiliation: Affiliation
   @Input() affiliationDetailsState: {
-    detailShowData: boolean,
-    detailShowLoader: boolean,
-    state: boolean,
+    detailShowData: boolean
+    detailShowLoader: boolean
+    state: boolean
   }
   @Output() toggleDetails = new EventEmitter<Affiliation>()
   @Input() stackMode

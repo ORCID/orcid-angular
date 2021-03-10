@@ -46,7 +46,9 @@ That might have N equivalent affiliations with with different sources  -->
       [stackLength]="affiliationStack.affiliations.length"
       [(stackMode)]="stackMode"
       (makePrimary)="makePrimaryCard($event)"
-      [displayAsMainStackCard]="stackCardsState[affiliation.putCode.value].stackState"
+      [displayAsMainStackCard]="
+        stackCardsState[affiliation.putCode.value].stackState
+      "
       (displayAsMainStackCardChange)="changeStackDisplayedCard(affiliation)"
     >
     </app-panel-source>
