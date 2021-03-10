@@ -1,3 +1,6 @@
+<!-- AFFILIATION BODY -->
+
+<!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data
   class="defaul-data-loaded orc-font-body-small"
   [borderBottom]="true"
@@ -33,25 +36,29 @@
   <div align-end>
     <a
       (click)="toggleDetails.next(affiliation)"
-      *ngIf="!affiliationDetailsState.state"
+      *ngIf="!panelDetailsState.state"
       i18n="@@share.showMoreDetail"
       >Show more detail</a
     >
     <a
       (click)="toggleDetails.next(affiliation)"
-      *ngIf="affiliationDetailsState.state"
+      *ngIf="panelDetailsState.state"
       i18n="@@share.showLessDetail"
       >Show less detail</a
     >
   </div>
 </app-panel-data>
 
-<app-panel-data [borderBottom]="true" *ngIf="affiliationDetailsState.state">
+<!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
+
+<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
+  <!-- URL -->
   <app-display-attribute *ngIf="affiliation.url.value">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
     <div>{{ affiliation.url.value }}</div>
   </app-display-attribute>
 
+  <!-- ORGANIZATION DISAMBIGUATED IDS-->
   <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@record.organizationIdentifiers">
@@ -120,6 +127,7 @@
     </app-display-attribute>
   </ng-container>
 
+  <!-- ADDED DATE-->
   <app-display-attribute>
     <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
     <div>
@@ -127,8 +135,11 @@
     </div>
   </app-display-attribute>
 
+  <!-- LAST MODIFIED  DATE-->
   <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@record.lastModified">Last modified</h3>
+    <h3 class="orc-font-body-small" i18n="@@record.lastModified">
+      Last modified
+    </h3>
     <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>
   </app-display-attribute>
 </app-panel-data>

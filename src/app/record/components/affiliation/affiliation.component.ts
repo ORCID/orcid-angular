@@ -10,7 +10,7 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 })
 export class AffiliationComponent implements OnInit {
   @Input() affiliation: Affiliation
-  @Input() affiliationDetailsState: {
+  @Input() panelDetailsState: {
     detailShowData: boolean
     detailShowLoader: boolean
     state: boolean

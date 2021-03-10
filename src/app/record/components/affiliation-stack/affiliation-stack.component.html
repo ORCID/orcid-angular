@@ -1,6 +1,3 @@
-<!-- A single affiliation
-That might have N equivalent affiliations with with different sources  -->
-
 <ng-container
   *ngFor="
     let affiliation of affiliationStack.affiliations;
@@ -9,12 +6,13 @@ That might have N equivalent affiliations with with different sources  -->
     trackBy: trackByAffiliationStack
   "
 >
+  <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
   <app-panel
     [elements]="affiliation"
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
-    [ngClass]="{ 'stack-mode': !last && stackMode }"
+    [ngClass]="{ last: last }"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
-    *ngIf="isPreferred(affiliation) || stackMode"
+    *ngIf="isPreferred(affiliation) || displayTheStack"
     type="main"
   >
     <h2 header class="orc-font-body" i18n="@@record.emails">
@@ -30,27 +28,28 @@ That might have N equivalent affiliations with with different sources  -->
         {{ affiliation.country.value }}
       </ng-container>
     </h2>
-
+    <!-- AFFILIATION BODY -->
     <app-affiliation
-      *ngIf="stackCardsState[affiliation.putCode.value].stackState"
+      *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
       [affiliation]="affiliation"
-      [affiliationDetailsState]="
-        affiliationDetailsState[affiliation.putCode.value]
+      [panelDetailsState]="
+        panelDetailsState[affiliation.putCode.value]
       "
       (toggleDetails)="toggleDetails($event)"
       [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
     >
     </app-affiliation>
+    <!-- AFFILIATION SOURCE -->
     <app-panel-source
       [isPreferred]="isPreferred(affiliation)"
       [sourceName]="affiliation.sourceName || affiliation.source"
       [stackLength]="affiliationStack.affiliations.length"
-      [(stackMode)]="stackMode"
+      [(displayTheStack)]="displayTheStack"
       (makePrimary)="makePrimaryCard($event)"
-      [displayAsMainStackCard]="
-        stackCardsState[affiliation.putCode.value].stackState
+      [topPanelOfTheStackMode]="
+        stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
       "
-      (displayAsMainStackCardChange)="changeStackDisplayedCard(affiliation)"
+      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
     >
     </app-panel-source>
   </app-panel>

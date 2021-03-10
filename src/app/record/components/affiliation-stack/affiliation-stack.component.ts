@@ -8,6 +8,7 @@ import { OrgDisambiguated } from 'src/app/types'
 import {
   Affiliation,
   AffiliationGroup,
+  AffiliationUIGroup,
 } from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
@@ -19,73 +20,76 @@ import {
   ],
 })
 export class AffiliationStackComponent implements OnInit {
-  @HostBinding('class.stack-mode') stackModeClass = false
+  @HostBinding('class.display-the-stack') displayTheStackClass = false
+  _affiliationStack: AffiliationGroup
+  @Input()
+  set affiliationStack(value: AffiliationGroup) {
+    this._affiliationStack = value
+    this.setAffiliationsInitialStates(value)
+  }
+  get affiliationStack(): AffiliationGroup {
+    return this._affiliationStack
+  }
 
-  _stackMode = false
-  set stackMode(mode: boolean) {
-    this._stackMode = mode
-    this.stackModeClass = this._stackMode
+  _displayTheStack = false
+  set displayTheStack(mode: boolean) {
+    this._displayTheStack = mode
+    this.displayTheStackClass = this._displayTheStack
     this.setAffiliationsInitialStates(this.affiliationStack, true)
   }
-  get stackMode(): boolean {
-    return this._stackMode
+  get displayTheStack(): boolean {
+    return this._displayTheStack
   }
 
-  _affiliationStack: AffiliationGroup
-  affiliationDetailsState: {
+  orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
+  stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
+  panelDetailsState: {
     [key: string]: {
-      detailShowData: boolean
-      detailShowLoader: boolean
       state: boolean
     }
   } = {}
-  stackCardsState: { [key: string]: { stackState: boolean } } = {}
-  orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
 
   constructor(
     private _affiliationService: RecordAffiliationService,
     private _organizationsService: OrganizationsService
   ) {}
 
-  @Input()
-  set affiliationStack(value: AffiliationGroup) {
-    this._affiliationStack = value
-    this.setAffiliationsInitialStates(value)
-  }
-
+  /**
+   * Set the panelDetails and top of the stack card to default mode
+   */
   private setAffiliationsInitialStates(value: AffiliationGroup, force = false) {
     value.affiliations.forEach((affiliation) => {
-      this.setDefaultPanelState(affiliation, force)
+      this.setDefaultPanelsDisplay(affiliation, force)
       this.setDefaultPanelDetailsState(affiliation, force)
     })
   }
 
+  /**
+   * On start, hide the details for all the panels
+   */
   private setDefaultPanelDetailsState(affiliation: Affiliation, force = false) {
     if (
-      this.affiliationDetailsState[affiliation.putCode.value] === undefined ||
+      this.panelDetailsState[affiliation.putCode.value] === undefined ||
       force
     ) {
-      this.affiliationDetailsState[affiliation.putCode.value] = {
-        detailShowData: false,
-        detailShowLoader: false,
+      this.panelDetailsState[affiliation.putCode.value] = {
         state: false,
       }
     }
   }
 
-  private setDefaultPanelState(affiliation: Affiliation, force = false) {
+  /**
+   * On start, set the preferred source as the top panel of the stack
+   */
+  private setDefaultPanelsDisplay(affiliation: Affiliation, force = false) {
     if (
-      this.stackCardsState[affiliation.putCode.value] === undefined ||
+      this.stackPanelsDisplay[affiliation.putCode.value] === undefined ||
       force
     ) {
-      this.stackCardsState[affiliation.putCode.value] = {
-        stackState: this.isPreferred(affiliation) ? true : false,
+      this.stackPanelsDisplay[affiliation.putCode.value] = {
+        topPanelOfTheStack: this.isPreferred(affiliation) ? true : false,
       }
     }
-  }
-
-  get affiliationStack(): AffiliationGroup {
-    return this._affiliationStack
   }
 
   isPreferred(affiliation: Affiliation) {
@@ -97,90 +101,69 @@ export class AffiliationStackComponent implements OnInit {
     return response
   }
 
+  /**
+   * Show and hide details of the panel
+   */
   toggleDetails(affiliation: Affiliation) {
-
     const putCode = affiliation.putCode.value
+    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
+      .state
 
-    // Only if is not loading execute user request
-    if (!this.affiliationDetailsState[putCode].detailShowLoader) {
-      // Change current state
-      this.affiliationDetailsState[putCode].state = !this
-        .affiliationDetailsState[putCode].state
-
-      // If is opening calls the server for the affiliation details
-      if (this.affiliationDetailsState[putCode].state) {
-        this.affiliationDetailsState[putCode].detailShowLoader = true
-        this.affiliationDetailsState[putCode].detailShowData = true
-
-        const combined = []
-
-        let $affiliationDisambiguationSource: Observable<
-          false | OrgDisambiguated
-        > = of(false)
-        // Adds call for disambiguationSource if the affiliation has
-        if (affiliation.disambiguationSource) {
-          $affiliationDisambiguationSource = this._organizationsService.getOrgDisambiguated(
-            affiliation.disambiguationSource.value,
-            affiliation.disambiguatedAffiliationSourceId.value
-          )
-        }
-        const $affiliationDetails = this._affiliationService.getAffiliationsDetails(
-          affiliation.affiliationType.value,
-          putCode
-        )
-
-        // Call http requests at the same time
-        combineLatest([$affiliationDisambiguationSource, $affiliationDetails])
-          .pipe(first())
-          .subscribe(
-            (response) => {
-              console.log(response)
-
-              this.orgDisambiguated[putCode] = response[0] || null
-              this.affiliationDetailsState[putCode].detailShowData = true
-              this.affiliationDetailsState[putCode].detailShowLoader = false
-            },
-            (error) => {
-              if (error.status === 0) {
-                // this.affiliationDetailsState[putCode].detailShowLoader = false
-                // this.affiliationDetailsState[putCode].detailShowData = false
-              }
-            }
-          )
-      } else {
-        this.affiliationDetailsState[putCode].detailShowLoader = false
-        this.affiliationDetailsState[putCode].detailShowData = false
-      }
+    if (this.panelDetailsState[putCode].state) {
+      this.getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
+        affiliation
+      ).subscribe((response) => {
+        this.orgDisambiguated[putCode] = response[0] || null
+      })
+    } else {
     }
   }
 
-  makePrimaryCard(affiliation: Affiliation) {
-    console.log(this.stackCardsState)
-  }
-
-  changeStackDisplayedCard(affiliation: Affiliation) {
-    console.log(affiliation)
-
-    Object.keys(this.stackCardsState).forEach((key) => {
-      this.stackCardsState[key].stackState = false
-    })
-    this.stackCardsState[affiliation.putCode.value].stackState = true
-  }
-
   /**
-   * RegEx funtion to check if the elements contains a URL
+   * Get require extra backend data to display on the panel details
    */
-  isUrl(element) {
-    const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
-    const regex = new RegExp(expression)
-    return element.match(regex)
+  private getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
+    affiliation: Affiliation
+  ): Observable<[false | OrgDisambiguated, AffiliationUIGroup[]]> {
+    const putCode = affiliation.putCode.value
+
+    let $affiliationDisambiguationSource: Observable<
+      false | OrgDisambiguated
+    > = of(false)
+    // Adds call for disambiguationSource if the affiliation has
+    if (affiliation.disambiguationSource) {
+      $affiliationDisambiguationSource = this._organizationsService.getOrgDisambiguated(
+        affiliation.disambiguationSource.value,
+        affiliation.disambiguatedAffiliationSourceId.value
+      )
+    }
+    const $affiliationDetails = this._affiliationService.getAffiliationsDetails(
+      affiliation.affiliationType.value,
+      putCode
+    )
+
+    // Call http requests at the same time
+    return combineLatest([
+      $affiliationDisambiguationSource,
+      $affiliationDetails,
+    ]).pipe(first())
+  }
+
+  makePrimaryCard(affiliation: Affiliation) {
+    // TODO
+    console.log(this.stackPanelsDisplay)
+  }
+
+  changeTopPanelOfTheStack(affiliation: Affiliation) {
+    Object.keys(this.stackPanelsDisplay).forEach((key) => {
+      this.stackPanelsDisplay[key].topPanelOfTheStack = false
+    })
+    this.stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack = true
   }
 
   trackByAffiliationStack(index, item: Affiliation) {
     return item.putCode.value
   }
 
-  ngOnInit(): void {
-    console.log('INIT ', this.affiliationStack.defaultAffiliation.putCode.value)
-  }
+  ngOnInit(): void {}
 }
