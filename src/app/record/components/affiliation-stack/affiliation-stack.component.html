@@ -32,9 +32,7 @@
     <app-affiliation
       *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
       [affiliation]="affiliation"
-      [panelDetailsState]="
-        panelDetailsState[affiliation.putCode.value]
-      "
+      [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
       (toggleDetails)="toggleDetails($event)"
       [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
     >
