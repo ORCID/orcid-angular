@@ -2,6 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChildren,
@@ -24,7 +25,7 @@ import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier
   templateUrl: './modal-person-identifiers.component.html',
   styleUrls: ['./modal-person-identifiers.component.scss'],
 })
-export class ModalPersonIdentifiersComponent implements OnInit {
+export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   constructor(

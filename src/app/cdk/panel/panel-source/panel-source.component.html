@@ -5,7 +5,6 @@
   }"
 >
   <div class="source-items">
-    {{ topPanelOfTheStackMode || json }}
     <div>
       <ng-container *ngIf="!topPanelOfTheStackMode">
         <ng-container i18n="@@record.source">Source</ng-container
@@ -23,11 +22,17 @@
         <ng-container i18n="@@groups.common.preferred_source"
           >Preferred source</ng-container
         >
-        <a *ngIf="!displayTheStack && stackLength > 1" (click)="toggleStackMode()">
+        <a
+          *ngIf="!displayTheStack && stackLength > 1"
+          (click)="toggleStackMode()"
+        >
           (<ng-container i18n="@@shared.of">of</ng-container>
           {{ stackLength }})&#x200E;
         </a>
-        <a (click)="toggleStackMode()" *ngIf="stackLength > 1 && displayTheStack">
+        <a
+          (click)="toggleStackMode()"
+          *ngIf="stackLength > 1 && displayTheStack"
+        >
           <ng-container i18n="@@shared.closeOtherSources"
             >(Close other sources)</ng-container
           >
