@@ -30,15 +30,17 @@
     ></app-display-external-ids>
   </div>
 
-  <div [align-end]>
+  <div align-end>
     <a
       (click)="toggleDetails.next(affiliation)"
       *ngIf="!affiliationDetailsState.state"
+      i18n="@@share.showMoreDetail"
       >Show more detail</a
     >
     <a
       (click)="toggleDetails.next(affiliation)"
       *ngIf="affiliationDetailsState.state"
+      i18n="@@share.showLessDetail"
       >Show less detail</a
     >
   </div>
@@ -47,7 +49,9 @@
 <app-panel-data [borderBottom]="true" *ngIf="affiliationDetailsState.state">
   <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
     <app-display-attribute>
-      <h3 class="orc-font-body-small">Organization identifiers</h3>
+      <h3 class="orc-font-body-small" i18n="@@record.organizationIdentifiers">
+        Organization identifiers
+      </h3>
       <div>
         <div>
           {{ orgDisambiguated?.sourceType
@@ -77,7 +81,9 @@
 
     <app-display-attribute>
       <h3 class="orc-font-body-small">
-        <ng-container i18n="@@workspace_affiliations.external_ids"
+        <ng-container
+          i18n="@@workspace_affiliations.external_ids"
+          i18n="@@record.OtherOrganization"
           >Other organization identifiers provided by</ng-container
         >
         {{ orgDisambiguated.sourceType | titlecase }}
@@ -110,14 +116,14 @@
   </ng-container>
 
   <app-display-attribute>
-    <h3 class="orc-font-body-small">Added</h3>
+    <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
     <div>
       {{ affiliation.createdDate | monthDayYearDateToString }}
     </div>
   </app-display-attribute>
 
   <app-display-attribute>
-    <h3 class="orc-font-body-small">Last modified</h3>
+    <h3 class="orc-font-body-small" i18n="@@record.lastModified">Last modified</h3>
     <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>
   </app-display-attribute>
 </app-panel-data>

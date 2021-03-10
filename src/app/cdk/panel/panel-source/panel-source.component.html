@@ -1,18 +1,18 @@
 <app-panel-data
   class="card-footer"
   [ngClass]="{
-    'margin-top-2': !stackMode || (stackMode && stackState == 'open')
+    'margin-top-2': !stackMode
   }"
 >
   <div class="source-items">
     <div>
       <ng-container *ngIf="!displayAsMainStackCard">
-        <ng-container i18n="@@groups.common.source">Source</ng-container
+        <ng-container i18n="@@record.source">Source</ng-container
         ><ng-container>: </ng-container
         ><a (click)="clickDisplayAsMainStackCard()">{{ sourceName }}</a>
       </ng-container>
       <div *ngIf="displayAsMainStackCard">
-        <ng-container i18n="@@groups.common.source">Source</ng-container>:
+        <ng-container i18n="@@record.source">Source</ng-container>:
         {{ sourceName }}
       </div>
     </div>
@@ -23,11 +23,11 @@
           >Preferred source</ng-container
         >
         <a *ngIf="!stackMode && stackLength > 1" (click)="toggleStackMode()">
-          (<ng-container i18n="@@search_results.of">of</ng-container>
+          (<ng-container i18n="@@shared.of">of</ng-container>
           {{ stackLength }})&#x200E;
         </a>
         <a (click)="toggleStackMode()" *ngIf="stackLength > 1 && stackMode">
-          <ng-container i18n="@@shared.showLess"
+          <ng-container i18n="@@shared.closeOtherSources"
             >(Close other sources)</ng-container
           >
         </a>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="prefered-source" *ngIf="!isPreferred && stackLength > 1">
-      <a (click)="clickMakePrimary()" *ngIf="stackLength > 1">
+      <a (click)="clickMakePrimary()" *ngIf="stackLength > 1" i18n="@@record.closeOtherSources">
         Make preferred source
       </a>
     </div>
