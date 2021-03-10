@@ -98,7 +98,6 @@ export class AffiliationStackComponent implements OnInit {
   }
 
   toggleDetails(affiliation: Affiliation) {
-    console.log('TOGGLE DETAILS')
 
     const putCode = affiliation.putCode.value
 
