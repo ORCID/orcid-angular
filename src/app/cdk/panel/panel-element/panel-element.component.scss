@@ -1,6 +1,6 @@
 :host {
-  padding: 0 16px 0 16px;
   display: block;
+  width: 100%;
 }
 
 .row-with-privacy {
@@ -8,6 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 8px;
+  width: 100%;
 }
 
 app-panel-privacy {

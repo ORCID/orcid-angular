@@ -2,37 +2,50 @@
   class="defaul-data-loaded orc-font-body-small"
   [borderBottom]="true"
 >
-  <a (click)="toggleDetails.next(affiliation)">Show more details</a>
+  <div>
+    <div class="general-data">
+      <ng-container *ngIf="affiliation.startDate.year"
+        >{{ affiliation.startDate | monthDayYearDateToString }}
+        <ng-container> to </ng-container>
+        <ng-container *ngIf="affiliation.endDate">{{
+          affiliation.endDate | monthDayYearDateToString
+        }}</ng-container>
+        <ng-container *ngIf="!affiliation.endDate.year">present</ng-container>
+      </ng-container>
+      <ng-container
+        *ngIf="affiliation.startDate.year && affiliation.roleTitle.value"
+      >
+        |
+      </ng-container>
+      {{ affiliation.roleTitle.value }}
+      <ng-container *ngIf="affiliation.departmentName.value">
+        ({{ affiliation.departmentName.value }})
+      </ng-container>
+    </div>
+    <div class="type">
+      {{ affiliation.affiliationType.value | titlecase }}
+    </div>
+    <app-display-external-ids
+      [externalIdentifiers]="affiliation.affiliationExternalIdentifiers"
+    ></app-display-external-ids>
+  </div>
 
-  <div class="general-data">
-    <ng-container *ngIf="affiliation.startDate.year"
-      >{{ affiliation.startDate | monthDayYearDateToString }}
-      <ng-container> to </ng-container>
-      <ng-container *ngIf="affiliation.endDate">{{
-        affiliation.endDate | monthDayYearDateToString
-      }}</ng-container>
-      <ng-container *ngIf="!affiliation.endDate.year">present</ng-container>
-    </ng-container>
-    <ng-container
-      *ngIf="affiliation.startDate.year && affiliation.roleTitle.value"
+  <div [align-end]>
+    <a
+      (click)="toggleDetails.next(affiliation)"
+      *ngIf="!affiliationDetailsState.state"
+      >Show more detail</a
     >
-      |
-    </ng-container>
-    {{ affiliation.roleTitle.value }}
-    <ng-container *ngIf="affiliation.departmentName.value">
-      ({{ affiliation.departmentName.value }})
-    </ng-container>
+    <a
+      (click)="toggleDetails.next(affiliation)"
+      *ngIf="affiliationDetailsState.state"
+      >Show less detail</a
+    >
   </div>
-  <div class="type">
-    {{ affiliation.affiliationType.value | titlecase }}
-  </div>
-  <app-display-external-ids
-    [externalIdentifiers]="affiliation.affiliationExternalIdentifiers"
-  ></app-display-external-ids>
 </app-panel-data>
 
 <app-panel-data [borderBottom]="true" *ngIf="affiliationDetailsState.state">
-  <div class="margin-top-1" *ngIf="orgDisambiguated">
+  <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
     <app-display-attribute>
       <h3 class="orc-font-body-small">Organization identifiers</h3>
       <div>
@@ -93,17 +106,17 @@
         </ng-container>
       </div>
     </app-display-attribute>
+  </ng-container>
 
-    <app-display-attribute>
-      <h3 class="orc-font-body-small">Added</h3>
-      <div>
-        {{ affiliation.createdDate | monthDayYearDateToString }}
-      </div>
-    </app-display-attribute>
+  <app-display-attribute>
+    <h3 class="orc-font-body-small">Added</h3>
+    <div>
+      {{ affiliation.createdDate | monthDayYearDateToString }}
+    </div>
+  </app-display-attribute>
 
-    <app-display-attribute>
-      <h3 class="orc-font-body-small">Last modified</h3>
-      <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>
-    </app-display-attribute>
-  </div>
+  <app-display-attribute>
+    <h3 class="orc-font-body-small">Last modified</h3>
+    <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>
+  </app-display-attribute>
 </app-panel-data>

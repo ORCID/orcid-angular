@@ -9,3 +9,15 @@
 h3 {
   margin: 0;
 }
+
+.panel-data-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .align-end-content {
+    flex-shrink: 0;
+  }
+  .data-content {
+    width: 100%;
+  }
+}

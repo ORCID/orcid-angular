@@ -29,10 +29,10 @@ app-root {
   flex-direction: column;
 }
 .router-container {
-  padding-bottom: 200px; //remove footer height
+  padding-bottom: 240px; //remove footer height
   .columns-8 &,
   .columns-4 & {
-    padding-bottom: 368px;
+    padding-bottom: 410px;
   }
 }
 
