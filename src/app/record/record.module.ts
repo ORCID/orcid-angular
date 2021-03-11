@@ -5,7 +5,7 @@ import { RecordRoutingModule } from './record-routing.module'
 import { MyOrcidComponent } from './pages/my-orcid/my-orcid.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
 import { MainComponent } from './components/main/main.component'
-import { PannelModule } from '../cdk/pannel/pannel.module'
+import { PanelModule } from '../cdk/panel/panel.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
@@ -19,6 +19,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { PrivacySelectorModule } from '../cdk/privacy-selector/privacy-selector.module'
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
+import { SharedModule } from '../shared/shared.module'
+import { AffiliationStackComponent } from './components/affiliation-stack/affiliation-stack.component'
+import { AffiliationStacksGroupsComponent } from './components/affiliation-stacks-groups/affiliation-stacks-groups.component'
+import { AffiliationComponent } from './components/affiliation/affiliation.component'
+import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
+import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +33,11 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     MainComponent,
     ModalNameComponent,
     ModalBiographyComponent,
+    AffiliationStacksGroupsComponent,
+    AffiliationStackComponent,
+    AffiliationComponent,
+    DisplayExternalIdsComponent,
+    DisplayAttributeComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +45,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     ReactiveFormsModule,
     RecordRoutingModule,
     SideBarModule,
-    PannelModule,
+    PanelModule,
     MatIconModule,
     MatButtonModule,
     ModalModule,
@@ -44,6 +55,9 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     PrivacySelectorModule,
     DragDropModule,
     A11yLinkModule,
+    SharedModule,
+    MatIconModule,
+    MatButtonModule,
   ],
 })
 export class RecordModule {}

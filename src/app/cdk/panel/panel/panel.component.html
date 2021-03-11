@@ -1,0 +1,61 @@
+<div
+  class="header box orc-font-body"
+  [ngClass]="{
+    'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
+    'top-bar-or-main': type === 'top-bar' || type === 'main',
+    'side-bar': type === 'side-bar'
+  }"
+>
+  <ng-content select="[header]"></ng-content>
+  <div class="buttons-container">
+    <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
+    <app-panel-privacy
+      *ngIf="visibility"
+      [visibility]="visibility"
+    ></app-panel-privacy>
+
+    <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
+    <ng-content select="[custom-controls]"></ng-content>
+
+    <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
+
+    <button
+      mat-icon-button
+      *ngIf="editable"
+      [matTooltip]="tooltipLabelEdit"
+      (click)="openModal()"
+      id="edit-button"
+    >
+      <mat-icon class="material-icons-outlined">edit</mat-icon>
+    </button>
+
+    <!-- [EXPAND BUTTONS] FOR ALL SIDEBAR PANELS -->
+
+    <button
+      mat-icon-button
+      *ngIf="!openState && !editable"
+      [matTooltip]="tooltipLabelShowDetails"
+    >
+      <mat-icon>expand_more</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      *ngIf="openState && !editable"
+      [matTooltip]="tooltipLabelHideDetails"
+    >
+      <mat-icon>expand_less</mat-icon>
+    </button>
+  </div>
+</div>
+<div
+  class="body"
+  *ngIf="isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)"
+>
+  <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
+  <ng-content></ng-content>
+
+  <!-- [NESTED PANELS] FOR PEER REVIEWS AND RESEARCH RESOURCES -->
+  <div class="nested-panels" *ngIf="hasNestedPanels">
+    <ng-content select="app-panel"></ng-content>
+  </div>
+</div>

@@ -113,6 +113,24 @@ export interface Visibility {
   getRequiredMessage?: any
   visibility: VisibilityStrings
 }
+
+export interface ExternalIdentifier {
+  errors: any[]
+  externalIdentifierId: ExternalIdentifierId
+  externalIdentifierType: Value
+  url: Value
+  relationship: Value
+  normalized: Value
+  normalizedUrl: Value
+}
+
+export interface ExternalIdentifierId {
+  errors: any[]
+  value: string
+  required: boolean
+  getRequiredMessage?: any
+}
+
 export type ScopesStrings =
   | 'openid'
   | '/authenticate'

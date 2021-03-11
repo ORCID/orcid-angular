@@ -1,118 +1,124 @@
-<app-side-bar-id
-  [ngClass]="{
-    mobile: !platform.columns12
-  }"
-  [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
-></app-side-bar-id>
+<div>
+  <app-side-bar-id
+    [ngClass]="{
+      mobile: !platform.columns12
+    }"
+    [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
+  ></app-side-bar-id>
 
-<ng-container *ngIf="!onlyOrcidId">
-  <app-panel
-    *ngIf="userRecord"
-    [elements]="userRecord.emails.emails"
-    [editModalComponent]="modalEmailComponent"
-    [type]="'side-bar'"
-    class="side-bar"
-    id="emails-panel"
-  >
-    <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
-    <div body>
-      <app-panel-element
-        *ngFor="let email of userRecord.emails.emails"
-        [visibility]="email.visibility"
-        [bold]="email.primary"
-        >{{ email.value }}</app-panel-element
-      >
-    </div>
-  </app-panel>
+  <ng-container *ngIf="!onlyOrcidId">
+    <app-panel
+      *ngIf="userRecord"
+      [elements]="userRecord.emails.emails"
+      [editModalComponent]="modalEmailComponent"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="emails-panel"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
+      <app-panel-data>
+        <app-panel-element
+          *ngFor="let email of userRecord.emails.emails"
+          [visibility]="email.visibility"
+          [bold]="email.primary"
+          >{{ email.value }}</app-panel-element
+        >
+      </app-panel-data>
+    </app-panel>
 
-  <app-panel
-    *ngIf="userRecord"
-    [elements]="userRecord.website.websites"
-    [editModalComponent]="modalWebsitesComponent"
-    [type]="'side-bar'"
-    class="side-bar"
-    id="websites-panel"
-  >
-    <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
-      Website and social links
-    </h2>
-    <div body>
-      <app-panel-element
-        *ngFor="let website of userRecord.website.websites"
-        [visibility]="website.visibility.visibility"
-        ><a
-          *ngIf="website.url"
-          [href]="website.url.value"
-          [ngClass]="{ 'orc-font-body-small': getWebsite(website).length > 20 }"
-          target="_blank"
-          rel="me nofollow noopener noreferrer"
-          >{{ getWebsite(website) }}</a
-        ></app-panel-element
-      >
-    </div>
-  </app-panel>
+    <app-panel
+      *ngIf="userRecord"
+      [elements]="userRecord.website.websites"
+      [editModalComponent]="modalWebsitesComponent"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="websites-panel"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
+        Website and social links
+      </h2>
+      <app-panel-data>
+        <app-panel-element
+          *ngFor="let website of userRecord.website.websites"
+          [visibility]="website.visibility.visibility"
+          ><a
+            *ngIf="website.url"
+            [href]="website.url.value"
+            [ngClass]="{
+              'orc-font-body-small': getWebsite(website).length > 20
+            }"
+            target="_blank"
+            rel="me nofollow noopener noreferrer"
+            >{{ getWebsite(website) }}</a
+          ></app-panel-element
+        >
+      </app-panel-data>
+    </app-panel>
 
-  <app-panel
-    *ngIf="
-      userRecord && userRecord.externalIdentifier.externalIdentifiers.length
-    "
-    [elements]="userRecord.externalIdentifier.externalIdentifiers"
-    [editModalComponent]="modalPersonalIdentifiers"
-    [type]="'side-bar'"
-    class="side-bar"
-    id="personal-identifiers-panel"
-  >
-    <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
-    <div body>
-      <app-panel-element
-        *ngFor="
-          let externalIdentifier of userRecord.externalIdentifier
-            .externalIdentifiers
-        "
-        [visibility]="externalIdentifier.visibility.visibility"
-        ><a
-          [href]="externalIdentifier.url"
-          target="_blank"
-          rel="me nofollow noopener noreferrer"
-          >{{
-            externalIdentifier.commonName + ': ' + externalIdentifier.reference
-          }}</a
-        ></app-panel-element
-      >
-    </div>
-  </app-panel>
-  <app-panel
-    *ngIf="userRecord"
-    [elements]="userRecord.keyword.keywords"
-    [editModalComponent]="modalKeywordComponent"
-    [type]="'side-bar'"
-    class="side-bar"
-    id="keywords-panel"
-  >
-    <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
-    <div body>
-      <app-panel-element
-        *ngFor="let keyword of userRecord.keyword.keywords"
-        [visibility]="keyword.visibility.visibility"
-        >{{ getKeyword(keyword) }}</app-panel-element
-      >
-    </div>
-  </app-panel>
-  <app-panel
-    *ngIf="userRecord"
-    [elements]="userRecord.countries.addresses"
-    [editModalComponent]="modalCountryComponent"
-    [type]="'side-bar'"
-    class="side-bar"
-    id="countries-panel"
-  >
-    <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
-    <div body>
-      <app-panel-element
-        *ngFor="let address of userRecord.countries.addresses"
-        [visibility]="address.visibility.visibility"
-        >{{ address.countryName }}</app-panel-element
-      >
-    </div>
-  </app-panel>
-</ng-container>
+    <app-panel
+      *ngIf="
+        userRecord && userRecord.externalIdentifier.externalIdentifiers.length
+      "
+      [elements]="userRecord.externalIdentifier.externalIdentifiers"
+      [editModalComponent]="modalPersonalIdentifiers"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="personal-identifiers-panel"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
+      <app-panel-data>
+        <app-panel-element
+          *ngFor="
+            let externalIdentifier of userRecord.externalIdentifier
+              .externalIdentifiers
+          "
+          [visibility]="externalIdentifier.visibility.visibility"
+          ><a
+            [href]="externalIdentifier.url"
+            target="_blank"
+            rel="me nofollow noopener noreferrer"
+            >{{
+              externalIdentifier.commonName +
+                ': ' +
+                externalIdentifier.reference
+            }}</a
+          ></app-panel-element
+        >
+      </app-panel-data>
+    </app-panel>
+    <app-panel
+      *ngIf="userRecord"
+      [elements]="userRecord.keyword.keywords"
+      [editModalComponent]="modalKeywordComponent"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="keywords-panel"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
+      <app-panel-data>
+        <app-panel-element
+          *ngFor="let keyword of userRecord.keyword.keywords"
+          [visibility]="keyword.visibility.visibility"
+          >{{ getKeyword(keyword) }}</app-panel-element
+        >
+      </app-panel-data>
+    </app-panel>
+    <app-panel
+      *ngIf="userRecord"
+      [elements]="userRecord.countries.addresses"
+      [editModalComponent]="modalCountryComponent"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="countries-panel"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
+      <app-panel-data>
+        <app-panel-element
+          *ngFor="let address of userRecord.countries.addresses"
+          [visibility]="address.visibility.visibility"
+          >{{ address.countryName }}</app-panel-element
+        >
+      </app-panel-data>
+    </app-panel>
+  </ng-container>
+</div>

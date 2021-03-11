@@ -27,6 +27,8 @@ import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { RecordWebsitesService } from '../record-websites/record-websites.service'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
+import { RecordAffiliationService } from '../record-affiliations/record-affiliations.service'
+import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
 
 @Injectable({
@@ -46,6 +48,7 @@ export class RecordService {
     private _recordEmailsService: RecordEmailsService,
     private _recordCountryService: RecordCountriesService,
     private _recordWebsitesService: RecordWebsitesService,
+    private _recordAffiliations: RecordAffiliationService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService
   ) {}
 
@@ -68,6 +71,7 @@ export class RecordService {
         this._recordPersonalIdentifier.getPersonalIdentifiers(),
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
+        this._recordAffiliations.getAffiliations(),
         this.getPreferences(),
       ])
         .pipe(
@@ -82,6 +86,7 @@ export class RecordService {
               externalIdentifier,
               names,
               biography,
+              affiliations,
               preferences,
             ]) => {
               this.recordSubject$.next({
@@ -94,6 +99,7 @@ export class RecordService {
                 externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
+                affiliations: affiliations as AffiliationUIGroup[],
                 preferences: preferences as Preferences,
               })
             }

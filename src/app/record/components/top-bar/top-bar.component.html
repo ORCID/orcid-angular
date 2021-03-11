@@ -30,7 +30,7 @@
   id="names-panel"
 >
   <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
-  <div body>
+  <app-panel-data>
     <app-panel-element [visibility]="userRecord.names.visibility.visibility">
       <ng-container *ngIf="creditName">
         <span i18n="@@record.publishedName" class="mat-caption description">
@@ -61,7 +61,7 @@
         </p>
       </app-panel-element>
     </ng-container>
-  </div>
+  </app-panel-data>
 </app-panel>
 <app-panel
   *ngIf="userRecord"
@@ -72,7 +72,7 @@
   id="biography-panel"
 >
   <h2 header class="orc-font-body" i18n="@@record.biography">Biography</h2>
-  <div body>
+  <app-panel-data>
     <app-panel-element
       *ngIf="!!userRecord.biography.biography"
       [visibility]="userRecord.biography.visibility.visibility"
@@ -81,5 +81,5 @@
         {{ userRecord.biography.biography.value }}
       </span>
     </app-panel-element>
-  </div>
+  </app-panel-data>
 </app-panel>
