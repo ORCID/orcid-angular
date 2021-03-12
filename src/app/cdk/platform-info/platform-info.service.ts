@@ -1,6 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
-import { ThrowStmt } from '@angular/compiler'
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'

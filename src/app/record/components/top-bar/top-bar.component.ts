@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'

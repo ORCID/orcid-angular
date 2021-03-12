@@ -17,6 +17,8 @@ export class StepAComponent extends BaseStepDirective {
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
   }
+  infoSiteBaseUrl =
+    environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE
 
   goBack() {
     this._platform

@@ -30,6 +30,7 @@ import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { combineLatest } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Component({
   selector: 'app-form-sign-in',

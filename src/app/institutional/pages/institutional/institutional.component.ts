@@ -10,7 +10,7 @@ import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
-import { first, map, startWith, switchMap, take, tap } from 'rxjs/operators'
+import { first, map, startWith, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 import { environment } from '../../../../environments/environment'

@@ -5,9 +5,7 @@ import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { UserService } from './core'
-import { first } from 'rxjs/internal/operators/first'
-import { mergeMap, switchMap, tap } from 'rxjs/operators'
-import { merge } from 'rxjs/internal/observable/merge'
+import { tap } from 'rxjs/operators'
 import { HeadlessOnOauthRoutes } from './constants'
 
 @Component({

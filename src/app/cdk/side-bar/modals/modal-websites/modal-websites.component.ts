@@ -21,7 +21,6 @@ import { UserSession } from '../../../../types/session.local'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { cloneDeep } from 'lodash'
 import { UserService } from '../../../../core'
-import { OrcidValidators } from '../../../../validators'
 import { URL_REGEXP } from '../../../../constants'
 
 @Component({

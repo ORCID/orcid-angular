@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
-import { ActivityService } from 'src/app/types/activities-service.local'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,
