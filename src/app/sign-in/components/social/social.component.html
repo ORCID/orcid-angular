@@ -1,8 +1,10 @@
 <button
   mat-raised-button
-  [routerLink]="['/institutional-signin']"
+  id="access-through-your-institution-button"
+  (click)="accessThroughInstitution()"
   class="institution mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
   type="button"
+  [attr.aria-label]="labelInstitutionalButton"
 >
   <img src="./assets/vectors/institutional-access.svg" alt="Institutional" />
   <ng-container i18n="@@ngOrcid.signin.institutionalAccount">
@@ -16,6 +18,7 @@
     mat-raised-button
     class="google mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
     type="submit"
+    [attr.aria-label]="labelGoogleButton"
   >
     <img src="./assets/vectors/google.svg" alt="Google" />
     <ng-container i18n="@@ngOrcid.signin.google">
@@ -30,6 +33,7 @@
     mat-raised-button
     class="facebook mat-button-wrap-text-with-icon mobile-fixed-width mat-elevation-z0"
     type="submit"
+    [attr.aria-label]="labelFacebookButton"
   >
     <img src="./assets/vectors/facebook.svg" alt="Facebook" />
     <ng-container i18n="@@ngOrcid.signin.facebook">

@@ -12,7 +12,7 @@
     <p>
       <ng-container i18n="@@register.orcids">Per ORCID's</ng-container>
       <a
-        href="https://orcid.org/content/orcid-terms-use"
+        href="{{ infoSiteBaseUrl }}/content/orcid-terms-use"
         class="mat-button-font"
         rel="noopener noreferrer"
         target="_blank"
@@ -22,7 +22,7 @@
         >, you may only register for an ORCID iD for yourself. Already have an
         ORCID iD?</ng-container
       >
-      <a routerLink="/signin" class="mat-button-font" i18n="@@register.sign"
+      <a class="mat-button-font" i18n="@@register.sign" (click)="signIn()"
         >Sign In</a
       >
     </p>
@@ -36,10 +36,12 @@
           matStepperPrevious
           type="button"
           i18n="@@shared.back"
+          id="step-a-back-button"
         >
           GO BACK
         </button>
         <button
+          id="step-a-next-button"
           mat-raised-button
           matStepperNext
           color="primary"

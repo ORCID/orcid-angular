@@ -1,4 +1,10 @@
 <main id="main">
+  <app-my-orcid-alerts
+    *ngIf="emailVerified || invalidVerifyUrl"
+    [emailVerified]="emailVerified"
+    [invalidVerifyUrl]="invalidVerifyUrl"
+    [verifiedEmail]="verifiedEmail"
+  ></app-my-orcid-alerts>
   <div class="container">
     <div class="row space-around">
       <div class="col l6 m6 s4">
@@ -41,6 +47,7 @@
                   [disabled]="loading"
                   *ngIf="!show2FA"
                   i18n="@@ngOrcid.signin.button"
+                  id="signin-button"
                 >
                   SIGN IN
                 </button>
@@ -56,11 +63,6 @@
               [realUserOrcid]="realUserOrcid"
             >
             </app-logged-in>
-            <app-oauth-error
-              *ngIf="isOauthError"
-              [errorDescription]="errorDescription"
-            >
-            </app-oauth-error>
           </mat-card-content>
         </mat-card>
       </div>

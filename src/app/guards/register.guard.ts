@@ -17,42 +17,21 @@ import { UserService } from '../core'
   providedIn: 'root',
 })
 export class RegisterGuard implements CanActivateChild {
-  constructor(
-    private _user: UserService,
-    private _router: Router,
-    private _platform: PlatformInfoService
-  ) {}
+  constructor(private _user: UserService, private _router: Router) {}
 
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | UrlTree | boolean {
-    const queryParams = next.queryParams
-
-    return this._platform.get().pipe(
-      switchMap((value) => {
-        if (value.oauthMode) {
-          return this.handleOauthSession(queryParams as OauthParameters)
-        } else {
-          return of(true)
-        }
-      })
-    )
-  }
-
-  handleOauthSession(queryParams: OauthParameters) {
-    // check if the user is already login or there are errors
-    return this._user.getUserSession(queryParams).pipe(
+    return this._user.getUserSession().pipe(
       map((session) => {
-        const oauthSession = session.oauthSession
-
         if (
-          oauthSession &&
-          !oauthSession.forceLogin &&
+          session.oauthSession &&
+          !session.oauthSession.forceLogin &&
           session.oauthSessionIsLoggedIn
         ) {
           return this._router.createUrlTree(['/oauth/authorize'], {
-            queryParams,
+            queryParams: next.queryParams,
           })
         }
         return true

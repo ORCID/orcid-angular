@@ -1,0 +1,97 @@
+.add-more-email {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    margin-inline-end: 8px;
+  }
+}
+
+.email-input-line {
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.actions-wrapper,
+.actions-sub-wrapper {
+  display: flex;
+  width: 50%;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  .actions-sub-wrapper {
+    justify-content: space-around;
+    a {
+      width: 100%;
+    }
+  }
+}
+
+.primary-email-label {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    margin-inline-end: 16px;
+  }
+}
+
+.email-input-line {
+  margin-top: 20px;
+  img {
+    margin-top: 6px;
+    cursor: move;
+    z-index: 1;
+    margin-inline-end: 18px;
+  }
+}
+
+::ng-deep .columns-4-or-8 .mat-form-field {
+  margin-inline-end: auto;
+}
+
+.email-input-container {
+  max-width: 50%;
+  padding-inline-end: 24px;
+}
+
+.add-more {
+  margin-top: 16px;
+  mat-icon {
+    padding-inline-end: 8px;
+  }
+}
+
+::ng-deep app-alert-message {
+  p {
+    margin: 0;
+  }
+  p.email-container {
+    margin: 16px 0 16px 0;
+  }
+  margin-bottom: 20px;
+}
+
+::ng-deep .columns-4-or-8 {
+  .mat-form-field {
+    margin-inline-end: auto;
+  }
+
+  .email-input-container {
+    padding: 0;
+    max-width: 100%;
+    padding-inline-end: 0px;
+  }
+
+  .actions-wrapper,
+  .actions-sub-wrapper {
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 10px 0 10px 0;
+  }
+  .actions-sub-wrapper {
+    justify-content: space-between !important;
+  }
+}

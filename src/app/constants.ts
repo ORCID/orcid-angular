@@ -1,9 +1,12 @@
+import { ɵConsole } from '@angular/core'
+import { UrlMatcher, UrlMatchResult, UrlSegment } from '@angular/router'
+
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
 // Custom email REGEXP
-// https://regex101.com/r/jV4aN7/14
+// https://regex101.com/r/jV4aN7/16
 // tslint:disable-next-line: max-line-length
-export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)*([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
+export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)+([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
 
 export const EMAIL_REGEXP_GENERIC = /^\s*?(.+)@(.+?)\s*$/
 // https://regex101.com/r/9MXmdl/1
@@ -19,9 +22,12 @@ export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 export const HAS_NUMBER = /(?=.*[0-9]).*/
 // https://regex101.com/r/NNIuKQ/1
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
+// https://regex101.com/r/gznzc6/1 strips params for OJS links
+export const REDIRECT_URI_REGEXP = /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
 
 export const ApplicationRoutes = {
-  myOrcid: 'qa/my-orcid',
+  myOrcid: 'my-orcid',
+  myOrcidTEMP: 'qa/my-orcid',
   twoFactor: '2fa-signin',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
@@ -35,6 +41,18 @@ export const ApplicationRoutes = {
   register: 'register',
   home: '',
 }
+
+export const HeadlessOnOauthRoutes = [
+  ApplicationRoutes.twoFactor,
+  ApplicationRoutes.social,
+  ApplicationRoutes.institutionalLinking,
+  ApplicationRoutes.institutional,
+  ApplicationRoutes.login,
+  ApplicationRoutes.signin,
+  ApplicationRoutes.authorize,
+  ApplicationRoutes.resetPassword,
+  ApplicationRoutes.register,
+]
 
 export const PerformanceMarks = {
   navigationStartPrefix: 'start_',
@@ -87,4 +105,33 @@ export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10
 
 export function isRedirectToTheAuthorizationPage(data: { url: string }) {
   return data.url.toLowerCase().includes('oauth/authorize')
+}
+
+export function objectToUrlParameters(object: Object) {
+  return Object.keys(object)
+    .map((key) => `${key}=${encodeURIComponent(object[key])}`)
+    .join('&')
+}
+
+export function routerPublicPageUrl(segments: UrlSegment[]) {
+  if (
+    (segments[0] && isValidOrcidFormat(segments[0].path)) ||
+    (segments[0] && segments[0].path.toLowerCase() === URL_PRIVATE_PROFILE)
+  ) {
+    return { consumed: [segments[0]] }
+  }
+  return {
+    consumed: [],
+  }
+}
+
+export function routerThirdPartySigninMatch(
+  segments: UrlSegment[]
+): UrlMatchResult {
+  if (
+    (segments[1] && segments[1].path.match(/third-party-signin-completed/)) ||
+    (segments[2] && segments[2].path.match(/third-party-signin-completed/))
+  ) {
+    return { consumed: segments }
+  }
 }

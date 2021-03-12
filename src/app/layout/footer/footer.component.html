@@ -6,18 +6,24 @@
         <a>
           <img src="./assets/vectors/orcid.logo.svg" alt="Orcid" />
         </a>
-        <a href="https://twitter.com/orcid_org" class="social">
+        <a href="https://twitter.com/orcid_org">
           <img
             src="./assets/vectors/glyphicons-social-32-twitter.svg"
+            class="social"
             alt="Twitter"
           />
         </a>
-        <a href="https://orcid.org/blog/feed" class="social">
-          <img src="./assets/vectors/glyphicons-social-38-rss.svg" alt="Rss" />
+        <a href="{{ infoSiteBaseUrl }}blog/feed" class="social">
+          <img
+            src="./assets/vectors/glyphicons-social-38-rss.svg"
+            class="social"
+            alt="Rss"
+          />
         </a>
         <a href="https://github.com/ORCID" class="social">
           <img
             src="./assets/vectors/glyphicons-social-22-github.svg"
+            class="social"
             alt="Github"
           />
         </a>
@@ -49,47 +55,51 @@
         class="col mat-button-font url-lists"
         [ngClass]="{ 'space-around': !platform.columns12 }"
       >
-        <a
-          class="col s4 l-auto m8"
-          (click)="about()"
-          i18n="@@footer.aboutOrcid"
-        >
+        <a class="col s4 l-auto m8" i18n="@@footer.aboutOrcid" href="/about">
           About ORCID
         </a>
+
         <a
           class="col s4 l-auto m8"
           i18n="@@footer.privacypolicy"
-          (click)="goTo('/footer/privacy-policy')"
+          href="/footer/privacy-policy"
         >
           Privacy Policy
         </a>
         <a
           class="col s4 l-auto m8"
           i18n="@@footer.termsofuse"
-          (click)="goTo('/content/orcid-terms-use')"
+          href="/content/orcid-terms-use"
         >
           Terms of Use
         </a>
         <a
           class="col s4 l-auto m8"
-          i18n="@@ngOrcid.disputeProcedure"
-          (click)="goTo('/orcid-dispute-procedures')"
+          i18n="@@footer.accessibility"
+          href="/content/orcid-accessibility-statement"
         >
-          Dispute procedures
+          Accessibility Statement
         </a>
         <a
           class="col s4 l-auto m8"
           i18n="@@footer.contactus"
-          (click)="goTo('https://support.orcid.org/hc/en-us/requests/new')"
+          href="https://support.orcid.org/hc/en-us/requests/new"
         >
           Contact us
         </a>
         <a
           class="col s4 l-auto m8"
-          (click)="goTo('/trademark-and-id-display-guidelines')"
-          i18n="@@ngOrcid.trademark"
+          i18n="@@ngOrcid.disputeProcedure"
+          href="/orcid-dispute-procedures"
         >
-          Trademark & iD guidelines
+          Dispute procedures
+        </a>
+        <a
+          class="col s4 l-auto m8"
+          href="/trademark-and-id-display-guidelines/"
+          i18n="@@footer.branGuideLines"
+        >
+          Brand Guidelines
         </a>
       </div>
     </div>

@@ -1,0 +1,16 @@
+{
+  "chromeWebSecurity": false,
+  "failOnStatusCode": false,
+  "experimentalNetworkStubbing": true,
+  "viewportWidth": 1000,
+  "viewportHeight": 1000,
+  "runMode": 2,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "charts": true,
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "reportDir": "cypress/reports/temp/mochawesome-report"
+  }
+}

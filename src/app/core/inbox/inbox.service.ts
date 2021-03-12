@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, switchMap, tap, retry } from 'rxjs/operators'
+import { retry } from 'rxjs/internal/operators/retry'
+import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL } from 'src/app/constants'
+import { ERROR_REPORT } from 'src/app/errors'
 import { environment } from 'src/environments/environment'
 
 import {
@@ -10,14 +12,16 @@ import {
   InboxNotificationHtml,
   InboxNotificationInstitutional,
   InboxNotificationPermission,
+  TotalNotificationCount,
 } from '../../types/notifications.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: 'root',
 })
 export class InboxService {
+  private nextLoadRequireAFullBackendSyncronization = false
+  private currentlyIncludingArchive: boolean
   private currentLevel = 0
   private headers: HttpHeaders
   private inboxSubject = new ReplaySubject<
@@ -47,7 +51,8 @@ export class InboxService {
   }
 
   get(
-    getNextDepthLevel = false
+    getNextDepthLevel = false,
+    includeArchived = false
   ): Observable<
     (
       | InboxNotificationAmended
@@ -56,12 +61,24 @@ export class InboxService {
       | InboxNotificationPermission
     )[]
   > {
+    if (this.currentlyIncludingArchive === null) {
+      this.currentlyIncludingArchive = includeArchived
+    } else if (this.currentlyIncludingArchive !== includeArchived) {
+      this.currentlyIncludingArchive = includeArchived
+      this.currentLevel = 0
+      this.lastEmittedValue = null
+    }
     // Only allow to get the next level if the first level was already retrieved
     if (getNextDepthLevel && this.lastEmittedValue) {
       this.currentLevel++
     }
-    return this.getNotifications(this.currentLevel).pipe(
+    return this.getNotifications(this.currentLevel, includeArchived).pipe(
       tap((data) => {
+        if (this.nextLoadRequireAFullBackendSyncronization) {
+          this.lastEmittedValue = null
+          this.nextLoadRequireAFullBackendSyncronization = false
+        }
+
         if (!this.lastEmittedValue) {
           this.lastEmittedValue = data
         } else {
@@ -74,7 +91,8 @@ export class InboxService {
   }
 
   private getNotifications(
-    depthLevel
+    depthLevel,
+    includeArchived
   ): Observable<
     (
       | InboxNotificationAmended
@@ -92,10 +110,17 @@ export class InboxService {
           | InboxNotificationPermission
         )[]
       >(
-        environment.BASE_URL +
-          `inbox/notifications.json?firstResult=${
-            AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel
-          }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=true`,
+        !this.nextLoadRequireAFullBackendSyncronization
+          ? // if a complete refresh is not required only load the the new notifications
+            environment.BASE_URL +
+              `inbox/notifications.json?firstResult=${
+                AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel
+              }&maxResults=${AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL}&includeArchived=${includeArchived}`
+          : // if a complete refresh is required reload all the notification from index 0
+            `inbox/notifications.json?firstResult=0&maxResults=${
+              AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * depthLevel +
+              AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL
+            }&includeArchived=${includeArchived}`,
         {
           headers: this.headers,
         }
@@ -108,24 +133,9 @@ export class InboxService {
       )
   }
 
-  // Check if the maximum amount of notifications was retrieved
-  // this is how is regerminated there might me more notifications
-  // this is the current solution since currently the backend does not retrieve the total amount of notifications
-  public mightHaveMoreNotifications() {
-    if (!this.lastEmittedValue) {
-      return true
-    } else if (
-      AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL * (this.currentLevel + 1) ===
-      this.lastEmittedValue.length
-    ) {
-      return true
-    } else {
-      return false
-    }
-  }
-
   flagAsArchive(
-    code: number | string
+    code: number | string,
+    emitUpdate = true
   ): Observable<
     | InboxNotificationAmended
     | InboxNotificationHtml
@@ -147,14 +157,29 @@ export class InboxService {
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         ),
         tap((data) => {
-          this.lastEmittedValue.forEach((value) => {
+          this.lastEmittedValue.forEach((value, index) => {
             if (value.putCode === data.putCode) {
-              value.archivedDate = data.archivedDate
+              if (this.currentlyIncludingArchive) {
+                value.archivedDate = data.archivedDate
+                value.readDate = data.readDate
+              } else {
+                this.lastEmittedValue.splice(index, 1)
+                // When one or multiple notifications are archived and deleted from the local list
+                // the next load of notifications from the backend will require a complete reload
+                // this is because just concatenating newly loaded items would be accurate
+                this.nextLoadRequireAFullBackendSyncronization = true
+              }
             }
           })
-          this.inboxSubject.next(this.lastEmittedValue)
+          if (emitUpdate) {
+            this.emitUpdate()
+          }
         })
       )
+  }
+
+  emitUpdate() {
+    this.inboxSubject.next(this.lastEmittedValue)
   }
 
   flagAsRead(
@@ -185,6 +210,24 @@ export class InboxService {
           })
           this.inboxSubject.next(this.lastEmittedValue)
         })
+      )
+  }
+
+  totalNumber() {
+    return this._http
+      .get<TotalNotificationCount>(
+        environment.BASE_URL + `inbox/totalCount.json`,
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        map((value) => {
+          value.archived = value.all - value.nonArchived
+          return value
+        }),
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }

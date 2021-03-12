@@ -3,7 +3,6 @@
 import { uniqueLength } from './unique-length.postbuild'
 import { buildInfo } from './build-info.postbuild'
 import { googleAnalytics } from './google-analytics.postbuild'
-import { hotjarAnalytics } from './hotjar-analytics.postbuild'
 import {
   addLanguageCodeToHashesOnToHTMLFiles,
   addLanguageCodeToHashesOnJSFiles,
@@ -11,6 +10,7 @@ import {
 import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
 import { zendeskPlugin } from './zend-desk.postbuild'
+import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
 const glob = require('glob')
 // Run updates on index.html files across languages
 glob
@@ -21,7 +21,6 @@ glob
     data = uniqueLength(data, options)
     data = buildInfo(data, options)
     data = googleAnalytics(data, options)
-    data = hotjarAnalytics(data, options)
     data = zendeskPlugin(data, options)
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
     save(data, options)
@@ -70,3 +69,6 @@ glob
     const options = getOptionsObjet(file)
     renameSync(options.folder, options.folder.replace('-', '_'))
   })
+
+// Move all assets into a single shared folder
+createShareAssetsFolder()

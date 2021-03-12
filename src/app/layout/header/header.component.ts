@@ -101,13 +101,16 @@ export class HeaderComponent implements OnInit {
 
   click(treeLocation: string[], button: ApplicationMenuItem) {
     if (!this.platform.columns12) {
-      if (button.route && (!button.buttons || !button.buttons.length)) {
-        this.newInfo(button.route)
+      if (
+        button.route !== undefined &&
+        (!button.buttons || !button.buttons.length)
+      ) {
+        this.preNavigate(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
-    } else if (button.route) {
-      this.newInfo(button.route)
+    } else if (button.route !== undefined) {
+      this.preNavigate(button.route)
     }
   }
 
@@ -255,25 +258,30 @@ export class HeaderComponent implements OnInit {
   goto(url) {
     if (url === 'signin') {
       if (!this.togglzOrcidAngularSignin) {
-        this.window.location.href = environment.BASE_URL + url
+        ;(this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
       } else {
         this._router.navigate(['/signin'])
         this.mobileMenuState = false
       }
     } else {
-      this.window.location.href = environment.BASE_URL + url
+      ;(this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
     }
   }
 
-  newInfo(route) {
-    if (this.togglzNewInfoSite) {
-      this.navigateTo(environment.INFO_SITE + route)
-    } else {
+  preNavigate(route: string) {
+    if (route.indexOf('://') >= 0) {
       this.navigateTo(route)
+    } else if (this.togglzNewInfoSite) {
+      this.navigateTo(
+        environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE +
+          route
+      )
+    } else {
+      this.navigateTo(environment.INFO_SITE + route)
     }
   }
 
   navigateTo(val) {
-    this.window.location.href = val
+    ;(this.window as any).outOfRouterNavigation(val)
   }
 }

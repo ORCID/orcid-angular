@@ -4,6 +4,11 @@ import { GoogleAnalyticsService } from './core/google-analytics/google-analytics
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
 import { ZendeskService } from './core/zendesk/zendesk.service'
+import { UserService } from './core'
+import { first } from 'rxjs/internal/operators/first'
+import { mergeMap, switchMap, tap } from 'rxjs/operators'
+import { merge } from 'rxjs/internal/observable/merge'
+import { HeadlessOnOauthRoutes } from './constants'
 
 @Component({
   selector: 'app-root',
@@ -11,7 +16,9 @@ import { ZendeskService } from './core/zendesk/zendesk.service'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  oauthMode = false
+  currentlyDisplayingZendesk = true
+  headlessMode = false
+  currentRouteIsHeadlessOnOauthPage = true
   screenDirection
   currentRoute
   @HostBinding('class.edge') edge
@@ -23,23 +30,43 @@ export class AppComponent {
   @HostBinding('class.columns-8') columns8
   @HostBinding('class.columns-12') columns12
   @HostBinding('class.columns-4') columns4
+  platformInfo
 
   constructor(
     _platformInfo: PlatformInfoService,
     _router: Router,
     _googleAnalytics: GoogleAnalyticsService,
-    _zendesk: ZendeskService
+    _zendesk: ZendeskService,
+    _userService: UserService
   ) {
-    _platformInfo.get().subscribe((platformInfo) => {
-      this.setPlatformClasses(platformInfo)
-      this.screenDirection = platformInfo.screenDirection
-      if (!platformInfo.oauthMode) {
-        _zendesk.show()
-        _zendesk.adaptPluginToPlatform(platformInfo)
-      } else {
-        _zendesk.hide()
-      }
-    })
+    _platformInfo
+      .get()
+      .pipe(
+        tap((platformInfo) => {
+          this.platformInfo = platformInfo
+          this.currentRouteIsHeadlessOnOauthPage = this.showHeadlessOnOauthPage(
+            platformInfo.currentRoute
+          )
+          this.setPlatformClasses(platformInfo)
+          this.screenDirection = platformInfo.screenDirection
+          if (
+            !platformInfo.hasOauthParameters &&
+            !this.currentlyDisplayingZendesk
+          ) {
+            _zendesk.show()
+            _zendesk.adaptPluginToPlatform(platformInfo)
+            this.currentlyDisplayingZendesk = true
+          } else if (
+            platformInfo.hasOauthParameters &&
+            this.currentlyDisplayingZendesk
+          ) {
+            _zendesk.hide()
+            this.currentlyDisplayingZendesk = false
+          }
+        })
+      )
+      .subscribe()
+
     _router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         _googleAnalytics.reportNavigationStart(event.url)
@@ -51,9 +78,21 @@ export class AppComponent {
       }
     })
   }
+  showHeadlessOnOauthPage(currentRoute: string): boolean {
+    if (currentRoute) {
+      const value = HeadlessOnOauthRoutes.filter(
+        (url) => currentRoute.indexOf('/' + url) === 0
+      )
+      return !!value.length
+    } else {
+      return true
+    }
+  }
 
-  setPlatformClasses(platformInfo: PlatformInfo) {
-    this.oauthMode = platformInfo.oauthMode
+  setPlatformClasses(platformInfo: PlatformInfo, oauthSessionFound?: boolean) {
+    this.headlessMode =
+      (platformInfo.hasOauthParameters || oauthSessionFound) &&
+      this.currentRouteIsHeadlessOnOauthPage
     this.ie = platformInfo.ie
     this.edge = platformInfo.edge
     this.tabletOrHandset = platformInfo.tabletOrHandset

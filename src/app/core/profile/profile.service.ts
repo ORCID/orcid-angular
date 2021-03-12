@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable } from 'rxjs'
-import { catchError, tap, retry } from 'rxjs/operators'
-import { AffiliationUIGroup, Person, Works } from 'src/app/types'
+import { catchError } from 'rxjs/internal/operators/catchError'
+import { retry } from 'rxjs/internal/operators/retry'
+import { tap } from 'rxjs/operators'
+import { Person, Works } from 'src/app/types'
+import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
-import { AffiliationsService } from '../affiliations/affiliations.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { RecordAffiliationService } from '../record-affiliations/record-affiliations.service'
 import { WorksService } from '../works/works.service'
 
 @Injectable({
@@ -16,7 +19,7 @@ export class ProfileService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
-    private _affiliations: AffiliationsService,
+    private _affiliations: RecordAffiliationService,
     private _works: WorksService
   ) {}
 
@@ -46,7 +49,7 @@ export class ProfileService {
   get(id): Observable<[Person, AffiliationUIGroup[], Works]> {
     return combineLatest([
       this.getPerson(id),
-      this._affiliations.get(id),
+      this._affiliations.getAffiliations(), // REMOVED THE ID PARAMETER
       this._works.get(id),
     ])
   }

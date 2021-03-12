@@ -25,6 +25,7 @@ import {
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms'
+
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -47,6 +48,7 @@ export class NotificationComponent
   state = 'close'
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') _archived = false
+  @HostBinding('class.read') _read = false
   @HostBinding('class.green') green = false
   @HostBinding('class.orange') orange = true
   @HostBinding('class.blue') blue = false
@@ -56,6 +58,7 @@ export class NotificationComponent
   notificationType: uiNotificationType
   platform: PlatformInfo
   public onTouchedFunction
+  displayCheckBox = false
 
   ariaLabelArchived = $localize`:@@inbox.archive:archive`
 
@@ -68,6 +71,13 @@ export class NotificationComponent
   }
   get archived() {
     return this._archived
+  }
+  @Input()
+  set read(value) {
+    this._read = value
+  }
+  get read() {
+    return this._read
   }
   @Input()
   set notification(notification: InboxNotification) {
@@ -141,7 +151,11 @@ export class NotificationComponent
 
   notificationDate(notification: InboxNotification) {
     const date = new Date(notification.createdDate)
-    return date.toLocaleDateString(this.locale)
+    return date.toLocaleDateString('en-ZA', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+    })
   }
 
   setNotificationColor(type: uiNotificationType) {
@@ -162,10 +176,15 @@ export class NotificationComponent
   }
 
   toggleNotificationContent() {
-    this.showNotificationContent = !this.showNotificationContent
-    this.state = this.showNotificationContent ? 'open' : 'close'
-    if (this.state === 'open') {
-      this._inbox.flagAsRead(this.notification.putCode).subscribe()
+    this.state = !this.showNotificationContent ? 'open' : 'close'
+    if (this.state === 'open' && !this.notification.readDate) {
+      this._inbox
+        .flagAsRead(this.notification.putCode)
+        .subscribe(
+          () => (this.showNotificationContent = !this.showNotificationContent)
+        )
+    } else {
+      this.showNotificationContent = !this.showNotificationContent
     }
   }
 
@@ -185,6 +204,7 @@ export class NotificationComponent
 
   writeValue(obj: any): void {
     if (obj != null && obj !== undefined && obj !== '') {
+      this.displayCheckBox = true
       this.form.setValue({ selected: obj }, { emitEvent: false })
     }
   }

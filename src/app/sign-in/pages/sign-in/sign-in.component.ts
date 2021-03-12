@@ -44,6 +44,9 @@ export class SignInComponent implements OnInit {
   show2FA = false
   signInType = TypeSignIn.personal
   errorDescription: string
+  verifiedEmail: string
+  emailVerified: boolean
+  invalidVerifyUrl: boolean
 
   constructor(
     _platformInfo: PlatformInfoService,
@@ -68,20 +71,25 @@ export class SignInComponent implements OnInit {
           this.realUserOrcid = null
         }
 
-        if (platform.oauthMode && platform.queryParameters.email) {
-          this.email = platform.queryParameters.email
-        }
-        if (
-          platform.oauthMode &&
-          session.oauthSession &&
-          session.oauthSession.userId
-        ) {
-          this.email = session.oauthSession.userId
+        if (platform.queryParameters.emailVerified) {
+          this.emailVerified = platform.queryParameters.emailVerified
+          if (
+            platform.queryParameters.emailVerified &&
+            platform.queryParameters.verifiedEmail
+          ) {
+            this.verifiedEmail = platform.queryParameters.verifiedEmail
+          }
         }
 
-        if (platform.queryParameters.error) {
-          this.isOauthError = true
-          this.errorDescription = platform.queryParameters.error
+        if (platform.queryParameters.invalidVerifyUrl) {
+          this.invalidVerifyUrl = platform.queryParameters.invalidVerifyUrl
+        }
+
+        if (platform.queryParameters.email) {
+          this.email = platform.queryParameters.email
+        }
+        if (session.oauthSession && session.oauthSession.userId) {
+          this.email = session.oauthSession.userId
         }
       })
   }

@@ -1,10 +1,9 @@
-import { Injectable, Inject } from '@angular/core'
-import { environment } from 'src/environments/environment'
+import { Inject, Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
 import { PerformanceMarks } from 'src/app/constants'
-import { Observable } from 'rxjs'
-import { catchError } from 'rxjs/operators'
 import { RequestInfoForm } from 'src/app/types'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +15,15 @@ export class GoogleAnalyticsService {
   }
 
   reportPageView(url: string) {
+    if (environment.debugger) {
+      console.info(`GA - Navigation ${url}`)
+    }
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       cookie_flags: 'SameSite=None;Secure',
       page_path: url,
-      page_location: window.location.origin,
+      page_location: window.location.href,
       anonymize_ip: true,
-      sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE ? '100' : '70',
+      sample_rate: '100',
       site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
         ? '100'
         : '1',
@@ -35,6 +37,9 @@ export class GoogleAnalyticsService {
   reportNavigationEnd(url: string) {
     const duration = this.finishPerformanceMeasurement(url)
     if (duration) {
+      if (environment.debugger) {
+        console.info(`GA - Took ${duration} to load ${url}`)
+      }
       this.gtag('event', 'timing_complete', {
         name: this.removeUrlParameters(url),
         value: Math.round(duration),
@@ -58,25 +63,21 @@ fatal: "${fatal}"
   }
 
   public reportEvent(
-    event: string,
+    action: string,
     event_category: string,
-    event_label: RequestInfoForm | string,
-    value?: number
+    event_label: RequestInfoForm | string
   ): Observable<void> {
     // if has RequestInfoForm add the client string as event_label
     if (typeof event_label !== 'string') {
       event_label = 'OAuth ' + this.buildClientString(event_label)
     }
-    return this.eventObservable(event, {
+    if (environment.debugger) {
+      console.info(`GA - Event ${action}/${event_category}/${event_label}/`)
+    }
+    return this.eventObservable(action, {
       event_category,
       event_label,
-      value,
-    }).pipe(
-      catchError((err, caught) => {
-        console.error(err)
-        return caught
-      })
-    )
+    })
   }
 
   removeUrlParameters(url: string) {

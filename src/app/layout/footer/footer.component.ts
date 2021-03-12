@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from '../../../environments/environment.sandbox'
+import { environment } from '../../../environments/environment'
 import { TogglzService } from '../../core/togglz/togglz.service'
 
 @Component({
@@ -14,6 +14,7 @@ export class FooterComponent implements OnInit {
   platform
   labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
   togglzNewInfoSite: boolean
+  infoSiteBaseUrl = environment.INFO_SITE
 
   constructor(
     _platformInfo: PlatformInfoService,
@@ -32,13 +33,5 @@ export class FooterComponent implements OnInit {
 
   goTo(url) {
     this.window.location.href = url
-  }
-
-  about() {
-    if (this.togglzNewInfoSite) {
-      this.goTo(environment.INFO_SITE)
-    } else {
-      this.goTo('about')
-    }
   }
 }

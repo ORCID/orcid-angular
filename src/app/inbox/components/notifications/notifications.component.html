@@ -1,71 +1,114 @@
-<div class="control-container">
-  <div
-    class="controls"
-    *ngIf="notifications?.length || archiveNotifications?.length"
+<h1 class="mat-headline">
+  <ng-container i18n="@@inbox.notifications">Notifications</ng-container>
+  <ng-container *ngIf="totalNotifications"
+    >({{
+      showArchived ? totalNotifications.all : totalNotifications.nonArchived
+    }})</ng-container
   >
-    <mat-checkbox
-      [(ngModel)]="generalCheck"
-      [(indeterminate)]="indeterminate"
-      aria-label="select-all"
-    ></mat-checkbox>
-    <div
-      class="archive-label mat-body-1"
-      id="select-all"
-      i18n="@@inbox.selectAll"
-    >
-      Select All
-    </div>
-    <button
-      mat-raised-button
-      color="primary"
-      class="mat-button-wrap-text-with-icon"
-      (click)="archivedSelected()"
-    >
-      <mat-icon class="material-icons-outlined">archive</mat-icon>
-      <div i18n="@@inbox.archiveSelected">Archive selected</div>
-    </button>
+</h1>
+
+<div class="control-container">
+  <div class="controls">
+    <ng-container *ngIf="notifications && amountOfSelectableItems">
+      <mat-checkbox
+        [(ngModel)]="generalCheck"
+        [(indeterminate)]="indeterminate"
+        aria-label="select-all"
+      ></mat-checkbox>
+      <div
+        class="archive-label mat-body-1"
+        id="select-all"
+        i18n="@@inbox.selectAll"
+      >
+        Select All
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        class="mat-button-wrap-text-with-icon"
+        (click)="archivedSelected()"
+      >
+        <mat-icon class="material-icons-outlined">archive</mat-icon>
+        <div i18n="@@inbox.archiveSelected">Archive selected</div>
+      </button>
+    </ng-container>
   </div>
-  <a (click)="toggleShowArchived()" *ngIf="archiveNotifications?.length"
+  <a (click)="toggleShowArchived()" *ngIf="totalNotifications?.archived"
     ><ng-container *ngIf="showArchived" i18n="@@inbox.hideArchived"
       >Hide archived</ng-container
     >
     <ng-container *ngIf="!showArchived" i18n="@@inbox.showArchived"
       >Show archived</ng-container
     >
-    ({{ archiveNotifications.length }})
+    ({{ totalNotifications.archived }})
   </a>
 </div>
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
 <ng-container *ngIf="form && notifications" [formGroup]="form">
-  <ng-container *ngFor="let item of notifications">
+  <ng-container *ngFor="let item of notifications; let i = index">
     <app-notification
-      *ngIf="!item.archivedDate || showArchived"
+      *ngIf="!item.archivedDate"
       [notification]="item"
       [formControl]="form.controls[item.putCode]"
       [archived]="!!item.archivedDate"
+      [read]="!!item.readDate"
+    ></app-notification>
+
+    <app-notification
+      *ngIf="item.archivedDate && showArchived"
+      [notification]="item"
+      [archived]="!!item.archivedDate"
+      [read]="!!item.readDate"
     ></app-notification>
   </ng-container>
 </ng-container>
 
 <div
-  class="no-messages"
-  *ngIf="
-    notifications &&
-    archiveNotifications &&
-    ((!showArchived && notifications.length == archiveNotifications.length) ||
-      (showArchived && notifications.length == 0))
-  "
-  i18n="@@inbox.thereAreNoMessages"
+  class="no-messages orc-font-body-small"
+  *ngIf="isAnEmptyInbox() && totalNotifications?.archived === 0 && !loading"
 >
-  There are no messages at the moment.
+  <div i18n="@@inbox.youDontHave">You don’t have any notifications yet.</div>
+  <div>
+    <ng-container i18n="@@inbox.youCanManage">
+      You can manage the frequency of your ORCID notifications in
+      your</ng-container
+    >
+    <a (click)="navigateTo('/account')" i18n="@@inbox.accountSetting">
+      account settings.</a
+    >
+  </div>
 </div>
 
-<div class="notifications-amount mat-body-1">
+<div
+  class="no-messages orc-font-body-small"
+  *ngIf="isAnEmptyInbox() && totalNotifications?.archived > 0 && !loading"
+>
+  <div i18n="@@inbox.youDontHaveUnarchived">
+    You don't have any unarchived notifications right now.
+  </div>
+</div>
+
+<mat-progress-bar
+  *ngIf="loading && notifications && !isAnEmptyInbox()"
+  mode="indeterminate"
+></mat-progress-bar>
+
+<div
+  class="notifications-amount mat-body-1"
+  *ngIf="!isAnEmptyInbox() && notifications"
+>
+  <app-showing-of
+    [displaying]="notifications?.length"
+    [total]="
+      showArchived ? totalNotifications?.all : totalNotifications?.nonArchived
+    "
+  >
+  </app-showing-of>
   <button
     mat-raised-button
     color="primary"
-    *ngIf="moreNotificationsMightExist"
+    *ngIf="hasMoreNotificationsToLoad()"
     (click)="showMore()"
     i18n="@@inbox.showMoreNotifications"
   >

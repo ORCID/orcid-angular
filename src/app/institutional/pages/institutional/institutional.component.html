@@ -118,7 +118,8 @@
                     color="primary"
                     type="button"
                     i18n="@@institutional.goBack"
-                    [routerLink]="['/signin']"
+                    (click)="back()"
+                    id="go-back-button"
                   >
                     Go back
                   </button>

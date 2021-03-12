@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import {
   InboxNotificationAmended,
   Item,
 } from 'src/app/types/notifications.endpoint'
-import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 
 @Component({
   selector: 'app-notification-your-record-amended',
@@ -34,13 +34,13 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
     if (item) {
       switch (item.actionType) {
         case 'CREATE':
-          return $localize`:@@inbox.newItemAdded:New item added`
+          return $localize`:@@inbox.newItemAdded:Added`
         case 'UPDATE':
-          return $localize`:@@inbox.itemUpdate:Item updated`
+          return $localize`:@@inbox.itemUpdate:Updated`
         case 'DELETE':
-          return $localize`:@@inbox.deleteItem:Deleted item`
+          return $localize`:@@inbox.deleteItem:Deleted`
         default:
-          return $localize`:@@inbox.otherUpdate:Other update`
+          return $localize`:@@inbox.otherUpdate:Other`
       }
     }
     return 'Other update'
@@ -52,12 +52,16 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
         return $localize`:@@inbox.affiliations:affiliations`
       case 'BIO':
         return $localize`:@@inbox.bio:bio`
+      case 'DISTINCTION':
+        return $localize`:@@inbox.distinction:distinction`
       case 'EDUCATION':
         return $localize`:@@inbox.education:education`
       case 'EMPLOYMENT':
         return $localize`:@@inbox.employment:employment`
       case 'EXTERNAL_IDENTIFIERS':
         return $localize`:@@inbox.externalIdentifiers:external identifiers`
+      case 'INVITED_POSITION':
+        return $localize`:@@inbox.invitedPosition:invited position`
       case 'FUNDING':
         return $localize`:@@inbox.funding:funding`
       case 'PEER_REVIEW':

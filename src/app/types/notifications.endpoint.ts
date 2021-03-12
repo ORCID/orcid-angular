@@ -50,7 +50,7 @@ export interface InboxNotification {
   putCode: number
   createdDate: any
   sentDate?: any
-  readDate: number
+  readDate?: number
   archivedDate?: number
   sourceDescription?: any
   encryptedPutCode?: any
@@ -64,6 +64,7 @@ export interface InboxNotificationAmended extends InboxNotification {
   amendedSection?:
     | 'AFFILIATION'
     | 'BIO'
+    | 'DISTINCTION'
     | 'EDUCATION'
     | 'EMPLOYMENT'
     | 'EXTERNAL_IDENTIFIERS'
@@ -110,3 +111,9 @@ export type notificationType =
   | 'TIP'
   | 'INSTITUTIONAL_CONNECTION'
   | 'PERMISSION'
+
+export interface TotalNotificationCount {
+  all: number
+  nonArchived: number
+  archived?: number
+}

@@ -2,12 +2,13 @@
 
 <ng-container [formGroup]="form">
   <mat-checkbox
+    id="privacy-input"
     class="orcid-checkbox-baseline"
     color="primary"
     formControlName="termsOfUse"
     ><ng-container i18n="@@register.consentTo">I consent to the</ng-container>
     <a
-      href="https://orcid.org/footer/privacy-policy"
+      href="{{ environment.INFO_SITE + 'footer/privacy-policy' }}"
       target="_blank"
       rel="noopener noreferrer"
       class="mat-button-font"
@@ -17,7 +18,7 @@
     </a>
     <ng-container i18n="@@register.and">and</ng-container>
     <a
-      href="https://orcid.org/content/orcid-terms-use"
+      href="{{ environment.INFO_SITE + 'content/orcid-terms-use' }}"
       target="_blank"
       rel="noopener noreferrer"
       class="mat-button-font"

@@ -3,13 +3,12 @@ export interface OauthParameters {
   response_type: string
   scope: string
   redirect_uri: string
-  oauth: string
   show_login: 'false' | 'true'
   email: string
   lang: string
   given_names: string
   family_names: string
   state: string
-  prompt?: 'login'
+  prompt?: 'login' | 'none'
   orcid: string
 }

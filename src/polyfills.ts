@@ -64,3 +64,4 @@ import 'zone.js/dist/zone' // Included with Angular CLI.
 // tslint:disable-next-line:whitespace
 ;(window as any)['global'] = window
 import 'core-js/es/string'
+import 'core-js/features/url-search-params'

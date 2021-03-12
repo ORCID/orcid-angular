@@ -16,6 +16,7 @@ import { AdvanceSearchComponent } from './components/advance-search/advance-sear
 import { BidiModule } from '@angular/cdk/bidi'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
+import { SharedModule } from '../shared/shared.module'
 
 @NgModule({
   declarations: [SearchComponent, ResultsComponent, AdvanceSearchComponent],
@@ -34,6 +35,7 @@ import { FormDirectivesModule } from '../cdk/form-directives/form-directives.mod
     ReactiveFormsModule,
     MatProgressBarModule,
     FormDirectivesModule,
+    SharedModule,
   ],
   exports: [ResultsComponent, AdvanceSearchComponent],
 })

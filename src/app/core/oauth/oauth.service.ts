@@ -5,12 +5,14 @@ import { NEVER, Observable, of, ReplaySubject } from 'rxjs'
 import {
   catchError,
   last,
+  map,
   retry,
   shareReplay,
   switchMap,
   tap,
 } from 'rxjs/operators'
 import { WINDOW } from 'src/app/cdk/window'
+import { ApplicationRoutes } from 'src/app/constants'
 import { ERROR_REPORT } from 'src/app/errors'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
 import { OauthAuthorize } from 'src/app/types/authorize.endpoint'
@@ -20,12 +22,18 @@ import { environment } from '../../../environments/environment'
 import { SignInData } from '../../types/sign-in-data.endpoint'
 import { TwoFactor } from '../../types/two-factor.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { objectToUrlParameters } from '../../constants'
 
 const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'login_required',
   'interaction_required',
   'invalid_scope',
   'unsupported_response_type',
+]
+
+const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_ORCID_APP = [
+  'oauth_error',
+  'invalid_grant',
 ]
 
 @Injectable({
@@ -61,16 +69,21 @@ export class OauthService {
     this.requestInfoSubject.next(requestInfoForm)
   }
 
+  /**
+   * @deprecated Oauth session are not require to be persistent since https://github.com/ORCID/orcid-angular/pull/609
+   */
   loadRequestInfoForm(): Observable<RequestInfoForm> {
     return this._http
       .get<RequestInfoForm>(
-        environment.BASE_URL +
-          'oauth/custom/authorize/get_request_info_form.json',
+        environment.BASE_URL + 'oauth/custom/requestInfoForm.json',
         { headers: this.headers }
       )
       .pipe(
+        // Return null if the requestInfo is empty
+        map((requestInfo) => (requestInfo.clientId ? requestInfo : undefined)),
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap((session) => this.handleSessionErrors(session))
       )
   }
 
@@ -122,9 +135,7 @@ export class OauthService {
       this.declareOauthSession$ = this._http
         .post<RequestInfoForm>(
           environment.BASE_URL +
-            `oauth/custom/init.json?${this.objectToUrlParameters(
-              queryParameters
-            )}`,
+            `oauth/custom/init.json?${objectToUrlParameters(queryParameters)}`,
           queryParameters,
           { headers: this.headers }
         )
@@ -133,7 +144,9 @@ export class OauthService {
           catchError((error) =>
             this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
           ),
-          switchMap((session) => this.handleSessionErrors(session)),
+          switchMap((session) =>
+            this.handleSessionErrors(session, queryParameters)
+          ),
           shareReplay(1)
         )
       return this.declareOauthSession$.pipe(last())
@@ -142,27 +155,30 @@ export class OauthService {
     }
   }
 
-  handleSessionErrors(session: RequestInfoForm): Observable<RequestInfoForm> {
+  handleSessionErrors(
+    session: RequestInfoForm,
+    queryParameters?: OauthParameters
+  ): Observable<RequestInfoForm> {
+    if (!session) {
+      return of(null)
+    }
     if (
       session.error &&
       OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP.find(
         (x) => x === session.error
       )
     ) {
-      // Redirect error that are handle by the client application
-      this.window.location.href = `${session.redirectUrl}#error=${session.error}`
+      // Redirect error that is handle by the client application
+      ;(this.window as any).outOfRouterNavigation(
+        `${session.redirectUrl}#error=${session.error}`
+      )
       return NEVER
     } else if (session.error || (session.errors && session.errors.length)) {
-      // Send the user to the signin and display a toaster error
-      let extra = {}
-      if (
-        session.error === 'oauth_error' ||
-        session.error === 'invalid_grant'
-      ) {
-        extra = { error: session.errorDescription }
-      }
+      // Send the user to the oauth page to see the error
       this._router
-        .navigate(['/signin'], { queryParams: extra })
+        .navigate([ApplicationRoutes.authorize], {
+          queryParams: queryParameters,
+        })
         .then((navigated: boolean) => {
           if (navigated) {
             this._errorHandler
@@ -189,7 +205,7 @@ export class OauthService {
       .get<RequestInfoForm>(
         environment.BASE_URL +
           // tslint:disable-next-line:max-line-length
-          `oauth/custom/authorize.json?${this.objectToUrlParameters(value)}`,
+          `oauth/custom/authorize.json?${objectToUrlParameters(value)}`,
         { headers: this.headers }
       )
       .pipe(
@@ -239,11 +255,5 @@ export class OauthService {
           this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
         )
       )
-  }
-
-  objectToUrlParameters(object: Object) {
-    return Object.keys(object)
-      .map((key) => `${key}=${encodeURIComponent(object[key])}`)
-      .join('&')
   }
 }

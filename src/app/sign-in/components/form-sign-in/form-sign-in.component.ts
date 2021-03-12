@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -11,7 +12,7 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { first, map } from 'rxjs/operators'
+import { catchError, first, map } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -27,6 +28,8 @@ import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
+import { combineLatest } from 'rxjs'
+import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -69,23 +72,28 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _router: Router,
     private _gtag: GoogleAnalyticsService,
     private _errorHandler: ErrorHandlerService,
-    private _signInGuard: SignInGuard
+    private _signInGuard: SignInGuard,
+    private _userInfo: UserService,
+    private cd: ChangeDetectorRef
   ) {
     this.signInLocal.type = this.signInType
-    _platformInfo
-      .get()
+    combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
       .pipe(first())
-      .subscribe((platform) => {
+      .subscribe(([session, platform]) => {
+        session = session as UserSession
+        platform = platform as PlatformInfo
         this.platform = platform
-        if (platform.oauthMode) {
+
+        if (session.oauthSession) {
           this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {
             this.signInLocal.params = {
               ...(params as OauthParameters),
-              oauth: '',
             }
           })
-        } else if (platform.social) {
+        }
+
+        if (platform.social) {
           this.signInLocal.type = TypeSignIn.social
         } else if (platform.institutional) {
           this.signInLocal.type = TypeSignIn.institutional
@@ -121,10 +129,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
       this.addUsernameValidation()
     }
+    this.cd.detectChanges()
   }
 
   ngAfterViewInit(): void {
     this.firstInput.nativeElement.focus()
+    this.cd.detectChanges()
   }
 
   onSubmit() {
@@ -149,10 +159,20 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           if (isRedirectToTheAuthorizationPage(data)) {
             this.handleOauthLogin(data.url)
           } else {
-            this._gtag.reportEvent('RegGrowth', 'Sign-In', 'Website').subscribe(
-              () => this.navigateTo(data.url),
-              () => this.navigateTo(data.url)
-            )
+            this._gtag
+              .reportEvent('Sign-In', 'RegGrowth', 'Website')
+              .pipe(
+                catchError((err) =>
+                  this._errorHandler.handleError(
+                    err,
+                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                  )
+                )
+              )
+              .subscribe(
+                () => this.navigateTo(data.url),
+                () => this.navigateTo(data.url)
+              )
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
           this.loading.next(false)
@@ -238,10 +258,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
-                if (userSession.oauthSession) {
-                  params['oauth'] = ''
-                }
                 this._router.navigate(['/register'], {
+                  // TODO leomendoza123
+                  // Adding the social/institutional parameters on the URL causes issues
+                  // https://trello.com/c/EiZOE6b1/7138
+
                   queryParams: {
                     ...params,
                     email,
@@ -263,6 +284,17 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
   }
 
+  forgotPassword() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/reset-password'], {
+          queryParams: platform.queryParameters,
+        })
+      })
+  }
+
   handleOauthLogin(urlRedirect) {
     this._user
       .getUserSession()
@@ -277,7 +309,15 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
         this._gtag
-          .reportEvent('RegGrowth', 'Sign-In', requestInfoForm)
+          .reportEvent('Sign-In', 'RegGrowth', requestInfoForm)
+          .pipe(
+            catchError((err) =>
+              this._errorHandler.handleError(
+                err,
+                ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+              )
+            )
+          )
           .subscribe(
             () => this.oauthAuthorize(urlRedirect),
             () => this.oauthAuthorize(urlRedirect)

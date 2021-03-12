@@ -77,7 +77,8 @@ nav {
         .top-bar-new-info {
           .menu-container {
             nav {
-              .top-bar {
+              .top-bar,
+              .top-bar-new-info {
                 .menu-container {
                   padding-top: 60px;
                 }
@@ -94,7 +95,8 @@ nav {
       z-index: 1000;
       height: 100%;
       margin-top: -65px;
-      .top-bar {
+      .top-bar,
+      .top-bar-new-info {
         height: auto;
         .menu-container {
           flex-direction: column;

@@ -1,12 +1,4 @@
 export * from './record.endpoint'
-export {
-  Affiliations,
-  Affiliation,
-  AffiliationGroupsTypes,
-  AffiliationGroup,
-  AffiliationUIGroup,
-  AffiliationUIGroupsTypes,
-} from './affiliations.endpoint'
 export { MonthDayYearDate } from './common.endpoint'
 export { OrgDisambiguated } from './orgs.disambiguated.endpoint'
 export { Works, WorkGroup, Work } from './works.endpoint'
@@ -23,3 +15,6 @@ export * from './screen-directions.local'
 export * from './zendesk.local'
 export * from './request-info-form.endpoint'
 export * from './snackbar.locale'
+export * from './record-email.endpoint'
+export * from './record-country.endpoint'
+export * from './record-person-identifier.endpoint'

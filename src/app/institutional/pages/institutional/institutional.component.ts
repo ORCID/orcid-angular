@@ -7,9 +7,11 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
+import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
-import { map, startWith, tap } from 'rxjs/operators'
+import { first, map, startWith, switchMap, take, tap } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -53,7 +55,9 @@ export class InstitutionalComponent implements OnInit {
   constructor(
     @Inject(WINDOW) private window: Window,
     private _cookie: CookieService,
-    private _disco: DiscoService
+    private _disco: DiscoService,
+    private _router: Router,
+    private _platformInfo: PlatformInfoService
   ) {
     this.loading = true
     this._disco.getDiscoFeed().subscribe((res) => {
@@ -87,6 +91,17 @@ export class InstitutionalComponent implements OnInit {
       )
       this.clear()
     })
+  }
+
+  back() {
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._router.navigate(['/signin'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 
   ngOnInit() {}
@@ -128,7 +143,7 @@ export class InstitutionalComponent implements OnInit {
     this.entityID = this.institution.entityID
 
     if (
-      this.institution.Logos &&
+      this.institution?.Logos &&
       !this.isInstitutionLogoDisplayed(this.institution.Logos[0].value)
     ) {
       this.logoInstitution = this.institution.Logos[0].value
@@ -159,14 +174,14 @@ export class InstitutionalComponent implements OnInit {
     }
     // Encode cookie base 64
     this._cookie.set(
-      '_saml_idp',
+      '_saml_institutional',
       institutions.join('%20'),
       dateCookie !== null ? dateCookie : this.cookieExpirationTime
     )
   }
 
   retrieveUserSelectedIdPs() {
-    let cookieValues = this._cookie.get('_saml_idp')
+    let cookieValues = this._cookie.get('_saml_institutional')
     if (cookieValues) {
       cookieValues = cookieValues.replace(/^\s+|\s+$/g, '')
       cookieValues = cookieValues.replace('+', '%20')

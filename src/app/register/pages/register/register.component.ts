@@ -12,8 +12,15 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
 import { ActivatedRoute, Params, Router } from '@angular/router'
-import { EMPTY, of } from 'rxjs'
-import { first, map, mergeMap, switchMap, tap } from 'rxjs/operators'
+import { combineLatest, EMPTY, of } from 'rxjs'
+import {
+  catchError,
+  first,
+  map,
+  mergeMap,
+  switchMap,
+  tap,
+} from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -28,6 +35,7 @@ import {
 } from 'src/app/types/register.endpoint'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
+import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-register',
@@ -57,9 +65,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     @Inject(WINDOW) private window: Window,
     private _gtag: GoogleAnalyticsService,
     private _user: UserService,
-    private _route: ActivatedRoute,
     private _router: Router,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _userInfo: UserService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -81,35 +89,26 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       captcha: [''],
     })
 
-    this._platformInfo
-      .get()
+    combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(
         first(),
-        mergeMap((platform) => {
+        map(([session, platform]) => {
+          session = session as UserSession
+          platform = platform as PlatformInfo
+
+          // TODO @leomendoza123 move the handle of social/institutional sessions to the user service
+
+          // TODO leomendoza123
+          // Adding the social/institutional parameters on the URL causes issues
+          // https://trello.com/c/EiZOE6b1/7138
+
           if (platform.queryParameters.providerId) {
-            return of(
-              (this.FormGroupStepA = this.prefillRegisterForm(
-                this.platform.queryParameters
-              ))
+            this.FormGroupStepA = this.prefillRegisterForm(
+              this.platform.queryParameters
             )
-          } else if (platform.oauthMode) {
-            return this._user.getUserSession().pipe(
-              first(),
-              map((session) => session.oauthSession),
-              tap((requestInfoForm) => {
-                if (requestInfoForm) {
-                  this.requestInfoForm = requestInfoForm
-                  this.FormGroupStepA = this.prefillRegisterForm(
-                    this.requestInfoForm
-                  )
-                } else {
-                  // for a oauth call the backend was expected to return a oauth context
-                  this._errorHandler.handleError(new Error('registerOauth'))
-                }
-              })
-            )
-          } else {
-            return EMPTY
+          } else if (session.oauthSession && platform.hasOauthParameters) {
+            this.requestInfoForm = session.oauthSession
+            this.FormGroupStepA = this.prefillRegisterForm(this.requestInfoForm)
           }
         })
       )
@@ -148,7 +147,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.FormGroupStepB,
               this.FormGroupStepC,
               this.requestInfoForm,
-              this.platform.oauthMode // request client service to be update (only when the next navigation wont go outside this app)
+              !!this.requestInfoForm // request client service to be update (only when the next navigation wont go outside this app)
             )
           })
         )
@@ -157,9 +156,17 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           if (response.url) {
             this._gtag
               .reportEvent(
-                'RegGrowth',
                 'New-Registration',
+                'RegGrowth',
                 this.requestInfoForm || 'Website'
+              )
+              .pipe(
+                catchError((err) =>
+                  this._errorHandler.handleError(
+                    err,
+                    ERROR_REPORT.STANDARD_NO_VERBOSE_NO_GA
+                  )
+                )
               )
               .subscribe(
                 () => this.afterRegisterRedirectionHandler(response),
