@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { PanelDataLineComponent } from './panel-data-line.component'
 
@@ -6,7 +6,7 @@ describe('PanelDataLineComponent', () => {
   let component: PanelDataLineComponent
   let fixture: ComponentFixture<PanelDataLineComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PanelDataLineComponent],
     }).compileComponents()

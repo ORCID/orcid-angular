@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { MyOrcidAlertsComponent } from './my-orcid-alerts.component'
 
@@ -6,7 +6,7 @@ describe('MyOrcidAlertsComponent', () => {
   let component: MyOrcidAlertsComponent
   let fixture: ComponentFixture<MyOrcidAlertsComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MyOrcidAlertsComponent],
     }).compileComponents()
