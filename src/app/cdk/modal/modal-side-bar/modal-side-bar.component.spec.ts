@@ -6,11 +6,13 @@ describe('ModalSideBarComponent', () => {
   let component: ModalSideBarComponent
   let fixture: ComponentFixture<ModalSideBarComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ModalSideBarComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ModalSideBarComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalSideBarComponent)

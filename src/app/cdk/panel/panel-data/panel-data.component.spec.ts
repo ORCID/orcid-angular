@@ -6,11 +6,13 @@ describe('PanelDataComponent', () => {
   let component: PanelDataComponent
   let fixture: ComponentFixture<PanelDataComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [PanelDataComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PanelDataComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelDataComponent)

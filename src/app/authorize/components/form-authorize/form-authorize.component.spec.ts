@@ -6,11 +6,13 @@ describe('FormAuthorizeComponent', () => {
   let component: FormAuthorizeComponent
   let fixture: ComponentFixture<FormAuthorizeComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [FormAuthorizeComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [FormAuthorizeComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormAuthorizeComponent)

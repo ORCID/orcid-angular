@@ -6,11 +6,13 @@ describe('AffiliationComponent', () => {
   let component: AffiliationComponent
   let fixture: ComponentFixture<AffiliationComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [AffiliationComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AffiliationComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AffiliationComponent)

@@ -6,11 +6,13 @@ describe('ModalNameComponent', () => {
   let component: ModalNameComponent
   let fixture: ComponentFixture<ModalNameComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ModalNameComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ModalNameComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalNameComponent)

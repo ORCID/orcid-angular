@@ -6,11 +6,13 @@ describe('ModalHeaderComponent', () => {
   let component: ModalHeaderComponent
   let fixture: ComponentFixture<ModalHeaderComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ModalHeaderComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ModalHeaderComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalHeaderComponent)

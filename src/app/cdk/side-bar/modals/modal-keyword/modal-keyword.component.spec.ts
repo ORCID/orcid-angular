@@ -6,11 +6,13 @@ describe('ModalKeywordComponent', () => {
   let component: ModalKeywordComponent
   let fixture: ComponentFixture<ModalKeywordComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ModalKeywordComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ModalKeywordComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalKeywordComponent)

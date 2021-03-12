@@ -6,11 +6,13 @@ describe('PanelSourceComponent', () => {
   let component: PanelSourceComponent
   let fixture: ComponentFixture<PanelSourceComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [PanelSourceComponent],
-    }).compileComponents()
-  }))
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PanelSourceComponent],
+      }).compileComponents()
+    })
+  )
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelSourceComponent)
