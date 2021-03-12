@@ -62,7 +62,7 @@ The following tools are not required to work on the project but they facilitate 
 
 1- Download [Visual Studio Code](https://code.visualstudio.com/) and install it
 
-2- Download and install [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin) and [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) extensions
+2- Download and install [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) extensions
 
 3- Go to VSCode menu Code/Preferences/Settings search for `Format` and select `esbenp.prettier-vscode`. You might also activate the `Editor: Format On Save` checkbox.
 

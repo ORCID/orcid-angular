@@ -4,14 +4,14 @@ export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
 // Custom email REGEXP
 // https://regex101.com/r/jV4aN7/16
-// tslint:disable-next-line: max-line-length
+// eslint-disable-next-line max-len
 export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)+([^@\s\."'\(\)\[\]\{\}\\/,:;]{2,})+$/
 
 export const EMAIL_REGEXP_GENERIC = /^\s*?(.+)@(.+?)\s*$/
 // https://regex101.com/r/9MXmdl/1
 export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://regex101.com/r/V95col/6
-// tslint:disable-next-line: max-line-length
+// eslint-disable-next-line max-len
 export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://www.regextester.com/94502
 export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/

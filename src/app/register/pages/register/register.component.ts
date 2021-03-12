@@ -224,7 +224,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       data: {
         duplicateRecords,
         titleLabel: $localize`:@@register.titleLabel:Could this be you?`,
-        // tslint:disable-next-line: max-line-length
+        // eslint-disable-next-line max-len
         bodyLabel: $localize`:@@register.bodyLabel:We found some accounts with your name, which means you may have already created an ORCID iD using a different email address. Before creating an account, please confirm that none of these records belong to you. Not sure if any of these are you?`,
         contactLabel: $localize`:@@register.contactLabel:Contact us.`,
         firstNameLabel: $localize`:@@register.firstNameLabel:First Name`,

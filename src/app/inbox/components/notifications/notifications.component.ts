@@ -155,7 +155,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   // Create a control for each notification using the putcode as key
-  // tslint:disable-next-line: max-line-length
+  // eslint-disable-next-line max-len
   setUpCheckboxForm(value) {
     const checkBoxForm = this._fromBuilder.group({})
     value.forEach((notification) => {

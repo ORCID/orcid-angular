@@ -106,7 +106,7 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
     }
   }
 
-  // tslint:disable-next-line: member-ordering
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   tempFixForOutlineFormInputCalculationIssue_Direction: ScreenDirection = 'ltr'
   tempFixForOutlineFormInputCalculation() {
     // This is a temporal way to fix an MatFormField issue

@@ -11,7 +11,7 @@ import { FormNotificationsComponent } from './components/form-notifications/form
 import { FormVisibilityComponent } from './components/form-visibility/form-visibility.component'
 import { FormTermsComponent } from './components/form-terms/form-terms.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-// tslint:disable-next-line: max-line-length
+// eslint-disable-next-line max-len
 import { FormPersonalAdditionalEmailsComponent } from './components/form-personal-additional-emails/form-personal-additional-emails.component'
 import { IsThisYouModule } from '../cdk/is-this-you'
 import { MatFormFieldModule } from '@angular/material/form-field'

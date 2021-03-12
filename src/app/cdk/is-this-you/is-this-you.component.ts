@@ -14,7 +14,7 @@ import { WINDOW } from '../window'
 export class IsThisYouComponent implements OnInit {
   titleLabel = 'Could this be you?'
   bodyLabel =
-    // tslint:disable-next-line: max-line-length
+    // eslint-disable-next-line max-len
     'We found some accounts with your name, which means you may have already created an ORCID iD using a different email address. Before creating an account, please confirm that none of these records belong to you. Not sure if any of these are you?'
   contactLabel = 'Contact us.'
   firstNameLabel = 'First Name'
