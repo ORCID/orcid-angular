@@ -71,6 +71,7 @@ export interface InboxNotificationAmended extends InboxNotification {
     | 'FUNDING'
     | 'PEER_REVIEW'
     | 'PREFERENCES'
+    | 'QUALIFICATION'
     | 'UNKNOWN'
     | 'RESEARCH_RESOURCE'
     | 'WORK'
