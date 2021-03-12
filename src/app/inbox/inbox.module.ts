@@ -12,10 +12,10 @@ import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { SharedModule } from '../shared/shared.module'
 import { NotificationHtmlComponent } from './components/notification-html/notification-html.component'
-// eslint-disable-next-line max-len
+// tslint:disable-next-line: max-line-length
 import { NotificationPermissionInstitutionalConnectionComponent } from './components/notification-permission-institutional-connection/notification-permission-institutional-connection.component'
 import { NotificationPermissionComponent } from './components/notification-permission/notification-permission.component'
-// eslint-disable-next-line max-len
+// tslint:disable-next-line: max-line-length
 import { NotificationYourRecordAmendedComponent } from './components/notification-your-record-amended/notification-your-record-amended.component'
 import { NotificationComponent } from './components/notification/notification.component'
 import { NotificationsComponent } from './components/notifications/notifications.component'

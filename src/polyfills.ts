@@ -59,9 +59,9 @@ import '@angular/localize/init'
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-// eslint-disable-next-line
+// tslint:disable-next-line:import-spacing
 import 'zone.js/dist/zone' // Included with Angular CLI.
-// eslint-disable-next-line
+// tslint:disable-next-line:whitespace
 ;(window as any)['global'] = window
 import 'core-js/es/string'
 import 'core-js/features/url-search-params'

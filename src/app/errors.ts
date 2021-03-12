@@ -70,7 +70,7 @@ export const ERROR_REPORT: {
   RESET_PASSWORD_COULD_NOT_RECOVER: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line:max-line-length
       message: $localize`:@@ngOrcid.passwordError:We couldn't recover your account details. Please try again, and if the error persists please`,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
       actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
@@ -86,7 +86,7 @@ export const ERROR_REPORT: {
   REGISTER: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred`,
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line:max-line-length
       message: $localize`:@@ngOrcid.registerError:We couldn't complete your registration. Please try again, and if the error persists please`,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
       actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,
@@ -103,7 +103,7 @@ export const ERROR_REPORT: {
   REGISTER_REACTIVATED_EMAIL: {
     display: {
       title: $localize`:@@ngOrcid.error:Oh no! An error occurred.`,
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line:max-line-length
       message: $localize`:@@ngOrcid.reactivationAccountError:We couldn't reactivate your ORCID account. Please try again, and if the error persists please`,
       action: $localize`:@@shared.knowledgeBase:visit our knowledge base.`,
       actionURL: `https://support.orcid.org/hc/en-us/articles/360047687054`,

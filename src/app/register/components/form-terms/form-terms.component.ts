@@ -30,7 +30,7 @@ import { BaseForm } from '../BaseForm'
   ],
   preserveWhitespaces: true,
 })
-// eslint-disable-next-line @typescript-eslint/naming-convention
+// tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   environment = environment
   constructor(

@@ -3,7 +3,7 @@
 import { Directive, HostBinding, HostListener } from '@angular/core'
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
+  // tslint:disable-next-line: directive-selector
   selector: `a[click]:not([href]):not([role]):not([tabindex]),
      a[matMenuTriggerFor]:not([href]):not([role]):not([tabindex])`,
 })

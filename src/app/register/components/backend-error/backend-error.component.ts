@@ -87,7 +87,7 @@ export class BackendErrorComponent implements OnInit {
       } else {
         this._snackbar.showSuccessMessage({
           title: $localize`:@@register.reactivating:Reactivating your account`,
-          // eslint-disable-next-line max-len
+          // tslint:disable-next-line: max-line-length
           message: $localize`:@@ngOrcid.signin.verify.reactivationSent:Thank you for reactivating your ORCID record; please complete the process by following the steps in the email we are now sending you. If you don’t receive an email from us, please`,
           action: $localize`:@@shared.contactSupport:contact support.`,
           actionURL: `https://support.orcid.org/hc/en-us/requests/new`,

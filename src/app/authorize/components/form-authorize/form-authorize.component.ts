@@ -178,26 +178,26 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   getLongDescription(ScopeObject: Scope): string {
     const scope = ScopeObject.value
     if (scope === 'openid') {
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line: max-line-length
       return $localize`:@@authorize.authenticateLongDescription:Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.`
     }
     if (scope === '/authenticate') {
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line: max-line-length
       return $localize`:@@authorize.authenticateLongDescription:Allow this organization or application to get your 16-character ORCID iD and read information on your ORCID record you have marked as public.`
     }
 
     if (scope === '/person/update') {
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line: max-line-length
       return $localize`:@@authorize.personUpdateLongDescription:Allow this organization or application to add information about you (for example, your country, key words, other identifiers - but not your biography) that is stored in their system(s) to the lefthand section of your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.`
     }
 
     if (scope === '/activities/update') {
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line: max-line-length
       return $localize`:@@authorize.activitiesUpdateLongDescription:Allow this organization or application to add information about your research activities (for example, works, affiliations) that is stored in their system(s) to your ORCID record. They will also be able to update this and any other information they have added, but will not be able to edit information added by you or by another trusted organization.`
     }
 
     if (scope === '/read-limited') {
-      // eslint-disable-next-line max-len
+      // tslint:disable-next-line: max-line-length
       return $localize`:@@authorize.readLimitedLongDescription:Allow this organization or application to read any information from your record you have marked as limited access. They cannot read information you have marked as private.`
     }
     // For any unreconized scope just use the description  from the backend
