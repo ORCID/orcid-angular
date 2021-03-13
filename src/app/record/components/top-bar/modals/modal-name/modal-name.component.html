@@ -1,0 +1,281 @@
+<app-modal [loading]="loadingNames">
+  <app-modal-header>
+    <ng-container i18n="@@topBar.names"> Names </ng-container>
+  </app-modal-header>
+  <app-modal-side-bar>
+    <ng-container id="side-bar-title">
+      <a
+        class="side-bar"
+        i18n="@@topBar.givenAndFamilyNames"
+        (click)="toGivenNames()"
+      >
+        Given and family names
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-1">
+      <a
+        class="side-bar"
+        i18n="@@topBar.publishedName"
+        (click)="toPublishedName()"
+      >
+        Published name
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-2">
+      <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
+        Visibility
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-3">
+      <a class="side-bar" i18n="@@topBar.otherNames" (click)="toAlsoKnownAs()">
+        Other names
+      </a>
+    </ng-container>
+  </app-modal-side-bar>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-names-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-names-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <form [formGroup]="namesForm" (ngSubmit)="onSubmit()">
+    <div
+      id="given-names"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <div class="row">
+        <p>
+          <strong i18n="@@topBar.givenAndFamilyNames">
+            Given and family names
+          </strong>
+          <span *ngIf="!platform.columns12" class="required">*</span>
+        </p>
+        <p *ngIf="platform.columns12" class="required-information mat-caption">
+          <span class="required">*</span>
+          <ng-container i18n="@@shared.requiredInformation"
+            >Required information</ng-container
+          >
+        </p>
+      </div>
+    </div>
+    <hr />
+    <p class="orc-font-small-print" i18n="@@topBar.yourGivenAndFamilyNames">
+      Your given and family names. These are used on your ORCID record by
+      default.
+    </p>
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
+        [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"
+      >
+        <strong i18n="@@topBar.givenNames">Given names</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline" class="mat-form-field-min">
+        <input
+          id="given-names-input"
+          matInput
+          formControlName="givenNames"
+          placeholder=" {{ ngOrcidAddGivenName }}"
+        />
+        <mat-error
+          class="mat-caption"
+          *ngIf="namesForm.get('givenNames').hasError('required')"
+          i18n="@@topBar.firstNameError"
+        >
+          Please enter your first/given name
+        </mat-error>
+        <mat-error
+          *ngIf="namesForm.get('givenNames').hasError('notPattern')"
+          i18n="@@topBar.invalidName"
+        >
+          Invalid name characters or format
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <label for="family-names-input" class="mat-caption">
+        <strong i18n="@@topBar.familyNames">Family names</strong>
+      </label>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline" class="mat-form-field-min">
+        <input
+          id="family-names-input"
+          matInput
+          formControlName="familyName"
+          placeholder=" {{ ngOrcidAddFamilyName }}"
+        />
+      </mat-form-field>
+    </div>
+    <div
+      id="published-name"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <p>
+        <strong i18n="@@topBar.publishedName">Published name</strong>
+      </p>
+    </div>
+    <hr />
+    <p class="orc-font-small-print" i18n="@@topBar.preferredNameFormat">
+      Your preferred name format and structure. If added the published name will
+      be used instead of your given and family names.
+    </p>
+    <div class="row">
+      <label for="published-names-input" class="mat-caption">
+        <strong i18n="@@topBar.publishedName">Published name</strong>
+      </label>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline" class="mat-form-field-min">
+        <input
+          id="published-names-input"
+          matInput
+          formControlName="publishedName"
+          placeholder=" {{ ngOrcidAddPublishedName }}"
+        />
+        <mat-hint class="mat-caption" i18n="@@topBar.youCanFormat">
+          You can format this name however you wish
+        </mat-hint>
+      </mat-form-field>
+    </div>
+    <div
+      id="visibility"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <p>
+        <strong i18n="@@shared.visibility">Visibility</strong>
+      </p>
+    </div>
+    <hr />
+    <p class="orc-font-small-print" i18n="@@shared.whoCanSeeName">
+      Who can see your name. The default visibility setting is Private.
+    </p>
+    <div class="row">
+      <div class="col no-wrap actions-wrapper no-gutters">
+        <app-privacy-selector
+          formControlName="visibility"
+        ></app-privacy-selector>
+      </div>
+    </div>
+    <div
+      id="also-known-as"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <p>
+        <strong i18n="@@topBar.alsoKnowAs">Also known as</strong>
+      </p>
+    </div>
+    <hr />
+    <p class="orc-font-small-print">
+      You can add variants of your name, such as an abbreviated first name,
+      middle names, former names or names in a different character set or
+      language. Adding other names can help people find your record when they
+      search the ORCID registry.
+    </p>
+    <ng-container *ngIf="otherNames.length > 0">
+      <div class="row">
+        <label for="alternative-names-input" class="mat-caption">
+          <strong i18n="@@topBar.otherNames">Other names</strong>
+        </label>
+      </div>
+      <div
+        class="row"
+        id="otherName-dropList"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          cdkDrag
+          rootElementSelector="#otherName-dropList"
+          class="row other-names-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [formGroupName]="otherName.putCode"
+          *ngFor="let otherName of otherNames"
+        >
+          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+            <img
+              class="icon-drag"
+              cdkDragHandle
+              src="./assets/vectors/draggable.svg"
+            />
+            <mat-form-field appearance="outline" class="mat-form-field-min">
+              <input
+                id="alternative-names-input"
+                matInput
+                formControlName="otherName"
+                placeholder="{{ ngOrcidAddOtherName }}"
+              />
+              <mat-hint
+                class="mat-caption"
+                *ngIf="otherName.putCode.indexOf('new') < 0"
+              >
+                <ng-container i18n="@@shared.source">Source:</ng-container>
+                {{ getSourceName(otherName) }}
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div
+            class="col no-wrap actions-wrapper no-gutters"
+            [ngClass]="{ privacy: !platform.columns12 }"
+          >
+            <app-privacy-selector
+              [ngClass]="{ selector: !platform.columns12 }"
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              id="delete-button"
+              (click)="deleteOtherName(otherName.putCode)"
+              mat-icon-button
+            >
+              <mat-icon class="material-icons-outlined large-material-icon"
+                >delete
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="row">
+      <a id="add-link" class="col add-more no-gutters" (click)="addOtherName()">
+        <mat-icon class="large-material-icon">add_circle</mat-icon>
+        <span class="mat-body-1" i18n="@@topBar.addAnotherName">
+          Add another name
+        </span>
+      </a>
+    </div>
+  </form>
+</app-modal>

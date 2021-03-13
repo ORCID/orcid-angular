@@ -26,7 +26,7 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._news.getNews().subscribe((data: Array<any>) => {
+    this._news.getNews().subscribe((data: any[]) => {
       this.news = data.slice(0, 3)
     })
   }

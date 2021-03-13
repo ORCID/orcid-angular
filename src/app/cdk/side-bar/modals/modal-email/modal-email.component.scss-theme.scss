@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin modal-email-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  :host ::ng-deep .verify-icon.email-activated mat-icon {
+    color: mat-color($accent, 400);
+  }
+  :host ::ng-deep .verify-icon mat-icon {
+    color: map-get($background, ui-background);
+  }
+  .add-more {
+    color: mat-color($primary, 700);
+  }
+}
+
+@include modal-email-theme($orcid-app-theme);

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { NotificationPermissionInstitutionalConnectionComponent } from './notification-permission-institutional-connection.component'
 
@@ -6,11 +6,11 @@ describe('NotificationPermissionINSTITUTIONALCONNECTIONComponent', () => {
   let component: NotificationPermissionInstitutionalConnectionComponent
   let fixture: ComponentFixture<NotificationPermissionInstitutionalConnectionComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NotificationPermissionInstitutionalConnectionComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(

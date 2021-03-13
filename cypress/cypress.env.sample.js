@@ -16,6 +16,8 @@ export const environment = {
     displayName: 'cy-Nov-05-2020-02-37-PM-kí cy-Nov-05-2020-02-37-PM-qX',
     email: 'cy-Nov-05-2020-02-37-PM+yS@gmail.com',
     password: '12345678Aa',
+    id: '0000-0002-9255-6887',
+    defaultPrivacy: 'LIMITED', // IT IS REQUIRE THAT TEST USER HAS LIMITED AS THE DEFAULT PRIVACY SETTING
   },
 
   // a working application

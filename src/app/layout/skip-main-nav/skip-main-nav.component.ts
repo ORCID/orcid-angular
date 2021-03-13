@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
 import { WINDOW } from 'src/app/cdk/window'
-import { take, filter } from 'rxjs/operators'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-skip-main-nav',

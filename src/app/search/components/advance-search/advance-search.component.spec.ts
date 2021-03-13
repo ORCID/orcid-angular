@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { AdvanceSearchComponent } from './advance-search.component'
 
@@ -6,11 +6,11 @@ describe('AdvanceSearchComponent', () => {
   let component: AdvanceSearchComponent
   let fixture: ComponentFixture<AdvanceSearchComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AdvanceSearchComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdvanceSearchComponent)

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { BackendErrorComponent } from './backend-error.component'
 
@@ -6,11 +6,11 @@ describe('BackendErrorComponent', () => {
   let component: BackendErrorComponent
   let fixture: ComponentFixture<BackendErrorComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [BackendErrorComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BackendErrorComponent)

@@ -1,24 +1,37 @@
-<div class="container">
+<div class="container" [ngClass]="{ mobile: !platform.columns12 }">
   <div>
-    <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+    <img
+      [ngClass]="{
+        mobile: !platform.columns12
+      }"
+      src="assets/vectors/orcid.logo.icon.svg"
+      alt="orcid logo"
+    />
   </div>
   <div class="text-container">
-    <div class="orc-font-body-large url" dir="ltr">
-      https:{{ environment.BASE_URL }}
+    <div
+      [ngClass]="{
+        'orc-font-body-small': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+      dir="ltr"
+    >
+      https: {{ environment.BASE_URL }}
     </div>
     <strong
       [ngClass]="{
-        'orc-font-heading-small': desktop,
-        'orc-font-body-large': !desktop
+        'orc-font-body-large': !platform.columns12,
+        'orc-font-heading-small': platform.columns12
       }"
-      >{{ id }}</strong
     >
+      {{ id }}
+    </strong>
   </div>
   <a
     [href]="id"
     target="_blank"
     rel="noopener noreferrer"
-    class="preview orc-font-smallprint"
+    class="preview orc-font-small-print"
     *ngIf="privateView"
     i18n="@@record.previewPublicRecord"
     >Preview public record</a

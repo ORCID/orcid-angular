@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { DeactivatedComponent } from './deactivated.component'
 
@@ -6,11 +6,11 @@ describe('DeactivatedComponent', () => {
   let component: DeactivatedComponent
   let fixture: ComponentFixture<DeactivatedComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DeactivatedComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DeactivatedComponent)

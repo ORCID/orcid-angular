@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { MyOrcidComponent } from './my-orcid.component'
 
@@ -6,11 +6,11 @@ describe('MyOrcidComponent', () => {
   let component: MyOrcidComponent
   let fixture: ComponentFixture<MyOrcidComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MyOrcidComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MyOrcidComponent)

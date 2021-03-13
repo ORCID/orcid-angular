@@ -27,10 +27,10 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
-import { ERROR_REPORT } from '../../../errors'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { combineLatest } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Component({
   selector: 'app-form-sign-in',

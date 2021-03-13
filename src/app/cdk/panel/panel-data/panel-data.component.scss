@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  padding: 16px;
+}
+:host.border-bottom {
+  border-bottom: solid 1px;
+}
+
+h3 {
+  margin: 0;
+}
+
+.panel-data-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  .align-end-content {
+    flex-shrink: 0;
+  }
+  .data-content {
+    width: 100%;
+  }
+}

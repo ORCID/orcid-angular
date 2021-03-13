@@ -44,7 +44,6 @@ import { MyOrcidAlertsModule } from '../cdk/my-orcid-alerts/my-orcid-alerts.modu
     A11yLinkModule,
     MyOrcidAlertsModule,
   ],
-  entryComponents: [],
   exports: [FormSignInComponent, TwoFactorComponent],
 })
 export class SignInModule {}

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Params } from '@angular/router'
 import {
   combineLatest,
   merge,

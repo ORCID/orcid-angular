@@ -9,9 +9,18 @@
   align-items: center;
   width: 100%;
   height: 56px;
+  padding: 0 16px 0 16px;
 }
 
 .text-container {
   display: flex;
   align-items: center;
+}
+
+.orc-font-body-large {
+  margin-left: 8px;
+}
+
+.orc-font-heading-small {
+  margin-left: 4px;
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import {
   Delegator,
   TrustedIndividuals,
