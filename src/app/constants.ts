@@ -1,5 +1,4 @@
-import { ɵConsole } from '@angular/core'
-import { UrlMatcher, UrlMatchResult, UrlSegment } from '@angular/router'
+import { UrlMatchResult, UrlSegment } from '@angular/router'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 

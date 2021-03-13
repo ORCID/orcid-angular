@@ -6,7 +6,7 @@ describe('PasswordRecoveryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}))
 
   it('should be created', () => {
-    const service: PasswordRecoveryService = TestBed.get(
+    const service: PasswordRecoveryService = TestBed.inject(
       PasswordRecoveryService
     )
     expect(service).toBeTruthy()

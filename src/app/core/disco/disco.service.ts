@@ -1,14 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of } from 'rxjs'
-import {
-  catchError,
-  first,
-  map,
-  retry,
-  shareReplay,
-  switchMap,
-} from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { catchError, first, map, retry, shareReplay } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'
 import { Institutional } from '../../types/institutional.endpoint'

@@ -10,10 +10,7 @@ import {
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
-import {
-  Affiliation,
-  AffiliationGroup,
-} from 'src/app/types/record-affiliation.endpoint'
+import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 
 @Component({
   selector: 'app-panel',

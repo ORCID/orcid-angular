@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { StepBComponent } from './step-b.component'
 
@@ -6,11 +6,11 @@ describe('StepBComponent', () => {
   let component: StepBComponent
   let fixture: ComponentFixture<StepBComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [StepBComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StepBComponent)

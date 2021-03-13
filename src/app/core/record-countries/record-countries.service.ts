@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { retry, catchError, tap, map } from 'rxjs/operators'
+import { retry, catchError, tap } from 'rxjs/operators'
 import {
   CountriesEndpoint,
   RecordCountryCodesEndpoint,

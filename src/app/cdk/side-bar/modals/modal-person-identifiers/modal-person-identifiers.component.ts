@@ -1,15 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
-import {
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChildren,
-} from '@angular/core'
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
-import { MatInput } from '@angular/material/input'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
@@ -17,7 +9,6 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordPersonIdentifierService } from 'src/app/core/record-personal-identifiers/record-person-identifier.service'
 import { Assertion } from 'src/app/types'
-import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 
 @Component({

@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-panel-data',

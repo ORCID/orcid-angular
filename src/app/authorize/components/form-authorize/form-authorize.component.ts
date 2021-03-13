@@ -1,14 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import {
-  switchMap,
-  take,
-  takeUntil,
-  map,
-  catchError,
-  tap,
-} from 'rxjs/operators'
+import { switchMap, take, takeUntil, map, catchError } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -19,7 +12,6 @@ import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RequestInfoForm, Scope } from 'src/app/types'
-import { ScopesStrings } from 'src/app/types/common.endpoint'
 import { UserSession } from 'src/app/types/session.local'
 import {
   TrustedIndividuals,

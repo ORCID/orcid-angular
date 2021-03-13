@@ -7,9 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
-import { map, switchMap, tap, catchError, last, take } from 'rxjs/operators'
-
-import { ApplicationRoutes } from '../constants'
+import { map, switchMap, catchError, take } from 'rxjs/operators'
 import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'

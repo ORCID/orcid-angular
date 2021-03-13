@@ -1,14 +1,11 @@
-import { Component, HostBinding, Inject, LOCALE_ID } from '@angular/core'
+import { Component, HostBinding } from '@angular/core'
 import { Router, NavigationEnd, NavigationStart } from '@angular/router'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { PlatformInfo } from './cdk/platform-info'
-import { CookieService } from 'ngx-cookie-service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
 import { UserService } from './core'
-import { first } from 'rxjs/internal/operators/first'
-import { mergeMap, switchMap, tap } from 'rxjs/operators'
-import { merge } from 'rxjs/internal/observable/merge'
+import { tap } from 'rxjs/operators'
 import { HeadlessOnOauthRoutes } from './constants'
 
 @Component({

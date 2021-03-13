@@ -7,21 +7,13 @@ import {
   Inject,
   OnInit,
   ViewChild,
-  ErrorHandler,
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
-import { ActivatedRoute, Params, Router } from '@angular/router'
-import { combineLatest, EMPTY, of } from 'rxjs'
-import {
-  catchError,
-  first,
-  map,
-  mergeMap,
-  switchMap,
-  tap,
-} from 'rxjs/operators'
+import { Params, Router } from '@angular/router'
+import { combineLatest } from 'rxjs'
+import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -281,7 +273,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     // On mobile scroll the current step component into view
     if (this.platform.columns4 || this.platform.columns8) {
       setTimeout(() => {
-        const nativeElementNextStep = <HTMLElement>nextStep.nativeElement
+        const nativeElementNextStep = nextStep.nativeElement as HTMLElement
         nativeElementNextStep.scrollIntoView()
       }, 200)
     }

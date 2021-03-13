@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { PanelElementComponent } from './panel-element.component'
 
@@ -6,11 +6,11 @@ describe('PanelElementComponent', () => {
   let component: PanelElementComponent
   let fixture: ComponentFixture<PanelElementComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PanelElementComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelElementComponent)

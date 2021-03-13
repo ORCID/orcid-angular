@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { PanelPrivacyComponent } from './panel-privacy.component'
 
@@ -6,11 +6,11 @@ describe('PanelPrivacyComponent', () => {
   let component: PanelPrivacyComponent
   let fixture: ComponentFixture<PanelPrivacyComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PanelPrivacyComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelPrivacyComponent)
