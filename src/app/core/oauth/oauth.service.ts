@@ -31,11 +31,6 @@ const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_CLIENT_APP = [
   'unsupported_response_type',
 ]
 
-const OAUTH_SESSION_ERROR_CODES_HANDLE_BY_ORCID_APP = [
-  'oauth_error',
-  'invalid_grant',
-]
-
 @Injectable({
   providedIn: 'root',
 })

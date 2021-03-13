@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { UserService } from 'src/app/core'
 import { environment } from 'src/environments/environment'
-import { UserInfo, NameForm } from 'src/app/types'
+import { UserInfo } from 'src/app/types'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../core/togglz/togglz.service'

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { NotificationHtmlComponent } from './notification-html.component'
 
@@ -6,11 +6,11 @@ describe('NotificationHtmlComponent', () => {
   let component: NotificationHtmlComponent
   let fixture: ComponentFixture<NotificationHtmlComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NotificationHtmlComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationHtmlComponent)

@@ -1,12 +1,10 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
-import { ThrowStmt } from '@angular/compiler'
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
-import { environment } from 'src/environments/environment'
 
 import { WINDOW } from '../window'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'

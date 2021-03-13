@@ -8,6 +8,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 })
 export class MyOrcidComponent implements OnInit {
   platform: PlatformInfo
+
   constructor(private _platform: PlatformInfoService) {}
 
   ngOnInit(): void {

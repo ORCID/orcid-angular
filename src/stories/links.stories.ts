@@ -1,12 +1,11 @@
 import { storiesOf } from '@storybook/angular'
-import { action } from '@storybook/addon-actions'
 
 let matChips = `
 ## Select/Unselect
 Sample content
 `
 
-storiesOf('Components|Urls', module).add(
+storiesOf('Components/Urls', module).add(
   'Plain',
   () => ({
     styles: [

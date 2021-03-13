@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin model-name-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $config: mat-typography-config();
+
+  hr {
+    border-color: map-get($foreground, 'brand-primary');
+    color: map-get($foreground, 'brand-primary');
+    background: map-get($foreground, 'brand-primary');
+  }
+}
+@include model-name-theme($orcid-app-theme);

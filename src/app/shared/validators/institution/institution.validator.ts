@@ -3,7 +3,7 @@ import { AbstractControl, ValidatorFn } from '@angular/forms'
 export class InstitutionValidator {
   static valueSelected(institutionsNames: string[]): ValidatorFn {
     return (c: AbstractControl): { [key: string]: boolean } | null => {
-      const institutionName = <string>c.value
+      const institutionName = c.value as string
       if (institutionName === '') {
         return null
       }

@@ -1,7 +1,8 @@
-import { EventEmitter, Input, Output } from '@angular/core'
+import { EventEmitter, Input, Output, Directive } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 
-export abstract class BaseStep {
+@Directive()
+export abstract class BaseStepDirective {
   public _formGroup: FormGroup
   @Input()
   set formGroup(formGroup: FormGroup) {

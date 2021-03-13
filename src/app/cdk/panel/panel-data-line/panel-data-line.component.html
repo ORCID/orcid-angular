@@ -1,0 +1,27 @@
+<h5
+  class="orc-font-body-small"
+  *ngIf="title"
+  [ngClass]="{
+    'title-margin': titleMargin,
+    'secondary-text': secondaryText
+  }"
+>
+  <i class="prefixTitle" *ngIf="prefixTitle">{{ prefixTitle }}</i>
+  {{ title }}
+  <ng-container *ngIf="detail">&#x200E;({{ detail }})&#x200E;</ng-container>
+</h5>
+
+<p
+  class="mat-body-1"
+  *ngIf="!url && copyOnClick"
+  appCopyOnClick
+  matTooltip="Click to Copy"
+  [matTooltipPosition]="'above'"
+>
+  {{ content }}
+</p>
+<p class="mat-body-1" *ngIf="!url && !copyOnClick">{{ content }}</p>
+
+<a class="mat-body-1" *ngIf="url" href="{{ url }}" target="orcid-app">{{
+  content
+}}</a>

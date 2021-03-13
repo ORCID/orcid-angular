@@ -2,6 +2,9 @@
   width: 100%;
   padding: 14px;
   box-sizing: border-box;
+  > div {
+    width: 100%;
+  }
 }
 
 app-panel {
@@ -15,4 +18,8 @@ app-panel:first-of-type {
 
 .orc-font-body {
   margin: unset;
+}
+
+.mobile {
+  height: 187px;
 }

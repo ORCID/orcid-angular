@@ -1,10 +1,16 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
-import { first, map, startWith, switchMap, take, tap } from 'rxjs/operators'
+import { first, map, startWith, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 
 import { environment } from '../../../../environments/environment'
@@ -20,10 +26,10 @@ import {
   selector: 'app-institutional',
   templateUrl: './institutional.component.html',
   styleUrls: ['./institutional.component.scss'],
-  host: { class: 'container' },
   preserveWhitespaces: true,
 })
 export class InstitutionalComponent implements OnInit {
+  @HostBinding('class.container') containerClass = true
   displayAutocompleteOptions = false
   loading = false
   options: string[]

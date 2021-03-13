@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { NewsComponent } from './news.component'
 
@@ -6,11 +6,11 @@ describe('NewsComponent', () => {
   let component: NewsComponent
   let fixture: ComponentFixture<NewsComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NewsComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NewsComponent)

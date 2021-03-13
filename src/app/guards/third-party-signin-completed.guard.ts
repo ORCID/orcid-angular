@@ -6,7 +6,7 @@ import {
   CanActivateChild,
   Router,
 } from '@angular/router'
-import { NEVER, Observable } from 'rxjs'
+import { Observable } from 'rxjs'
 import { first, map } from 'rxjs/operators'
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'

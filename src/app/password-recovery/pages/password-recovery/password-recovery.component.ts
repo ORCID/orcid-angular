@@ -12,7 +12,6 @@ import { Observable } from 'rxjs'
 import { WINDOW } from 'src/app/cdk/window'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { PasswordRecovery } from 'src/app/types'
-import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-password-recovery',
