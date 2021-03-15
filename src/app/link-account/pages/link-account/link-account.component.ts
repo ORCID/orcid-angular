@@ -8,6 +8,9 @@ import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { first } from 'rxjs/operators'
+import { UserService } from 'src/app/core'
+import { take } from 'lodash'
+import { Session } from 'node:inspector'
 
 @Component({
   selector: 'app-link-account',
@@ -29,57 +32,21 @@ export class LinkAccountComponent implements OnInit {
 
   constructor(
     private _platformInfo: PlatformInfoService,
+    private _user: UserService,
     private _disco: DiscoService,
     private _oauthService: OauthService,
     private _router: Router
   ) {
-    _platformInfo
-      .get()
+    this._user
+      .getUserSession()
       .pipe(first())
-      .subscribe((platform) => {
-        if (platform.social) {
-          this.loadSocialSignInData()
-        } else if (platform.institutional) {
-          this.loadShibbolethSignInData()
-        }
+      .subscribe((session) => {
+        this.signInData = session.thirdPartyLoginData.signinData
+        this.entityDisplayName = session.thirdPartyLoginData.entityDisplayName
       })
   }
 
   ngOnInit(): void {}
-
-  loadShibbolethSignInData() {
-    this._oauthService.loadShibbolethSignInData().subscribe((data) => {
-      this.signInData = data
-      this.getInstitution(this.signInData.providerId)
-    })
-  }
-
-  getInstitution(entityId) {
-    this._disco.getInstitutionBaseOnID(entityId).subscribe((institution) => {
-      this.loading = false
-      this.entityDisplayName = institution.DisplayNames.filter(
-        (subElement) => subElement.lang === 'en'
-      ).map((en) => {
-        return en.value
-      })[0]
-    })
-  }
-
-  loadSocialSignInData() {
-    this._oauthService.loadSocialSigninData().subscribe((data) => {
-      this.signInData = data
-      this.entityDisplayName = data.providerId
-      if (
-        this.entityDisplayName === 'facebook' ||
-        this.entityDisplayName === 'google'
-      ) {
-        this.entityDisplayName =
-          this.entityDisplayName.charAt(0).toUpperCase() +
-          this.entityDisplayName.slice(1)
-      }
-      this.loading = false
-    })
-  }
 
   show2FAEmitter($event) {
     this.show2FA = true

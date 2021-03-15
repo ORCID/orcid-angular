@@ -15,3 +15,8 @@ export interface SignInData {
   providerIdEncoded: string
   unsupportedInstitution: boolean
 }
+
+export interface SignInDataWithEntityName {
+  signinData: SignInData
+  entityDisplayName: string
+}
