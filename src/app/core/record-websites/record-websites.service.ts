@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { environment } from '../../../environments/environment.local'
+import { environment } from '../../../environments/environment'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
