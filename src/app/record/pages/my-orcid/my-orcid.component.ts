@@ -1,11 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
-import { UserRecord } from '../../../types/record.local'
-import { UserService } from '../../../core'
-import { RecordService } from '../../../core/record/record.service'
-import { takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-my-orcid',

@@ -49,7 +49,6 @@ import { CityRegionCountry } from './pipes/city-region-country/city-region-count
     SafeHtmlPipe,
     ShowingOfComponent,
   ],
-  entryComponents: [CopyOnClickComponent],
   providers: [], // Should not provide anything
 })
 export class SharedModule {}

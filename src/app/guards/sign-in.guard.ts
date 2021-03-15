@@ -68,7 +68,7 @@ export class SignInGuard implements CanActivateChild {
 
   private redirectToRegister(queryParams) {
     return this._router.createUrlTree(['/register'], {
-      queryParams: queryParams,
+      queryParams,
     })
   }
 }

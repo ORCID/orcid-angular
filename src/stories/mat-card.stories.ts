@@ -1,13 +1,12 @@
 import { storiesOf } from '@storybook/angular'
-import { SearchModule } from 'src/app/search/search.module'
 import mockSearchResults from '../../.mockData/mock-search.json'
-import { PlatformInfoService } from 'src/app/cdk/platform-info/platform-info.service'
+import { PlatformInfoService } from '../../src/app/cdk/platform-info/platform-info.service'
 import { Platform } from '@angular/cdk/platform'
 import { MatCardModule } from '@angular/material/card'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatButtonModule } from '@angular/material/button'
 
-storiesOf('Components|Card', module)
+storiesOf('Components/Card', module)
   .add('Regular', () => ({
     template: `
       <mat-card class="example-card" style="max-width: 400px">

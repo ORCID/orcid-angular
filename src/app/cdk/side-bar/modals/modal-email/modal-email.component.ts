@@ -269,10 +269,6 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
         // Only if both controls are not empty
         if (emailControlX.value && emailControlY.value) {
-          const emailYCompleteObject = this.emails.find(
-            (email) => email.putCode === keyY
-          )
-
           if (emailControlX.value === emailControlY.value && keyX !== keyY) {
             formGroupKeysWithDuplicatedValues.push(keyY)
           }

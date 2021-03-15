@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 
-import { BaseStep } from '../BaseStep'
+import { BaseStepDirective } from '../BaseStep'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
@@ -13,11 +13,12 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./step-a.component.scss'],
   preserveWhitespaces: true,
 })
-export class StepAComponent extends BaseStep {
-  infoSiteBaseUrl = environment.INFO_SITE
+export class StepAComponent extends BaseStepDirective {
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
   }
+  infoSiteBaseUrl =
+    environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE
 
   goBack() {
     this._platform

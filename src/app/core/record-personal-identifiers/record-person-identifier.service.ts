@@ -2,10 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap, map, switchMap } from 'rxjs/operators'
-import {
-  CountriesEndpoint,
-  RecordCountryCodesEndpoint,
-} from 'src/app/types/record-country.endpoint'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'

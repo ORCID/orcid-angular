@@ -6,9 +6,8 @@ import {
   Delegator,
 } from 'src/app/types/trusted-individuals.endpoint'
 import { environment } from 'src/environments/environment'
-import { retry, catchError, tap, repeatWhen } from 'rxjs/operators'
+import { retry, catchError, repeatWhen } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { map } from 'puppeteer/DeviceDescriptors'
 import { UserService } from '../user/user.service'
 import { ERROR_REPORT } from 'src/app/errors'
 

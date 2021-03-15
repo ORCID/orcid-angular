@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { UserInfo } from 'firebase'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'

@@ -6,7 +6,7 @@ describe('AffiliationsSortService', () => {
   beforeEach(() => TestBed.configureTestingModule({}))
 
   it('should be created', () => {
-    const service: AffiliationsSortService = TestBed.get(
+    const service: AffiliationsSortService = TestBed.inject(
       AffiliationsSortService
     )
     expect(service).toBeTruthy()

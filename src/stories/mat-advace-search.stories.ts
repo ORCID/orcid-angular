@@ -1,10 +1,9 @@
 import { storiesOf } from '@storybook/angular'
-import { action } from '@storybook/addon-actions'
-import { SearchModule } from 'src/app/search/search.module'
+import { SearchModule } from '../../src/app/search/search.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { PlatformInfoService } from 'src/app/cdk/platform-info/platform-info.service'
+import { PlatformInfoService } from '../../src/app/cdk/platform-info/platform-info.service'
 import { Platform } from '@angular/cdk/platform'
-import { PlatformInfoModule } from 'src/app/cdk/platform-info'
+import { PlatformInfoModule } from '../../src/app/cdk/platform-info'
 import { HttpClientModule } from '@angular/common/http'
 
 let matChips = `
@@ -12,7 +11,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Components|Advanced Search', module)
+storiesOf('Components/Advanced Search', module)
   .add(
     'Plain',
     () => ({

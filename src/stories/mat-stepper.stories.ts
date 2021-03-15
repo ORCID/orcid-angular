@@ -18,7 +18,7 @@ For full documentation on how to implement this with an Angular
 form see [the official material docs](https://material.angular.io/components/stepper/overview).
 `
 
-storiesOf('Components|Stepper', module)
+storiesOf('Components/Stepper', module)
   .add(
     'horizontal',
     () => ({

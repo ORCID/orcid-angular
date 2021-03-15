@@ -1,5 +1,11 @@
 import { HttpParams } from '@angular/common/http'
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { first } from 'rxjs/operators'
@@ -20,10 +26,10 @@ import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.
     './sign-in.component.scss-theme.scss',
     './sign-in.component.scss',
   ],
-  host: { class: 'container' },
   preserveWhitespaces: true,
 })
 export class SignInComponent implements OnInit {
+  @HostBinding('class.container') containerClass = true
   @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
   requestInfoForm: RequestInfoForm // deprecated
   params: HttpParams // deprecated

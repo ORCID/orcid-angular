@@ -43,7 +43,7 @@ export class FormNotificationsComponent extends BaseForm implements OnInit {
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupToSendOrcidNewsForm(
-        <FormGroup>this.form
+        this.form as FormGroup
       )
       fn(registerForm)
     })

@@ -1,5 +1,5 @@
 import { Assertion } from '.'
-import { MonthDayYearDate, Value, Visibility } from './common.endpoint'
+import { Visibility } from './common.endpoint'
 
 export interface PersonIdentifierEndpoint {
   errors: string[]

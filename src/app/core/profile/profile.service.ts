@@ -47,10 +47,10 @@ export class ProfileService {
   }
 
   get(id): Observable<[Person, AffiliationUIGroup[], Works]> {
-    return combineLatest(
+    return combineLatest([
       this.getPerson(id),
       this._affiliations.getAffiliations(), // REMOVED THE ID PARAMETER
-      this._works.get(id)
-    )
+      this._works.get(id),
+    ])
   }
 }
