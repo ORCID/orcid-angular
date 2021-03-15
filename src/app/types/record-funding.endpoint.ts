@@ -6,14 +6,13 @@ import {
 } from './common.endpoint'
 
 export interface FundingGroup {
-  affiliations: [Funding]
+  fundings: [Funding]
   activePutCode: number
   defaultFunding: Funding
   groupId: string
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
-  externalIdentifiers: [any] // TODO is this always empty?
-  affiliationType: string // Todo make an enum
+  externalIdentifiers: [any] // TODO is this always empty?  
 }
 
 export interface Funding {
