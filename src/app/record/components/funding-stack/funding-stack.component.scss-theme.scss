@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin funding-stack-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  :host.display-the-stack {
+    border-color: mat-color($background, ui-background-darkest);
+  }
+}
+
+@include funding-stack-theme($orcid-app-theme);
