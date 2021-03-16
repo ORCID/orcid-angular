@@ -2,39 +2,38 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { combineLatest, Observable, of } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
-import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
+import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { OrgDisambiguated } from 'src/app/types'
 import {
-  Affiliation,
-  AffiliationGroup,
-  AffiliationUIGroup,
-} from 'src/app/types/record-affiliation.endpoint'
+  Funding,
+  FundingGroup,  
+} from 'src/app/types/record-funding.endpoint'
 
 @Component({
-  selector: 'app-affiliation-stack',
-  templateUrl: './affiliation-stack.component.html',
+  selector: 'app-funding-stack',
+  templateUrl: './funding-stack.component.html',
   styleUrls: [
-    './affiliation-stack.component.scss',
-    './affiliation-stack.component.scss-theme.scss',
+    './funding-stack.component.scss',
+    './funding-stack.component.scss-theme.scss',
   ],
 })
-export class AffiliationStackComponent implements OnInit {
+export class FundingStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
-  _affiliationStack: AffiliationGroup
+  _fundingStack: FundingGroup
   @Input()
-  set affiliationStack(value: AffiliationGroup) {
-    this._affiliationStack = value
-    this.setAffiliationsInitialStates(value)
+  set fundingStack(value: FundingGroup) {
+    this._fundingStack = value
+    this.setFundingInitialStates(value)
   }
-  get affiliationStack(): AffiliationGroup {
-    return this._affiliationStack
+  get fundingStack(): FundingGroup {
+    return this._fundingStack
   }
 
   _displayTheStack = false
   set displayTheStack(mode: boolean) {
     this._displayTheStack = mode
     this.displayTheStackClass = this._displayTheStack
-    this.setAffiliationsInitialStates(this.affiliationStack, true)
+    this.setFundingsInitialStates(this.fundingStack, true)
   }
   get displayTheStack(): boolean {
     return this._displayTheStack
@@ -49,17 +48,17 @@ export class AffiliationStackComponent implements OnInit {
   } = {}
 
   constructor(
-    private _affiliationService: RecordAffiliationService,
+    private _fundingsService: RecordFundingsService,
     private _organizationsService: OrganizationsService
   ) {}
 
   /**
    * Set the panelDetails and top of the stack card to default mode
    */
-  private setAffiliationsInitialStates(value: AffiliationGroup, force = false) {
-    value.affiliations.forEach((affiliation) => {
-      this.setDefaultPanelsDisplay(affiliation, force)
-      this.setDefaultPanelDetailsState(affiliation, force)
+  private setFundingsInitialStates(value: FundingGroup, force = false) {
+    value.fundings.forEach((funding) => {
+      this.setDefaultPanelsDisplay(funding, force)
+      this.setDefaultPanelDetailsState(funding, force)
     })
   }
 
