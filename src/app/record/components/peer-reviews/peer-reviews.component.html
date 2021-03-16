@@ -1,36 +1,133 @@
-<h2 class="orc-font-body">Peer review</h2>
-<div *ngIf="userRecord && userRecord.peerReviews.length > 0">
+<app-panels
+  *ngIf="userRecord && userRecord.peerReviews"
+  class="row"
+  [title]="ngOrcidPeerReview"
+  [type]="'peer-review'"
+  [total]="userRecord.peerReviews.length"
+>
   <ng-container *ngFor="let peerReview of userRecord.peerReviews">
-    <span i18n="@@peerReview.reviewActivity">Review activity for</span>{{ peerReview.name }}
-    <br>
-    <span>{{peerReview.type}},</span>{{ peerReview.description }}
-    <br>
-    <ng-container *ngIf="peerReview.groupType">
-      <span>{{peerReview.groupType}}</span><a href="{{ peerReview.url }}">{{peerReview.groupIdValue}}</a>
-      <br>
-    </ng-container>
-    <ul>
-      <ng-container *ngFor="let subPeerReview of peerReview.peerReviewDuplicateGroups">
-        <li>
-          <span i18n="@@peerReview.reviewDate">Review date</span>{{subPeerReview.peerReviews[0].completionDate | monthDayYearDateToString}}
-            <span i18n="@@peerReview.type">Type</span>{{subPeerReview.peerReviews[0].type}}
-            <span i18n="@@peerReview.role">Role</span>{{subPeerReview.peerReviews[0].role.value}}
-          <br>
-          <!--Details-->
-            <span i18n="@@peerReview.reviewIdentifiers">Review identifier(s)</span>
-          {{subPeerReview.peerReviews[0].externalIdentifiers[0].externalIdentifierType.value}} {{subPeerReview.peerReviews[0].externalIdentifiers[0].externalIdentifierId.value}}
-          <br>
-          <button type="button" (click)="getDetails(subPeerReview.id)">details</button>
-          <br>
-          <ng-container *ngIf="detailsPeerReviews[subPeerReview.id]"></ng-container>
-          <span i18n="@@peerReview.conveningOrganization">Convening organization</span>
-<!--          {{detailsPeerReviews[subPeerReview.peerReviews[0].putCode].orgName.value}}-->
-          <span i18n="@@peerReview.reviewSubject">Review subject</span>
-          {{subPeerReview.peerReviews[0].subjectExternalIdentifier}}
-          <!--Details-->
-          <span>Source</span> {{ subPeerReview.peerReviews[0].sourceName}}
-        </li>
-      </ng-container>
-    </ul>
+    <app-panel
+      [elements]="peerReview"
+      [type]="'top-bar'"
+      [editable]="false"
+      class="top-bar"
+    >
+      <div header>
+        <ng-container i18n="@@peerReview.reviewActivity">
+          Review activity for
+        </ng-container>
+        <b>
+          {{peerReview.name}}
+        </b>
+        ({{ peerReview.peerReviewDuplicateGroups.length }})
+      </div>
+      <app-panel-data
+        class="orc-font-body-small"
+      >
+        <app-panel-element [hideVisibility]="false">
+          <p>
+            <span class="capitalize">{{ peerReview.type }}</span>, {{ peerReview.description }}
+          </p>
+          <ng-container *ngIf="peerReview.groupType">
+            <p>
+              {{ peerReview.groupType }}:
+              <a href="{{ peerReview.url }}">
+                {{ peerReview.groupIdValue }}
+              </a>
+            </p>
+          </ng-container>
+          <ng-container *ngFor="let subPeerReview of peerReview.peerReviewDuplicateGroups">
+            <div nested-panels>
+              <app-panel
+                [elements]="subPeerReview"
+                [type]="'top-bar'"
+                [editable]="false"
+                class="top-bar"
+              >
+                <div header>
+                  <span class="header-sub-peer-review">
+                    <b i18n="@@peerReview.reviewDate">
+                      Review date:
+                    </b>
+                    {{subPeerReview.peerReviews[0].completionDate | monthDayYearDateToString}}
+                  </span>
+                  <span class="header-sub-peer-review">
+                    <b i18n="@@peerReview.type">
+                      Type:
+                    </b>
+                    <span class="capitalize">
+                      {{subPeerReview.peerReviews[0].type.value}}
+                    </span>
+                  </span>
+                  <span class="header-sub-peer-review">
+                    <b i18n="@@peerReview.role">
+                      Role:
+                    </b>
+                    <span class="capitalize">
+                      {{subPeerReview.peerReviews[0].role.value}}
+                    </span>
+                  </span>
+                </div>
+                <div custom-controls>
+                  <a
+                    (click)="getDetails(subPeerReview.peerReviews[0], subPeerReview.peerReviews[0].putCode.value)"
+                    i18n="@@peerReview.showLessDetail"
+                  >
+                    Show less detail
+                  </a>
+                  <a
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="{{subPeerReview.peerReviews[0].url}}"
+                    i18n="@@peerReview.view"
+                  >
+                    View
+                  </a>
+                </div>
+                <app-panel-data *ngIf="subPeerReview.peerReviews[0].showDetails">
+                  <app-panel-element
+                    [hideVisibility]="false">
+                    <div class="details">
+                      <div>
+                        <b i18n="@@peerReview.reviewIdentifiers">Review identifier(s)</b>
+                      </div>
+                      <span class="source">
+                        {{subPeerReview.peerReviews[0].externalIdentifiers[0].externalIdentifierType.value}}: {{subPeerReview.peerReviews[0].externalIdentifiers[0].externalIdentifierId.value}}
+                      </span>
+                    </div>
+                    <div class="details">
+                      <div>
+                        <b i18n="@@peerReview.conveningOrganization">
+                          Convening organization
+                        </b>
+                      </div>
+                      {{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).orgName.value }}
+                    </div>
+                    <div>
+                      <b i18n="@@peerReview.reviewSubject">
+                        Review subject
+                      </b>
+                    </div>
+                    <div>
+                      <ng-container *ngIf="getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectName">
+                        {{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectName.value }}
+                      </ng-container>
+                      <ng-container *ngIf="getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectType">
+                        ({{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectType.value }})
+                      </ng-container>
+                    </div>
+                    <div *ngIf="getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectContainerName">
+                      {{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectContainerName.value }}
+                    </div>
+                  </app-panel-element>
+                </app-panel-data>
+              </app-panel>
+            </div>
+          </ng-container>
+        </app-panel-element>
+      </app-panel-data>
+      <app-panel-source [sourceName]="peerReview.sourceName">
+      </app-panel-source>
+    </app-panel>
   </ng-container>
-</div>
+</app-panels>

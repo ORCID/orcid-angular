@@ -10,7 +10,11 @@ import {
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
-import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  AffiliationGroup,
+} from 'src/app/types/record-affiliation.endpoint'
+import { PeerReview } from '../../../types/record-peer-review.endpoint'
 
 @Component({
   selector: 'app-panel',
@@ -19,17 +23,18 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 })
 export class PanelComponent implements OnInit {
   @Input() editModalComponent: ComponentType<any>
-  @Input() elements: Assertion[] | Value | Address | Affiliation
-  @Input() type: 'top-bar' | 'side-bar' | 'affiliations' | 'main'
+  @Input() elements: Assertion[] | Value | Address | Affiliation | PeerReview | any
+  @Input() type: 'top-bar' | 'side-bar' | 'affiliations' | 'peer-review' | 'main'
   @Input() userRecord: UserRecord
   @Input() visibility: VisibilityStrings
   @Input() hasNestedPanels: false
+  @Input() editable = true
+
 
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   openState = false
-  editable = true
 
   constructor(
     private _dialog: MatDialog,
@@ -38,7 +43,7 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  isArrayAndIsNotEmpty(obj: Assertion[] | Value | Address | Affiliation) {
+  isArrayAndIsNotEmpty(obj: Assertion[] | Value | Address | Affiliation | PeerReview) {
     return Array.isArray(obj) && obj.length > 0
   }
 

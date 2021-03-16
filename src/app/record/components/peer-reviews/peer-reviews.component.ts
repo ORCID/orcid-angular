@@ -12,7 +12,8 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
 @Component({
   selector: 'app-peer-reviews',
   templateUrl: './peer-reviews.component.html',
-  styleUrls: ['./peer-reviews.component.scss'],
+  styleUrls: ['./peer-reviews.component.scss',
+    './peer-reviews.component.scss-theme.scss'],
   preserveWhitespaces: true,
 })
 export class PeerReviewsComponent implements OnInit {
@@ -30,7 +31,12 @@ export class PeerReviewsComponent implements OnInit {
   }
   userRecord: UserRecord
   platform: PlatformInfo
-  detailsPeerReviews: PeerReview[] = []
+  detailsPeerReviews: {
+    putCode: number,
+    peerReview: PeerReview
+  }[] = []
+
+  ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
 
   constructor(
     _platform: PlatformInfoService,
@@ -64,14 +70,14 @@ export class PeerReviewsComponent implements OnInit {
       })
   }
 
-  getDetails(putCode: number): void {
+  getDetails(peerReview: PeerReview, putCode: number): void {
     console.log(putCode)
     if (this.publicView) {
       this._recordPeerReviewService.getPublicPeerReviewById(this.userSession.userInfo.EFFECTIVE_USER_ORCID, putCode)
         .pipe(first())
         .subscribe(
           data => {
-            this.detailsPeerReviews[putCode] = data
+            this.detailsPeerReviews.push({ putCode: putCode, peerReview: data})
           },
           error => {
             console.log('getDetailsError', error)
@@ -82,12 +88,33 @@ export class PeerReviewsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.detailsPeerReviews[putCode] = data
+            this.detailsPeerReviews.push({ putCode: putCode, peerReview: data})
+            peerReview.showDetails = true
           },
           error => {
             console.log('getDetailsError', error)
           },
         )
     }
+  }
+
+  getPeerReview(putCode: number): PeerReview {
+    if (this.detailsPeerReviews.length === 0) {
+      return null
+    }
+
+    console.log('getPeerReview')
+    console.log(putCode)
+    console.log(this.detailsPeerReviews
+      .filter(value => value.putCode === putCode)
+      .map((value) => {
+        return value.peerReview
+      })[0])
+
+    return this.detailsPeerReviews
+      .filter(value => value.putCode === putCode)
+      .map((value) => {
+        return value.peerReview
+      })[0]
   }
 }

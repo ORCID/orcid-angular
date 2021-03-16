@@ -47,15 +47,12 @@
     </button>
   </div>
 </div>
-<div
-  class="body"
-  *ngIf="isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements)"
->
+<div class="body">
   <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
   <ng-content></ng-content>
 
   <!-- [NESTED PANELS] FOR PEER REVIEWS AND RESEARCH RESOURCES -->
   <div class="nested-panels" *ngIf="hasNestedPanels">
-    <ng-content select="app-panel"></ng-content>
+    <ng-content select="[nested-panels]"></ng-content>
   </div>
 </div>

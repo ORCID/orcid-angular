@@ -15,15 +15,16 @@ export interface PeerReview extends AssertionBase {
   groupType?: any
   orgName: Value
   role: Value
-  subjectContainerName: string
+  subjectContainerName: any
   subjectExternalIdentifier: string
-  subjectName: string
-  subjectType: string
+  subjectName: any
+  subjectType: any
   subjectUrl: string
   translatedSubjectName: string
   type: Value | string
   name: string
   peerReviewDuplicateGroups: PeerReviewDuplicateGroup[]
+  showDetails: boolean
 }
 
 export interface PeerReviewDuplicateGroup {
