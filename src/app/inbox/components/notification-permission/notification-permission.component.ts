@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { InboxNotificationPermission } from 'src/app/types/notifications.endpoint'
+import { InboxNotificationPermission, Item } from 'src/app/types/notifications.endpoint'
+import { chain } from 'lodash'
 
 @Component({
   selector: 'app-notification-permission',
@@ -10,10 +11,50 @@ import { InboxNotificationPermission } from 'src/app/types/notifications.endpoin
 })
 export class NotificationPermissionComponent implements OnInit {
   @Input() notification: InboxNotificationPermission
+  itemsByType: { type: string, items: Item[] }[]
 
   constructor(@Inject(WINDOW) private window: Window) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.itemsByType =
+      chain(this.notification.items.items)
+        .groupBy( 'itemType')
+        .map((value, key) => ({ type: key, items: value }))
+        .value()
+  }
+
+  getNotificationType(type: string) {
+    switch (type) {
+      case 'AFFILIATION':
+        return $localize`:@@inbox.affiliations:Affiliations`
+      case 'BIO':
+        return $localize`:@@inbox.bio:Bio`
+      case 'DISTINCTION':
+        return $localize`:@@inbox.distinction:Distinction`
+      case 'EDUCATION':
+        return $localize`:@@inbox.education:Education`
+      case 'EMPLOYMENT':
+        return $localize`:@@inbox.employment:Employment`
+      case 'EXTERNAL_IDENTIFIERS':
+        return $localize`:@@inbox.externalIdentifiers:External Identifiers`
+      case 'INVITED_POSITION':
+        return $localize`:@@inbox.invitedPosition:Invited Position`
+      case 'FUNDING':
+        return $localize`:@@inbox.funding:Funding`
+      case 'PEER_REVIEW':
+        return $localize`:@@inbox.peerReview:Peer Review`
+      case 'PREFERENCES':
+        return $localize`:@@inbox.preferences:Preferences`
+      case 'QUALIFICATION':
+        return $localize`:@@inbox.qualification:Qualification`
+      case 'RESEARCH_RESOURCE':
+        return $localize`:@@inbox.researchResource:Research Resource`
+      case 'WORK':
+        return $localize`:@@inbox.work:Work`
+      default:
+        return $localize`:@@inbox.unknown:unknown`
+    }
+  }
 
   navigateTo(val) {
     this.window.location.href = val
