@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { AuthorizeComponent } from './authorize.component'
 
@@ -6,11 +6,11 @@ describe('AuthorizeComponent', () => {
   let component: AuthorizeComponent
   let fixture: ComponentFixture<AuthorizeComponent>
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AuthorizeComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AuthorizeComponent)

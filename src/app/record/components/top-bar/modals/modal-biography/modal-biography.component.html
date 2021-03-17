@@ -1,0 +1,96 @@
+<app-modal>
+  <app-modal-header>
+    <ng-container i18n="@@topBar.biography"> Biography </ng-container>
+  </app-modal-header>
+  <app-modal-side-bar>
+    <ng-container id="side-bar-title">
+      <a class="side-bar" i18n="@@topBar.biography" (click)="toBiography()">
+        Biography
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-1">
+      <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
+        Visibility
+      </a>
+    </ng-container>
+  </app-modal-side-bar>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-biography-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-biography-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <form [formGroup]="biographyForm" (ngSubmit)="onSubmit()">
+    <div
+      id="biography"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <p>
+        <strong i18n="@@topBar.biography"> Biography </strong>
+      </p>
+    </div>
+    <hr />
+    <p class="orc-font-small-print" i18n="@@topBar.information">
+      Information about yourself, your research interests and other pertinent
+      details that enhance your ORCID record.
+    </p>
+    <label for="biography-input" class="mat-caption">
+      <strong i18n="@@topBar.biography">Biography</strong>
+    </label>
+    <mat-form-field appearance="outline" class="mat-form-field-min">
+      <textarea
+        id="biography-input"
+        matInput
+        formControlName="biography"
+        placeholder=" {{ ngOrcidAddYourBiography }}"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="7"
+      >
+      </textarea>
+      <mat-error
+        *ngIf="biographyForm.get('biography').hasError('notPattern')"
+        i18n="@@topBar.invalidBio"
+      >
+        Invalid characters or format
+      </mat-error>
+    </mat-form-field>
+    <div
+      id="visibility"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <p>
+        <strong i18n="@@shared.visibility"> Visibility </strong>
+      </p>
+    </div>
+    <hr />
+    <p class="orc-font-small-print" i18n="@@shared.whoCanSeeBio">
+      Who can see your biography. The default visibility setting is Private.
+    </p>
+    <div class="col no-wrap actions-wrapper no-gutters visibility">
+      <app-privacy-selector formControlName="visibility"></app-privacy-selector>
+    </div>
+  </form>
+</app-modal>

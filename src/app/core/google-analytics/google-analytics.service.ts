@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment'
 export class GoogleAnalyticsService {
   gtag: Gtag.Gtag
   constructor(@Inject(WINDOW) private window: Window) {
-    this.gtag = (<any>window).gtag
+    this.gtag = (window as any).gtag
   }
 
   reportPageView(url: string) {
@@ -57,8 +57,8 @@ fatal: "${fatal}"
     `)
 
     this.gtag('event', 'exception', {
-      description: description,
-      fatal: fatal,
+      description,
+      fatal,
     })
   }
 

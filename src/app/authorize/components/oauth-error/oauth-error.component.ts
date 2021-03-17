@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { combineLatest, Subject } from 'rxjs'
-import { first, map, takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { UserService } from 'src/app/core'
 import { ZendeskService } from 'src/app/core/zendesk/zendesk.service'
@@ -13,7 +13,7 @@ import { UserSession } from 'src/app/types/session.local'
   styleUrls: ['./oauth-error.component.scss'],
   preserveWhitespaces: true,
 })
-export class OauthErrorComponent implements OnInit {
+export class OauthErrorComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   error = ''

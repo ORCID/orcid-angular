@@ -1,5 +1,11 @@
 <div class="container">
-  <div class="text-container orc-font-heading-small">
+  <div
+    class="text-container"
+    [ngClass]="{
+      'orc-font-body-large': !platform.columns12,
+      'orc-font-heading-small': platform.columns12
+    }"
+  >
     <ng-content> </ng-content>
   </div>
   <button mat-icon-button aria-label="_____">

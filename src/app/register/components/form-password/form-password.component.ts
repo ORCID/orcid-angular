@@ -102,7 +102,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupToPasswordRegisterForm(
-        <FormGroup>this.form
+        this.form as FormGroup
       )
 
       fn(registerForm)

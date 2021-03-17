@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core'
-import { RouterModule, Routes, UrlSegment } from '@angular/router'
+import { RouterModule, Routes } from '@angular/router'
 
-import {
-  isValidOrcidFormat,
-  URL_PRIVATE_PROFILE,
-  ApplicationRoutes,
-  routerThirdPartySigninMatch,
-} from './constants'
+import { ApplicationRoutes, routerThirdPartySigninMatch } from './constants'
 import { AuthenticatedGuard } from './guards/authenticated.guard'
 import { SignInGuard } from './guards/sign-in.guard'
 import { AuthorizeGuard } from './guards/authorize.guard'
@@ -108,7 +103,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

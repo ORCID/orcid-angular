@@ -18,7 +18,6 @@ import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validato
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SearchResults, ScreenDirection } from 'src/app/types'
 import { SearchService } from 'src/app/core/search/search.service'
-import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-advance-search',

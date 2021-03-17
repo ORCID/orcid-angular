@@ -52,7 +52,7 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupToTermOfUserRegisterForm(
-        <FormGroup>this.form
+        this.form as FormGroup
       )
       fn(registerForm)
     })

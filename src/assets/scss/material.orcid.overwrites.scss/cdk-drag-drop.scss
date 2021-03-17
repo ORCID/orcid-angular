@@ -1,0 +1,6 @@
+// FIX for CDK drag and drop issue with Mat-Dialog https://github.com/angular/components/issues/14280
+
+.cdk-global-scrollblock {
+  position: initial !important;
+  overflow: hidden !important;
+}

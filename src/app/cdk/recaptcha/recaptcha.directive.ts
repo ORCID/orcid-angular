@@ -6,7 +6,6 @@
 
 import {
   Directive,
-  Input,
   Inject,
   OnInit,
   NgZone,
@@ -18,9 +17,7 @@ import {
 import { WINDOW } from '../window'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { environment } from 'src/environments/environment'
-import { SnackbarService } from '../snackbar/snackbar.service'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
-import { ERROR_REPORT } from 'src/app/errors'
 
 export interface ReCaptchaConfig {
   theme?: 'dark' | 'light'

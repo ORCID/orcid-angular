@@ -1,10 +1,10 @@
 import { storiesOf } from '@storybook/angular'
-import { SearchModule } from 'src/app/search/search.module'
+import { SearchModule } from '../../src/app/search/search.module'
 import mockSearchResults from '../../.mockData/mock-search.json'
-import { PlatformInfoService } from 'src/app/cdk/platform-info/platform-info.service'
+import { PlatformInfoService } from '../../src/app/cdk/platform-info/platform-info.service'
 import { Platform } from '@angular/cdk/platform'
 
-storiesOf('Components|Search Results', module)
+storiesOf('Components/Search Results', module)
   .add(
     'show results',
     () => ({

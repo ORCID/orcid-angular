@@ -1,0 +1,23 @@
+<ng-container
+  *ngFor="
+    let profileAffiliationsGroup of profileAffiliationUiGroups;
+    trackBy: trackByProfileAffiliationUiGroups
+  "
+>
+  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <app-panels
+    *ngIf="profileAffiliationsGroup.affiliationGroup.length"
+    class="row"
+    [title]="profileAffiliationsGroup.type"
+    [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
+    [total]="profileAffiliationsGroup.affiliationGroup.length"
+  >
+    <app-affiliation-stack
+      *ngFor="
+        let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
+        trackBy: trackByAffiliationGroup
+      "
+      [affiliationStack]="affiliationGroup"
+    ></app-affiliation-stack>
+  </app-panels>
+</ng-container>
