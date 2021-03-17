@@ -60,10 +60,12 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
         return $localize`:@@inbox.employment:Employment`
       case 'EXTERNAL_IDENTIFIERS':
         return $localize`:@@inbox.externalIdentifiers:External Identifiers`
-      case 'INVITED_POSITION':
-        return $localize`:@@inbox.invitedPosition:Invited Position`
       case 'FUNDING':
         return $localize`:@@inbox.funding:Funding`
+      case 'INVITED_POSITION':
+        return $localize`:@@inbox.invitedPosition:Invited Position`
+      case 'MEMBERSHIP':
+        return $localize`:@@inbox.membership:Membership`
       case 'PEER_REVIEW':
         return $localize`:@@inbox.peerReview:Peer Review`
       case 'PREFERENCES':
@@ -72,6 +74,8 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
         return $localize`:@@inbox.qualification:Qualification`
       case 'RESEARCH_RESOURCE':
         return $localize`:@@inbox.researchResource:Research Resource`
+      case 'SERVICE':
+        return $localize`:@@inbox.researchResource:Service`
       case 'WORK':
         return $localize`:@@inbox.work:Work`
       default:
