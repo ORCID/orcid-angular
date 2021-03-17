@@ -13,10 +13,14 @@
     <strong>
       {{ getNotificationType(i.type) }}
     </strong>
-    ({{ i.items.length }})</p>
+    ({{ i.items.length }})
+  </p>
   <ul>
     <li *ngFor="let i of i.items">
-      {{ i.itemName }} <span *ngIf="i.externalIdentifier">{{ i.externalIdentifier.type }}: {{i.externalIdentifier.value}}</span>
+      {{ i.itemName }}
+      <span *ngIf="i.externalIdentifier"
+        >{{ i.externalIdentifier.type }}: {{ i.externalIdentifier.value }}</span
+      >
     </li>
   </ul>
 </div>

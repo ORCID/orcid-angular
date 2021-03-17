@@ -1,6 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { InboxNotificationPermission, Item } from 'src/app/types/notifications.endpoint'
+import {
+  InboxNotificationPermission,
+  Item,
+} from 'src/app/types/notifications.endpoint'
 import { chain } from 'lodash'
 
 @Component({
@@ -11,16 +14,15 @@ import { chain } from 'lodash'
 })
 export class NotificationPermissionComponent implements OnInit {
   @Input() notification: InboxNotificationPermission
-  itemsByType: { type: string, items: Item[] }[]
+  itemsByType: { type: string; items: Item[] }[]
 
   constructor(@Inject(WINDOW) private window: Window) {}
 
   ngOnInit(): void {
-    this.itemsByType =
-      chain(this.notification.items.items)
-        .groupBy( 'itemType')
-        .map((value, key) => ({ type: key, items: value }))
-        .value()
+    this.itemsByType = chain(this.notification.items.items)
+      .groupBy('itemType')
+      .map((value, key) => ({ type: key, items: value }))
+      .value()
   }
 
   getNotificationType(type: string) {
