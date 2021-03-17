@@ -35,7 +35,10 @@ import {
   UserSession,
   UserSessionUpdateParameters,
 } from 'src/app/types/session.local'
-import { SignInData, SignInDataWithEntityName } from 'src/app/types/sign-in-data.endpoint'
+import {
+  SignInData,
+  SignInDataWithEntityName,
+} from 'src/app/types/sign-in-data.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
@@ -282,41 +285,40 @@ export class UserService {
 
   private getThirdPartySignInData(): Observable<SignInDataWithEntityName> {
     return this._platform.get().pipe(
+      first(),
       switchMap((platform) => {
-        return this._platform.get().pipe(
-          first(),
-          switchMap((platform) => {
-            if (platform.social) {
-              return this._oauth.loadSocialSigninData().pipe(
-                take(1),
-                map((signinData) => {
+        if (platform.social) {
+          return this._oauth.loadSocialSigninData().pipe(
+            take(1),
+            tap((_) => console.log(_)),
+
+            map((signinData) => {
+              return {
+                signinData,
+                entityDisplayName: this.loadSocialSignInData(
+                  signinData.entityID
+                ),
+              }
+            })
+          )
+        } else if (platform.institutional) {
+          return this._oauth.loadShibbolethSignInData().pipe(
+            take(1),
+            tap((_) => console.log(_)),
+            switchMap((signinData) =>
+              this.getInstitutionName(signinData.entityID).pipe(
+                map((entityDisplayName) => {
                   return {
+                    entityDisplayName,
                     signinData,
-                    entityDisplayName: this.loadSocialSignInData(
-                      signinData.entityID
-                    ),
                   }
                 })
               )
-            } else if (platform.institutional) {
-              return this._oauth.loadShibbolethSignInData().pipe(
-                take(1),
-                switchMap((signinData) =>
-                  this.getInstitutionName(signinData.entityID).pipe(
-                    map((entityDisplayName) => {
-                      return {
-                        entityDisplayName,
-                        signinData,
-                      }
-                    })
-                  )
-                )
-              )
-            } else {
-              return of(null)
-            }
-          })
-        )
+            )
+          )
+        } else {
+          return of(null)
+        }
       })
     )
   }
