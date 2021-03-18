@@ -25,6 +25,8 @@ import { AffiliationStacksGroupsComponent } from './components/affiliation-stack
 import { AffiliationComponent } from './components/affiliation/affiliation.component'
 import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
 import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
+import { FundingStackComponent } from './components/funding-stack/funding-stack.component'
+import { FundingComponent } from './components/funding/funding.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { DisplayAttributeComponent } from './components/display-attribute/displa
     AffiliationStacksGroupsComponent,
     AffiliationStackComponent,
     AffiliationComponent,
+    FundingStackComponent,
+    FundingComponent,
     DisplayExternalIdsComponent,
     DisplayAttributeComponent,
   ],

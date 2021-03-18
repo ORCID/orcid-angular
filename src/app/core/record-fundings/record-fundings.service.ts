@@ -45,7 +45,7 @@ export class RecordFundingsService {
     return this.$fundings.asObservable()
   }  
 
-  private getFundingDetails(putCode, type): Observable<Funding> {
+  getFundingDetails(putCode): Observable<Funding> {
     return this._http
       .get<Funding>(
         environment.API_WEB +

@@ -10,7 +10,7 @@ import {
 } from 'src/app/types/record-funding.endpoint'
 
 @Component({
-  selector: 'app-funding-stack',
+  selector: 'app-fundings',
   templateUrl: './funding-stack.component.html',
   styleUrls: [
     './funding-stack.component.scss',
@@ -23,7 +23,7 @@ export class FundingStackComponent implements OnInit {
   @Input()
   set fundingStack(value: FundingGroup) {
     this._fundingStack = value
-    this.setFundingInitialStates(value)
+    this.setFundingsInitialStates(value)
   }
   get fundingStack(): FundingGroup {
     return this._fundingStack
@@ -65,12 +65,12 @@ export class FundingStackComponent implements OnInit {
   /**
    * On start, hide the details for all the panels
    */
-  private setDefaultPanelDetailsState(affiliation: Affiliation, force = false) {
+  private setDefaultPanelDetailsState(funding: Funding, force = false) {
     if (
-      this.panelDetailsState[affiliation.putCode.value] === undefined ||
+      this.panelDetailsState[funding.putCode.value] === undefined ||
       force
     ) {
-      this.panelDetailsState[affiliation.putCode.value] = {
+      this.panelDetailsState[funding.putCode.value] = {
         state: false,
       }
     }
@@ -79,22 +79,22 @@ export class FundingStackComponent implements OnInit {
   /**
    * On start, set the preferred source as the top panel of the stack
    */
-  private setDefaultPanelsDisplay(affiliation: Affiliation, force = false) {
+  private setDefaultPanelsDisplay(funding: Funding, force = false) {
     if (
-      this.stackPanelsDisplay[affiliation.putCode.value] === undefined ||
+      this.stackPanelsDisplay[funding.putCode.value] === undefined ||
       force
     ) {
-      this.stackPanelsDisplay[affiliation.putCode.value] = {
-        topPanelOfTheStack: this.isPreferred(affiliation) ? true : false,
+      this.stackPanelsDisplay[funding.putCode.value] = {
+        topPanelOfTheStack: this.isPreferred(funding) ? true : false,
       }
     }
   }
 
-  isPreferred(affiliation: Affiliation) {
+  isPreferred(funding: Funding) {
     const response =
-      affiliation && this.affiliationStack
-        ? this.affiliationStack.defaultAffiliation.putCode.value ===
-          affiliation.putCode.value
+      funding && this.fundingStack
+        ? this.fundingStack.defaultFunding.putCode.value ===
+          funding.putCode.value
         : false
     return response
   }
@@ -102,14 +102,14 @@ export class FundingStackComponent implements OnInit {
   /**
    * Show and hide details of the panel
    */
-  toggleDetails(affiliation: Affiliation) {
-    const putCode = affiliation.putCode.value
+  toggleDetails(funding: Funding) {
+    const putCode = funding.putCode.value
     this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
       .state
 
     if (this.panelDetailsState[putCode].state) {
       this.getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
-        affiliation
+        funding
       ).subscribe((response) => {
         this.orgDisambiguated[putCode] = response[0] || null
       })
@@ -121,45 +121,44 @@ export class FundingStackComponent implements OnInit {
    * Get require extra backend data to display on the panel details
    */
   private getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
-    affiliation: Affiliation
-  ): Observable<[false | OrgDisambiguated, AffiliationUIGroup[]]> {
-    const putCode = affiliation.putCode.value
+    funding: Funding
+  ): Observable<[false | OrgDisambiguated, Funding]> {
+    const putCode = funding.putCode.value
 
-    let $affiliationDisambiguationSource: Observable<
+    let $fundingDisambiguationSource: Observable<
       false | OrgDisambiguated
     > = of(false)
-    // Adds call for disambiguationSource if the affiliation has
-    if (affiliation.disambiguationSource) {
-      $affiliationDisambiguationSource = this._organizationsService.getOrgDisambiguated(
-        affiliation.disambiguationSource.value,
-        affiliation.disambiguatedAffiliationSourceId.value
+    // Adds call for disambiguationSource if the funding has
+    if (funding.disambiguationSource) {
+      $fundingDisambiguationSource = this._organizationsService.getOrgDisambiguated(
+        funding.disambiguationSource.value,
+        funding.disambiguatedFundingSourceId.value
       )
     }
-    const $affiliationDetails = this._affiliationService.getAffiliationsDetails(
-      affiliation.affiliationType.value,
+    const $fundingDetails = this._fundingsService.getFundingDetails(
       putCode
     )
 
     // Call http requests at the same time
     return combineLatest([
-      $affiliationDisambiguationSource,
-      $affiliationDetails,
+      $fundingDisambiguationSource,
+      $fundingDetails,
     ]).pipe(first())
   }
 
-  makePrimaryCard(affiliation: Affiliation) {
+  makePrimaryCard(funding: Funding) {
     // TODO
     console.log(this.stackPanelsDisplay)
   }
 
-  changeTopPanelOfTheStack(affiliation: Affiliation) {
+  changeTopPanelOfTheStack(funding: Funding) {
     Object.keys(this.stackPanelsDisplay).forEach((key) => {
       this.stackPanelsDisplay[key].topPanelOfTheStack = false
     })
-    this.stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack = true
+    this.stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack = true
   }
 
-  trackByAffiliationStack(index, item: Affiliation) {
+  trackByFundingStack(index, item: Funding) {
     return item.putCode.value
   }
 
