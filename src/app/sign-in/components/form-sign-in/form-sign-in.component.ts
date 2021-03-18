@@ -247,10 +247,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .subscribe((platform) => {
         if (platform.social || platform.institutional) {
           if (this.signInData) {
-            const {
-              providerId,
-              linkType,
-            } = this.signInData
+            const { providerId, linkType } = this.signInData
             this._user
               .getUserSession()
               .pipe(first())
