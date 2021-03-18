@@ -265,9 +265,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
                   queryParams: {
                     ...params,
-                    email,
-                    firstName,
-                    lastName,
                     providerId,
                     linkType,
                   },
