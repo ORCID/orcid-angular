@@ -25,7 +25,6 @@ export class StepAComponent extends BaseStepDirective {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-
         if (platform.social) {
           this._router.navigate([ApplicationRoutes.social], {
             queryParams: {
