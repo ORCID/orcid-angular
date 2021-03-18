@@ -294,17 +294,17 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       personal: [
         {
           givenNames:
-            thirdPartyOauthData?.signinData?.firstName ||
             oauthData?.userGivenNames ||
+            thirdPartyOauthData?.signinData?.firstName ||
             '',
           familyNames:
-            thirdPartyOauthData?.signinData?.lastName ||
             oauthData?.userFamilyNames ||
+            thirdPartyOauthData?.signinData?.lastName ||
             '',
           emails: {
             email:
-              thirdPartyOauthData?.signinData?.email ||
               oauthData?.userEmail ||
+              thirdPartyOauthData?.signinData?.email ||
               '',
             confirmEmail: '',
             additionalEmails: { '0': '' },

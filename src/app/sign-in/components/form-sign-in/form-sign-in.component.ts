@@ -248,9 +248,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         if (platform.social || platform.institutional) {
           if (this.signInData) {
             const {
-              email,
-              firstName,
-              lastName,
               providerId,
               linkType,
             } = this.signInData

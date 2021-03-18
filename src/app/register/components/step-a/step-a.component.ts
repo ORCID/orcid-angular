@@ -21,10 +21,13 @@ export class StepAComponent extends BaseStepDirective {
     environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE
 
   goBack() {
+    console.log('TRY TO GO BACK')
     this._platform
       .get()
       .pipe(first())
       .subscribe((platform) => {
+        console.log('TRY TO GO BACK')
+
         if (platform.social) {
           this._router.navigate([ApplicationRoutes.social], {
             queryParams: {
