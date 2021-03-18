@@ -10,6 +10,7 @@
       [elements]="peerReview"
       [type]="'top-bar'"
       [editable]="false"
+      [openState]="false"
       class="top-bar"
     >
       <div header>
@@ -25,23 +26,28 @@
         class="orc-font-body-small"
       >
         <app-panel-element [hideVisibility]="false">
-          <p>
-            <span class="capitalize">{{ peerReview.type }}</span>, {{ peerReview.description }}
-          </p>
-          <ng-container *ngIf="peerReview.groupType">
+          <div class="description">
             <p>
-              {{ peerReview.groupType }}:
-              <a href="{{ peerReview.url }}">
-                {{ peerReview.groupIdValue }}
-              </a>
+              <span class="capitalize">{{ peerReview.type }}</span>, {{ peerReview.description }}
             </p>
-          </ng-container>
+            <ng-container *ngIf="peerReview.groupType">
+              <p>
+                {{ peerReview.groupType }}:
+                <a href="{{ peerReview.url }}">
+                  {{ peerReview.groupIdValue }}
+                </a>
+              </p>
+            </ng-container>
+          </div>
+        </app-panel-element>
+        <app-panel-element class="nested-panels" [hideVisibility]="false">
           <ng-container *ngFor="let subPeerReview of peerReview.peerReviewDuplicateGroups">
             <div nested-panels>
               <app-panel
                 [elements]="subPeerReview"
                 [type]="'top-bar'"
                 [editable]="false"
+                [customControls]="true"
                 class="top-bar"
               >
                 <div header>
@@ -69,12 +75,22 @@
                   </span>
                 </div>
                 <div custom-controls>
-                  <a
-                    (click)="getDetails(subPeerReview.peerReviews[0], subPeerReview.peerReviews[0].putCode.value)"
-                    i18n="@@peerReview.showLessDetail"
-                  >
-                    Show less detail
-                  </a>
+                  <span class="show">
+                    <a
+                      *ngIf="!subPeerReview.peerReviews[0].showDetails"
+                      (click)="getDetails(subPeerReview.peerReviews[0], subPeerReview.peerReviews[0].putCode.value)"
+                      i18n="@@peerReview.showMoreDetail"
+                    >
+                      Show more detail
+                    </a>
+                    <a
+                      *ngIf="subPeerReview.peerReviews[0].showDetails"
+                      (click)="collapse(subPeerReview.peerReviews[0])"
+                      i18n="@@peerReview.showLessDetail"
+                    >
+                      Show less detail
+                    </a>
+                  </span>
                   <a
                     rel="noopener noreferrer"
                     target="_blank"

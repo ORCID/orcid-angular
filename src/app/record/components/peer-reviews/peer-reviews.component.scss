@@ -7,12 +7,9 @@ app-panel {
   width: 100%;
   margin-top: 16px;
 
-  app-panel-data {
-    width: 100%;
-  }
-
   p {
     margin-top: 0;
+    margin-bottom: 5px;
   }
 }
 
@@ -21,20 +18,31 @@ app-panels:first-of-type, .sub-peer-review {
 }
 
 app-panel-data {
-  border: solid 1px;
-  border-radius: 4px;
+  border-top: 1px solid;
+  padding: 0 !important;
 
   .header-sub-peer-review {
     margin-right: 40px;
   }
 
-  app-panel-data {
-    width: auto;
+  .description {
+    border-bottom: solid 1px;
+    padding: 16px;
   }
-}
 
-app-panel-element {
-  padding: 0 !important;
+  .nested-panels {
+    padding: 16px;
+    width: auto;
+    border-bottom: solid 1px;
+
+    app-panel-element {
+      padding: 16px;
+    }
+
+    .show {
+      margin-right: 32px;
+    }
+  }
 }
 
 a {

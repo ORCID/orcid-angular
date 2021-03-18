@@ -71,13 +71,13 @@ export class PeerReviewsComponent implements OnInit {
   }
 
   getDetails(peerReview: PeerReview, putCode: number): void {
-    console.log(putCode)
     if (this.publicView) {
       this._recordPeerReviewService.getPublicPeerReviewById(this.userSession.userInfo.EFFECTIVE_USER_ORCID, putCode)
         .pipe(first())
         .subscribe(
           data => {
             this.detailsPeerReviews.push({ putCode: putCode, peerReview: data})
+            peerReview.showDetails = true
           },
           error => {
             console.log('getDetailsError', error)
@@ -103,18 +103,14 @@ export class PeerReviewsComponent implements OnInit {
       return null
     }
 
-    console.log('getPeerReview')
-    console.log(putCode)
-    console.log(this.detailsPeerReviews
-      .filter(value => value.putCode === putCode)
-      .map((value) => {
-        return value.peerReview
-      })[0])
-
     return this.detailsPeerReviews
       .filter(value => value.putCode === putCode)
       .map((value) => {
         return value.peerReview
       })[0]
+  }
+
+  collapse(peerReview: PeerReview) {
+    peerReview.showDetails = !peerReview.showDetails
   }
 }

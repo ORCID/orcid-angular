@@ -1,6 +1,5 @@
 import { AssertionBase } from './record.endpoint'
-import { MonthDayYearDate, Value } from './common.endpoint'
-import { ExternalIdentifier } from './works.endpoint'
+import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
 
 export interface PeerReview extends AssertionBase {
   city: Value

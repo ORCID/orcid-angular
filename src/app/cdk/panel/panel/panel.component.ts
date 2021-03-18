@@ -29,12 +29,14 @@ export class PanelComponent implements OnInit {
   @Input() visibility: VisibilityStrings
   @Input() hasNestedPanels: false
   @Input() editable = true
+  @Input() customControls = false
+  @Input() openState = true
+
 
 
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
-  openState = false
 
   constructor(
     private _dialog: MatDialog,
@@ -64,5 +66,9 @@ export class PanelComponent implements OnInit {
           })
         }
       })
+  }
+
+  collapse() {
+    this.openState = !this.openState
   }
 }
