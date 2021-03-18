@@ -233,7 +233,11 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   allUrlsAreUnique(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (!_.isUndefined(control.value) && !_.isEmpty(control.value) && this.websitesForm) {
+      if (
+        !_.isUndefined(control.value) &&
+        !_.isEmpty(control.value) &&
+        this.websitesForm
+      ) {
         const result = _.groupBy(this.websitesForm.controls, (c) => c.value.url)
         for (const prop in result) {
           if (prop === control.value && control.dirty) {
