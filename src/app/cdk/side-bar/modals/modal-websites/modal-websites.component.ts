@@ -31,7 +31,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { cloneDeep } from 'lodash'
 import * as _ from 'lodash'
 import { UserService } from '../../../../core'
-import { URL_REGEXP } from '../../../../constants'
+import { URL_REGEXP, URL_REGEXP_BACKEND } from '../../../../constants'
 
 @Component({
   selector: 'app-modal-websites',
@@ -107,7 +107,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [Validators.required, Validators.pattern(URL_REGEXP)],
+          validators: [Validators.required, Validators.pattern(URL_REGEXP_BACKEND)],
           updateOn: 'change',
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
