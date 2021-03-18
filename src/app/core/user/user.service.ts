@@ -61,6 +61,7 @@ export class UserService {
   private loggingStateComesFromTheServer = false
   private $userSessionSubject = new ReplaySubject<UserSession>(1)
   sessionInitialized = false
+  keepRefreshingUserSession = true
 
   _recheck = new Subject<{
     forceSessionUpdate: boolean
@@ -122,6 +123,8 @@ export class UserService {
         this._recheck
       )
         .pipe(
+          // Check user status only when needed
+          filter((value) => this.keepRefreshingUserSession),
           // Check for updates on userStatus.json
           switchMap((checkTrigger) =>
             this.getUserStatus().pipe(
@@ -268,15 +271,14 @@ export class UserService {
           if (updateParameters.checkTrigger.postLoginUpdate) {
             params = { ...params, prompt: undefined }
           }
-          return this._oauth
-            .declareOauthSession(params, updateParameters)
-            .pipe(
-              tap(() =>
-                environment.debugger
-                  ? console.info('Oauth session declare')
-                  : null
-              )
+          return this._oauth.declareOauthSession(params, updateParameters).pipe(
+            tap((session) => (this.keepRefreshingUserSession = !session.error)),
+            tap(() =>
+              environment.debugger
+                ? console.info('Oauth session declare')
+                : null
             )
+          )
         }
         return of(null)
       })
