@@ -1,8 +1,9 @@
 <div class="col s4 m8 l12">
-  <div class="header-container"
-       [ngClass]="{
-        'sub-peer-review': type === 'sub-peer-review'
-        }"
+  <div
+    class="header-container"
+    [ngClass]="{
+      'sub-peer-review': type === 'sub-peer-review'
+    }"
   >
     <div class="inline-initial-side">
       <button mat-icon-button (click)="collapse()">
@@ -23,7 +24,7 @@
           <ng-container *ngIf="!currentAmount">(0)</ng-container>
         </ng-container>
         <ng-container *ngIf="type === 'peer-review'">
-          ({{ total}})
+          ({{ total }})
         </ng-container>
       </div>
     </div>

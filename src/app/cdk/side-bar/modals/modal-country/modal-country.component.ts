@@ -185,7 +185,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   }
 
   getDate(date: Address) {
-    return getDate(date);
+    return getDate(date)
   }
 
   ngOnDestroy() {

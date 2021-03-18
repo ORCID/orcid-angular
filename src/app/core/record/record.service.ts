@@ -52,7 +52,7 @@ export class RecordService {
     private _recordWebsitesService: RecordWebsitesService,
     private _recordAffiliations: RecordAffiliationService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
-    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordPeerReviewService: RecordPeerReviewService
   ) {}
 
   headers = new HttpHeaders({
@@ -76,7 +76,7 @@ export class RecordService {
         this._recordBiographyService.getBiography(),
         this._recordAffiliations.getAffiliations(),
         this.getPreferences(),
-        this._recordPeerReviewService.getPeerReviewGroups(true)
+        this._recordPeerReviewService.getPeerReviewGroups(true),
       ])
         .pipe(
           tap(

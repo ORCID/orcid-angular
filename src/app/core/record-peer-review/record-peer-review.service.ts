@@ -18,19 +18,18 @@ export class RecordPeerReviewService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
-  ) {
-  }
+  ) {}
 
   getPeerReviewGroups(sortAsc: true | false): Observable<PeerReview[]> {
     return this._http.get<PeerReview[]>(
       environment.API_WEB + 'peer-reviews/peer-reviews.json?sortAsc=' + sortAsc
-    );
+    )
   }
 
   getPeerReviewById(putCode: number): Observable<PeerReview> {
     return this._http.get<PeerReview>(
       environment.API_WEB + 'peer-reviews/peer-review.json?putCode=' + putCode
-    );
+    )
   }
 
   getPeerReviewImportWizardList(): Observable<PeerReview[]> {
@@ -42,7 +41,6 @@ export class RecordPeerReviewService {
   getPublicPeerReviewById(orcid: string, putCode: number): Observable<any> {
     return this._http.get(
       environment.API_WEB + orcid + '/peer-review.json?putCode=' + putCode
-    );
+    )
   }
-
 }

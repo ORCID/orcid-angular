@@ -18,17 +18,16 @@
           Review activity for
         </ng-container>
         <b>
-          {{peerReview.name}}
+          {{ peerReview.name }}
         </b>
         ({{ peerReview.peerReviewDuplicateGroups.length }})
       </div>
-      <app-panel-data
-        class="orc-font-body-small"
-      >
+      <app-panel-data class="orc-font-body-small">
         <app-panel-element [hideVisibility]="false">
           <div class="description">
             <p>
-              <span class="capitalize">{{ peerReview.type }}</span>, {{ peerReview.description }}
+              <span class="capitalize">{{ peerReview.type }}</span
+              >, {{ peerReview.description }}
             </p>
             <ng-container *ngIf="peerReview.groupType">
               <p>
@@ -41,7 +40,9 @@
           </div>
         </app-panel-element>
         <app-panel-element class="nested-panels" [hideVisibility]="false">
-          <ng-container *ngFor="let subPeerReview of peerReview.peerReviewDuplicateGroups">
+          <ng-container
+            *ngFor="let subPeerReview of peerReview.peerReviewDuplicateGroups"
+          >
             <div nested-panels>
               <app-panel
                 [elements]="subPeerReview"
@@ -52,25 +53,22 @@
               >
                 <div header>
                   <span class="header-sub-peer-review">
-                    <b i18n="@@peerReview.reviewDate">
-                      Review date:
-                    </b>
-                    {{subPeerReview.peerReviews[0].completionDate | monthDayYearDateToString}}
+                    <b i18n="@@peerReview.reviewDate"> Review date: </b>
+                    {{
+                      subPeerReview.peerReviews[0].completionDate
+                        | monthDayYearDateToString
+                    }}
                   </span>
                   <span class="header-sub-peer-review">
-                    <b i18n="@@peerReview.type">
-                      Type:
-                    </b>
+                    <b i18n="@@peerReview.type"> Type: </b>
                     <span class="capitalize">
-                      {{subPeerReview.peerReviews[0].type.value}}
+                      {{ subPeerReview.peerReviews[0].type.value }}
                     </span>
                   </span>
                   <span class="header-sub-peer-review">
-                    <b i18n="@@peerReview.role">
-                      Role:
-                    </b>
+                    <b i18n="@@peerReview.role"> Role: </b>
                     <span class="capitalize">
-                      {{subPeerReview.peerReviews[0].role.value}}
+                      {{ subPeerReview.peerReviews[0].role.value }}
                     </span>
                   </span>
                 </div>
@@ -78,7 +76,12 @@
                   <span class="show">
                     <a
                       *ngIf="!subPeerReview.peerReviews[0].showDetails"
-                      (click)="getDetails(subPeerReview.peerReviews[0], subPeerReview.peerReviews[0].putCode.value)"
+                      (click)="
+                        getDetails(
+                          subPeerReview.peerReviews[0],
+                          subPeerReview.peerReviews[0].putCode.value
+                        )
+                      "
                       i18n="@@peerReview.showMoreDetail"
                     >
                       Show more detail
@@ -94,21 +97,31 @@
                   <a
                     rel="noopener noreferrer"
                     target="_blank"
-                    href="{{subPeerReview.peerReviews[0].url}}"
+                    href="{{ subPeerReview.peerReviews[0].url }}"
                     i18n="@@peerReview.view"
                   >
                     View
                   </a>
                 </div>
-                <app-panel-data *ngIf="subPeerReview.peerReviews[0].showDetails">
-                  <app-panel-element
-                    [hideVisibility]="false">
+                <app-panel-data
+                  *ngIf="subPeerReview.peerReviews[0].showDetails"
+                >
+                  <app-panel-element [hideVisibility]="false">
                     <div class="details">
                       <div>
-                        <b i18n="@@peerReview.reviewIdentifiers">Review identifier(s)</b>
+                        <b i18n="@@peerReview.reviewIdentifiers"
+                          >Review identifier(s)</b
+                        >
                       </div>
                       <span class="source">
-                        {{subPeerReview.peerReviews[0].externalIdentifiers[0].externalIdentifierType.value}}: {{subPeerReview.peerReviews[0].externalIdentifiers[0].externalIdentifierId.value}}
+                        {{
+                          subPeerReview.peerReviews[0].externalIdentifiers[0]
+                            .externalIdentifierType.value
+                        }}:
+                        {{
+                          subPeerReview.peerReviews[0].externalIdentifiers[0]
+                            .externalIdentifierId.value
+                        }}
                       </span>
                     </div>
                     <div class="details">
@@ -117,23 +130,55 @@
                           Convening organization
                         </b>
                       </div>
-                      {{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).orgName.value }}
+                      {{
+                        getPeerReview(
+                          subPeerReview.peerReviews[0].putCode.value
+                        ).orgName.value
+                      }}
                     </div>
                     <div>
-                      <b i18n="@@peerReview.reviewSubject">
-                        Review subject
-                      </b>
+                      <b i18n="@@peerReview.reviewSubject"> Review subject </b>
                     </div>
                     <div>
-                      <ng-container *ngIf="getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectName">
-                        {{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectName.value }}
+                      <ng-container
+                        *ngIf="
+                          getPeerReview(
+                            subPeerReview.peerReviews[0].putCode.value
+                          ).subjectName
+                        "
+                      >
+                        {{
+                          getPeerReview(
+                            subPeerReview.peerReviews[0].putCode.value
+                          ).subjectName.value
+                        }}
                       </ng-container>
-                      <ng-container *ngIf="getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectType">
-                        ({{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectType.value }})
+                      <ng-container
+                        *ngIf="
+                          getPeerReview(
+                            subPeerReview.peerReviews[0].putCode.value
+                          ).subjectType
+                        "
+                      >
+                        ({{
+                          getPeerReview(
+                            subPeerReview.peerReviews[0].putCode.value
+                          ).subjectType.value
+                        }})
                       </ng-container>
                     </div>
-                    <div *ngIf="getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectContainerName">
-                      {{ getPeerReview(subPeerReview.peerReviews[0].putCode.value).subjectContainerName.value }}
+                    <div
+                      *ngIf="
+                        getPeerReview(
+                          subPeerReview.peerReviews[0].putCode.value
+                        ).subjectContainerName
+                      "
+                    >
+                      {{
+                        getPeerReview(
+                          subPeerReview.peerReviews[0].putCode.value
+                        ).subjectContainerName.value
+                      }}
                     </div>
                   </app-panel-element>
                 </app-panel-data>

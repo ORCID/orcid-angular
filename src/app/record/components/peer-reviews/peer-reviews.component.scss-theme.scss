@@ -20,7 +20,6 @@
   .nested-panels {
     border-color: mat-color($background, ui-background) !important;
   }
-
 }
 
 @include peer-reviews-theme($orcid-app-theme);

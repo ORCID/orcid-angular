@@ -31,4 +31,3 @@ export interface PeerReviewDuplicateGroup {
   id: number
   peerReviews: PeerReview[]
 }
-

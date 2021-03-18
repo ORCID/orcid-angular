@@ -1,4 +1,3 @@
-import { ɵConsole } from '@angular/core'
 import { Address } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
 

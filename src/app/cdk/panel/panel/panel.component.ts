@@ -10,10 +10,7 @@ import {
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
-import {
-  Affiliation,
-  AffiliationGroup,
-} from 'src/app/types/record-affiliation.endpoint'
+import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 
 @Component({
@@ -23,16 +20,25 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
 })
 export class PanelComponent implements OnInit {
   @Input() editModalComponent: ComponentType<any>
-  @Input() elements: Assertion[] | Value | Address | Affiliation | PeerReview | any
-  @Input() type: 'top-bar' | 'side-bar' | 'affiliations' | 'peer-review' | 'main'
+  @Input() elements:
+    | Assertion[]
+    | Value
+    | Address
+    | Affiliation
+    | PeerReview
+    | any
+  @Input() type:
+    | 'top-bar'
+    | 'side-bar'
+    | 'affiliations'
+    | 'peer-review'
+    | 'main'
   @Input() userRecord: UserRecord
   @Input() visibility: VisibilityStrings
   @Input() hasNestedPanels: false
   @Input() editable = true
   @Input() customControls = false
   @Input() openState = true
-
-
 
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
@@ -45,7 +51,9 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  isArrayAndIsNotEmpty(obj: Assertion[] | Value | Address | Affiliation | PeerReview) {
+  isArrayAndIsNotEmpty(
+    obj: Assertion[] | Value | Address | Affiliation | PeerReview
+  ) {
     return Array.isArray(obj) && obj.length > 0
   }
 

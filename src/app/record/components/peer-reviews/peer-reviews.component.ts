@@ -12,8 +12,10 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
 @Component({
   selector: 'app-peer-reviews',
   templateUrl: './peer-reviews.component.html',
-  styleUrls: ['./peer-reviews.component.scss',
-    './peer-reviews.component.scss-theme.scss'],
+  styleUrls: [
+    './peer-reviews.component.scss',
+    './peer-reviews.component.scss-theme.scss',
+  ],
   preserveWhitespaces: true,
 })
 export class PeerReviewsComponent implements OnInit {
@@ -32,7 +34,7 @@ export class PeerReviewsComponent implements OnInit {
   userRecord: UserRecord
   platform: PlatformInfo
   detailsPeerReviews: {
-    putCode: number,
+    putCode: number
     peerReview: PeerReview
   }[] = []
 
@@ -42,7 +44,7 @@ export class PeerReviewsComponent implements OnInit {
     _platform: PlatformInfoService,
     private _user: UserService,
     private _record: RecordService,
-    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordPeerReviewService: RecordPeerReviewService
   ) {
     _platform
       .get()
@@ -72,28 +74,33 @@ export class PeerReviewsComponent implements OnInit {
 
   getDetails(peerReview: PeerReview, putCode: number): void {
     if (this.publicView) {
-      this._recordPeerReviewService.getPublicPeerReviewById(this.userSession.userInfo.EFFECTIVE_USER_ORCID, putCode)
+      this._recordPeerReviewService
+        .getPublicPeerReviewById(
+          this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          putCode
+        )
         .pipe(first())
         .subscribe(
-          data => {
-            this.detailsPeerReviews.push({ putCode: putCode, peerReview: data})
+          (data) => {
+            this.detailsPeerReviews.push({ putCode: putCode, peerReview: data })
             peerReview.showDetails = true
           },
-          error => {
+          (error) => {
             console.log('getDetailsError', error)
-          },
+          }
         )
     } else {
-      this._recordPeerReviewService.getPeerReviewById(putCode)
+      this._recordPeerReviewService
+        .getPeerReviewById(putCode)
         .pipe(first())
         .subscribe(
-          data => {
-            this.detailsPeerReviews.push({ putCode: putCode, peerReview: data})
+          (data) => {
+            this.detailsPeerReviews.push({ putCode: putCode, peerReview: data })
             peerReview.showDetails = true
           },
-          error => {
+          (error) => {
             console.log('getDetailsError', error)
-          },
+          }
         )
     }
   }
@@ -104,7 +111,7 @@ export class PeerReviewsComponent implements OnInit {
     }
 
     return this.detailsPeerReviews
-      .filter(value => value.putCode === putCode)
+      .filter((value) => value.putCode === putCode)
       .map((value) => {
         return value.peerReview
       })[0]

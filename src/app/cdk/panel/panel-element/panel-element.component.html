@@ -1,8 +1,7 @@
-<div
-  [ngClass]="{'row-with-privacy': hideVisibility}"
->
+<div [ngClass]="{ 'row-with-privacy': hideVisibility }">
   <div class="line" [ngClass]="{ bold: bold }"><ng-content></ng-content></div>
   <app-panel-privacy
     *ngIf="hideVisibility"
-    [visibility]="visibility"></app-panel-privacy>
+    [visibility]="visibility"
+  ></app-panel-privacy>
 </div>
