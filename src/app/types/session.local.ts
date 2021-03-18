@@ -1,5 +1,5 @@
 import { UserInfo, NameForm, RequestInfoForm } from '.'
-import { SignInData, ThirdPartyAuthData } from './sign-in-data.endpoint'
+import { ThirdPartyAuthData } from './sign-in-data.endpoint'
 
 export interface UserSession {
   userInfo: UserInfo
