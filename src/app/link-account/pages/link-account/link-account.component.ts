@@ -67,9 +67,6 @@ export class LinkAccountComponent implements OnInit {
             /// TODO @leomendoza123 depend only on the user session thirty party login data
             /// avoid taking data from the the parameters.
 
-            email: null,
-            firstName: null,
-            lastName: null,
             linkType: null,
             providerId: null,
           },
