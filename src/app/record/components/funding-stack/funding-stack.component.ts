@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
-import { combineLatest, Observable, of } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { Subject, combineLatest, Observable, of } from 'rxjs'
+import { first, takeUntil } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { OrgDisambiguated } from 'src/app/types'
@@ -8,6 +8,10 @@ import {
   Funding,
   FundingGroup,  
 } from 'src/app/types/record-funding.endpoint'
+import { RecordService } from 'src/app/core/record/record.service'
+import { UserRecord } from 'src/app/types/record.local'
+import { UserSession } from 'src/app/types/session.local'
+import { UserService } from 'src/app/core'
 
 @Component({
   selector: 'app-fundings',
@@ -19,15 +23,19 @@ import {
 })
 export class FundingStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
-  _fundingStack: FundingGroup
+  _fundingStack: FundingGroup[]
   @Input()
-  set fundingStack(value: FundingGroup) {
+  set fundingStack(value: FundingGroup[]) {
     this._fundingStack = value
     this.setFundingsInitialStates(value)
   }
-  get fundingStack(): FundingGroup {
+  get fundingStack(): FundingGroup[] {
     return this._fundingStack
   }
+
+  $destroy: Subject<boolean> = new Subject<boolean>()
+  userSession: UserSession
+  userRecord: UserRecord
 
   _displayTheStack = false
   set displayTheStack(mode: boolean) {
@@ -49,17 +57,44 @@ export class FundingStackComponent implements OnInit {
 
   constructor(
     private _fundingsService: RecordFundingsService,
-    private _organizationsService: OrganizationsService
+    private _organizationsService: OrganizationsService,
+    private _userSession: UserService,
+    private _record: RecordService
   ) {}
+
+
+  ngOnInit(): void {
+    this._userSession
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userSession) => {
+        this.userSession = userSession
+
+        // TODO @amontenegro
+        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
+        this._record
+          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
+          .pipe(takeUntil(this.$destroy))
+          .subscribe((userRecord) => {
+            this.userRecord = userRecord
+            this.profileAffiliationGroups = this.userRecord.affiliations
+          })
+      })
+  }
+
+
+
 
   /**
    * Set the panelDetails and top of the stack card to default mode
    */
-  private setFundingsInitialStates(value: FundingGroup, force = false) {
-    value.fundings.forEach((funding) => {
-      this.setDefaultPanelsDisplay(funding, force)
-      this.setDefaultPanelDetailsState(funding, force)
-    })
+  private setFundingsInitialStates(value: FundingGroup[], force = false) {
+    value.forEach((fundingGroup) => {
+      fundingGroup.fundings.forEach((funding) => {
+        this.setDefaultPanelsDisplay(funding, force)
+        this.setDefaultPanelDetailsState(funding, force)
+      })
+    })    
   }
 
   /**
@@ -161,6 +196,4 @@ export class FundingStackComponent implements OnInit {
   trackByFundingStack(index, item: Funding) {
     return item.putCode.value
   }
-
-  ngOnInit(): void {}
 }
