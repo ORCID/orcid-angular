@@ -107,7 +107,10 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl(website.urlName),
         url: new FormControl(website.url.value, {
-          validators: [Validators.required, Validators.pattern(URL_REGEXP_BACKEND)],
+          validators: [
+            Validators.required,
+            Validators.pattern(URL_REGEXP_BACKEND),
+          ],
           updateOn: 'change',
         }),
         visibility: new FormControl(website.visibility.visibility, {}),
