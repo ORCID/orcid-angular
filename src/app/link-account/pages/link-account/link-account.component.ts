@@ -9,8 +9,6 @@ import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { first } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
-import { take } from 'lodash'
-import { Session } from 'node:inspector'
 
 @Component({
   selector: 'app-link-account',

@@ -11,7 +11,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
-import { Params, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
@@ -290,7 +290,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     oauthData: RequestInfoForm,
     thirdPartyOauthData: ThirdPartyAuthData
   ) {
-
     return this._formBuilder.group({
       personal: [
         {

@@ -35,10 +35,7 @@ import {
   UserSession,
   UserSessionUpdateParameters,
 } from 'src/app/types/session.local'
-import {
-  SignInData,
-  ThirdPartyAuthData,
-} from 'src/app/types/sign-in-data.endpoint'
+import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
