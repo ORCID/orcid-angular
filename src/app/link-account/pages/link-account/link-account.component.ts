@@ -41,8 +41,9 @@ export class LinkAccountComponent implements OnInit {
       .getUserSession()
       .pipe(first())
       .subscribe((session) => {
-        this.signInData = session.thirdPartyLoginData.signinData
-        this.entityDisplayName = session.thirdPartyLoginData.entityDisplayName
+        this.signInData = session.thirdPartyAuthData.signinData
+        this.entityDisplayName = session.thirdPartyAuthData.entityDisplayName
+        this.loading = false
       })
   }
 
@@ -63,9 +64,8 @@ export class LinkAccountComponent implements OnInit {
             ...platform.queryParameters,
             // The parameters added after a linking + register process are remove
 
-            // TODO leomendoza123
-            // Adding the social/institutional parameters on the URL causes issues
-            // https://trello.com/c/EiZOE6b1/7138
+            /// TODO @leomendoza123 depend only on the user session thirty party login data
+            /// avoid taking data from the the parameters.
 
             email: null,
             firstName: null,

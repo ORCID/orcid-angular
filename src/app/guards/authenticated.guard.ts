@@ -30,10 +30,7 @@ export class AuthenticatedGuard implements CanActivateChild {
         (value) =>
           value.loggedIn ||
           this._router.createUrlTree([ApplicationRoutes.signin])
-      ),
-      tap((x) => {
-        console.log(x)
-      })
+      )
     )
   }
 }

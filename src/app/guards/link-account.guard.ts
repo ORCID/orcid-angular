@@ -33,7 +33,7 @@ export class LinkAccountGuard implements CanActivateChild {
     return this._userInfo.getUserSession().pipe(
       take(1),
       map((value) => {
-        if (value.thirdPartyLoginData?.signinData?.providerId) {
+        if (value.thirdPartyAuthData?.signinData?.providerId) {
           return true
         } else {
           return this._router.createUrlTree(['/signin'])

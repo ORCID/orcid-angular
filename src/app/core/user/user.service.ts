@@ -37,7 +37,7 @@ import {
 } from 'src/app/types/session.local'
 import {
   SignInData,
-  SignInDataWithEntityName,
+  ThirdPartyAuthData,
 } from 'src/app/types/sign-in-data.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -182,7 +182,7 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
-    thirdPartyLoginData: SignInDataWithEntityName
+    thirdPartyAuthData: ThirdPartyAuthData
   }): UserSession {
     {
       return {
@@ -233,24 +233,24 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
-    thirdPartyLoginData: SignInDataWithEntityName
+    thirdPartyAuthData: ThirdPartyAuthData
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $oauthSession = this.getOauthSession(updateParameters)
-    const $thirdPartyLoginData = this.getThirdPartySignInData()
+    const $thirdPartyAuthData = this.getThirdPartySignInData()
     return combineLatest([
       updateParameters.loggedIn ? $userInfo : of(undefined),
       updateParameters.loggedIn ? $nameForm : of(undefined),
       $oauthSession,
-      !updateParameters.loggedIn ? $thirdPartyLoginData : of(undefined),
+      !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
     ]).pipe(
-      map(([userInfo, nameForm, oauthSession, thirdPartyLoginData]) => ({
+      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
         userInfo,
         nameForm,
         oauthSession,
-        thirdPartyLoginData,
+        thirdPartyAuthData,
       }))
     )
   }
@@ -285,15 +285,13 @@ export class UserService {
     )
   }
 
-  private getThirdPartySignInData(): Observable<SignInDataWithEntityName> {
+  private getThirdPartySignInData(): Observable<ThirdPartyAuthData> {
     return this._platform.get().pipe(
       first(),
       switchMap((platform) => {
         if (platform.social) {
           return this._oauth.loadSocialSigninData().pipe(
             take(1),
-            tap((_) => console.log(_)),
-
             map((signinData) => {
               return {
                 signinData,
@@ -303,12 +301,14 @@ export class UserService {
               }
             })
           )
-        } else if (platform.institutional) {
+        } else if (
+          platform.institutional ||
+          platform.currentRoute === 'register'
+        ) {
           return this._oauth.loadShibbolethSignInData().pipe(
             take(1),
-            tap((_) => console.log(_)),
             switchMap((signinData) =>
-              this.getInstitutionName(signinData.entityID).pipe(
+              this.getInstitutionName(signinData.providerId).pipe(
                 map((entityDisplayName) => {
                   return {
                     entityDisplayName,

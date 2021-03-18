@@ -107,9 +107,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
         (response) => {
           this.closeEvent()
         },
-        (error) => {
-          console.log(error)
-        }
+        (error) => {}
       )
   }
 

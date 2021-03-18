@@ -170,6 +170,9 @@ export class PlatformInfoService {
   private updateSocialState(queryParameters: Params) {
     const previousSocialState = this.platform.social
 
+    /// TODO @leomendoza123 depend only on the user session thirty party login data
+    /// avoid taking data from the the parameters.
+
     if (
       (queryParameters.hasOwnProperty('providerId') &&
         (queryParameters['providerId'] === 'facebook' ||

@@ -29,6 +29,7 @@ import {
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { UserSession } from 'src/app/types/session.local'
+import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 
 @Component({
   selector: 'app-register',
@@ -49,6 +50,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   backendForm: RegisterForm
   loading = false
   requestInfoForm: RequestInfoForm | null
+  thirdPartyAuthData: ThirdPartyAuthData
   constructor(
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
@@ -91,17 +93,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
           // TODO @leomendoza123 move the handle of social/institutional sessions to the user service
 
-          // TODO leomendoza123
-          // Adding the social/institutional parameters on the URL causes issues
-          // https://trello.com/c/EiZOE6b1/7138
+          this.thirdPartyAuthData = session.thirdPartyAuthData
+          this.requestInfoForm = session.oauthSession
 
-          if (platform.queryParameters.providerId) {
+          if (this.thirdPartyAuthData || this.requestInfoForm) {
             this.FormGroupStepA = this.prefillRegisterForm(
-              this.platform.queryParameters
+              this.requestInfoForm,
+              this.thirdPartyAuthData
             )
-          } else if (session.oauthSession && platform.hasOauthParameters) {
-            this.requestInfoForm = session.oauthSession
-            this.FormGroupStepA = this.prefillRegisterForm(this.requestInfoForm)
           }
         })
       )
@@ -279,14 +278,35 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private prefillRegisterForm(value: RequestInfoForm | Params) {
+  /**
+   * Fills the register form.
+   * Use the data from the Oauth session send by the Orcid integrator
+   * or
+   * Use data coming from a third party institution/social entity
+   * or
+   * Use empty values
+   */
+  private prefillRegisterForm(
+    oauthData: RequestInfoForm,
+    thirdPartyOauthData: ThirdPartyAuthData
+  ) {
+
     return this._formBuilder.group({
       personal: [
         {
-          givenNames: value.userGivenNames || value['firstName'] || '',
-          familyNames: value.userFamilyNames || value['lastName'] || '',
+          givenNames:
+            thirdPartyOauthData?.signinData?.firstName ||
+            oauthData?.userGivenNames ||
+            '',
+          familyNames:
+            thirdPartyOauthData?.signinData?.lastName ||
+            oauthData?.userFamilyNames ||
+            '',
           emails: {
-            email: value.userEmail || value['email'] || '',
+            email:
+              thirdPartyOauthData?.signinData?.email ||
+              oauthData?.userEmail ||
+              '',
             confirmEmail: '',
             additionalEmails: { '0': '' },
           },

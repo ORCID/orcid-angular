@@ -16,7 +16,7 @@ export interface SignInData {
   unsupportedInstitution: boolean
 }
 
-export interface SignInDataWithEntityName {
+export interface ThirdPartyAuthData {
   signinData: SignInData
   entityDisplayName: string
 }
