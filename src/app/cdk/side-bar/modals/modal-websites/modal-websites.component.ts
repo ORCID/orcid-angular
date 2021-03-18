@@ -110,6 +110,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           validators: [
             Validators.required,
             Validators.pattern(URL_REGEXP_BACKEND),
+            this.allUrlsAreUnique(),
           ],
           updateOn: 'change',
         }),
@@ -232,10 +233,10 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   allUrlsAreUnique(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (!_.isUndefined(control.value) && !_.isEmpty(control.value)) {
+      if (!_.isUndefined(control.value) && !_.isEmpty(control.value) && this.websitesForm) {
         const result = _.groupBy(this.websitesForm.controls, (c) => c.value.url)
         for (const prop in result) {
-          if (prop === control.value) {
+          if (prop === control.value && control.dirty) {
             return {
               duplicated: true,
             }
