@@ -110,7 +110,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           validators: [
             Validators.required,
             Validators.pattern(URL_REGEXP_BACKEND),
-            this.allUrlsAreUnique(),
+            this.allUrlsAreUnique(website.putCode),
           ],
           updateOn: 'change',
         }),
@@ -185,7 +185,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           validators: [
             Validators.required,
             Validators.pattern(URL_REGEXP),
-            this.allUrlsAreUnique(),
+            this.allUrlsAreUnique(newPutCode),
           ],
           updateOn: 'change',
         }),
@@ -231,20 +231,69 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.window.document.getElementById('my-links').scrollIntoView()
   }
 
-  allUrlsAreUnique(): ValidatorFn {
+  allUrlsAreUnique(controlKey): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!_.isUndefined(control.value) && !_.isEmpty(control.value) && this.websitesForm) {
-        const result = _.groupBy(this.websitesForm.controls, (c) => c.value.url)
-        for (const prop in result) {
-          if (prop === control.value && control.dirty) {
-            return {
-              duplicated: true,
-            }
+        const formGroup = this.websitesForm
+        const formGroupKeysWithDuplicatedValues: string[] = this.listDuplicateInputKeys(
+          formGroup
+        )
+        this.removeDuplicateErrorFromOtherControls(
+          formGroupKeysWithDuplicatedValues,
+          formGroup
+        )
+        if (formGroupKeysWithDuplicatedValues.indexOf(controlKey) >= 0) {
+          return {
+            duplicated: true,
           }
         }
       }
       return {}
     }
+  }
+
+  private listDuplicateInputKeys(formGroup: FormGroup) {
+    const formGroupKeysWithDuplicatedValues: string[] = []
+
+    // Add errors error on duplicated urls
+    Object.keys(formGroup.controls).forEach((keyX) => {
+      const urlControlX = (formGroup.controls[keyX] as FormGroup).controls[
+        'url'
+        ]
+      Object.keys(formGroup.controls).forEach((keyY) => {
+        const urlControlY = (formGroup.controls[keyY] as FormGroup).controls[
+          'url'
+          ]
+
+        // Only if both controls are not empty
+        if (urlControlX.value && urlControlY.value) {
+          if (urlControlX.value === urlControlY.value && keyX !== keyY) {
+            formGroupKeysWithDuplicatedValues.push(keyY)
+          }
+        }
+      })
+    })
+
+    return formGroupKeysWithDuplicatedValues
+  }
+
+  private removeDuplicateErrorFromOtherControls(
+    formGroupKeysWithDuplicatedValues: string[],
+    websitesForm: FormGroup = new FormGroup({})
+  ): void {
+    Object.keys(websitesForm.controls).forEach((currentControlKey) => {
+      const urlControl = (websitesForm.controls[
+        currentControlKey
+        ] as FormGroup).controls.url as FormControl
+      if (
+        formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
+        urlControl.errors &&
+        urlControl.errors['duplicated']
+      ) {
+        delete urlControl.errors['duplicated']
+        urlControl.updateValueAndValidity({ onlySelf: true })
+      }
+    })
   }
 
   ngOnDestroy() {
