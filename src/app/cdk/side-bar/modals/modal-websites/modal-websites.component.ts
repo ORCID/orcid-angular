@@ -233,7 +233,11 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   allUrlsAreUnique(controlKey): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (!_.isUndefined(control.value) && !_.isEmpty(control.value) && this.websitesForm) {
+      if (
+        !_.isUndefined(control.value) &&
+        !_.isEmpty(control.value) &&
+        this.websitesForm
+      ) {
         const formGroup = this.websitesForm
         const formGroupKeysWithDuplicatedValues: string[] = this.listDuplicateInputKeys(
           formGroup
@@ -259,11 +263,11 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     Object.keys(formGroup.controls).forEach((keyX) => {
       const urlControlX = (formGroup.controls[keyX] as FormGroup).controls[
         'url'
-        ]
+      ]
       Object.keys(formGroup.controls).forEach((keyY) => {
         const urlControlY = (formGroup.controls[keyY] as FormGroup).controls[
           'url'
-          ]
+        ]
 
         // Only if both controls are not empty
         if (urlControlX.value && urlControlY.value) {
@@ -282,9 +286,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     websitesForm: FormGroup = new FormGroup({})
   ): void {
     Object.keys(websitesForm.controls).forEach((currentControlKey) => {
-      const urlControl = (websitesForm.controls[
-        currentControlKey
-        ] as FormGroup).controls.url as FormControl
+      const urlControl = (websitesForm.controls[currentControlKey] as FormGroup)
+        .controls.url as FormControl
       if (
         formGroupKeysWithDuplicatedValues.indexOf(currentControlKey) === -1 &&
         urlControl.errors &&
