@@ -3,7 +3,7 @@ import {
   MonthDayYearDate,
   Value,
   Visibility,
-} from './common.endpoint'
+} from './common.endpoint' 
 
 export interface FundingGroup {
   fundings: [Funding]

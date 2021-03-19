@@ -29,7 +29,11 @@ import { RecordWebsitesService } from '../record-websites/record-websites.servic
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { RecordAffiliationService } from '../record-affiliations/record-affiliations.service'
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import { RecordPeerReviewService } from '../record-peer-review/record-peer-review.service'
 import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
+import { RecordFundingsService } from '../record-fundings/record-fundings.service'
+import { FundingGroup } from 'src/app/types/record-funding.endpoint'
+import { PeerReview } from '../../types/record-peer-review.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +53,9 @@ export class RecordService {
     private _recordCountryService: RecordCountriesService,
     private _recordWebsitesService: RecordWebsitesService,
     private _recordAffiliations: RecordAffiliationService,
-    private _recordPersonalIdentifier: RecordPersonIdentifierService
+    private _recordFundings: RecordFundingsService,
+    private _recordPersonalIdentifier: RecordPersonIdentifierService,
+    private _recordPeerReviewService: RecordPeerReviewService
   ) {}
 
   headers = new HttpHeaders({
@@ -72,7 +78,9 @@ export class RecordService {
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
         this._recordAffiliations.getAffiliations(),
+        this._recordFundings.getFundings(),
         this.getPreferences(),
+        this._recordPeerReviewService.getPeerReviewGroups(true),
       ])
         .pipe(
           tap(
@@ -87,7 +95,9 @@ export class RecordService {
               names,
               biography,
               affiliations,
+              fundings, 
               preferences,
+              peerReviews,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -100,7 +110,9 @@ export class RecordService {
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
                 affiliations: affiliations as AffiliationUIGroup[],
+                fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
+                peerReviews: peerReviews as PeerReview[],
               })
             }
           )

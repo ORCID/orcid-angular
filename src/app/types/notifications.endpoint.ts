@@ -69,13 +69,15 @@ export interface InboxNotificationAmended extends InboxNotification {
     | 'EMPLOYMENT'
     | 'EXTERNAL_IDENTIFIERS'
     | 'FUNDING'
+    | 'INVITED_POSITION'
+    | 'MEMBERSHIP'
     | 'PEER_REVIEW'
     | 'PREFERENCES'
     | 'QUALIFICATION'
-    | 'UNKNOWN'
+    | 'SERVICE'
     | 'RESEARCH_RESOURCE'
+    | 'UNKNOWN'
     | 'WORK'
-    | 'INVITED_POSITION'
 }
 
 export interface InboxNotificationHtml extends InboxNotification {

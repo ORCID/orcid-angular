@@ -14,7 +14,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { UserService } from 'src/app/core'
 
 @Component({
-  selector: 'app-fundings',
+  selector: 'app-funding-stack',
   templateUrl: './funding-stack.component.html',
   styleUrls: [
     './funding-stack.component.scss',
@@ -36,6 +36,7 @@ export class FundingStackComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
   userRecord: UserRecord
+  profileFundingGroups: FundingGroup[]
 
   _displayTheStack = false
   set displayTheStack(mode: boolean) {
@@ -77,13 +78,10 @@ export class FundingStackComponent implements OnInit {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
-            this.profileAffiliationGroups = this.userRecord.affiliations
+            this.profileFundingGroups = this.userRecord.fundings
           })
       })
   }
-
-
-
 
   /**
    * Set the panelDetails and top of the stack card to default mode

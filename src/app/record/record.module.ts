@@ -23,8 +23,11 @@ import { SharedModule } from '../shared/shared.module'
 import { AffiliationStackComponent } from './components/affiliation-stack/affiliation-stack.component'
 import { AffiliationStacksGroupsComponent } from './components/affiliation-stacks-groups/affiliation-stacks-groups.component'
 import { AffiliationComponent } from './components/affiliation/affiliation.component'
+import { PeerReviewsComponent } from './components/peer-reviews/peer-reviews.component'
+import { ModalPeerReviewsComponent } from './components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
 import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
+import { FundingStacksGroupsComponent } from './components/funding-stacks-groups/funding-stacks-groups.component'
 import { FundingStackComponent } from './components/funding-stack/funding-stack.component'
 import { FundingComponent } from './components/funding/funding.component'
 
@@ -38,10 +41,13 @@ import { FundingComponent } from './components/funding/funding.component'
     AffiliationStacksGroupsComponent,
     AffiliationStackComponent,
     AffiliationComponent,
+    FundingStacksGroupsComponent,
     FundingStackComponent,
     FundingComponent,
     DisplayExternalIdsComponent,
     DisplayAttributeComponent,
+    PeerReviewsComponent,
+    ModalPeerReviewsComponent,
   ],
   imports: [
     CommonModule,
