@@ -1,0 +1,12 @@
+<app-panels
+  *ngIf="workGroup.groups.length"
+  class="row"
+  [title]="Works"
+  [currentAmount]="workGroup.groups.length"
+  [total]="workGroup.totalGroups"
+>
+  <app-work-stack
+    *ngFor="let work of workGroup.groups; trackBy: trackByWorkGroup"
+    [workStack]="affiliationGroup"
+  ></app-work-stack>
+</app-panels>

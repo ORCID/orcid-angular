@@ -32,6 +32,8 @@ import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { RecordPeerReviewService } from '../record-peer-review/record-peer-review.service'
 import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
+import { RecordWorksService } from '../record-works/record-works.service'
+import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +54,8 @@ export class RecordService {
     private _recordWebsitesService: RecordWebsitesService,
     private _recordAffiliations: RecordAffiliationService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordWorkService: RecordWorksService
   ) {}
 
   headers = new HttpHeaders({
@@ -77,6 +80,7 @@ export class RecordService {
         this._recordAffiliations.getAffiliations(),
         this.getPreferences(),
         this._recordPeerReviewService.getPeerReviewGroups(true),
+        this._recordWorkService.getWorksService(),
       ])
         .pipe(
           tap(
@@ -93,6 +97,7 @@ export class RecordService {
               affiliations,
               preferences,
               peerReviews,
+              works,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -107,6 +112,7 @@ export class RecordService {
                 affiliations: affiliations as AffiliationUIGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
+                works: works as WorksEndpoint,
               })
             }
           )
