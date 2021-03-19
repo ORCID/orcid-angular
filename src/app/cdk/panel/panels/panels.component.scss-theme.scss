@@ -13,6 +13,15 @@
       background-color: mat-color($accent, 900);
       color: mat-contrast($accent, 900);
     }
+
+    .sub-peer-review {
+      border-color: mat-color($background, ui-background) !important;
+      background-color: mat-color(
+        $background,
+        ui-background-lightest
+      ) !important;
+      color: $orcid-dark-primary-text;
+    }
   }
 }
 

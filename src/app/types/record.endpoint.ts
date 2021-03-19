@@ -70,21 +70,21 @@ export interface Preferences {
   default_visibility: VisibilityStrings
 }
 
-interface AssertionBase {
+export interface AssertionBase {
   value?: string
   primary?: boolean
   current?: boolean
   verified?: boolean
   visibility?: Visibility | VisibilityStrings
   source?: string
-  putCode?: string
+  putCode?: any
   errors?: any[]
   displayIndex?: number
   iso2Country?: Value
   countryName?: string
   commonName?: string
   reference?: string
-  url?: Value
+  url?: any
   urlName?: string
   sourceName?: string
   content?: string
