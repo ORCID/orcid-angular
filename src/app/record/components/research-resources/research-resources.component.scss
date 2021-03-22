@@ -1,0 +1,41 @@
+:host {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+app-panel {
+  width: 100%;
+  margin-top: 16px;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+}
+
+app-panel-data {
+  border-top: 1px solid;
+  padding: 0 !important;
+
+  .description-container {
+    display: flex;
+    justify-content: space-between;
+
+    .description {
+      border-bottom: solid 1px;
+      padding: 16px;
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      a {
+        margin-inline-end: 16px;
+      }
+    }
+  }
+}
+
+

@@ -50,46 +50,47 @@
                 [editable]="false"
                 [customControls]="true"
                 class="top-bar"
+                *ngIf="subPeerReview.peerReviews[0] as peerReview"
               >
                 <div header>
                   <span class="header-sub-peer-review">
                     <b i18n="@@peerReview.reviewDate"> Review date: </b>
                     {{
-                      subPeerReview.peerReviews[0].completionDate
+                      peerReview.completionDate
                         | monthDayYearDateToString
                     }}
                   </span>
                   <span class="header-sub-peer-review">
                     <b i18n="@@peerReview.type"> Type: </b>
                     <span class="capitalize">
-                      {{ subPeerReview.peerReviews[0].type.value }}
+                      {{ peerReview.type.value }}
                     </span>
                   </span>
                   <span class="header-sub-peer-review">
                     <b i18n="@@peerReview.role"> Role: </b>
                     <span class="capitalize">
-                      {{ subPeerReview.peerReviews[0].role.value }}
+                      {{ peerReview.role.value }}
                     </span>
                   </span>
                 </div>
                 <div custom-controls>
                   <span class="show">
                     <a
-                      *ngIf="!subPeerReview.peerReviews[0].showDetails"
+                      *ngIf="!peerReview.showDetails"
                       (click)="
                         getDetails(
-                          subPeerReview.peerReviews[0],
-                          subPeerReview.peerReviews[0].putCode.value
+                          peerReview,
+                          peerReview.putCode.value
                         )
                       "
-                      i18n="@@peerReview.showMoreDetail"
+                      i18n="@@shared.showMoreDetail"
                     >
                       Show more detail
                     </a>
                     <a
-                      *ngIf="subPeerReview.peerReviews[0].showDetails"
-                      (click)="collapse(subPeerReview.peerReviews[0])"
-                      i18n="@@peerReview.showLessDetail"
+                      *ngIf="peerReview.showDetails"
+                      (click)="collapse(peerReview)"
+                      i18n="@@shared.showLessDetail"
                     >
                       Show less detail
                     </a>
@@ -97,14 +98,14 @@
                   <a
                     rel="noopener noreferrer"
                     target="_blank"
-                    href="{{ subPeerReview.peerReviews[0].url }}"
+                    href="{{ peerReview.url }}"
                     i18n="@@peerReview.view"
                   >
                     View
                   </a>
                 </div>
                 <app-panel-data
-                  *ngIf="subPeerReview.peerReviews[0].showDetails"
+                  *ngIf="peerReview.showDetails"
                 >
                   <app-panel-element [hideVisibility]="false">
                     <div class="details">
@@ -115,11 +116,11 @@
                       </div>
                       <span class="source">
                         {{
-                          subPeerReview.peerReviews[0].externalIdentifiers[0]
+                          peerReview.externalIdentifiers[0]
                             .externalIdentifierType.value
                         }}:
                         {{
-                          subPeerReview.peerReviews[0].externalIdentifiers[0]
+                          peerReview.externalIdentifiers[0]
                             .externalIdentifierId.value
                         }}
                       </span>
@@ -132,7 +133,7 @@
                       </div>
                       {{
                         getPeerReview(
-                          subPeerReview.peerReviews[0].putCode.value
+                          peerReview.putCode.value
                         ).orgName.value
                       }}
                     </div>
@@ -143,26 +144,26 @@
                       <ng-container
                         *ngIf="
                           getPeerReview(
-                            subPeerReview.peerReviews[0].putCode.value
+                            peerReview.putCode.value
                           ).subjectName
                         "
                       >
                         {{
                           getPeerReview(
-                            subPeerReview.peerReviews[0].putCode.value
+                            peerReview.putCode.value
                           ).subjectName.value
                         }}
                       </ng-container>
                       <ng-container
                         *ngIf="
                           getPeerReview(
-                            subPeerReview.peerReviews[0].putCode.value
+                            peerReview.putCode.value
                           ).subjectType
                         "
                       >
                         ({{
                           getPeerReview(
-                            subPeerReview.peerReviews[0].putCode.value
+                            peerReview.putCode.value
                           ).subjectType.value
                         }})
                       </ng-container>
@@ -170,13 +171,13 @@
                     <div
                       *ngIf="
                         getPeerReview(
-                          subPeerReview.peerReviews[0].putCode.value
+                          peerReview.putCode.value
                         ).subjectContainerName
                       "
                     >
                       {{
                         getPeerReview(
-                          subPeerReview.peerReviews[0].putCode.value
+                          peerReview.putCode.value
                         ).subjectContainerName.value
                       }}
                     </div>

@@ -26,7 +26,8 @@ import { AffiliationComponent } from './components/affiliation/affiliation.compo
 import { PeerReviewsComponent } from './components/peer-reviews/peer-reviews.component'
 import { ModalPeerReviewsComponent } from './components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
-import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
+import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component';
+import { ResearchResourcesComponent } from './components/research-resources/research-resources.component'
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { DisplayAttributeComponent } from './components/display-attribute/displa
     DisplayAttributeComponent,
     PeerReviewsComponent,
     ModalPeerReviewsComponent,
+    ResearchResourcesComponent,
   ],
   imports: [
     CommonModule,

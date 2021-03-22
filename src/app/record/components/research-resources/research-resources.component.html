@@ -1,0 +1,114 @@
+<app-panels
+  *ngIf="userRecord && userRecord.researchResources"
+  class="row"
+  [title]="ngOrcidResearchResources"
+  [type]="'peer-review'"
+  [total]="userRecord.researchResources.groups.length"
+>
+  <ng-container *ngFor="let researchResource of userRecord.researchResources.groups">
+    <app-panel
+      [elements]="researchResource"
+      [type]="'top-bar'"
+      [editable]="false"
+      [openState]="false"
+      class="top-bar"
+      *ngIf="researchResource.researchResources[0] as research"
+    >
+      <div header>
+        <b>
+          {{ research.title }}
+        </b>
+      </div>
+      <app-panel-data class="orc-font-body-small">
+        <app-panel-element [hideVisibility]="false">
+          <div class="description-container">
+            <div class="description">
+              <div *ngFor="let host of research.hosts">
+              <span class="capitalize">
+                 {{ host.name }}
+              </span>
+                <span *ngIf="host.city || host.region || host.country"> (</span>
+                <span *ngIf="host.city">{{ host.city }}</span><span *ngIf="host.region">, {{ host.region }}</span><span
+                *ngIf="host.country">, {{ host.country }}</span>
+                <span *ngIf="host.city || host.region || host.country">)</span>
+              </div>
+              <div>
+                <span *ngIf="research.startDate">
+                  <span *ngIf="research.startDate?.year">{{research?.startDate?.year}}</span>
+                  <span *ngIf="research?.startDate?.month">-{{research?.startDate?.month}}</span>
+                  <span *ngIf="research?.startDate?.day">-{{research?.startDate?.day}}</span>
+                  <span>-</span>
+                  <span
+                    [hidden]="research?.endDate && research?.endDate?.year"
+                    i18n="@@researchResources.present"
+                  >
+                    present
+                  </span>
+                  <span *ngIf="research?.endDate">
+                    <span *ngIf="research?.endDate?.year">{{research?.endDate?.year}}</span>
+                    <span *ngIf="research?.endDate?.month">-{{research?.endDate?.month}}</span>
+                    <span *ngIf="research?.endDate?.day">-{{research?.endDate?.day}}</span>
+                  </span>
+               </span>
+                <!--End date-->
+                <span *ngIf="!research.startDate && research?.endDate">
+                  <span *ngIf="research?.endDate?.year">{{research?.endDate?.year}}</span>
+                  <span *ngIf="research?.endDate?.month">-{{research?.endDate?.month}}</span>
+                  <span *ngIf="research?.endDate?.day">-{{research?.endDate?.day}}</span>
+                </span>
+              </div>
+              <div *ngFor="let externalIdentifier of research.externalIdentifiers;let i = index;">
+                <span *ngIf="externalIdentifier.externalIdentifierType">
+                  {{ externalIdentifier.externalIdentifierType.value }}
+                </span>
+                <a
+                  *ngIf="externalIdentifier.externalIdentifierId"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="{{ externalIdentifier.externalIdentifierId.value }}"
+                >
+                  {{ externalIdentifier.externalIdentifierId.value }}
+                </a>
+              </div>
+            </div>
+            <div class="buttons-container">
+              <a
+                *ngIf="!research.showDetails"
+                (click)="
+                          getDetails(
+                            research,
+                            research.putCode.value
+                          )
+                        "
+                i18n="@@shared.showMoreDetail"
+              >
+                Show more detail
+              </a>
+              <a
+                *ngIf="research.showDetails"
+                (click)="collapse(research)"
+                i18n="@@shared.showLessDetail"
+              >
+                Show less detail
+              </a>
+            </div>
+          </div>
+        </app-panel-element>
+        <app-panel-element
+          [hideVisibility]="false"
+          *ngIf="research.showDetails"
+        >
+          <div class="description">
+          </div>
+          <ng-container
+            *ngIf="getResearchResource(research.putCode)"
+          >
+          </ng-container>
+        </app-panel-element>
+      </app-panel-data>
+      <!--      <app-panel-source [sourceName]="peerReview.sourceName">-->
+<!--      </app-panel-source>-->
+    </app-panel>
+  </ng-container>
+
+</app-panels>
