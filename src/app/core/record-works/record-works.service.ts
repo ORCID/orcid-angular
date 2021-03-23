@@ -92,7 +92,9 @@ export class RecordWorksService {
     return this._http
       .get<Work>(
         environment.API_WEB +
-          `${orcidId ? orcidId + '?' : 'works/'}getWorkInfo.json?workId=${putCode}`
+          `${
+            orcidId ? orcidId + '?' : 'works/'
+          }getWorkInfo.json?workId=${putCode}`
       )
       .pipe(
         retry(3),
