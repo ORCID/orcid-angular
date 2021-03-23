@@ -36,7 +36,6 @@
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-
   <!-- TRANSLATION -->
   <app-display-attribute *ngIf="work.translatedTitle?.content">
     <h3 class="orc-font-body-small">
@@ -88,16 +87,15 @@
   <app-display-attribute *ngIf="work.citation?.citationType?.value">
     <h3 class="orc-font-body-small">
       <ng-container i18n="@@record.citation">Citation</ng-container>
+      <span *ngIf="work.citation?.citationType?.value"
+        >({{ work.citation?.citationType?.value }})</span
+      >
     </h3>
-    <span *ngIf="work.citation.citationType"
-      >({{ work.citation.citationType.value }})</span
-    >
 
     <div>
       {{ work.citation.citation.value }}
     </div>
   </app-display-attribute>
-
 
   <!-- ADDED DATE-->
   <app-display-attribute>
