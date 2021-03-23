@@ -36,6 +36,10 @@ export class RecordFundingsService {
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((value) => {
+            console.log("------------------------")
+            console.log("Fundings from server")
+            console.log(value)
+            console.log("------------------------")
             this.lastEmitedValue = cloneDeep(value)
             this.$fundings.next(value)
           })

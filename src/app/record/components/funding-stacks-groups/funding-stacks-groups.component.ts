@@ -38,7 +38,7 @@ export class FundingStacksGroupsComponent implements OnInit {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
-            this.profileFundingGroups = this.userRecord.affiliations
+            this.profileFundingGroups = this.userRecord.fundings
           })
       })
   }
