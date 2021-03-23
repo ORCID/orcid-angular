@@ -42,16 +42,18 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   errorState = false
 
   termsOfUse = new FormControl('', Validators.requiredTrue)
+  dataProcessed = new FormControl('', Validators.requiredTrue)
   ngOnInit() {
     this.form = new FormGroup({
       termsOfUse: this.termsOfUse,
+      dataProcessed: this.dataProcessed
     })
   }
 
   // OVERWRITE
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
-      const registerForm = this._register.formGroupToTermOfUserRegisterForm(
+      const registerForm = this._register.formGroupTermsOfUseAndDataProcessedRegisterForm(
         this.form as FormGroup
       )
       fn(registerForm)
@@ -59,9 +61,8 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    this.errorState = this._errorStateMatcher.isErrorState(
-      this.termsOfUse,
-      null
-    )
+    this.errorState =
+      this._errorStateMatcher.isErrorState(this.termsOfUse, null) ||
+      this._errorStateMatcher.isErrorState(this.dataProcessed, null)
   }
 }

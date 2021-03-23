@@ -6,6 +6,7 @@ export interface RegisterForm {
   sendOrcidNews?: Value
   sendMemberUpdateRequests?: Value
   termsOfUse?: Value
+  dataProcessed?: Value
   activitiesVisibilityDefault?: Visibility
   password?: Value
   passwordConfirm?: Value
