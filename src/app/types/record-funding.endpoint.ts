@@ -8,11 +8,11 @@ import {
 export interface FundingGroup {
   fundings: [Funding]
   activePutCode: number
-  defaultFunding: Funding
   groupId: string
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
-  externalIdentifiers: [any] // TODO is this always empty?  
+  externalIdentifiers: [any] // TODO is this always empty? 
+  defaultFunding: Funding 
 }
 
 export interface Funding {

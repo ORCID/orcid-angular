@@ -94,7 +94,7 @@ export class FundingStackComponent implements OnInit {
     const response =
       funding && this.fundingStack
         ? this.fundingStack.defaultFunding.putCode.value ===
-          funding.putCode.value
+        funding.putCode.value
         : false
     return response
   }

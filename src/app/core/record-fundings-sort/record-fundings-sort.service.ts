@@ -12,6 +12,8 @@ export class FundingsSortService {
     value: FundingGroup[],
     ascending = true
   ): FundingGroup[] {
+    console.log("Fundings to sort:")
+    console.log(value)
     return this.sort(value, ascending)
   }
 
