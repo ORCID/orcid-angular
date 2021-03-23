@@ -72,7 +72,9 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
       return { password, passwordConfirm }
     }
 
-    formGroupTermsOfUseAndDataProcessedRegisterForm(formGroup: FormGroup): RegisterForm {
+    formGroupTermsOfUseAndDataProcessedRegisterForm(
+      formGroup: FormGroup
+    ): RegisterForm {
       let termsOfUse: Value
       let dataProcessed: Value
       if (formGroup && formGroup.controls) {

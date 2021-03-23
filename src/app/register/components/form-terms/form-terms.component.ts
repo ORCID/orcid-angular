@@ -46,7 +46,7 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   ngOnInit() {
     this.form = new FormGroup({
       termsOfUse: this.termsOfUse,
-      dataProcessed: this.dataProcessed
+      dataProcessed: this.dataProcessed,
     })
   }
 

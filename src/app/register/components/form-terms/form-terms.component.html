@@ -27,7 +27,8 @@
       terms of use
     </a>
     <ng-container i18n="@@register.agree"
-      >and agree to my data being publicly accessible where marked as “Visible to Everyone”.</ng-container
+      >and agree to my data being publicly accessible where marked as “Visible
+      to Everyone”.</ng-container
     >
   </mat-checkbox>
   <mat-checkbox
@@ -40,14 +41,13 @@
     I consent to my data being processed in the United States
   </mat-checkbox>
   <mat-error
-      *ngIf="
-        (
-        form.hasError('required', 'termsOfUse') ||
-        form.hasError('required', 'dataProcessed')
-        ) &&
-        errorState
+    *ngIf="
+      (form.hasError('required', 'termsOfUse') ||
+        form.hasError('required', 'dataProcessed')) &&
+      errorState
     "
     i18n="@@register.termsRequired"
-    >To continue creating your ORCID iD you must accept the terms of use and consent to your data being processed in the United States.</mat-error
+    >To continue creating your ORCID iD you must accept the terms of use and
+    consent to your data being processed in the United States.</mat-error
   >
 </ng-container>
