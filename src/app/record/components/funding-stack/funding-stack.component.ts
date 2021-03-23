@@ -128,7 +128,7 @@ export class FundingStackComponent implements OnInit {
     let $fundingDisambiguationSource: Observable<
       false | OrgDisambiguated
     > = of(false)
-    // Adds call for disambiguationSource if the affiliation has
+    // Adds call for disambiguationSource if the funding has
     if (funding.disambiguationSource) {
       $fundingDisambiguationSource = this._organizationsService.getOrgDisambiguated(
         funding.disambiguationSource.value,
@@ -158,7 +158,7 @@ export class FundingStackComponent implements OnInit {
     this.stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack = true
   }
 
-  trackByAffiliationStack(index, item: Funding) {
+  trackByFundingStack(index, item: Funding) {
     return item.putCode.value
   }
 

@@ -17,7 +17,7 @@ export class FundingStacksGroupsComponent implements OnInit {
   userSession: UserSession
   userRecord: UserRecord
 
-  ngOrcidFunding = $localize`:@@funding.funding:Funding`
+  ngOrcidFunding = $localize`:@@shared.funding:Funding`
 
   constructor(
     private _userSession: UserService,
