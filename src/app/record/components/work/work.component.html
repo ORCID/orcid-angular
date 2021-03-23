@@ -1,5 +1,4 @@
 <!-- WORK BODY -->
-{{ work | json }}
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data [borderBottom]="true">
   <div>
@@ -37,80 +36,68 @@
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-  <!-- URL -->
-  <app-display-attribute *ngIf="work.url.value">
-    <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
-    <div>{{ work.url.value }}</div>
+
+  <!-- TRANSLATION -->
+  <app-display-attribute *ngIf="work.translatedTitle?.content">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.translations">Translation</ng-container>
+    </h3>
+    <span *ngIf="work.translatedTitle?.languageName"
+      >({{ work.translatedTitle?.languageName }})</span
+    >
+
+    <div>
+      {{ work.translatedTitle.content }}
+    </div>
   </app-display-attribute>
 
-  <!-- ORGANIZATION DISAMBIGUATED IDS-->
-  <!-- <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
-    <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@record.organizationIdentifiers">
-        Organization identifiers
-      </h3>
-      <div>
-        <div>
-          {{ orgDisambiguated?.sourceType
-          }}<ng-container
-            *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
-            >:</ng-container
-          >
-          <ng-container> {{ orgDisambiguated?.sourceId }}</ng-container>
-        </div>
-        <div>
-          {{ orgDisambiguated?.value
-          }}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
-            >:</ng-container
-          >
-          {{ orgDisambiguated | cityRegionCountry }}
-        </div>
+  <!-- LANGUAGE -->
+  <app-display-attribute *ngIf="work.languageName?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.language">Language</ng-container>
+    </h3>
 
-        <a
-          target="orcid-app"
-          *ngIf="orgDisambiguated?.url"
-          [href]="orgDisambiguated?.url"
-        >
-          {{ orgDisambiguated?.url }}</a
-        >
-      </div>
-    </app-display-attribute>
+    <div>
+      {{ work.languageName.value }}
+    </div>
+  </app-display-attribute>
 
-    <app-display-attribute>
-      <h3 class="orc-font-body-small">
-        <ng-container
-          i18n="@@workspace_works.external_ids"
-          i18n="@@record.OtherOrganization"
-          >Other organization identifiers provided by</ng-container
-        >
-        {{ orgDisambiguated.sourceType | titlecase }}
-      </h3>
-      <div
-        *ngFor="let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers"
-        class="padding-level-3"
-      >
-        {{ org.identifierType }}:
-        <ng-container *ngIf="org.preferred && !isUrl(org.preferred)">{{
-          org.preferred
-        }}</ng-container>
-        <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
-          <a target="orcid-app" href="{{ org.preferred }} ">
-            {{ org.preferred }}</a
-          >
-        </ng-container>
-        <ng-container>(preferred)</ng-container>
+  <!-- SUBTITLE -->
+  <app-display-attribute *ngIf="work.subtitle?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.subtitle">Subtitle</ng-container>
+    </h3>
 
-        <ng-container *ngFor="let id of org.all">
-          <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
-            id
-          }}</ng-container>
-          <ng-container *ngIf="id != org.preferred && isUrl(id)">
-            <a target="orcid-app" href="{{ id }}"> {{ id }}</a>
-          </ng-container>
-        </ng-container>
-      </div>
-    </app-display-attribute>
-  </ng-container> -->
+    <div>
+      {{ work.subtitle.value }}
+    </div>
+  </app-display-attribute>
+
+  <!-- URL-->
+  <app-display-attribute *ngIf="work.url?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.url">URL</ng-container>
+    </h3>
+
+    <div>
+      {{ work.url.value }}
+    </div>
+  </app-display-attribute>
+
+  <!-- CITATION-->
+  <app-display-attribute *ngIf="work.citation?.citationType?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.citation">Citation</ng-container>
+    </h3>
+    <span *ngIf="work.citation.citationType"
+      >({{ work.citation.citationType.value }})</span
+    >
+
+    <div>
+      {{ work.citation.citation.value }}
+    </div>
+  </app-display-attribute>
+
 
   <!-- ADDED DATE-->
   <app-display-attribute>

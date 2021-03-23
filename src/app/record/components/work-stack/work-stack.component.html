@@ -6,7 +6,7 @@
     let last = last
   "
 >
-  <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
+  <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
   <app-panel
     [elements]="work"
     [ngStyle]="{ 'z-index': workStack.works.length - i }"
@@ -18,17 +18,8 @@
     <h2 header class="orc-font-body" i18n="@@record.emails">
       {{ work.title.value }}:
 
-      <!-- <ng-container *ngIf="affiliation.city.value">
-        {{ affiliation.city.value }},
-      </ng-container>
-      <ng-container *ngIf="affiliation.region.value">
-        {{ affiliation.region.value }},
-      </ng-container>
-      <ng-container *ngIf="affiliation.country.value">
-        {{ affiliation.country.value }}
-      </ng-container> -->
     </h2>
-    <!-- AFFILIATION BODY -->
+    <!-- WORK BODY -->
     <app-work
       *ngIf="stackPanelsDisplay[work.putCode.value].topPanelOfTheStack"
       [work]="work"
@@ -36,7 +27,7 @@
       (toggleDetails)="toggleDetails($event)"
     >
     </app-work>
-    <!-- AFFILIATION SOURCE -->
+    <!-- WORK SOURCE -->
     <app-panel-source
       [isPreferred]="isPreferred(work)"
       [sourceName]="work.sourceName || work.source"

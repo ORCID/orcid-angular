@@ -16,7 +16,7 @@ export interface Work {
   journalTitle: Value
   languageCode?: any
   languageName?: any
-  citation?: any
+  citation?: Citation
   countryCode?: any
   countryName?: any
   contributors?: any
@@ -35,6 +35,14 @@ export interface Work {
   createdDate?: any
   lastModified?: any
   userSource: boolean
+}
+
+export interface Citation {
+  citation: Value
+  citationType: Value
+  errors: any[]
+  getRequiredMessage?: any
+  required: boolean
 }
 
 export interface WorkGroup {

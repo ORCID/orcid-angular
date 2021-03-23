@@ -1,20 +1,13 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
-import { combineLatest, Observable, of, Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { OrganizationsService, UserService } from 'src/app/core'
-import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
-import { RecordPeerReviewService } from 'src/app/core/record-peer-review/record-peer-review.service'
+import { Observable } from 'rxjs'
+import { OrganizationsService } from 'src/app/core'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
-import { RecordService } from 'src/app/core/record/record.service'
-import { OrgDisambiguated } from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import {
-  WorkGroup,
   Work,
+  WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
-import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-work-stack',
@@ -89,10 +82,10 @@ export class WorkStackComponent implements OnInit {
     }
   }
 
-  isPreferred(affiliation: Work) {
+  isPreferred(work: Work) {
     const response =
-      affiliation && this.workStack
-        ? this.workStack.defaultPutCode.toString() === affiliation.putCode.value
+      work && this.workStack
+        ? this.workStack.defaultPutCode.toString() === work.putCode.value
         : false
     return response
   }
@@ -115,30 +108,13 @@ export class WorkStackComponent implements OnInit {
   /**
    * Get require extra backend data to display on the panel details
    */
-  private getDetails(
-    work: Work
-  ): Observable<[false | OrgDisambiguated, WorksEndpoint]> {
+  private getDetails(work: Work): Observable<WorksEndpoint> {
     const putCode = work.putCode.value
-
-    let $affiliationDisambiguationSource: Observable<
-      false | OrgDisambiguated
-    > = of(false)
-    // // Adds call for disambiguationSource if the affiliation has
-    // if (work.disambiguationSource) {
-    //   $affiliationDisambiguationSource = this._organizationsService.getOrgDisambiguated(
-    //     affiliation.disambiguationSource.value,
-    //     affiliation.disambiguatedAffiliationSourceId.value
-    //   )
-    // }
     const $workDetails = this._workService.getDetails(putCode)
-
-    // Call http requests at the same time
-    return combineLatest([$affiliationDisambiguationSource, $workDetails]).pipe(
-      first()
-    )
+    return $workDetails
   }
 
-  makePrimaryCard(affiliation: Work) {
+  makePrimaryCard(work: Work) {
     // TODO
     console.log(this.stackPanelsDisplay)
   }
