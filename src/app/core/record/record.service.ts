@@ -80,7 +80,7 @@ export class RecordService {
         this._recordAffiliations.getAffiliations(),
         this.getPreferences(),
         this._recordPeerReviewService.getPeerReviewGroups(true),
-        this._recordWorkService.getWorksService(),
+        this._recordWorkService.getWorks(),
       ])
         .pipe(
           tap(

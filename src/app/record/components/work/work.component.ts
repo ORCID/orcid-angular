@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
-import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
+import { Work } from 'src/app/types/record-works.endpoint'
 
 @Component({
   selector: 'app-work',
@@ -8,13 +8,11 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
   styleUrls: ['./work.component.scss'],
 })
 export class WorkComponent implements OnInit {
-  @Input() affiliation: Affiliation
+  @Input() work: Work
   @Input() panelDetailsState: {
-    detailShowData: boolean
-    detailShowLoader: boolean
     state: boolean
   }
-  @Output() toggleDetails = new EventEmitter<Affiliation>()
+  @Output() toggleDetails = new EventEmitter<Work>()
   @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
 

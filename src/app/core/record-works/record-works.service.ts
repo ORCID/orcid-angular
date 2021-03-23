@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { switchMap, retry, catchError, map, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
-import { environment } from 'src/environments/environment.production'
+import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -45,7 +45,7 @@ export class RecordWorksService {
    *
    * @param id user Orcid id
    */
-  getWorksService(orcidId?: string) {
+  getWorks(orcidId?: string) {
     return this.getWorksData(0, 'date', 'false', orcidId).pipe(
       tap((data) => {
         this.lastEmitedValue = data
@@ -70,7 +70,7 @@ export class RecordWorksService {
    */
 
   getDetails(putCode: string, orcidId?: string): Observable<WorksEndpoint> {
-    return this.getWorkInfo(orcidId, putCode).pipe(
+    return this.getWorkInfo(putCode, orcidId).pipe(
       tap((workWithDetails) => {
         this.lastEmitedValue.groups.map((works) => {
           works.works = works.works.map((work) => {
@@ -88,11 +88,11 @@ export class RecordWorksService {
     )
   }
 
-  private getWorkInfo(putCode: string, orcidId: string): Observable<Work> {
+  private getWorkInfo(putCode: string, orcidId?: string): Observable<Work> {
     return this._http
       .get<Work>(
         environment.API_WEB +
-          `${orcidId ? orcidId + '?' : ''}getWorkInfo.json?workId=${putCode}`
+          `${orcidId ? orcidId + '?' : 'works/'}getWorkInfo.json?workId=${putCode}`
       )
       .pipe(
         retry(3),
@@ -110,8 +110,8 @@ export class RecordWorksService {
       .get<WorksEndpoint>(
         environment.API_WEB +
           `${
-            orcidId ? orcidId + '?' : ''
-          }/worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}`
+            orcidId ? orcidId + '/' : 'works/'
+          }worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}`
       )
       .pipe(
         retry(3),

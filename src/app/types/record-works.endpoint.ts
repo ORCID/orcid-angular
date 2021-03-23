@@ -3,6 +3,7 @@ import {
   MonthDayYearDate,
   Value,
   Visibility,
+  VisibilityStrings,
 } from './common.endpoint'
 
 export interface Work {
@@ -38,9 +39,9 @@ export interface Work {
 
 export interface WorkGroup {
   activePutCode: number
-  defaultPutCode: string
+  defaultPutCode: number
   groupId: number
-  activeVisibility: string
+  activeVisibility: VisibilityStrings
   userVersionPresent: boolean
   externalIdentifiers: ExternalIdentifier[]
   works: Work[]

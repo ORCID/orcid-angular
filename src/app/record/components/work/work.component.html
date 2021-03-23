@@ -1,46 +1,32 @@
 <!-- WORK BODY -->
-
+{{ work | json }}
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
-<app-panel-data
-  [borderBottom]="true"
->
+<app-panel-data [borderBottom]="true">
   <div>
+    <div class="general-data" *ngIf="work.journalTitle">
+      {{ work.journalTitle.value }}
+    </div>
     <div class="general-data">
-      <ng-container *ngIf="affiliation.startDate.year"
-        >{{ affiliation.startDate | monthDayYearDateToString }}
-        <ng-container> to </ng-container>
-        <ng-container *ngIf="affiliation.endDate">{{
-          affiliation.endDate | monthDayYearDateToString
-        }}</ng-container>
-        <ng-container *ngIf="!affiliation.endDate.year">present</ng-container>
-      </ng-container>
-      <ng-container
-        *ngIf="affiliation.startDate.year && affiliation.roleTitle.value"
-      >
+      <ng-container *ngIf="work.publicationDate?.year"
+        >{{ work.publicationDate | monthDayYearDateToString }}
         |
       </ng-container>
-      {{ affiliation.roleTitle.value }}
-      <ng-container *ngIf="affiliation.departmentName.value">
-        ({{ affiliation.departmentName.value }})
-      </ng-container>
-    </div>
-    <div class="type">
-      {{ affiliation.affiliationType.value | titlecase }}
+      {{ work.workType.value }}
     </div>
     <app-display-external-ids
-      [externalIdentifiers]="affiliation.affiliationExternalIdentifiers"
+      [externalIdentifiers]="work.workExternalIdentifiers"
     ></app-display-external-ids>
   </div>
 
   <div align-end>
     <a
-      (click)="toggleDetails.next(affiliation)"
+      (click)="toggleDetails.next(work)"
       *ngIf="!panelDetailsState.state"
       i18n="@@share.showMoreDetail"
       >Show more detail</a
     >
     <a
-      (click)="toggleDetails.next(affiliation)"
+      (click)="toggleDetails.next(work)"
       *ngIf="panelDetailsState.state"
       i18n="@@share.showLessDetail"
       >Show less detail</a
@@ -52,13 +38,13 @@
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
   <!-- URL -->
-  <app-display-attribute *ngIf="affiliation.url.value">
+  <app-display-attribute *ngIf="work.url.value">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
-    <div>{{ affiliation.url.value }}</div>
+    <div>{{ work.url.value }}</div>
   </app-display-attribute>
 
   <!-- ORGANIZATION DISAMBIGUATED IDS-->
-  <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
+  <!-- <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@record.organizationIdentifiers">
         Organization identifiers
@@ -93,7 +79,7 @@
     <app-display-attribute>
       <h3 class="orc-font-body-small">
         <ng-container
-          i18n="@@workspace_affiliations.external_ids"
+          i18n="@@workspace_works.external_ids"
           i18n="@@record.OtherOrganization"
           >Other organization identifiers provided by</ng-container
         >
@@ -124,13 +110,13 @@
         </ng-container>
       </div>
     </app-display-attribute>
-  </ng-container>
+  </ng-container> -->
 
   <!-- ADDED DATE-->
   <app-display-attribute>
     <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
     <div>
-      {{ affiliation.createdDate | monthDayYearDateToString }}
+      {{ work.createdDate | monthDayYearDateToString }}
     </div>
   </app-display-attribute>
 
@@ -139,6 +125,6 @@
     <h3 class="orc-font-body-small" i18n="@@record.lastModified">
       Last modified
     </h3>
-    <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>
+    <div>{{ work.lastModified | monthDayYearDateToString }}</div>
   </app-display-attribute>
 </app-panel-data>

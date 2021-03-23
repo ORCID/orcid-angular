@@ -8,6 +8,7 @@ import { RecordPeerReviewService } from 'src/app/core/record-peer-review/record-
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { OrgDisambiguated } from 'src/app/types'
+import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import {
   WorkGroup,
   Work,
@@ -23,6 +24,7 @@ import { UserSession } from 'src/app/types/session.local'
 export class WorkStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
+  visibility: VisibilityStrings
   @Input()
   set workStack(value: WorkGroup) {
     this._workStack = value
@@ -42,7 +44,7 @@ export class WorkStackComponent implements OnInit {
     return this._displayTheStack
   }
 
-  orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
+  // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
   panelDetailsState: {
     [key: string]: {
@@ -58,8 +60,8 @@ export class WorkStackComponent implements OnInit {
   /**
    * Set the panelDetails and top of the stack card to default mode
    */
-  private setInitialStates(value: WorkGroup, force = false) {
-    value.works.forEach((work) => {
+  private setInitialStates(group: WorkGroup, force = false) {
+    group.works.forEach((work) => {
       this.setDefaultPanelsDisplay(work, force)
       this.setDefaultPanelDetailsState(work, force)
     })
@@ -90,7 +92,7 @@ export class WorkStackComponent implements OnInit {
   isPreferred(affiliation: Work) {
     const response =
       affiliation && this.workStack
-        ? this.workStack.defaultPutCode === affiliation.putCode.value
+        ? this.workStack.defaultPutCode.toString() === affiliation.putCode.value
         : false
     return response
   }
@@ -104,9 +106,7 @@ export class WorkStackComponent implements OnInit {
       .state
 
     if (this.panelDetailsState[putCode].state) {
-      this.getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
-        work
-      ).subscribe((response) => {
+      this.getDetails(work).subscribe((response) => {
         // this.orgDisambiguated[putCode] = response[0] || null
       })
     }
@@ -115,7 +115,7 @@ export class WorkStackComponent implements OnInit {
   /**
    * Get require extra backend data to display on the panel details
    */
-  private getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
+  private getDetails(
     work: Work
   ): Observable<[false | OrgDisambiguated, WorksEndpoint]> {
     const putCode = work.putCode.value
