@@ -14,10 +14,10 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class FundingStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
-
-  profileFundingGroups: FundingGroup[]
   userSession: UserSession
   userRecord: UserRecord
+
+  ngOrcidFunding = $localize`:@@funding.funding:Funding`
 
   constructor(
     private _userSession: UserService,
@@ -38,7 +38,6 @@ export class FundingStacksGroupsComponent implements OnInit {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
-            this.profileFundingGroups = this.userRecord.fundings
           })
       })
   }

@@ -1,21 +1,17 @@
-<ng-container
-  *ngFor="
-    let fundingGroups of profileFundingGroups;
-  "
+<!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
+<app-panels
+  *ngIf="userRecord && userRecord.fundings"
+  class="row"
+  [title]="ngOrcidPeerReview"
+  [type]="'funding'"
+  [total]="userRecord.fundings.length"
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
-  <app-panels
-    *ngIf="fundingGroups.fundings.length"
-    class="row"    
-    [currentAmount]="fundingGroups.fundings.length"
-    [total]="fundingGroups.fundings.length"
-  >
-    <app-funding-stack
-      *ngFor="
-        let fundingGroup of fundingGroups.fundings;
-        trackBy: trackByFundingGroup
+  <app-funding-stack
+    *ngFor="
+      let fundingGroup of userRecord.fundings;
+      trackBy: trackByFundingGroup
       "
-      [fundingStack]="fundingGroup"
+    [fundingStack]="fundingGroup"
     ></app-funding-stack>
   </app-panels>
-</ng-container>
+
