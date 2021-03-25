@@ -1,3 +1,5 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
 :host {
   width: 100%;
   box-sizing: border-box;
@@ -21,11 +23,6 @@ app-panel-data {
     display: flex;
     justify-content: space-between;
 
-    .description {
-      border-bottom: solid 1px;
-      padding: 16px;
-    }
-
     .buttons-container {
       display: flex;
       flex-direction: row;
@@ -38,4 +35,23 @@ app-panel-data {
   }
 }
 
+.description {
+  border-bottom: solid 1px;
+  padding: 16px;
+}
 
+.resourceType {
+  margin-right: 15px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: $spacing-small;
+  [dir='rtl'] :host & {
+    margin-left: $spacing-small;
+    margin-right: auto;
+  }
+}

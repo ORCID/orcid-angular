@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
-import { Subject } from 'rxjs'
-import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
+import { combineLatest, Observable, of, Subject } from 'rxjs'
+import { NameForm, OrgDisambiguated, RequestInfoForm, UserInfo } from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { RecordService } from '../../../core/record/record.service'
 import { first, takeUntil } from 'rxjs/operators'
-import { UserService } from '../../../core'
-import { ResearchResource } from '../../../types/record-research-resources.endpoint'
+import { OrganizationsService, UserService } from '../../../core'
+import { Host, Item, ResearchResource } from '../../../types/record-research-resources.endpoint'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
+import { URL_REGEXP } from '../../../constants'
 
 @Component({
   selector: 'app-research-resources',
@@ -36,11 +37,17 @@ export class ResearchResourcesComponent implements OnInit {
     putCode: number
     researchResource: ResearchResource
   }[] = []
+  detailsOrgDisambiguated: {
+    disambiguationSource: string
+    orgDisambiguatedId: string
+    orgDisambiguated: OrgDisambiguated
+  }[] = []
 
   ngOrcidResearchResources = $localize`:@@researchResources.researchResources:Research resources`
 
   constructor(
     _platform: PlatformInfoService,
+    private _organizationsService: OrganizationsService,
     private _record: RecordService,
     private _recordResearchResourceService: RecordResearchResourceService,
     private _user: UserService,
@@ -67,7 +74,6 @@ export class ResearchResourcesComponent implements OnInit {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
-            console.log('researchResource ' + JSON.stringify(this.userRecord.researchResources.groups))
           })
       })
   }
@@ -91,21 +97,46 @@ export class ResearchResourcesComponent implements OnInit {
         )
     } else {
       this._recordResearchResourceService
-        .getPublicResearchResourceById(
-          this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+        .getResearchResourceById(
           putCode
         )
         .pipe(first())
         .subscribe(
           (data) => {
-            this.detailsResearchResources.push({ putCode: putCode, researchResource: data })
+            const research: ResearchResource = data
+            this.detailsResearchResources.push({ putCode: putCode, researchResource: research })
             researchResource.showDetails = true
+            research.hosts.forEach(host => {
+              this.getOrganizationDisambiguatedDetails(null, host.disambiguationSource, host.orgDisambiguatedId)
+            })
           },
           (error) => {
             console.log('getDetailsError', error)
           }
         )
     }
+  }
+
+  getOrganizationDisambiguatedDetails(
+    item: Item,
+    disambiguationSource,
+    orgDisambiguatedId
+  ): void {
+    this._organizationsService.getOrgDisambiguated(
+      disambiguationSource,
+      orgDisambiguatedId,
+    )
+      .pipe(first())
+      .subscribe(organizationDisambiguated => {
+        this.detailsOrgDisambiguated.push({
+          disambiguationSource,
+          orgDisambiguatedId,
+          orgDisambiguated: organizationDisambiguated
+        })
+        if (item) {
+          item.showDetails = true
+        }
+      })
   }
 
   getResearchResource(putCode: number): ResearchResource {
@@ -120,7 +151,30 @@ export class ResearchResourcesComponent implements OnInit {
       })[0]
   }
 
-  collapse(researchResource: ResearchResource) {
-    researchResource.showDetails = !researchResource.showDetails
+  getOrganizationDisambiguated(
+    host: Host
+  ): OrgDisambiguated {
+    const disambiguationSource = host.disambiguationSource
+    const orgDisambiguatedId = host.orgDisambiguatedId
+
+    return this.detailsOrgDisambiguated
+      .filter((value) =>
+        value.disambiguationSource === disambiguationSource &&
+        value.orgDisambiguatedId === orgDisambiguatedId)
+      .map((value) => {
+        return value.orgDisambiguated
+      })[0]
+  }
+
+  getLink(type: string, value: string) {
+    return this._organizationsService.getLink(type, value)
+  }
+
+  isUrl(value: string) {
+    return RegExp(URL_REGEXP).test(value)
+  }
+
+  collapse(value: ResearchResource | Item) {
+    value.showDetails = !value.showDetails
   }
 }

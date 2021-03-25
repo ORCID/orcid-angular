@@ -17,6 +17,19 @@
     border-color: mat-color($background, ui-background) !important;
   }
 
+  .infrastructures {
+    color: mat-color($primary, 700);
+    .dot {
+      background-color: mat-color($primary, 700);
+    }
+  }
+
+  .equipment {
+    color: mat-color($accent, 900);
+    .dot {
+      background-color: mat-color($accent, 900);
+    }
+  }
 }
 
 @include research-resources-theme($orcid-app-theme);

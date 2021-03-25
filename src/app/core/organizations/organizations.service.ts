@@ -11,10 +11,16 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class OrganizationsService {
+  GRID_BASE_URL: string;
+  TEST_BASE_URL: string;
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
-  ) {}
+  ) {
+    this.GRID_BASE_URL = 'https://www.grid.ac/institutes/'
+    this.TEST_BASE_URL = 'https://orcid.org/'
+  }
 
   getOrgDisambiguated(type, value): Observable<OrgDisambiguated> {
     if (type && value) {
@@ -29,6 +35,19 @@ export class OrganizationsService {
         )
     } else {
       return of(null)
+    }
+  }
+
+  getLink(type: string, value: string): string {
+    switch (type) {
+      case 'Test':
+        return this.TEST_BASE_URL + value;
+      case 'FUNDREF':
+        return value;
+      case 'GRID':
+        return this.GRID_BASE_URL + value;
+      default:
+        return '';
     }
   }
 }

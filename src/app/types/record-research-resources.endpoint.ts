@@ -1,6 +1,16 @@
 import { AssertionBase, GroupBase } from './record.endpoint'
 import { ExternalIdentifier } from './common.endpoint'
 
+export interface Item {
+  resourceName: string
+  resourceType: string
+  hosts: Host[]
+  externalIdentifiers: ExternalIdentifier[]
+  items: any
+  url: any
+  showDetails: boolean
+}
+
 export interface Host {
   city: string
   country: string
@@ -14,7 +24,7 @@ export interface ResearchResource extends AssertionBase {
   endDate: any
   externalIdentifiers: ExternalIdentifier[]
   hosts: Host[]
-  items: any
+  items: Item[]
   lastModifiedDate: any
   path: any
   startDate
