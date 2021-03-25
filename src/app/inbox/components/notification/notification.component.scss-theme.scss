@@ -9,7 +9,7 @@
   :host {
     border: solid map-get($background, light-grey) 1px;
   }
-  :host.archived .header {
+  :host.archived {
     background-color: map-get($background, background);
     color: map-get($foreground, 'text-dark-mid') !important;
   }
