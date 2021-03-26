@@ -9,9 +9,11 @@
   :host {
     border: solid map-get($background, light-grey) 1px;
   }
-  :host.archived {
+  :host.archived .container {
     background-color: map-get($background, background);
-    color: map-get($foreground, 'text-dark-mid') !important;
+    .header {
+      color: map-get($foreground, 'text-dark-mid') !important;
+    }
   }
   :host.read .header {
     color: map-get($foreground, 'text-dark-high');
@@ -44,10 +46,10 @@
     border-top: solid map-get($background, light-grey) 1px;
   }
 
-  .header.cdk-keyboard-focused {
+  .container:hover {
     background-color: map-get($background, hover);
   }
-  :host.archived .header.cdk-keyboard-focused {
+  :host.archived .container:hover {
     background-color: map-get($background, focused-button);
   }
 }
