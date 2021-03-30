@@ -38,10 +38,13 @@
     formControlName="dataProcessed"
   >
     <ng-container i18n="@@register.dataProcessed">
-    I consent to my data being processed in the United States
+      I consent to my data being processed in the United States
     </ng-container>
     <a
-      href="{{ environment.INFO_SITE + 'privacy-policy/#110_International_Data_Transfer' }}"
+      href="{{
+        environment.INFO_SITE +
+          'privacy-policy/#110_International_Data_Transfer'
+      }}"
       target="_blank"
       rel="noopener noreferrer"
       class="mat-button-font"
