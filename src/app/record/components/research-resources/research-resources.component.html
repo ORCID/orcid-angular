@@ -104,11 +104,14 @@
               <ng-container
                 *ngIf="getOrganizationDisambiguated(host) as organizationDisambiguated"
               >
-                <h3 class="orc-font-body-small" i18n="@@shared.organizationIdentifiers">
+                <h3
+                  class="orc-font-body-small organization-identifiers"
+                  i18n="@@shared.organizationIdentifiers"
+                >
                   Organization identifiers
                 </h3>
                 <div>
-                  {{ organizationDisambiguated.sourceType }}
+                  {{ organizationDisambiguated.sourceType | uppercase }}:
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -117,9 +120,7 @@
                   </a>
                 </div>
                 <div>
-                  <span class="capitalize">
-                    {{ organizationDisambiguated.value }}
-                  </span>
+                  <span>{{ organizationDisambiguated.value | titlecase}}</span>
                   <span *ngIf="organizationDisambiguated.city || organizationDisambiguated.region || organizationDisambiguated.country"> (</span>
                   <span *ngIf="organizationDisambiguated.city">{{ organizationDisambiguated.city }}</span><span *ngIf="organizationDisambiguated.region">, {{ organizationDisambiguated.region }}</span>
                   <span *ngIf="organizationDisambiguated.country">, {{ organizationDisambiguated.country }}</span>
@@ -278,9 +279,7 @@
                             </a>
                           </div>
                           <div>
-                            <span class="capitalize">
-                              {{ organizationDisambiguatedNested.value }}
-                            </span>
+                            <span>{{ organizationDisambiguatedNested.value | titlecase }}</span>
                             <span *ngIf="organizationDisambiguatedNested.city || organizationDisambiguatedNested.region || itemHost.country"> (</span>
                             <span *ngIf="organizationDisambiguatedNested.city">{{ organizationDisambiguatedNested.city }}</span><span
                             *ngIf="organizationDisambiguatedNested.region">, {{ organizationDisambiguatedNested.region }}</span>
@@ -330,9 +329,11 @@
           </div>
         </app-panel-element>
       </app-panel-data>
-      <!--      <app-panel-source [sourceName]="peerReview.sourceName">-->
-<!--      </app-panel-source>-->
+      <app-panel-source
+        [sourceName]="research.sourceName || research.source"
+        [isPreferred]="isPreferred(research, researchResource)"
+      >
+      </app-panel-source>
     </app-panel>
   </ng-container>
-
 </app-panels>

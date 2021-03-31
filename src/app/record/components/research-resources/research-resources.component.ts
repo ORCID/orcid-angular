@@ -6,7 +6,7 @@ import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { RecordService } from '../../../core/record/record.service'
 import { first, takeUntil } from 'rxjs/operators'
 import { OrganizationsService, UserService } from '../../../core'
-import { Host, Item, ResearchResource } from '../../../types/record-research-resources.endpoint'
+import { Host, Item, ResearchResource, ResearchResourcesGroup } from '../../../types/record-research-resources.endpoint'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { URL_REGEXP } from '../../../constants'
 
@@ -164,6 +164,15 @@ export class ResearchResourcesComponent implements OnInit {
       .map((value) => {
         return value.orgDisambiguated
       })[0]
+  }
+
+  isPreferred(researchResource: ResearchResource, group: ResearchResourcesGroup) {
+    const response =
+      researchResource && group.defaultResearchResource[0]
+        ? group[0].defaultResearchResource.putCode.value ===
+        researchResource.putCode.value
+        : false
+    return response
   }
 
   getLink(type: string, value: string) {
