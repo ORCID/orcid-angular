@@ -16,6 +16,8 @@ export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://www.regextester.com/94502
 export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
+// https://regex101.com/r/GEaSMo/2
+export const URL_REGEXP_BACKEND = /^(((https?):\/\/)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$/
 // https://www.regextester.com/96577
 export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 // https://regex101.com/r/aoHxNo/1

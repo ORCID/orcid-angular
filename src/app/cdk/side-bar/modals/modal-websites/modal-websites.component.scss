@@ -34,20 +34,26 @@
 }
 
 .websites-input-line {
-  margin: 20px 0;
+  margin: 10px 0 20px 0;
   height: 120px;
   img {
     cursor: move;
     z-index: 1;
-    margin: 4vh 1.45vh;
+    margin: auto 1.45vh;
+  }
+
+  .input-container {
+    max-width: 366px;
+    margin: 18px 0;
   }
 
   button {
-    margin: 3.5vh 0;
+    margin: auto 0;
   }
 
   .privacy {
     width: 100%;
+    margin: 0;
 
     button {
       margin: 0 0 0 auto !important;
@@ -55,7 +61,7 @@
   }
 
   app-privacy-selector {
-    margin: 4vh 7vh;
+    margin: auto 7vh;
   }
 
   .selector {
@@ -88,6 +94,15 @@
   margin-top: 16px;
 
   span {
+    margin: auto;
     padding-left: 6px;
+  }
+}
+
+::ng-deep .columns-4-or-8 {
+  .websites-input-line {
+    .input-container {
+      margin: 0 !important;
+    }
   }
 }
