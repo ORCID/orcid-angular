@@ -299,7 +299,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     })
   }
 
-
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
