@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+h3 {
+  margin-bottom: 0;
+}
+
 app-panel {
   width: 100%;
   margin-top: 16px;
@@ -26,7 +30,8 @@ app-panel-data {
     .buttons-container {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: start;
+      padding-top: 17px;
 
       a {
         margin-inline-end: 16px;

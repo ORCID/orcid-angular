@@ -24,9 +24,7 @@
           <div class="description-container">
             <div class="description">
               <div *ngFor="let host of research.hosts">
-                <span class="capitalize">
-                   {{ host.name }}
-                </span>
+                <span>{{ host.name | titlecase }}</span>
                 <span *ngIf="host.city || host.region || host.country"> (</span>
                 <span *ngIf="host.city">{{ host.city }}</span><span *ngIf="host.region">, {{ host.region }}</span>
                 <span *ngIf="host.country">, {{ host.country }}</span>
@@ -34,32 +32,32 @@
               </div>
               <div>
                 <span *ngIf="research.startDate">
-                  <span *ngIf="research.startDate?.year">{{research?.startDate?.year}}</span>
-                  <span *ngIf="research?.startDate?.month">-{{research?.startDate?.month}}</span>
-                  <span *ngIf="research?.startDate?.day">-{{research?.startDate?.day}}</span>
+                  <span *ngIf="research.startDate.year">{{research.startDate.year}}</span>
+                  <span *ngIf="research.startDate.month">-{{research.startDate.month}}</span>
+                  <span *ngIf="research.startDate.day">-{{research?.startDate.day}}</span>
                   <span> to </span>
                   <span
-                    [hidden]="research?.endDate && research?.endDate?.year"
+                    [hidden]="research.endDate && research.endDate.year"
                     i18n="@@researchResources.present"
                   >
                     present
                   </span>
-                  <span *ngIf="research?.endDate">
-                    <span *ngIf="research?.endDate?.year">{{research?.endDate?.year}}</span>
-                    <span *ngIf="research?.endDate?.month">-{{research?.endDate?.month}}</span>
-                    <span *ngIf="research?.endDate?.day">-{{research?.endDate?.day}}</span>
+                  <span *ngIf="research.endDate">
+                    <span *ngIf="research.endDate.year">{{research.endDate.year}}</span>
+                    <span *ngIf="research.endDate.month">-{{research.endDate.month}}</span>
+                    <span *ngIf="research.endDate.day">-{{research.endDate.day}}</span>
                   </span>
                </span>
                 <!--End date-->
-                <span *ngIf="!research.startDate && research?.endDate">
-                  <span *ngIf="research?.endDate?.year">{{research?.endDate?.year}}</span>
-                  <span *ngIf="research?.endDate?.month">-{{research?.endDate?.month}}</span>
-                  <span *ngIf="research?.endDate?.day">-{{research?.endDate?.day}}</span>
+                <span *ngIf="!research.startDate && research.endDate">
+                  <span *ngIf="research.endDate.year">{{research.endDate.year}}</span>
+                  <span *ngIf="research.endDate.month">-{{research.endDate.month}}</span>
+                  <span *ngIf="research.endDate.day">-{{research.endDate.day}}</span>
                 </span>
               </div>
               <div *ngFor="let externalIdentifier of research.externalIdentifiers;let i = index;">
                 <span *ngIf="externalIdentifier.externalIdentifierType">
-                  {{ externalIdentifier.externalIdentifierType.value }}
+                  {{ externalIdentifier.externalIdentifierType.value | uppercase }}:
                 </span>
                 <a
                   *ngIf="externalIdentifier.externalIdentifierId"
@@ -158,33 +156,37 @@
                 </h3>
                 <div>
                   <span *ngIf="researchDetail.startDate">
-                    <span *ngIf="researchDetail.startDate?.year">{{researchDetail?.startDate?.year}}</span>
-                    <span *ngIf="researchDetail?.startDate?.month">-{{researchDetail?.startDate?.month}}</span>
-                    <span *ngIf="researchDetail?.startDate?.day">-{{researchDetail?.startDate?.day}}</span>
+                    <span *ngIf="researchDetail.startDate.year">{{researchDetail.startDate.year}}</span>
+                    <span *ngIf="researchDetail.startDate.month">-{{researchDetail.startDate.month}}</span>
+                    <span *ngIf="researchDetail.startDate.day">-{{researchDetail.startDate.day}}</span>
                   </span>
                 </div>
-                <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
-                    Last modified
-                </h3>
-                <div>
-                  <span *ngIf="researchDetail?.lastModified">
-                    <span *ngIf="researchDetail?.lastModified?.year">{{researchDetail?.lastModified?.year}}</span>
-                    <span *ngIf="researchDetail?.lastModified?.month">-{{researchDetail?.lastModified?.month}}</span>
-                    <span *ngIf="researchDetail?.lastModified?.day">-{{researchDetail?.lastModified?.day}}</span>
-                  </span>
-                </div>
-                <h3 class="orc-font-body-small" i18n="@@shared.url">
-                    URL
-                </h3>
-                <div>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="{{ researchDetail.url }}"
-                  >
-                    {{ researchDetail.url }}
-                  </a>
-                </div>
+                <ng-container *ngIf="researchDetail.lastModified">
+                  <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+                      Last modified
+                  </h3>
+                  <div>
+                    <span *ngIf="researchDetail.lastModified">
+                      <span *ngIf="researchDetail.lastModified.year">{{researchDetail.lastModified.year}}</span>
+                      <span *ngIf="researchDetail.lastModified.month">-{{researchDetail.lastModified.month}}</span>
+                      <span *ngIf="researchDetail.lastModified.day">-{{researchDetail.lastModified.day}}</span>
+                    </span>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="researchDetail.url">
+                  <h3 class="orc-font-body-small" i18n="@@shared.url">
+                      URL
+                  </h3>
+                  <div>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="{{ researchDetail.url }}"
+                    >
+                      {{ researchDetail.url }}
+                    </a>
+                  </div>
+                </ng-container>
               </ng-container>
               <div *ngFor="let item of researchDetail.items">
                 <app-panel
