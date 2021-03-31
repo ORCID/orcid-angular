@@ -181,9 +181,5 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     this.$destroy.unsubscribe()
   }
 
-  toMyKeywords() {
-    this.window.document.getElementById('my-keywords').scrollIntoView()
-  }
-
   onSubmit() {}
 }

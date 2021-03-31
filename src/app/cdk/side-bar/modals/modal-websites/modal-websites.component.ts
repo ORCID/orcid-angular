@@ -205,10 +205,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     }
   }
 
-  toMyLinks() {
-    this.window.document.getElementById('my-links').scrollIntoView()
-  }
-
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
