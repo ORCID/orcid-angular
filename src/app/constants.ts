@@ -1,3 +1,4 @@
+import { Address } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
@@ -135,4 +136,19 @@ export function routerThirdPartySigninMatch(
   ) {
     return { consumed: segments }
   }
+}
+
+export function getDate(address: Address) {
+  const x = address.createdDate
+  let date: Date
+  if (x.year && x.month && x.day) {
+    date = new Date(
+      Date.UTC(
+        Number.parseInt(x.year, 10),
+        Number.parseInt(x.month, 10),
+        Number.parseInt(x.day, 10)
+      )
+    )
+  }
+  return date
 }
