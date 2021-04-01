@@ -77,7 +77,12 @@ export class SignInComponent implements OnInit {
             platform.queryParameters.emailVerified &&
             platform.queryParameters.verifiedEmail
           ) {
-            this.verifiedEmail = platform.queryParameters.verifiedEmail
+            this.verifiedEmail = decodeURIComponent(
+              this.window.location.search.split('verifiedEmail=')[1]
+            )
+            if (this.verifiedEmail.includes(' ')) {
+              this.verifiedEmail = this.verifiedEmail.replace(' ', '+')
+            }
           }
         }
 
