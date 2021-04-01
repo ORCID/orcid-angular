@@ -1,10 +1,5 @@
-<app-modal [loading]="loadingCountries || loadingCountryCodes">
+<app-modal [loading]="loadingCountries || loadingCountryCodes" noSidebar="true">
   <app-modal-header i18n="@@side-bar.countries">Countries</app-modal-header>
-  <app-modal-side-bar>
-    <ng-container id="side-bar-title" i18n="@@side-bar.myCountries"
-      >My countries</ng-container
-    >
-  </app-modal-side-bar>
   <app-modal-footer>
     <button
       mat-raised-button
