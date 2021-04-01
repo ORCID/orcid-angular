@@ -6,7 +6,7 @@ import mockAutocomplete from '../../.mockData/mock-autocomplete.json'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { action } from '@storybook/addon-actions'
 
-storiesOf('Components|Autocomplete', module).add(
+storiesOf('Components/Autocomplete', module).add(
   'Plain',
   () => ({
     template: `

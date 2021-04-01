@@ -59,7 +59,7 @@ export class FormVisibilityComponent
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const registerForm = this._register.formGroupToActivitiesVisibilityForm(
-        <FormGroup>this.form
+        this.form as FormGroup
       )
       fn(registerForm)
     })

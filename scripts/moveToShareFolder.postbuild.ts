@@ -5,7 +5,7 @@ const del = require('del')
 
 export async function createShareAssetsFolder() {
   await new Promise((resolve, reject) => {
-    src(['./dist/*/*.{js,woff,woff2,jpg,svg,txt}', '!./dist/*/assets/*'])
+    src(['./dist/*/*.{js,woff,woff2,jpg,svg,txt,css}', '!./dist/*/assets/*'])
       .pipe(clean({ force: true }))
       .pipe(flatten())
       .pipe(dest('./dist/share-assets/', { overwrite: true }))

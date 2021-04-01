@@ -9,7 +9,7 @@ if (environment) {
   // This ensures that the basePath typeScript feature works with storybook
 }
 
-storiesOf('Foundation|Palette', module)
+storiesOf('Foundation/Palette', module)
   .add(
     'Primary',
     () => ({

@@ -1,0 +1,12 @@
+::ng-deep {
+  app-display-attribute {
+    .title-container > h3 {
+      margin: 0;
+    }
+  }
+}
+
+:host {
+  display: block;
+  margin-bottom: 15px;
+}

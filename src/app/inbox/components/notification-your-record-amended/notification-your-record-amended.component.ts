@@ -34,13 +34,13 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
     if (item) {
       switch (item.actionType) {
         case 'CREATE':
-          return $localize`:@@inbox.newItemAdded:New item added`
+          return $localize`:@@inbox.newItemAdded:Added`
         case 'UPDATE':
-          return $localize`:@@inbox.itemUpdate:Item updated`
+          return $localize`:@@inbox.itemUpdate:Updated`
         case 'DELETE':
-          return $localize`:@@inbox.deleteItem:Deleted item`
+          return $localize`:@@inbox.deleteItem:Deleted`
         default:
-          return $localize`:@@inbox.otherUpdate:Other update`
+          return $localize`:@@inbox.otherUpdate:Other`
       }
     }
     return 'Other update'
@@ -49,25 +49,35 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   getNotificationSectionUpdatedLabel(notification: InboxNotificationAmended) {
     switch (notification.amendedSection) {
       case 'AFFILIATION':
-        return $localize`:@@inbox.affiliations:affiliations`
+        return $localize`:@@inbox.affiliations:Affiliations`
       case 'BIO':
-        return $localize`:@@inbox.bio:bio`
+        return $localize`:@@inbox.bio:Bio`
+      case 'DISTINCTION':
+        return $localize`:@@inbox.distinction:Distinction`
       case 'EDUCATION':
-        return $localize`:@@inbox.education:education`
+        return $localize`:@@inbox.education:Education`
       case 'EMPLOYMENT':
-        return $localize`:@@inbox.employment:employment`
+        return $localize`:@@inbox.employment:Employment`
       case 'EXTERNAL_IDENTIFIERS':
-        return $localize`:@@inbox.externalIdentifiers:external identifiers`
+        return $localize`:@@inbox.externalIdentifiers:External Identifiers`
       case 'FUNDING':
-        return $localize`:@@inbox.funding:funding`
+        return $localize`:@@inbox.funding:Funding`
+      case 'INVITED_POSITION':
+        return $localize`:@@inbox.invitedPosition:Invited Position`
+      case 'MEMBERSHIP':
+        return $localize`:@@inbox.membership:Membership`
       case 'PEER_REVIEW':
-        return $localize`:@@inbox.peerReview:peer review`
+        return $localize`:@@inbox.peerReview:Peer Review`
       case 'PREFERENCES':
-        return $localize`:@@inbox.preferences:preferences`
+        return $localize`:@@inbox.preferences:Preferences`
+      case 'QUALIFICATION':
+        return $localize`:@@inbox.qualification:Qualification`
       case 'RESEARCH_RESOURCE':
-        return $localize`:@@inbox.researchResource:research resource`
+        return $localize`:@@inbox.researchResource:Research Resource`
+      case 'SERVICE':
+        return $localize`:@@inbox.service:Service`
       case 'WORK':
-        return $localize`:@@inbox.work:work`
+        return $localize`:@@inbox.work:Work`
       default:
         return $localize`:@@inbox.unknown:unknown`
     }

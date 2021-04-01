@@ -6,14 +6,6 @@ export interface CreatedDate {
   value: number
 }
 
-export interface Biography {
-  lastModifiedDate: LastModifiedDate
-  createdDate: CreatedDate
-  content: string
-  visibility: string
-  path?: any
-}
-
 export interface SourceName {
   content: string
 }
@@ -22,6 +14,17 @@ export interface Source {
   sourceOrcid?: SourceOrcid
   sourceClientId?: any
   sourceName: SourceName
+}
+
+export interface Keyword {
+  content: string
+  source: Source
+  putCode: number
+  lastModifiedDate: LastModifiedDate
+  createdDate: CreatedDate
+  visibility: string
+  path?: any
+  displayIndex: number
 }
 
 export interface OtherName {
@@ -110,6 +113,24 @@ export interface Visibility {
   getRequiredMessage?: any
   visibility: VisibilityStrings
 }
+
+export interface ExternalIdentifier {
+  errors: any[]
+  externalIdentifierId: ExternalIdentifierId
+  externalIdentifierType: Value
+  url: Value
+  relationship: Value
+  normalized: Value
+  normalizedUrl: Value
+}
+
+export interface ExternalIdentifierId {
+  errors: any[]
+  value: string
+  required: boolean
+  getRequiredMessage?: any
+}
+
 export type ScopesStrings =
   | 'openid'
   | '/authenticate'

@@ -6,11 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { Observable, of } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
-
-import { PlatformInfoService } from '../cdk/platform-info'
-import { OauthParameters } from '../types'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { UserService } from '../core'
 
 @Injectable({

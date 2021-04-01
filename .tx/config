@@ -119,3 +119,10 @@ minimum_perc = 0
 source_file = src/locale/properties/record/record.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-top-bar-top-bar-en-properties--transifex]
+file_filter = src/locale/properties/top-bar/top-bar.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/top-bar/top-bar.en.properties
+source_lang = en
+type = UNICODEPROPERTIES

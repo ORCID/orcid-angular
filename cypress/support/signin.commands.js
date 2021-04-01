@@ -44,7 +44,7 @@ Cypress.Commands.add('programmaticSignin', (user) => {
       )
       request.send(
         `userId=${encodeURIComponent(
-          environment[user].email || environment[user].id
+          environment[user].id || environment[user].email
         )}&password=${environment[user].password}&oauthRequest=false`
       )
       return cy

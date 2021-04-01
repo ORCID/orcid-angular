@@ -136,7 +136,7 @@ export class NotificationComponent
           notification.source.sourceName.content
         } ${$localize`:@@inbox.hadMadeChanges:has made changes to your ORCID record`}`
       case 'INSTITUTIONAL_CONNECTION':
-        return `${$localize`:@@inbox.connectingAn:Connecting an`} ${
+        return `${$localize`:@@inbox.connectingYour:Connecting your`} ${
           notification.source.sourceName.content
         } ${$localize`:@@inbox.accountWithYourOrcid:account with your ORCID record`}`
 
@@ -151,7 +151,11 @@ export class NotificationComponent
 
   notificationDate(notification: InboxNotification) {
     const date = new Date(notification.createdDate)
-    return date.toLocaleDateString(this.locale)
+    return date.toLocaleDateString('en-ZA', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+    })
   }
 
   setNotificationColor(type: uiNotificationType) {

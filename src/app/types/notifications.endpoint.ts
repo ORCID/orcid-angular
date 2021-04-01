@@ -64,16 +64,20 @@ export interface InboxNotificationAmended extends InboxNotification {
   amendedSection?:
     | 'AFFILIATION'
     | 'BIO'
+    | 'DISTINCTION'
     | 'EDUCATION'
     | 'EMPLOYMENT'
     | 'EXTERNAL_IDENTIFIERS'
     | 'FUNDING'
+    | 'INVITED_POSITION'
+    | 'MEMBERSHIP'
     | 'PEER_REVIEW'
     | 'PREFERENCES'
-    | 'UNKNOWN'
+    | 'QUALIFICATION'
+    | 'SERVICE'
     | 'RESEARCH_RESOURCE'
+    | 'UNKNOWN'
     | 'WORK'
-    | 'INVITED_POSITION'
 }
 
 export interface InboxNotificationHtml extends InboxNotification {

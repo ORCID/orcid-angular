@@ -1,0 +1,25 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import 'src/assets/scss/material.typography';
+
+@mixin model-biography-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $config: mat-typography-config();
+
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .required {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  textarea.mat-input-element {
+    font-size: mat-font-size($config, caption) !important;
+  }
+}
+@include model-biography-theme($orcid-app-theme);
