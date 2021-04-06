@@ -1,35 +1,36 @@
-<button class="header" #header (click)="toggleNotificationContent()">
-  <div class="notification-type notification mat-caption" [formGroup]="form">
-    <mat-checkbox
-      [ngStyle]="{ visibility: !displayCheckBox && 'hidden' }"
-      class="larger"
-      (click)="$event.stopPropagation()"
-      formControlName="selected"
-      [aria-labelledby]="'notification-' + notification.putCode"
-    ></mat-checkbox>
-    <span class="dot notification-background mat-body-1"></span>
-    <ng-container *ngIf="platform.columns12">
-      {{ notificationTypeLabel(notificationType) }}
-    </ng-container>
-  </div>
-  <div class="title mat-body-1" [id]="'notification-' + notification.putCode">
-    {{ notificationTitle(notification) }}
-  </div>
-  <div class="date-archive-container">
-    <p class="mat-caption date">{{ notificationDate(notification) }}</p>
+<div class="container" [formGroup]="form">
+  <mat-checkbox
+    [ngStyle]="{ visibility: !displayCheckBox && 'hidden' }"
+    class="larger"
+    (click)="$event.stopPropagation()"
+    formControlName="selected"
+    [aria-labelledby]="'notification-' + notification.putCode"
+  ></mat-checkbox>
+  <button class="header" #header (click)="toggleNotificationContent()">
+    <div class="notification-type notification mat-caption">
+      <span class="dot notification-background mat-body-1"></span>
+      <ng-container *ngIf="platform.columns12">
+        {{ notificationTypeLabel(notificationType) }}
+      </ng-container>
+    </div>
+    <div class="title mat-body-1" [id]="'notification-' + notification.putCode">
+      {{ notificationTitle(notification) }}
+    </div>
+    <div class="date-archive-container">
+      <p class="mat-caption date">{{ notificationDate(notification) }}</p>
 
-    <button
-      mat-icon-button
-      (click)="archive(); $event.stopPropagation()"
-      [ngClass]="{ hidden: archived }"
-      [attr.aria-label]="ariaLabelArchived"
-      [matTooltip]="ariaLabelArchived"
-    >
-      <mat-icon class="material-icons-outlined">archived</mat-icon>
-    </button>
-  </div>
-</button>
-
+      <button
+        mat-icon-button
+        (click)="archive(); $event.stopPropagation()"
+        [ngClass]="{ hidden: archived }"
+        [attr.aria-label]="ariaLabelArchived"
+        [matTooltip]="ariaLabelArchived"
+      >
+        <mat-icon class="material-icons-outlined">archived</mat-icon>
+      </button>
+    </div>
+  </button>
+</div>
 <div
   class="body"
   [@heightAnimationState]="state"

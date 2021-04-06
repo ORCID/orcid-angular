@@ -7,6 +7,15 @@
   overflow: hidden;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  mat-checkbox {
+    margin-left: 4px;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -14,6 +23,7 @@
   align-items: baseline;
   padding: $spacing-base;
   cursor: pointer;
+  width: 100%;
 
   .date-archive-container {
     display: flex;

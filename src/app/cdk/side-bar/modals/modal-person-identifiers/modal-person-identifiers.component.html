@@ -1,12 +1,7 @@
-<app-modal [loading]="loadingPersonalIdentifiers">
+<app-modal [loading]="loadingPersonalIdentifiers" noSidebar="true">
   <app-modal-header i18n="@@side-bar.personalIdentifiers"
     >Personal identifiers</app-modal-header
   >
-  <app-modal-side-bar>
-    <ng-container id="side-bar-title" i18n="@@side-bar.myPersonIdentifiers">
-      My person identifiers</ng-container
-    >
-  </app-modal-side-bar>
   <app-modal-footer>
     <button
       mat-raised-button
