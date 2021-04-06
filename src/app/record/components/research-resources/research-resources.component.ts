@@ -1,12 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
-import { combineLatest, Observable, of, Subject } from 'rxjs'
-import { NameForm, OrgDisambiguated, RequestInfoForm, UserInfo } from '../../../types'
+import { Subject } from 'rxjs'
+import {
+  NameForm,
+  OrgDisambiguated,
+  RequestInfoForm,
+  UserInfo,
+} from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { RecordService } from '../../../core/record/record.service'
 import { first, takeUntil } from 'rxjs/operators'
 import { OrganizationsService, UserService } from '../../../core'
-import { Host, Item, ResearchResource, ResearchResourcesGroup } from '../../../types/record-research-resources.endpoint'
+import {
+  Host,
+  Item,
+  ResearchResource,
+  ResearchResourcesGroup,
+} from '../../../types/record-research-resources.endpoint'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { URL_REGEXP } from '../../../constants'
 
@@ -15,8 +25,8 @@ import { URL_REGEXP } from '../../../constants'
   templateUrl: './research-resources.component.html',
   styleUrls: [
     './research-resources.component.scss',
-    './research-resources.component.scss-theme.scss'
-  ]
+    './research-resources.component.scss-theme.scss',
+  ],
 })
 export class ResearchResourcesComponent implements OnInit {
   @Input() publicView: any = false
@@ -50,7 +60,7 @@ export class ResearchResourcesComponent implements OnInit {
     private _organizationsService: OrganizationsService,
     private _record: RecordService,
     private _recordResearchResourceService: RecordResearchResourceService,
-    private _user: UserService,
+    private _user: UserService
   ) {
     _platform
       .get()
@@ -88,7 +98,10 @@ export class ResearchResourcesComponent implements OnInit {
         .pipe(first())
         .subscribe(
           (data) => {
-            this.detailsResearchResources.push({ putCode: putCode, researchResource: data })
+            this.detailsResearchResources.push({
+              putCode: putCode,
+              researchResource: data,
+            })
             researchResource.showDetails = true
           },
           (error) => {
@@ -97,17 +110,22 @@ export class ResearchResourcesComponent implements OnInit {
         )
     } else {
       this._recordResearchResourceService
-        .getResearchResourceById(
-          putCode
-        )
+        .getResearchResourceById(putCode)
         .pipe(first())
         .subscribe(
           (data) => {
             const research: ResearchResource = data
-            this.detailsResearchResources.push({ putCode: putCode, researchResource: research })
+            this.detailsResearchResources.push({
+              putCode: putCode,
+              researchResource: research,
+            })
             researchResource.showDetails = true
-            research.hosts.forEach(host => {
-              this.getOrganizationDisambiguatedDetails(null, host.disambiguationSource, host.orgDisambiguatedId)
+            research.hosts.forEach((host) => {
+              this.getOrganizationDisambiguatedDetails(
+                null,
+                host.disambiguationSource,
+                host.orgDisambiguatedId
+              )
             })
           },
           (error) => {
@@ -122,16 +140,14 @@ export class ResearchResourcesComponent implements OnInit {
     disambiguationSource,
     orgDisambiguatedId
   ): void {
-    this._organizationsService.getOrgDisambiguated(
-      disambiguationSource,
-      orgDisambiguatedId,
-    )
+    this._organizationsService
+      .getOrgDisambiguated(disambiguationSource, orgDisambiguatedId)
       .pipe(first())
-      .subscribe(organizationDisambiguated => {
+      .subscribe((organizationDisambiguated) => {
         this.detailsOrgDisambiguated.push({
           disambiguationSource,
           orgDisambiguatedId,
-          orgDisambiguated: organizationDisambiguated
+          orgDisambiguated: organizationDisambiguated,
         })
         if (item) {
           item.showDetails = true
@@ -151,26 +167,29 @@ export class ResearchResourcesComponent implements OnInit {
       })[0]
   }
 
-  getOrganizationDisambiguated(
-    host: Host
-  ): OrgDisambiguated {
+  getOrganizationDisambiguated(host: Host): OrgDisambiguated {
     const disambiguationSource = host.disambiguationSource
     const orgDisambiguatedId = host.orgDisambiguatedId
 
     return this.detailsOrgDisambiguated
-      .filter((value) =>
-        value.disambiguationSource === disambiguationSource &&
-        value.orgDisambiguatedId === orgDisambiguatedId)
+      .filter(
+        (value) =>
+          value.disambiguationSource === disambiguationSource &&
+          value.orgDisambiguatedId === orgDisambiguatedId
+      )
       .map((value) => {
         return value.orgDisambiguated
       })[0]
   }
 
-  isPreferred(researchResource: ResearchResource, group: ResearchResourcesGroup) {
+  isPreferred(
+    researchResource: ResearchResource,
+    group: ResearchResourcesGroup
+  ) {
     const response =
       researchResource && group.defaultResearchResource[0]
         ? group[0].defaultResearchResource.putCode.value ===
-        researchResource.putCode.value
+          researchResource.putCode.value
         : false
     return response
   }

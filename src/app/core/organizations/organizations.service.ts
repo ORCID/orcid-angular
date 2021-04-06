@@ -11,8 +11,8 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class OrganizationsService {
-  GRID_BASE_URL: string;
-  TEST_BASE_URL: string;
+  GRID_BASE_URL: string
+  TEST_BASE_URL: string
 
   constructor(
     private _http: HttpClient,
@@ -41,13 +41,13 @@ export class OrganizationsService {
   getLink(type: string, value: string): string {
     switch (type) {
       case 'Test':
-        return this.TEST_BASE_URL + value;
+        return this.TEST_BASE_URL + value
       case 'FUNDREF':
-        return value;
+        return value
       case 'GRID':
-        return this.GRID_BASE_URL + value;
+        return this.GRID_BASE_URL + value
       default:
-        return '';
+        return ''
     }
   }
 }

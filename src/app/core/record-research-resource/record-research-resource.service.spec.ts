@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { RecordResearchResourceService } from './record-research-resource.service';
+import { RecordResearchResourceService } from './record-research-resource.service'
 
 describe('RecordResearchResourceService', () => {
-  let service: RecordResearchResourceService;
+  let service: RecordResearchResourceService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RecordResearchResourceService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(RecordResearchResourceService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})

@@ -18,31 +18,45 @@ export class RecordResearchResourceService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-  ) {
-  }
+    private _errorHandler: ErrorHandlerService
+  ) {}
 
   getResearchResourcePage(sort, sortAsc): Observable<any> {
     return this._http.get(
-      environment.API_WEB + 'research-resources/researchResourcePage.json?offset=' + this.offset + '&sort=' + sort + '&sortAsc=' + sortAsc
-    );
+      environment.API_WEB +
+        'research-resources/researchResourcePage.json?offset=' +
+        this.offset +
+        '&sort=' +
+        sort +
+        '&sortAsc=' +
+        sortAsc
+    )
   }
 
   getResearchResourceById(putCode: number): Observable<ResearchResource> {
     return this._http.get<ResearchResource>(
-      environment.API_WEB + 'research-resources/researchResource.json?id=' + putCode,
+      environment.API_WEB +
+        'research-resources/researchResource.json?id=' +
+        putCode
     )
   }
 
   getPublicResearchResourceById(orcid, putCode): Observable<ResearchResource> {
     return this._http.get<ResearchResource>(
-      environment.API_WEB + orcid + '/researchResource.json?id=' + putCode,
+      environment.API_WEB + orcid + '/researchResource.json?id=' + putCode
     )
   }
 
   getPublicResearchResourcePage(sort, sortAsc, orcid): Observable<any> {
     return this._http.get(
-      environment.API_WEB + orcid + '/researchResourcePage.json?offset=' + this.offset + '&sort=' + sort + '&sortAsc=' + sortAsc,
+      environment.API_WEB +
+        orcid +
+        '/researchResourcePage.json?offset=' +
+        this.offset +
+        '&sort=' +
+        sort +
+        '&sortAsc=' +
+        sortAsc
     )
   }
 }

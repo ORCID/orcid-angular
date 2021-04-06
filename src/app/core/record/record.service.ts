@@ -56,7 +56,7 @@ export class RecordService {
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
     private _recordPeerReviewService: RecordPeerReviewService,
     private _recordResearchResourceService: RecordResearchResourceService
-) {}
+  ) {}
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -97,7 +97,7 @@ export class RecordService {
               affiliations,
               preferences,
               peerReviews,
-              researchResources
+              researchResources,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -112,7 +112,7 @@ export class RecordService {
                 affiliations: affiliations as AffiliationUIGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
-                researchResources: researchResources as ResearchResources
+                researchResources: researchResources as ResearchResources,
               })
             }
           )
