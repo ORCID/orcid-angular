@@ -98,7 +98,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           .pipe(first())
           .subscribe((otherNames: OtherNamesEndPoint) => {
             this.originalBackendOtherNames = cloneDeep(otherNames)
-            this.otherNames = this.userRecord.otherNames.otherNames
+            this.otherNames = this.originalBackendOtherNames.otherNames
             const otherNamesMap = {}
             this.originalBackendOtherNames.otherNames.map(
               (value) => (otherNamesMap[value.putCode] = value)

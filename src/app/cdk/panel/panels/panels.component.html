@@ -1,6 +1,11 @@
 <div class="col s4 m8 l12">
-  <div class="header-container">
-    <div class="inline-intial-side">
+  <div
+    class="header-container"
+    [ngClass]="{
+      'sub-peer-review': type === 'sub-peer-review'
+    }"
+  >
+    <div class="inline-initial-side">
       <button mat-icon-button (click)="collapse()">
         <mat-icon class="large-material-icon" *ngIf="expandedContent"
           >keyboard_arrow_down
@@ -12,20 +17,25 @@
 
       <div class="text-container">
         {{ title }}
-        <ng-container *ngIf="currentAmount"
-          >({{ currentAmount }} of {{ total }})</ng-container
-        >
-        <ng-container *ngIf="!currentAmount">(0)</ng-container>
+        <ng-container *ngIf="type === 'activities'">
+          <ng-container *ngIf="currentAmount"
+            >({{ currentAmount }} of {{ total }})</ng-container
+          >
+          <ng-container *ngIf="!currentAmount">(0)</ng-container>
+        </ng-container>
+        <ng-container *ngIf="type === 'peer-review'">
+          ({{ total }})
+        </ng-container>
       </div>
     </div>
 
-    <div class="controls">
+    <div class="controls" *ngIf="type !== 'sub-peer-review'">
       <button mat-icon-button a>
         <mat-icon (click)="add()" class="large-material-icon"
           >add_circle</mat-icon
         >
       </button>
-      <button mat-icon-button a>
+      <button mat-icon-button>
         <mat-icon (click)="sort()" class="large-material-icon">sort</mat-icon>
       </button>
     </div>

@@ -76,7 +76,6 @@ export class RecordCountriesService {
   }
 
   postAddresses(countries: CountriesEndpoint): Observable<CountriesEndpoint> {
-    console.log(countries)
     return this._http
       .post<CountriesEndpoint>(
         environment.API_WEB + `account/countryForm.json`,
