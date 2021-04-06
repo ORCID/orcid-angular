@@ -2,6 +2,7 @@
 // https://github.com/angular/components/blob/8.1.4/src/material/checkbox/checkbox.scss
 
 mat-checkbox.orcid-checkbox-baseline {
+  max-width: 100%;
   label.mat-checkbox-layout {
     white-space: pre-line;
     .mat-checkbox-inner-container {
