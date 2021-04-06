@@ -2,11 +2,12 @@
   *ngIf="userRecord && userRecord.researchResources"
   class="row"
   [title]="ngOrcidResearchResources"
-  [type]="'peer-review'"
+  [type]="'research-resources'"
   [total]="userRecord.researchResources.groups.length"
+  id="research-resources-panel"
 >
   <ng-container
-    *ngFor="let researchResource of userRecord.researchResources.groups"
+    *ngFor="let researchResource of userRecord.researchResources.groups; index as i"
   >
     <app-panel
       [elements]="researchResource"
@@ -15,6 +16,7 @@
       [openState]="false"
       class="top-bar"
       *ngIf="researchResource.researchResources[0] as research"
+      [attr.id]="'panel-' + i"
     >
       <div header>
         <b>
@@ -78,9 +80,9 @@
               </div>
               <div
                 *ngFor="
-                  let externalIdentifier of research.externalIdentifiers;
-                  let i = index
+                  let externalIdentifier of research.externalIdentifiers;index as i
                 "
+                [attr.id]="'external-identifier-' + i"
               >
                 <span *ngIf="externalIdentifier.externalIdentifierType">
                   {{
@@ -102,6 +104,7 @@
                 *ngIf="!research.showDetails"
                 (click)="getDetails(research, research.putCode)"
                 i18n="@@shared.showMoreDetail"
+                id="show-more-button"
               >
                 Show more detail
               </a>
@@ -109,6 +112,7 @@
                 *ngIf="research.showDetails"
                 (click)="collapse(research)"
                 i18n="@@shared.showLessDetail"
+                id="show-less-button"
               >
                 Show less detail
               </a>
@@ -260,13 +264,14 @@
                   </div>
                 </ng-container>
               </ng-container>
-              <div *ngFor="let item of researchDetail.items">
+              <div *ngFor="let item of researchDetail.items; index as i">
                 <app-panel
                   [elements]="item"
                   [type]="'top-bar'"
                   [editable]="false"
                   [customControls]="true"
                   class="top-bar"
+                  [attr.id]="'research-detail-item-' + i"
                 >
                   <div header>
                     <div>
@@ -303,6 +308,7 @@
                           )
                         "
                         i18n="@@shared.showMoreDetail"
+                        id="show-more-item-button"
                       >
                         Show more detail
                       </a>
@@ -310,6 +316,7 @@
                         *ngIf="item.showDetails"
                         (click)="collapse(item)"
                         i18n="@@shared.showLessDetail"
+                        id="show-less-item-button"
                       >
                         Show less detail
                       </a>
