@@ -22,9 +22,15 @@
       Cancel
     </button>
   </app-modal-footer>
-  <div class="container no-padding" [formGroup]="keywordsForm" (ngSubmit)="onSubmit()">
+  <div
+    class="container no-padding"
+    [formGroup]="keywordsForm"
+    (ngSubmit)="onSubmit()"
+  >
     <p class="orc-font-small-print" i18n="@@topBar.keywordsAre">
-      Keywords are words or phrases which describe your research activities. Adding keywords can help people find you when searching the ORCID registry.
+      Keywords are words or phrases which describe your research activities.
+      Adding keywords can help people find you when searching the ORCID
+      registry.
     </p>
     <ng-container *ngIf="keywords.length > 0">
       <div class="row">
