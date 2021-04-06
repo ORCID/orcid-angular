@@ -7,7 +7,10 @@
   id="research-resources-panel"
 >
   <ng-container
-    *ngFor="let researchResource of userRecord.researchResources.groups; index as i"
+    *ngFor="
+      let researchResource of userRecord.researchResources.groups;
+      index as i
+    "
   >
     <app-panel
       [elements]="researchResource"
@@ -80,7 +83,8 @@
               </div>
               <div
                 *ngFor="
-                  let externalIdentifier of research.externalIdentifiers;index as i
+                  let externalIdentifier of research.externalIdentifiers;
+                  index as i
                 "
                 [attr.id]="'external-identifier-' + i"
               >

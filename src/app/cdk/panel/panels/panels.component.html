@@ -6,14 +6,8 @@
     }"
   >
     <div class="inline-initial-side">
-      <button
-        mat-icon-button
-        (click)="collapse()"
-        id="expand-content-button"
-      >
-        <mat-icon
-          class="large-material-icon"
-          *ngIf="expandedContent"
+      <button mat-icon-button (click)="collapse()" id="expand-content-button">
+        <mat-icon class="large-material-icon" *ngIf="expandedContent"
           >keyboard_arrow_down
         </mat-icon>
         <mat-icon class="large-material-icon" *ngIf="!expandedContent"
@@ -36,24 +30,13 @@
     </div>
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
-      <button
-        *ngIf="type !== 'research-resources'"
-        mat-icon-button
-      >
-        <mat-icon
-          (click)="add()"
-          class="large-material-icon"
-          id="add-button"
-        >
+      <button *ngIf="type !== 'research-resources'" mat-icon-button>
+        <mat-icon (click)="add()" class="large-material-icon" id="add-button">
           add_circle
         </mat-icon>
       </button>
       <button mat-icon-button>
-        <mat-icon
-          (click)="sort()"
-          class="large-material-icon"
-          id="sort-button"
-        >
+        <mat-icon (click)="sort()" class="large-material-icon" id="sort-button">
           sort
         </mat-icon>
       </button>
