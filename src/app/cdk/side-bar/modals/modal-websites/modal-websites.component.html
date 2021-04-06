@@ -24,7 +24,7 @@
       Cancel
     </button>
   </app-modal-footer>
-  <form [formGroup]="websitesForm" (ngSubmit)="onSubmit()">
+  <div class="container no-padding" [formGroup]="websitesForm" (ngSubmit)="onSubmit()">
     <p
       id="my-links"
       class="orc-font-small-print"
@@ -141,11 +141,11 @@
     </ng-container>
     <div class="row">
       <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
-        <mat-icon class="large-material-icon">add_circle</mat-icon>
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1" i18n="@@topBar.addAnotherLink">
           Add another link
         </span>
       </a>
     </div>
-  </form>
+  </div>
 </app-modal>
