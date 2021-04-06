@@ -57,8 +57,9 @@ export class FundingStackComponent implements OnInit {
    */
   private setFundingsInitialStates(value: FundingGroup, force = false) {
     value.fundings.forEach((funding) => {
-      this.setDefaultPanelsDisplay(funding, force)
       this.setDefaultPanelDetailsState(funding, force)
+      this.setDefaultPanelsDisplay(funding, force)
+      this.fetchOrganizationData(funding, force)
     })
   }
 
@@ -90,6 +91,17 @@ export class FundingStackComponent implements OnInit {
     }
   }
 
+  private fetchOrganizationData(funding: Funding, force = false) {
+    if (funding.disambiguationSource) {
+      this._organizationsService.getOrgDisambiguated(
+        funding.disambiguationSource.value,
+        funding.disambiguatedFundingSourceId.value
+      ).subscribe((response) => {
+        this.orgDisambiguated[funding.putCode.value] = response || null
+      })
+    }
+  }
+
   isPreferred(funding: Funding) {
     const response =
       funding && this.fundingStack
@@ -108,11 +120,9 @@ export class FundingStackComponent implements OnInit {
       .state
 
     if (this.panelDetailsState[putCode].state) {
-      this.getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
+      this.getMoreDetailsFromTheServer(
         funding
-      ).subscribe((response) => {
-        this.orgDisambiguated[putCode] = response[0] || null
-      })
+      ).subscribe((response) => {})
     } else {
     }
   }
@@ -120,30 +130,12 @@ export class FundingStackComponent implements OnInit {
   /**
    * Get require extra backend data to display on the panel details
    */
-  private getMoreDetailsAndOrganizationDisambiguatedFromTheServer(
+  private getMoreDetailsFromTheServer(
     funding: Funding
-  ): Observable<[false | OrgDisambiguated, Funding]> {
+  ): Observable<Funding> {
     const putCode = funding.putCode.value
-
-    let $fundingDisambiguationSource: Observable<
-      false | OrgDisambiguated
-    > = of(false)
-    // Adds call for disambiguationSource if the funding has
-    if (funding.disambiguationSource) {
-      $fundingDisambiguationSource = this._organizationsService.getOrgDisambiguated(
-        funding.disambiguationSource.value,
-        funding.disambiguatedFundingSourceId.value
-      )
-    }
-    const $fundingDetails = this._fundingService.getFundingDetails(
-      putCode
-    )
-
-    // Call http requests at the same time
-    return combineLatest([
-      $fundingDisambiguationSource,
-      $fundingDetails,
-    ]).pipe(first())
+    
+    return this._fundingService.getFundingDetails(putCode)
   }
 
   makePrimaryCard(funding: Funding) {

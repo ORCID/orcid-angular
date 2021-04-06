@@ -20,8 +20,22 @@
       >
         |
       </ng-container>
-      {{ funding.fundingType.value }}      
-    </div>    
+      {{ funding.fundingType.value | titlecase }}      
+    </div>
+    <div *ngIf="orgDisambiguated">
+      <div>
+        {{ orgDisambiguated?.value
+        }}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
+          >:</ng-container
+        >
+        ({{ orgDisambiguated | cityRegionCountry }})
+      </div>
+    </div>
+    <div
+        *ngFor="let extId of funding.externalIdentifiers"
+        class="padding-level-3">
+        {{extId.externalIdentifierType.value }}: {{extId.externalIdentifierId.value }}
+    </div>
   </div>
 
   <div align-end>
