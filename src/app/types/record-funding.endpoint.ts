@@ -43,4 +43,5 @@ export interface Funding {
   dateSortString: string
   createdDate: MonthDayYearDate
   lastModified: MonthDayYearDate
+  fullyLoaded?: boolean
 }

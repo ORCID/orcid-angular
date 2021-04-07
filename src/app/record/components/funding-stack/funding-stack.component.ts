@@ -118,14 +118,15 @@ export class FundingStackComponent implements OnInit {
     const putCode = funding.putCode.value
     this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
       .state
-
-    if (this.panelDetailsState[putCode].state) {
-      this.getMoreDetailsFromTheServer(
-        funding
-      ).subscribe((response) => {})
-    } else {
-    }
-  }
+    var itemToUpdate = this._fundingStack.fundings.find(x => x.putCode.value == putCode);
+    var index = this._fundingStack.fundings.indexOf(itemToUpdate)
+    if (itemToUpdate.fullyLoaded === undefined || itemToUpdate.fullyLoaded != true) {
+      this.getMoreDetailsFromTheServer(funding).subscribe((response) => {
+        this._fundingStack.fundings[index] = response
+        this._fundingStack.fundings[index].fullyLoaded = true
+      })
+    } 
+  }  
 
   /**
    * Get require extra backend data to display on the panel details
