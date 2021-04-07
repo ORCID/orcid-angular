@@ -57,5 +57,40 @@
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-  Working on it
+  <!-- ORGANIZATION DISAMBIGUATED IDS-->
+  <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
+    <app-display-attribute>
+      <h3 class="orc-font-body-small" i18n="@@record.organizationIdentifiers">
+        Organization identifiers
+      </h3>
+      <div>
+        <div>
+          {{ orgDisambiguated?.sourceType}}<ng-container *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId">: {{ orgDisambiguated?.sourceId }}</ng-container>
+        </div>
+        <div>
+          {{ orgDisambiguated?.value}}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value">: {{ orgDisambiguated | cityRegionCountry }}</ng-container>
+        </div>
+        <a
+          target="orcid-app"
+          *ngIf="orgDisambiguated?.url"
+          [href]="orgDisambiguated?.url"
+        >{{ orgDisambiguated?.url }}</a>    
+      </div>
+    </app-display-attribute>
+  </ng-container>
+  <!-- ADDED DATE-->
+  <app-display-attribute>
+    <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
+    <div>
+      {{ funding.createdDate | monthDayYearDateToString }}
+    </div>
+  </app-display-attribute>
+
+  <!-- LAST MODIFIED  DATE-->
+  <app-display-attribute>
+    <h3 class="orc-font-body-small" i18n="@@record.lastModified">
+      Last modified
+    </h3>
+    <div>{{ funding.lastModified | monthDayYearDateToString }}</div>
+  </app-display-attribute>
 </app-panel-data>
