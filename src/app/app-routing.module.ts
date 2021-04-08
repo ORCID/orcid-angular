@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { ApplicationRoutes, routerThirdPartySigninMatch } from './constants'
+import {
+  ApplicationRoutes,
+  routerPublicPageUrl,
+  routerThirdPartySigninMatch,
+} from './constants'
 import { AuthenticatedGuard } from './guards/authenticated.guard'
 import { SignInGuard } from './guards/sign-in.guard'
 import { AuthorizeGuard } from './guards/authorize.guard'
@@ -14,6 +18,11 @@ const routes: Routes = [
   {
     path: ApplicationRoutes.home,
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    matcher: routerPublicPageUrl,
+    loadChildren: () =>
+      import('./record/record.module').then((m) => m.RecordModule),
   },
   {
     path: ApplicationRoutes.inbox,

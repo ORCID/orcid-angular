@@ -116,11 +116,8 @@ export function objectToUrlParameters(object: Object) {
 }
 
 export function routerPublicPageUrl(segments: UrlSegment[]) {
-  if (
-    (segments[0] && isValidOrcidFormat(segments[0].path)) ||
-    (segments[0] && segments[0].path.toLowerCase() === URL_PRIVATE_PROFILE)
-  ) {
-    return { consumed: [segments[0]] }
+  if (segments[1] && isValidOrcidFormat(segments[1].path)) {
+    return { consumed: [segments[0], segments[1]] }
   }
   return {
     consumed: [],
