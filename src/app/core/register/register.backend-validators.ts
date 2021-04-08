@@ -71,6 +71,21 @@ export function RegisterBackendValidatorMixin<
         )
     }
 
+    validateAdditionalEmailsReactivation(
+      value: RegisterForm
+    ): Observable<RegisterForm> {
+      console.log('validateAdditionalEmailsReactivation')
+      return this._http
+        .post(
+          `${environment.API_WEB}reactivateAdditionalEmailsValidate.json`,
+          value,
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+        )
+    }
+
     backendValueValidate(
       controlName: 'givenNames' | 'familyNames' | 'email' | 'password'
     ): AsyncValidatorFn {
@@ -97,12 +112,22 @@ export function RegisterBackendValidatorMixin<
       }
     }
 
-    backendAdditionalEmailsValidate(): AsyncValidatorFn {
+    backendAdditionalEmailsValidate(reactivate: boolean): AsyncValidatorFn {
       return (formGroup: FormGroup): Observable<ValidationErrors | null> => {
         const value: RegisterForm = this.formGroupToEmailRegisterForm(formGroup)
         if (!value.emailsAdditional || value.emailsAdditional.length === 0) {
           return of(null)
         }
+
+        if (reactivate) {
+          return this.validateAdditionalEmailsReactivation(value).pipe(
+            map((response) => {
+              // Add errors to additional emails controls
+              return this.setFormGroupEmailErrors(response, 'backendErrors')
+            })
+          )
+        }
+
         return this.validateRegisterValue('emailsAdditional', value).pipe(
           map((response) => {
             // Add errors to additional emails controls

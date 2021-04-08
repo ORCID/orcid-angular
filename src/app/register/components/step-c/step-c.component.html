@@ -6,8 +6,23 @@
   ></mat-progress-bar>
 
   <mat-card-header>
-    <mat-card-title role="heading" aria-level="1" i18n="@@register.create"
-      >Create your ORCID iD</mat-card-title
+    <mat-card-title
+      role="heading"
+      aria-level="1"
+    >
+      <ng-container
+        *ngIf="!reactivation.isReactivation"
+        i18n="@@register.create"
+      >
+        Create your ORCID iD
+      </ng-container>
+      <ng-container
+        *ngIf="reactivation.isReactivation"
+        i18n="@@register.reactivation"
+      >
+        Thank you for reactivating your ORCID iD.
+      </ng-container>
+    </mat-card-title
     >
     <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step3"
       >This is step 3 of 3</mat-card-subtitle
@@ -36,10 +51,20 @@
           id="step-c-register-button"
           mat-raised-button
           color="primary"
-          i18n="@@register.register"
           [disabled]="loading"
         >
-          REGISTER
+          <ng-container
+            *ngIf="!reactivation.isReactivation"
+            i18n="@@register.register"
+          >
+            REGISTER
+          </ng-container>
+          <ng-container
+            *ngIf="reactivation.isReactivation"
+            i18n="@@register.reactivate"
+          >
+            REACTIVATE
+          </ng-container>
         </button>
       </div>
     </form>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { ApplicationRoutes, routerThirdPartySigninMatch } from './constants'
+import { ApplicationRoutes, routerReactivation, routerThirdPartySignInMatch } from './constants'
 import { AuthenticatedGuard } from './guards/authenticated.guard'
 import { SignInGuard } from './guards/sign-in.guard'
 import { AuthorizeGuard } from './guards/authorize.guard'
@@ -91,10 +91,16 @@ const routes: Routes = [
       import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
   },
   {
-    matcher: routerThirdPartySigninMatch,
+    matcher: routerThirdPartySignInMatch,
     canActivateChild: [ThirdPartySigninCompletedGuard],
     loadChildren: () =>
       import('./record/record.module').then((m) => m.RecordModule),
+  },
+  {
+    matcher: routerReactivation,
+    canActivateChild: [LanguageGuard, RegisterGuard],
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterModule),
   },
   {
     path: '**',

@@ -39,8 +39,10 @@ export const ApplicationRoutes = {
   signin: 'signin',
   authorize: 'oauth/authorize',
   search: 'orcid-search/search',
+  reactivation: 'reactivation',
   resetPassword: 'reset-password',
   register: 'register',
+  thirdPartySignIn: 'third-party-signin-completed',
   home: '',
 }
 
@@ -127,12 +129,20 @@ export function routerPublicPageUrl(segments: UrlSegment[]) {
   }
 }
 
-export function routerThirdPartySigninMatch(
+export function routerReactivation(
+  segments: UrlSegment[]
+): UrlMatchResult {
+  if (segments[0] && segments[0].path.match(new RegExp(ApplicationRoutes.reactivation, 'g'))) {
+    return { consumed: segments }
+  }
+}
+
+export function routerThirdPartySignInMatch(
   segments: UrlSegment[]
 ): UrlMatchResult {
   if (
-    (segments[1] && segments[1].path.match(/third-party-signin-completed/)) ||
-    (segments[2] && segments[2].path.match(/third-party-signin-completed/))
+    (segments[1] && segments[1].path.match(new RegExp(ApplicationRoutes.thirdPartySignIn, 'g'))) ||
+    (segments[2] && segments[2].path.match(new RegExp(ApplicationRoutes.thirdPartySignIn, 'g')))
   ) {
     return { consumed: segments }
   }
