@@ -1,4 +1,5 @@
 import {
+  Contributor, 
   ExternalIdentifier,
   MonthDayYearDate,
   Title, 
@@ -31,6 +32,7 @@ export interface Funding {
   startDate: MonthDayYearDate
   endDate: MonthDayYearDate
   externalIdentifiers?: ExternalIdentifier[]  
+  contributors?: Contributor[]
   sourceName: string
   source: string
   disambiguatedFundingSourceId: Value

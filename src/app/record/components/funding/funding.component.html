@@ -110,7 +110,7 @@
         Total funding amount
       </h3>
       <div>  
-        {{ funding.amount.value }}      
+        <ng-container *ngIf="funding.currencyCode && funding.currencyCode.value">{{ funding.currencyCode.value }}</ng-container>{{ funding.amount.value }}      
       </div>
     </app-display-attribute>
   </ng-container> 
@@ -136,6 +136,28 @@
       </div>
     </app-display-attribute>
   </ng-container>
+
+
+  <!-- CONTRIBUTORS -->
+  <ng-container class="margin-top-1" *ngIf="funding.contributors">
+    <app-display-attribute>
+      <h3 class="orc-font-body-small" i18n="@@funding.contributors">
+        Contributors
+      </h3>
+      <div>
+        <div
+        *ngFor="let contributor of funding.contributors"
+        class="padding-level-3">
+          <ng-container *ngIf="contributor.creditName">{{contributor.creditName.value}}</ng-container> {{ contributor | contributorsPipe }}
+        </div>
+      </div>
+    </app-display-attribute>
+  </ng-container>
+  
+  
+  
+  
+  
   <!-- ADDED DATE-->
   <app-display-attribute>
     <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
