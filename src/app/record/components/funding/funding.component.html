@@ -114,6 +114,28 @@
       </div>
     </app-display-attribute>
   </ng-container> 
+  <!-- TRANSLATED TITLE -->
+  <ng-container class="margin-top-1" *ngIf="funding.fundingTitle && funding.fundingTitle.translatedTitle && funding.fundingTitle.translatedTitle.content">
+    <app-display-attribute>
+      <h3 class="orc-font-body-small" i18n="@@funding.translatedTitle">
+        Translated title
+      </h3> <div *ngIf="funding.fundingTitle.translatedTitle.languageName">({{ funding.fundingTitle.translatedTitle.languageName }})</div>
+      <div>
+        {{ funding.fundingTitle.translatedTitle.content }}
+      </div>
+    </app-display-attribute>
+  </ng-container>
+  <!-- DESCRIPTION -->
+  <ng-container class="margin-top-1" *ngIf="funding.description && funding.description.value">
+    <app-display-attribute>
+      <h3 class="orc-font-body-small" i18n="@@funding.description">
+        Description
+      </h3>
+      <div>
+        {{ funding.description.value }}
+      </div>
+    </app-display-attribute>
+  </ng-container>
   <!-- ADDED DATE-->
   <app-display-attribute>
     <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>

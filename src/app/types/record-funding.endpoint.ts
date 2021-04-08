@@ -1,8 +1,9 @@
 import {
   ExternalIdentifier,
   MonthDayYearDate,
+  Title, 
   Value,
-  Visibility,
+  Visibility,  
 } from './common.endpoint' 
 
 export interface FundingGroup {
@@ -19,8 +20,7 @@ export interface Funding {
   visibility: Visibility
   errors: any[]
   putCode: Value
-  title: Value
-  translatedTitle: Value
+  fundingTitle: Title
   description: Value
   fundingName: Value
   fundingType: Value
@@ -30,7 +30,7 @@ export interface Funding {
   url: Value
   startDate: MonthDayYearDate
   endDate: MonthDayYearDate
-  externalIdentifiers?: ExternalIdentifier[]
+  externalIdentifiers?: ExternalIdentifier[]  
   sourceName: string
   source: string
   disambiguatedFundingSourceId: Value
