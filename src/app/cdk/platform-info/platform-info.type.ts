@@ -21,4 +21,6 @@ export interface PlatformInfo {
   institutional: boolean
   queryParameters: Params
   currentRoute: string
+  reactivation: boolean
+  reactivationCode: string
 }
