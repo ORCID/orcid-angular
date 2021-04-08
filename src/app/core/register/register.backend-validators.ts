@@ -74,7 +74,6 @@ export function RegisterBackendValidatorMixin<
     validateAdditionalEmailsReactivation(
       value: RegisterForm
     ): Observable<RegisterForm> {
-      console.log('validateAdditionalEmailsReactivation')
       return this._http
         .post(
           `${environment.API_WEB}reactivateAdditionalEmailsValidate.json`,
