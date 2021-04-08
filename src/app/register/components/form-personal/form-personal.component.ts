@@ -2,7 +2,8 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  forwardRef, Input,
+  forwardRef,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core'
@@ -76,7 +77,11 @@ export class FormPersonalComponent
           OrcidValidators.matchValues('email', 'confirmEmail', false),
           this.allEmailsAreUnique(),
         ],
-        asyncValidators: [this._register.backendAdditionalEmailsValidate(this.reactivation.isReactivation)],
+        asyncValidators: [
+          this._register.backendAdditionalEmailsValidate(
+            this.reactivation.isReactivation
+          ),
+        ],
         updateOn: 'change',
       }
     )
@@ -85,8 +90,9 @@ export class FormPersonalComponent
       this.emails.addControl(
         'confirmEmail',
         new FormControl('', {
-        validators: [Validators.required, OrcidValidators.email],
-      }))
+          validators: [Validators.required, OrcidValidators.email],
+        })
+      )
     }
 
     this.form = new FormGroup({
@@ -112,12 +118,11 @@ export class FormPersonalComponent
         .getReactivationData(this.reactivation.reactivationCode)
         .pipe(first())
         .subscribe((reactivation) => {
-            this.emails.patchValue({
-              email: reactivation.email,
-            })
-            this.emails.controls['email'].disable();
-          }
-        )
+          this.emails.patchValue({
+            email: reactivation.email,
+          })
+          this.emails.controls['email'].disable()
+        })
     }
   }
 

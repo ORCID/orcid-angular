@@ -10,9 +10,7 @@ import { Reactivation } from '../../types/reactivation.endpoint'
 export class ReactivationService {
   headers: HttpHeaders
 
-  constructor(
-    private _http: HttpClient,
-  ) {
+  constructor(private _http: HttpClient) {
     this.headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
@@ -25,13 +23,13 @@ export class ReactivationService {
     return this._http.post(
       `${environment.API_WEB}reactivationConfirm.json`,
       encoded_data,
-      { headers: this.headers },
+      { headers: this.headers }
     )
-
   }
 
   getReactivationData(resetParams): Observable<Reactivation> {
-    return this._http.get<Reactivation>(`${environment.API_WEB}reactivationData.json?params=${resetParams}`)
+    return this._http.get<Reactivation>(
+      `${environment.API_WEB}reactivationData.json?params=${resetParams}`
+    )
   }
-
 }

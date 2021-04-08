@@ -129,10 +129,11 @@ export function routerPublicPageUrl(segments: UrlSegment[]) {
   }
 }
 
-export function routerReactivation(
-  segments: UrlSegment[]
-): UrlMatchResult {
-  if (segments[0] && segments[0].path.match(new RegExp(ApplicationRoutes.reactivation, 'g'))) {
+export function routerReactivation(segments: UrlSegment[]): UrlMatchResult {
+  if (
+    segments[0] &&
+    segments[0].path.match(new RegExp(ApplicationRoutes.reactivation, 'g'))
+  ) {
     return { consumed: segments }
   }
 }
@@ -141,8 +142,14 @@ export function routerThirdPartySignInMatch(
   segments: UrlSegment[]
 ): UrlMatchResult {
   if (
-    (segments[1] && segments[1].path.match(new RegExp(ApplicationRoutes.thirdPartySignIn, 'g'))) ||
-    (segments[2] && segments[2].path.match(new RegExp(ApplicationRoutes.thirdPartySignIn, 'g')))
+    (segments[1] &&
+      segments[1].path.match(
+        new RegExp(ApplicationRoutes.thirdPartySignIn, 'g')
+      )) ||
+    (segments[2] &&
+      segments[2].path.match(
+        new RegExp(ApplicationRoutes.thirdPartySignIn, 'g')
+      ))
   ) {
     return { consumed: segments }
   }

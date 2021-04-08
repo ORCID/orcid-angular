@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   requestInfoForm: RequestInfoForm | null
   reactivation = {
     isReactivation: false,
-    reactivationCode: ''
+    reactivationCode: '',
   } as ReactivationLocal
 
   constructor(

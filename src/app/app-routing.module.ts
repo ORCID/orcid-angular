@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { ApplicationRoutes, routerReactivation, routerThirdPartySignInMatch } from './constants'
+import {
+  ApplicationRoutes,
+  routerReactivation,
+  routerThirdPartySignInMatch,
+} from './constants'
 import { AuthenticatedGuard } from './guards/authenticated.guard'
 import { SignInGuard } from './guards/sign-in.guard'
 import { AuthorizeGuard } from './guards/authorize.guard'

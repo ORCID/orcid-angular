@@ -78,11 +78,11 @@ export function RegisterBackendValidatorMixin<
       return this._http
         .post(
           `${environment.API_WEB}reactivateAdditionalEmailsValidate.json`,
-          value,
+          value
         )
         .pipe(
           retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
+          catchError((error) => this._errorHandler.handleError(error))
         )
     }
 
