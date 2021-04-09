@@ -24,12 +24,24 @@
     </li>
   </ul>
 </div>
-
-<button
-  mat-raised-button
-  color="primary"
-  (click)="navigateTo(notification.authorizationUrl.uri)"
-  i18n="@@inbox.grantPermission"
->
-  Grant permission
-</button>
+<div class="buttons-container">
+  <button
+    *ngIf="!notification.archivedDate"
+    (click)="archive(); $event.stopPropagation()"
+    mat-button
+    color="primary"
+    type="button"
+    i18n="@@inbox.archiveWithout"
+  >
+    Archive without granting permissions
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="grant-permission"
+    (click)="navigateTo(notification.authorizationUrl.uri)"
+    i18n="@@inbox.grantPermission"
+  >
+    Grant permission
+  </button>
+</div>
