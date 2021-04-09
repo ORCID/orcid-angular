@@ -5,6 +5,7 @@ import {
   Item,
 } from 'src/app/types/notifications.endpoint'
 import { chain } from 'lodash'
+import { InboxService } from '../../../core/inbox/inbox.service'
 
 @Component({
   selector: 'app-notification-permission',
@@ -16,7 +17,10 @@ export class NotificationPermissionComponent implements OnInit {
   @Input() notification: InboxNotificationPermission
   itemsByType: { type: string; items: Item[] }[]
 
-  constructor(@Inject(WINDOW) private window: Window) {}
+  constructor(
+    @Inject(WINDOW) private window: Window,
+    private _inbox: InboxService,
+  ) {}
 
   ngOnInit(): void {
     this.itemsByType = chain(this.notification.items.items)
@@ -60,6 +64,10 @@ export class NotificationPermissionComponent implements OnInit {
       default:
         return $localize`:@@inbox.unknown:unknown`
     }
+  }
+
+  archive() {
+    this._inbox.flagAsArchive(this.notification.putCode).subscribe()
   }
 
   navigateTo(val) {

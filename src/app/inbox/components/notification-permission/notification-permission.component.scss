@@ -12,3 +12,11 @@
 button {
   margin: $spacing-large 0;
 }
+
+.buttons-container {
+  display: flex;
+  margin-top: 14px;
+  .grant-permission {
+    margin-left: 14px;
+  }
+}
