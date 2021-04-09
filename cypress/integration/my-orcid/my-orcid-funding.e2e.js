@@ -23,7 +23,11 @@ describe.only('Funding' + runInfo(), () => {
 
   it('programatically add a funding and verify it displays correctly', () => {
     cy.createFunding()
-    .get('app-fundings').should('exist');
+    .reload(true)
+    .get('app-fundings').within(() => {
+      cy.get('h2').contains('Funding title')
+      cy.contains('2000-01 to 2031-12 | Award')
+    })
   })
 
 })
