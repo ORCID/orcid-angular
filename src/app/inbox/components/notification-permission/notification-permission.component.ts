@@ -19,7 +19,7 @@ export class NotificationPermissionComponent implements OnInit {
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _inbox: InboxService,
+    private _inbox: InboxService
   ) {}
 
   ngOnInit(): void {
