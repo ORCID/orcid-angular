@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core'
 
 import { BaseStepDirective } from '../BaseStep'
+import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
   selector: 'app-step-c',
@@ -9,6 +10,8 @@ import { BaseStepDirective } from '../BaseStep'
 })
 export class StepCComponent extends BaseStepDirective {
   @Input() loading
+  @Input() reactivation: ReactivationLocal
+
   constructor() {
     super()
   }
