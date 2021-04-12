@@ -1,0 +1,115 @@
+<!-- WORK BODY -->
+<!-- GENERAL DATA DISPLAY BY DEFAULT -->
+<app-panel-data [borderBottom]="true">
+  <div>
+    <div class="general-data" *ngIf="work.journalTitle">
+      {{ work.journalTitle.value }}
+    </div>
+    <div class="general-data">
+      <ng-container *ngIf="work.publicationDate?.year"
+        >{{ work.publicationDate | monthDayYearDateToString }}
+        |
+      </ng-container>
+      {{ work.workType.value }}
+    </div>
+    <app-display-external-ids
+      [externalIdentifiers]="work.workExternalIdentifiers"
+    ></app-display-external-ids>
+  </div>
+
+  <div align-end>
+    <a
+      (click)="toggleDetails.next(work)"
+      *ngIf="!panelDetailsState.state"
+      i18n="@@share.showMoreDetail"
+      >Show more detail</a
+    >
+    <a
+      (click)="toggleDetails.next(work)"
+      *ngIf="panelDetailsState.state"
+      i18n="@@share.showLessDetail"
+      >Show less detail</a
+    >
+  </div>
+</app-panel-data>
+
+<!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
+
+<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
+  <!-- TRANSLATION -->
+  <app-display-attribute *ngIf="work.translatedTitle?.content">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.translations">Translation</ng-container>
+    </h3>
+    <span *ngIf="work.translatedTitle?.languageName"
+      >({{ work.translatedTitle?.languageName }})</span
+    >
+
+    <div>
+      {{ work.translatedTitle.content }}
+    </div>
+  </app-display-attribute>
+
+  <!-- LANGUAGE -->
+  <app-display-attribute *ngIf="work.languageName?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.language">Language</ng-container>
+    </h3>
+
+    <div>
+      {{ work.languageName.value }}
+    </div>
+  </app-display-attribute>
+
+  <!-- SUBTITLE -->
+  <app-display-attribute *ngIf="work.subtitle?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.subtitle">Subtitle</ng-container>
+    </h3>
+
+    <div>
+      {{ work.subtitle.value }}
+    </div>
+  </app-display-attribute>
+
+  <!-- URL-->
+  <app-display-attribute *ngIf="work.url?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.url">URL</ng-container>
+    </h3>
+
+    <a [href]="work.url.value" rel="noopener noreferrer" target="_blank">
+      {{ work.url.value }}
+    </a>
+  </app-display-attribute>
+
+  <!-- CITATION-->
+  <app-display-attribute *ngIf="work.citation?.citationType?.value">
+    <h3 class="orc-font-body-small">
+      <ng-container i18n="@@record.citation">Citation</ng-container>
+      <span *ngIf="work.citation?.citationType?.value"
+        >({{ work.citation?.citationType?.value }})</span
+      >
+    </h3>
+
+    <div>
+      {{ work.citation.citation.value }}
+    </div>
+  </app-display-attribute>
+
+  <!-- ADDED DATE-->
+  <app-display-attribute>
+    <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
+    <div>
+      {{ work.createdDate | monthDayYearDateToString }}
+    </div>
+  </app-display-attribute>
+
+  <!-- LAST MODIFIED  DATE-->
+  <app-display-attribute>
+    <h3 class="orc-font-body-small" i18n="@@record.lastModified">
+      Last modified
+    </h3>
+    <div>{{ work.lastModified | monthDayYearDateToString }}</div>
+  </app-display-attribute>
+</app-panel-data>

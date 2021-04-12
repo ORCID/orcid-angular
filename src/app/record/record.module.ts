@@ -28,6 +28,9 @@ import { ModalPeerReviewsComponent } from './components/peer-reviews/modals/moda
 import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
 import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
 import { ResearchResourcesComponent } from './components/research-resources/research-resources.component'
+import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
+import { WorkStackComponent } from './components/work-stack/work-stack.component'
+import { WorkComponent } from './components/work/work.component'
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { ResearchResourcesComponent } from './components/research-resources/rese
     PeerReviewsComponent,
     ModalPeerReviewsComponent,
     ResearchResourcesComponent,
+    WorkStackGroupComponent,
+    WorkStackComponent,
+    WorkComponent,
   ],
   imports: [
     CommonModule,
