@@ -24,7 +24,11 @@
       Cancel
     </button>
   </app-modal-footer>
-  <form [formGroup]="websitesForm" (ngSubmit)="onSubmit()">
+  <div
+    class="container no-padding"
+    [formGroup]="websitesForm"
+    (ngSubmit)="onSubmit()"
+  >
     <p
       id="my-links"
       class="orc-font-small-print"
@@ -155,5 +159,5 @@
         </span>
       </a>
     </div>
-  </form>
+  </div>
 </app-modal>

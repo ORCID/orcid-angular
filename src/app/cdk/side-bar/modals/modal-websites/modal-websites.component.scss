@@ -40,10 +40,10 @@
     cursor: move;
     z-index: 1;
     margin: auto 1.45vh;
+    margin-inline-end: 8px;
   }
 
   .input-container {
-    max-width: 366px;
     margin: 18px 0;
   }
 
@@ -88,6 +88,7 @@
 
 .mat-form-field {
   width: 100%;
+  margin-inline-end: 16px;
 }
 
 .add-more {
@@ -96,13 +97,5 @@
   span {
     margin: auto;
     padding-left: 6px;
-  }
-}
-
-::ng-deep .columns-4-or-8 {
-  .websites-input-line {
-    .input-container {
-      margin: 0 !important;
-    }
   }
 }
