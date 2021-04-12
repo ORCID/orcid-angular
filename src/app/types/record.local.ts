@@ -9,6 +9,7 @@ import { WebsitesEndPoint } from './record-websites.endpoint'
 import { AffiliationUIGroup } from './record-affiliation.endpoint'
 import { FundingGroup } from './record-funding.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
+import { WorksEndpoint } from './record-works.endpoint'
 
 export interface UserRecord {
   person: Person
@@ -24,4 +25,5 @@ export interface UserRecord {
   affiliations: AffiliationUIGroup[]
   fundings: FundingGroup[]
   peerReviews: PeerReview[]
+  works: WorksEndpoint
 }

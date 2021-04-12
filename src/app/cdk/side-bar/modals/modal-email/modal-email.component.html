@@ -304,9 +304,15 @@
     <div class="row">
       <a class="col add-more" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container i18n="@@side-bar.anotherEmail">
-          Add another email address</ng-container
+        <ng-container *ngIf="emails.length === 0" i18n="@@side-bar.otherEmail">
+          Add other email address
+        </ng-container>
+        <ng-container
+          *ngIf="emails.length !== 0"
+          i18n="@@side-bar.anotherEmail"
         >
+          Add another email address
+        </ng-container>
       </a>
     </div>
   </div>

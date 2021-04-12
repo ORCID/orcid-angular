@@ -1,0 +1,43 @@
+<ng-container
+  *ngFor="
+    let work of workStack.works;
+    trackBy: trackByWorkStack;
+    let i = index;
+    let last = last
+  "
+>
+  <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
+  <app-panel
+    [elements]="work"
+    [ngStyle]="{ 'z-index': workStack.works.length - i }"
+    [ngClass]="{ last: last }"
+    [visibility]="workStack.activeVisibility"
+    *ngIf="isPreferred(work) || displayTheStack"
+    type="main"
+  >
+    <h2 header class="orc-font-body" i18n="@@record.emails">
+      {{ work.title.value }}:
+    </h2>
+    <!-- WORK BODY -->
+    <app-work
+      *ngIf="stackPanelsDisplay[work.putCode.value].topPanelOfTheStack"
+      [work]="work"
+      [panelDetailsState]="panelDetailsState[work.putCode.value]"
+      (toggleDetails)="toggleDetails($event)"
+    >
+    </app-work>
+    <!-- WORK SOURCE -->
+    <app-panel-source
+      [isPreferred]="isPreferred(work)"
+      [sourceName]="work.sourceName || work.source"
+      [stackLength]="workStack.works.length"
+      [(displayTheStack)]="displayTheStack"
+      (makePrimary)="makePrimaryCard(work)"
+      [topPanelOfTheStackMode]="
+        stackPanelsDisplay[work.putCode.value].topPanelOfTheStack
+      "
+      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(work)"
+    >
+    </app-panel-source>
+  </app-panel>
+</ng-container>
