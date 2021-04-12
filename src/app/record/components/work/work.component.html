@@ -78,9 +78,9 @@
       <ng-container i18n="@@record.url">URL</ng-container>
     </h3>
 
-    <div>
+    <a [href]="work.url.value" rel="noopener noreferrer" target="_blank">
       {{ work.url.value }}
-    </div>
+    </a>
   </app-display-attribute>
 
   <!-- CITATION-->

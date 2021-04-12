@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
+import { first } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
@@ -12,7 +13,7 @@ import {
 @Component({
   selector: 'app-work-stack',
   templateUrl: './work-stack.component.html',
-  styleUrls: ['./work-stack.component.scss'],
+  styleUrls: ['./work-stack.component.scss', './work-stack.component.scss-theme.scss'],
 })
 export class WorkStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
@@ -99,9 +100,9 @@ export class WorkStackComponent implements OnInit {
       .state
 
     if (this.panelDetailsState[putCode].state) {
-      this.getDetails(work).subscribe((response) => {
-        // this.orgDisambiguated[putCode] = response[0] || null
-      })
+      this.getDetails(work)
+        .pipe(first())
+        .subscribe(() => {})
     }
   }
 
@@ -116,7 +117,6 @@ export class WorkStackComponent implements OnInit {
 
   makePrimaryCard(work: Work) {
     // TODO
-    console.log(this.stackPanelsDisplay)
   }
 
   changeTopPanelOfTheStack(work: Work) {

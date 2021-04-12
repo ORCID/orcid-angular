@@ -5,35 +5,24 @@ import {
   Visibility,
   VisibilityStrings,
 } from './common.endpoint'
+import { AssertionBase } from './record.endpoint'
 
-export interface Work {
-  visibility: Visibility
-  errors: any[]
+export interface Work extends AssertionBase {
   publicationDate: MonthDayYearDate
-  putCode: Value
   shortDescription?: any
-  url?: any
   journalTitle: Value
   languageCode?: any
   languageName?: any
   citation?: Citation
   countryCode?: any
-  countryName?: any
   contributors?: any
   workExternalIdentifiers: ExternalIdentifier[]
-  source: string
-  sourceName: string
-  assertionOriginOrcid?: any
-  assertionOriginClientId: string
-  assertionOriginName: string
   title: Value
   subtitle?: any
   translatedTitle?: any
   workCategory?: any
   workType: Value
   dateSortString?: any
-  createdDate?: any
-  lastModified?: any
   userSource: boolean
 }
 
