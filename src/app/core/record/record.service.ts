@@ -32,6 +32,8 @@ import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { RecordPeerReviewService } from '../record-peer-review/record-peer-review.service'
 import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
+import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
+import { ResearchResources } from '../../types/record-research-resources.endpoint'
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 
@@ -55,6 +57,7 @@ export class RecordService {
     private _recordAffiliations: RecordAffiliationService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
     private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordResearchResourceService: RecordResearchResourceService,
     private _recordWorkService: RecordWorksService
   ) {}
 
@@ -80,6 +83,7 @@ export class RecordService {
         this._recordAffiliations.getAffiliations(),
         this.getPreferences(),
         this._recordPeerReviewService.getPeerReviewGroups(true),
+        this._recordResearchResourceService.getResearchResourcePage(true, true),
         this._recordWorkService.getWorks(),
       ])
         .pipe(
@@ -97,6 +101,7 @@ export class RecordService {
               affiliations,
               preferences,
               peerReviews,
+              researchResources,
               works,
             ]) => {
               this.recordSubject$.next({
@@ -112,6 +117,7 @@ export class RecordService {
                 affiliations: affiliations as AffiliationUIGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
+                researchResources: researchResources as ResearchResources,
                 works: works as WorksEndpoint,
               })
             }
