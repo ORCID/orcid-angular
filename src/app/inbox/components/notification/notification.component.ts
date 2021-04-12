@@ -136,7 +136,7 @@ export class NotificationComponent
           notification.source.sourceName.content
         } ${$localize`:@@inbox.hadMadeChanges:has made changes to your ORCID record`}`
       case 'INSTITUTIONAL_CONNECTION':
-        return `${$localize`:@@inbox.connectingAn:Connecting an`} ${
+        return `${$localize`:@@inbox.connectingYour:Connecting your`} ${
           notification.source.sourceName.content
         } ${$localize`:@@inbox.accountWithYourOrcid:account with your ORCID record`}`
 

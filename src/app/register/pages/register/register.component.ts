@@ -30,6 +30,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { ERROR_REPORT } from 'src/app/errors'
 import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
+import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
   selector: 'app-register',
@@ -51,6 +52,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   loading = false
   requestInfoForm: RequestInfoForm | null
   thirdPartyAuthData: ThirdPartyAuthData
+  reactivation = {
+    isReactivation: false,
+    reactivationCode: '',
+  } as ReactivationLocal
+
   constructor(
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
@@ -66,6 +72,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
+      this.reactivation.isReactivation = this.platform.reactivation
+      this.reactivation.reactivationCode = this.platform.reactivationCode
     })
   }
   ngOnInit() {
@@ -138,6 +146,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC,
+              this.reactivation,
               this.requestInfoForm,
               !!this.requestInfoForm // request client service to be update (only when the next navigation wont go outside this app)
             )

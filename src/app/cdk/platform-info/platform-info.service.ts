@@ -34,6 +34,8 @@ export class PlatformInfoService {
     social: false,
     institutional: false,
     currentRoute: '',
+    reactivation: false,
+    reactivationCode: '',
   }
   platformSubject = new BehaviorSubject<PlatformInfo>(this.platform)
 
@@ -226,6 +228,10 @@ export class PlatformInfoService {
         this.window.location.pathname
           .toLowerCase()
           .indexOf('institutional-signin') >= 0,
+      reactivation:
+        this.window.location.pathname.toLowerCase().indexOf('reactivation') >=
+        0,
+      reactivationCode: this.getReactivationCode(),
     }
     this.platformSubject.next(this.platform)
     return this.platformSubject.asObservable()
@@ -260,5 +266,10 @@ export class PlatformInfoService {
 
   public getCurrentRoute(): string {
     return this._router.url
+  }
+
+  getReactivationCode(): string {
+    const segments = window.location.href.split('/')
+    return segments[segments.length - 1]
   }
 }
