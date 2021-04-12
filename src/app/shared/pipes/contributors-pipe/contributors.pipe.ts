@@ -12,7 +12,10 @@ export class ContributorsPipe implements PipeTransform {
         value = contributor.contributorRole.value
       }
 
-      if (contributor.contributorSequence && contributor.contributorSequence.value) {
+      if (
+        contributor.contributorSequence &&
+        contributor.contributorSequence.value
+      ) {
         value = this.addComma(value) + contributor.contributorSequence.value
       }
 
@@ -33,8 +36,8 @@ export class ContributorsPipe implements PipeTransform {
 
   addComma(str: string): string {
     if (str.length > 0) {
-      return str + ', ';
+      return str + ', '
     }
-    return str;
+    return str
   }
 }

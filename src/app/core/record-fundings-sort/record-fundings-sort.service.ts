@@ -1,25 +1,16 @@
 import { Injectable } from '@angular/core'
 import { MonthDayYearDate } from 'src/app/types'
-import {
-  FundingGroup,
-} from 'src/app/types/record-funding.endpoint'
+import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 
 @Injectable({
   providedIn: 'root',
 })
 export class FundingsSortService {
-  transform(
-    value: FundingGroup[],
-    ascending = true
-  ): FundingGroup[] {
+  transform(value: FundingGroup[], ascending = true): FundingGroup[] {
     return this.sort(value, ascending)
   }
 
-  sort(
-    fundingGroups: FundingGroup[],
-    ascending = true
-  ): FundingGroup[] {
-
+  sort(fundingGroups: FundingGroup[], ascending = true): FundingGroup[] {
     fundingGroups.sort((a, b) => {
       const dateA = this.yearMonthDaytoDate(a.defaultFunding.startDate)
       const dateB = this.yearMonthDaytoDate(b.defaultFunding.startDate)

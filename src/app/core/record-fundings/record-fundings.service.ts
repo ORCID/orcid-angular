@@ -2,10 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
-import {
-  Funding,
-  FundingGroup,
-} from 'src/app/types/record-funding.endpoint'
+import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { FundingsSortService } from '../record-fundings-sort/record-fundings-sort.service'
@@ -47,20 +44,20 @@ export class RecordFundingsService {
   getFundingDetails(putCode): Observable<Funding> {
     return this._http
       .get<Funding>(
-        environment.API_WEB +
-          `fundings/fundingDetails.json?id=${putCode}`
+        environment.API_WEB + `fundings/fundingDetails.json?id=${putCode}`
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
-      /* TODO: Fetch group id info */
+    /* TODO: Fetch group id info */
   }
 
   private getAndSortFundings(): Observable<FundingGroup[]> {
     return this._http
       .get<FundingGroup[]>(
-        environment.API_WEB + `fundings/fundingGroups.json?sort=date&sortAsc=false`
+        environment.API_WEB +
+          `fundings/fundingGroups.json?sort=date&sortAsc=false`
       )
       .pipe(
         retry(3),

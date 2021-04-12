@@ -13,6 +13,7 @@ export class PanelsComponent implements OnInit {
     | 'peer-review'
     | 'funding'
     | 'sub-peer-review'
+    | 'funding'
     | 'research-resources' = 'activities'
   @Input() currentAmount
   @Input() total
