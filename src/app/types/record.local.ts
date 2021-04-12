@@ -8,6 +8,7 @@ import { EmailsEndpoint } from './record-email.endpoint'
 import { WebsitesEndPoint } from './record-websites.endpoint'
 import { AffiliationUIGroup } from './record-affiliation.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
+import { WorksEndpoint } from './record-works.endpoint'
 
 export interface UserRecord {
   person: Person
@@ -22,4 +23,5 @@ export interface UserRecord {
   preferences: Preferences
   affiliations: AffiliationUIGroup[]
   peerReviews: PeerReview[]
+  works: WorksEndpoint
 }
