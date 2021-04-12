@@ -34,6 +34,10 @@ import { RecordPersonIdentifierService } from '../record-personal-identifiers/re
 import { RecordFundingsService } from '../record-fundings/record-fundings.service'
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
+import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
+import { ResearchResources } from '../../types/record-research-resources.endpoint'
+import { RecordWorksService } from '../record-works/record-works.service'
+import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +59,9 @@ export class RecordService {
     private _recordAffiliations: RecordAffiliationService,
     private _recordFundings: RecordFundingsService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordResearchResourceService: RecordResearchResourceService,
+    private _recordWorkService: RecordWorksService
   ) {}
 
   headers = new HttpHeaders({
@@ -81,6 +87,8 @@ export class RecordService {
         this._recordFundings.getFundings(),
         this.getPreferences(),
         this._recordPeerReviewService.getPeerReviewGroups(true),
+        this._recordResearchResourceService.getResearchResourcePage(true, true),
+        this._recordWorkService.getWorks(),
       ])
         .pipe(
           tap(
@@ -98,6 +106,8 @@ export class RecordService {
               fundings,
               preferences,
               peerReviews,
+              researchResources,
+              works,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -113,6 +123,8 @@ export class RecordService {
                 fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
+                researchResources: researchResources as ResearchResources,
+                works: works as WorksEndpoint,
               })
             }
           )

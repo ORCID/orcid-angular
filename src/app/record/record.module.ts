@@ -30,6 +30,10 @@ import { DisplayAttributeComponent } from './components/display-attribute/displa
 import { FundingStacksGroupsComponent } from './components/funding-stacks-groups/funding-stacks-groups.component'
 import { FundingStackComponent } from './components/funding-stack/funding-stack.component'
 import { FundingComponent } from './components/funding/funding.component'
+import { ResearchResourcesComponent } from './components/research-resources/research-resources.component'
+import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
+import { WorkStackComponent } from './components/work-stack/work-stack.component'
+import { WorkComponent } from './components/work/work.component'
 
 @NgModule({
   declarations: [
@@ -48,6 +52,10 @@ import { FundingComponent } from './components/funding/funding.component'
     DisplayAttributeComponent,
     PeerReviewsComponent,
     ModalPeerReviewsComponent,
+    ResearchResourcesComponent,
+    WorkStackGroupComponent,
+    WorkStackComponent,
+    WorkComponent,
   ],
   imports: [
     CommonModule,

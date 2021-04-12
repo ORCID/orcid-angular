@@ -36,6 +36,9 @@
 
 .add-more {
   margin-top: 16px;
+  span {
+    padding-left: 6px;
+  }
 }
 
 ::ng-deep .cdk-drop-list-dragging {

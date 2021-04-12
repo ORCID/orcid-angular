@@ -22,13 +22,19 @@
       Cancel
     </button>
   </app-modal-footer>
-  <form [formGroup]="keywordsForm" (ngSubmit)="onSubmit()">
-    <p id="my-keywords" class="orc-font-small-print" i18n="@@topBar.addLinks">
-      Add keywords.
+  <div
+    class="container no-padding"
+    [formGroup]="keywordsForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <p class="orc-font-small-print" i18n="@@topBar.keywordsAre">
+      Keywords are words or phrases which describe your research activities.
+      Adding keywords can help people find you when searching the ORCID
+      registry.
     </p>
     <ng-container *ngIf="keywords.length > 0">
       <div class="row">
-        <label for="url-input" class="mat-caption">
+        <label for="content-input" class="mat-caption">
           <strong i18n="@@topBar.myKeywords">My keywords</strong>
         </label>
       </div>
@@ -98,11 +104,21 @@
         class="col add-more no-gutters"
         (click)="addKeyword()"
       >
-        <mat-icon class="large-material-icon">add_circle</mat-icon>
-        <span class="mat-body-1" i18n="@@topBar.addAnotherKeyword">
-          Add another keyword
+        <span class="mat-body-1">
+          <ng-container
+            *ngIf="keywords.length === 0"
+            i18n="@@topBar.addKeyword"
+          >
+            Add a keyword
+          </ng-container>
+          <ng-container
+            *ngIf="keywords.length !== 0"
+            i18n="@@topBar.addAnotherKeyword"
+          >
+            Add another keyword
+          </ng-container>
         </span>
       </a>
     </div>
-  </form>
+  </div>
 </app-modal>

@@ -8,7 +8,12 @@ import { Component, Input, OnInit } from '@angular/core'
 export class PanelsComponent implements OnInit {
   expandedContent = true
   @Input() title
-  @Input() type: 'activities' | 'peer-review' | 'funding' | 'sub-peer-review' = 'activities'
+  @Input() type:
+    | 'activities'
+    | 'peer-review'
+    | 'funding'
+    | 'sub-peer-review'
+    | 'research-resources' = 'activities'
   @Input() currentAmount
   @Input() total
 
