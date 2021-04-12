@@ -31,6 +31,8 @@ import { RecordAffiliationService } from '../record-affiliations/record-affiliat
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { RecordPeerReviewService } from '../record-peer-review/record-peer-review.service'
 import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
+import { RecordFundingsService } from '../record-fundings/record-fundings.service'
+import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
 import { ResearchResources } from '../../types/record-research-resources.endpoint'
@@ -55,6 +57,7 @@ export class RecordService {
     private _recordCountryService: RecordCountriesService,
     private _recordWebsitesService: RecordWebsitesService,
     private _recordAffiliations: RecordAffiliationService,
+    private _recordFundings: RecordFundingsService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
     private _recordPeerReviewService: RecordPeerReviewService,
     private _recordResearchResourceService: RecordResearchResourceService,
@@ -81,6 +84,7 @@ export class RecordService {
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
         this._recordAffiliations.getAffiliations(),
+        this._recordFundings.getFundings(),
         this.getPreferences(),
         this._recordPeerReviewService.getPeerReviewGroups(true),
         this._recordResearchResourceService.getResearchResourcePage(true, true),
@@ -99,6 +103,7 @@ export class RecordService {
               names,
               biography,
               affiliations,
+              fundings,
               preferences,
               peerReviews,
               researchResources,
@@ -115,6 +120,7 @@ export class RecordService {
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
                 affiliations: affiliations as AffiliationUIGroup[],
+                fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
                 researchResources: researchResources as ResearchResources,
