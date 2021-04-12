@@ -3,10 +3,7 @@ import { Observable } from 'rxjs'
 import { OrganizationsService } from 'src/app/core'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { OrgDisambiguated } from 'src/app/types'
-import {
-  Funding,
-  FundingGroup
-} from 'src/app/types/record-funding.endpoint'
+import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 
 @Component({
   selector: 'app-funding-stack',
@@ -66,10 +63,7 @@ export class FundingStackComponent implements OnInit {
    * On start, hide the details for all the panels
    */
   private setDefaultPanelDetailsState(funding: Funding, force = false) {
-    if (
-      this.panelDetailsState[funding.putCode.value] === undefined ||
-      force
-    ) {
+    if (this.panelDetailsState[funding.putCode.value] === undefined || force) {
       this.panelDetailsState[funding.putCode.value] = {
         state: false,
       }
@@ -80,10 +74,7 @@ export class FundingStackComponent implements OnInit {
    * On start, set the preferred source as the top panel of the stack
    */
   private setDefaultPanelsDisplay(funding: Funding, force = false) {
-    if (
-      this.stackPanelsDisplay[funding.putCode.value] === undefined ||
-      force
-    ) {
+    if (this.stackPanelsDisplay[funding.putCode.value] === undefined || force) {
       this.stackPanelsDisplay[funding.putCode.value] = {
         topPanelOfTheStack: this.isPreferred(funding) ? true : false,
       }
@@ -92,12 +83,14 @@ export class FundingStackComponent implements OnInit {
 
   private fetchOrganizationData(funding: Funding, force = false) {
     if (funding.disambiguationSource) {
-      this._organizationsService.getOrgDisambiguated(
-        funding.disambiguationSource.value,
-        funding.disambiguatedFundingSourceId.value
-      ).subscribe((response) => {
-        this.orgDisambiguated[funding.putCode.value] = response || null
-      })
+      this._organizationsService
+        .getOrgDisambiguated(
+          funding.disambiguationSource.value,
+          funding.disambiguatedFundingSourceId.value
+        )
+        .subscribe((response) => {
+          this.orgDisambiguated[funding.putCode.value] = response || null
+        })
     }
   }
 
@@ -105,7 +98,7 @@ export class FundingStackComponent implements OnInit {
     const response =
       funding && this.fundingStack
         ? this.fundingStack.defaultFunding.putCode.value ===
-        funding.putCode.value
+          funding.putCode.value
         : false
     return response
   }
@@ -117,9 +110,14 @@ export class FundingStackComponent implements OnInit {
     const putCode = funding.putCode.value
     this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
       .state
-    const itemToUpdate = this._fundingStack.fundings.find(x => x.putCode.value === putCode);
+    const itemToUpdate = this._fundingStack.fundings.find(
+      (x) => x.putCode.value === putCode
+    )
     const index = this._fundingStack.fundings.indexOf(itemToUpdate)
-    if (itemToUpdate.fullyLoaded === undefined || itemToUpdate.fullyLoaded !== true) {
+    if (
+      itemToUpdate.fullyLoaded === undefined ||
+      itemToUpdate.fullyLoaded !== true
+    ) {
       this.getMoreDetailsFromTheServer(funding).subscribe((response) => {
         this._fundingStack.fundings[index] = response
         this._fundingStack.fundings[index].fullyLoaded = true
@@ -130,9 +128,7 @@ export class FundingStackComponent implements OnInit {
   /**
    * Get require extra backend data to display on the panel details
    */
-  private getMoreDetailsFromTheServer(
-    funding: Funding
-  ): Observable<Funding> {
+  private getMoreDetailsFromTheServer(funding: Funding): Observable<Funding> {
     const putCode = funding.putCode.value
     return this._fundingService.getFundingDetails(putCode)
   }

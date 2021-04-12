@@ -15,12 +15,10 @@
         }}</ng-container>
         <ng-container *ngIf="!funding.endDate.year">present</ng-container>
       </ng-container>
-      <ng-container
-        *ngIf="funding.startDate.year && funding.fundingType.value"
-      >
+      <ng-container *ngIf="funding.startDate.year && funding.fundingType.value">
         |
       </ng-container>
-      {{ funding.fundingType.value | titlecase }}      
+      {{ funding.fundingType.value | titlecase }}
     </div>
     <div *ngIf="orgDisambiguated">
       <div>
@@ -32,23 +30,26 @@
       </div>
     </div>
     <div *ngIf="funding.url && funding.url.value">
-      <a
-      href="{{ funding.url.value }}"
-      target="_blank"
-      >{{ funding.url.value }}</a
-    >
+      <a href="{{ funding.url.value }}" target="_blank">{{
+        funding.url.value
+      }}</a>
     </div>
     <div
-        *ngFor="let extId of funding.externalIdentifiers"
-        class="padding-level-3">
-        {{extId.externalIdentifierType.value }}: <div *ngIf="extId.url && extId.url.value; then urlExtId; else plainExtId"></div>
-        <ng-template #urlExtId>
-          <a href="{{extId.url.value}}"
-          target="_blank">
+      *ngFor="let extId of funding.externalIdentifiers"
+      class="padding-level-3"
+    >
+      {{ extId.externalIdentifierType.value }}:
+      <div
+        *ngIf="extId.url && extId.url.value; then urlExtId; else plainExtId"
+      ></div>
+      <ng-template #urlExtId>
+        <a href="{{ extId.url.value }}" target="_blank">
           {{ extId.externalIdentifierId.value }}
-          </a>
-        </ng-template>
-        <ng-template #plainExtId>{{ extId.externalIdentifierId.value }}</ng-template>
+        </a>
+      </ng-template>
+      <ng-template #plainExtId>{{
+        extId.externalIdentifierId.value
+      }}</ng-template>
     </div>
   </div>
 
@@ -79,54 +80,91 @@
       </h3>
       <div>
         <div>
-          {{ orgDisambiguated?.sourceType}}<ng-container *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId">: {{ orgDisambiguated?.sourceId }}</ng-container>
+          {{ orgDisambiguated?.sourceType
+          }}<ng-container
+            *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
+            >: {{ orgDisambiguated?.sourceId }}</ng-container
+          >
         </div>
         <div>
-          {{ orgDisambiguated?.value}}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value">: {{ orgDisambiguated | cityRegionCountry }}</ng-container>
+          {{ orgDisambiguated?.value
+          }}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
+            >: {{ orgDisambiguated | cityRegionCountry }}</ng-container
+          >
         </div>
         <a
           target="orcid-app"
           *ngIf="orgDisambiguated?.url"
           [href]="orgDisambiguated?.url"
-        >{{ orgDisambiguated?.url }}</a>    
+          >{{ orgDisambiguated?.url }}</a
+        >
       </div>
     </app-display-attribute>
   </ng-container>
   <!-- FUNDING SUBTYPE -->
-  <ng-container class="margin-top-1" *ngIf="funding.organizationDefinedFundingSubType && funding.organizationDefinedFundingSubType.value">
+  <ng-container
+    class="margin-top-1"
+    *ngIf="
+      funding.organizationDefinedFundingSubType &&
+      funding.organizationDefinedFundingSubType.value
+    "
+  >
     <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@funding.organizationDefinedFundingSubType">
+      <h3
+        class="orc-font-body-small"
+        i18n="@@funding.organizationDefinedFundingSubType"
+      >
         Funding subtype
       </h3>
       <div>
-        {{ funding.organizationDefinedFundingSubType.value }}  
+        {{ funding.organizationDefinedFundingSubType.value }}
       </div>
     </app-display-attribute>
   </ng-container>
   <!-- AMOUNT -->
-  <ng-container class="margin-top-1" *ngIf="funding.amount && funding.amount.value">
+  <ng-container
+    class="margin-top-1"
+    *ngIf="funding.amount && funding.amount.value"
+  >
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@funding.amount">
         Total funding amount
       </h3>
-      <div>  
-        <ng-container *ngIf="funding.currencyCode && funding.currencyCode.value">{{ funding.currencyCode.value }}</ng-container> {{ funding.amount.value }}      
+      <div>
+        <ng-container
+          *ngIf="funding.currencyCode && funding.currencyCode.value"
+          >{{ funding.currencyCode.value }}</ng-container
+        >
+        {{ funding.amount.value }}
       </div>
     </app-display-attribute>
-  </ng-container> 
+  </ng-container>
   <!-- TRANSLATED TITLE -->
-  <ng-container class="margin-top-1" *ngIf="funding.fundingTitle && funding.fundingTitle.translatedTitle && funding.fundingTitle.translatedTitle.content">
+  <ng-container
+    class="margin-top-1"
+    *ngIf="
+      funding.fundingTitle &&
+      funding.fundingTitle.translatedTitle &&
+      funding.fundingTitle.translatedTitle.content
+    "
+  >
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@funding.translatedTitle">
         Translated title
-      </h3> <div *ngIf="funding.fundingTitle.translatedTitle.languageName">({{ funding.fundingTitle.translatedTitle.languageName }})</div>
+      </h3>
+      <div *ngIf="funding.fundingTitle.translatedTitle.languageName">
+        ({{ funding.fundingTitle.translatedTitle.languageName }})
+      </div>
       <div>
         {{ funding.fundingTitle.translatedTitle.content }}
       </div>
     </app-display-attribute>
   </ng-container>
   <!-- DESCRIPTION -->
-  <ng-container class="margin-top-1" *ngIf="funding.description && funding.description.value">
+  <ng-container
+    class="margin-top-1"
+    *ngIf="funding.description && funding.description.value"
+  >
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@funding.description">
         Description
@@ -145,14 +183,18 @@
       </h3>
       <div>
         <div
-        *ngFor="let contributor of funding.contributors"
-        class="padding-level-3">
-          <ng-container *ngIf="contributor.creditName">{{contributor.creditName.value}}</ng-container> {{ contributor | contributorsPipe }}
+          *ngFor="let contributor of funding.contributors"
+          class="padding-level-3"
+        >
+          <ng-container *ngIf="contributor.creditName">{{
+            contributor.creditName.value
+          }}</ng-container>
+          {{ contributor | contributorsPipe }}
         </div>
       </div>
     </app-display-attribute>
   </ng-container>
-  
+
   <!-- ADDED DATE-->
   <app-display-attribute>
     <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
