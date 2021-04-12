@@ -57,7 +57,7 @@ export class RecordService {
     private _recordAffiliations: RecordAffiliationService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
     private _recordPeerReviewService: RecordPeerReviewService,
-    private _recordResearchResourceService: RecordResearchResourceService
+    private _recordResearchResourceService: RecordResearchResourceService,
     private _recordWorkService: RecordWorksService
   ) {}
 
