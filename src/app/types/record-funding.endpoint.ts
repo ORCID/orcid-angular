@@ -1,11 +1,11 @@
 import {
-  Contributor, 
+  Contributor,
   ExternalIdentifier,
   MonthDayYearDate,
-  Title, 
+  Title,
   Value,
-  Visibility,  
-} from './common.endpoint' 
+  Visibility,
+} from './common.endpoint'
 
 export interface FundingGroup {
   fundings: [Funding]
@@ -13,8 +13,8 @@ export interface FundingGroup {
   groupId: string
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
-  externalIdentifiers: [any] // TODO is this always empty? 
-  defaultFunding: Funding 
+  externalIdentifiers: [any] // TODO is this always empty?
+  defaultFunding: Funding
 }
 
 export interface Funding {
@@ -27,11 +27,11 @@ export interface Funding {
   fundingType: Value
   organizationDefinedFundingSubType: Value
   currencyCode: Value
-  amount: Value 
+  amount: Value
   url: Value
   startDate: MonthDayYearDate
   endDate: MonthDayYearDate
-  externalIdentifiers?: ExternalIdentifier[]  
+  externalIdentifiers?: ExternalIdentifier[]
   contributors?: Contributor[]
   sourceName: string
   source: string
@@ -41,7 +41,7 @@ export interface Funding {
   region: Value
   country: Value
   countryForDisplay?: string // TODO is this always empty?
-  fundingTypeForDisplay?: string 
+  fundingTypeForDisplay?: string
   dateSortString: string
   createdDate: MonthDayYearDate
   lastModified: MonthDayYearDate

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { MonthDayYearDate } from 'src/app/types'
-import {  
+import {
   FundingGroup,
 } from 'src/app/types/record-funding.endpoint'
 

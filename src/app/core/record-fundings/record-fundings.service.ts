@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
-import { ActivityService } from 'src/app/types/activities-service.local'
-import {  
+import { catchError, map, retry, tap } from 'rxjs/operators'
+import {
   Funding,
   FundingGroup,
 } from 'src/app/types/record-funding.endpoint'
@@ -43,7 +42,7 @@ export class RecordFundingsService {
         .subscribe()
     }
     return this.$fundings.asObservable()
-  }  
+  }
 
   getFundingDetails(putCode): Observable<Funding> {
     return this._http
@@ -64,7 +63,7 @@ export class RecordFundingsService {
         environment.API_WEB + `fundings/fundingGroups.json?sort=date&sortAsc=false`
       )
       .pipe(
-        retry(3),        
+        retry(3),
         map((data) => this._fundingsSortService.transform(data)),
         catchError((error) => this._errorHandler.handleError(error))
       )

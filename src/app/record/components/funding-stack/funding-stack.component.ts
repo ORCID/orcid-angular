@@ -1,6 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
-import { combineLatest, Observable, of } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 import { OrganizationsService } from 'src/app/core'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { OrgDisambiguated } from 'src/app/types'
@@ -118,15 +117,15 @@ export class FundingStackComponent implements OnInit {
     const putCode = funding.putCode.value
     this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
       .state
-    var itemToUpdate = this._fundingStack.fundings.find(x => x.putCode.value == putCode);
-    var index = this._fundingStack.fundings.indexOf(itemToUpdate)
-    if (itemToUpdate.fullyLoaded === undefined || itemToUpdate.fullyLoaded != true) {
+    const itemToUpdate = this._fundingStack.fundings.find(x => x.putCode.value === putCode);
+    const index = this._fundingStack.fundings.indexOf(itemToUpdate)
+    if (itemToUpdate.fullyLoaded === undefined || itemToUpdate.fullyLoaded !== true) {
       this.getMoreDetailsFromTheServer(funding).subscribe((response) => {
         this._fundingStack.fundings[index] = response
         this._fundingStack.fundings[index].fullyLoaded = true
       })
-    } 
-  }  
+    }
+  }
 
   /**
    * Get require extra backend data to display on the panel details
@@ -135,7 +134,6 @@ export class FundingStackComponent implements OnInit {
     funding: Funding
   ): Observable<Funding> {
     const putCode = funding.putCode.value
-    
     return this._fundingService.getFundingDetails(putCode)
   }
 

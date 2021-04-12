@@ -16,11 +16,10 @@ export class FundingComponent implements OnInit {
     state: boolean
   }
   @Output() toggleDetails = new EventEmitter<Funding>()
-  @Input() stackMode 
+  @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
-  
+
   constructor() {}
 
   ngOnInit(): void {}
-
 }

@@ -41,7 +41,7 @@ export class FundingStacksGroupsComponent implements OnInit {
           })
       })
   }
-  
+
   trackByFundingGroup(index, item: FundingGroup) {
     return item.activePutCode
   }

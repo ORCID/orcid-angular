@@ -95,7 +95,7 @@ export class RecordService {
               names,
               biography,
               affiliations,
-              fundings, 
+              fundings,
               preferences,
               peerReviews,
             ]) => {

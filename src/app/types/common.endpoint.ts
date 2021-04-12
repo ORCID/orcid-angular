@@ -137,7 +137,7 @@ export interface Contributor {
   email?: Value
   orcid?: Value
   uri: Value
-  creditName?: Value  
+  creditName?: Value
   contributorRole: Value
 }
 
