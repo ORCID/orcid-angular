@@ -24,7 +24,11 @@
           <ng-container *ngIf="!currentAmount">(0)</ng-container>
         </ng-container>
         <ng-container
-          *ngIf="type === 'peer-review' || type === 'research-resources' || type === 'funding'"
+          *ngIf="
+            type === 'peer-review' ||
+            type === 'research-resources' ||
+            type === 'funding'
+          "
         >
           ({{ total }})
         </ng-container>
