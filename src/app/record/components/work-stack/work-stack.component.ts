@@ -13,7 +13,10 @@ import {
 @Component({
   selector: 'app-work-stack',
   templateUrl: './work-stack.component.html',
-  styleUrls: ['./work-stack.component.scss', './work-stack.component.scss-theme.scss'],
+  styleUrls: [
+    './work-stack.component.scss',
+    './work-stack.component.scss-theme.scss',
+  ],
 })
 export class WorkStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false

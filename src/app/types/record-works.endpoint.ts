@@ -2,7 +2,6 @@ import {
   ExternalIdentifier,
   MonthDayYearDate,
   Value,
-  Visibility,
   VisibilityStrings,
 } from './common.endpoint'
 import { AssertionBase } from './record.endpoint'
