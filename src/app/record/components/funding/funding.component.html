@@ -57,13 +57,13 @@
     <a
       (click)="toggleDetails.next(funding)"
       *ngIf="!panelDetailsState.state"
-      i18n="@@share.showMoreDetail"
+      i18n="@@shared.showMoreDetail"
       >Show more detail</a
     >
     <a
       (click)="toggleDetails.next(funding)"
       *ngIf="panelDetailsState.state"
-      i18n="@@share.showLessDetail"
+      i18n="@@shared.showLessDetail"
       >Show less detail</a
     >
   </div>
@@ -75,7 +75,7 @@
   <!-- ORGANIZATION DISAMBIGUATED IDS-->
   <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
     <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@record.organizationIdentifiers">
+      <h3 class="orc-font-body-small" i18n="@@shared.organizationIdentifiers">
         Organization identifiers
       </h3>
       <div>
