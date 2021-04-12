@@ -17,7 +17,7 @@ describe.only('Funding' + runInfo(), () => {
 
   it('display a user with no fundings', () => {
     cy.get('app-fundings').within(() => {
-      cy.get('[body=""]').should('not.exist')
+      cy.get('h2').should('not.exist')
     })
   })
 
@@ -26,7 +26,24 @@ describe.only('Funding' + runInfo(), () => {
     .reload(true)
     .get('app-fundings').within(() => {
       cy.get('h2').contains('Funding title')
-      cy.contains('2000-01 to 2031-12 | Award')
+      cy.get('app-funding').within(() => {
+        cy.get('app-panel-data').eq(0).within(() => {
+          cy.get('.data-content').within(() => {
+            cy.contains('2000-01 to 2031-12 | Award')
+            cy.contains('http://qa.orcid.org')
+            cy.contains('grant_number:').contains('1234567890')            
+          })
+          cy.get('.align-end-content').find('a').click()
+        })
+        cy.get('app-panel-data').eq(1).within(() => {
+          cy.get('.data-content').within(() => {
+            cy.contains('CRC 1,000,000')
+            cy.contains('(Spanish)')
+            cy.contains('Translated title')
+            cy.contains('This is the description')
+          })
+        })
+      })
     })
   })
 
