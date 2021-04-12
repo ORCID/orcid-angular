@@ -27,6 +27,7 @@ export interface RegisterForm {
   persistentTokenEnabled?: boolean
   emailAccessAllowed?: boolean
   redirectUrl?: any
+  resetParams?: string
 }
 
 export interface DuplicatedName {

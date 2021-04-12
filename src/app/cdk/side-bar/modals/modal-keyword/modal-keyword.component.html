@@ -104,9 +104,19 @@
         class="col add-more no-gutters"
         (click)="addKeyword()"
       >
-        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-body-1" i18n="@@topBar.addAnotherKeyword">
-          Add another keyword
+        <span class="mat-body-1">
+          <ng-container
+            *ngIf="keywords.length === 0"
+            i18n="@@topBar.addKeyword"
+          >
+            Add a keyword
+          </ng-container>
+          <ng-container
+            *ngIf="keywords.length !== 0"
+            i18n="@@topBar.addAnotherKeyword"
+          >
+            Add another keyword
+          </ng-container>
         </span>
       </a>
     </div>

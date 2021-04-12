@@ -145,9 +145,17 @@
     </ng-container>
     <div class="row">
       <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
-        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-body-1" i18n="@@topBar.addAnotherLink">
-          Add another link
+        <mat-icon class="large-material-icon">add_circle</mat-icon>
+        <span class="mat-body-1">
+          <ng-container *ngIf="websites.length === 0" i18n="@@topBar.addLink">
+            Add a link
+          </ng-container>
+          <ng-container
+            *ngIf="websites.length !== 0"
+            i18n="@@topBar.addAnotherLink"
+          >
+            Add another link
+          </ng-container>
         </span>
       </a>
     </div>

@@ -1,7 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal'
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { Assertion } from '../../../types'
+import { Assertion, Work } from '../../../types'
 import {
   Address,
   Value,
@@ -26,6 +26,7 @@ export class PanelComponent implements OnInit {
     | Address
     | Affiliation
     | PeerReview
+    | Work
     | any
   @Input() type:
     | 'top-bar'
@@ -52,7 +53,7 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {}
 
   isArrayAndIsNotEmpty(
-    obj: Assertion[] | Value | Address | Affiliation | PeerReview
+    obj: Assertion[] | Value | Address | Affiliation | PeerReview | Work
   ) {
     return Array.isArray(obj) && obj.length > 0
   }

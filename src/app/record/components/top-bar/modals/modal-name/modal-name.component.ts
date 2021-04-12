@@ -219,9 +219,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
               this.closeEvent()
             })
         },
-        (error) => {
-          console.log(error)
-        }
+        (error) => {}
       )
   }
 

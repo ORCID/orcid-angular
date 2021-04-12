@@ -150,7 +150,7 @@ export class AffiliationStackComponent implements OnInit {
 
   makePrimaryCard(affiliation: Affiliation) {
     // TODO
-    console.log(this.stackPanelsDisplay)
+    console.warn(this.stackPanelsDisplay)
   }
 
   changeTopPanelOfTheStack(affiliation: Affiliation) {
