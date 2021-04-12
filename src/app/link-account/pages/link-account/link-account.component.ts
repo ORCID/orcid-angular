@@ -8,6 +8,7 @@ import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { first } from 'rxjs/operators'
+import { UserService } from 'src/app/core'
 
 @Component({
   selector: 'app-link-account',
@@ -29,57 +30,22 @@ export class LinkAccountComponent implements OnInit {
 
   constructor(
     private _platformInfo: PlatformInfoService,
+    private _user: UserService,
     private _disco: DiscoService,
     private _oauthService: OauthService,
     private _router: Router
   ) {
-    _platformInfo
-      .get()
+    this._user
+      .getUserSession()
       .pipe(first())
-      .subscribe((platform) => {
-        if (platform.social) {
-          this.loadSocialSignInData()
-        } else if (platform.institutional) {
-          this.loadShibbolethSignInData()
-        }
+      .subscribe((session) => {
+        this.signInData = session.thirdPartyAuthData.signinData
+        this.entityDisplayName = session.thirdPartyAuthData.entityDisplayName
+        this.loading = false
       })
   }
 
   ngOnInit(): void {}
-
-  loadShibbolethSignInData() {
-    this._oauthService.loadShibbolethSignInData().subscribe((data) => {
-      this.signInData = data
-      this.getInstitution(this.signInData.providerId)
-    })
-  }
-
-  getInstitution(entityId) {
-    this._disco.getInstitutionBaseOnID(entityId).subscribe((institution) => {
-      this.loading = false
-      this.entityDisplayName = institution.DisplayNames.filter(
-        (subElement) => subElement.lang === 'en'
-      ).map((en) => {
-        return en.value
-      })[0]
-    })
-  }
-
-  loadSocialSignInData() {
-    this._oauthService.loadSocialSigninData().subscribe((data) => {
-      this.signInData = data
-      this.entityDisplayName = data.providerId
-      if (
-        this.entityDisplayName === 'facebook' ||
-        this.entityDisplayName === 'google'
-      ) {
-        this.entityDisplayName =
-          this.entityDisplayName.charAt(0).toUpperCase() +
-          this.entityDisplayName.slice(1)
-      }
-      this.loading = false
-    })
-  }
 
   show2FAEmitter($event) {
     this.show2FA = true
@@ -96,13 +62,9 @@ export class LinkAccountComponent implements OnInit {
             ...platform.queryParameters,
             // The parameters added after a linking + register process are remove
 
-            // TODO leomendoza123
-            // Adding the social/institutional parameters on the URL causes issues
-            // https://trello.com/c/EiZOE6b1/7138
+            /// TODO @leomendoza123 depend only on the user session thirty party login data
+            /// avoid taking data from the the parameters.
 
-            email: null,
-            firstName: null,
-            lastName: null,
             linkType: null,
             providerId: null,
           },

@@ -160,9 +160,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           () => {
             this.closeEvent()
           },
-          (error) => {
-            console.log(error)
-          }
+          (error) => {}
         )
     }
   }
