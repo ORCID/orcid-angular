@@ -197,7 +197,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
             putCode: key.indexOf('new-') === 0 ? null : key,
             content: otherName,
             displayIndex: i + 1,
-            source: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+            source: { privateRecordId = this.userSession.userInfo.EFFECTIVE_USER_ORCID },
             visibility: {
               visibility,
             },
@@ -219,9 +219,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
               this.closeEvent()
             })
         },
-        (error) => {
-          console.log(error)
-        }
+        (error) => {}
       )
   }
 

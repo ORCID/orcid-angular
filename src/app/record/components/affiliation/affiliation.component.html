@@ -37,13 +37,13 @@
     <a
       (click)="toggleDetails.next(affiliation)"
       *ngIf="!panelDetailsState.state"
-      i18n="@@share.showMoreDetail"
+      i18n="@@shared.showMoreDetail"
       >Show more detail</a
     >
     <a
       (click)="toggleDetails.next(affiliation)"
       *ngIf="panelDetailsState.state"
-      i18n="@@share.showLessDetail"
+      i18n="@@shared.showLessDetail"
       >Show less detail</a
     >
   </div>
@@ -61,7 +61,7 @@
   <!-- ORGANIZATION DISAMBIGUATED IDS-->
   <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
     <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@record.organizationIdentifiers">
+      <h3 class="orc-font-body-small" i18n="@@shared.organizationIdentifiers">
         Organization identifiers
       </h3>
       <div>
@@ -93,9 +93,7 @@
 
     <app-display-attribute>
       <h3 class="orc-font-body-small">
-        <ng-container
-          i18n="@@workspace_affiliations.external_ids"
-          i18n="@@record.OtherOrganization"
+        <ng-container i18n="@@shared.otherOrganization"
           >Other organization identifiers provided by</ng-container
         >
         {{ orgDisambiguated.sourceType | titlecase }}

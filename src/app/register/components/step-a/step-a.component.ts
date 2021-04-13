@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 
 import { BaseStepDirective } from '../BaseStep'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { environment } from 'src/environments/environment'
+import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
   selector: 'app-step-a',
@@ -14,6 +15,8 @@ import { environment } from 'src/environments/environment'
   preserveWhitespaces: true,
 })
 export class StepAComponent extends BaseStepDirective {
+  @Input() reactivation: ReactivationLocal
+
   constructor(private _platform: PlatformInfoService, private _router: Router) {
     super()
   }

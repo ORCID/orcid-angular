@@ -31,7 +31,13 @@ import { RecordAffiliationService } from '../record-affiliations/record-affiliat
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { RecordPeerReviewService } from '../record-peer-review/record-peer-review.service'
 import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
+import { RecordFundingsService } from '../record-fundings/record-fundings.service'
+import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
+import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
+import { ResearchResources } from '../../types/record-research-resources.endpoint'
+import { RecordWorksService } from '../record-works/record-works.service'
+import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -51,8 +57,11 @@ export class RecordService {
     private _recordCountryService: RecordCountriesService,
     private _recordWebsitesService: RecordWebsitesService,
     private _recordAffiliations: RecordAffiliationService,
+    private _recordFundings: RecordFundingsService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordResearchResourceService: RecordResearchResourceService,
+    private _recordWorkService: RecordWorksService
   ) {}
 
   headers = new HttpHeaders({
@@ -60,12 +69,20 @@ export class RecordService {
     'Content-Type': 'application/json',
   })
 
-  getRecord(id): Observable<UserRecord> {
+  getRecord(
+    options: {
+      forceReload?: boolean
+      publicRecordId?: string
+      privateRecordId?: string
+    } = {
+      forceReload: false,
+    }
+  ): Observable<UserRecord> {
     if (!this.recordInitialized) {
       this.recordInitialized = true
 
       combineLatest([
-        this.getPerson(id),
+        this.getPerson(options.publicRecordId),
         this._recordEmailsService.getEmails(),
         this._recordOtherNamesService.getOtherNames(),
         this._recordCountryService.getAddresses(),
@@ -75,8 +92,11 @@ export class RecordService {
         this._recordNamesService.getNames(),
         this._recordBiographyService.getBiography(),
         this._recordAffiliations.getAffiliations(),
+        this._recordFundings.getFundings(),
         this.getPreferences(),
         this._recordPeerReviewService.getPeerReviewGroups(true),
+        this._recordResearchResourceService.getResearchResourcePage(true, true),
+        this._recordWorkService.getWorks(),
       ])
         .pipe(
           tap(
@@ -91,8 +111,11 @@ export class RecordService {
               names,
               biography,
               affiliations,
+              fundings,
               preferences,
               peerReviews,
+              researchResources,
+              works,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -105,8 +128,11 @@ export class RecordService {
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
                 affiliations: affiliations as AffiliationUIGroup[],
+                fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
+                researchResources: researchResources as ResearchResources,
+                works: works as WorksEndpoint,
               })
             }
           )

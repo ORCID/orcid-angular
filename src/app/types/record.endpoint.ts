@@ -103,6 +103,15 @@ export interface AssertionVisibilityString extends AssertionBase {
   visibility?: VisibilityStrings
 }
 
+export interface GroupBase {
+  activePutCode: number
+  defaultPutCode: number
+  groupId: number
+  activeVisibility: string
+  userVersionPresent: boolean
+  externalIdentifiers: ExternalIdentifier[]
+}
+
 export interface ErrorsListResponse {
   errors: string[]
 }

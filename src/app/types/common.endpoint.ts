@@ -131,6 +131,29 @@ export interface ExternalIdentifierId {
   getRequiredMessage?: any
 }
 
+export interface Contributor {
+  errors: any[]
+  contributorSequence: Value
+  email?: Value
+  orcid?: Value
+  uri: Value
+  creditName?: Value
+  contributorRole: Value
+}
+
+export interface Title {
+  errors: any[]
+  title: Value
+  translatedTitle?: TranslatedTitle
+}
+
+export interface TranslatedTitle {
+  errors: any[]
+  content: string
+  languageCode?: string
+  languageName?: string
+}
+
 export type ScopesStrings =
   | 'openid'
   | '/authenticate'

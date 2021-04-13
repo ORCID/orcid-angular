@@ -7,7 +7,10 @@ import { CountriesEndpoint } from './record-country.endpoint'
 import { EmailsEndpoint } from './record-email.endpoint'
 import { WebsitesEndPoint } from './record-websites.endpoint'
 import { AffiliationUIGroup } from './record-affiliation.endpoint'
+import { FundingGroup } from './record-funding.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
+import { ResearchResources } from './record-research-resources.endpoint'
+import { WorksEndpoint } from './record-works.endpoint'
 
 export interface UserRecord {
   person: Person
@@ -21,5 +24,8 @@ export interface UserRecord {
   biography: BiographyEndPoint
   preferences: Preferences
   affiliations: AffiliationUIGroup[]
+  fundings: FundingGroup[]
   peerReviews: PeerReview[]
+  researchResources: ResearchResources
+  works: WorksEndpoint
 }

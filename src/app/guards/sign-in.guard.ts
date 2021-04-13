@@ -36,6 +36,8 @@ export class SignInGuard implements CanActivateChild {
       map((session) => {
         if (session.oauthSession) {
           if (queryParams.email || queryParams.orcid) {
+            // TODO at the moment user arriving with an email on the Oauth url.
+            // are not allow to go back.
             return this.isUserLoggedInOrExist(session, queryParams)
           } else if (
             queryParams.show_login &&

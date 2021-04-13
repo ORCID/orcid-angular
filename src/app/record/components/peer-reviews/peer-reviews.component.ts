@@ -64,7 +64,7 @@ export class PeerReviewsComponent implements OnInit {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
+          .getRecord({ privateRecordId = this.userSession.userInfo.EFFECTIVE_USER_ORCID })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
@@ -76,7 +76,7 @@ export class PeerReviewsComponent implements OnInit {
     if (this.publicView) {
       this._recordPeerReviewService
         .getPublicPeerReviewById(
-          this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          { privateRecordId = this.userSession.userInfo.EFFECTIVE_USER_ORCID },
           putCode
         )
         .pipe(first())

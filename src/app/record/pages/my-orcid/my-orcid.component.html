@@ -3,12 +3,16 @@
     <div class="row">
       <!-- [ngClass]="{ 'no-gutters': platform.columns4 }" -->
 
-      <app-side-bar class="col l3 m8 s4"> </app-side-bar>
+      <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
+      </app-side-bar>
       <app-main class="col l9 m8 s4">
         <app-top-bar class="row"></app-top-bar>
         <h2 class="orc-font-body col">Activities</h2>
+        <app-work-stack-group></app-work-stack-group>
         <app-affiliations></app-affiliations>
+        <app-research-resources class="row"></app-research-resources>
         <app-peer-reviews class="row"></app-peer-reviews>
+        <app-fundings></app-fundings>
       </app-main>
     </div>
   </div>

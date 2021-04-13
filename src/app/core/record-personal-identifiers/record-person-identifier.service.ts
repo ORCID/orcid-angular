@@ -10,7 +10,8 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class RecordPersonIdentifierService {
-  $externalIdentifiers: ReplaySubject<PersonIdentifierEndpoint>
+  $publicPersonIdentifier: ReplaySubject<PersonIdentifierEndpoint>
+  $privatePersonIdentifier: ReplaySubject<PersonIdentifierEndpoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -21,11 +22,38 @@ export class RecordPersonIdentifierService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getPersonalIdentifiers(forceReload = false) {
-    if (!this.$externalIdentifiers) {
-      this.$externalIdentifiers = new ReplaySubject<PersonIdentifierEndpoint>(1)
+  getPersonalIdentifiers(
+    options: {
+      forceReload?: boolean
+      publicRecordId?: string
+    } = {}
+  ) {
+    if (!options?.publicRecordId) {
+      return this.getPrivateRecordPublicIdentifiers(options.forceReload)
+    } else {
+      return this.getPublicRecordPublicIdentifiers(
+        options.forceReload,
+        options.publicRecordId
+      )
+    }
+  }
+
+  getPublicRecordPublicIdentifiers(
+    forceReload: boolean,
+    publicRecordId: string
+  ) {
+    if (!this.$publicPersonIdentifier) {
+      this.$publicPersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>()
     } else if (!forceReload) {
-      return this.$externalIdentifiers
+      return this.$publicPersonIdentifier
+    }
+  }
+
+  private getPrivateRecordPublicIdentifiers(forceReload: boolean) {
+    if (!this.$privatePersonIdentifier) {
+      this.$privatePersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>()
+    } else if (!forceReload) {
+      return this.$privatePersonIdentifier
     }
 
     this._http
@@ -42,11 +70,11 @@ export class RecordPersonIdentifierService {
           return value
         }),
         tap((value) => {
-          this.$externalIdentifiers.next(value)
+          this.$privatePersonIdentifier.next(value)
         })
       )
       .subscribe()
-    return this.$externalIdentifiers
+    return this.$privatePersonIdentifier
   }
 
   postPersonalIdentifiers(
@@ -63,7 +91,7 @@ export class RecordPersonIdentifierService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getPersonalIdentifiers(true))
+        switchMap(() => this.getPersonalIdentifiers({ forceReload: true }))
       )
   }
 }

@@ -1,0 +1,14 @@
+<ng-container *ngIf="workGroup">
+  <app-panels
+    *ngIf="workGroup.groups.length"
+    class="row"
+    [title]="'Works'"
+    [currentAmount]="workGroup.groups.length"
+    [total]="workGroup.totalGroups"
+  >
+    <app-work-stack
+      *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
+      [workStack]="group"
+    ></app-work-stack>
+  </app-panels>
+</ng-container>

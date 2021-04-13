@@ -247,28 +247,18 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .subscribe((platform) => {
         if (platform.social || platform.institutional) {
           if (this.signInData) {
-            const {
-              email,
-              firstName,
-              lastName,
-              providerId,
-              linkType,
-            } = this.signInData
+            const { providerId, linkType } = this.signInData
             this._user
               .getUserSession()
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
                 this._router.navigate(['/register'], {
-                  // TODO leomendoza123
-                  // Adding the social/institutional parameters on the URL causes issues
-                  // https://trello.com/c/EiZOE6b1/7138
+                  /// TODO @leomendoza123 depend only on the user session thirty party login data
+                  /// avoid taking data from the the parameters.
 
                   queryParams: {
                     ...params,
-                    email,
-                    firstName,
-                    lastName,
                     providerId,
                     linkType,
                   },

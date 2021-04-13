@@ -17,6 +17,7 @@ import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-str
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
+import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -31,6 +32,7 @@ import { CityRegionCountry } from './pipes/city-region-country/city-region-count
     CopyOnClickDirective,
     CopyOnClickComponent,
     CityRegionCountry,
+    ContributorsPipe,
     SafeHtmlPipe,
     ShowingOfComponent,
   ],
@@ -46,6 +48,7 @@ import { CityRegionCountry } from './pipes/city-region-country/city-region-count
     CopyOnClickDirective,
     MatSnackBarModule,
     CityRegionCountry,
+    ContributorsPipe,
     SafeHtmlPipe,
     ShowingOfComponent,
   ],
