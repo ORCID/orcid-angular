@@ -7,7 +7,10 @@
 >
   <div>
     <div class="general-data">
-      <ng-container *ngIf="affiliation && affiliation.startDate && affiliation.startDate.year"
+      <ng-container
+        *ngIf="
+          affiliation && affiliation.startDate && affiliation.startDate.year
+        "
         >{{ affiliation.startDate | monthDayYearDateToString }}
         <ng-container> to </ng-container>
         <ng-container *ngIf="affiliation.endDate">{{
@@ -16,7 +19,11 @@
         <ng-container *ngIf="!affiliation.endDate.year">present</ng-container>
       </ng-container>
       <ng-container
-        *ngIf="affiliation && affiliation.startDate.year && affiliation.roleTitle.value"
+        *ngIf="
+          affiliation &&
+          affiliation.startDate.year &&
+          affiliation.roleTitle.value
+        "
       >
         |
       </ng-container>

@@ -33,11 +33,15 @@
               <div class="description">
                 <div *ngFor="let host of research.hosts">
                   <span>{{ host.name | titlecase }}</span>
-                  <span *ngIf="host.city || host.region || host.country"> (</span>
+                  <span *ngIf="host.city || host.region || host.country">
+                    (</span
+                  >
                   <span *ngIf="host.city">{{ host.city }}</span
                   ><span *ngIf="host.region">, {{ host.region }}</span>
                   <span *ngIf="host.country">, {{ host.country }}</span>
-                  <span *ngIf="host.city || host.region || host.country">)</span>
+                  <span *ngIf="host.city || host.region || host.country"
+                    >)</span
+                  >
                 </div>
                 <div>
                   <span *ngIf="research.startDate">
@@ -91,7 +95,8 @@
                 >
                   <span *ngIf="externalIdentifier.externalIdentifierType">
                     {{
-                      externalIdentifier.externalIdentifierType.value | uppercase
+                      externalIdentifier.externalIdentifierType.value
+                        | uppercase
                     }}:
                   </span>
                   <a
@@ -162,7 +167,9 @@
                     </a>
                   </div>
                   <div>
-                    <span>{{ organizationDisambiguated.value | titlecase }}</span>
+                    <span>{{
+                      organizationDisambiguated.value | titlecase
+                    }}</span>
                     <span
                       *ngIf="
                         organizationDisambiguated.city ||
@@ -224,7 +231,9 @@
                       </ng-container>
                     </span>
                   </div>
-                  <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+                  <h3 class="orc-font-body-small" i18n="@@shared.added">
+                    Added
+                  </h3>
                   <div>
                     <span *ngIf="researchDetail.startDate">
                       <span *ngIf="researchDetail.startDate.year">{{
@@ -239,7 +248,10 @@
                     </span>
                   </div>
                   <ng-container *ngIf="researchDetail.lastModified">
-                    <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+                    <h3
+                      class="orc-font-body-small"
+                      i18n="@@shared.lastModified"
+                    >
                       Last modified
                     </h3>
                     <div>
@@ -412,7 +424,8 @@
                             </div>
                             <div>
                               <span>{{
-                                organizationDisambiguatedNested.value | titlecase
+                                organizationDisambiguatedNested.value
+                                  | titlecase
                               }}</span>
                               <span
                                 *ngIf="
@@ -425,11 +438,15 @@
                               >
                               <span
                                 *ngIf="organizationDisambiguatedNested.city"
-                                >{{ organizationDisambiguatedNested.city }}</span
+                                >{{
+                                  organizationDisambiguatedNested.city
+                                }}</span
                               ><span
                                 *ngIf="organizationDisambiguatedNested.region"
                                 >,
-                                {{ organizationDisambiguatedNested.region }}</span
+                                {{
+                                  organizationDisambiguatedNested.region
+                                }}</span
                               >
                               <span
                                 *ngIf="organizationDisambiguatedNested.country"
@@ -513,7 +530,8 @@
   <ng-container *ngIf="userRecord.researchResources.groups.length === 0">
     <div class="orc-font-body-small">
       <p i18n="@@researchResources.description">
-        Connect to trusted organizations to automatically add the specialist resources you use for your research.
+        Connect to trusted organizations to automatically add the specialist
+        resources you use for your research.
       </p>
       <a href="" i18n="@@researchResources.learnMore">
         Learn more about how research resources are added to your ORCID record

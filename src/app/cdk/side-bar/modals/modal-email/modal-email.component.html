@@ -30,9 +30,7 @@
         </p>
         <p>
           <i>
-            <ng-container i18n="@@side-bar.perOrcid">
-              Per the
-            </ng-container>
+            <ng-container i18n="@@side-bar.perOrcid"> Per the </ng-container>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -50,10 +48,7 @@
       </div>
     </div>
     <div class="row">
-      <h3
-        class="col orc-font-body-small"
-        i18n="@@side-bar.primaryEmail"
-      >
+      <h3 class="col orc-font-body-small" i18n="@@side-bar.primaryEmail">
         Primary email address
       </h3>
     </div>
@@ -174,10 +169,7 @@
     </div>
 
     <div class="row">
-      <h3
-        class="orc-font-body-small"
-        i18n="@@side-bar.otherEmails"
-      >
+      <h3 class="orc-font-body-small" i18n="@@side-bar.otherEmails">
         Other email address
       </h3>
     </div>
@@ -280,7 +272,8 @@
               mat-icon-button
               class="delete-button"
             >
-              <mat-icon class="material-icons-outlined extra-large-material-icon"
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
                 >delete</mat-icon
               >
             </button>
@@ -307,10 +300,7 @@
       </div>
     </ng-container>
     <ng-container *ngIf="emails.length === 1">
-      <p
-        class="orc-font-body-small"
-        i18n="@@side-bar.noOtherEmails"
-      >
+      <p class="orc-font-body-small" i18n="@@side-bar.noOtherEmails">
         You haven’t added any other email addresses yet.
       </p>
     </ng-container>
@@ -321,10 +311,7 @@
         <ng-container *ngIf="emails.length === 1" i18n="@@side-bar.otherEmail">
           Add other email address
         </ng-container>
-        <ng-container
-          *ngIf="emails.length > 1"
-          i18n="@@side-bar.anotherEmail"
-        >
+        <ng-container *ngIf="emails.length > 1" i18n="@@side-bar.anotherEmail">
           Add another email address
         </ng-container>
       </a>

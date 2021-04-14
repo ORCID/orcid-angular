@@ -74,9 +74,7 @@
   id="biography-panel"
 >
   <h2 header class="orc-font-body" i18n="@@record.biography">Biography</h2>
-  <app-panel-data
-    *ngIf="!!userRecord.biography.biography"
-  >
+  <app-panel-data *ngIf="!!userRecord.biography.biography">
     <app-panel-element
       [visibility]="userRecord.biography.visibility.visibility"
     >

@@ -5,7 +5,8 @@ import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
   AffiliationGroup,
-  AffiliationUIGroup, AffiliationUIGroupsTypes,
+  AffiliationUIGroup,
+  AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
@@ -69,7 +70,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
 
   getAffiliationType(type: string): AffiliationUIGroup {
     return this.profileAffiliationUiGroups.filter((affiliation) => {
-        return affiliation.type === type
-      })[0]
+      return affiliation.type === type
+    })[0]
   }
 }
