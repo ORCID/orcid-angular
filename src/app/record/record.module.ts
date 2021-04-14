@@ -34,7 +34,6 @@ import { ResearchResourcesComponent } from './components/research-resources/rese
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { WorkComponent } from './components/work/work.component';
-import { PublicPageComponent } from './pages/public-page/public-page.component'
 
 @NgModule({
   declarations: [
@@ -57,7 +56,6 @@ import { PublicPageComponent } from './pages/public-page/public-page.component'
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
-    PublicPageComponent,
   ],
   imports: [
     CommonModule,

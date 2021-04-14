@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -13,6 +13,8 @@ import { UserSession } from 'src/app/types/session.local'
   styleUrls: ['./work-stack-group.component.scss'],
 })
 export class WorkStackGroupComponent implements OnInit {
+  @Input() isPublicRecord: string
+
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   workGroup: WorksEndpoint
@@ -25,6 +27,12 @@ export class WorkStackGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.isPublicRecord) {
+      this.getPrivateRecordWorks()
+    }
+  }
+
+  private getPrivateRecordWorks() {
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -34,7 +42,9 @@ export class WorkStackGroupComponent implements OnInit {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord({ privateRecordId = this.userSession.userInfo.EFFECTIVE_USER_ORCID })
+          .getRecord({
+            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord

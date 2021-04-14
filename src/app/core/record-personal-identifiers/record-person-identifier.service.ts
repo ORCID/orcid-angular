@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap, map, switchMap } from 'rxjs/operators'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { environment } from 'src/environments/environment'
@@ -42,11 +42,13 @@ export class RecordPersonIdentifierService {
     forceReload: boolean,
     publicRecordId: string
   ) {
+    console.log('start loading public persona ids data')
     if (!this.$publicPersonIdentifier) {
       this.$publicPersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>()
     } else if (!forceReload) {
       return this.$publicPersonIdentifier
     }
+    return of({})
   }
 
   private getPrivateRecordPublicIdentifiers(forceReload: boolean) {
@@ -77,9 +79,7 @@ export class RecordPersonIdentifierService {
     return this.$privatePersonIdentifier
   }
 
-  postPersonalIdentifiers(
-    otherNames: PersonIdentifierEndpoint
-  ): Observable<PersonIdentifierEndpoint> {
+  postPersonalIdentifiers(otherNames: PersonIdentifierEndpoint) {
     return this._http
       .post<PersonIdentifierEndpoint>(
         environment.API_WEB + `my-orcid/externalIdentifiers.json`,

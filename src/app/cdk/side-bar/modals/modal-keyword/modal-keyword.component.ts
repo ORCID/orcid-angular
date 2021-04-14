@@ -119,7 +119,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
             putCode: key.indexOf('new-') === 0 ? null : key,
             content: content,
             displayIndex: i + 1,
-            source: { privateRecordId = this.userSession.userInfo.EFFECTIVE_USER_ORCID },
+            source: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
             visibility: {
               visibility,
             },

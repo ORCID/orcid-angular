@@ -58,6 +58,26 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!this.isPublicRecord) {
+      this.loadPrivateRecordSidebar()
+    } else {
+      this.loadPublicRecordSidebar(this.isPublicRecord)
+    }
+  }
+  loadPublicRecordSidebar(isPublicRecord: string) {
+    this._record
+      .getRecord({
+        publicRecordId: isPublicRecord,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+        console.log('PUBLIC RECORD')
+        console.log(userRecord)
+      })
+  }
+
+  private loadPrivateRecordSidebar() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -67,7 +87,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord({ privateRecordId = this.userSession.userInfo.EFFECTIVE_USER_ORCID })
+          .getRecord({
+            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord

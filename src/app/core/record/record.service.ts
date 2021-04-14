@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { combineLatest, Observable, ReplaySubject } from 'rxjs'
+import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
@@ -11,7 +11,7 @@ import {
   Preferences,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -70,11 +70,7 @@ export class RecordService {
   })
 
   getRecord(
-    options: {
-      forceReload?: boolean
-      publicRecordId?: string
-      privateRecordId?: string
-    } = {
+    options: UserRecordOptions = {
       forceReload: false,
     }
   ): Observable<UserRecord> {
@@ -82,21 +78,21 @@ export class RecordService {
       this.recordInitialized = true
 
       combineLatest([
-        this.getPerson(options.publicRecordId),
-        this._recordEmailsService.getEmails(),
-        this._recordOtherNamesService.getOtherNames(),
-        this._recordCountryService.getAddresses(),
-        this._recordKeywordService.getKeywords(),
-        this._recordWebsitesService.getWebsites(),
-        this._recordPersonalIdentifier.getPersonalIdentifiers(),
-        this._recordNamesService.getNames(),
-        this._recordBiographyService.getBiography(),
-        this._recordAffiliations.getAffiliations(),
-        this._recordFundings.getFundings(),
-        this.getPreferences(),
-        this._recordPeerReviewService.getPeerReviewGroups(true),
-        this._recordResearchResourceService.getResearchResourcePage(true, true),
-        this._recordWorkService.getWorks(),
+        this.getPerson(options),
+        this._recordEmailsService.getEmails(options),
+        this._recordOtherNamesService.getOtherNames(options),
+        this._recordCountryService.getAddresses(options),
+        this._recordKeywordService.getKeywords(options),
+        this._recordWebsitesService.getWebsites(options),
+        this._recordPersonalIdentifier.getPersonalIdentifiers(options),
+        this._recordNamesService.getNames(options),
+        this._recordBiographyService.getBiography(options),
+        this._recordAffiliations.getAffiliations(options),
+        this._recordFundings.getFundings(options),
+        this.getPreferences(options),
+        this._recordPeerReviewService.getPeerReviewGroups(options),
+        this._recordResearchResourceService.getResearchResourcePage(options),
+        this._recordWorkService.getWorks(options),
       ])
         .pipe(
           tap(
@@ -145,9 +141,19 @@ export class RecordService {
     )
   }
 
-  getPerson(id): Observable<Person> {
+  getPerson(options: {
+    forceReload?: boolean
+    publicRecordId?: string
+    privateRecordId?: string
+  }): Observable<Person> {
+    console.log('Get person')
+    console.log(options)
+
     return this._http
-      .get<Person>(environment.API_WEB + `${id}/person.json`)
+      .get<Person>(
+        environment.API_WEB +
+          `${options.publicRecordId || options.privateRecordId}/person.json`
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -220,7 +226,15 @@ export class RecordService {
       )
   }
 
-  getPreferences(): Observable<Preferences> {
+  getPreferences(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<Preferences> {
+    //TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
     return this._http
       .get<Preferences>(
         environment.API_WEB + `account/preferences.json`,

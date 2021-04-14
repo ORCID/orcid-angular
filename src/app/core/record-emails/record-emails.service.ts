@@ -13,6 +13,7 @@ import {
   EmailsEndpoint,
   ErrorsListResponse,
 } from 'src/app/types'
+import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -31,10 +32,17 @@ export class RecordEmailsService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}
-  getEmails(forceReload = false): Observable<EmailsEndpoint> {
+  getEmails(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<EmailsEndpoint> {
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
     if (!this.$emailsSubject) {
       this.$emailsSubject = new ReplaySubject<EmailsEndpoint>(1)
-    } else if (!forceReload) {
+    } else if (!options.forceReload) {
       return this.$emailsSubject
     }
 
@@ -72,7 +80,7 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails(true))
+        switchMap(() => this.getEmails({ forceReload: true }))
       )
   }
 

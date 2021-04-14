@@ -141,7 +141,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
             url: url,
             urlName: urlName,
             displayIndex: i + 1,
-            source: { privateRecordId = this.userSession.userInfo.EFFECTIVE_USER_ORCID },
+            source: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
             visibility: {
               visibility,
             },

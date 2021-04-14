@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { environment } from '../../../environments/environment.local'
 import { ResearchResource } from '../../types/record-research-resources.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -21,15 +22,19 @@ export class RecordResearchResourceService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getResearchResourcePage(sort, sortAsc): Observable<any> {
+  getResearchResourcePage(options: UserRecordOptions) {
+    //TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
     return this._http.get(
       environment.API_WEB +
         'research-resources/researchResourcePage.json?offset=' +
         this.offset +
         '&sort=' +
-        sort +
+        (options.sort != null ? options.sort : true) +
         '&sortAsc=' +
-        sortAsc
+        (options.sortAsc != null ? options.sort : true)
     )
   }
 

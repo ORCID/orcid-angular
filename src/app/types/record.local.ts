@@ -29,3 +29,11 @@ export interface UserRecord {
   researchResources: ResearchResources
   works: WorksEndpoint
 }
+
+export interface UserRecordOptions {
+  forceReload?: boolean
+  publicRecordId?: string
+  privateRecordId?: string
+  sortAsc?: boolean
+  sort?: boolean
+}

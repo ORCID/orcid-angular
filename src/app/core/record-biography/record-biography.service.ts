@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +22,19 @@ export class RecordBiographyService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getBiography(forceReload = false): Observable<BiographyEndPoint> {
+  getBiography(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<BiographyEndPoint> {
+    //TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
+
     if (!this.$biography) {
       this.$biography = new ReplaySubject<BiographyEndPoint>(1)
-    } else if (!forceReload) {
+    } else if (!options.forceReload) {
       return this.$biography
     }
 
@@ -54,7 +64,7 @@ export class RecordBiographyService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getBiography(true))
+        tap(() => this.getBiography({ forceReload: true }))
       )
   }
 }
