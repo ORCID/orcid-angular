@@ -1,4 +1,4 @@
-<app-modal>
+<app-modal [loading]="loadingBiography">
   <app-modal-header>
     <ng-container i18n="@@topBar.biography"> Biography </ng-container>
   </app-modal-header>
@@ -55,7 +55,7 @@
     <label for="biography-input" class="mat-caption">
       <strong i18n="@@topBar.biography">Biography</strong>
     </label>
-    <mat-form-field appearance="outline" class="mat-form-field-min">
+    <mat-form-field appearance="outline" class="mat-form-field-min biography">
       <textarea
         id="biography-input"
         matInput

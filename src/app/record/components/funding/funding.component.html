@@ -2,12 +2,12 @@
 
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data
-  class="defaul-data-loaded orc-font-body-small"
+  class="default-data-loaded orc-font-body-small"
   [borderBottom]="true"
 >
   <div>
     <div class="general-data">
-      <ng-container *ngIf="funding.startDate.year"
+      <ng-container *ngIf="funding && funding.startDate"
         >{{ funding.startDate | monthDayYearDateToString }}
         <ng-container> to </ng-container>
         <ng-container *ngIf="funding.endDate">{{

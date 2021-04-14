@@ -1,3 +1,7 @@
+a {
+ text-decoration: underline;
+}
+
 .add-more-email {
   display: flex;
   align-items: center;
@@ -39,7 +43,8 @@ mat-form-field {
 }
 
 .email-input-line {
-  margin-top: 20px;
+  margin-top: 5px;
+  margin-bottom: 20px;
   img {
     margin-top: 6px;
     cursor: move;
@@ -93,5 +98,11 @@ mat-form-field {
   }
   .actions-sub-wrapper {
     justify-content: space-between !important;
+  }
+}
+
+.additional-email {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 18px !important;
   }
 }

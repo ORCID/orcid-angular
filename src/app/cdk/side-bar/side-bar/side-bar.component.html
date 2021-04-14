@@ -16,7 +16,7 @@
       id="emails-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
-      <app-panel-data>
+      <app-panel-data *ngIf="userRecord && userRecord.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails"
           [visibility]="email.visibility"
@@ -37,7 +37,7 @@
       <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
         Website and social links
       </h2>
-      <app-panel-data>
+      <app-panel-data *ngIf="userRecord && userRecord.website.websites.length > 0">
         <app-panel-element
           *ngFor="let website of userRecord.website.websites"
           [visibility]="website.visibility.visibility"
@@ -65,7 +65,7 @@
       id="personal-identifiers-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
-      <app-panel-data>
+      <app-panel-data *ngIf="userRecord && userRecord.externalIdentifier.externalIdentifiers.length > 0">
         <app-panel-element
           *ngFor="
             let externalIdentifier of userRecord.externalIdentifier
@@ -94,7 +94,7 @@
       id="keywords-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
-      <app-panel-data>
+      <app-panel-data *ngIf="userRecord && userRecord.keyword.keywords.length > 0">
         <app-panel-element
           *ngFor="let keyword of userRecord.keyword.keywords"
           [visibility]="keyword.visibility.visibility"
@@ -111,7 +111,7 @@
       id="countries-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
-      <app-panel-data>
+      <app-panel-data *ngIf="userRecord && userRecord.countries.addresses.length > 0">
         <app-panel-element
           *ngFor="let address of userRecord.countries.addresses"
           [visibility]="address.visibility.visibility"

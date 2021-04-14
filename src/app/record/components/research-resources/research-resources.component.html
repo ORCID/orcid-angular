@@ -6,57 +6,71 @@
   [total]="userRecord.researchResources.groups.length"
   id="research-resources-panel"
 >
-  <ng-container
-    *ngFor="
-      let researchResource of userRecord.researchResources.groups;
-      index as i
-    "
-  >
-    <app-panel
-      [elements]="researchResource"
-      [type]="'top-bar'"
-      [editable]="false"
-      [openState]="false"
-      class="top-bar"
-      *ngIf="researchResource.researchResources[0] as research"
-      [attr.id]="'panel-' + i"
+  <ng-container *ngIf="userRecord.researchResources.groups.length > 0">
+    <ng-container
+      *ngFor="
+        let researchResource of userRecord.researchResources.groups;
+        index as i
+      "
     >
-      <div header>
-        <b>
-          {{ research.title }}
-        </b>
-      </div>
-      <app-panel-data class="orc-font-body-small">
-        <app-panel-element [hideVisibility]="false">
-          <div class="description-container">
-            <div class="description">
-              <div *ngFor="let host of research.hosts">
-                <span>{{ host.name | titlecase }}</span>
-                <span *ngIf="host.city || host.region || host.country"> (</span>
-                <span *ngIf="host.city">{{ host.city }}</span
-                ><span *ngIf="host.region">, {{ host.region }}</span>
-                <span *ngIf="host.country">, {{ host.country }}</span>
-                <span *ngIf="host.city || host.region || host.country">)</span>
-              </div>
-              <div>
-                <span *ngIf="research.startDate">
-                  <span *ngIf="research.startDate.year">{{
-                    research.startDate.year
-                  }}</span>
-                  <span *ngIf="research.startDate.month"
-                    >-{{ research.startDate.month }}</span
-                  >
-                  <span *ngIf="research.startDate.day"
-                    >-{{ research?.startDate.day }}</span
-                  >
-                  <span> to </span>
-                  <span
-                    [hidden]="research.endDate && research.endDate.year"
-                    i18n="@@researchResources.present"
-                  >
-                    present
+      <app-panel
+        [elements]="researchResource"
+        [type]="'top-bar'"
+        [editable]="false"
+        [openState]="false"
+        class="top-bar"
+        *ngIf="researchResource.researchResources[0] as research"
+        [attr.id]="'panel-' + i"
+      >
+        <div header>
+          <b>
+            {{ research.title }}
+          </b>
+        </div>
+        <app-panel-data class="orc-font-body-small">
+          <app-panel-element [hideVisibility]="false">
+            <div class="description-container">
+              <div class="description">
+                <div *ngFor="let host of research.hosts">
+                  <span>{{ host.name | titlecase }}</span>
+                  <span *ngIf="host.city || host.region || host.country"> (</span>
+                  <span *ngIf="host.city">{{ host.city }}</span
+                  ><span *ngIf="host.region">, {{ host.region }}</span>
+                  <span *ngIf="host.country">, {{ host.country }}</span>
+                  <span *ngIf="host.city || host.region || host.country">)</span>
+                </div>
+                <div>
+                  <span *ngIf="research.startDate">
+                    <span *ngIf="research.startDate.year">{{
+                      research.startDate.year
+                    }}</span>
+                    <span *ngIf="research.startDate.month"
+                      >-{{ research.startDate.month }}</span
+                    >
+                    <span *ngIf="research.startDate.day"
+                      >-{{ research?.startDate.day }}</span
+                    >
+                    <span> to </span>
+                    <span
+                      [hidden]="research.endDate && research.endDate.year"
+                      i18n="@@researchResources.present"
+                    >
+                      present
+                    </span>
+                    <span *ngIf="research.endDate">
+                      <span *ngIf="research.endDate.year">{{
+                        research.endDate.year
+                      }}</span>
+                      <span *ngIf="research.endDate.month"
+                        >-{{ research.endDate.month }}</span
+                      >
+                      <span *ngIf="research.endDate.day"
+                        >-{{ research.endDate.day }}</span
+                      >
+                    </span>
                   </span>
-                  <span *ngIf="research.endDate">
+                  <!--End date-->
+                  <span *ngIf="!research.startDate && research.endDate">
                     <span *ngIf="research.endDate.year">{{
                       research.endDate.year
                     }}</span>
@@ -67,445 +81,443 @@
                       >-{{ research.endDate.day }}</span
                     >
                   </span>
-                </span>
-                <!--End date-->
-                <span *ngIf="!research.startDate && research.endDate">
-                  <span *ngIf="research.endDate.year">{{
-                    research.endDate.year
-                  }}</span>
-                  <span *ngIf="research.endDate.month"
-                    >-{{ research.endDate.month }}</span
-                  >
-                  <span *ngIf="research.endDate.day"
-                    >-{{ research.endDate.day }}</span
-                  >
-                </span>
-              </div>
-              <div
-                *ngFor="
-                  let externalIdentifier of research.externalIdentifiers;
-                  index as i
-                "
-                [attr.id]="'external-identifier-' + i"
-              >
-                <span *ngIf="externalIdentifier.externalIdentifierType">
-                  {{
-                    externalIdentifier.externalIdentifierType.value | uppercase
-                  }}:
-                </span>
-                <a
-                  *ngIf="externalIdentifier.externalIdentifierId"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="{{ externalIdentifier.externalIdentifierId.value }}"
+                </div>
+                <div
+                  *ngFor="
+                    let externalIdentifier of research.externalIdentifiers;
+                    index as i
+                  "
+                  [attr.id]="'external-identifier-' + i"
                 >
-                  {{ externalIdentifier.externalIdentifierId.value }}
+                  <span *ngIf="externalIdentifier.externalIdentifierType">
+                    {{
+                      externalIdentifier.externalIdentifierType.value | uppercase
+                    }}:
+                  </span>
+                  <a
+                    *ngIf="externalIdentifier.externalIdentifierId"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="{{ externalIdentifier.externalIdentifierId.value }}"
+                  >
+                    {{ externalIdentifier.externalIdentifierId.value }}
+                  </a>
+                </div>
+              </div>
+              <div class="buttons-container">
+                <a
+                  *ngIf="!research.showDetails"
+                  (click)="getDetails(research, research.putCode)"
+                  i18n="@@shared.showMoreDetail"
+                  id="show-more-button"
+                >
+                  Show more detail
+                </a>
+                <a
+                  *ngIf="research.showDetails"
+                  (click)="collapse(research)"
+                  i18n="@@shared.showLessDetail"
+                  id="show-less-button"
+                >
+                  Show less detail
                 </a>
               </div>
             </div>
-            <div class="buttons-container">
-              <a
-                *ngIf="!research.showDetails"
-                (click)="getDetails(research, research.putCode)"
-                i18n="@@shared.showMoreDetail"
-                id="show-more-button"
-              >
-                Show more detail
-              </a>
-              <a
-                *ngIf="research.showDetails"
-                (click)="collapse(research)"
-                i18n="@@shared.showLessDetail"
-                id="show-less-button"
-              >
-                Show less detail
-              </a>
-            </div>
-          </div>
-        </app-panel-element>
-        <app-panel-element
-          [hideVisibility]="false"
-          *ngIf="research.showDetails"
-        >
-          <div
-            class="description"
-            *ngIf="getResearchResource(research.putCode) as researchDetail"
+          </app-panel-element>
+          <app-panel-element
+            [hideVisibility]="false"
+            *ngIf="research.showDetails"
           >
-            <div *ngFor="let host of researchDetail.hosts">
-              <ng-container
-                *ngIf="
-                  getOrganizationDisambiguated(
-                    host
-                  ) as organizationDisambiguated
-                "
-              >
-                <h3
-                  class="orc-font-body-small organization-identifiers"
-                  i18n="@@shared.organizationIdentifiers"
-                >
-                  Organization identifiers
-                </h3>
-                <div>
-                  {{ organizationDisambiguated.sourceType | uppercase }}:
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="{{
-                      getLink(
-                        organizationDisambiguated.sourceType,
-                        organizationDisambiguated.sourceId
-                      )
-                    }}"
-                  >
-                    {{ organizationDisambiguated.sourceId }}
-                  </a>
-                </div>
-                <div>
-                  <span>{{ organizationDisambiguated.value | titlecase }}</span>
-                  <span
-                    *ngIf="
-                      organizationDisambiguated.city ||
-                      organizationDisambiguated.region ||
-                      organizationDisambiguated.country
-                    "
-                  >
-                    (</span
-                  >
-                  <span *ngIf="organizationDisambiguated.city">{{
-                    organizationDisambiguated.city
-                  }}</span
-                  ><span *ngIf="organizationDisambiguated.region"
-                    >, {{ organizationDisambiguated.region }}</span
-                  >
-                  <span *ngIf="organizationDisambiguated.country"
-                    >, {{ organizationDisambiguated.country }}</span
-                  >
-                  <span
-                    *ngIf="
-                      organizationDisambiguated.city ||
-                      organizationDisambiguated.region ||
-                      organizationDisambiguated.country
-                    "
-                    >)</span
-                  >
-                </div>
-                <div>
-                  {{ researchDetail.translatedTitle }}
-                </div>
-                <h3 class="orc-font-body-small">
-                  <ng-container i18n="@@shared.otherOrganization">
-                    Other organization identifiers provided by
-                  </ng-container>
-                  {{ organizationDisambiguated.sourceType | titlecase }}
-                </h3>
-                <div
-                  *ngFor="
-                    let orgDisambiguatedExternalIdentifier of organizationDisambiguated.orgDisambiguatedExternalIdentifiers
+            <div
+              class="description"
+              *ngIf="getResearchResource(research.putCode) as researchDetail"
+            >
+              <div *ngFor="let host of researchDetail.hosts">
+                <ng-container
+                  *ngIf="
+                    getOrganizationDisambiguated(
+                      host
+                    ) as organizationDisambiguated
                   "
                 >
-                  {{ orgDisambiguatedExternalIdentifier.identifierType }}:
-                  <span
-                    *ngFor="
-                      let identifier of orgDisambiguatedExternalIdentifier.all
-                    "
+                  <h3
+                    class="orc-font-body-small organization-identifiers"
+                    i18n="@@shared.organizationIdentifiers"
                   >
-                    <ng-container *ngIf="!isUrl(identifier)">
-                      {{ identifier }}
-                    </ng-container>
-                    <ng-container *ngIf="isUrl(identifier)">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="{{ identifier }}"
-                      >
-                        {{ identifier }}
-                      </a>
-                    </ng-container>
-                  </span>
-                </div>
-                <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
-                <div>
-                  <span *ngIf="researchDetail.startDate">
-                    <span *ngIf="researchDetail.startDate.year">{{
-                      researchDetail.startDate.year
-                    }}</span>
-                    <span *ngIf="researchDetail.startDate.month"
-                      >-{{ researchDetail.startDate.month }}</span
-                    >
-                    <span *ngIf="researchDetail.startDate.day"
-                      >-{{ researchDetail.startDate.day }}</span
-                    >
-                  </span>
-                </div>
-                <ng-container *ngIf="researchDetail.lastModified">
-                  <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
-                    Last modified
+                    Organization identifiers
                   </h3>
                   <div>
-                    <span *ngIf="researchDetail.lastModified">
-                      <span *ngIf="researchDetail.lastModified.year">{{
-                        researchDetail.lastModified.year
-                      }}</span>
-                      <span *ngIf="researchDetail.lastModified.month"
-                        >-{{ researchDetail.lastModified.month }}</span
-                      >
-                      <span *ngIf="researchDetail.lastModified.day"
-                        >-{{ researchDetail.lastModified.day }}</span
-                      >
-                    </span>
-                  </div>
-                </ng-container>
-                <ng-container *ngIf="researchDetail.url">
-                  <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
-                  <div>
+                    {{ organizationDisambiguated.sourceType | uppercase }}:
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="{{ researchDetail.url }}"
+                      href="{{
+                        getLink(
+                          organizationDisambiguated.sourceType,
+                          organizationDisambiguated.sourceId
+                        )
+                      }}"
                     >
-                      {{ researchDetail.url }}
+                      {{ organizationDisambiguated.sourceId }}
                     </a>
                   </div>
-                </ng-container>
-              </ng-container>
-              <div *ngFor="let item of researchDetail.items; index as i">
-                <app-panel
-                  [elements]="item"
-                  [type]="'top-bar'"
-                  [editable]="false"
-                  [customControls]="true"
-                  class="top-bar"
-                  [attr.id]="'research-detail-item-' + i"
-                >
-                  <div header>
-                    <div>
-                      <span
-                        class="orc-font-small-print resourceType"
-                        [ngClass]="{
-                          infrastructures:
-                            item.resourceType.toLocaleLowerCase() ===
-                            'infrastructures',
-                          equipment:
-                            item.resourceType.toLocaleLowerCase() ===
-                            'equipment'
-                        }"
-                      >
-                        <span class="dot"></span>
-                        <strong>
-                          {{ item.resourceType | uppercase }}
-                        </strong>
-                      </span>
-                      <strong class="orc-font-body-small">
-                        {{ item.resourceName }}
-                      </strong>
-                    </div>
+                  <div>
+                    <span>{{ organizationDisambiguated.value | titlecase }}</span>
+                    <span
+                      *ngIf="
+                        organizationDisambiguated.city ||
+                        organizationDisambiguated.region ||
+                        organizationDisambiguated.country
+                      "
+                    >
+                      (</span
+                    >
+                    <span *ngIf="organizationDisambiguated.city">{{
+                      organizationDisambiguated.city
+                    }}</span
+                    ><span *ngIf="organizationDisambiguated.region"
+                      >, {{ organizationDisambiguated.region }}</span
+                    >
+                    <span *ngIf="organizationDisambiguated.country"
+                      >, {{ organizationDisambiguated.country }}</span
+                    >
+                    <span
+                      *ngIf="
+                        organizationDisambiguated.city ||
+                        organizationDisambiguated.region ||
+                        organizationDisambiguated.country
+                      "
+                      >)</span
+                    >
                   </div>
-                  <div custom-controls>
-                    <span class="orc-font-body-small show">
-                      <a
-                        *ngIf="!item.showDetails"
-                        (click)="
-                          getOrganizationDisambiguatedDetails(
-                            item,
-                            item.hosts[0].disambiguationSource,
-                            item.hosts[0].orgDisambiguatedId
-                          )
-                        "
-                        i18n="@@shared.showMoreDetail"
-                        id="show-more-item-button"
-                      >
-                        Show more detail
-                      </a>
-                      <a
-                        *ngIf="item.showDetails"
-                        (click)="collapse(item)"
-                        i18n="@@shared.showLessDetail"
-                        id="show-less-item-button"
-                      >
-                        Show less detail
-                      </a>
+                  <div>
+                    {{ researchDetail.translatedTitle }}
+                  </div>
+                  <h3 class="orc-font-body-small">
+                    <ng-container i18n="@@shared.otherOrganization">
+                      Other organization identifiers provided by
+                    </ng-container>
+                    {{ organizationDisambiguated.sourceType | titlecase }}
+                  </h3>
+                  <div
+                    *ngFor="
+                      let orgDisambiguatedExternalIdentifier of organizationDisambiguated.orgDisambiguatedExternalIdentifiers
+                    "
+                  >
+                    {{ orgDisambiguatedExternalIdentifier.identifierType }}:
+                    <span
+                      *ngFor="
+                        let identifier of orgDisambiguatedExternalIdentifier.all
+                      "
+                    >
+                      <ng-container *ngIf="!isUrl(identifier)">
+                        {{ identifier }}
+                      </ng-container>
+                      <ng-container *ngIf="isUrl(identifier)">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="{{ identifier }}"
+                        >
+                          {{ identifier }}
+                        </a>
+                      </ng-container>
                     </span>
                   </div>
-                  <app-panel-data *ngIf="item.showDetails">
-                    <app-panel-element [hideVisibility]="false">
-                      <div class="description">
-                        <ng-container
-                          class="description"
-                          *ngFor="
-                            let itemExternalIdentifier of item.externalIdentifiers
-                          "
+                  <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
+                  <div>
+                    <span *ngIf="researchDetail.startDate">
+                      <span *ngIf="researchDetail.startDate.year">{{
+                        researchDetail.startDate.year
+                      }}</span>
+                      <span *ngIf="researchDetail.startDate.month"
+                        >-{{ researchDetail.startDate.month }}</span
+                      >
+                      <span *ngIf="researchDetail.startDate.day"
+                        >-{{ researchDetail.startDate.day }}</span
+                      >
+                    </span>
+                  </div>
+                  <ng-container *ngIf="researchDetail.lastModified">
+                    <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
+                      Last modified
+                    </h3>
+                    <div>
+                      <span *ngIf="researchDetail.lastModified">
+                        <span *ngIf="researchDetail.lastModified.year">{{
+                          researchDetail.lastModified.year
+                        }}</span>
+                        <span *ngIf="researchDetail.lastModified.month"
+                          >-{{ researchDetail.lastModified.month }}</span
                         >
-                          <div>
-                            {{
-                              itemExternalIdentifier.externalIdentifierType
-                                .value + ':' | uppercase
-                            }}
-                            <ng-container
-                              *ngIf="
-                                !isUrl(
-                                  itemExternalIdentifier.externalIdentifierId
-                                    .value
-                                )
-                              "
-                            >
+                        <span *ngIf="researchDetail.lastModified.day"
+                          >-{{ researchDetail.lastModified.day }}</span
+                        >
+                      </span>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="researchDetail.url">
+                    <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
+                    <div>
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="{{ researchDetail.url }}"
+                      >
+                        {{ researchDetail.url }}
+                      </a>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <div *ngFor="let item of researchDetail.items; index as i">
+                  <app-panel
+                    [elements]="item"
+                    [type]="'top-bar'"
+                    [editable]="false"
+                    [customControls]="true"
+                    class="top-bar"
+                    [attr.id]="'research-detail-item-' + i"
+                  >
+                    <div header>
+                      <div>
+                        <span
+                          class="orc-font-small-print resourceType"
+                          [ngClass]="{
+                            infrastructures:
+                              item.resourceType.toLocaleLowerCase() ===
+                              'infrastructures',
+                            equipment:
+                              item.resourceType.toLocaleLowerCase() ===
+                              'equipment'
+                          }"
+                        >
+                          <span class="dot"></span>
+                          <strong>
+                            {{ item.resourceType | uppercase }}
+                          </strong>
+                        </span>
+                        <strong class="orc-font-body-small">
+                          {{ item.resourceName }}
+                        </strong>
+                      </div>
+                    </div>
+                    <div custom-controls>
+                      <span class="orc-font-body-small show">
+                        <a
+                          *ngIf="!item.showDetails"
+                          (click)="
+                            getOrganizationDisambiguatedDetails(
+                              item,
+                              item.hosts[0].disambiguationSource,
+                              item.hosts[0].orgDisambiguatedId
+                            )
+                          "
+                          i18n="@@shared.showMoreDetail"
+                          id="show-more-item-button"
+                        >
+                          Show more detail
+                        </a>
+                        <a
+                          *ngIf="item.showDetails"
+                          (click)="collapse(item)"
+                          i18n="@@shared.showLessDetail"
+                          id="show-less-item-button"
+                        >
+                          Show less detail
+                        </a>
+                      </span>
+                    </div>
+                    <app-panel-data *ngIf="item.showDetails">
+                      <app-panel-element [hideVisibility]="false">
+                        <div class="description">
+                          <ng-container
+                            class="description"
+                            *ngFor="
+                              let itemExternalIdentifier of item.externalIdentifiers
+                            "
+                          >
+                            <div>
                               {{
-                                itemExternalIdentifier.externalIdentifierId
-                                  .value
+                                itemExternalIdentifier.externalIdentifierType
+                                  .value + ':' | uppercase
                               }}
-                            </ng-container>
-                            <ng-container
-                              *ngIf="
-                                isUrl(
-                                  itemExternalIdentifier.externalIdentifierId
-                                    .value
-                                )
-                              "
-                            >
-                              <a
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href="{{
-                                  itemExternalIdentifier.externalIdentifierId
-                                    .value
-                                }}"
+                              <ng-container
+                                *ngIf="
+                                  !isUrl(
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  )
+                                "
                               >
                                 {{
                                   itemExternalIdentifier.externalIdentifierId
                                     .value
                                 }}
-                              </a>
-                            </ng-container>
-                          </div>
-                        </ng-container>
-                      </div>
-                      <ng-container *ngFor="let itemHost of item.hosts">
-                        <div
-                          class="description"
-                          *ngIf="
-                            getOrganizationDisambiguated(
-                              itemHost
-                            ) as organizationDisambiguatedNested
-                          "
-                        >
-                          {{ organizationDisambiguatedNested.value }}
-                          <h3
-                            class="orc-font-body-small"
-                            i18n="@@shared.organizationIdentifiers"
-                          >
-                            Organization identifiers
-                          </h3>
-                          <div>
-                            {{ organizationDisambiguatedNested.sourceType }}
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href="{{
-                                getLink(
-                                  organizationDisambiguatedNested.sourceType,
-                                  organizationDisambiguatedNested.sourceId
-                                )
-                              }}"
-                            >
-                              {{ organizationDisambiguatedNested.sourceId }}
-                            </a>
-                          </div>
-                          <div>
-                            <span>{{
-                              organizationDisambiguatedNested.value | titlecase
-                            }}</span>
-                            <span
-                              *ngIf="
-                                organizationDisambiguatedNested.city ||
-                                organizationDisambiguatedNested.region ||
-                                itemHost.country
-                              "
-                            >
-                              (</span
-                            >
-                            <span
-                              *ngIf="organizationDisambiguatedNested.city"
-                              >{{ organizationDisambiguatedNested.city }}</span
-                            ><span
-                              *ngIf="organizationDisambiguatedNested.region"
-                              >,
-                              {{ organizationDisambiguatedNested.region }}</span
-                            >
-                            <span
-                              *ngIf="organizationDisambiguatedNested.country"
-                              >,
-                              {{
-                                organizationDisambiguatedNested.country
-                              }}</span
-                            >
-                            <span
-                              *ngIf="
-                                organizationDisambiguatedNested.city ||
-                                organizationDisambiguatedNested.region ||
-                                organizationDisambiguatedNested.country
-                              "
-                              >)</span
-                            >
-                          </div>
-                          <div>
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href="{{ organizationDisambiguatedNested.url }}"
-                            >
-                              {{ organizationDisambiguatedNested.url }}
-                            </a>
-                          </div>
-                          <h3 class="orc-font-body-small">
-                            <ng-container i18n="@@shared.otherOrganization">
-                              Other organization identifiers provided by
-                            </ng-container>
-                            {{
-                              organizationDisambiguatedNested.sourceType
-                                | titlecase
-                            }}
-                          </h3>
-                          <div
-                            *ngFor="
-                              let orgDisambiguatedExternalIdentifierNested of organizationDisambiguatedNested.orgDisambiguatedExternalIdentifiers
-                            "
-                          >
-                            {{
-                              orgDisambiguatedExternalIdentifierNested.identifierType
-                            }}:
-                            <span
-                              *ngFor="
-                                let identifierNested of orgDisambiguatedExternalIdentifierNested.all
-                              "
-                            >
-                              <ng-container *ngIf="!isUrl(identifierNested)">
-                                {{ identifierNested }}
                               </ng-container>
-                              <ng-container *ngIf="isUrl(identifierNested)">
+                              <ng-container
+                                *ngIf="
+                                  isUrl(
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  )
+                                "
+                              >
                                 <a
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  href="{{ identifierNested }}"
+                                  href="{{
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  }}"
                                 >
-                                  {{ identifierNested }}
+                                  {{
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  }}
                                 </a>
                               </ng-container>
-                            </span>
-                          </div>
+                            </div>
+                          </ng-container>
                         </div>
-                      </ng-container>
-                    </app-panel-element>
-                  </app-panel-data>
-                </app-panel>
+                        <ng-container *ngFor="let itemHost of item.hosts">
+                          <div
+                            class="description"
+                            *ngIf="
+                              getOrganizationDisambiguated(
+                                itemHost
+                              ) as organizationDisambiguatedNested
+                            "
+                          >
+                            {{ organizationDisambiguatedNested.value }}
+                            <h3
+                              class="orc-font-body-small"
+                              i18n="@@shared.organizationIdentifiers"
+                            >
+                              Organization identifiers
+                            </h3>
+                            <div>
+                              {{ organizationDisambiguatedNested.sourceType }}
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="{{
+                                  getLink(
+                                    organizationDisambiguatedNested.sourceType,
+                                    organizationDisambiguatedNested.sourceId
+                                  )
+                                }}"
+                              >
+                                {{ organizationDisambiguatedNested.sourceId }}
+                              </a>
+                            </div>
+                            <div>
+                              <span>{{
+                                organizationDisambiguatedNested.value | titlecase
+                              }}</span>
+                              <span
+                                *ngIf="
+                                  organizationDisambiguatedNested.city ||
+                                  organizationDisambiguatedNested.region ||
+                                  itemHost.country
+                                "
+                              >
+                                (</span
+                              >
+                              <span
+                                *ngIf="organizationDisambiguatedNested.city"
+                                >{{ organizationDisambiguatedNested.city }}</span
+                              ><span
+                                *ngIf="organizationDisambiguatedNested.region"
+                                >,
+                                {{ organizationDisambiguatedNested.region }}</span
+                              >
+                              <span
+                                *ngIf="organizationDisambiguatedNested.country"
+                                >,
+                                {{
+                                  organizationDisambiguatedNested.country
+                                }}</span
+                              >
+                              <span
+                                *ngIf="
+                                  organizationDisambiguatedNested.city ||
+                                  organizationDisambiguatedNested.region ||
+                                  organizationDisambiguatedNested.country
+                                "
+                                >)</span
+                              >
+                            </div>
+                            <div>
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="{{ organizationDisambiguatedNested.url }}"
+                              >
+                                {{ organizationDisambiguatedNested.url }}
+                              </a>
+                            </div>
+                            <h3 class="orc-font-body-small">
+                              <ng-container i18n="@@shared.otherOrganization">
+                                Other organization identifiers provided by
+                              </ng-container>
+                              {{
+                                organizationDisambiguatedNested.sourceType
+                                  | titlecase
+                              }}
+                            </h3>
+                            <div
+                              *ngFor="
+                                let orgDisambiguatedExternalIdentifierNested of organizationDisambiguatedNested.orgDisambiguatedExternalIdentifiers
+                              "
+                            >
+                              {{
+                                orgDisambiguatedExternalIdentifierNested.identifierType
+                              }}:
+                              <span
+                                *ngFor="
+                                  let identifierNested of orgDisambiguatedExternalIdentifierNested.all
+                                "
+                              >
+                                <ng-container *ngIf="!isUrl(identifierNested)">
+                                  {{ identifierNested }}
+                                </ng-container>
+                                <ng-container *ngIf="isUrl(identifierNested)">
+                                  <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="{{ identifierNested }}"
+                                  >
+                                    {{ identifierNested }}
+                                  </a>
+                                </ng-container>
+                              </span>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </app-panel-element>
+                    </app-panel-data>
+                  </app-panel>
+                </div>
               </div>
             </div>
-          </div>
-        </app-panel-element>
-      </app-panel-data>
-      <app-panel-source
-        [sourceName]="research.sourceName || research.source"
-        [isPreferred]="isPreferred(research, researchResource)"
-      >
-      </app-panel-source>
-    </app-panel>
+          </app-panel-element>
+        </app-panel-data>
+        <app-panel-source
+          [sourceName]="research.sourceName || research.source"
+          [isPreferred]="isPreferred(research, researchResource)"
+        >
+        </app-panel-source>
+      </app-panel>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="userRecord.researchResources.groups.length === 0">
+    <div class="orc-font-body-small">
+      <p i18n="@@researchResources.description">
+        Connect to trusted organizations to automatically add the specialist resources you use for your research.
+      </p>
+      <a href="" i18n="@@researchResources.learnMore">
+        Learn more about how research resources are added to your ORCID record
+      </a>
+    </div>
   </ng-container>
 </app-panels>

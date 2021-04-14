@@ -22,36 +22,37 @@
     </button>
   </app-modal-footer>
 
-  <div class="container" [formGroup]="emailsForm">
+  <div [formGroup]="emailsForm">
     <div class="row">
-      <div class="col">
+      <div class="col orc-font-small-print">
         <p i18n="@@side-bar.OrcidWorkBest">
           ORCID works best when you have multiple email addresses.
         </p>
         <p>
-          <ng-container i18n="@@side-bar.perOrcid">
-            Per the ORCID
-          </ng-container>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="/content/orcid-terms-use"
-            i18n="@@side-bar.termOfUse"
-            >terms of use</a
-          >
-          <ng-container i18n="@@side-bar.youMayOnly">
-            you may only add email addresses that you have control over. Each
-            time you add an email address we will send you an email asking you
-            to verify it.
-          </ng-container>
+          <i>
+            <ng-container i18n="@@side-bar.perOrcid">
+              Per the
+            </ng-container>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="/content/orcid-terms-use"
+              i18n="@@side-bar.termOfUse"
+              >ORCID terms of use</a
+            >
+            <ng-container i18n="@@side-bar.youMayOnly">
+              you may only add email addresses that you have control over. Each
+              time you add an email address we will send you an email asking you
+              to verify it.
+            </ng-container>
+          </i>
         </p>
       </div>
     </div>
     <div class="row">
       <h3
-        class="col"
+        class="col orc-font-body-small"
         i18n="@@side-bar.primaryEmail"
-        class="orc-font-body-small"
       >
         Primary email address
       </h3>
@@ -173,7 +174,12 @@
     </div>
 
     <div class="row">
-      <h3 class="col" i18n="@@side-bar.otherEmails">Other email address</h3>
+      <h3
+        class="orc-font-body-small"
+        i18n="@@side-bar.otherEmails"
+      >
+        Other email address
+      </h3>
     </div>
 
     <!-- ADDITIONAL EMAILS -->
@@ -187,7 +193,7 @@
         <div class="col l12 m8 s4 email-input-container">
           <mat-form-field
             appearance="outline"
-            class="mat-form-field-min verify-icon"
+            class="mat-form-field-min verify-icon additional-email"
             [ngClass]="{
               'email-activated': showEmailAsVerified(email.putCode)
             }"
@@ -274,7 +280,7 @@
               mat-icon-button
               class="delete-button"
             >
-              <mat-icon class="material-icons-outlined huge-material-icon"
+              <mat-icon class="material-icons-outlined extra-large-material-icon"
                 >delete</mat-icon
               >
             </button>
@@ -300,15 +306,23 @@
         </app-alert-message>
       </div>
     </ng-container>
+    <ng-container *ngIf="emails.length === 1">
+      <p
+        class="orc-font-body-small"
+        i18n="@@side-bar.noOtherEmails"
+      >
+        You haven’t added any other email addresses yet.
+      </p>
+    </ng-container>
 
-    <div class="row">
+    <div class="row orc-font-body-small">
       <a class="col add-more" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container *ngIf="emails.length === 0" i18n="@@side-bar.otherEmail">
+        <ng-container *ngIf="emails.length === 1" i18n="@@side-bar.otherEmail">
           Add other email address
         </ng-container>
         <ng-container
-          *ngIf="emails.length !== 0"
+          *ngIf="emails.length > 1"
           i18n="@@side-bar.anotherEmail"
         >
           Add another email address
