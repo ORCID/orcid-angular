@@ -29,8 +29,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('RECORD ON AFFILIATIONS', this.isPublicRecord)
-
     if (!this.isPublicRecord) {
       this.getPrivateRecord()
     }

@@ -38,6 +38,7 @@ import { RecordResearchResourceService } from '../record-research-resource/recor
 import { ResearchResources } from '../../types/record-research-resources.endpoint'
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { RecordPersonService } from '../record-person/record-person.service'
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +62,8 @@ export class RecordService {
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
     private _recordPeerReviewService: RecordPeerReviewService,
     private _recordResearchResourceService: RecordResearchResourceService,
-    private _recordWorkService: RecordWorksService
+    private _recordWorkService: RecordWorksService,
+    private _recordPerson: RecordPersonService
   ) {}
 
   headers = new HttpHeaders({
@@ -74,11 +76,11 @@ export class RecordService {
       forceReload: false,
     }
   ): Observable<UserRecord> {
-    if (!this.recordInitialized) {
+    if (!this.recordInitialized || options.forceReload) {
       this.recordInitialized = true
 
       combineLatest([
-        this.getPerson(options),
+        this._recordPerson.getPerson(options),
         this._recordEmailsService.getEmails(options),
         this._recordOtherNamesService.getOtherNames(options),
         this._recordCountryService.getAddresses(options),
@@ -139,39 +141,6 @@ export class RecordService {
     return this.recordSubject$.pipe(
       tap((session) => (environment.debugger ? console.info(session) : null))
     )
-  }
-
-  getPerson(options: {
-    forceReload?: boolean
-    publicRecordId?: string
-    privateRecordId?: string
-  }): Observable<Person> {
-    console.log('Get person')
-    console.log(options)
-
-    return this._http
-      .get<Person>(
-        environment.API_WEB +
-          `${options.publicRecordId || options.privateRecordId}/person.json`
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-      .pipe(
-        tap((data) => {
-          // Changes publicGroupedAddresses keys for full country names
-          if (data.publicGroupedAddresses) {
-            Object.keys(data.publicGroupedAddresses).map((key) => {
-              if (data.countryNames && data.countryNames[key]) {
-                data.publicGroupedAddresses[data.countryNames[key]] =
-                  data.publicGroupedAddresses[key]
-                delete data.publicGroupedAddresses[key]
-              }
-            })
-          }
-        })
-      )
   }
 
   getExternalIdentifier(): Observable<ExternalIdentifier> {

@@ -5,6 +5,7 @@ import {
   MonthDayYearDate,
   OtherName,
   ResearcherUrl,
+  SourceWithAssertionOrigin,
   Value,
   Visibility,
   VisibilityStrings,
@@ -35,8 +36,20 @@ interface PublicGroupedEmails {
   [x: string]: Email
 }
 
-interface PublicGroupedPersonExternalIdentifiers {
-  [x: string]: any // TODO: DEFINE
+export interface PublicGroupedPersonExternalIdentifiers {
+  [x: string]: {
+    type: string
+    value: string
+    relationship: string
+    url: Value
+    source: SourceWithAssertionOrigin
+    lastModifiedDate: { value: number }
+    createdDate: { value: number }
+    putCode: number
+    visibility: string
+    path?: any
+    displayIndex: number
+  }
 }
 
 export interface Person {

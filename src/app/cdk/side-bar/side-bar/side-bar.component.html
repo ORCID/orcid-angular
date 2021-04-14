@@ -1,14 +1,23 @@
-<div *ngIf="userSession">
+<div>
   <app-side-bar-id
+    *ngIf="!isPublicRecord"
     [ngClass]="{
       mobile: !platform.columns12
     }"
     [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
   ></app-side-bar-id>
 
+  <app-side-bar-id
+    *ngIf="isPublicRecord"
+    [ngClass]="{
+      mobile: !platform.columns12
+    }"
+    [id]="isPublicRecord"
+  ></app-side-bar-id>
+
   <ng-container *ngIf="!onlyOrcidId">
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.emails"
       [elements]="userRecord.emails.emails"
       [editModalComponent]="modalEmailComponent"
       [type]="'side-bar'"
@@ -27,7 +36,7 @@
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.website"
       [elements]="userRecord.website.websites"
       [editModalComponent]="modalWebsitesComponent"
       [type]="'side-bar'"
@@ -56,7 +65,9 @@
 
     <app-panel
       *ngIf="
-        userRecord && userRecord.externalIdentifier.externalIdentifiers.length
+        userRecord &&
+        userRecord.externalIdentifier &&
+        userRecord.externalIdentifier.externalIdentifiers.length
       "
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
       [editModalComponent]="modalPersonalIdentifiers"
@@ -86,7 +97,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.keyword"
       [elements]="userRecord.keyword.keywords"
       [editModalComponent]="modalKeywordComponent"
       [type]="'side-bar'"
@@ -103,7 +114,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.countries"
       [elements]="userRecord.countries.addresses"
       [editModalComponent]="modalCountryComponent"
       [type]="'side-bar'"

@@ -16,6 +16,16 @@ export interface Source {
   sourceName: SourceName
 }
 
+export interface SourceWithAssertionOrigin {
+  sourceOrcid?: any
+  sourceClientId: SourceOrcid
+  sourceName: SourceName
+  assertionOriginOrcid?: any
+  assertionOriginClientId?: any
+  assertionOriginName?: any
+}
+
+
 export interface Keyword {
   content: string
   source: Source
@@ -73,10 +83,6 @@ export interface SourceOrcid {
   uri: string
   path: string
   host: string
-}
-
-export interface SourceName {
-  content: string
 }
 
 export interface Email {
