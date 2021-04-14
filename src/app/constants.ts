@@ -1,4 +1,4 @@
-import { Address } from './types'
+import { Address, MonthDayYearDate } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
@@ -165,4 +165,25 @@ export function getDate(address: Address) {
     )
   }
   return date
+}
+
+export function DateToMonthDayYearDateAdapter(
+  value: number
+): MonthDayYearDate | undefined {
+  if (value) {
+    const date = new Date(value)
+    return {
+      month: date.getMonth().toString(),
+      day: date.getDay().toString(),
+      year: date.getFullYear().toString(),
+    }
+  } else {
+    return undefined
+  }
+}
+
+export function ArrayFlat(arr){
+  return arr.reduce(function (flat, toFlatten) {
+    return flat.concat(Array.isArray(toFlatten) ? ArrayFlat(toFlatten) : toFlatten);
+  }, []);
 }

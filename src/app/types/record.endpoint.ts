@@ -37,19 +37,21 @@ interface PublicGroupedEmails {
 }
 
 export interface PublicGroupedPersonExternalIdentifiers {
-  [x: string]: {
-    type: string
-    value: string
-    relationship: string
-    url: Value
-    source: SourceWithAssertionOrigin
-    lastModifiedDate: { value: number }
-    createdDate: { value: number }
-    putCode: number
-    visibility: string
-    path?: any
-    displayIndex: number
-  }
+  [x: string]: [
+    {
+      type: string
+      value: string
+      relationship: string
+      url: Value
+      source: SourceWithAssertionOrigin
+      lastModifiedDate: { value: number }
+      createdDate: { value: number }
+      putCode: number
+      visibility: string
+      path?: any
+      displayIndex: number
+    }
+  ]
 }
 
 export interface Person {

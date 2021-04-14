@@ -2,8 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
-import { VISIBILITY_OPTIONS } from 'src/app/constants'
-import { PublicGroupedPersonExternalIdentifiers } from 'src/app/types'
+import { ArrayFlat, DateToMonthDayYearDateAdapter } from 'src/app/constants'
+import {
+  Assertion,
+  PublicGroupedPersonExternalIdentifiers,
+} from 'src/app/types'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
@@ -105,43 +108,34 @@ export class RecordPersonIdentifierService {
   ): PersonIdentifierEndpoint {
     return {
       errors: [],
-      externalIdentifiers: [
-        {
-          visibility: {
-            errors: [],
-            required: true,
-            getRequiredMessage: null,
-            visibility: 'PUBLIC',
-          },
-          errors: [],
-          commonName: 'API',
-          reference: '88',
-          url: 'http://www.orcid.org/88',
-          source: '0000-0003-1084-4015',
-          sourceName: "Cat's app for testing",
-          displayIndex: 2,
-          putCode: '1460',
-          createdDate: {
-            errors: [],
-            month: '10',
-            day: '10',
-            year: '2017',
-            required: true,
-            getRequiredMessage: null,
-          },
-          lastModified: {
-            errors: [],
-            month: '4',
-            day: '14',
-            year: '2021',
-            required: true,
-            getRequiredMessage: null,
-          },
-          assertionOriginOrcid: null,
-          assertionOriginClientId: null,
-          assertionOriginName: null,
-        },
-      ],
+      externalIdentifiers: ArrayFlat(
+        Object.keys(personIdentifiers).map((i) => {
+          return personIdentifiers[i].map((personIdentifier) => {
+            return {
+              visibility: {
+                visibility: 'PUBLIC',
+              },
+              errors: [],
+              commonName: personIdentifier.type,
+              reference: personIdentifier.value,
+              url: personIdentifier?.url?.value,
+              source: personIdentifier?.source?.sourceClientId?.path,
+              sourceName: personIdentifier?.source?.sourceName?.content,
+              displayIndex: personIdentifier.displayIndex,
+              putCode: personIdentifier.putCode,
+              createdDate: DateToMonthDayYearDateAdapter(
+                personIdentifier?.createdDate?.value
+              ),
+              lastModified: DateToMonthDayYearDateAdapter(
+                personIdentifier?.lastModifiedDate?.value
+              ),
+              assertionOriginOrcid: null,
+              assertionOriginClientId: null,
+              assertionOriginName: null,
+            }
+          })
+        })
+      ),
       visibility: { visibility: 'PUBLIC' },
     }
   }

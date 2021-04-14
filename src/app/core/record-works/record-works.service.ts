@@ -54,8 +54,7 @@ export class RecordWorksService {
     //TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
-    }
-    if (options.privateRecordId) {
+    } else {
       return this.getWorksData(0, 'date', 'false').pipe(
         tap((data) => {
           this.lastEmitedValue = data
@@ -63,8 +62,6 @@ export class RecordWorksService {
         }),
         switchMap((data) => this.workSubject.asObservable())
       )
-    } else if (options.publicRecordId) {
-      return of({})
     }
   }
 

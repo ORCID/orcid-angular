@@ -27,11 +27,7 @@ export class RecordPersonService {
     if (options?.publicRecordId) {
       return this.getPublicRecordPerson(options)
     } else {
-      return this.getPrivateRecordPerson(options).pipe(
-        tap((value) => {
-          console.log('the value ', value)
-        })
-      )
+      return this.getPrivateRecordPerson(options)
     }
   }
 
