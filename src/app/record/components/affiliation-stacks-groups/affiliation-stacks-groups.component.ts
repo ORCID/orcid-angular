@@ -69,8 +69,10 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   }
 
   getAffiliationType(type: string): AffiliationUIGroup {
-    return this.profileAffiliationUiGroups.filter((affiliation) => {
-      return affiliation.type === type
-    })[0]
+    if (this.profileAffiliationUiGroups) {
+      return this.profileAffiliationUiGroups.filter((affiliation) => {
+        return affiliation.type === type
+      })[0]
+    }
   }
 }
