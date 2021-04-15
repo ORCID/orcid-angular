@@ -19,6 +19,8 @@ export class WorkStackGroupComponent implements OnInit {
   userSession: UserSession
   userRecord: UserRecord
 
+  works = $localize`:@@shared.works:Works`
+
   constructor(
     private _userSession: UserService,
     private _record: RecordService

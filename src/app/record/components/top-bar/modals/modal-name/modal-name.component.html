@@ -261,7 +261,8 @@
               (click)="deleteOtherName(otherName.putCode)"
               mat-icon-button
             >
-              <mat-icon class="material-icons-outlined large-material-icon"
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
                 >delete
               </mat-icon>
             </button>
@@ -271,7 +272,7 @@
     </ng-container>
     <div class="row">
       <a id="add-link" class="col add-more no-gutters" (click)="addOtherName()">
-        <mat-icon class="large-material-icon">add_circle</mat-icon>
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
           <ng-container
             *ngIf="otherNames.length === 0"

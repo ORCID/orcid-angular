@@ -11,8 +11,16 @@ app-panel {
     margin-top: 0;
   }
 
-  .other-names {
-    margin-bottom: 0;
+  p .published-name {
+    margin-bottom: 18px;
+  }
+
+  .other-names-container {
+    margin-top: 18px;
+
+    .other-names {
+      margin-bottom: 0;
+    }
   }
 }
 

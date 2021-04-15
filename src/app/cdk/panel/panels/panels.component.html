@@ -16,14 +16,16 @@
       </button>
 
       <div class="text-container">
-        {{ title }}
+        <strong class="orc-font-body-large">
+          {{ title }}
+        </strong>
         <ng-container *ngIf="type === 'activities'">
-          <ng-container *ngIf="currentAmount"
-            >({{ currentAmount }} of {{ total }})</ng-container
+          <span *ngIf="currentAmount"
+            >({{ currentAmount }} of {{ total }})</span
           >
-          <ng-container *ngIf="!currentAmount">(0)</ng-container>
+          <span *ngIf="!currentAmount">(0)</span>
         </ng-container>
-        <ng-container
+        <span
           *ngIf="
             type === 'peer-review' ||
             type === 'research-resources' ||
@@ -31,7 +33,7 @@
           "
         >
           ({{ total }})
-        </ng-container>
+        </span>
       </div>
     </div>
 

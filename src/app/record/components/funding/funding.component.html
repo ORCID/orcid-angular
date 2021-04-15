@@ -2,12 +2,12 @@
 
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data
-  class="defaul-data-loaded orc-font-body-small"
+  class="default-data-loaded orc-font-body-small"
   [borderBottom]="true"
 >
   <div>
     <div class="general-data">
-      <ng-container *ngIf="funding.startDate.year"
+      <ng-container *ngIf="funding && funding.startDate"
         >{{ funding.startDate | monthDayYearDateToString }}
         <ng-container> to </ng-container>
         <ng-container *ngIf="funding.endDate">{{
@@ -30,9 +30,9 @@
       </div>
     </div>
     <div *ngIf="funding.url && funding.url.value">
-      <a href="{{ funding.url.value }}" target="_blank">{{
-        funding.url.value
-      }}</a>
+      <a class="underline" href="{{ funding.url.value }}" target="_blank">
+        {{ funding.url.value }}
+      </a>
     </div>
     <div
       *ngFor="let extId of funding.externalIdentifiers"
@@ -43,7 +43,12 @@
         *ngIf="extId.url && extId.url.value; then urlExtId; else plainExtId"
       ></div>
       <ng-template #urlExtId>
-        <a href="{{ extId.url.value }}" target="_blank">
+        <a
+          class="underline"
+          href="{{ extId.url.value }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {{ extId.externalIdentifierId.value }}
         </a>
       </ng-template>
@@ -55,12 +60,14 @@
 
   <div align-end>
     <a
+      class="underline"
       (click)="toggleDetails.next(funding)"
       *ngIf="!panelDetailsState.state"
       i18n="@@shared.showMoreDetail"
       >Show more detail</a
     >
     <a
+      class="underline"
       (click)="toggleDetails.next(funding)"
       *ngIf="panelDetailsState.state"
       i18n="@@shared.showLessDetail"
