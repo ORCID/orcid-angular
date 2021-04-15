@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
@@ -13,6 +13,7 @@ import { AffiliationsSortService } from '../record-affiliations-sort/record-affi
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
 import { cloneDeep } from 'lodash'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,16 @@ export class RecordAffiliationService {
     private _affiliationsSortService: AffiliationsSortService
   ) {}
 
-  getAffiliations(): Observable<AffiliationUIGroup[]> {
+  getAffiliations(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<AffiliationUIGroup[]> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
+
     if (!this.$affiliations) {
       this.$affiliations = new ReplaySubject(1)
       this.getGroupAndSortAffiliations()

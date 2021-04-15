@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -19,6 +19,7 @@ import { RecordService } from '../../../core/record/record.service'
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
+  @Input() isPublicRecord: string
 
   userSession: {
     userInfo: UserInfo
@@ -52,6 +53,14 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!this.isPublicRecord) {
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
+    }
+  }
+
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -61,7 +70,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
+          .getRecord({
+            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord

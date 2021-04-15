@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -18,6 +18,7 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
+  @Input() isPublicRecord: any = false
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession
@@ -29,6 +30,14 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.isPublicRecord) {
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
+    }
+  }
+
+  private getRecord() {
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -38,7 +47,9 @@ export class AffiliationStacksGroupsComponent implements OnInit {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
+          .getRecord({
+            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord

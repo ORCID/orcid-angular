@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { switchMap, retry, catchError, map, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -45,14 +46,23 @@ export class RecordWorksService {
    *
    * @param id user Orcid id
    */
-  getWorks(orcidId?: string) {
-    return this.getWorksData(0, 'date', 'false', orcidId).pipe(
-      tap((data) => {
-        this.lastEmitedValue = data
-        this.workSubject.next(data)
-      }),
-      switchMap((data) => this.workSubject.asObservable())
-    )
+  getWorks(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ) {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    } else {
+      return this.getWorksData(0, 'date', 'false').pipe(
+        tap((data) => {
+          this.lastEmitedValue = data
+          this.workSubject.next(data)
+        }),
+        switchMap((data) => this.workSubject.asObservable())
+      )
+    }
   }
 
   /**

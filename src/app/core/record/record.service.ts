@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { combineLatest, Observable, ReplaySubject } from 'rxjs'
+import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
@@ -11,7 +11,7 @@ import {
   Preferences,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -38,6 +38,7 @@ import { RecordResearchResourceService } from '../record-research-resource/recor
 import { ResearchResources } from '../../types/record-research-resources.endpoint'
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { RecordPersonService } from '../record-person/record-person.service'
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +62,8 @@ export class RecordService {
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
     private _recordPeerReviewService: RecordPeerReviewService,
     private _recordResearchResourceService: RecordResearchResourceService,
-    private _recordWorkService: RecordWorksService
+    private _recordWorkService: RecordWorksService,
+    private _recordPerson: RecordPersonService
   ) {}
 
   headers = new HttpHeaders({
@@ -69,26 +71,40 @@ export class RecordService {
     'Content-Type': 'application/json',
   })
 
-  getRecord(id): Observable<UserRecord> {
-    if (!this.recordInitialized) {
+  /**
+   * @param options:
+   * - use `forceReload` to force all server calls.
+   * - use `publicRecordId` to load a public record or leave the `publicRecordId` undefined
+   * to load the current user private record.
+   *
+   * Note: sending the `privateRecordId` is deprecated
+   *
+   * @returns And subject with all the require data from private or public orcid record
+   */
+  getRecord(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<UserRecord> {
+    if (!this.recordInitialized || options.forceReload) {
       this.recordInitialized = true
 
       combineLatest([
-        this.getPerson(id),
-        this._recordEmailsService.getEmails(),
-        this._recordOtherNamesService.getOtherNames(),
-        this._recordCountryService.getAddresses(),
-        this._recordKeywordService.getKeywords(),
-        this._recordWebsitesService.getWebsites(),
-        this._recordPersonalIdentifier.getPersonalIdentifiers(),
-        this._recordNamesService.getNames(),
-        this._recordBiographyService.getBiography(),
-        this._recordAffiliations.getAffiliations(),
-        this._recordFundings.getFundings(),
-        this.getPreferences(),
-        this._recordPeerReviewService.getPeerReviewGroups(true),
-        this._recordResearchResourceService.getResearchResourcePage(true, true),
-        this._recordWorkService.getWorks(),
+        this._recordPerson.getPerson(options),
+        this._recordEmailsService.getEmails(options),
+        this._recordOtherNamesService.getOtherNames(options),
+        this._recordCountryService.getAddresses(options),
+        this._recordKeywordService.getKeywords(options),
+        this._recordWebsitesService.getWebsites(options),
+        this._recordPersonalIdentifier.getPersonalIdentifiers(options),
+        this._recordNamesService.getNames(options),
+        this._recordBiographyService.getBiography(options),
+        this._recordAffiliations.getAffiliations(options),
+        this._recordFundings.getFundings(options),
+        this.getPreferences(options),
+        this._recordPeerReviewService.getPeerReviewGroups(options),
+        this._recordResearchResourceService.getResearchResourcePage(options),
+        this._recordWorkService.getWorks(options),
       ])
         .pipe(
           tap(
@@ -135,29 +151,6 @@ export class RecordService {
     return this.recordSubject$.pipe(
       tap((session) => (environment.debugger ? console.info(session) : null))
     )
-  }
-
-  getPerson(id): Observable<Person> {
-    return this._http
-      .get<Person>(environment.API_WEB + `${id}/person.json`)
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-      .pipe(
-        tap((data) => {
-          // Changes publicGroupedAddresses keys for full country names
-          if (data.publicGroupedAddresses) {
-            Object.keys(data.publicGroupedAddresses).map((key) => {
-              if (data.countryNames && data.countryNames[key]) {
-                data.publicGroupedAddresses[data.countryNames[key]] =
-                  data.publicGroupedAddresses[key]
-                delete data.publicGroupedAddresses[key]
-              }
-            })
-          }
-        })
-      )
   }
 
   getExternalIdentifier(): Observable<ExternalIdentifier> {
@@ -212,7 +205,15 @@ export class RecordService {
       )
   }
 
-  getPreferences(): Observable<Preferences> {
+  getPreferences(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<Preferences> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
     return this._http
       .get<Preferences>(
         environment.API_WEB + `account/preferences.json`,

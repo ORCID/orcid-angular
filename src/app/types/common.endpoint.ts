@@ -16,6 +16,15 @@ export interface Source {
   sourceName: SourceName
 }
 
+export interface SourceWithAssertionOrigin {
+  sourceOrcid?: any
+  sourceClientId: SourceOrcid
+  sourceName: SourceName
+  assertionOriginOrcid?: any
+  assertionOriginClientId?: any
+  assertionOriginName?: any
+}
+
 export interface Keyword {
   content: string
   source: Source
@@ -75,10 +84,6 @@ export interface SourceOrcid {
   host: string
 }
 
-export interface SourceName {
-  content: string
-}
-
 export interface Email {
   email: string
   source: Source
@@ -92,12 +97,12 @@ export interface Email {
 }
 
 export interface MonthDayYearDate {
-  errors: any[] // TODO define object
+  errors?: any[] // TODO define object
   month: string
   day: string
   year: string
-  required: boolean
-  getRequiredMessage: any
+  required?: boolean
+  getRequiredMessage?: any
 }
 
 export interface Value {

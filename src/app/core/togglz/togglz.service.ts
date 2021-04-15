@@ -47,10 +47,22 @@ export class TogglzService {
         const plainHtml = value
         const parser = new DOMParser()
         const htmlElement = parser.parseFromString(plainHtml, 'text/html')
-        const closableElements = htmlElement.querySelectorAll('div.closable')
-        const nonClosableElements = htmlElement.querySelectorAll('div.regular')
+        const closableElements = this.nodelistToArray(
+          htmlElement.querySelectorAll('div.closable')
+        )
+        const nonClosableElements = this.nodelistToArray(
+          htmlElement.querySelectorAll('div.regular')
+        )
         return { plainHtml, closableElements, nonClosableElements }
       })
     )
+  }
+
+  nodelistToArray(nodes: NodeListOf<Element>): Element[] {
+    const list = []
+    nodes.forEach((element) => {
+      list.push(element)
+    })
+    return list
   }
 }

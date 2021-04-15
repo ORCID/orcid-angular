@@ -19,7 +19,7 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
   preserveWhitespaces: true,
 })
 export class PeerReviewsComponent implements OnInit {
-  @Input() publicView: any = false
+  @Input() isPublicRecord: string
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -55,6 +55,14 @@ export class PeerReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.isPublicRecord) {
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
+    }
+  }
+
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -64,7 +72,9 @@ export class PeerReviewsComponent implements OnInit {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
+          .getRecord({
+            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
@@ -73,7 +83,7 @@ export class PeerReviewsComponent implements OnInit {
   }
 
   getDetails(peerReview: PeerReview, putCode: number): void {
-    if (this.publicView) {
+    if (this.isPublicRecord) {
       this._recordPeerReviewService
         .getPublicPeerReviewById(
           this.userSession.userInfo.EFFECTIVE_USER_ORCID,
@@ -86,7 +96,7 @@ export class PeerReviewsComponent implements OnInit {
             peerReview.showDetails = true
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     } else {
@@ -99,7 +109,7 @@ export class PeerReviewsComponent implements OnInit {
             peerReview.showDetails = true
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     }

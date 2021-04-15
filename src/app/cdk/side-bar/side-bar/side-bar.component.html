@@ -3,12 +3,13 @@
     [ngClass]="{
       mobile: !platform.columns12
     }"
-    [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
+    [id]="isPublicRecord || userSession.userInfo.EFFECTIVE_USER_ORCID"
   ></app-side-bar-id>
 
   <ng-container *ngIf="!onlyOrcidId">
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.emails"
+      [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.emails.emails"
       [editModalComponent]="modalEmailComponent"
       [type]="'side-bar'"
@@ -19,7 +20,7 @@
       <app-panel-data *ngIf="userRecord?.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails"
-          [visibility]="email.visibility"
+          [visibility]="!isPublicRecord && email.visibility"
           [bold]="email.primary"
           >{{ email.value }}</app-panel-element
         >
@@ -27,9 +28,10 @@
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.website"
       [elements]="userRecord.website.websites"
       [editModalComponent]="modalWebsitesComponent"
+      [isPublicRecord]="isPublicRecord"
       [type]="'side-bar'"
       class="side-bar"
       id="websites-panel"
@@ -40,7 +42,7 @@
       <app-panel-data *ngIf="userRecord?.website.websites.length > 0">
         <app-panel-element
           *ngFor="let website of userRecord.website.websites"
-          [visibility]="website.visibility.visibility"
+          [visibility]="!isPublicRecord && website.visibility.visibility"
           ><a
             [href]="website.url.value"
             [ngClass]="{
@@ -49,18 +51,20 @@
             target="_blank"
             rel="me nofollow noopener noreferrer"
             >{{ getWebsite(website) }}</a
-          ></app-panel-element
-        >
+          >
+        </app-panel-element>
       </app-panel-data>
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord?.externalIdentifier.externalIdentifiers.length"
+      *ngIf="userRecord?.externalIdentifier?.externalIdentifiers.length"
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
       [editModalComponent]="modalPersonalIdentifiers"
+      [isPublicRecord]="isPublicRecord"
       [type]="'side-bar'"
       class="side-bar"
       id="personal-identifiers-panel"
+      [(openState)]="externalIdentifierOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
       <app-panel-data
@@ -71,7 +75,9 @@
             let externalIdentifier of userRecord.externalIdentifier
               .externalIdentifiers
           "
-          [visibility]="externalIdentifier.visibility.visibility"
+          [visibility]="
+            !isPublicRecord && externalIdentifier.visibility.visibility
+          "
           ><a
             [href]="externalIdentifier.url"
             target="_blank"
@@ -81,14 +87,22 @@
                 ': ' +
                 externalIdentifier.reference
             }}</a
-          ></app-panel-element
-        >
+          >
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            *ngIf="externalIdentifierOpenState"
+            [name]="externalIdentifier.sourceName || externalIdentifier.source"
+            [date]="externalIdentifier.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.keyword"
       [elements]="userRecord.keyword.keywords"
       [editModalComponent]="modalKeywordComponent"
+      [isPublicRecord]="isPublicRecord"
       [type]="'side-bar'"
       class="side-bar"
       id="keywords-panel"
@@ -97,15 +111,16 @@
       <app-panel-data *ngIf="userRecord?.keyword.keywords.length > 0">
         <app-panel-element
           *ngFor="let keyword of userRecord.keyword.keywords"
-          [visibility]="keyword.visibility.visibility"
+          [visibility]="!isPublicRecord && keyword.visibility.visibility"
           >{{ getKeyword(keyword) }}</app-panel-element
         >
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord"
+      *ngIf="userRecord && userRecord.countries"
       [elements]="userRecord.countries.addresses"
       [editModalComponent]="modalCountryComponent"
+      [isPublicRecord]="isPublicRecord"
       [type]="'side-bar'"
       class="side-bar"
       id="countries-panel"
@@ -114,7 +129,7 @@
       <app-panel-data *ngIf="userRecord?.countries.addresses.length > 0">
         <app-panel-element
           *ngFor="let address of userRecord.countries.addresses"
-          [visibility]="address.visibility.visibility"
+          [visibility]="!isPublicRecord && address.visibility.visibility"
           >{{ address.countryName }}</app-panel-element
         >
       </app-panel-data>

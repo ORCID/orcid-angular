@@ -13,6 +13,7 @@ import { PanelSourceComponent } from './panel-source/panel-source.component'
 import { A11yLinkModule } from '../a11y-link/a11y-link.module'
 import { PanelsComponent } from './panels/panels.component'
 import { PanelDataLineComponent } from './panel-data-line/panel-data-line.component'
+import { PanelElementSourceComponent } from './panel-element-source/panel-element-source.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PanelDataLineComponent } from './panel-data-line/panel-data-line.compon
     PanelSourceComponent,
     PanelsComponent,
     PanelDataLineComponent,
+    PanelElementSourceComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { PanelDataLineComponent } from './panel-data-line/panel-data-line.compon
     A11yLinkModule,
     PanelsComponent,
     PanelDataLineComponent,
+    PanelElementSourceComponent,
   ],
 })
 export class PanelModule {}

@@ -20,7 +20,7 @@ export interface PeerReview extends AssertionBase {
   subjectType: any
   subjectUrl: string
   translatedSubjectName: string
-  type: Value | string
+  type: Value
   name: string
   peerReviewDuplicateGroups: PeerReviewDuplicateGroup[]
   showDetails: boolean

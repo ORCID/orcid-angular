@@ -1,4 +1,9 @@
-import { Person, Preferences, PersonIdentifierEndpoint } from '.'
+import {
+  Person,
+  Preferences,
+  PersonIdentifierEndpoint,
+  MonthDayYearDate,
+} from '.'
 import { OtherNamesEndPoint } from './record-other-names.endpoint'
 import { KeywordEndPoint } from './record-keyword.endpoint'
 import { NamesEndPoint } from './record-name.endpoint'
@@ -28,4 +33,17 @@ export interface UserRecord {
   peerReviews: PeerReview[]
   researchResources: ResearchResources
   works: WorksEndpoint
+  publicMetadata?: {
+    noRobots: boolean
+    noIndex: boolean
+    lastModifiedTime: MonthDayYearDate
+  }
+}
+
+export interface UserRecordOptions {
+  forceReload?: boolean
+  publicRecordId?: string
+  privateRecordId?: string
+  sortAsc?: boolean
+  sort?: boolean
 }

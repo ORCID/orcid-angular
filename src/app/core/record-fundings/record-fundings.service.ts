@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { environment } from 'src/environments/environment'
@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment'
 import { FundingsSortService } from '../record-fundings-sort/record-fundings-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { cloneDeep } from 'lodash'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,16 @@ export class RecordFundingsService {
     private _fundingsSortService: FundingsSortService
   ) {}
 
-  getFundings(): Observable<FundingGroup[]> {
+  getFundings(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<FundingGroup[]> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
+
     if (!this.$fundings) {
       this.$fundings = new ReplaySubject(1)
       this.getAndSortFundings()

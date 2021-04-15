@@ -29,7 +29,7 @@ import { URL_REGEXP } from '../../../constants'
   ],
 })
 export class ResearchResourcesComponent implements OnInit {
-  @Input() publicView: any = false
+  @Input() isPublicRecord: string
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -71,6 +71,14 @@ export class ResearchResourcesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.isPublicRecord) {
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
+    }
+  }
+
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -80,7 +88,9 @@ export class ResearchResourcesComponent implements OnInit {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
+          .getRecord({
+            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
@@ -89,10 +99,10 @@ export class ResearchResourcesComponent implements OnInit {
   }
 
   getDetails(researchResource: ResearchResource, putCode: number): void {
-    if (this.publicView) {
+    if (this.isPublicRecord) {
       this._recordResearchResourceService
         .getPublicResearchResourceById(
-          this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          { privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID },
           putCode
         )
         .pipe(first())
@@ -105,7 +115,7 @@ export class ResearchResourcesComponent implements OnInit {
             researchResource.showDetails = true
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     } else {
@@ -129,7 +139,7 @@ export class ResearchResourcesComponent implements OnInit {
             })
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     }

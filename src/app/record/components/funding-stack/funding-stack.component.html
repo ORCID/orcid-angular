@@ -33,7 +33,7 @@
       [sourceName]="funding.sourceName || funding.source"
       [stackLength]="fundingStack.fundings.length"
       [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard($event)"
+      (makePrimary)="makePrimaryCard(funding)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack
       "

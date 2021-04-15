@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap } from 'rxjs/operators'
 import {
   CountriesEndpoint,
   RecordCountryCodesEndpoint,
 } from 'src/app/types/record-country.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -47,10 +48,19 @@ export class RecordCountriesService {
     return this.$countryCodes.asObservable()
   }
 
-  getAddresses(forceReload = false): Observable<CountriesEndpoint> {
+  getAddresses(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<CountriesEndpoint> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
+
     if (!this.$addresses) {
       this.$addresses = new ReplaySubject<CountriesEndpoint>(1)
-    } else if (!forceReload) {
+    } else if (!options.forceReload) {
       return this.$addresses
     }
 
@@ -85,7 +95,7 @@ export class RecordCountriesService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getAddresses(true))
+        tap(() => this.getAddresses({ forceReload: true }))
       )
   }
 

@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion, Work } from '../../../types'
 import {
@@ -37,9 +37,21 @@ export class PanelComponent implements OnInit {
   @Input() userRecord: UserRecord
   @Input() visibility: VisibilityStrings
   @Input() hasNestedPanels: false
-  @Input() editable = true
   @Input() customControls = false
   @Input() openState = true
+  @Input() editable = true
+  @Output() openStateChange = new EventEmitter<boolean>()
+
+  _isPublicRecord: string
+  @Input() set isPublicRecord(value: string) {
+    this._isPublicRecord = value
+    if (this._isPublicRecord) {
+      this.editable = false
+    }
+  }
+  get isPublicRecord() {
+    return this._isPublicRecord
+  }
 
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
@@ -79,5 +91,6 @@ export class PanelComponent implements OnInit {
 
   collapse() {
     this.openState = !this.openState
+    this.openStateChange.next(this.openState)
   }
 }

@@ -12,8 +12,6 @@ import { URL_REGEXP } from '../../../constants'
 export class AffiliationComponent implements OnInit {
   @Input() affiliation: Affiliation
   @Input() panelDetailsState: {
-    detailShowData: boolean
-    detailShowLoader: boolean
     state: boolean
   }
   @Output() toggleDetails = new EventEmitter<Affiliation>()

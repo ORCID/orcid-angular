@@ -43,7 +43,7 @@
       [sourceName]="affiliation.sourceName || affiliation.source"
       [stackLength]="affiliationStack.affiliations.length"
       [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard($event)"
+      (makePrimary)="makePrimaryCard(affiliation)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
       "
