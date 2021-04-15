@@ -22,7 +22,7 @@
     <ng-container *ngIf="!customControls">
       <button
         mat-icon-button
-        *ngIf="editable"
+        *ngIf="!isPublicRecord"
         [matTooltip]="tooltipLabelEdit"
         (click)="openModal()"
         id="edit-button"
@@ -35,7 +35,7 @@
       <button
         mat-icon-button
         (click)="collapse()"
-        *ngIf="!openState && !editable"
+        *ngIf="!openState && isPublicRecord"
         [matTooltip]="tooltipLabelShowDetails"
         id="expand-more-button"
       >
@@ -44,7 +44,7 @@
       <button
         mat-icon-button
         (click)="collapse()"
-        *ngIf="openState && !editable"
+        *ngIf="openState && isPublicRecord"
         [matTooltip]="tooltipLabelHideDetails"
         id="expand-less-button"
       >
@@ -53,8 +53,11 @@
     </ng-container>
   </div>
 </div>
-<div class="body" *ngIf="openState">
+
+<div class="body" *ngIf="openState || (isPublicRecord && type === 'side-bar')">
   <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
+  <!-- public view side bar does not collapse de content -->
+
   <ng-content></ng-content>
 
   <!-- [NESTED PANELS] FOR PEER REVIEWS AND RESEARCH RESOURCES -->

@@ -4,7 +4,6 @@ import { of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import { ArrayFlat, DateToMonthDayYearDateAdapter } from 'src/app/constants'
 import {
-  Assertion,
   PublicGroupedPersonExternalIdentifiers,
 } from 'src/app/types'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'

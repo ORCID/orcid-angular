@@ -44,6 +44,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
   userRecord: UserRecord
   platform: PlatformInfo
 
+  externalIdentifierOpenState = true
+
   constructor(
     _platform: PlatformInfoService,
     private _user: UserService,
