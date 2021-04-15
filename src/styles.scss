@@ -55,6 +55,10 @@ a {
   cursor: pointer;
 }
 
+a.underline {
+  text-decoration: underline;
+}
+
 a.disabled {
   opacity: 80%;
   pointer-events: none;
@@ -68,6 +72,7 @@ a.white-url {
 a.black-url {
   color: black;
 }
+
 a.black-url:hover {
   text-decoration: underline;
 }

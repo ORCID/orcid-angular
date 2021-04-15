@@ -17,7 +17,7 @@
       id="emails-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
-      <app-panel-data *ngIf="userRecord && userRecord.emails.emails.length > 0">
+      <app-panel-data *ngIf="userRecord?.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails"
           [visibility]="!isPublicRecord && email.visibility"
@@ -39,9 +39,7 @@
       <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
         Website and social links
       </h2>
-      <app-panel-data
-        *ngIf="userRecord && userRecord.website.websites.length > 0"
-      >
+      <app-panel-data *ngIf="userRecord?.website.websites.length > 0">
         <app-panel-element
           *ngFor="let website of userRecord.website.websites"
           [visibility]="!isPublicRecord && website.visibility.visibility"
@@ -59,11 +57,7 @@
     </app-panel>
 
     <app-panel
-      *ngIf="
-        userRecord &&
-        userRecord.externalIdentifier &&
-        userRecord.externalIdentifier.externalIdentifiers.length
-      "
+      *ngIf="userRecord?.externalIdentifier?.externalIdentifiers.length"
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
       [editModalComponent]="modalPersonalIdentifiers"
       [isPublicRecord]="isPublicRecord"
@@ -74,10 +68,7 @@
     >
       <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
       <app-panel-data
-        *ngIf="
-          userRecord &&
-          userRecord.externalIdentifier.externalIdentifiers.length > 0
-        "
+        *ngIf="userRecord?.externalIdentifier.externalIdentifiers.length > 0"
       >
         <app-panel-element
           *ngFor="
@@ -117,9 +108,7 @@
       id="keywords-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
-      <app-panel-data
-        *ngIf="userRecord && userRecord.keyword.keywords.length > 0"
-      >
+      <app-panel-data *ngIf="userRecord?.keyword.keywords.length > 0">
         <app-panel-element
           *ngFor="let keyword of userRecord.keyword.keywords"
           [visibility]="!isPublicRecord && keyword.visibility.visibility"
@@ -137,9 +126,7 @@
       id="countries-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
-      <app-panel-data
-        *ngIf="userRecord && userRecord.countries.addresses.length > 0"
-      >
+      <app-panel-data *ngIf="userRecord?.countries.addresses.length > 0">
         <app-panel-element
           *ngFor="let address of userRecord.countries.addresses"
           [visibility]="!isPublicRecord && address.visibility.visibility"
