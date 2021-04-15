@@ -30,7 +30,7 @@ export class RecordFundingsService {
       forceReload: false,
     }
   ): Observable<FundingGroup[]> {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

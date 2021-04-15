@@ -51,7 +51,7 @@ export class RecordWorksService {
       forceReload: false,
     }
   ) {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     } else {

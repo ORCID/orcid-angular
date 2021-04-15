@@ -27,7 +27,7 @@ export class RecordOtherNamesService {
       forceReload: false,
     }
   ): Observable<OtherNamesEndPoint> {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

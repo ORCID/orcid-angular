@@ -74,11 +74,11 @@ export class RecordService {
   /**
    * @param options:
    * - use `forceReload` to force all server calls.
-   * - use `publicRecordId` to load a public record or leave the `publicRecordId` undefined 
-   * to load the current user private record. 
-   * 
+   * - use `publicRecordId` to load a public record or leave the `publicRecordId` undefined
+   * to load the current user private record.
+   *
    * Note: sending the `privateRecordId` is deprecated
-   *    
+   *
    * @returns And subject with all the require data from private or public orcid record
    */
   getRecord(
@@ -210,7 +210,7 @@ export class RecordService {
       forceReload: false,
     }
   ): Observable<Preferences> {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { of, ReplaySubject } from 'rxjs'
+import { ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import { ArrayFlat, DateToMonthDayYearDateAdapter } from 'src/app/constants'
 import { PublicGroupedPersonExternalIdentifiers } from 'src/app/types'

@@ -1,4 +1,8 @@
-import { SourceOrcid, SourceWithAssertionOrigin, Value } from './common.endpoint'
+import {
+  SourceOrcid,
+  SourceWithAssertionOrigin,
+  Value,
+} from './common.endpoint'
 
 interface ExternalIdentifier {
   type: string

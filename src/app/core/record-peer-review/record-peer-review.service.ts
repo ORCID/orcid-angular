@@ -22,7 +22,7 @@ export class RecordPeerReviewService {
   ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

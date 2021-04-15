@@ -25,7 +25,6 @@ export interface SourceWithAssertionOrigin {
   assertionOriginName?: any
 }
 
-
 export interface Keyword {
   content: string
   source: Source

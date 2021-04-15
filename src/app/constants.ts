@@ -182,8 +182,10 @@ export function DateToMonthDayYearDateAdapter(
   }
 }
 
-export function ArrayFlat(arr){
+export function ArrayFlat(arr) {
   return arr.reduce(function (flat, toFlatten) {
-    return flat.concat(Array.isArray(toFlatten) ? ArrayFlat(toFlatten) : toFlatten);
-  }, []);
+    return flat.concat(
+      Array.isArray(toFlatten) ? ArrayFlat(toFlatten) : toFlatten
+    )
+  }, [])
 }

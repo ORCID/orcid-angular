@@ -53,7 +53,7 @@ export class RecordCountriesService {
       forceReload: false,
     }
   ): Observable<CountriesEndpoint> {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

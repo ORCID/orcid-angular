@@ -27,7 +27,7 @@ export class RecordKeywordService {
       forceReload: false,
     }
   ): Observable<KeywordEndPoint> {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

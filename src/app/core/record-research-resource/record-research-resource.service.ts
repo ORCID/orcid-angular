@@ -23,7 +23,7 @@ export class RecordResearchResourceService {
   ) {}
 
   getResearchResourcePage(options: UserRecordOptions) {
-    //TODO GET PUBLIC DATA
+    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }
