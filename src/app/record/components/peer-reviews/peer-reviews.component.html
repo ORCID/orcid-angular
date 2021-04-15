@@ -5,10 +5,12 @@
   [type]="'peer-review'"
   [total]="userRecord.peerReviews.length"
 >
-  <ng-container *ngFor="let peerReview of userRecord.peerReviews">
+  <ng-container *ngIf="userRecord.peerReviews.length > 0">
     <app-panel
+      *ngFor="let peerReview of userRecord.peerReviews"
       [elements]="peerReview"
       [type]="'top-bar'"
+      [editable]="false"
       [openState]="false"
       class="top-bar"
     >
@@ -46,6 +48,7 @@
               <app-panel
                 [elements]="subPeerReview"
                 [type]="'top-bar'"
+                [editable]="false"
                 [customControls]="true"
                 class="top-bar"
                 *ngIf="subPeerReview.peerReviews[0] as peerReview"
@@ -171,5 +174,16 @@
       >
       </app-panel-source>
     </app-panel>
+  </ng-container>
+  <ng-container *ngIf="userRecord.peerReviews.length === 0">
+    <div class="orc-font-body-small">
+      <p i18n="@@peerReview.description">
+        Connect to trusted organizations to automatically add your peer review
+        activity to your ORCID record.
+      </p>
+      <a href="" i18n="@@peerReview.learnMore">
+        Learn more about how peer reviews are added to your ORCID record
+      </a>
+    </div>
   </ng-container>
 </app-panels>

@@ -23,8 +23,10 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-::ng-deep .mat-form-field-wrapper {
-  padding-bottom: 0;
+.description {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 8px !important;
+  }
 }
 
 .url {
@@ -61,6 +63,7 @@
   }
 
   app-privacy-selector {
+    min-width: 180px;
     margin: auto 7vh;
   }
 
@@ -88,7 +91,7 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 16px;
+  margin-inline-end: 32px;
 }
 
 .add-more {

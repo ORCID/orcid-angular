@@ -39,6 +39,7 @@ export class PanelComponent implements OnInit {
   @Input() hasNestedPanels: false
   @Input() customControls = false
   @Input() openState = true
+  @Input() editable: boolean = true
   @Output() openStateChange = new EventEmitter<boolean>()
 
   @Input() isPublicRecord: string

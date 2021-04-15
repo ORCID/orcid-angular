@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { OrgDisambiguated } from 'src/app/types'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
+import { URL_REGEXP } from '../../../constants'
 
 @Component({
   selector: 'app-affiliation',
@@ -25,8 +26,6 @@ export class AffiliationComponent implements OnInit {
    * RegEx function to check if the elements contains a URL
    */
   isUrl(element) {
-    const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
-    const regex = new RegExp(expression)
-    return element.match(regex)
+    return RegExp(URL_REGEXP).test(element)
   }
 }

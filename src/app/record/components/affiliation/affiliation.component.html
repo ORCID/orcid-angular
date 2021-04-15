@@ -2,12 +2,15 @@
 
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data
-  class="defaul-data-loaded orc-font-body-small"
+  class="default-data-loaded orc-font-body-small"
   [borderBottom]="true"
 >
   <div>
     <div class="general-data">
-      <ng-container *ngIf="affiliation.startDate.year"
+      <ng-container
+        *ngIf="
+          affiliation && affiliation.startDate && affiliation.startDate.year
+        "
         >{{ affiliation.startDate | monthDayYearDateToString }}
         <ng-container> to </ng-container>
         <ng-container *ngIf="affiliation.endDate">{{
@@ -16,7 +19,11 @@
         <ng-container *ngIf="!affiliation.endDate.year">present</ng-container>
       </ng-container>
       <ng-container
-        *ngIf="affiliation.startDate.year && affiliation.roleTitle.value"
+        *ngIf="
+          affiliation &&
+          affiliation.startDate.year &&
+          affiliation.roleTitle.value
+        "
       >
         |
       </ng-container>
@@ -55,7 +62,17 @@
   <!-- URL -->
   <app-display-attribute *ngIf="affiliation.url.value">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
-    <div>{{ affiliation.url.value }}</div>
+    <a
+      *ngIf="isUrl(affiliation.url.value)"
+      rel="noopener noreferrer"
+      target="_blank"
+      href="{{ affiliation.url.value }}"
+    >
+      {{ affiliation.url.value }}
+    </a>
+    <ng-container *ngIf="!isUrl(affiliation.url)">
+      {{ affiliation.url }}
+    </ng-container>
   </app-display-attribute>
 
   <!-- ORGANIZATION DISAMBIGUATED IDS-->
