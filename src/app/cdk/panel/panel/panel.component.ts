@@ -42,7 +42,16 @@ export class PanelComponent implements OnInit {
   @Input() editable: boolean = true
   @Output() openStateChange = new EventEmitter<boolean>()
 
-  @Input() isPublicRecord: string
+  _isPublicRecord: string
+  @Input() set isPublicRecord(value: string) {
+    this._isPublicRecord = value
+    if (this._isPublicRecord) {
+      this.editable = false
+    }
+  }
+  get isPublicRecord() {
+    return this._isPublicRecord
+  }
 
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`

@@ -7,28 +7,6 @@
     'expand-button': !editable && !isPublicRecord && !customControls
   }"
 >
-  <ng-container *ngIf="!editable && !customControls">
-    <!-- [EXPAND BUTTONS] FOR ALL SIDEBAR PANELS -->
-
-    <button
-      mat-icon-button
-      (click)="collapse()"
-      *ngIf="!openState && !editable"
-      [matTooltip]="tooltipLabelShowDetails"
-      id="expand-more-button"
-    >
-      <mat-icon>expand_more</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      (click)="collapse()"
-      *ngIf="openState && !editable"
-      [matTooltip]="tooltipLabelHideDetails"
-      id="expand-less-button"
-    >
-      <mat-icon>expand_less</mat-icon>
-    </button>
-  </ng-container>
   <ng-content select="[header]"></ng-content>
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
@@ -52,6 +30,28 @@
       >
         <mat-icon class="material-icons-outlined">edit</mat-icon>
       </button>
+      <ng-container *ngIf="!editable && !customControls">
+        <!-- [EXPAND BUTTONS] FOR ALL SIDEBAR PANELS -->
+
+        <button
+          mat-icon-button
+          (click)="collapse()"
+          *ngIf="!openState && !editable"
+          [matTooltip]="tooltipLabelShowDetails"
+          id="expand-more-button"
+        >
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="collapse()"
+          *ngIf="openState && !editable"
+          [matTooltip]="tooltipLabelHideDetails"
+          id="expand-less-button"
+        >
+          <mat-icon>expand_less</mat-icon>
+        </button>
+      </ng-container>
     </ng-container>
   </div>
 </div>
