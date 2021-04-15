@@ -16,12 +16,18 @@ export class MyOrcidComponent implements OnInit {
     private _platform: PlatformInfoService,
     private route: ActivatedRoute
   ) {
+    this.checkIfThisIsAPublicOrcid()
+  }
+
+  private checkIfThisIsAPublicOrcid() {
     if (
-      route.parent.snapshot.url &&
-      ORCID_REGEXP.test(route.parent.snapshot.url[1].toString())
+      this.route.parent.snapshot.url &&
+      // TODO!! SHOULD check for 'url[0]' when the '/qa/' URL path is remove
+      ORCID_REGEXP.test(this.route.parent.snapshot.url[1].toString())
     ) {
-      this.publicOrcid = route.parent.snapshot.url[1].toString() // TODO!! SHOULD BE [0] when the QA sub url is remove
+      return (this.publicOrcid = this.route.parent.snapshot.url[1].toString())
     }
+    return undefined
   }
 
   ngOnInit(): void {

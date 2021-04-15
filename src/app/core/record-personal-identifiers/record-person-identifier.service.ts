@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core'
 import { of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import { ArrayFlat, DateToMonthDayYearDateAdapter } from 'src/app/constants'
-import {
-  PublicGroupedPersonExternalIdentifiers,
-} from 'src/app/types'
+import { PublicGroupedPersonExternalIdentifiers } from 'src/app/types'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
@@ -54,16 +52,11 @@ export class RecordPersonIdentifierService {
       .pipe(
         map((person) => person.publicGroupedPersonExternalIdentifiers),
         map((publicGroupedPersonExternalIdentifiers) =>
-          this.publicGroupedPersonExternalIdentifiersAdapter(
+          this.publicDataAdapterExternalIdentifier(
             publicGroupedPersonExternalIdentifiers
           )
         ),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap((value) => {
-          console.log('OK I HAVE AN ADAPTED VALUE')
-
-          console.log(value)
-        }),
         tap((value) => {
           this.$publicPersonIdentifier.next(value)
         })
@@ -102,7 +95,7 @@ export class RecordPersonIdentifierService {
     return this.$privatePersonIdentifier
   }
 
-  publicGroupedPersonExternalIdentifiersAdapter(
+  publicDataAdapterExternalIdentifier(
     personIdentifiers: PublicGroupedPersonExternalIdentifiers
   ): PersonIdentifierEndpoint {
     return {

@@ -1,18 +1,9 @@
 <div>
   <app-side-bar-id
-    *ngIf="!isPublicRecord"
     [ngClass]="{
       mobile: !platform.columns12
     }"
-    [id]="userSession.userInfo.EFFECTIVE_USER_ORCID"
-  ></app-side-bar-id>
-
-  <app-side-bar-id
-    *ngIf="isPublicRecord"
-    [ngClass]="{
-      mobile: !platform.columns12
-    }"
-    [id]="isPublicRecord"
+    [id]="isPublicRecord || userSession.userInfo.EFFECTIVE_USER_ORCID"
   ></app-side-bar-id>
 
   <ng-container *ngIf="!onlyOrcidId">
@@ -99,14 +90,13 @@
                 externalIdentifier.reference
             }}</a
           >
-          <div *ngIf="externalIdentifierOpenState">
-            <strong> Sources </strong>
-            <p>
-              {{ externalIdentifier.source }}
-              {{ externalIdentifier.sourceName }}
-              {{ externalIdentifier.createdDate | monthDayYearDateToString }}
-            </p>
-          </div>
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            *ngIf="externalIdentifierOpenState"
+            [name]="externalIdentifier.sourceName || externalIdentifier.source"
+            [date]="externalIdentifier.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
         </app-panel-element>
       </app-panel-data>
     </app-panel>

@@ -28,11 +28,13 @@ export class WorkStackGroupComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.isPublicRecord) {
-      this.getPrivateRecordWorks()
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
     }
   }
 
-  private getPrivateRecordWorks() {
+  private getRecord() {
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))

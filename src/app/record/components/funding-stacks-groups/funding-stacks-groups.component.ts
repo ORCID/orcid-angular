@@ -28,11 +28,13 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.isPublicRecord) {
-      this.getPrivateRecord()
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
     }
   }
 
-  private getPrivateRecord() {
+  private getRecord() {
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))

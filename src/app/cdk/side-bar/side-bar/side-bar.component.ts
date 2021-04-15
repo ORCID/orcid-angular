@@ -60,6 +60,10 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getRecord()
+  }
+
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -67,9 +71,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.userSession = userSession
       })
 
+    // Loads the public record if `isPublicRecord` is defined
+    // Otherwise loads the current login private record
     this._record
       .getRecord({
-        publicRecordId: this.isPublicRecord,
+        publicRecordId: this.isPublicRecord || undefined,
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {

@@ -54,11 +54,13 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (!this.isPublicRecord) {
-      this.getPrivateRecord()
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
     }
   }
 
-  private getPrivateRecord() {
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))

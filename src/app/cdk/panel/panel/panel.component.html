@@ -30,7 +30,7 @@
         <mat-icon class="material-icons-outlined">edit</mat-icon>
       </button>
 
-      <!-- [EXPAND BUTTONS] FOR ALL SIDEBAR PANELS -->
+      <!-- [EXPAND BUTTONS]-->
 
       <button
         mat-icon-button
@@ -56,7 +56,8 @@
 
 <div class="body" *ngIf="openState || (isPublicRecord && type === 'side-bar')">
   <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
-  <!-- public view side bar does not collapse de content -->
+  <!-- hide the content when openState is false-->
+  <!-- expect on `public view side bar` where only the sources are hidden -->
 
   <ng-content></ng-content>
 

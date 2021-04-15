@@ -72,11 +72,13 @@ export class ResearchResourcesComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.isPublicRecord) {
-      this.getPrivateRecord()
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
     }
   }
 
-  private getPrivateRecord() {
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -113,7 +115,7 @@ export class ResearchResourcesComponent implements OnInit {
             researchResource.showDetails = true
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     } else {
@@ -137,7 +139,7 @@ export class ResearchResourcesComponent implements OnInit {
             })
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     }

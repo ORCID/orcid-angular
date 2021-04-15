@@ -19,8 +19,8 @@
 
   // TODO ENABLE STRICT TEMPLATES:
 
-  // "angularCompilerOptions": {
-  //   "strictTemplates": true,
-  //   "strictInjectionParameters": true
-  // }
+ , "angularCompilerOptions": {
+    "strictTemplates": true,
+    "strictInjectionParameters": true
+  }
 }

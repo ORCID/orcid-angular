@@ -5,4 +5,5 @@
     [visibility]="visibility"
   ></app-panel-privacy>
 </div>
-<ng-content select="[sources]"></ng-content>
+<!-- [PANEL ELEMENT SOURCE] display only on the public page side bar  -->
+<ng-content select="panel-element-source" *ngIf="isPublicRecord"></ng-content>

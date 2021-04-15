@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin panel-data-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  :host {
+    color: mat-contrast($primary, 200);
+  }
+}
+@include panel-data-theme($orcid-app-theme);
