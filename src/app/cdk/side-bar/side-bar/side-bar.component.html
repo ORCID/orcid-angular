@@ -16,7 +16,7 @@
       id="emails-panel"
     >
       <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
-      <app-panel-data *ngIf="userRecord && userRecord.emails.emails.length > 0">
+      <app-panel-data *ngIf="userRecord?.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails"
           [visibility]="email.visibility"
@@ -38,7 +38,7 @@
         Website and social links
       </h2>
       <app-panel-data
-        *ngIf="userRecord && userRecord.website.websites.length > 0"
+        *ngIf="userRecord?.website.websites.length > 0"
       >
         <app-panel-element
           *ngFor="let website of userRecord.website.websites"
@@ -58,7 +58,7 @@
 
     <app-panel
       *ngIf="
-        userRecord && userRecord.externalIdentifier.externalIdentifiers.length
+        userRecord?.externalIdentifier.externalIdentifiers.length
       "
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
       [editModalComponent]="modalPersonalIdentifiers"
@@ -68,10 +68,7 @@
     >
       <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
       <app-panel-data
-        *ngIf="
-          userRecord &&
-          userRecord.externalIdentifier.externalIdentifiers.length > 0
-        "
+        *ngIf="userRecord?.externalIdentifier.externalIdentifiers.length > 0"
       >
         <app-panel-element
           *ngFor="
@@ -102,7 +99,7 @@
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
       <app-panel-data
-        *ngIf="userRecord && userRecord.keyword.keywords.length > 0"
+        *ngIf="userRecord?.keyword.keywords.length > 0"
       >
         <app-panel-element
           *ngFor="let keyword of userRecord.keyword.keywords"
@@ -121,7 +118,7 @@
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
       <app-panel-data
-        *ngIf="userRecord && userRecord.countries.addresses.length > 0"
+        *ngIf="userRecord?.countries.addresses.length > 0"
       >
         <app-panel-element
           *ngFor="let address of userRecord.countries.addresses"

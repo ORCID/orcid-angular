@@ -145,6 +145,7 @@
             <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
             <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
             <a
+              class="underline"
               target="_blank"
               rel="noopener noreferrer"
               href="https://support.orcid.org/hc/articles/360006973793"
@@ -156,6 +157,7 @@
             </ng-container>
 
             <a
+              class="underline"
               target="_blank"
               rel="noopener noreferrer"
               i18n="@@side-bar.support"
@@ -236,7 +238,7 @@
         <div class="col actions-wrapper no-gutters">
           <div class="actions-sub-wrapper">
             <a
-              class="orc-font-smallprint"
+              class="orc-font-smallprint underline"
               *ngIf="showEmailAsVerified(email.putCode)"
               (click)="makePrimary(email)"
               i18n="@@side-bar.makePrimary"
@@ -246,14 +248,14 @@
 
             <ng-container *ngIf="showNonVerifiedData(email.putCode)">
               <a
-                class="orc-font-smallprint disabled"
+                class="orc-font-smallprint disabled underline"
                 *ngIf="verificationEmailWasSend(email.putCode)"
                 i18n="@@side-bar.resendVerification"
               >
                 Resend verification email</a
               >
               <a
-                class="orc-font-smallprint"
+                class="orc-font-smallprint underline"
                 (click)="verifyEmail(email)"
                 *ngIf="!verificationEmailWasSend(email.putCode)"
                 i18n="@@side-bar.resendVerification"
@@ -306,7 +308,7 @@
     </ng-container>
 
     <div class="row orc-font-body-small">
-      <a class="col add-more" id="add-link" (click)="addEmail()">
+      <a class="col add-more underline" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
         <ng-container *ngIf="emails.length === 1" i18n="@@side-bar.otherEmail">
           Add other email address

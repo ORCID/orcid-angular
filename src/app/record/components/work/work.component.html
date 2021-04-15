@@ -19,12 +19,14 @@
 
   <div align-end>
     <a
+      class="underline"
       (click)="toggleDetails.next(work)"
       *ngIf="!panelDetailsState.state"
       i18n="@@shared.showMoreDetail"
       >Show more detail</a
     >
     <a
+      class="underline"
       (click)="toggleDetails.next(work)"
       *ngIf="panelDetailsState.state"
       i18n="@@shared.showLessDetail"
@@ -78,7 +80,12 @@
       <ng-container i18n="@@record.url">URL</ng-container>
     </h3>
 
-    <a [href]="work.url.value" rel="noopener noreferrer" target="_blank">
+    <a
+      class="underline"
+      [href]="work.url.value"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
       {{ work.url.value }}
     </a>
   </app-display-attribute>

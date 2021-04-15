@@ -33,7 +33,7 @@
             <ng-container *ngIf="peerReview.groupType">
               <p>
                 {{ peerReview.groupType }}:
-                <a href="{{ peerReview.url }}">
+                <a class="underline" href="{{ peerReview.url }}">
                   {{ peerReview.groupIdValue }}
                 </a>
               </p>
@@ -74,6 +74,7 @@
                 <div custom-controls>
                   <span class="show">
                     <a
+                      class="underline"
                       *ngIf="!peerReview.showDetails"
                       (click)="getDetails(peerReview, peerReview.putCode.value)"
                       i18n="@@shared.showMoreDetail"
@@ -81,6 +82,7 @@
                       Show more detail
                     </a>
                     <a
+                      class="underline"
                       *ngIf="peerReview.showDetails"
                       (click)="collapse(peerReview)"
                       i18n="@@shared.showLessDetail"
@@ -89,6 +91,7 @@
                     </a>
                   </span>
                   <a
+                    class="underline"
                     rel="noopener noreferrer"
                     target="_blank"
                     href="{{ peerReview.url }}"
@@ -181,7 +184,7 @@
         Connect to trusted organizations to automatically add your peer review
         activity to your ORCID record.
       </p>
-      <a href="" i18n="@@peerReview.learnMore">
+      <a class="underline" href="" i18n="@@peerReview.learnMore">
         Learn more about how peer reviews are added to your ORCID record
       </a>
     </div>

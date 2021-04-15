@@ -111,6 +111,7 @@
               </div>
               <div class="buttons-container">
                 <a
+                  class="underline"
                   *ngIf="!research.showDetails"
                   (click)="getDetails(research, research.putCode)"
                   i18n="@@shared.showMoreDetail"
@@ -119,6 +120,7 @@
                   Show more detail
                 </a>
                 <a
+                  class="underline"
                   *ngIf="research.showDetails"
                   (click)="collapse(research)"
                   i18n="@@shared.showLessDetail"
@@ -316,6 +318,7 @@
                     <div custom-controls>
                       <span class="orc-font-body-small show">
                         <a
+                          class="underline"
                           *ngIf="!item.showDetails"
                           (click)="
                             getOrganizationDisambiguatedDetails(
@@ -330,6 +333,7 @@
                           Show more detail
                         </a>
                         <a
+                          class="underline"
                           *ngIf="item.showDetails"
                           (click)="collapse(item)"
                           i18n="@@shared.showLessDetail"
