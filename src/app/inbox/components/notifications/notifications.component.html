@@ -50,7 +50,7 @@
     <app-notification
       *ngIf="!item.archivedDate"
       [notification]="item"
-      [formControl]="form.controls[item.putCode]"
+      [formControl]="$any(form.controls[item.putCode])"
       [archived]="!!item.archivedDate"
       [read]="!!item.readDate"
     ></app-notification>

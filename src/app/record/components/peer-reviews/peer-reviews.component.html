@@ -9,7 +9,6 @@
     <app-panel
       [elements]="peerReview"
       [type]="'top-bar'"
-      [editable]="false"
       [openState]="false"
       class="top-bar"
     >
@@ -47,7 +46,6 @@
               <app-panel
                 [elements]="subPeerReview"
                 [type]="'top-bar'"
-                [editable]="false"
                 [customControls]="true"
                 class="top-bar"
                 *ngIf="subPeerReview.peerReviews[0] as peerReview"
@@ -60,7 +58,7 @@
                   <span class="header-sub-peer-review">
                     <b i18n="@@peerReview.type"> Type: </b>
                     <span class="capitalize">
-                      {{ peerReview.type.value }}
+                      {{ peerReview.type.value}}
                     </span>
                   </span>
                   <span class="header-sub-peer-review">

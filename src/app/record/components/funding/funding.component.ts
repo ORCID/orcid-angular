@@ -11,8 +11,6 @@ import { Funding } from 'src/app/types/record-funding.endpoint'
 export class FundingComponent implements OnInit {
   @Input() funding: Funding
   @Input() panelDetailsState: {
-    detailShowData: boolean
-    detailShowLoader: boolean
     state: boolean
   }
   @Output() toggleDetails = new EventEmitter<Funding>()

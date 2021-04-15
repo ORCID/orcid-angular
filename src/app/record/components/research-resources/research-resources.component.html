@@ -15,7 +15,6 @@
     <app-panel
       [elements]="researchResource"
       [type]="'top-bar'"
-      [editable]="false"
       [openState]="false"
       class="top-bar"
       *ngIf="researchResource.researchResources[0] as research"
@@ -272,7 +271,6 @@
                 <app-panel
                   [elements]="item"
                   [type]="'top-bar'"
-                  [editable]="false"
                   [customControls]="true"
                   class="top-bar"
                   [attr.id]="'research-detail-item-' + i"
