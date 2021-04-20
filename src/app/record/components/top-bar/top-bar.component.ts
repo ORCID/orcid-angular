@@ -21,14 +21,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() isPublicRecord: string
 
-  userSession: {
-    userInfo: UserInfo
-    nameForm: NameForm
-    oauthSession: RequestInfoForm
-    displayName: string
-    orcidUrl: string
-    loggedIn: boolean
-  }
   userRecord: UserRecord
 
   modalNameComponent = ModalNameComponent
@@ -56,12 +48,14 @@ export class TopBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._record
       .getRecord({
-        publicRecordId: this.isPublicRecord,
+        publicRecordId: this.isPublicRecord || undefined,
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         this.userRecord = userRecord
         this.setNames(this.userRecord)
+        console.log('isPublicRecord', this.isPublicRecord)
+        console.log('userRecord', this.userRecord)
       })
   }
 

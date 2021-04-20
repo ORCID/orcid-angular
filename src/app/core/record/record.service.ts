@@ -44,7 +44,6 @@ import { RecordPersonService } from '../record-person/record-person.service'
   providedIn: 'root',
 })
 export class RecordService {
-  recordInitialized = false
   recordSubject$: ReplaySubject<UserRecord>
 
   constructor(
@@ -89,7 +88,7 @@ export class RecordService {
     if (options.publicRecordId) {
       return this.getPublicRecord(options.publicRecordId)
     }
-    if (!this.recordInitialized || options.forceReload) {
+    if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 
       combineLatest([
