@@ -14,6 +14,23 @@
   .description {
     color: $text-dark-mid;
   }
+
+  .public-container {
+
+    .names-container {
+      .names {
+        border-color: mat-color($accent, 200);
+      }
+
+      .other-names {
+        border-color: mat-color($accent, 200);
+      }
+
+      .other-names-extended {
+        border-color: map-get($foreground, 'brand-primary-dark') !important;
+      }
+    }
+  }
 }
 
 @include top-bar-theme($orcid-app-theme);

@@ -21,66 +21,183 @@
   </button>
 </div>
 
-<app-panel
-  *ngIf="userRecord"
-  [elements]="userRecord.names.givenNames"
-  [editModalComponent]="modalNameComponent"
-  [userRecord]="userRecord"
-  [type]="'top-bar'"
-  id="names-panel"
->
-  <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
-  <app-panel-data>
-    <app-panel-element [visibility]="userRecord.names.visibility.visibility">
-      <ng-container *ngIf="creditName">
-        <span i18n="@@record.publishedName" class="mat-caption">
-          Published Name
-        </span>
-        <p class="mat-card-title published-name">
-          <b id="publishedName">
-            {{ creditName }}
-          </b>
-        </p>
-      </ng-container>
-      <span i18n="@@record.name" class="mat-caption description"> Name </span>
-      <div id="givenAndFamilyNames" class="mat-body-1">
-        {{ givenNames + ' ' + familyName }}
-      </div>
-    </app-panel-element>
-    <ng-container *ngIf="userRecord.otherNames.otherNames.length > 0">
-      <div class="other-names-container">
-        <span i18n="@@record.otherNames" class="mat-caption description">
-          Other names
-        </span>
-        <app-panel-element
-          id="other-names"
-          *ngFor="let otherNames of userRecord.otherNames.otherNames"
-          [visibility]="otherNames.visibility.visibility"
-        >
-          <p class="mat-body-1 other-names">
-            {{ otherNames.content }}
+<ng-container *ngIf="!isPublicRecord">
+  <app-panel
+    *ngIf="userRecord?.names"
+    [isPublicRecord]="isPublicRecord"
+    [elements]="userRecord.names.givenNames"
+    [editModalComponent]="modalNameComponent"
+    [userRecord]="userRecord"
+    [type]="'top-bar'"
+    id="names-panel"
+  >
+    <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
+    <app-panel-data>
+      <app-panel-element
+        [visibility]="userRecord.names.visibility.visibility"
+      >
+        <ng-container *ngIf="creditName">
+          <span i18n="@@record.publishedName" class="mat-caption">
+            Published Name
+          </span>
+          <p class="mat-card-title published-name">
+            <b id="publishedName">
+              {{ creditName }}
+            </b>
           </p>
-        </app-panel-element>
-      </div>
-    </ng-container>
-  </app-panel-data>
-</app-panel>
-<app-panel
-  *ngIf="userRecord"
-  [elements]="userRecord.biography.biography"
-  [editModalComponent]="modalBiographyComponent"
-  [userRecord]="userRecord"
-  [type]="'top-bar'"
-  id="biography-panel"
->
-  <h2 header class="orc-font-body" i18n="@@record.biography">Biography</h2>
-  <app-panel-data *ngIf="!!userRecord.biography.biography">
-    <app-panel-element
-      [visibility]="userRecord.biography.visibility.visibility"
+        </ng-container>
+        <span i18n="@@record.name" class="mat-caption description"> Name </span>
+        <div id="givenAndFamilyNames" class="mat-body-1">
+          {{ givenNames + ' ' + familyName }}
+        </div>
+      </app-panel-element>
+      <ng-container *ngIf="userRecord.otherNames.otherNames.length > 0">
+        <div class="other-names-container">
+          <span i18n="@@record.otherNames" class="mat-caption description">
+            Other names
+          </span>
+          <app-panel-element
+            id="other-names"
+            *ngFor="let otherNames of userRecord.otherNames.otherNames"
+            [visibility]="otherNames.visibility.visibility"
+          >
+            <p class="mat-body-1 other-names">
+              {{ otherNames.content }}
+            </p>
+          </app-panel-element>
+        </div>
+      </ng-container>
+    </app-panel-data>
+  </app-panel>
+  <app-panel
+    *ngIf="userRecord?.biography"
+    [elements]="userRecord.biography.biography"
+    [editModalComponent]="modalBiographyComponent"
+    [userRecord]="userRecord"
+    [type]="'top-bar'"
+    id="biography-panel"
+  >
+    <h2 header class="orc-font-body" i18n="@@record.biography">Biography</h2>
+    <app-panel-data *ngIf="!!userRecord.biography.biography">
+      <app-panel-element
+        [visibility]="userRecord.biography.visibility.visibility"
+      >
+        <span id="biography" class="mat-body-1">
+          {{ userRecord.biography.biography.value }}
+        </span>
+      </app-panel-element>
+    </app-panel-data>
+  </app-panel>
+</ng-container>
+
+<!--PUBLIC VIEWS-->
+<ng-container *ngIf="isPublicRecord">
+  <div
+    class="public-container"
+    [ngClass]="{
+        'mobile': !platform.columns12
+      }"
+  >
+    <div
+      class="row names-container"
+      *ngIf="userRecord?.names"
     >
-      <span id="biography" class="mat-body-1">
-        {{ userRecord.biography.biography.value }}
-      </span>
-    </app-panel-element>
-  </app-panel-data>
-</app-panel>
+      <div
+        class="published-name"
+        *ngIf="creditName"
+      >
+        <div
+          class="row mat-caption description"
+          i18n="@@record.publishedName"
+        >
+          Published Name
+        </div>
+        <h3 class="orc-font-heading-small">{{ creditName }}</h3>
+      </div>
+      <div class="row space-between">
+        <div
+          class="names"
+          [ngClass]="{
+            'col l5': platform.columns12,
+            'row mobile': !platform.columns12
+          }"
+        >
+          <div
+            class="row mat-caption description"
+            i18n="@@record.name"
+          >
+            Name
+          </div>
+          <div class="orc-font-body-small">
+            <i>
+              {{ givenNames + ' ' }}
+            </i>
+            {{ familyName }}
+          </div>
+        </div>
+        <div
+          class="other-names"
+          [ngClass]="{
+            'col l6': platform.columns12,
+            'row mobile': !platform.columns12,
+            'other-names-extended': expandedContent
+          }"
+        >
+          <div class="row space-between">
+            <div class="mat-caption other-names-wrapper" *ngIf="!expandedContent">
+              <div
+                class="description"
+                i18n="@@record.otherNames"
+              >
+                Other names
+              </div>
+              <ng-container *ngFor="let otherNames of userRecord.otherNames.otherNames; index as i">
+                {{ otherNames.content }}
+                <ng-container *ngIf="!(userRecord.otherNames.otherNames.length - 1 === i) ">,</ng-container>
+              </ng-container>
+            </div>
+            <div class="mat-caption other-names-wrapper" *ngIf="expandedContent">
+              <div
+                class="description"
+                i18n="@@record.otherNames"
+              >
+                Other names
+              </div>
+              <div
+                class="other-name"
+                *ngFor="let otherNames of userRecord.otherNames.otherNames; index as i"
+              >
+                <div>
+                  <b class="orc-font-body-small">
+                    {{ otherNames.content }}
+                  </b>
+                </div>
+                <div>
+                  <b
+                    class="description"
+                    i18n="@@record.source"
+                  >
+                    Source
+                  </b>
+                </div>
+                <div class="description">
+                  {{ otherNames.sourceName }}
+                </div>
+              </div>
+            </div>
+            <div>
+              <button mat-icon-button (click)="collapse()" id="expand-content-button">
+                <mat-icon class="large-material-icon" *ngIf="expandedContent"
+                >keyboard_arrow_down
+                </mat-icon>
+                <mat-icon class="large-material-icon" *ngIf="!expandedContent"
+                >keyboard_arrow_up
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

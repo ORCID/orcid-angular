@@ -238,4 +238,16 @@ export class RecordService {
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
+
+  getPublicRecord(orcid: string): Observable<UserRecord> {
+    return this._http
+      .get<UserRecord>(
+        environment.API_WEB + orcid + `/public-record.json`,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
 }

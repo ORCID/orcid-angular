@@ -38,6 +38,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   givenNames: String = ''
   familyName: String = ''
   creditName: String = ''
+  expandedContent = false
 
   constructor(
     private _platform: PlatformInfoService,
@@ -56,7 +57,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
     if (!this.isPublicRecord) {
       this.getRecord()
     } else {
-      // TODO SUPPORT PUBLIC VIEW
+      this.getPublicRecord()
     }
   }
 
@@ -76,17 +77,36 @@ export class TopBarComponent implements OnInit, OnDestroy {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
-            this.givenNames = this.userRecord.names.givenNames
-              ? this.userRecord.names.givenNames.value
-              : ''
-            this.familyName = this.userRecord.names.familyName
-              ? this.userRecord.names.familyName.value
-              : ''
-            this.creditName = this.userRecord.names.creditName
-              ? this.userRecord.names.creditName.value
-              : ''
+            this.setNames(this.userRecord)
           })
       })
+  }
+
+  private getPublicRecord() {
+    this._record
+      .getPublicRecord(this.isPublicRecord)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+        this.setNames(this.userRecord)
+      })
+  }
+
+  private setNames(userRecord: UserRecord) {
+    this.userRecord = userRecord
+    this.givenNames = this.userRecord.names.givenNames
+      ? this.userRecord.names.givenNames.value
+      : ''
+    this.familyName = this.userRecord.names.familyName
+      ? this.userRecord.names.familyName.value
+      : ''
+    this.creditName = this.userRecord.names.creditName
+      ? this.userRecord.names.creditName.value
+      : ''
+  }
+
+  collapse(): void {
+    this.expandedContent = !this.expandedContent
   }
 
   ngOnDestroy() {
