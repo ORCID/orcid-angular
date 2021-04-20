@@ -195,5 +195,16 @@
         </div>
       </div>
     </div>
+    <div
+      class="col l11 biography-container"
+      *ngIf="userRecord?.biography?.biography"
+    >
+      <h3 class="orc-font-body" i18n="@@record.biography">
+        Biography
+      </h3>
+      <p class="orc-font-body-small">
+        {{ userRecord.biography.biography.value }}
+      </p>
+    </div>
   </div>
 </ng-container>
