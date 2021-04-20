@@ -45,7 +45,7 @@ import { RecordPersonService } from '../record-person/record-person.service'
 })
 export class RecordService {
   recordInitialized = false
-  recordSubject$ = new ReplaySubject<UserRecord>(1)
+  recordSubject$: ReplaySubject<UserRecord>
 
   constructor(
     private _http: HttpClient,
@@ -86,8 +86,11 @@ export class RecordService {
       forceReload: false,
     }
   ): Observable<UserRecord> {
+    if (options.publicRecordId) {
+      return this.getPublicRecord(options.publicRecordId)
+    }
     if (!this.recordInitialized || options.forceReload) {
-      this.recordInitialized = true
+      this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 
       combineLatest([
         this._recordPerson.getPerson(options),
@@ -148,9 +151,11 @@ export class RecordService {
         .subscribe()
     }
 
-    return this.recordSubject$.pipe(
-      tap((session) => (environment.debugger ? console.info(session) : null))
-    )
+    return this.recordSubject$
+      .asObservable()
+      .pipe(
+        tap((session) => (environment.debugger ? console.info(session) : null))
+      )
   }
 
   getExternalIdentifier(): Observable<ExternalIdentifier> {
