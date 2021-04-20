@@ -33,9 +33,7 @@
   >
     <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
     <app-panel-data>
-      <app-panel-element
-        [visibility]="userRecord.names.visibility.visibility"
-      >
+      <app-panel-element [visibility]="userRecord.names.visibility.visibility">
         <ng-container *ngIf="creditName">
           <span i18n="@@record.publishedName" class="mat-caption">
             Published Name
@@ -95,21 +93,12 @@
   <div
     class="public-container"
     [ngClass]="{
-        'mobile': !platform.columns12
-      }"
+      mobile: !platform.columns12
+    }"
   >
-    <div
-      class="row names-container"
-      *ngIf="userRecord?.names"
-    >
-      <div
-        class="published-name"
-        *ngIf="creditName"
-      >
-        <div
-          class="row mat-caption description"
-          i18n="@@record.publishedName"
-        >
+    <div class="row names-container" *ngIf="userRecord?.names">
+      <div class="published-name" *ngIf="creditName">
+        <div class="row mat-caption description" i18n="@@record.publishedName">
           Published Name
         </div>
         <h3 class="orc-font-heading-small">{{ creditName }}</h3>
@@ -122,10 +111,7 @@
             'row mobile': !platform.columns12
           }"
         >
-          <div
-            class="row mat-caption description"
-            i18n="@@record.name"
-          >
+          <div class="row mat-caption description" i18n="@@record.name">
             Name
           </div>
           <div class="orc-font-body-small">
@@ -144,28 +130,39 @@
           }"
         >
           <div class="row space-between">
-            <div class="mat-caption other-names-wrapper" *ngIf="!expandedContent">
-              <div
-                class="description"
-                i18n="@@record.otherNames"
-              >
+            <div
+              class="mat-caption other-names-wrapper"
+              *ngIf="!expandedContent"
+            >
+              <div class="description" i18n="@@record.otherNames">
                 Other names
               </div>
-              <ng-container *ngFor="let otherNames of userRecord.otherNames.otherNames; index as i">
+              <ng-container
+                *ngFor="
+                  let otherNames of userRecord.otherNames.otherNames;
+                  index as i
+                "
+              >
                 {{ otherNames.content }}
-                <ng-container *ngIf="!(userRecord.otherNames.otherNames.length - 1 === i) ">,</ng-container>
+                <ng-container
+                  *ngIf="!(userRecord.otherNames.otherNames.length - 1 === i)"
+                  >,</ng-container
+                >
               </ng-container>
             </div>
-            <div class="mat-caption other-names-wrapper" *ngIf="expandedContent">
-              <div
-                class="description"
-                i18n="@@record.otherNames"
-              >
+            <div
+              class="mat-caption other-names-wrapper"
+              *ngIf="expandedContent"
+            >
+              <div class="description" i18n="@@record.otherNames">
                 Other names
               </div>
               <div
                 class="other-name"
-                *ngFor="let otherNames of userRecord.otherNames.otherNames; index as i"
+                *ngFor="
+                  let otherNames of userRecord.otherNames.otherNames;
+                  index as i
+                "
               >
                 <div>
                   <b class="orc-font-body-small">
@@ -173,12 +170,7 @@
                   </b>
                 </div>
                 <div>
-                  <b
-                    class="description"
-                    i18n="@@record.source"
-                  >
-                    Source
-                  </b>
+                  <b class="description" i18n="@@record.source"> Source </b>
                 </div>
                 <div class="description">
                   {{ otherNames.sourceName }}
@@ -186,12 +178,16 @@
               </div>
             </div>
             <div>
-              <button mat-icon-button (click)="collapse()" id="expand-content-button">
+              <button
+                mat-icon-button
+                (click)="collapse()"
+                id="expand-content-button"
+              >
                 <mat-icon class="large-material-icon" *ngIf="expandedContent"
-                >keyboard_arrow_down
+                  >keyboard_arrow_down
                 </mat-icon>
                 <mat-icon class="large-material-icon" *ngIf="!expandedContent"
-                >keyboard_arrow_up
+                  >keyboard_arrow_up
                 </mat-icon>
               </button>
             </div>
