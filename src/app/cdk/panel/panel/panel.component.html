@@ -56,10 +56,10 @@
   </div>
 </div>
 
-<div class="body" *ngIf="openState || (isPublicRecord && type === 'side-bar')">
+<div class="body" *ngIf="openState || type === 'side-bar'">
   <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
   <!-- hide the content when openState is false-->
-  <!-- expect on `public view side bar` where only the sources are hidden -->
+  <!-- on `side bar` never close the content -->
 
   <ng-content></ng-content>
 

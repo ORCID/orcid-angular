@@ -44,7 +44,12 @@ export class SideBarComponent implements OnInit, OnDestroy {
   userRecord: UserRecord
   platform: PlatformInfo
 
-  externalIdentifierOpenState = true
+  websiteOpenState = false
+  keywordOpenState = false
+  addressOpenState = false
+  countriesOpenState = false
+  externalIdentifierOpenState = false
+  emailsOpenState = false
 
   constructor(
     _platform: PlatformInfoService,
