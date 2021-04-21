@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
-import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
 import { ModalBiographyComponent } from './modals/modal-biography/modal-biography.component'
