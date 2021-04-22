@@ -11,36 +11,40 @@
   <ng-container i18n="@@inbox.sectionOf">section of your record:</ng-container>
 </div>
 
-<strong>{{ getAmendedTypeLabel(item) }}</strong>
+<div *ngFor="let i of itemGroupedByType">
 
-<div class="item" *ngIf="item">
-  <ng-container>-</ng-container>
+  <strong>{{ getAmendedTypeLabel(i.type) }}</strong>
 
-  <ng-container
-    *ngIf="item.additionalInfo && item.additionalInfo['org_name'] != undefined"
-  >
-    <i>{{ item.additionalInfo['org_name'] }} </i>
-  </ng-container>
-
-  <ng-container *ngIf="item.itemName != null">{{ item.itemName }}</ng-container>
-
-  <ng-container *ngIf="item.additionalInfo">
-    <ng-container
-      *ngIf="
-        item.itemName == null && item.additionalInfo['group_name'] != undefined
-      "
-      >{{ item.additionalInfo['group_name'] }}</ng-container
-    >
-    <div *ngIf="item.additionalInfo['external_identifiers'] != undefined">
-      <ul
-        *ngFor="
-          let otherId of item.additionalInfo['external_identifiers'][
-            'externalIdentifier'
-          ]
-        "
+  <div class="item" *ngIf="item">
+    <ng-container *ngFor="let item of i.items">
+      <ng-container>-</ng-container>
+      <ng-container
+        *ngIf="item.additionalInfo && item.additionalInfo['org_name'] != undefined"
       >
-        <li>{{ otherId.type }}: {{ otherId.value }}</li>
-      </ul>
-    </div>
-  </ng-container>
+        <i>{{ item.additionalInfo['org_name'] }} </i>
+      </ng-container>
+
+      <ng-container *ngIf="item.itemName != null">{{ item.itemName }}</ng-container>
+
+      <ng-container *ngIf="item.additionalInfo">
+        <ng-container
+          *ngIf="
+            item.itemName == null && item.additionalInfo['group_name'] != undefined
+          "
+          >{{ item.additionalInfo['group_name'] }}</ng-container
+        >
+        <div *ngIf="item.additionalInfo['external_identifiers'] != undefined">
+          <ul
+            *ngFor="
+              let otherId of item.additionalInfo['external_identifiers'][
+                'externalIdentifier'
+              ]
+            "
+          >
+            <li>{{ otherId.type }}: {{ otherId.value }}</li>
+          </ul>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>
