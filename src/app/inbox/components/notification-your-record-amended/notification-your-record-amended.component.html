@@ -12,24 +12,28 @@
 </div>
 
 <div *ngFor="let i of itemGroupedByType">
-
   <strong>{{ getAmendedTypeLabel(i.type) }}</strong>
 
   <div class="item" *ngIf="item">
     <ng-container *ngFor="let item of i.items">
       <ng-container>-</ng-container>
       <ng-container
-        *ngIf="item.additionalInfo && item.additionalInfo['org_name'] != undefined"
+        *ngIf="
+          item.additionalInfo && item.additionalInfo['org_name'] != undefined
+        "
       >
         <i>{{ item.additionalInfo['org_name'] }} </i>
       </ng-container>
 
-      <ng-container *ngIf="item.itemName != null">{{ item.itemName }}</ng-container>
+      <ng-container *ngIf="item.itemName != null">{{
+        item.itemName
+      }}</ng-container>
 
       <ng-container *ngIf="item.additionalInfo">
         <ng-container
           *ngIf="
-            item.itemName == null && item.additionalInfo['group_name'] != undefined
+            item.itemName == null &&
+            item.additionalInfo['group_name'] != undefined
           "
           >{{ item.additionalInfo['group_name'] }}</ng-container
         >
