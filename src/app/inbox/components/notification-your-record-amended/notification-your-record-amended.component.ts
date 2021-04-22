@@ -4,6 +4,7 @@ import {
   InboxNotificationAmended,
   Item,
 } from 'src/app/types/notifications.endpoint'
+import { chain } from 'lodash'
 
 @Component({
   selector: 'app-notification-your-record-amended',
@@ -13,7 +14,8 @@ import {
 })
 export class NotificationYourRecordAmendedComponent implements OnInit {
   private _notification: InboxNotificationAmended
-  item: Item
+  item: Item[]
+  itemGroupedByType: { type: string, items: Item[] }[]
   @Input()
   set notification(notification: InboxNotificationAmended) {
     this._notification = notification
@@ -21,18 +23,23 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
       // multiple items notifications are not expected for `YOUR-RECORD`
       this._errorHandler.handleError(new Error('notificationUnexpectedLength'))
     }
-    this.item = notification.items.items[0]
+    this.item = notification.items.items
   }
   get notification() {
     return this._notification
   }
   constructor(private _errorHandler: ErrorHandlerService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.itemGroupedByType = chain(this.notification.items.items)
+      .groupBy('actionType')
+      .map((value, key) => ({ type: key, items: value }))
+      .value()
+  }
 
-  getAmendedTypeLabel(item: Item) {
-    if (item) {
-      switch (item.actionType) {
+  getAmendedTypeLabel(type: string) {
+    if (type) {
+      switch (type) {
         case 'CREATE':
           return $localize`:@@inbox.newItemAdded:Added`
         case 'UPDATE':
