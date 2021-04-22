@@ -35,13 +35,17 @@
   >
     Archive without granting permissions
   </button>
-  <button
-    mat-raised-button
-    color="primary"
-    class="grant-permission"
-    (click)="navigateTo(notification.authorizationUrl.uri)"
-    i18n="@@inbox.grantPermission"
-  >
+  <a
+    target="_blank"
+    rel="noopener noreferrer"
+    href=" {{ notification.authorizationUrl.uri }}">
+    <button
+      mat-raised-button
+      color="primary"
+      class="grant-permission"
+      i18n="@@inbox.grantPermission"
+    >
     Grant permission
   </button>
+  </a>
 </div>
