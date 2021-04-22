@@ -15,7 +15,7 @@ import { chain } from 'lodash'
 export class NotificationYourRecordAmendedComponent implements OnInit {
   private _notification: InboxNotificationAmended
   item: Item[]
-  itemGroupedByType: { type: string, items: Item[] }[]
+  itemGroupedByType: { type: string; items: Item[] }[]
   @Input()
   set notification(notification: InboxNotificationAmended) {
     this._notification = notification
