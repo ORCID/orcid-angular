@@ -130,9 +130,7 @@
           }"
         >
           <div class="row space-between">
-            <div
-              class="mat-caption other-names-wrapper"
-            >
+            <div class="mat-caption other-names-wrapper">
               <div class="description" i18n="@@record.otherNames">
                 Other names
               </div>
@@ -142,20 +140,16 @@
                   index as i
                 "
               >
-                <ng-container
-                  *ngIf="!expandedContent"
-                >
+                <ng-container *ngIf="!expandedContent">
                   {{ otherNames.content }}
                   <ng-container
-                    *ngIf="!(userRecord.otherNames?.otherNames?.length - 1 === i)"
-                  >,
-                  </ng-container
-                  >
+                    *ngIf="
+                      !(userRecord.otherNames?.otherNames?.length - 1 === i)
+                    "
+                    >,
+                  </ng-container>
                 </ng-container>
-                <div
-                  class="other-name"
-                  *ngIf="expandedContent"
-                >
+                <div class="other-name" *ngIf="expandedContent">
                   <div>
                     <b class="orc-font-body-small">
                       {{ otherNames.content }}
