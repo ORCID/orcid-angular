@@ -15,15 +15,26 @@
       [type]="'side-bar'"
       class="side-bar"
       id="emails-panel"
+      [(openState)]="emailsOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
       <app-panel-data *ngIf="userRecord?.emails.emails.length > 0">
         <app-panel-element
-          *ngFor="let email of userRecord.emails.emails"
+          *ngFor="let email of userRecord.emails.emails; let last = last"
           [visibility]="!isPublicRecord && email.visibility"
           [bold]="email.primary"
-          >{{ email.value }}</app-panel-element
-        >
+          [isPublicRecord]="isPublicRecord"
+          >{{ email.value }}
+
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="emailsOpenState"
+            [name]="email.sourceName || email.source"
+            [date]="email.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
       </app-panel-data>
     </app-panel>
 
@@ -35,13 +46,15 @@
       [type]="'side-bar'"
       class="side-bar"
       id="websites-panel"
+      [(openState)]="websiteOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
         Website and social links
       </h2>
       <app-panel-data *ngIf="userRecord?.website.websites.length > 0">
         <app-panel-element
-          *ngFor="let website of userRecord.website.websites"
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="let website of userRecord.website.websites; let last = last"
           [visibility]="!isPublicRecord && website.visibility.visibility"
           ><a
             [href]="website.url.value"
@@ -52,6 +65,14 @@
             rel="me nofollow noopener noreferrer"
             >{{ getWebsite(website) }}</a
           >
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="websiteOpenState"
+            [name]="website.sourceName || website.source"
+            [date]="website.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
         </app-panel-element>
       </app-panel-data>
     </app-panel>
@@ -71,9 +92,11 @@
         *ngIf="userRecord?.externalIdentifier.externalIdentifiers.length > 0"
       >
         <app-panel-element
+          [isPublicRecord]="isPublicRecord"
           *ngFor="
             let externalIdentifier of userRecord.externalIdentifier
-              .externalIdentifiers
+              .externalIdentifiers;
+            let last = last
           "
           [visibility]="
             !isPublicRecord && externalIdentifier.visibility.visibility
@@ -90,6 +113,7 @@
           >
           <!-- [app-panel-element-source] only visible on public page -->
           <app-panel-element-source
+            [isLastItem]="last"
             *ngIf="externalIdentifierOpenState"
             [name]="externalIdentifier.sourceName || externalIdentifier.source"
             [date]="externalIdentifier.createdDate | monthDayYearDateToString"
@@ -106,14 +130,25 @@
       [type]="'side-bar'"
       class="side-bar"
       id="keywords-panel"
+      [(openState)]="keywordOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
       <app-panel-data *ngIf="userRecord?.keyword.keywords.length > 0">
         <app-panel-element
-          *ngFor="let keyword of userRecord.keyword.keywords"
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="let keyword of userRecord.keyword.keywords; let last = last"
           [visibility]="!isPublicRecord && keyword.visibility.visibility"
-          >{{ getKeyword(keyword) }}</app-panel-element
-        >
+          >{{ getKeyword(keyword) }}
+
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="keywordOpenState"
+            [name]="keyword.sourceName || keyword.source"
+            [date]="keyword.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
       </app-panel-data>
     </app-panel>
     <app-panel
@@ -124,14 +159,27 @@
       [type]="'side-bar'"
       class="side-bar"
       id="countries-panel"
+      [(openState)]="addressOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
       <app-panel-data *ngIf="userRecord?.countries.addresses.length > 0">
         <app-panel-element
-          *ngFor="let address of userRecord.countries.addresses"
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="
+            let address of userRecord.countries.addresses;
+            let last = last
+          "
           [visibility]="!isPublicRecord && address.visibility.visibility"
-          >{{ address.countryName }}</app-panel-element
-        >
+          >{{ address.countryName }}
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="addressOpenState"
+            [name]="address.sourceName || address.source"
+            [date]="address.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
       </app-panel-data>
     </app-panel>
   </ng-container>

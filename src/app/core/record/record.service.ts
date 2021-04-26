@@ -44,8 +44,7 @@ import { RecordPersonService } from '../record-person/record-person.service'
   providedIn: 'root',
 })
 export class RecordService {
-  recordInitialized = false
-  recordSubject$ = new ReplaySubject<UserRecord>(1)
+  recordSubject$: ReplaySubject<UserRecord>
 
   constructor(
     private _http: HttpClient,
@@ -86,8 +85,11 @@ export class RecordService {
       forceReload: false,
     }
   ): Observable<UserRecord> {
-    if (!this.recordInitialized || options.forceReload) {
-      this.recordInitialized = true
+    if (options.publicRecordId) {
+      return this.getPublicRecord(options.publicRecordId)
+    }
+    if (!this.recordSubject$ || options.forceReload) {
+      this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 
       combineLatest([
         this._recordPerson.getPerson(options),
@@ -148,9 +150,11 @@ export class RecordService {
         .subscribe()
     }
 
-    return this.recordSubject$.pipe(
-      tap((session) => (environment.debugger ? console.info(session) : null))
-    )
+    return this.recordSubject$
+      .asObservable()
+      .pipe(
+        tap((session) => (environment.debugger ? console.info(session) : null))
+      )
   }
 
   getExternalIdentifier(): Observable<ExternalIdentifier> {
@@ -233,6 +237,17 @@ export class RecordService {
         names,
         { headers: this.headers }
       )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  getPublicRecord(orcid: string): Observable<UserRecord> {
+    return this._http
+      .get<UserRecord>(environment.API_WEB + orcid + `/public-record.json`, {
+        headers: this.headers,
+      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
