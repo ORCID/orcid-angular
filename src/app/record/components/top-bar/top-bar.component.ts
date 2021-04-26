@@ -53,8 +53,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((userRecord) => {
         this.userRecord = userRecord
         this.setNames(this.userRecord)
-        console.log('isPublicRecord', this.isPublicRecord)
-        console.log('userRecord', this.userRecord)
       })
   }
 
