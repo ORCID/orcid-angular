@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment'
@@ -25,9 +25,9 @@ export class RecordPeerReviewService {
     if (options.publicRecordId) {
       return this._http.get<PeerReview[]>(
         environment.API_WEB +
-        options.publicRecordId +
-        '/peer-reviews.json?sortAsc=' +
-        (options.sortAsc != null ? options.sortAsc : true)
+          options.publicRecordId +
+          '/peer-reviews.json?sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : true)
       )
     }
     return this._http.get<PeerReview[]>(
