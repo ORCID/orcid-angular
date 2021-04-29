@@ -37,10 +37,11 @@
       </div>
     </div>
 
-    <div class="controls" *ngIf="type !== 'sub-peer-review' ">
+    <div class="controls" *ngIf="type !== 'sub-peer-review'">
       <button
         *ngIf="!isPublicRecord && type !== 'research-resources'"
-        mat-icon-button>
+        mat-icon-button
+      >
         <mat-icon (click)="add()" class="large-material-icon" id="add-button">
           add_circle
         </mat-icon>
