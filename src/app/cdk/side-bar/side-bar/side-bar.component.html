@@ -8,7 +8,7 @@
 
   <ng-container *ngIf="!onlyOrcidId">
     <app-panel
-      *ngIf="userRecord && userRecord.emails"
+      *ngIf="userRecord?.emails?.emails"
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.emails.emails"
       [editModalComponent]="modalEmailComponent"
@@ -18,7 +18,7 @@
       [(openState)]="emailsOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
-      <app-panel-data *ngIf="userRecord?.emails.emails.length > 0">
+      <app-panel-data *ngIf="userRecord.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails; let last = last"
           [visibility]="!isPublicRecord && email.visibility"
@@ -39,7 +39,7 @@
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord && userRecord.website"
+      *ngIf="userRecord?.website?.websites"
       [elements]="userRecord.website.websites"
       [editModalComponent]="modalWebsitesComponent"
       [isPublicRecord]="isPublicRecord"
@@ -51,7 +51,7 @@
       <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
         Website and social links
       </h2>
-      <app-panel-data *ngIf="userRecord?.website.websites.length > 0">
+      <app-panel-data *ngIf="userRecord.website.websites.length > 0">
         <app-panel-element
           [isPublicRecord]="isPublicRecord"
           *ngFor="let website of userRecord.website.websites; let last = last"
@@ -78,7 +78,7 @@
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord?.externalIdentifier?.externalIdentifiers.length"
+      *ngIf="userRecord?.externalIdentifier?.externalIdentifiers"
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
       [editModalComponent]="modalPersonalIdentifiers"
       [isPublicRecord]="isPublicRecord"
@@ -123,7 +123,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord && userRecord.keyword"
+      *ngIf="userRecord?.keyword?.keywords"
       [elements]="userRecord.keyword.keywords"
       [editModalComponent]="modalKeywordComponent"
       [isPublicRecord]="isPublicRecord"
@@ -133,7 +133,7 @@
       [(openState)]="keywordOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
-      <app-panel-data *ngIf="userRecord?.keyword.keywords.length > 0">
+      <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0">
         <app-panel-element
           [isPublicRecord]="isPublicRecord"
           *ngFor="let keyword of userRecord.keyword.keywords; let last = last"
@@ -152,7 +152,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord && userRecord.countries"
+      *ngIf="userRecord?.countries?.addresses"
       [elements]="userRecord.countries.addresses"
       [editModalComponent]="modalCountryComponent"
       [isPublicRecord]="isPublicRecord"
@@ -162,7 +162,7 @@
       [(openState)]="addressOpenState"
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
-      <app-panel-data *ngIf="userRecord?.countries.addresses.length > 0">
+      <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">
         <app-panel-element
           [isPublicRecord]="isPublicRecord"
           *ngFor="

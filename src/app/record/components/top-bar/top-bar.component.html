@@ -49,7 +49,7 @@
           {{ givenNames + ' ' + familyName }}
         </div>
       </app-panel-element>
-      <ng-container *ngIf="userRecord.otherNames.otherNames.length > 0">
+      <ng-container *ngIf="userRecord.otherNames?.otherNames?.length > 0">
         <div class="other-names-container">
           <span i18n="@@record.otherNames" class="mat-caption description">
             Other names
@@ -130,10 +130,7 @@
           }"
         >
           <div class="row space-between">
-            <div
-              class="mat-caption other-names-wrapper"
-              *ngIf="!expandedContent"
-            >
+            <div class="mat-caption other-names-wrapper">
               <div class="description" i18n="@@record.otherNames">
                 Other names
               </div>
@@ -143,39 +140,29 @@
                   index as i
                 "
               >
-                {{ otherNames.content }}
-                <ng-container
-                  *ngIf="!(userRecord.otherNames.otherNames.length - 1 === i)"
-                  >,</ng-container
-                >
+                <ng-container *ngIf="!expandedContent">
+                  {{ otherNames.content }}
+                  <ng-container
+                    *ngIf="
+                      !(userRecord.otherNames?.otherNames?.length - 1 === i)
+                    "
+                    >,
+                  </ng-container>
+                </ng-container>
+                <div class="other-name" *ngIf="expandedContent">
+                  <div>
+                    <b class="orc-font-body-small">
+                      {{ otherNames.content }}
+                    </b>
+                  </div>
+                  <div>
+                    <b class="description" i18n="@@record.source"> Source </b>
+                  </div>
+                  <div class="description">
+                    {{ otherNames.sourceName }}
+                  </div>
+                </div>
               </ng-container>
-            </div>
-            <div
-              class="mat-caption other-names-wrapper"
-              *ngIf="expandedContent"
-            >
-              <div class="description" i18n="@@record.otherNames">
-                Other names
-              </div>
-              <div
-                class="other-name"
-                *ngFor="
-                  let otherNames of userRecord.otherNames.otherNames;
-                  index as i
-                "
-              >
-                <div>
-                  <b class="orc-font-body-small">
-                    {{ otherNames.content }}
-                  </b>
-                </div>
-                <div>
-                  <b class="description" i18n="@@record.source"> Source </b>
-                </div>
-                <div class="description">
-                  {{ otherNames.sourceName }}
-                </div>
-              </div>
             </div>
             <div>
               <button
