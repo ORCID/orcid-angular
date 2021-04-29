@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Observable, of } from 'rxjs'
+import { Observable } from 'rxjs'
 import { environment } from '../../../environments/environment.local'
-import { ResearchResource, ResearchResources } from '../../types/record-research-resources.endpoint'
+import {
+  ResearchResource,
+  ResearchResources,
+} from '../../types/record-research-resources.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
@@ -22,17 +25,19 @@ export class RecordResearchResourceService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getResearchResourcePage(options: UserRecordOptions): Observable<ResearchResources> {
+  getResearchResourcePage(
+    options: UserRecordOptions
+  ): Observable<ResearchResources> {
     if (options.publicRecordId) {
       return this._http.get<ResearchResources>(
         environment.API_WEB +
-        options.publicRecordId +
-        '/researchResourcePage.json?offset=' +
-        this.offset +
-        '&sort=' +
-        (options.sort != null ? options.sort : true) +
-        '&sortAsc=' +
-        (options.sortAsc != null ? options.sort : true)
+          options.publicRecordId +
+          '/researchResourcePage.json?offset=' +
+          this.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : true) +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sort : true)
       )
     }
     return this._http.get<ResearchResources>(

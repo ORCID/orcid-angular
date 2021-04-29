@@ -71,7 +71,7 @@ export class ResearchResourcesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.getRecord()
+    this.getRecord()
   }
 
   private getRecord() {
