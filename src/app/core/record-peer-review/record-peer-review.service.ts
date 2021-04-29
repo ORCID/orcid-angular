@@ -22,9 +22,13 @@ export class RecordPeerReviewService {
   ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._http.get<PeerReview[]>(
+        environment.API_WEB +
+        options.publicRecordId +
+        '/peer-reviews.json?sortAsc=' +
+        (options.sortAsc != null ? options.sortAsc : true)
+      )
     }
     return this._http.get<PeerReview[]>(
       environment.API_WEB +

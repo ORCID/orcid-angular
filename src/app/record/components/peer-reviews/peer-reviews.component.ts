@@ -55,11 +55,7 @@ export class PeerReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.isPublicRecord) {
-      this.getRecord()
-    } else {
-      // TODO SUPPORT PUBLIC VIEW
-    }
+    this.getRecord()
   }
 
   private getRecord() {
@@ -68,16 +64,25 @@ export class PeerReviewsComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
+      })
 
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
-        this._record
-          .getRecord({
-            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+    // Loads the public record if `isPublicRecord` is defined
+    // Otherwise loads the current login private record
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord || undefined,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+
+        this._recordPeerReviewService
+          .getPeerReviewGroups({
+            publicRecordId: this.isPublicRecord,
           })
-          .pipe(takeUntil(this.$destroy))
-          .subscribe((userRecord) => {
-            this.userRecord = userRecord
+          .pipe(first())
+          .subscribe((data) => {
+            this.userRecord.peerReviews = data
           })
       })
   }
