@@ -1,5 +1,5 @@
 <app-panels
-  *ngIf="userRecord && userRecord.researchResources"
+  *ngIf="userRecord?.researchResources?.groups"
   class="row"
   [title]="ngOrcidResearchResources"
   [type]="'research-resources'"

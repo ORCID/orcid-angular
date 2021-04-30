@@ -71,11 +71,7 @@ export class ResearchResourcesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.isPublicRecord) {
-      this.getRecord()
-    } else {
-      // TODO SUPPORT PUBLIC VIEW
-    }
+    this.getRecord()
   }
 
   private getRecord() {
@@ -94,6 +90,14 @@ export class ResearchResourcesComponent implements OnInit {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
+            this._recordResearchResourceService
+              .getResearchResourcePage({
+                publicRecordId: this.isPublicRecord,
+              })
+              .pipe(first())
+              .subscribe((data) => {
+                this.userRecord.researchResources = data
+              })
           })
       })
   }
