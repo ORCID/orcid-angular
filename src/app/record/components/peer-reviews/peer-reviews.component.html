@@ -4,6 +4,7 @@
   [title]="ngOrcidPeerReview"
   [type]="'peer-review'"
   [total]="userRecord.peerReviews.length"
+  [isPublicRecord]="isPublicRecord"
 >
   <ng-container *ngIf="userRecord.peerReviews.length > 0">
     <app-panel

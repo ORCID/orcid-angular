@@ -17,6 +17,7 @@ export class PanelsComponent implements OnInit {
     | 'research-resources' = 'activities'
   @Input() currentAmount
   @Input() total
+  @Input() isPublicRecord: any = false
 
   constructor() {}
 
