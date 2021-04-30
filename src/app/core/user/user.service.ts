@@ -35,9 +35,11 @@ import {
   UserSession,
   UserSessionUpdateParameters,
 } from 'src/app/types/session.local'
+import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
+import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
 
@@ -49,7 +51,8 @@ export class UserService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
     private _platform: PlatformInfoService,
-    private _oauth: OauthService
+    private _oauth: OauthService,
+    private _disco: DiscoService
   ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -176,6 +179,7 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
+    thirdPartyAuthData: ThirdPartyAuthData
   }): UserSession {
     {
       return {
@@ -226,28 +230,26 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
+    thirdPartyAuthData: ThirdPartyAuthData
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $oauthSession = this.getOauthSession(updateParameters)
-    if (updateParameters.loggedIn) {
-      return combineLatest([$userInfo, $nameForm, $oauthSession]).pipe(
-        map(([userInfo, nameForm, oauthSession]) => ({
-          userInfo,
-          nameForm,
-          oauthSession,
-        }))
-      )
-    } else {
-      return combineLatest([of(undefined), of(undefined), $oauthSession]).pipe(
-        map(([userInfo, nameForm, oauthSession]) => ({
-          userInfo,
-          nameForm,
-          oauthSession,
-        }))
-      )
-    }
+    const $thirdPartyAuthData = this.getThirdPartySignInData()
+    return combineLatest([
+      updateParameters.loggedIn ? $userInfo : of(undefined),
+      updateParameters.loggedIn ? $nameForm : of(undefined),
+      $oauthSession,
+      !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
+    ]).pipe(
+      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
+        userInfo,
+        nameForm,
+        oauthSession,
+        thirdPartyAuthData,
+      }))
+    )
   }
   /**
    * @param updateParameters login status and trigger information
@@ -278,6 +280,66 @@ export class UserService {
         return of(null)
       })
     )
+  }
+
+  private getThirdPartySignInData(): Observable<ThirdPartyAuthData> {
+    return this._platform.get().pipe(
+      first(),
+      switchMap((platform) => {
+        if (platform.social) {
+          return this._oauth.loadSocialSigninData().pipe(
+            take(1),
+            map((signinData) => {
+              return {
+                signinData,
+                entityDisplayName: this.loadSocialSignInData(
+                  signinData.entityID
+                ),
+              }
+            })
+          )
+        } else if (
+          platform.institutional ||
+          platform.currentRoute === 'register'
+        ) {
+          return this._oauth.loadShibbolethSignInData().pipe(
+            take(1),
+            switchMap((signinData) =>
+              this.getInstitutionName(signinData.providerId).pipe(
+                map((entityDisplayName) => {
+                  return {
+                    entityDisplayName,
+                    signinData,
+                  }
+                })
+              )
+            )
+          )
+        } else {
+          return of(null)
+        }
+      })
+    )
+  }
+
+  private getInstitutionName(entityId): Observable<string> {
+    return this._disco.getInstitutionBaseOnID(entityId).pipe(
+      map((institution) => {
+        return institution.DisplayNames.filter(
+          (subElement) => subElement.lang === 'en'
+        ).map((en) => {
+          return en.value
+        })[0]
+      })
+    )
+  }
+
+  private loadSocialSignInData(entityDisplayName: string) {
+    if (entityDisplayName === 'facebook' || entityDisplayName === 'google') {
+      entityDisplayName =
+        entityDisplayName.charAt(0).toUpperCase() + entityDisplayName.slice(1)
+    }
+    return entityDisplayName
   }
 
   /**

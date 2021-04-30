@@ -18,6 +18,7 @@ import { A11yLinkModule } from '../a11y-link/a11y-link.module'
 import { ModalWebsitesComponent } from './modals/modal-websites/modal-websites.component'
 import { ModalKeywordComponent } from './modals/modal-keyword/modal-keyword.component'
 import { ModalPersonIdentifiersComponent } from './modals/modal-person-identifiers/modal-person-identifiers.component'
+import { SharedModule } from 'src/app/shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ModalPersonIdentifiersComponent } from './modals/modal-person-identifie
   imports: [
     CommonModule,
     PanelModule,
+    SharedModule,
     ModalModule,
     MatDialogModule,
     MatButtonModule,

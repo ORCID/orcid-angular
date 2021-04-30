@@ -6,7 +6,7 @@
     }"
   >
     <div class="inline-initial-side">
-      <button mat-icon-button (click)="collapse()">
+      <button mat-icon-button (click)="collapse()" id="expand-content-button">
         <mat-icon class="large-material-icon" *ngIf="expandedContent"
           >keyboard_arrow_down
         </mat-icon>
@@ -16,27 +16,40 @@
       </button>
 
       <div class="text-container">
-        {{ title }}
+        <strong class="orc-font-body-large">
+          {{ title }}
+        </strong>
         <ng-container *ngIf="type === 'activities'">
-          <ng-container *ngIf="currentAmount"
-            >({{ currentAmount }} of {{ total }})</ng-container
+          <span *ngIf="currentAmount"
+            >({{ currentAmount }} of {{ total }})</span
           >
-          <ng-container *ngIf="!currentAmount">(0)</ng-container>
+          <span *ngIf="!currentAmount">(0)</span>
         </ng-container>
-        <ng-container *ngIf="type === 'peer-review'">
+        <span
+          *ngIf="
+            type === 'peer-review' ||
+            type === 'research-resources' ||
+            type === 'funding'
+          "
+        >
           ({{ total }})
-        </ng-container>
+        </span>
       </div>
     </div>
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
-      <button mat-icon-button a>
-        <mat-icon (click)="add()" class="large-material-icon"
-          >add_circle</mat-icon
-        >
+      <button
+        *ngIf="!isPublicRecord && type !== 'research-resources'"
+        mat-icon-button
+      >
+        <mat-icon (click)="add()" class="large-material-icon" id="add-button">
+          add_circle
+        </mat-icon>
       </button>
       <button mat-icon-button>
-        <mat-icon (click)="sort()" class="large-material-icon">sort</mat-icon>
+        <mat-icon (click)="sort()" class="large-material-icon" id="sort-button">
+          sort
+        </mat-icon>
       </button>
     </div>
   </div>

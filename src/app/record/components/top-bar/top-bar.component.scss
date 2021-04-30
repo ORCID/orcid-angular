@@ -11,8 +11,16 @@ app-panel {
     margin-top: 0;
   }
 
-  .other-names {
-    margin-bottom: 0;
+  p .published-name {
+    margin-bottom: 18px;
+  }
+
+  .other-names-container {
+    margin-top: 18px;
+
+    .other-names {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -41,4 +49,63 @@ app-panel {
   .mat-icon-button {
     border-radius: 0;
   }
+}
+
+.public-container {
+  width: 100%;
+
+  .names-container {
+    h3 {
+      margin-top: 0;
+    }
+
+    .names {
+      height: 64px;
+      margin-left: 10px;
+      padding: 16px;
+      border: solid 1px;
+      border-radius: 4px;
+    }
+
+    .names.mobile {
+      height: auto !important;
+      margin-left: 0 !important;
+    }
+
+    .other-names {
+      height: 64px;
+      margin-right: 20px;
+      border: solid 1px;
+      border-radius: 4px;
+    }
+
+    .other-names.mobile {
+      margin-top: 1em;
+      margin-right: 0 !important;
+    }
+
+    .other-names-extended {
+      height: auto !important;
+    }
+
+    .other-names-wrapper {
+      padding: 16px;
+
+      .other-name {
+        margin-bottom: 10px;
+      }
+
+      .other-name:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .biography-container {
+    margin-top: 2em;
+  }
+}
+
+.public-container.mobile {
+  margin-top: 2em;
 }

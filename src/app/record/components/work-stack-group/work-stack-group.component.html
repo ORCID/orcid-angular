@@ -1,0 +1,27 @@
+<ng-container *ngIf="workGroup">
+  <app-panels
+    *ngIf="workGroup.groups.length"
+    class="row"
+    [title]="works"
+    [currentAmount]="workGroup.groups.length"
+    [total]="workGroup.totalGroups"
+  >
+    <ng-container *ngIf="workGroup.groups.length > 0">
+      <app-work-stack
+        *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
+        [workStack]="group"
+      ></app-work-stack>
+    </ng-container>
+    <ng-container *ngIf="workGroup.groups.length === 0">
+      <div class="orc-font-body-small">
+        <p i18n="@@shared.worksDescription">
+          Add details about your works, captures your research outputs, e.g.
+          publications, conference presentations, data sets, and more.
+        </p>
+        <a class="underline" href="" i18n="@@shared.worksLearnMore">
+          Learn more about adding a works to your ORCID record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</ng-container>

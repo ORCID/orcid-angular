@@ -19,7 +19,7 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
   preserveWhitespaces: true,
 })
 export class PeerReviewsComponent implements OnInit {
-  @Input() publicView: any = false
+  @Input() isPublicRecord: string
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -55,25 +55,40 @@ export class PeerReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getRecord()
+  }
+
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
+      })
 
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
-        this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
-          .pipe(takeUntil(this.$destroy))
-          .subscribe((userRecord) => {
-            this.userRecord = userRecord
+    // Loads the public record if `isPublicRecord` is defined
+    // Otherwise loads the current login private record
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord || undefined,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+
+        this._recordPeerReviewService
+          .getPeerReviewGroups({
+            publicRecordId: this.isPublicRecord,
+          })
+          .pipe(first())
+          .subscribe((data) => {
+            this.userRecord.peerReviews = data
           })
       })
   }
 
   getDetails(peerReview: PeerReview, putCode: number): void {
-    if (this.publicView) {
+    if (this.isPublicRecord) {
       this._recordPeerReviewService
         .getPublicPeerReviewById(
           this.userSession.userInfo.EFFECTIVE_USER_ORCID,
@@ -86,7 +101,7 @@ export class PeerReviewsComponent implements OnInit {
             peerReview.showDetails = true
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     } else {
@@ -99,7 +114,7 @@ export class PeerReviewsComponent implements OnInit {
             peerReview.showDetails = true
           },
           (error) => {
-            console.log('getDetailsError', error)
+            console.error('getDetailsError', error)
           }
         )
     }

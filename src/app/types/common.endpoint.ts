@@ -16,6 +16,15 @@ export interface Source {
   sourceName: SourceName
 }
 
+export interface SourceWithAssertionOrigin {
+  sourceOrcid?: any
+  sourceClientId: SourceOrcid
+  sourceName: SourceName
+  assertionOriginOrcid?: any
+  assertionOriginClientId?: any
+  assertionOriginName?: any
+}
+
 export interface Keyword {
   content: string
   source: Source
@@ -75,10 +84,6 @@ export interface SourceOrcid {
   host: string
 }
 
-export interface SourceName {
-  content: string
-}
-
 export interface Email {
   email: string
   source: Source
@@ -92,12 +97,12 @@ export interface Email {
 }
 
 export interface MonthDayYearDate {
-  errors: any[] // TODO define object
+  errors?: any[] // TODO define object
   month: string
   day: string
   year: string
-  required: boolean
-  getRequiredMessage: any
+  required?: boolean
+  getRequiredMessage?: any
 }
 
 export interface Value {
@@ -129,6 +134,29 @@ export interface ExternalIdentifierId {
   value: string
   required: boolean
   getRequiredMessage?: any
+}
+
+export interface Contributor {
+  errors: any[]
+  contributorSequence: Value
+  email?: Value
+  orcid?: Value
+  uri: Value
+  creditName?: Value
+  contributorRole: Value
+}
+
+export interface Title {
+  errors: any[]
+  title: Value
+  translatedTitle?: TranslatedTitle
+}
+
+export interface TranslatedTitle {
+  errors: any[]
+  content: string
+  languageCode?: string
+  languageName?: string
 }
 
 export type ScopesStrings =

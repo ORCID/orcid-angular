@@ -7,7 +7,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { FormControl, FormGroup } from '@angular/forms'
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms'
 import { OrcidValidators } from 'src/app/validators'
 
 import { ErrorStateMatcherForFormLevelErrors } from '../../ErrorStateMatcherForFormLevelErrors'
@@ -37,7 +37,7 @@ export class FormPersonalAdditionalEmailsComponent implements AfterViewInit {
   )
 
   getControlErrorAtFormLevel(
-    control: FormControl | null,
+    control: AbstractControl | null,
     errorGroup: string
   ): string[] {
     return (

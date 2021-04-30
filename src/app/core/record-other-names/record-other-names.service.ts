@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
 import { environment } from '../../../environments/environment'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +22,19 @@ export class RecordOtherNamesService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getOtherNames(forceReload = false): Observable<OtherNamesEndPoint> {
+  getOtherNames(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<OtherNamesEndPoint> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
+
     if (!this.$otherNames) {
       this.$otherNames = new ReplaySubject<OtherNamesEndPoint>(1)
-    } else if (!forceReload) {
+    } else if (options.forceReload) {
       return this.$otherNames
     }
 
@@ -59,7 +69,7 @@ export class RecordOtherNamesService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getOtherNames(true))
+        tap(() => this.getOtherNames({ forceReload: true }))
       )
   }
 }

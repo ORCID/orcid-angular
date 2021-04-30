@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +21,19 @@ export class RecordPeerReviewService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getPeerReviewGroups(sortAsc: true | false): Observable<PeerReview[]> {
+  getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
+    if (options.publicRecordId) {
+      return this._http.get<PeerReview[]>(
+        environment.API_WEB +
+          options.publicRecordId +
+          '/peer-reviews.json?sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : true)
+      )
+    }
     return this._http.get<PeerReview[]>(
-      environment.API_WEB + 'peer-reviews/peer-reviews.json?sortAsc=' + sortAsc
+      environment.API_WEB +
+        'peer-reviews/peer-reviews.json?sortAsc=' +
+        (options.sortAsc != null ? options.sortAsc : true)
     )
   }
 

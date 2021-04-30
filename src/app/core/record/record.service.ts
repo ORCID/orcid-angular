@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { combineLatest, Observable, ReplaySubject } from 'rxjs'
+import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
@@ -11,7 +11,7 @@ import {
   Preferences,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -31,14 +31,20 @@ import { RecordAffiliationService } from '../record-affiliations/record-affiliat
 import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { RecordPeerReviewService } from '../record-peer-review/record-peer-review.service'
 import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
+import { RecordFundingsService } from '../record-fundings/record-fundings.service'
+import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
+import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
+import { ResearchResources } from '../../types/record-research-resources.endpoint'
+import { RecordWorksService } from '../record-works/record-works.service'
+import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { RecordPersonService } from '../record-person/record-person.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordService {
-  recordInitialized = false
-  recordSubject$ = new ReplaySubject<UserRecord>(1)
+  recordSubject$: ReplaySubject<UserRecord>
 
   constructor(
     private _http: HttpClient,
@@ -51,8 +57,12 @@ export class RecordService {
     private _recordCountryService: RecordCountriesService,
     private _recordWebsitesService: RecordWebsitesService,
     private _recordAffiliations: RecordAffiliationService,
+    private _recordFundings: RecordFundingsService,
     private _recordPersonalIdentifier: RecordPersonIdentifierService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordResearchResourceService: RecordResearchResourceService,
+    private _recordWorkService: RecordWorksService,
+    private _recordPerson: RecordPersonService
   ) {}
 
   headers = new HttpHeaders({
@@ -60,23 +70,43 @@ export class RecordService {
     'Content-Type': 'application/json',
   })
 
-  getRecord(id): Observable<UserRecord> {
-    if (!this.recordInitialized) {
-      this.recordInitialized = true
+  /**
+   * @param options:
+   * - use `forceReload` to force all server calls.
+   * - use `publicRecordId` to load a public record or leave the `publicRecordId` undefined
+   * to load the current user private record.
+   *
+   * Note: sending the `privateRecordId` is deprecated
+   *
+   * @returns And subject with all the require data from private or public orcid record
+   */
+  getRecord(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<UserRecord> {
+    if (options.publicRecordId) {
+      return this.getPublicRecord(options.publicRecordId)
+    }
+    if (!this.recordSubject$ || options.forceReload) {
+      this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 
       combineLatest([
-        this.getPerson(id),
-        this._recordEmailsService.getEmails(),
-        this._recordOtherNamesService.getOtherNames(),
-        this._recordCountryService.getAddresses(),
-        this._recordKeywordService.getKeywords(),
-        this._recordWebsitesService.getWebsites(),
-        this._recordPersonalIdentifier.getPersonalIdentifiers(),
-        this._recordNamesService.getNames(),
-        this._recordBiographyService.getBiography(),
-        this._recordAffiliations.getAffiliations(),
-        this.getPreferences(),
-        this._recordPeerReviewService.getPeerReviewGroups(true),
+        this._recordPerson.getPerson(options),
+        this._recordEmailsService.getEmails(options),
+        this._recordOtherNamesService.getOtherNames(options),
+        this._recordCountryService.getAddresses(options),
+        this._recordKeywordService.getKeywords(options),
+        this._recordWebsitesService.getWebsites(options),
+        this._recordPersonalIdentifier.getPersonalIdentifiers(options),
+        this._recordNamesService.getNames(options),
+        this._recordBiographyService.getBiography(options),
+        this._recordAffiliations.getAffiliations(options),
+        this._recordFundings.getFundings(options),
+        this.getPreferences(options),
+        this._recordPeerReviewService.getPeerReviewGroups(options),
+        this._recordResearchResourceService.getResearchResourcePage(options),
+        this._recordWorkService.getWorks(options),
       ])
         .pipe(
           tap(
@@ -91,8 +121,11 @@ export class RecordService {
               names,
               biography,
               affiliations,
+              fundings,
               preferences,
               peerReviews,
+              researchResources,
+              works,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -105,8 +138,11 @@ export class RecordService {
                 names: names as NamesEndPoint,
                 biography: biography as BiographyEndPoint,
                 affiliations: affiliations as AffiliationUIGroup[],
+                fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
+                researchResources: researchResources as ResearchResources,
+                works: works as WorksEndpoint,
               })
             }
           )
@@ -114,31 +150,10 @@ export class RecordService {
         .subscribe()
     }
 
-    return this.recordSubject$.pipe(
-      tap((session) => (environment.debugger ? console.info(session) : null))
-    )
-  }
-
-  getPerson(id): Observable<Person> {
-    return this._http
-      .get<Person>(environment.API_WEB + `${id}/person.json`)
+    return this.recordSubject$
+      .asObservable()
       .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-      .pipe(
-        tap((data) => {
-          // Changes publicGroupedAddresses keys for full country names
-          if (data.publicGroupedAddresses) {
-            Object.keys(data.publicGroupedAddresses).map((key) => {
-              if (data.countryNames && data.countryNames[key]) {
-                data.publicGroupedAddresses[data.countryNames[key]] =
-                  data.publicGroupedAddresses[key]
-                delete data.publicGroupedAddresses[key]
-              }
-            })
-          }
-        })
+        tap((session) => (environment.debugger ? console.info(session) : null))
       )
   }
 
@@ -194,7 +209,15 @@ export class RecordService {
       )
   }
 
-  getPreferences(): Observable<Preferences> {
+  getPreferences(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<Preferences> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
     return this._http
       .get<Preferences>(
         environment.API_WEB + `account/preferences.json`,
@@ -214,6 +237,17 @@ export class RecordService {
         names,
         { headers: this.headers }
       )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  getPublicRecord(orcid: string): Observable<UserRecord> {
+    return this._http
+      .get<UserRecord>(environment.API_WEB + orcid + `/public-record.json`, {
+        headers: this.headers,
+      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

@@ -23,8 +23,10 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-::ng-deep .mat-form-field-wrapper {
-  padding-bottom: 0;
+.description {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 8px !important;
+  }
 }
 
 .url {
@@ -40,10 +42,10 @@
     cursor: move;
     z-index: 1;
     margin: auto 1.45vh;
+    margin-inline-end: 8px;
   }
 
   .input-container {
-    max-width: 366px;
     margin: 18px 0;
   }
 
@@ -61,6 +63,7 @@
   }
 
   app-privacy-selector {
+    min-width: 180px;
     margin: auto 7vh;
   }
 
@@ -88,6 +91,7 @@
 
 .mat-form-field {
   width: 100%;
+  margin-inline-end: 32px;
 }
 
 .add-more {
@@ -96,13 +100,5 @@
   span {
     margin: auto;
     padding-left: 6px;
-  }
-}
-
-::ng-deep .columns-4-or-8 {
-  .websites-input-line {
-    .input-container {
-      margin: 0 !important;
-    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -6,6 +6,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 import {
   AffiliationGroup,
   AffiliationUIGroup,
+  AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
@@ -17,6 +18,7 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
+  @Input() isPublicRecord: any = false
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession
@@ -28,6 +30,14 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.isPublicRecord) {
+      this.getRecord()
+    } else {
+      // TODO SUPPORT PUBLIC VIEW
+    }
+  }
+
+  private getRecord() {
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
@@ -37,7 +47,9 @@ export class AffiliationStacksGroupsComponent implements OnInit {
         // TODO @amontenegro
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
+          .getRecord({
+            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
@@ -52,5 +64,26 @@ export class AffiliationStacksGroupsComponent implements OnInit {
 
   trackByAffiliationGroup(index, item: AffiliationGroup) {
     return item.activePutCode
+  }
+
+  affiliationTypeLabel(affiliationType: string) {
+    switch (affiliationType) {
+      case AffiliationUIGroupsTypes.EMPLOYMENT:
+        return $localize`:@@shared.employment:Employment`
+      case AffiliationUIGroupsTypes.EDUCATION_AND_QUALIFICATION:
+        return $localize`:@@shared.educationQualifications:Education and Qualifications`
+      case AffiliationUIGroupsTypes.INVITED_POSITION_AND_DISTINCTION:
+        return $localize`:@@shared.invitedPositions:Invited positions and Distinctions`
+      case AffiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE:
+        return $localize`:@@shared.membership:Membership and Service`
+    }
+  }
+
+  getAffiliationType(type: string): AffiliationUIGroup {
+    if (this.profileAffiliationUiGroups) {
+      return this.profileAffiliationUiGroups.filter((affiliation) => {
+        return affiliation.type === type
+      })[0]
+    }
   }
 }
