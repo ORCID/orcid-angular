@@ -14,10 +14,10 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.keyword-input-line {
+.keywords-input-line {
   margin-top: 20px;
   img {
-    margin-top: 6px;
+    margin-top: 3px;
     cursor: move;
     z-index: 1;
     margin-inline-end: 18px;
@@ -26,7 +26,7 @@
 
 .mat-form-field {
   width: 100%;
-  margin-inline-end: 16px;
+  margin-inline-end: 32px;
 }
 
 ::ng-deep .columns-4-or-8 .mat-form-field {
@@ -36,6 +36,9 @@
 
 .add-more {
   margin-top: 16px;
+  span {
+    padding-left: 6px;
+  }
 }
 
 ::ng-deep .cdk-drop-list-dragging {
@@ -48,4 +51,8 @@
   .mat-flat-button {
     cursor: move !important;
   }
+}
+
+app-privacy-selector {
+  min-width: 180px;
 }

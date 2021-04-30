@@ -1,0 +1,16 @@
+<!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
+<app-panels
+  *ngIf="userRecord && userRecord.fundings && userRecord.fundings.length > 0"
+  class="row"
+  [title]="ngOrcidFunding"
+  [type]="'funding'"
+  [total]="userRecord.fundings.length"
+>
+  <app-funding-stack
+    *ngFor="
+      let fundingGroup of userRecord.fundings;
+      trackBy: trackByFundingGroup
+    "
+    [fundingStack]="fundingGroup"
+  ></app-funding-stack>
+</app-panels>

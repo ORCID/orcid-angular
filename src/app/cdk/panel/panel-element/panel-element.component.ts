@@ -7,9 +7,10 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
   styleUrls: ['./panel-element.component.scss'],
 })
 export class PanelElementComponent implements OnInit {
-  @Input() visibility: VisibilityStrings
+  @Input() visibility: VisibilityStrings | ''
   @Input() bold: Boolean
   @Input() hideVisibility: Boolean = true
+  @Input() isPublicRecord: string
 
   constructor() {}
 

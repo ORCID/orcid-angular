@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +22,19 @@ export class RecordWebsitesService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getWebsites(forceReload = false): Observable<WebsitesEndPoint> {
+  getWebsites(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<WebsitesEndPoint> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
+
     if (!this.$websites) {
       this.$websites = new ReplaySubject<WebsitesEndPoint>(1)
-    } else if (!forceReload) {
+    } else if (!options.forceReload) {
       return this.$websites
     }
 
@@ -56,7 +66,7 @@ export class RecordWebsitesService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWebsites(true))
+        tap(() => this.getWebsites({ forceReload: true }))
       )
   }
 }

@@ -18,6 +18,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    span {
+      margin-left: 3px;
+    }
     button {
       margin-inline-end: 4px;
     }
