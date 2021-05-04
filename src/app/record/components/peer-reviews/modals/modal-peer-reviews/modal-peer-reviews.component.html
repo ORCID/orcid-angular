@@ -1,7 +1,8 @@
 <app-modal [loading]="loadingPeerReviews" [noSidebar]="true">
   <app-modal-header>
     <ng-container i18n="@@peerReview.linkPeerReviews">
-      Link peer reviews</ng-container
+      Link peer reviews
+    </ng-container
     >
   </app-modal-header>
   <app-modal-side-bar>
@@ -29,38 +30,35 @@
       Cancel
     </button>
   </app-modal-footer>
-  <!--  todo missing form-->
-  <div>
-    <div class="row">
-      <div class="col orc-font-small-print">
-        <p i18n="@@shared.searchAndLink">
-          Search and Link wizards are our recommended way to populate your
-          record. They make adding works, funding and peer reviews simple and
-          save you time over updating your record manually. Select a platform
-          from the list below to start linking items to your record.
-        </p>
-        <a
-          class="underline"
-          href="https://support.orcid.org/hc/articles/360006971333"
-          i18n="@@peerReview.linkMoreInformation"
-        >
-          More information about linking peer reviews to your ORCID record
-        </a>
-      </div>
+  <div class="row">
+    <div class="col orc-font-small-print">
+      <p i18n="@@shared.searchAndLink">
+        Search and Link wizards are our recommended way to populate your
+        record. They make adding works, funding and peer reviews simple and
+        save you time over updating your record manually. Select a platform
+        from the list below to start linking items to your record.
+      </p>
+      <a
+        class="underline"
+        href="https://support.orcid.org/hc/articles/360006971333"
+        i18n="@@peerReview.linkMoreInformation"
+      >
+        More information about linking peer reviews to your ORCID record
+      </a>
     </div>
-    <div class="row">
-      <h3 i18n="@@shared.availableSearch">Available Search & Link wizards</h3>
-      <mat-divider class="row orcid-divider"></mat-divider>
-      <div *ngFor="let peerReviewImport of peerReviewImports">
-        <h2 class="orc-font-body-small">
-          <a [href]="openImportWizardUrlFilter(peerReviewImport)">
-            {{ peerReviewImport.name }}
-          </a>
-        </h2>
-        <p class="orc-font-small-print">
-          {{ peerReviewImport.description }}
-        </p>
-      </div>
+  </div>
+  <div class="row">
+    <h3 i18n="@@shared.availableSearch">Available Search & Link wizards</h3>
+    <mat-divider class="row orcid-divider"></mat-divider>
+    <div *ngFor="let peerReviewImport of peerReviewImports">
+      <h2 class="orc-font-body-small">
+        <a [href]="openImportWizardUrlFilter(peerReviewImport)">
+          {{ peerReviewImport.name }}
+        </a>
+      </h2>
+      <p class="orc-font-small-print">
+        {{ peerReviewImport.description }}
+      </p>
     </div>
   </div>
 </app-modal>
