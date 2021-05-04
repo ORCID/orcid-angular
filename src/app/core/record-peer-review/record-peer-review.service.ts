@@ -5,6 +5,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { RecordPeerReviewImport } from '../../types/record-peer-review-import.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +40,8 @@ export class RecordPeerReviewService {
     )
   }
 
-  getPeerReviewImportWizardList(): Observable<PeerReview[]> {
-    return this._http.get<PeerReview[]>(
+  getPeerReviewImportWizardList(): Observable<RecordPeerReviewImport[]> {
+    return this._http.get<RecordPeerReviewImport[]>(
       environment.API_WEB + 'workspace/retrieve-peer-review-import-wizards.json'
     )
   }
