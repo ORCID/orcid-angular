@@ -1,5 +1,9 @@
 <app-modal [loading]="loadingPeerReviews" [noSidebar]="true">
-  <app-modal-header></app-modal-header>
+  <app-modal-header>
+    <ng-container i18n="@@peerReview.linkPeerReviews">
+      Link peer reviews</ng-container
+    >
+  </app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title" i18n="@@peerReview.linkPeerReviews">
       Link peer reviews
@@ -35,7 +39,11 @@
           save you time over updating your record manually. Select a platform
           from the list below to start linking items to your record.
         </p>
-        <a class="underline" href="">
+        <a
+          class="underline"
+          href="https://support.orcid.org/hc/articles/360006971333"
+          i18n="@@peerReview.linkMoreInformation"
+        >
           More information about linking peer reviews to your ORCID record
         </a>
       </div>

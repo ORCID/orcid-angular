@@ -16,13 +16,13 @@ export class PanelsComponent implements OnInit {
   @Input() type:
     | 'activities'
     | 'peer-review'
-    | 'funding'
     | 'sub-peer-review'
     | 'funding'
     | 'research-resources' = 'activities'
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
+  @Input() addModalComponent: ComponentType<any>
 
   constructor(
     private _dialog: MatDialog,
@@ -44,10 +44,12 @@ export class PanelsComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-        this._dialog.open(modal, {
-          width: '850px',
-          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-        })
+        if (this.addModalComponent) {
+          this._dialog.open(modal, {
+            width: '850px',
+            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+          })
+        }
       })
   }
 
