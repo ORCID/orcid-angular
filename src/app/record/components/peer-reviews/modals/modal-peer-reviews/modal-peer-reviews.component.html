@@ -1,10 +1,7 @@
 <app-modal [loading]="loadingPeerReviews" [noSidebar]="true">
   <app-modal-header></app-modal-header>
   <app-modal-side-bar>
-    <ng-container
-      id="side-bar-title"
-      i18n="@@peerReview.linkPeerReviews"
-    >
+    <ng-container id="side-bar-title" i18n="@@peerReview.linkPeerReviews">
       Link peer reviews
     </ng-container>
   </app-modal-side-bar>
@@ -28,12 +25,15 @@
       Cancel
     </button>
   </app-modal-footer>
-<!--  todo missing form-->
-  <div >
+  <!--  todo missing form-->
+  <div>
     <div class="row">
       <div class="col orc-font-small-print">
         <p i18n="@@shared.searchAndLink">
-          Search and Link wizards are our recommended way to populate your record. They make adding works, funding and peer reviews simple and save you time over updating your record manually. Select a platform from the list below to start linking items to your record.
+          Search and Link wizards are our recommended way to populate your
+          record. They make adding works, funding and peer reviews simple and
+          save you time over updating your record manually. Select a platform
+          from the list below to start linking items to your record.
         </p>
         <a class="underline" href="">
           More information about linking peer reviews to your ORCID record
@@ -41,18 +41,16 @@
       </div>
     </div>
     <div class="row">
-      <h3 i18n="@@shared.availableSearch">
-        Available Search & Link wizards
-      </h3>
+      <h3 i18n="@@shared.availableSearch">Available Search & Link wizards</h3>
       <mat-divider class="row orcid-divider"></mat-divider>
       <div *ngFor="let peerReviewImport of peerReviewImports">
         <h2 class="orc-font-body-small">
           <a [href]="openImportWizardUrlFilter(peerReviewImport)">
-          {{ peerReviewImport.name}}
+            {{ peerReviewImport.name }}
           </a>
         </h2>
         <p class="orc-font-small-print">
-          {{ peerReviewImport.description}}
+          {{ peerReviewImport.description }}
         </p>
       </div>
     </div>

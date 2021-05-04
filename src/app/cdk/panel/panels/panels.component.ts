@@ -33,9 +33,9 @@ export class PanelsComponent implements OnInit {
     switch (this.type) {
       case 'peer-review':
         this.openModal(ModalPeerReviewsComponent)
-        break;
+        break
       default:
-        break;
+        break
     }
   }
 
@@ -44,10 +44,10 @@ export class PanelsComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-          this._dialog.open(modal, {
-            width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-          })
+        this._dialog.open(modal, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+        })
       })
   }
 

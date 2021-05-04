@@ -37,9 +37,17 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
   }
 
   openImportWizardUrlFilter(client): string {
-    return environment.BASE_URL + 'oauth/authorize' + '?client_id=' + client.id + '&response_type=code&scope=' +
-      client.scopes + '&redirect_uri=' + client.redirectUri
-  };
+    return (
+      environment.BASE_URL +
+      'oauth/authorize' +
+      '?client_id=' +
+      client.id +
+      '&response_type=code&scope=' +
+      client.scopes +
+      '&redirect_uri=' +
+      client.redirectUri
+    )
+  }
 
   saveEvent() {
     this.loadingPeerReviews = true
