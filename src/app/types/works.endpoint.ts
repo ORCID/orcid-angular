@@ -1,4 +1,5 @@
 import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
+import { GroupBase } from './record.endpoint'
 
 export interface Works {
   nextOffset: number
@@ -6,13 +7,7 @@ export interface Works {
   groups: WorkGroup[]
 }
 
-export interface WorkGroup {
-  activePutCode: number
-  defaultPutCode: number
-  groupId: number
-  activeVisibility: string
-  userVersionPresent: boolean
-  externalIdentifiers: ExternalIdentifier[]
+export interface WorkGroup extends GroupBase {
   works: Work[]
 }
 

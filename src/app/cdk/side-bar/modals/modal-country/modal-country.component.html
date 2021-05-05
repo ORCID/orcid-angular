@@ -1,4 +1,7 @@
-<app-modal [loading]="loadingCountries || loadingCountryCodes" noSidebar="true">
+<app-modal
+  [loading]="loadingCountries || loadingCountryCodes"
+  [noSidebar]="true"
+>
   <app-modal-header i18n="@@side-bar.countries">Countries</app-modal-header>
   <app-modal-footer>
     <button
@@ -88,7 +91,7 @@
             mat-icon-button
             class="delete-button"
           >
-            <mat-icon class="material-icons-outlined large-material-icon"
+            <mat-icon class="material-icons-outlined extra-large-material-icon"
               >delete</mat-icon
             >
           </button>
@@ -99,9 +102,20 @@
     <div class="row">
       <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container i18n="@@side-bar.addAnotherEmail">
-          Add another country</ng-container
-        >
+        <span class="mat-body-1">
+          <ng-container
+            *ngIf="countries.length === 0"
+            i18n="@@side-bar.addCountry"
+          >
+            Add a country
+          </ng-container>
+          <ng-container
+            *ngIf="countries.length !== 0"
+            i18n="@@side-bar.addAnotherCountry"
+          >
+            Add another country
+          </ng-container>
+        </span>
       </a>
     </div>
   </div>

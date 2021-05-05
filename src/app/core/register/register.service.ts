@@ -169,6 +169,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
     platform: PlatformInfo,
     registerForm: RegisterForm
   ): RegisterForm {
+    /// TODO @leomendoza123 depend only on the user session thirty party login data
+    /// avoid taking data from the the parameters.
     if (
       platform.social ||
       platform.queryParameters.providerId === 'facebook' ||

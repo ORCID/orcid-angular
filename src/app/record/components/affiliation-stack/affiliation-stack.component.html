@@ -15,7 +15,7 @@
     *ngIf="isPreferred(affiliation) || displayTheStack"
     type="main"
   >
-    <h2 header class="orc-font-body" i18n="@@record.emails">
+    <h2 header class="orc-font-body">
       {{ affiliation.affiliationName.value }}:
 
       <ng-container *ngIf="affiliation.city.value">
@@ -43,7 +43,7 @@
       [sourceName]="affiliation.sourceName || affiliation.source"
       [stackLength]="affiliationStack.affiliations.length"
       [(displayTheStack)]="displayTheStack"
-      (makePrimary)="makePrimaryCard($event)"
+      (makePrimary)="makePrimaryCard(affiliation)"
       [topPanelOfTheStackMode]="
         stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
       "

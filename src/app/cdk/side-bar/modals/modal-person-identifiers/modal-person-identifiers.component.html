@@ -1,4 +1,4 @@
-<app-modal [loading]="loadingPersonalIdentifiers" noSidebar="true">
+<app-modal [loading]="loadingPersonalIdentifiers" [noSidebar]="true">
   <app-modal-header i18n="@@side-bar.personalIdentifiers"
     >Personal identifiers</app-modal-header
   >
@@ -8,7 +8,7 @@
       color="primary"
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
-      id="save-pesonal-id-button"
+      id="save-personal-id-button"
     >
       Save changes
     </button>
@@ -26,7 +26,7 @@
   <div class="container no-padding" [formGroup]="personIdentifiersForm">
     <div class="row">
       <div class="col no-gutters">
-        <p>
+        <p class="orc-font-small-print">
           <ng-container i18n="@@side-bar.personIdentifiersDescription">
             Person identifiers are other identifiers that systems use to
             identify you, such as ResearcherID or Scopus Author ID. These
@@ -44,9 +44,11 @@
       </div>
     </div>
     <div class="row">
-      <h3 class="col no-gutters" i18n="@@side-bar.myPersonIdentifiers">
-        My person identifiers
-      </h3>
+      <label class="orc-font-body-small">
+        <strong i18n="@@side-bar.myPersonIdentifiers"
+          >My person identifiers</strong
+        >
+      </label>
     </div>
 
     <div
@@ -90,7 +92,7 @@
             mat-icon-button
             class="delete-button"
           >
-            <mat-icon class="material-icons-outlined large-material-icon"
+            <mat-icon class="material-icons-outlined extra-large-material-icon"
               >delete</mat-icon
             >
           </button>

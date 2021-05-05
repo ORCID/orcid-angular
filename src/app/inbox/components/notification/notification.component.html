@@ -39,17 +39,17 @@
   <div class="body-container">
     <app-notification-permission
       *ngIf="notification.notificationType === 'PERMISSION'"
-      [notification]="notification"
+      [notification]="$any(notification)"
     ></app-notification-permission>
 
     <app-notification-your-record-amended
       *ngIf="notification.notificationType === 'AMENDED'"
-      [notification]="notification"
+      [notification]="$any(notification)"
     ></app-notification-your-record-amended>
 
     <app-notification-permission-institutional-connection
       *ngIf="notification.notificationType === 'INSTITUTIONAL_CONNECTION'"
-      [notification]="notification"
+      [notification]="$any(notification)"
     ></app-notification-permission-institutional-connection>
 
     <app-notification-html
@@ -59,7 +59,7 @@
         notification.notificationType === 'SERVICE_ANNOUNCEMENT' ||
         notification.notificationType === 'TIP'
       "
-      [notification]="notification"
+      [notification]="$any(notification)"
     ></app-notification-html>
   </div>
 </div>

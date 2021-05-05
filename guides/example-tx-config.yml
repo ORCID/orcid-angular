@@ -155,3 +155,11 @@ filters:
     source_file: src/locale/properties/my-orcid-alerts/my-orcid-alerts.en.properties
     # path expression to translation files, must contain <lang> placeholder
     translation_files_expression: src/locale/properties/my-orcid-alerts/my-orcid-alerts.<lang>.properties
+    
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/research-resources/research-resources.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/research-resources/research-resources.<lang>.properties

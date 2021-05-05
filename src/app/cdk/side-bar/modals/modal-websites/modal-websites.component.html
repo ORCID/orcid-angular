@@ -1,4 +1,4 @@
-<app-modal [loading]="loadingWebsites" noSidebar="true">
+<app-modal [loading]="loadingWebsites" [noSidebar]="true">
   <app-modal-header>
     <ng-container i18n="@@topBar.websites">
       Websites & social links</ng-container
@@ -24,7 +24,11 @@
       Cancel
     </button>
   </app-modal-footer>
-  <form [formGroup]="websitesForm" (ngSubmit)="onSubmit()">
+  <div
+    class="container no-padding"
+    [formGroup]="websitesForm"
+    (ngSubmit)="onSubmit()"
+  >
     <p
       id="my-links"
       class="orc-font-small-print"
@@ -35,7 +39,7 @@
     </p>
     <ng-container *ngIf="websites.length > 0">
       <div class="row">
-        <label for="url-input" class="mat-caption">
+        <label for="url-input" class="orc-font-body-small">
           <strong i18n="@@topBar.myLinks">My links</strong>
         </label>
       </div>
@@ -61,7 +65,10 @@
               src="./assets/vectors/draggable.svg"
             />
             <div class="row">
-              <mat-form-field appearance="outline" class="mat-form-field-min">
+              <mat-form-field
+                appearance="outline"
+                class="mat-form-field-min description"
+              >
                 <input
                   id="description-input"
                   #descriptionInput
@@ -131,7 +138,8 @@
               (click)="deleteWebsite(website.putCode)"
               mat-icon-button
             >
-              <mat-icon class="material-icons-outlined large-material-icon"
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
                 >delete
               </mat-icon>
             </button>
@@ -141,11 +149,19 @@
     </ng-container>
     <div class="row">
       <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
-        <mat-icon class="large-material-icon">add_circle</mat-icon>
-        <span class="mat-body-1" i18n="@@topBar.addAnotherLink">
-          Add another link
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+        <span class="mat-body-1">
+          <ng-container *ngIf="websites.length === 0" i18n="@@topBar.addLink">
+            Add a link
+          </ng-container>
+          <ng-container
+            *ngIf="websites.length !== 0"
+            i18n="@@topBar.addAnotherLink"
+          >
+            Add another link
+          </ng-container>
         </span>
       </a>
     </div>
-  </form>
+  </div>
 </app-modal>

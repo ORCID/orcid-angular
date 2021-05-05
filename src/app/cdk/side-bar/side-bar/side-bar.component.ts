@@ -24,6 +24,7 @@ import { ModalPersonIdentifiersComponent } from '../modals/modal-person-identifi
 export class SideBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  @Input() isPublicRecord: string
   @Input() onlyOrcidId = false
 
   modalCountryComponent = ModalCountryComponent
@@ -43,6 +44,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
   userRecord: UserRecord
   platform: PlatformInfo
 
+  websiteOpenState = false
+  keywordOpenState = false
+  addressOpenState = false
+  countriesOpenState = false
+  externalIdentifierOpenState = false
+  emailsOpenState = false
+
   constructor(
     _platform: PlatformInfoService,
     private _user: UserService,
@@ -57,20 +65,26 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getRecord()
+  }
+
+  private getRecord() {
     this._user
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
+      })
 
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
-        this._record
-          .getRecord(this.userSession.userInfo.EFFECTIVE_USER_ORCID)
-          .pipe(takeUntil(this.$destroy))
-          .subscribe((userRecord) => {
-            this.userRecord = userRecord
-          })
+    // Loads the public record if `isPublicRecord` is defined
+    // Otherwise loads the current login private record
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord || undefined,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
       })
   }
 

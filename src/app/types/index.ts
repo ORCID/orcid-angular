@@ -1,5 +1,6 @@
 export * from './record.endpoint'
 export { MonthDayYearDate } from './common.endpoint'
+export { Contributor } from './common.endpoint'
 export { OrgDisambiguated } from './orgs.disambiguated.endpoint'
 export { Works, WorkGroup, Work } from './works.endpoint'
 export { ActivityService } from './activities-service.local'

@@ -29,7 +29,8 @@
       ui-background-darkest: $ui-background-darkest,
       ui-background: $ui-background,
       // COLORS OVERWRITES
-      unselected-chip: white
+      unselected-chip: white,
+      panel-shadow: $panel-shadow
     )
   );
   // .
@@ -45,6 +46,7 @@
     (
       box-border: $soft-grey,
       brand-primary: $brand-primary,
+      brand-primary-dark: $brand-primary-dark,
       state-notice-light: $state-notice-light,
       state-notice-dark: $state-notice-dark,
       state-notice-darkest: $state-notice-darkest,

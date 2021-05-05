@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
 import { environment } from '../../../environments/environment'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +22,19 @@ export class RecordKeywordService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  getKeywords(forceReload = false): Observable<KeywordEndPoint> {
+  getKeywords(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<KeywordEndPoint> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
+
     if (!this.$keywords) {
       this.$keywords = new ReplaySubject<KeywordEndPoint>(1)
-    } else if (!forceReload) {
+    } else if (!options.forceReload) {
       return this.$keywords
     }
 
@@ -57,7 +67,7 @@ export class RecordKeywordService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getKeywords(true))
+        tap(() => this.getKeywords({ forceReload: true }))
       )
   }
 }

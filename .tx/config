@@ -140,3 +140,11 @@ minimum_perc = 0
 source_file = src/locale/properties/my-orcid-alerts/my-orcid-alerts.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
+
+
+[orcid-angular.src-locale-properties-research-resources-en-properties--transifex]
+file_filter = src/locale/properties/research-resources/research-resources.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/research-resources/research-resources.en.properties
+source_lang = en
+type = UNICODEPROPERTIES

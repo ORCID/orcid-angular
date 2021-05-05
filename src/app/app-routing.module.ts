@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 
 import {
   ApplicationRoutes,
+  routerPublicPageUrl,
   routerReactivation,
   routerThirdPartySignInMatch,
 } from './constants'
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: ApplicationRoutes.home,
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    matcher: routerPublicPageUrl,
+    loadChildren: () =>
+      import('./record/record.module').then((m) => m.RecordModule),
   },
   {
     path: ApplicationRoutes.inbox,

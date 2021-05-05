@@ -1,4 +1,8 @@
-import { SourceOrcid, Value } from './common.endpoint'
+import {
+  SourceOrcid,
+  SourceWithAssertionOrigin,
+  Value,
+} from './common.endpoint'
 
 interface ExternalIdentifier {
   type: string
@@ -9,19 +13,6 @@ interface ExternalIdentifier {
 
 export interface ExternalIdentifiers {
   externalIdentifier: ExternalIdentifier[]
-}
-
-export interface SourceName {
-  content: string
-}
-
-export interface Source {
-  sourceOrcid?: any
-  sourceClientId: SourceOrcid
-  sourceName: SourceName
-  assertionOriginOrcid?: any
-  assertionOriginClientId?: any
-  assertionOriginName?: any
 }
 
 export interface AdditionalInfo {
@@ -55,7 +46,7 @@ export interface InboxNotification {
   sourceDescription?: any
   encryptedPutCode?: any
   subject: string
-  source: Source
+  source: SourceWithAssertionOrigin
 }
 
 export interface InboxNotificationAmended extends InboxNotification {
