@@ -134,6 +134,14 @@ source_file = src/locale/properties/peer-review/peer-review.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
 
+[orcid-angular.src-locale-properties-my-orcid-alerts-my-orcid-alerts-en-properties--transifex]
+file_filter = src/locale/properties/my-orcid-alerts/my-orcid-alerts.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/my-orcid-alerts/my-orcid-alerts.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+
 [orcid-angular.src-locale-properties-research-resources-en-properties--transifex]
 file_filter = src/locale/properties/research-resources/research-resources.<lang>.properties
 minimum_perc = 0
