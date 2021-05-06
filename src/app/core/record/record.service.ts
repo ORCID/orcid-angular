@@ -86,7 +86,7 @@ export class RecordService {
     }
   ): Observable<UserRecord> {
     if (options.publicRecordId) {
-      return this.getPublicRecord(options.publicRecordId)
+      return this.getPublicRecordSideBar(options.publicRecordId)
     }
     if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
@@ -237,17 +237,6 @@ export class RecordService {
         names,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getPublicRecord(orcid: string): Observable<UserRecord> {
-    return this._http
-      .get<UserRecord>(environment.API_WEB + orcid + `/public-record.json`, {
-        headers: this.headers,
-      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
