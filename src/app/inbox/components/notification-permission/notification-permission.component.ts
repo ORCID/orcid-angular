@@ -71,6 +71,6 @@ export class NotificationPermissionComponent implements OnInit {
   }
 
   navigateTo(val) {
-    this.window.open(val, '_blank')
+    this.window.open(val, '_blank', 'rel="noopener noreferrer"')
   }
 }
