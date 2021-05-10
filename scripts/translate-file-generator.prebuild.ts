@@ -99,7 +99,7 @@ function generateLanguageFile(saveCode, file) {
       // Report success
       .pipe(
         tap(() => {
-          console.log(`The langue code '${saveCode}' file was created`)
+          console.warn(`The langue code '${saveCode}' file was created`)
         })
       )
   )

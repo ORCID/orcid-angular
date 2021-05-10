@@ -23,8 +23,6 @@ export class RecordPeerReviewService {
   ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
-    console.log('Get peer reviews of ', options)
-
     if (options.publicRecordId) {
       return this._http.get<PeerReview[]>(
         environment.API_WEB +

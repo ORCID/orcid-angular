@@ -69,9 +69,6 @@ export class RecordPersonService {
       .getUserSession()
       .pipe(
         first(),
-        tap((userSession) => {
-          console.log('user session found ', userSession)
-        }),
         map((userSession) => userSession.userInfo.EFFECTIVE_USER_ORCID),
         switchMap((orcid) => this.getPersonHttpCall(orcid)),
         tap((data) => {

@@ -29,13 +29,9 @@ export class WorkStackGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('I AM ON THE WORKS')
-
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
-        console.log('I AM ON WORKS GETTING THE RECORD')
-
         this.userRecord = userRecord
         this.workGroup = this.userRecord.works
       })
@@ -44,8 +40,6 @@ export class WorkStackGroupComponent implements OnInit {
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
-        console.log('I AM ON WORKS GETTING THE SESSION')
-
         this.userSession = userSession
       })
   }
