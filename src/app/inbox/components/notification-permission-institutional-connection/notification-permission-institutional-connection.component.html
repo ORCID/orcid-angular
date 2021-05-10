@@ -16,12 +16,11 @@
   >
 </div>
 
-<a
-  target="_blank"
-  rel="noopener noreferrer"
-  href=" {{ notification.authorizationUrl.uri }}"
+<button
+  mat-raised-button
+  color="primary"
+  i18n="@@inbox.grantPermission"
+  (click)="navigateTo(notification.authorizationUrl.uri)"
 >
-  <button mat-raised-button color="primary" i18n="@@inbox.grantPermission">
-    Grant permission
-  </button>
-</a>
+  Grant permission
+</button>
