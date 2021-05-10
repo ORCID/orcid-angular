@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../environments/environment'

@@ -29,8 +29,8 @@ export class WorkStackGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('I AM ON THE WORKS');
-    
+    console.log('I AM ON THE WORKS')
+
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {

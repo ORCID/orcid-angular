@@ -78,8 +78,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
     // Loads the public record if `isPublicRecord` is defined
     // Otherwise loads the current login private record
-    console.log('Getting the recod for ', this.isPublicRecord);
-    
+    console.log('Getting the recod for ', this.isPublicRecord)
+
     this._record
       .getRecord({
         publicRecordId: this.isPublicRecord || undefined,

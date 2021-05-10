@@ -33,7 +33,7 @@ export class RecordPersonService {
 
   private getPublicRecordPerson(
     options: UserRecordOptions
-  ): Observable<Person| undefined> {
+  ): Observable<Person | undefined> {
     if (options.publicRecordId) {
       return of(undefined)
     }
