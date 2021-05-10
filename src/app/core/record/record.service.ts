@@ -87,11 +87,8 @@ export class RecordService {
       forceReload: false,
     }
   ): Observable<UserRecord> {
-    if (options.publicRecordId) {
-      return this._recordPublicSidebar.getPublicRecordSideBar(
-        options.publicRecordId
-      )
-    }
+    console.log('2 Getting the record ford', options.publicRecordId)
+
     if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 

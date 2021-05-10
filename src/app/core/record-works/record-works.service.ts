@@ -13,6 +13,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 export class RecordWorksService {
   lastEmitedValue: WorksEndpoint = null
   workSubject = new ReplaySubject<WorksEndpoint>(1)
+  offset = 0
 
   constructor(
     private _http: HttpClient,
@@ -51,9 +52,17 @@ export class RecordWorksService {
       forceReload: false,
     }
   ) {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._http.get<WorksEndpoint>(
+        environment.API_WEB +
+          options.publicRecordId +
+          '/worksPage.json?offset=' +
+          this.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : true) +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sort : true)
+      )
     } else {
       return this.getWorksData(0, 'date', 'false').pipe(
         tap((data) => {

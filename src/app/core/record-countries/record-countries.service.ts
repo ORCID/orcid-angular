@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { retry, catchError, tap } from 'rxjs/operators'
+import { retry, catchError, tap, map } from 'rxjs/operators'
 import {
   CountriesEndpoint,
   RecordCountryCodesEndpoint,
@@ -9,6 +9,7 @@ import {
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class RecordCountriesService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   getCountryCodes() {
@@ -53,9 +55,10 @@ export class RecordCountriesService {
       forceReload: false,
     }
   ): Observable<CountriesEndpoint> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.countries))
     }
 
     if (!this.$addresses) {

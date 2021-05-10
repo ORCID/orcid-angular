@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { NamesEndPoint } from '../../types/record-name.endpoint'
 import { environment } from '../../../environments/environment'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class RecordNamesService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   getNames(
@@ -27,11 +29,11 @@ export class RecordNamesService {
       forceReload: false,
     }
   ): Observable<NamesEndPoint> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.names))
     }
-
     if (!this.$names) {
       this.$names = new ReplaySubject<NamesEndPoint>(1)
     } else if (!options.forceReload) {
