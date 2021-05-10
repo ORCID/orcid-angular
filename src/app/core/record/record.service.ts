@@ -39,6 +39,7 @@ import { ResearchResources } from '../../types/record-research-resources.endpoin
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +63,8 @@ export class RecordService {
     private _recordPeerReviewService: RecordPeerReviewService,
     private _recordResearchResourceService: RecordResearchResourceService,
     private _recordWorkService: RecordWorksService,
-    private _recordPerson: RecordPersonService
+    private _recordPerson: RecordPersonService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   headers = new HttpHeaders({
@@ -86,7 +88,9 @@ export class RecordService {
     }
   ): Observable<UserRecord> {
     if (options.publicRecordId) {
-      return this.getPublicRecordSideBar(options.publicRecordId)
+      return this._recordPublicSidebar.getPublicRecordSideBar(
+        options.publicRecordId
+      )
     }
     if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
