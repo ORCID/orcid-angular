@@ -8,6 +8,7 @@ import { Subject } from 'rxjs'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
+import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -20,6 +21,8 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
 })
 export class PeerReviewsComponent implements OnInit {
   @Input() isPublicRecord: string
+
+  modalPeerReviewComponent = ModalPeerReviewsComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 

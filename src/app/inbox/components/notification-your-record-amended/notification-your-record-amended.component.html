@@ -37,17 +37,22 @@
           "
           >{{ item.additionalInfo['group_name'] }}</ng-container
         >
-        <div *ngIf="item.additionalInfo['external_identifiers'] != undefined">
-          <ul
-            *ngFor="
-              let otherId of item.additionalInfo['external_identifiers'][
-                'externalIdentifier'
-              ]
-            "
-          >
-            <li>{{ otherId.type }}: {{ otherId.value }}</li>
+        <ng-container
+          *ngIf="item.additionalInfo['external_identifiers'] != undefined"
+        >
+          <ul>
+            <li
+              class="orc-font-body-small"
+              *ngFor="
+                let otherId of item.additionalInfo['external_identifiers'][
+                  'externalIdentifier'
+                ]
+              "
+            >
+              {{ otherId.type }}: {{ otherId.value }}
+            </li>
           </ul>
-        </div>
+        </ng-container>
       </ng-container>
     </ng-container>
   </div>

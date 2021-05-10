@@ -26,6 +26,6 @@ export class NotificationPermissionInstitutionalConnectionComponent
   ngOnInit(): void {}
 
   navigateTo(val) {
-    this.window.location.href = val
+    this.window.open(val, '_blank', 'rel="noopener noreferrer"')
   }
 }
