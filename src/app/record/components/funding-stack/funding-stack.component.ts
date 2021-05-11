@@ -135,7 +135,7 @@ export class FundingStackComponent implements OnInit {
 
   makePrimaryCard(funding: Funding) {
     // TODO
-    console.log(this.stackPanelsDisplay)
+    console.info(this.stackPanelsDisplay)
   }
 
   changeTopPanelOfTheStack(funding: Funding) {

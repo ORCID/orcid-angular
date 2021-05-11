@@ -17,6 +17,19 @@ import { PeerReview } from './record-peer-review.endpoint'
 import { ResearchResources } from './record-research-resources.endpoint'
 import { WorksEndpoint } from './record-works.endpoint'
 
+export interface SideBarPublicUserRecord {
+  title?: any
+  displayName?: any
+  names?: any
+  biography: BiographyEndPoint
+  otherNames: OtherNamesEndPoint
+  countries: CountriesEndpoint
+  keyword: KeywordEndPoint
+  emails: EmailsEndpoint
+  externalIdentifier: PersonIdentifierEndpoint
+  website: WebsitesEndPoint
+}
+
 export interface UserRecord {
   person: Person
   emails: EmailsEndpoint

@@ -22,6 +22,8 @@ export class WorkStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
   visibility: VisibilityStrings
+  @Input() isPublicRecord: string
+
   @Input()
   set workStack(value: WorkGroup) {
     this._workStack = value
@@ -49,10 +51,7 @@ export class WorkStackComponent implements OnInit {
     }
   } = {}
 
-  constructor(
-    private _workService: RecordWorksService,
-    private _organizationsService: OrganizationsService
-  ) {}
+  constructor(private _workService: RecordWorksService) {}
 
   /**
    * Set the panelDetails and top of the stack card to default mode
@@ -114,7 +113,10 @@ export class WorkStackComponent implements OnInit {
    */
   private getDetails(work: Work): Observable<WorksEndpoint> {
     const putCode = work.putCode.value
-    const $workDetails = this._workService.getDetails(putCode)
+    const $workDetails = this._workService.getDetails(
+      putCode,
+      this.isPublicRecord
+    )
     return $workDetails
   }
 

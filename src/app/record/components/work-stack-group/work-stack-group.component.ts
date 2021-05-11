@@ -29,31 +29,18 @@ export class WorkStackGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.isPublicRecord) {
-      this.getRecord()
-    } else {
-      // TODO SUPPORT PUBLIC VIEW
-    }
-  }
+    this._record
+      .getRecord({ publicRecordId: this.isPublicRecord })
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+        this.workGroup = this.userRecord.works
+      })
 
-  private getRecord() {
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
-
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
-        this._record
-          .getRecord({
-            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
-          })
-          .pipe(takeUntil(this.$destroy))
-          .subscribe((userRecord) => {
-            this.userRecord = userRecord
-            this.workGroup = this.userRecord.works
-          })
       })
   }
 

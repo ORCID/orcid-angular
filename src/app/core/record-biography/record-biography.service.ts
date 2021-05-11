@@ -27,7 +27,6 @@ export class RecordBiographyService {
       forceReload: false,
     }
   ): Observable<BiographyEndPoint> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

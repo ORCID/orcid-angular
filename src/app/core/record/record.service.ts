@@ -39,6 +39,7 @@ import { ResearchResources } from '../../types/record-research-resources.endpoin
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +63,8 @@ export class RecordService {
     private _recordPeerReviewService: RecordPeerReviewService,
     private _recordResearchResourceService: RecordResearchResourceService,
     private _recordWorkService: RecordWorksService,
-    private _recordPerson: RecordPersonService
+    private _recordPerson: RecordPersonService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   headers = new HttpHeaders({
@@ -85,9 +87,6 @@ export class RecordService {
       forceReload: false,
     }
   ): Observable<UserRecord> {
-    if (options.publicRecordId) {
-      return this.getPublicRecord(options.publicRecordId)
-    }
     if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 
@@ -237,17 +236,6 @@ export class RecordService {
         names,
         { headers: this.headers }
       )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getPublicRecord(orcid: string): Observable<UserRecord> {
-    return this._http
-      .get<UserRecord>(environment.API_WEB + orcid + `/public-record.json`, {
-        headers: this.headers,
-      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
