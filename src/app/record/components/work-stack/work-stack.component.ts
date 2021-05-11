@@ -112,8 +112,6 @@ export class WorkStackComponent implements OnInit {
    * Get require extra backend data to display on the panel details
    */
   private getDetails(work: Work): Observable<WorksEndpoint> {
-    console.log('get public details ', this.isPublicRecord)
-
     const putCode = work.putCode.value
     const $workDetails = this._workService.getDetails(
       putCode,
