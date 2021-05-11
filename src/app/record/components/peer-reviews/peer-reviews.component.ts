@@ -93,10 +93,7 @@ export class PeerReviewsComponent implements OnInit {
   getDetails(peerReview: PeerReview, putCode: number): void {
     if (this.isPublicRecord) {
       this._recordPeerReviewService
-        .getPublicPeerReviewById(
-          this.isPublicRecord,
-          putCode
-        )
+        .getPublicPeerReviewById(this.isPublicRecord, putCode)
         .pipe(first())
         .subscribe(
           (data) => {

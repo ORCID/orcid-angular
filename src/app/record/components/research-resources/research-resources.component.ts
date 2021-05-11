@@ -105,10 +105,7 @@ export class ResearchResourcesComponent implements OnInit {
   getDetails(researchResource: ResearchResource, putCode: number): void {
     if (this.isPublicRecord) {
       this._recordResearchResourceService
-        .getPublicResearchResourceById(
-          this.isPublicRecord,
-          putCode
-        )
+        .getPublicResearchResourceById(this.isPublicRecord, putCode)
         .pipe(first())
         .subscribe(
           (data) => {
