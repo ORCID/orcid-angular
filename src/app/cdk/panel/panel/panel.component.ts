@@ -19,6 +19,7 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
+  @Input() expandButtonsPosition: 'right' | 'left' = 'right'
   @Input() editModalComponent: ComponentType<any>
   @Input() elements:
     | Assertion[]
@@ -53,8 +54,6 @@ export class PanelComponent implements OnInit {
     return this._isPublicRecord
   }
 
-  tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
-  tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
 
   constructor(
@@ -89,7 +88,7 @@ export class PanelComponent implements OnInit {
       })
   }
 
-  collapse() {
+  toggle() {
     this.openState = !this.openState
     this.openStateChange.next(this.openState)
   }
