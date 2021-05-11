@@ -5,6 +5,7 @@
   [title]="ngOrcidFunding"
   [type]="'funding'"
   [total]="userRecord.fundings.length"
+  [isPublicRecord]="isPublicRecord"
 >
   <ng-container *ngIf="userRecord.fundings.length > 0">
     <app-funding-stack
@@ -13,6 +14,7 @@
         trackBy: trackByFundingGroup
       "
       [fundingStack]="fundingGroup"
+      [isPublicRecord]="isPublicRecord"
     ></app-funding-stack>
   </ng-container>
   <ng-container *ngIf="userRecord.fundings.length === 0">

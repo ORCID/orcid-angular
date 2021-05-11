@@ -30,9 +30,13 @@ export class RecordFundingsService {
       forceReload: false,
     }
   ): Observable<FundingGroup[]> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._http.get<FundingGroup[]>(
+        environment.API_WEB +
+        options.publicRecordId +
+        '/fundingGroups.json?sort=date&sortAsc=' +
+        (options.sortAsc != null ? options.sortAsc : true)
+      )
     }
 
     if (!this.$fundings) {
