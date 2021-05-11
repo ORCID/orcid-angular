@@ -14,7 +14,7 @@ import { A11yLinkModule } from '../a11y-link/a11y-link.module'
 import { PanelsComponent } from './panels/panels.component'
 import { PanelDataLineComponent } from './panel-data-line/panel-data-line.component'
 import { PanelElementSourceComponent } from './panel-element-source/panel-element-source.component'
-import { MatDividerModule } from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider'
 import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand-buttons.component'
 
 @NgModule({
