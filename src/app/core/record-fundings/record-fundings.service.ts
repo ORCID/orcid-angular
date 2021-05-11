@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { environment } from 'src/environments/environment'
@@ -33,9 +33,9 @@ export class RecordFundingsService {
     if (options.publicRecordId) {
       return this._http.get<FundingGroup[]>(
         environment.API_WEB +
-        options.publicRecordId +
-        '/fundingGroups.json?sort=date&sortAsc=' +
-        (options.sortAsc != null ? options.sortAsc : true)
+          options.publicRecordId +
+          '/fundingGroups.json?sort=date&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : true)
       )
     }
 
