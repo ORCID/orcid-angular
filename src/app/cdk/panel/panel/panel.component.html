@@ -43,18 +43,18 @@
         <mat-icon class="material-icons-outlined">edit</mat-icon>
       </button>
     </ng-container>
-  </div>
-  <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
-  <ng-container
-    *ngIf="!editable && !customControls && expandButtonsPosition === 'right'"
-  >
-    <ng-container>
-      <app-panel-expand-buttons
-        (toggle)="toggle()"
-        [openState]="openState"
-      ></app-panel-expand-buttons>
+    <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
+    <ng-container
+      *ngIf="!editable && !customControls && expandButtonsPosition === 'right'"
+    >
+      <ng-container>
+        <app-panel-expand-buttons
+          (toggle)="toggle()"
+          [openState]="openState"
+        ></app-panel-expand-buttons>
+      </ng-container>
     </ng-container>
-  </ng-container>
+  </div>
 </div>
 
 <div class="body" *ngIf="openState || type === 'side-bar'">
