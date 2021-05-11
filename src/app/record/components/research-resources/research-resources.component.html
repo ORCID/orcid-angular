@@ -274,7 +274,9 @@
                       </div>
                     </ng-container>
                     <ng-container *ngIf="researchDetail.url">
-                      <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
+                      <h3 class="orc-font-body-small" i18n="@@shared.url">
+                        URL
+                      </h3>
                       <div>
                         <a
                           target="_blank"
@@ -363,8 +365,8 @@
                                 <ng-container
                                   *ngIf="
                                     !isUrl(
-                                      itemExternalIdentifier.externalIdentifierId
-                                        .value
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
                                     )
                                   "
                                 >
@@ -376,8 +378,8 @@
                                 <ng-container
                                   *ngIf="
                                     isUrl(
-                                      itemExternalIdentifier.externalIdentifierId
-                                        .value
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
                                     )
                                   "
                                 >
@@ -385,13 +387,13 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     href="{{
-                                      itemExternalIdentifier.externalIdentifierId
-                                        .value
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
                                     }}"
                                   >
                                     {{
-                                      itemExternalIdentifier.externalIdentifierId
-                                        .value
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
                                     }}
                                   </a>
                                 </ng-container>
@@ -456,7 +458,9 @@
                                   }}</span
                                 >
                                 <span
-                                  *ngIf="organizationDisambiguatedNested.country"
+                                  *ngIf="
+                                    organizationDisambiguatedNested.country
+                                  "
                                   >,
                                   {{
                                     organizationDisambiguatedNested.country
@@ -475,7 +479,9 @@
                                 <a
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  href="{{ organizationDisambiguatedNested.url }}"
+                                  href="{{
+                                    organizationDisambiguatedNested.url
+                                  }}"
                                 >
                                   {{ organizationDisambiguatedNested.url }}
                                 </a>
@@ -502,7 +508,9 @@
                                     let identifierNested of orgDisambiguatedExternalIdentifierNested.all
                                   "
                                 >
-                                  <ng-container *ngIf="!isUrl(identifierNested)">
+                                  <ng-container
+                                    *ngIf="!isUrl(identifierNested)"
+                                  >
                                     {{ identifierNested }}
                                   </ng-container>
                                   <ng-container *ngIf="isUrl(identifierNested)">
@@ -536,10 +544,7 @@
     </ng-container>
     <ng-container *ngIf="userRecord.researchResources.groups.length === 0">
       <div class="orc-font-body-small">
-        <p
-          class="empty"
-          i18n="@@researchResources.description"
-        >
+        <p class="empty" i18n="@@researchResources.description">
           Connect to trusted organizations to automatically add the specialist
           resources you use for your research.
         </p>

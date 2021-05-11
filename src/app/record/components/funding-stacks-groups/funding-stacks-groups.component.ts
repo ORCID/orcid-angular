@@ -47,9 +47,10 @@ export class FundingStacksGroupsComponent implements OnInit {
           .subscribe((userRecord) => {
             this.userRecord = userRecord
 
-            this._recordFundingsService.getFundings({
-              publicRecordId: this.isPublicRecord,
-            })
+            this._recordFundingsService
+              .getFundings({
+                publicRecordId: this.isPublicRecord,
+              })
               .pipe(first())
               .subscribe((data) => {
                 this.userRecord.fundings = data
