@@ -1,7 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
-import { OrganizationsService } from 'src/app/core'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import {
