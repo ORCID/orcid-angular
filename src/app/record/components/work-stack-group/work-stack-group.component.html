@@ -8,6 +8,7 @@
   >
     <ng-container *ngIf="workGroup.groups.length > 0">
       <app-work-stack
+        [isPublicRecord] ="isPublicRecord" 
         *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
         [workStack]="group"
       ></app-work-stack>
