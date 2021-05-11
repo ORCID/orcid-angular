@@ -85,7 +85,7 @@ export class ResearchResourcesComponent implements OnInit {
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
           .getRecord({
-            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+            publicRecordId: this.isPublicRecord || undefined,
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
@@ -106,7 +106,7 @@ export class ResearchResourcesComponent implements OnInit {
     if (this.isPublicRecord) {
       this._recordResearchResourceService
         .getPublicResearchResourceById(
-          { privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID },
+          this.isPublicRecord,
           putCode
         )
         .pipe(first())

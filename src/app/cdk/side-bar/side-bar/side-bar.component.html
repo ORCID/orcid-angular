@@ -3,7 +3,7 @@
     [ngClass]="{
       mobile: !platform.columns12
     }"
-    [id]="isPublicRecord || userSession.userInfo.EFFECTIVE_USER_ORCID"
+    [id]="isPublicRecord || userSession?.userInfo?.EFFECTIVE_USER_ORCID"
   ></app-side-bar-id>
 
   <ng-container *ngIf="!onlyOrcidId">

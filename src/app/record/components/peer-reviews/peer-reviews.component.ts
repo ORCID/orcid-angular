@@ -94,7 +94,7 @@ export class PeerReviewsComponent implements OnInit {
     if (this.isPublicRecord) {
       this._recordPeerReviewService
         .getPublicPeerReviewById(
-          this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+          this.isPublicRecord,
           putCode
         )
         .pipe(first())
