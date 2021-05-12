@@ -111,11 +111,11 @@ export class RecordAffiliationService {
     return this._http
       .get<Affiliation>(
         environment.API_WEB +
-        `${
-          options?.publicRecordId
-            ? options?.publicRecordId + '/'
-            : 'affiliations/'
-        }affiliationDetails.json?id=${putCode}&type=${type}`
+          `${
+            options?.publicRecordId
+              ? options?.publicRecordId + '/'
+              : 'affiliations/'
+          }affiliationDetails.json?id=${putCode}&type=${type}`
       )
       .pipe(
         retry(3),
