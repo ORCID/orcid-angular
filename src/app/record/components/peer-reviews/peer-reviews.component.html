@@ -170,15 +170,15 @@
                     </div>
                   </app-panel-element>
                 </app-panel-data>
+                <app-panel-source
+                  [sourceName]="peerReview.sourceName || peerReview.source"
+                >
+                </app-panel-source>
               </app-panel>
             </div>
           </ng-container>
         </app-panel-element>
       </app-panel-data>
-      <app-panel-source
-        [sourceName]="peerReview.sourceName || peerReview.source"
-      >
-      </app-panel-source>
     </app-panel>
   </ng-container>
   <ng-container *ngIf="userRecord.peerReviews.length === 0">
