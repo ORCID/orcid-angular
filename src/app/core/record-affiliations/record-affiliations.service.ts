@@ -36,7 +36,6 @@ export class RecordAffiliationService {
       forceReload: false,
     }
   ): Observable<AffiliationUIGroup[]> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
       return of(undefined)
     }

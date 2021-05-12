@@ -20,6 +20,6 @@ fs.writeFile(
     if (err) {
       throw new Error('Error creating browserlist regexp ' + err)
     }
-    console.log('Browserlist regexp created')
+    console.info('Browserlist regexp created')
   }
 )
