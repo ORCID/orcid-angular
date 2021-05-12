@@ -22,7 +22,7 @@ import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  hideMainMenu: boolean = false
+  hideMainMenu = false
   _currentRoute: string
   @Input() set currentRoute(value) {
     this._currentRoute = value
