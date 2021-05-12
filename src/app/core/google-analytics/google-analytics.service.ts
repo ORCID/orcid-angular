@@ -72,7 +72,7 @@ fatal: "${fatal}"
       event_label = 'OAuth ' + this.buildClientString(event_label)
     }
     if (environment.debugger) {
-      console.info(`GA - Event ${action}/${event_category}/${event_label}/`)
+      console.info(`GA - Event /${event_category}/${action}/${event_label}/`)
     }
     return this.eventObservable(action, {
       event_category,
