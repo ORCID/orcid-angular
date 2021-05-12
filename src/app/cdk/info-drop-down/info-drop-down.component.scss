@@ -22,6 +22,9 @@ mat-icon {
 .university-dropdown {
   display: flex;
   font-weight: bold;
+  mat-icon {
+    cursor: pointer;
+  }
 }
 
 :host {
