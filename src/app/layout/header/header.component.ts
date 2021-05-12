@@ -14,7 +14,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
 import { Location } from '@angular/common'
-import { ApplicationRoutes } from '../../constants'
+import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
 
 @Component({
   selector: 'app-header',
@@ -22,6 +22,7 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  hideMainMenu: boolean = false
   _currentRoute: string
   @Input() set currentRoute(value) {
     this._currentRoute = value
@@ -68,11 +69,15 @@ export class HeaderComponent implements OnInit {
     _togglz
       .getStateOf('ORCID_ANGULAR_SIGNIN')
       .subscribe((value) => (this.togglzOrcidAngularSignin = value))
-    _router.events.subscribe(
-      () =>
-        (this.signinRegisterButton =
-          location.path() !== `/${ApplicationRoutes.signin}`)
-    )
+    _router.events.subscribe(() => {
+      const path = location.path()
+      console.log(path, ORCID_REGEXP.test(path))
+      console.log(`/${ApplicationRoutes.myOrcidTEMP}`)
+
+      this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
+      this.hideMainMenu =
+        ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcidTEMP}`
+    })
     _togglz
       .getStateOf('NEW_INFO_SITE')
       .subscribe((value) => (this.togglzNewInfoSite = value))
