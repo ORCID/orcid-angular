@@ -35,6 +35,8 @@ export class FundingStackComponent implements OnInit {
     return this._displayTheStack
   }
 
+  @Input() isPublicRecord: string
+
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
   panelDetailsState: {
