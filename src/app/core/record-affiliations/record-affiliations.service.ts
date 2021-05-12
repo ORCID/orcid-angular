@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
@@ -36,14 +36,9 @@ export class RecordAffiliationService {
       forceReload: false,
     }
   ): Observable<AffiliationUIGroup[]> {
-    // TODO GET PUBLIC DATA
-    if (options.publicRecordId) {
-      return of(undefined)
-    }
-
     if (!this.$affiliations) {
       this.$affiliations = new ReplaySubject(1)
-      this.getGroupAndSortAffiliations()
+      this.getGroupAndSortAffiliations(options)
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
@@ -59,8 +54,12 @@ export class RecordAffiliationService {
 
   // Getting the "affiliations details" seems like a waste of network resources.
   // This will only return a url which on the first call comes as null.
-  getAffiliationsDetails(type, putCode): Observable<AffiliationUIGroup[]> {
-    return this.getAffiliationDetails(putCode, type).pipe(
+  getAffiliationsDetails(
+    type,
+    putCode,
+    options?: UserRecordOptions
+  ): Observable<AffiliationUIGroup[]> {
+    return this.getAffiliationDetails(putCode, type, options).pipe(
       tap((data) => {
         if (data && data.url && data.url.value) {
           this.lastEmitedValue.forEach((affiliations) => {
@@ -84,11 +83,19 @@ export class RecordAffiliationService {
     )
   }
 
-  private getAffiliationDetails(putCode, type): Observable<Affiliation> {
+  private getAffiliationDetails(
+    putCode,
+    type,
+    options?: UserRecordOptions
+  ): Observable<Affiliation> {
     return this._http
       .get<Affiliation>(
         environment.API_WEB +
-          `affiliations/affiliationDetails.json?id=${putCode}&type=${type}`
+          `${
+            options?.publicRecordId
+              ? options?.publicRecordId + '/'
+              : 'affiliations/'
+          }affiliationDetails.json?id=${putCode}&type=${type}`
       )
       .pipe(
         retry(3),
@@ -96,17 +103,33 @@ export class RecordAffiliationService {
       )
   }
 
-  private getGroupAndSortAffiliations(): Observable<AffiliationUIGroup[]> {
-    return this._http
-      .get<AffiliationsEndpoint>(
-        environment.API_WEB + `affiliations/affiliationGroups.json`
-      )
-      .pipe(
-        retry(3),
-        map((data) => this._affiliationsGroupingService.transform(data)),
-        map((data) => this._affiliationsSortService.transform(data)),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+  private getGroupAndSortAffiliations(
+    options: UserRecordOptions
+  ): Observable<AffiliationUIGroup[]> {
+    if (options.publicRecordId) {
+      return this._http
+        .get<AffiliationsEndpoint>(
+          environment.API_WEB +
+            `${options.publicRecordId}/affiliationGroups.json`
+        )
+        .pipe(
+          retry(3),
+          map((data) => this._affiliationsGroupingService.transform(data)),
+          map((data) => this._affiliationsSortService.transform(data)),
+          catchError((error) => this._errorHandler.handleError(error))
+        )
+    } else if (options.publicRecordId) {
+      return this._http
+        .get<AffiliationsEndpoint>(
+          environment.API_WEB + `affiliations/affiliationGroups.json`
+        )
+        .pipe(
+          retry(3),
+          map((data) => this._affiliationsGroupingService.transform(data)),
+          map((data) => this._affiliationsSortService.transform(data)),
+          catchError((error) => this._errorHandler.handleError(error))
+        )
+    }
   }
 
   set(value): Observable<AffiliationUIGroup[]> {

@@ -21,6 +21,7 @@ import {
 export class AffiliationStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _affiliationStack: AffiliationGroup
+  @Input() isPublicRecord: string = null
   @Input()
   set affiliationStack(value: AffiliationGroup) {
     this._affiliationStack = value
@@ -138,7 +139,10 @@ export class AffiliationStackComponent implements OnInit {
     }
     const $affiliationDetails = this._affiliationService.getAffiliationsDetails(
       affiliation.affiliationType.value,
-      putCode
+      putCode,
+      {
+        publicRecordId: this.isPublicRecord,
+      }
     )
 
     // Call http requests at the same time
