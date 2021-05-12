@@ -24,5 +24,4 @@ export class NotificationPermissionInstitutionalConnectionComponent
   constructor(@Inject(WINDOW) private window: Window) {}
 
   ngOnInit(): void {}
-
 }
