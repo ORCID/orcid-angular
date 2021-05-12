@@ -67,6 +67,17 @@ export class RecordFundingsService {
     /* TODO: Fetch group id info */
   }
 
+  getPublicFundingDetails(orcid, putCode): Observable<any> {
+    return this._http
+      .get<Funding>(
+        environment.API_WEB + orcid + `/fundingDetails.json?id=${putCode}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
   private getAndSortFundings(): Observable<FundingGroup[]> {
     return this._http
       .get<FundingGroup[]>(

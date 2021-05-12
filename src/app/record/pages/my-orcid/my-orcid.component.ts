@@ -11,6 +11,7 @@ import { ORCID_REGEXP } from 'src/app/constants'
 export class MyOrcidComponent implements OnInit {
   platform: PlatformInfo
   publicOrcid: string
+  expandedContent = true
 
   constructor(
     private _platform: PlatformInfoService,
@@ -32,5 +33,9 @@ export class MyOrcidComponent implements OnInit {
 
   ngOnInit(): void {
     this._platform.get().subscribe((value) => (this.platform = value))
+  }
+
+  collapse() {
+    this.expandedContent = !this.expandedContent
   }
 }

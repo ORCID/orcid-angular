@@ -14,6 +14,7 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class WorkStackGroupComponent implements OnInit {
   @Input() isPublicRecord: string
+  @Input() expandedContent: boolean
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
