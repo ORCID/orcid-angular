@@ -26,6 +26,7 @@ export class PanelSourceComponent implements OnInit {
 
   @Output() makePrimary = new EventEmitter<void>()
   @Input() topPanelOfTheStackMode: boolean
+  @Input() clickableSource = true
   @Output() topPanelOfTheStackModeChange = new EventEmitter<void>()
 
   constructor(private _platformInfo: PlatformInfoService) {
