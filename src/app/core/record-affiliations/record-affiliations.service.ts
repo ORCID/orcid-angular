@@ -88,7 +88,6 @@ export class RecordAffiliationService {
     type,
     options?: UserRecordOptions
   ): Observable<Affiliation> {
-    console.log(JSON.stringify(options))
     return this._http
       .get<Affiliation>(
         environment.API_WEB +
@@ -109,7 +108,6 @@ export class RecordAffiliationService {
     type,
     options?: UserRecordOptions
   ): Observable<Affiliation> {
-    console.log(options.publicRecordId)
     return this._http
       .get<Affiliation>(
         environment.API_WEB +
