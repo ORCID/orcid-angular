@@ -69,8 +69,4 @@ export class NotificationPermissionComponent implements OnInit {
   archive() {
     this._inbox.flagAsArchive(this.notification.putCode).subscribe()
   }
-
-  navigateTo(val) {
-    this.window.open(val, '_blank', 'rel="noopener noreferrer"')
-  }
 }
