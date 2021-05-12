@@ -55,6 +55,17 @@
       </ng-container>
     </ng-container>
   </div>
+  <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
+  <ng-container
+    *ngIf="!editable && !customControls && expandButtonsPosition === 'right'"
+  >
+    <ng-container>
+      <app-panel-expand-buttons
+        (toggle)="toggle()"
+        [openState]="openState"
+      ></app-panel-expand-buttons>
+    </ng-container>
+  </ng-container>
 </div>
 
 <div class="body" *ngIf="openState || type === 'side-bar'">
