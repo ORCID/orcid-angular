@@ -5,6 +5,7 @@
     [title]="works"
     [currentAmount]="workGroup.groups.length"
     [total]="workGroup.totalGroups"
+    [expandedContent]="expandedContent"
   >
     <ng-container *ngIf="workGroup.groups.length > 0">
       <app-work-stack

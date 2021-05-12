@@ -11,7 +11,7 @@ import { ModalPeerReviewsComponent } from '../../../record/components/peer-revie
   styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
 })
 export class PanelsComponent implements OnInit {
-  expandedContent = true
+  @Input() expandedContent = true
   @Input() title
   @Input() type:
     | 'activities'

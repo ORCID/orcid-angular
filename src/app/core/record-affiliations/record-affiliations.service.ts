@@ -88,6 +88,7 @@ export class RecordAffiliationService {
     type,
     options?: UserRecordOptions
   ): Observable<Affiliation> {
+    console.log(JSON.stringify(options))
     return this._http
       .get<Affiliation>(
         environment.API_WEB +
@@ -96,6 +97,27 @@ export class RecordAffiliationService {
               ? options?.publicRecordId + '/'
               : 'affiliations/'
           }affiliationDetails.json?id=${putCode}&type=${type}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  private getPublicAffiliationDetails(
+    putCode,
+    type,
+    options?: UserRecordOptions
+  ): Observable<Affiliation> {
+    console.log(options.publicRecordId)
+    return this._http
+      .get<Affiliation>(
+        environment.API_WEB +
+        `${
+          options?.publicRecordId
+            ? options?.publicRecordId + '/'
+            : 'affiliations/'
+        }affiliationDetails.json?id=${putCode}&type=${type}`
       )
       .pipe(
         retry(3),
@@ -118,7 +140,7 @@ export class RecordAffiliationService {
           map((data) => this._affiliationsSortService.transform(data)),
           catchError((error) => this._errorHandler.handleError(error))
         )
-    } else if (options.publicRecordId) {
+    } else {
       return this._http
         .get<AffiliationsEndpoint>(
           environment.API_WEB + `affiliations/affiliationGroups.json`

@@ -6,3 +6,15 @@ h2 {
   margin-top: 32px;
   margin-bottom: 20px;
 }
+
+.activities {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .expand-buttons {
+    .selected {
+      opacity: 0.3;
+    }
+  }
+}

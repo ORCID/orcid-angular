@@ -7,6 +7,7 @@
     [title]="ngOrcidResearchResources"
     [type]="'research-resources'"
     [total]="userRecord.researchResources.groups.length"
+    [expandedContent]="expandedContent"
     id="research-resources-panel"
   >
     <ng-container *ngIf="userRecord.researchResources.groups.length > 0">

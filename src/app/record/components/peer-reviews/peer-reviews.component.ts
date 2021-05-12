@@ -21,6 +21,7 @@ import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-pee
 })
 export class PeerReviewsComponent implements OnInit {
   @Input() isPublicRecord: string
+  @Input() expandedContent: boolean
 
   modalPeerReviewComponent = ModalPeerReviewsComponent
 

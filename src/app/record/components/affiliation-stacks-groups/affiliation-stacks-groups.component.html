@@ -5,6 +5,7 @@
   [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
   [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
   [total]="profileAffiliationsGroup.affiliationGroup.length"
+  [expandedContent]="expandedContent"
 >
   <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
     <app-affiliation-stack
@@ -40,9 +41,11 @@
   [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
   [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
   [total]="profileAffiliationsGroup.affiliationGroup.length"
+  [expandedContent]="expandedContent"
 >
   <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
     <app-affiliation-stack
+      [isPublicRecord]="isPublicRecord"
       *ngFor="
         let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
         trackBy: trackByAffiliationGroup
@@ -74,9 +77,11 @@
   [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
   [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
   [total]="profileAffiliationsGroup.affiliationGroup.length"
+  [expandedContent]="expandedContent"
 >
   <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
     <app-affiliation-stack
+      [isPublicRecord]="isPublicRecord"
       *ngFor="
         let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
         trackBy: trackByAffiliationGroup
@@ -107,9 +112,11 @@
   [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
   [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
   [total]="profileAffiliationsGroup.affiliationGroup.length"
+  [expandedContent]="expandedContent"
 >
   <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
     <app-affiliation-stack
+      [isPublicRecord]="isPublicRecord"
       *ngFor="
         let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
         trackBy: trackByAffiliationGroup
