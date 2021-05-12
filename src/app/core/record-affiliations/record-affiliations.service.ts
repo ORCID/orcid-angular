@@ -36,13 +36,9 @@ export class RecordAffiliationService {
       forceReload: false,
     }
   ): Observable<AffiliationUIGroup[]> {
-    if (options.publicRecordId) {
-      return of(undefined)
-    }
-
     if (!this.$affiliations) {
       this.$affiliations = new ReplaySubject(1)
-      this.getGroupAndSortAffiliations()
+      this.getGroupAndSortAffiliations(options)
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
@@ -95,17 +91,33 @@ export class RecordAffiliationService {
       )
   }
 
-  private getGroupAndSortAffiliations(): Observable<AffiliationUIGroup[]> {
-    return this._http
-      .get<AffiliationsEndpoint>(
-        environment.API_WEB + `affiliations/affiliationGroups.json`
-      )
-      .pipe(
-        retry(3),
-        map((data) => this._affiliationsGroupingService.transform(data)),
-        map((data) => this._affiliationsSortService.transform(data)),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+  private getGroupAndSortAffiliations(
+    options: UserRecordOptions
+  ): Observable<AffiliationUIGroup[]> {
+    if (options.publicRecordId) {
+      return this._http
+        .get<AffiliationsEndpoint>(
+          environment.API_WEB +
+            `${options.publicRecordId}/affiliationGroups.json`
+        )
+        .pipe(
+          retry(3),
+          map((data) => this._affiliationsGroupingService.transform(data)),
+          map((data) => this._affiliationsSortService.transform(data)),
+          catchError((error) => this._errorHandler.handleError(error))
+        )
+    } else if (options.publicRecordId) {
+      return this._http
+        .get<AffiliationsEndpoint>(
+          environment.API_WEB + `affiliations/affiliationGroups.json`
+        )
+        .pipe(
+          retry(3),
+          map((data) => this._affiliationsGroupingService.transform(data)),
+          map((data) => this._affiliationsSortService.transform(data)),
+          catchError((error) => this._errorHandler.handleError(error))
+        )
+    }
   }
 
   set(value): Observable<AffiliationUIGroup[]> {
