@@ -71,9 +71,6 @@ export class HeaderComponent implements OnInit {
       .subscribe((value) => (this.togglzOrcidAngularSignin = value))
     _router.events.subscribe(() => {
       const path = location.path()
-      console.log(path, ORCID_REGEXP.test(path))
-      console.log(`/${ApplicationRoutes.myOrcidTEMP}`)
-
       this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
       this.hideMainMenu =
         ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcidTEMP}`
