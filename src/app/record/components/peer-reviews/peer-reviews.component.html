@@ -32,8 +32,8 @@
           <app-panel-element [hideVisibility]="false">
             <div class="description">
               <p>
-              <span class="capitalize">{{ peerReview.type }}</span
-              >, {{ peerReview.description }}
+                <span class="capitalize">{{ peerReview.type }}</span
+                >, {{ peerReview.description }}
               </p>
               <ng-container *ngIf="peerReview.groupType">
                 <p>
@@ -59,42 +59,44 @@
                   *ngIf="subPeerReview.peerReviews[0] as peerReview"
                 >
                   <div header>
-                  <span class="header-sub-peer-review">
-                    <b i18n="@@peerReview.reviewDate"> Review date: </b>
-                    {{ peerReview.completionDate | monthDayYearDateToString }}
-                  </span>
-                  <span class="header-sub-peer-review">
-                    <b i18n="@@peerReview.type"> Type: </b>
-                    <span class="capitalize">
-                      {{ peerReview.type.value }}
+                    <span class="header-sub-peer-review">
+                      <b i18n="@@peerReview.reviewDate"> Review date: </b>
+                      {{ peerReview.completionDate | monthDayYearDateToString }}
                     </span>
-                  </span>
-                  <span class="header-sub-peer-review">
-                    <b i18n="@@peerReview.role"> Role: </b>
-                    <span class="capitalize">
-                      {{ peerReview.role.value }}
+                    <span class="header-sub-peer-review">
+                      <b i18n="@@peerReview.type"> Type: </b>
+                      <span class="capitalize">
+                        {{ peerReview.type.value }}
+                      </span>
                     </span>
-                  </span>
+                    <span class="header-sub-peer-review">
+                      <b i18n="@@peerReview.role"> Role: </b>
+                      <span class="capitalize">
+                        {{ peerReview.role.value }}
+                      </span>
+                    </span>
                   </div>
                   <div custom-controls>
-                  <span class="show">
-                    <a
-                      class="underline"
-                      *ngIf="!peerReview.showDetails"
-                      (click)="getDetails(peerReview, peerReview.putCode.value)"
-                      i18n="@@shared.showMoreDetail"
-                    >
-                      Show more detail
-                    </a>
-                    <a
-                      class="underline"
-                      *ngIf="peerReview.showDetails"
-                      (click)="collapse(peerReview)"
-                      i18n="@@shared.showLessDetail"
-                    >
-                      Show less detail
-                    </a>
-                  </span>
+                    <span class="show">
+                      <a
+                        class="underline"
+                        *ngIf="!peerReview.showDetails"
+                        (click)="
+                          getDetails(peerReview, peerReview.putCode.value)
+                        "
+                        i18n="@@shared.showMoreDetail"
+                      >
+                        Show more detail
+                      </a>
+                      <a
+                        class="underline"
+                        *ngIf="peerReview.showDetails"
+                        (click)="collapse(peerReview)"
+                        i18n="@@shared.showLessDetail"
+                      >
+                        Show less detail
+                      </a>
+                    </span>
                     <a
                       class="underline"
                       rel="noopener noreferrer"
@@ -110,19 +112,19 @@
                       <div class="details">
                         <div>
                           <b i18n="@@peerReview.reviewIdentifiers"
-                          >Review identifier(s)</b
+                            >Review identifier(s)</b
                           >
                         </div>
                         <span class="source">
-                        {{
-                          peerReview.externalIdentifiers[0]
-                            .externalIdentifierType.value
+                          {{
+                            peerReview.externalIdentifiers[0]
+                              .externalIdentifierType.value
                           }}:
                           {{
-                          peerReview.externalIdentifiers[0].externalIdentifierId
-                            .value
+                            peerReview.externalIdentifiers[0]
+                              .externalIdentifierId.value
                           }}
-                      </span>
+                        </span>
                       </div>
                       <div class="details">
                         <div>
@@ -131,43 +133,45 @@
                           </b>
                         </div>
                         {{
-                        getPeerReview(peerReview.putCode.value).orgName.value
+                          getPeerReview(peerReview.putCode.value).orgName.value
                         }}
                       </div>
                       <div>
-                        <b i18n="@@peerReview.reviewSubject"> Review subject </b>
+                        <b i18n="@@peerReview.reviewSubject">
+                          Review subject
+                        </b>
                       </div>
                       <div>
                         <ng-container
                           *ngIf="
-                          getPeerReview(peerReview.putCode.value).subjectName
-                        "
+                            getPeerReview(peerReview.putCode.value).subjectName
+                          "
                         >
                           {{
-                          getPeerReview(peerReview.putCode.value).subjectName
-                            .value
+                            getPeerReview(peerReview.putCode.value).subjectName
+                              .value
                           }}
                         </ng-container>
                         <ng-container
                           *ngIf="
-                          getPeerReview(peerReview.putCode.value).subjectType
-                        "
+                            getPeerReview(peerReview.putCode.value).subjectType
+                          "
                         >
                           ({{
-                          getPeerReview(peerReview.putCode.value).subjectType
-                            .value
+                            getPeerReview(peerReview.putCode.value).subjectType
+                              .value
                           }})
                         </ng-container>
                       </div>
                       <div
                         *ngIf="
-                        getPeerReview(peerReview.putCode.value)
-                          .subjectContainerName
-                      "
+                          getPeerReview(peerReview.putCode.value)
+                            .subjectContainerName
+                        "
                       >
                         {{
-                        getPeerReview(peerReview.putCode.value)
-                          .subjectContainerName.value
+                          getPeerReview(peerReview.putCode.value)
+                            .subjectContainerName.value
                         }}
                       </div>
                     </app-panel-element>

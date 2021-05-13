@@ -22,7 +22,7 @@ import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-pee
 export class PeerReviewsComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
-  @Output() total: EventEmitter<any> = new EventEmitter();
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   modalPeerReviewComponent = ModalPeerReviewsComponent
 

@@ -20,7 +20,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
-  @Output() total: EventEmitter<any> = new EventEmitter();
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession
@@ -44,10 +44,13 @@ export class AffiliationStacksGroupsComponent implements OnInit {
         this.profileAffiliationUiGroups = this.userRecord.affiliations
         this.affiliationsCount =
           this.getAffiliationType('EMPLOYMENT')?.affiliationGroup.length +
-          this.getAffiliationType('EDUCATION_AND_QUALIFICATION')?.affiliationGroup.length +
-          this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')?.affiliationGroup.length +
-          this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup.length
-          this.total.emit(this.affiliationsCount)
+          this.getAffiliationType('EDUCATION_AND_QUALIFICATION')
+            ?.affiliationGroup.length +
+          this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
+            ?.affiliationGroup.length +
+          this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
+            .length
+        this.total.emit(this.affiliationsCount)
       })
   }
 

@@ -1,6 +1,4 @@
-<ng-container
-  *ngIf="!(isPublicRecord && userRecord?.fundings.length === 0)"
->
+<ng-container *ngIf="!(isPublicRecord && userRecord?.fundings.length === 0)">
   <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
   <app-panels
     *ngIf="userRecord && userRecord.fundings"
@@ -14,9 +12,9 @@
     <ng-container *ngIf="userRecord.fundings.length > 0">
       <app-funding-stack
         *ngFor="
-        let fundingGroup of userRecord.fundings;
-        trackBy: trackByFundingGroup
-      "
+          let fundingGroup of userRecord.fundings;
+          trackBy: trackByFundingGroup
+        "
         [fundingStack]="fundingGroup"
         [isPublicRecord]="isPublicRecord"
       ></app-funding-stack>

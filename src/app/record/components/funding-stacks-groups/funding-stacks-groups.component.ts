@@ -16,7 +16,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 export class FundingStacksGroupsComponent implements OnInit {
   @Input() isPublicRecord: any = false
   @Input() expandedContent: boolean
-  @Output() total: EventEmitter<any> = new EventEmitter();
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
