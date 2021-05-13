@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -15,6 +15,7 @@ import { UserSession } from 'src/app/types/session.local'
 export class WorkStackGroupComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter();
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -35,6 +36,7 @@ export class WorkStackGroupComponent implements OnInit {
       .subscribe((userRecord) => {
         this.userRecord = userRecord
         this.workGroup = this.userRecord.works
+        this.total.emit(this.userRecord.works.groups.length)
       })
 
     this._userSession

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { Observable, ReplaySubject } from 'rxjs'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { BiographyEndPoint } from '../../types/record-biography.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class RecordBiographyService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   getBiography(
@@ -28,7 +30,9 @@ export class RecordBiographyService {
     }
   ): Observable<BiographyEndPoint> {
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.biography))
     }
 
     if (!this.$biography) {

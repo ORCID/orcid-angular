@@ -12,6 +12,7 @@ export class MyOrcidComponent implements OnInit {
   platform: PlatformInfo
   publicOrcid: string
   expandedContent = true
+  affiliations: number
 
   constructor(
     private _platform: PlatformInfoService,
@@ -33,9 +34,14 @@ export class MyOrcidComponent implements OnInit {
 
   ngOnInit(): void {
     this._platform.get().subscribe((value) => (this.platform = value))
+    this.affiliations = 0
   }
 
   collapse() {
     this.expandedContent = !this.expandedContent
+  }
+
+  affiliationsCount(itemsCount: Event) {
+    this.affiliations = this.affiliations + +itemsCount
   }
 }

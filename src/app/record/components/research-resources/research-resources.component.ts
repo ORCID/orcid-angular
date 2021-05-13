@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { Subject } from 'rxjs'
 import {
@@ -31,6 +31,7 @@ import { URL_REGEXP } from '../../../constants'
 export class ResearchResourcesComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter();
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -98,6 +99,7 @@ export class ResearchResourcesComponent implements OnInit {
               .pipe(first())
               .subscribe((data) => {
                 this.userRecord.researchResources = data
+                this.total.emit(this.userRecord.researchResources.groups.length)
               })
           })
       })
