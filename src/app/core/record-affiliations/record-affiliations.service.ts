@@ -118,7 +118,7 @@ export class RecordAffiliationService {
           map((data) => this._affiliationsSortService.transform(data)),
           catchError((error) => this._errorHandler.handleError(error))
         )
-    } else if (options.publicRecordId) {
+    } else {
       return this._http
         .get<AffiliationsEndpoint>(
           environment.API_WEB + `affiliations/affiliationGroups.json`

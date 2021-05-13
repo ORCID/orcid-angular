@@ -5,16 +5,51 @@
       </app-side-bar>
       <app-main class="col l9 m8 s4">
         <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
-        <h2 class="orc-font-body col">Activities</h2>
-        <app-affiliations [isPublicRecord]="publicOrcid"></app-affiliations>
-        <app-fundings [isPublicRecord]="publicOrcid"></app-fundings>
+        <div class="activities">
+          <h2 class="orc-font-body col">Activities</h2>
+          <div class="expand-buttons">
+            <button
+              mat-button
+              color="primary"
+              type="button"
+              i18n="@@shared.expandAll"
+              [ngClass]="{ selected: expandedContent }"
+              (click)="collapse()"
+            >
+              Expand all
+            </button>
+            <button
+              mat-button
+              color="primary"
+              type="button"
+              i18n="@@shared.collapseAll"
+              [ngClass]="{ selected: !expandedContent }"
+              (click)="collapse()"
+            >
+              Collapse all
+            </button>
+          </div>
+        </div>
+        <app-affiliations
+          [isPublicRecord]="publicOrcid"
+          [expandedContent]="expandedContent"
+        ></app-affiliations>
+        <app-fundings
+          [isPublicRecord]="publicOrcid"
+          [expandedContent]="expandedContent"
+        ></app-fundings>
         <app-work-stack-group
           [isPublicRecord]="publicOrcid"
+          [expandedContent]="expandedContent"
         ></app-work-stack-group>
         <app-research-resources
           [isPublicRecord]="publicOrcid"
+          [expandedContent]="expandedContent"
         ></app-research-resources>
-        <app-peer-reviews [isPublicRecord]="publicOrcid"></app-peer-reviews>
+        <app-peer-reviews
+          [isPublicRecord]="publicOrcid"
+          [expandedContent]="expandedContent"
+        ></app-peer-reviews>
       </app-main>
     </div>
   </div>

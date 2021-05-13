@@ -132,7 +132,14 @@ export class FundingStackComponent implements OnInit {
    */
   private getMoreDetailsFromTheServer(funding: Funding): Observable<Funding> {
     const putCode = funding.putCode.value
-    return this._fundingService.getFundingDetails(putCode)
+    if (this.isPublicRecord) {
+      return this._fundingService.getPublicFundingDetails(
+        this.isPublicRecord,
+        putCode
+      )
+    } else {
+      return this._fundingService.getFundingDetails(putCode)
+    }
   }
 
   makePrimaryCard(funding: Funding) {

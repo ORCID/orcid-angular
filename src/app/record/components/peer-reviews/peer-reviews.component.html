@@ -6,6 +6,7 @@
   [total]="userRecord.peerReviews.length"
   [isPublicRecord]="isPublicRecord"
   [addModalComponent]="modalPeerReviewComponent"
+  [expandedContent]="expandedContent"
 >
   <ng-container *ngIf="userRecord.peerReviews.length > 0">
     <app-panel

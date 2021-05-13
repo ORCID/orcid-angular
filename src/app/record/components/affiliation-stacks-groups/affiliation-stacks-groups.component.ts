@@ -19,6 +19,7 @@ import { UserSession } from 'src/app/types/session.local'
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() isPublicRecord: string = null
+  @Input() expandedContent: boolean
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession

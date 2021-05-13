@@ -30,6 +30,7 @@ import { URL_REGEXP } from '../../../constants'
 })
 export class ResearchResourcesComponent implements OnInit {
   @Input() isPublicRecord: string
+  @Input() expandedContent: boolean
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 

@@ -6,6 +6,7 @@
   [type]="'funding'"
   [total]="userRecord.fundings.length"
   [isPublicRecord]="isPublicRecord"
+  [expandedContent]="expandedContent"
 >
   <ng-container *ngIf="userRecord.fundings.length > 0">
     <app-funding-stack
