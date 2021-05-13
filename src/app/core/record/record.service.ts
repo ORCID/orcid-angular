@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
   ExternalIdentifier,
@@ -106,6 +106,7 @@ export class RecordService {
         this._recordPeerReviewService.getPeerReviewGroups(options),
         this._recordResearchResourceService.getResearchResourcePage(options),
         this._recordWorkService.getWorks(options),
+        this.getLastModifiedTime(options)
       ])
         .pipe(
           tap(
@@ -125,6 +126,7 @@ export class RecordService {
               peerReviews,
               researchResources,
               works,
+              lastModifiedTime
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -142,6 +144,7 @@ export class RecordService {
                 peerReviews: peerReviews as PeerReview[],
                 researchResources: researchResources as ResearchResources,
                 works: works as WorksEndpoint,
+                lastModifiedTime: lastModifiedTime as any
               })
             }
           )
@@ -240,5 +243,16 @@ export class RecordService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+
+  getLastModifiedTime(options: UserRecordOptions = {
+    forceReload: false,
+  }) {
+    if (options.publicRecordId) {
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.lastModifiedTime))
+    }
+    return of(undefined)
   }
 }

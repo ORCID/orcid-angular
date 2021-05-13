@@ -55,6 +55,17 @@
           [expandedContent]="expandedContent"
           (total)="affiliationsCount($event)"
         ></app-peer-reviews>
+        <div
+          class="orc-font-body-small"
+          *ngIf="publicOrcid"
+        >
+          <i>
+            <span i18n="@@shared.lastModifiedTime">
+              Record last modified
+            </span>
+            {{ userRecord?.lastModifiedTime | date:'long':'UTC' }}
+          </i>
+        </div>
       </app-main>
     </div>
   </div>

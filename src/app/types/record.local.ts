@@ -2,7 +2,6 @@ import {
   Person,
   Preferences,
   PersonIdentifierEndpoint,
-  MonthDayYearDate,
 } from '.'
 import { OtherNamesEndPoint } from './record-other-names.endpoint'
 import { KeywordEndPoint } from './record-keyword.endpoint'
@@ -28,6 +27,7 @@ export interface SideBarPublicUserRecord {
   emails: EmailsEndpoint
   externalIdentifier: PersonIdentifierEndpoint
   website: WebsitesEndPoint
+  lastModifiedTime: any
 }
 
 export interface UserRecord {
@@ -46,10 +46,10 @@ export interface UserRecord {
   peerReviews: PeerReview[]
   researchResources: ResearchResources
   works: WorksEndpoint
+  lastModifiedTime: any
   publicMetadata?: {
     noRobots: boolean
     noIndex: boolean
-    lastModifiedTime: MonthDayYearDate
   }
 }
 
