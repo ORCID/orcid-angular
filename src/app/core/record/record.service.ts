@@ -106,7 +106,7 @@ export class RecordService {
         this._recordPeerReviewService.getPeerReviewGroups(options),
         this._recordResearchResourceService.getResearchResourcePage(options),
         this._recordWorkService.getWorks(options),
-        this.getLastModifiedTime(options)
+        this.getLastModifiedTime(options),
       ])
         .pipe(
           tap(
@@ -126,7 +126,7 @@ export class RecordService {
               peerReviews,
               researchResources,
               works,
-              lastModifiedTime
+              lastModifiedTime,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -144,7 +144,7 @@ export class RecordService {
                 peerReviews: peerReviews as PeerReview[],
                 researchResources: researchResources as ResearchResources,
                 works: works as WorksEndpoint,
-                lastModifiedTime: lastModifiedTime as any
+                lastModifiedTime: lastModifiedTime as any,
               })
             }
           )
@@ -245,9 +245,11 @@ export class RecordService {
       )
   }
 
-  getLastModifiedTime(options: UserRecordOptions = {
-    forceReload: false,
-  }) {
+  getLastModifiedTime(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ) {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
         .getPublicRecordSideBar(options.publicRecordId)
