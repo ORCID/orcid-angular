@@ -15,7 +15,7 @@ import { UserSession } from 'src/app/types/session.local'
 export class WorkStackGroupComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
-  @Output() total: EventEmitter<any> = new EventEmitter();
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
