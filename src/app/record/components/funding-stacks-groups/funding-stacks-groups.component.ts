@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -16,6 +16,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 export class FundingStacksGroupsComponent implements OnInit {
   @Input() isPublicRecord: any = false
   @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
@@ -55,6 +56,7 @@ export class FundingStacksGroupsComponent implements OnInit {
               .pipe(first())
               .subscribe((data) => {
                 this.userRecord.fundings = data
+                this.total.emit(this.userRecord.fundings.length)
               })
           })
       })

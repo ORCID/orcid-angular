@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserService } from '../../../core'
@@ -22,6 +22,7 @@ import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-pee
 export class PeerReviewsComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   modalPeerReviewComponent = ModalPeerReviewsComponent
 
@@ -87,6 +88,7 @@ export class PeerReviewsComponent implements OnInit {
           .pipe(first())
           .subscribe((data) => {
             this.userRecord.peerReviews = data
+            this.total.emit(this.userRecord.peerReviews.length)
           })
       })
   }

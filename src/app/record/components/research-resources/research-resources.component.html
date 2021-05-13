@@ -1,5 +1,7 @@
 <ng-container
-  *ngIf="!isPublicRecord && userRecord?.researchResources?.groups.length === 0"
+  *ngIf="
+    !(isPublicRecord && userRecord?.researchResources?.groups.length === 0)
+  "
 >
   <app-panels
     *ngIf="userRecord?.researchResources?.groups"

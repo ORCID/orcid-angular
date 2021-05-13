@@ -1,11 +1,12 @@
-<ng-container *ngIf="workGroup">
+<ng-container *ngIf="!(isPublicRecord && workGroup?.groups.length === 0)">
   <app-panels
-    *ngIf="workGroup.groups.length"
+    *ngIf="workGroup?.groups"
     class="row"
     [title]="works"
     [currentAmount]="workGroup.groups.length"
     [total]="workGroup.totalGroups"
     [expandedContent]="expandedContent"
+    [isPublicRecord]="isPublicRecord"
   >
     <ng-container *ngIf="workGroup.groups.length > 0">
       <app-work-stack

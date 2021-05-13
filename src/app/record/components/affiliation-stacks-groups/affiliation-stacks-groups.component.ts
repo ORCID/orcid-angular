@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -20,10 +20,13 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession
   userRecord: UserRecord
+
+  affiliationsCount: number
 
   constructor(
     private _userSession: UserService,
@@ -39,6 +42,15 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       .subscribe((userRecord) => {
         this.userRecord = userRecord
         this.profileAffiliationUiGroups = this.userRecord.affiliations
+        this.affiliationsCount =
+          this.getAffiliationType('EMPLOYMENT')?.affiliationGroup.length +
+          this.getAffiliationType('EDUCATION_AND_QUALIFICATION')
+            ?.affiliationGroup.length +
+          this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
+            ?.affiliationGroup.length +
+          this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
+            .length
+        this.total.emit(this.affiliationsCount)
       })
   }
 
