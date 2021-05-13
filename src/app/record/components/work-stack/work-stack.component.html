@@ -13,6 +13,7 @@
     [ngClass]="{ last: last }"
     [visibility]="workStack.activeVisibility"
     *ngIf="isPreferred(work) || displayTheStack"
+    [isPublicRecord]="isPublicRecord"
     type="main"
   >
     <h2 header class="orc-font-body">{{ work.title.value }}:</h2>

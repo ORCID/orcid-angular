@@ -12,6 +12,7 @@
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
     [ngClass]="{ last: last }"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
+    [isPublicRecord]="isPublicRecord"
     *ngIf="isPreferred(affiliation) || displayTheStack"
     type="main"
   >
