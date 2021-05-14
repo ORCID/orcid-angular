@@ -130,8 +130,8 @@
           }"
         >
           <div class="row space-between">
-            <div class="mat-caption other-names-wrapper">
-              <div class="description" i18n="@@record.otherNames">
+            <div class="col l10 mat-caption other-names-wrapper">
+              <div class="row description" i18n="@@record.otherNames">
                 Other names
               </div>
               <ng-container
@@ -149,13 +149,13 @@
                     >,
                   </ng-container>
                 </ng-container>
-                <div class="other-name" *ngIf="expandedContent">
-                  <div>
+                <div class="row other-name" *ngIf="expandedContent">
+                  <div class="row">
                     <b class="orc-font-body-small">
                       {{ otherNames.content }}
                     </b>
                   </div>
-                  <div>
+                  <div class="row">
                     <b class="description" i18n="@@record.source"> Source </b>
                   </div>
                   <div class="description">
@@ -183,7 +183,7 @@
       </div>
     </div>
     <div
-      class="col l11 biography-container"
+      class="div biography-container"
       *ngIf="userRecord?.biography?.biography"
     >
       <h3 class="orc-font-body" i18n="@@record.biography">Biography</h3>

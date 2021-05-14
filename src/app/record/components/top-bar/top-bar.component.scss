@@ -60,7 +60,7 @@ app-panel {
     }
 
     .names {
-      height: 64px;
+      min-height: 64px;
       margin-left: 10px;
       padding: 16px;
       border: solid 1px;
@@ -73,7 +73,7 @@ app-panel {
     }
 
     .other-names {
-      height: 64px;
+      min-height: 64px;
       margin-right: 20px;
       border: solid 1px;
       border-radius: 4px;
@@ -102,8 +102,11 @@ app-panel {
   }
 
   .biography-container {
-    display: inline;
     margin-top: 2em;
+    padding: 0 10px;
+    p {
+      overflow-wrap: break-word;
+    }
   }
 }
 
