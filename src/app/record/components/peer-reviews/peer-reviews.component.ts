@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserService } from '../../../core'
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
+import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -20,6 +21,10 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
 })
 export class PeerReviewsComponent implements OnInit {
   @Input() isPublicRecord: string
+  @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
+
+  modalPeerReviewComponent = ModalPeerReviewsComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -83,6 +88,7 @@ export class PeerReviewsComponent implements OnInit {
           .pipe(first())
           .subscribe((data) => {
             this.userRecord.peerReviews = data
+            this.total.emit(this.userRecord.peerReviews.length)
           })
       })
   }
@@ -90,10 +96,7 @@ export class PeerReviewsComponent implements OnInit {
   getDetails(peerReview: PeerReview, putCode: number): void {
     if (this.isPublicRecord) {
       this._recordPeerReviewService
-        .getPublicPeerReviewById(
-          this.userSession.userInfo.EFFECTIVE_USER_ORCID,
-          putCode
-        )
+        .getPublicPeerReviewById(this.isPublicRecord, putCode)
         .pipe(first())
         .subscribe(
           (data) => {

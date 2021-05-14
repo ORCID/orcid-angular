@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class RecordWebsitesService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   getWebsites(
@@ -27,11 +29,11 @@ export class RecordWebsitesService {
       forceReload: false,
     }
   ): Observable<WebsitesEndPoint> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.website))
     }
-
     if (!this.$websites) {
       this.$websites = new ReplaySubject<WebsitesEndPoint>(1)
     } else if (!options.forceReload) {

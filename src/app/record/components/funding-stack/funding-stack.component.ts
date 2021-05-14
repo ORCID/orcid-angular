@@ -35,6 +35,8 @@ export class FundingStackComponent implements OnInit {
     return this._displayTheStack
   }
 
+  @Input() isPublicRecord: string
+
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
   panelDetailsState: {
@@ -130,12 +132,19 @@ export class FundingStackComponent implements OnInit {
    */
   private getMoreDetailsFromTheServer(funding: Funding): Observable<Funding> {
     const putCode = funding.putCode.value
-    return this._fundingService.getFundingDetails(putCode)
+    if (this.isPublicRecord) {
+      return this._fundingService.getPublicFundingDetails(
+        this.isPublicRecord,
+        putCode
+      )
+    } else {
+      return this._fundingService.getFundingDetails(putCode)
+    }
   }
 
   makePrimaryCard(funding: Funding) {
     // TODO
-    console.log(this.stackPanelsDisplay)
+    console.info(this.stackPanelsDisplay)
   }
 
   changeTopPanelOfTheStack(funding: Funding) {

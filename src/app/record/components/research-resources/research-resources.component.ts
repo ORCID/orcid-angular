@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { UserRecord } from '../../../types/record.local'
 import { Subject } from 'rxjs'
 import {
@@ -30,6 +30,8 @@ import { URL_REGEXP } from '../../../constants'
 })
 export class ResearchResourcesComponent implements OnInit {
   @Input() isPublicRecord: string
+  @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -85,7 +87,7 @@ export class ResearchResourcesComponent implements OnInit {
         // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
           .getRecord({
-            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+            publicRecordId: this.isPublicRecord || undefined,
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
@@ -97,6 +99,7 @@ export class ResearchResourcesComponent implements OnInit {
               .pipe(first())
               .subscribe((data) => {
                 this.userRecord.researchResources = data
+                this.total.emit(this.userRecord.researchResources.groups.length)
               })
           })
       })
@@ -105,10 +108,7 @@ export class ResearchResourcesComponent implements OnInit {
   getDetails(researchResource: ResearchResource, putCode: number): void {
     if (this.isPublicRecord) {
       this._recordResearchResourceService
-        .getPublicResearchResourceById(
-          { privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID },
-          putCode
-        )
+        .getPublicResearchResourceById(this.isPublicRecord, putCode)
         .pipe(first())
         .subscribe(
           (data) => {

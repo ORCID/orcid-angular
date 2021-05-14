@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { first, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
+import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
 
 @Component({
   selector: 'app-fundings',
@@ -14,6 +15,8 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class FundingStacksGroupsComponent implements OnInit {
   @Input() isPublicRecord: any = false
+  @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
@@ -23,15 +26,12 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   constructor(
     private _userSession: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _recordFundingsService: RecordFundingsService
   ) {}
 
   ngOnInit(): void {
-    if (!this.isPublicRecord) {
-      this.getRecord()
-    } else {
-      // TODO SUPPORT PUBLIC VIEW
-    }
+    this.getRecord()
   }
 
   private getRecord() {
@@ -41,15 +41,23 @@ export class FundingStacksGroupsComponent implements OnInit {
       .subscribe((userSession) => {
         this.userSession = userSession
 
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
         this._record
           .getRecord({
-            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
+            publicRecordId: this.isPublicRecord || undefined,
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
+
+            this._recordFundingsService
+              .getFundings({
+                publicRecordId: this.isPublicRecord,
+              })
+              .pipe(first())
+              .subscribe((data) => {
+                this.userRecord.fundings = data
+                this.total.emit(this.userRecord.fundings.length)
+              })
           })
       })
   }

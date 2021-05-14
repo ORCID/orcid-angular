@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { environment } from 'src/environments/environment'
@@ -30,9 +30,13 @@ export class RecordFundingsService {
       forceReload: false,
     }
   ): Observable<FundingGroup[]> {
-    // TODO GET PUBLIC DATA
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._http.get<FundingGroup[]>(
+        environment.API_WEB +
+          options.publicRecordId +
+          '/fundingGroups.json?sort=date&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : true)
+      )
     }
 
     if (!this.$fundings) {
@@ -61,6 +65,17 @@ export class RecordFundingsService {
         catchError((error) => this._errorHandler.handleError(error))
       )
     /* TODO: Fetch group id info */
+  }
+
+  getPublicFundingDetails(orcid, putCode): Observable<any> {
+    return this._http
+      .get<Funding>(
+        environment.API_WEB + orcid + `/fundingDetails.json?id=${putCode}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   private getAndSortFundings(): Observable<FundingGroup[]> {

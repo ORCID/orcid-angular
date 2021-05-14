@@ -20,7 +20,7 @@ export class FirebaseManager {
       .doc(id)
       .set(result)
       .then(function (docRef) {
-        console.log('Document written with ID: ', JSON.stringify(docRef))
+        console.info('Document written with ID: ', JSON.stringify(docRef))
       })
       .catch(function (error) {
         console.error('Error adding document: ', error)

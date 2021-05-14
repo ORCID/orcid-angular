@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -18,11 +18,15 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
-  @Input() isPublicRecord: any = false
+  @Input() isPublicRecord: string = null
+  @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession
   userRecord: UserRecord
+
+  affiliationsCount: number
 
   constructor(
     private _userSession: UserService,
@@ -30,31 +34,23 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.isPublicRecord) {
-      this.getRecord()
-    } else {
-      // TODO SUPPORT PUBLIC VIEW
-    }
-  }
-
-  private getRecord() {
-    this._userSession
-      .getUserSession()
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord,
+      })
       .pipe(takeUntil(this.$destroy))
-      .subscribe((userSession) => {
-        this.userSession = userSession
-
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
-        this._record
-          .getRecord({
-            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
-          })
-          .pipe(takeUntil(this.$destroy))
-          .subscribe((userRecord) => {
-            this.userRecord = userRecord
-            this.profileAffiliationUiGroups = this.userRecord.affiliations
-          })
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+        this.profileAffiliationUiGroups = this.userRecord.affiliations
+        this.affiliationsCount =
+          this.getAffiliationType('EMPLOYMENT')?.affiliationGroup.length +
+          this.getAffiliationType('EDUCATION_AND_QUALIFICATION')
+            ?.affiliationGroup.length +
+          this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
+            ?.affiliationGroup.length +
+          this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
+            .length
+        this.total.emit(this.affiliationsCount)
       })
   }
 

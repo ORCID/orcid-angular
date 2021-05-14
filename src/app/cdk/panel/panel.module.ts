@@ -15,6 +15,7 @@ import { PanelsComponent } from './panels/panels.component'
 import { PanelDataLineComponent } from './panel-data-line/panel-data-line.component'
 import { PanelElementSourceComponent } from './panel-element-source/panel-element-source.component'
 import { MatDividerModule } from '@angular/material/divider'
+import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand-buttons.component'
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatDividerModule } from '@angular/material/divider'
     PanelsComponent,
     PanelDataLineComponent,
     PanelElementSourceComponent,
+    PanelExpandButtonsComponent,
   ],
   imports: [
     CommonModule,
