@@ -38,7 +38,11 @@
               <ng-container *ngIf="peerReview.groupType">
                 <p>
                   {{ peerReview.groupType }}:
-                  <a class="underline" href="{{ peerReview.url }}">
+                  <a class="underline"
+                     href="{{ peerReview.url }}"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                  >
                     {{ peerReview.groupIdValue }}
                   </a>
                 </p>
@@ -132,47 +136,80 @@
                             Convening organization
                           </b>
                         </div>
-                        {{
-                          getPeerReview(peerReview.putCode.value).orgName.value
-                        }}
+                        <p>
+                          {{getPeerReview(peerReview.putCode.value).orgName.value}}, ({{getPeerReview(peerReview.putCode.value)?.city?.value}}<ng-container *ngIf="getPeerReview(peerReview.putCode.value)?.city?.value && getPeerReview(peerReview.putCode.value)?.country?.value">,</ng-container>{{getPeerReview(peerReview.putCode.value)?.country?.value}})
+                        </p>
                       </div>
-                      <div>
+                      <div class="details">
                         <b i18n="@@peerReview.reviewSubject">
                           Review subject
                         </b>
-                      </div>
-                      <div>
-                        <ng-container
-                          *ngIf="
-                            getPeerReview(peerReview.putCode.value).subjectName
+                        <div>
+                          <ng-container
+                            *ngIf="
+                              getPeerReview(peerReview.putCode.value).subjectName
+                            "
+                          >
+                            {{
+                              getPeerReview(peerReview.putCode.value).subjectName
+                                .value
+                            }}
+                          </ng-container>
+                          <ng-container
+                            *ngIf="
+                              getPeerReview(peerReview.putCode.value).subjectType
+                            "
+                          >
+                            ({{
+                              getPeerReview(peerReview.putCode.value).subjectType
+                                .value
+                            }})
+                          </ng-container>
+                          <div
+                            *ngIf="
+                            getPeerReview(peerReview.putCode.value)
+                              .subjectContainerName
                           "
-                        >
-                          {{
-                            getPeerReview(peerReview.putCode.value).subjectName
-                              .value
-                          }}
-                        </ng-container>
-                        <ng-container
-                          *ngIf="
-                            getPeerReview(peerReview.putCode.value).subjectType
+                          >
+                            {{
+                            getPeerReview(peerReview.putCode.value)
+                              .subjectContainerName.value
+                            }}
+                          </div>
+                          <div
+                            *ngIf="
+                            getPeerReview(peerReview.putCode.value)
+                              .subjectExternalIdentifier
                           "
-                        >
-                          ({{
-                            getPeerReview(peerReview.putCode.value).subjectType
-                              .value
-                          }})
-                        </ng-container>
+                          >
+                            {{getPeerReview(peerReview.putCode.value).subjectExternalIdentifier.externalIdentifierType.value | uppercase}}
+                            :
+                            {{
+                            getPeerReview(peerReview.putCode.value)
+                              .subjectExternalIdentifier.externalIdentifierId.value
+                            }}
+                          </div>
+                        </div>
                       </div>
-                      <div
-                        *ngIf="
-                          getPeerReview(peerReview.putCode.value)
-                            .subjectContainerName
-                        "
-                      >
-                        {{
-                          getPeerReview(peerReview.putCode.value)
-                            .subjectContainerName.value
-                        }}
+                      <div class="details">
+                        <div>
+                          <b i18n="@@shared.added">
+                            Added
+                          </b>
+                        </div>
+                        <p>
+                          {{ getPeerReview(peerReview.putCode.value).createdDate | monthDayYearDateToString }}
+                        </p>
+                      </div>
+                      <div class="details">
+                        <div>
+                          <b i18n="@@shared.lastModified">
+                            Last modified
+                          </b>
+                        </div>
+                        <p>
+                          {{ getPeerReview(peerReview.putCode.value).createdDate | monthDayYearDateToString }}
+                        </p>
                       </div>
                     </app-panel-element>
                   </app-panel-data>

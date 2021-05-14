@@ -1,5 +1,5 @@
 import { AssertionBase } from './record.endpoint'
-import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
+import { ExternalIdentifier, ExternalIdentifierId, MonthDayYearDate, Value } from './common.endpoint'
 
 export interface PeerReview extends AssertionBase {
   city: Value
@@ -15,7 +15,7 @@ export interface PeerReview extends AssertionBase {
   orgName: Value
   role: Value
   subjectContainerName: any
-  subjectExternalIdentifier: string
+  subjectExternalIdentifier: ExternalIdentifier
   subjectName: any
   subjectType: any
   subjectUrl: string
