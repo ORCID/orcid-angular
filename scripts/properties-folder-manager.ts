@@ -16,7 +16,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     flatFolder = true,
     reportUnexistingFiles?: (path: string, languageCode: string) => void
   ) {
-    console.log(`Read folder ${folderPath}  ________`)
+    console.info(`Read folder ${folderPath}  ________`)
     this.folderPath = folderPath
     this.reportUnexistingFiles = reportUnexistingFiles
     this.propertiesFolderToJson(folderPath, flatFolder)
@@ -91,7 +91,7 @@ abstract class PropertyFolderImpl implements PropertyFolder {
     It only copies the translations when there is not translation on this PropertyFolder
 */
   cloneValues(originFolder: PropertyFolderImpl): PropertyFolder {
-    console.log('Clone values from properties ________')
+    console.info('Clone values from properties ________')
     const matchingProperties: MatchingPair[] = this.matchingValueEnglishProperties(
       originFolder
     )
@@ -345,15 +345,15 @@ From the many properties on Orcid Source that have the same english value of ${p
   }
 
   generateTestingLanguages() {
-    console.log('Generate testing languages ________')
+    console.info('Generate testing languages ________')
     const testingLanguages = ['rl', 'lr', 'xx']
     Object.keys(this.files).forEach((fileName) => {
-      console.log('fileName', fileName)
+      console.info('fileName', fileName)
       testingLanguages.forEach((testingLangue) => {
-        console.log('---testingLangue', testingLangue)
+        console.info('---testingLangue', testingLangue)
         // Create the error testing language if does not exist
         if (!this.files[fileName][testingLangue]) {
-          console.log('---did not had translations file', testingLangue)
+          console.info('---did not had translations file', testingLangue)
 
           this.files[fileName][testingLangue] = {}
         }

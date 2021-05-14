@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -14,6 +14,8 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class WorkStackGroupComponent implements OnInit {
   @Input() isPublicRecord: string
+  @Input() expandedContent: boolean
+  @Output() total: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -29,31 +31,19 @@ export class WorkStackGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.isPublicRecord) {
-      this.getRecord()
-    } else {
-      // TODO SUPPORT PUBLIC VIEW
-    }
-  }
+    this._record
+      .getRecord({ publicRecordId: this.isPublicRecord })
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+        this.workGroup = this.userRecord.works
+        this.total.emit(this.userRecord.works.groups.length)
+      })
 
-  private getRecord() {
     this._userSession
       .getUserSession()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
-
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
-        this._record
-          .getRecord({
-            privateRecordId: this.userSession.userInfo.EFFECTIVE_USER_ORCID,
-          })
-          .pipe(takeUntil(this.$destroy))
-          .subscribe((userRecord) => {
-            this.userRecord = userRecord
-            this.workGroup = this.userRecord.works
-          })
       })
   }
 

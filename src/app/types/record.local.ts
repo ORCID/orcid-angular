@@ -1,9 +1,4 @@
-import {
-  Person,
-  Preferences,
-  PersonIdentifierEndpoint,
-  MonthDayYearDate,
-} from '.'
+import { Person, Preferences, PersonIdentifierEndpoint } from '.'
 import { OtherNamesEndPoint } from './record-other-names.endpoint'
 import { KeywordEndPoint } from './record-keyword.endpoint'
 import { NamesEndPoint } from './record-name.endpoint'
@@ -16,6 +11,20 @@ import { FundingGroup } from './record-funding.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
 import { ResearchResources } from './record-research-resources.endpoint'
 import { WorksEndpoint } from './record-works.endpoint'
+
+export interface SideBarPublicUserRecord {
+  title?: any
+  displayName?: any
+  names?: any
+  biography: BiographyEndPoint
+  otherNames: OtherNamesEndPoint
+  countries: CountriesEndpoint
+  keyword: KeywordEndPoint
+  emails: EmailsEndpoint
+  externalIdentifier: PersonIdentifierEndpoint
+  website: WebsitesEndPoint
+  lastModifiedTime: any
+}
 
 export interface UserRecord {
   person: Person
@@ -33,10 +42,10 @@ export interface UserRecord {
   peerReviews: PeerReview[]
   researchResources: ResearchResources
   works: WorksEndpoint
+  lastModifiedTime: any
   publicMetadata?: {
     noRobots: boolean
     noIndex: boolean
-    lastModifiedTime: MonthDayYearDate
   }
 }
 

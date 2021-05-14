@@ -12,7 +12,7 @@ Cypress.on('window:before:load', (win) => {
   cy.stub(win.dataLayer, 'push')
     .withArgs(isNotAnInternalGtagCall)
     .callsFake((args) => {
-      console.log(args)
+      console.info(args)
     })
     .as('ga')
 })

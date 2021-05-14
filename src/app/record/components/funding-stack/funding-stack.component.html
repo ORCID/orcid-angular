@@ -12,6 +12,7 @@
     [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
     [ngClass]="{ last: last }"
     [visibility]="fundingStack.defaultFunding.visibility.visibility"
+    [isPublicRecord]="isPublicRecord"
     *ngIf="isPreferred(funding) || displayTheStack"
     type="main"
   >

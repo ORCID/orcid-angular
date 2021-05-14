@@ -1,15 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
-import { ArrayFlat, DateToMonthDayYearDateAdapter } from 'src/app/constants'
-import { PublicGroupedPersonExternalIdentifiers } from 'src/app/types'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPersonService } from '../record-person/record-person.service'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -25,44 +24,20 @@ export class RecordPersonIdentifierService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
-    private _recordPerson: RecordPersonService
+    private _recordPerson: RecordPersonService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   getPersonalIdentifiers(
     options: UserRecordOptions = {}
-  ): ReplaySubject<PersonIdentifierEndpoint> {
-    if (!options?.publicRecordId) {
-      return this.getPrivateRecordIdentifiers(options.forceReload)
-    } else {
-      return this.getPublicRecordIdentifiers(options)
-    }
-  }
-
-  getPublicRecordIdentifiers(
-    options: UserRecordOptions
-  ): ReplaySubject<PersonIdentifierEndpoint> {
-    if (!this.$publicPersonIdentifier) {
-      this.$publicPersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>()
-    } else if (!options.forceReload) {
-      return this.$publicPersonIdentifier
+  ): Observable<PersonIdentifierEndpoint> {
+    if (options.publicRecordId) {
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.externalIdentifier))
     }
 
-    this._recordPerson
-      .getPerson(options)
-      .pipe(
-        map((person) => person.publicGroupedPersonExternalIdentifiers),
-        map((publicGroupedPersonExternalIdentifiers) =>
-          this.publicDataAdapterExternalIdentifier(
-            publicGroupedPersonExternalIdentifiers
-          )
-        ),
-        catchError((error) => this._errorHandler.handleError(error)),
-        tap((value) => {
-          this.$publicPersonIdentifier.next(value)
-        })
-      )
-      .subscribe()
-    return this.$publicPersonIdentifier
+    return this.getPrivateRecordIdentifiers(options.forceReload).asObservable()
   }
 
   private getPrivateRecordIdentifiers(
@@ -93,43 +68,6 @@ export class RecordPersonIdentifierService {
       )
       .subscribe()
     return this.$privatePersonIdentifier
-  }
-
-  publicDataAdapterExternalIdentifier(
-    personIdentifiers: PublicGroupedPersonExternalIdentifiers
-  ): PersonIdentifierEndpoint {
-    return {
-      errors: [],
-      externalIdentifiers: ArrayFlat(
-        Object.keys(personIdentifiers).map((i) => {
-          return personIdentifiers[i].map((personIdentifier) => {
-            return {
-              visibility: {
-                visibility: 'PUBLIC',
-              },
-              errors: [],
-              commonName: personIdentifier.type,
-              reference: personIdentifier.value,
-              url: personIdentifier?.url?.value,
-              source: personIdentifier?.source?.sourceClientId?.path,
-              sourceName: personIdentifier?.source?.sourceName?.content,
-              displayIndex: personIdentifier.displayIndex,
-              putCode: personIdentifier.putCode,
-              createdDate: DateToMonthDayYearDateAdapter(
-                personIdentifier?.createdDate?.value
-              ),
-              lastModified: DateToMonthDayYearDateAdapter(
-                personIdentifier?.lastModifiedDate?.value
-              ),
-              assertionOriginOrcid: null,
-              assertionOriginClientId: null,
-              assertionOriginName: null,
-            }
-          })
-        })
-      ),
-      visibility: { visibility: 'PUBLIC' },
-    }
   }
 
   postPersonalIdentifiers(otherNames: PersonIdentifierEndpoint) {

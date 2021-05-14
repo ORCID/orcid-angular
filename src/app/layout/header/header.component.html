@@ -58,7 +58,7 @@
 <!-- MAIN MENU -->
 <nav
   (mouseleave)="mouseLeave()"
-  *ngIf="mobileMenuState || platform.columns12"
+  *ngIf="(mobileMenuState || platform.columns12) && !hideMainMenu"
   [attr.aria-label]="labelMenu"
 >
   <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->

@@ -17,6 +17,7 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,8 @@ export class RecordEmailsService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
   getEmails(
     options: UserRecordOptions = {
@@ -38,7 +40,9 @@ export class RecordEmailsService {
     }
   ): Observable<EmailsEndpoint> {
     if (options.publicRecordId) {
-      return of(undefined)
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.emails))
     }
     if (!this.$emailsSubject) {
       this.$emailsSubject = new ReplaySubject<EmailsEndpoint>(1)

@@ -7,8 +7,14 @@ h2 {
   margin-bottom: 20px;
 }
 
-.columns-12 :host {
-  app-main {
-    padding-inline-start: 12px !important;
+.activities {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .expand-buttons {
+    .selected {
+      opacity: 0.3;
+    }
   }
 }

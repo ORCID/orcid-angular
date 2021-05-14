@@ -14,7 +14,7 @@
 <div *ngFor="let i of itemGroupedByType">
   <strong>{{ getAmendedTypeLabel(i.type) }}</strong>
 
-  <div class="item" *ngIf="item">
+  <div class="item orc-font-body-small" *ngIf="item">
     <ng-container *ngFor="let item of i.items">
       <ng-container>-</ng-container>
       <ng-container
@@ -42,7 +42,6 @@
         >
           <ul>
             <li
-              class="orc-font-body-small"
               *ngFor="
                 let otherId of item.additionalInfo['external_identifiers'][
                   'externalIdentifier'

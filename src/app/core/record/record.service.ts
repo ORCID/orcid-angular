@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
   ExternalIdentifier,
@@ -39,6 +39,7 @@ import { ResearchResources } from '../../types/record-research-resources.endpoin
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +63,8 @@ export class RecordService {
     private _recordPeerReviewService: RecordPeerReviewService,
     private _recordResearchResourceService: RecordResearchResourceService,
     private _recordWorkService: RecordWorksService,
-    private _recordPerson: RecordPersonService
+    private _recordPerson: RecordPersonService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   headers = new HttpHeaders({
@@ -85,9 +87,6 @@ export class RecordService {
       forceReload: false,
     }
   ): Observable<UserRecord> {
-    if (options.publicRecordId) {
-      return this.getPublicRecord(options.publicRecordId)
-    }
     if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 
@@ -107,6 +106,7 @@ export class RecordService {
         this._recordPeerReviewService.getPeerReviewGroups(options),
         this._recordResearchResourceService.getResearchResourcePage(options),
         this._recordWorkService.getWorks(options),
+        this.getLastModifiedTime(options),
       ])
         .pipe(
           tap(
@@ -126,6 +126,7 @@ export class RecordService {
               peerReviews,
               researchResources,
               works,
+              lastModifiedTime,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -143,6 +144,7 @@ export class RecordService {
                 peerReviews: peerReviews as PeerReview[],
                 researchResources: researchResources as ResearchResources,
                 works: works as WorksEndpoint,
+                lastModifiedTime: lastModifiedTime as any,
               })
             }
           )
@@ -243,14 +245,16 @@ export class RecordService {
       )
   }
 
-  getPublicRecord(orcid: string): Observable<UserRecord> {
-    return this._http
-      .get<UserRecord>(environment.API_WEB + orcid + `/public-record.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+  getLastModifiedTime(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ) {
+    if (options.publicRecordId) {
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.lastModifiedTime))
+    }
+    return of(undefined)
   }
 }

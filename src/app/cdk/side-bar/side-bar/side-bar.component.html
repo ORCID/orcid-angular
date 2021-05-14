@@ -3,12 +3,11 @@
     [ngClass]="{
       mobile: !platform.columns12
     }"
-    [id]="isPublicRecord || userSession.userInfo.EFFECTIVE_USER_ORCID"
+    [id]="isPublicRecord || userSession?.userInfo?.EFFECTIVE_USER_ORCID"
   ></app-side-bar-id>
 
   <ng-container *ngIf="!onlyOrcidId">
     <app-panel
-      *ngIf="userRecord?.emails?.emails"
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.emails.emails"
       [editModalComponent]="modalEmailComponent"
@@ -16,6 +15,10 @@
       class="side-bar"
       id="emails-panel"
       [(openState)]="emailsOpenState"
+      *ngIf="
+        userRecord?.emails?.emails &&
+        (!isPublicRecord || userRecord.emails.emails.length > 0)
+      "
     >
       <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
       <app-panel-data *ngIf="userRecord.emails.emails.length > 0">
@@ -39,7 +42,6 @@
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord?.website?.websites"
       [elements]="userRecord.website.websites"
       [editModalComponent]="modalWebsitesComponent"
       [isPublicRecord]="isPublicRecord"
@@ -47,6 +49,10 @@
       class="side-bar"
       id="websites-panel"
       [(openState)]="websiteOpenState"
+      *ngIf="
+        userRecord?.website?.websites &&
+        (!isPublicRecord || userRecord.website.websites.length > 0)
+      "
     >
       <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
         Website and social links
@@ -78,7 +84,11 @@
     </app-panel>
 
     <app-panel
-      *ngIf="userRecord?.externalIdentifier?.externalIdentifiers"
+      *ngIf="
+        userRecord?.externalIdentifier?.externalIdentifiers &&
+        (!isPublicRecord ||
+          userRecord?.externalIdentifier?.externalIdentifiers.length > 0)
+      "
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
       [editModalComponent]="modalPersonalIdentifiers"
       [isPublicRecord]="isPublicRecord"
@@ -123,7 +133,10 @@
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord?.keyword?.keywords"
+      *ngIf="
+        userRecord?.keyword?.keywords &&
+        (!isPublicRecord || userRecord.keyword.keywords.length > 0)
+      "
       [elements]="userRecord.keyword.keywords"
       [editModalComponent]="modalKeywordComponent"
       [isPublicRecord]="isPublicRecord"
@@ -152,7 +165,10 @@
       </app-panel-data>
     </app-panel>
     <app-panel
-      *ngIf="userRecord?.countries?.addresses"
+      *ngIf="
+        userRecord?.countries?.addresses &&
+        (!isPublicRecord || userRecord.countries.addresses.length > 0)
+      "
       [elements]="userRecord.countries.addresses"
       [editModalComponent]="modalCountryComponent"
       [isPublicRecord]="isPublicRecord"
