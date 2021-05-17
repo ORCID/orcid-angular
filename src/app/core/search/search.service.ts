@@ -13,7 +13,7 @@ import { ORCID_REGEXP } from 'src/app/constants'
 export class SearchService {
   quickSearchEDisMax =
     // tslint:disable-next-line: max-line-length
-    '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^5.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" mm=1}'
+    '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^5.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" bq="current-institution-affiliation-name:[* TO *]^100.0" mm=1}'
 
   constructor(
     private _http: HttpClient,
