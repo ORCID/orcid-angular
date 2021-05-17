@@ -1,6 +1,21 @@
-<ng-container *ngIf="isPublicRecord && isMyPublicRecod">
-  <div>You are previewing a public version of this record</div>
-  <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
-  {{ isPublicRecord }}
-  <a>Edit this record</a>
-</ng-container>
+<div *ngIf="isPublicRecord && isMyPublicRecod">
+  <mat-divider></mat-divider>
+
+  <div class="container">
+    <div class="content">
+      <mat-icon class="margin-end">preview</mat-icon>
+      <div class="margin-end" i18n='@@record.youArePreviewing'>
+        You are previewing a public version of this record
+      </div>
+      <img
+        class="margin-end"
+        src="assets/vectors/orcid.logo.icon.svg"
+        alt="orcid logo"
+      />
+      <strong class="margin-end">{{ isPublicRecord }}</strong>
+      <a class="margin-end" (click)="goToMyRecord()" i18n='@@record.editThisRecord'>Edit this record</a>
+    </div>
+  </div>
+
+  <mat-divider class="bottom-divider"></mat-divider>
+</div>

@@ -77,11 +77,11 @@ import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-pub
     MatSelectModule,
     PrivacySelectorModule,
     DragDropModule,
-    A11yLinkModule,
     SharedModule,
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
+    A11yLinkModule
   ],
 })
 export class RecordModule {}

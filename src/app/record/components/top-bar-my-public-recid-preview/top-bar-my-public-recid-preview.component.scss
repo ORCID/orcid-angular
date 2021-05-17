@@ -1,0 +1,26 @@
+img {
+  height: 24px;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  .container {
+    display: flex;
+    justify-content: space-around;
+  }
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    div {
+      display: flex;
+    }
+  }
+}
+
+.margin-end {
+  margin-inline-end: 4px;
+}
