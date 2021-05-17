@@ -23,7 +23,7 @@
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <app-panel-privacy
-      *ngIf="visibility"
+      *ngIf="visibility && !isPublicRecord"
       [visibility]="visibility"
     ></app-panel-privacy>
 
