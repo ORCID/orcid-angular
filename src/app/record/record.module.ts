@@ -35,7 +35,7 @@ import { WorkStackGroupComponent } from './components/work-stack-group/work-stac
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { WorkComponent } from './components/work/work.component'
 import { TopBarActionsComponent } from './components/top-bar-actions/top-bar-actions.component'
-import { MatDividerModule } from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider'
 import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-public-recid-preview/top-bar-my-public-recid-preview.component'
 
 @NgModule({
@@ -81,7 +81,7 @@ import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-pub
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
-    A11yLinkModule
+    A11yLinkModule,
   ],
 })
 export class RecordModule {}

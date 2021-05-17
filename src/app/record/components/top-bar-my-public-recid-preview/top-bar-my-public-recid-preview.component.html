@@ -4,7 +4,7 @@
   <div class="container">
     <div class="content">
       <mat-icon class="margin-end">preview</mat-icon>
-      <div class="margin-end" i18n='@@record.youArePreviewing'>
+      <div class="margin-end" i18n="@@record.youArePreviewing">
         You are previewing a public version of this record
       </div>
       <img
@@ -13,7 +13,12 @@
         alt="orcid logo"
       />
       <strong class="margin-end">{{ isPublicRecord }}</strong>
-      <a class="margin-end" (click)="goToMyRecord()" i18n='@@record.editThisRecord'>Edit this record</a>
+      <a
+        class="margin-end"
+        (click)="goToMyRecord()"
+        i18n="@@record.editThisRecord"
+        >Edit this record</a
+      >
     </div>
   </div>
 
