@@ -67,6 +67,10 @@ app-panel {
       border-radius: 4px;
     }
 
+    .names-extended {
+      max-height: 64px !important;
+    }
+
     .names.mobile {
       height: auto !important;
       margin-left: 0 !important;
