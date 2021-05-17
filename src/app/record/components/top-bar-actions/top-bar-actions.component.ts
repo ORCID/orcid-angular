@@ -1,9 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { Observable, Subject } from 'rxjs'
+import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { UserService } from 'src/app/core'
-import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
   selector: 'app-top-bar-actions',
@@ -15,11 +13,7 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
   @Input() isPublicRecord: string
 
-  constructor(
-    private _platform: PlatformInfoService,
-    private _user: UserService,
-    private _record: RecordService
-  ) {
+  constructor(_platform: PlatformInfoService) {
     _platform
       .get()
       .pipe(takeUntil(this.$destroy))
