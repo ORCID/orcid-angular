@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { URL_REGEXP } from 'src/app/constants'
 import { OrgDisambiguated } from 'src/app/types'
 import { Work } from 'src/app/types/record-works.endpoint'
 
@@ -20,4 +21,10 @@ export class WorkComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  /**
+   * RegEx function to check if the elements contains a URL
+   */
+  isUrl(element) {
+    return RegExp(URL_REGEXP).test(element)
+  }
 }
