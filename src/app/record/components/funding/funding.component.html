@@ -31,10 +31,11 @@
     </div>
     <div *ngIf="funding?.url?.value">
       <span i18n="@@shared.url">URL:</span>
-      <a class="underline"
-         href="{{ funding.url.value }}"
-         target="_blank"
-         rel="noreferrer noopener"
+      <a
+        class="underline"
+        href="{{ funding.url.value }}"
+        target="_blank"
+        rel="noreferrer noopener"
       >
         {{ funding.url.value }}
       </a>
@@ -96,15 +97,15 @@
           }}<ng-container
             *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
             >:
-          <a
-            class="underline"
-            target="_blank"
-            rel="noopener noreferrer"
-            *ngIf="orgDisambiguated?.sourceId"
-            [href]="orgDisambiguated?.sourceId"
-          >{{ orgDisambiguated?.sourceId }}</a>
-          </ng-container
-          >
+            <a
+              class="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              *ngIf="orgDisambiguated?.sourceId"
+              [href]="orgDisambiguated?.sourceId"
+              >{{ orgDisambiguated?.sourceId }}</a
+            >
+          </ng-container>
         </div>
         <div>
           {{ orgDisambiguated?.value

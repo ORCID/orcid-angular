@@ -124,9 +124,9 @@ export class FundingStackComponent implements OnInit {
       this.getMoreDetailsFromTheServer(funding)
         .pipe(first())
         .subscribe((response) => {
-        this._fundingStack.fundings[index] = response
-        this._fundingStack.fundings[index].fullyLoaded = true
-      })
+          this._fundingStack.fundings[index] = response
+          this._fundingStack.fundings[index].fullyLoaded = true
+        })
     }
   }
 
