@@ -16,7 +16,10 @@
         {{ sourceName }}
       </div>
     </div>
-    <div class="prefered-source" *ngIf="isPreferred && stackLength > 1">
+    <div
+      class="preferred-source"
+      *ngIf="isPreferred && stackLength > 1 && !isPublicRecord"
+    >
       <i class="material-icons"> grade </i>
       <div>
         <ng-container i18n="@@groups.common.preferred_source"
@@ -40,7 +43,10 @@
       </div>
     </div>
 
-    <div class="prefered-source" *ngIf="!isPreferred && stackLength > 1">
+    <div
+      class="preferred-source"
+      *ngIf="!isPreferred && stackLength > 1 && !isPublicRecord"
+    >
       <a
         (click)="clickMakePrimary()"
         *ngIf="stackLength > 1"

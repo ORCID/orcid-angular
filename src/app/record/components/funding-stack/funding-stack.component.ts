@@ -4,6 +4,7 @@ import { OrganizationsService } from 'src/app/core'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { OrgDisambiguated } from 'src/app/types'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-funding-stack',
@@ -120,10 +121,12 @@ export class FundingStackComponent implements OnInit {
       itemToUpdate.fullyLoaded === undefined ||
       itemToUpdate.fullyLoaded !== true
     ) {
-      this.getMoreDetailsFromTheServer(funding).subscribe((response) => {
-        this._fundingStack.fundings[index] = response
-        this._fundingStack.fundings[index].fullyLoaded = true
-      })
+      this.getMoreDetailsFromTheServer(funding)
+        .pipe(first())
+        .subscribe((response) => {
+          this._fundingStack.fundings[index] = response
+          this._fundingStack.fundings[index].fullyLoaded = true
+        })
     }
   }
 
