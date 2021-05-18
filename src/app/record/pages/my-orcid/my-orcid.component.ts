@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
@@ -6,13 +6,14 @@ import { takeUntil } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
 import { Subject } from 'rxjs'
 import { UserRecord } from '../../../types/record.local'
+import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 
 @Component({
   selector: 'app-my-orcid',
   templateUrl: './my-orcid.component.html',
   styleUrls: ['./my-orcid.component.scss'],
 })
-export class MyOrcidComponent implements OnInit {
+export class MyOrcidComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   platform: PlatformInfo
@@ -24,7 +25,8 @@ export class MyOrcidComponent implements OnInit {
   constructor(
     private _platform: PlatformInfoService,
     private route: ActivatedRoute,
-    private _record: RecordService
+    private _record: RecordService,
+    private _openGraph: OpenGraphService
   ) {
     this.checkIfThisIsAPublicOrcid()
   }
@@ -51,6 +53,16 @@ export class MyOrcidComponent implements OnInit {
       .subscribe((userRecord) => {
         this.userRecord = userRecord
       })
+
+    if (this.publicOrcid) {
+      const result = this._openGraph.addOpenGraphData(this.publicOrcid)
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.publicOrcid) {
+      this._openGraph.removeOpenGraphData()
+    }
   }
 
   collapse() {
