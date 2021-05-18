@@ -15,7 +15,7 @@ export interface PeerReview extends AssertionBase {
   orgName: Value
   role: Value
   subjectContainerName: any
-  subjectExternalIdentifier: string
+  subjectExternalIdentifier: ExternalIdentifier
   subjectName: any
   subjectType: any
   subjectUrl: string

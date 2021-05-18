@@ -67,11 +67,11 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       case AffiliationUIGroupsTypes.EMPLOYMENT:
         return $localize`:@@shared.employment:Employment`
       case AffiliationUIGroupsTypes.EDUCATION_AND_QUALIFICATION:
-        return $localize`:@@shared.educationQualifications:Education and Qualifications`
+        return $localize`:@@shared.educationQualifications:Education and qualifications`
       case AffiliationUIGroupsTypes.INVITED_POSITION_AND_DISTINCTION:
-        return $localize`:@@shared.invitedPositions:Invited positions and Distinctions`
+        return $localize`:@@shared.invitedPositions:Invited positions and distinctions`
       case AffiliationUIGroupsTypes.MEMBERSHIP_AND_SERVICE:
-        return $localize`:@@shared.membership:Membership and Service`
+        return $localize`:@@shared.membership:Membership and service`
     }
   }
 

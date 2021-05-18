@@ -7,6 +7,11 @@ import {
   Visibility,
 } from './common.endpoint'
 
+export interface OrganizationDefinedFundingSubType {
+  alreadyIndexed: boolean
+  subtype: Value
+}
+
 export interface FundingGroup {
   fundings: [Funding]
   activePutCode: number
@@ -25,7 +30,7 @@ export interface Funding {
   description: Value
   fundingName: Value
   fundingType: Value
-  organizationDefinedFundingSubType: Value
+  organizationDefinedFundingSubType: OrganizationDefinedFundingSubType
   currencyCode: Value
   amount: Value
   url: Value

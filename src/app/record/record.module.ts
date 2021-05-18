@@ -34,6 +34,9 @@ import { ResearchResourcesComponent } from './components/research-resources/rese
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { WorkComponent } from './components/work/work.component'
+import { TopBarActionsComponent } from './components/top-bar-actions/top-bar-actions.component'
+import { MatDividerModule } from '@angular/material/divider'
+import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-public-recid-preview/top-bar-my-public-recid-preview.component'
 
 @NgModule({
   declarations: [
@@ -56,6 +59,8 @@ import { WorkComponent } from './components/work/work.component'
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
+    TopBarActionsComponent,
+    TopBarMyPublicRecidPreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -72,10 +77,11 @@ import { WorkComponent } from './components/work/work.component'
     MatSelectModule,
     PrivacySelectorModule,
     DragDropModule,
-    A11yLinkModule,
     SharedModule,
     MatIconModule,
     MatButtonModule,
+    MatDividerModule,
+    A11yLinkModule,
   ],
 })
 export class RecordModule {}

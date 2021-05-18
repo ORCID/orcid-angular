@@ -8,6 +8,7 @@ import { PlatformInfoService } from '../../platform-info'
   preserveWhitespaces: true,
 })
 export class PanelSourceComponent implements OnInit {
+  @Input() isPublicRecord
   @Input() isPreferred = true
   @Input() sourceName
   @Input() stackLength

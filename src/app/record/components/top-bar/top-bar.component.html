@@ -1,25 +1,4 @@
-<div class="my-orcid-icons" *ngIf="platform.columns12">
-  <button mat-icon-button class="orc-font-small-print">
-    <mat-icon fontSet="material-icons-outlined" class="icon"> print </mat-icon>
-    <ng-container i18n="@@record.printableVersion">
-      Printable version
-    </ng-container>
-  </button>
-  <button mat-icon-button class="orc-font-small-print">
-    <mat-icon fontSet="material-icons-outlined" class="icon">
-      qr_code
-    </mat-icon>
-    <ng-container i18n="@@record.getQR">
-      Get a QR code for your ORCID iD
-    </ng-container>
-  </button>
-  <button mat-icon-button class="orc-font-small-print">
-    <mat-icon fontSet="material-icons-outlined" class="icon"> code </mat-icon>
-    <ng-container i18n="@@record.displayId">
-      Display your iD on other sites
-    </ng-container>
-  </button>
-</div>
+<app-top-bar-actions [isPublicRecord]="isPublicRecord"></app-top-bar-actions>
 
 <ng-container *ngIf="!isPublicRecord">
   <app-panel
@@ -108,7 +87,8 @@
           class="names"
           [ngClass]="{
             'col l5': platform.columns12,
-            'row mobile': !platform.columns12
+            'row mobile': !platform.columns12,
+            'names-extended': expandedContent
           }"
         >
           <div class="row mat-caption description" i18n="@@record.name">
@@ -130,8 +110,8 @@
           }"
         >
           <div class="row space-between">
-            <div class="mat-caption other-names-wrapper">
-              <div class="description" i18n="@@record.otherNames">
+            <div class="col l10 mat-caption other-names-wrapper">
+              <div class="row description" i18n="@@record.otherNames">
                 Other names
               </div>
               <ng-container
@@ -149,13 +129,13 @@
                     >,
                   </ng-container>
                 </ng-container>
-                <div class="other-name" *ngIf="expandedContent">
-                  <div>
+                <div class="row other-name" *ngIf="expandedContent">
+                  <div class="row">
                     <b class="orc-font-body-small">
                       {{ otherNames.content }}
                     </b>
                   </div>
-                  <div>
+                  <div class="row">
                     <b class="description" i18n="@@record.source"> Source </b>
                   </div>
                   <div class="description">
@@ -183,7 +163,7 @@
       </div>
     </div>
     <div
-      class="col l11 biography-container"
+      class="div biography-container"
       *ngIf="userRecord?.biography?.biography"
     >
       <h3 class="orc-font-body" i18n="@@record.biography">Biography</h3>
