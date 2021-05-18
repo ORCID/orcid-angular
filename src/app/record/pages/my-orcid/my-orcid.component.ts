@@ -55,7 +55,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
 
     if (this.publicOrcid) {
-      const result = this._openGraph.addOpenGraphData(this.publicOrcid)
+      this._openGraph.addOpenGraphData(this.publicOrcid)
     }
   }
 
