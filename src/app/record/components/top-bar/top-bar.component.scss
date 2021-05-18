@@ -28,29 +28,6 @@ app-panel {
   margin: unset;
 }
 
-.my-orcid-icons {
-  width: 100%;
-  text-align: right;
-
-  button {
-    width: auto;
-    margin-right: 40px;
-    padding-right: 3px;
-
-    .icon {
-      font-size: 20px;
-      margin-right: 6px;
-    }
-  }
-  button:last-child {
-    margin-right: 0;
-  }
-
-  .mat-icon-button {
-    border-radius: 0;
-  }
-}
-
 .public-container {
   width: 100%;
 
