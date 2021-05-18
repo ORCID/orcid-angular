@@ -29,3 +29,9 @@
 .nested-panels {
   padding: 30px; // TODO @Daniel
 }
+
+:host,
+.top-bar-or-main,
+.side-bar {
+  border-radius: 3px;
+}

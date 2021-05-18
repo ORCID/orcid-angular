@@ -14,7 +14,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 })
 export class TopBarMyPublicRecidPreviewComponent implements OnInit {
   @Input() isPublicRecord: string
-  isMyPublicRecod = true
+  isMyPublicRecord = false
 
   constructor(
     _platform: PlatformInfoService,
@@ -25,8 +25,10 @@ export class TopBarMyPublicRecidPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this._user.getUserSession().subscribe((value) => {
-      this.isMyPublicRecod =
-        value.userInfo.EFFECTIVE_USER_ORCID === this.isPublicRecord
+      if (value.userInfo) {
+        this.isMyPublicRecord =
+          value.userInfo.EFFECTIVE_USER_ORCID === this.isPublicRecord
+      }
     })
   }
   goToMyRecord() {

@@ -76,7 +76,7 @@
 
   <!-- URL -->
 
-  <app-display-attribute *ngIf="work.url.value !== ''">
+  <app-display-attribute *ngIf="work.url?.value">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
 
     <div>
@@ -90,7 +90,7 @@
         {{ work.url.value }}
       </a>
 
-      <ng-container *ngIf="!isUrl(work.url)">
+      <ng-container *ngIf="!isUrl(work.url.value)">
         {{ work.url.value }}
       </ng-container>
     </div>
