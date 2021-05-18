@@ -74,20 +74,26 @@
     </div>
   </app-display-attribute>
 
-  <!-- URL-->
-  <app-display-attribute *ngIf="work.url?.value">
-    <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.url">URL</ng-container>
-    </h3>
+  <!-- URL -->
 
-    <a
-      class="underline"
-      [href]="work.url.value"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      {{ work.url.value }}
-    </a>
+  <app-display-attribute *ngIf="work.url.value !== ''">
+    <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
+
+    <div>
+      <a
+        class="underline"
+        *ngIf="isUrl(work.url.value)"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="{{ work.url.value }}"
+      >
+        {{ work.url.value }}
+      </a>
+
+      <ng-container *ngIf="!isUrl(work.url)">
+        {{ work.url.value }}
+      </ng-container>
+    </div>
   </app-display-attribute>
 
   <!-- CITATION-->

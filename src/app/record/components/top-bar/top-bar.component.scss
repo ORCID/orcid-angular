@@ -28,29 +28,6 @@ app-panel {
   margin: unset;
 }
 
-.my-orcid-icons {
-  width: 100%;
-  text-align: right;
-
-  button {
-    width: auto;
-    margin-right: 40px;
-    padding-right: 3px;
-
-    .icon {
-      font-size: 20px;
-      margin-right: 6px;
-    }
-  }
-  button:last-child {
-    margin-right: 0;
-  }
-
-  .mat-icon-button {
-    border-radius: 0;
-  }
-}
-
 .public-container {
   width: 100%;
 
@@ -60,11 +37,15 @@ app-panel {
     }
 
     .names {
-      height: 64px;
+      min-height: 64px;
       margin-left: 10px;
       padding: 16px;
       border: solid 1px;
       border-radius: 4px;
+    }
+
+    .names-extended {
+      max-height: 64px !important;
     }
 
     .names.mobile {
@@ -73,7 +54,7 @@ app-panel {
     }
 
     .other-names {
-      height: 64px;
+      min-height: 64px;
       margin-right: 20px;
       border: solid 1px;
       border-radius: 4px;
@@ -102,8 +83,11 @@ app-panel {
   }
 
   .biography-container {
-    display: inline;
     margin-top: 2em;
+    padding: 0 10px;
+    p {
+      overflow-wrap: break-word;
+    }
   }
 }
 

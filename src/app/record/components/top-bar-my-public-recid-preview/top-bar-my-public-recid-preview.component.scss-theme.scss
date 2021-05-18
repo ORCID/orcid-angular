@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin top-bar-my-public-preview-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  mat-icon {
+    color: map-get($foreground, 'state-notice-darkest');
+  }
+  .bottom-divider {
+    border-top-color: map-get($foreground, 'state-notice-darkest');
+  }
+}
+
+@include top-bar-my-public-preview-theme($orcid-app-theme);

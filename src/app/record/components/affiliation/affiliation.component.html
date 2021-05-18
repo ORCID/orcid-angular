@@ -52,10 +52,10 @@
 </app-panel-data>
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
-
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
   <!-- URL -->
-  <app-display-attribute *ngIf="affiliation.url.value">
+
+  <app-display-attribute *ngIf="affiliation.url.value !== ''">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
     <a
       class="underline"
@@ -67,7 +67,7 @@
       {{ affiliation.url.value }}
     </a>
     <ng-container *ngIf="!isUrl(affiliation.url)">
-      {{ affiliation.url }}
+      {{ affiliation.url.value }}
     </ng-container>
   </app-display-attribute>
 
@@ -93,12 +93,14 @@
         </div>
 
         <a
-          target="orcid-app"
+          class="underline"
+          target="_blank"
+          rel="noreferrer noopener"
           *ngIf="orgDisambiguated?.url"
           [href]="orgDisambiguated?.url"
         >
-          {{ orgDisambiguated?.url }}</a
-        >
+          {{ orgDisambiguated?.url }}
+        </a>
       </div>
     </app-display-attribute>
 
@@ -118,9 +120,14 @@
           org.preferred
         }}</ng-container>
         <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
-          <a target="orcid-app" href="{{ org.preferred }} ">
-            {{ org.preferred }}</a
+          <a
+            class="underline"
+            target="_blank"
+            rel="noreferrer noopener"
+            href="{{ org.preferred }}"
           >
+            {{ org.preferred }}
+          </a>
         </ng-container>
         <ng-container>(preferred)</ng-container>
 
@@ -129,9 +136,14 @@
             id
           }}</ng-container>
           <ng-container *ngIf="id != org.preferred && isUrl(id)">
-            <a class="underline" target="orcid-app" href="{{ id }}">
-              {{ id }}</a
+            <a
+              class="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="{{ id }}"
             >
+              {{ id }}
+            </a>
           </ng-container>
         </ng-container>
       </div>
