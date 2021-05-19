@@ -14,7 +14,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 })
 export class TopBarMyPublicRecidPreviewComponent implements OnInit {
   @Input() isPublicRecord: string
-  isMyPublicRecord = false
+  isMyPublicRecord = true
 
   constructor(
     _platform: PlatformInfoService,

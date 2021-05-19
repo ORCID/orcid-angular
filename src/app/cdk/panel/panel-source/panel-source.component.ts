@@ -11,6 +11,9 @@ export class PanelSourceComponent implements OnInit {
   @Input() isPublicRecord
   @Input() isPreferred = true
   @Input() sourceName
+  @Input() assertionOriginOrcid
+  @Input() assertionOriginName
+  @Input() assertionOriginClientId
   @Input() stackLength
   _displayTheStack
   _displayAsMainStackCard

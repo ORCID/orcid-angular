@@ -32,6 +32,9 @@
     <app-panel-source
       [isPreferred]="isPreferred(funding)"
       [sourceName]="funding.sourceName || funding.source"
+      [assertionOriginClientId]="funding.assertionOriginClientId"
+      [assertionOriginName]="funding.assertionOriginName"
+      [assertionOriginOrcid]="funding.assertionOriginOrcid"
       [stackLength]="fundingStack.fundings.length"
       [(displayTheStack)]="displayTheStack"
       (makePrimary)="makePrimaryCard(funding)"

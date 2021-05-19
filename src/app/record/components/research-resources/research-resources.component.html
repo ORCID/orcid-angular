@@ -539,6 +539,9 @@
           </app-panel-data>
           <app-panel-source
             [sourceName]="research.sourceName || research.source"
+            [assertionOriginClientId]="research.assertionOriginClientId"
+            [assertionOriginName]="research.assertionOriginName"
+            [assertionOriginOrcid]="research.assertionOriginOrcid"
             [isPreferred]="isPreferred(research, researchResource)"
             [isPublicRecord]="isPublicRecord"
           >

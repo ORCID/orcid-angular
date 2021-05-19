@@ -35,7 +35,7 @@ export class RecordFundingsService {
         environment.API_WEB +
           options.publicRecordId +
           '/fundingGroups.json?sort=date&sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : true)
+          (options.sortAsc != null ? options.sortAsc : false)
       )
     }
 

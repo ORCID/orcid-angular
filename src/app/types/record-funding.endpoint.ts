@@ -6,6 +6,7 @@ import {
   Value,
   Visibility,
 } from './common.endpoint'
+import { AssertionBase } from './record.endpoint'
 
 export interface OrganizationDefinedFundingSubType {
   alreadyIndexed: boolean
@@ -22,9 +23,8 @@ export interface FundingGroup {
   defaultFunding: Funding
 }
 
-export interface Funding {
+export interface Funding extends AssertionBase {
   visibility: Visibility
-  errors: any[]
   putCode: Value
   fundingTitle: Title
   description: Value
@@ -38,8 +38,6 @@ export interface Funding {
   endDate: MonthDayYearDate
   externalIdentifiers?: ExternalIdentifier[]
   contributors?: Contributor[]
-  sourceName: string
-  source: string
   disambiguatedFundingSourceId: Value
   disambiguationSource: Value
   city: Value
@@ -48,7 +46,5 @@ export interface Funding {
   countryForDisplay?: string // TODO is this always empty?
   fundingTypeForDisplay?: string
   dateSortString: string
-  createdDate: MonthDayYearDate
-  lastModified: MonthDayYearDate
   fullyLoaded?: boolean
 }
