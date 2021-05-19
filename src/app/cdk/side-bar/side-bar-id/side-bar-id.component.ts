@@ -17,7 +17,7 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
 
   environment = environment
   @Input() id: string
-  privateView = true
+  @Input() privateView = true
   platform: PlatformInfo
 
   constructor(private _platform: PlatformInfoService) {

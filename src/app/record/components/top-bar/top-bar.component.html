@@ -1,4 +1,9 @@
 <app-top-bar-actions [isPublicRecord]="isPublicRecord"></app-top-bar-actions>
+<mat-progress-bar
+  *ngIf="!userRecord"
+  mode="indeterminate"
+  color="accent"
+></mat-progress-bar>
 
 <ng-container *ngIf="!isPublicRecord">
   <app-panel
@@ -68,6 +73,7 @@
 </ng-container>
 
 <!--PUBLIC VIEWS-->
+
 <ng-container *ngIf="isPublicRecord">
   <div
     class="public-container"
