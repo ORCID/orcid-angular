@@ -18,6 +18,7 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
+import { MatProgressBar } from '@angular/material/progress-bar'
 @NgModule({
   imports: [
     CommonModule,
