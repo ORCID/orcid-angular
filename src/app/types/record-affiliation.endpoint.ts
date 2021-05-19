@@ -4,6 +4,7 @@ import {
   Value,
   Visibility,
 } from './common.endpoint'
+import { AssertionBase } from './record.endpoint'
 
 export enum AffiliationGroupsTypes {
   EMPLOYMENT = 'EMPLOYMENT',
@@ -50,9 +51,8 @@ export interface AffiliationGroup {
   affiliationType: string // Todo make an enum
 }
 
-export interface Affiliation {
+export interface Affiliation extends AssertionBase {
   visibility: Visibility
-  errors: any[]
   putCode: Value
   affiliationName: Value
   city: Value
@@ -73,11 +73,7 @@ export interface Affiliation {
   affiliationTypeForDisplay?: any // TODO is this always empty?
   startDate: MonthDayYearDate
   endDate: MonthDayYearDate
-  sourceName: string
-  source: string
   dateSortString: string
-  createdDate: MonthDayYearDate
-  lastModified: MonthDayYearDate
   url: Value
   orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
   affiliationExternalIdentifiers?: ExternalIdentifier[]
