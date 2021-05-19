@@ -1,7 +1,7 @@
 on: [push, pull_request]
 name: Build INT 🛠️
 jobs:
-  init-build:
+  int-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,11 +17,11 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: INIT
+      - name: INT
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install and npm run build
         run: |
           npm i
-          npm run build:init
+          npm run build:int
