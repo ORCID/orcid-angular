@@ -51,8 +51,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.userRecord = userRecord
-        this.setNames(this.userRecord)
+        if (userRecord?.names) {
+          this.setNames(this.userRecord)
+        }
       })
   }
 

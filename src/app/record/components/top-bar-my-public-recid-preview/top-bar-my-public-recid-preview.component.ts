@@ -25,8 +25,10 @@ export class TopBarMyPublicRecidPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this._user.getUserSession().subscribe((value) => {
-      this.isMyPublicRecord =
-        value?.userInfo?.EFFECTIVE_USER_ORCID === this.isPublicRecord
+      if (value.userInfo) {
+        this.isMyPublicRecord =
+          value.userInfo.EFFECTIVE_USER_ORCID === this.isPublicRecord
+      }
     })
   }
   goToMyRecord() {
