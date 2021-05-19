@@ -1,8 +1,19 @@
 <mat-card class="orcid-wizard">
   <mat-card-header>
-    <mat-card-title role="heading" aria-level="1" i18n="@@register.create"
-      >Create your ORCID iD</mat-card-title
-    >
+    <mat-card-title role="heading" aria-level="1">
+      <ng-container
+        *ngIf="!reactivation.isReactivation"
+        i18n="@@register.create"
+      >
+        Create your ORCID iD
+      </ng-container>
+      <ng-container
+        *ngIf="reactivation.isReactivation"
+        i18n="@@register.reactivation"
+      >
+        Thank you for reactivating your ORCID iD.
+      </ng-container>
+    </mat-card-title>
     <mat-card-subtitle role="heading" aria-level="2" i18n="@@register.step2"
       >This is step 2 of 3</mat-card-subtitle
     >

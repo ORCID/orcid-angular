@@ -1,0 +1,31 @@
+:host {
+  width: 100%;
+}
+
+hr {
+  height: 2px;
+  border: 0;
+  margin: 0;
+}
+
+.title {
+  margin-top: 16px;
+
+  p {
+    margin: 6px 0;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.side-bar {
+  text-decoration: underline;
+}
+
+.biography {
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0px 0.5em 0 0.5em;
+  }
+}

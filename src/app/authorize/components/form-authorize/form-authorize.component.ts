@@ -1,14 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import {
-  switchMap,
-  take,
-  takeUntil,
-  map,
-  catchError,
-  tap,
-} from 'rxjs/operators'
+import { switchMap, take, takeUntil, map, catchError } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -19,12 +12,12 @@ import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RequestInfoForm, Scope } from 'src/app/types'
-import { ScopesStrings } from 'src/app/types/common.endpoint'
 import { UserSession } from 'src/app/types/session.local'
 import {
   TrustedIndividuals,
   Delegator,
 } from 'src/app/types/trusted-individuals.endpoint'
+import { environment } from 'src/environments/environment'
 @Component({
   selector: 'app-form-authorize',
   templateUrl: './form-authorize.component.html',
@@ -32,6 +25,7 @@ import {
   preserveWhitespaces: true,
 })
 export class FormAuthorizeComponent implements OnInit, OnDestroy {
+  environment = environment
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
   userName: string
@@ -105,17 +99,12 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   authorize(value = true) {
     this.loadingAuthorizeEndpoint = true
     this._oauth.authorize(value).subscribe((data) => {
-      let analyticsReports: Observable<void>[] = []
+      const analyticsReports: Observable<void>[] = []
 
       if (value) {
-        // Create a GA event for each scope
-        analyticsReports = data.scopes.map((scope) =>
+        analyticsReports.push(
           this._gtag
-            .reportEvent(
-              `AuthorizeP_${scope.name}`,
-              'RegGrowth',
-              this.oauthRequest
-            )
+            .reportEvent(`Authorize`, 'RegGrowth', this.oauthRequest)
             .pipe(
               catchError((err) =>
                 this._errorHandler.handleError(
@@ -140,12 +129,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             )
         )
       }
-      forkJoin(analyticsReports)
-        .pipe(tap(() => (this.loadingAuthorizeEndpoint = false)))
-        .subscribe(
-          () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
-          () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
-        )
+      forkJoin(analyticsReports).subscribe(
+        () => (this.window as any).outOfRouterNavigation(data.redirectUrl),
+        () => (this.window as any).outOfRouterNavigation(data.redirectUrl)
+      )
     })
   }
 

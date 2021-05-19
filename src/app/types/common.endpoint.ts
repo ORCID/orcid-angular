@@ -6,14 +6,6 @@ export interface CreatedDate {
   value: number
 }
 
-export interface Biography {
-  lastModifiedDate: LastModifiedDate
-  createdDate: CreatedDate
-  content: string
-  visibility: string
-  path?: any
-}
-
 export interface SourceName {
   content: string
 }
@@ -22,6 +14,26 @@ export interface Source {
   sourceOrcid?: SourceOrcid
   sourceClientId?: any
   sourceName: SourceName
+}
+
+export interface SourceWithAssertionOrigin {
+  sourceOrcid?: any
+  sourceClientId: SourceOrcid
+  sourceName: SourceName
+  assertionOriginOrcid?: any
+  assertionOriginClientId?: any
+  assertionOriginName?: any
+}
+
+export interface Keyword {
+  content: string
+  source: Source
+  putCode: number
+  lastModifiedDate: LastModifiedDate
+  createdDate: CreatedDate
+  visibility: string
+  path?: any
+  displayIndex: number
 }
 
 export interface OtherName {
@@ -72,10 +84,6 @@ export interface SourceOrcid {
   host: string
 }
 
-export interface SourceName {
-  content: string
-}
-
 export interface Email {
   email: string
   source: Source
@@ -89,12 +97,12 @@ export interface Email {
 }
 
 export interface MonthDayYearDate {
-  errors: any[] // TODO define object
+  errors?: any[] // TODO define object
   month: string
   day: string
   year: string
-  required: boolean
-  getRequiredMessage: any
+  required?: boolean
+  getRequiredMessage?: any
 }
 
 export interface Value {
@@ -110,6 +118,47 @@ export interface Visibility {
   getRequiredMessage?: any
   visibility: VisibilityStrings
 }
+
+export interface ExternalIdentifier {
+  errors: any[]
+  externalIdentifierId: ExternalIdentifierId
+  externalIdentifierType: Value
+  url: Value
+  relationship: Value
+  normalized: Value
+  normalizedUrl: Value
+}
+
+export interface ExternalIdentifierId {
+  errors: any[]
+  value: string
+  required: boolean
+  getRequiredMessage?: any
+}
+
+export interface Contributor {
+  errors: any[]
+  contributorSequence: Value
+  email?: Value
+  orcid?: Value
+  uri: Value
+  creditName?: Value
+  contributorRole: Value
+}
+
+export interface Title {
+  errors: any[]
+  title: Value
+  translatedTitle?: TranslatedTitle
+}
+
+export interface TranslatedTitle {
+  errors: any[]
+  content: string
+  languageCode?: string
+  languageName?: string
+}
+
 export type ScopesStrings =
   | 'openid'
   | '/authenticate'

@@ -1,0 +1,24 @@
+:host {
+  width: 100%;
+  box-sizing: border-box;
+  > div {
+    width: 100%;
+  }
+}
+
+app-panel {
+  width: 100%;
+  margin-top: 16px;
+}
+
+app-panel:first-of-type {
+  margin-top: 32px;
+}
+
+.orc-font-body {
+  margin: unset;
+}
+
+.mobile {
+  height: 187px;
+}

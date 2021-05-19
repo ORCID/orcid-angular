@@ -26,9 +26,11 @@
       seamlessaccess: $seamlessaccess-blue,
       brand-primary-lightest: $brand-primary-lightest,
       ui-background-lightest: $ui-background-lightest,
+      ui-background-darkest: $ui-background-darkest,
       ui-background: $ui-background,
       // COLORS OVERWRITES
-      unselected-chip: white
+      unselected-chip: white,
+      panel-shadow: $panel-shadow
     )
   );
   // .
@@ -43,7 +45,15 @@
     $foreground,
     (
       box-border: $soft-grey,
+      brand-primary: $brand-primary,
+      brand-primary-dark: $brand-primary-dark,
+      state-notice-light: $state-notice-light,
       state-notice-dark: $state-notice-dark,
+      state-notice-darkest: $state-notice-darkest,
+      state-warning-dark: $state-warning-dark,
+      text-dark-mid: $text-dark-mid,
+      text-dark-high: $text-dark-high,
+      text-light-high: $text-light-high,
       visibility-everyone: $visibility-everyone,
       visibility-private: $visibility-private,
       visibility-trusted: $visibility-trusted,

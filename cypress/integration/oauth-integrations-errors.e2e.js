@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 import { environment } from '../cypress.env'
 const oauthUrlBuilder = require('../helpers/oauthUrlBuilder')
-describe('Oauth integrations errors', () => {
+const runInfo = require('../helpers/runInfo')
+
+describe('Oauth integrations errors' + runInfo(), () => {
   before(() => {
     cy.clearCookies()
-    cy.sessionLogin('testUser')
+    cy.programmaticSignin('testUser')
   })
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
@@ -25,9 +27,10 @@ describe('Oauth integrations errors', () => {
         })
     )
     cy.injectAxe()
-    cy.checkA11y(null, {
-      includedImpacts: ['critical', 'serious'],
-    })
+      .get('#error-message')
+      .checkA11y(null, {
+        includedImpacts: ['critical', 'serious'],
+      })
   })
 
   it('show error screen on INVALID client id', function () {
@@ -65,18 +68,36 @@ describe('Oauth integrations errors', () => {
     cy.hasNoLayout()
     cy.hasZendesk()
   })
-  it('show error screen on LOCKED client id', function () {
+  it('show error screen on DEACTIVATED client id', function () {
     cy.visit(
       `${environment.baseUrl}/oauth/authorize` +
         oauthUrlBuilder({
-          client_id: environment.lockedApp.id,
+          client_id: environment.deactivatedClientApp.id,
           response_type: 'code',
           scope: `/authenticate openid`,
-          redirect_uri: environment.validApp.redirectUrl,
+          redirect_uri: environment.deactivatedClientApp.redirectUrl,
         })
     )
     cy.get('#error-message').contains(
-      `Error: The provided client id ${environment.lockedApp.id} is locked.`
+      `Error: The provided client id ${environment.deactivatedClientApp.id} is locked.`
+    )
+    cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
+    cy.hasNoLayout()
+    cy.hasZendesk()
+  })
+  it('show error screen on LOCKED member', function () {
+    cy.visit(
+      `${environment.baseUrl}/oauth/authorize` +
+        oauthUrlBuilder({
+          client_id: environment.lockedMemberApp.id,
+          response_type: 'code',
+          scope: `/authenticate openid`,
+          redirect_uri: environment.lockedMemberApp.redirectUrl,
+        })
+    )
+    cy.get('#error-message').contains(
+      `Error: The provided request couldn't be completed because the integration and hence, \
+the client ${environment.lockedMemberApp.id} is locked.`
     )
     cy.get('@ga').then((value) => expect(value.callCount).to.be.eq(5))
     cy.hasNoLayout()

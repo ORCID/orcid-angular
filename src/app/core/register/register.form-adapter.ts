@@ -8,9 +8,9 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
     formGroupToEmailRegisterForm(formGroup: FormGroup): RegisterForm {
       let additionalEmailsValue: Value[]
       if (formGroup.controls['additionalEmails']) {
-        const additionalEmailsControls = (<FormGroup>(
-          formGroup.controls['additionalEmails']
-        )).controls
+        const additionalEmailsControls = (formGroup.controls[
+          'additionalEmails'
+        ] as FormGroup).controls
         additionalEmailsValue = Object.keys(additionalEmailsControls)
           .filter((name) => additionalEmailsControls[name].value !== '')
           .map((name) => {
@@ -72,12 +72,20 @@ export function RegisterFormAdapterMixin<T extends Constructor<any>>(base: T) {
       return { password, passwordConfirm }
     }
 
-    formGroupToTermOfUserRegisterForm(formGroup: FormGroup): RegisterForm {
+    formGroupTermsOfUseAndDataProcessedRegisterForm(
+      formGroup: FormGroup
+    ): RegisterForm {
       let termsOfUse: Value
-      if (formGroup && formGroup.controls && formGroup.controls['termsOfUse']) {
-        termsOfUse = { value: formGroup.controls['termsOfUse'].value }
+      let dataProcessed: Value
+      if (formGroup && formGroup.controls) {
+        if (formGroup.controls['termsOfUse']) {
+          termsOfUse = { value: formGroup.controls['termsOfUse'].value }
+        }
+        if (formGroup.controls['dataProcessed']) {
+          dataProcessed = { value: formGroup.controls['dataProcessed'].value }
+        }
       }
-      return { termsOfUse }
+      return { termsOfUse, dataProcessed }
     }
 
     formGroupToSendOrcidNewsForm(formGroup: FormGroup) {

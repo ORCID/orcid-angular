@@ -1,0 +1,96 @@
+:host {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+app-panel {
+  width: 100%;
+  margin-top: 16px;
+
+  p {
+    margin-top: 0;
+  }
+
+  p .published-name {
+    margin-bottom: 18px;
+  }
+
+  .other-names-container {
+    margin-top: 18px;
+
+    .other-names {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.orc-font-body {
+  margin: unset;
+}
+
+.public-container {
+  width: 100%;
+
+  .names-container {
+    h3 {
+      margin-top: 0;
+    }
+
+    .names {
+      min-height: 64px;
+      margin-left: 10px;
+      padding: 16px;
+      border: solid 1px;
+      border-radius: 4px;
+    }
+
+    .names-extended {
+      max-height: 64px !important;
+    }
+
+    .names.mobile {
+      height: auto !important;
+      margin-left: 0 !important;
+    }
+
+    .other-names {
+      min-height: 64px;
+      margin-right: 20px;
+      border: solid 1px;
+      border-radius: 4px;
+    }
+
+    .other-names.mobile {
+      margin-top: 1em;
+      margin-right: 0 !important;
+    }
+
+    .other-names-extended {
+      height: auto !important;
+    }
+
+    .other-names-wrapper {
+      padding: 16px;
+
+      .other-name {
+        margin-bottom: 10px;
+      }
+
+      .other-name:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .biography-container {
+    margin-top: 2em;
+    padding: 0 10px;
+    p {
+      overflow-wrap: break-word;
+    }
+  }
+}
+
+.public-container.mobile {
+  margin-top: 2em;
+}

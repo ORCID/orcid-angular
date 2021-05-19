@@ -1,5 +1,11 @@
 @import 'src/assets/scss/orcid.spacing.scss';
 
-.item {
-  margin-top: $spacing-base;
+strong {
+  margin-bottom: 8px;
+  margin-top: 8px;
+  display: block;
+}
+
+ul {
+  margin-top: 8px;
 }

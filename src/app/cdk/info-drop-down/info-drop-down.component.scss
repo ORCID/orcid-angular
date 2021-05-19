@@ -15,8 +15,19 @@ mat-icon {
   [dir='rtl'] & {
     margin-right: 4px;
   }
+
+  text-decoration: none !important;
 }
 
 .university-dropdown {
   display: flex;
+  font-weight: bold;
+  mat-icon {
+    cursor: pointer;
+  }
+}
+
+:host {
+  margin-bottom: 8px;
+  display: block;
 }

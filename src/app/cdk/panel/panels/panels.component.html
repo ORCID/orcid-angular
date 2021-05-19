@@ -1,0 +1,59 @@
+<div class="col s4 m8 l12 no-gutters">
+  <div
+    class="header-container"
+    [ngClass]="{
+      'sub-peer-review': type === 'sub-peer-review'
+    }"
+  >
+    <div class="inline-initial-side">
+      <button mat-icon-button (click)="collapse()" id="expand-content-button">
+        <mat-icon class="large-material-icon" *ngIf="expandedContent"
+          >keyboard_arrow_down
+        </mat-icon>
+        <mat-icon class="large-material-icon" *ngIf="!expandedContent"
+          >keyboard_arrow_up
+        </mat-icon>
+      </button>
+
+      <div class="text-container">
+        <strong class="orc-font-body-large">
+          {{ title }}
+        </strong>
+        <ng-container *ngIf="type === 'activities'">
+          <span *ngIf="currentAmount"
+            >({{ currentAmount }} of {{ total }})</span
+          >
+          <span *ngIf="!currentAmount">(0)</span>
+        </ng-container>
+        <span
+          *ngIf="
+            type === 'peer-review' ||
+            type === 'research-resources' ||
+            type === 'funding'
+          "
+        >
+          ({{ total }})
+        </span>
+      </div>
+    </div>
+
+    <div class="controls" *ngIf="type !== 'sub-peer-review'">
+      <button
+        *ngIf="!isPublicRecord && type !== 'research-resources'"
+        mat-icon-button
+      >
+        <mat-icon (click)="add()" class="large-material-icon" id="add-button">
+          add_circle
+        </mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon (click)="sort()" class="large-material-icon" id="sort-button">
+          sort
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col s4 m8 l12 content no-gutters" *ngIf="expandedContent">
+  <ng-content></ng-content>
+</div>

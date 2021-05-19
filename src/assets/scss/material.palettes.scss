@@ -7,6 +7,9 @@ $orcid-dark-primary-text: rgba(black, 0.87);
 $orcid-dark-secondary-text: rgba(black, 0.6);
 $orcid-disabled-text: rgba(black, 0.38);
 
+$text-dark-mid: rgba(0, 0, 0, 0.6);
+$text-dark-high: rgba(0, 0, 0, 0.9);
+
 $orcid-light-primary-text: rgba(white, 1);
 $orcid-light-secondary-text: rgba(white, 0.6);
 $orcid-light-disabled-text: rgba(white, 0.38);
@@ -14,14 +17,14 @@ $orcid-light-disabled-text: rgba(white, 0.38);
 $orcid-green: (
   50: #f4f9e5,
   100: #e3f1bf,
-  200: #d4e7a1 /*#brand-primary-light*/,
+  200: #d4e7a1 /*#brand-primary-light / USE: mat-color($accent, 200);*/,
   300: #bade67,
-  400: #a6ce39 /*#brand-primary*/,
+  400: #a6ce39 /*#brand-primary / USE: mat-color($accent, 400);*/,
   500: #98ce00,
   600: #87be00,
   700: #70aa00,
   800: #599700,
-  900: #447405 /*brand-primary-darkest*/,
+  900: #447405 /*brand-primary-darkest / USE: mat-color($accent, 900); */,
   contrast: (
     50: $orcid-dark-secondary-text,
     100: $orcid-dark-secondary-text,
@@ -32,7 +35,7 @@ $orcid-green: (
     600: $orcid-dark-primary-text,
     700: $orcid-dark-primary-text,
     800: $orcid-dark-primary-text,
-    900: $orcid-dark-primary-text,
+    900: $orcid-light-primary-text,
   ),
 );
 $orcid-blue: (
@@ -96,6 +99,10 @@ $orcid-red: (
 // EXTRA BACKGROUND AND FOREGROUND COLORS
 // .
 // .
+$text-light-high: #ffffff;
+$text-dark-mid: rgba(0, 0, 0, 0.6);
+$text-dark-high: rgba(0, 0, 0, 0.9);
+$ui-background-darkest: #212121;
 
 $brand-primary-lightest: #f5f9e8;
 $ui-background-lightest: #fafafa;
@@ -119,9 +126,23 @@ $soft-grey: #979797;
 $facebook-blue: #3b5998;
 // https://seamlessaccess.org/
 $seamlessaccess-blue: #216e93;
+//brand zeplin colors
+$brand-primary: #a6ce39;
+
+$brand-primary-dark: #7faa26;
+
 // state-notice zepling colors
+$state-notice-light: #ffdf72;
+
 $state-notice-dark: #ff9c00;
 
+$state-notice-darkest: #ff6400;
+
+$state-warning-dark: #d32f2f;
+
+$ui-background: #e0e0e0;
+
+$panel-shadow: rgba(214, 214, 214, 1);
 // .
 // .
 // NON-USED/DEPRECATED COLORS

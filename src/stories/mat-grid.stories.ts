@@ -5,7 +5,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Foundation|Grid', module)
+storiesOf('Foundation/Grid', module)
   .add(
     'Responsive',
     () => ({

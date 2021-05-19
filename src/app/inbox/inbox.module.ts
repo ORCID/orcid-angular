@@ -9,6 +9,8 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { InfoDropDownModule } from '../cdk/info-drop-down/info-drop-down.module'
+import { SideBarModule } from '../cdk/side-bar/side-bar.module'
+import { SharedModule } from '../shared/shared.module'
 import { NotificationHtmlComponent } from './components/notification-html/notification-html.component'
 // tslint:disable-next-line: max-line-length
 import { NotificationPermissionInstitutionalConnectionComponent } from './components/notification-permission-institutional-connection/notification-permission-institutional-connection.component'
@@ -19,7 +21,6 @@ import { NotificationComponent } from './components/notification/notification.co
 import { NotificationsComponent } from './components/notifications/notifications.component'
 import { InboxRoutingModule } from './inbox-routing.module'
 import { InboxComponent } from './pages/inbox/inbox.component'
-
 @NgModule({
   declarations: [
     InboxComponent,
@@ -42,6 +43,8 @@ import { InboxComponent } from './pages/inbox/inbox.component'
     FormsModule,
     MatProgressBarModule,
     MatTooltipModule,
+    SharedModule,
+    SideBarModule,
   ],
 })
 export class InboxModule {}

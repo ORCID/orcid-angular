@@ -1,0 +1,167 @@
+<app-modal [loading]="loadingWebsites" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@topBar.websites">
+      Websites & social links</ng-container
+    >
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-websites-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-websites-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <div
+    class="container no-padding"
+    [formGroup]="websitesForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <p
+      id="my-links"
+      class="orc-font-small-print"
+      i18n="@@topBar.addLinksDescription"
+    >
+      Add links to personal websites, department profiles, Wikipedia pages or
+      social media accounts.
+    </p>
+    <ng-container *ngIf="websites.length > 0">
+      <div class="row">
+        <label for="url-input" class="orc-font-body-small">
+          <strong i18n="@@topBar.myLinks">My links</strong>
+        </label>
+      </div>
+      <div
+        class="row"
+        id="website-dropList"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          cdkDrag
+          rootElementSelector="#website-dropList"
+          class="row websites-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [formGroupName]="website.putCode"
+          *ngFor="let website of websites; index as i"
+          [attr.id]="'draggable-' + i"
+        >
+          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+            <img
+              class="icon-drag"
+              cdkDragHandle
+              src="./assets/vectors/draggable.svg"
+            />
+            <div class="row">
+              <mat-form-field
+                appearance="outline"
+                class="mat-form-field-min description"
+              >
+                <input
+                  id="description-input"
+                  #descriptionInput
+                  matInput
+                  formControlName="description"
+                  placeholder=" {{ ngOrcidDescription }}"
+                />
+              </mat-form-field>
+              <mat-form-field
+                appearance="outline"
+                class="mat-form-field-min url"
+              >
+                <input
+                  id="url-input"
+                  matInput
+                  formControlName="url"
+                  placeholder="{{ ngOrcidUrl }}"
+                />
+                <mat-error
+                  *ngIf="
+                    websitesForm
+                      .get(website.putCode)
+                      .hasError('required', 'url')
+                  "
+                  i18n="@@topBar.requiredURL"
+                >
+                  An URL is required
+                </mat-error>
+                <mat-error
+                  *ngIf="
+                    websitesForm.get(website.putCode).hasError('pattern', 'url')
+                  "
+                  i18n="@@topBar.invalidURL"
+                >
+                  Invalid URL
+                </mat-error>
+                <mat-error
+                  *ngIf="
+                    websitesForm
+                      .get(website.putCode)
+                      .hasError('duplicated', 'url')
+                  "
+                  i18n="@@topBar.urlDuplicated"
+                >
+                  URL can not be duplicated
+                </mat-error>
+                <mat-hint
+                  class="mat-caption"
+                  *ngIf="website.putCode.indexOf('new') < 0"
+                >
+                  <ng-container i18n="@@shared.source">Source:</ng-container>
+                  {{ getSource(website) }}
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="col no-wrap actions-wrapper no-gutters"
+            [ngClass]="{ privacy: !platform.columns12 }"
+          >
+            <app-privacy-selector
+              [ngClass]="{ selector: !platform.columns12 }"
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              id="delete-button"
+              (click)="deleteWebsite(website.putCode)"
+              mat-icon-button
+            >
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="row">
+      <a id="add-link" class="col add-more no-gutters" (click)="addWebsite()">
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+        <span class="mat-body-1">
+          <ng-container *ngIf="websites.length === 0" i18n="@@topBar.addLink">
+            Add a link
+          </ng-container>
+          <ng-container
+            *ngIf="websites.length !== 0"
+            i18n="@@topBar.addAnotherLink"
+          >
+            Add another link
+          </ng-container>
+        </span>
+      </a>
+    </div>
+  </div>
+</app-modal>

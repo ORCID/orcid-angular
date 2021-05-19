@@ -1,34 +1,70 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, combineLatest, ReplaySubject, of } from 'rxjs'
+import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import {
-  Person,
-  Emails,
-  OtherNames,
-  Countries,
-  Keywords,
-  Website,
+  EmailsEndpoint,
   ExternalIdentifier,
-  Names,
-  Biography,
+  Keywords,
+  Person,
+  PersonIdentifierEndpoint,
   Preferences,
 } from 'src/app/types'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
-import { retry, catchError, tap, map } from 'rxjs/operators'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { Address } from 'cluster'
-import { UserRecord } from 'src/app/types/record.local'
+import { RecordCountriesService } from '../record-countries/record-countries.service'
+import { RecordEmailsService } from '../record-emails/record-emails.service'
+import { RecordBiographyService } from '../record-biography/record-biography.service'
+import { RecordKeywordService } from '../record-keyword/record-keyword.service'
+import { RecordNamesService } from '../record-names/record-names.service'
+import { RecordOtherNamesService } from '../record-other-names/record-other-names.service'
+import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
+import { KeywordEndPoint } from '../../types/record-keyword.endpoint'
+import { NamesEndPoint } from '../../types/record-name.endpoint'
+import { BiographyEndPoint } from '../../types/record-biography.endpoint'
+import { RecordWebsitesService } from '../record-websites/record-websites.service'
+import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
+import { RecordAffiliationService } from '../record-affiliations/record-affiliations.service'
+import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import { RecordPeerReviewService } from '../record-peer-review/record-peer-review.service'
+import { RecordPersonIdentifierService } from '../record-personal-identifiers/record-person-identifier.service'
+import { RecordFundingsService } from '../record-fundings/record-fundings.service'
+import { FundingGroup } from 'src/app/types/record-funding.endpoint'
+import { PeerReview } from '../../types/record-peer-review.endpoint'
+import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
+import { ResearchResources } from '../../types/record-research-resources.endpoint'
+import { RecordWorksService } from '../record-works/record-works.service'
+import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { RecordPersonService } from '../record-person/record-person.service'
+import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordService {
-  recordInitialized = false
-  recordSubject$ = new ReplaySubject<UserRecord>(1)
+  recordSubject$: ReplaySubject<UserRecord>
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _recordBiographyService: RecordBiographyService,
+    private _recordKeywordService: RecordKeywordService,
+    private _recordNamesService: RecordNamesService,
+    private _recordOtherNamesService: RecordOtherNamesService,
+    private _recordEmailsService: RecordEmailsService,
+    private _recordCountryService: RecordCountriesService,
+    private _recordWebsitesService: RecordWebsitesService,
+    private _recordAffiliations: RecordAffiliationService,
+    private _recordFundings: RecordFundingsService,
+    private _recordPersonalIdentifier: RecordPersonIdentifierService,
+    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordResearchResourceService: RecordResearchResourceService,
+    private _recordWorkService: RecordWorksService,
+    private _recordPerson: RecordPersonService,
+    private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
   headers = new HttpHeaders({
@@ -36,21 +72,41 @@ export class RecordService {
     'Content-Type': 'application/json',
   })
 
-  getRecord(id): Observable<UserRecord> {
-    if (!this.recordInitialized) {
-      this.recordInitialized = true
+  /**
+   * @param options:
+   * - use `forceReload` to force all server calls.
+   * - use `publicRecordId` to load a public record or leave the `publicRecordId` undefined
+   * to load the current user private record.
+   *
+   * Note: sending the `privateRecordId` is deprecated
+   *
+   * @returns And subject with all the require data from private or public orcid record
+   */
+  getRecord(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<UserRecord> {
+    if (!this.recordSubject$ || options.forceReload) {
+      this.recordSubject$ = new ReplaySubject<UserRecord>(1)
 
       combineLatest([
-        this.getPerson(id),
-        this.getEmails(),
-        this.getOtherNames(),
-        this.getAddresses(),
-        this.getKeywords(),
-        this.getWebsites(),
-        this.getExternalIdentifier(),
-        this.getNames(),
-        this.getBiography(),
-        this.getPreferences(),
+        this._recordPerson.getPerson(options),
+        this._recordEmailsService.getEmails(options),
+        this._recordOtherNamesService.getOtherNames(options),
+        this._recordCountryService.getAddresses(options),
+        this._recordKeywordService.getKeywords(options),
+        this._recordWebsitesService.getWebsites(options),
+        this._recordPersonalIdentifier.getPersonalIdentifiers(options),
+        this._recordNamesService.getNames(options),
+        this._recordBiographyService.getBiography(options),
+        this._recordAffiliations.getAffiliations(options),
+        this._recordFundings.getFundings(options),
+        this.getPreferences(options),
+        this._recordPeerReviewService.getPeerReviewGroups(options),
+        this._recordResearchResourceService.getResearchResourcePage(options),
+        this._recordWorkService.getWorks(options),
+        this.getLastModifiedTime(options),
       ])
         .pipe(
           tap(
@@ -64,19 +120,31 @@ export class RecordService {
               externalIdentifier,
               names,
               biography,
+              affiliations,
+              fundings,
               preferences,
+              peerReviews,
+              researchResources,
+              works,
+              lastModifiedTime,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
-                emails: emails as Emails,
-                otherNames: otherNames as OtherNames,
-                countries: countries as Countries,
-                keyword: keyword as Keywords,
-                website: website as Website,
-                externalIdentifier: externalIdentifier as ExternalIdentifier,
-                names: names as Names,
-                biography: biography as Biography,
+                emails: emails as EmailsEndpoint,
+                otherNames: otherNames as OtherNamesEndPoint,
+                countries: countries as CountriesEndpoint,
+                keyword: keyword as KeywordEndPoint,
+                website: website as WebsitesEndPoint,
+                externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
+                names: names as NamesEndPoint,
+                biography: biography as BiographyEndPoint,
+                affiliations: affiliations as AffiliationUIGroup[],
+                fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
+                peerReviews: peerReviews as PeerReview[],
+                researchResources: researchResources as ResearchResources,
+                works: works as WorksEndpoint,
+                lastModifiedTime: lastModifiedTime as any,
               })
             }
           )
@@ -84,98 +152,17 @@ export class RecordService {
         .subscribe()
     }
 
-    return this.recordSubject$.pipe(
-      tap((session) =>
-        environment.sessionDebugger ? console.log(session) : null
-      )
-    )
-  }
-
-  getPerson(id): Observable<Person> {
-    return this._http
-      .get<Person>(environment.API_WEB + `${id}/person.json`)
+    return this.recordSubject$
+      .asObservable()
       .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-      .pipe(
-        tap((data) => {
-          // Changes publicGroupedAddresses keys for full country names
-          if (data.publicGroupedAddresses) {
-            Object.keys(data.publicGroupedAddresses).map((key) => {
-              if (data.countryNames && data.countryNames[key]) {
-                data.publicGroupedAddresses[data.countryNames[key]] =
-                  data.publicGroupedAddresses[key]
-                delete data.publicGroupedAddresses[key]
-              }
-            })
-          }
-        })
+        tap((session) => (environment.debugger ? console.info(session) : null))
       )
   }
 
-  getEmails(): Observable<Emails> {
+  getExternalIdentifier(): Observable<ExternalIdentifier> {
     return this._http
-      .get<Emails>(environment.API_WEB + `account/emails.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postEmails(otherNames: Emails): Observable<Emails> {
-    return this._http
-      .post<Emails>(environment.API_WEB + `account/emails.json`, otherNames, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getOtherNames(): Observable<OtherNames> {
-    return this._http
-      .get<OtherNames>(environment.API_WEB + `my-orcid/otherNamesForms.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postOtherNames(otherNames: OtherNames): Observable<OtherNames> {
-    return this._http
-      .post<OtherNames>(
-        environment.API_WEB + `my-orcid/otherNamesForms.json`,
-        otherNames,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getAddresses(): Observable<Countries> {
-    return this._http
-      .get<Countries>(environment.API_WEB + `account/countryForm.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postAddresses(countries: Countries): Observable<OtherNames> {
-    return this._http
-      .post<OtherNames>(
-        environment.API_WEB + `account/countryForm.json`,
-        countries,
+      .get<ExternalIdentifier>(
+        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
         { headers: this.headers }
       )
       .pipe(
@@ -189,55 +176,6 @@ export class RecordService {
       .get<Keywords>(environment.API_WEB + `my-orcid/keywordsForms.json`, {
         headers: this.headers,
       })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postKeywords(keywords: Keywords): Observable<Keywords> {
-    return this._http
-      .post<Keywords>(
-        environment.API_WEB + `my-orcid/keywordsForms.json`,
-        keywords,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getWebsites(): Observable<Website> {
-    return this._http
-      .get<Website>(environment.API_WEB + `my-orcid/websitesForms.json`, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postWebsites(website: Website): Observable<Keywords> {
-    return this._http
-      .post<Keywords>(
-        environment.API_WEB + `my-orcid/websitesForms.json`,
-        website,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getExternalIdentifier(): Observable<ExternalIdentifier> {
-    return this._http
-      .get<ExternalIdentifier>(
-        environment.API_WEB + `my-orcid/externalIdentifiers.json`,
-        { headers: this.headers }
-      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
@@ -260,11 +198,11 @@ export class RecordService {
       )
   }
 
-  getNames(): Observable<Names> {
+  postKeywords(keywords: Keywords): Observable<Keywords> {
     return this._http
-      .get<Names>(
-        environment.API_WEB + `account/nameForm.json`,
-
+      .post<Keywords>(
+        environment.API_WEB + `my-orcid/keywordsForms.json`,
+        keywords,
         { headers: this.headers }
       )
       .pipe(
@@ -273,44 +211,15 @@ export class RecordService {
       )
   }
 
-  postNames(names: Names): Observable<Names> {
-    return this._http
-      .post<Names>(environment.API_WEB + `account/nameForm.json`, names, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getBiography(): Observable<Biography> {
-    return this._http
-      .get<Biography>(
-        environment.API_WEB + `account/biographyForm.json`,
-
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  postBiography(names: Biography): Observable<Biography> {
-    return this._http
-      .post<Biography>(
-        environment.API_WEB + `account/biographyForm.json`,
-        names,
-        { headers: this.headers }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
-  }
-
-  getPreferences(): Observable<Preferences> {
+  getPreferences(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ): Observable<Preferences> {
+    // TODO GET PUBLIC DATA
+    if (options.publicRecordId) {
+      return of(undefined)
+    }
     return this._http
       .get<Preferences>(
         environment.API_WEB + `account/preferences.json`,
@@ -334,5 +243,18 @@ export class RecordService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+
+  getLastModifiedTime(
+    options: UserRecordOptions = {
+      forceReload: false,
+    }
+  ) {
+    if (options.publicRecordId) {
+      return this._recordPublicSidebar
+        .getPublicRecordSideBar(options.publicRecordId)
+        .pipe(map((value) => value.lastModifiedTime))
+    }
+    return of(undefined)
   }
 }

@@ -11,14 +11,12 @@
           class="orcid-stepper-wizard"
         >
           <mat-step [stepControl]="FormGroupStepA">
-            <ng-template
-              matStepLabel
-              i18n="@@register.personalData"
-              i18n="@@register.personalData"
+            <ng-template matStepLabel i18n="@@register.personalData"
               >Personal data</ng-template
             >
             <app-step-a
               [(formGroup)]="FormGroupStepA"
+              [reactivation]="reactivation"
               #stepComponentA
             ></app-step-a>
           </mat-step>
@@ -30,6 +28,7 @@
               #stepComponentB
               [(formGroup)]="FormGroupStepB"
               [personalData]="personalData"
+              [reactivation]="reactivation"
             ></app-step-b>
           </mat-step>
           <mat-step [stepControl]="FormGroupStepC" #lastStep>
@@ -39,8 +38,9 @@
             <app-step-c
               #stepComponentC
               [(formGroup)]="FormGroupStepC"
-              (submit)="register('vertical')"
+              (submit)="register()"
               [loading]="loading"
+              [reactivation]="reactivation"
             ></app-step-c>
           </mat-step>
         </mat-vertical-stepper>
@@ -60,6 +60,7 @@
             >
             <app-step-a
               [(formGroup)]="FormGroupStepA"
+              [reactivation]="reactivation"
               #stepComponentA
             ></app-step-a>
           </mat-step>
@@ -71,6 +72,7 @@
               #stepComponentB
               [(formGroup)]="FormGroupStepB"
               [personalData]="personalData"
+              [reactivation]="reactivation"
             ></app-step-b>
           </mat-step>
           <mat-step [stepControl]="FormGroupStepC" #lastStep>
@@ -80,8 +82,9 @@
             <app-step-c
               #stepComponentC
               [(formGroup)]="FormGroupStepC"
-              (submit)="register('horizontal')"
+              (submit)="register()"
               [loading]="loading"
+              [reactivation]="reactivation"
             ></app-step-c>
           </mat-step>
         </mat-horizontal-stepper>

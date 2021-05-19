@@ -1,66 +1,20 @@
 @import 'styles.scss-theme.scss';
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(./assets/fonts/MaterialIcons-Regular.woff2) format('woff2'),
-    url(./assets/fonts/MaterialIcons-Regular.woff) format('woff');
-}
-@font-face {
-  font-family: 'Material Icons Outlined';
-  font-style: normal;
-  font-weight: 400;
-  src: url(./assets/fonts/MaterialIcons-Outlined.woff2) format('woff2'),
-    url(./assets/fonts/MaterialIcons-Outlined.woff) format('woff');
+
+[dir='rtl'] .material-icons {
+  direction: rtl;
 }
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-display: swap;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 20px; /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+.extra-large-material-icon {
+  font-size: 36px;
 }
 
-.material-icons-outlined {
-  font-family: 'Material Icons Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 20px; /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-  /* Support for IE. */
-  font-feature-settings: 'liga';
-}
-
-.help-material-icon {
+.large-material-icon {
   font-size: 24px;
+}
+
+.title-material-icon {
+  font-size: 32px;
+  height: 32px !important;
 }
 
 html,
@@ -79,10 +33,10 @@ app-root {
   flex-direction: column;
 }
 .router-container {
-  padding-bottom: 200px; //remove footer height
+  padding-bottom: 240px; //remove footer height
   .columns-8 &,
   .columns-4 & {
-    padding-bottom: 368px;
+    padding-bottom: 410px;
   }
 }
 
@@ -101,6 +55,15 @@ a {
   cursor: pointer;
 }
 
+a.underline {
+  text-decoration: underline;
+}
+
+a.disabled {
+  opacity: 80%;
+  pointer-events: none;
+}
+
 a.white-url {
   color: white;
   text-decoration: underline;
@@ -109,6 +72,7 @@ a.white-url {
 a.black-url {
   color: black;
 }
+
 a.black-url:hover {
   text-decoration: underline;
 }

@@ -1,0 +1,59 @@
+<app-panel-data
+  class="panel-footer"
+  [ngClass]="{
+    'margin-top-2': !displayTheStack
+  }"
+>
+  <div class="source-items">
+    <div>
+      <ng-container *ngIf="!topPanelOfTheStackMode && clickableSource">
+        <ng-container i18n="@@record.source">Source</ng-container
+        ><ng-container>: </ng-container
+        ><a (click)="clickDisplayAsTopPanelOfTheStack()">{{ sourceName }}</a>
+      </ng-container>
+      <div *ngIf="topPanelOfTheStackMode || !clickableSource">
+        <ng-container i18n="@@record.source">Source</ng-container>:
+        {{ sourceName }}
+      </div>
+    </div>
+    <div
+      class="preferred-source"
+      *ngIf="isPreferred && stackLength > 1 && !isPublicRecord"
+    >
+      <i class="material-icons"> grade </i>
+      <div>
+        <ng-container i18n="@@groups.common.preferred_source"
+          >Preferred source</ng-container
+        >
+        <a
+          *ngIf="!displayTheStack && stackLength > 1"
+          (click)="toggleStackMode()"
+        >
+          (<ng-container i18n="@@shared.of">of</ng-container>
+          {{ stackLength }})&#x200E;
+        </a>
+        <a
+          (click)="toggleStackMode()"
+          *ngIf="stackLength > 1 && displayTheStack"
+        >
+          <ng-container i18n="@@shared.closeOtherSources"
+            >(Close other sources)</ng-container
+          >
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="preferred-source"
+      *ngIf="!isPreferred && stackLength > 1 && !isPublicRecord"
+    >
+      <a
+        (click)="clickMakePrimary()"
+        *ngIf="stackLength > 1"
+        i18n="@@record.closeOtherSources"
+      >
+        Make preferred source
+      </a>
+    </div>
+  </div>
+</app-panel-data>

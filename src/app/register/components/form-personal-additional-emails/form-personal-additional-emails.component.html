@@ -56,7 +56,7 @@
       mdePopoverTriggerOn="click"
       #additionalEmailsPopoverTrigger="mdePopoverTrigger"
     >
-      <mat-icon class="material-icons-outlined help-material-icon"
+      <mat-icon class="material-icons-outlined large-material-icon"
         >help_outline</mat-icon
       >
     </button>
@@ -74,9 +74,7 @@
 
 <a (click)="addAdditionalEmail()" class="mat-button-font">
   <mat-icon>add</mat-icon>
-  <ng-container i18n="@@register.additionalEmailAdd"
-    >Add another email</ng-container
-  >
+  <span i18n="@@register.additionalEmailAdd">Add another email</span>
 </a>
 
 <mde-popover

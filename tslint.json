@@ -1,5 +1,6 @@
 {
   "rulesDirectory": ["node_modules/codelyzer"],
+  "extends": ["tslint-etc"],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
@@ -31,7 +32,7 @@
     ],
     "no-arg": true,
     "no-bitwise": true,
-    "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
+    "no-console": [true, "debug", "time", "timeEnd", "trace"],
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-super": true,
@@ -49,7 +50,6 @@
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -85,15 +85,25 @@
       "check-type"
     ],
     "no-output-on-prefix": true,
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
-    "use-host-property-decorator": true,
+    "no-inputs-metadata-property": true,
+    "no-outputs-metadata-property": true,
+    "no-host-metadata-property": true,
     "no-input-rename": true,
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "extends": ["tslint:latest", "tslint-config-prettier"]
+
+    "expect-deprecation": false,
+    "no-unused-declaration": {
+      "options": [
+        {
+          "declarations": true,
+          "ignored": {},
+          "imports": true
+        }
+      ]
+    }
   }
 }

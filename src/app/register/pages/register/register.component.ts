@@ -7,21 +7,13 @@ import {
   Inject,
   OnInit,
   ViewChild,
-  ErrorHandler,
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatStep } from '@angular/material/stepper'
-import { ActivatedRoute, Params, Router } from '@angular/router'
-import { combineLatest, EMPTY, of } from 'rxjs'
-import {
-  catchError,
-  first,
-  map,
-  mergeMap,
-  switchMap,
-  tap,
-} from 'rxjs/operators'
+import { Router } from '@angular/router'
+import { combineLatest } from 'rxjs'
+import { catchError, first, map, switchMap } from 'rxjs/operators'
 import { IsThisYouComponent } from 'src/app/cdk/is-this-you'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -37,6 +29,8 @@ import {
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { UserSession } from 'src/app/types/session.local'
+import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
+import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
   selector: 'app-register',
@@ -57,6 +51,12 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   backendForm: RegisterForm
   loading = false
   requestInfoForm: RequestInfoForm | null
+  thirdPartyAuthData: ThirdPartyAuthData
+  reactivation = {
+    isReactivation: false,
+    reactivationCode: '',
+  } as ReactivationLocal
+
   constructor(
     private _cdref: ChangeDetectorRef,
     private _platformInfo: PlatformInfoService,
@@ -72,6 +72,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
+      this.reactivation.isReactivation = this.platform.reactivation
+      this.reactivation.reactivationCode = this.platform.reactivationCode
     })
   }
   ngOnInit() {
@@ -98,13 +100,15 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           platform = platform as PlatformInfo
 
           // TODO @leomendoza123 move the handle of social/institutional sessions to the user service
-          if (platform.queryParameters.providerId) {
+
+          this.thirdPartyAuthData = session.thirdPartyAuthData
+          this.requestInfoForm = session.oauthSession
+
+          if (this.thirdPartyAuthData || this.requestInfoForm) {
             this.FormGroupStepA = this.prefillRegisterForm(
-              this.platform.queryParameters
+              this.requestInfoForm,
+              this.thirdPartyAuthData
             )
-          } else if (session.oauthSession && platform.hasOauthParameters) {
-            this.requestInfoForm = session.oauthSession
-            this.FormGroupStepA = this.prefillRegisterForm(this.requestInfoForm)
           }
         })
       )
@@ -142,6 +146,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.FormGroupStepA,
               this.FormGroupStepB,
               this.FormGroupStepC,
+              this.reactivation,
               this.requestInfoForm,
               !!this.requestInfoForm // request client service to be update (only when the next navigation wont go outside this app)
             )
@@ -276,20 +281,40 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     // On mobile scroll the current step component into view
     if (this.platform.columns4 || this.platform.columns8) {
       setTimeout(() => {
-        const nativeElementNextStep = <HTMLElement>nextStep.nativeElement
+        const nativeElementNextStep = nextStep.nativeElement as HTMLElement
         nativeElementNextStep.scrollIntoView()
       }, 200)
     }
   }
 
-  private prefillRegisterForm(value: RequestInfoForm | Params) {
+  /**
+   * Fills the register form.
+   * Use the data from the Oauth session send by the Orcid integrator
+   * or
+   * Use data coming from a third party institution/social entity
+   * or
+   * Use empty values
+   */
+  private prefillRegisterForm(
+    oauthData: RequestInfoForm,
+    thirdPartyOauthData: ThirdPartyAuthData
+  ) {
     return this._formBuilder.group({
       personal: [
         {
-          givenNames: value.userGivenNames || value['firstName'] || '',
-          familyNames: value.userFamilyNames || value['lastName'] || '',
+          givenNames:
+            oauthData?.userGivenNames ||
+            thirdPartyOauthData?.signinData?.firstName ||
+            '',
+          familyNames:
+            oauthData?.userFamilyNames ||
+            thirdPartyOauthData?.signinData?.lastName ||
+            '',
           emails: {
-            email: value.userEmail || value['email'] || '',
+            email:
+              oauthData?.userEmail ||
+              thirdPartyOauthData?.signinData?.email ||
+              '',
             confirmEmail: '',
             additionalEmails: { '0': '' },
           },

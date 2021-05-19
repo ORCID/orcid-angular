@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.row-with-privacy {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+app-panel-privacy {
+  width: 48px;
+  margin-top: 4px;
+}
+
+.line {
+  word-break: break-all;
+}
+
+.bold {
+  font-weight: bold;
+}

@@ -1,4 +1,10 @@
 <main id="main">
+  <app-my-orcid-alerts
+    *ngIf="emailVerified || invalidVerifyUrl"
+    [emailVerified]="emailVerified"
+    [invalidVerifyUrl]="invalidVerifyUrl"
+    [verifiedEmail]="verifiedEmail"
+  ></app-my-orcid-alerts>
   <div class="container">
     <div class="row space-around">
       <div class="col l6 m6 s4">

@@ -11,16 +11,19 @@ import { environment } from 'src/environments/environment'
 export class GoogleAnalyticsService {
   gtag: Gtag.Gtag
   constructor(@Inject(WINDOW) private window: Window) {
-    this.gtag = (<any>window).gtag
+    this.gtag = (window as any).gtag
   }
 
   reportPageView(url: string) {
+    if (environment.debugger) {
+      console.info(`GA - Navigation ${url}`)
+    }
     this.gtag('config', environment.GOOGLE_ANALYTICS, {
       cookie_flags: 'SameSite=None;Secure',
       page_path: url,
       page_location: window.location.href,
       anonymize_ip: true,
-      sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE ? '100' : '70',
+      sample_rate: '100',
       site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
         ? '100'
         : '1',
@@ -34,6 +37,9 @@ export class GoogleAnalyticsService {
   reportNavigationEnd(url: string) {
     const duration = this.finishPerformanceMeasurement(url)
     if (duration) {
+      if (environment.debugger) {
+        console.info(`GA - Took ${duration} to load ${url}`)
+      }
       this.gtag('event', 'timing_complete', {
         name: this.removeUrlParameters(url),
         value: Math.round(duration),
@@ -51,25 +57,26 @@ fatal: "${fatal}"
     `)
 
     this.gtag('event', 'exception', {
-      description: description,
-      fatal: fatal,
+      description,
+      fatal,
     })
   }
 
   public reportEvent(
     action: string,
     event_category: string,
-    event_label: RequestInfoForm | string,
-    value?: number
+    event_label: RequestInfoForm | string
   ): Observable<void> {
     // if has RequestInfoForm add the client string as event_label
     if (typeof event_label !== 'string') {
       event_label = 'OAuth ' + this.buildClientString(event_label)
     }
+    if (environment.debugger) {
+      console.info(`GA - Event /${event_category}/${action}/${event_label}/`)
+    }
     return this.eventObservable(action, {
       event_category,
       event_label,
-      value,
     })
   }
 

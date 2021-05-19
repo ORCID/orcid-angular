@@ -35,7 +35,7 @@
       mdePopoverTriggerOn="click"
       #namesPopoverTrigger="mdePopoverTrigger"
     >
-      <mat-icon class="material-icons-outlined help-material-icon"
+      <mat-icon class="material-icons-outlined large-material-icon"
         >help_outline</mat-icon
       >
     </button>
@@ -98,7 +98,7 @@
         </div>
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="!reactivation.isReactivation">
       <mat-label i18n="@@register.confirmEmail"
         >Confirm primary email</mat-label
       >

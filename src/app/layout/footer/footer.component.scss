@@ -12,21 +12,20 @@ footer {
   padding-top: 24px;
   padding-bottom: 16px;
   > .col {
-    width: 260px;
+    width: 275px;
   }
-  img {
-    height: 41px;
-    width: auto;
-    object-fit: cover;
-  }
-
-  a.social {
+  a {
     margin-left: 12px;
     [dir] :host & {
       margin-left: auto;
       margin-right: 12px;
     }
     img {
+      height: 41px;
+      width: auto;
+      object-fit: cover;
+    }
+    img.social {
       height: 24px;
     }
   }

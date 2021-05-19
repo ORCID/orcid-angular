@@ -58,7 +58,7 @@
 <!-- MAIN MENU -->
 <nav
   (mouseleave)="mouseLeave()"
-  *ngIf="mobileMenuState || platform.columns12"
+  *ngIf="(mobileMenuState || platform.columns12) && !hideMainMenu"
   [attr.aria-label]="labelMenu"
 >
   <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->
@@ -72,39 +72,46 @@
     <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
       <ng-template #recursiveList let-list let-parents="parents">
         <ul class="row" *ngIf="!isDesktopThirdLevelMenu(parents)">
-          <li class="col no-gutters" *ngFor="let item of list">
-            <button
+          <ng-container *ngFor="let item of list">
+            <li
+              class="col no-gutters button-wrapper"
               *ngIf="checkMenuItemRequirements(item.requirements) === true"
-              [ngClass]="{
-                active: item.activeRoute === currentRoute,
-                'no-hover-effect': togglzNewInfoSite
-              }"
-              mat-button
-              [color]="menuButtonColor(parents)"
-              (focus)="mouseEnter(parents.concat(item.id))"
-              (click)="click(parents.concat(item.id), item)"
-              (mouseenter)="mouseEnter(parents.concat(item.id))"
-              [id]="item.id"
             >
-              <div class="button-box">
-                <div>{{ item.label | uppercase }}</div>
-                <mat-icon *ngIf="!platform.columns12 && item.buttons.length">{{
-                  item.hover ? 'arrow_drop_up' : 'arrow_drop_down'
-                }}</mat-icon>
-              </div>
-            </button>
-            <ng-container *ngIf="item.hover && item.buttons.length">
-              <ng-container
-                *ngTemplateOutlet="
-                  recursiveList;
-                  context: {
-                    $implicit: item.buttons,
-                    parents: parents.concat(item.id)
-                  }
-                "
-              ></ng-container>
-            </ng-container>
-          </li>
+              <button
+                [ngClass]="{
+                  active: item.activeRoute === currentRoute,
+                  'no-hover-effect': togglzNewInfoSite
+                }"
+                mat-button
+                [color]="menuButtonColor(parents)"
+                (focus)="mouseEnter(parents.concat(item.id))"
+                (click)="click(parents.concat(item.id), item)"
+                (mouseenter)="mouseEnter(parents.concat(item.id))"
+                [id]="item.id"
+              >
+                <div class="button-box">
+                  <div>{{ item.label | uppercase }}</div>
+                  <mat-icon
+                    *ngIf="!platform.columns12 && item.buttons.length"
+                    >{{
+                      item.hover ? 'arrow_drop_up' : 'arrow_drop_down'
+                    }}</mat-icon
+                  >
+                </div>
+              </button>
+              <ng-container *ngIf="item.hover && item.buttons.length">
+                <ng-container
+                  *ngTemplateOutlet="
+                    recursiveList;
+                    context: {
+                      $implicit: item.buttons,
+                      parents: parents.concat(item.id)
+                    }
+                  "
+                ></ng-container>
+              </ng-container>
+            </li>
+          </ng-container>
         </ul>
       </ng-template>
 

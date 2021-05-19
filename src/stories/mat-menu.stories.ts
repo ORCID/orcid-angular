@@ -8,7 +8,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Components|Menu', module).add(
+storiesOf('Components/Menu', module).add(
   'Basic menu',
   () => ({
     template: `

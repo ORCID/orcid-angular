@@ -1,0 +1,58 @@
+:host {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+app-panel {
+  width: 100%;
+  margin-top: 16px;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+}
+
+app-panel-data {
+  border-top: 1px solid;
+  padding: 0 !important;
+
+  .header-sub-peer-review {
+    margin-right: 40px;
+  }
+
+  .description {
+    border-bottom: solid 1px;
+    padding: 16px;
+  }
+
+  .nested-panels {
+    padding: 16px;
+    width: auto;
+    border-bottom: solid 1px;
+
+    app-panel-element {
+      padding: 16px;
+    }
+
+    .show {
+      margin-right: 32px;
+    }
+  }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.source {
+  text-transform: uppercase;
+}
+
+.details {
+  margin-bottom: 20px;
+}
+
+p.empty {
+  margin-bottom: 0;
+}

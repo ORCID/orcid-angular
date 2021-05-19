@@ -8,6 +8,7 @@ import {
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { RegisterService } from 'src/app/core/register/register.service'
+import { environment } from 'src/environments/environment'
 
 import { BaseForm } from '../BaseForm'
 
@@ -31,6 +32,7 @@ import { BaseForm } from '../BaseForm'
 })
 // tslint:disable-next-line: class-name
 export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
+  environment = environment
   constructor(
     private _register: RegisterService,
     private _errorStateMatcher: ErrorStateMatcher
@@ -40,26 +42,27 @@ export class FormTermsComponent extends BaseForm implements OnInit, DoCheck {
   errorState = false
 
   termsOfUse = new FormControl('', Validators.requiredTrue)
+  dataProcessed = new FormControl('', Validators.requiredTrue)
   ngOnInit() {
     this.form = new FormGroup({
       termsOfUse: this.termsOfUse,
+      dataProcessed: this.dataProcessed,
     })
   }
 
   // OVERWRITE
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
-      const registerForm = this._register.formGroupToTermOfUserRegisterForm(
-        <FormGroup>this.form
+      const registerForm = this._register.formGroupTermsOfUseAndDataProcessedRegisterForm(
+        this.form as FormGroup
       )
       fn(registerForm)
     })
   }
 
   ngDoCheck(): void {
-    this.errorState = this._errorStateMatcher.isErrorState(
-      this.termsOfUse,
-      null
-    )
+    this.errorState =
+      this._errorStateMatcher.isErrorState(this.termsOfUse, null) ||
+      this._errorStateMatcher.isErrorState(this.dataProcessed, null)
   }
 }

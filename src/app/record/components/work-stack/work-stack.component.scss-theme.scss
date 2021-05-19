@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin work-stack-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  :host.display-the-stack {
+    border-color: mat-color($background, ui-background-darkest);
+
+    app-panel:not(.last) {
+      -webkit-box-shadow: 0px 9px 5px 0px mat-color($background, panel-shadow);
+      -moz-box-shadow: 0px 9px 5px 0px mat-color($background, panel-shadow);
+      box-shadow: 0px 9px 5px 0px mat-color($background, panel-shadow);
+    }
+  }
+}
+
+@include work-stack-theme($orcid-app-theme);

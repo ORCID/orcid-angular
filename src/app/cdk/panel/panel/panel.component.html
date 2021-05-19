@@ -1,0 +1,71 @@
+<div
+  class="header box orc-font-body"
+  [ngClass]="{
+    'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
+    'top-bar-or-main': type === 'top-bar' || type === 'main',
+    'side-bar': type === 'side-bar',
+    'expand-button': !editable && !isPublicRecord && !customControls
+  }"
+>
+  <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
+  <ng-container
+    *ngIf="!editable && !customControls && expandButtonsPosition === 'left'"
+  >
+    <ng-container>
+      <app-panel-expand-buttons
+        (toggle)="toggle()"
+        [openState]="openState"
+      ></app-panel-expand-buttons>
+    </ng-container>
+  </ng-container>
+
+  <ng-content select="[header]"></ng-content>
+  <div class="buttons-container">
+    <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
+    <app-panel-privacy
+      *ngIf="visibility && !isPublicRecord"
+      [visibility]="visibility"
+    ></app-panel-privacy>
+
+    <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
+    <ng-content select="[custom-controls]"></ng-content>
+
+    <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
+
+    <ng-container *ngIf="editable && !customControls">
+      <button
+        mat-icon-button
+        *ngIf="!isPublicRecord"
+        [matTooltip]="tooltipLabelEdit"
+        (click)="openModal()"
+        id="edit-button"
+      >
+        <mat-icon class="material-icons-outlined">edit</mat-icon>
+      </button>
+    </ng-container>
+    <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
+    <ng-container
+      *ngIf="!editable && !customControls && expandButtonsPosition === 'right'"
+    >
+      <ng-container>
+        <app-panel-expand-buttons
+          (toggle)="toggle()"
+          [openState]="openState"
+        ></app-panel-expand-buttons>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<div class="body" *ngIf="openState || type === 'side-bar'">
+  <!-- [PANEL CONTENT] FOR EVERY PANEL IMPLEMENTATION -->
+  <!-- hide the content when openState is false-->
+  <!-- on `side bar` never close the content -->
+
+  <ng-content></ng-content>
+
+  <!-- [NESTED PANELS] FOR PEER REVIEWS AND RESEARCH RESOURCES -->
+  <div class="nested-panels" *ngIf="hasNestedPanels">
+    <ng-content select="[nested-panels]"></ng-content>
+  </div>
+</div>

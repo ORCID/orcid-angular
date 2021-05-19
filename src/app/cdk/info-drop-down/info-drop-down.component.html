@@ -1,22 +1,13 @@
-<a
-  class="university-dropdown"
-  (click)="show = !show"
+<div
+  class="university-dropdown orc-font-body-large"
   [ngClass]="{ active: show }"
+  (click)="show = !show"
 >
-  <div
-    role="button"
-    class="mat-body-2 black-underline-url body-2"
-    id="app-name"
-  >
+  <a class="mat-body-2 black-underline-url body-2 black-url" id="app-name">
     {{ name }}
-    <!-- TODO user the right icon-->
-  </div>
-  <mat-icon
-    class="material-icons-outlined help-material-icon"
-    role="presentation"
-    >help_outline</mat-icon
-  >
-</a>
+  </a>
+  <mat-icon class="large-material-icon" role="presentation">help</mat-icon>
+</div>
 
 <div class="description-container" *ngIf="show">
   {{ description }}

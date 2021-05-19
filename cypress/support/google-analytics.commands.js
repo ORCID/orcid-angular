@@ -12,7 +12,7 @@ Cypress.on('window:before:load', (win) => {
   cy.stub(win.dataLayer, 'push')
     .withArgs(isNotAnInternalGtagCall)
     .callsFake((args) => {
-      console.log(args)
+      console.info(args)
     })
     .as('ga')
 })
@@ -30,7 +30,7 @@ Cypress.Commands.add('expectGtagInitialization', (url) => {
         2: {
           anonymize_ip: true,
           cookie_flags: 'SameSite=None;Secure',
-          sample_rate: 70,
+          sample_rate: 100,
           send_page_view: false,
         },
       })

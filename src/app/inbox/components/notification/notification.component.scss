@@ -7,6 +7,15 @@
   overflow: hidden;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  mat-checkbox {
+    margin-left: 4px;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -14,6 +23,7 @@
   align-items: baseline;
   padding: $spacing-base;
   cursor: pointer;
+  width: 100%;
 
   .date-archive-container {
     display: flex;
@@ -45,9 +55,21 @@ mat-checkbox {
     margin-right: auto;
   }
 }
-:host:not(.archived) {
+:host:not(.archived):not(.read) {
   .title {
     font-weight: bold;
+  }
+}
+
+:host.archived:not(.read) {
+  .title {
+    font-weight: bold;
+  }
+}
+
+:host.archived.read {
+  .title {
+    font-weight: 400;
   }
 }
 
@@ -73,7 +95,7 @@ mat-checkbox {
     margin-right: $spacing-base;
     margin-left: auto;
   }
-  font-weight: bold;
+  font-weight: 500;
 }
 .columns-8 :host {
   .title {
@@ -98,6 +120,7 @@ button[mat-icon-button] {
   display: flex;
   align-items: center;
   text-align: start;
+  flex-shrink: 0;
 }
 
 .hidden {

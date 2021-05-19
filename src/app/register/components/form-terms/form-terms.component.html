@@ -8,7 +8,7 @@
     formControlName="termsOfUse"
     ><ng-container i18n="@@register.consentTo">I consent to the</ng-container>
     <a
-      href="https://orcid.org/footer/privacy-policy"
+      href="{{ environment.INFO_SITE + 'privacy-policy' }}"
       target="_blank"
       rel="noopener noreferrer"
       class="mat-button-font"
@@ -18,7 +18,7 @@
     </a>
     <ng-container i18n="@@register.and">and</ng-container>
     <a
-      href="https://orcid.org/content/orcid-terms-use"
+      href="{{ environment.INFO_SITE + 'content/orcid-terms-use' }}"
       target="_blank"
       rel="noopener noreferrer"
       class="mat-button-font"
@@ -26,14 +26,41 @@
     >
       terms of use
     </a>
-    <ng-container i18n="@@register.use"
-      >including agreeing to my data being processed in the US and being
-      publicly accessible where marked as “visible to Everyone”.</ng-container
+    <ng-container i18n="@@register.agree"
+      >and agree to my data being publicly accessible where marked as “Visible
+      to Everyone”.</ng-container
     >
   </mat-checkbox>
+  <mat-checkbox
+    id="data-processed-input"
+    class="orcid-checkbox-baseline"
+    color="primary"
+    formControlName="dataProcessed"
+  >
+    <ng-container i18n="@@register.dataProcessed">
+      I consent to my data being processed in the United States.
+    </ng-container>
+    <a
+      href="{{
+        environment.INFO_SITE +
+          'privacy-policy/#110_International_Data_Transfer'
+      }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mat-button-font"
+      i18n="@@register.moreInformation"
+    >
+      More information on how ORCID process your data.
+    </a>
+  </mat-checkbox>
   <mat-error
-    *ngIf="form.hasError('required', 'termsOfUse') && errorState"
+    *ngIf="
+      (form.hasError('required', 'termsOfUse') ||
+        form.hasError('required', 'dataProcessed')) &&
+      errorState
+    "
     i18n="@@register.termsRequired"
-    >You must accept the terms of use</mat-error
+    >To continue creating your ORCID iD you must accept the terms of use and
+    consent to your data being processed in the United States.</mat-error
   >
 </ng-container>

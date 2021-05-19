@@ -18,6 +18,7 @@ import { RegisterBackendValidatorMixin } from './register.backend-validators'
 import { RegisterFormAdapterMixin } from './register.form-adapter'
 import { ERROR_REPORT } from 'src/app/errors'
 import { objectToUrlParameters } from '../../constants'
+import { ReactivationLocal } from '../../types/reactivation.local'
 
 // Mixing boiler plate
 
@@ -77,6 +78,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
     StepA: FormGroup,
     StepB: FormGroup,
     StepC: FormGroup,
+    reactivation: ReactivationLocal,
     requestInfoForm?: RequestInfoForm,
     updateUserService = false
   ): Observable<RegisterConfirmResponse> {
@@ -98,9 +100,16 @@ export class RegisterService extends _RegisterServiceMixingBase {
         ) {
           url += `shibboleth/`
         }
-        url += `registerConfirm.json?${objectToUrlParameters(
-          platform.queryParameters
-        )}`
+        if (reactivation.isReactivation) {
+          url += `reactivationConfirm.json?${objectToUrlParameters(
+            platform.queryParameters
+          )}`
+          registerForm.resetParams = reactivation.reactivationCode
+        } else {
+          url += `registerConfirm.json?${objectToUrlParameters(
+            platform.queryParameters
+          )}`
+        }
 
         const registerFormWithTypeContext = this.addCreationTypeContext(
           platform,
@@ -160,6 +169,8 @@ export class RegisterService extends _RegisterServiceMixingBase {
     platform: PlatformInfo,
     registerForm: RegisterForm
   ): RegisterForm {
+    /// TODO @leomendoza123 depend only on the user session thirty party login data
+    /// avoid taking data from the the parameters.
     if (
       platform.social ||
       platform.queryParameters.providerId === 'facebook' ||

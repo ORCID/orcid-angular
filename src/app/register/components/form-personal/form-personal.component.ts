@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   forwardRef,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core'
@@ -19,6 +20,9 @@ import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
 
 import { BaseForm } from '../BaseForm'
+import { first } from 'rxjs/operators'
+import { ReactivationService } from '../../../core/reactivation/reactivation.service'
+import { ReactivationLocal } from '../../../types/reactivation.local'
 
 @Component({
   selector: 'app-form-personal',
@@ -41,10 +45,14 @@ import { BaseForm } from '../BaseForm'
 export class FormPersonalComponent
   extends BaseForm
   implements OnInit, AfterViewInit {
+  @Input() reactivation: ReactivationLocal
   @ViewChild('firstInput') firstInput: ElementRef
   labelInfoAboutName = $localize`:@@register.ariaLabelInfo:info about names`
   labelClose = $localize`:@@register.ariaLabelClose:close`
-  constructor(private _register: RegisterService) {
+  constructor(
+    private _register: RegisterService,
+    private _reactivationService: ReactivationService
+  ) {
     super()
   }
 
@@ -62,9 +70,6 @@ export class FormPersonalComponent
           validators: [Validators.required, OrcidValidators.email],
           asyncValidators: this._register.backendValueValidate('email'),
         }),
-        confirmEmail: new FormControl('', {
-          validators: [Validators.required, OrcidValidators.email],
-        }),
         additionalEmails: this.additionalEmails,
       },
       {
@@ -72,10 +77,23 @@ export class FormPersonalComponent
           OrcidValidators.matchValues('email', 'confirmEmail', false),
           this.allEmailsAreUnique(),
         ],
-        asyncValidators: [this._register.backendAdditionalEmailsValidate()],
+        asyncValidators: [
+          this._register.backendAdditionalEmailsValidate(
+            this.reactivation.isReactivation
+          ),
+        ],
         updateOn: 'change',
       }
     )
+
+    if (!this.reactivation.isReactivation) {
+      this.emails.addControl(
+        'confirmEmail',
+        new FormControl('', {
+          validators: [Validators.required, OrcidValidators.email],
+        })
+      )
+    }
 
     this.form = new FormGroup({
       givenNames: new FormControl('', {
@@ -94,6 +112,18 @@ export class FormPersonalComponent
       }),
       emails: this.emails,
     })
+
+    if (this.reactivation.isReactivation) {
+      this._reactivationService
+        .getReactivationData(this.reactivation.reactivationCode)
+        .pipe(first())
+        .subscribe((reactivation) => {
+          this.emails.patchValue({
+            email: reactivation.email,
+          })
+          this.emails.controls['email'].disable()
+        })
+    }
   }
 
   ngAfterViewInit(): void {
@@ -153,7 +183,7 @@ export class FormPersonalComponent
   registerOnChange(fn: any) {
     this.form.valueChanges.subscribe((value) => {
       const emailsForm = this._register.formGroupToEmailRegisterForm(
-        <FormGroup>this.form.controls['emails']
+        this.form.controls['emails'] as FormGroup
       )
       const namesForm =
         this._register.formGroupToNamesRegisterForm(this.form) || {}

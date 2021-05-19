@@ -1,0 +1,190 @@
+<ng-container
+  *ngIf="
+    !(
+      isPublicRecord &&
+      getAffiliationType('EMPLOYMENT')?.affiliationGroup?.length === 0
+    )
+  "
+>
+  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <app-panels
+    *ngIf="getAffiliationType('EMPLOYMENT') as profileAffiliationsGroup"
+    class="row"
+    [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
+    [total]="profileAffiliationsGroup.affiliationGroup.length"
+    [expandedContent]="expandedContent"
+    [isPublicRecord]="isPublicRecord"
+  >
+    <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
+      <app-affiliation-stack
+        [isPublicRecord]="isPublicRecord"
+        *ngFor="
+          let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
+          trackBy: trackByAffiliationGroup
+        "
+        [affiliationStack]="affiliationGroup"
+      ></app-affiliation-stack>
+    </ng-container>
+    <ng-container
+      *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
+    >
+      <div class="orc-font-body-small">
+        <p i18n="@@shared.employmentDescription">
+          Add employment lists organizations where you have been professionally
+          affiliated.
+        </p>
+        <a class="underline" href="" i18n="@@shared.employmentLearnMore">
+          Learn more about adding employment to your ORCID record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</ng-container>
+
+<ng-container
+  *ngIf="
+    !(
+      isPublicRecord &&
+      getAffiliationType('EDUCATION_AND_QUALIFICATION')?.affiliationGroup
+        ?.length === 0
+    )
+  "
+>
+  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <app-panels
+    *ngIf="
+      getAffiliationType(
+        'EDUCATION_AND_QUALIFICATION'
+      ) as profileAffiliationsGroup
+    "
+    class="row"
+    [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
+    [total]="profileAffiliationsGroup.affiliationGroup.length"
+    [expandedContent]="expandedContent"
+    [isPublicRecord]="isPublicRecord"
+  >
+    <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
+      <app-affiliation-stack
+        [isPublicRecord]="isPublicRecord"
+        *ngFor="
+          let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
+          trackBy: trackByAffiliationGroup
+        "
+        [affiliationStack]="affiliationGroup"
+      ></app-affiliation-stack>
+    </ng-container>
+    <ng-container
+      *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
+    >
+      <div class="orc-font-body-small">
+        <p i18n="@@shared.educationQualificationsDescription">
+          Add details about where you have studied and educational or
+          professional qualifications you have been awarded.
+        </p>
+        <a class="underline" href="" i18n="@@shared.educationLearnMore">
+          Learn more about adding education of qualifications to your ORCID
+          record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</ng-container>
+
+<ng-container
+  *ngIf="
+    !(
+      isPublicRecord &&
+      getAffiliationType('INVITED_POSITION_AND_DISTINCTION')?.affiliationGroup
+        ?.length === 0
+    )
+  "
+>
+  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <app-panels
+    *ngIf="
+      getAffiliationType(
+        'INVITED_POSITION_AND_DISTINCTION'
+      ) as profileAffiliationsGroup
+    "
+    class="row"
+    [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
+    [total]="profileAffiliationsGroup.affiliationGroup.length"
+    [expandedContent]="expandedContent"
+    [isPublicRecord]="isPublicRecord"
+  >
+    <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
+      <app-affiliation-stack
+        [isPublicRecord]="isPublicRecord"
+        *ngFor="
+          let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
+          trackBy: trackByAffiliationGroup
+        "
+        [affiliationStack]="affiliationGroup"
+      ></app-affiliation-stack>
+    </ng-container>
+    <ng-container
+      *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
+    >
+      <div class="orc-font-body-small">
+        <p i18n="@@shared.invitedPositionsDescription">
+          Add details about of invited positions you have held and awards or
+          prizes you have received in recognition of your achievements.
+        </p>
+        <a class="underline" href="" i18n="@@shared.invitedPositionsLearnMore">
+          Learn more about adding invited positions or distinctions to your
+          ORCID record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</ng-container>
+
+<ng-container
+  *ngIf="
+    !(
+      isPublicRecord &&
+      getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup?.length ===
+        0
+    )
+  "
+>
+  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <app-panels
+    *ngIf="
+      getAffiliationType('MEMBERSHIP_AND_SERVICE') as profileAffiliationsGroup
+    "
+    class="row"
+    [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
+    [total]="profileAffiliationsGroup.affiliationGroup.length"
+    [expandedContent]="expandedContent"
+    [isPublicRecord]="isPublicRecord"
+  >
+    <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
+      <app-affiliation-stack
+        [isPublicRecord]="isPublicRecord"
+        *ngFor="
+          let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
+          trackBy: trackByAffiliationGroup
+        "
+        [affiliationStack]="affiliationGroup"
+      ></app-affiliation-stack>
+    </ng-container>
+    <ng-container
+      *ngIf="profileAffiliationsGroup.affiliationGroup.length === 0"
+    >
+      <div class="orc-font-body-small">
+        <p i18n="@@shared.membershipDescription">
+          Add details of society or association memberships and donations of
+          time or other resources in the service of an organization.
+        </p>
+        <a class="underline" href="" i18n="@@shared.membershipLearnMore">
+          Learn more about adding a membership or service to your ORCID record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</ng-container>

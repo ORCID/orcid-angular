@@ -1,13 +1,20 @@
 import {
   Address,
   Email,
+  Keyword,
+  MonthDayYearDate,
   OtherName,
   ResearcherUrl,
-  Visibility,
-  MonthDayYearDate,
-  VisibilityStrings,
+  SourceWithAssertionOrigin,
   Value,
+  Visibility,
+  VisibilityStrings,
 } from './common.endpoint'
+import { BiographyEndPoint } from './record-biography.endpoint'
+
+interface PublicGroupedKeywords {
+  [x: string]: Keyword
+}
 
 interface PublicGroupedOtherNames {
   [x: string]: OtherName
@@ -21,10 +28,6 @@ interface PublicGroupedAddresses {
   [x: string]: Address
 }
 
-interface PublicGroupedKeywords {
-  [x: string]: any // TODO: DEFINE
-}
-
 interface PublicGroupedResearcherUrls {
   [x: string]: ResearcherUrl
 }
@@ -33,14 +36,28 @@ interface PublicGroupedEmails {
   [x: string]: Email
 }
 
-interface PublicGroupedPersonExternalIdentifiers {
-  [x: string]: any // TODO: DEFINE
+export interface PublicGroupedPersonExternalIdentifiers {
+  [x: string]: [
+    {
+      type: string
+      value: string
+      relationship: string
+      url: Value
+      source: SourceWithAssertionOrigin
+      lastModifiedDate: { value: number }
+      createdDate: { value: number }
+      putCode: number
+      visibility: string
+      path?: any
+      displayIndex: number
+    }
+  ]
 }
 
 export interface Person {
   title: string
   displayName: string
-  biography: Biography
+  biography: BiographyEndPoint
   publicGroupedOtherNames: PublicGroupedOtherNames
   publicAddress: Address
   countryNames: CountryNames
@@ -51,25 +68,9 @@ export interface Person {
   publicGroupedPersonExternalIdentifiers: PublicGroupedPersonExternalIdentifiers
 }
 
-export interface Biography {
-  visibility: Visibility
-  biography: Value
-  errors: string[]
-}
-
-export interface Emails {
-  emails: Assertion[]
-  errors: string[]
-}
-export interface OtherNames {
-  errors: String[]
-  otherNames: Assertion[]
-  visibility: Visibility
-}
-
-export interface Countries {
-  errors: string[]
-  addresses: Assertion[]
+export interface ExternalIdentifier {
+  errors: any[]
+  externalIdentifiers: Assertion[]
   visibility: Visibility
 }
 
@@ -79,52 +80,53 @@ export interface Keywords {
   visibility: Visibility
 }
 
-export interface Website {
-  errors: any[]
-  websites: Assertion[]
-  visibility: Visibility
-}
-
-export interface ExternalIdentifier {
-  errors: any[]
-  externalIdentifiers: Assertion[]
-  visibility: Visibility
-}
-
-export interface Names {
-  visibility: Visibility
-  errors: any[]
-  givenNames: Value
-  familyName: Value
-  creditName?: any
-}
-
 export interface Preferences {
   developer_tools_enabled: boolean
   default_visibility: VisibilityStrings
 }
 
-export interface Assertion {
-  value: string
-  primary: boolean
-  current: boolean
-  verified: boolean
-  visibility: Visibility | VisibilityStrings
-  errors: any[]
+export interface AssertionBase {
+  value?: string
+  primary?: boolean
+  current?: boolean
+  verified?: boolean
+  visibility?: Visibility | VisibilityStrings
+  source?: string
+  putCode?: any
+  errors?: any[]
+  displayIndex?: number
   iso2Country?: Value
   countryName?: string
   commonName?: string
   reference?: string
-  url?: string | Value
+  url?: any
   urlName?: string
-  source: string
-  sourceName: string
-  displayIndex: number
-  putCode: string
+  sourceName?: string
   content?: string
-  createdDate: MonthDayYearDate
-  lastModified: MonthDayYearDate
+  createdDate?: MonthDayYearDate
+  lastModified?: MonthDayYearDate
   assertionOriginOrcid?: any
   assertionOriginClientId?: any
   assertionOriginName?: any
+}
+
+export interface Assertion extends AssertionBase {
+  visibility?: Visibility
+}
+
+export interface AssertionVisibilityString extends AssertionBase {
+  visibility?: VisibilityStrings
+}
+
+export interface GroupBase {
+  activePutCode: number
+  defaultPutCode: number
+  groupId: number
+  activeVisibility: string
+  userVersionPresent: boolean
+  externalIdentifiers: ExternalIdentifier[]
+}
+
+export interface ErrorsListResponse {
+  errors: string[]
 }

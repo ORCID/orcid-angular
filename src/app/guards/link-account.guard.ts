@@ -7,9 +7,7 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
-import { map, switchMap, tap, catchError, last, take } from 'rxjs/operators'
-
-import { ApplicationRoutes } from '../constants'
+import { map, catchError, take } from 'rxjs/operators'
 import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
@@ -32,18 +30,10 @@ export class LinkAccountGuard implements CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this._platformInfo.get().pipe(
+    return this._userInfo.getUserSession().pipe(
       take(1),
-      switchMap((platform) => {
-        if (platform.social) {
-          // TODO @leomendoza123 make the social/shibboleth data part of the user session
-          return this._oauthService.loadSocialSigninData()
-        } else {
-          return this._oauthService.loadShibbolethSignInData()
-        }
-      }),
       map((value) => {
-        if (value.providerId) {
+        if (value.thirdPartyAuthData?.signinData?.providerId) {
           return true
         } else {
           return this._router.createUrlTree(['/signin'])

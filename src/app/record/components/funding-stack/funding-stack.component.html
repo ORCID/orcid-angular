@@ -1,0 +1,46 @@
+<ng-container
+  *ngFor="
+    let funding of fundingStack.fundings;
+    let i = index;
+    let last = last;
+    trackBy: trackByFundingStack
+  "
+>
+  <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
+  <app-panel
+    [elements]="funding"
+    [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
+    [ngClass]="{ last: last }"
+    [visibility]="fundingStack.defaultFunding.visibility.visibility"
+    [isPublicRecord]="isPublicRecord"
+    *ngIf="isPreferred(funding) || displayTheStack"
+    type="main"
+  >
+    <h2 header class="orc-font-body">
+      {{ funding.fundingTitle.title.value }}
+    </h2>
+    <!-- FUNDING BODY -->
+    <app-funding
+      *ngIf="stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack"
+      [funding]="funding"
+      [panelDetailsState]="panelDetailsState[funding.putCode.value]"
+      (toggleDetails)="toggleDetails($event)"
+      [orgDisambiguated]="orgDisambiguated[funding.putCode.value]"
+    >
+    </app-funding>
+    <!-- FUNDING SOURCE -->
+    <app-panel-source
+      [isPreferred]="isPreferred(funding)"
+      [sourceName]="funding.sourceName || funding.source"
+      [stackLength]="fundingStack.fundings.length"
+      [(displayTheStack)]="displayTheStack"
+      (makePrimary)="makePrimaryCard(funding)"
+      [topPanelOfTheStackMode]="
+        stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack
+      "
+      [isPublicRecord]="isPublicRecord"
+      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(funding)"
+    >
+    </app-panel-source>
+  </app-panel>
+</ng-container>

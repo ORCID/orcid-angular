@@ -12,15 +12,21 @@
   >
   <strong>{{ notification.source.sourceName.content }}</strong>
   <ng-container i18n="@@inbox.yourOrcidRecord">
-    your ORCID record.</ng-container
+    with your ORCID record.</ng-container
   >
 </div>
 
-<button
-  mat-raised-button
-  color="primary"
-  (click)="navigateTo(notification.authorizationUrl.uri)"
-  i18n="@@inbox.grantPermission"
+<a
+  target="_blank"
+  rel="noopener noreferrer"
+  [href]="notification.authorizationUrl.uri"
 >
-  Grant permission
-</button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="grant-permission"
+    i18n="@@inbox.grantPermission"
+  >
+    Grant permission
+  </button>
+</a>

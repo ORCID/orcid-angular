@@ -1,0 +1,58 @@
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.actions-wrapper {
+  flex-wrap: nowrap;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+::ng-deep .cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.keywords-input-line {
+  margin-top: 20px;
+  img {
+    margin-top: 3px;
+    cursor: move;
+    z-index: 1;
+    margin-inline-end: 18px;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-inline-end: 32px;
+}
+
+::ng-deep .columns-4-or-8 .mat-form-field {
+  width: 100%;
+  margin-inline-end: auto;
+}
+
+.add-more {
+  margin-top: 16px;
+  span {
+    padding-left: 6px;
+  }
+}
+
+::ng-deep .cdk-drop-list-dragging {
+  cursor: move !important;
+  .mat-form-field-flex,
+  .mat-select-trigger,
+  .mat-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button {
+    cursor: move !important;
+  }
+}
+
+app-privacy-selector {
+  min-width: 180px;
+}

@@ -14,6 +14,7 @@ export class FooterComponent implements OnInit {
   platform
   labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
   togglzNewInfoSite: boolean
+  infoSiteBaseUrl = environment.INFO_SITE
 
   constructor(
     _platformInfo: PlatformInfoService,
@@ -32,13 +33,5 @@ export class FooterComponent implements OnInit {
 
   goTo(url) {
     this.window.location.href = url
-  }
-
-  about() {
-    if (this.togglzNewInfoSite) {
-      this.goTo(environment.INFO_SITE + '/what-is-orcid')
-    } else {
-      this.goTo('about')
-    }
   }
 }

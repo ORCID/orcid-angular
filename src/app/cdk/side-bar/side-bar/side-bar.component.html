@@ -1,0 +1,202 @@
+<div>
+  <app-side-bar-id
+    [ngClass]="{
+      mobile: !platform.columns12
+    }"
+    [id]="isPublicRecord || userSession?.userInfo?.EFFECTIVE_USER_ORCID"
+  ></app-side-bar-id>
+
+  <ng-container *ngIf="!onlyOrcidId">
+    <app-panel
+      [isPublicRecord]="isPublicRecord"
+      [elements]="userRecord.emails.emails"
+      [editModalComponent]="modalEmailComponent"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="emails-panel"
+      [(openState)]="emailsOpenState"
+      *ngIf="
+        userRecord?.emails?.emails &&
+        (!isPublicRecord || userRecord.emails.emails.length > 0)
+      "
+    >
+      <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
+      <app-panel-data *ngIf="userRecord.emails.emails.length > 0">
+        <app-panel-element
+          *ngFor="let email of userRecord.emails.emails; let last = last"
+          [visibility]="!isPublicRecord && email.visibility"
+          [bold]="email.primary"
+          [isPublicRecord]="isPublicRecord"
+          >{{ email.value }}
+
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="emailsOpenState"
+            [name]="email.sourceName || email.source"
+            [date]="email.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
+      </app-panel-data>
+    </app-panel>
+
+    <app-panel
+      [elements]="userRecord.website.websites"
+      [editModalComponent]="modalWebsitesComponent"
+      [isPublicRecord]="isPublicRecord"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="websites-panel"
+      [(openState)]="websiteOpenState"
+      *ngIf="
+        userRecord?.website?.websites &&
+        (!isPublicRecord || userRecord.website.websites.length > 0)
+      "
+    >
+      <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
+        Website and social links
+      </h2>
+      <app-panel-data *ngIf="userRecord.website.websites.length > 0">
+        <app-panel-element
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="let website of userRecord.website.websites; let last = last"
+          [visibility]="!isPublicRecord && website.visibility.visibility"
+          ><a
+            [href]="website.url.value"
+            [ngClass]="{
+              'orc-font-body-small': getWebsite(website).length > 20
+            }"
+            target="_blank"
+            rel="me nofollow noopener noreferrer"
+            >{{ getWebsite(website) }}</a
+          >
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="websiteOpenState"
+            [name]="website.sourceName || website.source"
+            [date]="website.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
+      </app-panel-data>
+    </app-panel>
+
+    <app-panel
+      *ngIf="
+        userRecord?.externalIdentifier?.externalIdentifiers &&
+        (!isPublicRecord ||
+          userRecord?.externalIdentifier?.externalIdentifiers.length > 0)
+      "
+      [elements]="userRecord.externalIdentifier.externalIdentifiers"
+      [editModalComponent]="modalPersonalIdentifiers"
+      [isPublicRecord]="isPublicRecord"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="personal-identifiers-panel"
+      [(openState)]="externalIdentifierOpenState"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
+      <app-panel-data
+        *ngIf="userRecord?.externalIdentifier.externalIdentifiers.length > 0"
+      >
+        <app-panel-element
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="
+            let externalIdentifier of userRecord.externalIdentifier
+              .externalIdentifiers;
+            let last = last
+          "
+          [visibility]="
+            !isPublicRecord && externalIdentifier.visibility.visibility
+          "
+          ><a
+            [href]="externalIdentifier.url"
+            target="_blank"
+            rel="me nofollow noopener noreferrer"
+            >{{
+              externalIdentifier.commonName +
+                ': ' +
+                externalIdentifier.reference
+            }}</a
+          >
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="externalIdentifierOpenState"
+            [name]="externalIdentifier.sourceName || externalIdentifier.source"
+            [date]="externalIdentifier.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
+      </app-panel-data>
+    </app-panel>
+    <app-panel
+      *ngIf="
+        userRecord?.keyword?.keywords &&
+        (!isPublicRecord || userRecord.keyword.keywords.length > 0)
+      "
+      [elements]="userRecord.keyword.keywords"
+      [editModalComponent]="modalKeywordComponent"
+      [isPublicRecord]="isPublicRecord"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="keywords-panel"
+      [(openState)]="keywordOpenState"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
+      <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0">
+        <app-panel-element
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="let keyword of userRecord.keyword.keywords; let last = last"
+          [visibility]="!isPublicRecord && keyword.visibility.visibility"
+          >{{ getKeyword(keyword) }}
+
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="keywordOpenState"
+            [name]="keyword.sourceName || keyword.source"
+            [date]="keyword.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
+      </app-panel-data>
+    </app-panel>
+    <app-panel
+      *ngIf="
+        userRecord?.countries?.addresses &&
+        (!isPublicRecord || userRecord.countries.addresses.length > 0)
+      "
+      [elements]="userRecord.countries.addresses"
+      [editModalComponent]="modalCountryComponent"
+      [isPublicRecord]="isPublicRecord"
+      [type]="'side-bar'"
+      class="side-bar"
+      id="countries-panel"
+      [(openState)]="addressOpenState"
+    >
+      <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
+      <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">
+        <app-panel-element
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="
+            let address of userRecord.countries.addresses;
+            let last = last
+          "
+          [visibility]="!isPublicRecord && address.visibility.visibility"
+          >{{ address.countryName }}
+          <!-- [app-panel-element-source] only visible on public page -->
+          <app-panel-element-source
+            [isLastItem]="last"
+            *ngIf="addressOpenState"
+            [name]="address.sourceName || address.source"
+            [date]="address.createdDate | monthDayYearDateToString"
+          >
+          </app-panel-element-source>
+        </app-panel-element>
+      </app-panel-data>
+    </app-panel>
+  </ng-container>
+</div>

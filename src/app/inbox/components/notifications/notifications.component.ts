@@ -1,26 +1,32 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { forkJoin, Subscription } from 'rxjs'
-import { first } from 'rxjs/operators'
+import { forkJoin, Subject, Subscription } from 'rxjs'
+import { first, takeUntil, tap } from 'rxjs/operators'
+import { WINDOW } from 'src/app/cdk/window'
 import { InboxService } from 'src/app/core/inbox/inbox.service'
-import { InboxNotification } from 'src/app/types/notifications.endpoint'
+import {
+  InboxNotification,
+  TotalNotificationCount,
+} from 'src/app/types/notifications.endpoint'
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
+  preserveWhitespaces: true,
 })
-export class NotificationsComponent implements OnInit {
-  archiveNotifications: InboxNotification[]
+export class NotificationsComponent implements OnInit, OnDestroy {
   notifications: InboxNotification[]
+  $destroy: Subject<boolean> = new Subject<boolean>()
   form: FormGroup = this._fromBuilder.group({})
   _allCheck = false
   loading = true
-  showArchived = true
-  moreNotificationsMightExist = false
+  showArchived = false
+  totalNotifications: TotalNotificationCount
 
   indeterminate = false
   changesSubscription: Subscription
+  amountOfSelectableItems: number
 
   set generalCheck(value: boolean) {
     this._allCheck = value
@@ -38,64 +44,97 @@ export class NotificationsComponent implements OnInit {
 
   constructor(
     private _inbox: InboxService,
-    private _fromBuilder: FormBuilder
+    private _fromBuilder: FormBuilder,
+    @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit(): void {
     this.form = this._fromBuilder.group({})
     this.loading = true
-    this._inbox.get().subscribe((value) => {
-      // get retrieved values
-      this.loading = false
-      this.notifications = value
-      this.archiveNotifications = this.notifications.filter(
-        (notification) => notification.archivedDate
-      )
+    this._inbox
+      .get(false)
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((value) => {
+        // get retrieved values
 
-      // Remove previous setup change listener (if exist)
-      if (this.changesSubscription) {
-        this.changesSubscription.unsubscribe()
-      }
+        this.notifications = value
 
-      // setup a new notifications checkboxes form
-      this.form = this.setUpCheckboxForm(value)
-      this.generalCheck = false
+        // Remove previous setup change listener (if exist)
+        if (this.changesSubscription) {
+          this.changesSubscription.unsubscribe()
+        }
 
-      // detect changes on the checkboxes form
-      this.changesSubscription = this.form.valueChanges.subscribe((formValue) =>
-        this.listenFormChanges(formValue)
-      )
+        // setup a new notifications checkboxes form
+        this.form = this.setUpCheckboxForm(value)
+        this.amountOfSelectableItems = Object.keys(this.form.controls).length
+        this.generalCheck = false
 
-      // check if there might be more notifications
-      this.moreNotificationsMightExist = this._inbox.mightHaveMoreNotifications()
-    })
+        // detect changes on the checkboxes form
+        this.changesSubscription = this.form.valueChanges.subscribe(
+          (formValue) => this.listenFormChanges(formValue)
+        )
+        this._inbox.totalNumber().subscribe((data) => {
+          this.totalNotifications = data
+          if (this.autoLoadMoreNotificationsIfRequired()) {
+            this._inbox.get(false).pipe(first()).subscribe()
+          } else {
+            this.loading = false
+          }
+        })
+      })
+  }
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
+  }
+
+  autoLoadMoreNotificationsIfRequired() {
+    if (
+      this.notifications.length === 0 &&
+      !this.showArchived &&
+      this.totalNotifications.nonArchived > 0
+    ) {
+      return true
+    }
   }
 
   archivedSelected() {
-    const $archiveList = Object.keys(this.form.controls)
-      .map((key) => {
-        if (this.form.controls[key].value) {
-          return this._inbox.flagAsArchive(parseInt(key, 10))
-        }
-      })
-      .filter((value) => value)
-    forkJoin($archiveList).subscribe()
+    if (!this.loading) {
+      const notificationsToArchived = Object.keys(this.form.controls).filter(
+        (key) => this.form.controls[key].value
+      )
+      const $archiveList = notificationsToArchived
+        .map((key, index) => {
+          return this._inbox
+            .flagAsArchive(parseInt(key, 10), false)
+            .pipe(first())
+        })
+        .filter((value) => value)
+      if ($archiveList.length) {
+        this.loading = true
+        forkJoin($archiveList)
+          .pipe(tap(() => this._inbox.emitUpdate()))
+          .subscribe()
+      }
+    }
   }
 
   toggleShowArchived() {
     this.showArchived = !this.showArchived
+    this.loading = true
+    this._inbox
+      .get(true, this.showArchived)
+      .pipe(first())
+      .subscribe(() => {
+        this.loading = false
+      })
   }
 
   showMore() {
     // subscribe and take only one value without any action
     // allowing the previous subscription on ngOnInit to handle the data
     this.loading = true
-    this._inbox
-      .get(true)
-      .pipe(first())
-      .subscribe(() => {
-        this.loading = false
-      })
+    this._inbox.get(true, this.showArchived).pipe(first()).subscribe()
   }
 
   // Use to check if the general checkbox is on indeterminate stated
@@ -116,14 +155,33 @@ export class NotificationsComponent implements OnInit {
   }
 
   // Create a control for each notification using the putcode as key
+  // tslint:disable-next-line: max-line-length
   setUpCheckboxForm(value) {
     const checkBoxForm = this._fromBuilder.group({})
     value.forEach((notification) => {
-      checkBoxForm.addControl(
-        notification.putCode.toString(),
-        this._fromBuilder.control(false)
-      )
+      if (!notification.archivedDate) {
+        checkBoxForm.addControl(
+          notification.putCode.toString(),
+          this._fromBuilder.control(false)
+        )
+      }
     })
     return checkBoxForm
+  }
+
+  isAnEmptyInbox() {
+    return this.notifications && this.notifications.length === 0
+  }
+
+  navigateTo(url) {
+    ;(this.window as any).outOfRouterNavigation(url)
+  }
+
+  hasMoreNotificationsToLoad() {
+    return (
+      (this.showArchived
+        ? this.totalNotifications?.all
+        : this.totalNotifications?.nonArchived) > this.notifications.length
+    )
   }
 }

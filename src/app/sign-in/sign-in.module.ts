@@ -17,6 +17,7 @@ import { PrintErrorsComponent } from './components/errors/print-errors/print-err
 import { FormSignInComponent } from './components/form-sign-in/form-sign-in.component'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
+import { MyOrcidAlertsModule } from '../cdk/my-orcid-alerts/my-orcid-alerts.module'
 
 @NgModule({
   declarations: [
@@ -41,8 +42,8 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     SignInRoutingModule,
     FormDirectivesModule,
     A11yLinkModule,
+    MyOrcidAlertsModule,
   ],
-  entryComponents: [],
   exports: [FormSignInComponent, TwoFactorComponent],
 })
 export class SignInModule {}

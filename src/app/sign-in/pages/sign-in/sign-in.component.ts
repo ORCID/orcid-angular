@@ -1,5 +1,11 @@
 import { HttpParams } from '@angular/common/http'
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  HostBinding,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { first } from 'rxjs/operators'
@@ -20,10 +26,10 @@ import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.
     './sign-in.component.scss-theme.scss',
     './sign-in.component.scss',
   ],
-  host: { class: 'container' },
   preserveWhitespaces: true,
 })
 export class SignInComponent implements OnInit {
+  @HostBinding('class.container') containerClass = true
   @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
   requestInfoForm: RequestInfoForm // deprecated
   params: HttpParams // deprecated
@@ -38,6 +44,9 @@ export class SignInComponent implements OnInit {
   show2FA = false
   signInType = TypeSignIn.personal
   errorDescription: string
+  verifiedEmail: string
+  emailVerified: boolean
+  invalidVerifyUrl: boolean
 
   constructor(
     _platformInfo: PlatformInfoService,
@@ -60,6 +69,25 @@ export class SignInComponent implements OnInit {
         } else {
           this.displayName = null
           this.realUserOrcid = null
+        }
+
+        if (platform.queryParameters.emailVerified) {
+          this.emailVerified = platform.queryParameters.emailVerified
+          if (
+            platform.queryParameters.emailVerified &&
+            platform.queryParameters.verifiedEmail
+          ) {
+            this.verifiedEmail = decodeURIComponent(
+              this.window.location.search.split('verifiedEmail=')[1]
+            )
+            if (this.verifiedEmail.includes(' ')) {
+              this.verifiedEmail = this.verifiedEmail.replace(' ', '+')
+            }
+          }
+        }
+
+        if (platform.queryParameters.invalidVerifyUrl) {
+          this.invalidVerifyUrl = platform.queryParameters.invalidVerifyUrl
         }
 
         if (platform.queryParameters.email) {

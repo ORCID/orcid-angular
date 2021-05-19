@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { listAnimation } from 'src/app/animations'
 import { NewsService } from 'src/app/core'
-import { environment } from 'src/environments/environment.sandbox'
+import { environment } from 'src/environments/environment'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 
@@ -26,7 +26,7 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._news.getNews().subscribe((data: Array<any>) => {
+    this._news.getNews().subscribe((data: any[]) => {
       this.news = data.slice(0, 3)
     })
   }

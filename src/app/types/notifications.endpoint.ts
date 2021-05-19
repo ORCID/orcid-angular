@@ -1,4 +1,8 @@
-import { SourceOrcid, Value } from './common.endpoint'
+import {
+  SourceOrcid,
+  SourceWithAssertionOrigin,
+  Value,
+} from './common.endpoint'
 
 interface ExternalIdentifier {
   type: string
@@ -9,19 +13,6 @@ interface ExternalIdentifier {
 
 export interface ExternalIdentifiers {
   externalIdentifier: ExternalIdentifier[]
-}
-
-export interface SourceName {
-  content: string
-}
-
-export interface Source {
-  sourceOrcid?: any
-  sourceClientId: SourceOrcid
-  sourceName: SourceName
-  assertionOriginOrcid?: any
-  assertionOriginClientId?: any
-  assertionOriginName?: any
 }
 
 export interface AdditionalInfo {
@@ -50,12 +41,12 @@ export interface InboxNotification {
   putCode: number
   createdDate: any
   sentDate?: any
-  readDate: number
+  readDate?: number
   archivedDate?: number
   sourceDescription?: any
   encryptedPutCode?: any
   subject: string
-  source: Source
+  source: SourceWithAssertionOrigin
 }
 
 export interface InboxNotificationAmended extends InboxNotification {
@@ -64,16 +55,20 @@ export interface InboxNotificationAmended extends InboxNotification {
   amendedSection?:
     | 'AFFILIATION'
     | 'BIO'
+    | 'DISTINCTION'
     | 'EDUCATION'
     | 'EMPLOYMENT'
     | 'EXTERNAL_IDENTIFIERS'
     | 'FUNDING'
+    | 'INVITED_POSITION'
+    | 'MEMBERSHIP'
     | 'PEER_REVIEW'
     | 'PREFERENCES'
-    | 'UNKNOWN'
+    | 'QUALIFICATION'
+    | 'SERVICE'
     | 'RESEARCH_RESOURCE'
+    | 'UNKNOWN'
     | 'WORK'
-    | 'INVITED_POSITION'
 }
 
 export interface InboxNotificationHtml extends InboxNotification {
@@ -110,3 +105,9 @@ export type notificationType =
   | 'TIP'
   | 'INSTITUTIONAL_CONNECTION'
   | 'PERMISSION'
+
+export interface TotalNotificationCount {
+  all: number
+  nonArchived: number
+  archived?: number
+}

@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions'
 import MockTrustedIndividuals from '../../.mockData/mock-trusted-individuals.json'
 import MockTrustedIndividualsMe from '../../.mockData/mock-trusted-individuals-me.json'
 
-import { TrustedIndividualsDropdownModule } from 'src/app/cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
+import { TrustedIndividualsDropdownModule } from '../../src/app/cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
@@ -14,7 +14,7 @@ let matChips = `
 Sample content
 `
 
-storiesOf('Components|Trusted individuals dropdown', module)
+storiesOf('Components/Trusted individuals dropdown', module)
   .add(
     'plain',
     () => ({

@@ -1,0 +1,56 @@
+<ng-container
+  *ngFor="
+    let affiliation of affiliationStack.affiliations;
+    let i = index;
+    let last = last;
+    trackBy: trackByAffiliationStack
+  "
+>
+  <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
+  <app-panel
+    [elements]="affiliation"
+    [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
+    [ngClass]="{ last: last }"
+    [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
+    [isPublicRecord]="isPublicRecord"
+    *ngIf="isPreferred(affiliation) || displayTheStack"
+    type="main"
+  >
+    <h2 header class="orc-font-body">
+      {{ affiliation.affiliationName.value }}:
+
+      <ng-container *ngIf="affiliation.city.value">
+        {{ affiliation.city.value }},
+      </ng-container>
+      <ng-container *ngIf="affiliation.region.value">
+        {{ affiliation.region.value }},
+      </ng-container>
+      <ng-container *ngIf="affiliation.country.value">
+        {{ affiliation.country.value }}
+      </ng-container>
+    </h2>
+    <!-- AFFILIATION BODY -->
+    <app-affiliation
+      *ngIf="stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack"
+      [affiliation]="affiliation"
+      [panelDetailsState]="panelDetailsState[affiliation.putCode.value]"
+      (toggleDetails)="toggleDetails($event)"
+      [orgDisambiguated]="orgDisambiguated[affiliation.putCode.value]"
+    >
+    </app-affiliation>
+    <!-- AFFILIATION SOURCE -->
+    <app-panel-source
+      [isPreferred]="isPreferred(affiliation)"
+      [sourceName]="affiliation.sourceName || affiliation.source"
+      [stackLength]="affiliationStack.affiliations.length"
+      [(displayTheStack)]="displayTheStack"
+      (makePrimary)="makePrimaryCard(affiliation)"
+      [topPanelOfTheStackMode]="
+        stackPanelsDisplay[affiliation.putCode.value].topPanelOfTheStack
+      "
+      [isPublicRecord]="isPublicRecord"
+      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
+    >
+    </app-panel-source>
+  </app-panel>
+</ng-container>

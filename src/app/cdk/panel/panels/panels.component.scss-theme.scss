@@ -1,0 +1,28 @@
+@import '../../../../assets/scss/material.palettes';
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import '~@angular/material/theming';
+
+@mixin stack-container-header-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  :host {
+    .header-container {
+      background-color: mat-color($accent, 900);
+      color: mat-contrast($accent, 900);
+    }
+
+    .sub-peer-review {
+      border-color: mat-color($background, ui-background) !important;
+      background-color: mat-color(
+        $background,
+        ui-background-lightest
+      ) !important;
+      color: $orcid-dark-primary-text;
+    }
+  }
+}
+
+@include stack-container-header-theme($orcid-app-theme);

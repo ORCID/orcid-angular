@@ -6,6 +6,7 @@ export interface RegisterForm {
   sendOrcidNews?: Value
   sendMemberUpdateRequests?: Value
   termsOfUse?: Value
+  dataProcessed?: Value
   activitiesVisibilityDefault?: Visibility
   password?: Value
   passwordConfirm?: Value
@@ -26,6 +27,7 @@ export interface RegisterForm {
   persistentTokenEnabled?: boolean
   emailAccessAllowed?: boolean
   redirectUrl?: any
+  resetParams?: string
 }
 
 export interface DuplicatedName {

@@ -1,0 +1,34 @@
+<ng-container *ngIf="!(isPublicRecord && userRecord?.fundings.length === 0)">
+  <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
+  <app-panels
+    *ngIf="userRecord && userRecord.fundings"
+    class="row"
+    [title]="ngOrcidFunding"
+    [type]="'funding'"
+    [total]="userRecord.fundings.length"
+    [isPublicRecord]="isPublicRecord"
+    [expandedContent]="expandedContent"
+  >
+    <ng-container *ngIf="userRecord.fundings.length > 0">
+      <app-funding-stack
+        *ngFor="
+          let fundingGroup of userRecord.fundings;
+          trackBy: trackByFundingGroup
+        "
+        [fundingStack]="fundingGroup"
+        [isPublicRecord]="isPublicRecord"
+      ></app-funding-stack>
+    </ng-container>
+    <ng-container *ngIf="userRecord.fundings.length === 0">
+      <div class="orc-font-body-small">
+        <p class="empty" i18n="@@funding.descriptionEmpty">
+          Add grants, awards and other funding you have received to support your
+          work.
+        </p>
+        <a class="underline" href="" i18n="@@funding.learnMore">
+          Learn more about adding funding information to your ORCID record
+        </a>
+      </div>
+    </ng-container>
+  </app-panels>
+</ng-container>

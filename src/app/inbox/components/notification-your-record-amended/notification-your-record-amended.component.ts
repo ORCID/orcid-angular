@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import {
   InboxNotificationAmended,
   Item,
 } from 'src/app/types/notifications.endpoint'
-import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
+import { chain } from 'lodash'
 
 @Component({
   selector: 'app-notification-your-record-amended',
@@ -13,7 +14,8 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 })
 export class NotificationYourRecordAmendedComponent implements OnInit {
   private _notification: InboxNotificationAmended
-  item: Item
+  item: Item[]
+  itemGroupedByType: { type: string; items: Item[] }[]
   @Input()
   set notification(notification: InboxNotificationAmended) {
     this._notification = notification
@@ -21,26 +23,31 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
       // multiple items notifications are not expected for `YOUR-RECORD`
       this._errorHandler.handleError(new Error('notificationUnexpectedLength'))
     }
-    this.item = notification.items.items[0]
+    this.item = notification.items.items
   }
   get notification() {
     return this._notification
   }
   constructor(private _errorHandler: ErrorHandlerService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.itemGroupedByType = chain(this.notification.items.items)
+      .groupBy('actionType')
+      .map((value, key) => ({ type: key, items: value }))
+      .value()
+  }
 
-  getAmendedTypeLabel(item: Item) {
-    if (item) {
-      switch (item.actionType) {
+  getAmendedTypeLabel(type: string) {
+    if (type) {
+      switch (type) {
         case 'CREATE':
-          return $localize`:@@inbox.newItemAdded:New item added`
+          return $localize`:@@inbox.newItemAdded:Added`
         case 'UPDATE':
-          return $localize`:@@inbox.itemUpdate:Item updated`
+          return $localize`:@@inbox.itemUpdate:Updated`
         case 'DELETE':
-          return $localize`:@@inbox.deleteItem:Deleted item`
+          return $localize`:@@inbox.deleteItem:Deleted`
         default:
-          return $localize`:@@inbox.otherUpdate:Other update`
+          return $localize`:@@inbox.otherUpdate:Other`
       }
     }
     return 'Other update'
@@ -49,25 +56,35 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   getNotificationSectionUpdatedLabel(notification: InboxNotificationAmended) {
     switch (notification.amendedSection) {
       case 'AFFILIATION':
-        return $localize`:@@inbox.affiliations:affiliations`
+        return $localize`:@@inbox.affiliations:Affiliations`
       case 'BIO':
-        return $localize`:@@inbox.bio:bio`
+        return $localize`:@@inbox.bio:Bio`
+      case 'DISTINCTION':
+        return $localize`:@@inbox.distinction:Distinction`
       case 'EDUCATION':
-        return $localize`:@@inbox.education:education`
+        return $localize`:@@inbox.education:Education`
       case 'EMPLOYMENT':
-        return $localize`:@@inbox.employment:employment`
+        return $localize`:@@inbox.employment:Employment`
       case 'EXTERNAL_IDENTIFIERS':
-        return $localize`:@@inbox.externalIdentifiers:external identifiers`
+        return $localize`:@@inbox.externalIdentifiers:External Identifiers`
       case 'FUNDING':
-        return $localize`:@@inbox.funding:funding`
+        return $localize`:@@inbox.funding:Funding`
+      case 'INVITED_POSITION':
+        return $localize`:@@inbox.invitedPosition:Invited Position`
+      case 'MEMBERSHIP':
+        return $localize`:@@inbox.membership:Membership`
       case 'PEER_REVIEW':
-        return $localize`:@@inbox.peerReview:peer review`
+        return $localize`:@@inbox.peerReview:Peer Review`
       case 'PREFERENCES':
-        return $localize`:@@inbox.preferences:preferences`
+        return $localize`:@@inbox.preferences:Preferences`
+      case 'QUALIFICATION':
+        return $localize`:@@inbox.qualification:Qualification`
       case 'RESEARCH_RESOURCE':
-        return $localize`:@@inbox.researchResource:research resource`
+        return $localize`:@@inbox.researchResource:Research Resource`
+      case 'SERVICE':
+        return $localize`:@@inbox.service:Service`
       case 'WORK':
-        return $localize`:@@inbox.work:work`
+        return $localize`:@@inbox.work:Work`
       default:
         return $localize`:@@inbox.unknown:unknown`
     }

@@ -3,16 +3,50 @@
 <div>
   <strong>{{ notification.source.sourceName.content }}</strong>
   <ng-container i18n="@@inbox.likeYourPermission"
-    >like your permission to interact with your ORCID Record as a trusted
+    >would like your permission to interact with your ORCID Record as a trusted
     party.</ng-container
   >
 </div>
 
-<button
-  mat-raised-button
-  color="primary"
-  (click)="navigateTo(notification.authorizationUrl.uri)"
-  i18n="@@inbox.grantPermission"
->
-  Grant permission
-</button>
+<div *ngFor="let i of itemsByType">
+  <p class="type">
+    <strong>
+      {{ getNotificationType(i.type) }}
+    </strong>
+    ({{ i.items.length }})
+  </p>
+  <ul>
+    <li *ngFor="let i of i.items">
+      {{ i.itemName }}
+      <span *ngIf="i.externalIdentifier"
+        >{{ i.externalIdentifier.type }}: {{ i.externalIdentifier.value }}</span
+      >
+    </li>
+  </ul>
+</div>
+<div class="buttons-container">
+  <button
+    *ngIf="!notification.archivedDate"
+    (click)="archive(); $event.stopPropagation()"
+    mat-button
+    color="primary"
+    type="button"
+    i18n="@@inbox.archiveWithout"
+  >
+    Archive without granting permissions
+  </button>
+  <a
+    target="_blank"
+    rel="noopener noreferrer"
+    [href]="notification.authorizationUrl.uri"
+  >
+    <button
+      mat-raised-button
+      color="primary"
+      class="grant-permission"
+      i18n="@@inbox.grantPermission"
+    >
+      Grant permission
+    </button>
+  </a>
+</div>

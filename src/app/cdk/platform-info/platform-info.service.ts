@@ -1,12 +1,10 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { Platform } from '@angular/cdk/platform'
-import { ThrowStmt } from '@angular/compiler'
 import { Inject, Injectable, LOCALE_ID } from '@angular/core'
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { ApplicationRoutes } from 'src/app/constants'
-import { environment } from 'src/environments/environment'
 
 import { WINDOW } from '../window'
 import { BROWSERLIST_REGEXP } from './browserlist.regexp'
@@ -36,6 +34,8 @@ export class PlatformInfoService {
     social: false,
     institutional: false,
     currentRoute: '',
+    reactivation: false,
+    reactivationCode: '',
   }
   platformSubject = new BehaviorSubject<PlatformInfo>(this.platform)
 
@@ -172,11 +172,16 @@ export class PlatformInfoService {
   private updateSocialState(queryParameters: Params) {
     const previousSocialState = this.platform.social
 
+    /// TODO @leomendoza123 depend only on the user session thirty party login data
+    /// avoid taking data from the the parameters.
+
     if (
       (queryParameters.hasOwnProperty('providerId') &&
         (queryParameters['providerId'] === 'facebook' ||
           queryParameters['providerId'] === 'google')) ||
-      this._router.url.indexOf(ApplicationRoutes.social) >= 0
+      this.window.location.pathname
+        .toLowerCase()
+        .indexOf(ApplicationRoutes.social) >= 0
     ) {
       this.platform.social = true
     } else {
@@ -213,9 +218,20 @@ export class PlatformInfoService {
     this.platform = {
       ...this.platform,
       hasOauthParameters: this.hasOauthParameters(),
-      social: this.window.location.href.toLowerCase().indexOf('social') >= 0,
+      social:
+        this.window.location.pathname.toLowerCase().indexOf('social-linking') >=
+        0,
       institutional:
-        this.window.location.href.toLowerCase().indexOf('institutional') >= 0,
+        this.window.location.pathname
+          .toLowerCase()
+          .indexOf('institutional-linking') >= 0 ||
+        this.window.location.pathname
+          .toLowerCase()
+          .indexOf('institutional-signin') >= 0,
+      reactivation:
+        this.window.location.pathname.toLowerCase().indexOf('reactivation') >=
+        0,
+      reactivationCode: this.getReactivationCode(),
     }
     this.platformSubject.next(this.platform)
     return this.platformSubject.asObservable()
@@ -250,5 +266,10 @@ export class PlatformInfoService {
 
   public getCurrentRoute(): string {
     return this._router.url
+  }
+
+  getReactivationCode(): string {
+    const segments = window.location.href.split('/')
+    return segments[segments.length - 1]
   }
 }

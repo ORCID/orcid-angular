@@ -1,0 +1,31 @@
+:host {
+  border: solid 1px;
+  display: block;
+  border-radius: 4px;
+}
+.header {
+  box-sizing: border-box;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+}
+
+.expand-button {
+  justify-content: flex-start !important;
+}
+
+.header-bottom {
+  border-bottom: solid 1px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nested-panels {
+  padding: 30px; // TODO @Daniel
+}

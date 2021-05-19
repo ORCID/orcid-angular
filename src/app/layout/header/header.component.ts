@@ -14,7 +14,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
 import { Location } from '@angular/common'
-import { ApplicationRoutes } from '../../constants'
+import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
 
 @Component({
   selector: 'app-header',
@@ -22,6 +22,7 @@ import { ApplicationRoutes } from '../../constants'
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  hideMainMenu = false
   _currentRoute: string
   @Input() set currentRoute(value) {
     this._currentRoute = value
@@ -68,11 +69,12 @@ export class HeaderComponent implements OnInit {
     _togglz
       .getStateOf('ORCID_ANGULAR_SIGNIN')
       .subscribe((value) => (this.togglzOrcidAngularSignin = value))
-    _router.events.subscribe(
-      () =>
-        (this.signinRegisterButton =
-          location.path() !== `/${ApplicationRoutes.signin}`)
-    )
+    _router.events.subscribe(() => {
+      const path = location.path()
+      this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
+      this.hideMainMenu =
+        ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcidTEMP}`
+    })
     _togglz
       .getStateOf('NEW_INFO_SITE')
       .subscribe((value) => (this.togglzNewInfoSite = value))
@@ -105,12 +107,12 @@ export class HeaderComponent implements OnInit {
         button.route !== undefined &&
         (!button.buttons || !button.buttons.length)
       ) {
-        this.newInfo(button.route)
+        this.preNavigate(button.route)
       } else {
         this.updateMenu(this.menu, treeLocation, true)
       }
     } else if (button.route !== undefined) {
-      this.newInfo(button.route)
+      this.preNavigate(button.route)
     }
   }
 
@@ -268,11 +270,16 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  newInfo(route) {
-    if (this.togglzNewInfoSite) {
-      this.navigateTo(environment.INFO_SITE + route)
-    } else {
+  preNavigate(route: string) {
+    if (route.indexOf('://') >= 0) {
       this.navigateTo(route)
+    } else if (this.togglzNewInfoSite) {
+      this.navigateTo(
+        environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE +
+          route
+      )
+    } else {
+      this.navigateTo(environment.INFO_SITE + route)
     }
   }
 

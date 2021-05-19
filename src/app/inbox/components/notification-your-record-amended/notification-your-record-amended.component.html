@@ -5,41 +5,54 @@
 
 <!--  https://github.com/ORCID/ORCID-Source/blob/a9868bbc959b151d7c761936b610936faf1b2d84/orcid-web/src/main/resources/freemarker/includes/ng2_templates/notification-body-ng2-template.ftl#L81 -->
 
-<p>
-  has updated the {{ getNotificationSectionUpdatedLabel(notification) }} section
-  of your record:
-</p>
+<div class="mat-body-1">
+  <ng-container i18n="@@inbox.updateThe">has updated the</ng-container>
+  <span>{{ getNotificationSectionUpdatedLabel(notification) }}</span>
+  <ng-container i18n="@@inbox.sectionOf">section of your record:</ng-container>
+</div>
 
-<strong>{{ getAmendedTypeLabel(item) }}</strong>
+<div *ngFor="let i of itemGroupedByType">
+  <strong>{{ getAmendedTypeLabel(i.type) }}</strong>
 
-<div class="item" *ngIf="item">
-  <ng-container>-</ng-container>
-
-  <ng-container
-    *ngIf="item.additionalInfo && item.additionalInfo['org_name'] != undefined"
-  >
-    <i>{{ item.additionalInfo['org_name'] }} </i>
-  </ng-container>
-
-  <ng-container *ngIf="item.itemName != null">{{ item.itemName }}</ng-container>
-
-  <ng-container *ngIf="item.additionalInfo">
-    <ng-container
-      *ngIf="
-        item.itemName == null && item.additionalInfo['group_name'] != undefined
-      "
-      >{{ item.additionalInfo['group_name'] }}</ng-container
-    >
-    <div *ngIf="item.additionalInfo['external_identifiers'] != undefined">
-      <ul
-        *ngFor="
-          let otherId of item.additionalInfo['external_identifiers'][
-            'externalIdentifier'
-          ]
+  <div class="item orc-font-body-small" *ngIf="item">
+    <ng-container *ngFor="let item of i.items">
+      <ng-container>-</ng-container>
+      <ng-container
+        *ngIf="
+          item.additionalInfo && item.additionalInfo['org_name'] != undefined
         "
       >
-        <li>{{ otherId.type }}: {{ otherId.value }}</li>
-      </ul>
-    </div>
-  </ng-container>
+        <i>{{ item.additionalInfo['org_name'] }} </i>
+      </ng-container>
+
+      <ng-container *ngIf="item.itemName != null">{{
+        item.itemName
+      }}</ng-container>
+
+      <ng-container *ngIf="item.additionalInfo">
+        <ng-container
+          *ngIf="
+            item.itemName == null &&
+            item.additionalInfo['group_name'] != undefined
+          "
+          >{{ item.additionalInfo['group_name'] }}</ng-container
+        >
+        <ng-container
+          *ngIf="item.additionalInfo['external_identifiers'] != undefined"
+        >
+          <ul>
+            <li
+              *ngFor="
+                let otherId of item.additionalInfo['external_identifiers'][
+                  'externalIdentifier'
+                ]
+              "
+            >
+              {{ otherId.type }}: {{ otherId.value }}
+            </li>
+          </ul>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>

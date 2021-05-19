@@ -63,7 +63,7 @@ export interface ZendeskSettings {
       subject?: boolean
       suppress?: boolean
       title?: ZendeskUIString
-      ticketForms?: Array<{ id: number; fields?: ZendeskField[] }>
+      ticketForms?: { id: number; fields?: ZendeskField[] }[]
     }
     contactOptions?: {
       enabled?: boolean
@@ -165,9 +165,4 @@ export interface ZendeskSettings {
     }
     zIndex?: number
   }
-}
-
-interface Window {
-  zESettings?: ZendeskSettings
-  zE?: ZendeskWidget
 }

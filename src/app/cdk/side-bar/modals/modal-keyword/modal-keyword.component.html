@@ -1,0 +1,125 @@
+<app-modal [loading]="loadingKeywords" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@topBar.keywords">Keywords</ng-container>
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-keywords-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-keywords-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <div
+    class="container no-padding"
+    [formGroup]="keywordsForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <p class="orc-font-small-print" i18n="@@topBar.keywordsAre">
+      Keywords are words or phrases which describe your research activities.
+      Adding keywords can help people find you when searching the ORCID
+      registry.
+    </p>
+    <ng-container *ngIf="keywords.length > 0">
+      <div class="row">
+        <label for="content-input" class="orc-font-body-small">
+          <strong i18n="@@topBar.myKeywords">My keywords</strong>
+        </label>
+      </div>
+      <div
+        class="row"
+        id="keyword-dropList"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          cdkDrag
+          rootElementSelector="#keyword-dropList"
+          class="row keywords-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [formGroupName]="keyword.putCode"
+          *ngFor="let keyword of keywords"
+        >
+          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+            <img
+              class="icon-drag"
+              cdkDragHandle
+              src="./assets/vectors/draggable.svg"
+            />
+            <div class="row">
+              <mat-form-field appearance="outline" class="mat-form-field-min">
+                <input
+                  id="content-input"
+                  matInput
+                  #keywordInput
+                  formControlName="content"
+                  placeholder=" {{ ngOrcidKeyword }}"
+                />
+                <mat-hint
+                  class="mat-caption"
+                  *ngIf="keyword.putCode.indexOf('new') < 0"
+                >
+                  <ng-container i18n="@@shared.source">Source:</ng-container>
+                  {{ getSourceName(keyword) }}
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <div
+            class="col no-wrap actions-wrapper no-gutters"
+            [ngClass]="{ privacy: !platform.columns12 }"
+          >
+            <app-privacy-selector
+              [ngClass]="{ selector: !platform.columns12 }"
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              (click)="deleteKeyword(keyword.putCode)"
+              mat-icon-button
+              class="delete-button"
+            >
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="row">
+      <a
+        id="add-keyword"
+        class="col add-more no-gutters"
+        (click)="addKeyword()"
+      >
+        <span class="mat-body-1">
+          <ng-container
+            *ngIf="keywords.length === 0"
+            i18n="@@topBar.addKeyword"
+          >
+            Add a keyword
+          </ng-container>
+          <ng-container
+            *ngIf="keywords.length !== 0"
+            i18n="@@topBar.addAnotherKeyword"
+          >
+            Add another keyword
+          </ng-container>
+        </span>
+      </a>
+    </div>
+  </div>
+</app-modal>

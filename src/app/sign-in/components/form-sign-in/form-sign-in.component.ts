@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -26,10 +27,10 @@ import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
 import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
-import { ERROR_REPORT } from '../../../errors'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { combineLatest } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -73,7 +74,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     private _gtag: GoogleAnalyticsService,
     private _errorHandler: ErrorHandlerService,
     private _signInGuard: SignInGuard,
-    private _userInfo: UserService
+    private _userInfo: UserService,
+    private cd: ChangeDetectorRef
   ) {
     this.signInLocal.type = this.signInType
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
@@ -128,17 +130,16 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       })
       this.addUsernameValidation()
     }
+    this.cd.detectChanges()
   }
 
   ngAfterViewInit(): void {
     this.firstInput.nativeElement.focus()
+    this.cd.detectChanges()
   }
 
   onSubmit() {
     this.addUsernameValidation()
-    this.addUsernameValidation()
-    // fix firefox IOS autofill issue
-    this.authorizationForm.markAllAsTouched()
 
     if (this.authorizationForm.valid) {
       this.signInLocal.data = this.authorizationForm.getRawValue()
@@ -246,24 +247,18 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .subscribe((platform) => {
         if (platform.social || platform.institutional) {
           if (this.signInData) {
-            const {
-              email,
-              firstName,
-              lastName,
-              providerId,
-              linkType,
-            } = this.signInData
+            const { providerId, linkType } = this.signInData
             this._user
               .getUserSession()
               .pipe(first())
               .subscribe((userSession) => {
                 const params = platform.queryParameters
                 this._router.navigate(['/register'], {
+                  /// TODO @leomendoza123 depend only on the user session thirty party login data
+                  /// avoid taking data from the the parameters.
+
                   queryParams: {
                     ...params,
-                    email,
-                    firstName,
-                    lastName,
                     providerId,
                     linkType,
                   },

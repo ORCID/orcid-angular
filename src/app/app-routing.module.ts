@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core'
-import { RouterModule, Routes, UrlSegment } from '@angular/router'
+import { RouterModule, Routes } from '@angular/router'
 
 import {
-  isValidOrcidFormat,
-  URL_PRIVATE_PROFILE,
   ApplicationRoutes,
+  routerPublicPageUrl,
+  routerReactivation,
+  routerThirdPartySignInMatch,
 } from './constants'
 import { AuthenticatedGuard } from './guards/authenticated.guard'
 import { SignInGuard } from './guards/sign-in.guard'
@@ -12,29 +13,18 @@ import { AuthorizeGuard } from './guards/authorize.guard'
 import { RegisterGuard } from './guards/register.guard'
 import { LinkAccountGuard } from './guards/link-account.guard'
 import { LanguageGuard } from './guards/language.guard'
-
-export function matcher(segments: UrlSegment[]) {
-  if (
-    (segments[0] && isValidOrcidFormat(segments[0].path)) ||
-    (segments[0] && segments[0].path.toLowerCase() === URL_PRIVATE_PROFILE)
-  ) {
-    return { consumed: [segments[0]] }
-  }
-  return {
-    consumed: [],
-  }
-}
+import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
 
 const routes: Routes = [
   {
     path: ApplicationRoutes.home,
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
-  // {
-  //   matcher: matcher,
-  //   loadChildren:
-  //   () => import('./profile/profile.module').then(m => m.ProfileModule)
-  // },
+  {
+    matcher: routerPublicPageUrl,
+    loadChildren: () =>
+      import('./record/record.module').then((m) => m.RecordModule),
+  },
   {
     path: ApplicationRoutes.inbox,
     canActivateChild: [AuthenticatedGuard],
@@ -99,7 +89,7 @@ const routes: Routes = [
       import('./search/search.module').then((m) => m.SearchModule),
   },
   {
-    path: ApplicationRoutes.myOrcid,
+    path: ApplicationRoutes.myOrcidTEMP,
     canActivateChild: [LanguageGuard, AuthenticatedGuard],
     loadChildren: () =>
       import('./record/record.module').then((m) => m.RecordModule),
@@ -111,13 +101,25 @@ const routes: Routes = [
       import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
   },
   {
+    matcher: routerThirdPartySignInMatch,
+    canActivateChild: [ThirdPartySigninCompletedGuard],
+    loadChildren: () =>
+      import('./record/record.module').then((m) => m.RecordModule),
+  },
+  {
+    matcher: routerReactivation,
+    canActivateChild: [LanguageGuard, RegisterGuard],
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterModule),
+  },
+  {
     path: '**',
     redirectTo: '/',
   },
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

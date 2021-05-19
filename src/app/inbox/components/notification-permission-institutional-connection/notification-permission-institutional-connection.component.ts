@@ -24,8 +24,4 @@ export class NotificationPermissionInstitutionalConnectionComponent
   constructor(@Inject(WINDOW) private window: Window) {}
 
   ngOnInit(): void {}
-
-  navigateTo(val) {
-    this.window.location.href = val
-  }
 }

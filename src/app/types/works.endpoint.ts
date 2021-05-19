@@ -1,4 +1,5 @@
-import { MonthDayYearDate, Value } from './common.endpoint'
+import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
+import { GroupBase } from './record.endpoint'
 
 export interface Works {
   nextOffset: number
@@ -6,31 +7,8 @@ export interface Works {
   groups: WorkGroup[]
 }
 
-export interface WorkGroup {
-  activePutCode: number
-  defaultPutCode: number
-  groupId: number
-  activeVisibility: string
-  userVersionPresent: boolean
-  externalIdentifiers: ExternalIdentifier[]
+export interface WorkGroup extends GroupBase {
   works: Work[]
-}
-
-export interface ExternalIdentifier {
-  errors: any[]
-  externalIdentifierId: ExternalIdentifierId
-  externalIdentifierType: Value
-  url: Value
-  relationship: Value
-  normalized: Value
-  normalizedUrl: Value
-}
-
-export interface ExternalIdentifierId {
-  errors: any[]
-  value: string
-  required: boolean
-  getRequiredMessage?: any
 }
 
 export interface Citation {
@@ -39,16 +17,6 @@ export interface Citation {
   errors: any[]
   getRequiredMessage?: any
   required: boolean
-}
-
-export interface WorkExternalIdentifier {
-  errors: any[]
-  externalIdentifierId: Value
-  externalIdentifierType: Value
-  url: Value
-  relationship: Value
-  normalized: Value
-  normalizedUrl: Value
 }
 
 export interface Work {
@@ -65,7 +33,7 @@ export interface Work {
   countryCode?: Value
   countryName?: Value
   contributors?: [any] // TODO is this always empty?
-  workExternalIdentifiers: WorkExternalIdentifier[]
+  workExternalIdentifiers: ExternalIdentifier[]
   source: string
   sourceName: string
   title: Value

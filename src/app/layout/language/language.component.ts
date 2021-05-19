@@ -9,7 +9,7 @@ import { LanguageService } from 'src/app/core/language/language.service'
   styleUrls: ['./language.component.scss'],
 })
 export class LanguageComponent implements OnInit {
-  languageMenuOptions
+  languageMenuOptions: { [key: string]: string }
   labelLanguage = $localize`:@@layout.ariaLabelLanguage:language`
 
   constructor(

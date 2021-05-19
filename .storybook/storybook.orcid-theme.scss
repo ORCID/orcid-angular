@@ -13,7 +13,7 @@
     $string-key: inspect($key);
     @if type-of($color) == color and not str-index($string-key, 'contrast') {
       // add the background color for each key
-      .#{$palette-name}-palette-#{$key} {
+      .#{$palette-name}-palette-#{'' + $key} {
         background-color: $color;
       }
     } @else if type-of($color) == color {
