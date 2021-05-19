@@ -208,6 +208,20 @@
                 }
               ]
             },
+            "int": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.int.ts"
+                }
+              ]
+            },
             "en": {
               "localize": ["en"]
             },
