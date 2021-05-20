@@ -6,7 +6,7 @@ import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { RecordPeerReviewService } from '../../../../../core/record-peer-review/record-peer-review.service'
 import { first } from 'rxjs/operators'
 import { RecordPeerReviewImport } from '../../../../../types/record-peer-review-import.endpoint'
-import { environment } from '../../../../../../environments/environment.local'
+import { environment } from '../../../../../../environments/environment'
 
 @Component({
   selector: 'app-modal-peer-reviews',
