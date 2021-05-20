@@ -18,9 +18,15 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   platform: PlatformInfo
   publicOrcid: string
-  expandedContent = true
   affiliations: number
   userRecord: UserRecord
+  expandedContent = true
+  expandedButton = true
+  expandedAffiliations: boolean
+  expandedFundings: boolean
+  expandedWorks: boolean
+  expandedResearchResources: boolean
+  expandedPeerReview: boolean
 
   constructor(
     private _platform: PlatformInfoService,
@@ -71,5 +77,47 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   affiliationsCount(itemsCount: Event) {
     this.affiliations = this.affiliations + +itemsCount
+  }
+
+  expandedByType(event) {
+    switch (event.type) {
+      case 'affiliations':
+        this.expandedAffiliations = event.expanded
+        break
+      case 'fundings':
+        this.expandedFundings = event.expanded
+        break
+      case 'works':
+        this.expandedWorks = event.expanded
+        break
+      case 'research-resources':
+        this.expandedResearchResources = event.expanded
+        break
+      case 'peer-review':
+        this.expandedPeerReview = event.expanded
+        break
+    }
+
+    if (
+      this.expandedAffiliations !== undefined &&
+      this.expandedFundings !== undefined &&
+      this.expandedWorks !== undefined &&
+      this.expandedResearchResources !== undefined &&
+      this.expandedPeerReview !== undefined
+    ) {
+      if (
+        (this.expandedAffiliations &&
+          this.expandedFundings &&
+          this.expandedWorks &&
+          this.expandedPeerReview) ||
+        (!this.expandedAffiliations &&
+          !this.expandedFundings &&
+          !this.expandedWorks &&
+          !this.expandedResearchResources &&
+          !this.expandedPeerReview)
+      ) {
+        this.collapse()
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { first } from 'rxjs/operators'
 import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
@@ -23,6 +23,7 @@ export class PanelsComponent implements OnInit {
   @Input() total
   @Input() isPublicRecord: any = false
   @Input() addModalComponent: ComponentType<any>
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   constructor(
     private _dialog: MatDialog,
@@ -56,6 +57,7 @@ export class PanelsComponent implements OnInit {
   sort() {}
   collapse() {
     this.expandedContent = !this.expandedContent
+    this.expanded.emit(this.expandedContent)
   }
   ngOnInit(): void {}
 }

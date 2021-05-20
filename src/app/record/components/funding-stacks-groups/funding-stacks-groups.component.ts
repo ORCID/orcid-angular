@@ -17,6 +17,7 @@ export class FundingStacksGroupsComponent implements OnInit {
   @Input() isPublicRecord: any = false
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
@@ -64,5 +65,9 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   trackByFundingGroup(index, item: FundingGroup) {
     return item.activePutCode
+  }
+
+  expandedClicked(expanded: boolean) {
+    this.expanded.emit({ type: 'fundings', expanded })
   }
 }

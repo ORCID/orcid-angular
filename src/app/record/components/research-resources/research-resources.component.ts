@@ -32,6 +32,7 @@ export class ResearchResourcesComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -218,5 +219,9 @@ export class ResearchResourcesComponent implements OnInit {
 
   collapse(value: ResearchResource | Item) {
     value.showDetails = !value.showDetails
+  }
+
+  expandedClicked(expanded: boolean) {
+    this.expanded.emit({ type: 'research-resources', expanded })
   }
 }

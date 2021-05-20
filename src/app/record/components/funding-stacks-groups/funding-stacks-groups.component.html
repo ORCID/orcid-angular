@@ -8,6 +8,7 @@
     [total]="userRecord.fundings.length"
     [isPublicRecord]="isPublicRecord"
     [expandedContent]="expandedContent"
+    (expanded)="expandedClicked($event)"
   >
     <ng-container *ngIf="userRecord.fundings.length > 0">
       <app-funding-stack
