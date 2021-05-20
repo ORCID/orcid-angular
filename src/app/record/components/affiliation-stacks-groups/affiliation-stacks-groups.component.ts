@@ -93,25 +93,33 @@ export class AffiliationStacksGroupsComponent implements OnInit {
     switch (type) {
       case 'employment':
         this.expandedEmployment = expanded
-        break;
+        break
       case 'education':
         this.expandedEducation = expanded
-        break;
+        break
       case 'invited':
         this.expandedInvited = expanded
-        break;
+        break
       case 'membership':
         this.expandedMembership = expanded
-        break;
+        break
     }
 
     if (
-      this.expandedEmployment !== undefined  && this.expandedEducation !== undefined &&
-      this.expandedInvited !== undefined && this.expandedMembership !== undefined
+      this.expandedEmployment !== undefined &&
+      this.expandedEducation !== undefined &&
+      this.expandedInvited !== undefined &&
+      this.expandedMembership !== undefined
     ) {
       if (
-        this.expandedEmployment && this.expandedEducation && this.expandedInvited && this.expandedMembership ||
-        !this.expandedEmployment && !this.expandedEducation && !this.expandedInvited && !this.expandedMembership
+        (this.expandedEmployment &&
+          this.expandedEducation &&
+          this.expandedInvited &&
+          this.expandedMembership) ||
+        (!this.expandedEmployment &&
+          !this.expandedEducation &&
+          !this.expandedInvited &&
+          !this.expandedMembership)
       ) {
         this.expanded.emit({ type: 'affiliations', expanded })
       }

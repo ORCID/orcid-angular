@@ -83,30 +83,38 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     switch (event.type) {
       case 'affiliations':
         this.expandedAffiliations = event.expanded
-        break;
+        break
       case 'fundings':
         this.expandedFundings = event.expanded
-        break;
+        break
       case 'works':
         this.expandedWorks = event.expanded
-        break;
+        break
       case 'research-resources':
         this.expandedResearchResources = event.expanded
-        break;
+        break
       case 'peer-review':
         this.expandedPeerReview = event.expanded
-        break;
+        break
     }
 
     if (
-      this.expandedAffiliations !== undefined && this.expandedFundings !== undefined  && this.expandedWorks !== undefined  &&
-      this.expandedResearchResources !== undefined  && this.expandedPeerReview !== undefined
+      this.expandedAffiliations !== undefined &&
+      this.expandedFundings !== undefined &&
+      this.expandedWorks !== undefined &&
+      this.expandedResearchResources !== undefined &&
+      this.expandedPeerReview !== undefined
     ) {
       if (
-        this.expandedAffiliations && this.expandedFundings && this.expandedWorks &&
-        this.expandedPeerReview ||
-        !this.expandedAffiliations && !this.expandedFundings && !this.expandedWorks &&
-        !this.expandedResearchResources && !this.expandedPeerReview
+        (this.expandedAffiliations &&
+          this.expandedFundings &&
+          this.expandedWorks &&
+          this.expandedPeerReview) ||
+        (!this.expandedAffiliations &&
+          !this.expandedFundings &&
+          !this.expandedWorks &&
+          !this.expandedResearchResources &&
+          !this.expandedPeerReview)
       ) {
         this.collapse()
       }

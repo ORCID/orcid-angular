@@ -15,7 +15,7 @@
     [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('employment',$event)"
+    (expanded)="expandedClicked('employment', $event)"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -65,7 +65,7 @@
     [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('education',$event)"
+    (expanded)="expandedClicked('education', $event)"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -116,7 +116,7 @@
     [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('invited',$event)"
+    (expanded)="expandedClicked('invited', $event)"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -165,7 +165,7 @@
     [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('membership',$event)"
+    (expanded)="expandedClicked('membership', $event)"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
