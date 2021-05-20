@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash';
-import { Observable, ReplaySubject } from 'rxjs';
-import { catchError, retry, tap } from 'rxjs/operators';
-import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint';
-import { UserRecordOptions } from 'src/app/types/record.local';
-import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { cloneDeep } from 'lodash'
+import { Observable, ReplaySubject } from 'rxjs'
+import { catchError, retry, tap } from 'rxjs/operators'
+import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
+import { environment } from 'src/environments/environment'
 
-import { ErrorHandlerService } from '../error-handler/error-handler.service';
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
