@@ -100,6 +100,18 @@
                     "
                     [attr.id]="'external-identifier-' + i"
                   >
+                    <i
+                      *ngIf="externalIdentifier?.relationship.value === 'part-of'"
+                       i18n="@@shared.partOf"
+                    >
+                      Part of
+                    </i>
+                    <i
+                      *ngIf="externalIdentifier?.relationship.value === 'funded-by'"
+                      i18n="@@shared.fundedBy"
+                    >
+                      Funded by
+                    </i>
                     <span *ngIf="externalIdentifier.externalIdentifierType">
                       {{
                         externalIdentifier.externalIdentifierType.value
