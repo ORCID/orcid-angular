@@ -122,6 +122,18 @@
                           >
                         </div>
                         <span class="source">
+                          <i
+                            *ngIf="peerReview.externalIdentifiers[0]?.relationship.value === 'part-of'"
+                            i18n="@@shared.partOf"
+                          >
+                            Part of
+                          </i>
+                          <i
+                            *ngIf="peerReview.externalIdentifiers[0]?.relationship.value === 'funded-by'"
+                            i18n="@@shared.fundedBy"
+                          >
+                            Funded by
+                          </i>
                           {{
                             peerReview.externalIdentifiers[0]
                               .externalIdentifierType.value
@@ -203,6 +215,22 @@
                                 .subjectExternalIdentifier
                             "
                           >
+                            <i
+                              *ngIf="
+                                getPeerReview(peerReview.putCode.value).subjectExternalIdentifier?.relationship.value === 'part-of'
+                              "
+                              i18n="@@shared.partOf"
+                            >
+                              Part of
+                            </i>
+                            <i
+                              *ngIf="
+                                getPeerReview(peerReview.putCode.value).subjectExternalIdentifier?.relationship.value === 'funded-by'
+                              "
+                              i18n="@@shared.fundedBy"
+                            >
+                              Funded by
+                            </i>
                             {{
                               getPeerReview(peerReview.putCode.value)
                                 .subjectExternalIdentifier
