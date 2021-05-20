@@ -15,6 +15,7 @@
               i18n="@@shared.expandAll"
               [ngClass]="{ selected: expandedContent }"
               (click)="collapse()"
+              [disabled]="expandedContent"
             >
               Expand all
             </button>
@@ -25,6 +26,7 @@
               i18n="@@shared.collapseAll"
               [ngClass]="{ selected: !expandedContent }"
               (click)="collapse()"
+              [disabled]="!expandedContent"
             >
               Collapse all
             </button>
