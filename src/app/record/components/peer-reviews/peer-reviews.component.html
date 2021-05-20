@@ -123,13 +123,19 @@
                         </div>
                         <span class="source">
                           <i
-                            *ngIf="peerReview.externalIdentifiers[0]?.relationship.value === 'part-of'"
+                            *ngIf="
+                              peerReview.externalIdentifiers[0]?.relationship
+                                .value === 'part-of'
+                            "
                             i18n="@@shared.partOf"
                           >
                             Part of
                           </i>
                           <i
-                            *ngIf="peerReview.externalIdentifiers[0]?.relationship.value === 'funded-by'"
+                            *ngIf="
+                              peerReview.externalIdentifiers[0]?.relationship
+                                .value === 'funded-by'
+                            "
                             i18n="@@shared.fundedBy"
                           >
                             Funded by
@@ -217,7 +223,9 @@
                           >
                             <i
                               *ngIf="
-                                getPeerReview(peerReview.putCode.value).subjectExternalIdentifier?.relationship.value === 'part-of'
+                                getPeerReview(peerReview.putCode.value)
+                                  .subjectExternalIdentifier?.relationship
+                                  .value === 'part-of'
                               "
                               i18n="@@shared.partOf"
                             >
@@ -225,7 +233,9 @@
                             </i>
                             <i
                               *ngIf="
-                                getPeerReview(peerReview.putCode.value).subjectExternalIdentifier?.relationship.value === 'funded-by'
+                                getPeerReview(peerReview.putCode.value)
+                                  .subjectExternalIdentifier?.relationship
+                                  .value === 'funded-by'
                               "
                               i18n="@@shared.fundedBy"
                             >
