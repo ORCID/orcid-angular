@@ -34,26 +34,31 @@
           [isPublicRecord]="publicOrcid"
           [expandedContent]="expandedContent"
           (total)="affiliationsCount($event)"
+          (expanded)="expandedByType($event)"
         ></app-affiliations>
         <app-fundings
           [isPublicRecord]="publicOrcid"
           [expandedContent]="expandedContent"
           (total)="affiliationsCount($event)"
+          (expanded)="expandedByType($event)"
         ></app-fundings>
         <app-work-stack-group
           [isPublicRecord]="publicOrcid"
           [expandedContent]="expandedContent"
           (total)="affiliationsCount($event)"
+          (expanded)="expandedByType($event)"
         ></app-work-stack-group>
         <app-research-resources
           [isPublicRecord]="publicOrcid"
           [expandedContent]="expandedContent"
           (total)="affiliationsCount($event)"
+          (expanded)="expandedByType($event)"
         ></app-research-resources>
         <app-peer-reviews
           [isPublicRecord]="publicOrcid"
           [expandedContent]="expandedContent"
           (total)="affiliationsCount($event)"
+          (expanded)="expandedByType($event)"
         ></app-peer-reviews>
         <div class="orc-font-body-small" *ngIf="publicOrcid">
           <i>

@@ -16,6 +16,7 @@ export class WorkStackGroupComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -49,5 +50,9 @@ export class WorkStackGroupComponent implements OnInit {
 
   trackByWorkGroup(index, item: WorkGroup) {
     return item.defaultPutCode
+  }
+
+  expandedClicked(expanded: boolean) {
+    this.expanded.emit({ type: 'works', expanded })
   }
 }

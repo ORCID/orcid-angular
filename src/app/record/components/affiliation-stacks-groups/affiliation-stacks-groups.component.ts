@@ -21,6 +21,12 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
+
+  expandedEducation: boolean
+  expandedEmployment: boolean
+  expandedInvited: boolean
+  expandedMembership: boolean
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession
@@ -80,6 +86,35 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       return this.profileAffiliationUiGroups.filter((affiliation) => {
         return affiliation.type === type
       })[0]
+    }
+  }
+
+  expandedClicked(type: string, expanded: boolean) {
+    switch (type) {
+      case 'employment':
+        this.expandedEmployment = expanded
+        break;
+      case 'education':
+        this.expandedEducation = expanded
+        break;
+      case 'invited':
+        this.expandedInvited = expanded
+        break;
+      case 'membership':
+        this.expandedMembership = expanded
+        break;
+    }
+
+    if (
+      this.expandedEmployment !== undefined  && this.expandedEducation !== undefined &&
+      this.expandedInvited !== undefined && this.expandedMembership !== undefined
+    ) {
+      if (
+        this.expandedEmployment && this.expandedEducation && this.expandedInvited && this.expandedMembership ||
+        !this.expandedEmployment && !this.expandedEducation && !this.expandedInvited && !this.expandedMembership
+      ) {
+        this.expanded.emit({ type: 'affiliations', expanded })
+      }
     }
   }
 }

@@ -10,6 +10,7 @@
     [type]="'research-resources'"
     [total]="userRecord.researchResources.groups.length"
     [expandedContent]="expandedContent"
+    (expanded)="expandedClicked($event)"
     id="research-resources-panel"
   >
     <ng-container *ngIf="userRecord.researchResources.groups.length > 0">

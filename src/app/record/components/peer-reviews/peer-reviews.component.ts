@@ -23,6 +23,7 @@ export class PeerReviewsComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   modalPeerReviewComponent = ModalPeerReviewsComponent
 
@@ -137,5 +138,9 @@ export class PeerReviewsComponent implements OnInit {
 
   collapse(peerReview: PeerReview) {
     peerReview.showDetails = !peerReview.showDetails
+  }
+
+  expandedClicked(expanded: boolean) {
+    this.expanded.emit({ type: 'peer-review', expanded })
   }
 }

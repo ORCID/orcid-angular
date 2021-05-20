@@ -8,6 +8,7 @@
     [isPublicRecord]="isPublicRecord"
     [addModalComponent]="modalPeerReviewComponent"
     [expandedContent]="expandedContent"
+    (expanded)="expandedClicked($event)"
   >
     <ng-container *ngIf="userRecord.peerReviews.length > 0">
       <app-panel
