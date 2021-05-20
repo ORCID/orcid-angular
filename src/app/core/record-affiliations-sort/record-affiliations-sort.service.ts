@@ -21,11 +21,33 @@ export class AffiliationsSortService {
     ascending = true
   ): AffiliationUIGroup[] {
     affiliationGroups.forEach((x) => {
-      const affiliationGroup: AffiliationGroup[] = x.affiliationGroup
-      affiliationGroup.sort((a, b) => {
-        const dateA = this.yearMonthDaytoDate(a.defaultAffiliation.startDate)
-        const dateB = this.yearMonthDaytoDate(b.defaultAffiliation.startDate)
-        return (dateA.getTime() - dateB.getTime()) * (ascending ? -1 : 1)
+      let affiliationGroup: AffiliationGroup[] = x.affiliationGroup
+      affiliationGroup = affiliationGroup.sort((a, b) => {
+        const dateStartA = this.yearMonthDaytoDate(
+          a.defaultAffiliation.startDate
+        )
+        const dateStartB = this.yearMonthDaytoDate(
+          b.defaultAffiliation.startDate
+        )
+        const dateFinishA = this.yearMonthDaytoDate(
+          a.defaultAffiliation.endDate
+        )
+        const dateFinishB = this.yearMonthDaytoDate(
+          b.defaultAffiliation.endDate
+        )
+
+        // If the end date is not the same use it to sort
+        if (dateFinishA.getTime() !== dateFinishB.getTime()) {
+          return (
+            (dateFinishA.getTime() - dateFinishB.getTime()) *
+            (ascending ? -1 : 1)
+          )
+        } else {
+          // If the end date is the same use the start date to sort
+          return (
+            (dateStartA.getTime() - dateStartB.getTime()) * (ascending ? -1 : 1)
+          )
+        }
       })
     })
     return affiliationGroups
