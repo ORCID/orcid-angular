@@ -37,7 +37,7 @@ export class AppComponent {
     _googleAnalytics: GoogleAnalyticsService,
     _zendesk: ZendeskService,
     _userService: UserService,
-    _robotsMetaTags: RobotsMetaTagsService,
+    _robotsMetaTags: RobotsMetaTagsService
   ) {
     _platformInfo
       .get()
