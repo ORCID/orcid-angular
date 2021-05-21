@@ -112,7 +112,7 @@
         <ng-container i18n="@@shared.otherOrganization"
           >Other organization identifiers provided by</ng-container
         >
-        {{ orgDisambiguated.sourceType | titlecase }}
+        {{ orgDisambiguated.sourceType | uppercase }}
       </h3>
       <div
         *ngFor="let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers"
