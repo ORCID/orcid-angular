@@ -41,28 +41,9 @@
         {{ funding.url.value }}
       </a>
     </div>
-    <div
-      *ngFor="let extId of funding.externalIdentifiers"
-      class="padding-level-3"
-    >
-      {{ extId.externalIdentifierType.value | uppercase }}:
-      <div
-        *ngIf="extId.url && extId.url.value; then urlExtId; else plainExtId"
-      ></div>
-      <ng-template #urlExtId>
-        <a
-          class="underline"
-          href="{{ extId.url.value }}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{ extId.externalIdentifierId.value }}
-        </a>
-      </ng-template>
-      <ng-template #plainExtId>{{
-        extId.externalIdentifierId.value
-      }}</ng-template>
-    </div>
+    <app-display-external-ids
+      [externalIdentifiers]="funding.externalIdentifiers"
+    ></app-display-external-ids>
   </div>
 
   <div align-end>
