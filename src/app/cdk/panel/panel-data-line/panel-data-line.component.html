@@ -7,16 +7,10 @@
   }"
 >
   <i class="prefixTitle" *ngIf="prefixTitle">
-    <ng-container
-      *ngIf="prefixTitle === 'part-of'"
-      i18n="@@shared.partOf"
-    >
+    <ng-container *ngIf="prefixTitle === 'part-of'" i18n="@@shared.partOf">
       Part of
     </ng-container>
-    <ng-container
-      *ngIf="prefixTitle === 'funded-by'"
-      i18n="@@shared.fundedBy"
-    >
+    <ng-container *ngIf="prefixTitle === 'funded-by'" i18n="@@shared.fundedBy">
       Funded by
     </ng-container>
   </i>
