@@ -6,7 +6,20 @@
     'secondary-text': secondaryText
   }"
 >
-  <i class="prefixTitle" *ngIf="prefixTitle">{{ prefixTitle }}</i>
+  <i class="prefixTitle" *ngIf="prefixTitle">
+    <ng-container
+      *ngIf="prefixTitle === 'part-of'"
+      i18n="@@shared.partOf"
+    >
+      Part of
+    </ng-container>
+    <ng-container
+      *ngIf="prefixTitle === 'funded-by'"
+      i18n="@@shared.fundedBy"
+    >
+      Funded by
+    </ng-container>
+  </i>
   {{ title }}
   <ng-container *ngIf="detail">&#x200E;({{ detail }})&#x200E;</ng-container>
 </h5>
