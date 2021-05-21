@@ -189,7 +189,7 @@
   </ng-container>
 
   <!-- CONTRIBUTORS -->
-  <ng-container class="margin-top-1" *ngIf="funding.contributors">
+  <ng-container class="margin-top-1" *ngIf="funding?.contributors?.length > 0">
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@funding.contributors">
         Contributors
