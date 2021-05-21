@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { cloneDeep } from 'lodash'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, retry, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
-import { FundingsSortService } from '../record-fundings-sort/record-fundings-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { cloneDeep } from 'lodash'
-import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +20,7 @@ export class RecordFundingsService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-    private _fundingsSortService: FundingsSortService
+    private _errorHandler: ErrorHandlerService
   ) {}
 
   getFundings(
@@ -86,7 +84,6 @@ export class RecordFundingsService {
       )
       .pipe(
         retry(3),
-        map((data) => this._fundingsSortService.transform(data)),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
