@@ -41,15 +41,25 @@
       <button
         *ngIf="!isPublicRecord && type !== 'research-resources'"
         mat-icon-button
+        class="orc-font-body-small"
       >
         <mat-icon (click)="add()" class="large-material-icon" id="add-button">
           add_circle
         </mat-icon>
+        <ng-container i18n="@@shared.add">
+          Add
+        </ng-container>
       </button>
-      <button mat-icon-button>
+      <button
+        mat-icon-button
+        class="orc-font-body-small"
+      >
         <mat-icon (click)="sort()" class="large-material-icon" id="sort-button">
           sort
         </mat-icon>
+        <ng-container i18n="@@shared.sort">
+          Sort
+        </ng-container>
       </button>
     </div>
   </div>
