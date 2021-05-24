@@ -94,44 +94,10 @@
                       >
                     </span>
                   </div>
-                  <div
-                    *ngFor="
-                      let externalIdentifier of research.externalIdentifiers;
-                      index as i
-                    "
-                    [attr.id]="'external-identifier-' + i"
-                  >
-                    <i
-                      *ngIf="
-                        externalIdentifier?.relationship.value === 'part-of'
-                      "
-                      i18n="@@shared.partOf"
-                    >
-                      Part of
-                    </i>
-                    <i
-                      *ngIf="
-                        externalIdentifier?.relationship.value === 'funded-by'
-                      "
-                      i18n="@@shared.fundedBy"
-                    >
-                      Funded by
-                    </i>
-                    <span *ngIf="externalIdentifier.externalIdentifierType">
-                      {{
-                        externalIdentifier.externalIdentifierType.value
-                          | uppercase
-                      }}:
-                    </span>
-                    <a
-                      *ngIf="externalIdentifier.externalIdentifierId"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="{{ externalIdentifier.externalIdentifierId.value }}"
-                    >
-                      {{ externalIdentifier.externalIdentifierId.value }}
-                    </a>
-                  </div>
+                  <app-display-external-ids
+                    [externalIdentifiers]="research.externalIdentifiers"
+                    [noBoldTitle]="true"
+                  ></app-display-external-ids>
                 </div>
                 <div class="buttons-container">
                   <a

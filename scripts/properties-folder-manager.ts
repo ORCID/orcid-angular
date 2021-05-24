@@ -269,6 +269,9 @@ From the many properties on Orcid Source that have the same english value of ${p
       return this.dataToProperties(data, fileName, language)
     } catch {
       console.warn(filePath, '- does not exists ')
+      if (language === 'en') {
+        throw 'The source file for is missing'
+      }
     }
   }
 
@@ -347,6 +350,8 @@ From the many properties on Orcid Source that have the same english value of ${p
   generateTestingLanguages() {
     console.info('Generate testing languages ________')
     const testingLanguages = ['rl', 'lr', 'xx']
+    console.log(Object.keys(this.files))
+
     Object.keys(this.files).forEach((fileName) => {
       console.info('fileName', fileName)
       testingLanguages.forEach((testingLangue) => {
@@ -357,6 +362,10 @@ From the many properties on Orcid Source that have the same english value of ${p
 
           this.files[fileName][testingLangue] = {}
         }
+        if (!this.files[fileName]['en']) {
+          console.log('** The source file for ', fileName, ' was not found')
+        }
+
         Object.keys(this.files[fileName]['en']).forEach((key) => {
           this.files[fileName][testingLangue][key] = {
             value: testingLangue === 'xx' ? 'X' : testingLangue.toUpperCase(),
