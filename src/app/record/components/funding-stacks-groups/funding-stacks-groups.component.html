@@ -9,6 +9,8 @@
     [isPublicRecord]="isPublicRecord"
     [expandedContent]="expandedContent"
     (expanded)="expandedClicked($event)"
+    [labelAddButton]="labelAddButton"
+    [labelSortButton]="labelSortButton"
   >
     <ng-container *ngIf="userRecord.fundings.length > 0">
       <app-funding-stack

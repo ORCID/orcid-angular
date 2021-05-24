@@ -47,6 +47,7 @@ import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand
     PanelsComponent,
     PanelDataLineComponent,
     PanelElementSourceComponent,
+    PanelExpandButtonsComponent,
   ],
 })
 export class PanelModule {}

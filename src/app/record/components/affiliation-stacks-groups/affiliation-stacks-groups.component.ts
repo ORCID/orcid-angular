@@ -18,6 +18,16 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
+
+  labelAddEmploymentButton = $localize`:@@shared.addEmployment:Add Employment`
+  labelSortEmploymentButton = $localize`:@@shared.sortEmployments:Sort Employments`
+  labelEducationAddButton = $localize`:@@shared.addEducation:Add Education`
+  labelEducationSortButton = $localize`:@@shared.sortEducation:Sort Education`
+  labelInvitedAddButton = $localize`:@@shared.addInvited:Add Invited Position`
+  labelInvitedSortButton = $localize`:@@shared.sortInvited:Sort Invited Positions`
+  labelMembershipAddButton = $localize`:@@shared.addMemberships:Add Membership`
+  labelMembershipSortButton = $localize`:@@shared.sortMemberships:Sort Memberships`
+
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()

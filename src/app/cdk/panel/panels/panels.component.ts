@@ -24,6 +24,8 @@ export class PanelsComponent implements OnInit {
   @Input() isPublicRecord: any = false
   @Input() addModalComponent: ComponentType<any>
   @Output() expanded: EventEmitter<any> = new EventEmitter()
+  @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
+  @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
 
   constructor(
     private _dialog: MatDialog,
