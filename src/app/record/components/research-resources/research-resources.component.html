@@ -195,7 +195,7 @@
                       <ng-container i18n="@@shared.otherOrganization">
                         Other organization identifiers provided by
                       </ng-container>
-                      {{ organizationDisambiguated.sourceType | titlecase }}
+                      {{ organizationDisambiguated.sourceType | uppercase }}
                     </h3>
                     <div
                       *ngFor="
@@ -478,7 +478,7 @@
                                 </ng-container>
                                 {{
                                   organizationDisambiguatedNested.sourceType
-                                    | titlecase
+                                    | uppercase
                                 }}
                               </h3>
                               <div
@@ -522,6 +522,7 @@
           </app-panel-data>
           <app-panel-source
             [sourceName]="research.sourceName || research.source"
+            [clickableSource]="false"
             [assertionOriginClientId]="research.assertionOriginClientId"
             [assertionOriginName]="research.assertionOriginName"
             [assertionOriginOrcid]="research.assertionOriginOrcid"

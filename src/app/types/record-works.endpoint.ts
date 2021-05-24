@@ -1,4 +1,5 @@
 import {
+  Contributor,
   ExternalIdentifier,
   MonthDayYearDate,
   Value,
@@ -14,7 +15,7 @@ export interface Work extends AssertionBase {
   languageName?: any
   citation?: Citation
   countryCode?: any
-  contributors?: any
+  contributors?: Contributor[]
   workExternalIdentifiers: ExternalIdentifier[]
   title: Value
   subtitle?: any
