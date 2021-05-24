@@ -14,6 +14,7 @@ import {
   preserveWhitespaces: true,
 })
 export class PanelDataLineComponent implements OnInit {
+  @Input() noBoldTitle = false
   @Input() url
   @Input() title
   @Input() detail

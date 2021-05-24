@@ -121,34 +121,10 @@
                             >Review identifier(s)</b
                           >
                         </div>
-                        <span class="source">
-                          <i
-                            *ngIf="
-                              peerReview.externalIdentifiers[0]?.relationship
-                                ?.value === 'part-of'
-                            "
-                            i18n="@@shared.partOf"
-                          >
-                            Part of
-                          </i>
-                          <i
-                            *ngIf="
-                              peerReview.externalIdentifiers[0]?.relationship
-                                ?.value === 'funded-by'
-                            "
-                            i18n="@@shared.fundedBy"
-                          >
-                            Funded by
-                          </i>
-                          {{
-                            peerReview.externalIdentifiers[0]
-                              ?.externalIdentifierType?.value
-                          }}:
-                          {{
-                            peerReview.externalIdentifiers[0]
-                              ?.externalIdentifierId?.value
-                          }}
-                        </span>
+                        <app-display-external-ids
+                          [externalIdentifiers]="peerReview.externalIdentifiers"
+                          [noBoldTitle]="true"
+                        ></app-display-external-ids>
                       </div>
                       <div class="details">
                         <div>
