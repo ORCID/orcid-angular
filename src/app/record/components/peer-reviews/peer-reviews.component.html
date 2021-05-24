@@ -125,7 +125,7 @@
                           <i
                             *ngIf="
                               peerReview.externalIdentifiers[0]?.relationship
-                                .value === 'part-of'
+                                ?.value === 'part-of'
                             "
                             i18n="@@shared.partOf"
                           >
@@ -134,7 +134,7 @@
                           <i
                             *ngIf="
                               peerReview.externalIdentifiers[0]?.relationship
-                                .value === 'funded-by'
+                                ?.value === 'funded-by'
                             "
                             i18n="@@shared.fundedBy"
                           >
@@ -142,11 +142,11 @@
                           </i>
                           {{
                             peerReview.externalIdentifiers[0]
-                              .externalIdentifierType.value
+                              ?.externalIdentifierType?.value
                           }}:
                           {{
                             peerReview.externalIdentifiers[0]
-                              .externalIdentifierId.value
+                              ?.externalIdentifierId?.value
                           }}
                         </span>
                       </div>
@@ -158,8 +158,8 @@
                         </div>
                         <p>
                           {{
-                            getPeerReview(peerReview.putCode.value).orgName
-                              .value
+                            getPeerReview(peerReview.putCode.value)?.orgName
+                              ?.value
                           }}, ({{
                             getPeerReview(peerReview.putCode.value)?.city
                               ?.value
@@ -177,7 +177,15 @@
                           }})
                         </p>
                       </div>
-                      <div class="details">
+                      <div
+                        class="details"
+                        *ngIf="
+                          getPeerReview(peerReview.putCode.value)?.subjectName
+                            ?.value &&
+                          getPeerReview(peerReview.putCode.value)?.subjectType
+                            ?.value
+                        "
+                      >
                         <b i18n="@@peerReview.reviewSubject">
                           Review subject
                         </b>
@@ -185,7 +193,7 @@
                           <ng-container
                             *ngIf="
                               getPeerReview(peerReview.putCode.value)
-                                .subjectName
+                                ?.subjectName?.value
                             "
                           >
                             {{
@@ -196,7 +204,7 @@
                           <ng-container
                             *ngIf="
                               getPeerReview(peerReview.putCode.value)
-                                .subjectType
+                                ?.subjectType?.value
                             "
                           >
                             ({{
@@ -207,7 +215,7 @@
                           <div
                             *ngIf="
                               getPeerReview(peerReview.putCode.value)
-                                .subjectContainerName
+                                ?.subjectContainerName?.value
                             "
                           >
                             {{
@@ -215,17 +223,12 @@
                                 .subjectContainerName.value
                             }}
                           </div>
-                          <div
-                            *ngIf="
-                              getPeerReview(peerReview.putCode.value)
-                                .subjectExternalIdentifier
-                            "
-                          >
+                          <div>
                             <i
                               *ngIf="
                                 getPeerReview(peerReview.putCode.value)
-                                  .subjectExternalIdentifier?.relationship
-                                  .value === 'part-of'
+                                  ?.subjectExternalIdentifier?.relationship
+                                  ?.value === 'part-of'
                               "
                               i18n="@@shared.partOf"
                             >
@@ -234,8 +237,8 @@
                             <i
                               *ngIf="
                                 getPeerReview(peerReview.putCode.value)
-                                  .subjectExternalIdentifier?.relationship
-                                  .value === 'funded-by'
+                                  ?.subjectExternalIdentifier?.relationship
+                                  ?.value === 'funded-by'
                               "
                               i18n="@@shared.fundedBy"
                             >
@@ -243,39 +246,17 @@
                             </i>
                             {{
                               getPeerReview(peerReview.putCode.value)
-                                .subjectExternalIdentifier
-                                .externalIdentifierType.value | uppercase
+                                ?.subjectExternalIdentifier
+                                ?.externalIdentifierType?.value | uppercase
                             }}
                             :
                             {{
                               getPeerReview(peerReview.putCode.value)
-                                .subjectExternalIdentifier.externalIdentifierId
-                                .value
+                                ?.subjectExternalIdentifier.externalIdentifierId
+                                ?.value
                             }}
                           </div>
                         </div>
-                      </div>
-                      <div class="details">
-                        <div>
-                          <b i18n="@@shared.added"> Added </b>
-                        </div>
-                        <p>
-                          {{
-                            getPeerReview(peerReview.putCode.value).createdDate
-                              | monthDayYearDateToString
-                          }}
-                        </p>
-                      </div>
-                      <div class="details">
-                        <div>
-                          <b i18n="@@shared.lastModified"> Last modified </b>
-                        </div>
-                        <p>
-                          {{
-                            getPeerReview(peerReview.putCode.value).createdDate
-                              | monthDayYearDateToString
-                          }}
-                        </p>
                       </div>
                     </app-panel-element>
                   </app-panel-data>
