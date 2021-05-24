@@ -96,7 +96,7 @@ export interface AssertionBase {
   errors?: any[]
   displayIndex?: number
   iso2Country?: Value
-  countryName?: string
+  countryName?: Value
   commonName?: string
   reference?: string
   url?: any
