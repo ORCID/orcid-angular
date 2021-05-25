@@ -24,6 +24,10 @@ app-panel {
   }
 }
 
+app-top-bar-actions {
+  margin-bottom: 10px;
+}
+
 .orc-font-body {
   margin: unset;
 }
@@ -38,7 +42,6 @@ app-panel {
 
     .names {
       min-height: 64px;
-      margin-left: 10px;
       padding: 16px;
       border: solid 1px;
       border-radius: 4px;
@@ -55,7 +58,6 @@ app-panel {
 
     .other-names {
       min-height: 64px;
-      margin-right: 20px;
       border: solid 1px;
       border-radius: 4px;
     }

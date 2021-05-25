@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TopBarMyPublicRecidPreviewComponent } from './top-bar-my-public-recid-preview.component'
+import { TopBarMyPublicRecidPreviewComponent } from './top-bar-my-public-record-preview.component'
 
 describe('TopBarMyPublicRecidPreviewComponent', () => {
   let component: TopBarMyPublicRecidPreviewComponent
