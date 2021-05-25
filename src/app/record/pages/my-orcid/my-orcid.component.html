@@ -13,9 +13,8 @@
               color="primary"
               type="button"
               i18n="@@shared.expandAll"
-              [ngClass]="{ selected: expandedContent }"
               (click)="collapse()"
-              [disabled]="expandedContent"
+              *ngIf="!expandedContent"
             >
               Expand all
             </button>
@@ -24,9 +23,8 @@
               color="primary"
               type="button"
               i18n="@@shared.collapseAll"
-              [ngClass]="{ selected: !expandedContent }"
               (click)="collapse()"
-              [disabled]="!expandedContent"
+              *ngIf="expandedContent"
             >
               Collapse all
             </button>
