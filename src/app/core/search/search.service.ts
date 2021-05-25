@@ -122,11 +122,15 @@ export class SearchService {
   }
 
   private setEdismaxAndEncodedUrlWithPagination(searchStream, querryParam) {
-    const bq = encodeURIComponent(`current-institution-affiliation-name:[* TO *]^100.0 past-institution-affiliation-name:[* TO *]^70`)
+    const bq = encodeURIComponent(
+      `current-institution-affiliation-name:[* TO *]^100.0 past-institution-affiliation-name:[* TO *]^70`
+    )
     return (
-      `?bq=` + bq + `&defType=edismax&q=${encodeURIComponent(searchStream)}` +
+      `?bq=` +
+      bq +
+      `&defType=edismax&q=${encodeURIComponent(searchStream)}` +
       this.handlePagination(querryParam)
-    )    
+    )
   }
 
   private encodeUrlWithPagination(searchStream, querryParam) {
