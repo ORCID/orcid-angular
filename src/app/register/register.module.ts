@@ -29,7 +29,7 @@ import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { BackendErrorComponent } from './components/backend-error/backend-error.component'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module';
+import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
 @NgModule({
   declarations: [

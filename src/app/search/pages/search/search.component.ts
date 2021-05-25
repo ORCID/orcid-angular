@@ -38,13 +38,13 @@ export class SearchComponent implements OnInit {
           this.pageSize = value.pageSize || 50
           this.loadingNewResults = true
         }),
-          // Call the backend to get search results
-          switchMap((value) =>
-            _searchService.search(value).pipe(
-              retry(3),
-              catchError((err) => EMPTY)
-            )
+        // Call the backend to get search results
+        switchMap((value) =>
+          _searchService.search(value).pipe(
+            retry(3),
+            catchError((err) => EMPTY)
           )
+        )
       )
       .subscribe((data) => {
         this.loadingNewResults = false

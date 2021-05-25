@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { UserInfoService } from './user-info.service';
+import { UserInfoService } from './user-info.service'
 
 describe('UserInfoService', () => {
-  let service: UserInfoService;
+  let service: UserInfoService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(UserInfoService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(UserInfoService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})
