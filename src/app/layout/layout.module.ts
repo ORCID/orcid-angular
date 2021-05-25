@@ -55,6 +55,7 @@ import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
     FooterComponent,
     SkipMainNavComponent,
     BannersComponent,
+    StatisticsComponent,
   ],
 })
 export class LayoutModule {}

@@ -1,3 +1,5 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
 :host {
   width: 100%;
 }
@@ -5,6 +7,31 @@
 h2 {
   margin-top: 32px;
   margin-bottom: 20px;
+}
+
+app-main {
+  padding-bottom: 180px !important;
+}
+
+app-side-bar {
+  padding-bottom: 40px !important;
+}
+
+app-statistics {
+  position: absolute;
+  right: 24px;
+  bottom: 148px;
+  justify-content: flex-end;
+}
+
+main#main {
+  flex-direction: column;
+  margin-bottom: $spacing-large;
+  padding-top: 48px;
+}
+
+.mobile {
+  bottom: 400px !important;
 }
 
 .activities {
