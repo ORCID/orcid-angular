@@ -27,6 +27,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   expandedWorks: boolean
   expandedResearchResources: boolean
   expandedPeerReview: boolean
+  recordWithIssues: boolean
 
   constructor(
     private _platform: PlatformInfoService,
@@ -57,6 +58,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
       })
 

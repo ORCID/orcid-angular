@@ -30,6 +30,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   familyName: String = ''
   creditName: String = ''
   expandedContent = false
+  recordWithIssues: boolean
 
   constructor(
     private _platform: PlatformInfoService,
@@ -51,6 +52,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
         this.setNames(userRecord)
       })
   }

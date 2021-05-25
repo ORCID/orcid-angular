@@ -5,14 +5,14 @@ import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
-  selector: 'app-top-bar-my-public-recid-preview',
-  templateUrl: './top-bar-my-public-recid-preview.component.html',
+  selector: 'app-top-bar-my-public-record-preview',
+  templateUrl: './top-bar-my-public-record-preview.component.html',
   styleUrls: [
-    './top-bar-my-public-recid-preview.component.scss',
-    './top-bar-my-public-recid-preview.component.scss-theme.scss',
+    './top-bar-my-public-record-preview.component.scss',
+    './top-bar-my-public-record-preview.component.scss-theme.scss',
   ],
 })
-export class TopBarMyPublicRecidPreviewComponent implements OnInit {
+export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   @Input() isPublicRecord: string
   isMyPublicRecord = false
 

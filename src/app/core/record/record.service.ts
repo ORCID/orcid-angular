@@ -9,6 +9,7 @@ import {
   Person,
   PersonIdentifierEndpoint,
   Preferences,
+  UserInfo,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
@@ -40,6 +41,7 @@ import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
+import { UserInfoService } from '../user-info/user-info.service'
 
 @Injectable({
   providedIn: 'root',
@@ -64,7 +66,8 @@ export class RecordService {
     private _recordResearchResourceService: RecordResearchResourceService,
     private _recordWorkService: RecordWorksService,
     private _recordPerson: RecordPersonService,
-    private _recordPublicSidebar: RecordPublicSideBarService
+    private _recordPublicSidebar: RecordPublicSideBarService,
+    private _userInfo: UserInfoService
   ) {}
 
   headers = new HttpHeaders({
@@ -107,6 +110,7 @@ export class RecordService {
         this._recordResearchResourceService.getResearchResourcePage(options),
         this._recordWorkService.getWorks(options),
         this.getLastModifiedTime(options),
+        this._userInfo.getUserInfo(options),
       ])
         .pipe(
           tap(
@@ -127,6 +131,7 @@ export class RecordService {
               researchResources,
               works,
               lastModifiedTime,
+              userInfo,
             ]) => {
               this.recordSubject$.next({
                 person: person as Person,
@@ -145,6 +150,7 @@ export class RecordService {
                 researchResources: researchResources as ResearchResources,
                 works: works as WorksEndpoint,
                 lastModifiedTime: lastModifiedTime as any,
+                userInfo: userInfo as UserInfo,
               })
             }
           )

@@ -42,6 +42,7 @@ import { UserStatus } from '../../types/userStatus.endpoint'
 import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
+import { UserInfoService } from '../user-info/user-info.service'
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +53,8 @@ export class UserService {
     private _errorHandler: ErrorHandlerService,
     private _platform: PlatformInfoService,
     private _oauth: OauthService,
-    private _disco: DiscoService
+    private _disco: DiscoService,
+    private _userInfo: UserInfoService
   ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -64,12 +66,6 @@ export class UserService {
     forceSessionUpdate: boolean
     postLoginUpdate: boolean
   }>()
-
-  private getUserInfo(): Observable<UserInfo> {
-    return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
-      withCredentials: true,
-    })
-  }
 
   public getUserStatus(): Observable<boolean> {
     return this._http
@@ -233,7 +229,7 @@ export class UserService {
     thirdPartyAuthData: ThirdPartyAuthData
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
-    const $userInfo = this.getUserInfo().pipe(this.handleErrors)
+    const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $oauthSession = this.getOauthSession(updateParameters)
     const $thirdPartyAuthData = this.getThirdPartySignInData()

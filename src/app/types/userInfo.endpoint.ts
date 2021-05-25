@@ -1,6 +1,9 @@
 export interface UserInfo {
   EFFECTIVE_USER_ORCID: string
   PRIMARY_EMAIL: string
+  PRIMARY_RECORD?: string
+  IS_DEACTIVATED: string
+  IS_LOCKED: string
   ADMIN_MENU?: string
   DEVELOPER_TOOLS_ENABLED: string
   IS_PRIMARY_EMAIL_VERIFIED: string
@@ -11,4 +14,5 @@ export interface UserInfo {
   IN_DELEGATION_MODE: string
   LAST_MODIFIED: string
   SELF_SERVICE_MENU?: string
+  RECORD_WITH_ISSUES: boolean
 }
