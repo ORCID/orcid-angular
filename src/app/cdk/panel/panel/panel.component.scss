@@ -5,11 +5,14 @@
 }
 .header {
   box-sizing: border-box;
-  padding: 16px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 56px;
+  h2 {
+    margin: 0;
+  }
 }
 
 .expand-button {
