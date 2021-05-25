@@ -7,12 +7,12 @@
   <div class="source-items">
     <div>
       <ng-container *ngIf="!topPanelOfTheStackMode && clickableSource">
-        <ng-container i18n="@@record.source">Source</ng-container
+        <strong i18n="@@record.source">Source</strong
         ><ng-container>: </ng-container
         ><a (click)="clickDisplayAsTopPanelOfTheStack()">{{ sourceName }}</a>
       </ng-container>
       <div *ngIf="topPanelOfTheStackMode || !clickableSource">
-        <ng-container i18n="@@record.source">Source</ng-container>:
+        <strong i18n="@@record.source">Source</strong>:
         <ng-container
           *ngIf="
             assertionOriginClientId && assertionOriginClientId !== sourceName

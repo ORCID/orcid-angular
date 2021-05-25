@@ -9,6 +9,8 @@
     [addModalComponent]="modalPeerReviewComponent"
     [expandedContent]="expandedContent"
     (expanded)="expandedClicked($event)"
+    [labelAddButton]="labelAddButton"
+    [labelSortButton]="labelSortButton"
   >
     <ng-container *ngIf="userRecord.peerReviews.length > 0">
       <app-panel

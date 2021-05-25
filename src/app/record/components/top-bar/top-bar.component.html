@@ -151,18 +151,10 @@
               </ng-container>
             </div>
             <div>
-              <button
-                mat-icon-button
-                (click)="collapse()"
-                id="expand-content-button"
-              >
-                <mat-icon class="large-material-icon" *ngIf="expandedContent"
-                  >keyboard_arrow_down
-                </mat-icon>
-                <mat-icon class="large-material-icon" *ngIf="!expandedContent"
-                  >keyboard_arrow_up
-                </mat-icon>
-              </button>
+              <app-panel-expand-buttons
+                (toggle)="collapse()"
+                [openState]="expandedContent"
+              ></app-panel-expand-buttons>
             </div>
           </div>
         </div>

@@ -55,7 +55,7 @@
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
   <!-- URL -->
 
-  <app-display-attribute *ngIf="affiliation.url.value !== ''">
+  <app-display-attribute *ngIf="affiliation?.url?.value">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
 
     <div>
