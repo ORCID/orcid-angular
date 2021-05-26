@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-
 import { TopBarMyPublicRecordPreviewComponent } from './top-bar-my-public-record-preview.component'
 
 describe('TopBarMyPublicRecordPreviewComponent', () => {
