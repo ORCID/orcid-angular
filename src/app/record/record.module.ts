@@ -36,8 +36,9 @@ import { WorkStackComponent } from './components/work-stack/work-stack.component
 import { WorkComponent } from './components/work/work.component'
 import { TopBarActionsComponent } from './components/top-bar-actions/top-bar-actions.component'
 import { MatDividerModule } from '@angular/material/divider'
-import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-public-recid-preview/top-bar-my-public-recid-preview.component'
+import { TopBarMyPublicRecordPreviewComponent } from './components/top-bar-my-public-record-preview/top-bar-my-public-record-preview.component'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     WorkStackComponent,
     WorkComponent,
     TopBarActionsComponent,
-    TopBarMyPublicRecidPreviewComponent,
+    TopBarMyPublicRecordPreviewComponent,
+    TopBarRecordIssuesComponent,
   ],
   imports: [
     CommonModule,

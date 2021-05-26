@@ -13,21 +13,21 @@ export class RobotsMetaTagsService {
   constructor(private meta: Meta) {}
 
   addRobotMetaTags(): HTMLMetaElement[] {
-    if (!environment.production) {
-      return this.meta.addTags([
-        { name: this.google, content: 'noindex' },
-        {
-          name: this.robots,
-          content: 'noindex',
-        },
-        ,
-        { name: this.baiduSpider, content: 'noindex' },
-      ])
-    }
+    return this.meta.addTags([
+      { name: this.google, content: 'noindex' },
+      {
+        name: this.robots,
+        content: 'noindex',
+      },
+      ,
+      { name: this.baiduSpider, content: 'noindex' },
+    ])
   }
   removeRobotMetaTags() {
-    this.meta.removeTag(`property="${this.google}"`)
-    this.meta.removeTag(`property="${this.robots}"`)
-    this.meta.removeTag(`property="${this.baiduSpider}"`)
+    if (!environment.production) {
+      this.meta.removeTag(`property="${this.google}"`)
+      this.meta.removeTag(`property="${this.robots}"`)
+      this.meta.removeTag(`property="${this.baiduSpider}"`)
+    }
   }
 }

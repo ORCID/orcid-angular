@@ -270,7 +270,7 @@ From the many properties on Orcid Source that have the same english value of ${p
     } catch {
       console.warn(filePath, '- does not exists ')
       if (language === 'en') {
-        throw 'The source file for is missing'
+        throw 'The source file is missing'
       }
     }
   }
@@ -395,12 +395,8 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
     return [
       'admin',
       'about',
-      'email_added_as_delegate',
       'email_admin_delegate_request',
-      'email_amend',
-      'email_api_record_creation',
       'email_auto_deprecate',
-      'email_claim_reminder',
       'email_common',
       'email_deactivate',
       'email_digest',
@@ -416,7 +412,6 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
       'email_subject',
       'email_tips',
       'email_verify',
-      'email_verify_reminder',
       'email_welcome',
       'email2faDisabled',
       'identifiers',
@@ -425,7 +420,6 @@ export class OrcidSourcePropertyFolder extends PropertyFolderImpl {
       'ng_orcid',
       'ng_orcid_search',
       'ng_orcid_signin',
-      'ng_orcid_material',
       'notification_admin_delegate',
       'notification_announcement',
       'notification_delegate',
