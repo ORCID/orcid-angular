@@ -13,13 +13,13 @@
   </ng-container>
 
   <p *ngIf="userInfo.PRIMARY_RECORD">
-    <ng-container i18n="@@thisAccountHasBeenDeprecated">
+    <ng-container i18n="@@record.accountDeprecated">
       This account has been deprecated, please see account
     </ng-container>
     <a [href]="userInfo.PRIMARY_RECORD">{{
       'https:' + baseUrl + userInfo.PRIMARY_RECORD
     }}</a>
-    <ng-container i18n="@@thisAccountHasBeenDeprecated2"
+    <ng-container i18n="@@record.accountDeprecated2"
       >for the latest information
     </ng-container>
   </p>
