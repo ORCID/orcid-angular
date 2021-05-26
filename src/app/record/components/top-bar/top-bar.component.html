@@ -88,27 +88,37 @@
       mobile: !platform.columns12
     }"
   >
-    <div class="row names-container" *ngIf="userRecord?.names">
+    <div class="row names-container" *ngIf="userRecord?.names || userRecord?.otherNames">
       <div class="published-name" *ngIf="creditName">
         <div class="row mat-caption description" i18n="@@record.publishedName">
           Published Name
         </div>
         <h3 class="orc-font-heading-small">{{ creditName }}</h3>
       </div>
-      <div class="row space-between">
+      <div class="published-name" *ngIf="!creditName">
+        <div class="row mat-caption description" i18n="@@record.name">
+          Name
+        </div>
+        <h3 class="orc-font-heading-small">
+          {{ givenNames + ' ' + familyName }}
+        </h3>
+      </div>
+      <div class="row names-wrapper">
         <div
           class="names"
           [ngClass]="{
-            'col l5': platform.columns12,
+            'col': platform.columns12,
             'row mobile': !platform.columns12,
-            'names-extended': expandedContent
+            'names-extended': expandedContent,
+            'full-width': userRecord.otherNames?.otherNames?.length === 0
           }"
+          *ngIf="creditName"
         >
           <div class="row mat-caption description" i18n="@@record.name">
             Name
           </div>
           <div class="orc-font-body-small">
-            <i>
+            <i *ngIf="givenNames">
               {{ givenNames + ' ' }}
             </i>
             {{ familyName }}
@@ -117,12 +127,19 @@
         <div
           class="other-names"
           [ngClass]="{
-            'col l6': platform.columns12,
+            'col': platform.columns12,
             'row mobile': !platform.columns12,
+            'full-width': (!givenNames && !familyName) || !creditName,
+            'other-names-no-border': expandedContent
+          }"
+          *ngIf="userRecord.otherNames?.otherNames.length > 0"
+          >
+          <div
+            class="row space-between"
+            [ngClass]="{
             'other-names-extended': expandedContent
           }"
-        >
-          <div class="row space-between">
+          >
             <div class="col l10 mat-caption other-names-wrapper">
               <div class="row description" i18n="@@record.otherNames">
                 Other names
@@ -133,7 +150,10 @@
                   index as i
                 "
               >
-                <ng-container *ngIf="!expandedContent">
+                <div
+                  class="orc-font-body-small"
+                  *ngIf="!expandedContent"
+                >
                   {{ otherNames.content }}
                   <ng-container
                     *ngIf="
@@ -141,7 +161,7 @@
                     "
                     >,
                   </ng-container>
-                </ng-container>
+                </div>
                 <div class="row other-name" *ngIf="expandedContent">
                   <div class="row">
                     <b class="orc-font-body-small">
