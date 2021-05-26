@@ -1,12 +1,12 @@
-<main id="main">
-  <div class="container">
-    <app-top-bar-my-public-record-preview
-      [isPublicRecord]="publicOrcid"
-    ></app-top-bar-my-public-record-preview>
-    <div class="row">
-      <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
-      </app-side-bar>
-      <app-main class="col l9 m8 s4">
+<app-top-bar-my-public-record-preview
+  [isPublicRecord]="publicOrcid"
+></app-top-bar-my-public-record-preview>
+<div class="container">
+  <div class="row">
+    <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
+    </app-side-bar>
+    <main id="main" class="col l9 m8 s4">
+      <app-main>
         <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
         <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
           <h2 class="orc-font-body col">Activities</h2>
@@ -16,9 +16,8 @@
               color="primary"
               type="button"
               i18n="@@shared.expandAll"
-              [ngClass]="{ selected: expandedContent }"
               (click)="collapse()"
-              [disabled]="expandedContent"
+              *ngIf="!expandedContent"
             >
               Expand all
             </button>
@@ -27,9 +26,8 @@
               color="primary"
               type="button"
               i18n="@@shared.collapseAll"
-              [ngClass]="{ selected: !expandedContent }"
               (click)="collapse()"
-              [disabled]="!expandedContent"
+              *ngIf="expandedContent"
             >
               Collapse all
             </button>
@@ -76,7 +74,10 @@
             {{ userRecord?.lastModifiedTime | date: 'long':'UTC' }}
           </i>
         </div>
+        <app-statistics
+          [ngClass]="{ mobile: !platform.columns12 }"
+        ></app-statistics>
       </app-main>
-    </div>
+    </main>
   </div>
-</main>
+</div>

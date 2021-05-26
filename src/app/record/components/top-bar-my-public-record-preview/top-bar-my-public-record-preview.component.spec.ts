@@ -6,12 +6,6 @@ describe('TopBarMyPublicRecordPreviewComponent', () => {
   let component: TopBarMyPublicRecordPreviewComponent
   let fixture: ComponentFixture<TopBarMyPublicRecordPreviewComponent>
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TopBarMyPublicRecordPreviewComponent],
-    }).compileComponents()
-  })
-
   beforeEach(() => {
     fixture = TestBed.createComponent(TopBarMyPublicRecordPreviewComponent)
     component = fixture.componentInstance
