@@ -1,4 +1,4 @@
-<mat-error *ngIf="this.userInfo.RECORD_WITH_ISSUES">
+<mat-error *ngIf="this.userInfo?.RECORD_WITH_ISSUES">
   <mat-icon>error</mat-icon>
   <ng-container
     *ngIf="userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD"
