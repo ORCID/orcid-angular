@@ -12,6 +12,7 @@
     [expandedContent]="expandedContent"
     (expanded)="expandedClicked($event)"
     id="research-resources-panel"
+    [labelSortButton]="labelSortButton"
   >
     <ng-container *ngIf="userRecord.researchResources.groups.length > 0">
       <ng-container

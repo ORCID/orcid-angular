@@ -14,6 +14,8 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
   styleUrls: ['./funding-stacks-groups.component.scss'],
 })
 export class FundingStacksGroupsComponent implements OnInit {
+  labelAddButton = $localize`:@@shared.addFunding:Add Funding`
+  labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
   @Input() isPublicRecord: any = false
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()

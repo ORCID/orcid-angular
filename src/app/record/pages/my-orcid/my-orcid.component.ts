@@ -7,6 +7,7 @@ import { RecordService } from '../../../core/record/record.service'
 import { Subject } from 'rxjs'
 import { UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
+import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -27,12 +28,14 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   expandedWorks: boolean
   expandedResearchResources: boolean
   expandedPeerReview: boolean
+  recordWithIssues: boolean
 
   constructor(
     private _platform: PlatformInfoService,
     private route: ActivatedRoute,
     private _record: RecordService,
-    private _openGraph: OpenGraphService
+    private _openGraph: OpenGraphService,
+    private _robotsMeta: RobotsMetaTagsService
   ) {
     this.checkIfThisIsAPublicOrcid()
   }
@@ -57,7 +60,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
+        if (this.publicOrcid && this.recordWithIssues) {
+          this._robotsMeta.addRobotMetaTags()
+        }
       })
 
     if (this.publicOrcid) {
@@ -68,6 +75,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.publicOrcid) {
       this._openGraph.removeOpenGraphData()
+      this._robotsMeta.removeRobotMetaTags()
     }
   }
 

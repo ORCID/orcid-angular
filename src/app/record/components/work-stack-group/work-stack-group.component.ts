@@ -13,6 +13,8 @@ import { UserSession } from 'src/app/types/session.local'
   styleUrls: ['./work-stack-group.component.scss'],
 })
 export class WorkStackGroupComponent implements OnInit {
+  labelAddButton = $localize`:@@shared.addWork:Add Work`
+  labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()

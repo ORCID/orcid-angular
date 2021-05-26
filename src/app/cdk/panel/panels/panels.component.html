@@ -6,14 +6,10 @@
     }"
   >
     <div class="inline-initial-side">
-      <button mat-icon-button (click)="collapse()" id="expand-content-button">
-        <mat-icon class="large-material-icon" *ngIf="expandedContent"
-          >keyboard_arrow_down
-        </mat-icon>
-        <mat-icon class="large-material-icon" *ngIf="!expandedContent"
-          >keyboard_arrow_up
-        </mat-icon>
-      </button>
+      <app-panel-expand-buttons
+        (toggle)="collapse()"
+        [openState]="expandedContent"
+      ></app-panel-expand-buttons>
 
       <div class="text-container">
         <strong class="orc-font-body-large">
@@ -41,15 +37,21 @@
       <button
         *ngIf="!isPublicRecord && type !== 'research-resources'"
         mat-icon-button
+        class="orc-font-body-small"
+        [attr.aria-label]="labelAddButton"
       >
         <mat-icon (click)="add()" class="large-material-icon" id="add-button">
           add_circle
         </mat-icon>
+        <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
-      <button mat-icon-button>
-        <mat-icon (click)="sort()" class="large-material-icon" id="sort-button">
-          sort
-        </mat-icon>
+      <button
+        mat-icon-button
+        class="orc-font-body-small"
+        [attr.aria-label]="labelSortButton"
+      >
+        <mat-icon (click)="sort()" class="large-material-icon"> sort </mat-icon>
+        <ng-container i18n="@@shared.sort"> Sort </ng-container>
       </button>
     </div>
   </div>

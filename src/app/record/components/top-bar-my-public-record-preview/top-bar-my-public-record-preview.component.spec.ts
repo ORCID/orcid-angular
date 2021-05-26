@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TopBarMyPublicRecidPreviewComponent } from './top-bar-my-public-record-preview.component'
 
-describe('TopBarMyPublicRecidPreviewComponent', () => {
-  let component: TopBarMyPublicRecidPreviewComponent
-  let fixture: ComponentFixture<TopBarMyPublicRecidPreviewComponent>
+import { TopBarMyPublicRecordPreviewComponent } from './top-bar-my-public-record-preview.component'
+
+describe('TopBarMyPublicRecordPreviewComponent', () => {
+  let component: TopBarMyPublicRecordPreviewComponent
+  let fixture: ComponentFixture<TopBarMyPublicRecordPreviewComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TopBarMyPublicRecidPreviewComponent],
-    }).compileComponents()
-  })
+      declarations: [TopBarMyPublicRecordPreviewComponent],
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopBarMyPublicRecidPreviewComponent)
+    fixture = TestBed.createComponent(TopBarMyPublicRecordPreviewComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

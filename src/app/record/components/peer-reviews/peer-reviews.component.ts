@@ -20,6 +20,8 @@ import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-pee
   preserveWhitespaces: true,
 })
 export class PeerReviewsComponent implements OnInit {
+  labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
+  labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()

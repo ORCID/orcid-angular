@@ -1,11 +1,18 @@
-<app-top-bar-actions [isPublicRecord]="isPublicRecord"></app-top-bar-actions>
+<app-top-bar-record-issues
+  [isPublicRecord]="isPublicRecord"
+></app-top-bar-record-issues>
+
+<app-top-bar-actions
+  [isPublicRecord]="isPublicRecord"
+  *ngIf="isPublicRecord && !recordWithIssues"
+></app-top-bar-actions>
 <mat-progress-bar
   *ngIf="!userRecord"
   mode="indeterminate"
   color="accent"
 ></mat-progress-bar>
 
-<ng-container *ngIf="!isPublicRecord">
+<ng-container *ngIf="!isPublicRecord && !recordWithIssues">
   <app-panel
     *ngIf="userRecord?.names"
     [isPublicRecord]="isPublicRecord"
@@ -33,7 +40,7 @@
           {{ givenNames + ' ' + familyName }}
         </div>
       </app-panel-element>
-      <ng-container *ngIf="userRecord.otherNames?.otherNames?.length > 0">
+      <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
         <div class="other-names-container">
           <span i18n="@@record.otherNames" class="mat-caption description">
             Other names
@@ -74,7 +81,7 @@
 
 <!--PUBLIC VIEWS-->
 
-<ng-container *ngIf="isPublicRecord">
+<ng-container *ngIf="isPublicRecord && !recordWithIssues">
   <div
     class="public-container"
     [ngClass]="{
@@ -122,7 +129,7 @@
               </div>
               <ng-container
                 *ngFor="
-                  let otherNames of userRecord.otherNames.otherNames;
+                  let otherNames of userRecord.otherNames?.otherNames;
                   index as i
                 "
               >
@@ -151,18 +158,10 @@
               </ng-container>
             </div>
             <div>
-              <button
-                mat-icon-button
-                (click)="collapse()"
-                id="expand-content-button"
-              >
-                <mat-icon class="large-material-icon" *ngIf="expandedContent"
-                  >keyboard_arrow_down
-                </mat-icon>
-                <mat-icon class="large-material-icon" *ngIf="!expandedContent"
-                  >keyboard_arrow_up
-                </mat-icon>
-              </button>
+              <app-panel-expand-buttons
+                (toggle)="collapse()"
+                [openState]="expandedContent"
+              ></app-panel-expand-buttons>
             </div>
           </div>
         </div>

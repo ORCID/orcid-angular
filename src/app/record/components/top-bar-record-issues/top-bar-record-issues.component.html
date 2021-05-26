@@ -1,0 +1,26 @@
+<mat-error *ngIf="this.userInfo.RECORD_WITH_ISSUES">
+  <mat-icon>error</mat-icon>
+  <ng-container
+    *ngIf="userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD"
+    i18n="@@record.noPublicInfo"
+    >No public information available.
+  </ng-container>
+
+  <ng-container
+    *ngIf="userInfo.IS_LOCKED === 'true'"
+    i18n="@@record.lockedRecord"
+    >This ORCID Record is locked
+  </ng-container>
+
+  <p *ngIf="userInfo.PRIMARY_RECORD">
+    <ng-container i18n="@@record.accountDeprecated">
+      This account has been deprecated, please see account
+    </ng-container>
+    <a [href]="userInfo.PRIMARY_RECORD">{{
+      'https:' + baseUrl + userInfo.PRIMARY_RECORD
+    }}</a>
+    <ng-container i18n="@@record.accountDeprecated2"
+      >for the latest information
+    </ng-container>
+  </p>
+</mat-error>

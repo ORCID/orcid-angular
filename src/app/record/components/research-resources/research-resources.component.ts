@@ -29,6 +29,7 @@ import { URL_REGEXP } from '../../../constants'
   ],
 })
 export class ResearchResourcesComponent implements OnInit {
+  labelSortButton = $localize`:@@shared.sortResearch:Sort Research Resources`
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()

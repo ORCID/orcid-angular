@@ -9,6 +9,7 @@ export class PanelExpandButtonsComponent implements OnInit {
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
 
+  @Input() type: boolean
   @Input() openState: boolean
   @Output() toggle = new EventEmitter<void>()
   constructor() {}
