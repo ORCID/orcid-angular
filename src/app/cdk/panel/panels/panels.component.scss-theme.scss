@@ -16,10 +16,7 @@
 
     .sub-peer-review {
       border-color: mat-color($background, ui-background) !important;
-      background-color: mat-color(
-        $background,
-        ui-background
-      ) !important;
+      background-color: mat-color($background, ui-background) !important;
       color: $orcid-dark-primary-text;
     }
   }

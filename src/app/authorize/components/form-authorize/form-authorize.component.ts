@@ -9,7 +9,6 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
-import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RequestInfoForm, Scope } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
@@ -40,7 +39,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _user: UserService,
     private _oauth: OauthService,
     private _gtag: GoogleAnalyticsService,
-    private _trustedIndividuals: TrustedIndividualsService,
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService,
     private _router: Router,
@@ -54,10 +52,12 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       )
       .subscribe((userInfo) => {
         this.loadingUserInfo = false
+        this.loadingTrustedIndividuals = false
         this.oauthRequest = userInfo.oauthSession
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl
+          this.trustedIndividuals = userInfo.trustedIndividuals
         } else {
           // if the user logouts in the middle of a oauth section on another tab
           this._platformInfo
@@ -69,13 +69,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
               })
             )
         }
-      })
-    this._trustedIndividuals
-      .getTrustedIndividuals()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((data) => {
-        this.loadingTrustedIndividuals = false
-        this.trustedIndividuals = data
       })
   }
 
@@ -207,7 +200,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   changeAccount(delegator: Delegator) {
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
-    this._trustedIndividuals.switchAccount(delegator).subscribe()
+    this._user.switchAccount(delegator)
   }
   ngOnDestroy() {
     this.$destroy.next(true)

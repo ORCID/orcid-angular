@@ -40,6 +40,8 @@ import { TopBarMyPublicRecordPreviewComponent } from './components/top-bar-my-pu
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { LayoutModule } from '../layout/layout.module'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
+import { MatMenuModule } from '@angular/material/menu'
+import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 
 @NgModule({
   declarations: [
@@ -88,6 +90,8 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
     A11yLinkModule,
     MatProgressBarModule,
     LayoutModule,
+    MatMenuModule,
+    TrustedIndividualsDropdownModule,
   ],
 })
 export class RecordModule {}
