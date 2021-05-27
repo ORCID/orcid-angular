@@ -39,7 +39,9 @@ import { MatDividerModule } from '@angular/material/divider'
 import { TopBarMyPublicRecordPreviewComponent } from './components/top-bar-my-public-record-preview/top-bar-my-public-record-preview.component'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { LayoutModule } from '../layout/layout.module'
-import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
+import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component';
+import { NotFoundComponent } from './components/not-found/not-found.component'
+import { MatCardModule } from '@angular/material/card'
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
     TopBarActionsComponent,
     TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -88,6 +91,7 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
     A11yLinkModule,
     MatProgressBarModule,
     LayoutModule,
+    MatCardModule,
   ],
 })
 export class RecordModule {}

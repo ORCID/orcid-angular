@@ -29,6 +29,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   expandedResearchResources: boolean
   expandedPeerReview: boolean
   recordWithIssues: boolean
+  loading = false
 
   constructor(
     private _platform: PlatformInfoService,
@@ -52,6 +53,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = true
+    }, 300)
     this.affiliations = 0
     this._platform.get().subscribe((value) => (this.platform = value))
     this._record
@@ -60,7 +64,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
+        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
         if (this.publicOrcid && this.recordWithIssues) {
           this._robotsMeta.addRobotMetaTags()
