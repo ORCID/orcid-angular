@@ -42,6 +42,8 @@ import { LayoutModule } from '../layout/layout.module'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 import { MatCardModule } from '@angular/material/card'
+import { MatMenuModule } from '@angular/material/menu'
+import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 
 @NgModule({
   declarations: [
@@ -92,6 +94,8 @@ import { MatCardModule } from '@angular/material/card'
     MatProgressBarModule,
     LayoutModule,
     MatCardModule,
+    MatMenuModule,
+    TrustedIndividualsDropdownModule,
   ],
 })
 export class RecordModule {}

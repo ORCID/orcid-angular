@@ -62,7 +62,8 @@ export class RecordWorksService {
             '&sort=' +
             (options.sort != null ? options.sort : true) +
             '&sortAsc=' +
-            (options.sortAsc != null ? options.sort : true)
+            (options.sortAsc != null ? options.sort : true) +
+            `pageSize=50`
         )
         .pipe(
           tap((data) => {
@@ -140,7 +141,7 @@ export class RecordWorksService {
         environment.API_WEB +
           `${
             orcidId ? orcidId + '/' : 'works/'
-          }worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}`
+          }worksPage.json?offset=${offset}&sort=${sort}&sortAsc=${sortAsc}&pageSize=50`
       )
       .pipe(
         retry(3),
