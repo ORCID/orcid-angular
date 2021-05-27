@@ -1,83 +1,88 @@
-<app-top-bar-my-public-record-preview
-  [isPublicRecord]="publicOrcid"
-></app-top-bar-my-public-record-preview>
-<div class="container">
-  <div class="row">
-    <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
-    </app-side-bar>
-    <main id="main" class="col l9 m8 s4">
-      <app-main>
-        <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
-        <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
-          <h2 class="orc-font-body col">Activities</h2>
-          <div class="expand-buttons">
-            <button
-              mat-button
-              color="primary"
-              type="button"
-              i18n="@@shared.expandAll"
-              (click)="collapse()"
-              *ngIf="!expandedContent"
-            >
-              Expand all
-            </button>
-            <button
-              mat-button
-              color="primary"
-              type="button"
-              i18n="@@shared.collapseAll"
-              (click)="collapse()"
-              *ngIf="expandedContent"
-            >
-              Collapse all
-            </button>
+<ng-container *ngIf="userRecord">
+  <app-top-bar-my-public-record-preview
+    [isPublicRecord]="publicOrcid"
+  ></app-top-bar-my-public-record-preview>
+  <div class="container">
+    <div class="row">
+      <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
+      </app-side-bar>
+      <main id="main" class="col l9 m8 s4">
+        <app-main>
+          <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
+          <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
+            <h2 class="orc-font-body col">Activities</h2>
+            <div class="expand-buttons">
+              <button
+                mat-button
+                color="primary"
+                type="button"
+                i18n="@@shared.expandAll"
+                (click)="collapse()"
+                *ngIf="!expandedContent"
+              >
+                Expand all
+              </button>
+              <button
+                mat-button
+                color="primary"
+                type="button"
+                i18n="@@shared.collapseAll"
+                (click)="collapse()"
+                *ngIf="expandedContent"
+              >
+                Collapse all
+              </button>
+            </div>
           </div>
-        </div>
-        <app-affiliations
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-          (expanded)="expandedByType($event)"
-        ></app-affiliations>
-        <app-fundings
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-          (expanded)="expandedByType($event)"
-        ></app-fundings>
-        <app-work-stack-group
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-          (expanded)="expandedByType($event)"
-        ></app-work-stack-group>
-        <app-research-resources
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-          (expanded)="expandedByType($event)"
-        ></app-research-resources>
-        <app-peer-reviews
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-          (expanded)="expandedByType($event)"
-        ></app-peer-reviews>
-        <div
-          class="orc-font-body-small"
-          *ngIf="
-            publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
-          "
-        >
-          <i>
-            <span i18n="@@shared.lastModifiedTime"> Record last modified </span>
-            {{ userRecord?.lastModifiedTime | date: 'long':'UTC' }}
-          </i>
-        </div>
-        <app-statistics
-          [ngClass]="{ mobile: !platform.columns12 }"
-        ></app-statistics>
-      </app-main>
-    </main>
+          <app-affiliations
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-affiliations>
+          <app-fundings
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-fundings>
+          <app-work-stack-group
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-work-stack-group>
+          <app-research-resources
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-research-resources>
+          <app-peer-reviews
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-peer-reviews>
+          <div
+            class="orc-font-body-small"
+            *ngIf="
+              publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
+            "
+          >
+            <i>
+              <span i18n="@@shared.lastModifiedTime">
+                Record last modified
+              </span>
+              {{ userRecord?.lastModifiedTime | date: 'long':'UTC' }}
+            </i>
+          </div>
+          <app-statistics
+            [ngClass]="{ mobile: !platform.columns12 }"
+          ></app-statistics>
+        </app-main>
+      </main>
+    </div>
   </div>
-</div>
+</ng-container>
+<app-not-found *ngIf="loading && !userRecord"></app-not-found>

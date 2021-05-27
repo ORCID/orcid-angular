@@ -40,6 +40,8 @@ import { TopBarMyPublicRecordPreviewComponent } from './components/top-bar-my-pu
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { LayoutModule } from '../layout/layout.module'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
+import { NotFoundComponent } from './components/not-found/not-found.component'
+import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 
@@ -67,6 +69,7 @@ import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dro
     TopBarActionsComponent,
     TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -90,6 +93,7 @@ import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dro
     A11yLinkModule,
     MatProgressBarModule,
     LayoutModule,
+    MatCardModule,
     MatMenuModule,
     TrustedIndividualsDropdownModule,
   ],
