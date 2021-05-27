@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
@@ -6,7 +6,7 @@ import { Subject } from 'rxjs'
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss']
+  styleUrls: ['./not-found.component.scss'],
 })
 export class NotFoundComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -22,7 +22,5 @@ export class NotFoundComponent implements OnInit {
       })
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

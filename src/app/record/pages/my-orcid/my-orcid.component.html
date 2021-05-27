@@ -67,11 +67,13 @@
           <div
             class="orc-font-body-small"
             *ngIf="
-            publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
-          "
+              publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
+            "
           >
             <i>
-              <span i18n="@@shared.lastModifiedTime"> Record last modified </span>
+              <span i18n="@@shared.lastModifiedTime">
+                Record last modified
+              </span>
               {{ userRecord?.lastModifiedTime | date: 'long':'UTC' }}
             </i>
           </div>
@@ -84,4 +86,3 @@
   </div>
 </ng-container>
 <app-not-found *ngIf="loading && !userRecord"></app-not-found>
-
