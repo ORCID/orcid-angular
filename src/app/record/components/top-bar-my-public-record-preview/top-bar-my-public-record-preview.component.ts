@@ -33,9 +33,6 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('OK THIS IS A PUBLIC RECORD?')
-    console.log(this.isPublicRecord)
-
     this._user.getUserSession().subscribe((value) => {
       if (value.userInfo) {
         this.iAmEditingThisRecord =
