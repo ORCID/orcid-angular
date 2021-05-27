@@ -59,13 +59,13 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   private setNames(userRecord: UserRecord) {
     this.userRecord = userRecord
-    this.givenNames = this.userRecord.names.givenNames
+    this.givenNames = this.userRecord?.names?.givenNames
       ? this.userRecord.names.givenNames.value
       : ''
-    this.familyName = this.userRecord.names.familyName
+    this.familyName = this.userRecord?.names?.familyName
       ? this.userRecord.names.familyName.value
       : ''
-    this.creditName = this.userRecord.names.creditName
+    this.creditName = this.userRecord?.names?.creditName
       ? this.userRecord.names.creditName.value
       : ''
   }
