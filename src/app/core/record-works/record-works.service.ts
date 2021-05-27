@@ -63,7 +63,7 @@ export class RecordWorksService {
             (options.sort != null ? options.sort : true) +
             '&sortAsc=' +
             (options.sortAsc != null ? options.sort : true) +
-            `pageSize=50`
+            `&pageSize=50`
         )
         .pipe(
           tap((data) => {
