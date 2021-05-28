@@ -99,7 +99,6 @@ export class RecordService {
       }
 
       combineLatest([
-        // this._recordPerson.getPerson(options).pipe(startWith(false)),
         this._recordEmailsService.getEmails(options).pipe(startWith(false)),
         this._recordOtherNamesService
           .getOtherNames(options)
@@ -132,7 +131,6 @@ export class RecordService {
         .pipe(
           tap(
             ([
-              // person,
               emails,
               otherNames,
               countries,
@@ -151,7 +149,6 @@ export class RecordService {
               userInfo,
             ]) => {
               this.recordSubject$.next({
-                // person: person as Person,
                 emails: emails as EmailsEndpoint,
                 otherNames: otherNames as OtherNamesEndPoint,
                 countries: countries as CountriesEndpoint,
