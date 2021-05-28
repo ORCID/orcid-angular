@@ -39,7 +39,7 @@
               <div
                 class="description-container"
                 [ngClass]="{
-                'show-details': research.showDetails
+                  'show-details': research.showDetails
                 }"
               >
                 <div class="description">
@@ -339,7 +339,10 @@
                           </a>
                         </span>
                       </div>
-                      <app-panel-data [borderBottom]="true" *ngIf="item.showDetails">
+                      <app-panel-data
+                        [borderBottom]="true"
+                        *ngIf="item.showDetails"
+                      >
                         <app-panel-element [hideVisibility]="false">
                           <div
                             class="description"
@@ -349,41 +352,41 @@
                           >
                             <div>
                               {{
-                              itemExternalIdentifier.externalIdentifierType
-                                .value + ':' | uppercase
+                                itemExternalIdentifier.externalIdentifierType
+                                  .value + ':' | uppercase
                               }}
                               <ng-container
                                 *ngIf="
-                                    !isUrl(
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    )
-                                  "
+                                  !isUrl(
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  )
+                                "
                               >
                                 {{
-                                itemExternalIdentifier.externalIdentifierId
-                                  .value
+                                  itemExternalIdentifier.externalIdentifierId
+                                    .value
                                 }}
                               </ng-container>
                               <ng-container
                                 *ngIf="
-                                    isUrl(
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    )
-                                  "
+                                  isUrl(
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  )
+                                "
                               >
                                 <a
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   href="{{
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    }}"
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  }}"
                                 >
                                   {{
-                                  itemExternalIdentifier
-                                    .externalIdentifierId.value
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
                                   }}
                                 </a>
                               </ng-container>

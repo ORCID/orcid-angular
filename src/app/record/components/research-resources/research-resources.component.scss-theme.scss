@@ -13,7 +13,8 @@
     background-color: map-get($background, card);
   }
 
-  .description-container, .show-details {
+  .description-container,
+  .show-details {
     border-color: mat-color($background, ui-background) !important;
   }
 
