@@ -1,16 +1,32 @@
+.container {
+  max-width: 664px;
+  padding: 0 !important;
+}
+
+.container, .mobile {
+  padding: 0 12px !important;
+}
+
 img {
   display: block;
-  height: 86px;
-  width: 86px;
-  margin-left: auto;
-  margin-right: auto;
+  height: 64px;
+  width: 64px;
+  margin: 64px auto 33px;
 }
 
-h1,
 h2 {
   text-align: center;
+  margin-bottom: 33px;
 }
 
-h1 {
-  margin-bottom: 0;
+.if-you{
+
+  p {
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+}
+
+.search {
+  margin-top: 16px;
 }
