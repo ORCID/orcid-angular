@@ -34,13 +34,10 @@ export class RecordPersonService {
   private getPublicRecordPerson(
     options: UserRecordOptions
   ): Observable<Person | undefined> {
-    if (options.publicRecordId) {
-      return of(undefined)
-    }
-    if (!this.$personPublicRecordSubject) {
+    if (!this.$personPublicRecordSubject || options.forceReload) {
       this.$personPublicRecordSubject = new ReplaySubject<Person>(1)
-    } else if (!options.forceReload) {
-      return this.$personPublicRecordSubject
+    } else {
+      return this.$personPublicRecordSubject.asObservable()
     }
 
     this.getPersonHttpCall(options.publicRecordId)

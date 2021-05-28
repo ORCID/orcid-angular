@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
 
@@ -23,7 +23,7 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
-  userRecord: UserRecord
+  fundings: FundingGroup[]
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
 
@@ -50,17 +50,10 @@ export class FundingStacksGroupsComponent implements OnInit {
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
-            this.userRecord = userRecord
-
-            this._recordFundingsService
-              .getFundings({
-                publicRecordId: this.isPublicRecord,
-              })
-              .pipe(first())
-              .subscribe((data) => {
-                this.userRecord.fundings = data
-                this.total.emit(this.userRecord.fundings.length)
-              })
+            if (!isEmpty(userRecord.fundings)) {
+              this.fundings = userRecord.fundings
+              this.total.emit(userRecord.fundings.length)
+            }
           })
       })
   }

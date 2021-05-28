@@ -21,8 +21,6 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _platform: PlatformInfoService,
     private _recordPeerReviewService: RecordPeerReviewService
   ) {}
 

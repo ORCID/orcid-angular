@@ -27,7 +27,7 @@ export interface SideBarPublicUserRecord {
 }
 
 export interface UserRecord {
-  person: Person
+  // person: Person
   emails: EmailsEndpoint
   otherNames: OtherNamesEndPoint
   countries: CountriesEndpoint

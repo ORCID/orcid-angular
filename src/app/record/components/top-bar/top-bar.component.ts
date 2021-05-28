@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
+import { isEmpty } from 'lodash'
 
 @Component({
   selector: 'app-top-bar',
@@ -52,8 +53,10 @@ export class TopBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
-        this.setNames(userRecord)
+        if (!isEmpty(userRecord.otherNames)) {
+          this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
+          this.setNames(userRecord)
+        }
       })
   }
 

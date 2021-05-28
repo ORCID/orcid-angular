@@ -66,13 +66,13 @@
         <div
           class="orc-font-body-small"
           *ngIf="
-            publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
+            publicOrcid && userRecord && userRecord.lastModifiedTime && !recordWithIssues
           "
         >
-          <i>
+          <!-- <i>
             <span i18n="@@shared.lastModifiedTime"> Record last modified </span>
             {{ userRecord?.lastModifiedTime | date: 'long':'UTC' }}
-          </i>
+          </i> -->
         </div>
         <app-statistics
           [ngClass]="{ mobile: !platform.columns12 }"
