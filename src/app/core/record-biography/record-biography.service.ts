@@ -31,7 +31,7 @@ export class RecordBiographyService {
   ): Observable<BiographyEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.biography))
     }
 

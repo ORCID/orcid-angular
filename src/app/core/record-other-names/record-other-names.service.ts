@@ -31,7 +31,7 @@ export class RecordOtherNamesService {
   ): Observable<OtherNamesEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.otherNames))
     }
     if (!this.$otherNames) {

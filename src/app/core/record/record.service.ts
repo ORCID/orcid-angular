@@ -111,8 +111,12 @@ export class RecordService {
           .getPersonalIdentifiers(options)
           .pipe(startWith(false)),
         this._recordNamesService.getNames(options).pipe(startWith(false)),
-        this._recordBiographyService.getBiography(options).pipe(startWith(false)),
-        this._recordAffiliations.getAffiliations(options).pipe(startWith(false)),
+        this._recordBiographyService
+          .getBiography(options)
+          .pipe(startWith(false)),
+        this._recordAffiliations
+          .getAffiliations(options)
+          .pipe(startWith(false)),
         this._recordFundings.getFundings(options).pipe(startWith(false)),
         this.getPreferences(options).pipe(startWith(false)),
         this._recordPeerReviewService
@@ -267,7 +271,7 @@ export class RecordService {
   ) {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.lastModifiedTime))
     }
     return of(undefined)

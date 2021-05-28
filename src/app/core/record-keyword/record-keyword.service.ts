@@ -31,7 +31,7 @@ export class RecordKeywordService {
   ): Observable<KeywordEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.keyword))
     }
 

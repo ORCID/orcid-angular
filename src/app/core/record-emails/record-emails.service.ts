@@ -41,7 +41,7 @@ export class RecordEmailsService {
   ): Observable<EmailsEndpoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.emails))
     }
     if (!this.$emailsSubject) {
