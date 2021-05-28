@@ -76,8 +76,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
         return false
       }
     })
-    console.log(missingValues)
-
     this.loadingUserRecord = !!missingValues.length
   }
 

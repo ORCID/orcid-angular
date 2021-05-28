@@ -83,8 +83,6 @@ export class PeerReviewsComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.peerReviews)) {
-          console.log(userRecord)
-
           this.peerReviews = userRecord.peerReviews
           this.total.emit(this.peerReviews.length)
         }
