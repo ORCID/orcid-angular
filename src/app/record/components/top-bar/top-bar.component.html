@@ -1,3 +1,8 @@
+<mat-progress-bar
+  *ngIf="loadingUserRecord"
+  mode="indeterminate"
+  color="accent"
+></mat-progress-bar>
 <app-top-bar-record-issues
   [isPublicRecord]="isPublicRecord"
 ></app-top-bar-record-issues>
@@ -6,11 +11,6 @@
   [isPublicRecord]="isPublicRecord"
   *ngIf="isPublicRecord && !recordWithIssues"
 ></app-top-bar-actions>
-<mat-progress-bar
-  *ngIf="!userRecord"
-  mode="indeterminate"
-  color="accent"
-></mat-progress-bar>
 
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
   <app-panel
@@ -24,7 +24,7 @@
   >
     <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
     <app-panel-data>
-      <app-panel-element [visibility]="userRecord.names.visibility.visibility">
+      <app-panel-element [visibility]="userRecord.names.visibility">
         <ng-container *ngIf="creditName">
           <span i18n="@@record.publishedName" class="mat-caption">
             Published Name

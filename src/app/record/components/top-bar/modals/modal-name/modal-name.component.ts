@@ -92,7 +92,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       .getNames()
       .pipe(first())
       .subscribe((names: NamesEndPoint) => {
-        this.defaultVisibility = names.visibility.visibility
+        this.defaultVisibility = names.visibility
         this._recordOtherNamesService
           .getOtherNames()
           .pipe(first())
@@ -135,7 +135,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const publishedName = namesEndPoint.creditName
       ? namesEndPoint.creditName.value
       : ''
-    const visibilityName = namesEndPoint.visibility.visibility
+    const visibilityName = namesEndPoint.visibility
 
     this.namesForm.addControl(
       'givenNames',
@@ -164,11 +164,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   }
 
   formToBackendNames(namesForm: FormGroup): any {
-    const visibility = {
-      errors: [],
-      required: undefined,
-      visibility: namesForm.get('visibility').value,
-    } as Visibility
+    const visibility = namesForm.get('visibility').value
     return {
       errors: [],
       givenNames: namesForm.get('givenNames').value,

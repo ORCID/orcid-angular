@@ -11,6 +11,7 @@ h2 {
 
 app-main {
   padding-bottom: 180px !important;
+  max-width: 100%;
 }
 
 app-side-bar {
@@ -27,6 +28,10 @@ app-statistics {
 main#main {
   flex-direction: column;
   margin-bottom: $spacing-large;
+}
+
+.container {
+  margin-bottom: -140px;
 }
 
 .mobile {

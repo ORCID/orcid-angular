@@ -10,8 +10,14 @@
   mat-icon {
     color: map-get($foreground, 'state-notice-darkest');
   }
-  .bottom-divider {
+  .bottom-divider.orange {
     border-top-color: map-get($foreground, 'state-notice-darkest');
+  }
+  .bottom-divider.green {
+    border-top-color: map-get($foreground, 'brand-primary');
+  }
+  :host div.yellow-bg {
+    background-color: map-get($foreground, 'state-notice-light');
   }
 }
 

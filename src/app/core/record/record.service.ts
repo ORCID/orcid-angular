@@ -99,31 +99,31 @@ export class RecordService {
       }
 
       combineLatest([
-        // this._recordPerson.getPerson(options).pipe(startWith({})),
-        this._recordEmailsService.getEmails(options).pipe(startWith({})),
+        // this._recordPerson.getPerson(options).pipe(startWith(false)),
+        this._recordEmailsService.getEmails(options).pipe(startWith(false)),
         this._recordOtherNamesService
           .getOtherNames(options)
-          .pipe(startWith({})),
-        this._recordCountryService.getAddresses(options).pipe(startWith({})),
-        this._recordKeywordService.getKeywords(options).pipe(startWith({})),
-        this._recordWebsitesService.getWebsites(options).pipe(startWith({})),
+          .pipe(startWith(false)),
+        this._recordCountryService.getAddresses(options).pipe(startWith(false)),
+        this._recordKeywordService.getKeywords(options).pipe(startWith(false)),
+        this._recordWebsitesService.getWebsites(options).pipe(startWith(false)),
         this._recordPersonalIdentifier
           .getPersonalIdentifiers(options)
-          .pipe(startWith({})),
-        this._recordNamesService.getNames(options).pipe(startWith({})),
-        this._recordBiographyService.getBiography(options).pipe(startWith({})),
-        this._recordAffiliations.getAffiliations(options).pipe(startWith({})),
-        this._recordFundings.getFundings(options).pipe(startWith({})),
-        this.getPreferences(options).pipe(startWith({})),
+          .pipe(startWith(false)),
+        this._recordNamesService.getNames(options).pipe(startWith(false)),
+        this._recordBiographyService.getBiography(options).pipe(startWith(false)),
+        this._recordAffiliations.getAffiliations(options).pipe(startWith(false)),
+        this._recordFundings.getFundings(options).pipe(startWith(false)),
+        this.getPreferences(options).pipe(startWith(false)),
         this._recordPeerReviewService
           .getPeerReviewGroups(options)
-          .pipe(startWith({})),
+          .pipe(startWith(false)),
         this._recordResearchResourceService
           .getResearchResourcePage(options)
-          .pipe(startWith({})),
-        this._recordWorkService.getWorks(options).pipe(startWith({})),
-        this.getLastModifiedTime(options).pipe(startWith({})),
-        this._userInfo.getUserInfo(options).pipe(startWith({})),
+          .pipe(startWith(false)),
+        this._recordWorkService.getWorks(options).pipe(startWith(false)),
+        this.getLastModifiedTime(options).pipe(startWith(false)),
+        this._userInfo.getUserInfo(options).pipe(startWith(false)),
       ])
         .pipe(
           tap(
