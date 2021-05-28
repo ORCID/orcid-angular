@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
+import { isEmpty } from 'lodash'
 
 @Component({
   selector: 'app-top-bar',
@@ -31,6 +32,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   creditName: String = ''
   expandedContent = false
   recordWithIssues: boolean
+  loadingUserRecord = true
 
   constructor(
     private _platform: PlatformInfoService,
@@ -52,9 +54,29 @@ export class TopBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
-        this.setNames(userRecord)
+        this.checkLoadingState(userRecord)
+        if (!isEmpty(userRecord.otherNames)) {
+          this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
+          this.setNames(userRecord)
+        }
       })
+  }
+
+  checkLoadingState(userRecord: UserRecord) {
+    const missingValues = Object.keys(userRecord).filter((key) => {
+      if (
+        key !== 'names' &&
+        key !== 'lastModifiedTime' &&
+        this.isPublicRecord
+      ) {
+        return typeof userRecord[key] === 'boolean' && !userRecord[key]
+      } else if (key !== 'lastModifiedTime') {
+        return typeof userRecord[key] === 'boolean' && !userRecord[key]
+      } else {
+        return false
+      }
+    })
+    this.loadingUserRecord = !!missingValues.length
   }
 
   private setNames(userRecord: UserRecord) {

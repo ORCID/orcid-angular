@@ -6,9 +6,9 @@ import { RecordService } from '../../../core/record/record.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { Subject } from 'rxjs'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
-import { UserRecord } from '../../../types/record.local'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
+import { isEmpty } from 'lodash'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -39,7 +39,7 @@ export class PeerReviewsComponent implements OnInit {
     orcidUrl: string
     loggedIn: boolean
   }
-  userRecord: UserRecord
+  peerReviews: PeerReview[]
   platform: PlatformInfo
   detailsPeerReviews: {
     putCode: number
@@ -82,17 +82,10 @@ export class PeerReviewsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.userRecord = userRecord
-
-        this._recordPeerReviewService
-          .getPeerReviewGroups({
-            publicRecordId: this.isPublicRecord,
-          })
-          .pipe(first())
-          .subscribe((data) => {
-            this.userRecord.peerReviews = data
-            this.total.emit(this.userRecord.peerReviews.length)
-          })
+        if (!isEmpty(userRecord?.peerReviews)) {
+          this.peerReviews = userRecord.peerReviews
+          this.total.emit(this.peerReviews.length)
+        }
       })
   }
 

@@ -19,7 +19,7 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
-  @Input() expandButtonsPosition: 'right' | 'left' = 'right'
+  @Input() expandButtonsPosition: 'right' | 'left' = null
   @Input() editModalComponent: ComponentType<any>
   @Input() elements:
     | Assertion[]

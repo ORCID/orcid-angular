@@ -1,28 +1,25 @@
-<ng-container *ngIf="!(isPublicRecord && userRecord?.fundings.length === 0)">
+<ng-container *ngIf="!(isPublicRecord && fundings?.length === 0)">
   <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
   <app-panels
-    *ngIf="userRecord && userRecord.fundings"
+    *ngIf="fundings"
     class="row"
     [title]="ngOrcidFunding"
     [type]="'funding'"
-    [total]="userRecord.fundings.length"
+    [total]="fundings.length"
     [isPublicRecord]="isPublicRecord"
     [expandedContent]="expandedContent"
     (expanded)="expandedClicked($event)"
     [labelAddButton]="labelAddButton"
     [labelSortButton]="labelSortButton"
   >
-    <ng-container *ngIf="userRecord.fundings.length > 0">
+    <ng-container *ngIf="fundings.length > 0">
       <app-funding-stack
-        *ngFor="
-          let fundingGroup of userRecord.fundings;
-          trackBy: trackByFundingGroup
-        "
+        *ngFor="let fundingGroup of fundings; trackBy: trackByFundingGroup"
         [fundingStack]="fundingGroup"
         [isPublicRecord]="isPublicRecord"
       ></app-funding-stack>
     </ng-container>
-    <ng-container *ngIf="userRecord.fundings.length === 0">
+    <ng-container *ngIf="fundings.length === 0">
       <div class="orc-font-body-small">
         <p class="empty" i18n="@@funding.descriptionEmpty">
           Add grants, awards and other funding you have received to support your

@@ -1,12 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { UserRecord } from '../../../types/record.local'
 import { Subject } from 'rxjs'
-import {
-  NameForm,
-  OrgDisambiguated,
-  RequestInfoForm,
-  UserInfo,
-} from '../../../types'
+import { OrgDisambiguated } from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { RecordService } from '../../../core/record/record.service'
 import { first, takeUntil } from 'rxjs/operators'
@@ -15,10 +9,13 @@ import {
   Host,
   Item,
   ResearchResource,
+  ResearchResources,
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { URL_REGEXP } from '../../../constants'
+import { UserSession } from 'src/app/types/session.local'
+import { isEmpty } from 'lodash'
 
 @Component({
   selector: 'app-research-resources',
@@ -37,15 +34,8 @@ export class ResearchResourcesComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  userSession: {
-    userInfo: UserInfo
-    nameForm: NameForm
-    oauthSession: RequestInfoForm
-    displayName: string
-    orcidUrl: string
-    loggedIn: boolean
-  }
-  userRecord: UserRecord
+  userSession: UserSession
+  researchResources: ResearchResources
   platform: PlatformInfo
   detailsResearchResources: {
     putCode: number
@@ -84,26 +74,18 @@ export class ResearchResourcesComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
+      })
 
-        // TODO @amontenegro
-        // AVOID requiring the orcid url to getPerson to call all the record data on parallel
-        this._record
-          .getRecord({
-            publicRecordId: this.isPublicRecord || undefined,
-          })
-          .pipe(takeUntil(this.$destroy))
-          .subscribe((userRecord) => {
-            this.userRecord = userRecord
-            this._recordResearchResourceService
-              .getResearchResourcePage({
-                publicRecordId: this.isPublicRecord,
-              })
-              .pipe(first())
-              .subscribe((data) => {
-                this.userRecord.researchResources = data
-                this.total.emit(this.userRecord.researchResources.groups.length)
-              })
-          })
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord || undefined,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        if (!isEmpty(userRecord?.researchResources)) {
+          this.researchResources = userRecord.researchResources
+          this.total.emit(this.researchResources.groups.length)
+        }
       })
   }
 

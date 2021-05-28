@@ -1,7 +1,7 @@
-import { Value, Visibility } from './common.endpoint'
+import { Value, VisibilityStrings } from './common.endpoint'
 
 export interface NamesEndPoint {
-  visibility: Visibility
+  visibility: VisibilityStrings
   errors: any[]
   givenNames: Value
   familyName: Value

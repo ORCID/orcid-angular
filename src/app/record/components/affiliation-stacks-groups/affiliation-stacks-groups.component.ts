@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
@@ -56,17 +57,19 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.userRecord = userRecord
-        this.profileAffiliationUiGroups = this.userRecord.affiliations
-        this.affiliationsCount =
-          this.getAffiliationType('EMPLOYMENT')?.affiliationGroup.length +
-          this.getAffiliationType('EDUCATION_AND_QUALIFICATION')
-            ?.affiliationGroup.length +
-          this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
-            ?.affiliationGroup.length +
-          this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
-            .length
-        this.total.emit(this.affiliationsCount)
+        if (!isEmpty(userRecord.affiliations)) {
+          this.userRecord = userRecord
+          this.profileAffiliationUiGroups = this.userRecord.affiliations
+          this.affiliationsCount =
+            this.getAffiliationType('EMPLOYMENT')?.affiliationGroup.length +
+            this.getAffiliationType('EDUCATION_AND_QUALIFICATION')
+              ?.affiliationGroup.length +
+            this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
+              ?.affiliationGroup.length +
+            this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
+              .length
+          this.total.emit(this.affiliationsCount)
+        }
       })
   }
 

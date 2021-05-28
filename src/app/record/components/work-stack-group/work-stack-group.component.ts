@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 
 @Component({
@@ -24,7 +24,6 @@ export class WorkStackGroupComponent implements OnInit {
 
   workGroup: WorksEndpoint
   userSession: UserSession
-  userRecord: UserRecord
 
   works = $localize`:@@shared.works:Works`
 
@@ -37,9 +36,10 @@ export class WorkStackGroupComponent implements OnInit {
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
-        this.userRecord = userRecord
-        this.workGroup = this.userRecord.works
-        this.total.emit(this.userRecord.works.groups.length)
+        if (!isEmpty(userRecord.works)) {
+          this.workGroup = userRecord.works
+          this.total.emit(userRecord.works.groups.length)
+        }
       })
 
     this._userSession

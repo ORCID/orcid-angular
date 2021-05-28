@@ -31,7 +31,7 @@ export class RecordWebsitesService {
   ): Observable<WebsitesEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.website))
     }
     if (!this.$websites) {

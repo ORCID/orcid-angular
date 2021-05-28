@@ -9,6 +9,7 @@
 
   <ng-container *ngIf="!onlyOrcidId">
     <app-panel
+      expandButtonsPosition="right"
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.emails.emails"
       [editModalComponent]="modalEmailComponent"
@@ -43,6 +44,7 @@
     </app-panel>
 
     <app-panel
+      expandButtonsPosition="right"
       [elements]="userRecord.website.websites"
       [editModalComponent]="modalWebsitesComponent"
       [isPublicRecord]="isPublicRecord"
@@ -85,6 +87,7 @@
     </app-panel>
 
     <app-panel
+      expandButtonsPosition="right"
       *ngIf="
         userRecord?.externalIdentifier?.externalIdentifiers &&
         (!isPublicRecord ||
@@ -134,6 +137,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
+      expandButtonsPosition="right"
       *ngIf="
         userRecord?.keyword?.keywords &&
         (!isPublicRecord || userRecord.keyword.keywords.length > 0)
@@ -166,6 +170,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
+      expandButtonsPosition="right"
       *ngIf="
         userRecord?.countries?.addresses &&
         (!isPublicRecord || userRecord.countries.addresses.length > 0)

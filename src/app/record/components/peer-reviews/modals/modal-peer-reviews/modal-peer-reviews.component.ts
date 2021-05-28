@@ -1,8 +1,7 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { Subject } from 'rxjs'
-import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { RecordPeerReviewService } from '../../../../../core/record-peer-review/record-peer-review.service'
 import { first } from 'rxjs/operators'
 import { RecordPeerReviewImport } from '../../../../../types/record-peer-review-import.endpoint'
@@ -21,8 +20,6 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _platform: PlatformInfoService,
     private _recordPeerReviewService: RecordPeerReviewService
   ) {}
 
