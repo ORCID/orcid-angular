@@ -14,10 +14,7 @@
   >
     <ng-container *ngIf="fundings.length > 0">
       <app-funding-stack
-        *ngFor="
-          let fundingGroup of fundings;
-          trackBy: trackByFundingGroup
-        "
+        *ngFor="let fundingGroup of fundings; trackBy: trackByFundingGroup"
         [fundingStack]="fundingGroup"
         [isPublicRecord]="isPublicRecord"
       ></app-funding-stack>

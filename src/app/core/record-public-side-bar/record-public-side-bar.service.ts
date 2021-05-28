@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { observable, Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap } from 'rxjs/operators'
 import {
   SideBarPublicUserRecord,

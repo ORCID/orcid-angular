@@ -6,7 +6,6 @@ import {
   EmailsEndpoint,
   ExternalIdentifier,
   Keywords,
-  Person,
   PersonIdentifierEndpoint,
   Preferences,
   UserInfo,
