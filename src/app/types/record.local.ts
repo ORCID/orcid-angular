@@ -1,4 +1,4 @@
-import { Person, Preferences, PersonIdentifierEndpoint, UserInfo } from '.'
+import { Preferences, PersonIdentifierEndpoint, UserInfo } from '.'
 import { OtherNamesEndPoint } from './record-other-names.endpoint'
 import { KeywordEndPoint } from './record-keyword.endpoint'
 import { NamesEndPoint } from './record-name.endpoint'

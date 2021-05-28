@@ -22,10 +22,7 @@ import {
   PlatformInfo,
   PlatformInfoService,
 } from '../../../../../cdk/platform-info'
-import {
-  Visibility,
-  VisibilityStrings,
-} from '../../../../../types/common.endpoint'
+import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { Assertion } from '../../../../../types'
 import { NamesEndPoint } from '../../../../../types/record-name.endpoint'
 import { OtherNamesEndPoint } from '../../../../../types/record-other-names.endpoint'

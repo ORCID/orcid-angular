@@ -1,12 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { UserRecord } from '../../../types/record.local'
 import { Subject } from 'rxjs'
-import {
-  NameForm,
-  OrgDisambiguated,
-  RequestInfoForm,
-  UserInfo,
-} from '../../../types'
+import { OrgDisambiguated } from '../../../types'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { RecordService } from '../../../core/record/record.service'
 import { first, takeUntil } from 'rxjs/operators'
