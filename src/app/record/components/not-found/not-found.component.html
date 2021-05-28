@@ -2,7 +2,7 @@
   <div
     class="container"
     [ngClass]="{
-      'mobile': !platform.columns12
+      mobile: !platform.columns12
     }"
   >
     <div class="row space-around">
@@ -11,11 +11,8 @@
           'col l5 m6 s4': !platform.columns12
         }"
       >
-        <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo"/>
-        <h2
-          class="orc-font-heading-small"
-          i18n="@@record.notFound"
-        >
+        <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+        <h2 class="orc-font-heading-small" i18n="@@record.notFound">
           We’re really sorry, we can’t find the ORCID record you’re looking for.
         </h2>
         <div>
@@ -24,7 +21,8 @@
               If you typed in the iD or link by hand
             </b>
             <p i18n="@@record.pleaseCheck">
-              Please check that the ORCID iD - the 16-digit number at the end of the URL - is correct.
+              Please check that the ORCID iD - the 16-digit number at the end of
+              the URL - is correct.
             </p>
           </div>
           <div class="if-you">
@@ -32,7 +30,8 @@
               If you typed in the iD or link by hand
             </b>
             <p i18n="@@record.pleaseCheck">
-              Please check that the ORCID iD - the 16-digit number at the end of the URL - is correct.
+              Please check that the ORCID iD - the 16-digit number at the end of
+              the URL - is correct.
             </p>
           </div>
           <div class="if-you">
@@ -40,22 +39,24 @@
               If you followed a link to this record from another site or service
             </b>
             <p i18n="@@record.pleaseReport">
-              Please report this broken link to the site or service you came from so they can fix it. </p>
+              Please report this broken link to the site or service you came
+              from so they can fix it.
+            </p>
           </div>
           <div class="if-you">
             <b i18n="@@record.ifYouHave">
-              If you have previously bookmarked this record and it has stopped working
+              If you have previously bookmarked this record and it has stopped
+              working
             </b>
             <p i18n="@@record.pleaseGet">
-              Please get in touch with our support team via the Help button below.
+              Please get in touch with our support team via the Help button
+              below.
+            </p>
           </div>
+
           <h5 class="orc-font-body-large">Where next?</h5>
           <div class="search">
-            <a
-              class="underline"
-              i18n="@@record.headBack"
-              (click)="goto('/')"
-            >
+            <a class="underline" i18n="@@record.headBack" (click)="goto('/')">
               Head back to the main ORCID homepage
             </a>
           </div>

@@ -14,10 +14,7 @@ export class NotFoundComponent implements OnInit {
 
   platform: PlatformInfo
 
-  constructor(
-    private router: Router,
-    private _platform: PlatformInfoService
-  ) {
+  constructor(private router: Router, private _platform: PlatformInfoService) {
     _platform
       .get()
       .pipe(takeUntil(this.$destroy))
@@ -31,5 +28,4 @@ export class NotFoundComponent implements OnInit {
   goto(url) {
     this.router.navigate([url])
   }
-
 }
