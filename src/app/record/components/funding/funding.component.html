@@ -20,13 +20,14 @@
       </ng-container>
       {{ funding.fundingType.value | titlecase }}
     </div>
-    <div *ngIf="orgDisambiguated">
+    <div *ngIf="funding.fundingName?.value ">
       <div>
-        {{ orgDisambiguated?.value
-        }}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
-          >:</ng-container
-        >
-        ({{ orgDisambiguated | cityRegionCountry }})
+        {{ funding.fundingName?.value }}
+        (<ng-container *ngIf="funding.city?.value">
+          {{ funding.city?.value }}
+        </ng-container>
+        <ng-container *ngIf="funding.region?.value">, {{ funding.region?.value }}</ng-container>
+        <ng-container *ngIf="funding.countryForDisplay">, {{ funding.countryForDisplay }}</ng-container>)
       </div>
     </div>
     <div *ngIf="funding?.url?.value">
