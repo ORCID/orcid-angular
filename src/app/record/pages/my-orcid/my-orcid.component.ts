@@ -53,7 +53,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {}, 300)
     this.affiliations = 0
     this._platform.get().subscribe((value) => (this.platform = value))
     this._record
