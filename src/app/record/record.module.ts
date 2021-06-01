@@ -97,7 +97,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MatCardModule,
     MatMenuModule,
     TrustedIndividualsDropdownModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
 })
 export class RecordModule {}

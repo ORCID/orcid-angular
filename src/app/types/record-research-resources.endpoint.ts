@@ -43,5 +43,5 @@ export interface ResearchResourcesEndpoint {
   groups: ResearchResourcesGroup[]
   nextOffset: number
   totalGroups: number
-  offset: number  // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
+  offset: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
 }

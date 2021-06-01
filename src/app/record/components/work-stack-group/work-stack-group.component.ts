@@ -2,12 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-import { UserService } from 'src/app/core'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
-import { UserSession } from 'src/app/types/session.local'
 
 @Component({
   selector: 'app-work-stack-group',

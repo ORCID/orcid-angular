@@ -48,6 +48,6 @@ export interface WorksEndpoint {
   nextOffset: number
   totalGroups: number
   groups: WorkGroup[]
-  pageIndex: number, // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
-  pageSize: number, // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
+  pageIndex: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
+  pageSize: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
 }

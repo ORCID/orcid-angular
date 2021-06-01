@@ -211,6 +211,9 @@ export class ResearchResourcesComponent implements OnInit {
   }
 
   loadMore() {
-    this._recordResearchResourceService.loadMore(this.offset + 50, this.isPublicRecord)
+    this._recordResearchResourceService.loadMore(
+      this.offset + 50,
+      this.isPublicRecord
+    )
   }
 }
