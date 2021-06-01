@@ -57,7 +57,7 @@ export class RecordWorksService {
         .get<WorksEndpoint>(
           environment.API_WEB +
             options.publicRecordId +
-            'works/worksPage.json?.json?offset=' +
+            'works/worksPage.json?offset=' +
             options.offset +
             '&sort=' +
             (options.sort != null ? options.sort : true) +
