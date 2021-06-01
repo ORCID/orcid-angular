@@ -88,6 +88,14 @@ export class RecordResearchResourceService {
             (options.sortAsc != null ? options.sort : true)
         )
         .pipe(
+          map((value) => {
+            if (this.currentValue) {
+              value.groups = value.groups.concat(this.currentValue.groups)
+            }
+            this.currentValue = value
+            value.offset = options.offset
+            return value
+          }),
           tap((value) => {
             this.$RecordResearchResourceSubject.next(value)
           }),
