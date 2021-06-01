@@ -42,10 +42,14 @@ app-panel-data {
       }
     }
   }
+
+  .description-container,
+  .show-details {
+    border-bottom: solid 1px;
+  }
 }
 
 .description {
-  border-bottom: solid 1px;
   padding: 16px;
 }
 

@@ -32,9 +32,17 @@
               {{ research.title }}
             </b>
           </div>
-          <app-panel-data class="orc-font-body-small">
+          <app-panel-data
+            class="orc-font-body-small"
+            [borderBottom]="research.showDetails"
+          >
             <app-panel-element [hideVisibility]="false">
-              <div class="description-container">
+              <div
+                class="description-container"
+                [ngClass]="{
+                  'show-details': research.showDetails
+                }"
+              >
                 <div class="description">
                   <div *ngFor="let host of research.hosts">
                     <span>{{ host.name | titlecase }}</span>
@@ -332,57 +340,58 @@
                           </a>
                         </span>
                       </div>
-                      <app-panel-data *ngIf="item.showDetails">
+                      <app-panel-data
+                        [borderBottom]="true"
+                        *ngIf="item.showDetails"
+                      >
                         <app-panel-element [hideVisibility]="false">
-                          <div class="description">
-                            <ng-container
-                              class="description"
-                              *ngFor="
-                                let itemExternalIdentifier of item.externalIdentifiers
-                              "
-                            >
-                              <div>
+                          <div
+                            class="description"
+                            *ngFor="
+                              let itemExternalIdentifier of item.externalIdentifiers
+                            "
+                          >
+                            <div>
+                              {{
+                                itemExternalIdentifier.externalIdentifierType
+                                  .value + ':' | uppercase
+                              }}
+                              <ng-container
+                                *ngIf="
+                                  !isUrl(
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  )
+                                "
+                              >
                                 {{
-                                  itemExternalIdentifier.externalIdentifierType
-                                    .value + ':' | uppercase
+                                  itemExternalIdentifier.externalIdentifierId
+                                    .value
                                 }}
-                                <ng-container
-                                  *ngIf="
-                                    !isUrl(
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    )
-                                  "
+                              </ng-container>
+                              <ng-container
+                                *ngIf="
+                                  isUrl(
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  )
+                                "
+                              >
+                                <a
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  href="{{
+                                    itemExternalIdentifier.externalIdentifierId
+                                      .value
+                                  }}"
                                 >
                                   {{
                                     itemExternalIdentifier.externalIdentifierId
                                       .value
                                   }}
-                                </ng-container>
-                                <ng-container
-                                  *ngIf="
-                                    isUrl(
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    )
-                                  "
-                                >
-                                  <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href="{{
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    }}"
-                                  >
-                                    {{
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    }}
-                                  </a>
-                                </ng-container>
-                              </div>
-                            </ng-container>
+                                </a>
+                              </ng-container>
+                            </div>
                           </div>
                           <ng-container *ngFor="let itemHost of item.hosts">
                             <div
