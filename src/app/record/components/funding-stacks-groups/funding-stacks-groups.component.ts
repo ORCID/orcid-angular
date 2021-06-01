@@ -52,7 +52,7 @@ export class FundingStacksGroupsComponent implements OnInit {
           .subscribe((userRecord) => {
             if (!isEmpty(userRecord.fundings)) {
               this.fundings = userRecord.fundings
-              this.total.emit(userRecord.fundings.length)
+              this.total.emit(userRecord?.fundings?.length)
             }
           })
       })

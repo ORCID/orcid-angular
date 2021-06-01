@@ -54,7 +54,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.loading = true
     }, 300)
     this.affiliations = 0
     this._platform.get().subscribe((value) => (this.platform = value))
@@ -66,6 +65,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
+        this.loading = true
         if (this.publicOrcid && this.recordWithIssues) {
           this._robotsMeta.addRobotMetaTags()
         }

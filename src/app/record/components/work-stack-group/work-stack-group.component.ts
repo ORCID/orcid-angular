@@ -38,7 +38,7 @@ export class WorkStackGroupComponent implements OnInit {
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord.works)) {
           this.workGroup = userRecord.works
-          this.total.emit(userRecord.works.groups.length)
+          this.total.emit(userRecord.works?.groups?.length)
         }
       })
 
