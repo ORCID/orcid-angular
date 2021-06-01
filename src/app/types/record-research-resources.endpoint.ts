@@ -39,8 +39,9 @@ export interface ResearchResourcesGroup extends GroupBase {
   researchResources: ResearchResource[]
 }
 
-export interface ResearchResources {
+export interface ResearchResourcesEndpoint {
   groups: ResearchResourcesGroup[]
   nextOffset: number
   totalGroups: number
+  offset: number  // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
 }

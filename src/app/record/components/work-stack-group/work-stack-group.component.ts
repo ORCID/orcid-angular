@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
+import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserSession } from 'src/app/types/session.local'
@@ -23,13 +25,15 @@ export class WorkStackGroupComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   workGroup: WorksEndpoint
-  userSession: UserSession
 
   works = $localize`:@@shared.works:Works`
+  paginationTotalAmountOfWorks: number
+  paginationIndex: number
+  paginationPageSize: number
 
   constructor(
-    private _userSession: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _works: RecordWorksService
   ) {}
 
   ngOnInit(): void {
@@ -38,15 +42,12 @@ export class WorkStackGroupComponent implements OnInit {
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord.works)) {
           this.workGroup = userRecord.works
+          this.paginationTotalAmountOfWorks = userRecord.works.totalGroups
+          this.paginationIndex = userRecord.works.pageIndex
+          this.paginationPageSize = userRecord.works.pageSize
+
           this.total.emit(userRecord.works.groups.length)
         }
-      })
-
-    this._userSession
-      .getUserSession()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userSession) => {
-        this.userSession = userSession
       })
   }
 
@@ -56,5 +57,9 @@ export class WorkStackGroupComponent implements OnInit {
 
   expandedClicked(expanded: boolean) {
     this.expanded.emit({ type: 'works', expanded })
+  }
+
+  pageEvent(event: PageEvent) {
+    this._works.changePage(event, this.isPublicRecord)
   }
 }

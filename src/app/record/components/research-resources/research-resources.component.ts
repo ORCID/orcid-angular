@@ -9,7 +9,7 @@ import {
   Host,
   Item,
   ResearchResource,
-  ResearchResources,
+  ResearchResourcesEndpoint,
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
@@ -35,7 +35,7 @@ export class ResearchResourcesComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   userSession: UserSession
-  researchResources: ResearchResources
+  researchResources: ResearchResourcesEndpoint
   platform: PlatformInfo
   detailsResearchResources: {
     putCode: number
@@ -48,6 +48,7 @@ export class ResearchResourcesComponent implements OnInit {
   }[] = []
 
   ngOrcidResearchResources = $localize`:@@researchResources.researchResources:Research resources`
+  offset: number
 
   constructor(
     _platform: PlatformInfoService,
@@ -84,6 +85,7 @@ export class ResearchResourcesComponent implements OnInit {
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.researchResources)) {
           this.researchResources = userRecord.researchResources
+          this.offset = userRecord.researchResources.offset
           this.total.emit(this.researchResources.groups.length)
         }
       })
@@ -206,5 +208,9 @@ export class ResearchResourcesComponent implements OnInit {
 
   expandedClicked(expanded: boolean) {
     this.expanded.emit({ type: 'research-resources', expanded })
+  }
+
+  loadMore() {
+    this._recordResearchResourceService.loadMore(this.offset + 50, this.isPublicRecord)
   }
 }

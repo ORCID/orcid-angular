@@ -35,7 +35,7 @@ import { RecordFundingsService } from '../record-fundings/record-fundings.servic
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
-import { ResearchResources } from '../../types/record-research-resources.endpoint'
+import { ResearchResourcesEndpoint } from '../../types/record-research-resources.endpoint'
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
@@ -84,11 +84,7 @@ export class RecordService {
    *
    * @returns And subject with all the require data from private or public orcid record
    */
-  getRecord(
-    options: UserRecordOptions = {
-      forceReload: false,
-    }
-  ): Observable<UserRecord> {
+  getRecord(options?: UserRecordOptions): Observable<UserRecord> {
     if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
       if (environment.debugger) {
@@ -160,7 +156,7 @@ export class RecordService {
                 fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
-                researchResources: researchResources as ResearchResources,
+                researchResources: researchResources as ResearchResourcesEndpoint,
                 works: works as WorksEndpoint,
                 lastModifiedTime: lastModifiedTime as any,
                 userInfo: userInfo as UserInfo,

@@ -44,6 +44,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
 import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dro
     MatCardModule,
     MatMenuModule,
     TrustedIndividualsDropdownModule,
+    MatPaginatorModule
   ],
 })
 export class RecordModule {}
