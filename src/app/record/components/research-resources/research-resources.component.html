@@ -6,7 +6,8 @@
     class="row"
     [title]="ngOrcidResearchResources"
     [type]="'research-resources'"
-    [total]="researchResources.groups.length"
+    [total]="researchResources.totalGroups"
+    [currentAmount]="researchResources?.groups.length"
     [expandedContent]="expandedContent"
     (expanded)="expandedClicked($event)"
     id="research-resources-panel"
@@ -550,5 +551,15 @@
         </a>
       </div>
     </ng-container>
+    <button
+      class="load-more"
+      mat-raised-button
+      color="primary"
+      (click)="loadMore()"
+      *ngIf="researchResources.totalGroups > researchResources?.groups.length"
+      i18n="@@share.loadMore"
+    >
+      Load more
+    </button>
   </app-panels>
 </ng-container>

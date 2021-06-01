@@ -14,6 +14,7 @@ export class PanelsComponent implements OnInit {
   @Input() expandedContent = true
   @Input() title
   @Input() type:
+    | 'works'
     | 'activities'
     | 'peer-review'
     | 'sub-peer-review'

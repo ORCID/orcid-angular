@@ -10,7 +10,17 @@
     (expanded)="expandedClicked($event)"
     [labelAddButton]="labelAddButton"
     [labelSortButton]="labelSortButton"
+    type="works"
   >
+    <mat-paginator
+      *ngIf="workGroup.totalGroups > workGroup.groups.length"
+      [length]="paginationTotalAmountOfWorks"
+      [pageSize]="paginationPageSize"
+      [pageSizeOptions]="[10, 50, 100]"
+      [pageIndex]="paginationIndex"
+      (page)="pageEvent($event)"
+    >
+    </mat-paginator>
     <ng-container *ngIf="workGroup.groups.length > 0">
       <app-work-stack
         [isPublicRecord]="isPublicRecord"
@@ -29,5 +39,14 @@
         </a>
       </div>
     </ng-container>
+    <mat-paginator
+      *ngIf="workGroup.totalGroups > workGroup.groups.length"
+      [length]="paginationTotalAmountOfWorks"
+      [pageSize]="paginationPageSize"
+      [pageSizeOptions]="[10, 50, 100]"
+      [pageIndex]="paginationIndex"
+      (page)="pageEvent($event)"
+    >
+    </mat-paginator>
   </app-panels>
 </ng-container>

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { PageEvent } from '@angular/material/paginator'
 import { Observable, ReplaySubject } from 'rxjs'
-import { switchMap, retry, catchError, map, tap } from 'rxjs/operators'
+import { switchMap, retry, catchError, map, tap, take } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
@@ -47,25 +48,35 @@ export class RecordWorksService {
    *
    * @param id user Orcid id
    */
-  getWorks(
-    options: UserRecordOptions = {
-      forceReload: false,
-    }
-  ) {
+  getWorks(options: UserRecordOptions) {
+    options.pageSize = options.pageSize || 50
+    options.offset = options.offset || 0
+
     if (options.publicRecordId) {
       return this._http
         .get<WorksEndpoint>(
           environment.API_WEB +
             options.publicRecordId +
-            '/worksPage.json?offset=' +
-            this.offset +
+            'works/worksPage.json?offset=' +
+            options.offset +
             '&sort=' +
             (options.sort != null ? options.sort : true) +
             '&sortAsc=' +
             (options.sortAsc != null ? options.sort : true) +
-            `&pageSize=50`
+            `&pageSize=` +
+            options.pageSize
         )
+
         .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          map((data) => {
+            data.pageSize = options.pageSize
+            data.pageIndex = options.offset
+              ? Math.floor(options.offset / options.pageSize)
+              : 0
+            return data
+          }),
           tap((data) => {
             this.lastEmitedValue = data
             this.workSubject.next(data)
@@ -73,14 +84,45 @@ export class RecordWorksService {
           switchMap((data) => this.workSubject.asObservable())
         )
     } else {
-      return this.getWorksData(0, 'date', 'false').pipe(
-        tap((data) => {
-          this.lastEmitedValue = data
-          this.workSubject.next(data)
-        }),
-        switchMap((data) => this.workSubject.asObservable())
-      )
+      return this._http
+        .get<WorksEndpoint>(
+          environment.API_WEB +
+            'works/worksPage.json?offset=' +
+            options.offset +
+            '&sort=' +
+            (options.sort != null ? options.sort : true) +
+            '&sortAsc=' +
+            (options.sortAsc != null ? options.sort : true) +
+            `&pageSize=` +
+            options.pageSize
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          map((data) => {
+            data.pageSize = options.pageSize
+            data.pageIndex = options.offset
+              ? Math.floor(options.offset / options.pageSize)
+              : 0
+            return data
+          }),
+          tap((data) => {
+            this.lastEmitedValue = data
+            this.workSubject.next(data)
+          }),
+          switchMap((data) => this.workSubject.asObservable())
+        )
     }
+  }
+
+  changePage(event: PageEvent, publicRecord?: string) {
+    this.getWorks({
+      publicRecordId: publicRecord,
+      offset: event.pageIndex * event.pageSize,
+      pageSize: event.pageSize,
+    })
+      .pipe(take(1))
+      .subscribe()
   }
 
   /**
