@@ -85,4 +85,8 @@
     </div>
   </div>
 </ng-container>
-<app-not-found *ngIf="loading && userRecord.userInfo && !userRecord?.userInfo.EFFECTIVE_USER_ORCID"></app-not-found>
+<app-not-found
+  *ngIf="
+    loading && userRecord.userInfo && !userRecord?.userInfo.EFFECTIVE_USER_ORCID
+  "
+></app-not-found>
