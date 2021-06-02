@@ -7,21 +7,21 @@
     'no-bold': noBoldTitle
   }"
 >
-  <i class="prefixTitle" *ngIf="prefixTitle">
-    <ng-container *ngIf="prefixTitle === 'part-of'" i18n="@@shared.partOf">
+  <span class="prefixTitle" *ngIf="prefixTitle">
+    <i *ngIf="prefixTitle === 'part-of'" i18n="@@shared.partOf">
       Part of
-    </ng-container>
-    <ng-container *ngIf="prefixTitle === 'funded-by'" i18n="@@shared.fundedBy">
+    </i>
+    <i *ngIf="prefixTitle === 'funded-by'" i18n="@@shared.fundedBy">
       Funded by
-    </ng-container>
-    <ng-container
+    </i>
+    <i
       *ngIf="prefixTitle === 'version-of'"
       i18n="@@shared.versionOf"
     >
       Version of
-    </ng-container>
-  </i>
-  {{ title }}
+    </i>
+  </span>
+  <span>{{ title }}</span>
   <ng-container *ngIf="detail">&#x200E;({{ detail }})&#x200E;</ng-container>
   <p
     class="mat-body-1"
