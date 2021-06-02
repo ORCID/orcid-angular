@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment'
 import { AffiliationsSortService } from '../record-affiliations-sort/record-affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, transform } from 'lodash'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({
@@ -130,6 +130,16 @@ export class RecordAffiliationService {
           catchError((error) => this._errorHandler.handleError(error))
         )
     }
+  }
+
+  changeUserRecordContext(userRecordContext: UserRecordOptions, type: string) {
+    const value = this._affiliationsSortService.transform(
+      this.lastEmitedValue,
+      userRecordContext,
+      type
+    )
+    this.lastEmitedValue = cloneDeep(value)
+    this.$affiliations.next(value)
   }
 
   set(value): Observable<AffiliationUIGroup[]> {
