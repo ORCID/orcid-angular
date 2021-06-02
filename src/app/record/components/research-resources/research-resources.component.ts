@@ -1,10 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { OrgDisambiguated } from '../../../types'
-import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
-import { RecordService } from '../../../core/record/record.service'
 import { first, takeUntil } from 'rxjs/operators'
+import { UserRecordOptions } from 'src/app/types/record.local'
+import { UserSession } from 'src/app/types/session.local'
+import { SortData } from 'src/app/types/sort'
+
+import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
+import { URL_REGEXP } from '../../../constants'
 import { OrganizationsService, UserService } from '../../../core'
+import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
+import { RecordService } from '../../../core/record/record.service'
+import { OrgDisambiguated } from '../../../types'
 import {
   Host,
   Item,
@@ -12,10 +19,6 @@ import {
   ResearchResourcesEndpoint,
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
-import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
-import { URL_REGEXP } from '../../../constants'
-import { UserSession } from 'src/app/types/session.local'
-import { isEmpty } from 'lodash'
 
 @Component({
   selector: 'app-research-resources',
@@ -31,6 +34,7 @@ export class ResearchResourcesComponent implements OnInit {
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
+  userRecordContext: UserRecordOptions = {}
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -167,6 +171,25 @@ export class ResearchResourcesComponent implements OnInit {
       })[0]
   }
 
+  sortEvent(event: SortData) {
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sortAsc = event.direction === 'asc'
+    this.userRecordContext.forceReload = true
+    this.userRecordContext.offset = 0
+    this._recordResearchResourceService.changeUserRecordContext(
+      this.userRecordContext
+    )
+  }
+
+  loadMore() {
+    ;(this.userRecordContext.offset = this.offset + 50),
+      (this.userRecordContext.publicRecordId = this.isPublicRecord)
+    this.userRecordContext.forceReload = false
+    this._recordResearchResourceService.changeUserRecordContext(
+      this.userRecordContext
+    )
+  }
+
   getOrganizationDisambiguated(host: Host): OrgDisambiguated {
     const disambiguationSource = host.disambiguationSource
     const orgDisambiguatedId = host.orgDisambiguatedId
@@ -208,12 +231,5 @@ export class ResearchResourcesComponent implements OnInit {
 
   expandedClicked(expanded: boolean) {
     this.expanded.emit({ type: 'research-resources', expanded })
-  }
-
-  loadMore() {
-    this._recordResearchResourceService.loadMore(
-      this.offset + 50,
-      this.isPublicRecord
-    )
   }
 }

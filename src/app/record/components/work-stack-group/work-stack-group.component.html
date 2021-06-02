@@ -10,6 +10,9 @@
     (expanded)="expandedClicked($event)"
     [labelAddButton]="labelAddButton"
     [labelSortButton]="labelSortButton"
+    [sortTypes]="['date', 'title', 'type']"
+    [sortType]="'date'"
+    (sort)="sortEvent($event)"
     type="works"
   >
     <mat-paginator

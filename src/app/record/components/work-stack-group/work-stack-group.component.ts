@@ -5,6 +5,8 @@ import { Subject } from 'rxjs'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
+import { SortData } from 'src/app/types/sort'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -18,6 +20,7 @@ export class WorkStackGroupComponent implements OnInit {
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
+  userRecordContext: UserRecordOptions = {}
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -57,6 +60,16 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   pageEvent(event: PageEvent) {
-    this._works.changePage(event, this.isPublicRecord)
+    this.userRecordContext.offset = event.pageIndex * event.pageSize
+    this.userRecordContext.pageSize = event.pageSize
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this._works.changeUserRecordContext(this.userRecordContext)
+  }
+
+  sortEvent(event: SortData) {
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sort = event.type
+    this.userRecordContext.sortAsc = event.direction === 'asc'
+    this._works.changeUserRecordContext(this.userRecordContext)
   }
 }

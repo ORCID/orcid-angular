@@ -1,5 +1,5 @@
 <ng-container
-  *ngIf="!(isPublicRecord && researchResources?.groups.length === 0)"
+  *ngIf="!(researchResources?.groups.length === 0)"
 >
   <app-panels
     *ngIf="researchResources?.groups"
@@ -12,6 +12,9 @@
     (expanded)="expandedClicked($event)"
     id="research-resources-panel"
     [labelSortButton]="labelSortButton"
+    [sortTypes]="['date', 'title']"
+    [sortType]="'date'"
+    (sort)="sortEvent($event)"
   >
     <ng-container *ngIf="researchResources.groups.length > 0">
       <ng-container

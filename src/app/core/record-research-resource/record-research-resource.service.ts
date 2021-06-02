@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
+import { first, map, tap } from 'rxjs/operators'
+import { UserRecordOptions } from 'src/app/types/record.local'
+
 import { environment } from '../../../environments/environment'
 import {
   ResearchResource,
   ResearchResourcesEndpoint,
 } from '../../types/record-research-resources.endpoint'
-import { UserRecordOptions } from 'src/app/types/record.local'
-import { first, map, tap } from 'rxjs/operators'
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
@@ -33,20 +34,23 @@ export class RecordResearchResourceService {
   ): Observable<ResearchResourcesEndpoint> {
     options.offset = options.offset || 0
 
-    if (options.forceReload) {
-      this.$RecordResearchResourceSubject = null
-      this.lastOffset = 0
-      this.currentValue = null
+    if (
+      this.$RecordResearchResourceSubject &&
+      !options.forceReload &&
+      !(options.offset > this.lastOffset)
+    ) {
+      return this.$RecordResearchResourceSubject.asObservable()
     }
 
-    if (this.$RecordResearchResourceSubject) {
-      if (!(options.offset > this.lastOffset)) {
-        return this.$RecordResearchResourceSubject.asObservable()
-      }
-    } else {
+    if (!this.$RecordResearchResourceSubject) {
       this.$RecordResearchResourceSubject = new ReplaySubject<ResearchResourcesEndpoint>(
         1
       )
+    }
+
+    if (options.forceReload) {
+      this.lastOffset = 0
+      this.currentValue = null
     }
 
     if (options.publicRecordId) {
@@ -57,13 +61,13 @@ export class RecordResearchResourceService {
             '/researchResourcePage.json?offset=' +
             options.offset +
             '&sort=' +
-            (options.sort != null ? options.sort : true) +
+            (options.sort != null ? options.sort : 'date') +
             '&sortAsc=' +
-            (options.sortAsc != null ? options.sort : true)
+            (options.sortAsc != null ? options.sortAsc : false)
         )
         .pipe(
           map((value) => {
-            if (this.currentValue) {
+            if (this.currentValue && !options.forceReload) {
               value.groups = value.groups.concat(this.currentValue.groups)
             }
             this.currentValue = value
@@ -83,9 +87,9 @@ export class RecordResearchResourceService {
             'research-resources/researchResourcePage.json?offset=' +
             options.offset +
             '&sort=' +
-            (options.sort != null ? options.sort : true) +
+            (options.sort != null ? options.sort : 'date') +
             '&sortAsc=' +
-            (options.sortAsc != null ? options.sort : true)
+            (options.sortAsc != null ? options.sortAsc : true)
         )
         .pipe(
           map((value) => {
@@ -104,6 +108,10 @@ export class RecordResearchResourceService {
         .subscribe()
     }
     return this.$RecordResearchResourceSubject.asObservable()
+  }
+
+  changeUserRecordContext(event: UserRecordOptions): void {
+    this.getResearchResourcePage(event)
   }
 
   loadMore(offset: number, publicRecordId?: string) {

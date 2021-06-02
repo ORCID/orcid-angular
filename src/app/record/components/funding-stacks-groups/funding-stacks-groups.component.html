@@ -1,4 +1,4 @@
-<ng-container *ngIf="!(isPublicRecord && fundings?.length === 0)">
+<ng-container *ngIf="!(fundings?.length === 0)">
   <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
   <app-panels
     *ngIf="fundings"
@@ -11,6 +11,9 @@
     (expanded)="expandedClicked($event)"
     [labelAddButton]="labelAddButton"
     [labelSortButton]="labelSortButton"
+    [sortTypes]="['date', 'title', 'type']"
+    [sortType]="'date'"
+    (sort)="sortEvent($event)"
   >
     <ng-container *ngIf="fundings.length > 0">
       <app-funding-stack

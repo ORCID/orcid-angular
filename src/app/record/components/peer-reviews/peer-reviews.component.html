@@ -10,6 +10,10 @@
     (expanded)="expandedClicked($event)"
     [labelAddButton]="labelAddButton"
     [labelSortButton]="labelSortButton"
+    [sortTypes]="['order']"
+    [sortType]="'order'"
+    [sortDirection]="'asc'"
+    (sort)="sortEvent($event)"
   >
     <ng-container *ngIf="peerReviews.length > 0">
       <app-panel
