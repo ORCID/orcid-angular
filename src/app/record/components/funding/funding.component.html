@@ -35,9 +35,7 @@
       </div>
     </div>
     <div *ngIf="funding?.url?.value">
-      <span>
-        <ng-container i18n="@@shared.url">URL</ng-container>:
-      </span>
+      <span> <ng-container i18n="@@shared.url">URL</ng-container>: </span>
       <a
         class="underline"
         href="{{ funding.url.value }}"

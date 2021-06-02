@@ -8,16 +8,11 @@
   }"
 >
   <span class="prefixTitle" *ngIf="prefixTitle">
-    <i *ngIf="prefixTitle === 'part-of'" i18n="@@shared.partOf">
-      Part of
-    </i>
+    <i *ngIf="prefixTitle === 'part-of'" i18n="@@shared.partOf"> Part of </i>
     <i *ngIf="prefixTitle === 'funded-by'" i18n="@@shared.fundedBy">
       Funded by
     </i>
-    <i
-      *ngIf="prefixTitle === 'version-of'"
-      i18n="@@shared.versionOf"
-    >
+    <i *ngIf="prefixTitle === 'version-of'" i18n="@@shared.versionOf">
       Version of
     </i>
   </span>
