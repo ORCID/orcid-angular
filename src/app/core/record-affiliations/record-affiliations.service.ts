@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment'
 import { AffiliationsSortService } from '../record-affiliations-sort/record-affiliations-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
-import { cloneDeep, transform } from 'lodash'
+import { cloneDeep } from 'lodash'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Injectable({

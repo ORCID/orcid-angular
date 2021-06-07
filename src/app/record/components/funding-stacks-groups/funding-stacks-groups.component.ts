@@ -75,5 +75,4 @@ export class FundingStacksGroupsComponent implements OnInit {
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this._recordFundingsService.changeUserRecordContext(this.userRecordContext)
   }
-
 }
