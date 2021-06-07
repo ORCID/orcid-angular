@@ -42,10 +42,10 @@ export class WorkStackGroupComponent implements OnInit {
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord.works)) {
           this.workGroup = userRecord.works
+          this.total.emit(userRecord.works?.groups?.length)
           this.paginationTotalAmountOfWorks = userRecord.works.totalGroups
           this.paginationIndex = userRecord.works.pageIndex
           this.paginationPageSize = userRecord.works.pageSize
-
           this.total.emit(userRecord.works.groups.length)
         }
       })

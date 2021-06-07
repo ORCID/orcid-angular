@@ -1,4 +1,4 @@
-<ng-container *ngIf="userRecord">
+<ng-container *ngIf="userRecord?.userInfo?.EFFECTIVE_USER_ORCID">
   <app-top-bar-my-public-record-preview
     [isPublicRecord]="publicOrcid"
   ></app-top-bar-my-public-record-preview>
@@ -85,4 +85,8 @@
     </div>
   </div>
 </ng-container>
-<app-not-found *ngIf="loading && !userRecord"></app-not-found>
+<app-not-found
+  *ngIf="
+    loading && userRecord.userInfo && !userRecord?.userInfo.EFFECTIVE_USER_ORCID
+  "
+></app-not-found>
