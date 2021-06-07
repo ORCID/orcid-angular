@@ -11,7 +11,7 @@ import { FundingGroup } from './record-funding.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
 import { ResearchResourcesEndpoint } from './record-research-resources.endpoint'
 import { WorksEndpoint } from './record-works.endpoint'
-import { SortOrderDirection, SortOrderType } from './sort'
+import { SortOrderType } from './sort'
 
 export interface SideBarPublicUserRecord {
   title?: any
