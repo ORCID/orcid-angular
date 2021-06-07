@@ -90,7 +90,7 @@ export class RecordWorksService {
             'works/worksPage.json?offset=' +
             options.offset +
             '&sort=' +
-            (options.sort != null ? options.sort : true) +
+            (options.sort != null ? options.sort : 'date') +
             '&sortAsc=' +
             (options.sortAsc != null ? options.sortAsc : true) +
             `&pageSize=` +
