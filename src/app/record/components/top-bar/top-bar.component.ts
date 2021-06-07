@@ -54,9 +54,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.checkLoadingState(userRecord)
         if (!isEmpty(userRecord.otherNames)) {
-          this.recordWithIssues = userRecord.userInfo?.RECORD_WITH_ISSUES
           this.setNames(userRecord)
         }
       })

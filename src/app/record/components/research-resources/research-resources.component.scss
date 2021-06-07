@@ -42,10 +42,14 @@ app-panel-data {
       }
     }
   }
+
+  .description-container,
+  .show-details {
+    border-bottom: solid 1px;
+  }
 }
 
 .description {
-  border-bottom: solid 1px;
   padding: 16px;
 }
 
@@ -63,6 +67,10 @@ app-panel-data {
     margin-left: $spacing-small;
     margin-right: auto;
   }
+}
+
+button.load-more {
+  margin-top: 20px;
 }
 
 p.empty {

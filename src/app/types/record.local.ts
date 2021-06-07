@@ -9,7 +9,7 @@ import { WebsitesEndPoint } from './record-websites.endpoint'
 import { AffiliationUIGroup } from './record-affiliation.endpoint'
 import { FundingGroup } from './record-funding.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
-import { ResearchResources } from './record-research-resources.endpoint'
+import { ResearchResourcesEndpoint } from './record-research-resources.endpoint'
 import { WorksEndpoint } from './record-works.endpoint'
 
 export interface SideBarPublicUserRecord {
@@ -40,7 +40,7 @@ export interface UserRecord {
   affiliations: AffiliationUIGroup[]
   fundings: FundingGroup[]
   peerReviews: PeerReview[]
-  researchResources: ResearchResources
+  researchResources: ResearchResourcesEndpoint
   works: WorksEndpoint
   lastModifiedTime: any
   userInfo: UserInfo
@@ -52,4 +52,6 @@ export interface UserRecordOptions {
   privateRecordId?: string
   sortAsc?: boolean
   sort?: boolean
+  offset?: number
+  pageSize?: number
 }
