@@ -42,13 +42,35 @@
         <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
       <button
-        mat-icon-button
+        mat-button
         class="orc-font-body-small"
         [attr.aria-label]="labelSortButton"
+        [matMenuTriggerFor]="menu"
       >
-        <mat-icon (click)="sort()" class="large-material-icon"> sort </mat-icon>
+        <mat-icon class="large-material-icon"> sort </mat-icon>
         <ng-container i18n="@@shared.sort"> Sort </ng-container>
       </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          (click)="sortChange(option)"
+          *ngFor="let option of sortTypes"
+        >
+          {{ option | sortLabel }}
+          <mat-icon
+            class="large-material-icon"
+            *ngIf="option === sortType && sortDirection === 'asc'"
+          >
+            south
+          </mat-icon>
+          <mat-icon
+            class="large-material-icon"
+            *ngIf="option === sortType && sortDirection === 'desc'"
+          >
+            north
+          </mat-icon>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </div>

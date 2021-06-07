@@ -2,15 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { UserService } from 'src/app/core'
+import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
   AffiliationGroup,
   AffiliationUIGroup,
   AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
+import { SortData } from 'src/app/types/sort'
 
 @Component({
   selector: 'app-affiliations',
@@ -28,7 +29,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   labelInvitedSortButton = $localize`:@@shared.sortInvited:Sort Invited Positions`
   labelMembershipAddButton = $localize`:@@shared.addMemberships:Add Membership`
   labelMembershipSortButton = $localize`:@@shared.sortMemberships:Sort Memberships`
-
+  userRecordContext: UserRecordOptions = {}
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
@@ -46,8 +47,8 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   affiliationsCount: number
 
   constructor(
-    private _userSession: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _recordAffiliationService: RecordAffiliationService
   ) {}
 
   ngOnInit(): void {
@@ -137,5 +138,15 @@ export class AffiliationStacksGroupsComponent implements OnInit {
         this.expanded.emit({ type: 'affiliations', expanded })
       }
     }
+  }
+
+  sortEvent(event: SortData, type: string) {
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sort = event.type
+    this.userRecordContext.sortAsc = event.direction === 'asc'
+    this._recordAffiliationService.changeUserRecordContext(
+      this.userRecordContext,
+      type
+    )
   }
 }

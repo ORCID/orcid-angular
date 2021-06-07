@@ -17,6 +17,8 @@
     (expanded)="expandedClicked('employment', $event)"
     [labelAddButton]="labelAddEmploymentButton"
     [labelSortButton]="labelSortEmploymentButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'EMPLOYMENT')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -68,6 +70,8 @@
     (expanded)="expandedClicked('education', $event)"
     [labelAddButton]="labelEducationAddButton"
     [labelSortButton]="labelEducationSortButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'EDUCATION_AND_QUALIFICATION')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -120,6 +124,8 @@
     (expanded)="expandedClicked('invited', $event)"
     [labelAddButton]="labelInvitedAddButton"
     [labelSortButton]="labelInvitedSortButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'INVITED_POSITION_AND_DISTINCTION')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -170,6 +176,8 @@
     (expanded)="expandedClicked('membership', $event)"
     [labelAddButton]="labelMembershipAddButton"
     [labelSortButton]="labelMembershipSortButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'MEMBERSHIP_AND_SERVICE')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack

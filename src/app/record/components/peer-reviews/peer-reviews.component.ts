@@ -9,6 +9,8 @@ import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 import { isEmpty } from 'lodash'
+import { SortData } from 'src/app/types/sort'
+import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -30,7 +32,9 @@ export class PeerReviewsComponent implements OnInit {
   modalPeerReviewComponent = ModalPeerReviewsComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
+  userRecordContext: UserRecordOptions = {}
 
+  $dest
   userSession: {
     userInfo: UserInfo
     nameForm: NameForm
@@ -87,6 +91,14 @@ export class PeerReviewsComponent implements OnInit {
           this.total.emit(this.peerReviews.length)
         }
       })
+  }
+
+  sortEvent(event: SortData) {
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sortAsc = event.direction === 'asc'
+    this._recordPeerReviewService.changeUserRecordContext(
+      this.userRecordContext
+    )
   }
 
   getDetails(peerReview: PeerReview, putCode: number): void {

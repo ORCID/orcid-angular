@@ -132,6 +132,16 @@ export class RecordAffiliationService {
     }
   }
 
+  changeUserRecordContext(userRecordContext: UserRecordOptions, type: string) {
+    const value = this._affiliationsSortService.transform(
+      this.lastEmitedValue,
+      userRecordContext,
+      type
+    )
+    this.lastEmitedValue = cloneDeep(value)
+    this.$affiliations.next(value)
+  }
+
   set(value): Observable<AffiliationUIGroup[]> {
     throw new Error('Method not implemented.')
   }

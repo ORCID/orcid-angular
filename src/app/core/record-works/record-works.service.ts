@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { PageEvent } from '@angular/material/paginator'
 import { Observable, ReplaySubject } from 'rxjs'
-import { switchMap, retry, catchError, map, tap, take } from 'rxjs/operators'
+import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -60,9 +60,9 @@ export class RecordWorksService {
             '/worksPage.json?offset=' +
             options.offset +
             '&sort=' +
-            (options.sort != null ? options.sort : true) +
+            (options.sort != null ? options.sort : 'date') +
             '&sortAsc=' +
-            (options.sortAsc != null ? options.sort : true) +
+            (options.sortAsc != null ? options.sortAsc : false) +
             `&pageSize=` +
             options.pageSize
         )
@@ -90,9 +90,9 @@ export class RecordWorksService {
             'works/worksPage.json?offset=' +
             options.offset +
             '&sort=' +
-            (options.sort != null ? options.sort : true) +
+            (options.sort != null ? options.sort : 'date') +
             '&sortAsc=' +
-            (options.sortAsc != null ? options.sort : true) +
+            (options.sortAsc != null ? options.sortAsc : true) +
             `&pageSize=` +
             options.pageSize
         )
@@ -115,14 +115,8 @@ export class RecordWorksService {
     }
   }
 
-  changePage(event: PageEvent, publicRecord?: string) {
-    this.getWorks({
-      publicRecordId: publicRecord,
-      offset: event.pageIndex * event.pageSize,
-      pageSize: event.pageSize,
-    })
-      .pipe(take(1))
-      .subscribe()
+  changeUserRecordContext(event: UserRecordOptions): void {
+    this.getWorks(event).pipe(take(1)).subscribe()
   }
 
   /**

@@ -4,6 +4,7 @@ import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
+import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
 
 @Component({
   selector: 'app-panels',
@@ -25,6 +26,12 @@ export class PanelsComponent implements OnInit {
   @Input() isPublicRecord: any = false
   @Input() addModalComponent: ComponentType<any>
   @Output() expanded: EventEmitter<any> = new EventEmitter()
+  @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
+  @Input() sortType: SortOrderType = 'end'
+  @Input() sortDirection: SortOrderDirection = 'desc'
+  @Input() defaultDirection: SortOrderDirection = 'asc'
+
+  @Output() sort: EventEmitter<SortData> = new EventEmitter()
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
 
@@ -57,7 +64,20 @@ export class PanelsComponent implements OnInit {
       })
   }
 
-  sort() {}
+  sortChange(by: SortOrderType) {
+    if (this.sortType === by && this.sortDirection === 'asc') {
+      this.sortDirection = 'desc'
+    } else if (this.sortType === by && this.sortDirection === 'desc') {
+      this.sortDirection = 'asc'
+    } else if (this.sortType !== by) {
+      this.sortDirection = this.defaultDirection
+      this.sortType = by
+    }
+    this.sort.next({
+      direction: this.sortDirection,
+      type: this.sortType,
+    })
+  }
   collapse() {
     this.expandedContent = !this.expandedContent
     this.expanded.emit(this.expandedContent)

@@ -6,16 +6,18 @@ import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordPeerReviewImport } from '../../types/record-peer-review-import.endpoint'
+import { retry, catchError, switchMap, tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordPeerReviewService {
-  $peer: ReplaySubject<PeerReview[]>
+  $peer: ReplaySubject<PeerReview[]> = new ReplaySubject<PeerReview[]>()
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   })
+  lastEmitedValue: PeerReview[]
 
   constructor(
     private _http: HttpClient,
@@ -24,18 +26,46 @@ export class RecordPeerReviewService {
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
     if (options.publicRecordId) {
-      return this._http.get<PeerReview[]>(
-        environment.API_WEB +
-          options.publicRecordId +
-          '/peer-reviews.json?sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : true)
-      )
+      this._http
+        .get<PeerReview[]>(
+          environment.API_WEB +
+            options.publicRecordId +
+            '/peer-reviews.json?sortAsc=' +
+            (options.sortAsc != null ? options.sortAsc : true)
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          tap((data) => {
+            this.lastEmitedValue = data
+            this.$peer.next(data)
+          }),
+          switchMap((data) => this.$peer.asObservable())
+        )
+        .subscribe()
+    } else {
+      this._http
+        .get<PeerReview[]>(
+          environment.API_WEB +
+            'peer-reviews/peer-reviews.json?sortAsc=' +
+            (options.sortAsc != null ? options.sortAsc : true)
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          tap((data) => {
+            this.lastEmitedValue = data
+            this.$peer.next(data)
+          }),
+          switchMap((data) => this.$peer.asObservable())
+        )
+        .subscribe()
     }
-    return this._http.get<PeerReview[]>(
-      environment.API_WEB +
-        'peer-reviews/peer-reviews.json?sortAsc=' +
-        (options.sortAsc != null ? options.sortAsc : true)
-    )
+    return this.$peer.asObservable()
+  }
+
+  changeUserRecordContext(userRecordContext: UserRecordOptions) {
+    this.getPeerReviewGroups(userRecordContext).subscribe()
   }
 
   getPeerReviewById(putCode: number): Observable<PeerReview> {
