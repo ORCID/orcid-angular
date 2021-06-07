@@ -56,7 +56,7 @@
           (click)="sortChange(option)"
           *ngFor="let option of sortTypes"
         >
-          {{ option }}
+          {{ option | sortLabel }}
           <mat-icon
             class="large-material-icon"
             *ngIf="option === sortType && sortDirection === 'asc'"

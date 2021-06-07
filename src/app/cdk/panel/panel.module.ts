@@ -17,6 +17,7 @@ import { PanelElementSourceComponent } from './panel-element-source/panel-elemen
 import { MatDividerModule } from '@angular/material/divider'
 import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand-buttons.component'
 import { MatMenuModule } from '@angular/material/menu'
+import { SortLabelPipe } from './sort-label.pipe'
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu'
     PanelDataLineComponent,
     PanelElementSourceComponent,
     PanelExpandButtonsComponent,
+    SortLabelPipe,
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,7 @@ import { MatMenuModule } from '@angular/material/menu'
     MatTooltipModule,
     MatDialogModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   exports: [
     PanelComponent,
