@@ -93,7 +93,6 @@ export class RecordFundingsService {
       .get<FundingGroup[]>(
         environment.API_WEB +
           `fundings/fundingGroups.json?` +
-          '/fundingGroups.json?' +
           '&sort=' +
           (options.sort != null ? options.sort : 'date') +
           '&sortAsc=' +
