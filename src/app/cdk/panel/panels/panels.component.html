@@ -33,11 +33,11 @@
       <button
         *ngIf="!isPublicRecord && type !== 'research-resources'"
         mat-icon-button
-        class="orc-font-body-small"
+        class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
       >
         <mat-icon (click)="add()" class="large-material-icon" id="add-button">
-          add_circle
+          add_circle_outline
         </mat-icon>
         <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
@@ -58,13 +58,13 @@
         >
           {{ option | sortLabel }}
           <mat-icon
-            class="large-material-icon"
+            class="sort"
             *ngIf="option === sortType && sortDirection === 'asc'"
           >
             south
           </mat-icon>
           <mat-icon
-            class="large-material-icon"
+            class="sort"
             *ngIf="option === sortType && sortDirection === 'desc'"
           >
             north
