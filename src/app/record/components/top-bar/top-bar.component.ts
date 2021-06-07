@@ -56,6 +56,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.checkLoadingState(userRecord)
+        this.userRecord = userRecord
         if (!isEmpty(userRecord.otherNames)) {
           this.setNames(userRecord)
         }
@@ -80,7 +81,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   private setNames(userRecord: UserRecord) {
-    this.userRecord = userRecord
     this.givenNames = this.userRecord?.names?.givenNames
       ? this.userRecord.names.givenNames.value
       : ''

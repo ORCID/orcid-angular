@@ -1,5 +1,9 @@
 <div class="my-orcid-icons" *ngIf="platform.columns12">
-  <button mat-icon-button class="orc-font-small-print">
+  <button
+    mat-icon-button
+    class="orc-font-small-print"
+    (click)="printRecord()"
+  >
     <mat-icon fontSet="material-icons-outlined" class="icon"> print </mat-icon>
     <ng-container i18n="@@record.printableVersion">
       Printable version
