@@ -8,6 +8,7 @@
 ></app-top-bar-record-issues>
 
 <app-top-bar-actions
+  [userRecord]="userRecord"
   [isPublicRecord]="isPublicRecord"
   *ngIf="isPublicRecord && !recordWithIssues"
 ></app-top-bar-actions>
