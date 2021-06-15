@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _gtag: GoogleAnalyticsService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
-    private _userInfo: UserService,
+    private _userInfo: UserService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -211,7 +211,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
       this._register
         .checkDuplicatedResearcher({
-          lastName : this.personalData.familyNames.value,
+          lastName: this.personalData.familyNames.value,
           firstName: this.personalData.givenNames.value,
         })
         .subscribe((value) => {

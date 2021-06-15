@@ -55,13 +55,13 @@ export class RegisterService extends _RegisterServiceMixingBase {
   }) {
     return this._http
       .get<DuplicatedName[]>(
-        `${environment.API_WEB}duplicateResearcher.json${this._searchService.buildSearchUrl(
-          names
-        )}`,
+        `${
+          environment.API_WEB
+        }duplicateResearcher.json${this._searchService.buildSearchUrl(names)}`,
         {
           headers: { Accept: 'application/json' },
         }
-        )
+      )
       .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
