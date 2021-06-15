@@ -19,6 +19,7 @@ import { RegisterFormAdapterMixin } from './register.form-adapter'
 import { ERROR_REPORT } from 'src/app/errors'
 import { objectToUrlParameters } from '../../constants'
 import { ReactivationLocal } from '../../types/reactivation.local'
+import { SearchService } from '../search/search.service'
 
 // Mixing boiler plate
 
@@ -42,24 +43,26 @@ export class RegisterService extends _RegisterServiceMixingBase {
     _http: HttpClient,
     _errorHandler: ErrorHandlerService,
     private _userService: UserService,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _searchService: SearchService
   ) {
     super(_http, _errorHandler)
   }
 
   public checkDuplicatedResearcher(names: {
-    familyNames: string
-    givenNames: string
+    firstName: string
+    lastName: string
   }) {
     return this._http
-      .get<DuplicatedName[]>(environment.API_WEB + `dupicateResearcher.json`, {
-        params: names,
-        withCredentials: true,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+      .get<DuplicatedName[]>(
+        `${environment.API_WEB}duplicateResearcher.json${this._searchService.buildSearchUrl(
+          names
+        )}`,
+        {
+          headers: { Accept: 'application/json' },
+        }
+        )
+      .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
   getRegisterForm(): Observable<RegisterForm> {

@@ -20,11 +20,11 @@ export class SearchService {
     private _errorHandler: ErrorHandlerService
   ) {}
 
-  search(querryParam: SearchParameters): Observable<SearchResults> {
+  search(queryParam: SearchParameters): Observable<SearchResults> {
     return this._http
       .get<SearchResults>(
         `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
-          querryParam
+          queryParam
         )}`,
         {
           headers: { Accept: 'application/json' },
@@ -33,11 +33,12 @@ export class SearchService {
       .pipe(catchError((error) => this._errorHandler.handleError(error)))
   }
 
-  private buildSearchUrl(querryParam: SearchParameters): string {
+  public buildSearchUrl(queryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
-    Object.keys(querryParam).map((key) => {
-      escapedParams[key] = this.escapeReservedChar(querryParam[key])
+    Object.keys(queryParam).map((key) => {
+      escapedParams[key] = this.escapeReservedChar(queryParam[key])
     })
+    console.log(JSON.stringify(escapedParams))
 
     const orcidId =
       this.extractOrcidId(escapedParams.orcid) ||
@@ -45,12 +46,12 @@ export class SearchService {
 
     if (escapedParams && orcidId) {
       // When there is an Orcid id on the `Advance search Orcid iD` or `Quick search input`: only search the orcid ID
-      return this.encodeUrlWithPagination(`orcid:${orcidId}`, querryParam)
+      return this.encodeUrlWithPagination(`orcid:${orcidId}`, queryParam)
     } else if (escapedParams && escapedParams.searchQuery) {
       // When there is a `searchQuery` parameter with no Orcid iD:  do a quick search
       return this.encodeUrlWithPagination(
         this.quickSearchEDisMax + escapedParams.searchQuery,
-        querryParam
+        queryParam
       )
     } else if (escapedParams) {
       // otherwise do an advanced search
@@ -86,7 +87,7 @@ export class SearchService {
       }
       return this.setEdismaxAndEncodedUrlWithPagination(
         searchParameters.join(' AND '),
-        querryParam
+        queryParam
       )
     }
   }
@@ -121,7 +122,7 @@ export class SearchService {
     return trimParameters
   }
 
-  private setEdismaxAndEncodedUrlWithPagination(searchStream, querryParam) {
+  private setEdismaxAndEncodedUrlWithPagination(searchStream, queryParam) {
     const bq = encodeURIComponent(
       `current-institution-affiliation-name:[* TO *]^100.0 past-institution-affiliation-name:[* TO *]^70`
     )
@@ -129,20 +130,20 @@ export class SearchService {
       `?bq=` +
       bq +
       `&defType=edismax&q=${encodeURIComponent(searchStream)}` +
-      this.handlePagination(querryParam)
+      this.handlePagination(queryParam)
     )
   }
 
-  private encodeUrlWithPagination(searchStream, querryParam) {
+  private encodeUrlWithPagination(searchStream, queryParam) {
     return (
       `?q=${encodeURIComponent(searchStream)}` +
-      this.handlePagination(querryParam)
+      this.handlePagination(queryParam)
     )
   }
 
-  private handlePagination(querryParam: SearchParameters): string {
-    return `&start=${querryParam.pageIndex * querryParam.pageSize || 0}&rows=${
-      querryParam.pageSize || 50
+  private handlePagination(queryParam: SearchParameters): string {
+    return `&start=${queryParam.pageIndex * queryParam.pageSize || 0}&rows=${
+      queryParam.pageSize || 50
     }`
   }
 }

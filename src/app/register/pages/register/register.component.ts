@@ -65,10 +65,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _dialog: MatDialog,
     @Inject(WINDOW) private window: Window,
     private _gtag: GoogleAnalyticsService,
-    private _user: UserService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
-    private _userInfo: UserService
+    private _userInfo: UserService,
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -212,8 +211,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
       this._register
         .checkDuplicatedResearcher({
-          familyNames: this.personalData.familyNames.value,
-          givenNames: this.personalData.givenNames.value,
+          lastName : this.personalData.familyNames.value,
+          firstName: this.personalData.givenNames.value,
         })
         .subscribe((value) => {
           if (value.length > 0) {
