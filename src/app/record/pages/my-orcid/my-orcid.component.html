@@ -10,7 +10,12 @@
         <app-main>
           <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
           <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
-            <h2 class="orc-font-body col">Activities</h2>
+            <h2
+              class="orc-font-body col"
+              i18n="@@shared.activities"
+            >
+              Activities
+            </h2>
             <div class="expand-buttons">
               <button
                 mat-button
