@@ -38,7 +38,6 @@ export class SearchService {
     Object.keys(queryParam).map((key) => {
       escapedParams[key] = this.escapeReservedChar(queryParam[key])
     })
-    console.log(JSON.stringify(escapedParams))
 
     const orcidId =
       this.extractOrcidId(escapedParams.orcid) ||
