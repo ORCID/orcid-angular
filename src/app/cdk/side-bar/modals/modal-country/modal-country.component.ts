@@ -93,12 +93,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))
-      .subscribe(
-        (platform) => {
-          this.isMobile = platform.columns4 || platform.columns8
-          this.screenDirection = platform.screenDirection
-        }
-      )
+      .subscribe((platform) => {
+        this.isMobile = platform.columns4 || platform.columns8
+        this.screenDirection = platform.screenDirection
+      })
   }
 
   backendJsonToForm(emailEndpointJson: CountriesEndpoint) {
