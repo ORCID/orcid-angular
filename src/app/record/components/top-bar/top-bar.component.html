@@ -43,8 +43,8 @@
       </app-panel-element>
       <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
         <div class="other-names-container">
-          <span i18n="@@record.otherNames" class="mat-caption description">
-            Other names
+          <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
+            Also known as
           </span>
           <app-panel-element
             id="other-names"
@@ -120,9 +120,9 @@
             Name
           </div>
           <div class="orc-font-body-small">
-            <i *ngIf="givenNames">
+            <ng-container *ngIf="givenNames">
               {{ givenNames + ' ' }}
-            </i>
+            </ng-container>
             {{ familyName }}
           </div>
         </div>
@@ -143,8 +143,8 @@
             }"
           >
             <div class="col l10 mat-caption other-names-wrapper">
-              <div class="row description" i18n="@@record.otherNames">
-                Other names
+              <div class="row description" i18n="@@topBar.alsoKnowAs">
+                Also known as
               </div>
               <ng-container
                 *ngFor="
@@ -152,15 +152,17 @@
                   index as i
                 "
               >
-                <div class="orc-font-body-small" *ngIf="!expandedContent">
-                  {{ otherNames.content }}
-                  <ng-container
-                    *ngIf="
-                      !(userRecord.otherNames?.otherNames?.length - 1 === i)
-                    "
-                    >,
-                  </ng-container>
-                </div>
+                <ng-container>
+                  <div class="orc-font-body-small" *ngIf="!expandedContent">
+                    {{ otherNames.content }}
+                  </div>
+                  <span class="comma"
+                        *ngIf="
+                        !(userRecord.otherNames?.otherNames?.length - 1 === i)
+                      "
+                  >,
+                    </span>
+                </ng-container>
                 <div class="row other-name" *ngIf="expandedContent">
                   <div class="row">
                     <b class="orc-font-body-small">
