@@ -156,12 +156,13 @@
                   <div class="orc-font-body-small" *ngIf="!expandedContent">
                     {{ otherNames.content }}
                   </div>
-                  <span class="comma"
-                        *ngIf="
-                        !(userRecord.otherNames?.otherNames?.length - 1 === i)
-                      "
-                  >,
-                    </span>
+                  <span
+                    class="comma"
+                    *ngIf="
+                      !(userRecord.otherNames?.otherNames?.length - 1 === i)
+                    "
+                    >,
+                  </span>
                 </ng-container>
                 <div class="row other-name" *ngIf="expandedContent">
                   <div class="row">
