@@ -3,7 +3,7 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { UserRecord } from '../../../types/record.local'
-import { environment } from '../../../../environments/environment.local'
+import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
 
 @Component({
