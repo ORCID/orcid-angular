@@ -46,7 +46,7 @@ app-top-bar-actions {
       gap: 16px;
 
       .names {
-        height: 64px;
+        min-height: 64px;
         width: calc(50% - 8px);
         padding: 16px;
         border: solid 1px;
@@ -54,7 +54,7 @@ app-top-bar-actions {
       }
 
       .names-extended {
-        max-height: 64px !important;
+        height: auto;
       }
 
       .names.mobile {
@@ -65,7 +65,7 @@ app-top-bar-actions {
 
       .other-names {
         position: relative;
-        height: 64px;
+        min-height: 64px;
         width: calc(50% - 8px);
         border: solid 1px;
         border-radius: 4px;
