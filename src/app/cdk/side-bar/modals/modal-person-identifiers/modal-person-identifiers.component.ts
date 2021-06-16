@@ -30,6 +30,7 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   personIdentifiers: Assertion[]
   originalPersonalIdentifiers: PersonIdentifierEndpoint
   isMobile: boolean
+  screenDirection = 'ltr'
   loadingPersonalIdentifiers = true
 
   ngOnInit(): void {
@@ -47,7 +48,10 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
       .get()
       .pipe(takeUntil(this.$destroy))
       .subscribe(
-        (platform) => (this.isMobile = platform.columns4 || platform.columns8)
+        (platform) => {
+          this.isMobile = platform.columns4 || platform.columns8
+          this.screenDirection = platform.screenDirection
+        }
       )
   }
 

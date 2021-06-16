@@ -51,6 +51,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   originalBackendCountries: CountriesEndpoint
   defaultVisibility: VisibilityStrings
   isMobile: boolean
+  screenDirection: 'rtl' | 'ltr'
   loadingCountries = true
   loadingCountryCodes = true
   @ViewChildren('countrySelect') inputs: QueryList<MatSelect>
@@ -93,7 +94,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       .get()
       .pipe(takeUntil(this.$destroy))
       .subscribe(
-        (platform) => (this.isMobile = platform.columns4 || platform.columns8)
+        (platform) => {
+          this.isMobile = platform.columns4 || platform.columns8
+          this.screenDirection = platform.screenDirection
+        }
       )
   }
 

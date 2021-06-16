@@ -62,6 +62,7 @@
         cdkDrag
         class="row personal-identifier-input-line"
         [ngClass]="{ 'no-wrap': !isMobile }"
+        [ngStyle]="{direction: screenDirection}"
         [formGroupName]="personIdentifier.putCode"
         *ngFor="let personIdentifier of personIdentifiers; index as i"
         [attr.id]="'draggable-' + i"
