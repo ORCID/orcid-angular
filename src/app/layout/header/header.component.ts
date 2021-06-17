@@ -8,7 +8,7 @@ import {
   ApplicationMenuItemBasic,
   MenuItemRequirement,
 } from 'src/app/types/menu.local'
-import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzService, TOGGLZ_STRINGS } from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit {
       this.togglz = data
     })
     _togglz
-      .getStateOf('ORCID_ANGULAR_SIGNIN')
+      .getStateOf(TOGGLZ_STRINGS.ORCID_ANGULAR_SIGNIN)
       .subscribe((value) => (this.togglzOrcidAngularSignin = value))
     _router.events.subscribe(() => {
       const path = location.path()
@@ -76,7 +76,7 @@ export class HeaderComponent implements OnInit {
         ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcidTEMP}`
     })
     _togglz
-      .getStateOf('NEW_INFO_SITE')
+      .getStateOf(TOGGLZ_STRINGS.NEW_INFO_SITE)
       .subscribe((value) => (this.togglzNewInfoSite = value))
   }
 

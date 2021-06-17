@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
-import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { TogglzService, TOGGLZ_STRINGS } from 'src/app/core/togglz/togglz.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { SearchService } from 'src/app/core/search/search.service'
@@ -50,12 +50,12 @@ export class SearchComponent implements OnInit {
       this.platform = data
     })
     _togglz
-      .getStateOf('ENABLE_USER_MENU')
+      .getStateOf(TOGGLZ_STRINGS.ENABLE_USER_MENU)
       .subscribe((value) => (this.togglzEnableUserMenu = value))
     _togglz
-      .getStateOf('ORCID_ANGULAR_SEARCH')
+      .getStateOf(TOGGLZ_STRINGS.ORCID_ANGULAR_SEARCH)
       .subscribe((value) => (this.togglzOrcidAngularSearch = value))
-    _togglz.getStateOf('NEW_INFO_SITE').subscribe((value) => {
+    _togglz.getStateOf(TOGGLZ_STRINGS.NEW_INFO_SITE).subscribe((value) => {
       this.togglzNewInfoSite = value
       if (!this.togglzNewInfoSite) {
         this.searchPlaceHolder = this.firstLetterUppercase(

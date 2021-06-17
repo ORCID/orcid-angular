@@ -8,7 +8,7 @@ import { Subject } from 'rxjs'
 import { UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
-
+import { environment } from 'src/environments/environment'
 @Component({
   selector: 'app-my-orcid',
   templateUrl: './my-orcid.component.html',
@@ -42,14 +42,25 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   private checkIfThisIsAPublicOrcid() {
-    if (
-      this.route.parent.snapshot.url &&
-      // TODO!! SHOULD check for 'url[0]' when the '/qa/' URL path is remove
-      ORCID_REGEXP.test(this.route.parent.snapshot.url[1].toString())
-    ) {
-      return (this.publicOrcid = this.route.parent.snapshot.url[1].toString())
+    if (!environment.PUBLIC_PAGE_WITH_NO_QA_PREFIX) {
+      if (
+        this.route.parent.snapshot.url &&
+        // TODO!! SHOULD check for 'url[0]' when the '/qa/' URL path is remove
+        ORCID_REGEXP.test(this.route.parent.snapshot.url[1].toString())
+      ) {
+        return (this.publicOrcid = this.route.parent.snapshot.url[1].toString())
+      }
+      return undefined
+    } else {
+      if (
+        this.route.parent.snapshot.url &&
+        // TODO!! SHOULD check for 'url[0]' when the '/qa/' URL path is remove
+        ORCID_REGEXP.test(this.route.parent.snapshot.url[0].toString())
+      ) {
+        return (this.publicOrcid = this.route.parent.snapshot.url[0].toString())
+      }
+      return undefined
     }
-    return undefined
   }
 
   ngOnInit(): void {

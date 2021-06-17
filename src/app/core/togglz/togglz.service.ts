@@ -6,6 +6,16 @@ import { Observable, timer } from 'rxjs'
 import { switchMapTo, shareReplay, map } from 'rxjs/operators'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
+
+export enum TOGGLZ_STRINGS {
+  NEW_INFO_SITE = 'NEW_INFO_SITE',
+  MAINTENANCE_MESSAGE = 'MAINTENANCE_MESSAGE',
+  ORCID_ANGULAR_SIGNIN = 'ORCID_ANGULAR_SIGNIN',
+  ORCID_ANGULAR_SEARCH = 'ORCID_ANGULAR_SEARCH',
+  ENABLE_USER_MENU = 'ENABLE_USER_MENU',
+  ORCID_ANGULAR_INBOX = 'ORCID_ANGULAR_INBOX',
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -29,20 +39,20 @@ export class TogglzService {
     }
   }
 
-  getStateOf(togglzFeatureName: string): Observable<boolean> {
+  getStateOf(togglzFeatureName: TOGGLZ_STRINGS): Observable<boolean> {
     this.getTogglz()
     return this.togglz.pipe(
       map((data) => data.messages[togglzFeatureName] === 'true')
     )
   }
 
-  getMessageOf(togglzFeatureName: string): Observable<string> {
+  getMessageOf(togglzFeatureName: TOGGLZ_STRINGS): Observable<string> {
     this.getTogglz()
     return this.togglz.pipe(map((data) => data.messages[togglzFeatureName]))
   }
 
   getMaintenanceMessages(): Observable<MaintenanceMessage> {
-    return this.getMessageOf('MAINTENANCE_MESSAGE').pipe(
+    return this.getMessageOf(TOGGLZ_STRINGS.MAINTENANCE_MESSAGE).pipe(
       map((value) => {
         const plainHtml = value
         const parser = new DOMParser()
