@@ -99,7 +99,7 @@
         </div>
         <h3 class="orc-font-heading-small">{{ creditName }}</h3>
       </div>
-      <div class="published-name" *ngIf="!creditName">
+      <div class="published-name" *ngIf="!creditName && (givenNames || familyName)">
         <div class="row mat-caption description" i18n="@@record.name">Name</div>
         <h3 class="orc-font-heading-small">
           {{ givenNames + ' ' + familyName }}
