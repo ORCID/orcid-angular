@@ -1,7 +1,10 @@
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { WINDOW } from 'src/app/cdk/window'
-import { TogglzService, TOGGLZ_STRINGS } from 'src/app/core/togglz/togglz.service'
+import {
+  TogglzService,
+  TOGGLZ_STRINGS,
+} from 'src/app/core/togglz/togglz.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { SearchService } from 'src/app/core/search/search.service'

@@ -6,7 +6,6 @@ import { Observable, timer } from 'rxjs'
 import { switchMapTo, shareReplay, map } from 'rxjs/operators'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
 
-
 export enum TOGGLZ_STRINGS {
   NEW_INFO_SITE = 'NEW_INFO_SITE',
   MAINTENANCE_MESSAGE = 'MAINTENANCE_MESSAGE',

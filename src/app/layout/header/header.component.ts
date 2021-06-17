@@ -8,7 +8,10 @@ import {
   ApplicationMenuItemBasic,
   MenuItemRequirement,
 } from 'src/app/types/menu.local'
-import { TogglzService, TOGGLZ_STRINGS } from 'src/app/core/togglz/togglz.service'
+import {
+  TogglzService,
+  TOGGLZ_STRINGS,
+} from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
