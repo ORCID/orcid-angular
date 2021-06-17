@@ -45,7 +45,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     if (!environment.PUBLIC_PAGE_WITH_NO_QA_PREFIX) {
       if (
         this.route.parent.snapshot.url &&
-        // TODO!! SHOULD check for 'url[0]' when the '/qa/' URL path is remove
         ORCID_REGEXP.test(this.route.parent.snapshot.url[1].toString())
       ) {
         return (this.publicOrcid = this.route.parent.snapshot.url[1].toString())
@@ -54,7 +53,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     } else {
       if (
         this.route.parent.snapshot.url &&
-        // TODO!! SHOULD check for 'url[0]' when the '/qa/' URL path is remove
         ORCID_REGEXP.test(this.route.parent.snapshot.url[0].toString())
       ) {
         return (this.publicOrcid = this.route.parent.snapshot.url[0].toString())
