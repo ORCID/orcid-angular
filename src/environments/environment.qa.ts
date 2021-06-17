@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   debugger: true,
-  PUBLIC_PAGE_WITH_NO_QA_PREFIX: false,
+  PUBLIC_PAGE_WITH_NO_QA_PREFIX: true,
   API_NEWS_DEPRECATED: 'https://qa.orcid.org/blog/feed',
   API_NEWS: 'https://info.qa.orcid.org/feed/',
   API_PUB: '//pub.qa.orcid.org/v3.0',
