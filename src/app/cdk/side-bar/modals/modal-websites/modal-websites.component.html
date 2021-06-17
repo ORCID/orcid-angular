@@ -54,6 +54,7 @@
           rootElementSelector="#website-dropList"
           class="row websites-input-line"
           [ngClass]="{ 'no-wrap': !isMobile }"
+          [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="website.putCode"
           *ngFor="let website of websites; index as i"
           [attr.id]="'draggable-' + i"
@@ -75,6 +76,7 @@
                   matInput
                   formControlName="description"
                   placeholder=" {{ ngOrcidDescription }}"
+                  [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
                 />
               </mat-form-field>
               <mat-form-field
@@ -86,6 +88,7 @@
                   matInput
                   formControlName="url"
                   placeholder="{{ ngOrcidUrl }}"
+                  [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
                 />
                 <mat-error
                   *ngIf="

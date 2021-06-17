@@ -50,6 +50,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   originalBackendWebsites: WebsitesEndPoint
   userSession: UserSession
   isMobile: boolean
+  screenDirection = 'ltr'
   addedWebsiteCount = 0
   loadingWebsites = true
 
@@ -70,6 +71,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       .subscribe((platform) => {
         this.platform = platform
         this.isMobile = platform.columns4 || platform.columns8
+        this.screenDirection = platform.screenDirection
       })
 
     this._userService

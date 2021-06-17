@@ -50,6 +50,7 @@
         rootElementSelector="#country-droplist"
         class="row country-input-line"
         [ngClass]="{ 'no-wrap': !isMobile }"
+        [ngStyle]="{ direction: screenDirection }"
         [formGroupName]="country.putCode"
         *ngFor="let country of countries; index as i"
         [attr.id]="'draggable-' + i"

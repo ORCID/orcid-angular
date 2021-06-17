@@ -44,6 +44,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings
   originalBackendKeywords: KeywordEndPoint
   isMobile: boolean
+  screenDirection = 'ltr'
   loadingKeywords = true
   userSession: UserSession
   platform: PlatformInfo
@@ -65,6 +66,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
       .subscribe((platform) => {
         this.platform = platform
         this.isMobile = platform.columns4 || platform.columns8
+        this.screenDirection = platform.screenDirection
       })
     this._userService
       .getUserSession()
