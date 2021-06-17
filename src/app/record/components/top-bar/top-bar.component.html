@@ -171,7 +171,7 @@
                     <b class="description" i18n="@@record.source"> Source </b>
                   </div>
                   <div class="description">
-                    {{ otherNames.sourceName }}
+                    {{ otherNames.sourceName || otherNames.source }} {{ otherNames.createdDate | monthDayYearDateToString }}
                   </div>
                 </div>
               </ng-container>
