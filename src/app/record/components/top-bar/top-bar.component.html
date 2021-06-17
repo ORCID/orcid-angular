@@ -114,8 +114,7 @@
           [ngClass]="{
             col: platform.columns12,
             'row mobile': !platform.columns12,
-            'names-extended': expandedContent,
-            'full-width': userRecord.otherNames?.otherNames?.length === 0
+            'names-extended': expandedContent
           }"
           *ngIf="creditName"
         >
@@ -134,7 +133,6 @@
           [ngClass]="{
             col: platform.columns12,
             'row mobile': !platform.columns12,
-            'full-width': (!givenNames && !familyName) || !creditName,
             'other-names-no-border': expandedContent
           }"
           *ngIf="userRecord.otherNames?.otherNames.length > 0"
