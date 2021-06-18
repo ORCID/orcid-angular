@@ -32,7 +32,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { ReactivationLocal } from '../../../types/reactivation.local'
 import { SearchService } from '../../../core/search/search.service'
-import { SearchParameters } from 'src/app/types'
+import { SearchParameters, SearchResults } from 'src/app/types'
 
 @Component({
   selector: 'app-register',
@@ -227,7 +227,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openDialog(duplicateRecords): void {
+  openDialog(duplicateRecords: SearchResults): void {
     const dialogParams = {
       width: `1078px`,
       height: `600px`,
