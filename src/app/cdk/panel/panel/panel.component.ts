@@ -78,6 +78,8 @@ export class PanelComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
+        console.log(this.editModalComponent)
+
         if (this.editModalComponent) {
           this._dialog.open(this.editModalComponent, {
             width: '850px',

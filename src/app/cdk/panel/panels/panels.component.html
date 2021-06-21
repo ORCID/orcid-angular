@@ -30,17 +30,45 @@
     </div>
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
-      <button
-        *ngIf="!isPublicRecord && type !== 'research-resources'"
-        mat-icon-button
-        class="orc-font-body-small"
-        [attr.aria-label]="labelAddButton"
-      >
-        <mat-icon (click)="add()" class="large-material-icon" id="add-button">
-          add_circle
-        </mat-icon>
-        <ng-container i18n="@@shared.add"> Add </ng-container>
-      </button>
+      <ng-container *ngIf="!isPublicRecord && type !== 'research-resources'">
+        <!-- ADD BUTTON: For panels with a single add option -->
+        <button
+          *ngIf="!addMenuOptions.length"
+          mat-icon-button
+          class="orc-font-body-small"
+          [attr.aria-label]="labelAddButton"
+          (click)="add()"
+        >
+          <mat-icon class="large-material-icon" id="add-button">
+            add_circle
+          </mat-icon>
+          <ng-container i18n="@@shared.add"> Add </ng-container>
+        </button>
+        <!-- ADD BUTTON: For panels with a multiple add options -->
+        <button
+          mat-icon-button
+          class="orc-font-body-small"
+          [attr.aria-label]="labelAddButton"
+          (click)="add()"
+          [matMenuTriggerFor]="addMenu"
+          *ngIf="addMenuOptions.length"
+        >
+          <mat-icon class="large-material-icon" id="add-button">
+            add_circle
+          </mat-icon>
+          <ng-container i18n="@@shared.add"> Add </ng-container>
+        </button>
+      </ng-container>
+
+      <mat-menu #addMenu="matMenu">
+        <button
+          mat-menu-item
+          *ngFor="let option of addMenuOptions"
+          (click)="add(option.action)"
+        >
+          {{ option.label }}
+        </button>
+      </mat-menu>
       <button
         mat-button
         class="orc-font-body-small"

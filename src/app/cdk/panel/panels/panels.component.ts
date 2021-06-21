@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
+import { itemMarginAnimation } from 'src/app/animations'
+import { ADD_EVENT_ACTION } from 'src/app/constants'
 
 @Component({
   selector: 'app-panels',
@@ -32,6 +34,10 @@ export class PanelsComponent implements OnInit {
   @Input() defaultDirection: SortOrderDirection = 'asc'
 
   @Output() sort: EventEmitter<SortData> = new EventEmitter()
+  @Output() addEvent: EventEmitter<ADD_EVENT_ACTION> = new EventEmitter()
+
+  @Input() addMenuOptions: { action: ADD_EVENT_ACTION; label: string }[] = []
+
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
 
@@ -40,13 +46,19 @@ export class PanelsComponent implements OnInit {
     private _platform: PlatformInfoService
   ) {}
 
-  add() {
+  clickAddIcon() {
+    if (!this.addMenuOptions.length) {
+      this.add()
+    }
+  }
+
+  add(addEvent?: ADD_EVENT_ACTION) {
     switch (this.type) {
       case 'peer-review':
         this.openModal(ModalPeerReviewsComponent)
         break
       default:
-        break
+        this.addEvent.emit(addEvent)
     }
   }
 
