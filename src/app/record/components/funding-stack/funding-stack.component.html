@@ -22,10 +22,11 @@
     <!-- FUNDING BODY -->
     <app-funding
       *ngIf="stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack"
-      [funding]="funding"
+      
+      [orgDisambiguated]="orgDisambiguated[funding.putCode.value]"
+                [ funding]=   "funding"
       [panelDetailsState]="panelDetailsState[funding.putCode.value]"
       (toggleDetails)="toggleDetails($event)"
-      [orgDisambiguated]="orgDisambiguated[funding.putCode.value]"
     >
     </app-funding>
     <!-- FUNDING SOURCE -->

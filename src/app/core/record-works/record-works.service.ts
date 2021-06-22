@@ -4,6 +4,7 @@ import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { WorkTypes } from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -190,5 +191,16 @@ export class RecordWorksService {
   }
   update(value: any): Observable<any> {
     throw new Error('Method not implemented.')
+  }
+
+  public loadWorkTypes(workType: WorkTypes) {
+    return this._http
+    .get<Work>(
+      `${environment.API_WEB}works/loadWorkTypes.json?workCategory=${workType}`
+    )
+    .pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error))
+    )
   }
 }

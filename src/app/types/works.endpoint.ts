@@ -34,3 +34,10 @@ export interface Work {
   lastModified?: MonthDayYearDate
   userSource: boolean
 }
+
+export enum WorkTypes   {
+  publication = 'publication',
+  conference = 'conference',
+      intellectual_property=  'intellectual_property' ,
+  other_output= 'other_output'
+}
