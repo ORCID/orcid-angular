@@ -71,6 +71,7 @@
             *ngIf="
               publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
             "
+            [ngClass]="{ 'last-modified': affiliations === 0 }"
           >
             <i>
               <span i18n="@@shared.lastModifiedTime">
