@@ -1,9 +1,9 @@
 <app-modal [loading]="loading">
-    <app-modal-header>
-      <ng-container i18n="@@work.works"> Works </ng-container>
-    </app-modal-header>
-    <app-modal-side-bar>
-      <!-- <ng-container id="side-bar-title">
+  <app-modal-header>
+    <ng-container i18n="@@work.works"> Works </ng-container>
+  </app-modal-header>
+  <app-modal-side-bar>
+    <!-- <ng-container id="side-bar-title">
         <a class="side-bar" i18n="@@topBar.biography" (click)="toBiography()">
           Biography
         </a>
@@ -13,113 +13,227 @@
           Visibility
         </a>
       </ng-container> -->
-    </app-modal-side-bar>
-    <app-modal-footer>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="saveEvent()"
-        i18n="@@shared.saveChanges"
-        id="save-work-button"
-      >
-        Save changes
-      </button>
-      <button
-        mat-stroked-button
-        color="primary"
-        (click)="closeEvent()"
-        i18n="@@shared.cancel"
-        id="cancel-work-button"
-      >
-        Cancel
-      </button>
-    </app-modal-footer>
-    <form [formGroup]="workForm">
-      <div
-        id="biography"
-        class="title"
-        [ngClass]="{
-          'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
-        }"
-      >
-        <p>
-          <strong i18n="@@topBar.biography"> Work details </strong>
-        </p>
-      </div>
-      <hr />
+  </app-modal-side-bar>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-work-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-work-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <form [formGroup]="workForm">
+    <div
+      id="biography"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <p>
+        <strong i18n="@@topBar.biography"> Work details </strong>
+      </p>
+    </div>
+    <hr />
 
-      <div class="row">
-        <label
-          for="given-names-input"
-          class="mat-caption"
-          [ngClass]="{ error: workForm.hasError('required', 'workType') }"
+    <!-- Work Category -->
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
+        [ngClass]="{ error: workForm.hasError('required', 'workCategory') }"
+      >
+        <strong i18n="@@topBar.givenNames">Work Category</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+    <div class="row">
+      <mat-select
+        placeholder="Placeholder"
+        formControlName="workCategory"
+        name="item"
+      >
+        <mat-option
+          *ngFor="let item of workCategories | keyvalue"
+          [value]="item.key"
         >
-          <strong i18n="@@topBar.givenNames">Work Type</strong>
-          <span class="required">*</span>
-        </label>
-      </div>
-      <mat-select placeholder="Placeholder" formControlName="workType" name="item">
-          <mat-option *ngFor="let item of workTypes | keyvalue" [value]="item.key">
-              {{item.value}}
-          </mat-option>
-          <mat-error
-          *ngIf="workForm.get('workType').hasError('required')"
+          {{ item.value }}
+        </mat-option>
+        <mat-error
+          *ngIf="workForm.get('workCategory').hasError('required')"
           i18n="@@topBar.invalidBio"
         >
           Invalid characters or format
         </mat-error>
       </mat-select>
+    </div>
 
-
-      <div class="row">
-        <label
-          for="given-names-input"
-          class="mat-caption"
-          [ngClass]="{ error: workForm.hasError('required', 'workTitle') }"
+    <!-- Work Type -->
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
+        [ngClass]="{ error: workForm.hasError('required', 'workTitle') }"
+      >
+        <strong i18n="@@topBar.givenNames">Work Type</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+    <div class="row">
+      <mat-select
+        placeholder="Placeholder"
+        formControlName="workType"
+        name="item"
+      >
+        <mat-option
+          *ngFor="let item of workTypes | keyvalue"
+          [value]="item.key"
         >
-          <strong i18n="@@topBar.givenNames">Work Title</strong>
-          <span class="required">*</span>
-        </label>
-   
-      </div>
-
-      <mat-form-field appearance="outline" class="mat-form-field-min biography">
-        <textarea
-          id="biography-input"
-          matInput
-          formControlName="biography"
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="5"
-          cdkAutosizeMaxRows="7"
-        >
-        </textarea>
+          {{ item.value }}
+        </mat-option>
         <mat-error
           *ngIf="workForm.get('workType').hasError('required')"
           i18n="@@topBar.invalidBio"
         >
           Invalid characters or format
         </mat-error>
-      </mat-form-field>
-      <div
-        id="visibility"
-        class="title"
+      </mat-select>
+    </div>
+
+    <!-- Work Title -->
+
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
+        [ngClass]="{ error: workForm.hasError('required', 'workTitle') }"
+      >
+        <strong i18n="@@topBar.givenNames">Work Title</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+
+    <mat-form-field appearance="outline" class="mat-form-field-min">
+      <input id="biography-input" matInput formControlName="workTitle" />
+      <mat-error
+        *ngIf="workForm.get('workTitle').hasError('required')"
+        i18n="@@topBar.invalidBio"
+      >
+        Invalid characters or format
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Work translations title -->
+
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
         [ngClass]="{
-          'orc-font-body': !platform.columns12,
-          'orc-font-body-large': platform.columns12
+          error: workForm.hasError('required', 'workTranslationTitle')
         }"
       >
-        <p>
-          <strong i18n="@@shared.visibility"> Visibility </strong>
-        </p>
-      </div>
-      <hr />
-      <p class="orc-font-small-print" i18n="@@shared.whoCanSeeWork">
-        Manage who can see this information in your record.
+        <strong i18n="@@topBar.givenNames">Work Title</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+
+    <mat-form-field appearance="outline" class="mat-form-field-min">
+      <input
+        id="biography-input"
+        matInput
+        formControlName="workTranslationTitle"
+      />
+      <mat-error
+        *ngIf="workForm.get('workTranslationTitle').hasError('required')"
+        i18n="@@topBar.invalidBio"
+      >
+        Invalid characters or format
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Work subtitle -->
+
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
+        [ngClass]="{
+          error: workForm.hasError('required', 'subtitle')
+        }"
+      >
+        <strong i18n="@@topBar.givenNames">Work Title</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+
+    <mat-form-field appearance="outline" class="mat-form-field-min">
+      <input id="biography-input" matInput formControlName="subtitle" />
+      <mat-error
+        *ngIf="workForm.get('subtitle').hasError('required')"
+        i18n="@@topBar.invalidBio"
+      >
+        Invalid characters or format
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Work subtitle -->
+
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
+        [ngClass]="{
+          error: workForm.hasError('required', 'subtitle')
+        }"
+      >
+        <strong i18n="@@topBar.givenNames">Work Title</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+
+    <mat-form-field appearance="outline" class="mat-form-field-min">
+      <input id="biography-input" matInput formControlName="subtitle" />
+      <mat-error
+        *ngIf="workForm.get('subtitle').hasError('required')"
+        i18n="@@topBar.invalidBio"
+      >
+        Invalid characters or format
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Work Visibility -->
+    <div
+      id="visibility"
+      class="title"
+      [ngClass]="{
+        'orc-font-body': !platform.columns12,
+        'orc-font-body-large': platform.columns12
+      }"
+    >
+      <p>
+        <strong i18n="@@shared.visibility"> Visibility </strong>
       </p>
-      <div class="col no-wrap actions-wrapper no-gutters visibility">
-        <app-privacy-selector formControlName="visibility"></app-privacy-selector>
-      </div>
-    </form>
-  </app-modal>
-  
+    </div>
+    <hr />
+    <p class="orc-font-small-print" i18n="@@shared.whoCanSeeWork">
+      Manage who can see this information in your record.
+    </p>
+    <div class="col no-wrap actions-wrapper no-gutters visibility">
+      <app-privacy-selector formControlName="visibility"></app-privacy-selector>
+    </div>
+  </form>
+</app-modal>
