@@ -44,8 +44,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
 import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator'
 import { WorkModalComponent } from './components/work-modal/work-modal.component'
+import { MatRadioModule } from '@angular/material/radio'
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { WorkModalComponent } from './components/work-modal/work-modal.component
     MatMenuModule,
     TrustedIndividualsDropdownModule,
     MatPaginatorModule,
+    MatRadioModule,
   ],
 })
 export class RecordModule {}
