@@ -118,14 +118,14 @@
           }"
           *ngIf="creditName"
         >
-          <div class="row mat-caption description" i18n="@@record.name">
-            Name
-          </div>
-          <div class="orc-font-body-small">
-            <ng-container *ngIf="givenNames">
-              {{ givenNames + ' ' }}
-            </ng-container>
-            {{ familyName }}
+          <div class="names-content">
+            <div class="mat-caption description" i18n="@@record.name">Name</div>
+            <div class="orc-font-body-small">
+              <ng-container *ngIf="givenNames">
+                {{ givenNames + ' ' }}
+              </ng-container>
+              {{ familyName }}
+            </div>
           </div>
         </div>
         <div
@@ -144,42 +144,44 @@
             }"
           >
             <div class="col l10 mat-caption other-names-wrapper">
-              <div class="row description" i18n="@@topBar.alsoKnowAs">
-                Also known as
-              </div>
-              <ng-container
-                *ngFor="
-                  let otherNames of userRecord.otherNames?.otherNames;
-                  index as i
-                "
-              >
-                <ng-container>
-                  <div class="orc-font-body-small" *ngIf="!expandedContent">
-                    {{ otherNames.content }}
-                  </div>
-                  <span
-                    class="comma"
-                    *ngIf="
-                      !(userRecord.otherNames?.otherNames?.length - 1 === i)
-                    "
-                    >,
-                  </span>
-                </ng-container>
-                <div class="row other-name" *ngIf="expandedContent">
-                  <div class="row">
-                    <b class="orc-font-body-small">
-                      {{ otherNames.content }}
-                    </b>
-                  </div>
-                  <div class="row">
-                    <b class="description" i18n="@@record.source"> Source </b>
-                  </div>
-                  <div class="description">
-                    {{ otherNames.sourceName || otherNames.source }}
-                    {{ otherNames.createdDate | monthDayYearDateToString }}
-                  </div>
+              <div class="other-names-content">
+                <div class="description" i18n="@@topBar.alsoKnowAs">
+                  Also known as
                 </div>
-              </ng-container>
+                <ng-container
+                  *ngFor="
+                    let otherNames of userRecord.otherNames?.otherNames;
+                    index as i
+                  "
+                >
+                  <ng-container>
+                    <div class="orc-font-body-small" *ngIf="!expandedContent">
+                      {{ otherNames.content }}
+                    </div>
+                    <span
+                      class="comma"
+                      *ngIf="
+                        !(userRecord.otherNames?.otherNames?.length - 1 === i)
+                      "
+                      >,
+                    </span>
+                  </ng-container>
+                  <div class="row other-name" *ngIf="expandedContent">
+                    <div class="row">
+                      <b class="orc-font-body-small">
+                        {{ otherNames.content }}
+                      </b>
+                    </div>
+                    <div class="row">
+                      <b class="description" i18n="@@record.source"> Source </b>
+                    </div>
+                    <div class="description">
+                      {{ otherNames.sourceName || otherNames.source }}
+                      {{ otherNames.createdDate | monthDayYearDateToString }}
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
             </div>
             <div>
               <app-panel-expand-buttons
