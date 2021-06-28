@@ -68,7 +68,7 @@
       >
         <mat-option
           *ngFor="let item of workCategories | keyvalue"
-          [value]="item.key"
+          [value]="item.value"
         >
           {{ item.value }}
         </mat-option>
@@ -100,7 +100,7 @@
       >
         <mat-option
           *ngFor="let item of workTypes | keyvalue"
-          [value]="item.key"
+          [value]="item.value"
         >
           {{ item.value }}
         </mat-option>
@@ -475,8 +475,11 @@
               formControlName="externalIdentifierType"
               name="item"
             >
-              <mat-option *ngFor="let item of workTypes" [value]="item.name">
-                {{ item.name }}
+              <mat-option
+                *ngFor="let item of workTypes | keyvalue"
+                [value]="item.key"
+              >
+                {{ item.value }}
               </mat-option>
               <mat-error
                 *ngIf="
@@ -596,8 +599,6 @@
       </ng-container>
     </div>
 
-
-
     <!-- Language of this form -->
     <div class="row">
       <label
@@ -608,6 +609,39 @@
         }"
       >
         <strong i18n="@@topBar.givenNames">Language used in this form</strong>
+      </label>
+    </div>
+    <div class="row">
+      <mat-select
+        placeholder="Placeholder"
+        formControlName="languageCode"
+        name="item"
+      >
+        <mat-option
+          *ngFor="let item of languageMap | keyvalue"
+          [value]="item.key"
+        >
+          {{ item.value }}
+        </mat-option>
+        <mat-error
+          *ngIf="workForm.get('languageCode').hasError('required')"
+          i18n="@@topBar.invalidBio"
+        >
+          Invalid characters or format
+        </mat-error>
+      </mat-select>
+    </div>
+
+    <!-- Country of publication -->
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption"
+        [ngClass]="{
+          error: workForm.hasError('required', 'languageCode')
+        }"
+      >
+        <strong i18n="@@topBar.givenNames">Country of publication</strong>
       </label>
     </div>
     <div class="row">

@@ -7,12 +7,15 @@ import {
   DayOption,
   LanguageMap,
   MonthOption,
-  WorkCategoryLabels,
-  WorkDynamicTitles,
+  WorkCategories,
+  WorkCategoriesTitle,
+  WorkConferenceTypes,
+  WorkIntellectualPropertyTypes,
+  WorkOtherOutputTypes,
+  WorkPublicationTypes,
   WorkRelationships,
-  WorkTitleTypesLabels,
-  WorkType,
-  WorkTypesLabels,
+  WorkTypesByCategory,
+  WorkTypesTitle,
   YearOption,
 } from 'src/app/types/works.endpoint'
 
@@ -27,15 +30,20 @@ export class WorkModalComponent implements OnInit {
   platform: PlatformInfo
 
   languageMap = LanguageMap
-  workCategories = WorkCategoryLabels
+  workCategories = WorkCategories
   yearOptions = YearOption
   monthOptions = MonthOption
   dayOptions = DayOption
   citationTypes = CitationTypes
-  workTypes: WorkType[] = []
+  workTypes:
+    | WorkConferenceTypes
+    | WorkIntellectualPropertyTypes
+    | WorkOtherOutputTypes
+    | WorkPublicationTypes
+    | {} = {}
   workRelationships = WorkRelationships
 
-  dynamicTitle = WorkDynamicTitles.journalTitle
+  dynamicTitle = WorkCategoriesTitle.journalTitle
   workIdentifiersControls: FormArray
 
   constructor(
@@ -77,12 +85,12 @@ export class WorkModalComponent implements OnInit {
       visibility: ['', []],
     })
     this.workForm.get('workCategory').valueChanges.subscribe((value) => {
-      this.workTypes = WorkTypesLabels[value]
+      this.workTypes = WorkTypesByCategory[value as WorkCategories]
     })
     this.workForm.get('workType').valueChanges.subscribe((value) => {
       if (this.workForm.value['workCategory'] && value) {
         this.dynamicTitle =
-          WorkTitleTypesLabels[this.workForm.value['workCategory']][value]
+          WorkTypesTitle[this.workForm.value['workCategory']][value]
       }
     })
 
