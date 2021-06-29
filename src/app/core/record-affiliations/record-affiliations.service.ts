@@ -5,7 +5,8 @@ import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,
-  Affiliation, Organization,
+  Affiliation,
+  Organization,
 } from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -14,10 +15,6 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
 import { cloneDeep } from 'lodash'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { NamesEndPoint } from '../../types/record-name.endpoint'
-import { RecordCountryCodesEndpoint } from '../../types'
-import { UserStatus } from '../../types/userStatus.endpoint'
-import { ERROR_REPORT } from '../../errors'
 
 @Injectable({
   providedIn: 'root',
@@ -171,18 +168,21 @@ export class RecordAffiliationService {
   }
 
   getOrganization(org: string): Observable<Organization[]> {
-      return this._http
-        .get<Organization[]>(
-          environment.API_WEB + 'affiliations/disambiguated/name/' + org + '?limit=100',
-          {
-            headers: this.headers,
-          }
-        )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-        )
-    }
+    return this._http
+      .get<Organization[]>(
+        environment.API_WEB +
+          'affiliations/disambiguated/name/' +
+          org +
+          '?limit=100',
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
 
   update(value): Observable<AffiliationUIGroup[]> {
     throw new Error('Method not implemented.')

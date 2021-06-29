@@ -3,9 +3,15 @@ import { EMPTY, Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { PlatformInfo, PlatformInfoService } from '../../../../../cdk/platform-info'
+import {
+  PlatformInfo,
+  PlatformInfoService,
+} from '../../../../../cdk/platform-info'
 import { WINDOW } from '../../../../../cdk/window'
-import { Affiliation, Organization } from '../../../../../types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  Organization,
+} from '../../../../../types/record-affiliation.endpoint'
 import { RecordAffiliationService } from '../../../../../core/record-affiliations/record-affiliations.service'
 import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
@@ -15,14 +21,13 @@ import { URL_REGEXP } from '../../../../../constants'
 import { dateValidator } from '../../../../../shared/validators/date/date.validator'
 import { Observable } from 'rxjs/internal/Observable'
 
-
 @Component({
   selector: 'app-modal-affiliations',
   templateUrl: './modal-affiliations.component.html',
   styleUrls: [
     './modal-affiliations.component.scss',
-    './modal-affiliations.component.scss-theme.scss'
-  ]
+    './modal-affiliations.component.scss-theme.scss',
+  ],
 })
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -40,7 +45,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   startDateValid: boolean
   endDateValid: boolean
   defaultVisibility: VisibilityStrings
-  filteredOptions: Observable<Organization[]>;
+  filteredOptions: Observable<Organization[]>
 
   organization = ''
   city = ''
@@ -50,10 +55,20 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   title = ''
   link = ''
 
-  years = Array(110).fill(0).map((i, idx) => idx + new Date().getFullYear() - 109).reverse()
-  yearsEndDate = Array(120).fill(0).map((i, idx) => idx + new Date().getFullYear() - 109).reverse()
-  months = Array(12).fill(0).map((i, idx) => idx + 1)
-  days = Array(31).fill(0).map((i, idx) => idx + 1)
+  years = Array(110)
+    .fill(0)
+    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .reverse()
+  yearsEndDate = Array(120)
+    .fill(0)
+    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .reverse()
+  months = Array(12)
+    .fill(0)
+    .map((i, idx) => idx + 1)
+  days = Array(31)
+    .fill(0)
+    .map((i, idx) => idx + 1)
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -65,8 +80,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
     private _recordAffiliationService: RecordAffiliationService,
-    private _formBuilder: FormBuilder,
-) {
+    private _formBuilder: FormBuilder
+  ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
       this.isMobile = platform.columns4 || platform.columns8
@@ -77,42 +92,42 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     this.initialValues()
     this.affiliationForm = this._formBuilder.group({
       organization: new FormControl(this.organization, {
-        validators: [
-          Validators.required
-        ],
+        validators: [Validators.required],
       }),
       city: new FormControl(this.city, {
-        validators: [
-          Validators.required
-        ],
+        validators: [Validators.required],
       }),
       region: new FormControl(this.region, {}),
       country: new FormControl('', {
-        validators: [
-          Validators.required
-        ],
+        validators: [Validators.required],
       }),
       department: new FormControl(this.department, {}),
       title: new FormControl(this.title, {}),
-      startDateGroup: this._formBuilder.group({
-        startDateDay: [''],
-        startDateMonth: [''],
-        startDateYear: ['']
-      }, { validator: dateValidator('startDate') }),
-      endDateGroup: this._formBuilder.group({
-        endDateDay: [''],
-        endDateMonth: [''],
-        endDateYear: ['']
-      }, { validator: dateValidator('endDate') }),
+      startDateGroup: this._formBuilder.group(
+        {
+          startDateDay: [''],
+          startDateMonth: [''],
+          startDateYear: [''],
+        },
+        { validator: dateValidator('startDate') }
+      ),
+      endDateGroup: this._formBuilder.group(
+        {
+          endDateDay: [''],
+          endDateMonth: [''],
+          endDateYear: [''],
+        },
+        { validator: dateValidator('endDate') }
+      ),
       link: new FormControl(this.link, {
-        validators: [
-          Validators.pattern(URL_REGEXP)
-        ]
+        validators: [Validators.pattern(URL_REGEXP)],
       }),
       visibility: new FormControl(
-        this.affiliation?.visibility?.visibility ? this.affiliation.visibility.visibility : this.defaultVisibility,
+        this.affiliation?.visibility?.visibility
+          ? this.affiliation.visibility.visibility
+          : this.defaultVisibility,
         {}
-        ),
+      ),
     })
 
     if (this.affiliation) {
@@ -121,7 +136,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           endDateGroup: {
             endDateYear: Number(this.affiliation.endDate.year),
             endDateMonth: Number(this.affiliation.endDate.month),
-            endDateDay: Number(this.affiliation.endDate.day)
+            endDateDay: Number(this.affiliation.endDate.day),
           },
         })
       }
@@ -131,18 +146,21 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           startDateGroup: {
             startDateYear: Number(this.affiliation.startDate.year),
             startDateMonth: Number(this.affiliation.startDate.month),
-            startDateDay: Number(this.affiliation.startDate.day)
+            startDateDay: Number(this.affiliation.startDate.day),
           },
         })
       }
     }
 
-    this.filteredOptions = this.affiliationForm.get('organization').valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      switchMap(val => {
-        return this._filter(val || '');
-      }));
+    this.filteredOptions = this.affiliationForm
+      .get('organization')
+      .valueChanges.pipe(
+        startWith(''),
+        debounceTime(400),
+        switchMap((val) => {
+          return this._filter(val || '')
+        })
+      )
 
     this._recordCountryService
       .getCountryCodes()
@@ -176,11 +194,14 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         .getAffiliationsDetails(
           this.affiliation.affiliationType.value,
           this.affiliation.putCode.value
-        ).pipe(first())
+        )
+        .pipe(first())
         .subscribe((affiliationUIGroup) => {
           this.loadingAffiliations = false
           this.affiliationForm.patchValue({
-            link: affiliationUIGroup[0].affiliationGroup[0].affiliations[0].url.value,
+            link:
+              affiliationUIGroup[0].affiliationGroup[0].affiliations[0].url
+                .value,
           })
         })
     } else {
@@ -202,58 +223,69 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   formToBackendAffiliation(affiliationForm: FormGroup): any {
     return {
       visibility: {
-        visibility: affiliationForm.get('visibility').value ? affiliationForm.get('visibility').value : this.defaultVisibility
+        visibility: affiliationForm.get('visibility').value
+          ? affiliationForm.get('visibility').value
+          : this.defaultVisibility,
       },
       putCode: {
         value: this.affiliation?.putCode?.value,
       },
       affiliationName: {
-        value: affiliationForm.get('organization').value
+        value: affiliationForm.get('organization').value,
       },
       city: {
-        value: affiliationForm.get('city').value
+        value: affiliationForm.get('city').value,
       },
       region: {
-        value: affiliationForm.get('region').value
+        value: affiliationForm.get('region').value,
       },
       country: {
         value: this.countryCodes.find(
-          (x) => x.key === affiliationForm.get('country').value).value
+          (x) => x.key === affiliationForm.get('country').value
+        ).value,
       },
       roleTitle: {
-        value: affiliationForm.get('title').value
+        value: affiliationForm.get('title').value,
       },
       departmentName: {
-        value: affiliationForm.get('department').value ? affiliationForm.get('department').value : ''
+        value: affiliationForm.get('department').value
+          ? affiliationForm.get('department').value
+          : '',
       },
       affiliationType: {
-        value: this.type
+        value: this.type,
       },
       startDate: {
-        day: this.addTrailingZero(affiliationForm.get('startDateGroup.startDateDay').value),
-        month: this.addTrailingZero(affiliationForm.get('startDateGroup.startDateMonth').value),
-        year: affiliationForm.get('startDateGroup.startDateYear').value
+        day: this.addTrailingZero(
+          affiliationForm.get('startDateGroup.startDateDay').value
+        ),
+        month: this.addTrailingZero(
+          affiliationForm.get('startDateGroup.startDateMonth').value
+        ),
+        year: affiliationForm.get('startDateGroup.startDateYear').value,
       },
       endDate: {
-        day: this.addTrailingZero(affiliationForm.get('endDateGroup.endDateDay').value),
-        month: this.addTrailingZero(affiliationForm.get('endDateGroup.endDateMonth').value),
-        year: affiliationForm.get('endDateGroup.endDateYear').value
+        day: this.addTrailingZero(
+          affiliationForm.get('endDateGroup.endDateDay').value
+        ),
+        month: this.addTrailingZero(
+          affiliationForm.get('endDateGroup.endDateMonth').value
+        ),
+        year: affiliationForm.get('endDateGroup.endDateYear').value,
       },
       url: {
-        value: affiliationForm.get('link').value
+        value: affiliationForm.get('link').value,
       },
-      source: this.affiliation?.source
+      source: this.affiliation?.source,
     } as Affiliation
-
   }
 
   fillForm(organization: Organization) {
     this.affiliationForm.patchValue({
       city: organization.city,
       region: organization.region,
-      country: this.countryCodes.find(
-        (x) => x.value === organization.country
-      ).key,
+      country: this.countryCodes.find((x) => x.value === organization.country)
+        .key,
     })
   }
 
@@ -266,14 +298,12 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     })
   }
 
-  private _filter(value: string): Observable<Organization[]>  {
+  private _filter(value: string): Observable<Organization[]> {
     if (value) {
-      return this._recordAffiliationService
-        .getOrganization(value)
-        .pipe(first())
+      return this._recordAffiliationService.getOrganization(value).pipe(first())
     }
 
-    return EMPTY;
+    return EMPTY
   }
 
   private addTrailingZero(date: string): string {

@@ -103,7 +103,11 @@ export class PanelsComponent implements OnInit {
   }
 
   affiliationMatButton() {
-    return this.type === 'education' || this.type === 'invited-position' || this.type === 'membership'
+    return (
+      this.type === 'education' ||
+      this.type === 'invited-position' ||
+      this.type === 'membership'
+    )
   }
 
   ngOnInit(): void {}

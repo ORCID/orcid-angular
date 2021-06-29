@@ -28,7 +28,8 @@ label {
   max-width: 402px;
 }
 
-.input-container, .date {
+.input-container,
+.date {
   margin-bottom: 10px;
 }
 
@@ -100,6 +101,7 @@ label {
   }
 }
 
-button, .clear {
+button,
+.clear {
   z-index: 1;
 }

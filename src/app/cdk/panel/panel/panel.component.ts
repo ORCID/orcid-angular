@@ -99,9 +99,15 @@ export class PanelComponent implements OnInit {
   }
 
   isAffiliation(): boolean {
-    return this.type === 'employment' || this.type === 'education' || this.type === 'qualification'
-      || this.type === 'invited-position' || this.type === 'distinction' || this.type === 'membership'
-      || this.type === 'service'
+    return (
+      this.type === 'employment' ||
+      this.type === 'education' ||
+      this.type === 'qualification' ||
+      this.type === 'invited-position' ||
+      this.type === 'distinction' ||
+      this.type === 'membership' ||
+      this.type === 'service'
+    )
   }
 
   toggle() {

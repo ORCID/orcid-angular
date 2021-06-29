@@ -31,7 +31,7 @@ export class AffiliationStackComponent implements OnInit {
   get affiliationStack(): AffiliationGroup {
     return this._affiliationStack
   }
- @Input() type:
+  @Input() type:
     | 'employment'
     | 'education'
     | 'qualification'
