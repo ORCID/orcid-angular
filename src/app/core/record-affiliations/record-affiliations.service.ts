@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,
-  Affiliation,
+  Affiliation, Organization,
 } from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -14,13 +14,21 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
 import { cloneDeep } from 'lodash'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { NamesEndPoint } from '../../types/record-name.endpoint'
+import { RecordCountryCodesEndpoint } from '../../types'
+import { UserStatus } from '../../types/userStatus.endpoint'
+import { ERROR_REPORT } from '../../errors'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordAffiliationService {
   affiliationsSubject = new ReplaySubject<AffiliationUIGroup[]>(1)
-  lastEmitedValue: AffiliationUIGroup[]
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  })
+  lastEmittedValue: AffiliationUIGroup[]
 
   $affiliations: ReplaySubject<AffiliationUIGroup[]>
 
@@ -38,17 +46,21 @@ export class RecordAffiliationService {
   ): Observable<AffiliationUIGroup[]> {
     if (!this.$affiliations) {
       this.$affiliations = new ReplaySubject(1)
-      this.getGroupAndSortAffiliations(options)
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          tap((value) => {
-            this.lastEmitedValue = cloneDeep(value)
-            this.$affiliations.next(value)
-          })
-        )
-        .subscribe()
+    } else if (!options.forceReload) {
+      return this.$affiliations
     }
+
+    this.getGroupAndSortAffiliations(options)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap((value) => {
+          this.lastEmittedValue = cloneDeep(value)
+          this.$affiliations.next(value)
+        })
+      )
+      .subscribe()
+
     return this.$affiliations.asObservable()
   }
 
@@ -62,7 +74,7 @@ export class RecordAffiliationService {
     return this.getAffiliationDetails(putCode, type, options).pipe(
       tap((data) => {
         if (data && data.url && data.url.value) {
-          this.lastEmitedValue.forEach((affiliations) => {
+          this.lastEmittedValue.forEach((affiliations) => {
             affiliations.affiliationGroup.map((affiliationsStack) => {
               affiliationsStack.affiliations.map((affiliation) => {
                 if (
@@ -75,7 +87,7 @@ export class RecordAffiliationService {
             })
           })
         }
-        this.$affiliations.next(this.lastEmitedValue)
+        this.$affiliations.next(this.lastEmittedValue)
       }),
       switchMap(() => {
         return this.$affiliations.asObservable()
@@ -134,17 +146,44 @@ export class RecordAffiliationService {
 
   changeUserRecordContext(userRecordContext: UserRecordOptions, type: string) {
     const value = this._affiliationsSortService.transform(
-      this.lastEmitedValue,
+      this.lastEmittedValue,
       userRecordContext,
       type
     )
-    this.lastEmitedValue = cloneDeep(value)
+    this.lastEmittedValue = cloneDeep(value)
     this.$affiliations.next(value)
   }
 
-  set(value): Observable<AffiliationUIGroup[]> {
-    throw new Error('Method not implemented.')
+  postAffiliation(affiliation): Observable<Affiliation> {
+    return this._http
+      .post<Affiliation>(
+        environment.API_WEB + 'affiliations/affiliation.json',
+        affiliation,
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getAffiliations({ forceReload: true }))
+      )
   }
+
+  getOrganization(org: string): Observable<Organization[]> {
+      return this._http
+        .get<Organization[]>(
+          environment.API_WEB + 'affiliations/disambiguated/name/' + org + '?limit=100',
+          {
+            headers: this.headers,
+          }
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+        )
+    }
+
   update(value): Observable<AffiliationUIGroup[]> {
     throw new Error('Method not implemented.')
   }

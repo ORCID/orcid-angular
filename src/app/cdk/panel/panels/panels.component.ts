@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
+import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
   selector: 'app-panels',
@@ -15,6 +16,13 @@ export class PanelsComponent implements OnInit {
   @Input() expandedContent = true
   @Input() title
   @Input() type:
+    | 'employment'
+    | 'education'
+    | 'qualification'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
     | 'works'
     | 'activities'
     | 'peer-review'
@@ -40,8 +48,17 @@ export class PanelsComponent implements OnInit {
     private _platform: PlatformInfoService
   ) {}
 
-  add() {
-    switch (this.type) {
+  add(type: string) {
+    switch (type) {
+      case 'employment':
+      case 'education':
+      case 'qualification':
+      case 'invited-position':
+      case 'distinction':
+      case 'membership':
+      case 'service':
+        this.openModal(ModalAffiliationsComponent, type)
+        break
       case 'peer-review':
         this.openModal(ModalPeerReviewsComponent)
         break
@@ -50,17 +67,19 @@ export class PanelsComponent implements OnInit {
     }
   }
 
-  openModal(modal: ComponentType<any>) {
+  openModal(modal: ComponentType<any>, type?: string) {
     this._platform
       .get()
       .pipe(first())
       .subscribe((platform) => {
+        let modalComponent
         if (this.addModalComponent) {
-          this._dialog.open(modal, {
+          modalComponent = this._dialog.open(modal, {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
           })
         }
+        modalComponent.componentInstance.type = type
       })
   }
 
@@ -82,5 +101,10 @@ export class PanelsComponent implements OnInit {
     this.expandedContent = !this.expandedContent
     this.expanded.emit(this.expandedContent)
   }
+
+  affiliationMatButton() {
+    return this.type === 'education' || this.type === 'invited-position' || this.type === 'membership'
+  }
+
   ngOnInit(): void {}
 }

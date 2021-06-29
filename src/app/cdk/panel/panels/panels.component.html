@@ -31,16 +31,72 @@
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
       <button
-        *ngIf="!isPublicRecord && type !== 'research-resources'"
+        *ngIf="!isPublicRecord && type === 'employment' || type === 'peer-review'"
         mat-icon-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
       >
-        <mat-icon (click)="add()" class="large-material-icon" id="add-button">
+        <mat-icon (click)="add(type)" class="large-material-icon" id="add-button">
           add_circle_outline
         </mat-icon>
         <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
+      <button
+        *ngIf="!isPublicRecord && affiliationMatButton()"
+        mat-icon-button
+        class="orc-font-body-small add"
+        [attr.aria-label]="labelAddButton"
+        [matMenuTriggerFor]="menuAdd"
+      >
+        <mat-icon class="large-material-icon" id="add-button-multiple">
+          add_circle_outline
+        </mat-icon>
+        <ng-container i18n="@@shared.add"> Add </ng-container>
+      </button>
+      <mat-menu #menuAdd="matMenu">
+        <ng-container *ngIf="type === 'education' || type === 'qualification'">
+          <button
+            mat-menu-item
+            (click)="add('education')"
+          >
+            <ng-container i18n="@@shared.addEducation">Add Education</ng-container>
+          </button>
+          <button
+            mat-menu-item
+            (click)="add('qualification')"
+          >
+            <ng-container i18n="@@shared.addQualification">Add Qualification</ng-container>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'invited-position' || type === 'distinction'">
+          <button
+            mat-menu-item
+            (click)="add('invited-position')"
+          >
+            <ng-container i18n="@@shared.addInvited">Add Invited Position</ng-container>
+          </button>
+          <button
+            mat-menu-item
+            (click)="add('distinction')"
+          >
+            <ng-container i18n="@@shared.addDistinction">Add Distinction</ng-container>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'membership' || type === 'service'">
+          <button
+            mat-menu-item
+            (click)="add('membership')"
+          >
+            <ng-container i18n="@@shared.addMembership">Add Membership</ng-container>
+          </button>
+          <button
+            mat-menu-item
+            (click)="add('service')"
+          >
+            <ng-container i18n="@@shared.addService">Add Service</ng-container>
+          </button>
+        </ng-container>
+      </mat-menu>
       <button
         mat-button
         class="orc-font-body-small"

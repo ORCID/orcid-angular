@@ -33,6 +33,13 @@ export class PanelComponent implements OnInit {
     | 'top-bar'
     | 'side-bar'
     | 'affiliations'
+    | 'employment'
+    | 'education'
+    | 'qualification'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
     | 'peer-review'
     | 'main'
   @Input() userRecord: UserRecord
@@ -78,14 +85,23 @@ export class PanelComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
+        let modalComponent
         if (this.editModalComponent) {
-          this._dialog.open(this.editModalComponent, {
+          modalComponent = this._dialog.open(this.editModalComponent, {
             width: '850px',
             maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
             data: this.userRecord,
           })
+          modalComponent.componentInstance.type = this.type
+          modalComponent.componentInstance.affiliation = this.elements
         }
       })
+  }
+
+  isAffiliation(): boolean {
+    return this.type === 'employment' || this.type === 'education' || this.type === 'qualification'
+      || this.type === 'invited-position' || this.type === 'distinction' || this.type === 'membership'
+      || this.type === 'service'
   }
 
   toggle() {
