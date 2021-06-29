@@ -27,9 +27,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
   modalBiographyComponent = ModalBiographyComponent
 
   platform: PlatformInfo
-  givenNames: String = ''
-  familyName: String = ''
-  creditName: String = ''
+  givenNames = ''
+  familyName = ''
+  creditName = ''
   expandedContent = false
   recordWithIssues: boolean
   loadingUserRecord = true

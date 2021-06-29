@@ -34,9 +34,10 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
   }
 
   printRecord() {
-    this.window.location.href =
+    this.window.open(
       environment.BASE_URL +
-      this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
-      '/print'
+        this.userRecord?.userInfo?.EFFECTIVE_USER_ORCID +
+        '/print'
+    )
   }
 }

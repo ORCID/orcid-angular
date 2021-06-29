@@ -43,3 +43,19 @@ main#main {
   justify-content: space-between;
   align-items: center;
 }
+
+.no-public-info {
+  margin-top: 20px;
+
+  mat-error {
+    display: flex;
+    align-items: center;
+    mat-icon {
+      margin-inline-end: 4px;
+    }
+  }
+}
+
+.last-modified {
+  margin-top: 20px;
+}
