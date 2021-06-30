@@ -211,8 +211,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     // Update the personal data object is required after submit since is an input for StepB
 
     if (this.FormGroupStepA.valid) {
-      this.personalData = this.FormGroupStepA.value.personal
-      //TODO: XXX
+      this.personalData = this.FormGroupStepA.value.personal      
       let searchValue = this.personalData.familyNames.value + ' ' + this.personalData.givenNames.value
       const searchParams: SearchParameters = {}
       searchParams.searchQuery = searchValue;
