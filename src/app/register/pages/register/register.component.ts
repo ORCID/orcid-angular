@@ -227,7 +227,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openDialog(duplicateRecords: SearchResults): void {
+  openDialog(duplicateRecordsSearchResults: SearchResults): void {
+    let duplicateRecords = duplicateRecordsSearchResults['expanded-result'];
     const dialogParams = {
       width: `1078px`,
       height: `600px`,

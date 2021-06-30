@@ -19,18 +19,16 @@
         <th class="affiliation-colum">
           {{ data.affiliationsLabel || affiliationsLabel }}
         </th>
-        <th>{{ data.dateCreatedLabel || dateCreatedLabel }}</th>
         <th class="buttonsColumn">
           {{ data.viewRecordLabel || viewRecordLabel }}
         </th>
       </tr>
       <tr *ngFor="let record of data.duplicateRecords">
-        <td>{{ record.givenNames }}</td>
-        <td>{{ record.familyNames }}</td>
-        <td>{{ record.institution }}</td>
-        <td>{{ record.createdDate }}</td>
+        <td>{{ record['given-names'] }}</td>
+        <td>{{ record['family-names'] }}</td>
+        <td>{{ record['institution-name'].join(', ') }}</td>        
         <td>
-          <button mat-button color="primary" (click)="gotoNewTab(record.orcid)">
+          <button mat-button color="primary" (click)="gotoNewTab(record['orcid-id'])">
             {{ data.viewRecordLabel || viewRecordLabel }}
           </button>
         </td>
