@@ -137,10 +137,9 @@ export class RecordResearchResourceService {
 
   delete(putCode: string): Observable<any> {
     return this._http
-      .delete(
-      environment.API_WEB + 'research-resources/' + putCode,
-      { headers: this.headers }
-      )
+      .delete(environment.API_WEB + 'research-resources/' + putCode, {
+        headers: this.headers,
+      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

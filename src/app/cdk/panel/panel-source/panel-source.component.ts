@@ -59,9 +59,9 @@ export class PanelSourceComponent implements OnInit {
     private _platformInfo: PlatformInfoService,
     private _recordAffiliationService: RecordAffiliationService,
     private _recordFundingsService: RecordFundingsService,
-  private _recordWorksService: RecordWorksService,
-  private _recordResearchResourceService: RecordResearchResourceService,
-    private _recordPeerReviewService: RecordPeerReviewService,
+    private _recordWorksService: RecordWorksService,
+    private _recordResearchResourceService: RecordResearchResourceService,
+    private _recordPeerReviewService: RecordPeerReviewService
   ) {
     this._platformInfo.get().subscribe((person) => {
       this.isHanset = person.handset
@@ -104,10 +104,7 @@ export class PanelSourceComponent implements OnInit {
           .subscribe()
         break
       case 'works':
-        this._recordWorksService
-          .delete(this.putCode)
-          .pipe(first())
-          .subscribe()
+        this._recordWorksService.delete(this.putCode).pipe(first()).subscribe()
         break
       case 'research-resources':
         this._recordResearchResourceService

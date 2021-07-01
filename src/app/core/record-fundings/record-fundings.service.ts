@@ -114,7 +114,9 @@ export class RecordFundingsService {
   delete(putCode: string): Observable<any> {
     return this._http
       .delete(
-        environment.API_WEB + 'fundings/funding.json?id=' + encodeURIComponent(putCode),
+        environment.API_WEB +
+          'fundings/funding.json?id=' +
+          encodeURIComponent(putCode)
       )
       .pipe(
         retry(3),

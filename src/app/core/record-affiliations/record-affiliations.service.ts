@@ -191,7 +191,10 @@ export class RecordAffiliationService {
   delete(putCode: string): Observable<any> {
     return this._http
       .delete(
-      environment.API_WEB + 'affiliations/affiliation.json' + '?id=' + encodeURIComponent(putCode)
+        environment.API_WEB +
+          'affiliations/affiliation.json' +
+          '?id=' +
+          encodeURIComponent(putCode)
       )
       .pipe(
         retry(3),
