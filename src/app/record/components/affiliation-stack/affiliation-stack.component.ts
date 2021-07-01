@@ -23,6 +23,14 @@ export class AffiliationStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _affiliationStack: AffiliationGroup
   @Input() isPublicRecord: string = null
+  @Input() type:
+    | 'employment'
+    | 'education'
+    | 'qualification'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
   @Input()
   set affiliationStack(value: AffiliationGroup) {
     this._affiliationStack = value

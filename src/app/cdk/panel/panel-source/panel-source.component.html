@@ -64,4 +64,17 @@
       </a>
     </div>
   </div>
+  <div align-end>
+    <button
+      *ngIf="!isPublicRecord"
+      mat-icon-button
+      [matTooltip]="labelDeleteButton"
+      [attr.aria-label]="labelDeleteButton"
+    >
+      <mat-icon (click)="delete()" class="large-material-icon" id="delete-button">
+        delete_outline
+      </mat-icon>
+    </button>
+  </div>
 </app-panel-data>
+

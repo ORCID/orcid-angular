@@ -17,7 +17,7 @@ export class RecordPeerReviewService {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   })
-  lastEmitedValue: PeerReview[]
+  lastEmittedValue: PeerReview[]
 
   constructor(
     private _http: HttpClient,
@@ -37,7 +37,7 @@ export class RecordPeerReviewService {
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((data) => {
-            this.lastEmitedValue = data
+            this.lastEmittedValue = data
             this.$peer.next(data)
           }),
           switchMap((data) => this.$peer.asObservable())
@@ -54,7 +54,7 @@ export class RecordPeerReviewService {
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((data) => {
-            this.lastEmitedValue = data
+            this.lastEmittedValue = data
             this.$peer.next(data)
           }),
           switchMap((data) => this.$peer.asObservable())
@@ -84,5 +84,18 @@ export class RecordPeerReviewService {
     return this._http.get(
       environment.API_WEB + orcid + '/peer-review.json?putCode=' + putCode
     )
+  }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(
+      environment.API_WEB + 'peer-reviews/' + putCode,
+      { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getPeerReviewGroups({ forceReload: true }))
+      )
   }
 }

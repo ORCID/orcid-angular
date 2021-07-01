@@ -191,4 +191,16 @@ export class RecordWorksService {
   update(value: any): Observable<any> {
     throw new Error('Method not implemented.')
   }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(
+        environment.API_WEB + 'works/' + putCode,
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
 }

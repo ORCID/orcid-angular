@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { first, map, tap } from 'rxjs/operators'
+import { catchError, first, map, retry, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 import { environment } from '../../../environments/environment'
@@ -133,5 +133,18 @@ export class RecordResearchResourceService {
     return this._http.get<ResearchResource>(
       environment.API_WEB + orcid + '/researchResource.json?id=' + putCode
     )
+  }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(
+      environment.API_WEB + 'research-resources/' + putCode,
+      { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getResearchResourcePage({ forceReload: true }))
+      )
   }
 }
