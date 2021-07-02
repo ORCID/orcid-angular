@@ -117,7 +117,7 @@ export class RecordWorksService {
           tap((data) => {
             this.lastEmittedValue = data
             this.$works.next(data)
-          }),
+          })
         )
         .subscribe()
 
