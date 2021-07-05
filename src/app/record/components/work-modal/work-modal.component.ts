@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { URL_REGEXP } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import {
   CitationTypes,
@@ -10,6 +17,7 @@ import {
   WorkCategories,
   WorkCategoriesTitle,
   WorkConferenceTypes,
+  WorkIdType,
   WorkIntellectualPropertyTypes,
   WorkOtherOutputTypes,
   WorkPublicationTypes,
@@ -22,12 +30,17 @@ import {
 @Component({
   selector: 'app-work-modal',
   templateUrl: './work-modal.component.html',
-  styleUrls: ['./work-modal.component.scss'],
+  styleUrls: [
+    './work-modal.component.scss',
+    './work-modal.component.scss-theme.scss',
+  ],
 })
 export class WorkModalComponent implements OnInit {
   loading = true
   workForm: FormGroup
   platform: PlatformInfo
+
+  showTranslationTitle = false
 
   languageMap = LanguageMap
   workCategories = WorkCategories
@@ -41,10 +54,12 @@ export class WorkModalComponent implements OnInit {
     | WorkOtherOutputTypes
     | WorkPublicationTypes
     | {} = {}
+
   workRelationships = WorkRelationships
 
   dynamicTitle = WorkCategoriesTitle.journalTitle
-  workIdentifiersControls: FormArray
+  workIdTypes: WorkIdType[]
+  workIdentifiersArray: FormArray
 
   constructor(
     private fb: FormBuilder,
@@ -57,9 +72,9 @@ export class WorkModalComponent implements OnInit {
       this.platform = value
     })
     this.workForm = this.fb.group({
-      workCategory: ['', []],
-      workType: ['', []],
-      title: ['', []],
+      workCategory: ['', [Validators.required]],
+      workType: ['', [Validators.required]],
+      title: ['', [Validators.required]],
       translatedTitleContent: ['', []],
       translatedTitleLanguage: ['', []],
       subtitle: ['', []],
@@ -75,7 +90,7 @@ export class WorkModalComponent implements OnInit {
         this.fb.group({
           externalIdentifierType: ['', []],
           externalIdentifierId: ['', []],
-          externalIdentifierUrl: ['', []],
+          externalIdentifierUrl: ['', [Validators.pattern(URL_REGEXP)]],
           externalRelationship: ['', []],
         }),
       ]),
@@ -93,15 +108,52 @@ export class WorkModalComponent implements OnInit {
           WorkTypesTitle[this.workForm.value['workCategory']][value]
       }
     })
+    this.workForm.get('citationType').valueChanges.subscribe((value) => {
+      if (value !== '') {
+        this.workForm.controls.citation.setValidators([Validators.required])
+        this.workForm.controls.citation.updateValueAndValidity()
+      } else {
+        console.log('REMOVE VALIDATORS')
 
-    this.workService.loadWorkTypes().subscribe((value) => {
-      this.workTypes = value
+        this.workForm.controls.citation.clearValidators()
+        this.workForm.controls.citation.updateValueAndValidity()
+      }
+      console.log('validity', this.workForm.controls.citation.valid)
+      console.log('value:', `(${this.workForm.controls.citation.value})`)
+    })
+    this.workIdentifiersArray = this.workForm.controls
+      .workIdentifiers as FormArray
+
+    this.workIdentifiersArray.valueChanges.subscribe((value) => {
+      console.log(value)
     })
 
-    this.workIdentifiersControls = this.workForm.controls
-      .workIdentifiers as FormArray
+    this.workService.loadWorkIdTypes().subscribe((value) => {
+      this.workIdTypes = value
+    })
   }
 
-  saveEvent() {}
+  addOtherWorkId() {
+    this.workIdentifiersArray.controls.push(
+      this.fb.group({
+        externalIdentifierType: ['', []],
+        externalIdentifierId: ['', []],
+        externalIdentifierUrl: ['', []],
+        externalRelationship: ['', []],
+      })
+    )
+    console.log(this.workIdentifiersArray)
+  }
+  deleteWorkId(id: number) {
+    this.workIdentifiersArray.removeAt(id)
+  }
+
+  saveEvent() {
+    this.workForm.markAllAsTouched()
+    console.log(this.workForm.controls.citation)
+
+    console.log('Valid form ', this.workForm.valid)
+  }
+
   closeEvent() {}
 }

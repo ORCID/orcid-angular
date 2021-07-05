@@ -65,6 +65,8 @@ export class WorkStackGroupComponent implements OnInit {
           this.total.emit(userRecord.works.groups.length)
         }
       })
+
+    this.add(ADD_EVENT_ACTION.addManually)
   }
 
   trackByWorkGroup(index, item: WorkGroup) {

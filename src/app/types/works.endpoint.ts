@@ -623,11 +623,19 @@ export const CitationTypes = {
   'formatted-vancouver': 'VANCOUVER',
 }
 
-export interface WorkType {
+export interface WorkIdType {
   name: string
   description: string
   resolutionPrefix: string
 }
+
+export interface WorkIdTypeValidation {
+  resolved: boolean;
+  attemptedResolution: boolean;
+  generatedUrl: string;
+  validFormat: boolean;
+}
+
 
 export const WorkRelationships = {
   self: 'funded_by',
