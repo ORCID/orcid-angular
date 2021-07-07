@@ -14,7 +14,7 @@ import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta
   templateUrl: './my-orcid.component.html',
   styleUrls: [
     './my-orcid.component.scss',
-    './my-orcid.component.scss-theme.scss'
+    './my-orcid.component.scss-theme.scss',
   ],
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
