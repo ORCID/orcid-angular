@@ -3,23 +3,36 @@
     class="is-this-you orc-font-body-small"
     *ngIf="
       isPublicRecord &&
-      !(userRecord?.userInfo?.REAL_USER_ORCID === userRecord?.userInfo?.EFFECTIVE_USER_ORCID)
+      !(
+        userRecord?.userInfo?.REAL_USER_ORCID ===
+        userRecord?.userInfo?.EFFECTIVE_USER_ORCID
+      )
     "
-    >
+  >
     <mat-icon class="large-material-icon">account_circle</mat-icon>
     <p>
       Is this you?
-      <a class="underline" [routerLink]="['/signin']">Sign in to start editing</a>
+      <a class="underline" [routerLink]="['/signin']"
+        >Sign in to start editing</a
+      >
     </p>
   </div>
   <div class="my-orcid-icons" *ngIf="platform.columns12">
-    <button mat-icon-button class="orc-font-small-print" (click)="printRecord()">
+    <button
+      mat-icon-button
+      class="orc-font-small-print"
+      (click)="printRecord()"
+    >
       <mat-icon fontSet="material-icons-outlined" class="icon"> print</mat-icon>
       <ng-container i18n="@@record.printableVersion">
         Printable version
       </ng-container>
     </button>
-    <button mat-icon-button class="orc-font-small-print" *ngIf="!isPublicRecord">
+    <button
+      mat-icon-button
+      class="orc-font-small-print"
+      *ngIf="!isPublicRecord"
+    >
       <mat-icon fontSet="material-icons-outlined" class="icon">
         qr_code
       </mat-icon>
@@ -27,7 +40,11 @@
         Get a QR code for your ORCID iD
       </ng-container>
     </button>
-    <button mat-icon-button class="orc-font-small-print" *ngIf="!isPublicRecord">
+    <button
+      mat-icon-button
+      class="orc-font-small-print"
+      *ngIf="!isPublicRecord"
+    >
       <mat-icon fontSet="material-icons-outlined" class="icon"> code</mat-icon>
       <ng-container i18n="@@record.displayId">
         Display your iD on other sites
