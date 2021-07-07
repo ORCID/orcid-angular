@@ -1,0 +1,107 @@
+:host {
+  width: 100%;
+}
+
+label {
+  margin: 6px 0 3px 0;
+}
+
+::ng-deep .columns-4-or-8 .mat-form-field {
+  width: 100%;
+  margin-inline-end: auto;
+}
+
+.required {
+  margin-left: 3px;
+}
+
+.required-information {
+  margin-left: auto !important;
+  margin-top: 10px !important;
+
+  span {
+    margin-right: 3px !important;
+  }
+}
+
+.input-container {
+  max-width: 402px;
+}
+
+.input-container,
+.date {
+  margin-bottom: 10px;
+}
+
+.actions-wrapper {
+  flex-wrap: nowrap;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-option {
+  height: 64px;
+  line-height: 32px;
+}
+
+.title {
+  margin-top: 16px;
+
+  p {
+    margin: 6px 0;
+  }
+}
+
+.mat-form-field {
+  padding: 0 !important;
+}
+
+.input-box {
+  flex-grow: 1;
+  max-width: 402px;
+  input {
+    width: 100%;
+    height: 40px;
+    margin: 4px 0;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0 12px;
+  }
+}
+
+.visibility {
+  margin-top: 60px;
+}
+
+.delete {
+  margin-left: auto;
+}
+
+.other-names-wrapper {
+  margin: 20px 0 30px 0;
+}
+
+::ng-deep .mat-form-field-subscript-wrapper {
+  margin-top: 4px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+  padding-left: 2px !important;
+}
+
+.side-bar {
+  text-decoration: underline;
+}
+
+.date {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+}
+
+button,
+.clear {
+  z-index: 1;
+}

@@ -9,12 +9,13 @@
   <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
   <app-panel
     [elements]="affiliation"
+    [editModalComponent]="modalAffiliationsComponent"
+    [type]="type"
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
     [ngClass]="{ last: last }"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
     *ngIf="isPreferred(affiliation) || displayTheStack"
-    type="main"
   >
     <h2 header class="orc-font-body">
       {{ affiliation.affiliationName.value }}:
