@@ -12,7 +12,10 @@ import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta
 @Component({
   selector: 'app-my-orcid',
   templateUrl: './my-orcid.component.html',
-  styleUrls: ['./my-orcid.component.scss'],
+  styleUrls: [
+    './my-orcid.component.scss',
+    './my-orcid.component.scss-theme.scss'
+  ],
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
