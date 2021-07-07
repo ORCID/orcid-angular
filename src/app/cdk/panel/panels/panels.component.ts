@@ -4,10 +4,10 @@ import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
+import { ModalExportWorksComponent } from '../../../record/components/work/modals/modal-export-works/modal-export-works.component'
 import { ADD_EVENT_ACTION } from 'src/app/constants'
 import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
-
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 
@@ -36,6 +36,8 @@ export class PanelsComponent implements OnInit {
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
+  @Input() addModalComponent: ComponentType<any>
+  @Input() selectable = false
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
   @Input() sortType: SortOrderType = 'end'
@@ -52,6 +54,7 @@ export class PanelsComponent implements OnInit {
   }[] = []
 
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
+  @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
 
   constructor(

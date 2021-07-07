@@ -15,6 +15,7 @@
     [visibility]="workStack.activeVisibility"
     *ngIf="isPreferred(work) || displayTheStack"
     [isPublicRecord]="isPublicRecord"
+    [selectable]="true"
     [isUserSource]="userIsSource(work)"
     [type]="'works'"
   >

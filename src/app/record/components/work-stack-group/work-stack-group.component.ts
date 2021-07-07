@@ -8,12 +8,20 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
+import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
+import { ComponentType } from '@angular/cdk/portal'
+import { first } from 'rxjs/operators'
+import { MatDialog } from '@angular/material/dialog'
+import { PlatformInfoService } from '../../../cdk/platform-info'
 import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-work-stack-group',
   templateUrl: './work-stack-group.component.html',
-  styleUrls: ['./work-stack-group.component.scss'],
+  styleUrls: [
+    './work-stack-group.component.scss',
+    './work-stack-group.component.scss-theme.scss',
+  ],
 })
 export class WorkStackGroupComponent implements OnInit {
   defaultPageSize = DEFAULT_PAGE_SIZE
@@ -27,16 +35,21 @@ export class WorkStackGroupComponent implements OnInit {
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
 
+  modalExportWorksComponent = ModalExportWorksComponent
+
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   workGroup: WorksEndpoint
 
   works = $localize`:@@shared.works:Works`
+  labelActionsButton = $localize`:@@shared.actions:Actions`
   paginationTotalAmountOfWorks: number
   paginationIndex: number
   paginationPageSize: number
 
   constructor(
+    private _dialog: MatDialog,
+    private _platform: PlatformInfoService,
     private _record: RecordService,
     private _works: RecordWorksService
   ) {}
@@ -80,4 +93,21 @@ export class WorkStackGroupComponent implements OnInit {
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this._works.changeUserRecordContext(this.userRecordContext)
   }
+
+  export() {
+    this.openModal(ModalExportWorksComponent)
+  }
+
+  openModal(modal: ComponentType<any>) {
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        this._dialog.open(modal, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+        })
+      })
+  }
+
 }

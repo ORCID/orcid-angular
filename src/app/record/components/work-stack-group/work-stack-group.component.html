@@ -33,6 +33,65 @@
     >
     </mat-paginator>
     <ng-container *ngIf="workGroup.groups.length > 0">
+      <div class="row orc-font-body-small">
+        <div class="select-all">
+          <p>
+            <mat-checkbox>
+              <ng-container i18n="@@shared.selectAll">Select all</ng-container>
+              ({{ 0 }})
+            </mat-checkbox>
+          </p>
+        </div>
+        <div class="items-selected">
+          <p>
+            <ng-container i18n="@@shared.itemsCurrentlySelected">Items currently selected</ng-container>
+            ({{ 0 }})
+          </p>
+        </div>
+        <div class="controls">
+          <button
+            mat-button
+            class="orc-font-body-small"
+            [attr.aria-label]="labelActionsButton"
+            [matMenuTriggerFor]="menu"
+          >
+            <span
+              class="action"
+              i18n="@@shared.actions"
+            >
+              Actions
+            </span>
+            <mat-icon class="large-material-icon">arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+            >
+              <mat-icon>merge_type</mat-icon>
+              <span i18n="@@shared.combineWorks">Combine works</span>
+            </button>
+            <button
+              mat-menu-item
+              (click)="export()"
+            >
+              <mat-icon>file_download</mat-icon>
+              <span i18n="@@shared.exportWorks">Export works</span>
+            </button>
+            <button
+              mat-menu-item
+            >
+              <mat-icon>visibility</mat-icon>
+              <span i18n="@@shared.setVisibility">Set visibility</span>
+            </button>
+            <button
+              mat-menu-item
+            >
+              <mat-icon>delete</mat-icon>
+              <span i18n="@@shared.deleteWorks">Delete works</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
       <app-work-stack
         [isPublicRecord]="isPublicRecord"
         *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"

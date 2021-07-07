@@ -62,6 +62,7 @@ export class PanelComponent implements OnInit {
   @Input() customControls = false
   @Input() openState = true
   @Input() editable = true
+  @Input() selectable = false
   @Output() openStateChange = new EventEmitter<boolean>()
 
   _isPublicRecord: string

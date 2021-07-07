@@ -5,6 +5,7 @@
     'top-bar-or-main': type === 'top-bar' || type === 'main' || isAffiliation(),
     'side-bar': type === 'side-bar',
     'staked-header': stackedHeader
+    'expand-button': !editable && !isPublicRecord && !customControls
   }"
 >
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
@@ -20,10 +21,18 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="expandButtonsPosition !== 'left'">
-    <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
-  </ng-container>
-
+  <div *ngIf=selectable>
+    <mat-checkbox *ngIf="selectable">
+      <ng-container *ngIf="expandButtonsPosition !== 'left'">
+        <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+      </ng-container>
+    </mat-checkbox>
+  </div>
+  <div *ngIf=!selectable>
+    <ng-container *ngIf="expandButtonsPosition !== 'left'">
+      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    </ng-container>
+  </div>
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container *ngIf="visibility && !isPublicRecord">
