@@ -173,9 +173,12 @@
           <ng-container *ngIf="keywordOpenState">
             <app-panel-element
               [isPublicRecord]="isPublicRecord"
-              *ngFor="let keyword of userRecord.keyword.keywords; let last = last"
+              *ngFor="
+                let keyword of userRecord.keyword.keywords;
+                let last = last
+              "
               [visibility]="!isPublicRecord && keyword.visibility.visibility"
-            >{{ getKeyword(keyword) }}
+              >{{ getKeyword(keyword) }}
 
               <!-- [app-panel-element-source] only visible on public page -->
               <app-panel-element-source
@@ -217,7 +220,7 @@
               let last = last
             "
             [visibility]="!isPublicRecord && address.visibility.visibility"
-          >{{ address.countryName }}
+            >{{ address.countryName }}
 
             <!-- [app-panel-element-source] only visible on public page -->
             <app-panel-element-source
@@ -233,11 +236,11 @@
             <app-panel-element
               [isPublicRecord]="isPublicRecord"
               *ngFor="
-              let address of userRecord.countries.addresses;
-              let last = last
-            "
+                let address of userRecord.countries.addresses;
+                let last = last
+              "
               [visibility]="!isPublicRecord && address.visibility.visibility"
-            >{{ address.countryName }}
+              >{{ address.countryName }}
 
               <!-- [app-panel-element-source] only visible on public page -->
               <app-panel-element-source
