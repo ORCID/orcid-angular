@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { UserService } from 'src/app/core'
 import { Subject } from 'rxjs'
-import { UserInfo, NameForm, RequestInfoForm, Assertion } from 'src/app/types'
+import { UserInfo, NameForm, RequestInfoForm, Assertion, Address } from 'src/app/types'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from 'src/app/core/record/record.service'
 import { UserRecord } from 'src/app/types/record.local'
@@ -96,6 +96,18 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   getKeyword(keyword: Assertion) {
     return keyword.content
+  }
+
+  getKeywords(keywords: Assertion[]): string[] {
+    return keywords.map((keyword) => {
+      return keyword.content
+    })
+  }
+
+  getAddresses(addresses: Address[]): string[] {
+    return addresses.map((address) => {
+      return address.countryName
+    })
   }
 
   ngOnDestroy() {
