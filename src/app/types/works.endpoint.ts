@@ -8,10 +8,10 @@ export interface Citation {
 }
 
 export interface Work {
-  visibility: Value
+  visibility: any
   errors: any[] // TODO is this always empty?
   publicationDate: MonthDayYearDate
-  putCode: Value
+  putCode: any
   shortDescription?: Value
   url?: Value
   journalTitle?: Value
@@ -33,4 +33,5 @@ export interface Work {
   createdDate?: MonthDayYearDate
   lastModified?: MonthDayYearDate
   userSource: boolean
+  checked: boolean
 }

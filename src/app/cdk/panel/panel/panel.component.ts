@@ -2,11 +2,7 @@ import { ComponentType } from '@angular/cdk/portal'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion, Work } from '../../../types'
-import {
-  Address,
-  Value,
-  VisibilityStrings,
-} from '../../../types/common.endpoint'
+import { Address, Value, VisibilityStrings } from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
@@ -19,6 +15,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
+import { Work } from 'src/app/types/record-works.endpoint'
 
 @Component({
   selector: 'app-panel',

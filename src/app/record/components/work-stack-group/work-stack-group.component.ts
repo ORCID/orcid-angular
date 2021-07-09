@@ -46,6 +46,8 @@ export class WorkStackGroupComponent implements OnInit {
   paginationTotalAmountOfWorks: number
   paginationIndex: number
   paginationPageSize: number
+  selectedWorks: any[]
+  selectAll: false
 
   constructor(
     private _dialog: MatDialog,
@@ -96,6 +98,18 @@ export class WorkStackGroupComponent implements OnInit {
 
   export() {
     this.openModal(ModalExportWorksComponent)
+  }
+
+  updateCheck() {
+    if (this.selectAll) {
+      this.workGroup.groups.map((workGroup) => {
+        workGroup.works[0].checked = true
+      })
+    } else {
+      this.workGroup.groups.map((workGroup) => {
+        workGroup.works[0].checked = false
+      })
+    }
   }
 
   openModal(modal: ComponentType<any>) {

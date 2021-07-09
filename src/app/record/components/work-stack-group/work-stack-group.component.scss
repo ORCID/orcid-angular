@@ -10,26 +10,35 @@ p.empty {
   margin-bottom: 0;
 }
 
-.select-all {
-  margin-left: 10px;
-  margin-right: 20px;
-}
+.works-buttons {
+  margin: 16px;
 
-.items-selected {
-  margin-right: 20px;
-}
+  .select-all {
+    margin-left: 10px;
+    margin-right: 20px;
+  }
 
-.controls {
-  button {
-    width: 200px;
-    border: solid 1px;
-    display: inline-block;
-    text-align: start;
+  .items-selected {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
 
-    mat-icon {
-      position: absolute;
-      top: 20%;
-      right: 5%;
+  .controls {
+    display: flex;
+    align-items: center;
+
+    button {
+      width: 200px;
+      border: solid 1px;
+      display: inline-block;
+      text-align: start;
+
+      mat-icon {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+      }
     }
   }
 }

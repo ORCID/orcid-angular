@@ -33,19 +33,22 @@
     >
     </mat-paginator>
     <ng-container *ngIf="workGroup.groups.length > 0">
-      <div class="row orc-font-body-small">
+      <div class="row works-buttons orc-font-body-small">
         <div class="select-all">
           <p>
-            <mat-checkbox>
+            <mat-checkbox
+              (change)="updateCheck()"
+              [(ngModel)]="selectAll"
+            >
               <ng-container i18n="@@shared.selectAll">Select all</ng-container>
-              ({{ 0 }})
+              ({{ workGroup.groups.length }})
             </mat-checkbox>
           </p>
         </div>
         <div class="items-selected">
           <p>
             <ng-container i18n="@@shared.itemsCurrentlySelected">Items currently selected</ng-container>
-            ({{ 0 }})
+            ({{ selectedWorks }})
           </p>
         </div>
         <div class="controls">
