@@ -1,13 +1,7 @@
 <div class="container">
   <div
     class="is-this-you orc-font-body-small"
-    *ngIf="
-      isPublicRecord &&
-      !(
-        userRecord?.userInfo?.REAL_USER_ORCID ===
-        userRecord?.userInfo?.EFFECTIVE_USER_ORCID
-      )
-    "
+    *ngIf="isPublicRecord && !userStatus.loggedIn"
   >
     <mat-icon class="large-material-icon">account_circle</mat-icon>
     <p i18n="@@record.isThisYou">Is this you?</p>
