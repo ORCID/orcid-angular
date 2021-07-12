@@ -12,7 +12,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class RecordFundingsService {
-  lastEmitedValue: FundingGroup[]
+  lastEmittedValue: FundingGroup[]
 
   $fundings: ReplaySubject<FundingGroup[]> = new ReplaySubject<FundingGroup[]>()
 
@@ -37,7 +37,7 @@ export class RecordFundingsService {
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((data) => {
-            this.lastEmitedValue = data
+            this.lastEmittedValue = data
             this.$fundings.next(data)
           }),
           switchMap((data) => this.$fundings.asObservable())
@@ -49,7 +49,7 @@ export class RecordFundingsService {
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           tap((data) => {
-            this.lastEmitedValue = data
+            this.lastEmittedValue = data
             this.$fundings.next(data)
           }),
           switchMap((data) => this.$fundings.asObservable())
@@ -109,5 +109,19 @@ export class RecordFundingsService {
   }
   update(value): Observable<FundingGroup[]> {
     throw new Error('Method not implemented.')
+  }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(
+        environment.API_WEB +
+          'fundings/funding.json?id=' +
+          encodeURIComponent(putCode)
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getFundings({ forceReload: true }))
+      )
   }
 }

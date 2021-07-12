@@ -21,11 +21,11 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 })
 export class RecordAffiliationService {
   affiliationsSubject = new ReplaySubject<AffiliationUIGroup[]>(1)
+  lastEmittedValue: AffiliationUIGroup[]
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   })
-  lastEmittedValue: AffiliationUIGroup[]
 
   $affiliations: ReplaySubject<AffiliationUIGroup[]>
 
@@ -186,5 +186,20 @@ export class RecordAffiliationService {
 
   update(value): Observable<AffiliationUIGroup[]> {
     throw new Error('Method not implemented.')
+  }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(
+        environment.API_WEB +
+          'affiliations/affiliation.json' +
+          '?id=' +
+          encodeURIComponent(putCode)
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getAffiliations({ forceReload: true }))
+      )
   }
 }
