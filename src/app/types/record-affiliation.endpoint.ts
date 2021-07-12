@@ -78,3 +78,17 @@ export interface Affiliation extends AssertionBase {
   orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
   affiliationExternalIdentifiers?: ExternalIdentifier[]
 }
+
+export interface Organization {
+  affiliationKey: string
+  city: string
+  country: string
+  countryForDisplay: string
+  disambiguatedAffiliationIdentifier: string
+  orgType: string
+  region: string
+  sourceId: string
+  sourceType: string
+  url: string
+  value: string
+}

@@ -45,6 +45,8 @@ import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
     NotFoundComponent,
+    ModalAffiliationsComponent,
   ],
   imports: [
     CommonModule,
@@ -98,6 +101,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MatMenuModule,
     TrustedIndividualsDropdownModule,
     MatPaginatorModule,
+    MatAutocompleteModule,
   ],
 })
 export class RecordModule {}
