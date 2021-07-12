@@ -39,7 +39,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   constructor(
     private _platform: PlatformInfoService,
     private _user: UserService,
-    private _record: RecordService,
+    private _record: RecordService
   ) {
     _platform
       .get()

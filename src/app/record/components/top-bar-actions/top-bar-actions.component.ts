@@ -5,7 +5,6 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { UserRecord } from '../../../types/record.local'
 import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
-import { UserInfo } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
 
 @Component({
