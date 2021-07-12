@@ -45,14 +45,12 @@ main#main {
 }
 
 .no-public-info {
+  display: flex;
   margin-top: 20px;
+  align-items: center;
 
-  mat-error {
-    display: flex;
-    align-items: center;
-    mat-icon {
-      margin-inline-end: 4px;
-    }
+  mat-icon {
+    margin-inline-end: 4px;
   }
 }
 
