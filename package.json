@@ -36,6 +36,7 @@
     "build:prod": "yarn build",
     "build:sandbox": "yarn prebuild && ng build --configuration=sandbox --localize && yarn postbuild --env sandbox",
     "build:qa": "yarn prebuild && ng build --configuration=qa --localize && yarn postbuild --env qa",
+    "build:int": "yarn prebuild && ng build --configuration=int --localize && yarn postbuild --env int",
     "build:local-tomcat": "yarn prebuild && ng build --configuration=local-tomcat --localize && ng run ng-orcid:build:local-tomcat-source",
     "build:local": "yarn run prebuild && ng build --localize",
     "format": "ng lint --fix=true && prettier --write .",
