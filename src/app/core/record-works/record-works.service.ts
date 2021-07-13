@@ -186,6 +186,24 @@ export class RecordWorksService {
       )
   }
 
+  save(work: Work) {
+    return this._http
+      .post<Work>(environment.API_WEB + `works/work.json`, work)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  getWork(): Observable<Work> {
+    return this._http
+      .get<Work>(environment.API_WEB + `works/work.json`)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
   set(value: any): Observable<any> {
     throw new Error('Method not implemented.')
   }
@@ -202,9 +220,14 @@ export class RecordWorksService {
       )
   }
 
-  public validateWorkIdTypes(value: string): Observable<WorkIdTypeValidation> {
+  public validateWorkIdTypes(
+    idType: string,
+    workId: string
+  ): Observable<WorkIdTypeValidation> {
     return this._http
-      .get<WorkIdTypeValidation>(`${environment.API_WEB}works/id/doi?value=` + value)
+      .get<WorkIdTypeValidation>(
+        `${environment.API_WEB}works/id/${idType}?value=${workId}`
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))

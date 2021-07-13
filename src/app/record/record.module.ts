@@ -102,6 +102,7 @@ import { MatRadioModule } from '@angular/material/radio'
     TrustedIndividualsDropdownModule,
     MatPaginatorModule,
     MatRadioModule,
+    SharedModule,
   ],
 })
 export class RecordModule {}

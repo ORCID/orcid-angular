@@ -1,7 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { Assertion, Work } from '../../../types'
+import { Assertion } from '../../../types'
 import {
   Address,
   Value,
@@ -12,6 +12,7 @@ import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
+import { Work } from 'src/app/types/record-works.endpoint'
 
 @Component({
   selector: 'app-panel',
@@ -78,8 +79,6 @@ export class PanelComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-        console.log(this.editModalComponent)
-
         if (this.editModalComponent) {
           this._dialog.open(this.editModalComponent, {
             width: '850px',

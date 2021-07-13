@@ -7,6 +7,7 @@ import {
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ADD_EVENT_ACTION } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
@@ -45,11 +46,13 @@ export class WorkStackGroupComponent implements OnInit {
   paginationTotalAmountOfWorks: number
   paginationIndex: number
   paginationPageSize: number
+  platform: PlatformInfo
 
   constructor(
     private _record: RecordService,
     private _works: RecordWorksService,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _platform: PlatformInfoService
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +69,9 @@ export class WorkStackGroupComponent implements OnInit {
         }
       })
 
+    this._platform.get().subscribe((platform) => {
+      this.platform = platform
+    })
     this.add(ADD_EVENT_ACTION.addManually)
   }
 
@@ -93,7 +99,10 @@ export class WorkStackGroupComponent implements OnInit {
 
   add(event: ADD_EVENT_ACTION) {
     if (event === ADD_EVENT_ACTION.addManually) {
-      this._dialog.open(WorkModalComponent)
+      this._dialog.open(WorkModalComponent, {
+        width: '850px',
+        maxWidth: this.platform.tabletOrHandset ? '95vw' : '80vw',
+      })
     }
   }
 }

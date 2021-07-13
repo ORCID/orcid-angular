@@ -44,3 +44,18 @@ hr {
     margin-left: 4px;
   }
 }
+
+.translate-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.required-information {
+  margin-left: auto !important;
+  margin-top: 10px !important;
+
+  span {
+    margin-right: 3px !important;
+  }
+}

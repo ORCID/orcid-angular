@@ -128,4 +128,6 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
+
+
 }

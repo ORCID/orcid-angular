@@ -1,4 +1,10 @@
-import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
+import {
+  ExternalIdentifier,
+  MonthDayYearDate,
+  TranslatedTitle,
+  Value,
+  Visibility,
+} from './common.endpoint'
 
 export interface Citation {
   citation: Value
@@ -6,34 +12,6 @@ export interface Citation {
   errors: any[]
   getRequiredMessage?: any
   required: boolean
-}
-
-export interface Work {
-  visibility: Value
-  errors: any[] // TODO is this always empty?
-  publicationDate: MonthDayYearDate
-  putCode: Value
-  shortDescription?: Value
-  url?: Value
-  journalTitle?: Value
-  languageCode?: Value
-  languageName?: Value
-  citation?: Citation
-  countryCode?: Value
-  countryName?: Value
-  contributors?: [any] // TODO is this always empty?
-  workExternalIdentifiers: ExternalIdentifier[]
-  source: string
-  sourceName: string
-  title: Value
-  subtitle?: Value
-  translatedTitle?: any // TODO is this always empty?
-  workCategory?: Value
-  workType: Value
-  dateSortString?: string
-  createdDate?: MonthDayYearDate
-  lastModified?: MonthDayYearDate
-  userSource: boolean
 }
 
 export enum WorkCategories {
@@ -630,16 +608,15 @@ export interface WorkIdType {
 }
 
 export interface WorkIdTypeValidation {
-  resolved: boolean;
-  attemptedResolution: boolean;
-  generatedUrl: string;
-  validFormat: boolean;
+  resolved: boolean
+  attemptedResolution: boolean
+  generatedUrl: string
+  validFormat: boolean
 }
 
-
-export const WorkRelationships = {
-  self: 'funded_by',
-  'part-of': 'part-of',
-  'version-of': 'version_of',
-  'funded-by': 'funded_by',
+export enum WorkRelationships {
+  self = 'self',
+  'part-of' = 'part-of',
+  'version-of' = 'version_of',
+  'funded-by' = 'funded_by',
 }

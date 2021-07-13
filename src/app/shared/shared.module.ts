@@ -18,6 +18,8 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
+import { RecordWorkCategoryLabelPipe } from './pipes/record-work-category-label/record-work-category-label.pipe'
+import { RecordWorkTypeLabelPipe } from './pipes/record-work-type-label/record-work-type-label.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -35,6 +37,8 @@ import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
     ContributorsPipe,
     SafeHtmlPipe,
     ShowingOfComponent,
+    RecordWorkCategoryLabelPipe,
+    RecordWorkTypeLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -51,6 +55,8 @@ import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
     ContributorsPipe,
     SafeHtmlPipe,
     ShowingOfComponent,
+    RecordWorkCategoryLabelPipe,
+    RecordWorkTypeLabelPipe,
   ],
   providers: [], // Should not provide anything
 })
