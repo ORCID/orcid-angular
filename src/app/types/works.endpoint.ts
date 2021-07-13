@@ -620,3 +620,17 @@ export enum WorkRelationships {
   'version-of' = 'version_of',
   'funded-by' = 'funded_by',
 }
+
+export const WorkRelationshipsLabels = {
+  self: 'Self',
+  'part-of': 'Part of',
+  'version-of': 'Version of',
+  'funded-by': 'Funded by',
+}
+
+export const WorkRelationshipsHintsLabels = {
+  self: 'The identifier applies to the work itself. For example, a DOI for a book chapter.',
+  'part-of': 'The identifier applies to part of a larger work. For example, the ISBN of the book in which the work was published.',
+  'version-of': 'The identifier applies to an alternate version of the work. For example, an earlier draft of an article.',
+  'funded-by': '<<<<PENDING HINT @DAN>>>>',
+}

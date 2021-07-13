@@ -59,7 +59,9 @@ export class WorkModalComponent implements OnInit {
   dayOptions = DayOption
   citationTypes = CitationTypes
 
-  workRelationships = Object.keys(WorkRelationships)
+  workRelationships: WorkRelationships[] = Object.keys(
+    WorkRelationships
+  ) as WorkRelationships[]
 
   dynamicTitle = WorkCategoriesTitle.journalTitle
   workIdTypes: WorkIdType[]

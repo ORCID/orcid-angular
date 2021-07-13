@@ -20,6 +20,8 @@ import { CityRegionCountry } from './pipes/city-region-country/city-region-count
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
 import { RecordWorkCategoryLabelPipe } from './pipes/record-work-category-label/record-work-category-label.pipe'
 import { RecordWorkTypeLabelPipe } from './pipes/record-work-type-label/record-work-type-label.pipe'
+import { RecordWorkRelationshipLabelPipe } from './pipes/record-work-relationship-label/record-work-relationship-label.pipe'
+import { RecordWorkRelationshipHintLabelPipe } from './pipes/record-work-relationship-hint-label/record-work-relationship-hint-label.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +41,8 @@ import { RecordWorkTypeLabelPipe } from './pipes/record-work-type-label/record-w
     ShowingOfComponent,
     RecordWorkCategoryLabelPipe,
     RecordWorkTypeLabelPipe,
+    RecordWorkRelationshipLabelPipe,
+    RecordWorkRelationshipHintLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -57,6 +61,8 @@ import { RecordWorkTypeLabelPipe } from './pipes/record-work-type-label/record-w
     ShowingOfComponent,
     RecordWorkCategoryLabelPipe,
     RecordWorkTypeLabelPipe,
+    RecordWorkRelationshipLabelPipe,
+    RecordWorkRelationshipHintLabelPipe,
   ],
   providers: [], // Should not provide anything
 })
