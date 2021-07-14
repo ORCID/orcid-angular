@@ -87,15 +87,22 @@ export class RecordPeerReviewService {
     )
   }
 
-  updateVisibility(putCode: any, visibility: VisibilityStrings): Observable<any> {
+  updateVisibility(
+    putCode: any,
+    visibility: VisibilityStrings
+  ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB + 'peer-reviews/' + putCode + '/visibility/' + visibility,
+        environment.API_WEB +
+          'peer-reviews/' +
+          putCode +
+          '/visibility/' +
+          visibility
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getPeerReviewGroups({ forceReload: true })),
+        tap(() => this.getPeerReviewGroups({ forceReload: true }))
       )
   }
 

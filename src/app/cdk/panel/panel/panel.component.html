@@ -25,19 +25,14 @@
 
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
-    <ng-container
-      *ngIf="visibility && !isPublicRecord"
-    >
+    <ng-container *ngIf="visibility && !isPublicRecord">
       <app-panel-privacy
         class="panel-privacy"
         [visibility]="visibility"
       ></app-panel-privacy>
       <div class="hide">
         <div class="privacy-selector">
-          <p
-            class="orc-font-body-small"
-            i18n="@@shared.whoCanSeeThis"
-          >
+          <p class="orc-font-body-small" i18n="@@shared.whoCanSeeThis">
             Who can see this?
           </p>
           <form *ngIf="visibility" [formGroup]="formVisibility">

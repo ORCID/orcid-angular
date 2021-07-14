@@ -109,15 +109,22 @@ export class RecordFundingsService {
     throw new Error('Method not implemented.')
   }
 
-  updateVisibility(putCode: string, visibility: VisibilityStrings): Observable<any> {
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB + 'fundings/' + putCode + '/visibility/' + visibility,
+        environment.API_WEB +
+          'fundings/' +
+          putCode +
+          '/visibility/' +
+          visibility
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getFundings({ forceReload: true })),
+        tap(() => this.getFundings({ forceReload: true }))
       )
   }
 

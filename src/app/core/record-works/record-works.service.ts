@@ -200,15 +200,18 @@ export class RecordWorksService {
     throw new Error('Method not implemented.')
   }
 
-  updateVisibility(putCode: string, visibility: VisibilityStrings): Observable<any> {
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB + 'works/' + putCode + '/visibility/' + visibility,
+        environment.API_WEB + 'works/' + putCode + '/visibility/' + visibility
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks({ forceReload: true })),
+        tap(() => this.getWorks({ forceReload: true }))
       )
   }
 

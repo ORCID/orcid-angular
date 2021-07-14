@@ -136,15 +136,22 @@ export class RecordResearchResourceService {
     )
   }
 
-  updateVisibility(putCode: string, visibility: VisibilityStrings): Observable<any> {
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB + 'research-resources/' + putCode + '/visibility/' + visibility,
+        environment.API_WEB +
+          'research-resources/' +
+          putCode +
+          '/visibility/' +
+          visibility
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getResearchResourcePage({ forceReload: true })),
+        tap(() => this.getResearchResourcePage({ forceReload: true }))
       )
   }
 

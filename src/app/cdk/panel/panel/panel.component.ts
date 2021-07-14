@@ -82,22 +82,27 @@ export class PanelComponent implements OnInit {
     private _fundingService: RecordFundingsService,
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
-    private _worksService: RecordWorksService,
+    private _worksService: RecordWorksService
   ) {}
 
   ngOnInit(): void {
     if (this.type === 'peer-review' && this.elements) {
       this.putCode = []
-      this.elements.peerReviewDuplicateGroups.forEach((peerReviewDuplicateGroup) => {
-        this.putCode.push(peerReviewDuplicateGroup.peerReviews[0].putCode.value)
-        this.visibility = peerReviewDuplicateGroup.peerReviews[0].visibility.visibility
-      })
+      this.elements.peerReviewDuplicateGroups.forEach(
+        (peerReviewDuplicateGroup) => {
+          this.putCode.push(
+            peerReviewDuplicateGroup.peerReviews[0].putCode.value
+          )
+          this.visibility =
+            peerReviewDuplicateGroup.peerReviews[0].visibility.visibility
+        }
+      )
     }
 
     if (this.visibility) {
       this.formVisibility = new FormGroup({
-        visibility: new FormControl(this.visibility)
-      });
+        visibility: new FormControl(this.visibility),
+      })
     }
   }
 
@@ -160,27 +165,42 @@ export class PanelComponent implements OnInit {
       case 'membership':
       case 'service':
         this._affiliationService
-          .updateVisibility(this.putCode, this.formVisibility.get('visibility').value)
+          .updateVisibility(
+            this.putCode,
+            this.formVisibility.get('visibility').value
+          )
           .subscribe()
         break
       case 'funding':
         this._fundingService
-          .updateVisibility(this.putCode, this.formVisibility.get('visibility').value)
+          .updateVisibility(
+            this.putCode,
+            this.formVisibility.get('visibility').value
+          )
           .subscribe()
         break
       case 'works':
         this._worksService
-          .updateVisibility(this.putCode, this.formVisibility.get('visibility').value)
+          .updateVisibility(
+            this.putCode,
+            this.formVisibility.get('visibility').value
+          )
           .subscribe()
         break
       case 'research-resources':
         this._researchResourcesService
-          .updateVisibility(this.putCode, this.formVisibility.get('visibility').value)
+          .updateVisibility(
+            this.putCode,
+            this.formVisibility.get('visibility').value
+          )
           .subscribe()
         break
       case 'peer-review':
         this._peerReviewService
-          .updateVisibility(this.putCode.join(), this.formVisibility.get('visibility').value)
+          .updateVisibility(
+            this.putCode.join(),
+            this.formVisibility.get('visibility').value
+          )
           .subscribe()
         break
     }
