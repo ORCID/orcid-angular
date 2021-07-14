@@ -12,7 +12,7 @@
       >Sign in to start editing</a
     >
   </div>
-  <div class="my-orcid-icons">
+  <div class="my-orcid-icons" *ngIf="platform.columns12">
     <button
       mat-icon-button
       class="orc-font-small-print"
@@ -23,6 +23,28 @@
         Printable version
       </ng-container>
     </button>
+    <button
+      mat-icon-button
+      class="orc-font-small-print"
+      *ngIf="!isPublicRecord"
+    >
+      <mat-icon fontSet="material-icons-outlined" class="icon">
+        qr_code
+      </mat-icon>
+      <ng-container i18n="@@record.getQR">
+        Get a QR code for your ORCID iD
+      </ng-container>
+    </button>
+    <button
+      mat-icon-button
+      class="orc-font-small-print"
+      *ngIf="!isPublicRecord"
+    >
+      <mat-icon fontSet="material-icons-outlined" class="icon"> code</mat-icon>
+      <ng-container i18n="@@record.displayId">
+        Display your iD on other sites
+      </ng-container>
+    </button>
   </div>
 </div>
-<mat-divider *ngIf="!isPublicRecord && platform.columns12"></mat-divider>
+<mat-divider *ngIf="!isPublicRecord"></mat-divider>
