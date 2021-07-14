@@ -44,7 +44,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
 import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
