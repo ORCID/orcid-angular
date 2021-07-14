@@ -18,6 +18,8 @@ import { MatDividerModule } from '@angular/material/divider'
 import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand-buttons.component'
 import { MatMenuModule } from '@angular/material/menu'
 import { SortLabelPipe } from './sort-label.pipe'
+import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { SortLabelPipe } from './sort-label.pipe'
     MatDialogModule,
     MatDividerModule,
     MatMenuModule,
+    PrivacySelectorModule,
+    ReactiveFormsModule,
   ],
   exports: [
     PanelComponent,

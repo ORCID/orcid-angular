@@ -13,6 +13,7 @@
     [ngClass]="{ last: last }"
     [visibility]="fundingStack.defaultFunding.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
+    [putCode]="funding.putCode.value"
     *ngIf="isPreferred(funding) || displayTheStack"
     type="main"
   >

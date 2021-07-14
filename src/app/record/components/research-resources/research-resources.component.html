@@ -19,14 +19,17 @@
         *ngFor="let researchResource of researchResources.groups; index as i"
       >
         <app-panel
+          class="top-bar"
           [elements]="researchResource"
-          [type]="'top-bar'"
+          [type]="'research-resources'"
           [editable]="false"
           [openState]="false"
-          class="top-bar"
           *ngIf="researchResource.researchResources[0] as research"
           [attr.id]="'panel-' + i"
           [expandButtonsPosition]="'left'"
+          [putCode]="research.putCode"
+          [visibility]="research.visibility.visibility"
+          [isPublicRecord]="isPublicRecord"
         >
           <div header>
             <b>

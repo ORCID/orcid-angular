@@ -17,13 +17,14 @@
   >
     <ng-container *ngIf="peerReviews.length > 0">
       <app-panel
+        class="top-bar"
         *ngFor="let peerReview of peerReviews"
         [elements]="peerReview"
-        [type]="'top-bar'"
+        [type]="'peer-review'"
         [editable]="false"
         [openState]="false"
-        class="top-bar"
         [expandButtonsPosition]="'left'"
+        [isPublicRecord]="isPublicRecord"
       >
         <div header>
           <ng-container i18n="@@peerReview.reviewActivity">
