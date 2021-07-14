@@ -11,7 +11,7 @@
   [userRecord]="userRecord"
   [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
-  *ngIf="isPublicRecord && !recordWithIssues"
+  *ngIf="!recordWithIssues"
 ></app-top-bar-actions>
 
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
