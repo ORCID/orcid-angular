@@ -159,8 +159,7 @@ export const WorksTitleNameLabel = {
 
 export const WorkTypesTitle = {
   [WorkCategories.conference]: {
-    [WorkConferenceTypes.conferenceAbstract]:
-      WorksTitleName.conferenceTitle,
+    [WorkConferenceTypes.conferenceAbstract]: WorksTitleName.conferenceTitle,
     [WorkConferenceTypes.conferencePaper]: WorksTitleName.conferenceTitle,
     [WorkConferenceTypes.conferencePoster]: WorksTitleName.conferenceTitle,
   },
@@ -176,10 +175,8 @@ export const WorkTypesTitle = {
     [WorkPublicationTypes.journalIssue]: WorksTitleName.journalTitle,
     [WorkPublicationTypes.magazineArticle]: WorksTitleName.magazineTitle,
     [WorkPublicationTypes.manual]: WorksTitleName.publisher,
-    [WorkPublicationTypes.newsletterArticle]:
-      WorksTitleName.newsletterTitle,
-    [WorkPublicationTypes.newspaperArticle]:
-      WorksTitleName.newsletterTitle,
+    [WorkPublicationTypes.newsletterArticle]: WorksTitleName.newsletterTitle,
+    [WorkPublicationTypes.newspaperArticle]: WorksTitleName.newsletterTitle,
     [WorkPublicationTypes.onlineResource]: WorksTitleName.publisher,
     [WorkPublicationTypes.preprint]: WorksTitleName.journalTitle,
     [WorkPublicationTypes.report]: WorksTitleName.institution,
