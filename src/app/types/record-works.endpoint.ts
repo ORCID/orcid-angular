@@ -9,29 +9,38 @@ import { AssertionBase } from './record.endpoint'
 
 export interface Work extends AssertionBase {
   publicationDate: MonthDayYearDate
-  shortDescription?: any
+  shortDescription?: Value
   journalTitle: Value
-  languageCode?: any
-  languageName?: any
+  languageCode?: Value
+  languageName?: Value
   citation?: Citation
-  countryCode?: any
+  countryCode?: Value
   contributors?: Contributor[]
   workExternalIdentifiers: ExternalIdentifier[]
   title: Value
-  subtitle?: any
-  translatedTitle?: any
-  workCategory?: any
+  subtitle?: Value
+  translatedTitle?: TranslatedTitle
+  workCategory?: Value
   workType: Value
-  dateSortString?: any
-  userSource: boolean
+  dateSortString?: MonthDayYearDate
+  userSource?: boolean
+}
+
+export interface TranslatedTitle {
+  errors?: any
+  content: string
+  languageCode: string
+  languageName?: string
+  required?: false
+  getRequiredMessage?: null
 }
 
 export interface Citation {
   citation: Value
   citationType: Value
-  errors: any[]
+  errors?: any[]
   getRequiredMessage?: any
-  required: boolean
+  required?: boolean
 }
 
 export interface WorkGroup {

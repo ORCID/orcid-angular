@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
@@ -8,6 +9,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { WorkModalComponent } from '../work-modal/work-modal.component'
 
 @Component({
   selector: 'app-work-stack',
@@ -21,6 +23,7 @@ export class WorkStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
   visibility: VisibilityStrings
+  worksModal = WorkModalComponent
   @Input() isPublicRecord: string
 
   @Input()

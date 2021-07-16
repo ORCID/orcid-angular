@@ -96,6 +96,15 @@
             <ng-container i18n="@@shared.addService">Add Service</ng-container>
           </button>
         </ng-container>
+        <ng-container *ngIf="type === 'works'">
+          <button
+            mat-menu-item
+            *ngFor="let option of addMenuOptions"
+            (click)="add('works', option.action)"
+          >
+            {{ option.label }}
+          </button>
+        </ng-container>
       </mat-menu>
       <button
         mat-button
