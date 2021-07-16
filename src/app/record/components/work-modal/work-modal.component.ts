@@ -4,13 +4,10 @@ import {
   AsyncValidatorFn,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
-import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'

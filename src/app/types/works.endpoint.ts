@@ -1,10 +1,4 @@
-import {
-  ExternalIdentifier,
-  MonthDayYearDate,
-  TranslatedTitle,
-  Value,
-  Visibility,
-} from './common.endpoint'
+import { Value } from './common.endpoint'
 
 export interface Citation {
   citation: Value
