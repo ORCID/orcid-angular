@@ -179,7 +179,7 @@
     <!-- SHOW-HIDE translated title button  -->
     <div>
       <div
-        class="row translate-title"
+        class="row align-icon"
         *ngIf="!showTranslationTitle"
         (click)="showTranslationTitle = !showTranslationTitle"
       >
@@ -190,7 +190,7 @@
       </div>
 
       <div
-        class="row"
+        class="row align-icon"
         *ngIf="showTranslationTitle"
         (click)="showTranslationTitle = !showTranslationTitle"
       >
@@ -265,7 +265,9 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong i18n="@@topBar.givenNames">{{ dynamicTitle }}</strong>
+          <strong i18n="@@topBar.givenNames">{{
+            dynamicTitle | recordWorkTitleNameLabel
+          }}</strong>
         </label>
       </div>
 
@@ -274,67 +276,88 @@
       </mat-form-field>
     </div>
     <!-- Publication date -->
-    <div>
+    <ng-container formGroupName="startDateGroup">
       <div class="row">
         <label
-          for="given-names-input"
+          for="url-input"
           class="mat-caption"
           [ngClass]="{
-            error:
-              workForm.hasError('required', 'publicationDateYear') &&
-              workForm.get('publicationDateYear').touched
+            error: workForm.hasError('date', 'startDateGroup')
           }"
         >
-          <strong i18n="@@topBar.givenNames">Publication Date</strong>
-          <span class="required">*</span>
+          <strong i18n="@@shared.startDate">Start date</strong>
         </label>
       </div>
-      <div class="row date-container">
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <mat-select
-            placeholder="Year"
-            formControlName="publicationDateYear"
-            name="item"
+      <div class="input-container date">
+        <div class="col l4 date">
+          <mat-form-field
+            id="start-date-day-input"
+            appearance="outline"
+            class="mat-form-field-min"
           >
-            <mat-option
-              *ngFor="let item of yearOptions | keyvalue"
-              [value]="item.key"
+            <mat-select
+              placeholder="{{ ngOrcidDay }}"
+              formControlName="startDateDay"
             >
-              {{ item.value }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <mat-select
-            placeholder="Month"
-            formControlName="publicationDateMonth"
-            name="item"
+              <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
+              <mat-option
+                *ngFor="let day of dayOptions | keyvalue"
+                [value]="day.key"
+              >
+                {{ day.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col l4 date">
+          <mat-form-field
+            id="start-date-month-input"
+            appearance="outline"
+            class="mat-form-field-min"
           >
-            <mat-option
-              *ngFor="let item of monthOptions | keyvalue"
-              [value]="item.key"
+            <mat-select
+              placeholder="{{ ngOrcidMonth }}"
+              formControlName="startDateMonth"
             >
-              {{ item.value }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <mat-select
-            placeholder="Day"
-            formControlName="publicationDateDay"
-            name="item"
+              <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
+              <mat-option
+                *ngFor="let month of monthOptions | keyvalue"
+                [value]="month.key"
+              >
+                {{ month.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col l4 date">
+          <mat-form-field
+            id="start-date-year-input"
+            appearance="outline"
+            class="mat-form-field-min"
           >
-            <mat-option
-              *ngFor="let item of dayOptions | keyvalue"
-              [value]="item.key"
+            <mat-select
+              placeholder="{{ ngOrcidYear }}"
+              formControlName="startDateYear"
             >
-              {{ item.value }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+              <mat-option
+                *ngFor="let year of yearOptions | keyvalue"
+                [value]="year.key"
+              >
+                {{ year.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-error
+          class="mat-caption"
+          i18n="@@shared.invalidDate"
+          *ngIf="workForm.get('startDateGroup').errors?.date"
+        >
+          Invalid date
+        </mat-error>
       </div>
-    </div>
+    </ng-container>
 
     <!-- Work url -->
 
@@ -353,7 +376,10 @@
         </label>
       </div>
 
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min larger-input-margin"
+      >
         <input id="biography-input" matInput formControlName="url" />
         <mat-error
           *ngIf="workForm.get('url').hasError('required')"
@@ -593,7 +619,10 @@
                 <span class="required">*</span>
               </label>
             </div>
-            <mat-form-field appearance="outline" class="mat-form-field-min">
+            <mat-form-field
+              appearance="outline"
+              class="mat-form-field-min larger-input-margin"
+            >
               <input
                 id="biography-input"
                 matInput
@@ -603,11 +632,21 @@
                 *ngIf="
                   workIdentifiersGroup
                     .get('externalIdentifierId')
-                    .hasError('required')
+                    .hasError('validFormat')
                 "
-                i18n="@@works.invalidId"
+                i18n="@@works.validFormat"
               >
                 Invalid id for the selected identifier type
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  workIdentifiersGroup
+                    .get('externalIdentifierId')
+                    .hasError('required')
+                "
+                i18n="@@works.addADescriber"
+              >
+                Add a describer id
               </mat-error>
               <mat-hint i18n="@@works.identifierAssociated"
                 >The identifier associated with the work. The format will depend
@@ -633,7 +672,10 @@
               <span class="required">*</span>
             </label>
 
-            <mat-form-field appearance="outline" class="mat-form-field-min">
+            <mat-form-field
+              appearance="outline"
+              class="mat-form-field-min larger-input-margin"
+            >
               <input
                 id="biography-input"
                 matInput
@@ -688,7 +730,7 @@
                 <mat-radio-button [value]="value"
                   >{{ value | recordWorkRelationshipLabel }}
                 </mat-radio-button>
-                <mat-hint class="caption"
+                <mat-hint class="mat-caption"
                   >{{ value | recordWorkRelationshipHintLabel }}
                 </mat-hint>
               </ng-container>
@@ -708,7 +750,11 @@
       </ng-container>
 
       <!-- Add other identifier  -->
-      <div class="row" *ngIf="!showTranslationTitle" (click)="addOtherWorkId()">
+      <div
+        class="row align-icon"
+        *ngIf="!showTranslationTitle"
+        (click)="addOtherWorkId()"
+      >
         <button mat-icon-button><mat-icon>add</mat-icon></button>
         <a i18n="works.addAnotherId">Add other identifier</a>
       </div>
@@ -761,7 +807,9 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong i18n="@@works.Country of publication">Country of publication</strong>
+          <strong i18n="@@works.Country of publication"
+            >Country of publication</strong
+          >
         </label>
       </div>
       <div class="row">

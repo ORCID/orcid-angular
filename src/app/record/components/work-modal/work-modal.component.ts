@@ -17,6 +17,7 @@ import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { URL_REGEXP } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
+import { dateValidator } from 'src/app/shared/validators/date/date.validator'
 import { Visibility } from 'src/app/types/common.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
 import {
@@ -25,7 +26,7 @@ import {
   LanguageMap,
   MonthOption,
   WorkCategories,
-  WorkCategoriesTitle,
+  WorksTitleName,
   WorkConferenceTypes,
   WorkIdType,
   WorkIntellectualPropertyTypes,
@@ -49,6 +50,7 @@ export class WorkModalComponent implements OnInit {
   loading = true
   workForm: FormGroup
   platform: PlatformInfo
+  
 
   showTranslationTitle = false
 
@@ -63,9 +65,15 @@ export class WorkModalComponent implements OnInit {
     WorkRelationships
   ) as WorkRelationships[]
 
-  dynamicTitle = WorkCategoriesTitle.journalTitle
+  dynamicTitle = WorksTitleName.journalTitle
   workIdTypes: WorkIdType[]
   workIdentifiersArray: FormArray
+
+  ngOrcidYear = $localize`:@@shared.year:Year`
+  ngOrcidMonth = $localize`:@@shared.month:Month`
+  ngOrcidDay = $localize`:@@shared.day:Day`
+
+  
   workTypes:
     | typeof WorkConferenceTypes
     | typeof WorkPublicationTypes
@@ -95,6 +103,14 @@ export class WorkModalComponent implements OnInit {
         translatedTitleLanguage: ['', []],
         subtitle: ['', []],
         journalTitle: ['', []],
+        startDateGroup: this._fb.group(
+          {
+            startDateDay: ['', []],
+            startDateMonth: ['', []],
+            startDateYear: ['', []],
+          },
+          { validator: dateValidator('startDate') }
+        ),
         publicationDateYear: ['', []],
         publicationDateMonth: ['', []],
         publicationDateDay: ['', []],

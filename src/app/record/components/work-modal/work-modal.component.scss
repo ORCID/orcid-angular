@@ -45,7 +45,7 @@ hr {
   }
 }
 
-.translate-title {
+.align-icon {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,7 +60,18 @@ hr {
   }
 }
 
+.larger-input-margin {
+  margin-bottom: 20px;
+}
+
 mat-radio-group {
   display: flex;
   flex-direction: column;
+}
+
+.date {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+  padding-bottom: 1.475em;
 }

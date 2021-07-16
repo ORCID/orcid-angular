@@ -22,6 +22,7 @@ import { RecordWorkCategoryLabelPipe } from './pipes/record-work-category-label/
 import { RecordWorkTypeLabelPipe } from './pipes/record-work-type-label/record-work-type-label.pipe'
 import { RecordWorkRelationshipLabelPipe } from './pipes/record-work-relationship-label/record-work-relationship-label.pipe'
 import { RecordWorkRelationshipHintLabelPipe } from './pipes/record-work-relationship-hint-label/record-work-relationship-hint-label.pipe'
+import { RecordWorkTitleNameLabelPipe } from './pipes/record-work-title-name-label/record-work-title-name-label.pipe'
 @NgModule({
   imports: [
     CommonModule,
@@ -43,6 +44,7 @@ import { RecordWorkRelationshipHintLabelPipe } from './pipes/record-work-relatio
     RecordWorkTypeLabelPipe,
     RecordWorkRelationshipLabelPipe,
     RecordWorkRelationshipHintLabelPipe,
+    RecordWorkTitleNameLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -63,6 +65,7 @@ import { RecordWorkRelationshipHintLabelPipe } from './pipes/record-work-relatio
     RecordWorkTypeLabelPipe,
     RecordWorkRelationshipLabelPipe,
     RecordWorkRelationshipHintLabelPipe,
+    RecordWorkTitleNameLabelPipe,
   ],
   providers: [], // Should not provide anything
 })
