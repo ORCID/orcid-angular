@@ -629,8 +629,12 @@ export const WorkRelationshipsLabels = {
 }
 
 export const WorkRelationshipsHintsLabels = {
-  self: 'The identifier applies to the work itself. For example, a DOI for a book chapter.',
-  'part-of': 'The identifier applies to part of a larger work. For example, the ISBN of the book in which the work was published.',
-  'version-of': 'The identifier applies to an alternate version of the work. For example, an earlier draft of an article.',
-  'funded-by': '<<<<PENDING HINT @DAN>>>>',
+  self:
+    'The identifier applies to the work itself. For example, a DOI for a book chapter.',
+  'part-of':
+    'The identifier applies to part of a larger work. For example, the ISBN of the book in which the work was published.',
+  'version-of':
+    'The identifier applies to an alternate version of the work. For example, an earlier draft of an article.',
+  'funded-by':
+    'The identifier applies to an alternate version of the work. For example, an earlier draft of an article.',
 }
