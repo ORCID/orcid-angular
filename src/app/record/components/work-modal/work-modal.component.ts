@@ -47,7 +47,6 @@ export class WorkModalComponent implements OnInit {
   loading = true
   workForm: FormGroup
   platform: PlatformInfo
-  
 
   showTranslationTitle = false
 
@@ -70,7 +69,6 @@ export class WorkModalComponent implements OnInit {
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
 
-  
   workTypes:
     | typeof WorkConferenceTypes
     | typeof WorkPublicationTypes
