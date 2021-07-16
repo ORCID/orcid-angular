@@ -47,6 +47,8 @@ import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dro
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { WorkModalComponent } from './components/work-modal/work-modal.component'
 import { MatRadioModule } from '@angular/material/radio'
+import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { MatRadioModule } from '@angular/material/radio'
     TopBarRecordIssuesComponent,
     NotFoundComponent,
     WorkModalComponent,
+    ModalAffiliationsComponent,
   ],
   imports: [
     CommonModule,
@@ -103,6 +106,7 @@ import { MatRadioModule } from '@angular/material/radio'
     MatPaginatorModule,
     MatRadioModule,
     SharedModule,
+    MatAutocompleteModule,
   ],
 })
 export class RecordModule {}

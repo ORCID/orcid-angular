@@ -41,7 +41,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
 
   biographyForm: FormGroup
   userRecord: UserRecord
-  biography: String = ''
+  biography = ''
   biographyVisibility: VisibilityStrings = 'PRIVATE'
   loadingBiography = true
   defaultVisibility: VisibilityStrings

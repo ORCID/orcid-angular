@@ -13,9 +13,11 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
   providedIn: 'root',
 })
 export class RecordWorksService {
-  lastEmitedValue: WorksEndpoint = null
+  lastEmittedValue: WorksEndpoint = null
   workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
+
+  $works: ReplaySubject<WorksEndpoint>
 
   constructor(
     private _http: HttpClient,
@@ -37,7 +39,7 @@ export class RecordWorksService {
   ): Observable<WorksEndpoint> {
     return this.getWorksData(offset, sort, sortAsc, orcidId).pipe(
       map((data) => {
-        this.lastEmitedValue = data
+        this.lastEmittedValue = data
         this.workSubject.next(data)
       }),
       switchMap((data) => this.workSubject.asObservable())
@@ -79,13 +81,19 @@ export class RecordWorksService {
             return data
           }),
           tap((data) => {
-            this.lastEmitedValue = data
+            this.lastEmittedValue = data
             this.workSubject.next(data)
           }),
           switchMap((data) => this.workSubject.asObservable())
         )
     } else {
-      return this._http
+      if (!this.$works) {
+        this.$works = new ReplaySubject(1)
+      } else if (!options.forceReload) {
+        return this.$works
+      }
+
+      this._http
         .get<WorksEndpoint>(
           environment.API_WEB +
             'works/worksPage.json?offset=' +
@@ -108,11 +116,13 @@ export class RecordWorksService {
             return data
           }),
           tap((data) => {
-            this.lastEmitedValue = data
-            this.workSubject.next(data)
-          }),
-          switchMap((data) => this.workSubject.asObservable())
+            this.lastEmittedValue = data
+            this.$works.next(data)
+          })
         )
+        .subscribe()
+
+      return this.$works.asObservable()
     }
   }
 
@@ -137,7 +147,7 @@ export class RecordWorksService {
   getDetails(putCode: string, orcidId?: string): Observable<WorksEndpoint> {
     return this.getWorkInfo(putCode, orcidId).pipe(
       tap((workWithDetails) => {
-        this.lastEmitedValue.groups.map((works) => {
+        this.lastEmittedValue.groups.map((works) => {
           works.works = works.works.map((work) => {
             if (work.putCode.value === putCode) {
               return workWithDetails
@@ -145,7 +155,7 @@ export class RecordWorksService {
             return work
           })
         })
-        this.workSubject.next(this.lastEmitedValue)
+        this.workSubject.next(this.lastEmittedValue)
       }),
       switchMap(() => {
         return this.workSubject.asObservable()
@@ -196,12 +206,10 @@ export class RecordWorksService {
   }
 
   getWork(): Observable<Work> {
-    return this._http
-      .get<Work>(environment.API_WEB + `works/work.json`)
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
-      )
+    return this._http.get<Work>(environment.API_WEB + `works/work.json`).pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error))
+    )
   }
 
   set(value: any): Observable<any> {
@@ -232,5 +240,12 @@ export class RecordWorksService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+  delete(putCode: string): Observable<any> {
+    return this._http.delete(environment.API_WEB + 'works/' + putCode).pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error)),
+      tap(() => this.getWorks({ forceReload: true }))
+    )
   }
 }

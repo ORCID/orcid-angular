@@ -15,23 +15,28 @@
         <h2 class="orc-font-heading-small" i18n="@@record.notFound">
           We’re really sorry, we can’t find the ORCID record you’re looking for.
         </h2>
-        <div>
+        <p class="orc-font-body-large" i18n="@@record.whatHappened">
+          What happened?
+        </p>
+        <div class="orc-font-body-small">
           <div class="if-you">
             <b i18n="@@record.ifYouTyped">
-              If you typed in the iD or link by hand
+              If you typed in the URL or ORCID iD by hand
             </b>
             <p i18n="@@record.pleaseCheck">
               Please check that the ORCID iD - the 16-digit number at the end of
-              the URL - is correct.
+              the URL - is correct. A correctly-formatted ORCID URL looks like
+              this: http://orcid.org/1234-5678-9101-1121
             </p>
           </div>
           <div class="if-you">
             <b i18n="@@record.ifYouTyped">
-              If you typed in the iD or link by hand
+              If you typed in the URL or ORCID iD by hand
             </b>
             <p i18n="@@record.pleaseCheck">
               Please check that the ORCID iD - the 16-digit number at the end of
-              the URL - is correct.
+              the URL - is correct. A correctly-formatted ORCID URL looks like
+              this: http://orcid.org/1234-5678-9101-1121
             </p>
           </div>
           <div class="if-you">
@@ -50,25 +55,22 @@
             </b>
             <p i18n="@@record.pleaseGet">
               Please get in touch with our support team via the Help button
-              below.
+              below. They can help you find the record you are looking for.
             </p>
           </div>
-
-          <h5 class="orc-font-body-large">Where next?</h5>
-          <div class="search">
-            <a class="underline" i18n="@@record.headBack" (click)="goto('/')">
-              Head back to the main ORCID homepage
-            </a>
-          </div>
-          <div class="search">
-            <a
-              class="underline"
-              i18n="@@record.trySearching"
-              (click)="goto('/orcid-search/search')"
-            >
-              Try searching the ORCID registry by name or ORCID iD
-            </a>
-          </div>
+        </div>
+        <p class="orc-font-body-large" i18n="@@record.whatToDo">
+          What to do next
+        </p>
+        <div class="search">
+          <a
+            class="underline orc-font-body-small"
+            i18n="@@record.trySearching"
+            (click)="goto('/orcid-search/search')"
+          >
+            Try using our advanced search to find researchers by their name or
+            ORCID iD
+          </a>
         </div>
       </div>
     </div>

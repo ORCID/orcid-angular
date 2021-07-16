@@ -9,6 +9,7 @@
 
 <app-top-bar-actions
   [userRecord]="userRecord"
+  [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
   *ngIf="isPublicRecord && !recordWithIssues"
 ></app-top-bar-actions>
@@ -43,8 +44,8 @@
       </app-panel-element>
       <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
         <div class="other-names-container">
-          <span i18n="@@record.otherNames" class="mat-caption description">
-            Other names
+          <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
+            Also known as
           </span>
           <app-panel-element
             id="other-names"
@@ -99,7 +100,10 @@
         </div>
         <h3 class="orc-font-heading-small">{{ creditName }}</h3>
       </div>
-      <div class="published-name" *ngIf="!creditName">
+      <div
+        class="published-name"
+        *ngIf="!creditName && (givenNames || familyName)"
+      >
         <div class="row mat-caption description" i18n="@@record.name">Name</div>
         <h3 class="orc-font-heading-small">
           {{ givenNames + ' ' + familyName }}
@@ -111,19 +115,18 @@
           [ngClass]="{
             col: platform.columns12,
             'row mobile': !platform.columns12,
-            'names-extended': expandedContent,
-            'full-width': userRecord.otherNames?.otherNames?.length === 0
+            'names-extended': expandedContent
           }"
           *ngIf="creditName"
         >
-          <div class="row mat-caption description" i18n="@@record.name">
-            Name
-          </div>
-          <div class="orc-font-body-small">
-            <i *ngIf="givenNames">
-              {{ givenNames + ' ' }}
-            </i>
-            {{ familyName }}
+          <div class="names-content">
+            <div class="mat-caption description" i18n="@@record.name">Name</div>
+            <div class="orc-font-body-small">
+              <ng-container *ngIf="givenNames">
+                {{ givenNames + ' ' }}
+              </ng-container>
+              {{ familyName }}
+            </div>
           </div>
         </div>
         <div
@@ -131,7 +134,6 @@
           [ngClass]="{
             col: platform.columns12,
             'row mobile': !platform.columns12,
-            'full-width': (!givenNames && !familyName) || !creditName,
             'other-names-no-border': expandedContent
           }"
           *ngIf="userRecord.otherNames?.otherNames.length > 0"
@@ -143,38 +145,44 @@
             }"
           >
             <div class="col l10 mat-caption other-names-wrapper">
-              <div class="row description" i18n="@@record.otherNames">
-                Other names
-              </div>
-              <ng-container
-                *ngFor="
-                  let otherNames of userRecord.otherNames?.otherNames;
-                  index as i
-                "
-              >
-                <div class="orc-font-body-small" *ngIf="!expandedContent">
-                  {{ otherNames.content }}
-                  <ng-container
-                    *ngIf="
-                      !(userRecord.otherNames?.otherNames?.length - 1 === i)
-                    "
-                    >,
-                  </ng-container>
+              <div class="other-names-content">
+                <div class="description" i18n="@@topBar.alsoKnowAs">
+                  Also known as
                 </div>
-                <div class="row other-name" *ngIf="expandedContent">
-                  <div class="row">
-                    <b class="orc-font-body-small">
+                <ng-container
+                  *ngFor="
+                    let otherNames of userRecord.otherNames?.otherNames;
+                    index as i
+                  "
+                >
+                  <ng-container>
+                    <div class="orc-font-body-small" *ngIf="!expandedContent">
                       {{ otherNames.content }}
-                    </b>
+                    </div>
+                    <span
+                      class="comma"
+                      *ngIf="
+                        !(userRecord.otherNames?.otherNames?.length - 1 === i)
+                      "
+                      >,
+                    </span>
+                  </ng-container>
+                  <div class="row other-name" *ngIf="expandedContent">
+                    <div class="row">
+                      <b class="orc-font-body-small">
+                        {{ otherNames.content }}
+                      </b>
+                    </div>
+                    <div class="row">
+                      <b class="description" i18n="@@record.source"> Source </b>
+                    </div>
+                    <div class="description">
+                      {{ otherNames.sourceName || otherNames.source }}
+                      {{ otherNames.createdDate | monthDayYearDateToString }}
+                    </div>
                   </div>
-                  <div class="row">
-                    <b class="description" i18n="@@record.source"> Source </b>
-                  </div>
-                  <div class="description">
-                    {{ otherNames.sourceName }}
-                  </div>
-                </div>
-              </ng-container>
+                </ng-container>
+              </div>
             </div>
             <div>
               <app-panel-expand-buttons

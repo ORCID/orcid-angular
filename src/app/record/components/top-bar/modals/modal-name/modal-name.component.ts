@@ -262,6 +262,18 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       } else {
         return names.sourceName
       }
+    } else if (names.source) {
+      if (names.lastModified) {
+        return (
+          names.source +
+          ' ' +
+          names.lastModified.year +
+          '-' +
+          names.lastModified.month +
+          '-' +
+          names.lastModified.day
+        )
+      }
     }
   }
 

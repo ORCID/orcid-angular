@@ -12,6 +12,7 @@ import {
 import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
+import { ModalAffiliationsComponent } from './modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
   selector: 'app-affiliations',
@@ -27,13 +28,15 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   labelEducationSortButton = $localize`:@@shared.sortEducation:Sort Education`
   labelInvitedAddButton = $localize`:@@shared.addInvited:Add Invited Position`
   labelInvitedSortButton = $localize`:@@shared.sortInvited:Sort Invited Positions`
-  labelMembershipAddButton = $localize`:@@shared.addMemberships:Add Membership`
+  labelMembershipAddButton = $localize`:@@shared.addMembership:Add Membership`
   labelMembershipSortButton = $localize`:@@shared.sortMemberships:Sort Memberships`
   userRecordContext: UserRecordOptions = {}
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
+
+  modalAffiliationsComponent = ModalAffiliationsComponent
 
   expandedEducation: boolean
   expandedEmployment: boolean
@@ -111,7 +114,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       case 'education':
         this.expandedEducation = expanded
         break
-      case 'invited':
+      case 'invited-position':
         this.expandedInvited = expanded
         break
       case 'membership':

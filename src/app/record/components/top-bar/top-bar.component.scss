@@ -46,15 +46,19 @@ app-top-bar-actions {
       gap: 16px;
 
       .names {
-        height: 64px;
+        min-height: 64px;
         width: calc(50% - 8px);
         padding: 16px;
         border: solid 1px;
         border-radius: 4px;
+
+        .names-content {
+          display: block;
+        }
       }
 
       .names-extended {
-        max-height: 64px !important;
+        height: auto;
       }
 
       .names.mobile {
@@ -65,7 +69,7 @@ app-top-bar-actions {
 
       .other-names {
         position: relative;
-        height: 64px;
+        min-height: 64px;
         width: calc(50% - 8px);
         border: solid 1px;
         border-radius: 4px;
@@ -103,6 +107,10 @@ app-top-bar-actions {
       .other-names-wrapper {
         padding: 16px;
 
+        .other-names-content {
+          display: block;
+        }
+
         .other-name {
           margin-bottom: 10px;
         }
@@ -124,4 +132,8 @@ app-top-bar-actions {
 
 .public-container.mobile {
   margin-top: 2em;
+}
+
+.comma {
+  margin-right: 0.2em;
 }

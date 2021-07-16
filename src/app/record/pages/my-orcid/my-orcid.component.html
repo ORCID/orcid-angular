@@ -2,7 +2,7 @@
   <app-top-bar-my-public-record-preview
     [isPublicRecord]="publicOrcid"
   ></app-top-bar-my-public-record-preview>
-  <div class="container">
+  <div class="container no-padding">
     <div class="row">
       <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
       </app-side-bar>
@@ -10,7 +10,9 @@
         <app-main>
           <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
           <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
-            <h2 class="orc-font-body col">Activities</h2>
+            <h2 class="orc-font-body col" i18n="@@shared.activities">
+              Activities
+            </h2>
             <div class="expand-buttons">
               <button
                 mat-button
@@ -64,11 +66,18 @@
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-peer-reviews>
+          <div class="no-public-info" *ngIf="affiliations === 0">
+            <mat-icon>error</mat-icon>
+            <ng-container i18n="@@record.noPublicInfo"
+              >No public information available.
+            </ng-container>
+          </div>
           <div
             class="orc-font-body-small"
             *ngIf="
               publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
             "
+            [ngClass]="{ 'last-modified': affiliations === 0 }"
           >
             <i>
               <span i18n="@@shared.lastModifiedTime">

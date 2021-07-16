@@ -30,44 +30,81 @@
     </div>
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
-      <ng-container *ngIf="!isPublicRecord && type !== 'research-resources'">
-        <!-- ADD BUTTON: For panels with a single add option -->
-        <button
-          *ngIf="!addMenuOptions.length"
-          mat-icon-button
-          class="orc-font-body-small"
-          [attr.aria-label]="labelAddButton"
-          (click)="add()"
+      <button
+        *ngIf="
+          (!isPublicRecord && type === 'employment') || type === 'peer-review'
+        "
+        mat-icon-button
+        class="orc-font-body-small add"
+        [attr.aria-label]="labelAddButton"
+      >
+        <mat-icon
+          (click)="add(type)"
+          class="large-material-icon"
+          id="add-button"
         >
-          <mat-icon class="large-material-icon" id="add-button">
-            add_circle
-          </mat-icon>
-          <ng-container i18n="@@shared.add"> Add </ng-container>
-        </button>
-        <!-- ADD BUTTON: For panels with a multiple add options -->
-        <button
-          mat-icon-button
-          class="orc-font-body-small"
-          [attr.aria-label]="labelAddButton"
-          (click)="add()"
-          [matMenuTriggerFor]="addMenu"
-          *ngIf="addMenuOptions.length"
+          add_circle_outline
+        </mat-icon>
+        <ng-container i18n="@@shared.add"> Add </ng-container>
+      </button>
+      <button
+        *ngIf="!isPublicRecord && affiliationMatButton()"
+        mat-icon-button
+        class="orc-font-body-small add"
+        [attr.aria-label]="labelAddButton"
+        [matMenuTriggerFor]="menuAdd"
+      >
+        <mat-icon class="large-material-icon" id="add-button-multiple">
+          add_circle_outline
+        </mat-icon>
+        <ng-container i18n="@@shared.add"> Add </ng-container>
+      </button>
+      <mat-menu #menuAdd="matMenu">
+        <ng-container *ngIf="type === 'education' || type === 'qualification'">
+          <button mat-menu-item (click)="add('education')">
+            <ng-container i18n="@@shared.addEducation"
+              >Add Education</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('qualification')">
+            <ng-container i18n="@@shared.addQualification"
+              >Add Qualification</ng-container
+            >
+          </button>
+        </ng-container>
+        <ng-container
+          *ngIf="type === 'invited-position' || type === 'distinction'"
         >
-          <mat-icon class="large-material-icon" id="add-button">
-            add_circle
-          </mat-icon>
-          <ng-container i18n="@@shared.add"> Add </ng-container>
-        </button>
-      </ng-container>
-
-      <mat-menu #addMenu="matMenu">
-        <button
-          mat-menu-item
-          *ngFor="let option of addMenuOptions"
-          (click)="add(option.action)"
-        >
-          {{ option.label }}
-        </button>
+          <button mat-menu-item (click)="add('invited-position')">
+            <ng-container i18n="@@shared.addInvited"
+              >Add Invited Position</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('distinction')">
+            <ng-container i18n="@@shared.addDistinction"
+              >Add Distinction</ng-container
+            >
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'membership' || type === 'service'">
+          <button mat-menu-item (click)="add('membership')">
+            <ng-container i18n="@@shared.addMembership"
+              >Add Membership</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('service')">
+            <ng-container i18n="@@shared.addService">Add Service</ng-container>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'works'">
+          <button
+            mat-menu-item
+            *ngFor="let option of addMenuOptions"
+            (click)="add('works', option.action)"
+          >
+            {{ option.label }}
+          </button>
+        </ng-container>
       </mat-menu>
       <button
         mat-button
@@ -86,13 +123,13 @@
         >
           {{ option | sortLabel }}
           <mat-icon
-            class="large-material-icon"
+            class="sort"
             *ngIf="option === sortType && sortDirection === 'asc'"
           >
             south
           </mat-icon>
           <mat-icon
-            class="large-material-icon"
+            class="sort"
             *ngIf="option === sortType && sortDirection === 'desc'"
           >
             north

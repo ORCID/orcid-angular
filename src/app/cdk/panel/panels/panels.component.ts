@@ -5,8 +5,8 @@ import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
-import { itemMarginAnimation } from 'src/app/animations'
 import { ADD_EVENT_ACTION } from 'src/app/constants'
+import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
   selector: 'app-panels',
@@ -17,6 +17,13 @@ export class PanelsComponent implements OnInit {
   @Input() expandedContent = true
   @Input() title
   @Input() type:
+    | 'employment'
+    | 'education'
+    | 'qualification'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
     | 'works'
     | 'activities'
     | 'peer-review'
@@ -26,7 +33,6 @@ export class PanelsComponent implements OnInit {
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
-  @Input() addModalComponent: ComponentType<any>
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
   @Input() sortType: SortOrderType = 'end'
@@ -36,7 +42,11 @@ export class PanelsComponent implements OnInit {
   @Output() sort: EventEmitter<SortData> = new EventEmitter()
   @Output() addEvent: EventEmitter<ADD_EVENT_ACTION> = new EventEmitter()
 
-  @Input() addMenuOptions: { action: ADD_EVENT_ACTION; label: string }[] = []
+  @Input() addMenuOptions: {
+    action: ADD_EVENT_ACTION
+    label: string
+    modal?: ComponentType<any>
+  }[] = []
 
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
@@ -46,33 +56,38 @@ export class PanelsComponent implements OnInit {
     private _platform: PlatformInfoService
   ) {}
 
-  clickAddIcon() {
-    if (!this.addMenuOptions.length) {
-      this.add()
-    }
-  }
-
-  add(addEvent?: ADD_EVENT_ACTION) {
-    switch (this.type) {
+  add(type: string, action?: ADD_EVENT_ACTION) {
+    switch (type) {
+      case 'employment':
+      case 'education':
+      case 'qualification':
+      case 'invited-position':
+      case 'distinction':
+      case 'membership':
+      case 'service':
+        this.openModal(ModalAffiliationsComponent, type)
+        break
       case 'peer-review':
         this.openModal(ModalPeerReviewsComponent)
         break
-      default:
-        this.addEvent.emit(addEvent)
+      default: {
+        this.openModal(this.addMenuOptions[action].modal, type)
+      }
     }
   }
 
-  openModal(modal: ComponentType<any>) {
+  openModal(modal: ComponentType<any>, type?: string) {
     this._platform
       .get()
       .pipe(first())
       .subscribe((platform) => {
-        if (this.addModalComponent) {
-          this._dialog.open(modal, {
-            width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-          })
-        }
+        let modalComponent
+        modalComponent = this._dialog.open(modal, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+        })
+
+        modalComponent.componentInstance.type = type
       })
   }
 
@@ -94,5 +109,15 @@ export class PanelsComponent implements OnInit {
     this.expandedContent = !this.expandedContent
     this.expanded.emit(this.expandedContent)
   }
+
+  affiliationMatButton() {
+    return (
+      this.type === 'education' ||
+      this.type === 'invited-position' ||
+      this.type === 'membership' ||
+      this.type === 'works'
+    )
+  }
+
   ngOnInit(): void {}
 }

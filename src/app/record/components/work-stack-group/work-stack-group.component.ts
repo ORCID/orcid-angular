@@ -31,7 +31,11 @@ export class WorkStackGroupComponent implements OnInit {
   userRecordContext: UserRecordOptions = {}
 
   addMenuOptions = [
-    { label: 'Add manually', action: ADD_EVENT_ACTION.addManually },
+    {
+      label: 'Add manually',
+      action: ADD_EVENT_ACTION.addManually,
+      modal: WorkModalComponent,
+    },
     { label: 'Search & Link', action: ADD_EVENT_ACTION.searchAndLink },
     { label: 'Add DOI', action: ADD_EVENT_ACTION.doi },
     { label: 'Add PubMed ID', action: ADD_EVENT_ACTION.pubMed },
@@ -72,7 +76,6 @@ export class WorkStackGroupComponent implements OnInit {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
     })
-    this.add(ADD_EVENT_ACTION.addManually)
   }
 
   trackByWorkGroup(index, item: WorkGroup) {
@@ -95,14 +98,5 @@ export class WorkStackGroupComponent implements OnInit {
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this._works.changeUserRecordContext(this.userRecordContext)
-  }
-
-  add(event: ADD_EVENT_ACTION) {
-    if (event === ADD_EVENT_ACTION.addManually) {
-      this._dialog.open(WorkModalComponent, {
-        width: '850px',
-        maxWidth: this.platform.tabletOrHandset ? '95vw' : '80vw',
-      })
-    }
   }
 }
