@@ -1,13 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { WorkCategories, WorkCategoriesLabel } from 'src/app/types/works.endpoint';
+import { Pipe, PipeTransform } from '@angular/core'
+import {
+  WorkCategories,
+  WorkCategoriesLabel,
+} from 'src/app/types/works.endpoint'
 
 @Pipe({
-  name: 'recordWorkCategoryLabel'
+  name: 'recordWorkCategoryLabel',
 })
 export class RecordWorkCategoryLabelPipe implements PipeTransform {
-
   transform(value: WorkCategories, ...args: unknown[]): unknown {
-    return WorkCategoriesLabel[value];
+    return WorkCategoriesLabel[value]
   }
-
 }

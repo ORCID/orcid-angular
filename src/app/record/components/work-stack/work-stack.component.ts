@@ -1,5 +1,4 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
