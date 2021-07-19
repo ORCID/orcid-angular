@@ -111,6 +111,11 @@ app-top-bar-actions {
           display: block;
         }
 
+        p {
+          margin: 0;
+        }
+
+
         .other-name {
           margin-bottom: 10px;
         }
@@ -128,8 +133,4 @@ app-top-bar-actions {
       overflow-wrap: break-word;
     }
   }
-}
-
-.comma {
-  margin-right: 0.2em;
 }
