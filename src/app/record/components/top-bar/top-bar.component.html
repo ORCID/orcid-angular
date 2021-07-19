@@ -149,24 +149,17 @@
                 <div class="description" i18n="@@topBar.alsoKnowAs">
                   Also known as
                 </div>
+                <p class="orc-font-body-small" *ngIf="!expandedContent">
+                  {{
+                    getOtherNames(userRecord.otherNames?.otherNames).join(', ')
+                  }}
+                </p>
                 <ng-container
                   *ngFor="
                     let otherNames of userRecord.otherNames?.otherNames;
                     index as i
                   "
                 >
-                  <ng-container>
-                    <div class="orc-font-body-small" *ngIf="!expandedContent">
-                      {{ otherNames.content }}
-                    </div>
-                    <span
-                      class="comma"
-                      *ngIf="
-                        !(userRecord.otherNames?.otherNames?.length - 1 === i)
-                      "
-                      >,
-                    </span>
-                  </ng-container>
                   <div class="row other-name" *ngIf="expandedContent">
                     <div class="row">
                       <b class="orc-font-body-small">

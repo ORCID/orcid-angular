@@ -8,6 +8,7 @@ import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
 import { isEmpty } from 'lodash'
+import { Assertion } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
 
 @Component({
@@ -98,6 +99,12 @@ export class TopBarComponent implements OnInit, OnDestroy {
     this.creditName = this.userRecord?.names?.creditName
       ? this.userRecord.names.creditName.value
       : ''
+  }
+
+  getOtherNames(otherNames: Assertion[]): string[] {
+    return otherNames.map((otherName) => {
+      return otherName.content
+    })
   }
 
   collapse(): void {
