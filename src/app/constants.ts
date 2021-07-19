@@ -1,5 +1,6 @@
 import { Address, MonthDayYearDate } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
+import { environment } from 'src/environments/environment'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -117,11 +118,20 @@ export function objectToUrlParameters(object: Object) {
 }
 
 export function routerPublicPageUrl(segments: UrlSegment[]) {
-  if (segments[1] && isValidOrcidFormat(segments[1].path)) {
-    return { consumed: [segments[0], segments[1]] }
-  }
-  return {
-    consumed: [],
+  if (!environment.PUBLIC_PAGE_WITH_NO_QA_PREFIX) {
+    if (segments[1] && isValidOrcidFormat(segments[1].path)) {
+      return { consumed: [segments[0], segments[1]] }
+    }
+    return {
+      consumed: [],
+    }
+  } else {
+    if (segments[0] && isValidOrcidFormat(segments[0].path)) {
+      return { consumed: [segments[0]] }
+    }
+    return {
+      consumed: [],
+    }
   }
 }
 

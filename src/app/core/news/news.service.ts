@@ -5,7 +5,7 @@ import { catchError, flatMap, retry, take, switchMap } from 'rxjs/operators'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { environment } from 'src/environments/environment'
 import { Parser } from 'xml2js'
-import { TogglzService } from '../togglz/togglz.service'
+import { TogglzService, TOGGLZ_STRINGS } from '../togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,7 @@ export class NewsService {
   getNews() {
     // TODO @leomendoza123 remove when the toggle call when the new info is stable
     // that will avoid the wait time of the togglz check
-    return this._togglz.getStateOf('NEW_INFO_SITE').pipe(
+    return this._togglz.getStateOf(TOGGLZ_STRINGS.NEW_INFO_SITE).pipe(
       take(1),
       switchMap((newInfoStateToggle) => {
         // Select the correct URL to get the news feed

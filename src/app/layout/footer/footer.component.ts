@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
-import { TogglzService } from '../../core/togglz/togglz.service'
+import { TogglzService, TOGGLZ_STRINGS } from '../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-footer',
@@ -25,7 +25,7 @@ export class FooterComponent implements OnInit {
       this.platform = platformInfo
     })
     _togglz
-      .getStateOf('NEW_INFO_SITE')
+      .getStateOf(TOGGLZ_STRINGS.NEW_INFO_SITE)
       .subscribe((value) => (this.togglzNewInfoSite = value))
   }
 

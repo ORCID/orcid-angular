@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment'
 import { UserInfo } from 'src/app/types'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { TogglzService } from '../../core/togglz/togglz.service'
+import { TogglzService, TOGGLZ_STRINGS } from '../../core/togglz/togglz.service'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 
@@ -46,11 +46,11 @@ export class UserMenuComponent implements OnInit {
       this.platform = data
     })
     _togglz
-      .getStateOf('ORCID_ANGULAR_SIGNIN')
+      .getStateOf(TOGGLZ_STRINGS.ORCID_ANGULAR_SIGNIN)
       .subscribe((value) => (this.togglzOrcidAngularSignin = value))
 
     _togglz
-      .getStateOf('ORCID_ANGULAR_INBOX')
+      .getStateOf(TOGGLZ_STRINGS.ORCID_ANGULAR_INBOX)
       .subscribe((value) => (this.togglzOrcidAngularInbox = value))
   }
 
