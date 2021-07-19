@@ -149,11 +149,10 @@
                 <div class="description" i18n="@@topBar.alsoKnowAs">
                   Also known as
                 </div>
-                <p
-                  class="orc-font-body-small"
-                  *ngIf="!expandedContent"
-                >
-                  {{ getOtherNames(userRecord.otherNames?.otherNames).join(', ')}}
+                <p class="orc-font-body-small" *ngIf="!expandedContent">
+                  {{
+                    getOtherNames(userRecord.otherNames?.otherNames).join(', ')
+                  }}
                 </p>
                 <ng-container
                   *ngFor="
