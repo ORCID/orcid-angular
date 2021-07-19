@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
+import { Work } from '../../../../../types/record-works.endpoint'
+import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 
 @Component({
   selector: 'app-modal-export-works',
@@ -11,14 +13,25 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 export class ModalExportWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  loadingWorks = true
-  works = []
+  loadingWorks = false
+  putCodes: string[] = []
+  works: Work[] = []
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
+    private _recordWorksService: RecordWorksService,
   ) { }
 
   ngOnInit(): void {
+    this.loadingWorks = true
+    this.putCodes.forEach((putCode) => {
+      this._recordWorksService
+        .getWorkInfo(putCode)
+        .subscribe((work: Work) => {
+          this.loadingWorks = false
+          this.works.push(work)
+        })
+    })
   }
 
   saveEvent() {

@@ -142,7 +142,7 @@ export class RecordWorksService {
    *
    * TODO check why the userSource attribute comes as false on this call
    *
-   * @param id user Orcid id
+   * @param orcidId user Orcid id
    * @param putCode code of work
    */
 
@@ -165,7 +165,7 @@ export class RecordWorksService {
     )
   }
 
-  private getWorkInfo(putCode: string, orcidId?: string): Observable<Work> {
+  getWorkInfo(putCode: string, orcidId?: string): Observable<Work> {
     return this._http
       .get<Work>(
         environment.API_WEB +
@@ -217,11 +217,32 @@ export class RecordWorksService {
       )
   }
 
-  delete(putCode: string): Observable<any> {
-    return this._http.delete(environment.API_WEB + 'works/' + putCode).pipe(
+  delete(putCode: any): Observable<any> {
+    return this._http
+      .delete(environment.API_WEB + 'works/' + (Array.isArray(putCode) ? putCode.join(',') : putCode))
+      .pipe(
       retry(3),
       catchError((error) => this._errorHandler.handleError(error)),
       tap(() => this.getWorks({ forceReload: true }))
+    )
+  }
+
+  combine(putCodes: string[]): Observable<any> {
+    return this._http
+      .post(
+      environment.API_WEB + 'works/group/' + putCodes.join(','),
+      {},
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
+  export(): Observable<any> {
+    return this._http.get(
+      environment.API_WEB + 'works/works.bib', { responseType: 'text'}
     )
   }
 }

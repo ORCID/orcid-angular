@@ -1,5 +1,6 @@
 <ng-container *ngIf="!(isPublicRecord && workGroup?.groups?.length === 0)">
-  <app-panels
+  <form [formGroup]="workStackGroupForm">
+    <app-panels
     *ngIf="workGroup?.groups"
     class="row"
     [title]="works"
@@ -48,7 +49,7 @@
         <div class="items-selected">
           <p>
             <ng-container i18n="@@shared.itemsCurrentlySelected">Items currently selected</ng-container>
-            ({{ selectedWorks }})
+            ({{ selectedWorks.length }})
           </p>
         </div>
         <div class="controls">
@@ -69,6 +70,7 @@
           <mat-menu #menu="matMenu">
             <button
               mat-menu-item
+              (click)="combine()"
             >
               <mat-icon>merge_type</mat-icon>
               <span i18n="@@shared.combineWorks">Combine works</span>
@@ -88,6 +90,7 @@
             </button>
             <button
               mat-menu-item
+              (click)="delete()"
             >
               <mat-icon>delete</mat-icon>
               <span i18n="@@shared.deleteWorks">Delete works</span>
@@ -100,6 +103,7 @@
         *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
         [workStack]="group"
         [userInfo]="userInfo"
+        (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
       ></app-work-stack>
     </ng-container>
     <ng-container *ngIf="workGroup.groups.length === 0">
@@ -131,4 +135,5 @@
       *ngIf="paginationLoading"
     ></mat-progress-bar>
   </app-panels>
+  </form>
 </ng-container>

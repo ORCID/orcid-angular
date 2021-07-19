@@ -1,7 +1,7 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.exportSelectedWorks">
-      Export selected works
+    <ng-container i18n="@@record.combineSelectedWorks">
+      Combine selected works
     </ng-container>
   </app-modal-header>
   <app-modal-footer>
@@ -9,10 +9,10 @@
       mat-raised-button
       color="primary"
       (click)="saveEvent()"
-      id="export-button"
+      id="combine-button"
     >
-      <ng-container i18n="@@record.exportSelectedWorksBibtex">
-        Export selected works to BibTeX
+      <ng-container i18n="@@record.combineSelectedWorks">
+        Combine selected works
       </ng-container>
     </button>
     <button
@@ -26,23 +26,42 @@
     </button>
   </app-modal-footer>
   <div class="row">
-    <div class="col orc-font-small-print">
-      <p i18n="@@record.exportSelectedWorksBibtexDescription">
-        Export selected works to a BibTeX file. Please note that exporting to BibTeX may cause problems for text in some languages.
+    <div class="orc-font-small-print">
+      <p i18n="@@record.selectedWorksGrouped">
+        The selected works will be grouped together and displayed as a single group item on your record. All versions of the work will still be available but one will be shown as your preferred version.
       </p>
       <a
         class="underline"
         href="https://support.orcid.org/hc/articles/360006971333"
-        i18n="@@record.findOut"
+        i18n="@@record.learnMoreCombining"
       >
-        Find out more on exporting BibTeX files
+        Learn more about combining works
       </a>
+    </div>
+  </div>
+  <div
+    class="info"
+    [ngClass]="{
+        'orc-font-body-small': !isMobile,
+        'orc-font-small-print': isMobile
+      }"
+  >
+    <div class="col ">
+      <mat-icon class="large-material-icon">info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3">
+      <strong i18n="@@record.combiningWorks">
+        Combining works cannot be undone!
+      </strong>
+      <p i18n="@@record.checkSelectedWorks">
+        Please check the selected works are correct before combining them.
+      </p>
     </div>
   </div>
   <div class="row">
     <h3>
-      <ng-container i18n="@@record.selectedWorks">
-        Selected works to export
+      <ng-container i18n="@@record.selectedWorksCombine">
+        Selected works to combine
       </ng-container>
       ({{ works.length }})
     </h3>
@@ -68,5 +87,14 @@
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
+    <div
+      class="no-info orc-font-body-small"
+      *ngIf="works.length === 0"
+    >
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@record.noItemsSelected"
+      >No items selected.
+      </ng-container>
+    </div>
   </div>
 </app-modal>

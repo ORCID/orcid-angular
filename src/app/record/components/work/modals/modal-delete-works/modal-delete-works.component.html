@@ -1,0 +1,113 @@
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@record.deleteItems">
+      Delete items
+    </ng-container>
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      id="delete-button"
+    >
+      <ng-container i18n="@@record.deleteSelected">
+        Delete selected items
+      </ng-container>
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <div
+    class="info"
+    [ngClass]="{
+        'orc-font-body-small': !isMobile,
+        'orc-font-small-print': isMobile
+      }"
+  >
+    <div class="col">
+      <mat-icon>info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3">
+      <p i18n="@@record.deletingItems">
+        Deleting items permanently removes them from your ORCID record. Please review the items selected for deletion.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <h3>
+      <ng-container i18n="@@record.selectedItems">
+        Selected items to delete
+      </ng-container>
+      ({{ works.length }})
+    </h3>
+    <mat-divider class="row orcid-divider"></mat-divider>
+    <div
+      *ngIf="works.length > 0"
+      class="row"
+    >
+      <div class="row">
+        <p>
+          <mat-checkbox
+            (change)="updateCheck()"
+            [(ngModel)]="selectAll"
+          >
+            <ng-container i18n="@@shared.selectAll">Select all</ng-container>
+            ({{ worksChecked.length }})
+          </mat-checkbox>
+        </p>
+      </div>
+    </div>
+    <mat-divider class="row"></mat-divider>
+    <form
+      [formGroup]="deleteForm"
+    >
+      <ng-container
+        [formGroupName]="work.putCode"
+        *ngFor="let work of works"
+      >
+        <div class="row work-info">
+          <div class="row">
+            <mat-checkbox
+              formControlName="checked"
+              (change)="updateCheck()"
+              [(ngModel)]="selectAll"
+            >
+              <h2 class="orc-font-body">
+                {{ work.title.value }}
+              </h2>
+            </mat-checkbox>
+          </div>
+          <div class="details orc-font-body-small">
+            <strong i18n="@@record.source">Source</strong>:
+            {{ work.sourceName || work.source }}
+            <strong
+              class="added"
+              i18n="@@record.added"
+            >
+              Added
+            </strong>:
+            {{ work.createdDate | monthDayYearDateToString }}
+          </div>
+        </div>
+        <mat-divider class="row"></mat-divider>
+      </ng-container>
+    </form>
+    <div
+      class="no-info orc-font-body-small"
+      *ngIf="works.length === 0"
+    >
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@record.noItemsSelected"
+      >No items selected.
+      </ng-container>
+    </div>
+  </div>
+</app-modal>

@@ -17,6 +17,7 @@
     [isPublicRecord]="isPublicRecord"
     [selectable]="true"
     [isUserSource]="userIsSource(work)"
+    (checkboxChangePanel)="checkboxChangeWorkStack($event)"
     [type]="'works'"
   >
     <h2 header class="orc-font-body">{{ work.title.value }}</h2>

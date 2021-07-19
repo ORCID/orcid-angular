@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion, Work } from '../../../types'
 import { Address, Value, VisibilityStrings } from '../../../types/common.endpoint'
@@ -16,6 +16,8 @@ import { RecordWorksService } from '../../../core/record-works/record-works.serv
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { Work } from 'src/app/types/record-works.endpoint'
+import { WorkStackGroupComponent } from '../../../record/components/work-stack-group/work-stack-group.component'
+import { MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
   selector: 'app-panel',
@@ -60,7 +62,9 @@ export class PanelComponent implements OnInit {
   @Input() openState = true
   @Input() editable = true
   @Input() selectable = false
+  @Input() checkbox = false
   @Output() openStateChange = new EventEmitter<boolean>()
+  @Output() checkboxChangePanel = new EventEmitter<any>()
 
   _isPublicRecord: string
   @Input() set isPublicRecord(value: string) {
@@ -78,6 +82,8 @@ export class PanelComponent implements OnInit {
   formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
+
+  panelForm: FormGroup
 
   constructor(
     private _dialog: MatDialog,
@@ -161,6 +167,13 @@ export class PanelComponent implements OnInit {
       this.type === 'research-resources' ||
       this.type === 'peer-review'
     )
+  }
+
+  checked(event: MatCheckboxChange) {
+    this.checkboxChangePanel.emit({
+      putCode: this.putCode,
+      checked: event.checked
+    })
   }
 
   toggle() {
