@@ -10,6 +10,7 @@ import {
   ResearchResourcesEndpoint,
 } from '../../types/record-research-resources.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { VisibilityStrings } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -133,6 +134,25 @@ export class RecordResearchResourceService {
     return this._http.get<ResearchResource>(
       environment.API_WEB + orcid + '/researchResource.json?id=' + putCode
     )
+  }
+
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'research-resources/' +
+          putCode +
+          '/visibility/' +
+          visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getResearchResourcePage({ forceReload: true }))
+      )
   }
 
   delete(putCode: string): Observable<any> {

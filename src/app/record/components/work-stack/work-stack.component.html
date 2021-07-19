@@ -11,10 +11,11 @@
     [elements]="work"
     [ngStyle]="{ 'z-index': workStack.works.length - i }"
     [ngClass]="{ last: last }"
+    [putCode]="work.putCode.value"
     [visibility]="workStack.activeVisibility"
     *ngIf="isPreferred(work) || displayTheStack"
     [isPublicRecord]="isPublicRecord"
-    type="main"
+    [type]="'works'"
   >
     <h2 header class="orc-font-body">{{ work.title.value }}</h2>
     <!-- WORK BODY -->

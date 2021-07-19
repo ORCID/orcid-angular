@@ -7,6 +7,7 @@ import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordPeerReviewImport } from '../../types/record-peer-review-import.endpoint'
 import { retry, catchError, switchMap, tap } from 'rxjs/operators'
+import { VisibilityStrings } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -84,6 +85,25 @@ export class RecordPeerReviewService {
     return this._http.get(
       environment.API_WEB + orcid + '/peer-review.json?putCode=' + putCode
     )
+  }
+
+  updateVisibility(
+    putCode: any,
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'peer-reviews/' +
+          putCode +
+          '/visibility/' +
+          visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getPeerReviewGroups({ forceReload: true }))
+      )
   }
 
   delete(putCode: string): Observable<any> {
