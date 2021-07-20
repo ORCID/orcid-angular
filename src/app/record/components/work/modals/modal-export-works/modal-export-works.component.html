@@ -28,7 +28,8 @@
   <div class="row">
     <div class="col orc-font-small-print">
       <p i18n="@@record.exportSelectedWorksBibtexDescription">
-        Export selected works to a BibTeX file. Please note that exporting to BibTeX may cause problems for text in some languages.
+        Export selected works to a BibTeX file. Please note that exporting to
+        BibTeX may cause problems for text in some languages.
       </p>
       <a
         class="underline"
@@ -57,12 +58,7 @@
         <div class="orc-font-body-small">
           <strong i18n="@@record.source">Source</strong>:
           {{ work.sourceName || work.source }}
-          <strong
-            class="added"
-            i18n="@@record.added"
-          >
-            Added
-          </strong>:
+          <strong class="added" i18n="@@record.added"> Added </strong>:
           {{ work.createdDate | monthDayYearDateToString }}
         </div>
       </div>

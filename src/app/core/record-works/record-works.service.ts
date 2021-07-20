@@ -219,19 +219,10 @@ export class RecordWorksService {
 
   delete(putCode: any): Observable<any> {
     return this._http
-      .delete(environment.API_WEB + 'works/' + (Array.isArray(putCode) ? putCode.join(',') : putCode))
-      .pipe(
-      retry(3),
-      catchError((error) => this._errorHandler.handleError(error)),
-      tap(() => this.getWorks({ forceReload: true }))
-    )
-  }
-
-  combine(putCodes: string[]): Observable<any> {
-    return this._http
-      .post(
-      environment.API_WEB + 'works/group/' + putCodes.join(','),
-      {},
+      .delete(
+        environment.API_WEB +
+          'works/' +
+          (Array.isArray(putCode) ? putCode.join(',') : putCode)
       )
       .pipe(
         retry(3),
@@ -240,9 +231,19 @@ export class RecordWorksService {
       )
   }
 
+  combine(putCodes: string[]): Observable<any> {
+    return this._http
+      .post(environment.API_WEB + 'works/group/' + putCodes.join(','), {})
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
   export(): Observable<any> {
-    return this._http.get(
-      environment.API_WEB + 'works/works.bib', { responseType: 'text'}
-    )
+    return this._http.get(environment.API_WEB + 'works/works.bib', {
+      responseType: 'text',
+    })
   }
 }

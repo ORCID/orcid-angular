@@ -1,8 +1,6 @@
 <app-modal [loading]="loadingWorks || savingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.deleteItems">
-      Delete items
-    </ng-container>
+    <ng-container i18n="@@record.deleteItems"> Delete items </ng-container>
   </app-modal-header>
   <app-modal-footer>
     <button
@@ -28,16 +26,17 @@
   <div
     class="info"
     [ngClass]="{
-        'orc-font-body-small': !isMobile,
-        'orc-font-small-print': isMobile
-      }"
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
   >
     <div class="col">
       <mat-icon>info</mat-icon>
     </div>
     <div class="col l11 m6 s3">
       <p i18n="@@record.deletingItems">
-        Deleting items permanently removes them from your ORCID record. Please review the items selected for deletion.
+        Deleting items permanently removes them from your ORCID record. Please
+        review the items selected for deletion.
       </p>
     </div>
   </div>
@@ -49,16 +48,10 @@
       ({{ works.length }})
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
-    <div
-      *ngIf="works.length > 0"
-      class="row"
-    >
+    <div *ngIf="works.length > 0" class="row">
       <div class="row">
         <p>
-          <mat-checkbox
-            (change)="updateCheckAll()"
-            [(ngModel)]="selectAll"
-          >
+          <mat-checkbox (change)="updateCheckAll()" [(ngModel)]="selectAll">
             <ng-container
               i18n="@@shared.selectAll"
               *ngIf="selectedWorks.length === 0"
@@ -74,15 +67,9 @@
       </div>
     </div>
     <mat-divider class="row"></mat-divider>
-    <div
-      [formGroup]="deleteForm"
-      *ngIf="!loadingWorks"
-    >
+    <div [formGroup]="deleteForm" *ngIf="!loadingWorks">
       <ng-container *ngFor="let work of works">
-        <div
-          class="row work-info"
-          [formGroupName]="work.putCode.value"
-        >
+        <div class="row work-info" [formGroupName]="work.putCode.value">
           <div class="row">
             <mat-checkbox
               (change)="updateCheck(work.putCode.value)"
@@ -96,25 +83,17 @@
           <div class="details orc-font-body-small">
             <strong i18n="@@record.source">Source</strong>:
             {{ work.sourceName || work.source }}
-            <strong
-              class="added"
-              i18n="@@record.added"
-            >
-              Added
-            </strong>:
+            <strong class="added" i18n="@@record.added"> Added </strong>:
             {{ work.createdDate | monthDayYearDateToString }}
           </div>
         </div>
         <mat-divider class="row"></mat-divider>
       </ng-container>
     </div>
-    <div
-      class="no-info orc-font-body-small"
-      *ngIf="works.length === 0"
-    >
+    <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
       <mat-icon>error</mat-icon>
       <ng-container i18n="@@record.noItemsSelected"
-      >No items selected.
+        >No items selected.
       </ng-container>
     </div>
   </div>

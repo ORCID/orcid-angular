@@ -1,4 +1,11 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'

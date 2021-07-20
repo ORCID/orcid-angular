@@ -12,8 +12,8 @@ import { takeUntil } from 'rxjs/operators'
   templateUrl: './modal-combine-works.component.html',
   styleUrls: [
     './modal-combine-works.component.scss',
-    './modal-combine-works.component.scss-theme.scss'
-  ]
+    './modal-combine-works.component.scss-theme.scss',
+  ],
 })
 export class ModalCombineWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -26,8 +26,8 @@ export class ModalCombineWorksComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _platform: PlatformInfoService,
-    private _recordWorksService: RecordWorksService,
-  ) { }
+    private _recordWorksService: RecordWorksService
+  ) {}
 
   ngOnInit(): void {
     this._platform
@@ -51,13 +51,10 @@ export class ModalCombineWorksComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     this.loadingWorks = true
-    this._recordWorksService
-      .combine(this.putCodes)
-      .subscribe(() => {
-        this.loadingWorks = false
-        this.closeEvent()
-        }
-      )
+    this._recordWorksService.combine(this.putCodes).subscribe(() => {
+      this.loadingWorks = false
+      this.closeEvent()
+    })
   }
 
   closeEvent() {

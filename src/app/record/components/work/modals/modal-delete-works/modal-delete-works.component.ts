@@ -13,8 +13,8 @@ import { FormControl, FormGroup } from '@angular/forms'
   templateUrl: './modal-delete-works.component.html',
   styleUrls: [
     './modal-delete-works.component.scss',
-    './modal-delete-works.component.scss-theme.scss'
-  ]
+    './modal-delete-works.component.scss-theme.scss',
+  ],
 })
 export class ModalDeleteWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -32,8 +32,8 @@ export class ModalDeleteWorksComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _platform: PlatformInfoService,
-    private _recordWorksService: RecordWorksService,
-  ) { }
+    private _recordWorksService: RecordWorksService
+  ) {}
 
   ngOnInit(): void {
     const group: { [key: string]: FormGroup } = {}
@@ -52,10 +52,10 @@ export class ModalDeleteWorksComponent implements OnInit, OnDestroy {
           .getWorkInfo(putCode)
           .subscribe((work: Work) => {
             this.works.push(work)
-            if (index === (this.putCodes.length - 1)) {
+            if (index === this.putCodes.length - 1) {
               this.works.forEach((w) => {
                 group[w.putCode.value] = new FormGroup({
-                  checked: new FormControl(false)
+                  checked: new FormControl(false),
                 })
               })
               this.deleteForm = new FormGroup(group)
@@ -67,18 +67,20 @@ export class ModalDeleteWorksComponent implements OnInit, OnDestroy {
   }
 
   updateCheckAll() {
-    this.putCodes.forEach(value => {
+    this.putCodes.forEach((value) => {
       if (this.selectedWorks.includes(value)) {
         if (!!this.selectAll === false) {
-          this.selectedWorks = this.selectedWorks.filter(putCode => putCode !== value)
+          this.selectedWorks = this.selectedWorks.filter(
+            (putCode) => putCode !== value
+          )
         }
       } else {
         this.selectedWorks.push(value)
       }
       this.deleteForm.patchValue({
         [value]: {
-          checked: !!this.selectAll
-        }
+          checked: !!this.selectAll,
+        },
       })
     })
   }
@@ -86,7 +88,9 @@ export class ModalDeleteWorksComponent implements OnInit, OnDestroy {
   updateCheck(putCode: string) {
     if (this.selectedWorks.includes(putCode)) {
       if (!!this.selectAll === false) {
-        this.selectedWorks = this.selectedWorks.filter(value => value !== putCode)
+        this.selectedWorks = this.selectedWorks.filter(
+          (value) => value !== putCode
+        )
       }
     } else {
       this.selectedWorks.push(putCode)
@@ -96,19 +100,15 @@ export class ModalDeleteWorksComponent implements OnInit, OnDestroy {
   saveEvent() {
     const putCodesDelete = []
     this.savingWorks = true
-    this.works
-      .forEach((work, i) => {
-        if (this.deleteForm.value[work.putCode.value].checked) {
-          putCodesDelete.push(work.putCode.value)
-        }
-      })
-    this._recordWorksService
-      .delete(putCodesDelete)
-      .subscribe(() => {
-        this.savingWorks = false
-        this.closeEvent()
-        }
-      )
+    this.works.forEach((work, i) => {
+      if (this.deleteForm.value[work.putCode.value].checked) {
+        putCodesDelete.push(work.putCode.value)
+      }
+    })
+    this._recordWorksService.delete(putCodesDelete).subscribe(() => {
+      this.savingWorks = false
+      this.closeEvent()
+    })
   }
 
   closeEvent() {
@@ -119,6 +119,4 @@ export class ModalDeleteWorksComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
-
 }
-

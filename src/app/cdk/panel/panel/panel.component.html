@@ -21,17 +21,14 @@
     </div>
   </ng-container>
 
-  <div *ngIf=selectable>
-    <mat-checkbox
-      *ngIf="selectable"
-      (change)="checked($event)"
-    >
+  <div *ngIf="selectable">
+    <mat-checkbox *ngIf="selectable" (change)="checked($event)">
       <ng-container *ngIf="expandButtonsPosition !== 'left'">
         <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
       </ng-container>
     </mat-checkbox>
   </div>
-  <div *ngIf=!selectable>
+  <div *ngIf="!selectable">
     <ng-container *ngIf="expandButtonsPosition !== 'left'">
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>

@@ -5,7 +5,11 @@ import { Subject } from 'rxjs'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
-import { Work, WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import {
+  Work,
+  WorkGroup,
+  WorksEndpoint,
+} from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
@@ -45,7 +49,7 @@ export class WorkStackGroupComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   workGroup: WorksEndpoint
-  workStackGroupForm: FormGroup = new FormGroup({});
+  workStackGroupForm: FormGroup = new FormGroup({})
 
   works = $localize`:@@shared.works:Works`
   labelActionsButton = $localize`:@@shared.actions:Actions`
@@ -142,7 +146,9 @@ export class WorkStackGroupComponent implements OnInit {
   checkboxChangeWorkStackGroup($event) {
     if (this.selectedWorks.includes($event.putCode)) {
       if ($event.checked === false) {
-        this.selectedWorks = this.selectedWorks.filter(putCode => putCode !== $event.putCode)
+        this.selectedWorks = this.selectedWorks.filter(
+          (putCode) => putCode !== $event.putCode
+        )
       }
     } else {
       this.selectedWorks.push($event.putCode)
@@ -151,7 +157,7 @@ export class WorkStackGroupComponent implements OnInit {
 
   filteredWorks(): Work[] {
     const works: Work[] = []
-    this.selectedWorks.forEach(putCode => {
+    this.selectedWorks.forEach((putCode) => {
       this.workGroup.groups.forEach((workGroup) => {
         workGroup.works.forEach((work) => {
           if (work.putCode.value === putCode) {

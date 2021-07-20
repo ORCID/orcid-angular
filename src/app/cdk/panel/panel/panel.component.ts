@@ -1,8 +1,12 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion, Work } from '../../../types'
-import { Address, Value, VisibilityStrings } from '../../../types/common.endpoint'
+import {
+  Address,
+  Value,
+  VisibilityStrings,
+} from '../../../types/common.endpoint'
 import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
@@ -170,7 +174,7 @@ export class PanelComponent implements OnInit {
   checked(event: MatCheckboxChange) {
     this.checkboxChangePanel.emit({
       putCode: this.putCode,
-      checked: event.checked
+      checked: event.checked,
     })
   }
 

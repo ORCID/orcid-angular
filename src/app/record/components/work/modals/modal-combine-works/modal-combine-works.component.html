@@ -28,7 +28,9 @@
   <div class="row">
     <div class="orc-font-small-print">
       <p i18n="@@record.selectedWorksGrouped">
-        The selected works will be grouped together and displayed as a single group item on your record. All versions of the work will still be available but one will be shown as your preferred version.
+        The selected works will be grouped together and displayed as a single
+        group item on your record. All versions of the work will still be
+        available but one will be shown as your preferred version.
       </p>
       <a
         class="underline"
@@ -42,11 +44,11 @@
   <div
     class="info"
     [ngClass]="{
-        'orc-font-body-small': !isMobile,
-        'orc-font-small-print': isMobile
-      }"
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
   >
-    <div class="col ">
+    <div class="col">
       <mat-icon class="large-material-icon">info</mat-icon>
     </div>
     <div class="col l11 m6 s3">
@@ -76,24 +78,16 @@
         <div class="orc-font-body-small">
           <strong i18n="@@record.source">Source</strong>:
           {{ work.sourceName || work.source }}
-          <strong
-            class="added"
-            i18n="@@record.added"
-          >
-            Added
-          </strong>:
+          <strong class="added" i18n="@@record.added"> Added </strong>:
           {{ work.createdDate | monthDayYearDateToString }}
         </div>
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
-    <div
-      class="no-info orc-font-body-small"
-      *ngIf="works.length === 0"
-    >
+    <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
       <mat-icon>error</mat-icon>
       <ng-container i18n="@@record.noItemsSelected"
-      >No items selected.
+        >No items selected.
       </ng-container>
     </div>
   </div>

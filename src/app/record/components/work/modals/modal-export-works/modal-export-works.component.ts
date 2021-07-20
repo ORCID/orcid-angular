@@ -8,7 +8,7 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
 @Component({
   selector: 'app-modal-export-works',
   templateUrl: './modal-export-works.component.html',
-  styleUrls: ['./modal-export-works.component.scss']
+  styleUrls: ['./modal-export-works.component.scss'],
 })
 export class ModalExportWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -19,18 +19,16 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _recordWorksService: RecordWorksService,
-  ) { }
+    private _recordWorksService: RecordWorksService
+  ) {}
 
   ngOnInit(): void {
     this.loadingWorks = true
     this.putCodes.forEach((putCode) => {
-      this._recordWorksService
-        .getWorkInfo(putCode)
-        .subscribe((work: Work) => {
-          this.loadingWorks = false
-          this.works.push(work)
-        })
+      this._recordWorksService.getWorkInfo(putCode).subscribe((work: Work) => {
+        this.loadingWorks = false
+        this.works.push(work)
+      })
     })
   }
 
@@ -46,5 +44,4 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
-
 }
