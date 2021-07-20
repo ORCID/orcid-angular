@@ -8,6 +8,7 @@ import { WorkIdType, WorkIdTypeValidation } from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { VisibilityStrings } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -215,8 +216,20 @@ export class RecordWorksService {
   set(value: any): Observable<any> {
     throw new Error('Method not implemented.')
   }
-  update(value: any): Observable<any> {
-    throw new Error('Method not implemented.')
+
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB + 'works/' + putCode + '/visibility/' + visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
   }
 
   public loadWorkIdTypes(): Observable<WorkIdType[]> {

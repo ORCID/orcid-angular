@@ -90,7 +90,7 @@ export interface AssertionBase {
   primary?: boolean
   current?: boolean
   verified?: boolean
-  visibility?: Visibility | VisibilityStrings
+  visibility?: any
   source?: string
   putCode?: any
   errors?: any[]
