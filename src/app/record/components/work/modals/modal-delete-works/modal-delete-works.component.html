@@ -1,4 +1,4 @@
-<app-modal [loading]="loadingWorks" [noSidebar]="true">
+<app-modal [loading]="loadingWorks || savingWorks" [noSidebar]="true">
   <app-modal-header>
     <ng-container i18n="@@record.deleteItems">
       Delete items
@@ -56,29 +56,37 @@
       <div class="row">
         <p>
           <mat-checkbox
-            (change)="updateCheck()"
+            (change)="updateCheckAll()"
             [(ngModel)]="selectAll"
           >
-            <ng-container i18n="@@shared.selectAll">Select all</ng-container>
-            ({{ worksChecked.length }})
+            <ng-container
+              i18n="@@shared.selectAll"
+              *ngIf="selectedWorks.length === 0"
+            >
+              Select all
+            </ng-container>
+            <ng-container *ngIf="selectedWorks.length > 0">
+              ({{ selectedWorks.length }})
+              <ng-container i18n="@@shared.selected">Selected</ng-container>
+            </ng-container>
           </mat-checkbox>
         </p>
       </div>
     </div>
     <mat-divider class="row"></mat-divider>
-    <form
+    <div
       [formGroup]="deleteForm"
+      *ngIf="!loadingWorks"
     >
-      <ng-container
-        [formGroupName]="work.putCode"
-        *ngFor="let work of works"
-      >
-        <div class="row work-info">
+      <ng-container *ngFor="let work of works">
+        <div
+          class="row work-info"
+          [formGroupName]="work.putCode.value"
+        >
           <div class="row">
             <mat-checkbox
+              (change)="updateCheck(work.putCode.value)"
               formControlName="checked"
-              (change)="updateCheck()"
-              [(ngModel)]="selectAll"
             >
               <h2 class="orc-font-body">
                 {{ work.title.value }}
@@ -99,7 +107,7 @@
         </div>
         <mat-divider class="row"></mat-divider>
       </ng-container>
-    </form>
+    </div>
     <div
       class="no-info orc-font-body-small"
       *ngIf="works.length === 0"
