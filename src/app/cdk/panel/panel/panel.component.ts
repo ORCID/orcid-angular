@@ -15,8 +15,6 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
-import { Work } from 'src/app/types/record-works.endpoint'
-import { WorkStackGroupComponent } from '../../../record/components/work-stack-group/work-stack-group.component'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
