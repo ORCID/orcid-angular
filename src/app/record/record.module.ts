@@ -45,6 +45,8 @@ import { MatCardModule } from '@angular/material/card'
 import { MatMenuModule } from '@angular/material/menu'
 import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { WorkModalComponent } from './components/work-modal/work-modal.component'
+import { MatRadioModule } from '@angular/material/radio'
 import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
@@ -73,6 +75,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
     NotFoundComponent,
+    WorkModalComponent,
     ModalAffiliationsComponent,
   ],
   imports: [
@@ -101,6 +104,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     MatMenuModule,
     TrustedIndividualsDropdownModule,
     MatPaginatorModule,
+    MatRadioModule,
+    SharedModule,
     MatAutocompleteModule,
   ],
 })

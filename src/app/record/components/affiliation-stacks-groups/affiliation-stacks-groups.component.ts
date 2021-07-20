@@ -12,7 +12,6 @@ import {
 import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
-import { ModalAffiliationsComponent } from './modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
   selector: 'app-affiliations',
@@ -35,8 +34,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
-
-  modalAffiliationsComponent = ModalAffiliationsComponent
 
   expandedEducation: boolean
   expandedEmployment: boolean

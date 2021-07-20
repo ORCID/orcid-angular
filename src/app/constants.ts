@@ -102,6 +102,14 @@ export const GRID_COLUMNS = {
   handset: 4,
 }
 
+export enum ADD_EVENT_ACTION {
+  addManually,
+  doi,
+  searchAndLink,
+  pubMed,
+  bibText,
+}
+
 export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']
 
 export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10

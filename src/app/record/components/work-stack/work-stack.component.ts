@@ -8,6 +8,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { WorkModalComponent } from '../work-modal/work-modal.component'
 
 @Component({
   selector: 'app-work-stack',
@@ -21,6 +22,7 @@ export class WorkStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
   visibility: VisibilityStrings
+  worksModal = WorkModalComponent
   @Input() isPublicRecord: string
 
   @Input()
