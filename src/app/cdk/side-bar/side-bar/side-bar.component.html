@@ -1,5 +1,6 @@
 <div>
   <app-side-bar-id
+    *ngIf="!hideOrcidId"
     [ngClass]="{
       mobile: !platform.columns12
     }"

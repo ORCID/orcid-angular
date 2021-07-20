@@ -32,6 +32,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   @Input() isPublicRecord: string
   @Input() onlyOrcidId = false
+  @Input() hideOrcidId = false
 
   modalCountryComponent = ModalCountryComponent
   modalEmailComponent = ModalEmailComponent
