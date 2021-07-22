@@ -169,7 +169,7 @@
                     </div>
                     <div>
                       <span>{{
-                        organizationDisambiguated.value | titlecase
+                        organizationDisambiguated.value
                       }}</span>
                       <span
                         *ngIf="
@@ -303,7 +303,13 @@
                                 'infrastructures',
                               equipment:
                                 item.resourceType.toLocaleLowerCase() ===
-                                'equipment'
+                                'equipment',
+                              collections:
+                                item.resourceType.toLocaleLowerCase() ===
+                                'collections',
+                              services:
+                                item.resourceType.toLocaleLowerCase() ===
+                                'services'
                             }"
                           >
                             <span class="dot"></span>
@@ -349,13 +355,12 @@
                         *ngIf="item.showDetails"
                       >
                         <app-panel-element [hideVisibility]="false">
-                          <div
-                            class="description"
-                            *ngFor="
-                              let itemExternalIdentifier of item.externalIdentifiers
-                            "
-                          >
-                            <div>
+                          <div class="description">
+                            <div
+                              *ngFor="
+                                let itemExternalIdentifier of item.externalIdentifiers
+                              "
+                            >
                               {{
                                 itemExternalIdentifier.externalIdentifierType
                                   .value + ':' | uppercase

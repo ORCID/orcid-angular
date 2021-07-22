@@ -31,6 +31,20 @@
       background-color: mat-color($accent, 900);
     }
   }
+
+  .services {
+    color: mat-color($foreground, 'state-notice-darkest');
+    .dot {
+      background-color: mat-color($foreground, 'state-notice-darkest');
+    }
+  }
+
+  .collections {
+    color: mat-color($foreground, 'state-notice-light');
+    .dot {
+      background-color: mat-color($foreground, 'state-notice-light');
+    }
+  }
 }
 
 @include research-resources-theme($orcid-app-theme);
