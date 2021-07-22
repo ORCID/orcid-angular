@@ -89,7 +89,7 @@ export class RecordService {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
       if (environment.debugger) {
         this.recordSubject$.subscribe((value) => {
-          console.info(value)
+          console.debug(value)
         })
       }
 
