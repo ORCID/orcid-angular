@@ -53,6 +53,8 @@
   }
   .is-this-you {
     width: auto;
+    margin-top: 16px;
+    margin-bottom: 32px;
   }
   .my-orcid-icons {
     width: 100%;
@@ -62,6 +64,10 @@
     button {
       margin: 0;
     }
+  }
+  mat-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
   }
 }
 
