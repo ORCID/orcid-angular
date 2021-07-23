@@ -173,6 +173,7 @@ export class ResearchResourcesComponent implements OnInit {
 
   sortEvent(event: SortData) {
     this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this.userRecordContext.forceReload = true
     this.userRecordContext.offset = 0
