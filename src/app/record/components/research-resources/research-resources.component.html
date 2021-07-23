@@ -361,13 +361,19 @@
                             >
                               <i
                                 i18n="@@shared.partOf"
-                                *ngIf="itemExternalIdentifier?.relationship?.value === 'part-of'"
+                                *ngIf="
+                                  itemExternalIdentifier?.relationship
+                                    ?.value === 'part-of'
+                                "
                               >
                                 Part of
                               </i>
                               <i
                                 i18n="@@shared.fundedBy"
-                                *ngIf="itemExternalIdentifier?.relationship?.value === 'funded-by'"
+                                *ngIf="
+                                  itemExternalIdentifier?.relationship
+                                    ?.value === 'funded-by'
+                                "
                               >
                                 Funded by
                               </i>
@@ -418,34 +424,16 @@
                               >
                                 URL
                               </h3>
-                              <ng-container
-                                *ngIf="
-                                    !isUrl(
-                                      item.url
-                                    )
-                                  "
-                              >
-                                {{
-                                item.url
-                                }}
+                              <ng-container *ngIf="!isUrl(item.url)">
+                                {{ item.url }}
                               </ng-container>
-                              <ng-container
-                                *ngIf="
-                                    isUrl(
-                                      item.url
-                                    )
-                                  "
-                              >
+                              <ng-container *ngIf="isUrl(item.url)">
                                 <a
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  href="{{
-                                      item.url
-                                    }}"
+                                  href="{{ item.url }}"
                                 >
-                                  {{
-                                  item.url
-                                  }}
+                                  {{ item.url }}
                                 </a>
                               </ng-container>
                             </div>
@@ -555,20 +543,45 @@
                                 }}:
                                 <span>
                                   <ng-container
-                                    *ngIf="!isUrl(orgDisambiguatedExternalIdentifierNested.all[0])"
+                                    *ngIf="
+                                      !isUrl(
+                                        orgDisambiguatedExternalIdentifierNested
+                                          .all[0]
+                                      )
+                                    "
                                   >
-                                    {{ orgDisambiguatedExternalIdentifierNested.all[0] }}
+                                    {{
+                                      orgDisambiguatedExternalIdentifierNested
+                                        .all[0]
+                                    }}
                                   </ng-container>
-                                  <ng-container *ngIf="isUrl(orgDisambiguatedExternalIdentifierNested.all[0])">
+                                  <ng-container
+                                    *ngIf="
+                                      isUrl(
+                                        orgDisambiguatedExternalIdentifierNested
+                                          .all[0]
+                                      )
+                                    "
+                                  >
                                     <a
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      href="{{ orgDisambiguatedExternalIdentifierNested.all[0] }}"
+                                      href="{{
+                                        orgDisambiguatedExternalIdentifierNested
+                                          .all[0]
+                                      }}"
                                     >
-                                      {{ orgDisambiguatedExternalIdentifierNested.all[0] }}
+                                      {{
+                                        orgDisambiguatedExternalIdentifierNested
+                                          .all[0]
+                                      }}
                                     </a>
                                   </ng-container>
-                                  <ng-container *ngIf="orgDisambiguatedExternalIdentifierNested.preferred">
+                                  <ng-container
+                                    *ngIf="
+                                      orgDisambiguatedExternalIdentifierNested.preferred
+                                    "
+                                  >
                                     (
                                     <ng-container i18n="@@shared.preferred">
                                       preferred
