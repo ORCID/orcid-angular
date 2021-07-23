@@ -23,13 +23,12 @@
     <div *ngIf="funding.fundingName?.value">
       <div>
         {{ funding.fundingName?.value }}
-        (<ng-container *ngIf="funding.city?.value">
-          {{ funding.city?.value }}
-        </ng-container>
-        <ng-container *ngIf="funding.region?.value"
+        (<ng-container *ngIf="funding.city?.value">{{
+          funding.city?.value
+        }}</ng-container
+        ><ng-container *ngIf="funding.region?.value"
           >, {{ funding.region?.value }}</ng-container
-        >
-        <ng-container *ngIf="funding.countryForDisplay"
+        ><ng-container *ngIf="funding.countryForDisplay"
           >, {{ funding.countryForDisplay }}</ng-container
         >)
       </div>
