@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { first, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
+import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordService } from 'src/app/core/record/record.service'
+import { RecordCountryCodesEndpoint } from 'src/app/types'
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
@@ -29,11 +31,13 @@ export class FundingStacksGroupsComponent implements OnInit {
   fundings: FundingGroup[]
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
+  countryCodes: { key: string; value: string }[]
 
   constructor(
     private _userSession: UserService,
     private _record: RecordService,
-    private _recordFundingsService: RecordFundingsService
+    private _recordFundingsService: RecordFundingsService,
+    private _recordCountryService: RecordCountriesService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +58,24 @@ export class FundingStacksGroupsComponent implements OnInit {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             if (!isEmpty(userRecord.fundings)) {
+              this._recordCountryService
+                .getCountryCodes()
+                .pipe(first())
+                .subscribe((codes) => {
+                  this.countryCodes = Object.entries(codes).map((keyValue) => {
+                    return { key: keyValue[0], value: keyValue[1] }
+                  })
+                  this.fundings.map((value) => {
+                    value.fundings.forEach((funding) => {
+                      if (funding?.country?.value) {
+                        funding.countryForDisplay = this.countryCodes.find(
+                          (x) => x.value === funding.country.value
+                        ).key
+                      }
+                    })
+                  })
+                })
+
               this.fundings = userRecord.fundings
               this.total.emit(userRecord?.fundings?.length)
             }
