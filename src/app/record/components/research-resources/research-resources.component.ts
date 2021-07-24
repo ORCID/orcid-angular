@@ -106,6 +106,14 @@ export class ResearchResourcesComponent implements OnInit {
               putCode: putCode,
               researchResource: data,
             })
+            const research: ResearchResource = data
+            research.hosts.forEach((host) => {
+              this.getOrganizationDisambiguatedDetails(
+                null,
+                host.disambiguationSource,
+                host.orgDisambiguatedId
+              )
+            })
             researchResource.showDetails = true
           },
           (error) => {
@@ -123,7 +131,6 @@ export class ResearchResourcesComponent implements OnInit {
               putCode: putCode,
               researchResource: research,
             })
-            researchResource.showDetails = true
             research.hosts.forEach((host) => {
               this.getOrganizationDisambiguatedDetails(
                 null,
@@ -131,6 +138,7 @@ export class ResearchResourcesComponent implements OnInit {
                 host.orgDisambiguatedId
               )
             })
+            researchResource.showDetails = true
           },
           (error) => {
             console.error('getDetailsError', error)

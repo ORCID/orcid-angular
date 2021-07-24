@@ -27,8 +27,8 @@
           *ngIf="researchResource.researchResources[0] as research"
           [attr.id]="'panel-' + i"
           [expandButtonsPosition]="'left'"
-          [putCode]="research.putCode"
-          [visibility]="research.visibility.visibility"
+          [putCode]="researchResource.activePutCode"
+          [visibility]="researchResource.activeVisibility"
           [isPublicRecord]="isPublicRecord"
         >
           <div header>
