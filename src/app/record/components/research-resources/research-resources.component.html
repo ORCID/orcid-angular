@@ -197,6 +197,17 @@
                       >
                     </div>
                     <div>
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="{{
+                          organizationDisambiguated.url
+                        }}"
+                      >
+                        {{ organizationDisambiguated.url }}
+                      </a>
+                    </div>
+                    <div>
                       {{ researchDetail.translatedTitle }}
                     </div>
                     <h3 class="orc-font-body-small">
@@ -211,23 +222,33 @@
                       "
                     >
                       {{ orgDisambiguatedExternalIdentifier.identifierType }}:
-                      <span
-                        *ngFor="
-                          let identifier of orgDisambiguatedExternalIdentifier.all
-                        "
-                      >
-                        <ng-container *ngIf="!isUrl(identifier)">
-                          {{ identifier }}
+                      <span>
+                        <ng-container
+                          *ngIf="!isUrl(orgDisambiguatedExternalIdentifier.all[0])"
+                        >
+                          {{ orgDisambiguatedExternalIdentifier.all[0] }}
                         </ng-container>
-                        <ng-container *ngIf="isUrl(identifier)">
+                        <ng-container
+                          *ngIf="isUrl(orgDisambiguatedExternalIdentifier.all[0])">
                           <a
                             target="_blank"
                             rel="noopener noreferrer"
-                            href="{{ identifier }}"
+                            href="{{ orgDisambiguatedExternalIdentifier.all[0] }}"
                           >
-                            {{ identifier }}
+                            {{ orgDisambiguatedExternalIdentifier.all[0] }}
                           </a>
                         </ng-container>
+                        <ng-container
+                          *ngIf="
+                            orgDisambiguatedExternalIdentifier.preferred
+                          "
+                        >
+                          (
+                          <ng-container i18n="@@shared.preferred">
+                            preferred
+                          </ng-container>
+                          )
+                          </ng-container>
                       </span>
                     </div>
                     <h3 class="orc-font-body-small" i18n="@@shared.added">
