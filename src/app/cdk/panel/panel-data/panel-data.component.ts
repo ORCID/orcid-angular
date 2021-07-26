@@ -23,9 +23,7 @@ export class PanelDataComponent implements OnInit, OnDestroy {
   state = false
   isMobile: boolean
 
-  constructor(
-    private _platform: PlatformInfoService
-  ) {}
+  constructor(private _platform: PlatformInfoService) {}
 
   ngOnInit(): void {
     this._platform
