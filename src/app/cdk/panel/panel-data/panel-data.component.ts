@@ -1,4 +1,7 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
+import { takeUntil } from 'rxjs/operators'
+import { PlatformInfoService } from '../../platform-info'
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-panel-data',
@@ -8,7 +11,9 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core'
     './panel-data.component.scss-theme.scss',
   ],
 })
-export class PanelDataComponent implements OnInit {
+export class PanelDataComponent implements OnInit, OnDestroy {
+  $destroy: Subject<boolean> = new Subject<boolean>()
+
   @HostBinding('class.orc-font-body-small') fontSmall = true
   @HostBinding('class.border-bottom') borderBottomClass = false
   @Input() set borderBottom(borderBottom: boolean) {
@@ -16,8 +21,23 @@ export class PanelDataComponent implements OnInit {
   }
 
   state = false
+  isMobile: boolean
 
-  constructor() {}
+  constructor(
+    private _platform: PlatformInfoService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((platform) => {
+        this.isMobile = platform.columns4 || platform.columns8
+      })
+  }
+
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
+  }
 }
