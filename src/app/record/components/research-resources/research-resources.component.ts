@@ -53,6 +53,7 @@ export class ResearchResourcesComponent implements OnInit {
 
   ngOrcidResearchResources = $localize`:@@researchResources.researchResources:Research resources`
   offset: number
+  isMobile: boolean
 
   constructor(
     _platform: PlatformInfoService,
@@ -66,6 +67,7 @@ export class ResearchResourcesComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((data) => {
         this.platform = data
+        this.isMobile = data.columns4 || data.columns8
       })
   }
 

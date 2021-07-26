@@ -49,6 +49,7 @@ export class PeerReviewsComponent implements OnInit {
     putCode: number
     peerReview: PeerReview
   }[] = []
+  isMobile: boolean
 
   ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
 
@@ -63,6 +64,7 @@ export class PeerReviewsComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((data) => {
         this.platform = data
+        this.isMobile = data.columns4 || data.columns8
       })
   }
 

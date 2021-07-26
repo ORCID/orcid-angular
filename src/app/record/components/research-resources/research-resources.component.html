@@ -108,7 +108,13 @@
                     [noBoldTitle]="true"
                   ></app-display-external-ids>
                 </div>
-                <div class="buttons-container">
+                <div
+                  class="buttons-container"
+                  [ngClass]="{
+                    'orc-font-small-print' : isMobile,
+                    'orc-font-body-small' : !isMobile
+                  }"
+                >
                   <a
                     class="underline"
                     *ngIf="!research.showDetails"
