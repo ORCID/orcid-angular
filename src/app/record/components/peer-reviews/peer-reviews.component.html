@@ -110,21 +110,21 @@
                       </a>
                     </span>
                     <span>
-                       <a
-                         class="underline"
-                         rel="noopener noreferrer"
-                         target="_blank"
-                         href="{{ peerReview.url.value }}"
-                         i18n="@@peerReview.view"
-                         *ngIf="!!peerReview.url"
-                       >
-                          View
-                       </a>
+                      <a
+                        class="underline"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href="{{ peerReview.url.value }}"
+                        i18n="@@peerReview.view"
+                        *ngIf="!!peerReview.url"
+                      >
+                        View
+                      </a>
                       <ng-container
                         i18n="@@peerReview.view"
                         *ngIf="!peerReview.url"
                       >
-                          View
+                        View
                       </ng-container>
                     </span>
                   </div>
