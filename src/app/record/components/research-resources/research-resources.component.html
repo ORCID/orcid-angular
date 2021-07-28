@@ -313,7 +313,8 @@
                                 'collections',
                               services:
                                 item.resourceType.toLocaleLowerCase() ===
-                                'services'
+                                'services',
+                              mobile: isMobile
                             }"
                           >
                             <span class="dot"></span>
@@ -321,13 +322,28 @@
                               {{ item.resourceType | uppercase }}
                             </strong>
                           </span>
-                          <strong class="orc-font-body-small">
+                          <strong
+                            class="orc-font-body-small"
+                            *ngIf="!isMobile"
+                          >
                             {{ item.resourceName }}
                           </strong>
                         </div>
+                        <strong
+                          class="orc-font-body-small"
+                          *ngIf="isMobile"
+                        >
+                          {{ item.resourceName }}
+                        </strong>
                       </div>
                       <div custom-controls>
-                        <span class="orc-font-body-small show">
+                        <span
+                          class="show"
+                          [ngClass]="{
+                             'orc-font-small-print' : isMobile,
+                             'orc-font-body-small' : !isMobile
+                          }"
+                        >
                           <a
                             class="underline"
                             *ngIf="!item.showDetails"
