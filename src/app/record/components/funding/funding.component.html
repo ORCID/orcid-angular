@@ -15,7 +15,18 @@
         }}</ng-container>
         <ng-container *ngIf="!funding.endDate.year">present</ng-container>
       </ng-container>
-      <ng-container *ngIf="funding.startDate.year && funding.fundingType.value">
+      <!--End date-->
+      <ng-container *ngIf="!funding.startDate.year && funding.endDate">
+        <ng-container *ngIf="funding.endDate?.year">
+          {{ funding.endDate | monthDayYearDateToString }}
+        </ng-container>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          (funding.startDate.year || funding.endDate.year) &&
+          funding.fundingType.value
+        "
+      >
         |
       </ng-container>
       {{ funding.fundingType.value | titlecase }}
