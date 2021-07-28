@@ -322,17 +322,11 @@
                               {{ item.resourceType | uppercase }}
                             </strong>
                           </span>
-                          <strong
-                            class="orc-font-body-small"
-                            *ngIf="!isMobile"
-                          >
+                          <strong class="orc-font-body-small" *ngIf="!isMobile">
                             {{ item.resourceName }}
                           </strong>
                         </div>
-                        <strong
-                          class="orc-font-body-small"
-                          *ngIf="isMobile"
-                        >
+                        <strong class="orc-font-body-small" *ngIf="isMobile">
                           {{ item.resourceName }}
                         </strong>
                       </div>
@@ -340,8 +334,8 @@
                         <span
                           class="show"
                           [ngClass]="{
-                             'orc-font-small-print' : isMobile,
-                             'orc-font-body-small' : !isMobile
+                            'orc-font-small-print': isMobile,
+                            'orc-font-body-small': !isMobile
                           }"
                         >
                           <a
