@@ -144,7 +144,7 @@
                 class="description"
                 *ngIf="getResearchResource(research.putCode) as researchDetail"
               >
-                <div *ngFor="let host of researchDetail.hosts">
+                <div class="host" *ngFor="let host of researchDetail.hosts">
                   <ng-container
                     *ngIf="
                       getOrganizationDisambiguated(
@@ -152,13 +152,31 @@
                       ) as organizationDisambiguated
                     "
                   >
-                    {{ organizationDisambiguated.value }}
-                    <app-org-identifier
+                    <p>
+                      <span>{{ host.name | titlecase }}</span>
+                      <span *ngIf="host.city || host.region || host.country">
+                        (</span
+                      >
+                      <span *ngIf="host.city">{{ host.city }}</span
+                      ><span *ngIf="host.region">, {{ host.region }}</span>
+                      <span *ngIf="host.country">, {{ host.country }}</span>
+                      <span *ngIf="host.city || host.region || host.country"
+                      >)</span
+                      >
+                    </p>                    <app-org-identifier
                       [orgDisambiguated]="organizationDisambiguated"
                     ></app-org-identifier>
-                    <div>
-                      {{ researchDetail.translatedTitle }}
-                    </div>
+                    <ng-container *ngIf="researchDetail.translatedTitle">
+                      <h3
+                        class="orc-font-body-small"
+                        i18n="@@shared.translatedTitle"
+                      >
+                        Translated title
+                      </h3>
+                      <div>
+                        {{ researchDetail.translatedTitle }}
+                      </div>
+                    </ng-container>
                     <ng-container *ngIf="researchDetail.url">
                       <h3 class="orc-font-body-small" i18n="@@shared.url">
                         URL
@@ -211,17 +229,18 @@
                       </div>
                     </ng-container>
                   </ng-container>
-                  <div *ngFor="let item of researchDetail.items; index as i">
-                    <app-panel
-                      [elements]="item"
-                      [type]="'top-bar'"
-                      [editable]="false"
-                      [customControls]="true"
-                      class="top-bar"
-                      [attr.id]="'research-detail-item-' + i"
-                    >
-                      <div header>
-                        <div>
+                </div>
+                <div *ngFor="let item of researchDetail.items; index as i">
+                  <app-panel
+                    [elements]="item"
+                    [type]="'top-bar'"
+                    [editable]="false"
+                    [customControls]="true"
+                    class="top-bar"
+                    [attr.id]="'research-detail-item-' + i"
+                  >
+                    <div header>
+                      <div>
                           <span
                             class="orc-font-small-print resourceType"
                             [ngClass]="{
@@ -399,7 +418,6 @@
                     </app-panel>
                   </div>
                 </div>
-              </div>
             </app-panel-element>
           </app-panel-data>
           <app-panel-source
