@@ -73,20 +73,20 @@
                   <div
                     header
                     [ngClass]="{
-                       'orc-font-small-print' : isMobile,
-                       'orc-font-body-small' : !isMobile
+                      'orc-font-small-print': isMobile,
+                      'orc-font-body-small': !isMobile
                     }"
                   >
                     <span
                       class="header-sub-peer-review"
-                      [ngClass]="{ 'mobile' : isMobile }"
+                      [ngClass]="{ mobile: isMobile }"
                     >
                       <b i18n="@@peerReview.reviewDate"> Review date: </b>
                       {{ peerReview.completionDate | monthDayYearDateToString }}
                     </span>
                     <span
                       class="header-sub-peer-review"
-                      [ngClass]="{ 'mobile' : isMobile }"
+                      [ngClass]="{ mobile: isMobile }"
                     >
                       <b i18n="@@peerReview.type"> Type: </b>
                       <span class="capitalize">
@@ -95,7 +95,7 @@
                     </span>
                     <span
                       class="header-sub-peer-review"
-                      [ngClass]="{ 'mobile' : isMobile }"
+                      [ngClass]="{ mobile: isMobile }"
                     >
                       <b i18n="@@peerReview.role"> Role: </b>
                       <span class="capitalize">
@@ -106,8 +106,8 @@
                   <div
                     custom-controls
                     [ngClass]="{
-                       'orc-font-small-print' : isMobile,
-                       'orc-font-body-small' : !isMobile
+                      'orc-font-small-print': isMobile,
+                      'orc-font-body-small': !isMobile
                     }"
                   >
                     <span class="show">
