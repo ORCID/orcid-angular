@@ -27,8 +27,8 @@
           *ngIf="researchResource.researchResources[0] as research"
           [attr.id]="'panel-' + i"
           [expandButtonsPosition]="'left'"
-          [putCode]="research.putCode"
-          [visibility]="research.visibility.visibility"
+          [putCode]="researchResource.activePutCode"
+          [visibility]="researchResource.activeVisibility"
           [isPublicRecord]="isPublicRecord"
         >
           <div header>
@@ -108,7 +108,13 @@
                     [noBoldTitle]="true"
                   ></app-display-external-ids>
                 </div>
-                <div class="buttons-container">
+                <div
+                  class="buttons-container"
+                  [ngClass]="{
+                    'orc-font-small-print': isMobile,
+                    'orc-font-body-small': !isMobile
+                  }"
+                >
                   <a
                     class="underline"
                     *ngIf="!research.showDetails"
@@ -246,7 +252,7 @@
                         >
                       </span>
                     </div>
-                    <ng-container *ngIf="researchDetail.lastModified">
+                    <ng-container *ngIf="researchDetail.lastModifiedDate">
                       <h3
                         class="orc-font-body-small"
                         i18n="@@shared.lastModified"
@@ -254,15 +260,15 @@
                         Last modified
                       </h3>
                       <div>
-                        <span *ngIf="researchDetail.lastModified">
-                          <span *ngIf="researchDetail.lastModified.year">{{
-                            researchDetail.lastModified.year
+                        <span *ngIf="researchDetail.lastModifiedDate">
+                          <span *ngIf="researchDetail.lastModifiedDate.year">{{
+                            researchDetail.lastModifiedDate.year
                           }}</span>
-                          <span *ngIf="researchDetail.lastModified.month"
-                            >-{{ researchDetail.lastModified.month }}</span
+                          <span *ngIf="researchDetail.lastModifiedDate.month"
+                            >-{{ researchDetail.lastModifiedDate.month }}</span
                           >
-                          <span *ngIf="researchDetail.lastModified.day"
-                            >-{{ researchDetail.lastModified.day }}</span
+                          <span *ngIf="researchDetail.lastModifiedDate.day"
+                            >-{{ researchDetail.lastModifiedDate.day }}</span
                           >
                         </span>
                       </div>
@@ -307,7 +313,8 @@
                                 'collections',
                               services:
                                 item.resourceType.toLocaleLowerCase() ===
-                                'services'
+                                'services',
+                              mobile: isMobile
                             }"
                           >
                             <span class="dot"></span>
@@ -315,13 +322,22 @@
                               {{ item.resourceType | uppercase }}
                             </strong>
                           </span>
-                          <strong class="orc-font-body-small">
+                          <strong class="orc-font-body-small" *ngIf="!isMobile">
                             {{ item.resourceName }}
                           </strong>
                         </div>
+                        <strong class="orc-font-body-small" *ngIf="isMobile">
+                          {{ item.resourceName }}
+                        </strong>
                       </div>
                       <div custom-controls>
-                        <span class="orc-font-body-small show">
+                        <span
+                          class="show"
+                          [ngClass]="{
+                            'orc-font-small-print': isMobile,
+                            'orc-font-body-small': !isMobile
+                          }"
+                        >
                           <a
                             class="underline"
                             *ngIf="!item.showDetails"

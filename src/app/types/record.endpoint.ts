@@ -122,7 +122,7 @@ export interface GroupBase {
   activePutCode: number
   defaultPutCode: number
   groupId: number
-  activeVisibility: string
+  activeVisibility: VisibilityStrings
   userVersionPresent: boolean
   externalIdentifiers: ExternalIdentifier[]
 }
