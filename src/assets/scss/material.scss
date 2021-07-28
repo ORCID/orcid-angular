@@ -9,8 +9,10 @@
 @import './material.orcid.overwrites.scss/snackbar-theme';
 @import './material.orcid.overwrites.scss/paginator.scss';
 @import './material.orcid.overwrites.scss/card-theme';
-@import './material.orcid.overwrites.scss/form-field-outline-theme';
+@import './material.orcid.overwrites.scss/form-field-theme';
 @import './material.orcid.overwrites.scss/_divider-theme.scss';
+@import './material.orcid.overwrites.scss/_mat-error-theme.scss';
+
 @import './orcid/_urls-theme.scss';
 @import './orcid/_divider-theme.scss';
 @import './orcid/divider.scss';
@@ -50,9 +52,10 @@
 @import './material.orcid.overwrites.scss/mde-popover.scss';
 @import './material.orcid.overwrites.scss/radio.scss';
 @import './material.orcid.overwrites.scss/snackbar.scss';
-@include mat-form-field-outline-theme-overwrites($orcid-app-theme);
+@include mat-form-field-theme-overwrites($orcid-app-theme);
 @include mat-divider-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/divider.scss';
 @include mat-button-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/cdk-drag-drop.scss';
+@include mat-error-theme-overwrites($orcid-app-theme);
 @import './orcid/urls.scss';
