@@ -130,15 +130,24 @@
                         Show less detail
                       </a>
                     </span>
-                    <a
-                      class="underline"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      href="{{ peerReview.url }}"
-                      i18n="@@peerReview.view"
-                    >
-                      View
-                    </a>
+                    <span>
+                      <a
+                        class="underline"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href="{{ peerReview.url.value }}"
+                        i18n="@@peerReview.view"
+                        *ngIf="!!peerReview.url"
+                      >
+                        View
+                      </a>
+                      <ng-container
+                        i18n="@@peerReview.view"
+                        *ngIf="!peerReview.url"
+                      >
+                        View
+                      </ng-container>
+                    </span>
                   </div>
                   <app-panel-data
                     [borderBottom]="true"
