@@ -12,10 +12,10 @@
       ></app-panel-expand-buttons>
 
       <div class="text-container">
-        <strong class="orc-font-body-large clickable" (click)="collapse()">
-          {{ title }}
-        </strong>
-        <ng-container>
+        <div class="orc-font-body-large clickable" (click)="collapse()">
+          <strong>
+            {{ title }}
+          </strong>
           <span
             *ngIf="currentAmount && total && currentAmount !== total"
             class="clickable"
@@ -32,7 +32,8 @@
             ({{ currentAmount }})
           </span>
           <span *ngIf="!currentAmount">(0)</span>
-        </ng-container>
+        </div>
+        <ng-container> </ng-container>
       </div>
     </div>
 
