@@ -123,7 +123,10 @@
                     [borderBottom]="true"
                     *ngIf="peerReview.showDetails"
                   >
-                    <app-panel-element [hideVisibility]="false">
+                    <app-panel-element
+                      [hideVisibility]="false"
+                      *ngIf="getPeerReview(peerReview.putCode.value) as peerReview"
+                    >
                       <div class="details">
                         <div>
                           <b i18n="@@peerReview.reviewIdentifiers"
@@ -165,9 +168,9 @@
                       <div
                         class="details"
                         *ngIf="
-                          getPeerReview(peerReview.putCode.value)?.subjectName
+                          peerReview?.subjectName
                             ?.value &&
-                          getPeerReview(peerReview.putCode.value)?.subjectType
+                          peerReview?.subjectType
                             ?.value
                         "
                       >
@@ -177,25 +180,19 @@
                         <div>
                           <ng-container
                             *ngIf="
-                              getPeerReview(peerReview.putCode.value)
-                                ?.subjectName?.value
+                              peerReview?.subjectName?.value
                             "
                           >
                             {{
-                              getPeerReview(peerReview.putCode.value)
-                                .subjectName.value
+                            peerReview.subjectName.value
                             }}
                           </ng-container>
                           <ng-container
                             *ngIf="
-                              getPeerReview(peerReview.putCode.value)
-                                ?.subjectType?.value
+                              peerReview?.subjectType?.value
                             "
                           >
-                            ({{
-                              getPeerReview(peerReview.putCode.value)
-                                .subjectType.value
-                            }})
+                            ({{peerReview.subjectType.value}})
                           </ng-container>
                           <div
                             *ngIf="
@@ -241,6 +238,22 @@
                                 ?.value
                             }}
                           </div>
+                        </div>
+                      </div>
+                      <div class="details">
+                        <b i18n="@@shared.added">
+                          Added
+                        </b>
+                        <div>
+                          {{ peerReview.createdDate | monthDayYearDateToString }}
+                        </div>
+                      </div>
+                      <div class="details">
+                        <b i18n="@@shared.lastModified">
+                          Last modified
+                        </b>
+                        <div>
+                          {{ peerReview.lastModified | monthDayYearDateToString }}
                         </div>
                       </div>
                     </app-panel-element>
