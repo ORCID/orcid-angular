@@ -125,7 +125,9 @@
                   >
                     <app-panel-element
                       [hideVisibility]="false"
-                      *ngIf="getPeerReview(peerReview.putCode.value) as peerReview"
+                      *ngIf="
+                        getPeerReview(peerReview.putCode.value) as peerReview
+                      "
                     >
                       <div class="details">
                         <div>
@@ -168,31 +170,19 @@
                       <div
                         class="details"
                         *ngIf="
-                          peerReview?.subjectName
-                            ?.value &&
-                          peerReview?.subjectType
-                            ?.value
+                          peerReview?.subjectName?.value &&
+                          peerReview?.subjectType?.value
                         "
                       >
                         <b i18n="@@peerReview.reviewSubject">
                           Review subject
                         </b>
                         <div>
-                          <ng-container
-                            *ngIf="
-                              peerReview?.subjectName?.value
-                            "
-                          >
-                            {{
-                            peerReview.subjectName.value
-                            }}
+                          <ng-container *ngIf="peerReview?.subjectName?.value">
+                            {{ peerReview.subjectName.value }}
                           </ng-container>
-                          <ng-container
-                            *ngIf="
-                              peerReview?.subjectType?.value
-                            "
-                          >
-                            ({{peerReview.subjectType.value}})
+                          <ng-container *ngIf="peerReview?.subjectType?.value">
+                            ({{ peerReview.subjectType.value }})
                           </ng-container>
                           <div
                             *ngIf="
@@ -241,19 +231,19 @@
                         </div>
                       </div>
                       <div class="details">
-                        <b i18n="@@shared.added">
-                          Added
-                        </b>
+                        <b i18n="@@shared.added"> Added </b>
                         <div>
-                          {{ peerReview.createdDate | monthDayYearDateToString }}
+                          {{
+                            peerReview.createdDate | monthDayYearDateToString
+                          }}
                         </div>
                       </div>
                       <div class="details">
-                        <b i18n="@@shared.lastModified">
-                          Last modified
-                        </b>
+                        <b i18n="@@shared.lastModified"> Last modified </b>
                         <div>
-                          {{ peerReview.lastModified | monthDayYearDateToString }}
+                          {{
+                            peerReview.lastModified | monthDayYearDateToString
+                          }}
                         </div>
                       </div>
                     </app-panel-element>
