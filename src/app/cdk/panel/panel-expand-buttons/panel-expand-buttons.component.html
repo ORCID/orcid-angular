@@ -4,8 +4,10 @@
   [matTooltip]="tooltipLabelShowDetails"
   *ngIf="!openState"
   [attr.aria-label]="tooltipLabelShowDetails"
+  class="expand_more"
+
 >
-  <mat-icon>expand_more</mat-icon>
+  <mat-icon>expand_less</mat-icon>
 </button>
 <button
   mat-icon-button
@@ -15,5 +17,5 @@
   [attr.aria-label]="tooltipLabelHideDetails"
   class="expand_less"
 >
-  <mat-icon>expand_less</mat-icon>
+  <mat-icon>expand_more</mat-icon>
 </button>
