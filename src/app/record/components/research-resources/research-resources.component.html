@@ -152,114 +152,25 @@
                       ) as organizationDisambiguated
                     "
                   >
-                    <h3
-                      class="orc-font-body-small organization-identifiers"
-                      i18n="@@shared.organizationIdentifiers"
-                    >
-                      Organization identifiers
-                    </h3>
-                    <div>
-                      {{ organizationDisambiguated.sourceType | uppercase }}:
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="{{
-                          getLink(
-                            organizationDisambiguated.sourceType,
-                            organizationDisambiguated.sourceId
-                          )
-                        }}"
-                      >
-                        {{ organizationDisambiguated.sourceId }}
-                      </a>
-                    </div>
-                    <div>
-                      <span>{{ organizationDisambiguated.value }}</span>
-                      <span
-                        *ngIf="
-                          organizationDisambiguated.city ||
-                          organizationDisambiguated.region ||
-                          organizationDisambiguated.country
-                        "
-                      >
-                        (</span
-                      >
-                      <span *ngIf="organizationDisambiguated.city">{{
-                        organizationDisambiguated.city
-                      }}</span
-                      ><span *ngIf="organizationDisambiguated.region"
-                        >, {{ organizationDisambiguated.region }}</span
-                      >
-                      <span *ngIf="organizationDisambiguated.country"
-                        >, {{ organizationDisambiguated.country }}</span
-                      >
-                      <span
-                        *ngIf="
-                          organizationDisambiguated.city ||
-                          organizationDisambiguated.region ||
-                          organizationDisambiguated.country
-                        "
-                        >)</span
-                      >
-                    </div>
-                    <div>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="{{ organizationDisambiguated.url }}"
-                      >
-                        {{ organizationDisambiguated.url }}
-                      </a>
-                    </div>
+                    {{ organizationDisambiguated.value }}
+                    <app-org-identifier [orgDisambiguated]="organizationDisambiguated"></app-org-identifier>
                     <div>
                       {{ researchDetail.translatedTitle }}
                     </div>
-                    <h3 class="orc-font-body-small">
-                      <ng-container i18n="@@shared.otherOrganization">
-                        Other organization identifiers provided by
-                      </ng-container>
-                      {{ organizationDisambiguated.sourceType | uppercase }}
-                    </h3>
-                    <div
-                      *ngFor="
-                        let orgDisambiguatedExternalIdentifier of organizationDisambiguated.orgDisambiguatedExternalIdentifiers
-                      "
-                    >
-                      {{ orgDisambiguatedExternalIdentifier.identifierType }}:
-                      <span>
-                        <ng-container
-                          *ngIf="
-                            !isUrl(orgDisambiguatedExternalIdentifier.all[0])
-                          "
+                    <ng-container *ngIf="researchDetail.url">
+                      <h3 class="orc-font-body-small" i18n="@@shared.url">
+                        URL
+                      </h3>
+                      <div>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="{{ researchDetail.url }}"
                         >
-                          {{ orgDisambiguatedExternalIdentifier.all[0] }}
-                        </ng-container>
-                        <ng-container
-                          *ngIf="
-                            isUrl(orgDisambiguatedExternalIdentifier.all[0])
-                          "
-                        >
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="{{
-                              orgDisambiguatedExternalIdentifier.all[0]
-                            }}"
-                          >
-                            {{ orgDisambiguatedExternalIdentifier.all[0] }}
-                          </a>
-                        </ng-container>
-                        <ng-container
-                          *ngIf="orgDisambiguatedExternalIdentifier.preferred"
-                        >
-                          (
-                          <ng-container i18n="@@shared.preferred">
-                            preferred
-                          </ng-container>
-                          )
-                        </ng-container>
-                      </span>
-                    </div>
+                          {{ researchDetail.url }}
+                        </a>
+                      </div>
+                    </ng-container>
                     <h3 class="orc-font-body-small" i18n="@@shared.added">
                       Added
                     </h3>
@@ -295,20 +206,6 @@
                             >-{{ researchDetail.lastModifiedDate.day }}</span
                           >
                         </span>
-                      </div>
-                    </ng-container>
-                    <ng-container *ngIf="researchDetail.url">
-                      <h3 class="orc-font-body-small" i18n="@@shared.url">
-                        URL
-                      </h3>
-                      <div>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href="{{ researchDetail.url }}"
-                        >
-                          {{ researchDetail.url }}
-                        </a>
                       </div>
                     </ng-container>
                   </ng-container>
@@ -488,148 +385,9 @@
                               "
                             >
                               {{ organizationDisambiguatedNested.value }}
-                              <h3
-                                class="orc-font-body-small"
-                                i18n="@@shared.organizationIdentifiers"
-                              >
-                                Organization identifiers
-                              </h3>
-                              <div>
-                                {{ organizationDisambiguatedNested.sourceType }}
-                                <a
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  href="{{
-                                    getLink(
-                                      organizationDisambiguatedNested.sourceType,
-                                      organizationDisambiguatedNested.sourceId
-                                    )
-                                  }}"
-                                >
-                                  {{ organizationDisambiguatedNested.sourceId }}
-                                </a>
-                              </div>
-                              <div>
-                                <span>{{
-                                  organizationDisambiguatedNested.value
-                                    | titlecase
-                                }}</span>
-                                <span
-                                  *ngIf="
-                                    organizationDisambiguatedNested.city ||
-                                    organizationDisambiguatedNested.region ||
-                                    itemHost.country
-                                  "
-                                >
-                                  (</span
-                                >
-                                <span
-                                  *ngIf="organizationDisambiguatedNested.city"
-                                  >{{
-                                    organizationDisambiguatedNested.city
-                                  }}</span
-                                ><span
-                                  *ngIf="organizationDisambiguatedNested.region"
-                                  >,
-                                  {{
-                                    organizationDisambiguatedNested.region
-                                  }}</span
-                                >
-                                <span
-                                  *ngIf="
-                                    organizationDisambiguatedNested.country
-                                  "
-                                  >,
-                                  {{
-                                    organizationDisambiguatedNested.country
-                                  }}</span
-                                >
-                                <span
-                                  *ngIf="
-                                    organizationDisambiguatedNested.city ||
-                                    organizationDisambiguatedNested.region ||
-                                    organizationDisambiguatedNested.country
-                                  "
-                                  >)</span
-                                >
-                              </div>
-                              <div>
-                                <a
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  href="{{
-                                    organizationDisambiguatedNested.url
-                                  }}"
-                                >
-                                  {{ organizationDisambiguatedNested.url }}
-                                </a>
-                              </div>
-                              <h3 class="orc-font-body-small">
-                                <ng-container i18n="@@shared.otherOrganization">
-                                  Other organization identifiers provided by
-                                </ng-container>
-                                {{
-                                  organizationDisambiguatedNested.sourceType
-                                    | uppercase
-                                }}
-                              </h3>
-                              <div
-                                *ngFor="
-                                  let orgDisambiguatedExternalIdentifierNested of organizationDisambiguatedNested.orgDisambiguatedExternalIdentifiers
-                                "
-                              >
-                                {{
-                                  orgDisambiguatedExternalIdentifierNested.identifierType
-                                }}:
-                                <span>
-                                  <ng-container
-                                    *ngIf="
-                                      !isUrl(
-                                        orgDisambiguatedExternalIdentifierNested
-                                          .all[0]
-                                      )
-                                    "
-                                  >
-                                    {{
-                                      orgDisambiguatedExternalIdentifierNested
-                                        .all[0]
-                                    }}
-                                  </ng-container>
-                                  <ng-container
-                                    *ngIf="
-                                      isUrl(
-                                        orgDisambiguatedExternalIdentifierNested
-                                          .all[0]
-                                      )
-                                    "
-                                  >
-                                    <a
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      href="{{
-                                        orgDisambiguatedExternalIdentifierNested
-                                          .all[0]
-                                      }}"
-                                    >
-                                      {{
-                                        orgDisambiguatedExternalIdentifierNested
-                                          .all[0]
-                                      }}
-                                    </a>
-                                  </ng-container>
-                                  <ng-container
-                                    *ngIf="
-                                      orgDisambiguatedExternalIdentifierNested.preferred
-                                    "
-                                  >
-                                    (
-                                    <ng-container i18n="@@shared.preferred">
-                                      preferred
-                                    </ng-container>
-                                    )
-                                  </ng-container>
-                                </span>
-                              </div>
+                              <app-org-identifier
+                                [orgDisambiguated]="organizationDisambiguatedNested"
+                              ></app-org-identifier>
                             </div>
                           </ng-container>
                         </app-panel-element>

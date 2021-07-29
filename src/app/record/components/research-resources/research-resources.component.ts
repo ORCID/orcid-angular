@@ -228,10 +228,6 @@ export class ResearchResourcesComponent implements OnInit {
     return response
   }
 
-  getLink(type: string, value: string) {
-    return this._organizationsService.getLink(type, value)
-  }
-
   isUrl(value: string) {
     return RegExp(URL_REGEXP).test(value)
   }
