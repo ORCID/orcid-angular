@@ -153,7 +153,9 @@
                     "
                   >
                     {{ organizationDisambiguated.value }}
-                    <app-org-identifier [orgDisambiguated]="organizationDisambiguated"></app-org-identifier>
+                    <app-org-identifier
+                      [orgDisambiguated]="organizationDisambiguated"
+                    ></app-org-identifier>
                     <div>
                       {{ researchDetail.translatedTitle }}
                     </div>
@@ -386,7 +388,9 @@
                             >
                               {{ organizationDisambiguatedNested.value }}
                               <app-org-identifier
-                                [orgDisambiguated]="organizationDisambiguatedNested"
+                                [orgDisambiguated]="
+                                  organizationDisambiguatedNested
+                                "
                               ></app-org-identifier>
                             </div>
                           </ng-container>

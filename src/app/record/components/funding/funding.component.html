@@ -81,7 +81,9 @@
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-  <app-org-identifier [orgDisambiguated]="orgDisambiguated"></app-org-identifier>
+  <app-org-identifier
+    [orgDisambiguated]="orgDisambiguated"
+  ></app-org-identifier>
   <!-- FUNDING SUBTYPE -->
   <ng-container
     class="margin-top-1"

@@ -6,18 +6,14 @@ import { URL_REGEXP } from '../../../constants'
 @Component({
   selector: 'app-org-identifier',
   templateUrl: './org-identifier.component.html',
-  styleUrls: ['./org-identifier.component.scss']
+  styleUrls: ['./org-identifier.component.scss'],
 })
 export class OrgIdentifierComponent implements OnInit {
   @Input() orgDisambiguated: OrgDisambiguated
 
-  constructor(
-    private _organizationsService: OrganizationsService,
-  ) { }
+  constructor(private _organizationsService: OrganizationsService) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   getLink(type: string, value: string) {
     return this._organizationsService.getLink(type, value)

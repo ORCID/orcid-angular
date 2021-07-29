@@ -7,31 +7,27 @@
       <div>
         {{ orgDisambiguated?.sourceType
         }}<ng-container
-        *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
-      >:</ng-container
-      >
+          *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
+          >:</ng-container
+        >
         <a
           class="underline"
           target="_blank"
           rel="noopener noreferrer"
           href="{{
-            getLink(
-              orgDisambiguated.sourceType,
-              orgDisambiguated.sourceId
-            )
+            getLink(orgDisambiguated.sourceType, orgDisambiguated.sourceId)
           }}"
-          *ngIf="getLink(
-              orgDisambiguated.sourceType,
-              orgDisambiguated.sourceId
-            )"
+          *ngIf="
+            getLink(orgDisambiguated.sourceType, orgDisambiguated.sourceId)
+          "
         >
           {{ orgDisambiguated.sourceId }}
         </a>
         <ng-container
-          *ngIf="!getLink(
-              orgDisambiguated.sourceType,
-              orgDisambiguated.sourceId
-            )">
+          *ngIf="
+            !getLink(orgDisambiguated.sourceType, orgDisambiguated.sourceId)
+          "
+        >
           {{ orgDisambiguated?.sourceId }}
         </ng-container>
       </div>
@@ -53,23 +49,26 @@
     </div>
   </app-display-attribute>
 
-  <app-display-attribute *ngIf="orgDisambiguated?.orgDisambiguatedExternalIdentifiers?.length > 0">
+  <app-display-attribute
+    *ngIf="orgDisambiguated?.orgDisambiguatedExternalIdentifiers?.length > 0"
+  >
     <h3 class="orc-font-body-small">
       <ng-container i18n="@@shared.otherOrganization"
-      >Other organization identifiers provided by</ng-container
+        >Other organization identifiers provided by</ng-container
       >
       {{ orgDisambiguated.sourceType | uppercase }}
     </h3>
     <div
       *ngFor="
-        let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers; index as i
+        let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers;
+        index as i
       "
       class="padding-level-3"
     >
       {{ org.identifierType }}:
       <ng-container *ngIf="org.preferred && !isUrl(org.preferred)">{{
         org.preferred
-        }}</ng-container>
+      }}</ng-container>
       <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
         <a
           class="underline"
@@ -80,9 +79,7 @@
           {{ org.preferred }}
         </a>
       </ng-container>
-      <ng-container
-        *ngIf="org.preferred"
-      >
+      <ng-container *ngIf="org.preferred">
         <span> (</span>
         <span i18n="@@shared.preferred"> preferred </span>
         <span>)</span>
@@ -92,11 +89,12 @@
           org.preferred &&
           orgDisambiguated.orgDisambiguatedExternalIdentifiers.length - 1 !== i
         "
-      >, </span>
+        >,
+      </span>
       <ng-container *ngFor="let id of org.all; index as j">
         <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
           id
-          }}</ng-container>
+        }}</ng-container>
         <ng-container *ngIf="id != org.preferred && isUrl(id)">
           <a
             class="underline"
@@ -107,9 +105,7 @@
             {{ id }}
           </a>
         </ng-container>
-        <span
-          *ngIf="id != org.preferred && org.all.length - 1 !== j"
-        >, </span>
+        <span *ngIf="id != org.preferred && org.all.length - 1 !== j">, </span>
       </ng-container>
     </div>
   </app-display-attribute>
