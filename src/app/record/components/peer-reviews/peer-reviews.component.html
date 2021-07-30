@@ -178,21 +178,21 @@
                         </div>
                         <p>
                           {{
-                            getPeerReview(peerReview.putCode.value)?.orgName
+                            peerReview?.orgName
                               ?.value
                           }}, ({{
-                            getPeerReview(peerReview.putCode.value)?.city
+                            peerReview?.city
                               ?.value
                           }}<ng-container
                             *ngIf="
-                              getPeerReview(peerReview.putCode.value)?.city
+                              peerReview?.city
                                 ?.value &&
-                              getPeerReview(peerReview.putCode.value)?.country
+                              peerReview?.country
                                 ?.value
                             "
                             >,</ng-container
                           >{{
-                            getPeerReview(peerReview.putCode.value)?.country
+                            peerReview?.country
                               ?.value
                           }})
                         </p>
