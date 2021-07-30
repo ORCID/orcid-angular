@@ -56,7 +56,7 @@ import { ResearchResourceStackComponent } from './components/research-resource-s
 import { ResearchResourceComponent } from './components/research-resource/research-resource.component'
 import { PeerReviewStackComponent } from './components/peer-review-stack/peer-review-stack.component'
 import { PeerReviewComponent } from './components/peer-review/peer-review.component'
-import { ModalCombineWorksComponent } from './components/work/modals/modal-combine-works/modal-combine-works.component';
+import { ModalCombineWorksComponent } from './components/work/modals/modal-combine-works/modal-combine-works.component'
 import { ModalDeleteWorksComponent } from './components/work/modals/modal-delete-works/modal-delete-works.component'
 
 @NgModule({
