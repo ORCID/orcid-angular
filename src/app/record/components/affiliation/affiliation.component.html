@@ -53,8 +53,12 @@
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-  <!-- URL -->
+  <!-- ORGANIZATION DISAMBIGUATED IDS-->
+  <app-org-identifier
+    [orgDisambiguated]="orgDisambiguated"
+  ></app-org-identifier>
 
+  <!-- URL -->
   <app-display-attribute *ngIf="affiliation?.url?.value">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
 
@@ -73,83 +77,6 @@
       </ng-container>
     </div>
   </app-display-attribute>
-
-  <!-- ORGANIZATION DISAMBIGUATED IDS-->
-  <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
-    <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@shared.organizationIdentifiers">
-        Organization identifiers
-      </h3>
-      <div>
-        <div>
-          {{ orgDisambiguated?.sourceType
-          }}<ng-container
-            *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
-            >:</ng-container
-          >
-          <ng-container> {{ orgDisambiguated?.sourceId }}</ng-container>
-        </div>
-        <div>
-          {{ orgDisambiguated?.value
-          }}<ng-container *ngIf="orgDisambiguated?.value">:</ng-container>
-          {{ orgDisambiguated | cityRegionCountry }}
-        </div>
-
-        <a
-          class="underline"
-          target="_blank"
-          rel="noreferrer noopener"
-          *ngIf="orgDisambiguated?.url"
-          [href]="orgDisambiguated?.url"
-        >
-          {{ orgDisambiguated?.url }}
-        </a>
-      </div>
-    </app-display-attribute>
-
-    <app-display-attribute>
-      <h3 class="orc-font-body-small">
-        <ng-container i18n="@@shared.otherOrganization"
-          >Other organization identifiers provided by</ng-container
-        >
-        {{ orgDisambiguated.sourceType | uppercase }}
-      </h3>
-      <div
-        *ngFor="let org of orgDisambiguated.orgDisambiguatedExternalIdentifiers"
-        class="padding-level-3"
-      >
-        {{ org.identifierType }}:
-        <ng-container *ngIf="org.preferred && !isUrl(org.preferred)">{{
-          org.preferred
-        }}</ng-container>
-        <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
-          <a
-            class="underline"
-            target="_blank"
-            rel="noreferrer noopener"
-            href="{{ org.preferred }}"
-          >
-            {{ org.preferred }}
-          </a>
-        </ng-container>
-        <ng-container *ngFor="let id of org.all">
-          <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
-            id
-          }}</ng-container>
-          <ng-container *ngIf="id != org.preferred && isUrl(id)">
-            <a
-              class="underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="{{ id }}"
-            >
-              {{ id }}
-            </a>
-          </ng-container>
-        </ng-container>
-      </div>
-    </app-display-attribute>
-  </ng-container>
 
   <!-- ADDED DATE-->
   <app-display-attribute>

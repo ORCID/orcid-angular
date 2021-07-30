@@ -81,37 +81,9 @@
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-  <!-- ORGANIZATION DISAMBIGUATED IDS-->
-  <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
-    <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@shared.organizationIdentifiers">
-        Organization identifiers
-      </h3>
-      <div>
-        <div>
-          {{ orgDisambiguated?.sourceType
-          }}<ng-container
-            *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
-            >:
-            <a
-              class="underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              *ngIf="orgDisambiguated?.sourceId"
-              [href]="orgDisambiguated?.sourceId"
-              >{{ orgDisambiguated?.sourceId }}</a
-            >
-          </ng-container>
-        </div>
-        <div>
-          {{ orgDisambiguated?.value
-          }}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
-            >: {{ orgDisambiguated | cityRegionCountry }}</ng-container
-          >
-        </div>
-      </div>
-    </app-display-attribute>
-  </ng-container>
+  <app-org-identifier
+    [orgDisambiguated]="orgDisambiguated"
+  ></app-org-identifier>
   <!-- FUNDING SUBTYPE -->
   <ng-container
     class="margin-top-1"
