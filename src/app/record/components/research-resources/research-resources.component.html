@@ -177,7 +177,9 @@
                       Added
                     </h3>
                     <div>
-                      {{ researchDetail.createdDate | monthDayYearDateToString }}
+                      {{
+                        researchDetail.createdDate | monthDayYearDateToString
+                      }}
                     </div>
                     <ng-container *ngIf="researchDetail.lastModifiedDate">
                       <h3
@@ -187,7 +189,9 @@
                         Last modified
                       </h3>
                       <div>
-                        {{ researchDetail.lastModified | monthDayYearDateToString }}
+                        {{
+                          researchDetail.lastModified | monthDayYearDateToString
+                        }}
                       </div>
                     </ng-container>
                   </ng-container>
