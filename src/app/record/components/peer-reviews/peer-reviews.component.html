@@ -178,24 +178,15 @@
                           </b>
                         </div>
                         <p>
-                          {{
-                            peerReview?.orgName
-                              ?.value
-                          }}, ({{
-                            peerReview?.city
-                              ?.value
+                          {{ peerReview?.orgName?.value }}, ({{
+                            peerReview?.city?.value
                           }}<ng-container
                             *ngIf="
-                              peerReview?.city
-                                ?.value &&
-                              peerReview?.country
-                                ?.value
+                              peerReview?.city?.value &&
+                              peerReview?.country?.value
                             "
                             >,</ng-container
-                          >{{
-                            peerReview?.country
-                              ?.value
-                          }})
+                          >{{ peerReview?.country?.value }})
                         </p>
                       </div>
                       <div
