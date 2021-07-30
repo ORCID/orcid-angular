@@ -181,17 +181,17 @@
                           {{
                             peerReview?.orgName
                               ?.value
-                          }}, ({{
+                          }} ({{
                             peerReview?.city
                               ?.value
-                          }}<ng-container
+                          }}<span
                             *ngIf="
                               peerReview?.city
                                 ?.value &&
                               peerReview?.country
                                 ?.value
                             "
-                            >,</ng-container
+                            >, </span
                           >{{
                             peerReview?.country
                               ?.value
@@ -220,62 +220,10 @@
                           <div *ngIf="peerReview?.subjectContainerName?.value">
                             {{ peerReview.subjectContainerName.value }}
                           </div>
-                          <div>
-                            <i
-                              *ngIf="
-                                peerReview?.subjectExternalIdentifier
-                                  ?.relationship?.value === 'part-of'
-                              "
-                              i18n="@@shared.partOf"
-                            >
-                              Part of
-                            </i>
-                            <i
-                              *ngIf="
-                                peerReview?.subjectExternalIdentifier
-                                  ?.relationship?.value === 'funded-by'
-                              "
-                              i18n="@@shared.fundedBy"
-                            >
-                              Funded by
-                            </i>
-                            {{
-                              peerReview?.subjectExternalIdentifier
-                                ?.externalIdentifierType?.value | uppercase
-                            }}
-                            :
-                            <ng-container
-                              *ngIf="
-                                peerReview?.subjectExternalIdentifier.url?.value
-                              "
-                            >
-                              <a
-                                class="underline"
-                                target="_blank"
-                                rel="noreferrer noopener"
-                                href="{{
-                                  peerReview?.subjectExternalIdentifier.url
-                                    ?.value
-                                }}"
-                              >
-                                {{
-                                  peerReview?.subjectExternalIdentifier
-                                    .externalIdentifierId?.value
-                                }}
-                              </a>
-                            </ng-container>
-                            <ng-container
-                              *ngIf="
-                                !peerReview?.subjectExternalIdentifier.url
-                                  ?.value
-                              "
-                            >
-                              {{
-                                peerReview?.subjectExternalIdentifier
-                                  .externalIdentifierId?.value
-                              }}
-                            </ng-container>
-                          </div>
+                          <app-display-external-ids
+                            [externalIdentifier]="peerReview?.subjectExternalIdentifier"
+                            [noBoldTitle]="true"
+                          ></app-display-external-ids>
                         </div>
                       </div>
                       <div class="details">
