@@ -240,8 +240,7 @@ export class RecordService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        catchError(() => of({} as Preferences)),
-
+        catchError(() => of({} as Preferences))
       )
   }
 
