@@ -40,7 +40,8 @@
             <div class="description">
               <p>
                 <span class="capitalize">{{ peerReview.type }}</span
-                >, {{ peerReview.description }}
+                ><ng-container *ngIf="peerReview.description">, </ng-container>
+                {{ peerReview.description }}
               </p>
               <ng-container *ngIf="peerReview.groupType">
                 <p>
@@ -155,9 +156,7 @@
                   >
                     <app-panel-element
                       [hideVisibility]="false"
-                      *ngIf="
-                        getPeerReview(peerReview.putCode.value) as peerReview
-                      "
+                      *ngIf="getPeerReview(peerReview.putCode.value) as aasdasd"
                     >
                       <div class="details">
                         <div>
