@@ -40,7 +40,8 @@
             <div class="description">
               <p>
                 <span class="capitalize">{{ peerReview.type }}</span
-                >, {{ peerReview.description }}
+                ><ng-container *ngIf="peerReview.description">, </ng-container>
+                {{ peerReview.description }}
               </p>
               <ng-container *ngIf="peerReview.groupType">
                 <p>
@@ -200,9 +201,10 @@
                       <div
                         class="details"
                         *ngIf="
-                          peerReview?.subjectName?.value &&
-                          peerReview?.subjectType?.value ||
-                          peerReview?.subjectExternalIdentifier?.externalIdentifierType?.value
+                          (peerReview?.subjectName?.value &&
+                            peerReview?.subjectType?.value) ||
+                          peerReview?.subjectExternalIdentifier
+                            ?.externalIdentifierType?.value
                         "
                       >
                         <b i18n="@@peerReview.reviewSubject">
@@ -215,23 +217,14 @@
                           <ng-container *ngIf="peerReview?.subjectType?.value">
                             ({{ peerReview.subjectType.value }})
                           </ng-container>
-                          <div
-                            *ngIf="
-                              peerReview
-                                ?.subjectContainerName?.value
-                            "
-                          >
-                            {{
-                              peerReview
-                                .subjectContainerName.value
-                            }}
+                          <div *ngIf="peerReview?.subjectContainerName?.value">
+                            {{ peerReview.subjectContainerName.value }}
                           </div>
                           <div>
                             <i
                               *ngIf="
-                                peerReview
-                                  ?.subjectExternalIdentifier?.relationship
-                                  ?.value === 'part-of'
+                                peerReview?.subjectExternalIdentifier
+                                  ?.relationship?.value === 'part-of'
                               "
                               i18n="@@shared.partOf"
                             >
@@ -239,51 +232,47 @@
                             </i>
                             <i
                               *ngIf="
-                                peerReview
-                                  ?.subjectExternalIdentifier?.relationship
-                                  ?.value === 'funded-by'
+                                peerReview?.subjectExternalIdentifier
+                                  ?.relationship?.value === 'funded-by'
                               "
                               i18n="@@shared.fundedBy"
                             >
                               Funded by
                             </i>
                             {{
-                              peerReview
-                                ?.subjectExternalIdentifier
+                              peerReview?.subjectExternalIdentifier
                                 ?.externalIdentifierType?.value | uppercase
                             }}
                             :
                             <ng-container
-                              *ngIf="peerReview
-                                ?.subjectExternalIdentifier.url
-                                ?.value"
+                              *ngIf="
+                                peerReview?.subjectExternalIdentifier.url?.value
+                              "
                             >
                               <a
                                 class="underline"
                                 target="_blank"
                                 rel="noreferrer noopener"
                                 href="{{
-                                  peerReview
-                                    ?.subjectExternalIdentifier.url
+                                  peerReview?.subjectExternalIdentifier.url
                                     ?.value
                                 }}"
                               >
                                 {{
-                                  peerReview
-                                    ?.subjectExternalIdentifier.externalIdentifierId
-                                    ?.value
+                                  peerReview?.subjectExternalIdentifier
+                                    .externalIdentifierId?.value
                                 }}
                               </a>
                             </ng-container>
                             <ng-container
-                              *ngIf="!peerReview
-                                  ?.subjectExternalIdentifier.url
-                                  ?.value"
+                              *ngIf="
+                                !peerReview?.subjectExternalIdentifier.url
+                                  ?.value
+                              "
                             >
                               {{
-                                peerReview
-                                  ?.subjectExternalIdentifier.externalIdentifierId
-                                  ?.value
+                                peerReview?.subjectExternalIdentifier
+                                  .externalIdentifierId?.value
                               }}
                             </ng-container>
                           </div>

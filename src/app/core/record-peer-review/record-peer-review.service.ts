@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment'
@@ -37,6 +37,7 @@ export class RecordPeerReviewService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
+          catchError((error) => of([])),
           tap((data) => {
             this.lastEmittedValue = data
             this.$peer.next(data)
