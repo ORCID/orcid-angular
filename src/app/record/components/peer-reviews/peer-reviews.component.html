@@ -40,7 +40,8 @@
             <div class="description">
               <p>
                 <span class="capitalize">{{ peerReview.type }}</span
-                >, {{ peerReview.description }}
+                ><ng-container *ngIf="peerReview.description">, </ng-container>
+                {{ peerReview.description }}
               </p>
               <ng-container *ngIf="peerReview.groupType">
                 <p>
