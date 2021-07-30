@@ -178,25 +178,15 @@
                           </b>
                         </div>
                         <p>
-                          {{
-                            peerReview?.orgName
-                              ?.value
-                          }} ({{
-                            peerReview?.city
-                              ?.value
+                          {{ peerReview?.orgName?.value }} ({{
+                            peerReview?.city?.value
                           }}<span
                             *ngIf="
-                              peerReview?.city
-                                ?.value &&
-                              peerReview?.country
-                                ?.value
+                              peerReview?.city?.value &&
+                              peerReview?.country?.value
                             "
+                            >{{ peerReview?.country?.value }}) >, </span
                           >{{ peerReview?.country?.value }})
-                            >, </span
-                          >{{
-                            peerReview?.country
-                              ?.value
-                          }})
                         </p>
                       </div>
                       <div
@@ -222,7 +212,9 @@
                             {{ peerReview.subjectContainerName.value }}
                           </div>
                           <app-display-external-ids
-                            [externalIdentifier]="peerReview?.subjectExternalIdentifier"
+                            [externalIdentifier]="
+                              peerReview?.subjectExternalIdentifier
+                            "
                             [noBoldTitle]="true"
                           ></app-display-external-ids>
                         </div>
