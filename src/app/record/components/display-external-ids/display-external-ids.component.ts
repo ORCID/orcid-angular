@@ -15,8 +15,7 @@ export class DisplayExternalIdsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.externalIdentifier) {
-      this.externalIdentifiers = []
-      this.externalIdentifiers.push(this.externalIdentifier)
+      this.externalIdentifiers = Array.of(this.externalIdentifier)
     }
   }
 }
