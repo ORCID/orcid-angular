@@ -335,31 +335,6 @@
                               i18n="@@shared.showMoreDetail"
                               id="show-more-item-button"
                             >
-<<<<<<< HEAD
-                              Show more detail
-                            </a>
-                            <a
-                              class="underline"
-                              *ngIf="item.showDetails"
-                              (click)="collapse(item)"
-                              i18n="@@shared.showLessDetail"
-                              id="show-less-item-button"
-                            >
-                              Show less detail
-                            </a>
-                          </span>
-                        </div>
-                        <app-panel-data
-                          [borderBottom]="true"
-                          *ngIf="item.showDetails"
-                        >
-                          <app-panel-element [hideVisibility]="false">
-                            <div class="description">
-                              <div
-                                *ngFor="
-                                  let itemExternalIdentifier of item.externalIdentifiers
-                                "
-=======
                               {{
                                 itemExternalIdentifier.externalIdentifierId
                                   .value
@@ -380,7 +355,6 @@
                                   itemExternalIdentifier.externalIdentifierId
                                     .value
                                 }}"
->>>>>>> development
                               >
                                 <i
                                   i18n="@@shared.partOf"
@@ -404,87 +378,6 @@
                                   itemExternalIdentifier.externalIdentifierType
                                     .value + ':' | uppercase
                                 }}
-<<<<<<< HEAD
-                                <ng-container
-                                  *ngIf="
-                                    !isUrl(
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    )
-                                  "
-                                >
-                                  {{
-                                    itemExternalIdentifier.externalIdentifierId
-                                      .value
-                                  }}
-                                </ng-container>
-                                <ng-container
-                                  *ngIf="
-                                    isUrl(
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    )
-                                  "
-                                >
-                                  <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href="{{
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    }}"
-                                  >
-                                    {{
-                                      itemExternalIdentifier
-                                        .externalIdentifierId.value
-                                    }}
-                                  </a>
-                                </ng-container>
-                              </div>
-                              <div *ngIf="item.url">
-                                <h3
-                                  class="orc-font-body-small"
-                                  i18n="@@shared.url"
-                                >
-                                  URL
-                                </h3>
-                                <ng-container *ngIf="!isUrl(item.url)">
-                                  {{ item.url }}
-                                </ng-container>
-                                <ng-container *ngIf="isUrl(item.url)">
-                                  <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href="{{ item.url }}"
-                                  >
-                                    {{ item.url }}
-                                  </a>
-                                </ng-container>
-                              </div>
-                            </div>
-                            <ng-container *ngFor="let itemHost of item.hosts">
-                              <div
-                                class="description"
-                                *ngIf="
-                                  getOrganizationDisambiguated(
-                                    itemHost
-                                  ) as organizationDisambiguatedNested
-                                "
-                              >
-                                {{ organizationDisambiguatedNested.value }}
-                                <app-org-identifier
-                                  [orgDisambiguated]="
-                                    organizationDisambiguatedNested
-                                  "
-                                ></app-org-identifier>
-                              </div>
-                            </ng-container>
-                          </app-panel-element>
-                        </app-panel-data>
-                      </app-panel>
-                    </div>
-                  </div>
-=======
                               </a>
                             </ng-container>
                           </div>
@@ -526,7 +419,6 @@
                       </app-panel-element>
                     </app-panel-data>
                   </app-panel>
->>>>>>> development
                 </div>
               </div>
             </app-panel-element>
