@@ -23,3 +23,13 @@ h3 {
     width: 100%;
   }
 }
+
+.columns-8 :host,
+.columns-4 :host {
+  .panel-data-container {
+    flex-direction: column;
+    .data-content {
+      margin-bottom: 12px;
+    }
+  }
+}

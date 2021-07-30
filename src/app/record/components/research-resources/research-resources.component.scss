@@ -50,6 +50,19 @@ app-panel-data {
   }
 }
 
+.columns-8 :host,
+.columns-4 :host {
+  app-panel-data {
+    .description-container {
+      flex-direction: column;
+      .buttons-container {
+        padding: 16px;
+        padding-top: 0;
+      }
+    }
+  }
+}
+
 .description {
   padding: 16px;
 }

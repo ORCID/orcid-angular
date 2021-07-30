@@ -211,192 +211,198 @@
                       </div>
                     </ng-container>
                   </ng-container>
-                  <div *ngFor="let item of researchDetail.items; index as i">
-                    <app-panel
-                      [elements]="item"
-                      [type]="'top-bar'"
-                      [editable]="false"
-                      [customControls]="true"
-                      class="top-bar"
-                      [attr.id]="'research-detail-item-' + i"
-                    >
-                      <div header>
-                        <div>
-                          <span
-                            class="orc-font-small-print resourceType"
-                            [ngClass]="{
-                              infrastructures:
-                                item.resourceType.toLocaleLowerCase() ===
-                                'infrastructures',
-                              equipment:
-                                item.resourceType.toLocaleLowerCase() ===
-                                'equipment',
-                              collections:
-                                item.resourceType.toLocaleLowerCase() ===
-                                'collections',
-                              services:
-                                item.resourceType.toLocaleLowerCase() ===
-                                'services',
-                              mobile: isMobile
-                            }"
-                          >
-                            <span class="dot"></span>
-                            <strong>
-                              {{ item.resourceType | uppercase }}
+                  <div>
+                    <div *ngFor="let item of researchDetail.items; index as i">
+                      <app-panel
+                        [elements]="item"
+                        [type]="'top-bar'"
+                        [editable]="false"
+                        [customControls]="true"
+                        class="top-bar"
+                        [attr.id]="'research-detail-item-' + i"
+                        [stackedHeader]="!platform.columns12"
+                      >
+                        <div header>
+                          <div>
+                            <span
+                              class="orc-font-small-print resourceType"
+                              [ngClass]="{
+                                infrastructures:
+                                  item.resourceType.toLocaleLowerCase() ===
+                                  'infrastructures',
+                                equipment:
+                                  item.resourceType.toLocaleLowerCase() ===
+                                  'equipment',
+                                collections:
+                                  item.resourceType.toLocaleLowerCase() ===
+                                  'collections',
+                                services:
+                                  item.resourceType.toLocaleLowerCase() ===
+                                  'services',
+                                mobile: isMobile
+                              }"
+                            >
+                              <span class="dot"></span>
+                              <strong>
+                                {{ item.resourceType | uppercase }}
+                              </strong>
+                            </span>
+                            <strong
+                              class="orc-font-body-small"
+                              *ngIf="!isMobile"
+                            >
+                              {{ item.resourceName }}
                             </strong>
-                          </span>
-                          <strong class="orc-font-body-small" *ngIf="!isMobile">
+                          </div>
+                          <strong class="orc-font-body-small" *ngIf="isMobile">
                             {{ item.resourceName }}
                           </strong>
                         </div>
-                        <strong class="orc-font-body-small" *ngIf="isMobile">
-                          {{ item.resourceName }}
-                        </strong>
-                      </div>
-                      <div custom-controls>
-                        <span
-                          class="show"
-                          [ngClass]="{
-                            'orc-font-small-print': isMobile,
-                            'orc-font-body-small': !isMobile
-                          }"
-                        >
-                          <a
-                            class="underline"
-                            *ngIf="!item.showDetails"
-                            (click)="
-                              getOrganizationDisambiguatedDetails(
-                                item,
-                                item.hosts[0].disambiguationSource,
-                                item.hosts[0].orgDisambiguatedId
-                              )
-                            "
-                            i18n="@@shared.showMoreDetail"
-                            id="show-more-item-button"
+                        <div custom-controls>
+                          <span
+                            class="show"
+                            [ngClass]="{
+                              'orc-font-small-print': isMobile,
+                              'orc-font-body-small': !isMobile
+                            }"
                           >
-                            Show more detail
-                          </a>
-                          <a
-                            class="underline"
-                            *ngIf="item.showDetails"
-                            (click)="collapse(item)"
-                            i18n="@@shared.showLessDetail"
-                            id="show-less-item-button"
-                          >
-                            Show less detail
-                          </a>
-                        </span>
-                      </div>
-                      <app-panel-data
-                        [borderBottom]="true"
-                        *ngIf="item.showDetails"
-                      >
-                        <app-panel-element [hideVisibility]="false">
-                          <div class="description">
-                            <div
-                              *ngFor="
-                                let itemExternalIdentifier of item.externalIdentifiers
+                            <a
+                              class="underline"
+                              *ngIf="!item.showDetails"
+                              (click)="
+                                getOrganizationDisambiguatedDetails(
+                                  item,
+                                  item.hosts[0].disambiguationSource,
+                                  item.hosts[0].orgDisambiguatedId
+                                )
                               "
+                              i18n="@@shared.showMoreDetail"
+                              id="show-more-item-button"
                             >
-                              <i
-                                i18n="@@shared.partOf"
-                                *ngIf="
-                                  itemExternalIdentifier?.relationship
-                                    ?.value === 'part-of'
+                              Show more detail
+                            </a>
+                            <a
+                              class="underline"
+                              *ngIf="item.showDetails"
+                              (click)="collapse(item)"
+                              i18n="@@shared.showLessDetail"
+                              id="show-less-item-button"
+                            >
+                              Show less detail
+                            </a>
+                          </span>
+                        </div>
+                        <app-panel-data
+                          [borderBottom]="true"
+                          *ngIf="item.showDetails"
+                        >
+                          <app-panel-element [hideVisibility]="false">
+                            <div class="description">
+                              <div
+                                *ngFor="
+                                  let itemExternalIdentifier of item.externalIdentifiers
                                 "
                               >
-                                Part of
-                              </i>
-                              <i
-                                i18n="@@shared.fundedBy"
-                                *ngIf="
-                                  itemExternalIdentifier?.relationship
-                                    ?.value === 'funded-by'
-                                "
-                              >
-                                Funded by
-                              </i>
-                              {{
-                                itemExternalIdentifier.externalIdentifierType
-                                  .value + ':' | uppercase
-                              }}
-                              <ng-container
-                                *ngIf="
-                                  !isUrl(
-                                    itemExternalIdentifier.externalIdentifierId
-                                      .value
-                                  )
-                                "
-                              >
+                                <i
+                                  i18n="@@shared.partOf"
+                                  *ngIf="
+                                    itemExternalIdentifier?.relationship
+                                      ?.value === 'part-of'
+                                  "
+                                >
+                                  Part of
+                                </i>
+                                <i
+                                  i18n="@@shared.fundedBy"
+                                  *ngIf="
+                                    itemExternalIdentifier?.relationship
+                                      ?.value === 'funded-by'
+                                  "
+                                >
+                                  Funded by
+                                </i>
                                 {{
-                                  itemExternalIdentifier.externalIdentifierId
-                                    .value
+                                  itemExternalIdentifier.externalIdentifierType
+                                    .value + ':' | uppercase
                                 }}
-                              </ng-container>
-                              <ng-container
-                                *ngIf="
-                                  isUrl(
-                                    itemExternalIdentifier.externalIdentifierId
-                                      .value
-                                  )
-                                "
-                              >
-                                <a
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  href="{{
-                                    itemExternalIdentifier.externalIdentifierId
-                                      .value
-                                  }}"
+                                <ng-container
+                                  *ngIf="
+                                    !isUrl(
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
+                                    )
+                                  "
                                 >
                                   {{
                                     itemExternalIdentifier.externalIdentifierId
                                       .value
                                   }}
-                                </a>
-                              </ng-container>
-                            </div>
-                            <div *ngIf="item.url">
-                              <h3
-                                class="orc-font-body-small"
-                                i18n="@@shared.url"
-                              >
-                                URL
-                              </h3>
-                              <ng-container *ngIf="!isUrl(item.url)">
-                                {{ item.url }}
-                              </ng-container>
-                              <ng-container *ngIf="isUrl(item.url)">
-                                <a
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  href="{{ item.url }}"
+                                </ng-container>
+                                <ng-container
+                                  *ngIf="
+                                    isUrl(
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
+                                    )
+                                  "
                                 >
+                                  <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="{{
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
+                                    }}"
+                                  >
+                                    {{
+                                      itemExternalIdentifier
+                                        .externalIdentifierId.value
+                                    }}
+                                  </a>
+                                </ng-container>
+                              </div>
+                              <div *ngIf="item.url">
+                                <h3
+                                  class="orc-font-body-small"
+                                  i18n="@@shared.url"
+                                >
+                                  URL
+                                </h3>
+                                <ng-container *ngIf="!isUrl(item.url)">
                                   {{ item.url }}
-                                </a>
-                              </ng-container>
+                                </ng-container>
+                                <ng-container *ngIf="isUrl(item.url)">
+                                  <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="{{ item.url }}"
+                                  >
+                                    {{ item.url }}
+                                  </a>
+                                </ng-container>
+                              </div>
                             </div>
-                          </div>
-                          <ng-container *ngFor="let itemHost of item.hosts">
-                            <div
-                              class="description"
-                              *ngIf="
-                                getOrganizationDisambiguated(
-                                  itemHost
-                                ) as organizationDisambiguatedNested
-                              "
-                            >
-                              {{ organizationDisambiguatedNested.value }}
-                              <app-org-identifier
-                                [orgDisambiguated]="
-                                  organizationDisambiguatedNested
+                            <ng-container *ngFor="let itemHost of item.hosts">
+                              <div
+                                class="description"
+                                *ngIf="
+                                  getOrganizationDisambiguated(
+                                    itemHost
+                                  ) as organizationDisambiguatedNested
                                 "
-                              ></app-org-identifier>
-                            </div>
-                          </ng-container>
-                        </app-panel-element>
-                      </app-panel-data>
-                    </app-panel>
+                              >
+                                {{ organizationDisambiguatedNested.value }}
+                                <app-org-identifier
+                                  [orgDisambiguated]="
+                                    organizationDisambiguatedNested
+                                  "
+                                ></app-org-identifier>
+                              </div>
+                            </ng-container>
+                          </app-panel-element>
+                        </app-panel-data>
+                      </app-panel>
+                    </div>
                   </div>
                 </div>
               </div>
