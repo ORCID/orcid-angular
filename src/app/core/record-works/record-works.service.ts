@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -73,6 +73,7 @@ export class RecordWorksService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of({ groups: [] } as WorksEndpoint)),
           map((data) => {
             data.pageSize = options.pageSize
             data.pageIndex = options.offset
