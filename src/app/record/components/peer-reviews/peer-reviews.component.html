@@ -202,7 +202,8 @@
                         class="details"
                         *ngIf="
                           peerReview?.subjectName?.value &&
-                          peerReview?.subjectType?.value
+                          peerReview?.subjectType?.value ||
+                          peerReview?.subjectExternalIdentifier?.externalIdentifierType?.value
                         "
                       >
                         <b i18n="@@peerReview.reviewSubject">
@@ -217,19 +218,19 @@
                           </ng-container>
                           <div
                             *ngIf="
-                              getPeerReview(peerReview.putCode.value)
+                              peerReview
                                 ?.subjectContainerName?.value
                             "
                           >
                             {{
-                              getPeerReview(peerReview.putCode.value)
+                              peerReview
                                 .subjectContainerName.value
                             }}
                           </div>
                           <div>
                             <i
                               *ngIf="
-                                getPeerReview(peerReview.putCode.value)
+                                peerReview
                                   ?.subjectExternalIdentifier?.relationship
                                   ?.value === 'part-of'
                               "
@@ -239,7 +240,7 @@
                             </i>
                             <i
                               *ngIf="
-                                getPeerReview(peerReview.putCode.value)
+                                peerReview
                                   ?.subjectExternalIdentifier?.relationship
                                   ?.value === 'funded-by'
                               "
@@ -248,16 +249,44 @@
                               Funded by
                             </i>
                             {{
-                              getPeerReview(peerReview.putCode.value)
+                              peerReview
                                 ?.subjectExternalIdentifier
                                 ?.externalIdentifierType?.value | uppercase
                             }}
                             :
-                            {{
-                              getPeerReview(peerReview.putCode.value)
-                                ?.subjectExternalIdentifier.externalIdentifierId
-                                ?.value
-                            }}
+                            <ng-container
+                              *ngIf="peerReview
+                                ?.subjectExternalIdentifier.url
+                                ?.value"
+                            >
+                              <a
+                                class="underline"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                href="{{
+                                  peerReview
+                                    ?.subjectExternalIdentifier.url
+                                    ?.value
+                                }}"
+                              >
+                                {{
+                                  peerReview
+                                    ?.subjectExternalIdentifier.externalIdentifierId
+                                    ?.value
+                                }}
+                              </a>
+                            </ng-container>
+                            <ng-container
+                              *ngIf="!peerReview
+                                  ?.subjectExternalIdentifier.url
+                                  ?.value"
+                            >
+                              {{
+                                peerReview
+                                  ?.subjectExternalIdentifier.externalIdentifierId
+                                  ?.value
+                              }}
+                            </ng-container>
                           </div>
                         </div>
                       </div>
