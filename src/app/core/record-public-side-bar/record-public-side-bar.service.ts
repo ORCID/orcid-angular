@@ -48,6 +48,7 @@ export class RecordPublicSideBarService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
+          catchError((error) => of({} as SideBarPublicUserRecord)),
           tap((value) => this.$SideBarPublicUserRecordSubject.next(value))
         )
     } else {

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -59,6 +59,10 @@ export class RecordPersonIdentifierService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() =>
+          of({ externalIdentifiers: [] } as PersonIdentifierEndpoint)
+        ),
+
         map((value: PersonIdentifierEndpoint) => {
           return value
         }),

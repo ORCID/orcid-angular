@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, first, map, retry, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
@@ -67,6 +67,8 @@ export class RecordResearchResourceService {
             (options.sortAsc != null ? options.sortAsc : false)
         )
         .pipe(
+          catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
           map((value) => {
             if (this.currentValue && !options.forceReload) {
               value.groups = value.groups.concat(this.currentValue.groups)
@@ -93,6 +95,8 @@ export class RecordResearchResourceService {
             (options.sortAsc != null ? options.sortAsc : true)
         )
         .pipe(
+          catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
           map((value) => {
             if (this.currentValue) {
               value.groups = value.groups.concat(this.currentValue.groups)

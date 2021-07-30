@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, switchMap, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -37,6 +37,7 @@ export class RecordFundingsService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of([])),
           tap((data) => {
             this.lastEmittedValue = data
             this.$fundings.next(data)
