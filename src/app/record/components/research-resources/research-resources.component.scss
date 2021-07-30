@@ -52,6 +52,9 @@ app-panel-data {
 
 .description {
   padding: 16px;
+  .host:first-child {
+    margin-bottom: 16px;
+  }
 }
 
 .resourceType {
