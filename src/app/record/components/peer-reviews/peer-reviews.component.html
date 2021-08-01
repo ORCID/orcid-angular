@@ -179,31 +179,24 @@
                           </b>
                         </div>
                         <p>
-                          {{
-                            getPeerReview(peerReview.putCode.value)?.orgName
-                              ?.value
-                          }}, ({{
-                            getPeerReview(peerReview.putCode.value)?.city
-                              ?.value
-                          }}<ng-container
+                          {{ peerReview?.orgName?.value }} ({{
+                            peerReview?.city?.value
+                          }}<span
                             *ngIf="
-                              getPeerReview(peerReview.putCode.value)?.city
-                                ?.value &&
-                              getPeerReview(peerReview.putCode.value)?.country
-                                ?.value
+                              peerReview?.city?.value &&
+                              peerReview?.country?.value
                             "
-                            >,</ng-container
-                          >{{
-                            getPeerReview(peerReview.putCode.value)?.country
-                              ?.value
-                          }})
+                            >, </span
+                          >{{ peerReview?.country?.value }})
                         </p>
                       </div>
                       <div
                         class="details"
                         *ngIf="
-                          peerReview?.subjectName?.value &&
-                          peerReview?.subjectType?.value
+                          (peerReview?.subjectName?.value &&
+                            peerReview?.subjectType?.value) ||
+                          peerReview?.subjectExternalIdentifier
+                            ?.externalIdentifierType?.value
                         "
                       >
                         <b i18n="@@peerReview.reviewSubject">
@@ -216,50 +209,15 @@
                           <ng-container *ngIf="peerReview?.subjectType?.value">
                             ({{ peerReview.subjectType.value }})
                           </ng-container>
-                          <div
-                            *ngIf="
-                              getPeerReview(peerReview.putCode.value)
-                                ?.subjectContainerName?.value
+                          <div *ngIf="peerReview?.subjectContainerName?.value">
+                            {{ peerReview.subjectContainerName.value }}
+                          </div>
+                          <app-display-external-ids
+                            [externalIdentifier]="
+                              peerReview?.subjectExternalIdentifier
                             "
-                          >
-                            {{
-                              getPeerReview(peerReview.putCode.value)
-                                .subjectContainerName.value
-                            }}
-                          </div>
-                          <div>
-                            <i
-                              *ngIf="
-                                getPeerReview(peerReview.putCode.value)
-                                  ?.subjectExternalIdentifier?.relationship
-                                  ?.value === 'part-of'
-                              "
-                              i18n="@@shared.partOf"
-                            >
-                              Part of
-                            </i>
-                            <i
-                              *ngIf="
-                                getPeerReview(peerReview.putCode.value)
-                                  ?.subjectExternalIdentifier?.relationship
-                                  ?.value === 'funded-by'
-                              "
-                              i18n="@@shared.fundedBy"
-                            >
-                              Funded by
-                            </i>
-                            {{
-                              getPeerReview(peerReview.putCode.value)
-                                ?.subjectExternalIdentifier
-                                ?.externalIdentifierType?.value | uppercase
-                            }}
-                            :
-                            {{
-                              getPeerReview(peerReview.putCode.value)
-                                ?.subjectExternalIdentifier.externalIdentifierId
-                                ?.value
-                            }}
-                          </div>
+                            [noBoldTitle]="true"
+                          ></app-display-external-ids>
                         </div>
                       </div>
                       <div class="details">
