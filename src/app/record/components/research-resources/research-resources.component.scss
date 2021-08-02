@@ -5,6 +5,20 @@
   box-sizing: border-box;
 }
 
+app-panel.display-the-stack {
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 2px;
+}
+
+app-panel:not(.last) {
+  -webkit-box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
+  -moz-box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
+  box-shadow: 0px 9px 5px 0px rgba(214, 214, 214, 1);
+  display: block;
+  position: relative;
+}
+
 h3 {
   margin-bottom: 0;
 }

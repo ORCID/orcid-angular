@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
@@ -19,6 +19,7 @@ import {
   ResearchResourcesEndpoint,
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
+import { Work, WorkGroup } from '../../../types/record-works.endpoint'
 
 @Component({
   selector: 'app-research-resources',
@@ -35,6 +36,7 @@ export class ResearchResourcesComponent implements OnInit {
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
+  displayTheStackClass = false
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -42,7 +44,7 @@ export class ResearchResourcesComponent implements OnInit {
   researchResources: ResearchResourcesEndpoint
   platform: PlatformInfo
   detailsResearchResources: {
-    putCode: number
+    putCode: string
     researchResource: ResearchResource
   }[] = []
   detailsOrgDisambiguated: {
@@ -50,6 +52,13 @@ export class ResearchResourcesComponent implements OnInit {
     orgDisambiguatedId: string
     orgDisambiguated: OrgDisambiguated
   }[] = []
+
+  stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
+  panelDetailsState: {
+    [key: string]: {
+      state: boolean
+    }
+  } = {}
 
   ngOrcidResearchResources = $localize`:@@researchResources.researchResources:Research resources`
   offset: number
@@ -91,13 +100,16 @@ export class ResearchResourcesComponent implements OnInit {
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.researchResources)) {
           this.researchResources = userRecord.researchResources
+          this.researchResources.groups.forEach((group) => {
+            this.setInitialStates(group)
+          })
           this.offset = userRecord.researchResources.offset
           this.total.emit(this.researchResources.groups.length)
         }
       })
   }
 
-  getDetails(researchResource: ResearchResource, putCode: number): void {
+  getDetails(researchResource: ResearchResource, putCode: string): void {
     if (this.isPublicRecord) {
       this._recordResearchResourceService
         .getPublicResearchResourceById(this.isPublicRecord, putCode)
@@ -169,7 +181,7 @@ export class ResearchResourcesComponent implements OnInit {
       })
   }
 
-  getResearchResource(putCode: number): ResearchResource {
+  getResearchResource(putCode: string): ResearchResource {
     if (this.detailsResearchResources.length === 0) {
       return null
     }
@@ -220,12 +232,10 @@ export class ResearchResourcesComponent implements OnInit {
     researchResource: ResearchResource,
     group: ResearchResourcesGroup
   ) {
-    const response =
-      researchResource && group.defaultResearchResource[0]
-        ? group[0].defaultResearchResource.putCode.value ===
-          researchResource.putCode.value
+     return researchResource && group.defaultResearchResource.putCode
+        ? group.defaultResearchResource.putCode ===
+          researchResource.putCode
         : false
-    return response
   }
 
   isUrl(value: string) {
@@ -238,5 +248,54 @@ export class ResearchResourcesComponent implements OnInit {
 
   expandedClicked(expanded: boolean) {
     this.expanded.emit({ type: 'research-resources', expanded })
+  }
+
+  makePrimaryCard(researchResource: ResearchResource) {
+    // TODO
+    console.warn(this.stackPanelsDisplay)
+  }
+
+  changeTopPanelOfTheStack(researchResource: ResearchResource) {
+    Object.keys(this.stackPanelsDisplay).forEach((key) => {
+      this.stackPanelsDisplay[key].topPanelOfTheStack = false
+    })
+    this.stackPanelsDisplay[researchResource.putCode].topPanelOfTheStack = true
+  }
+
+  /**
+   * Set the panelDetails and top of the stack card to default mode
+   */
+  private setInitialStates(
+    group: ResearchResourcesGroup,
+    force = false) {
+    group.researchResources.forEach((researchResource) => {
+      this.setDefaultPanelsDisplay(researchResource, group)
+      this.setDefaultPanelDetailsState(researchResource, force)
+    })
+  }
+
+  /**
+   * On start, hide the details for all the panels
+   */
+  private setDefaultPanelDetailsState(researchResource: ResearchResource, force = false) {
+    if (this.panelDetailsState[researchResource.putCode] === undefined || force) {
+      this.panelDetailsState[researchResource.putCode] = {
+        state: false,
+      }
+    }
+  }
+
+  /**
+   * On start, set the preferred source as the top panel of the stack
+   */
+  private setDefaultPanelsDisplay(
+    researchResource: ResearchResource,
+    group: ResearchResourcesGroup,
+    force = false) {
+    if (this.stackPanelsDisplay[researchResource.putCode] === undefined || force) {
+      this.stackPanelsDisplay[researchResource.putCode] = {
+        topPanelOfTheStack: this.isPreferred(researchResource, group),
+      }
+    }
   }
 }

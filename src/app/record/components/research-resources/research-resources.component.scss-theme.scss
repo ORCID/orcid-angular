@@ -8,6 +8,10 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
+  app-panel.display-the-stack {
+    border-color: mat-color($background, ui-background-darkest);
+  }
+
   app-panel-data {
     border-color: mat-color($background, ui-background) !important;
     background-color: map-get($background, card);
