@@ -9,13 +9,14 @@
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
   <app-panel
     [elements]="funding"
+    [editModalComponent]="modalFundingComponent"
     [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
     [ngClass]="{ last: last }"
     [visibility]="fundingStack.defaultFunding.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
     [putCode]="funding.putCode.value"
     *ngIf="isPreferred(funding) || displayTheStack"
-    type="main"
+    type="funding"
   >
     <h2 header class="orc-font-body">
       {{ funding.fundingTitle.title.value }}

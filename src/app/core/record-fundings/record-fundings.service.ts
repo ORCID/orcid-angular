@@ -142,4 +142,22 @@ export class RecordFundingsService {
         tap(() => this.getFundings({ forceReload: true }))
       )
   }
+
+  getFunding(): Observable<Funding> {
+    return this._http.get<Funding>(environment.API_WEB + `fundings/funding.json`).pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error))
+    )
+  }
+
+  save(funding: Funding) {
+    return this._http
+      .post<Funding>(environment.API_WEB + `fundings/funding.json`, funding)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getFundings({ forceReload: true }))
+      )
+  }
+
 }

@@ -11,6 +11,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
+import { ModalFundingComponent } from './modals/modal-funding/modal-funding.component'
 
 @Component({
   selector: 'app-fundings',
@@ -25,6 +26,8 @@ export class FundingStacksGroupsComponent implements OnInit {
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
+
+  modalFundingComponent = ModalFundingComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession

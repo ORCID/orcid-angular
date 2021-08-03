@@ -48,6 +48,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component'
+import { ModalFundingComponent } from './components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
+import { MatRadioModule } from '@angular/material/radio'
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import { OrgIdentifierComponent } from './components/org-identifier/org-identifi
     NotFoundComponent,
     ModalAffiliationsComponent,
     OrgIdentifierComponent,
+    ModalFundingComponent,
   ],
   imports: [
     CommonModule,
@@ -104,6 +107,7 @@ import { OrgIdentifierComponent } from './components/org-identifier/org-identifi
     TrustedIndividualsDropdownModule,
     MatPaginatorModule,
     MatAutocompleteModule,
+    MatRadioModule,
   ],
 })
 export class RecordModule {}

@@ -6,6 +6,8 @@ import { OrgDisambiguated } from 'src/app/types'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { first } from 'rxjs/operators'
 
+import { ModalFundingComponent } from '../funding-stacks-groups/modals/modal-funding/modal-funding.component'
+
 @Component({
   selector: 'app-funding-stack',
   templateUrl: './funding-stack.component.html',
@@ -45,6 +47,8 @@ export class FundingStackComponent implements OnInit {
       state: boolean
     }
   } = {}
+
+  modalFundingComponent = ModalFundingComponent
 
   constructor(
     private _fundingService: RecordFundingsService,

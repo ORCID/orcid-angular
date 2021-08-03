@@ -18,6 +18,10 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
 import { ShowingOfComponent } from './components/showing-of/showing-of.component'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
+import { RecordFundingRelationshipLabelPipe } from './pipes/record-funding-relationship-label/record-funding-relationship-label.pipe'
+import { RecordFundingRelationshipHintLabelPipe } from './pipes/record-funding-relationship-hint-label/record-funding-relationship-hint-label.pipe'
+import { RecordFundingTypeLabelPipe } from './pipes/record-funding-type-label/record-funding-type-label.pipe'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -35,6 +39,9 @@ import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
     ContributorsPipe,
     SafeHtmlPipe,
     ShowingOfComponent,
+    RecordFundingRelationshipLabelPipe,
+    RecordFundingRelationshipHintLabelPipe,
+    RecordFundingTypeLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -51,6 +58,9 @@ import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
     ContributorsPipe,
     SafeHtmlPipe,
     ShowingOfComponent,
+    RecordFundingRelationshipLabelPipe,
+    RecordFundingRelationshipHintLabelPipe,
+    RecordFundingTypeLabelPipe,
   ],
   providers: [], // Should not provide anything
 })
