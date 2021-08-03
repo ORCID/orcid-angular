@@ -44,7 +44,6 @@ export class SignInComponent implements OnInit {
   show2FA = false
   signInType = TypeSignIn.personal
   errorDescription: string
-  verifiedEmail: string
   emailVerified: boolean
   invalidVerifyUrl: boolean
 
@@ -73,17 +72,6 @@ export class SignInComponent implements OnInit {
 
         if (platform.queryParameters.emailVerified) {
           this.emailVerified = platform.queryParameters.emailVerified
-          if (
-            platform.queryParameters.emailVerified &&
-            platform.queryParameters.verifiedEmail
-          ) {
-            this.verifiedEmail = decodeURIComponent(
-              this.window.location.search.split('verifiedEmail=')[1]
-            )
-            if (this.verifiedEmail.includes(' ')) {
-              this.verifiedEmail = this.verifiedEmail.replace(' ', '+')
-            }
-          }
         }
 
         if (platform.queryParameters.invalidVerifyUrl) {
