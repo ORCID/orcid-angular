@@ -31,11 +31,12 @@ export interface ResearchResource extends AssertionBase {
   title: string
   translatedTitle: string
   translatedTitleLanguageCode: string
+  putCode: string
   showDetails: boolean
 }
 
 export interface ResearchResourcesGroup extends GroupBase {
-  defaultResearchResource: ResearchResource[]
+  defaultResearchResource: ResearchResource
   researchResources: ResearchResource[]
 }
 
@@ -44,4 +45,6 @@ export interface ResearchResourcesEndpoint {
   nextOffset: number
   totalGroups: number
   offset: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
+  pageIndex: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
+  pageSize: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
 }

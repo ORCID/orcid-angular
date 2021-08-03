@@ -1,0 +1,56 @@
+<ng-container
+  *ngFor="
+    let research of researchResourceStack.researchResources;
+    trackBy: trackByResearchResourceStack;
+    let i = index;
+    let last = last;
+  "
+>
+  <app-panel
+    class="top-bar"
+    [elements]="research"
+    [type]="'research-resources'"
+    [ngStyle]="{ 'z-index': researchResourceStack.researchResources.length - i }"
+    [ngClass]="{ last: last }"
+    [editable]="false"
+    [openState]="false"
+    [attr.id]="'panel-' + i"
+    [expandButtonsPosition]="'left'"
+    [putCode]="research.putCode"
+    [visibility]="researchResourceStack.activeVisibility"
+    [isPublicRecord]="isPublicRecord"
+    *ngIf="isPreferred(research) || displayTheStack"
+  >
+    <div header>
+      <b>
+        {{ research.title }}
+      </b>
+    </div>
+    <app-research-resource
+      *ngIf="stackPanelsDisplay[research.putCode].topPanelOfTheStack"
+      [isPublicRecord]="isPublicRecord"
+      [researchResource]="research"
+      [panelDetailsState]="panelDetailsState[research.putCode]"
+      (toggleDetails)="toggleDetails($event)"
+    >
+    </app-research-resource>
+    <app-panel-source
+      [isPreferred]="isPreferred(research)"
+      [sourceName]="research.sourceName || research.source"
+      [assertionOriginClientId]="research.assertionOriginClientId"
+      [assertionOriginName]="research.assertionOriginName"
+      [assertionOriginOrcid]="research.assertionOriginOrcid"
+      [stackLength]="researchResourceStack.researchResources.length"
+      [(displayTheStack)]="displayTheStack"
+      (makePrimary)="makePrimaryCard(research)"
+      [topPanelOfTheStackMode]="
+        stackPanelsDisplay[research.putCode].topPanelOfTheStack
+      "
+      [isPublicRecord]="isPublicRecord"
+      (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(research)"
+      [type]="'research-resources'"
+      [putCode]="research.putCode"
+    >
+    </app-panel-source>
+  </app-panel>
+</ng-container>

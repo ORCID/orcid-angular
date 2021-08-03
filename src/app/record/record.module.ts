@@ -30,7 +30,7 @@ import { DisplayAttributeComponent } from './components/display-attribute/displa
 import { FundingStacksGroupsComponent } from './components/funding-stacks-groups/funding-stacks-groups.component'
 import { FundingStackComponent } from './components/funding-stack/funding-stack.component'
 import { FundingComponent } from './components/funding/funding.component'
-import { ResearchResourcesComponent } from './components/research-resources/research-resources.component'
+import { ResearchResourceStacksGroupComponent } from './components/research-resource-stacks-group/research-resource-stacks-group.component'
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { WorkComponent } from './components/work/work.component'
@@ -47,7 +47,9 @@ import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dro
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
-import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component'
+import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component';
+import { ResearchResourceStackComponent } from './components/research-resource-stack/research-resource-stack.component';
+import { ResearchResourceComponent } from './components/research-resource/research-resource.component'
 
 @NgModule({
   declarations: [
@@ -66,7 +68,7 @@ import { OrgIdentifierComponent } from './components/org-identifier/org-identifi
     DisplayAttributeComponent,
     PeerReviewsComponent,
     ModalPeerReviewsComponent,
-    ResearchResourcesComponent,
+    ResearchResourceStacksGroupComponent,
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
@@ -76,6 +78,8 @@ import { OrgIdentifierComponent } from './components/org-identifier/org-identifi
     NotFoundComponent,
     ModalAffiliationsComponent,
     OrgIdentifierComponent,
+    ResearchResourceStackComponent,
+    ResearchResourceComponent,
   ],
   imports: [
     CommonModule,
