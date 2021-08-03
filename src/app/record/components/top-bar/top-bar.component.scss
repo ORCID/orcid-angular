@@ -25,7 +25,7 @@ app-panel {
 }
 
 app-top-bar-actions {
-  margin: 10px 0;
+  margin-top: 16px;
 }
 
 .orc-font-body {
@@ -111,6 +111,10 @@ app-top-bar-actions {
           display: block;
         }
 
+        p {
+          margin: 0;
+        }
+
         .other-name {
           margin-bottom: 10px;
         }
@@ -128,12 +132,4 @@ app-top-bar-actions {
       overflow-wrap: break-word;
     }
   }
-}
-
-.public-container.mobile {
-  margin-top: 2em;
-}
-
-.comma {
-  margin-right: 0.2em;
 }

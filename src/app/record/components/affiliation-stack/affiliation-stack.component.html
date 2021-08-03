@@ -13,6 +13,7 @@
     [type]="type"
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"
     [ngClass]="{ last: last }"
+    [putCode]="affiliation.putCode.value"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
     *ngIf="isPreferred(affiliation) || displayTheStack"
@@ -54,6 +55,8 @@
       "
       [isPublicRecord]="isPublicRecord"
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
+      [type]="type"
+      [putCode]="affiliation.putCode.value"
     >
     </app-panel-source>
   </app-panel>

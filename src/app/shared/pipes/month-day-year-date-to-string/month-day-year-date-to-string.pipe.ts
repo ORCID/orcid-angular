@@ -5,18 +5,21 @@ import { MonthDayYearDate } from 'src/app/types'
   name: 'monthDayYearDateToString',
 })
 export class MonthDayYearDateToStringPipe implements PipeTransform {
-  transform(value: MonthDayYearDate, args?: any): any {
-    return value
-      ? value.year
-        ? value.year.padStart(4, '0') + // Has a year to display
-          (value.month.padStart(2, '0')
-            ? '-' +
-              value.month.padStart(2, '0') + // Has a month to display
-              (value.day.padStart(2, '0')
-                ? '-' + value.day.padStart(2, '0') // Has a day to display
-                : '') // Has NO day to display
-            : '') // Has NO month to display
-        : '' // Has NO year to display
-      : ''
+  transform(value: MonthDayYearDate): string {
+    let dateString = ''
+
+    if (value?.year) {
+      dateString += value.year?.padStart(4, '0')
+    } else {
+      return ''
+    }
+    if (value?.month) {
+      dateString += '-' + value.month?.padStart(2, '0')
+    }
+
+    if (value?.day) {
+      dateString += '-' + value.day?.padStart(2, '0')
+    }
+    return dateString
   }
 }

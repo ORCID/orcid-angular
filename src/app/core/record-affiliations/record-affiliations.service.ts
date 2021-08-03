@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
@@ -15,17 +15,18 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordAffiliationsGroupingService } from '../record-affiliations-affiliations-grouping/record-affiliations-grouping.service'
 import { cloneDeep } from 'lodash'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { VisibilityStrings } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordAffiliationService {
   affiliationsSubject = new ReplaySubject<AffiliationUIGroup[]>(1)
+  lastEmittedValue: AffiliationUIGroup[]
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   })
-  lastEmittedValue: AffiliationUIGroup[]
 
   $affiliations: ReplaySubject<AffiliationUIGroup[]>
 
@@ -51,6 +52,7 @@ export class RecordAffiliationService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of([])),
         tap((value) => {
           this.lastEmittedValue = cloneDeep(value)
           this.$affiliations.next(value)
@@ -184,7 +186,37 @@ export class RecordAffiliationService {
       )
   }
 
-  update(value): Observable<AffiliationUIGroup[]> {
-    throw new Error('Method not implemented.')
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'affiliations/' +
+          putCode +
+          '/visibility/' +
+          visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getAffiliations({ forceReload: true }))
+      )
+  }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(
+        environment.API_WEB +
+          'affiliations/affiliation.json' +
+          '?id=' +
+          encodeURIComponent(putCode)
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getAffiliations({ forceReload: true }))
+      )
   }
 }

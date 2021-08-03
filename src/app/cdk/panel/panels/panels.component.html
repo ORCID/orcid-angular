@@ -12,27 +12,35 @@
       ></app-panel-expand-buttons>
 
       <div class="text-container">
-        <strong class="orc-font-body-large">
-          {{ title }}
-        </strong>
-        <ng-container>
-          <span *ngIf="currentAmount && total && currentAmount !== total"
+        <div class="orc-font-body-large clickable" (click)="collapse()">
+          <strong>
+            {{ title }}
+          </strong>
+          <span
+            *ngIf="currentAmount && total && currentAmount !== total"
+            class="clickable"
+            (click)="collapse()"
             >({{ currentAmount }}
             <ng-container i18n="@@shared.of">of</ng-container>
             {{ total }})</span
           >
-          <span *ngIf="(currentAmount && !total) || currentAmount === total">
+          <span
+            *ngIf="(currentAmount && !total) || currentAmount === total"
+            class="clickable"
+            (click)="collapse()"
+          >
             ({{ currentAmount }})
           </span>
           <span *ngIf="!currentAmount">(0)</span>
-        </ng-container>
+        </div>
+        <ng-container> </ng-container>
       </div>
     </div>
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
       <button
         *ngIf="
-          (!isPublicRecord && type === 'employment') || type === 'peer-review'
+          !isPublicRecord && (type === 'employment' || type === 'peer-review')
         "
         mat-icon-button
         class="orc-font-body-small add"

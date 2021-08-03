@@ -8,6 +8,8 @@ import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
 import { isEmpty } from 'lodash'
+import { Assertion } from '../../../types'
+import { UserStatus } from '../../../types/userStatus.endpoint'
 
 @Component({
   selector: 'app-top-bar',
@@ -22,6 +24,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   @Input() isPublicRecord: string
 
   userRecord: UserRecord
+  userStatus: UserStatus
 
   modalNameComponent = ModalNameComponent
   modalBiographyComponent = ModalBiographyComponent
@@ -44,6 +47,12 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((data) => {
         this.platform = data
+      })
+    _user
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((data) => {
+        this.userStatus = data
       })
   }
 
@@ -90,6 +99,12 @@ export class TopBarComponent implements OnInit, OnDestroy {
     this.creditName = this.userRecord?.names?.creditName
       ? this.userRecord.names.creditName.value
       : ''
+  }
+
+  getOtherNames(otherNames: Assertion[]): string[] {
+    return otherNames.map((otherName) => {
+      return otherName.content
+    })
   }
 
   collapse(): void {

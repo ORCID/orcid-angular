@@ -24,10 +24,7 @@
         {{ sourceName }}
       </div>
     </div>
-    <div
-      class="preferred-source"
-      *ngIf="isPreferred && stackLength > 1 && !isPublicRecord"
-    >
+    <div class="preferred-source" *ngIf="isPreferred && stackLength > 1">
       <i class="material-icons"> grade </i>
       <div>
         <ng-container i18n="@@groups.common.preferred_source"
@@ -63,5 +60,21 @@
         Make preferred source
       </a>
     </div>
+  </div>
+  <div align-end>
+    <button
+      *ngIf="!isPublicRecord"
+      mat-icon-button
+      [matTooltip]="labelDeleteButton"
+      [attr.aria-label]="labelDeleteButton"
+    >
+      <mat-icon
+        (click)="delete()"
+        class="large-material-icon"
+        id="delete-button"
+      >
+        delete_outline
+      </mat-icon>
+    </button>
   </div>
 </app-panel-data>

@@ -89,7 +89,7 @@ export class RecordService {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
       if (environment.debugger) {
         this.recordSubject$.subscribe((value) => {
-          console.info(value)
+          console.debug(value)
         })
       }
 
@@ -239,7 +239,8 @@ export class RecordService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({} as Preferences))
       )
   }
 

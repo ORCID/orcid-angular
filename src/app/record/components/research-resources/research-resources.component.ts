@@ -53,6 +53,7 @@ export class ResearchResourcesComponent implements OnInit {
 
   ngOrcidResearchResources = $localize`:@@researchResources.researchResources:Research resources`
   offset: number
+  isMobile: boolean
 
   constructor(
     _platform: PlatformInfoService,
@@ -66,6 +67,7 @@ export class ResearchResourcesComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((data) => {
         this.platform = data
+        this.isMobile = data.columns4 || data.columns8
       })
   }
 
@@ -106,6 +108,14 @@ export class ResearchResourcesComponent implements OnInit {
               putCode: putCode,
               researchResource: data,
             })
+            const research: ResearchResource = data
+            research.hosts.forEach((host) => {
+              this.getOrganizationDisambiguatedDetails(
+                null,
+                host.disambiguationSource,
+                host.orgDisambiguatedId
+              )
+            })
             researchResource.showDetails = true
           },
           (error) => {
@@ -123,7 +133,6 @@ export class ResearchResourcesComponent implements OnInit {
               putCode: putCode,
               researchResource: research,
             })
-            researchResource.showDetails = true
             research.hosts.forEach((host) => {
               this.getOrganizationDisambiguatedDetails(
                 null,
@@ -131,6 +140,7 @@ export class ResearchResourcesComponent implements OnInit {
                 host.orgDisambiguatedId
               )
             })
+            researchResource.showDetails = true
           },
           (error) => {
             console.error('getDetailsError', error)
@@ -173,6 +183,7 @@ export class ResearchResourcesComponent implements OnInit {
 
   sortEvent(event: SortData) {
     this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this.userRecordContext.forceReload = true
     this.userRecordContext.offset = 0
@@ -215,10 +226,6 @@ export class ResearchResourcesComponent implements OnInit {
           researchResource.putCode.value
         : false
     return response
-  }
-
-  getLink(type: string, value: string) {
-    return this._organizationsService.getLink(type, value)
   }
 
   isUrl(value: string) {

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
-import { first, map, tap } from 'rxjs/operators'
+import { Observable, of, ReplaySubject } from 'rxjs'
+import { catchError, first, map, retry, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 import { environment } from '../../../environments/environment'
@@ -10,6 +10,7 @@ import {
   ResearchResourcesEndpoint,
 } from '../../types/record-research-resources.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { VisibilityStrings } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,8 @@ export class RecordResearchResourceService {
             (options.sortAsc != null ? options.sortAsc : false)
         )
         .pipe(
+          catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
           map((value) => {
             if (this.currentValue && !options.forceReload) {
               value.groups = value.groups.concat(this.currentValue.groups)
@@ -92,6 +95,8 @@ export class RecordResearchResourceService {
             (options.sortAsc != null ? options.sortAsc : true)
         )
         .pipe(
+          catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
           map((value) => {
             if (this.currentValue) {
               value.groups = value.groups.concat(this.currentValue.groups)
@@ -133,5 +138,36 @@ export class RecordResearchResourceService {
     return this._http.get<ResearchResource>(
       environment.API_WEB + orcid + '/researchResource.json?id=' + putCode
     )
+  }
+
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'research-resources/' +
+          putCode +
+          '/visibility/' +
+          visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getResearchResourcePage({ forceReload: true }))
+      )
+  }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(environment.API_WEB + 'research-resources/' + putCode, {
+        headers: this.headers,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getResearchResourcePage({ forceReload: true }))
+      )
   }
 }

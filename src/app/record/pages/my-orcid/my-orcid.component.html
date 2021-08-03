@@ -2,13 +2,24 @@
   <app-top-bar-my-public-record-preview
     [isPublicRecord]="publicOrcid"
   ></app-top-bar-my-public-record-preview>
-  <div class="container">
+  <div class="container no-padding">
     <div class="row">
-      <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
+      <app-side-bar
+        class="col l3 m8 s4"
+        [isPublicRecord]="publicOrcid"
+        [onlyOrcidId]="platform.columns8 || platform.columns4"
+      >
       </app-side-bar>
       <main id="main" class="col l9 m8 s4">
         <app-main>
           <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
+          <app-side-bar
+            *ngIf="platform.columns8 || platform.columns4"
+            class="col l3 m8 s4"
+            [isPublicRecord]="publicOrcid"
+            [hideOrcidId]="true"
+          >
+          </app-side-bar>
           <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
             <h2 class="orc-font-body col" i18n="@@shared.activities">
               Activities
@@ -48,18 +59,18 @@
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-fundings>
-          <app-work-stack-group
-            [isPublicRecord]="publicOrcid"
-            [expandedContent]="expandedContent"
-            (total)="affiliationsCount($event)"
-            (expanded)="expandedByType($event)"
-          ></app-work-stack-group>
           <app-research-resources
             [isPublicRecord]="publicOrcid"
             [expandedContent]="expandedContent"
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-research-resources>
+          <app-work-stack-group
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-work-stack-group>
           <app-peer-reviews
             [isPublicRecord]="publicOrcid"
             [expandedContent]="expandedContent"
@@ -67,12 +78,10 @@
             (expanded)="expandedByType($event)"
           ></app-peer-reviews>
           <div class="no-public-info" *ngIf="affiliations === 0">
-            <mat-error>
-              <mat-icon>error</mat-icon>
-              <ng-container i18n="@@record.noPublicInfo"
-                >No public information available.
-              </ng-container>
-            </mat-error>
+            <mat-icon>error</mat-icon>
+            <ng-container i18n="@@record.noPublicInfo"
+              >No public information available.
+            </ng-container>
           </div>
           <div
             class="orc-font-body-small"

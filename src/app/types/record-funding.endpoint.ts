@@ -43,7 +43,7 @@ export interface Funding extends AssertionBase {
   city: Value
   region: Value
   country: Value
-  countryForDisplay?: string // TODO is this always empty?
+  countryForDisplay?: string
   fundingTypeForDisplay?: string
   dateSortString: string
   fullyLoaded?: boolean
