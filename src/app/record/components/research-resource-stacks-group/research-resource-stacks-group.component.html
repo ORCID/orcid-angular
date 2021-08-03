@@ -54,15 +54,5 @@
       (page)="pageEvent($event)"
     >
     </mat-paginator>
-    <button
-      class="load-more"
-      mat-raised-button
-      color="primary"
-      (click)="loadMore()"
-      *ngIf="researchResources.totalGroups > researchResources?.groups.length"
-      i18n="@@share.loadMore"
-    >
-      Load more
-    </button>
   </app-panels>
 </ng-container>
