@@ -126,15 +126,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     )
   }
 
-  loadMore() {
-    ;(this.userRecordContext.offset = this.offset + 50),
-      (this.userRecordContext.publicRecordId = this.isPublicRecord)
-    this.userRecordContext.forceReload = false
-    this._recordResearchResourceService.changeUserRecordContext(
-      this.userRecordContext
-    )
-  }
-
   expandedClicked(expanded: boolean) {
     this.expanded.emit({ type: 'research-resources', expanded })
   }

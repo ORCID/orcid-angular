@@ -6,7 +6,7 @@ import { RecordService } from '../../../core/record/record.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { Subject } from 'rxjs'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
-import { PeerReview } from '../../../types/record-peer-review.endpoint'
+import { PeerReview, PeerReviewDuplicateGroup } from '../../../types/record-peer-review.endpoint'
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
@@ -70,6 +70,10 @@ export class PeerReviewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecord()
+  }
+
+  trackByPeerReviewGroup(index, item: PeerReviewDuplicateGroup) {
+    return item.activePutCode
   }
 
   private getRecord() {
