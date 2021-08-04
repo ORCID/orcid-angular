@@ -46,7 +46,7 @@ export class LanguageGuard implements CanActivateChild {
       }),
       switchMap(() => {
         // The browser cookie language might already right
-        if (this.currentCookieLanguageMatchTheParamLanguage(langContext)) {
+        if (this.currentAppLanguageMatchTheParamLanguage(langContext)) {
           return of(true)
         } else {
           // the browser needs to be reloaded to set the right cookie and reload.
@@ -94,13 +94,13 @@ export class LanguageGuard implements CanActivateChild {
     return languageCode
   }
 
-  currentCookieLanguageMatchTheParamLanguage(
+  currentAppLanguageMatchTheParamLanguage(
     langContext: LanguageContext
   ): boolean {
     if (
       langContext.param &&
-      langContext.cookie &&
-      langContext.cookie.indexOf(langContext.param) === -1
+      langContext.app &&
+      langContext.app.indexOf(langContext.param) === -1
     ) {
       return false
     }
@@ -109,9 +109,8 @@ export class LanguageGuard implements CanActivateChild {
 
   currentAppLanguageMatchCookieLanguage(langContext: LanguageContext): boolean {
     if (
-      langContext.cookie &&
       langContext.app &&
-      langContext.app.indexOf(langContext.cookie) === -1
+      langContext.app.indexOf(langContext.cookie || 'en') === -1
     ) {
       return false
     }
