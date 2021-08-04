@@ -13,6 +13,7 @@ import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 import { LanguageService } from '../core/language/language.service'
+import { ERROR_REPORT } from '../errors'
 import { LanguageContext } from '../types/language.locale'
 
 @Injectable({
@@ -44,15 +45,11 @@ export class LanguageGuard implements CanActivateChild {
         }
       }),
       switchMap(() => {
-        // The browser might be already loading the right language
-        if (this.currentAppLanguageMatchTheParamLanguage(langContext)) {
+        // The browser cookie language might already right
+        if (this.currentCookieLanguageMatchTheParamLanguage(langContext)) {
           return of(true)
-        } else if (this.currentAppLanguageMatchCookieLanguage(langContext)) {
-          return this._errorHandler
-            .handleError(new Error('cacheIssueDetected/'))
-            .pipe(catchError((error) => of(true)))
         } else {
-          // the browser needs to be reloaded to load the correct language
+          // the browser needs to be reloaded to set the right cookie and reload.
           return this._languageService
             .changeLanguage(langContext.param)
             .pipe(
@@ -60,6 +57,14 @@ export class LanguageGuard implements CanActivateChild {
                 of(this.window.location.reload()).pipe(switchMap(() => NEVER))
               )
             )
+        }
+      }),
+      switchMap(() => {
+        // A weird tomcat or cloudflare scenario where the the wrong translated app is downloaded
+        if (!this.currentAppLanguageMatchCookieLanguage(langContext)) {
+          return this._errorHandler.handleError(
+            new Error('cacheIssueDetected/')
+          )
         }
       }),
       catchError(() => of(true)) // Allow to continue if the language change fails
@@ -89,13 +94,13 @@ export class LanguageGuard implements CanActivateChild {
     return languageCode
   }
 
-  currentAppLanguageMatchTheParamLanguage(
+  currentCookieLanguageMatchTheParamLanguage(
     langContext: LanguageContext
   ): boolean {
     if (
       langContext.param &&
-      langContext.app &&
-      langContext.app.indexOf(langContext.param) === -1
+      langContext.cookie &&
+      langContext.cookie.indexOf(langContext.param) === -1
     ) {
       return false
     }
