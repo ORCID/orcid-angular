@@ -118,8 +118,7 @@ export class PanelsComponent implements OnInit {
     return (
       this.type === 'education' ||
       this.type === 'invited-position' ||
-      this.type === 'membership' ||
-      this.type === 'works'
+      this.type === 'membership' 
     )
   }
 

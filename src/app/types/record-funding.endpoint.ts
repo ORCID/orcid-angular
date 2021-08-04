@@ -1,7 +1,7 @@
 import {
   Contributor,
   ExternalIdentifier,
-  MonthYearDate,
+  MonthDayYearDate,
   Title,
   Value,
   Visibility,
@@ -34,8 +34,8 @@ export interface Funding extends AssertionBase {
   currencyCode: Value
   amount: Value
   url: Value
-  startDate: MonthYearDate
-  endDate: MonthYearDate
+  startDate: MonthDayYearDate
+  endDate: MonthDayYearDate
   externalIdentifiers?: ExternalIdentifier[]
   contributors?: Contributor[]
   disambiguatedFundingSourceId: Value
@@ -45,7 +45,7 @@ export interface Funding extends AssertionBase {
   country: Value
   countryForDisplay?: string
   fundingTypeForDisplay?: string
-  dateSortString?: MonthYearDate
+  dateSortString?: MonthDayYearDate
   fullyLoaded?: boolean
 }
 

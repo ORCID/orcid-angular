@@ -81,8 +81,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     FundingRelationships
   ) as FundingRelationships[]
 
-  ngOrcidAddFundingType = $localize`:@@tfunding.addFundingType:Add funding type`
-
   years = Array(110)
     .fill(0)
     .map((i, idx) => idx + new Date().getFullYear() - 109)

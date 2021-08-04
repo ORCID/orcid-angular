@@ -96,19 +96,11 @@ export interface Email {
   primary: boolean
 }
 
-export interface MonthYearDate {
-  errors?: any[] // TODO define object
-  month: string
-  year: string
-  required?: boolean
-  getRequiredMessage?: any
-}
-
 export interface MonthDayYearDate {
   errors?: any[] // TODO define object
-  day: string
-  month: string
-  year: string
+  day?: string
+  month?: string
+  year?: string
   required?: boolean
   getRequiredMessage?: any
 }
