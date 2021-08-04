@@ -1,6 +1,9 @@
 :host {
   width: 100%;
-  box-sizing: border-box;
+}
+
+app-peer-review-stack {
+  margin-top: 24px;
 }
 
 app-panel {
@@ -14,23 +17,17 @@ app-panel {
   }
 }
 
+p.empty {
+  margin-bottom: 0;
+}
+
+.description {
+  border-bottom: solid 1px;
+  padding: 16px;
+}
+
 app-panel-data {
-  border-top: 1px solid;
   padding: 0 !important;
-
-  .header-sub-peer-review {
-    margin-right: 40px;
-  }
-
-  .header-sub-peer-review,
-  .mobile {
-    margin-right: 10px;
-  }
-
-  .description {
-    border-bottom: solid 1px;
-    padding: 16px;
-  }
 
   .nested-panels {
     padding: 16px;
@@ -39,25 +36,5 @@ app-panel-data {
     app-panel-element {
       padding: 16px;
     }
-
-    .show {
-      margin-right: 32px;
-    }
   }
-}
-
-.capitalize {
-  text-transform: capitalize;
-}
-
-.source {
-  text-transform: uppercase;
-}
-
-.details {
-  margin-bottom: 20px;
-}
-
-p.empty {
-  margin-bottom: 0;
 }

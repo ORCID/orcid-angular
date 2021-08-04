@@ -7,7 +7,10 @@ import { RecordPeerReviewService } from '../../../core/record-peer-review/record
 @Component({
   selector: 'app-peer-review-stack',
   templateUrl: './peer-review-stack.component.html',
-  styleUrls: ['./peer-review-stack.component.scss']
+  styleUrls: [
+    './peer-review-stack.component.scss',
+    './peer-review-stack.component.scss-theme.scss'
+  ]
 })
 export class PeerReviewStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
