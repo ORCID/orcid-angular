@@ -104,23 +104,23 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.queryParams.subscribe((params) => {
-      if (
-        params.lang &&
-        Object.keys(environment.LANGUAGE_MENU_OPTIONS).find(
-          (x) => x === params.lang
-        )
-      ) {
-        this._languageService.changeLanguage(params.lang).subscribe(
-          (_) =>
-            (this.window.location.href =
-              environment.BASE_URL + ApplicationRoutes.signin),
-          (_) =>
-            (this.window.location.href =
-              environment.BASE_URL + ApplicationRoutes.signin)
-        )
-      }
-    })
+    // this._route.queryParams.subscribe((params) => {
+    //   if (
+    //     params.lang &&
+    //     Object.keys(environment.LANGUAGE_MENU_OPTIONS).find(
+    //       (x) => x === params.lang
+    //     )
+    //   ) {
+    //     this._languageService.changeLanguage(params.lang).subscribe(
+    //       (_) =>
+    //         (this.window.location.href =
+    //           environment.BASE_URL + ApplicationRoutes.signin),
+    //       (_) =>
+    //         (this.window.location.href =
+    //           environment.BASE_URL + ApplicationRoutes.signin)
+    //     )
+    //   }
+    // })
   }
 
   show2FAEmitter($event) {

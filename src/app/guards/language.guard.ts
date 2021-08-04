@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
-import { NEVER, Observable, of, throwError } from 'rxjs'
+import { NEVER, Observable, of } from 'rxjs'
 import { catchError, switchMap, tap } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 
@@ -62,7 +62,7 @@ export class LanguageGuard implements CanActivateChild {
             )
         }
       }),
-      catchError((value) => of(true)) // Allow to continue if the language change fails
+      catchError(() => of(true)) // Allow to continue if the language change fails
     )
   }
 
