@@ -3,14 +3,16 @@
     let research of researchResourceStack.researchResources;
     trackBy: trackByResearchResourceStack;
     let i = index;
-    let last = last;
+    let last = last
   "
 >
   <app-panel
     class="top-bar"
     [elements]="research"
     [type]="'research-resources'"
-    [ngStyle]="{ 'z-index': researchResourceStack.researchResources.length - i }"
+    [ngStyle]="{
+      'z-index': researchResourceStack.researchResources.length - i
+    }"
     [ngClass]="{ last: last }"
     [editable]="false"
     [openState]="false"

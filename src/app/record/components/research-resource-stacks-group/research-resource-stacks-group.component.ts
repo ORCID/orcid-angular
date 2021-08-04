@@ -1,25 +1,20 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
-import { URL_REGEXP } from '../../../constants'
 import { OrganizationsService, UserService } from '../../../core'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { RecordService } from '../../../core/record/record.service'
 import { OrgDisambiguated } from '../../../types'
 import {
-  Host,
-  Item,
   ResearchResource,
   ResearchResourcesEndpoint,
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
-import { Work, WorkGroup } from '../../../types/record-works.endpoint'
 import { PageEvent } from '@angular/material/paginator'
 
 @Component({
@@ -100,7 +95,8 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
           this.researchResources = userRecord.researchResources
           this.offset = userRecord.researchResources.offset
           this.total.emit(this.researchResources.groups.length)
-          this.paginationTotalAmountOfResearchResources = userRecord.researchResources.totalGroups
+          this.paginationTotalAmountOfResearchResources =
+            userRecord.researchResources.totalGroups
           this.paginationIndex = userRecord.researchResources.pageIndex
           this.paginationPageSize = userRecord.researchResources.pageSize
           this.total.emit(userRecord.researchResources.groups.length)
@@ -112,7 +108,9 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
     this.userRecordContext.publicRecordId = this.isPublicRecord
-    this._recordResearchResourceService.changeUserRecordContext(this.userRecordContext)
+    this._recordResearchResourceService.changeUserRecordContext(
+      this.userRecordContext
+    )
   }
 
   sortEvent(event: SortData) {
@@ -129,5 +127,4 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   expandedClicked(expanded: boolean) {
     this.expanded.emit({ type: 'research-resources', expanded })
   }
-
 }

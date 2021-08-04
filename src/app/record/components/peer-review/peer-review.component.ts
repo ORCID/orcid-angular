@@ -4,7 +4,7 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
 @Component({
   selector: 'app-peer-review',
   templateUrl: './peer-review.component.html',
-  styleUrls: ['./peer-review.component.scss']
+  styleUrls: ['./peer-review.component.scss'],
 })
 export class PeerReviewComponent implements OnInit {
   @Input() isPublicRecord: string
@@ -17,10 +17,9 @@ export class PeerReviewComponent implements OnInit {
   @Output() toggleDetails = new EventEmitter<PeerReview>()
   @Input() stackMode
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getPeerReview(putCode: number): PeerReview {
     if (this.detailsPeerReviews.length === 0) {
@@ -33,5 +32,4 @@ export class PeerReviewComponent implements OnInit {
         return value.peerReview
       })[0]
   }
-
 }

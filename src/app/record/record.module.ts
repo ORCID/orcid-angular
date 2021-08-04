@@ -47,10 +47,10 @@ import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dro
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
-import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component';
-import { ResearchResourceStackComponent } from './components/research-resource-stack/research-resource-stack.component';
-import { ResearchResourceComponent } from './components/research-resource/research-resource.component';
-import { PeerReviewStackComponent } from './components/peer-review-stack/peer-review-stack.component';
+import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component'
+import { ResearchResourceStackComponent } from './components/research-resource-stack/research-resource-stack.component'
+import { ResearchResourceComponent } from './components/research-resource/research-resource.component'
+import { PeerReviewStackComponent } from './components/peer-review-stack/peer-review-stack.component'
 import { PeerReviewComponent } from './components/peer-review/peer-review.component'
 
 @NgModule({

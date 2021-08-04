@@ -3,7 +3,7 @@
     let subPeerReview of peerReviewStack.peerReviews;
     trackBy: trackByPeerReviewStack;
     let i = index;
-    let last = last;
+    let last = last
   "
 >
   <app-panel
@@ -18,29 +18,19 @@
     <div
       header
       [ngClass]="{
-         'orc-font-small-print': isMobile,
-         'orc-font-body-small': !isMobile
+        'orc-font-small-print': isMobile,
+        'orc-font-body-small': !isMobile
       }"
     >
-      <span
-        class="header-sub-peer-review"
-        [ngClass]="{ mobile: isMobile }"
-      >
+      <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
         <b i18n="@@peerReview.reviewDate"> Review date: </b>
         {{ subPeerReview.completionDate | monthDayYearDateToString }}
       </span>
-      <span
-        class="header-sub-peer-review"
-        [ngClass]="{ mobile: isMobile }"
-      >
+      <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
         <b i18n="@@peerReview.type"> Type: </b>
-        <span class="capitalize">
-          {{ subPeerReview.type.value }}</span>
+        <span class="capitalize"> {{ subPeerReview.type.value }}</span>
       </span>
-      <span
-        class="header-sub-peer-review"
-        [ngClass]="{ mobile: isMobile }"
-      >
+      <span class="header-sub-peer-review" [ngClass]="{ mobile: isMobile }">
         <b i18n="@@peerReview.role"> Role: </b>
         <span class="capitalize">
           {{ subPeerReview.role.value }}
@@ -58,9 +48,7 @@
         <a
           class="underline"
           *ngIf="!subPeerReview.showDetails"
-          (click)="
-             getDetails(subPeerReview, subPeerReview.putCode.value)
-          "
+          (click)="getDetails(subPeerReview, subPeerReview.putCode.value)"
           i18n="@@shared.showMoreDetail"
         >
           Show more detail
@@ -85,10 +73,7 @@
         >
           View
         </a>
-        <ng-container
-          i18n="@@peerReview.view"
-          *ngIf="!subPeerReview.url"
-        >
+        <ng-container i18n="@@peerReview.view" *ngIf="!subPeerReview.url">
           View
         </ng-container>
       </span>

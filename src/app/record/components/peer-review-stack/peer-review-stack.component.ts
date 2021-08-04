@@ -1,6 +1,16 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { VisibilityStrings } from '../../../types/common.endpoint'
-import { PeerReview, PeerReviewDuplicateGroup } from '../../../types/record-peer-review.endpoint'
+import {
+  PeerReview,
+  PeerReviewDuplicateGroup,
+} from '../../../types/record-peer-review.endpoint'
 import { first } from 'rxjs/operators'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -10,8 +20,8 @@ import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
   templateUrl: './peer-review-stack.component.html',
   styleUrls: [
     './peer-review-stack.component.scss',
-    './peer-review-stack.component.scss-theme.scss'
-  ]
+    './peer-review-stack.component.scss-theme.scss',
+  ],
 })
 export class PeerReviewStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
@@ -78,7 +88,10 @@ export class PeerReviewStackComponent implements OnInit {
    * On start, set the preferred source as the top panel of the stack
    */
   private setDefaultPanelsDisplay(peerReview: PeerReview, force = false) {
-    if (this.stackPanelsDisplay[peerReview.putCode.value] === undefined || force) {
+    if (
+      this.stackPanelsDisplay[peerReview.putCode.value] === undefined ||
+      force
+    ) {
       this.stackPanelsDisplay[peerReview.putCode.value] = {
         topPanelOfTheStack: this.isPreferred(peerReview),
       }
@@ -89,7 +102,10 @@ export class PeerReviewStackComponent implements OnInit {
    * On start, hide the details for all the panels
    */
   private setDefaultPanelDetailsState(peerReview: PeerReview, force = false) {
-    if (this.panelDetailsState[peerReview.putCode.value] === undefined || force) {
+    if (
+      this.panelDetailsState[peerReview.putCode.value] === undefined ||
+      force
+    ) {
       this.panelDetailsState[peerReview.putCode.value] = {
         state: false,
       }
@@ -99,7 +115,8 @@ export class PeerReviewStackComponent implements OnInit {
   isPreferred(peerReview: PeerReview) {
     const response =
       peerReview && this.peerReviewStack
-        ? this.peerReviewStack.activePutCode.toString() === peerReview.putCode.value
+        ? this.peerReviewStack.activePutCode.toString() ===
+          peerReview.putCode.value
         : false
     return response
   }
@@ -134,8 +151,7 @@ export class PeerReviewStackComponent implements OnInit {
     return item.putCode
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getDetails(peerReview: PeerReview, putCode: number): void {
     if (this.isPublicRecord) {

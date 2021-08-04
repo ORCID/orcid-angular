@@ -1,6 +1,9 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { VisibilityStrings } from '../../../types/common.endpoint'
-import { ResearchResource, ResearchResourcesGroup } from '../../../types/record-research-resources.endpoint'
+import {
+  ResearchResource,
+  ResearchResourcesGroup,
+} from '../../../types/record-research-resources.endpoint'
 import { Work } from '../../../types/record-works.endpoint'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 
@@ -9,8 +12,8 @@ import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
   templateUrl: './research-resource-stack.component.html',
   styleUrls: [
     './research-resource-stack.component.scss',
-    './research-resource-stack.component.scss-theme.scss'
-  ]
+    './research-resource-stack.component.scss-theme.scss',
+  ],
 })
 export class ResearchResourceStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
@@ -47,9 +50,7 @@ export class ResearchResourceStackComponent implements OnInit {
   isMobile: boolean
   platform: PlatformInfo
 
-  constructor(
-    private _platformInfo: PlatformInfoService,
-  ) {
+  constructor(private _platformInfo: PlatformInfoService) {
     this._platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
     })
@@ -68,8 +69,14 @@ export class ResearchResourceStackComponent implements OnInit {
   /**
    * On start, set the preferred source as the top panel of the stack
    */
-  private setDefaultPanelsDisplay(researchResource: ResearchResource, force = false) {
-    if (this.stackPanelsDisplay[researchResource.putCode] === undefined || force) {
+  private setDefaultPanelsDisplay(
+    researchResource: ResearchResource,
+    force = false
+  ) {
+    if (
+      this.stackPanelsDisplay[researchResource.putCode] === undefined ||
+      force
+    ) {
       this.stackPanelsDisplay[researchResource.putCode] = {
         topPanelOfTheStack: this.isPreferred(researchResource),
       }
@@ -79,8 +86,14 @@ export class ResearchResourceStackComponent implements OnInit {
   /**
    * On start, hide the details for all the panels
    */
-  private setDefaultPanelDetailsState(researchResource: ResearchResource, force = false) {
-    if (this.panelDetailsState[researchResource.putCode] === undefined || force) {
+  private setDefaultPanelDetailsState(
+    researchResource: ResearchResource,
+    force = false
+  ) {
+    if (
+      this.panelDetailsState[researchResource.putCode] === undefined ||
+      force
+    ) {
       this.panelDetailsState[researchResource.putCode] = {
         state: false,
       }
@@ -90,7 +103,8 @@ export class ResearchResourceStackComponent implements OnInit {
   isPreferred(researchResource: ResearchResource) {
     const response =
       researchResource && this.researchResourceStack
-        ? this.researchResourceStack.activePutCode.toString() === researchResource.putCode
+        ? this.researchResourceStack.activePutCode.toString() ===
+          researchResource.putCode
         : false
     return response
   }
@@ -125,7 +139,5 @@ export class ResearchResourceStackComponent implements OnInit {
     return item.putCode
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

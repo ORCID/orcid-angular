@@ -1,9 +1,13 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { Work } from '../../../types/record-works.endpoint'
-import { Host, Item, ResearchResource } from '../../../types/record-research-resources.endpoint'
+import {
+  Host,
+  Item,
+  ResearchResource,
+} from '../../../types/record-research-resources.endpoint'
 import { URL_REGEXP } from '../../../constants'
 import { OrgDisambiguated } from '../../../types'
 import { OrganizationsService } from '../../../core'
@@ -14,8 +18,8 @@ import { RecordResearchResourceService } from '../../../core/record-research-res
   templateUrl: './research-resource.component.html',
   styleUrls: [
     './research-resource.component.scss',
-    './research-resource.component.scss-theme.scss'
-  ]
+    './research-resource.component.scss-theme.scss',
+  ],
 })
 export class ResearchResourceComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -46,8 +50,7 @@ export class ResearchResourceComponent implements OnInit {
   constructor(
     _platform: PlatformInfoService,
     private _organizationsService: OrganizationsService,
-    private _recordResearchResourceService: RecordResearchResourceService,
-
+    private _recordResearchResourceService: RecordResearchResourceService
   ) {
     _platform
       .get()
@@ -58,8 +61,7 @@ export class ResearchResourceComponent implements OnInit {
       })
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getResearchResource(putCode: string): ResearchResource {
     if (this.detailsResearchResources.length === 0) {
@@ -124,7 +126,6 @@ export class ResearchResourceComponent implements OnInit {
         )
     }
   }
-
 
   getOrganizationDisambiguated(host: Host): OrgDisambiguated {
     const disambiguationSource = host.disambiguationSource
