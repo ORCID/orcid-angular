@@ -9,7 +9,10 @@ import {
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { first } from 'rxjs/operators'
+import { ApplicationRoutes } from 'src/app/constants'
+import { LanguageService } from 'src/app/core/language/language.service'
 import { UserSession } from 'src/app/types/session.local'
+import { environment } from 'src/environments/environment'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
@@ -53,7 +56,8 @@ export class SignInComponent implements OnInit {
     _userInfo: UserService,
     _oauthService: OauthService,
     @Inject(WINDOW) private window: Window,
-    _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _languageService: LanguageService
   ) {
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
       .pipe(first())
@@ -99,7 +103,25 @@ export class SignInComponent implements OnInit {
       })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._route.queryParams.subscribe((params) => {
+      if (
+        params.lang &&
+        Object.keys(environment.LANGUAGE_MENU_OPTIONS).find(
+          (x) => x === params.lang
+        )
+      ) {
+        this._languageService.changeLanguage(params.lang).subscribe(
+          (_) =>
+            (this.window.location.href =
+              environment.BASE_URL + ApplicationRoutes.signin),
+          (_) =>
+            (this.window.location.href =
+              environment.BASE_URL + ApplicationRoutes.signin)
+        )
+      }
+    })
+  }
 
   show2FAEmitter($event) {
     this.show2FA = true
