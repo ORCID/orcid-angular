@@ -5,16 +5,16 @@ import {
   RouterStateSnapshot,
 } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
-import { NEVER, Observable, of } from 'rxjs'
+import { NEVER, Observable, of, throwError } from 'rxjs'
 import { catchError, switchMap, tap } from 'rxjs/operators'
 import { environment } from 'src/environments/environment'
 
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
+import { LanguageService } from '../core/language/language.service'
 import { LanguageContext } from '../types/language.locale'
 
-const GUARD_COOKIE_CHECK = 'lang_refresh'
 @Injectable({
   providedIn: 'root',
 })
@@ -24,7 +24,8 @@ export class LanguageGuard implements CanActivateChild {
     private _cookies: CookieService,
     private _user: UserService,
     @Inject(WINDOW) private window: Window,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _languageService: LanguageService
   ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -37,30 +38,28 @@ export class LanguageGuard implements CanActivateChild {
       tap(() => {
         // get language context
         langContext = this.getLanguageContext(next.queryParams)
+
         if (environment.debugger) {
           console.debug('language context', langContext)
         }
       }),
       switchMap(() => {
         // The browser might be already loading the right language
-        if (this.currentAppLanguageMatchTheCookieLanguage(langContext)) {
-          this._cookies.delete(GUARD_COOKIE_CHECK)
+        if (this.currentAppLanguageMatchTheParamLanguage(langContext)) {
           return of(true)
-        }
-        // the browser needs to be reloaded to load the correct language
-        // the GUARD_COOKIE_CHECK cookie is used to avoid infinite reloading
-        if (
-          !this._cookies.check(GUARD_COOKIE_CHECK) ||
-          this._cookies.get(GUARD_COOKIE_CHECK) !== langContext.cookie
-        ) {
-          this._cookies.set(GUARD_COOKIE_CHECK, langContext.cookie)
-          return of(this.window.location.reload()).pipe(switchMap(() => NEVER))
-        } else {
-          // if even after a reload the app can't get the language match the cookie
-          // there is a cloudflare or browser cache issue
+        } else if (this.currentAppLanguageMatchCookieLanguage(langContext)) {
           return this._errorHandler
             .handleError(new Error('cacheIssueDetected/'))
             .pipe(catchError((error) => of(true)))
+        } else {
+          // the browser needs to be reloaded to load the correct language
+          return this._languageService
+            .changeLanguage(langContext.param)
+            .pipe(
+              switchMap(() =>
+                of(this.window.location.reload()).pipe(switchMap(() => NEVER))
+              )
+            )
         }
       }),
       catchError((value) => of(true)) // Allow to continue if the language change fails
@@ -90,7 +89,20 @@ export class LanguageGuard implements CanActivateChild {
     return languageCode
   }
 
-  currentAppLanguageMatchTheCookieLanguage(langContext: LanguageContext) {
+  currentAppLanguageMatchTheParamLanguage(
+    langContext: LanguageContext
+  ): boolean {
+    if (
+      langContext.param &&
+      langContext.app &&
+      langContext.app.indexOf(langContext.param) === -1
+    ) {
+      return false
+    }
+    return true
+  }
+
+  currentAppLanguageMatchCookieLanguage(langContext: LanguageContext): boolean {
     if (
       langContext.cookie &&
       langContext.app &&
@@ -99,12 +111,5 @@ export class LanguageGuard implements CanActivateChild {
       return false
     }
     return true
-  }
-
-  /**
-   * @deprecated
-   */
-  requireLanguageCookieUpdate(lang: LanguageContext): boolean {
-    return lang.param && lang.cookie && lang.cookie.indexOf(lang.param) === -1
   }
 }
