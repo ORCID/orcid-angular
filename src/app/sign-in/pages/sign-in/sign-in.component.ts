@@ -9,10 +9,8 @@ import {
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { first } from 'rxjs/operators'
-import { ApplicationRoutes } from 'src/app/constants'
 import { LanguageService } from 'src/app/core/language/language.service'
 import { UserSession } from 'src/app/types/session.local'
-import { environment } from 'src/environments/environment'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'

@@ -13,7 +13,6 @@ import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 import { LanguageService } from '../core/language/language.service'
-import { ERROR_REPORT } from '../errors'
 import { LanguageContext } from '../types/language.locale'
 
 @Injectable({
