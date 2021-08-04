@@ -20,6 +20,7 @@
     [visibility]="researchResourceStack.activeVisibility"
     [isPublicRecord]="isPublicRecord"
     *ngIf="isPreferred(research) || displayTheStack"
+    [stackedHeader]="!platform.columns12"
   >
     <div header>
       <b>

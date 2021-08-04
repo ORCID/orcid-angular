@@ -185,6 +185,7 @@
           [customControls]="true"
           class="top-bar"
           [attr.id]="'research-detail-item-' + i"
+          [stackedHeader]="!platform.columns12"
         >
           <div header>
             <div>
@@ -254,7 +255,6 @@
                       </span>
           </div>
           <app-panel-data
-            class="research-detail"
             [borderBottom]="true"
             *ngIf="item.showDetails"
           >
@@ -316,9 +316,27 @@
                                     .value
                                 }}"
                     >
+                      <i
+                        i18n="@@shared.partOf"
+                        *ngIf="
+                                    itemExternalIdentifier?.relationship
+                                      ?.value === 'part-of'
+                                  "
+                      >
+                        Part of
+                      </i>
+                      <i
+                        i18n="@@shared.fundedBy"
+                        *ngIf="
+                                    itemExternalIdentifier?.relationship
+                                      ?.value === 'funded-by'
+                                  "
+                      >
+                        Funded by
+                      </i>
                       {{
-                      itemExternalIdentifier.externalIdentifierId
-                        .value
+                      itemExternalIdentifier.externalIdentifierType
+                        .value + ':' | uppercase
                       }}
                     </a>
                   </ng-container>

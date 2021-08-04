@@ -2,6 +2,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { VisibilityStrings } from '../../../types/common.endpoint'
 import { ResearchResource, ResearchResourcesGroup } from '../../../types/record-research-resources.endpoint'
 import { Work } from '../../../types/record-works.endpoint'
+import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
   selector: 'app-research-resource-stack',
@@ -44,8 +45,15 @@ export class ResearchResourceStackComponent implements OnInit {
   } = {}
 
   isMobile: boolean
+  platform: PlatformInfo
 
-  constructor() { }
+  constructor(
+    private _platformInfo: PlatformInfoService,
+  ) {
+    this._platformInfo.get().subscribe((platformInfo) => {
+      this.platform = platformInfo
+    })
+  }
 
   /**
    * Set the panelDetails and top of the stack card to default mode

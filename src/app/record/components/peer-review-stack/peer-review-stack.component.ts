@@ -3,6 +3,7 @@ import { VisibilityStrings } from '../../../types/common.endpoint'
 import { PeerReview, PeerReviewDuplicateGroup } from '../../../types/record-peer-review.endpoint'
 import { first } from 'rxjs/operators'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
+import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({
   selector: 'app-peer-review-stack',
@@ -52,11 +53,16 @@ export class PeerReviewStackComponent implements OnInit {
     peerReview: PeerReview
   }[] = []
   isMobile: boolean
-
+  platform: PlatformInfo
 
   constructor(
+    private _platformInfo: PlatformInfoService,
     private _recordPeerReviewService: RecordPeerReviewService
-  ) { }
+  ) {
+    this._platformInfo.get().subscribe((platformInfo) => {
+      this.platform = platformInfo
+    })
+  }
 
   /**
    * Set the panelDetails and top of the stack card to default mode
@@ -91,7 +97,6 @@ export class PeerReviewStackComponent implements OnInit {
   }
 
   isPreferred(peerReview: PeerReview) {
-    console.log(JSON.stringify(peerReview))
     const response =
       peerReview && this.peerReviewStack
         ? this.peerReviewStack.activePutCode.toString() === peerReview.putCode.value

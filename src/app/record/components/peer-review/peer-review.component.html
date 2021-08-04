@@ -23,27 +23,25 @@
       <b i18n="@@peerReview.conveningOrganization">
         Convening organization
       </b>
-      <p>
-        {{
-        peerReview?.orgName?.value
-        }}<span>, (</span>{{
+      <div>
+        {{ peerReview?.orgName?.value }} ({{
         peerReview?.city?.value
         }}<span
         *ngIf="
-            peerReview?.city?.value &&
-            peerReview?.country?.value
+           peerReview?.city?.value &&
+           peerReview?.country?.value
           "
       >, </span
-      >{{
-        peerReview?.country?.value
-        }})
-      </p>
+      >{{ peerReview?.country?.value }})
+      </div>
     </div>
     <div
       class="details"
       *ngIf="
-          peerReview?.subjectName?.value &&
-          peerReview?.subjectType?.value
+         (peerReview?.subjectName?.value &&
+         peerReview?.subjectType?.value) ||
+         peerReview?.subjectExternalIdentifier
+         ?.externalIdentifierType?.value
          "
     >
       <b i18n="@@peerReview.reviewSubject">
@@ -56,48 +54,15 @@
         <ng-container *ngIf="peerReview?.subjectType?.value">
           ({{ peerReview.subjectType.value }})
         </ng-container>
-        <div
-          *ngIf="
-              peerReview?.subjectContainerName?.value
-              "
-        >
-          {{
-          peerReview.subjectContainerName.value
-          }}
+        <div *ngIf="peerReview?.subjectContainerName?.value">
+          {{ peerReview.subjectContainerName.value }}
         </div>
-        <div>
-          <i
-            *ngIf="
-                peerReview
-                ?.subjectExternalIdentifier?.relationship
-                ?.value === 'part-of'
-               "
-            i18n="@@shared.partOf"
-          >
-            Part of
-          </i>
-          <i
-            *ngIf="
-               peerReview
-               ?.subjectExternalIdentifier?.relationship
-               ?.value === 'funded-by'
-               "
-            i18n="@@shared.fundedBy"
-          >
-            Funded by
-          </i>
-          {{
-          peerReview
-            ?.subjectExternalIdentifier
-            ?.externalIdentifierType?.value | uppercase
-          }}
-          :
-          {{
-          peerReview
-            ?.subjectExternalIdentifier.externalIdentifierId
-            ?.value
-          }}
-        </div>
+        <app-display-external-ids
+          [externalIdentifier]="
+             peerReview?.subjectExternalIdentifier
+          "
+          [noBoldTitle]="true"
+        ></app-display-external-ids>
       </div>
     </div>
     <div class="details">

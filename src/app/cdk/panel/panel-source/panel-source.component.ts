@@ -46,7 +46,7 @@ export class PanelSourceComponent implements OnInit {
     return this._displayTheStack
   }
   @Output() displayTheStackChange = new EventEmitter<boolean>()
-  isHanset: boolean
+  isHandset: boolean
 
   @Output() makePrimary = new EventEmitter<void>()
   @Input() topPanelOfTheStackMode: boolean
@@ -64,7 +64,7 @@ export class PanelSourceComponent implements OnInit {
     private _recordPeerReviewService: RecordPeerReviewService
   ) {
     this._platformInfo.get().subscribe((person) => {
-      this.isHanset = person.handset
+      this.isHandset = person.handset
     })
   }
   ngOnInit(): void {}

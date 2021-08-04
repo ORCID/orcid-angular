@@ -13,6 +13,7 @@
     [customControls]="true"
     class="top-bar"
     *ngIf="isPreferred(subPeerReview) || displayTheStack"
+    [stackedHeader]="!platform.columns12"
   >
     <div
       header
