@@ -9,11 +9,13 @@
     <div class="general-data">
       <ng-container *ngIf="funding?.startDate?.year"
         >{{ funding.startDate | monthDayYearDateToString }}
-        <ng-container> to </ng-container>
+        <ng-container i18n="@@shared.to">to</ng-container>
         <ng-container *ngIf="funding.endDate">{{
           funding.endDate | monthDayYearDateToString
         }}</ng-container>
-        <ng-container *ngIf="!funding.endDate.year">present</ng-container>
+        <ng-container *ngIf="!funding.endDate.year" i18n="@@shared.present"
+          >present</ng-container
+        >
       </ng-container>
       <!--End date-->
       <ng-container *ngIf="!funding.startDate.year && funding.endDate">

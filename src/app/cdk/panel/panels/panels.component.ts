@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
 import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 
 @Component({
@@ -67,7 +68,7 @@ export class PanelsComponent implements OnInit {
     }
   }
 
-  openModal(modal: ComponentType<any>, type?: string) {
+  openModal(modal: ComponentType<any>, type?: string | AffiliationType) {
     this._platform
       .get()
       .pipe(first())
