@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { first } from 'rxjs/operators'
+import { LanguageService } from 'src/app/core/language/language.service'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -52,7 +53,8 @@ export class SignInComponent implements OnInit {
     _userInfo: UserService,
     _oauthService: OauthService,
     @Inject(WINDOW) private window: Window,
-    _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _languageService: LanguageService
   ) {
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
       .pipe(first())
