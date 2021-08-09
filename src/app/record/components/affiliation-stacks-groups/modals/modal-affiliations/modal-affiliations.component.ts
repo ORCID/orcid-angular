@@ -10,6 +10,7 @@ import {
 import { WINDOW } from '../../../../../cdk/window'
 import {
   Affiliation,
+  AffiliationType,
   Organization,
 } from '../../../../../types/record-affiliation.endpoint'
 import { RecordAffiliationService } from '../../../../../core/record-affiliations/record-affiliations.service'
@@ -32,7 +33,7 @@ import { Observable } from 'rxjs/internal/Observable'
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  @Input() type: string
+  @Input() type: AffiliationType
   @Input() affiliation: Affiliation
 
   platform: PlatformInfo

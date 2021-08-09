@@ -61,7 +61,7 @@ export interface Affiliation extends AssertionBase {
   roleTitle: Value
   countryForDisplay?: any // TODO is this always empty?
   departmentName: Value
-  affiliationType: Value
+  affiliationType: AffiliationTypeValue
   disambiguatedAffiliationSourceId: Value
   disambiguationSource: Value
   orgDisambiguatedCity?: any // TODO is this always empty?
@@ -91,4 +91,33 @@ export interface Organization {
   sourceType: string
   url: string
   value: string
+}
+
+export interface AffiliationTypeValue {
+  errors?: any[]
+  value: AffiliationType
+  required?: boolean
+  getRequiredMessage?: any
+}
+
+export enum AffiliationType {
+  'employment' = 'employment',
+  'education' = 'education',
+  'qualification' = 'qualification',
+  'invited-position' = 'invited-position',
+  'distinction' = 'distinction',
+  'membership' = 'membership',
+  'service' = 'service',
+}
+
+export const AffiliationTypeLabel = {
+  [AffiliationType.employment]: $localize`:@@shared.employment:Employment`,
+  [AffiliationType.education]: $localize`:@@shared.education:Education`,
+  [AffiliationType.qualification]: $localize`:@@shared.qualification:Qualification`,
+  [AffiliationType[
+    'invited-position'
+  ]]: $localize`:@@shared.invited-position:Invited position`,
+  [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
+  [AffiliationType.membership]: $localize`:@@shared.membership:Membership`,
+  [AffiliationType.service]: $localize`:@@shared.service:Service`,
 }
