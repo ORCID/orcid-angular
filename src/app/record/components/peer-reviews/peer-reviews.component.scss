@@ -3,7 +3,12 @@
 }
 
 app-peer-review-stack {
+  display: block;
   margin-top: 24px;
+}
+
+app-peer-review-stack:first-child {
+  margin-top: 0;
 }
 
 app-panel {
