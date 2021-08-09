@@ -24,7 +24,7 @@ import { UserRecordOptions } from 'src/app/types/record.local'
   ],
   preserveWhitespaces: true,
 })
-export class PeerReviewsComponent implements OnInit {
+export class PeerReviewStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
   @Input() isPublicRecord: string
