@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 
 @Component({

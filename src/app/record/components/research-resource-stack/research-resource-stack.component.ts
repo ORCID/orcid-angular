@@ -4,7 +4,6 @@ import {
   ResearchResource,
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
-import { Work } from '../../../types/record-works.endpoint'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 
 @Component({

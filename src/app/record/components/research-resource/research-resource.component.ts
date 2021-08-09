@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
