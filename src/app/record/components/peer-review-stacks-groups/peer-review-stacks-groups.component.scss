@@ -1,0 +1,45 @@
+:host {
+  width: 100%;
+}
+
+app-peer-review-stack {
+  display: block;
+  margin-top: 24px;
+}
+
+app-peer-review-stack:first-child {
+  margin-top: 0;
+}
+
+app-panel {
+  width: 100%;
+  margin-top: 16px;
+  word-break: break-word;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+}
+
+p.empty {
+  margin-bottom: 0;
+}
+
+.description {
+  border-bottom: solid 1px;
+  padding: 16px;
+}
+
+app-panel-data {
+  padding: 0 !important;
+
+  .nested-panels {
+    padding: 16px;
+    width: auto;
+
+    app-panel-element {
+      padding: 16px;
+    }
+  }
+}

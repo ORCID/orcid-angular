@@ -1,0 +1,41 @@
+[body] {
+  display: flex;
+  flex-direction: column;
+}
+
+:host {
+  width: 100%;
+}
+
+:host.display-the-stack {
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 2px;
+
+  app-panel:not(.last) {
+    display: block;
+    position: relative;
+  }
+}
+
+app-panel {
+  word-break: break-word;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+}
+
+.header-sub-peer-review {
+  margin-inline-end: 40px;
+}
+
+.header-sub-peer-review,
+.mobile {
+  margin-inline-end: 10px;
+}
+
+.show {
+  margin-inline-end: 32px;
+}

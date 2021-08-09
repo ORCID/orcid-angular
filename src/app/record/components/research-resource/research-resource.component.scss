@@ -24,7 +24,6 @@ app-panel {
 }
 
 app-panel-data {
-  border-top: 1px solid;
   padding: 0 !important;
 
   .description-container {
@@ -42,6 +41,11 @@ app-panel-data {
         margin-inline-end: 16px;
       }
     }
+  }
+
+  app-panel-data,
+  .research-detail {
+    border-top: 1px solid;
   }
 
   .description-container,

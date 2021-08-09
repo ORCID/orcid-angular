@@ -6,7 +6,10 @@ import { RecordService } from '../../../core/record/record.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { Subject } from 'rxjs'
 import { NameForm, RequestInfoForm, UserInfo } from '../../../types'
-import { PeerReview } from '../../../types/record-peer-review.endpoint'
+import {
+  PeerReview,
+  PeerReviewDuplicateGroup,
+} from '../../../types/record-peer-review.endpoint'
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
@@ -14,14 +17,14 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-peer-reviews',
-  templateUrl: './peer-reviews.component.html',
+  templateUrl: './peer-review-stacks-groups.component.html',
   styleUrls: [
-    './peer-reviews.component.scss',
-    './peer-reviews.component.scss-theme.scss',
+    './peer-review-stacks-groups.component.scss',
+    './peer-review-stacks-groups.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
 })
-export class PeerReviewsComponent implements OnInit {
+export class PeerReviewStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
   @Input() isPublicRecord: string
@@ -70,6 +73,10 @@ export class PeerReviewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecord()
+  }
+
+  trackByPeerReviewGroup(index, item: PeerReviewDuplicateGroup) {
+    return item.activePutCode
   }
 
   private getRecord() {
