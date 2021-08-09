@@ -109,21 +109,6 @@ export class ResearchResourceStackComponent implements OnInit {
     return response
   }
 
-  /**
-   * Show and hide details of the panel
-   */
-  toggleDetails(work: Work) {
-    const putCode = work.putCode.value
-    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-      .state
-
-    if (this.panelDetailsState[putCode].state) {
-      // this.getDetails(work)
-      //   .pipe(first())
-      //   .subscribe(() => {})
-    }
-  }
-
   makePrimaryCard(researchResource: ResearchResource) {
     // TODO
   }

@@ -33,8 +33,6 @@
       *ngIf="stackPanelsDisplay[research.putCode].topPanelOfTheStack"
       [isPublicRecord]="isPublicRecord"
       [researchResource]="research"
-      [panelDetailsState]="panelDetailsState[research.putCode]"
-      (toggleDetails)="toggleDetails($event)"
     >
     </app-research-resource>
     <app-panel-source

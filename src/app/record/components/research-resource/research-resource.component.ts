@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { first, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
-import { Work } from '../../../types/record-works.endpoint'
 import {
   Host,
   Item,
@@ -26,10 +25,6 @@ export class ResearchResourceComponent implements OnInit {
 
   @Input() isPublicRecord: string
   @Input() researchResource: ResearchResource
-  @Input() panelDetailsState: {
-    state: boolean
-  }
-  @Output() toggleDetails = new EventEmitter<Work>()
   @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
 

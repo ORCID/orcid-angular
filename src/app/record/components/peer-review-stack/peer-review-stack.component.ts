@@ -121,21 +121,6 @@ export class PeerReviewStackComponent implements OnInit {
     return response
   }
 
-  /**
-   * Show and hide details of the panel
-   */
-  toggleDetails(peerReview: PeerReview) {
-    const putCode = peerReview.putCode.value
-    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-      .state
-
-    if (this.panelDetailsState[putCode].state) {
-      // this.getDetails(work)
-      //   .pipe(first())
-      //   .subscribe(() => {})
-    }
-  }
-
   makePrimaryCard(peerReview: PeerReview) {
     // TODO
   }

@@ -9,12 +9,8 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
 export class PeerReviewComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() subPeerReview: PeerReview
-  @Input() panelDetailsState: {
-    state: boolean
-  }
   @Input() detailsPeerReviews: any
 
-  @Output() toggleDetails = new EventEmitter<PeerReview>()
   @Input() stackMode
 
   constructor() {}
