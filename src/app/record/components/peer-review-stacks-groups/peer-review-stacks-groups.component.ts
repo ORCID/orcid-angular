@@ -17,10 +17,10 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-peer-reviews',
-  templateUrl: './peer-reviews.component.html',
+  templateUrl: './peer-review-stacks-groups.component.html',
   styleUrls: [
-    './peer-reviews.component.scss',
-    './peer-reviews.component.scss-theme.scss',
+    './peer-review-stacks-groups.component.scss',
+    './peer-review-stacks-groups.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
 })
