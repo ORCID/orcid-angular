@@ -13,7 +13,7 @@
       >
         Qualification
       </ng-container>
-      <ng-container i18n="@@shared.invited" *ngIf="type === 'invited'">
+      <ng-container i18n="@@shared.invited" *ngIf="type === 'invited-position'">
         Invited Position
       </ng-container>
       <ng-container i18n="@@shared.distinction" *ngIf="type === 'distinction'">
@@ -367,7 +367,7 @@
           *ngIf="
             type === 'employment' ||
             type === 'qualification' ||
-            type === 'invited' ||
+            type === 'invited-position' ||
             type === 'service'
           "
         >

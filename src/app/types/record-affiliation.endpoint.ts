@@ -116,7 +116,7 @@ export const AffiliationTypeLabel = {
   [AffiliationType.qualification]: $localize`:@@shared.qualification:Qualification`,
   [AffiliationType[
     'invited-position'
-  ]]: $localize`:@@shared.invited-position:Invited position`,
+  ]]: $localize`:@@shared.invitedSentenceCase:Invited position`,
   [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
   [AffiliationType.membership]: $localize`:@@shared.membership:Membership`,
   [AffiliationType.service]: $localize`:@@shared.service:Service`,
