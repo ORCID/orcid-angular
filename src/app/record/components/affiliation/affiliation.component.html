@@ -9,15 +9,29 @@
     <div class="general-data">
       <ng-container *ngIf="affiliation?.startDate?.year"
         >{{ affiliation.startDate | monthDayYearDateToString }}
-        <ng-container *ngIf="showEndDate">
-          <ng-container> to </ng-container>
+        <ng-container *ngIf="showEndDateRange">
+          <ng-container i18n="@@share.to">to</ng-container>
           <ng-container *ngIf="affiliation.endDate">{{
             affiliation.endDate | monthDayYearDateToString
-          }}</ng-container>
-          <ng-container *ngIf="!affiliation.endDate.year">present</ng-container>
+          }}</ng-container></ng-container
+        >
+        <ng-container *ngIf="!affiliation.endDate.year" i18n="@@share.present"
+          >present</ng-container
+        >
+      </ng-container>
+      <ng-container *ngIf="!affiliation.startDate.year && affiliation.endDate">
+        <ng-container *ngIf="affiliation.endDate?.year">
+          {{ affiliation.endDate | monthDayYearDateToString }}
         </ng-container>
       </ng-container>
-      <ng-container *ngIf="affiliation?.startDate.year"> | </ng-container>
+      <ng-container
+        *ngIf="
+          (affiliation?.startDate.year || affiliation?.endDate.year) &&
+          affiliation?.roleTitle.value
+        "
+      >
+        |
+      </ng-container>
       {{ affiliation.roleTitle.value }}
       <ng-container *ngIf="affiliation.departmentName.value">
         ({{ affiliation.departmentName.value }})

@@ -15,7 +15,7 @@ import { URL_REGEXP } from '../../../constants'
 export class AffiliationComponent implements OnInit {
   affiliationValue: Affiliation
   @Input() set affiliation(value: Affiliation) {
-    this.showEndDate = this.isAffiliationEndDateShown(value)
+    this.showEndDateRange = this.isAffiliationEndDateRangeShown(value)
     this.affiliationValue = value
   }
 
@@ -28,7 +28,7 @@ export class AffiliationComponent implements OnInit {
   @Output() toggleDetails = new EventEmitter<Affiliation>()
   @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
-  showEndDate = true
+  showEndDateRange = true
 
   constructor() {}
 
@@ -40,7 +40,7 @@ export class AffiliationComponent implements OnInit {
   isUrl(element) {
     return RegExp(URL_REGEXP).test(element)
   }
-  private isAffiliationEndDateShown(affiliation: Affiliation): boolean {
+  private isAffiliationEndDateRangeShown(affiliation: Affiliation): boolean {
     return !(
       affiliation?.affiliationType.value === AffiliationType.distinction &&
       !affiliation.endDate.year
