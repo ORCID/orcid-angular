@@ -133,6 +133,7 @@ export class PanelComponent implements OnInit {
           })
           modalComponent.componentInstance.type = this.type
           modalComponent.componentInstance.affiliation = this.elements
+          modalComponent.componentInstance.funding = this.elements
         }
       })
   }

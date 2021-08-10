@@ -22,8 +22,8 @@
       </a>
     </ng-container>
     <ng-container id="side-bar-url-2">
-      <a class="side-bar" i18n="@@funding.grantDetails" (click)="toGrantDetails()">
-        Grant details
+      <a class="side-bar" i18n="@@funding.fundingIdentifiers" (click)="toFundingIdentifiers()">
+        Funding identifiers
       </a>
     </ng-container>
     <ng-container id="side-bar-url-3">
@@ -160,6 +160,13 @@
             formControlName="fundingProjectTitle"
             placeholder=""
           />
+          <mat-error
+          class="mat-caption"
+          *ngIf="fundingForm.hasError('required', 'fundingProjectTitle')"
+          i18n="@@funding.projectTitleError"
+        >
+          Please enter a title
+        </mat-error>
         </mat-form-field>
       </div>
       <!-- SHOW-HIDE translated title button  -->
@@ -472,7 +479,11 @@
       <label
         for="funding-agency-name-input"
         class="mat-caption"
-        [ngClass]="{ error: fundingForm.hasError('required', 'agencyName') }"
+        [ngClass]="{
+          error:
+            fundingForm.get('agencyName').hasError('required') &&
+            (fundingForm.get('agencyName').touched || fundingForm.get('agencyName').dirty )
+        }"
       >
         <strong i18n="@@funding.agencyName">Funding agency name</strong>
         <span class="required">*</span>
@@ -484,8 +495,39 @@
           id="funding-agency-name-input"
           matInput
           formControlName="agencyName"
-          placeholder=""
+          [matAutocomplete]="auto"
         />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option.value"
+            (click)="fillForm(option)"
+          >
+            <div class="row orc-font-body-small">
+              {{ option.value }}
+            </div>
+            <div class="row orc-font-small-print">
+              {{ option.city }} {{ option.region }} {{ option.country }}
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+        <button
+          class="clear"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="clearForm()"
+          *ngIf="fundingForm.get('agencyName').value"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error
+          class="mat-caption"
+          *ngIf="fundingForm.hasError('required', 'agencyName')"
+          i18n="@@funding.agencyNameError"
+        >
+          Please enter an agency name
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -500,13 +542,14 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="city-input" matInput formControlName="city" />
-        <!--mat-error
+        <mat-error
           class="mat-caption"
-          *ngIf="affiliationForm.get('city').hasError('required')"
+          *ngIf="fundingForm.get('city').hasError('required') &&
+            fundingForm.get('city').touched"
           i18n="@@shared.cityError"
         >
           Please enter a city
-        </mat-error -->
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -543,21 +586,22 @@
             {{ countryCode.key }}
           </mat-option>
         </mat-select>
-        <!--mat-error
+        <mat-error
           i18n="@@shared.countryError"
-          *ngIf="affiliationForm.get('country').hasError('required')"
+          *ngIf="fundingForm.get('country').hasError('required') &&
+            fundingForm.get('country').touched"
         >
           Please enter a country
-        </mat-error -->
+        </mat-error>
       </mat-form-field>
     </div>
 
     <!-------------------------->
-    <!-- Funding Grant Details-->
+    <!-- Funding Identifiers-->
     <!-------------------------->
 
     <div
-      id="grant-details"
+      id="funding-identifiers"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
@@ -565,7 +609,7 @@
       }"
     >
       <p>
-        <strong i18n="@@funding.grantDetails">Grant details</strong>
+        <strong i18n="@@funding.fundingIdentifiers">Funding identifiers</strong>
         <span *ngIf="!platform.columns12" class="required">*</span>
       </p>
       <p *ngIf="platform.columns12" class="required-information mat-caption">
@@ -597,7 +641,7 @@
               >
                 <strong
                   i18n="@@funding.grantNumber"
-                  >Grant number
+                  >Funding number
                 </strong>
               </label>
             </div>
@@ -626,7 +670,7 @@
                   ) && grantsGroup.get('grantUrl').touched
               }"
             >
-              <strong i18n="@@funding.grantUrl">Grant link </strong>
+              <strong i18n="@@funding.grantUrl">Funding link </strong>
             </label>
 
             <mat-form-field
@@ -707,11 +751,10 @@
       <!-- Add another -->
       <div
         class="row align-icon"
-        *ngIf="!showTranslationTitle"
         (click)="addAnotherGrant()"
       >
         <button mat-icon-button><mat-icon>add</mat-icon></button>
-        <a i18n="@@funding.addAnotherGrant">Add another grant number</a>
+        <a i18n="@@funding.addAnotherGrant">Add another funding identifier</a>
       </div>
     </div>
 

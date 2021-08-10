@@ -159,6 +159,20 @@ export interface TranslatedTitle {
   languageName?: string
 }
 
+export interface Organization {
+  affiliationKey: string
+  city: string
+  country: string
+  countryForDisplay: string
+  disambiguatedAffiliationIdentifier: string
+  orgType: string
+  region: string
+  sourceId: string
+  sourceType: string
+  url: string
+  value: string
+}
+
 export type ScopesStrings =
   | 'openid'
   | '/authenticate'
