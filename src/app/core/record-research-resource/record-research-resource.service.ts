@@ -126,7 +126,7 @@ export class RecordResearchResourceService {
     })
   }
 
-  getResearchResourceById(putCode: number): Observable<ResearchResource> {
+  getResearchResourceById(putCode: string): Observable<ResearchResource> {
     return this._http.get<ResearchResource>(
       environment.API_WEB +
         'research-resources/researchResource.json?id=' +

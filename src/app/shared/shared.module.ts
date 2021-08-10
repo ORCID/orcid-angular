@@ -21,6 +21,7 @@ import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
 import { RecordFundingRelationshipLabelPipe } from './pipes/record-funding-relationship-label/record-funding-relationship-label.pipe'
 import { RecordFundingRelationshipHintLabelPipe } from './pipes/record-funding-relationship-hint-label/record-funding-relationship-hint-label.pipe'
 import { RecordFundingTypeLabelPipe } from './pipes/record-funding-type-label/record-funding-type-label.pipe'
+import { AffiliationTypeLabelPipe } from './pipes/affiliation-type-label.pipe'
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { RecordFundingTypeLabelPipe } from './pipes/record-funding-type-label/re
     RecordFundingRelationshipLabelPipe,
     RecordFundingRelationshipHintLabelPipe,
     RecordFundingTypeLabelPipe,
+    AffiliationTypeLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -61,6 +63,7 @@ import { RecordFundingTypeLabelPipe } from './pipes/record-funding-type-label/re
     RecordFundingRelationshipLabelPipe,
     RecordFundingRelationshipHintLabelPipe,
     RecordFundingTypeLabelPipe,
+    AffiliationTypeLabelPipe,
   ],
   providers: [], // Should not provide anything
 })
