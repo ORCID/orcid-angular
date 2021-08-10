@@ -51,7 +51,10 @@
         class="show"
         *ngIf="
           !displayTheStack ||
-           (displayTheStack && this.stackPanelsDisplay[subPeerReview.putCode.value].topPanelOfTheStack)"
+          (displayTheStack &&
+            this.stackPanelsDisplay[subPeerReview.putCode.value]
+              .topPanelOfTheStack)
+        "
       >
         <a
           class="underline"
