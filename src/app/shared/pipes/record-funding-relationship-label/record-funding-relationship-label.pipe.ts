@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 import {
   FundingRelationships,
   FundingRelationshipsLabels,
-} from  'src/app/types/record-funding.endpoint'
+} from 'src/app/types/record-funding.endpoint'
 
 @Pipe({
   name: 'recordFundingRelationshipLabel',
