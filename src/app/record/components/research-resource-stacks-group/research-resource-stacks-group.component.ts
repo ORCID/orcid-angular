@@ -117,8 +117,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     this.userRecordContext.publicRecordId = this.isPublicRecord
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
-    this.userRecordContext.forceReload = true
-    this.userRecordContext.offset = 0
     this._recordResearchResourceService.changeUserRecordContext(
       this.userRecordContext
     )
