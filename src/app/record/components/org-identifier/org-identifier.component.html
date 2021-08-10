@@ -81,16 +81,10 @@
       </ng-container>
       <ng-container *ngIf="org.preferred">
         <span> (</span>
-        <span i18n="@@shared.preferred"> preferred </span>
+        <span i18n="@@shared.preferred">preferred</span>
         <span>)</span>
       </ng-container>
-      <span
-        *ngIf="
-          org.preferred &&
-          orgDisambiguated.orgDisambiguatedExternalIdentifiers.length - 1 !== i
-        "
-        >,
-      </span>
+      <span *ngIf="org.preferred && org.all.length > 1">, </span>
       <ng-container *ngFor="let id of org.all; index as j">
         <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
           id
@@ -105,7 +99,9 @@
             {{ id }}
           </a>
         </ng-container>
-        <span *ngIf="id != org.preferred && org.all.length - 1 !== j">, </span>
+        <span *ngIf="org.all[j + 1] && org.all[j + 1] != org.preferred"
+          >,
+        </span>
       </ng-container>
     </div>
   </app-display-attribute>
