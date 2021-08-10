@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, first, map, retry, take, tap } from 'rxjs/operators'
+import { catchError, map, retry, take, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 import { environment } from '../../../environments/environment'
@@ -11,7 +11,6 @@ import {
 } from '../../types/record-research-resources.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
-import { WorksEndpoint } from '../../types/record-works.endpoint'
 
 @Injectable({
   providedIn: 'root',
