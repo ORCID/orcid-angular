@@ -47,7 +47,12 @@
         'orc-font-body-small': !isMobile
       }"
     >
-      <span class="show">
+      <span
+        class="show"
+        *ngIf="
+          !displayTheStack ||
+           (displayTheStack && this.stackPanelsDisplay[subPeerReview.putCode.value].topPanelOfTheStack)"
+      >
         <a
           class="underline"
           *ngIf="!subPeerReview.showDetails"
