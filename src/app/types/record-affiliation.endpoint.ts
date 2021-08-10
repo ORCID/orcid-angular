@@ -118,6 +118,6 @@ export const AffiliationTypeLabel = {
     'invited-position'
   ]]: $localize`:@@shared.invitedSentenceCase:Invited position`,
   [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
-  [AffiliationType.membership]: $localize`:@@shared.membership:Membership`,
+  [AffiliationType.membership]: $localize`:@@shared.membershipTitle:Membership`,
   [AffiliationType.service]: $localize`:@@shared.service:Service`,
 }
