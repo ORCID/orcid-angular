@@ -74,8 +74,8 @@ export class PanelsComponent implements OnInit {
         this.openModal(ModalPeerReviewsComponent)
         break
       case 'funding':
-          this.openModal(ModalFundingComponent)
-          break
+        this.openModal(ModalFundingComponent)
+        break
       default: {
         this.openModal(this.addMenuOptions[action].modal, type)
       }
@@ -120,7 +120,7 @@ export class PanelsComponent implements OnInit {
     return (
       this.type === 'education' ||
       this.type === 'invited-position' ||
-      this.type === 'membership' 
+      this.type === 'membership'
     )
   }
 

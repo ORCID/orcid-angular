@@ -110,7 +110,14 @@ export class PanelComponent implements OnInit {
   }
 
   isArrayAndIsNotEmpty(
-    obj: Assertion[] | Value | Address | Affiliation | Funding | PeerReview | Work
+    obj:
+      | Assertion[]
+      | Value
+      | Address
+      | Affiliation
+      | Funding
+      | PeerReview
+      | Work
   ) {
     return Array.isArray(obj) && obj.length > 0
   }

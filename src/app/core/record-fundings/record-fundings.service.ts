@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders  } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, switchMap, tap } from 'rxjs/operators'
@@ -148,10 +148,12 @@ export class RecordFundingsService {
   }
 
   getFunding(): Observable<Funding> {
-    return this._http.get<Funding>(environment.API_WEB + `fundings/funding.json`).pipe(
-      retry(3),
-      catchError((error) => this._errorHandler.handleError(error))
-    )
+    return this._http
+      .get<Funding>(environment.API_WEB + `fundings/funding.json`)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   save(funding: Funding) {
@@ -169,7 +171,8 @@ export class RecordFundingsService {
       .get<Organization[]>(
         environment.API_WEB +
           'fundings/disambiguated/name/' +
-          org + '?limit=100&funders-only=true',
+          org +
+          '?limit=100&funders-only=true',
         {
           headers: this.headers,
         }
@@ -179,5 +182,4 @@ export class RecordFundingsService {
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
-
 }

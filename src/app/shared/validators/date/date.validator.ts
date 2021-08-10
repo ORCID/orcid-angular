@@ -1,7 +1,7 @@
 import { AbstractControl } from '@angular/forms'
 
 export function dateValidator(dateType: string) {
-   return (c: AbstractControl): { [key: string]: any } | null => {
+  return (c: AbstractControl): { [key: string]: any } | null => {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
     const day = c.get(dateType + 'Day').value
@@ -42,14 +42,13 @@ export function dateMonthYearValidator(dateType: string) {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
 
-    if (year === '' && month === '') 
-     {
+    if (year === '' && month === '') {
       return null
     }
 
     let date
 
-    if (year && !month ) {
+    if (year && !month) {
       date = new Date(year)
     }
 
@@ -58,7 +57,7 @@ export function dateMonthYearValidator(dateType: string) {
     }
 
     if (year && month) {
-      date = new Date(year + '/' + month )
+      date = new Date(year + '/' + month)
     }
 
     if (date && !isNaN(date.getTime())) {

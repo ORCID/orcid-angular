@@ -49,7 +49,6 @@ export interface Funding extends AssertionBase {
   fullyLoaded?: boolean
 }
 
-
 export enum FundingTypes {
   award = 'award',
   contract = 'contract',
@@ -499,6 +498,4 @@ export const CurrencyCodeMap = {
   ZWL: 'ZWL',
   ZWN: 'ZWN',
   ZWR: 'ZWR',
-
 }
-
