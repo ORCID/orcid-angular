@@ -230,77 +230,13 @@
           </div>
           <app-panel-data [borderBottom]="true" *ngIf="item.showDetails">
             <app-panel-element [hideVisibility]="false">
+              <app-display-external-ids
+                class="description"
+                [externalIdentifiers]="item.externalIdentifiers"
+                [noBoldTitle]="true"
+              ></app-display-external-ids>
+
               <div class="description">
-                <div
-                  *ngFor="
-                    let itemExternalIdentifier of item.externalIdentifiers
-                  "
-                >
-                  <i
-                    i18n="@@shared.partOf"
-                    *ngIf="
-                      itemExternalIdentifier?.relationship?.value === 'part-of'
-                    "
-                  >
-                    Part of
-                  </i>
-                  <i
-                    i18n="@@shared.fundedBy"
-                    *ngIf="
-                      itemExternalIdentifier?.relationship?.value ===
-                      'funded-by'
-                    "
-                  >
-                    Funded by
-                  </i>
-                  {{
-                    itemExternalIdentifier.externalIdentifierType.value + ':'
-                      | uppercase
-                  }}
-                  <ng-container
-                    *ngIf="
-                      !isUrl(itemExternalIdentifier.externalIdentifierId.value)
-                    "
-                  >
-                    {{ itemExternalIdentifier.externalIdentifierId.value }}
-                  </ng-container>
-                  <ng-container
-                    *ngIf="
-                      isUrl(itemExternalIdentifier.externalIdentifierId.value)
-                    "
-                  >
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="{{
-                        itemExternalIdentifier.externalIdentifierId.value
-                      }}"
-                    >
-                      <i
-                        i18n="@@shared.partOf"
-                        *ngIf="
-                          itemExternalIdentifier?.relationship?.value ===
-                          'part-of'
-                        "
-                      >
-                        Part of
-                      </i>
-                      <i
-                        i18n="@@shared.fundedBy"
-                        *ngIf="
-                          itemExternalIdentifier?.relationship?.value ===
-                          'funded-by'
-                        "
-                      >
-                        Funded by
-                      </i>
-                      {{
-                        itemExternalIdentifier.externalIdentifierType.value +
-                          ':' | uppercase
-                      }}
-                    </a>
-                  </ng-container>
-                </div>
                 <div *ngIf="item.url">
                   <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
                   <ng-container *ngIf="!isUrl(item.url)">
@@ -320,15 +256,23 @@
               <ng-container *ngFor="let itemHost of item.hosts">
                 <div
                   class="description"
-                  *ngIf="
-                    getOrganizationDisambiguated(
-                      itemHost
-                    ) as organizationDisambiguatedNested
-                  "
+                  *ngIf="getOrganizationDisambiguated(itemHost) as nestOrg"
                 >
-                  {{ organizationDisambiguatedNested.value }}
+                  <span>{{ itemHost.name }}</span>
+                  <span
+                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
+                  >
+                    (</span
+                  >
+                  <span *ngIf="itemHost.city">{{ itemHost.city }}</span
+                  ><span *ngIf="itemHost.region">, {{ itemHost.region }}</span>
+                  <span *ngIf="itemHost.country">, {{ itemHost.country }}</span>
+                  <span
+                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
+                    >)</span
+                  >
                   <app-org-identifier
-                    [orgDisambiguated]="organizationDisambiguatedNested"
+                    [orgDisambiguated]="nestOrg"
                   ></app-org-identifier>
                 </div>
               </ng-container>
