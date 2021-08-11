@@ -15,6 +15,10 @@
     (sort)="sortEvent($event)"
     type="works"
   >
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="paginationLoading"
+    ></mat-progress-bar>
     <mat-paginator
       *ngIf="workGroup.totalGroups > workGroup.groups.length"
       [length]="paginationTotalAmountOfWorks"
@@ -22,6 +26,7 @@
       [pageSizeOptions]="[10, 50, 100]"
       [pageIndex]="paginationIndex"
       (page)="pageEvent($event)"
+      [disabled]="paginationLoading"
     >
     </mat-paginator>
     <ng-container *ngIf="workGroup.groups.length > 0">
