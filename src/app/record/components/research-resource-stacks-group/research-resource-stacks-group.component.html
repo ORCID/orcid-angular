@@ -49,7 +49,10 @@
       </div>
     </ng-container>
     <mat-paginator
-      *ngIf="researchResources.totalGroups > researchResources.groups.length"
+      *ngIf="
+        researchResources.totalGroups > researchResources.groups.length ||
+        paginationPageSize !== defaultPageSize
+      "
       [length]="paginationTotalAmountOfResearchResources"
       [pageSize]="paginationPageSize"
       [pageSizeOptions]="[10, 50, 100]"
