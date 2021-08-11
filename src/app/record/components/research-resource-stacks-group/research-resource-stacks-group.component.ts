@@ -59,7 +59,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   paginationTotalAmountOfResearchResources: number
   paginationIndex: number
   paginationPageSize: number
-  paginationLoading = true
 
   constructor(
     _platform: PlatformInfoService,
@@ -93,7 +92,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.researchResources)) {
-          this.paginationLoading = false
           this.researchResources = userRecord.researchResources
           this.offset = userRecord.researchResources.offset
           this.total.emit(this.researchResources.groups.length)
@@ -113,7 +111,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     this._recordResearchResourceService.changeUserRecordContext(
       this.userRecordContext
     )
-    this.paginationLoading = true
   }
 
   sortEvent(event: SortData) {
@@ -123,7 +120,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     this._recordResearchResourceService.changeUserRecordContext(
       this.userRecordContext
     )
-    this.paginationLoading = true
   }
 
   expandedClicked(expanded: boolean) {
