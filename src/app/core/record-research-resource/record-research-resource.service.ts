@@ -11,6 +11,7 @@ import {
 } from '../../types/record-research-resources.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class RecordResearchResourceService {
   getResearchResourcePage(
     options: UserRecordOptions
   ): Observable<ResearchResourcesEndpoint> {
-    options.pageSize = options.pageSize || 50
+    options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
     if (options.publicRecordId) {

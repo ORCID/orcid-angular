@@ -16,6 +16,7 @@ import {
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
 import { PageEvent } from '@angular/material/paginator'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 
 @Component({
   selector: 'app-research-resources',
@@ -23,6 +24,7 @@ import { PageEvent } from '@angular/material/paginator'
   styleUrls: ['./research-resource-stacks-group.component.scss'],
 })
 export class ResearchResourceStacksGroupComponent implements OnInit {
+  defaultPageSize = DEFAULT_PAGE_SIZE
   labelSortButton = $localize`:@@shared.sortResearch:Sort Research Resources`
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
