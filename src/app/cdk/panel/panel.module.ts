@@ -16,6 +16,10 @@ import { PanelDataLineComponent } from './panel-data-line/panel-data-line.compon
 import { PanelElementSourceComponent } from './panel-element-source/panel-element-source.component'
 import { MatDividerModule } from '@angular/material/divider'
 import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand-buttons.component'
+import { MatMenuModule } from '@angular/material/menu'
+import { SortLabelPipe } from './sort-label.pipe'
+import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand
     PanelDataLineComponent,
     PanelElementSourceComponent,
     PanelExpandButtonsComponent,
+    SortLabelPipe,
   ],
   imports: [
     CommonModule,
@@ -36,6 +41,9 @@ import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand
     MatTooltipModule,
     MatDialogModule,
     MatDividerModule,
+    MatMenuModule,
+    PrivacySelectorModule,
+    ReactiveFormsModule,
   ],
   exports: [
     PanelComponent,
@@ -47,6 +55,7 @@ import { PanelExpandButtonsComponent } from './panel-expand-buttons/panel-expand
     PanelsComponent,
     PanelDataLineComponent,
     PanelElementSourceComponent,
+    PanelExpandButtonsComponent,
   ],
 })
 export class PanelModule {}

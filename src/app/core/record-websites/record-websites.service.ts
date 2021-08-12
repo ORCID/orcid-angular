@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { WebsitesEndPoint } from '../../types/record-websites.endpoint'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
@@ -31,7 +31,7 @@ export class RecordWebsitesService {
   ): Observable<WebsitesEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.website))
     }
     if (!this.$websites) {
@@ -50,6 +50,7 @@ export class RecordWebsitesService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ websites: [] } as WebsitesEndPoint)),
         tap((value) => {
           this.$websites.next(value)
         })

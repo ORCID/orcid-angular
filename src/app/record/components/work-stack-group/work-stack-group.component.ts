@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { PageEvent } from '@angular/material/paginator'
+import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-import { UserService } from 'src/app/core'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
-import { UserSession } from 'src/app/types/session.local'
+import { UserRecordOptions } from 'src/app/types/record.local'
+import { SortData } from 'src/app/types/sort'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -13,41 +15,67 @@ import { UserSession } from 'src/app/types/session.local'
   styleUrls: ['./work-stack-group.component.scss'],
 })
 export class WorkStackGroupComponent implements OnInit {
+  defaultPageSize = DEFAULT_PAGE_SIZE
+  labelAddButton = $localize`:@@shared.addWork:Add Work`
+  labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
+  paginationLoading = true
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
+  userRecordContext: UserRecordOptions = {}
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   workGroup: WorksEndpoint
-  userSession: UserSession
-  userRecord: UserRecord
 
   works = $localize`:@@shared.works:Works`
+  paginationTotalAmountOfWorks: number
+  paginationIndex: number
+  paginationPageSize: number
 
   constructor(
-    private _userSession: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _works: RecordWorksService
   ) {}
 
   ngOnInit(): void {
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
-        this.userRecord = userRecord
-        this.workGroup = this.userRecord.works
-        this.total.emit(this.userRecord.works.groups.length)
-      })
-
-    this._userSession
-      .getUserSession()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userSession) => {
-        this.userSession = userSession
+        if (!isEmpty(userRecord.works)) {
+          this.paginationLoading = false
+          this.workGroup = userRecord.works
+          this.total.emit(userRecord.works?.groups?.length)
+          this.paginationTotalAmountOfWorks = userRecord.works.totalGroups
+          this.paginationIndex = userRecord.works.pageIndex
+          this.paginationPageSize = userRecord.works.pageSize
+          this.total.emit(userRecord.works.groups.length)
+        }
       })
   }
 
   trackByWorkGroup(index, item: WorkGroup) {
     return item.defaultPutCode
+  }
+
+  expandedClicked(expanded: boolean) {
+    this.expanded.emit({ type: 'works', expanded })
+  }
+
+  pageEvent(event: PageEvent) {
+    this.paginationLoading = true
+    this.userRecordContext.offset = event.pageIndex * event.pageSize
+    this.userRecordContext.pageSize = event.pageSize
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this._works.changeUserRecordContext(this.userRecordContext)
+  }
+
+  sortEvent(event: SortData) {
+    this.paginationLoading = true
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sort = event.type
+    this.userRecordContext.sortAsc = event.direction === 'asc'
+    this._works.changeUserRecordContext(this.userRecordContext)
   }
 }

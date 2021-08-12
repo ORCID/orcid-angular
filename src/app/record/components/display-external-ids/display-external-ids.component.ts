@@ -8,8 +8,14 @@ import { ExternalIdentifier } from 'src/app/types/common.endpoint'
 })
 export class DisplayExternalIdsComponent implements OnInit {
   @Input() externalIdentifiers: ExternalIdentifier[]
+  @Input() noBoldTitle = false
+  @Input() externalIdentifier: ExternalIdentifier
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.externalIdentifier) {
+      this.externalIdentifiers = Array.of(this.externalIdentifier)
+    }
+  }
 }

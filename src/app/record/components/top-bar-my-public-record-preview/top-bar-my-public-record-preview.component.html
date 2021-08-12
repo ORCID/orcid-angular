@@ -1,0 +1,83 @@
+<div
+  *ngIf="iAmEditingThisRecord && isPublicRecord"
+  [ngClass]="{ 'yellow-bg': !isMyRecord }"
+>
+  <div class="container">
+    <div class="content">
+      <mat-icon class="margin-end">preview</mat-icon>
+      <div
+        class="margin-end"
+        i18n="@@record.youArePreviewing"
+        *ngIf="!isMyRecord"
+      >
+        You are previewing a public version of this record
+      </div>
+      <div
+        class="margin-end"
+        i18n="@@record.youArePreviewingSomeElse"
+        *ngIf="isMyRecord"
+      >
+        You are previewing the public version of your record
+      </div>
+      <img
+        class="margin-end"
+        src="assets/vectors/orcid.logo.icon.svg"
+        alt="orcid logo"
+      />
+      <strong class="margin-end">{{ effectiveRecord }}</strong>
+      <a class="margin-end" href="/my-orcid" i18n="@@record.editThisRecord"
+        >Edit this record</a
+      >
+    </div>
+  </div>
+
+  <mat-divider class="bottom-divider"></mat-divider>
+</div>
+
+<div
+  *ngIf="
+    iAmEditingThisRecord &&
+    (trustedIndividuals.delegators.length || trustedIndividuals.me) &&
+    !isPublicRecord
+  "
+  [ngClass]="{ 'yellow-bg': !isMyRecord }"
+>
+  <mat-divider></mat-divider>
+
+  <div class="container">
+    <div class="content">
+      <mat-icon class="margin-end">preview</mat-icon>
+      <div
+        class="margin-end"
+        i18n="@@record.youAreManaging"
+        *ngIf="!isMyRecord"
+      >
+        You are managing this ORCID record as a trusted individual
+      </div>
+
+      <div
+        class="margin-end"
+        i18n="@@record.youAreManagingSomeElse"
+        *ngIf="isMyRecord"
+      >
+        You are managing your Orcid record
+      </div>
+      <img
+        class="margin-end"
+        src="assets/vectors/orcid.logo.icon.svg"
+        alt="orcid logo"
+      />
+      <strong class="margin-end">{{ effectiveRecord }}</strong>
+      <app-trusted-individuals-dropdown
+        *ngIf="trustedIndividuals"
+        (changeUser)="changeAccount($event)"
+        [trustedIndividuals]="trustedIndividuals"
+      ></app-trusted-individuals-dropdown>
+    </div>
+  </div>
+
+  <mat-divider
+    class="bottom-divider"
+    [ngClass]="{ orange: isPublicRecord, green: !isPublicRecord && isMyRecord }"
+  ></mat-divider>
+</div>

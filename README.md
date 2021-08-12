@@ -73,6 +73,7 @@ The following commands are used to build the application for non-local environme
 - `yarn build:prod`
 - `yarn build:sandbox`
 - `yarn build:qa`
+- `yarn build:int`
 
 ## Learn more
 

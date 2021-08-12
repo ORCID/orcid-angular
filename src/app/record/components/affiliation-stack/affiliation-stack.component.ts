@@ -9,6 +9,7 @@ import {
   AffiliationGroup,
   AffiliationUIGroup,
 } from 'src/app/types/record-affiliation.endpoint'
+import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
   selector: 'app-affiliation-stack',
@@ -22,6 +23,14 @@ export class AffiliationStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _affiliationStack: AffiliationGroup
   @Input() isPublicRecord: string = null
+  @Input() type:
+    | 'employment'
+    | 'education'
+    | 'qualification'
+    | 'invited-position'
+    | 'distinction'
+    | 'membership'
+    | 'service'
   @Input()
   set affiliationStack(value: AffiliationGroup) {
     this._affiliationStack = value
@@ -48,6 +57,7 @@ export class AffiliationStackComponent implements OnInit {
       state: boolean
     }
   } = {}
+  modalAffiliationsComponent = ModalAffiliationsComponent
 
   constructor(
     private _affiliationService: RecordAffiliationService,

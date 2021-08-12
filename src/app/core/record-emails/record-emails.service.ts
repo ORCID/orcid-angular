@@ -41,7 +41,7 @@ export class RecordEmailsService {
   ): Observable<EmailsEndpoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.emails))
     }
     if (!this.$emailsSubject) {
@@ -57,6 +57,7 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError((error) => of({ emails: [] })),
         map((value: EmailsEndpoint) => {
           value.emails
             .sort(this.sortByEmailByValue)

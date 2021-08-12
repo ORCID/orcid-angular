@@ -1,4 +1,4 @@
-import { Person, Preferences, PersonIdentifierEndpoint } from '.'
+import { Preferences, PersonIdentifierEndpoint, UserInfo } from '.'
 import { OtherNamesEndPoint } from './record-other-names.endpoint'
 import { KeywordEndPoint } from './record-keyword.endpoint'
 import { NamesEndPoint } from './record-name.endpoint'
@@ -9,8 +9,9 @@ import { WebsitesEndPoint } from './record-websites.endpoint'
 import { AffiliationUIGroup } from './record-affiliation.endpoint'
 import { FundingGroup } from './record-funding.endpoint'
 import { PeerReview } from './record-peer-review.endpoint'
-import { ResearchResources } from './record-research-resources.endpoint'
+import { ResearchResourcesEndpoint } from './record-research-resources.endpoint'
 import { WorksEndpoint } from './record-works.endpoint'
+import { SortOrderType } from './sort'
 
 export interface SideBarPublicUserRecord {
   title?: any
@@ -27,7 +28,7 @@ export interface SideBarPublicUserRecord {
 }
 
 export interface UserRecord {
-  person: Person
+  // person: Person
   emails: EmailsEndpoint
   otherNames: OtherNamesEndPoint
   countries: CountriesEndpoint
@@ -40,13 +41,10 @@ export interface UserRecord {
   affiliations: AffiliationUIGroup[]
   fundings: FundingGroup[]
   peerReviews: PeerReview[]
-  researchResources: ResearchResources
+  researchResources: ResearchResourcesEndpoint
   works: WorksEndpoint
   lastModifiedTime: any
-  publicMetadata?: {
-    noRobots: boolean
-    noIndex: boolean
-  }
+  userInfo: UserInfo
 }
 
 export interface UserRecordOptions {
@@ -54,5 +52,7 @@ export interface UserRecordOptions {
   publicRecordId?: string
   privateRecordId?: string
   sortAsc?: boolean
-  sort?: boolean
+  sort?: SortOrderType
+  offset?: number
+  pageSize?: number
 }

@@ -24,13 +24,41 @@
     button {
       margin-inline-end: 4px;
     }
+    .text-container {
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
   }
   .controls {
     display: flex;
+
+    button {
+      font-weight: normal;
+      padding: 0 6px;
+
+      mat-icon {
+        margin-right: 8px;
+        margin-bottom: 2px;
+      }
+    }
+
+    .add {
+      margin-right: 32px;
+    }
   }
 }
 
 .header-container,
 .sub-peer-review {
   border: solid 1px;
+}
+
+.sort {
+  position: absolute;
+  bottom: 12px;
+  right: 0;
+}
+
+.clickable {
+  cursor: pointer;
 }

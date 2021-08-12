@@ -1,0 +1,45 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin research-resource-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .description-container,
+  .show-details {
+    border-color: mat-color($background, ui-background) !important;
+  }
+
+  .infrastructures {
+    color: mat-contrast($accent, 600);
+    .dot {
+      background-color: mat-contrast($accent, 600);
+    }
+  }
+
+  .equipment {
+    color: mat-contrast($accent, 600);
+    .dot {
+      background-color: mat-contrast($accent, 600);
+    }
+  }
+
+  .services {
+    color: mat-contrast($accent, 600);
+    .dot {
+      background-color: mat-contrast($accent, 600);
+    }
+  }
+
+  .collections {
+    color: mat-contrast($accent, 600);
+    .dot {
+      background-color: mat-contrast($accent, 600);
+    }
+  }
+}
+
+@include research-resource-theme($orcid-app-theme);

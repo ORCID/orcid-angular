@@ -2,30 +2,49 @@
   class="header box orc-font-body"
   [ngClass]="{
     'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
-    'top-bar-or-main': type === 'top-bar' || type === 'main',
+    'top-bar-or-main': type === 'top-bar' || type === 'main' || isAffiliation(),
     'side-bar': type === 'side-bar',
-    'expand-button': !editable && !isPublicRecord && !customControls
+    'staked-header': stackedHeader
   }"
 >
-  <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
+  <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
   <ng-container
     *ngIf="!editable && !customControls && expandButtonsPosition === 'left'"
   >
-    <ng-container>
+    <div class="expand-button-left">
       <app-panel-expand-buttons
         (toggle)="toggle()"
         [openState]="openState"
       ></app-panel-expand-buttons>
-    </ng-container>
+      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    </div>
   </ng-container>
 
-  <ng-content select="[header]"></ng-content>
+  <ng-container *ngIf="expandButtonsPosition !== 'left'">
+    <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+  </ng-container>
+
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
-    <app-panel-privacy
-      *ngIf="visibility && !isPublicRecord"
-      [visibility]="visibility"
-    ></app-panel-privacy>
+    <ng-container *ngIf="visibility && !isPublicRecord">
+      <app-panel-privacy
+        class="panel-privacy"
+        [visibility]="visibility"
+      ></app-panel-privacy>
+      <div class="hide">
+        <div class="privacy-selector">
+          <p class="orc-font-body-small" i18n="@@shared.whoCanSeeThis">
+            Who can see this?
+          </p>
+          <form *ngIf="visibility" [formGroup]="formVisibility">
+            <app-privacy-selector
+              (click)="updateVisibility()"
+              formControlName="visibility"
+            ></app-privacy-selector>
+          </form>
+        </div>
+      </div>
+    </ng-container>
 
     <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
     <ng-content select="[custom-controls]"></ng-content>
@@ -43,7 +62,7 @@
         <mat-icon class="material-icons-outlined">edit</mat-icon>
       </button>
     </ng-container>
-    <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
+    <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
     <ng-container
       *ngIf="!editable && !customControls && expandButtonsPosition === 'right'"
     >
@@ -69,3 +88,6 @@
     <ng-content select="[nested-panels]"></ng-content>
   </div>
 </div>
+<ng-template #tempHeader>
+  <ng-content select="[header]"></ng-content>
+</ng-template>

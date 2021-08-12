@@ -1,33 +1,41 @@
-<h5
+<div
   class="orc-font-body-small"
   *ngIf="title"
   [ngClass]="{
     'title-margin': titleMargin,
-    'secondary-text': secondaryText
+    'secondary-text': secondaryText,
+    'no-bold': noBoldTitle
   }"
 >
-  <i class="prefixTitle" *ngIf="prefixTitle">{{ prefixTitle }}</i>
-  {{ title }}
+  <span class="prefixTitle" *ngIf="prefixTitle">
+    <i *ngIf="prefixTitle === 'part-of'" i18n="@@shared.partOf"> Part of </i>
+    <i *ngIf="prefixTitle === 'funded-by'" i18n="@@shared.fundedBy">
+      Funded by
+    </i>
+    <i *ngIf="prefixTitle === 'version-of'" i18n="@@shared.versionOf">
+      Version of
+    </i>
+  </span>
+  <span>{{ title }}</span>
   <ng-container *ngIf="detail">&#x200E;({{ detail }})&#x200E;</ng-container>
-</h5>
+  <p
+    class="mat-body-1"
+    *ngIf="!url && copyOnClick"
+    appCopyOnClick
+    matTooltip="Click to Copy"
+    [matTooltipPosition]="'above'"
+  >
+    {{ content }}
+  </p>
+  <p class="mat-body-1" *ngIf="!url && !copyOnClick">{{ content }}</p>
 
-<p
-  class="mat-body-1"
-  *ngIf="!url && copyOnClick"
-  appCopyOnClick
-  matTooltip="Click to Copy"
-  [matTooltipPosition]="'above'"
->
-  {{ content }}
-</p>
-<p class="mat-body-1" *ngIf="!url && !copyOnClick">{{ content }}</p>
-
-<a
-  class="underline mat-body-1"
-  href="{{ url }}"
-  target="_blank"
-  rel="noopener noreferrer"
-  *ngIf="url"
->
-  {{ content }}
-</a>
+  <a
+    class="underline mat-body-1"
+    href="{{ url }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    *ngIf="url"
+  >
+    {{ content }}
+  </a>
+</div>

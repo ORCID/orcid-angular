@@ -23,20 +23,35 @@ import { SharedModule } from '../shared/shared.module'
 import { AffiliationStackComponent } from './components/affiliation-stack/affiliation-stack.component'
 import { AffiliationStacksGroupsComponent } from './components/affiliation-stacks-groups/affiliation-stacks-groups.component'
 import { AffiliationComponent } from './components/affiliation/affiliation.component'
-import { PeerReviewsComponent } from './components/peer-reviews/peer-reviews.component'
-import { ModalPeerReviewsComponent } from './components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
+import { PeerReviewStacksGroupsComponent } from './components/peer-review-stacks-groups/peer-review-stacks-groups.component'
+import { ModalPeerReviewsComponent } from './components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
 import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
 import { FundingStacksGroupsComponent } from './components/funding-stacks-groups/funding-stacks-groups.component'
 import { FundingStackComponent } from './components/funding-stack/funding-stack.component'
 import { FundingComponent } from './components/funding/funding.component'
-import { ResearchResourcesComponent } from './components/research-resources/research-resources.component'
+import { ResearchResourceStacksGroupComponent } from './components/research-resource-stacks-group/research-resource-stacks-group.component'
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { WorkComponent } from './components/work/work.component'
 import { TopBarActionsComponent } from './components/top-bar-actions/top-bar-actions.component'
 import { MatDividerModule } from '@angular/material/divider'
-import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-public-recid-preview/top-bar-my-public-recid-preview.component'
+import { TopBarMyPublicRecordPreviewComponent } from './components/top-bar-my-public-record-preview/top-bar-my-public-record-preview.component'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { LayoutModule } from '../layout/layout.module'
+import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
+import { NotFoundComponent } from './components/not-found/not-found.component'
+import { MatCardModule } from '@angular/material/card'
+import { MatMenuModule } from '@angular/material/menu'
+import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dropdown/trusted-individuals-dropdown.module'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component'
+import { ResearchResourceStackComponent } from './components/research-resource-stack/research-resource-stack.component'
+import { ResearchResourceComponent } from './components/research-resource/research-resource.component'
+import { PeerReviewStackComponent } from './components/peer-review-stack/peer-review-stack.component'
+import { PeerReviewComponent } from './components/peer-review/peer-review.component'
 
 @NgModule({
   declarations: [
@@ -53,14 +68,22 @@ import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-pub
     FundingComponent,
     DisplayExternalIdsComponent,
     DisplayAttributeComponent,
-    PeerReviewsComponent,
+    PeerReviewStacksGroupsComponent,
     ModalPeerReviewsComponent,
-    ResearchResourcesComponent,
+    ResearchResourceStacksGroupComponent,
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
     TopBarActionsComponent,
-    TopBarMyPublicRecidPreviewComponent,
+    TopBarMyPublicRecordPreviewComponent,
+    TopBarRecordIssuesComponent,
+    NotFoundComponent,
+    ModalAffiliationsComponent,
+    OrgIdentifierComponent,
+    ResearchResourceStackComponent,
+    ResearchResourceComponent,
+    PeerReviewStackComponent,
+    PeerReviewComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +105,13 @@ import { TopBarMyPublicRecidPreviewComponent } from './components/top-bar-my-pub
     MatButtonModule,
     MatDividerModule,
     A11yLinkModule,
+    MatProgressBarModule,
+    LayoutModule,
+    MatCardModule,
+    MatMenuModule,
+    TrustedIndividualsDropdownModule,
+    MatPaginatorModule,
+    MatAutocompleteModule,
   ],
 })
 export class RecordModule {}

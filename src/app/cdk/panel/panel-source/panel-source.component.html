@@ -7,19 +7,24 @@
   <div class="source-items">
     <div>
       <ng-container *ngIf="!topPanelOfTheStackMode && clickableSource">
-        <ng-container i18n="@@record.source">Source</ng-container
+        <strong i18n="@@record.source">Source</strong
         ><ng-container>: </ng-container
         ><a (click)="clickDisplayAsTopPanelOfTheStack()">{{ sourceName }}</a>
       </ng-container>
       <div *ngIf="topPanelOfTheStackMode || !clickableSource">
-        <ng-container i18n="@@record.source">Source</ng-container>:
+        <strong i18n="@@record.source">Source</strong>:
+        <ng-container
+          *ngIf="
+            assertionOriginClientId && assertionOriginClientId !== sourceName
+          "
+        >
+          {{ assertionOriginName || assertionOriginOrcid }}
+          <i i18n="@@shared.onBehalfOf">via</i>
+        </ng-container>
         {{ sourceName }}
       </div>
     </div>
-    <div
-      class="preferred-source"
-      *ngIf="isPreferred && stackLength > 1 && !isPublicRecord"
-    >
+    <div class="preferred-source" *ngIf="isPreferred && stackLength > 1">
       <i class="material-icons"> grade </i>
       <div>
         <ng-container i18n="@@groups.common.preferred_source"
@@ -55,5 +60,21 @@
         Make preferred source
       </a>
     </div>
+  </div>
+  <div align-end>
+    <button
+      *ngIf="!isPublicRecord"
+      mat-icon-button
+      [matTooltip]="labelDeleteButton"
+      [attr.aria-label]="labelDeleteButton"
+    >
+      <mat-icon
+        (click)="delete()"
+        class="large-material-icon"
+        id="delete-button"
+      >
+        delete_outline
+      </mat-icon>
+    </button>
   </div>
 </app-panel-data>

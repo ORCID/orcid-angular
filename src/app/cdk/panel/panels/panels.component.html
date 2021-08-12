@@ -6,51 +6,135 @@
     }"
   >
     <div class="inline-initial-side">
-      <button mat-icon-button (click)="collapse()" id="expand-content-button">
-        <mat-icon class="large-material-icon" *ngIf="expandedContent"
-          >keyboard_arrow_down
-        </mat-icon>
-        <mat-icon class="large-material-icon" *ngIf="!expandedContent"
-          >keyboard_arrow_up
-        </mat-icon>
-      </button>
+      <app-panel-expand-buttons
+        (toggle)="collapse()"
+        [openState]="expandedContent"
+      ></app-panel-expand-buttons>
 
       <div class="text-container">
-        <strong class="orc-font-body-large">
-          {{ title }}
-        </strong>
-        <ng-container *ngIf="type === 'activities'">
-          <span *ngIf="currentAmount"
-            >({{ currentAmount }} of {{ total }})</span
+        <div class="orc-font-body-large clickable" (click)="collapse()">
+          <strong>
+            {{ title }}
+          </strong>
+          <span
+            *ngIf="currentAmount && total && currentAmount !== total"
+            class="clickable"
+            (click)="collapse()"
+            >({{ currentAmount }}
+            <ng-container i18n="@@shared.of">of</ng-container>
+            {{ total }})</span
           >
+          <span
+            *ngIf="(currentAmount && !total) || currentAmount === total"
+            class="clickable"
+            (click)="collapse()"
+          >
+            ({{ currentAmount }})
+          </span>
           <span *ngIf="!currentAmount">(0)</span>
-        </ng-container>
-        <span
-          *ngIf="
-            type === 'peer-review' ||
-            type === 'research-resources' ||
-            type === 'funding'
-          "
-        >
-          ({{ total }})
-        </span>
+        </div>
+        <ng-container> </ng-container>
       </div>
     </div>
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
       <button
-        *ngIf="!isPublicRecord && type !== 'research-resources'"
+        *ngIf="
+          !isPublicRecord && (type === 'employment' || type === 'peer-review')
+        "
         mat-icon-button
+        class="orc-font-body-small add"
+        [attr.aria-label]="labelAddButton"
       >
-        <mat-icon (click)="add()" class="large-material-icon" id="add-button">
-          add_circle
+        <mat-icon
+          (click)="add(type)"
+          class="large-material-icon"
+          id="add-button"
+        >
+          add_circle_outline
         </mat-icon>
+        <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
-      <button mat-icon-button>
-        <mat-icon (click)="sort()" class="large-material-icon" id="sort-button">
-          sort
+      <button
+        *ngIf="!isPublicRecord && affiliationMatButton()"
+        mat-icon-button
+        class="orc-font-body-small add"
+        [attr.aria-label]="labelAddButton"
+        [matMenuTriggerFor]="menuAdd"
+      >
+        <mat-icon class="large-material-icon" id="add-button-multiple">
+          add_circle_outline
         </mat-icon>
+        <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
+      <mat-menu #menuAdd="matMenu">
+        <ng-container *ngIf="type === 'education' || type === 'qualification'">
+          <button mat-menu-item (click)="add('education')">
+            <ng-container i18n="@@shared.addEducation"
+              >Add Education</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('qualification')">
+            <ng-container i18n="@@shared.addQualification"
+              >Add Qualification</ng-container
+            >
+          </button>
+        </ng-container>
+        <ng-container
+          *ngIf="type === 'invited-position' || type === 'distinction'"
+        >
+          <button mat-menu-item (click)="add('invited-position')">
+            <ng-container i18n="@@shared.addInvited"
+              >Add Invited Position</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('distinction')">
+            <ng-container i18n="@@shared.addDistinction"
+              >Add Distinction</ng-container
+            >
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'membership' || type === 'service'">
+          <button mat-menu-item (click)="add('membership')">
+            <ng-container i18n="@@shared.addMembership"
+              >Add Membership</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('service')">
+            <ng-container i18n="@@shared.addService">Add Service</ng-container>
+          </button>
+        </ng-container>
+      </mat-menu>
+      <button
+        mat-button
+        class="orc-font-body-small"
+        [attr.aria-label]="labelSortButton"
+        [matMenuTriggerFor]="menu"
+      >
+        <mat-icon class="large-material-icon"> sort </mat-icon>
+        <ng-container i18n="@@shared.sort"> Sort </ng-container>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          (click)="sortChange(option)"
+          *ngFor="let option of sortTypes"
+        >
+          {{ option | sortLabel }}
+          <mat-icon
+            class="sort"
+            *ngIf="option === sortType && sortDirection === 'asc'"
+          >
+            south
+          </mat-icon>
+          <mat-icon
+            class="sort"
+            *ngIf="option === sortType && sortDirection === 'desc'"
+          >
+            north
+          </mat-icon>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </div>

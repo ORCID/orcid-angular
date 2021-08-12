@@ -1,15 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { UserService } from 'src/app/core'
+import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
   AffiliationGroup,
   AffiliationUIGroup,
   AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
+import { SortData } from 'src/app/types/sort'
+import { ModalAffiliationsComponent } from './modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
   selector: 'app-affiliations',
@@ -18,9 +21,27 @@ import { UserSession } from 'src/app/types/session.local'
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
+
+  labelAddEmploymentButton = $localize`:@@shared.addEmployment:Add Employment`
+  labelSortEmploymentButton = $localize`:@@shared.sortEmployments:Sort Employments`
+  labelEducationAddButton = $localize`:@@shared.addEducation:Add Education`
+  labelEducationSortButton = $localize`:@@shared.sortEducation:Sort Education`
+  labelInvitedAddButton = $localize`:@@shared.addInvited:Add Invited Position`
+  labelInvitedSortButton = $localize`:@@shared.sortInvited:Sort Invited Positions`
+  labelMembershipAddButton = $localize`:@@shared.addMembership:Add Membership`
+  labelMembershipSortButton = $localize`:@@shared.sortMemberships:Sort Memberships`
+  userRecordContext: UserRecordOptions = {}
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
+  @Output() expanded: EventEmitter<any> = new EventEmitter()
+
+  modalAffiliationsComponent = ModalAffiliationsComponent
+
+  expandedEducation: boolean
+  expandedEmployment: boolean
+  expandedInvited: boolean
+  expandedMembership: boolean
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
   userSession: UserSession
@@ -29,8 +50,8 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   affiliationsCount: number
 
   constructor(
-    private _userSession: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _recordAffiliationService: RecordAffiliationService
   ) {}
 
   ngOnInit(): void {
@@ -40,17 +61,19 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.userRecord = userRecord
-        this.profileAffiliationUiGroups = this.userRecord.affiliations
-        this.affiliationsCount =
-          this.getAffiliationType('EMPLOYMENT')?.affiliationGroup.length +
-          this.getAffiliationType('EDUCATION_AND_QUALIFICATION')
-            ?.affiliationGroup.length +
-          this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
-            ?.affiliationGroup.length +
-          this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
-            .length
-        this.total.emit(this.affiliationsCount)
+        if (!isEmpty(userRecord.affiliations)) {
+          this.userRecord = userRecord
+          this.profileAffiliationUiGroups = this.userRecord.affiliations
+          this.affiliationsCount =
+            this.getAffiliationType('EMPLOYMENT')?.affiliationGroup.length +
+            this.getAffiliationType('EDUCATION_AND_QUALIFICATION')
+              ?.affiliationGroup.length +
+            this.getAffiliationType('INVITED_POSITION_AND_DISTINCTION')
+              ?.affiliationGroup.length +
+            this.getAffiliationType('MEMBERSHIP_AND_SERVICE')?.affiliationGroup
+              .length
+          this.total.emit(this.affiliationsCount)
+        }
       })
   }
 
@@ -81,5 +104,52 @@ export class AffiliationStacksGroupsComponent implements OnInit {
         return affiliation.type === type
       })[0]
     }
+  }
+
+  expandedClicked(type: string, expanded: boolean) {
+    switch (type) {
+      case 'employment':
+        this.expandedEmployment = expanded
+        break
+      case 'education':
+        this.expandedEducation = expanded
+        break
+      case 'invited-position':
+        this.expandedInvited = expanded
+        break
+      case 'membership':
+        this.expandedMembership = expanded
+        break
+    }
+
+    if (
+      this.expandedEmployment !== undefined &&
+      this.expandedEducation !== undefined &&
+      this.expandedInvited !== undefined &&
+      this.expandedMembership !== undefined
+    ) {
+      if (
+        (this.expandedEmployment &&
+          this.expandedEducation &&
+          this.expandedInvited &&
+          this.expandedMembership) ||
+        (!this.expandedEmployment &&
+          !this.expandedEducation &&
+          !this.expandedInvited &&
+          !this.expandedMembership)
+      ) {
+        this.expanded.emit({ type: 'affiliations', expanded })
+      }
+    }
+  }
+
+  sortEvent(event: SortData, type: string) {
+    this.userRecordContext.publicRecordId = this.isPublicRecord
+    this.userRecordContext.sort = event.type
+    this.userRecordContext.sortAsc = event.direction === 'asc'
+    this._recordAffiliationService.changeUserRecordContext(
+      this.userRecordContext,
+      type
+    )
   }
 }

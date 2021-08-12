@@ -4,6 +4,7 @@ import {
   Value,
   Visibility,
 } from './common.endpoint'
+import { AssertionBase } from './record.endpoint'
 
 export enum AffiliationGroupsTypes {
   EMPLOYMENT = 'EMPLOYMENT',
@@ -50,9 +51,8 @@ export interface AffiliationGroup {
   affiliationType: string // Todo make an enum
 }
 
-export interface Affiliation {
+export interface Affiliation extends AssertionBase {
   visibility: Visibility
-  errors: any[]
   putCode: Value
   affiliationName: Value
   city: Value
@@ -61,7 +61,7 @@ export interface Affiliation {
   roleTitle: Value
   countryForDisplay?: any // TODO is this always empty?
   departmentName: Value
-  affiliationType: Value
+  affiliationType: AffiliationTypeValue
   disambiguatedAffiliationSourceId: Value
   disambiguationSource: Value
   orgDisambiguatedCity?: any // TODO is this always empty?
@@ -73,12 +73,51 @@ export interface Affiliation {
   affiliationTypeForDisplay?: any // TODO is this always empty?
   startDate: MonthDayYearDate
   endDate: MonthDayYearDate
-  sourceName: string
-  source: string
   dateSortString: string
-  createdDate: MonthDayYearDate
-  lastModified: MonthDayYearDate
   url: Value
   orgDisambiguatedExternalIdentifiers?: any // TODO is this always empty?
   affiliationExternalIdentifiers?: ExternalIdentifier[]
+}
+
+export interface Organization {
+  affiliationKey: string
+  city: string
+  country: string
+  countryForDisplay: string
+  disambiguatedAffiliationIdentifier: string
+  orgType: string
+  region: string
+  sourceId: string
+  sourceType: string
+  url: string
+  value: string
+}
+
+export interface AffiliationTypeValue {
+  errors?: any[]
+  value: AffiliationType
+  required?: boolean
+  getRequiredMessage?: any
+}
+
+export enum AffiliationType {
+  'employment' = 'employment',
+  'education' = 'education',
+  'qualification' = 'qualification',
+  'invited-position' = 'invited-position',
+  'distinction' = 'distinction',
+  'membership' = 'membership',
+  'service' = 'service',
+}
+
+export const AffiliationTypeLabel = {
+  [AffiliationType.employment]: $localize`:@@shared.employment:Employment`,
+  [AffiliationType.education]: $localize`:@@shared.education:Education`,
+  [AffiliationType.qualification]: $localize`:@@shared.qualification:Qualification`,
+  [AffiliationType[
+    'invited-position'
+  ]]: $localize`:@@shared.invitedSentenceCase:Invited position`,
+  [AffiliationType.distinction]: $localize`:@@shared.distinction:Distinction`,
+  [AffiliationType.membership]: $localize`:@@shared.membershipTitle:Membership`,
+  [AffiliationType.service]: $localize`:@@shared.service:Service`,
 }

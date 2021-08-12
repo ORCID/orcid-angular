@@ -11,10 +11,16 @@
     *ngIf="getAffiliationType('EMPLOYMENT') as profileAffiliationsGroup"
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [type]="'employment'"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
+    [addModalComponent]="modalAffiliationsComponent"
+    (expanded)="expandedClicked('employment', $event)"
+    [labelAddButton]="labelAddEmploymentButton"
+    [labelSortButton]="labelSortEmploymentButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'EMPLOYMENT')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -24,6 +30,7 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
+        [type]="'employment'"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container
@@ -60,10 +67,16 @@
     "
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [type]="'education'"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
+    [addModalComponent]="modalAffiliationsComponent"
+    (expanded)="expandedClicked('education', $event)"
+    [labelAddButton]="labelEducationAddButton"
+    [labelSortButton]="labelEducationSortButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'EDUCATION_AND_QUALIFICATION')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -73,6 +86,7 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
+        [type]="'education'"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container
@@ -110,10 +124,16 @@
     "
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [type]="'invited-position'"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
+    [addModalComponent]="modalAffiliationsComponent"
+    (expanded)="expandedClicked('invited-position', $event)"
+    [labelAddButton]="labelInvitedAddButton"
+    [labelSortButton]="labelInvitedSortButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'INVITED_POSITION_AND_DISTINCTION')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -123,6 +143,7 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
+        [type]="'invited-position'"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container
@@ -158,10 +179,16 @@
     "
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
+    [type]="'membership'"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [total]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
+    [addModalComponent]="modalAffiliationsComponent"
+    (expanded)="expandedClicked('membership', $event)"
+    [labelAddButton]="labelMembershipAddButton"
+    [labelSortButton]="labelMembershipSortButton"
+    [sortType]="'end'"
+    (sort)="sortEvent($event, 'MEMBERSHIP_AND_SERVICE')"
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
@@ -171,6 +198,7 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
+        [type]="'membership'"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container

@@ -1,16 +1,4 @@
 import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
-import { GroupBase } from './record.endpoint'
-
-export interface Works {
-  nextOffset: number
-  totalGroups: number
-  groups: WorkGroup[]
-}
-
-export interface WorkGroup extends GroupBase {
-  works: Work[]
-}
-
 export interface Citation {
   citation: Value
   citationType: Value

@@ -1,71 +1,112 @@
-<main id="main">
-  <div class="container">
+<ng-container *ngIf="userRecord?.userInfo?.EFFECTIVE_USER_ORCID">
+  <app-top-bar-my-public-record-preview
+    [isPublicRecord]="publicOrcid"
+  ></app-top-bar-my-public-record-preview>
+  <div class="container no-padding">
     <div class="row">
-      <app-top-bar-my-public-recid-preview
-        class="col l12 m8 s4 padding-overwrite"
+      <app-side-bar
+        class="col l3 m8 s4"
         [isPublicRecord]="publicOrcid"
-      ></app-top-bar-my-public-recid-preview>
-      <app-side-bar class="col l3 m8 s4" [isPublicRecord]="publicOrcid">
+        [onlyOrcidId]="platform.columns8 || platform.columns4"
+      >
       </app-side-bar>
-      <app-main class="col l9 m8 s4">
-        <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
-        <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
-          <h2 class="orc-font-body col">Activities</h2>
-          <div class="expand-buttons">
-            <button
-              mat-button
-              color="primary"
-              type="button"
-              i18n="@@shared.expandAll"
-              [ngClass]="{ selected: expandedContent }"
-              (click)="collapse()"
-            >
-              Expand all
-            </button>
-            <button
-              mat-button
-              color="primary"
-              type="button"
-              i18n="@@shared.collapseAll"
-              [ngClass]="{ selected: !expandedContent }"
-              (click)="collapse()"
-            >
-              Collapse all
-            </button>
+      <main id="main" class="col l9 m8 s4">
+        <app-main>
+          <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
+          <app-side-bar
+            *ngIf="platform.columns8 || platform.columns4"
+            class="col l3 m8 s4"
+            [isPublicRecord]="publicOrcid"
+            [hideOrcidId]="true"
+          >
+          </app-side-bar>
+          <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
+            <h2 class="orc-font-body col" i18n="@@shared.activities">
+              Activities
+            </h2>
+            <div class="expand-buttons">
+              <button
+                mat-button
+                color="primary"
+                type="button"
+                i18n="@@shared.expandAll"
+                (click)="collapse()"
+                *ngIf="!expandedContent"
+              >
+                Expand all
+              </button>
+              <button
+                mat-button
+                color="primary"
+                type="button"
+                i18n="@@shared.collapseAll"
+                (click)="collapse()"
+                *ngIf="expandedContent"
+              >
+                Collapse all
+              </button>
+            </div>
           </div>
-        </div>
-        <app-affiliations
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-        ></app-affiliations>
-        <app-fundings
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-        ></app-fundings>
-        <app-work-stack-group
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-        ></app-work-stack-group>
-        <app-research-resources
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-        ></app-research-resources>
-        <app-peer-reviews
-          [isPublicRecord]="publicOrcid"
-          [expandedContent]="expandedContent"
-          (total)="affiliationsCount($event)"
-        ></app-peer-reviews>
-        <div class="orc-font-body-small" *ngIf="publicOrcid">
-          <i>
-            <span i18n="@@shared.lastModifiedTime"> Record last modified </span>
-            {{ userRecord?.lastModifiedTime | date: 'long':'UTC' }}
-          </i>
-        </div>
-      </app-main>
+          <app-affiliations
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-affiliations>
+          <app-fundings
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-fundings>
+          <app-research-resources
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-research-resources>
+          <app-work-stack-group
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-work-stack-group>
+          <app-peer-reviews
+            [isPublicRecord]="publicOrcid"
+            [expandedContent]="expandedContent"
+            (total)="affiliationsCount($event)"
+            (expanded)="expandedByType($event)"
+          ></app-peer-reviews>
+          <div class="no-public-info" *ngIf="affiliations === 0">
+            <mat-icon>error</mat-icon>
+            <ng-container i18n="@@record.noPublicInfo"
+              >No public information available.
+            </ng-container>
+          </div>
+          <div
+            class="orc-font-body-small"
+            *ngIf="
+              publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
+            "
+            [ngClass]="{ 'last-modified': affiliations === 0 }"
+          >
+            <i>
+              <span i18n="@@shared.lastModifiedTime">
+                Record last modified
+              </span>
+              {{ userRecord?.lastModifiedTime | date: 'medium':'UTC' }} UTC
+            </i>
+          </div>
+          <app-statistics
+            [ngClass]="{ mobile: !platform.columns12 }"
+          ></app-statistics>
+        </app-main>
+      </main>
     </div>
   </div>
-</main>
+</ng-container>
+<app-not-found
+  *ngIf="
+    loading && userRecord.userInfo && !userRecord?.userInfo.EFFECTIVE_USER_ORCID
+  "
+></app-not-found>

@@ -13,6 +13,7 @@
     [ngClass]="{ last: last }"
     [visibility]="fundingStack.defaultFunding.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
+    [putCode]="funding.putCode.value"
     *ngIf="isPreferred(funding) || displayTheStack"
     type="main"
   >
@@ -32,6 +33,9 @@
     <app-panel-source
       [isPreferred]="isPreferred(funding)"
       [sourceName]="funding.sourceName || funding.source"
+      [assertionOriginClientId]="funding.assertionOriginClientId"
+      [assertionOriginName]="funding.assertionOriginName"
+      [assertionOriginOrcid]="funding.assertionOriginOrcid"
       [stackLength]="fundingStack.fundings.length"
       [(displayTheStack)]="displayTheStack"
       (makePrimary)="makePrimaryCard(funding)"
@@ -40,6 +44,8 @@
       "
       [isPublicRecord]="isPublicRecord"
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(funding)"
+      [type]="'funding'"
+      [putCode]="funding.putCode.value"
     >
     </app-panel-source>
   </app-panel>

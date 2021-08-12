@@ -17,11 +17,16 @@
   :host,
   .top-bar-or-main {
     border-color: mat-color($background, ui-background) !important;
-    background-color: mat-color($background, ui-background-lightest) !important;
+    background-color: mat-color($background, ui-background-light) !important;
   }
 
   .body {
     background-color: map-get($background, card);
+  }
+
+  .privacy-selector {
+    background-color: map-get($foreground, 'text-light-high');
+    border-color: mat-color($background, ui-background);
   }
 }
 @include panel-theme($orcid-app-theme);

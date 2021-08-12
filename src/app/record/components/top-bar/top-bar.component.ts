@@ -7,6 +7,9 @@ import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
+import { isEmpty } from 'lodash'
+import { Assertion } from '../../../types'
+import { UserStatus } from '../../../types/userStatus.endpoint'
 
 @Component({
   selector: 'app-top-bar',
@@ -21,15 +24,18 @@ export class TopBarComponent implements OnInit, OnDestroy {
   @Input() isPublicRecord: string
 
   userRecord: UserRecord
+  userStatus: UserStatus
 
   modalNameComponent = ModalNameComponent
   modalBiographyComponent = ModalBiographyComponent
 
   platform: PlatformInfo
-  givenNames: String = ''
-  familyName: String = ''
-  creditName: String = ''
+  givenNames = ''
+  familyName = ''
+  creditName = ''
   expandedContent = false
+  recordWithIssues: boolean
+  loadingUserRecord = true
 
   constructor(
     private _platform: PlatformInfoService,
@@ -42,6 +48,12 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.platform = data
       })
+    _user
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((data) => {
+        this.userStatus = data
+      })
   }
 
   ngOnInit(): void {
@@ -51,22 +63,48 @@ export class TopBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+        this.checkLoadingState(userRecord)
         this.userRecord = userRecord
-        this.setNames(this.userRecord)
+        if (!isEmpty(userRecord.otherNames)) {
+          this.setNames(userRecord)
+        }
       })
   }
 
+  checkLoadingState(userRecord: UserRecord) {
+    const missingValues = Object.keys(userRecord).filter((key) => {
+      if (
+        key !== 'names' &&
+        key !== 'lastModifiedTime' &&
+        this.isPublicRecord
+      ) {
+        return typeof userRecord[key] === 'boolean' && !userRecord[key]
+      } else if (key !== 'lastModifiedTime') {
+        return typeof userRecord[key] === 'boolean' && !userRecord[key]
+      } else {
+        return false
+      }
+    })
+    this.loadingUserRecord = !!missingValues.length
+  }
+
   private setNames(userRecord: UserRecord) {
-    this.userRecord = userRecord
-    this.givenNames = this.userRecord.names.givenNames
+    this.givenNames = this.userRecord?.names?.givenNames
       ? this.userRecord.names.givenNames.value
       : ''
-    this.familyName = this.userRecord.names.familyName
+    this.familyName = this.userRecord?.names?.familyName
       ? this.userRecord.names.familyName.value
       : ''
-    this.creditName = this.userRecord.names.creditName
+    this.creditName = this.userRecord?.names?.creditName
       ? this.userRecord.names.creditName.value
       : ''
+  }
+
+  getOtherNames(otherNames: Assertion[]): string[] {
+    return otherNames.map((otherName) => {
+      return otherName.content
+    })
   }
 
   collapse(): void {

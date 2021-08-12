@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
@@ -31,7 +31,7 @@ export class RecordBiographyService {
   ): Observable<BiographyEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.biography))
     }
 
@@ -49,6 +49,7 @@ export class RecordBiographyService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({} as BiographyEndPoint)),
         tap((value) => {
           this.$biography.next(value)
         })

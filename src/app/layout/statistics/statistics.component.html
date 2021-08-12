@@ -1,15 +1,13 @@
 <section class="statics container" [attr.aria-label]="labelStatistics">
   <div class="row">
-    <div class="col l5 m8 s4" *ngIf="togglz">
-      <div class="row middle mat-caption">
-        {{ togglz.messages.LIVE_IDS }}
-        <ng-container i18n="@@public-layout.amount_ids">
-          ORCID iDs and counting.</ng-container
-        >
-        <a i18n="@@ngOrcid.seeMoreStatics" href="/statistics"
-          >See more statistics</a
-        >
-      </div>
+    <div class="row middle mat-caption" *ngIf="togglz">
+      {{ togglz.messages.LIVE_IDS }}
+      <ng-container i18n="@@public-layout.amount_ids">
+        ORCID iDs and counting.
+      </ng-container>
+      <a i18n="@@ngOrcid.seeMoreStatics" href="/statistics"
+        >See more statistics</a
+      >
     </div>
   </div>
 </section>

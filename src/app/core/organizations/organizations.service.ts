@@ -39,8 +39,8 @@ export class OrganizationsService {
   }
 
   getLink(type: string, value: string): string {
-    switch (type) {
-      case 'Test':
+    switch (type.toUpperCase()) {
+      case 'TEST':
         return this.TEST_BASE_URL + value
       case 'FUNDREF':
         return value

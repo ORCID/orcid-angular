@@ -49,6 +49,7 @@
           rootElementSelector="#keyword-dropList"
           class="row keywords-input-line"
           [ngClass]="{ 'no-wrap': !isMobile }"
+          [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="keyword.putCode"
           *ngFor="let keyword of keywords"
         >
@@ -66,6 +67,7 @@
                   #keywordInput
                   formControlName="content"
                   placeholder=" {{ ngOrcidKeyword }}"
+                  [ngClass]="{ 'keyword-input': screenDirection === 'rtl' }"
                 />
                 <mat-hint
                   class="mat-caption"

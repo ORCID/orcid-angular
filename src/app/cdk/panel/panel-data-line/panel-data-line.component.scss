@@ -9,4 +9,11 @@ p {
 
 .prefixTitle {
   display: inline;
+  i {
+    margin-right: 3px;
+  }
+}
+
+h5.no-bold {
+  font-weight: normal;
 }

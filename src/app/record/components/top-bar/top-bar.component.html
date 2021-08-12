@@ -1,6 +1,21 @@
-<app-top-bar-actions [isPublicRecord]="isPublicRecord"></app-top-bar-actions>
+<mat-progress-bar
+  *ngIf="loadingUserRecord"
+  mode="indeterminate"
+  color="accent"
+></mat-progress-bar>
+<app-top-bar-record-issues
+  [isPublicRecord]="isPublicRecord"
+></app-top-bar-record-issues>
 
-<ng-container *ngIf="!isPublicRecord">
+<app-top-bar-actions
+  [userRecord]="userRecord"
+  [userStatus]="userStatus"
+  [isPublicRecord]="isPublicRecord"
+  *ngIf="!recordWithIssues"
+  [onlyShowPrintButton]="!platform.columns12"
+></app-top-bar-actions>
+
+<ng-container *ngIf="!isPublicRecord && !recordWithIssues">
   <app-panel
     *ngIf="userRecord?.names"
     [isPublicRecord]="isPublicRecord"
@@ -12,7 +27,7 @@
   >
     <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
     <app-panel-data>
-      <app-panel-element [visibility]="userRecord.names.visibility.visibility">
+      <app-panel-element [visibility]="userRecord.names.visibility">
         <ng-container *ngIf="creditName">
           <span i18n="@@record.publishedName" class="mat-caption">
             Published Name
@@ -28,10 +43,10 @@
           {{ givenNames + ' ' + familyName }}
         </div>
       </app-panel-element>
-      <ng-container *ngIf="userRecord.otherNames?.otherNames?.length > 0">
+      <ng-container *ngIf="userRecord?.otherNames?.otherNames?.length > 0">
         <div class="other-names-container">
-          <span i18n="@@record.otherNames" class="mat-caption description">
-            Other names
+          <span i18n="@@topBar.alsoKnowAs" class="mat-caption description">
+            Also known as
           </span>
           <app-panel-element
             id="other-names"
@@ -68,100 +83,120 @@
 </ng-container>
 
 <!--PUBLIC VIEWS-->
-<ng-container *ngIf="isPublicRecord">
+
+<ng-container *ngIf="isPublicRecord && !recordWithIssues">
   <div
     class="public-container"
     [ngClass]="{
       mobile: !platform.columns12
     }"
   >
-    <div class="row names-container" *ngIf="userRecord?.names">
+    <div
+      class="row names-container"
+      *ngIf="userRecord?.names || userRecord?.otherNames"
+    >
       <div class="published-name" *ngIf="creditName">
         <div class="row mat-caption description" i18n="@@record.publishedName">
           Published Name
         </div>
         <h3 class="orc-font-heading-small">{{ creditName }}</h3>
       </div>
-      <div class="row space-between">
+      <div
+        class="published-name"
+        *ngIf="!creditName && (givenNames || familyName)"
+      >
+        <div class="row mat-caption description" i18n="@@record.name">Name</div>
+        <h3 class="orc-font-heading-small">
+          {{ givenNames + ' ' + familyName }}
+        </h3>
+      </div>
+      <div class="row names-wrapper">
         <div
           class="names"
           [ngClass]="{
-            'col l5': platform.columns12,
+            col: platform.columns12,
             'row mobile': !platform.columns12,
             'names-extended': expandedContent
           }"
+          *ngIf="creditName"
         >
-          <div class="row mat-caption description" i18n="@@record.name">
-            Name
-          </div>
-          <div class="orc-font-body-small">
-            <i>
-              {{ givenNames + ' ' }}
-            </i>
-            {{ familyName }}
+          <div class="names-content">
+            <div class="mat-caption description" i18n="@@record.name">Name</div>
+            <div class="orc-font-body-small">
+              <ng-container *ngIf="givenNames">
+                {{ givenNames + ' ' }}
+              </ng-container>
+              {{ familyName }}
+            </div>
           </div>
         </div>
         <div
           class="other-names"
           [ngClass]="{
-            'col l6': platform.columns12,
+            col: platform.columns12,
             'row mobile': !platform.columns12,
-            'other-names-extended': expandedContent
+            'other-names-no-border': expandedContent
           }"
+          *ngIf="userRecord.otherNames?.otherNames.length > 0"
         >
-          <div class="row space-between">
+          <div
+            class="row space-between"
+            [ngClass]="{
+              'other-names-extended': expandedContent
+            }"
+          >
             <div class="col l10 mat-caption other-names-wrapper">
-              <div class="row description" i18n="@@record.otherNames">
-                Other names
-              </div>
-              <ng-container
-                *ngFor="
-                  let otherNames of userRecord.otherNames.otherNames;
-                  index as i
-                "
-              >
-                <ng-container *ngIf="!expandedContent">
-                  {{ otherNames.content }}
-                  <ng-container
-                    *ngIf="
-                      !(userRecord.otherNames?.otherNames?.length - 1 === i)
-                    "
-                    >,
-                  </ng-container>
-                </ng-container>
-                <div class="row other-name" *ngIf="expandedContent">
-                  <div class="row">
-                    <b class="orc-font-body-small">
-                      {{ otherNames.content }}
-                    </b>
-                  </div>
-                  <div class="row">
-                    <b class="description" i18n="@@record.source"> Source </b>
-                  </div>
-                  <div class="description">
-                    {{ otherNames.sourceName }}
-                  </div>
+              <div class="other-names-content">
+                <div class="description" i18n="@@topBar.alsoKnowAs">
+                  Also known as
                 </div>
-              </ng-container>
+                <p class="orc-font-body-small" *ngIf="!expandedContent">
+                  {{
+                    getOtherNames(userRecord.otherNames?.otherNames).join(', ')
+                  }}
+                </p>
+                <ng-container
+                  *ngFor="
+                    let otherNames of userRecord.otherNames?.otherNames;
+                    index as i
+                  "
+                >
+                  <div class="row other-name" *ngIf="expandedContent">
+                    <div class="row">
+                      <b class="orc-font-body-small">
+                        {{ otherNames.content }}
+                      </b>
+                    </div>
+                    <div class="row">
+                      <b class="description" i18n="@@record.source"> Source </b>
+                    </div>
+                    <div class="description">
+                      {{ otherNames.sourceName || otherNames.source }}
+                      {{ otherNames.createdDate | monthDayYearDateToString }}
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
             </div>
             <div>
-              <button
-                mat-icon-button
-                (click)="collapse()"
-                id="expand-content-button"
-              >
-                <mat-icon class="large-material-icon" *ngIf="expandedContent"
-                  >keyboard_arrow_down
-                </mat-icon>
-                <mat-icon class="large-material-icon" *ngIf="!expandedContent"
-                  >keyboard_arrow_up
-                </mat-icon>
-              </button>
+              <app-panel-expand-buttons
+                (toggle)="collapse()"
+                [openState]="expandedContent"
+              ></app-panel-expand-buttons>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <app-top-bar-actions
+      [userRecord]="userRecord"
+      [userStatus]="userStatus"
+      [isPublicRecord]="isPublicRecord"
+      *ngIf="!recordWithIssues && !platform.columns12"
+      [onlyShowIsThisYouButton]="true"
+    ></app-top-bar-actions>
+
     <div
       class="div biography-container"
       *ngIf="userRecord?.biography?.biography"

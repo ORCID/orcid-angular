@@ -1,3 +1,5 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
 :host {
   width: 100%;
 }
@@ -7,14 +9,52 @@ h2 {
   margin-bottom: 20px;
 }
 
+app-main {
+  padding-bottom: 180px !important;
+  max-width: 100%;
+}
+
+app-side-bar {
+  padding-bottom: 40px !important;
+}
+
+app-statistics {
+  position: absolute;
+  right: 24px;
+  bottom: 148px;
+  justify-content: flex-end;
+}
+
+main#main {
+  flex-direction: column;
+  margin-bottom: $spacing-large;
+  padding-left: 14px;
+}
+
+.container {
+  margin-bottom: -140px;
+}
+
+.mobile {
+  bottom: 400px !important;
+}
+
 .activities {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
-  .expand-buttons {
-    .selected {
-      opacity: 0.3;
-    }
+.no-public-info {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  mat-icon {
+    margin-inline-end: 4px;
   }
+}
+
+.last-modified {
+  margin-top: 20px;
 }

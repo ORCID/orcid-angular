@@ -14,11 +14,22 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: start;
   width: 100%;
   .align-end-content {
     flex-shrink: 0;
   }
   .data-content {
     width: 100%;
+  }
+}
+
+.columns-8 :host,
+.columns-4 :host {
+  .panel-data-container {
+    flex-direction: column;
+    .data-content {
+      margin-bottom: 12px;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -31,7 +31,7 @@ export class RecordNamesService {
   ): Observable<NamesEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.names))
     }
     if (!this.$names) {
@@ -47,6 +47,7 @@ export class RecordNamesService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({} as NamesEndPoint)),
         tap((value) => {
           this.$names.next(value)
         })

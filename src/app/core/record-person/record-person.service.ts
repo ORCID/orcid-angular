@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { Observable, ReplaySubject } from 'rxjs'
 import { catchError } from 'rxjs/internal/operators/catchError'
 import { retry } from 'rxjs/internal/operators/retry'
 import { first, map, switchMap, tap } from 'rxjs/operators'
@@ -34,13 +34,10 @@ export class RecordPersonService {
   private getPublicRecordPerson(
     options: UserRecordOptions
   ): Observable<Person | undefined> {
-    if (options.publicRecordId) {
-      return of(undefined)
-    }
-    if (!this.$personPublicRecordSubject) {
+    if (!this.$personPublicRecordSubject || options.forceReload) {
       this.$personPublicRecordSubject = new ReplaySubject<Person>(1)
-    } else if (!options.forceReload) {
-      return this.$personPublicRecordSubject
+    } else {
+      return this.$personPublicRecordSubject.asObservable()
     }
 
     this.getPersonHttpCall(options.publicRecordId)

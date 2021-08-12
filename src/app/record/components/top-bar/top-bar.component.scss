@@ -24,6 +24,10 @@ app-panel {
   }
 }
 
+app-top-bar-actions {
+  margin-top: 16px;
+}
+
 .orc-font-body {
   margin: unset;
 }
@@ -36,61 +40,96 @@ app-panel {
       margin-top: 0;
     }
 
-    .names {
-      min-height: 64px;
-      margin-left: 10px;
-      padding: 16px;
-      border: solid 1px;
-      border-radius: 4px;
-    }
+    .names-wrapper {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 16px;
 
-    .names-extended {
-      max-height: 64px !important;
-    }
+      .names {
+        min-height: 64px;
+        width: calc(50% - 8px);
+        padding: 16px;
+        border: solid 1px;
+        border-radius: 4px;
 
-    .names.mobile {
-      height: auto !important;
-      margin-left: 0 !important;
-    }
-
-    .other-names {
-      min-height: 64px;
-      margin-right: 20px;
-      border: solid 1px;
-      border-radius: 4px;
-    }
-
-    .other-names.mobile {
-      margin-top: 1em;
-      margin-right: 0 !important;
-    }
-
-    .other-names-extended {
-      height: auto !important;
-    }
-
-    .other-names-wrapper {
-      padding: 16px;
-
-      .other-name {
-        margin-bottom: 10px;
+        .names-content {
+          display: block;
+        }
       }
 
-      .other-name:last-child {
-        margin-bottom: 0;
+      .names-extended {
+        height: auto;
+      }
+
+      .names.mobile {
+        height: auto !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+      }
+
+      .other-names {
+        position: relative;
+        min-height: 64px;
+        width: calc(50% - 8px);
+        border: solid 1px;
+        border-radius: 4px;
+        padding: 0px;
+
+        .other-names-extended {
+          position: absolute;
+          left: 0;
+          right: 0;
+          height: auto !important;
+          overflow: hidden;
+          -moz-transition: height 450ms;
+          z-index: 2;
+          -webkit-transition: height 450ms;
+          border: solid 1px;
+          border-radius: 4px;
+        }
+      }
+
+      .other-names-no-border {
+        border: unset !important;
+        border-radius: unset !important;
+      }
+
+      .other-names.mobile {
+        width: 100% !important;
+        margin-top: 1em;
+        margin-right: 0 !important;
+      }
+
+      .full-width {
+        width: 100% !important;
+      }
+
+      .other-names-wrapper {
+        padding: 16px;
+
+        .other-names-content {
+          display: block;
+        }
+
+        p {
+          margin: 0;
+        }
+
+        .other-name {
+          margin-bottom: 10px;
+        }
+
+        .other-name:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
 
   .biography-container {
-    margin-top: 2em;
-    padding: 0 10px;
+    margin-top: 1em;
     p {
       overflow-wrap: break-word;
     }
   }
-}
-
-.public-container.mobile {
-  margin-top: 2em;
 }

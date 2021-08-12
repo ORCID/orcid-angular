@@ -1,13 +1,16 @@
 <div>
   <app-side-bar-id
+    *ngIf="!hideOrcidId"
     [ngClass]="{
       mobile: !platform.columns12
     }"
     [id]="isPublicRecord || userSession?.userInfo?.EFFECTIVE_USER_ORCID"
+    [privateView]="!isPublicRecord"
   ></app-side-bar-id>
 
   <ng-container *ngIf="!onlyOrcidId">
     <app-panel
+      expandButtonsPosition="right"
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.emails.emails"
       [editModalComponent]="modalEmailComponent"
@@ -42,6 +45,7 @@
     </app-panel>
 
     <app-panel
+      expandButtonsPosition="right"
       [elements]="userRecord.website.websites"
       [editModalComponent]="modalWebsitesComponent"
       [isPublicRecord]="isPublicRecord"
@@ -84,6 +88,7 @@
     </app-panel>
 
     <app-panel
+      expandButtonsPosition="right"
       *ngIf="
         userRecord?.externalIdentifier?.externalIdentifiers &&
         (!isPublicRecord ||
@@ -133,6 +138,7 @@
       </app-panel-data>
     </app-panel>
     <app-panel
+      expandButtonsPosition="right"
       *ngIf="
         userRecord?.keyword?.keywords &&
         (!isPublicRecord || userRecord.keyword.keywords.length > 0)
@@ -147,24 +153,52 @@
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
       <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0">
-        <app-panel-element
-          [isPublicRecord]="isPublicRecord"
-          *ngFor="let keyword of userRecord.keyword.keywords; let last = last"
-          [visibility]="!isPublicRecord && keyword.visibility.visibility"
-          >{{ getKeyword(keyword) }}
+        <ng-container *ngIf="!isPublicRecord">
+          <app-panel-element
+            [isPublicRecord]="isPublicRecord"
+            *ngFor="let keyword of userRecord.keyword.keywords; let last = last"
+            [visibility]="!isPublicRecord && keyword.visibility.visibility"
+            >{{ getKeyword(keyword) }}
 
-          <!-- [app-panel-element-source] only visible on public page -->
-          <app-panel-element-source
-            [isLastItem]="last"
-            *ngIf="keywordOpenState"
-            [name]="keyword.sourceName || keyword.source"
-            [date]="keyword.createdDate | monthDayYearDateToString"
-          >
-          </app-panel-element-source>
-        </app-panel-element>
+            <!-- [app-panel-element-source] only visible on public page -->
+            <app-panel-element-source
+              [isLastItem]="last"
+              *ngIf="keywordOpenState"
+              [name]="keyword.sourceName || keyword.source"
+              [date]="keyword.createdDate | monthDayYearDateToString"
+            >
+            </app-panel-element-source>
+          </app-panel-element>
+        </ng-container>
+        <ng-container *ngIf="isPublicRecord">
+          <ng-container *ngIf="keywordOpenState">
+            <app-panel-element
+              [isPublicRecord]="isPublicRecord"
+              *ngFor="
+                let keyword of userRecord.keyword.keywords;
+                let last = last
+              "
+              [visibility]="!isPublicRecord && keyword.visibility.visibility"
+              >{{ getKeyword(keyword) }}
+
+              <!-- [app-panel-element-source] only visible on public page -->
+              <app-panel-element-source
+                [isLastItem]="last"
+                *ngIf="keywordOpenState"
+                [name]="keyword.sourceName || keyword.source"
+                [date]="keyword.createdDate | monthDayYearDateToString"
+              >
+              </app-panel-element-source>
+            </app-panel-element>
+          </ng-container>
+          <ng-container *ngIf="!keywordOpenState">
+            {{ getKeywords(userRecord.keyword.keywords).join(', ') }}
+          </ng-container>
+        </ng-container>
       </app-panel-data>
     </app-panel>
     <app-panel
+      expandButtonsPosition="right"
       *ngIf="
         userRecord?.countries?.addresses &&
         (!isPublicRecord || userRecord.countries.addresses.length > 0)
@@ -179,23 +213,49 @@
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
       <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">
-        <app-panel-element
-          [isPublicRecord]="isPublicRecord"
-          *ngFor="
-            let address of userRecord.countries.addresses;
-            let last = last
-          "
-          [visibility]="!isPublicRecord && address.visibility.visibility"
-          >{{ address.countryName }}
-          <!-- [app-panel-element-source] only visible on public page -->
-          <app-panel-element-source
-            [isLastItem]="last"
-            *ngIf="addressOpenState"
-            [name]="address.sourceName || address.source"
-            [date]="address.createdDate | monthDayYearDateToString"
-          >
-          </app-panel-element-source>
-        </app-panel-element>
+        <ng-container *ngIf="!isPublicRecord">
+          <app-panel-element
+            [isPublicRecord]="isPublicRecord"
+            *ngFor="
+              let address of userRecord.countries.addresses;
+              let last = last
+            "
+            [visibility]="!isPublicRecord && address.visibility.visibility"
+            >{{ address.countryName }}
+
+            <!-- [app-panel-element-source] only visible on public page -->
+            <app-panel-element-source
+              [isLastItem]="last"
+              [name]="address.sourceName || address.source"
+              [date]="address.createdDate | monthDayYearDateToString"
+            >
+            </app-panel-element-source>
+          </app-panel-element>
+        </ng-container>
+        <ng-container *ngIf="isPublicRecord">
+          <ng-container *ngIf="addressOpenState">
+            <app-panel-element
+              [isPublicRecord]="isPublicRecord"
+              *ngFor="
+                let address of userRecord.countries.addresses;
+                let last = last
+              "
+              [visibility]="!isPublicRecord && address.visibility.visibility"
+              >{{ address.countryName }}
+
+              <!-- [app-panel-element-source] only visible on public page -->
+              <app-panel-element-source
+                [isLastItem]="last"
+                [name]="address.sourceName || address.source"
+                [date]="address.createdDate | monthDayYearDateToString"
+              >
+              </app-panel-element-source>
+            </app-panel-element>
+          </ng-container>
+          <ng-container *ngIf="!addressOpenState">
+            {{ getAddresses(userRecord.countries.addresses).join(', ') }}
+          </ng-container>
+        </ng-container>
       </app-panel-data>
     </app-panel>
   </ng-container>

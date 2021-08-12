@@ -36,12 +36,18 @@ import {
   UserSessionUpdateParameters,
 } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
+import {
+  Delegator,
+  TrustedIndividuals,
+} from 'src/app/types/trusted-individuals.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
+import { TrustedIndividualsService } from '../trusted-individuals/trusted-individuals.service'
+import { UserInfoService } from '../user-info/user-info.service'
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +58,9 @@ export class UserService {
     private _errorHandler: ErrorHandlerService,
     private _platform: PlatformInfoService,
     private _oauth: OauthService,
-    private _disco: DiscoService
+    private _disco: DiscoService,
+    private _userInfo: UserInfoService,
+    private _trustedIndividuals: TrustedIndividualsService
   ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -64,12 +72,6 @@ export class UserService {
     forceSessionUpdate: boolean
     postLoginUpdate: boolean
   }>()
-
-  private getUserInfo(): Observable<UserInfo> {
-    return this._http.get<UserInfo>(environment.API_WEB + 'userInfo.json', {
-      withCredentials: true,
-    })
-  }
 
   public getUserStatus(): Observable<boolean> {
     return this._http
@@ -148,7 +150,7 @@ export class UserService {
           map((data) => this.computesUpdatedUserData(data)),
           // Debugger for the user session on development time
           tap((session) =>
-            environment.debugger ? console.info(session) : null
+            environment.debugger ? console.debug(session) : null
           ),
           tap((session) => {
             this.$userSessionSubject.next(session)
@@ -230,10 +232,14 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
+    trustedIndividuals: TrustedIndividuals
     thirdPartyAuthData: ThirdPartyAuthData
   }> {
     this.currentlyLoggedIn = updateParameters.loggedIn
-    const $userInfo = this.getUserInfo().pipe(this.handleErrors)
+    const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
+    const $trustedIndividuals = this._trustedIndividuals
+      .getTrustedIndividuals()
+      .pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $oauthSession = this.getOauthSession(updateParameters)
     const $thirdPartyAuthData = this.getThirdPartySignInData()
@@ -241,14 +247,24 @@ export class UserService {
       updateParameters.loggedIn ? $userInfo : of(undefined),
       updateParameters.loggedIn ? $nameForm : of(undefined),
       $oauthSession,
+      $trustedIndividuals,
       !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
     ]).pipe(
-      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
-        userInfo,
-        nameForm,
-        oauthSession,
-        thirdPartyAuthData,
-      }))
+      map(
+        ([
+          userInfo,
+          nameForm,
+          oauthSession,
+          trustedIndividuals,
+          thirdPartyAuthData,
+        ]) => ({
+          userInfo,
+          nameForm,
+          oauthSession,
+          trustedIndividuals,
+          thirdPartyAuthData,
+        })
+      )
     )
   }
   /**
@@ -272,7 +288,7 @@ export class UserService {
             tap((session) => (this.keepRefreshingUserSession = !session.error)),
             tap(() =>
               environment.debugger
-                ? console.info('Oauth session declare')
+                ? console.debug('Oauth session declare')
                 : null
             )
           )
@@ -374,7 +390,9 @@ export class UserService {
       return undefined
     }
   }
-  private handleErrors(gerUserInfo: Observable<UserInfo | NameForm>) {
+  private handleErrors(
+    gerUserInfo: Observable<UserInfo | NameForm | TrustedIndividuals>
+  ) {
     return (
       gerUserInfo
         .pipe(
@@ -404,5 +422,36 @@ export class UserService {
         // so we can better interpret real errors here
         .pipe(catchError((error) => of(null)))
     )
+  }
+
+  // TODO @angel review
+  // since the switch account is returning a 302 witch triggers a redirect to `my-orcid`
+  // and we also trigger a reload, to reload the oauth page
+  // there might be some scenarios where these two different request might not work as expected.
+  switchAccount(delegator: Delegator) {
+    return this._http
+      .get(
+        `${environment.API_WEB}switch-user?username=${delegator.giverOrcid.path}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          // TODO @angel review
+          // The endpoint response need to be handle as an error
+          // since the response is not a 200 from the server
+          // The status is interpreted as a error code 0 since the 302 redirect is cancelled
+          if (error.status === 0) {
+            this.refreshUserSession(true)
+            return of(error)
+          } else {
+            return this._errorHandler.handleError(
+              error,
+              ERROR_REPORT.STANDARD_VERBOSE
+            )
+          }
+        })
+      )
   }
 }

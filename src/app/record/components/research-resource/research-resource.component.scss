@@ -1,0 +1,106 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+:host {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.organization-identifiers {
+  margin-top: 0;
+}
+
+app-panel {
+  width: 100%;
+  margin-top: 16px;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+}
+
+app-panel-data {
+  padding: 0 !important;
+
+  .description-container {
+    display: flex;
+    justify-content: space-between;
+
+    .buttons-container {
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      padding-top: 17px;
+      word-break: break-word;
+
+      a {
+        margin-inline-end: 16px;
+      }
+    }
+  }
+
+  app-panel-data,
+  .research-detail {
+    border-top: 1px solid;
+  }
+
+  .description-container,
+  .show-details {
+    border-bottom: solid 1px;
+  }
+}
+
+.columns-8 :host,
+.columns-4 :host {
+  app-panel-data {
+    .description-container {
+      flex-direction: column;
+      .buttons-container {
+        padding: 16px;
+        padding-top: 0;
+      }
+    }
+  }
+}
+
+.description {
+  display: block;
+  margin: 16px;
+  .host:first-child {
+    margin-bottom: 16px;
+  }
+}
+
+.resourceType {
+  margin-right: 15px;
+}
+
+.resourceType,
+.mobile {
+  display: inline-block;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: $spacing-small;
+  [dir='rtl'] :host & {
+    margin-left: $spacing-small;
+    margin-right: auto;
+  }
+}
+
+button.load-more {
+  margin-top: 20px;
+}
+
+p.empty {
+  margin-bottom: 0;
+}

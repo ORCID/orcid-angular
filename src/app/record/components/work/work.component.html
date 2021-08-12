@@ -38,10 +38,12 @@
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-  <!-- TRANSLATION -->
+  <!-- TRANSLATED TITLE -->
   <app-display-attribute *ngIf="work.translatedTitle?.content">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.translations">Translation</ng-container>
+      <ng-container i18n="@@record.translatedTitle"
+        >Translated title</ng-container
+      >
     </h3>
     <span *ngIf="work.translatedTitle?.languageName"
       >({{ work.translatedTitle?.languageName }})</span
@@ -76,7 +78,7 @@
 
   <!-- URL -->
 
-  <app-display-attribute *ngIf="work.url.value !== ''">
+  <app-display-attribute *ngIf="work.url?.value">
     <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
 
     <div>
@@ -90,9 +92,28 @@
         {{ work.url.value }}
       </a>
 
-      <ng-container *ngIf="!isUrl(work.url)">
+      <ng-container *ngIf="!isUrl(work.url.value)">
         {{ work.url.value }}
       </ng-container>
+    </div>
+  </app-display-attribute>
+
+  <!--  CONTRIBUTORS-->
+  <app-display-attribute *ngIf="work?.contributors?.length > 0">
+    <h3 class="orc-font-body-small" i18n="@@record.contributors">
+      Contributors
+    </h3>
+
+    <div>
+      <div
+        *ngFor="let contributor of work.contributors"
+        class="padding-level-3"
+      >
+        <ng-container *ngIf="contributor.creditName">{{
+          contributor.creditName.value
+        }}</ng-container>
+        {{ contributor | contributorsPipe }}
+      </div>
     </div>
   </app-display-attribute>
 
@@ -107,6 +128,25 @@
 
     <div>
       {{ work.citation.citation.value }}
+    </div>
+  </app-display-attribute>
+
+  <!--  DESCRIPTION-->
+  <app-display-attribute *ngIf="work.shortDescription?.value">
+    <h3 class="orc-font-body-small" i18n="@@record.description">Description</h3>
+
+    <div>
+      {{ work.shortDescription.value }}
+    </div>
+  </app-display-attribute>
+  <!--  COUNTRY OF PUBLICATION-->
+  <app-display-attribute *ngIf="work.countryCode?.value">
+    <h3 class="orc-font-body-small" i18n="@@record.countryPublication">
+      Country of publication
+    </h3>
+
+    <div>
+      {{ work.countryName.value }}
     </div>
   </app-display-attribute>
 

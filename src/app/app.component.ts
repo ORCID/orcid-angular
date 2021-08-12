@@ -7,6 +7,8 @@ import { ZendeskService } from './core/zendesk/zendesk.service'
 import { UserService } from './core'
 import { tap } from 'rxjs/operators'
 import { HeadlessOnOauthRoutes } from './constants'
+import { RobotsMetaTagsService } from './core/robots-meta-tags/robots-meta-tags.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-root',
@@ -35,7 +37,8 @@ export class AppComponent {
     _router: Router,
     _googleAnalytics: GoogleAnalyticsService,
     _zendesk: ZendeskService,
-    _userService: UserService
+    _userService: UserService,
+    _robotsMetaTags: RobotsMetaTagsService
   ) {
     _platformInfo
       .get()
@@ -75,6 +78,10 @@ export class AppComponent {
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
       }
     })
+
+    if (!environment.production) {
+      _robotsMetaTags.addRobotMetaTags()
+    }
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {

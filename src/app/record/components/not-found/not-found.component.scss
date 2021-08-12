@@ -1,0 +1,31 @@
+.container {
+  max-width: 664px;
+  padding: 0 !important;
+}
+
+.container,
+.mobile {
+  padding: 0 12px !important;
+}
+
+img {
+  display: block;
+  height: 64px;
+  width: 64px;
+  margin: 64px auto 33px;
+}
+
+h2 {
+  margin-bottom: 32px;
+}
+
+.if-you {
+  p {
+    margin-top: 4px;
+    margin-bottom: 24px;
+  }
+}
+
+.search {
+  margin-top: 16px;
+}

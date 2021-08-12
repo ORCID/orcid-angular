@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, retry, startWith, tap } from 'rxjs/operators'
 import {
   EmailsEndpoint,
   ExternalIdentifier,
   Keywords,
-  Person,
   PersonIdentifierEndpoint,
   Preferences,
+  UserInfo,
 } from 'src/app/types'
 import { CountriesEndpoint } from 'src/app/types/record-country.endpoint'
 import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
@@ -35,11 +35,12 @@ import { RecordFundingsService } from '../record-fundings/record-fundings.servic
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { RecordResearchResourceService } from '../record-research-resource/record-research-resource.service'
-import { ResearchResources } from '../../types/record-research-resources.endpoint'
+import { ResearchResourcesEndpoint } from '../../types/record-research-resources.endpoint'
 import { RecordWorksService } from '../record-works/record-works.service'
 import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { RecordPersonService } from '../record-person/record-person.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
+import { UserInfoService } from '../user-info/user-info.service'
 
 @Injectable({
   providedIn: 'root',
@@ -64,7 +65,8 @@ export class RecordService {
     private _recordResearchResourceService: RecordResearchResourceService,
     private _recordWorkService: RecordWorksService,
     private _recordPerson: RecordPersonService,
-    private _recordPublicSidebar: RecordPublicSideBarService
+    private _recordPublicSidebar: RecordPublicSideBarService,
+    private _userInfo: UserInfoService
   ) {}
 
   headers = new HttpHeaders({
@@ -82,36 +84,48 @@ export class RecordService {
    *
    * @returns And subject with all the require data from private or public orcid record
    */
-  getRecord(
-    options: UserRecordOptions = {
-      forceReload: false,
-    }
-  ): Observable<UserRecord> {
+  getRecord(options?: UserRecordOptions): Observable<UserRecord> {
     if (!this.recordSubject$ || options.forceReload) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
+      if (environment.debugger) {
+        this.recordSubject$.subscribe((value) => {
+          console.debug(value)
+        })
+      }
 
       combineLatest([
-        this._recordPerson.getPerson(options),
-        this._recordEmailsService.getEmails(options),
-        this._recordOtherNamesService.getOtherNames(options),
-        this._recordCountryService.getAddresses(options),
-        this._recordKeywordService.getKeywords(options),
-        this._recordWebsitesService.getWebsites(options),
-        this._recordPersonalIdentifier.getPersonalIdentifiers(options),
-        this._recordNamesService.getNames(options),
-        this._recordBiographyService.getBiography(options),
-        this._recordAffiliations.getAffiliations(options),
-        this._recordFundings.getFundings(options),
-        this.getPreferences(options),
-        this._recordPeerReviewService.getPeerReviewGroups(options),
-        this._recordResearchResourceService.getResearchResourcePage(options),
-        this._recordWorkService.getWorks(options),
-        this.getLastModifiedTime(options),
+        this._recordEmailsService.getEmails(options).pipe(startWith(false)),
+        this._recordOtherNamesService
+          .getOtherNames(options)
+          .pipe(startWith(false)),
+        this._recordCountryService.getAddresses(options).pipe(startWith(false)),
+        this._recordKeywordService.getKeywords(options).pipe(startWith(false)),
+        this._recordWebsitesService.getWebsites(options).pipe(startWith(false)),
+        this._recordPersonalIdentifier
+          .getPersonalIdentifiers(options)
+          .pipe(startWith(false)),
+        this._recordNamesService.getNames(options).pipe(startWith(false)),
+        this._recordBiographyService
+          .getBiography(options)
+          .pipe(startWith(false)),
+        this._recordAffiliations
+          .getAffiliations(options)
+          .pipe(startWith(false)),
+        this._recordFundings.getFundings(options).pipe(startWith(false)),
+        this.getPreferences(options).pipe(startWith(false)),
+        this._recordPeerReviewService
+          .getPeerReviewGroups(options)
+          .pipe(startWith(false)),
+        this._recordResearchResourceService
+          .getResearchResourcePage(options)
+          .pipe(startWith(false)),
+        this._recordWorkService.getWorks(options).pipe(startWith(false)),
+        this.getLastModifiedTime(options).pipe(startWith(false)),
+        this._userInfo.getUserInfo(options).pipe(startWith(false)),
       ])
         .pipe(
           tap(
             ([
-              person,
               emails,
               otherNames,
               countries,
@@ -127,9 +141,9 @@ export class RecordService {
               researchResources,
               works,
               lastModifiedTime,
+              userInfo,
             ]) => {
               this.recordSubject$.next({
-                person: person as Person,
                 emails: emails as EmailsEndpoint,
                 otherNames: otherNames as OtherNamesEndPoint,
                 countries: countries as CountriesEndpoint,
@@ -142,9 +156,10 @@ export class RecordService {
                 fundings: fundings as FundingGroup[],
                 preferences: preferences as Preferences,
                 peerReviews: peerReviews as PeerReview[],
-                researchResources: researchResources as ResearchResources,
+                researchResources: researchResources as ResearchResourcesEndpoint,
                 works: works as WorksEndpoint,
                 lastModifiedTime: lastModifiedTime as any,
+                userInfo: userInfo as UserInfo,
               })
             }
           )
@@ -152,11 +167,7 @@ export class RecordService {
         .subscribe()
     }
 
-    return this.recordSubject$
-      .asObservable()
-      .pipe(
-        tap((session) => (environment.debugger ? console.info(session) : null))
-      )
+    return this.recordSubject$.asObservable()
   }
 
   getExternalIdentifier(): Observable<ExternalIdentifier> {
@@ -228,7 +239,8 @@ export class RecordService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({} as Preferences))
       )
   }
 
@@ -252,7 +264,7 @@ export class RecordService {
   ) {
     if (options.publicRecordId) {
       return this._recordPublicSidebar
-        .getPublicRecordSideBar(options.publicRecordId)
+        .getPublicRecordSideBar(options)
         .pipe(map((value) => value.lastModifiedTime))
     }
     return of(undefined)

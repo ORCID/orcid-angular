@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError } from 'rxjs/operators'
-import { ORCID_REGEXP } from 'src/app/constants'
+import { DEFAULT_PAGE_SIZE, ORCID_REGEXP } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ import { ORCID_REGEXP } from 'src/app/constants'
 export class SearchService {
   quickSearchEDisMax =
     // tslint:disable-next-line: max-line-length
-    '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^5.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" mm=1}'
+    '{!edismax qf="given-and-family-names^50.0 family-name^10.0 given-names^10.0 credit-name^10.0 other-names^5.0 text^1.0" pf="given-and-family-names^50.0" bq="current-institution-affiliation-name:[* TO *]^100.0 past-institution-affiliation-name:[* TO *]^70" mm=1}'
 
   constructor(
     private _http: HttpClient,
@@ -84,7 +84,7 @@ export class SearchService {
           )
         }
       }
-      return this.encodeUrlWithPagination(
+      return this.setEdismaxAndEncodedUrlWithPagination(
         searchParameters.join(' AND '),
         querryParam
       )
@@ -121,6 +121,18 @@ export class SearchService {
     return trimParameters
   }
 
+  private setEdismaxAndEncodedUrlWithPagination(searchStream, querryParam) {
+    const bq = encodeURIComponent(
+      `current-institution-affiliation-name:[* TO *]^100.0 past-institution-affiliation-name:[* TO *]^70`
+    )
+    return (
+      `?bq=` +
+      bq +
+      `&defType=edismax&q=${encodeURIComponent(searchStream)}` +
+      this.handlePagination(querryParam)
+    )
+  }
+
   private encodeUrlWithPagination(searchStream, querryParam) {
     return (
       `?q=${encodeURIComponent(searchStream)}` +
@@ -130,7 +142,7 @@ export class SearchService {
 
   private handlePagination(querryParam: SearchParameters): string {
     return `&start=${querryParam.pageIndex * querryParam.pageSize || 0}&rows=${
-      querryParam.pageSize || 50
+      querryParam.pageSize || DEFAULT_PAGE_SIZE
     }`
   }
 }

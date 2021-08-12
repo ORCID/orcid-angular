@@ -1,54 +1,60 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, tap } from 'rxjs/operators'
+import { Observable, of, ReplaySubject } from 'rxjs'
+import { catchError, retry, switchMap, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
-import { FundingsSortService } from '../record-fundings-sort/record-fundings-sort.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { cloneDeep } from 'lodash'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import { VisibilityStrings } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordFundingsService {
-  fundingsSubject = new ReplaySubject<FundingGroup[]>(1)
-  lastEmitedValue: FundingGroup[]
+  lastEmittedValue: FundingGroup[]
 
-  $fundings: ReplaySubject<FundingGroup[]>
+  $fundings: ReplaySubject<FundingGroup[]> = new ReplaySubject<FundingGroup[]>()
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-    private _fundingsSortService: FundingsSortService
+    private _errorHandler: ErrorHandlerService
   ) {}
 
-  getFundings(
-    options: UserRecordOptions = {
-      forceReload: false,
-    }
-  ): Observable<FundingGroup[]> {
+  getFundings(options: UserRecordOptions): Observable<FundingGroup[]> {
     if (options.publicRecordId) {
-      return this._http.get<FundingGroup[]>(
-        environment.API_WEB +
-          options.publicRecordId +
-          '/fundingGroups.json?sort=date&sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : true)
-      )
-    }
-
-    if (!this.$fundings) {
-      this.$fundings = new ReplaySubject(1)
-      this.getAndSortFundings()
+      this._http
+        .get<FundingGroup[]>(
+          environment.API_WEB +
+            options.publicRecordId +
+            '/fundingGroups.json?' +
+            '&sort=' +
+            (options.sort != null ? options.sort : 'date') +
+            '&sortAsc=' +
+            (options.sortAsc != null ? options.sortAsc : false)
+        )
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
-          tap((value) => {
-            this.lastEmitedValue = cloneDeep(value)
-            this.$fundings.next(value)
-          })
+          catchError(() => of([])),
+          tap((data) => {
+            this.lastEmittedValue = data
+            this.$fundings.next(data)
+          }),
+          switchMap((data) => this.$fundings.asObservable())
+        )
+        .subscribe()
+    } else {
+      this.getAndSortFundings(options)
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          tap((data) => {
+            this.lastEmittedValue = data
+            this.$fundings.next(data)
+          }),
+          switchMap((data) => this.$fundings.asObservable())
         )
         .subscribe()
     }
@@ -78,15 +84,24 @@ export class RecordFundingsService {
       )
   }
 
-  private getAndSortFundings(): Observable<FundingGroup[]> {
+  changeUserRecordContext(userRecordContext: UserRecordOptions) {
+    this.getFundings(userRecordContext).subscribe()
+  }
+
+  private getAndSortFundings(
+    options: UserRecordOptions
+  ): Observable<FundingGroup[]> {
     return this._http
       .get<FundingGroup[]>(
         environment.API_WEB +
-          `fundings/fundingGroups.json?sort=date&sortAsc=false`
+          `fundings/fundingGroups.json?` +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : false)
       )
       .pipe(
         retry(3),
-        map((data) => this._fundingsSortService.transform(data)),
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
@@ -94,7 +109,37 @@ export class RecordFundingsService {
   set(value): Observable<FundingGroup[]> {
     throw new Error('Method not implemented.')
   }
-  update(value): Observable<FundingGroup[]> {
-    throw new Error('Method not implemented.')
+
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'fundings/' +
+          putCode +
+          '/visibility/' +
+          visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getFundings({ forceReload: true }))
+      )
+  }
+
+  delete(putCode: string): Observable<any> {
+    return this._http
+      .delete(
+        environment.API_WEB +
+          'fundings/funding.json?id=' +
+          encodeURIComponent(putCode)
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getFundings({ forceReload: true }))
+      )
   }
 }

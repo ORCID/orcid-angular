@@ -24,7 +24,7 @@ export class WorkComponent implements OnInit {
   /**
    * RegEx function to check if the elements contains a URL
    */
-  isUrl(element) {
+  isUrl(element): boolean {
     return RegExp(URL_REGEXP).test(element)
   }
 }
