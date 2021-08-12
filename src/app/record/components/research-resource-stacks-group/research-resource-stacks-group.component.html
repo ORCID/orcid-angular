@@ -14,6 +14,10 @@
     [sortType]="'date'"
     (sort)="sortEvent($event)"
   >
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="paginationLoading"
+    ></mat-progress-bar>
     <mat-paginator
       *ngIf="researchResources.totalGroups > researchResources.groups.length"
       [length]="paginationTotalAmountOfResearchResources"
@@ -21,6 +25,7 @@
       [pageSizeOptions]="[10, 50, 100]"
       [pageIndex]="paginationIndex"
       (page)="pageEvent($event)"
+      [disabled]="paginationLoading"
     >
     </mat-paginator>
     <ng-container *ngIf="researchResources.groups.length > 0">
@@ -52,7 +57,12 @@
       [pageSizeOptions]="[10, 50, 100]"
       [pageIndex]="paginationIndex"
       (page)="pageEvent($event)"
+      [disabled]="paginationLoading"
     >
     </mat-paginator>
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="paginationLoading"
+    ></mat-progress-bar>
   </app-panels>
 </ng-container>
