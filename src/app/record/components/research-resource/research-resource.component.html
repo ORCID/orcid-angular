@@ -252,27 +252,38 @@
                 </ng-container>
               </div>
               <ng-container *ngFor="let itemHost of item.hosts">
-                <div
-                  class="description"
+                <ng-container
                   *ngIf="getOrganizationDisambiguated(itemHost) as nestOrg"
                 >
-                  <span>{{ itemHost.name }}</span>
-                  <span
-                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
-                  >
-                    (</span
-                  >
-                  <span *ngIf="itemHost.city">{{ itemHost.city }}</span
-                  ><span *ngIf="itemHost.region">, {{ itemHost.region }}</span>
-                  <span *ngIf="itemHost.country">, {{ itemHost.country }}</span>
-                  <span
-                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
-                    >)</span
-                  >
-                  <app-org-identifier
-                    [orgDisambiguated]="nestOrg"
-                  ></app-org-identifier>
-                </div>
+                  <div class="description">
+                    <span>{{ itemHost.name }}</span>
+                    <span
+                      *ngIf="
+                        itemHost.city || itemHost.region || itemHost.country
+                      "
+                    >
+                      (</span
+                    >
+                    <span *ngIf="itemHost.city">{{ itemHost.city }}</span
+                    ><span *ngIf="itemHost.region"
+                      >, {{ itemHost.region }}</span
+                    >
+                    <span *ngIf="itemHost.country"
+                      >, {{ itemHost.country }}</span
+                    >
+                    <span
+                      *ngIf="
+                        itemHost.city || itemHost.region || itemHost.country
+                      "
+                      >)</span
+                    >
+                  </div>
+                  <div class="description">
+                    <app-org-identifier
+                      [orgDisambiguated]="nestOrg"
+                    ></app-org-identifier>
+                  </div>
+                </ng-container>
               </ng-container>
             </app-panel-element>
           </app-panel-data>
