@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
@@ -14,6 +15,7 @@ import { SortData } from 'src/app/types/sort'
   styleUrls: ['./work-stack-group.component.scss'],
 })
 export class WorkStackGroupComponent implements OnInit {
+  defaultPageSize = DEFAULT_PAGE_SIZE
   labelAddButton = $localize`:@@shared.addWork:Add Work`
   labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
   paginationLoading = true

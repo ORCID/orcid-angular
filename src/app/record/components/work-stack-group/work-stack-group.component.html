@@ -20,7 +20,10 @@
       *ngIf="paginationLoading"
     ></mat-progress-bar>
     <mat-paginator
-      *ngIf="workGroup.totalGroups > workGroup.groups.length"
+      *ngIf="
+        workGroup.totalGroups > workGroup.groups.length ||
+        this.paginationPageSize != defaultPageSize
+      "
       [length]="paginationTotalAmountOfWorks"
       [pageSize]="paginationPageSize"
       [pageSizeOptions]="[10, 50, 100]"
@@ -48,7 +51,10 @@
       </div>
     </ng-container>
     <mat-paginator
-      *ngIf="workGroup.totalGroups > workGroup.groups.length"
+      *ngIf="
+        workGroup.totalGroups > workGroup.groups.length ||
+        paginationPageSize !== defaultPageSize
+      "
       [length]="paginationTotalAmountOfWorks"
       [pageSize]="paginationPageSize"
       [pageSizeOptions]="[10, 50, 100]"
