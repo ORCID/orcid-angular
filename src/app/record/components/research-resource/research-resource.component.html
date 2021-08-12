@@ -236,22 +236,20 @@
                 [noBoldTitle]="true"
               ></app-display-external-ids>
 
-              <div class="description">
-                <div *ngIf="item.url">
-                  <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
-                  <ng-container *ngIf="!isUrl(item.url)">
+              <div *ngIf="item.url" class="description">
+                <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
+                <ng-container *ngIf="!isUrl(item.url)">
+                  {{ item.url }}
+                </ng-container>
+                <ng-container *ngIf="isUrl(item.url)">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="{{ item.url }}"
+                  >
                     {{ item.url }}
-                  </ng-container>
-                  <ng-container *ngIf="isUrl(item.url)">
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href="{{ item.url }}"
-                    >
-                      {{ item.url }}
-                    </a>
-                  </ng-container>
-                </div>
+                  </a>
+                </ng-container>
               </div>
               <ng-container *ngFor="let itemHost of item.hosts">
                 <div
