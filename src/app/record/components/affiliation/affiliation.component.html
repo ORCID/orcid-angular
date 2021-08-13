@@ -15,7 +15,12 @@
             affiliation.endDate | monthDayYearDateToString
           }}</ng-container></ng-container
         >
-        <ng-container *ngIf="!affiliation.endDate.year" i18n="@@shared.present"
+        <ng-container
+          *ngIf="
+            !affiliation.endDate.year &&
+            affiliation.affiliationType?.value !== 'distinction'
+          "
+          i18n="@@shared.present"
           >present</ng-container
         >
       </ng-container>
