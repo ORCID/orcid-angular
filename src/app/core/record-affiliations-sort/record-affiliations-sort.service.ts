@@ -119,9 +119,13 @@ export class AffiliationsSortService {
     }
     if (x.month) {
       date.setMonth(Number.parseInt(x.month, 10))
+    } else {
+      date.setMonth(1)
     }
     if (x.day) {
       date.setDate(Number.parseInt(x.day, 10))
+    } else {
+      date.setDate(1)
     }
     return date
   }
