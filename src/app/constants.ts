@@ -121,7 +121,7 @@ export function routerPublicPageUrl(segments: UrlSegment[]) {
     return { consumed: [segments[0]] }
   }
   if (segments[1] && isValidOrcidFormat(segments[1].path)) {
-    return { consumed: [segments[1]] }
+    return { consumed: [segments[0], segments[1]] }
   }
   return {
     consumed: [],
