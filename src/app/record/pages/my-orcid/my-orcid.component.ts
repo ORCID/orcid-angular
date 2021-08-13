@@ -57,7 +57,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     // od `/<orcid-id>` (used while the app is live )
     if (this.route.parent.snapshot.url) {
       const firstParameter = this.route.parent.snapshot.url[0]
-      const secondParameter = this.route.parent.snapshot.url[0]
+      const secondParameter = this.route.parent.snapshot.url[1]
       if (
         firstParameter &&
         firstParameter.toString() &&
