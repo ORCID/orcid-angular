@@ -230,12 +230,28 @@
           </div>
           <app-panel-data [borderBottom]="true" *ngIf="item.showDetails">
             <app-panel-element [hideVisibility]="false">
-              <app-display-external-ids
-                class="description"
-                [externalIdentifiers]="item.externalIdentifiers"
-                [noBoldTitle]="true"
-              ></app-display-external-ids>
+              <div class="description">
+                <app-display-external-ids
+                  [externalIdentifiers]="item.externalIdentifiers"
+                  [noBoldTitle]="true"
+                ></app-display-external-ids>
 
+                <div *ngIf="item.hosts && item.hosts[0] as itemHost">
+                  <span>{{ itemHost.name }}</span>
+                  <span
+                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
+                  >
+                    (</span
+                  >
+                  <span *ngIf="itemHost.city">{{ itemHost.city }}</span
+                  ><span *ngIf="itemHost.region">, {{ itemHost.region }}</span>
+                  <span *ngIf="itemHost.country">, {{ itemHost.country }}</span>
+                  <span
+                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
+                    >)</span
+                  >
+                </div>
+              </div>
               <div *ngIf="item.url" class="description">
                 <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
                 <ng-container *ngIf="!isUrl(item.url)">
@@ -251,29 +267,18 @@
                   </a>
                 </ng-container>
               </div>
-              <ng-container *ngFor="let itemHost of item.hosts">
-                <div
-                  class="description"
+              <div
+                *ngIf="item.hosts && item.hosts[0] as itemHost"
+                class="description"
+              >
+                <ng-container
                   *ngIf="getOrganizationDisambiguated(itemHost) as nestOrg"
                 >
-                  <span>{{ itemHost.name }}</span>
-                  <span
-                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
-                  >
-                    (</span
-                  >
-                  <span *ngIf="itemHost.city">{{ itemHost.city }}</span
-                  ><span *ngIf="itemHost.region">, {{ itemHost.region }}</span>
-                  <span *ngIf="itemHost.country">, {{ itemHost.country }}</span>
-                  <span
-                    *ngIf="itemHost.city || itemHost.region || itemHost.country"
-                    >)</span
-                  >
                   <app-org-identifier
                     [orgDisambiguated]="nestOrg"
                   ></app-org-identifier>
-                </div>
-              </ng-container>
+                </ng-container>
+              </div>
             </app-panel-element>
           </app-panel-data>
         </app-panel>
