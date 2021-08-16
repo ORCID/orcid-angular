@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, ElementRef, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -18,6 +18,7 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
   works: Work[] = []
 
   constructor(
+    private elementRef: ElementRef,
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordWorksService: RecordWorksService
   ) {}
@@ -34,6 +35,18 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     this.loadingWorks = true
+    this._recordWorksService.exportSelected(this.putCodes).subscribe((data) => {
+      this.loadingWorks = false
+      const anchor = document.createElement('a')
+      anchor.setAttribute('css', '{display: \'none\'}')
+      this.elementRef.nativeElement.append(anchor)
+      anchor.setAttribute('href', 'data:text/x-bibtex;charset=utf-8,' + encodeURIComponent(data))
+      anchor.setAttribute('target', '_self')
+      anchor.setAttribute('download', 'works.bib')
+      anchor.click()
+      anchor.remove()
+      this.closeEvent()
+    })
   }
 
   closeEvent() {

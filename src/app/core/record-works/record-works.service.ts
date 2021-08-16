@@ -246,4 +246,11 @@ export class RecordWorksService {
       responseType: 'text',
     })
   }
+
+  exportSelected(putCodes: string[]): Observable<any> {
+    return this._http.get(
+      environment.API_WEB + 'works/export/bibtex?workIdsStr=' + putCodes.join(','), {
+      responseType: 'text',
+    })
+  }
 }
