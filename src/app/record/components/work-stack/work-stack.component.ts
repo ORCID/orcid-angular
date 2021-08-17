@@ -139,10 +139,10 @@ export class WorkStackComponent implements OnInit {
 
   userIsSource(work: Work): boolean {
     if (this.userInfo) {
-      return work.source === this.userInfo.REAL_USER_ORCID;
+      return work.source === this.userInfo.REAL_USER_ORCID
     }
     return false
-  };
+  }
 
   ngOnInit(): void {}
 }

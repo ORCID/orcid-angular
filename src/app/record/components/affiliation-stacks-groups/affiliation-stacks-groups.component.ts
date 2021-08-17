@@ -4,7 +4,11 @@ import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
-import { AffiliationGroup, AffiliationUIGroup, AffiliationUIGroupsTypes } from 'src/app/types/record-affiliation.endpoint'
+import {
+  AffiliationGroup,
+  AffiliationUIGroup,
+  AffiliationUIGroupsTypes,
+} from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 import { ModalAffiliationsComponent } from './modals/modal-affiliations/modal-affiliations.component'

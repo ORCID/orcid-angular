@@ -52,9 +52,7 @@
     <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
 
     <ng-container *ngIf="editable && !customControls">
-      <ng-container
-        *ngIf="isAffiliation()"
-      >
+      <ng-container *ngIf="isAffiliation()">
         <button
           mat-icon-button
           *ngIf="!isPublicRecord && isUserSource"
@@ -72,9 +70,7 @@
           <mat-icon class="material-icons-outlined">call_split</mat-icon>
         </button>
       </ng-container>
-      <ng-container
-        *ngIf="!isAffiliation()"
-      >
+      <ng-container *ngIf="!isAffiliation()">
         <button
           mat-icon-button
           *ngIf="!isPublicRecord && isUserSource"

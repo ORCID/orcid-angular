@@ -4,7 +4,11 @@ import { first } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { OrgDisambiguated, UserInfo } from 'src/app/types'
-import { Affiliation, AffiliationGroup, AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  AffiliationGroup,
+  AffiliationUIGroup,
+} from 'src/app/types/record-affiliation.endpoint'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
@@ -178,10 +182,10 @@ export class AffiliationStackComponent implements OnInit {
 
   userIsSource(affiliation: Affiliation): boolean {
     if (this.userInfo) {
-      return affiliation.source === this.userInfo.REAL_USER_ORCID;
+      return affiliation.source === this.userInfo.REAL_USER_ORCID
     }
     return false
-  };
+  }
 
   ngOnInit(): void {}
 }

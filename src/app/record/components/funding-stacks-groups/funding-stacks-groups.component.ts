@@ -12,7 +12,6 @@ import { SortData } from 'src/app/types/sort'
 
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
 import { UserInfo } from '../../../types'
-import { UserInfoService } from '../../../core/user-info/user-info.service'
 
 @Component({
   selector: 'app-fundings',
