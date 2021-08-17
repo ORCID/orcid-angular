@@ -8,6 +8,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-work-stack',
@@ -41,6 +42,8 @@ export class WorkStackComponent implements OnInit {
   get displayTheStack(): boolean {
     return this._displayTheStack
   }
+
+  @Input() userInfo: UserInfo
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
@@ -133,6 +136,13 @@ export class WorkStackComponent implements OnInit {
   trackByWorkStack(index, item: Work) {
     return item.putCode.value
   }
+
+  userIsSource(work: Work): boolean {
+    if (this.userInfo) {
+      return work.source === this.userInfo.REAL_USER_ORCID;
+    }
+    return false
+  };
 
   ngOnInit(): void {}
 }

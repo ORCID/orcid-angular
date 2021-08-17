@@ -8,6 +8,7 @@ import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
+import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -19,6 +20,7 @@ export class WorkStackGroupComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addWork:Add Work`
   labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
   paginationLoading = true
+  @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()

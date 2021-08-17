@@ -3,12 +3,8 @@ import { combineLatest, Observable, of } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { OrganizationsService } from 'src/app/core'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
-import { OrgDisambiguated } from 'src/app/types'
-import {
-  Affiliation,
-  AffiliationGroup,
-  AffiliationUIGroup,
-} from 'src/app/types/record-affiliation.endpoint'
+import { OrgDisambiguated, UserInfo } from 'src/app/types'
+import { Affiliation, AffiliationGroup, AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
@@ -49,6 +45,8 @@ export class AffiliationStackComponent implements OnInit {
   get displayTheStack(): boolean {
     return this._displayTheStack
   }
+
+  @Input() userInfo: UserInfo
 
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
@@ -177,6 +175,13 @@ export class AffiliationStackComponent implements OnInit {
   trackByAffiliationStack(index, item: Affiliation) {
     return item.putCode.value
   }
+
+  userIsSource(affiliation: Affiliation): boolean {
+    if (this.userInfo) {
+      return affiliation.source === this.userInfo.REAL_USER_ORCID;
+    }
+    return false
+  };
 
   ngOnInit(): void {}
 }

@@ -73,8 +73,11 @@ export class PanelComponent implements OnInit {
     return this._isPublicRecord
   }
 
+  @Input() isUserSource = false
+
   formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
+  tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
 
   constructor(
     private _dialog: MatDialog,
@@ -117,7 +120,7 @@ export class PanelComponent implements OnInit {
     return obj && (obj.value || obj.putCode)
   }
 
-  openModal() {
+  openModal(isCopy: boolean) {
     this._platform
       .get()
       .pipe(first())
@@ -129,6 +132,7 @@ export class PanelComponent implements OnInit {
             maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
             data: this.userRecord,
           })
+          modalComponent.componentInstance.isCopy = isCopy
           modalComponent.componentInstance.type = this.type
           modalComponent.componentInstance.affiliation = this.elements
         }

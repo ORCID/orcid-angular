@@ -52,15 +52,39 @@
     <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
 
     <ng-container *ngIf="editable && !customControls">
-      <button
-        mat-icon-button
-        *ngIf="!isPublicRecord"
-        [matTooltip]="tooltipLabelEdit"
-        (click)="openModal()"
-        id="edit-button"
+      <ng-container
+        *ngIf="isAffiliation()"
       >
-        <mat-icon class="material-icons-outlined">edit</mat-icon>
-      </button>
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord && isUserSource"
+          [matTooltip]="tooltipLabelEdit"
+          (click)="openModal(false)"
+        >
+          <mat-icon class="material-icons-outlined">edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord && !isUserSource"
+          [matTooltip]="tooltipLabelMakeCopy"
+          (click)="openModal(true)"
+        >
+          <mat-icon class="material-icons-outlined">call_split</mat-icon>
+        </button>
+      </ng-container>
+      <ng-container
+        *ngIf="!isAffiliation()"
+      >
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord && isUserSource"
+          [matTooltip]="tooltipLabelEdit"
+          (click)="openModal(false)"
+          id="edit-button"
+        >
+          <mat-icon class="material-icons-outlined">edit</mat-icon>
+        </button>
+      </ng-container>
     </ng-container>
     <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
     <ng-container
