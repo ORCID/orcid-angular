@@ -22,11 +22,18 @@
   </ng-container>
 
   <div *ngIf="selectable">
-    <mat-checkbox *ngIf="selectable" (change)="checked($event)">
+    <mat-checkbox
+      *ngIf="selectable && !isPublicRecord"
+      (change)="checked($event)"
+      [ngModel]="selected"
+    >
       <ng-container *ngIf="expandButtonsPosition !== 'left'">
         <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
       </ng-container>
     </mat-checkbox>
+    <ng-container *ngIf="isPublicRecord && expandButtonsPosition !== 'left'">
+      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    </ng-container>
   </div>
   <div *ngIf="!selectable">
     <ng-container *ngIf="expandButtonsPosition !== 'left'">

@@ -4,7 +4,7 @@ import {
   HostBinding,
   Input,
   OnInit,
-  Output,
+  Output, QueryList, ViewChildren,
 } from '@angular/core'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
@@ -15,6 +15,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 import { UserInfo } from '../../../types'
 
 @Component({
@@ -52,6 +53,7 @@ export class WorkStackComponent implements OnInit {
 
   @Output() checkboxChangeWorkStackOutput = new EventEmitter<any>()
   @Input() userInfo: UserInfo
+  @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}

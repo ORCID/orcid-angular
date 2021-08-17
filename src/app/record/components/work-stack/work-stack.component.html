@@ -18,6 +18,7 @@
     [selectable]="true"
     [isUserSource]="userIsSource(work)"
     (checkboxChangePanel)="checkboxChangeWorkStack($event)"
+    #panelsComponent
     [type]="'works'"
   >
     <h2 header class="orc-font-body">{{ work.title.value }}</h2>

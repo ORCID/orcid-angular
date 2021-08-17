@@ -20,7 +20,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { SortLabelPipe } from './sort-label.pipe'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -46,6 +46,7 @@ import { ReactiveFormsModule } from '@angular/forms'
     MatCheckboxModule,
     PrivacySelectorModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
     PanelComponent,

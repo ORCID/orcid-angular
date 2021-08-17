@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
@@ -20,6 +20,8 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
 import { FormGroup } from '@angular/forms'
 import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
 import { ModalDeleteWorksComponent } from '../work/modals/modal-delete-works/modal-delete-works.component'
+import { WorkStackComponent } from '../work-stack/work-stack.component'
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { UserInfo } from '../../../types'
 
 @Component({
@@ -58,6 +60,9 @@ export class WorkStackGroupComponent implements OnInit {
   paginationPageSize: number
   selectedWorks: string[] = []
   selectAll: false
+
+  @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
+  @ViewChildren('appWorkStacks') appWorkStacks: QueryList<WorkStackComponent>
 
   constructor(
     private _dialog: MatDialog,
@@ -117,16 +122,16 @@ export class WorkStackGroupComponent implements OnInit {
     this.openModal(ModalExportWorksComponent, this.selectedWorks)
   }
 
-  updateCheck() {
-    if (this.selectAll) {
-      this.workGroup.groups.map((workGroup) => {
-        workGroup.works[0].checked = true
+  checked(event: MatCheckboxChange) {
+    this.selectedWorks = []
+    this.appWorkStacks.forEach((appWorkStack) => {
+      appWorkStack.panelsComponent.forEach((panelComponent) => {
+        panelComponent.selected = event.checked
+        if (event.checked) {
+          this.selectedWorks.push(panelComponent.putCode)
+        }
       })
-    } else {
-      this.workGroup.groups.map((workGroup) => {
-        workGroup.works[0].checked = false
-      })
-    }
+    })
   }
 
   openModal(modal: ComponentType<any>, putCodes) {

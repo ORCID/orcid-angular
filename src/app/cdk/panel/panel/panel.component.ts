@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, ViewChildren } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion, Work } from '../../../types'
 import {
@@ -19,7 +19,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
-import { MatCheckboxChange } from '@angular/material/checkbox'
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
   selector: 'app-panel',
@@ -80,6 +80,7 @@ export class PanelComponent implements OnInit {
   }
 
   @Input() isUserSource = false
+  selected: boolean
 
   formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
