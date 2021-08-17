@@ -57,7 +57,7 @@
           mat-icon-button
           *ngIf="!isPublicRecord && isUserSource"
           [matTooltip]="tooltipLabelEdit"
-          (click)="openModal(false)"
+          (click)="openModal()"
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
         </button>
@@ -65,7 +65,7 @@
           mat-icon-button
           *ngIf="!isPublicRecord && !isUserSource"
           [matTooltip]="tooltipLabelMakeCopy"
-          (click)="openModal(true)"
+          (click)="openModal({ createACopy: true })"
         >
           <mat-icon class="material-icons-outlined">call_split</mat-icon>
         </button>
@@ -75,7 +75,7 @@
           mat-icon-button
           *ngIf="!isPublicRecord && isUserSource"
           [matTooltip]="tooltipLabelEdit"
-          (click)="openModal(false)"
+          (click)="openModal()"
           id="edit-button"
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>

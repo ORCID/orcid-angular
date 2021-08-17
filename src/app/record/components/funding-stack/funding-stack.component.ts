@@ -164,7 +164,7 @@ export class FundingStackComponent implements OnInit {
 
   userIsSource(funding: Funding): boolean {
     if (this.userInfo) {
-      return funding.source === this.userInfo.REAL_USER_ORCID
+      return funding.source === this.userInfo.EFFECTIVE_USER_ORCID
     }
     return false
   }

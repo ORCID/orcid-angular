@@ -182,7 +182,7 @@ export class AffiliationStackComponent implements OnInit {
 
   userIsSource(affiliation: Affiliation): boolean {
     if (this.userInfo) {
-      return affiliation.source === this.userInfo.REAL_USER_ORCID
+      return affiliation.source === this.userInfo.EFFECTIVE_USER_ORCID
     }
     return false
   }

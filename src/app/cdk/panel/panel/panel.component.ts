@@ -120,7 +120,7 @@ export class PanelComponent implements OnInit {
     return obj && (obj.value || obj.putCode)
   }
 
-  openModal(isCopy: boolean) {
+  openModal(options?: { createACopy: boolean }) {
     this._platform
       .get()
       .pipe(first())
@@ -132,7 +132,7 @@ export class PanelComponent implements OnInit {
             maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
             data: this.userRecord,
           })
-          modalComponent.componentInstance.isCopy = isCopy
+          modalComponent.componentInstance.options = options
           modalComponent.componentInstance.type = this.type
           modalComponent.componentInstance.affiliation = this.elements
         }
