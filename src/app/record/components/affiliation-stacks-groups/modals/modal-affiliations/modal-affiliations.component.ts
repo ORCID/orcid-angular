@@ -230,7 +230,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           : this.defaultVisibility,
       },
       putCode: {
-        value: this.options?.createACopy ? null : this.affiliation?.putCode?.value,
+        value: this.options?.createACopy
+          ? null
+          : this.affiliation?.putCode?.value,
       },
       affiliationName: {
         value: affiliationForm.get('organization').value,
@@ -281,17 +283,20 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       source: this.options?.createACopy ? null : this.affiliation?.source,
       sourceName: this.affiliation?.sourceName,
       dateSortString: this.affiliation?.dateSortString,
-      affiliationExternalIdentifiers: this.affiliation?.affiliationExternalIdentifiers,
+      affiliationExternalIdentifiers: this.affiliation
+        ?.affiliationExternalIdentifiers,
       affiliationTypeForDisplay: this.affiliation?.affiliationTypeForDisplay,
       assertionOriginClientId: this.affiliation?.assertionOriginClientId,
       assertionOriginName: this.affiliation?.assertionOriginName,
       assertionOriginOrcid: this.affiliation?.assertionOriginOrcid,
       disambiguationSource: this.affiliation?.disambiguationSource,
-      disambiguatedAffiliationSourceId: this.affiliation?.disambiguatedAffiliationSourceId,
+      disambiguatedAffiliationSourceId: this.affiliation
+        ?.disambiguatedAffiliationSourceId,
       orgDisambiguatedId: this.affiliation?.orgDisambiguatedId,
       orgDisambiguatedCity: this.affiliation?.orgDisambiguatedCity,
       orgDisambiguatedCountry: this.affiliation?.orgDisambiguatedCountry,
-      orgDisambiguatedExternalIdentifiers: this.affiliation?.orgDisambiguatedExternalIdentifiers,
+      orgDisambiguatedExternalIdentifiers: this.affiliation
+        ?.orgDisambiguatedExternalIdentifiers,
       orgDisambiguatedName: this.affiliation?.orgDisambiguatedName,
       orgDisambiguatedRegion: this.affiliation?.orgDisambiguatedRegion,
       orgDisambiguatedUrl: this.affiliation?.orgDisambiguatedUrl,
