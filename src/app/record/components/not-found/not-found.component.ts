@@ -22,7 +22,7 @@ export class NotFoundComponent implements OnInit {
     _titleService: Title,
     private _platform: PlatformInfoService
   ) {
-    _titleService.setTitle(this.titleNotFound);
+    _titleService.setTitle(this.titleNotFound)
     _platform
       .get()
       .pipe(takeUntil(this.$destroy))
