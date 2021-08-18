@@ -31,6 +31,8 @@ import { ERROR_REPORT } from 'src/app/errors'
 import { UserSession } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
 import { ReactivationLocal } from '../../../types/reactivation.local'
+import { SearchService } from '../../../core/search/search.service'
+import { SearchParameters, SearchResults } from 'src/app/types'
 
 @Component({
   selector: 'app-register',
@@ -68,7 +70,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     private _user: UserService,
     private _router: Router,
     private _errorHandler: ErrorHandlerService,
-    private _userInfo: UserService
+    private _userInfo: UserService,
+    private _searchService: SearchService
   ) {
     _platformInfo.get().subscribe((platform) => {
       this.platform = platform
@@ -209,21 +212,23 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
     if (this.FormGroupStepA.valid) {
       this.personalData = this.FormGroupStepA.value.personal
+      const searchValue =
+        this.personalData.familyNames.value +
+        ' ' +
+        this.personalData.givenNames.value
+      const searchParams: SearchParameters = {}
+      searchParams.searchQuery = searchValue
 
-      this._register
-        .checkDuplicatedResearcher({
-          familyNames: this.personalData.familyNames.value,
-          givenNames: this.personalData.givenNames.value,
-        })
-        .subscribe((value) => {
-          if (value.length > 0) {
-            this.openDialog(value)
-          }
-        })
+      this._searchService.search(searchParams).subscribe((value) => {
+        if (value['num-found'] > 0) {
+          this.openDialog(value)
+        }
+      })
     }
   }
 
-  openDialog(duplicateRecords): void {
+  openDialog(duplicateRecordsSearchResults: SearchResults): void {
+    const duplicateRecords = duplicateRecordsSearchResults['expanded-result']
     const dialogParams = {
       width: `1078px`,
       height: `600px`,

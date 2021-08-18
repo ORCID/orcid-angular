@@ -6,6 +6,7 @@
 }
 
 h3 {
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -24,7 +25,6 @@ app-panel {
 }
 
 app-panel-data {
-  border-top: 1px solid;
   padding: 0 !important;
 
   .description-container {
@@ -36,11 +36,17 @@ app-panel-data {
       flex-direction: row;
       align-items: start;
       padding-top: 17px;
+      word-break: break-word;
 
       a {
         margin-inline-end: 16px;
       }
     }
+  }
+
+  app-panel-data,
+  .research-detail {
+    border-top: 1px solid;
   }
 
   .description-container,
@@ -49,12 +55,34 @@ app-panel-data {
   }
 }
 
+.columns-8 :host,
+.columns-4 :host {
+  app-panel-data {
+    .description-container {
+      flex-direction: column;
+      .buttons-container {
+        padding: 16px;
+        padding-top: 0;
+      }
+    }
+  }
+}
+
 .description {
-  padding: 16px;
+  display: block;
+  margin: 16px;
+  .host:first-child {
+    margin-bottom: 16px;
+  }
 }
 
 .resourceType {
   margin-right: 15px;
+}
+
+.resourceType,
+.mobile {
+  display: inline-block;
 }
 
 .dot {

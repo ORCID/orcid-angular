@@ -51,29 +51,45 @@ export class AffiliationsSortService {
               // If the end date is not the same use it to sort
               if (dateFinishA.getTime() !== dateFinishB.getTime()) {
                 return (
-                  (dateFinishA.getTime() - dateFinishB.getTime()) *
-                  (ascending ? 1 : -1)
+                  (dateFinishB.getTime() - dateFinishA.getTime()) *
+                  (ascending ? -1 : 1)
                 )
-              } else {
+              } else if (dateStartB.getTime() !== dateStartA.getTime()) {
                 // If the end date is the same use the start date to sort
                 return (
-                  (dateStartA.getTime() - dateStartB.getTime()) *
-                  (ascending ? 1 : -1)
+                  (dateStartB.getTime() - dateStartA.getTime()) *
+                  (ascending ? -1 : 1)
+                )
+              } else {
+                return (
+                  (
+                    '' + a.defaultAffiliation.affiliationName.value
+                  ).localeCompare(
+                    '' + b.defaultAffiliation.affiliationName.value
+                  ) * (ascending ? 1 : -1)
                 )
               }
             }
             if (by === 'start') {
               // If the start is not the same use it to sort
-              if (dateStartA.getTime() !== dateStartB.getTime()) {
+              if (dateStartB.getTime() !== dateStartA.getTime()) {
                 return (
-                  (dateStartA.getTime() - dateStartB.getTime()) *
-                  (ascending ? 1 : -1)
+                  (dateStartB.getTime() - dateStartA.getTime()) *
+                  (ascending ? -1 : 1)
                 )
-              } else {
+              } else if (dateFinishB.getTime() !== dateFinishA.getTime()) {
                 // If the start date is the same use the end date to sort
                 return (
-                  (dateFinishA.getTime() - dateFinishB.getTime()) *
-                  (ascending ? 1 : -1)
+                  (dateFinishB.getTime() - dateFinishA.getTime()) *
+                  (ascending ? -1 : 1)
+                )
+              } else {
+                return (
+                  (
+                    '' + a.defaultAffiliation.affiliationName.value
+                  ).localeCompare(
+                    '' + b.defaultAffiliation.affiliationName.value
+                  ) * (ascending ? 1 : -1)
                 )
               }
             }
@@ -96,15 +112,20 @@ export class AffiliationsSortService {
   }
 
   yearMonthDaytoDate(x: MonthDayYearDate): Date {
-    const date = new Date()
+    // By default use the largest date possible
+    const date = new Date(8640000000000000)
     if (x.year) {
       date.setFullYear(Number.parseInt(x.year, 10))
     }
     if (x.month) {
       date.setMonth(Number.parseInt(x.month, 10))
+    } else {
+      date.setMonth(1)
     }
     if (x.day) {
       date.setDate(Number.parseInt(x.day, 10))
+    } else {
+      date.setDate(1)
     }
     return date
   }

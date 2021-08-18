@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, switchMap, tap } from 'rxjs/operators'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
+import { VisibilityStrings } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,7 @@ export class RecordFundingsService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of([])),
           tap((data) => {
             this.lastEmittedValue = data
             this.$fundings.next(data)
@@ -107,8 +109,24 @@ export class RecordFundingsService {
   set(value): Observable<FundingGroup[]> {
     throw new Error('Method not implemented.')
   }
-  update(value): Observable<FundingGroup[]> {
-    throw new Error('Method not implemented.')
+
+  updateVisibility(
+    putCode: string,
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'fundings/' +
+          putCode +
+          '/visibility/' +
+          visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getFundings({ forceReload: true }))
+      )
   }
 
   delete(putCode: string): Observable<any> {

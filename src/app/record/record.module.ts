@@ -23,14 +23,14 @@ import { SharedModule } from '../shared/shared.module'
 import { AffiliationStackComponent } from './components/affiliation-stack/affiliation-stack.component'
 import { AffiliationStacksGroupsComponent } from './components/affiliation-stacks-groups/affiliation-stacks-groups.component'
 import { AffiliationComponent } from './components/affiliation/affiliation.component'
-import { PeerReviewsComponent } from './components/peer-reviews/peer-reviews.component'
-import { ModalPeerReviewsComponent } from './components/peer-reviews/modals/modal-peer-reviews/modal-peer-reviews.component'
+import { PeerReviewStacksGroupsComponent } from './components/peer-review-stacks-groups/peer-review-stacks-groups.component'
+import { ModalPeerReviewsComponent } from './components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { DisplayExternalIdsComponent } from './components/display-external-ids/display-external-ids.component'
 import { DisplayAttributeComponent } from './components/display-attribute/display-attribute.component'
 import { FundingStacksGroupsComponent } from './components/funding-stacks-groups/funding-stacks-groups.component'
 import { FundingStackComponent } from './components/funding-stack/funding-stack.component'
 import { FundingComponent } from './components/funding/funding.component'
-import { ResearchResourcesComponent } from './components/research-resources/research-resources.component'
+import { ResearchResourceStacksGroupComponent } from './components/research-resource-stacks-group/research-resource-stacks-group.component'
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { WorkComponent } from './components/work/work.component'
@@ -47,6 +47,11 @@ import { TrustedIndividualsDropdownModule } from '../cdk/trusted-individuals-dro
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { ModalAffiliationsComponent } from './components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { OrgIdentifierComponent } from './components/org-identifier/org-identifier.component'
+import { ResearchResourceStackComponent } from './components/research-resource-stack/research-resource-stack.component'
+import { ResearchResourceComponent } from './components/research-resource/research-resource.component'
+import { PeerReviewStackComponent } from './components/peer-review-stack/peer-review-stack.component'
+import { PeerReviewComponent } from './components/peer-review/peer-review.component'
 
 @NgModule({
   declarations: [
@@ -63,9 +68,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     FundingComponent,
     DisplayExternalIdsComponent,
     DisplayAttributeComponent,
-    PeerReviewsComponent,
+    PeerReviewStacksGroupsComponent,
     ModalPeerReviewsComponent,
-    ResearchResourcesComponent,
+    ResearchResourceStacksGroupComponent,
     WorkStackGroupComponent,
     WorkStackComponent,
     WorkComponent,
@@ -74,6 +79,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
     TopBarRecordIssuesComponent,
     NotFoundComponent,
     ModalAffiliationsComponent,
+    OrgIdentifierComponent,
+    ResearchResourceStackComponent,
+    ResearchResourceComponent,
+    PeerReviewStackComponent,
+    PeerReviewComponent,
   ],
   imports: [
     CommonModule,

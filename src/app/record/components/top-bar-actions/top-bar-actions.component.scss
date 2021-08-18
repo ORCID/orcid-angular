@@ -43,6 +43,34 @@
     }
   }
 }
+
+.columns-4 :host,
+.columns-8 :host {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -10px;
+  }
+  .is-this-you {
+    width: auto;
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+  .my-orcid-icons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button {
+      margin: 0;
+    }
+  }
+  mat-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
 :host {
   width: 100%;
 }

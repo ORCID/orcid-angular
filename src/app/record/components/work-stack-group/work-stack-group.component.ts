@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
@@ -14,8 +15,10 @@ import { SortData } from 'src/app/types/sort'
   styleUrls: ['./work-stack-group.component.scss'],
 })
 export class WorkStackGroupComponent implements OnInit {
+  defaultPageSize = DEFAULT_PAGE_SIZE
   labelAddButton = $localize`:@@shared.addWork:Add Work`
   labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
+  paginationLoading = true
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
@@ -41,6 +44,7 @@ export class WorkStackGroupComponent implements OnInit {
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord.works)) {
+          this.paginationLoading = false
           this.workGroup = userRecord.works
           this.total.emit(userRecord.works?.groups?.length)
           this.paginationTotalAmountOfWorks = userRecord.works.totalGroups
@@ -60,6 +64,7 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   pageEvent(event: PageEvent) {
+    this.paginationLoading = true
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
     this.userRecordContext.publicRecordId = this.isPublicRecord
@@ -67,6 +72,7 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   sortEvent(event: SortData) {
+    this.paginationLoading = true
     this.userRecordContext.publicRecordId = this.isPublicRecord
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'

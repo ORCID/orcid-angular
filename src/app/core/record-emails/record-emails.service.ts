@@ -57,6 +57,7 @@ export class RecordEmailsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError((error) => of({ emails: [] })),
         map((value: EmailsEndpoint) => {
           value.emails
             .sort(this.sortByEmailByValue)
