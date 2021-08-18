@@ -3,6 +3,7 @@ import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { Router } from '@angular/router'
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-not-found',
@@ -14,7 +15,14 @@ export class NotFoundComponent implements OnInit {
 
   platform: PlatformInfo
 
-  constructor(private router: Router, private _platform: PlatformInfoService) {
+  titleNotFound = $localize`:@@shared.titleNotFound:404 - ORCID record not found`
+
+  constructor(
+    private router: Router,
+    _titleService: Title,
+    private _platform: PlatformInfoService
+  ) {
+    _titleService.setTitle(this.titleNotFound);
     _platform
       .get()
       .pipe(takeUntil(this.$destroy))
