@@ -79,7 +79,7 @@ export class PanelsComponent implements OnInit {
         this.openModal(ModalFundingComponent)
         break
       default: {
-        this.openModal(this.addMenuOptions[action].modal, type)
+        break
       }
     }
   }

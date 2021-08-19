@@ -37,7 +37,7 @@
         <div class="row works-buttons orc-font-body-small">
           <div class="select-all">
             <p>
-              <mat-checkbox (change)="updateCheck()" [(ngModel)]="selectAll">
+              <mat-checkbox (change)="checked($event)" [(ngModel)]="selectAll">
                 <ng-container i18n="@@shared.selectAll"
                   >Select all</ng-container
                 >
@@ -89,6 +89,7 @@
           [workStack]="group"
           [userInfo]="userInfo"
           (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
+          #appWorkStacks
         ></app-work-stack>
       </ng-container>
       <ng-container *ngIf="workGroup.groups.length === 0">
