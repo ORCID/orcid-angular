@@ -3,6 +3,7 @@ import { EMPTY, Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+
 import {
   PlatformInfo,
   PlatformInfoService,

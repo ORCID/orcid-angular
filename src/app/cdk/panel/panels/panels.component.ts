@@ -4,7 +4,10 @@ import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
+import { ADD_EVENT_ACTION } from 'src/app/constants'
 import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
+
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 
@@ -33,7 +36,6 @@ export class PanelsComponent implements OnInit {
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
-  @Input() addModalComponent: ComponentType<any>
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
   @Input() sortType: SortOrderType = 'end'
@@ -41,6 +43,14 @@ export class PanelsComponent implements OnInit {
   @Input() defaultDirection: SortOrderDirection = 'asc'
 
   @Output() sort: EventEmitter<SortData> = new EventEmitter()
+  @Output() addEvent: EventEmitter<ADD_EVENT_ACTION> = new EventEmitter()
+
+  @Input() addMenuOptions: {
+    action: ADD_EVENT_ACTION
+    label: string
+    modal?: ComponentType<any>
+  }[] = []
+
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
 
@@ -49,7 +59,7 @@ export class PanelsComponent implements OnInit {
     private _platform: PlatformInfoService
   ) {}
 
-  add(type: string) {
+  add(type: string, action?: ADD_EVENT_ACTION) {
     switch (type) {
       case 'employment':
       case 'education':
@@ -63,8 +73,12 @@ export class PanelsComponent implements OnInit {
       case 'peer-review':
         this.openModal(ModalPeerReviewsComponent)
         break
-      default:
+      case 'funding':
+        this.openModal(ModalFundingComponent)
         break
+      default: {
+        this.openModal(this.addMenuOptions[action].modal, type)
+      }
     }
   }
 
@@ -74,12 +88,11 @@ export class PanelsComponent implements OnInit {
       .pipe(first())
       .subscribe((platform) => {
         let modalComponent
-        if (this.addModalComponent) {
-          modalComponent = this._dialog.open(modal, {
-            width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-          })
-        }
+        modalComponent = this._dialog.open(modal, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+        })
+
         modalComponent.componentInstance.type = type
       })
   }
