@@ -16,6 +16,7 @@
     [putCode]="affiliation.putCode.value"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
+    [isUserSource]="userIsSource(affiliation)"
     *ngIf="isPreferred(affiliation) || displayTheStack"
   >
     <h2 header class="orc-font-body">

@@ -37,6 +37,7 @@
         [isPublicRecord]="isPublicRecord"
         *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
         [workStack]="group"
+        [userInfo]="userInfo"
       ></app-work-stack>
     </ng-container>
     <ng-container *ngIf="workGroup.groups.length === 0">
