@@ -1,0 +1,16 @@
+.search-link-options {
+  justify-content: space-between;
+
+  .select {
+    width: calc(50% - 40px);
+  }
+
+  .title {
+    margin: 5px 0;
+  }
+
+  mat-form-field{
+    width: 100%;
+  }
+
+}
