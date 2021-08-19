@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'

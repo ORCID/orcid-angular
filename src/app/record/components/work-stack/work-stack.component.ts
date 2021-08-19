@@ -4,7 +4,9 @@ import {
   HostBinding,
   Input,
   OnInit,
-  Output, QueryList, ViewChildren,
+  Output,
+  QueryList,
+  ViewChildren,
 } from '@angular/core'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
