@@ -16,10 +16,11 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   loadingWorks = true
+  recordImportWizardsOriginal: RecordImportWizard[]
   recordImportWizards: RecordImportWizard[]
   workTypes = []
   geographicalAreas = []
-  workTypesSelected: string
+  workTypeSelected: string
   geographicalAreaSelected: string
 
   constructor(
@@ -41,7 +42,8 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
             // if (data == null || data.length == 0) {
             //   this.noLinkFlag = false;
             // }
-            this.recordImportWizards = recordImportWizards;
+            this.recordImportWizardsOriginal = recordImportWizards;
+            this.recordImportWizards = this.recordImportWizardsOriginal;
             // this.bulkEditShow = false;
             // this.showBibtexImportWizard = false;
             recordImportWizards.forEach((recordImportWizard) => {
@@ -64,6 +66,30 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
         );
   };
 
+  searchAndLink() {
+    this.recordImportWizards = []
+    this.recordImportWizardsOriginal.forEach((recordImportWizard) => {
+      if (this.workTypeSelected === 'All' && this.geographicalAreaSelected === 'All') {
+        this.recordImportWizards = this.recordImportWizardsOriginal
+      } else if (
+        this.workTypeSelected === 'All' &&
+        recordImportWizard.geoAreas.includes(this.geographicalAreaSelected)
+      ) {
+        this.recordImportWizards.push(recordImportWizard)
+      } else if (
+        this.geographicalAreaSelected === 'All' &&
+        recordImportWizard.actTypes.includes(this.workTypeSelected)
+      ) {
+        this.recordImportWizards.push(recordImportWizard)
+      } else if (
+        recordImportWizard.actTypes.includes(this.workTypeSelected) &&
+        recordImportWizard.geoAreas.includes(this.geographicalAreaSelected)
+      ) {
+        this.recordImportWizards.push(recordImportWizard)
+      }
+    })
+  }
+
   openImportWizardUrlFilter(client): string {
     return (
       environment.BASE_URL +
@@ -75,6 +101,10 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
       '&redirect_uri=' +
       client.redirectUri
     )
+  }
+
+  toggle(recordImportWizard: RecordImportWizard) {
+    recordImportWizard.show = !recordImportWizard.show
   }
 
   saveEvent() {

@@ -8,4 +8,5 @@ export interface RecordImportWizard {
   redirectUri: string
   scopes: string
   status: string
+  show: boolean
 }

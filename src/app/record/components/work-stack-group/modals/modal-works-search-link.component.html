@@ -61,8 +61,11 @@
         appearance="outline"
         class="mat-form-field-min"
       >
-        <mat-select>
-          <mat-option selected>All</mat-option>
+        <mat-select
+          [(value)]="workTypeSelected"
+          (selectionChange)="searchAndLink()"
+        >
+          <mat-option value="All">All</mat-option>
           <mat-option
             *ngFor="let workType of workTypes"
             [value]="workType"
@@ -87,7 +90,7 @@
           [(value)]="geographicalAreaSelected"
           (selectionChange)="searchAndLink()"
         >
-          <mat-option selected>All</mat-option>
+          <mat-option value="All">All</mat-option>
           <mat-option
             *ngFor="let geographicalArea of geographicalAreas"
             [value]="geographicalArea"
@@ -105,7 +108,33 @@
       </a>
     </h2>
     <p class="orc-font-small-print">
-      {{ recordImportWizard.description }}
+      <ng-container *ngIf="recordImportWizard.description.length > 140">
+        <ng-container *ngIf="recordImportWizard.show">
+          {{ recordImportWizard.description.substring(0, 140) + '...' }}
+          <a
+            class="underline"
+            i18n="@@shared.showMore"
+            (click)="toggle(recordImportWizard)"
+          >
+
+            Show more
+          </a>
+        </ng-container>
+        <ng-container *ngIf="!recordImportWizard.show">
+          {{ recordImportWizard.description }}
+          <a
+            class="underline"
+            i18n="@@shared.showLess"
+            (click)="toggle(recordImportWizard)"
+          >
+
+            Show less
+          </a>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="recordImportWizard.description.length < 140">
+        {{ recordImportWizard.description }}
+      </ng-container>
     </p>
   </div>
 </app-modal>
