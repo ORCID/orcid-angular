@@ -32,8 +32,10 @@ export class PeerReviewStackComponent implements OnInit {
   @Input()
   set peerReviewStack(value: PeerReviewDuplicateGroup) {
     this._peerReviewStack = value
+    this.putsThePreferredPeerReviewOnTop(value)
     this.setInitialStates(value)
   }
+
   get peerReviewStack(): PeerReviewDuplicateGroup {
     return this._peerReviewStack
   }
@@ -72,6 +74,18 @@ export class PeerReviewStackComponent implements OnInit {
     this._platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
     })
+  }
+
+  private putsThePreferredPeerReviewOnTop(value: PeerReviewDuplicateGroup) {
+    const peerReviewIndex = value.peerReviews.findIndex((peerRe) => {
+      return this.isPreferred(peerRe)
+    })
+
+    if (peerReviewIndex) {
+      const peerReview = value.peerReviews[peerReviewIndex]
+      value.peerReviews.splice(peerReviewIndex, 1)
+      value.peerReviews.unshift(peerReview)
+    }
   }
 
   /**

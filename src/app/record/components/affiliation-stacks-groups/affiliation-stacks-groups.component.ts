@@ -10,9 +10,9 @@ import {
   AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
 import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
-import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 import { ModalAffiliationsComponent } from './modals/modal-affiliations/modal-affiliations.component'
+import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-affiliations',
@@ -31,6 +31,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   labelMembershipAddButton = $localize`:@@shared.addMembership:Add Membership`
   labelMembershipSortButton = $localize`:@@shared.sortMemberships:Sort Memberships`
   userRecordContext: UserRecordOptions = {}
+  @Input() userInfo: UserInfo
   @Input() isPublicRecord: string = null
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
@@ -44,7 +45,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   expandedMembership: boolean
 
   profileAffiliationUiGroups: AffiliationUIGroup[]
-  userSession: UserSession
   userRecord: UserRecord
 
   affiliationsCount: number

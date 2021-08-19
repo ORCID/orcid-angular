@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +53,7 @@ export class RecordWorksService {
    * @param id user Orcid id
    */
   getWorks(options: UserRecordOptions) {
-    options.pageSize = options.pageSize || 50
+    options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
     if (options.publicRecordId) {

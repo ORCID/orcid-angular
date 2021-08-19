@@ -16,6 +16,7 @@ import {
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
 import { PageEvent } from '@angular/material/paginator'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 
 @Component({
   selector: 'app-research-resources',
@@ -23,6 +24,7 @@ import { PageEvent } from '@angular/material/paginator'
   styleUrls: ['./research-resource-stacks-group.component.scss'],
 })
 export class ResearchResourceStacksGroupComponent implements OnInit {
+  defaultPageSize = DEFAULT_PAGE_SIZE
   labelSortButton = $localize`:@@shared.sortResearch:Sort Research Resources`
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
@@ -59,6 +61,7 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   paginationTotalAmountOfResearchResources: number
   paginationIndex: number
   paginationPageSize: number
+  paginationLoading = true
 
   constructor(
     _platform: PlatformInfoService,
@@ -92,6 +95,7 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.researchResources)) {
+          this.paginationLoading = false
           this.researchResources = userRecord.researchResources
           this.offset = userRecord.researchResources.offset
           this.total.emit(this.researchResources.groups.length)
@@ -111,17 +115,17 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
     this._recordResearchResourceService.changeUserRecordContext(
       this.userRecordContext
     )
+    this.paginationLoading = true
   }
 
   sortEvent(event: SortData) {
     this.userRecordContext.publicRecordId = this.isPublicRecord
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
-    this.userRecordContext.forceReload = true
-    this.userRecordContext.offset = 0
     this._recordResearchResourceService.changeUserRecordContext(
       this.userRecordContext
     )
+    this.paginationLoading = true
   }
 
   expandedClicked(expanded: boolean) {

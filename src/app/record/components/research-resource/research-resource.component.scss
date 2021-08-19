@@ -6,6 +6,7 @@
 }
 
 h3 {
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -68,7 +69,8 @@ app-panel-data {
 }
 
 .description {
-  padding: 16px;
+  display: block;
+  margin: 16px;
   .host:first-child {
     margin-bottom: 16px;
   }

@@ -11,6 +11,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
+import { UserInfo } from '../../../types'
 import { ModalFundingComponent } from './modals/modal-funding/modal-funding.component'
 
 @Component({
@@ -21,6 +22,7 @@ import { ModalFundingComponent } from './modals/modal-funding/modal-funding.comp
 export class FundingStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addFunding:Add Funding`
   labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
+  @Input() userInfo: UserInfo
   @Input() isPublicRecord: any = false
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()

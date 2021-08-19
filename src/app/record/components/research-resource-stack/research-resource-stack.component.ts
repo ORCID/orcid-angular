@@ -116,6 +116,10 @@ export class ResearchResourceStackComponent implements OnInit {
     Object.keys(this.stackPanelsDisplay).forEach((key) => {
       this.stackPanelsDisplay[key].topPanelOfTheStack = false
     })
+
+    this.researchResourceStack.researchResources.forEach(
+      (researchAndResource) => (researchAndResource.showDetails = false)
+    )
     this.stackPanelsDisplay[researchResource.putCode].topPanelOfTheStack = true
   }
 

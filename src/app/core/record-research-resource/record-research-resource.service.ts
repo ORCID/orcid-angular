@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, first, map, retry, tap } from 'rxjs/operators'
+import { catchError, map, retry, take, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 import { environment } from '../../../environments/environment'
@@ -11,19 +11,18 @@ import {
 } from '../../types/record-research-resources.endpoint'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordResearchResourceService {
-  private $RecordResearchResourceSubject: ReplaySubject<ResearchResourcesEndpoint>
-  private currentValue: ResearchResourcesEndpoint
+  researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(1)
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
   })
-  lastOffset = 0
 
   constructor(
     private _http: HttpClient,
@@ -33,26 +32,8 @@ export class RecordResearchResourceService {
   getResearchResourcePage(
     options: UserRecordOptions
   ): Observable<ResearchResourcesEndpoint> {
+    options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
-
-    if (
-      this.$RecordResearchResourceSubject &&
-      !options.forceReload &&
-      !(options.offset > this.lastOffset)
-    ) {
-      return this.$RecordResearchResourceSubject.asObservable()
-    }
-
-    if (!this.$RecordResearchResourceSubject) {
-      this.$RecordResearchResourceSubject = new ReplaySubject<ResearchResourcesEndpoint>(
-        1
-      )
-    }
-
-    if (options.forceReload) {
-      this.lastOffset = 0
-      this.currentValue = null
-    }
 
     if (options.publicRecordId) {
       this._http
@@ -64,23 +45,23 @@ export class RecordResearchResourceService {
             '&sort=' +
             (options.sort != null ? options.sort : 'date') +
             '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : false)
+            (options.sortAsc != null ? options.sortAsc : false) +
+            '&pageSize=' +
+            options.pageSize
         )
         .pipe(
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
-          map((value) => {
-            if (this.currentValue && !options.forceReload) {
-              value.groups = value.groups.concat(this.currentValue.groups)
-            }
-            this.currentValue = value
-            value.offset = options.offset
-            return value
+          map((data) => {
+            data.pageSize = options.pageSize
+            data.pageIndex = options.offset
+              ? Math.floor(options.offset / options.pageSize)
+              : 0
+            return data
           }),
           tap((value) => {
-            this.$RecordResearchResourceSubject.next(value)
-          }),
-          first()
+            this.researchResourcesSubject.next(value)
+          })
         )
         .subscribe()
     } else {
@@ -92,31 +73,31 @@ export class RecordResearchResourceService {
             '&sort=' +
             (options.sort != null ? options.sort : 'date') +
             '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : true)
+            (options.sortAsc != null ? options.sortAsc : true) +
+            '&pageSize=' +
+            options.pageSize
         )
         .pipe(
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
-          map((value) => {
-            if (this.currentValue) {
-              value.groups = value.groups.concat(this.currentValue.groups)
-            }
-            this.currentValue = value
-            value.offset = options.offset
-            return value
+          map((data) => {
+            data.pageSize = options.pageSize
+            data.pageIndex = options.offset
+              ? Math.floor(options.offset / options.pageSize)
+              : 0
+            return data
           }),
           tap((value) => {
-            this.$RecordResearchResourceSubject.next(value)
-          }),
-          first()
+            this.researchResourcesSubject.next(value)
+          })
         )
         .subscribe()
     }
-    return this.$RecordResearchResourceSubject.asObservable()
+    return this.researchResourcesSubject.asObservable()
   }
 
   changeUserRecordContext(event: UserRecordOptions): void {
-    this.getResearchResourcePage(event)
+    this.getResearchResourcePage(event).pipe(take(1)).subscribe()
   }
 
   loadMore(offset: number, publicRecordId?: string) {
