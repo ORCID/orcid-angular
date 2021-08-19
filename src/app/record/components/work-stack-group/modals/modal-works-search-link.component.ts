@@ -39,13 +39,8 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (recordImportWizards) => {
-            // if (data == null || data.length == 0) {
-            //   this.noLinkFlag = false;
-            // }
             this.recordImportWizardsOriginal = recordImportWizards;
             this.recordImportWizards = this.recordImportWizardsOriginal;
-            // this.bulkEditShow = false;
-            // this.showBibtexImportWizard = false;
             recordImportWizards.forEach((recordImportWizard) => {
               recordImportWizard.actTypes.forEach((actType) => {
                 if (!this.workTypes.includes(actType)) {
@@ -59,6 +54,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
                 }
               })
             })
+            this.loadingWorks = false
           },
           error => {
             // console.log('WorkImportWizardError', error);
@@ -90,17 +86,21 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
     })
   }
 
-  openImportWizardUrlFilter(client): string {
-    return (
-      environment.BASE_URL +
-      'oauth/authorize' +
-      '?client_id=' +
-      client.id +
-      '&response_type=code&scope=' +
-      client.scopes +
-      '&redirect_uri=' +
-      client.redirectUri
-    )
+  openImportWizardUrlFilter(client: RecordImportWizard): string {
+    if (client.status === 'RETIRED') {
+     return client.clientWebsite;
+    } else {
+      return (
+        environment.BASE_URL +
+        'oauth/authorize' +
+        '?client_id=' +
+        client.id +
+        '&response_type=code&scope=' +
+        client.scopes +
+        '&redirect_uri=' +
+        client.redirectUri
+      )
+    }
   }
 
   toggle(recordImportWizard: RecordImportWizard) {

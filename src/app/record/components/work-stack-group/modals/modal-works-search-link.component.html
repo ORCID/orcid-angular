@@ -59,7 +59,7 @@
       </div>
       <mat-form-field
         appearance="outline"
-        class="mat-form-field-min"
+        class="mat-form-field-min search-link-select"
       >
         <mat-select
           [(value)]="workTypeSelected"
@@ -84,7 +84,7 @@
       <mat-form-field
         id="geographical-area-input"
         appearance="outline"
-        class="mat-form-field-min"
+        class="mat-form-field-min search-link-select"
       >
         <mat-select
           [(value)]="geographicalAreaSelected"
@@ -103,14 +103,18 @@
   </div>
   <div *ngFor="let recordImportWizard of recordImportWizards">
     <h2 class="orc-font-body-small">
-      <a [href]="openImportWizardUrlFilter(recordImportWizard)">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        [href]="openImportWizardUrlFilter(recordImportWizard)"
+      >
         {{ recordImportWizard.name }}
       </a>
     </h2>
     <p class="orc-font-small-print">
-      <ng-container *ngIf="recordImportWizard.description.length > 140">
-        <ng-container *ngIf="recordImportWizard.show">
-          {{ recordImportWizard.description.substring(0, 140) + '...' }}
+      <ng-container *ngIf="recordImportWizard.description.length > 125">
+        <ng-container *ngIf="!recordImportWizard.show">
+          {{ recordImportWizard.description.substring(0, 125) + '...' }}
           <a
             class="underline"
             i18n="@@shared.showMore"
@@ -120,8 +124,9 @@
             Show more
           </a>
         </ng-container>
-        <ng-container *ngIf="!recordImportWizard.show">
+        <ng-container *ngIf="recordImportWizard.show">
           {{ recordImportWizard.description }}
+          <br>
           <a
             class="underline"
             i18n="@@shared.showLess"
@@ -132,7 +137,7 @@
           </a>
         </ng-container>
       </ng-container>
-      <ng-container *ngIf="recordImportWizard.description.length < 140">
+      <ng-container *ngIf="recordImportWizard.description.length < 125">
         {{ recordImportWizard.description }}
       </ng-container>
     </p>
