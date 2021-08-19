@@ -143,8 +143,6 @@ export class WorkModalComponent implements OnInit {
           this.workForm.controls.citation.clearValidators()
           this.workForm.controls.citation.updateValueAndValidity()
         }
-        console.log('validity', this.workForm.controls.citation.valid)
-        console.log('value:', `(${this.workForm.controls.citation.value})`)
       })
       this.workIdentifiersArray = this.workForm.controls
         .workIdentifiers as FormArray
@@ -181,8 +179,6 @@ export class WorkModalComponent implements OnInit {
     const formGroup = this.workIdentifiersArray.controls[index] as FormGroup
     formGroup.controls.externalIdentifierType.valueChanges.subscribe(
       (externalIdentifierType) => {
-        console.log('FOR FOR VALUE <', externalIdentifierType, '>')
-
         if (externalIdentifierType !== '') {
           formGroup.controls.externalIdentifierId.setValidators([
             Validators.required,
@@ -203,8 +199,6 @@ export class WorkModalComponent implements OnInit {
     )
 
     formGroup.controls.externalIdentifierId.valueChanges.subscribe((value) => {
-      console.log(value)
-
       if (value) {
         formGroup.controls.externalIdentifierType.setValidators([
           Validators.required,
@@ -233,7 +227,6 @@ export class WorkModalComponent implements OnInit {
     this.checkWorkIdentifiersChanges(
       this.workIdentifiersArray.controls.length - 1
     )
-    console.log(this.workIdentifiersArray)
   }
   deleteWorkId(id: number) {
     this.workIdentifiersArray.removeAt(id)
@@ -241,8 +234,6 @@ export class WorkModalComponent implements OnInit {
 
   saveEvent() {
     this.workForm.markAllAsTouched()
-    console.log('_____')
-
     if (this.workForm.valid) {
       const work: Work = {
         visibility: {
@@ -308,8 +299,6 @@ export class WorkModalComponent implements OnInit {
       this._workService.save(work).subscribe((value) => {
         this._dialogRef.close()
       })
-    } else {
-      console.log(this.workForm.errors)
     }
   }
 
