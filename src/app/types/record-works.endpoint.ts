@@ -24,6 +24,7 @@ export interface Work extends AssertionBase {
   workType: Value
   dateSortString?: any
   userSource: boolean
+  checked: boolean
 }
 
 export interface Citation {
@@ -42,6 +43,7 @@ export interface WorkGroup {
   userVersionPresent: boolean
   externalIdentifiers: ExternalIdentifier[]
   works: Work[]
+  checked: boolean
 }
 
 export interface WorksEndpoint {

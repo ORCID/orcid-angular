@@ -19,6 +19,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
+import { MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
   selector: 'app-panel',
@@ -62,7 +63,10 @@ export class PanelComponent implements OnInit {
   @Input() customControls = false
   @Input() openState = true
   @Input() editable = true
+  @Input() selectable = false
+  @Input() checkbox = false
   @Output() openStateChange = new EventEmitter<boolean>()
+  @Output() checkboxChangePanel = new EventEmitter<any>()
 
   _isPublicRecord: string
   @Input() set isPublicRecord(value: string) {
@@ -76,10 +80,13 @@ export class PanelComponent implements OnInit {
   }
 
   @Input() isUserSource = false
+  selected: boolean
 
   formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
+
+  panelForm: FormGroup
 
   constructor(
     private _dialog: MatDialog,
@@ -163,6 +170,13 @@ export class PanelComponent implements OnInit {
       this.type === 'research-resources' ||
       this.type === 'peer-review'
     )
+  }
+
+  checked(event: MatCheckboxChange) {
+    this.checkboxChangePanel.emit({
+      putCode: this.putCode,
+      checked: event.checked,
+    })
   }
 
   toggle() {
