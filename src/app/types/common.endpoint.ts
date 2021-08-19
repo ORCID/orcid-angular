@@ -98,8 +98,8 @@ export interface Email {
 
 export interface MonthDayYearDate {
   errors?: any[] // TODO define object
-  month?: string
   day?: string
+  month?: string
   year?: string
   required?: boolean
   getRequiredMessage?: any
@@ -157,6 +157,20 @@ export interface TranslatedTitle {
   content: string
   languageCode?: string
   languageName?: string
+}
+
+export interface Organization {
+  affiliationKey: string
+  city: string
+  country: string
+  countryForDisplay: string
+  disambiguatedAffiliationIdentifier: string
+  orgType: string
+  region: string
+  sourceId: string
+  sourceType: string
+  url: string
+  value: string
 }
 
 export type ScopesStrings =

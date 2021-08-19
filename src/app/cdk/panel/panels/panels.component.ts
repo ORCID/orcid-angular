@@ -6,6 +6,8 @@ import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
 import { ADD_EVENT_ACTION } from 'src/app/constants'
 import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
+
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 
@@ -70,6 +72,9 @@ export class PanelsComponent implements OnInit {
         break
       case 'peer-review':
         this.openModal(ModalPeerReviewsComponent)
+        break
+      case 'funding':
+        this.openModal(ModalFundingComponent)
         break
       default: {
         this.openModal(this.addMenuOptions[action].modal, type)

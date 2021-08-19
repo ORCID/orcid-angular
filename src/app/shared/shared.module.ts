@@ -18,6 +18,9 @@ import { AffiliationTypeLabelPipe } from './pipes/affiliation-type-label.pipe'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
+import { RecordFundingRelationshipHintLabelPipe } from './pipes/record-funding-relationship-hint-label/record-funding-relationship-hint-label.pipe'
+import { RecordFundingRelationshipLabelPipe } from './pipes/record-funding-relationship-label/record-funding-relationship-label.pipe'
+import { RecordFundingTypeLabelPipe } from './pipes/record-funding-type-label/record-funding-type-label.pipe'
 import { RecordWorkCategoryLabelPipe } from './pipes/record-work-category-label/record-work-category-label.pipe'
 import { RecordWorkRelationshipHintLabelPipe } from './pipes/record-work-relationship-hint-label/record-work-relationship-hint-label.pipe'
 import { RecordWorkRelationshipLabelPipe } from './pipes/record-work-relationship-label/record-work-relationship-label.pipe'
@@ -47,6 +50,9 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
     RecordWorkRelationshipLabelPipe,
     RecordWorkRelationshipHintLabelPipe,
     RecordWorkTitleNameLabelPipe,
+    RecordFundingRelationshipLabelPipe,
+    RecordFundingRelationshipHintLabelPipe,
+    RecordFundingTypeLabelPipe,
     AffiliationTypeLabelPipe,
   ],
   exports: [
@@ -69,6 +75,9 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
     RecordWorkRelationshipLabelPipe,
     RecordWorkRelationshipHintLabelPipe,
     RecordWorkTitleNameLabelPipe,
+    RecordFundingRelationshipLabelPipe,
+    RecordFundingRelationshipHintLabelPipe,
+    RecordFundingTypeLabelPipe,
     AffiliationTypeLabelPipe,
   ],
   providers: [], // Should not provide anything

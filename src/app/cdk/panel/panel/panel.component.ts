@@ -11,6 +11,7 @@ import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
+import { Funding } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { FormControl, FormGroup } from '@angular/forms'
@@ -34,6 +35,7 @@ export class PanelComponent implements OnInit {
     | Value
     | Address
     | Affiliation
+    | Funding
     | PeerReview
     | Work
     | any
@@ -112,7 +114,14 @@ export class PanelComponent implements OnInit {
   }
 
   isArrayAndIsNotEmpty(
-    obj: Assertion[] | Value | Address | Affiliation | PeerReview | Work
+    obj:
+      | Assertion[]
+      | Value
+      | Address
+      | Affiliation
+      | Funding
+      | PeerReview
+      | Work
   ) {
     return Array.isArray(obj) && obj.length > 0
   }
@@ -136,6 +145,7 @@ export class PanelComponent implements OnInit {
           modalComponent.componentInstance.options = options
           modalComponent.componentInstance.type = this.type
           modalComponent.componentInstance.affiliation = this.elements
+          modalComponent.componentInstance.funding = this.elements
         }
       })
   }
