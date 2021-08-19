@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { first } from 'rxjs/operators'
+import { LanguageService } from 'src/app/core/language/language.service'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -44,7 +45,6 @@ export class SignInComponent implements OnInit {
   show2FA = false
   signInType = TypeSignIn.personal
   errorDescription: string
-  verifiedEmail: string
   emailVerified: boolean
   invalidVerifyUrl: boolean
 
@@ -53,7 +53,8 @@ export class SignInComponent implements OnInit {
     _userInfo: UserService,
     _oauthService: OauthService,
     @Inject(WINDOW) private window: Window,
-    _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _languageService: LanguageService
   ) {
     combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
       .pipe(first())
@@ -73,17 +74,6 @@ export class SignInComponent implements OnInit {
 
         if (platform.queryParameters.emailVerified) {
           this.emailVerified = platform.queryParameters.emailVerified
-          if (
-            platform.queryParameters.emailVerified &&
-            platform.queryParameters.verifiedEmail
-          ) {
-            this.verifiedEmail = decodeURIComponent(
-              this.window.location.search.split('verifiedEmail=')[1]
-            )
-            if (this.verifiedEmail.includes(' ')) {
-              this.verifiedEmail = this.verifiedEmail.replace(' ', '+')
-            }
-          }
         }
 
         if (platform.queryParameters.invalidVerifyUrl) {

@@ -150,7 +150,7 @@ export class UserService {
           map((data) => this.computesUpdatedUserData(data)),
           // Debugger for the user session on development time
           tap((session) =>
-            environment.debugger ? console.info(session) : null
+            environment.debugger ? console.debug(session) : null
           ),
           tap((session) => {
             this.$userSessionSubject.next(session)
@@ -288,7 +288,7 @@ export class UserService {
             tap((session) => (this.keepRefreshingUserSession = !session.error)),
             tap(() =>
               environment.debugger
-                ? console.info('Oauth session declare')
+                ? console.debug('Oauth session declare')
                 : null
             )
           )

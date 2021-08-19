@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
 import { OrganizationsService } from 'src/app/core'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
-import { OrgDisambiguated } from 'src/app/types'
+import { OrgDisambiguated, UserInfo } from 'src/app/types'
 import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { first } from 'rxjs/operators'
 
@@ -37,6 +37,7 @@ export class FundingStackComponent implements OnInit {
   }
 
   @Input() isPublicRecord: string
+  @Input() userInfo: UserInfo
 
   orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
@@ -147,7 +148,7 @@ export class FundingStackComponent implements OnInit {
 
   makePrimaryCard(funding: Funding) {
     // TODO
-    console.info(this.stackPanelsDisplay)
+    console.debug(this.stackPanelsDisplay)
   }
 
   changeTopPanelOfTheStack(funding: Funding) {
@@ -159,6 +160,13 @@ export class FundingStackComponent implements OnInit {
 
   trackByFundingStack(index, item: Funding) {
     return item.putCode.value
+  }
+
+  userIsSource(funding: Funding): boolean {
+    if (this.userInfo) {
+      return funding.source === this.userInfo.EFFECTIVE_USER_ORCID
+    }
+    return false
   }
 
   ngOnInit(): void {}

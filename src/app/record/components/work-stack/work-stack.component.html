@@ -16,6 +16,7 @@
     *ngIf="isPreferred(work) || displayTheStack"
     [isPublicRecord]="isPublicRecord"
     [editModalComponent]="worksModal"
+    [isUserSource]="userIsSource(work)"
     [type]="'works'"
   >
     <h2 header class="orc-font-body">{{ work.title.value }}</h2>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
+import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -53,7 +54,7 @@ export class RecordWorksService {
    * @param id user Orcid id
    */
   getWorks(options: UserRecordOptions) {
-    options.pageSize = options.pageSize || 50
+    options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
     if (options.publicRecordId) {
@@ -74,6 +75,7 @@ export class RecordWorksService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of({ groups: [] } as WorksEndpoint)),
           map((data) => {
             data.pageSize = options.pageSize
             data.pageIndex = options.offset

@@ -3,7 +3,8 @@
   [ngClass]="{
     'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
     'top-bar-or-main': type === 'top-bar' || type === 'main' || isAffiliation(),
-    'side-bar': type === 'side-bar'
+    'side-bar': type === 'side-bar',
+    'staked-header': stackedHeader
   }"
 >
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
@@ -51,15 +52,35 @@
     <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
 
     <ng-container *ngIf="editable && !customControls">
-      <button
-        mat-icon-button
-        *ngIf="!isPublicRecord"
-        [matTooltip]="tooltipLabelEdit"
-        (click)="openModal()"
-        id="edit-button"
-      >
-        <mat-icon class="material-icons-outlined">edit</mat-icon>
-      </button>
+      <ng-container *ngIf="isAffiliation()">
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord && isUserSource"
+          [matTooltip]="tooltipLabelEdit"
+          (click)="openModal()"
+        >
+          <mat-icon class="material-icons-outlined">edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord && !isUserSource"
+          [matTooltip]="tooltipLabelMakeCopy"
+          (click)="openModal({ createACopy: true })"
+        >
+          <mat-icon class="material-icons-outlined">call_split</mat-icon>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="!isAffiliation()">
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord && isUserSource"
+          [matTooltip]="tooltipLabelEdit"
+          (click)="openModal()"
+          id="edit-button"
+        >
+          <mat-icon class="material-icons-outlined">edit</mat-icon>
+        </button>
+      </ng-container>
     </ng-container>
     <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
     <ng-container

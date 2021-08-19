@@ -1,3 +1,41 @@
+@import '~@angular/cdk/text-field/text-field';
+@import '~@angular/material/_theming';
+
+@mixin mat-form-field-theme-overwrites($theme) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $warn: map-get($theme, warn);
+
+  .mat-form-field-appearance-outline {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px map-get($background, autofill-input) inset !important;
+    }
+    input.edge-autofilled {
+      background-color: map-get($background, autofill-input) !important;
+    }
+  }
+
+  mat-hint {
+    color: map-get($foreground, 'text-dark-mid');
+  }
+  .mat-focused.mat-warn .mat-form-field-outline-thick,
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+    .mat-form-field-outline-thick {
+    color: mat-color($warn, 700);
+  }
+  .mat-form-field.mat-warn .mat-input-element,
+  .mat-form-field-invalid .mat-input-element {
+    color: mat-color($warn, 700);
+  }
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: mat-color($warn, 700);
+  }
+}
+
 @mixin angular-material-form-field-typography($config) {
   .columns-4,
   .columns-8 {

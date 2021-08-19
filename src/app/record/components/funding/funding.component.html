@@ -9,13 +9,26 @@
     <div class="general-data">
       <ng-container *ngIf="funding?.startDate?.year"
         >{{ funding.startDate | monthDayYearDateToString }}
-        <ng-container> to </ng-container>
+        <ng-container i18n="@@shared.to">to</ng-container>
         <ng-container *ngIf="funding.endDate">{{
           funding.endDate | monthDayYearDateToString
         }}</ng-container>
-        <ng-container *ngIf="!funding.endDate.year">present</ng-container>
+        <ng-container *ngIf="!funding.endDate.year" i18n="@@shared.present"
+          >present</ng-container
+        >
       </ng-container>
-      <ng-container *ngIf="funding.startDate.year && funding.fundingType.value">
+      <!--End date-->
+      <ng-container *ngIf="!funding.startDate.year && funding.endDate">
+        <ng-container *ngIf="funding.endDate?.year">
+          {{ funding.endDate | monthDayYearDateToString }}
+        </ng-container>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          (funding.startDate.year || funding.endDate.year) &&
+          funding.fundingType.value
+        "
+      >
         |
       </ng-container>
       {{ funding.fundingType.value | titlecase }}
@@ -23,13 +36,12 @@
     <div *ngIf="funding.fundingName?.value">
       <div>
         {{ funding.fundingName?.value }}
-        (<ng-container *ngIf="funding.city?.value">
-          {{ funding.city?.value }}
-        </ng-container>
-        <ng-container *ngIf="funding.region?.value"
+        (<ng-container *ngIf="funding.city?.value">{{
+          funding.city?.value
+        }}</ng-container
+        ><ng-container *ngIf="funding.region?.value"
           >, {{ funding.region?.value }}</ng-container
-        >
-        <ng-container *ngIf="funding.countryForDisplay"
+        ><ng-container *ngIf="funding.countryForDisplay"
           >, {{ funding.countryForDisplay }}</ng-container
         >)
       </div>
@@ -71,37 +83,9 @@
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
-  <!-- ORGANIZATION DISAMBIGUATED IDS-->
-  <ng-container class="margin-top-1" *ngIf="orgDisambiguated">
-    <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@shared.organizationIdentifiers">
-        Organization identifiers
-      </h3>
-      <div>
-        <div>
-          {{ orgDisambiguated?.sourceType
-          }}<ng-container
-            *ngIf="orgDisambiguated.sourceType && orgDisambiguated.sourceId"
-            >:
-            <a
-              class="underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              *ngIf="orgDisambiguated?.sourceId"
-              [href]="orgDisambiguated?.sourceId"
-              >{{ orgDisambiguated?.sourceId }}</a
-            >
-          </ng-container>
-        </div>
-        <div>
-          {{ orgDisambiguated?.value
-          }}<ng-container *ngIf="orgDisambiguated && orgDisambiguated.value"
-            >: {{ orgDisambiguated | cityRegionCountry }}</ng-container
-          >
-        </div>
-      </div>
-    </app-display-attribute>
-  </ng-container>
+  <app-org-identifier
+    [orgDisambiguated]="orgDisambiguated"
+  ></app-org-identifier>
   <!-- FUNDING SUBTYPE -->
   <ng-container
     class="margin-top-1"

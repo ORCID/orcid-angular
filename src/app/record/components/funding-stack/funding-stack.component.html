@@ -14,6 +14,7 @@
     [visibility]="fundingStack.defaultFunding.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
     [putCode]="funding.putCode.value"
+    [isUserSource]="userIsSource(funding)"
     *ngIf="isPreferred(funding) || displayTheStack"
     type="main"
   >

@@ -12,6 +12,7 @@
   [userStatus]="userStatus"
   [isPublicRecord]="isPublicRecord"
   *ngIf="!recordWithIssues"
+  [onlyShowPrintButton]="!platform.columns12"
 ></app-top-bar-actions>
 
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
@@ -187,6 +188,15 @@
         </div>
       </div>
     </div>
+
+    <app-top-bar-actions
+      [userRecord]="userRecord"
+      [userStatus]="userStatus"
+      [isPublicRecord]="isPublicRecord"
+      *ngIf="!recordWithIssues && !platform.columns12"
+      [onlyShowIsThisYouButton]="true"
+    ></app-top-bar-actions>
+
     <div
       class="div biography-container"
       *ngIf="userRecord?.biography?.biography"

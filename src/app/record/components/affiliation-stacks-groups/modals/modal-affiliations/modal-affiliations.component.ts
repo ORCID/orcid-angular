@@ -10,6 +10,7 @@ import {
 import { WINDOW } from '../../../../../cdk/window'
 import {
   Affiliation,
+  AffiliationType,
   Organization,
 } from '../../../../../types/record-affiliation.endpoint'
 import { RecordAffiliationService } from '../../../../../core/record-affiliations/record-affiliations.service'
@@ -32,8 +33,9 @@ import { Observable } from 'rxjs/internal/Observable'
 export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  @Input() type: string
+  @Input() type: AffiliationType
   @Input() affiliation: Affiliation
+  @Input() options: { createACopy: boolean }
 
   platform: PlatformInfo
   affiliationForm: FormGroup
@@ -228,7 +230,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           : this.defaultVisibility,
       },
       putCode: {
-        value: this.affiliation?.putCode?.value,
+        value: this.options?.createACopy
+          ? null
+          : this.affiliation?.putCode?.value,
       },
       affiliationName: {
         value: affiliationForm.get('organization').value,
@@ -276,7 +280,26 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       url: {
         value: affiliationForm.get('link').value,
       },
-      source: this.affiliation?.source,
+      source: this.options?.createACopy ? null : this.affiliation?.source,
+      sourceName: this.affiliation?.sourceName,
+      dateSortString: this.affiliation?.dateSortString,
+      affiliationExternalIdentifiers: this.affiliation
+        ?.affiliationExternalIdentifiers,
+      affiliationTypeForDisplay: this.affiliation?.affiliationTypeForDisplay,
+      assertionOriginClientId: this.affiliation?.assertionOriginClientId,
+      assertionOriginName: this.affiliation?.assertionOriginName,
+      assertionOriginOrcid: this.affiliation?.assertionOriginOrcid,
+      disambiguationSource: this.affiliation?.disambiguationSource,
+      disambiguatedAffiliationSourceId: this.affiliation
+        ?.disambiguatedAffiliationSourceId,
+      orgDisambiguatedId: this.affiliation?.orgDisambiguatedId,
+      orgDisambiguatedCity: this.affiliation?.orgDisambiguatedCity,
+      orgDisambiguatedCountry: this.affiliation?.orgDisambiguatedCountry,
+      orgDisambiguatedExternalIdentifiers: this.affiliation
+        ?.orgDisambiguatedExternalIdentifiers,
+      orgDisambiguatedName: this.affiliation?.orgDisambiguatedName,
+      orgDisambiguatedRegion: this.affiliation?.orgDisambiguatedRegion,
+      orgDisambiguatedUrl: this.affiliation?.orgDisambiguatedUrl,
     } as Affiliation
   }
 

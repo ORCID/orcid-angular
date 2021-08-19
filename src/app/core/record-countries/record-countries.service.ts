@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, ReplaySubject } from 'rxjs'
+import { Observable, of, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap, map } from 'rxjs/operators'
 import {
   CountriesEndpoint,
@@ -77,6 +77,7 @@ export class RecordCountriesService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ addresses: [] } as CountriesEndpoint)),
         tap((value) => {
           this.reverseSort(value)
         }),

@@ -16,13 +16,21 @@
     [addMenuOptions]="addMenuOptions"
     type="works"
   >
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="paginationLoading"
+    ></mat-progress-bar>
     <mat-paginator
-      *ngIf="workGroup.totalGroups > workGroup.groups.length"
+      *ngIf="
+        workGroup.totalGroups > workGroup.groups.length ||
+        this.paginationPageSize != defaultPageSize
+      "
       [length]="paginationTotalAmountOfWorks"
       [pageSize]="paginationPageSize"
       [pageSizeOptions]="[10, 50, 100]"
       [pageIndex]="paginationIndex"
       (page)="pageEvent($event)"
+      [disabled]="paginationLoading"
     >
     </mat-paginator>
     <ng-container *ngIf="workGroup.groups.length > 0">
@@ -30,6 +38,7 @@
         [isPublicRecord]="isPublicRecord"
         *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
         [workStack]="group"
+        [userInfo]="userInfo"
       ></app-work-stack>
     </ng-container>
     <ng-container *ngIf="workGroup.groups.length === 0">
@@ -44,13 +53,21 @@
       </div>
     </ng-container>
     <mat-paginator
-      *ngIf="workGroup.totalGroups > workGroup.groups.length"
+      *ngIf="
+        workGroup.totalGroups > workGroup.groups.length ||
+        paginationPageSize !== defaultPageSize
+      "
       [length]="paginationTotalAmountOfWorks"
       [pageSize]="paginationPageSize"
       [pageSizeOptions]="[10, 50, 100]"
       [pageIndex]="paginationIndex"
       (page)="pageEvent($event)"
+      [disabled]="paginationLoading"
     >
     </mat-paginator>
+    <mat-progress-bar
+      mode="indeterminate"
+      *ngIf="paginationLoading"
+    ></mat-progress-bar>
   </app-panels>
 </ng-container>

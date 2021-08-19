@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError } from 'rxjs/operators'
-import { ORCID_REGEXP } from 'src/app/constants'
+import { DEFAULT_PAGE_SIZE, ORCID_REGEXP } from 'src/app/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -142,7 +142,7 @@ export class SearchService {
 
   private handlePagination(querryParam: SearchParameters): string {
     return `&start=${querryParam.pageIndex * querryParam.pageSize || 0}&rows=${
-      querryParam.pageSize || 50
+      querryParam.pageSize || DEFAULT_PAGE_SIZE
     }`
   }
 }

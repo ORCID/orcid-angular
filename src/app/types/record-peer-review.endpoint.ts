@@ -27,7 +27,7 @@ export interface PeerReview extends AssertionBase {
 }
 
 export interface PeerReviewDuplicateGroup {
-  activatePutCode: number
+  activePutCode: number
   id: number
   peerReviews: PeerReview[]
 }
