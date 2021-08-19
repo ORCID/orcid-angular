@@ -4,7 +4,7 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { Subject } from 'rxjs'
 import { RecordPeerReviewService } from '../../../../../core/record-peer-review/record-peer-review.service'
 import { first } from 'rxjs/operators'
-import { RecordPeerReviewImport } from '../../../../../types/record-peer-review-import.endpoint'
+import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
 import { environment } from '../../../../../../environments/environment'
 
 @Component({
@@ -16,7 +16,7 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   loadingPeerReviews = true
-  peerReviewImports: RecordPeerReviewImport[]
+  peerReviewImports: RecordImportWizard[]
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,

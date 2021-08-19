@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -255,6 +256,12 @@ export class RecordWorksService {
       {
         responseType: 'text',
       }
+    )
+  }
+
+  loadWorkImportWizardList(): Observable<RecordImportWizard[]> {
+    return this._http.get<RecordImportWizard[]>(
+      environment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
     )
   }
 }

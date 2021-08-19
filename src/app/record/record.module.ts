@@ -58,6 +58,7 @@ import { PeerReviewStackComponent } from './components/peer-review-stack/peer-re
 import { PeerReviewComponent } from './components/peer-review/peer-review.component'
 import { ModalCombineWorksComponent } from './components/work/modals/modal-combine-works/modal-combine-works.component'
 import { ModalDeleteWorksComponent } from './components/work/modals/modal-delete-works/modal-delete-works.component'
+import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/modal-works-search-link.component'
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { ModalDeleteWorksComponent } from './components/work/modals/modal-delete
     ModalExportWorksComponent,
     ModalCombineWorksComponent,
     ModalDeleteWorksComponent,
+    ModalWorksSearchLinkComponent,
   ],
   imports: [
     CommonModule,

@@ -40,11 +40,7 @@
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
       <button
         *ngIf="
-          !isPublicRecord &&
-          (type === 'employment' ||
-            type === 'funding' ||
-            type === 'works' ||
-            type === 'peer-review')
+          !isPublicRecord && singleAddButton()
         "
         mat-button
         class="orc-font-body-small add"

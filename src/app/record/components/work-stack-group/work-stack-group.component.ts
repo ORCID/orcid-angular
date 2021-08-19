@@ -31,6 +31,7 @@ import { ModalDeleteWorksComponent } from '../work/modals/modal-delete-works/mod
 import { WorkStackComponent } from '../work-stack/work-stack.component'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { UserInfo } from '../../../types'
+import { ModalWorksSearchLinkComponent } from './modals/modal-works-search-link.component'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -50,6 +51,9 @@ export class WorkStackGroupComponent implements OnInit {
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
+
+  modalWorksSearchLinkComponent = ModalWorksSearchLinkComponent
+
   userRecordContext: UserRecordOptions = {}
 
   modalExportWorksComponent = ModalExportWorksComponent
