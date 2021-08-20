@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalWorksSearchLink.Component.HtmlComponent } from './modals.component';
+import { ModalWorksSearchLinkComponent } from './modal-works-search-link.component';
 
 describe('ModalWorksSearchLink.Component.HtmlComponent', () => {
-  let component: ModalWorksSearchLink.Component.HtmlComponent;
-  let fixture: ComponentFixture<ModalWorksSearchLink.Component.HtmlComponent>;
+  let component: ModalWorksSearchLinkComponent;
+  let fixture: ComponentFixture<ModalWorksSearchLinkComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalWorksSearchLink.Component.HtmlComponent ]
+      declarations: [ ModalWorksSearchLinkComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalWorksSearchLink.Component.HtmlComponent);
+    fixture = TestBed.createComponent(ModalWorksSearchLinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
