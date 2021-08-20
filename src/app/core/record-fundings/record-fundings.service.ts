@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, retry, switchMap, tap } from 'rxjs/operators'
@@ -7,13 +7,17 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { VisibilityStrings } from '../../types/common.endpoint'
+import { VisibilityStrings, Organization } from '../../types/common.endpoint'
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordFundingsService {
   lastEmittedValue: FundingGroup[]
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  })
 
   $fundings: ReplaySubject<FundingGroup[]> = new ReplaySubject<FundingGroup[]>()
 
@@ -140,6 +144,42 @@ export class RecordFundingsService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getFundings({ forceReload: true }))
+      )
+  }
+
+  getFunding(): Observable<Funding> {
+    return this._http
+      .get<Funding>(environment.API_WEB + `fundings/funding.json`)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  save(funding: Funding) {
+    return this._http
+      .post<Funding>(environment.API_WEB + `fundings/funding.json`, funding)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getFundings({ forceReload: true }))
+      )
+  }
+
+  getOrganization(org: string): Observable<Organization[]> {
+    return this._http
+      .get<Organization[]>(
+        environment.API_WEB +
+          'fundings/disambiguated/name/' +
+          org +
+          '?limit=100&funders-only=true',
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }

@@ -1,4 +1,13 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
@@ -8,6 +17,8 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
+import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-work-stack',
@@ -41,6 +52,10 @@ export class WorkStackComponent implements OnInit {
   get displayTheStack(): boolean {
     return this._displayTheStack
   }
+
+  @Output() checkboxChangeWorkStackOutput = new EventEmitter<any>()
+  @Input() userInfo: UserInfo
+  @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
@@ -132,6 +147,17 @@ export class WorkStackComponent implements OnInit {
 
   trackByWorkStack(index, item: Work) {
     return item.putCode.value
+  }
+
+  userIsSource(work: Work): boolean {
+    if (this.userInfo) {
+      return work.source === this.userInfo.EFFECTIVE_USER_ORCID
+    }
+    return false
+  }
+
+  checkboxChangeWorkStack($event) {
+    this.checkboxChangeWorkStackOutput.emit($event)
   }
 
   ngOnInit(): void {}

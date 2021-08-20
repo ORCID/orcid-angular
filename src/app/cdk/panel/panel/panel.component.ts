@@ -11,6 +11,7 @@ import { UserRecord } from '../../../types/record.local'
 import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
+import { Funding } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { FormControl, FormGroup } from '@angular/forms'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
@@ -18,6 +19,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
+import { MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
   selector: 'app-panel',
@@ -33,6 +35,7 @@ export class PanelComponent implements OnInit {
     | Value
     | Address
     | Affiliation
+    | Funding
     | PeerReview
     | Work
     | any
@@ -60,7 +63,10 @@ export class PanelComponent implements OnInit {
   @Input() customControls = false
   @Input() openState = true
   @Input() editable = true
+  @Input() selectable = false
+  @Input() checkbox = false
   @Output() openStateChange = new EventEmitter<boolean>()
+  @Output() checkboxChangePanel = new EventEmitter<any>()
 
   _isPublicRecord: string
   @Input() set isPublicRecord(value: string) {
@@ -73,8 +79,14 @@ export class PanelComponent implements OnInit {
     return this._isPublicRecord
   }
 
+  @Input() isUserSource = false
+  selected: boolean
+
   formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
+  tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
+
+  panelForm: FormGroup
 
   constructor(
     private _dialog: MatDialog,
@@ -108,7 +120,14 @@ export class PanelComponent implements OnInit {
   }
 
   isArrayAndIsNotEmpty(
-    obj: Assertion[] | Value | Address | Affiliation | PeerReview | Work
+    obj:
+      | Assertion[]
+      | Value
+      | Address
+      | Affiliation
+      | Funding
+      | PeerReview
+      | Work
   ) {
     return Array.isArray(obj) && obj.length > 0
   }
@@ -117,7 +136,7 @@ export class PanelComponent implements OnInit {
     return obj && (obj.value || obj.putCode)
   }
 
-  openModal() {
+  openModal(options?: { createACopy: boolean }) {
     this._platform
       .get()
       .pipe(first())
@@ -129,8 +148,10 @@ export class PanelComponent implements OnInit {
             maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
             data: this.userRecord,
           })
+          modalComponent.componentInstance.options = options
           modalComponent.componentInstance.type = this.type
           modalComponent.componentInstance.affiliation = this.elements
+          modalComponent.componentInstance.funding = this.elements
         }
       })
   }
@@ -149,6 +170,13 @@ export class PanelComponent implements OnInit {
       this.type === 'research-resources' ||
       this.type === 'peer-review'
     )
+  }
+
+  checked(event: MatCheckboxChange) {
+    this.checkboxChangePanel.emit({
+      putCode: this.putCode,
+      checked: event.checked,
+    })
   }
 
   toggle() {

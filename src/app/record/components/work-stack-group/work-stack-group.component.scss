@@ -9,3 +9,36 @@ app-work-stack {
 p.empty {
   margin-bottom: 0;
 }
+
+.works-buttons {
+  margin: 16px;
+
+  .select-all {
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+
+  .items-selected {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+
+    button {
+      width: 200px;
+      border: solid 1px;
+      display: inline-block;
+      text-align: start;
+
+      mat-icon {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+      }
+    }
+  }
+}

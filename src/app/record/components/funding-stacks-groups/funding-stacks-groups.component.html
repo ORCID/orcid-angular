@@ -20,6 +20,7 @@
         *ngFor="let fundingGroup of fundings; trackBy: trackByFundingGroup"
         [fundingStack]="fundingGroup"
         [isPublicRecord]="isPublicRecord"
+        [userInfo]="userInfo"
       ></app-funding-stack>
     </ng-container>
     <ng-container *ngIf="fundings.length === 0">

@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin work-stack-group-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .controls {
+    button {
+      border-color: mat-color($background, ui-background) !important;
+    }
+  }
+}
+
+@include work-stack-group-theme($orcid-app-theme);
