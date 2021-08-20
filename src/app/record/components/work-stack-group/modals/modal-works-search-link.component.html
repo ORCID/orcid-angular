@@ -1,8 +1,6 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.linkWorks">
-      Link works
-    </ng-container>
+    <ng-container i18n="@@record.linkWorks"> Link works </ng-container>
   </app-modal-header>
   <div class="row">
     <div class="orc-font-small-print">
@@ -41,10 +39,7 @@
           (selectionChange)="searchAndLink()"
         >
           <mat-option value="All">All</mat-option>
-          <mat-option
-            *ngFor="let workType of workTypes"
-            [value]="workType"
-          >
+          <mat-option *ngFor="let workType of workTypes" [value]="workType">
             {{ workType }}
           </mat-option>
         </mat-select>
@@ -80,4 +75,3 @@
     [recordImportWizards]="recordImportWizards"
   ></app-search-link-wizard>
 </app-modal>
-

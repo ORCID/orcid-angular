@@ -5,20 +5,18 @@ import { environment } from '../../../../environments/environment'
 @Component({
   selector: 'app-search-link-wizard',
   templateUrl: './search-link-wizard.component.html',
-  styleUrls: ['./search-link-wizard.component.scss']
+  styleUrls: ['./search-link-wizard.component.scss'],
 })
 export class SearchLinkWizardComponent implements OnInit {
-
   @Input() recordImportWizards: RecordImportWizard[]
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openImportWizardUrlFilter(client: RecordImportWizard): string {
     if (client.status === 'RETIRED') {
-      return client.clientWebsite;
+      return client.clientWebsite
     } else {
       return (
         environment.BASE_URL +

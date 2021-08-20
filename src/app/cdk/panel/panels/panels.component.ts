@@ -136,9 +136,7 @@ export class PanelsComponent implements OnInit {
   }
 
   singleAddButton() {
-    return (
-      this.type === 'employment'
-    )
+    return this.type === 'employment'
   }
 
   ngOnInit(): void {}

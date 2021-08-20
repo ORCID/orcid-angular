@@ -99,7 +99,7 @@ import { SearchLinkWizardComponent } from './components/search-link-wizard/searc
     ModalWorksSearchLinkComponent,
     ModalDeleteItemsComponent,
     ModalFundingSearchLinkComponent,
-    SearchLinkWizardComponent
+    SearchLinkWizardComponent,
   ],
   imports: [
     CommonModule,

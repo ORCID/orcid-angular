@@ -9,7 +9,7 @@ import { Subject } from 'rxjs'
 @Component({
   selector: 'app-modal-funding-search-link',
   templateUrl: './modal-funding-search-link.component.html',
-  styleUrls: ['./modal-funding-search-link.component.scss']
+  styleUrls: ['./modal-funding-search-link.component.scss'],
 })
 export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -21,21 +21,20 @@ export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordFundingsService: RecordFundingsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadFundingImportWizardList()
   }
 
   loadFundingImportWizardList(): void {
-    this._recordFundingsService.loadFundingImportWizardList()
-      .pipe(
-        takeUntil(this.$destroy)
-      )
+    this._recordFundingsService
+      .loadFundingImportWizardList()
+      .pipe(takeUntil(this.$destroy))
       .subscribe(
         (recordImportWizards) => {
-          this.recordImportWizardsOriginal = recordImportWizards;
-          this.recordImportWizards = this.recordImportWizardsOriginal;
+          this.recordImportWizardsOriginal = recordImportWizards
+          this.recordImportWizards = this.recordImportWizardsOriginal
           // recordImportWizards.forEach((recordImportWizard) => {
           //   recordImportWizard.actTypes.forEach((actType) => {
           //     if (!this.workTypes.includes(actType)) {
@@ -51,10 +50,10 @@ export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
           // })
           this.loadingFunding = false
         },
-        error => {
+        (error) => {
           // console.log('WorkImportWizardError', error);
         }
-      );
+      )
   }
 
   saveEvent() {

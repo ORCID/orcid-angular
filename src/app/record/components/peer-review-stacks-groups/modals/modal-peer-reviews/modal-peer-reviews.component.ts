@@ -35,7 +35,7 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
 
   openImportWizardUrlFilter(client): string {
     if (client.status === 'RETIRED') {
-      return client.clientWebsite;
+      return client.clientWebsite
     } else {
       return (
         environment.BASE_URL +

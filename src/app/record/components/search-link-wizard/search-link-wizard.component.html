@@ -17,19 +17,17 @@
           i18n="@@shared.showMore"
           (click)="toggle(recordImportWizard)"
         >
-
           Show more
         </a>
       </ng-container>
       <ng-container *ngIf="recordImportWizard.show">
         {{ recordImportWizard.description }}
-        <br>
+        <br />
         <a
           class="underline"
           i18n="@@shared.showLess"
           (click)="toggle(recordImportWizard)"
         >
-
           Show less
         </a>
       </ng-container>
