@@ -56,7 +56,7 @@
         <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
       <button
-        *ngIf="!isPublicRecord && affiliationMatButton()"
+        *ngIf="!isPublicRecord && multipleMatButton()"
         mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
@@ -102,6 +102,33 @@
           </button>
           <button mat-menu-item (click)="add('service')">
             <ng-container i18n="@@shared.addService">Add Service</ng-container>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'funding'">
+          <button mat-menu-item (click)="add('funding-search')">
+            <ng-container i18n="@@shared.searchLink"
+            >Search & link</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('funding')">
+            <ng-container i18n="@@shared.addManually">Add manually</ng-container>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'works'">
+          <button mat-menu-item (click)="add('works-search')">
+            <ng-container i18n="@@shared.searchLink"
+            >Search & link</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('works')">
+            <ng-container i18n="@@shared.addManually">Add manually</ng-container>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'peer-review'">
+          <button mat-menu-item (click)="add(type)">
+            <ng-container i18n="@@shared.searchLink"
+            >Search & link</ng-container
+            >
           </button>
         </ng-container>
       </mat-menu>

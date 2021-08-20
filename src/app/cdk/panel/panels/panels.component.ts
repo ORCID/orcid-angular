@@ -78,7 +78,7 @@ export class PanelsComponent implements OnInit {
       case 'funding':
         this.openModal(ModalFundingComponent)
         break
-      case 'works':
+      case 'works-search':
         this.openModal(ModalWorksSearchLinkComponent)
         break
       default:
@@ -120,20 +120,20 @@ export class PanelsComponent implements OnInit {
     this.expanded.emit(this.expandedContent)
   }
 
-  affiliationMatButton() {
+  multipleMatButton() {
     return (
       this.type === 'education' ||
       this.type === 'invited-position' ||
-      this.type === 'membership'
+      this.type === 'membership' ||
+      this.type === 'funding' ||
+      this.type === 'works' ||
+      this.type === 'peer-review'
     )
   }
 
   singleAddButton() {
     return (
-      this.type === 'employment' ||
-      this.type === 'funding' ||
-      this.type === 'works' ||
-      this.type === 'peer-review'
+      this.type === 'employment'
     )
   }
 

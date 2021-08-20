@@ -16,7 +16,7 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   loadingPeerReviews = true
-  peerReviewImports: RecordImportWizard[]
+  recordImportWizards: RecordImportWizard[]
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -28,22 +28,30 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
       .getPeerReviewImportWizardList()
       .pipe(first())
       .subscribe((data) => {
-        this.peerReviewImports = data
+        this.recordImportWizards = data
         this.loadingPeerReviews = false
       })
   }
 
   openImportWizardUrlFilter(client): string {
-    return (
-      environment.BASE_URL +
-      'oauth/authorize' +
-      '?client_id=' +
-      client.id +
-      '&response_type=code&scope=' +
-      client.scopes +
-      '&redirect_uri=' +
-      client.redirectUri
-    )
+    if (client.status === 'RETIRED') {
+      return client.clientWebsite;
+    } else {
+      return (
+        environment.BASE_URL +
+        'oauth/authorize' +
+        '?client_id=' +
+        client.id +
+        '&response_type=code&scope=' +
+        client.scopes +
+        '&redirect_uri=' +
+        client.redirectUri
+      )
+    }
+  }
+
+  toggle(recordImportWizard: RecordImportWizard) {
+    recordImportWizard.show = !recordImportWizard.show
   }
 
   saveEvent() {
