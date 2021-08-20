@@ -60,7 +60,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
             // console.log('WorkImportWizardError', error);
           }
         );
-  };
+  }
 
   searchAndLink() {
     this.recordImportWizards = []
@@ -84,27 +84,6 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
         this.recordImportWizards.push(recordImportWizard)
       }
     })
-  }
-
-  openImportWizardUrlFilter(client: RecordImportWizard): string {
-    if (client.status === 'RETIRED') {
-     return client.clientWebsite;
-    } else {
-      return (
-        environment.BASE_URL +
-        'oauth/authorize' +
-        '?client_id=' +
-        client.id +
-        '&response_type=code&scope=' +
-        client.scopes +
-        '&redirect_uri=' +
-        client.redirectUri
-      )
-    }
-  }
-
-  toggle(recordImportWizard: RecordImportWizard) {
-    recordImportWizard.show = !recordImportWizard.show
   }
 
   saveEvent() {

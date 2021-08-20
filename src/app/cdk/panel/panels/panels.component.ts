@@ -10,6 +10,7 @@ import { ModalFundingComponent } from '../../../record/components/funding-stacks
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/modal-works-search-link.component'
+import { ModalFundingSearchLinkComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
 
 @Component({
   selector: 'app-panels',
@@ -77,6 +78,9 @@ export class PanelsComponent implements OnInit {
         break
       case 'funding':
         this.openModal(ModalFundingComponent)
+        break
+      case 'funding-search':
+        this.openModal(ModalFundingSearchLinkComponent)
         break
       case 'works-search':
         this.openModal(ModalWorksSearchLinkComponent)

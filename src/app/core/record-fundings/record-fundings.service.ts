@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings, Organization } from '../../types/common.endpoint'
+import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -181,5 +182,11 @@ export class RecordFundingsService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+
+  loadFundingImportWizardList(): Observable<RecordImportWizard[]> {
+    return this._http.get<RecordImportWizard[]>(
+      environment.API_WEB + 'workspace/retrieve-funding-import-wizards.json'
+    )
   }
 }

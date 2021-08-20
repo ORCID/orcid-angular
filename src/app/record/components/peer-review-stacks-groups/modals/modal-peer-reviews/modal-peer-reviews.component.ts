@@ -54,14 +54,6 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
     recordImportWizard.show = !recordImportWizard.show
   }
 
-  saveEvent() {
-    this.loadingPeerReviews = true
-  }
-
-  closeEvent() {
-    this.dialogRef.close()
-  }
-
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()

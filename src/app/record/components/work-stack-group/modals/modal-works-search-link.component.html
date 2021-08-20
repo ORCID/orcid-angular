@@ -4,33 +4,8 @@
       Link works
     </ng-container>
   </app-modal-header>
-  <app-modal-side-bar>
-    <ng-container id="side-bar-title" i18n="@@record.linkWorks">
-      Link works
-    </ng-container>
-  </app-modal-side-bar>
-  <app-modal-footer>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="saveEvent()"
-      i18n="@@shared.saveChanges"
-      id="save-button"
-    >
-      Save changes
-    </button>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="closeEvent()"
-      i18n="@@shared.cancel"
-      id="cancel-button"
-    >
-      Cancel
-    </button>
-  </app-modal-footer>
   <div class="row">
-    <div class="col orc-font-small-print">
+    <div class="orc-font-small-print">
       <p i18n="@@shared.searchAndLink">
         Search and Link wizards are our recommended way to populate your record.
         They make adding works, funding and peer reviews simple and save you
@@ -101,46 +76,8 @@
       </mat-form-field>
     </div>
   </div>
-  <div *ngFor="let recordImportWizard of recordImportWizards">
-    <h2 class="orc-font-body-small">
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        [href]="openImportWizardUrlFilter(recordImportWizard)"
-      >
-        {{ recordImportWizard.name }}
-      </a>
-    </h2>
-    <p class="orc-font-small-print">
-      <ng-container *ngIf="recordImportWizard.description.length > 125">
-        <ng-container *ngIf="!recordImportWizard.show">
-          {{ recordImportWizard.description.substring(0, 125) + '...' }}
-          <a
-            class="underline"
-            i18n="@@shared.showMore"
-            (click)="toggle(recordImportWizard)"
-          >
-
-            Show more
-          </a>
-        </ng-container>
-        <ng-container *ngIf="recordImportWizard.show">
-          {{ recordImportWizard.description }}
-          <br>
-          <a
-            class="underline"
-            i18n="@@shared.showLess"
-            (click)="toggle(recordImportWizard)"
-          >
-
-            Show less
-          </a>
-        </ng-container>
-      </ng-container>
-      <ng-container *ngIf="recordImportWizard.description.length < 125">
-        {{ recordImportWizard.description }}
-      </ng-container>
-    </p>
-  </div>
+  <app-search-link-wizard
+    [recordImportWizards]="recordImportWizards"
+  ></app-search-link-wizard>
 </app-modal>
 
