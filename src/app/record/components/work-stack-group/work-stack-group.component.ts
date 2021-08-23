@@ -1,23 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChildren,
-} from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
-import {
-  Work,
-  WorkGroup,
-  WorksEndpoint,
-} from 'src/app/types/record-works.endpoint'
+import { Work, WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
@@ -27,10 +15,10 @@ import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { FormGroup } from '@angular/forms'
 import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
-import { ModalDeleteWorksComponent } from '../work/modals/modal-delete-works/modal-delete-works.component'
 import { WorkStackComponent } from '../work-stack/work-stack.component'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { UserInfo } from '../../../types'
+import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -54,7 +42,7 @@ export class WorkStackGroupComponent implements OnInit {
 
   modalExportWorksComponent = ModalExportWorksComponent
   modalCombineWorksComponent = ModalCombineWorksComponent
-  modalDeleteWorksComponent = ModalDeleteWorksComponent
+  modalDeleteWorksComponent = ModalDeleteItemsComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -123,7 +111,7 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   delete() {
-    this.openModal(ModalDeleteWorksComponent, this.selectedWorks)
+    this.openModal(ModalDeleteItemsComponent, this.selectedWorks)
   }
 
   export() {
@@ -152,6 +140,7 @@ export class WorkStackGroupComponent implements OnInit {
           maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
         })
         modalComponent.componentInstance.putCodes = putCodes
+        modalComponent.componentInstance.type = 'works'
       })
     this.selectedWorks = []
   }

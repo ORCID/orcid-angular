@@ -1,0 +1,133 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@record.deleteItems"> Delete items</ng-container>
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="saveEvent()"
+      id="delete-button"
+    >
+      <ng-container i18n="@@record.deleteSelected">
+        Delete selected items
+      </ng-container>
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <div
+    class="info"
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div class="col">
+      <mat-icon>info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3">
+      <p i18n="@@record.deletingItems">
+        Deleting items permanently removes them from your ORCID record. Please
+        review the items selected for deletion.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <h3>
+      <ng-container i18n="@@record.selectedItems">
+        Selected items to delete
+      </ng-container>
+      ({{ selectedItems.length }})
+    </h3>
+    <div *ngIf="items.length > 1" class="row">
+      <div class="row">
+        <p>
+          <mat-checkbox (change)="updateCheckAll()" [(ngModel)]="selectAll">
+            <ng-container
+              i18n="@@shared.selectAll"
+              *ngIf="selectedItems.length === 0"
+            >
+              Select all
+            </ng-container>
+            <ng-container *ngIf="selectedItems.length > 0">
+              ({{ selectedItems.length }})
+              <ng-container i18n="@@shared.selected">Selected</ng-container>
+            </ng-container>
+          </mat-checkbox>
+        </p>
+      </div>
+    </div>
+    <mat-divider class="row"></mat-divider>
+    <div class="row" [formGroup]="deleteForm" *ngIf="!loadingItems">
+      <ng-container *ngFor="let item of items">
+        <div class="row affiliation-info" [formGroupName]="type === 'research-resources' ? item.putCode : item.putCode.value">
+          <div class="row">
+            <mat-checkbox
+              (change)="updateCheck(type === 'research-resources' ? item.putCode : item.putCode.value)"
+              formControlName="checked"
+            >
+              <h2 class="orc-font-body">
+                <ng-container
+                  *ngIf="isAffiliation()"
+                >
+                  {{ item?.affiliationName?.value }}
+                </ng-container>
+                <ng-container
+                  *ngIf="type === 'funding'"
+                >
+                  {{ item?.fundingTitle?.title?.value }}
+                </ng-container>
+                <ng-container
+                  *ngIf="type === 'research-resources'"
+                >
+                  {{ item?.title }}
+                </ng-container>
+                <ng-container
+                  *ngIf="type === 'works'"
+                >
+                  {{ item?.title?.value }}
+                </ng-container>
+                <ng-container
+                  *ngIf="type === 'peer-review'"
+                >
+                  <div>
+                    <span class="peer-review">
+                      <ng-container i18n="@@peerReview.reviewDate"> Review date: </ng-container>
+                      {{ item?.completionDate | monthDayYearDateToString }}
+                    </span>
+                    <span class="peer-review">
+                      <ng-container i18n="@@peerReview.type"> Type: </ng-container>
+                      <span class="capitalize"> {{ item.type.value }}</span>
+                    </span>
+                    <span>
+                      <ng-container i18n="@@peerReview.role"> Role: </ng-container>
+                      <span class="capitalize">
+                        {{ item.role.value }}
+                      </span>
+                    </span>
+                  </div>
+                </ng-container>
+              </h2>
+            </mat-checkbox>
+          </div>
+          <div class="details orc-font-body-small">
+            <strong i18n="@@record.source">Source</strong>:
+            {{ item.sourceName || item.source }}
+            <strong class="added" i18n="@@record.added"> Added </strong>:
+            {{ item.createdDate | monthDayYearDateToString }}
+          </div>
+        </div>
+        <mat-divider class="row"></mat-divider>
+      </ng-container>
+    </div>
+  </div>
+</app-modal>
+
