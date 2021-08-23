@@ -68,47 +68,54 @@
     <mat-divider class="row"></mat-divider>
     <div class="row" [formGroup]="deleteForm" *ngIf="!loadingItems">
       <ng-container *ngFor="let item of items">
-        <div class="row affiliation-info" [formGroupName]="type === 'research-resources' ? item.putCode : item.putCode.value">
+        <div
+          class="row affiliation-info"
+          [formGroupName]="
+            type === 'research-resources' ? item.putCode : item.putCode.value
+          "
+        >
           <div class="row">
             <mat-checkbox
-              (change)="updateCheck(type === 'research-resources' ? item.putCode : item.putCode.value)"
+              (change)="
+                updateCheck(
+                  type === 'research-resources'
+                    ? item.putCode
+                    : item.putCode.value
+                )
+              "
               formControlName="checked"
             >
               <h2 class="orc-font-body">
-                <ng-container
-                  *ngIf="isAffiliation()"
-                >
+                <ng-container *ngIf="isAffiliation()">
                   {{ item?.affiliationName?.value }}
                 </ng-container>
-                <ng-container
-                  *ngIf="type === 'funding'"
-                >
+                <ng-container *ngIf="type === 'funding'">
                   {{ item?.fundingTitle?.title?.value }}
                 </ng-container>
-                <ng-container
-                  *ngIf="type === 'research-resources'"
-                >
+                <ng-container *ngIf="type === 'research-resources'">
                   {{ item?.title }}
                 </ng-container>
-                <ng-container
-                  *ngIf="type === 'works'"
-                >
+                <ng-container *ngIf="type === 'works'">
                   {{ item?.title?.value }}
                 </ng-container>
-                <ng-container
-                  *ngIf="type === 'peer-review'"
-                >
+                <ng-container *ngIf="type === 'peer-review'">
                   <div>
                     <span class="peer-review">
-                      <ng-container i18n="@@peerReview.reviewDate"> Review date: </ng-container>
+                      <ng-container i18n="@@peerReview.reviewDate">
+                        Review date:
+                      </ng-container>
                       {{ item?.completionDate | monthDayYearDateToString }}
                     </span>
                     <span class="peer-review">
-                      <ng-container i18n="@@peerReview.type"> Type: </ng-container>
+                      <ng-container i18n="@@peerReview.type">
+                        Type:
+                      </ng-container>
                       <span class="capitalize"> {{ item.type.value }}</span>
                     </span>
                     <span>
-                      <ng-container i18n="@@peerReview.role"> Role: </ng-container>
+                      <ng-container i18n="@@peerReview.role">
+                        Role:
+                      </ng-container>
                       <span class="capitalize">
                         {{ item.role.value }}
                       </span>
@@ -130,4 +137,3 @@
     </div>
   </div>
 </app-modal>
-

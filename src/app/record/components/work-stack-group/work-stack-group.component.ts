@@ -1,11 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
-import { Work, WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import {
+  Work,
+  WorkGroup,
+  WorksEndpoint,
+} from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'

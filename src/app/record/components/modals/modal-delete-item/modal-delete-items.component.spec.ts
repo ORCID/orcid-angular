@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ModalDeleteItemsComponent } from './modal-delete-items.component';
+import { ModalDeleteItemsComponent } from './modal-delete-items.component'
 
 describe('ModalDeleteItemsComponent', () => {
-  let component: ModalDeleteItemsComponent;
-  let fixture: ComponentFixture<ModalDeleteItemsComponent>;
+  let component: ModalDeleteItemsComponent
+  let fixture: ComponentFixture<ModalDeleteItemsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalDeleteItemsComponent ]
-    })
-    .compileComponents();
-  });
+      declarations: [ModalDeleteItemsComponent],
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalDeleteItemsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ModalDeleteItemsComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

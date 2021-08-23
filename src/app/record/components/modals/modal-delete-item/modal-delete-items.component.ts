@@ -38,8 +38,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     | 'funding'
     | 'research-resources' = 'activities'
 
-  @Input()item: any
-  @Input()putCodes: string[] = []
+  @Input() item: any
+  @Input() putCodes: string[] = []
 
   isMobile: boolean
   loadingItems = false
@@ -57,9 +57,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     private _recordFundingsService: RecordFundingsService,
     private _recordWorksService: RecordWorksService,
     private _recordResearchResourceService: RecordResearchResourceService,
-    private _recordPeerReviewService: RecordPeerReviewService,
-  ) {
-  }
+    private _recordPeerReviewService: RecordPeerReviewService
+  ) {}
 
   ngOnInit(): void {
     const group: { [key: string]: FormGroup } = {}
@@ -106,8 +105,13 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     const putCodesDelete = []
     let putCode = ''
     this.items.forEach((item, i) => {
-      if (this.deleteForm.value[this.type === 'research-resources' ? item.putCode : item.putCode.value].checked) {
-        putCode = this.type === 'research-resources' ? item.putCode : item.putCode.value
+      if (
+        this.deleteForm.value[
+          this.type === 'research-resources' ? item.putCode : item.putCode.value
+        ].checked
+      ) {
+        putCode =
+          this.type === 'research-resources' ? item.putCode : item.putCode.value
         if (this.items.length > 1) {
           putCodesDelete.push(putCode)
         }
@@ -141,7 +145,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
           })
         break
       case 'works':
-        this._recordWorksService.delete(putCode)
+        this._recordWorksService
+          .delete(putCode)
           .pipe(first())
           .subscribe(() => {
             this.closeEvent()
@@ -183,7 +188,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       if (this.selectedItems.includes(value)) {
         if (!!this.selectAll === false) {
           this.selectedItems = this.selectedItems.filter(
-            (putCode) => putCode !== value,
+            (putCode) => putCode !== value
           )
         }
       } else {
@@ -201,7 +206,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     if (this.selectedItems.includes(putCode)) {
       if (!!this.selectAll === false) {
         this.selectedItems = this.selectedItems.filter(
-          (value) => value !== putCode,
+          (value) => value !== putCode
         )
       }
     } else {
@@ -218,4 +223,3 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     this.$destroy.unsubscribe()
   }
 }
-
