@@ -15,7 +15,6 @@
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    [addModalComponent]="modalAffiliationsComponent"
     (expanded)="expandedClicked('employment', $event)"
     [labelAddButton]="labelAddEmploymentButton"
     [labelSortButton]="labelSortEmploymentButton"
@@ -31,6 +30,7 @@
         "
         [affiliationStack]="affiliationGroup"
         [type]="'employment'"
+        [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container
@@ -71,7 +71,6 @@
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    [addModalComponent]="modalAffiliationsComponent"
     (expanded)="expandedClicked('education', $event)"
     [labelAddButton]="labelEducationAddButton"
     [labelSortButton]="labelEducationSortButton"
@@ -87,6 +86,7 @@
         "
         [affiliationStack]="affiliationGroup"
         [type]="'education'"
+        [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container
@@ -128,7 +128,6 @@
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    [addModalComponent]="modalAffiliationsComponent"
     (expanded)="expandedClicked('invited-position', $event)"
     [labelAddButton]="labelInvitedAddButton"
     [labelSortButton]="labelInvitedSortButton"
@@ -144,6 +143,7 @@
         "
         [affiliationStack]="affiliationGroup"
         [type]="'invited-position'"
+        [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container
@@ -183,7 +183,6 @@
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
     [expandedContent]="expandedContent"
     [isPublicRecord]="isPublicRecord"
-    [addModalComponent]="modalAffiliationsComponent"
     (expanded)="expandedClicked('membership', $event)"
     [labelAddButton]="labelMembershipAddButton"
     [labelSortButton]="labelMembershipSortButton"
@@ -199,6 +198,7 @@
         "
         [affiliationStack]="affiliationGroup"
         [type]="'membership'"
+        [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
     <ng-container

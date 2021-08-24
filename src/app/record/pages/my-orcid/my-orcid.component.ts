@@ -8,6 +8,8 @@ import { Subject } from 'rxjs'
 import { UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
+import { UserInfoService } from '../../../core/user-info/user-info.service'
+import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-my-orcid',
@@ -23,6 +25,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
   publicOrcid: string
   affiliations: number
+  userInfo: UserInfo
   userRecord: UserRecord
   expandedContent = true
   expandedButton = true
@@ -35,12 +38,19 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   loading = false
 
   constructor(
+    _userInfoService: UserInfoService,
     private _platform: PlatformInfoService,
     private route: ActivatedRoute,
     private _record: RecordService,
     private _openGraph: OpenGraphService,
     private _robotsMeta: RobotsMetaTagsService
   ) {
+    _userInfoService
+      .getUserInfo()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userInfo) => {
+        this.userInfo = userInfo
+      })
     this.checkIfThisIsAPublicOrcid()
   }
 
