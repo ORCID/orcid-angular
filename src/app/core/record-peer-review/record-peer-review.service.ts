@@ -5,7 +5,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { RecordPeerReviewImport } from '../../types/record-peer-review-import.endpoint'
+import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { retry, catchError, switchMap, tap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
 
@@ -76,8 +76,8 @@ export class RecordPeerReviewService {
     )
   }
 
-  getPeerReviewImportWizardList(): Observable<RecordPeerReviewImport[]> {
-    return this._http.get<RecordPeerReviewImport[]>(
+  getPeerReviewImportWizardList(): Observable<RecordImportWizard[]> {
+    return this._http.get<RecordImportWizard[]>(
       environment.API_WEB + 'workspace/retrieve-peer-review-import-wizards.json'
     )
   }

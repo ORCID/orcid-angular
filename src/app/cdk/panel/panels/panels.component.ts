@@ -9,6 +9,8 @@ import { ModalAffiliationsComponent } from '../../../record/components/affiliati
 import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
+import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/modal-works-search-link.component'
+import { ModalFundingSearchLinkComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
 
 @Component({
   selector: 'app-panels',
@@ -35,7 +37,6 @@ export class PanelsComponent implements OnInit {
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
-  @Input() addModalComponent: ComponentType<any>
   @Input() selectable = false
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
@@ -82,9 +83,14 @@ export class PanelsComponent implements OnInit {
         case 'funding':
           this.openModal(ModalFundingComponent)
           break
-        default: {
+        case 'funding-search':
+          this.openModal(ModalFundingSearchLinkComponent)
           break
-        }
+        case 'works-search':
+          this.openModal(ModalWorksSearchLinkComponent)
+          break
+        default:
+          break
       }
     }
   }
@@ -123,13 +129,19 @@ export class PanelsComponent implements OnInit {
     this.expanded.emit(this.expandedContent)
   }
 
-  affiliationMatButton() {
+  multipleMatButton() {
     return (
       this.type === 'education' ||
       this.type === 'invited-position' ||
       this.type === 'membership' ||
-      this.type === 'works'
+      this.type === 'funding' ||
+      this.type === 'works' ||
+      this.type === 'peer-review'
     )
+  }
+
+  singleAddButton() {
+    return this.type === 'employment'
   }
 
   ngOnInit(): void {}

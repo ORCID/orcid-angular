@@ -59,6 +59,9 @@ import { ModalExportWorksComponent } from './components/work/modals/modal-export
 import { WorkComponent } from './components/work/work.component'
 import { MyOrcidComponent } from './pages/my-orcid/my-orcid.component'
 import { RecordRoutingModule } from './record-routing.module'
+import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/modal-works-search-link.component'
+import { ModalFundingSearchLinkComponent } from './components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
+import { SearchLinkWizardComponent } from './components/search-link-wizard/search-link-wizard.component'
 
 @NgModule({
   declarations: [
@@ -95,7 +98,10 @@ import { RecordRoutingModule } from './record-routing.module'
     PeerReviewComponent,
     ModalExportWorksComponent,
     ModalCombineWorksComponent,
+    ModalWorksSearchLinkComponent,
     ModalDeleteItemsComponent,
+    ModalFundingSearchLinkComponent,
+    SearchLinkWizardComponent,
   ],
   imports: [
     CommonModule,

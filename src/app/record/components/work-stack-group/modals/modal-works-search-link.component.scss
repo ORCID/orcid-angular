@@ -1,0 +1,25 @@
+h3 {
+  margin: 32px 0 8px;
+}
+
+.search-link-options {
+  justify-content: space-between;
+
+  .select {
+    width: calc(50% - 40px);
+  }
+
+  .title {
+    margin: 5px 0;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .search-link-select {
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 1em !important;
+    }
+  }
+}

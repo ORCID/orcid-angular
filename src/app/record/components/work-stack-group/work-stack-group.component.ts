@@ -52,6 +52,7 @@ export class WorkStackGroupComponent implements OnInit {
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
+
   userRecordContext: UserRecordOptions = {}
 
   addMenuOptions = [

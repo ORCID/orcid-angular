@@ -80,28 +80,25 @@
         </a>
       </ng-container>
       <ng-container *ngIf="org.preferred">
-        <span> (</span>
-        <span i18n="@@shared.preferred">preferred</span>
-        <span>)</span>
-      </ng-container>
-      <span *ngIf="org.preferred && org.all.length > 1">, </span>
-      <ng-container *ngFor="let id of org.all; index as j">
-        <ng-container *ngIf="id != org.preferred && !isUrl(id)">{{
-          id
-        }}</ng-container>
-        <ng-container *ngIf="id != org.preferred && isUrl(id)">
-          <a
-            class="underline"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="{{ id }}"
-          >
-            {{ id }}
-          </a>
+        <span> (</span><span i18n="@@shared.preferred">preferred</span
+        ><span>)</span></ng-container
+      ><span *ngIf="org.preferred && org.all.length > 1">, </span
+      ><ng-container *ngFor="let id of org.all; index as j"
+        ><ng-container *ngIf="id != org.preferred"
+          ><ng-container *ngIf="!isUrl(id)">{{ id }}</ng-container
+          ><ng-container *ngIf="isUrl(id)">
+            <a
+              class="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="{{ id }}"
+            >
+              {{ id }}
+            </a> </ng-container
+          ><span *ngIf="org.all[j + 1] && org.all[j + 1] != org.preferred"
+            >,
+          </span>
         </ng-container>
-        <span *ngIf="org.all[j + 1] && org.all[j + 1] != org.preferred"
-          >,
-        </span>
       </ng-container>
     </div>
   </app-display-attribute>
