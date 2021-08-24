@@ -9,7 +9,7 @@
   }
 }
 
-.work-info {
+.affiliation-info {
   margin-bottom: 16px;
 
   .details {
@@ -29,4 +29,12 @@
   mat-icon {
     margin-inline-end: 4px;
   }
+}
+
+.peer-review {
+  margin-inline-end: 40px;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }

@@ -27,10 +27,10 @@ import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { FormGroup } from '@angular/forms'
 import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
-import { ModalDeleteWorksComponent } from '../work/modals/modal-delete-works/modal-delete-works.component'
 import { WorkStackComponent } from '../work-stack/work-stack.component'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { UserInfo } from '../../../types'
+import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -54,7 +54,7 @@ export class WorkStackGroupComponent implements OnInit {
 
   modalExportWorksComponent = ModalExportWorksComponent
   modalCombineWorksComponent = ModalCombineWorksComponent
-  modalDeleteWorksComponent = ModalDeleteWorksComponent
+  modalDeleteWorksComponent = ModalDeleteItemsComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -123,7 +123,7 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   delete() {
-    this.openModal(ModalDeleteWorksComponent, this.selectedWorks)
+    this.openModal(ModalDeleteItemsComponent, this.selectedWorks)
   }
 
   export() {
@@ -152,6 +152,7 @@ export class WorkStackGroupComponent implements OnInit {
           maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
         })
         modalComponent.componentInstance.putCodes = putCodes
+        modalComponent.componentInstance.type = 'works'
       })
     this.selectedWorks = []
   }

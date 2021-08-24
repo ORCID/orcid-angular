@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
-@mixin delete-work-theme($theme) {
+@mixin delete-items-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
@@ -17,4 +17,4 @@
   }
 }
 
-@include delete-work-theme($orcid-app-theme);
+@include delete-items-theme($orcid-app-theme);
