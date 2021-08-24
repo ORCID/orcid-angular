@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { PlatformInfoService } from '../../platform-info'
-import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { first } from 'rxjs/operators'
-import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
-import { RecordWorksService } from '../../../core/record-works/record-works.service'
-import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
-import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
+import { Affiliation } from '../../../types/record-affiliation.endpoint'
+import { MatDialog } from '@angular/material/dialog'
+import { ModalDeleteItemsComponent } from '../../../record/components/modals/modal-delete-item/modal-delete-items.component'
+import { Funding } from '../../../types/record-funding.endpoint'
+import { ResearchResource } from '../../../types/record-research-resources.endpoint'
+import { Work } from '../../../types/record-works.endpoint'
+import { PeerReview } from '../../../types/record-peer-review.endpoint'
 
 @Component({
   selector: 'app-panel-source',
@@ -21,7 +23,7 @@ export class PanelSourceComponent implements OnInit {
   @Input() assertionOriginName
   @Input() assertionOriginClientId
   @Input() stackLength
-  @Input() putCode: string
+  @Input() item: Affiliation | Funding | ResearchResource | Work | PeerReview
   @Input() type:
     | 'employment'
     | 'education'
@@ -56,12 +58,8 @@ export class PanelSourceComponent implements OnInit {
   labelDeleteButton = $localize`:@@shared.delete:Delete`
 
   constructor(
-    private _platformInfo: PlatformInfoService,
-    private _recordAffiliationService: RecordAffiliationService,
-    private _recordFundingsService: RecordFundingsService,
-    private _recordWorksService: RecordWorksService,
-    private _recordResearchResourceService: RecordResearchResourceService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _dialog: MatDialog,
+    private _platformInfo: PlatformInfoService
   ) {
     this._platformInfo.get().subscribe((person) => {
       this.isHandset = person.handset
@@ -84,40 +82,18 @@ export class PanelSourceComponent implements OnInit {
   }
 
   delete() {
-    switch (this.type) {
-      case 'employment':
-      case 'education':
-      case 'qualification':
-      case 'invited-position':
-      case 'distinction':
-      case 'membership':
-      case 'service':
-        this._recordAffiliationService
-          .delete(this.putCode)
-          .pipe(first())
-          .subscribe()
-        break
-      case 'funding':
-        this._recordFundingsService
-          .delete(this.putCode)
-          .pipe(first())
-          .subscribe()
-        break
-      case 'works':
-        this._recordWorksService.delete(this.putCode).pipe(first()).subscribe()
-        break
-      case 'research-resources':
-        this._recordResearchResourceService
-          .delete(this.putCode)
-          .pipe(first())
-          .subscribe()
-        break
-      case 'peer-review':
-        this._recordPeerReviewService
-          .delete(this.putCode)
-          .pipe(first())
-          .subscribe()
-        break
-    }
+    this._platformInfo
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        let modalComponent
+        modalComponent = this._dialog.open(ModalDeleteItemsComponent, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+        })
+
+        modalComponent.componentInstance.type = this.type
+        modalComponent.componentInstance.item = this.item
+      })
   }
 }

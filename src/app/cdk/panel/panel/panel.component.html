@@ -4,7 +4,8 @@
     'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
     'top-bar-or-main': type === 'top-bar' || type === 'main' || isAffiliation(),
     'side-bar': type === 'side-bar',
-    'staked-header': stackedHeader
+    'staked-header': stackedHeader,
+    'expand-button': !editable && !isPublicRecord && !customControls
   }"
 >
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
@@ -20,10 +21,25 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="expandButtonsPosition !== 'left'">
-    <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
-  </ng-container>
-
+  <div *ngIf="selectable">
+    <mat-checkbox
+      *ngIf="selectable && !isPublicRecord"
+      (change)="checked($event)"
+      [ngModel]="selected"
+    >
+      <ng-container *ngIf="expandButtonsPosition !== 'left'">
+        <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+      </ng-container>
+    </mat-checkbox>
+    <ng-container *ngIf="isPublicRecord && expandButtonsPosition !== 'left'">
+      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    </ng-container>
+  </div>
+  <div *ngIf="!selectable">
+    <ng-container *ngIf="expandButtonsPosition !== 'left'">
+      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    </ng-container>
+  </div>
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container *ngIf="visibility && !isPublicRecord">
@@ -73,7 +89,7 @@
       <ng-container *ngIf="!isAffiliation()">
         <button
           mat-icon-button
-          *ngIf="!isPublicRecord && isUserSource"
+          *ngIf="!isPublicRecord"
           [matTooltip]="tooltipLabelEdit"
           (click)="openModal()"
           id="edit-button"

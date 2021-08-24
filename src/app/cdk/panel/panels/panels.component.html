@@ -13,9 +13,7 @@
 
       <div class="text-container">
         <div class="orc-font-body-large clickable" (click)="collapse()">
-          <strong>
-            {{ title }}
-          </strong>
+          <strong> {{ title }} </strong>
           <span
             *ngIf="currentAmount && total && currentAmount !== total"
             class="clickable"
@@ -31,7 +29,7 @@
           >
             ({{ currentAmount }})
           </span>
-          <span *ngIf="!currentAmount">(0)</span>
+          <span *ngIf="!currentAmount && currentAmount !== 0">(0)</span>
         </div>
         <ng-container> </ng-container>
       </div>
@@ -42,10 +40,10 @@
         *ngIf="
           !isPublicRecord &&
           (type === 'employment' ||
-            type === 'peer-review' ||
-            type === 'funding')
+            type === 'funding' ||
+            type === 'peer-review')
         "
-        mat-icon-button
+        mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
       >
@@ -60,7 +58,7 @@
       </button>
       <button
         *ngIf="!isPublicRecord && affiliationMatButton()"
-        mat-icon-button
+        mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
         [matMenuTriggerFor]="menuAdd"

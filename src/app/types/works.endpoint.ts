@@ -1,4 +1,4 @@
-import { Value } from './common.endpoint'
+import { ExternalIdentifier, MonthDayYearDate, Value } from './common.endpoint'
 
 export interface Citation {
   citation: Value
@@ -623,4 +623,32 @@ export const WorkRelationshipsHintsLabels = {
   'part-of': $localize`:@@works.partOfDescription:The identifier applies to part of a larger work. For example, the ISBN of the book in which the work was published.`,
   'version-of': $localize`:@@works.versionOfDescription:The identifier applies to an alternate version of the work. For example, an earlier draft of an article.`,
   'funded-by': $localize`:@@works.fundedByDescription:The identifier applies to an alternate version of the work. For example, an earlier draft of an article.`,
+}
+export interface Work {
+  visibility: any
+  errors: any[] // TODO is this always empty?
+  publicationDate: MonthDayYearDate
+  putCode: any
+  shortDescription?: Value
+  url?: Value
+  journalTitle?: Value
+  languageCode?: Value
+  languageName?: Value
+  citation?: Citation
+  countryCode?: Value
+  countryName?: Value
+  contributors?: [any] // TODO is this always empty?
+  workExternalIdentifiers: ExternalIdentifier[]
+  source: string
+  sourceName: string
+  title: Value
+  subtitle?: Value
+  translatedTitle?: any // TODO is this always empty?
+  workCategory?: Value
+  workType: Value
+  dateSortString?: string
+  createdDate?: MonthDayYearDate
+  lastModified?: MonthDayYearDate
+  userSource: boolean
+  checked: boolean
 }

@@ -1,23 +1,34 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { PageEvent } from '@angular/material/paginator'
-import { isEmpty } from 'lodash'
-import { Subject } from 'rxjs'
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE } from 'src/app/constants'
-import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
-import { RecordService } from 'src/app/core/record/record.service'
-import { WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
-import { UserRecordOptions } from 'src/app/types/record.local'
-import { SortData } from 'src/app/types/sort'
+import { ComponentType } from '@angular/cdk/portal';
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { isEmpty } from 'lodash';
+import { Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info';
+import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE } from 'src/app/constants';
+import { RecordWorksService } from 'src/app/core/record-works/record-works.service';
+import { RecordService } from 'src/app/core/record/record.service';
+import { Work, WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint';
+import { UserRecordOptions } from 'src/app/types/record.local';
+import { SortData } from 'src/app/types/sort';
 
-import { UserInfo } from '../../../types'
-import { WorkModalComponent } from '../work-modal/work-modal.component'
+import { UserInfo } from '../../../types';
+import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component';
+import { WorkModalComponent } from '../work-modal/work-modal.component';
+import { WorkStackComponent } from '../work-stack/work-stack.component';
+import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component';
+import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component';
 
 @Component({
   selector: 'app-work-stack-group',
   templateUrl: './work-stack-group.component.html',
-  styleUrls: ['./work-stack-group.component.scss'],
+  styleUrls: [
+    './work-stack-group.component.scss',
+    './work-stack-group.component.scss-theme.scss',
+  ],
 })
 export class WorkStackGroupComponent implements OnInit {
   defaultPageSize = DEFAULT_PAGE_SIZE
@@ -42,22 +53,32 @@ export class WorkStackGroupComponent implements OnInit {
     { label: 'Add PubMed ID', action: ADD_EVENT_ACTION.pubMed },
     { label: 'Add BibTex', action: ADD_EVENT_ACTION.bibText },
   ]
+  modalExportWorksComponent = ModalExportWorksComponent
+  modalCombineWorksComponent = ModalCombineWorksComponent
+  modalDeleteWorksComponent = ModalDeleteItemsComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   workGroup: WorksEndpoint
+  workStackGroupForm: FormGroup = new FormGroup({})
 
   works = $localize`:@@shared.works:Works`
+  labelActionsButton = $localize`:@@shared.actions:Actions`
   paginationTotalAmountOfWorks: number
   paginationIndex: number
   paginationPageSize: number
   platform: PlatformInfo
+  selectedWorks: string[] = []
+  selectAll: false
+
+  @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
+  @ViewChildren('appWorkStacks') appWorkStacks: QueryList<WorkStackComponent>
 
   constructor(
+    private _dialog: MatDialog,
+    private _platform: PlatformInfoService,
     private _record: RecordService,
     private _works: RecordWorksService,
-    private _dialog: MatDialog,
-    private _platform: PlatformInfoService
   ) {}
 
   ngOnInit(): void {
@@ -102,5 +123,69 @@ export class WorkStackGroupComponent implements OnInit {
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this._works.changeUserRecordContext(this.userRecordContext)
+  }
+  combine() {
+    this.openModal(ModalCombineWorksComponent, this.selectedWorks)
+  }
+
+  delete() {
+    this.openModal(ModalDeleteItemsComponent, this.selectedWorks)
+  }
+
+  export() {
+    this.openModal(ModalExportWorksComponent, this.selectedWorks)
+  }
+
+  checked(event: MatCheckboxChange) {
+    this.selectedWorks = []
+    this.appWorkStacks.forEach((appWorkStack) => {
+      appWorkStack.panelsComponent.forEach((panelComponent) => {
+        panelComponent.selected = event.checked
+        if (event.checked) {
+          this.selectedWorks.push(panelComponent.putCode)
+        }
+      })
+    })
+  }
+
+  openModal(modal: ComponentType<any>, putCodes) {
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        const modalComponent = this._dialog.open(modal, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+        })
+        modalComponent.componentInstance.putCodes = putCodes
+        modalComponent.componentInstance.type = 'works'
+      })
+    this.selectedWorks = []
+  }
+
+  checkboxChangeWorkStackGroup($event) {
+    if (this.selectedWorks.includes($event.putCode)) {
+      if ($event.checked === false) {
+        this.selectedWorks = this.selectedWorks.filter(
+          (putCode) => putCode !== $event.putCode
+        )
+      }
+    } else {
+      this.selectedWorks.push($event.putCode)
+    }
+  }
+
+  filteredWorks(): Work[] {
+    const works: Work[] = []
+    this.selectedWorks.forEach((putCode) => {
+      this.workGroup.groups.forEach((workGroup) => {
+        workGroup.works.forEach((work) => {
+          if (work.putCode.value === putCode) {
+            works.push(work)
+          }
+        })
+      })
+    })
+    return works
   }
 }

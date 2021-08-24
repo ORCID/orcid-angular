@@ -291,20 +291,20 @@
       <div class="input-container date">
         <div class="col l4 date">
           <mat-form-field
-            id="start-date-day-input"
+            id="start-date-year-input"
             appearance="outline"
             class="mat-form-field-min"
           >
             <mat-select
-              placeholder="{{ ngOrcidDay }}"
-              formControlName="startDateDay"
+              placeholder="{{ ngOrcidYear }}"
+              formControlName="startDateYear"
             >
-              <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
+              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
               <mat-option
-                *ngFor="let day of dayOptions | keyvalue"
-                [value]="day.key"
+                *ngFor="let year of yearOptions | keyvalue"
+                [value]="year.key"
               >
-                {{ day.value }}
+                {{ year.value }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -331,20 +331,20 @@
         </div>
         <div class="col l4 date">
           <mat-form-field
-            id="start-date-year-input"
+            id="start-date-day-input"
             appearance="outline"
             class="mat-form-field-min"
           >
             <mat-select
-              placeholder="{{ ngOrcidYear }}"
-              formControlName="startDateYear"
+              placeholder="{{ ngOrcidDay }}"
+              formControlName="startDateDay"
             >
-              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+              <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
               <mat-option
-                *ngFor="let year of yearOptions | keyvalue"
-                [value]="year.key"
+                *ngFor="let day of dayOptions | keyvalue"
+                [value]="day.key"
               >
-                {{ year.value }}
+                {{ day.value }}
               </mat-option>
             </mat-select>
           </mat-form-field>
