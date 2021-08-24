@@ -7,6 +7,7 @@ import { URL_REGEXP } from '../../../constants'
   selector: 'app-org-identifier',
   templateUrl: './org-identifier.component.html',
   styleUrls: ['./org-identifier.component.scss'],
+  preserveWhitespaces: true,
 })
 export class OrgIdentifierComponent implements OnInit {
   @Input() orgDisambiguated: OrgDisambiguated
