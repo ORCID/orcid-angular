@@ -89,7 +89,7 @@
       <ng-container *ngIf="!isAffiliation()">
         <button
           mat-icon-button
-          *ngIf="!isPublicRecord && isUserSource"
+          *ngIf="!isPublicRecord"
           [matTooltip]="tooltipLabelEdit"
           (click)="openModal()"
           id="edit-button"
