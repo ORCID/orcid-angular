@@ -52,8 +52,6 @@ export class WorkStackGroupComponent implements OnInit {
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
 
-  modalWorksSearchLinkComponent = ModalWorksSearchLinkComponent
-
   userRecordContext: UserRecordOptions = {}
 
   modalExportWorksComponent = ModalExportWorksComponent

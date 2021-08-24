@@ -19,8 +19,8 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
   recordImportWizards: RecordImportWizard[]
   workTypes = []
   geographicalAreas = []
-  workTypeSelected: string
-  geographicalAreaSelected: string
+  workTypeSelected = 'All'
+  geographicalAreaSelected = 'All'
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -53,9 +53,6 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
             })
           })
           this.loadingWorks = false
-        },
-        (error) => {
-          // console.log('WorkImportWizardError', error);
         }
       )
   }

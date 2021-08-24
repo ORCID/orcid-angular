@@ -35,23 +35,7 @@ export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
         (recordImportWizards) => {
           this.recordImportWizardsOriginal = recordImportWizards
           this.recordImportWizards = this.recordImportWizardsOriginal
-          // recordImportWizards.forEach((recordImportWizard) => {
-          //   recordImportWizard.actTypes.forEach((actType) => {
-          //     if (!this.workTypes.includes(actType)) {
-          //       this.workTypes.push(actType)
-          //     }
-          //   })
-          //
-          //   recordImportWizard.geoAreas.forEach((geoArea) => {
-          //     if (!this.geographicalAreas.includes(geoArea)) {
-          //       this.geographicalAreas.push(geoArea)
-          //     }
-          //   })
-          // })
           this.loadingFunding = false
-        },
-        (error) => {
-          // console.log('WorkImportWizardError', error);
         }
       )
   }

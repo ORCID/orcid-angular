@@ -38,7 +38,9 @@
           [(value)]="workTypeSelected"
           (selectionChange)="searchAndLink()"
         >
-          <mat-option value="All">All</mat-option>
+          <mat-option value="All">
+            <ng-container i18n="@@record.all">All</ng-container>
+          </mat-option>
           <mat-option *ngFor="let workType of workTypes" [value]="workType">
             {{ workType }}
           </mat-option>
@@ -60,7 +62,9 @@
           [(value)]="geographicalAreaSelected"
           (selectionChange)="searchAndLink()"
         >
-          <mat-option value="All">All</mat-option>
+          <mat-option value="All">
+            <ng-container i18n="@@record.all">All</ng-container>
+          </mat-option>
           <mat-option
             *ngFor="let geographicalArea of geographicalAreas"
             [value]="geographicalArea"
