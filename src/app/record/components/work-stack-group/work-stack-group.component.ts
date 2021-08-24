@@ -1,26 +1,38 @@
-import { ComponentType } from '@angular/cdk/portal';
-import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
-import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
-import { isEmpty } from 'lodash';
-import { Subject } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info';
-import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE } from 'src/app/constants';
-import { RecordWorksService } from 'src/app/core/record-works/record-works.service';
-import { RecordService } from 'src/app/core/record/record.service';
-import { Work, WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint';
-import { UserRecordOptions } from 'src/app/types/record.local';
-import { SortData } from 'src/app/types/sort';
+import { ComponentType } from '@angular/cdk/portal'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
+import { FormGroup } from '@angular/forms'
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
+import { MatDialog } from '@angular/material/dialog'
+import { PageEvent } from '@angular/material/paginator'
+import { isEmpty } from 'lodash'
+import { Subject } from 'rxjs'
+import { first } from 'rxjs/operators'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
+import { RecordService } from 'src/app/core/record/record.service'
+import {
+  Work,
+  WorkGroup,
+  WorksEndpoint,
+} from 'src/app/types/record-works.endpoint'
+import { UserRecordOptions } from 'src/app/types/record.local'
+import { SortData } from 'src/app/types/sort'
 
-import { UserInfo } from '../../../types';
-import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component';
-import { WorkModalComponent } from '../work-modal/work-modal.component';
-import { WorkStackComponent } from '../work-stack/work-stack.component';
-import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component';
-import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component';
+import { UserInfo } from '../../../types'
+import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component'
+import { WorkModalComponent } from '../work-modal/work-modal.component'
+import { WorkStackComponent } from '../work-stack/work-stack.component'
+import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
+import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -78,7 +90,7 @@ export class WorkStackGroupComponent implements OnInit {
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _record: RecordService,
-    private _works: RecordWorksService,
+    private _works: RecordWorksService
   ) {}
 
   ngOnInit(): void {

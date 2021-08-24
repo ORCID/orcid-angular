@@ -1,5 +1,4 @@
 <ng-container *ngIf="!(isPublicRecord && workGroup?.groups?.length === 0)">
-
   <form [formGroup]="workStackGroupForm">
     <app-panels
       *ngIf="workGroup?.groups"
@@ -22,7 +21,6 @@
         mode="indeterminate"
         *ngIf="paginationLoading"
       ></mat-progress-bar>
-  
 
       <mat-paginator
         *ngIf="
