@@ -37,7 +37,6 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   userRecordContext: UserRecordOptions = {}
 
-  $dest
   userSession: {
     userInfo: UserInfo
     nameForm: NameForm

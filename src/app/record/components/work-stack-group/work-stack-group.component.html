@@ -34,7 +34,10 @@
       >
       </mat-paginator>
       <ng-container *ngIf="workGroup.groups.length > 0">
-        <div class="row works-buttons orc-font-body-small">
+        <div
+          class="row works-buttons orc-font-body-small"
+          *ngIf="!isPublicRecord"
+        >
           <div class="select-all">
             <p>
               <mat-checkbox (change)="checked($event)" [(ngModel)]="selectAll">
