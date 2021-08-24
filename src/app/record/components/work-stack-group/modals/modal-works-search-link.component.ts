@@ -35,26 +35,24 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
     this._recordWorksService
       .loadWorkImportWizardList()
       .pipe(takeUntil(this.$destroy))
-      .subscribe(
-        (recordImportWizards) => {
-          this.recordImportWizardsOriginal = recordImportWizards
-          this.recordImportWizards = this.recordImportWizardsOriginal
-          recordImportWizards.forEach((recordImportWizard) => {
-            recordImportWizard.actTypes.forEach((actType) => {
-              if (!this.workTypes.includes(actType)) {
-                this.workTypes.push(actType)
-              }
-            })
-
-            recordImportWizard.geoAreas.forEach((geoArea) => {
-              if (!this.geographicalAreas.includes(geoArea)) {
-                this.geographicalAreas.push(geoArea)
-              }
-            })
+      .subscribe((recordImportWizards) => {
+        this.recordImportWizardsOriginal = recordImportWizards
+        this.recordImportWizards = this.recordImportWizardsOriginal
+        recordImportWizards.forEach((recordImportWizard) => {
+          recordImportWizard.actTypes.forEach((actType) => {
+            if (!this.workTypes.includes(actType)) {
+              this.workTypes.push(actType)
+            }
           })
-          this.loadingWorks = false
-        }
-      )
+
+          recordImportWizard.geoAreas.forEach((geoArea) => {
+            if (!this.geographicalAreas.includes(geoArea)) {
+              this.geographicalAreas.push(geoArea)
+            }
+          })
+        })
+        this.loadingWorks = false
+      })
   }
 
   searchAndLink() {

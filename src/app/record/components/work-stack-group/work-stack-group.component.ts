@@ -30,7 +30,6 @@ import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/m
 import { WorkStackComponent } from '../work-stack/work-stack.component'
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
 import { UserInfo } from '../../../types'
-import { ModalWorksSearchLinkComponent } from './modals/modal-works-search-link.component'
 import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component'
 
 @Component({

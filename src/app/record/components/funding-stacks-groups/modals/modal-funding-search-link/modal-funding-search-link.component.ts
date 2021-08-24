@@ -31,13 +31,11 @@ export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
     this._recordFundingsService
       .loadFundingImportWizardList()
       .pipe(takeUntil(this.$destroy))
-      .subscribe(
-        (recordImportWizards) => {
-          this.recordImportWizardsOriginal = recordImportWizards
-          this.recordImportWizards = this.recordImportWizardsOriginal
-          this.loadingFunding = false
-        }
-      )
+      .subscribe((recordImportWizards) => {
+        this.recordImportWizardsOriginal = recordImportWizards
+        this.recordImportWizards = this.recordImportWizardsOriginal
+        this.loadingFunding = false
+      })
   }
 
   saveEvent() {
