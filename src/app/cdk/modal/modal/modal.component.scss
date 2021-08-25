@@ -3,12 +3,15 @@
   display: flex;
 
   .content-wrapper {
-    max-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-bottom: 40px;
-    padding-inline-start: 16px;
-    padding-inline-end: 12px;
+
+
+    mat-dialog-content {
+      overflow-x: hidden;
+      margin: 0;
+      padding-bottom: 40px;
+      padding-inline-start: 16px;
+      padding-inline-end: 12px;
+    }
   }
   .columns-4-or-8 .content-wrapper {
     padding-inline-end: 18px;

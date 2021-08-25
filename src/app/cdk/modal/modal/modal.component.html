@@ -16,7 +16,9 @@
       [ngClass]="{ l9: !noSidebar, l12: noSidebar }"
     >
       <div class="container no-padding">
-        <ng-content></ng-content>
+        <mat-dialog-content>
+          <ng-content></ng-content>
+        </mat-dialog-content>
       </div>
     </div>
     <div class="col l3 no-padding side-bar" *ngIf="columns12 && !noSidebar">
