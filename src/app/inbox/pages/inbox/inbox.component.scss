@@ -11,6 +11,7 @@ main#main {
   flex-direction: column;
   margin-bottom: $spacing-large;
   padding-top: 48px;
+  padding-inline-start: 16px;
 }
 
 app-side-bar {
