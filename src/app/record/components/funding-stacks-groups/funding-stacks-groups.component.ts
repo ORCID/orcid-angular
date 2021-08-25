@@ -29,8 +29,6 @@ export class FundingStacksGroupsComponent implements OnInit {
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
 
-  modalFundingComponent = ModalFundingComponent
-
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
   fundings: FundingGroup[]

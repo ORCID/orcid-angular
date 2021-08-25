@@ -159,28 +159,29 @@
         </mat-form-field>
       </div>
       <!-- SHOW-HIDE translated title button  -->
-      <div>
-        <div
-          class="row align-icon"
-          *ngIf="!showTranslationTitle"
+      <div class="row">
+        <a
+          class="col add-more translate-title no-gutters"
           (click)="showTranslationTitle = !showTranslationTitle"
         >
-          <button mat-icon-button color="primary">
-            <mat-icon>add</mat-icon>
-          </button>
-          <a i18n="@@funding.addTranslatedTitle">Add a translated title</a>
-        </div>
-
-        <div
-          class="row align-icon"
-          *ngIf="showTranslationTitle"
-          (click)="showTranslationTitle = !showTranslationTitle"
-        >
-          <button color="primary">
-            <mat-icon>add</mat-icon>
-          </button>
-          <a i18n="@@funding.hideTranslatedTitle">Hide translated title</a>
-        </div>
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span
+            class="mat-body-1"
+          >
+            <ng-container
+              i18n="@@funding.addTranslatedTitle"
+              *ngIf="!showTranslationTitle"
+            >
+              Add a translated title
+            </ng-container>
+            <ng-container
+              i18n="@@funding.hideTranslatedTitle"
+              *ngIf="showTranslationTitle"
+            >
+              Hide translated title
+            </ng-container>
+          </span>
+        </a>
       </div>
     </div>
     <!-- Funding project translations title -->
@@ -208,7 +209,7 @@
 
       <!-- Language of this title -->
       <div>
-        <div class="row">
+        <div class="row translate-title">
           <label for="language-title-input" class="mat-caption">
             <strong i18n="@@funding.translatedTitleLanguage"
               >Language of this title</strong
@@ -287,7 +288,7 @@
       </div>
       <!-- Currency  -->
       <div class="input-container">
-        <div class="col l4">
+        <div class="col l4 date">
           <mat-form-field
             id="currency-code-input"
             appearance="outline"
@@ -335,7 +336,7 @@
         </label>
       </div>
       <!--Start date year  -->
-      <div class="input-container date">
+      <div class="input-container">
         <div class="col l4 date">
           <mat-form-field
             id="start-date-year-input"
@@ -371,13 +372,15 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.invalidDate"
-          *ngIf="fundingForm.get('startDateGroup').errors?.date"
-        >
-          Invalid date
-        </mat-error>
+        <div class="row">
+          <mat-error
+            class="mat-caption"
+            i18n="@@shared.invalidDate"
+            *ngIf="fundingForm.get('startDateGroup').errors?.date"
+          >
+            Invalid date
+          </mat-error>
+        </div>
       </div>
     </div>
 
@@ -395,7 +398,7 @@
         </label>
       </div>
       <!-- End date year  -->
-      <div class="input-container date">
+      <div class="input-container">
         <div class="col l4 date">
           <mat-form-field
             id="end-date-year-input"
@@ -431,13 +434,15 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.invalidDate"
-          *ngIf="fundingForm.get('endDateGroup').errors?.date"
-        >
-          Invalid date
-        </mat-error>
+        <div class="row">
+          <mat-error
+            class="mat-caption"
+            i18n="@@shared.invalidDate"
+            *ngIf="fundingForm.get('endDateGroup').errors?.date"
+          >
+            Invalid date
+          </mat-error>
+        </div>
       </div>
     </div>
 
@@ -544,7 +549,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <label for="organization-input" class="mat-caption">
+      <label for="region-input" class="mat-caption">
         <strong i18n="@@shared.region">Region, State or County</strong>
       </label>
     </div>
@@ -674,7 +679,7 @@
 
           <!-- Funding relationship -->
           <div>
-            <div class="row">
+            <div class="row relationship">
               <label
                 for="given-names-input"
                 class="mat-caption"
@@ -719,9 +724,19 @@
       </ng-container>
 
       <!-- Add another -->
-      <div class="row align-icon" (click)="addAnotherGrant()">
-        <button mat-icon-button><mat-icon>add</mat-icon></button>
-        <a i18n="@@funding.addAnotherGrant">Add another funding identifier</a>
+      <div class="row">
+        <a
+          class="col add-more funding no-gutters"
+          (click)="addAnotherGrant()"
+        >
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span
+            class="mat-body-1"
+            i18n="@@funding.addAnotherGrant"
+          >
+            Add another funding identifier
+          </span>
+        </a>
       </div>
     </div>
 
