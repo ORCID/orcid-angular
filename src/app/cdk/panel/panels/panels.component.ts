@@ -63,30 +63,35 @@ export class PanelsComponent implements OnInit {
   ) {}
 
   add(type: string, action?: ADD_EVENT_ACTION) {
-    switch (type) {
-      case 'employment':
-      case 'education':
-      case 'qualification':
-      case 'invited-position':
-      case 'distinction':
-      case 'membership':
-      case 'service':
-        this.openModal(ModalAffiliationsComponent, type)
-        break
-      case 'peer-review':
-        this.openModal(ModalPeerReviewsComponent)
-        break
-      case 'funding':
-        this.openModal(ModalFundingComponent)
-        break
-      case 'funding-search':
-        this.openModal(ModalFundingSearchLinkComponent)
-        break
-      case 'works-search':
-        this.openModal(ModalWorksSearchLinkComponent)
-        break
-      default:
-        break
+    const menuOption = this.addMenuOptions.find((x) => x.action === action)
+    if (menuOption && menuOption.modal) {
+      this.openModal(menuOption.modal, type)
+    } else {
+      switch (type) {
+        case 'employment':
+        case 'education':
+        case 'qualification':
+        case 'invited-position':
+        case 'distinction':
+        case 'membership':
+        case 'service':
+          this.openModal(ModalAffiliationsComponent, type)
+          break
+        case 'peer-review':
+          this.openModal(ModalPeerReviewsComponent)
+          break
+        case 'funding':
+          this.openModal(ModalFundingComponent)
+          break
+        case 'funding-search':
+          this.openModal(ModalFundingSearchLinkComponent)
+          break
+        case 'works-search':
+          this.openModal(ModalWorksSearchLinkComponent)
+          break
+        default:
+          break
+      }
     }
   }
 

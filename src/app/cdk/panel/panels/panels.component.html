@@ -13,9 +13,7 @@
 
       <div class="text-container">
         <div class="orc-font-body-large clickable" (click)="collapse()">
-          <strong>
-            {{ title }}
-          </strong>
+          <strong> {{ title }} </strong>
           <span
             *ngIf="currentAmount && total && currentAmount !== total"
             class="clickable"
@@ -31,7 +29,7 @@
           >
             ({{ currentAmount }})
           </span>
-          <span *ngIf="!currentAmount">(0)</span>
+          <span *ngIf="!currentAmount && currentAmount !== 0">(0)</span>
         </div>
         <ng-container> </ng-container>
       </div>
@@ -115,10 +113,12 @@
           </button>
         </ng-container>
         <ng-container *ngIf="type === 'works'">
-          <button mat-menu-item (click)="add('works-search')">
-            <ng-container i18n="@@shared.searchLink"
-              >Search & link</ng-container
-            >
+          <button
+            mat-menu-item
+            *ngFor="let option of addMenuOptions"
+            (click)="add('works', option.action)"
+          >
+            {{ option.label }}
           </button>
           <button mat-menu-item (click)="add('works')">
             <ng-container i18n="@@shared.addManually"

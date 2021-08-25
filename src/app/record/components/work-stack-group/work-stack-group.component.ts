@@ -1,3 +1,4 @@
+import { ComponentType } from '@angular/cdk/portal'
 import {
   Component,
   EventEmitter,
@@ -7,10 +8,15 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
+import { FormGroup } from '@angular/forms'
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
+import { MatDialog } from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
-import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { first } from 'rxjs/operators'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
@@ -20,17 +26,13 @@ import {
 } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
-import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
-import { ComponentType } from '@angular/cdk/portal'
-import { first } from 'rxjs/operators'
-import { MatDialog } from '@angular/material/dialog'
-import { PlatformInfoService } from '../../../cdk/platform-info'
-import { FormGroup } from '@angular/forms'
-import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
-import { WorkStackComponent } from '../work-stack/work-stack.component'
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox'
+
 import { UserInfo } from '../../../types'
 import { ModalDeleteItemsComponent } from '../modals/modal-delete-item/modal-delete-items.component'
+import { WorkModalComponent } from '../work-modal/work-modal.component'
+import { WorkStackComponent } from '../work-stack/work-stack.component'
+import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
+import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -53,6 +55,17 @@ export class WorkStackGroupComponent implements OnInit {
 
   userRecordContext: UserRecordOptions = {}
 
+  addMenuOptions = [
+    {
+      label: 'Add manually',
+      action: ADD_EVENT_ACTION.addManually,
+      modal: WorkModalComponent,
+    },
+    { label: 'Search & Link', action: ADD_EVENT_ACTION.searchAndLink },
+    { label: 'Add DOI', action: ADD_EVENT_ACTION.doi },
+    { label: 'Add PubMed ID', action: ADD_EVENT_ACTION.pubMed },
+    { label: 'Add BibTex', action: ADD_EVENT_ACTION.bibText },
+  ]
   modalExportWorksComponent = ModalExportWorksComponent
   modalCombineWorksComponent = ModalCombineWorksComponent
   modalDeleteWorksComponent = ModalDeleteItemsComponent
@@ -67,6 +80,7 @@ export class WorkStackGroupComponent implements OnInit {
   paginationTotalAmountOfWorks: number
   paginationIndex: number
   paginationPageSize: number
+  platform: PlatformInfo
   selectedWorks: string[] = []
   selectAll: false
 
@@ -94,6 +108,10 @@ export class WorkStackGroupComponent implements OnInit {
           this.total.emit(userRecord.works.groups.length)
         }
       })
+
+    this._platform.get().subscribe((platform) => {
+      this.platform = platform
+    })
   }
 
   trackByWorkGroup(index, item: WorkGroup) {

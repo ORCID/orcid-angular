@@ -108,9 +108,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       title: new FormControl(this.title, {}),
       startDateGroup: this._formBuilder.group(
         {
-          startDateDay: [''],
-          startDateMonth: [''],
-          startDateYear: [''],
+          startDateDay: ['', []],
+          startDateMonth: ['', []],
+          startDateYear: ['', []],
         },
         { validator: dateValidator('startDate') }
       ),

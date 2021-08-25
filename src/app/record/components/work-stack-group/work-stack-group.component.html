@@ -13,6 +13,7 @@
       [labelSortButton]="labelSortButton"
       [sortTypes]="['date', 'title', 'type']"
       [sortType]="'date'"
+      [addMenuOptions]="addMenuOptions"
       (sort)="sortEvent($event)"
       type="works"
     >
@@ -20,6 +21,7 @@
         mode="indeterminate"
         *ngIf="paginationLoading"
       ></mat-progress-bar>
+
       <mat-paginator
         *ngIf="
           workGroup.totalGroups > workGroup.groups.length ||
