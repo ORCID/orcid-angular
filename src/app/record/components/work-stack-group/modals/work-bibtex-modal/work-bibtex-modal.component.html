@@ -1,0 +1,28 @@
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@works.importBibTex"> Works - Import BibTeX </ng-container>
+  </app-modal-header>
+  <div class="row">
+    <div class="orc-font-small-print">
+      <p i18n="@@works.importCitations">
+        Import citations from BibTex (.bib) files, including files exported from Google Scholar.      </p>
+      <a
+        class="underline"
+        href="https://support.orcid.org/hc/en-us/articles/360006894794-Importing-works-from-a-BibTeX-file"
+        i18n="@@works.moreInformation"
+      >
+        More information on importing BibTeX files into ORCID
+      </a>
+    </div>
+  </div>
+  <div class="col l4 choose-bibtex">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveEvent()"
+        i18n="@@works.chooseBibTex"
+      >
+        Choose BibTeX file to import
+      </button>
+    </div>
+</app-modal>

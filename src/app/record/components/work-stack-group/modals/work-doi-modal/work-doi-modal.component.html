@@ -1,0 +1,46 @@
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@works.addFromDOI">Works - Add work from DOI</ng-container>
+  </app-modal-header>
+  <form [formGroup]="fundingExternalIdentifier">
+    <div class="row">
+      <div class="orc-font-small-print">
+        <p i18n="@@works.youCanUseFullDOI">
+          You can use the full DOI URL or just the identifier value.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <label
+        class="mat-caption"
+      >
+        <strong i18n="@@works.doiIdentifier">DOI identifier value or full URL</strong>
+      </label>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline" class="mat-form-field-min">
+        <input
+          id="given-names-input"
+          matInput
+          formControlName="externalId"
+        />
+  <!--      <mat-error-->
+  <!--        *ngIf="namesForm.get('givenNames').hasError('notPattern')"-->
+  <!--        i18n="@@topBar.invalidName"-->
+  <!--      >-->
+  <!--        Invalid name characters or format-->
+  <!--      </mat-error>-->
+      </mat-form-field>
+    </div>
+    <div class="col l4 retrieve-work">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="retrieveWork()"
+        i18n="@@works.retrieveWorkDOI"
+      >
+        Retrieve work details from DOI
+      </button>
+    </div>
+  </form>
+</app-modal>

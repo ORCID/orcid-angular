@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
-import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
-import { RecordImportWizard } from '../../../../types/record-peer-review-import.endpoint'
-import { RecordWorksService } from '../../../../core/record-works/record-works.service'
 import { takeUntil } from 'rxjs/operators'
+import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
+import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
+import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 
 @Component({
   selector: 'app-modal-works-search-link',
@@ -80,14 +80,6 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
         this.recordImportWizards.push(recordImportWizard)
       }
     })
-  }
-
-  saveEvent() {
-    this.loadingWorks = true
-  }
-
-  closeEvent() {
-    this.dialogRef.close()
   }
 
   ngOnDestroy() {

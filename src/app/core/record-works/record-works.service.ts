@@ -348,4 +348,10 @@ export class RecordWorksService {
       environment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
     )
   }
+
+  loadExternalId(externalId: string): Observable<any> {
+    return this._http.get(
+      environment.API_WEB + 'works/resolve/doi?value=' + externalId
+    )
+  }
 }

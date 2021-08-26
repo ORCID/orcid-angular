@@ -9,8 +9,8 @@ import { ModalAffiliationsComponent } from '../../../record/components/affiliati
 import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
-import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/modal-works-search-link.component'
 import { ModalFundingSearchLinkComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
+import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
 
 @Component({
   selector: 'app-panels',
