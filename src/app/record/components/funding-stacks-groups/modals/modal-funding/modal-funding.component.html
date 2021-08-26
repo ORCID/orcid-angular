@@ -185,7 +185,7 @@
       </div>
     </div>
     <!-- Funding project translations title -->
-    <div [hidden]="!showTranslationTitle">
+    <div [hidden]="!funding?.fundingTitle?.translatedTitle?.content || !showTranslationTitle">
       <div>
         <div class="row">
           <label
@@ -238,7 +238,15 @@
     <!-- Funding project link-->
     <div>
       <div class="row">
-        <label for="funding-project-link-input" class="mat-caption">
+        <label
+          for="funding-project-link-input"
+          class="mat-caption"
+          [ngClass]="{
+            error:
+              fundingForm.get('fundingProjectLink').hasError('pattern') &&
+              fundingForm.get('fundingProjectLink').touched
+          }"
+        >
           <strong i18n="@@funding.projectLink">Project link</strong>
         </label>
       </div>
@@ -254,6 +262,12 @@
             A link to the project supported by this funding. Links should be in
             full URL format e.g. http://www.website.com/page.html
           </mat-hint>
+          <mat-error
+            *ngIf="fundingForm.get('fundingProjectLink').hasError('pattern')"
+            i18n="@@funding.invalidUrl"
+          >
+            Invalid URL
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
