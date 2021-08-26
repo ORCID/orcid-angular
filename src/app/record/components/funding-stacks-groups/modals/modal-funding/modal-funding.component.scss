@@ -38,6 +38,11 @@ hr {
   text-decoration: underline;
 }
 
+mat-radio-button {
+  margin-top: 16px;
+  padding-left: 2px;
+}
+
 .date-container {
   display: flex;
   flex-direction: row;
@@ -50,10 +55,19 @@ hr {
   }
 }
 
-.align-icon {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.add-more {
+  span {
+    margin: auto;
+    padding-left: 6px;
+  }
+}
+
+.funding {
+  margin-top: 26px;
+}
+
+.translate-title {
+  margin-bottom: 26px;
 }
 
 .required-information {
@@ -79,8 +93,9 @@ mat-radio-group {
     padding-bottom: 0px !important;
   }
   padding-bottom: 1.475em;
+  padding-left: 0;
 }
 
 .description {
-  margin-top: 16px !important;
+  margin-top: 26px !important;
 }

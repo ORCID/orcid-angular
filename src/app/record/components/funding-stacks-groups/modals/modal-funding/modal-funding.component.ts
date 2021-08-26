@@ -59,6 +59,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   @Input() type: string
   @Input() funding: Funding
+  @Input() options: { createACopy: boolean }
 
   platform: PlatformInfo
   fundingForm: FormGroup
@@ -313,8 +314,100 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.loadingFunding = false
       this.disambiguatedFundingSourceId = this.funding.disambiguatedFundingSourceId?.value
       this.disambiguatedFundingSource = this.funding.disambiguationSource?.value
+      this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
+        ?.content
     } else {
       this.loadingFunding = false
+    }
+  }
+
+  formToBackendAffiliation(): Funding {
+    return {
+      visibility: {
+        visibility: this.fundingForm.get('visibility').value
+          ? this.fundingForm.get('visibility').value
+          : this.defaultVisibility,
+      },
+      putCode: {
+        value: this.options?.createACopy ? null : this.funding?.putCode?.value,
+      },
+      fundingTitle: {
+        title: this.fundingForm.value.fundingProjectTitle,
+        errors: [],
+        translatedTitle: {
+          content: this.fundingForm.value.translatedTitleContent,
+          languageCode: this.fundingForm.value.translatedTitleLanguage,
+          errors: [],
+        },
+      },
+      description: {
+        value: this.fundingForm.value.description,
+      },
+      organizationDefinedFundingSubType: {
+        subtype: this.fundingForm.value.fundingSubtype,
+        alreadyIndexed: false, // what value should be here ?
+      },
+      fundingName: {
+        value: this.fundingForm.value.agencyName,
+      },
+      fundingType: {
+        value: this.fundingForm.value.fundingType,
+      },
+      currencyCode: {
+        value: this.fundingForm.value.currencyCode,
+      },
+      amount: {
+        value: this.fundingForm.value.amount,
+      },
+      url: {
+        value: this.fundingForm.value.fundingProjectLink,
+      },
+      startDate: {
+        month: this.addTrailingZero(
+          this.fundingForm.get('startDateGroup.startDateMonth').value
+        ),
+        year: this.fundingForm.get('startDateGroup.startDateYear').value,
+      },
+      endDate: {
+        month: this.addTrailingZero(
+          this.fundingForm.get('endDateGroup.endDateMonth').value
+        ),
+        year: this.fundingForm.get('endDateGroup.endDateYear').value,
+      },
+      externalIdentifiers: this.fundingForm.value.grants.map((grant) => {
+        return {
+          externalIdentifierId: grant.grantNumber,
+          externalIdentifierType: FundingExternalIndentifierType.grant_number, // is it allways grant_number?
+          url: grant.grantUrl,
+          relationship: grant.fundingRelationship,
+        }
+      }),
+      contributors: this.funding?.contributors,
+      disambiguatedFundingSourceId: {
+        value: this.disambiguatedFundingSourceId,
+      },
+      disambiguationSource: {
+        value: this.disambiguatedFundingSource,
+      },
+      city: {
+        value: this.fundingForm.value.city,
+      },
+      region: {
+        value: this.fundingForm.value.region,
+      },
+      country: {
+        value: this.countryCodes.find(
+          (x) => x.key === this.fundingForm.get('country').value
+        ).value,
+      },
+      source: this.options?.createACopy ? null : this.funding?.source,
+      sourceName: this.funding?.sourceName,
+      dateSortString: this.funding?.dateSortString,
+      assertionOriginClientId: this.funding?.assertionOriginClientId,
+      assertionOriginName: this.funding?.assertionOriginName,
+      assertionOriginOrcid: this.funding?.assertionOriginOrcid,
+      countryForDisplay: this.funding?.countryForDisplay,
+      fundingTypeForDisplay: this.funding?.fundingTypeForDisplay,
     }
   }
 
@@ -338,94 +431,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   saveEvent() {
     this.fundingForm.markAllAsTouched()
     if (this.fundingForm.valid) {
-      const fundingObj: Funding = {
-        visibility: {
-          visibility: this.fundingForm.get('visibility').value
-            ? this.fundingForm.get('visibility').value
-            : this.defaultVisibility,
-        },
-        putCode: {
-          value: this.funding?.putCode?.value,
-        },
-        fundingTitle: {
-          title: this.fundingForm.value.fundingProjectTitle,
-          errors: [],
-          translatedTitle: {
-            content: this.fundingForm.value.translatedTitleContent,
-            languageCode: this.fundingForm.value.translatedTitleLanguage,
-            errors: [],
-          },
-        },
-        description: {
-          value: this.fundingForm.value.description,
-        },
-        organizationDefinedFundingSubType: {
-          subtype: this.fundingForm.value.fundingSubtype,
-          alreadyIndexed: false, // what value should be here ?
-        },
-        fundingName: {
-          value: this.fundingForm.value.agencyName,
-        },
-        fundingType: {
-          value: this.fundingForm.value.fundingType,
-        },
-        currencyCode: {
-          value: this.fundingForm.value.currencyCode,
-        },
-        amount: {
-          value: this.fundingForm.value.amount,
-        },
-        url: {
-          value: this.fundingForm.value.fundingProjectLink,
-        },
-        startDate: {
-          month: this.addTrailingZero(
-            this.fundingForm.get('startDateGroup.startDateMonth').value
-          ),
-          year: this.fundingForm.get('startDateGroup.startDateYear').value,
-        },
-        endDate: {
-          month: this.addTrailingZero(
-            this.fundingForm.get('endDateGroup.endDateMonth').value
-          ),
-          year: this.fundingForm.get('endDateGroup.endDateYear').value,
-        },
-        externalIdentifiers: this.fundingForm.value.grants.map((grant) => {
-          return {
-            externalIdentifierId: grant.grantNumber,
-            externalIdentifierType: FundingExternalIndentifierType.grant_number, // is it allways grant_number?
-            url: grant.grantUrl,
-            relationship: grant.fundingRelationship,
-          }
-        }),
-        // contributors?: Contributor[]  what should go here ?
-        disambiguatedFundingSourceId: {
-          value: this.disambiguatedFundingSourceId,
-        },
-        disambiguationSource: {
-          value: this.disambiguatedFundingSource,
-        },
-        city: {
-          value: this.fundingForm.value.city,
-        },
-        region: {
-          value: this.fundingForm.value.region,
-        },
-        country: {
-          value: this.countryCodes.find(
-            (x) => x.key === this.fundingForm.get('country').value
-          ).value,
-        },
-      }
-
       this._fundingsService
-        .save(fundingObj)
+        .save(this.formToBackendAffiliation())
         .pipe(first())
         .subscribe(() => {
           this.closeEvent()
         })
-    } else {
-      // console.log(this.fundingForm.errors)
     }
   }
 
