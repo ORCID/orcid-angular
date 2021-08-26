@@ -314,7 +314,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.loadingFunding = false
       this.disambiguatedFundingSourceId = this.funding.disambiguatedFundingSourceId?.value
       this.disambiguatedFundingSource = this.funding.disambiguationSource?.value
-      this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle?.content
+      this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
+        ?.content
     } else {
       this.loadingFunding = false
     }
@@ -328,9 +329,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           : this.defaultVisibility,
       },
       putCode: {
-        value: this.options?.createACopy
-          ? null
-          : this.funding?.putCode?.value,
+        value: this.options?.createACopy ? null : this.funding?.putCode?.value,
       },
       fundingTitle: {
         title: this.fundingForm.value.fundingProjectTitle,
@@ -408,7 +407,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       assertionOriginName: this.funding?.assertionOriginName,
       assertionOriginOrcid: this.funding?.assertionOriginOrcid,
       countryForDisplay: this.funding?.countryForDisplay,
-      fundingTypeForDisplay: this.funding?.fundingTypeForDisplay
+      fundingTypeForDisplay: this.funding?.fundingTypeForDisplay,
     }
   }
 

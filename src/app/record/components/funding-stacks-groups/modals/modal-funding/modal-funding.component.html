@@ -165,9 +165,7 @@
           (click)="showTranslationTitle = !showTranslationTitle"
         >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span
-            class="mat-body-1"
-          >
+          <span class="mat-body-1">
             <ng-container
               i18n="@@funding.addTranslatedTitle"
               *ngIf="!showTranslationTitle"
@@ -185,7 +183,12 @@
       </div>
     </div>
     <!-- Funding project translations title -->
-    <div [hidden]="!funding?.fundingTitle?.translatedTitle?.content || !showTranslationTitle">
+    <div
+      [hidden]="
+        !funding?.fundingTitle?.translatedTitle?.content ||
+        !showTranslationTitle
+      "
+    >
       <div>
         <div class="row">
           <label
@@ -739,15 +742,9 @@
 
       <!-- Add another -->
       <div class="row">
-        <a
-          class="col add-more funding no-gutters"
-          (click)="addAnotherGrant()"
-        >
+        <a class="col add-more funding no-gutters" (click)="addAnotherGrant()">
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span
-            class="mat-body-1"
-            i18n="@@funding.addAnotherGrant"
-          >
+          <span class="mat-body-1" i18n="@@funding.addAnotherGrant">
             Add another funding identifier
           </span>
         </a>
