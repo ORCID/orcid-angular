@@ -7,8 +7,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms'
-import { MatDialogRef } from '@angular/material/dialog'
-import { map } from 'rxjs/operators'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { map, startWith } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
@@ -17,6 +17,7 @@ import { RecordWorksService } from 'src/app/core/record-works/record-works.servi
 import { dateValidator } from 'src/app/shared/validators/date/date.validator'
 import { Visibility } from 'src/app/types/common.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
+import { UserRecord } from 'src/app/types/record.local'
 import {
   CitationTypes,
   DayOption,
@@ -47,6 +48,7 @@ export class WorkModalComponent implements OnInit {
   loading = true
   workForm: FormGroup
   platform: PlatformInfo
+  work: Work
 
   showTranslationTitle = false
 
@@ -81,7 +83,8 @@ export class WorkModalComponent implements OnInit {
     private _platform: PlatformInfoService,
     private _workService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
-    @Inject(WINDOW) private _window: Window
+    @Inject(WINDOW) private _window: Window,
+    @Inject(MAT_DIALOG_DATA) public data: UserRecord
   ) {}
 
   ngOnInit(): void {
@@ -91,28 +94,31 @@ export class WorkModalComponent implements OnInit {
     this._workService.getWork().subscribe((emptyWork) => {
       this.loading = false
       this.workForm = this._fb.group({
-        workCategory: ['', [Validators.required]],
-        workType: ['', [Validators.required]],
-        title: ['', [Validators.required]],
-        translatedTitleContent: ['', []],
-        translatedTitleLanguage: ['', []],
-        subtitle: ['', []],
-        journalTitle: ['', []],
+        workCategory: [
+          this.work?.workCategory?.value || '',
+          [Validators.required],
+        ],
+        workType: [this.work?.workType?.value || '', [Validators.required]],
+        title: [this.work?.title?.value || '', [Validators.required]],
+        translatedTitleContent: [this.work?.translatedTitle?.content || '', []],
+        translatedTitleLanguage: [
+          this.work?.translatedTitle?.languageCode || '',
+          [],
+        ],
+        subtitle: [this.work?.subtitle?.value || '', []],
+        journalTitle: [this.work?.journalTitle?.value || '', []],
         startDateGroup: this._fb.group(
           {
-            startDateDay: ['', []],
-            startDateMonth: ['', []],
-            startDateYear: ['', []],
+            startDateDay: [this.work?.createdDate?.day || '', []],
+            startDateMonth: [this.work?.createdDate?.month || '', []],
+            startDateYear: [this.work?.createdDate?.year || '', []],
           },
           { validator: dateValidator('startDate') }
         ),
-        publicationDateYear: ['', []],
-        publicationDateMonth: ['', []],
-        publicationDateDay: ['', []],
-        url: ['', [Validators.pattern(URL_REGEXP)]],
-        citationType: ['', []],
-        citation: ['', []],
-        shortDescription: ['', []],
+        url: [this.work?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
+        citationType: [this.work?.citation?.citationType || '', []],
+        citation: [this.work?.citation?.citation || '', []],
+        shortDescription: [this.work?.shortDescription?.value || '', []],
         workIdentifiers: new FormArray([
           this._fb.group({
             externalIdentifierType: ['', []],
@@ -121,29 +127,44 @@ export class WorkModalComponent implements OnInit {
             externalRelationship: [WorkRelationships.self, []],
           }),
         ]),
-        languageCode: ['', []],
-        countryCode: ['', []],
+        languageCode: [this.work?.languageCode?.value || '', []],
+        countryCode: [this.work?.countryCode?.value || '', []],
 
-        visibility: [(emptyWork.visibility as Visibility).visibility, []],
+        visibility: [
+          this.work?.visibility?.visibility || emptyWork.visibility.visibility,
+          [],
+        ],
       })
-      this.workForm.get('workCategory').valueChanges.subscribe((value) => {
-        this.workTypes = WorkTypesByCategory[value as WorkCategories]
-      })
-      this.workForm.get('workType').valueChanges.subscribe((value) => {
-        if (this.workForm.value['workCategory'] && value) {
-          this.dynamicTitle =
-            WorkTypesTitle[this.workForm.value['workCategory']][value]
-        }
-      })
-      this.workForm.get('citationType').valueChanges.subscribe((value) => {
-        if (value !== '') {
-          this.workForm.controls.citation.setValidators([Validators.required])
-          this.workForm.controls.citation.updateValueAndValidity()
-        } else {
-          this.workForm.controls.citation.clearValidators()
-          this.workForm.controls.citation.updateValueAndValidity()
-        }
-      })
+      this.workForm
+        .get('workCategory')
+        .valueChanges.pipe(startWith(this.workForm.value['workCategory']))
+        .subscribe((value) => {
+          if (value) {
+            this.workTypes = WorkTypesByCategory[value as WorkCategories]
+          }
+        })
+
+      this.workForm
+        .get('workType')
+        .valueChanges.pipe(startWith(this.workForm.value['workType']))
+        .subscribe((value) => {
+          if (value && this.workForm.value['workCategory'] && value) {
+            this.dynamicTitle =
+              WorkTypesTitle[this.workForm.value['workCategory']][value]
+          }
+        })
+      this.workForm
+        .get('citationType')
+        .valueChanges.pipe(startWith(this.workForm.value['citationType']))
+        .subscribe((value) => {
+          if (value !== '') {
+            this.workForm.controls.citation.setValidators([Validators.required])
+            this.workForm.controls.citation.updateValueAndValidity()
+          } else {
+            this.workForm.controls.citation.clearValidators()
+            this.workForm.controls.citation.updateValueAndValidity()
+          }
+        })
       this.workIdentifiersArray = this.workForm.controls
         .workIdentifiers as FormArray
 
