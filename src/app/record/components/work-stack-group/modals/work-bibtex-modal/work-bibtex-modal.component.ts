@@ -255,7 +255,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   updateCheckAll() {
     this.worksFromBibtex.forEach((work) => {
-      console.log(work.putCode.value)
       if (this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)) {
         if (!!this.selectAll === false) {
           this.selectedWorks = this.selectedWorks.filter(
@@ -289,6 +288,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     this.loadingWorks = true
     if (this.selectedWorks.length > 0 ) {
       this.selectedWorks.forEach((work, index) => {
+        work.putCode = null
         this._recordWorksService.save(work)
           .subscribe(() => {
             if (index === this.selectedWorks.length - 1) {
