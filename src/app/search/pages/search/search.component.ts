@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core'
+import { Component, OnDestroy, OnInit, Optional } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SearchService } from '../../../core/search/search.service'
 import { tap, switchMap, retry, catchError } from 'rxjs/operators'
@@ -7,13 +7,14 @@ import { SearchResults } from 'src/app/types'
 import { SearchParameters } from 'src/app/types'
 import { Meta } from '@angular/platform-browser'
 import { EMPTY } from 'rxjs'
+import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   searchResults: SearchResults
   searchParams
   pageIndex: number
@@ -26,9 +27,10 @@ export class SearchComponent implements OnInit {
     route: ActivatedRoute,
     private _searchService: SearchService,
     @Optional() private router: Router,
-    meta: Meta
+    meta: Meta,
+    private _robotsMetadata: RobotsMetaTagsService
   ) {
-    meta.updateTag({ name: 'robots', content: 'NOINDEX, NOFOLLOW' })
+    this._robotsMetadata.disallowRobots()
     route.queryParams
       .pipe(
         // Set the query parameters to the advanced search
@@ -50,6 +52,9 @@ export class SearchComponent implements OnInit {
         this.loadingNewResults = false
         this.searchResults = data
       })
+  }
+  ngOnDestroy(): void {
+    this._robotsMetadata.restoreEnvironmentRobotsConfig()
   }
 
   changePage(event: PageEvent) {

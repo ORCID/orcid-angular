@@ -15,4 +15,6 @@ export interface UserInfo {
   LAST_MODIFIED: string
   SELF_SERVICE_MENU?: string
   RECORD_WITH_ISSUES: boolean
+  USER_NOT_FOUND: boolean
+
 }

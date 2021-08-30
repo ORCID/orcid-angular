@@ -1,3 +1,4 @@
+import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util'
 import { Injectable } from '@angular/core'
 import { Meta } from '@angular/platform-browser'
 import { environment } from 'src/environments/environment'
@@ -12,22 +13,21 @@ export class RobotsMetaTagsService {
 
   constructor(private meta: Meta) {}
 
-  addRobotMetaTags(): HTMLMetaElement[] {
-    return this.meta.addTags([
-      { name: this.google, content: 'noindex' },
-      {
-        name: this.robots,
-        content: 'noindex',
-      },
-      ,
-      { name: this.baiduSpider, content: 'noindex' },
-    ])
+  disallowRobots() {
+    return this.meta.updateTag({
+      name: this.robots,
+      content: 'noindex, nofollow',
+    })
   }
-  removeRobotMetaTags() {
-    if (!environment.production) {
-      this.meta.removeTag(`property="${this.google}"`)
-      this.meta.removeTag(`property="${this.robots}"`)
-      this.meta.removeTag(`property="${this.baiduSpider}"`)
+  restoreEnvironmentRobotsConfig() {
+    if (environment.ROBOTS) {
+      this.meta.updateTag({ name: this.robots, content: environment.ROBOTS })
+    } else {
+      // If not defined by the environment do not allow robots
+      this.meta.updateTag({
+        name: this.robots,
+        content: 'noindex, nofollow',
+      })
     }
   }
 }

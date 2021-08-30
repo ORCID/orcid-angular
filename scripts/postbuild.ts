@@ -12,6 +12,7 @@ import { getOptionsObjet, save } from './utils'
 import { renameSync, readFileSync } from 'fs'
 import { zendeskPlugin } from './zend-desk.postbuild'
 import { createShareAssetsFolder } from './moveToShareFolder.postbuild'
+import { robotsMetadata } from './robots-metada.postbuild'
 const glob = require('glob')
 // Run updates on index.html files across languages
 glob
@@ -25,6 +26,7 @@ glob
     data = hotjarAnalytics(data, options)
     data = zendeskPlugin(data, options)
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
+    data = robotsMetadata(data, options)
     save(data, options)
   })
 

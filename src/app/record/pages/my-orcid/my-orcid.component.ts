@@ -35,7 +35,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   expandedResearchResources: boolean
   expandedPeerReview: boolean
   recordWithIssues: boolean
-  loading = false
+  userNotFound: boolean
 
   constructor(
     _userInfoService: UserInfoService,
@@ -95,10 +95,10 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+        this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
-        this.loading = true
-        if (this.publicOrcid && this.recordWithIssues) {
-          this._robotsMeta.addRobotMetaTags()
+        if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
+          this._robotsMeta.disallowRobots()
         }
       })
 
@@ -110,7 +110,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.publicOrcid) {
       this._openGraph.removeOpenGraphData()
-      this._robotsMeta.removeRobotMetaTags()
+      this._robotsMeta.restoreEnvironmentRobotsConfig()
     }
   }
 
