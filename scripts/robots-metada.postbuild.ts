@@ -8,9 +8,6 @@ export function robotsMetadata(indexHtml: string, options) {
     console.warn(
       'This build will disallow robots with `noindex, nofollow` since the parameters are not defined on the environment variables'
     )
-    return indexHtml.replace(
-      `[ROBOTS_PARAMETERS]`,
-      `noindex, nofollow`
-    )
+    return indexHtml.replace(`[ROBOTS_PARAMETERS]`, `noindex, nofollow`)
   }
 }

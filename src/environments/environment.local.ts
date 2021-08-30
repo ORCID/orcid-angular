@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   debugger: true,
-  ROBOTS: "all",
+  ROBOTS: 'all',
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_NEWS_DEPRECATED: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.dev.orcid.org/v3.0',

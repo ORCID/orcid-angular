@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   debugger: false,
-  ROBOTS: "all",
+  ROBOTS: 'all',
   API_NEWS_DEPRECATED: 'https://orcid.org/blog/feed',
   API_NEWS: 'https://info.orcid.org/feed/',
   API_PUB: '//pub.orcid.org/v3.0',
