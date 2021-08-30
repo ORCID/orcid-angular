@@ -13,19 +13,8 @@
       </ng-container>
       <div *ngIf="topPanelOfTheStackMode || !clickableSource">
         <strong i18n="@@record.source">Source</strong>:
-        <ng-container
-          *ngIf="
-            (assertionOriginName ||
-              assertionOriginOrcid ||
-              assertionOriginClientId) &&
-            assertionOriginName !== sourceName
-          "
-        >
-          {{
-            assertionOriginName ||
-              assertionOriginOrcid ||
-              assertionOriginClientId
-          }}
+        <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
+          {{ assertionOriginName || assertionOriginOrcid }}
           <i i18n="@@shared.onBehalfOf">via</i>
         </ng-container>
         {{ sourceName }}
