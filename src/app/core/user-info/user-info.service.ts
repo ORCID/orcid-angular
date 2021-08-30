@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { isEmpty } from 'lodash'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { UserInfo } from 'src/app/types'
@@ -24,6 +25,7 @@ export class UserInfoService {
       )
       .pipe(
         map((value) => {
+          value.USER_NOT_FOUND = isEmpty(value)
           value.RECORD_WITH_ISSUES = !!(
             value.IS_LOCKED === 'true' ||
             value.IS_DEACTIVATED === 'true' ||
