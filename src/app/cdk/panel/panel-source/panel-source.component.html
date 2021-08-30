@@ -15,10 +15,17 @@
         <strong i18n="@@record.source">Source</strong>:
         <ng-container
           *ngIf="
-            assertionOriginClientId && assertionOriginClientId !== sourceName
+            (assertionOriginName ||
+              assertionOriginOrcid ||
+              assertionOriginClientId) &&
+            assertionOriginName !== sourceName
           "
         >
-          {{ assertionOriginName || assertionOriginOrcid }}
+          {{
+            assertionOriginName ||
+              assertionOriginOrcid ||
+              assertionOriginClientId
+          }}
           <i i18n="@@shared.onBehalfOf">via</i>
         </ng-container>
         {{ sourceName }}
