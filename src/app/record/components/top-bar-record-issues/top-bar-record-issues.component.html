@@ -2,8 +2,8 @@
   <mat-icon>error</mat-icon>
   <ng-container
     *ngIf="userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD"
-    i18n="@@record.noPublicInfo"
-    >No public information available.
+    i18n="@@record.deactivatedRecord"
+    >This ORCID Record is deactivated
   </ng-container>
 
   <ng-container
