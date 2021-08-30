@@ -1,7 +1,49 @@
 .choose-bibtex {
   padding: 0;
   margin-top: 16px;
+
   button {
     width: 100%;
+  }
+}
+
+.work-info {
+  margin-bottom: 16px;
+  width: 100%;
+  word-break: break-word;
+
+  div {
+    word-break: break-word;
+
+    h2 {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    ::ng-deep .mat-checkbox-inner-container {
+      margin: 0 !important;
+      margin-right: 8px !important;
+    }
+
+    .details {
+      margin-left: 24px;
+    }
+
+    .added {
+      margin-left: 16px;
+    }
+  }
+}
+
+.no-info {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  mat-icon {
+    margin-inline-end: 4px;
   }
 }

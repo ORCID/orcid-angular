@@ -16,7 +16,7 @@ import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
@@ -35,7 +35,7 @@ import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/m
 import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
 import { WorksVisibilityModalComponent } from '../work/modals/works-visibility-modal/works-visibility-modal.component'
 import { ModalWorksSearchLinkComponent } from './modals/work-search-link-modal/modal-works-search-link.component'
-import { WorkDoiModalComponent } from './modals/work-doi-modal/work-doi-modal.component'
+import { WorkExternalIdModalComponent } from './modals/work-external-id-modal/work-external-id-modal.component'
 import { WorkBibtexModalComponent } from './modals/work-bibtex-modal/work-bibtex-modal.component'
 
 @Component({
@@ -73,11 +73,14 @@ export class WorkStackGroupComponent implements OnInit {
     {
       label: 'Add DOI',
       action: ADD_EVENT_ACTION.doi,
-      modal: WorkDoiModalComponent,
+      modal: WorkExternalIdModalComponent,
+      type: EXTERNAL_ID_TYPE_WORK.doi
     },
     {
       label: 'Add PubMed ID',
-      action: ADD_EVENT_ACTION.pubMed
+      action: ADD_EVENT_ACTION.pubMed,
+      modal: WorkExternalIdModalComponent,
+      type: EXTERNAL_ID_TYPE_WORK.pubMed
     },
     {
       label: 'Add BibTex',

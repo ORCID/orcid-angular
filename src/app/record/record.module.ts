@@ -64,7 +64,7 @@ import { SearchLinkWizardComponent } from './components/search-link-wizard/searc
 import { WorksVisibilityModalComponent } from './components/work/modals/works-visibility-modal/works-visibility-modal.component'
 import { WorkBibtexModalComponent } from './components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
 import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component';
-import { WorkDoiModalComponent } from './components/work-stack-group/modals/work-doi-modal/work-doi-modal.component'
+import { WorkExternalIdModalComponent } from './components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
 
 @NgModule({
   declarations: [
@@ -107,7 +107,7 @@ import { WorkDoiModalComponent } from './components/work-stack-group/modals/work
     SearchLinkWizardComponent,
     WorksVisibilityModalComponent,
     WorkBibtexModalComponent,
-    WorkDoiModalComponent,
+    WorkExternalIdModalComponent,
   ],
   imports: [
     CommonModule,

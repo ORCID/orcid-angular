@@ -1,11 +1,33 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@works.importBibTex"> Works - Import BibTeX </ng-container>
+    <ng-container i18n="@@works.importBibTex"> Works - Import BibTeX</ng-container>
   </app-modal-header>
+  <app-modal-footer *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      id="import-button"
+    >
+      <ng-container i18n="@@works.importWork">
+        Import work to your record
+      </ng-container>
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
   <div class="row">
     <div class="orc-font-small-print">
       <p i18n="@@works.importCitations">
-        Import citations from BibTex (.bib) files, including files exported from Google Scholar.      </p>
+        Import citations from BibTex (.bib) files, including files exported from Google Scholar.
+      </p>
       <a
         class="underline"
         href="https://support.orcid.org/hc/en-us/articles/360006894794-Importing-works-from-a-BibTeX-file"
@@ -15,14 +37,93 @@
       </a>
     </div>
   </div>
-  <div class="col l4 choose-bibtex">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="saveEvent()"
-        i18n="@@works.chooseBibTex"
+  <div
+    class="col l4 choose-bibtex"
+    *ngIf="worksFromBibtex.length === 0"
+  >
+    <input
+      #bibTexInput
+      [hidden]="true"
+      type="file"
+      onclick="this.value=null"
+      (change)="bibTexInputChange($event)"
+      accept=".bib"
+    />
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="bibTexInput.click()"
+      i18n="@@works.chooseBibTex"
+    >
+      Choose BibTeX file to import
+    </button>
+    <mat-error *ngIf="bibtexParsingError">
+      {{ bibtexParsingErrorText }}
+    </mat-error>
+  </div>
+  <ng-container *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
+    <div class="row">
+      <h3>
+        <ng-container i18n="@@works.foundInBibTex">
+          Works found in BibTeX
+        </ng-container>
+        ({{ selectedWorks.length }})
+      </h3>
+      <mat-divider class="row orcid-divider"></mat-divider>
+      <div class="row">
+        <div class="row">
+          <p>
+            <mat-checkbox
+              (change)="updateCheckAll()"
+              [(ngModel)]="selectAll"
+            >
+              <ng-container
+                i18n="@@shared.selectAll"
+                *ngIf="selectedWorks.length === 0"
+              >
+                Select all
+              </ng-container>
+              <ng-container *ngIf="selectedWorks.length > 0">
+                ({{ selectedWorks.length }})
+                <ng-container i18n="@@shared.selected">Selected</ng-container>
+              </ng-container>
+            </mat-checkbox>
+          </p>
+        </div>
+      </div>
+      <mat-divider class="row"></mat-divider>
+      <div
+        class="row"
+        [formGroup]="importForm"
+        *ngIf="worksFromBibtex.length > 0 && !loadingWorks"
       >
-        Choose BibTeX file to import
-      </button>
+        <ng-container *ngFor="let work of worksFromBibtex">
+          <div
+            class="row work-info"
+            [formGroupName]="work.putCode.value"
+          >
+            <div class="row">
+              <mat-checkbox
+                (change)="updateCheck(work)"
+                formControlName="checked"
+              >
+                <h2 class="orc-font-body">
+                  {{ work?.title?.value }}
+                </h2>
+                <p class="orc-font-body-small">
+                  {{ work.journalTitle.value }}
+                </p>
+                <p class="orc-font-body-small">
+                  {{ work.publicationDate | monthDayYearDateToString }}
+                  <span> | </span>
+                  {{ work.workType.value }}
+                </p>
+              </mat-checkbox>
+            </div>
+          </div>
+          <mat-divider class="row"></mat-divider>
+        </ng-container>
+      </div>
     </div>
+  </ng-container>
 </app-modal>

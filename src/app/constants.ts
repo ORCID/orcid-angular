@@ -110,6 +110,11 @@ export enum ADD_EVENT_ACTION {
   bibText,
 }
 
+export enum EXTERNAL_ID_TYPE_WORK {
+  doi,
+  pubMed,
+}
+
 export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']
 
 export const AMOUNT_OF_RETRIEVE_NOTIFICATIONS_PER_CALL = 10
