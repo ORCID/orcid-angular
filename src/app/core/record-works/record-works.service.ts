@@ -282,6 +282,16 @@ export class RecordWorksService {
       )
   }
 
+  visibility(putCodes: string[], visibility: VisibilityStrings): Observable<any> {
+    return this._http
+      .get(environment.API_WEB + 'works/' + putCodes.join(',') + '/visibility/' + visibility)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
   export(): Observable<any> {
     return this._http.get(environment.API_WEB + 'works/works.bib', {
       responseType: 'text',
