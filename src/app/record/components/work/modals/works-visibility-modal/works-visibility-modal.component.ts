@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 @Component({
   selector: 'app-works-visibility-modal',
   templateUrl: './works-visibility-modal.component.html',
-  styleUrls: ['./works-visibility-modal.component.scss']
+  styleUrls: ['./works-visibility-modal.component.scss'],
 })
 export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -22,30 +22,34 @@ export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordWorksService: RecordWorksService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.worksForm = new FormGroup({
-      visibility: new FormControl('PRIVATE', {})
+      visibility: new FormControl('PRIVATE', {}),
     })
 
     if (this.putCodes.length > 0) {
       this.loadingWorks = true
       this.putCodes.forEach((putCode) => {
-        this._recordWorksService.getWorkInfo(putCode).subscribe((work: Work) => {
-          this.loadingWorks = false
-          this.works.push(work)
-        })
+        this._recordWorksService
+          .getWorkInfo(putCode)
+          .subscribe((work: Work) => {
+            this.loadingWorks = false
+            this.works.push(work)
+          })
       })
     }
   }
 
   saveEvent() {
     this.loadingWorks = true
-    this._recordWorksService.visibility(this.putCodes, this.worksForm.get('visibility').value).subscribe(() => {
-      this.loadingWorks = false
-      this.closeEvent()
-    })
+    this._recordWorksService
+      .visibility(this.putCodes, this.worksForm.get('visibility').value)
+      .subscribe(() => {
+        this.loadingWorks = false
+        this.closeEvent()
+      })
   }
 
   closeEvent() {

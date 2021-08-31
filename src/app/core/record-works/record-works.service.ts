@@ -282,9 +282,18 @@ export class RecordWorksService {
       )
   }
 
-  visibility(putCodes: string[], visibility: VisibilityStrings): Observable<any> {
+  visibility(
+    putCodes: string[],
+    visibility: VisibilityStrings
+  ): Observable<any> {
     return this._http
-      .get(environment.API_WEB + 'works/' + putCodes.join(',') + '/visibility/' + visibility)
+      .get(
+        environment.API_WEB +
+          'works/' +
+          putCodes.join(',') +
+          '/visibility/' +
+          visibility
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

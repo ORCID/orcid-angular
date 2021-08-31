@@ -1,6 +1,8 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@works.setVisibility"> Set visibility selected works </ng-container>
+    <ng-container i18n="@@works.setVisibility">
+      Set visibility selected works
+    </ng-container>
   </app-modal-header>
   <app-modal-footer>
     <button
@@ -60,10 +62,9 @@
       <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
         <mat-icon>error</mat-icon>
         <ng-container i18n="@@record.noItemsSelected"
-        >No items selected.
+          >No items selected.
         </ng-container>
       </div>
     </div>
   </form>
 </app-modal>
-
