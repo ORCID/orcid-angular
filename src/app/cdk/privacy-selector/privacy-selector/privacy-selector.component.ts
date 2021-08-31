@@ -1,4 +1,10 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+} from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
