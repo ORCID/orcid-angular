@@ -164,6 +164,12 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   openModal(modal: ComponentType<any>, putCodes) {
+    this.selectedWorks = []
+    this.appWorkStacks.forEach((appWorkStack) => {
+      appWorkStack.panelsComponent.forEach((panelComponent) => {
+        panelComponent.selected = false
+      })
+    })
     this._platform
       .get()
       .pipe(first())
@@ -175,7 +181,6 @@ export class WorkStackGroupComponent implements OnInit {
         modalComponent.componentInstance.putCodes = putCodes
         modalComponent.componentInstance.type = 'works'
       })
-    this.selectedWorks = []
   }
 
   checkboxChangeWorkStackGroup($event) {
