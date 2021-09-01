@@ -112,10 +112,15 @@ export class WorkStackComponent implements OnInit {
   /**
    * Show and hide details of the panel
    */
-  toggleDetails(work: Work) {
+  toggleDetails(
+    work: Work,
+    options: { showDetails: boolean } = { showDetails: true }
+  ) {
     const putCode = work.putCode.value
-    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-      .state
+    if (options.showDetails) {
+      this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
+        .state
+    }
 
     if (this.panelDetailsState[putCode].state) {
       this.getDetails(work)
