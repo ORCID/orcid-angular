@@ -84,7 +84,7 @@
               (total)="affiliationsCount($event)"
               (expanded)="expandedByType($event)"
             ></app-peer-reviews>
-            <div class="no-public-info" *ngIf="affiliations === 0">
+            <div class="no-public-info" *ngIf="publicOrcid && affiliations === 0">
               <mat-icon>error</mat-icon>
               <ng-container i18n="@@record.noPublicInfo"
                 >No public information available.
