@@ -38,7 +38,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   bibTexInputChange($fileInputEvent: any) {
     this.loadingWorks = true
     const textFiles = $fileInputEvent.target.files
-    const worksFromBibtex = []
     for (const bibtex of textFiles) {
       const reader = new FileReader()
       reader.readAsText(bibtex)
@@ -51,7 +50,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           that.bibtexParsingErrorText = parsed
           that.bibtexParsingError = true
         } else {
-          const blankWork: Work = undefined
           const newWorks = []
           while (parsed.length > 0) {
             const cur = parsed.shift()
