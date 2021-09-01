@@ -16,7 +16,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import { URL_REGEXP } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { dateValidator } from 'src/app/shared/validators/date/date.validator'
-import { ExternalIdentifier, Visibility } from 'src/app/types/common.endpoint'
+import { ExternalIdentifier } from 'src/app/types/common.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import {
@@ -89,7 +89,6 @@ export class WorkModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this._platform.get().subscribe((value) => {
       this.platform = value
     })
@@ -273,7 +272,7 @@ export class WorkModalComponent implements OnInit {
         ],
       })
     )
-    
+
     this.checkWorkIdentifiersChanges(
       this.workIdentifiersFormArray.controls.length - 1
     )
@@ -285,7 +284,6 @@ export class WorkModalComponent implements OnInit {
   saveEvent() {
     this.workForm.markAllAsTouched()
     if (this.workForm.valid) {
-
       const work: Work = {
         visibility: {
           visibility: this.workForm.value.visibility,
