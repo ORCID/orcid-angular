@@ -358,7 +358,7 @@ export class WorkModalComponent implements OnInit {
       if (this.work?.putCode) {
         work.putCode = this.work.putCode
       }
-      if (this.work.source) {
+      if (this.work?.source) {
         work.source = this.work.source
       }
       this._workService.save(work).subscribe((value) => {
