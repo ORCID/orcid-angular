@@ -109,8 +109,10 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       // create a lower case create a reference map
       const tags = bibJSON.entryTags
       const lowerKeyTags = {}
-      for (const key in tags) {
-        lowerKeyTags[key.toLowerCase()] = tags[key]
+      if (tags.length > 0) {
+        for (const key in tags) {
+          lowerKeyTags[key.toLowerCase()] = tags[key]
+        }
       }
 
       if (lowerKeyTags.hasOwnProperty('booktitle')) {
