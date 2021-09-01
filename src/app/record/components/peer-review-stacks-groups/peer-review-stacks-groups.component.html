@@ -37,8 +37,7 @@
         <app-panel-element [hideVisibility]="false">
           <div class="description">
             <p>
-                <span class="capitalize">{{ peerReview.type }}</span
-                >
+              <span class="capitalize">{{ peerReview.type }}</span>
               <ng-container *ngIf="peerReview.description">,</ng-container>
               {{ peerReview.description }}
             </p>
@@ -63,9 +62,9 @@
               [isPublicRecord]="isPublicRecord"
               [peerReviewStack]="group"
               *ngFor="
-                  let group of peerReview.peerReviewDuplicateGroups;
-                  trackBy: trackByPeerReviewGroup
-                "
+                let group of peerReview.peerReviewDuplicateGroups;
+                trackBy: trackByPeerReviewGroup
+              "
             >
             </app-peer-review-stack>
           </div>
