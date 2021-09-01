@@ -45,7 +45,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     orcidUrl: string
     loggedIn: boolean
   }
-  peerReviews: PeerReview[]
+  peerReviews: PeerReview[] = []
   platform: PlatformInfo
   detailsPeerReviews: {
     putCode: number
