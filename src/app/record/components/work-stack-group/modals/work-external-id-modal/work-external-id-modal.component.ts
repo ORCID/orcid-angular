@@ -50,7 +50,6 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
         .loadExternalId(this.externalIdentifierForm.get('externalId').value, this.type)
         .pipe(first())
         .subscribe((work) => {
-          console.log(work)
           if (!work) {
             this.metadataNotFound = true
           } else {
