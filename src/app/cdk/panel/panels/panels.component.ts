@@ -96,7 +96,10 @@ export class PanelsComponent implements OnInit {
     }
   }
 
-  openModal(modal: ComponentType<any>, type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK) {
+  openModal(
+    modal: ComponentType<any>,
+    type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
+  ) {
     this._platform
       .get()
       .pipe(first())

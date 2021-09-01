@@ -29,9 +29,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _recordWorksService: RecordWorksService,
-  ) {
-  }
+    private _recordWorksService: RecordWorksService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -44,9 +43,12 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
       const that = this
 
-      reader.onloadend = function(e) {
+      reader.onloadend = function (e) {
         const parsed = bibtexParse.toJSON(reader.result)
-        if (typeof parsed === 'string' && parsed.substring(0, 5).toLowerCase().indexOf('error') > -1) {
+        if (
+          typeof parsed === 'string' &&
+          parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
+        ) {
           that.bibtexParsingErrorText = parsed
           that.bibtexParsingError = true
         } else {
@@ -62,14 +64,14 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           that._recordWorksService
             .worksValidate(newWorks)
             .pipe(first())
-            .subscribe(data => {
+            .subscribe((data) => {
               data.forEach((work) => {
                 that.worksFromBibtex.push(work)
               })
               that.worksFromBibtex.forEach((w) => {
                 const newPutCode = 'new-' + that.addedWorkCount++
                 w.putCode = {
-                  value: newPutCode
+                  value: newPutCode,
                 }
                 that.group[newPutCode] = new FormGroup({
                   checked: new FormControl(false),
@@ -86,11 +88,13 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   populateWork(bibJSON): Work {
     const work = {} as Work
     const bibtex = bibtexParse.toBibtex([bibJSON])
-    work.citation = { 'citation': { 'value': bibtex }, 'citationType': { 'value': 'bibtex' } }
+    work.citation = {
+      citation: { value: bibtex },
+      citationType: { value: 'bibtex' },
+    }
 
     // set the work type based off the entry type
     if (bibJSON.entryType) {
-
       const type = bibJSON.entryType.toLowerCase()
 
       if (bibToWorkTypeMap.hasOwnProperty(type)) {
@@ -133,8 +137,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         this.externalIdentifierId(work, 'pmid', lowerKeyTags['pmid'])
       }
 
-      if (lowerKeyTags.hasOwnProperty('eprint')
-        && lowerKeyTags.hasOwnProperty('eprinttype') && lowerKeyTags['eprinttype'] === 'arxiv') {
+      if (
+        lowerKeyTags.hasOwnProperty('eprint') &&
+        lowerKeyTags.hasOwnProperty('eprinttype') &&
+        lowerKeyTags['eprinttype'] === 'arxiv'
+      ) {
         this.externalIdentifierId(work, 'arxiv', tags['eprint'])
       }
 
@@ -200,13 +207,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           value: lowerKeyTags['url'],
         }
       }
-
     }
     return work
   }
 
   externalIdentifierId(work, idType, value) {
-
     if (!value) {
       console.warn('Empty value for ext id: ' + idType)
       return
@@ -227,13 +232,13 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
     const ident = {
       externalIdentifierId: {
-        'value': value,
+        value: value,
       },
       externalIdentifierType: {
-        'value': idType,
+        value: idType,
       },
       relationship: {
-        'value': relationship,
+        value: relationship,
       },
     }
 
@@ -243,7 +248,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     } else if (idType !== 'uri') {
       work.workExternalIdentifiers.push(ident)
     }
-  };
+  }
 
   pad(num: number, size: number): string {
     let s = num + ''
@@ -255,10 +260,12 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   updateCheckAll() {
     this.worksFromBibtex.forEach((work) => {
-      if (this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)) {
+      if (
+        this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)
+      ) {
         if (!!this.selectAll === false) {
           this.selectedWorks = this.selectedWorks.filter(
-            (w) => w.putCode.value !== work.putCode.value,
+            (w) => w.putCode.value !== work.putCode.value
           )
         }
       } else {
@@ -273,10 +280,12 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   }
 
   updateCheck(work: Work) {
-    if (this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)) {
+    if (
+      this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)
+    ) {
       if (!!this.selectAll === false) {
         this.selectedWorks = this.selectedWorks.filter(
-          (value) => value.putCode.value !== work.putCode.value,
+          (value) => value.putCode.value !== work.putCode.value
         )
       }
     } else {
@@ -286,15 +295,14 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     this.loadingWorks = true
-    if (this.selectedWorks.length > 0 ) {
+    if (this.selectedWorks.length > 0) {
       this.selectedWorks.forEach((work, index) => {
         work.putCode = null
-        this._recordWorksService.save(work)
-          .subscribe(() => {
-            if (index === this.selectedWorks.length - 1) {
-              this.loadingWorks = false
-              this.closeEvent()
-            }
+        this._recordWorksService.save(work).subscribe(() => {
+          if (index === this.selectedWorks.length - 1) {
+            this.loadingWorks = false
+            this.closeEvent()
+          }
         })
       })
     }
@@ -310,7 +318,20 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   }
 }
 
-export const bibMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+export const bibMonths = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
+]
 
 export const bibToWorkTypeMap = {}
 bibToWorkTypeMap['article'] = ['publication', 'journal-article']
@@ -321,11 +342,12 @@ bibToWorkTypeMap['inbook'] = ['publication', 'book-chapter']
 bibToWorkTypeMap['incollection'] = ['publication', 'book-chapter']
 bibToWorkTypeMap['inproceedings'] = ['conference', 'conference-paper']
 bibToWorkTypeMap['manual'] = ['publication', 'manual']
-bibToWorkTypeMap['mastersthesis'] = ['publication',
-  'supervised-student-publication']
+bibToWorkTypeMap['mastersthesis'] = [
+  'publication',
+  'supervised-student-publication',
+]
 bibToWorkTypeMap['misc'] = ['other_output', 'other']
 bibToWorkTypeMap['phdthesis'] = ['publication', 'dissertation-thesis']
 bibToWorkTypeMap['proceedings'] = ['conference', 'conference-paper']
 bibToWorkTypeMap['techreport'] = ['publication', 'report']
 bibToWorkTypeMap['unpublished'] = ['other_output', 'other']
-

@@ -1,4 +1,4 @@
-(function(exports) {
+;(function (exports) {
   function LatexToUTF8() {
     this.orcidCharLatexMap = {}
 
@@ -13,18 +13,18 @@
       '\\`i': 'ì',
       '\\`o': 'ò',
       '\\`u': 'ù',
-      '\\\'A': 'Á', // begin acute
-      '\\\'E': 'É',
-      '\\\'I': 'Í',
-      '\\\'O': 'Ó',
-      '\\\'U': 'Ú',
-      '\\\'Y': 'Ý',
-      '\\\'a': 'á',
-      '\\\'e': 'é',
-      '\\\'i': 'í',
-      '\\\'o': 'ó',
-      '\\\'u': 'ú',
-      '\\\'y': 'ý',
+      "\\'A": 'Á', // begin acute
+      "\\'E": 'É',
+      "\\'I": 'Í',
+      "\\'O": 'Ó',
+      "\\'U": 'Ú',
+      "\\'Y": 'Ý',
+      "\\'a": 'á',
+      "\\'e": 'é',
+      "\\'i": 'í',
+      "\\'o": 'ó',
+      "\\'u": 'ú',
+      "\\'y": 'ý',
       '\\"A': 'Ä', // begin diaeresis
       '\\r A': 'Å',
       '\\"E': 'Ë',
@@ -45,7 +45,7 @@
       '\\~o': 'õ',
       '\\rU': 'Ů', // begin ring above
       '\\ru': 'ů',
-      '\\vC': 'Č',  // begin caron
+      '\\vC': 'Č', // begin caron
       '\\vD': 'Ď',
       '\\vE': 'Ě',
       '\\vN': 'Ň',
@@ -61,7 +61,7 @@
       '\\vs': 'š',
       '\\vt': 'ť',
       '\\vz': 'ž',
-      '\\#': '#',  // begin special symbols
+      '\\#': '#', // begin special symbols
       '\\$': '$',
       '\\%': '%',
       '\\&': '&',
@@ -72,7 +72,7 @@
       '\\}': '}',
       '\\~': '~',
       '\\"': '"',
-      '\\\'': '’', // closing single quote
+      "\\'": '’', // closing single quote
       '\\`': '‘', // opening single quote
       '\\AA': 'Å', // begin non-ASCII letters
       '\\AE': 'Æ',
@@ -119,8 +119,8 @@
       '\\u{a}': 'ă',
       '\\k A': 'Ą',
       '\\k a': 'ą',
-      '\\\'C': 'Ć',
-      '\\\'c': 'ć',
+      "\\'C": 'Ć',
+      "\\'c": 'ć',
       '\\^C': 'Ĉ',
       '\\^c': 'ĉ',
       '\\.C': 'Ċ',
@@ -163,16 +163,16 @@
       '\\^j': 'ĵ',
       '\\c{J}': 'Ķ',
       '\\c{j}': 'ķ',
-      '\\\'L': 'Ĺ',
-      '\\\'l': 'ĺ',
+      "\\'L": 'Ĺ',
+      "\\'l": 'ĺ',
       '\\c{L}': 'Ļ',
       '\\c{l}': 'ļ',
       '\\v{L}': 'Ľ',
       '\\v{l}': 'ľ',
       '\\dL': 'Ł',
       '\\dl': 'ł',
-      '\\\'N': 'Ń',
-      '\\\'n': 'ń',
+      "\\'N": 'Ń',
+      "\\'n": 'ń',
       '\\c{N}': 'Ņ',
       '\\c{n}': 'ņ',
       '\\v{N}': 'Ň',
@@ -185,14 +185,14 @@
       '\\H{o}': 'ő',
       '\\OE': 'Œ',
       '\\oe': 'œ',
-      '\\\'R': 'Ŕ',
-      '\\\'r': 'ŕ',
+      "\\'R": 'Ŕ',
+      "\\'r": 'ŕ',
       '\\c{R}': 'Ŗ',
       '\\c{r}': 'ŗ',
       '\\v{R}': 'Ř',
       '\\v{r}': 'ř',
-      '\\\'R': 'Ś',
-      '\\\'r': 'ś',
+      "\\'R": 'Ś',
+      "\\'r": 'ś',
       '\\^S': 'Ŝ',
       '\\^s': 'ŝ',
       '\\c{S}': 'Ş',
@@ -222,8 +222,8 @@
       '\\^Y': 'Ŷ',
       '\\^y': 'ŷ',
       '\\"Y': 'Ÿ',
-      '\\\'Z': 'Ź',
-      '\\\'z': 'ź',
+      "\\'Z": 'Ź',
+      "\\'z": 'ź',
       '\\.Z': 'Ż',
       '\\.z': 'ż',
       '\\v{Z}': 'Ž',
@@ -232,17 +232,17 @@
 
     this.w3cCharLatexMap = {}
 
-//Generated from http://www.w3.org/2003/entities/2007xml/unicode.xml
-//Duplicate latex keys skipped (first choosen)
-//Duplicate latex keys not starting with backwardslash (\) skipped
-//Decimal Charcode with dashes (-) skipped
+    //Generated from http://www.w3.org/2003/entities/2007xml/unicode.xml
+    //Duplicate latex keys skipped (first choosen)
+    //Duplicate latex keys not starting with backwardslash (\) skipped
+    //Decimal Charcode with dashes (-) skipped
     this.w3cLatexCharMap = {
       '\\space': ' ',
       '\\#': '#',
       '\\textdollar': '$',
       '\\%': '%',
       '\\&': '&',
-      '\\textquotesingle': '\'',
+      '\\textquotesingle': "'",
       '\\ast': '*',
       '\\textbackslash': '\\',
       '\\^{}': '^',
@@ -281,7 +281,7 @@
       '\\textthreequarters': '¾',
       '\\textquestiondown': '¿',
       '\\`{A}': 'À',
-      '\\\'{A}': 'Á',
+      "\\'{A}": 'Á',
       '\\^{A}': 'Â',
       '\\~{A}': 'Ã',
       '\\"{A}': 'Ä',
@@ -289,31 +289,31 @@
       '\\AE': 'Æ',
       '\\c{C}': 'Ç',
       '\\`{E}': 'È',
-      '\\\'{E}': 'É',
+      "\\'{E}": 'É',
       '\\^{E}': 'Ê',
       '\\"{E}': 'Ë',
       '\\`{I}': 'Ì',
-      '\\\'{I}': 'Í',
+      "\\'{I}": 'Í',
       '\\^{I}': 'Î',
       '\\"{I}': 'Ï',
       '\\DH': 'Ð',
       '\\~{N}': 'Ñ',
       '\\`{O}': 'Ò',
-      '\\\'{O}': 'Ó',
+      "\\'{O}": 'Ó',
       '\\^{O}': 'Ô',
       '\\~{O}': 'Õ',
       '\\"{O}': 'Ö',
       '\\texttimes': '×',
       '\\O': 'Ø',
       '\\`{U}': 'Ù',
-      '\\\'{U}': 'Ú',
+      "\\'{U}": 'Ú',
       '\\^{U}': 'Û',
       '\\"{U}': 'Ü',
-      '\\\'{Y}': 'Ý',
+      "\\'{Y}": 'Ý',
       '\\TH': 'Þ',
       '\\ss': 'ß',
       '\\`{a}': 'à',
-      '\\\'{a}': 'á',
+      "\\'{a}": 'á',
       '\\^{a}': 'â',
       '\\~{a}': 'ã',
       '\\"{a}': 'ä',
@@ -321,27 +321,27 @@
       '\\ae': 'æ',
       '\\c{c}': 'ç',
       '\\`{e}': 'è',
-      '\\\'{e}': 'é',
+      "\\'{e}": 'é',
       '\\^{e}': 'ê',
       '\\"{e}': 'ë',
       '\\`{\\i}': 'ì',
-      '\\\'{\\i}': 'í',
+      "\\'{\\i}": 'í',
       '\\^{\\i}': 'î',
       '\\"{\\i}': 'ï',
       '\\dh': 'ð',
       '\\~{n}': 'ñ',
       '\\`{o}': 'ò',
-      '\\\'{o}': 'ó',
+      "\\'{o}": 'ó',
       '\\^{o}': 'ô',
       '\\~{o}': 'õ',
       '\\"{o}': 'ö',
       '\\div': '÷',
       '\\o': 'ø',
       '\\`{u}': 'ù',
-      '\\\'{u}': 'ú',
+      "\\'{u}": 'ú',
       '\\^{u}': 'û',
       '\\"{u}': 'ü',
-      '\\\'{y}': 'ý',
+      "\\'{y}": 'ý',
       '\\th': 'þ',
       '\\"{y}': 'ÿ',
       '\\={A}': 'Ā',
@@ -350,8 +350,8 @@
       '\\u{a}': 'ă',
       '\\k{A}': 'Ą',
       '\\k{a}': 'ą',
-      '\\\'{C}': 'Ć',
-      '\\\'{c}': 'ć',
+      "\\'{C}": 'Ć',
+      "\\'{c}": 'ć',
       '\\^{C}': 'Ĉ',
       '\\^{c}': 'ĉ',
       '\\.{C}': 'Ċ',
@@ -397,16 +397,16 @@
       '\\^{\\j}': 'ĵ',
       '\\c{K}': 'Ķ',
       '\\c{k}': 'ķ',
-      '\\\'{L}': 'Ĺ',
-      '\\\'{l}': 'ĺ',
+      "\\'{L}": 'Ĺ',
+      "\\'{l}": 'ĺ',
       '\\c{L}': 'Ļ',
       '\\c{l}': 'ļ',
       '\\v{L}': 'Ľ',
       '\\v{l}': 'ľ',
       '\\L': 'Ł',
       '\\l': 'ł',
-      '\\\'{N}': 'Ń',
-      '\\\'{n}': 'ń',
+      "\\'{N}": 'Ń',
+      "\\'{n}": 'ń',
       '\\c{N}': 'Ņ',
       '\\c{n}': 'ņ',
       '\\v{N}': 'Ň',
@@ -421,14 +421,14 @@
       '\\H{o}': 'ő',
       '\\OE': 'Œ',
       '\\oe': 'œ',
-      '\\\'{R}': 'Ŕ',
-      '\\\'{r}': 'ŕ',
+      "\\'{R}": 'Ŕ',
+      "\\'{r}": 'ŕ',
       '\\c{R}': 'Ŗ',
       '\\c{r}': 'ŗ',
       '\\v{R}': 'Ř',
       '\\v{r}': 'ř',
-      '\\\'{S}': 'Ś',
-      '\\\'{s}': 'ś',
+      "\\'{S}": 'Ś',
+      "\\'{s}": 'ś',
       '\\^{S}': 'Ŝ',
       '\\^{s}': 'ŝ',
       '\\c{S}': 'Ş',
@@ -456,8 +456,8 @@
       '\\^{Y}': 'Ŷ',
       '\\^{y}': 'ŷ',
       '\\"{Y}': 'Ÿ',
-      '\\\'{Z}': 'Ź',
-      '\\\'{z}': 'ź',
+      "\\'{Z}": 'Ź',
+      "\\'{z}": 'ź',
       '\\.{Z}': 'Ż',
       '\\.{z}': 'ż',
       '\\v{Z}': 'Ž',
@@ -466,7 +466,7 @@
       '\\textnrleg': 'ƞ',
       '\\eth': 'ƪ',
       '\\textdoublepipe': 'ǂ',
-      '\\\'{g}': 'ǵ',
+      "\\'{g}": 'ǵ',
       '\\Elztrna': 'ɐ',
       '\\Elztrnsa': 'ɒ',
       '\\Elzopeno': 'ɔ',
@@ -529,7 +529,7 @@
       '\\tone{22}': '˨',
       '\\tone{11}': '˩',
       '\\`': '̀',
-      '\\\'': '́',
+      "\\'": '́',
       '\\^': '̂',
       '\\~': '̃',
       '\\=': '̄',
@@ -547,11 +547,11 @@
       '\\Elzsbbrg': '̪',
       '\\Elzxl': '̵',
       '\\Elzbar': '̶',
-      '\\\'{H}': 'Ή',
-      '\\\'{}{I}': 'Ί',
-      '\\\'{}O': 'Ό',
-      '\\mathrm{\'Y}': 'Ύ',
-      '\\mathrm{\'\\Omega}': 'Ώ',
+      "\\'{H}": 'Ή',
+      "\\'{}{I}": 'Ί',
+      "\\'{}O": 'Ό',
+      "\\mathrm{'Y}": 'Ύ',
+      "\\mathrm{'\\Omega}": 'Ώ',
       '\\acute{\\ddot{\\iota}}': 'ΐ',
       '\\Alpha': 'Α',
       '\\Beta': 'Β',
@@ -576,7 +576,7 @@
       '\\Omega': 'Ω',
       '\\mathrm{\\ddot{I}}': 'Ϊ',
       '\\mathrm{\\ddot{Y}}': 'Ϋ',
-      '\\\'{$\\alpha$}': 'ά',
+      "\\'{$\\alpha$}": 'ά',
       '\\acute{\\epsilon}': 'έ',
       '\\acute{\\eta}': 'ή',
       '\\acute{\\iota}': 'ί',
@@ -624,7 +624,7 @@
       '\\backepsilon': '϶',
       '\\cyrchar\\CYRYO': 'Ё',
       '\\cyrchar\\CYRDJE': 'Ђ',
-      '\\cyrchar{\\\'\\CYRG}': 'Ѓ',
+      "\\cyrchar{\\'\\CYRG}": 'Ѓ',
       '\\cyrchar\\CYRIE': 'Є',
       '\\cyrchar\\CYRDZE': 'Ѕ',
       '\\cyrchar\\CYRII': 'І',
@@ -633,7 +633,7 @@
       '\\cyrchar\\CYRLJE': 'Љ',
       '\\cyrchar\\CYRNJE': 'Њ',
       '\\cyrchar\\CYRTSHE': 'Ћ',
-      '\\cyrchar{\\\'\\CYRK}': 'Ќ',
+      "\\cyrchar{\\'\\CYRK}": 'Ќ',
       '\\cyrchar\\CYRUSHRT': 'Ў',
       '\\cyrchar\\CYRDZHE': 'Џ',
       '\\cyrchar\\CYRA': 'А',
@@ -702,7 +702,7 @@
       '\\cyrchar\\cyrya': 'я',
       '\\cyrchar\\cyryo': 'ё',
       '\\cyrchar\\cyrdje': 'ђ',
-      '\\cyrchar{\\\'\\cyrg}': 'ѓ',
+      "\\cyrchar{\\'\\cyrg}": 'ѓ',
       '\\cyrchar\\cyrie': 'є',
       '\\cyrchar\\cyrdze': 'ѕ',
       '\\cyrchar\\cyrii': 'і',
@@ -711,7 +711,7 @@
       '\\cyrchar\\cyrlje': 'љ',
       '\\cyrchar\\cyrnje': 'њ',
       '\\cyrchar\\cyrtshe': 'ћ',
-      '\\cyrchar{\\\'\\cyrk}': 'ќ',
+      "\\cyrchar{\\'\\cyrk}": 'ќ',
       '\\cyrchar\\cyrushrt': 'ў',
       '\\cyrchar\\cyrdzhe': 'џ',
       '\\cyrchar\\CYROMEGA': 'Ѡ',
@@ -2509,31 +2509,29 @@
       this.w3cCharLatexMap[this.w3cLatexCharMap[idx]] = idx
     }
 
-    this.getUni = function(latex) {
-      if (this.w3cLatexCharMap[latex])
-        return this.w3cLatexCharMap[latex]
+    this.getUni = function (latex) {
+      if (this.w3cLatexCharMap[latex]) return this.w3cLatexCharMap[latex]
       return this.orcidLatexCharMap[latex]
     }
 
-    this.hasLatexMatch = function(latex) {
-      return latex in this.orcidLatexCharMap
-        || latex in this.w3cLatexCharMap
+    this.hasLatexMatch = function (latex) {
+      return latex in this.orcidLatexCharMap || latex in this.w3cLatexCharMap
     }
 
-    this.getLatex = function(uni) {
-      if (this.w3cCharLatexMap[uni])
-        return this.w3cCharLatexMap[uni]
+    this.getLatex = function (uni) {
+      if (this.w3cCharLatexMap[uni]) return this.w3cCharLatexMap[uni]
       return this.orcidCharLatexMap[uni]
     }
 
-    this.hasUniMatch = function(uni) {
-      return uni in this.orcidCharLatexMap
-        || uni in this.w3cCharLatexMap
+    this.hasUniMatch = function (uni) {
+      return uni in this.orcidCharLatexMap || uni in this.w3cCharLatexMap
     }
 
-    this.longestEscapeMatch = function(value, pos) {
-      var subStringEnd = pos + 1 + this.maxLatexLength <= value.length ?
-        pos + 1 + this.maxLatexLength : value.length
+    this.longestEscapeMatch = function (value, pos) {
+      var subStringEnd =
+        pos + 1 + this.maxLatexLength <= value.length
+          ? pos + 1 + this.maxLatexLength
+          : value.length
       var subStr = value.substring(pos, subStringEnd)
       while (subStr.length > 0) {
         if (this.hasLatexMatch(subStr)) {
@@ -2543,14 +2541,11 @@
       }
       return subStr
     }
-
-
   }
-
 
   var latexToUTF8 = new LatexToUTF8()
 
-  exports.decodeLatex = function(value) {
+  exports.decodeLatex = function (value) {
     var newVal = ''
     var pos = 0
     while (pos < value.length) {
@@ -2573,36 +2568,47 @@
     return newVal
   }
 
-  exports.encodeLatex = function(value) {
+  exports.encodeLatex = function (value) {
     var trans = ''
     for (var idx = 0; idx < value.length; ++idx) {
       var c = value.charAt(idx)
-      if (this.hasUniMatch(c))
-        trans += latexToUTF8.getLatex(c)
-      else
-        trans += c
+      if (this.hasUniMatch(c)) trans += latexToUTF8.getLatex(c)
+      else trans += c
     }
     return trans
   }
+})(typeof exports === 'undefined' ? (this['latexParse'] = {}) : exports)
 
+const bibMonths = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dec',
+]
 
-})(typeof exports === 'undefined' ? this['latexParse'] = {} : exports)
-
-const bibMonths = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-
-const bibToWorkTypeMap = {};
-bibToWorkTypeMap['article'] = [ 'publication', 'journal-article' ];
-bibToWorkTypeMap['book'] = [ 'publication', 'book' ];
-bibToWorkTypeMap['booklet'] = [ 'other_output', 'other' ];
-bibToWorkTypeMap['conference'] = [ 'conference', 'conference-paper' ];
-bibToWorkTypeMap['inbook'] = [ 'publication', 'book-chapter' ];
-bibToWorkTypeMap['incollection'] = [ 'publication', 'book-chapter' ];
-bibToWorkTypeMap['inproceedings'] = [ 'conference', 'conference-paper' ];
-bibToWorkTypeMap['manual'] = [ 'publication', 'manual' ];
-bibToWorkTypeMap['mastersthesis'] = [ 'publication',
-  'supervised-student-publication' ];
-bibToWorkTypeMap['misc'] = [ 'other_output', 'other' ];
-bibToWorkTypeMap['phdthesis'] = [ 'publication', 'dissertation-thesis'  ];
-bibToWorkTypeMap['proceedings'] = [ 'conference', 'conference-paper' ];
-bibToWorkTypeMap['techreport'] = [ 'publication', 'report' ];
-bibToWorkTypeMap['unpublished'] = [ 'other_output', 'other' ];
+const bibToWorkTypeMap = {}
+bibToWorkTypeMap['article'] = ['publication', 'journal-article']
+bibToWorkTypeMap['book'] = ['publication', 'book']
+bibToWorkTypeMap['booklet'] = ['other_output', 'other']
+bibToWorkTypeMap['conference'] = ['conference', 'conference-paper']
+bibToWorkTypeMap['inbook'] = ['publication', 'book-chapter']
+bibToWorkTypeMap['incollection'] = ['publication', 'book-chapter']
+bibToWorkTypeMap['inproceedings'] = ['conference', 'conference-paper']
+bibToWorkTypeMap['manual'] = ['publication', 'manual']
+bibToWorkTypeMap['mastersthesis'] = [
+  'publication',
+  'supervised-student-publication',
+]
+bibToWorkTypeMap['misc'] = ['other_output', 'other']
+bibToWorkTypeMap['phdthesis'] = ['publication', 'dissertation-thesis']
+bibToWorkTypeMap['proceedings'] = ['conference', 'conference-paper']
+bibToWorkTypeMap['techreport'] = ['publication', 'report']
+bibToWorkTypeMap['unpublished'] = ['other_output', 'other']

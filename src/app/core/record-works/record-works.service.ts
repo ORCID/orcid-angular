@@ -349,27 +349,29 @@ export class RecordWorksService {
     )
   }
 
-  loadExternalId(externalId: string, type: EXTERNAL_ID_TYPE_WORK): Observable<Work> {
+  loadExternalId(
+    externalId: string,
+    type: EXTERNAL_ID_TYPE_WORK
+  ): Observable<Work> {
     let url = 'works/resolve/doi?value='
     if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
       const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\d{5})/g)
       const result = regex.exec(externalId)
-      url = result ? 'works/resolve/pmc/?value=' :  'works/resolve/pmid?value=';
+      url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
     }
 
-    return this._http.get<Work>(
-      environment.API_WEB + url + externalId
-    )
+    return this._http.get<Work>(environment.API_WEB + url + externalId)
   }
 
   worksValidate(obj): Observable<any> {
     return this._http.post(
       environment.API_WEB + 'works/worksValidate.json',
       JSON.stringify(obj),
-      { headers: {
+      {
+        headers: {
           'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       }
     )
   }

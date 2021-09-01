@@ -64,4 +64,3 @@ export interface WorksEndpoint {
   pageIndex: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
   pageSize: number // THIS DATA FIELD IS ATTACHED ON THE FRONTEND
 }
-

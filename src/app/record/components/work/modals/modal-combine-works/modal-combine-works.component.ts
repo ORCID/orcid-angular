@@ -51,7 +51,7 @@ export class ModalCombineWorksComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     this.loadingWorks = true
-    if (this.putCodes.length > 0 ) {
+    if (this.putCodes.length > 0) {
       this._recordWorksService.combine(this.putCodes).subscribe(() => {
         this.loadingWorks = false
         this.closeEvent()

@@ -16,7 +16,11 @@ import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
+import {
+  ADD_EVENT_ACTION,
+  DEFAULT_PAGE_SIZE,
+  EXTERNAL_ID_TYPE_WORK,
+} from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
@@ -74,13 +78,13 @@ export class WorkStackGroupComponent implements OnInit {
       label: 'Add DOI',
       action: ADD_EVENT_ACTION.doi,
       modal: WorkExternalIdModalComponent,
-      type: EXTERNAL_ID_TYPE_WORK.doi
+      type: EXTERNAL_ID_TYPE_WORK.doi,
     },
     {
       label: 'Add PubMed ID',
       action: ADD_EVENT_ACTION.pubMed,
       modal: WorkExternalIdModalComponent,
-      type: EXTERNAL_ID_TYPE_WORK.pubMed
+      type: EXTERNAL_ID_TYPE_WORK.pubMed,
     },
     {
       label: 'Add BibTex',

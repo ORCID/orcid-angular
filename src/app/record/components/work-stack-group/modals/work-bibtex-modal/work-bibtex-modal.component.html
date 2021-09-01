@@ -1,6 +1,8 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@works.importBibTex"> Works - Import BibTeX</ng-container>
+    <ng-container i18n="@@works.importBibTex">
+      Works - Import BibTeX</ng-container
+    >
   </app-modal-header>
   <app-modal-footer *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
     <button
@@ -26,7 +28,8 @@
   <div class="row">
     <div class="orc-font-small-print">
       <p i18n="@@works.importCitations">
-        Import citations from BibTex (.bib) files, including files exported from Google Scholar.
+        Import citations from BibTex (.bib) files, including files exported from
+        Google Scholar.
       </p>
       <a
         class="underline"
@@ -37,10 +40,7 @@
       </a>
     </div>
   </div>
-  <div
-    class="col l4 choose-bibtex"
-    *ngIf="worksFromBibtex.length === 0"
-  >
+  <div class="col l4 choose-bibtex" *ngIf="worksFromBibtex.length === 0">
     <input
       #bibTexInput
       [hidden]="true"
@@ -73,10 +73,7 @@
       <div class="row">
         <div class="row">
           <p>
-            <mat-checkbox
-              (change)="updateCheckAll()"
-              [(ngModel)]="selectAll"
-            >
+            <mat-checkbox (change)="updateCheckAll()" [(ngModel)]="selectAll">
               <ng-container
                 i18n="@@shared.selectAll"
                 *ngIf="selectedWorks.length === 0"
@@ -98,10 +95,7 @@
         *ngIf="worksFromBibtex.length > 0 && !loadingWorks"
       >
         <ng-container *ngFor="let work of worksFromBibtex">
-          <div
-            class="row work-info"
-            [formGroupName]="work.putCode.value"
-          >
+          <div class="row work-info" [formGroupName]="work.putCode.value">
             <div class="row">
               <mat-checkbox
                 (change)="updateCheck(work)"
