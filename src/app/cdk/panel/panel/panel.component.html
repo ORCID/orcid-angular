@@ -54,6 +54,7 @@
           </p>
           <form *ngIf="visibility" [formGroup]="formVisibility">
             <app-privacy-selector
+              [privacy]="visibility"
               (click)="updateVisibility()"
               formControlName="visibility"
             ></app-privacy-selector>
