@@ -10,6 +10,7 @@ export class DisplayExternalIdsComponent implements OnInit {
   @Input() externalIdentifiers: ExternalIdentifier[]
   @Input() noBoldTitle = false
   @Input() externalIdentifier: ExternalIdentifier
+  undefinedIdLabel = $localize`:@@share.undefinedId:undefined id`
 
   constructor() {}
 
