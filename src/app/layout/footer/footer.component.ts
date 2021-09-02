@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
-import { TogglzService } from '../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-footer',
@@ -17,8 +16,7 @@ export class FooterComponent implements OnInit {
 
   constructor(
     _platformInfo: PlatformInfoService,
-    @Inject(WINDOW) private window: Window,
-    _togglz: TogglzService
+    @Inject(WINDOW) private window: Window
   ) {
     _platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
