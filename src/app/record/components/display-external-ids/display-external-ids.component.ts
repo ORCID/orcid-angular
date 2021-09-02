@@ -12,7 +12,6 @@ export class DisplayExternalIdsComponent implements OnInit {
   @Input() externalIdentifier: ExternalIdentifier
   undefinedIdLabel = $localize`:@@share.undefinedId:undefined id`
 
-
   constructor() {}
 
   ngOnInit(): void {
