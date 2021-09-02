@@ -33,6 +33,7 @@ import { WorkModalComponent } from '../work-modal/work-modal.component'
 import { WorkStackComponent } from '../work-stack/work-stack.component'
 import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
 import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
+import { WorksVisibilityModalComponent } from '../work/modals/works-visibility-modal/works-visibility-modal.component'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -66,9 +67,6 @@ export class WorkStackGroupComponent implements OnInit {
     { label: 'Add PubMed ID', action: ADD_EVENT_ACTION.pubMed },
     { label: 'Add BibTex', action: ADD_EVENT_ACTION.bibText },
   ]
-  modalExportWorksComponent = ModalExportWorksComponent
-  modalCombineWorksComponent = ModalCombineWorksComponent
-  modalDeleteWorksComponent = ModalDeleteItemsComponent
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
@@ -150,6 +148,10 @@ export class WorkStackGroupComponent implements OnInit {
     this.openModal(ModalExportWorksComponent, this.selectedWorks)
   }
 
+  visibility() {
+    this.openModal(WorksVisibilityModalComponent, this.selectedWorks)
+  }
+
   checked(event: MatCheckboxChange) {
     this.selectedWorks = []
     this.appWorkStacks.forEach((appWorkStack) => {
@@ -163,6 +165,12 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   openModal(modal: ComponentType<any>, putCodes) {
+    this.selectedWorks = []
+    this.appWorkStacks.forEach((appWorkStack) => {
+      appWorkStack.panelsComponent.forEach((panelComponent) => {
+        panelComponent.selected = false
+      })
+    })
     this._platform
       .get()
       .pipe(first())
@@ -174,7 +182,6 @@ export class WorkStackGroupComponent implements OnInit {
         modalComponent.componentInstance.putCodes = putCodes
         modalComponent.componentInstance.type = 'works'
       })
-    this.selectedWorks = []
   }
 
   checkboxChangeWorkStackGroup($event) {
