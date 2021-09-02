@@ -13,23 +13,23 @@ export const menu: ApplicationMenuItemBasic[] = [
   {
     id: 'public-layout.membership',
     label: $localize`:@@public-layout.membership:Membership`,
-    route: 'about-membership',    
+    route: 'about-membership',
   },
   {
     id: 'public-layout.documentation',
     label: $localize`:@@public-layout.documentation:Documentation`,
-    route: 'documentation',   
+    route: 'documentation',
   },
   {
     id: 'public-layout.resources',
     label: $localize`:@@public-layout.resources:Resources`,
-    route: 'resources',    
+    route: 'resources',
   },
 
   {
     id: 'public-layout.newsEvents',
     label: $localize`:@@public-layout.newsEvents:News & Events`,
-    route: '',    
+    route: '',
   },
 
   {

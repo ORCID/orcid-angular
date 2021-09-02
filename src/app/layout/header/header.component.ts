@@ -270,10 +270,8 @@ export class HeaderComponent implements OnInit {
     if (route.indexOf('://') >= 0) {
       this.navigateTo(route)
     } else {
-      this.navigateTo(
-        environment.INFO_SITE + route
-      )
-    } 
+      this.navigateTo(environment.INFO_SITE + route)
+    }
   }
 
   navigateTo(val) {
