@@ -271,8 +271,7 @@ export class HeaderComponent implements OnInit {
       this.navigateTo(route)
     } else {
       this.navigateTo(
-        environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE +
-          route
+        environment.INFO_SITE + route
       )
     } 
   }
