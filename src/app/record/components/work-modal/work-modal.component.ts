@@ -7,16 +7,18 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms'
-import { MatDialogRef } from '@angular/material/dialog'
-import { map } from 'rxjs/operators'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { Observable } from 'rxjs'
+import { map, startWith } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { URL_REGEXP } from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { dateValidator } from 'src/app/shared/validators/date/date.validator'
-import { Visibility } from 'src/app/types/common.endpoint'
+import { ExternalIdentifier } from 'src/app/types/common.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
+import { UserRecord } from 'src/app/types/record.local'
 import {
   CitationTypes,
   DayOption,
@@ -47,6 +49,7 @@ export class WorkModalComponent implements OnInit {
   loading = true
   workForm: FormGroup
   platform: PlatformInfo
+  work: Work
 
   showTranslationTitle = false
 
@@ -63,7 +66,7 @@ export class WorkModalComponent implements OnInit {
 
   dynamicTitle = WorksTitleName.journalTitle
   workIdTypes: WorkIdType[]
-  workIdentifiersArray: FormArray
+  workIdentifiersFormArray: FormArray
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -81,61 +84,56 @@ export class WorkModalComponent implements OnInit {
     private _platform: PlatformInfoService,
     private _workService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
-    @Inject(WINDOW) private _window: Window
+    @Inject(WINDOW) private _window: Window,
+    @Inject(MAT_DIALOG_DATA) public data: UserRecord
   ) {}
 
   ngOnInit(): void {
     this._platform.get().subscribe((value) => {
       this.platform = value
     })
-    this._workService.getWork().subscribe((emptyWork) => {
-      this.loading = false
-      this.workForm = this._fb.group({
-        workCategory: ['', [Validators.required]],
-        workType: ['', [Validators.required]],
-        title: ['', [Validators.required]],
-        translatedTitleContent: ['', []],
-        translatedTitleLanguage: ['', []],
-        subtitle: ['', []],
-        journalTitle: ['', []],
-        startDateGroup: this._fb.group(
-          {
-            startDateDay: ['', []],
-            startDateMonth: ['', []],
-            startDateYear: ['', []],
-          },
-          { validator: dateValidator('startDate') }
-        ),
-        publicationDateYear: ['', []],
-        publicationDateMonth: ['', []],
-        publicationDateDay: ['', []],
-        url: ['', [Validators.pattern(URL_REGEXP)]],
-        citationType: ['', []],
-        citation: ['', []],
-        shortDescription: ['', []],
-        workIdentifiers: new FormArray([
-          this._fb.group({
-            externalIdentifierType: ['', []],
-            externalIdentifierId: ['', []],
-            externalIdentifierUrl: ['', [Validators.pattern(URL_REGEXP)]],
-            externalRelationship: [WorkRelationships.self, []],
-          }),
-        ]),
-        languageCode: ['', []],
-        countryCode: ['', []],
+    // Load an empty work or the current work been edited
 
-        visibility: [(emptyWork.visibility as Visibility).visibility, []],
+    let workObs: Observable<Work>
+    if (this.work?.putCode) {
+      workObs = this._workService.getWorkInfo(this.work.putCode.value)
+    } else {
+      workObs = this._workService.getWork()
+    }
+
+    workObs.subscribe((currentWork) => {
+      this.loadWorkForm(currentWork)
+      this.observeFormChanges()
+
+      this._workService.loadWorkIdTypes().subscribe((value) => {
+        this.workIdTypes = value
       })
-      this.workForm.get('workCategory').valueChanges.subscribe((value) => {
-        this.workTypes = WorkTypesByCategory[value as WorkCategories]
+    })
+  }
+
+  private observeFormChanges() {
+    this.workForm
+      .get('workCategory')
+      .valueChanges.pipe(startWith(this.workForm.value['workCategory']))
+      .subscribe((value) => {
+        if (value) {
+          this.workTypes = WorkTypesByCategory[value as WorkCategories]
+        }
       })
-      this.workForm.get('workType').valueChanges.subscribe((value) => {
-        if (this.workForm.value['workCategory'] && value) {
+
+    this.workForm
+      .get('workType')
+      .valueChanges.pipe(startWith(this.workForm.value['workType']))
+      .subscribe((value) => {
+        if (value && this.workForm.value['workCategory'] && value) {
           this.dynamicTitle =
             WorkTypesTitle[this.workForm.value['workCategory']][value]
         }
       })
-      this.workForm.get('citationType').valueChanges.subscribe((value) => {
+    this.workForm
+      .get('citationType')
+      .valueChanges.pipe(startWith(this.workForm.value['citationType']))
+      .subscribe((value) => {
         if (value !== '') {
           this.workForm.controls.citation.setValidators([Validators.required])
           this.workForm.controls.citation.updateValueAndValidity()
@@ -144,14 +142,52 @@ export class WorkModalComponent implements OnInit {
           this.workForm.controls.citation.updateValueAndValidity()
         }
       })
-      this.workIdentifiersArray = this.workForm.controls
-        .workIdentifiers as FormArray
+    this.checkWorkIdentifiersChanges(0)
+  }
 
-      this.checkWorkIdentifiersChanges(0)
+  private loadWorkForm(currentWork: Work) {
+    this.loading = false
+    this.workForm = this._fb.group({
+      workCategory: [
+        currentWork?.workCategory?.value || '',
+        [Validators.required],
+      ],
+      workType: [currentWork?.workType?.value || '', [Validators.required]],
+      title: [currentWork?.title?.value || '', [Validators.required]],
+      translatedTitleContent: [currentWork?.translatedTitle?.content || '', []],
+      translatedTitleLanguage: [
+        currentWork?.translatedTitle?.languageCode || '',
+        [],
+      ],
+      subtitle: [currentWork?.subtitle?.value || '', []],
+      journalTitle: [currentWork?.journalTitle?.value || '', []],
+      publicationDate: this._fb.group(
+        {
+          publicationDay: [currentWork?.publicationDate?.day || '', []],
+          publicationMonth: [currentWork.publicationDate?.month || '', []],
+          publicationYear: [currentWork?.publicationDate?.year || '', []],
+        },
+        { validator: dateValidator('publication') }
+      ),
+      url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
+      citationType: [currentWork?.citation?.citationType.value || '', []],
+      citation: [currentWork?.citation?.citation.value || '', []],
+      shortDescription: [currentWork?.shortDescription?.value || '', []],
+      workIdentifiers: new FormArray([]),
+      languageCode: [currentWork?.languageCode?.value || '', []],
+      countryCode: [currentWork?.countryCode?.value || '', []],
 
-      this._workService.loadWorkIdTypes().subscribe((value) => {
-        this.workIdTypes = value
-      })
+      visibility: [
+        currentWork?.visibility?.visibility ||
+          currentWork.visibility.visibility,
+        [],
+      ],
+    })
+    this.workIdentifiersFormArray = this.workForm.controls
+      .workIdentifiers as FormArray
+
+    currentWork.workExternalIdentifiers.forEach((workExternalId) => {
+      this.addOtherWorkId(workExternalId)
     })
   }
 
@@ -176,7 +212,7 @@ export class WorkModalComponent implements OnInit {
   }
 
   private checkWorkIdentifiersChanges(index: number) {
-    const formGroup = this.workIdentifiersArray.controls[index] as FormGroup
+    const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
     formGroup.controls.externalIdentifierType.valueChanges.subscribe(
       (externalIdentifierType) => {
         if (externalIdentifierType !== '') {
@@ -215,21 +251,34 @@ export class WorkModalComponent implements OnInit {
     })
   }
 
-  addOtherWorkId() {
-    this.workIdentifiersArray.controls.push(
+  addOtherWorkId(externalId?: ExternalIdentifier) {
+    this.workIdentifiersFormArray.push(
       this._fb.group({
-        externalIdentifierType: ['', []],
-        externalIdentifierId: ['', []],
-        externalIdentifierUrl: ['', [Validators.pattern(URL_REGEXP)]],
-        externalRelationship: [WorkRelationships.self, []],
+        externalIdentifierType: [
+          externalId?.externalIdentifierType.value || '',
+          [],
+        ],
+        externalIdentifierId: [
+          externalId?.externalIdentifierId.value || '',
+          [],
+        ],
+        externalIdentifierUrl: [
+          externalId?.url.value || '',
+          [Validators.pattern(URL_REGEXP)],
+        ],
+        externalRelationship: [
+          externalId?.relationship.value || WorkRelationships.self,
+          [],
+        ],
       })
     )
+
     this.checkWorkIdentifiersChanges(
-      this.workIdentifiersArray.controls.length - 1
+      this.workIdentifiersFormArray.controls.length - 1
     )
   }
   deleteWorkId(id: number) {
-    this.workIdentifiersArray.removeAt(id)
+    this.workIdentifiersFormArray.removeAt(id)
   }
 
   saveEvent() {
@@ -240,9 +289,9 @@ export class WorkModalComponent implements OnInit {
           visibility: this.workForm.value.visibility,
         },
         publicationDate: {
-          month: this.workForm.value.publicationDateMonth,
-          day: this.workForm.value.publicationDateDay,
-          year: this.workForm.value.publicationDateYear,
+          month: this.workForm.value.publicationDate.publicationMonth,
+          day: this.workForm.value.publicationDate.publicationDay,
+          year: this.workForm.value.publicationDate.publicationYear,
         },
         shortDescription: {
           value: this.workForm.value.shortDescription,
@@ -269,13 +318,21 @@ export class WorkModalComponent implements OnInit {
         countryCode: {
           value: this.workForm.value.countryCode,
         },
-        workExternalIdentifiers: this.workForm.value.workIdentifiers.map(
+        workExternalIdentifiers: this.workIdentifiersFormArray.value.map(
           (workExternalId) => {
             return {
-              externalIdentifierId: workExternalId.externalIdentifierId,
-              externalIdentifierType: workExternalId.externalIdentifierType,
-              url: workExternalId.externalIdentifierUrl,
-              relationship: workExternalId.externalRelationship,
+              externalIdentifierId: {
+                value: workExternalId.externalIdentifierId,
+              },
+              externalIdentifierType: {
+                value: workExternalId.externalIdentifierType,
+              },
+              url: {
+                value: workExternalId.externalIdentifierUrl,
+              },
+              relationship: {
+                value: workExternalId.externalRelationship,
+              },
             }
           }
         ),
@@ -295,6 +352,12 @@ export class WorkModalComponent implements OnInit {
         workType: {
           value: this.workForm.value.workType,
         },
+      }
+      if (this.work?.putCode) {
+        work.putCode = this.work.putCode
+      }
+      if (this.work?.source) {
+        work.source = this.work.source
       }
       this._workService.save(work).subscribe((value) => {
         this._dialogRef.close()

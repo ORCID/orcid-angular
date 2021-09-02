@@ -205,7 +205,8 @@ export class RecordWorksService {
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
       )
   }
 
