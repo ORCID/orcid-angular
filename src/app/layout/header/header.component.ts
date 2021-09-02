@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit {
   user: UserInfo
   togglz: Config
   togglzOrcidAngularSignin: boolean
-  togglzNewInfoSite: boolean
   signinRegisterButton = true
   labelLogo = $localize`:@@layout.ariaLabelLogo:orcid mini logo`
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
@@ -75,9 +74,6 @@ export class HeaderComponent implements OnInit {
       this.hideMainMenu =
         ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcidTEMP}`
     })
-    _togglz
-      .getStateOf('NEW_INFO_SITE')
-      .subscribe((value) => (this.togglzNewInfoSite = value))
   }
 
   ngOnInit() {}
@@ -273,14 +269,12 @@ export class HeaderComponent implements OnInit {
   preNavigate(route: string) {
     if (route.indexOf('://') >= 0) {
       this.navigateTo(route)
-    } else if (this.togglzNewInfoSite) {
+    } else {
       this.navigateTo(
         environment.INFO_SITE_TEMPORAL_WHILE_TRANSITIONING_TO_THE_NEW_INFO_WEBSITE +
           route
       )
-    } else {
-      this.navigateTo(environment.INFO_SITE + route)
-    }
+    } 
   }
 
   navigateTo(val) {

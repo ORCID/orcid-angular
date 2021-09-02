@@ -13,7 +13,6 @@ import { TogglzService } from '../../core/togglz/togglz.service'
 export class FooterComponent implements OnInit {
   platform
   labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
-  togglzNewInfoSite: boolean
   infoSiteBaseUrl = environment.INFO_SITE
 
   constructor(
@@ -24,9 +23,6 @@ export class FooterComponent implements OnInit {
     _platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
     })
-    _togglz
-      .getStateOf('NEW_INFO_SITE')
-      .subscribe((value) => (this.togglzNewInfoSite = value))
   }
 
   ngOnInit() {}

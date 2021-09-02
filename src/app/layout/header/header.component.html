@@ -64,11 +64,7 @@
 >
   <!-- TODO @leomendoza123 Once the new info site is stable, remove this togglz hidden to save render time -->
   <div
-    [hidden]="togglzNewInfoSite === undefined"
-    [ngClass]="{
-      'top-bar': !togglzNewInfoSite,
-      'top-bar-new-info': togglzNewInfoSite
-    }"
+    class="top-bar-new-info"
   >
     <div class="menu-container" [ngClass]="{ container: platform.columns12 }">
       <ng-template #recursiveList let-list let-parents="parents">
@@ -80,9 +76,8 @@
             >
               <button
                 [ngClass]="{
-                  active: item.activeRoute === currentRoute,
-                  'no-hover-effect': togglzNewInfoSite
-                }"
+                  active: item.activeRoute === currentRoute}"
+                class="no-hover-effect"
                 mat-button
                 [color]="menuButtonColor(parents)"
                 (focus)="mouseEnter(parents.concat(item.id))"
