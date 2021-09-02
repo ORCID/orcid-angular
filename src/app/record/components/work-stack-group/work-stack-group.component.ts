@@ -137,6 +137,7 @@ export class WorkStackGroupComponent implements OnInit {
     this.userRecordContext.sortAsc = event.direction === 'asc'
     this._works.changeUserRecordContext(this.userRecordContext)
   }
+
   combine() {
     this.openModal(ModalCombineWorksComponent, this.selectedWorks)
   }
