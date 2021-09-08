@@ -8,13 +8,15 @@ import {
   Validators,
 } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
-import { map } from 'rxjs/operators'
+import { first, map } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { URL_REGEXP } from 'src/app/constants'
+import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { dateValidator } from 'src/app/shared/validators/date/date.validator'
+import { RecordCountryCodesEndpoint } from 'src/app/types'
 import { Visibility } from 'src/app/types/common.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
 import {
@@ -75,16 +77,25 @@ export class WorkModalComponent implements OnInit {
     | typeof WorkIntellectualPropertyTypes
     | typeof WorkOtherOutputTypes
     | {} = {}
+  originalCountryCodes: RecordCountryCodesEndpoint
 
   constructor(
     private _fb: FormBuilder,
     private _platform: PlatformInfoService,
     private _workService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
+    private _recordCountryService: RecordCountriesService,
     @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {
+    this._recordCountryService
+      .getCountryCodes()
+      .pipe(first())
+      .subscribe((codes) => {
+        this.originalCountryCodes = codes
+      })
+
     this._platform.get().subscribe((value) => {
       this.platform = value
     })

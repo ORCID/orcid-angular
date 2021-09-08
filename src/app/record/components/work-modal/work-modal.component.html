@@ -822,10 +822,10 @@
             name="item"
           >
             <mat-option
-              *ngFor="let item of languageMap | keyvalue"
-              [value]="item.key"
+              *ngFor="let item of originalCountryCodes | keyvalue"
+              [value]="item.value"
             >
-              {{ item.value }}
+              {{ item.key }}
             </mat-option>
           </mat-select>
         </mat-form-field>
