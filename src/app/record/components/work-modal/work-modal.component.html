@@ -78,7 +78,6 @@
     <div>
       <div class="row">
         <label
-          for="given-names-input"
           class="mat-caption title"
           [ngClass]="{
             error:
@@ -116,7 +115,6 @@
     <div [ngClass]="{ hide: (workTypes | keyvalue).length === 0 }">
       <label
         class="row"
-        for="given-names-input"
         class="mat-caption"
         [ngClass]="{
           error:
@@ -161,7 +159,7 @@
               workForm.get('title').touched
           }"
         >
-          <strong i18n="@@topBar.givenNames">Title</strong>
+          <strong i18n="@@works.title">Title</strong>
           <span class="required">*</span>
         </label>
       </div>
@@ -225,7 +223,7 @@
       <div>
         <div class="row">
           <label for="given-names-input" class="mat-caption">
-            <strong i18n="@@topBar.givenNames">Language of this title</strong>
+            <strong i18n="@@works.languageOnThisTitle">Language of this title</strong>
           </label>
         </div>
         <div class="row">
@@ -252,7 +250,7 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong i18n="@@works.Subtitle">Work Subtitle</strong>
+          <strong i18n="@@works.subtitle">Work Subtitle</strong>
         </label>
       </div>
 
@@ -265,7 +263,7 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong i18n="@@topBar.givenNames">{{
+          <strong>{{
             dynamicTitle | recordWorkTitleNameLabel
           }}</strong>
         </label>
@@ -372,7 +370,7 @@
               workForm.get('url').touched
           }"
         >
-          <strong i18n="@@topBar.givenNames">Link</strong>
+          <strong i18n="@@works.link">Link</strong>
         </label>
       </div>
 
@@ -524,7 +522,7 @@
       }"
     >
       <p>
-        <strong i18n="@@shared.visibility" i18n="@@works.workIds">
+        <strong  i18n="@@works.workIds">
           Work identifiers</strong
         >
       </p>
@@ -612,7 +610,6 @@
                 }"
               >
                 <strong
-                  i18n="@@topBar.givenNames"
                   i18n="@@works.identifierValue"
                   >Identifier value
                 </strong>
