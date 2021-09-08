@@ -139,6 +139,7 @@ export class WorkModalComponent implements OnInit {
         if (value && this.workForm.value['workCategory'] && value) {
           this.dynamicTitle =
             WorkTypesTitle[this.workForm.value['workCategory']][value]
+          console.log(this.dynamicTitle)
         }
       })
     this.workForm

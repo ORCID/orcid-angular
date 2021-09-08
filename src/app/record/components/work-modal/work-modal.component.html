@@ -40,6 +40,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-work-button"
+      [disabled]="!workForm.valid"
     >
       Save changes
     </button>
@@ -223,7 +224,9 @@
       <div>
         <div class="row">
           <label for="given-names-input" class="mat-caption">
-            <strong i18n="@@works.languageOnThisTitle">Language of this title</strong>
+            <strong i18n="@@works.languageOnThisTitle"
+              >Language of this title</strong
+            >
           </label>
         </div>
         <div class="row">
@@ -263,9 +266,7 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong>{{
-            dynamicTitle | recordWorkTitleNameLabel
-          }}</strong>
+          <strong>{{ dynamicTitle | recordWorkTitleNameLabel }}</strong>
         </label>
       </div>
 
@@ -522,9 +523,7 @@
       }"
     >
       <p>
-        <strong  i18n="@@works.workIds">
-          Work identifiers</strong
-        >
+        <strong i18n="@@works.workIds"> Work identifiers</strong>
       </p>
     </div>
     <hr />
@@ -609,8 +608,7 @@
                     workIdentifiersGroup.get('externalIdentifierId').touched
                 }"
               >
-                <strong
-                  i18n="@@works.identifierValue"
+                <strong i18n="@@works.identifierValue"
                   >Identifier value
                 </strong>
                 <span class="required">*</span>
