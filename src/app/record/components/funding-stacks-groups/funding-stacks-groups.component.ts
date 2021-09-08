@@ -30,7 +30,7 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
-  fundings: FundingGroup[]
+  fundings: FundingGroup[] = []
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
   countryCodes: { key: string; value: string }[]

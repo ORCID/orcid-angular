@@ -205,7 +205,8 @@ export class RecordWorksService {
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
       )
   }
 
@@ -275,6 +276,25 @@ export class RecordWorksService {
   combine(putCodes: string[]): Observable<any> {
     return this._http
       .post(environment.API_WEB + 'works/group/' + putCodes.join(','), {})
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
+  visibility(
+    putCodes: string[],
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'works/' +
+          putCodes.join(',') +
+          '/visibility/' +
+          visibility
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

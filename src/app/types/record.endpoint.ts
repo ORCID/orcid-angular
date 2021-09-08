@@ -99,7 +99,7 @@ export interface AssertionBase {
   countryName?: Value
   commonName?: string
   reference?: string
-  url?: any
+  url?: Value
   urlName?: string
   sourceName?: string
   content?: string

@@ -1,12 +1,13 @@
-<app-panel-data-line
-  *ngFor="let workExternal of externalIdentifiers"
-  [prefixTitle]="workExternal?.relationship?.value"
-  title="{{ workExternal.externalIdentifierType.value + ':' | uppercase }}"
-  [content]="workExternal.externalIdentifierId.value"
-  [url]="workExternal.url?.value || workExternal.normalizedUrl?.value"
-  [titleMargin]="false"
-  [secondaryText]="true"
-  [marginBotton]="false"
-  [noBoldTitle]="noBoldTitle"
->
-</app-panel-data-line>
+<ng-container *ngFor="let workExternal of externalIdentifiers">
+  <app-panel-data-line
+    [prefixTitle]="workExternal?.relationship?.value"
+    title="{{ workExternal.externalIdentifierType.value + ':' | uppercase }}"
+    [content]="workExternal.externalIdentifierId?.value || undefinedIdLabel"
+    [url]="workExternal.url?.value || workExternal.normalizedUrl?.value"
+    [titleMargin]="false"
+    [secondaryText]="true"
+    [marginBotton]="false"
+    [noBoldTitle]="noBoldTitle"
+  >
+  </app-panel-data-line>
+</ng-container>

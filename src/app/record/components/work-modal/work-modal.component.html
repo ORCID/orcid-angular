@@ -276,7 +276,7 @@
       </mat-form-field>
     </div>
     <!-- Publication date -->
-    <ng-container formGroupName="startDateGroup">
+    <ng-container formGroupName="publicationDate">
       <div class="row">
         <label
           for="url-input"
@@ -297,7 +297,7 @@
           >
             <mat-select
               placeholder="{{ ngOrcidYear }}"
-              formControlName="startDateYear"
+              formControlName="publicationYear"
             >
               <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
               <mat-option
@@ -317,7 +317,7 @@
           >
             <mat-select
               placeholder="{{ ngOrcidMonth }}"
-              formControlName="startDateMonth"
+              formControlName="publicationMonth"
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option
@@ -337,7 +337,7 @@
           >
             <mat-select
               placeholder="{{ ngOrcidDay }}"
-              formControlName="startDateDay"
+              formControlName="publicationDay"
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
               <mat-option
@@ -352,7 +352,7 @@
         <mat-error
           class="mat-caption"
           i18n="@@shared.invalidDate"
-          *ngIf="workForm.get('startDateGroup').errors?.date"
+          *ngIf="workForm.get('publicationDate').errors?.date"
         >
           Invalid date
         </mat-error>
@@ -534,7 +534,7 @@
     <div formArrayName="workIdentifiers">
       <ng-container
         *ngFor="
-          let workIdentifiersGroup of workIdentifiersArray.controls;
+          let workIdentifiersGroup of workIdentifiersFormArray.controls;
           let i = index;
           let last = last
         "
@@ -739,7 +739,7 @@
             <button
               mat-icon-button
               (click)="deleteWorkId(i)"
-              *ngIf="workIdentifiersArray.controls.length > 1"
+              *ngIf="workIdentifiersFormArray.controls.length > 1"
             >
               <mat-icon>delete</mat-icon>
             </button>
