@@ -36,37 +36,36 @@
         </p>
       </div>
     </div>
-    <div class="row">
-      <h3
-        class="col no-gutters orc-font-body-small"
-        i18n="@@side-bar.myCountries">
-          My countries
-      </h3>
-    </div>
-
-    <div
-      class="row"
-      id="country-droplist"
-      cdkDropList
-      (cdkDropListDropped)="drop($event)"
-      class="country-wrapper"
-    >
+    <ng-container *ngIf="countries?.length > 0">
+      <div class="row">
+        <h3
+          class="col no-gutters orc-font-body-small"
+          i18n="@@side-bar.myCountries">
+            My countries
+        </h3>
+      </div>
       <div
-        cdkDrag
-        rootElementSelector="#country-droplist"
-        class="row country-input-line"
-        [ngClass]="{ 'no-wrap': !isMobile }"
-        [ngStyle]="{ direction: screenDirection }"
-        [formGroupName]="country.putCode"
-        *ngFor="let country of countries; index as i"
-        [attr.id]="'draggable-' + i"
+        class="row country-wrapper"
+        id="country-droplist"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
       >
-        <div class="col l12 m8 s4 top no-wrap no-gutters">
-          <img
-            cdkDragHandle
-            src="./assets/vectors/draggable.svg"
-            aria-label="drag handle"
-          />
+        <div
+          cdkDrag
+          rootElementSelector="#country-droplist"
+          class="row country-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [ngStyle]="{ direction: screenDirection }"
+          [formGroupName]="country.putCode"
+          *ngFor="let country of countries; index as i"
+          [attr.id]="'draggable-' + i"
+        >
+          <div class="col l12 m8 s4 top no-wrap no-gutters">
+            <img
+              cdkDragHandle
+              src="./assets/vectors/draggable.svg"
+              aria-label="drag handle"
+            />
 
           <mat-form-field
             appearance="outline"
@@ -108,7 +107,7 @@
         </div>
       </div>
     </div>
-
+  </ng-container>
     <div class="row">
       <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
