@@ -46,12 +46,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _openGraph: OpenGraphService,
     private _robotsMeta: RobotsMetaTagsService
   ) {
-    _userInfoService
-      .getUserInfo()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userInfo) => {
-        this.userInfo = userInfo
-      })
     this.checkIfThisIsAPublicOrcid()
   }
 
@@ -95,6 +89,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.userInfo = userRecord?.userInfo
         this.checkLoadingState(userRecord)
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
