@@ -64,6 +64,7 @@
               class="icon-drag"
               cdkDragHandle
               src="./assets/vectors/draggable.svg"
+              aria-label="drag handle"
             />
             <div class="row">
               <mat-form-field
@@ -122,8 +123,10 @@
                   class="mat-caption"
                   *ngIf="website.putCode.indexOf('new') < 0"
                 >
-                  <ng-container i18n="@@shared.source">Source:</ng-container>
-                  {{ getSource(website) }}
+                  <span i18n="@@shared.source">Source:</span>
+                  {{ getSourceName(website) }},
+                  <span i18n="@@shared.created">Created:</span>
+                  {{ website.createdDate | monthDayYearDateToString }}
                 </mat-hint>
               </mat-form-field>
             </div>

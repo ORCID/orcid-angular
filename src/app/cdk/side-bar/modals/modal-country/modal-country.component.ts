@@ -186,10 +186,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     return address.sourceName || address.source
   }
 
-  getDate(date: Address) {
-    return getDate(date)
-  }
-
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
