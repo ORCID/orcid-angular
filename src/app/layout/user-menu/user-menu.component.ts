@@ -21,7 +21,6 @@ export class UserMenuComponent implements OnInit {
   userInfo: UserInfo
   displayName: string
   platform: PlatformInfo
-  togglzOrcidAngularSignin: boolean
   togglzOrcidAngularInbox: boolean
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:sign in or register`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
@@ -46,10 +45,6 @@ export class UserMenuComponent implements OnInit {
       this.platform = data
     })
     _togglz
-      .getStateOf('ORCID_ANGULAR_SIGNIN')
-      .subscribe((value) => (this.togglzOrcidAngularSignin = value))
-
-    _togglz
       .getStateOf('ORCID_ANGULAR_INBOX')
       .subscribe((value) => (this.togglzOrcidAngularInbox = value))
   }
@@ -57,7 +52,7 @@ export class UserMenuComponent implements OnInit {
   ngOnInit() {}
 
   goto(url) {
-    if (url === 'signin' && this.togglzOrcidAngularSignin) {
+    if (url === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
     } else if (url === 'inbox' && this.togglzOrcidAngularInbox) {
       this._router.navigate([ApplicationRoutes.inbox])
