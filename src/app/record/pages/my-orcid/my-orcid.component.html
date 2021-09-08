@@ -12,7 +12,11 @@
       </app-side-bar>
       <main id="main" class="col l9 m8 s4">
         <app-main>
-          <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
+          <app-top-bar
+            [isPublicRecord]="publicOrcid"
+            class="row"
+            [loadingUserRecord]="loadingUserRecord"
+          ></app-top-bar>
           <app-side-bar
             *ngIf="platform.columns8 || platform.columns4"
             class="col l3 m8 s4"
@@ -81,7 +85,7 @@
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-peer-reviews>
-          <ng-container *ngIf="!recordWithIssues">
+          <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">
             <div
               class="no-public-info"
               *ngIf="publicOrcid && affiliations === 0"

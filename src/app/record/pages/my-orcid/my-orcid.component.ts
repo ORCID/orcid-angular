@@ -36,6 +36,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   expandedPeerReview: boolean
   recordWithIssues: boolean
   userNotFound: boolean
+  loadingUserRecord: boolean
 
   constructor(
     _userInfoService: UserInfoService,
@@ -94,6 +95,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.checkLoadingState(userRecord)
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
@@ -162,5 +164,16 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this.collapse()
       }
     }
+  }
+
+  checkLoadingState(userRecord: UserRecord) {
+    const missingValues = Object.keys(userRecord).filter((key) => {
+      if (key !== 'preferences' && key !== 'lastModifiedTime') {
+        return userRecord[key] === undefined
+      } else {
+        return false
+      }
+    })
+    this.loadingUserRecord = !!missingValues.length
   }
 }
