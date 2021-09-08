@@ -6,11 +6,7 @@
 >
   <div class="source-items">
     <div>
-      <ng-container *ngIf="!topPanelOfTheStackMode && clickableSource">
-        <strong i18n="@@record.source">Source</strong
-        ><ng-container>: </ng-container
-        ><a (click)="clickDisplayAsTopPanelOfTheStack()">{{ sourceName }}</a>
-      </ng-container>
+      <!-- TOP PANEL SOURCE TITLE -->
       <div *ngIf="topPanelOfTheStackMode || !clickableSource">
         <strong i18n="@@record.source">Source</strong>:
         <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
@@ -19,6 +15,18 @@
         </ng-container>
         {{ sourceName }}
       </div>
+      <!-- OTHER SOURCES (COLLAPSED PANEL) URL -->
+      <ng-container *ngIf="!topPanelOfTheStackMode && clickableSource">
+        <strong i18n="@@record.source">Source</strong
+        ><ng-container>: </ng-container
+        ><a (click)="clickDisplayAsTopPanelOfTheStack()">
+          <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
+            {{ assertionOriginName || assertionOriginOrcid }}
+            <i i18n="@@shared.onBehalfOf">via</i>
+          </ng-container>
+          {{ sourceName }}</a
+        >
+      </ng-container>
     </div>
     <div class="preferred-source" *ngIf="isPreferred && stackLength > 1">
       <i class="material-icons"> grade </i>
