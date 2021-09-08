@@ -20,15 +20,9 @@
         </div>
         <div>
           <span *ngIf="researchResource.startDate">
-            <span *ngIf="researchResource.startDate.year">{{
-              researchResource.startDate.year
-            }}</span>
-            <span *ngIf="researchResource.startDate.month"
-              >-{{ researchResource.startDate.month }}</span
-            >
-            <span *ngIf="researchResource.startDate.day"
-              >-{{ researchResource?.startDate.day }}</span
-            >
+             <span>{{
+               researchResource.startDate | monthDayYearDateToString
+               }}</span>
             <span> to </span>
             <span
               [hidden]="
@@ -39,28 +33,16 @@
               present
             </span>
             <span *ngIf="researchResource.endDate">
-              <span *ngIf="researchResource.endDate.year">{{
-                researchResource.endDate.year
+              <span>{{
+                researchResource.endDate | monthDayYearDateToString
               }}</span>
-              <span *ngIf="researchResource.endDate.month"
-                >-{{ researchResource.endDate.month }}</span
-              >
-              <span *ngIf="researchResource.endDate.day"
-                >-{{ researchResource.endDate.day }}</span
-              >
             </span>
           </span>
           <!--End date-->
           <span *ngIf="!researchResource.startDate && researchResource.endDate">
-            <span *ngIf="researchResource.endDate.year">{{
-              researchResource.endDate.year
-            }}</span>
-            <span *ngIf="researchResource.endDate.month"
-              >-{{ researchResource.endDate.month }}</span
-            >
-            <span *ngIf="researchResource.endDate.day"
-              >-{{ researchResource.endDate.day }}</span
-            >
+             <span>{{
+               researchResource.endDate | monthDayYearDateToString
+               }}</span>
           </span>
         </div>
         <app-display-external-ids
