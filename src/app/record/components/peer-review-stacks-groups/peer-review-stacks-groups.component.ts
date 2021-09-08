@@ -27,6 +27,7 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 export class PeerReviewStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
+  @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
@@ -54,6 +55,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   isMobile: boolean
 
   ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
+  loading = true
 
   constructor(
     _platform: PlatformInfoService,
@@ -94,6 +96,9 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        if (userRecord.peerReviews !== undefined) {
+          this.loading = false
+        }
         if (!isEmpty(userRecord?.peerReviews)) {
           this.peerReviews = userRecord.peerReviews
           this.total.emit(this.peerReviews.length)

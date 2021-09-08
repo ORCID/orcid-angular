@@ -28,7 +28,6 @@ export function dateValidator(dateType: string) {
     if (year && month && day) {
       date = new Date(year + '/' + month + '/' + day)
     }
-
     if (date && !isNaN(date.getTime())) {
       return null
     }

@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
-import { isEmpty } from 'lodash'
+import { isEmpty, isUndefined } from 'lodash'
 import { Assertion } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
 
@@ -74,14 +74,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   checkLoadingState(userRecord: UserRecord) {
     const missingValues = Object.keys(userRecord).filter((key) => {
-      if (
-        key !== 'names' &&
-        key !== 'lastModifiedTime' &&
-        this.isPublicRecord
-      ) {
-        return typeof userRecord[key] === 'boolean' && !userRecord[key]
-      } else if (key !== 'lastModifiedTime') {
-        return typeof userRecord[key] === 'boolean' && !userRecord[key]
+      if (key !== 'preferences' && key !== 'lastModifiedTime') {
+        return userRecord[key] === undefined
       } else {
         return false
       }
