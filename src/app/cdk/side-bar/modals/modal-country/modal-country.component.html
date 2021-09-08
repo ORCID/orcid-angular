@@ -79,7 +79,10 @@
               <span i18n="@@shared.source">Source:</span>
               {{ getSourceName(countriesMap[country.putCode]) }},
               <span i18n="@@shared.created">Created:</span>
-              {{ countriesMap[country.putCode].createdDate | monthDayYearDateToString }}
+              {{
+                countriesMap[country.putCode].createdDate
+                  | monthDayYearDateToString
+              }}
             </mat-hint>
           </mat-form-field>
         </div>

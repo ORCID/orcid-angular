@@ -59,7 +59,10 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
 
     personIdentifiers.forEach((personId) => {
       group[personId.putCode] = new FormGroup({
-        identifier: new FormControl({value: personId.commonName + ': ' + personId.reference, disabled: true}),
+        identifier: new FormControl({
+          value: personId.commonName + ': ' + personId.reference,
+          disabled: true,
+        }),
         visibility: new FormControl(personId.visibility.visibility, {}),
       })
     })

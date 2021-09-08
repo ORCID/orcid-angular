@@ -75,24 +75,19 @@
             aria-label="drag handle"
           />
           <div class="row">
-            <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <input
-              id="identifier-input"
-              matInput
-              formControlName="identifier"
-            />
-            <mat-hint
-              class="mat-caption"
-            >
-              <span i18n="@@shared.source">Source:</span>
-              {{ getSourceName(personIdentifier) }},
-              <span i18n="@@shared.created">Created:</span>
-              {{ personIdentifier.createdDate | monthDayYearDateToString }}
-            </mat-hint>
-          </mat-form-field>
+            <mat-form-field appearance="outline" class="mat-form-field-min">
+              <input
+                id="identifier-input"
+                matInput
+                formControlName="identifier"
+              />
+              <mat-hint class="mat-caption">
+                <span i18n="@@shared.source">Source:</span>
+                {{ getSourceName(personIdentifier) }},
+                <span i18n="@@shared.created">Created:</span>
+                {{ personIdentifier.createdDate | monthDayYearDateToString }}
+              </mat-hint>
+            </mat-form-field>
           </div>
         </div>
         <div
@@ -107,9 +102,8 @@
             class="delete-button"
           >
             <mat-icon class="material-icons-outlined extra-large-material-icon"
-            >delete
-            </mat-icon
-            >
+              >delete
+            </mat-icon>
           </button>
         </div>
       </div>

@@ -22,7 +22,6 @@ import {
   CountriesEndpoint,
   RecordCountryCodesEndpoint,
 } from 'src/app/types/record-country.endpoint'
-import { getDate } from '../../../../constants'
 
 @Component({
   selector: 'app-modal-country',
