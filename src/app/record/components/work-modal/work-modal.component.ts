@@ -215,7 +215,13 @@ export class WorkModalComponent implements OnInit {
               return {
                 validFormat: !value.validFormat,
               }
+            }
+            if (value.generatedUrl) {
+              formGroup.controls.externalIdentifierUrl.setValue(
+                value.generatedUrl
+              )
             } else {
+              formGroup.controls.externalIdentifierUrl.setValue(null)
             }
           })
         )
