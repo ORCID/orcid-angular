@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router'
     PlatformInfoModule,
     WindowModule,
     MatDialogModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [IsThisYouComponent],
 })
