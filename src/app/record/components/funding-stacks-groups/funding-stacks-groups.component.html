@@ -1,5 +1,6 @@
 <!-- A PANELS COMPONENT FOR EACH GROUP OF FUNDING -->
 <app-panels
+  *ngIf="!(loading || (fundings?.length === 0 && isPublicRecord))"
   class="row"
   [title]="ngOrcidFunding"
   [type]="'funding'"

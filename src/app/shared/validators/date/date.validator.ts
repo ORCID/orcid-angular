@@ -5,9 +5,6 @@ export function dateValidator(dateType: string) {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
     const day = c.get(dateType + 'Day').value
-
-    console.log(year, month, day)
-
     if (!year && !month && !day) {
       return null
     }
@@ -25,8 +22,6 @@ export function dateValidator(dateType: string) {
     if (year && month && day) {
       date = new Date(year + '/' + month + '/' + day)
     }
-
-    console.log(date)
     if (date && !isNaN(date.getTime())) {
       return null
     }

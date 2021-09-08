@@ -94,34 +94,36 @@ export class RecordService {
       }
 
       combineLatest([
-        this._recordEmailsService.getEmails(options).pipe(startWith(false)),
+        this._recordEmailsService.getEmails(options).pipe(startWith(<Object>undefined)),
         this._recordOtherNamesService
           .getOtherNames(options)
-          .pipe(startWith(false)),
-        this._recordCountryService.getAddresses(options).pipe(startWith(false)),
-        this._recordKeywordService.getKeywords(options).pipe(startWith(false)),
-        this._recordWebsitesService.getWebsites(options).pipe(startWith(false)),
+          .pipe(startWith(<Object>undefined)),
+        this._recordCountryService.getAddresses(options).pipe(startWith(<Object>undefined)),
+        this._recordKeywordService.getKeywords(options).pipe(startWith(<Object>undefined)),
+        this._recordWebsitesService.getWebsites(options).pipe(startWith(<Object>undefined)),
         this._recordPersonalIdentifier
           .getPersonalIdentifiers(options)
-          .pipe(startWith(false)),
-        this._recordNamesService.getNames(options).pipe(startWith(false)),
+          .pipe(startWith(<Object>undefined)),
+        this._recordNamesService.getNames(options).pipe(startWith(<Object>undefined)),
         this._recordBiographyService
           .getBiography(options)
-          .pipe(startWith(false)),
+          .pipe(startWith(<Object>undefined)),
         this._recordAffiliations
           .getAffiliations(options)
-          .pipe(startWith(false)),
-        this._recordFundings.getFundings(options).pipe(startWith(false)),
-        this.getPreferences(options).pipe(startWith(false)),
+          .pipe(startWith(<Object>undefined)),
+        this._recordFundings
+          .getFundings(options)
+          .pipe(startWith(<Object>undefined)),
+        this.getPreferences(options).pipe(startWith(<Object>undefined)),
         this._recordPeerReviewService
           .getPeerReviewGroups(options)
-          .pipe(startWith(false)),
+          .pipe(startWith(<Object>undefined)),
         this._recordResearchResourceService
           .getResearchResourcePage(options)
-          .pipe(startWith(false)),
-        this._recordWorkService.getWorks(options).pipe(startWith(false)),
-        this.getLastModifiedTime(options).pipe(startWith(false)),
-        this._userInfo.getUserInfo(options).pipe(startWith(false)),
+          .pipe(startWith(<Object>undefined)),
+        this._recordWorkService.getWorks(options).pipe(startWith(<Object>undefined)),
+        this.getLastModifiedTime(options).pipe(startWith(<Object>undefined)),
+        this._userInfo.getUserInfo(options).pipe(startWith(<Object>undefined)),
       ])
         .pipe(
           tap(
