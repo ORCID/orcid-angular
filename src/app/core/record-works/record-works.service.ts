@@ -54,7 +54,7 @@ export class RecordWorksService {
    *
    * @param id user Orcid id
    */
-  getWorks(options: UserRecordOptions) {
+  getWorks(options: UserRecordOptions): Observable<WorksEndpoint> {
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
@@ -206,7 +206,13 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks({ forceReload: true }))
+        switchMap(() => {
+          if (work.putCode?.value) {
+            return this.getDetails(work.putCode.value)
+          } else {
+            return this.getWorks({ forceReload: true })
+          }
+        })
       )
   }
 
