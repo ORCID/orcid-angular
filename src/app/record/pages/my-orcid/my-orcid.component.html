@@ -81,24 +81,29 @@
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-peer-reviews>
-          <div class="no-public-info" *ngIf="publicOrcid && affiliations === 0">
-            <mat-icon>error</mat-icon>
-            <ng-container i18n="@@record.noPublicInfo"
-              >No public information available.
-            </ng-container>
-          </div>
-          <div
-            class="orc-font-body-small"
-            *ngIf="publicOrcid && userRecord?.lastModifiedTime"
-            [ngClass]="{ 'last-modified': affiliations === 0 }"
-          >
-            <i>
-              <span i18n="@@shared.lastModifiedTime">
-                Record last modified
-              </span>
-              {{ userRecord?.lastModifiedTime | date: 'medium':'UTC' }} UTC
-            </i>
-          </div>
+          <ng-container *ngIf="!recordWithIssues">
+            <div
+              class="no-public-info"
+              *ngIf="publicOrcid && affiliations === 0"
+            >
+              <mat-icon>error</mat-icon>
+              <ng-container i18n="@@record.noPublicInfo"
+                >No public information available.
+              </ng-container>
+            </div>
+            <div
+              class="orc-font-body-small"
+              *ngIf="publicOrcid && userRecord?.lastModifiedTime"
+              [ngClass]="{ 'last-modified': affiliations === 0 }"
+            >
+              <i>
+                <span i18n="@@shared.lastModifiedTime">
+                  Record last modified
+                </span>
+                {{ userRecord?.lastModifiedTime | date: 'medium':'UTC' }} UTC
+              </i>
+            </div>
+          </ng-container>
           <app-statistics
             [ngClass]="{ mobile: !platform.columns12 }"
           ></app-statistics>
