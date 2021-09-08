@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
-import { isEmpty, isUndefined } from 'lodash'
+import { isEmpty } from 'lodash'
 import { Assertion } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
 

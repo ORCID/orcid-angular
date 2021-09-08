@@ -94,17 +94,27 @@ export class RecordService {
       }
 
       combineLatest([
-        this._recordEmailsService.getEmails(options).pipe(startWith(<Object>undefined)),
+        this._recordEmailsService
+          .getEmails(options)
+          .pipe(startWith(<Object>undefined)),
         this._recordOtherNamesService
           .getOtherNames(options)
           .pipe(startWith(<Object>undefined)),
-        this._recordCountryService.getAddresses(options).pipe(startWith(<Object>undefined)),
-        this._recordKeywordService.getKeywords(options).pipe(startWith(<Object>undefined)),
-        this._recordWebsitesService.getWebsites(options).pipe(startWith(<Object>undefined)),
+        this._recordCountryService
+          .getAddresses(options)
+          .pipe(startWith(<Object>undefined)),
+        this._recordKeywordService
+          .getKeywords(options)
+          .pipe(startWith(<Object>undefined)),
+        this._recordWebsitesService
+          .getWebsites(options)
+          .pipe(startWith(<Object>undefined)),
         this._recordPersonalIdentifier
           .getPersonalIdentifiers(options)
           .pipe(startWith(<Object>undefined)),
-        this._recordNamesService.getNames(options).pipe(startWith(<Object>undefined)),
+        this._recordNamesService
+          .getNames(options)
+          .pipe(startWith(<Object>undefined)),
         this._recordBiographyService
           .getBiography(options)
           .pipe(startWith(<Object>undefined)),
@@ -121,7 +131,9 @@ export class RecordService {
         this._recordResearchResourceService
           .getResearchResourcePage(options)
           .pipe(startWith(<Object>undefined)),
-        this._recordWorkService.getWorks(options).pipe(startWith(<Object>undefined)),
+        this._recordWorkService
+          .getWorks(options)
+          .pipe(startWith(<Object>undefined)),
         this.getLastModifiedTime(options).pipe(startWith(<Object>undefined)),
         this._userInfo.getUserInfo(options).pipe(startWith(<Object>undefined)),
       ])
