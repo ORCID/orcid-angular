@@ -20,9 +20,9 @@
         </div>
         <div>
           <span *ngIf="researchResource.startDate">
-             <span>{{
-               researchResource.startDate | monthDayYearDateToString
-               }}</span>
+            <span>{{
+              researchResource.startDate | monthDayYearDateToString
+            }}</span>
             <span> to </span>
             <span
               [hidden]="
@@ -40,9 +40,9 @@
           </span>
           <!--End date-->
           <span *ngIf="!researchResource.startDate && researchResource.endDate">
-             <span>{{
-               researchResource.endDate | monthDayYearDateToString
-               }}</span>
+            <span>{{
+              researchResource.endDate | monthDayYearDateToString
+            }}</span>
           </span>
         </div>
         <app-display-external-ids
