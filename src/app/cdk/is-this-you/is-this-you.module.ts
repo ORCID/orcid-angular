@@ -5,6 +5,7 @@ import { PlatformInfoModule } from '../platform-info'
 import { WindowModule } from '../window'
 import { MatButtonModule } from '@angular/material/button'
 import { MatDialogModule } from '@angular/material/dialog'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
   declarations: [IsThisYouComponent],
@@ -14,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog'
     PlatformInfoModule,
     WindowModule,
     MatDialogModule,
+    RouterModule,
   ],
   exports: [IsThisYouComponent],
 })
