@@ -78,7 +78,6 @@
     <div>
       <div class="row">
         <label
-          for="given-names-input"
           class="mat-caption title"
           [ngClass]="{
             error:
@@ -185,7 +184,7 @@
     <!-- Funding project translations title -->
     <div
       [hidden]="
-        !funding?.fundingTitle?.translatedTitle?.content ||
+        !!funding?.fundingTitle?.translatedTitle?.content ||
         !showTranslationTitle
       "
     >
@@ -343,7 +342,6 @@
     <div class="row" formGroupName="startDateGroup">
       <div class="row">
         <label
-          for="url-input"
           class="mat-caption"
           [ngClass]="{
             error: fundingForm.hasError('date', 'startDateGroup')
@@ -405,7 +403,6 @@
     <div class="row" formGroupName="endDateGroup">
       <div class="row">
         <label
-          for="url-input"
           class="mat-caption"
           [ngClass]="{
             error: fundingForm.hasError('date', 'endDateGroup')
@@ -545,7 +542,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <label for="organization-input" class="mat-caption">
+      <label class="mat-caption">
         <strong i18n="@@shared.city">City</strong>
         <span class="required">*</span>
       </label>
@@ -698,7 +695,6 @@
           <div>
             <div class="row relationship">
               <label
-                for="given-names-input"
                 class="mat-caption"
                 [ngClass]="{
                   error:
@@ -711,29 +707,31 @@
               </label>
             </div>
 
-            <mat-radio-group
-              aria-label="Select an option"
-              appearance="outline"
-              class="mat-form-field-min"
-              formControlName="fundingRelationship"
-            >
-              <ng-container *ngFor="let value of fundingRelationships">
-                <mat-radio-button [value]="value"
-                  >{{ value | recordFundingRelationshipLabel }}
-                </mat-radio-button>
-                <mat-hint class="mat-caption"
-                  >{{ value | recordFundingRelationshipHintLabel }}
-                </mat-hint>
-              </ng-container>
-            </mat-radio-group>
-
-            <button
-              mat-icon-button
-              (click)="deleteGrant(i)"
-              *ngIf="grantsArray.controls.length > 1"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
+            <div class="row">
+              <mat-radio-group
+                aria-label="Select an option"
+                class="mat-form-field-min"
+                formControlName="fundingRelationship"
+              >
+                <ng-container *ngFor="let value of fundingRelationships;">
+                  <mat-radio-button [value]="value"
+                    >{{ value | recordFundingRelationshipLabel }}
+                  </mat-radio-button>
+                  <mat-hint class="mat-caption"
+                    >{{ value | recordFundingRelationshipHintLabel }}
+                  </mat-hint>
+                </ng-container>
+              </mat-radio-group>
+              <div class="col l3 delete-grant">
+                <button
+                  mat-icon-button
+                  (click)="deleteGrant(i)"
+                  *ngIf="grantsArray.controls.length > 1 && i > 0"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
           </div>
         </ng-container>
 
