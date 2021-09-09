@@ -205,19 +205,22 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
-    this.loadingNames = true
-    this._recordNameService
-      .postNames(this.formToBackendNames(this.namesForm))
-      .subscribe(
-        (response) => {
-          this._recordOtherNamesService
-            .postOtherNames(this.formToBackendOtherNames(this.namesForm))
-            .subscribe((res) => {
-              this.closeEvent()
-            })
-        },
-        (error) => {}
-      )
+    if (this.namesForm.valid) {
+      this.loadingNames = true
+      this._recordNameService
+        .postNames(this.formToBackendNames(this.namesForm))
+        .subscribe(
+          (response) => {
+            this._recordOtherNamesService
+              .postOtherNames(this.formToBackendOtherNames(this.namesForm))
+              .subscribe((res) => {
+                this.closeEvent()
+              })
+          },
+          (error) => {
+          },
+        )
+    }
   }
 
   closeEvent() {
