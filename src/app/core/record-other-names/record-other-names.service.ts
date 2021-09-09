@@ -36,7 +36,7 @@ export class RecordOtherNamesService {
     }
     if (!this.$otherNames) {
       this.$otherNames = new ReplaySubject<OtherNamesEndPoint>(1)
-    } else if (options.forceReload) {
+    } else if (!options.forceReload) {
       return this.$otherNames
     }
 
@@ -51,7 +51,6 @@ export class RecordOtherNamesService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ otherNames: [] } as OtherNamesEndPoint)),
-
         tap((value) => {
           this.$otherNames.next(value)
         })
