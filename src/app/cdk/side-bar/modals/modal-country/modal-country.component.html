@@ -69,50 +69,51 @@
               aria-label="drag handle"
             />
 
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min"
-            [ngClass]="{ twoLinesHint: isMobile }"
-          >
-            <mat-select #countrySelect formControlName="country">
-              <mat-option
-                *ngFor="let countryCode of countryCodes"
-                [value]="countryCode.key"
-              >
-                {{ countryCode.key }}
-              </mat-option>
-            </mat-select>
-            <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-              <span i18n="@@shared.source">Source:</span>
-              {{ getSourceName(countriesMap[country.putCode]) }},
-              <span i18n="@@shared.created">Created:</span>
-              {{
+            <mat-form-field
+              appearance="outline"
+              class="mat-form-field-min"
+              [ngClass]="{ twoLinesHint: isMobile }"
+            >
+              <mat-select #countrySelect formControlName="country">
+                <mat-option
+                  *ngFor="let countryCode of countryCodes"
+                  [value]="countryCode.key"
+                >
+                  {{ countryCode.key }}
+                </mat-option>
+              </mat-select>
+              <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
+                <span i18n="@@shared.source">Source:</span>
+                {{ getSourceName(countriesMap[country.putCode]) }},
+                <span i18n="@@shared.created">Created:</span>
+                {{
                 countriesMap[country.putCode].createdDate
                   | monthDayYearDateToString
-              }}
-            </mat-hint>
-          </mat-form-field>
-        </div>
-        <div class="col no-wrap actions-wrapper no-gutters">
-          <app-privacy-selector
-            formControlName="visibility"
-          ></app-privacy-selector>
-          <button
-            (click)="deleteEmail(country.putCode)"
-            mat-icon-button
-            class="delete-button"
-          >
-            <mat-icon class="material-icons-outlined extra-large-material-icon"
-              >delete</mat-icon
+                }}
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col no-wrap actions-wrapper no-gutters">
+            <app-privacy-selector
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              (click)="deleteEmail(country.putCode)"
+              mat-icon-button
+              class="delete-button"
             >
-          </button>
+              <mat-icon class="material-icons-outlined extra-large-material-icon"
+              >delete
+              </mat-icon
+              >
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
     <div class="row">
       <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
-        <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
           <ng-container
             *ngIf="countries.length === 0"
