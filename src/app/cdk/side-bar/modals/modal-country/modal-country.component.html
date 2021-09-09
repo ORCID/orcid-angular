@@ -76,10 +76,13 @@
               </mat-option>
             </mat-select>
             <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-              <ng-container i18n="@@shared.source">Source:</ng-container>
+              <span i18n="@@shared.source">Source:</span>
               {{ getSourceName(countriesMap[country.putCode]) }},
-              <ng-container i18n="@@shared.created">Created: </ng-container
-              >{{ getDate(countriesMap[country.putCode]) | date }}
+              <span i18n="@@shared.created">Created:</span>
+              {{
+                countriesMap[country.putCode].createdDate
+                  | monthDayYearDateToString
+              }}
             </mat-hint>
           </mat-form-field>
         </div>
