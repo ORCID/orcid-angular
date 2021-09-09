@@ -716,7 +716,7 @@
                 class="mat-form-field-min"
                 formControlName="fundingRelationship"
               >
-                <ng-container *ngFor="let value of fundingRelationships;">
+                <ng-container *ngFor="let value of fundingRelationships">
                   <mat-radio-button [value]="value"
                     >{{ value | recordFundingRelationshipLabel }}
                   </mat-radio-button>
