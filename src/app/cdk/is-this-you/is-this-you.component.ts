@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, Inject, Optional } from '@angular/core'
+import { Component, OnInit, HostBinding, Inject, Optional, Output } from '@angular/core'
 import { PlatformInfoService } from '../platform-info/platform-info.service'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { WINDOW } from '../window'
@@ -69,5 +69,8 @@ export class IsThisYouComponent implements OnInit {
 
   confirmRegistration() {
     this.dialogRef.close(true)
+  }
+  denyNewRegistration() {
+    this.dialogRef.close(false)
   }
 }
