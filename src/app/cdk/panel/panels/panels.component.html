@@ -120,11 +120,6 @@
           >
             {{ option.label }}
           </button>
-          <button mat-menu-item (click)="add('works')">
-            <ng-container i18n="@@shared.addManually"
-              >Add manually</ng-container
-            >
-          </button>
         </ng-container>
         <ng-container *ngIf="type === 'peer-review'">
           <button mat-menu-item (click)="add(type)">

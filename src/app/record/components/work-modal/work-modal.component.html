@@ -40,6 +40,7 @@
       (click)="saveEvent()"
       i18n="@@shared.saveChanges"
       id="save-work-button"
+      [disabled]="!workForm.valid"
     >
       Save changes
     </button>
@@ -78,7 +79,6 @@
     <div>
       <div class="row">
         <label
-          for="given-names-input"
           class="mat-caption title"
           [ngClass]="{
             error:
@@ -116,7 +116,6 @@
     <div [ngClass]="{ hide: (workTypes | keyvalue).length === 0 }">
       <label
         class="row"
-        for="given-names-input"
         class="mat-caption"
         [ngClass]="{
           error:
@@ -161,7 +160,7 @@
               workForm.get('title').touched
           }"
         >
-          <strong i18n="@@topBar.givenNames">Title</strong>
+          <strong i18n="@@works.title">Title</strong>
           <span class="required">*</span>
         </label>
       </div>
@@ -225,7 +224,9 @@
       <div>
         <div class="row">
           <label for="given-names-input" class="mat-caption">
-            <strong i18n="@@topBar.givenNames">Language of this title</strong>
+            <strong i18n="@@works.languageOnThisTitle"
+              >Language of this title</strong
+            >
           </label>
         </div>
         <div class="row">
@@ -252,7 +253,7 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong i18n="@@works.Subtitle">Work Subtitle</strong>
+          <strong i18n="@@works.subtitle">Work Subtitle</strong>
         </label>
       </div>
 
@@ -265,9 +266,7 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong i18n="@@topBar.givenNames">{{
-            dynamicTitle | recordWorkTitleNameLabel
-          }}</strong>
+          <strong>{{ dynamicTitle | recordWorkTitleNameLabel }}</strong>
         </label>
       </div>
 
@@ -372,7 +371,7 @@
               workForm.get('url').touched
           }"
         >
-          <strong i18n="@@topBar.givenNames">Link</strong>
+          <strong i18n="@@works.link">Link</strong>
         </label>
       </div>
 
@@ -524,9 +523,7 @@
       }"
     >
       <p>
-        <strong i18n="@@shared.visibility" i18n="@@works.workIds">
-          Work identifiers</strong
-        >
+        <strong i18n="@@works.workIds"> Work identifiers</strong>
       </p>
     </div>
     <hr />
@@ -611,9 +608,7 @@
                     workIdentifiersGroup.get('externalIdentifierId').touched
                 }"
               >
-                <strong
-                  i18n="@@topBar.givenNames"
-                  i18n="@@works.identifierValue"
+                <strong i18n="@@works.identifierValue"
                   >Identifier value
                 </strong>
                 <span class="required">*</span>
@@ -624,6 +619,7 @@
               class="mat-form-field-min larger-input-margin"
             >
               <input
+                autocomplete="off"
                 id="biography-input"
                 matInput
                 formControlName="externalIdentifierId"
@@ -818,14 +814,14 @@
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <mat-select
             placeholder="Placeholder"
-            formControlName="languageCode"
+            formControlName="countryCode"
             name="item"
           >
             <mat-option
-              *ngFor="let item of languageMap | keyvalue"
-              [value]="item.key"
+              *ngFor="let item of originalCountryCodes | keyvalue"
+              [value]="item.value"
             >
-              {{ item.value }}
+              {{ item.key }}
             </mat-option>
           </mat-select>
         </mat-form-field>
