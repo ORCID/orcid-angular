@@ -252,7 +252,10 @@
           <strong i18n="@@funding.projectLink">Project link</strong>
         </label>
       </div>
-      <div class="input-container">
+      <div
+        class="input-container"
+        [ngClass]="{ 'project-link-mobile': isMobile }"
+      >
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <input
             id="funding-project-link-input"
