@@ -35,7 +35,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   creditName = ''
   expandedContent = false
   recordWithIssues: boolean
-  loadingUserRecord = true
+  @Input() loadingUserRecord = true
 
   constructor(
     private _platform: PlatformInfoService,
@@ -64,29 +64,11 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
-        this.checkLoadingState(userRecord)
         this.userRecord = userRecord
         if (!isEmpty(userRecord.otherNames)) {
           this.setNames(userRecord)
         }
       })
-  }
-
-  checkLoadingState(userRecord: UserRecord) {
-    const missingValues = Object.keys(userRecord).filter((key) => {
-      if (
-        key !== 'names' &&
-        key !== 'lastModifiedTime' &&
-        this.isPublicRecord
-      ) {
-        return typeof userRecord[key] === 'boolean' && !userRecord[key]
-      } else if (key !== 'lastModifiedTime') {
-        return typeof userRecord[key] === 'boolean' && !userRecord[key]
-      } else {
-        return false
-      }
-    })
-    this.loadingUserRecord = !!missingValues.length
   }
 
   private setNames(userRecord: UserRecord) {

@@ -34,6 +34,7 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
   countryCodes: { key: string; value: string }[]
+  loading = true
 
   constructor(
     private _userSession: UserService,
@@ -59,6 +60,9 @@ export class FundingStacksGroupsComponent implements OnInit {
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
+            if (userRecord.fundings !== undefined) {
+              this.loading = false
+            }
             if (!isEmpty(userRecord.fundings)) {
               this._recordCountryService
                 .getCountryCodes()

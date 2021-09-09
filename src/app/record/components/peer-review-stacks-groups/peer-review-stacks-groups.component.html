@@ -1,4 +1,5 @@
 <app-panels
+  *ngIf="!(loading || (peerReviews?.length === 0 && isPublicRecord))"
   class="row"
   [title]="ngOrcidPeerReview"
   [type]="'peer-review'"

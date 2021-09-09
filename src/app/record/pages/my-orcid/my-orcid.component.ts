@@ -36,6 +36,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   expandedPeerReview: boolean
   recordWithIssues: boolean
   userNotFound: boolean
+  loadingUserRecord: boolean
 
   constructor(
     _userInfoService: UserInfoService,
@@ -45,12 +46,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _openGraph: OpenGraphService,
     private _robotsMeta: RobotsMetaTagsService
   ) {
-    _userInfoService
-      .getUserInfo()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userInfo) => {
-        this.userInfo = userInfo
-      })
     this.checkIfThisIsAPublicOrcid()
   }
 
@@ -94,6 +89,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.userInfo = userRecord?.userInfo
+        this.checkLoadingState(userRecord)
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
@@ -162,5 +159,16 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this.collapse()
       }
     }
+  }
+
+  checkLoadingState(userRecord: UserRecord) {
+    const missingValues = Object.keys(userRecord).filter((key) => {
+      if (key !== 'preferences' && key !== 'lastModifiedTime') {
+        return userRecord[key] === undefined
+      } else {
+        return false
+      }
+    })
+    this.loadingUserRecord = !!missingValues.length
   }
 }

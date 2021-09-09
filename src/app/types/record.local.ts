@@ -39,7 +39,7 @@ export interface UserRecord {
   biography: BiographyEndPoint
   preferences: Preferences
   affiliations: AffiliationUIGroup[]
-  fundings: FundingGroup[]
+  fundings?: FundingGroup[]
   peerReviews: PeerReview[]
   researchResources: ResearchResourcesEndpoint
   works: WorksEndpoint
