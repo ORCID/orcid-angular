@@ -87,8 +87,8 @@
                 {{ getSourceName(countriesMap[country.putCode]) }},
                 <span i18n="@@shared.created">Created:</span>
                 {{
-                countriesMap[country.putCode].createdDate
-                  | monthDayYearDateToString
+                  countriesMap[country.putCode].createdDate
+                    | monthDayYearDateToString
                 }}
               </mat-hint>
             </mat-form-field>
@@ -102,10 +102,10 @@
               mat-icon-button
               class="delete-button"
             >
-              <mat-icon class="material-icons-outlined extra-large-material-icon"
-              >delete
-              </mat-icon
-              >
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete
+              </mat-icon>
             </button>
           </div>
         </div>
