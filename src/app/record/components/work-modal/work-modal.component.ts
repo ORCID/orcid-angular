@@ -211,6 +211,11 @@ export class WorkModalComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
+            if (!value.resolved) {
+              return {
+                unResolved: !value.validFormat,
+              }
+            }
             if (!value.validFormat) {
               return {
                 validFormat: !value.validFormat,
