@@ -44,7 +44,7 @@
       mat-button
       color="primary"
       class="mat-button-wrap-text mat-button-font-spaced"
-      [routerLink]="['/signin']"
+      (click)="denyNewRegistration()"
     >
       {{ data.signinLabel || signinLabel }}
     </button>
