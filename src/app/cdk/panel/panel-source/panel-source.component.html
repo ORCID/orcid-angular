@@ -71,12 +71,9 @@
       mat-icon-button
       [matTooltip]="labelDeleteButton"
       [attr.aria-label]="labelDeleteButton"
+      (click)="delete()"
     >
-      <mat-icon
-        (click)="delete()"
-        class="large-material-icon"
-        id="delete-button"
-      >
+      <mat-icon class="large-material-icon" id="delete-button">
         delete_outline
       </mat-icon>
     </button>

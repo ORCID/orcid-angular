@@ -202,9 +202,10 @@
       *ngIf="userRecord?.biography?.biography"
     >
       <h3 class="orc-font-body" i18n="@@record.biography">Biography</h3>
-      <p class="orc-font-body-small">
-        {{ userRecord.biography.biography.value }}
-      </p>
+      <p
+        class="orc-font-body-small"
+        [innerText]="userRecord.biography.biography.value"
+      ></p>
     </div>
   </div>
 </ng-container>

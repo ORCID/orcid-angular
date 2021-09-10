@@ -41,12 +41,9 @@
         mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
+        (click)="add(type)"
       >
-        <mat-icon
-          (click)="add(type)"
-          class="large-material-icon"
-          id="add-button"
-        >
+        <mat-icon class="large-material-icon" id="add-button">
           add_circle_outline
         </mat-icon>
         <ng-container i18n="@@shared.add"> Add </ng-container>

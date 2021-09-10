@@ -23,6 +23,7 @@ export class ModalHeaderComponent implements OnInit, OnDestroy {
 
   @Output() close = new EventEmitter<boolean>()
   platform: PlatformInfo
+  closeLabel = $localize`:@@shared.ariaLabelClose:Close`
 
   constructor(
     private dialogReg: MatDialogRef<any>,
