@@ -74,9 +74,11 @@
       <app-panel-element
         [visibility]="userRecord.biography.visibility.visibility"
       >
-        <span id="biography" class="mat-body-1">
-          {{ userRecord.biography.biography.value }}
-        </span>
+        <span
+          id="biography"
+          class="mat-body-1"
+          [innerText]="userRecord.biography.biography.value"
+        ></span>
       </app-panel-element>
     </app-panel-data>
   </app-panel>
