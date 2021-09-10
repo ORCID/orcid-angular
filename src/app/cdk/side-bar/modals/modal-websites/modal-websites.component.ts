@@ -154,6 +154,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
+    this.websitesForm.markAllAsTouched()
     if (this.websitesForm.valid) {
       this.loadingWebsites = true
       this._recordWebsitesService
