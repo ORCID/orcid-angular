@@ -70,7 +70,6 @@ export class RecordPersonIdentifierService {
         }),
         tap((value) => {
           this.$privatePersonIdentifier.next(value)
-          console.log('OK THIS IS THE VALUE', value)
         })
       )
       .subscribe()
