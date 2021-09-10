@@ -35,6 +35,7 @@
   </app-modal-side-bar>
   <app-modal-footer>
     <button
+      *ngIf="workForm"
       mat-raised-button
       color="primary"
       (click)="saveEvent()"
@@ -633,6 +634,18 @@
                 i18n="@@works.validFormat"
               >
                 Invalid id for the selected identifier type
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  workIdentifiersGroup
+                    .get('externalIdentifierId')
+                    .hasError('unResolved')
+                "
+                i18n="@@works.unResolved"
+              >
+                We couldn't find a resource that matches the identifier you
+                entered. Please check the value or enter a valid link to the
+                resource.
               </mat-error>
               <mat-error
                 *ngIf="
