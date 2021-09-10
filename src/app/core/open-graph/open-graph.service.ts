@@ -21,15 +21,18 @@ export class OpenGraphService {
 
   addOpenGraphData(record: UserRecord): HTMLMetaElement[] {
     if (record.userInfo) {
-      const { displayedNameWithId, displayedName } = this.getDisplayNames(record)
+      const { displayedNameWithId, displayedName } = this.getDisplayNames(
+        record
+      )
       this._titleService.setTitle(displayedNameWithId)
       return this.meta.addTags([
         { property: this.titleMeta, content: displayedNameWithId },
         {
           property: this.descriptionMeta,
           content:
-            $localize`:@@record.ogDescription1:ORCID record for ` +
-            displayedName +
+            $localize`:@@record.ogDescription1:ORCID record for` +
+            ` ` +
+            (displayedName || displayedNameWithId) +
             `. ` +
             $localize`:@@record.ogDescription2:ORCID provides an identifier for individuals to use with their name as they engage in research, scholarship, and innovation activities.`,
         },
