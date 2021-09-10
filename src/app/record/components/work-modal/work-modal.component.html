@@ -239,9 +239,9 @@
             >
               <mat-option
                 *ngFor="let item of languageMap | keyvalue"
-                [value]="item.key"
+                [value]="item.value"
               >
-                {{ item.value }}
+                {{ item.key }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -805,9 +805,9 @@
           >
             <mat-option
               *ngFor="let item of languageMap | keyvalue"
-              [value]="item.key"
+              [value]="item.value"
             >
-              {{ item.value }}
+              {{ item.key }}
             </mat-option>
           </mat-select>
         </mat-form-field>
