@@ -70,4 +70,7 @@ export class IsThisYouComponent implements OnInit {
   confirmRegistration() {
     this.dialogRef.close(true)
   }
+  denyNewRegistration() {
+    this.dialogRef.close(false)
+  }
 }

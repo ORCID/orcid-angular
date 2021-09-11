@@ -52,6 +52,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   originalBackendOtherNames: OtherNamesEndPoint
   isMobile: boolean
   defaultVisibility: VisibilityStrings
+  otherNamesDefaultVisibility: VisibilityStrings
   addedOtherNameCount = 0
   loadingNames = true
 
@@ -89,12 +90,13 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       .getNames()
       .pipe(first())
       .subscribe((names: NamesEndPoint) => {
-        this.defaultVisibility = names.visibility
+        this.defaultVisibility = names.visibility.visibility
         this._recordOtherNamesService
           .getOtherNames()
           .pipe(first())
           .subscribe((otherNames: OtherNamesEndPoint) => {
             this.originalBackendOtherNames = cloneDeep(otherNames)
+            this.otherNamesDefaultVisibility = otherNames.visibility.visibility
             this.otherNames = this.originalBackendOtherNames.otherNames
             const otherNamesMap = {}
             this.originalBackendOtherNames.otherNames.map(
@@ -132,7 +134,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const publishedName = namesEndPoint.creditName
       ? namesEndPoint.creditName.value
       : ''
-    const visibilityName = namesEndPoint.visibility
+    const visibilityName = namesEndPoint.visibility.visibility
 
     this.namesForm.addControl(
       'givenNames',
@@ -167,7 +169,9 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       givenNames: namesForm.get('givenNames').value,
       familyName: namesForm.get('familyName').value,
       creditName: namesForm.get('publishedName').value,
-      visibility: visibility,
+      visibility: {
+        visibility,
+      },
     } as NamesEndPoint
   }
 
@@ -201,19 +205,21 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
-    this.loadingNames = true
-    this._recordNameService
-      .postNames(this.formToBackendNames(this.namesForm))
-      .subscribe(
-        (response) => {
-          this._recordOtherNamesService
-            .postOtherNames(this.formToBackendOtherNames(this.namesForm))
-            .subscribe((res) => {
-              this.closeEvent()
-            })
-        },
-        (error) => {}
-      )
+    if (this.namesForm.valid) {
+      this.loadingNames = true
+      this._recordNameService
+        .postNames(this.formToBackendNames(this.namesForm))
+        .subscribe(
+          (response) => {
+            this._recordOtherNamesService
+              .postOtherNames(this.formToBackendOtherNames(this.namesForm))
+              .subscribe((res) => {
+                this.closeEvent()
+              })
+          },
+          (error) => {}
+        )
+    }
   }
 
   closeEvent() {
@@ -229,12 +235,12 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       'new-' + this.addedOtherNameCount,
       new FormGroup({
         otherName: new FormControl(),
-        visibility: new FormControl(this.defaultVisibility, {}),
+        visibility: new FormControl(this.otherNamesDefaultVisibility, {}),
       })
     )
     this.otherNames.push({
       putCode: 'new-' + this.addedOtherNameCount,
-      visibility: { visibility: this.defaultVisibility },
+      visibility: { visibility: this.otherNamesDefaultVisibility },
     } as Assertion)
     this.addedOtherNameCount++
 

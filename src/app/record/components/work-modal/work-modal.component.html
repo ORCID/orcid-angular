@@ -35,6 +35,7 @@
   </app-modal-side-bar>
   <app-modal-footer>
     <button
+      *ngIf="workForm"
       mat-raised-button
       color="primary"
       (click)="saveEvent()"
@@ -238,9 +239,9 @@
             >
               <mat-option
                 *ngFor="let item of languageMap | keyvalue"
-                [value]="item.key"
+                [value]="item.value"
               >
-                {{ item.value }}
+                {{ item.key }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -638,6 +639,18 @@
                 *ngIf="
                   workIdentifiersGroup
                     .get('externalIdentifierId')
+                    .hasError('unResolved')
+                "
+                i18n="@@works.unResolved"
+              >
+                We couldn't find a resource that matches the identifier you
+                entered. Please check the value or enter a valid link to the
+                resource.
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  workIdentifiersGroup
+                    .get('externalIdentifierId')
                     .hasError('required')
                 "
                 i18n="@@works.addADescriber"
@@ -792,9 +805,9 @@
           >
             <mat-option
               *ngFor="let item of languageMap | keyvalue"
-              [value]="item.key"
+              [value]="item.value"
             >
-              {{ item.value }}
+              {{ item.key }}
             </mat-option>
           </mat-select>
         </mat-form-field>

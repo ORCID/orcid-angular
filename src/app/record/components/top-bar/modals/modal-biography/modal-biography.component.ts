@@ -117,7 +117,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   }
 
   toBiography() {
-    this.window.document.getElementById('biography').scrollIntoView()
+    this.window.document.getElementById('biography-title').scrollIntoView()
   }
 
   toVisibility() {

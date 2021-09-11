@@ -8,9 +8,7 @@
   >
     <ng-content> </ng-content>
   </div>
-  <button mat-icon-button aria-label="_____">
-    <mat-icon (click)="closeEvent()" class="large-material-icon"
-      >close</mat-icon
-    >
+  <button mat-icon-button [attr.aria-label]="closeLabel" (click)="closeEvent()">
+    <mat-icon class="large-material-icon">close</mat-icon>
   </button>
 </div>

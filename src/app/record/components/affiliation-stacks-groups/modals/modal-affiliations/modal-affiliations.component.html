@@ -459,7 +459,7 @@
         </mat-error>
       </div>
     </ng-container>
-    <ng-container formGroupName="endDateGroup">
+    <ng-container formGroupName="endDateGroup" *ngIf="type !== 'distinction'">
       <div class="row">
         <label
           for="url-input"

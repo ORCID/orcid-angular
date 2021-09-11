@@ -258,7 +258,8 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     const dialogRef = this._dialog.open(IsThisYouComponent, dialogParams)
 
     dialogRef.afterClosed().subscribe((confirmRegistration) => {
-      if (confirmRegistration) {
+      if (!confirmRegistration) {
+        this._router.navigate(['signin'])
       }
     })
   }

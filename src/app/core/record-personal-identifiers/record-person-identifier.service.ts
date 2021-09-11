@@ -44,7 +44,9 @@ export class RecordPersonIdentifierService {
     forceReload: boolean
   ): ReplaySubject<PersonIdentifierEndpoint> {
     if (!this.$privatePersonIdentifier) {
-      this.$privatePersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>()
+      this.$privatePersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>(
+        1
+      )
     } else if (!forceReload) {
       return this.$privatePersonIdentifier
     }
