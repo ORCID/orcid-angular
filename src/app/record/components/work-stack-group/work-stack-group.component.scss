@@ -3,7 +3,15 @@
 }
 
 app-work-stack {
+  margin-bottom: 24px;
+}
+
+app-work-stack:first-child {
   margin-top: 24px;
+}
+
+app-work-stack:last-child {
+  margin-bottom: 0;
 }
 
 p.empty {
