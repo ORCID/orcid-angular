@@ -84,3 +84,9 @@ div.hide:hover {
     margin-top: 4px;
   }
 }
+
+mat-checkbox.text-wrap {
+  ::ng-deep label.mat-checkbox-layout {
+    white-space: normal;
+  }
+}
