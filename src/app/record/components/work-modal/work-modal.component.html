@@ -304,10 +304,10 @@
             >
               <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
               <mat-option
-                *ngFor="let year of yearOptions | keyvalue"
-                [value]="year.key"
+                *ngFor="let year of yearOptions"
+                [value]="year"
               >
-                {{ year.value }}
+                {{ year}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -324,10 +324,10 @@
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option
-                *ngFor="let month of monthOptions | keyvalue"
-                [value]="month.key"
+                *ngFor="let month of monthOptions"
+                [value]="month"
               >
-                {{ month.value }}
+                {{ month }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -344,10 +344,10 @@
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
               <mat-option
-                *ngFor="let day of dayOptions | keyvalue"
-                [value]="day.key"
+                *ngFor="let day of dayOptions"
+                [value]="day"
               >
-                {{ day.value }}
+                {{ day }}
               </mat-option>
             </mat-select>
           </mat-form-field>
