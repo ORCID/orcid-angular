@@ -11,7 +11,7 @@
   $config: mat-typography-config();
 
   textarea.mat-input-element {
-    font-size: mat-font-size($config, caption) !important;
+    font-size: mat-font-size($config, body-1) !important;
   }
 }
 @include model-biography-theme($orcid-app-theme);

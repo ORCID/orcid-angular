@@ -24,7 +24,7 @@
 
   <div [formGroup]="emailsForm">
     <div class="row">
-      <div class="col orc-font-small-print">
+      <div class="col orc-font-body-small">
         <p i18n="@@side-bar.OrcidWorkBest">
           ORCID works best when you have multiple email addresses.
         </p>
@@ -238,7 +238,7 @@
         <div class="col actions-wrapper no-gutters">
           <div class="actions-sub-wrapper">
             <a
-              class="orc-font-smallprint underline"
+              class="orc-font-small-print underline"
               *ngIf="showEmailAsVerified(email.putCode)"
               (click)="makePrimary(email)"
               i18n="@@side-bar.makePrimary"
@@ -248,14 +248,14 @@
 
             <ng-container *ngIf="showNonVerifiedData(email.putCode)">
               <a
-                class="orc-font-smallprint disabled underline"
+                class="orc-font-small-print disabled underline"
                 *ngIf="verificationEmailWasSend(email.putCode)"
                 i18n="@@side-bar.resendVerification"
               >
                 Resend verification email</a
               >
               <a
-                class="orc-font-smallprint underline"
+                class="orc-font-small-print underline"
                 (click)="verifyEmail(email)"
                 *ngIf="!verificationEmailWasSend(email.putCode)"
                 i18n="@@side-bar.resendVerification"
