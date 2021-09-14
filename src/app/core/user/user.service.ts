@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import {
   combineLatest,
   merge,
+  NEVER,
   Observable,
   of,
   ReplaySubject,
@@ -429,19 +430,22 @@ export class UserService {
   // and we also trigger a reload, to reload the oauth page
   // there might be some scenarios where these two different request might not work as expected.
   switchAccount(delegator: Delegator) {
+    var body = 'username=' + delegator.giverOrcid.path
     return this._http
-      .get(
-        `${environment.API_WEB}switch-user?username=${delegator.giverOrcid.path}`,
-        {
-          withCredentials: true,
-        }
-      )
+      .post(`${environment.API_WEB}switch-user`, body, {
+        headers: new HttpHeaders({
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }),
+      })
       .pipe(
         catchError((error) => {
-          // TODO @angel review
-          // The endpoint response need to be handle as an error
-          // since the response is not a 200 from the server
-          // The status is interpreted as a error code 0 since the 302 redirect is cancelled
+          console.log(error)
+
+          // TODO @angel @camelia review
+          // The server response with a redirect to an http not secure page,
+          // which equals a error status 0 to browsers
+
           if (error.status === 0) {
             this.refreshUserSession(true)
             return of(error)

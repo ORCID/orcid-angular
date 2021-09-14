@@ -51,6 +51,8 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
   changeAccount(delegator: Delegator) {
     this.loadingTrustedIndividuals = true
     this._user.switchAccount(delegator).subscribe(() => {
+      console.log('OK DONE');
+      
       // TODO: SHOULD NOT BE REQUIRE TO RELOAD
       // the user session service should be updated
       // https://github.com/ORCID/orcid-angular/projects/1#card-61932970
