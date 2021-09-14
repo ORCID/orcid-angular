@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
-import { first, switchMap, take, takeUntil, tap } from 'rxjs/operators'
+import { first, switchMap, take, takeUntil } from 'rxjs/operators'
 
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {

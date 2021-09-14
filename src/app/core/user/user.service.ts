@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import {
   combineLatest,
   merge,
-  NEVER,
   Observable,
   of,
   ReplaySubject,
@@ -54,6 +53,11 @@ import { UserInfoService } from '../user-info/user-info.service'
   providedIn: 'root',
 })
 export class UserService {
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  })
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
@@ -430,13 +434,10 @@ export class UserService {
   // and we also trigger a reload, to reload the oauth page
   // there might be some scenarios where these two different request might not work as expected.
   switchAccount(delegator: Delegator) {
-    var body = 'username=' + delegator.giverOrcid.path
+    const body = 'username=' + delegator.giverOrcid.path
     return this._http
       .post(`${environment.API_WEB}switch-user`, body, {
-        headers: new HttpHeaders({
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        }),
+        headers: this.headers,
       })
       .pipe(
         catchError((error) => {
