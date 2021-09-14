@@ -1,7 +1,9 @@
 <app-skip-main-nav></app-skip-main-nav>
 <div [dir]="screenDirection">
+  <!--googleoff: all-->
   <router-outlet name="banner"></router-outlet>
   <app-banners *ngIf="!headlessMode"></app-banners>
+  <!--googleon: all-->
   <app-header *ngIf="!headlessMode" currentRoute=""></app-header>
   <div class="router-container">
     <router-outlet> </router-outlet>
