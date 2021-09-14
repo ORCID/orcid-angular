@@ -122,16 +122,17 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
 
   loadResearchResources(): void {
     if (
-      this.researchResources.totalGroups > this.researchResources.groups.length ||
+      this.researchResources.totalGroups >
+        this.researchResources.groups.length ||
       this.paginationPageSize !== this.defaultPageSize
     ) {
       this.userRecordContext.forceReload = true
     }
-    this._recordResearchResourceService.changeUserRecordContext(
-      this.userRecordContext
-    ).subscribe(() => {
-      this.paginationLoading = false
-    })
+    this._recordResearchResourceService
+      .changeUserRecordContext(this.userRecordContext)
+      .subscribe(() => {
+        this.paginationLoading = false
+      })
   }
 
   expandedClicked(expanded: boolean) {

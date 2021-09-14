@@ -28,11 +28,7 @@
       </a>
     </ng-container>
     <ng-container id="side-bar-url-4">
-      <a
-        class="side-bar"
-        i18n="@@shared.visibility"
-        (click)="toVisibility()"
-      >
+      <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
         Visibility
       </a>
     </ng-container>
@@ -132,10 +128,7 @@
         <span class="required">*</span>
       </label>
       <mat-form-field appearance="outline" class="mat-form-field-min row">
-        <mat-select
-          placeholder="Select a work type"
-          formControlName="workType"
-        >
+        <mat-select placeholder="Select a work type" formControlName="workType">
           <mat-option
             *ngFor="let item of workTypes | keyvalue"
             [value]="item.value"
@@ -303,11 +296,8 @@
               formControlName="publicationYear"
             >
               <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option
-                *ngFor="let year of yearOptions"
-                [value]="year"
-              >
-                {{ year}}
+              <mat-option *ngFor="let year of yearOptions" [value]="year">
+                {{ year }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -323,10 +313,7 @@
               formControlName="publicationMonth"
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-              <mat-option
-                *ngFor="let month of monthOptions"
-                [value]="month"
-              >
+              <mat-option *ngFor="let month of monthOptions" [value]="month">
                 {{ month }}
               </mat-option>
             </mat-select>
@@ -343,10 +330,7 @@
               formControlName="publicationDay"
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-              <mat-option
-                *ngFor="let day of dayOptions"
-                [value]="day"
-              >
+              <mat-option *ngFor="let day of dayOptions" [value]="day">
                 {{ day }}
               </mat-option>
             </mat-select>
@@ -434,10 +418,7 @@
       </div>
       <div class="row">
         <mat-form-field appearance="outline" class="mat-form-field-min">
-          <mat-select
-            placeholder="Placeholder"
-            formControlName="citationType"
-          >
+          <mat-select placeholder="Placeholder" formControlName="citationType">
             <mat-option [value]="''" i18n="@@works.selectACitation">
               Select a citation type
             </mat-option>
@@ -462,10 +443,7 @@
 
     <div>
       <div class="row">
-        <label
-          for="citation-input"
-          class="mat-caption"
-        >
+        <label for="citation-input" class="mat-caption">
           <strong i18n="@@works.citation">Citation</strong>
         </label>
       </div>

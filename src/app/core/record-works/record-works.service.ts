@@ -130,7 +130,9 @@ export class RecordWorksService {
     }
   }
 
-  changeUserRecordContext(userRecordOptions: UserRecordOptions): Observable<WorksEndpoint> {
+  changeUserRecordContext(
+    userRecordOptions: UserRecordOptions
+  ): Observable<WorksEndpoint> {
     return this.getWorks(userRecordOptions).pipe(take(1))
   }
 

@@ -104,7 +104,9 @@ export class RecordResearchResourceService {
     return this.$research.asObservable()
   }
 
-  changeUserRecordContext(event: UserRecordOptions): Observable<ResearchResourcesEndpoint> {
+  changeUserRecordContext(
+    event: UserRecordOptions
+  ): Observable<ResearchResourcesEndpoint> {
     return this.getResearchResourcePage(event).pipe(take(1))
   }
 

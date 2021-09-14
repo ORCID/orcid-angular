@@ -143,7 +143,8 @@ export class WorkStackGroupComponent implements OnInit {
     ) {
       this.userRecordContext.forceReload = true
     }
-    this._works.changeUserRecordContext(this.userRecordContext)
+    this._works
+      .changeUserRecordContext(this.userRecordContext)
       .subscribe(() => {
         this.paginationLoading = false
       })
