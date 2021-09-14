@@ -91,8 +91,7 @@
       expandButtonsPosition="right"
       *ngIf="
         userRecord?.externalIdentifier?.externalIdentifiers &&
-        (!isPublicRecord ||
-          userRecord?.externalIdentifier?.externalIdentifiers.length > 0)
+        userRecord?.externalIdentifier?.externalIdentifiers.length > 0
       "
       [elements]="userRecord.externalIdentifier.externalIdentifiers"
       [editModalComponent]="modalPersonalIdentifiers"
