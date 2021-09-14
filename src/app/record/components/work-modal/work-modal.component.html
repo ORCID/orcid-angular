@@ -180,19 +180,19 @@
       >
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
-            <ng-container
-              i18n="@@works.addTranslatedTitle"
-              *ngIf="!showTranslationTitle"
-            >
-              Add translated title
-            </ng-container>
-            <ng-container
-              i18n="@@works.hideTranslatedTitle"
-              *ngIf="showTranslationTitle"
-            >
-              Hide translation title
-            </ng-container>
-          </span>
+          <ng-container
+            i18n="@@works.addTranslatedTitle"
+            *ngIf="!showTranslationTitle"
+          >
+            Add translated title
+          </ng-container>
+          <ng-container
+            i18n="@@works.hideTranslatedTitle"
+            *ngIf="showTranslationTitle"
+          >
+            Hide translation title
+          </ng-container>
+        </span>
       </a>
     </div>
 
@@ -707,15 +707,9 @@
 
       <!-- Add other identifier  -->
       <div class="row">
-        <a
-          class="col add-more no-gutters"
-          (click)="addOtherWorkId()"
-        >
+        <a class="col add-more no-gutters" (click)="addOtherWorkId()">
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span
-            class="mat-body-1"
-            i18n="@@works.addAnotherId"
-          >
+          <span class="mat-body-1" i18n="@@works.addAnotherId">
             Add other identifier
           </span>
         </a>
