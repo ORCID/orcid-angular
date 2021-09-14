@@ -81,6 +81,7 @@ export class PanelComponent implements OnInit {
   }
 
   @Input() isUserSource = false
+  @Input() userVersionPresent = false
   selected: boolean
 
   formVisibility: FormGroup

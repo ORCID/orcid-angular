@@ -18,6 +18,7 @@
     [editModalComponent]="worksModal"
     [selectable]="true"
     [isUserSource]="userIsSource(work)"
+    [userVersionPresent]="workStack.userVersionPresent"
     (checkboxChangePanel)="checkboxChangeWorkStack($event)"
     #panelsComponent
     [type]="'works'"
