@@ -55,7 +55,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   } = {}
 
   ngOrcidResearchResources = $localize`:@@researchResources.researchResources:Research resources`
-  offset: number
   isMobile: boolean
 
   paginationTotalAmountOfResearchResources: number
@@ -89,15 +88,12 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
 
   private getRecord() {
     this._record
-      .getRecord({
-        publicRecordId: this.isPublicRecord || undefined,
-      })
+      .getRecord({ publicRecordId: this.isPublicRecord })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.researchResources)) {
           this.paginationLoading = false
           this.researchResources = userRecord.researchResources
-          this.offset = userRecord.researchResources.offset
           this.total.emit(this.researchResources.groups.length)
           this.paginationTotalAmountOfResearchResources =
             userRecord.researchResources.totalGroups
@@ -109,23 +105,33 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   }
 
   pageEvent(event: PageEvent) {
+    this.paginationLoading = true
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
     this.userRecordContext.publicRecordId = this.isPublicRecord
-    this._recordResearchResourceService.changeUserRecordContext(
-      this.userRecordContext
-    )
-    this.paginationLoading = true
+    this.loadResearchResources()
   }
 
   sortEvent(event: SortData) {
+    this.paginationLoading = true
     this.userRecordContext.publicRecordId = this.isPublicRecord
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
+    this.loadResearchResources()
+  }
+
+  loadResearchResources(): void {
+    if (
+      this.researchResources.totalGroups > this.researchResources.groups.length ||
+      this.paginationPageSize !== this.defaultPageSize
+    ) {
+      this.userRecordContext.forceReload = true
+    }
     this._recordResearchResourceService.changeUserRecordContext(
       this.userRecordContext
-    )
-    this.paginationLoading = true
+    ).subscribe(() => {
+      this.paginationLoading = false
+    })
   }
 
   expandedClicked(expanded: boolean) {

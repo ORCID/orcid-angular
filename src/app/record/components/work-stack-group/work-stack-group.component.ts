@@ -125,7 +125,7 @@ export class WorkStackGroupComponent implements OnInit {
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
     this.userRecordContext.publicRecordId = this.isPublicRecord
-    this._works.changeUserRecordContext(this.userRecordContext)
+    this.loadWorks()
   }
 
   sortEvent(event: SortData) {
@@ -133,7 +133,20 @@ export class WorkStackGroupComponent implements OnInit {
     this.userRecordContext.publicRecordId = this.isPublicRecord
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
+    this.loadWorks()
+  }
+
+  loadWorks(): void {
+    if (
+      this.workGroup.totalGroups > this.workGroup.groups.length ||
+      this.paginationPageSize !== this.defaultPageSize
+    ) {
+      this.userRecordContext.forceReload = true
+    }
     this._works.changeUserRecordContext(this.userRecordContext)
+      .subscribe(() => {
+        this.paginationLoading = false
+      })
   }
 
   combine() {
