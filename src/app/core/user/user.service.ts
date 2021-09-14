@@ -440,12 +440,9 @@ export class UserService {
       })
       .pipe(
         catchError((error) => {
-          console.log(error)
-
           // TODO @angel @camelia review
           // The server response with a redirect to an http not secure page,
           // which equals a error status 0 to browsers
-
           if (error.status === 0) {
             this.refreshUserSession(true)
             return of(error)
