@@ -194,12 +194,6 @@ export class WorkModalComponent implements OnInit {
         [],
       ],
     })
-    if (
-      currentWork?.translatedTitle?.content ||
-      currentWork?.translatedTitle?.languageCode
-    ) {
-      this.showTranslationTitle = true
-    }
     this.workIdentifiersFormArray = this.workForm.controls
       .workIdentifiers as FormArray
 
@@ -371,12 +365,8 @@ export class WorkModalComponent implements OnInit {
           value: this.workForm.value.subtitle,
         },
         translatedTitle: {
-          content: this.showTranslationTitle
-            ? this.workForm.value.translatedTitleContent
-            : '',
-          languageCode: this.showTranslationTitle
-            ? this.workForm.value.translatedTitleLanguage
-            : '',
+          content: this.workForm.value.translatedTitleContent,
+          languageCode: this.workForm.value.translatedTitleLanguage,
         },
         workCategory: {
           value: this.workForm.value.workCategory,

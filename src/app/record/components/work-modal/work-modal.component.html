@@ -177,31 +177,28 @@
       </mat-form-field>
     </div>
     <!-- SHOW-HIDE translated title button  -->
-    <div class="row">
-      <a
-        class="col add-more no-gutters"
+    <div>
+      <div
+        class="row align-icon"
         *ngIf="!showTranslationTitle"
         (click)="showTranslationTitle = !showTranslationTitle"
       >
-        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-body-1">
-          <ng-container i18n="@@works.addTranslatedTitle">
-            Add translated title
-          </ng-container>
-        </span>
-      </a>
-      <a
-        class="col add-more no-gutters"
+        <button mat-icon-button color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+        <a i18n="@@works.addTranslatedTitle">add translated title</a>
+      </div>
+
+      <div
+        class="row align-icon"
         *ngIf="showTranslationTitle"
         (click)="showTranslationTitle = !showTranslationTitle"
       >
-        <mat-icon class="large-material-icon">remove_circle_outline</mat-icon>
-        <span class="mat-body-1">
-          <ng-container i18n="@@works.hideTranslatedTitle">
-            Hide translation title
-          </ng-container>
-        </span>
-      </a>
+        <button mat-icon-button color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+        <a i18n="@@works.hideTranslatedTitle">hide translation title</a>
+      </div>
     </div>
 
     <!-- Work translations title -->
@@ -762,15 +759,13 @@
       </ng-container>
 
       <!-- Add other identifier  -->
-      <div class="row">
-        <a class="col add-more no-gutters" (click)="addOtherWorkId()">
-          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span class="mat-body-1">
-            <ng-container i18n="@@works.addAnotherId">
-              Add other identifier
-            </ng-container>
-          </span>
-        </a>
+      <div
+        class="row align-icon"
+        *ngIf="!showTranslationTitle"
+        (click)="addOtherWorkId()"
+      >
+        <button mat-icon-button><mat-icon>add</mat-icon></button>
+        <a i18n="@@works.addAnotherId">Add other identifier</a>
       </div>
     </div>
 
