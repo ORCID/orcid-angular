@@ -173,28 +173,27 @@
       </mat-form-field>
     </div>
     <!-- SHOW-HIDE translated title button  -->
-    <div>
-      <div
-        class="row align-icon"
-        *ngIf="!showTranslationTitle"
+    <div class="row">
+      <a
+        class="col add-more no-gutters"
         (click)="showTranslationTitle = !showTranslationTitle"
       >
-        <button mat-icon-button color="primary">
-          <mat-icon>add</mat-icon>
-        </button>
-        <a i18n="@@works.addTranslatedTitle">add translated title</a>
-      </div>
-
-      <div
-        class="row align-icon"
-        *ngIf="showTranslationTitle"
-        (click)="showTranslationTitle = !showTranslationTitle"
-      >
-        <button mat-icon-button color="primary">
-          <mat-icon>add</mat-icon>
-        </button>
-        <a i18n="@@works.hideTranslatedTitle">hide translation title</a>
-      </div>
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+        <span class="mat-body-1">
+            <ng-container
+              i18n="@@works.addTranslatedTitle"
+              *ngIf="!showTranslationTitle"
+            >
+              Add translated title
+            </ng-container>
+            <ng-container
+              i18n="@@works.hideTranslatedTitle"
+              *ngIf="showTranslationTitle"
+            >
+              Hide translation title
+            </ng-container>
+          </span>
+      </a>
     </div>
 
     <!-- Work translations title -->
@@ -707,13 +706,19 @@
       </ng-container>
 
       <!-- Add other identifier  -->
-      <div
-        class="row align-icon"
-        *ngIf="!showTranslationTitle"
-        (click)="addOtherWorkId()"
-      >
-        <button mat-icon-button><mat-icon>add</mat-icon></button>
-        <a i18n="@@works.addAnotherId">Add other identifier</a>
+      <div class="row">
+        <a
+          class="col add-more no-gutters"
+          (click)="addOtherWorkId()"
+        >
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span
+            class="mat-body-1"
+            i18n="@@works.addAnotherId"
+          >
+            Add other identifier
+          </span>
+        </a>
       </div>
     </div>
 
