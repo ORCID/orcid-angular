@@ -17,8 +17,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
   providedIn: 'root',
 })
 export class RecordResearchResourceService {
-  researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(1)
-  $research: ReplaySubject<ResearchResourcesEndpoint>
+  $researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(1)
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -61,15 +60,15 @@ export class RecordResearchResourceService {
             return data
           }),
           tap((value) => {
-            this.researchResourcesSubject.next(value)
+            this.$researchResourcesSubject.next(value)
           })
         )
         .subscribe()
     } else {
-      if (!this.$research) {
-        this.$research = new ReplaySubject(1)
+      if (!this.$researchResourcesSubject) {
+        this.$researchResourcesSubject = new ReplaySubject(1)
       } else if (!options.forceReload) {
-        return this.$research
+        return this.$researchResourcesSubject
       }
 
       this._http
@@ -96,12 +95,12 @@ export class RecordResearchResourceService {
             return data
           }),
           tap((value) => {
-            this.$research.next(value)
+            this.$researchResourcesSubject.next(value)
           })
         )
         .subscribe()
     }
-    return this.$research.asObservable()
+    return this.$researchResourcesSubject.asObservable()
   }
 
   changeUserRecordContext(
