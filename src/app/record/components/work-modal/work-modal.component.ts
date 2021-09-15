@@ -76,7 +76,7 @@ export class WorkModalComponent implements OnInit {
 
   dynamicTitle = WorksTitleName.journalTitle
   workIdTypes: WorkIdType[]
-  workIdentifiersFormArray: FormArray
+  workIdentifiersFormArray: FormArray = new FormArray([])
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -161,7 +161,6 @@ export class WorkModalComponent implements OnInit {
           this.workForm.controls.citation.updateValueAndValidity()
         }
       })
-    this.checkWorkIdentifiersChanges(0)
   }
 
   private loadWorkForm(currentWork: Work) {
@@ -219,7 +218,7 @@ export class WorkModalComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
-            if (!value.resolved) {
+            if (!value.resolved && value.attemptedResolution) {
               return {
                 unResolved: !value.resolved,
               }
