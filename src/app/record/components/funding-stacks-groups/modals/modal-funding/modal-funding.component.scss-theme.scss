@@ -35,7 +35,12 @@
     font-size: mat-font-size($config, body-1) !important;
   }
 
-  .translate-title {
+  textarea.mat-input-element {
+    font-size: mat-font-size($config, body-1) !important;
+  }
+
+  .mat-select {
+    font-size: mat-font-size($config, body-1) !important;
   }
 }
 @include modal-funding-theme($orcid-app-theme);

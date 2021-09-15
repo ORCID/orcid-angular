@@ -34,5 +34,9 @@
     border: transparent;
     font-size: mat-font-size($config, body-1) !important;
   }
+
+  .mat-select {
+    font-size: mat-font-size($config, body-1) !important;
+  }
 }
 @include model-affiliation-theme($orcid-app-theme);
