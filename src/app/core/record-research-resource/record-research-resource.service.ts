@@ -17,7 +17,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
   providedIn: 'root',
 })
 export class RecordResearchResourceService {
-  $researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(1)
+  $researchResourcesSubject: ReplaySubject<ResearchResourcesEndpoint>
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -66,7 +66,9 @@ export class RecordResearchResourceService {
         .subscribe()
     } else {
       if (!this.$researchResourcesSubject) {
-        this.$researchResourcesSubject = new ReplaySubject(1)
+        this.$researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(
+          1
+        )
       } else if (!options.forceReload) {
         return this.$researchResourcesSubject
       }
