@@ -36,7 +36,7 @@ export class RecordResearchResourceService {
     options.offset = options.offset || 0
 
     if (options.publicRecordId) {
-      this._http
+      return this._http
         .get<ResearchResourcesEndpoint>(
           environment.API_WEB +
             options.publicRecordId +
@@ -58,12 +58,8 @@ export class RecordResearchResourceService {
               ? Math.floor(options.offset / options.pageSize)
               : 0
             return data
-          }),
-          tap((value) => {
-            this.$researchResourcesSubject.next(value)
           })
         )
-        .subscribe()
     } else {
       if (!this.$researchResourcesSubject) {
         this.$researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(
