@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment'
   providedIn: 'root',
 })
 export class OpenGraphService {
+  openGraphDataSet = false
   private titleMeta = 'og:title'
   private descriptionMeta = 'og:description'
   private imageMeta = 'og:image'
@@ -20,45 +21,50 @@ export class OpenGraphService {
   constructor(private meta: Meta, private _titleService: Title) {}
 
   addOpenGraphData(record: UserRecord): HTMLMetaElement[] {
-    if (record.userInfo) {
-      const { displayedNameWithId, displayedName } = this.getDisplayNames(
-        record
-      )
-      this._titleService.setTitle(displayedNameWithId)
-      return this.meta.addTags([
-        { property: this.titleMeta, content: displayedNameWithId },
-        {
-          property: this.descriptionMeta,
-          content:
-            $localize`:@@record.ogDescription1:ORCID record for` +
-            ` ` +
-            (displayedName || displayedNameWithId) +
-            `. ` +
-            $localize`:@@record.ogDescription2:ORCID provides an identifier for individuals to use with their name as they engage in research, scholarship, and innovation activities.`,
-        },
+    if (record.userInfo && !this.openGraphDataSet) {
+      this.openGraphDataSet = true
+      try {
+        const { displayedNameWithId, displayedName } = this.getDisplayNames(
+          record
+        )
+        this._titleService.setTitle(displayedNameWithId)
+        return this.meta.addTags([
+          { property: this.titleMeta, content: displayedNameWithId },
+          {
+            property: this.descriptionMeta,
+            content:
+              $localize`:@@record.ogDescription1:ORCID record for` +
+              ` ` +
+              (displayedName || displayedNameWithId) +
+              `. ` +
+              $localize`:@@record.ogDescription2:ORCID provides an identifier for individuals to use with their name as they engage in research, scholarship, and innovation activities.`,
+          },
 
-        { property: this.typeMeta, content: 'profile' },
-        {
-          property: this.urlMeta,
-          content:
-            'https:' +
-            environment.BASE_URL +
-            record.userInfo.EFFECTIVE_USER_ORCID,
-        },
-        {
-          property: this.firstNameMeta,
-          content: record.names?.givenNames?.value || '',
-        },
-        {
-          property: this.lastNameMeta,
-          content: record.names?.familyName?.value || '',
-        },
-        {
-          property: this.usernameMeta,
-          content: record.userInfo.EFFECTIVE_USER_ORCID,
-        },
-        { property: this.siteNameMeta, content: 'Orcid' },
-      ])
+          { property: this.typeMeta, content: 'profile' },
+          {
+            property: this.urlMeta,
+            content:
+              'https:' +
+              environment.BASE_URL +
+              record.userInfo.EFFECTIVE_USER_ORCID,
+          },
+          {
+            property: this.firstNameMeta,
+            content: record.names?.givenNames?.value || '',
+          },
+          {
+            property: this.lastNameMeta,
+            content: record.names?.familyName?.value || '',
+          },
+          {
+            property: this.usernameMeta,
+            content: record.userInfo.EFFECTIVE_USER_ORCID,
+          },
+          { property: this.siteNameMeta, content: 'Orcid' },
+        ])
+      } catch (e) {
+        this.openGraphDataSet = false
+      }
     }
   }
   private getDisplayNames(
@@ -97,5 +103,6 @@ export class OpenGraphService {
     this.meta.removeTag(`property="${this.usernameMeta}"`)
     this.meta.removeTag(`property="${this.siteNameMeta}"`)
     this._titleService.setTitle('ORCID')
+    this.openGraphDataSet = false
   }
 }
