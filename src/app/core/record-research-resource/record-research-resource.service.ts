@@ -18,6 +18,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
 })
 export class RecordResearchResourceService {
   researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(1)
+  $research: ReplaySubject<ResearchResourcesEndpoint>
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -65,6 +66,12 @@ export class RecordResearchResourceService {
         )
         .subscribe()
     } else {
+      if (!this.$research) {
+        this.$research = new ReplaySubject(1)
+      } else if (!options.forceReload) {
+        return this.$research
+      }
+
       this._http
         .get<ResearchResourcesEndpoint>(
           environment.API_WEB +
@@ -78,6 +85,7 @@ export class RecordResearchResourceService {
             options.pageSize
         )
         .pipe(
+          retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
           map((data) => {
@@ -88,23 +96,18 @@ export class RecordResearchResourceService {
             return data
           }),
           tap((value) => {
-            this.researchResourcesSubject.next(value)
+            this.$research.next(value)
           })
         )
         .subscribe()
     }
-    return this.researchResourcesSubject.asObservable()
+    return this.$research.asObservable()
   }
 
-  changeUserRecordContext(event: UserRecordOptions): void {
-    this.getResearchResourcePage(event).pipe(take(1)).subscribe()
-  }
-
-  loadMore(offset: number, publicRecordId?: string) {
-    this.getResearchResourcePage({
-      offset,
-      publicRecordId,
-    })
+  changeUserRecordContext(
+    event: UserRecordOptions
+  ): Observable<ResearchResourcesEndpoint> {
+    return this.getResearchResourcePage(event).pipe(take(1))
   }
 
   getResearchResourceById(putCode: string): Observable<ResearchResource> {

@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { first, map, startWith } from 'rxjs/operators'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -23,20 +23,17 @@ import { Work } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import {
   CitationTypes,
-  DayOption,
   LanguageMap,
-  MonthOption,
   WorkCategories,
-  WorksTitleName,
   WorkConferenceTypes,
   WorkIdType,
   WorkIntellectualPropertyTypes,
   WorkOtherOutputTypes,
   WorkPublicationTypes,
   WorkRelationships,
+  WorksTitleName,
   WorkTypesByCategory,
   WorkTypesTitle,
-  YearOption,
 } from 'src/app/types/works.endpoint'
 
 @Component({
@@ -57,9 +54,20 @@ export class WorkModalComponent implements OnInit {
 
   languageMap = LanguageMap
   workCategories = WorkCategories
-  yearOptions = YearOption
-  monthOptions = MonthOption
-  dayOptions = DayOption
+  yearOptions = Array(110)
+    .fill(0)
+    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .reverse()
+  yearsEndDate = Array(120)
+    .fill(0)
+    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .reverse()
+  monthOptions = Array(12)
+    .fill(0)
+    .map((i, idx) => idx + 1)
+  dayOptions = Array(31)
+    .fill(0)
+    .map((i, idx) => idx + 1)
   citationTypes = CitationTypes
 
   workRelationships: WorkRelationships[] = Object.keys(

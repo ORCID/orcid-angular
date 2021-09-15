@@ -96,7 +96,7 @@
 
       <div class="row">
         <mat-form-field appearance="outline" class="mat-form-field-min">
-          <mat-select formControlName="workCategory" name="item">
+          <mat-select formControlName="workCategory">
             <mat-option
               *ngFor="let item of workCategories | keyvalue"
               [value]="item.value"
@@ -128,11 +128,7 @@
         <span class="required">*</span>
       </label>
       <mat-form-field appearance="outline" class="mat-form-field-min row">
-        <mat-select
-          placeholder="Select a work type"
-          formControlName="workType"
-          name="item"
-        >
+        <mat-select placeholder="Select a work type" formControlName="workType">
           <mat-option
             *ngFor="let item of workTypes | keyvalue"
             [value]="item.value"
@@ -153,7 +149,7 @@
     <div>
       <div class="row">
         <label
-          for="given-names-input"
+          for="title-input"
           class="mat-caption"
           [ngClass]="{
             error:
@@ -167,7 +163,7 @@
       </div>
 
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="biography-input" matInput formControlName="title" />
+        <input id="title-input" matInput formControlName="title" />
         <mat-error
           *ngIf="workForm.get('title').hasError('required')"
           i18n="@@works.setAWorkTitle"
@@ -177,28 +173,27 @@
       </mat-form-field>
     </div>
     <!-- SHOW-HIDE translated title button  -->
-    <div>
-      <div
-        class="row align-icon"
-        *ngIf="!showTranslationTitle"
+    <div class="row">
+      <a
+        class="col add-more no-gutters"
         (click)="showTranslationTitle = !showTranslationTitle"
       >
-        <button mat-icon-button color="primary">
-          <mat-icon>add</mat-icon>
-        </button>
-        <a i18n="@@works.addTranslatedTitle">add translated title</a>
-      </div>
-
-      <div
-        class="row align-icon"
-        *ngIf="showTranslationTitle"
-        (click)="showTranslationTitle = !showTranslationTitle"
-      >
-        <button mat-icon-button color="primary">
-          <mat-icon>add</mat-icon>
-        </button>
-        <a i18n="@@works.hideTranslatedTitle">hide translation title</a>
-      </div>
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+        <span class="mat-body-1">
+          <ng-container
+            i18n="@@works.addTranslatedTitle"
+            *ngIf="!showTranslationTitle"
+          >
+            Add translated title
+          </ng-container>
+          <ng-container
+            i18n="@@works.hideTranslatedTitle"
+            *ngIf="showTranslationTitle"
+          >
+            Hide translation title
+          </ng-container>
+        </span>
+      </a>
     </div>
 
     <!-- Work translations title -->
@@ -224,7 +219,7 @@
       <!-- Language of this title -->
       <div>
         <div class="row">
-          <label for="given-names-input" class="mat-caption">
+          <label for="language-of-title-input" class="mat-caption">
             <strong i18n="@@works.languageOnThisTitle"
               >Language of this title</strong
             >
@@ -233,9 +228,9 @@
         <div class="row">
           <mat-form-field appearance="outline" class="mat-form-field-min">
             <mat-select
+              id="language-of-title-input"
               placeholder="Select a language"
               formControlName="translatedTitleLanguage"
-              name="item"
             >
               <mat-option
                 *ngFor="let item of languageMap | keyvalue"
@@ -253,13 +248,13 @@
 
     <div>
       <div class="row">
-        <label for="given-names-input" class="mat-caption">
+        <label for="work-subtitle-input" class="mat-caption">
           <strong i18n="@@works.subtitle">Work Subtitle</strong>
         </label>
       </div>
 
       <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="biography-input" matInput formControlName="subtitle" />
+        <input id="work-subtitle-input" matInput formControlName="subtitle" />
       </mat-form-field>
     </div>
     <!-- Journal title -->
@@ -300,11 +295,8 @@
               formControlName="publicationYear"
             >
               <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option
-                *ngFor="let year of yearOptions | keyvalue"
-                [value]="year.key"
-              >
-                {{ year.value }}
+              <mat-option *ngFor="let year of yearOptions" [value]="year">
+                {{ year }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -320,11 +312,8 @@
               formControlName="publicationMonth"
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-              <mat-option
-                *ngFor="let month of monthOptions | keyvalue"
-                [value]="month.key"
-              >
-                {{ month.value }}
+              <mat-option *ngFor="let month of monthOptions" [value]="month">
+                {{ month }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -340,11 +329,8 @@
               formControlName="publicationDay"
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-              <mat-option
-                *ngFor="let day of dayOptions | keyvalue"
-                [value]="day.key"
-              >
-                {{ day.value }}
+              <mat-option *ngFor="let day of dayOptions" [value]="day">
+                {{ day }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -431,11 +417,7 @@
       </div>
       <div class="row">
         <mat-form-field appearance="outline" class="mat-form-field-min">
-          <mat-select
-            placeholder="Placeholder"
-            formControlName="citationType"
-            name="item"
-          >
+          <mat-select placeholder="Placeholder" formControlName="citationType">
             <mat-option [value]="''" i18n="@@works.selectACitation">
               Select a citation type
             </mat-option>
@@ -460,21 +442,13 @@
 
     <div>
       <div class="row">
-        <label
-          for="given-names-input"
-          class="mat-caption"
-          [ngClass]="{
-            error:
-              workForm.hasError('required', 'citation') &&
-              workForm.get('citation').touched
-          }"
-        >
+        <label for="citation-input" class="mat-caption">
           <strong i18n="@@works.citation">Citation</strong>
-          <span class="required">*</span>
         </label>
       </div>
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <textarea
+          id="citation-input"
           matInput
           formControlName="citation"
           cdkTextareaAutosize
@@ -493,14 +467,13 @@
 
     <div>
       <div class="row">
-        <label for="given-names-input" class="mat-caption">
+        <label for="description-input" class="mat-caption">
           <strong i18n="@@works.description">Description</strong>
-          <span class="required">*</span>
         </label>
       </div>
       <mat-form-field appearance="outline" class="mat-form-field-min biography">
         <textarea
-          id="biography-input"
+          id="description-input"
           matInput
           formControlName="shortDescription"
           cdkTextareaAutosize
@@ -554,7 +527,6 @@
                 }"
               >
                 <strong i18n="@@works.type">Identifier type</strong>
-                <span class="required">*</span>
               </label>
             </div>
             <div class="row">
@@ -562,7 +534,6 @@
                 <mat-select
                   placeholder="Placeholder"
                   formControlName="externalIdentifierType"
-                  name="item"
                 >
                   <mat-option [value]="''" i18n="@@works.selectAnIdentifier">
                     Select an identifier type
@@ -574,17 +545,6 @@
                   >
                     {{ item.description }}
                   </mat-option>
-
-                  <mat-error
-                    *ngIf="
-                      workIdentifiersGroup
-                        .get('externalIdentifierType')
-                        .hasError('required')
-                    "
-                    i18n="@@works.selectAnIdentifier"
-                  >
-                    Select an identifier type
-                  </mat-error>
                   <mat-hint i18n="@@works.typeOfIdentifier"
                     >The type of identifier associated with the work, such as an
                     ISBN, DOI or PMID.
@@ -598,7 +558,7 @@
           <div>
             <div class="row">
               <label
-                for="given-names-input"
+                for="external-identifier-id-input"
                 class="mat-caption"
                 [ngClass]="{
                   error:
@@ -612,7 +572,6 @@
                 <strong i18n="@@works.identifierValue"
                   >Identifier value
                 </strong>
-                <span class="required">*</span>
               </label>
             </div>
             <mat-form-field
@@ -621,7 +580,7 @@
             >
               <input
                 autocomplete="off"
-                id="biography-input"
+                id="external-identifier-id-input"
                 matInput
                 formControlName="externalIdentifierId"
               />
@@ -647,16 +606,6 @@
                 entered. Please check the value or enter a valid link to the
                 resource.
               </mat-error>
-              <mat-error
-                *ngIf="
-                  workIdentifiersGroup
-                    .get('externalIdentifierId')
-                    .hasError('required')
-                "
-                i18n="@@works.addADescriber"
-              >
-                Add a describer id
-              </mat-error>
               <mat-hint i18n="@@works.identifierAssociated"
                 >The identifier associated with the work. The format will depend
                 on the type of identifier selected.
@@ -667,7 +616,7 @@
 
           <div class="row">
             <label
-              for="given-names-input"
+              for="external-identifier-url-input"
               class="mat-caption"
               [ngClass]="{
                 error:
@@ -678,15 +627,13 @@
               }"
             >
               <strong i18n="@@works.identifierUrl">Identifier URL </strong>
-              <span class="required">*</span>
             </label>
-
             <mat-form-field
               appearance="outline"
               class="mat-form-field-min larger-input-margin"
             >
               <input
-                id="biography-input"
+                id="external-identifier-url-input"
                 matInput
                 formControlName="externalIdentifierUrl"
               />
@@ -713,7 +660,7 @@
           <div>
             <div class="row">
               <label
-                for="given-names-input"
+                for="external-relationship-input"
                 class="mat-caption"
                 [ngClass]="{
                   error:
@@ -725,11 +672,11 @@
                 }"
               >
                 <strong i18n="@@works.relationship">Relationship</strong>
-                <span class="required">*</span>
               </label>
             </div>
 
             <mat-radio-group
+              id="external-relationship-input"
               aria-label="Select an option"
               appearance="outline"
               class="mat-form-field-min"
@@ -759,13 +706,13 @@
       </ng-container>
 
       <!-- Add other identifier  -->
-      <div
-        class="row align-icon"
-        *ngIf="!showTranslationTitle"
-        (click)="addOtherWorkId()"
-      >
-        <button mat-icon-button><mat-icon>add</mat-icon></button>
-        <a i18n="@@works.addAnotherId">Add other identifier</a>
+      <div class="row">
+        <a class="col add-more no-gutters" (click)="addOtherWorkId()">
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span class="mat-body-1" i18n="@@works.addAnotherId">
+            Add other identifier
+          </span>
+        </a>
       </div>
     </div>
 
@@ -790,7 +737,7 @@
     <!-- Language of this form -->
     <div>
       <div class="row">
-        <label for="given-names-input" class="mat-caption">
+        <label for="language-input" class="mat-caption">
           <strong i18n="@@works.languageUsed"
             >Language used in this form</strong
           >
@@ -799,9 +746,9 @@
       <div class="row">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <mat-select
+            id="language-input"
             placeholder="Placeholder"
             formControlName="languageCode"
-            name="item"
           >
             <mat-option
               *ngFor="let item of languageMap | keyvalue"
@@ -817,7 +764,7 @@
     <!-- Country of publication -->
     <div>
       <div class="row">
-        <label for="given-names-input" class="mat-caption">
+        <label for="country-input" class="mat-caption">
           <strong i18n="@@works.countryPublication"
             >Country of publication</strong
           >
@@ -826,9 +773,9 @@
       <div class="row">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <mat-select
+            id="country-input"
             placeholder="Placeholder"
             formControlName="countryCode"
-            name="item"
           >
             <mat-option
               *ngFor="let item of originalCountryCodes | keyvalue"
