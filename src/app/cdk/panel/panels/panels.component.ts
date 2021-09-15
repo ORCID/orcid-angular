@@ -34,7 +34,7 @@ export class PanelsComponent implements OnInit {
     | 'sub-peer-review'
     | 'funding'
     | 'research-resources' = 'activities'
-  @Input() currentAmount
+  @Input() currentAmount = 0
   @Input() total
   @Input() isPublicRecord: any = false
   @Input() selectable = false
