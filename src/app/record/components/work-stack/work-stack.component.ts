@@ -142,7 +142,7 @@ export class WorkStackComponent implements OnInit {
   }
 
   makePrimaryCard(work: Work) {
-    // TODO
+    this._workService.updatePreferredSource(work.putCode.value).subscribe()
   }
 
   changeTopPanelOfTheStack(work: Work) {

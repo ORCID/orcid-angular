@@ -285,19 +285,19 @@ export class WorkModalComponent implements OnInit {
     this.workIdentifiersFormArray.push(
       this._fb.group({
         externalIdentifierType: [
-          externalId?.externalIdentifierType.value || '',
+          externalId?.externalIdentifierType?.value || '',
           [],
         ],
         externalIdentifierId: [
-          externalId?.externalIdentifierId.value || '',
+          externalId?.externalIdentifierId?.value || '',
           [],
         ],
         externalIdentifierUrl: [
-          externalId?.url.value || '',
+          externalId?.url?.value || '',
           [Validators.pattern(URL_REGEXP)],
         ],
         externalRelationship: [
-          externalId?.relationship.value || WorkRelationships.self,
+          externalId?.relationship?.value || WorkRelationships.self,
           [],
         ],
       })

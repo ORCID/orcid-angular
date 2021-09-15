@@ -244,6 +244,18 @@ export class RecordWorksService {
       )
   }
 
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB + 'works/updateToMaxDisplay.json?putCode=' + putCode
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
   public loadWorkIdTypes(): Observable<WorkIdType[]> {
     return this._http
       .get<WorkIdType[]>(`${environment.API_WEB}works/idTypes.json?query=`)
