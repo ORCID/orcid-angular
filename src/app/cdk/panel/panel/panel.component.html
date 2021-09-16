@@ -48,20 +48,6 @@
         class="panel-privacy"
         [visibility]="visibility"
       ></app-panel-privacy>
-      <div class="hide">
-        <div class="privacy-selector">
-          <p class="orc-font-body-small" i18n="@@shared.whoCanSeeThis">
-            Who can see this?
-          </p>
-          <form *ngIf="visibility" [formGroup]="formVisibility">
-            <app-privacy-selector
-              [privacy]="visibility"
-              (click)="updateVisibility()"
-              formControlName="visibility"
-            ></app-privacy-selector>
-          </form>
-        </div>
-      </div>
     </ng-container>
 
     <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->

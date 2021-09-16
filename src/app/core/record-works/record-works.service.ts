@@ -21,6 +21,7 @@ export class RecordWorksService {
   offset = 0
 
   $works: ReplaySubject<WorksEndpoint>
+  userRecordOptions: UserRecordOptions = {}
 
   constructor(
     private _http: HttpClient,
@@ -133,6 +134,7 @@ export class RecordWorksService {
   changeUserRecordContext(
     userRecordOptions: UserRecordOptions
   ): Observable<WorksEndpoint> {
+    this.userRecordOptions = userRecordOptions
     return this.getWorks(userRecordOptions).pipe(take(1))
   }
 
@@ -241,6 +243,20 @@ export class RecordWorksService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB + 'works/updateToMaxDisplay.json?putCode=' + putCode
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() =>
+          this.getWorks({ ...this.userRecordOptions, forceReload: true })
+        )
       )
   }
 
