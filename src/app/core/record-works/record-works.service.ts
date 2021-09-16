@@ -21,7 +21,7 @@ export class RecordWorksService {
   offset = 0
 
   $works: ReplaySubject<WorksEndpoint>
-  userRecordOptions: UserRecordOptions
+  userRecordOptions: UserRecordOptions = {}
 
   constructor(
     private _http: HttpClient,
@@ -247,8 +247,6 @@ export class RecordWorksService {
   }
 
   updatePreferredSource(putCode: string): Observable<any> {
-    this.userRecordOptions
-
     return this._http
       .get(
         environment.API_WEB + 'works/updateToMaxDisplay.json?putCode=' + putCode
