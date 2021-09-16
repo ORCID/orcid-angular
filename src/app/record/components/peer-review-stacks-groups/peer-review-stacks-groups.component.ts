@@ -53,6 +53,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     peerReview: PeerReview
   }[] = []
   isMobile: boolean
+  moreInfo: number[] = []
 
   ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
   loading = true
@@ -160,7 +161,16 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     peerReview.showDetails = !peerReview.showDetails
   }
 
-  expandedClicked(expanded: boolean) {
+  expandedClicked(expanded: boolean, peerReview?: PeerReview) {
+    if (peerReview) {
+      if (expanded) {
+        if (!this.moreInfo.includes(peerReview.groupId)) {
+          this.moreInfo.push(peerReview.groupId)
+        }
+      } else {
+        this.moreInfo = this.moreInfo.filter((p) => { p !== peerReview.groupId})
+      }
+    }
     this.expanded.emit({ type: 'peer-review', expanded })
   }
 }
