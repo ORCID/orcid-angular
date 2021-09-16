@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Meta, Title } from '@angular/platform-browser'
+import { NamesEndPoint } from 'src/app/types/record-name.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 
@@ -21,11 +22,12 @@ export class OpenGraphService {
   constructor(private meta: Meta, private _titleService: Title) {}
 
   addOpenGraphData(record: UserRecord): HTMLMetaElement[] {
-    if (record.userInfo && !this.openGraphDataSet) {
+    if (record.userInfo && record.names && !this.openGraphDataSet) {
       this.openGraphDataSet = true
       try {
         const { displayedNameWithId, displayedName } = this.getDisplayNames(
-          record
+          record.names,
+          record.userInfo.EFFECTIVE_USER_ORCID
         )
         this._titleService.setTitle(displayedNameWithId)
         return this.meta.addTags([
@@ -60,7 +62,12 @@ export class OpenGraphService {
             property: this.usernameMeta,
             content: record.userInfo.EFFECTIVE_USER_ORCID,
           },
-          { property: this.siteNameMeta, content: 'Orcid' },
+          { property: this.siteNameMeta, content: 'ORCID' },
+          {
+            property: this.imageMeta,
+            content:
+              'https:' + environment.BASE_URL + 'assets/img/orcid-og-image.png',
+          },
         ])
       } catch (e) {
         this.openGraphDataSet = false
@@ -68,26 +75,27 @@ export class OpenGraphService {
     }
   }
   private getDisplayNames(
-    record: UserRecord
+    recordNames: NamesEndPoint,
+    effectiveID: string
   ): { displayedNameWithId: string; displayedName: string } {
     let displayedName = ''
-    if (record.names?.creditName) {
-      displayedName = record.names.creditName.value
+    if (recordNames?.creditName) {
+      displayedName = recordNames.creditName.value
     } else if (
-      record.names?.givenNames?.value &&
-      record.names?.familyName?.value
+      recordNames?.givenNames?.value &&
+      recordNames?.familyName?.value
     ) {
-      displayedName = `${record.names.givenNames.value} ${record.names.familyName.value}`
-    } else if (record.names?.givenNames?.value) {
-      displayedName = `${record.names.givenNames.value}`
+      displayedName = `${recordNames.givenNames.value} ${recordNames.familyName.value}`
+    } else if (recordNames?.givenNames?.value) {
+      displayedName = `${recordNames.givenNames.value}`
     }
 
     displayedName = displayedName.trim()
     let displayedNameWithId = ''
     if (displayedName !== '') {
-      displayedNameWithId = `${displayedName} (${record.userInfo.EFFECTIVE_USER_ORCID})`
+      displayedNameWithId = `${displayedName} (${effectiveID})`
     } else {
-      displayedNameWithId = `${record.userInfo.EFFECTIVE_USER_ORCID}`
+      displayedNameWithId = `${effectiveID}`
     }
     return { displayedNameWithId, displayedName }
   }
