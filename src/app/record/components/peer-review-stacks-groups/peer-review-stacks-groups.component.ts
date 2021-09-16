@@ -168,7 +168,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
           this.moreInfo.push(peerReview.groupId)
         }
       } else {
-        this.moreInfo = this.moreInfo.filter((p) => { p !== peerReview.groupId})
+        this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
       }
     }
     this.expanded.emit({ type: 'peer-review', expanded })
