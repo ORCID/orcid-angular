@@ -22,7 +22,6 @@ export class OpenGraphService {
   constructor(private meta: Meta, private _titleService: Title) {}
 
   addOpenGraphData(record: UserRecord): HTMLMetaElement[] {
-
     if (record.userInfo && record.names && !this.openGraphDataSet) {
       this.openGraphDataSet = true
       try {
@@ -64,6 +63,11 @@ export class OpenGraphService {
             content: record.userInfo.EFFECTIVE_USER_ORCID,
           },
           { property: this.siteNameMeta, content: 'ORCID' },
+          {
+            property: this.imageMeta,
+            content:
+              'https:' + environment.BASE_URL + 'assets/img/orcid-og-image.png',
+          },
         ])
       } catch (e) {
         this.openGraphDataSet = false
