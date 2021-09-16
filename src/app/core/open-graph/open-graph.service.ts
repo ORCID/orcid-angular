@@ -22,7 +22,6 @@ export class OpenGraphService {
   constructor(private meta: Meta, private _titleService: Title) {}
 
   addOpenGraphData(record: UserRecord): HTMLMetaElement[] {
-
     if (record.userInfo && record.names && !this.openGraphDataSet) {
       this.openGraphDataSet = true
       try {
