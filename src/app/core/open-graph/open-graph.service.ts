@@ -64,7 +64,7 @@ export class OpenGraphService {
             property: this.usernameMeta,
             content: record.userInfo.EFFECTIVE_USER_ORCID,
           },
-          { property: this.siteNameMeta, content: 'Orcid' },
+          { property: this.siteNameMeta, content: 'ORCID' },
         ])
       } catch (e) {
         this.openGraphDataSet = false
