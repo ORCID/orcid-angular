@@ -12,7 +12,6 @@ import { SnackbarModule } from './snackbar.module'
 import { SnackbarComponent } from './snackbar/snackbar.component'
 import { HttpErrorResponse } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
-import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: SnackbarModule,
