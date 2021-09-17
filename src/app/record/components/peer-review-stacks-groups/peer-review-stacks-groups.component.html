@@ -21,9 +21,10 @@
       [elements]="peerReview"
       [type]="'peer-review'"
       [editable]="false"
-      [openState]="false"
+      [openState]="this.moreInfo.includes(peerReview.groupId)"
       [expandButtonsPosition]="'left'"
       [isPublicRecord]="isPublicRecord"
+      (openStateChange)="expandedClicked($event, peerReview)"
     >
       <div header>
         <ng-container i18n="@@peerReview.reviewActivity">
