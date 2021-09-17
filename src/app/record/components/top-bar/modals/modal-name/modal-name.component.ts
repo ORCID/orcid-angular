@@ -11,6 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, switchMap, take, takeUntil } from 'rxjs/operators'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
@@ -71,7 +72,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _userSession: UserService
+    private _userSession: UserService,
+    private _snackBar: SnackbarService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -227,6 +229,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           },
           (error) => {}
         )
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 

@@ -45,6 +45,7 @@ import {
   FundingExternalIndentifierType,
 } from 'src/app/types/record-funding.endpoint'
 import { Title } from '@angular/platform-browser'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-modal-funding',
@@ -126,7 +127,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _recordCountryService: RecordCountriesService,
     private _fundingsService: RecordFundingsService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _snackBar: SnackbarService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -437,6 +439,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.closeEvent()
         })
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 

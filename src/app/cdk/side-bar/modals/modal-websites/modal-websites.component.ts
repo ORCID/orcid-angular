@@ -32,6 +32,7 @@ import { cloneDeep } from 'lodash'
 import * as _ from 'lodash'
 import { UserService } from '../../../../core'
 import { URL_REGEXP, URL_REGEXP_BACKEND } from '../../../../constants'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-modal-websites',
@@ -63,7 +64,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _userService: UserService,
-    private _recordWebsitesService: RecordWebsitesService
+    private _recordWebsitesService: RecordWebsitesService,
+    private _snackBar: SnackbarService
   ) {
     this._platform
       .get()
@@ -165,6 +167,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           },
           (error) => {}
         )
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 

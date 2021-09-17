@@ -12,6 +12,7 @@ import { SnackbarModule } from './snackbar.module'
 import { SnackbarComponent } from './snackbar/snackbar.component'
 import { HttpErrorResponse } from '@angular/common/http'
 import { environment } from 'src/environments/environment'
+import { ERROR_REPORT } from 'src/app/errors'
 
 @Injectable({
   providedIn: SnackbarModule,
@@ -72,6 +73,28 @@ export class SnackbarService {
         errorReport.analytics.fatal
       )
     }
+  }
+
+  showValidationError(
+    message: string = $localize`:@@register.pleaseReviewInvalidForm:Please review the form and fix the issues before saving`,
+    title: string = $localize`:@@register.invalidForm:Form validation error`
+  ) {
+    const mappedDisplay = {
+      contentDirection: this.contentDirection,
+      closable: true,
+      title,
+      message,
+    }
+
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      data: {
+        displayMessage: mappedDisplay,
+      },
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: 'bottom',
+      panelClass: 'orcid-error',
+      duration: 15 * 1000,
+    })
   }
 
   showSuccessMessage(message: DisplayMessage) {

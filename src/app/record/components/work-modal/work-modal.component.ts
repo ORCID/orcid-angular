@@ -35,6 +35,7 @@ import {
   WorkTypesByCategory,
   WorkTypesTitle,
 } from 'src/app/types/works.endpoint'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-work-modal',
@@ -91,6 +92,7 @@ export class WorkModalComponent implements OnInit {
   originalCountryCodes: RecordCountryCodesEndpoint
 
   constructor(
+    private _snackBar: SnackbarService,
     private _fb: FormBuilder,
     private _platform: PlatformInfoService,
     private _workService: RecordWorksService,
@@ -312,6 +314,7 @@ export class WorkModalComponent implements OnInit {
 
   saveEvent() {
     this.workForm.markAllAsTouched()
+
     if (this.workForm.valid) {
       const work: Work = {
         visibility: {
@@ -391,6 +394,8 @@ export class WorkModalComponent implements OnInit {
       this._workService.save(work).subscribe((value) => {
         this._dialogRef.close()
       })
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 

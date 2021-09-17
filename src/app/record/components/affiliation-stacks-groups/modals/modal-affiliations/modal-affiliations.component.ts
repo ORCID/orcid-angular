@@ -22,6 +22,7 @@ import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { URL_REGEXP } from '../../../../../constants'
 import { dateValidator } from '../../../../../shared/validators/date/date.validator'
 import { Observable } from 'rxjs/internal/Observable'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-modal-affiliations',
@@ -83,7 +84,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
     private _recordAffiliationService: RecordAffiliationService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _snackbar: SnackbarService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -358,6 +360,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.closeEvent()
         })
+    } else {
+      this._snackbar.showValidationError()
     }
   }
 
