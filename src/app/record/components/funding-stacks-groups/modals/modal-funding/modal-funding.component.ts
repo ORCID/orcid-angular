@@ -186,7 +186,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       country: new FormControl(this.country, {
         validators: [Validators.required],
       }),
-      grants: new FormArray([]),      
+      grants: new FormArray([]),
       visibility: new FormControl(this.visibility, {
         validators: [Validators.required],
       }),
@@ -214,12 +214,15 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
     this.grantsArray = this.fundingForm.controls.grants as FormArray
     let i = 0
-    if(this.funding?.externalIdentifiers?.length > 0) {
+    if (this.funding?.externalIdentifiers?.length > 0) {
       this.funding.externalIdentifiers.forEach((extIdentifier) => {
         this.grantsArray.controls.push(
           this._formBuilder.group({
             grantNumber: [extIdentifier.externalIdentifierId?.value, []],
-            grantUrl: [extIdentifier.url?.value, [Validators.pattern(URL_REGEXP)]],
+            grantUrl: [
+              extIdentifier.url?.value,
+              [Validators.pattern(URL_REGEXP)],
+            ],
             fundingRelationship: [extIdentifier.relationship.value, []],
           })
         )
@@ -232,11 +235,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           grantNumber: ['', []],
           grantUrl: ['', [Validators.pattern(URL_REGEXP)]],
           fundingRelationship: [FundingRelationships.self, []],
-        }),
+        })
       )
       this.checkGrantsChanges(i)
     }
-    
 
     this._recordCountryService
       .getCountryCodes()
