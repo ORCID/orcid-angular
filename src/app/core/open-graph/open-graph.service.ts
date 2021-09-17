@@ -25,7 +25,9 @@ export class OpenGraphService {
     if (
       record.userInfo &&
       record.names !== undefined &&
-      !this.openGraphDataSet
+      !this.openGraphDataSet &&
+      record.userInfo !== undefined && 
+      !record.userInfo.RECORD_WITH_ISSUES
     ) {
       this.openGraphDataSet = true
       try {
