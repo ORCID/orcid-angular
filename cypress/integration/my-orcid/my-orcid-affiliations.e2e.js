@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+const runInfo = require('../../helpers/runInfo')
 
 describe.only('Affiliations' + runInfo(), () => {
   describe.only('Employment' + runInfo(), () => {
