@@ -22,6 +22,7 @@ import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { URL_REGEXP } from '../../../../../constants'
 import { dateValidator } from '../../../../../shared/validators/date/date.validator'
 import { Observable } from 'rxjs/internal/Observable'
+import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
   selector: 'app-modal-affiliations',
@@ -83,7 +84,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
     private _recordAffiliationService: RecordAffiliationService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _record: RecordService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -125,12 +127,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       link: new FormControl(this.link, {
         validators: [Validators.pattern(URL_REGEXP)],
       }),
-      visibility: new FormControl(
-        this.affiliation?.visibility?.visibility
-          ? this.affiliation.visibility.visibility
-          : this.defaultVisibility,
-        {}
-      ),
+      visibility: new FormControl(this.defaultVisibility, {
+        validators: [Validators.required],
+      }),
     })
 
     if (this.affiliation) {
@@ -151,6 +150,12 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
             startDateMonth: Number(this.affiliation.startDate.month),
             startDateDay: Number(this.affiliation.startDate.day),
           },
+        })
+      }
+
+      if(this.affiliation.visibility?.visibility) {
+        this.affiliationForm.patchValue({
+          visibility: this.affiliation.visibility.visibility
         })
       }
     }
@@ -192,6 +197,16 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         }
       })
 
+      if(!this.affiliation?.putCode) {
+        // Update the visibility with the default value
+        this._record.getPreferences().pipe(first()).subscribe((userPreferences) => {          
+          this.defaultVisibility = userPreferences.default_visibility
+          this.affiliationForm.patchValue({
+          visibility: this.defaultVisibility
+          })
+        })
+      }
+
     if (this.affiliation) {
       this._recordAffiliationService
         .getAffiliationsDetails(
@@ -206,7 +221,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
               affiliationUIGroup[0].affiliationGroup[0].affiliations[0].url
                 .value,
           })
-        })
+        })        
     } else {
       this.loadingAffiliations = false
     }

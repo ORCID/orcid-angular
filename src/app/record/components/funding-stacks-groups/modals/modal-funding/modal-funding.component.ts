@@ -45,6 +45,7 @@ import {
   FundingExternalIndentifierType,
 } from 'src/app/types/record-funding.endpoint'
 import { Title } from '@angular/platform-browser'
+import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
   selector: 'app-modal-funding',
@@ -68,8 +69,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   currencyCodeMap = CurrencyCodeMap
   userRecord: UserRecord
   userSession: UserSession
-  isMobile: boolean
-  defaultVisibility: VisibilityStrings
+  isMobile: boolean  
   filteredOptions: Observable<Organization[]>
   loadingFunding = true
   startDateValid: boolean
@@ -82,7 +82,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   fundingProjectTitle = ''
   fundingProjectLink = ''
   description = ''
-  visibility = 'PRIVATE'
+  defaultVisibility: VisibilityStrings
   agencyName = ''
   city = ''
   region = ''
@@ -126,7 +126,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _recordCountryService: RecordCountriesService,
     private _fundingsService: RecordFundingsService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _record: RecordService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -138,7 +139,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
-      })
+      })    
   }
 
   ngOnInit(): void {
@@ -187,10 +188,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       }),
       grants: new FormArray([]),
-      visibility: new FormControl(this.visibility, {
+      visibility: new FormControl(this.defaultVisibility, {
         validators: [Validators.required],
       }),
-    })
+    })  
 
     if (this.funding) {
       if (this.funding.endDate.year) {
@@ -210,6 +211,20 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           },
         })
       }
+
+      if(this.funding.visibility?.visibility) {
+        this.fundingForm.patchValue({
+          visibility: this.funding.visibility.visibility
+        })
+      }
+    } else {
+      // If there is an existing funding, do not overwrite the visibility
+      this._record.getPreferences().pipe(first()).subscribe((userPreferences) => {
+        this.defaultVisibility = userPreferences.default_visibility
+        this.fundingForm.patchValue({
+          visibility: this.defaultVisibility
+        })
+      })
     }
 
     this.grantsArray = this.fundingForm.controls.grants as FormArray
@@ -273,10 +288,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       switchMap((val) => {
         return this._filter(val || '')
       })
-    )
+    )    
   }
 
-  initialValues() {
+  initialValues() {    
     if (this.funding?.putCode) {
       if (this.funding) {
         this._fundingsService
@@ -312,10 +327,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.translatedTitleLanguage = this.funding.fundingTitle?.translatedTitle?.languageCode
       this.fundingProjectLink = this.funding.url?.value
       this.description = this.funding.description?.value
-      this.visibility = this.funding.visibility?.visibility
-        ? this.funding.visibility.visibility
-        : this.defaultVisibility
-
       this.agencyName = this.funding.fundingName?.value
       this.currencyCode = this.funding.currencyCode?.value
       this.amount = this.funding.amount?.value
@@ -324,6 +335,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.disambiguatedFundingSource = this.funding.disambiguationSource?.value
       this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
         ?.content
+
+      if(this.funding.visibility?.visibility) {        
+        this.defaultVisibility = this.funding.visibility?.visibility
+      }                     
     } else {
       this.loadingFunding = false
     }
