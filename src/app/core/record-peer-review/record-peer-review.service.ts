@@ -118,4 +118,18 @@ export class RecordPeerReviewService {
         tap(() => this.getPeerReviewGroups({ forceReload: true }))
       )
   }
+
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB + 'peer-reviews/updateToMaxDisplay.json?putCode=' + putCode
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() =>
+          this.getPeerReviewGroups({ forceReload: true })
+        )
+      )
+  }
 }

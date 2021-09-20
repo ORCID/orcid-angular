@@ -5,6 +5,7 @@ import {
   ResearchResourcesGroup,
 } from '../../../types/record-research-resources.endpoint'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
+import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 
 @Component({
   selector: 'app-research-resource-stack',
@@ -49,7 +50,10 @@ export class ResearchResourceStackComponent implements OnInit {
   isMobile: boolean
   platform: PlatformInfo
 
-  constructor(private _platformInfo: PlatformInfoService) {
+  constructor(
+    private _platformInfo: PlatformInfoService,
+    private _recordResearchResourceService: RecordResearchResourceService
+  ) {
     this._platformInfo.get().subscribe((platformInfo) => {
       this.platform = platformInfo
     })
@@ -109,7 +113,7 @@ export class ResearchResourceStackComponent implements OnInit {
   }
 
   makePrimaryCard(researchResource: ResearchResource) {
-    // TODO
+    this._recordResearchResourceService.updatePreferredSource(researchResource.putCode).subscribe()
   }
 
   changeTopPanelOfTheStack(researchResource: ResearchResource) {
