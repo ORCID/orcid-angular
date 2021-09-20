@@ -10,3 +10,7 @@ ul {
 .title {
   cursor: pointer;
 }
+
+.side-bar-url:empty + .divider {
+  display: none;
+}
