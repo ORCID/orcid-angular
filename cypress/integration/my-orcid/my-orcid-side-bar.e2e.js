@@ -17,7 +17,7 @@ Cypress.Commands.add(
       .trigger('mouseup', { force: true })
   }
 )
-describe.only('My Orcid sidebar' + runInfo(), () => {
+describe('My Orcid sidebar' + runInfo(), () => {
   before(() => {
     cy.programmaticSignin('testUser')
   })
@@ -30,13 +30,13 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
   describe('Orcid id', () => {
     it('display the users Orcid', () => {
       cy.get('app-side-bar-id ').within(() => {
-        cy.contains(environment.testUser.id)
-        cy.contains(`https:${environment.baseUrl}/${environment.testUser.id}`)
+      cy.contains(`${environment.baseUrl}`)
+      cy.contains(environment.testUser.id)
       })
     })
     it('display url to navigate to the public page view', () => {})
   })
-  describe.only('Emails' + runInfo(), () => {
+  describe('Emails' + runInfo(), () => {
     before(() => {
       cy.cleanEmails()
       cy.visit(`${environment.baseUrl}/qa/my-orcid`)
@@ -50,7 +50,7 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
 
     it('display a user with only a primary email "unverified"', () => {
       cy.get('#emails-panel').within(() => {
-        cy.get('[body=""]').children().should('have.length', 1)
+        cy.get('.body').get('.line').should('have.length', 1)
       })
     })
     it('display a user with only a primary email "verified"', () => {})
@@ -76,8 +76,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           .click()
           .get('#emails-panel')
           .within(() => {
-            cy.get('[body=""]')
-              .children()
+            cy.get('.body')
+              .get('.line')
               .should('have.length', 2)
               .get('app-panel-privacy')
               .eq(1)
@@ -97,7 +97,7 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           .wait(2000)
           .get('#emails-panel')
           .within(() => {
-            cy.get('[body=""]').children().should('have.length', 1)
+            cy.get('.body').get('.line').should('have.length', 1)
           })
       })
 
@@ -131,7 +131,7 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           .click()
           .get('#emails-panel')
           .within(() => {
-            cy.get('[body=""]').children().should('have.length', 5)
+            cy.get('.body').get('.line').should('have.length', 5)
           })
       })
 
@@ -147,8 +147,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           .click()
           .get('#emails-panel')
           .within(() => {
-            cy.get('[body=""]')
-              .children()
+            cy.get('.body')
+              .get('.line')
               .should('have.length', 5)
               .get('app-panel-privacy')
               .should('have.attr', 'aria-label', 'PUBLIC')
@@ -183,14 +183,14 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           .click()
           .get('#emails-panel')
           .within(() => {
-            cy.get('[body=""]')
-              .children()
+            cy.get('.body')
+              .get('.line')
               .should('have.length', 5)
               .get('app-panel-privacy')
               .should('have.attr', 'aria-label', 'PUBLIC')
           })
       })
-      it.only('open the terms of use on a separate window ', () => {
+      it('open the terms of use on a separate window ', () => {
         cy.get('#emails-panel')
           .within(() => {
             cy.get('#edit-button').click()
@@ -199,6 +199,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           .within(() => {
             cy.get('a ').should('have.attr', 'target', '_blank')
           })
+          .get('#cancel-emails-button')
+          .click()
       })
     })
   })
@@ -214,7 +216,7 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
     })
     it('display a user with no items', () => {
       cy.get('#websites-panel').within(() => {
-        cy.get('[body=""]').should('not.exist')
+        cy.get('.body').get('.line').should('not.exist')
       })
     })
     it('add items and display those with default privacy', () => {
@@ -223,20 +225,22 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           cy.get('#edit-button').click()
         })
         .get('#modal-container')
-        .get('#add-link')
-        .click()
-        .get('#description-input')
-        .click()
-        .type(description, { delay: 0 })
-        .get('#url-input')
-        .click()
-        .type(website, { delay: 0 })
-        .get('#save-websites-button')
-        .click()
+        .within(() => {
+          cy.get('#add-link')
+          .click()
+          .get('#description-input')
+          .click()
+          .type(description, { delay: 0 })
+          .get('#url-input')
+          .click()
+          .type(website, { delay: 0 })
+          .get('#save-websites-button')
+          .click()
+         })
         .get('#websites-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 1)
             .get('app-panel-privacy')
             .should(
@@ -252,14 +256,16 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           cy.get('#edit-button').click()
         })
         .get('#modal-container')
-        .get('#delete-button')
-        .click()
-        .get('#save-websites-button')
-        .click()
-        .wait(2000)
+        .within(() => {
+          cy.get('#delete-button')
+          .click()
+          .get('#save-websites-button')
+          .click()
+          .wait(2000)
+         })
         .get('#websites-panel')
         .within(() => {
-          cy.get('[body=""]').should('not.exist')
+          cy.get('.body').get('.line').should('not.exist')
         })
     })
     it('add multiple websites', () => {
@@ -268,44 +274,46 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           cy.get('#edit-button').click()
         })
         .get('#modal-container')
-        .get('#add-link')
-        .click()
-        .get('.mat-form-field-flex')
-        .eq(0)
-        .click({ multiple: true })
-        .type('Description Website 1', { delay: 0 })
-        .get('.mat-form-field-flex')
-        .eq(1)
-        .click({ multiple: true })
-        .type('https://orcid.org', { delay: 0 })
-        .get('#add-link')
-        .click()
-        .get('.mat-form-field-flex')
-        .click({ multiple: true })
-        .get('.mat-form-field-flex')
-        .eq(2)
-        .click()
-        .type('Description Website 2', { delay: 0 })
-        .get('.mat-form-field-flex')
-        .eq(3)
-        .click({ multiple: true })
-        .type('https://sandbox.orcid.org', { delay: 0 })
-        .get('#add-link')
-        .click()
-        .get('.mat-form-field-flex')
-        .eq(4)
-        .click()
-        .type('Description Website 3', { delay: 0 })
-        .get('.mat-form-field-flex')
-        .eq(5)
-        .click()
-        .type('https://qa.orcid.org', { delay: 0 })
-        .get('#save-websites-button')
-        .click()
+        .within(() => {
+          cy.get('#add-link')
+          .click()
+          .get('.mat-form-field-flex')
+          .eq(0)
+          .click({ multiple: true })
+          .type('Description Website 1', { delay: 0 })
+          .get('.mat-form-field-flex')
+          .eq(1)
+          .click({ multiple: true })
+          .type('https://orcid.org', { delay: 0 })
+          .get('#add-link')
+          .click()
+          .get('.mat-form-field-flex')
+          .click({ multiple: true })
+          .get('.mat-form-field-flex')
+          .eq(2)
+          .click()
+          .type('Description Website 2', { delay: 0 })
+          .get('.mat-form-field-flex')
+          .eq(3)
+          .click({ multiple: true })
+          .type('https://sandbox.orcid.org', { delay: 0 })
+          .get('#add-link')
+          .click()
+          .get('.mat-form-field-flex')
+          .eq(4)
+          .click()
+          .type('Description Website 3', { delay: 0 })
+          .get('.mat-form-field-flex')
+          .eq(5)
+          .click()
+          .type('https://qa.orcid.org', { delay: 0 })
+          .get('#save-websites-button')
+          .click()
+         })
         .get('#websites-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 3)
             .get('app-panel-privacy')
             .should(
@@ -324,14 +332,16 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           cy.get('#edit-button').click()
         })
         .get('#modal-container')
-        .get('.public-button')
-        .click({ multiple: true })
-        .get('#save-websites-button')
-        .click()
+        .within(() => {
+          cy.get('.public-button')
+          .click({ multiple: true })
+          .get('#save-websites-button')
+          .click()
+         })
         .get('#websites-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 3)
             .get('app-panel-privacy')
             .should('have.attr', 'aria-label', 'PUBLIC')
@@ -343,14 +353,16 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
           cy.get('#edit-button').click()
         })
         .get('#modal-container')
-        .get('.private-button')
-        .click({ multiple: true })
-        .get('#cancel-websites-button')
-        .click()
+        .within(() => {
+          cy.get('.private-button')
+          .click({ multiple: true })
+          .get('#cancel-websites-button')
+          .click()
+         })
         .get('#websites-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 3)
             .get('app-panel-privacy')
             .should('have.attr', 'aria-label', 'PUBLIC')
@@ -370,7 +382,7 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
     })
     it('display a user with no items', () => {
       cy.get('#countries-panel').within(() => {
-        cy.get('[body=""]').should('not.exist')
+        cy.get('.body').get('.line').should('not.exist')
       })
     })
     it('add items and display those with default privacy', () => {
@@ -389,8 +401,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
         .click()
         .get('#countries-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 1)
             .get('app-panel-privacy')
             .should(
@@ -413,7 +425,7 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
         .wait(2000)
         .get('#countries-panel')
         .within(() => {
-          cy.get('[body=""]').should('not.exist')
+          cy.get('.body').get('.line').should('not.exist')
         })
 
       // Expect changes to be display outside and inside of the modal
@@ -452,8 +464,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
         .click()
         .get('#countries-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 3)
             .get('app-panel-privacy')
             .should(
@@ -478,8 +490,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
         .click()
         .get('#countries-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 3)
             .get('app-panel-privacy')
             .should('have.attr', 'aria-label', 'PUBLIC')
@@ -499,8 +511,8 @@ describe.only('My Orcid sidebar' + runInfo(), () => {
         .click()
         .get('#countries-panel')
         .within(() => {
-          cy.get('[body=""]')
-            .children()
+          cy.get('.body')
+            .get('.line')
             .should('have.length', 3)
             .get('app-panel-privacy')
             .should('have.attr', 'aria-label', 'PUBLIC')
