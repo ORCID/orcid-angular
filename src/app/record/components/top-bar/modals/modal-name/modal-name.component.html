@@ -4,11 +4,7 @@
   </app-modal-header>
   <app-modal-side-bar>
     <ng-container id="side-bar-title">
-      <a
-        class="side-bar"
-        i18n="@@topBar.yourNames"
-        (click)="toGivenNames()"
-      >
+      <a class="side-bar" i18n="@@topBar.yourNames" (click)="toGivenNames()">
         Your names
       </a>
     </ng-container>
@@ -49,9 +45,7 @@
     >
       <div class="row">
         <p>
-          <strong i18n="@@topBar.yourNames">
-            Your names
-          </strong>
+          <strong i18n="@@topBar.yourNames"> Your names </strong>
           <span *ngIf="!platform.columns12" class="required">*</span>
         </p>
         <p *ngIf="platform.columns12" class="required-information mat-caption">
@@ -63,7 +57,10 @@
       </div>
     </div>
     <hr />
-    <p class="orc-font-body-small orcid-has-number " i18n="@@topBar.orcidHasANumber">
+    <p
+      class="orc-font-body-small orcid-has-number"
+      i18n="@@topBar.orcidHasANumber"
+    >
       ORCID has a number of options for adding and managing your names.
     </p>
     <a
@@ -71,14 +68,15 @@
       rel="noopener noreferrer"
       target="_blank"
       href="https://support.orcid.org/hc/en-us/articles/360006973853-Add-and-edit-your-name-on-your-ORCID-record"
-      i18n="@@topBar.findOutMore">
+      i18n="@@topBar.findOutMore"
+    >
       Find out more about managing names in your ORCID record
     </a>
-    <div
-      class="title orc-font-body"
-    >
+    <div class="title orc-font-body">
       <p class="your-given-names">
-        <strong i18n="@@topBar.yourGivenAndFamilyNames">Your given and family names.</strong>
+        <strong i18n="@@topBar.yourGivenAndFamilyNames"
+          >Your given and family names.</strong
+        >
       </p>
     </div>
     <div class="row">
@@ -129,16 +127,14 @@
         />
       </mat-form-field>
     </div>
-    <div
-      id="published-name"
-      class="title orc-font-body"
-    >
+    <div id="published-name" class="title orc-font-body">
       <p>
         <strong i18n="@@topBar.yourPublishedName">Your published name</strong>
       </p>
     </div>
     <p class="orc-font-body-small" i18n="@@topBar.howYouPreferYourName">
-      How you prefer your name to appear when credited. Adding a published name lets you control how your name is displayed in your ORCID record.
+      How you prefer your name to appear when credited. Adding a published name
+      lets you control how your name is displayed in your ORCID record.
     </p>
     <div class="row">
       <label for="published-names-input" class="mat-caption">
@@ -155,16 +151,16 @@
         />
       </mat-form-field>
     </div>
-    <div
-      id="visibility"
-      class="title orc-font-body"
-    >
+    <div id="visibility" class="title orc-font-body">
       <p>
-        <strong i18n="@@topBar.whoCanSeeYourNames">Who can see your names</strong>
+        <strong i18n="@@topBar.whoCanSeeYourNames"
+          >Who can see your names</strong
+        >
       </p>
     </div>
     <p class="orc-font-body-small" i18n="@@topBar.manageWhoCanSee">
-      Manage who can see your given, family and published names. By default your names are set to Public and can be seen by everyone.
+      Manage who can see your given, family and published names. By default your
+      names are set to Public and can be seen by everyone.
     </p>
     <div class="row">
       <div class="col no-wrap actions-wrapper no-gutters">
@@ -187,7 +183,10 @@
     </div>
     <hr />
     <p class="orc-font-body-small" i18n="@@topBar.addOtherNames">
-      Add other names you may be known by. These can include abbreviated names, middle names, former names or names in a different character set or language. Adding other names can help people find your record when they search the ORCID registry.
+      Add other names you may be known by. These can include abbreviated names,
+      middle names, former names or names in a different character set or
+      language. Adding other names can help people find your record when they
+      search the ORCID registry.
     </p>
     <ng-container *ngIf="otherNames.length > 0">
       <div
