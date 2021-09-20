@@ -1,0 +1,87 @@
+.hide {
+  display: none;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+:host {
+  width: 100%;
+}
+
+hr {
+  height: 2px;
+  border: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-top: 16px;
+
+  p {
+    margin: 6px 0;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.side-bar {
+  text-decoration: underline;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  mat-form-field {
+    width: 120px;
+    margin-left: 4px;
+  }
+}
+
+.align-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.required-information {
+  margin-left: auto !important;
+  margin-top: 10px !important;
+
+  span {
+    margin-right: 3px !important;
+  }
+}
+
+.larger-input-margin {
+  margin-bottom: 20px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+  padding-bottom: 1.475em;
+  padding-left: 0;
+}
+
+.add-more {
+  margin-bottom: 26px;
+
+  span {
+    margin: auto;
+    padding-left: 6px;
+  }
+}
