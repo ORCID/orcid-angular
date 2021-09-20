@@ -153,9 +153,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         })
       }
 
-      if(this.affiliation.visibility?.visibility) {
+      if (this.affiliation.visibility?.visibility) {
         this.affiliationForm.patchValue({
-          visibility: this.affiliation.visibility.visibility
+          visibility: this.affiliation.visibility.visibility,
         })
       }
     }
@@ -197,15 +197,18 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         }
       })
 
-      if(!this.affiliation?.putCode) {
-        // Update the visibility with the default value
-        this._record.getPreferences().pipe(first()).subscribe((userPreferences) => {          
+    if (!this.affiliation?.putCode) {
+      // Update the visibility with the default value
+      this._record
+        .getPreferences()
+        .pipe(first())
+        .subscribe((userPreferences) => {
           this.defaultVisibility = userPreferences.default_visibility
           this.affiliationForm.patchValue({
-          visibility: this.defaultVisibility
+            visibility: this.defaultVisibility,
           })
         })
-      }
+    }
 
     if (this.affiliation) {
       this._recordAffiliationService
@@ -221,7 +224,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
               affiliationUIGroup[0].affiliationGroup[0].affiliations[0].url
                 .value,
           })
-        })        
+        })
     } else {
       this.loadingAffiliations = false
     }

@@ -69,7 +69,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   currencyCodeMap = CurrencyCodeMap
   userRecord: UserRecord
   userSession: UserSession
-  isMobile: boolean  
+  isMobile: boolean
   filteredOptions: Observable<Organization[]>
   loadingFunding = true
   startDateValid: boolean
@@ -139,7 +139,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
-      })    
+      })
   }
 
   ngOnInit(): void {
@@ -191,7 +191,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       visibility: new FormControl(this.defaultVisibility, {
         validators: [Validators.required],
       }),
-    })  
+    })
 
     if (this.funding) {
       if (this.funding.endDate.year) {
@@ -212,19 +212,22 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         })
       }
 
-      if(this.funding.visibility?.visibility) {
+      if (this.funding.visibility?.visibility) {
         this.fundingForm.patchValue({
-          visibility: this.funding.visibility.visibility
+          visibility: this.funding.visibility.visibility,
         })
       }
     } else {
       // If there is an existing funding, do not overwrite the visibility
-      this._record.getPreferences().pipe(first()).subscribe((userPreferences) => {
-        this.defaultVisibility = userPreferences.default_visibility
-        this.fundingForm.patchValue({
-          visibility: this.defaultVisibility
+      this._record
+        .getPreferences()
+        .pipe(first())
+        .subscribe((userPreferences) => {
+          this.defaultVisibility = userPreferences.default_visibility
+          this.fundingForm.patchValue({
+            visibility: this.defaultVisibility,
+          })
         })
-      })
     }
 
     this.grantsArray = this.fundingForm.controls.grants as FormArray
@@ -288,10 +291,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       switchMap((val) => {
         return this._filter(val || '')
       })
-    )    
+    )
   }
 
-  initialValues() {    
+  initialValues() {
     if (this.funding?.putCode) {
       if (this.funding) {
         this._fundingsService
@@ -336,9 +339,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
         ?.content
 
-      if(this.funding.visibility?.visibility) {        
+      if (this.funding.visibility?.visibility) {
         this.defaultVisibility = this.funding.visibility?.visibility
-      }                     
+      }
     } else {
       this.loadingFunding = false
     }
