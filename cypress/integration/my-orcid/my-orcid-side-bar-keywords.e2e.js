@@ -148,10 +148,10 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
         .get('#modal-container')
         .within(() => {
           cy.get('.public-button')
-          .click({ multiple: true})
-          .get('#save-keywords-button')
-          .click()
-          .wait(1000)
+            .click({ multiple: true })
+            .get('#save-keywords-button')
+            .click()
+            .wait(1000)
         })
         .get('#keywords-panel')
         .within(() => {
@@ -170,10 +170,10 @@ describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
         .get('#modal-container')
         .within(() => {
           cy.get('.private-button')
-          .click({ multiple: true})
-          .get('#cancel-keywords-button')
-          .click()
-          .wait(1000)
+            .click({ multiple: true })
+            .get('#cancel-keywords-button')
+            .click()
+            .wait(1000)
         })
         .get('#keywords-panel')
         .within(() => {
