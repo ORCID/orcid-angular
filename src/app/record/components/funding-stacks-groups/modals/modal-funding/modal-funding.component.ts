@@ -187,7 +187,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       country: new FormControl(this.country, {
         validators: [Validators.required],
       }),
-<<<<<<< HEAD
       grants: new FormArray([
         this._formBuilder.group({
           grantNumber: ['', []],
@@ -196,10 +195,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         }),
       ]),
       visibility: new FormControl(this.defaultVisibility, {
-=======
-      grants: new FormArray([]),
-      visibility: new FormControl(this.visibility, {
->>>>>>> development
         validators: [Validators.required],
       }),
     })  
