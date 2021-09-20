@@ -187,13 +187,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       country: new FormControl(this.country, {
         validators: [Validators.required],
       }),
-      grants: new FormArray([
-        this._formBuilder.group({
-          grantNumber: ['', []],
-          grantUrl: ['', [Validators.pattern(URL_REGEXP)]],
-          fundingRelationship: [FundingRelationships.self, []],
-        }),
-      ]),
+      grants: new FormArray([]),
       visibility: new FormControl(this.defaultVisibility, {
         validators: [Validators.required],
       }),
