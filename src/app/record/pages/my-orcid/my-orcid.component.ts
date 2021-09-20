@@ -8,6 +8,8 @@ import { Subject } from 'rxjs'
 import { UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
+import { UserInfoService } from '../../../core/user-info/user-info.service'
+import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-my-orcid',
@@ -23,6 +25,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
   publicOrcid: string
   affiliations: number
+  userInfo: UserInfo
   userRecord: UserRecord
   expandedContent = true
   expandedButton = true
@@ -32,9 +35,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   expandedResearchResources: boolean
   expandedPeerReview: boolean
   recordWithIssues: boolean
-  loading = false
+  userNotFound: boolean
+  loadingUserRecord: boolean
 
   constructor(
+    _userInfoService: UserInfoService,
     private _platform: PlatformInfoService,
     private route: ActivatedRoute,
     private _record: RecordService,
@@ -84,23 +89,22 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        this.userInfo = userRecord?.userInfo
+        this.checkLoadingState(userRecord)
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+        this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
-        this.loading = true
-        if (this.publicOrcid && this.recordWithIssues) {
-          this._robotsMeta.addRobotMetaTags()
+        if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
+          this._robotsMeta.disallowRobots()
         }
+        this._openGraph.addOpenGraphData(userRecord)
       })
-
-    if (this.publicOrcid) {
-      this._openGraph.addOpenGraphData(this.publicOrcid)
-    }
   }
 
   ngOnDestroy(): void {
     if (this.publicOrcid) {
       this._openGraph.removeOpenGraphData()
-      this._robotsMeta.removeRobotMetaTags()
+      this._robotsMeta.restoreEnvironmentRobotsConfig()
     }
   }
 
@@ -152,5 +156,16 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this.collapse()
       }
     }
+  }
+
+  checkLoadingState(userRecord: UserRecord) {
+    const missingValues = Object.keys(userRecord).filter((key) => {
+      if (key !== 'preferences' && key !== 'lastModifiedTime') {
+        return userRecord[key] === undefined
+      } else {
+        return false
+      }
+    })
+    this.loadingUserRecord = !!missingValues.length
   }
 }

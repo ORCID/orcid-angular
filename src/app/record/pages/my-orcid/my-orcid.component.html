@@ -1,4 +1,4 @@
-<ng-container *ngIf="userRecord?.userInfo?.EFFECTIVE_USER_ORCID">
+<ng-container *ngIf="!userNotFound">
   <app-top-bar-my-public-record-preview
     [isPublicRecord]="publicOrcid"
   ></app-top-bar-my-public-record-preview>
@@ -12,7 +12,11 @@
       </app-side-bar>
       <main id="main" class="col l9 m8 s4">
         <app-main>
-          <app-top-bar [isPublicRecord]="publicOrcid" class="row"></app-top-bar>
+          <app-top-bar
+            [isPublicRecord]="publicOrcid"
+            class="row"
+            [loadingUserRecord]="loadingUserRecord"
+          ></app-top-bar>
           <app-side-bar
             *ngIf="platform.columns8 || platform.columns4"
             class="col l3 m8 s4"
@@ -48,12 +52,14 @@
             </div>
           </div>
           <app-affiliations
+            [userInfo]="userInfo"
             [isPublicRecord]="publicOrcid"
             [expandedContent]="expandedContent"
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-affiliations>
           <app-fundings
+            [userInfo]="userInfo"
             [isPublicRecord]="publicOrcid"
             [expandedContent]="expandedContent"
             (total)="affiliationsCount($event)"
@@ -66,37 +72,42 @@
             (expanded)="expandedByType($event)"
           ></app-research-resources>
           <app-work-stack-group
+            [userInfo]="userInfo"
             [isPublicRecord]="publicOrcid"
             [expandedContent]="expandedContent"
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-work-stack-group>
           <app-peer-reviews
+            [userInfo]="userInfo"
             [isPublicRecord]="publicOrcid"
             [expandedContent]="expandedContent"
             (total)="affiliationsCount($event)"
             (expanded)="expandedByType($event)"
           ></app-peer-reviews>
-          <div class="no-public-info" *ngIf="affiliations === 0">
-            <mat-icon>error</mat-icon>
-            <ng-container i18n="@@record.noPublicInfo"
-              >No public information available.
-            </ng-container>
-          </div>
-          <div
-            class="orc-font-body-small"
-            *ngIf="
-              publicOrcid && userRecord?.lastModifiedTime && !recordWithIssues
-            "
-            [ngClass]="{ 'last-modified': affiliations === 0 }"
-          >
-            <i>
-              <span i18n="@@shared.lastModifiedTime">
-                Record last modified
-              </span>
-              {{ userRecord?.lastModifiedTime | date: 'medium':'UTC' }} UTC
-            </i>
-          </div>
+          <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">
+            <div
+              class="no-public-info"
+              *ngIf="publicOrcid && affiliations === 0"
+            >
+              <mat-icon>error</mat-icon>
+              <ng-container i18n="@@record.noPublicInfo"
+                >No public information available.
+              </ng-container>
+            </div>
+            <div
+              class="orc-font-body-small"
+              *ngIf="publicOrcid && userRecord?.lastModifiedTime"
+              [ngClass]="{ 'last-modified': affiliations === 0 }"
+            >
+              <i>
+                <span i18n="@@shared.lastModifiedTime">
+                  Record last modified
+                </span>
+                {{ userRecord?.lastModifiedTime | date: 'medium':'UTC' }} UTC
+              </i>
+            </div>
+          </ng-container>
           <app-statistics
             [ngClass]="{ mobile: !platform.columns12 }"
           ></app-statistics>
@@ -105,8 +116,4 @@
     </div>
   </div>
 </ng-container>
-<app-not-found
-  *ngIf="
-    loading && userRecord.userInfo && !userRecord?.userInfo.EFFECTIVE_USER_ORCID
-  "
-></app-not-found>
+<app-not-found *ngIf="userNotFound"></app-not-found>

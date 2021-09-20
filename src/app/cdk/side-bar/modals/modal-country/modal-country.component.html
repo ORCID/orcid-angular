@@ -27,82 +27,93 @@
   <div class="container no-padding" [formGroup]="countryForm">
     <div class="row">
       <div class="col no-gutters">
-        <p i18n="@@side-bar.countriesModalDescription">
+        <p
+          class="orc-font-small-print"
+          i18n="@@side-bar.countriesModalDescription"
+        >
           Add countries to your ORCID record to highlight where you conduct your
           research or where your research is focused. You can add as many
           countries as you want.
         </p>
       </div>
     </div>
-    <div class="row">
-      <h3 class="col no-gutters" i18n="@@side-bar.myCountries">My countries</h3>
-    </div>
-
-    <div
-      class="row"
-      id="country-droplist"
-      cdkDropList
-      (cdkDropListDropped)="drop($event)"
-      class="country-wrapper"
-    >
+    <ng-container *ngIf="countries?.length > 0">
+      <div class="row">
+        <h3
+          class="col no-gutters orc-font-body-small"
+          i18n="@@side-bar.myCountries"
+        >
+          My countries
+        </h3>
+      </div>
       <div
-        cdkDrag
-        rootElementSelector="#country-droplist"
-        class="row country-input-line"
-        [ngClass]="{ 'no-wrap': !isMobile }"
-        [ngStyle]="{ direction: screenDirection }"
-        [formGroupName]="country.putCode"
-        *ngFor="let country of countries; index as i"
-        [attr.id]="'draggable-' + i"
+        class="row country-wrapper"
+        id="country-droplist"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
       >
-        <div class="col l12 m8 s4 top no-wrap no-gutters">
-          <img
-            cdkDragHandle
-            src="./assets/vectors/draggable.svg"
-            aria-label="drag handle"
-          />
+        <div
+          cdkDrag
+          rootElementSelector="#country-droplist"
+          class="row country-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [ngStyle]="{ direction: screenDirection }"
+          [formGroupName]="country.putCode"
+          *ngFor="let country of countries; index as i"
+          [attr.id]="'draggable-' + i"
+        >
+          <div class="col l12 m8 s4 top no-wrap no-gutters">
+            <img
+              cdkDragHandle
+              src="./assets/vectors/draggable.svg"
+              aria-label="drag handle"
+            />
 
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min"
-            [ngClass]="{ twoLinesHint: isMobile }"
-          >
-            <mat-select #countrySelect formControlName="country">
-              <mat-option
-                *ngFor="let countryCode of countryCodes"
-                [value]="countryCode.key"
-              >
-                {{ countryCode.key }}
-              </mat-option>
-            </mat-select>
-            <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-              <ng-container i18n="@@shared.source">Source:</ng-container>
-              {{ getSourceName(countriesMap[country.putCode]) }},
-              <ng-container i18n="@@shared.created">Created: </ng-container
-              >{{ getDate(countriesMap[country.putCode]) | date }}
-            </mat-hint>
-          </mat-form-field>
-        </div>
-        <div class="col no-wrap actions-wrapper no-gutters">
-          <app-privacy-selector
-            formControlName="visibility"
-          ></app-privacy-selector>
-          <button
-            (click)="deleteEmail(country.putCode)"
-            mat-icon-button
-            class="delete-button"
-          >
-            <mat-icon class="material-icons-outlined extra-large-material-icon"
-              >delete</mat-icon
+            <mat-form-field
+              appearance="outline"
+              class="mat-form-field-min"
+              [ngClass]="{ twoLinesHint: isMobile }"
             >
-          </button>
+              <mat-select #countrySelect formControlName="country">
+                <mat-option
+                  *ngFor="let countryCode of countryCodes"
+                  [value]="countryCode.key"
+                >
+                  {{ countryCode.key }}
+                </mat-option>
+              </mat-select>
+              <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
+                <span i18n="@@shared.source">Source:</span>
+                {{ getSourceName(countriesMap[country.putCode]) }},
+                <span i18n="@@shared.created">Created:</span>
+                {{
+                  countriesMap[country.putCode].createdDate
+                    | monthDayYearDateToString
+                }}
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col no-wrap actions-wrapper no-gutters">
+            <app-privacy-selector
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              (click)="deleteEmail(country.putCode)"
+              mat-icon-button
+              class="delete-button"
+            >
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete
+              </mat-icon>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-
+    </ng-container>
     <div class="row">
       <a class="col add-more no-gutters" (click)="addCountry()" id="add-link">
-        <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
           <ng-container
             *ngIf="countries.length === 0"

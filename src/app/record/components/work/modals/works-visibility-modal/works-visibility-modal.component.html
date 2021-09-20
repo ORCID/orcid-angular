@@ -1,0 +1,70 @@
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@works.setVisibility">
+      Set visibility selected works
+    </ng-container>
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-names-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-names-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <form [formGroup]="worksForm">
+    <p class="orc-font-body-small" i18n="@@works.whoCanSeeWorks">
+      Who can see your works. The default visibility setting is Private.
+    </p>
+    <div class="row">
+      <div class="col no-wrap actions-wrapper no-gutters">
+        <app-privacy-selector
+          formControlName="visibility"
+        ></app-privacy-selector>
+      </div>
+    </div>
+    <div class="row">
+      <h3>
+        <ng-container i18n="@@works.selectedWorksVisibility">
+          Selected works to set visibility
+        </ng-container>
+        ({{ works.length }})
+      </h3>
+      <mat-divider class="row orcid-divider"></mat-divider>
+      <ng-container *ngFor="let work of works">
+        <div class="row work-info">
+          <div class="row">
+            <h2 class="orc-font-body">
+              {{ work.title.value }}
+            </h2>
+          </div>
+          <div class="orc-font-body-small">
+            <strong i18n="@@record.source">Source</strong>:
+            {{ work.sourceName || work.source }}
+            <strong class="added" i18n="@@record.added"> Added </strong>:
+            {{ work.createdDate | monthDayYearDateToString }}
+          </div>
+        </div>
+        <mat-divider class="row"></mat-divider>
+      </ng-container>
+      <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
+        <mat-icon>error</mat-icon>
+        <ng-container i18n="@@record.noItemsSelected"
+          >No items selected.
+        </ng-container>
+      </div>
+    </div>
+  </form>
+</app-modal>

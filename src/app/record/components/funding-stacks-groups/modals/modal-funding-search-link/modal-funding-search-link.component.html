@@ -1,0 +1,33 @@
+<app-modal [loading]="loadingFunding" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@record.linkFunding"> Link funding </ng-container>
+  </app-modal-header>
+  <div class="row">
+    <div class="orc-font-small-print">
+      <p i18n="@@shared.searchAndLink">
+        Search and Link wizards are our recommended way to populate your record.
+        They make adding works, funding and peer reviews simple and save you
+        time over updating your record manually. Select a platform from the list
+        below to start linking items to your record.
+      </p>
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006973653-Add-works-by-direct-import-from-other-systems"
+        target="_blank"
+        rel="noopener noreferrer"
+        i18n="@@record.linkFundingMoreInfo"
+      >
+        More information about linking funding to your ORCID record
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <h3 i18n="@@shared.availableSearch">Available Search & Link wizards</h3>
+    <mat-divider class="row orcid-divider"></mat-divider>
+  </div>
+  <app-search-link-wizard
+    [recordImportWizards]="recordImportWizards"
+  ></app-search-link-wizard>
+</app-modal>

@@ -1,0 +1,110 @@
+.hide {
+  display: none;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+:host {
+  width: 100%;
+}
+
+hr {
+  height: 2px;
+  border: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-top: 16px;
+
+  p {
+    margin: 6px 0;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-option {
+  height: 64px;
+  line-height: 32px;
+}
+
+.side-bar {
+  text-decoration: underline;
+}
+
+mat-radio-button {
+  margin-top: 16px;
+  padding-left: 2px;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  mat-form-field {
+    width: 120px;
+    margin-left: 4px;
+  }
+}
+
+.add-more {
+  span {
+    margin: auto;
+    padding-left: 6px;
+  }
+}
+
+.funding {
+  margin-top: 26px;
+}
+
+.translate-title {
+  margin-bottom: 26px;
+}
+
+.required-information {
+  margin-left: auto !important;
+  margin-top: 10px !important;
+
+  span {
+    margin-right: 3px !important;
+  }
+}
+
+.larger-input-margin {
+  margin-bottom: 20px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+  padding-bottom: 1.475em;
+  padding-left: 0;
+}
+
+.project-link-mobile {
+  padding-bottom: 1.475em;
+}
+
+.description {
+  margin-top: 26px !important;
+}
+
+.delete-grant {
+  align-content: end;
+  justify-content: flex-end;
+}

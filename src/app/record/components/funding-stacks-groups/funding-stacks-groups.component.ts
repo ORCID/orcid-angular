@@ -11,6 +11,7 @@ import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
+import { UserInfo } from '../../../types'
 
 @Component({
   selector: 'app-fundings',
@@ -20,6 +21,7 @@ import { RecordFundingsService } from '../../../core/record-fundings/record-fund
 export class FundingStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addFunding:Add Funding`
   labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
+  @Input() userInfo: UserInfo
   @Input() isPublicRecord: any = false
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
@@ -28,10 +30,11 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
-  fundings: FundingGroup[]
+  fundings: FundingGroup[] = []
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
   countryCodes: { key: string; value: string }[]
+  loading = true
 
   constructor(
     private _userSession: UserService,
@@ -57,6 +60,9 @@ export class FundingStacksGroupsComponent implements OnInit {
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
+            if (userRecord.fundings !== undefined) {
+              this.loading = false
+            }
             if (!isEmpty(userRecord.fundings)) {
               this._recordCountryService
                 .getCountryCodes()

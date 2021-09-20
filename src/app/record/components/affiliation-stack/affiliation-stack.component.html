@@ -16,6 +16,8 @@
     [putCode]="affiliation.putCode.value"
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
+    [isUserSource]="userIsSource(affiliation)"
+    [userVersionPresent]="affiliationStack.userVersionPresent"
     *ngIf="isPreferred(affiliation) || displayTheStack"
   >
     <h2 header class="orc-font-body">
@@ -56,7 +58,7 @@
       [isPublicRecord]="isPublicRecord"
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(affiliation)"
       [type]="type"
-      [putCode]="affiliation.putCode.value"
+      [item]="affiliation"
     >
     </app-panel-source>
   </app-panel>

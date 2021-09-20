@@ -15,6 +15,12 @@
     [visibility]="workStack.activeVisibility"
     *ngIf="isPreferred(work) || displayTheStack"
     [isPublicRecord]="isPublicRecord"
+    [editModalComponent]="worksModal"
+    [selectable]="true"
+    [isUserSource]="userIsSource(work)"
+    [userVersionPresent]="workStack.userVersionPresent"
+    (checkboxChangePanel)="checkboxChangeWorkStack($event)"
+    #panelsComponent
     [type]="'works'"
   >
     <h2 header class="orc-font-body">{{ work.title.value }}</h2>
@@ -42,7 +48,7 @@
       [isPublicRecord]="isPublicRecord"
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(work)"
       [type]="'works'"
-      [putCode]="work.putCode.value"
+      [item]="work"
     >
     </app-panel-source>
   </app-panel>

@@ -1,0 +1,96 @@
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@record.combineSelectedWorks">
+      Combine selected works
+    </ng-container>
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      id="combine-button"
+    >
+      <ng-container i18n="@@record.combineSelectedWorks">
+        Combine selected works
+      </ng-container>
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <div class="row">
+    <div class="orc-font-small-print">
+      <p i18n="@@record.selectedWorksGrouped">
+        The selected works will be grouped together and displayed as a single
+        group item on your record. All versions of the work will still be
+        available but one will be shown as your preferred version.
+      </p>
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/articles/360006971333"
+        i18n="@@record.learnMoreCombining"
+      >
+        Learn more about combining works
+      </a>
+    </div>
+  </div>
+  <div
+    class="info"
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div class="col">
+      <mat-icon class="large-material-icon">info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3">
+      <strong i18n="@@record.combiningWorks">
+        Combining works cannot be undone!
+      </strong>
+      <p i18n="@@record.checkSelectedWorks">
+        Please check the selected works are correct before combining them.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <h3>
+      <ng-container i18n="@@record.selectedWorksCombine">
+        Selected works to combine
+      </ng-container>
+      ({{ works.length }})
+    </h3>
+    <mat-divider class="row orcid-divider"></mat-divider>
+    <ng-container *ngFor="let work of works">
+      <div class="row work-info">
+        <div class="row">
+          <h2 class="orc-font-body">
+            {{ work.title.value }}
+          </h2>
+        </div>
+        <div class="orc-font-body-small">
+          <strong i18n="@@record.source">Source</strong>:
+          {{ work.sourceName || work.source }}
+          <strong class="added" i18n="@@record.added"> Added </strong>:
+          {{ work.createdDate | monthDayYearDateToString }}
+        </div>
+      </div>
+      <mat-divider class="row"></mat-divider>
+    </ng-container>
+    <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@record.noItemsSelected"
+        >No items selected.
+      </ng-container>
+    </div>
+  </div>
+</app-modal>

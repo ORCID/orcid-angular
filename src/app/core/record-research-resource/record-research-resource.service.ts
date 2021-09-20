@@ -17,7 +17,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
   providedIn: 'root',
 })
 export class RecordResearchResourceService {
-  researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(1)
+  $researchResourcesSubject: ReplaySubject<ResearchResourcesEndpoint>
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -36,7 +36,7 @@ export class RecordResearchResourceService {
     options.offset = options.offset || 0
 
     if (options.publicRecordId) {
-      this._http
+      return this._http
         .get<ResearchResourcesEndpoint>(
           environment.API_WEB +
             options.publicRecordId +
@@ -58,13 +58,17 @@ export class RecordResearchResourceService {
               ? Math.floor(options.offset / options.pageSize)
               : 0
             return data
-          }),
-          tap((value) => {
-            this.researchResourcesSubject.next(value)
           })
         )
-        .subscribe()
     } else {
+      if (!this.$researchResourcesSubject) {
+        this.$researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(
+          1
+        )
+      } else if (!options.forceReload) {
+        return this.$researchResourcesSubject
+      }
+
       this._http
         .get<ResearchResourcesEndpoint>(
           environment.API_WEB +
@@ -78,6 +82,7 @@ export class RecordResearchResourceService {
             options.pageSize
         )
         .pipe(
+          retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
           catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
           map((data) => {
@@ -88,23 +93,18 @@ export class RecordResearchResourceService {
             return data
           }),
           tap((value) => {
-            this.researchResourcesSubject.next(value)
+            this.$researchResourcesSubject.next(value)
           })
         )
         .subscribe()
     }
-    return this.researchResourcesSubject.asObservable()
+    return this.$researchResourcesSubject.asObservable()
   }
 
-  changeUserRecordContext(event: UserRecordOptions): void {
-    this.getResearchResourcePage(event).pipe(take(1)).subscribe()
-  }
-
-  loadMore(offset: number, publicRecordId?: string) {
-    this.getResearchResourcePage({
-      offset,
-      publicRecordId,
-    })
+  changeUserRecordContext(
+    event: UserRecordOptions
+  ): Observable<ResearchResourcesEndpoint> {
+    return this.getResearchResourcePage(event).pipe(take(1))
   }
 
   getResearchResourceById(putCode: string): Observable<ResearchResource> {

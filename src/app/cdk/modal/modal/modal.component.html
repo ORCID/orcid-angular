@@ -15,16 +15,16 @@
       class="col s4 m8 no-gutters content-wrapper"
       [ngClass]="{ l9: !noSidebar, l12: noSidebar }"
     >
-      <div class="container no-padding">
+      <div class="no-padding modal-content">
         <ng-content></ng-content>
       </div>
     </div>
-    <div class="col l3 no-padding side-bar" *ngIf="columns12 && !noSidebar">
+    <div class="col l3 no-gutters side-bar" *ngIf="columns12 && !noSidebar">
       <ng-content select="app-modal-side-bar"></ng-content>
     </div>
   </div>
   <div class="row footer-area no-padding">
-    <div class="col s4 l12">
+    <div class="col s4 l12 no-gutters">
       <ng-content select="app-modal-footer"></ng-content>
     </div>
   </div>

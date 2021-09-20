@@ -1,71 +1,136 @@
 <ng-container *ngIf="!(isPublicRecord && workGroup?.groups?.length === 0)">
-  <app-panels
-    *ngIf="workGroup?.groups"
-    class="row"
-    [title]="works"
-    [currentAmount]="workGroup.groups.length"
-    [total]="workGroup.totalGroups"
-    [isPublicRecord]="isPublicRecord"
-    [expandedContent]="expandedContent"
-    (expanded)="expandedClicked($event)"
-    [labelAddButton]="labelAddButton"
-    [labelSortButton]="labelSortButton"
-    [sortTypes]="['date', 'title', 'type']"
-    [sortType]="'date'"
-    (sort)="sortEvent($event)"
-    type="works"
-  >
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="paginationLoading"
-    ></mat-progress-bar>
-    <mat-paginator
-      *ngIf="
-        workGroup.totalGroups > workGroup.groups.length ||
-        this.paginationPageSize != defaultPageSize
-      "
-      [length]="paginationTotalAmountOfWorks"
-      [pageSize]="paginationPageSize"
-      [pageSizeOptions]="[10, 50, 100]"
-      [pageIndex]="paginationIndex"
-      (page)="pageEvent($event)"
-      [disabled]="paginationLoading"
+  <form [formGroup]="workStackGroupForm">
+    <app-panels
+      *ngIf="workGroup?.groups"
+      class="row"
+      [title]="works"
+      [currentAmount]="workGroup.groups.length"
+      [total]="workGroup.totalGroups"
+      [isPublicRecord]="isPublicRecord"
+      [expandedContent]="expandedContent"
+      (expanded)="expandedClicked($event)"
+      [labelAddButton]="labelAddButton"
+      [labelSortButton]="labelSortButton"
+      [sortTypes]="['date', 'title', 'type']"
+      [sortType]="'date'"
+      [addMenuOptions]="addMenuOptions"
+      (sort)="sortEvent($event)"
+      type="works"
     >
-    </mat-paginator>
-    <ng-container *ngIf="workGroup.groups.length > 0">
-      <app-work-stack
-        [isPublicRecord]="isPublicRecord"
-        *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
-        [workStack]="group"
-      ></app-work-stack>
-    </ng-container>
-    <ng-container *ngIf="workGroup.groups.length === 0">
-      <div class="orc-font-body-small">
-        <p class="empty" i18n="@@shared.worksDescription">
-          Add details about your works, captures your research outputs, e.g.
-          publications, conference presentations, data sets, and more.
-        </p>
-        <a class="underline" href="" i18n="@@shared.worksLearnMore">
-          Learn more about adding a works to your ORCID record
-        </a>
-      </div>
-    </ng-container>
-    <mat-paginator
-      *ngIf="
-        workGroup.totalGroups > workGroup.groups.length ||
-        paginationPageSize !== defaultPageSize
-      "
-      [length]="paginationTotalAmountOfWorks"
-      [pageSize]="paginationPageSize"
-      [pageSizeOptions]="[10, 50, 100]"
-      [pageIndex]="paginationIndex"
-      (page)="pageEvent($event)"
-      [disabled]="paginationLoading"
-    >
-    </mat-paginator>
-    <mat-progress-bar
-      mode="indeterminate"
-      *ngIf="paginationLoading"
-    ></mat-progress-bar>
-  </app-panels>
+      <mat-progress-bar
+        mode="indeterminate"
+        *ngIf="paginationLoading"
+      ></mat-progress-bar>
+
+      <mat-paginator
+        *ngIf="
+          workGroup.totalGroups > workGroup.groups.length ||
+          this.paginationPageSize != defaultPageSize
+        "
+        [length]="paginationTotalAmountOfWorks"
+        [pageSize]="paginationPageSize"
+        [pageSizeOptions]="[10, 50, 100]"
+        [pageIndex]="paginationIndex"
+        (page)="pageEvent($event)"
+        [disabled]="paginationLoading"
+      >
+      </mat-paginator>
+      <ng-container *ngIf="workGroup.groups.length > 0">
+        <div
+          class="row works-buttons orc-font-body-small"
+          *ngIf="!isPublicRecord"
+        >
+          <div class="select-all">
+            <p>
+              <mat-checkbox (change)="checked($event)" [(ngModel)]="selectAll">
+                <ng-container i18n="@@shared.selectAll"
+                  >Select all</ng-container
+                >
+                ({{ workGroup.groups.length }})
+              </mat-checkbox>
+            </p>
+          </div>
+          <div class="items-selected">
+            <p>
+              <ng-container i18n="@@shared.itemsCurrentlySelected"
+                >Items currently selected</ng-container
+              >
+              ({{ selectedWorks.length }})
+            </p>
+          </div>
+          <div class="controls">
+            <button
+              mat-button
+              class="orc-font-body-small"
+              [attr.aria-label]="labelActionsButton"
+              [matMenuTriggerFor]="menu"
+            >
+              <span class="action" i18n="@@shared.actions"> Actions </span>
+              <mat-icon class="large-material-icon">arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="combine()">
+                <mat-icon>merge_type</mat-icon>
+                <span i18n="@@shared.combineWorks">Combine works</span>
+              </button>
+              <button mat-menu-item (click)="export()">
+                <mat-icon>file_download</mat-icon>
+                <span i18n="@@shared.exportWorks">Export works</span>
+              </button>
+              <button mat-menu-item (click)="visibility()">
+                <mat-icon>visibility</mat-icon>
+                <span i18n="@@shared.setVisibility">Set visibility</span>
+              </button>
+              <button mat-menu-item (click)="delete()">
+                <mat-icon>delete</mat-icon>
+                <span i18n="@@shared.deleteWorks">Delete works</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <app-work-stack
+          [isPublicRecord]="isPublicRecord"
+          *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
+          [workStack]="group"
+          [userInfo]="userInfo"
+          (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
+          #appWorkStacks
+        ></app-work-stack>
+      </ng-container>
+      <ng-container *ngIf="workGroup.groups.length === 0">
+        <div class="orc-font-body-small">
+          <p class="empty" i18n="@@shared.worksDescription">
+            Add your research outputs such as publications, data sets,
+            conference presentations and more.
+          </p>
+          <a
+            class="underline"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://support.orcid.org/hc/en-us/sections/360001495353-Works-and-peer-review"
+            i18n="@@shared.worksLearnMore"
+          >
+            Learn more about adding works to your ORCID record
+          </a>
+        </div>
+      </ng-container>
+      <mat-paginator
+        *ngIf="
+          workGroup.totalGroups > workGroup.groups.length ||
+          paginationPageSize !== defaultPageSize
+        "
+        [length]="paginationTotalAmountOfWorks"
+        [pageSize]="paginationPageSize"
+        [pageSizeOptions]="[10, 50, 100]"
+        [pageIndex]="paginationIndex"
+        (page)="pageEvent($event)"
+        [disabled]="paginationLoading"
+      >
+      </mat-paginator>
+      <mat-progress-bar
+        mode="indeterminate"
+        *ngIf="paginationLoading"
+      ></mat-progress-bar>
+    </app-panels>
+  </form>
 </ng-container>

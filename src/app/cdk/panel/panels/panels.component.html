@@ -13,9 +13,7 @@
 
       <div class="text-container">
         <div class="orc-font-body-large clickable" (click)="collapse()">
-          <strong>
-            {{ title }}
-          </strong>
+          <strong> {{ title }} </strong>
           <span
             *ngIf="currentAmount && total && currentAmount !== total"
             class="clickable"
@@ -31,7 +29,7 @@
           >
             ({{ currentAmount }})
           </span>
-          <span *ngIf="!currentAmount">(0)</span>
+          <span *ngIf="!currentAmount && currentAmount !== 0">(0)</span>
         </div>
         <ng-container> </ng-container>
       </div>
@@ -39,25 +37,20 @@
 
     <div class="controls" *ngIf="type !== 'sub-peer-review'">
       <button
-        *ngIf="
-          !isPublicRecord && (type === 'employment' || type === 'peer-review')
-        "
-        mat-icon-button
+        *ngIf="!isPublicRecord && singleAddButton()"
+        mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
+        (click)="add(type)"
       >
-        <mat-icon
-          (click)="add(type)"
-          class="large-material-icon"
-          id="add-button"
-        >
+        <mat-icon class="large-material-icon" id="add-button">
           add_circle_outline
         </mat-icon>
         <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
       <button
-        *ngIf="!isPublicRecord && affiliationMatButton()"
-        mat-icon-button
+        *ngIf="!isPublicRecord && multipleMatButton()"
+        mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
         [matMenuTriggerFor]="menuAdd"
@@ -102,6 +95,34 @@
           </button>
           <button mat-menu-item (click)="add('service')">
             <ng-container i18n="@@shared.addService">Add Service</ng-container>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'funding'">
+          <button mat-menu-item (click)="add('funding-search')">
+            <ng-container i18n="@@shared.searchLink"
+              >Search & link</ng-container
+            >
+          </button>
+          <button mat-menu-item (click)="add('funding')">
+            <ng-container i18n="@@shared.addManually"
+              >Add manually</ng-container
+            >
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'works'">
+          <button
+            mat-menu-item
+            *ngFor="let option of addMenuOptions"
+            (click)="add('works', option.action)"
+          >
+            {{ option.label }}
+          </button>
+        </ng-container>
+        <ng-container *ngIf="type === 'peer-review'">
+          <button mat-menu-item (click)="add(type)">
+            <ng-container i18n="@@shared.searchLink"
+              >Search & link</ng-container
+            >
           </button>
         </ng-container>
       </mat-menu>

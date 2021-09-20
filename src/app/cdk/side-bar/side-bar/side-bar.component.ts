@@ -91,6 +91,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        if (!this.onlyOrcidId && userRecord?.userInfo?.RECORD_WITH_ISSUES) {
+          this.onlyOrcidId = true
+        }
         this.userRecord = userRecord
       })
   }

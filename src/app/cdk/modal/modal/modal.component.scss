@@ -1,6 +1,7 @@
 :host {
   margin: -24px;
   display: flex;
+  border: 2px solid;
 
   .content-wrapper {
     max-height: 100%;
@@ -41,4 +42,7 @@ mat-progress-bar {
 
 .header-container {
   position: relative;
+}
+.modal-content {
+  width: 100%;
 }

@@ -4,9 +4,13 @@ import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
+import { ADD_EVENT_ACTION } from 'src/app/constants'
 import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
+import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
+import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/modal-works-search-link.component'
+import { ModalFundingSearchLinkComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
 
 @Component({
   selector: 'app-panels',
@@ -33,7 +37,7 @@ export class PanelsComponent implements OnInit {
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
-  @Input() addModalComponent: ComponentType<any>
+  @Input() selectable = false
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
   @Input() sortType: SortOrderType = 'end'
@@ -41,7 +45,16 @@ export class PanelsComponent implements OnInit {
   @Input() defaultDirection: SortOrderDirection = 'asc'
 
   @Output() sort: EventEmitter<SortData> = new EventEmitter()
+  @Output() addEvent: EventEmitter<ADD_EVENT_ACTION> = new EventEmitter()
+
+  @Input() addMenuOptions: {
+    action: ADD_EVENT_ACTION
+    label: string
+    modal?: ComponentType<any>
+  }[] = []
+
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
+  @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
 
   constructor(
@@ -49,22 +62,36 @@ export class PanelsComponent implements OnInit {
     private _platform: PlatformInfoService
   ) {}
 
-  add(type: string) {
-    switch (type) {
-      case 'employment':
-      case 'education':
-      case 'qualification':
-      case 'invited-position':
-      case 'distinction':
-      case 'membership':
-      case 'service':
-        this.openModal(ModalAffiliationsComponent, type)
-        break
-      case 'peer-review':
-        this.openModal(ModalPeerReviewsComponent)
-        break
-      default:
-        break
+  add(type: string, action?: ADD_EVENT_ACTION) {
+    const menuOption = this.addMenuOptions.find((x) => x.action === action)
+    if (menuOption && menuOption.modal) {
+      this.openModal(menuOption.modal, type)
+    } else {
+      switch (type) {
+        case 'employment':
+        case 'education':
+        case 'qualification':
+        case 'invited-position':
+        case 'distinction':
+        case 'membership':
+        case 'service':
+          this.openModal(ModalAffiliationsComponent, type)
+          break
+        case 'peer-review':
+          this.openModal(ModalPeerReviewsComponent)
+          break
+        case 'funding':
+          this.openModal(ModalFundingComponent)
+          break
+        case 'funding-search':
+          this.openModal(ModalFundingSearchLinkComponent)
+          break
+        case 'works-search':
+          this.openModal(ModalWorksSearchLinkComponent)
+          break
+        default:
+          break
+      }
     }
   }
 
@@ -74,12 +101,11 @@ export class PanelsComponent implements OnInit {
       .pipe(first())
       .subscribe((platform) => {
         let modalComponent
-        if (this.addModalComponent) {
-          modalComponent = this._dialog.open(modal, {
-            width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-          })
-        }
+        modalComponent = this._dialog.open(modal, {
+          width: '850px',
+          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+        })
+
         modalComponent.componentInstance.type = type
       })
   }
@@ -103,12 +129,19 @@ export class PanelsComponent implements OnInit {
     this.expanded.emit(this.expandedContent)
   }
 
-  affiliationMatButton() {
+  multipleMatButton() {
     return (
       this.type === 'education' ||
       this.type === 'invited-position' ||
-      this.type === 'membership'
+      this.type === 'membership' ||
+      this.type === 'funding' ||
+      this.type === 'works' ||
+      this.type === 'peer-review'
     )
+  }
+
+  singleAddButton() {
+    return this.type === 'employment'
   }
 
   ngOnInit(): void {}

@@ -22,7 +22,6 @@ import {
   CountriesEndpoint,
   RecordCountryCodesEndpoint,
 } from 'src/app/types/record-country.endpoint'
-import { getDate } from '../../../../constants'
 
 @Component({
   selector: 'app-modal-country',
@@ -184,10 +183,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
   getSourceName(address: Address) {
     return address.sourceName || address.source
-  }
-
-  getDate(date: Address) {
-    return getDate(date)
   }
 
   ngOnDestroy() {

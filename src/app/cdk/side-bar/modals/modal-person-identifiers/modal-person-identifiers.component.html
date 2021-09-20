@@ -26,16 +26,22 @@
   <div class="container no-padding" [formGroup]="personIdentifiersForm">
     <div class="row">
       <div class="col no-gutters">
-        <p class="orc-font-small-print">
+        <p class="orc-font-body-small">
           <ng-container i18n="@@side-bar.personIdentifiersDescription">
             Person identifiers are other identifiers that systems use to
             identify you, such as ResearcherID or Scopus Author ID. These
             identifiers can only be added by trusted organizations linked with
-            your ORCID record. Find out more on our
+            your ORCID record.
+          </ng-container>
+        </p>
+        <p class="orc-font-small-print find-out">
+          <ng-container i18n="@@side-bar.findOutMore">
+            Find out more on our
           </ng-container>
           <a
             target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             href="https://support.orcid.org/hc/en-us/articles/360006894854"
             i18n="@@side-bar.personIdentifiersSupport"
             >Person identifiers support page.</a
@@ -43,62 +49,64 @@
         </p>
       </div>
     </div>
-    <div class="row">
-      <label class="orc-font-body-small">
-        <strong i18n="@@side-bar.myPersonIdentifiers"
-          >My person identifiers</strong
-        >
-      </label>
-    </div>
-
-    <div
-      class="row"
-      id="ids-list"
-      cdkDropList
-      (cdkDropListDropped)="drop($event)"
-      class="personal-identifier-wrapper"
-    >
+    <ng-container *ngIf="personIdentifiers?.length > 0">
+      <div class="row">
+        <label class="orc-font-body-small">
+          <strong i18n="@@side-bar.myPersonIdentifiers"
+            >My person identifiers</strong
+          >
+        </label>
+      </div>
       <div
-        cdkDrag
-        class="row personal-identifier-input-line"
-        [ngClass]="{ 'no-wrap': !isMobile }"
-        [ngStyle]="{ direction: screenDirection }"
-        [formGroupName]="personIdentifier.putCode"
-        *ngFor="let personIdentifier of personIdentifiers; index as i"
-        [attr.id]="'draggable-' + i"
+        class="row"
+        id="ids-list"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+        class="personal-identifier-wrapper"
       >
         <div
-          class="col l12 m8 s4 middle no-wrap no-gutters personal-identifiers-wrapper"
+          cdkDrag
+          class="row personal-identifier-input-line"
+          [ngClass]="{ 'no-wrap': !isMobile }"
+          [ngStyle]="{ direction: screenDirection }"
+          [formGroupName]="personIdentifier.putCode"
+          *ngFor="let personIdentifier of personIdentifiers; index as i"
+          [attr.id]="'draggable-' + i"
         >
-          <img
-            cdkDragHandle
-            src="./assets/vectors/draggable.svg"
-            aria-label="drag handle"
-          />
+          <div
+            class="col l12 m8 s4 middle no-wrap no-gutters personal-identifiers-wrapper"
+          >
+            <img
+              cdkDragHandle
+              src="./assets/vectors/draggable.svg"
+              aria-label="drag handle"
+            />
 
-          <label>
-            {{
-              personIdentifier.commonName + ': ' + personIdentifier.reference
-            }}</label
-          >
-        </div>
-        <div
-          class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
-        >
-          <app-privacy-selector
-            formControlName="visibility"
-          ></app-privacy-selector>
-          <button
-            (click)="deletePersonalIdentifier(personIdentifier.putCode)"
-            mat-icon-button
-            class="delete-button"
-          >
-            <mat-icon class="material-icons-outlined extra-large-material-icon"
-              >delete</mat-icon
+            <label>
+              {{
+                personIdentifier.commonName + ': ' + personIdentifier.reference
+              }}</label
             >
-          </button>
+          </div>
+          <div
+            class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
+          >
+            <app-privacy-selector
+              formControlName="visibility"
+            ></app-privacy-selector>
+            <button
+              (click)="deletePersonalIdentifier(personIdentifier.putCode)"
+              mat-icon-button
+              class="delete-button"
+            >
+              <mat-icon
+                class="material-icons-outlined extra-large-material-icon"
+                >delete</mat-icon
+              >
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </app-modal>

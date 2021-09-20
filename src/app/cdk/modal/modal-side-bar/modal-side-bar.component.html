@@ -1,18 +1,22 @@
 <div class="container">
-  <h2 class="orc-font-body-small">Form content</h2>
-  <mat-divider></mat-divider>
-  <div class="orc-font-small-print">
+  <div class="orc-font-body-small">
     <ul>
       <ng-content select="#side-bar-title"></ng-content>
     </ul>
+    <mat-divider></mat-divider>
     <ul>
       <ng-content select="#side-bar-url-1"></ng-content>
     </ul>
+    <mat-divider></mat-divider>
     <ul>
       <ng-content select="#side-bar-url-2"></ng-content>
     </ul>
+    <mat-divider></mat-divider>
     <ul>
       <ng-content select="#side-bar-url-3"></ng-content>
+    </ul>
+    <ul>
+      <ng-content select="#side-bar-url-4"></ng-content>
     </ul>
   </div>
 </div>

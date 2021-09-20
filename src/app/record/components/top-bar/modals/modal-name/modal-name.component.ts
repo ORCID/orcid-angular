@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
@@ -5,32 +6,32 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { OrcidValidators } from '../../../../../validators'
-import {
-  ILLEGAL_NAME_CHARACTERS_REGEXP,
-  URL_REGEXP,
-} from '../../../../../constants'
-import { UserRecord } from '../../../../../types/record.local'
-import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
-import { RecordOtherNamesService } from '../../../../../core/record-other-names/record-other-names.service'
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
+import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
+import { first, switchMap, take, takeUntil } from 'rxjs/operators'
+
+import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
   PlatformInfo,
   PlatformInfoService,
 } from '../../../../../cdk/platform-info'
-import { VisibilityStrings } from '../../../../../types/common.endpoint'
+import { WINDOW } from '../../../../../cdk/window'
+import {
+  ILLEGAL_NAME_CHARACTERS_REGEXP,
+  URL_REGEXP,
+} from '../../../../../constants'
+import { UserService } from '../../../../../core'
+import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
+import { RecordOtherNamesService } from '../../../../../core/record-other-names/record-other-names.service'
 import { Assertion } from '../../../../../types'
+import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { NamesEndPoint } from '../../../../../types/record-name.endpoint'
 import { OtherNamesEndPoint } from '../../../../../types/record-other-names.endpoint'
-import { first, takeUntil } from 'rxjs/operators'
-import { cloneDeep } from 'lodash'
+import { UserRecord } from '../../../../../types/record.local'
 import { UserSession } from '../../../../../types/session.local'
-import { UserService } from '../../../../../core'
-import { WINDOW } from '../../../../../cdk/window'
+import { OrcidValidators } from '../../../../../validators'
 
 @Component({
   selector: 'app-modal-name',
@@ -52,6 +53,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   originalBackendOtherNames: OtherNamesEndPoint
   isMobile: boolean
   defaultVisibility: VisibilityStrings
+  otherNamesDefaultVisibility: VisibilityStrings
   addedOtherNameCount = 0
   loadingNames = true
 
@@ -68,7 +70,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
-    private _changeDetectorRef: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _userSession: UserService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -89,12 +92,13 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       .getNames()
       .pipe(first())
       .subscribe((names: NamesEndPoint) => {
-        this.defaultVisibility = names.visibility
+        this.defaultVisibility = names.visibility.visibility
         this._recordOtherNamesService
           .getOtherNames()
           .pipe(first())
           .subscribe((otherNames: OtherNamesEndPoint) => {
             this.originalBackendOtherNames = cloneDeep(otherNames)
+            this.otherNamesDefaultVisibility = otherNames.visibility.visibility
             this.otherNames = this.originalBackendOtherNames.otherNames
             const otherNamesMap = {}
             this.originalBackendOtherNames.otherNames.map(
@@ -132,7 +136,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const publishedName = namesEndPoint.creditName
       ? namesEndPoint.creditName.value
       : ''
-    const visibilityName = namesEndPoint.visibility
+    const visibilityName = namesEndPoint.visibility.visibility
 
     this.namesForm.addControl(
       'givenNames',
@@ -167,7 +171,9 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       givenNames: namesForm.get('givenNames').value,
       familyName: namesForm.get('familyName').value,
       creditName: namesForm.get('publishedName').value,
-      visibility: visibility,
+      visibility: {
+        visibility,
+      },
     } as NamesEndPoint
   }
 
@@ -201,19 +207,27 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
-    this.loadingNames = true
-    this._recordNameService
-      .postNames(this.formToBackendNames(this.namesForm))
-      .subscribe(
-        (response) => {
-          this._recordOtherNamesService
-            .postOtherNames(this.formToBackendOtherNames(this.namesForm))
-            .subscribe((res) => {
-              this.closeEvent()
-            })
-        },
-        (error) => {}
-      )
+    if (this.namesForm.valid) {
+      this.loadingNames = true
+      this._recordNameService
+        .postNames(this.formToBackendNames(this.namesForm))
+        .pipe(
+          switchMap((_) =>
+            this._recordOtherNamesService.postOtherNames(
+              this.formToBackendOtherNames(this.namesForm)
+            )
+          ),
+          switchMap((_) =>
+            this._userSession.refreshUserSession(true).pipe(take(1))
+          )
+        )
+        .subscribe(
+          (_) => {
+            this.closeEvent()
+          },
+          (error) => {}
+        )
+    }
   }
 
   closeEvent() {
@@ -229,12 +243,12 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       'new-' + this.addedOtherNameCount,
       new FormGroup({
         otherName: new FormControl(),
-        visibility: new FormControl(this.defaultVisibility, {}),
+        visibility: new FormControl(this.otherNamesDefaultVisibility, {}),
       })
     )
     this.otherNames.push({
       putCode: 'new-' + this.addedOtherNameCount,
-      visibility: { visibility: this.defaultVisibility },
+      visibility: { visibility: this.otherNamesDefaultVisibility },
     } as Assertion)
     this.addedOtherNameCount++
 

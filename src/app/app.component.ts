@@ -1,14 +1,13 @@
 import { Component, HostBinding } from '@angular/core'
-import { Router, NavigationEnd, NavigationStart } from '@angular/router'
-import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
-import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
-import { PlatformInfo } from './cdk/platform-info'
-import { ZendeskService } from './core/zendesk/zendesk.service'
-import { UserService } from './core'
+import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import { tap } from 'rxjs/operators'
+
+import { PlatformInfo } from './cdk/platform-info'
+import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
 import { HeadlessOnOauthRoutes } from './constants'
-import { RobotsMetaTagsService } from './core/robots-meta-tags/robots-meta-tags.service'
-import { environment } from 'src/environments/environment'
+import { UserService } from './core'
+import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
+import { ZendeskService } from './core/zendesk/zendesk.service'
 
 @Component({
   selector: 'app-root',
@@ -37,8 +36,7 @@ export class AppComponent {
     _router: Router,
     _googleAnalytics: GoogleAnalyticsService,
     _zendesk: ZendeskService,
-    _userService: UserService,
-    _robotsMetaTags: RobotsMetaTagsService
+    _userService: UserService
   ) {
     _platformInfo
       .get()
@@ -78,10 +76,6 @@ export class AppComponent {
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
       }
     })
-
-    if (!environment.production) {
-      _robotsMetaTags.addRobotMetaTags()
-    }
   }
   showHeadlessOnOauthPage(currentRoute: string): boolean {
     if (currentRoute) {

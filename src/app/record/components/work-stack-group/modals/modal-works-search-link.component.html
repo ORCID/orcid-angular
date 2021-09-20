@@ -1,0 +1,85 @@
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@record.linkWorks"> Link works </ng-container>
+  </app-modal-header>
+  <div class="row">
+    <div class="orc-font-small-print">
+      <p i18n="@@shared.searchAndLink">
+        Search and Link wizards are our recommended way to populate your record.
+        They make adding works, funding and peer reviews simple and save you
+        time over updating your record manually. Select a platform from the list
+        below to start linking items to your record.
+      </p>
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006973653-Add-works-by-direct-import-from-other-systems"
+        target="_blank"
+        rel="noopener noreferrer"
+        i18n="@@record.linkWorksMoreInfo"
+      >
+        More information about linking works to your ORCID record
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <h3 i18n="@@shared.availableSearch">Available Search & Link wizards</h3>
+    <mat-divider class="row orcid-divider"></mat-divider>
+  </div>
+  <div class="row search-link-options">
+    <div class="select">
+      <div class="title">
+        <label class="mat-caption">
+          <strong i18n="@@record.workType">Work type</strong>
+        </label>
+      </div>
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min search-link-select"
+      >
+        <mat-select
+          [(value)]="workTypeSelected"
+          (selectionChange)="searchAndLink()"
+        >
+          <mat-option value="All">
+            <ng-container i18n="@@record.all">All</ng-container>
+          </mat-option>
+          <mat-option *ngFor="let workType of workTypes" [value]="workType">
+            {{ workType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="select">
+      <div class="title">
+        <label class="mat-caption">
+          <strong i18n="@@record.geographicalArea">Geographical area</strong>
+        </label>
+      </div>
+      <mat-form-field
+        id="geographical-area-input"
+        appearance="outline"
+        class="mat-form-field-min search-link-select"
+      >
+        <mat-select
+          [(value)]="geographicalAreaSelected"
+          (selectionChange)="searchAndLink()"
+        >
+          <mat-option value="All">
+            <ng-container i18n="@@record.all">All</ng-container>
+          </mat-option>
+          <mat-option
+            *ngFor="let geographicalArea of geographicalAreas"
+            [value]="geographicalArea"
+          >
+            {{ geographicalArea }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <app-search-link-wizard
+    [recordImportWizards]="recordImportWizards"
+  ></app-search-link-wizard>
+</app-modal>

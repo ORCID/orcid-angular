@@ -4,11 +4,13 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
+import { WorkIdType, WorkIdTypeValidation } from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +21,7 @@ export class RecordWorksService {
   offset = 0
 
   $works: ReplaySubject<WorksEndpoint>
+  userRecordOptions: UserRecordOptions = {}
 
   constructor(
     private _http: HttpClient,
@@ -52,7 +55,7 @@ export class RecordWorksService {
    *
    * @param id user Orcid id
    */
-  getWorks(options: UserRecordOptions) {
+  getWorks(options: UserRecordOptions): Observable<WorksEndpoint> {
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
@@ -128,8 +131,11 @@ export class RecordWorksService {
     }
   }
 
-  changeUserRecordContext(event: UserRecordOptions): void {
-    this.getWorks(event).pipe(take(1)).subscribe()
+  changeUserRecordContext(
+    userRecordOptions: UserRecordOptions
+  ): Observable<WorksEndpoint> {
+    this.userRecordOptions = userRecordOptions
+    return this.getWorks(userRecordOptions).pipe(take(1))
   }
 
   /**
@@ -142,7 +148,7 @@ export class RecordWorksService {
    *
    * TODO check why the userSource attribute comes as false on this call
    *
-   * @param id user Orcid id
+   * @param orcidId user Orcid id
    * @param putCode code of work
    */
 
@@ -165,7 +171,7 @@ export class RecordWorksService {
     )
   }
 
-  private getWorkInfo(putCode: string, orcidId?: string): Observable<Work> {
+  getWorkInfo(putCode: string, orcidId?: string): Observable<Work> {
     return this._http
       .get<Work>(
         environment.API_WEB +
@@ -198,6 +204,29 @@ export class RecordWorksService {
       )
   }
 
+  save(work: Work) {
+    return this._http
+      .post<Work>(environment.API_WEB + `works/work.json`, work)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap(() => {
+          if (work.putCode?.value) {
+            return this.getDetails(work.putCode.value)
+          } else {
+            return this.getWorks({ forceReload: true })
+          }
+        })
+      )
+  }
+
+  getWork(): Observable<Work> {
+    return this._http.get<Work>(environment.API_WEB + `works/work.json`).pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error))
+    )
+  }
+
   set(value: any): Observable<any> {
     throw new Error('Method not implemented.')
   }
@@ -217,11 +246,106 @@ export class RecordWorksService {
       )
   }
 
-  delete(putCode: string): Observable<any> {
-    return this._http.delete(environment.API_WEB + 'works/' + putCode).pipe(
-      retry(3),
-      catchError((error) => this._errorHandler.handleError(error)),
-      tap(() => this.getWorks({ forceReload: true }))
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB + 'works/updateToMaxDisplay.json?putCode=' + putCode
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() =>
+          this.getWorks({ ...this.userRecordOptions, forceReload: true })
+        )
+      )
+  }
+
+  public loadWorkIdTypes(): Observable<WorkIdType[]> {
+    return this._http
+      .get<WorkIdType[]>(`${environment.API_WEB}works/idTypes.json?query=`)
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  public validateWorkIdTypes(
+    idType: string,
+    workId: string
+  ): Observable<WorkIdTypeValidation> {
+    return this._http
+      .get<WorkIdTypeValidation>(
+        `${environment.API_WEB}works/id/${idType}?value=${workId}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  delete(putCode: any): Observable<any> {
+    return this._http
+      .delete(
+        environment.API_WEB +
+          'works/' +
+          (Array.isArray(putCode) ? putCode.join(',') : putCode)
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
+  combine(putCodes: string[]): Observable<any> {
+    return this._http
+      .post(environment.API_WEB + 'works/group/' + putCodes.join(','), {})
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
+  visibility(
+    putCodes: string[],
+    visibility: VisibilityStrings
+  ): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'works/' +
+          putCodes.join(',') +
+          '/visibility/' +
+          visibility
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
+  export(): Observable<any> {
+    return this._http.get(environment.API_WEB + 'works/works.bib', {
+      responseType: 'text',
+    })
+  }
+
+  exportSelected(putCodes: string[]): Observable<any> {
+    return this._http.get(
+      environment.API_WEB +
+        'works/export/bibtex?workIdsStr=' +
+        putCodes.join(','),
+      {
+        responseType: 'text',
+      }
+    )
+  }
+
+  loadWorkImportWizardList(): Observable<RecordImportWizard[]> {
+    return this._http.get<RecordImportWizard[]>(
+      environment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
     )
   }
 }

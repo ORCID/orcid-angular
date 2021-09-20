@@ -154,6 +154,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
+    this.websitesForm.markAllAsTouched()
     if (this.websitesForm.valid) {
       this.loadingWebsites = true
       this._recordWebsitesService
@@ -209,22 +210,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.websitesForm.removeControl(putCode)
   }
 
-  getSource(website: Assertion) {
-    if (website.source) {
-      if (website.lastModified) {
-        return (
-          website.source +
-          ' ' +
-          website.lastModified.year +
-          '-' +
-          website.lastModified.month +
-          '-' +
-          website.lastModified.day
-        )
-      } else {
-        return website.sourceName
-      }
-    }
+  getSourceName(website: Assertion) {
+    return website.sourceName || website.source
   }
 
   toMyLinks() {

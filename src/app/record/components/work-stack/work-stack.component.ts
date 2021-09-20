@@ -1,4 +1,13 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { Observable } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
@@ -8,6 +17,9 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
+import { UserInfo } from '../../../types'
+import { WorkModalComponent } from '../work-modal/work-modal.component'
 
 @Component({
   selector: 'app-work-stack',
@@ -21,6 +33,7 @@ export class WorkStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
   visibility: VisibilityStrings
+  worksModal = WorkModalComponent
   @Input() isPublicRecord: string
 
   @Input()
@@ -41,6 +54,10 @@ export class WorkStackComponent implements OnInit {
   get displayTheStack(): boolean {
     return this._displayTheStack
   }
+
+  @Output() checkboxChangeWorkStackOutput = new EventEmitter<any>()
+  @Input() userInfo: UserInfo
+  @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
@@ -95,10 +112,15 @@ export class WorkStackComponent implements OnInit {
   /**
    * Show and hide details of the panel
    */
-  toggleDetails(work: Work) {
+  toggleDetails(
+    work: Work,
+    options: { showDetails: boolean } = { showDetails: true }
+  ) {
     const putCode = work.putCode.value
-    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-      .state
+    if (options.showDetails) {
+      this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
+        .state
+    }
 
     if (this.panelDetailsState[putCode].state) {
       this.getDetails(work)
@@ -120,7 +142,7 @@ export class WorkStackComponent implements OnInit {
   }
 
   makePrimaryCard(work: Work) {
-    // TODO
+    this._workService.updatePreferredSource(work.putCode.value).subscribe()
   }
 
   changeTopPanelOfTheStack(work: Work) {
@@ -132,6 +154,17 @@ export class WorkStackComponent implements OnInit {
 
   trackByWorkStack(index, item: Work) {
     return item.putCode.value
+  }
+
+  userIsSource(work: Work): boolean {
+    if (this.userInfo) {
+      return work.source === this.userInfo.EFFECTIVE_USER_ORCID
+    }
+    return false
+  }
+
+  checkboxChangeWorkStack($event) {
+    this.checkboxChangeWorkStackOutput.emit($event)
   }
 
   ngOnInit(): void {}

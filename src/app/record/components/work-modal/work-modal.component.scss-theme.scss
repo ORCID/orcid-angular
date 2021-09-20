@@ -1,0 +1,46 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin work-modal-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $config: mat-typography-config();
+
+  input {
+    border: solid 1px mat-color($background, grey);
+  }
+
+  ::placeholder {
+    color: mat-color($background, grey);
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: mat-color($background, grey);
+  }
+
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .required {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  input.mat-input-element {
+    border: transparent;
+    font-size: mat-font-size($config, body-1) !important;
+  }
+
+  textarea.mat-input-element {
+    font-size: mat-font-size($config, body-1) !important;
+  }
+
+  .mat-select {
+    font-size: mat-font-size($config, body-1) !important;
+  }
+}
+@include work-modal-theme($orcid-app-theme);

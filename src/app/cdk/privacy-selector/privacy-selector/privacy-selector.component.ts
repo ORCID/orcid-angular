@@ -1,4 +1,10 @@
-import { Component, EventEmitter, forwardRef, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+} from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
@@ -23,7 +29,7 @@ export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
 
   _privacy: VisibilityStrings
 
-  set privacy(value: VisibilityStrings) {
+  @Input() set privacy(value: VisibilityStrings) {
     this._privacy = value
   }
   get privacy(): VisibilityStrings {

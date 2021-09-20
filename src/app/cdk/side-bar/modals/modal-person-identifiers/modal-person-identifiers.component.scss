@@ -23,6 +23,11 @@
   margin-top: 16px;
 }
 
+::ng-deep .columns-4-or-8 .mat-form-field {
+  width: 100%;
+  margin-inline-end: auto;
+}
+
 ::ng-deep .columns-4-or-8 .personal-identifiers-wrapper {
   margin: 16px 0 16px 0;
 }
@@ -35,12 +40,13 @@
 .personal-identifier-input-line {
   margin-top: 20px;
   img {
-    margin-top: 6px;
+    margin-top: 3px;
     cursor: move;
     z-index: 1;
     margin-inline-end: 18px;
   }
 }
+
 ::ng-deep .cdk-drop-list-dragging {
   cursor: move !important;
   .mat-form-field-flex,
@@ -55,4 +61,18 @@
 
 app-privacy-selector {
   min-width: 180px;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-inline-end: 32px;
+}
+
+.icon-drag {
+  height: 32px;
+  margin: 4px;
+}
+
+.find-out {
+  display: inline;
 }

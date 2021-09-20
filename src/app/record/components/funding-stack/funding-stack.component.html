@@ -7,15 +7,19 @@
   "
 >
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
+
   <app-panel
     [elements]="funding"
+    [editModalComponent]="modalFundingComponent"
     [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
     [ngClass]="{ last: last }"
     [visibility]="fundingStack.defaultFunding.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
     [putCode]="funding.putCode.value"
+    [isUserSource]="userIsSource(funding)"
+    [userVersionPresent]="fundingStack.userVersionPresent"
     *ngIf="isPreferred(funding) || displayTheStack"
-    type="main"
+    type="funding"
   >
     <h2 header class="orc-font-body">
       {{ funding.fundingTitle.title.value }}
@@ -23,10 +27,10 @@
     <!-- FUNDING BODY -->
     <app-funding
       *ngIf="stackPanelsDisplay[funding.putCode.value].topPanelOfTheStack"
+      [orgDisambiguated]="orgDisambiguated[funding.putCode.value]"
       [funding]="funding"
       [panelDetailsState]="panelDetailsState[funding.putCode.value]"
       (toggleDetails)="toggleDetails($event)"
-      [orgDisambiguated]="orgDisambiguated[funding.putCode.value]"
     >
     </app-funding>
     <!-- FUNDING SOURCE -->
@@ -45,7 +49,7 @@
       [isPublicRecord]="isPublicRecord"
       (topPanelOfTheStackModeChange)="changeTopPanelOfTheStack(funding)"
       [type]="'funding'"
-      [putCode]="funding.putCode.value"
+      [item]="funding"
     >
     </app-panel-source>
   </app-panel>

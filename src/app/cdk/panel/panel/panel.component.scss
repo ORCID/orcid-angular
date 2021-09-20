@@ -41,19 +41,6 @@
   border-radius: 3px;
 }
 
-.hide {
-  display: none;
-}
-
-.panel-privacy:hover + .hide {
-  display: block;
-  margin-bottom: 35px;
-}
-
-div.hide:hover {
-  display: block;
-}
-
 .privacy-selector {
   position: absolute;
   overflow: hidden;
@@ -82,5 +69,11 @@ div.hide:hover {
   padding: 6px;
   .buttons-container {
     margin-top: 4px;
+  }
+}
+
+mat-checkbox.text-wrap {
+  ::ng-deep label.mat-checkbox-layout {
+    white-space: normal;
   }
 }

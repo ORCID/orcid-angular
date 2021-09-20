@@ -1,0 +1,28 @@
+.info {
+  padding: 16px;
+  margin-top: 32px;
+  border: solid 2px;
+  border-radius: 4px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.work-info {
+  margin-bottom: 16px;
+
+  .added {
+    margin-left: 16px;
+  }
+}
+
+.no-info {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  mat-icon {
+    margin-inline-end: 4px;
+  }
+}

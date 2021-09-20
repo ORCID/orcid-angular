@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   debugger: false,
+  ROBOTS: 'noindex, nofollow',
   API_NEWS_DEPRECATED: 'https://orcid.org/blog/feed',
   API_NEWS: 'https://info.qa.orcid.org/feed/',
   API_PUB: '//pub.sandbox.orcid.org/v3.0',
@@ -13,6 +14,7 @@ export const environment = {
   GOOGLE_ANALYTICS_TESTING_MODE: false,
   GOOGLE_ANALYTICS: 'UA-17492803-5',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+  HOTJAR_ANALYTICS: 'hjid:1220063',
   ZENDESK: null,
   SHOW_TEST_WARNING_BANNER: true,
   CAN_DISABLE_TEST_WARNING_BANNER: false,

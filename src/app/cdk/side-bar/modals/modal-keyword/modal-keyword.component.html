@@ -27,7 +27,7 @@
     [formGroup]="keywordsForm"
     (ngSubmit)="onSubmit()"
   >
-    <p class="orc-font-small-print" i18n="@@topBar.keywordsAre">
+    <p class="orc-font-body-small" i18n="@@topBar.keywordsAre">
       Keywords are words or phrases which describe your research activities.
       Adding keywords can help people find you when searching the ORCID
       registry.
@@ -73,8 +73,10 @@
                   class="mat-caption"
                   *ngIf="keyword.putCode.indexOf('new') < 0"
                 >
-                  <ng-container i18n="@@shared.source">Source:</ng-container>
-                  {{ getSourceName(keyword) }}
+                  <span i18n="@@shared.source">Source:</span>
+                  {{ getSourceName(keyword) }},
+                  <span i18n="@@shared.created">Created:</span>
+                  {{ keyword.createdDate | monthDayYearDateToString }}
                 </mat-hint>
               </mat-form-field>
             </div>
@@ -107,6 +109,7 @@
         class="col add-more no-gutters"
         (click)="addKeyword()"
       >
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1">
           <ng-container
             *ngIf="keywords.length === 0"

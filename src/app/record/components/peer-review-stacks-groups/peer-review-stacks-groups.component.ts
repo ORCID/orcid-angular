@@ -27,6 +27,7 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 export class PeerReviewStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
+  @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
   @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
@@ -37,7 +38,6 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
   userRecordContext: UserRecordOptions = {}
 
-  $dest
   userSession: {
     userInfo: UserInfo
     nameForm: NameForm
@@ -46,15 +46,17 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     orcidUrl: string
     loggedIn: boolean
   }
-  peerReviews: PeerReview[]
+  peerReviews: PeerReview[] = []
   platform: PlatformInfo
   detailsPeerReviews: {
     putCode: number
     peerReview: PeerReview
   }[] = []
   isMobile: boolean
+  moreInfo: number[] = []
 
   ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
+  loading = true
 
   constructor(
     _platform: PlatformInfoService,
@@ -95,6 +97,9 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        if (userRecord.peerReviews !== undefined) {
+          this.loading = false
+        }
         if (!isEmpty(userRecord?.peerReviews)) {
           this.peerReviews = userRecord.peerReviews
           this.total.emit(this.peerReviews.length)
@@ -156,7 +161,16 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     peerReview.showDetails = !peerReview.showDetails
   }
 
-  expandedClicked(expanded: boolean) {
+  expandedClicked(expanded: boolean, peerReview?: PeerReview) {
+    if (peerReview) {
+      if (expanded) {
+        if (!this.moreInfo.includes(peerReview.groupId)) {
+          this.moreInfo.push(peerReview.groupId)
+        }
+      } else {
+        this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
+      }
+    }
     this.expanded.emit({ type: 'peer-review', expanded })
   }
 }

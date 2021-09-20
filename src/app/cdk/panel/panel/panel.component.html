@@ -4,7 +4,8 @@
     'header-bottom': isArrayAndIsNotEmpty(elements) || valueIsNotNull(elements),
     'top-bar-or-main': type === 'top-bar' || type === 'main' || isAffiliation(),
     'side-bar': type === 'side-bar',
-    'staked-header': stackedHeader
+    'staked-header': stackedHeader,
+    'expand-button': !editable && !isPublicRecord && !customControls
   }"
 >
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
@@ -20,10 +21,26 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="expandButtonsPosition !== 'left'">
-    <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
-  </ng-container>
-
+  <div *ngIf="selectable">
+    <mat-checkbox
+      class="text-wrap"
+      *ngIf="selectable && !isPublicRecord"
+      (change)="checked($event)"
+      [ngModel]="selected"
+    >
+      <ng-container *ngIf="expandButtonsPosition !== 'left'">
+        <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+      </ng-container>
+    </mat-checkbox>
+    <ng-container *ngIf="isPublicRecord && expandButtonsPosition !== 'left'">
+      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    </ng-container>
+  </div>
+  <div *ngIf="!selectable">
+    <ng-container *ngIf="expandButtonsPosition !== 'left'">
+      <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
+    </ng-container>
+  </div>
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container *ngIf="visibility && !isPublicRecord">
@@ -31,19 +48,6 @@
         class="panel-privacy"
         [visibility]="visibility"
       ></app-panel-privacy>
-      <div class="hide">
-        <div class="privacy-selector">
-          <p class="orc-font-body-small" i18n="@@shared.whoCanSeeThis">
-            Who can see this?
-          </p>
-          <form *ngIf="visibility" [formGroup]="formVisibility">
-            <app-privacy-selector
-              (click)="updateVisibility()"
-              formControlName="visibility"
-            ></app-privacy-selector>
-          </form>
-        </div>
-      </div>
     </ng-container>
 
     <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
@@ -52,15 +56,37 @@
     <!-- [EDIT BUTTONS] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS` AND ALL SIDEBAR PANELS -->
 
     <ng-container *ngIf="editable && !customControls">
-      <button
-        mat-icon-button
-        *ngIf="!isPublicRecord"
-        [matTooltip]="tooltipLabelEdit"
-        (click)="openModal()"
-        id="edit-button"
-      >
-        <mat-icon class="material-icons-outlined">edit</mat-icon>
-      </button>
+      <ng-container *ngIf="isAffiliation()">
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord && isUserSource"
+          [matTooltip]="tooltipLabelEdit"
+          (click)="openModal()"
+        >
+          <mat-icon class="material-icons-outlined">edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          *ngIf="
+            !isPublicRecord && !isUserSource && userVersionPresent !== null
+          "
+          [matTooltip]="tooltipLabelMakeCopy"
+          (click)="openModal({ createACopy: true })"
+        >
+          <mat-icon class="material-icons-outlined">call_split</mat-icon>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="!isAffiliation()">
+        <button
+          mat-icon-button
+          *ngIf="!isPublicRecord"
+          [matTooltip]="tooltipLabelEdit"
+          (click)="openModal()"
+          id="edit-button"
+        >
+          <mat-icon class="material-icons-outlined">edit</mat-icon>
+        </button>
+      </ng-container>
     </ng-container>
     <!-- [EXPAND BUTTONS] FOR SIDEBAR PANELS -->
     <ng-container
