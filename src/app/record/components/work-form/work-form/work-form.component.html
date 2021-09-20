@@ -3,9 +3,9 @@
     id="workDetails"
     class="title row"
     [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
+      'orc-font-body': !platform.columns12,
+      'orc-font-body-large': platform.columns12
+    }"
   >
     <p>
       <strong i18n="@@works.workDetails"> Work details </strong>
@@ -13,7 +13,7 @@
     <p *ngIf="platform.columns12" class="required-information mat-caption">
       <span class="required">*</span>
       <ng-container i18n="@@shared.requiredInformation"
-      >Required information</ng-container
+        >Required information</ng-container
       >
     </p>
   </div>
@@ -25,13 +25,13 @@
       <label
         class="mat-caption title"
         [ngClass]="{
-            error:
-              workForm.get('workCategory').hasError('required') &&
-              workForm.get('workCategory').touched
-          }"
+          error:
+            workForm.get('workCategory').hasError('required') &&
+            workForm.get('workCategory').touched
+        }"
       >
         <strong i18n="@@works.selectAWorkCategory"
-        >Select a work category</strong
+          >Select a work category</strong
         >
         <span class="required">*</span>
       </label>
@@ -62,10 +62,10 @@
       class="row"
       class="mat-caption"
       [ngClass]="{
-          error:
-            workForm.get('workType').hasError('required') &&
-            workForm.get('workType').touched
-        }"
+        error:
+          workForm.get('workType').hasError('required') &&
+          workForm.get('workType').touched
+      }"
     >
       <strong i18n="@@works.workType">Work type</strong>
       <span class="required">*</span>
@@ -95,10 +95,10 @@
         for="title-input"
         class="mat-caption"
         [ngClass]="{
-            error:
-              workForm.hasError('required', 'title') &&
-              workForm.get('title').touched
-          }"
+          error:
+            workForm.hasError('required', 'title') &&
+            workForm.get('title').touched
+        }"
       >
         <strong i18n="@@works.title">Title</strong>
         <span class="required">*</span>
@@ -123,19 +123,19 @@
     >
       <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
       <span class="mat-body-1">
-          <ng-container
-            i18n="@@works.addTranslatedTitle"
-            *ngIf="!showTranslationTitle"
-          >
-            Add translated title
-          </ng-container>
-          <ng-container
-            i18n="@@works.hideTranslatedTitle"
-            *ngIf="showTranslationTitle"
-          >
-            Hide translation title
-          </ng-container>
-        </span>
+        <ng-container
+          i18n="@@works.addTranslatedTitle"
+          *ngIf="!showTranslationTitle"
+        >
+          Add translated title
+        </ng-container>
+        <ng-container
+          i18n="@@works.hideTranslatedTitle"
+          *ngIf="showTranslationTitle"
+        >
+          Hide translation title
+        </ng-container>
+      </span>
     </a>
   </div>
 
@@ -144,9 +144,7 @@
     <div>
       <div class="row">
         <label for="given-names-input" class="mat-caption">
-          <strong i18n="@@works.translatedTitle"
-          >Work translated title</strong
-          >
+          <strong i18n="@@works.translatedTitle">Work translated title</strong>
         </label>
       </div>
 
@@ -164,7 +162,7 @@
       <div class="row">
         <label for="language-of-title-input" class="mat-caption">
           <strong i18n="@@works.languageOnThisTitle"
-          >Language of this title</strong
+            >Language of this title</strong
           >
         </label>
       </div>
@@ -220,8 +218,8 @@
         for="url-input"
         class="mat-caption"
         [ngClass]="{
-            error: workForm.hasError('date', 'startDateGroup')
-          }"
+          error: workForm.hasError('date', 'startDateGroup')
+        }"
       >
         <strong i18n="@@shared.startDate">Start date</strong>
       </label>
@@ -296,10 +294,9 @@
         for="given-names-input"
         class="mat-caption"
         [ngClass]="{
-            error:
-              workForm.hasError('required', 'url') &&
-              workForm.get('url').touched
-          }"
+          error:
+            workForm.hasError('required', 'url') && workForm.get('url').touched
+        }"
       >
         <strong i18n="@@works.link">Link</strong>
       </label>
@@ -317,8 +314,8 @@
         Invalid url
       </mat-error>
       <mat-hint i18n="@@works.linkMoreInformationAbout"
-      >A link to more information about the work. Links should be in the
-        full URL format e.g. http://www.website.com/page.html
+        >A link to more information about the work. Links should be in the full
+        URL format e.g. http://www.website.com/page.html
       </mat-hint>
     </mat-form-field>
   </div>
@@ -331,9 +328,9 @@
     class="title"
     id="citation"
     [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
+      'orc-font-body': !platform.columns12,
+      'orc-font-body-large': platform.columns12
+    }"
   >
     <p>
       <strong i18n="@@works.citation"> Citation </strong>
@@ -350,10 +347,10 @@
         for="given-names-input"
         class="mat-caption"
         [ngClass]="{
-            error:
-              workForm.hasError('required', 'citationType') &&
-              workForm.get('citationType').touched
-          }"
+          error:
+            workForm.hasError('required', 'citationType') &&
+            workForm.get('citationType').touched
+        }"
       >
         <strong i18n="@@works.citationType">Citation type</strong>
       </label>
@@ -390,14 +387,14 @@
       </label>
     </div>
     <mat-form-field appearance="outline" class="mat-form-field-min">
-        <textarea
-          id="citation-input"
-          matInput
-          formControlName="citation"
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="5"
-          cdkAutosizeMaxRows="7"
-        ></textarea>
+      <textarea
+        id="citation-input"
+        matInput
+        formControlName="citation"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="7"
+      ></textarea>
       <mat-error
         *ngIf="workForm.hasError('required', 'citation')"
         i18n="@@works.describeThisCitation"
@@ -415,15 +412,15 @@
       </label>
     </div>
     <mat-form-field appearance="outline" class="mat-form-field-min biography">
-        <textarea
-          id="description-input"
-          matInput
-          formControlName="shortDescription"
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="5"
-          cdkAutosizeMaxRows="7"
-        >
-        </textarea>
+      <textarea
+        id="description-input"
+        matInput
+        formControlName="shortDescription"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        cdkAutosizeMaxRows="7"
+      >
+      </textarea>
     </mat-form-field>
   </div>
 
@@ -435,9 +432,9 @@
     class="title"
     id="identifiers"
     [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
+      'orc-font-body': !platform.columns12,
+      'orc-font-body-large': platform.columns12
+    }"
   >
     <p>
       <strong i18n="@@works.workIds"> Work identifiers</strong>
@@ -448,10 +445,10 @@
   <div formArrayName="workIdentifiers">
     <ng-container
       *ngFor="
-          let workIdentifiersGroup of workIdentifiersFormArray.controls;
-          let i = index;
-          let last = last
-        "
+        let workIdentifiersGroup of workIdentifiersFormArray.controls;
+        let i = index;
+        let last = last
+      "
     >
       <ng-container [formGroupName]="i">
         <!-- Work identifier type -->
@@ -461,13 +458,13 @@
               for="given-names-input"
               class="mat-caption"
               [ngClass]="{
-                  error:
-                    workIdentifiersGroup.hasError(
-                      'required',
-                      'externalIdentifierType'
-                    ) &&
-                    workIdentifiersGroup.get('externalIdentifierType').touched
-                }"
+                error:
+                  workIdentifiersGroup.hasError(
+                    'required',
+                    'externalIdentifierType'
+                  ) &&
+                  workIdentifiersGroup.get('externalIdentifierType').touched
+              }"
             >
               <strong i18n="@@works.type">Identifier type</strong>
             </label>
@@ -489,7 +486,7 @@
                   {{ item.description }}
                 </mat-option>
                 <mat-hint i18n="@@works.typeOfIdentifier"
-                >The type of identifier associated with the work, such as an
+                  >The type of identifier associated with the work, such as an
                   ISBN, DOI or PMID.
                 </mat-hint>
               </mat-select>
@@ -504,17 +501,14 @@
               for="external-identifier-id-input"
               class="mat-caption"
               [ngClass]="{
-                  error:
-                    workIdentifiersGroup.hasError(
-                      'required',
-                      'externalIdentifierId'
-                    ) &&
-                    workIdentifiersGroup.get('externalIdentifierId').touched
-                }"
+                error:
+                  workIdentifiersGroup.hasError(
+                    'required',
+                    'externalIdentifierId'
+                  ) && workIdentifiersGroup.get('externalIdentifierId').touched
+              }"
             >
-              <strong i18n="@@works.identifierValue"
-              >Identifier value
-              </strong>
+              <strong i18n="@@works.identifierValue">Identifier value </strong>
             </label>
           </div>
           <mat-form-field
@@ -529,20 +523,20 @@
             />
             <mat-error
               *ngIf="
-                  workIdentifiersGroup
-                    .get('externalIdentifierId')
-                    .hasError('validFormat')
-                "
+                workIdentifiersGroup
+                  .get('externalIdentifierId')
+                  .hasError('validFormat')
+              "
               i18n="@@works.validFormat"
             >
               Invalid id for the selected identifier type
             </mat-error>
             <mat-error
               *ngIf="
-                  workIdentifiersGroup
-                    .get('externalIdentifierId')
-                    .hasError('unResolved')
-                "
+                workIdentifiersGroup
+                  .get('externalIdentifierId')
+                  .hasError('unResolved')
+              "
               i18n="@@works.unResolved"
             >
               We couldn't find a resource that matches the identifier you
@@ -550,7 +544,7 @@
               resource.
             </mat-error>
             <mat-hint i18n="@@works.identifierAssociated"
-            >The identifier associated with the work. The format will depend
+              >The identifier associated with the work. The format will depend
               on the type of identifier selected.
             </mat-hint>
           </mat-form-field>
@@ -562,12 +556,12 @@
             for="external-identifier-url-input"
             class="mat-caption"
             [ngClass]="{
-                error:
-                  workIdentifiersGroup.hasError(
-                    'pattern',
-                    'externalIdentifierUrl'
-                  ) && workIdentifiersGroup.get('externalIdentifierUrl').touched
-              }"
+              error:
+                workIdentifiersGroup.hasError(
+                  'pattern',
+                  'externalIdentifierUrl'
+                ) && workIdentifiersGroup.get('externalIdentifierUrl').touched
+            }"
           >
             <strong i18n="@@works.identifierUrl">Identifier URL </strong>
           </label>
@@ -587,10 +581,10 @@
             </mat-hint>
             <mat-error
               *ngIf="
-                  workIdentifiersGroup
-                    .get('externalIdentifierUrl')
-                    .hasError('pattern')
-                "
+                workIdentifiersGroup
+                  .get('externalIdentifierUrl')
+                  .hasError('pattern')
+              "
               i18n="@@works.invalidUrl"
             >
               Invalid url
@@ -606,13 +600,12 @@
               for="external-relationship-input"
               class="mat-caption"
               [ngClass]="{
-                  error:
-                    workIdentifiersGroup.hasError(
-                      'required',
-                      'externalRelationship'
-                    ) &&
-                    workIdentifiersGroup.get('externalRelationship').touched
-                }"
+                error:
+                  workIdentifiersGroup.hasError(
+                    'required',
+                    'externalRelationship'
+                  ) && workIdentifiersGroup.get('externalRelationship').touched
+              }"
             >
               <strong i18n="@@works.relationship">Relationship</strong>
             </label>
@@ -627,10 +620,10 @@
           >
             <ng-container *ngFor="let value of workRelationships">
               <mat-radio-button [value]="value"
-              >{{ value | recordWorkRelationshipLabel }}
+                >{{ value | recordWorkRelationshipLabel }}
               </mat-radio-button>
               <mat-hint class="mat-caption"
-              >{{ value | recordWorkRelationshipHintLabel }}
+                >{{ value | recordWorkRelationshipHintLabel }}
               </mat-hint>
             </ng-container>
           </mat-radio-group>
@@ -653,8 +646,8 @@
       <a class="col add-more no-gutters" (click)="addOtherWorkId()">
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1" i18n="@@works.addAnotherId">
-            Add other identifier
-          </span>
+          Add other identifier
+        </span>
       </a>
     </div>
   </div>
@@ -667,9 +660,9 @@
     class="title"
     id="otherInformation"
     [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
+      'orc-font-body': !platform.columns12,
+      'orc-font-body-large': platform.columns12
+    }"
   >
     <p>
       <strong i18n="@@works.otherInformation"> Other information</strong>
@@ -681,9 +674,7 @@
   <div>
     <div class="row">
       <label for="language-input" class="mat-caption">
-        <strong i18n="@@works.languageUsed"
-        >Language used in this form</strong
-        >
+        <strong i18n="@@works.languageUsed">Language used in this form</strong>
       </label>
     </div>
     <div class="row">
@@ -709,7 +700,7 @@
     <div class="row">
       <label for="country-input" class="mat-caption">
         <strong i18n="@@works.countryPublication"
-        >Country of publication</strong
+          >Country of publication</strong
         >
       </label>
     </div>
@@ -739,9 +730,9 @@
     id="visibility"
     class="title"
     [ngClass]="{
-        'orc-font-body': !platform.columns12,
-        'orc-font-body-large': platform.columns12
-      }"
+      'orc-font-body': !platform.columns12,
+      'orc-font-body-large': platform.columns12
+    }"
   >
     <p>
       <strong i18n="@@shared.visibility"> Visibility </strong>
@@ -755,9 +746,7 @@
       Manage who can see this information in your record.
     </p>
     <div class="col no-wrap actions-wrapper no-gutters visibility">
-      <app-privacy-selector
-        formControlName="visibility"
-      ></app-privacy-selector>
+      <app-privacy-selector formControlName="visibility"></app-privacy-selector>
     </div>
   </div>
 </form>

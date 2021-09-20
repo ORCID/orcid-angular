@@ -1,15 +1,30 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
-import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { PlatformInfo, PlatformInfoService } from '../../../../cdk/platform-info'
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms'
+import {
+  PlatformInfo,
+  PlatformInfoService,
+} from '../../../../cdk/platform-info'
 import { Work } from '../../../../types/record-works.endpoint'
 import {
   CitationTypes,
   LanguageMap,
   WorkCategories,
   WorkConferenceTypes,
-  WorkIdType, WorkIntellectualPropertyTypes, WorkOtherOutputTypes, WorkPublicationTypes,
+  WorkIdType,
+  WorkIntellectualPropertyTypes,
+  WorkOtherOutputTypes,
+  WorkPublicationTypes,
   WorkRelationships,
-  WorksTitleName, WorkTypesByCategory, WorkTypesTitle,
+  WorksTitleName,
+  WorkTypesByCategory,
+  WorkTypesTitle,
 } from '../../../../types/works.endpoint'
 import { RecordCountryCodesEndpoint } from '../../../../types'
 import { RecordWorksService } from '../../../../core/record-works/record-works.service'
@@ -19,7 +34,6 @@ import { RecordCountriesService } from '../../../../core/record-countries/record
 import { WINDOW } from '../../../../cdk/window'
 import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
-import { Observable } from 'rxjs'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
 import { URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
@@ -29,11 +43,10 @@ import { ExternalIdentifier } from '../../../../types/common.endpoint'
   templateUrl: './work-form.component.html',
   styleUrls: [
     './work-form.component.scss',
-    './work-form.component.scss-theme.scss'
-  ]
+    './work-form.component.scss-theme.scss',
+  ],
 })
 export class WorkFormComponent implements OnInit {
-
   @Input() work: Work
 
   loading = true
@@ -176,7 +189,7 @@ export class WorkFormComponent implements OnInit {
 
       visibility: [
         currentWork?.visibility?.visibility ||
-        currentWork.visibility.visibility,
+          currentWork.visibility.visibility,
         [],
       ],
     })
@@ -376,5 +389,4 @@ export class WorkFormComponent implements OnInit {
   closeEvent() {
     this._dialogRef.close()
   }
-
 }
