@@ -187,6 +187,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       country: new FormControl(this.country, {
         validators: [Validators.required],
       }),
+<<<<<<< HEAD
       grants: new FormArray([
         this._formBuilder.group({
           grantNumber: ['', []],
@@ -195,6 +196,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         }),
       ]),
       visibility: new FormControl(this.defaultVisibility, {
+=======
+      grants: new FormArray([]),
+      visibility: new FormControl(this.visibility, {
+>>>>>>> development
         validators: [Validators.required],
       }),
     })  
@@ -235,17 +240,31 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
     this.grantsArray = this.fundingForm.controls.grants as FormArray
     let i = 0
-    this.funding?.externalIdentifiers?.forEach((extIdentifier) => {
+    if (this.funding?.externalIdentifiers?.length > 0) {
+      this.funding.externalIdentifiers.forEach((extIdentifier) => {
+        this.grantsArray.controls.push(
+          this._formBuilder.group({
+            grantNumber: [extIdentifier.externalIdentifierId?.value, []],
+            grantUrl: [
+              extIdentifier.url?.value,
+              [Validators.pattern(URL_REGEXP)],
+            ],
+            fundingRelationship: [extIdentifier.relationship.value, []],
+          })
+        )
+        this.checkGrantsChanges(i)
+        i++
+      })
+    } else {
       this.grantsArray.controls.push(
         this._formBuilder.group({
-          grantNumber: [extIdentifier.externalIdentifierId?.value, []],
-          grantUrl: [extIdentifier.url?.value, [Validators.pattern(URL_REGEXP)]],
-          fundingRelationship: [extIdentifier.relationship.value, []],
+          grantNumber: ['', []],
+          grantUrl: ['', [Validators.pattern(URL_REGEXP)]],
+          fundingRelationship: [FundingRelationships.self, []],
         })
       )
       this.checkGrantsChanges(i)
-      i++
-    })
+    }
 
     this._recordCountryService
       .getCountryCodes()
