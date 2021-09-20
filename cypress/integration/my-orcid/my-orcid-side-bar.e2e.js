@@ -30,8 +30,8 @@ describe('My Orcid sidebar' + runInfo(), () => {
   describe('Orcid id', () => {
     it('display the users Orcid', () => {
       cy.get('app-side-bar-id ').within(() => {
-      cy.contains(`${environment.baseUrl}`)
-      cy.contains(environment.testUser.id)
+        cy.contains(`${environment.baseUrl}`)
+        cy.contains(environment.testUser.id)
       })
     })
     it('display url to navigate to the public page view', () => {})
