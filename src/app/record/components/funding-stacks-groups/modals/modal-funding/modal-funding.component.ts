@@ -217,6 +217,20 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           },
         })
       }
+
+      if(this.funding.visibility?.visibility) {
+        this.fundingForm.patchValue({
+          visibility: this.funding.visibility.visibility
+        })
+      }
+    } else {
+      // If there is an existing funding, do not overwrite the visibility
+      this._record.getPreferences().pipe(first()).subscribe((userPreferences) => {
+        this.defaultVisibility = userPreferences.default_visibility
+        this.fundingForm.patchValue({
+          visibility: this.defaultVisibility
+        })
+      })
     }
 
     this.grantsArray = this.fundingForm.controls.grants as FormArray
@@ -266,17 +280,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       switchMap((val) => {
         return this._filter(val || '')
       })
-    )
-
-    // If there is an existing funding, do not overwrite the visibility
-    if (!this.funding?.putCode) {
-      this._record.getPreferences().pipe(first()).subscribe((userPreferences) => {
-        this.defaultVisibility = userPreferences.default_visibility
-        this.fundingForm.patchValue({
-          visibility: this.defaultVisibility
-        })
-      })    
-    }    
+    )    
   }
 
   initialValues() {    
