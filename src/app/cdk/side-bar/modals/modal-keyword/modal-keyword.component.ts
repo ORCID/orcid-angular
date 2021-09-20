@@ -96,7 +96,10 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
     keywords.forEach((keyword) => {
       group[keyword.putCode] = new FormGroup({
-        content: new FormControl({ value: keyword.content, disabled: keyword.source !== this.id }),
+        content: new FormControl({
+          value: keyword.content,
+          disabled: keyword.source !== this.id,
+        }),
         visibility: new FormControl(keyword.visibility.visibility, {}),
       })
     })

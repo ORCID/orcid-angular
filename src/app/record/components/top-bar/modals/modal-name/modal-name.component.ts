@@ -122,7 +122,10 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
     otherNames.forEach((otherName) => {
       group[otherName.putCode] = new FormGroup({
-        otherName: new FormControl({ value: otherName.content, disabled: otherName.source !== this.id }),
+        otherName: new FormControl({
+          value: otherName.content,
+          disabled: otherName.source !== this.id,
+        }),
         visibility: new FormControl(otherName.visibility.visibility, {}),
       })
     })

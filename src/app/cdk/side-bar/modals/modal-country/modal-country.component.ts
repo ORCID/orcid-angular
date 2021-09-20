@@ -1,5 +1,12 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatSelect } from '@angular/material/select'
@@ -10,7 +17,11 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
-import { Address, CountriesEndpoint, RecordCountryCodesEndpoint } from 'src/app/types/record-country.endpoint'
+import {
+  Address,
+  CountriesEndpoint,
+  RecordCountryCodesEndpoint,
+} from 'src/app/types/record-country.endpoint'
 
 @Component({
   selector: 'app-modal-country',
@@ -94,7 +105,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
     countries.forEach((country) => {
       group[country.putCode] = new FormGroup({
-        country: new FormControl({ value: country.countryName, disabled: country.source !== this.id }),
+        country: new FormControl({
+          value: country.countryName,
+          disabled: country.source !== this.id,
+        }),
         visibility: new FormControl(country.visibility.visibility, {}),
       })
     })
