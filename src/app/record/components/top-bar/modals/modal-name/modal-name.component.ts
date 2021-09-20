@@ -44,6 +44,7 @@ import { OrcidValidators } from '../../../../../validators'
 export class ModalNameComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  id: string
   platform: PlatformInfo
   namesForm: FormGroup
   otherNamesForm: FormGroup
@@ -121,7 +122,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
     otherNames.forEach((otherName) => {
       group[otherName.putCode] = new FormGroup({
-        otherName: new FormControl(otherName.content),
+        otherName: new FormControl({ value: otherName.content, disabled: otherName.source !== this.id }),
         visibility: new FormControl(otherName.visibility.visibility, {}),
       })
     })

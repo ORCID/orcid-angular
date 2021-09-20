@@ -37,6 +37,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @ViewChildren('keywordInput') inputs: QueryList<ElementRef>
 
+  id: string
   addedKeywordsCount = 0
   userRecord: UserRecord
   keywordsForm: FormGroup
@@ -95,7 +96,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
     keywords.forEach((keyword) => {
       group[keyword.putCode] = new FormGroup({
-        content: new FormControl(keyword.content),
+        content: new FormControl({ value: keyword.content, disabled: keyword.source !== this.id }),
         visibility: new FormControl(keyword.visibility.visibility, {}),
       })
     })
