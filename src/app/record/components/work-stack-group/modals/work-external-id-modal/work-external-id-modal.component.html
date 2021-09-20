@@ -1,0 +1,108 @@
+<app-modal [loading]="loading" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container
+      i18n="@@works.addFromDOI"
+      *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
+    >
+      Works - Add work from DOI
+    </ng-container>
+    <ng-container
+      i18n="@@works.addFromPubMed"
+      *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
+    >
+      Works - Add work from pubMed
+    </ng-container>
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      *ngIf="work"
+      mat-raised-button
+      color="primary"
+      (click)="workFormComponent.saveEvent()"
+      i18n="@@shared.saveChanges"
+      id="save-work-button"
+    >
+      Save changes
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-work-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <form [formGroup]="externalIdentifierForm" *ngIf="!work">
+    <div class="row">
+      <div class="orc-font-small-print">
+        <p>
+          <ng-container
+            i18n="@@works.youCanUseFullDOI"
+            *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
+          >
+            You can use the full DOI URL or just the identifier value.
+          </ng-container>
+          <ng-container
+            i18n="@@works.typeOrPastePubMed"
+            *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
+          >
+            Type or paste the full pubMed URL or just the identifier value
+          </ng-container>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <label for="external-id-input" class="mat-caption">
+        <strong>
+          <ng-container
+            i18n="@@works.doiIdentifier"
+            *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
+          >
+            DOI identifier value or full URL
+          </ng-container>
+          <ng-container
+            i18n="@@works.pubMedIdentifier"
+            *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
+          >
+            pubMed identifier value or full URL
+          </ng-container>
+        </strong>
+      </label>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline" class="mat-form-field-min">
+        <input id="external-id-input" matInput formControlName="externalId" />
+        <!--        todo add invalid url -->
+        <!--        <mat-error-->
+        <!--          *ngIf="metadataNotFound"-->
+        <!--          i18n="@@works.unableToImport"-->
+        <!--        >-->
+        <!--          Unable to import using this identifier. Please add work using a different option.-->
+        <!--        </mat-error>-->
+        <mat-error *ngIf="metadataNotFound" i18n="@@works.unableToImport">
+          Unable to import using this identifier. Please add work using a
+          different option.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col l4 retrieve-work">
+      <button mat-raised-button color="primary" (click)="retrieveWork()">
+        <ng-container
+          i18n="@@works.retrieveWorkDOI"
+          *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"
+        >
+          Retrieve work details from DOI
+        </ng-container>
+        <ng-container
+          i18n="@@works.retrieveWorkPubMed"
+          *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
+        >
+          Retrieve work details from pubMed
+        </ng-container>
+      </button>
+    </div>
+  </form>
+  <app-work-form [work]="work" *ngIf="work"> </app-work-form>
+</app-modal>

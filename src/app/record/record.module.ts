@@ -59,10 +59,13 @@ import { ModalExportWorksComponent } from './components/work/modals/modal-export
 import { WorkComponent } from './components/work/work.component'
 import { MyOrcidComponent } from './pages/my-orcid/my-orcid.component'
 import { RecordRoutingModule } from './record-routing.module'
-import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/modal-works-search-link.component'
 import { ModalFundingSearchLinkComponent } from './components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
 import { SearchLinkWizardComponent } from './components/search-link-wizard/search-link-wizard.component'
 import { WorksVisibilityModalComponent } from './components/work/modals/works-visibility-modal/works-visibility-modal.component'
+import { WorkBibtexModalComponent } from './components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
+import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
+import { WorkExternalIdModalComponent } from './components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
+import { WorkFormComponent } from './components/work-form/work-form/work-form.component'
 
 @NgModule({
   declarations: [
@@ -104,6 +107,9 @@ import { WorksVisibilityModalComponent } from './components/work/modals/works-vi
     ModalFundingSearchLinkComponent,
     SearchLinkWizardComponent,
     WorksVisibilityModalComponent,
+    WorkBibtexModalComponent,
+    WorkExternalIdModalComponent,
+    WorkFormComponent,
   ],
   imports: [
     CommonModule,

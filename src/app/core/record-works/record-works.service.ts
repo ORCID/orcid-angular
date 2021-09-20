@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
-import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 
 @Injectable({
@@ -346,6 +346,33 @@ export class RecordWorksService {
   loadWorkImportWizardList(): Observable<RecordImportWizard[]> {
     return this._http.get<RecordImportWizard[]>(
       environment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
+    )
+  }
+
+  loadExternalId(
+    externalId: string,
+    type: EXTERNAL_ID_TYPE_WORK
+  ): Observable<Work> {
+    let url = 'works/resolve/doi?value='
+    if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
+      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\d{5})/g)
+      const result = regex.exec(externalId)
+      url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
+    }
+
+    return this._http.get<Work>(environment.API_WEB + url + externalId)
+  }
+
+  worksValidate(obj): Observable<any> {
+    return this._http.post(
+      environment.API_WEB + 'works/worksValidate.json',
+      JSON.stringify(obj),
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+      }
     )
   }
 }

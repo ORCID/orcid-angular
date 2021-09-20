@@ -16,7 +16,11 @@ import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { first } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { ADD_EVENT_ACTION, DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import {
+  ADD_EVENT_ACTION,
+  DEFAULT_PAGE_SIZE,
+  EXTERNAL_ID_TYPE_WORK,
+} from 'src/app/constants'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import {
@@ -34,6 +38,9 @@ import { WorkStackComponent } from '../work-stack/work-stack.component'
 import { ModalCombineWorksComponent } from '../work/modals/modal-combine-works/modal-combine-works.component'
 import { ModalExportWorksComponent } from '../work/modals/modal-export-works/modal-export-works.component'
 import { WorksVisibilityModalComponent } from '../work/modals/works-visibility-modal/works-visibility-modal.component'
+import { ModalWorksSearchLinkComponent } from './modals/work-search-link-modal/modal-works-search-link.component'
+import { WorkExternalIdModalComponent } from './modals/work-external-id-modal/work-external-id-modal.component'
+import { WorkBibtexModalComponent } from './modals/work-bibtex-modal/work-bibtex-modal.component'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -62,10 +69,28 @@ export class WorkStackGroupComponent implements OnInit {
       action: ADD_EVENT_ACTION.addManually,
       modal: WorkModalComponent,
     },
-    { label: 'Search & Link', action: ADD_EVENT_ACTION.searchAndLink },
-    { label: 'Add DOI', action: ADD_EVENT_ACTION.doi },
-    { label: 'Add PubMed ID', action: ADD_EVENT_ACTION.pubMed },
-    { label: 'Add BibTex', action: ADD_EVENT_ACTION.bibText },
+    {
+      label: 'Search & Link',
+      action: ADD_EVENT_ACTION.searchAndLink,
+      modal: ModalWorksSearchLinkComponent,
+    },
+    {
+      label: 'Add DOI',
+      action: ADD_EVENT_ACTION.doi,
+      modal: WorkExternalIdModalComponent,
+      type: EXTERNAL_ID_TYPE_WORK.doi,
+    },
+    {
+      label: 'Add PubMed ID',
+      action: ADD_EVENT_ACTION.pubMed,
+      modal: WorkExternalIdModalComponent,
+      type: EXTERNAL_ID_TYPE_WORK.pubMed,
+    },
+    {
+      label: 'Add BibTex',
+      action: ADD_EVENT_ACTION.bibText,
+      modal: WorkBibtexModalComponent,
+    },
   ]
 
   $destroy: Subject<boolean> = new Subject<boolean>()
