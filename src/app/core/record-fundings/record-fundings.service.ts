@@ -193,14 +193,14 @@ export class RecordFundingsService {
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB + 'fundings/updateToMaxDisplay.json?putCode=' + putCode
+        environment.API_WEB +
+          'fundings/updateToMaxDisplay.json?putCode=' +
+          putCode
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() =>
-          this.getFundings({ forceReload: true })
-        )
+        tap(() => this.getFundings({ forceReload: true }))
       )
   }
 }

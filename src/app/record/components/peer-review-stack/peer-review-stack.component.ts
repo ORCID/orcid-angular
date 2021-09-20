@@ -136,7 +136,9 @@ export class PeerReviewStackComponent implements OnInit {
   }
 
   makePrimaryCard(peerReview: PeerReview) {
-    this._recordPeerReviewService.updatePreferredSource(peerReview.putCode.value).subscribe()
+    this._recordPeerReviewService
+      .updatePreferredSource(peerReview.putCode.value)
+      .subscribe()
   }
 
   changeTopPanelOfTheStack(peerReview: PeerReview) {

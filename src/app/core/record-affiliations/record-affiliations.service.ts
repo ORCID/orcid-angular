@@ -223,14 +223,14 @@ export class RecordAffiliationService {
   updatePreferredSource(putCode: string): Observable<any> {
     return this._http
       .get(
-        environment.API_WEB + 'affiliations/updateToMaxDisplay.json?putCode=' + putCode
+        environment.API_WEB +
+          'affiliations/updateToMaxDisplay.json?putCode=' +
+          putCode
       )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() =>
-          this.getAffiliations({ forceReload: true })
-        )
+        tap(() => this.getAffiliations({ forceReload: true }))
       )
   }
 }

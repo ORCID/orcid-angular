@@ -113,7 +113,9 @@ export class ResearchResourceStackComponent implements OnInit {
   }
 
   makePrimaryCard(researchResource: ResearchResource) {
-    this._recordResearchResourceService.updatePreferredSource(researchResource.putCode).subscribe()
+    this._recordResearchResourceService
+      .updatePreferredSource(researchResource.putCode)
+      .subscribe()
   }
 
   changeTopPanelOfTheStack(researchResource: ResearchResource) {
