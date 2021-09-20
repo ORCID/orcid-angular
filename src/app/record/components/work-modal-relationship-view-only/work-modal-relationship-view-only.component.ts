@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { ExternalIdentifier } from 'src/app/types/common.endpoint'
 
 @Component({
   selector: 'app-work-modal-relationship-view-only',

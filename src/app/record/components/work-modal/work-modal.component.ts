@@ -35,7 +35,6 @@ import {
   WorkTypesByCategory,
   WorkTypesTitle,
 } from 'src/app/types/works.endpoint'
-import { stubFalse } from 'lodash'
 
 @Component({
   selector: 'app-work-modal',
