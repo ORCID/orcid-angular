@@ -62,7 +62,8 @@ import { RecordRoutingModule } from './record-routing.module'
 import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/modal-works-search-link.component'
 import { ModalFundingSearchLinkComponent } from './components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
 import { SearchLinkWizardComponent } from './components/search-link-wizard/search-link-wizard.component'
-import { WorksVisibilityModalComponent } from './components/work/modals/works-visibility-modal/works-visibility-modal.component'
+import { WorksVisibilityModalComponent } from './components/work/modals/works-visibility-modal/works-visibility-modal.component';
+import { WorkModalRelationshipViewOnlyComponent } from './components/work-modal-relationship-view-only/work-modal-relationship-view-only.component'
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { WorksVisibilityModalComponent } from './components/work/modals/works-vi
     ModalFundingSearchLinkComponent,
     SearchLinkWizardComponent,
     WorksVisibilityModalComponent,
+    WorkModalRelationshipViewOnlyComponent,
   ],
   imports: [
     CommonModule,

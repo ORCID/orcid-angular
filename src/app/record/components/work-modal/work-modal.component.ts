@@ -35,6 +35,7 @@ import {
   WorkTypesByCategory,
   WorkTypesTitle,
 } from 'src/app/types/works.endpoint'
+import { stubFalse } from 'lodash'
 
 @Component({
   selector: 'app-work-modal',
@@ -77,6 +78,7 @@ export class WorkModalComponent implements OnInit {
   dynamicTitle = WorksTitleName.journalTitle
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
+  workIdentifiersFormArrayDisplayState: boolean[] = []
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -280,23 +282,28 @@ export class WorkModalComponent implements OnInit {
     })
   }
 
-  addOtherWorkId(externalId?: ExternalIdentifier) {
+  addOtherWorkId(existingExternalId?: ExternalIdentifier) {
+    if (existingExternalId) {
+      this.workIdentifiersFormArrayDisplayState.push(false)
+    } else {
+      this.workIdentifiersFormArrayDisplayState.push(true)
+    }
     this.workIdentifiersFormArray.push(
       this._fb.group({
         externalIdentifierType: [
-          externalId?.externalIdentifierType?.value || '',
+          existingExternalId?.externalIdentifierType?.value || '',
           [],
         ],
         externalIdentifierId: [
-          externalId?.externalIdentifierId?.value || '',
+          existingExternalId?.externalIdentifierId?.value || '',
           [],
         ],
         externalIdentifierUrl: [
-          externalId?.url?.value || '',
+          existingExternalId?.url?.value || '',
           [Validators.pattern(URL_REGEXP)],
         ],
         externalRelationship: [
-          externalId?.relationship?.value || WorkRelationships.self,
+          existingExternalId?.relationship?.value || WorkRelationships.self,
           [],
         ],
       })
@@ -307,6 +314,7 @@ export class WorkModalComponent implements OnInit {
     )
   }
   deleteWorkId(id: number) {
+    this.workIdentifiersFormArrayDisplayState.splice(id, 1)
     this.workIdentifiersFormArray.removeAt(id)
   }
 

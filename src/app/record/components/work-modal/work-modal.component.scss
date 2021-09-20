@@ -2,19 +2,17 @@
   display: none;
 }
 
+.externalIdBox {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
 mat-form-field {
   width: 100%;
 }
 
 :host {
   width: 100%;
-}
-
-hr {
-  height: 2px;
-  border: 0;
-  margin: 0;
-  margin-bottom: 20px;
 }
 
 .title {
@@ -78,10 +76,11 @@ mat-radio-group {
 }
 
 .add-more {
+  margin-top: 26px;
   margin-bottom: 26px;
 
   span {
     margin: auto;
-    padding-left: 6px;
+    padding-inline-start: 6px;
   }
 }
