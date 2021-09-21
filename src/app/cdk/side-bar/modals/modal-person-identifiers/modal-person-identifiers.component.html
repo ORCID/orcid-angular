@@ -62,7 +62,6 @@
         id="ids-list"
         cdkDropList
         (cdkDropListDropped)="drop($event)"
-        class="personal-identifier-wrapper"
       >
         <div
           cdkDrag
@@ -74,19 +73,28 @@
           [attr.id]="'draggable-' + i"
         >
           <div
-            class="col l12 m8 s4 middle no-wrap no-gutters personal-identifiers-wrapper"
+            class="col l12 m8 s4 top no-wrap no-gutters personal-identifiers-wrapper"
           >
             <img
               cdkDragHandle
               src="./assets/vectors/draggable.svg"
               aria-label="drag handle"
             />
-
-            <label>
-              {{
-                personIdentifier.commonName + ': ' + personIdentifier.reference
-              }}</label
-            >
+            <div class="row">
+              <mat-form-field appearance="outline" class="mat-form-field-min">
+                <input
+                  id="identifier-input"
+                  matInput
+                  formControlName="identifier"
+                />
+                <mat-hint class="mat-caption">
+                  <span i18n="@@shared.source">Source:</span>
+                  {{ getSourceName(personIdentifier) }},
+                  <span i18n="@@shared.created">Created:</span>
+                  {{ personIdentifier.createdDate | monthDayYearDateToString }}
+                </mat-hint>
+              </mat-form-field>
+            </div>
           </div>
           <div
             class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
