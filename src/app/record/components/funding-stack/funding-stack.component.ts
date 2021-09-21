@@ -151,8 +151,9 @@ export class FundingStackComponent implements OnInit {
   }
 
   makePrimaryCard(funding: Funding) {
-    // TODO
-    console.debug(this.stackPanelsDisplay)
+    this._fundingService
+      .updatePreferredSource(funding.putCode.value)
+      .subscribe()
   }
 
   changeTopPanelOfTheStack(funding: Funding) {
