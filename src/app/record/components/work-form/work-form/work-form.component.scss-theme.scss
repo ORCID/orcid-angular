@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
-@mixin work-modal-theme($theme) {
+@mixin work-form-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
@@ -43,4 +43,4 @@
     font-size: mat-font-size($config, body-1) !important;
   }
 }
-@include work-modal-theme($orcid-app-theme);
+@include work-form-theme($orcid-app-theme);
