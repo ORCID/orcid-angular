@@ -165,8 +165,9 @@ export class AffiliationStackComponent implements OnInit {
   }
 
   makePrimaryCard(affiliation: Affiliation) {
-    // TODO
-    console.warn(this.stackPanelsDisplay)
+    this._affiliationService
+      .updatePreferredSource(affiliation.putCode.value)
+      .subscribe()
   }
 
   changeTopPanelOfTheStack(affiliation: Affiliation) {

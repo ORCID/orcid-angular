@@ -151,4 +151,18 @@ export class RecordResearchResourceService {
         tap(() => this.getResearchResourcePage({ forceReload: true }))
       )
   }
+
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'research-resources/updateToMaxDisplay.json?putCode=' +
+          putCode
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getResearchResourcePage({ forceReload: true }))
+      )
+  }
 }
