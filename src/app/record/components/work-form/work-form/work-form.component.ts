@@ -37,6 +37,7 @@ import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
 import { URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-work-form',
@@ -99,6 +100,8 @@ export class WorkFormComponent implements OnInit {
     private _workService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
+    private _snackBar: SnackbarService,
+
     @Inject(WINDOW) private _window: Window,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
   ) {}
@@ -383,6 +386,8 @@ export class WorkFormComponent implements OnInit {
       this._workService.save(work).subscribe((value) => {
         this._dialogRef.close()
       })
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
@@ -24,7 +24,6 @@ export class WorkModalComponent implements OnInit {
   showTranslationTitle = false
 
   constructor(
-    private _platform: PlatformInfoService,
     private _workService: RecordWorksService,
     private _dialogRef: MatDialogRef<ModalComponent>,
     @Inject(WINDOW) private _window: Window,
@@ -43,10 +42,6 @@ export class WorkModalComponent implements OnInit {
       this.work = currentWork
       this.loading = false
     })
-  }
-
-  saveEvent() {
-    this._dialogRef.close()
   }
 
   closeEvent() {

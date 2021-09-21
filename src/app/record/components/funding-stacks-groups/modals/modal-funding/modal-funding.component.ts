@@ -45,6 +45,7 @@ import {
   FundingExternalIndentifierType,
 } from 'src/app/types/record-funding.endpoint'
 import { Title } from '@angular/platform-browser'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
@@ -127,6 +128,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     private _recordCountryService: RecordCountriesService,
     private _fundingsService: RecordFundingsService,
     private _formBuilder: FormBuilder,
+    private _snackBar: SnackbarService,
     private _record: RecordService
   ) {
     this._platform.get().subscribe((platform) => {
@@ -463,6 +465,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.closeEvent()
         })
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 
