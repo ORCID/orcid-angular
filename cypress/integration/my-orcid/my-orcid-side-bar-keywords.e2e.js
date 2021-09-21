@@ -17,7 +17,7 @@ Cypress.Commands.add(
       .trigger('mouseup', { force: true })
   }
 )
-describe.only('My Orcid sidebar - Keywords' + runInfo(), () => {
+describe('My Orcid sidebar - Keywords' + runInfo(), () => {
   before(() => {
     cy.programmaticSignin('testUser')
   })

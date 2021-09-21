@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 const runInfo = require('../../helpers/runInfo')
 
-describe.only('Affiliations' + runInfo(), () => {
-  describe.only('Employment' + runInfo(), () => {
+describe('Affiliations' + runInfo(), () => {
+  describe('Employment' + runInfo(), () => {
     it('show an option to add more items', () => {})
     it('show an option to edit items', () => {})
     it('display a user with no items', () => {
@@ -43,10 +43,10 @@ describe.only('Affiliations' + runInfo(), () => {
   })
 
   // REPEAT ALL THE SAME TESTs for the following
-  describe.only('Distinction' + runInfo(), () => {})
-  describe.only('Qualification' + runInfo(), () => {})
-  describe.only('Membership' + runInfo(), () => {})
-  describe.only('Service' + runInfo(), () => {})
-  describe.only('Education' + runInfo(), () => {})
-  describe.only('Invited Position' + runInfo(), () => {})
+  describe('Distinction' + runInfo(), () => {})
+  describe('Qualification' + runInfo(), () => {})
+  describe('Membership' + runInfo(), () => {})
+  describe('Service' + runInfo(), () => {})
+  describe('Education' + runInfo(), () => {})
+  describe('Invited Position' + runInfo(), () => {})
 })
