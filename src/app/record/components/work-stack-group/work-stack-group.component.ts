@@ -128,7 +128,7 @@ export class WorkStackGroupComponent implements OnInit {
           this.paginationTotalAmountOfWorks = userRecord.works.totalGroups
           this.paginationIndex = userRecord.works.pageIndex
           this.paginationPageSize = userRecord.works.pageSize
-          this.total.emit(userRecord.works.groups.length)
+          this.total.emit(userRecord.works.groups?.length || 0)
         }
       })
 

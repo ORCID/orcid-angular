@@ -94,12 +94,12 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
         if (!isEmpty(userRecord?.researchResources)) {
           this.paginationLoading = false
           this.researchResources = userRecord.researchResources
-          this.total.emit(this.researchResources.groups.length)
+          this.total.emit(this.researchResources.groups?.length || 0)
           this.paginationTotalAmountOfResearchResources =
             userRecord.researchResources.totalGroups
           this.paginationIndex = userRecord.researchResources.pageIndex
           this.paginationPageSize = userRecord.researchResources.pageSize
-          this.total.emit(userRecord.researchResources.groups.length)
+          this.total.emit(userRecord.researchResources.groups?.length || 0)
         }
       })
   }

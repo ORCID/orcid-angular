@@ -24,67 +24,72 @@
             [hideOrcidId]="true"
           >
           </app-side-bar>
-          <div class="activities" *ngIf="!(publicOrcid && affiliations === 0)">
-            <h2 class="orc-font-body col" i18n="@@shared.activities">
-              Activities
-            </h2>
-            <div class="expand-buttons">
-              <button
-                mat-button
-                color="primary"
-                type="button"
-                i18n="@@shared.expandAll"
-                (click)="collapse()"
-                *ngIf="!expandedContent"
-              >
-                Expand all
-              </button>
-              <button
-                mat-button
-                color="primary"
-                type="button"
-                i18n="@@shared.collapseAll"
-                (click)="collapse()"
-                *ngIf="expandedContent"
-              >
-                Collapse all
-              </button>
+          <ng-container *ngIf="!recordWithIssues">
+            <div
+              class="activities"
+              *ngIf="!(publicOrcid && affiliations === 0)"
+            >
+              <h2 class="orc-font-body col" i18n="@@shared.activities">
+                Activities
+              </h2>
+              <div class="expand-buttons">
+                <button
+                  mat-button
+                  color="primary"
+                  type="button"
+                  i18n="@@shared.expandAll"
+                  (click)="collapse()"
+                  *ngIf="!expandedContent"
+                >
+                  Expand all
+                </button>
+                <button
+                  mat-button
+                  color="primary"
+                  type="button"
+                  i18n="@@shared.collapseAll"
+                  (click)="collapse()"
+                  *ngIf="expandedContent"
+                >
+                  Collapse all
+                </button>
+              </div>
             </div>
-          </div>
-          <app-affiliations
-            [userInfo]="userInfo"
-            [isPublicRecord]="publicOrcid"
-            [expandedContent]="expandedContent"
-            (total)="affiliationsCount($event)"
-            (expanded)="expandedByType($event)"
-          ></app-affiliations>
-          <app-fundings
-            [userInfo]="userInfo"
-            [isPublicRecord]="publicOrcid"
-            [expandedContent]="expandedContent"
-            (total)="affiliationsCount($event)"
-            (expanded)="expandedByType($event)"
-          ></app-fundings>
-          <app-research-resources
-            [isPublicRecord]="publicOrcid"
-            [expandedContent]="expandedContent"
-            (total)="affiliationsCount($event)"
-            (expanded)="expandedByType($event)"
-          ></app-research-resources>
-          <app-work-stack-group
-            [userInfo]="userInfo"
-            [isPublicRecord]="publicOrcid"
-            [expandedContent]="expandedContent"
-            (total)="affiliationsCount($event)"
-            (expanded)="expandedByType($event)"
-          ></app-work-stack-group>
-          <app-peer-reviews
-            [userInfo]="userInfo"
-            [isPublicRecord]="publicOrcid"
-            [expandedContent]="expandedContent"
-            (total)="affiliationsCount($event)"
-            (expanded)="expandedByType($event)"
-          ></app-peer-reviews>
+            <app-affiliations
+              [userInfo]="userInfo"
+              [isPublicRecord]="publicOrcid"
+              [expandedContent]="expandedContent"
+              (total)="affiliationsCount($event)"
+              (expanded)="expandedByType($event)"
+            ></app-affiliations>
+            <app-fundings
+              [userInfo]="userInfo"
+              [isPublicRecord]="publicOrcid"
+              [expandedContent]="expandedContent"
+              (total)="affiliationsCount($event)"
+              (expanded)="expandedByType($event)"
+            ></app-fundings>
+            <app-research-resources
+              [isPublicRecord]="publicOrcid"
+              [expandedContent]="expandedContent"
+              (total)="affiliationsCount($event)"
+              (expanded)="expandedByType($event)"
+            ></app-research-resources>
+            <app-work-stack-group
+              [userInfo]="userInfo"
+              [isPublicRecord]="publicOrcid"
+              [expandedContent]="expandedContent"
+              (total)="affiliationsCount($event)"
+              (expanded)="expandedByType($event)"
+            ></app-work-stack-group>
+            <app-peer-reviews
+              [userInfo]="userInfo"
+              [isPublicRecord]="publicOrcid"
+              [expandedContent]="expandedContent"
+              (total)="affiliationsCount($event)"
+              (expanded)="expandedByType($event)"
+            ></app-peer-reviews>
+          </ng-container>
           <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">
             <div
               class="no-public-info"
