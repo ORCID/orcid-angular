@@ -7,20 +7,6 @@ import { WINDOW } from 'src/app/cdk/window'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
-import {
-  CitationTypes,
-  LanguageMap,
-  WorkCategories,
-  WorkConferenceTypes,
-  WorkIdType,
-  WorkIntellectualPropertyTypes,
-  WorkOtherOutputTypes,
-  WorkPublicationTypes,
-  WorkRelationships,
-  WorksTitleName,
-  WorkTypesByCategory,
-  WorkTypesTitle,
-} from 'src/app/types/works.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkFormComponent } from '../work-form/work-form/work-form.component'
 
