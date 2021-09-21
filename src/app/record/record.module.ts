@@ -110,7 +110,7 @@ import { WorkModalComponent } from './components/work-modal/work-modal.component
     WorkExternalIdModalComponent,
     WorkFormComponent,
     WorkFormComponent,
-    WorkModalComponent
+    WorkModalComponent,
   ],
   imports: [
     CommonModule,
