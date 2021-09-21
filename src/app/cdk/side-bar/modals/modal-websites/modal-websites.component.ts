@@ -44,6 +44,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  id: string
   websitesForm: FormGroup
   platform: PlatformInfo
   defaultVisibility: VisibilityStrings
@@ -109,15 +110,21 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     websites.forEach((website) => {
       group[website.putCode] = new FormGroup({
-        description: new FormControl(website.urlName),
-        url: new FormControl(website.url.value, {
-          validators: [
-            Validators.required,
-            Validators.pattern(URL_REGEXP_BACKEND),
-            this.allUrlsAreUnique(website.putCode),
-          ],
-          updateOn: 'change',
+        description: new FormControl({
+          value: website.urlName,
+          disabled: website.source !== this.id,
         }),
+        url: new FormControl(
+          { value: website.url.value, disabled: website.source !== this.id },
+          {
+            validators: [
+              Validators.required,
+              Validators.pattern(URL_REGEXP_BACKEND),
+              this.allUrlsAreUnique(website.putCode),
+            ],
+            updateOn: 'change',
+          }
+        ),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
     })
