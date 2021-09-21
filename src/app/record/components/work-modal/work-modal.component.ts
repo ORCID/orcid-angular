@@ -2,14 +2,12 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { RecordWorksService } from 'src/app/core/record-works/record-works.service'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { UserRecord } from 'src/app/types/record.local'
-import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkFormComponent } from '../work-form/work-form/work-form.component'
-import { FormBuilder } from '@angular/forms'
 
 @Component({
   selector: 'app-work-modal',

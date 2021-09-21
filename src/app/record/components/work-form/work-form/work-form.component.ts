@@ -386,7 +386,7 @@ export class WorkFormComponent implements OnInit {
       this._workService.save(work).subscribe((value) => {
         this._dialogRef.close()
       })
-    }else {
+    } else {
       this._snackBar.showValidationError()
     }
   }

@@ -65,7 +65,6 @@ import { ModalWorksSearchLinkComponent } from './components/work-stack-group/mod
 import { WorkExternalIdModalComponent } from './components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
 import { WorkFormComponent } from './components/work-form/work-form/work-form.component'
 import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
-import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -109,7 +108,7 @@ import { MatDialogModule } from '@angular/material/dialog'
     WorkBibtexModalComponent,
     WorkExternalIdModalComponent,
     WorkFormComponent,
-    WorkFormComponent
+    WorkFormComponent,
   ],
   imports: [
     CommonModule,
