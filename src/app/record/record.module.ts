@@ -51,11 +51,9 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
 import { ModalBiographyComponent } from './components/top-bar/modals/modal-biography/modal-biography.component'
 import { ModalNameComponent } from './components/top-bar/modals/modal-name/modal-name.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
-import { WorkModalComponent } from './components/work-modal/work-modal.component'
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { ModalCombineWorksComponent } from './components/work/modals/modal-combine-works/modal-combine-works.component'
-import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
 import { WorkComponent } from './components/work/work.component'
 import { MyOrcidComponent } from './pages/my-orcid/my-orcid.component'
 import { RecordRoutingModule } from './record-routing.module'
@@ -66,6 +64,8 @@ import { WorkBibtexModalComponent } from './components/work-stack-group/modals/w
 import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
 import { WorkExternalIdModalComponent } from './components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
 import { WorkFormComponent } from './components/work-form/work-form/work-form.component'
+import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -92,7 +92,6 @@ import { WorkFormComponent } from './components/work-form/work-form/work-form.co
     TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
     NotFoundComponent,
-    WorkModalComponent,
     ModalAffiliationsComponent,
     OrgIdentifierComponent,
     ModalFundingComponent,
@@ -110,6 +109,7 @@ import { WorkFormComponent } from './components/work-form/work-form/work-form.co
     WorkBibtexModalComponent,
     WorkExternalIdModalComponent,
     WorkFormComponent,
+    WorkFormComponent
   ],
   imports: [
     CommonModule,

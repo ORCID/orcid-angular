@@ -1594,6 +1594,11 @@
     node-gyp "^7.1.0"
     read-package-json-fast "^2.0.1"
 
+"@orcid/bibtex-parse-js@0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@orcid/bibtex-parse-js/-/bibtex-parse-js-0.0.25.tgz#3a4996d2339cab55ab6e43849cc791efa7a35418"
+  integrity sha512-n6VuG5/WjiifC1DoUzq0sUCWNSbAyRZznBgvPcY4jVZ/2eJiMv2tNUAt2NukbnFExOUa0RyTOFsqhH2MGpiLgQ==
+
 "@phenomnomnominal/tsquery@^4.0.0":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@phenomnomnominal/tsquery/-/tsquery-4.1.1.tgz#42971b83590e9d853d024ddb04a18085a36518df"
