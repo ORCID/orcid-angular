@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { AbstractControl, FormGroup } from '@angular/forms'
+import { FormGroup } from '@angular/forms'
 import { FundingRelationships } from 'src/app/types/record-funding.endpoint'
-import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
+import { WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-funding-external-identifiers-edit',
@@ -21,7 +21,6 @@ export class FundingExternalIdentifiersEditComponent implements OnInit {
     FundingRelationships
   ) as FundingRelationships[]
 
-  
   constructor() {}
 
   ngOnInit(): void {

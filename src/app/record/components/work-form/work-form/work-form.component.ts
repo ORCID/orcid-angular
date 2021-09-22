@@ -112,7 +112,6 @@ export class WorkFormComponent implements OnInit {
       this.platform = value
     })
 
-
     this.loadWorkForm(this.work)
     this.observeFormChanges()
 

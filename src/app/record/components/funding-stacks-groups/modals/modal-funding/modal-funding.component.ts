@@ -197,7 +197,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     })
     this.grantsArray = this.fundingForm.controls.grants as FormArray
 
-
     if (this.funding) {
       if (this.funding.endDate.year) {
         this.fundingForm.patchValue({
@@ -222,7 +221,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           visibility: this.funding.visibility.visibility,
         })
       }
- 
+
       this.funding.externalIdentifiers.forEach((grant) => {
         this.addAnotherGrant(grant)
       })
@@ -329,8 +328,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   formToBackendAffiliation(): Funding {
-    console.log(this.fundingForm.value)
-
     return {
       visibility: {
         visibility: this.fundingForm.get('visibility').value
