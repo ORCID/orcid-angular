@@ -112,8 +112,6 @@ export class WorkFormComponent implements OnInit {
       this.platform = value
     })
 
-    console.log('LOAD WITH')
-    console.log(this.work)
 
     this.loadWorkForm(this.work)
     this.observeFormChanges()

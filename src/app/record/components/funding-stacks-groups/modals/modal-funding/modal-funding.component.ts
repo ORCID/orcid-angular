@@ -21,6 +21,7 @@ import {
 import {
   VisibilityStrings,
   Organization,
+  ExternalIdentifier,
 } from '../../../../../types/common.endpoint'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { Observable } from 'rxjs/internal/Observable'
@@ -91,6 +92,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   amount = ''
   currencyCode = ''
   grantsArray: FormArray
+  grantsArrayDisplayState: boolean[] = []
+
   disambiguatedFundingSourceId = ''
   disambiguatedFundingSource = ''
   translatedTitleContent = ''
@@ -192,6 +195,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       }),
     })
+    this.grantsArray = this.fundingForm.controls.grants as FormArray
+
 
     if (this.funding) {
       if (this.funding.endDate.year) {
@@ -217,6 +222,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           visibility: this.funding.visibility.visibility,
         })
       }
+ 
+      this.funding.externalIdentifiers.forEach((grant) => {
+        this.addAnotherGrant(grant)
+      })
     } else {
       // If there is an existing funding, do not overwrite the visibility
       this._record
@@ -228,34 +237,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
             visibility: this.defaultVisibility,
           })
         })
-    }
-
-    this.grantsArray = this.fundingForm.controls.grants as FormArray
-    let i = 0
-    if (this.funding?.externalIdentifiers?.length > 0) {
-      this.funding.externalIdentifiers.forEach((extIdentifier) => {
-        this.grantsArray.controls.push(
-          this._formBuilder.group({
-            grantNumber: [extIdentifier.externalIdentifierId?.value, []],
-            grantUrl: [
-              extIdentifier.url?.value,
-              [Validators.pattern(URL_REGEXP)],
-            ],
-            fundingRelationship: [extIdentifier.relationship.value, []],
-          })
-        )
-        this.checkGrantsChanges(i)
-        i++
-      })
-    } else {
-      this.grantsArray.controls.push(
-        this._formBuilder.group({
-          grantNumber: ['', []],
-          grantUrl: ['', [Validators.pattern(URL_REGEXP)]],
-          fundingRelationship: [FundingRelationships.self, []],
-        })
-      )
-      this.checkGrantsChanges(i)
     }
 
     this._recordCountryService
@@ -348,6 +329,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   formToBackendAffiliation(): Funding {
+    console.log(this.fundingForm.value)
+
     return {
       visibility: {
         visibility: this.fundingForm.get('visibility').value
@@ -433,20 +416,29 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       assertionOriginName: this.funding?.assertionOriginName,
       assertionOriginOrcid: this.funding?.assertionOriginOrcid,
       countryForDisplay: this.funding?.countryForDisplay,
-      fundingTypeForDisplay: this.funding?.fundingTypeForDisplay,
     }
   }
 
   onSubmit() {}
 
-  addAnotherGrant() {
-    this.grantsArray.controls.push(
+  addAnotherGrant(existingGrant?: ExternalIdentifier) {
+    if (existingGrant) {
+      this.grantsArrayDisplayState.push(false)
+    } else {
+      this.grantsArrayDisplayState.push(true)
+    }
+
+    this.grantsArray.push(
       this._formBuilder.group({
-        grantNumber: ['', []],
-        grantUrl: ['', [Validators.pattern(URL_REGEXP)]],
+        grantNumber: [existingGrant?.externalIdentifierId?.value || '', []],
+        grantUrl: [
+          existingGrant?.url?.value || '',
+          [Validators.pattern(URL_REGEXP)],
+        ],
         fundingRelationship: [FundingRelationships.self, []],
       })
     )
+
     this.checkGrantsChanges(this.grantsArray.controls.length - 1)
   }
 
@@ -560,6 +552,18 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   toFundingIdentifiers() {
     this.window.document.getElementById('funding-identifiers').scrollIntoView()
+  }
+
+  cancelExternalIdEdit(id: number) {
+    if (
+      this.grantsArray.controls[id] &&
+      !this.grantsArray.controls[id].value.grantUrl &&
+      !this.grantsArray.controls[id].value.grantNumber
+    ) {
+      this.deleteGrant(id)
+    } else {
+      this.grantsArrayDisplayState[id] = false
+    }
   }
 
   ngOnDestroy() {

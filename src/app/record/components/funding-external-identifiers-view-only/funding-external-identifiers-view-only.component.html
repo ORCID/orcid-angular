@@ -1,34 +1,26 @@
 <div class="externalIds">
-    <app-panel-data-line
-      *ngIf="workIdentifier?.externalIdentifierType"
-      [title]="typeLabel"
-      [content]="workIdentifier.externalIdentifierType"
-    ></app-panel-data-line>
-  
-    <app-panel-data-line
-      *ngIf="workIdentifier?.externalIdentifierId"
-      [title]="valueLabel"
-      [content]="workIdentifier.externalIdentifierId"
-    >
-    </app-panel-data-line>
-  
-    <app-panel-data-line
-      *ngIf="workIdentifier?.externalIdentifierUrl"
-      [title]="urlLabel"
-      [content]="workIdentifier.externalIdentifierUrl"
-      [url]="workIdentifier.externalIdentifierUrl"
-    >
-    </app-panel-data-line>
-  
-    <app-panel-data-line
-      *ngIf="workIdentifier?.externalRelationship"
-      [title]="relationshipLabel"
-      [content]="workIdentifier.externalRelationship"
-    >
-    </app-panel-data-line>
-  </div>
-  <div class="controls">
-    <a (click)="edit.emit()">Edit</a>
-    <a (click)="delete.emit()">Delete</a>
-  </div>
-  
+  <app-panel-data-line
+    *ngIf="grant?.grantNumber"
+    [title]="typeLabel"
+    [content]="grant.grantNumber"
+  ></app-panel-data-line>
+
+  <app-panel-data-line
+    *ngIf="grant?.grantUrl"
+    [title]="valueLabel"
+    [content]="grant.grantUrl"
+    [url]="grant.grantUrl"
+  >
+  </app-panel-data-line>
+
+  <app-panel-data-line
+    *ngIf="grant?.fundingRelationship"
+    [title]="urlLabel"
+    [content]="grant.fundingRelationship"
+  >
+  </app-panel-data-line>
+</div>
+<div class="controls">
+  <a (click)="edit.emit()">Edit</a>
+  <a (click)="delete.emit()">Delete</a>
+</div>

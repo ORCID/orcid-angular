@@ -624,39 +624,48 @@
         <strong i18n="@@funding.fundingIdentifiers">Funding identifiers</strong>
         <span *ngIf="!platform.columns12" class="required">*</span>
       </p>
-      <p *ngIf="platform.columns12" class="required-information mat-caption">
-        <span class="required">*</span>
-        <ng-container i18n="@@shared.requiredInformation"
-          >Required information</ng-container
-        >
-      </p>
     </div>
-    <hr />
-
+    <hr class="no-margin" />
     <!-- Grants group -->
     <div formArrayName="grants">
-      <ng-container
+      <div
+        class="externalIdBox"
         *ngFor="
           let grantsGroup of grantsArray.controls;
           let i = index;
           let last = last
         "
       >
-        [formGroupName]="i"
+        <ng-container *ngIf="grantsArrayDisplayState[i]">
+          <app-funding-external-identifiers-edit
+            [grantForm]="$any(grantsGroup)"
+            (cancelEvent)="cancelExternalIdEdit(i)"
+            [index]="i"
+          ></app-funding-external-identifiers-edit>
+        </ng-container>
 
-        <app-funding-external-identifiers-edit
-          [grantForm]="$any(grantsGroup)"
-          [index]="i"
-        ></app-funding-external-identifiers-edit>
-
-      </ng-container>
-
+        <ng-container *ngIf="!grantsArrayDisplayState[i]">
+          <app-funding-external-identifiers-view-only
+            [grant]="grantsGroup.value"
+            (edit)="grantsArrayDisplayState[i] = true"
+            (delete)="deleteGrant(i)"
+          ></app-funding-external-identifiers-view-only>
+        </ng-container>
+      </div>
       <!-- Add another -->
-      <div class="row">
-        <a class="col add-more funding no-gutters" (click)="addAnotherGrant()">
+      <div class="row" *ngIf="grantsArray.length">
+        <a class="col add-more no-gutters" (click)="addAnotherGrant()">
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-          <span class="mat-body-1" i18n="@@funding.addAnotherGrant">
-            Add another funding identifier
+          <span class="mat-body-1" i18n="@@works.addAnotherId">
+            Add other identifier
+          </span>
+        </a>
+      </div>
+      <div class="row" *ngIf="!grantsArray.length">
+        <a class="col add-more no-gutters" (click)="addAnotherGrant()">
+          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <span class="mat-body-1" i18n="@@works.addId">
+            Add an identifier
           </span>
         </a>
       </div>
