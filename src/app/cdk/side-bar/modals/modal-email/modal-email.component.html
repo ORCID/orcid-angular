@@ -66,13 +66,7 @@
               appearance="outline"
               class="mat-form-field-min verify-icon"
             >
-              <input
-                matInput
-                matInput
-                formControlName="email"
-                type="email"
-                appTrim
-              />
+              <input matInput formControlName="email" type="email" appTrim />
               <mat-icon matPrefix>verified</mat-icon>
 
               <mat-error
@@ -111,7 +105,25 @@
             >
           </div>
           <div class="col actions-wrapper no-gutters">
-            <div class="actions-sub-wrapper"></div>
+            <div class="actions-sub-wrapper">
+              <ng-container *ngIf="showNonVerifiedData(email.putCode)">
+                <a
+                  class="orc-font-small-print disabled underline"
+                  *ngIf="verificationEmailWasSend(email.putCode)"
+                  i18n="@@side-bar.resendVerification"
+                >
+                  Resend verification email</a
+                >
+                <a
+                  class="orc-font-small-print underline"
+                  (click)="verifyEmail(email)"
+                  *ngIf="!verificationEmailWasSend(email.putCode)"
+                  i18n="@@side-bar.resendVerification"
+                >
+                  Resend verification email</a
+                >
+              </ng-container>
+            </div>
             <div class="actions-sub-wrapper">
               <app-privacy-selector
                 formControlName="visibility"
@@ -124,47 +136,63 @@
           *ngIf="email.primary && !showEmailAsVerified(email.putCode)"
           class="orc-font-body-small"
         >
-          <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
-            >Please verify your primary email address!</strong
-          >
-
-          <p>
-            <ng-container i18n="@@side-bar.youNeedToVerify">
-              You need to verify your primary email in order to access all of
-              ORCID’s editing features.
-            </ng-container>
-            <br />
-            <ng-container i18n="@@side-bar.youNeedToVerify2">
-              To verify your email, click the link in the message sent to:
-            </ng-container>
-          </p>
-          <p class="email-container">{{ email.value }}</p>
-
-          <p>
-            <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
-            <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
-            <a
-              class="underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://support.orcid.org/hc/articles/360006973793"
-              i18n="@@side-bar.knowledge"
-              >knowledge base
-            </a>
-            <ng-container i18n="@@side-bar.orContact">
-              or contact
-            </ng-container>
-
-            <a
-              class="underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              i18n="@@side-bar.support"
-              href="https://support.orcid.org/hc/en-us/requests/new"
+          <ng-container *ngIf="verificationEmailWasSend(email.putCode)">
+            <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
+              >Please verify your primary email address!</strong
             >
-              support.
-            </a>
-          </p>
+
+            <p>
+              <ng-container i18n="@@side-bar.youNeedToVerify">
+                You need to verify your primary email in order to access all of
+                ORCID’s editing features.
+              </ng-container>
+              <br />
+              <ng-container i18n="@@side-bar.youNeedToVerify2">
+                To verify your email, click the link in the message sent to:
+              </ng-container>
+            </p>
+            <p class="email-container">{{ email.value }}</p>
+
+            <p>
+              <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
+              <ng-container i18n="@@side-bar.visitOur">
+                Visit our
+              </ng-container>
+              <a
+                class="underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://support.orcid.org/hc/articles/360006973793"
+                i18n="@@side-bar.knowledge"
+                >knowledge base
+              </a>
+              <ng-container i18n="@@side-bar.orContact">
+                or contact
+              </ng-container>
+
+              <a
+                class="underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                i18n="@@side-bar.support"
+                href="https://support.orcid.org/hc/en-us/requests/new"
+              >
+                support.
+              </a>
+            </p>
+          </ng-container>
+          <ng-container *ngIf="!verificationEmailWasSend(email.putCode)">
+            <strong class="orc-font-body"
+              ><ng-container i18n="@@side-bar.weHaveSentAEmail"
+                >We’ve sent a verification email to</ng-container
+              >
+              {{ email.value }}</strong
+            >
+            <p i18n="@@side-bar.pleaseCheckYour">
+              Please check your email inbox (or maybe your spam folder) for an
+              email with a link to complete the process.
+            </p>
+          </ng-container>
         </app-alert-message>
       </ng-container>
     </div>
@@ -264,8 +292,14 @@
             </ng-container>
           </div>
 
-          <div class="actions-sub-wrapper">
+          <div
+            class="actions-sub-wrapper"
+            [ngClass]="{
+              'visibility-hidden': !showVisibility(email.putCode)
+            }"
+          >
             <app-privacy-selector
+              [hidden]="!showVisibility(email.putCode)"
               formControlName="visibility"
             ></app-privacy-selector>
             <button
@@ -281,10 +315,22 @@
           </div>
         </div>
         <hr *ngIf="isMobile" />
+        <mat-error
+          class="mat-caption only-verified"
+          i18n="@@sideBar.onlyVerifiedEmail"
+          *ngIf="
+            (emailsForm.get([email.putCode, 'visibility']).touched ||
+              emailsForm.get([email.putCode, 'visibility']).dirty) &&
+            emailsForm.hasError('unverified', [email.putCode, 'visibility'])
+          "
+        >
+          Only verified email addresses can be displayed publicly or shared with
+          trusted parties. Please verify your email
+        </mat-error>
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
-          *ngIf="verificationEmailWasSend(email.putCode)"
+          *ngIf="!email.primary && verificationEmailWasSend(email.putCode)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"

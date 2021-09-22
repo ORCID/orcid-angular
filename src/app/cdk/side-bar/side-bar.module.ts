@@ -19,6 +19,7 @@ import { ModalWebsitesComponent } from './modals/modal-websites/modal-websites.c
 import { ModalKeywordComponent } from './modals/modal-keyword/modal-keyword.component'
 import { ModalPersonIdentifiersComponent } from './modals/modal-person-identifiers/modal-person-identifiers.component'
 import { SharedModule } from 'src/app/shared/shared.module'
+import { FormDirectivesModule } from '../form-directives/form-directives.module'
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SharedModule } from 'src/app/shared/shared.module'
     DragDropModule,
     MatSelectModule,
     A11yLinkModule,
+    FormDirectivesModule,
   ],
   exports: [SideBarComponent],
 })
