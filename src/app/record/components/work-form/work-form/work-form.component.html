@@ -341,42 +341,40 @@
 
   <!-- Citation type -->
 
-  <div>
-    <div class="row">
-      <label
-        for="given-names-input"
-        class="mat-caption"
-        [ngClass]="{
-          error:
-            workForm.hasError('required', 'citationType') &&
-            workForm.get('citationType').touched
-        }"
-      >
-        <strong i18n="@@works.citationType">Citation type</strong>
-      </label>
-    </div>
-    <div class="row">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
-        <mat-select placeholder="Placeholder" formControlName="citationType">
-          <mat-option [value]="''" i18n="@@works.selectACitation">
-            Select a citation type
-          </mat-option>
-
-          <mat-option
-            *ngFor="let item of citationTypes | keyvalue"
-            [value]="item.key"
-          >
-            {{ item.value }}
-          </mat-option>
-        </mat-select>
-        <mat-error
-          *ngIf="workForm.get('citationType').hasError('required')"
-          i18n="@@works.selectACitationType"
-        >
+  <div class="row">
+    <label
+      for="given-names-input"
+      class="mat-caption title"
+      [ngClass]="{
+        error:
+          workForm.hasError('required', 'citationType') &&
+          workForm.get('citationType').touched
+      }"
+    >
+      <strong i18n="@@works.citationType">Citation type</strong>
+    </label>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-select placeholder="Placeholder" formControlName="citationType">
+        <mat-option [value]="''" i18n="@@works.selectACitation">
           Select a citation type
-        </mat-error>
-      </mat-form-field>
-    </div>
+        </mat-option>
+
+        <mat-option
+          *ngFor="let item of citationTypes | keyvalue"
+          [value]="item.key"
+        >
+          {{ item.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="workForm.get('citationType').hasError('required')"
+        i18n="@@works.selectACitationType"
+      >
+        Select a citation type
+      </mat-error>
+    </mat-form-field>
   </div>
   <!-- Citation  -->
 
@@ -443,210 +441,47 @@
   <hr />
 
   <div formArrayName="workIdentifiers">
-    <ng-container
+    <div
+      class="externalIdBox"
       *ngFor="
         let workIdentifiersGroup of workIdentifiersFormArray.controls;
         let i = index;
         let last = last
       "
     >
-      <ng-container [formGroupName]="i">
-        <!-- Work identifier type -->
-        <div>
-          <div class="row">
-            <label
-              for="given-names-input"
-              class="mat-caption"
-              [ngClass]="{
-                error:
-                  workIdentifiersGroup.hasError(
-                    'required',
-                    'externalIdentifierType'
-                  ) &&
-                  workIdentifiersGroup.get('externalIdentifierType').touched
-              }"
-            >
-              <strong i18n="@@works.type">Identifier type</strong>
-            </label>
-          </div>
-          <div class="row">
-            <mat-form-field appearance="outline" class="mat-form-field-min">
-              <mat-select
-                placeholder="Placeholder"
-                formControlName="externalIdentifierType"
-              >
-                <mat-option [value]="''" i18n="@@works.selectAnIdentifier">
-                  Select an identifier type
-                </mat-option>
-
-                <mat-option
-                  *ngFor="let item of workIdTypes"
-                  [value]="item.name"
-                >
-                  {{ item.description }}
-                </mat-option>
-                <mat-hint i18n="@@works.typeOfIdentifier"
-                  >The type of identifier associated with the work, such as an
-                  ISBN, DOI or PMID.
-                </mat-hint>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <!-- Work identifier value -->
-
-        <div>
-          <div class="row">
-            <label
-              for="external-identifier-id-input"
-              class="mat-caption"
-              [ngClass]="{
-                error:
-                  workIdentifiersGroup.hasError(
-                    'required',
-                    'externalIdentifierId'
-                  ) && workIdentifiersGroup.get('externalIdentifierId').touched
-              }"
-            >
-              <strong i18n="@@works.identifierValue">Identifier value </strong>
-            </label>
-          </div>
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min larger-input-margin"
-          >
-            <input
-              autocomplete="off"
-              id="external-identifier-id-input"
-              matInput
-              formControlName="externalIdentifierId"
-            />
-            <mat-error
-              *ngIf="
-                workIdentifiersGroup
-                  .get('externalIdentifierId')
-                  .hasError('validFormat')
-              "
-              i18n="@@works.validFormat"
-            >
-              Invalid id for the selected identifier type
-            </mat-error>
-            <mat-error
-              *ngIf="
-                workIdentifiersGroup
-                  .get('externalIdentifierId')
-                  .hasError('unResolved')
-              "
-              i18n="@@works.unResolved"
-            >
-              We couldn't find a resource that matches the identifier you
-              entered. Please check the value or enter a valid link to the
-              resource.
-            </mat-error>
-            <mat-hint i18n="@@works.identifierAssociated"
-              >The identifier associated with the work. The format will depend
-              on the type of identifier selected.
-            </mat-hint>
-          </mat-form-field>
-        </div>
-        <!-- Work identifier url value -->
-
-        <div class="row">
-          <label
-            for="external-identifier-url-input"
-            class="mat-caption"
-            [ngClass]="{
-              error:
-                workIdentifiersGroup.hasError(
-                  'pattern',
-                  'externalIdentifierUrl'
-                ) && workIdentifiersGroup.get('externalIdentifierUrl').touched
-            }"
-          >
-            <strong i18n="@@works.identifierUrl">Identifier URL </strong>
-          </label>
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min larger-input-margin"
-          >
-            <input
-              id="external-identifier-url-input"
-              matInput
-              formControlName="externalIdentifierUrl"
-            />
-
-            <mat-hint i18n="@@works.urlIdentifierHint">
-              The URL that the identifier resolves to, for example
-              https://doi.org/10.23640/07243.c.4232246
-            </mat-hint>
-            <mat-error
-              *ngIf="
-                workIdentifiersGroup
-                  .get('externalIdentifierUrl')
-                  .hasError('pattern')
-              "
-              i18n="@@works.invalidUrl"
-            >
-              Invalid url
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <!-- Work identifier relationship -->
-
-        <div>
-          <div class="row">
-            <label
-              for="external-relationship-input"
-              class="mat-caption"
-              [ngClass]="{
-                error:
-                  workIdentifiersGroup.hasError(
-                    'required',
-                    'externalRelationship'
-                  ) && workIdentifiersGroup.get('externalRelationship').touched
-              }"
-            >
-              <strong i18n="@@works.relationship">Relationship</strong>
-            </label>
-          </div>
-
-          <mat-radio-group
-            id="external-relationship-input"
-            aria-label="Select an option"
-            appearance="outline"
-            class="mat-form-field-min"
-            formControlName="externalRelationship"
-          >
-            <ng-container *ngFor="let value of workRelationships">
-              <mat-radio-button [value]="value"
-                >{{ value | recordWorkRelationshipLabel }}
-              </mat-radio-button>
-              <mat-hint class="mat-caption"
-                >{{ value | recordWorkRelationshipHintLabel }}
-              </mat-hint>
-            </ng-container>
-          </mat-radio-group>
-
-          <button
-            mat-icon-button
-            (click)="deleteWorkId(i)"
-            *ngIf="workIdentifiersFormArray.controls.length > 1"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
+      <ng-container
+        *ngIf="workIdentifiersFormArrayDisplayState[i]"
+        [formGroupName]="i"
+      >
+        <app-work-external-identifiers-edit
+          [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
+          [workIdTypes]="workIdTypes"
+          (cancelEvent)="cancelExternalIdEdit(i)"
+          [index]="i"
+        ></app-work-external-identifiers-edit>
       </ng-container>
-
-      <hr *ngIf="!last" />
-    </ng-container>
-
+      <ng-container *ngIf="!workIdentifiersFormArrayDisplayState[i]">
+        <app-work-external-identifiers-view-only
+          [workIdentifier]="workIdentifiersFormArray.controls[i].value"
+          (edit)="workIdentifiersFormArrayDisplayState[i] = true"
+          (delete)="deleteWorkId(i)"
+        ></app-work-external-identifiers-view-only>
+      </ng-container>
+    </div>
     <!-- Add other identifier  -->
-    <div class="row">
+    <div class="row" *ngIf="workIdentifiersFormArray.length">
       <a class="col add-more no-gutters" (click)="addOtherWorkId()">
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
-        <span class="mat-body-1" i18n="@@works.addAnotherId">
+        <span class="mat-body-1" i18n="@@shared.addAnotherId">
           Add other identifier
+        </span>
+      </a>
+    </div>
+    <div class="row" *ngIf="!workIdentifiersFormArray.length">
+      <a class="col add-more no-gutters" (click)="addOtherWorkId()">
+        <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+        <span class="mat-body-1" i18n="@@shared.addId">
+          Add an identifier
         </span>
       </a>
     </div>
@@ -672,7 +507,7 @@
 
   <!-- Language of this form -->
   <div>
-    <div class="row">
+    <div class="row title">
       <label for="language-input" class="mat-caption">
         <strong i18n="@@works.languageUsed">Language used in this form</strong>
       </label>

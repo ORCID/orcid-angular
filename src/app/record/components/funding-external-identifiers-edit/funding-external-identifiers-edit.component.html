@@ -1,0 +1,91 @@
+<div class="top-bar">
+  <strong>
+    <ng-container i18n="@@shared.identifier">Identifier</ng-container> ({{
+      index + 1
+    }})
+  </strong>
+  <a i18n="@@shared.cancel" (click)="cancel()">Cancel</a>
+</div>
+
+<ng-container [formGroup]="grantForm">
+  <!-- Grant number value -->
+  <div>
+    <div class="row">
+      <label for="grant-number-input" class="mat-caption">
+        <strong i18n="@@funding.grantNumber">Granting number </strong>
+      </label>
+    </div>
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min larger-input-margin"
+    >
+      <input id="grant-number-input" matInput formControlName="grantNumber" />
+    </mat-form-field>
+  </div>
+
+  <!-- Grant link value -->
+  <div class="row">
+    <label
+      for="grant-url-input"
+      class="mat-caption"
+      [ngClass]="{
+        error:
+          grantForm.hasError('pattern', 'grantUrl') &&
+          grantForm.get('grantUrl').touched
+      }"
+    >
+      <strong i18n="@@funding.grantUrl">Granting link </strong>
+    </label>
+
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min larger-input-margin"
+    >
+      <input id="grant-url-input" matInput formControlName="grantUrl" />
+
+      <mat-hint i18n="@@funding.grantUrlHint">
+        A link to more information about the funding award
+      </mat-hint>
+      <mat-error
+        *ngIf="grantForm.get('grantUrl').hasError('pattern')"
+        i18n="@@funding.invalidUrl"
+      >
+        Invalid URL
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Funding relationship -->
+  <div>
+    <div class="row relationship">
+      <label
+        class="mat-caption"
+        [ngClass]="{
+          error:
+            grantForm.hasError('required', 'fundingRelationship') &&
+            grantForm.get('fundingRelationship').touched
+        }"
+      >
+        <strong i18n="@@funding.relationship">Relationship</strong>
+        <span class="required">*</span>
+      </label>
+    </div>
+
+    <div class="row">
+      <mat-radio-group
+        aria-label="Select an option"
+        class="mat-form-field-min"
+        formControlName="fundingRelationship"
+      >
+        <ng-container *ngFor="let value of fundingRelationships">
+          <mat-radio-button [value]="value"
+            >{{ value | recordFundingRelationshipLabel }}
+          </mat-radio-button>
+          <mat-hint class="mat-caption"
+            >{{ value | recordFundingRelationshipHintLabel }}
+          </mat-hint>
+        </ng-container>
+      </mat-radio-group>
+    </div>
+  </div>
+</ng-container>
