@@ -106,3 +106,10 @@ mat-form-field {
 .only-verified {
   padding: 0 4px;
 }
+
+.visibility-hidden {
+  justify-content: end !important;
+  button {
+    margin-inline-end: 8px;
+  }
+}

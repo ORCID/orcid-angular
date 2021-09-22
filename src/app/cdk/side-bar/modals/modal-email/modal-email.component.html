@@ -263,7 +263,12 @@
             </ng-container>
           </div>
 
-          <div class="actions-sub-wrapper">
+          <div
+            class="actions-sub-wrapper"
+            [ngClass]="{
+                'visibility-hidden': !showVisibility(email.putCode)
+              }"
+          >
             <app-privacy-selector
               [hidden]="!showVisibility(email.putCode)"
               formControlName="visibility"
