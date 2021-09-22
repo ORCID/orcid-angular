@@ -66,12 +66,7 @@
               appearance="outline"
               class="mat-form-field-min verify-icon"
             >
-              <input
-                matInput
-                formControlName="email"
-                type="email"
-                appTrim
-              />
+              <input matInput formControlName="email" type="email" appTrim />
               <mat-icon matPrefix>verified</mat-icon>
 
               <mat-error
@@ -266,8 +261,8 @@
           <div
             class="actions-sub-wrapper"
             [ngClass]="{
-                'visibility-hidden': !showVisibility(email.putCode)
-              }"
+              'visibility-hidden': !showVisibility(email.putCode)
+            }"
           >
             <app-privacy-selector
               [hidden]="!showVisibility(email.putCode)"
@@ -290,12 +285,13 @@
           class="mat-caption only-verified"
           i18n="@@sideBar.onlyVerifiedEmail"
           *ngIf="
-                  (emailsForm.get([email.putCode, 'visibility']).touched || emailsForm.get([email.putCode, 'visibility']).dirty)
-                  && emailsForm.hasError('unverified', [email.putCode, 'visibility'])
-                "
+            (emailsForm.get([email.putCode, 'visibility']).touched ||
+              emailsForm.get([email.putCode, 'visibility']).dirty) &&
+            emailsForm.hasError('unverified', [email.putCode, 'visibility'])
+          "
         >
-          Only verified email addresses can be displayed publicly or shared with trusted parties. Please verify your
-          email
+          Only verified email addresses can be displayed publicly or shared with
+          trusted parties. Please verify your email
         </mat-error>
       </div>
       <div class="col l12 m8 s4">

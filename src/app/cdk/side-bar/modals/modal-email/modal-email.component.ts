@@ -166,9 +166,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         visibility: new FormControl(
           existingEmail ? existingEmail.visibility : this.defaultVisibility,
           {
-            validators: [
-              this.emailsIsUnverified(newPutCode)
-            ],
+            validators: [this.emailsIsUnverified(newPutCode)],
           }
         ),
       })
@@ -230,7 +228,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   emailsIsUnverified(controlKey): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (control.value !== 'PRIVATE' && !this.showEmailAsVerified(controlKey)) {
+      if (
+        control.value !== 'PRIVATE' &&
+        !this.showEmailAsVerified(controlKey)
+      ) {
         return {
           unverified: true,
         }
