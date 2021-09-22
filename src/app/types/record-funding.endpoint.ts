@@ -44,7 +44,7 @@ export interface Funding extends AssertionBase {
   region: Value
   country: Value
   countryForDisplay?: string
-  TypeForDisplay?: string
+  typeForDisplay?: string
   dateSortString?: MonthDayYearDate
   fullyLoaded?: boolean
 }
