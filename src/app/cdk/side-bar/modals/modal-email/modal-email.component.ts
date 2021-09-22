@@ -165,7 +165,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         }),
         visibility: new FormControl(
           existingEmail ? existingEmail.visibility : this.defaultVisibility,
-          {}
+          {
+            validators: [
+              this.emailsIsUnverified(newPutCode)
+            ],
+          }
         ),
       })
     )
@@ -218,6 +222,21 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       if (formGroupKeysWithDuplicatedValues.indexOf(controlKey) >= 0) {
         return {
           duplicated: true,
+        }
+      }
+      return {}
+    }
+  }
+
+  emailsIsUnverified(controlKey): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      console.log(controlKey)
+      console.log(control.value)
+      console.log(this.showEmailAsVerified(controlKey))
+
+      if (control.value !== 'PRIVATE' && !this.showEmailAsVerified(controlKey)) {
+        return {
+          unverified: true,
         }
       }
       return {}
@@ -322,6 +341,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       (email) => email.value === formValue
     )
     return realEmailBackendContext && !realEmailBackendContext.verified
+  }
+
+  showVisibility(controlKey: string): boolean {
+    const formValue = this.emailsForm.value[controlKey]?.email
+    const realEmailBackendContext = this.originalEmailsBackendCopy.find(
+      (email) => email.value === formValue
+    )
+    return !!realEmailBackendContext
   }
 
   verificationEmailWasSend(controlKey: string) {

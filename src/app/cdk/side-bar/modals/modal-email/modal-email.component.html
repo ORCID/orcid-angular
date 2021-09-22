@@ -68,7 +68,6 @@
             >
               <input
                 matInput
-                matInput
                 formControlName="email"
                 type="email"
                 appTrim
@@ -266,6 +265,7 @@
 
           <div class="actions-sub-wrapper">
             <app-privacy-selector
+              [hidden]="!showVisibility(email.putCode)"
               formControlName="visibility"
             ></app-privacy-selector>
             <button
@@ -281,6 +281,17 @@
           </div>
         </div>
         <hr *ngIf="isMobile" />
+        <mat-error
+          class="mat-caption only-verified"
+          i18n="@@sideBar.onlyVerifiedEmail"
+          *ngIf="
+                  (emailsForm.get([email.putCode, 'visibility']).touched || emailsForm.get([email.putCode, 'visibility']).dirty)
+                  && emailsForm.hasError('unverified', [email.putCode, 'visibility'])
+                "
+        >
+          Only verified email addresses can be displayed publicly or shared with trusted parties. Please verify your
+          email
+        </mat-error>
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
