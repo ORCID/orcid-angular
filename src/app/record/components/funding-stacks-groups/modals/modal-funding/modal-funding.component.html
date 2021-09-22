@@ -642,103 +642,13 @@
           let last = last
         "
       >
-        <ng-container [formGroupName]="i">
-          <!-- Grant number value -->
-          <div>
-            <div class="row">
-              <label for="grant-number-input" class="mat-caption">
-                <strong i18n="@@funding.grantNumber">Granting number </strong>
-              </label>
-            </div>
-            <mat-form-field
-              appearance="outline"
-              class="mat-form-field-min larger-input-margin"
-            >
-              <input
-                id="grant-number-input"
-                matInput
-                formControlName="grantNumber"
-              />
-            </mat-form-field>
-          </div>
+        [formGroupName]="i"
 
-          <!-- Grant link value -->
-          <div class="row">
-            <label
-              for="grant-url-input"
-              class="mat-caption"
-              [ngClass]="{
-                error:
-                  grantsGroup.hasError('pattern', 'grantUrl') &&
-                  grantsGroup.get('grantUrl').touched
-              }"
-            >
-              <strong i18n="@@funding.grantUrl">Granting link </strong>
-            </label>
+        <app-funding-external-identifiers-edit
+          [grantForm]="$any(grantsGroup)"
+          [index]="i"
+        ></app-funding-external-identifiers-edit>
 
-            <mat-form-field
-              appearance="outline"
-              class="mat-form-field-min larger-input-margin"
-            >
-              <input id="grant-url-input" matInput formControlName="grantUrl" />
-
-              <mat-hint i18n="@@funding.grantUrlHint">
-                A link to more information about the funding award
-              </mat-hint>
-              <mat-error
-                *ngIf="grantsGroup.get('grantUrl').hasError('pattern')"
-                i18n="@@funding.invalidUrl"
-              >
-                Invalid URL
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <!-- Funding relationship -->
-          <div>
-            <div class="row relationship">
-              <label
-                class="mat-caption"
-                [ngClass]="{
-                  error:
-                    grantsGroup.hasError('required', 'fundingRelationship') &&
-                    grantsGroup.get('fundingRelationship').touched
-                }"
-              >
-                <strong i18n="@@funding.relationship">Relationship</strong>
-                <span class="required">*</span>
-              </label>
-            </div>
-
-            <div class="row">
-              <mat-radio-group
-                aria-label="Select an option"
-                class="mat-form-field-min"
-                formControlName="fundingRelationship"
-              >
-                <ng-container *ngFor="let value of fundingRelationships">
-                  <mat-radio-button [value]="value"
-                    >{{ value | recordFundingRelationshipLabel }}
-                  </mat-radio-button>
-                  <mat-hint class="mat-caption"
-                    >{{ value | recordFundingRelationshipHintLabel }}
-                  </mat-hint>
-                </ng-container>
-              </mat-radio-group>
-              <div class="col l3 delete-grant">
-                <button
-                  mat-icon-button
-                  (click)="deleteGrant(i)"
-                  *ngIf="grantsArray.controls.length > 1 && i > 0"
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-        <hr *ngIf="!last" />
       </ng-container>
 
       <!-- Add another -->

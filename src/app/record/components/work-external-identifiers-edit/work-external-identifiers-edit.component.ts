@@ -3,11 +3,11 @@ import { AbstractControl, FormGroup } from '@angular/forms'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
-  selector: 'app-external-identifiers-edit',
-  templateUrl: './external-identifiers-edit.component.html',
-  styleUrls: ['./external-identifiers-edit.component.scss'],
+  selector: 'app-work-external-identifiers-edit',
+  templateUrl: './work-external-identifiers-edit.component.html',
+  styleUrls: ['./work-external-identifiers-edit.component.scss'],
 })
-export class ExternalIdentifiersEditComponent implements OnInit {
+export class WorkExternalIdentifiersEditComponent implements OnInit {
   @Input() externalIdForm: FormGroup
   @Input() index: number
   @Input() workIdTypes: WorkIdType[]

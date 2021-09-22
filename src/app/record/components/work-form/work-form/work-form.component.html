@@ -453,19 +453,19 @@
         *ngIf="workIdentifiersFormArrayDisplayState[i]"
         [formGroupName]="i"
       >
-        <app-external-identifiers-edit
+        <app-work-external-identifiers-edit
           [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
           [workIdTypes]="workIdTypes"
           (cancelEvent)="cancelExternalIdEdit(i)"
           [index]="i"
-        ></app-external-identifiers-edit>
+        ></app-work-external-identifiers-edit>
       </ng-container>
       <ng-container *ngIf="!workIdentifiersFormArrayDisplayState[i]">
-        <app-external-identifiers-view-only
+        <app-work-external-identifiers-view-only
           [workIdentifier]="workIdentifiersFormArray.controls[i].value"
           (edit)="workIdentifiersFormArrayDisplayState[i] = true"
           (delete)="deleteWorkId(i)"
-        ></app-external-identifiers-view-only>
+        ></app-work-external-identifiers-view-only>
       </ng-container>
     </div>
     <!-- Add other identifier  -->

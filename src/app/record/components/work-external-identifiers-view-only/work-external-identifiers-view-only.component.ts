@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 @Component({
-  selector: 'app-external-identifiers-view-only',
-  templateUrl: './external-identifiers-view-only.component.html',
-  styleUrls: ['./external-identifiers-view-only.component.scss'],
+  selector: 'app-work-external-identifiers-view-only',
+  templateUrl: './work-external-identifiers-view-only.component.html',
+  styleUrls: ['./work-external-identifiers-view-only.component.scss'],
 })
-export class ExternalIdentifiersViewOnlyComponent implements OnInit {
+export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
   typeLabel = $localize`:@@record.type:Type:`
   valueLabel = $localize`:@@record.type:Value:`
   urlLabel = $localize`:@@record.type:Url:`

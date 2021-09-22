@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExternalIdentifiersEditComponent } from './external-identifiers-edit.component';
+import { WorkExternalIdentifiersEditComponent } from './work-external-identifiers-edit.component';
 
 describe('ExternalIdentifiersEditComponent', () => {
-  let component: ExternalIdentifiersEditComponent;
-  let fixture: ComponentFixture<ExternalIdentifiersEditComponent>;
+  let component: WorkExternalIdentifiersEditComponent;
+  let fixture: ComponentFixture<WorkExternalIdentifiersEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExternalIdentifiersEditComponent ]
+      declarations: [ WorkExternalIdentifiersEditComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExternalIdentifiersEditComponent);
+    fixture = TestBed.createComponent(WorkExternalIdentifiersEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

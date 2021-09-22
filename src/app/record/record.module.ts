@@ -66,8 +66,10 @@ import { WorkBibtexModalComponent } from './components/work-stack-group/modals/w
 import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
 import { WorkExternalIdModalComponent } from './components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
 import { WorkFormComponent } from './components/work-form/work-form/work-form.component'
-import { ExternalIdentifiersEditComponent } from './components/external-identifiers-edit/external-identifiers-edit.component'
-import { ExternalIdentifiersViewOnlyComponent } from './components/external-identifiers-view-only/external-identifiers-view-only.component'
+import { WorkExternalIdentifiersEditComponent } from './components/work-external-identifiers-edit/work-external-identifiers-edit.component'
+import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
+import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
+import { FundingExternalIdentifiersEditComponent } from './components/funding-external-identifiers-edit/funding-external-identifiers-edit.component'
 
 @NgModule({
   declarations: [
@@ -112,8 +114,10 @@ import { ExternalIdentifiersViewOnlyComponent } from './components/external-iden
     WorkBibtexModalComponent,
     WorkExternalIdModalComponent,
     WorkFormComponent,
-    ExternalIdentifiersEditComponent,
-    ExternalIdentifiersViewOnlyComponent,
+    WorkExternalIdentifiersEditComponent,
+    WorkExternalIdentifiersViewOnlyComponent,
+    FundingExternalIdentifiersEditComponent,
+    FundingExternalIdentifiersViewOnlyComponent,
   ],
   imports: [
     CommonModule,
