@@ -136,8 +136,7 @@
           *ngIf="email.primary && !showEmailAsVerified(email.putCode)"
           class="orc-font-body-small"
         >
-          <ng-container
-            *ngIf="verificationEmailWasSend(email.putCode)">
+          <ng-container *ngIf="verificationEmailWasSend(email.putCode)">
             <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
               >Please verify your primary email address!</strong
             >
@@ -156,7 +155,9 @@
 
             <p>
               <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
-              <ng-container i18n="@@side-bar.visitOur"> Visit our </ng-container>
+              <ng-container i18n="@@side-bar.visitOur">
+                Visit our
+              </ng-container>
               <a
                 class="underline"
                 target="_blank"
@@ -180,12 +181,11 @@
               </a>
             </p>
           </ng-container>
-          <ng-container
-            *ngIf="!verificationEmailWasSend(email.putCode)">
+          <ng-container *ngIf="!verificationEmailWasSend(email.putCode)">
             <strong class="orc-font-body"
-            ><ng-container i18n="@@side-bar.weHaveSentAEmail"
-            >We’ve sent a verification email to</ng-container
-            >
+              ><ng-container i18n="@@side-bar.weHaveSentAEmail"
+                >We’ve sent a verification email to</ng-container
+              >
               {{ email.value }}</strong
             >
             <p i18n="@@side-bar.pleaseCheckYour">
