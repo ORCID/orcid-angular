@@ -101,14 +101,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * @returns A JSON build for the backend
    */
 
-  private formToBackend(
+  private formToOtherNames(
     emailForm: FormGroup,
     emails: AssertionVisibilityString[]
-  ): EmailsEndpoint {
-    const endpointCall: EmailsEndpoint = {
-      errors: [],
-      emails: [],
-    }
+  ): AssertionVisibilityString[] {
+    const allEmails = []
 
     emails
       .map((email) => email.putCode)
@@ -120,14 +117,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         const primary = emails[i].primary
 
         if (emailForm.value[key]) {
-          endpointCall.emails.push({
+          allEmails.push({
             value,
             visibility,
             primary,
           } as AssertionVisibilityString)
         }
       })
-    return endpointCall
+    return allEmails
   }
 
   /**
@@ -313,11 +310,21 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     if (this.emailsForm.valid) {
-      const data = this.formToBackend(this.emailsForm, this.emails)
-      this._recordEmails.postEmails(data).pipe(first()).subscribe()
+      const data = this.formToOtherNames(this.emailsForm, this.emails)
+      const emailNewPrimary = data.filter((email) => email.primary)[0].value
+      const emailOldPrimary = this.emails.filter((email) => email.primary)[0].value
+      const otherNames = {
+        emails: data.filter((email) => !email.primary),
+        errors: []
+      }
+      if (emailNewPrimary !== emailOldPrimary) {
+        this._recordEmails.editEmail(emailOldPrimary, emailNewPrimary).pipe(first()).subscribe()
+      }
+      if (otherNames.emails.length > 0) {
+        this._recordEmails.postEmails(otherNames).pipe(first()).subscribe()
+      }
       this.closeEvent()
-    }
-    {
+    } else {
       this._snackBar.showValidationError()
     }
   }
