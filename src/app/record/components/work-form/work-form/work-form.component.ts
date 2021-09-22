@@ -73,13 +73,10 @@ export class WorkFormComponent implements OnInit {
     .map((i, idx) => idx + 1)
   citationTypes = CitationTypes
 
-  workRelationships: WorkRelationships[] = Object.keys(
-    WorkRelationships
-  ) as WorkRelationships[]
-
   dynamicTitle = WorksTitleName.journalTitle
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
+  workIdentifiersFormArrayDisplayState: boolean[] = []
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -114,6 +111,9 @@ export class WorkFormComponent implements OnInit {
     this._platform.get().subscribe((value) => {
       this.platform = value
     })
+
+    console.log('LOAD WITH')
+    console.log(this.work)
 
     this.loadWorkForm(this.work)
     this.observeFormChanges()
@@ -156,7 +156,7 @@ export class WorkFormComponent implements OnInit {
       })
   }
 
-  private loadWorkForm(currentWork: Work) {
+  private loadWorkForm(currentWork: Work): void {
     this.workForm = this._fb.group({
       workCategory: [
         currentWork?.workCategory?.value || '',
@@ -272,23 +272,28 @@ export class WorkFormComponent implements OnInit {
     })
   }
 
-  addOtherWorkId(externalId?: ExternalIdentifier) {
+  addOtherWorkId(existingExternalId?: ExternalIdentifier) {
+    if (existingExternalId) {
+      this.workIdentifiersFormArrayDisplayState.push(false)
+    } else {
+      this.workIdentifiersFormArrayDisplayState.push(true)
+    }
     this.workIdentifiersFormArray.push(
       this._fb.group({
         externalIdentifierType: [
-          externalId?.externalIdentifierType?.value || '',
+          existingExternalId?.externalIdentifierType?.value || '',
           [],
         ],
         externalIdentifierId: [
-          externalId?.externalIdentifierId?.value || '',
+          existingExternalId?.externalIdentifierId?.value || '',
           [],
         ],
         externalIdentifierUrl: [
-          externalId?.url?.value || '',
+          existingExternalId?.url?.value || '',
           [Validators.pattern(URL_REGEXP)],
         ],
         externalRelationship: [
-          externalId?.relationship?.value || WorkRelationships.self,
+          existingExternalId?.relationship?.value || WorkRelationships.self,
           [],
         ],
       })
@@ -299,6 +304,7 @@ export class WorkFormComponent implements OnInit {
     )
   }
   deleteWorkId(id: number) {
+    this.workIdentifiersFormArrayDisplayState.splice(id, 1)
     this.workIdentifiersFormArray.removeAt(id)
   }
 
@@ -383,6 +389,19 @@ export class WorkFormComponent implements OnInit {
       this._workService.save(work).subscribe((value) => {
         this._dialogRef.close()
       })
+    }
+  }
+
+  cancelExternalIdEdit(id: number) {
+    if (
+      this.workIdentifiersFormArray.controls[id] &&
+      !this.workIdentifiersFormArray.controls[id].value
+        .externalIdentifierType &&
+      !this.workIdentifiersFormArray.controls[id].value.externalIdentifierId
+    ) {
+      this.deleteWorkId(id)
+    } else {
+      this.workIdentifiersFormArrayDisplayState[id] = false
     }
   }
 
