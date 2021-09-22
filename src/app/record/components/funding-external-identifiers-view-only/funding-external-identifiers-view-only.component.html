@@ -1,13 +1,13 @@
 <div class="externalIds">
   <app-panel-data-line
     *ngIf="grant?.grantNumber"
-    [title]="typeLabel"
+    [title]="grantNumberLabel"
     [content]="grant.grantNumber"
   ></app-panel-data-line>
 
   <app-panel-data-line
     *ngIf="grant?.grantUrl"
-    [title]="valueLabel"
+    [title]="grantUrlLabel"
     [content]="grant.grantUrl"
     [url]="grant.grantUrl"
   >
@@ -15,7 +15,7 @@
 
   <app-panel-data-line
     *ngIf="grant?.fundingRelationship"
-    [title]="urlLabel"
+    [title]="fundingRelationshipLabel"
     [content]="grant.fundingRelationship"
   >
   </app-panel-data-line>
