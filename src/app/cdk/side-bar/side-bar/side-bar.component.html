@@ -53,6 +53,7 @@
       class="side-bar"
       id="websites-panel"
       [(openState)]="websiteOpenState"
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
       *ngIf="
         userRecord?.website?.websites &&
         (!isPublicRecord || userRecord.website.websites.length > 0)
@@ -149,6 +150,7 @@
       class="side-bar"
       id="keywords-panel"
       [(openState)]="keywordOpenState"
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
       <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0">
@@ -209,6 +211,7 @@
       class="side-bar"
       id="countries-panel"
       [(openState)]="addressOpenState"
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
       <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">

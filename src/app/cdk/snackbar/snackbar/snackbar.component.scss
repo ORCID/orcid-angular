@@ -4,16 +4,17 @@
   overflow-wrap: anywhere;
 }
 
-button {
+.close-button-container {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 4px;
   [dir='rtl'] & {
     left: 0;
   }
+  width: 50px;
 }
 
-mat-icon {
+mat-icon.errorGroup {
   margin-top: 8px;
   font-size: 30px;
   height: 30px;

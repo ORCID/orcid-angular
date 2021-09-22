@@ -82,6 +82,7 @@ export class PanelComponent implements OnInit {
 
   @Input() isUserSource = false
   @Input() userVersionPresent: boolean
+  @Input() id: string
   selected: boolean
 
   formVisibility: FormGroup
@@ -150,6 +151,7 @@ export class PanelComponent implements OnInit {
             maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
             data: this.userRecord,
           })
+          modalComponent.componentInstance.id = this.id
           modalComponent.componentInstance.options = options
           modalComponent.componentInstance.type = this.type
           modalComponent.componentInstance.affiliation = this.elements

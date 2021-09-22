@@ -32,6 +32,7 @@ import { cloneDeep } from 'lodash'
 import * as _ from 'lodash'
 import { UserService } from '../../../../core'
 import { URL_REGEXP, URL_REGEXP_BACKEND } from '../../../../constants'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-modal-websites',
@@ -43,6 +44,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  id: string
   websitesForm: FormGroup
   platform: PlatformInfo
   defaultVisibility: VisibilityStrings
@@ -63,7 +65,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _userService: UserService,
-    private _recordWebsitesService: RecordWebsitesService
+    private _recordWebsitesService: RecordWebsitesService,
+    private _snackBar: SnackbarService
   ) {
     this._platform
       .get()
@@ -107,15 +110,21 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     websites.forEach((website) => {
       group[website.putCode] = new FormGroup({
-        description: new FormControl(website.urlName),
-        url: new FormControl(website.url.value, {
-          validators: [
-            Validators.required,
-            Validators.pattern(URL_REGEXP_BACKEND),
-            this.allUrlsAreUnique(website.putCode),
-          ],
-          updateOn: 'change',
+        description: new FormControl({
+          value: website.urlName,
+          disabled: website.source !== this.id,
         }),
+        url: new FormControl(
+          { value: website.url.value, disabled: website.source !== this.id },
+          {
+            validators: [
+              Validators.required,
+              Validators.pattern(URL_REGEXP_BACKEND),
+              this.allUrlsAreUnique(website.putCode),
+            ],
+            updateOn: 'change',
+          }
+        ),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
     })
@@ -165,6 +174,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           },
           (error) => {}
         )
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 

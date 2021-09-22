@@ -8,7 +8,7 @@ import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
 import { isEmpty } from 'lodash'
-import { Assertion } from '../../../types'
+import { Assertion, UserInfo } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
 
 @Component({
@@ -23,6 +23,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() isPublicRecord: string
 
+  userInfo: UserInfo
   userRecord: UserRecord
   userStatus: UserStatus
 
@@ -65,6 +66,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
+        this.userInfo = userRecord.userInfo
         if (!isEmpty(userRecord.otherNames)) {
           this.setNames(userRecord)
         }

@@ -11,6 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, switchMap, take, takeUntil } from 'rxjs/operators'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
@@ -44,6 +45,7 @@ import { OrcidValidators } from '../../../../../validators'
 export class ModalNameComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  id: string
   platform: PlatformInfo
   namesForm: FormGroup
   otherNamesForm: FormGroup
@@ -71,7 +73,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _userSession: UserService
+    private _userSession: UserService,
+    private _snackBar: SnackbarService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -121,7 +124,10 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
     otherNames.forEach((otherName) => {
       group[otherName.putCode] = new FormGroup({
-        otherName: new FormControl(otherName.content),
+        otherName: new FormControl({
+          value: otherName.content,
+          disabled: otherName.source !== this.id,
+        }),
         visibility: new FormControl(otherName.visibility.visibility, {}),
       })
     })
@@ -227,6 +233,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           },
           (error) => {}
         )
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 

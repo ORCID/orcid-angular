@@ -51,11 +51,9 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
 import { ModalBiographyComponent } from './components/top-bar/modals/modal-biography/modal-biography.component'
 import { ModalNameComponent } from './components/top-bar/modals/modal-name/modal-name.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
-import { WorkModalComponent } from './components/work-modal/work-modal.component'
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { ModalCombineWorksComponent } from './components/work/modals/modal-combine-works/modal-combine-works.component'
-import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
 import { WorkComponent } from './components/work/work.component'
 import { MyOrcidComponent } from './pages/my-orcid/my-orcid.component'
 import { RecordRoutingModule } from './record-routing.module'
@@ -67,9 +65,11 @@ import { ModalWorksSearchLinkComponent } from './components/work-stack-group/mod
 import { WorkExternalIdModalComponent } from './components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
 import { WorkFormComponent } from './components/work-form/work-form/work-form.component'
 import { WorkExternalIdentifiersEditComponent } from './components/work-external-identifiers-edit/work-external-identifiers-edit.component'
-import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
-import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
 import { FundingExternalIdentifiersEditComponent } from './components/funding-external-identifiers-edit/funding-external-identifiers-edit.component'
+import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
+import { WorkModalComponent } from './components/work-modal/work-modal.component'
+import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
+import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
 
 @NgModule({
   declarations: [
@@ -96,7 +96,6 @@ import { FundingExternalIdentifiersEditComponent } from './components/funding-ex
     TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
     NotFoundComponent,
-    WorkModalComponent,
     ModalAffiliationsComponent,
     OrgIdentifierComponent,
     ModalFundingComponent,
@@ -118,6 +117,8 @@ import { FundingExternalIdentifiersEditComponent } from './components/funding-ex
     WorkExternalIdentifiersViewOnlyComponent,
     FundingExternalIdentifiersEditComponent,
     FundingExternalIdentifiersViewOnlyComponent,
+    WorkFormComponent,
+    WorkModalComponent,
   ],
   imports: [
     CommonModule,

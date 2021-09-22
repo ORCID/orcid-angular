@@ -41,6 +41,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService
   ) {}
 
+  id: string
   addedEmailsCount = 0
   countryForm: FormGroup
   countries: Address[]
@@ -104,7 +105,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
     countries.forEach((country) => {
       group[country.putCode] = new FormGroup({
-        country: new FormControl(country.countryName),
+        country: new FormControl({
+          value: country.countryName,
+          disabled: country.source !== this.id,
+        }),
         visibility: new FormControl(country.visibility.visibility, {}),
       })
     })

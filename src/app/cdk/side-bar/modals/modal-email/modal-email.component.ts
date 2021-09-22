@@ -20,6 +20,7 @@ import { Subject } from 'rxjs'
 import { first, takeUntil, tap } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
@@ -50,7 +51,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     public _recordEmails: RecordEmailsService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _snackBar: SnackbarService
   ) {}
 
   tempPrivacyState = 'PUBLIC'
@@ -298,6 +300,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       const data = this.formToBackend(this.emailsForm, this.emails)
       this._recordEmails.postEmails(data).pipe(first()).subscribe()
       this.closeEvent()
+    }
+    {
+      this._snackBar.showValidationError()
     }
   }
 

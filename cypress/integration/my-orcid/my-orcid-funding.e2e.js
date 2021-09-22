@@ -3,7 +3,7 @@ import { environment } from '../../cypress.env'
 const randomUser = require('../../helpers/randomUser')
 const runInfo = require('../../helpers/runInfo')
 
-describe.only('Funding' + runInfo(), () => {
+describe('Funding' + runInfo(), () => {
   before(() => {
     cy.programmaticSignin('testUser')
   })
