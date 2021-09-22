@@ -230,10 +230,6 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   emailsIsUnverified(controlKey): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      console.log(controlKey)
-      console.log(control.value)
-      console.log(this.showEmailAsVerified(controlKey))
-
       if (control.value !== 'PRIVATE' && !this.showEmailAsVerified(controlKey)) {
         return {
           unverified: true,
