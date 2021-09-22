@@ -10,7 +10,6 @@ export class FundingExternalIdentifiersViewOnlyComponent implements OnInit {
   grantUrlLabel = $localize`:@@record.grantUrl:Grant URL:`
   fundingRelationshipLabel = $localize`:@@record.relationship:Relationship:`
 
-
   @Output() edit = new EventEmitter<void>()
   @Output() delete = new EventEmitter<void>()
 
