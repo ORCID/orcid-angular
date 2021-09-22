@@ -312,13 +312,17 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     if (this.emailsForm.valid) {
       const data = this.formToOtherNames(this.emailsForm, this.emails)
       const emailNewPrimary = data.filter((email) => email.primary)[0].value
-      const emailOldPrimary = this.emails.filter((email) => email.primary)[0].value
+      const emailOldPrimary = this.emails.filter((email) => email.primary)[0]
+        .value
       const otherNames = {
         emails: data.filter((email) => !email.primary),
-        errors: []
+        errors: [],
       }
       if (emailNewPrimary !== emailOldPrimary) {
-        this._recordEmails.editEmail(emailOldPrimary, emailNewPrimary).pipe(first()).subscribe()
+        this._recordEmails
+          .editEmail(emailOldPrimary, emailNewPrimary)
+          .pipe(first())
+          .subscribe()
       }
       if (otherNames.emails.length > 0) {
         this._recordEmails.postEmails(otherNames).pipe(first()).subscribe()

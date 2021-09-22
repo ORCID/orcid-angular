@@ -91,9 +91,13 @@ export class RecordEmailsService {
 
   editEmail(original: string, edited: string): Observable<EmailsEndpoint> {
     return this._http
-      .post<Assertion>(environment.API_WEB + `account/email/edit.json`, { original, edited }, {
-        headers: this.headers,
-      })
+      .post<Assertion>(
+        environment.API_WEB + `account/email/edit.json`,
+        { original, edited },
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
