@@ -1,0 +1,36 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header>
+    <mat-icon>info</mat-icon>
+    <ng-container
+      i18n="@@record.pleaseVerifyYourPrimary"
+    >
+      Please verify your primary email address
+    </ng-container>
+  </app-modal-header>
+  <div
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div class="col">
+      <mat-icon>info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3">
+      <p i18n="@@record.youNeedToVerify">
+        You need to verify your primary email address in order to access all of ORCID’s editing features.
+      </p>
+      <p i18n="@@record.toVerifyYourEmail">
+        To verify your email please click the link in the message we have sent to:
+      </p>
+      <p >
+        <strong i18n="@@record.iDontHave">
+          I don’t have the verification email
+        </strong>
+        <ng-container i18n="@@record.toVerifyYourEmail">
+          To verify your email please click the link in the message we have sent to:
+        </ng-container>
+      </p>
+    </div>
+  </div>
+</app-modal>

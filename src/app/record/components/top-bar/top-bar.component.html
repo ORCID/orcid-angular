@@ -15,6 +15,11 @@
   [onlyShowPrintButton]="!platform.columns12"
 ></app-top-bar-actions>
 
+<app-top-bar-verification-email
+  [userRecord]="userRecord"
+>
+</app-top-bar-verification-email>
+
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
   <app-panel
     *ngIf="userRecord?.names"
