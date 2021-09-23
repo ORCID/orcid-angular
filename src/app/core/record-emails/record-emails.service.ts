@@ -73,11 +73,11 @@ export class RecordEmailsService {
     return this.$emailsSubject
   }
 
-  postEmails(otherNames: EmailsEndpoint): Observable<EmailsEndpoint> {
+  postEmails(emails: EmailsEndpoint): Observable<EmailsEndpoint> {
     return this._http
       .post<EmailsEndpoint>(
         environment.API_WEB + `account/emails.json`,
-        otherNames,
+        emails,
         {
           headers: this.headers,
         }
@@ -130,6 +130,20 @@ export class RecordEmailsService {
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails())
       )
+  }
+
+  emailVisibility(email): Observable<any> {
+    const encoded_data = JSON.stringify( email );
+
+    return this._http.post(
+      environment.API_WEB + `account/email/visibility`,
+      encoded_data,
+      { headers: this.headers }
+    )   .pipe(
+      retry(3),
+      catchError((error) => this._errorHandler.handleError(error)),
+      switchMap(() => this.getEmails({ forceReload: true }))
+    )
   }
 
   setAsPrimaryEmail(email: Assertion): Observable<EmailsEndpoint> {
