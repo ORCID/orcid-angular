@@ -79,6 +79,15 @@
                   placeholder=" {{ ngOrcidDescription }}"
                   [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
                 />
+                <mat-error
+                  *ngIf="
+                    websitesForm.get(website.putCode).get('description')?.errors
+                      ?.maxlength
+                  "
+                  i18n="@@topBar.urlMaxLength"
+                >
+                  Must be less then 355 characters
+                </mat-error>
               </mat-form-field>
               <mat-form-field
                 appearance="outline"

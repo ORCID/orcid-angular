@@ -199,7 +199,7 @@
 
     <div class="row">
       <h3 class="orc-font-body-small" i18n="@@side-bar.otherEmails">
-        Other email address
+        Other email addresses
       </h3>
     </div>
 
@@ -270,7 +270,7 @@
               (click)="makePrimary(email)"
               i18n="@@side-bar.makePrimary"
             >
-              Make primary</a
+              Make primary email</a
             >
 
             <ng-container *ngIf="showNonVerifiedData(email.putCode)">
@@ -355,10 +355,7 @@
     <div class="row orc-font-body-small">
       <a class="col add-more" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container *ngIf="emails.length === 1" i18n="@@side-bar.otherEmail">
-          Add other email address
-        </ng-container>
-        <ng-container *ngIf="emails.length > 1" i18n="@@side-bar.anotherEmail">
+        <ng-container i18n="@@side-bar.anotherEmail">
           Add another email address
         </ng-container>
       </a>
