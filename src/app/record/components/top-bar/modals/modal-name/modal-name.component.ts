@@ -195,7 +195,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       .map((value) => value.putCode)
       .filter((key) => namesForm.value[key].otherName)
       .forEach((key, i) => {
-        const otherName = namesForm.value[key].otherName
+        const otherName = namesForm.value[key].otherName.trim()
         const visibility = namesForm.value[key].visibility
         if (namesForm.value[key]) {
           otherNames.otherNames.push({
