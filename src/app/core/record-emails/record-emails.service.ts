@@ -133,17 +133,17 @@ export class RecordEmailsService {
   }
 
   emailVisibility(email): Observable<any> {
-    const encoded_data = JSON.stringify( email );
+    const encoded_data = JSON.stringify(email)
 
-    return this._http.post(
-      environment.API_WEB + `account/email/visibility`,
-      encoded_data,
-      { headers: this.headers }
-    )   .pipe(
-      retry(3),
-      catchError((error) => this._errorHandler.handleError(error)),
-      switchMap(() => this.getEmails({ forceReload: true }))
-    )
+    return this._http
+      .post(environment.API_WEB + `account/email/visibility`, encoded_data, {
+        headers: this.headers,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap(() => this.getEmails({ forceReload: true }))
+      )
   }
 
   setAsPrimaryEmail(email: Assertion): Observable<EmailsEndpoint> {
