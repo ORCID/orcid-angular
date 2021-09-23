@@ -21,7 +21,6 @@ export class PanelSourceComponent implements OnInit {
   @Input() sourceName
   @Input() assertionOriginOrcid
   @Input() assertionOriginName
-  @Input() assertionOriginClientId
   @Input() stackLength
   @Input() item: Affiliation | Funding | ResearchResource | Work | PeerReview
   @Input() type:

@@ -1,3 +1,9 @@
 <strong i18n="@@shared.source">Source: </strong>
-<p>{{ name }} {{ date }}</p>
+<p>
+  <ng-container *ngIf="assertion">
+    {{ assertion }}
+    <i i18n="@@shared.onBehalfOf">via</i>
+  </ng-container>
+  {{ name }} {{ date }}
+</p>
 <mat-divider *ngIf="!isLastItem"></mat-divider>
