@@ -170,7 +170,7 @@
                       </b>
                     </div>
                     <app-panel-element-source
-                      [hideSourceDivider]="true"
+                      [isLastItem]="last"
                       *ngIf="true"
                       [name]="otherNames.sourceName || otherNames.source"
                       [date]="otherNames.createdDate | monthDayYearDateToString"

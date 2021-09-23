@@ -9,7 +9,6 @@ import { Component, Input, OnInit } from '@angular/core'
   ],
 })
 export class PanelElementSourceComponent implements OnInit {
-  @Input() hideSourceDivider: boolean
   @Input() name: string
   @Input() date: string
   @Input() isLastItem: boolean
