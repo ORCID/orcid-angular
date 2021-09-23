@@ -87,7 +87,15 @@
                   formControlName="identifier"
                 />
                 <mat-hint class="mat-caption">
-                  <span><a [href]="personIdentifier.url" target="_blank" rel="me nofollow noopener noreferrer" i18n="@@shared.view">View</a>, </span>
+                  <span
+                    ><a
+                      [href]="personIdentifier.url"
+                      target="_blank"
+                      rel="me nofollow noopener noreferrer"
+                      i18n="@@shared.view"
+                      >View</a
+                    >,
+                  </span>
                   <span i18n="@@shared.source">Source:</span>
                   {{ getSourceName(personIdentifier) }},
                   <span i18n="@@shared.created">Created:</span>

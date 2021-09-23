@@ -12,7 +12,7 @@ import {
 import { Assertion } from '../../../../types'
 import { UserService } from '../../../../core'
 import { WINDOW } from '../../../window'
-import { FormControl, FormGroup, Validators} from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -99,15 +99,16 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
     keywords.forEach((keyword) => {
       group[keyword.putCode] = new FormGroup({
-        content: new FormControl({
-          value: keyword.content,
-          disabled: keyword.source !== this.id
-        }, {
-          validators: [
-            Validators.maxLength(this.keywordMaxLength)
-          ],
-          updateOn: 'change'
-        }),
+        content: new FormControl(
+          {
+            value: keyword.content,
+            disabled: keyword.source !== this.id,
+          },
+          {
+            validators: [Validators.maxLength(this.keywordMaxLength)],
+            updateOn: 'change',
+          }
+        ),
         visibility: new FormControl(keyword.visibility.visibility, {}),
       })
     })
@@ -145,12 +146,12 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     if (this.keywordsForm.valid) {
-    this.loadingKeywords = true
-    this._recordKeywordService
-      .postKeywords(this.formToBackend(this.keywordsForm))
-      .subscribe((response) => {
-        this.closeEvent()
-      })
+      this.loadingKeywords = true
+      this._recordKeywordService
+        .postKeywords(this.formToBackend(this.keywordsForm))
+        .subscribe((response) => {
+          this.closeEvent()
+        })
     } else {
       this._snackBar.showValidationError()
     }
@@ -170,9 +171,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
       newPutCode,
       new FormGroup({
         content: new FormControl('', {
-          validators: [
-            Validators.maxLength(this.keywordMaxLength)
-          ],
+          validators: [Validators.maxLength(this.keywordMaxLength)],
           updateOn: 'change',
         }),
         visibility: new FormControl(this.defaultVisibility, {}),
@@ -204,5 +203,4 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {}
-
 }

@@ -111,14 +111,16 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     websites.forEach((website) => {
       group[website.putCode] = new FormGroup({
-        description: new FormControl({
-          value: website.urlName,
-          disabled: website.source !== this.id },{
-          validators: [
-            Validators.maxLength(this.urlMaxLength)
-          ],
-          updateOn: 'change',
-        }),
+        description: new FormControl(
+          {
+            value: website.urlName,
+            disabled: website.source !== this.id,
+          },
+          {
+            validators: [Validators.maxLength(this.urlMaxLength)],
+            updateOn: 'change',
+          }
+        ),
         url: new FormControl(
           { value: website.url.value, disabled: website.source !== this.id },
           {
@@ -198,10 +200,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       newPutCode,
       new FormGroup({
         description: new FormControl('', {
-          validators: [
-            Validators.maxLength(this.urlMaxLength)
-          ],
-          updateOn: 'change'
+          validators: [Validators.maxLength(this.urlMaxLength)],
+          updateOn: 'change',
         }),
         url: new FormControl('', {
           validators: [
@@ -311,5 +311,4 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
-  
 }

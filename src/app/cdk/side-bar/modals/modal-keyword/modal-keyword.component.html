@@ -78,9 +78,14 @@
                   <span i18n="@@shared.created">Created:</span>
                   {{ keyword.createdDate | monthDayYearDateToString }}
                 </mat-hint>
-                
-                <mat-error *ngIf="keywordsForm.get(keyword.putCode)?.get('content')?.errors?.maxlength"
-                  i18n="@@topBar.keywordMaxLength">
+
+                <mat-error
+                  *ngIf="
+                    keywordsForm.get(keyword.putCode)?.get('content')?.errors
+                      ?.maxlength
+                  "
+                  i18n="@@topBar.keywordMaxLength"
+                >
                   Must be less then 100 characters
                 </mat-error>
               </mat-form-field>
