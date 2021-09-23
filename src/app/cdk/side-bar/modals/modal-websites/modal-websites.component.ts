@@ -220,11 +220,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.websites.splice(i, 1)
     this.websitesForm.removeControl(putCode)
   }
-
-  getSourceName(website: Assertion) {
-    return website.sourceName || website.source
-  }
-
+  
   toMyLinks() {
     this.window.document.getElementById('my-links').scrollIntoView()
   }

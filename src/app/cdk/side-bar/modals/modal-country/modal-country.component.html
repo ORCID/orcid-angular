@@ -83,13 +83,13 @@
                 </mat-option>
               </mat-select>
               <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-                <span i18n="@@shared.source">Source:</span>
-                {{ getSourceName(countriesMap[country.putCode]) }},
-                <span i18n="@@shared.created">Created:</span>
-                {{
-                  countriesMap[country.putCode].createdDate
-                    | monthDayYearDateToString
-                }}
+                <app-source-hit
+                  [createdDate]="countriesMap[country.putCode].createdDate"
+                  [source]="country.sourceName || country.source"
+                  [assertion]="
+                    country.assertionOriginName || country.assertionOriginOrcid
+                  "
+                ></app-source-hit>
               </mat-hint>
             </mat-form-field>
           </div>

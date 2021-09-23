@@ -269,36 +269,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.namesForm.removeControl(putCode)
   }
 
-  getSourceName(names: Assertion) {
-    if (names.sourceName) {
-      if (names.lastModified) {
-        return (
-          names.sourceName +
-          ' ' +
-          names.lastModified.year +
-          '-' +
-          names.lastModified.month +
-          '-' +
-          names.lastModified.day
-        )
-      } else {
-        return names.sourceName
-      }
-    } else if (names.source) {
-      if (names.lastModified) {
-        return (
-          names.source +
-          ' ' +
-          names.lastModified.year +
-          '-' +
-          names.lastModified.month +
-          '-' +
-          names.lastModified.day
-        )
-      }
-    }
-  }
-
   toGivenNames() {
     this.window.document.getElementById('given-names').scrollIntoView()
   }

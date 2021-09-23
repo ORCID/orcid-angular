@@ -178,10 +178,6 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     this.keywordsForm.removeControl(putcode)
   }
 
-  getSourceName(keyword: Assertion) {
-    return keyword.sourceName || keyword.source
-  }
-
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()

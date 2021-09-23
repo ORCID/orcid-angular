@@ -73,10 +73,14 @@
                   class="mat-caption"
                   *ngIf="keyword.putCode.indexOf('new') < 0"
                 >
-                  <span i18n="@@shared.source">Source:</span>
-                  {{ getSourceName(keyword) }},
-                  <span i18n="@@shared.created">Created:</span>
-                  {{ keyword.createdDate | monthDayYearDateToString }}
+                  <app-source-hit
+                    [createdDate]="keyword.createdDate"
+                    [source]="keyword.sourceName || keyword.source"
+                    [assertion]="
+                      keyword.assertionOriginName ||
+                      keyword.assertionOriginOrcid
+                    "
+                  ></app-source-hit>
                 </mat-hint>
               </mat-form-field>
             </div>

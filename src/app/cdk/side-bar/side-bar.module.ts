@@ -19,7 +19,8 @@ import { ModalWebsitesComponent } from './modals/modal-websites/modal-websites.c
 import { ModalKeywordComponent } from './modals/modal-keyword/modal-keyword.component'
 import { ModalPersonIdentifiersComponent } from './modals/modal-person-identifiers/modal-person-identifiers.component'
 import { SharedModule } from 'src/app/shared/shared.module'
-import { FormDirectivesModule } from '../form-directives/form-directives.module'
+import { FormDirectivesModule } from '../form-directives/form-directives.module';
+import { SourceHitComponent } from './modals/source-hit/source-hit.component'
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FormDirectivesModule } from '../form-directives/form-directives.module'
     ModalWebsitesComponent,
     ModalKeywordComponent,
     ModalPersonIdentifiersComponent,
+    SourceHitComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,6 @@ import { FormDirectivesModule } from '../form-directives/form-directives.module'
     A11yLinkModule,
     FormDirectivesModule,
   ],
-  exports: [SideBarComponent],
+  exports: [SideBarComponent, SourceHitComponent],
 })
 export class SideBarModule {}

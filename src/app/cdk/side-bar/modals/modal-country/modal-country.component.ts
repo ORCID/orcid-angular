@@ -185,10 +185,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     this.countryForm.removeControl(putcode)
   }
 
-  getSourceName(address: Address) {
-    return address.sourceName || address.source
-  }
-
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
