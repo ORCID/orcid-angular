@@ -38,7 +38,9 @@
             *ngIf="emailsOpenState"
             [name]="email.sourceName || email.source"
             [date]="email.createdDate | monthDayYearDateToString"
-            [assertion]="email.assertionOriginName || email.assertionOriginOrcid"
+            [assertion]="
+              email.assertionOriginName || email.assertionOriginOrcid
+            "
           >
           </app-panel-element-source>
         </app-panel-element>
@@ -83,7 +85,9 @@
             *ngIf="websiteOpenState"
             [name]="website.sourceName || website.source"
             [date]="website.createdDate | monthDayYearDateToString"
-            [assertion]="website.assertionOriginName || website.assertionOriginOrcid"
+            [assertion]="
+              website.assertionOriginName || website.assertionOriginOrcid
+            "
           >
           </app-panel-element-source>
         </app-panel-element>
@@ -134,8 +138,10 @@
             *ngIf="externalIdentifierOpenState"
             [name]="externalIdentifier.sourceName || externalIdentifier.source"
             [date]="externalIdentifier.createdDate | monthDayYearDateToString"
-            [assertion]="externalIdentifier.assertionOriginName || externalIdentifier.assertionOriginOrcid"
-
+            [assertion]="
+              externalIdentifier.assertionOriginName ||
+              externalIdentifier.assertionOriginOrcid
+            "
           >
           </app-panel-element-source>
         </app-panel-element>
@@ -171,8 +177,9 @@
               *ngIf="keywordOpenState"
               [name]="keyword.sourceName || keyword.source"
               [date]="keyword.createdDate | monthDayYearDateToString"
-              [assertion]="keyword.assertionOriginName || keyword.assertionOriginOrcid"
-
+              [assertion]="
+                keyword.assertionOriginName || keyword.assertionOriginOrcid
+              "
             >
             </app-panel-element-source>
           </app-panel-element>
@@ -194,8 +201,9 @@
                 *ngIf="keywordOpenState"
                 [name]="keyword.sourceName || keyword.source"
                 [date]="keyword.createdDate | monthDayYearDateToString"
-                [assertion]="keyword.assertionOriginName || keyword.assertionOriginOrcid"
-
+                [assertion]="
+                  keyword.assertionOriginName || keyword.assertionOriginOrcid
+                "
               >
               </app-panel-element-source>
             </app-panel-element>
@@ -238,8 +246,9 @@
               [isLastItem]="last"
               [name]="address.sourceName || address.source"
               [date]="address.createdDate | monthDayYearDateToString"
-              [assertion]="address.assertionOriginName || address.assertionOriginOrcid"
-
+              [assertion]="
+                address.assertionOriginName || address.assertionOriginOrcid
+              "
             >
             </app-panel-element-source>
           </app-panel-element>
@@ -260,7 +269,9 @@
                 [isLastItem]="last"
                 [name]="address.sourceName || address.source"
                 [date]="address.createdDate | monthDayYearDateToString"
-                [assertion]="address.assertionOriginName || address.assertionOriginOrcid"
+                [assertion]="
+                  address.assertionOriginName || address.assertionOriginOrcid
+                "
               >
               </app-panel-element-source>
             </app-panel-element>
