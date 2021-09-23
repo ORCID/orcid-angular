@@ -161,7 +161,8 @@
                 <ng-container
                   *ngFor="
                     let otherNames of userRecord.otherNames?.otherNames;
-                    index as i
+                    index as i;
+                    let last = last
                   "
                 >
                   <div class="row other-name" *ngIf="expandedContent">
@@ -170,13 +171,17 @@
                         {{ otherNames.content }}
                       </b>
                     </div>
-                    <div class="row">
-                      <b class="description" i18n="@@record.source"> Source </b>
-                    </div>
-                    <div class="description">
-                      {{ otherNames.sourceName || otherNames.source }}
-                      {{ otherNames.createdDate | monthDayYearDateToString }}
-                    </div>
+                    <app-panel-element-source
+                      [isLastItem]="last"
+                      *ngIf="true"
+                      [name]="otherNames.sourceName || otherNames.source"
+                      [date]="otherNames.createdDate | monthDayYearDateToString"
+                      [assertion]="
+                        otherNames.assertionOriginName ||
+                        otherNames.assertionOriginOrcid
+                      "
+                    >
+                    </app-panel-element-source>
                   </div>
                 </ng-container>
               </div>
