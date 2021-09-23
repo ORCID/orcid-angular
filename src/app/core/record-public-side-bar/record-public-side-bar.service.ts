@@ -4,10 +4,8 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap } from 'rxjs/operators'
 import {
   SideBarPublicUserRecord,
-  UserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
-import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -99,7 +97,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -132,7 +130,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -165,7 +163,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
           ],
           visibility: null,
@@ -210,7 +208,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -249,7 +247,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -288,7 +286,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
           ],
           visibility: null,
@@ -327,7 +325,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -360,7 +358,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -393,7 +391,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -426,7 +424,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
           ],
           visibility: null,
@@ -468,7 +466,7 @@ export class RecordPublicSideBarService {
               },
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -503,7 +501,7 @@ export class RecordPublicSideBarService {
               },
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -538,7 +536,7 @@ export class RecordPublicSideBarService {
               },
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -573,7 +571,7 @@ export class RecordPublicSideBarService {
               },
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
           ],
           visibility: null,
@@ -618,7 +616,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -657,7 +655,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -696,7 +694,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
             {
               visibility: {
@@ -735,7 +733,7 @@ export class RecordPublicSideBarService {
               sourceName: 'Manual Testing Client',
               assertionOriginOrcid: null,
               assertionOriginClientId: null,
-              assertionOriginName: "my assetion entity",
+              assertionOriginName: 'my assetion entity',
             },
           ],
           visibility: null,
