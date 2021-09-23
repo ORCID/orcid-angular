@@ -85,10 +85,15 @@ export class TopBarComponent implements OnInit, OnDestroy {
       : ''
   }
 
-  getOtherNames(otherNames: Assertion[]): string[] {
-    return otherNames.map((otherName) => {
-      return otherName.content
-    })
+  getOtherNamesUnique(otherNames: Assertion[]): string {
+    return otherNames
+      .map((otherName) => {
+        return otherName.content
+      })
+      .filter(function (item, pos, array) {
+        return array.indexOf(item) == pos
+      })
+      .join(', ')
   }
 
   collapse(): void {

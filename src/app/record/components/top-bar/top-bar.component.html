@@ -154,9 +154,7 @@
                   Also known as
                 </div>
                 <p class="orc-font-body-small" *ngIf="!expandedContent">
-                  {{
-                    getOtherNames(userRecord.otherNames?.otherNames).join(', ')
-                  }}
+                  {{ getOtherNamesUnique(userRecord.otherNames?.otherNames) }}
                 </p>
                 <ng-container
                   *ngFor="
