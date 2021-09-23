@@ -55,6 +55,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   screenDirection = 'ltr'
   addedWebsiteCount = 0
   loadingWebsites = true
+  urlMaxLength = 354
 
   ngOrcidDescription = $localize`:@@topBar.description:Link Title`
   ngOrcidUrl = $localize`:@@topBar.url:Link URL`
@@ -112,7 +113,11 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       group[website.putCode] = new FormGroup({
         description: new FormControl({
           value: website.urlName,
-          disabled: website.source !== this.id,
+          disabled: website.source !== this.id },{
+          validators: [
+            Validators.maxLength(this.urlMaxLength)
+          ],
+          updateOn: 'change',
         }),
         url: new FormControl(
           { value: website.url.value, disabled: website.source !== this.id },
@@ -192,7 +197,12 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.websitesForm.addControl(
       newPutCode,
       new FormGroup({
-        description: new FormControl(),
+        description: new FormControl('', {
+          validators: [
+            Validators.maxLength(this.urlMaxLength)
+          ],
+          updateOn: 'change'
+        }),
         url: new FormControl('', {
           validators: [
             Validators.required,
@@ -301,4 +311,5 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
+
 }
