@@ -220,8 +220,14 @@
                 class="mat-caption"
                 *ngIf="otherName.putCode.indexOf('new') < 0"
               >
-                <ng-container i18n="@@shared.source">Source:</ng-container>
-                {{ getSourceName(otherName) }}
+                <app-source-hit
+                  [createdDate]="otherName.createdDate"
+                  [source]="otherName.sourceName || otherName.source"
+                  [assertion]="
+                    otherName.assertionOriginName ||
+                    otherName.assertionOriginOrcid
+                  "
+                ></app-source-hit>
               </mat-hint>
             </mat-form-field>
           </div>

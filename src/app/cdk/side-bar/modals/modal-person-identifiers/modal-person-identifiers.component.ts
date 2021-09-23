@@ -123,10 +123,6 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
     this.personIdentifiersForm.removeControl(putCode)
   }
 
-  getSourceName(address: Assertion) {
-    return address.sourceName || address.source
-  }
-
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()

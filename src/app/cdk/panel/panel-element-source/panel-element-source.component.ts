@@ -12,6 +12,7 @@ export class PanelElementSourceComponent implements OnInit {
   @Input() name: string
   @Input() date: string
   @Input() isLastItem: boolean
+  @Input() assertion: string
   constructor() {}
 
   ngOnInit(): void {}

@@ -37,12 +37,12 @@ export interface UserRecord {
   externalIdentifier: PersonIdentifierEndpoint
   names: NamesEndPoint
   biography: BiographyEndPoint
-  preferences: Preferences
-  affiliations: AffiliationUIGroup[]
+  preferences?: Preferences
+  affiliations?: AffiliationUIGroup[]
   fundings?: FundingGroup[]
-  peerReviews: PeerReview[]
-  researchResources: ResearchResourcesEndpoint
-  works: WorksEndpoint
+  peerReviews?: PeerReview[]
+  researchResources?: ResearchResourcesEndpoint
+  works?: WorksEndpoint
   lastModifiedTime: any
   userInfo: UserInfo
 }

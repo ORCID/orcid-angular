@@ -132,10 +132,14 @@
                   class="mat-caption"
                   *ngIf="website.putCode.indexOf('new') < 0"
                 >
-                  <span i18n="@@shared.source">Source:</span>
-                  {{ getSourceName(website) }},
-                  <span i18n="@@shared.created">Created:</span>
-                  {{ website.createdDate | monthDayYearDateToString }}
+                  <app-source-hit
+                    [createdDate]="website.createdDate"
+                    [source]="website.sourceName || website.source"
+                    [assertion]="
+                      website.assertionOriginName ||
+                      website.assertionOriginOrcid
+                    "
+                  ></app-source-hit>
                 </mat-hint>
               </mat-form-field>
             </div>

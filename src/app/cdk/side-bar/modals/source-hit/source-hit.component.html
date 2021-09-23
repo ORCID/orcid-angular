@@ -1,0 +1,8 @@
+<ng-container *ngIf="assertion">
+  {{ assertion }}
+  <i i18n="@@shared.onBehalfOf">via</i>
+</ng-container>
+<span i18n="@@shared.source">Source:</span>
+{{ source }},
+<span i18n="@@shared.created">Created:</span>
+{{ createdDate | monthDayYearDateToString }}

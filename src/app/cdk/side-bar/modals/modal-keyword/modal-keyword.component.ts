@@ -127,7 +127,7 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
       .map((value) => value.putCode)
       .filter((key) => keywordsForm.value[key].content)
       .forEach((key, i) => {
-        const content = keywordsForm.value[key].content
+        const content = keywordsForm.value[key].content.trim()
         const visibility = keywordsForm.value[key].visibility
         if (keywordsForm.value[key]) {
           keywords.keywords.push({
@@ -191,10 +191,6 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     const i = this.keywords.findIndex((value) => value.putCode === putcode)
     this.keywords.splice(i, 1)
     this.keywordsForm.removeControl(putcode)
-  }
-
-  getSourceName(keyword: Assertion) {
-    return keyword.sourceName || keyword.source
   }
 
   ngOnDestroy() {

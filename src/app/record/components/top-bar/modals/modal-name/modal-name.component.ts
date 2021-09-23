@@ -174,9 +174,9 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const visibility = namesForm.get('visibility').value
     return {
       errors: [],
-      givenNames: namesForm.get('givenNames').value,
-      familyName: namesForm.get('familyName').value,
-      creditName: namesForm.get('publishedName').value,
+      givenNames: namesForm.get('givenNames').value.trim(),
+      familyName: namesForm.get('familyName').value.trim(),
+      creditName: namesForm.get('publishedName').value.trim(),
       visibility: {
         visibility,
       },
@@ -195,7 +195,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       .map((value) => value.putCode)
       .filter((key) => namesForm.value[key].otherName)
       .forEach((key, i) => {
-        const otherName = namesForm.value[key].otherName
+        const otherName = namesForm.value[key].otherName.trim()
         const visibility = namesForm.value[key].visibility
         if (namesForm.value[key]) {
           otherNames.otherNames.push({
@@ -267,36 +267,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const i = this.otherNames.findIndex((value) => value.putCode === putCode)
     this.otherNames.splice(i, 1)
     this.namesForm.removeControl(putCode)
-  }
-
-  getSourceName(names: Assertion) {
-    if (names.sourceName) {
-      if (names.lastModified) {
-        return (
-          names.sourceName +
-          ' ' +
-          names.lastModified.year +
-          '-' +
-          names.lastModified.month +
-          '-' +
-          names.lastModified.day
-        )
-      } else {
-        return names.sourceName
-      }
-    } else if (names.source) {
-      if (names.lastModified) {
-        return (
-          names.source +
-          ' ' +
-          names.lastModified.year +
-          '-' +
-          names.lastModified.month +
-          '-' +
-          names.lastModified.day
-        )
-      }
-    }
   }
 
   toGivenNames() {

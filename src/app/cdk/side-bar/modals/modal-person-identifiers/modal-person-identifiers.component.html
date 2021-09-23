@@ -96,10 +96,16 @@
                       >View</a
                     >,
                   </span>
-                  <span i18n="@@shared.source">Source:</span>
-                  {{ getSourceName(personIdentifier) }},
-                  <span i18n="@@shared.created">Created:</span>
-                  {{ personIdentifier.createdDate | monthDayYearDateToString }}
+                  <app-source-hit
+                    [createdDate]="personIdentifier.createdDate"
+                    [source]="
+                      personIdentifier.sourceName || personIdentifier.source
+                    "
+                    [assertion]="
+                      personIdentifier.assertionOriginName ||
+                      personIdentifier.assertionOriginOrcid
+                    "
+                  ></app-source-hit>
                 </mat-hint>
               </mat-form-field>
             </div>
