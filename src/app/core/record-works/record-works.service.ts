@@ -223,6 +223,10 @@ export class RecordWorksService {
   getWork(): Observable<Work> {
     return this._http.get<Work>(environment.API_WEB + `works/work.json`).pipe(
       retry(3),
+      map((x) => {
+        x.workExternalIdentifiers = []
+        return x
+      }),
       catchError((error) => this._errorHandler.handleError(error))
     )
   }

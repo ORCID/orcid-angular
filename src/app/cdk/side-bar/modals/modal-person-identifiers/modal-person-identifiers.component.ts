@@ -15,6 +15,7 @@ import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier
   selector: 'app-modal-person-identifiers',
   templateUrl: './modal-person-identifiers.component.html',
   styleUrls: ['./modal-person-identifiers.component.scss'],
+  preserveWhitespaces: true,
 })
 export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

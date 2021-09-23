@@ -14,7 +14,7 @@ export interface OrganizationDefinedFundingSubType {
 }
 
 export interface FundingGroup {
-  fundings: [Funding]
+  fundings: Funding[]
   activePutCode: number
   groupId: string
   activeVisibility: string // TODO is this always empty?
@@ -44,7 +44,7 @@ export interface Funding extends AssertionBase {
   region: Value
   country: Value
   countryForDisplay?: string
-  fundingTypeForDisplay?: string
+  typeForDisplay?: string
   dateSortString?: MonthDayYearDate
   fullyLoaded?: boolean
 }

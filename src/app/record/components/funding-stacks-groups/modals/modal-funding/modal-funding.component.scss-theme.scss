@@ -42,5 +42,10 @@
   .mat-select {
     font-size: mat-font-size($config, body-1) !important;
   }
+  .externalIdBox {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: dashed mat-color($background, ui-background-light) 1px;
+  }
 }
 @include modal-funding-theme($orcid-app-theme);

@@ -54,5 +54,6 @@
       Cancel
     </button>
   </app-modal-footer>
-  <app-work-form [work]="work" *ngIf="work" #workFormComponent> </app-work-form>
+  <app-work-form [work]="work" *ngIf="work && !loading" #workFormComponent>
+  </app-work-form>
 </app-modal>

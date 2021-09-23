@@ -55,10 +55,16 @@ mat-radio-button {
   }
 }
 
+.no-margin {
+  margin: 0;
+}
 .add-more {
+  margin-top: 26px;
+  margin-bottom: 26px;
+
   span {
     margin: auto;
-    padding-left: 6px;
+    padding-inline-start: 6px;
   }
 }
 
