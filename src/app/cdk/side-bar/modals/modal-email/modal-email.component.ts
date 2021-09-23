@@ -12,7 +12,8 @@ import {
   FormControl,
   FormGroup,
   ValidationErrors,
-  ValidatorFn, Validators,
+  ValidatorFn,
+  Validators,
 } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
@@ -22,7 +23,11 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { AssertionVisibilityString, EmailsActions, EmailsEndpoint } from 'src/app/types'
+import {
+  AssertionVisibilityString,
+  EmailsActions,
+  EmailsEndpoint,
+} from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -120,14 +125,13 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
         if (emailForm.value[key]) {
           allEmails.push({
-              email: {
-                value,
-                visibility,
-                primary,
-              },
-              action: emailsActions[i].action
-            }
-          )
+            email: {
+              value,
+              visibility,
+              primary,
+            },
+            action: emailsActions[i].action,
+          })
         }
       })
     return allEmails
@@ -146,10 +150,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     // backend response come with no email putCode, so here we create one to be able to track those on the frontend
     this.emailsActions.push({
       email: {
-          putCode: newPutCode,
-          ...existingEmail,
+        putCode: newPutCode,
+        ...existingEmail,
       },
-      action: existingEmail ? 'UPDATE' : 'ADD'
+      action: existingEmail ? 'UPDATE' : 'ADD',
     })
 
     // Add a new control to the formGroup
@@ -197,8 +201,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       (ea) => (ea.email.primary = ea.email.putCode === newPrimaryEmail.putCode)
     )
     this.emailPrimary.push({
-      email: this.emailsActions.find((value) => value.email.putCode === newPrimaryEmail.putCode).email,
-      action: 'PRIMARY'
+      email: this.emailsActions.find(
+        (value) => value.email.putCode === newPrimaryEmail.putCode
+      ).email,
+      action: 'PRIMARY',
     })
     this.triggerGeneralFormValidation()
   }
@@ -328,10 +334,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       const data = this.formToBackend(this.emailsForm, this.emailsActions)
       if (this.emailsDelete.length > 0) {
         this.emailsDelete.forEach((emailDelete) => {
-          this._recordEmails
-            .delete(emailDelete.email)
-            .pipe(first())
-            .subscribe()
+          this._recordEmails.delete(emailDelete.email).pipe(first()).subscribe()
         })
       }
       if (this.emailPrimary.length > 0) {
@@ -342,10 +345,16 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
             .subscribe()
         })
       }
-      const emailNewPrimary = data.filter((emailActions) => emailActions.email.primary)[0].email
-      const emailOldPrimary = this.emailsActions.filter((emailActions) => emailActions.email.primary)[0].email
+      const emailNewPrimary = data.filter(
+        (emailActions) => emailActions.email.primary
+      )[0].email
+      const emailOldPrimary = this.emailsActions.filter(
+        (emailActions) => emailActions.email.primary
+      )[0].email
       const otherNames = {
-        emails: data.filter((emailActions) => !emailActions.email.primary).map(emailActions => emailActions.email),
+        emails: data
+          .filter((emailActions) => !emailActions.email.primary)
+          .map((emailActions) => emailActions.email),
         errors: [],
       }
       if (emailNewPrimary.value !== emailOldPrimary.value) {
@@ -355,14 +364,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           .subscribe()
       }
       if (emailNewPrimary.visibility !== emailOldPrimary.visibility) {
-        this._recordEmails
-          .visibility(emailNewPrimary)
-          .pipe(first())
-          .subscribe()
+        this._recordEmails.visibility(emailNewPrimary).pipe(first()).subscribe()
       }
 
       if (otherNames.emails.length > 0) {
-        this._recordEmails.postEmails({ emails: otherNames.emails, errors : []}).pipe(first()).subscribe()
+        this._recordEmails
+          .postEmails({ emails: otherNames.emails, errors: [] })
+          .pipe(first())
+          .subscribe()
       }
       this.closeEvent()
     } else {
@@ -376,10 +385,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   deleteEmail(controlKey: string) {
     this.emailsDelete.push({
-      email: this.emailsActions.find((value) => value.email.putCode === controlKey).email,
-      action: 'DELETE'
+      email: this.emailsActions.find(
+        (value) => value.email.putCode === controlKey
+      ).email,
+      action: 'DELETE',
     })
-    this.emailsActions = this.emailsActions.filter((value) => value.email.putCode !== controlKey)
+    this.emailsActions = this.emailsActions.filter(
+      (value) => value.email.putCode !== controlKey
+    )
     this.emailsForm.removeControl(controlKey)
   }
 

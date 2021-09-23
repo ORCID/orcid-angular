@@ -85,7 +85,9 @@
                 Email can not be duplicated
               </mat-error>
               <mat-error
-                *ngIf="emailsForm.hasError('email', [ea.email.putCode, 'email'])"
+                *ngIf="
+                  emailsForm.hasError('email', [ea.email.putCode, 'email'])
+                "
                 i18n="@@side-bar.invalidEmailFormat"
               >
                 Invalid email format
@@ -93,7 +95,10 @@
 
               <mat-error
                 *ngIf="
-                  emailsForm.hasError('backendError', [ea.email.putCode, 'email'])
+                  emailsForm.hasError('backendError', [
+                    ea.email.putCode,
+                    'email'
+                  ])
                 "
                 i18n="@@side-bar.alreadyAssociated"
               >
@@ -142,14 +147,17 @@
             class="mat-caption only-verified"
             i18n="@@sideBar.onlyVerifiedEmail"
             *ngIf="
-                  emailsForm.get([ea.email.putCode, 'visibility']) &&
-                  (emailsForm.get([ea.email.putCode, 'visibility']).touched ||
-                    emailsForm.get([ea.email.putCode, 'visibility']).dirty) &&
-                  emailsForm.hasError('unverified', [ea.email.putCode, 'visibility'])
-                "
+              emailsForm.get([ea.email.putCode, 'visibility']) &&
+              (emailsForm.get([ea.email.putCode, 'visibility']).touched ||
+                emailsForm.get([ea.email.putCode, 'visibility']).dirty) &&
+              emailsForm.hasError('unverified', [
+                ea.email.putCode,
+                'visibility'
+              ])
+            "
           >
-            Only verified email addresses can be displayed publicly or shared with
-            trusted parties. Please verify your email
+            Only verified email addresses can be displayed publicly or shared
+            with trusted parties. Please verify your email
           </mat-error>
         </div>
         <app-alert-message
@@ -250,7 +258,10 @@
             <mat-icon matPrefix>verified</mat-icon>
             <mat-error
               *ngIf="
-                emailsForm.hasError('backendErrors', [ea.email.putCode, 'email'])
+                emailsForm.hasError('backendErrors', [
+                  ea.email.putCode,
+                  'email'
+                ])
               "
               i18n="@@side-bar.alreadyAssociated"
             >
@@ -323,11 +334,14 @@
           <div
             class="actions-sub-wrapper"
             [ngClass]="{
-              'visibility-hidden': !showVisibility(ea.email.putCode) && ea.action === 'ADD'
+              'visibility-hidden':
+                !showVisibility(ea.email.putCode) && ea.action === 'ADD'
             }"
           >
             <app-privacy-selector
-              [hidden]="!showVisibility(ea.email.putCode) && ea.action === 'ADD'"
+              [hidden]="
+                !showVisibility(ea.email.putCode) && ea.action === 'ADD'
+              "
               formControlName="visibility"
             ></app-privacy-selector>
             <button
@@ -359,7 +373,9 @@
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
-          *ngIf="!ea.email.primary && verificationEmailWasSend(ea.email.putCode)"
+          *ngIf="
+            !ea.email.primary && verificationEmailWasSend(ea.email.putCode)
+          "
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"
@@ -384,10 +400,16 @@
     <div class="row orc-font-body-small">
       <a class="col add-more" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container *ngIf="emailsActions.length === 1" i18n="@@side-bar.otherEmail">
+        <ng-container
+          *ngIf="emailsActions.length === 1"
+          i18n="@@side-bar.otherEmail"
+        >
           Add other email address
         </ng-container>
-        <ng-container *ngIf="emailsActions.length > 1" i18n="@@side-bar.anotherEmail">
+        <ng-container
+          *ngIf="emailsActions.length > 1"
+          i18n="@@side-bar.anotherEmail"
+        >
           Add another email address
         </ng-container>
       </a>
