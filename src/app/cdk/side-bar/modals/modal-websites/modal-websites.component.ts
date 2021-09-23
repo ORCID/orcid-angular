@@ -150,8 +150,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
       .map((value) => value.putCode)
       .filter((key) => websitesForm.value[key].url)
       .forEach((key, i) => {
-        const urlName = websitesForm.value[key].description
-        const url = websitesForm.value[key].url
+        const urlName = websitesForm.value[key].description.trim()
+        const url = websitesForm.value[key].url.trim()
         const visibility = websitesForm.value[key].visibility
         if (websitesForm.value[key]) {
           websites.websites.push({

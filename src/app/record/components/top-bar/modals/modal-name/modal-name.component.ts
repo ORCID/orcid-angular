@@ -174,9 +174,9 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const visibility = namesForm.get('visibility').value
     return {
       errors: [],
-      givenNames: namesForm.get('givenNames').value,
-      familyName: namesForm.get('familyName').value,
-      creditName: namesForm.get('publishedName').value,
+      givenNames: namesForm.get('givenNames').value.trim(),
+      familyName: namesForm.get('familyName').value.trim(),
+      creditName: namesForm.get('publishedName').value.trim(),
       visibility: {
         visibility,
       },
