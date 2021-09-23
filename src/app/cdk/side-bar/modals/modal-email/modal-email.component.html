@@ -54,31 +54,38 @@
 
     <!-- PRIMARY EMAIL -->
     <div class="row">
-      <ng-container *ngFor="let email of emails">
+      <ng-container *ngFor="let ea of emailsActions">
         <div
-          *ngIf="email.primary"
+          *ngIf="ea.email.primary"
           class="row email-input-line"
-          [formGroupName]="email.putCode"
+          [formGroupName]="ea.email.putCode"
         >
           <div class="col l12 m8 s4 email-input-container">
             <mat-form-field
-              *ngIf="!showEmailAsVerified(email.putCode)"
+              *ngIf="!showEmailAsVerified(ea.email.putCode)"
               appearance="outline"
               class="mat-form-field-min verify-icon"
             >
               <input matInput formControlName="email" type="email" appTrim />
               <mat-icon matPrefix>verified</mat-icon>
-
               <mat-error
                 *ngIf="
-                  emailsForm.hasError('duplicated', [email.putCode, 'email'])
+                  emailsForm.hasError('required', [ea.email.putCode, 'email'])
+                "
+                i18n="@@sideBar.primaryEmailRequired"
+              >
+                An email is required
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  emailsForm.hasError('duplicated', [ea.email.putCode, 'email'])
                 "
                 i18n="@@side-bar.emailCanNotBeDuplicated"
               >
                 Email can not be duplicated
               </mat-error>
               <mat-error
-                *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+                *ngIf="emailsForm.hasError('email', [ea.email.putCode, 'email'])"
                 i18n="@@side-bar.invalidEmailFormat"
               >
                 Invalid email format
@@ -86,7 +93,7 @@
 
               <mat-error
                 *ngIf="
-                  emailsForm.hasError('backendError', [email.putCode, 'email'])
+                  emailsForm.hasError('backendError', [ea.email.putCode, 'email'])
                 "
                 i18n="@@side-bar.alreadyAssociated"
               >
@@ -96,28 +103,28 @@
 
             <strong
               class="orc-font-body-large email-activated primary-email-label verify-icon"
-              *ngIf="showEmailAsVerified(email.putCode)"
+              *ngIf="showEmailAsVerified(ea.email.putCode)"
             >
               <mat-icon class="title-material-icon" matPrefix
                 >verified</mat-icon
               >
-              {{ emailsForm.value[email.putCode].email }}</strong
+              {{ emailsForm.value[ea.email.putCode].email }}</strong
             >
           </div>
           <div class="col actions-wrapper no-gutters">
             <div class="actions-sub-wrapper">
-              <ng-container *ngIf="showNonVerifiedData(email.putCode)">
+              <ng-container *ngIf="showNonVerifiedData(ea.email.putCode)">
                 <a
                   class="orc-font-small-print disabled underline"
-                  *ngIf="verificationEmailWasSend(email.putCode)"
+                  *ngIf="verificationEmailWasSend(ea.email.putCode)"
                   i18n="@@side-bar.resendVerification"
                 >
                   Resend verification email</a
                 >
                 <a
                   class="orc-font-small-print underline"
-                  (click)="verifyEmail(email)"
-                  *ngIf="!verificationEmailWasSend(email.putCode)"
+                  (click)="verifyEmail(ea.email)"
+                  *ngIf="!verificationEmailWasSend(ea.email.putCode)"
                   i18n="@@side-bar.resendVerification"
                 >
                   Resend verification email</a
@@ -131,12 +138,25 @@
               <div></div>
             </div>
           </div>
+          <mat-error
+            class="mat-caption only-verified"
+            i18n="@@sideBar.onlyVerifiedEmail"
+            *ngIf="
+                  emailsForm.get([ea.email.putCode, 'visibility']) &&
+                  (emailsForm.get([ea.email.putCode, 'visibility']).touched ||
+                    emailsForm.get([ea.email.putCode, 'visibility']).dirty) &&
+                  emailsForm.hasError('unverified', [ea.email.putCode, 'visibility'])
+                "
+          >
+            Only verified email addresses can be displayed publicly or shared with
+            trusted parties. Please verify your email
+          </mat-error>
         </div>
         <app-alert-message
-          *ngIf="email.primary && !showEmailAsVerified(email.putCode)"
+          *ngIf="ea.email.primary && !showEmailAsVerified(ea.email.putCode)"
           class="orc-font-body-small"
         >
-          <ng-container *ngIf="verificationEmailWasSend(email.putCode)">
+          <ng-container *ngIf="verificationEmailWasSend(ea.email.putCode)">
             <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
               >Please verify your primary email address!</strong
             >
@@ -151,7 +171,7 @@
                 To verify your email, click the link in the message sent to:
               </ng-container>
             </p>
-            <p class="email-container">{{ email.value }}</p>
+            <p class="email-container">{{ ea.email.value }}</p>
 
             <p>
               <strong i18n="@@side-bar.needHelp"> Need help?</strong> <br />
@@ -181,12 +201,12 @@
               </a>
             </p>
           </ng-container>
-          <ng-container *ngIf="!verificationEmailWasSend(email.putCode)">
+          <ng-container *ngIf="!verificationEmailWasSend(ea.email.putCode)">
             <strong class="orc-font-body"
               ><ng-container i18n="@@side-bar.weHaveSentAEmail"
                 >We’ve sent a verification email to</ng-container
               >
-              {{ email.value }}</strong
+              {{ ea.email.value }}</strong
             >
             <p i18n="@@side-bar.pleaseCheckYour">
               Please check your email inbox (or maybe your spam folder) for an
@@ -205,22 +225,22 @@
 
     <!-- ADDITIONAL EMAILS -->
 
-    <ng-container *ngFor="let email of emails">
+    <ng-container *ngFor="let ea of emailsActions">
       <div
-        *ngIf="!email.primary"
+        *ngIf="!ea.email.primary"
         class="row email-input-line"
-        [formGroupName]="email.putCode"
+        [formGroupName]="ea.email.putCode"
       >
         <div class="col l12 m8 s4 email-input-container">
           <mat-form-field
             appearance="outline"
             class="mat-form-field-min verify-icon additional-email"
             [ngClass]="{
-              'email-activated': showEmailAsVerified(email.putCode)
+              'email-activated': showEmailAsVerified(ea.email.putCode)
             }"
           >
             <input
-              [id]="email.putCode"
+              [id]="ea.email.putCode"
               #emailInput
               matInput
               formControlName="email"
@@ -230,7 +250,7 @@
             <mat-icon matPrefix>verified</mat-icon>
             <mat-error
               *ngIf="
-                emailsForm.hasError('backendErrors', [email.putCode, 'email'])
+                emailsForm.hasError('backendErrors', [ea.email.putCode, 'email'])
               "
               i18n="@@side-bar.alreadyAssociated"
             >
@@ -238,14 +258,22 @@
             </mat-error>
             <mat-error
               *ngIf="
-                emailsForm.hasError('duplicated', [email.putCode, 'email'])
+                emailsForm.hasError('duplicated', [ea.email.putCode, 'email'])
               "
               i18n="@@side-bar.additionalEmailsDuplicate"
             >
               Additional emails can not be duplicated
             </mat-error>
             <mat-error
-              *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
+              *ngIf="
+                emailsForm.hasError('required', [ea.email.putCode, 'email'])
+              "
+              i18n="@@sideBar.primaryEmailRequired"
+            >
+              An email is required
+            </mat-error>
+            <mat-error
+              *ngIf="emailsForm.hasError('email', [ea.email.putCode, 'email'])"
               i18n="@@side-bar.invalidEmailFormat"
             >
               Invalid email format
@@ -253,7 +281,7 @@
 
             <mat-error
               *ngIf="
-                emailsForm.hasError('backendError', [email.putCode, 'email'])
+                emailsForm.hasError('backendError', [ea.email.putCode, 'email'])
               "
               i18n="@@side-bar.alreadyAssociated"
             >
@@ -266,25 +294,25 @@
           <div class="actions-sub-wrapper">
             <a
               class="orc-font-small-print underline"
-              *ngIf="showEmailAsVerified(email.putCode)"
-              (click)="makePrimary(email)"
+              *ngIf="showEmailAsVerified(ea.email.putCode)"
+              (click)="makePrimary(ea.email)"
               i18n="@@side-bar.makePrimary"
             >
               Make primary email</a
             >
 
-            <ng-container *ngIf="showNonVerifiedData(email.putCode)">
+            <ng-container *ngIf="showNonVerifiedData(ea.email.putCode)">
               <a
                 class="orc-font-small-print disabled underline"
-                *ngIf="verificationEmailWasSend(email.putCode)"
+                *ngIf="verificationEmailWasSend(ea.email.putCode)"
                 i18n="@@side-bar.resendVerification"
               >
                 Resend verification email</a
               >
               <a
                 class="orc-font-small-print underline"
-                (click)="verifyEmail(email)"
-                *ngIf="!verificationEmailWasSend(email.putCode)"
+                (click)="verifyEmail(ea.email)"
+                *ngIf="!verificationEmailWasSend(ea.email.putCode)"
                 i18n="@@side-bar.resendVerification"
               >
                 Resend verification email</a
@@ -295,15 +323,15 @@
           <div
             class="actions-sub-wrapper"
             [ngClass]="{
-              'visibility-hidden': !showVisibility(email.putCode)
+              'visibility-hidden': !showVisibility(ea.email.putCode) && ea.action === 'ADD'
             }"
           >
             <app-privacy-selector
-              [hidden]="!showVisibility(email.putCode)"
+              [hidden]="!showVisibility(ea.email.putCode) && ea.action === 'ADD'"
               formControlName="visibility"
             ></app-privacy-selector>
             <button
-              (click)="deleteEmail(email.putCode)"
+              (click)="deleteEmail(ea.email.putCode)"
               mat-icon-button
               class="delete-button"
             >
@@ -319,9 +347,10 @@
           class="mat-caption only-verified"
           i18n="@@sideBar.onlyVerifiedEmail"
           *ngIf="
-            (emailsForm.get([email.putCode, 'visibility']).touched ||
-              emailsForm.get([email.putCode, 'visibility']).dirty) &&
-            emailsForm.hasError('unverified', [email.putCode, 'visibility'])
+            emailsForm.get([ea.email.putCode, 'visibility']) &&
+            (emailsForm.get([ea.email.putCode, 'visibility']).touched ||
+              emailsForm.get([ea.email.putCode, 'visibility']).dirty) &&
+            emailsForm.hasError('unverified', [ea.email.putCode, 'visibility'])
           "
         >
           Only verified email addresses can be displayed publicly or shared with
@@ -330,14 +359,14 @@
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
-          *ngIf="!email.primary && verificationEmailWasSend(email.putCode)"
+          *ngIf="!ea.email.primary && verificationEmailWasSend(ea.email.putCode)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"
             ><ng-container i18n="@@side-bar.weHaveSentAEmail"
               >We’ve sent a verification email to</ng-container
             >
-            {{ email.value }}</strong
+            {{ ea.email.value }}</strong
           >
           <p i18n="@@side-bar.pleaseCheckYour">
             Please check your email inbox (or maybe your spam folder) for an
@@ -346,7 +375,7 @@
         </app-alert-message>
       </div>
     </ng-container>
-    <ng-container *ngIf="emails.length === 1">
+    <ng-container *ngIf="emailsActions.length === 1">
       <p class="orc-font-body-small" i18n="@@side-bar.noOtherEmails">
         You haven’t added any other email addresses yet.
       </p>
@@ -355,7 +384,10 @@
     <div class="row orc-font-body-small">
       <a class="col add-more" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container i18n="@@side-bar.anotherEmail">
+        <ng-container *ngIf="emailsActions.length === 1" i18n="@@side-bar.otherEmail">
+          Add other email address
+        </ng-container>
+        <ng-container *ngIf="emailsActions.length > 1" i18n="@@side-bar.anotherEmail">
           Add another email address
         </ng-container>
       </a>

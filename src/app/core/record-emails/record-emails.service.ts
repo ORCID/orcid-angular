@@ -132,7 +132,7 @@ export class RecordEmailsService {
       )
   }
 
-  emailVisibility(email): Observable<any> {
+  visibility(email): Observable<any> {
     const encoded_data = JSON.stringify(email)
 
     return this._http
@@ -146,9 +146,22 @@ export class RecordEmailsService {
       )
   }
 
-  setAsPrimaryEmail(email: Assertion): Observable<EmailsEndpoint> {
+  delete(email: AssertionVisibilityString) {
+    return this._http.delete(
+      environment.API_WEB + 'account/deleteEmail.json?email=' + encodeURIComponent(email.value), {
+        headers: this.headers
+      })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap(() => this.getEmails({ forceReload: true }))
+      )
+      ;
+  }
+
+  setAsPrimaryEmail(email: AssertionVisibilityString): Observable<EmailsEndpoint> {
     return this._http
-      .post<Assertion>(
+      .post<AssertionVisibilityString>(
         environment.API_WEB + `account/email/setPrimary`,
         email,
         {
