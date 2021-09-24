@@ -403,9 +403,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       formValue &&
       !(this.verificationsSend.indexOf(formValue) > -1) &&
       otherEmail &&
-      this.originalEmailsBackendCopy.find(
-        (email) => email.value === formValue
-      )?.primary
+      this.originalEmailsBackendCopy.find((email) => email.value === formValue)
+        ?.primary
     ) {
       return false
     }
