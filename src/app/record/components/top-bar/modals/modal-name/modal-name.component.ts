@@ -169,9 +169,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.namesForm.addControl(
       'publishedName',
       new FormControl(publishedName, {
-        validators: [
-          Validators.maxLength(this.nameMaxLength),
-        ],
+        validators: [Validators.maxLength(this.nameMaxLength)],
       })
     )
     this.namesForm.addControl('visibility', new FormControl(visibilityName, {}))

@@ -111,10 +111,10 @@
           Invalid name characters or format
         </mat-error>
         <mat-error
-        *ngIf="namesForm.get('givenNames').hasError('maxlength')"
-        i18n="@@topBar.namesMaxLenght"
+          *ngIf="namesForm.get('givenNames').hasError('maxlength')"
+          i18n="@@topBar.namesMaxLenght"
         >
-        Must be less then 100 characters
+          Must be less then 100 characters
         </mat-error>
       </mat-form-field>
     </div>
@@ -132,23 +132,23 @@
           placeholder=" {{ ngOrcidAddFamilyName }}"
         />
         <mat-error
-        class="mat-caption"
-        *ngIf="namesForm.get('familyName').hasError('required')"
-        i18n="@@topBar.firstNameError"
+          class="mat-caption"
+          *ngIf="namesForm.get('familyName').hasError('required')"
+          i18n="@@topBar.firstNameError"
         >
-        Please enter your first/given name
+          Please enter your first/given name
         </mat-error>
         <mat-error
-        *ngIf="namesForm.get('familyName').hasError('notPattern')"
-        i18n="@@topBar.invalidName"
+          *ngIf="namesForm.get('familyName').hasError('notPattern')"
+          i18n="@@topBar.invalidName"
         >
-        Invalid name characters or format
+          Invalid name characters or format
         </mat-error>
         <mat-error
-        *ngIf="namesForm.get('familyName').hasError('maxlength')"
-        i18n="@@topBar.namesMaxLenght"
+          *ngIf="namesForm.get('familyName').hasError('maxlength')"
+          i18n="@@topBar.namesMaxLenght"
         >
-        Must be less then 100 characters
+          Must be less then 100 characters
         </mat-error>
       </mat-form-field>
     </div>
@@ -175,10 +175,10 @@
           placeholder=" {{ ngOrcidAddPublishedName }}"
         />
         <mat-error
-        *ngIf="namesForm.get('publishedName').hasError('maxlength')"
-        i18n="@@topBar.namesMaxLenght"
+          *ngIf="namesForm.get('publishedName').hasError('maxlength')"
+          i18n="@@topBar.namesMaxLenght"
         >
-        Must be less then 100 characters
+          Must be less then 100 characters
         </mat-error>
       </mat-form-field>
     </div>
