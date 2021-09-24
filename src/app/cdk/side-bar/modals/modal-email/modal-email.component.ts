@@ -337,10 +337,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         })
       }
       if (this.emailPrimary) {
-          this._recordEmails
-            .setAsPrimaryEmail(this.emailPrimary.email)
-            .pipe(first())
-            .subscribe()
+        this._recordEmails
+          .setAsPrimaryEmail(this.emailPrimary.email)
+          .pipe(first())
+          .subscribe()
       }
       const emailNewPrimary = data.filter(
         (emailActions) => emailActions.email.primary
@@ -408,14 +408,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     )
     const result = !!realEmailBackendContext
 
-    if (
-      !result &&
-      action === 'UPDATE'
-    ) {
+    if (!result && action === 'UPDATE') {
       this.emailsForm.patchValue({
         [controlKey]: {
-          visibility: 'PRIVATE'
-        }
+          visibility: 'PRIVATE',
+        },
       })
     }
     return result

@@ -334,14 +334,11 @@
           <div
             class="actions-sub-wrapper"
             [ngClass]="{
-              'visibility-hidden':
-                !showVisibility(ea.email.putCode, ea.action)
+              'visibility-hidden': !showVisibility(ea.email.putCode, ea.action)
             }"
           >
             <app-privacy-selector
-              [hidden]="
-                !showVisibility(ea.email.putCode, ea.action)
-              "
+              [hidden]="!showVisibility(ea.email.putCode, ea.action)"
               formControlName="visibility"
             ></app-privacy-selector>
             <button
