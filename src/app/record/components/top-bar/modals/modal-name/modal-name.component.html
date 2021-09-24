@@ -110,6 +110,12 @@
         >
           Invalid name characters or format
         </mat-error>
+        <mat-error
+        *ngIf="namesForm.get('givenNames').hasError('maxlength')"
+        i18n="@@topBar.namesMaxLenght"
+        >
+        Must be less then 100 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -125,6 +131,25 @@
           formControlName="familyName"
           placeholder=" {{ ngOrcidAddFamilyName }}"
         />
+        <mat-error
+        class="mat-caption"
+        *ngIf="namesForm.get('familyName').hasError('required')"
+        i18n="@@topBar.firstNameError"
+        >
+        Please enter your first/given name
+        </mat-error>
+        <mat-error
+        *ngIf="namesForm.get('familyName').hasError('notPattern')"
+        i18n="@@topBar.invalidName"
+        >
+        Invalid name characters or format
+        </mat-error>
+        <mat-error
+        *ngIf="namesForm.get('familyName').hasError('maxlength')"
+        i18n="@@topBar.namesMaxLenght"
+        >
+        Must be less then 100 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div id="published-name" class="title orc-font-body">
@@ -149,6 +174,12 @@
           formControlName="publishedName"
           placeholder=" {{ ngOrcidAddPublishedName }}"
         />
+        <mat-error
+        *ngIf="namesForm.get('publishedName').hasError('maxlength')"
+        i18n="@@topBar.namesMaxLenght"
+        >
+        Must be less then 100 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div id="visibility" class="title orc-font-body">
