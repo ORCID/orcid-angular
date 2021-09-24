@@ -401,12 +401,24 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     return realEmailBackendContext && !realEmailBackendContext.verified
   }
 
-  showVisibility(controlKey: string): boolean {
+  showVisibility(controlKey: string, action?: string): boolean {
     const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
     )
-    return !!realEmailBackendContext
+    const result = !!realEmailBackendContext
+
+    if (
+      !result &&
+      action === 'UPDATE'
+    ) {
+      this.emailsForm.patchValue({
+        [controlKey]: {
+          visibility: 'PRIVATE'
+        }
+      })
+    }
+    return result
   }
 
   verificationEmailWasSend(controlKey: string) {
