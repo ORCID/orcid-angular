@@ -393,11 +393,23 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     this.emailsForm.removeControl(controlKey)
   }
 
-  showNonVerifiedData(controlKey: string): boolean {
+  showNonVerifiedData(controlKey: string, otherEmail?: boolean): boolean {
     const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
     )
+
+    if (
+      formValue &&
+      !(this.verificationsSend.indexOf(formValue) > -1) &&
+      otherEmail &&
+      this.originalEmailsBackendCopy.find(
+        (email) => email.value === formValue
+      )?.primary
+    ) {
+      return false
+    }
+
     return realEmailBackendContext && !realEmailBackendContext.verified
   }
 
@@ -407,6 +419,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       (email) => email.value === formValue
     )
     const result = !!realEmailBackendContext
+
+    if (result && realEmailBackendContext.primary) {
+      return false
+    }
 
     if (!result && action === 'UPDATE') {
       this.emailsForm.patchValue({

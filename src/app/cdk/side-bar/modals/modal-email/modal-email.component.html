@@ -312,7 +312,7 @@
               Make primary email</a
             >
 
-            <ng-container *ngIf="showNonVerifiedData(ea.email.putCode)">
+            <ng-container *ngIf="showNonVerifiedData(ea.email.putCode, true)">
               <a
                 class="orc-font-small-print disabled underline"
                 *ngIf="verificationEmailWasSend(ea.email.putCode)"
