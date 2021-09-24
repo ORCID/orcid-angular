@@ -48,7 +48,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   emailsForm: FormGroup = new FormGroup({})
   emailsActions: EmailsActions[] = []
   emailsDelete: EmailsActions[] = []
-  emailPrimary: EmailsActions[] = []
+  emailPrimary: EmailsActions
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
@@ -196,16 +196,15 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * @param newPrimaryEmail: the email to make primary
    */
   makePrimary(newPrimaryEmail: AssertionVisibilityString): void {
-    this.emailPrimary = []
     this.emailsActions.forEach(
       (ea) => (ea.email.primary = ea.email.putCode === newPrimaryEmail.putCode)
     )
-    this.emailPrimary.push({
+    this.emailPrimary = {
       email: this.emailsActions.find(
         (value) => value.email.putCode === newPrimaryEmail.putCode
       ).email,
       action: 'PRIMARY',
-    })
+    }
     this.triggerGeneralFormValidation()
   }
 
@@ -337,13 +336,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           this._recordEmails.delete(emailDelete.email).pipe(first()).subscribe()
         })
       }
-      if (this.emailPrimary.length > 0) {
-        this.emailPrimary.forEach((emailPrimary) => {
+      if (this.emailPrimary) {
           this._recordEmails
-            .setAsPrimaryEmail(emailPrimary.email)
+            .setAsPrimaryEmail(this.emailPrimary.email)
             .pipe(first())
             .subscribe()
-        })
       }
       const emailNewPrimary = data.filter(
         (emailActions) => emailActions.email.primary
