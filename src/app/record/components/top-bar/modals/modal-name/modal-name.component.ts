@@ -58,6 +58,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   otherNamesDefaultVisibility: VisibilityStrings
   addedOtherNameCount = 0
   loadingNames = true
+  nameMaxLength = 99
 
   ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
   ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
@@ -151,6 +152,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           Validators.required,
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
           OrcidValidators.notPattern(URL_REGEXP),
+          Validators.maxLength(this.nameMaxLength),
         ],
       })
     )
@@ -160,12 +162,15 @@ export class ModalNameComponent implements OnInit, OnDestroy {
         validators: [
           OrcidValidators.notPattern(URL_REGEXP),
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+          Validators.maxLength(this.nameMaxLength),
         ],
       })
     )
     this.namesForm.addControl(
       'publishedName',
-      new FormControl(publishedName, {})
+      new FormControl(publishedName, {
+        validators: [Validators.maxLength(this.nameMaxLength)],
+      })
     )
     this.namesForm.addControl('visibility', new FormControl(visibilityName, {}))
   }
