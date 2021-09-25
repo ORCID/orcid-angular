@@ -151,7 +151,7 @@ import { TextFieldModule } from '@angular/cdk/text-field'
     MatAutocompleteModule,
     MatRadioModule,
     MatCheckboxModule,
-    TextFieldModule
+    TextFieldModule,
   ],
 })
 export class RecordModule {}

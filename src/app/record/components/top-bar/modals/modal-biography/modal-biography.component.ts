@@ -7,14 +7,9 @@ import {
 } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormControl, FormGroup } from '@angular/forms'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
-import { OrcidValidators } from '../../../../../validators'
-import {
-  ILLEGAL_NAME_CHARACTERS_REGEXP,
-  URL_REGEXP,
-} from '../../../../../constants'
 import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
 import {
   Visibility,
