@@ -164,7 +164,7 @@
           *ngIf="ea.email.primary && !showEmailAsVerified(ea.email.putCode)"
           class="orc-font-body-small"
         >
-          <ng-container *ngIf="verificationEmailWasSend(ea.email.putCode)">
+          <ng-container *ngIf="!verificationEmailWasSend(ea.email.putCode)">
             <strong class="orc-font-body" i18n="@@side-bar.pleaseVerify"
               >Please verify your primary email address!</strong
             >
@@ -209,7 +209,7 @@
               </a>
             </p>
           </ng-container>
-          <ng-container *ngIf="!verificationEmailWasSend(ea.email.putCode)">
+          <ng-container *ngIf="verificationEmailWasSend(ea.email.putCode)">
             <strong class="orc-font-body"
               ><ng-container i18n="@@side-bar.weHaveSentAEmail"
                 >We’ve sent a verification email to</ng-container
