@@ -60,12 +60,14 @@
           [attr.id]="'draggable-' + i"
         >
           <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-            <img
-              class="icon-drag"
-              cdkDragHandle
-              src="./assets/vectors/draggable.svg"
-              aria-label="drag handle"
-            />
+            <div class="image-container">
+              <img
+                class="icon-drag"
+                cdkDragHandle
+                src="./assets/vectors/draggable.svg"
+                aria-label="drag handle"
+              />
+            </div>
             <div class="row">
               <mat-form-field
                 appearance="outline"
@@ -163,6 +165,7 @@
               </mat-icon>
             </button>
           </div>
+          <hr *ngIf="isMobile" />
         </div>
       </div>
     </ng-container>

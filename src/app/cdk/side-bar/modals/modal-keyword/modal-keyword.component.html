@@ -54,11 +54,14 @@
           *ngFor="let keyword of keywords"
         >
           <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-            <img
-              class="icon-drag"
-              cdkDragHandle
-              src="./assets/vectors/draggable.svg"
-            />
+            <div class="image-container">
+              <img
+                class="icon-drag"
+                cdkDragHandle
+                src="./assets/vectors/draggable.svg"
+                aria-label="drag handle"
+              />
+            </div>
             <div class="row">
               <mat-form-field appearance="outline" class="mat-form-field-min">
                 <input
@@ -95,6 +98,7 @@
               </mat-form-field>
             </div>
           </div>
+
           <div
             class="col no-wrap actions-wrapper no-gutters"
             [ngClass]="{ privacy: !platform.columns12 }"
@@ -114,6 +118,7 @@
               </mat-icon>
             </button>
           </div>
+          <hr *ngIf="isMobile" />
         </div>
       </div>
     </ng-container>

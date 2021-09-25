@@ -62,7 +62,7 @@
           *ngFor="let country of countries; index as i"
           [attr.id]="'draggable-' + i"
         >
-          <div class="col l12 m8 s4 top no-wrap no-gutters">
+          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
             <img
               cdkDragHandle
               src="./assets/vectors/draggable.svg"
@@ -108,6 +108,8 @@
               </mat-icon>
             </button>
           </div>
+          <hr *ngIf="isMobile" />
+
         </div>
       </div>
     </ng-container>

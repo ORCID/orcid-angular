@@ -36,19 +36,16 @@
 }
 
 .websites-input-line {
-  margin: 10px 0 20px 0;
-  height: 120px;
-  img {
-    cursor: move;
-    z-index: 1;
-    margin: auto 1.45vh;
-    margin-inline-end: 8px;
+  .image-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .input-container {
-    margin: 18px 0;
+    margin-top: 18px;
   }
-
   button {
     margin: auto 0;
   }
@@ -64,11 +61,16 @@
 
   app-privacy-selector {
     min-width: 180px;
-    margin: auto 7vh;
   }
 
   .selector {
     margin: 0 !important;
+  }
+}
+
+::ng-deep .columns-4-or-8 {
+  .websites-input-line .input-container {
+    padding-bottom: 30px;
   }
 }
 
@@ -83,7 +85,15 @@
 
 .actions-wrapper {
   flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
 }
+::ng-deep .columns-4-or-8 {
+  .websites-input-line .actions-wrapper {
+    padding-bottom: 10px;
+  }
+}
+
 
 .cdk-drag-placeholder {
   opacity: 0;
@@ -92,6 +102,9 @@
 .mat-form-field {
   width: 100%;
   margin-inline-end: 32px;
+}
+::ng-deep .columns-4-or-8 .mat-form-field {
+  margin-inline-end: 0;
 }
 
 .website-input {
