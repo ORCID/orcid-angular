@@ -67,19 +67,7 @@
         cdkAutosizeMaxRows="1000"
       >
       </textarea>
-      <mat-error
-        *ngIf="biographyForm.get('biography').hasError('maxLength')"
-        i18n="@@topBar.maxLength5000"
-      >
-        Must be less then 5000 characters
-      </mat-error>
 
-      <mat-error
-        *ngIf="biographyForm.get('biography').hasError('notPattern')"
-        i18n="@@topBar.invalidBio"
-      >
-        Invalid characters or format
-      </mat-error>
       <mat-hint
         >{{ biographyForm.get('biography').value.length }}/5000</mat-hint
       >

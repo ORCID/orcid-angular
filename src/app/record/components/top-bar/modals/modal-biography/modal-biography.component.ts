@@ -76,9 +76,6 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
 
     this.biographyForm = new FormGroup({
       biography: new FormControl(this.biography, {
-        validators: [
-          OrcidValidators.notPattern(URL_REGEXP),
-        ],
         updateOn: 'change',
       }),
       visibility: new FormControl(this.biographyVisibility, {}),
