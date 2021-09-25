@@ -4,24 +4,27 @@
 
 .actions-wrapper {
   flex-wrap: nowrap;
+  display: flex;
+  justify-content: center;
 }
 
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
-::ng-deep .cdk-drag-animating {
+::ng-deep ::ng-deep .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.icon-drag {
+  height: 32px;
+  margin: 4px;
+}
+
 .keywords-input-line {
-  margin-top: 20px;
-  img {
-    margin-top: 3px;
-    cursor: move;
-    z-index: 1;
-    margin-inline-end: 18px;
+  .image-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
   }
+
+  margin-top: 20px;
 }
 
 .mat-form-field {
@@ -59,4 +62,21 @@
 
 app-privacy-selector {
   min-width: 180px;
+}
+
+::ng-deep .columns-4-or-8 {
+  .keywords-input-line .input-container {
+    padding-bottom: 30px;
+  }
+
+  .keywords-input-line .actions-wrapper {
+    padding-bottom: 10px;
+    justify-content: space-between;
+  }
+  .actions-wrapper {
+    width: 100%;
+  }
+  .columns-4-or-8 .cdk-drag-placeholder {
+    opacity: 0;
+  }
 }

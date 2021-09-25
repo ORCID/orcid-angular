@@ -160,3 +160,20 @@ label {
 .side-bar {
   text-decoration: underline;
 }
+
+::ng-deep .columns-4-or-8 {
+  .other-names-input-line .input-container {
+    padding-bottom: 30px;
+  }
+
+  .other-names-input-line .actions-wrapper {
+    padding-bottom: 10px;
+    justify-content: space-between;
+  }
+  .actions-wrapper {
+    width: 100%;
+  }
+  .columns-4-or-8 .cdk-drag-placeholder {
+    opacity: 0;
+  }
+}

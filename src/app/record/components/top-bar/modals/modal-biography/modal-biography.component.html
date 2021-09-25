@@ -57,21 +57,20 @@
     </label>
     <mat-form-field appearance="outline" class="mat-form-field-min biography">
       <textarea
+        maxlength="5000"
         id="biography-input"
         matInput
         formControlName="biography"
         placeholder=" {{ ngOrcidAddYourBiography }}"
-        cdkTextareaAutosize
+        [cdkTextareaAutosize]="true"
         cdkAutosizeMinRows="5"
-        cdkAutosizeMaxRows="7"
+        cdkAutosizeMaxRows="1000"
       >
       </textarea>
-      <mat-error
-        *ngIf="biographyForm.get('biography').hasError('notPattern')"
-        i18n="@@topBar.invalidBio"
+
+      <mat-hint
+        >{{ biographyForm.get('biography').value.length }}/5000</mat-hint
       >
-        Invalid characters or format
-      </mat-error>
     </mat-form-field>
     <div
       id="visibility"
