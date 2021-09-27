@@ -1,20 +1,5 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChildren,
-} from '@angular/core'
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms'
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core'
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -23,11 +8,7 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import {
-  AssertionVisibilityString,
-  EmailsActions,
-  EmailsEndpoint,
-} from 'src/app/types'
+import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -46,9 +27,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   addedEmailsCount = 0
   emailsForm: FormGroup = new FormGroup({})
-  emailsActions: EmailsActions[] = []
-  emailsDelete: EmailsActions[] = []
-  emailPrimary: EmailsActions
+  emails: AssertionVisibilityString[] = []
   originalEmailsBackendCopy: AssertionVisibilityString[]
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
@@ -110,28 +89,25 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   private formToBackend(
     emailForm: FormGroup,
-    emailsActions: EmailsActions[]
-  ): EmailsActions[] {
-    const allEmails = [] as EmailsActions[]
+    emails: AssertionVisibilityString[]
+  ): AssertionVisibilityString[] {
+    const allEmails = []
 
-    emailsActions
-      .map((e) => e.email.putCode)
+    emails
+      .map((email) => email.putCode)
       // Clear empty inputs
       .filter((key) => emailForm.value[key].email)
       .forEach((key, i) => {
         const value = emailForm.value[key].email
         const visibility = emailForm.value[key].visibility
-        const primary = emailsActions[i].email.primary
+        const primary = emails[i].primary
 
         if (emailForm.value[key]) {
           allEmails.push({
-            email: {
-              value,
-              visibility,
-              primary,
-            },
-            action: emailsActions[i].action,
-          })
+            value,
+            visibility,
+            primary,
+          } as AssertionVisibilityString)
         }
       })
     return allEmails
@@ -148,13 +124,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
     // Add email to the emails list
     // backend response come with no email putCode, so here we create one to be able to track those on the frontend
-    this.emailsActions.push({
-      email: {
-        putCode: newPutCode,
-        ...existingEmail,
-      },
+    this.emails.push({
+      putCode: newPutCode,
       action: existingEmail ? 'UPDATE' : 'ADD',
-    })
+      ...existingEmail,
+    } as AssertionVisibilityString)
 
     // Add a new control to the formGroup
     this.emailsForm.addControl(
@@ -196,15 +170,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * @param newPrimaryEmail: the email to make primary
    */
   makePrimary(newPrimaryEmail: AssertionVisibilityString): void {
-    this.emailsActions.forEach(
-      (ea) => (ea.email.primary = ea.email.putCode === newPrimaryEmail.putCode)
+    this.emails.forEach(
+      (email) => (email.primary = email.putCode === newPrimaryEmail.putCode)
     )
-    this.emailPrimary = {
-      email: this.emailsActions.find(
-        (value) => value.email.putCode === newPrimaryEmail.putCode
-      ).email,
-      action: 'PRIMARY',
-    }
     this.triggerGeneralFormValidation()
   }
 
@@ -330,77 +298,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     if (this.emailsForm.valid) {
-      const data = this.formToBackend(this.emailsForm, this.emailsActions)
-      if (this.emailsDelete.length > 0) {
-        this.emailsDelete.forEach((emailDelete) => {
-          this._recordEmails.delete(emailDelete.email).pipe(first()).subscribe()
-        })
-      }
-      if (this.emailPrimary) {
-        this._recordEmails
-          .setAsPrimaryEmail(this.emailPrimary.email)
-          .pipe(first())
-          .subscribe()
-      }
-      const emailNewPrimary = data.filter(
-        (emailActions) => emailActions.email.primary
-      )[0].email
-      const emailOldPrimary = this.emailsActions.filter(
-        (emailActions) => emailActions.email.primary
-      )[0].email
-
-      if (emailNewPrimary.value !== emailOldPrimary.value) {
-        this._recordEmails
-          .editEmail(emailOldPrimary.value, emailNewPrimary.value)
-          .pipe(first())
-          .subscribe()
-      }
-
-      if (emailNewPrimary.visibility !== emailOldPrimary.visibility) {
-        this._recordEmails.visibility(emailNewPrimary).pipe(first()).subscribe()
-      }
-
-      const otherEmailsAdd = data
-        .filter(
-          (emailActions) =>
-            !emailActions.email.primary && emailActions.action === 'ADD'
-        )
-        .map((emailActions) => emailActions.email)
-
-      const otherEmailsUpdate = data
-        .filter(
-          (emailActions) =>
-            !emailActions.email.primary && emailActions.action === 'UPDATE'
-        )
-        .map((emailActions) => emailActions.email)
-
-      if (otherEmailsAdd.length > 0) {
-        otherEmailsAdd.forEach((email) => {
-          email.current = true
-          email.primary = false
-          email.verified = false
-          this._recordEmails.addEmail(email).pipe(first()).subscribe()
-        })
-      }
-
-      if (otherEmailsUpdate.length > 0) {
-        otherEmailsUpdate.forEach((emailNew) => {
-          const emailOld = this.emailsActions.filter(
-            (emailActions) => emailActions.email.primary
-          )[0].email
-
-          if (emailNew.value !== emailOld.value) {
-            this._recordEmails
-              .editEmail(emailOld.value, emailNew.value)
-              .pipe(first())
-              .subscribe()
-          }
-
-          if (emailNew.visibility !== emailOld.visibility) {
-            this._recordEmails.visibility(emailNew).pipe(first()).subscribe()
-          }
-        })
-      }
+      const data = this.formToBackend(this.emailsForm, this.emails)
+      this._recordEmails.postEmails({
+        emails: data,
+        errors: [],
+      }).pipe(first()).subscribe()
       this.closeEvent()
     } else {
       this._snackBar.showValidationError()
@@ -412,15 +314,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   }
 
   deleteEmail(controlKey: string) {
-    this.emailsDelete.push({
-      email: this.emailsActions.find(
-        (value) => value.email.putCode === controlKey
-      ).email,
-      action: 'DELETE',
-    })
-    this.emailsActions = this.emailsActions.filter(
-      (value) => value.email.putCode !== controlKey
-    )
+    const i = this.emails.findIndex((value) => value.putCode === controlKey)
+    this.emails.splice(i, 1)
     this.emailsForm.removeControl(controlKey)
   }
 
@@ -450,7 +345,11 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     )
     const result = !!realEmailBackendContext
 
-    if (result && realEmailBackendContext.primary) {
+    if (
+      result &&
+      realEmailBackendContext.primary &&
+      this.emailsForm.hasError('duplicated', [controlKey, 'email'])
+    ) {
       return false
     }
 
@@ -474,7 +373,18 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
     )
-    return realEmailBackendContext?.verified
+
+    const result = realEmailBackendContext?.verified
+
+    if (
+      result &&
+      realEmailBackendContext.primary &&
+      this.emailsForm.hasError('duplicated', [controlKey, 'email'])
+    ) {
+      return false
+    }
+
+    return result
   }
 
   ngOnDestroy() {
