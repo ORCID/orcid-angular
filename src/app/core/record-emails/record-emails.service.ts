@@ -105,22 +105,6 @@ export class RecordEmailsService {
       )
   }
 
-  addEmail(email: AssertionVisibilityString): Observable<EmailsEndpoint> {
-    return this._http
-      .post<AssertionVisibilityString>(
-        environment.API_WEB + `account/addEmail.json`,
-        email,
-        {
-          headers: this.headers,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails({ forceReload: true }))
-      )
-  }
-
   verifyEmail(email: String): Observable<EmailsEndpoint> {
     return this._http
       .get<ErrorsListResponse>(
@@ -147,41 +131,6 @@ export class RecordEmailsService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap(() => this.getEmails({ forceReload: true }))
-      )
-  }
-
-  delete(email: AssertionVisibilityString) {
-    return this._http
-      .delete(
-        environment.API_WEB +
-          'account/deleteEmail.json?email=' +
-          encodeURIComponent(email.value),
-        {
-          headers: this.headers,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails({ forceReload: true }))
-      )
-  }
-
-  setAsPrimaryEmail(
-    email: AssertionVisibilityString
-  ): Observable<EmailsEndpoint> {
-    return this._http
-      .post<AssertionVisibilityString>(
-        environment.API_WEB + `account/email/setPrimary`,
-        email,
-        {
-          headers: this.headers,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
       )
   }
 
