@@ -1,5 +1,20 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core'
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms'
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core'
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
@@ -299,10 +314,13 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   saveEvent() {
     if (this.emailsForm.valid) {
       const data = this.formToBackend(this.emailsForm, this.emails)
-      this._recordEmails.postEmails({
-        emails: data,
-        errors: [],
-      }).pipe(first()).subscribe()
+      this._recordEmails
+        .postEmails({
+          emails: data,
+          errors: [],
+        })
+        .pipe(first())
+        .subscribe()
       this.closeEvent()
     } else {
       this._snackBar.showValidationError()

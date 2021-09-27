@@ -85,9 +85,7 @@
                 Email can not be duplicated
               </mat-error>
               <mat-error
-                *ngIf="
-                  emailsForm.hasError('email', [email.putCode, 'email'])
-                "
+                *ngIf="emailsForm.hasError('email', [email.putCode, 'email'])"
                 i18n="@@side-bar.invalidEmailFormat"
               >
                 Invalid email format
@@ -95,10 +93,7 @@
 
               <mat-error
                 *ngIf="
-                  emailsForm.hasError('backendError', [
-                    email.putCode,
-                    'email'
-                  ])
+                  emailsForm.hasError('backendError', [email.putCode, 'email'])
                 "
                 i18n="@@side-bar.alreadyAssociated"
               >
@@ -150,10 +145,7 @@
               emailsForm.get([email.putCode, 'visibility']) &&
               (emailsForm.get([email.putCode, 'visibility']).touched ||
                 emailsForm.get([email.putCode, 'visibility']).dirty) &&
-              emailsForm.hasError('unverified', [
-                email.putCode,
-                'visibility'
-              ])
+              emailsForm.hasError('unverified', [email.putCode, 'visibility'])
             "
           >
             Only verified email addresses can be displayed publicly or shared
@@ -258,10 +250,7 @@
             <mat-icon matPrefix>verified</mat-icon>
             <mat-error
               *ngIf="
-                emailsForm.hasError('backendErrors', [
-                  email.putCode,
-                  'email'
-                ])
+                emailsForm.hasError('backendErrors', [email.putCode, 'email'])
               "
               i18n="@@side-bar.alreadyAssociated"
             >
@@ -276,9 +265,7 @@
               Additional emails can not be duplicated
             </mat-error>
             <mat-error
-              *ngIf="
-                emailsForm.hasError('required', [email.putCode, 'email'])
-              "
+              *ngIf="emailsForm.hasError('required', [email.putCode, 'email'])"
               i18n="@@sideBar.primaryEmailRequired"
             >
               An email is required
@@ -370,9 +357,7 @@
       </div>
       <div class="col l12 m8 s4">
         <app-alert-message
-          *ngIf="
-            !email.primary && verificationEmailWasSend(email.putCode)
-          "
+          *ngIf="!email.primary && verificationEmailWasSend(email.putCode)"
           class="orc-font-body-small"
         >
           <strong class="orc-font-body"
@@ -397,16 +382,10 @@
     <div class="row orc-font-body-small">
       <a class="col add-more" id="add-link" (click)="addEmail()">
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
-        <ng-container
-          *ngIf="emails.length === 1"
-          i18n="@@side-bar.otherEmail"
-        >
+        <ng-container *ngIf="emails.length === 1" i18n="@@side-bar.otherEmail">
           Add other email address
         </ng-container>
-        <ng-container
-          *ngIf="emails.length > 1"
-          i18n="@@side-bar.anotherEmail"
-        >
+        <ng-container *ngIf="emails.length > 1" i18n="@@side-bar.anotherEmail">
           Add another email address
         </ng-container>
       </a>
