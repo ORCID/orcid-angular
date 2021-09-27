@@ -105,15 +105,15 @@ export class RecordEmailsService {
       )
   }
 
-  addEmail(email: Assertion): Observable<EmailsEndpoint> {
+  addEmail(email: AssertionVisibilityString): Observable<EmailsEndpoint> {
     return this._http
-      .post<Assertion>(environment.API_WEB + `account/addEmail.json`, email, {
+      .post<AssertionVisibilityString>(environment.API_WEB + `account/addEmail.json`, email, {
         headers: this.headers,
       })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
+        switchMap(() => this.getEmails({ forceReload: true }))
       )
   }
 

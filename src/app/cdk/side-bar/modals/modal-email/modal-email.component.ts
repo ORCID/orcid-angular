@@ -348,27 +348,55 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       const emailOldPrimary = this.emailsActions.filter(
         (emailActions) => emailActions.email.primary
       )[0].email
-      const otherNames = {
-        emails: data
-          .filter((emailActions) => !emailActions.email.primary)
-          .map((emailActions) => emailActions.email),
-        errors: [],
-      }
+
       if (emailNewPrimary.value !== emailOldPrimary.value) {
         this._recordEmails
           .editEmail(emailOldPrimary.value, emailNewPrimary.value)
           .pipe(first())
           .subscribe()
       }
+
       if (emailNewPrimary.visibility !== emailOldPrimary.visibility) {
         this._recordEmails.visibility(emailNewPrimary).pipe(first()).subscribe()
       }
 
-      if (otherNames.emails.length > 0) {
-        this._recordEmails
-          .postEmails({ emails: otherNames.emails, errors: [] })
-          .pipe(first())
-          .subscribe()
+      const otherEmailsAdd = data
+          .filter((emailActions) => !emailActions.email.primary && emailActions.action === 'ADD')
+          .map((emailActions) => emailActions.email)
+
+      const otherEmailsUpdate = data
+        .filter((emailActions) => !emailActions.email.primary && emailActions.action === 'UPDATE')
+        .map((emailActions) => emailActions.email)
+
+      if (otherEmailsAdd.length > 0) {
+        otherEmailsAdd.forEach((email) => {
+          email.current = true
+          email.primary = false
+          email.verified = false
+          this._recordEmails
+            .addEmail(email)
+            .pipe(first())
+            .subscribe()
+        })
+      }
+
+      if (otherEmailsUpdate.length > 0) {
+        otherEmailsUpdate.forEach((emailNew) => {
+          const emailOld = this.emailsActions.filter(
+            (emailActions) => emailActions.email.primary
+          )[0].email
+
+          if (emailNew.value !== emailOld.value) {
+            this._recordEmails
+              .editEmail(emailOld.value, emailNew.value)
+              .pipe(first())
+              .subscribe()
+          }
+
+          if (emailNew.visibility !== emailOld.visibility) {
+            this._recordEmails.visibility(emailNew).pipe(first()).subscribe()
+          }
+        })
       }
       this.closeEvent()
     } else {
