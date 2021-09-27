@@ -361,11 +361,17 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       }
 
       const otherEmailsAdd = data
-          .filter((emailActions) => !emailActions.email.primary && emailActions.action === 'ADD')
-          .map((emailActions) => emailActions.email)
+        .filter(
+          (emailActions) =>
+            !emailActions.email.primary && emailActions.action === 'ADD'
+        )
+        .map((emailActions) => emailActions.email)
 
       const otherEmailsUpdate = data
-        .filter((emailActions) => !emailActions.email.primary && emailActions.action === 'UPDATE')
+        .filter(
+          (emailActions) =>
+            !emailActions.email.primary && emailActions.action === 'UPDATE'
+        )
         .map((emailActions) => emailActions.email)
 
       if (otherEmailsAdd.length > 0) {
@@ -373,10 +379,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
           email.current = true
           email.primary = false
           email.verified = false
-          this._recordEmails
-            .addEmail(email)
-            .pipe(first())
-            .subscribe()
+          this._recordEmails.addEmail(email).pipe(first()).subscribe()
         })
       }
 
