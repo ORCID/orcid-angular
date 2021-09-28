@@ -137,11 +137,11 @@
           for="funding-project-title-input"
           class="mat-caption"
           [ngClass]="{
-          error:
-            fundingForm.get('fundingProjectTitle').hasError('required') &&
-            (fundingForm.get('fundingProjectTitle').touched ||
-              fundingForm.get('fundingProjectTitle').dirty)
-        }"
+            error:
+              fundingForm.get('fundingProjectTitle').hasError('required') &&
+              (fundingForm.get('fundingProjectTitle').touched ||
+                fundingForm.get('fundingProjectTitle').dirty)
+          }"
         >
           <strong i18n="@@funding.projectTitle">Title of funded project</strong>
           <span class="required">*</span>
@@ -331,15 +331,8 @@
         </div>
         <!-- Amount -->
         <div class="col">
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <input
-              id="amount-input"
-              matInput
-              formControlName="amount"
-            />
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input id="amount-input" matInput formControlName="amount" />
             <mat-error
               class="mat-caption"
               *ngIf="
@@ -564,8 +557,7 @@
         [ngClass]="{
           error:
             fundingForm.get('city').hasError('required') &&
-            (fundingForm.get('city').touched ||
-              fundingForm.get('city').dirty)
+            (fundingForm.get('city').touched || fundingForm.get('city').dirty)
         }"
       >
         <strong i18n="@@shared.city">City</strong>
@@ -602,10 +594,10 @@
         for="country-input"
         class="mat-caption"
         [ngClass]="{
-            error:
-              fundingForm.get('country').hasError('required') &&
-              fundingForm.get('country').touched
-          }"
+          error:
+            fundingForm.get('country').hasError('required') &&
+            fundingForm.get('country').touched
+        }"
       >
         <strong i18n="@@shared.country">Country</strong>
         <span class="required">*</span>

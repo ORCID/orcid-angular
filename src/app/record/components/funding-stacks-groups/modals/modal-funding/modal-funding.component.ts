@@ -167,7 +167,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       }),
       description: new FormControl(this.description, {}),
       amount: new FormControl(this.amount, {
-        validators: [Validators.pattern(AMOUNT_REGEXP)]
+        validators: [Validators.pattern(AMOUNT_REGEXP)],
       }),
       currencyCode: new FormControl(this.currencyCode, {}),
       startDateGroup: this._formBuilder.group(
