@@ -10,7 +10,7 @@ import {
 } from '@angular/forms'
 import { dateMonthYearValidator } from '../../../../../shared/validators/date/date.validator'
 
-import { URL_REGEXP } from '../../../../../constants'
+import { AMOUNT_REGEXP, URL_REGEXP } from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
 import { EMPTY, Subject } from 'rxjs'
@@ -120,6 +120,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
+  ngOrcidFundingType = $localize`:@@funding.selectAType:Select a funding type`
+  ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -163,10 +165,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       fundingProjectLink: new FormControl(this.fundingProjectLink, {
         validators: [Validators.pattern(URL_REGEXP)],
       }),
-      description: new FormControl(this.description, {
-        validators: [Validators.required],
+      description: new FormControl(this.description, {}),
+      amount: new FormControl(this.amount, {
+        validators: [Validators.pattern(AMOUNT_REGEXP)]
       }),
-      amount: new FormControl(this.amount, {}),
       currencyCode: new FormControl(this.currencyCode, {}),
       startDateGroup: this._formBuilder.group(
         {

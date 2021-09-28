@@ -16,6 +16,9 @@ export class WorkExternalIdentifiersEditComponent implements OnInit {
     WorkRelationships
   ) as WorkRelationships[]
   backupValue: any
+
+  ngOrcidSelectIdentifierType = $localize`:@@works.selectAnIdentifier:Select an identifier type`
+
   constructor() {}
 
   ngOnInit(): void {
