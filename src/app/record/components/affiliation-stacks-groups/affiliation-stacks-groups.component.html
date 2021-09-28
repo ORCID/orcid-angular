@@ -153,7 +153,11 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="affiliationGroup.affiliationType === 'DISTINCTION' ? 'distinction' : 'invited-position'"
+        [type]="
+          affiliationGroup.affiliationType === 'DISTINCTION'
+            ? 'distinction'
+            : 'invited-position'
+        "
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
@@ -213,7 +217,11 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="affiliationGroup.affiliationType === 'MEMBERSHIP' ? 'membership' : 'service'"
+        [type]="
+          affiliationGroup.affiliationType === 'MEMBERSHIP'
+            ? 'membership'
+            : 'service'
+        "
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
