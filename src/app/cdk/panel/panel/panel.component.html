@@ -20,7 +20,7 @@
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </div>
   </ng-container>
-
+  
   <div *ngIf="selectable">
     <mat-checkbox
       class="text-wrap"
@@ -67,9 +67,7 @@
         </button>
         <button
           mat-icon-button
-          *ngIf="
-            !isPublicRecord && !isUserSource && userVersionPresent !== null
-          "
+          *ngIf="!isPublicRecord && !isUserSource && hasExternalIds"
           [matTooltip]="tooltipLabelMakeCopy"
           (click)="openModal({ createACopy: true })"
         >

@@ -19,7 +19,7 @@ export interface FundingGroup {
   groupId: string
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
-  externalIdentifiers: [any] // TODO is this always empty?
+  externalIdentifiers: ExternalIdentifier[]
   defaultFunding: Funding
 }
 

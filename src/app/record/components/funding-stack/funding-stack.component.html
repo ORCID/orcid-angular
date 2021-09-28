@@ -17,7 +17,7 @@
     [isPublicRecord]="isPublicRecord"
     [putCode]="funding.putCode.value"
     [isUserSource]="userIsSource(funding)"
-    [userVersionPresent]="fundingStack.userVersionPresent"
+    [hasExternalIds]="hasExternalIds"
     *ngIf="isPreferred(funding) || displayTheStack"
     type="funding"
   >
