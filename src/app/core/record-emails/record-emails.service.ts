@@ -73,11 +73,11 @@ export class RecordEmailsService {
     return this.$emailsSubject
   }
 
-  postEmails(otherNames: EmailsEndpoint): Observable<EmailsEndpoint> {
+  postEmails(emails: EmailsEndpoint): Observable<EmailsEndpoint> {
     return this._http
       .post<EmailsEndpoint>(
         environment.API_WEB + `account/emails.json`,
-        otherNames,
+        emails,
         {
           headers: this.headers,
         }
@@ -105,18 +105,6 @@ export class RecordEmailsService {
       )
   }
 
-  addEmail(email: Assertion): Observable<EmailsEndpoint> {
-    return this._http
-      .post<Assertion>(environment.API_WEB + `account/addEmail.json`, email, {
-        headers: this.headers,
-      })
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
-      )
-  }
-
   verifyEmail(email: String): Observable<EmailsEndpoint> {
     return this._http
       .get<ErrorsListResponse>(
@@ -132,19 +120,17 @@ export class RecordEmailsService {
       )
   }
 
-  setAsPrimaryEmail(email: Assertion): Observable<EmailsEndpoint> {
+  visibility(email): Observable<any> {
+    const encoded_data = JSON.stringify(email)
+
     return this._http
-      .post<Assertion>(
-        environment.API_WEB + `account/email/setPrimary`,
-        email,
-        {
-          headers: this.headers,
-        }
-      )
+      .post(environment.API_WEB + `account/email/visibility`, encoded_data, {
+        headers: this.headers,
+      })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
+        switchMap(() => this.getEmails({ forceReload: true }))
       )
   }
 

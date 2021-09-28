@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core'
-import { Subject } from 'rxjs/internal/Subject'
+import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
 import { environment } from '../../../../environments/environment'
