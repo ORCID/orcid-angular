@@ -474,17 +474,17 @@
       <div class="input-container date">
         <div class="col l4 date">
           <mat-form-field
-            id="end-date-day-input"
+            id="end-date-year-input"
             appearance="outline"
             class="mat-form-field-min"
           >
             <mat-select
-              placeholder="{{ ngOrcidDay }}"
-              formControlName="endDateDay"
+              placeholder="{{ ngOrcidYear }}"
+              formControlName="endDateYear"
             >
-              <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
-              <mat-option *ngFor="let day of days" [value]="day">
-                {{ day }}
+              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+              <mat-option *ngFor="let year of yearsEndDate" [value]="year">
+                {{ year }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -508,17 +508,17 @@
         </div>
         <div class="col l4 date">
           <mat-form-field
-            id="end-date-year-input"
+            id="end-date-day-input"
             appearance="outline"
             class="mat-form-field-min"
           >
             <mat-select
-              placeholder="{{ ngOrcidYear }}"
-              formControlName="endDateYear"
+              placeholder="{{ ngOrcidDay }}"
+              formControlName="endDateDay"
             >
-              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option *ngFor="let year of yearsEndDate" [value]="year">
-                {{ year }}
+              <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
+              <mat-option *ngFor="let day of days" [value]="day">
+                {{ day }}
               </mat-option>
             </mat-select>
           </mat-form-field>
