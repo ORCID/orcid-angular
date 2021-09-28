@@ -48,7 +48,7 @@ export interface AffiliationGroup {
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
   externalIdentifiers: [any] // TODO is this always empty?
-  affiliationType: string // Todo make an enum
+  affiliationType: AffiliationGroupsTypes
 }
 
 export interface Affiliation extends AssertionBase {
