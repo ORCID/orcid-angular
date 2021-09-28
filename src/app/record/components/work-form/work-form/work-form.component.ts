@@ -82,6 +82,7 @@ export class WorkFormComponent implements OnInit {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
+  ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
 
   workTypes:
     | typeof WorkConferenceTypes
