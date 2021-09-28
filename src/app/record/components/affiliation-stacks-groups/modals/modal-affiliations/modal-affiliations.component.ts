@@ -209,23 +209,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           this.affiliationForm.patchValue({
             visibility: this.defaultVisibility,
           })
-        })
-    }
-
-    if (this.affiliation) {
-      this._recordAffiliationService
-        .getAffiliationsDetails(
-          this.affiliation.affiliationType.value,
-          this.affiliation.putCode.value
-        )
-        .pipe(first())
-        .subscribe((affiliationUIGroup) => {
           this.loadingAffiliations = false
-          this.affiliationForm.patchValue({
-            link:
-              affiliationUIGroup[0].affiliationGroup[0].affiliations[0].url
-                .value,
-          })
         })
     } else {
       this.loadingAffiliations = false
@@ -240,6 +224,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       this.country = this.affiliation.country.value
       this.department = this.affiliation.departmentName.value
       this.title = this.affiliation.roleTitle.value
+      this.link = this.affiliation.url.value
     }
   }
 

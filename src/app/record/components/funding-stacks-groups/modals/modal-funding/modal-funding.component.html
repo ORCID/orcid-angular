@@ -94,8 +94,7 @@
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <mat-select
             formControlName="fundingType"
-            placeholder="Select a funding type"
-            name="item"
+            placeholder="{{ ngOrcidFundingType }}"
           >
             <mat-option
               *ngFor="let item of fundingTypes | keyvalue"
@@ -128,14 +127,22 @@
           id="funding-subtype-input"
           matInput
           formControlName="fundingSubtype"
-          placeholder=""
         />
       </mat-form-field>
     </div>
 
     <div>
       <div class="row">
-        <label for="funding-project-title-input" class="mat-caption">
+        <label
+          for="funding-project-title-input"
+          class="mat-caption"
+          [ngClass]="{
+            error:
+              fundingForm.get('fundingProjectTitle').hasError('required') &&
+              (fundingForm.get('fundingProjectTitle').touched ||
+                fundingForm.get('fundingProjectTitle').dirty)
+          }"
+        >
           <strong i18n="@@funding.projectTitle">Title of funded project</strong>
           <span class="required">*</span>
         </label>
@@ -146,7 +153,6 @@
             id="funding-project-title-input"
             matInput
             formControlName="fundingProjectTitle"
-            placeholder=""
           />
           <mat-error
             class="mat-caption"
@@ -221,9 +227,9 @@
         <div class="row">
           <mat-form-field appearance="outline" class="mat-form-field-min">
             <mat-select
-              placeholder="Select a language"
+              id="language-title-input"
+              placeholder="{{ ngOrcidSelectLanguage }}"
               formControlName="translatedTitleLanguage"
-              name="item"
             >
               <mat-option
                 *ngFor="let item of languageMap | keyvalue"
@@ -280,7 +286,7 @@
     <!-- Description  -->
     <div class="row description">
       <div class="row">
-        <label for="descriptiom-input" class="mat-caption">
+        <label for="description-input" class="mat-caption">
           <strong i18n="@@funding.description">Description</strong>
           <span class="required">*</span>
         </label>
@@ -309,7 +315,7 @@
       <div class="input-container">
         <div class="col l4 date">
           <mat-form-field
-            id="currency-code-input"
+            id="funding-amount-input"
             appearance="outline"
             class="mat-form-field-min"
           >
@@ -325,17 +331,18 @@
         </div>
         <!-- Amount -->
         <div class="col">
-          <mat-form-field
-            appearance="outline"
-            class="mat-form-field-min"
-            ng-currency
-          >
-            <input
-              id="amount-input"
-              matInput
-              formControlName="amount"
-              placeholder=""
-            />
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input id="amount-input" matInput formControlName="amount" />
+            <mat-error
+              class="mat-caption"
+              *ngIf="
+                fundingForm.get('amount').hasError('pattern') &&
+                fundingForm.get('amount').touched
+              "
+              i18n="@@funding.amountError"
+            >
+              Amount should be a numeric value with format 1,234,567.89
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -545,7 +552,14 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <label class="mat-caption">
+      <label
+        class="mat-caption"
+        [ngClass]="{
+          error:
+            fundingForm.get('city').hasError('required') &&
+            (fundingForm.get('city').touched || fundingForm.get('city').dirty)
+        }"
+      >
         <strong i18n="@@shared.city">City</strong>
         <span class="required">*</span>
       </label>
@@ -576,7 +590,15 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <label for="country-input" class="mat-caption">
+      <label
+        for="country-input"
+        class="mat-caption"
+        [ngClass]="{
+          error:
+            fundingForm.get('country').hasError('required') &&
+            fundingForm.get('country').touched
+        }"
+      >
         <strong i18n="@@shared.country">Country</strong>
         <span class="required">*</span>
       </label>

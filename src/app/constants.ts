@@ -26,6 +26,8 @@ export const HAS_NUMBER = /(?=.*[0-9]).*/
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 // https://regex101.com/r/gznzc6/1 strips params for OJS links
 export const REDIRECT_URI_REGEXP = /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
+// https://regex101.com/r/EP7uWn/1
+export const AMOUNT_REGEXP = /^[0-9.,]*$/
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
