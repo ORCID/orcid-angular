@@ -198,11 +198,11 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.otherNames.reverse()
     this.otherNames
       .map((value) => value.putCode)
-      .filter((key) => namesForm.value[key].otherName)
+      .filter((key) => namesForm.getRawValue()[key].otherName)
       .forEach((key, i) => {
-        const otherName = namesForm.value[key].otherName.trim()
-        const visibility = namesForm.value[key].visibility
-        if (namesForm.value[key]) {
+        const otherName = namesForm.getRawValue()[key].otherName.trim()
+        const visibility = namesForm.getRawValue()[key].visibility
+        if (namesForm.getRawValue()[key]) {
           otherNames.otherNames.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
             content: otherName,

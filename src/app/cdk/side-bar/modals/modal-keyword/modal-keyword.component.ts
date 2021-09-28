@@ -125,11 +125,11 @@ export class ModalKeywordComponent implements OnInit, OnDestroy {
     toBackendKeywords.reverse()
     toBackendKeywords
       .map((value) => value.putCode)
-      .filter((key) => keywordsForm.value[key].content)
+      .filter((key) => keywordsForm.getRawValue()[key].content)
       .forEach((key, i) => {
-        const content = keywordsForm.value[key].content.trim()
-        const visibility = keywordsForm.value[key].visibility
-        if (keywordsForm.value[key]) {
+        const content = keywordsForm.getRawValue()[key].content.trim()
+        const visibility = keywordsForm.getRawValue()[key].visibility
+        if (keywordsForm.getRawValue()[key]) {
           keywords.keywords.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
             content: content,
