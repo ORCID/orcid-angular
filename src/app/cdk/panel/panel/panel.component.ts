@@ -81,7 +81,8 @@ export class PanelComponent implements OnInit {
   }
 
   @Input() isUserSource = false
-  @Input() userVersionPresent: boolean
+  @Input() hasExternalIds: boolean
+
   @Input() id: string
   selected: boolean
 

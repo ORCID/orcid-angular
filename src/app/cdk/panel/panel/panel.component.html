@@ -67,9 +67,7 @@
         </button>
         <button
           mat-icon-button
-          *ngIf="
-            !isPublicRecord && !isUserSource && userVersionPresent !== null
-          "
+          *ngIf="!isPublicRecord && !isUserSource && hasExternalIds"
           [matTooltip]="tooltipLabelMakeCopy"
           (click)="openModal({ createACopy: true })"
         >

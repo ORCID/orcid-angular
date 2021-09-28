@@ -47,7 +47,7 @@ export interface AffiliationGroup {
   groupId: string
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
-  externalIdentifiers: [any] // TODO is this always empty?
+  externalIdentifiers: ExternalIdentifier[]
   affiliationType: AffiliationGroupsTypes
 }
 

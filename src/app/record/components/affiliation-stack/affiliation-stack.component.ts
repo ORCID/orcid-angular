@@ -31,8 +31,10 @@ export class AffiliationStackComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+  hasExternalIdentifiers: boolean
   @Input()
   set affiliationStack(value: AffiliationGroup) {
+    this.hasExternalIdentifiers = !!value.externalIdentifiers.length
     this._affiliationStack = value
     this.setAffiliationsInitialStates(value)
   }

@@ -436,7 +436,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           existingGrant?.url?.value || '',
           [Validators.pattern(URL_REGEXP)],
         ],
-        fundingRelationship: [FundingRelationships.self, []],
+        fundingRelationship: [
+          existingGrant?.relationship?.value || FundingRelationships.self,
+          [],
+        ],
       })
     )
 

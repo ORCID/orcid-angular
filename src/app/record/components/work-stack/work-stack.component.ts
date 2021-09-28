@@ -35,9 +35,11 @@ export class WorkStackComponent implements OnInit {
   visibility: VisibilityStrings
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
+  hasExternalIds: boolean
 
   @Input()
   set workStack(value: WorkGroup) {
+    this.hasExternalIds = !!value.externalIdentifiers.length
     this._workStack = value
     this.setInitialStates(value)
   }

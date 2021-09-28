@@ -19,8 +19,10 @@ import { ModalFundingComponent } from '../funding-stacks-groups/modals/modal-fun
 export class FundingStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _fundingStack: FundingGroup
+  hasExternalIds: boolean
   @Input()
   set fundingStack(value: FundingGroup) {
+    this.hasExternalIds = !!value.externalIdentifiers.length
     this._fundingStack = value
     this.setFundingsInitialStates(value)
   }
