@@ -126,11 +126,11 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     this.countries
       .map((value) => value.putCode)
       // Clear empty inputs
-      .filter((key) => countryForm.value[key].country)
+      .filter((key) => countryForm.getRawValue()[key].country)
       .forEach((key, i) => {
-        const countryName = countryForm.value[key].country
-        const visibility = countryForm.value[key].visibility
-        if (countryForm.value[key]) {
+        const countryName = countryForm.getRawValue()[key].country
+        const visibility = countryForm.getRawValue()[key].visibility
+        if (countryForm.getRawValue()[key]) {
           countries.addresses.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
             countryName,
