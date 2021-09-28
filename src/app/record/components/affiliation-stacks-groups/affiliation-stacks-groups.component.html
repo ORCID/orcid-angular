@@ -29,7 +29,11 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="affiliationGroup.affiliationType === 'EDUCATION' ? 'education' : 'qualification'"
+        [type]="
+          affiliationGroup.affiliationType === 'EDUCATION'
+            ? 'education'
+            : 'qualification'
+        "
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
