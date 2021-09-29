@@ -19,6 +19,8 @@
     [selectable]="true"
     [isUserSource]="userIsSource(work)"
     [hasExternalIds]="hasExternalIds"
+    [userVersionPresent]="workStack.userVersionPresent"
+    [(displayTheStack)]="displayTheStack"
     (checkboxChangePanel)="checkboxChangeWorkStack($event)"
     #panelsComponent
     [type]="'works'"

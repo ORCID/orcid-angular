@@ -66,6 +66,16 @@ export class PanelComponent implements OnInit {
   @Input() editable = true
   @Input() selectable = false
   @Input() checkbox = false
+  _displayTheStack: boolean
+  @Input()
+  set displayTheStack(value: boolean) {
+    this._displayTheStack = value
+    this.displayTheStackChange.emit(value)
+  }
+  get displayTheStack(): boolean {
+    return this._displayTheStack
+  }
+  @Output() displayTheStackChange = new EventEmitter<boolean>()
   @Output() openStateChange = new EventEmitter<boolean>()
   @Output() checkboxChangePanel = new EventEmitter<any>()
 
@@ -82,6 +92,7 @@ export class PanelComponent implements OnInit {
 
   @Input() isUserSource = false
   @Input() hasExternalIds: boolean
+  @Input() userVersionPresent: boolean
 
   @Input() id: string
   selected: boolean
@@ -89,6 +100,7 @@ export class PanelComponent implements OnInit {
   formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
+  tooltipLabelOpenSources = $localize`:@@shared.makeCopy:Open sources to edit you own version`
 
   panelForm: FormGroup
 
