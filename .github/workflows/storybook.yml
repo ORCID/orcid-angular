@@ -1,34 +1,40 @@
-# on: [push, pull_request]
-# name: Storybook 📚
-# jobs:
-#   storybook:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version: [12.x]
+name: Storybook 📚
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+      - main
 
-#     steps:
-#       - uses: actions/checkout@v1
+jobs:
+  storybook:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
 
-#       - name: Cache node modules
-#         uses: actions/cache@v1
-#         with:
-#           path: ~/.npm
-#           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-node-
-#       - name: Setup
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: ${{ matrix.node-version }}
-#       - name: npm install and npm run build
-#         run: |
-#           npm i
-#           npm run build:storybook
-#       - name: Deploy 🚀
-#         if: github.event_name == 'push' && (contains(github.ref, 'tags') || github.ref == 'refs/heads/master')
-#         uses: JamesIves/github-pages-deploy-action@3.5.9
-#         with:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           BRANCH: gh-pages
-#           FOLDER: dist/storybook
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and npm run build
+        run: |
+          npm i
+          npm run build:storybook
+      - name: Deploy 🚀
+        if: contains(github.ref, 'tags')
+        uses: JamesIves/github-pages-deploy-action@3.5.9
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist/storybook
