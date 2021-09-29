@@ -29,11 +29,7 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="
-          affiliationGroup.affiliationType === 'EDUCATION'
-            ? 'education'
-            : 'qualification'
-        "
+        [type]="'employment'"
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
@@ -94,7 +90,9 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="'education'"
+        [type]="affiliationGroup.affiliationType === 'EDUCATION'
+            ? 'education'
+            : 'qualification'"
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
