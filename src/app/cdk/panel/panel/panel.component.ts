@@ -101,6 +101,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
   tooltipLabelOpenSources = $localize`:@@shared.makeCopy:Open sources to edit you own version`
+  tooltipLabelYourOwnVersion = $localize`:@@shared.makeCopy:You can only edit your own version`
 
   panelForm: FormGroup
 

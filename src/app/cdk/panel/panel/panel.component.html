@@ -68,15 +68,26 @@
         <ng-container
           *ngIf="!isPublicRecord && !isUserSource && hasExternalIds"
         >
-          <button
+          <div
             *ngIf="userVersionPresent"
-            [disabled]="displayTheStack"
-            mat-icon-button
-            [matTooltip]="tooltipLabelOpenSources"
-            (click)="displayTheStackChange.next(true)"
+            [matTooltip]="
+              displayTheStack
+                ? tooltipLabelYourOwnVersion
+                : tooltipLabelOpenSources
+            "
           >
-            <mat-icon class="material-icons-outlined">call_split</mat-icon>
-          </button>
+            <button *ngIf="displayTheStack" [disabled]="true" mat-icon-button>
+              <mat-icon class="material-icons-outlined">call_split</mat-icon>
+            </button>
+            <button
+              *ngIf="!displayTheStack"
+              [disabled]="false"
+              mat-icon-button
+              (click)="displayTheStackChange.next(true)"
+            >
+              <mat-icon class="material-icons-outlined">call_split</mat-icon>
+            </button>
+          </div>
           <button
             *ngIf="!userVersionPresent"
             mat-icon-button
