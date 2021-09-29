@@ -28,9 +28,8 @@ label {
   max-width: 402px;
 }
 
-.input-container,
-.date {
-  margin-bottom: 10px;
+.input-container, .date-group {
+  margin: 0;
 }
 
 .actions-wrapper {
@@ -95,11 +94,14 @@ label {
   text-decoration: underline;
 }
 
-.date {
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0px !important;
+.date-group {
+  padding-bottom: 1.475em;
+  .date {
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+    padding-left: 0;
   }
-  padding-inline-start: 0;
 }
 
 button,
