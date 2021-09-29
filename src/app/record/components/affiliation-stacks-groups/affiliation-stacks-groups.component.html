@@ -90,9 +90,11 @@
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="affiliationGroup.affiliationType === 'EDUCATION'
+        [type]="
+          affiliationGroup.affiliationType === 'EDUCATION'
             ? 'education'
-            : 'qualification'"
+            : 'qualification'
+        "
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
