@@ -188,12 +188,16 @@
       </div>
     </div>
     <!-- Funding project translations title -->
-    <div [hidden]="!showTranslationTitle">
+    <div [hidden]="!showTranslationTitle" formGroupName="translatedTitleGroup">
       <div>
         <div class="row">
           <label
             for="funding-project-translated-title-input"
             class="mat-caption"
+            [ngClass]="{
+              error: fundingForm.hasError('invalidTranslatedTitleContent', 'translatedTitleGroup')
+            }"
+            
           >
             <strong i18n="@@funding.translatedTitle"
               >Funding project translated title</strong
@@ -208,12 +212,20 @@
             formControlName="translatedTitleContent"
           />
         </mat-form-field>
+        <mat-error class="mat-caption" *ngIf="fundingForm.hasError('invalidTranslatedTitleContent', 'translatedTitleGroup')"
+          i18n="@@funding.projectTranslatedTitleError">
+            Please enter a translated title
+        </mat-error>
       </div>
 
       <!-- Language of this title -->
       <div>
         <div class="row translate-title">
-          <label for="language-title-input" class="mat-caption">
+          <label for="language-title-input" class="mat-caption"
+          [ngClass]="{
+              error: fundingForm.hasError('invalidTranslatedTitleLanguage', 'translatedTitleGroup')
+            }"
+          >
             <strong i18n="@@funding.translatedTitleLanguage"
               >Language of this title</strong
             >
@@ -234,6 +246,10 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-error class="mat-caption" *ngIf="fundingForm.hasError('invalidTranslatedTitleLanguage', 'translatedTitleGroup')"
+            i18n="@@funding.projectTranslatedTitleError">
+            Please select a language 
+          </mat-error>
         </div>
       </div>
     </div>
