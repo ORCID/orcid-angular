@@ -89,13 +89,14 @@ mat-radio-group {
   display: flex;
   flex-direction: column;
 }
-
-.date {
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0px !important;
-  }
+.date-group {
   padding-bottom: 1.475em;
-  padding-left: 0;
+  .date {
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+    padding-left: 0;
+  }
 }
 
 .project-link-mobile {

@@ -266,22 +266,34 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         value: this.type,
       },
       startDate: {
-        day: this.addTrailingZero(
-          affiliationForm.get('startDateGroup.startDateDay').value
-        ),
-        month: this.addTrailingZero(
-          affiliationForm.get('startDateGroup.startDateMonth').value
-        ),
-        year: affiliationForm.get('startDateGroup.startDateYear').value,
+        day: affiliationForm.get('startDateGroup.startDateDay').value
+          ? this.addTrailingZero(
+              affiliationForm.get('startDateGroup.startDateDay').value
+            )
+          : '',
+        month: affiliationForm.get('startDateGroup.startDateMonth').value
+          ? this.addTrailingZero(
+              affiliationForm.get('startDateGroup.startDateMonth').value
+            )
+          : '',
+        year: affiliationForm.get('startDateGroup.startDateYear').value
+          ? affiliationForm.get('startDateGroup.startDateYear').value
+          : '',
       },
       endDate: {
-        day: this.addTrailingZero(
-          affiliationForm.get('endDateGroup.endDateDay').value
-        ),
-        month: this.addTrailingZero(
-          affiliationForm.get('endDateGroup.endDateMonth').value
-        ),
-        year: affiliationForm.get('endDateGroup.endDateYear').value,
+        day: affiliationForm.get('endDateGroup.endDateDay').value
+          ? this.addTrailingZero(
+              affiliationForm.get('endDateGroup.endDateDay').value
+            )
+          : '',
+        month: affiliationForm.get('endDateGroup.endDateMonth')
+          ? this.addTrailingZero(
+              affiliationForm.get('endDateGroup.endDateMonth').value
+            )
+          : '',
+        year: affiliationForm.get('endDateGroup.endDateYear').value
+          ? affiliationForm.get('endDateGroup.endDateYear').value
+          : '',
       },
       url: {
         value: affiliationForm.get('link').value,

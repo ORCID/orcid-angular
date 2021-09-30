@@ -373,16 +373,26 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         value: this.fundingForm.value.fundingProjectLink,
       },
       startDate: {
-        month: this.addTrailingZero(
-          this.fundingForm.get('startDateGroup.startDateMonth').value
-        ),
-        year: this.fundingForm.get('startDateGroup.startDateYear').value,
+        day: '',
+        month: this.fundingForm.get('startDateGroup.startDateMonth').value
+          ? this.addTrailingZero(
+              this.fundingForm.get('startDateGroup.startDateMonth').value
+            )
+          : '',
+        year: this.fundingForm.get('startDateGroup.startDateYear').value
+          ? this.fundingForm.get('startDateGroup.startDateYear').value
+          : '',
       },
       endDate: {
-        month: this.addTrailingZero(
-          this.fundingForm.get('endDateGroup.endDateMonth').value
-        ),
-        year: this.fundingForm.get('endDateGroup.endDateYear').value,
+        day: '',
+        month: this.fundingForm.get('endDateGroup.endDateMonth').value
+          ? this.addTrailingZero(
+              this.fundingForm.get('endDateGroup.endDateMonth').value
+            )
+          : '',
+        year: this.fundingForm.get('endDateGroup.endDateYear').value
+          ? this.fundingForm.get('endDateGroup.endDateYear').value
+          : '',
       },
       externalIdentifiers: this.fundingForm.value.grants.map((grant) => {
         return {

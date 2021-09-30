@@ -36,7 +36,7 @@ export function dateMonthYearValidator(dateType: string) {
     const year = c.get(dateType + 'Year').value
     const month = c.get(dateType + 'Month').value
 
-    if (year === '' && month === '') {
+    if (!year && !month) {
       return null
     }
 
