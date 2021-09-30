@@ -8,7 +8,7 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms'
-import { dateMonthYearValidator } from '../../../../../shared/validators/date/date.validator'
+import { dateMonthYearValidator, endDateValidator } from '../../../../../shared/validators/date/date.validator'
 
 import { AMOUNT_REGEXP, URL_REGEXP } from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
@@ -198,6 +198,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       visibility: new FormControl(this.defaultVisibility, {
         validators: [Validators.required],
       }),
+    }, {
+      validator: endDateValidator()
     })
     this.grantsArray = this.fundingForm.controls.grants as FormArray
 

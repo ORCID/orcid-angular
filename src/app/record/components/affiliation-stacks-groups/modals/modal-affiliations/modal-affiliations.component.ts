@@ -20,7 +20,7 @@ import { RecordCountriesService } from '../../../../../core/record-countries/rec
 import { first, map, switchMap, tap } from 'rxjs/operators'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { URL_REGEXP } from '../../../../../constants'
-import { dateValidator } from '../../../../../shared/validators/date/date.validator'
+import { dateValidator, endDateValidator } from '../../../../../shared/validators/date/date.validator'
 import { Observable } from 'rxjs/internal/Observable'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
@@ -135,6 +135,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       visibility: new FormControl(this.defaultVisibility, {
         validators: [Validators.required],
       }),
+    }, {
+      validator: endDateValidator()
     })
 
     this.filteredOptions = this.affiliationForm
