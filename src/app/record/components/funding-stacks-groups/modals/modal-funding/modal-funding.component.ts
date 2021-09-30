@@ -161,12 +161,13 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       fundingProjectTitle: new FormControl(this.fundingProjectTitle, {
         validators: [Validators.required],
       }),
-      translatedTitleGroup: 
-        this._formBuilder.group(
-          {
-            translatedTitleContent: [''],
-            translatedTitleLanguage: [''],
-          }, { validator: translatedTitleValidator}),
+      translatedTitleGroup: this._formBuilder.group(
+        {
+          translatedTitleContent: [''],
+          translatedTitleLanguage: [''],
+        },
+        { validator: translatedTitleValidator }
+      ),
       fundingProjectLink: new FormControl(this.fundingProjectLink, {
         validators: [Validators.pattern(URL_REGEXP)],
       }),
@@ -233,8 +234,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       if (this.funding.fundingTitle?.translatedTitle) {
         this.fundingForm.patchValue({
           translatedTitleGroup: {
-            translatedTitleContent: this.funding.fundingTitle?.translatedTitle.content,
-            translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle.languageCode,
+            translatedTitleContent: this.funding.fundingTitle?.translatedTitle
+              .content,
+            translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle
+              .languageCode,
           },
         })
       }
@@ -242,8 +245,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.funding.externalIdentifiers.forEach((grant) => {
         this.addAnotherGrant(grant)
       })
-
-
     } else {
       // If there is an existing funding, do not overwrite the visibility
       this._record
@@ -360,8 +361,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         title: this.fundingForm.value.fundingProjectTitle,
         errors: [],
         translatedTitle: {
-          content: this.fundingForm.get('translatedTitleGroup.translatedTitleContent').value,
-          languageCode: this.fundingForm.get('translatedTitleGroup.translatedTitleLanguage').value,
+          content: this.fundingForm.get(
+            'translatedTitleGroup.translatedTitleContent'
+          ).value,
+          languageCode: this.fundingForm.get(
+            'translatedTitleGroup.translatedTitleLanguage'
+          ).value,
           errors: [],
         },
       },
@@ -609,4 +614,3 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     return date
   }
 }
-
