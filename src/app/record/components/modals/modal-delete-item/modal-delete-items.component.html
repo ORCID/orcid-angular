@@ -127,7 +127,9 @@
           </div>
           <div class="details orc-font-body-small">
             <strong i18n="@@record.source">Source</strong>:
-            <ng-container *ngIf="item?.assertionOriginName || item?.assertionOriginOrcid">
+            <ng-container
+              *ngIf="item?.assertionOriginName || item?.assertionOriginOrcid"
+            >
               {{ item?.assertionOriginName || item?.assertionOriginOrcid }}
               <i i18n="@@shared.onBehalfOf">via</i>
             </ng-container>
