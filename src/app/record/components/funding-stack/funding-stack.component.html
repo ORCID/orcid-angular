@@ -18,6 +18,8 @@
     [putCode]="funding.putCode.value"
     [isUserSource]="userIsSource(funding)"
     [hasExternalIds]="hasExternalIds"
+    [userVersionPresent]="fundingStack.userVersionPresent"
+    [(displayTheStack)]="displayTheStack"
     *ngIf="isPreferred(funding) || displayTheStack"
     type="funding"
   >

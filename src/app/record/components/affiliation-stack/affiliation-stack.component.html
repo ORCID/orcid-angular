@@ -17,6 +17,8 @@
     [visibility]="affiliationStack.defaultAffiliation.visibility.visibility"
     [isPublicRecord]="isPublicRecord"
     [isUserSource]="userIsSource(affiliation)"
+    [userVersionPresent]="affiliationStack.userVersionPresent"
+    [(displayTheStack)]="displayTheStack"
     [hasExternalIds]="hasExternalIdentifiers"
     *ngIf="isPreferred(affiliation) || displayTheStack"
   >

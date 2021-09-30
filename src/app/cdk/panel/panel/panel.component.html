@@ -65,14 +65,39 @@
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
+        <ng-container
           *ngIf="!isPublicRecord && !isUserSource && hasExternalIds"
-          [matTooltip]="tooltipLabelMakeCopy"
-          (click)="openModal({ createACopy: true })"
         >
-          <mat-icon class="material-icons-outlined">call_split</mat-icon>
-        </button>
+          <div
+            *ngIf="userVersionPresent"
+            [matTooltip]="
+              displayTheStack
+                ? tooltipLabelYourOwnVersion
+                : tooltipLabelOpenSources
+            "
+          >
+            <button *ngIf="displayTheStack" [disabled]="true" mat-icon-button>
+              <mat-icon class="material-icons-outlined">call_split</mat-icon>
+            </button>
+            <button
+              *ngIf="!displayTheStack"
+              [disabled]="false"
+              mat-icon-button
+              (click)="displayTheStackChange.next(true)"
+            >
+              <mat-icon class="material-icons-outlined">call_split</mat-icon>
+            </button>
+          </div>
+          <button
+            *ngIf="!userVersionPresent"
+            mat-icon-button
+            [matTooltip]="tooltipLabelMakeCopy"
+            (click)="openModal({ createACopy: true })"
+            [disabled]
+          >
+            <mat-icon class="material-icons-outlined">call_split</mat-icon>
+          </button>
+        </ng-container>
       </ng-container>
       <ng-container *ngIf="!isAffiliation()">
         <button

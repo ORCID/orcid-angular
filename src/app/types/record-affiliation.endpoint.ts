@@ -93,6 +93,20 @@ export interface Organization {
   value: string
 }
 
+export interface DisambiguatedOrganization {
+  sourceId: string
+  country: string
+  orgType: string
+  countryForDisplay: string
+  disambiguatedAffiliationIdentifier?: any
+  city: string
+  sourceType: string
+  region: string
+  value: string
+  url?: string
+  affiliationKey: string
+}
+
 export interface AffiliationTypeValue {
   errors?: any[]
   value: AffiliationType

@@ -7,6 +7,7 @@ import {
   AffiliationsEndpoint,
   Affiliation,
   Organization,
+  DisambiguatedOrganization,
 } from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -176,6 +177,22 @@ export class RecordAffiliationService {
           'affiliations/disambiguated/name/' +
           org +
           '?limit=100',
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  getOrganizationDisambiguated(
+    id: string
+  ): Observable<DisambiguatedOrganization> {
+    return this._http
+      .get<DisambiguatedOrganization>(
+        environment.API_WEB + 'affiliations/disambiguated/id/' + id,
         {
           headers: this.headers,
         }
