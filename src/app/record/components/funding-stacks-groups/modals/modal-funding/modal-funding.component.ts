@@ -332,7 +332,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   formToBackendAffiliation(): Funding {
-    
     return {
       visibility: {
         visibility: this.fundingForm.get('visibility').value
