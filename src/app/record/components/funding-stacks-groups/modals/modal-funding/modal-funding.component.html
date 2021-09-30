@@ -188,12 +188,7 @@
       </div>
     </div>
     <!-- Funding project translations title -->
-    <div
-      [hidden]="
-        !!funding?.fundingTitle?.translatedTitle?.content ||
-        !showTranslationTitle
-      "
-    >
+    <div [hidden]="!showTranslationTitle">
       <div>
         <div class="row">
           <label
