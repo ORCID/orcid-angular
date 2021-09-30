@@ -187,7 +187,9 @@ export class RecordAffiliationService {
       )
   }
 
-  getOrganizationDisambiguated(id: string): Observable<DisambiguatedOrganization> {
+  getOrganizationDisambiguated(
+    id: string
+  ): Observable<DisambiguatedOrganization> {
     return this._http
       .get<DisambiguatedOrganization>(
         environment.API_WEB + 'affiliations/disambiguated/id/' + id,
