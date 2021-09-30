@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
-import { EMPTY, Subject } from 'rxjs'
+import { empty, EMPTY, of, Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -12,12 +12,20 @@ import { WINDOW } from '../../../../../cdk/window'
 import {
   Affiliation,
   AffiliationType,
+  DisambiguatedOrganization,
   Organization,
 } from '../../../../../types/record-affiliation.endpoint'
 import { RecordAffiliationService } from '../../../../../core/record-affiliations/record-affiliations.service'
 import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
-import { debounceTime, first, startWith, switchMap } from 'rxjs/operators'
+import {
+  debounceTime,
+  first,
+  map,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs/operators'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { URL_REGEXP } from '../../../../../constants'
 import { dateValidator } from '../../../../../shared/validators/date/date.validator'
@@ -52,7 +60,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings
   filteredOptions: Observable<Organization[]>
 
-  organization = ''
+  organization: string | Organization = ''
   city = ''
   region = ''
   country = ''
@@ -78,6 +86,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
+  selectedOrganizationFromDatabase: Organization
+  requireOrganizationDisambiguatedDataOnRefresh = false
+  displayOrganizationHint: boolean
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -134,6 +145,49 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       }),
     })
 
+    this.filteredOptions = this.affiliationForm
+      .get('organization')
+      .valueChanges.pipe(
+        tap((organization: string | Organization) => {
+          // Auto fill form when the user select an organization from the autocomplete list
+          if (
+            typeof organization === 'object' &&
+            organization.disambiguatedAffiliationIdentifier
+          ) {
+            this.selectedOrganizationFromDatabase = organization
+            this.requireOrganizationDisambiguatedDataOnRefresh = true
+            this.displayOrganizationHint = true
+            this.fillForm(organization)
+          }
+          if (!organization) {
+            this.selectedOrganizationFromDatabase = undefined
+            this.requireOrganizationDisambiguatedDataOnRefresh = true
+            this.displayOrganizationHint = false
+            this.affiliationForm.patchValue({
+              city: '',
+              region: '',
+              country: '',
+            })
+          }
+        }),
+        switchMap((organization: string | Organization) => {
+          if (
+            typeof organization === 'string' &&
+            !this.selectedOrganizationFromDatabase
+          ) {
+            // Display matching organization based on the user string input
+            return this._filter((organization as string) || '').pipe(
+              tap((x) => {
+                this.displayOrganizationHint = true
+              })
+            )
+          } else {
+            // Do not display options once the user has selected an Organization
+            return of([])
+          }
+        })
+      )
+
     if (this.affiliation) {
       if (this.affiliation.endDate.year) {
         this.affiliationForm.patchValue({
@@ -161,16 +215,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         })
       }
     }
-
-    this.filteredOptions = this.affiliationForm
-      .get('organization')
-      .valueChanges.pipe(
-        startWith(''),
-        debounceTime(400),
-        switchMap((val) => {
-          return this._filter(val || '')
-        })
-      )
 
     this._recordCountryService
       .getCountryCodes()
@@ -218,7 +262,15 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   initialValues() {
     if (this.affiliation) {
-      this.organization = this.affiliation.affiliationName.value
+      this.displayOrganizationHint = true
+      if (this.affiliation.orgDisambiguatedName) {
+        this.selectedOrganizationFromDatabase = {
+          value: this.affiliation.orgDisambiguatedName,
+        } as Organization
+      }
+      this.organization = {
+        value: this.affiliation.affiliationName.value,
+      } as Organization
       this.city = this.affiliation.city.value
       this.region = this.affiliation.region.value
       this.country = this.affiliation.country.value
@@ -228,8 +280,14 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     }
   }
 
-  formToBackendAffiliation(affiliationForm: FormGroup): any {
-    return {
+  autoCompleteDisplayOrganization(organization: Organization) {
+    return organization.value
+  }
+
+  formToBackendAffiliation(
+    affiliationForm: FormGroup
+  ): Observable<Affiliation> {
+    const affiliationToSave = {
       visibility: {
         visibility: affiliationForm.get('visibility').value
           ? affiliationForm.get('visibility').value
@@ -239,9 +297,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         value: this.options?.createACopy
           ? null
           : this.affiliation?.putCode?.value,
-      },
-      affiliationName: {
-        value: affiliationForm.get('organization').value,
       },
       city: {
         value: affiliationForm.get('city').value,
@@ -307,6 +362,53 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       orgDisambiguatedRegion: this.affiliation?.orgDisambiguatedRegion,
       orgDisambiguatedUrl: this.affiliation?.orgDisambiguatedUrl,
     } as Affiliation
+
+    if (this.selectedOrganizationFromDatabase) {
+      affiliationToSave.affiliationName = {
+        value: this.selectedOrganizationFromDatabase.value,
+      }
+    } else {
+      affiliationToSave.affiliationName = {
+        value: affiliationForm.get('organization').value,
+      }
+    }
+
+    if (this.requireOrganizationDisambiguatedDataOnRefresh) {
+      // When a organization was selected from the drop down get the disambiguated source to populate the affiliation
+      if (
+        this.selectedOrganizationFromDatabase
+          ?.disambiguatedAffiliationIdentifier
+      ) {
+        return this._recordAffiliationService
+          .getOrganizationDisambiguated(
+            this.selectedOrganizationFromDatabase
+              .disambiguatedAffiliationIdentifier
+          )
+          .pipe(
+            map((disambiguated) => {
+              affiliationToSave.disambiguatedAffiliationSourceId = {
+                value: disambiguated.sourceId,
+              }
+              affiliationToSave.disambiguationSource = {
+                value: disambiguated.sourceType,
+              }
+              affiliationToSave.orgDisambiguatedId = {
+                value: this.selectedOrganizationFromDatabase.sourceType,
+              }
+
+              return affiliationToSave
+            })
+          )
+      } else {
+        // When a organization was NOT selected empty the organization fills
+        affiliationToSave.disambiguatedAffiliationSourceId = undefined
+        affiliationToSave.disambiguationSource = undefined
+        affiliationToSave.orgDisambiguatedId = undefined
+        return of(affiliationToSave)
+      }
+    } else {
+      return of(affiliationToSave)
+    }
   }
 
   fillForm(organization: Organization) {
@@ -321,9 +423,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   clearForm() {
     this.affiliationForm.patchValue({
       organization: '',
-      city: '',
-      region: '',
-      country: '',
     })
   }
 
@@ -357,9 +456,13 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   saveEvent() {
     if (this.affiliationForm.valid) {
       this.loadingAffiliations = true
-      this._recordAffiliationService
-        .postAffiliation(this.formToBackendAffiliation(this.affiliationForm))
-        .pipe(first())
+      this.formToBackendAffiliation(this.affiliationForm)
+        .pipe(
+          switchMap((affiliation) =>
+            this._recordAffiliationService.postAffiliation(affiliation)
+          ),
+          first()
+        )
         .subscribe(() => {
           this.closeEvent()
         })
