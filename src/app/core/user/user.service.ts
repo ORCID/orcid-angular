@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import {
   combineLatest,
@@ -434,10 +434,14 @@ export class UserService {
   // and we also trigger a reload, to reload the oauth page
   // there might be some scenarios where these two different request might not work as expected.
   switchAccount(delegator: Delegator) {
-    const body = 'username=' + delegator.giverOrcid.path
+    const params = new HttpParams().append(
+      'username',
+      delegator.giverOrcid.path
+    )
     return this._http
-      .post(`${environment.API_WEB}switch-user`, body, {
+      .post(`${environment.API_WEB}switch-user`, '', {
         headers: this.headers,
+        params: params,
       })
       .pipe(
         catchError((error) => {
