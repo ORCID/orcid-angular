@@ -28,7 +28,7 @@ export function dateValidator(dateType: string) {
         date.getMonth() === month - 1 &&
         date.getDate() === day
       ) {
-        return null;
+        return null
       } else {
         return { date: true }
       }
