@@ -21,8 +21,19 @@ export function dateValidator(dateType: string) {
     }
 
     if (year && month && day) {
-      date = new Date(year + '/' + month + '/' + day)
+      date = new Date(year, month - 1, day)
+
+      if (
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day
+      ) {
+        return null
+      } else {
+        return { date: true }
+      }
     }
+
     if (date && !isNaN(date.getTime())) {
       return null
     }
@@ -59,5 +70,30 @@ export function dateMonthYearValidator(dateType: string) {
     }
 
     return { date: true }
+  }
+}
+
+export function endDateValidator() {
+  return (c: AbstractControl): { [key: string]: any } | null => {
+    const endDateYear = c.get('endDateGroup.endDateYear').value
+    const endDateMonth = c.get('endDateGroup.endDateMonth').value
+    const endDateDay = c.get('endDateGroup.endDateDay').value
+
+    const startDateYear = c.get('startDateGroup.startDateYear').value
+    const startDateMonth = c.get('startDateGroup.startDateMonth').value
+    const startDateDay = c.get('startDateGroup.startDateDay').value
+
+    if (!endDateYear && !startDateYear) {
+      return null
+    }
+
+    const startDate = new Date(startDateYear, startDateMonth - 1, startDateDay)
+    const endDate = new Date(endDateYear, endDateMonth - 1, endDateDay)
+
+    if (endDate < startDate) {
+      return { invalidEndDate: true }
+    }
+
+    return null
   }
 }

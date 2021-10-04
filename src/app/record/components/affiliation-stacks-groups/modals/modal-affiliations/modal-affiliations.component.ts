@@ -20,7 +20,10 @@ import { RecordCountriesService } from '../../../../../core/record-countries/rec
 import { first, map, switchMap, tap } from 'rxjs/operators'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { URL_REGEXP } from '../../../../../constants'
-import { dateValidator } from '../../../../../shared/validators/date/date.validator'
+import {
+  dateValidator,
+  endDateValidator,
+} from '../../../../../shared/validators/date/date.validator'
 import { Observable } from 'rxjs/internal/Observable'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
@@ -100,42 +103,47 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initialValues()
-    this.affiliationForm = this._formBuilder.group({
-      organization: new FormControl(this.organization, {
-        validators: [Validators.required],
-      }),
-      city: new FormControl(this.city, {
-        validators: [Validators.required],
-      }),
-      region: new FormControl(this.region, {}),
-      country: new FormControl('', {
-        validators: [Validators.required],
-      }),
-      department: new FormControl(this.department, {}),
-      title: new FormControl(this.title, {}),
-      startDateGroup: this._formBuilder.group(
-        {
-          startDateDay: ['', []],
-          startDateMonth: ['', []],
-          startDateYear: ['', []],
-        },
-        { validator: dateValidator('startDate') }
-      ),
-      endDateGroup: this._formBuilder.group(
-        {
-          endDateDay: [''],
-          endDateMonth: [''],
-          endDateYear: [''],
-        },
-        { validator: dateValidator('endDate') }
-      ),
-      link: new FormControl(this.link, {
-        validators: [Validators.pattern(URL_REGEXP)],
-      }),
-      visibility: new FormControl(this.defaultVisibility, {
-        validators: [Validators.required],
-      }),
-    })
+    this.affiliationForm = this._formBuilder.group(
+      {
+        organization: new FormControl(this.organization, {
+          validators: [Validators.required],
+        }),
+        city: new FormControl(this.city, {
+          validators: [Validators.required],
+        }),
+        region: new FormControl(this.region, {}),
+        country: new FormControl('', {
+          validators: [Validators.required],
+        }),
+        department: new FormControl(this.department, {}),
+        title: new FormControl(this.title, {}),
+        startDateGroup: this._formBuilder.group(
+          {
+            startDateDay: ['', []],
+            startDateMonth: ['', []],
+            startDateYear: ['', []],
+          },
+          { validator: dateValidator('startDate') }
+        ),
+        endDateGroup: this._formBuilder.group(
+          {
+            endDateDay: [''],
+            endDateMonth: [''],
+            endDateYear: [''],
+          },
+          { validator: dateValidator('endDate') }
+        ),
+        link: new FormControl(this.link, {
+          validators: [Validators.pattern(URL_REGEXP)],
+        }),
+        visibility: new FormControl(this.defaultVisibility, {
+          validators: [Validators.required],
+        }),
+      },
+      {
+        validator: endDateValidator(),
+      }
+    )
 
     this.filteredOptions = this.affiliationForm
       .get('organization')
