@@ -53,7 +53,7 @@ export enum FundingTypes {
   award = 'award',
   contract = 'contract',
   grant = 'grant',
-  salary_award = 'salary_award',
+  salary_award = 'salary-award',
 }
 
 export const FundingTypesLabel = {

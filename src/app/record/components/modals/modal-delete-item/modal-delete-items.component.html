@@ -127,6 +127,12 @@
           </div>
           <div class="details orc-font-body-small">
             <strong i18n="@@record.source">Source</strong>:
+            <ng-container
+              *ngIf="item?.assertionOriginName || item?.assertionOriginOrcid"
+            >
+              {{ item?.assertionOriginName || item?.assertionOriginOrcid }}
+              <i i18n="@@shared.onBehalfOf">via</i>
+            </ng-container>
             {{ item.sourceName || item.source }}
             <strong class="added" i18n="@@record.added"> Added </strong>:
             {{ item.createdDate | monthDayYearDateToString }}
