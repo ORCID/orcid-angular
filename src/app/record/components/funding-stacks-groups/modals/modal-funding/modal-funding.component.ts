@@ -9,6 +9,7 @@ import {
   FormArray,
 } from '@angular/forms'
 import { dateMonthYearValidator } from '../../../../../shared/validators/date/date.validator'
+import { translatedTitleValidator } from '../../../../../shared/validators/translated-title/translated-title.validator'
 
 import { AMOUNT_REGEXP, URL_REGEXP } from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
@@ -160,8 +161,13 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       fundingProjectTitle: new FormControl(this.fundingProjectTitle, {
         validators: [Validators.required],
       }),
-      translatedTitleContent: [this.translatedTitleContent, []],
-      translatedTitleLanguage: [this.translatedTitleLanguage, []],
+      translatedTitleGroup: this._formBuilder.group(
+        {
+          translatedTitleContent: [''],
+          translatedTitleLanguage: [''],
+        },
+        { validator: translatedTitleValidator }
+      ),
       fundingProjectLink: new FormControl(this.fundingProjectLink, {
         validators: [Validators.pattern(URL_REGEXP)],
       }),
@@ -223,6 +229,16 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       if (this.funding.visibility?.visibility) {
         this.fundingForm.patchValue({
           visibility: this.funding.visibility.visibility,
+        })
+      }
+      if (this.funding.fundingTitle?.translatedTitle) {
+        this.fundingForm.patchValue({
+          translatedTitleGroup: {
+            translatedTitleContent: this.funding.fundingTitle?.translatedTitle
+              .content,
+            translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle
+              .languageCode,
+          },
         })
       }
 
@@ -345,8 +361,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         title: this.fundingForm.value.fundingProjectTitle,
         errors: [],
         translatedTitle: {
-          content: this.fundingForm.value.translatedTitleContent,
-          languageCode: this.fundingForm.value.translatedTitleLanguage,
+          content: this.fundingForm.get(
+            'translatedTitleGroup.translatedTitleContent'
+          ).value,
+          languageCode: this.fundingForm.get(
+            'translatedTitleGroup.translatedTitleLanguage'
+          ).value,
           errors: [],
         },
       },
