@@ -16,4 +16,5 @@ export interface UserInfo {
   SELF_SERVICE_MENU?: string
   RECORD_WITH_ISSUES: boolean
   USER_NOT_FOUND: boolean
+  DELEGATOR_MODO: 'true' | undefined
 }

@@ -23,7 +23,8 @@ import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
+import { UserInfoService } from 'src/app/core/user-info/user-info.service'
+import { AssertionVisibilityString, EmailsEndpoint, UserInfo } from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -47,17 +48,22 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
   isMobile: boolean
+  config: UserInfo
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     public _recordEmails: RecordEmailsService,
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
-    private _snackBar: SnackbarService
+    private _snackBar: SnackbarService,
+    private userInfo: UserInfoService
   ) {}
 
   tempPrivacyState = 'PUBLIC'
   ngOnInit(): void {
+    this.userInfo.getUserInfo().subscribe((config) => {
+      this.config = config
+    })
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))
