@@ -14,7 +14,7 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
     './top-bar-verification-email-modal.component.scss-theme.scss',
   ],
 })
-export class TopBarVerificationEmailModalComponent implements OnInit {
+export class TopBarVerificationEmailModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   primaryEmail: string
