@@ -54,4 +54,8 @@ export class TopBarVerificationEmailComponent implements OnInit {
       this.primaryEmail
     )
   }
+    ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
+  }
 }
