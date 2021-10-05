@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { Subject } from 'rxjs'
