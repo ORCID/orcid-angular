@@ -23,13 +23,19 @@
             {{ total }})</span
           >
           <span
-            *ngIf="(currentAmount && !total) || (currentAmount !== 0 && currentAmount === total)"
+            *ngIf="
+              (currentAmount && !total) ||
+              (currentAmount !== 0 && currentAmount === total)
+            "
             class="clickable"
             (click)="collapse()"
           >
             ({{ currentAmount }})
           </span>
-          <span *ngIf="((!currentAmount && total == 0) || (!currentAmount && !total) )">(0)</span>
+          <span
+            *ngIf="(!currentAmount && total == 0) || (!currentAmount && !total)"
+            >(0)</span
+          >
           <span *ngIf="!currentAmount && currentAmount !== 0"></span>
         </div>
         <ng-container> </ng-container>
