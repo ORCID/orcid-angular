@@ -11,7 +11,6 @@ import { isEmpty } from 'lodash'
 import { Assertion, UserInfo } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
 import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
-import { TopBarVerificationEmailModalComponent } from '../top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { MatDialog } from '@angular/material/dialog'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 
@@ -76,17 +75,12 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._record
-      .getRecord({
-        publicRecordId: this.isPublicRecord || undefined,
-      })
+    this._user
+      .getUserSession()
       .pipe(first())
-      .subscribe((userRecord) => {
-        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
-        this.userRecord = userRecord
-        this.userInfo = userRecord.userInfo
-        this.checkEmailValidated = (userRecord?.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true')
-        this.inDelegationMode = (userRecord?.userInfo?.IN_DELEGATION_MODE === 'true')
+      .subscribe((userSession) => {
+        this.checkEmailValidated = (userSession?.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true')
+        this.inDelegationMode = (userSession?.userInfo?.IN_DELEGATION_MODE === 'true')
 
         if (!this.checkEmailValidated && !this.inDelegationMode) {
           this._recordEmails
@@ -99,6 +93,21 @@ export class TopBarComponent implements OnInit, OnDestroy {
               }
             })
         }
+      })
+
+
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord || undefined,
+      })
+      .pipe(
+        takeUntil(this.$destroy)
+      )
+      .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+        this.userRecord = userRecord
+        this.userInfo = userRecord.userInfo
+
         if (!isEmpty(userRecord.otherNames)) {
           this.setNames(userRecord)
         }

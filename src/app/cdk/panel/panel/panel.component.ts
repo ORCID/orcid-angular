@@ -97,6 +97,7 @@ export class PanelComponent implements OnInit {
 
   @Input() id: string
   @Input() email = false
+  @Input() names = false
   selected: boolean
 
   formVisibility: FormGroup
@@ -158,29 +159,37 @@ export class PanelComponent implements OnInit {
 
   openModal(options?: { createACopy: boolean }) {
     const primaryEmail = this.userRecord?.emails?.emails.find(email => email.primary)
-    if (!this.email && !primaryEmail?.verified) {
-      this._verificationEmailModalService.openVerificationEmailModal(primaryEmail.value)
+    if (!primaryEmail?.verified) {
+      if (this.email || this.names) {
+        this.open(options)
+      } else {
+        this._verificationEmailModalService.openVerificationEmailModal(primaryEmail.value)
+      }
     } else {
-      this._platform
-        .get()
-        .pipe(first())
-        .subscribe((platform) => {
-          let modalComponent
-          if (this.editModalComponent) {
-            modalComponent = this._dialog.open(this.editModalComponent, {
-              width: '850px',
-              maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-              data: this.userRecord,
-            })
-            modalComponent.componentInstance.id = this.id
-            modalComponent.componentInstance.options = options
-            modalComponent.componentInstance.type = this.type
-            modalComponent.componentInstance.affiliation = this.elements
-            modalComponent.componentInstance.funding = this.elements
-            modalComponent.componentInstance.work = this.elements
-          }
-        })
+      this.open(options)
     }
+  }
+
+  open(options?: { createACopy: boolean }) {
+    this._platform
+      .get()
+      .pipe(first())
+      .subscribe((platform) => {
+        let modalComponent
+        if (this.editModalComponent) {
+          modalComponent = this._dialog.open(this.editModalComponent, {
+            width: '850px',
+            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+            data: this.userRecord,
+          })
+          modalComponent.componentInstance.id = this.id
+          modalComponent.componentInstance.options = options
+          modalComponent.componentInstance.type = this.type
+          modalComponent.componentInstance.affiliation = this.elements
+          modalComponent.componentInstance.funding = this.elements
+          modalComponent.componentInstance.work = this.elements
+        }
+      })
   }
 
   isAffiliation(): boolean {
