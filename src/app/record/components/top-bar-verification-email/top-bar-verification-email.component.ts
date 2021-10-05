@@ -3,9 +3,10 @@ import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { UserRecord } from '../../../types/record.local'
-import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
 import { TopBarVerificationEmailModalComponent } from './modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
+import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
+import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 
 @Component({
   selector: 'app-top-bar-verification-email',
@@ -18,13 +19,17 @@ import { TopBarVerificationEmailModalComponent } from './modals/top-bar-verifica
 export class TopBarVerificationEmailComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
-  @Input() userRecord: UserRecord
+  @Input() justRegistered: boolean
+  @Input() emailVerified: boolean
 
+  primaryEmail: string
   isMobile: boolean
 
   constructor(
     private _dialog: MatDialog,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _recordEmails: RecordEmailsService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {
     _platform
       .get()
@@ -35,18 +40,18 @@ export class TopBarVerificationEmailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._recordEmails
+      .getEmails()
+      .pipe(first())
+      .subscribe((emails) => {
+        const primaryEmail = emails.emails.filter(email => email.primary)[0]
+        if (!primaryEmail.verified) {
+          this.primaryEmail = primaryEmail.value
+        }
+      })
   }
 
-  resendVerificationEmail() {
-      this._platform
-        .get()
-        .pipe(first())
-        .subscribe((platform) => {
-          const modalComponent = this._dialog.open(TopBarVerificationEmailModalComponent, {
-            width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-          })
-          modalComponent.componentInstance.primaryEmail = this.userRecord?.userInfo?.PRIMARY_EMAIL
-        })
+  resendVerificationEmailModal() {
+    this._verificationEmailModalService.openVerificationEmailModal(this.primaryEmail)
   }
 }

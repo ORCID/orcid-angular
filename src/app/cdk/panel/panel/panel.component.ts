@@ -21,6 +21,7 @@ import { RecordWorksService } from '../../../core/record-works/record-works.serv
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
+import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 
 @Component({
   selector: 'app-panel',
@@ -95,6 +96,7 @@ export class PanelComponent implements OnInit {
   @Input() userVersionPresent: boolean
 
   @Input() id: string
+  @Input() email = false
   selected: boolean
 
   formVisibility: FormGroup
@@ -112,7 +114,8 @@ export class PanelComponent implements OnInit {
     private _fundingService: RecordFundingsService,
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
-    private _worksService: RecordWorksService
+    private _worksService: RecordWorksService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   ngOnInit(): void {
@@ -154,25 +157,30 @@ export class PanelComponent implements OnInit {
   }
 
   openModal(options?: { createACopy: boolean }) {
-    this._platform
-      .get()
-      .pipe(first())
-      .subscribe((platform) => {
-        let modalComponent
-        if (this.editModalComponent) {
-          modalComponent = this._dialog.open(this.editModalComponent, {
-            width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-            data: this.userRecord,
-          })
-          modalComponent.componentInstance.id = this.id
-          modalComponent.componentInstance.options = options
-          modalComponent.componentInstance.type = this.type
-          modalComponent.componentInstance.affiliation = this.elements
-          modalComponent.componentInstance.funding = this.elements
-          modalComponent.componentInstance.work = this.elements
-        }
-      })
+    const primaryEmail = this.userRecord?.emails?.emails.find(email => email.primary)
+    if (!this.email && !primaryEmail?.verified) {
+      this._verificationEmailModalService.openVerificationEmailModal(primaryEmail.value)
+    } else {
+      this._platform
+        .get()
+        .pipe(first())
+        .subscribe((platform) => {
+          let modalComponent
+          if (this.editModalComponent) {
+            modalComponent = this._dialog.open(this.editModalComponent, {
+              width: '850px',
+              maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+              data: this.userRecord,
+            })
+            modalComponent.componentInstance.id = this.id
+            modalComponent.componentInstance.options = options
+            modalComponent.componentInstance.type = this.type
+            modalComponent.componentInstance.affiliation = this.elements
+            modalComponent.componentInstance.funding = this.elements
+            modalComponent.componentInstance.work = this.elements
+          }
+        })
+    }
   }
 
   isAffiliation(): boolean {

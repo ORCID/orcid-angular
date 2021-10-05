@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { takeUntil } from 'rxjs/operators'
+import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { Subject } from 'rxjs'
+import { AssertionVisibilityString } from '../../../../../types'
+import { RecordEmailsService } from '../../../../../core/record-emails/record-emails.service'
+import { MatDialogRef } from '@angular/material/dialog'
+import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 
 @Component({
   selector: 'app-top-bar-verification-email-modal',
   templateUrl: './top-bar-verification-email-modal.component.html',
-  styleUrls: ['./top-bar-verification-email-modal.component.scss']
+  styleUrls: [
+    './top-bar-verification-email-modal.component.scss',
+    './top-bar-verification-email-modal.component.scss-theme.scss'
+  ]
 })
 export class TopBarVerificationEmailModalComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -15,13 +22,24 @@ export class TopBarVerificationEmailModalComponent implements OnInit {
   isMobile: boolean
 
   constructor(
+    public dialogRef: MatDialogRef<ModalComponent>,
     private _platform: PlatformInfoService,
+    private _recordEmailsService: RecordEmailsService
   ) {
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))
       .subscribe((platform) => {
         this.isMobile = platform.columns4 || platform.columns8
+      })
+  }
+
+  verifyEmail() {
+    this._recordEmailsService
+      .verifyEmail(this.primaryEmail)
+      .pipe(first())
+      .subscribe(() => {
+        this.dialogRef.close()
       })
   }
 

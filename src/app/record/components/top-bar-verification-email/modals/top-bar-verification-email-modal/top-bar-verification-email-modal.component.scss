@@ -1,0 +1,19 @@
+app-modal {
+  ::ng-deep .content-wrapper {
+    padding-bottom: 20px !important;
+  }
+}
+
+.info {
+  margin-inline-end: 10px;
+}
+
+.resend-verification {
+  margin: 20px 0 30px 0;
+}
+
+.need-help {
+  p {
+    margin: 4px 0;
+  }
+}

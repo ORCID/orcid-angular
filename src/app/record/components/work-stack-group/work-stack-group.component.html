@@ -15,7 +15,8 @@
       [sortType]="'date'"
       [addMenuOptions]="addMenuOptions"
       (sort)="sortEvent($event)"
-      type="works"
+      [type]="'works'"
+      [userRecord]="userRecord"
     >
       <mat-progress-bar
         mode="indeterminate"

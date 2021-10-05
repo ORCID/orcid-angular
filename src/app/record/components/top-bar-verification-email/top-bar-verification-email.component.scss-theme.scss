@@ -8,11 +8,19 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .info {
+  .just-registered {
     border-color: mat-color($foreground, 'state-notice-dark') !important;
 
     mat-icon {
       color: mat-color($foreground, 'state-notice-dark') !important;
+    }
+  }
+
+  .email-verified {
+    color: mat-color($accent, 400);
+
+    mat-icon {
+      color: mat-color($accent, 400);
     }
   }
 }

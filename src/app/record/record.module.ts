@@ -73,6 +73,7 @@ import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-exte
 import { TextFieldModule } from '@angular/cdk/text-field'
 import { TopBarVerificationEmailComponent } from './components/top-bar-verification-email/top-bar-verification-email.component';
 import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
+import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 
 @NgModule({
   declarations: [
@@ -157,5 +158,6 @@ import { TopBarVerificationEmailModalComponent } from './components/top-bar-veri
     MatCheckboxModule,
     TextFieldModule,
   ],
+  providers : [VerificationEmailModalService]
 })
 export class RecordModule {}
