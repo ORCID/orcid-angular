@@ -71,6 +71,7 @@ import { WorkModalComponent } from './components/work-modal/work-modal.component
 import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
 import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
 import { TextFieldModule } from '@angular/cdk/text-field'
+import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 
 @NgModule({
   declarations: [
@@ -152,6 +153,7 @@ import { TextFieldModule } from '@angular/cdk/text-field'
     MatRadioModule,
     MatCheckboxModule,
     TextFieldModule,
+    WarningMessageModule,
   ],
 })
 export class RecordModule {}

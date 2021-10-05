@@ -18,6 +18,7 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
     './top-bar.component.scss',
     './top-bar.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()

@@ -31,6 +31,7 @@ import { BackendErrorComponent } from './components/backend-error/backend-error.
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
+import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -67,6 +68,7 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
     A11yLinkModule,
     MatProgressBarModule,
     FormDirectivesModule,
+    WarningMessageModule,
   ],
 })
 export class RegisterModule {}
