@@ -6,7 +6,7 @@ import { UserService } from 'src/app/core'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 
@@ -27,7 +27,7 @@ export class FundingStacksGroupsComponent implements OnInit {
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
-
+  userRecord: UserRecord
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
   fundings: FundingGroup[] = []
@@ -60,6 +60,7 @@ export class FundingStacksGroupsComponent implements OnInit {
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
+            this.userRecord = userRecord
             if (userRecord.fundings !== undefined) {
               this.loading = false
             }

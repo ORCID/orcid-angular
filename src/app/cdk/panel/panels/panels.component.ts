@@ -11,6 +11,8 @@ import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
 import { ModalFundingSearchLinkComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
 import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
+import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { UserRecord } from '../../../types/record.local'
 
 @Component({
   selector: 'app-panels',
@@ -34,6 +36,7 @@ export class PanelsComponent implements OnInit {
     | 'sub-peer-review'
     | 'funding'
     | 'research-resources' = 'activities'
+  @Input() userRecord: UserRecord
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
@@ -60,7 +63,8 @@ export class PanelsComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   add(type: string, action?: ADD_EVENT_ACTION) {
@@ -100,18 +104,27 @@ export class PanelsComponent implements OnInit {
     modal: ComponentType<any>,
     type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
   ) {
-    this._platform
-      .get()
-      .pipe(first())
-      .subscribe((platform) => {
-        let modalComponent
-        modalComponent = this._dialog.open(modal, {
-          width: '850px',
-          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-        })
+    const primaryEmail = this.userRecord.emails.emails.find(
+      (email) => email.primary
+    )
+    if (!primaryEmail.verified) {
+      this._verificationEmailModalService.openVerificationEmailModal(
+        primaryEmail.value
+      )
+    } else {
+      this._platform
+        .get()
+        .pipe(first())
+        .subscribe((platform) => {
+          let modalComponent
+          modalComponent = this._dialog.open(modal, {
+            width: '850px',
+            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+          })
 
-        modalComponent.componentInstance.type = type
-      })
+          modalComponent.componentInstance.type = type
+        })
+    }
   }
 
   sortChange(by: SortOrderType) {

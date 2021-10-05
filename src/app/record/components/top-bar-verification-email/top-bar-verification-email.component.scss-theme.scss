@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin top-bar-verification-email-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .just-registered {
+    border-color: mat-color($foreground, 'state-notice-dark') !important;
+
+    mat-icon {
+      color: mat-color($foreground, 'state-notice-dark') !important;
+    }
+  }
+
+  .email-verified {
+    color: mat-color($accent, 400);
+
+    mat-icon {
+      color: mat-color($accent, 400);
+    }
+  }
+}
+
+@include top-bar-verification-email-theme($orcid-app-theme);

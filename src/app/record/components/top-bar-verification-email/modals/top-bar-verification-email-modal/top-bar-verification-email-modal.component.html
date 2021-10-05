@@ -1,0 +1,78 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header>
+    <mat-icon class="material-icons-outlined info">info</mat-icon>
+    <ng-container i18n="@@record.pleaseVerifyYourPrimary">
+      Please verify your primary email address
+    </ng-container>
+  </app-modal-header>
+  <div
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div class="row">
+      <p i18n="@@record.youNeedToVerify">
+        You need to verify your primary email address in order to access all of
+        ORCID’s editing features.
+      </p>
+      <p>
+        <ng-container i18n="@@record.toVerifyYourEmail">
+          To verify your email please click the link in the message we have sent
+          to:
+        </ng-container>
+        <br />
+        <strong>
+          {{ primaryEmail }}
+        </strong>
+      </p>
+      <p>
+        <strong i18n="@@record.iDontHave">
+          I don’t have the verification email
+        </strong>
+        <br />
+        <ng-container i18n="@@record.clickTheButton">
+          Click the button below and we will send you a new one.
+        </ng-container>
+      </p>
+    </div>
+    <div class="row resend-verification">
+      <button
+        mat-raised-button
+        color="primary"
+        i18n="@@record.resendVerificationEmails"
+        (click)="verifyEmail()"
+      >
+        Resend verification emails
+      </button>
+    </div>
+    <div class="need-help">
+      <p>
+        <strong i18n="@@side-bar.needHelp"> Need help?</strong>
+        <br />
+        <ng-container i18n="@@record.visitOur"> Visit our </ng-container>
+        <a
+          class="underline"
+          href="https://support.orcid.org/hc/articles/360006973793"
+          rel="noopener noreferrer"
+          target="_blank"
+          i18n="@@record.knowledge"
+        >
+          knowledge
+        </a>
+        <ng-container i18n="@@record.baseOrContact">
+          base or contact the support team at
+        </ng-container>
+        <br />
+        <a
+          class="underline"
+          href="https://support.orcid.org/hc/en-us/requests/new"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          https://support.orcid.org/hc/en-us/requests/new
+        </a>
+      </p>
+    </div>
+  </div>
+</app-modal>
