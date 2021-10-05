@@ -41,6 +41,9 @@ export class TopBarVerificationEmailModalComponent implements OnInit {
         this.dialogRef.close()
       })
   }
-
+  ngOnDestroy() {
+    this.$destroy.next(true)
+    this.$destroy.unsubscribe()
+  }
   ngOnInit(): void {}
 }
