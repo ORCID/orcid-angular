@@ -1,9 +1,7 @@
 <app-modal [noSidebar]="true">
   <app-modal-header>
     <mat-icon class="material-icons-outlined info">info</mat-icon>
-    <ng-container
-      i18n="@@record.pleaseVerifyYourPrimary"
-    >
+    <ng-container i18n="@@record.pleaseVerifyYourPrimary">
       Please verify your primary email address
     </ng-container>
   </app-modal-header>
@@ -15,11 +13,13 @@
   >
     <div class="row">
       <p i18n="@@record.youNeedToVerify">
-        You need to verify your primary email address in order to access all of ORCID’s editing features.
+        You need to verify your primary email address in order to access all of
+        ORCID’s editing features.
       </p>
       <p i18n="@@record.toVerifyYourEmail">
-        To verify your email please click the link in the message we have sent to:
-        <br>
+        To verify your email please click the link in the message we have sent
+        to:
+        <br />
         <strong>
           {{ primaryEmail }}
         </strong>
@@ -28,7 +28,7 @@
         <strong i18n="@@record.iDontHave">
           I don’t have the verification email
         </strong>
-        <br>
+        <br />
         <ng-container i18n="@@record.clickTheButton">
           Click the button below and we will send you a new one.
         </ng-container>
@@ -47,10 +47,8 @@
     <div class="need-help">
       <p>
         <strong i18n="@@side-bar.needHelp"> Need help?</strong>
-        <br>
-        <ng-container i18n="@@record.visitOur">
-          Visit our
-        </ng-container>
+        <br />
+        <ng-container i18n="@@record.visitOur"> Visit our </ng-container>
         <a
           class="underline"
           href="https://support.orcid.org/hc/articles/360006973793"
@@ -63,7 +61,7 @@
         <ng-container i18n="@@record.baseOrContact">
           base or contact the support team at
         </ng-container>
-        <br>
+        <br />
         <a
           class="underline"
           href="https://support.orcid.org/hc/en-us/requests/new"

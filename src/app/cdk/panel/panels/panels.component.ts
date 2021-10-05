@@ -104,9 +104,13 @@ export class PanelsComponent implements OnInit {
     modal: ComponentType<any>,
     type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
   ) {
-    const primaryEmail = this.userRecord.emails.emails.find(email => email.primary)
+    const primaryEmail = this.userRecord.emails.emails.find(
+      (email) => email.primary
+    )
     if (!primaryEmail.verified) {
-      this._verificationEmailModalService.openVerificationEmailModal(primaryEmail.value)
+      this._verificationEmailModalService.openVerificationEmailModal(
+        primaryEmail.value
+      )
     } else {
       this._platform
         .get()

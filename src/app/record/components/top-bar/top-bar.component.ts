@@ -79,15 +79,19 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .getUserSession()
       .pipe(first())
       .subscribe((userSession) => {
-        this.checkEmailValidated = (userSession?.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true')
-        this.inDelegationMode = (userSession?.userInfo?.IN_DELEGATION_MODE === 'true')
+        this.checkEmailValidated =
+          userSession?.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true'
+        this.inDelegationMode =
+          userSession?.userInfo?.IN_DELEGATION_MODE === 'true'
 
         if (!this.checkEmailValidated && !this.inDelegationMode) {
           this._recordEmails
             .getEmails()
             .pipe(first())
             .subscribe((emails) => {
-              const primaryEmail = emails.emails.filter(email => email.primary)[0]
+              const primaryEmail = emails.emails.filter(
+                (email) => email.primary
+              )[0]
               if (!primaryEmail.verified) {
                 this.resendVerificationEmailModal(primaryEmail.value)
               }
@@ -95,14 +99,11 @@ export class TopBarComponent implements OnInit, OnDestroy {
         }
       })
 
-
     this._record
       .getRecord({
         publicRecordId: this.isPublicRecord || undefined,
       })
-      .pipe(
-        takeUntil(this.$destroy)
-      )
+      .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord

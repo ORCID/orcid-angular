@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { Subject } from 'rxjs'
-import { AssertionVisibilityString } from '../../../../../types'
 import { RecordEmailsService } from '../../../../../core/record-emails/record-emails.service'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -12,8 +11,8 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
   templateUrl: './top-bar-verification-email-modal.component.html',
   styleUrls: [
     './top-bar-verification-email-modal.component.scss',
-    './top-bar-verification-email-modal.component.scss-theme.scss'
-  ]
+    './top-bar-verification-email-modal.component.scss-theme.scss',
+  ],
 })
 export class TopBarVerificationEmailModalComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -43,7 +42,5 @@ export class TopBarVerificationEmailModalComponent implements OnInit {
       })
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -2,9 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
-import { UserRecord } from '../../../types/record.local'
 import { MatDialog } from '@angular/material/dialog'
-import { TopBarVerificationEmailModalComponent } from './modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 
@@ -14,7 +12,7 @@ import { VerificationEmailModalService } from '../../../core/verification-email-
   styleUrls: [
     './top-bar-verification-email.component.scss',
     './top-bar-verification-email.component.scss-theme.scss',
-  ]
+  ],
 })
 export class TopBarVerificationEmailComponent implements OnInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -44,7 +42,7 @@ export class TopBarVerificationEmailComponent implements OnInit {
       .getEmails()
       .pipe(first())
       .subscribe((emails) => {
-        const primaryEmail = emails.emails.filter(email => email.primary)[0]
+        const primaryEmail = emails.emails.filter((email) => email.primary)[0]
         if (!primaryEmail.verified) {
           this.primaryEmail = primaryEmail.value
         }
@@ -52,6 +50,8 @@ export class TopBarVerificationEmailComponent implements OnInit {
   }
 
   resendVerificationEmailModal() {
-    this._verificationEmailModalService.openVerificationEmailModal(this.primaryEmail)
+    this._verificationEmailModalService.openVerificationEmailModal(
+      this.primaryEmail
+    )
   }
 }

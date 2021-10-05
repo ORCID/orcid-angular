@@ -1,11 +1,11 @@
 <div
   class="info"
   [ngClass]="{
-      'orc-font-body-small': !isMobile,
-      'orc-font-small-print': isMobile,
-      'just-registered': justRegistered,
-      'email-verified': emailVerified
-    }"
+    'orc-font-body-small': !isMobile,
+    'orc-font-small-print': isMobile,
+    'just-registered': justRegistered,
+    'email-verified': emailVerified
+  }"
 >
   <div class="col">
     <mat-icon *ngIf="justRegistered">info</mat-icon>
@@ -13,17 +13,13 @@
   </div>
   <div class="col l11 m6 s3">
     <ng-container *ngIf="justRegistered">
-      <h2
-        class="orc-font-body"
-        i18n="@@record.thankYouForRegistering"
-      >
+      <h2 class="orc-font-body" i18n="@@record.thankYouForRegistering">
         Thank you for registering with ORCID
       </h2>
-      <p
-        class="orc-font-body-small"
-        i18n="@@record.weHaveSent"
-      >
-        We have sent verification messages to each of your registered email addresses. You will need to verify your primary email address before you can begin adding information manually to your ORCID record.
+      <p class="orc-font-body-small" i18n="@@record.weHaveSent">
+        We have sent verification messages to each of your registered email
+        addresses. You will need to verify your primary email address before you
+        can begin adding information manually to your ORCID record.
       </p>
       <button
         mat-raised-button
@@ -35,10 +31,7 @@
       </button>
     </ng-container>
     <ng-container *ngIf="emailVerified">
-      <h2
-        class="orc-font-body"
-        i18n="@@myOrcidAlerts.emailVerified"
-      >
+      <h2 class="orc-font-body" i18n="@@myOrcidAlerts.emailVerified">
         Thank you for verifying your email
       </h2>
     </ng-container>
