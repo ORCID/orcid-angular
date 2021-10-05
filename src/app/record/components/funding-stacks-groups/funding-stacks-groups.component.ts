@@ -63,7 +63,7 @@ export class FundingStacksGroupsComponent implements OnInit {
             if (userRecord.fundings !== undefined) {
               this.loading = false
             }
-            if (!isEmpty(userRecord.fundings)) {
+            if (userRecord.fundings !== undefined) {
               this._recordCountryService
                 .getCountryCodes()
                 .pipe(first())
