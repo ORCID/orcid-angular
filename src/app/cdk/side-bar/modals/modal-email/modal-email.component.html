@@ -379,7 +379,13 @@
       </p>
     </ng-container>
 
-    <div class="row orc-font-body-small" *ngIf="!config?.DELEGATOR_MODO">
+    <div
+      class="row orc-font-body-small"
+      *ngIf="
+        userInfo?.IN_DELEGATION_MODE !== 'true' ||
+        userInfo?.DELEGATED_BY_ADMIN === 'true'
+      "
+    >
       <a
         class="col add-more"
         id="add-link"
@@ -397,11 +403,24 @@
     </div>
 
     <div
-      class="row orc-font-body-small"
-      *ngIf="config?.DELEGATOR_MODO"
-      i18n="@@record.delegatorAddEmailNotAllow"
+      *ngIf="
+        userInfo?.IN_DELEGATION_MODE === 'true' &&
+        userInfo?.DELEGATED_BY_ADMIN !== 'true'
+      "
+      class="info"
+      [ngClass]="{
+        'orc-font-body-small': !isMobile,
+        'orc-font-small-print': isMobile
+      }"
     >
-      Adding emails is not allowed when managing another record.
+      <div class="col">
+        <mat-icon>info</mat-icon>
+      </div>
+      <div class="col l11 m6 s3">
+        <p i18n="@@record.delegatorAddEmailNotAllow">
+          Adding emails is not allowed when managing another record.
+        </p>
+      </div>
     </div>
   </div>
 </app-modal>

@@ -48,7 +48,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
   isMobile: boolean
-  config: UserInfo
+  userInfo: UserInfo
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -56,13 +56,13 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _snackBar: SnackbarService,
-    private userInfo: UserInfoService
+    private _userInfo: UserInfoService
   ) {}
 
   tempPrivacyState = 'PUBLIC'
   ngOnInit(): void {
-    this.userInfo.getUserInfo().subscribe((config) => {
-      this.config = config
+    this._userInfo.getUserInfo().subscribe((config) => {
+      this.userInfo = config
     })
     this._platform
       .get()
