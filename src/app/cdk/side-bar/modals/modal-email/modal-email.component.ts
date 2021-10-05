@@ -24,7 +24,11 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
 import { UserInfoService } from 'src/app/core/user-info/user-info.service'
-import { AssertionVisibilityString, EmailsEndpoint, UserInfo } from 'src/app/types'
+import {
+  AssertionVisibilityString,
+  EmailsEndpoint,
+  UserInfo,
+} from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
