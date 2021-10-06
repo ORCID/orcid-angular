@@ -64,7 +64,7 @@
       ORCID has a number of options for adding and managing your names.
     </p>
     <a
-      class="underline"
+      class="underline orc-font-body-small"
       rel="noopener noreferrer"
       target="_blank"
       href="https://support.orcid.org/hc/en-us/articles/360006973853-Add-and-edit-your-name-on-your-ORCID-record"
@@ -243,6 +243,7 @@
             <mat-form-field appearance="outline" class="mat-form-field-min">
               <input
                 id="alternative-names-input"
+                #nameInput
                 matInput
                 formControlName="otherName"
                 placeholder="{{ ngOrcidAddOtherName }}"
