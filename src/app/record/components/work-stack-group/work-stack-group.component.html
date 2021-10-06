@@ -1,6 +1,7 @@
 <ng-container *ngIf="!(isPublicRecord && workGroup?.groups?.length === 0)">
   <form [formGroup]="workStackGroupForm">
     <app-panels
+      [userRecord]="userRecord"
       *ngIf="workGroup?.groups"
       class="row"
       [title]="works"
@@ -94,6 +95,7 @@
           </div>
         </div>
         <app-work-stack
+          [userRecord]="userRecord"
           [isPublicRecord]="isPublicRecord"
           *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
           [workStack]="group"

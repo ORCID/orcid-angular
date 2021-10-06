@@ -47,8 +47,8 @@ export class TopBarComponent implements OnInit, OnDestroy {
   @Input() loadingUserRecord = true
 
   constructor(
-    private _dialog: MatDialog,
-    private _platform: PlatformInfoService,
+    _dialog: MatDialog,
+    _platform: PlatformInfoService,
     private _user: UserService,
     private _record: RecordService,
     private _recordEmails: RecordEmailsService,

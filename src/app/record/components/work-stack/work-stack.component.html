@@ -8,6 +8,7 @@
 >
   <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
   <app-panel
+    [userRecord]="userRecord"
     [elements]="work"
     [ngStyle]="{ 'z-index': workStack.works.length - i }"
     [ngClass]="{ last: last }"

@@ -161,7 +161,7 @@ export class PanelComponent implements OnInit {
     const primaryEmail = this.userRecord?.emails?.emails.find(
       (email) => email.primary
     )
-    if (!primaryEmail?.verified) {
+    if (primaryEmail && !primaryEmail.verified) {
       if (this.email || this.names) {
         this.open(options)
       } else {
