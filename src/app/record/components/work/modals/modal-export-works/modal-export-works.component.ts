@@ -38,7 +38,7 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
     this._recordWorksService.exportSelected(this.putCodes).subscribe((data) => {
       this.loadingWorks = false
       const anchor = document.createElement('a')
-      anchor.setAttribute('css', '{display: \'none\'}')
+      anchor.setAttribute('css', "{display: 'none'}")
       this.elementRef.nativeElement.append(anchor)
       anchor.setAttribute(
         'href',

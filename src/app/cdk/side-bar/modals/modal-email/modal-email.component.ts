@@ -203,7 +203,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
   private triggerGeneralFormValidation() {
     Object.keys(this.emailsForm.controls).forEach((currentControlKey) => {
-      ; (this.emailsForm.controls[
+      ;(this.emailsForm.controls[
         currentControlKey
       ] as FormGroup).controls.email.updateValueAndValidity()
     })
