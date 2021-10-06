@@ -238,6 +238,7 @@
             [ngClass]="{
               'email-activated': showEmailAsVerified(email.putCode)
             }"
+            *ngIf="!showEmailAsVerified(email.putCode)"
           >
             <input
               [id]="email.putCode"
@@ -286,6 +287,16 @@
               This email is already associated with an ORCID record.
             </mat-error>
           </mat-form-field>
+
+          <strong
+            class="orc-font-body email-activated primary-email-label verify-icon"
+            *ngIf="showEmailAsVerified(email.putCode)"
+          >
+            <mat-icon class="large-material-icon" matPrefix
+            >verified</mat-icon
+            >
+            {{ emailsForm.value[email.putCode].email }}</strong
+          >
         </div>
 
         <div class="col actions-wrapper no-gutters">
