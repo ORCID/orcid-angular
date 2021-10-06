@@ -138,9 +138,7 @@
         class="orc-font-body-small"
         [attr.aria-label]="labelSortButton"
         [matMenuTriggerFor]="menu"
-        [disabled]="
-          !currentAmount && !total
-        "
+        [disabled]="!currentAmount && !total"
       >
         <mat-icon class="large-material-icon"> sort </mat-icon>
         <ng-container i18n="@@shared.sort"> Sort </ng-container>
