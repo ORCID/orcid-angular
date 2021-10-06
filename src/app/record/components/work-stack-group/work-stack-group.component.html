@@ -44,7 +44,11 @@
         >
           <div class="select-all">
             <p>
-              <mat-checkbox (change)="checked($event)" [(ngModel)]="selectAll">
+              <mat-checkbox
+                (change)="checked($event)"
+                [(ngModel)]="selectAll"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <ng-container i18n="@@shared.selectAll"
                   >Select all</ng-container
                 >
