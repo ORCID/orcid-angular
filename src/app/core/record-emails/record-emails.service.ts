@@ -105,10 +105,10 @@ export class RecordEmailsService {
       )
   }
 
-  verifyEmail(email: String): Observable<EmailsEndpoint> {
+  verifyEmail(email: string): Observable<EmailsEndpoint> {
     return this._http
       .get<ErrorsListResponse>(
-        environment.API_WEB + `account/verifyEmail.json?email=${email}`,
+        environment.API_WEB + `account/verifyEmail.json?email=${encodeURIComponent(email)}`,
         {
           headers: this.headers,
         }
