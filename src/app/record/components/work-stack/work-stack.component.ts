@@ -17,6 +17,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { UserRecord } from 'src/app/types/record.local'
 import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
@@ -30,6 +31,7 @@ import { WorkModalComponent } from '../work-modal/work-modal.component'
   ],
 })
 export class WorkStackComponent implements OnInit {
+  @Input() userRecord: UserRecord
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
   visibility: VisibilityStrings
