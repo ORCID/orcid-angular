@@ -1,6 +1,12 @@
 <div class="container">
-  <div class="text-container orc-font-body-large">
-    <ng-content> </ng-content>
+  <div
+    class="text-container"
+    [ngClass]="{
+      'orc-font-body-large': !platform.columns12,
+      'orc-font-body': platform.columns12
+    }"
+  >
+    <ng-content></ng-content>
   </div>
   <button mat-icon-button [attr.aria-label]="closeLabel" (click)="closeEvent()">
     <mat-icon class="large-material-icon">close</mat-icon>

@@ -71,6 +71,9 @@ import { WorkModalComponent } from './components/work-modal/work-modal.component
 import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
 import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
 import { TextFieldModule } from '@angular/cdk/text-field'
+import { TopBarVerificationEmailComponent } from './components/top-bar-verification-email/top-bar-verification-email.component'
+import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
+import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 
 @NgModule({
   declarations: [
@@ -120,6 +123,8 @@ import { TextFieldModule } from '@angular/cdk/text-field'
     FundingExternalIdentifiersViewOnlyComponent,
     WorkFormComponent,
     WorkModalComponent,
+    TopBarVerificationEmailComponent,
+    TopBarVerificationEmailModalComponent,
   ],
   imports: [
     CommonModule,
@@ -153,5 +158,6 @@ import { TextFieldModule } from '@angular/cdk/text-field'
     MatCheckboxModule,
     TextFieldModule,
   ],
+  providers: [VerificationEmailModalService],
 })
 export class RecordModule {}

@@ -28,7 +28,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
@@ -95,6 +95,7 @@ export class WorkStackGroupComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  userRecord: UserRecord
   workGroup: WorksEndpoint
   workStackGroupForm: FormGroup = new FormGroup({})
 
@@ -121,6 +122,7 @@ export class WorkStackGroupComponent implements OnInit {
     this._record
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
+        this.userRecord = userRecord
         if (!isEmpty(userRecord.works)) {
           this.paginationLoading = false
           this.workGroup = userRecord.works
