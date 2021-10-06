@@ -379,8 +379,19 @@
       </p>
     </ng-container>
 
-    <div class="row orc-font-body-small">
-      <a class="col add-more" id="add-link" (click)="addEmail()">
+    <div
+      class="row orc-font-body-small"
+      *ngIf="
+        userInfo?.IN_DELEGATION_MODE !== 'true' ||
+        userInfo?.DELEGATED_BY_ADMIN === 'true'
+      "
+    >
+      <a
+        class="col add-more"
+        id="add-link"
+        (click)="addEmail()"
+        [attr.disabled]=""
+      >
         <mat-icon class="large-material-icon">add_circle_outline </mat-icon>
         <ng-container *ngIf="emails.length === 1" i18n="@@side-bar.otherEmail">
           Add other email address
@@ -389,6 +400,28 @@
           Add another email address
         </ng-container>
       </a>
+    </div>
+
+    <div
+      *ngIf="
+        userInfo?.IN_DELEGATION_MODE === 'true' &&
+        userInfo?.DELEGATED_BY_ADMIN !== 'true'
+      "
+      class="info"
+      [ngClass]="{
+        'orc-font-body-small': !isMobile,
+        'orc-font-small-print': isMobile
+      }"
+    >
+      <div class="col">
+        <mat-icon>info</mat-icon>
+      </div>
+      <div class="col l11 m6 s3">
+        <p i18n="@@record.delegatorAddEmailNotAllow">
+          Adding additional email addresses is not allowed when you are managing
+          another ORCID record.
+        </p>
+      </div>
     </div>
   </div>
 </app-modal>
