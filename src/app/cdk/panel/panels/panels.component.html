@@ -139,7 +139,7 @@
         [attr.aria-label]="labelSortButton"
         [matMenuTriggerFor]="menu"
         [disabled]="
-          (!currentAmount && total == 0) || (!currentAmount && !total)
+          !currentAmount && !total
         "
       >
         <mat-icon class="large-material-icon"> sort </mat-icon>
