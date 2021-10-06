@@ -1,0 +1,18 @@
+:host {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info {
+  display: flex;
+  padding: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+
+  h2 {
+    margin: 0;
+  }
+  p {
+    margin-top: 0;
+  }
+}

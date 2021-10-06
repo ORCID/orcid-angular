@@ -72,6 +72,9 @@ import { FundingExternalIdentifiersViewOnlyComponent } from './components/fundin
 import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
 import { TextFieldModule } from '@angular/cdk/text-field'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
+import { TopBarVerificationEmailComponent } from './components/top-bar-verification-email/top-bar-verification-email.component'
+import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
+import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 
 @NgModule({
   declarations: [
@@ -121,6 +124,8 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
     FundingExternalIdentifiersViewOnlyComponent,
     WorkFormComponent,
     WorkModalComponent,
+    TopBarVerificationEmailComponent,
+    TopBarVerificationEmailModalComponent,
   ],
   imports: [
     CommonModule,
@@ -155,5 +160,6 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
     TextFieldModule,
     WarningMessageModule,
   ],
+  providers: [VerificationEmailModalService],
 })
 export class RecordModule {}
