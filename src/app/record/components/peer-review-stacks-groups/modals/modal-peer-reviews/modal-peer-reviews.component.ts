@@ -17,6 +17,7 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
 
   loadingPeerReviews = true
   recordImportWizards: RecordImportWizard[]
+  total = 0
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -30,6 +31,7 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.recordImportWizards = data
         this.loadingPeerReviews = false
+        this.total=data.length
       })
   }
 

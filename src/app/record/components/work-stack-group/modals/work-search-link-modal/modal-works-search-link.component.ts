@@ -21,6 +21,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
   geographicalAreas = []
   workTypeSelected = 'All'
   geographicalAreaSelected = 'All'
+  total = 0
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -52,6 +53,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
           })
         })
         this.loadingWorks = false
+        this.total = this.recordImportWizardsOriginal.length
       })
   }
 
@@ -80,6 +82,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
         this.recordImportWizards.push(recordImportWizard)
       }
     })
+    this.total = this.recordImportWizards.length
   }
 
   ngOnDestroy() {

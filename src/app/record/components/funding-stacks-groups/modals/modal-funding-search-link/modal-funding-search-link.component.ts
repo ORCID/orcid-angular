@@ -17,6 +17,7 @@ export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
   loadingFunding = true
   recordImportWizardsOriginal: RecordImportWizard[]
   recordImportWizards: RecordImportWizard[]
+  total = 0
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -35,6 +36,7 @@ export class ModalFundingSearchLinkComponent implements OnInit, OnDestroy {
         this.recordImportWizardsOriginal = recordImportWizards
         this.recordImportWizards = this.recordImportWizardsOriginal
         this.loadingFunding = false
+        this.total = this.recordImportWizardsOriginal.length
       })
   }
 
