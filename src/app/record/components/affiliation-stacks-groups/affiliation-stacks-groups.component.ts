@@ -20,7 +20,6 @@ import { UserInfo } from '../../../types'
   styleUrls: ['./affiliation-stacks-groups.component.scss'],
 })
 export class AffiliationStacksGroupsComponent implements OnInit {
-  loading = false
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   labelAddEmploymentButton = $localize`:@@shared.addEmployment:Add Employment`
