@@ -71,6 +71,7 @@ import { WorkModalComponent } from './components/work-modal/work-modal.component
 import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
 import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
 import { TextFieldModule } from '@angular/cdk/text-field'
+import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
 import { TopBarVerificationEmailComponent } from './components/top-bar-verification-email/top-bar-verification-email.component'
 import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
@@ -157,6 +158,7 @@ import { VerificationEmailModalService } from '../core/verification-email-modal/
     MatRadioModule,
     MatCheckboxModule,
     TextFieldModule,
+    WarningMessageModule,
   ],
   providers: [VerificationEmailModalService],
 })

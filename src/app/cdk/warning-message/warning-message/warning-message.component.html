@@ -1,0 +1,19 @@
+<div
+  class="container-text-and-icon"
+  [ngClass]="{
+    'orc-font-body-small': !isMobile,
+    'orc-font-small-print': isMobile
+  }"
+>
+  <div class="col">
+    <mat-icon>{{ icon }}</mat-icon>
+  </div>
+  <div class="text-container">
+    <strong>
+      <ng-content select="[title]"> </ng-content>
+    </strong>
+    <p>
+      <ng-content select="[content]"></ng-content>
+    </p>
+  </div>
+</div>

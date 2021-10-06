@@ -1,0 +1,17 @@
+.container-text-and-icon {
+  display: flex;
+  flex-direction: row;
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    p {
+      margin-bottom: 0;
+      margin-top: 4px;
+    }
+  }
+}
+:host {
+  border: 1px solid;
+  padding: 14px;
+  width: 100%;
+}

@@ -22,6 +22,26 @@
 ></app-top-bar-verification-email>
 
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
+  <app-warning-message *ngIf="userInfo?.LOCKED === 'true'">
+    <ng-container i18n="@@record.accountHasBeenLocked" title
+      >Your account has been locked</ng-container
+    >
+    <ng-container content
+      ><ng-container i18n="@@record.pleasContact">Please contact</ng-container>
+      <a
+        class="underline"
+        i18n="@@record.orcidSupport"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://support.orcid.org/hc/en-us/requests/new"
+        >ORCID support</a
+      >
+      <ng-container i18n="@@record.ifYouBelieveWasLockedInError"
+        >if you believe this account was locked in error.</ng-container
+      >
+    </ng-container>
+  </app-warning-message>
+
   <app-panel
     *ngIf="userRecord?.names"
     [isPublicRecord]="isPublicRecord"
