@@ -31,7 +31,7 @@ export class ModalPeerReviewsComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.recordImportWizards = data
         this.loadingPeerReviews = false
-        this.total=data.length
+        this.total = data.length
       })
   }
 
