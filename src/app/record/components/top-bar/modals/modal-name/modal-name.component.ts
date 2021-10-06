@@ -1,10 +1,13 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   Inject,
   OnDestroy,
-  OnInit, QueryList, ViewChildren,
+  OnInit,
+  QueryList,
+  ViewChildren,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
