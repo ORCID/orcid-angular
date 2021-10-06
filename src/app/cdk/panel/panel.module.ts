@@ -21,6 +21,7 @@ import { SortLabelPipe } from './sort-label.pipe'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { PrivacySelectorModule } from '../privacy-selector/privacy-selector.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     PrivacySelectorModule,
     ReactiveFormsModule,
     FormsModule,
+    MatProgressBarModule,
   ],
   exports: [
     PanelComponent,
