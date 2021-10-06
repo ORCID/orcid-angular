@@ -17,6 +17,14 @@
   .add-more {
     color: mat-color($primary, 700);
   }
+
+  .info {
+    border-color: mat-color($foreground, 'state-notice-dark') !important;
+
+    mat-icon {
+      color: mat-color($foreground, 'state-notice-dark') !important;
+    }
+  }
 }
 
 @include modal-email-theme($orcid-app-theme);

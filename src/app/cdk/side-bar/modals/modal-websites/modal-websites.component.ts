@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
@@ -8,11 +9,6 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { Subject } from 'rxjs'
-import { MatDialogRef } from '@angular/material/dialog'
-import { ModalComponent } from '../../../modal/modal/modal.component'
-import { PlatformInfo, PlatformInfoService } from '../../../platform-info'
-import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
 import {
   AbstractControl,
   FormControl,
@@ -21,18 +17,23 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { VisibilityStrings } from '../../../../types/common.endpoint'
-import { WINDOW } from '../../../window'
-import { first, takeUntil } from 'rxjs/operators'
-import { WebsitesEndPoint } from '../../../../types/record-websites.endpoint'
-import { Assertion } from '../../../../types'
-import { UserSession } from '../../../../types/session.local'
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import * as _ from 'lodash'
-import { UserService } from '../../../../core'
-import { URL_REGEXP, URL_REGEXP_BACKEND } from '../../../../constants'
+import { Subject } from 'rxjs'
+import { first, takeUntil } from 'rxjs/operators'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+
+import { URL_REGEXP, URL_REGEXP_BACKEND } from '../../../../constants'
+import { UserService } from '../../../../core'
+import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
+import { Assertion } from '../../../../types'
+import { VisibilityStrings } from '../../../../types/common.endpoint'
+import { WebsitesEndPoint } from '../../../../types/record-websites.endpoint'
+import { UserSession } from '../../../../types/session.local'
+import { ModalComponent } from '../../../modal/modal/modal.component'
+import { PlatformInfo, PlatformInfoService } from '../../../platform-info'
+import { WINDOW } from '../../../window'
 
 @Component({
   selector: 'app-modal-websites',
@@ -265,17 +266,20 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     // Add errors error on duplicated urls
     Object.keys(formGroup.controls).forEach((keyX) => {
-      const urlControlX = (formGroup.controls[keyX] as FormGroup).controls[
-        'url'
-      ]
+      let urlControlX: string = (formGroup.controls[keyX] as FormGroup)
+        .controls['url'].value
+      urlControlX = urlControlX.toLowerCase()
+      urlControlX = this.removeProtocol(urlControlX)
+
       Object.keys(formGroup.controls).forEach((keyY) => {
-        const urlControlY = (formGroup.controls[keyY] as FormGroup).controls[
-          'url'
-        ]
+        let urlControlY: string = (formGroup.controls[keyY] as FormGroup)
+          .controls['url'].value
+        urlControlY = urlControlY.toLowerCase()
+        urlControlY = this.removeProtocol(urlControlY)
 
         // Only if both controls are not empty
-        if (urlControlX.value && urlControlY.value) {
-          if (urlControlX.value === urlControlY.value && keyX !== keyY) {
+        if (urlControlX && urlControlY) {
+          if (urlControlX === urlControlY && keyX !== keyY) {
             formGroupKeysWithDuplicatedValues.push(keyY)
           }
         }
@@ -306,5 +310,16 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  removeProtocol(urlControlX: string): string {
+    let response = urlControlX
+    if (urlControlX.indexOf('http://') === 0) {
+      response = response.replace('http://', '')
+    }
+    if (urlControlX.indexOf('https://') === 0) {
+      response = response.replace('https://', '')
+    }
+    return response
   }
 }
