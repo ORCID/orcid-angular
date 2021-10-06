@@ -166,6 +166,11 @@
     </div>
   </div>
 </div>
+<mat-progress-bar
+  mode="indeterminate"
+  color="accent"
+  *ngIf="loading"
+></mat-progress-bar>
 <div class="col s4 m8 l12 content no-gutters" *ngIf="expandedContent">
   <ng-content></ng-content>
 </div>

@@ -20,6 +20,7 @@ import { UserRecord } from '../../../types/record.local'
   styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
 })
 export class PanelsComponent implements OnInit {
+  @Input() loading = false
   @Input() expandedContent = true
   @Input() title
   @Input() type:

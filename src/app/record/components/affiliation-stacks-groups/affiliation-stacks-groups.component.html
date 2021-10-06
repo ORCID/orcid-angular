@@ -6,8 +6,9 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR EMPLOYMENT -->
   <app-panels
+    [loading]="$loading | async"
     *ngIf="getAffiliationType('EMPLOYMENT') as profileAffiliationsGroup"
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
@@ -64,8 +65,10 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR EDUCATION_AND_QUALIFICATION -->
   <app-panels
+    [loading]="$loading | async"
+    s
     *ngIf="
       getAffiliationType(
         'EDUCATION_AND_QUALIFICATION'
@@ -132,8 +135,9 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR INVITED_POSITION_AND_DISTINCTION -->
   <app-panels
+    [loading]="$loading | async"
     *ngIf="
       getAffiliationType(
         'INVITED_POSITION_AND_DISTINCTION'
@@ -199,8 +203,9 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR MEMBERSHIP_AND_SERVICE -->
   <app-panels
+    [loading]="$loading | async"
     *ngIf="
       getAffiliationType('MEMBERSHIP_AND_SERVICE') as profileAffiliationsGroup
     "

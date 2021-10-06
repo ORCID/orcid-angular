@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
@@ -22,7 +22,6 @@ import { VisibilityStrings } from '../../types/common.endpoint'
   providedIn: 'root',
 })
 export class RecordAffiliationService {
-  affiliationsSubject = new ReplaySubject<AffiliationUIGroup[]>(1)
   lastEmittedValue: AffiliationUIGroup[]
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -30,6 +29,10 @@ export class RecordAffiliationService {
   })
 
   $affiliations: ReplaySubject<AffiliationUIGroup[]>
+  private _$loading = new BehaviorSubject<boolean>(true)
+  public get $loading() {
+    return this._$loading.asObservable()
+  }
 
   constructor(
     private _http: HttpClient,
@@ -49,12 +52,14 @@ export class RecordAffiliationService {
       return this.$affiliations
     }
 
+    this._$loading.next(true)
     this.getGroupAndSortAffiliations(options)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of([])),
         tap((value) => {
+          this._$loading.next(false)
           this.lastEmittedValue = cloneDeep(value)
           this.$affiliations.next(value)
         })
