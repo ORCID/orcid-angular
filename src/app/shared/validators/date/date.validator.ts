@@ -73,6 +73,28 @@ export function dateMonthYearValidator(dateType: string) {
   }
 }
 
+export function endDateMonthYearValidator() {
+  return (c: AbstractControl): { [key: string]: any } | null => {
+    const endDateYear = c.get('endDateGroup.endDateYear').value
+    const endDateMonth = c.get('endDateGroup.endDateMonth').value
+
+    const startDateYear = c.get('startDateGroup.startDateYear').value
+    const startDateMonth = c.get('startDateGroup.startDateMonth').value
+
+    if (!endDateYear || !startDateYear) {
+      return null
+    }
+    const startDate = new Date(startDateYear, startDateMonth - 1)
+    const endDate = new Date(endDateYear, endDateMonth - 1)
+
+    if (endDate < startDate) {
+      return { invalidEndDate: true }
+    }
+
+    return null
+  }
+}
+
 export function endDateValidator() {
   return (c: AbstractControl): { [key: string]: any } | null => {
     const endDateYear = c.get('endDateGroup.endDateYear').value
@@ -83,10 +105,9 @@ export function endDateValidator() {
     const startDateMonth = c.get('startDateGroup.startDateMonth').value
     const startDateDay = c.get('startDateGroup.startDateDay').value
 
-    if (!endDateYear && !startDateYear) {
+    if (!endDateYear || !startDateYear) {
       return null
     }
-
     const startDate = new Date(startDateYear, startDateMonth - 1, startDateDay)
     const endDate = new Date(endDateYear, endDateMonth - 1, endDateDay)
 

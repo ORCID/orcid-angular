@@ -10,7 +10,7 @@ import {
 } from '@angular/forms'
 import {
   dateMonthYearValidator,
-  endDateValidator,
+  endDateMonthYearValidator,
 } from '../../../../../shared/validators/date/date.validator'
 import { translatedTitleValidator } from '../../../../../shared/validators/translated-title/translated-title.validator'
 
@@ -209,7 +209,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         }),
       },
       {
-        validator: endDateValidator(),
+        validator: endDateMonthYearValidator(),
       }
     )
     this.grantsArray = this.fundingForm.controls.grants as FormArray
