@@ -21,6 +21,7 @@ import { RecordWorksService } from '../../../core/record-works/record-works.serv
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
+import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 
 @Component({
   selector: 'app-panel',
@@ -95,6 +96,8 @@ export class PanelComponent implements OnInit {
   @Input() userVersionPresent: boolean
 
   @Input() id: string
+  @Input() email = false
+  @Input() names = false
   selected: boolean
 
   formVisibility: FormGroup
@@ -112,7 +115,8 @@ export class PanelComponent implements OnInit {
     private _fundingService: RecordFundingsService,
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
-    private _worksService: RecordWorksService
+    private _worksService: RecordWorksService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   ngOnInit(): void {
@@ -154,6 +158,23 @@ export class PanelComponent implements OnInit {
   }
 
   openModal(options?: { createACopy: boolean }) {
+    const primaryEmail = this.userRecord?.emails?.emails.find(
+      (email) => email.primary
+    )
+    if (!primaryEmail?.verified) {
+      if (this.email || this.names) {
+        this.open(options)
+      } else {
+        this._verificationEmailModalService.openVerificationEmailModal(
+          primaryEmail.value
+        )
+      }
+    } else {
+      this.open(options)
+    }
+  }
+
+  open(options?: { createACopy: boolean }) {
     this._platform
       .get()
       .pipe(first())
