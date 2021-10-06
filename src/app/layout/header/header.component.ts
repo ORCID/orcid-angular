@@ -258,7 +258,7 @@ export class HeaderComponent implements OnInit {
       this._router.navigate(['/signin'])
       this.mobileMenuState = false
     } else {
-      ;(this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
+      ; (this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
     }
   }
 
@@ -276,6 +276,6 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateTo(val) {
-    ;(this.window as any).outOfRouterNavigation(val)
+    ; (this.window as any).outOfRouterNavigation(val)
   }
 }

@@ -164,7 +164,7 @@ export class OauthService {
       )
     ) {
       // Redirect error that is handle by the client application
-      ;(this.window as any).outOfRouterNavigation(
+      ; (this.window as any).outOfRouterNavigation(
         `${session.redirectUrl}#error=${session.error}`
       )
       return NEVER

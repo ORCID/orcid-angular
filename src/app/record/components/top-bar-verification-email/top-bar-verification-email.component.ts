@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
@@ -14,7 +14,7 @@ import { VerificationEmailModalService } from '../../../core/verification-email-
     './top-bar-verification-email.component.scss-theme.scss',
   ],
 })
-export class TopBarVerificationEmailComponent implements OnInit {
+export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @Input() justRegistered: boolean
