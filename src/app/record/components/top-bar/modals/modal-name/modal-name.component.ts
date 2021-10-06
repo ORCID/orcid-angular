@@ -2,9 +2,12 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   Inject,
   OnDestroy,
   OnInit,
+  QueryList,
+  ViewChildren,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
@@ -43,6 +46,7 @@ import { OrcidValidators } from '../../../../../validators'
   ],
 })
 export class ModalNameComponent implements OnInit, OnDestroy {
+  @ViewChildren('nameInput') inputs: QueryList<ElementRef>
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   id: string
@@ -266,6 +270,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.addedOtherNameCount++
 
     this._changeDetectorRef.detectChanges()
+    const input = this.inputs.last
+    input.nativeElement.focus()
   }
 
   deleteOtherName(putCode: string) {
