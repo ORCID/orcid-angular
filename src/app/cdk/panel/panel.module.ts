@@ -48,7 +48,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
     PrivacySelectorModule,
     ReactiveFormsModule,
     FormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   exports: [
     PanelComponent,
