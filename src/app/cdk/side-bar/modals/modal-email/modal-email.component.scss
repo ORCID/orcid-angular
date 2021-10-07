@@ -33,6 +33,9 @@ mat-form-field {
 .primary-email-label {
   display: flex;
   align-items: center;
+  width: 20em;
+  overflow: hidden;
+  text-overflow: ellipsis;
   mat-icon {
     margin-inline-end: 16px;
   }
