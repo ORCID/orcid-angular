@@ -24,10 +24,12 @@
   <div [formGroup]="emailsForm">
     <div class="row">
       <div class="col orc-font-body-small">
-        <p i18n="@@side-bar.OrcidWorkBest">
+        <p class="orcid-works-best"
+          i18n="@@side-bar.OrcidWorkBest"
+        >
           ORCID works best when you have multiple email addresses.
         </p>
-        <p>
+        <p class="terms-of-use">
           <i>
             <ng-container i18n="@@side-bar.perOrcid"> Per the </ng-container>
             <a
@@ -105,7 +107,7 @@
               class="orc-font-body-large email-activated primary-email-label verify-icon"
               *ngIf="showEmailAsVerified(email.putCode)"
             >
-              <mat-icon class="title-material-icon" matPrefix
+              <mat-icon class="title-material-icon other-names" matPrefix
                 >verified</mat-icon
               >
               {{ emailsForm.value[email.putCode].email }}</strong
@@ -115,14 +117,14 @@
             <div class="actions-sub-wrapper">
               <ng-container *ngIf="showNonVerifiedData(email.putCode)">
                 <a
-                  class="orc-font-small-print disabled underline"
+                  class="orc-font-body-small disabled underline"
                   *ngIf="verificationEmailWasSend(email.putCode)"
                   i18n="@@side-bar.resendVerification"
                 >
                   Resend verification email</a
                 >
                 <a
-                  class="orc-font-small-print underline"
+                  class="orc-font-body-small underline"
                   (click)="verifyEmail(email)"
                   *ngIf="!verificationEmailWasSend(email.putCode)"
                   i18n="@@side-bar.resendVerification"
@@ -218,7 +220,7 @@
     </div>
 
     <div class="row">
-      <h3 class="orc-font-body-small" i18n="@@side-bar.otherEmails">
+      <h3 class="col orc-font-body-small" i18n="@@side-bar.otherEmails">
         Other email addresses
       </h3>
     </div>
@@ -300,7 +302,7 @@
         <div class="col actions-wrapper no-gutters">
           <div class="actions-sub-wrapper">
             <a
-              class="orc-font-small-print underline"
+              class="orc-font-body-small underline"
               *ngIf="showEmailAsVerified(email.putCode)"
               (click)="makePrimary(email)"
               i18n="@@side-bar.makePrimary"
@@ -310,14 +312,14 @@
 
             <ng-container *ngIf="showNonVerifiedData(email.putCode, true)">
               <a
-                class="orc-font-small-print disabled underline"
+                class="orc-font-body-small disabled underline"
                 *ngIf="verificationEmailWasSend(email.putCode)"
                 i18n="@@side-bar.resendVerification"
               >
                 Resend verification email</a
               >
               <a
-                class="orc-font-small-print underline"
+                class="orc-font-body-small underline"
                 (click)="verifyEmail(email)"
                 *ngIf="!verificationEmailWasSend(email.putCode)"
                 i18n="@@side-bar.resendVerification"

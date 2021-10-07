@@ -1,3 +1,15 @@
+.row .col {
+  padding-inline-start: 0;
+}
+
+.orcid-works-best{
+  margin-bottom: 16px;
+}
+
+.terms-of-use {
+  margin-top: 0;
+}
+
 .add-more-email {
   display: flex;
   align-items: center;
@@ -34,7 +46,11 @@ mat-form-field {
   display: flex;
   align-items: center;
   mat-icon {
+    margin-inline-start: 6px;
     margin-inline-end: 16px;
+  }
+  mat-icon, .other-names {
+    margin-inline-start: 10px;
   }
 }
 
@@ -99,7 +115,7 @@ mat-form-field {
 
 .additional-email {
   ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 18px !important;
+    padding-bottom: 7px !important;
   }
 }
 
