@@ -39,10 +39,7 @@
     </p>
     <ng-container *ngIf="websites.length > 0">
       <div class="row">
-        <h3
-          class="col no-gutters orc-font-body"
-          i18n="@@topBar.myLinks"
-        >
+        <h3 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
           My links
         </h3>
       </div>
@@ -90,8 +87,8 @@
                   />
                   <mat-error
                     *ngIf="
-                      websitesForm.get(website.putCode).get('description')?.errors
-                        ?.maxlength
+                      websitesForm.get(website.putCode).get('description')
+                        ?.errors?.maxlength
                     "
                     i18n="@@topBar.urlMaxLength"
                   >
@@ -121,7 +118,9 @@
                   </mat-error>
                   <mat-error
                     *ngIf="
-                      websitesForm.get(website.putCode).hasError('pattern', 'url')
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('pattern', 'url')
                     "
                     i18n="@@topBar.invalidURL"
                   >

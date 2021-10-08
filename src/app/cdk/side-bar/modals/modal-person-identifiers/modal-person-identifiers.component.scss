@@ -36,7 +36,8 @@
   }
 }
 
-.person-identifiers-list.cdk-drop-list-dragging .person-identifiers-box:not(.cdk-drag-placeholder) {
+.person-identifiers-list.cdk-drop-list-dragging
+  .person-identifiers-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 

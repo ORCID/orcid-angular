@@ -39,10 +39,7 @@
     </div>
     <ng-container *ngIf="countries?.length > 0">
       <div class="row">
-        <h3
-          class="col no-gutters orc-font-body"
-          i18n="@@side-bar.myCountries"
-        >
+        <h3 class="col no-gutters orc-font-body" i18n="@@side-bar.myCountries">
           My countries
         </h3>
       </div>
@@ -67,51 +64,52 @@
             [ngClass]="{ 'no-wrap': !isMobile }"
           >
             <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-            <img
-              cdkDragHandle
-              src="./assets/vectors/draggable.svg"
-              aria-label="drag handle"
-            />
+              <img
+                cdkDragHandle
+                src="./assets/vectors/draggable.svg"
+                aria-label="drag handle"
+              />
 
-            <mat-form-field
-              appearance="outline"
-              class="mat-form-field-min"
-              [ngClass]="{ twoLinesHint: isMobile }"
-            >
-              <mat-select #countrySelect formControlName="country">
-                <mat-option
-                  *ngFor="let countryCode of countryCodes"
-                  [value]="countryCode.key"
-                >
-                  {{ countryCode.key }}
-                </mat-option>
-              </mat-select>
-              <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
-                <app-source-hit
-                  [createdDate]="countriesMap[country.putCode].createdDate"
-                  [source]="country.sourceName || country.source"
-                  [assertion]="
-                    country.assertionOriginName || country.assertionOriginOrcid
-                  "
-                ></app-source-hit>
-              </mat-hint>
-            </mat-form-field>
-          </div>
+              <mat-form-field
+                appearance="outline"
+                class="mat-form-field-min"
+                [ngClass]="{ twoLinesHint: isMobile }"
+              >
+                <mat-select #countrySelect formControlName="country">
+                  <mat-option
+                    *ngFor="let countryCode of countryCodes"
+                    [value]="countryCode.key"
+                  >
+                    {{ countryCode.key }}
+                  </mat-option>
+                </mat-select>
+                <mat-hint *ngIf="country.putCode.indexOf('new') < 0">
+                  <app-source-hit
+                    [createdDate]="countriesMap[country.putCode].createdDate"
+                    [source]="country.sourceName || country.source"
+                    [assertion]="
+                      country.assertionOriginName ||
+                      country.assertionOriginOrcid
+                    "
+                  ></app-source-hit>
+                </mat-hint>
+              </mat-form-field>
+            </div>
             <div class="col no-wrap actions-wrapper no-gutters">
-            <app-privacy-selector
-              formControlName="visibility"
-            ></app-privacy-selector>
-            <button
-              (click)="deleteEmail(country.putCode)"
-              mat-icon-button
-              class="delete-button"
-            >
-              <mat-icon
-                class="material-icons-outlined extra-large-material-icon"
-                >delete
-              </mat-icon>
-            </button>
-          </div>
+              <app-privacy-selector
+                formControlName="visibility"
+              ></app-privacy-selector>
+              <button
+                (click)="deleteEmail(country.putCode)"
+                mat-icon-button
+                class="delete-button"
+              >
+                <mat-icon
+                  class="material-icons-outlined extra-large-material-icon"
+                  >delete
+                </mat-icon>
+              </button>
+            </div>
           </div>
           <hr class="dashed-line" />
         </div>

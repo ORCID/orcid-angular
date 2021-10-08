@@ -15,12 +15,14 @@
     background: map-get($foreground, 'brand-primary');
   }
 
-  hr, .dashed-line{
+  hr,
+  .dashed-line {
     background: repeating-linear-gradient(
-        90deg,
-        mat-color($background, light-grey),
-        mat-color($background, light-grey) 6px,
-        transparent 6px,transparent 12px
+      90deg,
+      mat-color($background, light-grey),
+      mat-color($background, light-grey) 6px,
+      transparent 6px,
+      transparent 12px
     );
   }
 }
