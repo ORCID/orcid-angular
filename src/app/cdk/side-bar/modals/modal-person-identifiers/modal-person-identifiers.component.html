@@ -34,7 +34,7 @@
             your ORCID record.
           </ng-container>
         </p>
-        <p class="orc-font-small-print find-out">
+        <p class="orc-font-body-small find-out">
           <ng-container i18n="@@side-bar.findOutMore">
             Find out more on our
           </ng-container>
@@ -50,12 +50,14 @@
     </div>
     <ng-container *ngIf="personIdentifiers?.length > 0">
       <div class="row">
-        <label class="orc-font-body-small">
-          <strong i18n="@@side-bar.myPersonIdentifiers"
-            >My person identifiers</strong
-          >
-        </label>
+        <h3
+          class="col no-gutters orc-font-body"
+          i18n="@@side-bar.myPersonIdentifiers"
+        >
+          My person identifiers
+        </h3>
       </div>
+      <hr class="dashed-line" />
       <div
         class="row"
         id="ids-list"
@@ -64,71 +66,75 @@
       >
         <div
           cdkDrag
-          class="row personal-identifier-input-line"
-          [ngClass]="{ 'no-wrap': !isMobile }"
+          class="row"
           [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="personIdentifier.putCode"
           *ngFor="let personIdentifier of personIdentifiers; index as i"
           [attr.id]="'draggable-' + i"
         >
           <div
-            class="col l12 m8 s4 top no-wrap no-gutters personal-identifiers-wrapper"
+            class="row personal-identifier-input-line"
+            [ngClass]="{ 'no-wrap': !isMobile }"
           >
-            <img
-              cdkDragHandle
-              src="./assets/vectors/draggable.svg"
-              aria-label="drag handle"
-            />
-            <div class="row">
-              <mat-form-field appearance="outline" class="mat-form-field-min">
-                <input
-                  id="identifier-input"
-                  matInput
-                  formControlName="identifier"
-                />
-                <mat-hint class="mat-caption">
-                  <span
-                    ><a
-                      class="underline"
-                      [href]="personIdentifier.url"
-                      target="_blank"
-                      rel="me nofollow noopener noreferrer"
-                      i18n="@@shared.view"
-                      >View</a
-                    >,
-                  </span>
-                  <app-source-hit
-                    [createdDate]="personIdentifier.createdDate"
-                    [source]="
-                      personIdentifier.sourceName || personIdentifier.source
-                    "
-                    [assertion]="
-                      personIdentifier.assertionOriginName ||
-                      personIdentifier.assertionOriginOrcid
-                    "
-                  ></app-source-hit>
-                </mat-hint>
-              </mat-form-field>
+            <div
+              class="col l12 m8 s4 top no-wrap no-gutters personal-identifiers-wrapper"
+            >
+              <img
+                cdkDragHandle
+                src="./assets/vectors/draggable.svg"
+                aria-label="drag handle"
+              />
+              <div class="row">
+                <mat-form-field appearance="outline" class="mat-form-field-min">
+                  <input
+                    id="identifier-input"
+                    matInput
+                    formControlName="identifier"
+                  />
+                  <mat-hint class="mat-caption">
+                    <span
+                      ><a
+                        class="underline"
+                        [href]="personIdentifier.url"
+                        target="_blank"
+                        rel="me nofollow noopener noreferrer"
+                        i18n="@@shared.view"
+                        >View</a
+                      >,
+                    </span>
+                    <app-source-hit
+                      [createdDate]="personIdentifier.createdDate"
+                      [source]="
+                        personIdentifier.sourceName || personIdentifier.source
+                      "
+                      [assertion]="
+                        personIdentifier.assertionOriginName ||
+                        personIdentifier.assertionOriginOrcid
+                      "
+                    ></app-source-hit>
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+            <div
+              class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
+            >
+              <app-privacy-selector
+                formControlName="visibility"
+              ></app-privacy-selector>
+              <button
+                (click)="deletePersonalIdentifier(personIdentifier.putCode)"
+                mat-icon-button
+                class="delete-button"
+              >
+                <mat-icon
+                  class="material-icons-outlined extra-large-material-icon"
+                  >delete</mat-icon
+                >
+              </button>
             </div>
           </div>
-          <div
-            class="col no-wrap actions-wrapper no-gutters personal-identifiers-controls-wrapper"
-          >
-            <app-privacy-selector
-              formControlName="visibility"
-            ></app-privacy-selector>
-            <button
-              (click)="deletePersonalIdentifier(personIdentifier.putCode)"
-              mat-icon-button
-              class="delete-button"
-            >
-              <mat-icon
-                class="material-icons-outlined extra-large-material-icon"
-                >delete</mat-icon
-              >
-            </button>
-          </div>
-          <hr *ngIf="isMobile" />
+          <hr class="dashed-line" />
         </div>
       </div>
     </ng-container>

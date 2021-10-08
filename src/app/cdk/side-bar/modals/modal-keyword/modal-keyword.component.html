@@ -34,10 +34,14 @@
     </p>
     <ng-container *ngIf="keywords.length > 0">
       <div class="row">
-        <label for="content-input" class="orc-font-body-small">
-          <strong i18n="@@topBar.myKeywords">My keywords</strong>
-        </label>
+        <h3
+          class="col no-gutters orc-font-body"
+          i18n="@@topBar.myKeywords"
+        >
+          My keywords
+        </h3>
       </div>
+      <hr class="dashed-line" />
       <div
         class="row"
         id="keyword-dropList"
@@ -47,78 +51,82 @@
         <div
           cdkDrag
           rootElementSelector="#keyword-dropList"
-          class="row keywords-input-line"
-          [ngClass]="{ 'no-wrap': !isMobile }"
+          class="row"
           [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="keyword.putCode"
           *ngFor="let keyword of keywords"
         >
-          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-            <div class="image-container">
-              <img
-                class="icon-drag"
-                cdkDragHandle
-                src="./assets/vectors/draggable.svg"
-                aria-label="drag handle"
-              />
-            </div>
-            <div class="row">
-              <mat-form-field appearance="outline" class="mat-form-field-min">
-                <input
-                  id="content-input"
-                  matInput
-                  #keywordInput
-                  formControlName="content"
-                  placeholder=" {{ ngOrcidKeyword }}"
-                  [ngClass]="{ 'keyword-input': screenDirection === 'rtl' }"
-                />
-                <mat-hint
-                  class="mat-caption"
-                  *ngIf="keyword.putCode.indexOf('new') < 0"
-                >
-                  <app-source-hit
-                    [createdDate]="keyword.createdDate"
-                    [source]="keyword.sourceName || keyword.source"
-                    [assertion]="
-                      keyword.assertionOriginName ||
-                      keyword.assertionOriginOrcid
-                    "
-                  ></app-source-hit>
-                </mat-hint>
-
-                <mat-error
-                  *ngIf="
-                    keywordsForm.get(keyword.putCode)?.get('content')?.errors
-                      ?.maxlength
-                  "
-                  i18n="@@topBar.keywordMaxLength"
-                >
-                  Must be less then 100 characters
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-
           <div
-            class="col no-wrap actions-wrapper no-gutters"
-            [ngClass]="{ privacy: !platform.columns12 }"
+            class="row keywords-input-line"
+            [ngClass]="{ 'no-wrap': !isMobile }"
           >
-            <app-privacy-selector
-              [ngClass]="{ selector: !platform.columns12 }"
-              formControlName="visibility"
-            ></app-privacy-selector>
-            <button
-              (click)="deleteKeyword(keyword.putCode)"
-              mat-icon-button
-              class="delete-button"
+            <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+              <div class="image-container">
+                <img
+                  class="icon-drag"
+                  cdkDragHandle
+                  src="./assets/vectors/draggable.svg"
+                  aria-label="drag handle"
+                />
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="mat-form-field-min">
+                  <input
+                    id="content-input"
+                    matInput
+                    #keywordInput
+                    formControlName="content"
+                    placeholder=" {{ ngOrcidKeyword }}"
+                    [ngClass]="{ 'keyword-input': screenDirection === 'rtl' }"
+                  />
+                  <mat-hint
+                    class="mat-caption"
+                    *ngIf="keyword.putCode.indexOf('new') < 0"
+                  >
+                    <app-source-hit
+                      [createdDate]="keyword.createdDate"
+                      [source]="keyword.sourceName || keyword.source"
+                      [assertion]="
+                        keyword.assertionOriginName ||
+                        keyword.assertionOriginOrcid
+                      "
+                    ></app-source-hit>
+                  </mat-hint>
+
+                  <mat-error
+                    *ngIf="
+                      keywordsForm.get(keyword.putCode)?.get('content')?.errors
+                        ?.maxlength
+                    "
+                    i18n="@@topBar.keywordMaxLength"
+                  >
+                    Must be less then 100 characters
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div
+              class="col no-wrap actions-wrapper no-gutters"
+              [ngClass]="{ privacy: !platform.columns12 }"
             >
-              <mat-icon
-                class="material-icons-outlined extra-large-material-icon"
-                >delete
-              </mat-icon>
-            </button>
+              <app-privacy-selector
+                [ngClass]="{ selector: !platform.columns12 }"
+                formControlName="visibility"
+              ></app-privacy-selector>
+              <button
+                (click)="deleteKeyword(keyword.putCode)"
+                mat-icon-button
+                class="delete-button"
+              >
+                <mat-icon
+                  class="material-icons-outlined extra-large-material-icon"
+                  >delete
+                </mat-icon>
+              </button>
+            </div>
           </div>
-          <hr *ngIf="isMobile" />
+          <hr class="dashed-line" />
         </div>
       </div>
     </ng-container>

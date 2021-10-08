@@ -28,7 +28,7 @@
     <div class="row">
       <div class="col no-gutters">
         <p
-          class="orc-font-small-print"
+          class="orc-font-body-small"
           i18n="@@side-bar.countriesModalDescription"
         >
           Add countries to your ORCID record to highlight where you conduct your
@@ -40,29 +40,33 @@
     <ng-container *ngIf="countries?.length > 0">
       <div class="row">
         <h3
-          class="col no-gutters orc-font-body-small"
+          class="col no-gutters orc-font-body"
           i18n="@@side-bar.myCountries"
         >
           My countries
         </h3>
       </div>
+      <hr class="dashed-line" />
       <div
-        class="row country-wrapper"
-        id="country-droplist"
+        class="row"
+        id="country-dropList"
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
         <div
           cdkDrag
-          rootElementSelector="#country-droplist"
-          class="row country-input-line"
-          [ngClass]="{ 'no-wrap': !isMobile }"
+          rootElementSelector="#country-dropList"
+          class="row"
           [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="country.putCode"
           *ngFor="let country of countries; index as i"
           [attr.id]="'draggable-' + i"
         >
-          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+          <div
+            class="row country-input-line"
+            [ngClass]="{ 'no-wrap': !isMobile }"
+          >
+            <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
             <img
               cdkDragHandle
               src="./assets/vectors/draggable.svg"
@@ -93,7 +97,7 @@
               </mat-hint>
             </mat-form-field>
           </div>
-          <div class="col no-wrap actions-wrapper no-gutters">
+            <div class="col no-wrap actions-wrapper no-gutters">
             <app-privacy-selector
               formControlName="visibility"
             ></app-privacy-selector>
@@ -108,7 +112,8 @@
               </mat-icon>
             </button>
           </div>
-          <hr *ngIf="isMobile" />
+          </div>
+          <hr class="dashed-line" />
         </div>
       </div>
     </ng-container>
