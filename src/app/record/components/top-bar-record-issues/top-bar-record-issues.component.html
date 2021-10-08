@@ -7,10 +7,11 @@
   </ng-container>
   <br
     *ngIf="
-      userInfo.IS_DEACTIVATED === 'true' && !userInfo.PRIMARY_RECORD &&
+      userInfo.IS_DEACTIVATED === 'true' &&
+      !userInfo.PRIMARY_RECORD &&
       userInfo.IS_LOCKED === 'true'
     "
-  >
+  />
   <ng-container
     *ngIf="userInfo.IS_LOCKED === 'true'"
     i18n="@@record.lockedRecord"
