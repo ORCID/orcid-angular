@@ -84,6 +84,10 @@ label {
   text-decoration: underline;
 }
 
+.input-container {
+  max-width: 402px;
+}
+
 :host {
   .date-group {
     padding-bottom: 1.475em;
