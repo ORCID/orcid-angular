@@ -72,6 +72,10 @@ export class AffiliationStackComponent implements OnInit {
    * Set the panelDetails and top of the stack card to default mode
    */
   private setAffiliationsInitialStates(value: AffiliationGroup, force = false) {
+    if (value.affiliations?.length === 1 && this.displayTheStack) {
+      this.displayTheStack = false
+    }
+
     value.affiliations.forEach((affiliation) => {
       this.setDefaultPanelsDisplay(affiliation, force)
       this.setDefaultPanelDetailsState(affiliation, force)
