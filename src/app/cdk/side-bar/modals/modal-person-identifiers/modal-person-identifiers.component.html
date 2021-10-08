@@ -72,6 +72,7 @@
           *ngFor="let personIdentifier of personIdentifiers; index as i"
           [attr.id]="'draggable-' + i"
         >
+          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
           <div
             class="row personal-identifier-input-line"
             [ngClass]="{ 'no-wrap': !isMobile }"

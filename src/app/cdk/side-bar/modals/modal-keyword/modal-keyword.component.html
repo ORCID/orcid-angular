@@ -43,19 +43,19 @@
       </div>
       <hr class="dashed-line" />
       <div
-        class="row"
+        class="row keyword-list"
         id="keyword-dropList"
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
         <div
           cdkDrag
-          rootElementSelector="#keyword-dropList"
-          class="row"
+          class="row keyword-box"
           [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="keyword.putCode"
           *ngFor="let keyword of keywords"
         >
+          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
           <div
             class="row keywords-input-line"
             [ngClass]="{ 'no-wrap': !isMobile }"

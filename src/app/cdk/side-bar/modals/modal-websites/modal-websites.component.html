@@ -48,20 +48,20 @@
       </div>
       <hr class="dashed-line" />
       <div
-        class="row"
+        class="row websites-list"
         id="website-dropList"
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
         <div
           cdkDrag
-          rootElementSelector="#website-dropList"
-          class="row"
+          class="row websites-box"
           [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="website.putCode"
           *ngFor="let website of websites; index as i"
           [attr.id]="'draggable-' + i"
         >
+          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
           <div
             class="row websites-input-line"
             [ngClass]="{ 'no-wrap': !isMobile }"
