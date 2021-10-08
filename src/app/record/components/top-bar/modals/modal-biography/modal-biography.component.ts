@@ -70,10 +70,8 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
     }
 
     this.biographyForm = new FormGroup({
-      biography: new FormControl(this.biography, {
-        updateOn: 'change',
-      }),
-      visibility: new FormControl(this.biographyVisibility, {}),
+      biography: new FormControl(this.biography),
+      visibility: new FormControl(this.biographyVisibility),
     })
   }
 
