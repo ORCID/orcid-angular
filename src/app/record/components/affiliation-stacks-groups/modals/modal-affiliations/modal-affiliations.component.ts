@@ -360,7 +360,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         ?.affiliationExternalIdentifiers,
       affiliationTypeForDisplay: this.affiliation?.affiliationTypeForDisplay,
       assertionOriginClientId: this.affiliation?.assertionOriginClientId,
-      assertionOriginName: this.affiliation?.assertionOriginName,
       assertionOriginOrcid: this.affiliation?.assertionOriginOrcid,
       disambiguationSource: this.affiliation?.disambiguationSource,
       disambiguatedAffiliationSourceId: this.affiliation

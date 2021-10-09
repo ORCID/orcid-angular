@@ -29,17 +29,10 @@ import {
 } from '../../../../../types/common.endpoint'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { Observable } from 'rxjs/internal/Observable'
-import {
-  debounceTime,
-  first,
-  startWith,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs/operators'
+import { first, map, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { UserSession } from '../../../../../types/session.local'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
-import { UserService } from '../../../../../core'
+import { OrganizationsService, UserService } from '../../../../../core'
 import { WINDOW } from '../../../../../cdk/window'
 import {
   FundingRelationships,
@@ -143,7 +136,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     private _fundingsService: RecordFundingsService,
     private _formBuilder: FormBuilder,
     private _snackBar: SnackbarService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _orgDisambiguated: OrganizationsService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -297,53 +291,71 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         }
       })
 
-    this.filteredOptions = this.fundingForm
-      .get('agencyName')
-      .valueChanges.pipe(
-        tap((organization: string | Organization) => {
-          // Auto fill form when the user select an organization from the autocomplete list
-          if (
-            typeof organization === 'object' &&
-            organization.disambiguatedAffiliationIdentifier
-          ) {
-            this.selectedOrganizationFromDatabase = organization
-            this.requireOrganizationDisambiguatedDataOnRefresh = true
-            this.displayOrganizationHint = true
-            this.fillForm(organization)
-          }
-          if (!organization) {
-            this.selectedOrganizationFromDatabase = undefined
-            this.requireOrganizationDisambiguatedDataOnRefresh = true
-            this.displayOrganizationHint = false
-            this.fundingForm.patchValue({
-              city: '',
-              region: '',
-              country: '',
+    this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
+      tap((organization: string | Organization) => {
+        // Auto fill form when the user select an organization from the autocomplete list
+        if (
+          typeof organization === 'object' &&
+          organization.disambiguatedAffiliationIdentifier
+        ) {
+          this.selectedOrganizationFromDatabase = organization
+          this.requireOrganizationDisambiguatedDataOnRefresh = true
+          this.displayOrganizationHint = true
+          this.fillForm(organization)
+        }
+        if (!organization) {
+          this.selectedOrganizationFromDatabase = undefined
+          this.requireOrganizationDisambiguatedDataOnRefresh = true
+          this.displayOrganizationHint = false
+          this.fundingForm.patchValue({
+            city: '',
+            region: '',
+            country: '',
+          })
+        }
+      }),
+      switchMap((organization: string | Organization) => {
+        if (
+          typeof organization === 'string' &&
+          !this.selectedOrganizationFromDatabase
+        ) {
+          // Display matching organization based on the user string input
+          return this._filter((organization as string) || '').pipe(
+            tap((x) => {
+              this.displayOrganizationHint = true
             })
-          }
-        }),
-        switchMap((organization: string | Organization) => {
-          if (
-            typeof organization === 'string' &&
-            !this.selectedOrganizationFromDatabase
-          ) {
-            // Display matching organization based on the user string input
-            return this._filter((organization as string) || '').pipe(
-              tap((x) => {
-                this.displayOrganizationHint = true
-              })
-            )
-          } else {
-            // Do not display options once the user has selected an Organization
-            return of([])
-          }
-        })
-      )
+          )
+        } else {
+          // Do not display options once the user has selected an Organization
+          return of([])
+        }
+      })
+    )
   }
 
   initialValues() {
     if (this.funding?.putCode) {
       if (this.funding) {
+        console.log('this.funding ', this.funding)
+
+        this.displayOrganizationHint = true
+        if (
+          this.funding.disambiguationSource?.value &&
+          this.funding.disambiguatedFundingSourceId?.value
+        ) {
+          this._orgDisambiguated
+            .getOrgDisambiguated(
+              this.funding.disambiguationSource.value,
+              this.funding.disambiguatedFundingSourceId?.value
+            )
+            .subscribe((disambiguatedOrg) => {
+              console.log('disambiguatedOrg ', disambiguatedOrg)
+
+              this.selectedOrganizationFromDatabase = {
+                value: disambiguatedOrg.value,
+              } as Organization
+            })
+        }
         this._fundingsService
           .getFundingDetails(this.funding.putCode.value)
           .pipe(first())
@@ -367,6 +379,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       } else {
         this.loadingFunding = false
       }
+
       this.city = this.funding.city?.value
       this.region = this.funding.region?.value
       this.country = this.funding.country?.value
@@ -395,7 +408,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   formToBackendAffiliation(): Funding {
-    return {
+    const obj = {
       visibility: {
         visibility: this.fundingForm.get('visibility').value
           ? this.fundingForm.get('visibility').value
@@ -495,6 +508,31 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       assertionOriginOrcid: this.funding?.assertionOriginOrcid,
       countryForDisplay: this.funding?.countryForDisplay,
     }
+
+    if (this.selectedOrganizationFromDatabase) {
+      obj.fundingName = {
+        value: this.selectedOrganizationFromDatabase.value,
+      }
+    }
+
+    if (this.requireOrganizationDisambiguatedDataOnRefresh) {
+      // When a organization was selected from the drop down get the disambiguated source to populate the affiliation
+      if (
+        this.selectedOrganizationFromDatabase
+          ?.disambiguatedAffiliationIdentifier
+      ) {
+        obj.disambiguatedFundingSourceId = this.selectedOrganizationFromDatabase
+          .sourceId as any
+
+        obj.disambiguationSource = this.selectedOrganizationFromDatabase
+          .sourceType as any
+      } else {
+        // When a organization was NOT selected empty the organization fills
+        obj.disambiguatedFundingSourceId = undefined
+        obj.disambiguationSource = undefined
+      }
+    }
+    return obj
   }
 
   onSubmit() {}
