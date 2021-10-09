@@ -553,25 +553,47 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input
-          id="funding-agency-name-input"
+          id="organization-input"
           matInput
           formControlName="agencyName"
           [matAutocomplete]="auto"
         />
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option
-            *ngFor="let option of filteredOptions | async"
-            [value]="option.value"
-            (click)="fillForm(option)"
-          >
-            <div class="row orc-font-body-small">
-              {{ option.value }}
-            </div>
-            <div class="row orc-font-small-print">
-              {{ option.city }} {{ option.region }} {{ option.country }}
-            </div>
-          </mat-option>
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="autoCompleteDisplayOrganization"
+        >
+          <ng-container *ngIf="filteredOptions">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              <div class="row orc-font-body-small">
+                {{ option.value }}
+              </div>
+              <div class="row orc-font-small-print">
+                {{ option.city }} {{ option.region }} {{ option.country }}
+              </div>
+            </mat-option>
+          </ng-container>
         </mat-autocomplete>
+        <mat-hint
+          *ngIf="selectedOrganizationFromDatabase && displayOrganizationHint"
+        >
+          <ng-container i18n="@@record.identifyAS">Identify as:</ng-container>
+          {{ selectedOrganizationFromDatabase.value }}
+        </mat-hint>
+        <mat-hint
+          *ngIf="
+            !selectedOrganizationFromDatabase &&
+            fundingForm.get('agencyName').value &&
+            displayOrganizationHint
+          "
+          i18n="@@record.unidentifiedOrganization"
+        >
+          Unidentified agency
+        </mat-hint>
+
         <button
           class="clear"
           matSuffix
@@ -585,9 +607,9 @@
         <mat-error
           class="mat-caption"
           *ngIf="fundingForm.hasError('required', 'agencyName')"
-          i18n="@@funding.agencyNameError"
+          i18n="@@shared.organizationError"
         >
-          Please enter an agency name
+          Please enter a organization
         </mat-error>
       </mat-form-field>
     </div>

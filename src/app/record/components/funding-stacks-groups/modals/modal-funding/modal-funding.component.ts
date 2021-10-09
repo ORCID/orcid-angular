@@ -17,7 +17,7 @@ import { translatedTitleValidator } from '../../../../../shared/validators/trans
 import { AMOUNT_REGEXP, URL_REGEXP } from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
-import { EMPTY, Subject } from 'rxjs'
+import { EMPTY, of, Subject } from 'rxjs'
 import {
   PlatformInfo,
   PlatformInfoService,
@@ -35,6 +35,7 @@ import {
   startWith,
   switchMap,
   takeUntil,
+  tap,
 } from 'rxjs/operators'
 import { UserSession } from '../../../../../types/session.local'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
@@ -98,6 +99,10 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   currencyCode = ''
   grantsArray: FormArray
   grantsArrayDisplayState: boolean[] = []
+
+  selectedOrganizationFromDatabase: Organization
+  requireOrganizationDisambiguatedDataOnRefresh = false
+  displayOrganizationHint: boolean
 
   disambiguatedFundingSourceId = ''
   disambiguatedFundingSource = ''
@@ -292,13 +297,48 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         }
       })
 
-    this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      switchMap((val) => {
-        return this._filter(val || '')
-      })
-    )
+    this.filteredOptions = this.fundingForm
+      .get('agencyName')
+      .valueChanges.pipe(
+        tap((organization: string | Organization) => {
+          // Auto fill form when the user select an organization from the autocomplete list
+          if (
+            typeof organization === 'object' &&
+            organization.disambiguatedAffiliationIdentifier
+          ) {
+            this.selectedOrganizationFromDatabase = organization
+            this.requireOrganizationDisambiguatedDataOnRefresh = true
+            this.displayOrganizationHint = true
+            this.fillForm(organization)
+          }
+          if (!organization) {
+            this.selectedOrganizationFromDatabase = undefined
+            this.requireOrganizationDisambiguatedDataOnRefresh = true
+            this.displayOrganizationHint = false
+            this.fundingForm.patchValue({
+              city: '',
+              region: '',
+              country: '',
+            })
+          }
+        }),
+        switchMap((organization: string | Organization) => {
+          if (
+            typeof organization === 'string' &&
+            !this.selectedOrganizationFromDatabase
+          ) {
+            // Display matching organization based on the user string input
+            return this._filter((organization as string) || '').pipe(
+              tap((x) => {
+                this.displayOrganizationHint = true
+              })
+            )
+          } else {
+            // Do not display options once the user has selected an Organization
+            return of([])
+          }
+        })
+      )
   }
 
   initialValues() {
@@ -619,5 +659,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       return '0' + date
     }
     return date
+  }
+
+  autoCompleteDisplayOrganization(organization: Organization) {
+    return organization.value
   }
 }
