@@ -1,20 +1,17 @@
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
 .actions-wrapper {
   flex-wrap: nowrap;
   display: flex;
   justify-content: center;
 }
 
-::ng-deep ::ng-deep .cdk-drag-animating {
+.keyword-list.cdk-drop-list-dragging .keyword-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .icon-drag {
   height: 32px;
   margin: 4px 0;
+  cursor: move;
   margin-inline-start: 6px;
   margin-inline-end: 10px;
 }
@@ -26,7 +23,7 @@
     justify-content: space-around;
   }
 
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .mat-form-field {
@@ -50,18 +47,6 @@
   }
 }
 
-::ng-deep .cdk-drop-list-dragging {
-  cursor: move !important;
-  .mat-form-field-flex,
-  .mat-select-trigger,
-  .mat-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button {
-    cursor: move !important;
-  }
-}
-
 app-privacy-selector {
   min-width: 180px;
 }
@@ -77,8 +62,5 @@ app-privacy-selector {
   }
   .actions-wrapper {
     width: 100%;
-  }
-  .columns-4-or-8 .cdk-drag-placeholder {
-    opacity: 0;
   }
 }
