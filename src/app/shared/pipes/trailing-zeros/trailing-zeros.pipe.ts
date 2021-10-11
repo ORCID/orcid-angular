@@ -1,15 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-  name: 'trailingZeros'
+  name: 'trailingZeros',
 })
 export class TrailingZerosPipe implements PipeTransform {
-
   transform(date: number): string {
     if (date && Number(date) < 10) {
       return '0' + date.toString()
     }
     return date.toString()
   }
-
 }
