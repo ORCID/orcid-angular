@@ -425,7 +425,7 @@
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option *ngFor="let month of months" [value]="month">
-                {{ month }}
+                {{ month | trailingZeros }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -486,7 +486,7 @@
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option *ngFor="let month of months" [value]="month">
-                {{ month }}
+                {{ month | trailingZeros }}
               </mat-option>
             </mat-select>
           </mat-form-field>
