@@ -107,3 +107,23 @@
 .drag-placeholder {
   min-height: 120px;
 }
+
+.web-site-input-container {
+  display: flex;
+  flex-direction: column;
+  p {
+    margin: 0;
+    padding-bottom: 6px;
+  }
+  .mat-form-field-subscript-wrapper {
+    top: 0;
+    position: relative;
+    margin-top: 0;
+  }
+  .not-editable-url {
+    padding-bottom: 15px;
+  }
+  .not-editable-description {
+    padding-top: 15px;
+  }
+}
