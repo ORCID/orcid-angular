@@ -12,6 +12,7 @@
 @import './material.orcid.overwrites.scss/form-field-theme';
 @import './material.orcid.overwrites.scss/_divider-theme.scss';
 @import './material.orcid.overwrites.scss/_mat-error-theme.scss';
+@import './material.orcid.overwrites.scss/_cdk-drag-drop-theme.scss';
 
 @import './orcid/_urls-theme.scss';
 @import './orcid/_divider-theme.scss';
@@ -59,3 +60,4 @@
 @import './material.orcid.overwrites.scss/cdk-drag-drop.scss';
 @include mat-error-theme-overwrites($orcid-app-theme);
 @import './orcid/urls.scss';
+@include mat-drag-drop-theme($orcid-app-theme);

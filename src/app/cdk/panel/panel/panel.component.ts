@@ -158,7 +158,7 @@ export class PanelComponent implements OnInit {
   }
 
   openModal(options?: { createACopy: boolean }) {
-    const primaryEmail = this.userRecord?.emails?.emails.find(
+    const primaryEmail = this.userRecord?.emails?.emails?.find(
       (email) => email.primary
     )
     if (primaryEmail && !primaryEmail.verified) {
