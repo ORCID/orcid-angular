@@ -1,3 +1,13 @@
+.title {
+  width: 48em;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.title.mobile {
+  width: 14em;
+}
+
 .info {
   display: flex;
   padding: 16px;
@@ -19,6 +29,10 @@
 
   .added {
     margin-left: 16px;
+  }
+
+  .added.mobile {
+    margin-left: 0;
   }
 }
 

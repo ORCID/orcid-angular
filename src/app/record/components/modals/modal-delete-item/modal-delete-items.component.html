@@ -85,7 +85,12 @@
               "
               formControlName="checked"
             >
-              <h2 class="orc-font-body">
+              <h2
+                class="orc-font-body title"
+                [ngClass]="{
+                  'mobile': isMobile
+                }"
+              >
                 <ng-container *ngIf="isAffiliation()">
                   {{ item?.affiliationName?.value }}
                 </ng-container>
@@ -134,7 +139,14 @@
               <i i18n="@@shared.onBehalfOf">via</i>
             </ng-container>
             {{ item.sourceName || item.source }}
-            <strong class="added" i18n="@@record.added"> Added </strong>:
+            <br *ngIf="isMobile" />
+            <strong
+              class="added"
+              i18n="@@record.added"
+              [ngClass]="{
+                'mobile': isMobile
+              }"
+            > Added </strong>:
             {{ item.createdDate | monthDayYearDateToString }}
           </div>
         </div>
