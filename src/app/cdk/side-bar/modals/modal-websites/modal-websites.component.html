@@ -72,8 +72,17 @@
                   aria-label="drag handle"
                 />
               </div>
-              <div class="row">
+              <div class="row web-site-input-container">
+                <div
+                  class="not-editable-description"
+                  *ngIf="website.source && website.source !== id"
+                >
+                  <strong>{{ website.urlName }}</strong>
+                </div>
+
                 <mat-form-field
+                  *ngIf="!website.source || website.source === id"
+                  [ngClass]="{ 'mat-form-field-readonly': true }"
                   appearance="outline"
                   class="mat-form-field-min description"
                 >
@@ -86,6 +95,7 @@
                     [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
                   />
                   <mat-error
+                    class="mat-form-field-subscript-wrapper"
                     *ngIf="
                       websitesForm.get(website.putCode).get('description')
                         ?.errors?.maxlength
@@ -95,7 +105,26 @@
                     Must be less then 355 characters
                   </mat-error>
                 </mat-form-field>
+                <div
+                  *ngIf="website.source && website.source !== id"
+                  class="not-editable-url"
+                >
+                  <p>{{ website.url.value }}</p>
+
+                  <mat-error
+                    class="mat-form-field-subscript-wrapper"
+                    *ngIf="
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('duplicated', 'url')
+                    "
+                    i18n="@@topBar.urlDuplicated"
+                  >
+                    URL can not be duplicated
+                  </mat-error>
+                </div>
                 <mat-form-field
+                  *ngIf="!website.source || website.source === id"
                   appearance="outline"
                   class="mat-form-field-min url"
                 >

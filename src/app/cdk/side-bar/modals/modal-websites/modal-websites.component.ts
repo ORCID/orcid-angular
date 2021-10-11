@@ -112,30 +112,22 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     websites.forEach((website) => {
       group[website.putCode] = new FormGroup({
-        description: new FormControl(
-          {
-            value: website.urlName,
-            disabled: website.source !== this.id,
-          },
-          {
-            validators: [Validators.maxLength(this.urlMaxLength)],
-            updateOn: 'change',
-          }
-        ),
-        url: new FormControl(
-          { value: website.url.value, disabled: website.source !== this.id },
-          {
-            validators: [
-              Validators.required,
-              Validators.pattern(URL_REGEXP_BACKEND),
-              this.allUrlsAreUnique(website.putCode),
-            ],
-            updateOn: 'change',
-          }
-        ),
+        description: new FormControl(website.urlName.toLowerCase().trim(), {
+          validators: [Validators.maxLength(this.urlMaxLength)],
+          updateOn: 'change',
+        }),
+        url: new FormControl(website.url.value.toLowerCase().trim(), {
+          validators: [
+            Validators.required,
+            Validators.pattern(URL_REGEXP_BACKEND),
+            this.allUrlsAreUnique(website.putCode),
+          ],
+          updateOn: 'change',
+        }),
         visibility: new FormControl(website.visibility.visibility, {}),
       })
     })
+
     this.websitesForm = new FormGroup(group)
   }
 
@@ -172,6 +164,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   saveEvent() {
     this.websitesForm.markAllAsTouched()
+    this.websitesForm.updateValueAndValidity()
+
     if (this.websitesForm.valid) {
       this.loadingWebsites = true
       this._recordWebsitesService
@@ -268,13 +262,13 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     Object.keys(formGroup.controls).forEach((keyX) => {
       let urlControlX: string = (formGroup.controls[keyX] as FormGroup)
         .controls['url'].value
-      urlControlX = urlControlX.toLowerCase()
+      urlControlX = urlControlX.toLowerCase().trim()
       urlControlX = this.removeProtocol(urlControlX)
 
       Object.keys(formGroup.controls).forEach((keyY) => {
         let urlControlY: string = (formGroup.controls[keyY] as FormGroup)
           .controls['url'].value
-        urlControlY = urlControlY.toLowerCase()
+        urlControlY = urlControlY.toLowerCase().trim()
         urlControlY = this.removeProtocol(urlControlY)
 
         // Only if both controls are not empty
