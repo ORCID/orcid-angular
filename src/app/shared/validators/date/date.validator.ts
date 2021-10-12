@@ -85,7 +85,12 @@ export function endDateMonthYearValidator() {
       return null
     }
 
-    const dates = startAndEndDate(startDateYear, endDateYear, startDateMonth, endDateMonth)
+    const dates = startAndEndDate(
+      startDateYear,
+      endDateYear,
+      startDateMonth,
+      endDateMonth
+    )
 
     if (dates.endDate < dates.startDate) {
       return { invalidEndDate: true }
@@ -109,7 +114,14 @@ export function endDateValidator() {
       return null
     }
 
-    const dates = startAndEndDate(startDateYear, endDateYear, startDateMonth, endDateMonth, startDateDay, endDateDay)
+    const dates = startAndEndDate(
+      startDateYear,
+      endDateYear,
+      startDateMonth,
+      endDateMonth,
+      startDateDay,
+      endDateDay
+    )
 
     if (dates.endDate < dates.startDate) {
       return { invalidEndDate: true }
@@ -119,13 +131,28 @@ export function endDateValidator() {
   }
 }
 
-function startAndEndDate(startDateYear, endDateYear, startDateMonth, endDateMonth, startDateDay?, endDateDay?) {
+function startAndEndDate(
+  startDateYear,
+  endDateYear,
+  startDateMonth,
+  endDateMonth,
+  startDateDay?,
+  endDateDay?
+) {
   let startDate
   let endDate
 
   if (startDateDay && endDateDay && startDateMonth && endDateMonth) {
-    startDate = new Date(startDateYear, startDateMonth ? startDateMonth - 1 : undefined, startDateDay)
-    endDate = new Date(endDateYear, endDateMonth ? endDateMonth - 1 : undefined, endDateDay)
+    startDate = new Date(
+      startDateYear,
+      startDateMonth ? startDateMonth - 1 : undefined,
+      startDateDay
+    )
+    endDate = new Date(
+      endDateYear,
+      endDateMonth ? endDateMonth - 1 : undefined,
+      endDateDay
+    )
   } else if (startDateMonth && endDateMonth) {
     startDate = new Date(startDateYear, startDateMonth - 1)
     endDate = new Date(endDateYear, endDateMonth - 1)

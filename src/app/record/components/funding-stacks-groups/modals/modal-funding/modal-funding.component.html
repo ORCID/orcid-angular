@@ -430,13 +430,13 @@
             </mat-select>
           </mat-form-field>
         </div>
-          <mat-error
-            class="mat-caption"
-            i18n="@@shared.invalidDate"
-            *ngIf="fundingForm.get('startDateGroup').errors?.date"
-          >
-            Invalid date
-          </mat-error>
+        <mat-error
+          class="mat-caption"
+          i18n="@@shared.invalidDate"
+          *ngIf="fundingForm.get('startDateGroup').errors?.date"
+        >
+          Invalid date
+        </mat-error>
       </div>
     </div>
 
