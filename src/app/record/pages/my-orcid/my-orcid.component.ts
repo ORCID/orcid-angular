@@ -54,7 +54,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   recordWithIssues: boolean
   userNotFound: boolean
   loadingUserRecord: boolean
-  globalExpandState: boolean = true
+  globalExpandState = true
 
   constructor(
     _userInfoService: UserInfoService,
