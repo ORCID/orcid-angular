@@ -13,7 +13,7 @@ import {
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import { MainPanelsState, UserRecordOptions } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -29,9 +29,10 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
-  @Input() expandedContent: boolean
+  @Input() expandedContent: MainPanelsState
+  @Output() expandedContentChange = new EventEmitter<MainPanelsState>()
+
   @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   modalPeerReviewComponent = ModalPeerReviewsComponent
 
@@ -171,6 +172,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
       }
     }
-    this.expanded.emit({ type: 'peer-review', expanded })
+    this.expandedContent.PEER_REVIEW = expanded
+    this.expandedContentChange.emit(this.expandedContent)
   }
 }

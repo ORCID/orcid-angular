@@ -28,7 +28,11 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
-import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
+import {
+  MainPanelsState,
+  UserRecord,
+  UserRecordOptions,
+} from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
@@ -57,9 +61,9 @@ export class WorkStackGroupComponent implements OnInit {
   paginationLoading = true
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
-  @Input() expandedContent: boolean
+  @Input() expandedContent: MainPanelsState
+  @Output() expandedContentChange = new EventEmitter<MainPanelsState>()
   @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   userRecordContext: UserRecordOptions = {}
 
@@ -141,10 +145,6 @@ export class WorkStackGroupComponent implements OnInit {
 
   trackByWorkGroup(index, item: WorkGroup) {
     return item.defaultPutCode
-  }
-
-  expandedClicked(expanded: boolean) {
-    this.expanded.emit({ type: 'works', expanded })
   }
 
   pageEvent(event: PageEvent) {
