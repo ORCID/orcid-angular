@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
   FormArray,
+  AbstractControl,
 } from '@angular/forms'
 import {
   dateMonthYearValidator,
@@ -215,43 +216,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     this.grantsArray = this.fundingForm.controls.grants as FormArray
 
     if (this.funding) {
-      if (this.funding.endDate.year) {
-        this.fundingForm.patchValue({
-          endDateGroup: {
-            endDateYear: Number(this.funding.endDate.year),
-            endDateMonth: Number(this.funding.endDate.month),
-          },
-        })
-      }
-
-      if (this.funding.startDate.year) {
-        this.fundingForm.patchValue({
-          startDateGroup: {
-            startDateYear: Number(this.funding.startDate.year),
-            startDateMonth: Number(this.funding.startDate.month),
-          },
-        })
-      }
-
-      if (this.funding.visibility?.visibility) {
-        this.fundingForm.patchValue({
-          visibility: this.funding.visibility.visibility,
-        })
-      }
-      if (this.funding.fundingTitle?.translatedTitle) {
-        this.fundingForm.patchValue({
-          translatedTitleGroup: {
-            translatedTitleContent: this.funding.fundingTitle?.translatedTitle
-              .content,
-            translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle
-              .languageCode,
-          },
-        })
-      }
-
-      this.funding.externalIdentifiers.forEach((grant) => {
-        this.addAnotherGrant(grant)
-      })
+      this.initFormValues()
     } else {
       // If there is an existing funding, do not overwrite the visibility
       this._record
@@ -264,7 +229,11 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           })
         })
     }
+    this.listenFormChanges()
+    this.getCountryCodes()
+  }
 
+  private getCountryCodes() {
     this._recordCountryService
       .getCountryCodes()
       .pipe(first())
@@ -291,6 +260,18 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           })
         }
       })
+  }
+
+  private listenFormChanges() {
+    this.fundingForm.controls['fundingProjectLink'].valueChanges.subscribe(
+      (value) => {
+        if (this.fundingForm.controls['fundingProjectLink'].valid) {
+          this.appendProtocolToTheURL(
+            this.fundingForm.controls['fundingProjectLink']
+          )
+        }
+      }
+    )
 
     this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
       startWith(''),
@@ -299,6 +280,46 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         return this._filter(val || '')
       })
     )
+  }
+
+  private initFormValues() {
+    if (this.funding.endDate.year) {
+      this.fundingForm.patchValue({
+        endDateGroup: {
+          endDateYear: Number(this.funding.endDate.year),
+          endDateMonth: Number(this.funding.endDate.month),
+        },
+      })
+    }
+
+    if (this.funding.startDate.year) {
+      this.fundingForm.patchValue({
+        startDateGroup: {
+          startDateYear: Number(this.funding.startDate.year),
+          startDateMonth: Number(this.funding.startDate.month),
+        },
+      })
+    }
+
+    if (this.funding.visibility?.visibility) {
+      this.fundingForm.patchValue({
+        visibility: this.funding.visibility.visibility,
+      })
+    }
+    if (this.funding.fundingTitle?.translatedTitle) {
+      this.fundingForm.patchValue({
+        translatedTitleGroup: {
+          translatedTitleContent: this.funding.fundingTitle?.translatedTitle
+            .content,
+          translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle
+            .languageCode,
+        },
+      })
+    }
+
+    this.funding.externalIdentifiers.forEach((grant) => {
+      this.addAnotherGrant(grant)
+    })
   }
 
   initialValues() {
@@ -556,6 +577,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         formGroup.controls.grantUrl.updateValueAndValidity({
           emitEvent: false,
         })
+        if (formGroup.controls.grantUrl.valid) {
+          this.appendProtocolToTheURL(formGroup.controls.grantUrl)
+        }
       } else {
         formGroup.controls.grantUrl.clearValidators()
         formGroup.controls.grantUrl.updateValueAndValidity({
@@ -576,6 +600,15 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         })
       }
     })
+  }
+  appendProtocolToTheURL(grantUrl: AbstractControl) {
+    if (
+      grantUrl.value &&
+      !(grantUrl.value as string).startsWith('http://') &&
+      !(grantUrl.value as string).startsWith('https://')
+    ) {
+      grantUrl.patchValue('http://' + grantUrl.value)
+    }
   }
 
   closeEvent() {
