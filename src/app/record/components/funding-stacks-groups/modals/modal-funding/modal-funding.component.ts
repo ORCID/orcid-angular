@@ -486,7 +486,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     } else {
       this.grantsArrayDisplayState.push(true)
     }
-   
+
     this.grantsArray.push(
       this._formBuilder.group({
         grantNumber: [existingGrant?.externalIdentifierId?.value || '', []],
