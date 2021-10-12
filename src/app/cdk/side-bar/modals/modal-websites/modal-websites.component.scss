@@ -108,6 +108,10 @@
   min-height: 120px;
 }
 
+.actions-wrapper {
+  padding: 0 32px;
+}
+
 .web-site-input-container {
   display: flex;
   flex-direction: column;
@@ -125,5 +129,11 @@
   }
   .not-editable-description {
     padding-top: 15px;
+  }
+}
+
+::ng-deep .columns-4-or-8 {
+  .actions-wrapper {
+    padding: 0;
   }
 }
