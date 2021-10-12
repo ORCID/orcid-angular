@@ -417,7 +417,12 @@
             error: affiliationForm.hasError('date', 'startDateGroup')
           }"
         >
-          <strong i18n="@@shared.startDate">Start date</strong>
+          <ng-container *ngIf="type !== 'distinction'">
+            <strong i18n="@@shared.startDate">Start date</strong>
+          </ng-container>
+          <ng-container *ngIf="type == 'distinction'">
+            <strong i18n="@@shared.distinctionDate">Date of distinction</strong>
+          </ng-container>
         </label>
       </div>
       <div class="row input-container date-group">
@@ -450,7 +455,7 @@
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option *ngFor="let month of months" [value]="month">
-                {{ month }}
+                {{ month | trailingZeros }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -467,7 +472,7 @@
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
               <mat-option *ngFor="let day of days" [value]="day">
-                {{ day }}
+                {{ day | trailingZeros }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -523,7 +528,7 @@
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option *ngFor="let month of months" [value]="month">
-                {{ month }}
+                {{ month | trailingZeros }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -540,7 +545,7 @@
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
               <mat-option *ngFor="let day of days" [value]="day">
-                {{ day }}
+                {{ day | trailingZeros }}
               </mat-option>
             </mat-select>
           </mat-form-field>
