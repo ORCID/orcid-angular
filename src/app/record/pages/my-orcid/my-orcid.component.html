@@ -38,8 +38,8 @@
                   color="primary"
                   type="button"
                   i18n="@@shared.expandAll"
-                  (click)="collapse()"
-                  *ngIf="!expandedContent"
+                  (click)="switchPanelsState()"
+                  *ngIf="!globalExpandState"
                 >
                   Expand all
                 </button>
@@ -48,8 +48,8 @@
                   color="primary"
                   type="button"
                   i18n="@@shared.collapseAll"
-                  (click)="collapse()"
-                  *ngIf="expandedContent"
+                  (click)="switchPanelsState()"
+                  *ngIf="globalExpandState"
                 >
                   Collapse all
                 </button>
@@ -59,35 +59,36 @@
               [userInfo]="userInfo"
               [isPublicRecord]="publicOrcid"
               [expandedContent]="expandedContent"
+              (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event)"
-              (expanded)="expandedByType($event)"
             ></app-affiliations>
             <app-fundings
               [userInfo]="userInfo"
               [isPublicRecord]="publicOrcid"
               [expandedContent]="expandedContent"
+              (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event)"
-              (expanded)="expandedByType($event)"
             ></app-fundings>
             <app-research-resources
               [isPublicRecord]="publicOrcid"
               [expandedContent]="expandedContent"
-              (total)="affiliationsCount($event)"
-              (expanded)="expandedByType($event)"
+              (expandedContentChange)="expandedContentUpdate($event)"
+              (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
             ></app-research-resources>
             <app-work-stack-group
               [userInfo]="userInfo"
               [isPublicRecord]="publicOrcid"
               [expandedContent]="expandedContent"
+              (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event)"
-              (expanded)="expandedByType($event)"
             ></app-work-stack-group>
             <app-peer-reviews
               [userInfo]="userInfo"
               [isPublicRecord]="publicOrcid"
               [expandedContent]="expandedContent"
+              (expandedContentChange)="expandedContentUpdate($event)"
+
               (total)="affiliationsCount($event)"
-              (expanded)="expandedByType($event)"
             ></app-peer-reviews>
           </ng-container>
           <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">

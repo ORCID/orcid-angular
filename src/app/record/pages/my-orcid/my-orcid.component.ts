@@ -5,7 +5,7 @@ import { ORCID_REGEXP } from 'src/app/constants'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
 import { Subject } from 'rxjs'
-import { UserRecord } from '../../../types/record.local'
+import { MainPanelsState, UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 import { UserInfoService } from '../../../core/user-info/user-info.service'
@@ -27,16 +27,34 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   affiliations: number
   userInfo: UserInfo
   userRecord: UserRecord
-  expandedContent = true
+  expandedContent: {
+    EMPLOYMENT: boolean
+    EDUCATION_AND_QUALIFICATION: boolean
+    INVITED_POSITION_AND_DISTINCTION: boolean
+    MEMBERSHIP_AND_SERVICE: boolean
+    FUNDING: boolean
+    PEER_REVIEW: boolean
+    RESEARCH_RESOURCE: boolean
+    WORK: boolean
+  } = {
+    EMPLOYMENT: true,
+    EDUCATION_AND_QUALIFICATION: true,
+    INVITED_POSITION_AND_DISTINCTION: true,
+    MEMBERSHIP_AND_SERVICE: true,
+    FUNDING: true,
+    PEER_REVIEW: true,
+    RESEARCH_RESOURCE: true,
+    WORK: true,
+  }
+
+  researchResourcePresent: boolean
+
   expandedButton = true
-  expandedAffiliations: boolean
-  expandedFundings: boolean
-  expandedWorks: boolean
-  expandedResearchResources: boolean
-  expandedPeerReview: boolean
+
   recordWithIssues: boolean
   userNotFound: boolean
   loadingUserRecord: boolean
+  globalExpandState: boolean = true
 
   constructor(
     _userInfoService: UserInfoService,
@@ -108,53 +126,24 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     }
   }
 
-  collapse() {
-    this.expandedContent = !this.expandedContent
+  switchPanelsState() {
+    this.globalExpandState = !this.globalExpandState
+    Object.keys(this.expandedContent).forEach((key) => {
+      this.expandedContent[key] = this.globalExpandState
+    })
   }
 
-  affiliationsCount(itemsCount: Event) {
+  expandedContentUpdate(expandedContent: MainPanelsState) {
+    this.globalExpandState = !Object.keys(expandedContent)
+      .filter((x) => x !== 'RESEARCH_RESOURCE' || this.researchResourcePresent)
+      .map((key) => expandedContent[key])
+      .some((x) => !x)
+  }
+
+  affiliationsCount(itemsCount: number, type?: string) {
     this.affiliations = this.affiliations + +itemsCount
-  }
-
-  expandedByType(event) {
-    switch (event.type) {
-      case 'affiliations':
-        this.expandedAffiliations = event.expanded
-        break
-      case 'fundings':
-        this.expandedFundings = event.expanded
-        break
-      case 'works':
-        this.expandedWorks = event.expanded
-        break
-      case 'research-resources':
-        this.expandedResearchResources = event.expanded
-        break
-      case 'peer-review':
-        this.expandedPeerReview = event.expanded
-        break
-    }
-
-    if (
-      this.expandedAffiliations !== undefined &&
-      this.expandedFundings !== undefined &&
-      this.expandedWorks !== undefined &&
-      this.expandedResearchResources !== undefined &&
-      this.expandedPeerReview !== undefined
-    ) {
-      if (
-        (this.expandedAffiliations &&
-          this.expandedFundings &&
-          this.expandedWorks &&
-          this.expandedPeerReview) ||
-        (!this.expandedAffiliations &&
-          !this.expandedFundings &&
-          !this.expandedWorks &&
-          !this.expandedResearchResources &&
-          !this.expandedPeerReview)
-      ) {
-        this.collapse()
-      }
+    if (type === 'RESEARCH_RESOURCE') {
+      this.researchResourcePresent = !!itemsCount
     }
   }
 

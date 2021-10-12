@@ -5,7 +5,7 @@ import { UserService } from 'src/app/core'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
-import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
+import { MainPanelsState, UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 
@@ -22,7 +22,9 @@ export class FundingStacksGroupsComponent implements OnInit {
   labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: any = false
-  @Input() expandedContent: boolean
+  @Input() expandedContent: MainPanelsState
+  @Output() expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
+
   @Output() total: EventEmitter<any> = new EventEmitter()
   @Output() expanded: EventEmitter<any> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
@@ -92,7 +94,7 @@ export class FundingStacksGroupsComponent implements OnInit {
   }
 
   expandedClicked(expanded: boolean) {
-    this.expanded.emit({ type: 'fundings', expanded })
+    this.expanded.emit([{ type: 'fundings', expanded }])
   }
 
   sortEvent(event: SortData) {

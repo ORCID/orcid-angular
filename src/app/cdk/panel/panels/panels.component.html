@@ -8,7 +8,7 @@
     <div class="inline-initial-side">
       <app-panel-expand-buttons
         (toggle)="collapse()"
-        [openState]="expandedContent"
+        [openState]="expandedContent == true"
       ></app-panel-expand-buttons>
 
       <div class="text-container">
@@ -172,6 +172,6 @@
   color="accent"
   *ngIf="loading"
 ></mat-progress-bar>
-<div class="col s4 m8 l12 content no-gutters" *ngIf="expandedContent">
+<div class="col s4 m8 l12 content no-gutters" *ngIf="expandedContent == true">
   <ng-content></ng-content>
 </div>

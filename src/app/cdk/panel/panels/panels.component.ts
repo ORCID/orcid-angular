@@ -21,7 +21,8 @@ import { UserRecord } from '../../../types/record.local'
 })
 export class PanelsComponent implements OnInit {
   @Input() loading = false
-  @Input() expandedContent = true
+  @Input() expandedContent: boolean = true
+  @Output() expandedContentChange: EventEmitter<boolean> = new EventEmitter()
   @Input() title
   @Input() type:
     | 'employment'
@@ -42,7 +43,6 @@ export class PanelsComponent implements OnInit {
   @Input() total
   @Input() isPublicRecord: any = false
   @Input() selectable = false
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
   @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
   @Input() sortType: SortOrderType = 'end'
   @Input() sortDirection: SortOrderDirection = 'desc'
@@ -144,7 +144,7 @@ export class PanelsComponent implements OnInit {
   }
   collapse() {
     this.expandedContent = !this.expandedContent
-    this.expanded.emit(this.expandedContent)
+    this.expandedContentChange.emit(this.expandedContent)
   }
 
   multipleMatButton() {
