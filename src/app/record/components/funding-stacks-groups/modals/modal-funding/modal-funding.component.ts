@@ -229,17 +229,11 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           })
         })
     }
+    this.listenFormChanges()
+    this.getCountryCodes()
+  }
 
-    this.fundingForm.controls['fundingProjectLink'].valueChanges.subscribe(
-      (value) => {
-        if (this.fundingForm.controls['fundingProjectLink'].valid) {
-          this.appendProtocolToTheURL(
-            this.fundingForm.controls['fundingProjectLink']
-          )
-        }
-      }
-    )
-
+  private getCountryCodes() {
     this._recordCountryService
       .getCountryCodes()
       .pipe(first())
@@ -266,6 +260,18 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           })
         }
       })
+  }
+
+  private listenFormChanges() {
+    this.fundingForm.controls['fundingProjectLink'].valueChanges.subscribe(
+      (value) => {
+        if (this.fundingForm.controls['fundingProjectLink'].valid) {
+          this.appendProtocolToTheURL(
+            this.fundingForm.controls['fundingProjectLink']
+          )
+        }
+      }
+    )
 
     this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
       startWith(''),
