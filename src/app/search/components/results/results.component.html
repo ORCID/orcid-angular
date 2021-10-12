@@ -23,7 +23,9 @@
     <tbody>
       <tr *ngFor="let orcid of resultsContent">
         <td class="orcid-id-column">
-          <a href="{{ orcid['orcid-id'] }}"> {{ orcid['orcid-id'] }}</a>
+          <a [routerLink]="['/' + orcid['orcid-id']]">
+            {{ orcid['orcid-id'] }}</a
+          >
         </td>
         <td>{{ orcid['given-names'] }}</td>
         <td>{{ orcid['family-names'] }}</td>
