@@ -31,7 +31,7 @@
       >
         |
       </ng-container>
-      {{ funding.fundingType.value | titlecase }}
+      {{ funding.fundingType.value | recordFundingTypesLabel }}
     </div>
     <div *ngIf="funding.fundingName?.value">
       <div>

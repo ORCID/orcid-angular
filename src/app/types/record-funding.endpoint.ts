@@ -13,6 +13,13 @@ export interface OrganizationDefinedFundingSubType {
   subtype: Value
 }
 
+export interface FundingType {
+  errors?: any[]
+  value: FundingTypes
+  required?: boolean
+  getRequiredMessage?: any
+}
+
 export interface FundingGroup {
   fundings: Funding[]
   activePutCode: number
@@ -29,7 +36,7 @@ export interface Funding extends AssertionBase {
   fundingTitle: Title
   description: Value
   fundingName: Value
-  fundingType: Value
+  fundingType: FundingType
   organizationDefinedFundingSubType: OrganizationDefinedFundingSubType
   currencyCode: Value
   amount: Value
