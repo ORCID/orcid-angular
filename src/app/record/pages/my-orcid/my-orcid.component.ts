@@ -27,16 +27,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   affiliations: number
   userInfo: UserInfo
   userRecord: UserRecord
-  expandedContent: {
-    EMPLOYMENT: boolean
-    EDUCATION_AND_QUALIFICATION: boolean
-    INVITED_POSITION_AND_DISTINCTION: boolean
-    MEMBERSHIP_AND_SERVICE: boolean
-    FUNDING: boolean
-    PEER_REVIEW: boolean
-    RESEARCH_RESOURCE: boolean
-    WORK: boolean
-  } = {
+  expandedContent: MainPanelsState = {
     EMPLOYMENT: true,
     EDUCATION_AND_QUALIFICATION: true,
     INVITED_POSITION_AND_DISTINCTION: true,
@@ -54,7 +45,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   recordWithIssues: boolean
   userNotFound: boolean
   loadingUserRecord: boolean
-  globalExpandState: boolean = true
+  globalExpandState = true
 
   constructor(
     _userInfoService: UserInfoService,

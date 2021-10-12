@@ -21,7 +21,7 @@ import { UserRecord } from '../../../types/record.local'
 })
 export class PanelsComponent implements OnInit {
   @Input() loading = false
-  @Input() expandedContent: boolean = true
+  @Input() expandedContent = true
   @Output() expandedContentChange: EventEmitter<boolean> = new EventEmitter()
   @Input() title
   @Input() type:
