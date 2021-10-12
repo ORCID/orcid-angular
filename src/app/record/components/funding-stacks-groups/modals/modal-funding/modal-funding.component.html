@@ -345,7 +345,7 @@
         </label>
       </div>
       <!-- Currency  -->
-      <div class="input-container date-group">
+      <div class="row input-container date-group">
         <div class="col l4 date">
           <mat-form-field
             id="funding-amount-input"
@@ -394,7 +394,7 @@
         </label>
       </div>
       <!--Start date year  -->
-      <div class="input-container date-group">
+      <div class="row input-container date-group">
         <div class="col l4 date">
           <mat-form-field
             id="start-date-year-input"
@@ -430,7 +430,6 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="row">
           <mat-error
             class="mat-caption"
             i18n="@@shared.invalidDate"
@@ -438,7 +437,6 @@
           >
             Invalid date
           </mat-error>
-        </div>
       </div>
     </div>
 
@@ -455,7 +453,7 @@
         </label>
       </div>
       <!-- End date year  -->
-      <div class="input-container date-group">
+      <div class="row input-container date-group">
         <div class="col l4 date">
           <mat-form-field
             id="end-date-year-input"
@@ -491,22 +489,20 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="row">
-          <mat-error
-            class="mat-caption"
-            i18n="@@shared.invalidDate"
-            *ngIf="fundingForm.get('endDateGroup').errors?.date"
-          >
-            Invalid date
-          </mat-error>
-          <mat-error
-            class="mat-caption"
-            i18n="@@shared.endDateError"
-            *ngIf="fundingForm.errors?.invalidEndDate"
-          >
-            End date must come after start date
-          </mat-error>
-        </div>
+        <mat-error
+          class="mat-caption"
+          i18n="@@shared.invalidDate"
+          *ngIf="fundingForm.get('endDateGroup').errors?.date"
+        >
+          Invalid date
+        </mat-error>
+        <mat-error
+          class="mat-caption"
+          i18n="@@shared.endDateError"
+          *ngIf="fundingForm.errors?.invalidEndDate"
+        >
+          End date must come after start date
+        </mat-error>
       </div>
     </div>
 
