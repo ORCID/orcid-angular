@@ -506,7 +506,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   deleteGrant(id: number) {
     this.grantsArray.removeAt(id)
-    this.grantsArrayDisplayState.splice(id)
+    this.grantsArrayDisplayState.splice(id, 1)
   }
 
   saveEvent() {
