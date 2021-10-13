@@ -58,12 +58,15 @@ mat-form-field {
 
 .email-input-line {
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   img {
     margin-top: 6px;
     cursor: move;
     z-index: 1;
     margin-inline-end: 18px;
+  }
+  .email-activated {
+    margin-bottom: 12px;
   }
 }
 
@@ -101,7 +104,7 @@ mat-form-field {
   .email-input-container {
     padding: 0;
     max-width: 100%;
-    padding-inline-end: 0px;
+    padding-inline-end: 0;
   }
 
   .actions-wrapper,
@@ -117,7 +120,7 @@ mat-form-field {
 
 .additional-email {
   ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 7px !important;
+    padding-bottom: 18px !important;
   }
 }
 
