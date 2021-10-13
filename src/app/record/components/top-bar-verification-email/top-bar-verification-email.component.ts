@@ -4,7 +4,6 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { MatDialog } from '@angular/material/dialog'
 import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
-import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 
 @Component({
   selector: 'app-top-bar-verification-email',
@@ -21,13 +20,14 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   @Input() emailVerified: boolean
 
   primaryEmail: string
+  verifyEmailSend: boolean
   isMobile: boolean
 
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _recordEmails: RecordEmailsService,
-    private _verificationEmailModalService: VerificationEmailModalService
+    private _recordEmailsService: RecordEmailsService
   ) {
     _platform
       .get()
@@ -49,11 +49,15 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
       })
   }
 
-  resendVerificationEmailModal() {
-    this._verificationEmailModalService.openVerificationEmailModal(
-      this.primaryEmail
-    )
+  verifyEmail() {
+    this._recordEmailsService
+      .verifyEmail(this.primaryEmail)
+      .pipe(first())
+      .subscribe(() => {
+        this.verifyEmailSend = true
+      })
   }
+
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
