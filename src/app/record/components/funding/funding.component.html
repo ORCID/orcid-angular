@@ -151,8 +151,9 @@
       <h3 class="orc-font-body-small" i18n="@@funding.description">
         Description
       </h3>
-      <div>
-        {{ funding.description.value }}
+      <div
+        [innerText]="funding.description.value"
+      >
       </div>
     </app-display-attribute>
   </ng-container>

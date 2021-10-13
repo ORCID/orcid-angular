@@ -135,8 +135,9 @@
   <app-display-attribute *ngIf="work.shortDescription?.value">
     <h3 class="orc-font-body-small" i18n="@@record.description">Description</h3>
 
-    <div>
-      {{ work.shortDescription.value }}
+    <div
+      [innerText]="work.shortDescription.value"
+    >
     </div>
   </app-display-attribute>
   <!--  COUNTRY OF PUBLICATION-->
