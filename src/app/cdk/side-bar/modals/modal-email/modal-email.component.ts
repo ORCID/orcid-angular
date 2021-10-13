@@ -285,19 +285,20 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   private listDuplicateInputKeys(formGroup: FormGroup) {
     const formGroupKeysWithDuplicatedValues: string[] = []
 
-    // Add errors error on duplicated emails
+    // Add errors error on duplicated urls
     Object.keys(formGroup.controls).forEach((keyX) => {
-      const emailControlX = (formGroup.controls[keyX] as FormGroup).controls[
-        'email'
-      ]
+      let urlControlX: string = (formGroup.controls[keyX] as FormGroup)
+        .controls['email'].value
+      urlControlX = urlControlX.toLowerCase().trim()
+
       Object.keys(formGroup.controls).forEach((keyY) => {
-        const emailControlY = (formGroup.controls[keyY] as FormGroup).controls[
-          'email'
-        ]
+        let urlControlY: string = (formGroup.controls[keyY] as FormGroup)
+          .controls['email'].value
+        urlControlY = urlControlY.toLowerCase().trim()
 
         // Only if both controls are not empty
-        if (emailControlX.value && emailControlY.value) {
-          if (emailControlX.value === emailControlY.value && keyX !== keyY) {
+        if (urlControlX && urlControlY) {
+          if (urlControlX === urlControlY && keyX !== keyY) {
             formGroupKeysWithDuplicatedValues.push(keyY)
           }
         }
