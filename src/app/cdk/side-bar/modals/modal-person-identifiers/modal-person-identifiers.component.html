@@ -87,13 +87,21 @@
               />
               <div class="row">
                 <mat-form-field appearance="outline" class="mat-form-field-min">
-                  <input [hidden]=true
+                  <input
+                    [hidden]="true"
                     id="identifier-input"
                     matInput
                     formControlName="identifier"
                   />
-                  <a class="underline" [href]="personIdentifier.url" target="_blank" rel="me nofollow noopener noreferrer"
-                    i18n="@@shared.view">{{personIdentifier.commonName}}: {{personIdentifier.reference}}</a>
+                  <a
+                    class="underline"
+                    [href]="personIdentifier.url"
+                    target="_blank"
+                    rel="me nofollow noopener noreferrer"
+                    i18n="@@shared.view"
+                    >{{ personIdentifier.commonName }}:
+                    {{ personIdentifier.reference }}</a
+                  >
                   <mat-hint class="mat-caption">
                     <app-source-hit
                       [createdDate]="personIdentifier.createdDate"
