@@ -15,8 +15,7 @@
     background: map-get($foreground, 'brand-primary');
   }
 
-  hr,
-  .dashed-line {
+  hr.dashed-line {
     background: repeating-linear-gradient(
       90deg,
       mat-color($background, light-grey),
