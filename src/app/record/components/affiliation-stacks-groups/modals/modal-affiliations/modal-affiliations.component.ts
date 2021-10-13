@@ -381,7 +381,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       }
     } else {
       affiliationToSave.affiliationName = {
-        value: affiliationForm.get('organization').value,
+        value: affiliationForm.get('organization').value?.value ? 
+        affiliationForm.get('organization').value?.value : affiliationForm.get('organization').value,
       }
     }
 
