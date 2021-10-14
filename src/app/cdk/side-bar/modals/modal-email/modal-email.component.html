@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="row">
-      <h3 class="col orc-font-body-small" i18n="@@side-bar.primaryEmail">
+      <h3 class="col orc-font-body" i18n="@@side-bar.primaryEmail">
         Primary email address
       </h3>
     </div>
@@ -131,7 +131,12 @@
                 >
               </ng-container>
             </div>
-            <div class="actions-sub-wrapper">
+            <div
+              class="actions-sub-wrapper"
+              [ngClass]="{
+                'privacy-selector': !showNonVerifiedData(email.putCode)
+              }"
+            >
               <app-privacy-selector
                 formControlName="visibility"
               ></app-privacy-selector>
@@ -218,7 +223,7 @@
     </div>
 
     <div class="row">
-      <h3 class="col orc-font-body-small" i18n="@@side-bar.otherEmails">
+      <h3 class="col orc-font-body" i18n="@@side-bar.otherEmails">
         Other email addresses
       </h3>
     </div>
