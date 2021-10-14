@@ -51,7 +51,7 @@
   <form [formGroup]="fundingForm" (ngSubmit)="onSubmit()">
     <div
       id="funding-details"
-      class="title"
+      class="title top-title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
         'orc-font-body-large': platform.columns12
@@ -90,7 +90,7 @@
         </label>
       </div>
 
-      <div class="row">
+      <div class="input-container">
         <mat-form-field appearance="outline" class="mat-form-field-min">
           <mat-select
             formControlName="fundingType"
@@ -166,7 +166,7 @@
       <!-- SHOW-HIDE translated title button  -->
       <div class="row">
         <a
-          class="col add-more translate-title no-gutters"
+          class="col add-more translate-title"
           (click)="showTranslationTitle = !showTranslationTitle"
         >
           <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
@@ -296,7 +296,7 @@
         class="input-container"
         [ngClass]="{ 'project-link-mobile': isMobile }"
       >
-        <mat-form-field appearance="outline" class="mat-form-field-min">
+        <mat-form-field appearance="outline" class="mat-form-field-min three-line-hint">
           <input
             id="funding-project-link-input"
             matInput
@@ -324,7 +324,10 @@
           <strong i18n="@@funding.description">Description</strong>
         </label>
       </div>
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
         <textarea
           id="description-input"
           matInput
@@ -345,12 +348,12 @@
         </label>
       </div>
       <!-- Currency  -->
-      <div class="row input-container date-group">
-        <div class="col l4 date">
+      <div class="date-group mat-form-field-wrapper input-container">
+        <div class="col l4 date-input">
           <mat-form-field
             id="funding-amount-input"
             appearance="outline"
-            class="mat-form-field-min"
+            class="mat-form-field-min no-hint"
           >
             <mat-select placeholder="-" formControlName="currencyCode">
               <mat-option
@@ -363,26 +366,29 @@
           </mat-form-field>
         </div>
         <!-- Amount -->
-        <div class="col">
-          <mat-form-field appearance="outline" class="mat-form-field-min">
+        <div class="col date-input l4">
+          <mat-form-field
+            appearance="outline"
+            class="mat-form-field-min no-hint"
+          >
             <input id="amount-input" matInput formControlName="amount" />
-            <mat-error
-              class="mat-caption"
-              *ngIf="
-                fundingForm.get('amount').hasError('pattern') &&
-                fundingForm.get('amount').touched
-              "
-              i18n="@@funding.amountError"
-            >
-              Amount should be a numeric value with format 1,234,567.89
-            </mat-error>
           </mat-form-field>
         </div>
+        <mat-error
+          class="mat-caption error-out-input-context"
+          *ngIf="
+            fundingForm.get('amount').hasError('pattern') &&
+            fundingForm.get('amount').touched
+          "
+          i18n="@@funding.amountError"
+        >
+          Amount should be a numeric value with format 1,234,567.89
+        </mat-error>
       </div>
     </div>
 
     <!-- Start date  -->
-    <div class="row" formGroupName="startDateGroup">
+    <div class="input-container" formGroupName="startDateGroup">
       <div class="row">
         <label
           class="mat-caption"
@@ -394,49 +400,53 @@
         </label>
       </div>
       <!--Start date year  -->
-      <div class="row input-container date-group">
-        <div class="col l4 date">
-          <mat-form-field
-            id="start-date-year-input"
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <mat-select
-              placeholder="{{ ngOrcidYear }}"
-              formControlName="startDateYear"
+      <div class="row date-group mat-form-field-wrapper">
+        <div class="row">
+          <div class="col l4 date-input">
+            <mat-form-field
+              id="start-date-year-input"
+              appearance="outline"
+              class="mat-form-field-min no-hint"
             >
-              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option *ngFor="let year of years" [value]="year">
-                {{ year }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <!-- Start date month -->
-        <div class="col l4 date">
-          <mat-form-field
-            id="start-date-month-input"
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <mat-select
-              placeholder="{{ ngOrcidMonth }}"
-              formControlName="startDateMonth"
+              <mat-select
+                placeholder="{{ ngOrcidYear }}"
+                formControlName="startDateYear"
+              >
+                <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+                <mat-option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Start date month -->
+          <div class="col l4 date-input">
+            <mat-form-field
+              id="start-date-month-input"
+              appearance="outline"
+              class="mat-form-field-min no-hint"
             >
-              <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-              <mat-option *ngFor="let month of months" [value]="month">
-                {{ month | trailingZeros }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+              <mat-select
+                placeholder="{{ ngOrcidMonth }}"
+                formControlName="startDateMonth"
+              >
+                <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month">
+                  {{ month | trailingZeros }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.invalidDate"
-          *ngIf="fundingForm.get('startDateGroup').errors?.date"
-        >
-          Invalid date
-        </mat-error>
+        <div class="row">
+          <mat-error
+            class="mat-caption error-out-input-context"
+            i18n="@@shared.invalidDate"
+            *ngIf="fundingForm.get('startDateGroup').errors?.date"
+          >
+            Invalid date
+          </mat-error>
+        </div>
       </div>
     </div>
 
@@ -453,56 +463,60 @@
         </label>
       </div>
       <!-- End date year  -->
-      <div class="row input-container date-group">
-        <div class="col l4 date">
-          <mat-form-field
-            id="end-date-year-input"
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <mat-select
-              placeholder="{{ ngOrcidYear }}"
-              formControlName="endDateYear"
+      <div class="input-container date-group mat-form-field-wrapper">
+        <div class="row">
+          <div class="col l4 date-input">
+            <mat-form-field
+              id="end-date-year-input"
+              appearance="outline"
+              class="mat-form-field-min no-hint"
             >
-              <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
-              <mat-option *ngFor="let year of yearsEndDate" [value]="year">
-                {{ year }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <!-- End date month -->
-        <div class="col l4 date">
-          <mat-form-field
-            id="end-date-month-input"
-            appearance="outline"
-            class="mat-form-field-min"
-          >
-            <mat-select
-              placeholder="{{ ngOrcidMonth }}"
-              formControlName="endDateMonth"
+              <mat-select
+                placeholder="{{ ngOrcidYear }}"
+                formControlName="endDateYear"
+              >
+                <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
+                <mat-option *ngFor="let year of yearsEndDate" [value]="year">
+                  {{ year }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- End date month -->
+          <div class="col l4 date-input">
+            <mat-form-field
+              id="end-date-month-input"
+              appearance="outline"
+              class="mat-form-field-min no-hint"
             >
-              <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
-              <mat-option *ngFor="let month of months" [value]="month">
-                {{ month | trailingZeros }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+              <mat-select
+                placeholder="{{ ngOrcidMonth }}"
+                formControlName="endDateMonth"
+              >
+                <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month">
+                  {{ month | trailingZeros }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.invalidDate"
-          *ngIf="fundingForm.get('endDateGroup').errors?.date"
-        >
-          Invalid date
-        </mat-error>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.endDateError"
-          *ngIf="fundingForm.errors?.invalidEndDate"
-        >
-          End date must come after start date
-        </mat-error>
+        <div class="row">
+          <mat-error
+            class="mat-caption error-out-input-context"
+            i18n="@@shared.invalidDate"
+            *ngIf="fundingForm.get('endDateGroup').errors?.date"
+          >
+            Invalid date
+          </mat-error>
+          <mat-error
+            class="mat-caption error-out-input-context"
+            i18n="@@shared.endDateError"
+            *ngIf="fundingForm.errors?.invalidEndDate"
+          >
+            End date must come after start date
+          </mat-error>
+        </div>
       </div>
     </div>
 
@@ -644,7 +658,7 @@
         id="country-input"
         appearance="outline"
         class="mat-form-field-min"
-        [ngClass]="{ twoLinesHint: isMobile }"
+        [ngClass]="{ 'two-line-hint': isMobile }"
       >
         <mat-select #countrySelect formControlName="country">
           <mat-option
@@ -683,7 +697,7 @@
         <span *ngIf="!platform.columns12" class="required">*</span>
       </p>
     </div>
-    <hr class="no-margin" />
+    <hr />
     <!-- Grants group -->
     <div formArrayName="grants">
       <div

@@ -21,24 +21,25 @@
 
   <!-- Work Category -->
   <div>
-    <div class="row">
-      <label
-        class="mat-caption title"
-        [ngClass]="{
-          error:
-            workForm.get('workCategory').hasError('required') &&
-            workForm.get('workCategory').touched
-        }"
+    <label
+      class="mat-caption title"
+      [ngClass]="{
+        error:
+          workForm.get('workCategory').hasError('required') &&
+          workForm.get('workCategory').touched
+      }"
+    >
+      <strong i18n="@@works.selectAWorkCategory"
+        >Select a work category!!</strong
       >
-        <strong i18n="@@works.selectAWorkCategory"
-          >Select a work category</strong
-        >
-        <span class="required">*</span>
-      </label>
-    </div>
+      <span class="required">*</span>
+    </label>
 
     <div class="row">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
         <mat-select formControlName="workCategory">
           <mat-option
             *ngFor="let item of workCategories | keyvalue"
@@ -70,7 +71,10 @@
       <strong i18n="@@works.workType">Work type</strong>
       <span class="required">*</span>
     </label>
-    <mat-form-field appearance="outline" class="mat-form-field-min row">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
       <mat-select placeholder="Select a work type" formControlName="workType">
         <mat-option
           *ngFor="let item of workTypes | keyvalue"
@@ -105,7 +109,10 @@
       </label>
     </div>
 
-    <mat-form-field appearance="outline" class="mat-form-field-min">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
       <input id="title-input" matInput formControlName="title" />
       <mat-error
         *ngIf="workForm.get('title').hasError('required')"
@@ -148,7 +155,10 @@
         </label>
       </div>
 
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
         <input
           id="biography-input"
           matInput
@@ -167,7 +177,10 @@
         </label>
       </div>
       <div class="row">
-        <mat-form-field appearance="outline" class="mat-form-field-min">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min input-container"
+        >
           <mat-select
             id="language-of-title-input"
             placeholder="{{ ngOrcidSelectLanguage }}"
@@ -194,7 +207,10 @@
       </label>
     </div>
 
-    <mat-form-field appearance="outline" class="mat-form-field-min">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
       <input id="work-subtitle-input" matInput formControlName="subtitle" />
     </mat-form-field>
   </div>
@@ -207,7 +223,10 @@
       </label>
     </div>
 
-    <mat-form-field appearance="outline" class="mat-form-field-min">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
       <input matInput formControlName="journalTitle" />
     </mat-form-field>
   </div>
@@ -244,6 +263,7 @@
       </div>
       <div class="col l4 date">
         <mat-form-field
+          class="input-container"
           id="start-date-month-input"
           appearance="outline"
           class="mat-form-field-min"
@@ -261,6 +281,7 @@
       </div>
       <div class="col l4 date">
         <mat-form-field
+          class="input-container"
           id="start-date-day-input"
           appearance="outline"
           class="mat-form-field-min"
@@ -303,8 +324,9 @@
     </div>
 
     <mat-form-field
+      class="input-container"
       appearance="outline"
-      class="mat-form-field-min larger-input-margin"
+      class="mat-form-field-min two-line-hint input-container"
     >
       <input id="biography-input" matInput formControlName="url" />
       <mat-error
@@ -355,7 +377,10 @@
     </label>
   </div>
   <div class="row">
-    <mat-form-field appearance="outline" class="mat-form-field-min">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
       <mat-select placeholder="Placeholder" formControlName="citationType">
         <mat-option [value]="''" i18n="@@works.selectACitation">
           Select a citation type
@@ -384,7 +409,10 @@
         <strong i18n="@@works.citation">Citation</strong>
       </label>
     </div>
-    <mat-form-field appearance="outline" class="mat-form-field-min">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
       <textarea
         id="citation-input"
         matInput
@@ -409,7 +437,10 @@
         <strong i18n="@@works.description">Description</strong>
       </label>
     </div>
-    <mat-form-field appearance="outline" class="mat-form-field-min biography">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min biography input-container"
+    >
       <textarea
         id="description-input"
         matInput
@@ -454,6 +485,7 @@
         [formGroupName]="i"
       >
         <app-work-external-identifiers-edit
+          class="input-container"
           [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
           [workIdTypes]="workIdTypes"
           (cancelEvent)="cancelExternalIdEdit(i)"
@@ -513,7 +545,10 @@
       </label>
     </div>
     <div class="row">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
         <mat-select
           id="language-input"
           placeholder="Placeholder"
@@ -540,7 +575,10 @@
       </label>
     </div>
     <div class="row">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
         <mat-select
           id="country-input"
           placeholder="Placeholder"

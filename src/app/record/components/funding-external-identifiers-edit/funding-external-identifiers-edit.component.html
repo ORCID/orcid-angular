@@ -17,7 +17,7 @@
     </div>
     <mat-form-field
       appearance="outline"
-      class="mat-form-field-min larger-input-margin"
+      class="mat-form-field-min input-container"
     >
       <input id="grant-number-input" matInput formControlName="grantNumber" />
     </mat-form-field>
@@ -36,24 +36,23 @@
     >
       <strong i18n="@@funding.grantUrl">Grant link </strong>
     </label>
-
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min larger-input-margin"
-    >
-      <input id="grant-url-input" matInput formControlName="grantUrl" />
-
-      <mat-hint i18n="@@funding.grantUrlHint">
-        A link to more information about the funding award
-      </mat-hint>
-      <mat-error
-        *ngIf="grantForm.get('grantUrl').hasError('pattern')"
-        i18n="@@funding.invalidUrl"
-      >
-        Invalid URL
-      </mat-error>
-    </mat-form-field>
   </div>
+  <mat-form-field
+    appearance="outline"
+    class="mat-form-field-min input-container"
+  >
+    <input id="grant-url-input" matInput formControlName="grantUrl" />
+
+    <mat-hint i18n="@@funding.grantUrlHint">
+      A link to more information about the funding award
+    </mat-hint>
+    <mat-error
+      *ngIf="grantForm.get('grantUrl').hasError('pattern')"
+      i18n="@@funding.invalidUrl"
+    >
+      Invalid URL
+    </mat-error>
+  </mat-form-field>
 
   <!-- Funding relationship -->
   <div>

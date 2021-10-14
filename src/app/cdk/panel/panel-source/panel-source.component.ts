@@ -88,7 +88,7 @@ export class PanelSourceComponent implements OnInit {
         let modalComponent
         modalComponent = this._dialog.open(ModalDeleteItemsComponent, {
           width: '850px',
-          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+          maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
         })
 
         modalComponent.componentInstance.type = this.type

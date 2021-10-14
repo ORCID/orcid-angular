@@ -22,7 +22,7 @@ export class VerificationEmailModalService {
           TopBarVerificationEmailModalComponent,
           {
             width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
           }
         )
         modalComponent.componentInstance.primaryEmail = primaryEmail

@@ -11,11 +11,14 @@ mat-form-field {
 }
 
 .title {
-  margin-top: 16px;
-
   p {
     margin: 6px 0;
   }
+}
+
+label {
+  display: block;
+  padding-bottom: 8px;
 }
 
 .mat-form-field {
@@ -62,11 +65,21 @@ mat-form-field {
 }
 
 .add-more {
-  margin-top: 26px;
-  margin-bottom: 26px;
-
+  margin-bottom: 27px;
+  padding-inline-start: 0;
+  a {
+    margin: 0;
+  }
   span {
     margin: auto;
     padding-inline-start: 6px;
   }
+}
+
+.input-container {
+  max-width: 402px;
+}
+.externalIdBox {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 }

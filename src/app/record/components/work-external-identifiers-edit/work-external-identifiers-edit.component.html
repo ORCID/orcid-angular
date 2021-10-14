@@ -23,7 +23,10 @@
       </label>
     </div>
     <div class="row">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
         <mat-select
           placeholder="{{ ngOrcidSelectIdentifierType }}"
           formControlName="externalIdentifierType"
@@ -61,7 +64,7 @@
     </div>
     <mat-form-field
       appearance="outline"
-      class="mat-form-field-min larger-input-margin"
+      class="mat-form-field-min three-line-hint input-container"
     >
       <input
         autocomplete="off"
@@ -94,21 +97,23 @@
   </div>
   <!-- Work identifier url value -->
 
-  <div class="row">
-    <label
-      for="external-identifier-url-input"
-      class="mat-caption"
-      [ngClass]="{
-        error:
-          externalIdForm.hasError('pattern', 'externalIdentifierUrl') &&
-          externalIdForm.get('externalIdentifierUrl').touched
-      }"
-    >
-      <strong i18n="@@works.identifierUrl">Identifier URL </strong>
-    </label>
+  <div>
+    <div class="row">
+      <label
+        for="external-identifier-url-input"
+        class="mat-caption"
+        [ngClass]="{
+          error:
+            externalIdForm.hasError('pattern', 'externalIdentifierUrl') &&
+            externalIdForm.get('externalIdentifierUrl').touched
+        }"
+      >
+        <strong i18n="@@works.identifierUrl">Identifier URL </strong>
+      </label>
+    </div>
     <mat-form-field
       appearance="outline"
-      class="mat-form-field-min larger-input-margin"
+      class="mat-form-field-min three-line-hint input-container"
     >
       <input
         id="external-identifier-url-input"

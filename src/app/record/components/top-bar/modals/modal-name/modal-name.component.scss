@@ -94,8 +94,6 @@ label {
 }
 
 .title {
-  margin-top: 16px;
-
   p {
     margin: 6px 0;
   }
@@ -103,6 +101,10 @@ label {
   .your-given-names {
     margin-bottom: 10px;
   }
+}
+
+label.mat-caption {
+  margin-bottom: 8px;
 }
 
 .mat-form-field {
@@ -119,6 +121,9 @@ label {
     border-style: solid;
     padding: 0 12px;
   }
+}
+hr {
+  margin-bottom: 16px;
 }
 
 .family-names {
