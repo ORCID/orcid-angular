@@ -89,16 +89,12 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        console.log('______>')
-
         this.userInfo = userRecord?.userInfo
         this.checkLoadingState(userRecord)
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
         if (!this.publicOrcid) {
-          console.log('GOT IT ALL')
-
           this.setMyORcidOrcidIdQueryParameter()
         }
 
@@ -111,11 +107,10 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   private setMyORcidOrcidIdQueryParameter() {
     if (this.userInfo?.EFFECTIVE_USER_ORCID && !this.initMyOrcidParameter) {
-      console.log(this.userInfo.EFFECTIVE_USER_ORCID)
 
       this.initMyOrcidParameter = true
       this._router.navigate(['/qa/my-orcid'], {
-        queryParams: { id: this.userInfo.EFFECTIVE_USER_ORCID },
+        queryParams: { orcid: this.userInfo.EFFECTIVE_USER_ORCID },
       })
     }
   }
