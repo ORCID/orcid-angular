@@ -40,6 +40,10 @@ mat-form-field {
       width: 100%;
     }
   }
+  .privacy-selector {
+    justify-content: unset;
+    padding-inline-start: 8px;
+  }
 }
 
 .primary-email-label {
