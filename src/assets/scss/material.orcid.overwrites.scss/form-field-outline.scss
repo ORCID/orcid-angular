@@ -21,9 +21,21 @@
   border-top: 0.8em solid transparent;
 }
 
-.mat-form-field-appearance-outline.twoLinesHint {
+.mat-form-field-appearance-outline.two-line-hint {
   .mat-form-field-wrapper {
     margin-bottom: 1.6em;
+  }
+}
+
+.mat-form-field-appearance-outline.three-line-hint {
+  .mat-form-field-wrapper {
+    margin-bottom: 2.4em;
+  }
+}
+
+.no-hint {
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
   }
 }
 

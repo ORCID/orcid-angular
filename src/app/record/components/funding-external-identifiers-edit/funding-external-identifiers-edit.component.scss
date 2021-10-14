@@ -1,18 +1,14 @@
-.externalIdBox {
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
 .mat-form-field {
   width: 100%;
 }
 
 .title {
-  margin-top: 16px;
-
   p {
     margin: 6px 0;
   }
+}
+label.mat-caption {
+  margin-bottom: 8px;
 }
 
 .mat-form-field {
@@ -23,10 +19,6 @@
   text-decoration: underline;
 }
 
-.externalIdBox {
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
 mat-radio-group {
   display: flex;
   flex-direction: column;
@@ -38,6 +30,6 @@ mat-radio-group {
   margin-bottom: 16px;
 }
 
-.larger-input-margin {
-  margin-bottom: 20px;
+.input-container {
+  max-width: 402px;
 }

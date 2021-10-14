@@ -120,7 +120,7 @@ export class PanelsComponent implements OnInit {
           let modalComponent
           modalComponent = this._dialog.open(modal, {
             width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
           })
 
           modalComponent.componentInstance.type = type

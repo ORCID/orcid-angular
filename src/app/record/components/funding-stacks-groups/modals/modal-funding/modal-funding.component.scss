@@ -2,6 +2,10 @@
   display: none;
 }
 
+label.mat-caption {
+  margin-bottom: 8px;
+}
+
 mat-form-field {
   width: 100%;
 }
@@ -18,8 +22,6 @@ hr {
 }
 
 .title {
-  margin-top: 16px;
-
   p {
     margin: 6px 0;
   }
@@ -59,9 +61,11 @@ mat-radio-button {
   margin: 0;
 }
 .add-more {
-  margin-top: 26px;
-  margin-bottom: 26px;
-
+  margin-bottom: 27px;
+  padding-inline-start: 0;
+  a {
+    margin: 0;
+  }
   span {
     margin: auto;
     padding-inline-start: 6px;
@@ -74,15 +78,12 @@ mat-radio-button {
 
 .required-information {
   margin-left: auto !important;
-  margin-top: 10px !important;
+  display: flex;
+  align-items: center;
 
   span {
     margin-right: 3px !important;
   }
-}
-
-.larger-input-margin {
-  margin-bottom: 20px;
 }
 
 mat-radio-group {
@@ -91,11 +92,7 @@ mat-radio-group {
 }
 :host {
   .date-group {
-    padding-bottom: 1.475em;
-    .date {
-      ::ng-deep .mat-form-field-wrapper {
-        padding-bottom: 0 !important;
-      }
+    .date-input {
       padding-left: 0;
     }
   }
@@ -112,4 +109,17 @@ mat-radio-group {
 .delete-grant {
   align-content: end;
   justify-content: flex-end;
+}
+
+.error-out-input-context {
+  padding: 0 8px;
+}
+
+.input-container {
+  max-width: 402px;
+}
+
+.externalIdBox {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 }

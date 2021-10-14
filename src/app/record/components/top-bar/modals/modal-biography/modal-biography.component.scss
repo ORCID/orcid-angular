@@ -9,11 +9,13 @@ hr {
 }
 
 .title {
-  margin-top: 16px;
-
   p {
     margin: 6px 0;
   }
+}
+
+label.mat-caption {
+  margin-bottom: 8px;
 }
 
 .mat-form-field {

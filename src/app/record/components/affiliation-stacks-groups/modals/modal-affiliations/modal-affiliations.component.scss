@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+hr {
+  margin-bottom: 16px;
+}
+
 label {
   margin: 6px 0 3px 0;
 }
@@ -44,8 +48,6 @@ label {
 }
 
 .title {
-  margin-top: 16px;
-
   p {
     margin: 6px 0;
   }
@@ -103,4 +105,8 @@ label {
 button,
 .clear {
   z-index: 1;
+}
+
+label.mat-caption {
+  margin-bottom: 8px;
 }

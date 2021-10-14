@@ -183,7 +183,7 @@ export class PanelComponent implements OnInit {
         if (this.editModalComponent) {
           modalComponent = this._dialog.open(this.editModalComponent, {
             width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
             data: this.userRecord,
           })
           modalComponent.componentInstance.id = this.id
