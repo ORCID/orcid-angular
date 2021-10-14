@@ -95,7 +95,6 @@
                     [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
                   />
                   <mat-error
-                    class="mat-form-field-subscript-wrapper"
                     *ngIf="
                       websitesForm.get(website.putCode).get('description')
                         ?.errors?.maxlength
