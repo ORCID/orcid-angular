@@ -40,6 +40,10 @@ mat-form-field {
       width: 100%;
     }
   }
+  .privacy-selector {
+    justify-content: unset;
+    padding-inline-start: 8px;
+  }
 }
 
 .primary-email-label {
@@ -57,7 +61,7 @@ mat-form-field {
 
 .email-input-line {
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   img {
     margin-top: 6px;
     cursor: move;
@@ -116,7 +120,7 @@ mat-form-field {
 
 .additional-email {
   ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 7px !important;
+    padding-bottom: 18px !important;
   }
 }
 
