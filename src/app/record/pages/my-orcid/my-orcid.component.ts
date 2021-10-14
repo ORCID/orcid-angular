@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { takeUntil } from 'rxjs/operators'
@@ -46,6 +46,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   userNotFound: boolean
   loadingUserRecord: boolean
   globalExpandState = true
+  initMyOrcidParameter = false
 
   constructor(
     _userInfoService: UserInfoService,
@@ -53,10 +54,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private _record: RecordService,
     private _openGraph: OpenGraphService,
-    private _robotsMeta: RobotsMetaTagsService
-  ) {
-    this.checkIfThisIsAPublicOrcid()
-  }
+    private _robotsMeta: RobotsMetaTagsService,
+    private _router: Router
+  ) {}
 
   private checkIfThisIsAPublicOrcid() {
     if (this.getRouteOrcidID()) {
@@ -66,30 +66,21 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   private getRouteOrcidID(): string {
-    // checks first and second URL segment to find
-    // `/qa/<orcid-id>` (used only during QA )
-    // od `/<orcid-id>` (used while the app is live )
     if (this.route.parent.snapshot.url) {
-      const firstParameter = this.route.parent.snapshot.url[0]
-      const secondParameter = this.route.parent.snapshot.url[1]
+      const firstUrlSegment = this.route.parent.snapshot.url[0]
       if (
-        firstParameter &&
-        firstParameter.toString() &&
-        ORCID_REGEXP.test(firstParameter.toString())
+        firstUrlSegment &&
+        firstUrlSegment.toString() &&
+        ORCID_REGEXP.test(firstUrlSegment.toString())
       ) {
-        return firstParameter.toString()
-      } else if (
-        secondParameter &&
-        secondParameter.toString() &&
-        ORCID_REGEXP.test(secondParameter.toString())
-      ) {
-        return secondParameter.toString()
+        return firstUrlSegment.toString()
       }
-      return null
     }
   }
 
   ngOnInit(): void {
+    this.checkIfThisIsAPublicOrcid()
+
     this.affiliations = 0
     this._platform.get().subscribe((value) => (this.platform = value))
     this._record
@@ -98,16 +89,35 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
+        console.log('______>')
+
         this.userInfo = userRecord?.userInfo
         this.checkLoadingState(userRecord)
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
+        if (!this.publicOrcid) {
+          console.log('GOT IT ALL')
+
+          this.setMyORcidOrcidIdQueryParameter()
+        }
+
         if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
           this._robotsMeta.disallowRobots()
         }
         this._openGraph.addOpenGraphData(userRecord)
       })
+  }
+
+  private setMyORcidOrcidIdQueryParameter() {
+    if (this.userInfo?.EFFECTIVE_USER_ORCID && !this.initMyOrcidParameter) {
+      console.log(this.userInfo.EFFECTIVE_USER_ORCID)
+
+      this.initMyOrcidParameter = true
+      this._router.navigate(['/qa/my-orcid'], {
+        queryParams: { id: this.userInfo.EFFECTIVE_USER_ORCID },
+      })
+    }
   }
 
   ngOnDestroy(): void {
@@ -132,7 +142,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   affiliationsCount(itemsCount: number, type?: string) {
-    this.affiliations = this.affiliations + +itemsCount
+    this.affiliations = this.affiliations + itemsCount
     if (type === 'RESEARCH_RESOURCE') {
       this.researchResourcePresent = !!itemsCount
     }
