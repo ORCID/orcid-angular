@@ -128,7 +128,12 @@
       class="col add-more no-gutters"
       (click)="showTranslationTitle = !showTranslationTitle"
     >
-      <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+      <mat-icon *ngIf="!showTranslationTitle" class="large-material-icon"
+        >add_circle_outline</mat-icon
+      >
+      <mat-icon *ngIf="showTranslationTitle" class="large-material-icon"
+        >remove_circle_outline</mat-icon
+      >
       <span class="mat-body-1">
         <ng-container
           i18n="@@works.addTranslatedTitle"

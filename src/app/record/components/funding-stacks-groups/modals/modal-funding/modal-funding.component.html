@@ -169,7 +169,13 @@
           class="col add-more translate-title"
           (click)="showTranslationTitle = !showTranslationTitle"
         >
-          <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
+          <mat-icon class="large-material-icon" *ngIf="!showTranslationTitle"
+            >add_circle_outline</mat-icon
+          >
+          <mat-icon class="large-material-icon" *ngIf="showTranslationTitle"
+            >remove_circle_outline</mat-icon
+          >
+
           <span class="mat-body-1">
             <ng-container
               i18n="@@funding.addTranslatedTitle"
@@ -296,7 +302,10 @@
         class="input-container"
         [ngClass]="{ 'project-link-mobile': isMobile }"
       >
-        <mat-form-field appearance="outline" class="mat-form-field-min three-line-hint">
+        <mat-form-field
+          appearance="outline"
+          class="mat-form-field-min three-line-hint"
+        >
           <input
             id="funding-project-link-input"
             matInput
