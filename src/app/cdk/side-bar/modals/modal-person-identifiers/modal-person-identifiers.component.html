@@ -54,7 +54,7 @@
           class="col no-gutters orc-font-body"
           i18n="@@side-bar.myPersonIdentifiers"
         >
-          My person identifiers
+          My other identifiers
         </h3>
       </div>
       <hr class="dashed-line" />
@@ -86,7 +86,10 @@
                 aria-label="drag handle"
               />
               <div class="row">
-                <mat-form-field appearance="outline" class="mat-form-field-min">
+                <mat-form-field
+                  appearance="outline"
+                  class="mat-form-field-min line"
+                >
                   <input
                     [hidden]="true"
                     id="identifier-input"
@@ -94,7 +97,7 @@
                     formControlName="identifier"
                   />
                   <a
-                    class="underline"
+                    class="underline line"
                     [href]="personIdentifier.url"
                     target="_blank"
                     rel="me nofollow noopener noreferrer"
