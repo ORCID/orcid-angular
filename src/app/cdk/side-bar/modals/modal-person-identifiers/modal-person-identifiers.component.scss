@@ -27,12 +27,18 @@
 
 .personal-identifier-input-line {
   margin-top: 10px;
+  margin-bottom: 4px;
   img {
     margin-top: 3px;
     cursor: move;
     z-index: 1;
     margin-inline-start: 6px;
     margin-inline-end: 10px;
+  }
+
+  .person-identifier {
+    display: flex;
+    flex-direction: column;
   }
 }
 
