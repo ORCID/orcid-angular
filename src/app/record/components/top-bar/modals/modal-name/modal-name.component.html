@@ -260,6 +260,17 @@
                   "
                 ></app-source-hit>
               </mat-hint>
+              <mat-error
+                *ngIf="
+                  namesForm.hasError('maxlength', [
+                    otherName.putCode,
+                    'otherName'
+                  ])
+                "
+                i18n="@@topBar.otherNamesMaxLenght"
+              >
+                Must be less than 255 characters
+              </mat-error>
             </mat-form-field>
           </div>
           <div
