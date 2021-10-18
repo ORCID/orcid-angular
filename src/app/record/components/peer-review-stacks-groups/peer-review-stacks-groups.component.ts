@@ -13,7 +13,7 @@ import {
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
-import { MainPanelsState, UserRecordOptions } from 'src/app/types/record.local'
+import { MainPanelsState, UserRecord, UserRecordOptions } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -47,6 +47,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     orcidUrl: string
     loggedIn: boolean
   }
+  userRecord: UserRecord
   peerReviews: PeerReview[] = []
   platform: PlatformInfo
   detailsPeerReviews: {
@@ -88,6 +89,15 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       .pipe(takeUntil(this.$destroy))
       .subscribe((userSession) => {
         this.userSession = userSession
+      })
+
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord || undefined,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
       })
 
     // Loads the public record if `isPublicRecord` is defined
