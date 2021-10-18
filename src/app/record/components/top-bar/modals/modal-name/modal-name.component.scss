@@ -15,7 +15,8 @@ hr.dashed-line {
   margin-inline-end: auto;
 }
 
-.other-names-list.cdk-drop-list-dragging .other-names-box:not(.cdk-drag-placeholder) {
+.other-names-list.cdk-drop-list-dragging
+  .other-names-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
