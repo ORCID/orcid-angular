@@ -221,67 +221,72 @@
     </p>
     <ng-container *ngIf="otherNames.length > 0">
       <div
-        class="row"
+        class="row other-names-list"
         id="otherName-dropList"
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
         <div
           cdkDrag
-          class="row other-names-input-line"
-          [ngClass]="{ 'no-wrap': !isMobile }"
+          class="row other-names-box"
           [formGroupName]="otherName.putCode"
           *ngFor="let otherName of otherNames"
         >
-          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-            <img
-              class="icon-drag"
-              cdkDragHandle
-              src="./assets/vectors/draggable.svg"
-            />
-            <mat-form-field appearance="outline" class="mat-form-field-min">
-              <input
-                id="alternative-names-input"
-                #nameInput
-                matInput
-                formControlName="otherName"
-                placeholder="{{ ngOrcidAddOtherName }}"
-              />
-              <mat-hint
-                class="mat-caption"
-                *ngIf="otherName.putCode.indexOf('new') < 0"
-              >
-                <app-source-hit
-                  [createdDate]="otherName.createdDate"
-                  [source]="otherName.sourceName || otherName.source"
-                  [assertion]="
-                    otherName.assertionOriginName ||
-                    otherName.assertionOriginOrcid
-                  "
-                ></app-source-hit>
-              </mat-hint>
-            </mat-form-field>
-          </div>
+          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
           <div
-            class="col no-wrap actions-wrapper no-gutters"
-            [ngClass]="{ privacy: !platform.columns12 }"
+            class="row other-names-input-line"
+            [ngClass]="{ 'no-wrap': !isMobile }"
           >
-            <app-privacy-selector
-              [ngClass]="{ selector: !platform.columns12 }"
-              formControlName="visibility"
-            ></app-privacy-selector>
-            <button
-              id="delete-button"
-              (click)="deleteOtherName(otherName.putCode)"
-              mat-icon-button
+            <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+              <img
+                class="icon-drag"
+                cdkDragHandle
+                src="./assets/vectors/draggable.svg"
+              />
+              <mat-form-field appearance="outline" class="mat-form-field-min">
+                <input
+                  id="alternative-names-input"
+                  #nameInput
+                  matInput
+                  formControlName="otherName"
+                  placeholder="{{ ngOrcidAddOtherName }}"
+                />
+                <mat-hint
+                  class="mat-caption"
+                  *ngIf="otherName.putCode.indexOf('new') < 0"
+                >
+                  <app-source-hit
+                    [createdDate]="otherName.createdDate"
+                    [source]="otherName.sourceName || otherName.source"
+                    [assertion]="
+                      otherName.assertionOriginName ||
+                      otherName.assertionOriginOrcid
+                    "
+                  ></app-source-hit>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <div
+              class="col no-wrap actions-wrapper no-gutters"
+              [ngClass]="{ privacy: !platform.columns12 }"
             >
-              <mat-icon
-                class="material-icons-outlined extra-large-material-icon"
+              <app-privacy-selector
+                [ngClass]="{ selector: !platform.columns12 }"
+                formControlName="visibility"
+              ></app-privacy-selector>
+              <button
+                id="delete-button"
+                (click)="deleteOtherName(otherName.putCode)"
+                mat-icon-button
+              >
+                <mat-icon
+                  class="material-icons-outlined extra-large-material-icon"
                 >delete
-              </mat-icon>
-            </button>
+                </mat-icon>
+              </button>
+            </div>
           </div>
-          <hr *ngIf="isMobile" />
+          <hr class="dashed-line"/>
         </div>
       </div>
     </ng-container>
