@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion } from '../../../types'
 import {
@@ -22,6 +22,7 @@ import { RecordPeerReviewService } from '../../../core/record-peer-review/record
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { UserService } from 'src/app/core'
 
 @Component({
   selector: 'app-panel',
@@ -111,6 +112,7 @@ export class PanelComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
+    private _userService: UserService,
     private _affiliationService: RecordAffiliationService,
     private _fundingService: RecordFundingsService,
     private _peerReviewService: RecordPeerReviewService,
@@ -273,5 +275,10 @@ export class PanelComponent implements OnInit {
           .subscribe()
         break
     }
+  }
+
+  @HostListener('window:visibilitychange')
+  onVisibilityChange() {
+    this._userService.resetTimer(document.hidden)
   }
 }
