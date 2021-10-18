@@ -95,7 +95,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
         if (!this.publicOrcid) {
-          this.setMyORcidOrcidIdQueryParameter()
+          this.setMyOrcidIdQueryParameter()
         }
 
         if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
