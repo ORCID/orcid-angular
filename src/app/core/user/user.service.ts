@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import {
   BehaviorSubject,
   combineLatest,
-  interval,
   merge,
   Observable,
   of,
@@ -76,8 +75,10 @@ export class UserService {
   sessionInitialized = false
   keepRefreshingUserSession = true
   private hiddenTab = false
-  private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(60 * 1000);
-  private reset$ = new Subject();
+  private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(
+    60 * 1000
+  )
+  private reset$ = new Subject()
 
   _recheck = new Subject<{
     forceSessionUpdate: boolean
@@ -124,59 +125,56 @@ export class UserService {
     } else {
       this.sessionInitialized = true
       // trigger every 60 seconds or on _recheck subject event
-      this.interval$
-        .subscribe(duration => {
-          merge(
-            timer(0, duration).pipe(
-              takeUntil(this.reset$),
-              map((timerUpdate) => {
-                    return { timerUpdate }
-              })
+      this.interval$.subscribe((duration) => {
+        merge(
+          timer(0, duration).pipe(
+            takeUntil(this.reset$),
+            map((timerUpdate) => {
+              return { timerUpdate }
+            })
+          ),
+          this._recheck
+        )
+          .pipe(
+            // Check user status only when needed
+            filter((value) => this.keepRefreshingUserSession),
+            // Check for updates on userStatus.json
+            switchMap((checkTrigger) =>
+              this.getUserStatus().pipe(
+                map((loggedIn) => {
+                  return { loggedIn, checkTrigger }
+                })
+              )
             ),
-            this._recheck
+            // Filter followup calls if the user status has no change
+            //
+            // Also turns on the flag loggingStateComesFromTheServer
+            // indicating that the current logging state is taken from the server,
+            // and not the initial assumption. (more on this on the following pipe)
+            filter((result: UserSessionUpdateParameters) => {
+              this.loggingStateComesFromTheServer = true
+              return this.userStatusHasChange(result)
+            }),
+            // At the very beginning assumes the user is logged in,
+            // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
+            startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
+            switchMap((updateParameters) =>
+              this.handleUserDataUpdate(updateParameters)
+            ),
+            map((data) => this.computesUpdatedUserData(data)),
+            // Debugger for the user session on development time
+            tap((session) =>
+              environment.debugger ? console.debug(session) : null
+            ),
+            tap((session) => {
+              this.$userSessionSubject.next(session)
+            })
           )
-            .pipe(
-              // Check user status only when needed
-              filter((value) => this.keepRefreshingUserSession),
-              // Check for updates on userStatus.json
-              switchMap((checkTrigger) =>
-                this.getUserStatus().pipe(
-                  map((loggedIn) => {
-                    return { loggedIn, checkTrigger }
-                  })
-                )
-              ),
-              // Filter followup calls if the user status has no change
-              //
-              // Also turns on the flag loggingStateComesFromTheServer
-              // indicating that the current logging state is taken from the server,
-              // and not the initial assumption. (more on this on the following pipe)
-              filter((result: UserSessionUpdateParameters) => {
-                this.loggingStateComesFromTheServer = true
-                return this.userStatusHasChange(result)
-              }),
-              // At the very beginning assumes the user is logged in,
-              // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
-              startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
-              switchMap((updateParameters) =>
-                this.handleUserDataUpdate(updateParameters)
-              ),
-              map((data) => this.computesUpdatedUserData(data)),
-              // Debugger for the user session on development time
-              tap((session) =>
-                environment.debugger ? console.debug(session) : null
-              ),
-              tap((session) => {
-                this.$userSessionSubject.next(session)
-              })
-            )
-            .subscribe()
-        })
+          .subscribe()
+      })
       return this.$userSessionSubject
     }
   }
-
-  
 
   private userStatusHasChange(updateParameters: UserSessionUpdateParameters) {
     if (
@@ -474,18 +472,15 @@ export class UserService {
   }
 
   resetTimer(hiddenTab: Boolean) {
-    //only reset the timer when the visibility is changed
-    if(hiddenTab && !this.hiddenTab) {
+    // only reset the timer when the visibility is changed
+    if (hiddenTab && !this.hiddenTab) {
       this.hiddenTab = hiddenTab.valueOf()
       this.reset$.next()
       this.interval$.next(5 * 60 * 1000)
-      
-    }
-    else if (!hiddenTab && this.hiddenTab){
+    } else if (!hiddenTab && this.hiddenTab) {
       this.hiddenTab = hiddenTab.valueOf()
       this.reset$.next()
       this.interval$.next(60 * 1000)
     }
   }
-
 }
