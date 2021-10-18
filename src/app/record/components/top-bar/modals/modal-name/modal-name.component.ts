@@ -63,7 +63,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   addedOtherNameCount = 0
   loadingNames = true
   nameMaxLength = 99
-  otherNameMaxLength = 244
+  otherNameMaxLength = 254
 
   ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
   ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
