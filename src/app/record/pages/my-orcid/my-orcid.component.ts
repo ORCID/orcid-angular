@@ -105,7 +105,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       })
   }
 
-  private setMyORcidOrcidIdQueryParameter() {
+  private setMyOrcidIdQueryParameter() {
     if (this.userInfo?.EFFECTIVE_USER_ORCID && !this.initMyOrcidParameter) {
       this.initMyOrcidParameter = true
 
