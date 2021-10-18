@@ -45,15 +45,15 @@ export class RecordResearchResourceService {
     this._http
       .get<ResearchResourcesEndpoint>(
         environment.API_WEB +
-        url +
-        '?offset=' +
-        options.offset +
-        '&sort=' +
-        (options.sort != null ? options.sort : 'date') +
-        '&sortAsc=' +
-        (options.sortAsc != null ? options.sortAsc : true) +
-        '&pageSize=' +
-        options.pageSize,
+          url +
+          '?offset=' +
+          options.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : true) +
+          '&pageSize=' +
+          options.pageSize
       )
       .pipe(
         retry(3),
@@ -69,7 +69,8 @@ export class RecordResearchResourceService {
         tap((data) => {
           this.$researchResourcesSubject.next(data)
         })
-      ).subscribe()
+      )
+      .subscribe()
     return this.$researchResourcesSubject.asObservable()
   }
 

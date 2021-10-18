@@ -66,35 +66,35 @@ export class RecordWorksService {
     }
 
     this._http
-        .get<WorksEndpoint>(
-          environment.API_WEB +
-            url +
-            '?offset=' +
-            options.offset +
-            '&sort=' +
-            (options.sort != null ? options.sort : 'date') +
-            '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : false) +
-            `&pageSize=` +
-            options.pageSize
-        )
+      .get<WorksEndpoint>(
+        environment.API_WEB +
+          url +
+          '?offset=' +
+          options.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : false) +
+          `&pageSize=` +
+          options.pageSize
+      )
 
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          catchError(() => of({ groups: [] } as WorksEndpoint)),
-          map((data) => {
-            data.pageSize = options.pageSize
-            data.pageIndex = options.offset
-              ? Math.floor(options.offset / options.pageSize)
-              : 0
-            return data
-          }),
-          tap((data) => {
-            this.lastEmittedValue = data
-            this.workSubject.next(data)
-          })
-        )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ groups: [] } as WorksEndpoint)),
+        map((data) => {
+          data.pageSize = options.pageSize
+          data.pageIndex = options.offset
+            ? Math.floor(options.offset / options.pageSize)
+            : 0
+          return data
+        }),
+        tap((data) => {
+          this.lastEmittedValue = data
+          this.workSubject.next(data)
+        })
+      )
     return this.workSubject.asObservable()
   }
 
