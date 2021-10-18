@@ -119,7 +119,7 @@
     margin: 0;
     padding-bottom: 6px;
   }
-  .mat-form-field-subscript-wrapper {
+  ::ng-deep .mat-form-field-subscript-wrapper {
     top: 0;
     position: relative;
     margin-top: 0;
