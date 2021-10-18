@@ -12,7 +12,7 @@ import { RecordEmailsService } from '../../../core/record-emails/record-emails.s
     './top-bar-verification-email.component.scss',
     './top-bar-verification-email.component.scss-theme.scss',
   ],
-  preserveWhitespaces: true,
+  preserveWhitespaces: true
 })
 export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
