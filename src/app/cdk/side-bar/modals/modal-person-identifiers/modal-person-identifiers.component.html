@@ -52,7 +52,7 @@
       <div class="row">
         <h3
           class="col no-gutters orc-font-body"
-          i18n="@@side-bar.myPersonIdentifiers"
+          i18n="@@side-bar.myOtherIdentifiers"
         >
           My other identifiers
         </h3>
@@ -85,38 +85,28 @@
                 src="./assets/vectors/draggable.svg"
                 aria-label="drag handle"
               />
-              <div class="row">
-                <mat-form-field
-                  appearance="outline"
-                  class="mat-form-field-min line"
+              <div class="person-identifier">
+                <a
+                  style="word-break: break-all"
+                  class="underline"
+                  [href]="personIdentifier.url"
+                  target="_blank"
+                  rel="me nofollow noopener noreferrer"
+                  >{{ personIdentifier.commonName }}:
+                  {{ personIdentifier.reference }}</a
                 >
-                  <input
-                    [hidden]="true"
-                    id="identifier-input"
-                    matInput
-                    formControlName="identifier"
-                  />
-                  <a
-                    class="underline line"
-                    [href]="personIdentifier.url"
-                    target="_blank"
-                    rel="me nofollow noopener noreferrer"
-                    >{{ personIdentifier.commonName }}:
-                    {{ personIdentifier.reference }}</a
-                  >
-                  <mat-hint class="mat-caption">
-                    <app-source-hit
-                      [createdDate]="personIdentifier.createdDate"
-                      [source]="
-                        personIdentifier.sourceName || personIdentifier.source
-                      "
-                      [assertion]="
-                        personIdentifier.assertionOriginName ||
-                        personIdentifier.assertionOriginOrcid
-                      "
-                    ></app-source-hit>
-                  </mat-hint>
-                </mat-form-field>
+                <mat-hint class="mat-caption">
+                  <app-source-hit
+                    [createdDate]="personIdentifier.createdDate"
+                    [source]="
+                      personIdentifier.sourceName || personIdentifier.source
+                    "
+                    [assertion]="
+                      personIdentifier.assertionOriginName ||
+                      personIdentifier.assertionOriginOrcid
+                    "
+                  ></app-source-hit>
+                </mat-hint>
               </div>
             </div>
             <div
