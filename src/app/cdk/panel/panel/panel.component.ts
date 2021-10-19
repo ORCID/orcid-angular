@@ -22,7 +22,7 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { Funding } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormGroup } from '@angular/forms'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
@@ -39,6 +39,9 @@ import { WINDOW } from 'src/app/cdk/window'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
+  @Input() isPreferred = false
+  @Input() stackSiblings: any[]
+
   @Input() stackedHeader = false
   @Input() expandButtonsPosition: 'right' | 'left' = null
   @Input() editModalComponent: ComponentType<any>
@@ -71,6 +74,7 @@ export class PanelComponent implements OnInit {
   @Input() userRecord: UserRecord
   @Input() putCode: any
   @Input() visibility: VisibilityStrings
+
   @Input() hasNestedPanels: false
   @Input() customControls = false
   @Input() openState = true
@@ -110,7 +114,6 @@ export class PanelComponent implements OnInit {
   @Input() names = false
   selected: boolean
 
-  formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
   tooltipLabelOpenSources = $localize`:@@shared.openSourceToEdit:Open sources to edit you own version`
@@ -143,12 +146,6 @@ export class PanelComponent implements OnInit {
             peerReviewDuplicateGroup.peerReviews[0].visibility.visibility
         }
       )
-    }
-
-    if (this.visibility) {
-      this.formVisibility = new FormGroup({
-        visibility: new FormControl(this.visibility),
-      })
     }
   }
 
@@ -236,7 +233,7 @@ export class PanelComponent implements OnInit {
     this.openStateChange.next(this.openState)
   }
 
-  updateVisibility() {
+  updateVisibility(visibility: VisibilityStrings) {
     switch (this.type) {
       case 'employment':
       case 'education':
@@ -247,40 +244,55 @@ export class PanelComponent implements OnInit {
       case 'service':
         this._affiliationService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'funding':
         this._fundingService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'works':
         this._worksService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'research-resources':
         this._researchResourcesService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value) + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'peer-review':
         this._peerReviewService
           .updateVisibility(
-            this.putCode.join(),
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break

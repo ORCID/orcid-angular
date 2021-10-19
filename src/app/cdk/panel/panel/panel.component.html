@@ -44,10 +44,12 @@
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container *ngIf="visibility && !isPublicRecord">
-      <app-panel-privacy
-        class="panel-privacy"
-        [visibility]="visibility"
-      ></app-panel-privacy>
+      <app-privacy-selector
+        [whiteBackground]="true"
+        *ngIf="isPreferred"
+        (ngModelChange)="updateVisibility($event)"
+        [ngModel]="visibility"
+      ></app-privacy-selector>
     </ng-container>
 
     <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->

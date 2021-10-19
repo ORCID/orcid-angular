@@ -7,8 +7,11 @@
   "
 >
   <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
+
   <app-panel
     [elements]="affiliation"
+    [stackSiblings]="affiliationStack.affiliations"
+    [isPreferred]="isPreferred(affiliation)"
     [editModalComponent]="modalAffiliationsComponent"
     [type]="type"
     [ngStyle]="{ 'z-index': affiliationStack.affiliations.length - i }"

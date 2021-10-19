@@ -9,7 +9,8 @@
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
 
   <app-panel
-    [elements]="funding"
+    [stackSiblings]="fundingStack.fundings"
+    [isPreferred]="isPreferred(funding)"
     [editModalComponent]="modalFundingComponent"
     [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
     [ngClass]="{ last: last }"
