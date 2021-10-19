@@ -17,8 +17,7 @@ mat-form-field {
 hr {
   height: 2px;
   border: 0;
-  margin: 0;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
 }
 
 .title {
@@ -46,8 +45,6 @@ mat-radio-button {
 }
 
 .date-container {
-  display: flex;
-  flex-direction: row;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -122,4 +119,12 @@ mat-radio-group {
 .externalIdBox {
   padding-bottom: 16px;
   margin-bottom: 16px;
+}
+
+.language {
+  padding-bottom: 1.475em;
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
 }
