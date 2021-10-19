@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import {
   BehaviorSubject,
   combineLatest,
@@ -75,8 +75,10 @@ export class UserService {
   sessionInitialized = false
   keepRefreshingUserSession = true
   private hiddenTab = false
+  private ONE_MINUTE = 60 * 1000
+  private FIVE_MINUTES = 5 *60 * 1000
   private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(
-    60 * 1000
+    this.ONE_MINUTE
   )
   private reset$ = new Subject()
 
@@ -124,7 +126,8 @@ export class UserService {
       return this.$userSessionSubject
     } else {
       this.sessionInitialized = true
-      // trigger every 60 seconds or on _recheck subject event
+      // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or 
+      //on _recheck subject event 
       this.interval$.subscribe((duration) => {
         merge(
           timer(0, duration).pipe(
@@ -471,16 +474,16 @@ export class UserService {
       )
   }
 
-  resetTimer(hiddenTab: Boolean) {
+  setTimerAsHiddenState(hiddenTab: boolean) {
     // only reset the timer when the visibility is changed
     if (hiddenTab && !this.hiddenTab) {
-      this.hiddenTab = hiddenTab.valueOf()
+      this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(5 * 60 * 1000)
+      this.interval$.next(this.FIVE_MINUTES)
     } else if (!hiddenTab && this.hiddenTab) {
-      this.hiddenTab = hiddenTab.valueOf()
+      this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(60 * 1000)
+      this.interval$.next(this.ONE_MINUTE)
     }
   }
 }

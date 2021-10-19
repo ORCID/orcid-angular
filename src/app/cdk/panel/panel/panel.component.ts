@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   HostListener,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -30,6 +31,7 @@ import { RecordResearchResourceService } from '../../../core/record-research-res
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserService } from 'src/app/core'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-panel',
@@ -125,7 +127,8 @@ export class PanelComponent implements OnInit {
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
     private _worksService: RecordWorksService,
-    private _verificationEmailModalService: VerificationEmailModalService
+    private _verificationEmailModalService: VerificationEmailModalService,
+    @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {
@@ -286,6 +289,6 @@ export class PanelComponent implements OnInit {
 
   @HostListener('window:visibilitychange')
   onVisibilityChange() {
-    this._userService.resetTimer(document.hidden)
+    this._userService.setTimerAsHiddenState(this._window.document.hidden)
   }
 }
