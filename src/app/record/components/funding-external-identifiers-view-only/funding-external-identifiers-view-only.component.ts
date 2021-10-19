@@ -18,7 +18,7 @@ export class FundingExternalIdentifiersViewOnlyComponent implements OnInit {
     grantUrl: string
     fundingRelationship: string
   }
-  
+
   constructor() {}
 
   ngOnInit(): void {}
