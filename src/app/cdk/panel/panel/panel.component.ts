@@ -31,6 +31,8 @@ import { ResearchResource } from 'src/app/types/record-research-resources.endpoi
 })
 export class PanelComponent implements OnInit {
   @Input() isPreferred = false
+  @Input() stackSiblings: any[]
+
   @Input() stackedHeader = false
   @Input() expandButtonsPosition: 'right' | 'left' = null
   @Input() editModalComponent: ComponentType<any>
@@ -43,7 +45,6 @@ export class PanelComponent implements OnInit {
     | PeerReview
     | Work
     | any
-  @Input() stackSiblings: any[]
   @Input() type:
     | 'top-bar'
     | 'side-bar'

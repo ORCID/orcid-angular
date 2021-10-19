@@ -45,6 +45,7 @@
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container *ngIf="visibility && !isPublicRecord">
       <app-privacy-selector
+        [whiteBackground]="true"
         *ngIf="isPreferred"
         (ngModelChange)="updateVisibility($event)"
         [ngModel]="visibility"

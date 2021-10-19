@@ -8,6 +8,8 @@
 >
   <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
   <app-panel
+    [isPreferred]="isPreferred(work)"
+    [stackSiblings]="workStack.works"
     [userRecord]="userRecord"
     [elements]="work"
     [ngStyle]="{ 'z-index': workStack.works.length - i }"

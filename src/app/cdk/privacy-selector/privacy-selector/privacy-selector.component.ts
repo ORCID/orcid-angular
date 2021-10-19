@@ -26,6 +26,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
   private onChange: (value: string) => void
   private onTouched: (value: string) => void
+  @Input() whiteBackground = false
 
   _privacy: VisibilityStrings
 

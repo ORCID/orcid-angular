@@ -10,6 +10,9 @@
   .panel {
     background-color: map-get($background, light-grey);
   }
+  .panel.white-background {
+    background-color: mat-color($foreground, text-light-high);
+  }
   ::ng-deep .no-selected svg > g,
   ::ng-deep .no-selected svg > path {
     fill: map-get($background, ui-background);
