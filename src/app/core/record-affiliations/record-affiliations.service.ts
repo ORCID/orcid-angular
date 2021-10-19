@@ -52,10 +52,6 @@ export class RecordAffiliationService {
       return this.$affiliations
     }
 
-    console.log(options)
-
-    console.log('LOAD AFFILIATIONS')
-
     this._$loading.next(true)
     this.getGroupAndSortAffiliations(options)
       .pipe(
