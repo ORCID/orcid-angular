@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import {
   BehaviorSubject,
   combineLatest,
@@ -76,7 +76,7 @@ export class UserService {
   keepRefreshingUserSession = true
   private hiddenTab = false
   private ONE_MINUTE = 60 * 1000
-  private FIVE_MINUTES = 5 *60 * 1000
+  private FIVE_MINUTES = 5 * 60 * 1000
   private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(
     this.ONE_MINUTE
   )
@@ -126,8 +126,8 @@ export class UserService {
       return this.$userSessionSubject
     } else {
       this.sessionInitialized = true
-      // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or 
-      //on _recheck subject event 
+      // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or
+      // on _recheck subject event
       this.interval$.subscribe((duration) => {
         merge(
           timer(0, duration).pipe(
