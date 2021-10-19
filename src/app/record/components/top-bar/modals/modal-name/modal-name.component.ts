@@ -63,6 +63,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   addedOtherNameCount = 0
   loadingNames = true
   nameMaxLength = 99
+  otherNameMaxLength = 254
 
   ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
   ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
@@ -129,10 +130,13 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
     otherNames.forEach((otherName) => {
       group[otherName.putCode] = new FormGroup({
-        otherName: new FormControl({
-          value: otherName.content,
-          disabled: otherName.source !== this.id,
-        }),
+        otherName: new FormControl(
+          {
+            value: otherName.content,
+            disabled: otherName.source !== this.id,
+          },
+          [Validators.maxLength(this.otherNameMaxLength)]
+        ),
         visibility: new FormControl(otherName.visibility.visibility, {}),
       })
     })
@@ -259,8 +263,10 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.namesForm.addControl(
       'new-' + this.addedOtherNameCount,
       new FormGroup({
-        otherName: new FormControl(),
-        visibility: new FormControl(this.otherNamesDefaultVisibility, {}),
+        otherName: new FormControl('', [
+          Validators.maxLength(this.otherNameMaxLength),
+        ]),
+        visibility: new FormControl(this.otherNamesDefaultVisibility),
       })
     )
     this.otherNames.push({
