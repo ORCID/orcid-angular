@@ -22,6 +22,7 @@ import { RecordPeerReviewService } from '../../../core/record-peer-review/record
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { ResearchResource } from 'src/app/types/record-research-resources.endpoint'
 
 @Component({
   selector: 'app-panel',
@@ -29,6 +30,7 @@ import { VerificationEmailModalService } from '../../../core/verification-email-
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
+  @Input() isPreferred = false
   @Input() stackedHeader = false
   @Input() expandButtonsPosition: 'right' | 'left' = null
   @Input() editModalComponent: ComponentType<any>
@@ -41,6 +43,7 @@ export class PanelComponent implements OnInit {
     | PeerReview
     | Work
     | any
+  @Input() stackSiblings: any[]
   @Input() type:
     | 'top-bar'
     | 'side-bar'
@@ -61,6 +64,7 @@ export class PanelComponent implements OnInit {
   @Input() userRecord: UserRecord
   @Input() putCode: any
   @Input() visibility: VisibilityStrings
+
   @Input() hasNestedPanels: false
   @Input() customControls = false
   @Input() openState = true
@@ -100,7 +104,6 @@ export class PanelComponent implements OnInit {
   @Input() names = false
   selected: boolean
 
-  formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
   tooltipLabelOpenSources = $localize`:@@shared.openSourceToEdit:Open sources to edit you own version`
@@ -131,12 +134,6 @@ export class PanelComponent implements OnInit {
             peerReviewDuplicateGroup.peerReviews[0].visibility.visibility
         }
       )
-    }
-
-    if (this.visibility) {
-      this.formVisibility = new FormGroup({
-        visibility: new FormControl(this.visibility),
-      })
     }
   }
 
@@ -224,7 +221,7 @@ export class PanelComponent implements OnInit {
     this.openStateChange.next(this.openState)
   }
 
-  updateVisibility() {
+  updateVisibility(visibility: VisibilityStrings) {
     switch (this.type) {
       case 'employment':
       case 'education':
@@ -235,40 +232,55 @@ export class PanelComponent implements OnInit {
       case 'service':
         this._affiliationService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'funding':
         this._fundingService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'works':
         this._worksService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'research-resources':
         this._researchResourcesService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value) + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'peer-review':
         this._peerReviewService
           .updateVisibility(
-            this.putCode.join(),
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
