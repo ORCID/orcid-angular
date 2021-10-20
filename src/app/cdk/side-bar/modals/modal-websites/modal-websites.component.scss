@@ -127,7 +127,12 @@
     margin-top: 0;
   }
   .not-editable-url {
+    display: flex;
+    flex-direction: column;
     padding-bottom: 15px;
+    a {
+      word-break: break-all
+    }
   }
   .not-editable-description {
     padding-top: 15px;
