@@ -198,5 +198,4 @@ export class PeerReviewStackComponent implements OnInit {
   collapse(peerReview: PeerReview) {
     peerReview.showDetails = !peerReview.showDetails
   }
-
 }
