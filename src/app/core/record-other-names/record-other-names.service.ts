@@ -35,7 +35,9 @@ export class RecordOtherNamesService {
         map((value) => value.otherNames),
         map((value) => {
           value.otherNames = flatMap(
-            groupBy(value.otherNames, (item) => item.content.toLowerCase().trim())
+            groupBy(value.otherNames, (item) =>
+              item.content.toLowerCase().trim()
+            )
           )
           return value
         })
