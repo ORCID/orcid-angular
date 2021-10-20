@@ -127,4 +127,9 @@ mat-radio-group {
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 0 !important;
   }
+
+  mat-error {
+    padding: 0 1em;
+    margin-top: 0.2em;
+  }
 }
