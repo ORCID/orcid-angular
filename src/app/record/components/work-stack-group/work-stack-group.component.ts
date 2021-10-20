@@ -77,6 +77,7 @@ export class WorkStackGroupComponent implements OnInit {
       label: 'Search & Link',
       action: ADD_EVENT_ACTION.searchAndLink,
       modal: ModalWorksSearchLinkComponent,
+      allowNotVerifiedEmails: true,
     },
     {
       label: 'Add DOI',

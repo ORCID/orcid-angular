@@ -9,6 +9,7 @@
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
 
   <app-panel
+    [userRecord]="userRecord"
     [stackSiblings]="fundingStack.fundings"
     [isPreferred]="isPreferred(funding)"
     [editModalComponent]="modalFundingComponent"
@@ -38,6 +39,7 @@
     </app-funding>
     <!-- FUNDING SOURCE -->
     <app-panel-source
+      [userRecord]="userRecord"
       [isPreferred]="isPreferred(funding)"
       [sourceName]="funding.sourceName || funding.source"
       [assertionOriginName]="funding.assertionOriginName"
