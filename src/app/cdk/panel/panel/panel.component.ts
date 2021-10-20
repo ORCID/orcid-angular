@@ -236,11 +236,6 @@ export class PanelComponent implements OnInit {
   }
 
   updateVisibility(visibility: VisibilityStrings) {
-    console.log(visibility)
-    console.log(this.type)
-
-    console.log(this.stackSiblings)
-
     switch (this.type) {
       case 'employment':
       case 'education':
