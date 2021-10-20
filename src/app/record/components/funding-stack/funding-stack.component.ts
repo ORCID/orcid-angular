@@ -7,6 +7,7 @@ import { Funding, FundingGroup } from 'src/app/types/record-funding.endpoint'
 import { first } from 'rxjs/operators'
 
 import { ModalFundingComponent } from '../funding-stacks-groups/modals/modal-funding/modal-funding.component'
+import { UserRecord } from 'src/app/types/record.local'
 
 @Component({
   selector: 'app-funding-stack',
@@ -20,6 +21,7 @@ export class FundingStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _fundingStack: FundingGroup
   hasExternalIds: boolean
+  @Input() userRecord: UserRecord
   @Input()
   set fundingStack(value: FundingGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length

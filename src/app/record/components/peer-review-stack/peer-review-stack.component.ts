@@ -28,6 +28,7 @@ export class PeerReviewStackComponent implements OnInit {
   _peerReviewStack: PeerReviewDuplicateGroup
   visibility: VisibilityStrings
   @Input() isPublicRecord: string
+  @Input() userRecord
 
   @Input()
   set peerReviewStack(value: PeerReviewDuplicateGroup) {
