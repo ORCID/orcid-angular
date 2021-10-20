@@ -20,7 +20,10 @@ import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { Funding } from 'src/app/types/record-funding.endpoint'
-import { PeerReview } from '../../../types/record-peer-review.endpoint'
+import {
+  PeerReview,
+  PeerReviewDuplicateGroup,
+} from '../../../types/record-peer-review.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { FormGroup } from '@angular/forms'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
@@ -39,9 +42,8 @@ import { WINDOW } from 'src/app/cdk/window'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
-  @Input() isPreferred = false
+  @Input() showVisibilityControl = false
   @Input() stackSiblings: any[]
-
   @Input() stackedHeader = false
   @Input() expandButtonsPosition: 'right' | 'left' = null
   @Input() editModalComponent: ComponentType<any>
@@ -289,7 +291,7 @@ export class PanelComponent implements OnInit {
         this._peerReviewService
           .updateVisibility(
             this.stackSiblings.reduce(
-              (p, c) => p + (c.putCode as Value).value + `,`,
+              (p, c) => p + (c as PeerReviewDuplicateGroup).id + `,`,
               ''
             ),
             visibility
