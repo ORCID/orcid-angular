@@ -62,7 +62,7 @@ export class RecordWorksService {
     if (options.publicRecordId) {
       url = options.publicRecordId + '/worksPage.json'
     } else {
-      url = 'works/worksPage.json?offset='
+      url = 'works/worksPage.json'
     }
 
     this._http
@@ -78,7 +78,6 @@ export class RecordWorksService {
           `&pageSize=` +
           options.pageSize
       )
-
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -95,6 +94,7 @@ export class RecordWorksService {
           this.workSubject.next(data)
         })
       )
+      .subscribe()
     return this.workSubject.asObservable()
   }
 
