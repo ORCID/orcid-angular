@@ -11,7 +11,7 @@
   <app-panel
     [userRecord]="userRecord"
     [stackSiblings]="fundingStack.fundings"
-    [isPreferred]="isPreferred(funding)"
+    [showVisibilityControl]="isPreferred(funding)"
     [editModalComponent]="modalFundingComponent"
     [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
     [ngClass]="{ last: last }"

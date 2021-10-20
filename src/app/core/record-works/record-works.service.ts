@@ -20,7 +20,6 @@ export class RecordWorksService {
   workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
 
-  $works: ReplaySubject<WorksEndpoint>
   userRecordOptions: UserRecordOptions = {}
 
   constructor(
@@ -59,76 +58,44 @@ export class RecordWorksService {
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
+    let url
     if (options.publicRecordId) {
-      return this._http
-        .get<WorksEndpoint>(
-          environment.API_WEB +
-            options.publicRecordId +
-            '/worksPage.json?offset=' +
-            options.offset +
-            '&sort=' +
-            (options.sort != null ? options.sort : 'date') +
-            '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : false) +
-            `&pageSize=` +
-            options.pageSize
-        )
-
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          catchError(() => of({ groups: [] } as WorksEndpoint)),
-          map((data) => {
-            data.pageSize = options.pageSize
-            data.pageIndex = options.offset
-              ? Math.floor(options.offset / options.pageSize)
-              : 0
-            return data
-          }),
-          tap((data) => {
-            this.lastEmittedValue = data
-            this.workSubject.next(data)
-          }),
-          switchMap((data) => this.workSubject.asObservable())
-        )
+      url = options.publicRecordId + '/worksPage.json'
     } else {
-      if (!this.$works) {
-        this.$works = new ReplaySubject(1)
-      } else if (!options.forceReload) {
-        return this.$works
-      }
-
-      this._http
-        .get<WorksEndpoint>(
-          environment.API_WEB +
-            'works/worksPage.json?offset=' +
-            options.offset +
-            '&sort=' +
-            (options.sort != null ? options.sort : 'date') +
-            '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : false) +
-            `&pageSize=` +
-            options.pageSize
-        )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          map((data) => {
-            data.pageSize = options.pageSize
-            data.pageIndex = options.offset
-              ? Math.floor(options.offset / options.pageSize)
-              : 0
-            return data
-          }),
-          tap((data) => {
-            this.lastEmittedValue = data
-            this.$works.next(data)
-          })
-        )
-        .subscribe()
-
-      return this.$works.asObservable()
+      url = 'works/worksPage.json'
     }
+
+    this._http
+      .get<WorksEndpoint>(
+        environment.API_WEB +
+          url +
+          '?offset=' +
+          options.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : false) +
+          `&pageSize=` +
+          options.pageSize
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ groups: [] } as WorksEndpoint)),
+        map((data) => {
+          data.pageSize = options.pageSize
+          data.pageIndex = options.offset
+            ? Math.floor(options.offset / options.pageSize)
+            : 0
+          return data
+        }),
+        tap((data) => {
+          this.lastEmittedValue = data
+          this.workSubject.next(data)
+        })
+      )
+      .subscribe()
+    return this.workSubject.asObservable()
   }
 
   changeUserRecordContext(

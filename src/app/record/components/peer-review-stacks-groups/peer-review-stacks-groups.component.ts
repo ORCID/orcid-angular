@@ -186,7 +186,5 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
       }
     }
-    this.expandedContent.PEER_REVIEW = expanded
-    this.expandedContentChange.emit(this.expandedContent)
   }
 }

@@ -8,7 +8,7 @@
 >
   <!-- A PANEL COMPONENT FOR EACH WORK ON THE STACK -->
   <app-panel
-    [isPreferred]="isPreferred(work)"
+    [showVisibilityControl]="isPreferred(work)"
     [stackSiblings]="workStack.works"
     [userRecord]="userRecord"
     [elements]="work"

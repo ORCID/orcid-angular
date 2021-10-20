@@ -31,7 +31,6 @@ export class FundingStacksGroupsComponent implements OnInit {
   expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
 
   @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
   userRecord: UserRecord
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -96,10 +95,6 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   trackByFundingGroup(index, item: FundingGroup) {
     return item.activePutCode
-  }
-
-  expandedClicked(expanded: boolean) {
-    this.expanded.emit([{ type: 'fundings', expanded }])
   }
 
   sortEvent(event: SortData) {

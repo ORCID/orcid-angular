@@ -108,7 +108,13 @@
                   *ngIf="website.source && website.source !== id"
                   class="not-editable-url"
                 >
-                  <p>{{ website.url.value }}</p>
+                  <a
+                    class="underline"
+                    [href]="website.url.value"
+                    target="_blank"
+                    rel="me nofollow noopener noreferrer"
+                    >{{ website.url.value }}</a
+                  >
 
                   <mat-error
                     class="mat-form-field-subscript-wrapper"

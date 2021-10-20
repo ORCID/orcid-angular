@@ -26,6 +26,9 @@
       [expandButtonsPosition]="'left'"
       [isPublicRecord]="isPublicRecord"
       (openStateChange)="expandedClicked($event, peerReview)"
+      [showVisibilityControl]="true"
+      [stackSiblings]="peerReview.peerReviewDuplicateGroups"
+      [visibility]="peerReview.visibility"
     >
       <div header>
         <ng-container i18n="@@peerReview.reviewActivity">
