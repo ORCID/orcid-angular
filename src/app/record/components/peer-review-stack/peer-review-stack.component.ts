@@ -51,7 +51,6 @@ export class PeerReviewStackComponent implements OnInit {
   }
 
   @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
   panelDetailsState: {
@@ -198,9 +197,5 @@ export class PeerReviewStackComponent implements OnInit {
 
   collapse(peerReview: PeerReview) {
     peerReview.showDetails = !peerReview.showDetails
-  }
-
-  expandedClicked(expanded: boolean) {
-    this.expanded.emit({ type: 'peer-review', expanded })
   }
 }
