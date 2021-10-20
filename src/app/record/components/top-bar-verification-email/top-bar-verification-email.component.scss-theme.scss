@@ -17,6 +17,8 @@
   }
 
   .email-verified {
+    border-color: mat-color($accent, 400) !important;
+
     mat-icon {
       color: mat-color($accent, 400);
     }
