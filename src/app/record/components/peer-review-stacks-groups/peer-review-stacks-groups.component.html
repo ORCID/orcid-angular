@@ -65,6 +65,7 @@
         <app-panel-element class="nested-panels" [hideVisibility]="false">
           <div nested-panels>
             <app-peer-review-stack
+              [userRecord]="userRecord"
               [isPublicRecord]="isPublicRecord"
               [peerReviewStack]="group"
               *ngFor="

@@ -25,6 +25,7 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
@@ -89,6 +90,7 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
@@ -158,6 +160,7 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
@@ -224,6 +227,7 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;

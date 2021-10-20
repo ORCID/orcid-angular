@@ -9,6 +9,7 @@
   <!-- A PANEL COMPONENT FOR EACH AFFILIATION ON THE STACK -->
 
   <app-panel
+    [userRecord]="userRecord"
     [elements]="affiliation"
     [stackSiblings]="affiliationStack.affiliations"
     [showVisibilityControl]="isPreferred(affiliation)"
@@ -49,6 +50,7 @@
     </app-affiliation>
     <!-- AFFILIATION SOURCE -->
     <app-panel-source
+      [userRecord]="userRecord"
       [isPreferred]="isPreferred(affiliation)"
       [sourceName]="affiliation.sourceName || affiliation.source"
       [assertionOriginName]="affiliation.assertionOriginName"

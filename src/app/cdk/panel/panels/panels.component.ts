@@ -71,7 +71,7 @@ export class PanelsComponent implements OnInit {
   add(type: string, action?: ADD_EVENT_ACTION) {
     const menuOption = this.addMenuOptions.find((x) => x.action === action)
     if (menuOption && menuOption.modal) {
-      this.openModal(menuOption.modal, menuOption.type)
+      this.openModal(menuOption.modal, { ...menuOption, type: menuOption.type })
     } else {
       switch (type) {
         case 'employment':
@@ -81,19 +81,25 @@ export class PanelsComponent implements OnInit {
         case 'distinction':
         case 'membership':
         case 'service':
-          this.openModal(ModalAffiliationsComponent, type)
+          this.openModal(ModalAffiliationsComponent, { type })
           break
         case 'peer-review':
-          this.openModal(ModalPeerReviewsComponent)
+          this.openModal(ModalPeerReviewsComponent, {
+            allowNotVerifiedEmails: true,
+          })
           break
         case 'funding':
           this.openModal(ModalFundingComponent)
           break
         case 'funding-search':
-          this.openModal(ModalFundingSearchLinkComponent)
+          this.openModal(ModalFundingSearchLinkComponent, {
+            allowNotVerifiedEmails: true,
+          })
           break
         case 'works-search':
-          this.openModal(ModalWorksSearchLinkComponent)
+          this.openModal(ModalWorksSearchLinkComponent, {
+            allowNotVerifiedEmails: true,
+          })
           break
         default:
           break
@@ -103,12 +109,19 @@ export class PanelsComponent implements OnInit {
 
   openModal(
     modal: ComponentType<any>,
-    type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
+    options?: {
+      allowNotVerifiedEmails?: boolean
+      type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
+    }
   ) {
     const primaryEmail = this.userRecord?.emails?.emails?.find(
       (email) => email.primary
     )
-    if (primaryEmail && !primaryEmail.verified) {
+    if (
+      primaryEmail &&
+      !primaryEmail.verified &&
+      !options?.allowNotVerifiedEmails
+    ) {
       this._verificationEmailModalService.openVerificationEmailModal(
         primaryEmail.value
       )
@@ -123,7 +136,7 @@ export class PanelsComponent implements OnInit {
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
           })
 
-          modalComponent.componentInstance.type = type
+          modalComponent.componentInstance.type = options.type
         })
     }
   }
