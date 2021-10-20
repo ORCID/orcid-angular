@@ -30,7 +30,6 @@ export class PeerReviewStackComponent implements OnInit {
   @Input() isPublicRecord: string
   @Input() userRecord
 
-
   @Input()
   set peerReviewStack(value: PeerReviewDuplicateGroup) {
     this._peerReviewStack = value
