@@ -13,6 +13,7 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
     './top-bar-verification-email-modal.component.scss',
     './top-bar-verification-email-modal.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class TopBarVerificationEmailModalComponent
   implements OnInit, OnDestroy {
