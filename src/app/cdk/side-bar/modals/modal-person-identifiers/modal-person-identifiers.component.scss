@@ -39,6 +39,9 @@
   .person-identifier {
     display: flex;
     flex-direction: column;
+    a {
+      word-break: break-all
+    }
   }
 }
 
