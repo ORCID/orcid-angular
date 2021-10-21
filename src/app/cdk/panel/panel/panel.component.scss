@@ -29,6 +29,10 @@
   flex-direction: row;
   align-items: center;
   word-break: break-word;
+
+  .error {
+    margin-inline-end: 8px;
+  }
 }
 
 .nested-panels {

@@ -28,5 +28,9 @@
     background-color: map-get($foreground, 'text-light-high');
     border-color: mat-color($background, ui-background);
   }
+
+  .error {
+    color: map-get($foreground, 'state-notice-dark');
+  }
 }
 @include panel-theme($orcid-app-theme);

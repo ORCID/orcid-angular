@@ -18,6 +18,7 @@ import {
   UserRecord,
   UserRecordOptions,
 } from 'src/app/types/record.local'
+import { VisibilityStrings } from '../../../types/common.endpoint'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -170,6 +171,22 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       .map((value) => {
         return value.peerReview
       })[0]
+  }
+
+  getVisibility(peerReview: PeerReview): VisibilityStrings {
+    // Validate if there are not different types of visibilities between the Peer Reviews other wise display the error
+    const visibility = peerReview.peerReviewDuplicateGroups[0].peerReviews[0].visibility.visibility
+    peerReview.peerReviewDuplicateGroups.forEach(
+      (peerReviewDuplicateGroup) => {
+        const peerReviews = peerReviewDuplicateGroup.peerReviews
+          .filter(p => p.visibility.visibility !== visibility
+        )
+        if (peerReviews.length > 0) {
+          peerReview.visibilityError = true
+        }
+      })
+
+    return visibility
   }
 
   collapse(peerReview: PeerReview) {

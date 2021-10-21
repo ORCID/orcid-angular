@@ -21,11 +21,9 @@ import { first } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { Funding } from 'src/app/types/record-funding.endpoint'
 import {
-  PeerReview,
-  PeerReviewDuplicateGroup,
+  PeerReview, PeerReviewDuplicateGroup,
 } from '../../../types/record-peer-review.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
-import { FormGroup } from '@angular/forms'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
@@ -76,6 +74,7 @@ export class PanelComponent implements OnInit {
   @Input() userRecord: UserRecord
   @Input() putCode: any
   @Input() visibility: VisibilityStrings
+  @Input() visibilityError: boolean
 
   @Input() hasNestedPanels: false
   @Input() customControls = false
@@ -120,8 +119,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
   tooltipLabelOpenSources = $localize`:@@shared.openSourceToEdit:Open sources to edit you own version`
   tooltipLabelYourOwnVersion = $localize`:@@shared.youCanOnlyEditYour:You can only edit your own version`
-
-  panelForm: FormGroup
+  tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
 
   constructor(
     private _dialog: MatDialog,
@@ -136,20 +134,7 @@ export class PanelComponent implements OnInit {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {
-    if (this.type === 'peer-review' && this.elements) {
-      this.putCode = []
-      this.elements.peerReviewDuplicateGroups.forEach(
-        (peerReviewDuplicateGroup) => {
-          this.putCode.push(
-            peerReviewDuplicateGroup.peerReviews[0].putCode.value
-          )
-          this.visibility =
-            peerReviewDuplicateGroup.peerReviews[0].visibility.visibility
-        }
-      )
-    }
-  }
+  ngOnInit(): void {}
 
   isArrayAndIsNotEmpty(
     obj:
@@ -288,12 +273,21 @@ export class PanelComponent implements OnInit {
           .subscribe()
         break
       case 'peer-review':
+        if (this.elements) {
+          this.putCode = []
+          this.elements.peerReviewDuplicateGroups.forEach(
+            (peerReviewDuplicateGroup) => {
+              peerReviewDuplicateGroup.peerReviews.forEach(
+                (peerReview) => {
+                  this.putCode.push(peerReview.putCode.value
+                  )
+                })
+            }
+          )
+        }
         this._peerReviewService
           .updateVisibility(
-            this.stackSiblings.reduce(
-              (p, c) => p + (c as PeerReviewDuplicateGroup).id + `,`,
-              ''
-            ),
+            this.putCode.join(),
             visibility
           )
           .subscribe()
