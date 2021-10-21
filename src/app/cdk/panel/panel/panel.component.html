@@ -46,6 +46,13 @@
     <ng-container
       *ngIf="visibility && !isPublicRecord && showVisibilityControl"
     >
+      <ng-container *ngIf="visibilityError">
+        <mat-icon
+          class="large-material-icon error"
+          [matTooltip]="tooltipLabelVisibilityError"
+          >info</mat-icon
+        >
+      </ng-container>
       <app-privacy-selector
         [whiteBackground]="true"
         (ngModelChange)="updateVisibility($event)"

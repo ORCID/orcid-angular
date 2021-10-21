@@ -11,6 +11,7 @@ import { RecordFundingsService } from '../../../../core/record-fundings/record-f
 import { RecordResearchResourceService } from '../../../../core/record-research-resource/record-research-resource.service'
 import { RecordPeerReviewService } from '../../../../core/record-peer-review/record-peer-review.service'
 import { Work } from '../../../../types/record-works.endpoint'
+import { SnackbarService } from '../../../../cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-modal-delete-items',
@@ -57,7 +58,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     private _recordFundingsService: RecordFundingsService,
     private _recordWorksService: RecordWorksService,
     private _recordResearchResourceService: RecordResearchResourceService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _recordPeerReviewService: RecordPeerReviewService,
+    private _snackBar: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -117,7 +119,14 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         }
       }
     })
-    this.delete(putCodesDelete.length === 0 ? putCode : putCodesDelete)
+    if (putCode || putCodesDelete.length > 0) {
+      this.delete(putCodesDelete.length === 0 ? putCode : putCodesDelete)
+    } else {
+      this._snackBar.showValidationError(
+        $localize`:@@shared.youHaveNotSelected:You haven’t selected any items to delete.`,
+        $localize`:@@shared.pleaseReview:Please review and fix the issue`
+      )
+    }
   }
 
   delete(putCode) {

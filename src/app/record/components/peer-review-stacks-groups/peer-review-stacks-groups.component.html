@@ -28,7 +28,8 @@
       (openStateChange)="expandedClicked($event, peerReview)"
       [showVisibilityControl]="true"
       [stackSiblings]="peerReview.peerReviewDuplicateGroups"
-      [visibility]="peerReview.visibility"
+      [visibility]="getVisibility(peerReview)"
+      [visibilityError]="peerReview.visibilityError"
     >
       <div header>
         <ng-container i18n="@@peerReview.reviewActivity">
