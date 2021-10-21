@@ -37,13 +37,13 @@ def readProperty(file, key):
 
 def getPropertiesToMove():
     propertiesToMove = Properties()
-    with open("./propertiesToMove.properties", "rb") as f:
+    with open("./properties-mover.properties", "rb") as f:
         propertiesToMove.load(f, "utf-8")
     return propertiesToMove.items()
 
 
 originFile = 'record'
-destinationFile = 'top-bar'
+destinationFile = 'shared'
 languages = [
     'ar', 'cs', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'ru', 'zh-CN',
     'zh-TW', 'xx', 'src', 'lr', 'rl', 'uk', 'ca'
@@ -53,7 +53,7 @@ propertiesToMove = getPropertiesToMove()
 
 
 def buildFilePath(originFile, language):
-    return './' + originFile + '/' + originFile + '.' + language + '.' + 'properties'
+    return './properties/' + originFile + '/' + originFile + '.' + language + '.' + 'properties'
 
 
 for property in propertiesToMove:
@@ -63,9 +63,7 @@ for property in propertiesToMove:
         destinationFilePath = buildFilePath(destinationFile, language)
         movingKey = property[0]
         propertyTuple = readProperty(originFilePath, movingKey)
-        print(propertyTuple)
         if not (propertyTuple is None):
-            print(propertyTuple)
             movingValue = propertyTuple.data
             movingAdaptedKey = destinationFile + '.' + movingKey.replace(
                 '-', '').split('.')[1]
