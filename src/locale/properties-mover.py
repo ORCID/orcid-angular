@@ -65,10 +65,10 @@ for property in propertiesToMove:
         propertyTuple = readProperty(originFilePath, movingKey)
         if not (propertyTuple is None):
             movingValue = propertyTuple.data
-            movingAdaptedKey = destinationFile + '.' + movingKey.replace(
-                '-', '').split('.')[1]
-            print('movingAdaptedKey ', movingAdaptedKey)
+            # movingAdaptedKey = destinationFile + '.' + movingKey.replace(
+            #     '-', '').split('.')[1]
+            print('movingAdaptedKey ', movingKey)
             ## DELETE ORIGIN
             removeProperty(originFilePath, movingKey)
             ## ADD TO DESTINTION
-            addProperty(destinationFilePath, movingAdaptedKey, movingValue)
+            addProperty(destinationFilePath, movingKey, movingValue)

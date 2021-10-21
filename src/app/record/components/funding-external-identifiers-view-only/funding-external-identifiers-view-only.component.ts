@@ -6,9 +6,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
   styleUrls: ['./funding-external-identifiers-view-only.component.scss'],
 })
 export class FundingExternalIdentifiersViewOnlyComponent implements OnInit {
-  grantNumberLabel = $localize`:@@funding.grantNumber:Grant number:`
-  grantUrlLabel = $localize`:@@funding.grantUrl:Grant URL:`
-  fundingRelationshipLabel = $localize`:@@funding.relationshipColon:Relationship:`
+  grantNumberLabel = $localize`:@@funding.grantNumberColon:Grant number:`
+  grantUrlLabel = $localize`:@@funding.grantUrlColon:Grant URL:`
+  fundingRelationshipLabel = $localize`:@@shared.relationshipColon:Relationship:`
 
   @Output() edit = new EventEmitter<void>()
   @Output() delete = new EventEmitter<void>()

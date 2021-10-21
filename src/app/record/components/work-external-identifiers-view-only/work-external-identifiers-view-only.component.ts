@@ -9,7 +9,7 @@ export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
   typeLabel = $localize`:@@record.type:Type:`
   valueLabel = $localize`:@@record.value:Value:`
   urlLabel = $localize`:@@record.identifierUrl:URL:`
-  relationshipLabel = $localize`:@@funding.relationshipColon:Relationship:`
+  relationshipLabel = $localize`:@@shared.relationshipColon:Relationship:`
 
   @Output() edit = new EventEmitter<void>()
   @Output() delete = new EventEmitter<void>()
