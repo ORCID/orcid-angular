@@ -1,7 +1,7 @@
 <app-modal [noSidebar]="true">
   <app-modal-header>
     <mat-icon class="material-icons-outlined info">info</mat-icon>
-    <ng-container i18n="@@record.pleaseVerifyYourPrimary">
+    <ng-container i18n="@@topBar.pleaseVerifyYourPrimary">
       Please verify your primary email address
     </ng-container>
   </app-modal-header>
@@ -12,12 +12,12 @@
     }"
   >
     <div class="row">
-      <p i18n="@@record.youNeedToVerify">
+      <p i18n="@@topBar.youNeedToVerify">
         You need to verify your primary email address in order to access all of
         ORCID’s editing features.
       </p>
       <p>
-        <ng-container i18n="@@record.toVerifyYourEmail">
+        <ng-container i18n="@@topBar.toVerifyYourEmail">
           To verify your email please click the link in the message we have sent
           to:
         </ng-container>
@@ -27,11 +27,11 @@
         </strong>
       </p>
       <p>
-        <strong i18n="@@record.iDontHave">
+        <strong i18n="@@topBar.iDontHave">
           I don’t have the verification email
         </strong>
         <br />
-        <ng-container i18n="@@record.clickTheButton">
+        <ng-container i18n="@@topBar.clickTheButton">
           Click the button below and we will send you a new one.
         </ng-container>
       </p>
@@ -40,7 +40,7 @@
       <button
         mat-raised-button
         color="primary"
-        i18n="@@record.resendVerificationEmail"
+        i18n="@@topBar.resendVerificationEmail"
         (click)="verifyEmail()"
       >
         Resend verification email
@@ -50,16 +50,16 @@
       <p>
         <strong i18n="@@side-bar.needHelp"> Need help?</strong>
         <br />
-        <ng-container i18n="@@record.visitOur"> Visit our</ng-container>
+        <ng-container i18n="@@topBar.visitOur"> Visit our</ng-container>
         <a
           class="underline"
           href="https://support.orcid.org/hc/articles/360006973793"
           rel="noopener noreferrer"
           target="_blank"
-          i18n="@@record.knowledge"
+          i18n="@@topBar.knowledge"
           >knowledgebase</a
         >
-        <ng-container i18n="@@record.baseOrContact"
+        <ng-container i18n="@@topBar.baseOrContact"
           >or contact the support team at</ng-container
         >
         <br />
