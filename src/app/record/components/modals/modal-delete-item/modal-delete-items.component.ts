@@ -123,8 +123,8 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       this.delete(putCodesDelete.length === 0 ? putCode : putCodesDelete)
     } else {
       this._snackBar.showValidationError(
-        $localize`:@@record.youHaveNotSelected:You haven’t selected any items to delete.`,
-        $localize`:@@record.pleaseReview:Please review and fix the issue`
+        $localize`:@@shared.youHaveNotSelected:You haven’t selected any items to delete.`,
+        $localize`:@@shared.pleaseReview:Please review and fix the issue`
       )
     }
   }
