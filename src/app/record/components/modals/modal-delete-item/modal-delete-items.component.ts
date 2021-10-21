@@ -59,7 +59,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
     private _recordWorksService: RecordWorksService,
     private _recordResearchResourceService: RecordResearchResourceService,
     private _recordPeerReviewService: RecordPeerReviewService,
-    private _snackBar: SnackbarService,
+    private _snackBar: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -125,7 +125,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       this._snackBar.showValidationError(
         $localize`:@@record.anyItems:You haven’t selected any items to delete.`,
         $localize`:@@record.pleaseReview:Please review and fix the issue`
-        )
+      )
     }
   }
 

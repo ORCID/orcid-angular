@@ -20,9 +20,7 @@ import { PlatformInfoService } from '../../platform-info'
 import { first } from 'rxjs/operators'
 import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { Funding } from 'src/app/types/record-funding.endpoint'
-import {
-  PeerReview, PeerReviewDuplicateGroup,
-} from '../../../types/record-peer-review.endpoint'
+import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
@@ -277,19 +275,14 @@ export class PanelComponent implements OnInit {
           this.putCode = []
           this.elements.peerReviewDuplicateGroups.forEach(
             (peerReviewDuplicateGroup) => {
-              peerReviewDuplicateGroup.peerReviews.forEach(
-                (peerReview) => {
-                  this.putCode.push(peerReview.putCode.value
-                  )
-                })
+              peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
+                this.putCode.push(peerReview.putCode.value)
+              })
             }
           )
         }
         this._peerReviewService
-          .updateVisibility(
-            this.putCode.join(),
-            visibility
-          )
+          .updateVisibility(this.putCode.join(), visibility)
           .subscribe()
         break
     }
