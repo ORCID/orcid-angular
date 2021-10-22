@@ -142,16 +142,31 @@ source_lang = en
 type = UNICODEPROPERTIES
 
 
-[orcid-angular.src-locale-properties-research-resources-en-properties--transifex]
+[orcid-angular.src-locale-properties-research-resources-research-resources-en-properties--transifex]
 file_filter = src/locale/properties/research-resources/research-resources.<lang>.properties
 minimum_perc = 0
 source_file = src/locale/properties/research-resources/research-resources.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
 
-[orcid-angular.src-locale-properties-research-resources-en-properties--transifex]
-file_filter = src/locale/properties/research-resources/research-resources.<lang>.properties
+
+[orcid-angular.src-locale-properties-funding-funding-en-properties--transifex]
+file_filter = src/locale/properties/funding/funding.<lang>.properties
 minimum_perc = 0
-source_file = src/locale/properties/research-resources/research-resources.en.properties
+source_file = src/locale/properties/funding/funding.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-side-bar-side-bar-en-properties--transifex]
+file_filter = src/locale/properties/side-bar/side-bar.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/side-bar/side-bar.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-works-works-en-properties--transifex]
+file_filter = src/locale/properties/works/works.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/works/works.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
