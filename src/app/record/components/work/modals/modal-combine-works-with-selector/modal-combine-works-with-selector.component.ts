@@ -85,8 +85,6 @@ export class ModalCombineWorksWithSelectorComponent
   }
 
   private getSetOkWorkToCombine() {
-    console.log('____');
-    
     this.selectSetOfWorksToCombine = Object.keys(this.form.value).filter(
       (putCodes) => {
         return this.form.value[putCodes]

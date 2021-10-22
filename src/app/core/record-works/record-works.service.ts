@@ -21,6 +21,8 @@ import { RecordImportWizard } from '../../types/record-peer-review-import.endpoi
 })
 export class RecordWorksService {
   lastEmittedValue: WorksEndpoint = null
+  groupingSuggestionsSubjectInitialized = false
+  groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
   workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
 
@@ -96,6 +98,11 @@ export class RecordWorksService {
         tap((data) => {
           this.lastEmittedValue = data
           this.workSubject.next(data)
+        }),
+        tap(() => {
+          if (!options.publicRecordId) {
+            this.getWorksGroupingSuggestions({ force: true })
+          }
         })
       )
       .subscribe()
@@ -355,15 +362,25 @@ export class RecordWorksService {
     )
   }
 
-  getWorksGroupingSuggestions(): Observable<GroupingSuggestions> {
-    return this._http.get<GroupingSuggestions>(
-      environment.API_WEB + 'works/groupingSuggestions.json',
-      {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+  getWorksGroupingSuggestions(
+    options: { force: boolean } = { force: false }
+  ): Observable<GroupingSuggestions> {
+    console.log('getWorksGroupingSuggestions')
+
+    if (options.force || !this.groupingSuggestionsSubjectInitialized) {
+      this.groupingSuggestionsSubjectInitialized = true
+      this._http
+        .get<GroupingSuggestions>(
+          environment.API_WEB + 'works/groupingSuggestions.json',
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .subscribe((x) => this.groupingSuggestionsSubject.next(x))
+    }
+    return this.groupingSuggestionsSubject.asObservable()
   }
 }
