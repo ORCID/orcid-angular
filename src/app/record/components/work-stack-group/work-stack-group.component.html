@@ -93,13 +93,16 @@
             </mat-menu>
             <button
               mat-raised-button
-              *ngif="showManageSimilarWorks"
+              color="primary"
+              *ngIf="combineSuggestion?.suggestions?.length"
               (click)="openManageSimilarWorksModal()"
+              class="test-align-center"
             >
               Manage similar works
             </button>
           </div>
         </div>
+
         <app-work-stack
           [userRecord]="userRecord"
           [isPublicRecord]="isPublicRecord"

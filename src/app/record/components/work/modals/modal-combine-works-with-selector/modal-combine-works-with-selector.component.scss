@@ -3,6 +3,7 @@
   margin-top: 32px;
   border: solid 2px;
   border-radius: 4px;
+  display: flex;
 
   p {
     margin: 0;
@@ -25,4 +26,19 @@
   mat-icon {
     margin-inline-end: 4px;
   }
+}
+
+.list-works-group {
+  mat-checkbox {
+    padding-inline-end: 16px;
+    padding-top: 16px;
+  }
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.list-works {
+  display: flex;
+  flex-direction: column;
 }

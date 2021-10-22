@@ -1,12 +1,13 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { forkJoin, Subject } from 'rxjs'
+import { forkJoin, Observable, Subject } from 'rxjs'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
-import { takeUntil } from 'rxjs/operators'
+import { map, takeUntil } from 'rxjs/operators'
 import { GroupingSuggestions, Suggestion } from 'src/app/types/works.endpoint'
+import { Form, FormBuilder, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-modal-combine-works-with-selector',
@@ -23,12 +24,14 @@ export class ModalCombineWorksWithSelectorComponent
   isMobile: boolean
   loadingWorks = false
   putCodes: string[] = []
-  works: Work[] = []
   suggestionGroups: number[][]
   suggestions: Suggestion[]
-  $suggestion: any
+  form: FormGroup
+  suggestionsWorks: { works: Work[]; putCodes: string }[]
+  selectSetOfWorksToCombine: string[] = []
 
   constructor(
+    private _fb: FormBuilder,
     public dialogRef: MatDialogRef<ModalComponent>,
     private _platform: PlatformInfoService,
     private _recordWorksService: RecordWorksService,
@@ -48,19 +51,47 @@ export class ModalCombineWorksWithSelectorComponent
       const groupObservableList = group.putCodes.map((putCode) =>
         this._recordWorksService.getWorkInfo(putCode + '')
       )
-      return forkJoin(groupObservableList)
+      return forkJoin(groupObservableList).pipe(
+        map((works) => {
+          return { works, putCodes: group.putCodesAsString }
+        })
+      )
     })
-    this.$suggestion = forkJoin(suggestionObservableList)
+    forkJoin(suggestionObservableList).subscribe((value) => {
+      this.suggestionsWorks = value
+      const formObject = {}
+      value.forEach((suggestionGroup) => {
+        formObject[suggestionGroup.putCodes] = [false]
+      })
+      this.form = this._fb.group(formObject)
+      this.form.valueChanges.subscribe(() => {
+        this.getSetOkWorkToCombine()
+      })
+    })
   }
 
   saveEvent() {
+    this.getSetOkWorkToCombine()
+
+    const putCodesToMerge = this.selectSetOfWorksToCombine.map((putCodes) => {
+      return this._recordWorksService.combinePutCodes(putCodes)
+    })
+
     this.loadingWorks = true
-    if (this.putCodes.length > 0) {
-      this._recordWorksService.combine(this.putCodes).subscribe(() => {
-        this.loadingWorks = false
-        this.closeEvent()
-      })
-    }
+    return forkJoin(putCodesToMerge).subscribe(() => {
+      this.loadingWorks = false
+      this.closeEvent()
+    })
+  }
+
+  private getSetOkWorkToCombine() {
+    console.log('____');
+    
+    this.selectSetOfWorksToCombine = Object.keys(this.form.value).filter(
+      (putCodes) => {
+        return this.form.value[putCodes]
+      }
+    )
   }
 
   closeEvent() {

@@ -264,10 +264,15 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   openManageSimilarWorksModal() {
-    this._dialog.open(ModalCombineWorksWithSelectorComponent, {
-      width: '850px',
-      maxWidth: this.platform.tabletOrHandset ? '99%' : '80vw',
-      data: this.combineSuggestion,
-    })
+    this._dialog
+      .open(ModalCombineWorksWithSelectorComponent, {
+        width: '850px',
+        maxWidth: this.platform.tabletOrHandset ? '99%' : '80vw',
+        data: this.combineSuggestion,
+      })
+      .afterClosed()
+      .subscribe((value) => {
+        this.getGroupingSuggestions()
+      })
   }
 }

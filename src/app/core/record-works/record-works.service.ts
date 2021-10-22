@@ -273,8 +273,12 @@ export class RecordWorksService {
   }
 
   combine(putCodes: string[]): Observable<any> {
+    return this.combinePutCodes(putCodes.join(','))
+  }
+
+  combinePutCodes(putCodes: string): Observable<any> {
     return this._http
-      .post(environment.API_WEB + 'works/group/' + putCodes.join(','), {})
+      .post(environment.API_WEB + 'works/group/' + putCodes, {})
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -352,8 +356,8 @@ export class RecordWorksService {
   }
 
   getWorksGroupingSuggestions(): Observable<GroupingSuggestions> {
-    return this._http.post<GroupingSuggestions>(
-      environment.API_WEB + '/works/groupingSuggestions.json',
+    return this._http.get<GroupingSuggestions>(
+      environment.API_WEB + 'works/groupingSuggestions.json',
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
