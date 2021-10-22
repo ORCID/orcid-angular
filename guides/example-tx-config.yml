@@ -179,7 +179,7 @@ filters:
     source_file: src/locale/properties/works/works.en.properties
     # path expression to translation files, must contain <lang> placeholder
     translation_files_expression: src/locale/properties/works/works.<lang>.properties
-  
+
   - filter_type: file
     # all supported i18n types: https://docs.transifex.com/formats
     file_format: UNICODEPROPERTIES
