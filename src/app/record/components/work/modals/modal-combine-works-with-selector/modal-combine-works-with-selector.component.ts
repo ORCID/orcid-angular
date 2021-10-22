@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { forkJoin, Observable, Subject } from 'rxjs'
+import { forkJoin, Subject } from 'rxjs'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -7,7 +7,7 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { map, takeUntil } from 'rxjs/operators'
 import { GroupingSuggestions, Suggestion } from 'src/app/types/works.endpoint'
-import { Form, FormBuilder, FormGroup } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-modal-combine-works-with-selector',
