@@ -28,7 +28,8 @@
       (openStateChange)="expandedClicked($event, peerReview)"
       [showVisibilityControl]="true"
       [stackSiblings]="peerReview.peerReviewDuplicateGroups"
-      [visibility]="peerReview.visibility"
+      [visibility]="getVisibility(peerReview)"
+      [visibilityError]="peerReview.visibilityError"
     >
       <div header>
         <ng-container i18n="@@peerReview.reviewActivity">
@@ -43,8 +44,9 @@
         <app-panel-element [hideVisibility]="false">
           <div class="description">
             <p>
-              <span class="capitalize">{{ peerReview.type }}</span>
-              <ng-container *ngIf="peerReview.description">,</ng-container>
+              <span class="capitalize">
+                {{ peerReview.type + (peerReview.description ? ',' : '') }}
+              </span>
               {{ peerReview.description }}
             </p>
             <ng-container *ngIf="peerReview.groupType">

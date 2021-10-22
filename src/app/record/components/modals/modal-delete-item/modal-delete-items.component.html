@@ -139,17 +139,19 @@
               <i i18n="@@shared.onBehalfOf">via</i>
             </ng-container>
             {{ item.sourceName || item.source }}
-            <br *ngIf="isMobile" />
-            <strong
-              class="added"
-              i18n="@@shared.added"
-              [ngClass]="{
-                mobile: isMobile
-              }"
-            >
-              Added </strong
-            >:
-            {{ item.createdDate | monthDayYearDateToString }}
+            <ng-container *ngIf="item.createdDate">
+              <br *ngIf="isMobile" />
+              <strong
+                class="added"
+                i18n="@@shared.added"
+                [ngClass]="{
+                  mobile: isMobile
+                }"
+              >
+                Added </strong
+              >:
+              {{ item.createdDate | monthDayYearDateToString }}
+            </ng-container>
           </div>
         </div>
         <mat-divider class="row"></mat-divider>
