@@ -84,22 +84,16 @@ export class PanelsComponent implements OnInit {
           this.openModal(ModalAffiliationsComponent, { type })
           break
         case 'peer-review':
-          this.openModal(ModalPeerReviewsComponent, {
-            allowNotVerifiedEmails: true,
-          })
+          this.openModal(ModalPeerReviewsComponent)
           break
         case 'funding':
           this.openModal(ModalFundingComponent)
           break
         case 'funding-search':
-          this.openModal(ModalFundingSearchLinkComponent, {
-            allowNotVerifiedEmails: true,
-          })
+          this.openModal(ModalFundingSearchLinkComponent)
           break
         case 'works-search':
-          this.openModal(ModalWorksSearchLinkComponent, {
-            allowNotVerifiedEmails: true,
-          })
+          this.openModal(ModalWorksSearchLinkComponent)
           break
         default:
           break
@@ -110,18 +104,13 @@ export class PanelsComponent implements OnInit {
   openModal(
     modal: ComponentType<any>,
     options?: {
-      allowNotVerifiedEmails?: boolean
       type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
     }
   ) {
     const primaryEmail = this.userRecord?.emails?.emails?.find(
       (email) => email.primary
     )
-    if (
-      primaryEmail &&
-      !primaryEmail.verified &&
-      !options?.allowNotVerifiedEmails
-    ) {
+    if (primaryEmail && !primaryEmail.verified) {
       this._verificationEmailModalService.openVerificationEmailModal(
         primaryEmail.value
       )
