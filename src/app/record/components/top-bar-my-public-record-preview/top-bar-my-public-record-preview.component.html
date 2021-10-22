@@ -7,14 +7,14 @@
       <mat-icon class="margin-end">preview</mat-icon>
       <div
         class="margin-end"
-        i18n="@@record.youArePreviewing"
+        i18n="@@topBar.youArePreviewing"
         *ngIf="!isMyRecord"
       >
         You are previewing a public version of this record
       </div>
       <div
         class="margin-end"
-        i18n="@@record.youArePreviewingSomeElse"
+        i18n="@@topBar.youArePreviewingSomeElse"
         *ngIf="isMyRecord"
       >
         You are previewing the public version of your record
@@ -25,7 +25,7 @@
         alt="orcid logo"
       />
       <strong class="margin-end">{{ effectiveRecord }}</strong>
-      <a class="margin-end" href="/my-orcid" i18n="@@record.editThisRecord"
+      <a class="margin-end" href="/my-orcid" i18n="@@topBar.editThisRecord"
         >Edit this record</a
       >
     </div>
@@ -49,7 +49,7 @@
       <mat-icon class="margin-end">preview</mat-icon>
       <div
         class="margin-end"
-        i18n="@@record.youAreManaging"
+        i18n="@@topBar.youAreManaging"
         *ngIf="!isMyRecord"
       >
         You are managing this ORCID record as a trusted individual
@@ -57,7 +57,7 @@
 
       <div
         class="margin-end"
-        i18n="@@record.youAreManagingSomeElse"
+        i18n="@@topBar.youAreManagingSomeElse"
         *ngIf="isMyRecord"
       >
         You are managing your ORCID record

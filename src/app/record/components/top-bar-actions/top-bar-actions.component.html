@@ -4,10 +4,10 @@
     *ngIf="isPublicRecord && !userStatus?.loggedIn && !onlyShowPrintButton"
   >
     <mat-icon class="large-material-icon">account_circle</mat-icon>
-    <p i18n="@@record.isThisYou">Is this you?</p>
+    <p i18n="@@topBar.isThisYou">Is this you?</p>
     <a
       class="underline"
-      i18n="@@record.signInToStart"
+      i18n="@@topBar.signInToStart"
       [routerLink]="['/signin']"
       >Sign in to start editing</a
     >
@@ -19,7 +19,7 @@
       (click)="printRecord()"
     >
       <mat-icon fontSet="material-icons-outlined" class="icon"> print</mat-icon>
-      <ng-container i18n="@@record.printableVersion">
+      <ng-container i18n="@@topBar.printableVersion">
         Printable version
       </ng-container>
     </button>

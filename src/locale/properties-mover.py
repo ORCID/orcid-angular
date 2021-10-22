@@ -2,15 +2,17 @@ from jproperties import Properties
 
 
 def addProperty(file, key, value):
-    with open(file, "r+b") as f:
-        p = Properties(process_escapes_in_values=False)
-        p.load(f, "utf-8")
-        p[key] = value
-        f.seek(0)
-        f.truncate(0)
-        p.store(f, encoding="utf-8")
-        f.close()
-
+    try:
+        with open(file, "r+b") as f:
+            p = Properties(process_escapes_in_values=False)
+            p.load(f, "utf-8")
+            p[key] = value
+            f.seek(0)
+            f.truncate(0)
+            p.store(f, encoding="utf-8")
+            f.close()
+    except:
+        pass
 
 def removeProperty(file, key):
     with open(file, "r+b") as f:
@@ -43,7 +45,9 @@ def getPropertiesToMove():
 
 
 originFile = 'record'
-destinationFile = 'shared'
+destinationFile = 'top-bar'
+destinationPrefix = 'topBar'
+
 languages = [
     'ar', 'cs', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'ru', 'zh-CN',
     'zh-TW', 'xx', 'src', 'lr', 'rl', 'uk', 'ca'
@@ -71,4 +75,10 @@ for property in propertiesToMove:
             ## DELETE ORIGIN
             removeProperty(originFilePath, movingKey)
             ## ADD TO DESTINTION
-            addProperty(destinationFilePath, movingKey, movingValue)
+            existProperty = readProperty(
+                destinationFilePath,
+                destinationPrefix + '.' + movingKey.split('.')[1])
+            if (existProperty):
+                addProperty(destinationFilePath, movingKey + '**', movingValue)
+            else:
+                addProperty(destinationFilePath, movingKey, movingValue)
