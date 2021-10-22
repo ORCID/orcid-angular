@@ -6,9 +6,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
   styleUrls: ['./work-external-identifiers-view-only.component.scss'],
 })
 export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
-  typeLabel = $localize`:@@record.type:Type:`
-  valueLabel = $localize`:@@record.value:Value:`
-  urlLabel = $localize`:@@record.identifierUrl:URL:`
+  typeLabel = $localize`:@@works.typeColon:Type:`
+  valueLabel = $localize`:@@works.value:Value:`
+  urlLabel = $localize`:@@works.urlColon:URL:`
   relationshipLabel = $localize`:@@shared.relationshipColon:Relationship:`
 
   @Output() edit = new EventEmitter<void>()

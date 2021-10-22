@@ -1,6 +1,6 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.exportSelectedWorks">
+    <ng-container i18n="@@works.exportSelectedWorks">
       Export selected works
     </ng-container>
   </app-modal-header>
@@ -11,7 +11,7 @@
       (click)="saveEvent()"
       id="export-button"
     >
-      <ng-container i18n="@@record.exportSelectedWorksBibtex">
+      <ng-container i18n="@@works.exportSelectedWorksBibtex">
         Export selected works to BibTeX
       </ng-container>
     </button>
@@ -27,7 +27,7 @@
   </app-modal-footer>
   <div class="row">
     <div class="col orc-font-small-print">
-      <p i18n="@@record.exportSelectedWorksBibtexDescription">
+      <p i18n="@@works.exportSelectedWorksBibtexDescription">
         Export selected works to a BibTeX file. Please note that exporting to
         BibTeX may cause problems for text in some languages.
       </p>
@@ -36,7 +36,7 @@
         rel="noopener noreferrer"
         target="_blank"
         href="https://support.orcid.org/hc/articles/360006971333"
-        i18n="@@record.findOut"
+        i18n="@@works.findOut"
       >
         Find out more on exporting BibTeX files
       </a>
@@ -44,7 +44,7 @@
   </div>
   <div class="row">
     <h3>
-      <ng-container i18n="@@record.selectedWorks">
+      <ng-container i18n="@@works.selectedWorks">
         Selected works to export
       </ng-container>
       ({{ works.length }})

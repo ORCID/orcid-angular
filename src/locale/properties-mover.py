@@ -45,8 +45,8 @@ def getPropertiesToMove():
 
 
 originFile = 'record'
-destinationFile = 'top-bar'
-destinationPrefix = 'topBar'
+destinationFile = 'works'
+destinationPrefix = 'works'
 
 languages = [
     'ar', 'cs', 'en', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'ru', 'zh-CN',

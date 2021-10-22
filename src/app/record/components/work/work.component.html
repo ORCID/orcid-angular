@@ -41,7 +41,7 @@
   <!-- TRANSLATED TITLE -->
   <app-display-attribute *ngIf="work.translatedTitle?.content">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.translatedTitle"
+      <ng-container i18n="@@works.translatedTitle"
         >Translated title</ng-container
       >
     </h3>
@@ -57,7 +57,7 @@
   <!-- LANGUAGE -->
   <app-display-attribute *ngIf="work.languageName?.value">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.language">Language</ng-container>
+      <ng-container i18n="@@works.language">Language</ng-container>
     </h3>
 
     <div>
@@ -68,7 +68,7 @@
   <!-- SUBTITLE -->
   <app-display-attribute *ngIf="work.subtitle?.value">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.subtitle">Subtitle</ng-container>
+      <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
     </h3>
 
     <div>
@@ -100,7 +100,7 @@
 
   <!--  CONTRIBUTORS-->
   <app-display-attribute *ngIf="work?.contributors?.length > 0">
-    <h3 class="orc-font-body-small" i18n="@@record.contributors">
+    <h3 class="orc-font-body-small" i18n="@@works.contributors">
       Contributors
     </h3>
 
@@ -120,7 +120,7 @@
   <!-- CITATION-->
   <app-display-attribute *ngIf="work.citation?.citationType?.value">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.citation">Citation</ng-container>
+      <ng-container i18n="@@works.citation">Citation</ng-container>
       <span *ngIf="work.citation?.citationType?.value"
         >({{ work.citation?.citationType?.value }})</span
       >
@@ -133,7 +133,7 @@
 
   <!--  DESCRIPTION-->
   <app-display-attribute *ngIf="work.shortDescription?.value">
-    <h3 class="orc-font-body-small" i18n="@@record.description">Description</h3>
+    <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
 
     <div [innerText]="work.shortDescription.value"></div>
   </app-display-attribute>
