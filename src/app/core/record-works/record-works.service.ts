@@ -4,7 +4,11 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { GroupingSuggestions, WorkIdType, WorkIdTypeValidation } from 'src/app/types/works.endpoint'
+import {
+  GroupingSuggestions,
+  WorkIdType,
+  WorkIdTypeValidation,
+} from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
