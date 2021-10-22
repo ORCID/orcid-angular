@@ -73,15 +73,19 @@ export class ModalCombineWorksWithSelectorComponent
   saveEvent() {
     this.getSetOkWorkToCombine()
 
-    const putCodesToMerge = this.selectSetOfWorksToCombine.map((putCodes) => {
-      return this._recordWorksService.combinePutCodes(putCodes)
-    })
+    if (this.selectSetOfWorksToCombine.length) {
+      const putCodesToMerge = this.selectSetOfWorksToCombine.map((putCodes) => {
+        return this._recordWorksService.combinePutCodes(putCodes)
+      })
 
-    this.loadingWorks = true
-    return forkJoin(putCodesToMerge).subscribe(() => {
-      this.loadingWorks = false
+      this.loadingWorks = true
+      return forkJoin(putCodesToMerge).subscribe(() => {
+        this.loadingWorks = false
+        this.closeEvent()
+      })
+    } else {
       this.closeEvent()
-    })
+    }
   }
 
   private getSetOkWorkToCombine() {
