@@ -1,6 +1,6 @@
 <app-modal [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.deleteItems"> Delete items</ng-container>
+    <ng-container i18n="@@shared.deleteItems"> Delete items</ng-container>
   </app-modal-header>
   <app-modal-footer>
     <button
@@ -9,7 +9,7 @@
       (click)="saveEvent()"
       id="delete-button"
     >
-      <ng-container i18n="@@record.deleteSelected">
+      <ng-container i18n="@@shared.deleteSelected">
         Delete selected items
       </ng-container>
     </button>
@@ -34,7 +34,7 @@
       <mat-icon>info</mat-icon>
     </div>
     <div class="col l11 m6 s3">
-      <p i18n="@@record.deletingItems">
+      <p i18n="@@shared.deletingItems">
         Deleting items permanently removes them from your ORCID record. Please
         review the items selected for deletion.
       </p>
@@ -42,7 +42,7 @@
   </div>
   <div class="row">
     <h3>
-      <ng-container i18n="@@record.selectedItems">
+      <ng-container i18n="@@shared.selectedItems">
         Selected items to delete
       </ng-container>
       ({{ selectedItems.length }})
@@ -131,7 +131,7 @@
             </mat-checkbox>
           </div>
           <div class="details orc-font-body-small">
-            <strong i18n="@@record.source">Source</strong>:
+            <strong i18n="@@shared.source">Source</strong>:
             <ng-container
               *ngIf="item?.assertionOriginName || item?.assertionOriginOrcid"
             >
@@ -143,7 +143,7 @@
               <br *ngIf="isMobile" />
               <strong
                 class="added"
-                i18n="@@record.added"
+                i18n="@@shared.added"
                 [ngClass]="{
                   mobile: isMobile
                 }"

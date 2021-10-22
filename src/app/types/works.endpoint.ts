@@ -105,7 +105,7 @@ export const WorkTypesLabels = {
     [WorkPublicationTypes.test]: $localize`:@@works.test:Test`,
     [WorkPublicationTypes.translation]: $localize`:@@works.translation:Translation`,
     [WorkPublicationTypes.website]: $localize`:@@works.website:Website`,
-    [WorkPublicationTypes.workingPaper]: $localize`:@@works.working paperAA:Working paper`,
+    [WorkPublicationTypes.workingPaper]: $localize`:@@works.working:Working paper`,
   },
 
   [WorkCategories.intellectual_property]: {

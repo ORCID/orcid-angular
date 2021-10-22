@@ -51,9 +51,9 @@
             </h2>
           </div>
           <div class="orc-font-body-small">
-            <strong i18n="@@record.source">Source</strong>:
+            <strong i18n="@@shared.source">Source</strong>:
             {{ work.sourceName || work.source }}
-            <strong class="added" i18n="@@record.added"> Added </strong>:
+            <strong class="added" i18n="@@shared.added"> Added </strong>:
             {{ work.createdDate | monthDayYearDateToString }}
           </div>
         </div>
@@ -61,7 +61,7 @@
       </ng-container>
       <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
         <mat-icon>error</mat-icon>
-        <ng-container i18n="@@record.noItemsSelected"
+        <ng-container i18n="@@works.noItemsSelected"
           >No items selected.
         </ng-container>
       </div>

@@ -75,8 +75,8 @@ export class SnackbarService {
   }
 
   showValidationError(
-    message: string = $localize`:@@register.pleaseReviewInvalidForm:Please review the form and fix the issues before saving`,
-    title: string = $localize`:@@register.invalidForm:Form validation error`
+    message: string = $localize`:@@shared.pleaseReviewInvalidForm:Please review the form and fix the issues before saving`,
+    title: string = $localize`:@@shared.invalidForm:Form validation error`
   ) {
     const mappedDisplay = {
       contentDirection: this.contentDirection,
