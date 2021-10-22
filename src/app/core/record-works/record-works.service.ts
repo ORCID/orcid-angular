@@ -365,7 +365,6 @@ export class RecordWorksService {
   getWorksGroupingSuggestions(
     options: { force: boolean } = { force: false }
   ): Observable<GroupingSuggestions> {
-    console.log('getWorksGroupingSuggestions')
 
     if (options.force || !this.groupingSuggestionsSubjectInitialized) {
       this.groupingSuggestionsSubjectInitialized = true
