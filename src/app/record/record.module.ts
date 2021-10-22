@@ -76,6 +76,7 @@ import { WarningMessageModule } from '../cdk/warning-message/warning-message.mod
 import { TopBarVerificationEmailComponent } from './components/top-bar-verification-email/top-bar-verification-email.component'
 import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
+import { ModalCombineWorksWithSelectorComponent } from './components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import { VerificationEmailModalService } from '../core/verification-email-modal/
     WorkModalComponent,
     TopBarVerificationEmailComponent,
     TopBarVerificationEmailModalComponent,
+    ModalCombineWorksWithSelectorComponent,
   ],
   imports: [
     CommonModule,

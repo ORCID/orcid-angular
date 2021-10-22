@@ -480,3 +480,14 @@ export interface Work {
   userSource: boolean
   checked: boolean
 }
+
+export interface Suggestion {
+  putCodes: number[]
+  orcid: string
+  putCodesAsString: string
+}
+
+export interface GroupingSuggestions {
+  suggestions: Suggestion[]
+  moreAvailable: boolean
+}

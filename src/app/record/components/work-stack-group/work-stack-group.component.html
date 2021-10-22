@@ -91,6 +91,13 @@
                 <span i18n="@@shared.deleteWorks">Delete works</span>
               </button>
             </mat-menu>
+            <button
+              mat-raised-button
+              *ngif="showManageSimilarWorks"
+              (click)="openManageSimilarWorksModal()"
+            >
+              Manage similar works
+            </button>
           </div>
         </div>
         <app-work-stack

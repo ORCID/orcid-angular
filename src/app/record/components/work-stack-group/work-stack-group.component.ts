@@ -45,6 +45,8 @@ import { WorksVisibilityModalComponent } from '../work/modals/works-visibility-m
 import { ModalWorksSearchLinkComponent } from './modals/work-search-link-modal/modal-works-search-link.component'
 import { WorkExternalIdModalComponent } from './modals/work-external-id-modal/work-external-id-modal.component'
 import { WorkBibtexModalComponent } from './modals/work-bibtex-modal/work-bibtex-modal.component'
+import { ModalCombineWorksWithSelectorComponent } from '../work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
+import { GroupingSuggestions } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-work-stack-group',
@@ -55,6 +57,7 @@ import { WorkBibtexModalComponent } from './modals/work-bibtex-modal/work-bibtex
   ],
 })
 export class WorkStackGroupComponent implements OnInit {
+  showManageSimilarWorks = false
   defaultPageSize = DEFAULT_PAGE_SIZE
   labelAddButton = $localize`:@@shared.addWork:Add Work`
   labelSortButton = $localize`:@@shared.sortWorks:Sort Works`
@@ -115,6 +118,7 @@ export class WorkStackGroupComponent implements OnInit {
 
   @ViewChildren('selectAllCheckbox') selectAllCheckbox: MatCheckbox
   @ViewChildren('appWorkStacks') appWorkStacks: QueryList<WorkStackComponent>
+  combineSuggestion: GroupingSuggestions
 
   constructor(
     private _dialog: MatDialog,
@@ -138,9 +142,16 @@ export class WorkStackGroupComponent implements OnInit {
           this.total.emit(userRecord.works.groups?.length || 0)
         }
       })
+    this.getGroupingSuggestions()
 
     this._platform.get().subscribe((platform) => {
       this.platform = platform
+    })
+  }
+
+  private getGroupingSuggestions() {
+    this._works.getWorksGroupingSuggestions().subscribe((value) => {
+      this.combineSuggestion = value
     })
   }
 
@@ -250,5 +261,13 @@ export class WorkStackGroupComponent implements OnInit {
       })
     })
     return works
+  }
+
+  openManageSimilarWorksModal() {
+    this._dialog.open(ModalCombineWorksWithSelectorComponent, {
+      width: '850px',
+      maxWidth: this.platform.tabletOrHandset ? '99%' : '80vw',
+      data: this.combineSuggestion,
+    })
   }
 }

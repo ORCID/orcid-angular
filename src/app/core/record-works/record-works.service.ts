@@ -4,7 +4,7 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { WorkIdType, WorkIdTypeValidation } from 'src/app/types/works.endpoint'
+import { GroupingSuggestions, WorkIdType, WorkIdTypeValidation } from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -338,6 +338,18 @@ export class RecordWorksService {
     return this._http.post(
       environment.API_WEB + 'works/worksValidate.json',
       JSON.stringify(obj),
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+  }
+
+  getWorksGroupingSuggestions(): Observable<GroupingSuggestions> {
+    return this._http.post<GroupingSuggestions>(
+      environment.API_WEB + '/works/groupingSuggestions.json',
       {
         headers: {
           'Access-Control-Allow-Origin': '*',

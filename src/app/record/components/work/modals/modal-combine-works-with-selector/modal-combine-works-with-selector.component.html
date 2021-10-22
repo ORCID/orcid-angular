@@ -1,0 +1,100 @@
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
+  <app-modal-header>
+    <ng-container i18n="@@works.combineSelectedWorks">
+      Review works to combine
+    </ng-container>
+  </app-modal-header>
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveEvent()"
+      id="combine-button"
+    >
+      <ng-container i18n="@@works.combineSelectedWorks">
+        Combine selected works
+      </ng-container>
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="closeEvent()"
+      i18n="@@shared.cancel"
+      id="cancel-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer>
+  <div class="row">
+    <div class="orc-font-small-print">
+      <p i18n="@@works.selectedWorksGrouped">
+        We found 1 sets of works with similar titles that you may want to
+        combine Combined works will be grouped together and displayed as one
+        item on your record. All versions will still be available, but one will
+        be shown as your preferred version.
+      </p>
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/articles/360006971333"
+        i18n="@@works.learnMoreCombining"
+      >
+        Learn more about combining works
+      </a>
+    </div>
+  </div>
+  <div
+    class="info"
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div class="col">
+      <mat-icon class="large-material-icon">info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3">
+      <strong i18n="@@works.combiningWorks">
+        Combining works cannot be undone!
+      </strong>
+      <p i18n="@@works.checkSelectedWorks">
+        Please check the selected works are correct before combining them.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <h3>
+      <ng-container i18n="@@works.selectedWorksCombine">
+        Selected works to combine
+      </ng-container>
+      ({{ works.length }})
+    </h3>
+    <mat-divider class="row orcid-divider"></mat-divider>
+    <ng-container *ngFor="let workList of this.$suggestion | async">
+      <mat-checkbox> test </mat-checkbox>
+      <ng-container *ngFor="let work of workList">
+        <div class="row work-info">
+          <div class="row">
+            <h2 class="orc-font-body">
+              {{ work.title.value }}
+            </h2>
+          </div>
+          <div class="orc-font-body-small">
+            <strong i18n="@@shared.source">Source</strong>:
+            {{ work.sourceName || work.source }}
+            <strong class="added" i18n="@@shared.added"> Added </strong>:
+            {{ work.createdDate | monthDayYearDateToString }}
+          </div>
+        </div>
+        <mat-divider class="row"></mat-divider>
+      </ng-container>
+    </ng-container>
+    <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@works.noItemsSelected"
+        >No items selected.
+      </ng-container>
+    </div>
+  </div>
+</app-modal>
