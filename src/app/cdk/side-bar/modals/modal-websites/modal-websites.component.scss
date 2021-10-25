@@ -47,6 +47,7 @@
 
   .privacy {
     width: 100%;
+    max-height: 60px;
     margin: 0;
 
     button {
@@ -78,6 +79,7 @@
   flex-wrap: nowrap;
   display: flex;
   align-items: center;
+  height: 80%;
 }
 ::ng-deep .columns-4-or-8 {
   .websites-input-line .actions-wrapper {

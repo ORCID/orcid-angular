@@ -50,3 +50,13 @@ p.empty {
     }
   }
 }
+
+button {
+  margin-inline-start: 8px;
+  height: 38px;
+  margin-top: 6px;
+}
+
+::ng-deep button.test-align-center {
+  text-align: center !important;
+}

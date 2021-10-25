@@ -4,7 +4,11 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { WorkIdType, WorkIdTypeValidation } from 'src/app/types/works.endpoint'
+import {
+  GroupingSuggestions,
+  WorkIdType,
+  WorkIdTypeValidation,
+} from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -17,6 +21,8 @@ import { RecordImportWizard } from '../../types/record-peer-review-import.endpoi
 })
 export class RecordWorksService {
   lastEmittedValue: WorksEndpoint = null
+  groupingSuggestionsSubjectInitialized = false
+  groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
   workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
 
@@ -92,6 +98,11 @@ export class RecordWorksService {
         tap((data) => {
           this.lastEmittedValue = data
           this.workSubject.next(data)
+        }),
+        tap(() => {
+          if (!options.publicRecordId) {
+            this.getWorksGroupingSuggestions({ force: true })
+          }
         })
       )
       .subscribe()
@@ -269,8 +280,12 @@ export class RecordWorksService {
   }
 
   combine(putCodes: string[]): Observable<any> {
+    return this.combinePutCodes(putCodes.join(','))
+  }
+
+  combinePutCodes(putCodes: string): Observable<any> {
     return this._http
-      .post(environment.API_WEB + 'works/group/' + putCodes.join(','), {})
+      .post(environment.API_WEB + 'works/group/' + putCodes, {})
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -345,5 +360,25 @@ export class RecordWorksService {
         },
       }
     )
+  }
+
+  getWorksGroupingSuggestions(
+    options: { force: boolean } = { force: false }
+  ): Observable<GroupingSuggestions> {
+    if (options.force || !this.groupingSuggestionsSubjectInitialized) {
+      this.groupingSuggestionsSubjectInitialized = true
+      this._http
+        .get<GroupingSuggestions>(
+          environment.API_WEB + 'works/groupingSuggestions.json',
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .subscribe((x) => this.groupingSuggestionsSubject.next(x))
+    }
+    return this.groupingSuggestionsSubject.asObservable()
   }
 }
