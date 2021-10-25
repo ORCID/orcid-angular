@@ -51,7 +51,7 @@ export class RecordResearchResourceService {
           '&sort=' +
           (options.sort != null ? options.sort : 'date') +
           '&sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : true) +
+          (options.sortAsc != null ? options.sortAsc : false) +
           '&pageSize=' +
           options.pageSize
       )
