@@ -72,31 +72,32 @@ export class WorkStackGroupComponent implements OnInit {
 
   addMenuOptions = [
     {
-      label: 'Add manually',
-      action: ADD_EVENT_ACTION.addManually,
-      modal: WorkModalComponent,
-    },
-    {
-      label: 'Search & Link',
+      label: $localize`:@@shared.searchLink:Search & Link`,
       action: ADD_EVENT_ACTION.searchAndLink,
       modal: ModalWorksSearchLinkComponent,
     },
     {
-      label: 'Add DOI',
+      label: $localize`:@@works.addDoi:Add DOI`,
       action: ADD_EVENT_ACTION.doi,
       modal: WorkExternalIdModalComponent,
       type: EXTERNAL_ID_TYPE_WORK.doi,
     },
     {
-      label: 'Add PubMed ID',
+      label: $localize`:@@works.addPubmed:Add PubMed ID`,
       action: ADD_EVENT_ACTION.pubMed,
       modal: WorkExternalIdModalComponent,
       type: EXTERNAL_ID_TYPE_WORK.pubMed,
     },
     {
-      label: 'Add BibTex',
+      label: $localize`:@@works.addBibtex:Add BibTeX`,
       action: ADD_EVENT_ACTION.bibText,
       modal: WorkBibtexModalComponent,
+    },
+
+    {
+      label: $localize`:@@shared.addManually:Add manually`,
+      action: ADD_EVENT_ACTION.addManually,
+      modal: WorkModalComponent,
     },
   ]
 
