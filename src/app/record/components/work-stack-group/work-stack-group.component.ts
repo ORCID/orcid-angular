@@ -72,7 +72,7 @@ export class WorkStackGroupComponent implements OnInit {
 
   addMenuOptions = [
     {
-      label: $localize`:@@shared.searchLink":Search & Link`,
+      label: $localize`:@@shared.searchLink:Search & Link`,
       action: ADD_EVENT_ACTION.searchAndLink,
       modal: ModalWorksSearchLinkComponent,
     },
