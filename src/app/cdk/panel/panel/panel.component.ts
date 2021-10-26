@@ -79,6 +79,7 @@ export class PanelComponent implements OnInit {
   @Input() openState = true
   @Input() editable = true
   @Input() selectable = false
+  @Input() selectAll = false
   @Input() checkbox = false
   _displayTheStack: boolean
   @Input()
@@ -132,7 +133,9 @@ export class PanelComponent implements OnInit {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selected = this.selectAll
+  }
 
   isArrayAndIsNotEmpty(
     obj:

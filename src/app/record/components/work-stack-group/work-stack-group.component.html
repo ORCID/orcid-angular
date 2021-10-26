@@ -36,7 +36,7 @@
         [disabled]="paginationLoading"
       >
       </mat-paginator>
-      <ng-container *ngIf="workGroup.groups.length > 0">
+      <ng-container *ngIf="workGroup.groups.length > 0 && !paginationLoading">
         <div
           class="row works-buttons orc-font-body-small"
           *ngIf="!isPublicRecord"
@@ -51,7 +51,7 @@
                 <ng-container i18n="@@shared.selectAll"
                   >Select all</ng-container
                 >
-                ({{ workGroup.groups.length }})
+                ({{ selectAll ? workGroup.totalGroups : 0 }})
               </mat-checkbox>
             </p>
           </div>
@@ -60,7 +60,7 @@
               <ng-container i18n="@@shared.itemsCurrentlySelected"
                 >Items currently selected</ng-container
               >
-              ({{ selectedWorks.length }})
+              ({{ selectAll ? workGroup.totalGroups : selectedWorks.length }})
             </p>
           </div>
           <div class="controls">
@@ -109,6 +109,7 @@
           *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
           [workStack]="group"
           [userInfo]="userInfo"
+          [selectAll]="selectAll"
           (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
           #appWorkStacks
         ></app-work-stack>
