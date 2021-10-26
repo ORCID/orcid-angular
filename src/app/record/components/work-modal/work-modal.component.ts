@@ -39,7 +39,7 @@ export class WorkModalComponent implements OnInit {
     }
 
     workObs.subscribe((currentWork) => {
-      if(this.options?.createACopy) {
+      if (this.options?.createACopy) {
         currentWork.putCode = null
       }
       this.work = currentWork
