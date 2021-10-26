@@ -174,9 +174,9 @@ export class WorkFormComponent implements OnInit {
       journalTitle: [currentWork?.journalTitle?.value || '', []],
       publicationDate: this._fb.group(
         {
-          publicationDay: [currentWork?.publicationDate?.day || '', []],
-          publicationMonth: [currentWork.publicationDate?.month || '', []],
-          publicationYear: [currentWork?.publicationDate?.year || '', []],
+          publicationDay: [Number(currentWork?.publicationDate?.day) || '', []],
+          publicationMonth: [Number(currentWork?.publicationDate?.month) || '', []],
+          publicationYear: [Number(currentWork?.publicationDate?.year) || '', []],
         },
         { validator: dateValidator('publication') }
       ),
