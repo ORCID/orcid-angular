@@ -86,6 +86,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     this._record
       .getRecord({
         publicRecordId: this.publicOrcid || undefined,
+        forceReload: true,
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
