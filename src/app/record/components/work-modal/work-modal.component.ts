@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core'
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
@@ -16,7 +16,7 @@ import { WorkFormComponent } from '../work-form/work-form/work-form.component'
 })
 export class WorkModalComponent implements OnInit {
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent
-
+  @Input() options: { createACopy: boolean }
   loading = true
   platform: PlatformInfo
   work: Work
@@ -39,6 +39,9 @@ export class WorkModalComponent implements OnInit {
     }
 
     workObs.subscribe((currentWork) => {
+      if(this.options?.createACopy) {
+        currentWork.putCode = null
+      }
       this.work = currentWork
       this.loading = false
     })
