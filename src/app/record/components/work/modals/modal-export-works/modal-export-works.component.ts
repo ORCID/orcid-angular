@@ -9,7 +9,7 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
   selector: 'app-modal-export-works',
   templateUrl: './modal-export-works.component.html',
   styleUrls: ['./modal-export-works.component.scss'],
-  preserveWhitespaces: true
+  preserveWhitespaces: true,
 })
 export class ModalExportWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -30,8 +30,12 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingWorks = true
     if (this.selectedAll) {
-      const pageSize = this.totalWorks < this.maxNumberOfWorksToDisplay ? this.totalWorks : this.maxNumberOfWorksToDisplay
-      this._recordWorksService.getWorks({pageSize})
+      const pageSize =
+        this.totalWorks < this.maxNumberOfWorksToDisplay
+          ? this.totalWorks
+          : this.maxNumberOfWorksToDisplay
+      this._recordWorksService
+        .getWorks({ pageSize })
         .subscribe((worksEndpoint: WorksEndpoint) => {
           worksEndpoint.groups.forEach((workGroup) => {
             workGroup.works.forEach((work) => {
@@ -39,13 +43,15 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
             })
           })
           this.loadingWorks = false
-      })
+        })
     } else {
       this.putCodes.forEach((putCode) => {
-        this._recordWorksService.getWorkInfo(putCode).subscribe((work: Work) => {
-          this.loadingWorks = false
-          this.works.push(work)
-        })
+        this._recordWorksService
+          .getWorkInfo(putCode)
+          .subscribe((work: Work) => {
+            this.loadingWorks = false
+            this.works.push(work)
+          })
       })
     }
   }
@@ -58,17 +64,18 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
         this.closeEvent()
       })
     } else {
-      this._recordWorksService.exportSelected(this.putCodes).subscribe((data) => {
-        this.createTxtFile(data)
-        this.closeEvent()
-      })
+      this._recordWorksService
+        .exportSelected(this.putCodes)
+        .subscribe((data) => {
+          this.createTxtFile(data)
+          this.closeEvent()
+        })
     }
   }
 
-
   createTxtFile(data) {
     const anchor = document.createElement('a')
-    anchor.setAttribute('css', '{display: \'none\'}')
+    anchor.setAttribute('css', "{display: 'none'}")
     this.elementRef.nativeElement.append(anchor)
     anchor.setAttribute(
       'href',
