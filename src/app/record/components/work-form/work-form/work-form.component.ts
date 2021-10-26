@@ -175,8 +175,14 @@ export class WorkFormComponent implements OnInit {
       publicationDate: this._fb.group(
         {
           publicationDay: [Number(currentWork?.publicationDate?.day) || '', []],
-          publicationMonth: [Number(currentWork?.publicationDate?.month) || '', []],
-          publicationYear: [Number(currentWork?.publicationDate?.year) || '', []],
+          publicationMonth: [
+            Number(currentWork?.publicationDate?.month) || '',
+            [],
+          ],
+          publicationYear: [
+            Number(currentWork?.publicationDate?.year) || '',
+            [],
+          ],
         },
         { validator: dateValidator('publication') }
       ),
