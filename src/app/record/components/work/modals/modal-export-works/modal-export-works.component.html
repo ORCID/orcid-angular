@@ -47,7 +47,7 @@
       <ng-container i18n="@@works.selectedWorks">
         Selected works to export
       </ng-container>
-      ({{ works.length }})
+      ({{ selectedAll ? totalWorks : works.length }})
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
     <ng-container *ngFor="let work of works">
@@ -66,5 +66,12 @@
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
+    <p *ngIf="totalWorks > maxNumberOfWorksToDisplay">
+      <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
+      <b>{{ maxNumberOfWorksToDisplay }}</b>
+      <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
+      <b>{{ totalWorks }}</b>
+      <ng-container i18n="@@works.worksToExport">works to export</ng-container>
+    </p>
   </div>
 </app-modal>

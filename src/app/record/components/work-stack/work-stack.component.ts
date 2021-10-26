@@ -61,6 +61,7 @@ export class WorkStackComponent implements OnInit {
 
   @Output() checkboxChangeWorkStackOutput = new EventEmitter<any>()
   @Input() userInfo: UserInfo
+  @Input() selectAll: boolean
   @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
