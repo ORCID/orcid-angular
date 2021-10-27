@@ -417,4 +417,8 @@ export class WorkFormComponent implements OnInit {
   closeEvent() {
     this._dialogRef.close()
   }
+
+  returnZero() {
+    return 0
+  }
 }

@@ -40,7 +40,7 @@
       >
         <mat-select formControlName="workCategory">
           <mat-option
-            *ngFor="let item of workCategories | keyvalue"
+            *ngFor="let item of workCategories | keyvalue : returnZero"
             [value]="item.value"
           >
             {{ item.value | recordWorkCategoryLabel }}
