@@ -207,8 +207,8 @@ export class WorkStackGroupComponent implements OnInit {
   exportAllWorks() {
     this.openModal(
       ModalExportWorksComponent,
-      this.selectedWorks,
-      this.selectAll
+      undefined,
+      true
     )
   }
 
