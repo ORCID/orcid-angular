@@ -26,7 +26,7 @@ export class WorkExternalIdentifiersEditComponent implements OnInit {
   @Input() index: number
   @Input() workIdTypes: WorkIdType[]
   @Output() cancelEvent = new EventEmitter<void>()
-  matcher = new MyErrorStateMatcher()
+  workExternalIdErrorMatcher = new WorkExternalIdErrorMatcher()
 
   validFormatTooltip = $localize`:@@works.validFormat:Invalid id for the selected identifier type`
   unResolvedTooltip = $localize`:@@works.unResolved:We couldn't find a resource that matches the identifier you entered.
@@ -56,7 +56,7 @@ export class WorkExternalIdentifiersEditComponent implements OnInit {
   }
 }
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
+export class WorkExternalIdErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null): boolean {
     return control.hasError('required') && control.touched
   }
