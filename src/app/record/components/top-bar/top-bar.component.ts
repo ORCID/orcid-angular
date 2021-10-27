@@ -134,11 +134,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
         return otherName.content
       })
       .filter(function (item, pos, array) {
-        return (
-          array
-            .map((x) => x.toLowerCase().trim())
-            .indexOf(item.toLowerCase().trim()) === pos
-        )
+        return array.indexOf(item) === pos
       })
       .join(', ')
   }
