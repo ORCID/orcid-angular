@@ -1,9 +1,16 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
-import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint';
-
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core'
+import { FormControl, FormGroup } from '@angular/forms'
+import { ErrorStateMatcher } from '@angular/material/core'
+import { MatSelect } from '@angular/material/select'
+import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-work-external-identifiers-edit',
@@ -20,6 +27,10 @@ export class WorkExternalIdentifiersEditComponent implements OnInit {
   @Input() workIdTypes: WorkIdType[]
   @Output() cancelEvent = new EventEmitter<void>()
   matcher = new MyErrorStateMatcher()
+
+  validFormatTooltip = $localize`:@@works.validFormat:Invalid id for the selected identifier type`
+  unResolvedTooltip = $localize`:@@works.unResolved:We couldn't find a resource that matches the identifier you entered.
+  Please check the value or enter a valid link to the resource.`
 
   workRelationships: WorkRelationships[] = Object.keys(
     WorkRelationships

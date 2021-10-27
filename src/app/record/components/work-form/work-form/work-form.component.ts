@@ -36,7 +36,7 @@ import { WINDOW } from '../../../../cdk/window'
 import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
-import { URL_REGEXP } from '../../../../constants'
+import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { flatten } from 'lodash'
@@ -219,7 +219,6 @@ export class WorkFormComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
-
             if (value.generatedUrl) {
               formGroup.controls.externalIdentifierUrl.setValue(
                 value.generatedUrl
@@ -227,7 +226,7 @@ export class WorkFormComponent implements OnInit {
             } else {
               formGroup.controls.externalIdentifierUrl.setValue('')
             }
-            
+
             if (!value.resolved && value.attemptedResolution) {
               return {
                 unResolved: !value.resolved,
@@ -238,7 +237,6 @@ export class WorkFormComponent implements OnInit {
                 validFormat: !value.validFormat,
               }
             }
-  
           })
         )
     }
@@ -326,11 +324,8 @@ export class WorkFormComponent implements OnInit {
 
   saveEvent() {
     this.workForm.markAllAsTouched()
-    console.log(this.getFormErrors(this.workForm))
-    const formErrors = this.getFormErrors(this.workForm)
-    const allowInvalidForm = this.formHasOnlyAllowError(
-      formErrors
-    )
+    const formErrors = GetFormErrors(this.workForm)
+    const allowInvalidForm = this.formHasOnlyAllowError(formErrors)
 
     if (this.workForm.valid || allowInvalidForm) {
       const work: Work = {
@@ -417,10 +412,9 @@ export class WorkFormComponent implements OnInit {
   }
 
   /**
-   * Return true only if the errors found are unResolved or validFormat
+   * Return true only if the errors found are only of the type unResolved and validFormat
    */
   private formHasOnlyAllowError(formErrors) {
-  
     if (
       Object.keys(formErrors).length === 1 &&
       formErrors.workIdentifiers?.length
@@ -456,39 +450,5 @@ export class WorkFormComponent implements OnInit {
 
   closeEvent() {
     this._dialogRef.close()
-  }
-
-  getFormErrors(form: AbstractControl) {
-    if (form instanceof FormControl) {
-      // Return FormControl errors or null
-      return form.errors ?? null
-    }
-    if (form instanceof FormGroup) {
-      const groupErrors = form.errors
-      // Form group can contain errors itself, in that case add'em
-      const formErrors = groupErrors ? { groupErrors } : {}
-      Object.keys(form.controls).forEach((key) => {
-        // Recursive call of the FormGroup fields
-        const error = this.getFormErrors(form.get(key))
-        if (error !== null) {
-          // Only add error if not null
-          formErrors[key] = error
-        }
-      })
-      // Return FormGroup errors or null
-      return Object.keys(formErrors).length > 0 ? formErrors : null
-    }
-    if (form instanceof FormArray) {
-      const groupErrors = form.errors
-      // Form group can contain errors itself, in that case add'em
-      const formErrors = groupErrors ? [groupErrors] : []
-      form.controls.forEach((control) => {
-        // Recursive call of the FormGroup fields
-        const error = this.getFormErrors(control)
-        formErrors.push(error)
-      })
-      // Return FormGroup errors or null
-      return formErrors.length > 0 ? formErrors : null
-    }
   }
 }

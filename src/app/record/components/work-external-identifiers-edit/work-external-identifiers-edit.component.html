@@ -74,31 +74,54 @@
         formControlName="externalIdentifierId"
         [errorStateMatcher]="matcher"
       />
+
+      <mat-icon
+        matSuffix
+        *ngIf="
+          externalIdForm.get('externalIdentifierId').hasError('validFormat')
+        "
+        [matTooltip]="validFormatTooltip"
+        >warning</mat-icon
+      >
       <mat-hint
         *ngIf="
           externalIdForm.get('externalIdentifierId').hasError('validFormat')
         "
-        i18n="@@works.validFormat"
       >
-        Invalid id for the selected identifier type
+        <ng-container i18n="@@works.validFormat">
+          Invalid id for the selected identifier type
+        </ng-container>
       </mat-hint>
+
+      <mat-icon
+        matSuffix
+        [matTooltip]="unResolvedTooltip"
+        *ngIf="
+          externalIdForm.get('externalIdentifierId').hasError('unResolved')
+        "
+        >warning</mat-icon
+      >
+
       <mat-hint
         *ngIf="
           externalIdForm.get('externalIdentifierId').hasError('unResolved')
         "
-        i18n="@@works.unResolved"
       >
+        <ng-container i18n="@@works.unResolved"></ng-container>
         We couldn't find a resource that matches the identifier you entered.
         Please check the value or enter a valid link to the resource.
       </mat-hint>
+
       <mat-hint
-        i18n="@@works.identifierAssociated"
         *ngIf="
           !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
           !externalIdForm.get('externalIdentifierId').hasError('validFormat')
         "
-        >The identifier associated with the work. The format will depend on the
-        type of identifier selected.
+      >
+        <ng-container i18n="@@works.identifierAssociated"
+          >The identifier associated with the work. The format will depend on
+          the type of identifier selected.</ng-container
+        >
       </mat-hint>
       <mat-error
         *ngIf="
