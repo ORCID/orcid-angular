@@ -422,6 +422,7 @@ export class WorkFormComponent implements OnInit {
         [key: string]: { [key: string]: boolean }
       }[]).every(
         (x) =>
+          x &&
           Object.keys(x).length === 1 &&
           x.externalIdentifierId &&
           Object.keys(x.externalIdentifierId).length === 1 &&

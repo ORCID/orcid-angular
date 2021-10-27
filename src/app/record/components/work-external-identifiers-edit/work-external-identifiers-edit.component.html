@@ -99,7 +99,12 @@
       <mat-hint
         i18n="@@works.identifierAssociated"
         *ngIf="
+<<<<<<< HEAD
           !externalIdForm.get('externalIdentifierId').hasError('unResolved')
+=======
+          !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
+          !externalIdForm.get('externalIdentifierId').hasError('validFormat')
+>>>>>>> 3c15ea04... 7723-qamy-orcid-valid-doi-url-not-recognized
         "
         >The identifier associated with the work. The format will depend on the
         type of identifier selected.
