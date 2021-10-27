@@ -243,14 +243,10 @@ export class WorkFormComponent implements OnInit {
   }
 
   private checkWorkIdentifiersChanges(index: number) {
-    console.log('checkWorkIdentifiersChanges')
-
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
     formGroup.controls.externalIdentifierType.valueChanges
       .pipe(startWith(formGroup.controls.externalIdentifierType.value))
       .subscribe((externalIdentifierType) => {
-        console.log('externalIdentifierType', externalIdentifierType)
-
         if (externalIdentifierType !== '') {
           formGroup.controls.externalIdentifierId.setValidators([
             Validators.required,
