@@ -47,6 +47,6 @@ export class WorkExternalIdentifiersEditComponent implements OnInit {
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null): boolean {
-    return control.hasError('validFormat') && control.touched
+    return control.hasError('required') && control.touched
   }
 }

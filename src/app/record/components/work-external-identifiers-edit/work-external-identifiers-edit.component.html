@@ -56,9 +56,7 @@
         class="mat-caption"
         [ngClass]="{
           error:
-            externalIdForm
-              .get('externalIdentifierId')
-              .hasError('validFormat') &&
+            externalIdForm.get('externalIdentifierId').hasError('required') &&
             externalIdForm.get('externalIdentifierId').touched
         }"
       >
@@ -68,7 +66,6 @@
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min three-line-hint input-container"
-
     >
       <input
         autocomplete="off"
@@ -76,16 +73,15 @@
         matInput
         formControlName="externalIdentifierId"
         [errorStateMatcher]="matcher"
-
       />
-      <mat-error
+      <mat-hint
         *ngIf="
           externalIdForm.get('externalIdentifierId').hasError('validFormat')
         "
         i18n="@@works.validFormat"
       >
         Invalid id for the selected identifier type
-      </mat-error>
+      </mat-hint>
       <mat-hint
         *ngIf="
           externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
@@ -105,6 +101,14 @@
         >The identifier associated with the work. The format will depend on the
         type of identifier selected.
       </mat-hint>
+      <mat-error
+        *ngIf="
+          externalIdForm.get('externalIdentifierId').hasError('required') &&
+          externalIdForm.get('externalIdentifierId').touched
+        "
+        i18n="@@works.pleaseEnterExternalID"
+        >Please enter an external ID</mat-error
+      >
     </mat-form-field>
   </div>
   <!-- Work identifier url value -->
