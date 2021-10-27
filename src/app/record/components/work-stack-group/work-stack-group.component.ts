@@ -198,18 +198,11 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   export() {
-    this.openModal(
-      ModalExportWorksComponent,
-      this.selectedWorks
-    )
+    this.openModal(ModalExportWorksComponent, this.selectedWorks)
   }
 
   exportAllWorks() {
-    this.openModal(
-      ModalExportWorksComponent,
-      undefined,
-      true
-    )
+    this.openModal(ModalExportWorksComponent, undefined, true)
   }
 
   visibility() {
