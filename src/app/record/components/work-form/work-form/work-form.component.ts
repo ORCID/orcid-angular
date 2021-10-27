@@ -138,9 +138,11 @@ export class WorkFormComponent implements OnInit {
       .get('workType')
       .valueChanges.pipe(startWith(this.workForm.value['workType']))
       .subscribe((value) => {
-        if (value && this.workForm.value['workCategory'] && value) {
+        if (value && this.workForm.value['workCategory']) {
           this.dynamicTitle =
             WorkTypesTitle[this.workForm.value['workCategory']][value]
+        } else {
+          this.dynamicTitle = WorksTitleName.journalTitle
         }
       })
     this.workForm
