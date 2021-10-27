@@ -1,6 +1,11 @@
 import { Address, MonthDayYearDate } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
-import { AbstractControl, FormControl, FormGroup, FormArray } from '@angular/forms'
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormArray,
+} from '@angular/forms'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -209,7 +214,6 @@ export function ArrayFlat(arr) {
 }
 
 export const DEFAULT_PAGE_SIZE = 50
-
 
 export function GetFormErrors(form: AbstractControl) {
   if (form instanceof FormControl) {

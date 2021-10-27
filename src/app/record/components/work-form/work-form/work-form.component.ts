@@ -4,7 +4,6 @@ import {
   AsyncValidatorFn,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms'
@@ -39,7 +38,6 @@ import { dateValidator } from '../../../../shared/validators/date/date.validator
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
-import { flatten } from 'lodash'
 
 @Component({
   selector: 'app-work-form',
