@@ -84,8 +84,7 @@
       </mat-hint>
       <mat-hint
         *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
-          externalIdForm.get('externalIdentifierId').touched
+          externalIdForm.get('externalIdentifierId').hasError('unResolved')
         "
         i18n="@@works.unResolved"
       >

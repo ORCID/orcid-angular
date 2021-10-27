@@ -219,6 +219,15 @@ export class WorkFormComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
+
+            if (value.generatedUrl) {
+              formGroup.controls.externalIdentifierUrl.setValue(
+                value.generatedUrl
+              )
+            } else {
+              formGroup.controls.externalIdentifierUrl.setValue('')
+            }
+            
             if (!value.resolved && value.attemptedResolution) {
               return {
                 unResolved: !value.resolved,
@@ -229,13 +238,7 @@ export class WorkFormComponent implements OnInit {
                 validFormat: !value.validFormat,
               }
             }
-            if (value.generatedUrl) {
-              formGroup.controls.externalIdentifierUrl.setValue(
-                value.generatedUrl
-              )
-            } else {
-              formGroup.controls.externalIdentifierUrl.setValue(null)
-            }
+  
           })
         )
     }
@@ -325,7 +328,7 @@ export class WorkFormComponent implements OnInit {
     this.workForm.markAllAsTouched()
     console.log(this.getFormErrors(this.workForm))
     const formErrors = this.getFormErrors(this.workForm)
-    const allowInvalidForm = this.formHasAndOnlyHasUnResolvedExternalIdentifierIdErrors(
+    const allowInvalidForm = this.formHasOnlyAllowError(
       formErrors
     )
 
@@ -413,7 +416,11 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
-  private formHasAndOnlyHasUnResolvedExternalIdentifierIdErrors(formErrors) {
+  /**
+   * Return true only if the errors found are unResolved or validFormat
+   */
+  private formHasOnlyAllowError(formErrors) {
+  
     if (
       Object.keys(formErrors).length === 1 &&
       formErrors.workIdentifiers?.length
@@ -426,7 +433,8 @@ export class WorkFormComponent implements OnInit {
           Object.keys(x).length === 1 &&
           x.externalIdentifierId &&
           Object.keys(x.externalIdentifierId).length === 1 &&
-          x.externalIdentifierId.unResolved === true
+          (x.externalIdentifierId.unResolved ||
+            x.externalIdentifierId.validFormat)
       )
     } else {
       return false
