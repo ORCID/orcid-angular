@@ -56,7 +56,9 @@
         class="mat-caption"
         [ngClass]="{
           error:
-            externalIdForm.hasError('required', 'externalIdentifierId') &&
+            externalIdForm
+              .get('externalIdentifierId')
+              .hasError('validFormat') &&
             externalIdForm.get('externalIdentifierId').touched
         }"
       >
@@ -66,12 +68,15 @@
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min three-line-hint input-container"
+
     >
       <input
         autocomplete="off"
         id="external-identifier-id-input"
         matInput
         formControlName="externalIdentifierId"
+        [errorStateMatcher]="matcher"
+
       />
       <mat-error
         *ngIf="
@@ -81,16 +86,21 @@
       >
         Invalid id for the selected identifier type
       </mat-error>
-      <mat-error
+      <mat-hint
         *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('unResolved')
+          externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
+          externalIdForm.get('externalIdentifierId').touched
         "
         i18n="@@works.unResolved"
       >
         We couldn't find a resource that matches the identifier you entered.
         Please check the value or enter a valid link to the resource.
-      </mat-error>
-      <mat-hint i18n="@@works.identifierAssociated"
+      </mat-hint>
+      <mat-hint
+        i18n="@@works.identifierAssociated"
+        *ngIf="
+          !externalIdForm.get('externalIdentifierId').hasError('unResolved')
+        "
         >The identifier associated with the work. The format will depend on the
         type of identifier selected.
       </mat-hint>
@@ -104,9 +114,7 @@
         for="external-identifier-url-input"
         class="mat-caption"
         [ngClass]="{
-          error:
-            externalIdForm.hasError('pattern', 'externalIdentifierUrl') &&
-            externalIdForm.get('externalIdentifierUrl').touched
+          error: externalIdForm.get('externalIdentifierUrl').hasError('pattern')
         }"
       >
         <strong i18n="@@works.identifierUrl">Identifier URL </strong>

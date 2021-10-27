@@ -4,6 +4,7 @@ import {
   AsyncValidatorFn,
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms'
@@ -38,6 +39,7 @@ import { dateValidator } from '../../../../shared/validators/date/date.validator
 import { URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { flatten } from 'lodash'
 
 @Component({
   selector: 'app-work-form',
@@ -240,9 +242,14 @@ export class WorkFormComponent implements OnInit {
   }
 
   private checkWorkIdentifiersChanges(index: number) {
+    console.log('checkWorkIdentifiersChanges')
+
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
-    formGroup.controls.externalIdentifierType.valueChanges.subscribe(
-      (externalIdentifierType) => {
+    formGroup.controls.externalIdentifierType.valueChanges
+      .pipe(startWith(formGroup.controls.externalIdentifierType.value))
+      .subscribe((externalIdentifierType) => {
+        console.log('externalIdentifierType', externalIdentifierType)
+
         if (externalIdentifierType !== '') {
           formGroup.controls.externalIdentifierId.setValidators([
             Validators.required,
@@ -259,8 +266,7 @@ export class WorkFormComponent implements OnInit {
           formGroup.controls.externalIdentifierId.clearAsyncValidators()
           formGroup.controls.externalIdentifierId.updateValueAndValidity()
         }
-      }
-    )
+      })
 
     formGroup.controls.externalIdentifierId.valueChanges.subscribe((value) => {
       if (value) {
@@ -317,7 +323,13 @@ export class WorkFormComponent implements OnInit {
 
   saveEvent() {
     this.workForm.markAllAsTouched()
-    if (this.workForm.valid) {
+    console.log(this.getFormErrors(this.workForm))
+    const formErrors = this.getFormErrors(this.workForm)
+    const allowInvalidForm = this.formHasAndOnlyHasUnResolvedExternalIdentifierIdErrors(
+      formErrors
+    )
+
+    if (this.workForm.valid || allowInvalidForm) {
       const work: Work = {
         visibility: {
           visibility: this.workForm.value.visibility,
@@ -401,6 +413,25 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
+  private formHasAndOnlyHasUnResolvedExternalIdentifierIdErrors(formErrors) {
+    if (
+      Object.keys(formErrors).length === 1 &&
+      formErrors.workIdentifiers?.length
+    ) {
+      return (formErrors.workIdentifiers as {
+        [key: string]: { [key: string]: boolean }
+      }[]).every(
+        (x) =>
+          Object.keys(x).length === 1 &&
+          x.externalIdentifierId &&
+          Object.keys(x.externalIdentifierId).length === 1 &&
+          x.externalIdentifierId.unResolved === true
+      )
+    } else {
+      return false
+    }
+  }
+
   cancelExternalIdEdit(id: number) {
     if (
       this.workIdentifiersFormArray.controls[id] &&
@@ -416,5 +447,39 @@ export class WorkFormComponent implements OnInit {
 
   closeEvent() {
     this._dialogRef.close()
+  }
+
+  getFormErrors(form: AbstractControl) {
+    if (form instanceof FormControl) {
+      // Return FormControl errors or null
+      return form.errors ?? null
+    }
+    if (form instanceof FormGroup) {
+      const groupErrors = form.errors
+      // Form group can contain errors itself, in that case add'em
+      const formErrors = groupErrors ? { groupErrors } : {}
+      Object.keys(form.controls).forEach((key) => {
+        // Recursive call of the FormGroup fields
+        const error = this.getFormErrors(form.get(key))
+        if (error !== null) {
+          // Only add error if not null
+          formErrors[key] = error
+        }
+      })
+      // Return FormGroup errors or null
+      return Object.keys(formErrors).length > 0 ? formErrors : null
+    }
+    if (form instanceof FormArray) {
+      const groupErrors = form.errors
+      // Form group can contain errors itself, in that case add'em
+      const formErrors = groupErrors ? [groupErrors] : []
+      form.controls.forEach((control) => {
+        // Recursive call of the FormGroup fields
+        const error = this.getFormErrors(control)
+        formErrors.push(error)
+      })
+      // Return FormGroup errors or null
+      return formErrors.length > 0 ? formErrors : null
+    }
   }
 }

@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin work-external-identifiers-edit-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $config: mat-typography-config();
+
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+}
+@include work-external-identifiers-edit-theme($orcid-app-theme);
