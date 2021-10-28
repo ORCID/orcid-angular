@@ -73,7 +73,7 @@ export enum WorkOtherOutputTypes {
 export const WorkCategoriesLabel = {
   [WorkCategories.conference]: $localize`:@@works.conference:Conference`,
   [WorkCategories.intellectual_property]: $localize`:@@works.intellectual:Intellectual property`,
-  [WorkCategories.other_output]: $localize`:@@works.other:Other output`,
+  [WorkCategories.other_output]: $localize`:@@works.other:Other`,
   [WorkCategories.publication]: $localize`:@@works.publication:Publication`,
 }
 
@@ -121,7 +121,7 @@ export const WorkTypesLabels = {
     [WorkOtherOutputTypes.dataManagementPlan]: $localize`:@@works.AAA:Data management plan`,
     [WorkOtherOutputTypes.dataSet]: $localize`:@@works.plan:Data set`,
     [WorkOtherOutputTypes.invention]: $localize`:@@works.invention:Invention`,
-    [WorkOtherOutputTypes.lectureSpeech]: $localize`:@@works.speech:Lecture speech`,
+    [WorkOtherOutputTypes.lectureSpeech]: $localize`:@@works.speech:Lecture/speech`,
     [WorkOtherOutputTypes.physicalObject]: $localize`:@@works.object:Physical object`,
     [WorkOtherOutputTypes.researchTechnique]: $localize`:@@works.technique:Research technique`,
     [WorkOtherOutputTypes.software]: $localize`:@@works.software:software`,
