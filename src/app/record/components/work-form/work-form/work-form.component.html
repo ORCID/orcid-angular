@@ -38,7 +38,10 @@
         appearance="outline"
         class="mat-form-field-min input-container"
       >
-        <mat-select formControlName="workCategory">
+        <mat-select
+          formControlName="workCategory"
+          (selectionChange)="updateType($event)"
+        >
           <mat-option
             *ngFor="let item of workCategories | keyvalue: returnZero"
             [value]="item.value"
@@ -58,8 +61,7 @@
   <!-- Work Types -->
   <div [ngClass]="{ hide: (workTypes | keyvalue).length === 0 }">
     <label
-      class="row"
-      class="mat-caption"
+      class="row mat-caption"
       [ngClass]="{
         error:
           workForm.get('workType').hasError('required') &&

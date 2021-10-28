@@ -1,21 +1,12 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms'
-import {
-  PlatformInfo,
-  PlatformInfoService,
-} from '../../../../cdk/platform-info'
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { PlatformInfo, PlatformInfoService } from '../../../../cdk/platform-info'
 import { Work } from '../../../../types/record-works.endpoint'
 import {
   CitationTypes,
   LanguageMap,
   WorkCategories,
+  WorkCategoriesLabel,
   WorkConferenceTypes,
   WorkIdType,
   WorkIntellectualPropertyTypes,
@@ -41,6 +32,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRelation/FundedByRelation.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
+import { MatSelectChange } from '@angular/material/select'
 
 @Component({
   selector: 'app-work-form',
@@ -454,6 +446,31 @@ export class WorkFormComponent implements OnInit {
       this.deleteWorkId(id)
     } else {
       this.workIdentifiersFormArrayDisplayState[id] = false
+    }
+  }
+
+  updateType(event: MatSelectChange) {
+    switch (event.value) {
+      case WorkCategories.conference:
+        this.workForm.patchValue({
+          workType: WorkConferenceTypes.conferencePaper
+        })
+        break
+      case WorkCategories.intellectual_property:
+        this.workForm.patchValue({
+          workType: WorkIntellectualPropertyTypes.patent
+        })
+        break
+      case WorkCategories.other_output:
+        this.workForm.patchValue({
+          workType: WorkOtherOutputTypes.dataSet
+        })
+        break
+      case WorkCategories.publication:
+        this.workForm.patchValue({
+          workType: WorkPublicationTypes.journalArticle
+        })
+        break
     }
   }
 
