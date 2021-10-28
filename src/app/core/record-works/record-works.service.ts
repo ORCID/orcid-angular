@@ -188,13 +188,7 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => {
-          if (work.putCode?.value) {
-            return this.getDetails(work.putCode.value)
-          } else {
-            return this.getWorks({ forceReload: true })
-          }
-        })
+        switchMap(() => this.getWorks({ forceReload: true }))
       )
   }
 
