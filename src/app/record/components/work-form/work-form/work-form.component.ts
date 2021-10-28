@@ -6,7 +6,6 @@ import {
   CitationTypes,
   LanguageMap,
   WorkCategories,
-  WorkCategoriesLabel,
   WorkConferenceTypes,
   WorkIdType,
   WorkIntellectualPropertyTypes,
@@ -73,6 +72,8 @@ export class WorkFormComponent implements OnInit {
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
+  workRelationship: WorkRelationships
+  externalIdentifier: string
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -471,6 +472,31 @@ export class WorkFormComponent implements OnInit {
           workType: WorkPublicationTypes.journalArticle
         })
         break
+    }
+  }
+
+  updateRelation(event, type: 'external' | 'workType') {
+    const workType = this.workForm.get('workType').value
+
+    if (type === 'external') {
+      this.externalIdentifier = event
+    }
+
+    if (this.externalIdentifier && workType) {
+      if (this.externalIdentifier === 'isbn' && workType === 'book-chapter') {
+        this.workRelationship = WorkRelationships['part-of']
+      } else if (this.externalIdentifier === 'isbn' && workType === 'book') {
+        this.workRelationship = WorkRelationships.self
+      } else if (this.externalIdentifier === 'issn') {
+        this.workRelationship = WorkRelationships['part-of']
+      } else if (this.externalIdentifier === 'isbn' &&
+        workType.value === 'dictionary-entry' || 'conference-paper' || 'encyclopedia-entry'
+    ) {
+        this.workRelationship = WorkRelationships['part-of']
+      }
+    }
+    if (this.externalIdentifier === 'grant_number' || this.externalIdentifier === 'proposal-id') {
+      this.workRelationship = WorkRelationships['funded-by']
     }
   }
 
