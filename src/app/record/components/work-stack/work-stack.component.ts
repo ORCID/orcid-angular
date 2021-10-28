@@ -43,11 +43,7 @@ export class WorkStackComponent implements OnInit {
   set workStack(value: WorkGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
     this._workStack = value
-    console.log('______');
-    
-    console.log(this._workStack)
-
-    this.setInitialStates(value)
+    this.setInitialStates(value, true)
   }
   get workStack(): WorkGroup {
     return this._workStack
@@ -96,6 +92,8 @@ export class WorkStackComponent implements OnInit {
       this.panelDetailsState[work.putCode.value] = {
         state: false,
       }
+    } else {
+      this.getDetails(work).subscribe()
     }
   }
 

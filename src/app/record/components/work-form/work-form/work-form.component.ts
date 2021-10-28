@@ -138,9 +138,11 @@ export class WorkFormComponent implements OnInit {
       .get('workType')
       .valueChanges.pipe(startWith(this.workForm.value['workType']))
       .subscribe((value) => {
-        if (value && this.workForm.value['workCategory'] && value) {
+        if (value && this.workForm.value['workCategory']) {
           this.dynamicTitle =
             WorkTypesTitle[this.workForm.value['workCategory']][value]
+        } else {
+          this.dynamicTitle = WorksTitleName.journalTitle
         }
       })
     this.workForm
@@ -410,6 +412,7 @@ export class WorkFormComponent implements OnInit {
    */
   private formHasOnlyAllowError(formErrors) {
     if (
+      formErrors !== null &&
       Object.keys(formErrors).length === 1 &&
       formErrors.workIdentifiers?.length
     ) {
@@ -444,5 +447,9 @@ export class WorkFormComponent implements OnInit {
 
   closeEvent() {
     this._dialogRef.close()
+  }
+
+  returnZero() {
+    return 0
   }
 }

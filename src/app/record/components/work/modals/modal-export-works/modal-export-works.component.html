@@ -59,9 +59,26 @@
         </div>
         <div class="orc-font-body-small">
           <strong i18n="@@shared.source">Source</strong>:
+          <ng-container
+            *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
+          >
+            {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+            <i i18n="@@shared.onBehalfOf">via</i>
+          </ng-container>
           {{ work.sourceName || work.source }}
-          <strong class="added" i18n="@@shared.added"> Added </strong>:
-          {{ work.createdDate | monthDayYearDateToString }}
+          <ng-container *ngIf="work.createdDate">
+            <br *ngIf="isMobile" />
+            <strong
+              class="added"
+              i18n="@@shared.added"
+              [ngClass]="{
+                mobile: isMobile
+              }"
+            >
+              Added </strong
+            >:
+            {{ work.createdDate | monthDayYearDateToString }}
+          </ng-container>
         </div>
       </div>
       <mat-divider class="row"></mat-divider>
