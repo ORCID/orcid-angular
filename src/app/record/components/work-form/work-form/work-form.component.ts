@@ -412,6 +412,7 @@ export class WorkFormComponent implements OnInit {
    */
   private formHasOnlyAllowError(formErrors) {
     if (
+      formErrors !== null &&
       Object.keys(formErrors).length === 1 &&
       formErrors.workIdentifiers?.length
     ) {
