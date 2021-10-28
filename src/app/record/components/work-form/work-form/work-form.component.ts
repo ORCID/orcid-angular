@@ -159,11 +159,14 @@ export class WorkFormComponent implements OnInit {
       title: [currentWork?.title?.value || '', [Validators.required]],
       translatedTitleGroup: this._fb.group(
         {
-      translatedTitleContent: [currentWork?.translatedTitle?.content || '', []],
-      translatedTitleLanguage: [
-        currentWork?.translatedTitle?.languageCode || '',
-        [],
-          ]
+          translatedTitleContent: [
+            currentWork?.translatedTitle?.content || '',
+            [],
+          ],
+          translatedTitleLanguage: [
+            currentWork?.translatedTitle?.languageCode || '',
+            [],
+          ],
         },
         { validator: translatedTitleValidator }
       ),
@@ -186,9 +189,9 @@ export class WorkFormComponent implements OnInit {
       url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
       citationGroup: this._fb.group(
         {
-      citationType: [currentWork?.citation?.citationType.value || '', []],
-      citation: [currentWork?.citation?.citation.value || '', []],
-      shortDescription: [currentWork?.shortDescription?.value || '', []],
+          citationType: [currentWork?.citation?.citationType.value || '', []],
+          citation: [currentWork?.citation?.citation.value || '', []],
+          shortDescription: [currentWork?.shortDescription?.value || '', []],
         },
         { validator: workCitationValidator }
       ),
