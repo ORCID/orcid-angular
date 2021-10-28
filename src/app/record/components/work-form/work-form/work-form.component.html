@@ -150,10 +150,16 @@
   </div>
 
   <!-- Work translations title -->
-  <div [hidden]="!showTranslationTitle">
+  <div [hidden]="!showTranslationTitle" formGroupName="translatedTitleGroup">
     <div>
       <div class="row">
-        <label for="given-names-input" class="mat-caption">
+        <label for="given-names-input" class="mat-caption" 
+        [ngClass]="{
+              error: workForm.hasError(
+                'invalidTranslatedTitleContent',
+                'translatedTitleGroup'
+              )
+            }">
           <strong i18n="@@works.translatedTitle">Work translated title</strong>
         </label>
       </div>
@@ -168,18 +174,32 @@
           formControlName="translatedTitleContent"
         />
       </mat-form-field>
+      <mat-error class="mat-caption" *ngIf="
+                  workForm.hasError(
+                    'invalidTranslatedTitleContent',
+                    'translatedTitleGroup'
+                  )
+                " i18n="@@shared.projectTranslatedTitleError">
+        Please enter a translated title
+      </mat-error>
     </div>
 
     <!-- Language of this title -->
     <div>
       <div class="row">
-        <label for="language-of-title-input" class="mat-caption">
+        <label for="language-of-title-input" class="mat-caption"
+        [ngClass]="{
+              error: workForm.hasError(
+                'invalidTranslatedTitleLanguage',
+                'translatedTitleGroup'
+              )
+            }">
           <strong i18n="@@works.languageOnThisTitle"
             >Language of this title</strong
           >
         </label>
       </div>
-      <div class="row">
+      <div class="row language">
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min input-container"
@@ -197,6 +217,14 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-error class="mat-caption" *ngIf="
+                      workForm.hasError(
+                        'invalidTranslatedTitleLanguage',
+                        'translatedTitleGroup'
+                      )
+                    " i18n="@@shared.projectTranslatedTitleLanguageError">
+          Please select a language
+        </mat-error>
       </div>
     </div>
   </div>
@@ -365,15 +393,17 @@
   <hr />
 
   <!-- Citation type -->
-
+  <div formGroupName="citationGroup">
   <div class="row">
     <label
       for="given-names-input"
       class="mat-caption title"
       [ngClass]="{
         error:
-          workForm.hasError('required', 'citationType') &&
-          workForm.get('citationType').touched
+          workForm.hasError(
+                'citationType',
+                'citationGroup'
+              )
       }"
     >
       <strong i18n="@@works.citationType">Citation type</strong>
@@ -397,8 +427,14 @@
         </mat-option>
       </mat-select>
       <mat-error
-        *ngIf="workForm.get('citationType').hasError('required')"
-        i18n="@@works.selectACitationType"
+        class="mat-caption"
+          *ngIf="
+              workForm.hasError(
+                'citationType',
+                'citationGroup'
+              )
+            "
+          i18n="@@works.selectACitationType"
       >
         Select a citation type
       </mat-error>
@@ -408,7 +444,15 @@
 
   <div>
     <div class="row">
-      <label for="citation-input" class="mat-caption">
+      <label for="citation-input" 
+      class="mat-caption"
+      [ngClass]="{
+        error:
+          workForm.hasError(
+                'citation',
+                'citationGroup'
+              )
+      }">
         <strong i18n="@@works.citation">Citation</strong>
       </label>
     </div>
@@ -425,8 +469,13 @@
         cdkAutosizeMaxRows="7"
       ></textarea>
       <mat-error
-        *ngIf="workForm.hasError('required', 'citation')"
-        i18n="@@works.describeThisCitation"
+        class="mat-caption"
+        *ngIf="
+              workForm.hasError(
+                'citation',
+                'citationGroup'
+              )
+            "        i18n="@@works.describeThisCitation"
       >
         Describe this citation
       </mat-error>
@@ -454,6 +503,7 @@
       >
       </textarea>
     </mat-form-field>
+  </div>
   </div>
 
   <!---------------------->
