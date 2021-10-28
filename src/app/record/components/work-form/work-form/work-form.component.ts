@@ -38,6 +38,8 @@ import { dateValidator } from '../../../../shared/validators/date/date.validator
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
+import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
 
 @Component({
   selector: 'app-work-form',
@@ -145,18 +147,6 @@ export class WorkFormComponent implements OnInit {
           this.dynamicTitle = WorksTitleName.journalTitle
         }
       })
-    this.workForm
-      .get('citationType')
-      .valueChanges.pipe(startWith(this.workForm.value['citationType']))
-      .subscribe((value) => {
-        if (value !== '') {
-          this.workForm.controls.citation.setValidators([Validators.required])
-          this.workForm.controls.citation.updateValueAndValidity()
-        } else {
-          this.workForm.controls.citation.clearValidators()
-          this.workForm.controls.citation.updateValueAndValidity()
-        }
-      })
   }
 
   private loadWorkForm(currentWork: Work): void {
@@ -167,11 +157,19 @@ export class WorkFormComponent implements OnInit {
       ],
       workType: [currentWork?.workType?.value || '', [Validators.required]],
       title: [currentWork?.title?.value || '', [Validators.required]],
-      translatedTitleContent: [currentWork?.translatedTitle?.content || '', []],
-      translatedTitleLanguage: [
-        currentWork?.translatedTitle?.languageCode || '',
-        [],
-      ],
+      translatedTitleGroup: this._fb.group(
+        {
+          translatedTitleContent: [
+            currentWork?.translatedTitle?.content || '',
+            [],
+          ],
+          translatedTitleLanguage: [
+            currentWork?.translatedTitle?.languageCode || '',
+            [],
+          ],
+        },
+        { validator: translatedTitleValidator }
+      ),
       subtitle: [currentWork?.subtitle?.value || '', []],
       journalTitle: [currentWork?.journalTitle?.value || '', []],
       publicationDate: this._fb.group(
@@ -189,9 +187,14 @@ export class WorkFormComponent implements OnInit {
         { validator: dateValidator('publication') }
       ),
       url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
-      citationType: [currentWork?.citation?.citationType.value || '', []],
-      citation: [currentWork?.citation?.citation.value || '', []],
-      shortDescription: [currentWork?.shortDescription?.value || '', []],
+      citationGroup: this._fb.group(
+        {
+          citationType: [currentWork?.citation?.citationType.value || '', []],
+          citation: [currentWork?.citation?.citation.value || '', []],
+          shortDescription: [currentWork?.shortDescription?.value || '', []],
+        },
+        { validator: workCitationValidator }
+      ),
       workIdentifiers: new FormArray([]),
       languageCode: [currentWork?.languageCode?.value || '', []],
       countryCode: [currentWork?.countryCode?.value || '', []],
@@ -334,7 +337,7 @@ export class WorkFormComponent implements OnInit {
           year: this.workForm.value.publicationDate.publicationYear,
         },
         shortDescription: {
-          value: this.workForm.value.shortDescription,
+          value: this.workForm.get('citationGroup.shortDescription').value,
         },
         url: {
           value: this.workForm.value.url,
@@ -349,10 +352,10 @@ export class WorkFormComponent implements OnInit {
         },
         citation: {
           citation: {
-            value: this.workForm.value.citation,
+            value: this.workForm.get('citationGroup.citation').value,
           },
           citationType: {
-            value: this.workForm.value.citationType,
+            value: this.workForm.get('citationGroup.citationType').value,
           },
         },
         countryCode: {
@@ -383,8 +386,13 @@ export class WorkFormComponent implements OnInit {
           value: this.workForm.value.subtitle,
         },
         translatedTitle: {
-          content: this.workForm.value.translatedTitleContent,
-          languageCode: this.workForm.value.translatedTitleLanguage,
+          content: this.workForm.get(
+            'translatedTitleGroup.translatedTitleContent'
+          ).value,
+          languageCode: this.workForm.get(
+            'translatedTitleGroup.translatedTitleLanguage'
+          ).value,
+          errors: [],
         },
         workCategory: {
           value: this.workForm.value.workCategory,
