@@ -150,10 +150,19 @@
   </div>
 
   <!-- Work translations title -->
-  <div [hidden]="!showTranslationTitle">
+  <div [hidden]="!showTranslationTitle" formGroupName="translatedTitleGroup">
     <div>
       <div class="row">
-        <label for="given-names-input" class="mat-caption">
+        <label
+          for="given-names-input"
+          class="mat-caption"
+          [ngClass]="{
+            error: workForm.hasError(
+              'invalidTranslatedTitleContent',
+              'translatedTitleGroup'
+            )
+          }"
+        >
           <strong i18n="@@works.translatedTitle">Work translated title</strong>
         </label>
       </div>
@@ -168,18 +177,39 @@
           formControlName="translatedTitleContent"
         />
       </mat-form-field>
+      <mat-error
+        class="mat-caption"
+        *ngIf="
+          workForm.hasError(
+            'invalidTranslatedTitleContent',
+            'translatedTitleGroup'
+          )
+        "
+        i18n="@@shared.translatedTitleError"
+      >
+        Please enter a translated title
+      </mat-error>
     </div>
 
     <!-- Language of this title -->
     <div>
       <div class="row">
-        <label for="language-of-title-input" class="mat-caption">
+        <label
+          for="language-of-title-input"
+          class="mat-caption"
+          [ngClass]="{
+            error: workForm.hasError(
+              'invalidTranslatedTitleLanguage',
+              'translatedTitleGroup'
+            )
+          }"
+        >
           <strong i18n="@@works.languageOnThisTitle"
             >Language of this title</strong
           >
         </label>
       </div>
-      <div class="row">
+      <div class="row select-error">
         <mat-form-field
           appearance="outline"
           class="mat-form-field-min input-container"
@@ -197,6 +227,18 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-error
+          class="mat-caption"
+          *ngIf="
+            workForm.hasError(
+              'invalidTranslatedTitleLanguage',
+              'translatedTitleGroup'
+            )
+          "
+          i18n="@@shared.translatedTitleLanguageError"
+        >
+          Please select a language
+        </mat-error>
       </div>
     </div>
   </div>
@@ -365,95 +407,102 @@
   <hr />
 
   <!-- Citation type -->
+  <div formGroupName="citationGroup">
+    <div class="row">
+      <label
+        for="given-names-input"
+        class="mat-caption title"
+        [ngClass]="{
+          error: workForm.hasError('citationType', 'citationGroup')
+        }"
+      >
+        <strong i18n="@@works.citationType">Citation type</strong>
+      </label>
+    </div>
+    <div class="row select-error">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
+        <mat-select placeholder="Placeholder" formControlName="citationType">
+          <mat-option [value]="''" i18n="@@works.selectACitationType">
+            Select a citation type
+          </mat-option>
 
-  <div class="row">
-    <label
-      for="given-names-input"
-      class="mat-caption title"
-      [ngClass]="{
-        error:
-          workForm.hasError('required', 'citationType') &&
-          workForm.get('citationType').touched
-      }"
-    >
-      <strong i18n="@@works.citationType">Citation type</strong>
-    </label>
-  </div>
-  <div class="row">
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <mat-select placeholder="Placeholder" formControlName="citationType">
-        <mat-option [value]="''" i18n="@@works.selectACitation">
-          Select a citation type
-        </mat-option>
-
-        <mat-option
-          *ngFor="let item of citationTypes | keyvalue"
-          [value]="item.key"
-        >
-          {{ item.value }}
-        </mat-option>
-      </mat-select>
+          <mat-option
+            *ngFor="let item of citationTypes | keyvalue"
+            [value]="item.key"
+          >
+            {{ item.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <mat-error
-        *ngIf="workForm.get('citationType').hasError('required')"
+        class="mat-caption"
+        *ngIf="workForm.hasError('citationType', 'citationGroup')"
         i18n="@@works.selectACitationType"
       >
         Select a citation type
       </mat-error>
-    </mat-form-field>
-  </div>
-  <!-- Citation  -->
-
-  <div>
-    <div class="row">
-      <label for="citation-input" class="mat-caption">
-        <strong i18n="@@works.citation">Citation</strong>
-      </label>
     </div>
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min input-container"
-    >
-      <textarea
-        id="citation-input"
-        matInput
-        formControlName="citation"
-        cdkTextareaAutosize
-        cdkAutosizeMinRows="5"
-        cdkAutosizeMaxRows="7"
-      ></textarea>
+    <!-- Citation  -->
+
+    <div>
+      <div class="row">
+        <label
+          for="citation-input"
+          class="mat-caption"
+          [ngClass]="{
+            error: workForm.hasError('citation', 'citationGroup')
+          }"
+        >
+          <strong i18n="@@works.citation">Citation</strong>
+        </label>
+      </div>
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
+        <textarea
+          id="citation-input"
+          matInput
+          formControlName="citation"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="7"
+        ></textarea>
+      </mat-form-field>
       <mat-error
-        *ngIf="workForm.hasError('required', 'citation')"
-        i18n="@@works.describeThisCitation"
+        class="mat-caption"
+        *ngIf="workForm.hasError('citation', 'citationGroup')"
+        i18n="@@works.selectACitation"
       >
-        Describe this citation
+        Select a citation
       </mat-error>
-    </mat-form-field>
-  </div>
-  <!-- Description  -->
-
-  <div>
-    <div class="row">
-      <label for="description-input" class="mat-caption">
-        <strong i18n="@@works.description">Description</strong>
-      </label>
     </div>
-    <mat-form-field
-      appearance="outline"
-      class="mat-form-field-min biography input-container"
-    >
-      <textarea
-        id="description-input"
-        matInput
-        formControlName="shortDescription"
-        cdkTextareaAutosize
-        cdkAutosizeMinRows="5"
-        cdkAutosizeMaxRows="7"
+    <!-- Description  -->
+
+    <div>
+      <div class="row">
+        <label for="description-input" class="mat-caption">
+          <strong i18n="@@works.description">Description</strong>
+        </label>
+      </div>
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min biography input-container"
       >
-      </textarea>
-    </mat-form-field>
+        <textarea
+          id="description-input"
+          matInput
+          formControlName="shortDescription"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="7"
+        >
+        </textarea>
+      </mat-form-field>
+    </div>
   </div>
 
   <!---------------------->
