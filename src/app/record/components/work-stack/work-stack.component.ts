@@ -43,6 +43,10 @@ export class WorkStackComponent implements OnInit {
   set workStack(value: WorkGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
     this._workStack = value
+    console.log('______');
+    
+    console.log(this._workStack)
+
     this.setInitialStates(value)
   }
   get workStack(): WorkGroup {
