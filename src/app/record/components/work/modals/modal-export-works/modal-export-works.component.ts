@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { Work, WorksEndpoint } from '../../../../../types/record-works.endpoint'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
+import { takeUntil } from 'rxjs/operators'
+import { PlatformInfoService } from '../../../../../cdk/platform-info'
 
 @Component({
   selector: 'app-modal-export-works',
@@ -14,6 +16,7 @@ import { RecordWorksService } from '../../../../../core/record-works/record-work
 export class ModalExportWorksComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  isMobile: boolean
   loadingWorks = false
   putCodes: string[] = []
   selectedAll: boolean
@@ -24,10 +27,18 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
   constructor(
     private elementRef: ElementRef,
     public dialogRef: MatDialogRef<ModalComponent>,
+    private _platform: PlatformInfoService,
     private _recordWorksService: RecordWorksService
   ) {}
 
   ngOnInit(): void {
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((platform) => {
+        this.isMobile = platform.columns4 || platform.columns8
+      })
+
     this.loadingWorks = true
     if (this.selectedAll) {
       const pageSize =

@@ -51,7 +51,7 @@
                 <ng-container i18n="@@shared.selectAll"
                   >Select all</ng-container
                 >
-                ({{ selectAll ? workGroup.totalGroups : 0 }})
+                ({{ workGroup.groups.length }})
               </mat-checkbox>
             </p>
           </div>
@@ -60,7 +60,7 @@
               <ng-container i18n="@@shared.itemsCurrentlySelected"
                 >Items currently selected</ng-container
               >
-              ({{ selectAll ? workGroup.totalGroups : selectedWorks.length }})
+              ({{ selectedWorks.length }})
             </p>
           </div>
           <div class="controls">
@@ -80,7 +80,21 @@
               </button>
               <button mat-menu-item (click)="export()">
                 <mat-icon>file_download</mat-icon>
-                <span i18n="@@shared.exportWorks">Export works</span>
+                <span>
+                  <ng-container i18n="@@shared.exportWorks">
+                    Export works
+                  </ng-container>
+                  ({{ selectedWorks.length }})
+                </span>
+              </button>
+              <button mat-menu-item (click)="exportAllWorks()">
+                <mat-icon>file_download</mat-icon>
+                <span>
+                  <ng-container i18n="@@shared.exportAllWorks">
+                    Export all works
+                  </ng-container>
+                  ({{ this.workGroup.totalGroups }})
+                </span>
               </button>
               <button mat-menu-item (click)="visibility()">
                 <mat-icon>visibility</mat-icon>

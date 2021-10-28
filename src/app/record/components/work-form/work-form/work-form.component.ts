@@ -35,7 +35,7 @@ import { WINDOW } from '../../../../cdk/window'
 import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
-import { URL_REGEXP } from '../../../../constants'
+import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
@@ -140,9 +140,11 @@ export class WorkFormComponent implements OnInit {
       .get('workType')
       .valueChanges.pipe(startWith(this.workForm.value['workType']))
       .subscribe((value) => {
-        if (value && this.workForm.value['workCategory'] && value) {
+        if (value && this.workForm.value['workCategory']) {
           this.dynamicTitle =
             WorkTypesTitle[this.workForm.value['workCategory']][value]
+        } else {
+          this.dynamicTitle = WorksTitleName.journalTitle
         }
       })
   }
@@ -217,6 +219,14 @@ export class WorkFormComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
+            if (value.generatedUrl) {
+              formGroup.controls.externalIdentifierUrl.setValue(
+                value.generatedUrl
+              )
+            } else {
+              formGroup.controls.externalIdentifierUrl.setValue('')
+            }
+
             if (!value.resolved && value.attemptedResolution) {
               return {
                 unResolved: !value.resolved,
@@ -227,13 +237,6 @@ export class WorkFormComponent implements OnInit {
                 validFormat: !value.validFormat,
               }
             }
-            if (value.generatedUrl) {
-              formGroup.controls.externalIdentifierUrl.setValue(
-                value.generatedUrl
-              )
-            } else {
-              formGroup.controls.externalIdentifierUrl.setValue(null)
-            }
           })
         )
     }
@@ -241,8 +244,9 @@ export class WorkFormComponent implements OnInit {
 
   private checkWorkIdentifiersChanges(index: number) {
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
-    formGroup.controls.externalIdentifierType.valueChanges.subscribe(
-      (externalIdentifierType) => {
+    formGroup.controls.externalIdentifierType.valueChanges
+      .pipe(startWith(formGroup.controls.externalIdentifierType.value))
+      .subscribe((externalIdentifierType) => {
         if (externalIdentifierType !== '') {
           formGroup.controls.externalIdentifierId.setValidators([
             Validators.required,
@@ -259,8 +263,7 @@ export class WorkFormComponent implements OnInit {
           formGroup.controls.externalIdentifierId.clearAsyncValidators()
           formGroup.controls.externalIdentifierId.updateValueAndValidity()
         }
-      }
-    )
+      })
 
     formGroup.controls.externalIdentifierId.valueChanges.subscribe((value) => {
       if (value) {
@@ -317,7 +320,10 @@ export class WorkFormComponent implements OnInit {
 
   saveEvent() {
     this.workForm.markAllAsTouched()
-    if (this.workForm.valid) {
+    const formErrors = GetFormErrors(this.workForm)
+    const allowInvalidForm = this.formHasOnlyAllowError(formErrors)
+
+    if (this.workForm.valid || allowInvalidForm) {
       const work: Work = {
         visibility: {
           visibility: this.workForm.value.visibility,
@@ -406,6 +412,31 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Return true only if the errors found are only of the type unResolved and validFormat
+   */
+  private formHasOnlyAllowError(formErrors) {
+    if (
+      formErrors !== null &&
+      Object.keys(formErrors).length === 1 &&
+      formErrors.workIdentifiers?.length
+    ) {
+      return (formErrors.workIdentifiers as {
+        [key: string]: { [key: string]: boolean }
+      }[]).every(
+        (x) =>
+          x &&
+          Object.keys(x).length === 1 &&
+          x.externalIdentifierId &&
+          Object.keys(x.externalIdentifierId).length === 1 &&
+          (x.externalIdentifierId.unResolved ||
+            x.externalIdentifierId.validFormat)
+      )
+    } else {
+      return false
+    }
+  }
+
   cancelExternalIdEdit(id: number) {
     if (
       this.workIdentifiersFormArray.controls[id] &&
@@ -421,5 +452,9 @@ export class WorkFormComponent implements OnInit {
 
   closeEvent() {
     this._dialogRef.close()
+  }
+
+  returnZero() {
+    return 0
   }
 }

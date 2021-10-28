@@ -133,9 +133,7 @@ export class PanelComponent implements OnInit {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {
-    this.selected = this.selectAll
-  }
+  ngOnInit(): void {}
 
   isArrayAndIsNotEmpty(
     obj:
