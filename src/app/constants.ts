@@ -223,7 +223,7 @@ export function GetFormErrors(form: AbstractControl) {
     const groupErrors = form.errors
     const formErrors = groupErrors ? { groupErrors } : {}
     Object.keys(form.controls).forEach((key) => {
-      const error = this.getFormErrors(form.get(key))
+      const error = GetFormErrors(form.get(key))
       if (error !== null) {
         formErrors[key] = error
       }
@@ -234,7 +234,7 @@ export function GetFormErrors(form: AbstractControl) {
     const groupErrors = form.errors
     const formErrors = groupErrors ? [groupErrors] : []
     form.controls.forEach((control) => {
-      const error = this.getFormErrors(control)
+      const error = GetFormErrors(control)
       formErrors.push(error)
     })
     return formErrors.length > 0 ? formErrors : null
