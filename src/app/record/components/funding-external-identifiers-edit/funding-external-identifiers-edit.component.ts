@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -17,7 +18,8 @@ import { WorkRelationships } from 'src/app/types/works.endpoint'
   templateUrl: './funding-external-identifiers-edit.component.html',
   styleUrls: ['./funding-external-identifiers-edit.component.scss'],
 })
-export class FundingExternalIdentifiersEditComponent implements OnInit {
+export class FundingExternalIdentifiersEditComponent
+  implements OnInit, AfterViewInit {
   @ViewChild('grantNumber') grantNumberRef: ElementRef
   @Input() grantForm: FormGroup
   @Input() index: number

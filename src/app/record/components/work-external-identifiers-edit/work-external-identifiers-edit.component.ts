@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -20,7 +21,8 @@ import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
     'work-external-identifiers-edit.component.scss-theme.scss',
   ],
 })
-export class WorkExternalIdentifiersEditComponent implements OnInit {
+export class WorkExternalIdentifiersEditComponent
+  implements OnInit, AfterViewInit {
   @ViewChild('externalIdentifierType') externalIdentifierTypeRef: MatSelect
   @Input() externalIdForm: FormGroup
   @Input() index: number
