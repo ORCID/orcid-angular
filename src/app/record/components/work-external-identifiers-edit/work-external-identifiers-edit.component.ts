@@ -7,14 +7,18 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { FormControl, FormGroup } from '@angular/forms'
+import { ErrorStateMatcher } from '@angular/material/core'
 import { MatSelect } from '@angular/material/select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-work-external-identifiers-edit',
   templateUrl: './work-external-identifiers-edit.component.html',
-  styleUrls: ['./work-external-identifiers-edit.component.scss'],
+  styleUrls: [
+    './work-external-identifiers-edit.component.scss',
+    'work-external-identifiers-edit.component.scss-theme.scss',
+  ],
 })
 export class WorkExternalIdentifiersEditComponent implements OnInit {
   @ViewChild('externalIdentifierType') externalIdentifierTypeRef: MatSelect
@@ -22,6 +26,12 @@ export class WorkExternalIdentifiersEditComponent implements OnInit {
   @Input() index: number
   @Input() workIdTypes: WorkIdType[]
   @Output() cancelEvent = new EventEmitter<void>()
+  workExternalIdErrorMatcher = new WorkExternalIdErrorMatcher()
+
+  validFormatTooltip = $localize`:@@works.validFormat:Invalid id for the selected identifier type`
+  unResolvedTooltip = $localize`:@@works.unResolved:We couldn't find a resource that matches the identifier you entered.
+  Please check the value or enter a valid link to the resource.`
+
   workRelationships: WorkRelationships[] = Object.keys(
     WorkRelationships
   ) as WorkRelationships[]
@@ -43,5 +53,11 @@ export class WorkExternalIdentifiersEditComponent implements OnInit {
   cancel() {
     this.externalIdForm.setValue(this.backupValue)
     this.cancelEvent.emit()
+  }
+}
+
+export class WorkExternalIdErrorMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null): boolean {
+    return control.hasError('required') && control.touched
   }
 }
