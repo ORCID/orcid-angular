@@ -1,6 +1,16 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
-import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { PlatformInfo, PlatformInfoService } from '../../../../cdk/platform-info'
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms'
+import {
+  PlatformInfo,
+  PlatformInfoService,
+} from '../../../../cdk/platform-info'
 import { Work } from '../../../../types/record-works.endpoint'
 import {
   CitationTypes,
@@ -454,22 +464,22 @@ export class WorkFormComponent implements OnInit {
     switch (event.value) {
       case WorkCategories.conference:
         this.workForm.patchValue({
-          workType: WorkConferenceTypes.conferencePaper
+          workType: WorkConferenceTypes.conferencePaper,
         })
         break
       case WorkCategories.intellectual_property:
         this.workForm.patchValue({
-          workType: WorkIntellectualPropertyTypes.patent
+          workType: WorkIntellectualPropertyTypes.patent,
         })
         break
       case WorkCategories.other_output:
         this.workForm.patchValue({
-          workType: WorkOtherOutputTypes.dataSet
+          workType: WorkOtherOutputTypes.dataSet,
         })
         break
       case WorkCategories.publication:
         this.workForm.patchValue({
-          workType: WorkPublicationTypes.journalArticle
+          workType: WorkPublicationTypes.journalArticle,
         })
         break
     }
@@ -489,13 +499,19 @@ export class WorkFormComponent implements OnInit {
         this.workRelationship = WorkRelationships.self
       } else if (this.externalIdentifier === 'issn') {
         this.workRelationship = WorkRelationships['part-of']
-      } else if (this.externalIdentifier === 'isbn' &&
-        workType.value === 'dictionary-entry' || 'conference-paper' || 'encyclopedia-entry'
-    ) {
+      } else if (
+        (this.externalIdentifier === 'isbn' &&
+          workType.value === 'dictionary-entry') ||
+        'conference-paper' ||
+        'encyclopedia-entry'
+      ) {
         this.workRelationship = WorkRelationships['part-of']
       }
     }
-    if (this.externalIdentifier === 'grant_number' || this.externalIdentifier === 'proposal-id') {
+    if (
+      this.externalIdentifier === 'grant_number' ||
+      this.externalIdentifier === 'proposal-id'
+    ) {
       this.workRelationship = WorkRelationships['funded-by']
     }
   }

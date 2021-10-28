@@ -12,7 +12,6 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { MatSelect, MatSelectChange } from '@angular/material/select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
-import { MatRadioChange } from '@angular/material/radio'
 
 @Component({
   selector: 'app-work-external-identifiers-edit',
