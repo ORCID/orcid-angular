@@ -225,7 +225,7 @@ export class WorkFormComponent implements OnInit {
           map((value) => {
             if (value.generatedUrl) {
               formGroup.controls.externalIdentifierUrl.setValue(
-                value.generatedUrl
+                decodeURI(value.generatedUrl)
               )
             } else {
               formGroup.controls.externalIdentifierUrl.setValue('')
