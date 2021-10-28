@@ -38,6 +38,7 @@ import { dateValidator } from '../../../../shared/validators/date/date.validator
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRelation/FundedByRelation.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
 
@@ -291,26 +292,28 @@ export class WorkFormComponent implements OnInit {
     } else {
       this.workIdentifiersFormArrayDisplayState.push(true)
     }
-    this.workIdentifiersFormArray.push(
-      this._fb.group({
-        externalIdentifierType: [
-          existingExternalId?.externalIdentifierType?.value || '',
-          [],
-        ],
-        externalIdentifierId: [
-          existingExternalId?.externalIdentifierId?.value || '',
-          [],
-        ],
-        externalIdentifierUrl: [
-          existingExternalId?.url?.value || '',
-          [Validators.pattern(URL_REGEXP)],
-        ],
-        externalRelationship: [
-          existingExternalId?.relationship?.value || WorkRelationships.self,
-          [],
-        ],
-      })
+    const workIdentifierForm = this._fb.group({
+      externalIdentifierType: [
+        existingExternalId?.externalIdentifierType?.value || '',
+        [],
+      ],
+      externalIdentifierId: [
+        existingExternalId?.externalIdentifierId?.value || '',
+        [],
+      ],
+      externalIdentifierUrl: [
+        existingExternalId?.url?.value || '',
+        [Validators.pattern(URL_REGEXP)],
+      ],
+      externalRelationship: [
+        existingExternalId?.relationship?.value || WorkRelationships.self,
+        [],
+      ],
+    })
+    workIdentifierForm.setValidators(
+      FundedByRelationValidator.fundedByInvalidRelationship()
     )
+    this.workIdentifiersFormArray.push(workIdentifierForm)
 
     this.checkWorkIdentifiersChanges(
       this.workIdentifiersFormArray.controls.length - 1
@@ -324,6 +327,7 @@ export class WorkFormComponent implements OnInit {
   saveEvent() {
     this.workForm.markAllAsTouched()
     const formErrors = GetFormErrors(this.workForm)
+
     const allowInvalidForm = this.formHasOnlyAllowError(formErrors)
 
     if (this.workForm.valid || allowInvalidForm) {
