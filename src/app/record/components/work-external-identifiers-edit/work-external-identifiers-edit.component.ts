@@ -10,8 +10,9 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
-import { MatSelect } from '@angular/material/select'
+import { MatSelect, MatSelectChange } from '@angular/material/select'
 import { WorkIdType, WorkRelationships } from 'src/app/types/works.endpoint'
+import { MatRadioChange } from '@angular/material/radio'
 
 @Component({
   selector: 'app-work-external-identifiers-edit',
@@ -27,7 +28,9 @@ export class WorkExternalIdentifiersEditComponent
   @Input() externalIdForm: FormGroup
   @Input() index: number
   @Input() workIdTypes: WorkIdType[]
+  @Input() workRelationship: WorkRelationships
   @Output() cancelEvent = new EventEmitter<void>()
+  @Output() updateExternalEvent = new EventEmitter<void>()
   workExternalIdErrorMatcher = new WorkExternalIdErrorMatcher()
 
   validFormatTooltip = $localize`:@@works.validFormat:Invalid id for the selected identifier type`
@@ -45,6 +48,10 @@ export class WorkExternalIdentifiersEditComponent
 
   ngOnInit(): void {
     this.backupValue = this.externalIdForm.value
+  }
+
+  updateExternal(event: MatSelectChange): void {
+    this.updateExternalEvent.emit(event.value)
   }
 
   ngAfterViewInit() {

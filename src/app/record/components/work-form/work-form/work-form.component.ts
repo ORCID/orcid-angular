@@ -1,16 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms'
-import {
-  PlatformInfo,
-  PlatformInfoService,
-} from '../../../../cdk/platform-info'
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { PlatformInfo, PlatformInfoService } from '../../../../cdk/platform-info'
 import { Work } from '../../../../types/record-works.endpoint'
 import {
   CitationTypes,
@@ -41,6 +31,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRelation/FundedByRelation.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
+import { MatSelectChange } from '@angular/material/select'
 
 @Component({
   selector: 'app-work-form',
@@ -81,6 +72,8 @@ export class WorkFormComponent implements OnInit {
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
+  workRelationship: WorkRelationships
+  externalIdentifier: string
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -454,6 +447,56 @@ export class WorkFormComponent implements OnInit {
       this.deleteWorkId(id)
     } else {
       this.workIdentifiersFormArrayDisplayState[id] = false
+    }
+  }
+
+  updateType(event: MatSelectChange) {
+    switch (event.value) {
+      case WorkCategories.conference:
+        this.workForm.patchValue({
+          workType: WorkConferenceTypes.conferencePaper
+        })
+        break
+      case WorkCategories.intellectual_property:
+        this.workForm.patchValue({
+          workType: WorkIntellectualPropertyTypes.patent
+        })
+        break
+      case WorkCategories.other_output:
+        this.workForm.patchValue({
+          workType: WorkOtherOutputTypes.dataSet
+        })
+        break
+      case WorkCategories.publication:
+        this.workForm.patchValue({
+          workType: WorkPublicationTypes.journalArticle
+        })
+        break
+    }
+  }
+
+  updateRelation(event, type: 'external' | 'workType') {
+    const workType = this.workForm.get('workType').value
+
+    if (type === 'external') {
+      this.externalIdentifier = event
+    }
+
+    if (this.externalIdentifier && workType) {
+      if (this.externalIdentifier === 'isbn' && workType === 'book-chapter') {
+        this.workRelationship = WorkRelationships['part-of']
+      } else if (this.externalIdentifier === 'isbn' && workType === 'book') {
+        this.workRelationship = WorkRelationships.self
+      } else if (this.externalIdentifier === 'issn') {
+        this.workRelationship = WorkRelationships['part-of']
+      } else if (this.externalIdentifier === 'isbn' &&
+        workType.value === 'dictionary-entry' || 'conference-paper' || 'encyclopedia-entry'
+    ) {
+        this.workRelationship = WorkRelationships['part-of']
+      }
+    }
+    if (this.externalIdentifier === 'grant_number' || this.externalIdentifier === 'proposal-id') {
+      this.workRelationship = WorkRelationships['funded-by']
     }
   }
 

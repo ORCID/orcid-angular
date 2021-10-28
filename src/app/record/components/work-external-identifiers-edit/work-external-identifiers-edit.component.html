@@ -31,6 +31,7 @@
           #externalIdentifierType
           placeholder="{{ ngOrcidSelectIdentifierType }}"
           formControlName="externalIdentifierType"
+          (selectionChange)="updateExternal($event)"
         >
           <mat-option [value]="''" i18n="@@works.selectAnIdentifier">
             Select an identifier type
@@ -194,6 +195,7 @@
       appearance="outline"
       class="mat-form-field-min"
       formControlName="externalRelationship"
+      [(ngModel)]="workRelationship"
     >
       <ng-container *ngFor="let value of workRelationships">
         <mat-radio-button [value]="value"

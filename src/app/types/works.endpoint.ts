@@ -435,8 +435,8 @@ export interface WorkIdTypeValidation {
 export enum WorkRelationships {
   self = 'self',
   'part-of' = 'part-of',
-  'version-of' = 'version_of',
-  'funded-by' = 'funded_by',
+  'version-of' = 'version-of',
+  'funded-by' = 'funded-by',
 }
 
 export const WorkRelationshipsLabels = {
