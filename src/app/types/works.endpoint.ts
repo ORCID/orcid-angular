@@ -118,7 +118,7 @@ export const WorkTypesLabels = {
   [WorkCategories.other_output]: {
     [WorkOtherOutputTypes.annotation]: $localize`:@@works.annotation:Annotation`,
     [WorkOtherOutputTypes.artisticPerformance]: $localize`:@@works.artisticPerformance:Artistic performance`,
-    [WorkOtherOutputTypes.dataManagementPlan]: $localize`:@@works.AAA:Data management plan`,
+    [WorkOtherOutputTypes.dataManagementPlan]: $localize`:@@works.dataManagementPlan:Data management plan`,
     [WorkOtherOutputTypes.dataSet]: $localize`:@@works.plan:Data set`,
     [WorkOtherOutputTypes.invention]: $localize`:@@works.invention:Invention`,
     [WorkOtherOutputTypes.lectureSpeech]: $localize`:@@works.speech:Lecture/speech`,
@@ -145,15 +145,15 @@ export enum WorksTitleName {
 }
 
 export const WorksTitleNameLabel = {
-  [WorksTitleName.publisher]: $localize`:@@works.AAA:Publisher`,
-  [WorksTitleName.conferenceTitle]: $localize`:@@works.AAA:Conference title`,
-  [WorksTitleName.bookTitle]: $localize`:@@works.AAA:Book title`,
-  [WorksTitleName.journalTitle]: $localize`:@@works.AAA:Journal title`,
-  [WorksTitleName.magazineTitle]: $localize`:@@works.AAA:Magazine title`,
-  [WorksTitleName.newsletterTitle]: $localize`:@@works.AAA:Newsletter title`,
-  [WorksTitleName.institution]: $localize`:@@works.AAA:Institution`,
-  [WorksTitleName.custodian]: $localize`:@@works.AAA:Custodian`,
-  [WorksTitleName.trademark]: $localize`:@@works.AAA:Trademark`,
+  [WorksTitleName.publisher]: $localize`:@@works.publisher:Publisher`,
+  [WorksTitleName.conferenceTitle]: $localize`:@@works.conferenceTitle:Conference title`,
+  [WorksTitleName.bookTitle]: $localize`:@@works.bookTitle:Book title`,
+  [WorksTitleName.journalTitle]: $localize`:@@works.journalTitle:Journal title`,
+  [WorksTitleName.magazineTitle]: $localize`:@@works.magazineTitle:Magazine title`,
+  [WorksTitleName.newsletterTitle]: $localize`:@@works.newsletterTitle:Newsletter title`,
+  [WorksTitleName.institution]: $localize`:@@works.institution:Institution`,
+  [WorksTitleName.custodian]: $localize`:@@works.custodian:Custodian`,
+  [WorksTitleName.trademark]: $localize`:@@works.trademark:Trademark`,
 }
 
 export const WorkTypesTitle = {
