@@ -97,5 +97,9 @@
       </button>
     </div>
   </form>
-  <app-work-form [work]="work" *ngIf="work && !loading" #workFormComponent></app-work-form>
+  <app-work-form
+    [work]="work"
+    *ngIf="work && !loading"
+    #workFormComponent
+  ></app-work-form>
 </app-modal>
