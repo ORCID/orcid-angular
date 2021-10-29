@@ -35,9 +35,13 @@ import { WINDOW } from '../../../../cdk/window'
 import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
-import { URL_REGEXP } from '../../../../constants'
+import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRelation/FundedByRelation.validator'
+import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
+import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
+import { MatSelectChange } from '@angular/material/select'
 
 @Component({
   selector: 'app-work-form',
@@ -78,6 +82,8 @@ export class WorkFormComponent implements OnInit {
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
+  workRelationship: WorkRelationships
+  externalIdentifier: string
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -138,21 +144,11 @@ export class WorkFormComponent implements OnInit {
       .get('workType')
       .valueChanges.pipe(startWith(this.workForm.value['workType']))
       .subscribe((value) => {
-        if (value && this.workForm.value['workCategory'] && value) {
+        if (value && this.workForm.value['workCategory']) {
           this.dynamicTitle =
             WorkTypesTitle[this.workForm.value['workCategory']][value]
-        }
-      })
-    this.workForm
-      .get('citationType')
-      .valueChanges.pipe(startWith(this.workForm.value['citationType']))
-      .subscribe((value) => {
-        if (value !== '') {
-          this.workForm.controls.citation.setValidators([Validators.required])
-          this.workForm.controls.citation.updateValueAndValidity()
         } else {
-          this.workForm.controls.citation.clearValidators()
-          this.workForm.controls.citation.updateValueAndValidity()
+          this.dynamicTitle = WorksTitleName.journalTitle
         }
       })
   }
@@ -165,25 +161,44 @@ export class WorkFormComponent implements OnInit {
       ],
       workType: [currentWork?.workType?.value || '', [Validators.required]],
       title: [currentWork?.title?.value || '', [Validators.required]],
-      translatedTitleContent: [currentWork?.translatedTitle?.content || '', []],
-      translatedTitleLanguage: [
-        currentWork?.translatedTitle?.languageCode || '',
-        [],
-      ],
+      translatedTitleGroup: this._fb.group(
+        {
+          translatedTitleContent: [
+            currentWork?.translatedTitle?.content || '',
+            [],
+          ],
+          translatedTitleLanguage: [
+            currentWork?.translatedTitle?.languageCode || '',
+            [],
+          ],
+        },
+        { validator: translatedTitleValidator }
+      ),
       subtitle: [currentWork?.subtitle?.value || '', []],
       journalTitle: [currentWork?.journalTitle?.value || '', []],
       publicationDate: this._fb.group(
         {
-          publicationDay: [currentWork?.publicationDate?.day || '', []],
-          publicationMonth: [currentWork.publicationDate?.month || '', []],
-          publicationYear: [currentWork?.publicationDate?.year || '', []],
+          publicationDay: [Number(currentWork?.publicationDate?.day) || '', []],
+          publicationMonth: [
+            Number(currentWork?.publicationDate?.month) || '',
+            [],
+          ],
+          publicationYear: [
+            Number(currentWork?.publicationDate?.year) || '',
+            [],
+          ],
         },
         { validator: dateValidator('publication') }
       ),
       url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
-      citationType: [currentWork?.citation?.citationType.value || '', []],
-      citation: [currentWork?.citation?.citation.value || '', []],
-      shortDescription: [currentWork?.shortDescription?.value || '', []],
+      citationGroup: this._fb.group(
+        {
+          citationType: [currentWork?.citation?.citationType.value || '', []],
+          citation: [currentWork?.citation?.citation.value || '', []],
+          shortDescription: [currentWork?.shortDescription?.value || '', []],
+        },
+        { validator: workCitationValidator }
+      ),
       workIdentifiers: new FormArray([]),
       languageCode: [currentWork?.languageCode?.value || '', []],
       countryCode: [currentWork?.countryCode?.value || '', []],
@@ -211,6 +226,14 @@ export class WorkFormComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
+            if (value.generatedUrl) {
+              formGroup.controls.externalIdentifierUrl.setValue(
+                decodeURI(value.generatedUrl)
+              )
+            } else {
+              formGroup.controls.externalIdentifierUrl.setValue('')
+            }
+
             if (!value.resolved && value.attemptedResolution) {
               return {
                 unResolved: !value.resolved,
@@ -221,13 +244,6 @@ export class WorkFormComponent implements OnInit {
                 validFormat: !value.validFormat,
               }
             }
-            if (value.generatedUrl) {
-              formGroup.controls.externalIdentifierUrl.setValue(
-                value.generatedUrl
-              )
-            } else {
-              formGroup.controls.externalIdentifierUrl.setValue(null)
-            }
           })
         )
     }
@@ -235,8 +251,9 @@ export class WorkFormComponent implements OnInit {
 
   private checkWorkIdentifiersChanges(index: number) {
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
-    formGroup.controls.externalIdentifierType.valueChanges.subscribe(
-      (externalIdentifierType) => {
+    formGroup.controls.externalIdentifierType.valueChanges
+      .pipe(startWith(formGroup.controls.externalIdentifierType.value))
+      .subscribe((externalIdentifierType) => {
         if (externalIdentifierType !== '') {
           formGroup.controls.externalIdentifierId.setValidators([
             Validators.required,
@@ -253,8 +270,7 @@ export class WorkFormComponent implements OnInit {
           formGroup.controls.externalIdentifierId.clearAsyncValidators()
           formGroup.controls.externalIdentifierId.updateValueAndValidity()
         }
-      }
-    )
+      })
 
     formGroup.controls.externalIdentifierId.valueChanges.subscribe((value) => {
       if (value) {
@@ -279,26 +295,28 @@ export class WorkFormComponent implements OnInit {
     } else {
       this.workIdentifiersFormArrayDisplayState.push(true)
     }
-    this.workIdentifiersFormArray.push(
-      this._fb.group({
-        externalIdentifierType: [
-          existingExternalId?.externalIdentifierType?.value || '',
-          [],
-        ],
-        externalIdentifierId: [
-          existingExternalId?.externalIdentifierId?.value || '',
-          [],
-        ],
-        externalIdentifierUrl: [
-          existingExternalId?.url?.value || '',
-          [Validators.pattern(URL_REGEXP)],
-        ],
-        externalRelationship: [
-          existingExternalId?.relationship?.value || WorkRelationships.self,
-          [],
-        ],
-      })
+    const workIdentifierForm = this._fb.group({
+      externalIdentifierType: [
+        existingExternalId?.externalIdentifierType?.value || '',
+        [],
+      ],
+      externalIdentifierId: [
+        existingExternalId?.externalIdentifierId?.value || '',
+        [],
+      ],
+      externalIdentifierUrl: [
+        existingExternalId?.url?.value || '',
+        [Validators.pattern(URL_REGEXP)],
+      ],
+      externalRelationship: [
+        existingExternalId?.relationship?.value || WorkRelationships.self,
+        [],
+      ],
+    })
+    workIdentifierForm.setValidators(
+      FundedByRelationValidator.fundedByInvalidRelationship()
     )
+    this.workIdentifiersFormArray.push(workIdentifierForm)
 
     this.checkWorkIdentifiersChanges(
       this.workIdentifiersFormArray.controls.length - 1
@@ -311,7 +329,11 @@ export class WorkFormComponent implements OnInit {
 
   saveEvent() {
     this.workForm.markAllAsTouched()
-    if (this.workForm.valid) {
+    const formErrors = GetFormErrors(this.workForm)
+
+    const allowInvalidForm = this.formHasOnlyAllowError(formErrors)
+
+    if (this.workForm.valid || allowInvalidForm) {
       const work: Work = {
         visibility: {
           visibility: this.workForm.value.visibility,
@@ -322,7 +344,7 @@ export class WorkFormComponent implements OnInit {
           year: this.workForm.value.publicationDate.publicationYear,
         },
         shortDescription: {
-          value: this.workForm.value.shortDescription,
+          value: this.workForm.get('citationGroup.shortDescription').value,
         },
         url: {
           value: this.workForm.value.url,
@@ -337,10 +359,10 @@ export class WorkFormComponent implements OnInit {
         },
         citation: {
           citation: {
-            value: this.workForm.value.citation,
+            value: this.workForm.get('citationGroup.citation').value,
           },
           citationType: {
-            value: this.workForm.value.citationType,
+            value: this.workForm.get('citationGroup.citationType').value,
           },
         },
         countryCode: {
@@ -371,8 +393,13 @@ export class WorkFormComponent implements OnInit {
           value: this.workForm.value.subtitle,
         },
         translatedTitle: {
-          content: this.workForm.value.translatedTitleContent,
-          languageCode: this.workForm.value.translatedTitleLanguage,
+          content: this.workForm.get(
+            'translatedTitleGroup.translatedTitleContent'
+          ).value,
+          languageCode: this.workForm.get(
+            'translatedTitleGroup.translatedTitleLanguage'
+          ).value,
+          errors: [],
         },
         workCategory: {
           value: this.workForm.value.workCategory,
@@ -395,6 +422,31 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Return true only if the errors found are only of the type unResolved and validFormat
+   */
+  private formHasOnlyAllowError(formErrors) {
+    if (
+      formErrors !== null &&
+      Object.keys(formErrors).length === 1 &&
+      formErrors.workIdentifiers?.length
+    ) {
+      return (formErrors.workIdentifiers as {
+        [key: string]: { [key: string]: boolean }
+      }[]).every(
+        (x) =>
+          x &&
+          Object.keys(x).length === 1 &&
+          x.externalIdentifierId &&
+          Object.keys(x.externalIdentifierId).length === 1 &&
+          (x.externalIdentifierId.unResolved ||
+            x.externalIdentifierId.validFormat)
+      )
+    } else {
+      return false
+    }
+  }
+
   cancelExternalIdEdit(id: number) {
     if (
       this.workIdentifiersFormArray.controls[id] &&
@@ -408,7 +460,67 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
+  updateType(event: MatSelectChange) {
+    switch (event.value) {
+      case WorkCategories.conference:
+        this.workForm.patchValue({
+          workType: WorkConferenceTypes.conferencePaper,
+        })
+        break
+      case WorkCategories.intellectual_property:
+        this.workForm.patchValue({
+          workType: WorkIntellectualPropertyTypes.patent,
+        })
+        break
+      case WorkCategories.other_output:
+        this.workForm.patchValue({
+          workType: WorkOtherOutputTypes.dataSet,
+        })
+        break
+      case WorkCategories.publication:
+        this.workForm.patchValue({
+          workType: WorkPublicationTypes.journalArticle,
+        })
+        break
+    }
+  }
+
+  updateRelation(event, type: 'external' | 'workType') {
+    const workType = this.workForm.get('workType').value
+
+    if (type === 'external') {
+      this.externalIdentifier = event
+    }
+
+    if (this.externalIdentifier && workType) {
+      if (this.externalIdentifier === 'isbn' && workType === 'book-chapter') {
+        this.workRelationship = WorkRelationships['part-of']
+      } else if (this.externalIdentifier === 'isbn' && workType === 'book') {
+        this.workRelationship = WorkRelationships.self
+      } else if (this.externalIdentifier === 'issn') {
+        this.workRelationship = WorkRelationships['part-of']
+      } else if (
+        (this.externalIdentifier === 'isbn' &&
+          workType.value === 'dictionary-entry') ||
+        'conference-paper' ||
+        'encyclopedia-entry'
+      ) {
+        this.workRelationship = WorkRelationships['part-of']
+      }
+    }
+    if (
+      this.externalIdentifier === 'grant_number' ||
+      this.externalIdentifier === 'proposal-id'
+    ) {
+      this.workRelationship = WorkRelationships['funded-by']
+    }
+  }
+
   closeEvent() {
     this._dialogRef.close()
+  }
+
+  returnZero() {
+    return 0
   }
 }

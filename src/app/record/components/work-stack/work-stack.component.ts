@@ -43,7 +43,7 @@ export class WorkStackComponent implements OnInit {
   set workStack(value: WorkGroup) {
     this.hasExternalIds = !!value.externalIdentifiers.length
     this._workStack = value
-    this.setInitialStates(value)
+    this.setInitialStates(value, true)
   }
   get workStack(): WorkGroup {
     return this._workStack
@@ -61,6 +61,7 @@ export class WorkStackComponent implements OnInit {
 
   @Output() checkboxChangeWorkStackOutput = new EventEmitter<any>()
   @Input() userInfo: UserInfo
+  @Input() selectAll: boolean
   @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
@@ -91,6 +92,8 @@ export class WorkStackComponent implements OnInit {
       this.panelDetailsState[work.putCode.value] = {
         state: false,
       }
+    } else {
+      this.getDetails(work).subscribe()
     }
   }
 

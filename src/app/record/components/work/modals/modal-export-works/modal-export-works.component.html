@@ -47,7 +47,7 @@
       <ng-container i18n="@@works.selectedWorks">
         Selected works to export
       </ng-container>
-      ({{ works.length }})
+      ({{ selectedAll ? totalWorks : works.length }})
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
     <ng-container *ngFor="let work of works">
@@ -59,12 +59,36 @@
         </div>
         <div class="orc-font-body-small">
           <strong i18n="@@shared.source">Source</strong>:
+          <ng-container
+            *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
+          >
+            {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+            <i i18n="@@shared.onBehalfOf">via</i>
+          </ng-container>
           {{ work.sourceName || work.source }}
-          <strong class="added" i18n="@@shared.added"> Added </strong>:
-          {{ work.createdDate | monthDayYearDateToString }}
+          <ng-container *ngIf="work.createdDate">
+            <br *ngIf="isMobile" />
+            <strong
+              class="added"
+              i18n="@@shared.added"
+              [ngClass]="{
+                mobile: isMobile
+              }"
+            >
+              Added </strong
+            >:
+            {{ work.createdDate | monthDayYearDateToString }}
+          </ng-container>
         </div>
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
+    <p *ngIf="totalWorks > maxNumberOfWorksToDisplay">
+      <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
+      <b>{{ maxNumberOfWorksToDisplay }}</b>
+      <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
+      <b>{{ totalWorks }}</b>
+      <ng-container i18n="@@works.worksToExport">works to export</ng-container>
+    </p>
   </div>
 </app-modal>

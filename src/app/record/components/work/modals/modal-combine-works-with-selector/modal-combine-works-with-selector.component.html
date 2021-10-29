@@ -1,7 +1,7 @@
-<app-modal [loading]="loadingWorks" [noSidebar]="true" [loading]="loadingWorks">
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@works.reviewWorkToCombine">
-      Review works to combine
+    <ng-container i18n="@@works.combineSelectedWorks">
+      Combine selected works
     </ng-container>
   </app-modal-header>
   <app-modal-footer>
@@ -30,7 +30,7 @@
       <div class="orc-font-small-print">
         <p>
           <ng-container i18n="@@works.setsOfSimilarWorkToManage1"
-            >We found</ng-container
+            >ORCID have found</ng-container
           >
           {{ this.suggestionsWorks.length }}
           <ng-container i18n="@@works.setsOfSimilarWorkToManage2">
@@ -39,9 +39,9 @@
         </p>
 
         <p i18n="@@works.setsOfSimilarWorkToManage3">
-          Combined works will be grouped together and displayed as one item on
-          your record. All versions will still be available, but one will be
-          shown as your preferred version.
+          The selected works will be grouped together and displayed as a single
+          group item on your record. All versions of the work will still be
+          available but one will be shown as your preferred version
         </p>
         <a
           class="underline"
@@ -96,9 +96,30 @@
                 </div>
                 <div class="orc-font-body-small">
                   <strong i18n="@@shared.source">Source</strong>:
+                  <ng-container
+                    *ngIf="
+                      work?.assertionOriginName || work?.assertionOriginOrcid
+                    "
+                  >
+                    {{
+                      work?.assertionOriginName || work?.assertionOriginOrcid
+                    }}
+                    <i i18n="@@shared.onBehalfOf">via</i>
+                  </ng-container>
                   {{ work.sourceName || work.source }}
-                  <strong class="added" i18n="@@shared.added"> Added </strong>:
-                  {{ work.createdDate | monthDayYearDateToString }}
+                  <ng-container *ngIf="work.createdDate">
+                    <br *ngIf="isMobile" />
+                    <strong
+                      class="added"
+                      i18n="@@shared.added"
+                      [ngClass]="{
+                        mobile: isMobile
+                      }"
+                    >
+                      Added </strong
+                    >:
+                    {{ work.createdDate | monthDayYearDateToString }}
+                  </ng-container>
                 </div>
               </div>
               <mat-divider class="row"></mat-divider>

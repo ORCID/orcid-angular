@@ -201,6 +201,10 @@ export class WorkStackGroupComponent implements OnInit {
     this.openModal(ModalExportWorksComponent, this.selectedWorks)
   }
 
+  exportAllWorks() {
+    this.openModal(ModalExportWorksComponent, undefined, true)
+  }
+
   visibility() {
     this.openModal(WorksVisibilityModalComponent, this.selectedWorks)
   }
@@ -217,8 +221,9 @@ export class WorkStackGroupComponent implements OnInit {
     })
   }
 
-  openModal(modal: ComponentType<any>, putCodes) {
+  openModal(modal: ComponentType<any>, putCodes, selectedAll?: boolean) {
     this.selectedWorks = []
+    this.selectAll = false
     this.appWorkStacks.forEach((appWorkStack) => {
       appWorkStack.panelsComponent.forEach((panelComponent) => {
         panelComponent.selected = false
@@ -234,6 +239,8 @@ export class WorkStackGroupComponent implements OnInit {
         })
         modalComponent.componentInstance.putCodes = putCodes
         modalComponent.componentInstance.type = 'works'
+        modalComponent.componentInstance.selectedAll = selectedAll
+        modalComponent.componentInstance.totalWorks = this.workGroup.totalGroups
       })
   }
 

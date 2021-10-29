@@ -36,7 +36,7 @@
         [disabled]="paginationLoading"
       >
       </mat-paginator>
-      <ng-container *ngIf="workGroup.groups.length > 0">
+      <ng-container *ngIf="workGroup.groups.length > 0 && !paginationLoading">
         <div
           class="row works-buttons orc-font-body-small"
           *ngIf="!isPublicRecord"
@@ -80,7 +80,21 @@
               </button>
               <button mat-menu-item (click)="export()">
                 <mat-icon>file_download</mat-icon>
-                <span i18n="@@shared.exportWorks">Export works</span>
+                <span>
+                  <ng-container i18n="@@shared.exportWorks">
+                    Export works
+                  </ng-container>
+                  ({{ selectedWorks.length }})
+                </span>
+              </button>
+              <button mat-menu-item (click)="exportAllWorks()">
+                <mat-icon>file_download</mat-icon>
+                <span>
+                  <ng-container i18n="@@shared.exportAllWorks">
+                    Export all works
+                  </ng-container>
+                  ({{ this.workGroup.totalGroups }})
+                </span>
               </button>
               <button mat-menu-item (click)="visibility()">
                 <mat-icon>visibility</mat-icon>
@@ -109,6 +123,7 @@
           *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
           [workStack]="group"
           [userInfo]="userInfo"
+          [selectAll]="selectAll"
           (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
           #appWorkStacks
         ></app-work-stack>
