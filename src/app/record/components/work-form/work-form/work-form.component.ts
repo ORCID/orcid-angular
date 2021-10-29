@@ -42,6 +42,7 @@ import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRel
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
 import { MatSelectChange } from '@angular/material/select'
+import { merge, Subject } from 'rxjs'
 
 @Component({
   selector: 'app-work-form',
@@ -53,6 +54,7 @@ import { MatSelectChange } from '@angular/material/select'
 })
 export class WorkFormComponent implements OnInit {
   @Input() work: Work
+  $workTypeUpdateEvent = new Subject<WorkIdType>()
 
   loading = true
   workForm: FormGroup
@@ -82,7 +84,6 @@ export class WorkFormComponent implements OnInit {
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
-  workRelationship: WorkRelationships
   externalIdentifier: string
 
   ngOrcidYear = $localize`:@@shared.year:Year`
@@ -97,6 +98,7 @@ export class WorkFormComponent implements OnInit {
     | typeof WorkOtherOutputTypes
     | {} = {}
   originalCountryCodes: RecordCountryCodesEndpoint
+  workRelationship: WorkRelationships
 
   constructor(
     private _fb: FormBuilder,
@@ -251,7 +253,10 @@ export class WorkFormComponent implements OnInit {
 
   private checkWorkIdentifiersChanges(index: number) {
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
-    formGroup.controls.externalIdentifierType.valueChanges
+    merge(
+      this.$workTypeUpdateEvent,
+      formGroup.controls.externalIdentifierType.valueChanges
+    )
       .pipe(startWith(formGroup.controls.externalIdentifierType.value))
       .subscribe((externalIdentifierType) => {
         if (externalIdentifierType !== '') {
@@ -265,6 +270,20 @@ export class WorkFormComponent implements OnInit {
             )
           )
           formGroup.controls.externalIdentifierId.updateValueAndValidity()
+          const suggestedRelationship = this.getOrcidRecommendedRelationShip(
+            externalIdentifierType
+          )
+          console.log(externalIdentifierType)
+          console.log(this.workForm.get('workType').value)
+          console.log('>>>> ', suggestedRelationship)
+
+          console.log('____-')
+
+          if (suggestedRelationship) {
+            formGroup.controls.externalRelationship.setValue(
+              suggestedRelationship
+            )
+          }
         } else {
           formGroup.controls.externalIdentifierId.clearValidators()
           formGroup.controls.externalIdentifierId.clearAsyncValidators()
@@ -423,7 +442,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   /**
-   * Return true only if the errors found are only of the type unResolved 
+   * Return true only if the errors found are only of the type unResolved
    */
   private formHasOnlyAllowError(formErrors) {
     if (
@@ -484,35 +503,33 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
-  updateRelation(event, type: 'external' | 'workType') {
+  getOrcidRecommendedRelationShip(externalIdentifier) {
+    let workRelationship = null
     const workType = this.workForm.get('workType').value
 
-    if (type === 'external') {
-      this.externalIdentifier = event
-    }
-
-    if (this.externalIdentifier && workType) {
-      if (this.externalIdentifier === 'isbn' && workType === 'book-chapter') {
-        this.workRelationship = WorkRelationships['part-of']
-      } else if (this.externalIdentifier === 'isbn' && workType === 'book') {
-        this.workRelationship = WorkRelationships.self
-      } else if (this.externalIdentifier === 'issn') {
-        this.workRelationship = WorkRelationships['part-of']
+    if (externalIdentifier && workType) {
+      if (externalIdentifier === 'isbn' && workType === 'book-chapter') {
+        workRelationship = WorkRelationships['part-of']
+      } else if (externalIdentifier === 'isbn' && workType === 'book') {
+        workRelationship = WorkRelationships.self
+      } else if (externalIdentifier === 'issn') {
+        workRelationship = WorkRelationships['part-of']
       } else if (
-        (this.externalIdentifier === 'isbn' &&
-          workType.value === 'dictionary-entry') ||
-        'conference-paper' ||
-        'encyclopedia-entry'
+        externalIdentifier === 'isbn' &&
+        ['dictionary-entry', 'conference-paper', 'encyclopedia-entry'].indexOf(
+          workType.value
+        ) >= 0
       ) {
-        this.workRelationship = WorkRelationships['part-of']
+        workRelationship = WorkRelationships['part-of']
       }
     }
     if (
-      this.externalIdentifier === 'grant_number' ||
-      this.externalIdentifier === 'proposal-id'
+      externalIdentifier === 'grant_number' ||
+      externalIdentifier === 'proposal-id'
     ) {
-      this.workRelationship = WorkRelationships['funded-by']
+      workRelationship = WorkRelationships['funded-by']
     }
+    return workRelationship
   }
 
   closeEvent() {

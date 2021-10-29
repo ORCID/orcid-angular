@@ -78,7 +78,7 @@
       <mat-select
         placeholder="Select a work type"
         formControlName="workType"
-        (selectionChange)="updateRelation($event, 'workType')"
+        (selectionChange)="$workTypeUpdateEvent.next()"
       >
         <mat-option
           *ngFor="let item of workTypes | keyvalue"
@@ -546,9 +546,7 @@
           class="input-container"
           [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
           [workIdTypes]="workIdTypes"
-          [workRelationship]="workRelationship"
           (cancelEvent)="cancelExternalIdEdit(i)"
-          (updateExternalEvent)="updateRelation($event, 'external')"
           [index]="i"
         ></app-work-external-identifiers-edit>
       </ng-container>

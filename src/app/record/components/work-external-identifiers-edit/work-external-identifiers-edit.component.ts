@@ -27,7 +27,6 @@ export class WorkExternalIdentifiersEditComponent
   @Input() externalIdForm: FormGroup
   @Input() index: number
   @Input() workIdTypes: WorkIdType[]
-  @Input() workRelationship: WorkRelationships
   @Output() cancelEvent = new EventEmitter<void>()
   @Output() updateExternalEvent = new EventEmitter<void>()
   workExternalIdErrorMatcher = new WorkExternalIdErrorMatcher()
