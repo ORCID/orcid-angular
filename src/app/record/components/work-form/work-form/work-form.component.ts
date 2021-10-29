@@ -503,9 +503,6 @@ export class WorkFormComponent implements OnInit {
   }
 
   getOrcidRecommendedRelationShip(externalIdentifier) {
-    console.log(externalIdentifier)
-    console.log(this.workForm.get('workType').value)
-
     let workRelationship = null
     const workType = this.workForm.get('workType').value
 
@@ -531,8 +528,6 @@ export class WorkFormComponent implements OnInit {
     ) {
       workRelationship = WorkRelationships['funded-by']
     }
-    console.log(workRelationship)
-    console.log('______')
 
     return workRelationship
   }
