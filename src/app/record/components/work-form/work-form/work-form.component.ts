@@ -276,6 +276,7 @@ export class WorkFormComponent implements OnInit {
           const suggestedRelationship = this.getOrcidRecommendedRelationShip(
             externalIdentifierType
           )
+
           if (suggestedRelationship) {
             formGroup.controls.externalRelationship.setValue(
               suggestedRelationship
@@ -498,9 +499,13 @@ export class WorkFormComponent implements OnInit {
         })
         break
     }
+    this.$workTypeUpdateEvent.next()
   }
 
   getOrcidRecommendedRelationShip(externalIdentifier) {
+    console.log(externalIdentifier)
+    console.log(this.workForm.get('workType').value)
+
     let workRelationship = null
     const workType = this.workForm.get('workType').value
 
@@ -514,7 +519,7 @@ export class WorkFormComponent implements OnInit {
       } else if (
         externalIdentifier === 'isbn' &&
         ['dictionary-entry', 'conference-paper', 'encyclopedia-entry'].indexOf(
-          workType.value
+          workType
         ) >= 0
       ) {
         workRelationship = WorkRelationships['part-of']
@@ -526,6 +531,9 @@ export class WorkFormComponent implements OnInit {
     ) {
       workRelationship = WorkRelationships['funded-by']
     }
+    console.log(workRelationship)
+    console.log('______')
+
     return workRelationship
   }
 
