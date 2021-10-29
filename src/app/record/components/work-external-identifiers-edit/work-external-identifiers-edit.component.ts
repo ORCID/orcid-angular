@@ -32,7 +32,6 @@ export class WorkExternalIdentifiersEditComponent
   @Output() updateExternalEvent = new EventEmitter<void>()
   workExternalIdErrorMatcher = new WorkExternalIdErrorMatcher()
 
-  validFormatTooltip = $localize`:@@works.validFormat:Invalid id for the selected identifier type`
   unResolvedTooltip = $localize`:@@works.unResolved:We couldn't find a resource that matches the identifier you entered.
   Please check the value or enter a valid link to the resource.`
 

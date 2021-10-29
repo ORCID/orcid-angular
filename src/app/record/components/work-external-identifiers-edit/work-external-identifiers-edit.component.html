@@ -76,14 +76,6 @@
         [errorStateMatcher]="workExternalIdErrorMatcher"
       />
 
-      <mat-icon
-        matSuffix
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat')
-        "
-        [matTooltip]="validFormatTooltip"
-        >warning</mat-icon
-      >
       <mat-hint
         *ngIf="
           externalIdForm.get('externalIdentifierId').hasError('validFormat')
@@ -116,8 +108,7 @@
 
       <mat-hint
         *ngIf="
-          !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
-          !externalIdForm.get('externalIdentifierId').hasError('validFormat')
+          !externalIdForm.get('externalIdentifierId').hasError('unResolved')
         "
       >
         <ng-container i18n="@@works.identifierAssociated"
