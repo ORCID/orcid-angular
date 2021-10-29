@@ -257,7 +257,11 @@ export class WorkFormComponent implements OnInit {
       this.$workTypeUpdateEvent,
       formGroup.controls.externalIdentifierType.valueChanges
     )
-      .pipe(startWith(formGroup.controls.externalIdentifierType.value))
+      .pipe(
+        startWith(formGroup.controls.externalIdentifierType.value),
+        // Maps evert value to externalIdentifierTyp since $workTypeUpdateEvent trigger null events
+        map((x) => formGroup.controls.externalIdentifierType.value)
+      )
       .subscribe((externalIdentifierType) => {
         if (externalIdentifierType !== '') {
           formGroup.controls.externalIdentifierId.setValidators([
