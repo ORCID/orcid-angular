@@ -98,7 +98,6 @@ export class WorkFormComponent implements OnInit {
     | typeof WorkOtherOutputTypes
     | {} = {}
   originalCountryCodes: RecordCountryCodesEndpoint
-  workRelationship: WorkRelationships
 
   constructor(
     private _fb: FormBuilder,
