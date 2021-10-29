@@ -277,12 +277,6 @@ export class WorkFormComponent implements OnInit {
           const suggestedRelationship = this.getOrcidRecommendedRelationShip(
             externalIdentifierType
           )
-          console.log(externalIdentifierType)
-          console.log(this.workForm.get('workType').value)
-          console.log('>>>> ', suggestedRelationship)
-
-          console.log('____-')
-
           if (suggestedRelationship) {
             formGroup.controls.externalRelationship.setValue(
               suggestedRelationship
