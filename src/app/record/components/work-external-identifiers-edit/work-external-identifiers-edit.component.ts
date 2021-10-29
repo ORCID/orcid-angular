@@ -65,6 +65,9 @@ export class WorkExternalIdentifiersEditComponent
 
 export class WorkExternalIdErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null): boolean {
-    return control.hasError('required') && control.touched
+    return (
+      (control.hasError('required') || control.hasError('validFormat')) &&
+      control.touched
+    )
   }
 }

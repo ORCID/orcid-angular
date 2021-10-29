@@ -423,7 +423,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   /**
-   * Return true only if the errors found are only of the type unResolved and validFormat
+   * Return true only if the errors found are only of the type unResolved 
    */
   private formHasOnlyAllowError(formErrors) {
     if (
