@@ -76,23 +76,16 @@
         [errorStateMatcher]="workExternalIdErrorMatcher"
       />
 
-      <mat-icon
-        matSuffix
+      <mat-error
         *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat')
-        "
-        [matTooltip]="validFormatTooltip"
-        >warning</mat-icon
-      >
-      <mat-hint
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat')
+          externalIdForm.get('externalIdentifierId').hasError('validFormat') &&
+          externalIdForm.get('externalIdentifierId').touched
         "
       >
         <ng-container i18n="@@works.validFormat">
           Invalid id for the selected identifier type
         </ng-container>
-      </mat-hint>
+      </mat-error>
 
       <mat-icon
         matSuffix
@@ -116,8 +109,7 @@
 
       <mat-hint
         *ngIf="
-          !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
-          !externalIdForm.get('externalIdentifierId').hasError('validFormat')
+          !externalIdForm.get('externalIdentifierId').hasError('unResolved')
         "
       >
         <ng-container i18n="@@works.identifierAssociated"
@@ -195,7 +187,6 @@
       appearance="outline"
       class="mat-form-field-min"
       formControlName="externalRelationship"
-      [(ngModel)]="workRelationship"
     >
       <ng-container *ngFor="let value of workRelationships">
         <mat-radio-button [value]="value"
