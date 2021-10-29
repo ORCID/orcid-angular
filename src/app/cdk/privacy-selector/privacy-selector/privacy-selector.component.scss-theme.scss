@@ -31,7 +31,7 @@
   ::ng-deep button.limited-button.selected {
     background-color: map-get($foreground, visibility-trusted);
   }
-  ::ng-deep button.public-button.selected,  {
+  ::ng-deep button.public-button.selected {
     background-color: map-get($foreground, visibility-everyone);
   }
 
