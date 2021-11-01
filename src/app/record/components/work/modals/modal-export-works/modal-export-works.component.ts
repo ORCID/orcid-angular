@@ -40,7 +40,10 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
       })
 
     this.loadingWorks = true
-    if (this.selectedAll) {
+    if (
+      this.selectedAll && this.totalWorks > this.maxNumberOfWorksToDisplay ||
+      this.putCodes?.length > this.maxNumberOfWorksToDisplay
+    ) {
       const pageSize =
         this.totalWorks < this.maxNumberOfWorksToDisplay
           ? this.totalWorks
