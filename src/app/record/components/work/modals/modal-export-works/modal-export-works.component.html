@@ -83,10 +83,11 @@
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
-    <p *ngIf="
-          selectedAll && totalWorks > maxNumberOfWorksToDisplay ||
-          putCodes?.length > this.maxNumberOfWorksToDisplay
-        "
+    <p
+      *ngIf="
+        (selectedAll && totalWorks > maxNumberOfWorksToDisplay) ||
+        putCodes?.length > this.maxNumberOfWorksToDisplay
+      "
     >
       <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
       <b>{{ maxNumberOfWorksToDisplay }}</b>
