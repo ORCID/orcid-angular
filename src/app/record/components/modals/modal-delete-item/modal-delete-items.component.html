@@ -1,4 +1,4 @@
-<app-modal [noSidebar]="true">
+<app-modal [loading]="loadingItems" [noSidebar]="true">
   <app-modal-header>
     <ng-container i18n="@@shared.deleteItems"> Delete items</ng-container>
   </app-modal-header>
@@ -50,7 +50,11 @@
     <div *ngIf="items.length > 1" class="row">
       <div class="row">
         <p>
-          <mat-checkbox (change)="updateCheckAll()" [(ngModel)]="selectAll">
+          <mat-checkbox
+            (change)="updateCheckAll()"
+            [(ngModel)]="selectAll"
+            [ngModelOptions]="{ standalone: true }"
+          >
             <ng-container
               i18n="@@shared.selectAll"
               *ngIf="selectedItems.length === 0"
@@ -156,6 +160,12 @@
         </div>
         <mat-divider class="row"></mat-divider>
       </ng-container>
+      <div class="no-info orc-font-body-small" *ngIf="!item && items.length === 0">
+        <mat-icon>error</mat-icon>
+        <ng-container i18n="@@works.noItemsSelected"
+        >No items selected.
+        </ng-container>
+      </div>
     </div>
   </div>
 </app-modal>

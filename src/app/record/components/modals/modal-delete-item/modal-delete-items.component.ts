@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -53,6 +53,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
+    private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _recordAffiliationService: RecordAffiliationService,
     private _recordFundingsService: RecordFundingsService,
@@ -209,6 +210,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         },
       })
     })
+    this._changeDetectorRef.detectChanges()
   }
 
   updateCheck(putCode: string) {
