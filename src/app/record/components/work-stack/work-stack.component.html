@@ -14,6 +14,7 @@
     [elements]="work"
     [ngStyle]="{ 'z-index': workStack.works.length - i }"
     [ngClass]="{ last: last }"
+    [defaultPutCode]="workStack.defaultPutCode.toString()"
     [putCode]="work.putCode.value"
     [visibility]="workStack.activeVisibility"
     *ngIf="isPreferred(work) || displayTheStack"
