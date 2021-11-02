@@ -43,6 +43,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
 
   ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@shared.whoCanSeeBio:Who can see your biography. Your default visibility setting is`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -68,7 +69,6 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
       this.biography = this.userRecord.biography.biography.value
       this.biographyVisibility = this.userRecord.biography.visibility.visibility
     }
-
     this.biographyForm = new FormGroup({
       biography: new FormControl(this.biography),
       visibility: new FormControl(this.biographyVisibility),

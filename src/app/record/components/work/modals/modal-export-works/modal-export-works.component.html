@@ -83,12 +83,26 @@
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
-    <p *ngIf="totalWorks > maxNumberOfWorksToDisplay">
+    <p
+      *ngIf="
+        (selectedAll && totalWorks > maxNumberOfWorksToDisplay) ||
+        putCodes?.length > this.maxNumberOfWorksToDisplay
+      "
+    >
       <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
       <b>{{ maxNumberOfWorksToDisplay }}</b>
       <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
-      <b>{{ totalWorks }}</b>
+      <b>{{ totalWorks || putCodes?.length }}</b>
       <ng-container i18n="@@works.worksToExport">works to export</ng-container>
     </p>
+    <div
+      class="no-info orc-font-body-small"
+      *ngIf="!selectedAll && putCodes?.length === 0"
+    >
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@works.noItemsSelected"
+        >No items selected.
+      </ng-container>
+    </div>
   </div>
 </app-modal>

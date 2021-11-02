@@ -182,6 +182,12 @@ export type ScopesStrings =
 
 export type VisibilityStrings = 'PUBLIC' | 'LIMITED' | 'PRIVATE'
 
+export const VisibilityStringLabel = {
+  PUBLIC: $localize`:@@shared.everyone:Everyone`,
+  LIMITED: $localize`:@@shared.trustedParties:Trusted parties`,
+  PRIVATE: $localize`:@@shared.onlyMe:Only me`,
+}
+
 export type DeprecatedScopesStrings =
   | '/orcid-works/read-limited'
   | '/orcid-bio/read-limited'
