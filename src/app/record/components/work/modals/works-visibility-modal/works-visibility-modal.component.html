@@ -25,8 +25,8 @@
     </button>
   </app-modal-footer>
   <form [formGroup]="worksForm">
-    <p class="orc-font-body-small" i18n="@@works.whoCanSeeWorks">
-      Who can see your works. The default visibility setting is Private.
+    <p class="orc-font-body-small">
+      {{ngOrcidDefaultVisibilityLabel}} {{defaultVisibility| visibilityStringLabel}}
     </p>
     <div class="row">
       <div class="col no-wrap actions-wrapper no-gutters">
