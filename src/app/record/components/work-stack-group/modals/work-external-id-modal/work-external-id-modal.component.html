@@ -10,7 +10,7 @@
       i18n="@@works.addFromPubMed"
       *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
     >
-      Works - Add work from pubMed
+      Works - Add work from PubMed
     </ng-container>
   </app-modal-header>
   <app-modal-footer>
@@ -48,7 +48,7 @@
             i18n="@@works.typeOrPastePubMed"
             *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
           >
-            Type or paste the full pubMed URL or just the identifier value
+            Type or paste the full PubMed URL or just the identifier value
           </ng-container>
         </p>
       </div>
@@ -66,7 +66,7 @@
             i18n="@@works.pubMedIdentifier"
             *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
           >
-            pubMed identifier value or full URL
+            PubMed identifier value or full URL
           </ng-container>
         </strong>
       </label>
@@ -74,13 +74,6 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="external-id-input" matInput formControlName="externalId" />
-        <!--        todo add invalid url -->
-        <!--        <mat-error-->
-        <!--          *ngIf="metadataNotFound"-->
-        <!--          i18n="@@works.unableToImport"-->
-        <!--        >-->
-        <!--          Unable to import using this identifier. Please add work using a different option.-->
-        <!--        </mat-error>-->
         <mat-error *ngIf="metadataNotFound" i18n="@@works.unableToImport">
           Unable to import using this identifier. Please add work using a
           different option.
@@ -99,10 +92,14 @@
           i18n="@@works.retrieveWorkPubMed"
           *ngIf="type === EXTERNAL_ID_TYPE_WORK.pubMed"
         >
-          Retrieve work details from pubMed
+          Retrieve work details from PubMed
         </ng-container>
       </button>
     </div>
   </form>
-  <app-work-form [work]="work" *ngIf="work"> </app-work-form>
+  <app-work-form
+    [work]="work"
+    *ngIf="work && !loading"
+    #workFormComponent
+  ></app-work-form>
 </app-modal>

@@ -25,12 +25,13 @@
     <div class="row">
       <mat-form-field
         appearance="outline"
-        class="mat-form-field-min input-container"
+        class="mat-form-field-min input-container two-line-hint"
       >
         <mat-select
           #externalIdentifierType
           placeholder="{{ ngOrcidSelectIdentifierType }}"
           formControlName="externalIdentifierType"
+          (selectionChange)="updateExternal($event)"
         >
           <mat-option [value]="''" i18n="@@works.selectAnIdentifier">
             Select an identifier type
@@ -39,11 +40,11 @@
           <mat-option *ngFor="let item of workIdTypes" [value]="item.name">
             {{ item.description }}
           </mat-option>
-          <mat-hint i18n="@@works.typeOfIdentifier"
-            >The type of identifier associated with the work, such as an ISBN,
-            DOI or PMID.
-          </mat-hint>
         </mat-select>
+        <mat-hint i18n="@@works.typeOfIdentifier"
+          >The type of identifier associated with the work, such as an ISBN, DOI
+          or PMID.
+        </mat-hint>
       </mat-form-field>
     </div>
   </div>
@@ -75,23 +76,16 @@
         [errorStateMatcher]="workExternalIdErrorMatcher"
       />
 
-      <mat-icon
-        matSuffix
+      <mat-error
         *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat')
-        "
-        [matTooltip]="validFormatTooltip"
-        >warning</mat-icon
-      >
-      <mat-hint
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat')
+          externalIdForm.get('externalIdentifierId').hasError('validFormat') &&
+          externalIdForm.get('externalIdentifierId').touched
         "
       >
         <ng-container i18n="@@works.validFormat">
           Invalid id for the selected identifier type
         </ng-container>
-      </mat-hint>
+      </mat-error>
 
       <mat-icon
         matSuffix
@@ -115,8 +109,7 @@
 
       <mat-hint
         *ngIf="
-          !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
-          !externalIdForm.get('externalIdentifierId').hasError('validFormat')
+          !externalIdForm.get('externalIdentifierId').hasError('unResolved')
         "
       >
         <ng-container i18n="@@works.identifierAssociated"
@@ -204,5 +197,14 @@
         </mat-hint>
       </ng-container>
     </mat-radio-group>
+
+    <mat-error
+      class="mat-caption error-out-input-context fundingIdErrors"
+      i18n="@@works.onlyIdentifierTypesFundedBy"
+      *ngIf="externalIdForm.hasError('funded_by_invalid')"
+    >
+      Only identifier types "grant number", "doi", "uri" or "proposal id" are
+      allowed when using "funded-by" identifiers</mat-error
+    >
   </div>
 </ng-container>

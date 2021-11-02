@@ -38,6 +38,11 @@ import { dateValidator } from '../../../../shared/validators/date/date.validator
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRelation/FundedByRelation.validator'
+import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
+import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
+import { MatSelectChange } from '@angular/material/select'
+import { merge, Subject } from 'rxjs'
 
 @Component({
   selector: 'app-work-form',
@@ -49,6 +54,7 @@ import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 })
 export class WorkFormComponent implements OnInit {
   @Input() work: Work
+  $workTypeUpdateEvent = new Subject<WorkIdType>()
 
   loading = true
   workForm: FormGroup
@@ -78,6 +84,7 @@ export class WorkFormComponent implements OnInit {
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
+  externalIdentifier: string
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
@@ -146,18 +153,6 @@ export class WorkFormComponent implements OnInit {
           this.dynamicTitle = WorksTitleName.journalTitle
         }
       })
-    this.workForm
-      .get('citationType')
-      .valueChanges.pipe(startWith(this.workForm.value['citationType']))
-      .subscribe((value) => {
-        if (value !== '') {
-          this.workForm.controls.citation.setValidators([Validators.required])
-          this.workForm.controls.citation.updateValueAndValidity()
-        } else {
-          this.workForm.controls.citation.clearValidators()
-          this.workForm.controls.citation.updateValueAndValidity()
-        }
-      })
   }
 
   private loadWorkForm(currentWork: Work): void {
@@ -168,11 +163,19 @@ export class WorkFormComponent implements OnInit {
       ],
       workType: [currentWork?.workType?.value || '', [Validators.required]],
       title: [currentWork?.title?.value || '', [Validators.required]],
-      translatedTitleContent: [currentWork?.translatedTitle?.content || '', []],
-      translatedTitleLanguage: [
-        currentWork?.translatedTitle?.languageCode || '',
-        [],
-      ],
+      translatedTitleGroup: this._fb.group(
+        {
+          translatedTitleContent: [
+            currentWork?.translatedTitle?.content || '',
+            [],
+          ],
+          translatedTitleLanguage: [
+            currentWork?.translatedTitle?.languageCode || '',
+            [],
+          ],
+        },
+        { validator: translatedTitleValidator }
+      ),
       subtitle: [currentWork?.subtitle?.value || '', []],
       journalTitle: [currentWork?.journalTitle?.value || '', []],
       publicationDate: this._fb.group(
@@ -190,9 +193,14 @@ export class WorkFormComponent implements OnInit {
         { validator: dateValidator('publication') }
       ),
       url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
-      citationType: [currentWork?.citation?.citationType.value || '', []],
-      citation: [currentWork?.citation?.citation.value || '', []],
-      shortDescription: [currentWork?.shortDescription?.value || '', []],
+      citationGroup: this._fb.group(
+        {
+          citationType: [currentWork?.citation?.citationType.value || '', []],
+          citation: [currentWork?.citation?.citation.value || '', []],
+          shortDescription: [currentWork?.shortDescription?.value || '', []],
+        },
+        { validator: workCitationValidator }
+      ),
       workIdentifiers: new FormArray([]),
       languageCode: [currentWork?.languageCode?.value || '', []],
       countryCode: [currentWork?.countryCode?.value || '', []],
@@ -222,7 +230,7 @@ export class WorkFormComponent implements OnInit {
           map((value) => {
             if (value.generatedUrl) {
               formGroup.controls.externalIdentifierUrl.setValue(
-                value.generatedUrl
+                decodeURI(value.generatedUrl)
               )
             } else {
               formGroup.controls.externalIdentifierUrl.setValue('')
@@ -245,8 +253,15 @@ export class WorkFormComponent implements OnInit {
 
   private checkWorkIdentifiersChanges(index: number) {
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
-    formGroup.controls.externalIdentifierType.valueChanges
-      .pipe(startWith(formGroup.controls.externalIdentifierType.value))
+    merge(
+      this.$workTypeUpdateEvent,
+      formGroup.controls.externalIdentifierType.valueChanges
+    )
+      .pipe(
+        startWith(formGroup.controls.externalIdentifierType.value),
+        // Maps evert value to externalIdentifierTyp since $workTypeUpdateEvent trigger null events
+        map((x) => formGroup.controls.externalIdentifierType.value)
+      )
       .subscribe((externalIdentifierType) => {
         if (externalIdentifierType !== '') {
           formGroup.controls.externalIdentifierId.setValidators([
@@ -259,6 +274,15 @@ export class WorkFormComponent implements OnInit {
             )
           )
           formGroup.controls.externalIdentifierId.updateValueAndValidity()
+          const suggestedRelationship = this.getOrcidRecommendedRelationShip(
+            externalIdentifierType
+          )
+
+          if (suggestedRelationship) {
+            formGroup.controls.externalRelationship.setValue(
+              suggestedRelationship
+            )
+          }
         } else {
           formGroup.controls.externalIdentifierId.clearValidators()
           formGroup.controls.externalIdentifierId.clearAsyncValidators()
@@ -289,26 +313,28 @@ export class WorkFormComponent implements OnInit {
     } else {
       this.workIdentifiersFormArrayDisplayState.push(true)
     }
-    this.workIdentifiersFormArray.push(
-      this._fb.group({
-        externalIdentifierType: [
-          existingExternalId?.externalIdentifierType?.value || '',
-          [],
-        ],
-        externalIdentifierId: [
-          existingExternalId?.externalIdentifierId?.value || '',
-          [],
-        ],
-        externalIdentifierUrl: [
-          existingExternalId?.url?.value || '',
-          [Validators.pattern(URL_REGEXP)],
-        ],
-        externalRelationship: [
-          existingExternalId?.relationship?.value || WorkRelationships.self,
-          [],
-        ],
-      })
+    const workIdentifierForm = this._fb.group({
+      externalIdentifierType: [
+        existingExternalId?.externalIdentifierType?.value || '',
+        [],
+      ],
+      externalIdentifierId: [
+        existingExternalId?.externalIdentifierId?.value || '',
+        [],
+      ],
+      externalIdentifierUrl: [
+        existingExternalId?.url?.value || '',
+        [Validators.pattern(URL_REGEXP)],
+      ],
+      externalRelationship: [
+        existingExternalId?.relationship?.value || WorkRelationships.self,
+        [],
+      ],
+    })
+    workIdentifierForm.setValidators(
+      FundedByRelationValidator.fundedByInvalidRelationship()
     )
+    this.workIdentifiersFormArray.push(workIdentifierForm)
 
     this.checkWorkIdentifiersChanges(
       this.workIdentifiersFormArray.controls.length - 1
@@ -322,6 +348,7 @@ export class WorkFormComponent implements OnInit {
   saveEvent() {
     this.workForm.markAllAsTouched()
     const formErrors = GetFormErrors(this.workForm)
+
     const allowInvalidForm = this.formHasOnlyAllowError(formErrors)
 
     if (this.workForm.valid || allowInvalidForm) {
@@ -335,7 +362,7 @@ export class WorkFormComponent implements OnInit {
           year: this.workForm.value.publicationDate.publicationYear,
         },
         shortDescription: {
-          value: this.workForm.value.shortDescription,
+          value: this.workForm.get('citationGroup.shortDescription').value,
         },
         url: {
           value: this.workForm.value.url,
@@ -350,10 +377,10 @@ export class WorkFormComponent implements OnInit {
         },
         citation: {
           citation: {
-            value: this.workForm.value.citation,
+            value: this.workForm.get('citationGroup.citation').value,
           },
           citationType: {
-            value: this.workForm.value.citationType,
+            value: this.workForm.get('citationGroup.citationType').value,
           },
         },
         countryCode: {
@@ -384,8 +411,13 @@ export class WorkFormComponent implements OnInit {
           value: this.workForm.value.subtitle,
         },
         translatedTitle: {
-          content: this.workForm.value.translatedTitleContent,
-          languageCode: this.workForm.value.translatedTitleLanguage,
+          content: this.workForm.get(
+            'translatedTitleGroup.translatedTitleContent'
+          ).value,
+          languageCode: this.workForm.get(
+            'translatedTitleGroup.translatedTitleLanguage'
+          ).value,
+          errors: [],
         },
         workCategory: {
           value: this.workForm.value.workCategory,
@@ -409,7 +441,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   /**
-   * Return true only if the errors found are only of the type unResolved and validFormat
+   * Return true only if the errors found are only of the type unResolved
    */
   private formHasOnlyAllowError(formErrors) {
     if (
@@ -425,8 +457,7 @@ export class WorkFormComponent implements OnInit {
           Object.keys(x).length === 1 &&
           x.externalIdentifierId &&
           Object.keys(x.externalIdentifierId).length === 1 &&
-          (x.externalIdentifierId.unResolved ||
-            x.externalIdentifierId.validFormat)
+          x.externalIdentifierId.unResolved
       )
     } else {
       return false
@@ -444,6 +475,62 @@ export class WorkFormComponent implements OnInit {
     } else {
       this.workIdentifiersFormArrayDisplayState[id] = false
     }
+  }
+
+  updateType(event: MatSelectChange) {
+    switch (event.value) {
+      case WorkCategories.conference:
+        this.workForm.patchValue({
+          workType: WorkConferenceTypes.conferencePaper,
+        })
+        break
+      case WorkCategories.intellectual_property:
+        this.workForm.patchValue({
+          workType: WorkIntellectualPropertyTypes.patent,
+        })
+        break
+      case WorkCategories.other_output:
+        this.workForm.patchValue({
+          workType: WorkOtherOutputTypes.dataSet,
+        })
+        break
+      case WorkCategories.publication:
+        this.workForm.patchValue({
+          workType: WorkPublicationTypes.journalArticle,
+        })
+        break
+    }
+    this.$workTypeUpdateEvent.next()
+  }
+
+  getOrcidRecommendedRelationShip(externalIdentifier) {
+    let workRelationship = null
+    const workType = this.workForm.get('workType').value
+
+    if (externalIdentifier && workType) {
+      if (externalIdentifier === 'isbn' && workType === 'book-chapter') {
+        workRelationship = WorkRelationships['part-of']
+      } else if (externalIdentifier === 'isbn' && workType === 'book') {
+        workRelationship = WorkRelationships.self
+      } else if (externalIdentifier === 'issn') {
+        workRelationship = WorkRelationships['part-of']
+      } else if (
+        externalIdentifier === 'isbn' &&
+        ['dictionary-entry', 'conference-paper', 'encyclopedia-entry'].indexOf(
+          workType
+        ) >= 0
+      ) {
+        workRelationship = WorkRelationships['part-of']
+      }
+    }
+    if (
+      externalIdentifier === 'grant_number' ||
+      externalIdentifier === 'proposal-id'
+    ) {
+      workRelationship = WorkRelationships['funded-by']
+    }
+
+    return workRelationship
   }
 
   closeEvent() {

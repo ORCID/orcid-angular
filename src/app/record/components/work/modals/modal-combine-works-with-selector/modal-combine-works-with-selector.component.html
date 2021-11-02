@@ -1,7 +1,7 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@works.reviewWorkToCombine">
-      Review works to combine
+    <ng-container i18n="@@works.combineSelectedWorks">
+      Combine selected works
     </ng-container>
   </app-modal-header>
   <app-modal-footer>
@@ -30,7 +30,7 @@
       <div class="orc-font-small-print">
         <p>
           <ng-container i18n="@@works.setsOfSimilarWorkToManage1"
-            >We found</ng-container
+            >ORCID have found</ng-container
           >
           {{ this.suggestionsWorks.length }}
           <ng-container i18n="@@works.setsOfSimilarWorkToManage2">
@@ -39,9 +39,9 @@
         </p>
 
         <p i18n="@@works.setsOfSimilarWorkToManage3">
-          Combined works will be grouped together and displayed as one item on
-          your record. All versions will still be available, but one will be
-          shown as your preferred version.
+          The selected works will be grouped together and displayed as a single
+          group item on your record. All versions of the work will still be
+          available but one will be shown as your preferred version
         </p>
         <a
           class="underline"

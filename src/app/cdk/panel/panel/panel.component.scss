@@ -45,27 +45,6 @@
   border-radius: 3px;
 }
 
-.privacy-selector {
-  position: absolute;
-  overflow: hidden;
-  -moz-transition: height 450ms;
-  z-index: 2;
-  -webkit-transition: height 450ms;
-  padding: 8px 16px 16px;
-  border: solid 1px;
-  border-radius: 4px;
-  right: 28px;
-  transition: all 500ms ease-in-out;
-
-  p {
-    margin: 0 0 8px;
-  }
-
-  app-privacy-selector {
-    margin-top: 8px;
-  }
-}
-
 .staked-header {
   display: flex;
   flex-direction: column;
