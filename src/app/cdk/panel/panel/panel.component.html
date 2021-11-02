@@ -35,8 +35,9 @@
     <ng-container
       *ngIf="
         defaultPutCode !== putCode ||
-        isPublicRecord && expandButtonsPosition !== 'left'
-      ">
+        (isPublicRecord && expandButtonsPosition !== 'left')
+      "
+    >
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>
   </div>
