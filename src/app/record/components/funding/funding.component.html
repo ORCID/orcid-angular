@@ -133,9 +133,13 @@
     <app-display-attribute>
       <div class="row">
         <span class="translated-title-label orc-font-body-small">
-          <ng-container i18n="@@funding.translatedTitle">Translated title</ng-container>
+          <ng-container i18n="@@funding.translatedTitle"
+            >Translated title</ng-container
+          >
         </span>
-        <ng-container *ngIf="funding.fundingTitle.translatedTitle?.languageName">
+        <ng-container
+          *ngIf="funding.fundingTitle.translatedTitle?.languageName"
+        >
           ({{ funding.fundingTitle.translatedTitle?.languageName }})
         </ng-container>
       </div>
