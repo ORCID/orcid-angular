@@ -40,15 +40,17 @@
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
   <!-- TRANSLATED TITLE -->
   <app-display-attribute *ngIf="work.translatedTitle?.content">
-    <h3 class="orc-font-body-small">
-      <ng-container i18n="@@works.translatedTitle"
+    <div class="row">
+      <span class="translated-title-label orc-font-body-small">
+      <ng-container i18n="@@works.translatedTitle" 
         >Translated title</ng-container
       >
-    </h3>
-    <span *ngIf="work.translatedTitle?.languageName"
-      >({{ work.translatedTitle?.languageName }})</span
-    >
-
+      </span>
+      <ng-container *ngIf="work.translatedTitle?.languageName">
+      ({{ work.translatedTitle.languageName}})
+      </ng-container>
+    </div>
+ 
     <div>
       {{ work.translatedTitle.content }}
     </div>
