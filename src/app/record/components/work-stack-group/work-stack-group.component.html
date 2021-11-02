@@ -127,7 +127,7 @@
               *ngIf="combineSuggestion?.suggestions?.length"
               (click)="openManageSimilarWorksModal()"
               class="test-align-center"
-              [disabled]="selectedWorks.length == 0"
+              [disabled]="selectedWorks.length === 0"
             >
               Manage similar works
             </button>
