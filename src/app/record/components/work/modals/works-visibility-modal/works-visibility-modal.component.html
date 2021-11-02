@@ -26,7 +26,8 @@
   </app-modal-footer>
   <form [formGroup]="worksForm">
     <p class="orc-font-body-small">
-      {{ngOrcidDefaultVisibilityLabel}} {{defaultVisibility| visibilityStringLabel}}
+      {{ ngOrcidDefaultVisibilityLabel }}
+      {{ defaultVisibility | visibilityStringLabel }}
     </p>
     <div class="row">
       <div class="col no-wrap actions-wrapper no-gutters">

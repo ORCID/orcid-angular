@@ -86,7 +86,8 @@
     </div>
     <hr />
     <p class="orc-font-body-small">
-      {{ngOrcidDefaultVisibilityLabel}}  {{biographyVisibility | visibilityStringLabel}}
+      {{ ngOrcidDefaultVisibilityLabel }}
+      {{ biographyVisibility | visibilityStringLabel }}
     </p>
     <div class="col no-wrap actions-wrapper no-gutters visibility">
       <app-privacy-selector formControlName="visibility"></app-privacy-selector>

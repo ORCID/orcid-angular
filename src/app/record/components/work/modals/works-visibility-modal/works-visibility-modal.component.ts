@@ -8,7 +8,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
-import { UserRecord } from 'src/app/types/record.local'
 import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
@@ -41,7 +40,6 @@ export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
       .subscribe((platform) => {
         this.isMobile = platform.columns4 || platform.columns8
       })
-   
 
     this.worksForm = new FormGroup({
       visibility: new FormControl(this.defaultVisibility, {
@@ -50,14 +48,12 @@ export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
     })
 
     //
-    this._record
-      .getPreferences()
-      .subscribe((userRecord) => {
-        this.defaultVisibility = userRecord.default_visibility
-        this.worksForm.patchValue({
-          visibility: this.defaultVisibility,
-        })
+    this._record.getPreferences().subscribe((userRecord) => {
+      this.defaultVisibility = userRecord.default_visibility
+      this.worksForm.patchValue({
+        visibility: this.defaultVisibility,
       })
+    })
 
     if (this.putCodes.length > 0) {
       this.loadingWorks = true

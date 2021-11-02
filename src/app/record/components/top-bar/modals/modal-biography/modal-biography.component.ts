@@ -14,7 +14,6 @@ import { BiographyEndPoint } from '../../../../../types/record-biography.endpoin
 import {
   Visibility,
   VisibilityStrings,
-  VisibilityStringLabel
 } from '../../../../../types/common.endpoint'
 import { takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
@@ -44,7 +43,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
 
   ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
-  ngOrcidDefaultVisibilityLabel=  $localize`:@@shared.whoCanSeeBio:Who can see your biography. Your default visibility setting is`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@shared.whoCanSeeBio:Who can see your biography. Your default visibility setting is`
 
   constructor(
     @Inject(WINDOW) private window: Window,
