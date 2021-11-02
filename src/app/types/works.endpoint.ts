@@ -152,7 +152,7 @@ export const WorksTitleNameLabel = {
   [WorksTitleName.journalTitle]: $localize`:@@works.journalTitle:Journal title`,
   [WorksTitleName.magazineTitle]: $localize`:@@works.magazineTitle:Magazine title`,
   [WorksTitleName.newsletterTitle]: $localize`:@@works.newsletterTitle:Newsletter title`,
-  [WorksTitleName.newspaperTitle]: $localize`:@@works.newsletterTitle:Newspaper title`,
+  [WorksTitleName.newspaperTitle]: $localize`:@@works.newspaperTitle:Newspaper title`,
   [WorksTitleName.institution]: $localize`:@@works.institution:Institution`,
   [WorksTitleName.custodian]: $localize`:@@works.custodian:Custodian`,
   [WorksTitleName.trademark]: $localize`:@@works.trademark:Trademark`,
