@@ -40,10 +40,7 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
       })
 
     this.loadingWorks = true
-    if (
-      (this.selectedAll && this.totalWorks > this.maxNumberOfWorksToDisplay) ||
-      this.putCodes?.length > this.maxNumberOfWorksToDisplay
-    ) {
+    if (this.selectedAll || this.putCodes?.length > this.maxNumberOfWorksToDisplay) {
       const pageSize =
         this.totalWorks < this.maxNumberOfWorksToDisplay
           ? this.totalWorks
@@ -59,31 +56,38 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
           this.loadingWorks = false
         })
     } else {
-      this.putCodes.forEach((putCode) => {
-        this._recordWorksService
-          .getWorkInfo(putCode)
-          .subscribe((work: Work) => {
-            this.loadingWorks = false
-            this.works.push(work)
-          })
-      })
+      if (this.putCodes?.length > 0) {
+        this.putCodes.forEach((putCode) => {
+          this._recordWorksService
+            .getWorkInfo(putCode)
+            .subscribe((work: Work) => {
+              this.works.push(work)
+            })
+          this.loadingWorks = false
+        })
+      } else {
+        this.loadingWorks = false
+      }
     }
   }
 
   saveEvent() {
-    this.loadingWorks = true
     if (this.selectedAll) {
+      this.loadingWorks = true
       this._recordWorksService.export().subscribe((data) => {
         this.createTxtFile(data)
         this.closeEvent()
       })
     } else {
-      this._recordWorksService
-        .exportSelected(this.putCodes)
-        .subscribe((data) => {
-          this.createTxtFile(data)
-          this.closeEvent()
-        })
+      if (this.putCodes?.length > 0) {
+        this.loadingWorks = true
+        this._recordWorksService
+          .exportSelected(this.putCodes)
+          .subscribe((data) => {
+            this.createTxtFile(data)
+            this.closeEvent()
+          })
+      }
     }
   }
 
