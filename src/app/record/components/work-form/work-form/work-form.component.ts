@@ -38,7 +38,7 @@ import { dateValidator } from '../../../../shared/validators/date/date.validator
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
-import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRelation/FundedByRelation.validator'
+import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
 import { MatSelectChange } from '@angular/material/select'
@@ -251,7 +251,10 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
-  private checkWorkIdentifiersChanges(index: number) {
+  private checkWorkIdentifiersChanges(
+    index: number,
+    workIdentifiersArray: FormArray
+  ) {
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
     merge(
       this.$workTypeUpdateEvent,
@@ -263,44 +266,80 @@ export class WorkFormComponent implements OnInit {
         map((x) => formGroup.controls.externalIdentifierType.value)
       )
       .subscribe((externalIdentifierType) => {
-        if (externalIdentifierType !== '') {
-          formGroup.controls.externalIdentifierId.setValidators([
-            Validators.required,
-          ])
-          formGroup.controls.externalIdentifierId.setAsyncValidators(
-            this.externalIdentifierTypeAsyncValidator(
-              formGroup,
-              externalIdentifierType
-            )
-          )
-          formGroup.controls.externalIdentifierId.updateValueAndValidity()
-          const suggestedRelationship = this.getOrcidRecommendedRelationShip(
-            externalIdentifierType
-          )
-
-          if (suggestedRelationship) {
-            formGroup.controls.externalRelationship.setValue(
-              suggestedRelationship
-            )
-          }
-        } else {
-          formGroup.controls.externalIdentifierId.clearValidators()
-          formGroup.controls.externalIdentifierId.clearAsyncValidators()
-          formGroup.controls.externalIdentifierId.updateValueAndValidity()
-        }
+        this.manageWorkIdentifierTypeUpdates(externalIdentifierType, formGroup)
       })
 
-    formGroup.controls.externalIdentifierId.valueChanges.subscribe((value) => {
-      if (value) {
-        formGroup.controls.externalIdentifierType.setValidators([
-          Validators.required,
-        ])
-        formGroup.controls.externalIdentifierType.updateValueAndValidity({
-          emitEvent: false,
-        })
-      } else {
-        formGroup.controls.externalIdentifierType.clearValidators()
-        formGroup.controls.externalIdentifierType.updateValueAndValidity({
+    formGroup.controls.externalIdentifierId.valueChanges.subscribe((id) => {
+      this.manageWorkIdentifierIdUpdates(id, formGroup)
+    })
+
+    formGroup.controls.externalRelationship.valueChanges.subscribe(() => {
+      this.manageWorkIdentyfiersRelationshipUpdates(
+        workIdentifiersArray,
+        formGroup
+      )
+    })
+  }
+
+  private manageWorkIdentifierTypeUpdates(
+    externalIdentifierType: any,
+    formGroup: FormGroup
+  ) {
+    if (externalIdentifierType !== '') {
+      formGroup.controls.externalIdentifierId.setValidators([
+        Validators.required,
+      ])
+      formGroup.controls.externalIdentifierId.setAsyncValidators(
+        this.externalIdentifierTypeAsyncValidator(
+          formGroup,
+          externalIdentifierType
+        )
+      )
+      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      const suggestedRelationship = this.getOrcidRecommendedRelationShip(
+        externalIdentifierType
+      )
+
+      if (suggestedRelationship) {
+        formGroup.controls.externalRelationship.setValue(suggestedRelationship)
+      }
+    } else {
+      formGroup.controls.externalIdentifierId.clearValidators()
+      formGroup.controls.externalIdentifierId.clearAsyncValidators()
+      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+    }
+  }
+
+  private manageWorkIdentifierIdUpdates(value: any, formGroup: FormGroup) {
+    if (value) {
+      formGroup.controls.externalIdentifierType.setValidators([
+        Validators.required,
+      ])
+      formGroup.controls.externalIdentifierType.updateValueAndValidity({
+        emitEvent: false,
+      })
+    } else {
+      formGroup.controls.externalIdentifierType.clearValidators()
+      formGroup.controls.externalIdentifierType.updateValueAndValidity({
+        emitEvent: false,
+      })
+    }
+  }
+
+  private manageWorkIdentyfiersRelationshipUpdates(
+    workIdentifiersArray: FormArray,
+    formGroup: FormGroup
+  ) {
+    workIdentifiersArray.controls.forEach((element: FormGroup) => {
+      // Updates the value and validity of all the external identifier relationships on the array
+      // Since those depend on each other to validate the `versionOfInvalidRelationship` validator
+      if (
+        !Object.is(
+          element.controls.externalRelationship,
+          formGroup.controls.externalRelationship
+        )
+      ) {
+        element.controls.externalRelationship.updateValueAndValidity({
           emitEvent: false,
         })
       }
@@ -331,13 +370,17 @@ export class WorkFormComponent implements OnInit {
         [],
       ],
     })
-    workIdentifierForm.setValidators(
-      FundedByRelationValidator.fundedByInvalidRelationship()
-    )
+    workIdentifierForm.setValidators([
+      WorkIdentifiers.fundedByInvalidRelationship(),
+      WorkIdentifiers.versionOfInvalidRelationship(
+        this.workIdentifiersFormArray
+      ),
+    ])
     this.workIdentifiersFormArray.push(workIdentifierForm)
 
     this.checkWorkIdentifiersChanges(
-      this.workIdentifiersFormArray.controls.length - 1
+      this.workIdentifiersFormArray.controls.length - 1,
+      this.workIdentifiersFormArray
     )
   }
   deleteWorkId(id: number) {
