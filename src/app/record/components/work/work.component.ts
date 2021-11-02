@@ -20,7 +20,9 @@ export class WorkComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log("!!!work", this.work)
+  }
   /**
    * RegEx function to check if the elements contains a URL
    */
