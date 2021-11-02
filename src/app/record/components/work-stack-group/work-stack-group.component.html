@@ -74,11 +74,19 @@
               <mat-icon class="large-material-icon">arrow_drop_down</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="combine()" [disabled]="selectedWorks.length===0">
+              <button
+                mat-menu-item
+                (click)="combine()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>merge_type</mat-icon>
                 <span i18n="@@shared.combineWorks">Combine works</span>
               </button>
-              <button mat-menu-item (click)="export()" [disabled]="selectedWorks.length===0">
+              <button
+                mat-menu-item
+                (click)="export()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>file_download</mat-icon>
                 <span>
                   <ng-container i18n="@@shared.exportWorks">
@@ -96,11 +104,19 @@
                   ({{ this.workGroup.totalGroups }})
                 </span>
               </button>
-              <button mat-menu-item (click)="visibility()" [disabled]="selectedWorks.length===0">
+              <button
+                mat-menu-item
+                (click)="visibility()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>visibility</mat-icon>
                 <span i18n="@@shared.setVisibility">Set visibility</span>
               </button>
-              <button mat-menu-item (click)="delete()" [disabled]="selectedWorks.length===0">
+              <button
+                mat-menu-item
+                (click)="delete()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>delete</mat-icon>
                 <span i18n="@@shared.deleteWorks">Delete works</span>
               </button>
@@ -111,7 +127,7 @@
               *ngIf="combineSuggestion?.suggestions?.length"
               (click)="openManageSimilarWorksModal()"
               class="test-align-center"
-              [disabled]="selectedWorks.length==0"
+              [disabled]="selectedWorks.length == 0"
             >
               Manage similar works
             </button>
