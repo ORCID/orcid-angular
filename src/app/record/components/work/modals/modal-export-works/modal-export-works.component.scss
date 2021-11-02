@@ -11,3 +11,13 @@ app-modal {
     margin-inline-end: 16px;
   }
 }
+
+.no-info {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  mat-icon {
+    margin-inline-end: 4px;
+  }
+}

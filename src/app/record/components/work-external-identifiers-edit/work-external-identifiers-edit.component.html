@@ -206,5 +206,14 @@
       Only identifier types "grant number", "doi", "uri" or "proposal id" are
       allowed when using "funded-by" identifiers</mat-error
     >
+
+    <mat-error
+      class="mat-caption error-out-input-context fundingIdErrors"
+      i18n="@@works.atLestOneSelfIdRequired"
+      *ngIf="externalIdForm.hasError('version_of_invalid')"
+    >
+      At least one "self" identifier is required when using "version-of"
+      identifiers</mat-error
+    >
   </div>
 </ng-container>
