@@ -70,9 +70,6 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
       this.biography = this.userRecord.biography.biography.value
       this.biographyVisibility = this.userRecord.biography.visibility.visibility
     }
-
-    console.log("this.biographyVisibility ", this.biographyVisibility )
-
     this.biographyForm = new FormGroup({
       biography: new FormControl(this.biography),
       visibility: new FormControl(this.biographyVisibility),
