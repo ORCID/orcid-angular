@@ -70,6 +70,7 @@ export class PanelComponent implements OnInit {
     | 'funding'
     | 'research-resources'
   @Input() userRecord: UserRecord
+  @Input() defaultPutCode: any
   @Input() putCode: any
   @Input() visibility: VisibilityStrings
   @Input() visibilityError: boolean

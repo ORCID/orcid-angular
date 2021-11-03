@@ -78,7 +78,7 @@
       <mat-select
         placeholder="Select a work type"
         formControlName="workType"
-        (selectionChange)="updateRelation($event, 'workType')"
+        (selectionChange)="$workTypeUpdateEvent.next()"
       >
         <mat-option
           *ngFor="let item of workTypes | keyvalue"
@@ -123,6 +123,12 @@
         i18n="@@works.setAWorkTitle"
       >
         Set a work title
+      </mat-error>
+      <mat-error
+        *ngIf="workForm.get('title').errors?.maxlength"
+        i18n="@@works.titleMaxLength"
+      >
+        Must be less than 1000 characters
       </mat-error>
     </mat-form-field>
   </div>
@@ -195,6 +201,16 @@
       >
         Please enter a translated title
       </mat-error>
+      <mat-error
+        class="mat-caption"
+        *ngIf="
+          workForm.get('translatedTitleGroup.translatedTitleContent').errors
+            ?.maxlength
+        "
+        i18n="@@works.titleMaxLength"
+      >
+        Must be less than 1000 characters
+      </mat-error>
     </div>
 
     <!-- Language of this title -->
@@ -263,6 +279,12 @@
       class="mat-form-field-min input-container"
     >
       <input id="work-subtitle-input" matInput formControlName="subtitle" />
+      <mat-error
+        *ngIf="workForm.get('subtitle').errors?.maxlength"
+        i18n="@@works.titleMaxLength"
+      >
+        Must be less than 1000 characters
+      </mat-error>
     </mat-form-field>
   </div>
   <!-- Journal title -->
@@ -279,6 +301,12 @@
       class="mat-form-field-min input-container"
     >
       <input matInput formControlName="journalTitle" />
+      <mat-error
+        *ngIf="workForm.get('journalTitle').errors?.maxlength"
+        i18n="@@works.titleMaxLength"
+      >
+        Must be less than 1000 characters
+      </mat-error>
     </mat-form-field>
   </div>
   <!-- Publication date -->
@@ -507,6 +535,15 @@
           cdkAutosizeMaxRows="7"
         >
         </textarea>
+        <mat-error
+          class="mat-caption"
+          *ngIf="
+            workForm.get('citationGroup.shortDescription').errors?.maxlength
+          "
+          i18n="@@works.descriptionMaxLength"
+        >
+          Must be less than 5000 characters
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -546,9 +583,7 @@
           class="input-container"
           [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
           [workIdTypes]="workIdTypes"
-          [workRelationship]="workRelationship"
           (cancelEvent)="cancelExternalIdEdit(i)"
-          (updateExternalEvent)="updateRelation($event, 'external')"
           [index]="i"
         ></app-work-external-identifiers-edit>
       </ng-container>
@@ -611,7 +646,7 @@
       >
         <mat-select
           id="language-input"
-          placeholder="Placeholder"
+          placeholder="{{ ngOrcidSelectLanguage }}"
           formControlName="languageCode"
         >
           <mat-option
@@ -641,7 +676,7 @@
       >
         <mat-select
           id="country-input"
-          placeholder="Placeholder"
+          placeholder="{{ ngOrcidSelectACountry }}"
           formControlName="countryCode"
         >
           <mat-option

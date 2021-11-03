@@ -38,10 +38,11 @@ import { dateValidator } from '../../../../shared/validators/date/date.validator
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
 import { ExternalIdentifier } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
-import { FundedByRelationValidator } from 'src/app/shared/validators/fundedByRelation/FundedByRelation.validator'
+import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
 import { MatSelectChange } from '@angular/material/select'
+import { merge, Subject } from 'rxjs'
 
 @Component({
   selector: 'app-work-form',
@@ -53,6 +54,7 @@ import { MatSelectChange } from '@angular/material/select'
 })
 export class WorkFormComponent implements OnInit {
   @Input() work: Work
+  $workTypeUpdateEvent = new Subject<WorkIdType>()
 
   loading = true
   workForm: FormGroup
@@ -76,19 +78,23 @@ export class WorkFormComponent implements OnInit {
   dayOptions = Array(31)
     .fill(0)
     .map((i, idx) => idx + 1)
+
+  MAX_LENGTH_TITLE = 999
+  MAX_LENGTH_DESCRIPTION = 4999
+
   citationTypes = CitationTypes
 
   dynamicTitle = WorksTitleName.journalTitle
   workIdTypes: WorkIdType[]
   workIdentifiersFormArray: FormArray = new FormArray([])
   workIdentifiersFormArrayDisplayState: boolean[] = []
-  workRelationship: WorkRelationships
   externalIdentifier: string
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
+  ngOrcidSelectACountry = $localize`:@@shared.selectACountry:Select a country`
 
   workTypes:
     | typeof WorkConferenceTypes
@@ -160,12 +166,15 @@ export class WorkFormComponent implements OnInit {
         [Validators.required],
       ],
       workType: [currentWork?.workType?.value || '', [Validators.required]],
-      title: [currentWork?.title?.value || '', [Validators.required]],
+      title: [
+        currentWork?.title?.value || '',
+        [Validators.required, Validators.maxLength(this.MAX_LENGTH_TITLE)],
+      ],
       translatedTitleGroup: this._fb.group(
         {
           translatedTitleContent: [
             currentWork?.translatedTitle?.content || '',
-            [],
+            [Validators.maxLength(this.MAX_LENGTH_TITLE)],
           ],
           translatedTitleLanguage: [
             currentWork?.translatedTitle?.languageCode || '',
@@ -174,8 +183,14 @@ export class WorkFormComponent implements OnInit {
         },
         { validator: translatedTitleValidator }
       ),
-      subtitle: [currentWork?.subtitle?.value || '', []],
-      journalTitle: [currentWork?.journalTitle?.value || '', []],
+      subtitle: [
+        currentWork?.subtitle?.value || '',
+        [Validators.maxLength(this.MAX_LENGTH_TITLE)],
+      ],
+      journalTitle: [
+        currentWork?.journalTitle?.value || '',
+        [Validators.maxLength(this.MAX_LENGTH_TITLE)],
+      ],
       publicationDate: this._fb.group(
         {
           publicationDay: [Number(currentWork?.publicationDate?.day) || '', []],
@@ -195,7 +210,10 @@ export class WorkFormComponent implements OnInit {
         {
           citationType: [currentWork?.citation?.citationType.value || '', []],
           citation: [currentWork?.citation?.citation.value || '', []],
-          shortDescription: [currentWork?.shortDescription?.value || '', []],
+          shortDescription: [
+            currentWork?.shortDescription?.value || '',
+            [Validators.maxLength(this.MAX_LENGTH_DESCRIPTION)],
+          ],
         },
         { validator: workCitationValidator }
       ),
@@ -249,40 +267,95 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
-  private checkWorkIdentifiersChanges(index: number) {
+  private checkWorkIdentifiersChanges(
+    index: number,
+    workIdentifiersArray: FormArray
+  ) {
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
-    formGroup.controls.externalIdentifierType.valueChanges
-      .pipe(startWith(formGroup.controls.externalIdentifierType.value))
+    merge(
+      this.$workTypeUpdateEvent,
+      formGroup.controls.externalIdentifierType.valueChanges
+    )
+      .pipe(
+        startWith(formGroup.controls.externalIdentifierType.value),
+        // Maps evert value to externalIdentifierTyp since $workTypeUpdateEvent trigger null events
+        map((x) => formGroup.controls.externalIdentifierType.value)
+      )
       .subscribe((externalIdentifierType) => {
-        if (externalIdentifierType !== '') {
-          formGroup.controls.externalIdentifierId.setValidators([
-            Validators.required,
-          ])
-          formGroup.controls.externalIdentifierId.setAsyncValidators(
-            this.externalIdentifierTypeAsyncValidator(
-              formGroup,
-              externalIdentifierType
-            )
-          )
-          formGroup.controls.externalIdentifierId.updateValueAndValidity()
-        } else {
-          formGroup.controls.externalIdentifierId.clearValidators()
-          formGroup.controls.externalIdentifierId.clearAsyncValidators()
-          formGroup.controls.externalIdentifierId.updateValueAndValidity()
-        }
+        this.manageWorkIdentifierTypeUpdates(externalIdentifierType, formGroup)
       })
 
-    formGroup.controls.externalIdentifierId.valueChanges.subscribe((value) => {
-      if (value) {
-        formGroup.controls.externalIdentifierType.setValidators([
-          Validators.required,
-        ])
-        formGroup.controls.externalIdentifierType.updateValueAndValidity({
-          emitEvent: false,
-        })
-      } else {
-        formGroup.controls.externalIdentifierType.clearValidators()
-        formGroup.controls.externalIdentifierType.updateValueAndValidity({
+    formGroup.controls.externalIdentifierId.valueChanges.subscribe((id) => {
+      this.manageWorkIdentifierIdUpdates(id, formGroup)
+    })
+
+    formGroup.controls.externalRelationship.valueChanges.subscribe(() => {
+      this.manageWorkIdentyfiersRelationshipUpdates(
+        workIdentifiersArray,
+        formGroup
+      )
+    })
+  }
+
+  private manageWorkIdentifierTypeUpdates(
+    externalIdentifierType: any,
+    formGroup: FormGroup
+  ) {
+    if (externalIdentifierType !== '') {
+      formGroup.controls.externalIdentifierId.setValidators([
+        Validators.required,
+      ])
+      formGroup.controls.externalIdentifierId.setAsyncValidators(
+        this.externalIdentifierTypeAsyncValidator(
+          formGroup,
+          externalIdentifierType
+        )
+      )
+      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+      const suggestedRelationship = this.getOrcidRecommendedRelationShip(
+        externalIdentifierType
+      )
+
+      if (suggestedRelationship) {
+        formGroup.controls.externalRelationship.setValue(suggestedRelationship)
+      }
+    } else {
+      formGroup.controls.externalIdentifierId.clearValidators()
+      formGroup.controls.externalIdentifierId.clearAsyncValidators()
+      formGroup.controls.externalIdentifierId.updateValueAndValidity()
+    }
+  }
+
+  private manageWorkIdentifierIdUpdates(value: any, formGroup: FormGroup) {
+    if (value) {
+      formGroup.controls.externalIdentifierType.setValidators([
+        Validators.required,
+      ])
+      formGroup.controls.externalIdentifierType.updateValueAndValidity({
+        emitEvent: false,
+      })
+    } else {
+      formGroup.controls.externalIdentifierType.clearValidators()
+      formGroup.controls.externalIdentifierType.updateValueAndValidity({
+        emitEvent: false,
+      })
+    }
+  }
+
+  private manageWorkIdentyfiersRelationshipUpdates(
+    workIdentifiersArray: FormArray,
+    formGroup: FormGroup
+  ) {
+    workIdentifiersArray.controls.forEach((element: FormGroup) => {
+      // Updates the value and validity of all the external identifier relationships on the array
+      // Since those depend on each other to validate the `versionOfInvalidRelationship` validator
+      if (
+        !Object.is(
+          element.controls.externalRelationship,
+          formGroup.controls.externalRelationship
+        )
+      ) {
+        element.controls.externalRelationship.updateValueAndValidity({
           emitEvent: false,
         })
       }
@@ -313,13 +386,17 @@ export class WorkFormComponent implements OnInit {
         [],
       ],
     })
-    workIdentifierForm.setValidators(
-      FundedByRelationValidator.fundedByInvalidRelationship()
-    )
+    workIdentifierForm.setValidators([
+      WorkIdentifiers.fundedByInvalidRelationship(),
+      WorkIdentifiers.versionOfInvalidRelationship(
+        this.workIdentifiersFormArray
+      ),
+    ])
     this.workIdentifiersFormArray.push(workIdentifierForm)
 
     this.checkWorkIdentifiersChanges(
-      this.workIdentifiersFormArray.controls.length - 1
+      this.workIdentifiersFormArray.controls.length - 1,
+      this.workIdentifiersFormArray
     )
   }
   deleteWorkId(id: number) {
@@ -423,7 +500,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   /**
-   * Return true only if the errors found are only of the type unResolved and validFormat
+   * Return true only if the errors found are only of the type unResolved
    */
   private formHasOnlyAllowError(formErrors) {
     if (
@@ -439,8 +516,7 @@ export class WorkFormComponent implements OnInit {
           Object.keys(x).length === 1 &&
           x.externalIdentifierId &&
           Object.keys(x.externalIdentifierId).length === 1 &&
-          (x.externalIdentifierId.unResolved ||
-            x.externalIdentifierId.validFormat)
+          x.externalIdentifierId.unResolved
       )
     } else {
       return false
@@ -483,37 +559,37 @@ export class WorkFormComponent implements OnInit {
         })
         break
     }
+    this.$workTypeUpdateEvent.next()
   }
 
-  updateRelation(event, type: 'external' | 'workType') {
+  getOrcidRecommendedRelationShip(externalIdentifier) {
+    let workRelationship = null
     const workType = this.workForm.get('workType').value
 
-    if (type === 'external') {
-      this.externalIdentifier = event
-    }
-
-    if (this.externalIdentifier && workType) {
-      if (this.externalIdentifier === 'isbn' && workType === 'book-chapter') {
-        this.workRelationship = WorkRelationships['part-of']
-      } else if (this.externalIdentifier === 'isbn' && workType === 'book') {
-        this.workRelationship = WorkRelationships.self
-      } else if (this.externalIdentifier === 'issn') {
-        this.workRelationship = WorkRelationships['part-of']
+    if (externalIdentifier && workType) {
+      if (externalIdentifier === 'isbn' && workType === 'book-chapter') {
+        workRelationship = WorkRelationships['part-of']
+      } else if (externalIdentifier === 'isbn' && workType === 'book') {
+        workRelationship = WorkRelationships.self
+      } else if (externalIdentifier === 'issn') {
+        workRelationship = WorkRelationships['part-of']
       } else if (
-        (this.externalIdentifier === 'isbn' &&
-          workType.value === 'dictionary-entry') ||
-        'conference-paper' ||
-        'encyclopedia-entry'
+        externalIdentifier === 'isbn' &&
+        ['dictionary-entry', 'conference-paper', 'encyclopedia-entry'].indexOf(
+          workType
+        ) >= 0
       ) {
-        this.workRelationship = WorkRelationships['part-of']
+        workRelationship = WorkRelationships['part-of']
       }
     }
     if (
-      this.externalIdentifier === 'grant_number' ||
-      this.externalIdentifier === 'proposal-id'
+      externalIdentifier === 'grant_number' ||
+      externalIdentifier === 'proposal-id'
     ) {
-      this.workRelationship = WorkRelationships['funded-by']
+      workRelationship = WorkRelationships['funded-by']
     }
+
+    return workRelationship
   }
 
   closeEvent() {

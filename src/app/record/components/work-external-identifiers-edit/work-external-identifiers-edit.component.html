@@ -76,23 +76,16 @@
         [errorStateMatcher]="workExternalIdErrorMatcher"
       />
 
-      <mat-icon
-        matSuffix
+      <mat-error
         *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat')
-        "
-        [matTooltip]="validFormatTooltip"
-        >warning</mat-icon
-      >
-      <mat-hint
-        *ngIf="
-          externalIdForm.get('externalIdentifierId').hasError('validFormat')
+          externalIdForm.get('externalIdentifierId').hasError('validFormat') &&
+          externalIdForm.get('externalIdentifierId').touched
         "
       >
         <ng-container i18n="@@works.validFormat">
           Invalid id for the selected identifier type
         </ng-container>
-      </mat-hint>
+      </mat-error>
 
       <mat-icon
         matSuffix
@@ -116,8 +109,7 @@
 
       <mat-hint
         *ngIf="
-          !externalIdForm.get('externalIdentifierId').hasError('unResolved') &&
-          !externalIdForm.get('externalIdentifierId').hasError('validFormat')
+          !externalIdForm.get('externalIdentifierId').hasError('unResolved')
         "
       >
         <ng-container i18n="@@works.identifierAssociated"
@@ -195,7 +187,6 @@
       appearance="outline"
       class="mat-form-field-min"
       formControlName="externalRelationship"
-      [(ngModel)]="workRelationship"
     >
       <ng-container *ngFor="let value of workRelationships">
         <mat-radio-button [value]="value"
@@ -214,6 +205,15 @@
     >
       Only identifier types "grant number", "doi", "uri" or "proposal id" are
       allowed when using "funded-by" identifiers</mat-error
+    >
+
+    <mat-error
+      class="mat-caption error-out-input-context fundingIdErrors"
+      i18n="@@works.atLestOneSelfIdRequired"
+      *ngIf="externalIdForm.hasError('version_of_invalid')"
+    >
+      At least one "self" identifier is required when using "version-of"
+      identifiers</mat-error
     >
   </div>
 </ng-container>

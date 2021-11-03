@@ -3,7 +3,7 @@
     [prefixTitle]="workExternal?.relationship?.value"
     title="{{ workExternal.externalIdentifierType.value + ':' | uppercase }}"
     [content]="workExternal.externalIdentifierId?.value || undefinedIdLabel"
-    [url]="workExternal.url?.value || workExternal.normalizedUrl?.value"
+    [url]="workExternal.normalizedUrl?.value || workExternal.url?.value"
     [titleMargin]="false"
     [secondaryText]="true"
     [marginBotton]="false"

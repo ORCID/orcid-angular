@@ -139,6 +139,7 @@ export enum WorksTitleName {
   journalTitle = 'journalTitle',
   magazineTitle = 'magazineTitle',
   newsletterTitle = 'newsletterTitle',
+  newspaperTitle = 'newspaperTitle',
   institution = 'institution',
   custodian = 'custodian',
   trademark = 'trademark',
@@ -151,6 +152,7 @@ export const WorksTitleNameLabel = {
   [WorksTitleName.journalTitle]: $localize`:@@works.journalTitle:Journal title`,
   [WorksTitleName.magazineTitle]: $localize`:@@works.magazineTitle:Magazine title`,
   [WorksTitleName.newsletterTitle]: $localize`:@@works.newsletterTitle:Newsletter title`,
+  [WorksTitleName.newspaperTitle]: $localize`:@@works.newspaperTitle:Newspaper title`,
   [WorksTitleName.institution]: $localize`:@@works.institution:Institution`,
   [WorksTitleName.custodian]: $localize`:@@works.custodian:Custodian`,
   [WorksTitleName.trademark]: $localize`:@@works.trademark:Trademark`,
@@ -175,7 +177,7 @@ export const WorkTypesTitle = {
     [WorkPublicationTypes.magazineArticle]: WorksTitleName.magazineTitle,
     [WorkPublicationTypes.manual]: WorksTitleName.publisher,
     [WorkPublicationTypes.newsletterArticle]: WorksTitleName.newsletterTitle,
-    [WorkPublicationTypes.newspaperArticle]: WorksTitleName.newsletterTitle,
+    [WorkPublicationTypes.newspaperArticle]: WorksTitleName.newspaperTitle,
     [WorkPublicationTypes.onlineResource]: WorksTitleName.publisher,
     [WorkPublicationTypes.preprint]: WorksTitleName.journalTitle,
     [WorkPublicationTypes.report]: WorksTitleName.institution,
@@ -185,7 +187,7 @@ export const WorkTypesTitle = {
     [WorkPublicationTypes.test]: WorksTitleName.institution,
     [WorkPublicationTypes.translation]: WorksTitleName.publisher,
     [WorkPublicationTypes.website]: WorksTitleName.publisher,
-    [WorkPublicationTypes.workingPaper]: WorksTitleName.publisher,
+    [WorkPublicationTypes.workingPaper]: WorksTitleName.institution,
   },
 
   [WorkCategories.intellectual_property]: {
@@ -194,7 +196,7 @@ export const WorkTypesTitle = {
     [WorkIntellectualPropertyTypes.patent]: WorksTitleName.publisher,
     [WorkIntellectualPropertyTypes.registeredCopyright]:
       WorksTitleName.publisher,
-    [WorkIntellectualPropertyTypes.trademark]: WorksTitleName.trademark,
+    [WorkIntellectualPropertyTypes.trademark]: WorksTitleName.journalTitle,
   },
   [WorkCategories.other_output]: {
     [WorkOtherOutputTypes.annotation]: WorksTitleName.custodian,

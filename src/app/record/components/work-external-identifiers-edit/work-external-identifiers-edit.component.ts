@@ -27,12 +27,10 @@ export class WorkExternalIdentifiersEditComponent
   @Input() externalIdForm: FormGroup
   @Input() index: number
   @Input() workIdTypes: WorkIdType[]
-  @Input() workRelationship: WorkRelationships
   @Output() cancelEvent = new EventEmitter<void>()
   @Output() updateExternalEvent = new EventEmitter<void>()
   workExternalIdErrorMatcher = new WorkExternalIdErrorMatcher()
 
-  validFormatTooltip = $localize`:@@works.validFormat:Invalid id for the selected identifier type`
   unResolvedTooltip = $localize`:@@works.unResolved:We couldn't find a resource that matches the identifier you entered.
   Please check the value or enter a valid link to the resource.`
 
@@ -66,6 +64,9 @@ export class WorkExternalIdentifiersEditComponent
 
 export class WorkExternalIdErrorMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null): boolean {
-    return control.hasError('required') && control.touched
+    return (
+      (control.hasError('required') || control.hasError('validFormat')) &&
+      control.touched
+    )
   }
 }
