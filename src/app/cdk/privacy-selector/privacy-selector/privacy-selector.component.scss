@@ -48,6 +48,12 @@ button {
   margin: unset;
 }
 
+.privacy-selector.bottom {
+  bottom: unset;
+  left: unset;
+  margin: unset;
+}
+
 .panel:hover + .hide {
   display: block;
 }
