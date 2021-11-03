@@ -77,7 +77,13 @@
   </button>
 </div>
 <div class="hide">
-  <div class="privacy-selector orc-font-body-small">
+  <div
+    class="privacy-selector orc-font-body-small"
+    [ngClass]="{
+      start: alignment === 'start',
+      bottom: alignment === 'bottom'
+    }"
+  >
     <p>
       <strong i18n="@@shared.whoCanSeeThis"> Who can see this? </strong>
     </p>
