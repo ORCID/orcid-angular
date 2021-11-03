@@ -10,6 +10,7 @@
       color="primary"
       (click)="saveEvent()"
       id="combine-button"
+      [disabled]="selectSetOfWorksToCombine.length === 0"
     >
       <ng-container i18n="@@works.combineSelectedWorks">
         Combine selected works
