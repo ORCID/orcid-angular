@@ -174,7 +174,7 @@ export class WorkFormComponent implements OnInit {
         {
           translatedTitleContent: [
             currentWork?.translatedTitle?.content || '',
-            [],
+            [Validators.maxLength(this.MAX_LENGTH_TITLE)],
           ],
           translatedTitleLanguage: [
             currentWork?.translatedTitle?.languageCode || '',

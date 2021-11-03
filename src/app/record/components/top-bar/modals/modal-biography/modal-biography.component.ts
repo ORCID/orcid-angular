@@ -64,7 +64,8 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingBiography = false
     this.userRecord = this.data
-    this.biographyVisibility = this.userRecord.preferences.default_visibility
+    this.defaultVisibility = this.userRecord.preferences.default_visibility
+    this.biographyVisibility = this.defaultVisibility
     if (this.userRecord.biography && this.userRecord.biography.biography) {
       this.biography = this.userRecord.biography.biography.value
       this.biographyVisibility = this.userRecord.biography.visibility.visibility

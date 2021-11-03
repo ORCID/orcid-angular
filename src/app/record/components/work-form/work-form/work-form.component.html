@@ -201,6 +201,16 @@
       >
         Please enter a translated title
       </mat-error>
+      <mat-error
+        class="mat-caption"
+        *ngIf="
+          workForm.get('translatedTitleGroup.translatedTitleContent').errors
+            ?.maxlength
+        "
+        i18n="@@works.titleMaxLength"
+      >
+        Must be less than 1000 characters
+      </mat-error>
     </div>
 
     <!-- Language of this title -->
