@@ -117,7 +117,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       if (
         this.deleteForm.value[
           this.type === 'research-resources' ? item.putCode : item.putCode.value
-        ].checked
+        ]?.checked
       ) {
         putCode =
           this.type === 'research-resources' ? item.putCode : item.putCode.value
