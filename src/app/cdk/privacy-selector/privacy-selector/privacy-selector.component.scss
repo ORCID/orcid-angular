@@ -43,6 +43,11 @@ button {
   }
 }
 
+.privacy-selector.start {
+  left: unset;
+  margin: unset;
+}
+
 .panel:hover + .hide {
   display: block;
 }

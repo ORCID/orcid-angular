@@ -36,6 +36,7 @@ export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
   get privacy(): VisibilityStrings {
     return this._privacy
   }
+  @Input() alignment: 'start' = null
   privacyChange = new EventEmitter<VisibilityStrings>()
 
   constructor() {}
