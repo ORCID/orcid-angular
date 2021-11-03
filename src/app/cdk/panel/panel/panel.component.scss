@@ -60,3 +60,14 @@ mat-checkbox.text-wrap {
     white-space: normal;
   }
 }
+.columns-8 :host,
+.columns-4 :host {
+  .header {
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-bottom: 15px;
+  }
+  .buttons-container {
+    width: 100%;
+  }
+}
