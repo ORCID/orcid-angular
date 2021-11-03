@@ -92,7 +92,7 @@
       <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
       <b>{{ maxNumberOfWorksToDisplay }}</b>
       <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
-      <b>{{ totalWorks || putCodes?.length }}</b>
+      <b>{{ selectedAll ?  totalWorks : putCodes?.length }}</b>
       <ng-container i18n="@@works.worksToExport">works to export</ng-container>
     </p>
     <div
