@@ -10,7 +10,7 @@
         >{{ work.publicationDate | monthDayYearDateToString }}
         |
       </ng-container>
-      {{ work.workType.value }}
+      {{ work.workType.value | recordWorkTypeLabel }}
     </div>
     <app-display-external-ids
       [externalIdentifiers]="work.workExternalIdentifiers"
