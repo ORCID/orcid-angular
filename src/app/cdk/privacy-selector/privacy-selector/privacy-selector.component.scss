@@ -1,3 +1,7 @@
+:host {
+  position: relative;
+}
+
 .panel {
   position: relative;
   border-radius: 50px;
@@ -21,6 +25,10 @@ button {
 
 .privacy-selector {
   position: absolute;
+  width: 152px;
+  bottom: 110%;
+  left: 50%;
+  margin-left: -90px;
   overflow: hidden;
   -moz-transition: height 450ms;
   z-index: 2;

@@ -78,6 +78,10 @@ export class WorkFormComponent implements OnInit {
   dayOptions = Array(31)
     .fill(0)
     .map((i, idx) => idx + 1)
+
+  MAX_LENGTH_TITLE = 999
+  MAX_LENGTH_DESCRIPTION = 4999
+
   citationTypes = CitationTypes
 
   dynamicTitle = WorksTitleName.journalTitle
@@ -162,7 +166,10 @@ export class WorkFormComponent implements OnInit {
         [Validators.required],
       ],
       workType: [currentWork?.workType?.value || '', [Validators.required]],
-      title: [currentWork?.title?.value || '', [Validators.required]],
+      title: [
+        currentWork?.title?.value || '',
+        [Validators.required, Validators.maxLength(this.MAX_LENGTH_TITLE)],
+      ],
       translatedTitleGroup: this._fb.group(
         {
           translatedTitleContent: [
@@ -176,8 +183,14 @@ export class WorkFormComponent implements OnInit {
         },
         { validator: translatedTitleValidator }
       ),
-      subtitle: [currentWork?.subtitle?.value || '', []],
-      journalTitle: [currentWork?.journalTitle?.value || '', []],
+      subtitle: [
+        currentWork?.subtitle?.value || '',
+        [Validators.maxLength(this.MAX_LENGTH_TITLE)],
+      ],
+      journalTitle: [
+        currentWork?.journalTitle?.value || '',
+        [Validators.maxLength(this.MAX_LENGTH_TITLE)],
+      ],
       publicationDate: this._fb.group(
         {
           publicationDay: [Number(currentWork?.publicationDate?.day) || '', []],
@@ -197,7 +210,10 @@ export class WorkFormComponent implements OnInit {
         {
           citationType: [currentWork?.citation?.citationType.value || '', []],
           citation: [currentWork?.citation?.citation.value || '', []],
-          shortDescription: [currentWork?.shortDescription?.value || '', []],
+          shortDescription: [
+            currentWork?.shortDescription?.value || '',
+            [Validators.maxLength(this.MAX_LENGTH_DESCRIPTION)],
+          ],
         },
         { validator: workCitationValidator }
       ),
