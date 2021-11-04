@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
+import { sortBy } from 'lodash'
 
 @Component({
   selector: 'app-modal-works-search-link',
@@ -37,7 +38,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
       .loadWorkImportWizardList()
       .pipe(takeUntil(this.$destroy))
       .subscribe((recordImportWizards) => {
-        this.recordImportWizardsOriginal = recordImportWizards
+        this.recordImportWizardsOriginal = sortBy(recordImportWizards, 'name')
         this.recordImportWizards = this.recordImportWizardsOriginal
         recordImportWizards.forEach((recordImportWizard) => {
           recordImportWizard.actTypes.forEach((actType) => {
@@ -53,6 +54,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
           })
         })
         this.loadingWorks = false
+
         this.total = this.recordImportWizardsOriginal.length
       })
   }
