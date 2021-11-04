@@ -38,7 +38,6 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
       .loadWorkImportWizardList()
       .pipe(takeUntil(this.$destroy))
       .subscribe((recordImportWizards) => {
-        
         this.recordImportWizardsOriginal = sortBy(recordImportWizards, 'name')
         this.recordImportWizards = this.recordImportWizardsOriginal
         recordImportWizards.forEach((recordImportWizard) => {
@@ -55,7 +54,7 @@ export class ModalWorksSearchLinkComponent implements OnInit, OnDestroy {
           })
         })
         this.loadingWorks = false
-        
+
         this.total = this.recordImportWizardsOriginal.length
       })
   }
