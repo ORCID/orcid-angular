@@ -137,7 +137,6 @@ export class WorkFormComponent implements OnInit {
 
     this.loadWorkForm(this.work)
 
-    //
     this._record.getPreferences().subscribe((userRecord) => {
       this.defaultVisibility = userRecord.default_visibility
     })
