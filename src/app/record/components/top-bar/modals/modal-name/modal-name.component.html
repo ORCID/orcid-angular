@@ -189,9 +189,10 @@
         >
       </p>
     </div>
-    <p class="orc-font-body-small" i18n="@@topBar.manageWhoCanSee">
-      Manage who can see your given, family and published names. By default your
-      names are set to Public and can be seen by everyone.
+    <p class="orc-font-body-small">
+      {{ ngOrcidDefaultVisibilityLabel }}
+      <strong>{{ publicVisibility | visibilityStringLabel }}</strong
+      >.
     </p>
     <div class="row names-visibility">
       <div class="col no-wrap actions-wrapper no-gutters">

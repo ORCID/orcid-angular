@@ -59,6 +59,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   originalBackendOtherNames: OtherNamesEndPoint
   isMobile: boolean
   defaultVisibility: VisibilityStrings
+  publicVisibility: VisibilityStrings
   otherNamesDefaultVisibility: VisibilityStrings
   addedOtherNameCount = 0
   loadingNames = true
@@ -69,6 +70,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
   ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add a published or credit name`
   ngOrcidAddOtherName = $localize`:@@topBar.addOtherName:Add other name`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@topBar.manageWhoCanSee:Control who can see your given, family and published names by setting the visibility. The default visibility for your names is`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -97,6 +99,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userRecord = this.data
+    this.publicVisibility = 'PUBLIC'
     this._recordNameService
       .getNames()
       .pipe(first())
