@@ -244,8 +244,9 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     if (work.workExternalIdentifiers === undefined) {
       work.workExternalIdentifiers = []
       work.workExternalIdentifiers[0] = ident
-    }
-    else if (work.workExternalIdentifiers[0]?.externalIdentifierId?.value == null) {
+    } else if (
+      work.workExternalIdentifiers[0]?.externalIdentifierId?.value == null
+    ) {
       work.workExternalIdentifiers[0] = ident
       // Only adds the url if there is no other identifier
     } else if (idType !== 'uri') {
