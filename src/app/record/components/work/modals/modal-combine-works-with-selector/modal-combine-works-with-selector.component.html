@@ -30,9 +30,8 @@
     <div class="orc-font-small-print">
       <p>
         <ng-container i18n="@@works.setsOfSimilarWorkToManage1"
-        >ORCID have found
-        </ng-container
-        >
+          >ORCID have found
+        </ng-container>
         {{ this.suggestionsWorks?.length }}
         <ng-container i18n="@@works.setsOfSimilarWorkToManage2">
           sets of works with similar titles that you may want to combine.
@@ -58,9 +57,9 @@
   <div
     class="info"
     [ngClass]="{
-        'orc-font-body-small': !isMobile,
-        'orc-font-small-print': isMobile
-      }"
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
   >
     <div class="col">
       <mat-icon class="large-material-icon">info</mat-icon>
@@ -74,11 +73,7 @@
       </p>
     </div>
   </div>
-  <div
-    class="row"
-    [formGroup]="form"
-    *ngIf="form"
-  >
+  <div class="row" [formGroup]="form" *ngIf="form">
     <h3>
       <ng-container i18n="@@works.selectedWorksCombine">
         Selected works to combine
@@ -103,23 +98,21 @@
                 <strong i18n="@@shared.source">Source</strong>:
                 <ng-container
                   *ngIf="
-                      work?.assertionOriginName || work?.assertionOriginOrcid
-                    "
+                    work?.assertionOriginName || work?.assertionOriginOrcid
+                  "
                 >
-                  {{
-                  work?.assertionOriginName || work?.assertionOriginOrcid
-                  }}
+                  {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
                   <i i18n="@@shared.onBehalfOf">via</i>
                 </ng-container>
                 {{ work.sourceName || work.source }}
                 <ng-container *ngIf="work.createdDate">
-                  <br *ngIf="isMobile"/>
+                  <br *ngIf="isMobile" />
                   <strong
                     class="added"
                     i18n="@@shared.added"
                     [ngClass]="{
-                        mobile: isMobile
-                      }"
+                      mobile: isMobile
+                    }"
                   >
                     Added </strong
                   >:
@@ -138,7 +131,7 @@
     >
       <mat-icon>error</mat-icon>
       <ng-container i18n="@@works.noItemsSelected"
-      >No items selected.
+        >No items selected.
       </ng-container>
     </div>
   </div>
