@@ -222,7 +222,7 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   openModal(modal: ComponentType<any>, putCodes, selectedAll?: boolean) {
-    this.checked({checked: false, source: undefined})
+    this.checked({ checked: false, source: undefined })
     this.selectedWorks = []
     this.selectAll = false
     this._platform
