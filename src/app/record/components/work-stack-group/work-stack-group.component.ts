@@ -222,13 +222,9 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   openModal(modal: ComponentType<any>, putCodes, selectedAll?: boolean) {
+    this.checked({checked: false, source: undefined})
     this.selectedWorks = []
     this.selectAll = false
-    this.appWorkStacks.forEach((appWorkStack) => {
-      appWorkStack.panelsComponent.forEach((panelComponent) => {
-        panelComponent.selected = false
-      })
-    })
     this._platform
       .get()
       .pipe(first())
