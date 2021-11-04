@@ -79,7 +79,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    if (this.item && this.items.length === 0) {
+    if (this.item && this.items?.length === 0) {
       this.items.push(this.item)
       this.items.forEach((i) => {
         group[i?.putCode?.value || i.putCode] = new FormGroup({
