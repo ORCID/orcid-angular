@@ -36,7 +36,10 @@ import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
-import { ExternalIdentifier, VisibilityStrings } from '../../../../types/common.endpoint'
+import {
+  ExternalIdentifier,
+  VisibilityStrings,
+} from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
@@ -98,7 +101,6 @@ export class WorkFormComponent implements OnInit {
   ngOrcidSelectACountry = $localize`:@@shared.selectACountry:Select a country`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
   defaultVisibility: VisibilityStrings
-
 
   workTypes:
     | typeof WorkConferenceTypes

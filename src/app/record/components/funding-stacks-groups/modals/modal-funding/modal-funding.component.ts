@@ -129,7 +129,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
 
-
   constructor(
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,

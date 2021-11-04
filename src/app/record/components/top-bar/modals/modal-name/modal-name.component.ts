@@ -72,7 +72,6 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   ngOrcidAddOtherName = $localize`:@@topBar.addOtherName:Add other name`
   ngOrcidDefaultVisibilityLabel = $localize`:@@topBar.manageWhoCanSee:Control who can see your given, family and published names by setting the visibility. The default visibility for your names is`
 
-
   constructor(
     @Inject(WINDOW) private window: Window,
     private _platform: PlatformInfoService,
@@ -100,7 +99,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userRecord = this.data
-    this.publicVisibility="PUBLIC"
+    this.publicVisibility = 'PUBLIC'
     this._recordNameService
       .getNames()
       .pipe(first())
