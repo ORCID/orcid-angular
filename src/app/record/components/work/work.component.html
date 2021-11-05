@@ -16,18 +16,17 @@
       [externalIdentifiers]="work.workExternalIdentifiers"
     ></app-display-external-ids>
     <div class="general-data" *ngIf="work?.contributors?.length > 0">
-      <span i18n="#upperCase@@works.contributors">
-        Contributors
-      </span>:
+      <span i18n="#upperCase@@works.contributors"> Contributors </span>:
       <ng-container
         *ngFor="
           let contributor of work.contributors;
           let index = index;
-          let last = last;"
+          let last = last
+        "
       >
         <ng-container *ngIf="contributor.creditName && index < 10">{{
           contributor.creditName.value + (!last && index !== 9 ? ',' : '')
-          }}</ng-container>
+        }}</ng-container>
       </ng-container>
       <ng-container *ngIf="work.contributors.length > 10">
         + {{ work.contributors.length - 10 }}
