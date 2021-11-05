@@ -24,11 +24,11 @@
           let last = last
         "
       >
-        <ng-container *ngIf="contributor.creditName && index < 10">{{
-          contributor.creditName.value + (!last && index !== 9 ? ',' : '')
-        }}</ng-container>
+        <ng-container *ngIf="contributor.creditName && index < maxNumberContributors">{{
+          contributor.creditName.value + (!last && index !== maxNumberContributors - 1 ? ',' : '')
+          }}</ng-container>
       </ng-container>
-      <ng-container *ngIf="work.contributors.length > 10">
+      <ng-container *ngIf="work.contributors.length > maxNumberContributors">
         + {{ work.contributors.length - 10 }}
         <span i18n="@@works.more">more</span>
       </ng-container>
