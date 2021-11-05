@@ -19,10 +19,19 @@
       <span i18n="#upperCase@@works.contributors">
         Contributors
       </span>:
-      <ng-container *ngFor="let contributor of work.contributors;let last = last;">
-        <ng-container *ngIf="contributor.creditName">{{
-          contributor.creditName.value + (!last ? ',' : '')
+      <ng-container
+        *ngFor="
+          let contributor of work.contributors;
+          let index = index;
+          let last = last;"
+      >
+        <ng-container *ngIf="contributor.creditName && index < 10">{{
+          contributor.creditName.value + (!last && index !== 9 ? ',' : '')
           }}</ng-container>
+      </ng-container>
+      <ng-container *ngIf="work.contributors.length > 10">
+        + {{ work.contributors.length - 10 }}
+        <span i18n="@@works.more">more</span>
       </ng-container>
     </div>
   </div>
