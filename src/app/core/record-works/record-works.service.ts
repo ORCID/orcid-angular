@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
@@ -182,13 +182,15 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work) {
+  save(work: Work, bibtex?: boolean) {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getWorks({ forceReload: true }))
+        switchMap(() =>
+          bibtex === false ? EMPTY : this.getWorks({ forceReload: true })
+        )
       )
   }
 

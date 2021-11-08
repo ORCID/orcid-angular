@@ -103,16 +103,16 @@
                 (change)="updateCheck(work)"
                 formControlName="checked"
               >
-                <h2 class="orc-font-body">
+                <h2 class="orc-font-body" *ngIf="work?.title?.value">
                   {{ work?.title?.value }}
                 </h2>
                 <p class="orc-font-body-small">
-                  {{ work.journalTitle.value }}
+                  {{ work?.journalTitle?.value }}
                 </p>
                 <p class="orc-font-body-small">
-                  {{ work.publicationDate | monthDayYearDateToString }}
-                  <span> | </span>
-                  {{ work.workType.value }}
+                  {{ work?.publicationDate | monthDayYearDateToString }}
+                  <span *ngIf="work.publicationDate"> | </span>
+                  {{ work?.workType?.value }}
                 </p>
               </mat-checkbox>
             </div>
