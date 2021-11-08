@@ -111,7 +111,7 @@
                 </p>
                 <p class="orc-font-body-small">
                   {{ work?.publicationDate | monthDayYearDateToString }}
-                  <span> | </span>
+                  <span *ngIf="work.publicationDate"> | </span>
                   {{ work?.workType?.value }}
                 </p>
               </mat-checkbox>
