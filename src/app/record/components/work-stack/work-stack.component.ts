@@ -92,9 +92,8 @@ export class WorkStackComponent implements OnInit {
       this.panelDetailsState[work.putCode.value] = {
         state: false,
       }
-    } else {
-      this.getDetails(work).subscribe()
     }
+    this.getDetails(work).subscribe()
   }
 
   /**
