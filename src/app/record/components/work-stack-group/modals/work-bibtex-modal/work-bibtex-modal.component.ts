@@ -182,6 +182,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         }
       }
 
+      
       if (lowerKeyTags.hasOwnProperty('year')) {
         if (!isNaN(lowerKeyTags['year'])) {
           work.publicationDate = {
@@ -190,14 +191,18 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (lowerKeyTags.hasOwnProperty('month')) {
-        let month = lowerKeyTags['month'].trim()
-        if (bibMonths.indexOf(month.trim().substring(0, 3)) >= 0) {
-          month = bibMonths.indexOf(month.trim().substring(0, 3)) + 1
-        }
-        if (!isNaN(month) && month > 0 && month <= 12) {
-          work.publicationDate = {
-            month: this.pad(month, 2),
+      //only set month if year provided
+      if (lowerKeyTags.hasOwnProperty('month') && lowerKeyTags.hasOwnProperty('year')) {
+        if (!isNaN(lowerKeyTags['year']) && lowerKeyTags['year'].trim()!='' ){
+          let month = lowerKeyTags['month'].trim()
+          if (bibMonths.indexOf(month.trim().substring(0, 3)) >= 0) {
+            month = bibMonths.indexOf(month.trim().substring(0, 3)) + 1
+          }
+          if (!isNaN(month) && month > 0 && month <= 12) {
+            work.publicationDate = {
+              year: lowerKeyTags['year'].trim(),
+              month: this.pad(month, 2),
+            }
           }
         }
       }
@@ -305,11 +310,13 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         this._recordWorksService.save(work).subscribe(() => {
           if (index === this.selectedWorks.length - 1) {
             this.loadingWorks = false
+            this.worksFromBibtex = []
             this.closeEvent()
           }
         })
       })
     }
+
   }
 
   closeEvent() {
