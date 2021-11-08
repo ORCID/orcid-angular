@@ -16,7 +16,7 @@
       [externalIdentifiers]="work.workExternalIdentifiers"
     ></app-display-external-ids>
     <div class="general-data" *ngIf="work?.contributors?.length > 0">
-      <span i18n="@@works.contributors"> Contributors </span>:
+      <span i18n="#upperCase@@works.contributors"> Contributors </span>:
       <ng-container
         *ngFor="
           let contributor of work.contributors;
