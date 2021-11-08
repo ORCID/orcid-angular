@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { Subject } from 'rxjs'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -19,6 +19,7 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent
+  @ViewChild('externalIdRef') externalIdElement: ElementRef;
 
   @Input() type: EXTERNAL_ID_TYPE_WORK
   EXTERNAL_ID_TYPE_WORK = EXTERNAL_ID_TYPE_WORK
@@ -45,6 +46,11 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
         Validators.pattern(URL_REGEXP),
       ])
     }
+    
+  }
+
+  ngAfterViewInit() {
+    this.externalIdElement.nativeElement.focus()
   }
 
   retrieveWork() {
