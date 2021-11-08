@@ -85,6 +85,7 @@ export class WorkFormComponent implements OnInit {
 
   MAX_LENGTH_TITLE = 999
   MAX_LENGTH_DESCRIPTION = 4999
+  MAX_LENGTH_URL=1999
 
   citationTypes = CitationTypes
 
@@ -217,7 +218,7 @@ export class WorkFormComponent implements OnInit {
         },
         { validator: dateValidator('publication') }
       ),
-      url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
+      url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP), Validators.maxLength(this.MAX_LENGTH_URL)]],
       citationGroup: this._fb.group(
         {
           citationType: [currentWork?.citation?.citationType.value || '', []],
