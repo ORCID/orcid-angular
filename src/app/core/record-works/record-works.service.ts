@@ -188,7 +188,9 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => bibtex === false ? EMPTY : this.getWorks({ forceReload: true }))
+        switchMap(() =>
+          bibtex === false ? EMPTY : this.getWorks({ forceReload: true })
+        )
       )
   }
 
