@@ -24,7 +24,7 @@
   <div *ngIf="selectable">
     <mat-checkbox
       class="text-wrap"
-      *ngIf="defaultPutCode === putCode && !isPublicRecord"
+      *ngIf="defaultPutCode === putCode || displayTheStack && !isPublicRecord"
       (change)="checked($event)"
       [(ngModel)]="selected"
     >
@@ -33,10 +33,7 @@
       </ng-container>
     </mat-checkbox>
     <ng-container
-      *ngIf="
-        defaultPutCode !== putCode ||
-        (isPublicRecord && expandButtonsPosition !== 'left')
-      "
+      *ngIf="isPublicRecord && expandButtonsPosition !== 'left'"
     >
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>
