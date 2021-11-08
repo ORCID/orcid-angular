@@ -217,7 +217,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   updateCheck(putCode: string) {
     if (this.selectedItems.includes(putCode)) {
       this.selectedItems = this.selectedItems.filter(
-        (value) => value !== putCode,
+        (value) => value !== putCode
       )
     } else {
       this.selectedItems.push(putCode)
