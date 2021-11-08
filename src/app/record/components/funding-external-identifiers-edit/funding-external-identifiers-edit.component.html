@@ -25,7 +25,10 @@
         matInput
         formControlName="grantNumber"
       />
-      <mat-error *ngIf="grantForm.get('grantNumber').errors?.maxlength" i18n="@@shared.maxLength.less_than_two_thousand_forty_eight">
+      <mat-error
+        *ngIf="grantForm.get('grantNumber').errors?.maxlength"
+        i18n="@@shared.maxLength.less_than_two_thousand_forty_eight"
+      >
         Must be less than 2084 characters
       </mat-error>
     </mat-form-field>
@@ -60,11 +63,12 @@
     >
       Invalid URL
     </mat-error>
-    <mat-error *ngIf="grantForm.get('grantUrl').hasError('maxlength')"
-      i18n="@@shared.maxLength.less_than_two_thousand">
+    <mat-error
+      *ngIf="grantForm.get('grantUrl').hasError('maxlength')"
+      i18n="@@shared.maxLength.less_than_two_thousand"
+    >
       Must be less than 2000 characters
     </mat-error>
-    
   </mat-form-field>
 
   <!-- Funding relationship -->
