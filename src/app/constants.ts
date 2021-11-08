@@ -214,6 +214,11 @@ export function ArrayFlat(arr) {
 }
 
 export const DEFAULT_PAGE_SIZE = 50
+export const MAX_LENGTH_LESS_THAN_ONE_THOUSAND = 999
+export const MAX_LENGTH_LESS_THAN_FIVE_THOUSAND = 4999
+export const MAX_LENGTH_LESS_THAN_TWO_THOUSAND = 1999
+export const MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE = 254
+export const MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR = 2083
 
 export function GetFormErrors(form: AbstractControl) {
   if (form instanceof FormControl) {
