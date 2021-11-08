@@ -71,8 +71,11 @@
         </strong>
       </label>
     </div>
-    <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+    <div class="row">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min input-container"
+      >
         <input id="external-id-input" matInput formControlName="externalId" />
         <mat-error *ngIf="metadataNotFound" i18n="@@works.unableToImport">
           Unable to import using this identifier. Please add work using a
