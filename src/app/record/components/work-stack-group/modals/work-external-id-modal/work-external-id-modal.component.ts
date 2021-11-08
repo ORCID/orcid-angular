@@ -38,10 +38,13 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.externalIdentifierForm = this._formBuilder.group({
-      externalId: new FormControl('', {
-        validators: [Validators.pattern(URL_REGEXP)],
-      }),
+      externalId: new FormControl(''),
     })
+    if (this.type === EXTERNAL_ID_TYPE_WORK.doi) {
+      this.externalIdentifierForm.controls.externalId.setValidators([
+        Validators.pattern(URL_REGEXP),
+      ])
+    }
   }
 
   retrieveWork() {
@@ -55,6 +58,9 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
         .pipe(first())
         .subscribe((work) => {
           if (!work) {
+            this.externalIdentifierForm
+              .get('externalId')
+              .setErrors({ metadataNotFound: true })
             this.metadataNotFound = true
           } else {
             this.work = work

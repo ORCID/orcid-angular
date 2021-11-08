@@ -10,7 +10,7 @@
       color="primary"
       (click)="saveEvent()"
       id="combine-button"
-      [disabled]="selectSetOfWorksToCombine.length === 0"
+      [disabled]="selectSetOfWorksToCombine?.length === 0"
     >
       <ng-container i18n="@@works.combineSelectedWorks">
         Combine selected works
@@ -26,117 +26,113 @@
       Cancel
     </button>
   </app-modal-footer>
-  <ng-container *ngIf="form">
-    <div class="row">
-      <div class="orc-font-small-print">
-        <p>
-          <ng-container i18n="@@works.setsOfSimilarWorkToManage1"
-            >ORCID have found</ng-container
-          >
-          {{ this.suggestionsWorks.length }}
-          <ng-container i18n="@@works.setsOfSimilarWorkToManage2">
-            sets of works with similar titles that you may want to combine.
-          </ng-container>
-        </p>
-
-        <p i18n="@@works.setsOfSimilarWorkToManage3">
-          The selected works will be grouped together and displayed as a single
-          group item on your record. All versions of the work will still be
-          available but one will be shown as your preferred version
-        </p>
-        <a
-          class="underline"
-          rel="noopener noreferrer"
-          target="_blank"
-          href="https://support.orcid.org/hc/articles/360006894774"
-          i18n="@@works.learnMoreCombining"
-        >
-          Learn more about combining works
-        </a>
-      </div>
-    </div>
-    <div
-      class="info"
-      [ngClass]="{
-        'orc-font-body-small': !isMobile,
-        'orc-font-small-print': isMobile
-      }"
-    >
-      <div class="col">
-        <mat-icon class="large-material-icon">info</mat-icon>
-      </div>
-      <div class="col l11 m6 s3">
-        <strong i18n="@@works.combiningWorks">
-          Combining works cannot be undone!
-        </strong>
-        <p i18n="@@works.checkSelectedWorks">
-          Please check the selected works are correct before combining them.
-        </p>
-      </div>
-    </div>
-    <div class="row" [formGroup]="form">
-      <h3>
-        <ng-container i18n="@@works.selectedWorksCombine">
-          Selected works to combine
+  <div class="row">
+    <div class="orc-font-small-print">
+      <p>
+        <ng-container i18n="@@works.setsOfSimilarWorkToManage1"
+          >ORCID have found
         </ng-container>
-        ({{ selectSetOfWorksToCombine.length }})
-      </h3>
-      <mat-divider class="row orcid-divider"></mat-divider>
+        {{ this.suggestionsWorks?.length }}
+        <ng-container i18n="@@works.setsOfSimilarWorkToManage2">
+          sets of works with similar titles that you may want to combine.
+        </ng-container>
+      </p>
 
-      <ng-container *ngFor="let suggestionWork of suggestionsWorks">
-        <div class="list-works-group">
-          <mat-checkbox [formControlName]="suggestionWork.putCodes">
-          </mat-checkbox>
-          <div class="list-works">
-            <ng-container *ngFor="let work of suggestionWork.works">
-              <div class="row work-info">
-                <div class="row">
-                  <h2 class="orc-font-body">
-                    {{ work.title.value }}
-                  </h2>
-                </div>
-                <div class="orc-font-body-small">
-                  <strong i18n="@@shared.source">Source</strong>:
-                  <ng-container
-                    *ngIf="
-                      work?.assertionOriginName || work?.assertionOriginOrcid
-                    "
-                  >
-                    {{
-                      work?.assertionOriginName || work?.assertionOriginOrcid
-                    }}
-                    <i i18n="@@shared.onBehalfOf">via</i>
-                  </ng-container>
-                  {{ work.sourceName || work.source }}
-                  <ng-container *ngIf="work.createdDate">
-                    <br *ngIf="isMobile" />
-                    <strong
-                      class="added"
-                      i18n="@@shared.added"
-                      [ngClass]="{
-                        mobile: isMobile
-                      }"
-                    >
-                      Added </strong
-                    >:
-                    {{ work.createdDate | monthDayYearDateToString }}
-                  </ng-container>
-                </div>
-              </div>
-              <mat-divider class="row"></mat-divider>
-            </ng-container>
-          </div>
-        </div>
-      </ng-container>
-      <div
-        class="no-info orc-font-body-small"
-        *ngIf="selectSetOfWorksToCombine.length === 0"
+      <p i18n="@@works.setsOfSimilarWorkToManage3">
+        The selected works will be grouped together and displayed as a single
+        group item on your record. All versions of the work will still be
+        available but one will be shown as your preferred version
+      </p>
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/articles/360006894774"
+        i18n="@@works.learnMoreCombining"
       >
-        <mat-icon>error</mat-icon>
-        <ng-container i18n="@@works.noItemsSelected"
-          >No items selected.
-        </ng-container>
-      </div>
+        Learn more about combining works
+      </a>
     </div>
-  </ng-container>
+  </div>
+  <div
+    class="info"
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div class="col">
+      <mat-icon class="large-material-icon">info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3">
+      <strong i18n="@@works.combiningWorks">
+        Combining works cannot be undone!
+      </strong>
+      <p i18n="@@works.checkSelectedWorks">
+        Please check the selected works are correct before combining them.
+      </p>
+    </div>
+  </div>
+  <div class="row" [formGroup]="form" *ngIf="form">
+    <h3>
+      <ng-container i18n="@@works.selectedWorksCombine">
+        Selected works to combine
+      </ng-container>
+      ({{ selectSetOfWorksToCombine?.length }})
+    </h3>
+    <mat-divider class="row orcid-divider"></mat-divider>
+
+    <ng-container *ngFor="let suggestionWork of suggestionsWorks">
+      <div class="list-works-group">
+        <mat-checkbox [formControlName]="suggestionWork.putCodes">
+        </mat-checkbox>
+        <div class="list-works">
+          <ng-container *ngFor="let work of suggestionWork.works">
+            <div class="row work-info">
+              <div class="row">
+                <h2 class="orc-font-body">
+                  {{ work.title.value }}
+                </h2>
+              </div>
+              <div class="orc-font-body-small">
+                <strong i18n="@@shared.source">Source</strong>:
+                <ng-container
+                  *ngIf="
+                    work?.assertionOriginName || work?.assertionOriginOrcid
+                  "
+                >
+                  {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+                  <i i18n="@@shared.onBehalfOf">via</i>
+                </ng-container>
+                {{ work.sourceName || work.source }}
+                <ng-container *ngIf="work.createdDate">
+                  <br *ngIf="isMobile" />
+                  <strong
+                    class="added"
+                    i18n="@@shared.added"
+                    [ngClass]="{
+                      mobile: isMobile
+                    }"
+                  >
+                    Added </strong
+                  >:
+                  {{ work.createdDate | monthDayYearDateToString }}
+                </ng-container>
+              </div>
+            </div>
+            <mat-divider class="row"></mat-divider>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+    <div
+      class="no-info orc-font-body-small"
+      *ngIf="selectSetOfWorksToCombine?.length === 0"
+    >
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@works.noItemsSelected"
+        >No items selected.
+      </ng-container>
+    </div>
+  </div>
 </app-modal>

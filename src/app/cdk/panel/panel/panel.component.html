@@ -26,7 +26,7 @@
       class="text-wrap"
       *ngIf="defaultPutCode === putCode && !isPublicRecord"
       (change)="checked($event)"
-      [ngModel]="selected"
+      [(ngModel)]="selected"
     >
       <ng-container *ngIf="expandButtonsPosition !== 'left'">
         <ng-container *ngTemplateOutlet="tempHeader"></ng-container>

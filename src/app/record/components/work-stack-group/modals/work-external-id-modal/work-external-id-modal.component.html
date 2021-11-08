@@ -79,12 +79,9 @@
           different option.
         </mat-error>
       </mat-form-field>
-    </div>
-    <div>
-      
-    </div>
-    <div class="col l4 retrieve-work">
-      <button mat-raised-button color="primary" (click)="retrieveWork()">
+    </div>    
+    <div class="retrieve-work">
+      <button mat-raised-button color="primary" (click)="retrieveWork()" [disabled]="loading">
         <ng-container
           i18n="@@works.retrieveWorkDOI"
           *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"

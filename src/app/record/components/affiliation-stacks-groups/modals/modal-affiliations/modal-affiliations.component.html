@@ -605,8 +605,10 @@
         </p>
       </div>
       <hr />
-      <p class="orc-font-body-small" i18n="@@shared.visibilityDescription">
-        Manage who can see this information in your record.
+      <p class="orc-font-body-small">
+        {{ ngOrcidDefaultVisibilityLabel }}
+        <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+        >.
       </p>
     </form>
     <div class="row">

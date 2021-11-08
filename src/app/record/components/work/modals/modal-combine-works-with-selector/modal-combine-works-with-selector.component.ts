@@ -47,6 +47,7 @@ export class ModalCombineWorksWithSelectorComponent
       })
 
     this.suggestions = this.data.suggestions
+    this.loadingWorks = true
     const suggestionObservableList = this.suggestions.map((group) => {
       const groupObservableList = group.putCodes.map((putCode) =>
         this._recordWorksService.getWorkInfo(putCode + '')
@@ -67,6 +68,7 @@ export class ModalCombineWorksWithSelectorComponent
       this.form.valueChanges.subscribe(() => {
         this.getSetOkWorkToCombine()
       })
+      this.loadingWorks = false
     })
   }
 

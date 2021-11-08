@@ -770,8 +770,10 @@
     <hr />
 
     <!-- Funding Visibility -->
-    <p class="orc-font-body-small" i18n="@@funding.whoCanSeeFunding">
-      Who can see your funding. The default visibility setting is Private.
+    <p class="orc-font-body-small">
+      {{ ngOrcidDefaultVisibilityLabel }}
+      <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+      >.
     </p>
     <div class="row">
       <div class="col no-wrap actions-wrapper no-gutters">
