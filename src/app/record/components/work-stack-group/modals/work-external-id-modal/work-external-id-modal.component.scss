@@ -1,16 +1,16 @@
 .input-container {
-  max-width: 402px;
-  .mat-form-field {
-    width: 100%;
-  }
+  max-width: 500px;
   ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0px !important;
+    padding-bottom: 25px !important;
   }
+}
+
+.mat-form-field {
+  width: 100%;
 }
 
 .retrieve-work {
   padding: 0;
-  margin-top: 16px;
   button {
     width: 100%;
   }
