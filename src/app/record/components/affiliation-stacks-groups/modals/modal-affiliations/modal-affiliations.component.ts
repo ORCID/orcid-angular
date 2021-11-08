@@ -257,7 +257,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       this.affiliationForm.patchValue({
         visibility: this.defaultVisibility,
       })
-
     } else {
       this.loadingAffiliations = false
     }
