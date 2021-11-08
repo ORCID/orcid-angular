@@ -182,7 +182,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         }
       }
 
-      
       if (lowerKeyTags.hasOwnProperty('year')) {
         if (!isNaN(lowerKeyTags['year'])) {
           work.publicationDate = {
@@ -191,9 +190,15 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         }
       }
 
-      //only set month if year provided
-      if (lowerKeyTags.hasOwnProperty('month') && lowerKeyTags.hasOwnProperty('year')) {
-        if (!isNaN(lowerKeyTags['year']) && lowerKeyTags['year'].trim()!=='' ){
+      // only set month if year provided
+      if (
+        lowerKeyTags.hasOwnProperty('month') &&
+        lowerKeyTags.hasOwnProperty('year')
+      ) {
+        if (
+          !isNaN(lowerKeyTags['year']) &&
+          lowerKeyTags['year'].trim() !== ''
+        ) {
           let month = lowerKeyTags['month'].trim()
           if (bibMonths.indexOf(month.trim().substring(0, 3)) >= 0) {
             month = bibMonths.indexOf(month.trim().substring(0, 3)) + 1
@@ -316,7 +321,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         })
       })
     }
-
   }
 
   closeEvent() {
