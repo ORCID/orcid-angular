@@ -414,7 +414,10 @@
       >
         Invalid url
       </mat-error>
-      <mat-error *ngIf="workForm.get('url').errors?.maxlength" i18n="@@shared.urlMaxLength">
+      <mat-error
+        *ngIf="workForm.get('url').errors?.maxlength"
+        i18n="@@shared.urlMaxLength"
+      >
         Must be less than 2000 characters
       </mat-error>
       <mat-hint i18n="@@works.linkMoreInformationAbout"
