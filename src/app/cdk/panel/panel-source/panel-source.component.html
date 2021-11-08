@@ -65,13 +65,13 @@
       </a>
     </div>
   </div>
-  <div align-end>
+  <div align-end *ngIf="!isPublicRecord">
     <button
-      *ngIf="!isPublicRecord"
       mat-icon-button
       [matTooltip]="labelDeleteButton"
       [attr.aria-label]="labelDeleteButton"
       (click)="delete()"
+      *ngIf="(stackLength > 1 && displayTheStack) || stackLength === 1"
     >
       <mat-icon class="large-material-icon" id="delete-button">
         delete_outline
