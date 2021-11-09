@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators'
 import { FormControl, FormGroup } from '@angular/forms'
 import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-work-doi-bibtex-modal',
@@ -29,7 +30,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _recordWorksService: RecordWorksService
+    private _recordWorksService: RecordWorksService,
+    @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {}
@@ -332,6 +334,23 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+  toWorkDetails() {
+    this._window.document.getElementById('workDetails').scrollIntoView()
+  }
+
+  toIdentifiers() {
+    this._window.document.getElementById('identifiers').scrollIntoView()
+  }
+
+  toCitation() {
+    this._window.document.getElementById('citation').scrollIntoView()
+  }
+  toOtherInformation() {
+    this._window.document.getElementById('otherInformation').scrollIntoView()
+  }
+  toVisibility() {
+    this._window.document.getElementById('visibility').scrollIntoView()
   }
 }
 
