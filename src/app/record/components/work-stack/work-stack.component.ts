@@ -102,7 +102,11 @@ export class WorkStackComponent implements OnInit {
         state: false,
       }
     }
-    if (this.togglzWorksContributors || this.panelDetailsState[work.putCode.value] !== undefined || !force) {
+    if (
+      this.togglzWorksContributors ||
+      this.panelDetailsState[work.putCode.value] !== undefined ||
+      !force
+    ) {
       this.getDetails(work).subscribe()
     }
   }
