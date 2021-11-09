@@ -102,6 +102,7 @@ export class WorkStackComponent implements OnInit {
         state: false,
       }
     }
+    // todo @DanielPalafox remove if and togglz once contributors are returned in works page endpoint
     if (
       this.togglzWorksContributors ||
       this.panelDetailsState[work.putCode.value] !== undefined ||
