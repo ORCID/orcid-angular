@@ -54,8 +54,6 @@ export class RecordBiographyService {
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({} as BiographyEndPoint)),
         tap((value) => {
-          console.log('OK HAVE THE FRESH DATA ', value)
-
           this.$biography.next(value)
         })
       )

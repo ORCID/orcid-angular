@@ -154,8 +154,6 @@ export class RecordWorksService {
   }
 
   getWorkInfo(putCode: string, orcidId?: string): Observable<Work> {
-    console.log(putCode)
-
     return this._http
       .get<Work>(
         environment.API_WEB +

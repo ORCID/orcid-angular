@@ -20,7 +20,7 @@ import { UserInfo } from '../../../types'
   ],
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
-  private readonly $destroy = new Subject();
+  private readonly $destroy = new Subject()
 
   platform: PlatformInfo
   publicOrcid: string
@@ -107,7 +107,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
-        console.log('________ ', this.userInfo?.EFFECTIVE_USER_ORCID)
 
         if (!this.publicOrcid && userRecord?.userInfo) {
           this.setMyOrcidIdQueryParameter()
@@ -122,9 +121,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   private setMyOrcidIdQueryParameter() {
     if (this.userInfo?.EFFECTIVE_USER_ORCID && !this.initMyOrcidParameter) {
-      console.log('INIT MY ORCID PARAMETERS')
-      console.log(this.userInfo.EFFECTIVE_USER_ORCID)
-
       this.initMyOrcidParameter = true
 
       if (!this.platform.queryParameters.hasOwnProperty('justRegistered')) {
@@ -149,7 +145,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     }
     this.$destroy.next(true)
     this.$destroy.complete()
-    console.log('DESTROY!')
   }
 
   switchPanelsState() {
