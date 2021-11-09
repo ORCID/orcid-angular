@@ -186,7 +186,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
             translatedTitleContent: new FormControl('', {
               validators: [
                 Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
-              ]}),
+              ],
+            }),
             translatedTitleLanguage: [''],
           },
           {
@@ -237,7 +238,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
             Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
           ],
         }),
-        region: new FormControl(this.region, { validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)]}),
+        region: new FormControl(this.region, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
         country: new FormControl(this.country, {
           validators: [
             Validators.required,
