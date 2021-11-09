@@ -28,6 +28,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   group: { [key: string]: FormGroup } = {}
   addedWorkCount = 0
 
+  ngOrcidErrorParsingBibtex = $localize`:@@works.errorParsingBibtex:Error parsing Bibtex. No Bibtex entries found in file`
+
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordWorksService: RecordWorksService,
@@ -55,6 +57,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           that.bibtexParsingError = true
         } else {
           const newWorks = []
+          if (parsed.length === 0) {
+            that.bibtexParsingErrorText = that.ngOrcidErrorParsingBibtex
+            that.bibtexParsingError = true
+            that.loadingWorks = false
+          }
           while (parsed.length > 0) {
             const cur = parsed.shift()
             const bibtexEntry = cur.entryType.toLowerCase()
@@ -63,25 +70,27 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
               newWorks.push(that.populateWork(cur))
             }
           }
-          that._recordWorksService
-            .worksValidate(newWorks)
-            .pipe(first())
-            .subscribe((data) => {
-              data.forEach((work) => {
-                that.worksFromBibtex.push(work)
-              })
-              that.worksFromBibtex.forEach((w) => {
-                const newPutCode = 'new-' + that.addedWorkCount++
-                w.putCode = {
-                  value: newPutCode,
-                }
-                that.group[newPutCode] = new FormGroup({
-                  checked: new FormControl(false),
+          if (newWorks.length > 0) {
+            that._recordWorksService
+              .worksValidate(newWorks)
+              .pipe(first())
+              .subscribe((data) => {
+                data.forEach((work) => {
+                  that.worksFromBibtex.push(work)
                 })
+                that.worksFromBibtex.forEach((w) => {
+                  const newPutCode = 'new-' + that.addedWorkCount++
+                  w.putCode = {
+                    value: newPutCode,
+                  }
+                  that.group[newPutCode] = new FormGroup({
+                    checked: new FormControl(false),
+                  })
+                })
+                that.importForm = new FormGroup(that.group)
+                that.loadingWorks = false
               })
-              that.importForm = new FormGroup(that.group)
-              that.loadingWorks = false
-            })
+          }
         }
       }
     }
