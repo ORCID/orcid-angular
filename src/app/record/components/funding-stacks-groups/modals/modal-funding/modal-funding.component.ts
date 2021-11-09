@@ -254,18 +254,16 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
     if (this.funding) {
       this.initFormValues()
-    } else {
-      // If there is an existing funding, do not overwrite the visibility
-      this._record
-        .getPreferences()
-        .pipe(first())
-        .subscribe((userPreferences) => {
-          this.defaultVisibility = userPreferences.default_visibility
-          this.fundingForm.patchValue({
-            visibility: this.defaultVisibility,
-          })
+    } 
+    this._record
+      .getPreferences()
+      .pipe(first())
+      .subscribe((userPreferences) => {
+        this.defaultVisibility = userPreferences.default_visibility
+        this.fundingForm.patchValue({
+          visibility: this.funding?.visibility?.visibility ? this.funding?.visibility?.visibility : this.defaultVisibility,
         })
-    }
+      })
     this.listenFormChanges()
     this.getCountryCodes()
   }
@@ -412,10 +410,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.disambiguatedFundingSource = this.funding.disambiguationSource?.value
       this.showTranslationTitle = !!this.funding.fundingTitle?.translatedTitle
         ?.content
-
-      if (this.funding.visibility?.visibility) {
-        this.defaultVisibility = this.funding.visibility?.visibility
-      }
     } else {
       this.loadingFunding = false
     }

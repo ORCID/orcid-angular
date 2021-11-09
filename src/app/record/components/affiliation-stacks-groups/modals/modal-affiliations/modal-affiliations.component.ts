@@ -105,13 +105,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initialValues()
-    this._record
-      .getPreferences()
-      .pipe(first())
-      .subscribe((userPreferences) => {
-        this.defaultVisibility = userPreferences.default_visibility
-        this.loadingAffiliations = false
-      })
+    
     this.affiliationForm = this._formBuilder.group(
       {
         organization: new FormControl(this.organization, {
@@ -153,6 +147,17 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         validator: endDateValidator(),
       }
     )
+
+    this._record
+      .getPreferences()
+      .pipe(first())
+      .subscribe((userPreferences) => {
+        this.defaultVisibility = userPreferences.default_visibility
+        this.loadingAffiliations = false
+        this.affiliationForm.patchValue({
+          visibility: this.affiliation?.visibility?.visibility ? this.affiliation.visibility.visibility: this.defaultVisibility,
+        })
+    })
 
     this.filteredOptions = this.affiliationForm
       .get('organization')
