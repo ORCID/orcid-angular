@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment'
 import { UserInfo } from 'src/app/types'
 import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import { TogglzService } from '../../core/togglz/togglz.service'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
@@ -23,7 +22,6 @@ export class UserMenuComponent implements OnInit {
   userInfo: UserInfo
   displayName: string
   platform: PlatformInfo
-  togglzOrcidAngularInbox: boolean
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:sign in or register`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
 
@@ -32,7 +30,6 @@ export class UserMenuComponent implements OnInit {
     _userInfo: UserService,
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
-    _togglz: TogglzService,
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService
   ) {
@@ -48,9 +45,6 @@ export class UserMenuComponent implements OnInit {
     _platform.get().subscribe((data) => {
       this.platform = data
     })
-    _togglz
-      .getStateOf('ORCID_ANGULAR_INBOX')
-      .subscribe((value) => (this.togglzOrcidAngularInbox = value))
   }
 
   ngOnInit() {}
@@ -58,7 +52,7 @@ export class UserMenuComponent implements OnInit {
   goto(url) {
     if (url === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
-    } else if (url === 'inbox' && this.togglzOrcidAngularInbox) {
+    } else if (url === 'inbox') {
       this._router.navigate([ApplicationRoutes.inbox])
     } else {
       this.window.location.href = environment.BASE_URL + url
