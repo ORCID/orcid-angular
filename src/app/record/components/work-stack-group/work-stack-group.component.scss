@@ -50,6 +50,16 @@ p.empty {
     }
   }
 }
+.columns-4 :host {
+  .works-buttons {
+    .controls {
+      flex-direction: column;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
 
 button {
   margin-inline-start: 8px;
