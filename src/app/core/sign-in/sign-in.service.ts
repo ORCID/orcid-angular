@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { of } from 'rxjs'
 import { catchError, map, retry, switchMap, first } from 'rxjs/operators'
 
 import { environment } from '../../../environments/environment'

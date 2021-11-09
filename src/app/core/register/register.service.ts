@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { Observable, of } from 'rxjs'
+import { Observable } from 'rxjs'
 import { catchError, first, map, retry, switchMap } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { RequestInfoForm } from 'src/app/types'
