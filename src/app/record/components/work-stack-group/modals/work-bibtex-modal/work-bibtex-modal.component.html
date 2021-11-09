@@ -114,7 +114,9 @@
                   <span *ngIf="work.publicationDate"> | </span>
                   {{ work?.workType?.value }}
                 </p>
-                <app-display-external-ids [externalIdentifiers]="work?.workExternalIdentifiers"></app-display-external-ids>
+                <app-display-external-ids
+                  [externalIdentifiers]="work?.workExternalIdentifiers"
+                ></app-display-external-ids>
               </mat-checkbox>
             </div>
           </div>
