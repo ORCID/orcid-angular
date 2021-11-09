@@ -9,6 +9,9 @@
   <!-- A PANEL COMPONENT FOR EACH FUNDING ON THE STACK -->
 
   <app-panel
+    [userRecord]="userRecord"
+    [stackSiblings]="fundingStack.fundings"
+    [showVisibilityControl]="isPreferred(funding)"
     [elements]="funding"
     [editModalComponent]="modalFundingComponent"
     [ngStyle]="{ 'z-index': fundingStack.fundings.length - i }"
@@ -17,6 +20,9 @@
     [isPublicRecord]="isPublicRecord"
     [putCode]="funding.putCode.value"
     [isUserSource]="userIsSource(funding)"
+    [hasExternalIds]="hasExternalIds"
+    [userVersionPresent]="fundingStack.userVersionPresent"
+    [(displayTheStack)]="displayTheStack"
     *ngIf="isPreferred(funding) || displayTheStack"
     type="funding"
   >
@@ -34,9 +40,9 @@
     </app-funding>
     <!-- FUNDING SOURCE -->
     <app-panel-source
+      [userRecord]="userRecord"
       [isPreferred]="isPreferred(funding)"
       [sourceName]="funding.sourceName || funding.source"
-      [assertionOriginClientId]="funding.assertionOriginClientId"
       [assertionOriginName]="funding.assertionOriginName"
       [assertionOriginOrcid]="funding.assertionOriginOrcid"
       [stackLength]="fundingStack.fundings.length"

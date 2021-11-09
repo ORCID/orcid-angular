@@ -132,11 +132,33 @@ Cypress.Commands.add('cleanKeywords', () => {
   })
 })
 
+Cypress.Commands.add('cleanWebsites', () => {
+  cy.getCookie('XSRF-TOKEN').then((cookie) => {
+    cy.request({
+      method: 'POST',
+      url: '/my-orcid/websitesForms.json', // baseUrl is prepended to url
+      body: {
+        errors: [],
+        websites: [],
+        visibility: {
+          errors: [],
+          required: true,
+          getRequiredMessage: null,
+          visibility: 'LIMITED',
+        },
+      },
+      headers: {
+        'X-XSRF-TOKEN': cookie.value,
+      },
+    })
+  })
+})
+
 Cypress.Commands.add('cleanPersonalIdentifiers', () => {
   cy.getCookie('XSRF-TOKEN').then((cookie) => {
     cy.request({
       method: 'POST',
-      url: '/account/emails.json', // baseUrl is prepended to url
+      url: '/my-orcid/externalIdentifiers.json', // baseUrl is prepended to url
       body: {
         errors: [],
         externalIdentifiers: [],

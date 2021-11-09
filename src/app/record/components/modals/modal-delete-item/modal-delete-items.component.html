@@ -1,6 +1,6 @@
-<app-modal [noSidebar]="true">
+<app-modal [loading]="loadingItems" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.deleteItems"> Delete items</ng-container>
+    <ng-container i18n="@@shared.deleteItems"> Delete items</ng-container>
   </app-modal-header>
   <app-modal-footer>
     <button
@@ -9,7 +9,7 @@
       (click)="saveEvent()"
       id="delete-button"
     >
-      <ng-container i18n="@@record.deleteSelected">
+      <ng-container i18n="@@shared.deleteSelected">
         Delete selected items
       </ng-container>
     </button>
@@ -34,7 +34,7 @@
       <mat-icon>info</mat-icon>
     </div>
     <div class="col l11 m6 s3">
-      <p i18n="@@record.deletingItems">
+      <p i18n="@@shared.deletingItems">
         Deleting items permanently removes them from your ORCID record. Please
         review the items selected for deletion.
       </p>
@@ -42,7 +42,7 @@
   </div>
   <div class="row">
     <h3>
-      <ng-container i18n="@@record.selectedItems">
+      <ng-container i18n="@@shared.selectedItems">
         Selected items to delete
       </ng-container>
       ({{ selectedItems.length }})
@@ -50,7 +50,11 @@
     <div *ngIf="items.length > 1" class="row">
       <div class="row">
         <p>
-          <mat-checkbox (change)="updateCheckAll()" [(ngModel)]="selectAll">
+          <mat-checkbox
+            (change)="updateCheckAll()"
+            [(ngModel)]="selectAll"
+            [ngModelOptions]="{ standalone: true }"
+          >
             <ng-container
               i18n="@@shared.selectAll"
               *ngIf="selectedItems.length === 0"
@@ -85,7 +89,12 @@
               "
               formControlName="checked"
             >
-              <h2 class="orc-font-body">
+              <h2
+                class="orc-font-body title"
+                [ngClass]="{
+                  mobile: isMobile
+                }"
+              >
                 <ng-container *ngIf="isAffiliation()">
                   {{ item?.affiliationName?.value }}
                 </ng-container>
@@ -126,14 +135,40 @@
             </mat-checkbox>
           </div>
           <div class="details orc-font-body-small">
-            <strong i18n="@@record.source">Source</strong>:
+            <strong i18n="@@shared.source">Source</strong>:
+            <ng-container
+              *ngIf="item?.assertionOriginName || item?.assertionOriginOrcid"
+            >
+              {{ item?.assertionOriginName || item?.assertionOriginOrcid }}
+              <i i18n="@@shared.onBehalfOf">via</i>
+            </ng-container>
             {{ item.sourceName || item.source }}
-            <strong class="added" i18n="@@record.added"> Added </strong>:
-            {{ item.createdDate | monthDayYearDateToString }}
+            <ng-container *ngIf="item.createdDate">
+              <br *ngIf="isMobile" />
+              <strong
+                class="added"
+                i18n="@@shared.added"
+                [ngClass]="{
+                  mobile: isMobile
+                }"
+              >
+                Added </strong
+              >:
+              {{ item.createdDate | monthDayYearDateToString }}
+            </ng-container>
           </div>
         </div>
         <mat-divider class="row"></mat-divider>
       </ng-container>
+      <div
+        class="no-info orc-font-body-small"
+        *ngIf="!item && items.length === 0"
+      >
+        <mat-icon>error</mat-icon>
+        <ng-container i18n="@@works.noItemsSelected"
+          >No items selected.
+        </ng-container>
+      </div>
     </div>
   </div>
 </app-modal>

@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
 import { takeUntil } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
 import { Subject } from 'rxjs'
-import { UserRecord } from '../../../types/record.local'
+import { MainPanelsState, UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 import { UserInfoService } from '../../../core/user-info/user-info.service'
@@ -27,16 +27,26 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   affiliations: number
   userInfo: UserInfo
   userRecord: UserRecord
-  expandedContent = true
+  expandedContent: MainPanelsState = {
+    EMPLOYMENT: true,
+    EDUCATION_AND_QUALIFICATION: true,
+    INVITED_POSITION_AND_DISTINCTION: true,
+    MEMBERSHIP_AND_SERVICE: true,
+    FUNDING: true,
+    PEER_REVIEW: true,
+    RESEARCH_RESOURCE: true,
+    WORK: true,
+  }
+
+  researchResourcePresent: boolean
+
   expandedButton = true
-  expandedAffiliations: boolean
-  expandedFundings: boolean
-  expandedWorks: boolean
-  expandedResearchResources: boolean
-  expandedPeerReview: boolean
+
   recordWithIssues: boolean
   userNotFound: boolean
   loadingUserRecord: boolean
+  globalExpandState = true
+  initMyOrcidParameter = false
 
   constructor(
     _userInfoService: UserInfoService,
@@ -44,10 +54,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private _record: RecordService,
     private _openGraph: OpenGraphService,
-    private _robotsMeta: RobotsMetaTagsService
-  ) {
-    this.checkIfThisIsAPublicOrcid()
-  }
+    private _robotsMeta: RobotsMetaTagsService,
+    private _router: Router
+  ) {}
 
   private checkIfThisIsAPublicOrcid() {
     if (this.getRouteOrcidID()) {
@@ -57,35 +66,27 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   private getRouteOrcidID(): string {
-    // checks first and second URL segment to find
-    // `/qa/<orcid-id>` (used only during QA )
-    // od `/<orcid-id>` (used while the app is live )
     if (this.route.parent.snapshot.url) {
-      const firstParameter = this.route.parent.snapshot.url[0]
-      const secondParameter = this.route.parent.snapshot.url[1]
+      const firstUrlSegment = this.route.parent.snapshot.url[0]
       if (
-        firstParameter &&
-        firstParameter.toString() &&
-        ORCID_REGEXP.test(firstParameter.toString())
+        firstUrlSegment &&
+        firstUrlSegment.toString() &&
+        ORCID_REGEXP.test(firstUrlSegment.toString())
       ) {
-        return firstParameter.toString()
-      } else if (
-        secondParameter &&
-        secondParameter.toString() &&
-        ORCID_REGEXP.test(secondParameter.toString())
-      ) {
-        return secondParameter.toString()
+        return firstUrlSegment.toString()
       }
-      return null
     }
   }
 
   ngOnInit(): void {
+    this.checkIfThisIsAPublicOrcid()
+
     this.affiliations = 0
     this._platform.get().subscribe((value) => (this.platform = value))
     this._record
       .getRecord({
         publicRecordId: this.publicOrcid || undefined,
+        forceReload: true,
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
@@ -94,13 +95,33 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
+        if (!this.publicOrcid) {
+          this.setMyOrcidIdQueryParameter()
+        }
+
         if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
           this._robotsMeta.disallowRobots()
         }
+        this._openGraph.addOpenGraphData(userRecord)
       })
+  }
 
-    if (this.publicOrcid) {
-      this._openGraph.addOpenGraphData(this.publicOrcid)
+  private setMyOrcidIdQueryParameter() {
+    if (this.userInfo?.EFFECTIVE_USER_ORCID && !this.initMyOrcidParameter) {
+      this.initMyOrcidParameter = true
+
+      if (!this.platform.queryParameters.hasOwnProperty('justRegistered')) {
+        this._router.navigate(['/my-orcid'], {
+          queryParams: { orcid: this.userInfo.EFFECTIVE_USER_ORCID },
+        })
+      } else {
+        this._router.navigate(['/my-orcid'], {
+          queryParams: {
+            orcid: this.userInfo.EFFECTIVE_USER_ORCID,
+            justRegistered: '',
+          },
+        })
+      }
     }
   }
 
@@ -111,53 +132,24 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     }
   }
 
-  collapse() {
-    this.expandedContent = !this.expandedContent
+  switchPanelsState() {
+    this.globalExpandState = !this.globalExpandState
+    Object.keys(this.expandedContent).forEach((key) => {
+      this.expandedContent[key] = this.globalExpandState
+    })
   }
 
-  affiliationsCount(itemsCount: Event) {
-    this.affiliations = this.affiliations + +itemsCount
+  expandedContentUpdate(expandedContent: MainPanelsState) {
+    this.globalExpandState = !Object.keys(expandedContent)
+      .filter((x) => x !== 'RESEARCH_RESOURCE' || this.researchResourcePresent)
+      .map((key) => expandedContent[key])
+      .some((x) => !x)
   }
 
-  expandedByType(event) {
-    switch (event.type) {
-      case 'affiliations':
-        this.expandedAffiliations = event.expanded
-        break
-      case 'fundings':
-        this.expandedFundings = event.expanded
-        break
-      case 'works':
-        this.expandedWorks = event.expanded
-        break
-      case 'research-resources':
-        this.expandedResearchResources = event.expanded
-        break
-      case 'peer-review':
-        this.expandedPeerReview = event.expanded
-        break
-    }
-
-    if (
-      this.expandedAffiliations !== undefined &&
-      this.expandedFundings !== undefined &&
-      this.expandedWorks !== undefined &&
-      this.expandedResearchResources !== undefined &&
-      this.expandedPeerReview !== undefined
-    ) {
-      if (
-        (this.expandedAffiliations &&
-          this.expandedFundings &&
-          this.expandedWorks &&
-          this.expandedPeerReview) ||
-        (!this.expandedAffiliations &&
-          !this.expandedFundings &&
-          !this.expandedWorks &&
-          !this.expandedResearchResources &&
-          !this.expandedPeerReview)
-      ) {
-        this.collapse()
-      }
+  affiliationsCount(itemsCount: number, type?: string) {
+    this.affiliations = this.affiliations + itemsCount
+    if (type === 'RESEARCH_RESOURCE') {
+      this.researchResourcePresent = !!itemsCount
     }
   }
 

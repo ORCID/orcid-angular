@@ -8,7 +8,7 @@
     <div>
       <!-- TOP PANEL SOURCE TITLE -->
       <div *ngIf="topPanelOfTheStackMode || !clickableSource">
-        <strong i18n="@@record.source">Source</strong>:
+        <strong i18n="@@shared.source">Source</strong>:
         <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
           {{ assertionOriginName || assertionOriginOrcid }}
           <i i18n="@@shared.onBehalfOf">via</i>
@@ -17,7 +17,7 @@
       </div>
       <!-- OTHER SOURCES (COLLAPSED PANEL) URL -->
       <ng-container *ngIf="!topPanelOfTheStackMode && clickableSource">
-        <strong i18n="@@record.source">Source</strong
+        <strong i18n="@@shared.source">Source</strong
         ><ng-container>: </ng-container
         ><a (click)="clickDisplayAsTopPanelOfTheStack()">
           <ng-container *ngIf="assertionOriginName || assertionOriginOrcid">
@@ -65,18 +65,15 @@
       </a>
     </div>
   </div>
-  <div align-end>
+  <div align-end *ngIf="!isPublicRecord">
     <button
-      *ngIf="!isPublicRecord"
       mat-icon-button
       [matTooltip]="labelDeleteButton"
       [attr.aria-label]="labelDeleteButton"
+      (click)="delete()"
+      *ngIf="(stackLength > 1 && displayTheStack) || stackLength === 1"
     >
-      <mat-icon
-        (click)="delete()"
-        class="large-material-icon"
-        id="delete-button"
-      >
+      <mat-icon class="large-material-icon" id="delete-button">
         delete_outline
       </mat-icon>
     </button>

@@ -8,6 +8,7 @@ import { Funding } from '../../../types/record-funding.endpoint'
 import { ResearchResource } from '../../../types/record-research-resources.endpoint'
 import { Work } from '../../../types/record-works.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
+import { VerificationEmailModalService } from 'src/app/core/verification-email-modal/verification-email-modal.service'
 
 @Component({
   selector: 'app-panel-source',
@@ -21,7 +22,6 @@ export class PanelSourceComponent implements OnInit {
   @Input() sourceName
   @Input() assertionOriginOrcid
   @Input() assertionOriginName
-  @Input() assertionOriginClientId
   @Input() stackLength
   @Input() item: Affiliation | Funding | ResearchResource | Work | PeerReview
   @Input() type:
@@ -53,11 +53,13 @@ export class PanelSourceComponent implements OnInit {
   @Output() makePrimary = new EventEmitter<void>()
   @Input() topPanelOfTheStackMode: boolean
   @Input() clickableSource = true
+  @Input() userRecord
   @Output() topPanelOfTheStackModeChange = new EventEmitter<void>()
 
   labelDeleteButton = $localize`:@@shared.delete:Delete`
 
   constructor(
+    private _verificationEmailModalService: VerificationEmailModalService,
     private _dialog: MatDialog,
     private _platformInfo: PlatformInfoService
   ) {
@@ -82,18 +84,27 @@ export class PanelSourceComponent implements OnInit {
   }
 
   delete() {
-    this._platformInfo
-      .get()
-      .pipe(first())
-      .subscribe((platform) => {
-        let modalComponent
-        modalComponent = this._dialog.open(ModalDeleteItemsComponent, {
-          width: '850px',
-          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-        })
+    const primaryEmail = this.userRecord?.emails?.emails?.find(
+      (email) => email.primary
+    )
+    if (primaryEmail && !primaryEmail.verified) {
+      this._verificationEmailModalService.openVerificationEmailModal(
+        primaryEmail.value
+      )
+    } else {
+      this._platformInfo
+        .get()
+        .pipe(first())
+        .subscribe((platform) => {
+          let modalComponent
+          modalComponent = this._dialog.open(ModalDeleteItemsComponent, {
+            width: '850px',
+            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
+          })
 
-        modalComponent.componentInstance.type = this.type
-        modalComponent.componentInstance.item = this.item
-      })
+          modalComponent.componentInstance.type = this.type
+          modalComponent.componentInstance.item = this.item
+        })
+    }
   }
 }

@@ -31,28 +31,32 @@ export class RecordAffiliationsGroupingService {
   }
 
   transform(value: AffiliationsEndpoint, args?: any): AffiliationUIGroup[] {
-    return Object.keys(this.expectedUiOrderGroups).map(
-      (expectedUiOrderGroup) => {
-        return {
-          type: expectedUiOrderGroup,
-          affiliationGroup: this.expectedUiOrderGroups[expectedUiOrderGroup]
-            .map((AffiliationGroupsTypeName) => {
-              return Object.keys(value.affiliationGroups)
-                .filter((key) => {
-                  return key === AffiliationGroupsTypeName
-                })
-                .map((key) => value.affiliationGroups[key])
-            })
-            // Reduce all elements with different AffiliationGroupsTypeName on the same expectedUiOrderGroup
-            .reduce((accumulator, currentValue) =>
-              accumulator.concat(currentValue)
-            )
-            // Concatenates affiliations lists
-            .reduce((accumulator, currentValue) =>
-              accumulator.concat(currentValue)
-            ),
+    if (Object.keys(value.affiliationGroups).length) {
+      return Object.keys(this.expectedUiOrderGroups).map(
+        (expectedUiOrderGroup) => {
+          return {
+            type: expectedUiOrderGroup,
+            affiliationGroup: this.expectedUiOrderGroups[expectedUiOrderGroup]
+              .map((AffiliationGroupsTypeName) => {
+                return Object.keys(value.affiliationGroups)
+                  .filter((key) => {
+                    return key === AffiliationGroupsTypeName
+                  })
+                  .map((key) => value.affiliationGroups[key])
+              })
+              // Reduce all elements with different AffiliationGroupsTypeName on the same expectedUiOrderGroup
+              .reduce((accumulator, currentValue) =>
+                accumulator.concat(currentValue)
+              )
+              // Concatenates affiliations lists
+              .reduce((accumulator, currentValue) =>
+                accumulator.concat(currentValue)
+              ),
+          }
         }
-      }
-    )
+      )
+    } else {
+      return []
+    }
   }
 }

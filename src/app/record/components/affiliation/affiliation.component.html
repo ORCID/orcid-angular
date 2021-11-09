@@ -77,7 +77,7 @@
 
   <!-- URL -->
   <app-display-attribute *ngIf="affiliation?.url?.value">
-    <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
 
     <div>
       <a
@@ -97,7 +97,7 @@
 
   <!-- ADDED DATE-->
   <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
     <div>
       {{ affiliation.createdDate | monthDayYearDateToString }}
     </div>
@@ -105,7 +105,7 @@
 
   <!-- LAST MODIFIED  DATE-->
   <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@record.lastModified">
+    <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
       Last modified
     </h3>
     <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>

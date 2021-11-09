@@ -1,0 +1,14 @@
+@import '~@angular/material/_theming';
+
+@mixin mat-drag-drop-theme($theme) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .drag-placeholder {
+    background: mat-color($background, ui-background-light);
+    border: dotted 3px mat-color($background, ui-background);
+    min-height: 60px;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}

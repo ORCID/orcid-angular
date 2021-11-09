@@ -1,4 +1,9 @@
+:host {
+  position: relative;
+}
+
 .panel {
+  position: relative;
   border-radius: 50px;
   display: flex;
   height: 40px;
@@ -12,4 +17,47 @@ button {
   height: 32px;
   width: 32px;
   line-height: 0px;
+}
+
+.hide {
+  display: none;
+}
+
+.privacy-selector {
+  position: absolute;
+  width: 152px;
+  bottom: 110%;
+  left: 50%;
+  margin-left: -90px;
+  overflow: hidden;
+  -moz-transition: height 450ms;
+  z-index: 2;
+  -webkit-transition: height 450ms;
+  padding: 8px 16px 16px;
+  border: solid 1px;
+  border-radius: 4px;
+  transition: all 500ms ease-in-out;
+
+  p {
+    margin: 8px 8px 12px 8px;
+  }
+}
+
+.privacy-selector.start {
+  left: unset;
+  margin: unset;
+}
+
+.privacy-selector.bottom {
+  bottom: unset;
+  left: unset;
+  margin: unset;
+}
+
+.panel:hover + .hide {
+  display: block;
+}
+
+div.hide:hover {
+  display: block;
 }

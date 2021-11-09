@@ -37,12 +37,12 @@ export interface UserRecord {
   externalIdentifier: PersonIdentifierEndpoint
   names: NamesEndPoint
   biography: BiographyEndPoint
-  preferences: Preferences
-  affiliations: AffiliationUIGroup[]
+  preferences?: Preferences
+  affiliations?: AffiliationUIGroup[]
   fundings?: FundingGroup[]
-  peerReviews: PeerReview[]
-  researchResources: ResearchResourcesEndpoint
-  works: WorksEndpoint
+  peerReviews?: PeerReview[]
+  researchResources?: ResearchResourcesEndpoint
+  works?: WorksEndpoint
   lastModifiedTime: any
   userInfo: UserInfo
 }
@@ -55,4 +55,15 @@ export interface UserRecordOptions {
   sort?: SortOrderType
   offset?: number
   pageSize?: number
+}
+
+export interface MainPanelsState {
+  EMPLOYMENT: boolean
+  EDUCATION_AND_QUALIFICATION: boolean
+  INVITED_POSITION_AND_DISTINCTION: boolean
+  MEMBERSHIP_AND_SERVICE: boolean
+  FUNDING: boolean
+  PEER_REVIEW: boolean
+  RESEARCH_RESOURCE: boolean
+  WORK: boolean
 }

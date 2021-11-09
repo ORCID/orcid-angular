@@ -17,6 +17,7 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { UserRecord } from 'src/app/types/record.local'
 import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
@@ -30,16 +31,19 @@ import { WorkModalComponent } from '../work-modal/work-modal.component'
   ],
 })
 export class WorkStackComponent implements OnInit {
+  @Input() userRecord: UserRecord
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
   visibility: VisibilityStrings
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
+  hasExternalIds: boolean
 
   @Input()
   set workStack(value: WorkGroup) {
+    this.hasExternalIds = !!value.externalIdentifiers.length
     this._workStack = value
-    this.setInitialStates(value)
+    this.setInitialStates(value, true)
   }
   get workStack(): WorkGroup {
     return this._workStack
@@ -57,6 +61,7 @@ export class WorkStackComponent implements OnInit {
 
   @Output() checkboxChangeWorkStackOutput = new EventEmitter<any>()
   @Input() userInfo: UserInfo
+  @Input() selectAll: boolean
   @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
@@ -88,6 +93,7 @@ export class WorkStackComponent implements OnInit {
         state: false,
       }
     }
+    this.getDetails(work).subscribe()
   }
 
   /**
@@ -142,7 +148,7 @@ export class WorkStackComponent implements OnInit {
   }
 
   makePrimaryCard(work: Work) {
-    // TODO
+    this._workService.updatePreferredSource(work.putCode.value).subscribe()
   }
 
   changeTopPanelOfTheStack(work: Work) {

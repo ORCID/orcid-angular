@@ -1,0 +1,17 @@
+.input-container {
+  max-width: 500px;
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 25px !important;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.retrieve-work {
+  padding: 0;
+  button {
+    width: 100%;
+  }
+}

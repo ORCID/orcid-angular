@@ -35,7 +35,15 @@
     font-size: mat-font-size($config, body-1) !important;
   }
 
-  .translate-title {
+  textarea.mat-input-element {
+    font-size: mat-font-size($config, body-1) !important;
+  }
+
+  .mat-select {
+    font-size: mat-font-size($config, body-1) !important;
+  }
+  .externalIdBox {
+    border-bottom: dashed mat-color($background, ui-background-light) 1px;
   }
 }
 @include modal-funding-theme($orcid-app-theme);

@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
-import { WorkIdType, WorkIdTypeValidation } from 'src/app/types/works.endpoint'
+import {
+  GroupingSuggestions,
+  WorkIdType,
+  WorkIdTypeValidation,
+} from 'src/app/types/works.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
-import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
+import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 
 @Injectable({
@@ -17,10 +21,12 @@ import { RecordImportWizard } from '../../types/record-peer-review-import.endpoi
 })
 export class RecordWorksService {
   lastEmittedValue: WorksEndpoint = null
+  groupingSuggestionsSubjectInitialized = false
+  groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
   workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
 
-  $works: ReplaySubject<WorksEndpoint>
+  userRecordOptions: UserRecordOptions = {}
 
   constructor(
     private _http: HttpClient,
@@ -58,80 +64,56 @@ export class RecordWorksService {
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
+    let url
     if (options.publicRecordId) {
-      return this._http
-        .get<WorksEndpoint>(
-          environment.API_WEB +
-            options.publicRecordId +
-            '/worksPage.json?offset=' +
-            options.offset +
-            '&sort=' +
-            (options.sort != null ? options.sort : 'date') +
-            '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : false) +
-            `&pageSize=` +
-            options.pageSize
-        )
-
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          catchError(() => of({ groups: [] } as WorksEndpoint)),
-          map((data) => {
-            data.pageSize = options.pageSize
-            data.pageIndex = options.offset
-              ? Math.floor(options.offset / options.pageSize)
-              : 0
-            return data
-          }),
-          tap((data) => {
-            this.lastEmittedValue = data
-            this.workSubject.next(data)
-          }),
-          switchMap((data) => this.workSubject.asObservable())
-        )
+      url = options.publicRecordId + '/worksPage.json'
     } else {
-      if (!this.$works) {
-        this.$works = new ReplaySubject(1)
-      } else if (!options.forceReload) {
-        return this.$works
-      }
-
-      this._http
-        .get<WorksEndpoint>(
-          environment.API_WEB +
-            'works/worksPage.json?offset=' +
-            options.offset +
-            '&sort=' +
-            (options.sort != null ? options.sort : 'date') +
-            '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : true) +
-            `&pageSize=` +
-            options.pageSize
-        )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          map((data) => {
-            data.pageSize = options.pageSize
-            data.pageIndex = options.offset
-              ? Math.floor(options.offset / options.pageSize)
-              : 0
-            return data
-          }),
-          tap((data) => {
-            this.lastEmittedValue = data
-            this.$works.next(data)
-          })
-        )
-        .subscribe()
-
-      return this.$works.asObservable()
+      url = 'works/worksPage.json'
     }
+
+    this._http
+      .get<WorksEndpoint>(
+        environment.API_WEB +
+          url +
+          '?offset=' +
+          options.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : false) +
+          `&pageSize=` +
+          options.pageSize
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ groups: [] } as WorksEndpoint)),
+        map((data) => {
+          data.pageSize = options.pageSize
+          data.pageIndex = options.offset
+            ? Math.floor(options.offset / options.pageSize)
+            : 0
+          return data
+        }),
+        tap((data) => {
+          this.lastEmittedValue = data
+          this.workSubject.next(data)
+        }),
+        tap(() => {
+          if (!options.publicRecordId) {
+            this.getWorksGroupingSuggestions({ force: true })
+          }
+        })
+      )
+      .subscribe()
+    return this.workSubject.asObservable()
   }
 
-  changeUserRecordContext(event: UserRecordOptions): void {
-    this.getWorks(event).pipe(take(1)).subscribe()
+  changeUserRecordContext(
+    userRecordOptions: UserRecordOptions
+  ): Observable<WorksEndpoint> {
+    this.userRecordOptions = userRecordOptions
+    return this.getWorks(userRecordOptions).pipe(take(1))
   }
 
   /**
@@ -200,25 +182,25 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work) {
+  save(work: Work, bibtex?: boolean) {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => {
-          if (work.putCode?.value) {
-            return this.getDetails(work.putCode.value)
-          } else {
-            return this.getWorks({ forceReload: true })
-          }
-        })
+        switchMap(() =>
+          bibtex === false ? EMPTY : this.getWorks({ forceReload: true })
+        )
       )
   }
 
   getWork(): Observable<Work> {
     return this._http.get<Work>(environment.API_WEB + `works/work.json`).pipe(
       retry(3),
+      map((x) => {
+        x.workExternalIdentifiers = []
+        return x
+      }),
       catchError((error) => this._errorHandler.handleError(error))
     )
   }
@@ -239,6 +221,20 @@ export class RecordWorksService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         tap(() => this.getWorks({ forceReload: true }))
+      )
+  }
+
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB + 'works/updateToMaxDisplay.json?putCode=' + putCode
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() =>
+          this.getWorks({ ...this.userRecordOptions, forceReload: true })
+        )
       )
   }
 
@@ -280,8 +276,12 @@ export class RecordWorksService {
   }
 
   combine(putCodes: string[]): Observable<any> {
+    return this.combinePutCodes(putCodes.join(','))
+  }
+
+  combinePutCodes(putCodes: string): Observable<any> {
     return this._http
-      .post(environment.API_WEB + 'works/group/' + putCodes.join(','), {})
+      .post(environment.API_WEB + 'works/group/' + putCodes, {})
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -329,5 +329,52 @@ export class RecordWorksService {
     return this._http.get<RecordImportWizard[]>(
       environment.API_WEB + 'workspace/retrieve-work-import-wizards.json'
     )
+  }
+
+  loadExternalId(
+    externalId: string,
+    type: EXTERNAL_ID_TYPE_WORK
+  ): Observable<Work> {
+    let url = 'works/resolve/doi?value='
+    if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
+      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\d{5})/g)
+      const result = regex.exec(externalId)
+      url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
+    }
+
+    return this._http.get<Work>(environment.API_WEB + url + externalId)
+  }
+
+  worksValidate(obj): Observable<any> {
+    return this._http.post(
+      environment.API_WEB + 'works/worksValidate.json',
+      JSON.stringify(obj),
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+  }
+
+  getWorksGroupingSuggestions(
+    options: { force: boolean } = { force: false }
+  ): Observable<GroupingSuggestions> {
+    if (options.force || !this.groupingSuggestionsSubjectInitialized) {
+      this.groupingSuggestionsSubjectInitialized = true
+      this._http
+        .get<GroupingSuggestions>(
+          environment.API_WEB + 'works/groupingSuggestions.json',
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        .subscribe((x) => this.groupingSuggestionsSubject.next(x))
+    }
+    return this.groupingSuggestionsSubject.asObservable()
   }
 }

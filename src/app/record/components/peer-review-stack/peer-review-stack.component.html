@@ -99,9 +99,9 @@
     >
     </app-peer-review>
     <app-panel-source
+      [userRecord]="userRecord"
       [isPreferred]="isPreferred(subPeerReview)"
       [sourceName]="subPeerReview.sourceName || subPeerReview.source"
-      [assertionOriginClientId]="subPeerReview.assertionOriginClientId"
       [assertionOriginName]="subPeerReview.assertionOriginName"
       [assertionOriginOrcid]="subPeerReview.assertionOriginOrcid"
       [stackLength]="peerReviewStack.peerReviews.length"

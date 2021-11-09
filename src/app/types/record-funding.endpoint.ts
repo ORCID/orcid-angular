@@ -13,13 +13,20 @@ export interface OrganizationDefinedFundingSubType {
   subtype: Value
 }
 
+export interface FundingType {
+  errors?: any[]
+  value: FundingTypes
+  required?: boolean
+  getRequiredMessage?: any
+}
+
 export interface FundingGroup {
-  fundings: [Funding]
+  fundings: Funding[]
   activePutCode: number
   groupId: string
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
-  externalIdentifiers: [any] // TODO is this always empty?
+  externalIdentifiers: ExternalIdentifier[]
   defaultFunding: Funding
 }
 
@@ -29,7 +36,7 @@ export interface Funding extends AssertionBase {
   fundingTitle: Title
   description: Value
   fundingName: Value
-  fundingType: Value
+  fundingType: FundingType
   organizationDefinedFundingSubType: OrganizationDefinedFundingSubType
   currencyCode: Value
   amount: Value
@@ -44,7 +51,7 @@ export interface Funding extends AssertionBase {
   region: Value
   country: Value
   countryForDisplay?: string
-  fundingTypeForDisplay?: string
+  typeForDisplay?: string
   dateSortString?: MonthDayYearDate
   fullyLoaded?: boolean
 }
@@ -53,7 +60,7 @@ export enum FundingTypes {
   award = 'award',
   contract = 'contract',
   grant = 'grant',
-  salary_award = 'salary_award',
+  salary_award = 'salary-award',
 }
 
 export const FundingTypesLabel = {

@@ -36,7 +36,7 @@
   </app-modal-footer>
   <form [formGroup]="biographyForm" (ngSubmit)="onSubmit()">
     <div
-      id="biography"
+      id="biography-title"
       class="title"
       [ngClass]="{
         'orc-font-body': !platform.columns12,
@@ -48,7 +48,7 @@
       </p>
     </div>
     <hr />
-    <p class="orc-font-small-print" i18n="@@topBar.information">
+    <p class="orc-font-body-small" i18n="@@topBar.information">
       Information about yourself, your research interests and other pertinent
       details that enhance your ORCID record.
     </p>
@@ -57,21 +57,20 @@
     </label>
     <mat-form-field appearance="outline" class="mat-form-field-min biography">
       <textarea
+        maxlength="5000"
         id="biography-input"
         matInput
         formControlName="biography"
         placeholder=" {{ ngOrcidAddYourBiography }}"
-        cdkTextareaAutosize
+        [cdkTextareaAutosize]="true"
         cdkAutosizeMinRows="5"
-        cdkAutosizeMaxRows="7"
+        cdkAutosizeMaxRows="1000"
       >
       </textarea>
-      <mat-error
-        *ngIf="biographyForm.get('biography').hasError('notPattern')"
-        i18n="@@topBar.invalidBio"
+
+      <mat-hint
+        >{{ biographyForm.get('biography').value.length }}/5000</mat-hint
       >
-        Invalid characters or format
-      </mat-error>
     </mat-form-field>
     <div
       id="visibility"
@@ -86,11 +85,19 @@
       </p>
     </div>
     <hr />
-    <p class="orc-font-small-print" i18n="@@shared.whoCanSeeBio">
-      Who can see your biography. The default visibility setting is Private.
+    <p class="orc-font-body-small">
+      {{ ngOrcidDefaultVisibilityLabel }}
+      <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+      >.
     </p>
-    <div class="col no-wrap actions-wrapper no-gutters visibility">
-      <app-privacy-selector formControlName="visibility"></app-privacy-selector>
+    <div class="row visibility">
+      <div class="col no-wrap actions-wrapper no-gutters">
+        <app-privacy-selector
+          [alignment]="'start'"
+          formControlName="visibility"
+        >
+        </app-privacy-selector>
+      </div>
     </div>
   </form>
 </app-modal>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
-import { Subject } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { RecordAffiliationService } from 'src/app/core/record-affiliations/record-affiliations.service'
 import { RecordService } from 'src/app/core/record/record.service'
@@ -9,7 +9,11 @@ import {
   AffiliationUIGroup,
   AffiliationUIGroupsTypes,
 } from 'src/app/types/record-affiliation.endpoint'
-import { UserRecord, UserRecordOptions } from 'src/app/types/record.local'
+import {
+  MainPanelsState,
+  UserRecord,
+  UserRecordOptions,
+} from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 
 import { UserInfo } from '../../../types'
@@ -33,9 +37,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   userRecordContext: UserRecordOptions = {}
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string = null
-  @Input() expandedContent: boolean
   @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   expandedEducation: boolean
   expandedEmployment: boolean
@@ -46,6 +48,10 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   userRecord: UserRecord
 
   affiliationsCount: number
+  $loading: Observable<boolean>
+  @Input() expandedContent: MainPanelsState
+  @Output()
+  expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
 
   constructor(
     private _record: RecordService,
@@ -53,6 +59,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.$loading = this._recordAffiliationService.$loading
     this._record
       .getRecord({
         publicRecordId: this.isPublicRecord,
@@ -101,43 +108,6 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       return this.profileAffiliationUiGroups.filter((affiliation) => {
         return affiliation.type === type
       })[0]
-    }
-  }
-
-  expandedClicked(type: string, expanded: boolean) {
-    switch (type) {
-      case 'employment':
-        this.expandedEmployment = expanded
-        break
-      case 'education':
-        this.expandedEducation = expanded
-        break
-      case 'invited-position':
-        this.expandedInvited = expanded
-        break
-      case 'membership':
-        this.expandedMembership = expanded
-        break
-    }
-
-    if (
-      this.expandedEmployment !== undefined &&
-      this.expandedEducation !== undefined &&
-      this.expandedInvited !== undefined &&
-      this.expandedMembership !== undefined
-    ) {
-      if (
-        (this.expandedEmployment &&
-          this.expandedEducation &&
-          this.expandedInvited &&
-          this.expandedMembership) ||
-        (!this.expandedEmployment &&
-          !this.expandedEducation &&
-          !this.expandedInvited &&
-          !this.expandedMembership)
-      ) {
-        this.expanded.emit({ type: 'affiliations', expanded })
-      }
     }
   }
 

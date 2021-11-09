@@ -41,6 +41,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     private _platform: PlatformInfoService
   ) {}
 
+  id: string
   addedEmailsCount = 0
   countryForm: FormGroup
   countries: Address[]
@@ -104,7 +105,10 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
 
     countries.forEach((country) => {
       group[country.putCode] = new FormGroup({
-        country: new FormControl(country.countryName),
+        country: new FormControl({
+          value: country.countryName,
+          disabled: country.source !== this.id,
+        }),
         visibility: new FormControl(country.visibility.visibility, {}),
       })
     })
@@ -122,11 +126,11 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     this.countries
       .map((value) => value.putCode)
       // Clear empty inputs
-      .filter((key) => countryForm.value[key].country)
+      .filter((key) => countryForm.getRawValue()[key].country)
       .forEach((key, i) => {
-        const countryName = countryForm.value[key].country
-        const visibility = countryForm.value[key].visibility
-        if (countryForm.value[key]) {
+        const countryName = countryForm.getRawValue()[key].country
+        const visibility = countryForm.getRawValue()[key].visibility
+        if (countryForm.getRawValue()[key]) {
           countries.addresses.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
             countryName,
@@ -179,10 +183,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
     const i = this.countries.findIndex((value) => value.putCode === putcode)
     this.countries.splice(i, 1)
     this.countryForm.removeControl(putcode)
-  }
-
-  getSourceName(address: Address) {
-    return address.sourceName || address.source
   }
 
   ngOnDestroy() {

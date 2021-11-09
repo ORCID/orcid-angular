@@ -86,6 +86,10 @@ export class RecordService {
    */
   getRecord(options?: UserRecordOptions): Observable<UserRecord> {
     if (!this.recordSubject$ || options.forceReload) {
+      if (this.recordSubject$) {
+        this.recordSubject$.complete()
+      }
+
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
       if (environment.debugger) {
         this.recordSubject$.subscribe((value) => {

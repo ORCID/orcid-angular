@@ -15,6 +15,7 @@ import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier
   selector: 'app-modal-person-identifiers',
   templateUrl: './modal-person-identifiers.component.html',
   styleUrls: ['./modal-person-identifiers.component.scss'],
+  preserveWhitespaces: true,
 })
 export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -59,10 +60,6 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
 
     personIdentifiers.forEach((personId) => {
       group[personId.putCode] = new FormGroup({
-        identifier: new FormControl({
-          value: personId.commonName + ': ' + personId.reference,
-          disabled: true,
-        }),
         visibility: new FormControl(personId.visibility.visibility, {}),
       })
     })
@@ -120,10 +117,6 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
     )
     this.personIdentifiers.splice(i, 1)
     this.personIdentifiersForm.removeControl(putCode)
-  }
-
-  getSourceName(address: Assertion) {
-    return address.sourceName || address.source
   }
 
   ngOnDestroy() {

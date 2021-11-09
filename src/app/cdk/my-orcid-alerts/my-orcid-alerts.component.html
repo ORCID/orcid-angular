@@ -1,10 +1,5 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <p *ngIf="emailVerified" class="mat-body-2">
-      <ng-container i18n="@@myOrcidAlerts.emailVerified">
-        Thank you for verifying your email
-      </ng-container>
-    </p>
     <p
       *ngIf="invalidVerifyUrl"
       i18n="@@myOrcidAlerts.invalidVerifyUrl"

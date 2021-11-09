@@ -1,6 +1,6 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.exportSelectedWorks">
+    <ng-container i18n="@@works.exportSelectedWorks">
       Export selected works
     </ng-container>
   </app-modal-header>
@@ -11,7 +11,7 @@
       (click)="saveEvent()"
       id="export-button"
     >
-      <ng-container i18n="@@record.exportSelectedWorksBibtex">
+      <ng-container i18n="@@works.exportSelectedWorksBibtex">
         Export selected works to BibTeX
       </ng-container>
     </button>
@@ -27,14 +27,16 @@
   </app-modal-footer>
   <div class="row">
     <div class="col orc-font-small-print">
-      <p i18n="@@record.exportSelectedWorksBibtexDescription">
+      <p i18n="@@works.exportSelectedWorksBibtexDescription">
         Export selected works to a BibTeX file. Please note that exporting to
         BibTeX may cause problems for text in some languages.
       </p>
       <a
         class="underline"
-        href="https://support.orcid.org/hc/articles/360006971333"
-        i18n="@@record.findOut"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006971453"
+        i18n="@@works.findOut"
       >
         Find out more on exporting BibTeX files
       </a>
@@ -42,10 +44,10 @@
   </div>
   <div class="row">
     <h3>
-      <ng-container i18n="@@record.selectedWorks">
+      <ng-container i18n="@@works.selectedWorks">
         Selected works to export
       </ng-container>
-      ({{ works.length }})
+      ({{ selectedAll ? totalWorks : works.length }})
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
     <ng-container *ngFor="let work of works">
@@ -56,13 +58,51 @@
           </h2>
         </div>
         <div class="orc-font-body-small">
-          <strong i18n="@@record.source">Source</strong>:
+          <strong i18n="@@shared.source">Source</strong>:
+          <ng-container
+            *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
+          >
+            {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+            <i i18n="@@shared.onBehalfOf">via</i>
+          </ng-container>
           {{ work.sourceName || work.source }}
-          <strong class="added" i18n="@@record.added"> Added </strong>:
-          {{ work.createdDate | monthDayYearDateToString }}
+          <ng-container *ngIf="work.createdDate">
+            <br *ngIf="isMobile" />
+            <strong
+              class="added"
+              i18n="@@shared.added"
+              [ngClass]="{
+                mobile: isMobile
+              }"
+            >
+              Added </strong
+            >:
+            {{ work.createdDate | monthDayYearDateToString }}
+          </ng-container>
         </div>
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
+    <p
+      *ngIf="
+        (selectedAll && totalWorks > maxNumberOfWorksToDisplay) ||
+        putCodes?.length > this.maxNumberOfWorksToDisplay
+      "
+    >
+      <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
+      <b>{{ maxNumberOfWorksToDisplay }}</b>
+      <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
+      <b>{{ selectedAll ? totalWorks : putCodes?.length }}</b>
+      <ng-container i18n="@@works.worksToExport">works to export</ng-container>
+    </p>
+    <div
+      class="no-info orc-font-body-small"
+      *ngIf="!selectedAll && putCodes?.length === 0"
+    >
+      <mat-icon>error</mat-icon>
+      <ng-container i18n="@@works.noItemsSelected"
+        >No items selected.
+      </ng-container>
+    </div>
   </div>
 </app-modal>

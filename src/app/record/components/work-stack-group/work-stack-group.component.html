@@ -1,21 +1,22 @@
 <ng-container *ngIf="!(isPublicRecord && workGroup?.groups?.length === 0)">
   <form [formGroup]="workStackGroupForm">
     <app-panels
+      [userRecord]="userRecord"
       *ngIf="workGroup?.groups"
       class="row"
       [title]="works"
       [currentAmount]="workGroup.groups.length"
       [total]="workGroup.totalGroups"
       [isPublicRecord]="isPublicRecord"
-      [expandedContent]="expandedContent"
-      (expanded)="expandedClicked($event)"
+      [(expandedContent)]="expandedContent['WORK']"
+      (expandedContentChange)="expandedContentChange.emit(expandedContent)"
       [labelAddButton]="labelAddButton"
       [labelSortButton]="labelSortButton"
       [sortTypes]="['date', 'title', 'type']"
       [sortType]="'date'"
       [addMenuOptions]="addMenuOptions"
       (sort)="sortEvent($event)"
-      type="works"
+      [type]="'works'"
     >
       <mat-progress-bar
         mode="indeterminate"
@@ -35,14 +36,18 @@
         [disabled]="paginationLoading"
       >
       </mat-paginator>
-      <ng-container *ngIf="workGroup.groups.length > 0">
+      <ng-container *ngIf="workGroup.groups.length > 0 && !paginationLoading">
         <div
           class="row works-buttons orc-font-body-small"
           *ngIf="!isPublicRecord"
         >
           <div class="select-all">
             <p>
-              <mat-checkbox (change)="checked($event)" [(ngModel)]="selectAll">
+              <mat-checkbox
+                (change)="checked($event)"
+                [(ngModel)]="selectAll"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <ng-container i18n="@@shared.selectAll"
                   >Select all</ng-container
                 >
@@ -69,30 +74,73 @@
               <mat-icon class="large-material-icon">arrow_drop_down</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="combine()">
+              <button
+                mat-menu-item
+                (click)="combine()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>merge_type</mat-icon>
                 <span i18n="@@shared.combineWorks">Combine works</span>
               </button>
-              <button mat-menu-item (click)="export()">
+              <button
+                mat-menu-item
+                (click)="export()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>file_download</mat-icon>
-                <span i18n="@@shared.exportWorks">Export works</span>
+                <span>
+                  <ng-container i18n="@@shared.exportWorks">
+                    Export works
+                  </ng-container>
+                  ({{ selectedWorks.length }})
+                </span>
               </button>
-              <button mat-menu-item (click)="visibility()">
+              <button mat-menu-item (click)="exportAllWorks()">
+                <mat-icon>file_download</mat-icon>
+                <span>
+                  <ng-container i18n="@@shared.exportAllWorks">
+                    Export all works
+                  </ng-container>
+                  ({{ this.workGroup.totalGroups }})
+                </span>
+              </button>
+              <button
+                mat-menu-item
+                (click)="visibility()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>visibility</mat-icon>
                 <span i18n="@@shared.setVisibility">Set visibility</span>
               </button>
-              <button mat-menu-item (click)="delete()">
+              <button
+                mat-menu-item
+                (click)="delete()"
+                [disabled]="selectedWorks.length === 0"
+              >
                 <mat-icon>delete</mat-icon>
                 <span i18n="@@shared.deleteWorks">Delete works</span>
               </button>
             </mat-menu>
+            <button
+              mat-raised-button
+              color="primary"
+              *ngIf="combineSuggestion?.suggestions?.length"
+              (click)="openManageSimilarWorksModal()"
+              class="test-align-center"
+              i18n="@@works.manageSimilarWorks"
+            >
+              Manage similar works
+            </button>
           </div>
         </div>
+
         <app-work-stack
+          [userRecord]="userRecord"
           [isPublicRecord]="isPublicRecord"
           *ngFor="let group of workGroup.groups; trackBy: trackByWorkGroup"
           [workStack]="group"
           [userInfo]="userInfo"
+          [selectAll]="selectAll"
           (checkboxChangeWorkStackOutput)="checkboxChangeWorkStackGroup($event)"
           #appWorkStacks
         ></app-work-stack>
@@ -100,11 +148,17 @@
       <ng-container *ngIf="workGroup.groups.length === 0">
         <div class="orc-font-body-small">
           <p class="empty" i18n="@@shared.worksDescription">
-            Add details about your works, captures your research outputs, e.g.
-            publications, conference presentations, data sets, and more.
+            Add your research outputs such as publications, data sets,
+            conference presentations and more.
           </p>
-          <a class="underline" href="" i18n="@@shared.worksLearnMore">
-            Learn more about adding a works to your ORCID record
+          <a
+            class="underline"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://support.orcid.org/hc/en-us/articles/360006973133"
+            i18n="@@shared.worksLearnMore"
+          >
+            Learn more about adding works to your ORCID record
           </a>
         </div>
       </ng-container>

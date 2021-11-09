@@ -74,6 +74,28 @@ export class SnackbarService {
     }
   }
 
+  showValidationError(
+    message: string = $localize`:@@shared.pleaseReviewInvalidForm:Please review the form and fix the issues before saving`,
+    title: string = $localize`:@@shared.invalidForm:Form validation error`
+  ) {
+    const mappedDisplay = {
+      contentDirection: this.contentDirection,
+      closable: true,
+      title,
+      message,
+    }
+
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      data: {
+        displayMessage: mappedDisplay,
+      },
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: 'bottom',
+      panelClass: 'orcid-error',
+      duration: 15 * 1000,
+    })
+  }
+
   showSuccessMessage(message: DisplayMessage) {
     this._snackBar.openFromComponent(SnackbarComponent, {
       data: {

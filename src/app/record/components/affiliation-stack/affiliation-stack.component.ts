@@ -9,6 +9,7 @@ import {
   AffiliationGroup,
   AffiliationUIGroup,
 } from 'src/app/types/record-affiliation.endpoint'
+import { UserRecord } from 'src/app/types/record.local'
 import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 
 @Component({
@@ -22,6 +23,7 @@ import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/
 export class AffiliationStackComponent implements OnInit {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _affiliationStack: AffiliationGroup
+  @Input() userRecord: UserRecord
   @Input() isPublicRecord: string = null
   @Input() type:
     | 'employment'
@@ -31,8 +33,10 @@ export class AffiliationStackComponent implements OnInit {
     | 'distinction'
     | 'membership'
     | 'service'
+  hasExternalIdentifiers: boolean
   @Input()
   set affiliationStack(value: AffiliationGroup) {
+    this.hasExternalIdentifiers = !!value.externalIdentifiers.length
     this._affiliationStack = value
     this.setAffiliationsInitialStates(value)
   }
@@ -70,6 +74,10 @@ export class AffiliationStackComponent implements OnInit {
    * Set the panelDetails and top of the stack card to default mode
    */
   private setAffiliationsInitialStates(value: AffiliationGroup, force = false) {
+    if (value.affiliations?.length === 1 && this.displayTheStack) {
+      this.displayTheStack = false
+    }
+
     value.affiliations.forEach((affiliation) => {
       this.setDefaultPanelsDisplay(affiliation, force)
       this.setDefaultPanelDetailsState(affiliation, force)
@@ -165,8 +173,9 @@ export class AffiliationStackComponent implements OnInit {
   }
 
   makePrimaryCard(affiliation: Affiliation) {
-    // TODO
-    console.warn(this.stackPanelsDisplay)
+    this._affiliationService
+      .updatePreferredSource(affiliation.putCode.value)
+      .subscribe()
   }
 
   changeTopPanelOfTheStack(affiliation: Affiliation) {

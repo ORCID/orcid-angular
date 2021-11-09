@@ -2,6 +2,10 @@
   display: none;
 }
 
+label.mat-caption {
+  margin-bottom: 8px;
+}
+
 mat-form-field {
   width: 100%;
 }
@@ -13,13 +17,10 @@ mat-form-field {
 hr {
   height: 2px;
   border: 0;
-  margin: 0;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
 }
 
 .title {
-  margin-top: 16px;
-
   p {
     margin: 6px 0;
   }
@@ -46,8 +47,6 @@ mat-radio-button {
 .date-container {
   display: flex;
   flex-direction: row;
-  display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
   mat-form-field {
     width: 120px;
@@ -55,10 +54,18 @@ mat-radio-button {
   }
 }
 
+.no-margin {
+  margin: 0;
+}
 .add-more {
+  margin-bottom: 27px;
+  padding-inline-start: 0;
+  a {
+    margin: 0;
+  }
   span {
     margin: auto;
-    padding-left: 6px;
+    padding-inline-start: 6px;
   }
 }
 
@@ -66,36 +73,63 @@ mat-radio-button {
   margin-top: 26px;
 }
 
-.translate-title {
-  margin-bottom: 26px;
-}
-
 .required-information {
   margin-left: auto !important;
-  margin-top: 10px !important;
+  display: flex;
+  align-items: center;
 
   span {
     margin-right: 3px !important;
   }
 }
 
-.larger-input-margin {
-  margin-bottom: 20px;
-}
-
 mat-radio-group {
   display: flex;
   flex-direction: column;
 }
-
-.date {
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0px !important;
+:host {
+  .date-group {
+    .date-input {
+      padding-left: 0;
+    }
   }
+}
+
+.project-link-mobile {
   padding-bottom: 1.475em;
-  padding-left: 0;
 }
 
 .description {
   margin-top: 26px !important;
+}
+
+.delete-grant {
+  align-content: end;
+  justify-content: flex-end;
+}
+
+.error-out-input-context {
+  padding: 0 8px;
+}
+
+.input-container {
+  max-width: 402px;
+}
+
+.externalIdBox {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.language {
+  padding-bottom: 1.475em;
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
+
+  mat-error {
+    padding: 0 1em;
+    margin-top: 0.2em;
+  }
 }

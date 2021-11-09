@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, take, tap } from 'rxjs/operators'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import { UserRecordOptions } from 'src/app/types/record.local'
 
 import { environment } from '../../../environments/environment'
@@ -17,7 +17,7 @@ import { DEFAULT_PAGE_SIZE } from 'src/app/constants'
   providedIn: 'root',
 })
 export class RecordResearchResourceService {
-  researchResourcesSubject = new ReplaySubject<ResearchResourcesEndpoint>(1)
+  $researchResourcesSubject: ReplaySubject<ResearchResourcesEndpoint> = new ReplaySubject<ResearchResourcesEndpoint>()
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -35,76 +35,49 @@ export class RecordResearchResourceService {
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
+    let url
     if (options.publicRecordId) {
-      this._http
-        .get<ResearchResourcesEndpoint>(
-          environment.API_WEB +
-            options.publicRecordId +
-            '/researchResourcePage.json?offset=' +
-            options.offset +
-            '&sort=' +
-            (options.sort != null ? options.sort : 'date') +
-            '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : false) +
-            '&pageSize=' +
-            options.pageSize
-        )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error)),
-          catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
-          map((data) => {
-            data.pageSize = options.pageSize
-            data.pageIndex = options.offset
-              ? Math.floor(options.offset / options.pageSize)
-              : 0
-            return data
-          }),
-          tap((value) => {
-            this.researchResourcesSubject.next(value)
-          })
-        )
-        .subscribe()
+      url = options.publicRecordId + '/researchResourcePage.json'
     } else {
-      this._http
-        .get<ResearchResourcesEndpoint>(
-          environment.API_WEB +
-            'research-resources/researchResourcePage.json?offset=' +
-            options.offset +
-            '&sort=' +
-            (options.sort != null ? options.sort : 'date') +
-            '&sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : true) +
-            '&pageSize=' +
-            options.pageSize
-        )
-        .pipe(
-          catchError((error) => this._errorHandler.handleError(error)),
-          catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
-          map((data) => {
-            data.pageSize = options.pageSize
-            data.pageIndex = options.offset
-              ? Math.floor(options.offset / options.pageSize)
-              : 0
-            return data
-          }),
-          tap((value) => {
-            this.researchResourcesSubject.next(value)
-          })
-        )
-        .subscribe()
+      url = 'research-resources/researchResourcePage.json'
     }
-    return this.researchResourcesSubject.asObservable()
+
+    this._http
+      .get<ResearchResourcesEndpoint>(
+        environment.API_WEB +
+          url +
+          '?offset=' +
+          options.offset +
+          '&sort=' +
+          (options.sort != null ? options.sort : 'date') +
+          '&sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : false) +
+          '&pageSize=' +
+          options.pageSize
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of({ groups: [] } as ResearchResourcesEndpoint)),
+        map((data) => {
+          data.pageSize = options.pageSize
+          data.pageIndex = options.offset
+            ? Math.floor(options.offset / options.pageSize)
+            : 0
+          return data
+        }),
+        tap((data) => {
+          this.$researchResourcesSubject.next(data)
+        })
+      )
+      .subscribe()
+    return this.$researchResourcesSubject.asObservable()
   }
 
-  changeUserRecordContext(event: UserRecordOptions): void {
-    this.getResearchResourcePage(event).pipe(take(1)).subscribe()
-  }
-
-  loadMore(offset: number, publicRecordId?: string) {
-    this.getResearchResourcePage({
-      offset,
-      publicRecordId,
-    })
+  changeUserRecordContext(
+    event: UserRecordOptions
+  ): Observable<ResearchResourcesEndpoint> {
+    return this.getResearchResourcePage(event)
   }
 
   getResearchResourceById(putCode: string): Observable<ResearchResource> {
@@ -145,6 +118,20 @@ export class RecordResearchResourceService {
       .delete(environment.API_WEB + 'research-resources/' + putCode, {
         headers: this.headers,
       })
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getResearchResourcePage({ forceReload: true }))
+      )
+  }
+
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'research-resources/updateToMaxDisplay.json?putCode=' +
+          putCode
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

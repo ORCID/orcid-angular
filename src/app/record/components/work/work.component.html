@@ -10,11 +10,33 @@
         >{{ work.publicationDate | monthDayYearDateToString }}
         |
       </ng-container>
-      {{ work.workType.value }}
+      {{ work.workType.value | recordWorkTypeLabel }}
     </div>
     <app-display-external-ids
       [externalIdentifiers]="work.workExternalIdentifiers"
     ></app-display-external-ids>
+    <div class="general-data" *ngIf="work?.contributors?.length > 0">
+      <span i18n="#upperCase@@works.contributors"> CONTRIBUTORS </span>:
+      <ng-container
+        *ngFor="
+          let contributor of work.contributors;
+          let index = index;
+          let last = last
+        "
+      >
+        <ng-container
+          *ngIf="contributor.creditName && index < maxNumberContributors"
+          >{{
+            contributor.creditName.value +
+              (!last && index !== maxNumberContributors - 1 ? ',' : '')
+          }}</ng-container
+        >
+      </ng-container>
+      <ng-container *ngIf="work.contributors.length > maxNumberContributors">
+        + {{ work.contributors.length - maxNumberContributors }}
+        <span i18n="@@works.more">more</span>
+      </ng-container>
+    </div>
   </div>
 
   <div align-end>
@@ -40,14 +62,15 @@
 <app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
   <!-- TRANSLATED TITLE -->
   <app-display-attribute *ngIf="work.translatedTitle?.content">
-    <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.translatedTitle"
-        >Translated title</ng-container
-      >
-    </h3>
-    <span *ngIf="work.translatedTitle?.languageName"
-      >({{ work.translatedTitle?.languageName }})</span
-    >
+    <div class="row">
+      <span class="translated-title-label orc-font-body-small">
+        <ng-container i18n="@@works.translatedTitle"
+          >Translated title</ng-container
+        >&nbsp;</span
+      ><ng-container *ngIf="work.translatedTitle?.languageName">
+        ({{ work.translatedTitle.languageName }})
+      </ng-container>
+    </div>
 
     <div>
       {{ work.translatedTitle.content }}
@@ -57,7 +80,7 @@
   <!-- LANGUAGE -->
   <app-display-attribute *ngIf="work.languageName?.value">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.language">Language</ng-container>
+      <ng-container i18n="@@works.language">Language</ng-container>
     </h3>
 
     <div>
@@ -68,7 +91,7 @@
   <!-- SUBTITLE -->
   <app-display-attribute *ngIf="work.subtitle?.value">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.subtitle">Subtitle</ng-container>
+      <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
     </h3>
 
     <div>
@@ -79,7 +102,7 @@
   <!-- URL -->
 
   <app-display-attribute *ngIf="work.url?.value">
-    <h3 class="orc-font-body-small" i18n="@@record.url">URL</h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
 
     <div>
       <a
@@ -100,7 +123,7 @@
 
   <!--  CONTRIBUTORS-->
   <app-display-attribute *ngIf="work?.contributors?.length > 0">
-    <h3 class="orc-font-body-small" i18n="@@record.contributors">
+    <h3 class="orc-font-body-small" i18n="@@works.contributors">
       Contributors
     </h3>
 
@@ -120,7 +143,7 @@
   <!-- CITATION-->
   <app-display-attribute *ngIf="work.citation?.citationType?.value">
     <h3 class="orc-font-body-small">
-      <ng-container i18n="@@record.citation">Citation</ng-container>
+      <ng-container i18n="@@works.citation">Citation</ng-container>
       <span *ngIf="work.citation?.citationType?.value"
         >({{ work.citation?.citationType?.value }})</span
       >
@@ -133,11 +156,9 @@
 
   <!--  DESCRIPTION-->
   <app-display-attribute *ngIf="work.shortDescription?.value">
-    <h3 class="orc-font-body-small" i18n="@@record.description">Description</h3>
+    <h3 class="orc-font-body-small" i18n="@@works.description">Description</h3>
 
-    <div>
-      {{ work.shortDescription.value }}
-    </div>
+    <div [innerText]="work.shortDescription.value"></div>
   </app-display-attribute>
   <!--  COUNTRY OF PUBLICATION-->
   <app-display-attribute *ngIf="work.countryCode?.value">
@@ -152,7 +173,7 @@
 
   <!-- ADDED DATE-->
   <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
     <div>
       {{ work.createdDate | monthDayYearDateToString }}
     </div>
@@ -160,7 +181,7 @@
 
   <!-- LAST MODIFIED  DATE-->
   <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@record.lastModified">
+    <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
       Last modified
     </h3>
     <div>{{ work.lastModified | monthDayYearDateToString }}</div>

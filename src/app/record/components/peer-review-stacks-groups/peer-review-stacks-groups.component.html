@@ -3,10 +3,11 @@
   class="row"
   [title]="ngOrcidPeerReview"
   [type]="'peer-review'"
+  [userRecord]="userRecord"
   [currentAmount]="peerReviews.length"
   [isPublicRecord]="isPublicRecord"
-  [expandedContent]="expandedContent"
-  (expanded)="expandedClicked($event)"
+  [(expandedContent)]="expandedContent['PEER_REVIEW']"
+  (expandedContentChange)="expandedContentChange.emit(expandedContent)"
   [labelAddButton]="labelAddButton"
   [labelSortButton]="labelSortButton"
   [sortTypes]="['order']"
@@ -21,9 +22,14 @@
       [elements]="peerReview"
       [type]="'peer-review'"
       [editable]="false"
-      [openState]="false"
+      [openState]="this.moreInfo.includes(peerReview.groupId)"
       [expandButtonsPosition]="'left'"
       [isPublicRecord]="isPublicRecord"
+      (openStateChange)="expandedClicked($event, peerReview)"
+      [showVisibilityControl]="true"
+      [stackSiblings]="peerReview.peerReviewDuplicateGroups"
+      [visibility]="getVisibility(peerReview)"
+      [visibilityError]="peerReview.visibilityError"
     >
       <div header>
         <ng-container i18n="@@peerReview.reviewActivity">
@@ -38,8 +44,9 @@
         <app-panel-element [hideVisibility]="false">
           <div class="description">
             <p>
-              <span class="capitalize">{{ peerReview.type }}</span>
-              <ng-container *ngIf="peerReview.description">,</ng-container>
+              <span class="capitalize">
+                {{ peerReview.type + (peerReview.description ? ',' : '') }}
+              </span>
               {{ peerReview.description }}
             </p>
             <ng-container *ngIf="peerReview.groupType">
@@ -60,6 +67,7 @@
         <app-panel-element class="nested-panels" [hideVisibility]="false">
           <div nested-panels>
             <app-peer-review-stack
+              [userRecord]="userRecord"
               [isPublicRecord]="isPublicRecord"
               [peerReviewStack]="group"
               *ngFor="
@@ -79,7 +87,13 @@
         Connect to trusted organizations to automatically add your peer review
         activity to your ORCID record.
       </p>
-      <a class="underline" href="" i18n="@@peerReview.learnMore">
+      <a
+        class="underline"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006971333-Peer-Review"
+        i18n="@@peerReview.learnMore"
+      >
         Learn more about how peer reviews are added to your ORCID record
       </a>
     </div>

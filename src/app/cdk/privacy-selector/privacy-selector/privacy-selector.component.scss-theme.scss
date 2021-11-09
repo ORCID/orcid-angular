@@ -10,6 +10,9 @@
   .panel {
     background-color: map-get($background, light-grey);
   }
+  .panel.white-background {
+    background-color: mat-color($foreground, text-light-high);
+  }
   ::ng-deep .no-selected svg > g,
   ::ng-deep .no-selected svg > path {
     fill: map-get($background, ui-background);
@@ -22,14 +25,19 @@
     background-color: map-get($foreground, text-light-high);
   }
 
-  ::ng-deep .panel button.private-button.selected {
+  ::ng-deep button.private-button.selected {
     background-color: map-get($foreground, visibility-private);
   }
-  ::ng-deep .panel button.limited-button.selected {
+  ::ng-deep button.limited-button.selected {
     background-color: map-get($foreground, visibility-trusted);
   }
-  ::ng-deep .panel button.public-button.selected {
+  ::ng-deep button.public-button.selected {
     background-color: map-get($foreground, visibility-everyone);
+  }
+
+  .privacy-selector {
+    background-color: map-get($foreground, 'text-light-high');
+    border-color: mat-color($background, ui-background);
   }
 }
 @include privacy-selector-theme($orcid-app-theme);
