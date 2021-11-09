@@ -72,9 +72,7 @@ export class UserMenuComponent implements OnInit {
       .singOut()
       .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
       .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin], {
-          queryParams: platform.queryParameters,
-        })
+        this._router.navigate([ApplicationRoutes.signin])
       })
   }
 }

@@ -85,7 +85,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
       .subscribe((platform) => {
         this._router.navigate([ApplicationRoutes.signin], {
-          queryParams: platform.queryParameters,
+          queryParams: { ...platform.queryParameters },
         })
       })
   }
