@@ -30,7 +30,6 @@ export class UserMenuComponent implements OnInit {
     _userInfo: UserService,
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
-    _togglz: TogglzService,
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService
   ) {
