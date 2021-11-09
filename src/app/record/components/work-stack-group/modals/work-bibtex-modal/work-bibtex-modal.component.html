@@ -93,9 +93,31 @@
     >
       Choose BibTeX file to import
     </button>
-    <mat-error class="mat-caption" *ngIf="bibtexParsingError">
-      {{ bibtexParsingErrorText }}
+  </div>
+  <div
+    class="row bibtex-error"
+    *ngIf="bibtexErrorParsing || bibtexErrorNoEntries"
+  >
+    <mat-error class="mat-caption">
+      <ng-container
+        i18n="@@works.bibtexImporterParsingError"
+        *ngIf="bibtexErrorParsing"
+      >
+        This file cannot be read. Please check the BibTeX formatting and try again.
+      </ng-container>
+      <ng-container
+        i18n="@@works.noBibtexEntries"
+        *ngIf="bibtexErrorNoEntries"
+      >
+        Error parsing Bibtex. No Bibtex entries found in file
+      </ng-container>
     </mat-error>
+  </div>
+  <div
+    class="row bibtex-error"
+    *ngIf="bibtexErrorParsing"
+  >
+    <code>{{ bibtexErrorParsingText }}</code>
   </div>
   <ng-container *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
     <div class="row">
