@@ -582,6 +582,7 @@
             *ngFor="let option of filteredOptions | async"
             [value]="option.value"
             (click)="fillForm(option)"
+            (keydown.enter)="fillForm(option)"
           >
             <div class="row orc-font-body-small">
               {{ option.value }}

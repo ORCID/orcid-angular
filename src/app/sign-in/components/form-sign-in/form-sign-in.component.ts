@@ -148,11 +148,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
 
       const isOauth = this.signInLocal.isOauth
       const willNotNavigateOutOrcidAngular = isOauth
-      const forceSessionUpdate = isOauth
       const $signIn = this._signIn.signIn(
         this.signInLocal,
         willNotNavigateOutOrcidAngular,
-        forceSessionUpdate
+        true
       )
       $signIn.subscribe((data) => {
         this.printError = false
@@ -348,7 +347,11 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     this.authorizationForm.get('username').updateValueAndValidity()
   }
 
-  navigateTo(val) {
-    this.window.location.href = val
+  navigateTo(val: string): void {
+    if (val.indexOf('orcid.org/my-orcid')) {
+      this._router.navigate(['/my-orcid'])
+    } else {
+      this.window.location.href = val
+    }
   }
 }

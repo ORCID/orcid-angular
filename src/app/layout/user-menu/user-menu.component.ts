@@ -7,6 +7,8 @@ import { WINDOW } from 'src/app/cdk/window'
 import { TogglzService } from '../../core/togglz/togglz.service'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { switchMap, take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-user-menu',
@@ -30,7 +32,9 @@ export class UserMenuComponent implements OnInit {
     _userInfo: UserService,
     @Inject(WINDOW) private window: Window,
     _platform: PlatformInfoService,
-    _togglz: TogglzService
+    _togglz: TogglzService,
+    private _signingService: SignInService,
+    private _platformInfo: PlatformInfoService
   ) {
     _userInfo.getUserSession().subscribe((data) => {
       if (data.loggedIn) {
@@ -59,5 +63,16 @@ export class UserMenuComponent implements OnInit {
     } else {
       this.window.location.href = environment.BASE_URL + url
     }
+  }
+
+  signOut() {
+    this._signingService
+      .singOut()
+      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
+      .subscribe((platform) => {
+        this._router.navigate(['/signin'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 }

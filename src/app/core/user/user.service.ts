@@ -19,6 +19,7 @@ import {
   map,
   retry,
   retryWhen,
+  skip,
   startWith,
   switchMap,
   take,
@@ -175,7 +176,8 @@ export class UserService {
           )
           .subscribe()
       })
-      return this.$userSessionSubject
+
+      return this.$userSessionSubject.asObservable()
     }
   }
 

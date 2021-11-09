@@ -36,7 +36,7 @@ export class SignInService {
    */
   signIn(
     signInLocal: SignInLocal,
-    updateUserSession = false,
+    updateUserSession = true,
     forceSessionUpdate = false
   ) {
     let loginUrl = 'signin/auth.json'
@@ -71,6 +71,8 @@ export class SignInService {
           // At the moment by default the userService wont be refreshed, only on the oauth login
           // other logins that go outside this application, wont require to refresh the user service
           if (updateUserSession) {
+            console.log('OK UPDAATE USER SESSION');
+            
             return this._userService
               .refreshUserSession(forceSessionUpdate, true)
               .pipe(

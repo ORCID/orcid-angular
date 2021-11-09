@@ -80,7 +80,7 @@ export class RegisterService extends _RegisterServiceMixingBase {
     StepC: FormGroup,
     reactivation: ReactivationLocal,
     requestInfoForm?: RequestInfoForm,
-    updateUserService = false
+    updateUserService = true
   ): Observable<RegisterConfirmResponse> {
     this.backendRegistrationForm.valNumClient =
       this.backendRegistrationForm.valNumServer / 2
