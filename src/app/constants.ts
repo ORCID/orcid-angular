@@ -37,7 +37,6 @@ export const AMOUNT_REGEXP = /^[0-9.,]*$/
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
-  myOrcidTEMP: 'qa/my-orcid',
   twoFactor: '2fa-signin',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',

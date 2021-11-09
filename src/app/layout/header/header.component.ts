@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Input } from '@angular/core'
 import { Router, NavigationStart } from '@angular/router'
-import { filter } from 'rxjs/operators'
+import { filter, switchMap, take } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
 import { menu } from './menu'
@@ -15,6 +15,7 @@ import { WINDOW } from 'src/app/cdk/window'
 import { environment } from '../../../environments/environment'
 import { Location } from '@angular/common'
 import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
 
 @Component({
   selector: 'app-header',
@@ -47,7 +48,9 @@ export class HeaderComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     _userInfo: UserService,
     _togglz: TogglzService,
-    location: Location
+    location: Location,
+    private _signingService: SignInService,
+    private _platformInfo: PlatformInfoService
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))
@@ -69,7 +72,7 @@ export class HeaderComponent implements OnInit {
       const path = location.path()
       this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
       this.hideMainMenu =
-        ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcidTEMP}`
+        ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcid}`
     })
     _togglz
       .getStateOf('NEW_INFO_SITE')
@@ -277,5 +280,16 @@ export class HeaderComponent implements OnInit {
 
   navigateTo(val) {
     ;(this.window as any).outOfRouterNavigation(val)
+  }
+
+  signOut() {
+    this._signingService
+      .singOut()
+      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
+      .subscribe((platform) => {
+        this._router.navigate(['/signin'], {
+          queryParams: platform.queryParameters,
+        })
+      })
   }
 }

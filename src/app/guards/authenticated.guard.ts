@@ -25,14 +25,13 @@ export class AuthenticatedGuard implements CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this._userInfo
-      .getUserSession()
-      .pipe(
-        map(
-          (value) =>
-            value.loggedIn ||
-            this._router.createUrlTree([ApplicationRoutes.signin])
+    return this._userInfo.getUserSession().pipe(
+      map((value) => {
+        return (
+          value.loggedIn ||
+          this._router.createUrlTree([ApplicationRoutes.signin])
         )
-      )
+      })
+    )
   }
 }
