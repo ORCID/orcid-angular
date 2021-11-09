@@ -96,7 +96,6 @@
         [formGroup]="importForm"
         *ngIf="worksFromBibtex.length > 0 && !loadingWorks"
       >
-      
         <ng-container *ngFor="let work of worksFromBibtex">
           <div class="row work-info" [formGroupName]="work.putCode.value">
             <div class="row">
@@ -118,8 +117,11 @@
                 <app-display-external-ids
                   [externalIdentifiers]="work?.workExternalIdentifiers"
                 ></app-display-external-ids>
-                <p class="orc-font-body-small"  *ngIf="work?.url">
-                  URL: <a href="{{ work?.url?.value}}" target="_blank">{{ work?.url?.value}}</a>
+                <p class="orc-font-body-small" *ngIf="work?.url">
+                  URL:
+                  <a href="{{ work?.url?.value }}" target="_blank">{{
+                    work?.url?.value
+                  }}</a>
                 </p>
               </mat-checkbox>
             </div>
