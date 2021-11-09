@@ -55,6 +55,8 @@ export interface UserRecordOptions {
   sort?: SortOrderType
   offset?: number
   pageSize?: number
+  cleanUp?: boolean
+  cleanCacheIfExist?: boolean
 }
 
 export interface MainPanelsState {

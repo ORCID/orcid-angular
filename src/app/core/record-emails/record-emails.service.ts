@@ -49,6 +49,9 @@ export class RecordEmailsService {
     } else if (!options.forceReload) {
       return this.$emailsSubject
     }
+    if (options.cleanCacheIfExist && this.$emailsSubject) {
+      this.$emailsSubject.next(<EmailsEndpoint>undefined)
+    }
 
     this._http
       .get<EmailsEndpoint>(environment.API_WEB + `account/emails.json`, {

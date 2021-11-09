@@ -56,7 +56,9 @@ export class UserMenuComponent implements OnInit {
   ngOnInit() {}
 
   goto(url) {
-    if (url === 'signin') {
+    if (url === 'my-orcid') {
+      this._router.navigate([ApplicationRoutes.myOrcid])
+    } else if (url === 'signin') {
       this._router.navigate([ApplicationRoutes.signin])
     } else if (url === 'inbox' && this.togglzOrcidAngularInbox) {
       this._router.navigate([ApplicationRoutes.inbox])
@@ -70,7 +72,7 @@ export class UserMenuComponent implements OnInit {
       .singOut()
       .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
       .subscribe((platform) => {
-        this._router.navigate(['/signin'], {
+        this._router.navigate([ApplicationRoutes.signin], {
           queryParams: platform.queryParameters,
         })
       })

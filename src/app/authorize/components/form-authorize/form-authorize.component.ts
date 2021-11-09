@@ -4,6 +4,7 @@ import { forkJoin, Observable, Subject } from 'rxjs'
 import { switchMap, take, takeUntil, map, catchError } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
+import { ApplicationRoutes } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
@@ -64,7 +65,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             .get()
             .pipe(take(1))
             .subscribe((platform) =>
-              this._router.navigate(['/signin'], {
+              this._router.navigate([ApplicationRoutes.signin], {
                 queryParams: platform.queryParameters,
               })
             )
@@ -83,7 +84,7 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
       .singOut()
       .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
       .subscribe((platform) => {
-        this._router.navigate(['/signin'], {
+        this._router.navigate([ApplicationRoutes.signin], {
           queryParams: platform.queryParameters,
         })
       })

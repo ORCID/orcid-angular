@@ -40,6 +40,9 @@ export class RecordBiographyService {
     } else if (!options.forceReload) {
       return this.$biography
     }
+    if (options.cleanCacheIfExist && this.$biography) {
+      this.$biography.next(<BiographyEndPoint>undefined)
+    }
 
     this._http
       .get<BiographyEndPoint>(
@@ -51,6 +54,8 @@ export class RecordBiographyService {
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({} as BiographyEndPoint)),
         tap((value) => {
+          console.log('OK HAVE THE FRESH DATA ', value)
+
           this.$biography.next(value)
         })
       )
