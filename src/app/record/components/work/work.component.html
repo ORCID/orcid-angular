@@ -15,7 +15,10 @@
     <app-display-external-ids
       [externalIdentifiers]="work.workExternalIdentifiers"
     ></app-display-external-ids>
-    <div class="general-data" *ngIf="work?.contributors?.length > 0">
+    <div
+      class="general-data"
+      *ngIf="togglzWorksContributors && work?.contributors?.length > 0"
+    >
       <span i18n="#upperCase@@works.contributors"> CONTRIBUTORS </span>:
       <ng-container
         *ngFor="

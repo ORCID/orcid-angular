@@ -36,6 +36,7 @@
       *ngIf="stackPanelsDisplay[work.putCode.value].topPanelOfTheStack"
       [work]="work"
       [panelDetailsState]="panelDetailsState[work.putCode.value]"
+      [togglzWorksContributors]="togglzWorksContributors"
       (toggleDetails)="toggleDetails($event)"
     >
     </app-work>

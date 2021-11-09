@@ -21,6 +21,7 @@ import { UserRecord } from 'src/app/types/record.local'
 import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-stack',
@@ -38,6 +39,7 @@ export class WorkStackComponent implements OnInit {
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
   hasExternalIds: boolean
+  togglzWorksContributors: boolean
 
   @Input()
   set workStack(value: WorkGroup) {
@@ -72,7 +74,14 @@ export class WorkStackComponent implements OnInit {
     }
   } = {}
 
-  constructor(private _workService: RecordWorksService) {}
+  constructor(
+    _togglz: TogglzService,
+    private _workService: RecordWorksService
+  ) {
+    _togglz
+      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
+      .subscribe((value) => (this.togglzWorksContributors = value))
+  }
 
   /**
    * Set the panelDetails and top of the stack card to default mode
@@ -93,7 +102,13 @@ export class WorkStackComponent implements OnInit {
         state: false,
       }
     }
-    this.getDetails(work).subscribe()
+    // todo @DanielPalafox remove if and togglz once contributors are returned in works page endpoint
+    if (
+      this.togglzWorksContributors ||
+      (this.panelDetailsState[work.putCode.value] !== undefined && !force)
+    ) {
+      this.getDetails(work).subscribe()
+    }
   }
 
   /**
