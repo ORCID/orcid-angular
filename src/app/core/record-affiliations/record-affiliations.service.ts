@@ -52,6 +52,10 @@ export class RecordAffiliationService {
       return this.$affiliations
     }
 
+    if (options.cleanCacheIfExist && this.$affiliations) {
+      this.$affiliations.next(undefined)
+    }
+
     this._$loading.next(true)
     this.getGroupAndSortAffiliations(options)
       .pipe(

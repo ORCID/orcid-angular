@@ -23,7 +23,7 @@ export class RecordWorksService {
   lastEmittedValue: WorksEndpoint = null
   groupingSuggestionsSubjectInitialized = false
   groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
-  workSubject = new ReplaySubject<WorksEndpoint>(1)
+  $workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
 
   userRecordOptions: UserRecordOptions = {}
@@ -49,9 +49,9 @@ export class RecordWorksService {
     return this.getWorksData(offset, sort, sortAsc, orcidId).pipe(
       map((data) => {
         this.lastEmittedValue = data
-        this.workSubject.next(data)
+        this.$workSubject.next(data)
       }),
-      switchMap((data) => this.workSubject.asObservable())
+      switchMap((data) => this.$workSubject.asObservable())
     )
   }
   /**
@@ -61,6 +61,10 @@ export class RecordWorksService {
    * @param id user Orcid id
    */
   getWorks(options: UserRecordOptions): Observable<WorksEndpoint> {
+    if (options.cleanCacheIfExist && this.$workSubject) {
+      this.$workSubject.next(<WorksEndpoint>undefined)
+    }
+
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
 
@@ -97,7 +101,7 @@ export class RecordWorksService {
         }),
         tap((data) => {
           this.lastEmittedValue = data
-          this.workSubject.next(data)
+          this.$workSubject.next(data)
         }),
         tap(() => {
           if (!options.publicRecordId) {
@@ -106,7 +110,7 @@ export class RecordWorksService {
         })
       )
       .subscribe()
-    return this.workSubject.asObservable()
+    return this.$workSubject.asObservable()
   }
 
   changeUserRecordContext(
@@ -141,10 +145,10 @@ export class RecordWorksService {
             return work
           })
         })
-        this.workSubject.next(this.lastEmittedValue)
+        this.$workSubject.next(this.lastEmittedValue)
       }),
       switchMap(() => {
-        return this.workSubject.asObservable()
+        return this.$workSubject.asObservable()
       })
     )
   }

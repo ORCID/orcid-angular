@@ -258,7 +258,7 @@ export class HeaderComponent implements OnInit {
 
   goto(url) {
     if (url === 'signin') {
-      this._router.navigate(['/signin'])
+      this._router.navigate([ApplicationRoutes.signin])
       this.mobileMenuState = false
     } else {
       ;(this.window as any).outOfRouterNavigation(environment.BASE_URL + url)
@@ -287,9 +287,7 @@ export class HeaderComponent implements OnInit {
       .singOut()
       .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
       .subscribe((platform) => {
-        this._router.navigate(['/signin'], {
-          queryParams: platform.queryParameters,
-        })
+        this._router.navigate([ApplicationRoutes.signin])
       })
   }
 }

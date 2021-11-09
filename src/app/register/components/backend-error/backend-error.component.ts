@@ -66,7 +66,7 @@ export class BackendErrorComponent implements OnInit {
       .get()
       .pipe(take(1))
       .subscribe((platform) => {
-        return this._router.navigate(['/signin'], {
+        return this._router.navigate([ApplicationRoutes.signin], {
           // keeps all parameters to support Oauth request
           // and set show login to true
           queryParams: { ...platform.queryParameters, email, show_login: true },

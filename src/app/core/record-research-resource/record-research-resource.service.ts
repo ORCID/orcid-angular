@@ -42,6 +42,10 @@ export class RecordResearchResourceService {
       url = 'research-resources/researchResourcePage.json'
     }
 
+    if (options.cleanCacheIfExist && this.$researchResourcesSubject) {
+      this.$researchResourcesSubject.next(<ResearchResourcesEndpoint>undefined)
+    }
+
     this._http
       .get<ResearchResourcesEndpoint>(
         environment.API_WEB +
