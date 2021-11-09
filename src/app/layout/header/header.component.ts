@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
       const path = location.path()
       this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
       this.hideMainMenu =
-        ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcidTEMP}`
+        ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcid}`
     })
     _togglz
       .getStateOf('NEW_INFO_SITE')
