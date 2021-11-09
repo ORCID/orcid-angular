@@ -254,14 +254,16 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
     if (this.funding) {
       this.initFormValues()
-    } 
+    }
     this._record
       .getPreferences()
       .pipe(first())
       .subscribe((userPreferences) => {
         this.defaultVisibility = userPreferences.default_visibility
         this.fundingForm.patchValue({
-          visibility: this.funding?.visibility?.visibility ? this.funding?.visibility?.visibility : this.defaultVisibility,
+          visibility: this.funding?.visibility?.visibility
+            ? this.funding?.visibility?.visibility
+            : this.defaultVisibility,
         })
       })
     this.listenFormChanges()
