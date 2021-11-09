@@ -118,10 +118,10 @@
                   [externalIdentifiers]="work?.workExternalIdentifiers"
                 ></app-display-external-ids>
                 <p class="orc-font-body-small" *ngIf="work?.url">
-                <span class="prefixTitle" i18n="@@works.urlColon">URL:</span> 
-                  <a href="{{ work?.url?.value }}" target="_blank"> {{
-                    work?.url?.value
-                  }}</a>
+                  <span class="prefixTitle" i18n="@@works.urlColon">URL:</span>
+                  <a href="{{ work?.url?.value }}" target="_blank">
+                    {{ work?.url?.value }}</a
+                  >
                 </p>
               </mat-checkbox>
             </div>
