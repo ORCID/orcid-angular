@@ -31,7 +31,7 @@ export class SignInService {
   }
   /**
    * @param  SignInLocal sign in information
-   * @param  updateUserSession default false, set to true if after successfully signing Orcid Angular will still be open
+   * @param  updateUserSession default true, set to true if after successfully signing Orcid Angular will still be open
    * @param  forceSessionUpdate default false, set to true if the user session should be updated even when the user status does not change
    */
   signIn(
@@ -68,20 +68,13 @@ export class SignInService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         switchMap((response) => {
-          // At the moment by default the userService wont be refreshed, only on the oauth login
-          // other logins that go outside this application, wont require to refresh the user service
-          if (updateUserSession) {
-            console.log('OK UPDAATE USER SESSION');
-            
-            return this._userService
-              .refreshUserSession(forceSessionUpdate, true)
-              .pipe(
-                first(),
-                map(() => response)
-              )
-          } else {
-            return of(response)
-          }
+          // call refreshUserSession with force session update to handle register actions from sessions with a logged in user
+          return this._userService
+            .refreshUserSession(forceSessionUpdate, true)
+            .pipe(
+              first(),
+              map(() => response)
+            )
         })
       )
   }
