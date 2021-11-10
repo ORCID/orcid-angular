@@ -24,7 +24,7 @@
   <div *ngIf="selectable">
     <mat-checkbox
       class="text-wrap"
-      *ngIf="defaultPutCode === putCode || (displayTheStack && !isPublicRecord)"
+      *ngIf="(defaultPutCode === putCode || displayTheStack) && !isPublicRecord"
       (change)="checked($event)"
       [(ngModel)]="selected"
     >
