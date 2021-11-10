@@ -15,7 +15,7 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './work-bibtex-modal.component.html',
   styleUrls: [
     './work-bibtex-modal.component.scss',
-    './work-bibtex-modal.component.scss-theme.scss'
+    './work-bibtex-modal.component.scss-theme.scss',
   ],
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {
