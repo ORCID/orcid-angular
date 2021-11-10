@@ -67,7 +67,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                 that.bibtexErrorNoEntries = true
                 that.loadingWorks = false
               }
-              while (parsed?.length > 0) {
+              while (parsed.length > 0) {
                 const cur = parsed.shift()
                 const bibtexEntry = cur.entryType.toLowerCase()
                 if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
