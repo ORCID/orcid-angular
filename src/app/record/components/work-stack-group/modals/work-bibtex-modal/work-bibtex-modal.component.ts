@@ -71,7 +71,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                 const cur = parsed.shift()
                 const bibtexEntry = cur.entryType.toLowerCase()
                 if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
-                  // Filtering @PREAMBLE and @COMMENT
                   newWorks.push(that.populateWork(cur))
                 }
               }
