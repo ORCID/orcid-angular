@@ -105,7 +105,7 @@
       <mat-form-field
         appearance="outline"
         class="mat-form-field-min"
-        [ngClass]="{ 'two-line-hint' : metadataNotFound }"
+        [ngClass]="{ 'two-line-hint': metadataNotFound }"
       >
         <input
           id="external-id-input"
@@ -117,7 +117,7 @@
           *ngIf="
             type === EXTERNAL_ID_TYPE_WORK.doi &&
             externalIdentifierForm?.get('externalId')?.errors?.pattern
-            "
+          "
           i18n="@@works.validFormat"
         >
           Invalid id for the selected identifier type
