@@ -115,7 +115,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
           this._robotsMeta.disallowRobots()
         }
-        this._openGraph.addOpenGraphData(userRecord)
+        this._openGraph.addOpenGraphData(userRecord, { force: true })
       })
   }
 
@@ -140,9 +140,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.publicOrcid) {
-      this._openGraph.removeOpenGraphData()
       this._robotsMeta.restoreEnvironmentRobotsConfig()
     }
+    this._openGraph.removeOpenGraphData()
     this.$destroy.next(true)
     this.$destroy.complete()
   }

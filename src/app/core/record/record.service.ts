@@ -82,6 +82,7 @@ export class RecordService {
     'Content-Type': 'application/json',
   })
 
+  subscriptionSourceCountDebugger = 0
   /**
    * @param options:
    * - use `forceReload` to force all server calls.
@@ -103,8 +104,13 @@ export class RecordService {
     if (this.recordSubject$ && options.cleanCacheIfExist) {
       this.recordSubject$.next(undefined)
     }
-    this.$destroy.next()
+    const subscriptionCount = this.subscriptionSourceCountDebugger
+    this.subscriptionSourceCountDebugger =
+      this.subscriptionSourceCountDebugger + 1
 
+    // Un-subscribe from previous combineLatest subscriptions
+    this.$destroy.next()
+    // Subscribe to a new combineLatest http calls subscription
     combineLatest([
       this._recordEmailsService
         .getEmails(options)
@@ -170,6 +176,7 @@ export class RecordService {
             userInfo,
           ]) => {
             this.recordSubject$.next({
+              localCounter: subscriptionCount,
               emails: emails as EmailsEndpoint,
               otherNames: otherNames as OtherNamesEndPoint,
               countries: countries as CountriesEndpoint,
