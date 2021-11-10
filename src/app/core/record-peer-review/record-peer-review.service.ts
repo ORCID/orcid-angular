@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
-import { retry, catchError, switchMap, tap } from 'rxjs/operators'
+import { retry, catchError, tap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { cloneDeep } from 'lodash'
 
