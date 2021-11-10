@@ -206,22 +206,37 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
     if (this.affiliation) {
       if (this.affiliation.endDate.year) {
+        var endDateObj = {
+          endDateYear: Number(this.affiliation.endDate.year),
+          endDateMonth: undefined,
+          endDateDay:undefined
+        }
+        if (this.affiliation.endDate.month) {
+          endDateObj.endDateMonth = Number(this.affiliation.endDate.month)
+          if (this.affiliation.endDate.day) {
+            endDateObj.endDateDay = Number(this.affiliation.endDate.day)
+          }
+        }
         this.affiliationForm.patchValue({
-          endDateGroup: {
-            endDateYear: Number(this.affiliation.endDate.year),
-            endDateMonth: Number(this.affiliation.endDate.month),
-            endDateDay: Number(this.affiliation.endDate.day),
-          },
+          endDateGroup: endDateObj,
         })
       }
 
       if (this.affiliation.startDate.year) {
+        var startDateObj = {
+          startDateYear: Number(this.affiliation.startDate.year),
+          startDateMonth: undefined,
+          startDateDay: undefined,
+        }
+
+        if (this.affiliation.startDate.month) {
+          startDateObj.startDateMonth = Number(this.affiliation.startDate.month)
+          if (this.affiliation.startDate.day) {
+            startDateObj.startDateDay = Number(this.affiliation.startDate.day)
+          }
+        }
         this.affiliationForm.patchValue({
-          startDateGroup: {
-            startDateYear: Number(this.affiliation.startDate.year),
-            startDateMonth: Number(this.affiliation.startDate.month),
-            startDateDay: Number(this.affiliation.startDate.day),
-          },
+          startDateGroup: startDateObj,
         })
       }
 
