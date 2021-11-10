@@ -82,7 +82,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
       })
       .pipe(
         tap((record) => {
-          if (record?.userInfo) {
+          if (record?.userInfo && !this.isPublicRecord) {
             const checkEmailValidated =
               record.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true'
             const inDelegationMode =
@@ -98,16 +98,10 @@ export class TopBarComponent implements OnInit, OnDestroy {
               }
             }
           }
-        })
+        }),
+        takeWhile((record) => !record.userInfo || !record.emails)
       )
       .subscribe()
-
-    this._record
-      .getRecord({
-        publicRecordId: this.isPublicRecord || undefined,
-      })
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userRecord) => {})
   }
 
   private setNames(userRecord: UserRecord) {
