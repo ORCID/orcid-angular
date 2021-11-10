@@ -16,6 +16,9 @@
     word-break: break-word;
 
     h2 {
+      width: 48em;
+      overflow: hidden;
+      text-overflow: ellipsis;
       margin-bottom: 0;
     }
 
