@@ -63,7 +63,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
           } else {
             if (parsed) {
               const newWorks = []
-              if (parsed?.length === 0) {
+              if (parsed.length === 0) {
                 that.bibtexErrorNoEntries = true
                 that.loadingWorks = false
               }
