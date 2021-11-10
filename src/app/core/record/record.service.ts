@@ -176,7 +176,7 @@ export class RecordService {
             userInfo,
           ]) => {
             this.recordSubject$.next({
-              localCounter: subscriptionCount,
+              subscriptionCount: subscriptionCount,
               emails: emails as EmailsEndpoint,
               otherNames: otherNames as OtherNamesEndPoint,
               countries: countries as CountriesEndpoint,
