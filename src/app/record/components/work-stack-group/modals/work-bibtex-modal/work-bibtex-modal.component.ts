@@ -344,23 +344,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
-  toWorkDetails() {
-    this._window.document.getElementById('workDetails').scrollIntoView()
-  }
-
-  toIdentifiers() {
-    this._window.document.getElementById('identifiers').scrollIntoView()
-  }
-
-  toCitation() {
-    this._window.document.getElementById('citation').scrollIntoView()
-  }
-  toOtherInformation() {
-    this._window.document.getElementById('otherInformation').scrollIntoView()
-  }
-  toVisibility() {
-    this._window.document.getElementById('visibility').scrollIntoView()
-  }
 }
 
 export const bibMonths = [
