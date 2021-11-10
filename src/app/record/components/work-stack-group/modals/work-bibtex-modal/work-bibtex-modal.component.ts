@@ -32,8 +32,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   group: { [key: string]: FormGroup } = {}
   addedWorkCount = 0
 
-  ngOrcidErrorParsingBibtex = $localize`:@@works.errorParsingBibtex:Error parsing Bibtex. No Bibtex entries found in file`
-
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordWorksService: RecordWorksService,
