@@ -27,7 +27,7 @@ export class RecordPeerReviewService {
   ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
-    if (options.publicRecordId) {
+    if (options?.publicRecordId) {
       this._http
         .get<PeerReview[]>(
           environment.API_WEB +
@@ -38,14 +38,14 @@ export class RecordPeerReviewService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
-          catchError((error) => of([])),
+          catchError(() => of([])),
           tap((data) => {
             this.lastEmittedValue = data
             this.$peer.next(data)
-          }),
-          switchMap((data) => this.$peer.asObservable())
+          })
         )
         .subscribe()
+      return this.$peer.asObservable()
     } else {
       if (!this.$peer) {
         this.$peer = new ReplaySubject(1)

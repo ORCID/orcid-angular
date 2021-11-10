@@ -96,7 +96,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
           this.onlyOrcidId = true
         }
         this.userRecord = userRecord
-        this.userInfo = userRecord.userInfo
+        this.userInfo = userRecord?.userInfo
       })
   }
 

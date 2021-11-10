@@ -142,7 +142,7 @@ export class RecordService {
       this._recordFundings
         .getFundings(options)
         .pipe(startWith(<Object>undefined)),
-      this.getPreferences(options).pipe(startWith(<Object>undefined)),
+      this.getPreferences(options)?.pipe(startWith(<Object>undefined)),
       this._recordPeerReviewService
         .getPeerReviewGroups(options)
         .pipe(startWith(<Object>undefined)),
