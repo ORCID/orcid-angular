@@ -227,6 +227,12 @@
         >
           Please enter a organization
         </mat-error>
+        <mat-error
+          *ngIf="affiliationForm.get('organization').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -254,6 +260,12 @@
         >
           Please enter a city
         </mat-error>
+        <mat-error
+          *ngIf="affiliationForm.get('city').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -264,6 +276,12 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="region-input" matInput formControlName="region" />
+        <mat-error
+          *ngIf="affiliationForm.get('region').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -406,6 +424,12 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="title-input" matInput formControlName="title" />
+        <mat-error
+          *ngIf="affiliationForm.get('title').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <ng-container formGroupName="startDateGroup">
@@ -588,6 +612,12 @@
           i18n="@@shared.invalidLink"
         >
           Invalid Link
+        </mat-error>
+        <mat-error
+          *ngIf="affiliationForm.get('link').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_two_thousand"
+        >
+          Must be less than 2000 characters
         </mat-error>
       </mat-form-field>
     </div>

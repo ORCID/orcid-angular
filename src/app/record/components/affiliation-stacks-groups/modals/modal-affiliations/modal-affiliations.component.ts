@@ -19,7 +19,11 @@ import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
 import { first, map, switchMap, tap } from 'rxjs/operators'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
-import { URL_REGEXP } from '../../../../../constants'
+import {
+  MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
+  URL_REGEXP,
+} from '../../../../../constants'
 import {
   dateValidator,
   endDateValidator,
@@ -109,17 +113,27 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     this.affiliationForm = this._formBuilder.group(
       {
         organization: new FormControl(this.organization, {
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
         }),
         city: new FormControl(this.city, {
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
         }),
-        region: new FormControl(this.region, {}),
+        region: new FormControl(this.region, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
         country: new FormControl('', {
           validators: [Validators.required],
         }),
         department: new FormControl(this.department, {}),
-        title: new FormControl(this.title, {}),
+        title: new FormControl(this.title, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
         startDateGroup: this._formBuilder.group(
           {
             startDateDay: ['', []],
@@ -137,7 +151,10 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           { validator: dateValidator('endDate') }
         ),
         link: new FormControl(this.link, {
-          validators: [Validators.pattern(URL_REGEXP)],
+          validators: [
+            Validators.pattern(URL_REGEXP),
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
+          ],
         }),
         visibility: new FormControl(this.defaultVisibility, {
           validators: [Validators.required],
