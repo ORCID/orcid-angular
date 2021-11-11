@@ -41,6 +41,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   bibTexInputChange($fileInputEvent: any) {
+    this.bibtexErrorParsingText = undefined
+    this.bibtexErrorParsing = false
     this.loadingWorks = true
     const textFiles = $fileInputEvent.target.files
     for (const bibtex of textFiles) {
