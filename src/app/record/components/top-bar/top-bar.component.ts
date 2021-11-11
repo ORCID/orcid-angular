@@ -99,7 +99,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
             }
           }
         }),
-        takeWhile((record) => !record?.userInfo || !record.emails)
+        takeUntil(this.$destroy)
       )
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
