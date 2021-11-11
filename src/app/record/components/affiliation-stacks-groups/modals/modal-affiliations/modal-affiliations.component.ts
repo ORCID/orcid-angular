@@ -131,7 +131,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           validators: [Validators.required],
         }),
         department: new FormControl(this.department, {
-          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)]
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),
         title: new FormControl(this.title, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
