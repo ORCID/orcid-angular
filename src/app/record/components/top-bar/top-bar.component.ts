@@ -108,7 +108,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
         if (!isEmpty(userRecord.otherNames)) {
           this.setNames(userRecord)
-
         }
       })
   }
