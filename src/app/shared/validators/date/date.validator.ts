@@ -100,8 +100,14 @@ export function endDateMonthYearValidator() {
     )
 
     // Cloning old app and backend behaviour.
-    // if the end-month is defined start-month MUST be defined
-    if (endDateMonth && !startDateMonth) {
+    // if the end-month is defined and the start-year and end-year are the same, start-month MUST be defined
+    if (
+      endDateMonth &&
+      !startDateMonth &&
+      startDateYear &&
+      endDateYear &&
+      startDateYear === endDateYear
+    ) {
       return { invalidEndDate: true }
     }
 
@@ -150,11 +156,29 @@ export function endDateValidator() {
       startDateDay,
       endDateDay
     )
-
     // Cloning old app and backend behaviour.
-    // if the end-month is defined start-month MUST be defined
-    // if the end-day is defined start-day MUST be defined
-    if ((endDateMonth && !startDateMonth) || (endDateDay && !startDateDay)) {
+    // if the end-month is defined and the start-year and end-year are the same, start-month MUST be defined
+    if (
+      endDateMonth &&
+      !startDateMonth &&
+      startDateYear &&
+      endDateYear &&
+      startDateYear === endDateYear
+    ) {
+      return { invalidEndDate: true }
+    }
+    // Cloning old app and backend behaviour.
+    // if the end-day is defined and the start-year/month and end-year/month are the same, start-month MUST be defined
+    if (
+      endDateDay &&
+      !startDateDay &&
+      startDateYear &&
+      endDateYear &&
+      endDateMonth &&
+      endDateDay &&
+      startDateYear === endDateYear &&
+      endDateMonth === endDateDay
+    ) {
       return { invalidEndDate: true }
     }
 
