@@ -3,7 +3,7 @@ import { UserRecord } from '../../../types/record.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
 import { ModalBiographyComponent } from './modals/modal-biography/modal-biography.component'
-import { takeUntil, takeWhile, tap } from 'rxjs/operators'
+import { takeUntil, tap } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
@@ -99,7 +99,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
             }
           }
         }),
-        takeWhile((record) => !record?.userInfo || !record.emails)
+        takeUntil(this.$destroy)
       )
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
