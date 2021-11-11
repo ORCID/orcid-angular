@@ -175,7 +175,8 @@ export class UserService {
           )
           .subscribe()
       })
-      return this.$userSessionSubject
+
+      return this.$userSessionSubject.asObservable()
     }
   }
 

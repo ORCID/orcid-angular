@@ -77,11 +77,17 @@
   </button>
 </div>
 <div class="hide">
-  <div class="privacy-selector orc-font-body-small">
+  <div
+    class="privacy-selector orc-font-body-small"
+    [ngClass]="{
+      start: alignment === 'start',
+      bottom: alignment === 'bottom'
+    }"
+  >
     <p>
       <strong i18n="@@shared.whoCanSeeThis"> Who can see this? </strong>
     </p>
-    <div class="row">
+    <div class="row no-wrap">
       <button
         aria-label="limited public"
         mat-icon-button
@@ -109,7 +115,7 @@
       </button>
       <p i18n="@@register.VisibilityEveryone">Everyone</p>
     </div>
-    <div class="row">
+    <div class="row no-wrap">
       <button
         aria-label="visibility limited"
         mat-icon-button
@@ -130,7 +136,7 @@
       </button>
       <p i18n="@@shared.trustedParties">Trusted parties</p>
     </div>
-    <div class="row">
+    <div class="row no-wrap">
       <button
         aria-label="visibility private"
         mat-icon-button

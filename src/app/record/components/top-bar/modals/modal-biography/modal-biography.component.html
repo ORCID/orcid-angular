@@ -87,10 +87,17 @@
     <hr />
     <p class="orc-font-body-small">
       {{ ngOrcidDefaultVisibilityLabel }}
-      {{ defaultVisibility | visibilityStringLabel }}.
+      <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+      >.
     </p>
-    <div class="col no-wrap actions-wrapper no-gutters visibility">
-      <app-privacy-selector formControlName="visibility"></app-privacy-selector>
+    <div class="row visibility">
+      <div class="col no-wrap actions-wrapper no-gutters">
+        <app-privacy-selector
+          [alignment]="'start'"
+          formControlName="visibility"
+        >
+        </app-privacy-selector>
+      </div>
     </div>
   </form>
 </app-modal>

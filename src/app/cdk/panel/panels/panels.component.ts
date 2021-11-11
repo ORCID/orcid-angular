@@ -125,7 +125,7 @@ export class PanelsComponent implements OnInit {
             maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
           })
 
-          modalComponent.componentInstance.type = options.type
+          modalComponent.componentInstance.type = options?.type
         })
     }
   }

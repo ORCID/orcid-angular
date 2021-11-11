@@ -10,8 +10,14 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding-bottom: 40px;
-    padding-inline-start: 16px;
-    padding-inline-end: 12px;
+  }
+  [dir='ltr'] .content-wrapper {
+    padding-left: 16px;
+    padding-right: 12px;
+  }
+  [dir='rtl'] .content-wrapper {
+    padding-left: 12px;
+    padding-right: 16px;
   }
   .columns-4-or-8 .content-wrapper {
     padding-inline-end: 18px;

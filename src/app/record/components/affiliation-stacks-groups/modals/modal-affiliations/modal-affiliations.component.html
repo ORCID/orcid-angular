@@ -227,6 +227,12 @@
         >
           Please enter a organization
         </mat-error>
+        <mat-error
+          *ngIf="affiliationForm.get('organization').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -254,6 +260,12 @@
         >
           Please enter a city
         </mat-error>
+        <mat-error
+          *ngIf="affiliationForm.get('city').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -264,6 +276,12 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="region-input" matInput formControlName="region" />
+        <mat-error
+          *ngIf="affiliationForm.get('region').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -377,6 +395,12 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="department-input" matInput formControlName="department" />
+        <mat-error
+          *ngIf="affiliationForm.get('department').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -406,6 +430,12 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="title-input" matInput formControlName="title" />
+        <mat-error
+          *ngIf="affiliationForm.get('title').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <ng-container formGroupName="startDateGroup">
@@ -550,6 +580,7 @@
             </mat-select>
           </mat-form-field>
         </div>
+
         <mat-error
           class="mat-caption"
           i18n="@@shared.invalidDate"
@@ -557,13 +588,15 @@
         >
           Invalid date
         </mat-error>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.endDateError"
-          *ngIf="affiliationForm.errors?.invalidEndDate"
-        >
-          End date must come after start date
-        </mat-error>
+        <div class="row">
+          <mat-error
+            class="mat-caption"
+            i18n="@@shared.endDateError"
+            *ngIf="affiliationForm.errors?.invalidEndDate"
+          >
+            End date must come after start date
+          </mat-error>
+        </div>
       </div>
     </ng-container>
     <div class="row">
@@ -589,6 +622,12 @@
         >
           Invalid Link
         </mat-error>
+        <mat-error
+          *ngIf="affiliationForm.get('link').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_two_thousand"
+        >
+          Must be less than 2000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <form>
@@ -605,13 +644,16 @@
         </p>
       </div>
       <hr />
-      <p class="orc-font-body-small" i18n="@@shared.visibilityDescription">
-        Manage who can see this information in your record.
+      <p class="orc-font-body-small">
+        {{ ngOrcidDefaultVisibilityLabel }}
+        <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+        >.
       </p>
     </form>
     <div class="row">
       <div class="col no-wrap actions-wrapper no-gutters">
         <app-privacy-selector
+          [alignment]="'start'"
           formControlName="visibility"
         ></app-privacy-selector>
       </div>

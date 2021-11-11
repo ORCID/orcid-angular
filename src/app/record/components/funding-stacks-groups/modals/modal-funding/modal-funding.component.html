@@ -128,6 +128,12 @@
           matInput
           formControlName="fundingSubtype"
         />
+        <mat-error
+          *ngIf="fundingForm.get('fundingSubtype').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_two_hundred_fifty_five"
+        >
+          Must be less than 255 characters
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -160,6 +166,12 @@
             i18n="@@funding.projectTitleError"
           >
             Please enter a title
+          </mat-error>
+          <mat-error
+            *ngIf="fundingForm.get('fundingProjectTitle').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
           </mat-error>
         </mat-form-field>
       </div>
@@ -213,25 +225,37 @@
           </label>
         </div>
 
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <input
-            id="funding-project-translated-title-input"
-            matInput
-            formControlName="translatedTitleContent"
-          />
-        </mat-form-field>
-        <mat-error
-          class="mat-caption"
-          *ngIf="
-            fundingForm.hasError(
-              'invalidTranslatedTitleContent',
-              'translatedTitleGroup'
-            )
-          "
-          i18n="@@shared.translatedTitleError"
-        >
-          Please enter a translated title
-        </mat-error>
+        <div class="input-container">
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input
+              id="funding-project-translated-title-input"
+              matInput
+              formControlName="translatedTitleContent"
+            />
+          </mat-form-field>
+          <mat-error
+            class="mat-caption"
+            *ngIf="
+              fundingForm.hasError(
+                'invalidTranslatedTitleContent',
+                'translatedTitleGroup'
+              )
+            "
+            i18n="@@shared.translatedTitleError"
+          >
+            Please enter a translated title
+          </mat-error>
+          <mat-error
+            class="mat-caption"
+            *ngIf="
+              fundingForm.get('translatedTitleGroup.translatedTitleContent')
+                .errors?.maxlength
+            "
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </div>
       </div>
 
       <!-- Language of this title -->
@@ -252,7 +276,7 @@
             >
           </label>
         </div>
-        <div class="row language">
+        <div class="input-container language">
           <mat-form-field appearance="outline" class="mat-form-field-min">
             <mat-select
               id="language-title-input"
@@ -322,6 +346,12 @@
           >
             Invalid URL
           </mat-error>
+          <mat-error
+            *ngIf="fundingForm.get('fundingProjectLink').errors?.maxlength"
+            i18n="@@shared.maxLength.less_than_two_thousand"
+          >
+            Must be less than 2000 characters
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -346,6 +376,12 @@
           cdkAutosizeMaxRows="7"
         >
         </textarea>
+        <mat-error
+          *ngIf="fundingForm.get('description').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_five_thousand"
+        >
+          Must be less than 5000 characters
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -362,7 +398,7 @@
           <mat-form-field
             id="funding-amount-input"
             appearance="outline"
-            class="mat-form-field-min no-hint"
+            class="mat-form-field-min no-hint input-container"
           >
             <mat-select placeholder="-" formControlName="currencyCode">
               <mat-option
@@ -392,6 +428,15 @@
           i18n="@@funding.amountError"
         >
           Amount should be a numeric value with format 1,234,567.89
+        </mat-error>
+      </div>
+      <div class="row">
+        <mat-error
+          *ngIf="fundingForm.get('currencyCode').errors?.required"
+          i18n="@@funding.selectACurrencyCode"
+          class="mat-caption error-out-input-context"
+        >
+          Please select a currency
         </mat-error>
       </div>
     </div>
@@ -581,7 +626,7 @@
           <mat-option
             *ngFor="let option of filteredOptions | async"
             [value]="option.value"
-            (click)="fillForm(option)"
+            (onSelectionChange)="fillForm(option)"
           >
             <div class="row orc-font-body-small">
               {{ option.value }}
@@ -607,6 +652,12 @@
           i18n="@@funding.agencyNameError"
         >
           Please enter an agency name
+        </mat-error>
+        <mat-error
+          *ngIf="fundingForm.get('agencyName').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
         </mat-error>
       </mat-form-field>
     </div>
@@ -636,6 +687,12 @@
         >
           Please enter a city
         </mat-error>
+        <mat-error
+          *ngIf="fundingForm.get('city').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -646,6 +703,12 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="region-input" matInput formControlName="region" />
+        <mat-error
+          *ngIf="fundingForm.get('region').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
@@ -770,12 +833,15 @@
     <hr />
 
     <!-- Funding Visibility -->
-    <p class="orc-font-body-small" i18n="@@funding.whoCanSeeFunding">
-      Who can see your funding. The default visibility setting is Private.
+    <p class="orc-font-body-small">
+      {{ ngOrcidDefaultVisibilityLabel }}
+      <strong>{{ defaultVisibility | visibilityStringLabel }}</strong
+      >.
     </p>
     <div class="row">
       <div class="col no-wrap actions-wrapper no-gutters">
         <app-privacy-selector
+          [alignment]="'start'"
           formControlName="visibility"
         ></app-privacy-selector>
       </div>

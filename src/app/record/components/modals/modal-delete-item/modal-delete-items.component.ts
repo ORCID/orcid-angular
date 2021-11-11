@@ -79,7 +79,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    if (this.item && this.items.length === 0) {
+    if (this.item && this.items?.length === 0) {
       this.items.push(this.item)
       this.items.forEach((i) => {
         group[i?.putCode?.value || i.putCode] = new FormGroup({
@@ -200,14 +200,9 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   }
 
   updateCheckAll() {
+    this.selectedItems = []
     this.putCodes.forEach((value) => {
-      if (this.selectedItems.includes(value)) {
-        if (!!this.selectAll === false) {
-          this.selectedItems = this.selectedItems.filter(
-            (putCode) => putCode !== value
-          )
-        }
-      } else {
+      if (this.selectAll) {
         this.selectedItems.push(value)
       }
       this.deleteForm.patchValue({
@@ -221,11 +216,9 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
   updateCheck(putCode: string) {
     if (this.selectedItems.includes(putCode)) {
-      if (!!this.selectAll === false) {
-        this.selectedItems = this.selectedItems.filter(
-          (value) => value !== putCode
-        )
-      }
+      this.selectedItems = this.selectedItems.filter(
+        (value) => value !== putCode
+      )
     } else {
       this.selectedItems.push(putCode)
     }

@@ -35,7 +35,7 @@
         class="underline"
         rel="noopener noreferrer"
         target="_blank"
-        href="https://support.orcid.org/hc/articles/360006971333"
+        href="https://support.orcid.org/hc/en-us/articles/360006971453"
         i18n="@@works.findOut"
       >
         Find out more on exporting BibTeX files
@@ -92,7 +92,7 @@
       <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
       <b>{{ maxNumberOfWorksToDisplay }}</b>
       <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
-      <b>{{ totalWorks || putCodes?.length }}</b>
+      <b>{{ selectedAll ? totalWorks : putCodes?.length }}</b>
       <ng-container i18n="@@works.worksToExport">works to export</ng-container>
     </p>
     <div

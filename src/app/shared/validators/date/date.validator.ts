@@ -17,7 +17,7 @@ export function dateValidator(dateType: string) {
     }
 
     if (year && month && !day) {
-      date = new Date(year + '/' + month)
+      date = new Date(year + '-' + (month < 10 ? '0' + month : month))
     }
 
     if (year && month && day) {
@@ -58,11 +58,11 @@ export function dateMonthYearValidator(dateType: string) {
     }
 
     if (year && month) {
-      date = new Date(year + '/' + month)
+      date = new Date(year + '-' + month)
     }
 
     if (year && month) {
-      date = new Date(year + '/' + month)
+      date = new Date(year + '-' + month)
     }
 
     if (date && !isNaN(date.getTime())) {

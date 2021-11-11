@@ -36,13 +36,17 @@ import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
-import { ExternalIdentifier } from '../../../../types/common.endpoint'
+import {
+  ExternalIdentifier,
+  VisibilityStrings,
+} from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
 import { translatedTitleValidator } from 'src/app/shared/validators/translated-title/translated-title.validator'
 import { MatSelectChange } from '@angular/material/select'
 import { merge, Subject } from 'rxjs'
+import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
   selector: 'app-work-form',
@@ -81,6 +85,7 @@ export class WorkFormComponent implements OnInit {
 
   MAX_LENGTH_TITLE = 999
   MAX_LENGTH_DESCRIPTION = 4999
+  MAX_LENGTH_URL = 1999
 
   citationTypes = CitationTypes
 
@@ -95,6 +100,8 @@ export class WorkFormComponent implements OnInit {
   ngOrcidDay = $localize`:@@shared.day:Day`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
   ngOrcidSelectACountry = $localize`:@@shared.selectACountry:Select a country`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
+  defaultVisibility: VisibilityStrings
 
   workTypes:
     | typeof WorkConferenceTypes
@@ -111,6 +118,7 @@ export class WorkFormComponent implements OnInit {
     private _dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
     private _snackBar: SnackbarService,
+    private _record: RecordService,
 
     @Inject(WINDOW) private _window: Window,
     @Inject(MAT_DIALOG_DATA) public data: UserRecord
@@ -129,6 +137,11 @@ export class WorkFormComponent implements OnInit {
     })
 
     this.loadWorkForm(this.work)
+
+    //
+    this._record.getPreferences().subscribe((userRecord) => {
+      this.defaultVisibility = userRecord.default_visibility
+    })
     this.observeFormChanges()
 
     this._workService.loadWorkIdTypes().subscribe((value) => {
@@ -205,7 +218,13 @@ export class WorkFormComponent implements OnInit {
         },
         { validator: dateValidator('publication') }
       ),
-      url: [currentWork?.url?.value || '', [Validators.pattern(URL_REGEXP)]],
+      url: [
+        currentWork?.url?.value || '',
+        [
+          Validators.pattern(URL_REGEXP),
+          Validators.maxLength(this.MAX_LENGTH_URL),
+        ],
+      ],
       citationGroup: this._fb.group(
         {
           citationType: [currentWork?.citation?.citationType.value || '', []],

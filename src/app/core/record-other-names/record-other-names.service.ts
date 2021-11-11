@@ -47,6 +47,8 @@ export class RecordOtherNamesService {
       this.$otherNames = new ReplaySubject<OtherNamesEndPoint>(1)
     } else if (!options.forceReload) {
       return this.$otherNames
+    } else if (options.cleanCacheIfExist && this.$otherNames) {
+      this.$otherNames.next(<OtherNamesEndPoint>undefined)
     }
 
     this._http

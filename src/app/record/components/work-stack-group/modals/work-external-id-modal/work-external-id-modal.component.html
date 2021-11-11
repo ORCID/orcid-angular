@@ -1,4 +1,4 @@
-<app-modal [loading]="loading" [noSidebar]="true">
+<app-modal [loading]="loading" [noSidebar]="!(work && !loading)">
   <app-modal-header>
     <ng-container
       i18n="@@works.addFromDOI"
@@ -13,16 +13,46 @@
       Works - Add work from PubMed
     </ng-container>
   </app-modal-header>
-  <app-modal-footer>
+  <app-modal-side-bar *ngIf="work && !loading">
+    <ng-container id="side-bar-title">
+      <a class="side-bar" i18n="@@works.workDetails" (click)="toWorkDetails()">
+        Work Details
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-1">
+      <a class="side-bar" i18n="@@works.identifiers" (click)="toIdentifiers()">
+        Identifiers
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-2">
+      <a class="side-bar" i18n="@@works.citation" (click)="toCitation()">
+        Citation
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-3">
+      <a
+        class="side-bar"
+        i18n="@@works.otherInformation"
+        (click)="toOtherInformation()"
+      >
+        Other information
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-4">
+      <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
+        Visibility
+      </a>
+    </ng-container>
+  </app-modal-side-bar>
+  <app-modal-footer *ngIf="work">
     <button
-      *ngIf="work"
       mat-raised-button
       color="primary"
       (click)="workFormComponent.saveEvent()"
-      i18n="@@shared.saveChanges"
+      i18n="@@works.addWorkToOrcid"
       id="save-work-button"
     >
-      Save changes
+      Add this work to your ORCID record
     </button>
     <button
       mat-stroked-button
@@ -72,16 +102,39 @@
       </label>
     </div>
     <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
-        <input id="external-id-input" matInput formControlName="externalId" />
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+        [ngClass]="{ 'two-line-hint': metadataNotFound }"
+      >
+        <input
+          id="external-id-input"
+          #externalIdRef
+          matInput
+          formControlName="externalId"
+        />
+        <mat-error
+          *ngIf="
+            type === EXTERNAL_ID_TYPE_WORK.doi &&
+            externalIdentifierForm?.get('externalId')?.errors?.pattern
+          "
+          i18n="@@works.validFormat"
+        >
+          Invalid id for the selected identifier type
+        </mat-error>
         <mat-error *ngIf="metadataNotFound" i18n="@@works.unableToImport">
           Unable to import using this identifier. Please add work using a
           different option.
         </mat-error>
       </mat-form-field>
     </div>
-    <div class="col l4 retrieve-work">
-      <button mat-raised-button color="primary" (click)="retrieveWork()">
+    <div class="retrieve-work">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="retrieveWork()"
+        [disabled]="loading"
+      >
         <ng-container
           i18n="@@works.retrieveWorkDOI"
           *ngIf="type === EXTERNAL_ID_TYPE_WORK.doi"

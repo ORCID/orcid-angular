@@ -35,12 +35,14 @@
         class="underline"
         href="https://support.orcid.org/hc/en-us/articles/360006894794-Importing-works-from-a-BibTeX-file"
         i18n="@@works.moreInformation"
+        rel="noopener noreferrer"
+        target="_blank"
       >
         More information on importing BibTeX files into ORCID
       </a>
     </div>
   </div>
-  <div class="col l4 choose-bibtex" *ngIf="worksFromBibtex.length === 0">
+  <div class="col l6 choose-bibtex" *ngIf="worksFromBibtex.length === 0">
     <input
       #bibTexInput
       [hidden]="true"
@@ -57,9 +59,26 @@
     >
       Choose BibTeX file to import
     </button>
-    <mat-error *ngIf="bibtexParsingError">
-      {{ bibtexParsingErrorText }}
+  </div>
+  <div
+    class="row bibtex-error"
+    *ngIf="bibtexErrorParsing || bibtexErrorNoEntries"
+  >
+    <mat-error class="mat-caption">
+      <ng-container
+        i18n="@@works.bibtexImporterParsingError"
+        *ngIf="bibtexErrorParsing"
+      >
+        This file cannot be read. Please check the BibTeX formatting and try
+        again.
+      </ng-container>
+      <ng-container i18n="@@works.noBibtexEntries" *ngIf="bibtexErrorNoEntries">
+        Error parsing Bibtex. No Bibtex entries found in file
+      </ng-container>
     </mat-error>
+  </div>
+  <div class="row bibtex-error" *ngIf="bibtexErrorParsing">
+    <code>{{ bibtexErrorParsingText }}</code>
   </div>
   <ng-container *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
     <div class="row">
@@ -101,16 +120,25 @@
                 (change)="updateCheck(work)"
                 formControlName="checked"
               >
-                <h2 class="orc-font-body">
+                <h2 class="orc-font-body" *ngIf="work?.title?.value">
                   {{ work?.title?.value }}
                 </h2>
                 <p class="orc-font-body-small">
-                  {{ work.journalTitle.value }}
+                  {{ work?.journalTitle?.value }}
                 </p>
                 <p class="orc-font-body-small">
-                  {{ work.publicationDate | monthDayYearDateToString }}
-                  <span> | </span>
-                  {{ work.workType.value }}
+                  {{ work?.publicationDate | monthDayYearDateToString }}
+                  <span *ngIf="work.publicationDate"> | </span>
+                  {{ work?.workType?.value }}
+                </p>
+                <app-display-external-ids
+                  [externalIdentifiers]="work?.workExternalIdentifiers"
+                ></app-display-external-ids>
+                <p class="orc-font-body-small" *ngIf="work?.url">
+                  <span class="prefixTitle" i18n="@@works.urlColon">URL:</span>
+                  <a href="{{ work?.url?.value }}" target="_blank">
+                    {{ work?.url?.value }}</a
+                  >
                 </p>
               </mat-checkbox>
             </div>

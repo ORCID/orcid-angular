@@ -15,6 +15,31 @@
     <app-display-external-ids
       [externalIdentifiers]="work.workExternalIdentifiers"
     ></app-display-external-ids>
+    <div
+      class="general-data"
+      *ngIf="togglzWorksContributors && work?.contributors?.length > 0"
+    >
+      <span i18n="#upperCase@@works.contributors"> CONTRIBUTORS </span>:
+      <ng-container
+        *ngFor="
+          let contributor of work.contributors;
+          let index = index;
+          let last = last
+        "
+      >
+        <ng-container
+          *ngIf="contributor.creditName && index < maxNumberContributors"
+          >{{
+            contributor.creditName.value +
+              (!last && index !== maxNumberContributors - 1 ? ',' : '')
+          }}</ng-container
+        >
+      </ng-container>
+      <ng-container *ngIf="work.contributors.length > maxNumberContributors">
+        + {{ work.contributors.length - maxNumberContributors }}
+        <span i18n="@@works.more">more</span>
+      </ng-container>
+    </div>
   </div>
 
   <div align-end>
@@ -44,9 +69,8 @@
       <span class="translated-title-label orc-font-body-small">
         <ng-container i18n="@@works.translatedTitle"
           >Translated title</ng-container
-        > </span
-      >&nbsp;
-      <ng-container *ngIf="work.translatedTitle?.languageName">
+        >&nbsp;</span
+      ><ng-container *ngIf="work.translatedTitle?.languageName">
         ({{ work.translatedTitle.languageName }})
       </ng-container>
     </div>

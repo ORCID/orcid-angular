@@ -40,6 +40,10 @@ export class RecordWebsitesService {
       return this.$websites
     }
 
+    if (options.cleanCacheIfExist && this.$websites) {
+      this.$websites.next(<WebsitesEndPoint>undefined)
+    }
+
     this._http
       .get<WebsitesEndPoint>(
         environment.API_WEB + `my-orcid/websitesForms.json`,

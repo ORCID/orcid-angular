@@ -21,14 +21,18 @@ export class OpenGraphService {
 
   constructor(private meta: Meta, private _titleService: Title) {}
 
-  addOpenGraphData(record: UserRecord): HTMLMetaElement[] {
+  addOpenGraphData(
+    record: UserRecord,
+    options?: { force?: boolean }
+  ): HTMLMetaElement[] {
     if (
       record.userInfo &&
       record.names !== undefined &&
-      !this.openGraphDataSet &&
       record.userInfo !== undefined &&
-      !record.userInfo.RECORD_WITH_ISSUES
+      !record.userInfo.RECORD_WITH_ISSUES &&
+      (!this.openGraphDataSet || options.force)
     ) {
+      this.removeOpenGraphData()
       this.openGraphDataSet = true
       try {
         const { displayedNameWithId, displayedName } = this.getDisplayNames(

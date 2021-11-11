@@ -1,9 +1,10 @@
 .choose-bibtex {
   padding: 0;
   margin-top: 16px;
+  margin-bottom: 6px;
 
   button {
-    width: 100%;
+    min-width: 237px;
   }
 }
 
@@ -16,6 +17,9 @@
     word-break: break-word;
 
     h2 {
+      width: 48em;
+      overflow: hidden;
+      text-overflow: ellipsis;
       margin-bottom: 0;
     }
 
@@ -45,5 +49,14 @@
 
   mat-icon {
     margin-inline-end: 4px;
+  }
+}
+
+.bibtex-error {
+  margin: 6px 2px;
+
+  code {
+    border-radius: 3px;
+    padding: 6px;
   }
 }

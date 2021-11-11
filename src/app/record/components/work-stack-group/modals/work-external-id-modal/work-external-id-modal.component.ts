@@ -1,4 +1,12 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core'
 import { Subject } from 'rxjs'
 import { RecordImportWizard } from '../../../../../types/record-peer-review-import.endpoint'
 import { MatDialogRef } from '@angular/material/dialog'
@@ -9,6 +17,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { EXTERNAL_ID_TYPE_WORK, URL_REGEXP } from '../../../../../constants'
 import { Work } from '../../../../../types/record-works.endpoint'
 import { WorkFormComponent } from '../../../work-form/work-form/work-form.component'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-work-doi-modal',
@@ -19,6 +28,7 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent
+  @ViewChild('externalIdRef') externalIdElement: ElementRef
 
   @Input() type: EXTERNAL_ID_TYPE_WORK
   EXTERNAL_ID_TYPE_WORK = EXTERNAL_ID_TYPE_WORK
@@ -28,20 +38,28 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
   recordImportWizards: RecordImportWizard[]
   externalIdentifierForm: FormGroup
   work: Work
-  metadataNotFound = true
+  metadataNotFound = false
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private _formBuilder: FormBuilder,
-    private _recordWorksService: RecordWorksService
+    private _recordWorksService: RecordWorksService,
+    @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {
     this.externalIdentifierForm = this._formBuilder.group({
-      externalId: new FormControl('', {
-        validators: [Validators.pattern(URL_REGEXP)],
-      }),
+      externalId: new FormControl(''),
     })
+    if (this.type === EXTERNAL_ID_TYPE_WORK.doi) {
+      this.externalIdentifierForm.controls.externalId.setValidators([
+        Validators.pattern(URL_REGEXP),
+      ])
+    }
+  }
+
+  ngAfterViewInit() {
+    this.externalIdElement.nativeElement.focus()
   }
 
   retrieveWork() {
@@ -55,6 +73,9 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
         .pipe(first())
         .subscribe((work) => {
           if (!work) {
+            this.externalIdentifierForm
+              .get('externalId')
+              .setErrors({ metadataNotFound: true })
             this.metadataNotFound = true
           } else {
             this.work = work
@@ -71,5 +92,22 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+  toWorkDetails() {
+    this._window.document.getElementById('workDetails').scrollIntoView()
+  }
+
+  toIdentifiers() {
+    this._window.document.getElementById('identifiers').scrollIntoView()
+  }
+
+  toCitation() {
+    this._window.document.getElementById('citation').scrollIntoView()
+  }
+  toOtherInformation() {
+    this._window.document.getElementById('otherInformation').scrollIntoView()
+  }
+  toVisibility() {
+    this._window.document.getElementById('visibility').scrollIntoView()
   }
 }

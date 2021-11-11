@@ -19,7 +19,11 @@ import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
 import { first, map, switchMap, tap } from 'rxjs/operators'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
-import { URL_REGEXP } from '../../../../../constants'
+import {
+  MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
+  URL_REGEXP,
+} from '../../../../../constants'
 import {
   dateValidator,
   endDateValidator,
@@ -81,6 +85,8 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
+
   selectedOrganizationFromDatabase: Organization
   requireOrganizationDisambiguatedDataOnRefresh = false
   displayOrganizationHint: boolean
@@ -103,20 +109,33 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initialValues()
+
     this.affiliationForm = this._formBuilder.group(
       {
         organization: new FormControl(this.organization, {
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
         }),
         city: new FormControl(this.city, {
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
         }),
-        region: new FormControl(this.region, {}),
+        region: new FormControl(this.region, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
         country: new FormControl('', {
           validators: [Validators.required],
         }),
-        department: new FormControl(this.department, {}),
-        title: new FormControl(this.title, {}),
+        department: new FormControl(this.department, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
+        title: new FormControl(this.title, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
         startDateGroup: this._formBuilder.group(
           {
             startDateDay: ['', []],
@@ -134,7 +153,10 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
           { validator: dateValidator('endDate') }
         ),
         link: new FormControl(this.link, {
-          validators: [Validators.pattern(URL_REGEXP)],
+          validators: [
+            Validators.pattern(URL_REGEXP),
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
+          ],
         }),
         visibility: new FormControl(this.defaultVisibility, {
           validators: [Validators.required],
@@ -144,6 +166,19 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         validator: endDateValidator(),
       }
     )
+
+    this._record
+      .getPreferences()
+      .pipe(first())
+      .subscribe((userPreferences) => {
+        this.defaultVisibility = userPreferences.default_visibility
+        this.loadingAffiliations = false
+        this.affiliationForm.patchValue({
+          visibility: this.affiliation?.visibility?.visibility
+            ? this.affiliation.visibility.visibility
+            : this.defaultVisibility,
+        })
+      })
 
     this.filteredOptions = this.affiliationForm
       .get('organization')
@@ -192,9 +227,15 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       if (this.affiliation.endDate.year) {
         this.affiliationForm.patchValue({
           endDateGroup: {
-            endDateYear: Number(this.affiliation.endDate.year),
-            endDateMonth: Number(this.affiliation.endDate.month),
-            endDateDay: Number(this.affiliation.endDate.day),
+            endDateYear: this.affiliation.endDate.year
+              ? Number(this.affiliation.endDate.year)
+              : '',
+            endDateMonth: this.affiliation.endDate.month
+              ? Number(this.affiliation.endDate.month)
+              : '',
+            endDateDay: this.affiliation.endDate.day
+              ? Number(this.affiliation.endDate.day)
+              : '',
           },
         })
       }
@@ -202,9 +243,15 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       if (this.affiliation.startDate.year) {
         this.affiliationForm.patchValue({
           startDateGroup: {
-            startDateYear: Number(this.affiliation.startDate.year),
-            startDateMonth: Number(this.affiliation.startDate.month),
-            startDateDay: Number(this.affiliation.startDate.day),
+            startDateYear: this.affiliation.startDate.year
+              ? Number(this.affiliation.startDate.year)
+              : '',
+            startDateMonth: this.affiliation.startDate.month
+              ? Number(this.affiliation.startDate.month)
+              : '',
+            startDateDay: this.affiliation.startDate.day
+              ? Number(this.affiliation.startDate.day)
+              : '',
           },
         })
       }
@@ -245,16 +292,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
     if (!this.affiliation?.putCode) {
       // Update the visibility with the default value
-      this._record
-        .getPreferences()
-        .pipe(first())
-        .subscribe((userPreferences) => {
-          this.defaultVisibility = userPreferences.default_visibility
-          this.affiliationForm.patchValue({
-            visibility: this.defaultVisibility,
-          })
-          this.loadingAffiliations = false
-        })
+      this.affiliationForm.patchValue({
+        visibility: this.defaultVisibility,
+      })
     } else {
       this.loadingAffiliations = false
     }

@@ -20,7 +20,7 @@ import { UserInfo } from '../../../types'
   ],
 })
 export class MyOrcidComponent implements OnInit, OnDestroy {
-  $destroy: Subject<boolean> = new Subject<boolean>()
+  private readonly $destroy = new Subject()
 
   platform: PlatformInfo
   publicOrcid: string
@@ -87,6 +87,18 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       .getRecord({
         publicRecordId: this.publicOrcid || undefined,
         forceReload: true,
+        /// TODO
+        // cleaning the cache is only require when the user login or register *** (To make sure not previous session is displayed)
+        // This means that we can later figure out a way  to NOT CLEAN cache when the user is navigating between the app router features.
+        // In that way we KEEP THE forceReload (meaning that any update is loaded as done right now)
+        // but also the cache is used to pain the my-orcid page super fast (With cache data)
+        //
+        // This could be archive using a local-storage parameter or a query parameter,
+        // to know if the user just login or registered and the cache must be clean.
+        //
+        // at the moment the cache will always bee cleaned,
+        // as a quick solution to not show cache data when a user logouts/login with different accounts.
+        cleanCacheIfExist: true,
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
@@ -95,14 +107,15 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
         this.userRecord = userRecord
-        if (!this.publicOrcid) {
+
+        if (!this.publicOrcid && userRecord?.userInfo) {
           this.setMyOrcidIdQueryParameter()
         }
 
         if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
           this._robotsMeta.disallowRobots()
         }
-        this._openGraph.addOpenGraphData(userRecord)
+        this._openGraph.addOpenGraphData(userRecord, { force: true })
       })
   }
 
@@ -111,11 +124,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       this.initMyOrcidParameter = true
 
       if (!this.platform.queryParameters.hasOwnProperty('justRegistered')) {
-        this._router.navigate(['/qa/my-orcid'], {
+        this._router.navigate(['/my-orcid'], {
           queryParams: { orcid: this.userInfo.EFFECTIVE_USER_ORCID },
         })
       } else {
-        this._router.navigate(['/qa/my-orcid'], {
+        this._router.navigate(['/my-orcid'], {
           queryParams: {
             orcid: this.userInfo.EFFECTIVE_USER_ORCID,
             justRegistered: '',
@@ -127,9 +140,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.publicOrcid) {
-      this._openGraph.removeOpenGraphData()
       this._robotsMeta.restoreEnvironmentRobotsConfig()
     }
+    this._openGraph.removeOpenGraphData()
+    this.$destroy.next(true)
+    this.$destroy.complete()
   }
 
   switchPanelsState() {

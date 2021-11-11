@@ -132,7 +132,7 @@ export class WorkStackGroupComponent implements OnInit {
       .getRecord({ publicRecordId: this.isPublicRecord })
       .subscribe((userRecord) => {
         this.userRecord = userRecord
-        if (!isEmpty(userRecord.works)) {
+        if (!isEmpty(userRecord?.works)) {
           this.paginationLoading = false
           this.workGroup = userRecord.works
           this.total.emit(userRecord.works?.groups?.length)
@@ -222,13 +222,9 @@ export class WorkStackGroupComponent implements OnInit {
   }
 
   openModal(modal: ComponentType<any>, putCodes, selectedAll?: boolean) {
+    this.checked({ checked: false, source: undefined })
     this.selectedWorks = []
     this.selectAll = false
-    this.appWorkStacks.forEach((appWorkStack) => {
-      appWorkStack.panelsComponent.forEach((panelComponent) => {
-        panelComponent.selected = false
-      })
-    })
     this._platform
       .get()
       .pipe(first())

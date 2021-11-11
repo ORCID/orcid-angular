@@ -29,6 +29,8 @@ export interface SideBarPublicUserRecord {
 
 export interface UserRecord {
   // person: Person
+  // TODO remove subscriptionCount only use to debug on QA the subscription management
+  subscriptionCount: number
   emails: EmailsEndpoint
   otherNames: OtherNamesEndPoint
   countries: CountriesEndpoint
@@ -55,6 +57,8 @@ export interface UserRecordOptions {
   sort?: SortOrderType
   offset?: number
   pageSize?: number
+  cleanUp?: boolean
+  cleanCacheIfExist?: boolean
 }
 
 export interface MainPanelsState {

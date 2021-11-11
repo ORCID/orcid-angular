@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -8,19 +8,24 @@ import { first } from 'rxjs/operators'
 import { FormControl, FormGroup } from '@angular/forms'
 import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-work-doi-bibtex-modal',
   templateUrl: './work-bibtex-modal.component.html',
-  styleUrls: ['./work-bibtex-modal.component.scss'],
+  styleUrls: [
+    './work-bibtex-modal.component.scss',
+    './work-bibtex-modal.component.scss-theme.scss',
+  ],
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   importForm: FormGroup
   loadingWorks = false
-  bibtexParsingErrorText = ''
-  bibtexParsingError = false
+  bibtexErrorParsingText = ''
+  bibtexErrorParsing = false
+  bibtexErrorNoEntries = false
   worksFromBibtex: Work[] = []
   selectedWorks: Work[] = []
   selectAll: false
@@ -29,12 +34,15 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private _recordWorksService: RecordWorksService
+    private _recordWorksService: RecordWorksService,
+    @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {}
 
   bibTexInputChange($fileInputEvent: any) {
+    this.bibtexErrorParsingText = undefined
+    this.bibtexErrorParsing = false
     this.loadingWorks = true
     const textFiles = $fileInputEvent.target.files
     for (const bibtex of textFiles) {
@@ -44,42 +52,57 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       const that = this
 
       reader.onloadend = function (e) {
-        const parsed = bibtexParse.toJSON(reader.result)
-        if (
-          typeof parsed === 'string' &&
-          parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
-        ) {
-          that.bibtexParsingErrorText = parsed
-          that.bibtexParsingError = true
-        } else {
-          const newWorks = []
-          while (parsed.length > 0) {
-            const cur = parsed.shift()
-            const bibtexEntry = cur.entryType.toLowerCase()
-            if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
-              // Filtering @PREAMBLE and @COMMENT
-              newWorks.push(that.populateWork(cur))
+        let parsed = null
+        try {
+          parsed = bibtexParse.toJSON(reader.result)
+          if (
+            typeof parsed === 'string' &&
+            parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
+          ) {
+            that.bibtexErrorParsingText = parsed
+            that.bibtexErrorParsing = true
+            that.loadingWorks = false
+          } else {
+            if (parsed) {
+              const newWorks = []
+              if (parsed.length === 0) {
+                that.bibtexErrorNoEntries = true
+                that.loadingWorks = false
+              }
+              while (parsed.length > 0) {
+                const cur = parsed.shift()
+                const bibtexEntry = cur.entryType.toLowerCase()
+                if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
+                  newWorks.push(that.populateWork(cur))
+                }
+              }
+              if (newWorks.length > 0) {
+                that._recordWorksService
+                  .worksValidate(newWorks)
+                  .pipe(first())
+                  .subscribe((data) => {
+                    data.forEach((work) => {
+                      that.worksFromBibtex.push(work)
+                    })
+                    that.worksFromBibtex.forEach((w) => {
+                      const newPutCode = 'new-' + that.addedWorkCount++
+                      w.putCode = {
+                        value: newPutCode,
+                      }
+                      that.group[newPutCode] = new FormGroup({
+                        checked: new FormControl(false),
+                      })
+                    })
+                    that.importForm = new FormGroup(that.group)
+                    that.loadingWorks = false
+                  })
+              }
             }
           }
-          that._recordWorksService
-            .worksValidate(newWorks)
-            .pipe(first())
-            .subscribe((data) => {
-              data.forEach((work) => {
-                that.worksFromBibtex.push(work)
-              })
-              that.worksFromBibtex.forEach((w) => {
-                const newPutCode = 'new-' + that.addedWorkCount++
-                w.putCode = {
-                  value: newPutCode,
-                }
-                that.group[newPutCode] = new FormGroup({
-                  checked: new FormControl(false),
-                })
-              })
-              that.importForm = new FormGroup(that.group)
-              that.loadingWorks = false
-            })
+        } catch (e) {
+          that.bibtexErrorParsingText = e
+          that.bibtexErrorParsing = true
+          that.loadingWorks = false
         }
       }
     }
@@ -190,14 +213,24 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (lowerKeyTags.hasOwnProperty('month')) {
-        let month = lowerKeyTags['month'].trim()
-        if (bibMonths.indexOf(month.trim().substring(0, 3)) >= 0) {
-          month = bibMonths.indexOf(month.trim().substring(0, 3)) + 1
-        }
-        if (!isNaN(month) && month > 0 && month <= 12) {
-          work.publicationDate = {
-            month: this.pad(month, 2),
+      // only set month if year provided
+      if (
+        lowerKeyTags.hasOwnProperty('month') &&
+        lowerKeyTags.hasOwnProperty('year')
+      ) {
+        if (
+          !isNaN(lowerKeyTags['year']) &&
+          lowerKeyTags['year'].trim() !== ''
+        ) {
+          let month = lowerKeyTags['month'].trim()
+          if (bibMonths.indexOf(month.trim().substring(0, 3)) >= 0) {
+            month = bibMonths.indexOf(month.trim().substring(0, 3)) + 1
+          }
+          if (!isNaN(month) && month > 0 && month <= 12) {
+            work.publicationDate = {
+              year: lowerKeyTags['year'].trim(),
+              month: this.pad(month, 2),
+            }
           }
         }
       }
@@ -241,8 +274,12 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         value: relationship,
       },
     }
-
-    if (work.workExternalIdentifiers[0].externalIdentifierId.value == null) {
+    if (work.workExternalIdentifiers === undefined) {
+      work.workExternalIdentifiers = []
+      work.workExternalIdentifiers[0] = ident
+    } else if (
+      work.workExternalIdentifiers[0]?.externalIdentifierId?.value == null
+    ) {
       work.workExternalIdentifiers[0] = ident
       // Only adds the url if there is no other identifier
     } else if (idType !== 'uri') {
@@ -298,12 +335,15 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     if (this.selectedWorks.length > 0) {
       this.selectedWorks.forEach((work, index) => {
         work.putCode = null
-        this._recordWorksService.save(work).subscribe(() => {
-          if (index === this.selectedWorks.length - 1) {
-            this.loadingWorks = false
-            this.closeEvent()
-          }
-        })
+        this._recordWorksService
+          .save(work, index === this.selectedWorks.length - 1)
+          .subscribe(() => {
+            if (index === this.selectedWorks.length - 1) {
+              this.loadingWorks = false
+              this.worksFromBibtex = []
+              this.closeEvent()
+            }
+          })
       })
     }
   }
