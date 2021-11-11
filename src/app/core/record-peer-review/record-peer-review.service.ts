@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
-import { retry, catchError, switchMap, tap } from 'rxjs/operators'
+import { retry, catchError, tap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { cloneDeep } from 'lodash'
 
@@ -27,7 +27,7 @@ export class RecordPeerReviewService {
   ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
-    if (options.publicRecordId) {
+    if (options?.publicRecordId) {
       this._http
         .get<PeerReview[]>(
           environment.API_WEB +
@@ -38,14 +38,14 @@ export class RecordPeerReviewService {
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
-          catchError((error) => of([])),
+          catchError(() => of([])),
           tap((data) => {
             this.lastEmittedValue = data
             this.$peer.next(data)
-          }),
-          switchMap((data) => this.$peer.asObservable())
+          })
         )
         .subscribe()
+      return this.$peer.asObservable()
     } else {
       if (!this.$peer) {
         this.$peer = new ReplaySubject(1)

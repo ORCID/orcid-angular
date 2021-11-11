@@ -66,7 +66,7 @@ export class AffiliationStacksGroupsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        if (!isEmpty(userRecord.affiliations)) {
+        if (!isEmpty(userRecord?.affiliations)) {
           this.userRecord = userRecord
           this.profileAffiliationUiGroups = this.userRecord.affiliations
           this.affiliationsCount =

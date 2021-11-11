@@ -91,14 +91,14 @@ export class TopBarComponent implements OnInit, OnDestroy {
                 const primaryEmail = record.emails.emails.filter(
                   (email) => email.primary
                 )[0]
-                if (!primaryEmail.verified) {
+                if (!primaryEmail?.verified) {
                   this.resendVerificationEmailModal(primaryEmail.value)
                 }
               }
             }
           }
         }),
-        takeWhile((record) => !record.userInfo || !record.emails)
+        takeWhile((record) => !record?.userInfo || !record.emails)
       )
       .subscribe()
   }

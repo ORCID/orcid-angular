@@ -113,7 +113,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        if (userRecord.peerReviews !== undefined) {
+        if (userRecord?.peerReviews !== undefined) {
           this.loading = false
         }
         if (!isEmpty(userRecord?.peerReviews)) {
