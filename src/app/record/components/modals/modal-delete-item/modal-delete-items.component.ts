@@ -98,9 +98,12 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
             this.items.push(work)
             if (index === this.putCodes.length - 1) {
               this.items.forEach((w) => {
-                this.deleteForm.addControl(w.putCode.value, new FormGroup({
-                  checked: new FormControl(false),
-                }))
+                this.deleteForm.addControl(
+                  w.putCode.value,
+                  new FormGroup({
+                    checked: new FormControl(false),
+                  })
+                )
               })
               this.loadingItems = false
             }
