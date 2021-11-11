@@ -26,6 +26,7 @@ button {
 .privacy-selector {
   position: absolute;
   width: 152px;
+  height: auto;
   bottom: 110%;
   left: 50%;
   margin-left: -90px;
@@ -37,6 +38,10 @@ button {
   border: solid 1px;
   border-radius: 4px;
   transition: all 500ms ease-in-out;
+
+  div {
+    align-items: center;
+  }
 
   p {
     margin: 8px 8px 12px 8px;
