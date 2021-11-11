@@ -71,9 +71,12 @@ export function dateMonthYearValidator(dateType: string) {
 
 export function endDateMonthYearValidator() {
   return (c: AbstractControl): { [key: string]: any } | null => {
-
-    const endDateExistingErrors = Object.keys(c.get('endDateGroup').errors || {})
-    const startDateExistingErrors = Object.keys(c.get('startDateGroup').errors|| {})
+    const endDateExistingErrors = Object.keys(
+      c.get('endDateGroup').errors || {}
+    )
+    const startDateExistingErrors = Object.keys(
+      c.get('startDateGroup').errors || {}
+    )
     if (endDateExistingErrors.length || startDateExistingErrors.length) {
       // both date has to be valid to validate end date congruence
       return null
@@ -116,9 +119,12 @@ export function endDateMonthYearValidator() {
 
 export function endDateValidator() {
   return (c: AbstractControl): { [key: string]: any } | null => {
-
-    const endDateExistingErrors = Object.keys(c.get('endDateGroup').errors || {})
-    const startDateExistingErrors = Object.keys(c.get('startDateGroup').errors || {})
+    const endDateExistingErrors = Object.keys(
+      c.get('endDateGroup').errors || {}
+    )
+    const startDateExistingErrors = Object.keys(
+      c.get('startDateGroup').errors || {}
+    )
     if (endDateExistingErrors.length || startDateExistingErrors.length) {
       // both date has to be valid to validate end date congruence
       return null
