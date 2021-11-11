@@ -4,6 +4,7 @@ import { PlatformInfoService } from '../../../cdk/platform-info'
 import { Subject } from 'rxjs'
 import { MatDialog } from '@angular/material/dialog'
 import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
+import { RecordService } from '../../../core/record/record.service'
 
 @Component({
   selector: 'app-top-bar-verification-email',
@@ -27,6 +28,7 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
+    private _record: RecordService,
     private _recordEmails: RecordEmailsService,
     private _recordEmailsService: RecordEmailsService
   ) {
@@ -39,13 +41,13 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._recordEmails
-      .getEmails()
-      .pipe(first())
-      .subscribe((emails) => {
-        const primaryEmail = emails.emails.filter((email) => email.primary)[0]
-        if (!primaryEmail.verified) {
-          this.primaryEmail = primaryEmail.value
+    this._record
+      .getRecord()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        const primaryEmail = userRecord?.emails?.emails?.filter((email) => email.primary)[0]
+        if (!primaryEmail?.verified) {
+          this.primaryEmail = primaryEmail?.value
         }
       })
   }
