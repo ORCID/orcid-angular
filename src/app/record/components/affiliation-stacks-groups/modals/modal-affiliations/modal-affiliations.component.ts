@@ -130,7 +130,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         country: new FormControl('', {
           validators: [Validators.required],
         }),
-        department: new FormControl(this.department, {}),
+        department: new FormControl(this.department, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
         title: new FormControl(this.title, {
           validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
         }),

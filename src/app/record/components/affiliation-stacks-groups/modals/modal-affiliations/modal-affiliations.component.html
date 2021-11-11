@@ -395,6 +395,12 @@
     <div class="input-container">
       <mat-form-field appearance="outline" class="mat-form-field-min">
         <input id="department-input" matInput formControlName="department" />
+        <mat-error
+          *ngIf="affiliationForm.get('department').errors?.maxlength"
+          i18n="@@shared.maxLength.less_than_one_thousand"
+        >
+          Must be less than 1000 characters
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">

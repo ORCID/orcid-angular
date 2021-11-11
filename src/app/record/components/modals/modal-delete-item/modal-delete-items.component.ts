@@ -55,7 +55,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   selectedItems: string[] = []
   selectAll: false
 
-  deleteForm: FormGroup
+  deleteForm: FormGroup = new FormGroup({})
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -98,11 +98,13 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
             this.items.push(work)
             if (index === this.putCodes.length - 1) {
               this.items.forEach((w) => {
-                group[w.putCode.value] = new FormGroup({
-                  checked: new FormControl(false),
-                })
+                this.deleteForm.addControl(
+                  w.putCode.value,
+                  new FormGroup({
+                    checked: new FormControl(false),
+                  })
+                )
               })
-              this.deleteForm = new FormGroup(group)
               this.loadingItems = false
             }
           })

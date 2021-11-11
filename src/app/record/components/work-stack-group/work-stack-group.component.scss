@@ -73,3 +73,9 @@ button {
   width: auto !important;
   height: auto !important;
 }
+
+button.mat-menu-item {
+  max-width: 350px;
+  white-space: normal;
+  height: auto !important;
+}
