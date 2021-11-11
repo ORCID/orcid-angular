@@ -12,6 +12,7 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
 import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
 import { MatDialog } from '@angular/material/dialog'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { isEmpty } from 'lodash'
 
 @Component({
   selector: 'app-top-bar',
@@ -100,7 +101,15 @@ export class TopBarComponent implements OnInit, OnDestroy {
         }),
         takeWhile((record) => !record?.userInfo || !record.emails)
       )
-      .subscribe()
+      .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+        this.userRecord = userRecord
+        this.userInfo = userRecord.userInfo
+
+        if (!isEmpty(userRecord.otherNames)) {
+          this.setNames(userRecord)
+        }
+      })
   }
 
   private setNames(userRecord: UserRecord) {
