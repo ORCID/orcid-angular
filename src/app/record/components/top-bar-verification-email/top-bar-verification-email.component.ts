@@ -45,7 +45,9 @@ export class TopBarVerificationEmailComponent implements OnInit, OnDestroy {
       .getRecord()
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        const primaryEmail = userRecord?.emails?.emails?.filter((email) => email.primary)[0]
+        const primaryEmail = userRecord?.emails?.emails?.filter(
+          (email) => email.primary
+        )[0]
         if (!primaryEmail?.verified) {
           this.primaryEmail = primaryEmail?.value
         }

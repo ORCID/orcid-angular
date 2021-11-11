@@ -145,8 +145,12 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * @param  existingEmail: use when adding an email that already exists on the backend
    * @param  newEmail: use when user is adding an new email
    */
-  addEmail(existingEmail?: AssertionVisibilityString, newEmail?: boolean): void {
-    const newPutCode = (newEmail ? 'newEmailInput' : 'emailInput-') + this.addedEmailsCount
+  addEmail(
+    existingEmail?: AssertionVisibilityString,
+    newEmail?: boolean
+  ): void {
+    const newPutCode =
+      (newEmail ? 'newEmailInput' : 'emailInput-') + this.addedEmailsCount
 
     // Add email to the emails list
     // backend response come with no email putCode, so here we create one to be able to track those on the frontend
