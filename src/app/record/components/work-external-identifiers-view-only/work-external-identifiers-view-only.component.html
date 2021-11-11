@@ -23,7 +23,9 @@
   <app-panel-data-line
     *ngIf="workIdentifier?.externalRelationship"
     [title]="relationshipLabel"
-    [content]="workIdentifier.externalRelationship"
+    [content]="
+      workIdentifier.externalRelationship | recordWorkRelationshipLabel
+    "
   >
   </app-panel-data-line>
 </div>

@@ -1,3 +1,5 @@
+import { WorkRelationships } from "./works.endpoint"
+
 export interface LastModifiedDate {
   value: number
 }
@@ -124,9 +126,16 @@ export interface ExternalIdentifier {
   externalIdentifierId: ExternalIdentifierId
   externalIdentifierType: Value
   url: Value
-  relationship: Value
+  relationship: RelationshipValue
   normalized: Value
   normalizedUrl: Value
+}
+
+export interface RelationshipValue {
+  errors?: any[] // TODO is this always empty?
+  value: WorkRelationships
+  required?: boolean
+  getRequiredMessage?: any
 }
 
 export interface ExternalIdentifierId {

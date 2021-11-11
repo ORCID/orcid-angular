@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { WorkRelationships } from 'src/app/types/works.endpoint'
 
 @Component({
   selector: 'app-work-external-identifiers-view-only',
@@ -18,7 +19,7 @@ export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
     externalIdentifierId: string
     externalIdentifierType: string
     externalIdentifierUrl: string
-    externalRelationship: string
+    externalRelationship: WorkRelationships
   }
   constructor() {}
 

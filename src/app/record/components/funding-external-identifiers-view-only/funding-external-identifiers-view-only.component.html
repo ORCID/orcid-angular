@@ -16,7 +16,7 @@
   <app-panel-data-line
     *ngIf="grant?.fundingRelationship"
     [title]="fundingRelationshipLabel"
-    [content]="grant.fundingRelationship"
+    [content]="grant.fundingRelationship | recordFundingRelationshipLabel"
   >
   </app-panel-data-line>
 </div>
