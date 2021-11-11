@@ -143,9 +143,10 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * This can be either with a existingEmail (with backend data)
    * or a new empty email input
    * @param  existingEmail: use when adding an email that already exists on the backend
+   * @param  newEmail: use when user is adding an new email
    */
-  addEmail(existingEmail?: AssertionVisibilityString): void {
-    const newPutCode = 'emailInput-' + this.addedEmailsCount
+  addEmail(existingEmail?: AssertionVisibilityString, newEmail?: boolean): void {
+    const newPutCode = (newEmail ? 'newEmailInput' : 'emailInput-') + this.addedEmailsCount
 
     // Add email to the emails list
     // backend response come with no email putCode, so here we create one to be able to track those on the frontend
@@ -349,6 +350,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   }
 
   showNonVerifiedData(controlKey: string, otherEmail?: boolean): boolean {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
     const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
@@ -368,6 +372,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   }
 
   showVisibility(controlKey: string, action?: string): boolean {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
     const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
@@ -393,11 +400,17 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   }
 
   verificationEmailWasSend(controlKey: string) {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
     const formValue = this.emailsForm.value[controlKey]?.email
     return this.verificationsSend.indexOf(formValue) > -1
   }
 
   showEmailAsVerified(controlKey: string): boolean {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
     const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
