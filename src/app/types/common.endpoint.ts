@@ -1,4 +1,4 @@
-import { WorkRelationships } from "./works.endpoint"
+import { WorkRelationships } from './works.endpoint'
 
 export interface LastModifiedDate {
   value: number

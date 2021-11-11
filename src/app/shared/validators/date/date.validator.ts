@@ -156,7 +156,7 @@ export function endDateValidator() {
       startDateDay,
       endDateDay
     )
- // Cloning old app and backend behaviour.
+    // Cloning old app and backend behaviour.
     // if the end-month is defined and the start-year and end-year are the same, start-month MUST be defined
     if (
       endDateMonth &&
@@ -182,7 +182,6 @@ export function endDateValidator() {
       return { invalidEndDate: true }
     }
 
-  
     if (dates.endDate < dates.startDate) {
       return { invalidEndDate: true }
     }
