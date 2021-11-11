@@ -13,22 +13,24 @@ import { WINDOW } from 'src/app/cdk/window'
 @Component({
   selector: 'app-work-doi-bibtex-modal',
   templateUrl: './work-bibtex-modal.component.html',
-  styleUrls: ['./work-bibtex-modal.component.scss'],
+  styleUrls: [
+    './work-bibtex-modal.component.scss',
+    './work-bibtex-modal.component.scss-theme.scss',
+  ],
 })
 export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   importForm: FormGroup
   loadingWorks = false
-  bibtexParsingErrorText = ''
-  bibtexParsingError = false
+  bibtexErrorParsingText = ''
+  bibtexErrorParsing = false
+  bibtexErrorNoEntries = false
   worksFromBibtex: Work[] = []
   selectedWorks: Work[] = []
   selectAll: false
   group: { [key: string]: FormGroup } = {}
   addedWorkCount = 0
-
-  ngOrcidErrorParsingBibtex = $localize`:@@works.errorParsingBibtex:Error parsing Bibtex. No Bibtex entries found in file`
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -48,49 +50,57 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
       const that = this
 
       reader.onloadend = function (e) {
-        const parsed = bibtexParse.toJSON(reader.result)
-        if (
-          typeof parsed === 'string' &&
-          parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
-        ) {
-          that.bibtexParsingErrorText = parsed
-          that.bibtexParsingError = true
-        } else {
-          const newWorks = []
-          if (parsed.length === 0) {
-            that.bibtexParsingErrorText = that.ngOrcidErrorParsingBibtex
-            that.bibtexParsingError = true
+        let parsed = null
+        try {
+          parsed = bibtexParse.toJSON(reader.result)
+          if (
+            typeof parsed === 'string' &&
+            parsed.substring(0, 5).toLowerCase().indexOf('error') > -1
+          ) {
+            that.bibtexErrorParsingText = parsed
+            that.bibtexErrorParsing = true
             that.loadingWorks = false
-          }
-          while (parsed.length > 0) {
-            const cur = parsed.shift()
-            const bibtexEntry = cur.entryType.toLowerCase()
-            if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
-              // Filtering @PREAMBLE and @COMMENT
-              newWorks.push(that.populateWork(cur))
+          } else {
+            if (parsed) {
+              const newWorks = []
+              if (parsed.length === 0) {
+                that.bibtexErrorNoEntries = true
+                that.loadingWorks = false
+              }
+              while (parsed.length > 0) {
+                const cur = parsed.shift()
+                const bibtexEntry = cur.entryType.toLowerCase()
+                if (bibtexEntry !== 'preamble' && bibtexEntry !== 'comment') {
+                  newWorks.push(that.populateWork(cur))
+                }
+              }
+              if (newWorks.length > 0) {
+                that._recordWorksService
+                  .worksValidate(newWorks)
+                  .pipe(first())
+                  .subscribe((data) => {
+                    data.forEach((work) => {
+                      that.worksFromBibtex.push(work)
+                    })
+                    that.worksFromBibtex.forEach((w) => {
+                      const newPutCode = 'new-' + that.addedWorkCount++
+                      w.putCode = {
+                        value: newPutCode,
+                      }
+                      that.group[newPutCode] = new FormGroup({
+                        checked: new FormControl(false),
+                      })
+                    })
+                    that.importForm = new FormGroup(that.group)
+                    that.loadingWorks = false
+                  })
+              }
             }
           }
-          if (newWorks.length > 0) {
-            that._recordWorksService
-              .worksValidate(newWorks)
-              .pipe(first())
-              .subscribe((data) => {
-                data.forEach((work) => {
-                  that.worksFromBibtex.push(work)
-                })
-                that.worksFromBibtex.forEach((w) => {
-                  const newPutCode = 'new-' + that.addedWorkCount++
-                  w.putCode = {
-                    value: newPutCode,
-                  }
-                  that.group[newPutCode] = new FormGroup({
-                    checked: new FormControl(false),
-                  })
-                })
-                that.importForm = new FormGroup(that.group)
-                that.loadingWorks = false
-              })
-          }
+        } catch (e) {
+          that.bibtexErrorParsingText = e
+          that.bibtexErrorParsing = true
+          that.loadingWorks = false
         }
       }
     }
@@ -343,23 +353,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
-  }
-  toWorkDetails() {
-    this._window.document.getElementById('workDetails').scrollIntoView()
-  }
-
-  toIdentifiers() {
-    this._window.document.getElementById('identifiers').scrollIntoView()
-  }
-
-  toCitation() {
-    this._window.document.getElementById('citation').scrollIntoView()
-  }
-  toOtherInformation() {
-    this._window.document.getElementById('otherInformation').scrollIntoView()
-  }
-  toVisibility() {
-    this._window.document.getElementById('visibility').scrollIntoView()
   }
 }
 

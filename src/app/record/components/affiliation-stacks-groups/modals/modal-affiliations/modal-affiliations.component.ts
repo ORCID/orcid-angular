@@ -227,9 +227,15 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       if (this.affiliation.endDate.year) {
         this.affiliationForm.patchValue({
           endDateGroup: {
-            endDateYear: Number(this.affiliation.endDate.year),
-            endDateMonth: Number(this.affiliation.endDate.month),
-            endDateDay: Number(this.affiliation.endDate.day),
+            endDateYear: this.affiliation.endDate.year
+              ? Number(this.affiliation.endDate.year)
+              : '',
+            endDateMonth: this.affiliation.endDate.month
+              ? Number(this.affiliation.endDate.month)
+              : '',
+            endDateDay: this.affiliation.endDate.day
+              ? Number(this.affiliation.endDate.day)
+              : '',
           },
         })
       }
@@ -237,9 +243,15 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       if (this.affiliation.startDate.year) {
         this.affiliationForm.patchValue({
           startDateGroup: {
-            startDateYear: Number(this.affiliation.startDate.year),
-            startDateMonth: Number(this.affiliation.startDate.month),
-            startDateDay: Number(this.affiliation.startDate.day),
+            startDateYear: this.affiliation.startDate.year
+              ? Number(this.affiliation.startDate.year)
+              : '',
+            startDateMonth: this.affiliation.startDate.month
+              ? Number(this.affiliation.startDate.month)
+              : '',
+            startDateDay: this.affiliation.startDate.day
+              ? Number(this.affiliation.startDate.day)
+              : '',
           },
         })
       }

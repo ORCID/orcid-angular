@@ -44,9 +44,8 @@
       </a>
     </ng-container>
   </app-modal-side-bar>
-  <app-modal-footer>
+  <app-modal-footer *ngIf="work">
     <button
-      *ngIf="work"
       mat-raised-button
       color="primary"
       (click)="workFormComponent.saveEvent()"
@@ -103,13 +102,26 @@
       </label>
     </div>
     <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+        [ngClass]="{ 'two-line-hint': metadataNotFound }"
+      >
         <input
           id="external-id-input"
           #externalIdRef
           matInput
           formControlName="externalId"
         />
+        <mat-error
+          *ngIf="
+            type === EXTERNAL_ID_TYPE_WORK.doi &&
+            externalIdentifierForm?.get('externalId')?.errors?.pattern
+          "
+          i18n="@@works.validFormat"
+        >
+          Invalid id for the selected identifier type
+        </mat-error>
         <mat-error *ngIf="metadataNotFound" i18n="@@works.unableToImport">
           Unable to import using this identifier. Please add work using a
           different option.

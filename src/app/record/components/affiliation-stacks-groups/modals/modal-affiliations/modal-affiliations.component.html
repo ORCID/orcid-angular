@@ -577,6 +577,7 @@
             </mat-select>
           </mat-form-field>
         </div>
+
         <mat-error
           class="mat-caption"
           i18n="@@shared.invalidDate"
@@ -584,13 +585,15 @@
         >
           Invalid date
         </mat-error>
-        <mat-error
-          class="mat-caption"
-          i18n="@@shared.endDateError"
-          *ngIf="affiliationForm.errors?.invalidEndDate"
-        >
-          End date must come after start date
-        </mat-error>
+        <div class="row">
+          <mat-error
+            class="mat-caption"
+            i18n="@@shared.endDateError"
+            *ngIf="affiliationForm.errors?.invalidEndDate"
+          >
+            End date must come after start date
+          </mat-error>
+        </div>
       </div>
     </ng-container>
     <div class="row">

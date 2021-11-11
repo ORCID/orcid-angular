@@ -1,43 +1,9 @@
-<app-modal
-  [loading]="loadingWorks"
-  [noSidebar]="!(worksFromBibtex.length > 0 && !loadingWorks)"
->
+<app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
     <ng-container i18n="@@works.importBibTex">
       Works - Import BibTeX</ng-container
     >
   </app-modal-header>
-  <app-modal-side-bar *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
-    <ng-container id="side-bar-title">
-      <a class="side-bar" i18n="@@works.workDetails" (click)="toWorkDetails()">
-        Work Details
-      </a>
-    </ng-container>
-    <ng-container id="side-bar-url-1">
-      <a class="side-bar" i18n="@@works.identifiers" (click)="toIdentifiers()">
-        Identifiers
-      </a>
-    </ng-container>
-    <ng-container id="side-bar-url-2">
-      <a class="side-bar" i18n="@@works.citation" (click)="toCitation()">
-        Citation
-      </a>
-    </ng-container>
-    <ng-container id="side-bar-url-3">
-      <a
-        class="side-bar"
-        i18n="@@works.otherInformation"
-        (click)="toOtherInformation()"
-      >
-        Other information
-      </a>
-    </ng-container>
-    <ng-container id="side-bar-url-4">
-      <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
-        Visibility
-      </a>
-    </ng-container>
-  </app-modal-side-bar>
   <app-modal-footer *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
     <button
       mat-raised-button
@@ -93,9 +59,26 @@
     >
       Choose BibTeX file to import
     </button>
-    <mat-error class="mat-caption" *ngIf="bibtexParsingError">
-      {{ bibtexParsingErrorText }}
+  </div>
+  <div
+    class="row bibtex-error"
+    *ngIf="bibtexErrorParsing || bibtexErrorNoEntries"
+  >
+    <mat-error class="mat-caption">
+      <ng-container
+        i18n="@@works.bibtexImporterParsingError"
+        *ngIf="bibtexErrorParsing"
+      >
+        This file cannot be read. Please check the BibTeX formatting and try
+        again.
+      </ng-container>
+      <ng-container i18n="@@works.noBibtexEntries" *ngIf="bibtexErrorNoEntries">
+        Error parsing Bibtex. No Bibtex entries found in file
+      </ng-container>
     </mat-error>
+  </div>
+  <div class="row bibtex-error" *ngIf="bibtexErrorParsing">
+    <code>{{ bibtexErrorParsingText }}</code>
   </div>
   <ng-container *ngIf="worksFromBibtex.length > 0 && !loadingWorks">
     <div class="row">

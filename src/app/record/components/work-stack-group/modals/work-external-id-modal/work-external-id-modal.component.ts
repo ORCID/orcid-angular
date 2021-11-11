@@ -38,7 +38,7 @@ export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
   recordImportWizards: RecordImportWizard[]
   externalIdentifierForm: FormGroup
   work: Work
-  metadataNotFound = true
+  metadataNotFound = false
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,

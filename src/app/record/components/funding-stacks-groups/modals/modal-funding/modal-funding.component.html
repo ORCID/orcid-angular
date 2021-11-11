@@ -225,35 +225,37 @@
           </label>
         </div>
 
-        <mat-form-field appearance="outline" class="mat-form-field-min">
-          <input
-            id="funding-project-translated-title-input"
-            matInput
-            formControlName="translatedTitleContent"
-          />
-        </mat-form-field>
-        <mat-error
-          class="mat-caption"
-          *ngIf="
-            fundingForm.hasError(
-              'invalidTranslatedTitleContent',
-              'translatedTitleGroup'
-            )
-          "
-          i18n="@@shared.translatedTitleError"
-        >
-          Please enter a translated title
-        </mat-error>
-        <mat-error
-          class="mat-caption"
-          *ngIf="
-            fundingForm.get('translatedTitleGroup.translatedTitleContent')
-              .errors?.maxlength
-          "
-          i18n="@@shared.maxLength.less_than_one_thousand"
-        >
-          Must be less than 1000 characters
-        </mat-error>
+        <div class="input-container">
+          <mat-form-field appearance="outline" class="mat-form-field-min">
+            <input
+              id="funding-project-translated-title-input"
+              matInput
+              formControlName="translatedTitleContent"
+            />
+          </mat-form-field>
+          <mat-error
+            class="mat-caption"
+            *ngIf="
+              fundingForm.hasError(
+                'invalidTranslatedTitleContent',
+                'translatedTitleGroup'
+              )
+            "
+            i18n="@@shared.translatedTitleError"
+          >
+            Please enter a translated title
+          </mat-error>
+          <mat-error
+            class="mat-caption"
+            *ngIf="
+              fundingForm.get('translatedTitleGroup.translatedTitleContent')
+                .errors?.maxlength
+            "
+            i18n="@@shared.maxLength.less_than_one_thousand"
+          >
+            Must be less than 1000 characters
+          </mat-error>
+        </div>
       </div>
 
       <!-- Language of this title -->
@@ -274,7 +276,7 @@
             >
           </label>
         </div>
-        <div class="row language">
+        <div class="input-container language">
           <mat-form-field appearance="outline" class="mat-form-field-min">
             <mat-select
               id="language-title-input"

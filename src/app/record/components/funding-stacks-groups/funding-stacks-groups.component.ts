@@ -66,7 +66,7 @@ export class FundingStacksGroupsComponent implements OnInit {
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
             this.userRecord = userRecord
-            if (userRecord.fundings !== undefined) {
+            if (userRecord?.fundings !== undefined) {
               this.loading = false
               this._recordCountryService
                 .getCountryCodes()
