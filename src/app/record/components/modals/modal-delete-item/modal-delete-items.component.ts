@@ -16,7 +16,6 @@ import { RecordAffiliationService } from '../../../../core/record-affiliations/r
 import { RecordFundingsService } from '../../../../core/record-fundings/record-fundings.service'
 import { RecordResearchResourceService } from '../../../../core/record-research-resource/record-research-resource.service'
 import { RecordPeerReviewService } from '../../../../core/record-peer-review/record-peer-review.service'
-import { Work } from '../../../../types/record-works.endpoint'
 import { SnackbarService } from '../../../../cdk/snackbar/snackbar.service'
 
 @Component({
@@ -92,11 +91,11 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
     if (this.putCodes.length > 0) {
       this.loadingItems = true
-      const works$ = [];
+      const works$ = []
       this.putCodes.forEach((putCode) => {
-        works$.push(this._recordWorksService.getWorkInfo(putCode));
+        works$.push(this._recordWorksService.getWorkInfo(putCode))
       })
-      forkJoin(...works$).subscribe(works => {
+      forkJoin(...works$).subscribe((works) => {
         works.forEach((w) => {
           this.items.push(w)
           group[w.putCode.value] = new FormGroup({
