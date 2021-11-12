@@ -320,11 +320,9 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     if (
       this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)
     ) {
-      if (!!this.selectAll === false) {
-        this.selectedWorks = this.selectedWorks.filter(
-          (value) => value.putCode.value !== work.putCode.value
-        )
-      }
+      this.selectedWorks = this.selectedWorks.filter(
+        (value) => value.putCode.value !== work.putCode.value,
+      )
     } else {
       this.selectedWorks.push(work)
     }
