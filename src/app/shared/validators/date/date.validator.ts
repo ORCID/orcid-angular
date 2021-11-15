@@ -58,11 +58,7 @@ export function dateMonthYearValidator(dateType: string) {
     }
 
     if (year && month) {
-      date = new Date(year + '-' + month)
-    }
-
-    if (year && month) {
-      date = new Date(year + '-' + month)
+      date = new Date(year + '-' + (month < 10 ? '0' + month : month))
     }
 
     if (date && !isNaN(date.getTime())) {
@@ -75,6 +71,17 @@ export function dateMonthYearValidator(dateType: string) {
 
 export function endDateMonthYearValidator() {
   return (c: AbstractControl): { [key: string]: any } | null => {
+    const endDateExistingErrors = Object.keys(
+      c.get('endDateGroup').errors || {}
+    )
+    const startDateExistingErrors = Object.keys(
+      c.get('startDateGroup').errors || {}
+    )
+    if (endDateExistingErrors.length || startDateExistingErrors.length) {
+      // both date has to be valid to validate end date congruence
+      return null
+    }
+
     const endDateYear = c.get('endDateGroup.endDateYear').value
     const endDateMonth = c.get('endDateGroup.endDateMonth').value
 
@@ -92,6 +99,22 @@ export function endDateMonthYearValidator() {
       endDateMonth
     )
 
+    // Cloning old app and backend behaviour.
+    // if the end-month is defined and the start-year and end-year are the same, start-month MUST be defined
+    if (
+      endDateMonth &&
+      !startDateMonth &&
+      startDateYear &&
+      endDateYear &&
+      startDateYear === endDateYear
+    ) {
+      return { invalidEndDate: true }
+    }
+
+    if (dates.endDate < dates.startDate) {
+      return { invalidEndDate: true }
+    }
+
     if (dates.endDate < dates.startDate) {
       return { invalidEndDate: true }
     }
@@ -102,6 +125,17 @@ export function endDateMonthYearValidator() {
 
 export function endDateValidator() {
   return (c: AbstractControl): { [key: string]: any } | null => {
+    const endDateExistingErrors = Object.keys(
+      c.get('endDateGroup').errors || {}
+    )
+    const startDateExistingErrors = Object.keys(
+      c.get('startDateGroup').errors || {}
+    )
+    if (endDateExistingErrors.length || startDateExistingErrors.length) {
+      // both date has to be valid to validate end date congruence
+      return null
+    }
+
     const endDateYear = c.get('endDateGroup.endDateYear').value
     const endDateMonth = c.get('endDateGroup.endDateMonth').value
     const endDateDay = c.get('endDateGroup.endDateDay').value
@@ -122,6 +156,31 @@ export function endDateValidator() {
       startDateDay,
       endDateDay
     )
+    // Cloning old app and backend behaviour.
+    // if the end-month is defined and the start-year and end-year are the same, start-month MUST be defined
+    if (
+      endDateMonth &&
+      !startDateMonth &&
+      startDateYear &&
+      endDateYear &&
+      startDateYear === endDateYear
+    ) {
+      return { invalidEndDate: true }
+    }
+    // Cloning old app and backend behaviour.
+    // if the end-day is defined and the start-year/month and end-year/month are the same, start-month MUST be defined
+    if (
+      endDateDay &&
+      !startDateDay &&
+      startDateYear &&
+      endDateYear &&
+      endDateMonth &&
+      endDateDay &&
+      startDateYear === endDateYear &&
+      endDateMonth === endDateDay
+    ) {
+      return { invalidEndDate: true }
+    }
 
     if (dates.endDate < dates.startDate) {
       return { invalidEndDate: true }
@@ -132,33 +191,53 @@ export function endDateValidator() {
 }
 
 function startAndEndDate(
-  startDateYear,
-  endDateYear,
-  startDateMonth,
-  endDateMonth,
-  startDateDay?,
-  endDateDay?
-) {
-  let startDate
-  let endDate
-
-  if (startDateDay && endDateDay && startDateMonth && endDateMonth) {
-    startDate = new Date(
+  startDateYear: number,
+  endDateYear: number,
+  startDateMonth: number,
+  endDateMonth: number,
+  startDateDay?: number,
+  endDateDay?: number
+): { startDate: Date; endDate: Date } {
+  if (
+    startDateYear &&
+    endDateYear &&
+    startDateMonth &&
+    endDateMonth &&
+    startDateDay &&
+    endDateDay
+  ) {
+    const startDate = getDateFromNumbers(
       startDateYear,
-      startDateMonth ? startDateMonth - 1 : undefined,
+      startDateMonth,
       startDateDay
     )
-    endDate = new Date(
-      endDateYear,
-      endDateMonth ? endDateMonth - 1 : undefined,
-      endDateDay
-    )
-  } else if (startDateMonth && endDateMonth) {
-    startDate = new Date(startDateYear, startDateMonth - 1)
-    endDate = new Date(endDateYear, endDateMonth - 1)
-  } else if (startDateYear && endDateYear) {
-    startDate = new Date(startDateYear)
-    endDate = new Date(endDateYear)
+    const endDate = getDateFromNumbers(endDateYear, endDateMonth, endDateDay)
+
+    return { startDate, endDate }
   }
-  return { startDate, endDate }
+  if (startDateYear && startDateMonth && endDateYear && endDateMonth) {
+    const startDate = getDateFromNumbers(startDateYear, startDateMonth)
+    const endDate = getDateFromNumbers(endDateYear, endDateMonth)
+
+    return { startDate, endDate }
+  }
+
+  if (startDateYear && endDateYear) {
+    const startDate = getDateFromNumbers(startDateYear)
+    const endDate = getDateFromNumbers(endDateYear)
+
+    return { startDate, endDate }
+  }
+}
+function getDateFromNumbers(year: number, month?: number, day?: number): Date {
+  let date: Date
+
+  if (year && month && day) {
+    date = new Date(year, month ? month - 1 : undefined, day)
+  } else if (year && month) {
+    date = new Date(year + '-' + (month < 10 ? '0' + month : month))
+  } else {
+    date = new Date(year + '')
+  }
+  return date
 }

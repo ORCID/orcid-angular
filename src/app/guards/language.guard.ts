@@ -14,7 +14,7 @@ import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 import { LanguageService } from '../core/language/language.service'
 import { LanguageContext } from '../types/language.locale'
-
+const GUARD_COOKIE_CHECK = 'lang_refresh'
 @Injectable({
   providedIn: 'root',
 })
@@ -43,12 +43,13 @@ export class LanguageGuard implements CanActivateChild {
           console.debug('language context', langContext)
         }
       }),
+      /// HANDLE LANGUAGE CHANGE BY QUERY PARAMETERS, like `https://orcid.org/signin?lang=pt`
       switchMap(() => {
-        // The browser cookie language might already right
         if (this.currentAppLanguageMatchTheParamLanguage(langContext)) {
+          this._cookies.delete(GUARD_COOKIE_CHECK)
           return of(true)
         } else {
-          // the browser needs to be reloaded to set the right cookie and reload.
+          // the browser needs to be reloaded to set the right cookie.
           return this._languageService
             .changeLanguage(langContext.param)
             .pipe(
@@ -58,12 +59,28 @@ export class LanguageGuard implements CanActivateChild {
             )
         }
       }),
+      /// HANDLE LANGUAGE COOKIE UPDATES, like when a user login into a `spanish` user from a `english` signin page.  
       switchMap(() => {
-        // A weird tomcat or cloudflare scenario where the the wrong translated app is downloaded
-        if (!this.currentAppLanguageMatchCookieLanguage(langContext)) {
-          return this._errorHandler.handleError(
-            new Error('cacheIssueDetected/')
-          )
+        if (this.currentAppLanguageMatchCookieLanguage(langContext)) {
+          this._cookies.delete(GUARD_COOKIE_CHECK)
+          return of(true)
+        } else {
+          if (
+            !this._cookies.check(GUARD_COOKIE_CHECK) ||
+            this._cookies.get(GUARD_COOKIE_CHECK) !== langContext.cookie
+          ) {
+            // the browser needs to be reloaded to set the right cookie.
+            this._cookies.set(GUARD_COOKIE_CHECK, langContext.cookie)
+            return of(this.window.location.reload()).pipe(
+              switchMap(() => NEVER)
+            )
+          } else {
+            // Weird event where `GUARD_COOKIE_CHECK` was already set, the app was already loaded
+            // But the current app language do not match the cookie language
+            return this._errorHandler.handleError(
+              new Error('cacheIssueDetected/')
+            )
+          }
         }
       }),
       catchError(() => of(true)) // Allow to continue if the language change fails

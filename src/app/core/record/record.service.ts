@@ -97,11 +97,11 @@ export class RecordService {
     if (!this.recordSubject$) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
       this.attachDebugger()
-    } else if (!options.forceReload) {
+    } else if (!options?.forceReload) {
       return this.recordSubject$.asObservable()
     }
 
-    if (this.recordSubject$ && options.cleanCacheIfExist) {
+    if (this.recordSubject$ && options?.cleanCacheIfExist) {
       this.recordSubject$.next(undefined)
     }
     const subscriptionCount = this.subscriptionSourceCountDebugger

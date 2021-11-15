@@ -5,7 +5,7 @@ import {
   AsyncValidatorFn,
   ValidationErrors,
 } from '@angular/forms'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   Assertion,
@@ -49,8 +49,8 @@ export class RecordEmailsService {
     } else if (!options.forceReload) {
       return this.$emailsSubject
     }
-    if (options.cleanCacheIfExist && this.$emailsSubject) {
-      this.$emailsSubject.next(<EmailsEndpoint>undefined)
+    if (options.cleanCacheIfExist) {
+      this.$emailsSubject.next(EMPTY)
     }
 
     this._http
