@@ -32,7 +32,6 @@ export class LanguageGuard implements CanActivateChild {
     state: RouterStateSnapshot
   ): Observable<boolean> {
     let langContext: LanguageContext
-
     // Wait the user session so the language cookie is declared from the backend
     return this._user.getUserSession().pipe(
       tap(() => {
@@ -50,16 +49,17 @@ export class LanguageGuard implements CanActivateChild {
           return of(true)
         } else {
           // the browser needs to be reloaded to set the right cookie.
-          return this._languageService
-            .changeLanguage(langContext.param)
-            .pipe(
-              switchMap(() =>
-                of(this.window.location.reload()).pipe(switchMap(() => NEVER))
+          return this._languageService.changeLanguage(langContext.param).pipe(
+            switchMap(() =>
+              // Redirect the user to the destiny LOCAL (without using the router)
+              of((this.window.location.href = state?.url || '/')).pipe(
+                switchMap(() => NEVER)
               )
             )
+          )
         }
       }),
-      /// HANDLE LANGUAGE COOKIE UPDATES, like when a user login into a `spanish` user from a `english` signin page.  
+      /// HANDLE LANGUAGE COOKIE UPDATES, like when a user login into a `spanish` user from a `english` signin page.
       switchMap(() => {
         if (this.currentAppLanguageMatchCookieLanguage(langContext)) {
           this._cookies.delete(GUARD_COOKIE_CHECK)
@@ -71,7 +71,7 @@ export class LanguageGuard implements CanActivateChild {
           ) {
             // the browser needs to be reloaded to set the right cookie.
             this._cookies.set(GUARD_COOKIE_CHECK, langContext.cookie)
-            return of(this.window.location.reload()).pipe(
+            return of((this.window.location.href = state.url)).pipe(
               switchMap(() => NEVER)
             )
           } else {
