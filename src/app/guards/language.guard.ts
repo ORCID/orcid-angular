@@ -71,6 +71,7 @@ export class LanguageGuard implements CanActivateChild {
           ) {
             // the browser needs to be reloaded to set the right cookie.
             this._cookies.set(GUARD_COOKIE_CHECK, langContext.cookie)
+            // Redirect the user to the destiny LOCAL (without using the router)
             return of((this.window.location.href = state?.url || '/')).pipe(
               switchMap(() => NEVER)
             )
