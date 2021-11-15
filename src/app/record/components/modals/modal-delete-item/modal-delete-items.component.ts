@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core'
-import { Subject } from 'rxjs'
+import { forkJoin, Subject } from 'rxjs'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
@@ -16,7 +16,6 @@ import { RecordAffiliationService } from '../../../../core/record-affiliations/r
 import { RecordFundingsService } from '../../../../core/record-fundings/record-fundings.service'
 import { RecordResearchResourceService } from '../../../../core/record-research-resource/record-research-resource.service'
 import { RecordPeerReviewService } from '../../../../core/record-peer-review/record-peer-review.service'
-import { Work } from '../../../../types/record-works.endpoint'
 import { SnackbarService } from '../../../../cdk/snackbar/snackbar.service'
 
 @Component({
@@ -55,7 +54,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   selectedItems: string[] = []
   selectAll: false
 
-  deleteForm: FormGroup = new FormGroup({})
+  deleteForm: FormGroup
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -70,6 +69,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.deleteForm = new FormGroup({})
     const group: { [key: string]: FormGroup } = {}
 
     this._platform
@@ -79,7 +79,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    if (this.item && this.items?.length === 0) {
+    if (this.item && this.putCodes?.length === 0) {
       this.items.push(this.item)
       this.items.forEach((i) => {
         group[i?.putCode?.value || i.putCode] = new FormGroup({
@@ -91,23 +91,19 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
     if (this.putCodes.length > 0) {
       this.loadingItems = true
-      this.putCodes.forEach((putCode, index) => {
-        this._recordWorksService
-          .getWorkInfo(putCode)
-          .subscribe((work: Work) => {
-            this.items.push(work)
-            if (index === this.putCodes.length - 1) {
-              this.items.forEach((w) => {
-                this.deleteForm.addControl(
-                  w.putCode.value,
-                  new FormGroup({
-                    checked: new FormControl(false),
-                  })
-                )
-              })
-              this.loadingItems = false
-            }
+      const works$ = []
+      this.putCodes.forEach((putCode) => {
+        works$.push(this._recordWorksService.getWorkInfo(putCode))
+      })
+      forkJoin(...works$).subscribe((works) => {
+        works.forEach((w) => {
+          this.items.push(w)
+          group[w.putCode.value] = new FormGroup({
+            checked: new FormControl(false),
           })
+        })
+        this.deleteForm = new FormGroup(group)
+        this.loadingItems = false
       })
     }
   }
