@@ -7,6 +7,7 @@
       mat-raised-button
       color="warn"
       (click)="saveEvent()"
+      [disabled]="loadingItems"
       id="delete-button"
     >
       <ng-container i18n="@@shared.deleteSelected">
@@ -70,7 +71,11 @@
       </div>
     </div>
     <mat-divider class="row"></mat-divider>
-    <div class="row" [formGroup]="deleteForm" *ngIf="!loadingItems">
+    <div
+      class="row"
+      [formGroup]="deleteForm"
+      *ngIf="deleteForm && !loadingItems"
+    >
       <ng-container *ngFor="let item of items">
         <div
           class="row affiliation-info"
