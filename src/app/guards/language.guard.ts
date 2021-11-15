@@ -75,7 +75,7 @@ export class LanguageGuard implements CanActivateChild {
               switchMap(() => NEVER)
             )
           } else {
-            // Weird event where `GUARD_COOKIE_CHECK` was already set, the app was already loaded
+            // Weird event where `GUARD_COOKIE_CHECK` was already set, the app was already reloaded
             // But the current app language do not match the cookie language
             return this._errorHandler.handleError(
               new Error('cacheIssueDetected/')
