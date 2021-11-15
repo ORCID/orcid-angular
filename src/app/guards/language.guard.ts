@@ -59,7 +59,7 @@ export class LanguageGuard implements CanActivateChild {
             )
         }
       }),
-      /// HANDLE LANGUAGE COOKIE UPDATES, like when a user login into a `spanish` user from a `english` signin page.  
+      /// HANDLE LANGUAGE COOKIE UPDATES, like when a user login into a `spanish` user from a `english` signin page.
       switchMap(() => {
         if (this.currentAppLanguageMatchCookieLanguage(langContext)) {
           this._cookies.delete(GUARD_COOKIE_CHECK)
