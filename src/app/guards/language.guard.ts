@@ -71,7 +71,7 @@ export class LanguageGuard implements CanActivateChild {
           ) {
             // the browser needs to be reloaded to set the right cookie.
             this._cookies.set(GUARD_COOKIE_CHECK, langContext.cookie)
-            return of((this.window.location.href = state.url)).pipe(
+            return of((this.window.location.href = state?.url || '/')).pipe(
               switchMap(() => NEVER)
             )
           } else {
