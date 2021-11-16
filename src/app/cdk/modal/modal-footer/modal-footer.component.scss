@@ -2,7 +2,7 @@
   border-top: solid 1px;
   background-color: black;
   width: 100%;
-  height: 72px;
+  min-height: 72px;
 }
 
 .container {
@@ -10,6 +10,17 @@
   height: 100%;
   align-items: center;
   padding: 0 16px 0 16px;
+}
+
+.handset.container {
+  flex-direction: column;
+  align-items: self-start;
+  padding: 10 px;
+  height: auto;
+  ::ng-deep button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 :host ::ng-deep .container > button {
