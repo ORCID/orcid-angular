@@ -374,6 +374,15 @@
             </strong>
             <span *ngIf="!platform.columns12" class="required">*</span>
           </p>
+          <p
+            *ngIf="platform.columns12"
+            class="required-information mat-caption"
+          >
+            <span class="required">*</span>
+            <ng-container i18n="@@shared.requiredInformation"
+              >Required information
+            </ng-container>
+          </p>
         </div>
       </div>
       <hr />
