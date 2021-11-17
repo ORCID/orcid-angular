@@ -20,20 +20,20 @@ export class VerificationEmailModalService {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-        
         if (!this.alreadyOpenVerificacionModal) {
           this.alreadyOpenVerificacionModal = true
-        const modalComponent = this._dialog.open(
-          TopBarVerificationEmailModalComponent,
-          {
-            width: '850px',
-            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
-          }
-        )
-        modalComponent.componentInstance.primaryEmail = primaryEmail
-        
+          const modalComponent = this._dialog.open(
+            TopBarVerificationEmailModalComponent,
+            {
+              width: '850px',
+              maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
+            }
+          )
+          modalComponent.componentInstance.primaryEmail = primaryEmail
 
-        modalComponent.afterClosed().subscribe(x => this.alreadyOpenVerificacionModal = false)
+          modalComponent
+            .afterClosed()
+            .subscribe((x) => (this.alreadyOpenVerificacionModal = false))
         }
       })
   }
