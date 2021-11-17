@@ -13,11 +13,16 @@ export class VerificationEmailModalService {
     private _platform: PlatformInfoService
   ) {}
 
+  alreadyOpenVerificacionModal = false
+
   openVerificationEmailModal(primaryEmail: string) {
     this._platform
       .get()
       .pipe(first())
       .subscribe((platform) => {
+        
+        if (!this.alreadyOpenVerificacionModal) {
+          this.alreadyOpenVerificacionModal = true
         const modalComponent = this._dialog.open(
           TopBarVerificationEmailModalComponent,
           {
@@ -26,6 +31,10 @@ export class VerificationEmailModalService {
           }
         )
         modalComponent.componentInstance.primaryEmail = primaryEmail
+        
+
+        modalComponent.afterClosed().subscribe(x => this.alreadyOpenVerificacionModal = false)
+        }
       })
   }
 }
