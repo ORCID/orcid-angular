@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core'
+import { Component, ElementRef, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
@@ -6,6 +6,7 @@ import { Work, WorksEndpoint } from '../../../../../types/record-works.endpoint'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-modal-export-works',
@@ -28,7 +29,8 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     public dialogRef: MatDialogRef<ModalComponent>,
     private _platform: PlatformInfoService,
-    private _recordWorksService: RecordWorksService
+    private _recordWorksService: RecordWorksService,
+    @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit(): void {
@@ -98,18 +100,24 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
   }
 
   createTxtFile(data) {
-    const anchor = document.createElement('a')
-    anchor.setAttribute('css', "{display: 'none'}")
-    this.elementRef.nativeElement.append(anchor)
-    anchor.setAttribute(
-      'href',
-      'data:text/x-bibtex;charset=utf-8,' + encodeURIComponent(data)
-    )
-    anchor.setAttribute('target', '_self')
-    anchor.setAttribute('download', 'works.bib')
-    anchor.click()
-    anchor.remove()
-    this.loadingWorks = false
+    if ((this.window.navigator as any)?.msSaveOrOpenBlob) {
+      const fileData = [data]
+      const blobObject = new Blob(fileData, { type: 'text/plain' })
+      ;(this.window.navigator as any).msSaveOrOpenBlob(blobObject, 'works.bib')
+    } else {
+      const anchor = document.createElement('a')
+      anchor.setAttribute('css', "{display: 'none'}")
+      this.elementRef.nativeElement.append(anchor)
+      anchor.setAttribute(
+        'href',
+        'data:text/x-bibtex;charset=utf-8,' + encodeURIComponent(data)
+      )
+      anchor.setAttribute('target', '_self')
+      anchor.setAttribute('download', 'works.bib')
+      anchor.click()
+      anchor.remove()
+      this.loadingWorks = false
+    }
   }
 
   closeEvent() {
