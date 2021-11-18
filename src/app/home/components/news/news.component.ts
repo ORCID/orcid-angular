@@ -36,6 +36,6 @@ export class NewsComponent implements OnInit {
   }
 
   moreNews() {
-    this.window.location.href = environment.BLOG_NEWS
+    this.window.location.href = environment.INFO_SITE
   }
 }
