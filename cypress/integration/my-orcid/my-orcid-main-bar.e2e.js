@@ -13,7 +13,7 @@ Cypress.Commands.add(
       .trigger('mouseup', { force: true })
   }
 )
-describe.only('My Orcid main bar' + runInfo(), () => {
+describe('My Orcid main bar' + runInfo(), () => {
   before(() => {
     cy.programmaticSignin('testUser')
   })

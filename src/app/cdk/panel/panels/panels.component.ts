@@ -4,13 +4,15 @@ import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
 import { SortData, SortOrderDirection, SortOrderType } from 'src/app/types/sort'
-import { ADD_EVENT_ACTION } from 'src/app/constants'
+import { ADD_EVENT_ACTION, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { ModalAffiliationsComponent } from '../../../record/components/affiliation-stacks-groups/modals/modal-affiliations/modal-affiliations.component'
 import { ModalFundingComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding/modal-funding.component'
 import { AffiliationType } from 'src/app/types/record-affiliation.endpoint'
 import { ModalPeerReviewsComponent } from '../../../record/components/peer-review-stacks-groups/modals/modal-peer-reviews/modal-peer-reviews.component'
-import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/modal-works-search-link.component'
 import { ModalFundingSearchLinkComponent } from '../../../record/components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
+import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
+import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { UserRecord } from '../../../types/record.local'
 
 @Component({
   selector: 'app-panels',
@@ -18,7 +20,9 @@ import { ModalFundingSearchLinkComponent } from '../../../record/components/fund
   styleUrls: ['./panels.component.scss', './panels.component.scss-theme.scss'],
 })
 export class PanelsComponent implements OnInit {
+  @Input() loading = false
   @Input() expandedContent = true
+  @Output() expandedContentChange: EventEmitter<boolean> = new EventEmitter()
   @Input() title
   @Input() type:
     | 'employment'
@@ -34,11 +38,11 @@ export class PanelsComponent implements OnInit {
     | 'sub-peer-review'
     | 'funding'
     | 'research-resources' = 'activities'
+  @Input() userRecord: UserRecord
   @Input() currentAmount
   @Input() total
   @Input() isPublicRecord: any = false
   @Input() selectable = false
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
   @Input() sortTypes: SortOrderType[] = ['title', 'start', 'end']
   @Input() sortType: SortOrderType = 'end'
   @Input() sortDirection: SortOrderDirection = 'desc'
@@ -51,6 +55,7 @@ export class PanelsComponent implements OnInit {
     action: ADD_EVENT_ACTION
     label: string
     modal?: ComponentType<any>
+    type?: EXTERNAL_ID_TYPE_WORK
   }[] = []
 
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
@@ -59,13 +64,14 @@ export class PanelsComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {}
 
   add(type: string, action?: ADD_EVENT_ACTION) {
     const menuOption = this.addMenuOptions.find((x) => x.action === action)
     if (menuOption && menuOption.modal) {
-      this.openModal(menuOption.modal, type)
+      this.openModal(menuOption.modal, { ...menuOption, type: menuOption.type })
     } else {
       switch (type) {
         case 'employment':
@@ -75,7 +81,7 @@ export class PanelsComponent implements OnInit {
         case 'distinction':
         case 'membership':
         case 'service':
-          this.openModal(ModalAffiliationsComponent, type)
+          this.openModal(ModalAffiliationsComponent, { type })
           break
         case 'peer-review':
           this.openModal(ModalPeerReviewsComponent)
@@ -95,19 +101,33 @@ export class PanelsComponent implements OnInit {
     }
   }
 
-  openModal(modal: ComponentType<any>, type?: string | AffiliationType) {
-    this._platform
-      .get()
-      .pipe(first())
-      .subscribe((platform) => {
-        let modalComponent
-        modalComponent = this._dialog.open(modal, {
-          width: '850px',
-          maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
-        })
+  openModal(
+    modal: ComponentType<any>,
+    options?: {
+      type?: string | AffiliationType | EXTERNAL_ID_TYPE_WORK
+    }
+  ) {
+    const primaryEmail = this.userRecord?.emails?.emails?.find(
+      (email) => email.primary
+    )
+    if (primaryEmail && !primaryEmail.verified) {
+      this._verificationEmailModalService.openVerificationEmailModal(
+        primaryEmail.value
+      )
+    } else {
+      this._platform
+        .get()
+        .pipe(first())
+        .subscribe((platform) => {
+          let modalComponent
+          modalComponent = this._dialog.open(modal, {
+            width: '850px',
+            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
+          })
 
-        modalComponent.componentInstance.type = type
-      })
+          modalComponent.componentInstance.type = options?.type
+        })
+    }
   }
 
   sortChange(by: SortOrderType) {
@@ -126,7 +146,7 @@ export class PanelsComponent implements OnInit {
   }
   collapse() {
     this.expandedContent = !this.expandedContent
-    this.expanded.emit(this.expandedContent)
+    this.expandedContentChange.emit(this.expandedContent)
   }
 
   multipleMatButton() {

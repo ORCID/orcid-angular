@@ -2,15 +2,19 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   Inject,
   OnDestroy,
   OnInit,
+  QueryList,
+  ViewChildren,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, switchMap, take, takeUntil } from 'rxjs/operators'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import {
@@ -42,8 +46,10 @@ import { OrcidValidators } from '../../../../../validators'
   ],
 })
 export class ModalNameComponent implements OnInit, OnDestroy {
+  @ViewChildren('nameInput') inputs: QueryList<ElementRef>
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  id: string
   platform: PlatformInfo
   namesForm: FormGroup
   otherNamesForm: FormGroup
@@ -53,14 +59,18 @@ export class ModalNameComponent implements OnInit, OnDestroy {
   originalBackendOtherNames: OtherNamesEndPoint
   isMobile: boolean
   defaultVisibility: VisibilityStrings
+  publicVisibility: VisibilityStrings
   otherNamesDefaultVisibility: VisibilityStrings
   addedOtherNameCount = 0
   loadingNames = true
+  nameMaxLength = 99
+  otherNameMaxLength = 254
 
   ngOrcidAddGivenName = $localize`:@@topBar.addGivenName:Add given name`
   ngOrcidAddFamilyName = $localize`:@@topBar.addFamilyName:Add family name`
   ngOrcidAddPublishedName = $localize`:@@topBar.addPublishedName:Add a published or credit name`
   ngOrcidAddOtherName = $localize`:@@topBar.addOtherName:Add other name`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@topBar.manageWhoCanSee:Control who can see your given, family and published names by setting the visibility. The default visibility for your names is`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -71,7 +81,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     private _recordNameService: RecordNamesService,
     private _recordOtherNamesService: RecordOtherNamesService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _userSession: UserService
+    private _userSession: UserService,
+    private _snackBar: SnackbarService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -88,6 +99,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userRecord = this.data
+    this.publicVisibility = 'PUBLIC'
     this._recordNameService
       .getNames()
       .pipe(first())
@@ -121,7 +133,13 @@ export class ModalNameComponent implements OnInit, OnDestroy {
 
     otherNames.forEach((otherName) => {
       group[otherName.putCode] = new FormGroup({
-        otherName: new FormControl(otherName.content),
+        otherName: new FormControl(
+          {
+            value: otherName.content,
+            disabled: otherName.source !== this.id,
+          },
+          [Validators.maxLength(this.otherNameMaxLength)]
+        ),
         visibility: new FormControl(otherName.visibility.visibility, {}),
       })
     })
@@ -145,6 +163,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           Validators.required,
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
           OrcidValidators.notPattern(URL_REGEXP),
+          Validators.maxLength(this.nameMaxLength),
         ],
       })
     )
@@ -154,12 +173,15 @@ export class ModalNameComponent implements OnInit, OnDestroy {
         validators: [
           OrcidValidators.notPattern(URL_REGEXP),
           OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+          Validators.maxLength(this.nameMaxLength),
         ],
       })
     )
     this.namesForm.addControl(
       'publishedName',
-      new FormControl(publishedName, {})
+      new FormControl(publishedName, {
+        validators: [Validators.maxLength(this.nameMaxLength)],
+      })
     )
     this.namesForm.addControl('visibility', new FormControl(visibilityName, {}))
   }
@@ -168,9 +190,9 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     const visibility = namesForm.get('visibility').value
     return {
       errors: [],
-      givenNames: namesForm.get('givenNames').value,
-      familyName: namesForm.get('familyName').value,
-      creditName: namesForm.get('publishedName').value,
+      givenNames: namesForm.get('givenNames').value.trim(),
+      familyName: namesForm.get('familyName').value.trim(),
+      creditName: namesForm.get('publishedName').value.trim(),
       visibility: {
         visibility,
       },
@@ -187,11 +209,11 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.otherNames.reverse()
     this.otherNames
       .map((value) => value.putCode)
-      .filter((key) => namesForm.value[key].otherName)
+      .filter((key) => namesForm.getRawValue()[key].otherName)
       .forEach((key, i) => {
-        const otherName = namesForm.value[key].otherName
-        const visibility = namesForm.value[key].visibility
-        if (namesForm.value[key]) {
+        const otherName = namesForm.getRawValue()[key].otherName.trim()
+        const visibility = namesForm.getRawValue()[key].visibility
+        if (namesForm.getRawValue()[key]) {
           otherNames.otherNames.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
             content: otherName,
@@ -227,6 +249,8 @@ export class ModalNameComponent implements OnInit, OnDestroy {
           },
           (error) => {}
         )
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 
@@ -242,8 +266,10 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.namesForm.addControl(
       'new-' + this.addedOtherNameCount,
       new FormGroup({
-        otherName: new FormControl(),
-        visibility: new FormControl(this.otherNamesDefaultVisibility, {}),
+        otherName: new FormControl('', [
+          Validators.maxLength(this.otherNameMaxLength),
+        ]),
+        visibility: new FormControl(this.otherNamesDefaultVisibility),
       })
     )
     this.otherNames.push({
@@ -253,42 +279,14 @@ export class ModalNameComponent implements OnInit, OnDestroy {
     this.addedOtherNameCount++
 
     this._changeDetectorRef.detectChanges()
+    const input = this.inputs.last
+    input.nativeElement.focus()
   }
 
   deleteOtherName(putCode: string) {
     const i = this.otherNames.findIndex((value) => value.putCode === putCode)
     this.otherNames.splice(i, 1)
     this.namesForm.removeControl(putCode)
-  }
-
-  getSourceName(names: Assertion) {
-    if (names.sourceName) {
-      if (names.lastModified) {
-        return (
-          names.sourceName +
-          ' ' +
-          names.lastModified.year +
-          '-' +
-          names.lastModified.month +
-          '-' +
-          names.lastModified.day
-        )
-      } else {
-        return names.sourceName
-      }
-    } else if (names.source) {
-      if (names.lastModified) {
-        return (
-          names.source +
-          ' ' +
-          names.lastModified.year +
-          '-' +
-          names.lastModified.month +
-          '-' +
-          names.lastModified.day
-        )
-      }
-    }
   }
 
   toGivenNames() {

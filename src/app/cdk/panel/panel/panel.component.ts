@@ -1,5 +1,13 @@
 import { ComponentType } from '@angular/cdk/portal'
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Assertion } from '../../../types'
 import {
@@ -14,13 +22,15 @@ import { Affiliation } from 'src/app/types/record-affiliation.endpoint'
 import { Funding } from 'src/app/types/record-funding.endpoint'
 import { PeerReview } from '../../../types/record-peer-review.endpoint'
 import { Work } from 'src/app/types/record-works.endpoint'
-import { FormControl, FormGroup } from '@angular/forms'
 import { RecordAffiliationService } from '../../../core/record-affiliations/record-affiliations.service'
 import { RecordFundingsService } from '../../../core/record-fundings/record-fundings.service'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { RecordPeerReviewService } from '../../../core/record-peer-review/record-peer-review.service'
 import { RecordResearchResourceService } from '../../../core/record-research-resource/record-research-resource.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
+import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { UserService } from 'src/app/core'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-panel',
@@ -28,6 +38,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox'
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
 export class PanelComponent implements OnInit {
+  @Input() showVisibilityControl = false
+  @Input() stackSiblings: any[]
   @Input() stackedHeader = false
   @Input() expandButtonsPosition: 'right' | 'left' = null
   @Input() editModalComponent: ComponentType<any>
@@ -58,14 +70,28 @@ export class PanelComponent implements OnInit {
     | 'funding'
     | 'research-resources'
   @Input() userRecord: UserRecord
+  @Input() defaultPutCode: any
   @Input() putCode: any
   @Input() visibility: VisibilityStrings
+  @Input() visibilityError: boolean
+
   @Input() hasNestedPanels: false
   @Input() customControls = false
   @Input() openState = true
   @Input() editable = true
   @Input() selectable = false
+  @Input() selectAll = false
   @Input() checkbox = false
+  _displayTheStack: boolean
+  @Input()
+  set displayTheStack(value: boolean) {
+    this._displayTheStack = value
+    this.displayTheStackChange.emit(value)
+  }
+  get displayTheStack(): boolean {
+    return this._displayTheStack
+  }
+  @Output() displayTheStackChange = new EventEmitter<boolean>()
   @Output() openStateChange = new EventEmitter<boolean>()
   @Output() checkboxChangePanel = new EventEmitter<any>()
 
@@ -81,45 +107,34 @@ export class PanelComponent implements OnInit {
   }
 
   @Input() isUserSource = false
+  @Input() hasExternalIds: boolean
   @Input() userVersionPresent: boolean
+
+  @Input() id: string
+  @Input() email = false
+  @Input() names = false
   selected: boolean
 
-  formVisibility: FormGroup
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
-
-  panelForm: FormGroup
+  tooltipLabelOpenSources = $localize`:@@shared.openSourceToEdit:Open sources to edit you own version`
+  tooltipLabelYourOwnVersion = $localize`:@@shared.youCanOnlyEditYour:You can only edit your own version`
+  tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
 
   constructor(
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
+    private _userService: UserService,
     private _affiliationService: RecordAffiliationService,
     private _fundingService: RecordFundingsService,
     private _peerReviewService: RecordPeerReviewService,
     private _researchResourcesService: RecordResearchResourceService,
-    private _worksService: RecordWorksService
+    private _worksService: RecordWorksService,
+    private _verificationEmailModalService: VerificationEmailModalService,
+    @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {
-    if (this.type === 'peer-review' && this.elements) {
-      this.putCode = []
-      this.elements.peerReviewDuplicateGroups.forEach(
-        (peerReviewDuplicateGroup) => {
-          this.putCode.push(
-            peerReviewDuplicateGroup.peerReviews[0].putCode.value
-          )
-          this.visibility =
-            peerReviewDuplicateGroup.peerReviews[0].visibility.visibility
-        }
-      )
-    }
-
-    if (this.visibility) {
-      this.formVisibility = new FormGroup({
-        visibility: new FormControl(this.visibility),
-      })
-    }
-  }
+  ngOnInit(): void {}
 
   isArrayAndIsNotEmpty(
     obj:
@@ -139,6 +154,23 @@ export class PanelComponent implements OnInit {
   }
 
   openModal(options?: { createACopy: boolean }) {
+    const primaryEmail = this.userRecord?.emails?.emails?.find(
+      (email) => email.primary
+    )
+    if (primaryEmail && !primaryEmail.verified) {
+      if (this.email || this.names) {
+        this.open(options)
+      } else {
+        this._verificationEmailModalService.openVerificationEmailModal(
+          primaryEmail.value
+        )
+      }
+    } else {
+      this.open(options)
+    }
+  }
+
+  open(options?: { createACopy: boolean }) {
     this._platform
       .get()
       .pipe(first())
@@ -147,9 +179,10 @@ export class PanelComponent implements OnInit {
         if (this.editModalComponent) {
           modalComponent = this._dialog.open(this.editModalComponent, {
             width: '850px',
-            maxWidth: platform.tabletOrHandset ? '95vw' : '80vw',
+            maxWidth: platform.tabletOrHandset ? '99%' : '80vw',
             data: this.userRecord,
           })
+          modalComponent.componentInstance.id = this.id
           modalComponent.componentInstance.options = options
           modalComponent.componentInstance.type = this.type
           modalComponent.componentInstance.affiliation = this.elements
@@ -187,7 +220,7 @@ export class PanelComponent implements OnInit {
     this.openStateChange.next(this.openState)
   }
 
-  updateVisibility() {
+  updateVisibility(visibility: VisibilityStrings) {
     switch (this.type) {
       case 'employment':
       case 'education':
@@ -198,43 +231,67 @@ export class PanelComponent implements OnInit {
       case 'service':
         this._affiliationService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'funding':
         this._fundingService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'works':
         this._worksService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value).value + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'research-resources':
         this._researchResourcesService
           .updateVisibility(
-            this.putCode,
-            this.formVisibility.get('visibility').value
+            this.stackSiblings.reduce(
+              (p, c) => p + (c.putCode as Value) + `,`,
+              ''
+            ),
+            visibility
           )
           .subscribe()
         break
       case 'peer-review':
-        this._peerReviewService
-          .updateVisibility(
-            this.putCode.join(),
-            this.formVisibility.get('visibility').value
+        const peerReviewPutCodes = []
+        if (this.elements) {
+          this.elements.peerReviewDuplicateGroups.forEach(
+            (peerReviewDuplicateGroup) => {
+              peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
+                peerReviewPutCodes.push(peerReview.putCode.value)
+              })
+            }
           )
+        }
+        this._peerReviewService
+          .updateVisibility(peerReviewPutCodes.join(), visibility)
           .subscribe()
         break
     }
+  }
+
+  @HostListener('window:visibilitychange')
+  onVisibilityChange() {
+    this._userService.setTimerAsHiddenState(this._window.document.hidden)
   }
 }

@@ -13,7 +13,12 @@ import {
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
 import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import {
+  MainPanelsState,
+  UserRecord,
+  UserRecordOptions,
+} from 'src/app/types/record.local'
+import { VisibilityStrings } from '../../../types/common.endpoint'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -29,9 +34,10 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
-  @Input() expandedContent: boolean
+  @Input() expandedContent: MainPanelsState
+  @Output() expandedContentChange = new EventEmitter<MainPanelsState>()
+
   @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   modalPeerReviewComponent = ModalPeerReviewsComponent
 
@@ -46,6 +52,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     orcidUrl: string
     loggedIn: boolean
   }
+  userRecord: UserRecord
   peerReviews: PeerReview[] = []
   platform: PlatformInfo
   detailsPeerReviews: {
@@ -89,6 +96,15 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.userSession = userSession
       })
 
+    this._record
+      .getRecord({
+        publicRecordId: this.isPublicRecord || undefined,
+      })
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((userRecord) => {
+        this.userRecord = userRecord
+      })
+
     // Loads the public record if `isPublicRecord` is defined
     // Otherwise loads the current login private record
     this._record
@@ -97,7 +113,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        if (userRecord.peerReviews !== undefined) {
+        if (userRecord?.peerReviews !== undefined) {
           this.loading = false
         }
         if (!isEmpty(userRecord?.peerReviews)) {
@@ -157,6 +173,23 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       })[0]
   }
 
+  getVisibility(peerReview: PeerReview): VisibilityStrings {
+    // Validate if there are not different types of visibilities between the Peer Reviews other wise display the error
+    const visibility =
+      peerReview.peerReviewDuplicateGroups[0].peerReviews[0].visibility
+        .visibility
+    peerReview.peerReviewDuplicateGroups.forEach((peerReviewDuplicateGroup) => {
+      const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(
+        (p) => p.visibility.visibility !== visibility
+      )
+      if (peerReviews.length > 0) {
+        peerReview.visibilityError = true
+      }
+    })
+
+    return visibility
+  }
+
   collapse(peerReview: PeerReview) {
     peerReview.showDetails = !peerReview.showDetails
   }
@@ -171,6 +204,5 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
       }
     }
-    this.expanded.emit({ type: 'peer-review', expanded })
   }
 }

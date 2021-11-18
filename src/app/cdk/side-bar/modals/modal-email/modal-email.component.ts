@@ -13,6 +13,7 @@ import {
   FormGroup,
   ValidationErrors,
   ValidatorFn,
+  Validators,
 } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
@@ -20,8 +21,14 @@ import { Subject } from 'rxjs'
 import { first, takeUntil, tap } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordEmailsService } from 'src/app/core/record-emails/record-emails.service'
-import { AssertionVisibilityString, EmailsEndpoint } from 'src/app/types'
+import { UserInfoService } from 'src/app/core/user-info/user-info.service'
+import {
+  AssertionVisibilityString,
+  EmailsEndpoint,
+  UserInfo,
+} from 'src/app/types'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -45,16 +52,22 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings = 'PRIVATE'
 
   isMobile: boolean
+  userInfo: UserInfo
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     public _recordEmails: RecordEmailsService,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    private _snackBar: SnackbarService,
+    private _userInfo: UserInfoService
   ) {}
 
   tempPrivacyState = 'PUBLIC'
   ngOnInit(): void {
+    this._userInfo.getUserInfo().subscribe((config) => {
+      this.userInfo = config
+    })
     this._platform
       .get()
       .pipe(takeUntil(this.$destroy))
@@ -102,11 +115,8 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   private formToBackend(
     emailForm: FormGroup,
     emails: AssertionVisibilityString[]
-  ): EmailsEndpoint {
-    const endpointCall: EmailsEndpoint = {
-      errors: [],
-      emails: [],
-    }
+  ): AssertionVisibilityString[] {
+    const allEmails = []
 
     emails
       .map((email) => email.putCode)
@@ -118,14 +128,14 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         const primary = emails[i].primary
 
         if (emailForm.value[key]) {
-          endpointCall.emails.push({
+          allEmails.push({
             value,
             visibility,
             primary,
           } as AssertionVisibilityString)
         }
       })
-    return endpointCall
+    return allEmails
   }
 
   /**
@@ -133,14 +143,20 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
    * This can be either with a existingEmail (with backend data)
    * or a new empty email input
    * @param  existingEmail: use when adding an email that already exists on the backend
+   * @param  newEmail: use when user is adding an new email
    */
-  addEmail(existingEmail?: AssertionVisibilityString): void {
-    const newPutCode = 'emailInput-' + this.addedEmailsCount
+  addEmail(
+    existingEmail?: AssertionVisibilityString,
+    newEmail?: boolean
+  ): void {
+    const newPutCode =
+      (newEmail ? 'newEmailInput' : 'emailInput-') + this.addedEmailsCount
 
     // Add email to the emails list
     // backend response come with no email putCode, so here we create one to be able to track those on the frontend
     this.emails.push({
       putCode: newPutCode,
+      action: existingEmail ? 'UPDATE' : 'ADD',
       ...existingEmail,
     } as AssertionVisibilityString)
 
@@ -150,6 +166,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
       new FormGroup({
         email: new FormControl(existingEmail ? existingEmail.value : '', {
           validators: [
+            Validators.required,
             OrcidValidators.email,
             this.allEmailsAreUnique(newPutCode),
           ],
@@ -163,7 +180,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         }),
         visibility: new FormControl(
           existingEmail ? existingEmail.visibility : this.defaultVisibility,
-          {}
+          {
+            validators: [this.emailsIsUnverified(newPutCode)],
+          }
         ),
       })
     )
@@ -222,6 +241,20 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     }
   }
 
+  emailsIsUnverified(controlKey): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (
+        control.value !== 'PRIVATE' &&
+        !this.showEmailAsVerified(controlKey)
+      ) {
+        return {
+          unverified: true,
+        }
+      }
+      return {}
+    }
+  }
+
   /**
    * Remove `duplicated` error on controls that are not listed on the list
    * @param formGroupKeysWithDuplicatedValues: List of controls with duplicated emails
@@ -259,17 +292,18 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
 
     // Add errors error on duplicated emails
     Object.keys(formGroup.controls).forEach((keyX) => {
-      const emailControlX = (formGroup.controls[keyX] as FormGroup).controls[
-        'email'
-      ]
+      let emailControlX: string = (formGroup.controls[keyX] as FormGroup)
+        .controls['email'].value
+      emailControlX = emailControlX.toLowerCase().trim()
+
       Object.keys(formGroup.controls).forEach((keyY) => {
-        const emailControlY = (formGroup.controls[keyY] as FormGroup).controls[
-          'email'
-        ]
+        let emailControlY: string = (formGroup.controls[keyY] as FormGroup)
+          .controls['email'].value
+        emailControlY = emailControlY.toLowerCase().trim()
 
         // Only if both controls are not empty
-        if (emailControlX.value && emailControlY.value) {
-          if (emailControlX.value === emailControlY.value && keyX !== keyY) {
+        if (emailControlX && emailControlY) {
+          if (emailControlX === emailControlY && keyX !== keyY) {
             formGroupKeysWithDuplicatedValues.push(keyY)
           }
         }
@@ -296,8 +330,16 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
   saveEvent() {
     if (this.emailsForm.valid) {
       const data = this.formToBackend(this.emailsForm, this.emails)
-      this._recordEmails.postEmails(data).pipe(first()).subscribe()
+      this._recordEmails
+        .postEmails({
+          emails: data,
+          errors: [],
+        })
+        .pipe(first())
+        .subscribe()
       this.closeEvent()
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 
@@ -311,25 +353,84 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     this.emailsForm.removeControl(controlKey)
   }
 
-  showNonVerifiedData(controlKey: string): boolean {
+  showNonVerifiedData(controlKey: string, otherEmail?: boolean): boolean {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
     const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
     )
+
+    if (
+      formValue &&
+      !(this.verificationsSend.indexOf(formValue) > -1) &&
+      otherEmail &&
+      this.originalEmailsBackendCopy.find((email) => email.value === formValue)
+        ?.primary
+    ) {
+      return false
+    }
+
     return realEmailBackendContext && !realEmailBackendContext.verified
   }
 
+  showVisibility(controlKey: string, action?: string): boolean {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
+    const formValue = this.emailsForm.value[controlKey]?.email
+    const realEmailBackendContext = this.originalEmailsBackendCopy.find(
+      (email) => email.value === formValue
+    )
+    const result = !!realEmailBackendContext
+
+    if (
+      result &&
+      realEmailBackendContext.primary &&
+      this.emailsForm.hasError('duplicated', [controlKey, 'email'])
+    ) {
+      return false
+    }
+
+    if (!result && action === 'UPDATE') {
+      this.emailsForm.patchValue({
+        [controlKey]: {
+          visibility: 'PRIVATE',
+        },
+      })
+    }
+    return result
+  }
+
   verificationEmailWasSend(controlKey: string) {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
     const formValue = this.emailsForm.value[controlKey]?.email
     return this.verificationsSend.indexOf(formValue) > -1
   }
 
   showEmailAsVerified(controlKey: string): boolean {
+    if (controlKey.startsWith('new')) {
+      return false
+    }
     const formValue = this.emailsForm.value[controlKey]?.email
     const realEmailBackendContext = this.originalEmailsBackendCopy.find(
       (email) => email.value === formValue
     )
-    return realEmailBackendContext?.verified
+
+    const result = realEmailBackendContext?.verified
+
+    if (
+      result &&
+      realEmailBackendContext.primary &&
+      this.emailsForm.hasError('duplicated', [controlKey, 'email'])
+    ) {
+      return false
+    }
+
+    return result
   }
 
   ngOnDestroy() {

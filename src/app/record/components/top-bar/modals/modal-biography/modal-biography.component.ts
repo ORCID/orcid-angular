@@ -10,11 +10,6 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormControl, FormGroup } from '@angular/forms'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
-import { OrcidValidators } from '../../../../../validators'
-import {
-  ILLEGAL_NAME_CHARACTERS_REGEXP,
-  URL_REGEXP,
-} from '../../../../../constants'
 import { BiographyEndPoint } from '../../../../../types/record-biography.endpoint'
 import {
   Visibility,
@@ -48,6 +43,7 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
 
   ngOrcidAddYourBiography = $localize`:@@topBar.addYourBiography:Add you biography`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@shared.whoCanSeeBio:Control who can see your biography by setting the visibility. Your default visibility setting is`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -68,20 +64,15 @@ export class ModalBiographyComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingBiography = false
     this.userRecord = this.data
-    this.biographyVisibility = this.userRecord.preferences.default_visibility
+    this.defaultVisibility = this.userRecord.preferences.default_visibility
+    this.biographyVisibility = this.defaultVisibility
     if (this.userRecord.biography && this.userRecord.biography.biography) {
       this.biography = this.userRecord.biography.biography.value
       this.biographyVisibility = this.userRecord.biography.visibility.visibility
     }
-
     this.biographyForm = new FormGroup({
-      biography: new FormControl(this.biography, {
-        validators: [
-          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
-          OrcidValidators.notPattern(URL_REGEXP),
-        ],
-      }),
-      visibility: new FormControl(this.biographyVisibility, {}),
+      biography: new FormControl(this.biography),
+      visibility: new FormControl(this.biographyVisibility),
     })
   }
 

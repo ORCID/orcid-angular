@@ -1,3 +1,15 @@
+.row .col {
+  padding-inline-start: 0;
+}
+
+.orcid-works-best {
+  margin-bottom: 16px;
+}
+
+.terms-of-use {
+  margin-top: 0;
+}
+
 .add-more-email {
   display: flex;
   align-items: center;
@@ -28,24 +40,37 @@ mat-form-field {
       width: 100%;
     }
   }
+  .privacy-selector {
+    justify-content: unset;
+    padding-inline-start: 8px;
+  }
 }
 
 .primary-email-label {
   display: flex;
   align-items: center;
+  word-break: break-all;
   mat-icon {
+    margin-inline-start: 6px;
     margin-inline-end: 16px;
+  }
+  mat-icon,
+  .other-names {
+    margin-inline-start: 12px;
   }
 }
 
 .email-input-line {
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   img {
     margin-top: 6px;
     cursor: move;
     z-index: 1;
     margin-inline-end: 18px;
+  }
+  .email-activated {
+    margin-bottom: 12px;
   }
 }
 
@@ -83,7 +108,7 @@ mat-form-field {
   .email-input-container {
     padding: 0;
     max-width: 100%;
-    padding-inline-end: 0px;
+    padding-inline-end: 0;
   }
 
   .actions-wrapper,
@@ -100,5 +125,29 @@ mat-form-field {
 .additional-email {
   ::ng-deep .mat-form-field-wrapper {
     padding-bottom: 18px !important;
+  }
+}
+
+.only-verified {
+  padding: 0 4px;
+}
+
+.visibility-hidden {
+  justify-content: end !important;
+  button {
+    margin-inline-end: 8px;
+  }
+}
+
+.info {
+  padding: 16px;
+  margin-top: 32px;
+  border: solid 2px;
+  border-radius: 4px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  p {
+    margin: 0;
   }
 }

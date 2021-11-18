@@ -26,7 +26,7 @@ export class TopBarRecordIssuesComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        this.userInfo = userRecord.userInfo
+        this.userInfo = userRecord?.userInfo
       })
   }
   ngOnDestroy() {

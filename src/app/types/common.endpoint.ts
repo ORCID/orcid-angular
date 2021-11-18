@@ -1,3 +1,5 @@
+import { WorkRelationships } from './works.endpoint'
+
 export interface LastModifiedDate {
   value: number
 }
@@ -124,9 +126,16 @@ export interface ExternalIdentifier {
   externalIdentifierId: ExternalIdentifierId
   externalIdentifierType: Value
   url: Value
-  relationship: Value
+  relationship: RelationshipValue
   normalized: Value
   normalizedUrl: Value
+}
+
+export interface RelationshipValue {
+  errors?: any[] // TODO is this always empty?
+  value: WorkRelationships
+  required?: boolean
+  getRequiredMessage?: any
 }
 
 export interface ExternalIdentifierId {
@@ -181,6 +190,12 @@ export type ScopesStrings =
   | '/read-limited'
 
 export type VisibilityStrings = 'PUBLIC' | 'LIMITED' | 'PRIVATE'
+
+export const VisibilityStringLabel = {
+  PUBLIC: $localize`:@@shared.everyone:Everyone`,
+  LIMITED: $localize`:@@shared.trustedParties:Trusted parties`,
+  PRIVATE: $localize`:@@shared.onlyMe:Only me`,
+}
 
 export type DeprecatedScopesStrings =
   | '/orcid-works/read-limited'

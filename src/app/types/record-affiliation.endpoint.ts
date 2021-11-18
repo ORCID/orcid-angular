@@ -47,8 +47,8 @@ export interface AffiliationGroup {
   groupId: string
   activeVisibility: string // TODO is this always empty?
   userVersionPresent: boolean
-  externalIdentifiers: [any] // TODO is this always empty?
-  affiliationType: string // Todo make an enum
+  externalIdentifiers: ExternalIdentifier[]
+  affiliationType: AffiliationGroupsTypes
 }
 
 export interface Affiliation extends AssertionBase {
@@ -91,6 +91,20 @@ export interface Organization {
   sourceType: string
   url: string
   value: string
+}
+
+export interface DisambiguatedOrganization {
+  sourceId: string
+  country: string
+  orgType: string
+  countryForDisplay: string
+  disambiguatedAffiliationIdentifier?: any
+  city: string
+  sourceType: string
+  region: string
+  value: string
+  url?: string
+  affiliationKey: string
 }
 
 export interface AffiliationTypeValue {

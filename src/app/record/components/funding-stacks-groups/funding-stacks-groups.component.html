@@ -4,10 +4,11 @@
   class="row"
   [title]="ngOrcidFunding"
   [type]="'funding'"
+  [userRecord]="userRecord"
   [currentAmount]="fundings.length"
   [isPublicRecord]="isPublicRecord"
-  [expandedContent]="expandedContent"
-  (expanded)="expandedClicked($event)"
+  [(expandedContent)]="expandedContent['FUNDING']"
+  (expandedContentChange)="expandedContentChange.emit(expandedContent)"
   [labelAddButton]="labelAddButton"
   [labelSortButton]="labelSortButton"
   [sortTypes]="['date', 'title', 'type']"
@@ -16,6 +17,7 @@
 >
   <ng-container *ngIf="fundings.length > 0">
     <app-funding-stack
+      [userRecord]="userRecord"
       *ngFor="let fundingGroup of fundings; trackBy: trackByFundingGroup"
       [fundingStack]="fundingGroup"
       [isPublicRecord]="isPublicRecord"

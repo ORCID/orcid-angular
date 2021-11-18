@@ -1,7 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { combineLatest, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, startWith, tap } from 'rxjs/operators'
+import { combineLatest, Observable, of, ReplaySubject, Subject } from 'rxjs'
+import {
+  catchError,
+  map,
+  retry,
+  startWith,
+  takeUntil,
+  tap,
+} from 'rxjs/operators'
 import {
   EmailsEndpoint,
   ExternalIdentifier,
@@ -47,6 +54,7 @@ import { UserInfoService } from '../user-info/user-info.service'
 })
 export class RecordService {
   recordSubject$: ReplaySubject<UserRecord>
+  private readonly $destroy = new Subject()
 
   constructor(
     private _http: HttpClient,
@@ -74,6 +82,7 @@ export class RecordService {
     'Content-Type': 'application/json',
   })
 
+  subscriptionSourceCountDebugger = 0
   /**
    * @param options:
    * - use `forceReload` to force all server calls.
@@ -85,103 +94,121 @@ export class RecordService {
    * @returns And subject with all the require data from private or public orcid record
    */
   getRecord(options?: UserRecordOptions): Observable<UserRecord> {
-    if (!this.recordSubject$ || options.forceReload) {
+    if (!this.recordSubject$) {
       this.recordSubject$ = new ReplaySubject<UserRecord>(1)
-      if (environment.debugger) {
-        this.recordSubject$.subscribe((value) => {
-          console.debug(value)
-        })
-      }
-
-      combineLatest([
-        this._recordEmailsService
-          .getEmails(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordOtherNamesService
-          .getOtherNames(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordCountryService
-          .getAddresses(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordKeywordService
-          .getKeywords(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordWebsitesService
-          .getWebsites(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordPersonalIdentifier
-          .getPersonalIdentifiers(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordNamesService
-          .getNames(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordBiographyService
-          .getBiography(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordAffiliations
-          .getAffiliations(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordFundings
-          .getFundings(options)
-          .pipe(startWith(<Object>undefined)),
-        this.getPreferences(options).pipe(startWith(<Object>undefined)),
-        this._recordPeerReviewService
-          .getPeerReviewGroups(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordResearchResourceService
-          .getResearchResourcePage(options)
-          .pipe(startWith(<Object>undefined)),
-        this._recordWorkService
-          .getWorks(options)
-          .pipe(startWith(<Object>undefined)),
-        this.getLastModifiedTime(options).pipe(startWith(<Object>undefined)),
-        this._userInfo.getUserInfo(options).pipe(startWith(<Object>undefined)),
-      ])
-        .pipe(
-          tap(
-            ([
-              emails,
-              otherNames,
-              countries,
-              keyword,
-              website,
-              externalIdentifier,
-              names,
-              biography,
-              affiliations,
-              fundings,
-              preferences,
-              peerReviews,
-              researchResources,
-              works,
-              lastModifiedTime,
-              userInfo,
-            ]) => {
-              this.recordSubject$.next({
-                emails: emails as EmailsEndpoint,
-                otherNames: otherNames as OtherNamesEndPoint,
-                countries: countries as CountriesEndpoint,
-                keyword: keyword as KeywordEndPoint,
-                website: website as WebsitesEndPoint,
-                externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
-                names: names as NamesEndPoint,
-                biography: biography as BiographyEndPoint,
-                affiliations: affiliations as AffiliationUIGroup[],
-                fundings: fundings as FundingGroup[],
-                preferences: preferences as Preferences,
-                peerReviews: peerReviews as PeerReview[],
-                researchResources: researchResources as ResearchResourcesEndpoint,
-                works: works as WorksEndpoint,
-                lastModifiedTime: lastModifiedTime as any,
-                userInfo: userInfo as UserInfo,
-              })
-            }
-          )
-        )
-        .subscribe()
+      this.attachDebugger()
+    } else if (!options?.forceReload) {
+      return this.recordSubject$.asObservable()
     }
 
+    if (this.recordSubject$ && options?.cleanCacheIfExist) {
+      this.recordSubject$.next(undefined)
+    }
+    const subscriptionCount = this.subscriptionSourceCountDebugger
+    this.subscriptionSourceCountDebugger =
+      this.subscriptionSourceCountDebugger + 1
+
+    // Un-subscribe from previous combineLatest subscriptions
+    this.$destroy.next()
+    // Subscribe to a new combineLatest http calls subscription
+    combineLatest([
+      this._recordEmailsService
+        .getEmails(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordOtherNamesService
+        .getOtherNames(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordCountryService
+        .getAddresses(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordKeywordService
+        .getKeywords(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordWebsitesService
+        .getWebsites(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordPersonalIdentifier
+        .getPersonalIdentifiers(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordNamesService
+        .getNames(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordBiographyService
+        .getBiography(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordAffiliations
+        .getAffiliations(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordFundings
+        .getFundings(options)
+        .pipe(startWith(<Object>undefined)),
+      this.getPreferences(options)?.pipe(startWith(<Object>undefined)),
+      this._recordPeerReviewService
+        .getPeerReviewGroups(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordResearchResourceService
+        .getResearchResourcePage(options)
+        .pipe(startWith(<Object>undefined)),
+      this._recordWorkService
+        .getWorks(options)
+        .pipe(startWith(<Object>undefined)),
+      this.getLastModifiedTime(options).pipe(startWith(<Object>undefined)),
+      this._userInfo.getUserInfo(options).pipe(startWith(<Object>undefined)),
+    ])
+      .pipe(
+        tap(
+          ([
+            emails,
+            otherNames,
+            countries,
+            keyword,
+            website,
+            externalIdentifier,
+            names,
+            biography,
+            affiliations,
+            fundings,
+            preferences,
+            peerReviews,
+            researchResources,
+            works,
+            lastModifiedTime,
+            userInfo,
+          ]) => {
+            this.recordSubject$.next({
+              subscriptionCount: subscriptionCount,
+              emails: emails as EmailsEndpoint,
+              otherNames: otherNames as OtherNamesEndPoint,
+              countries: countries as CountriesEndpoint,
+              keyword: keyword as KeywordEndPoint,
+              website: website as WebsitesEndPoint,
+              externalIdentifier: externalIdentifier as PersonIdentifierEndpoint,
+              names: names as NamesEndPoint,
+              biography: biography as BiographyEndPoint,
+              affiliations: affiliations as AffiliationUIGroup[],
+              fundings: fundings as FundingGroup[],
+              preferences: preferences as Preferences,
+              peerReviews: peerReviews as PeerReview[],
+              researchResources: researchResources as ResearchResourcesEndpoint,
+              works: works as WorksEndpoint,
+              lastModifiedTime: lastModifiedTime as any,
+              userInfo: userInfo as UserInfo,
+            })
+          }
+        ),
+        takeUntil(this.$destroy)
+      )
+
+      .subscribe()
+
     return this.recordSubject$.asObservable()
+  }
+  attachDebugger() {
+    if (environment.debugger) {
+      this.recordSubject$.subscribe((value) => {
+        console.debug(value)
+      })
+    }
   }
 
   getExternalIdentifier(): Observable<ExternalIdentifier> {
@@ -245,6 +272,7 @@ export class RecordService {
     if (options.publicRecordId) {
       return of(undefined)
     }
+
     return this._http
       .get<Preferences>(
         environment.API_WEB + `account/preferences.json`,

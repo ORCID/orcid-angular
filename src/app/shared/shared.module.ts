@@ -27,6 +27,8 @@ import { RecordWorkRelationshipLabelPipe } from './pipes/record-work-relationshi
 import { RecordWorkTitleNameLabelPipe } from './pipes/record-work-title-name-label/record-work-title-name-label.pipe'
 import { RecordWorkTypeLabelPipe } from './pipes/record-work-type-label/record-work-type-label.pipe'
 import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
+import { TrailingZerosPipe } from './pipes/trailing-zeros/trailing-zeros.pipe'
+import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visibility-string-label.pipe'
 
 @NgModule({
   imports: [
@@ -54,6 +56,8 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
     RecordFundingRelationshipHintLabelPipe,
     RecordFundingTypeLabelPipe,
     AffiliationTypeLabelPipe,
+    TrailingZerosPipe,
+    VisibilityStringLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -79,6 +83,8 @@ import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe'
     RecordFundingRelationshipHintLabelPipe,
     RecordFundingTypeLabelPipe,
     AffiliationTypeLabelPipe,
+    TrailingZerosPipe,
+    VisibilityStringLabelPipe,
   ],
   providers: [], // Should not provide anything
 })

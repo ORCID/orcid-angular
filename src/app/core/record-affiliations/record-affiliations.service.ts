@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   AffiliationUIGroup,
   AffiliationsEndpoint,
   Affiliation,
   Organization,
+  DisambiguatedOrganization,
 } from 'src/app/types/record-affiliation.endpoint'
 import { environment } from 'src/environments/environment'
 
@@ -21,7 +22,6 @@ import { VisibilityStrings } from '../../types/common.endpoint'
   providedIn: 'root',
 })
 export class RecordAffiliationService {
-  affiliationsSubject = new ReplaySubject<AffiliationUIGroup[]>(1)
   lastEmittedValue: AffiliationUIGroup[]
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -29,6 +29,10 @@ export class RecordAffiliationService {
   })
 
   $affiliations: ReplaySubject<AffiliationUIGroup[]>
+  private _$loading = new BehaviorSubject<boolean>(true)
+  public get $loading() {
+    return this._$loading.asObservable()
+  }
 
   constructor(
     private _http: HttpClient,
@@ -48,12 +52,18 @@ export class RecordAffiliationService {
       return this.$affiliations
     }
 
+    if (options.cleanCacheIfExist && this.$affiliations) {
+      this.$affiliations.next(undefined)
+    }
+
+    this._$loading.next(true)
     this.getGroupAndSortAffiliations(options)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of([])),
         tap((value) => {
+          this._$loading.next(false)
           this.lastEmittedValue = cloneDeep(value)
           this.$affiliations.next(value)
         })
@@ -186,6 +196,22 @@ export class RecordAffiliationService {
       )
   }
 
+  getOrganizationDisambiguated(
+    id: string
+  ): Observable<DisambiguatedOrganization> {
+    return this._http
+      .get<DisambiguatedOrganization>(
+        environment.API_WEB + 'affiliations/disambiguated/id/' + id,
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
   updateVisibility(
     putCode: string,
     visibility: VisibilityStrings
@@ -212,6 +238,20 @@ export class RecordAffiliationService {
           'affiliations/affiliation.json' +
           '?id=' +
           encodeURIComponent(putCode)
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.getAffiliations({ forceReload: true }))
+      )
+  }
+
+  updatePreferredSource(putCode: string): Observable<any> {
+    return this._http
+      .get(
+        environment.API_WEB +
+          'affiliations/updateToMaxDisplay.json?putCode=' +
+          putCode
       )
       .pipe(
         retry(3),

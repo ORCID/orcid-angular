@@ -24,8 +24,13 @@
     </div>
   </div>
   <div class="row">
-    <h3 i18n="@@shared.availableSearch">Available Search & Link wizards</h3>
-    <mat-divider class="row orcid-divider"></mat-divider>
+    <h3>
+      <ng-container i18n="@@shared.availableSearch"
+        >Available Search & Link wizards</ng-container
+      >
+      ({{ total }})
+    </h3>
+    <hr />
   </div>
   <app-search-link-wizard
     [recordImportWizards]="recordImportWizards"

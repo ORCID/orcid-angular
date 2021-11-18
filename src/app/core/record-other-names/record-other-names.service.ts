@@ -7,6 +7,7 @@ import { OtherNamesEndPoint } from '../../types/record-other-names.endpoint'
 import { environment } from '../../../environments/environment'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
+import { flatMap, groupBy } from 'lodash'
 
 @Injectable({
   providedIn: 'root',
@@ -30,14 +31,24 @@ export class RecordOtherNamesService {
     }
   ): Observable<OtherNamesEndPoint> {
     if (options.publicRecordId) {
-      return this._recordPublicSidebar
-        .getPublicRecordSideBar(options)
-        .pipe(map((value) => value.otherNames))
+      return this._recordPublicSidebar.getPublicRecordSideBar(options).pipe(
+        map((value) => value.otherNames),
+        map((value) => {
+          value.otherNames = flatMap(
+            groupBy(value.otherNames, (item) =>
+              item.content.toLowerCase().trim()
+            )
+          )
+          return value
+        })
+      )
     }
     if (!this.$otherNames) {
       this.$otherNames = new ReplaySubject<OtherNamesEndPoint>(1)
     } else if (!options.forceReload) {
       return this.$otherNames
+    } else if (options.cleanCacheIfExist && this.$otherNames) {
+      this.$otherNames.next(<OtherNamesEndPoint>undefined)
     }
 
     this._http

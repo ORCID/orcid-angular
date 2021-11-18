@@ -1,7 +1,23 @@
+app-modal {
+  ::ng-deep .content-wrapper {
+    padding-bottom: 20px !important;
+  }
+}
+
 .affiliation-info {
   margin-bottom: 16px;
 
   .added {
     margin-inline-end: 16px;
+  }
+}
+
+.no-info {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+
+  mat-icon {
+    margin-inline-end: 4px;
   }
 }

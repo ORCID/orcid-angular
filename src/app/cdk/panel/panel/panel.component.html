@@ -24,9 +24,9 @@
   <div *ngIf="selectable">
     <mat-checkbox
       class="text-wrap"
-      *ngIf="selectable && !isPublicRecord"
+      *ngIf="(defaultPutCode === putCode || displayTheStack) && !isPublicRecord"
       (change)="checked($event)"
-      [ngModel]="selected"
+      [(ngModel)]="selected"
     >
       <ng-container *ngIf="expandButtonsPosition !== 'left'">
         <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
@@ -43,11 +43,21 @@
   </div>
   <div class="buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
-    <ng-container *ngIf="visibility && !isPublicRecord">
-      <app-panel-privacy
-        class="panel-privacy"
-        [visibility]="visibility"
-      ></app-panel-privacy>
+    <ng-container
+      *ngIf="visibility && !isPublicRecord && showVisibilityControl"
+    >
+      <ng-container *ngIf="visibilityError">
+        <mat-icon
+          class="large-material-icon error"
+          [matTooltip]="tooltipLabelVisibilityError"
+          >info</mat-icon
+        >
+      </ng-container>
+      <app-privacy-selector
+        [whiteBackground]="true"
+        (ngModelChange)="updateVisibility($event)"
+        [ngModel]="visibility"
+      ></app-privacy-selector>
     </ng-container>
 
     <!-- [CUSTOM CONTROLS] FOR `PEER REVIEWS` AND `RESEARCH RESOURCES` -->
@@ -65,16 +75,39 @@
         >
           <mat-icon class="material-icons-outlined">edit</mat-icon>
         </button>
-        <button
-          mat-icon-button
-          *ngIf="
-            !isPublicRecord && !isUserSource && userVersionPresent !== null
-          "
-          [matTooltip]="tooltipLabelMakeCopy"
-          (click)="openModal({ createACopy: true })"
+        <ng-container
+          *ngIf="!isPublicRecord && !isUserSource && hasExternalIds"
         >
-          <mat-icon class="material-icons-outlined">call_split</mat-icon>
-        </button>
+          <div
+            *ngIf="userVersionPresent"
+            [matTooltip]="
+              displayTheStack
+                ? tooltipLabelYourOwnVersion
+                : tooltipLabelOpenSources
+            "
+          >
+            <button *ngIf="displayTheStack" [disabled]="true" mat-icon-button>
+              <mat-icon class="material-icons-outlined">call_split</mat-icon>
+            </button>
+            <button
+              *ngIf="!displayTheStack"
+              [disabled]="false"
+              mat-icon-button
+              (click)="displayTheStackChange.next(true)"
+            >
+              <mat-icon class="material-icons-outlined">call_split</mat-icon>
+            </button>
+          </div>
+          <button
+            *ngIf="!userVersionPresent"
+            mat-icon-button
+            [matTooltip]="tooltipLabelMakeCopy"
+            (click)="openModal({ createACopy: true })"
+            [disabled]
+          >
+            <mat-icon class="material-icons-outlined">call_split</mat-icon>
+          </button>
+        </ng-container>
       </ng-container>
       <ng-container *ngIf="!isAffiliation()">
         <button

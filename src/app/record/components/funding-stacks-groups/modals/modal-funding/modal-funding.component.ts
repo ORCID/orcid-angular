@@ -7,10 +7,23 @@ import {
   FormGroup,
   Validators,
   FormArray,
+  AbstractControl,
 } from '@angular/forms'
-import { dateMonthYearValidator } from '../../../../../shared/validators/date/date.validator'
+import {
+  dateMonthYearValidator,
+  endDateMonthYearValidator,
+} from '../../../../../shared/validators/date/date.validator'
+import { translatedTitleValidator } from '../../../../../shared/validators/translated-title/translated-title.validator'
 
-import { URL_REGEXP } from '../../../../../constants'
+import {
+  AMOUNT_REGEXP,
+  MAX_LENGTH_LESS_THAN_FIVE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE,
+  MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR,
+  URL_REGEXP,
+} from '../../../../../constants'
 import { UserRecord } from '../../../../../types/record.local'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
 import { EMPTY, Subject } from 'rxjs'
@@ -21,6 +34,7 @@ import {
 import {
   VisibilityStrings,
   Organization,
+  ExternalIdentifier,
 } from '../../../../../types/common.endpoint'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { Observable } from 'rxjs/internal/Observable'
@@ -45,6 +59,8 @@ import {
   FundingExternalIndentifierType,
 } from 'src/app/types/record-funding.endpoint'
 import { Title } from '@angular/platform-browser'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
   selector: 'app-modal-funding',
@@ -69,7 +85,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   userRecord: UserRecord
   userSession: UserSession
   isMobile: boolean
-  defaultVisibility: VisibilityStrings
   filteredOptions: Observable<Organization[]>
   loadingFunding = true
   startDateValid: boolean
@@ -82,7 +97,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   fundingProjectTitle = ''
   fundingProjectLink = ''
   description = ''
-  visibility = 'PRIVATE'
+  defaultVisibility: VisibilityStrings
   agencyName = ''
   city = ''
   region = ''
@@ -91,6 +106,8 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   amount = ''
   currencyCode = ''
   grantsArray: FormArray
+  grantsArrayDisplayState: boolean[] = []
+
   disambiguatedFundingSourceId = ''
   disambiguatedFundingSource = ''
   translatedTitleContent = ''
@@ -116,6 +133,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
+  ngOrcidFundingType = $localize`:@@funding.selectAType:Select a funding type`
+  ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -126,7 +146,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _recordCountryService: RecordCountriesService,
     private _fundingsService: RecordFundingsService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _snackBar: SnackbarService,
+    private _record: RecordService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -143,95 +165,118 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initialValues()
-
-    this.fundingForm = this._formBuilder.group({
-      fundingType: new FormControl(this.fundingType, {
-        validators: [Validators.required],
-      }),
-      fundingSubtype: new FormControl(this.fundingSubtype, {}),
-      fundingProjectTitle: new FormControl(this.fundingProjectTitle, {
-        validators: [Validators.required],
-      }),
-      translatedTitleContent: [this.translatedTitleContent, []],
-      translatedTitleLanguage: [this.translatedTitleLanguage, []],
-      fundingProjectLink: new FormControl(this.fundingProjectLink, {
-        validators: [Validators.pattern(URL_REGEXP)],
-      }),
-      description: new FormControl(this.description, {
-        validators: [Validators.required],
-      }),
-      amount: new FormControl(this.amount, {}),
-      currencyCode: new FormControl(this.currencyCode, {}),
-      startDateGroup: this._formBuilder.group(
-        {
-          startDateMonth: [''],
-          startDateYear: [''],
-        },
-        { validator: dateMonthYearValidator('startDate') }
-      ),
-      endDateGroup: this._formBuilder.group(
-        {
-          endDateMonth: [''],
-          endDateYear: [''],
-        },
-        { validator: dateMonthYearValidator('endDate') }
-      ),
-      agencyName: new FormControl(this.agencyName, {
-        validators: [Validators.required],
-      }),
-      city: new FormControl(this.city, {
-        validators: [Validators.required],
-      }),
-      region: new FormControl(this.region, {}),
-      country: new FormControl(this.country, {
-        validators: [Validators.required],
-      }),
-      grants: new FormArray([
-        this._formBuilder.group({
-          grantNumber: ['', []],
-          grantUrl: ['', [Validators.pattern(URL_REGEXP)]],
-          fundingRelationship: [FundingRelationships.self, []],
+    this.fundingForm = this._formBuilder.group(
+      {
+        fundingType: new FormControl(this.fundingType, {
+          validators: [Validators.required],
         }),
-      ]),
-      visibility: new FormControl(this.visibility, {
-        validators: [Validators.required],
-      }),
-    })
+        fundingSubtype: new FormControl(this.fundingSubtype, {
+          validators: [
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE),
+          ],
+        }),
+        fundingProjectTitle: new FormControl(this.fundingProjectTitle, {
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
+        }),
+        translatedTitleGroup: this._formBuilder.group(
+          {
+            translatedTitleContent: new FormControl('', {
+              validators: [
+                Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+              ],
+            }),
+            translatedTitleLanguage: [''],
+          },
+          {
+            validators: [
+              translatedTitleValidator,
+              Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+            ],
+          }
+        ),
+        fundingProjectLink: new FormControl(this.fundingProjectLink, {
+          validators: [
+            Validators.pattern(URL_REGEXP),
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
+          ],
+        }),
+        description: new FormControl(this.description, {
+          validators: [
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_FIVE_THOUSAND),
+          ],
+        }),
+        amount: new FormControl(this.amount, {
+          validators: [Validators.pattern(AMOUNT_REGEXP)],
+        }),
+        currencyCode: new FormControl(this.currencyCode, {}),
+        startDateGroup: this._formBuilder.group(
+          {
+            startDateMonth: [''],
+            startDateYear: [''],
+          },
+          { validator: [dateMonthYearValidator('startDate')] }
+        ),
+        endDateGroup: this._formBuilder.group(
+          {
+            endDateMonth: [''],
+            endDateYear: [''],
+          },
+          { validator: dateMonthYearValidator('endDate') }
+        ),
+        agencyName: new FormControl(this.agencyName, {
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
+        }),
+        city: new FormControl(this.city, {
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
+        }),
+        region: new FormControl(this.region, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
+        country: new FormControl(this.country, {
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
+        }),
+        grants: new FormArray([]),
+        visibility: new FormControl(this.defaultVisibility, {
+          validators: [Validators.required],
+        }),
+      },
+      {
+        validator: endDateMonthYearValidator(),
+      }
+    )
+    this.grantsArray = this.fundingForm.controls.grants as FormArray
 
     if (this.funding) {
-      if (this.funding.endDate.year) {
-        this.fundingForm.patchValue({
-          endDateGroup: {
-            endDateYear: Number(this.funding.endDate.year),
-            endDateMonth: Number(this.funding.endDate.month),
-          },
-        })
-      }
-
-      if (this.funding.startDate.year) {
-        this.fundingForm.patchValue({
-          startDateGroup: {
-            startDateYear: Number(this.funding.startDate.year),
-            startDateMonth: Number(this.funding.startDate.month),
-          },
-        })
-      }
+      this.initFormValues()
     }
-
-    this.grantsArray = this.fundingForm.controls.grants as FormArray
-    let i = 0
-    this.funding?.externalIdentifiers?.forEach((extIdentifier) => {
-      this.grantsArray.controls.push(
-        this._formBuilder.group({
-          grantNumber: [extIdentifier.externalIdentifierId.value, []],
-          grantUrl: [extIdentifier.url.value, [Validators.pattern(URL_REGEXP)]],
-          fundingRelationship: [extIdentifier.relationship.value, []],
+    this._record
+      .getPreferences()
+      .pipe(first())
+      .subscribe((userPreferences) => {
+        this.defaultVisibility = userPreferences.default_visibility
+        this.fundingForm.patchValue({
+          visibility: this.funding?.visibility?.visibility
+            ? this.funding?.visibility?.visibility
+            : this.defaultVisibility,
         })
-      )
-      this.checkGrantsChanges(i)
-      i++
-    })
+      })
+    this.listenFormChanges()
+    this.getCountryCodes()
+  }
 
+  private getCountryCodes() {
     this._recordCountryService
       .getCountryCodes()
       .pipe(first())
@@ -258,6 +303,18 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           })
         }
       })
+  }
+
+  private listenFormChanges() {
+    this.fundingForm.controls['fundingProjectLink'].valueChanges.subscribe(
+      (value) => {
+        if (this.fundingForm.controls['fundingProjectLink'].valid) {
+          this.appendProtocolToTheURL(
+            this.fundingForm.controls['fundingProjectLink']
+          )
+        }
+      }
+    )
 
     this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
       startWith(''),
@@ -266,6 +323,55 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         return this._filter(val || '')
       })
     )
+
+    this.fundingForm.controls['amount'].valueChanges.subscribe((value) => {
+      if (value) {
+        this.fundingForm.controls['currencyCode'].setValidators(
+          Validators.required
+        )
+        this.fundingForm.controls['currencyCode'].updateValueAndValidity()
+      }
+    })
+  }
+
+  private initFormValues() {
+    if (this.funding.endDate.year) {
+      this.fundingForm.patchValue({
+        endDateGroup: {
+          endDateYear: Number(this.funding.endDate.year),
+          endDateMonth: Number(this.funding.endDate.month),
+        },
+      })
+    }
+
+    if (this.funding.startDate.year) {
+      this.fundingForm.patchValue({
+        startDateGroup: {
+          startDateYear: Number(this.funding.startDate.year),
+          startDateMonth: Number(this.funding.startDate.month),
+        },
+      })
+    }
+
+    if (this.funding.visibility?.visibility) {
+      this.fundingForm.patchValue({
+        visibility: this.funding.visibility.visibility,
+      })
+    }
+    if (this.funding.fundingTitle?.translatedTitle) {
+      this.fundingForm.patchValue({
+        translatedTitleGroup: {
+          translatedTitleContent: this.funding.fundingTitle?.translatedTitle
+            .content,
+          translatedTitleLanguage: this.funding.fundingTitle?.translatedTitle
+            .languageCode,
+        },
+      })
+    }
+
+    this.funding.externalIdentifiers.forEach((grant) => {
+      this.addAnotherGrant(grant)
+    })
   }
 
   initialValues() {
@@ -304,10 +410,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.translatedTitleLanguage = this.funding.fundingTitle?.translatedTitle?.languageCode
       this.fundingProjectLink = this.funding.url?.value
       this.description = this.funding.description?.value
-      this.visibility = this.funding.visibility?.visibility
-        ? this.funding.visibility.visibility
-        : this.defaultVisibility
-
       this.agencyName = this.funding.fundingName?.value
       this.currencyCode = this.funding.currencyCode?.value
       this.amount = this.funding.amount?.value
@@ -321,7 +423,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     }
   }
 
-  formToBackendAffiliation(): Funding {
+  formToBackendFunding(): Funding {
     return {
       visibility: {
         visibility: this.fundingForm.get('visibility').value
@@ -335,8 +437,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         title: this.fundingForm.value.fundingProjectTitle,
         errors: [],
         translatedTitle: {
-          content: this.fundingForm.value.translatedTitleContent,
-          languageCode: this.fundingForm.value.translatedTitleLanguage,
+          content: this.fundingForm.get(
+            'translatedTitleGroup.translatedTitleContent'
+          ).value,
+          languageCode: this.fundingForm.get(
+            'translatedTitleGroup.translatedTitleLanguage'
+          ).value,
           errors: [],
         },
       },
@@ -363,16 +469,26 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         value: this.fundingForm.value.fundingProjectLink,
       },
       startDate: {
-        month: this.addTrailingZero(
-          this.fundingForm.get('startDateGroup.startDateMonth').value
-        ),
-        year: this.fundingForm.get('startDateGroup.startDateYear').value,
+        day: '',
+        month: this.fundingForm.get('startDateGroup.startDateMonth').value
+          ? this.addTrailingZero(
+              this.fundingForm.get('startDateGroup.startDateMonth').value
+            )
+          : '',
+        year: this.fundingForm.get('startDateGroup.startDateYear').value
+          ? this.fundingForm.get('startDateGroup.startDateYear').value
+          : '',
       },
       endDate: {
-        month: this.addTrailingZero(
-          this.fundingForm.get('endDateGroup.endDateMonth').value
-        ),
-        year: this.fundingForm.get('endDateGroup.endDateYear').value,
+        day: '',
+        month: this.fundingForm.get('endDateGroup.endDateMonth').value
+          ? this.addTrailingZero(
+              this.fundingForm.get('endDateGroup.endDateMonth').value
+            )
+          : '',
+        year: this.fundingForm.get('endDateGroup.endDateYear').value
+          ? this.fundingForm.get('endDateGroup.endDateYear').value
+          : '',
       },
       externalIdentifiers: this.fundingForm.value.grants.map((grant) => {
         return {
@@ -407,36 +523,57 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       assertionOriginName: this.funding?.assertionOriginName,
       assertionOriginOrcid: this.funding?.assertionOriginOrcid,
       countryForDisplay: this.funding?.countryForDisplay,
-      fundingTypeForDisplay: this.funding?.fundingTypeForDisplay,
     }
   }
 
   onSubmit() {}
 
-  addAnotherGrant() {
-    this.grantsArray.controls.push(
+  addAnotherGrant(existingGrant?: ExternalIdentifier) {
+    if (existingGrant) {
+      this.grantsArrayDisplayState.push(false)
+    } else {
+      this.grantsArrayDisplayState.push(true)
+    }
+
+    this.grantsArray.push(
       this._formBuilder.group({
-        grantNumber: ['', []],
-        grantUrl: ['', [Validators.pattern(URL_REGEXP)]],
-        fundingRelationship: [FundingRelationships.self, []],
+        grantNumber: [
+          existingGrant?.externalIdentifierId?.value || '',
+          [Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR)],
+        ],
+        grantUrl: [
+          existingGrant?.url?.value || '',
+          [
+            Validators.pattern(URL_REGEXP),
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
+          ],
+        ],
+        fundingRelationship: [
+          existingGrant?.relationship?.value || FundingRelationships.self,
+          [],
+        ],
       })
     )
+
     this.checkGrantsChanges(this.grantsArray.controls.length - 1)
   }
 
   deleteGrant(id: number) {
     this.grantsArray.removeAt(id)
+    this.grantsArrayDisplayState.splice(id, 1)
   }
 
   saveEvent() {
     this.fundingForm.markAllAsTouched()
     if (this.fundingForm.valid) {
       this._fundingsService
-        .save(this.formToBackendAffiliation())
+        .save(this.formToBackendFunding())
         .pipe(first())
         .subscribe(() => {
           this.closeEvent()
         })
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 
@@ -474,7 +611,9 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
     const formGroup = this.grantsArray.controls[index] as FormGroup
     formGroup.controls.grantNumber.valueChanges.subscribe((value) => {
       if (value) {
-        formGroup.controls.grantNumber.setValidators([])
+        formGroup.controls.grantNumber.setValidators([
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR),
+        ])
         formGroup.controls.grantNumber.updateValueAndValidity({
           emitEvent: false,
         })
@@ -490,10 +629,14 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       if (value) {
         formGroup.controls.grantUrl.setValidators([
           Validators.pattern(URL_REGEXP),
+          Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
         ])
         formGroup.controls.grantUrl.updateValueAndValidity({
           emitEvent: false,
         })
+        if (formGroup.controls.grantUrl.valid) {
+          this.appendProtocolToTheURL(formGroup.controls.grantUrl)
+        }
       } else {
         formGroup.controls.grantUrl.clearValidators()
         formGroup.controls.grantUrl.updateValueAndValidity({
@@ -515,6 +658,15 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       }
     })
   }
+  appendProtocolToTheURL(grantUrl: AbstractControl) {
+    if (
+      grantUrl.value &&
+      !(grantUrl.value as string).startsWith('http://') &&
+      !(grantUrl.value as string).startsWith('https://')
+    ) {
+      grantUrl.patchValue('http://' + grantUrl.value)
+    }
+  }
 
   closeEvent() {
     this.dialogRef.close()
@@ -534,6 +686,18 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   toFundingIdentifiers() {
     this.window.document.getElementById('funding-identifiers').scrollIntoView()
+  }
+
+  cancelExternalIdEdit(id: number) {
+    if (
+      this.grantsArray.controls[id] &&
+      !this.grantsArray.controls[id].value.grantUrl &&
+      !this.grantsArray.controls[id].value.grantNumber
+    ) {
+      this.deleteGrant(id)
+    } else {
+      this.grantsArrayDisplayState[id] = false
+    }
   }
 
   ngOnDestroy() {

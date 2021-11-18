@@ -6,16 +6,18 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR EMPLOYMENT -->
   <app-panels
+    [loading]="$loading | async"
     *ngIf="getAffiliationType('EMPLOYMENT') as profileAffiliationsGroup"
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
     [type]="'employment'"
+    [userRecord]="userRecord"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [expandedContent]="expandedContent"
+    [(expandedContent)]="expandedContent['EMPLOYMENT']"
+    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('employment', $event)"
     [labelAddButton]="labelAddEmploymentButton"
     [labelSortButton]="labelSortEmploymentButton"
     [sortType]="'end'"
@@ -23,6 +25,7 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
@@ -63,8 +66,10 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR EDUCATION_AND_QUALIFICATION -->
   <app-panels
+    [loading]="$loading | async"
+    s
     *ngIf="
       getAffiliationType(
         'EDUCATION_AND_QUALIFICATION'
@@ -73,10 +78,11 @@
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
     [type]="'education'"
+    [userRecord]="userRecord"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [expandedContent]="expandedContent"
+    [(expandedContent)]="expandedContent['EDUCATION_AND_QUALIFICATION']"
+    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('education', $event)"
     [labelAddButton]="labelEducationAddButton"
     [labelSortButton]="labelEducationSortButton"
     [sortType]="'end'"
@@ -84,13 +90,18 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="'education'"
+        [type]="
+          affiliationGroup.affiliationType === 'EDUCATION'
+            ? 'education'
+            : 'qualification'
+        "
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
@@ -126,8 +137,9 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR INVITED_POSITION_AND_DISTINCTION -->
   <app-panels
+    [loading]="$loading | async"
     *ngIf="
       getAffiliationType(
         'INVITED_POSITION_AND_DISTINCTION'
@@ -136,10 +148,11 @@
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
     [type]="'invited-position'"
+    [userRecord]="userRecord"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [expandedContent]="expandedContent"
+    [(expandedContent)]="expandedContent['INVITED_POSITION_AND_DISTINCTION']"
+    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('invited-position', $event)"
     [labelAddButton]="labelInvitedAddButton"
     [labelSortButton]="labelInvitedSortButton"
     [sortType]="'end'"
@@ -147,13 +160,18 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="'invited-position'"
+        [type]="
+          affiliationGroup.affiliationType === 'DISTINCTION'
+            ? 'distinction'
+            : 'invited-position'
+        "
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>
@@ -188,18 +206,20 @@
     )
   "
 >
-  <!-- A PANELS COMPONENT FOR EACH GROUP OF AFFILIATION -->
+  <!-- A PANELS COMPONENT FOR MEMBERSHIP_AND_SERVICE -->
   <app-panels
+    [loading]="$loading | async"
     *ngIf="
       getAffiliationType('MEMBERSHIP_AND_SERVICE') as profileAffiliationsGroup
     "
     class="row"
     [title]="affiliationTypeLabel(profileAffiliationsGroup.type)"
     [type]="'membership'"
+    [userRecord]="userRecord"
     [currentAmount]="profileAffiliationsGroup.affiliationGroup.length"
-    [expandedContent]="expandedContent"
+    [(expandedContent)]="expandedContent['MEMBERSHIP_AND_SERVICE']"
+    (expandedContentChange)="expandedContentChange.emit(expandedContent)"
     [isPublicRecord]="isPublicRecord"
-    (expanded)="expandedClicked('membership', $event)"
     [labelAddButton]="labelMembershipAddButton"
     [labelSortButton]="labelMembershipSortButton"
     [sortType]="'end'"
@@ -207,13 +227,18 @@
   >
     <ng-container *ngIf="profileAffiliationsGroup.affiliationGroup.length > 0">
       <app-affiliation-stack
+        [userRecord]="userRecord"
         [isPublicRecord]="isPublicRecord"
         *ngFor="
           let affiliationGroup of profileAffiliationsGroup.affiliationGroup;
           trackBy: trackByAffiliationGroup
         "
         [affiliationStack]="affiliationGroup"
-        [type]="'membership'"
+        [type]="
+          affiliationGroup.affiliationType === 'MEMBERSHIP'
+            ? 'membership'
+            : 'service'
+        "
         [userInfo]="userInfo"
       ></app-affiliation-stack>
     </ng-container>

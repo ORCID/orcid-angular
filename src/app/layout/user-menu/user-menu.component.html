@@ -80,7 +80,7 @@
   <button
     mat-menu-item
     *ngIf="userInfo && userInfo['SELF_SERVICE_MENU']"
-    (click)="goto('manage-members')"
+    (click)="goto('self-service')"
   >
     <mat-icon>build</mat-icon>
     <span i18n="@@ngOrcid.selfService">Member tools </span>
@@ -101,7 +101,7 @@
     <mat-icon>verified_user</mat-icon>
     <span i18n="@@ngOrcid.adminPage">Admin page</span>
   </button>
-  <button mat-menu-item (click)="goto('signout')">
+  <button mat-menu-item (click)="signOut()">
     <mat-icon>exit_to_app</mat-icon>
     <span i18n="@@ngOrcid.logout">Logout</span>
   </button>

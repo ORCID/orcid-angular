@@ -151,7 +151,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
               this.FormGroupStepC,
               this.reactivation,
               this.requestInfoForm,
-              !!this.requestInfoForm // request client service to be update (only when the next navigation wont go outside this app)
+              true
             )
           })
         )
@@ -203,7 +203,16 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           }
         })
     } else {
-      this.window.location.href = response.url
+      if (
+        response.url.indexOf('orcid.org/my-orcid') > 0 &&
+        response.url.indexOf('justRegistered') > 0
+      ) {
+        this._router.navigate(['/my-orcid'], {
+          queryParams: { justRegistered: true },
+        })
+      } else {
+        this.window.location.href = response.url
+      }
     }
   }
 

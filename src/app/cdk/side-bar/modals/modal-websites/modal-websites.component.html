@@ -39,117 +39,184 @@
     </p>
     <ng-container *ngIf="websites.length > 0">
       <div class="row">
-        <label for="url-input" class="orc-font-body-small">
-          <strong i18n="@@topBar.myLinks">My links</strong>
-        </label>
+        <h3 class="col no-gutters orc-font-body" i18n="@@topBar.myLinks">
+          My links
+        </h3>
       </div>
+      <hr class="dashed-line" />
       <div
-        class="row"
+        class="row websites-list"
         id="website-dropList"
         cdkDropList
         (cdkDropListDropped)="drop($event)"
       >
         <div
           cdkDrag
-          rootElementSelector="#website-dropList"
-          class="row websites-input-line"
-          [ngClass]="{ 'no-wrap': !isMobile }"
+          class="row websites-box"
           [ngStyle]="{ direction: screenDirection }"
           [formGroupName]="website.putCode"
           *ngFor="let website of websites; index as i"
           [attr.id]="'draggable-' + i"
         >
-          <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
-            <img
-              class="icon-drag"
-              cdkDragHandle
-              src="./assets/vectors/draggable.svg"
-              aria-label="drag handle"
-            />
-            <div class="row">
-              <mat-form-field
-                appearance="outline"
-                class="mat-form-field-min description"
-              >
-                <input
-                  id="description-input"
-                  #descriptionInput
-                  matInput
-                  formControlName="description"
-                  placeholder=" {{ ngOrcidDescription }}"
-                  [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+          <div class="row drag-placeholder" *cdkDragPlaceholder></div>
+          <div
+            class="row websites-input-line"
+            [ngClass]="{ 'no-wrap': !isMobile }"
+          >
+            <div class="col l12 m8 s4 top no-wrap no-gutters input-container">
+              <div class="image-container">
+                <img
+                  class="icon-drag"
+                  cdkDragHandle
+                  src="./assets/vectors/draggable.svg"
+                  aria-label="drag handle"
                 />
-              </mat-form-field>
-              <mat-form-field
-                appearance="outline"
-                class="mat-form-field-min url"
+              </div>
+              <div class="row web-site-input-container">
+                <div
+                  class="not-editable-description"
+                  *ngIf="website.source && website.source !== id"
+                >
+                  <strong>{{ website.urlName }}</strong>
+                </div>
+
+                <mat-form-field
+                  *ngIf="!website.source || website.source === id"
+                  [ngClass]="{ 'mat-form-field-readonly': true }"
+                  appearance="outline"
+                  class="mat-form-field-min description"
+                >
+                  <input
+                    id="description-input"
+                    #descriptionInput
+                    matInput
+                    formControlName="description"
+                    placeholder=" {{ ngOrcidDescription }}"
+                    [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                  />
+                  <mat-error
+                    *ngIf="
+                      websitesForm.get(website.putCode).get('description')
+                        ?.errors?.maxlength
+                    "
+                    i18n="@@topBar.urlMaxLength"
+                  >
+                    Must be less than 355 characters
+                  </mat-error>
+                </mat-form-field>
+                <div
+                  *ngIf="website.source && website.source !== id"
+                  class="not-editable-url"
+                >
+                  <a
+                    class="underline"
+                    [href]="website.url.value"
+                    target="_blank"
+                    rel="me nofollow noopener noreferrer"
+                    >{{ website.url.value }}</a
+                  >
+
+                  <mat-error
+                    class="mat-form-field-subscript-wrapper"
+                    *ngIf="
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('duplicated', 'url')
+                    "
+                    i18n="@@topBar.urlDuplicated"
+                  >
+                    URL can not be duplicated
+                  </mat-error>
+                  <mat-hint class="mat-caption">
+                    <app-source-hit
+                      [createdDate]="website.createdDate"
+                      [source]="website.sourceName || website.source"
+                      [assertion]="
+                        website.assertionOriginName ||
+                        website.assertionOriginOrcid
+                      "
+                    ></app-source-hit>
+                  </mat-hint>
+                </div>
+                <mat-form-field
+                  *ngIf="!website.source || website.source === id"
+                  appearance="outline"
+                  class="mat-form-field-min url"
+                >
+                  <input
+                    id="url-input"
+                    matInput
+                    formControlName="url"
+                    placeholder="{{ ngOrcidUrl }}"
+                    [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
+                  />
+                  <mat-error
+                    *ngIf="
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('required', 'url')
+                    "
+                    i18n="@@topBar.requiredURL"
+                  >
+                    An URL is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('pattern', 'url')
+                    "
+                    i18n="@@topBar.invalidURL"
+                  >
+                    Invalid URL
+                  </mat-error>
+                  <mat-error
+                    *ngIf="
+                      websitesForm
+                        .get(website.putCode)
+                        .hasError('duplicated', 'url')
+                    "
+                    i18n="@@topBar.urlDuplicated"
+                  >
+                    URL can not be duplicated
+                  </mat-error>
+                  <mat-hint
+                    class="mat-caption"
+                    *ngIf="website.putCode.indexOf('new') < 0"
+                  >
+                    <app-source-hit
+                      [createdDate]="website.createdDate"
+                      [source]="website.sourceName || website.source"
+                      [assertion]="
+                        website.assertionOriginName ||
+                        website.assertionOriginOrcid
+                      "
+                    ></app-source-hit>
+                  </mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+            <div
+              class="col no-wrap actions-wrapper"
+              [ngClass]="{ privacy: !platform.columns12 }"
+            >
+              <app-privacy-selector
+                [ngClass]="{ selector: !platform.columns12 }"
+                formControlName="visibility"
+              ></app-privacy-selector>
+              <button
+                id="delete-button"
+                (click)="deleteWebsite(website.putCode)"
+                mat-icon-button
               >
-                <input
-                  id="url-input"
-                  matInput
-                  formControlName="url"
-                  placeholder="{{ ngOrcidUrl }}"
-                  [ngClass]="{ 'website-input': screenDirection === 'rtl' }"
-                />
-                <mat-error
-                  *ngIf="
-                    websitesForm
-                      .get(website.putCode)
-                      .hasError('required', 'url')
-                  "
-                  i18n="@@topBar.requiredURL"
-                >
-                  An URL is required
-                </mat-error>
-                <mat-error
-                  *ngIf="
-                    websitesForm.get(website.putCode).hasError('pattern', 'url')
-                  "
-                  i18n="@@topBar.invalidURL"
-                >
-                  Invalid URL
-                </mat-error>
-                <mat-error
-                  *ngIf="
-                    websitesForm
-                      .get(website.putCode)
-                      .hasError('duplicated', 'url')
-                  "
-                  i18n="@@topBar.urlDuplicated"
-                >
-                  URL can not be duplicated
-                </mat-error>
-                <mat-hint
-                  class="mat-caption"
-                  *ngIf="website.putCode.indexOf('new') < 0"
-                >
-                  <span i18n="@@shared.source">Source:</span>
-                  {{ getSourceName(website) }},
-                  <span i18n="@@shared.created">Created:</span>
-                  {{ website.createdDate | monthDayYearDateToString }}
-                </mat-hint>
-              </mat-form-field>
+                <mat-icon
+                  class="material-icons-outlined extra-large-material-icon"
+                  >delete
+                </mat-icon>
+              </button>
             </div>
           </div>
-          <div
-            class="col no-wrap actions-wrapper no-gutters"
-            [ngClass]="{ privacy: !platform.columns12 }"
-          >
-            <app-privacy-selector
-              [ngClass]="{ selector: !platform.columns12 }"
-              formControlName="visibility"
-            ></app-privacy-selector>
-            <button
-              id="delete-button"
-              (click)="deleteWebsite(website.putCode)"
-              mat-icon-button
-            >
-              <mat-icon
-                class="material-icons-outlined extra-large-material-icon"
-                >delete
-              </mat-icon>
-            </button>
-          </div>
+          <hr class="dashed-line" />
         </div>
       </div>
     </ng-container>

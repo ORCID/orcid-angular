@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import { MainPanelsState, UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -27,9 +27,9 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   defaultPageSize = DEFAULT_PAGE_SIZE
   labelSortButton = $localize`:@@shared.sortResearch:Sort Research Resources`
   @Input() isPublicRecord: string
-  @Input() expandedContent: boolean
-  @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
+  @Input() expandedContent: MainPanelsState
+  @Output() expandedContentChange = new EventEmitter<MainPanelsState>()
+  @Output() total: EventEmitter<number> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
   displayTheStackClass = false
 
@@ -94,12 +94,12 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
         if (!isEmpty(userRecord?.researchResources)) {
           this.paginationLoading = false
           this.researchResources = userRecord.researchResources
-          this.total.emit(this.researchResources.groups.length)
+          this.total.emit(this.researchResources.groups?.length || 0)
           this.paginationTotalAmountOfResearchResources =
             userRecord.researchResources.totalGroups
           this.paginationIndex = userRecord.researchResources.pageIndex
           this.paginationPageSize = userRecord.researchResources.pageSize
-          this.total.emit(userRecord.researchResources.groups.length)
+          this.total.emit(userRecord.researchResources.groups?.length || 0)
         }
       })
   }
@@ -133,9 +133,5 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
       .subscribe(() => {
         this.paginationLoading = false
       })
-  }
-
-  expandedClicked(expanded: boolean) {
-    this.expanded.emit({ type: 'research-resources', expanded })
   }
 }

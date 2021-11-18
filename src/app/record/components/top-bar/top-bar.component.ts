@@ -3,13 +3,16 @@ import { UserRecord } from '../../../types/record.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
 import { ModalBiographyComponent } from './modals/modal-biography/modal-biography.component'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, tap } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
-import { isEmpty } from 'lodash'
-import { Assertion } from '../../../types'
+import { Assertion, UserInfo } from '../../../types'
 import { UserStatus } from '../../../types/userStatus.endpoint'
+import { RecordEmailsService } from '../../../core/record-emails/record-emails.service'
+import { MatDialog } from '@angular/material/dialog'
+import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
+import { isEmpty } from 'lodash'
 
 @Component({
   selector: 'app-top-bar',
@@ -18,11 +21,13 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
     './top-bar.component.scss',
     './top-bar.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class TopBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   @Input() isPublicRecord: string
 
+  userInfo: UserInfo
   userRecord: UserRecord
   userStatus: UserStatus
 
@@ -35,18 +40,32 @@ export class TopBarComponent implements OnInit, OnDestroy {
   creditName = ''
   expandedContent = false
   recordWithIssues: boolean
+  justRegistered: boolean
+  emailVerified: boolean
+  checkEmailValidated: boolean
+  inDelegationMode: boolean
   @Input() loadingUserRecord = true
 
   constructor(
-    private _platform: PlatformInfoService,
+    _dialog: MatDialog,
+    _platform: PlatformInfoService,
     private _user: UserService,
-    private _record: RecordService
+    private _record: RecordService,
+    private _recordEmails: RecordEmailsService,
+    private _verificationEmailModalService: VerificationEmailModalService
   ) {
     _platform
       .get()
       .pipe(takeUntil(this.$destroy))
       .subscribe((data) => {
         this.platform = data
+        if (this.platform.queryParameters.hasOwnProperty('justRegistered')) {
+          this.justRegistered = true
+        }
+
+        if (this.platform.queryParameters.hasOwnProperty('emailVerified')) {
+          this.emailVerified = true
+        }
       })
     _user
       .getUserSession()
@@ -61,10 +80,32 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .getRecord({
         publicRecordId: this.isPublicRecord || undefined,
       })
-      .pipe(takeUntil(this.$destroy))
+      .pipe(
+        tap((record) => {
+          if (record?.userInfo && !this.isPublicRecord) {
+            const checkEmailValidated =
+              record.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true'
+            const inDelegationMode =
+              record.userInfo.IN_DELEGATION_MODE === 'true'
+            if (!checkEmailValidated && !inDelegationMode) {
+              if (record.emails) {
+                const primaryEmail = record.emails.emails.filter(
+                  (email) => email.primary
+                )[0]
+                if (!primaryEmail?.verified) {
+                  this.resendVerificationEmailModal(primaryEmail.value)
+                }
+              }
+            }
+          }
+        }),
+        takeUntil(this.$destroy)
+      )
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
+        this.userInfo = userRecord.userInfo
+
         if (!isEmpty(userRecord.otherNames)) {
           this.setNames(userRecord)
         }
@@ -83,10 +124,23 @@ export class TopBarComponent implements OnInit, OnDestroy {
       : ''
   }
 
-  getOtherNames(otherNames: Assertion[]): string[] {
-    return otherNames.map((otherName) => {
-      return otherName.content
-    })
+  getOtherNamesUnique(otherNames: Assertion[]): string {
+    return otherNames
+      .map((otherName) => {
+        return otherName.content
+      })
+      .filter(function (item, pos, array) {
+        return (
+          array
+            .map((x) => x.toLowerCase().trim())
+            .indexOf(item.toLowerCase().trim()) === pos
+        )
+      })
+      .join(', ')
+  }
+
+  resendVerificationEmailModal(email: string) {
+    this._verificationEmailModalService.openVerificationEmailModal(email)
   }
 
   collapse(): void {

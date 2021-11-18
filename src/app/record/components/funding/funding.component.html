@@ -31,7 +31,7 @@
       >
         |
       </ng-container>
-      {{ funding.fundingType.value | titlecase }}
+      {{ funding.fundingType.value | recordFundingTypesLabel }}
     </div>
     <div *ngIf="funding.fundingName?.value">
       <div>
@@ -41,8 +41,8 @@
         }}</ng-container
         ><ng-container *ngIf="funding.region?.value"
           >, {{ funding.region?.value }}</ng-container
-        ><ng-container *ngIf="funding.countryForDisplay"
-          >, {{ funding.countryForDisplay }}</ng-container
+        ><ng-container *ngIf="funding.country?.value"
+          >, {{ funding.country?.value }}</ng-container
         >)
       </div>
     </div>
@@ -131,11 +131,17 @@
     "
   >
     <app-display-attribute>
-      <h3 class="orc-font-body-small" i18n="@@funding.translatedTitle">
-        Translated title
-      </h3>
-      <div *ngIf="funding.fundingTitle.translatedTitle.languageName">
-        ({{ funding.fundingTitle.translatedTitle.languageName }})
+      <div class="row">
+        <span class="translated-title-label orc-font-body-small">
+          <ng-container i18n="@@funding.translatedTitle"
+            >Translated title</ng-container
+          >&nbsp;</span
+        >
+        <ng-container
+          *ngIf="funding.fundingTitle.translatedTitle?.languageName"
+        >
+          ({{ funding.fundingTitle.translatedTitle?.languageName }})
+        </ng-container>
       </div>
       <div>
         {{ funding.fundingTitle.translatedTitle.content }}
@@ -151,9 +157,7 @@
       <h3 class="orc-font-body-small" i18n="@@funding.description">
         Description
       </h3>
-      <div>
-        {{ funding.description.value }}
-      </div>
+      <div [innerText]="funding.description.value"></div>
     </app-display-attribute>
   </ng-container>
 
@@ -179,7 +183,7 @@
 
   <!-- ADDED DATE-->
   <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@record.added">Added</h3>
+    <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
     <div>
       {{ funding.createdDate | monthDayYearDateToString }}
     </div>
@@ -187,7 +191,7 @@
 
   <!-- LAST MODIFIED  DATE-->
   <app-display-attribute>
-    <h3 class="orc-font-body-small" i18n="@@record.lastModified">
+    <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
       Last modified
     </h3>
     <div>{{ funding.lastModified | monthDayYearDateToString }}</div>

@@ -14,6 +14,7 @@
       [isPublicRecord]="isPublicRecord"
       [elements]="userRecord.emails.emails"
       [editModalComponent]="modalEmailComponent"
+      [email]="true"
       [type]="'side-bar'"
       class="side-bar"
       id="emails-panel"
@@ -22,8 +23,9 @@
         userRecord?.emails?.emails &&
         (!isPublicRecord || userRecord.emails.emails.length > 0)
       "
+      [userRecord]="userRecord"
     >
-      <h2 header class="orc-font-body" i18n="@@record.emails">Emails</h2>
+      <h2 header class="orc-font-body" i18n="@@shared.emails">Emails</h2>
       <app-panel-data *ngIf="userRecord.emails.emails.length > 0">
         <app-panel-element
           *ngFor="let email of userRecord.emails.emails; let last = last"
@@ -38,6 +40,9 @@
             *ngIf="emailsOpenState"
             [name]="email.sourceName || email.source"
             [date]="email.createdDate | monthDayYearDateToString"
+            [assertion]="
+              email.assertionOriginName || email.assertionOriginOrcid
+            "
           >
           </app-panel-element-source>
         </app-panel-element>
@@ -53,13 +58,15 @@
       class="side-bar"
       id="websites-panel"
       [(openState)]="websiteOpenState"
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
+      [userRecord]="userRecord"
       *ngIf="
         userRecord?.website?.websites &&
         (!isPublicRecord || userRecord.website.websites.length > 0)
       "
     >
-      <h2 header class="orc-font-body" i18n="@@record.websiteAndSocialLinks">
-        Website and social links
+      <h2 header class="orc-font-body" i18n="@@record.websitesAndSocialLinks">
+        Websites & social links
       </h2>
       <app-panel-data *ngIf="userRecord.website.websites.length > 0">
         <app-panel-element
@@ -81,6 +88,9 @@
             *ngIf="websiteOpenState"
             [name]="website.sourceName || website.source"
             [date]="website.createdDate | monthDayYearDateToString"
+            [assertion]="
+              website.assertionOriginName || website.assertionOriginOrcid
+            "
           >
           </app-panel-element-source>
         </app-panel-element>
@@ -100,6 +110,7 @@
       class="side-bar"
       id="personal-identifiers-panel"
       [(openState)]="externalIdentifierOpenState"
+      [userRecord]="userRecord"
     >
       <h2 header class="orc-font-body" i18n="@@record.otherIds">Other IDs</h2>
       <app-panel-data
@@ -131,6 +142,10 @@
             *ngIf="externalIdentifierOpenState"
             [name]="externalIdentifier.sourceName || externalIdentifier.source"
             [date]="externalIdentifier.createdDate | monthDayYearDateToString"
+            [assertion]="
+              externalIdentifier.assertionOriginName ||
+              externalIdentifier.assertionOriginOrcid
+            "
           >
           </app-panel-element-source>
         </app-panel-element>
@@ -149,6 +164,8 @@
       class="side-bar"
       id="keywords-panel"
       [(openState)]="keywordOpenState"
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
+      [userRecord]="userRecord"
     >
       <h2 header class="orc-font-body" i18n="@@record.keywords">Keywords</h2>
       <app-panel-data *ngIf="userRecord.keyword.keywords.length > 0">
@@ -165,6 +182,9 @@
               *ngIf="keywordOpenState"
               [name]="keyword.sourceName || keyword.source"
               [date]="keyword.createdDate | monthDayYearDateToString"
+              [assertion]="
+                keyword.assertionOriginName || keyword.assertionOriginOrcid
+              "
             >
             </app-panel-element-source>
           </app-panel-element>
@@ -186,6 +206,9 @@
                 *ngIf="keywordOpenState"
                 [name]="keyword.sourceName || keyword.source"
                 [date]="keyword.createdDate | monthDayYearDateToString"
+                [assertion]="
+                  keyword.assertionOriginName || keyword.assertionOriginOrcid
+                "
               >
               </app-panel-element-source>
             </app-panel-element>
@@ -209,6 +232,8 @@
       class="side-bar"
       id="countries-panel"
       [(openState)]="addressOpenState"
+      [id]="userInfo?.EFFECTIVE_USER_ORCID"
+      [userRecord]="userRecord"
     >
       <h2 header class="orc-font-body" i18n="@@record.countries">Countries</h2>
       <app-panel-data *ngIf="userRecord.countries.addresses.length > 0">
@@ -227,6 +252,9 @@
               [isLastItem]="last"
               [name]="address.sourceName || address.source"
               [date]="address.createdDate | monthDayYearDateToString"
+              [assertion]="
+                address.assertionOriginName || address.assertionOriginOrcid
+              "
             >
             </app-panel-element-source>
           </app-panel-element>
@@ -247,6 +275,9 @@
                 [isLastItem]="last"
                 [name]="address.sourceName || address.source"
                 [date]="address.createdDate | monthDayYearDateToString"
+                [assertion]="
+                  address.assertionOriginName || address.assertionOriginOrcid
+                "
               >
               </app-panel-element-source>
             </app-panel-element>

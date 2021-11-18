@@ -116,6 +116,7 @@ export interface Assertion extends AssertionBase {
 
 export interface AssertionVisibilityString extends AssertionBase {
   visibility?: VisibilityStrings
+  action?: 'ADD' | 'UPDATE'
 }
 
 export interface GroupBase {

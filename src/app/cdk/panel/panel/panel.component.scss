@@ -29,6 +29,10 @@
   flex-direction: row;
   align-items: center;
   word-break: break-word;
+
+  .error {
+    margin-inline-end: 8px;
+  }
 }
 
 .nested-panels {
@@ -39,27 +43,6 @@
 .top-bar-or-main,
 .side-bar {
   border-radius: 3px;
-}
-
-.privacy-selector {
-  position: absolute;
-  overflow: hidden;
-  -moz-transition: height 450ms;
-  z-index: 2;
-  -webkit-transition: height 450ms;
-  padding: 8px 16px 16px;
-  border: solid 1px;
-  border-radius: 4px;
-  right: 28px;
-  transition: all 500ms ease-in-out;
-
-  p {
-    margin: 0 0 8px;
-  }
-
-  app-privacy-selector {
-    margin-top: 8px;
-  }
 }
 
 .staked-header {
@@ -75,5 +58,16 @@
 mat-checkbox.text-wrap {
   ::ng-deep label.mat-checkbox-layout {
     white-space: normal;
+  }
+}
+.columns-8 :host,
+.columns-4 :host {
+  .header {
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-bottom: 15px;
+  }
+  .buttons-container {
+    width: 100%;
   }
 }

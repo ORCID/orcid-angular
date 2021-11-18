@@ -66,6 +66,9 @@ export class RecordCountriesService {
     } else if (!options.forceReload) {
       return this.$addresses
     }
+    if (options.cleanCacheIfExist && this.$addresses) {
+      this.$addresses.next(<CountriesEndpoint>undefined)
+    }
 
     this._http
       .get<CountriesEndpoint>(

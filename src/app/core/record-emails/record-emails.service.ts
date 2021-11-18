@@ -5,7 +5,7 @@ import {
   AsyncValidatorFn,
   ValidationErrors,
 } from '@angular/forms'
-import { Observable, of, ReplaySubject } from 'rxjs'
+import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import { catchError, map, retry, switchMap, tap } from 'rxjs/operators'
 import {
   Assertion,
@@ -49,6 +49,9 @@ export class RecordEmailsService {
     } else if (!options.forceReload) {
       return this.$emailsSubject
     }
+    if (options.cleanCacheIfExist) {
+      this.$emailsSubject.next(EMPTY)
+    }
 
     this._http
       .get<EmailsEndpoint>(environment.API_WEB + `account/emails.json`, {
@@ -73,11 +76,11 @@ export class RecordEmailsService {
     return this.$emailsSubject
   }
 
-  postEmails(otherNames: EmailsEndpoint): Observable<EmailsEndpoint> {
+  postEmails(emails: EmailsEndpoint): Observable<EmailsEndpoint> {
     return this._http
       .post<EmailsEndpoint>(
         environment.API_WEB + `account/emails.json`,
-        otherNames,
+        emails,
         {
           headers: this.headers,
         }
@@ -89,46 +92,49 @@ export class RecordEmailsService {
       )
   }
 
-  addEmail(email: Assertion): Observable<EmailsEndpoint> {
+  editEmail(original: string, edited: string): Observable<EmailsEndpoint> {
     return this._http
-      .post<Assertion>(environment.API_WEB + `account/addEmail.json`, email, {
+      .post<Assertion>(
+        environment.API_WEB + `account/email/edit.json`,
+        { original, edited },
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap(() => this.getEmails({ forceReload: true }))
+      )
+  }
+
+  verifyEmail(email: string): Observable<EmailsEndpoint> {
+    return this._http
+      .get<ErrorsListResponse>(
+        environment.API_WEB +
+          `account/verifyEmail.json?email=${encodeURIComponent(email)}`,
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        switchMap(() => this.getEmails())
+      )
+  }
+
+  visibility(email): Observable<any> {
+    const encoded_data = JSON.stringify(email)
+
+    return this._http
+      .post(environment.API_WEB + `account/email/visibility`, encoded_data, {
         headers: this.headers,
       })
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
-      )
-  }
-
-  verifyEmail(email: String): Observable<EmailsEndpoint> {
-    return this._http
-      .get<ErrorsListResponse>(
-        environment.API_WEB + `account/verifyEmail.json?email=${email}`,
-        {
-          headers: this.headers,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
-      )
-  }
-
-  setAsPrimaryEmail(email: Assertion): Observable<EmailsEndpoint> {
-    return this._http
-      .post<Assertion>(
-        environment.API_WEB + `account/email/setPrimary`,
-        email,
-        {
-          headers: this.headers,
-        }
-      )
-      .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() => this.getEmails())
+        switchMap(() => this.getEmails({ forceReload: true }))
       )
   }
 
