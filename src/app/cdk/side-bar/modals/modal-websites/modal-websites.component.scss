@@ -7,19 +7,7 @@
   margin-inline-end: auto;
 }
 
-::ng-deep .cdk-drop-list-dragging {
-  cursor: move !important;
-  .mat-form-field-flex,
-  .mat-select-trigger,
-  .mat-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button {
-    cursor: move !important;
-  }
-}
-
-::ng-deep .cdk-drag-animating {
+.websites-list.cdk-drop-list-dragging .websites-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -36,17 +24,21 @@
 }
 
 .websites-input-line {
-  margin: 10px 0 20px 0;
-  height: 120px;
-  img {
-    cursor: move;
-    z-index: 1;
-    margin: auto 1.45vh;
-    margin-inline-end: 8px;
+  .image-container {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    img {
+      cursor: move;
+      margin-inline-start: 6px;
+      margin-inline-end: 10px;
+    }
   }
 
   .input-container {
-    margin: 18px 0;
+    margin-top: 10px;
+    margin-bottom: 4px;
   }
 
   button {
@@ -55,6 +47,7 @@
 
   .privacy {
     width: 100%;
+    max-height: 60px;
     margin: 0;
 
     button {
@@ -64,11 +57,16 @@
 
   app-privacy-selector {
     min-width: 180px;
-    margin: auto 7vh;
   }
 
   .selector {
     margin: 0 !important;
+  }
+}
+
+::ng-deep .columns-4-or-8 {
+  .websites-input-line .input-container {
+    padding-bottom: 30px;
   }
 }
 
@@ -77,21 +75,24 @@
   margin: 4px;
 }
 
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
 .actions-wrapper {
   flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  height: 80%;
 }
-
-.cdk-drag-placeholder {
-  opacity: 0;
+::ng-deep .columns-4-or-8 {
+  .websites-input-line .actions-wrapper {
+    padding-bottom: 10px;
+  }
 }
 
 .mat-form-field {
   width: 100%;
   margin-inline-end: 32px;
+}
+::ng-deep .columns-4-or-8 .mat-form-field {
+  margin-inline-end: 0;
 }
 
 .website-input {
@@ -104,5 +105,44 @@
   span {
     margin: auto;
     padding-left: 6px;
+  }
+}
+
+.drag-placeholder {
+  min-height: 120px;
+}
+
+.actions-wrapper {
+  padding: 0 32px;
+}
+
+.web-site-input-container {
+  display: flex;
+  flex-direction: column;
+  p {
+    margin: 0;
+    padding-bottom: 6px;
+  }
+  ::ng-deep .mat-form-field-subscript-wrapper {
+    top: 0;
+    position: relative;
+    margin-top: 0;
+  }
+  .not-editable-url {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+    a {
+      word-break: break-all;
+    }
+  }
+  .not-editable-description {
+    padding-top: 15px;
+  }
+}
+
+::ng-deep .columns-4-or-8 {
+  .actions-wrapper {
+    padding: 0;
   }
 }

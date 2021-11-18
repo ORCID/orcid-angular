@@ -24,6 +24,7 @@ export interface PeerReview extends AssertionBase {
   name: string
   peerReviewDuplicateGroups: PeerReviewDuplicateGroup[]
   showDetails: boolean
+  visibilityError: boolean
 }
 
 export interface PeerReviewDuplicateGroup {

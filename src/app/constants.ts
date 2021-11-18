@@ -1,5 +1,11 @@
 import { Address, MonthDayYearDate } from './types'
 import { UrlMatchResult, UrlSegment } from '@angular/router'
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  FormArray,
+} from '@angular/forms'
 
 export { COUNTRY_NAMES_TO_COUNTRY_CODES } from './constants-country-codes'
 
@@ -14,8 +20,8 @@ export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://regex101.com/r/V95col/6
 // tslint:disable-next-line: max-line-length
 export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
-// https://www.regextester.com/94502
-export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.%]+$/
+// https://regex101.com/r/xkIlf0/1
+export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.><]+$/
 // https://regex101.com/r/GEaSMo/2
 export const URL_REGEXP_BACKEND = /^(((https?):\/\/)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$/
 // https://www.regextester.com/96577
@@ -26,10 +32,11 @@ export const HAS_NUMBER = /(?=.*[0-9]).*/
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 // https://regex101.com/r/gznzc6/1 strips params for OJS links
 export const REDIRECT_URI_REGEXP = /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
+// https://regex101.com/r/EP7uWn/1
+export const AMOUNT_REGEXP = /^[0-9.,]*$/
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
-  myOrcidTEMP: 'qa/my-orcid',
   twoFactor: '2fa-signin',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
@@ -108,6 +115,11 @@ export enum ADD_EVENT_ACTION {
   searchAndLink,
   pubMed,
   bibText,
+}
+
+export enum EXTERNAL_ID_TYPE_WORK {
+  doi,
+  pubMed,
 }
 
 export const VISIBILITY_OPTIONS = ['PUBLIC', 'LIMITED', 'PRIVATE']
@@ -201,3 +213,34 @@ export function ArrayFlat(arr) {
 }
 
 export const DEFAULT_PAGE_SIZE = 50
+export const MAX_LENGTH_LESS_THAN_ONE_THOUSAND = 999
+export const MAX_LENGTH_LESS_THAN_FIVE_THOUSAND = 4999
+export const MAX_LENGTH_LESS_THAN_TWO_THOUSAND = 1999
+export const MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE = 254
+export const MAX_LENGTH_LESS_THAN_TWO_THOUSAND_EIGHTY_FOUR = 2083
+
+export function GetFormErrors(form: AbstractControl) {
+  if (form instanceof FormControl) {
+    return form.errors ?? null
+  }
+  if (form instanceof FormGroup) {
+    const groupErrors = form.errors
+    const formErrors = groupErrors ? { groupErrors } : {}
+    Object.keys(form.controls).forEach((key) => {
+      const error = GetFormErrors(form.get(key))
+      if (error !== null) {
+        formErrors[key] = error
+      }
+    })
+    return Object.keys(formErrors).length > 0 ? formErrors : null
+  }
+  if (form instanceof FormArray) {
+    const groupErrors = form.errors
+    const formErrors = groupErrors ? [groupErrors] : []
+    form.controls.forEach((control) => {
+      const error = GetFormErrors(control)
+      formErrors.push(error)
+    })
+    return formErrors.length > 0 ? formErrors : null
+  }
+}

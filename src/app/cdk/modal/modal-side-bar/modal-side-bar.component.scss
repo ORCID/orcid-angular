@@ -1,6 +1,7 @@
 :host {
   width: 100%;
   padding-inline-end: 16px;
+  padding-top: 16px;
 }
 
 ul {
@@ -9,4 +10,8 @@ ul {
 
 .title {
   cursor: pointer;
+}
+
+.side-bar-url:empty + .divider {
+  display: none;
 }

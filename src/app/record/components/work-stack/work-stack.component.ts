@@ -17,9 +17,11 @@ import {
   WorkGroup,
   WorksEndpoint,
 } from 'src/app/types/record-works.endpoint'
+import { UserRecord } from 'src/app/types/record.local'
 import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 import { UserInfo } from '../../../types'
 import { WorkModalComponent } from '../work-modal/work-modal.component'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-work-stack',
@@ -30,16 +32,20 @@ import { WorkModalComponent } from '../work-modal/work-modal.component'
   ],
 })
 export class WorkStackComponent implements OnInit {
+  @Input() userRecord: UserRecord
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
   visibility: VisibilityStrings
   worksModal = WorkModalComponent
   @Input() isPublicRecord: string
+  hasExternalIds: boolean
+  togglzWorksContributors: boolean
 
   @Input()
   set workStack(value: WorkGroup) {
+    this.hasExternalIds = !!value.externalIdentifiers.length
     this._workStack = value
-    this.setInitialStates(value)
+    this.setInitialStates(value, true)
   }
   get workStack(): WorkGroup {
     return this._workStack
@@ -57,6 +63,7 @@ export class WorkStackComponent implements OnInit {
 
   @Output() checkboxChangeWorkStackOutput = new EventEmitter<any>()
   @Input() userInfo: UserInfo
+  @Input() selectAll: boolean
   @ViewChildren('panelsComponent') panelsComponent: QueryList<PanelComponent>
 
   // orgDisambiguated: { [key: string]: OrgDisambiguated | null } = {}
@@ -67,7 +74,14 @@ export class WorkStackComponent implements OnInit {
     }
   } = {}
 
-  constructor(private _workService: RecordWorksService) {}
+  constructor(
+    _togglz: TogglzService,
+    private _workService: RecordWorksService
+  ) {
+    _togglz
+      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
+      .subscribe((value) => (this.togglzWorksContributors = value))
+  }
 
   /**
    * Set the panelDetails and top of the stack card to default mode
@@ -87,6 +101,13 @@ export class WorkStackComponent implements OnInit {
       this.panelDetailsState[work.putCode.value] = {
         state: false,
       }
+    }
+    // todo @DanielPalafox remove if and togglz once contributors are returned in works page endpoint
+    if (
+      this.togglzWorksContributors ||
+      (this.panelDetailsState[work.putCode.value] !== undefined && !force)
+    ) {
+      this.getDetails(work).subscribe()
     }
   }
 
@@ -112,10 +133,15 @@ export class WorkStackComponent implements OnInit {
   /**
    * Show and hide details of the panel
    */
-  toggleDetails(work: Work) {
+  toggleDetails(
+    work: Work,
+    options: { showDetails: boolean } = { showDetails: true }
+  ) {
     const putCode = work.putCode.value
-    this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
-      .state
+    if (options.showDetails) {
+      this.panelDetailsState[putCode].state = !this.panelDetailsState[putCode]
+        .state
+    }
 
     if (this.panelDetailsState[putCode].state) {
       this.getDetails(work)
@@ -137,7 +163,7 @@ export class WorkStackComponent implements OnInit {
   }
 
   makePrimaryCard(work: Work) {
-    // TODO
+    this._workService.updatePreferredSource(work.putCode.value).subscribe()
   }
 
   changeTopPanelOfTheStack(work: Work) {

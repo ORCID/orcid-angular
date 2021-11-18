@@ -39,6 +39,9 @@ export class RecordNamesService {
     } else if (!options.forceReload) {
       return this.$names
     }
+    if (options.cleanCacheIfExist && this.$names) {
+      this.$names.next(<NamesEndPoint>undefined)
+    }
 
     this._http
       .get<NamesEndPoint>(environment.API_WEB + `account/nameForm.json`, {

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import {
+  BehaviorSubject,
   combineLatest,
   merge,
   Observable,
@@ -21,6 +22,7 @@ import {
   startWith,
   switchMap,
   take,
+  takeUntil,
   tap,
 } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
@@ -53,6 +55,11 @@ import { UserInfoService } from '../user-info/user-info.service'
   providedIn: 'root',
 })
 export class UserService {
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  })
+
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
@@ -67,6 +74,13 @@ export class UserService {
   private $userSessionSubject = new ReplaySubject<UserSession>(1)
   sessionInitialized = false
   keepRefreshingUserSession = true
+  private hiddenTab = false
+  private ONE_MINUTE = 60 * 1000
+  private FIVE_MINUTES = 5 * 60 * 1000
+  private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(
+    this.ONE_MINUTE
+  )
+  private reset$ = new Subject()
 
   _recheck = new Subject<{
     forceSessionUpdate: boolean
@@ -112,52 +126,57 @@ export class UserService {
       return this.$userSessionSubject
     } else {
       this.sessionInitialized = true
-      // trigger every 60 seconds or on _recheck subject event
-      merge(
-        timer(0, 60 * 1000).pipe(
-          map((timerUpdate) => {
-            return { timerUpdate }
-          })
-        ),
-        this._recheck
-      )
-        .pipe(
-          // Check user status only when needed
-          filter((value) => this.keepRefreshingUserSession),
-          // Check for updates on userStatus.json
-          switchMap((checkTrigger) =>
-            this.getUserStatus().pipe(
-              map((loggedIn) => {
-                return { loggedIn, checkTrigger }
-              })
-            )
+      // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or
+      // on _recheck subject event
+      this.interval$.subscribe((duration) => {
+        merge(
+          timer(0, duration).pipe(
+            takeUntil(this.reset$),
+            map((timerUpdate) => {
+              return { timerUpdate }
+            })
           ),
-          // Filter followup calls if the user status has no change
-          //
-          // Also turns on the flag loggingStateComesFromTheServer
-          // indicating that the current logging state is taken from the server,
-          // and not the initial assumption. (more on this on the following pipe)
-          filter((result: UserSessionUpdateParameters) => {
-            this.loggingStateComesFromTheServer = true
-            return this.userStatusHasChange(result)
-          }),
-          // At the very beginning assumes the user is logged in,
-          // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
-          startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
-          switchMap((updateParameters) =>
-            this.handleUserDataUpdate(updateParameters)
-          ),
-          map((data) => this.computesUpdatedUserData(data)),
-          // Debugger for the user session on development time
-          tap((session) =>
-            environment.debugger ? console.debug(session) : null
-          ),
-          tap((session) => {
-            this.$userSessionSubject.next(session)
-          })
+          this._recheck
         )
-        .subscribe()
-      return this.$userSessionSubject
+          .pipe(
+            // Check user status only when needed
+            filter((value) => this.keepRefreshingUserSession),
+            // Check for updates on userStatus.json
+            switchMap((checkTrigger) =>
+              this.getUserStatus().pipe(
+                map((loggedIn) => {
+                  return { loggedIn, checkTrigger }
+                })
+              )
+            ),
+            // Filter followup calls if the user status has no change
+            //
+            // Also turns on the flag loggingStateComesFromTheServer
+            // indicating that the current logging state is taken from the server,
+            // and not the initial assumption. (more on this on the following pipe)
+            filter((result: UserSessionUpdateParameters) => {
+              this.loggingStateComesFromTheServer = true
+              return this.userStatusHasChange(result)
+            }),
+            // At the very beginning assumes the user is logged in,
+            // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
+            startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
+            switchMap((updateParameters) =>
+              this.handleUserDataUpdate(updateParameters)
+            ),
+            map((data) => this.computesUpdatedUserData(data)),
+            // Debugger for the user session on development time
+            tap((session) =>
+              environment.debugger ? console.debug(session) : null
+            ),
+            tap((session) => {
+              this.$userSessionSubject.next(session)
+            })
+          )
+          .subscribe()
+      })
+
+      return this.$userSessionSubject.asObservable()
     }
   }
 
@@ -429,19 +448,20 @@ export class UserService {
   // and we also trigger a reload, to reload the oauth page
   // there might be some scenarios where these two different request might not work as expected.
   switchAccount(delegator: Delegator) {
+    const params = new HttpParams().append(
+      'username',
+      delegator.giverOrcid.path
+    )
     return this._http
-      .get(
-        `${environment.API_WEB}switch-user?username=${delegator.giverOrcid.path}`,
-        {
-          withCredentials: true,
-        }
-      )
+      .post(`${environment.API_WEB}switch-user`, '', {
+        headers: this.headers,
+        params: params,
+      })
       .pipe(
         catchError((error) => {
-          // TODO @angel review
-          // The endpoint response need to be handle as an error
-          // since the response is not a 200 from the server
-          // The status is interpreted as a error code 0 since the 302 redirect is cancelled
+          // TODO @angel @camelia review
+          // The server response with a redirect to an http not secure page,
+          // which equals a error status 0 to browsers
           if (error.status === 0) {
             this.refreshUserSession(true)
             return of(error)
@@ -453,5 +473,18 @@ export class UserService {
           }
         })
       )
+  }
+
+  setTimerAsHiddenState(hiddenTab: boolean) {
+    // only reset the timer when the visibility is changed
+    if (hiddenTab && !this.hiddenTab) {
+      this.hiddenTab = hiddenTab
+      this.reset$.next()
+      this.interval$.next(this.FIVE_MINUTES)
+    } else if (!hiddenTab && this.hiddenTab) {
+      this.hiddenTab = hiddenTab
+      this.reset$.next()
+      this.interval$.next(this.ONE_MINUTE)
+    }
   }
 }

@@ -40,6 +40,9 @@ export class RecordKeywordService {
     } else if (!options.forceReload) {
       return this.$keywords
     }
+    if (options.cleanCacheIfExist && this.$keywords) {
+      this.$keywords.next(<KeywordEndPoint>undefined)
+    }
 
     this._http
       .get<KeywordEndPoint>(

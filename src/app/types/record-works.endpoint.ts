@@ -6,6 +6,12 @@ import {
   VisibilityStrings,
 } from './common.endpoint'
 import { AssertionBase } from './record.endpoint'
+import {
+  WorkPublicationTypes,
+  WorkConferenceTypes,
+  WorkIntellectualPropertyTypes,
+  WorkOtherOutputTypes,
+} from './works.endpoint'
 
 export interface Work extends AssertionBase {
   publicationDate: MonthDayYearDate
@@ -21,9 +27,19 @@ export interface Work extends AssertionBase {
   subtitle?: Value
   translatedTitle?: TranslatedTitle
   workCategory?: Value
-  workType: Value
+  workType: WorkType
   dateSortString?: MonthDayYearDate
   userSource?: boolean
+}
+interface WorkType {
+  errors?: any[]
+  required?: boolean
+  getRequiredMessage?: any
+  value:
+    | WorkPublicationTypes
+    | WorkConferenceTypes
+    | WorkIntellectualPropertyTypes
+    | WorkOtherOutputTypes
 }
 
 export interface TranslatedTitle {

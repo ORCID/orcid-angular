@@ -15,6 +15,7 @@ import { PersonIdentifierEndpoint } from 'src/app/types/record-person-identifier
   selector: 'app-modal-person-identifiers',
   templateUrl: './modal-person-identifiers.component.html',
   styleUrls: ['./modal-person-identifiers.component.scss'],
+  preserveWhitespaces: true,
 })
 export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -116,26 +117,6 @@ export class ModalPersonIdentifiersComponent implements OnInit, OnDestroy {
     )
     this.personIdentifiers.splice(i, 1)
     this.personIdentifiersForm.removeControl(putCode)
-  }
-
-  getSourceName(address: Assertion) {
-    return address.sourceName || address.source
-  }
-
-  getDate(address: Assertion) {
-    const x = address.createdDate
-    let date: Date
-    if (x.year && x.month && x.day) {
-      date = new Date(
-        Date.UTC(
-          Number.parseInt(x.year, 10),
-          Number.parseInt(x.month, 10),
-          Number.parseInt(x.day, 10)
-        )
-      )
-    }
-
-    return date
   }
 
   ngOnDestroy() {

@@ -7,6 +7,8 @@
   "
 >
   <app-panel
+    [stackSiblings]="researchResourceStack.researchResources"
+    [showVisibilityControl]="isPreferred(research)"
     class="top-bar"
     [elements]="research"
     [type]="'research-resources'"
@@ -38,7 +40,6 @@
     <app-panel-source
       [isPreferred]="isPreferred(research)"
       [sourceName]="research.sourceName || research.source"
-      [assertionOriginClientId]="research.assertionOriginClientId"
       [assertionOriginName]="research.assertionOriginName"
       [assertionOriginOrcid]="research.assertionOriginOrcid"
       [stackLength]="researchResourceStack.researchResources.length"

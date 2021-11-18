@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service'
 import { Observable } from 'rxjs'
 import { first, map, startWith, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { ApplicationRoutes } from 'src/app/constants'
 
 import { environment } from '../../../../environments/environment'
 import { WINDOW } from '../../../cdk/window'
@@ -98,7 +99,7 @@ export class InstitutionalComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-        this._router.navigate(['/signin'], {
+        this._router.navigate([ApplicationRoutes.signin], {
           queryParams: platform.queryParameters,
         })
       })

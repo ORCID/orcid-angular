@@ -1,5 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { Subject } from 'rxjs'
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
+import { forkJoin, Subject } from 'rxjs'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
@@ -10,7 +16,7 @@ import { RecordAffiliationService } from '../../../../core/record-affiliations/r
 import { RecordFundingsService } from '../../../../core/record-fundings/record-fundings.service'
 import { RecordResearchResourceService } from '../../../../core/record-research-resource/record-research-resource.service'
 import { RecordPeerReviewService } from '../../../../core/record-peer-review/record-peer-review.service'
-import { Work } from '../../../../types/record-works.endpoint'
+import { SnackbarService } from '../../../../cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-modal-delete-items',
@@ -52,15 +58,18 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
+    private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _recordAffiliationService: RecordAffiliationService,
     private _recordFundingsService: RecordFundingsService,
     private _recordWorksService: RecordWorksService,
     private _recordResearchResourceService: RecordResearchResourceService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _recordPeerReviewService: RecordPeerReviewService,
+    private _snackBar: SnackbarService
   ) {}
 
   ngOnInit(): void {
+    this.deleteForm = new FormGroup({})
     const group: { [key: string]: FormGroup } = {}
 
     this._platform
@@ -70,7 +79,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         this.isMobile = platform.columns4 || platform.columns8
       })
 
-    if (this.item && this.items.length === 0) {
+    if (this.item && this.putCodes?.length === 0) {
       this.items.push(this.item)
       this.items.forEach((i) => {
         group[i?.putCode?.value || i.putCode] = new FormGroup({
@@ -82,21 +91,19 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
     if (this.putCodes.length > 0) {
       this.loadingItems = true
-      this.putCodes.forEach((putCode, index) => {
-        this._recordWorksService
-          .getWorkInfo(putCode)
-          .subscribe((work: Work) => {
-            this.items.push(work)
-            if (index === this.putCodes.length - 1) {
-              this.items.forEach((w) => {
-                group[w.putCode.value] = new FormGroup({
-                  checked: new FormControl(false),
-                })
-              })
-              this.deleteForm = new FormGroup(group)
-              this.loadingItems = false
-            }
+      const works$ = []
+      this.putCodes.forEach((putCode) => {
+        works$.push(this._recordWorksService.getWorkInfo(putCode))
+      })
+      forkJoin(...works$).subscribe((works) => {
+        works.forEach((w) => {
+          this.items.push(w)
+          group[w.putCode.value] = new FormGroup({
+            checked: new FormControl(false),
           })
+        })
+        this.deleteForm = new FormGroup(group)
+        this.loadingItems = false
       })
     }
   }
@@ -108,7 +115,7 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
       if (
         this.deleteForm.value[
           this.type === 'research-resources' ? item.putCode : item.putCode.value
-        ].checked
+        ]?.checked
       ) {
         putCode =
           this.type === 'research-resources' ? item.putCode : item.putCode.value
@@ -117,7 +124,14 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         }
       }
     })
-    this.delete(putCodesDelete.length === 0 ? putCode : putCodesDelete)
+    if (putCode || putCodesDelete.length > 0) {
+      this.delete(putCodesDelete.length === 0 ? putCode : putCodesDelete)
+    } else {
+      this._snackBar.showValidationError(
+        $localize`:@@shared.youHaveNotSelected:You haven’t selected any items to delete.`,
+        $localize`:@@shared.pleaseReview:Please review and fix the issue`
+      )
+    }
   }
 
   delete(putCode) {
@@ -184,14 +198,9 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
   }
 
   updateCheckAll() {
+    this.selectedItems = []
     this.putCodes.forEach((value) => {
-      if (this.selectedItems.includes(value)) {
-        if (!!this.selectAll === false) {
-          this.selectedItems = this.selectedItems.filter(
-            (putCode) => putCode !== value
-          )
-        }
-      } else {
+      if (this.selectAll) {
         this.selectedItems.push(value)
       }
       this.deleteForm.patchValue({
@@ -200,15 +209,14 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
         },
       })
     })
+    this._changeDetectorRef.detectChanges()
   }
 
   updateCheck(putCode: string) {
     if (this.selectedItems.includes(putCode)) {
-      if (!!this.selectAll === false) {
-        this.selectedItems = this.selectedItems.filter(
-          (value) => value !== putCode
-        )
-      }
+      this.selectedItems = this.selectedItems.filter(
+        (value) => value !== putCode
+      )
     } else {
       this.selectedItems.push(putCode)
     }

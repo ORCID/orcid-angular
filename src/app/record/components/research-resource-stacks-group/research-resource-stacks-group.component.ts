@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import { MainPanelsState, UserRecordOptions } from 'src/app/types/record.local'
 import { SortData } from 'src/app/types/sort'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -27,9 +27,9 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   defaultPageSize = DEFAULT_PAGE_SIZE
   labelSortButton = $localize`:@@shared.sortResearch:Sort Research Resources`
   @Input() isPublicRecord: string
-  @Input() expandedContent: boolean
-  @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
+  @Input() expandedContent: MainPanelsState
+  @Output() expandedContentChange = new EventEmitter<MainPanelsState>()
+  @Output() total: EventEmitter<number> = new EventEmitter()
   userRecordContext: UserRecordOptions = {}
   displayTheStackClass = false
 
@@ -55,7 +55,6 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
   } = {}
 
   ngOrcidResearchResources = $localize`:@@researchResources.researchResources:Research resources`
-  offset: number
   isMobile: boolean
 
   paginationTotalAmountOfResearchResources: number
@@ -89,46 +88,50 @@ export class ResearchResourceStacksGroupComponent implements OnInit {
 
   private getRecord() {
     this._record
-      .getRecord({
-        publicRecordId: this.isPublicRecord || undefined,
-      })
+      .getRecord({ publicRecordId: this.isPublicRecord })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
         if (!isEmpty(userRecord?.researchResources)) {
           this.paginationLoading = false
           this.researchResources = userRecord.researchResources
-          this.offset = userRecord.researchResources.offset
-          this.total.emit(this.researchResources.groups.length)
+          this.total.emit(this.researchResources.groups?.length || 0)
           this.paginationTotalAmountOfResearchResources =
             userRecord.researchResources.totalGroups
           this.paginationIndex = userRecord.researchResources.pageIndex
           this.paginationPageSize = userRecord.researchResources.pageSize
-          this.total.emit(userRecord.researchResources.groups.length)
+          this.total.emit(userRecord.researchResources.groups?.length || 0)
         }
       })
   }
 
   pageEvent(event: PageEvent) {
+    this.paginationLoading = true
     this.userRecordContext.offset = event.pageIndex * event.pageSize
     this.userRecordContext.pageSize = event.pageSize
     this.userRecordContext.publicRecordId = this.isPublicRecord
-    this._recordResearchResourceService.changeUserRecordContext(
-      this.userRecordContext
-    )
-    this.paginationLoading = true
+    this.loadResearchResources()
   }
 
   sortEvent(event: SortData) {
+    this.paginationLoading = true
     this.userRecordContext.publicRecordId = this.isPublicRecord
     this.userRecordContext.sort = event.type
     this.userRecordContext.sortAsc = event.direction === 'asc'
-    this._recordResearchResourceService.changeUserRecordContext(
-      this.userRecordContext
-    )
-    this.paginationLoading = true
+    this.loadResearchResources()
   }
 
-  expandedClicked(expanded: boolean) {
-    this.expanded.emit({ type: 'research-resources', expanded })
+  loadResearchResources(): void {
+    if (
+      this.researchResources.totalGroups >
+        this.researchResources.groups.length ||
+      this.paginationPageSize !== this.defaultPageSize
+    ) {
+      this.userRecordContext.forceReload = true
+    }
+    this._recordResearchResourceService
+      .changeUserRecordContext(this.userRecordContext)
+      .subscribe(() => {
+        this.paginationLoading = false
+      })
   }
 }

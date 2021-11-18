@@ -40,6 +40,9 @@ export class RecordBiographyService {
     } else if (!options.forceReload) {
       return this.$biography
     }
+    if (options.cleanCacheIfExist && this.$biography) {
+      this.$biography.next(<BiographyEndPoint>undefined)
+    }
 
     this._http
       .get<BiographyEndPoint>(

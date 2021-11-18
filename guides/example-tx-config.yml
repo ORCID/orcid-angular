@@ -1,6 +1,3 @@
-## This file is a backup copy of the configuration file of transifex.
-## it does not affect the functionality of the integration here in any way.
-
 #
 filters:
   - filter_type: file
@@ -163,3 +160,27 @@ filters:
     source_file: src/locale/properties/research-resources/research-resources.en.properties
     # path expression to translation files, must contain <lang> placeholder
     translation_files_expression: src/locale/properties/research-resources/research-resources.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/funding/funding.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/funding/funding.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/works/works.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/works/works.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/side-bar/side-bar.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/side-bar/side-bar.<lang>.properties

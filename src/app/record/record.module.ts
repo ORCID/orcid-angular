@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+
 import { MatRadioModule } from '@angular/material/radio'
 import { MatSelectModule } from '@angular/material/select'
 
@@ -51,17 +52,31 @@ import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/
 import { ModalBiographyComponent } from './components/top-bar/modals/modal-biography/modal-biography.component'
 import { ModalNameComponent } from './components/top-bar/modals/modal-name/modal-name.component'
 import { TopBarComponent } from './components/top-bar/top-bar.component'
-import { WorkModalComponent } from './components/work-modal/work-modal.component'
 import { WorkStackGroupComponent } from './components/work-stack-group/work-stack-group.component'
 import { WorkStackComponent } from './components/work-stack/work-stack.component'
 import { ModalCombineWorksComponent } from './components/work/modals/modal-combine-works/modal-combine-works.component'
-import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
 import { WorkComponent } from './components/work/work.component'
 import { MyOrcidComponent } from './pages/my-orcid/my-orcid.component'
 import { RecordRoutingModule } from './record-routing.module'
-import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/modal-works-search-link.component'
 import { ModalFundingSearchLinkComponent } from './components/funding-stacks-groups/modals/modal-funding-search-link/modal-funding-search-link.component'
 import { SearchLinkWizardComponent } from './components/search-link-wizard/search-link-wizard.component'
+import { WorksVisibilityModalComponent } from './components/work/modals/works-visibility-modal/works-visibility-modal.component'
+import { WorkBibtexModalComponent } from './components/work-stack-group/modals/work-bibtex-modal/work-bibtex-modal.component'
+import { ModalWorksSearchLinkComponent } from './components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
+import { WorkExternalIdModalComponent } from './components/work-stack-group/modals/work-external-id-modal/work-external-id-modal.component'
+import { WorkFormComponent } from './components/work-form/work-form/work-form.component'
+import { WorkExternalIdentifiersEditComponent } from './components/work-external-identifiers-edit/work-external-identifiers-edit.component'
+import { FundingExternalIdentifiersEditComponent } from './components/funding-external-identifiers-edit/funding-external-identifiers-edit.component'
+import { ModalExportWorksComponent } from './components/work/modals/modal-export-works/modal-export-works.component'
+import { WorkModalComponent } from './components/work-modal/work-modal.component'
+import { FundingExternalIdentifiersViewOnlyComponent } from './components/funding-external-identifiers-view-only/funding-external-identifiers-view-only.component'
+import { WorkExternalIdentifiersViewOnlyComponent } from './components/work-external-identifiers-view-only/work-external-identifiers-view-only.component'
+import { TextFieldModule } from '@angular/cdk/text-field'
+import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
+import { TopBarVerificationEmailComponent } from './components/top-bar-verification-email/top-bar-verification-email.component'
+import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
+import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
+import { ModalCombineWorksWithSelectorComponent } from './components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
 
 @NgModule({
   declarations: [
@@ -88,7 +103,6 @@ import { SearchLinkWizardComponent } from './components/search-link-wizard/searc
     TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
     NotFoundComponent,
-    WorkModalComponent,
     ModalAffiliationsComponent,
     OrgIdentifierComponent,
     ModalFundingComponent,
@@ -102,6 +116,19 @@ import { SearchLinkWizardComponent } from './components/search-link-wizard/searc
     ModalDeleteItemsComponent,
     ModalFundingSearchLinkComponent,
     SearchLinkWizardComponent,
+    WorksVisibilityModalComponent,
+    WorkBibtexModalComponent,
+    WorkExternalIdModalComponent,
+    WorkFormComponent,
+    WorkExternalIdentifiersEditComponent,
+    WorkExternalIdentifiersViewOnlyComponent,
+    FundingExternalIdentifiersEditComponent,
+    FundingExternalIdentifiersViewOnlyComponent,
+    WorkFormComponent,
+    WorkModalComponent,
+    TopBarVerificationEmailComponent,
+    TopBarVerificationEmailModalComponent,
+    ModalCombineWorksWithSelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -133,6 +160,9 @@ import { SearchLinkWizardComponent } from './components/search-link-wizard/searc
     MatAutocompleteModule,
     MatRadioModule,
     MatCheckboxModule,
+    TextFieldModule,
+    WarningMessageModule,
   ],
+  providers: [VerificationEmailModalService],
 })
 export class RecordModule {}

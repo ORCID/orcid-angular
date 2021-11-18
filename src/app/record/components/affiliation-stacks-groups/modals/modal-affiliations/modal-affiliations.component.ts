@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core'
-import { EMPTY, Subject } from 'rxjs'
+import { EMPTY, of, Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
@@ -17,11 +17,20 @@ import {
 import { RecordAffiliationService } from '../../../../../core/record-affiliations/record-affiliations.service'
 import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
-import { debounceTime, first, startWith, switchMap } from 'rxjs/operators'
+import { first, map, switchMap, tap } from 'rxjs/operators'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
-import { URL_REGEXP } from '../../../../../constants'
-import { dateValidator } from '../../../../../shared/validators/date/date.validator'
+import {
+  MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
+  MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
+  URL_REGEXP,
+} from '../../../../../constants'
+import {
+  dateValidator,
+  endDateValidator,
+} from '../../../../../shared/validators/date/date.validator'
 import { Observable } from 'rxjs/internal/Observable'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { RecordService } from 'src/app/core/record/record.service'
 
 @Component({
   selector: 'app-modal-affiliations',
@@ -50,7 +59,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   defaultVisibility: VisibilityStrings
   filteredOptions: Observable<Organization[]>
 
-  organization = ''
+  organization: string | Organization = ''
   city = ''
   region = ''
   country = ''
@@ -76,6 +85,11 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   ngOrcidYear = $localize`:@@shared.year:Year`
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
+  ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
+
+  selectedOrganizationFromDatabase: Organization
+  requireOrganizationDisambiguatedDataOnRefresh = false
+  displayOrganizationHint: boolean
 
   constructor(
     @Inject(WINDOW) private window: Window,
@@ -83,7 +97,9 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<ModalComponent>,
     private _recordCountryService: RecordCountriesService,
     private _recordAffiliationService: RecordAffiliationService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _snackbar: SnackbarService,
+    private _record: RecordService
   ) {
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -93,53 +109,133 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initialValues()
-    this.affiliationForm = this._formBuilder.group({
-      organization: new FormControl(this.organization, {
-        validators: [Validators.required],
-      }),
-      city: new FormControl(this.city, {
-        validators: [Validators.required],
-      }),
-      region: new FormControl(this.region, {}),
-      country: new FormControl('', {
-        validators: [Validators.required],
-      }),
-      department: new FormControl(this.department, {}),
-      title: new FormControl(this.title, {}),
-      startDateGroup: this._formBuilder.group(
-        {
-          startDateDay: ['', []],
-          startDateMonth: ['', []],
-          startDateYear: ['', []],
-        },
-        { validator: dateValidator('startDate') }
-      ),
-      endDateGroup: this._formBuilder.group(
-        {
-          endDateDay: [''],
-          endDateMonth: [''],
-          endDateYear: [''],
-        },
-        { validator: dateValidator('endDate') }
-      ),
-      link: new FormControl(this.link, {
-        validators: [Validators.pattern(URL_REGEXP)],
-      }),
-      visibility: new FormControl(
-        this.affiliation?.visibility?.visibility
-          ? this.affiliation.visibility.visibility
-          : this.defaultVisibility,
-        {}
-      ),
-    })
+
+    this.affiliationForm = this._formBuilder.group(
+      {
+        organization: new FormControl(this.organization, {
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
+        }),
+        city: new FormControl(this.city, {
+          validators: [
+            Validators.required,
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND),
+          ],
+        }),
+        region: new FormControl(this.region, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
+        country: new FormControl('', {
+          validators: [Validators.required],
+        }),
+        department: new FormControl(this.department, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
+        title: new FormControl(this.title, {
+          validators: [Validators.maxLength(MAX_LENGTH_LESS_THAN_ONE_THOUSAND)],
+        }),
+        startDateGroup: this._formBuilder.group(
+          {
+            startDateDay: ['', []],
+            startDateMonth: ['', []],
+            startDateYear: ['', []],
+          },
+          { validator: dateValidator('startDate') }
+        ),
+        endDateGroup: this._formBuilder.group(
+          {
+            endDateDay: [''],
+            endDateMonth: [''],
+            endDateYear: [''],
+          },
+          { validator: dateValidator('endDate') }
+        ),
+        link: new FormControl(this.link, {
+          validators: [
+            Validators.pattern(URL_REGEXP),
+            Validators.maxLength(MAX_LENGTH_LESS_THAN_TWO_THOUSAND),
+          ],
+        }),
+        visibility: new FormControl(this.defaultVisibility, {
+          validators: [Validators.required],
+        }),
+      },
+      {
+        validator: endDateValidator(),
+      }
+    )
+
+    this._record
+      .getPreferences()
+      .pipe(first())
+      .subscribe((userPreferences) => {
+        this.defaultVisibility = userPreferences.default_visibility
+        this.loadingAffiliations = false
+        this.affiliationForm.patchValue({
+          visibility: this.affiliation?.visibility?.visibility
+            ? this.affiliation.visibility.visibility
+            : this.defaultVisibility,
+        })
+      })
+
+    this.filteredOptions = this.affiliationForm
+      .get('organization')
+      .valueChanges.pipe(
+        tap((organization: string | Organization) => {
+          // Auto fill form when the user select an organization from the autocomplete list
+          if (
+            typeof organization === 'object' &&
+            organization.disambiguatedAffiliationIdentifier
+          ) {
+            this.selectedOrganizationFromDatabase = organization
+            this.requireOrganizationDisambiguatedDataOnRefresh = true
+            this.displayOrganizationHint = true
+            this.fillForm(organization)
+          }
+          if (!organization) {
+            this.selectedOrganizationFromDatabase = undefined
+            this.requireOrganizationDisambiguatedDataOnRefresh = true
+            this.displayOrganizationHint = false
+            this.affiliationForm.patchValue({
+              city: '',
+              region: '',
+              country: '',
+            })
+          }
+        }),
+        switchMap((organization: string | Organization) => {
+          if (
+            typeof organization === 'string' &&
+            !this.selectedOrganizationFromDatabase
+          ) {
+            // Display matching organization based on the user string input
+            return this._filter((organization as string) || '').pipe(
+              tap((x) => {
+                this.displayOrganizationHint = true
+              })
+            )
+          } else {
+            // Do not display options once the user has selected an Organization
+            return of([])
+          }
+        })
+      )
 
     if (this.affiliation) {
       if (this.affiliation.endDate.year) {
         this.affiliationForm.patchValue({
           endDateGroup: {
-            endDateYear: Number(this.affiliation.endDate.year),
-            endDateMonth: Number(this.affiliation.endDate.month),
-            endDateDay: Number(this.affiliation.endDate.day),
+            endDateYear: this.affiliation.endDate.year
+              ? Number(this.affiliation.endDate.year)
+              : '',
+            endDateMonth: this.affiliation.endDate.month
+              ? Number(this.affiliation.endDate.month)
+              : '',
+            endDateDay: this.affiliation.endDate.day
+              ? Number(this.affiliation.endDate.day)
+              : '',
           },
         })
       }
@@ -147,23 +243,25 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       if (this.affiliation.startDate.year) {
         this.affiliationForm.patchValue({
           startDateGroup: {
-            startDateYear: Number(this.affiliation.startDate.year),
-            startDateMonth: Number(this.affiliation.startDate.month),
-            startDateDay: Number(this.affiliation.startDate.day),
+            startDateYear: this.affiliation.startDate.year
+              ? Number(this.affiliation.startDate.year)
+              : '',
+            startDateMonth: this.affiliation.startDate.month
+              ? Number(this.affiliation.startDate.month)
+              : '',
+            startDateDay: this.affiliation.startDate.day
+              ? Number(this.affiliation.startDate.day)
+              : '',
           },
         })
       }
-    }
 
-    this.filteredOptions = this.affiliationForm
-      .get('organization')
-      .valueChanges.pipe(
-        startWith(''),
-        debounceTime(400),
-        switchMap((val) => {
-          return this._filter(val || '')
+      if (this.affiliation.visibility?.visibility) {
+        this.affiliationForm.patchValue({
+          visibility: this.affiliation.visibility.visibility,
         })
-      )
+      }
+    }
 
     this._recordCountryService
       .getCountryCodes()
@@ -192,21 +290,11 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         }
       })
 
-    if (this.affiliation) {
-      this._recordAffiliationService
-        .getAffiliationsDetails(
-          this.affiliation.affiliationType.value,
-          this.affiliation.putCode.value
-        )
-        .pipe(first())
-        .subscribe((affiliationUIGroup) => {
-          this.loadingAffiliations = false
-          this.affiliationForm.patchValue({
-            link:
-              affiliationUIGroup[0].affiliationGroup[0].affiliations[0].url
-                .value,
-          })
-        })
+    if (!this.affiliation?.putCode) {
+      // Update the visibility with the default value
+      this.affiliationForm.patchValue({
+        visibility: this.defaultVisibility,
+      })
     } else {
       this.loadingAffiliations = false
     }
@@ -214,17 +302,32 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   initialValues() {
     if (this.affiliation) {
-      this.organization = this.affiliation.affiliationName.value
+      this.displayOrganizationHint = true
+      if (this.affiliation.orgDisambiguatedName) {
+        this.selectedOrganizationFromDatabase = {
+          value: this.affiliation.orgDisambiguatedName,
+        } as Organization
+      }
+      this.organization = {
+        value: this.affiliation.affiliationName.value,
+      } as Organization
       this.city = this.affiliation.city.value
       this.region = this.affiliation.region.value
       this.country = this.affiliation.country.value
       this.department = this.affiliation.departmentName.value
       this.title = this.affiliation.roleTitle.value
+      this.link = this.affiliation.url.value
     }
   }
 
-  formToBackendAffiliation(affiliationForm: FormGroup): any {
-    return {
+  autoCompleteDisplayOrganization(organization: Organization) {
+    return organization.value
+  }
+
+  formToBackendAffiliation(
+    affiliationForm: FormGroup
+  ): Observable<Affiliation> {
+    const affiliationToSave = {
       visibility: {
         visibility: affiliationForm.get('visibility').value
           ? affiliationForm.get('visibility').value
@@ -234,9 +337,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         value: this.options?.createACopy
           ? null
           : this.affiliation?.putCode?.value,
-      },
-      affiliationName: {
-        value: affiliationForm.get('organization').value,
       },
       city: {
         value: affiliationForm.get('city').value,
@@ -261,22 +361,34 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         value: this.type,
       },
       startDate: {
-        day: this.addTrailingZero(
-          affiliationForm.get('startDateGroup.startDateDay').value
-        ),
-        month: this.addTrailingZero(
-          affiliationForm.get('startDateGroup.startDateMonth').value
-        ),
-        year: affiliationForm.get('startDateGroup.startDateYear').value,
+        day: affiliationForm.get('startDateGroup.startDateDay').value
+          ? this.addTrailingZero(
+              affiliationForm.get('startDateGroup.startDateDay').value
+            )
+          : '',
+        month: affiliationForm.get('startDateGroup.startDateMonth').value
+          ? this.addTrailingZero(
+              affiliationForm.get('startDateGroup.startDateMonth').value
+            )
+          : '',
+        year: affiliationForm.get('startDateGroup.startDateYear').value
+          ? affiliationForm.get('startDateGroup.startDateYear').value
+          : '',
       },
       endDate: {
-        day: this.addTrailingZero(
-          affiliationForm.get('endDateGroup.endDateDay').value
-        ),
-        month: this.addTrailingZero(
-          affiliationForm.get('endDateGroup.endDateMonth').value
-        ),
-        year: affiliationForm.get('endDateGroup.endDateYear').value,
+        day: affiliationForm.get('endDateGroup.endDateDay').value
+          ? this.addTrailingZero(
+              affiliationForm.get('endDateGroup.endDateDay').value
+            )
+          : '',
+        month: affiliationForm.get('endDateGroup.endDateMonth')
+          ? this.addTrailingZero(
+              affiliationForm.get('endDateGroup.endDateMonth').value
+            )
+          : '',
+        year: affiliationForm.get('endDateGroup.endDateYear').value
+          ? affiliationForm.get('endDateGroup.endDateYear').value
+          : '',
       },
       url: {
         value: affiliationForm.get('link').value,
@@ -302,6 +414,55 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       orgDisambiguatedRegion: this.affiliation?.orgDisambiguatedRegion,
       orgDisambiguatedUrl: this.affiliation?.orgDisambiguatedUrl,
     } as Affiliation
+
+    if (this.selectedOrganizationFromDatabase) {
+      affiliationToSave.affiliationName = {
+        value: this.selectedOrganizationFromDatabase.value,
+      }
+    } else {
+      affiliationToSave.affiliationName = {
+        value: affiliationForm.get('organization').value?.value
+          ? affiliationForm.get('organization').value?.value
+          : affiliationForm.get('organization').value,
+      }
+    }
+
+    if (this.requireOrganizationDisambiguatedDataOnRefresh) {
+      // When a organization was selected from the drop down get the disambiguated source to populate the affiliation
+      if (
+        this.selectedOrganizationFromDatabase
+          ?.disambiguatedAffiliationIdentifier
+      ) {
+        return this._recordAffiliationService
+          .getOrganizationDisambiguated(
+            this.selectedOrganizationFromDatabase
+              .disambiguatedAffiliationIdentifier
+          )
+          .pipe(
+            map((disambiguated) => {
+              affiliationToSave.disambiguatedAffiliationSourceId = {
+                value: disambiguated.sourceId,
+              }
+              affiliationToSave.disambiguationSource = {
+                value: disambiguated.sourceType,
+              }
+              affiliationToSave.orgDisambiguatedId = {
+                value: this.selectedOrganizationFromDatabase.sourceType,
+              }
+
+              return affiliationToSave
+            })
+          )
+      } else {
+        // When a organization was NOT selected empty the organization fills
+        affiliationToSave.disambiguatedAffiliationSourceId = undefined
+        affiliationToSave.disambiguationSource = undefined
+        affiliationToSave.orgDisambiguatedId = undefined
+        return of(affiliationToSave)
+      }
+    } else {
+      return of(affiliationToSave)
+    }
   }
 
   fillForm(organization: Organization) {
@@ -316,9 +477,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   clearForm() {
     this.affiliationForm.patchValue({
       organization: '',
-      city: '',
-      region: '',
-      country: '',
     })
   }
 
@@ -352,12 +510,18 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   saveEvent() {
     if (this.affiliationForm.valid) {
       this.loadingAffiliations = true
-      this._recordAffiliationService
-        .postAffiliation(this.formToBackendAffiliation(this.affiliationForm))
-        .pipe(first())
+      this.formToBackendAffiliation(this.affiliationForm)
+        .pipe(
+          switchMap((affiliation) =>
+            this._recordAffiliationService.postAffiliation(affiliation)
+          ),
+          first()
+        )
         .subscribe(() => {
           this.closeEvent()
         })
+    } else {
+      this._snackbar.showValidationError()
     }
   }
 

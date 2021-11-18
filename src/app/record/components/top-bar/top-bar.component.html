@@ -15,7 +15,33 @@
   [onlyShowPrintButton]="!platform.columns12"
 ></app-top-bar-actions>
 
+<app-top-bar-verification-email
+  [justRegistered]="justRegistered"
+  [emailVerified]="emailVerified"
+  *ngIf="justRegistered || emailVerified"
+></app-top-bar-verification-email>
+
 <ng-container *ngIf="!isPublicRecord && !recordWithIssues">
+  <app-warning-message *ngIf="userInfo?.LOCKED === 'true'">
+    <ng-container i18n="@@topBar.accountHasBeenLocked" title
+      >Your account has been locked</ng-container
+    >
+    <ng-container content
+      ><ng-container i18n="@@topBar.pleasContact">Please contact</ng-container>
+      <a
+        class="underline"
+        i18n="@@topBar.orcidSupport"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://support.orcid.org/hc/en-us/requests/new"
+        >ORCID support</a
+      >
+      <ng-container i18n="@@topBar.ifYouBelieveWasLockedInError"
+        >if you believe this account was locked in error.</ng-container
+      >
+    </ng-container>
+  </app-warning-message>
+
   <app-panel
     *ngIf="userRecord?.names"
     [isPublicRecord]="isPublicRecord"
@@ -23,13 +49,15 @@
     [editModalComponent]="modalNameComponent"
     [userRecord]="userRecord"
     [type]="'top-bar'"
+    [id]="userInfo?.EFFECTIVE_USER_ORCID"
+    [names]="true"
     id="names-panel"
   >
-    <h2 header class="orc-font-body" i18n="@@record.names">Names</h2>
+    <h2 header class="orc-font-body" i18n="@@topBar.names">Names</h2>
     <app-panel-data>
-      <app-panel-element [visibility]="userRecord.names.visibility">
+      <app-panel-element [visibility]="userRecord.names.visibility.visibility">
         <ng-container *ngIf="creditName">
-          <span i18n="@@record.publishedName" class="mat-caption">
+          <span i18n="@@topBar.publishedName" class="mat-caption">
             Published Name
           </span>
           <p class="mat-card-title published-name">
@@ -38,7 +66,7 @@
             </b>
           </p>
         </ng-container>
-        <span i18n="@@record.name" class="mat-caption description"> Name </span>
+        <span i18n="@@topBar.name" class="mat-caption description"> Name </span>
         <div id="givenAndFamilyNames" class="mat-body-1">
           {{ givenNames + ' ' + familyName }}
         </div>
@@ -69,14 +97,16 @@
     [type]="'top-bar'"
     id="biography-panel"
   >
-    <h2 header class="orc-font-body" i18n="@@record.biography">Biography</h2>
+    <h2 header class="orc-font-body" i18n="@@topBar.biography">Biography</h2>
     <app-panel-data *ngIf="!!userRecord.biography.biography">
       <app-panel-element
         [visibility]="userRecord.biography.visibility.visibility"
       >
-        <span id="biography" class="mat-body-1">
-          {{ userRecord.biography.biography.value }}
-        </span>
+        <span
+          id="biography"
+          class="mat-body-1"
+          [innerText]="userRecord.biography.biography.value"
+        ></span>
       </app-panel-element>
     </app-panel-data>
   </app-panel>
@@ -96,7 +126,7 @@
       *ngIf="userRecord?.names || userRecord?.otherNames"
     >
       <div class="published-name" *ngIf="creditName">
-        <div class="row mat-caption description" i18n="@@record.publishedName">
+        <div class="row mat-caption description" i18n="@@topBar.publishedName">
           Published Name
         </div>
         <h3 class="orc-font-heading-small">{{ creditName }}</h3>
@@ -105,7 +135,7 @@
         class="published-name"
         *ngIf="!creditName && (givenNames || familyName)"
       >
-        <div class="row mat-caption description" i18n="@@record.name">Name</div>
+        <div class="row mat-caption description" i18n="@@topBar.name">Name</div>
         <h3 class="orc-font-heading-small">
           {{ givenNames + ' ' + familyName }}
         </h3>
@@ -121,7 +151,7 @@
           *ngIf="creditName"
         >
           <div class="names-content">
-            <div class="mat-caption description" i18n="@@record.name">Name</div>
+            <div class="mat-caption description" i18n="@@topBar.name">Name</div>
             <div class="orc-font-body-small">
               <ng-container *ngIf="givenNames">
                 {{ givenNames + ' ' }}
@@ -151,14 +181,13 @@
                   Also known as
                 </div>
                 <p class="orc-font-body-small" *ngIf="!expandedContent">
-                  {{
-                    getOtherNames(userRecord.otherNames?.otherNames).join(', ')
-                  }}
+                  {{ getOtherNamesUnique(userRecord.otherNames?.otherNames) }}
                 </p>
                 <ng-container
                   *ngFor="
                     let otherNames of userRecord.otherNames?.otherNames;
-                    index as i
+                    index as i;
+                    let last = last
                   "
                 >
                   <div class="row other-name" *ngIf="expandedContent">
@@ -167,13 +196,17 @@
                         {{ otherNames.content }}
                       </b>
                     </div>
-                    <div class="row">
-                      <b class="description" i18n="@@record.source"> Source </b>
-                    </div>
-                    <div class="description">
-                      {{ otherNames.sourceName || otherNames.source }}
-                      {{ otherNames.createdDate | monthDayYearDateToString }}
-                    </div>
+                    <app-panel-element-source
+                      [isLastItem]="last"
+                      *ngIf="true"
+                      [name]="otherNames.sourceName || otherNames.source"
+                      [date]="otherNames.createdDate | monthDayYearDateToString"
+                      [assertion]="
+                        otherNames.assertionOriginName ||
+                        otherNames.assertionOriginOrcid
+                      "
+                    >
+                    </app-panel-element-source>
                   </div>
                 </ng-container>
               </div>
@@ -201,10 +234,11 @@
       class="div biography-container"
       *ngIf="userRecord?.biography?.biography"
     >
-      <h3 class="orc-font-body" i18n="@@record.biography">Biography</h3>
-      <p class="orc-font-body-small">
-        {{ userRecord.biography.biography.value }}
-      </p>
+      <h3 class="orc-font-body" i18n="@@topBar.biography">Biography</h3>
+      <p
+        class="orc-font-body-small"
+        [innerText]="userRecord.biography.biography.value"
+      ></p>
     </div>
   </div>
 </ng-container>

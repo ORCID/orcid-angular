@@ -1,12 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { isEmpty } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { RecordCountriesService } from 'src/app/core/record-countries/record-countries.service'
 import { RecordService } from 'src/app/core/record/record.service'
 import { FundingGroup } from 'src/app/types/record-funding.endpoint'
-import { UserRecordOptions } from 'src/app/types/record.local'
+import {
+  MainPanelsState,
+  UserRecord,
+  UserRecordOptions,
+} from 'src/app/types/record.local'
 import { UserSession } from 'src/app/types/session.local'
 import { SortData } from 'src/app/types/sort'
 
@@ -23,17 +26,20 @@ export class FundingStacksGroupsComponent implements OnInit {
   labelSortButton = $localize`:@@shared.sortFundings:Sort Fundings`
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: any = false
-  @Input() expandedContent: boolean
-  @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
-  userRecordContext: UserRecordOptions = {}
+  @Input() expandedContent: MainPanelsState
+  @Output()
+  expandedContentChange: EventEmitter<MainPanelsState> = new EventEmitter()
 
+  @Output() total: EventEmitter<any> = new EventEmitter()
+  userRecordContext: UserRecordOptions = {}
+  userRecord: UserRecord
   $destroy: Subject<boolean> = new Subject<boolean>()
   userSession: UserSession
-  fundings: FundingGroup[]
+  fundings: FundingGroup[] = []
 
   ngOrcidFunding = $localize`:@@shared.funding:Funding`
   countryCodes: { key: string; value: string }[]
+  loading = true
 
   constructor(
     private _userSession: UserService,
@@ -59,7 +65,9 @@ export class FundingStacksGroupsComponent implements OnInit {
           })
           .pipe(takeUntil(this.$destroy))
           .subscribe((userRecord) => {
-            if (!isEmpty(userRecord.fundings)) {
+            this.userRecord = userRecord
+            if (userRecord?.fundings !== undefined) {
+              this.loading = false
               this._recordCountryService
                 .getCountryCodes()
                 .pipe(first())
@@ -87,10 +95,6 @@ export class FundingStacksGroupsComponent implements OnInit {
 
   trackByFundingGroup(index, item: FundingGroup) {
     return item.activePutCode
-  }
-
-  expandedClicked(expanded: boolean) {
-    this.expanded.emit({ type: 'fundings', expanded })
   }
 
   sortEvent(event: SortData) {

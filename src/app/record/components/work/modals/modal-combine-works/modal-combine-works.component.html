@@ -1,6 +1,6 @@
 <app-modal [loading]="loadingWorks" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.combineSelectedWorks">
+    <ng-container i18n="@@works.combineSelectedWorks">
       Combine selected works
     </ng-container>
   </app-modal-header>
@@ -11,7 +11,7 @@
       (click)="saveEvent()"
       id="combine-button"
     >
-      <ng-container i18n="@@record.combineSelectedWorks">
+      <ng-container i18n="@@works.combineSelectedWorks">
         Combine selected works
       </ng-container>
     </button>
@@ -27,15 +27,17 @@
   </app-modal-footer>
   <div class="row">
     <div class="orc-font-small-print">
-      <p i18n="@@record.selectedWorksGrouped">
+      <p i18n="@@works.selectedWorksGrouped">
         The selected works will be grouped together and displayed as a single
         group item on your record. All versions of the work will still be
         available but one will be shown as your preferred version.
       </p>
       <a
         class="underline"
-        href="https://support.orcid.org/hc/articles/360006971333"
-        i18n="@@record.learnMoreCombining"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/articles/360006894774"
+        i18n="@@works.learnMoreCombining"
       >
         Learn more about combining works
       </a>
@@ -52,17 +54,17 @@
       <mat-icon class="large-material-icon">info</mat-icon>
     </div>
     <div class="col l11 m6 s3">
-      <strong i18n="@@record.combiningWorks">
+      <strong i18n="@@works.combiningWorks">
         Combining works cannot be undone!
       </strong>
-      <p i18n="@@record.checkSelectedWorks">
+      <p i18n="@@works.checkSelectedWorks">
         Please check the selected works are correct before combining them.
       </p>
     </div>
   </div>
   <div class="row">
     <h3>
-      <ng-container i18n="@@record.selectedWorksCombine">
+      <ng-container i18n="@@works.selectedWorksCombine">
         Selected works to combine
       </ng-container>
       ({{ works.length }})
@@ -76,17 +78,34 @@
           </h2>
         </div>
         <div class="orc-font-body-small">
-          <strong i18n="@@record.source">Source</strong>:
+          <strong i18n="@@shared.source">Source</strong>:
+          <ng-container
+            *ngIf="work?.assertionOriginName || work?.assertionOriginOrcid"
+          >
+            {{ work?.assertionOriginName || work?.assertionOriginOrcid }}
+            <i i18n="@@shared.onBehalfOf">via</i>
+          </ng-container>
           {{ work.sourceName || work.source }}
-          <strong class="added" i18n="@@record.added"> Added </strong>:
-          {{ work.createdDate | monthDayYearDateToString }}
+          <ng-container *ngIf="work.createdDate">
+            <br *ngIf="isMobile" />
+            <strong
+              class="added"
+              i18n="@@shared.added"
+              [ngClass]="{
+                mobile: isMobile
+              }"
+            >
+              Added </strong
+            >:
+            {{ work.createdDate | monthDayYearDateToString }}
+          </ng-container>
         </div>
       </div>
       <mat-divider class="row"></mat-divider>
     </ng-container>
     <div class="no-info orc-font-body-small" *ngIf="works.length === 0">
       <mat-icon>error</mat-icon>
-      <ng-container i18n="@@record.noItemsSelected"
+      <ng-container i18n="@@works.noItemsSelected"
         >No items selected.
       </ng-container>
     </div>

@@ -28,6 +28,7 @@ export class PeerReviewStackComponent implements OnInit {
   _peerReviewStack: PeerReviewDuplicateGroup
   visibility: VisibilityStrings
   @Input() isPublicRecord: string
+  @Input() userRecord
 
   @Input()
   set peerReviewStack(value: PeerReviewDuplicateGroup) {
@@ -51,7 +52,6 @@ export class PeerReviewStackComponent implements OnInit {
   }
 
   @Output() total: EventEmitter<any> = new EventEmitter()
-  @Output() expanded: EventEmitter<any> = new EventEmitter()
 
   stackPanelsDisplay: { [key: string]: { topPanelOfTheStack: boolean } } = {}
   panelDetailsState: {
@@ -136,7 +136,9 @@ export class PeerReviewStackComponent implements OnInit {
   }
 
   makePrimaryCard(peerReview: PeerReview) {
-    // TODO
+    this._recordPeerReviewService
+      .updatePreferredSource(peerReview.putCode.value)
+      .subscribe()
   }
 
   changeTopPanelOfTheStack(peerReview: PeerReview) {
@@ -196,9 +198,5 @@ export class PeerReviewStackComponent implements OnInit {
 
   collapse(peerReview: PeerReview) {
     peerReview.showDetails = !peerReview.showDetails
-  }
-
-  expandedClicked(expanded: boolean) {
-    this.expanded.emit({ type: 'peer-review', expanded })
   }
 }

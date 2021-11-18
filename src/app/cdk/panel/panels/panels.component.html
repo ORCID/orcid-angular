@@ -23,13 +23,20 @@
             {{ total }})</span
           >
           <span
-            *ngIf="(currentAmount && !total) || currentAmount === total"
+            *ngIf="
+              (currentAmount && !total) ||
+              (currentAmount !== 0 && currentAmount === total)
+            "
             class="clickable"
             (click)="collapse()"
           >
             ({{ currentAmount }})
           </span>
-          <span *ngIf="!currentAmount && currentAmount !== 0">(0)</span>
+          <span
+            *ngIf="(!currentAmount && total == 0) || (!currentAmount && !total)"
+            >(0)</span
+          >
+          <span *ngIf="!currentAmount && currentAmount !== 0"></span>
         </div>
         <ng-container> </ng-container>
       </div>
@@ -41,12 +48,9 @@
         mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
+        (click)="add(type)"
       >
-        <mat-icon
-          (click)="add(type)"
-          class="large-material-icon"
-          id="add-button"
-        >
+        <mat-icon class="large-material-icon" id="add-button">
           add_circle_outline
         </mat-icon>
         <ng-container i18n="@@shared.add"> Add </ng-container>
@@ -120,11 +124,6 @@
           >
             {{ option.label }}
           </button>
-          <button mat-menu-item (click)="add('works')">
-            <ng-container i18n="@@shared.addManually"
-              >Add manually</ng-container
-            >
-          </button>
         </ng-container>
         <ng-container *ngIf="type === 'peer-review'">
           <button mat-menu-item (click)="add(type)">
@@ -139,6 +138,7 @@
         class="orc-font-body-small"
         [attr.aria-label]="labelSortButton"
         [matMenuTriggerFor]="menu"
+        [disabled]="!currentAmount && !total"
       >
         <mat-icon class="large-material-icon"> sort </mat-icon>
         <ng-container i18n="@@shared.sort"> Sort </ng-container>
@@ -167,6 +167,11 @@
     </div>
   </div>
 </div>
+<mat-progress-bar
+  mode="indeterminate"
+  color="accent"
+  *ngIf="loading"
+></mat-progress-bar>
 <div class="col s4 m8 l12 content no-gutters" *ngIf="expandedContent">
   <ng-content></ng-content>
 </div>

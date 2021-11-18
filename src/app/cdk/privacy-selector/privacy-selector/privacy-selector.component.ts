@@ -1,4 +1,10 @@
-import { Component, EventEmitter, forwardRef, OnInit } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+} from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
@@ -20,15 +26,17 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
   private onChange: (value: string) => void
   private onTouched: (value: string) => void
+  @Input() whiteBackground = false
 
   _privacy: VisibilityStrings
 
-  set privacy(value: VisibilityStrings) {
+  @Input() set privacy(value: VisibilityStrings) {
     this._privacy = value
   }
   get privacy(): VisibilityStrings {
     return this._privacy
   }
+  @Input() alignment: 'start' | 'bottom' = null
   privacyChange = new EventEmitter<VisibilityStrings>()
 
   constructor() {}

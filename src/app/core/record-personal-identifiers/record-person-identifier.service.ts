@@ -37,16 +37,22 @@ export class RecordPersonIdentifierService {
         .pipe(map((value) => value.externalIdentifier))
     }
 
-    return this.getPrivateRecordIdentifiers(options.forceReload).asObservable()
+    return this.getPrivateRecordIdentifiers(options).asObservable()
   }
 
   private getPrivateRecordIdentifiers(
-    forceReload: boolean
+    options: UserRecordOptions
   ): ReplaySubject<PersonIdentifierEndpoint> {
     if (!this.$privatePersonIdentifier) {
-      this.$privatePersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>()
-    } else if (!forceReload) {
+      this.$privatePersonIdentifier = new ReplaySubject<PersonIdentifierEndpoint>(
+        1
+      )
+    } else if (!options.forceReload) {
       return this.$privatePersonIdentifier
+    }
+
+    if (options.cleanCacheIfExist && this.$privatePersonIdentifier) {
+      this.$privatePersonIdentifier.next(<PersonIdentifierEndpoint>undefined)
     }
 
     this._http

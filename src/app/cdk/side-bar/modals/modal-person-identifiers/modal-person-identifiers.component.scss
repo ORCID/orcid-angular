@@ -1,17 +1,5 @@
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
 .actions-wrapper {
   flex-wrap: nowrap;
-}
-
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
-::ng-deep .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 ::ng-deep .columns-4-or-8 .mat-form-field {
@@ -21,6 +9,11 @@
 
 .add-more {
   margin-top: 16px;
+}
+
+::ng-deep .columns-4-or-8 .mat-form-field {
+  width: 100%;
+  margin-inline-end: auto;
 }
 
 ::ng-deep .columns-4-or-8 .personal-identifiers-wrapper {
@@ -33,26 +26,51 @@
 }
 
 .personal-identifier-input-line {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 4px;
   img {
-    margin-top: 6px;
+    margin-top: 3px;
     cursor: move;
     z-index: 1;
-    margin-inline-end: 18px;
+    margin-inline-start: 6px;
+    margin-inline-end: 10px;
+  }
+
+  .person-identifier {
+    display: flex;
+    flex-direction: column;
+    a {
+      word-break: break-all;
+    }
   }
 }
-::ng-deep .cdk-drop-list-dragging {
-  cursor: move !important;
-  .mat-form-field-flex,
-  .mat-select-trigger,
-  .mat-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button {
-    cursor: move !important;
-  }
+
+.person-identifiers-list.cdk-drop-list-dragging
+  .person-identifiers-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 app-privacy-selector {
   min-width: 180px;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-inline-end: 32px;
+}
+
+.icon-drag {
+  cursor: move;
+  height: 32px;
+  margin: 4px;
+}
+
+.find-out {
+  display: inline;
+  margin-top: 8px;
+}
+
+.line {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }

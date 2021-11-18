@@ -1,3 +1,9 @@
+app-panel-data {
+  ::ng-deep .panel-data-container {
+    align-items: center;
+  }
+}
+
 .panel-footer,
 .panel-footer > div {
   display: flex;

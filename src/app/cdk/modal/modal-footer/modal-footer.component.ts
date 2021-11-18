@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
+import { PlatformInfoService } from '../../platform-info'
 
 @Component({
   selector: 'app-modal-footer',
@@ -9,7 +12,22 @@ import { Component, OnInit } from '@angular/core'
   ],
 })
 export class ModalFooterComponent implements OnInit {
-  constructor() {}
+  handset: boolean
+  screenDirection: string
+  constructor(private _platform: PlatformInfoService) {}
+  $destroy: Subject<boolean> = new Subject<boolean>()
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._platform
+      .get()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((platform) => {
+        this.handset = platform.columns4 || platform.columns8
+        this.screenDirection = platform.screenDirection
+      })
+  }
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.unsubscribe()
+  }
 }

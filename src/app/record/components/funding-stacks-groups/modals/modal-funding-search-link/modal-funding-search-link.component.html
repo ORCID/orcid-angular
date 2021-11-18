@@ -1,6 +1,6 @@
 <app-modal [loading]="loadingFunding" [noSidebar]="true">
   <app-modal-header>
-    <ng-container i18n="@@record.linkFunding"> Link funding </ng-container>
+    <ng-container i18n="@@funding.linkFunding"> Link funding </ng-container>
   </app-modal-header>
   <div class="row">
     <div class="orc-font-small-print">
@@ -12,16 +12,24 @@
       </p>
       <a
         class="underline"
-        href="https://support.orcid.org/hc/en-us/articles/360006973653-Add-works-by-direct-import-from-other-systems"
-        i18n="@@record.linkFundingMoreInfo"
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.orcid.org/hc/en-us/articles/360006897214-Add-funding-information-to-your-ORCID-record"
+        i18n="@@funding.linkFundingMoreInfo"
       >
         More information about linking funding to your ORCID record
       </a>
     </div>
   </div>
   <div class="row">
-    <h3 i18n="@@shared.availableSearch">Available Search & Link wizards</h3>
-    <mat-divider class="row orcid-divider"></mat-divider>
+    <h3>
+      <ng-container i18n="@@shared.availableSearch"
+        >Available Search & Link wizards</ng-container
+      >
+      ({{ total }})
+    </h3>
+
+    <hr />
   </div>
   <app-search-link-wizard
     [recordImportWizards]="recordImportWizards"

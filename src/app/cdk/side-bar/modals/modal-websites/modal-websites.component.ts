@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
   Component,
@@ -8,11 +9,6 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { Subject } from 'rxjs'
-import { MatDialogRef } from '@angular/material/dialog'
-import { ModalComponent } from '../../../modal/modal/modal.component'
-import { PlatformInfo, PlatformInfoService } from '../../../platform-info'
-import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
 import {
   AbstractControl,
   FormControl,
@@ -21,17 +17,23 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { VisibilityStrings } from '../../../../types/common.endpoint'
-import { WINDOW } from '../../../window'
-import { first, takeUntil } from 'rxjs/operators'
-import { WebsitesEndPoint } from '../../../../types/record-websites.endpoint'
-import { Assertion } from '../../../../types'
-import { UserSession } from '../../../../types/session.local'
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import { MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import * as _ from 'lodash'
-import { UserService } from '../../../../core'
+import { Subject } from 'rxjs'
+import { first, takeUntil } from 'rxjs/operators'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+
 import { URL_REGEXP, URL_REGEXP_BACKEND } from '../../../../constants'
+import { UserService } from '../../../../core'
+import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
+import { Assertion } from '../../../../types'
+import { VisibilityStrings } from '../../../../types/common.endpoint'
+import { WebsitesEndPoint } from '../../../../types/record-websites.endpoint'
+import { UserSession } from '../../../../types/session.local'
+import { ModalComponent } from '../../../modal/modal/modal.component'
+import { PlatformInfo, PlatformInfoService } from '../../../platform-info'
+import { WINDOW } from '../../../window'
 
 @Component({
   selector: 'app-modal-websites',
@@ -43,6 +45,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  id: string
   websitesForm: FormGroup
   platform: PlatformInfo
   defaultVisibility: VisibilityStrings
@@ -53,6 +56,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   screenDirection = 'ltr'
   addedWebsiteCount = 0
   loadingWebsites = true
+  urlMaxLength = 354
 
   ngOrcidDescription = $localize`:@@topBar.description:Link Title`
   ngOrcidUrl = $localize`:@@topBar.url:Link URL`
@@ -63,7 +67,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: PlatformInfoService,
     private _userService: UserService,
-    private _recordWebsitesService: RecordWebsitesService
+    private _recordWebsitesService: RecordWebsitesService,
+    private _snackBar: SnackbarService
   ) {
     this._platform
       .get()
@@ -107,8 +112,11 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     websites.forEach((website) => {
       group[website.putCode] = new FormGroup({
-        description: new FormControl(website.urlName),
-        url: new FormControl(website.url.value, {
+        description: new FormControl(website.urlName.toLowerCase().trim(), {
+          validators: [Validators.maxLength(this.urlMaxLength)],
+          updateOn: 'change',
+        }),
+        url: new FormControl(website.url.value.toLowerCase().trim(), {
           validators: [
             Validators.required,
             Validators.pattern(URL_REGEXP_BACKEND),
@@ -119,6 +127,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         visibility: new FormControl(website.visibility.visibility, {}),
       })
     })
+
     this.websitesForm = new FormGroup(group)
   }
 
@@ -132,12 +141,12 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.websites.reverse()
     this.websites
       .map((value) => value.putCode)
-      .filter((key) => websitesForm.value[key].url)
+      .filter((key) => websitesForm.getRawValue()[key].url)
       .forEach((key, i) => {
-        const urlName = websitesForm.value[key].description
-        const url = websitesForm.value[key].url
-        const visibility = websitesForm.value[key].visibility
-        if (websitesForm.value[key]) {
+        const urlName = websitesForm.getRawValue()[key].description.trim()
+        const url = websitesForm.getRawValue()[key].url.trim()
+        const visibility = websitesForm.getRawValue()[key].visibility
+        if (websitesForm.getRawValue()[key]) {
           websites.websites.push({
             putCode: key.indexOf('new-') === 0 ? null : key,
             url: url,
@@ -154,6 +163,9 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
+    this.websitesForm.markAllAsTouched()
+    this.websitesForm.updateValueAndValidity()
+
     if (this.websitesForm.valid) {
       this.loadingWebsites = true
       this._recordWebsitesService
@@ -164,6 +176,8 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
           },
           (error) => {}
         )
+    } else {
+      this._snackBar.showValidationError()
     }
   }
 
@@ -180,7 +194,10 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     this.websitesForm.addControl(
       newPutCode,
       new FormGroup({
-        description: new FormControl(),
+        description: new FormControl('', {
+          validators: [Validators.maxLength(this.urlMaxLength)],
+          updateOn: 'change',
+        }),
         url: new FormControl('', {
           validators: [
             Validators.required,
@@ -207,24 +224,6 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     const i = this.websites.findIndex((value) => value.putCode === putCode)
     this.websites.splice(i, 1)
     this.websitesForm.removeControl(putCode)
-  }
-
-  getSource(website: Assertion) {
-    if (website.source) {
-      if (website.lastModified) {
-        return (
-          website.source +
-          ' ' +
-          website.lastModified.year +
-          '-' +
-          website.lastModified.month +
-          '-' +
-          website.lastModified.day
-        )
-      } else {
-        return website.sourceName
-      }
-    }
   }
 
   toMyLinks() {
@@ -261,17 +260,20 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     // Add errors error on duplicated urls
     Object.keys(formGroup.controls).forEach((keyX) => {
-      const urlControlX = (formGroup.controls[keyX] as FormGroup).controls[
-        'url'
-      ]
+      let urlControlX: string = (formGroup.controls[keyX] as FormGroup)
+        .controls['url'].value
+      urlControlX = urlControlX.toLowerCase().trim()
+      urlControlX = this.removeProtocol(urlControlX)
+
       Object.keys(formGroup.controls).forEach((keyY) => {
-        const urlControlY = (formGroup.controls[keyY] as FormGroup).controls[
-          'url'
-        ]
+        let urlControlY: string = (formGroup.controls[keyY] as FormGroup)
+          .controls['url'].value
+        urlControlY = urlControlY.toLowerCase().trim()
+        urlControlY = this.removeProtocol(urlControlY)
 
         // Only if both controls are not empty
-        if (urlControlX.value && urlControlY.value) {
-          if (urlControlX.value === urlControlY.value && keyX !== keyY) {
+        if (urlControlX && urlControlY) {
+          if (urlControlX === urlControlY && keyX !== keyY) {
             formGroupKeysWithDuplicatedValues.push(keyY)
           }
         }
@@ -302,5 +304,16 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
+  }
+
+  removeProtocol(urlControlX: string): string {
+    let response = urlControlX
+    if (urlControlX.indexOf('http://') === 0) {
+      response = response.replace('http://', '')
+    }
+    if (urlControlX.indexOf('https://') === 0) {
+      response = response.replace('https://', '')
+    }
+    return response
   }
 }

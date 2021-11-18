@@ -99,7 +99,7 @@ export interface AssertionBase {
   countryName?: Value
   commonName?: string
   reference?: string
-  url?: any
+  url?: Value
   urlName?: string
   sourceName?: string
   content?: string
@@ -116,6 +116,7 @@ export interface Assertion extends AssertionBase {
 
 export interface AssertionVisibilityString extends AssertionBase {
   visibility?: VisibilityStrings
+  action?: 'ADD' | 'UPDATE'
 }
 
 export interface GroupBase {
