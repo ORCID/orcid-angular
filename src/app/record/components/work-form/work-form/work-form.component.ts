@@ -138,7 +138,6 @@ export class WorkFormComponent implements OnInit {
 
     this.loadWorkForm(this.work)
 
-    //
     this._record.getPreferences().subscribe((userRecord) => {
       this.defaultVisibility = userRecord.default_visibility
     })
@@ -267,18 +266,18 @@ export class WorkFormComponent implements OnInit {
               formGroup.controls.externalIdentifierUrl.setValue(
                 decodeURI(value.generatedUrl)
               )
-            } else {
+            } else if (!value.validFormat || (value.attemptedResolution && !value.resolved)) {
               formGroup.controls.externalIdentifierUrl.setValue('')
             }
 
-            if (!value.resolved && value.attemptedResolution) {
+            if (value.attemptedResolution && !value.resolved) {
               return {
-                unResolved: !value.resolved,
+                unResolved: true,
               }
             }
             if (!value.validFormat) {
               return {
-                validFormat: !value.validFormat,
+                validFormat: true,
               }
             }
           })
@@ -397,7 +396,7 @@ export class WorkFormComponent implements OnInit {
         [],
       ],
       externalIdentifierUrl: [
-        existingExternalId?.url?.value || '',
+        existingExternalId?.normalizedUrl?.value || existingExternalId?.url?.value || '',
         [Validators.pattern(URL_REGEXP)],
       ],
       externalRelationship: [
