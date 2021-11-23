@@ -89,7 +89,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
               record.userInfo.IN_DELEGATION_MODE === 'true'
             if (!checkEmailValidated && !inDelegationMode) {
               if (record.emails) {
-                const primaryEmail = record.emails.emails.filter(
+                const primaryEmail = record.emails.emails?.filter(
                   (email) => email.primary
                 )[0]
                 if (!primaryEmail?.verified) {
