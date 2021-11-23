@@ -266,7 +266,10 @@ export class WorkFormComponent implements OnInit {
               formGroup.controls.externalIdentifierUrl.setValue(
                 decodeURI(value.generatedUrl)
               )
-            } else if (!value.validFormat || (value.attemptedResolution && !value.resolved)) {
+            } else if (
+              !value.validFormat ||
+              (value.attemptedResolution && !value.resolved)
+            ) {
               formGroup.controls.externalIdentifierUrl.setValue('')
             }
 
@@ -396,7 +399,9 @@ export class WorkFormComponent implements OnInit {
         [],
       ],
       externalIdentifierUrl: [
-        existingExternalId?.normalizedUrl?.value || existingExternalId?.url?.value || '',
+        existingExternalId?.normalizedUrl?.value ||
+          existingExternalId?.url?.value ||
+          '',
         [Validators.pattern(URL_REGEXP)],
       ],
       externalRelationship: [
