@@ -19,9 +19,7 @@ import {
   UserRecordOptions,
 } from 'src/app/types/record.local'
 import { VisibilityStrings } from '../../../types/common.endpoint'
-import {
-  isQA
-} from 'src/app/shared/validators/environment-check/environment-check'
+import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -46,7 +44,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userRecordContext: UserRecordOptions = {}
-  IS_QA:  boolean
+  IS_QA: boolean
 
   userSession: {
     userInfo: UserInfo

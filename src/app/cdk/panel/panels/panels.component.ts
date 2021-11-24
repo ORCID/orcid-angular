@@ -13,9 +13,7 @@ import { ModalFundingSearchLinkComponent } from '../../../record/components/fund
 import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserRecord } from '../../../types/record.local'
-import {
-  isQA
-} from 'src/app/shared/validators/environment-check/environment-check'
+import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
 
 @Component({
   selector: 'app-panels',

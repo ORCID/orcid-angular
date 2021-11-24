@@ -4,7 +4,11 @@
     [ngClass]="{
       'sub-peer-review': type === 'sub-peer-review'
     }"
-    *ngIf="IS_QA || (type !== 'peer-review') || ((type === 'peer-review') && currentAmount > 0)" 
+    *ngIf="
+      IS_QA ||
+      type !== 'peer-review' ||
+      (type === 'peer-review' && currentAmount > 0)
+    "
   >
     <div class="inline-initial-side">
       <app-panel-expand-buttons
@@ -57,7 +61,11 @@
         <ng-container i18n="@@shared.add"> Add </ng-container>
       </button>
       <button
-        *ngIf="!isPublicRecord && multipleMatButton() && (IS_QA || (!IS_QA && type !== 'peer-review'))"
+        *ngIf="
+          !isPublicRecord &&
+          multipleMatButton() &&
+          (IS_QA || (!IS_QA && type !== 'peer-review'))
+        "
         mat-button
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
