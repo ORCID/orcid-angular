@@ -19,6 +19,9 @@ import {
   UserRecordOptions,
 } from 'src/app/types/record.local'
 import { VisibilityStrings } from '../../../types/common.endpoint'
+import {
+  isQA
+} from 'src/app/shared/validators/environment-check/environment-check'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -43,6 +46,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userRecordContext: UserRecordOptions = {}
+  IS_QA:  boolean
 
   userSession: {
     userInfo: UserInfo
@@ -82,6 +86,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecord()
+    this.IS_QA = isQA()
   }
 
   trackByPeerReviewGroup(index, item: PeerReviewDuplicateGroup) {
@@ -204,5 +209,9 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
       }
     }
+  }
+
+  isQA(): boolean {
+    return isQA()
   }
 }

@@ -13,6 +13,9 @@ import { ModalFundingSearchLinkComponent } from '../../../record/components/fund
 import { ModalWorksSearchLinkComponent } from '../../../record/components/work-stack-group/modals/work-search-link-modal/modal-works-search-link.component'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserRecord } from '../../../types/record.local'
+import {
+  isQA
+} from 'src/app/shared/validators/environment-check/environment-check'
 
 @Component({
   selector: 'app-panels',
@@ -61,6 +64,7 @@ export class PanelsComponent implements OnInit {
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
   @Input() labelExportButton = $localize`:@@shared.exportItems:Export Items`
   @Input() labelSortButton = $localize`:@@shared.addItem:Add Item`
+  IS_QA: boolean
 
   constructor(
     private _dialog: MatDialog,
@@ -164,5 +168,7 @@ export class PanelsComponent implements OnInit {
     return this.type === 'employment'
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.IS_QA = isQA()
+  }
 }
