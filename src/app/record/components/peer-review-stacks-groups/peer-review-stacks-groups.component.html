@@ -81,7 +81,7 @@
       </app-panel-data>
     </app-panel>
   </ng-container>
-  <ng-container *ngIf="peerReviews.length === 0">
+  <ng-container *ngIf="peerReviews.length === 0 && IS_QA">
     <div class="orc-font-body-small">
       <p class="empty" i18n="@@peerReview.description">
         Connect to trusted organizations to automatically add your peer review
