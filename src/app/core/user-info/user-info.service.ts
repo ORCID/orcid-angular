@@ -44,7 +44,7 @@ export class UserInfoService {
 
           if (this.platform.queryParameters.hasOwnProperty('orcid')) {
             this._router.navigate(['/my-orcid'], {
-              queryParams: { orcid: value.EFFECTIVE_USER_ORCID }
+              queryParams: { orcid: value.EFFECTIVE_USER_ORCID },
             })
           }
 
