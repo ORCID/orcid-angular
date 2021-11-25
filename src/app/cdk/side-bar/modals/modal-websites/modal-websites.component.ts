@@ -112,7 +112,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
 
     websites.forEach((website) => {
       group[website.putCode] = new FormGroup({
-        description: new FormControl(website.urlName.toLowerCase().trim(), {
+        description: new FormControl(website.urlName == null ? '' : website.urlName.toLowerCase().trim(), {
           validators: [Validators.maxLength(this.urlMaxLength)],
           updateOn: 'change',
         }),
