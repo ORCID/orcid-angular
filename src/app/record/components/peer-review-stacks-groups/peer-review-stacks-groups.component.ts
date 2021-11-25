@@ -11,7 +11,6 @@ import {
   PeerReviewDuplicateGroup,
 } from '../../../types/record-peer-review.endpoint'
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
-import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
 import {
   MainPanelsState,
