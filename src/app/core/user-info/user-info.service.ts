@@ -6,12 +6,22 @@ import { map } from 'rxjs/operators'
 import { UserInfo } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
+import { Router } from '@angular/router'
+import { PlatformInfo, PlatformInfoService } from '../../cdk/platform-info'
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserInfoService {
-  constructor(private _http: HttpClient) {}
+  platform: PlatformInfo
+
+  constructor(
+    private _http: HttpClient,
+    private _router: Router,
+    private _platform: PlatformInfoService
+  ) {
+    this._platform.get().subscribe((value) => (this.platform = value))
+  }
 
   public getUserInfo(options?: UserRecordOptions): Observable<UserInfo> {
     return this._http
@@ -31,6 +41,13 @@ export class UserInfoService {
             value.IS_DEACTIVATED === 'true' ||
             value.PRIMARY_RECORD
           )
+
+          if (this.platform.queryParameters.hasOwnProperty('orcid')) {
+            this._router.navigate(['/my-orcid'], {
+              queryParams: { orcid: value.EFFECTIVE_USER_ORCID },
+            })
+          }
+
           return value
         })
       )
