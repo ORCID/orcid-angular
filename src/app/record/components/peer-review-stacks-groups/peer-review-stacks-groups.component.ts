@@ -11,7 +11,6 @@ import {
   PeerReviewDuplicateGroup,
 } from '../../../types/record-peer-review.endpoint'
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
-import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
 import {
   MainPanelsState,
@@ -119,7 +118,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         if (userRecord?.peerReviews !== undefined) {
           this.loading = false
         }
-        if (!isEmpty(userRecord?.peerReviews)) {
+        if (userRecord?.peerReviews !== undefined) {
           this.peerReviews = userRecord.peerReviews
           this.total.emit(this.peerReviews.length)
         }
