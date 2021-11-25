@@ -119,7 +119,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         if (userRecord?.peerReviews !== undefined) {
           this.loading = false
         }
-        if (!isEmpty(userRecord?.peerReviews)) {
+        if (userRecord?.peerReviews !== undefined) {
           this.peerReviews = userRecord.peerReviews
           this.total.emit(this.peerReviews.length)
         }
