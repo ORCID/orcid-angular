@@ -70,9 +70,9 @@ export class RecordWorksService {
 
     let url
     if (options.publicRecordId) {
-      url = options.publicRecordId + '/worksPage.json'
+      url = options.publicRecordId + '/worksExtendedPage.json'
     } else {
-      url = 'works/worksPage.json'
+      url = 'works/worksExtendedPage.json'
     }
 
     this._http

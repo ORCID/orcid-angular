@@ -19,10 +19,6 @@ export class ContributorsPipe implements PipeTransform {
         value = this.addComma(value) + contributor.contributorSequence.value
       }
 
-      if (contributor.orcid && contributor.orcid.value) {
-        value = this.addComma(value) + contributor.orcid.value
-      }
-
       if (contributor.email && contributor.email.value) {
         value = this.addComma(value) + contributor.email.value
       }

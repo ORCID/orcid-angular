@@ -17,7 +17,7 @@ export class WorkComponent implements OnInit {
   @Output() toggleDetails = new EventEmitter<Work>()
   @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
-  @Input() togglzWorksContributors: boolean
+  @Input() id: string
   maxNumberContributors = 10
 
   constructor() {}
