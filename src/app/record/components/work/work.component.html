@@ -15,10 +15,7 @@
     <app-display-external-ids
       [externalIdentifiers]="work.workExternalIdentifiers"
     ></app-display-external-ids>
-    <div
-      class="general-data"
-      *ngIf="work?.contributors?.length > 0"
-    >
+    <div class="general-data" *ngIf="work?.contributors?.length > 0">
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
       <ng-container
         *ngFor="
@@ -28,7 +25,9 @@
         "
       >
         <ng-container
-          *ngIf="contributor?.creditName?.value && index < maxNumberContributors"
+          *ngIf="
+            contributor?.creditName?.value && index < maxNumberContributors
+          "
           >{{
             contributor.creditName.value +
               (!last && index !== maxNumberContributors - 1 ? ',' : '')
@@ -134,7 +133,7 @@
       <div
         *ngFor="let contributor of work.contributors"
         class="padding-level-3"
-        [ngClass]="{ 'record-holder': contributor?.orcid?.value ===  id}"
+        [ngClass]="{ 'record-holder': contributor?.orcid?.value === id }"
       >
         <ng-container *ngIf="contributor?.creditName?.value">{{
           contributor.creditName.value
@@ -145,8 +144,9 @@
             class="underline"
             target="_blank"
             rel="noreferrer noopener"
-            href="{{contributor.uri.value}}"
-          >{{ contributor.orcid.value }}</a>
+            href="{{ contributor.uri.value }}"
+            >{{ contributor.orcid.value }}</a
+          >
         </ng-container>
       </div>
     </div>
