@@ -11,7 +11,6 @@ import {
   PeerReviewDuplicateGroup,
 } from '../../../types/record-peer-review.endpoint'
 import { ModalPeerReviewsComponent } from './modals/modal-peer-reviews/modal-peer-reviews.component'
-import { isEmpty } from 'lodash'
 import { SortData } from 'src/app/types/sort'
 import {
   MainPanelsState,
@@ -19,6 +18,7 @@ import {
   UserRecordOptions,
 } from 'src/app/types/record.local'
 import { VisibilityStrings } from '../../../types/common.endpoint'
+import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -43,6 +43,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   $destroy: Subject<boolean> = new Subject<boolean>()
   userRecordContext: UserRecordOptions = {}
+  IS_QA: boolean
 
   userSession: {
     userInfo: UserInfo
@@ -82,6 +83,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecord()
+    this.IS_QA = isQA()
   }
 
   trackByPeerReviewGroup(index, item: PeerReviewDuplicateGroup) {
@@ -116,7 +118,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         if (userRecord?.peerReviews !== undefined) {
           this.loading = false
         }
-        if (!isEmpty(userRecord?.peerReviews)) {
+        if (userRecord?.peerReviews !== undefined) {
           this.peerReviews = userRecord.peerReviews
           this.total.emit(this.peerReviews.length)
         }
@@ -204,5 +206,9 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
       }
     }
+  }
+
+  isQA(): boolean {
+    return isQA()
   }
 }

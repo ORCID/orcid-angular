@@ -4,7 +4,6 @@ export const environment = {
   production: false,
   sessionDebugger: true,
   API_NEWS: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
-  API_NEWS_DEPRECATED: 'https://www.mocky.io/v2/5dced45b3000007300931ce8',
   API_PUB: '//pub.localhost/v3.0',
   API_WEB: 'https://orcid.herokuapp.com/https://sandbox.orcid.org/',
   BASE_URL: 'https://orcid.org/',

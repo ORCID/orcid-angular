@@ -9,25 +9,8 @@
 </div>
 <form role="search" class="row h-end search-box middle">
   <div id="ariaLabelWhere" hidden>Search on</div>
-  <button
-    *ngIf="!togglzNewInfoSite"
-    id="whereToSearch"
-    type="button"
-    matRipple
-    [matMenuTriggerFor]="menu"
-    class="col middle search-where mat-body-2"
-    role="button"
-    aria-haspopup="listbox"
-    aria-labelledby="ariaLabelWhere ariaLabelWhereLocation"
-  >
-    <div id="ariaLabelWhereLocation">{{ whereToSearchSelected }}</div>
-    <mat-icon matSuffix role="presentation">arrow_drop_down</mat-icon>
-  </button>
   <div
-    [ngClass]="{
-      'input-box': !togglzNewInfoSite,
-      'input-box-new-info': togglzNewInfoSite
-    }"
+    class="input-box-new-info"
     (keyup.enter)="search(whereToSearchSelected, whatToSearch)"
   >
     <input
