@@ -229,7 +229,7 @@ export class RecordWorksService {
       forceReload: true,
       offset: this.offset,
       sort: this.sortOrder,
-      sortAsc: this.sortAsc
+      sortAsc: this.sortAsc,
     }
 
     return this._http
