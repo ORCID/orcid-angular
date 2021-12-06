@@ -195,7 +195,9 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
         input.nativeElement.focus()
       }
     } else {
-      this._snackBar.showValidationError($localize`:@@shared.pleaseReview:Please review and fix the issue`)
+      this._snackBar.showValidationError(
+        $localize`:@@shared.pleaseReview:Please review and fix the issue`
+      )
     }
   }
 
