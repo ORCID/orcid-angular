@@ -149,49 +149,53 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     existingEmail?: AssertionVisibilityString,
     newEmail?: boolean
   ): void {
-    const newPutCode =
-      (newEmail ? 'newEmailInput' : 'emailInput-') + this.addedEmailsCount
+    if (this.emailsForm.valid) {
+      const newPutCode =
+        (newEmail ? 'newEmailInput' : 'emailInput-') + this.addedEmailsCount
 
-    // Add email to the emails list
-    // backend response come with no email putCode, so here we create one to be able to track those on the frontend
-    this.emails.push({
-      putCode: newPutCode,
-      action: existingEmail ? 'UPDATE' : 'ADD',
-      ...existingEmail,
-    } as AssertionVisibilityString)
+      // Add email to the emails list
+      // backend response come with no email putCode, so here we create one to be able to track those on the frontend
+      this.emails.push({
+        putCode: newPutCode,
+        action: existingEmail ? 'UPDATE' : 'ADD',
+        ...existingEmail,
+      } as AssertionVisibilityString)
 
-    // Add a new control to the formGroup
-    this.emailsForm.addControl(
-      newPutCode,
-      new FormGroup({
-        email: new FormControl(existingEmail ? existingEmail.value : '', {
-          validators: [
-            Validators.required,
-            OrcidValidators.email,
-            this.allEmailsAreUnique(newPutCode),
-          ],
-          asyncValidators: [
-            this._recordEmails.backendEmailValidate(
-              this.originalEmailsBackendCopy
-            ),
-          ],
+      // Add a new control to the formGroup
+      this.emailsForm.addControl(
+        newPutCode,
+        new FormGroup({
+          email: new FormControl(existingEmail ? existingEmail.value : '', {
+            validators: [
+              Validators.required,
+              OrcidValidators.email,
+              this.allEmailsAreUnique(newPutCode),
+            ],
+            asyncValidators: [
+              this._recordEmails.backendEmailValidate(
+                this.originalEmailsBackendCopy
+              ),
+            ],
 
-          updateOn: 'change',
-        }),
-        visibility: new FormControl(
-          existingEmail ? existingEmail.visibility : this.defaultVisibility,
-          {
-            validators: [this.emailsIsUnverified(newPutCode)],
-          }
-        ),
-      })
-    )
+            updateOn: 'change',
+          }),
+          visibility: new FormControl(
+            existingEmail ? existingEmail.visibility : this.defaultVisibility,
+            {
+              validators: [this.emailsIsUnverified(newPutCode)],
+            }
+          ),
+        })
+      )
 
-    this.addedEmailsCount++
-    if (!existingEmail) {
-      this._changeDetectorRef.detectChanges()
-      const input = this.inputs.last
-      input.nativeElement.focus()
+      this.addedEmailsCount++
+      if (!existingEmail) {
+        this._changeDetectorRef.detectChanges()
+        const input = this.inputs.last
+        input.nativeElement.focus()
+      }
+    } else {
+      this._snackBar.showValidationError($localize`:@@shared.pleaseReview:Please review and fix the issue`)
     }
   }
 
