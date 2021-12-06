@@ -9,6 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
 import { WINDOW } from 'src/app/cdk/window'
+import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-work-doi-bibtex-modal',
@@ -34,6 +35,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
+    private _snackBar: SnackbarService,
     private _recordWorksService: RecordWorksService,
     @Inject(WINDOW) private _window: Window
   ) {}
@@ -329,8 +331,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
-    this.loadingWorks = true
     if (this.selectedWorks.length > 0) {
+      this.loadingWorks = true
       this.selectedWorks.forEach((work, index) => {
         work.putCode = null
         this._recordWorksService
@@ -343,6 +345,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
             }
           })
       })
+    } else {
+      this._snackBar.showValidationError(
+        $localize`:@@shared.youHaveNotSelectedImport:You haven’t selected any items to import.`,
+        $localize`:@@shared.pleaseReview:Please review and fix the issue`
+      )
     }
   }
 
