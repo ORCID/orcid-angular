@@ -18,46 +18,6 @@
     </p>
   </div>
   <hr />
-
-  <!-- Work Category
-  <div>
-    <label
-      class="mat-caption title"
-      [ngClass]="{
-        error:
-          workForm.get('workCategory').hasError('required') &&
-          workForm.get('workCategory').touched
-      }"
-    >
-      <strong i18n="@@works.selectAWorkCategory">Select a work category</strong>
-      <span class="required">*</span>
-    </label>
-
-    <div class="row">
-      <mat-form-field
-        appearance="outline"
-        class="mat-form-field-min input-container"
-      >
-        <mat-select
-          formControlName="workCategory"
-          (selectionChange)="updateType($event)"
-        >
-          <mat-option
-            *ngFor="let item of workCategories | keyvalue: returnZero"
-            [value]="item.value"
-          >
-            {{ item.value | recordWorkCategoryLabel }}
-          </mat-option>
-        </mat-select>
-        <mat-error
-          *ngIf="workForm.get('workCategory').hasError('required')"
-          i18n="@@works.selectACategory"
-        >
-          Select a work category
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </div> -->
   <!-- Work Types -->
   <div>
     <label

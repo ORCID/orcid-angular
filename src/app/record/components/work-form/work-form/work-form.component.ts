@@ -65,7 +65,6 @@ export class WorkFormComponent implements OnInit {
   showTranslationTitle = false
 
   languageMap = LanguageMap
-  workCategories = WorkCategories
   yearOptions = Array(110)
     .fill(0)
     .map((i, idx) => idx + new Date().getFullYear() - 109)
@@ -150,15 +149,6 @@ export class WorkFormComponent implements OnInit {
   }
 
   private observeFormChanges() {
-    // this.workForm
-    //   .get('workCategory')
-    //   .valueChanges.pipe(startWith(this.workForm.value['workCategory']))
-    //   .subscribe((value) => {
-    //     if (value) {
-    //       this.workTypes = WorkTypesByCategory[value as WorkCategories]
-    //     }
-    //   })
-
     this.workForm
       .get('workType')
       .valueChanges.pipe(startWith(this.workForm.value['workType']))
@@ -170,7 +160,7 @@ export class WorkFormComponent implements OnInit {
             | WorkIntellectualPropertyTypes
             | WorkOtherOutputTypes
         ) => {
-          if (value /*&& this.workForm.value['workCategory']*/) {
+          if (value) {
             this.dynamicTitle = WorkTypesTitle[value]
           } else {
             this.dynamicTitle = WorksTitleName.journalTitle
@@ -181,10 +171,6 @@ export class WorkFormComponent implements OnInit {
 
   private loadWorkForm(currentWork: Work): void {
     this.workForm = this._fb.group({
-      // workCategory: [
-      //   currentWork?.workCategory?.value || '',
-      //   [Validators.required],
-      // ],
       workType: [currentWork?.workType?.value || '', [Validators.required]],
       title: [
         currentWork?.title?.value || '',
@@ -509,9 +495,6 @@ export class WorkFormComponent implements OnInit {
           ).value,
           errors: [],
         },
-        // workCategory: {
-        //   value: this.workForm.value.workCategory,
-        // },
         workType: {
           value: this.workForm.value.workType,
         },
