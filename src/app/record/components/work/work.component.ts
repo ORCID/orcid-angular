@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { URL_REGEXP } from 'src/app/constants'
 import { OrgDisambiguated } from 'src/app/types'
 import { Work } from 'src/app/types/record-works.endpoint'
