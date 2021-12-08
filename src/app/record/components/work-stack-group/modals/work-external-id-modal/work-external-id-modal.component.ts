@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   Inject,
@@ -24,7 +25,8 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './work-external-id-modal.component.html',
   styleUrls: ['./work-external-id-modal.component.scss'],
 })
-export class WorkExternalIdModalComponent implements OnInit, OnDestroy {
+export class WorkExternalIdModalComponent
+  implements OnInit, OnDestroy, AfterViewInit {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent
