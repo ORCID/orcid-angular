@@ -11,8 +11,8 @@
       (click)="saveEvent()"
       id="import-button"
     >
-      <ng-container i18n="@@works.importWork">
-        Import work to your record
+      <ng-container i18n="@@works.importWorks">
+        Import works to your record
       </ng-container>
     </button>
     <button
@@ -86,7 +86,7 @@
         <ng-container i18n="@@works.foundInBibTex">
           Works found in BibTeX
         </ng-container>
-        ({{ selectedWorks.length }})
+        ({{ worksFromBibtex.length }})
       </h3>
       <mat-divider class="row orcid-divider"></mat-divider>
       <div class="row">
