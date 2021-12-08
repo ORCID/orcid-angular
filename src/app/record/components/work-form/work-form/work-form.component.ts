@@ -103,12 +103,15 @@ export class WorkFormComponent implements OnInit {
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
   defaultVisibility: VisibilityStrings
 
-  workTypes:
-    | typeof WorkConferenceTypes
-    | typeof WorkPublicationTypes
-    | typeof WorkIntellectualPropertyTypes
-    | typeof WorkOtherOutputTypes
-    | {} = {}
+  workTypeByCategory = [
+    { category: WorkCategories.publication, types: WorkPublicationTypes },
+    { category: WorkCategories.conference, types: WorkConferenceTypes },
+    {
+      category: WorkCategories.intellectual_property,
+      types: WorkIntellectualPropertyTypes,
+    },
+    { category: WorkCategories.other_output, types: WorkOtherOutputTypes },
+  ]
   originalCountryCodes: RecordCountryCodesEndpoint
 
   constructor(
@@ -150,34 +153,41 @@ export class WorkFormComponent implements OnInit {
   }
 
   private observeFormChanges() {
-    this.workForm
-      .get('workCategory')
-      .valueChanges.pipe(startWith(this.workForm.value['workCategory']))
-      .subscribe((value) => {
-        if (value) {
-          this.workTypes = WorkTypesByCategory[value as WorkCategories]
-        }
-      })
+    // this.workForm
+    //   .get('workCategory')
+    //   .valueChanges.pipe(startWith(this.workForm.value['workCategory']))
+    //   .subscribe((value) => {
+    //     if (value) {
+    //       this.workTypes = WorkTypesByCategory[value as WorkCategories]
+    //     }
+    //   })
 
     this.workForm
       .get('workType')
       .valueChanges.pipe(startWith(this.workForm.value['workType']))
-      .subscribe((value) => {
-        if (value && this.workForm.value['workCategory']) {
-          this.dynamicTitle =
-            WorkTypesTitle[this.workForm.value['workCategory']][value]
-        } else {
-          this.dynamicTitle = WorksTitleName.journalTitle
+      .subscribe(
+        (
+          value:
+            | WorkConferenceTypes
+            | WorkPublicationTypes
+            | WorkIntellectualPropertyTypes
+            | WorkOtherOutputTypes
+        ) => {
+          if (value /*&& this.workForm.value['workCategory']*/) {
+            this.dynamicTitle = WorkTypesTitle[value]
+          } else {
+            this.dynamicTitle = WorksTitleName.journalTitle
+          }
         }
-      })
+      )
   }
 
   private loadWorkForm(currentWork: Work): void {
     this.workForm = this._fb.group({
-      workCategory: [
-        currentWork?.workCategory?.value || '',
-        [Validators.required],
-      ],
+      // workCategory: [
+      //   currentWork?.workCategory?.value || '',
+      //   [Validators.required],
+      // ],
       workType: [currentWork?.workType?.value || '', [Validators.required]],
       title: [
         currentWork?.title?.value || '',
@@ -497,9 +507,9 @@ export class WorkFormComponent implements OnInit {
           ).value,
           errors: [],
         },
-        workCategory: {
-          value: this.workForm.value.workCategory,
-        },
+        // workCategory: {
+        //   value: this.workForm.value.workCategory,
+        // },
         workType: {
           value: this.workForm.value.workType,
         },
@@ -555,48 +565,30 @@ export class WorkFormComponent implements OnInit {
     }
   }
 
-  updateType(event: MatSelectChange) {
-    switch (event.value) {
-      case WorkCategories.conference:
-        this.workForm.patchValue({
-          workType: WorkConferenceTypes.conferencePaper,
-        })
-        break
-      case WorkCategories.intellectual_property:
-        this.workForm.patchValue({
-          workType: WorkIntellectualPropertyTypes.patent,
-        })
-        break
-      case WorkCategories.other_output:
-        this.workForm.patchValue({
-          workType: WorkOtherOutputTypes.dataSet,
-        })
-        break
-      case WorkCategories.publication:
-        this.workForm.patchValue({
-          workType: WorkPublicationTypes.journalArticle,
-        })
-        break
-    }
-    this.$workTypeUpdateEvent.next()
-  }
-
   getOrcidRecommendedRelationShip(externalIdentifier) {
     let workRelationship = null
     const workType = this.workForm.get('workType').value
 
     if (externalIdentifier && workType) {
-      if (externalIdentifier === 'isbn' && workType === 'book-chapter') {
+      if (
+        externalIdentifier === 'isbn' &&
+        workType === WorkPublicationTypes.bookChapter
+      ) {
         workRelationship = WorkRelationships['part-of']
-      } else if (externalIdentifier === 'isbn' && workType === 'book') {
+      } else if (
+        externalIdentifier === 'isbn' &&
+        workType === WorkPublicationTypes.book
+      ) {
         workRelationship = WorkRelationships.self
       } else if (externalIdentifier === 'issn') {
         workRelationship = WorkRelationships['part-of']
       } else if (
         externalIdentifier === 'isbn' &&
-        ['dictionary-entry', 'conference-paper', 'encyclopedia-entry'].indexOf(
-          workType
-        ) >= 0
+        [
+          WorkPublicationTypes.dictionaryEntry,
+          WorkConferenceTypes.conferencePaper,
+          WorkPublicationTypes.encyclopediaEntry,
+        ].indexOf(workType) >= 0
       ) {
         workRelationship = WorkRelationships['part-of']
       }

@@ -19,7 +19,7 @@
   </div>
   <hr />
 
-  <!-- Work Category -->
+  <!-- Work Category
   <div>
     <label
       class="mat-caption title"
@@ -57,9 +57,9 @@
         </mat-error>
       </mat-form-field>
     </div>
-  </div>
+  </div> -->
   <!-- Work Types -->
-  <div [ngClass]="{ hide: (workTypes | keyvalue).length === 0 }">
+  <div>
     <label
       class="row mat-caption"
       [ngClass]="{
@@ -80,12 +80,17 @@
         formControlName="workType"
         (selectionChange)="$workTypeUpdateEvent.next()"
       >
-        <mat-option
-          *ngFor="let item of workTypes | keyvalue"
-          [value]="item.value"
+        <mat-optgroup
+          *ngFor="let workType of workTypeByCategory"
+          label="{{ workType.category | recordWorkCategoryLabel }}"
         >
-          {{ item.value | recordWorkTypeLabel }}
-        </mat-option>
+          <mat-option
+            *ngFor="let type of workType.types | keyvalue"
+            [value]="type.value"
+          >
+            {{ type.value | recordWorkTypeLabel }}
+          </mat-option>
+        </mat-optgroup>
       </mat-select>
       <mat-error
         *ngIf="workForm.get('workType').hasError('required')"
