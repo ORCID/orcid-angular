@@ -69,11 +69,11 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
 
   years = Array(110)
     .fill(0)
-    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .map((i, idx) => idx + new Date().getFullYear() - 108)
     .reverse()
   yearsEndDate = Array(120)
     .fill(0)
-    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .map((i, idx) => idx + new Date().getFullYear() - 108)
     .reverse()
   months = Array(12)
     .fill(0)
