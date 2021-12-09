@@ -70,11 +70,11 @@ export class WorkFormComponent implements OnInit {
   workCategories = WorkCategories
   yearOptions = Array(110)
     .fill(0)
-    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .map((i, idx) => idx + new Date().getFullYear() - 108)
     .reverse()
   yearsEndDate = Array(120)
     .fill(0)
-    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .map((i, idx) => idx + new Date().getFullYear() - 108)
     .reverse()
   monthOptions = Array(12)
     .fill(0)
