@@ -86,10 +86,10 @@ export class TopBarComponent implements OnInit, OnDestroy {
             const checkEmailValidated =
               record.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true'
             const inDelegationMode =
-              record.userInfo.IN_DELEGATION_MODE === 'true'
+              record.userInfo?.IN_DELEGATION_MODE === 'true'
             if (!checkEmailValidated && !inDelegationMode) {
               if (record.emails) {
-                const primaryEmail = record.emails.emails?.filter(
+                const primaryEmail = record.emails?.emails?.filter(
                   (email) => email.primary
                 )[0]
                 if (!primaryEmail?.verified) {
@@ -104,9 +104,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((userRecord) => {
         this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
         this.userRecord = userRecord
-        this.userInfo = userRecord.userInfo
+        this.userInfo = userRecord?.userInfo
 
-        if (!isEmpty(userRecord.otherNames)) {
+        if (!isEmpty(userRecord?.otherNames)) {
           this.setNames(userRecord)
         }
       })
