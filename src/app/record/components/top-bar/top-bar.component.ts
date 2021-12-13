@@ -3,7 +3,7 @@ import { UserRecord } from '../../../types/record.local'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { ModalNameComponent } from './modals/modal-name/modal-name.component'
 import { ModalBiographyComponent } from './modals/modal-biography/modal-biography.component'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, tap } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 import { UserService } from '../../../core'
 import { RecordService } from '../../../core/record/record.service'
@@ -80,30 +80,34 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .getRecord({
         publicRecordId: this.isPublicRecord || undefined,
       })
-      .subscribe((userRecord) => {
-        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
-        this.userRecord = userRecord
-        this.userInfo = userRecord.userInfo
-
-        if (!isEmpty(userRecord.otherNames)) {
-          this.setNames(userRecord)
-        }
-
-        if (userRecord?.userInfo && !this.isPublicRecord) {
-          const checkEmailValidated =
-            userRecord.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true'
-          const inDelegationMode =
-            userRecord.userInfo.IN_DELEGATION_MODE === 'true'
-          if (!checkEmailValidated && !inDelegationMode) {
-            if (userRecord.emails) {
-              const primaryEmail = userRecord.emails.emails.filter(
-                (email) => email.primary
-              )[0]
-              if (!primaryEmail?.verified) {
-                this.resendVerificationEmailModal(primaryEmail.value)
+      .pipe(
+        tap((record) => {
+          if (record?.userInfo && !this.isPublicRecord) {
+            const checkEmailValidated =
+              record.userInfo?.IS_PRIMARY_EMAIL_VERIFIED === 'true'
+            const inDelegationMode =
+              record.userInfo?.IN_DELEGATION_MODE === 'true'
+            if (!checkEmailValidated && !inDelegationMode) {
+              if (record.emails) {
+                const primaryEmail = record.emails?.emails?.filter(
+                  (email) => email.primary
+                )[0]
+                if (!primaryEmail?.verified) {
+                  this.resendVerificationEmailModal(primaryEmail.value)
+                }
               }
             }
           }
+        }),
+        takeUntil(this.$destroy)
+      )
+      .subscribe((userRecord) => {
+        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+        this.userRecord = userRecord
+        this.userInfo = userRecord?.userInfo
+
+        if (!isEmpty(userRecord?.otherNames)) {
+          this.setNames(userRecord)
         }
       })
   }
