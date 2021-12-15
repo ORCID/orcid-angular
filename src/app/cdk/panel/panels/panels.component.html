@@ -2,7 +2,8 @@
   <div
     class="header-container"
     [ngClass]="{
-      'sub-peer-review': type === 'sub-peer-review'
+      'sub-peer-review': type === 'sub-peer-review',
+      'white-header-container': type === 'account-settings'
     }"
     *ngIf="
       IS_QA ||

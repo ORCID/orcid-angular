@@ -95,6 +95,14 @@ const routes: Routes = [
       import('./record/record.module').then((m) => m.RecordModule),
   },
   {
+    path: ApplicationRoutes.accountQA,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./account-settings/account-settings.module').then(
+        (m) => m.AccountSettingsModule
+      ),
+  },
+  {
     path: ApplicationRoutes.twoFactor,
     canActivateChild: [LinkAccountGuard],
     loadChildren: () =>

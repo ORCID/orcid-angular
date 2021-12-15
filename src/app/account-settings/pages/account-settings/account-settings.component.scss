@@ -1,0 +1,20 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+:host {
+  width: 100%;
+}
+
+.mat-headline {
+  margin-bottom: $spacing-large;
+}
+main#main {
+  flex-direction: column;
+  margin-bottom: $spacing-large;
+  padding-top: 48px;
+  padding-inline-start: 16px;
+}
+
+app-side-bar {
+  padding-bottom: 12px !important;
+}
+
