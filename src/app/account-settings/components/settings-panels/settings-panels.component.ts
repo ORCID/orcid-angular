@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-settings-panels',
   templateUrl: './settings-panels.component.html',
-  styleUrls: ['./settings-panels.component.scss', './settings-panels.component.scss-theme.scss'],
+  styleUrls: [
+    './settings-panels.component.scss',
+    './settings-panels.component.scss-theme.scss',
+  ],
 })
 export class SettingsPanelsComponent implements OnInit {
   @Input() loading = false

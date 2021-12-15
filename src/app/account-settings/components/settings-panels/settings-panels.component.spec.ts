@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsPanelsComponent } from './settings-panels.component';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { SettingsPanelsComponent } from './settings-panels.component'
 
 describe('StackContainerComponent', () => {
   let component: SettingsPanelsComponent

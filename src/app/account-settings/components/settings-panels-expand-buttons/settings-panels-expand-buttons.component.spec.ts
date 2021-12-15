@@ -1,8 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import {
-  PanelExpandButtonsComponent as SettingsPanelExpandButtonsComponent,
-} from './settings-panels-expand-buttons.component';
+import { PanelExpandButtonsComponent as SettingsPanelExpandButtonsComponent } from './settings-panels-expand-buttons.component'
 
 describe('PanelExpandButtonsComponent', () => {
   let component: SettingsPanelExpandButtonsComponent

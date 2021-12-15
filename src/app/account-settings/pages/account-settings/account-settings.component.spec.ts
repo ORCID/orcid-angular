@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AccountSettingsComponent } from './account-settings.component';
+import { AccountSettingsComponent } from './account-settings.component'
 
 describe('AccountSettingsComponent', () => {
-  let component: AccountSettingsComponent;
-  let fixture: ComponentFixture<AccountSettingsComponent>;
+  let component: AccountSettingsComponent
+  let fixture: ComponentFixture<AccountSettingsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountSettingsComponent ]
-    })
-    .compileComponents();
-  });
+      declarations: [AccountSettingsComponent],
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccountSettingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(AccountSettingsComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
