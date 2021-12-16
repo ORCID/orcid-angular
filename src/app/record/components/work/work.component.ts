@@ -32,7 +32,9 @@ export class WorkComponent implements OnInit {
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 1000
-  contributors = []
+  contributors: string[] = []
+  numberOfContributors: number
+  contributorsDetails: Contributor[] = []
 
   constructor(
     private elementRef: ElementRef,
@@ -42,6 +44,7 @@ export class WorkComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContributors(this.work.contributors)
+    this.getContributorsDetails(this.work.contributors)
   }
 
   /**
@@ -80,17 +83,33 @@ export class WorkComponent implements OnInit {
   }
 
   getContributors(contributor: Contributor[]) {
-    contributor.slice(0, this.maxNumberContributorsWorkDetails)
     contributor.forEach((c) => {
       if (c?.creditName?.value) {
-        if (
-          !this.contributors.includes(c?.creditName?.value) &&
-          this.contributors.length < this.maxNumberContributors
-        ) {
+        if (!this.contributors.includes(c?.creditName?.value)) {
           this.contributors.push(c?.creditName?.value)
         }
       }
     })
-    return contributor
+    this.numberOfContributors = this.contributors.length
+  }
+
+  getContributorsDetails(contributors: Contributor[]) {
+    contributors.forEach((c) => {
+      const contributor = this.contributorsDetails.some((cD) => cD?.creditName?.value === c?.creditName?.value)
+      if (contributor) {
+        this.contributorsDetails.forEach((cD) => {
+          if (cD?.creditName?.value === c?.creditName?.value) {
+            if (c.contributorRole?.value || c.contributorSequence?.value) {
+              cD.contributorRolesAndSequence.push({ role: c.contributorRole?.value, sequence: c.contributorSequence?.value })
+            }
+          }
+        })
+      } else {
+        if (c.contributorRole?.value || c.contributorSequence?.value) {
+          c.contributorRolesAndSequence = [{ role: c.contributorRole?.value, sequence: c.contributorSequence?.value }]
+        }
+        this.contributorsDetails.push(c)
+      }
+    })
   }
 }
