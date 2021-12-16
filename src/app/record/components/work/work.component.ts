@@ -95,18 +95,28 @@ export class WorkComponent implements OnInit {
 
   getContributorsDetails(contributors: Contributor[]) {
     contributors.forEach((c) => {
-      const contributor = this.contributorsDetails.some((cD) => cD?.creditName?.value === c?.creditName?.value)
+      const contributor = this.contributorsDetails.some(
+        (cD) => cD?.creditName?.value === c?.creditName?.value
+      )
       if (contributor) {
         this.contributorsDetails.forEach((cD) => {
           if (cD?.creditName?.value === c?.creditName?.value) {
             if (c.contributorRole?.value || c.contributorSequence?.value) {
-              cD.contributorRolesAndSequence.push({ role: c.contributorRole?.value, sequence: c.contributorSequence?.value })
+              cD.contributorRolesAndSequence.push({
+                role: c.contributorRole?.value,
+                sequence: c.contributorSequence?.value,
+              })
             }
           }
         })
       } else {
         if (c.contributorRole?.value || c.contributorSequence?.value) {
-          c.contributorRolesAndSequence = [{ role: c.contributorRole?.value, sequence: c.contributorSequence?.value }]
+          c.contributorRolesAndSequence = [
+            {
+              role: c.contributorRole?.value,
+              sequence: c.contributorSequence?.value,
+            },
+          ]
         }
         this.contributorsDetails.push(c)
       }

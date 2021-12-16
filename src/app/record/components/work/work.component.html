@@ -17,7 +17,7 @@
     ></app-display-external-ids>
     <div class="general-data" *ngIf="work?.contributors?.length > 0">
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
-      {{ contributors.slice(0,maxNumberContributors).join(', ') }}
+      {{ contributors.slice(0, maxNumberContributors).join(', ') }}
       <ng-container *ngIf="numberOfContributors > maxNumberContributors">
         + {{ numberOfContributors - maxNumberContributors }}
         <span i18n="@@works.more">more</span>

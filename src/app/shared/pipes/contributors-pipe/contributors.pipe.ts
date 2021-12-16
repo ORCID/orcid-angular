@@ -12,12 +12,16 @@ export class ContributorsPipe implements PipeTransform {
         contributor.contributorRolesAndSequence !== undefined &&
         contributor.contributorRolesAndSequence.length > 0
       ) {
-        contributor.contributorRolesAndSequence.forEach((roleAndSequence, index) => {
-          value =
-            value + this.addColon(roleAndSequence.role) +
-            (contributor.contributorRolesAndSequence.length - 1 === index ?
-              roleAndSequence.sequence : this.addComma(roleAndSequence.sequence))
-        })
+        contributor.contributorRolesAndSequence.forEach(
+          (roleAndSequence, index) => {
+            value =
+              value +
+              this.addColon(roleAndSequence.role) +
+              (contributor.contributorRolesAndSequence.length - 1 === index
+                ? roleAndSequence.sequence
+                : this.addComma(roleAndSequence.sequence))
+          }
+        )
       } else {
         if (contributor.contributorRole && contributor.contributorRole.value) {
           value = contributor.contributorRole.value
