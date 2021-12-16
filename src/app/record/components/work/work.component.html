@@ -17,23 +17,7 @@
     ></app-display-external-ids>
     <div class="general-data" *ngIf="work?.contributors?.length > 0">
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
-      <ng-container
-        *ngFor="
-          let contributor of work.contributors | slice: 0:maxNumberContributors;
-          let index = index;
-          let last = last
-        "
-      >
-        <ng-container
-          *ngIf="
-            contributor?.creditName?.value && index < maxNumberContributors
-          "
-          >{{
-            contributor.creditName.value +
-              (!last && index !== maxNumberContributors - 1 ? ',' : '')
-          }}</ng-container
-        >
-      </ng-container>
+      {{ contributors.join(', ')}}
       <ng-container *ngIf="work.contributors.length > maxNumberContributors">
         + {{ work.contributors.length - maxNumberContributors }}
         <span i18n="@@works.more">more</span>
@@ -138,7 +122,7 @@
           <b>{{ maxNumberContributorsWorkDetails }}</b>
           <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
           <b>{{
-            work.contributors.length - maxNumberContributorsWorkDetails
+            work.contributors.length
           }}</b>
         </p>
         <p>----</p>
@@ -188,10 +172,16 @@
             class="underline"
             i18n="@@works.exportAsBibtex"
             (click)="exportWork(work)"
+            *ngIf="!isPublicRecord"
           >
             export this work as BibTeX
           </a>
-          <ng-container i18n="@@works.or"> or </ng-container>
+          <ng-container
+            i18n="@@works.or"
+            *ngIf="!isPublicRecord"
+          >
+            or
+          </ng-container>
           <a
             href="{{
               work.workExternalIdentifiers[0].normalizedUrl?.value ||
@@ -231,8 +221,27 @@
           class="underline"
           i18n="@@works.exportAsBibtex"
           (click)="exportWork(work)"
+          *ngIf="!isPublicRecord"
         >
           export this work as BibTeX
+        </a>
+        <ng-container
+          i18n="@@works.or"
+          *ngIf="!isPublicRecord"
+        >
+          or
+        </ng-container>
+        <a
+          href="{{
+              work.workExternalIdentifiers[0].normalizedUrl?.value ||
+                work.workExternalIdentifiers[0].url?.value
+            }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline"
+          i18n="@@works.visitWorkSource"
+        >
+          visit the work source
         </a>
       </ng-container>
       <ng-container

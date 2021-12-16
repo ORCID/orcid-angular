@@ -37,6 +37,7 @@
       [work]="work"
       [panelDetailsState]="panelDetailsState[work.putCode.value]"
       [id]="userInfo?.EFFECTIVE_USER_ORCID"
+      [isPublicRecord]="isPublicRecord"
       (toggleDetails)="toggleDetails($event)"
     >
     </app-work>

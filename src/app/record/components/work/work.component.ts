@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core'
 import { URL_REGEXP } from 'src/app/constants'
-import { OrgDisambiguated } from 'src/app/types'
+import { Contributor, OrgDisambiguated } from 'src/app/types'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { WINDOW } from '../../../cdk/window'
@@ -28,9 +28,11 @@ export class WorkComponent implements OnInit {
   @Input() stackMode
   @Input() orgDisambiguated: OrgDisambiguated
   @Input() id: string
+  @Input() isPublicRecord
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 1000
+  contributors = []
 
   constructor(
     private elementRef: ElementRef,
@@ -38,7 +40,10 @@ export class WorkComponent implements OnInit {
     @Inject(WINDOW) private window: Window
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getContributors(this.work.contributors)
+  }
+
   /**
    * RegEx function to check if the elements contains a URL
    */
@@ -72,5 +77,18 @@ export class WorkComponent implements OnInit {
       anchor.click()
       anchor.remove()
     }
+  }
+
+  getContributors(contributor: Contributor[]) {
+    contributor.slice(0, this.maxNumberContributorsWorkDetails)
+    contributor.forEach((c) => {
+        if (c?.creditName?.value) {
+          if (!this.contributors.includes(c?.creditName?.value) && this.contributors.length < this.maxNumberContributors) {
+            this.contributors.push(c?.creditName?.value)
+          }
+        }
+      },
+    )
+    return contributor
   }
 }

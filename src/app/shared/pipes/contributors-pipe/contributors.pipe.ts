@@ -16,7 +16,7 @@ export class ContributorsPipe implements PipeTransform {
         contributor.contributorSequence &&
         contributor.contributorSequence.value
       ) {
-        value = this.addComma(value) + contributor.contributorSequence.value
+        value = this.addColon(value) + contributor.contributorSequence.value
       }
 
       if (contributor.email && contributor.email.value) {
@@ -33,6 +33,13 @@ export class ContributorsPipe implements PipeTransform {
   addComma(str: string): string {
     if (str.length > 0) {
       return str + ', '
+    }
+    return str
+  }
+
+  addColon(str: string): string {
+    if (str.length > 0) {
+      return str + ': '
     }
     return str
   }
