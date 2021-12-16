@@ -40,7 +40,12 @@ export class ContributorsPipe implements PipeTransform {
       }
 
       if (value.length > 0) {
-        value = '(' + value + ')'
+        value = '(' + value
+        if (contributor?.orcid) {
+          value = value + ','
+        } else {
+          value = value + ')'
+        }
       }
     }
     return value
