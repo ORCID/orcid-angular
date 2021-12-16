@@ -17,7 +17,7 @@
     ></app-display-external-ids>
     <div class="general-data" *ngIf="work?.contributors?.length > 0">
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
-      {{ contributors.join(', ')}}
+      {{ contributors.join(', ') }}
       <ng-container *ngIf="work.contributors.length > maxNumberContributors">
         + {{ work.contributors.length - maxNumberContributors }}
         <span i18n="@@works.more">more</span>
@@ -121,9 +121,7 @@
           <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
           <b>{{ maxNumberContributorsWorkDetails }}</b>
           <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
-          <b>{{
-            work.contributors.length
-          }}</b>
+          <b>{{ work.contributors.length }}</b>
         </p>
         <p>----</p>
       </ng-container>
@@ -176,10 +174,7 @@
           >
             export this work as BibTeX
           </a>
-          <ng-container
-            i18n="@@works.or"
-            *ngIf="!isPublicRecord"
-          >
+          <ng-container i18n="@@works.or" *ngIf="!isPublicRecord">
             or
           </ng-container>
           <a
@@ -225,17 +220,14 @@
         >
           export this work as BibTeX
         </a>
-        <ng-container
-          i18n="@@works.or"
-          *ngIf="!isPublicRecord"
-        >
+        <ng-container i18n="@@works.or" *ngIf="!isPublicRecord">
           or
         </ng-container>
         <a
           href="{{
-              work.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work.workExternalIdentifiers[0].url?.value
-            }}"
+            work.workExternalIdentifiers[0].normalizedUrl?.value ||
+              work.workExternalIdentifiers[0].url?.value
+          }}"
           target="_blank"
           rel="noopener noreferrer"
           class="underline"

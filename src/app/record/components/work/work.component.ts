@@ -82,13 +82,15 @@ export class WorkComponent implements OnInit {
   getContributors(contributor: Contributor[]) {
     contributor.slice(0, this.maxNumberContributorsWorkDetails)
     contributor.forEach((c) => {
-        if (c?.creditName?.value) {
-          if (!this.contributors.includes(c?.creditName?.value) && this.contributors.length < this.maxNumberContributors) {
-            this.contributors.push(c?.creditName?.value)
-          }
+      if (c?.creditName?.value) {
+        if (
+          !this.contributors.includes(c?.creditName?.value) &&
+          this.contributors.length < this.maxNumberContributors
+        ) {
+          this.contributors.push(c?.creditName?.value)
         }
-      },
-    )
+      }
+    })
     return contributor
   }
 }
