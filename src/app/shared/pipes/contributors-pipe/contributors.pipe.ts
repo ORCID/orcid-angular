@@ -8,15 +8,31 @@ export class ContributorsPipe implements PipeTransform {
   transform(contributor: Contributor, args?: any): string {
     let value = ''
     if (contributor) {
-      if (contributor.contributorRole && contributor.contributorRole.value) {
-        value = contributor.contributorRole.value
-      }
-
       if (
-        contributor.contributorSequence &&
-        contributor.contributorSequence.value
+        contributor.contributorRolesAndSequence !== undefined &&
+        contributor.contributorRolesAndSequence.length > 0
       ) {
-        value = this.addComma(value) + contributor.contributorSequence.value
+        contributor.contributorRolesAndSequence.forEach(
+          (roleAndSequence, index) => {
+            value =
+              value +
+              this.addColon(roleAndSequence.role) +
+              (contributor.contributorRolesAndSequence.length - 1 === index
+                ? roleAndSequence.sequence
+                : this.addComma(roleAndSequence.sequence))
+          }
+        )
+      } else {
+        if (contributor.contributorRole && contributor.contributorRole.value) {
+          value = contributor.contributorRole.value
+        }
+
+        if (
+          contributor.contributorSequence &&
+          contributor.contributorSequence.value
+        ) {
+          value = this.addColon(value) + contributor.contributorSequence.value
+        }
       }
 
       if (contributor.email && contributor.email.value) {
@@ -24,15 +40,27 @@ export class ContributorsPipe implements PipeTransform {
       }
 
       if (value.length > 0) {
-        value = '(' + value + ')'
+        value = '(' + value
+        if (contributor?.orcid) {
+          value = value + ','
+        } else {
+          value = value + ')'
+        }
       }
     }
     return value
   }
 
   addComma(str: string): string {
-    if (str.length > 0) {
+    if (str?.length > 0) {
       return str + ', '
+    }
+    return str
+  }
+
+  addColon(str: string): string {
+    if (str?.length > 0) {
+      return str + ': '
     }
     return str
   }

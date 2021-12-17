@@ -153,6 +153,7 @@ export interface Contributor {
   uri: Value
   creditName?: Value
   contributorRole: Value
+  contributorRolesAndSequence: any[]
 }
 
 export interface Title {
