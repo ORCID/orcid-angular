@@ -316,7 +316,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   }
 
   oauthAuthorize(urlRedirect) {
-    if (this.platform.social || this.platform.institutional) {
+    if (
+      (this.platform.social || this.platform.institutional) &&
+      !isRedirectToTheAuthorizationPage({ url: urlRedirect })
+    ) {
       this.navigateTo(urlRedirect)
     } else {
       this._router.navigate(['/oauth/authorize'], {
