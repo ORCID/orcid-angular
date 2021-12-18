@@ -595,6 +595,7 @@
       </ng-container>
       <ng-container *ngIf="!workIdentifiersFormArrayDisplayState[i]">
         <app-work-external-identifiers-view-only
+          [externalIdForm]="$any(workIdentifiersFormArray.controls[i])"
           [workIdentifier]="workIdentifiersFormArray.controls[i].value"
           (edit)="workIdentifiersFormArrayDisplayState[i] = true"
           (delete)="deleteWorkId(i)"
