@@ -298,16 +298,9 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   }
 
   updateCheckAll() {
+    this.selectedWorks = []
     this.worksFromBibtex.forEach((work) => {
-      if (
-        this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)
-      ) {
-        if (!!this.selectAll === false) {
-          this.selectedWorks = this.selectedWorks.filter(
-            (w) => w.putCode.value !== work.putCode.value
-          )
-        }
-      } else {
+      if (this.selectAll) {
         this.selectedWorks.push(work)
       }
       this.importForm.patchValue({
