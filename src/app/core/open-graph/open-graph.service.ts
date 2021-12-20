@@ -39,7 +39,12 @@ export class OpenGraphService {
           record.names,
           record.userInfo.EFFECTIVE_USER_ORCID
         )
-        this._titleService.setTitle(displayedNameWithId)
+        if (
+          displayedNameWithId !== undefined &&
+          displayedNameWithId !== 'undefined'
+        ) {
+          this._titleService.setTitle(displayedNameWithId)
+        }
         return this.meta.addTags([
           { property: this.titleMeta, content: displayedNameWithId },
           {
@@ -120,7 +125,6 @@ export class OpenGraphService {
     this.meta.removeTag(`property="${this.lastNameMeta}"`)
     this.meta.removeTag(`property="${this.usernameMeta}"`)
     this.meta.removeTag(`property="${this.siteNameMeta}"`)
-    this._titleService.setTitle('ORCID')
     this.openGraphDataSet = false
   }
 }
