@@ -226,8 +226,8 @@ export class WorkFormComponent implements OnInit {
       ],
       citationGroup: this._fb.group(
         {
-          citationType: [currentWork?.citation?.citationType.value || '', []],
-          citation: [currentWork?.citation?.citation.value || '', []],
+          citationType: [currentWork?.citation?.citationType?.value || '', []],
+          citation: [currentWork?.citation?.citation?.value || '', []],
           shortDescription: [
             currentWork?.shortDescription?.value || '',
             [Validators.maxLength(this.MAX_LENGTH_DESCRIPTION)],

@@ -205,7 +205,7 @@
 
     <div>
       <ng-container
-        *ngIf="work.citation.citation.value.length > maxBibtexCharacters"
+        *ngIf="work.citation?.citation?.value?.length > maxBibtexCharacters"
       >
         {{ work.citation.citation.value.substr(0, maxBibtexCharacters) }}
         <br />
