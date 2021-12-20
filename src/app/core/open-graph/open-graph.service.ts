@@ -39,7 +39,10 @@ export class OpenGraphService {
           record.names,
           record.userInfo.EFFECTIVE_USER_ORCID
         )
-        if (displayedNameWithId !== undefined && displayedNameWithId !== 'undefined') {
+        if (
+          displayedNameWithId !== undefined &&
+          displayedNameWithId !== 'undefined'
+        ) {
           this._titleService.setTitle(displayedNameWithId)
         }
         return this.meta.addTags([
