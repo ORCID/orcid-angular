@@ -122,7 +122,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         url: new FormControl(website.url.value.trim(), {
           validators: [
             Validators.required,
-            Validators.pattern(URL_REGEXP_BACKEND),
+            Validators.pattern(URL_REGEXP),
             this.allUrlsAreUnique(website.putCode),
           ],
           updateOn: 'change',
