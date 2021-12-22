@@ -539,7 +539,8 @@ export class WorkFormComponent implements OnInit {
           Object.keys(x).length === 1 &&
           x.externalIdentifierId &&
           Object.keys(x.externalIdentifierId).length === 1 &&
-          x.externalIdentifierId.unResolved
+          (x.externalIdentifierId.unResolved ||
+            x.externalIdentifierId.validFormat)
       )
     } else {
       return false
