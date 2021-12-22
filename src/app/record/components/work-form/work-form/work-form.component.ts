@@ -523,7 +523,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   /**
-   * Return true only if the errors found are only of the type unResolved
+   * Return true only if the errors found are only of the type unResolved or validFormat
    */
   private formHasOnlyAllowError(formErrors) {
     if (
@@ -533,14 +533,20 @@ export class WorkFormComponent implements OnInit {
     ) {
       return (formErrors.workIdentifiers as {
         [key: string]: { [key: string]: boolean }
-      }[]).every(
-        (x) =>
-          x &&
-          Object.keys(x).length === 1 &&
-          x.externalIdentifierId &&
-          Object.keys(x.externalIdentifierId).length === 1 &&
-          x.externalIdentifierId.unResolved
-      )
+      }[]).every((workIdentifiersErrorList) => {
+        return (
+          // Either workIdentifiers is null
+          // OR it only contains allow error like unResolved or validFormat
+          !workIdentifiersErrorList ||
+          (workIdentifiersErrorList &&
+            Object.keys(workIdentifiersErrorList).length === 1 &&
+            workIdentifiersErrorList.externalIdentifierId &&
+            Object.keys(workIdentifiersErrorList.externalIdentifierId)
+              .length === 1 &&
+            (workIdentifiersErrorList.externalIdentifierId.unResolved ||
+              workIdentifiersErrorList.externalIdentifierId.validFormat))
+        )
+      })
     } else {
       return false
     }
