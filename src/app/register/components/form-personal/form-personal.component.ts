@@ -99,15 +99,13 @@ export class FormPersonalComponent
       givenNames: new FormControl('', {
         validators: [
           Validators.required,
-          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
-          OrcidValidators.notPattern(URL_REGEXP),
+          OrcidValidators.illegalName
         ],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
       familyNames: new FormControl('', {
         validators: [
-          OrcidValidators.notPattern(URL_REGEXP),
-          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+          OrcidValidators.illegalName
         ],
       }),
       emails: this.emails,

@@ -4,7 +4,7 @@ import {
   Validators,
   FormGroup,
 } from '@angular/forms'
-import { EMAIL_REGEXP, EMAIL_REGEXP_GENERIC } from './constants'
+import { EMAIL_REGEXP, EMAIL_REGEXP_GENERIC, ILLEGAL_NAME_CHARACTERS_REGEXP } from './constants'
 
 export class OrcidValidators {
   static email = (control: AbstractControl) => {
@@ -22,6 +22,16 @@ export class OrcidValidators {
     const result = patterErrors(control)
     if (control.value && result?.pattern) {
       return { email: true }
+    } else {
+      return null
+    }
+  }
+
+  static illegalName = (control: AbstractControl) => {
+    const patterErrors = Validators.pattern(ILLEGAL_NAME_CHARACTERS_REGEXP)
+    const result = patterErrors(control)
+    if (control.value && (control.value.startsWith('http') || !result?.pattern)) {
+      return { illegalName: true }
     } else {
       return null
     }

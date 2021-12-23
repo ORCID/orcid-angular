@@ -15,7 +15,7 @@
         Please enter your first/given name
       </mat-error>
       <mat-error
-        *ngIf="form.hasError('notPattern', 'givenNames')"
+        *ngIf="form.hasError('illegalName', 'givenNames')"
         i18n="@@register.invalidName"
       >
         Invalid name characters or format
@@ -49,7 +49,7 @@
     >
     <input id="family-names-input" formControlName="familyNames" matInput />
     <mat-error
-      *ngIf="form.hasError('notPattern', 'familyNames')"
+      *ngIf="form.hasError('illegalName', 'familyNames')"
       i18n="@@register.invalidName"
     >
       Invalid name characters or format
