@@ -543,8 +543,7 @@ export class WorkFormComponent implements OnInit {
             workIdentifiersErrorList.externalIdentifierId &&
             Object.keys(workIdentifiersErrorList.externalIdentifierId)
               .length === 1 &&
-            (workIdentifiersErrorList.externalIdentifierId.unResolved ||
-              workIdentifiersErrorList.externalIdentifierId.validFormat))
+            workIdentifiersErrorList.externalIdentifierId.unResolved)
         )
       })
     } else {
