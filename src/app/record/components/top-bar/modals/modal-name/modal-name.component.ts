@@ -22,7 +22,6 @@ import {
   PlatformInfoService,
 } from '../../../../../cdk/platform-info'
 import { WINDOW } from '../../../../../cdk/window'
-import { ILLEGAL_NAME_CHARACTERS_REGEXP } from '../../../../../constants'
 import { UserService } from '../../../../../core'
 import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
 import { RecordOtherNamesService } from '../../../../../core/record-other-names/record-other-names.service'

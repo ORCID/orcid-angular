@@ -15,7 +15,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms'
-import { ILLEGAL_NAME_CHARACTERS_REGEXP, URL_REGEXP } from 'src/app/constants'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
 
@@ -97,16 +96,11 @@ export class FormPersonalComponent
 
     this.form = new FormGroup({
       givenNames: new FormControl('', {
-        validators: [
-          Validators.required,
-          OrcidValidators.illegalName
-        ],
+        validators: [Validators.required, OrcidValidators.illegalName],
         asyncValidators: this._register.backendValueValidate('givenNames'),
       }),
       familyNames: new FormControl('', {
-        validators: [
-          OrcidValidators.illegalName
-        ],
+        validators: [OrcidValidators.illegalName],
       }),
       emails: this.emails,
     })
