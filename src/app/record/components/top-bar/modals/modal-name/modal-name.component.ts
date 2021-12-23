@@ -22,10 +22,6 @@ import {
   PlatformInfoService,
 } from '../../../../../cdk/platform-info'
 import { WINDOW } from '../../../../../cdk/window'
-import {
-  ILLEGAL_NAME_CHARACTERS_REGEXP,
-  URL_REGEXP,
-} from '../../../../../constants'
 import { UserService } from '../../../../../core'
 import { RecordNamesService } from '../../../../../core/record-names/record-names.service'
 import { RecordOtherNamesService } from '../../../../../core/record-other-names/record-other-names.service'
@@ -161,8 +157,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       new FormControl(givenNames, {
         validators: [
           Validators.required,
-          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
-          OrcidValidators.notPattern(URL_REGEXP),
+          OrcidValidators.illegalName,
           Validators.maxLength(this.nameMaxLength),
         ],
       })
@@ -171,8 +166,7 @@ export class ModalNameComponent implements OnInit, OnDestroy {
       'familyName',
       new FormControl(familyName, {
         validators: [
-          OrcidValidators.notPattern(URL_REGEXP),
-          OrcidValidators.notPattern(ILLEGAL_NAME_CHARACTERS_REGEXP),
+          OrcidValidators.illegalName,
           Validators.maxLength(this.nameMaxLength),
         ],
       })
