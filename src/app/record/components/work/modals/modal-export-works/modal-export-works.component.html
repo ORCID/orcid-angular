@@ -50,7 +50,9 @@
       ({{ selectedAll ? totalWorks : works.length }})
     </h3>
     <mat-divider class="row orcid-divider"></mat-divider>
-    <ng-container *ngFor="let work of works | slice: 0:maxNumberOfWorksToDisplay;">
+    <ng-container
+      *ngFor="let work of works | slice: 0:maxNumberOfWorksToDisplay"
+    >
       <div class="row work-info">
         <div class="row">
           <h2 class="orc-font-body">
