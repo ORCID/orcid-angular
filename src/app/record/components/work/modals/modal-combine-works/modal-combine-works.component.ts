@@ -6,6 +6,8 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { takeUntil } from 'rxjs/operators'
+import { SnackbarComponent } from '../../../../../cdk/snackbar/snackbar/snackbar.component'
+import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-modal-combine-works',
@@ -25,6 +27,7 @@ export class ModalCombineWorksComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
+    private _snackBar: SnackbarService,
     private _platform: PlatformInfoService,
     private _recordWorksService: RecordWorksService
   ) {}
@@ -52,9 +55,16 @@ export class ModalCombineWorksComponent implements OnInit, OnDestroy {
   saveEvent() {
     this.loadingWorks = true
     if (this.putCodes.length > 0) {
-      this._recordWorksService.combine(this.putCodes).subscribe(() => {
+      this._recordWorksService.combine(this.putCodes).subscribe((workCombineEndpoint) => {
+        if (workCombineEndpoint?.errors?.length > 0) {
+          this._snackBar.showValidationError(
+            workCombineEndpoint.errors[0],
+            $localize`:@@ngOrcid.error:Oh no! An error occurred.`
+          )
+        } else {
+          this.closeEvent()
+        }
         this.loadingWorks = false
-        this.closeEvent()
       })
     }
   }

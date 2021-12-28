@@ -5,7 +5,7 @@ import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
-  GroupingSuggestions,
+  GroupingSuggestions, WorkCombineEndpoint,
   WorkIdType,
   WorkIdTypeValidation,
 } from 'src/app/types/works.endpoint'
@@ -279,13 +279,13 @@ export class RecordWorksService {
       )
   }
 
-  combine(putCodes: string[]): Observable<any> {
+  combine(putCodes: string[]): Observable<WorkCombineEndpoint> {
     return this.combinePutCodes(putCodes.join(','))
   }
 
-  combinePutCodes(putCodes: string): Observable<any> {
+  combinePutCodes(putCodes: string): Observable<WorkCombineEndpoint> {
     return this._http
-      .post(environment.API_WEB + 'works/group/' + putCodes, {})
+      .post<WorkCombineEndpoint>(environment.API_WEB + 'works/group/' + putCodes, {})
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),

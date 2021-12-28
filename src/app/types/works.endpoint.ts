@@ -434,6 +434,11 @@ export interface WorkIdTypeValidation {
   validFormat: boolean
 }
 
+export interface WorkCombineEndpoint {
+  errors: string[]
+  workIds: any
+}
+
 export enum WorkRelationships {
   self = 'self',
   'part-of' = 'part-of',
