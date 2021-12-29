@@ -11,6 +11,7 @@ import { CustomEncoder } from '../custom-encoder/custom.encoder'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 import { ERROR_REPORT } from 'src/app/errors'
+import { Title } from '@angular/platform-browser'
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class SignInService {
 
   constructor(
     private _http: HttpClient,
+    private _titleService: Title,
     private _errorHandler: ErrorHandlerService,
     private _userService: UserService
   ) {
@@ -98,6 +100,7 @@ export class SignInService {
   }
 
   singOut() {
+    this._titleService.setTitle('ORCID')
     return this._http
       .get<SignIn>(environment.API_WEB + 'userStatus.json?logUserOut=true', {
         headers: this.headers,
