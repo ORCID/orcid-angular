@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
 import { Work, WorksEndpoint } from '../../../../../types/record-works.endpoint'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
-import { first, takeUntil } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 
@@ -23,7 +23,7 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
   selectedAll: boolean
   totalWorks: number
   works: Work[] = []
-  maxNumberOfWorksToDisplay = 50
+  maxNumberOfWorksToDisplay = 100
 
   constructor(
     private elementRef: ElementRef,
@@ -52,7 +52,6 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
           : this.maxNumberOfWorksToDisplay
       this._recordWorksService
         .getWorks({ pageSize })
-        .pipe(first())
         .subscribe((worksEndpoint: WorksEndpoint) => {
           worksEndpoint.groups.forEach((workGroup) => {
             workGroup.works.forEach((work) => {
