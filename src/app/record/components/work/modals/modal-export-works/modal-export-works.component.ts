@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
-import { Work, WorkGroup, WorksEndpoint } from '../../../../../types/record-works.endpoint'
+import { Work, WorkGroup } from '../../../../../types/record-works.endpoint'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
@@ -42,8 +42,7 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
       })
 
     this.loadingWorks = true
-    if (
-      this.selectedAll) {
+    if (this.selectedAll) {
       this.workGroups.forEach((workGroup) => {
         workGroup.works.forEach((work) => {
           if (workGroup.defaultPutCode.toString() === work.putCode.value) {
