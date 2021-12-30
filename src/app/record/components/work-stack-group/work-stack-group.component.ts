@@ -237,6 +237,7 @@ export class WorkStackGroupComponent implements OnInit {
         modalComponent.componentInstance.type = 'works'
         modalComponent.componentInstance.selectedAll = selectedAll
         modalComponent.componentInstance.totalWorks = this.workGroup.totalGroups
+        modalComponent.componentInstance.workGroups = this.workGroup.groups
       })
   }
 
