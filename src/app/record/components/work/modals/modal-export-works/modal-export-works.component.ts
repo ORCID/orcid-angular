@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
-import { Work, WorksEndpoint } from '../../../../../types/record-works.endpoint'
+import { Work, WorkGroup } from '../../../../../types/record-works.endpoint'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../../../../cdk/platform-info'
@@ -23,7 +23,7 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
   selectedAll: boolean
   totalWorks: number
   works: Work[] = []
-  maxNumberOfWorksToDisplay = 100
+  workGroups: WorkGroup[] = []
 
   constructor(
     private elementRef: ElementRef,
@@ -42,26 +42,15 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
       })
 
     this.loadingWorks = true
-    if (
-      this.selectedAll ||
-      this.putCodes?.length > this.maxNumberOfWorksToDisplay
-    ) {
-      const pageSize =
-        this.totalWorks < this.maxNumberOfWorksToDisplay
-          ? this.totalWorks
-          : this.maxNumberOfWorksToDisplay
-      this._recordWorksService
-        .getWorks({ pageSize })
-        .subscribe((worksEndpoint: WorksEndpoint) => {
-          worksEndpoint.groups.forEach((workGroup) => {
-            workGroup.works.forEach((work) => {
-              if (workGroup.defaultPutCode.toString() === work.putCode.value) {
-                this.works.push(work)
-              }
-            })
-          })
-          this.loadingWorks = false
+    if (this.selectedAll) {
+      this.workGroups.forEach((workGroup) => {
+        workGroup.works.forEach((work) => {
+          if (workGroup.defaultPutCode.toString() === work.putCode.value) {
+            this.works.push(work)
+          }
         })
+      })
+      this.loadingWorks = false
     } else {
       if (this.putCodes?.length > 0) {
         this.putCodes.forEach((putCode) => {
