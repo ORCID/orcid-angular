@@ -7,7 +7,6 @@ import {
   FormGroup,
   Validators,
   FormArray,
-  AbstractControl,
 } from '@angular/forms'
 import {
   dateMonthYearValidator,
@@ -306,16 +305,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   private listenFormChanges() {
-    this.fundingForm.controls['fundingProjectLink'].valueChanges.subscribe(
-      (value) => {
-        if (this.fundingForm.controls['fundingProjectLink'].valid) {
-          this.appendProtocolToTheURL(
-            this.fundingForm.controls['fundingProjectLink']
-          )
-        }
-      }
-    )
-
     this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -634,9 +623,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         formGroup.controls.grantUrl.updateValueAndValidity({
           emitEvent: false,
         })
-        if (formGroup.controls.grantUrl.valid) {
-          this.appendProtocolToTheURL(formGroup.controls.grantUrl)
-        }
       } else {
         formGroup.controls.grantUrl.clearValidators()
         formGroup.controls.grantUrl.updateValueAndValidity({
@@ -657,15 +643,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         })
       }
     })
-  }
-  appendProtocolToTheURL(grantUrl: AbstractControl) {
-    if (
-      grantUrl.value &&
-      !(grantUrl.value as string).startsWith('http://') &&
-      !(grantUrl.value as string).startsWith('https://')
-    ) {
-      grantUrl.patchValue('http://' + grantUrl.value)
-    }
   }
 
   closeEvent() {
