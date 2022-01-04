@@ -172,10 +172,19 @@
           *ngFor="let contributor of funding.contributors"
           class="padding-level-3"
         >
-          <ng-container *ngIf="contributor.creditName">{{
+          <ng-container *ngIf="contributor?.creditName?.value">{{
             contributor.creditName.value
-          }}</ng-container>
+            }}</ng-container>
           {{ contributor | contributorsPipe }}
+          <ng-container *ngIf="contributor?.orcid">
+            <a
+              class="underline"
+              target="_blank"
+              rel="noreferrer noopener"
+              href="{{ contributor.uri.value }}"
+            >{{ contributor.orcid.value }}</a
+            >)
+          </ng-container>
         </div>
       </div>
     </app-display-attribute>
