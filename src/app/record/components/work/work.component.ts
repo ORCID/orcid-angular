@@ -35,6 +35,7 @@ export class WorkComponent implements OnInit {
   contributors: string[] = []
   numberOfContributors: number
   contributorsDetails: Contributor[] = []
+  contributionRole: string
 
   constructor(
     private elementRef: ElementRef,
@@ -44,6 +45,7 @@ export class WorkComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContributors(this.work.contributors)
+    this.getContributionRole(this.work.contributors)
     this.getContributorsDetails(this.work.contributors)
   }
 
@@ -93,31 +95,49 @@ export class WorkComponent implements OnInit {
     this.numberOfContributors = this.contributors.length
   }
 
+  getContributionRole(contributors: Contributor[]) {
+    contributors.forEach((c) => {
+      if (this.isPublicRecord) {
+        if (c?.orcid?.value === this.isPublicRecord) {
+          this.contributionRole = c?.contributorRole?.value
+        }
+      } else {
+        if (c?.orcid?.value === this.id) {
+          this.contributionRole = c?.contributorRole?.value
+        }
+      }
+    })
+  }
+
   getContributorsDetails(contributors: Contributor[]) {
     contributors.forEach((c) => {
-      const contributor = this.contributorsDetails.some(
-        (cD) => cD?.creditName?.value === c?.creditName?.value
-      )
-      if (contributor) {
-        this.contributorsDetails.forEach((cD) => {
-          if (cD?.creditName?.value === c?.creditName?.value) {
-            if (c.contributorRole?.value || c.contributorSequence?.value) {
-              cD.contributorRolesAndSequence.push({
+      if (c?.orcid?.value) {
+        const contributor = this.contributorsDetails.some(
+          (cD) => cD?.orcid?.value === c?.orcid?.value
+        )
+        if (contributor) {
+          this.contributorsDetails.forEach((cD) => {
+            if (cD?.orcid?.value === c?.orcid?.value) {
+              if (c.contributorRole?.value || c.contributorSequence?.value) {
+                cD.contributorRolesAndSequence.push({
+                  role: c.contributorRole?.value,
+                  sequence: c.contributorSequence?.value,
+                })
+              }
+            }
+          })
+        } else {
+          if (c.contributorRole?.value || c.contributorSequence?.value) {
+            c.contributorRolesAndSequence = [
+              {
                 role: c.contributorRole?.value,
                 sequence: c.contributorSequence?.value,
-              })
-            }
+              },
+            ]
           }
-        })
-      } else {
-        if (c.contributorRole?.value || c.contributorSequence?.value) {
-          c.contributorRolesAndSequence = [
-            {
-              role: c.contributorRole?.value,
-              sequence: c.contributorSequence?.value,
-            },
-          ]
+          this.contributorsDetails.push(c)
         }
+      } else {
         this.contributorsDetails.push(c)
       }
     })
