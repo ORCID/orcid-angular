@@ -270,7 +270,9 @@ export class WorkFormComponent implements OnInit {
               !value.validFormat ||
               (value.attemptedResolution && !value.resolved)
             ) {
-              formGroup.controls.externalIdentifierUrl.setValue('')
+              if (!this.work?.putCode) {
+                formGroup.controls.externalIdentifierUrl.setValue('')
+              }
             }
 
             if (value.attemptedResolution && !value.resolved) {
@@ -384,6 +386,7 @@ export class WorkFormComponent implements OnInit {
   }
 
   addOtherWorkId(existingExternalId?: ExternalIdentifier) {
+    console.log(JSON.stringify(existingExternalId))
     if (existingExternalId) {
       this.workIdentifiersFormArrayDisplayState.push(false)
     } else {
