@@ -386,7 +386,6 @@ export class WorkFormComponent implements OnInit {
   }
 
   addOtherWorkId(existingExternalId?: ExternalIdentifier) {
-    console.log(JSON.stringify(existingExternalId))
     if (existingExternalId) {
       this.workIdentifiersFormArrayDisplayState.push(false)
     } else {
