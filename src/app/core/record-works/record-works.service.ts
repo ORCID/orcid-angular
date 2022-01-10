@@ -171,8 +171,7 @@ export class RecordWorksService {
   getWorksInfo(putCodes: string[], orcidId?: string): Observable<Work[]> {
     return this._http
       .get<Work[]>(
-        environment.API_WEB +
-        `works/worksInfo/${putCodes.join(',')}`
+        environment.API_WEB + `works/worksInfo/${putCodes.join(',')}`
       )
       .pipe(
         retry(3),
