@@ -1,4 +1,4 @@
-<ng-container *ngFor="let workExternal of externalIdentifiers">
+<ng-container *ngFor="let workExternal of externalIdentifiersList">
   <app-panel-data-line
     [prefixTitle]="workExternal?.relationship?.value"
     title="{{ workExternal.externalIdentifierType.value + ':' | uppercase }}"
