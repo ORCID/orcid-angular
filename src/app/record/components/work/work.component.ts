@@ -88,7 +88,7 @@ export class WorkComponent implements OnInit {
   getContributors(contributor: Contributor[]) {
     contributor.forEach((c) => {
       if (c?.creditName?.value) {
-          this.contributors.push(c?.creditName?.value)
+        this.contributors.push(c?.creditName?.value)
       }
     })
     this.numberOfContributors = this.contributors.length
