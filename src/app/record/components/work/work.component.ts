@@ -32,7 +32,7 @@ export class WorkComponent implements OnInit {
   @Input() togglzWorksContributors: boolean
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
-  maxBibtexCharacters = 1000
+  maxBibtexCharacters = 5000
   contributors: string[] = []
   numberOfContributors: number
   contributorsDetails: Contributor[] = []
@@ -88,7 +88,9 @@ export class WorkComponent implements OnInit {
   getContributors(contributor: Contributor[]) {
     contributor.forEach((c) => {
       if (c?.creditName?.value) {
-        this.contributors.push(c?.creditName?.value)
+        if (!this.contributors.includes(c?.creditName?.value)) {
+          this.contributors.push(c?.creditName?.value)
+        }
       }
     })
     this.numberOfContributors = this.contributors.length
@@ -102,7 +104,11 @@ export class WorkComponent implements OnInit {
         }
       } else {
         if (c?.orcid?.value === this.id) {
-          this.contributionRole = c?.contributorRole?.value
+          if (this.contributionRole) {
+            this.contributionRole = this.contributionRole + ', ' + c?.contributorRole?.value
+          } else {
+            this.contributionRole = c?.contributorRole?.value
+          }
         }
       }
     })
