@@ -120,7 +120,7 @@
       Contributors
     </h3>
 
-    <div>
+    <div *ngIf="togglzWorksContributors">
       <ng-container
         *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
       >
@@ -198,6 +198,27 @@
           </a>
         </p>
       </ng-container>
+    </div>
+<!--    todo @DanielPalafox Remove div once togglz is removed-->
+    <div *ngIf="!togglzWorksContributors">
+      <div
+        *ngFor="let contributor of work.contributors"
+        class="padding-level-3"
+      >
+        <ng-container *ngIf="contributor.creditName">{{
+          contributor.creditName.value
+          }}</ng-container>
+        {{ contributor | contributorsPipe }}
+        <ng-container *ngIf="contributor?.orcid">
+          <a
+            class="underline"
+            target="_blank"
+            rel="noreferrer noopener"
+            href="{{ contributor.uri.value }}"
+          >{{ contributor.orcid.value }}</a
+          >)
+        </ng-container>
+      </div>
     </div>
   </app-display-attribute>
 
