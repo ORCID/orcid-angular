@@ -105,7 +105,8 @@ export class WorkComponent implements OnInit {
       } else {
         if (c?.orcid?.value === this.id) {
           if (this.contributionRole) {
-            this.contributionRole = this.contributionRole + ', ' + c?.contributorRole?.value
+            this.contributionRole =
+              this.contributionRole + ', ' + c?.contributorRole?.value
           } else {
             this.contributionRole = c?.contributorRole?.value
           }
