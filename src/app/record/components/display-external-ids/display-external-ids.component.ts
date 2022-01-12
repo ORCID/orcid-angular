@@ -19,10 +19,17 @@ export class DisplayExternalIdsComponent implements OnInit {
   getExternalIdentifiers(): ExternalIdentifier[] {
     const externalIdentifiersList: ExternalIdentifier[] = []
     if (this.externalIdentifiers?.length > 0) {
-      const doi = this.externalIdentifiers.filter((external) => external.externalIdentifierType?.value === 'doi')
-      const source = this.externalIdentifiers.filter((external) => external.externalIdentifierType?.value === 'source-work-id')
+      const doi = this.externalIdentifiers.filter(
+        (external) => external.externalIdentifierType?.value === 'doi'
+      )
+      const source = this.externalIdentifiers.filter(
+        (external) =>
+          external.externalIdentifierType?.value === 'source-work-id'
+      )
       const others = this.externalIdentifiers.filter(
-        (external) => external.externalIdentifierType?.value !== 'doi' && external.externalIdentifierType?.value !== 'source-work-id'
+        (external) =>
+          external.externalIdentifierType?.value !== 'doi' &&
+          external.externalIdentifierType?.value !== 'source-work-id'
       )
 
       externalIdentifiersList.push(...doi, ...source, ...others)
