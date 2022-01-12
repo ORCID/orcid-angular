@@ -11,7 +11,7 @@
         |
       </ng-container>
       {{ work.workType.value | recordWorkTypeLabel }}
-      <ng-container *ngIf="contributionRole"
+      <ng-container *ngIf="togglzWorksContributors && contributionRole"
         >|
         {{ contributionRole }}
       </ng-container>
