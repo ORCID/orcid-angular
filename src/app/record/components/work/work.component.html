@@ -11,7 +11,7 @@
         |
       </ng-container>
       {{ work.workType.value | recordWorkTypeLabel }}
-      <ng-container *ngIf="contributionRole"
+      <ng-container *ngIf="togglzWorksContributors && contributionRole"
         >|
         {{ contributionRole }}
       </ng-container>
@@ -232,41 +232,46 @@
     </h3>
 
     <div>
-      <ng-container
-        *ngIf="work.citation?.citation?.value?.length > maxBibtexCharacters"
-      >
-        {{ work.citation.citation.value.substr(0, maxBibtexCharacters) }}
-        <br />
-        ----
-        <br />
-        <span i18n="@@works.fullCitation"> For full citation </span>
-        <a
-          class="underline"
-          i18n="@@works.exportAsBibtex"
-          (click)="exportWork(work)"
-          *ngIf="!isPublicRecord"
+      <ng-container *ngIf="togglzWorksContributors">
+        <ng-container
+          *ngIf="work.citation?.citation?.value?.length > maxBibtexCharacters"
         >
-          export this work as BibTeX
-        </a>
-        <ng-container i18n="@@works.or" *ngIf="!isPublicRecord">
-          or
+          {{ work.citation.citation.value.substr(0, maxBibtexCharacters) }}
+          <br />
+          ----
+          <br />
+          <span i18n="@@works.fullCitation"> For full citation </span>
+          <a
+            class="underline"
+            i18n="@@works.exportAsBibtex"
+            (click)="exportWork(work)"
+            *ngIf="!isPublicRecord"
+          >
+            export this work as BibTeX
+          </a>
+          <ng-container i18n="@@works.or" *ngIf="!isPublicRecord">
+            or
+          </ng-container>
+          <a
+            href="{{
+              work.workExternalIdentifiers[0].normalizedUrl?.value ||
+                work.workExternalIdentifiers[0].url?.value
+            }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+            i18n="@@works.visitWorkSource"
+          >
+            visit the work source
+          </a>
         </ng-container>
-        <a
-          href="{{
-            work.workExternalIdentifiers[0].normalizedUrl?.value ||
-              work.workExternalIdentifiers[0].url?.value
-          }}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline"
-          i18n="@@works.visitWorkSource"
+        <ng-container
+          *ngIf="work.citation.citation.value.length < maxBibtexCharacters"
         >
-          visit the work source
-        </a>
+          {{ work.citation.citation.value }}
+        </ng-container>
       </ng-container>
-      <ng-container
-        *ngIf="work.citation.citation.value.length < maxBibtexCharacters"
-      >
+      <ng-container *ngIf="!togglzWorksContributors">
         {{ work.citation.citation.value }}
       </ng-container>
     </div>
