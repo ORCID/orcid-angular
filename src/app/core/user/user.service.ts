@@ -77,9 +77,7 @@ export class UserService {
   private hiddenTab = false
   private ONE_MINUTE = 60 * 1000
   private FIVE_MINUTES = 5 * 60 * 1000
-  private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(
-    this.ONE_MINUTE
-  )
+  private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(10000)
   private reset$ = new Subject()
 
   _recheck = new Subject<{
@@ -125,6 +123,8 @@ export class UserService {
     if (this.sessionInitialized) {
       return this.$userSessionSubject
     } else {
+      console.log("OK LET'S START THIS")
+
       this.sessionInitialized = true
       // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or
       // on _recheck subject event
@@ -139,6 +139,9 @@ export class UserService {
           this._recheck
         )
           .pipe(
+            tap((x) => {
+              console.log('TIMER VALUE ', x)
+            }),
             // Check user status only when needed
             filter((value) => this.keepRefreshingUserSession),
             // Check for updates on userStatus.json
@@ -149,6 +152,9 @@ export class UserService {
                 })
               )
             ),
+            tap((x) => {
+              console.log('Trigger value ', x)
+            }),
             // Filter followup calls if the user status has no change
             //
             // Also turns on the flag loggingStateComesFromTheServer
@@ -156,7 +162,12 @@ export class UserService {
             // and not the initial assumption. (more on this on the following pipe)
             filter((result: UserSessionUpdateParameters) => {
               this.loggingStateComesFromTheServer = true
+              console.log('status', this.userStatusHasChange(result))
+
               return this.userStatusHasChange(result)
+            }),
+            tap((x) => {
+              console.log('IS THE UPDATE REQUIRED? ', x)
             }),
             // At the very beginning assumes the user is logged in,
             // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
@@ -254,6 +265,8 @@ export class UserService {
     trustedIndividuals: TrustedIndividuals
     thirdPartyAuthData: ThirdPartyAuthData
   }> {
+    console.log('TRIGGER USER UPDATE', updateParameters)
+
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
     const $trustedIndividuals = this._trustedIndividuals
@@ -480,11 +493,15 @@ export class UserService {
     if (hiddenTab && !this.hiddenTab) {
       this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(this.FIVE_MINUTES)
+      console.log('ok make it slow')
+
+      this.interval$.next(10000)
     } else if (!hiddenTab && this.hiddenTab) {
+      console.log('ok make it fast')
+
       this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(this.ONE_MINUTE)
+      this.interval$.next(10000)
     }
   }
 }

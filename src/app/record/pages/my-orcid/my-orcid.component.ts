@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, tap } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
 import { Subject } from 'rxjs'
 import { MainPanelsState, UserRecord } from '../../../types/record.local'
@@ -10,6 +10,8 @@ import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 import { UserInfoService } from '../../../core/user-info/user-info.service'
 import { UserInfo } from '../../../types'
+import { UserService } from 'src/app/core'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-my-orcid',
@@ -55,7 +57,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _record: RecordService,
     private _openGraph: OpenGraphService,
     private _robotsMeta: RobotsMetaTagsService,
-    private _router: Router
+    private _router: Router,
+    private _userSession: UserService,
+    @Inject(WINDOW) private window: Window
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -80,7 +84,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.checkIfThisIsAPublicOrcid()
-
     this.affiliations = 0
     this._platform.get().subscribe((value) => (this.platform = value))
     this._record
@@ -100,23 +103,42 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         // as a quick solution to not show cache data when a user logouts/login with different accounts.
         cleanCacheIfExist: true,
       })
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userRecord) => {
-        this.userInfo = userRecord?.userInfo
-        this.checkLoadingState(userRecord)
-        this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
-        this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
-        this.userRecord = userRecord
+      .pipe(
+        takeUntil(this.$destroy),
+        tap((userRecord) => {
+          this.userInfo = userRecord?.userInfo
+          this.checkLoadingState(userRecord)
+          this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
+          this.userNotFound = userRecord?.userInfo?.USER_NOT_FOUND
+          this.userRecord = userRecord
 
-        if (!this.publicOrcid && userRecord?.userInfo) {
-          this.setMyOrcidIdQueryParameter()
-        }
+          if (!this.publicOrcid && userRecord?.userInfo) {
+            this.setMyOrcidIdQueryParameter()
+            this.observeSessionUpdates()
+          }
 
-        if (this.publicOrcid && (this.recordWithIssues || this.userNotFound)) {
-          this._robotsMeta.disallowRobots()
-        }
-        this._openGraph.addOpenGraphData(userRecord, { force: true })
-      })
+          if (
+            this.publicOrcid &&
+            (this.recordWithIssues || this.userNotFound)
+          ) {
+            this._robotsMeta.disallowRobots()
+          }
+          this._openGraph.addOpenGraphData(userRecord, { force: true })
+        })
+      )
+      .subscribe()
+  }
+
+  private observeSessionUpdates() {
+    this._userSession.getUserSession().subscribe((value) => {
+      if (
+        value?.userInfo?.REAL_USER_ORCID !== this.userInfo.REAL_USER_ORCID ||
+        value?.userInfo?.EFFECTIVE_USER_ORCID !==
+          this.userInfo.EFFECTIVE_USER_ORCID
+      ) {
+        this.window.location.reload()
+      }
+    })
   }
 
   private setMyOrcidIdQueryParameter() {
