@@ -106,8 +106,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.$destroy),
         tap((userRecord) => {
-          console.log('UPDATE RECORD ', userRecord)
-
           this.userInfo = userRecord?.userInfo
           this.checkLoadingState(userRecord)
           this.recordWithIssues = userRecord?.userInfo?.RECORD_WITH_ISSUES
