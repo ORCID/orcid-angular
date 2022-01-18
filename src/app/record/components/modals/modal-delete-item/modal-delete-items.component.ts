@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core'
-import { forkJoin, Subject } from 'rxjs'
+import { Subject } from 'rxjs'
 import { FormControl, FormGroup } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
@@ -17,6 +17,7 @@ import { RecordFundingsService } from '../../../../core/record-fundings/record-f
 import { RecordResearchResourceService } from '../../../../core/record-research-resource/record-research-resource.service'
 import { RecordPeerReviewService } from '../../../../core/record-peer-review/record-peer-review.service'
 import { SnackbarService } from '../../../../cdk/snackbar/snackbar.service'
+import { Work } from '../../../../types/record-works.endpoint'
 
 @Component({
   selector: 'app-modal-delete-items',
@@ -91,20 +92,18 @@ export class ModalDeleteItemsComponent implements OnInit, OnDestroy {
 
     if (this.putCodes.length > 0) {
       this.loadingItems = true
-      const works$ = []
-      this.putCodes.forEach((putCode) => {
-        works$.push(this._recordWorksService.getWorkInfo(putCode))
-      })
-      forkJoin(...works$).subscribe((works) => {
-        works.forEach((w) => {
-          this.items.push(w)
-          group[w.putCode.value] = new FormGroup({
-            checked: new FormControl(false),
+      this._recordWorksService
+        .getWorksInfo(this.putCodes)
+        .subscribe((works: Work[]) => {
+          works.forEach((w) => {
+            this.items.push(w)
+            group[w.putCode.value] = new FormGroup({
+              checked: new FormControl(false),
+            })
           })
+          this.deleteForm = new FormGroup(group)
+          this.loadingItems = false
         })
-        this.deleteForm = new FormGroup(group)
-        this.loadingItems = false
-      })
     }
   }
 

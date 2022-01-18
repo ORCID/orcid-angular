@@ -53,14 +53,12 @@ export class ModalExportWorksComponent implements OnInit, OnDestroy {
       this.loadingWorks = false
     } else {
       if (this.putCodes?.length > 0) {
-        this.putCodes.forEach((putCode) => {
-          this._recordWorksService
-            .getWorkInfo(putCode)
-            .subscribe((work: Work) => {
-              this.works.push(work)
-            })
-          this.loadingWorks = false
-        })
+        this._recordWorksService
+          .getWorksInfo(this.putCodes)
+          .subscribe((works: Work[]) => {
+            this.works = works
+            this.loadingWorks = false
+          })
       } else {
         this.loadingWorks = false
       }
