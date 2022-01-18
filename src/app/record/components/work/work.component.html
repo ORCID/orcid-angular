@@ -13,7 +13,7 @@
       {{ work.workType.value | recordWorkTypeLabel }}
       <ng-container *ngIf="togglzWorksContributors && contributionRole"
         >|
-        {{ contributionRole }}
+        <i>{{ contributionRole }}</i>
       </ng-container>
     </div>
     <app-display-external-ids
