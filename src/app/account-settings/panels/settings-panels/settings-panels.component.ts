@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog'
 })
 export class SettingsPanelsComponent implements OnInit {
   @Input() loading = false
-  @Input() expandedContent = true
+  @Input() expandedContent = false
   @Output() expandedContentChange: EventEmitter<boolean> = new EventEmitter()
   @Input() title
 

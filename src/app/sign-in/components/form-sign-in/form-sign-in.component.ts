@@ -13,14 +13,7 @@ import {
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import {
-  catchError,
-  filter,
-  first,
-  map,
-  switchMap,
-  takeUntil,
-} from 'rxjs/operators'
+import { catchError, first, map, takeUntil } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'

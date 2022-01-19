@@ -7,9 +7,10 @@ import {
   UrlTree,
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
-import { map, catchError, take } from 'rxjs/operators'
-import { UserService } from '../core'
+import { catchError, map, take } from 'rxjs/operators'
+
 import { PlatformInfoService } from '../cdk/platform-info'
+import { UserService } from '../core'
 import { OauthService } from '../core/oauth/oauth.service'
 
 @Injectable({

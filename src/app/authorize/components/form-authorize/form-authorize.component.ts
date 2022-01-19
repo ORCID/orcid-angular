@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import { switchMap, take, takeUntil, map, catchError } from 'rxjs/operators'
+import { catchError, map, switchMap, take, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
@@ -14,10 +14,11 @@ import { ERROR_REPORT } from 'src/app/errors'
 import { RequestInfoForm, Scope } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
 import {
-  TrustedIndividuals,
   Delegator,
+  TrustedIndividuals,
 } from 'src/app/types/trusted-individuals.endpoint'
 import { environment } from 'src/environments/environment'
+
 @Component({
   selector: 'app-form-authorize',
   templateUrl: './form-authorize.component.html',

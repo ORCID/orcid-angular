@@ -1,5 +1,9 @@
 :host {
-  margin-bottom: 30px;
+  margin-bottom: 16px;
+  border-left: solid 1px;
+  border-right: solid 1px;
+  border-radius: 4px;
+  width: 100%;
 }
 
 .header-container {
@@ -46,7 +50,8 @@
 
 .header-container,
 .sub-peer-review {
-  border: solid 1px;
+  border-top: solid 1px;
+  border-bottom: solid 1px;
 }
 
 .sort {

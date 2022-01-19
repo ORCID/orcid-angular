@@ -6,14 +6,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { combineLatest, Subject } from 'rxjs'
-import { first, takeUntil } from 'rxjs/operators'
+import { combineLatest } from 'rxjs'
+import { first } from 'rxjs/operators'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
 import { UserService } from '../../../core'
-import { OauthService } from '../../../core/oauth/oauth.service'
 import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
 import { TypeSignIn } from '../../../types/sign-in.local'
 import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.component'
@@ -85,7 +84,6 @@ export class SignInComponent implements OnInit {
         }
       })
   }
-
 
   show2FAEmitter($event) {
     this.show2FA = true

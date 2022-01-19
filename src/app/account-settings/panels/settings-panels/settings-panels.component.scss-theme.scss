@@ -9,7 +9,8 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   :host {
-    .white-header-container {
+    border-color: mat-color($background, ui-background) !important;
+    .header-container {
       border-color: mat-color($background, ui-background) !important;
       background-color: mat-color($background, ui-background-lightest);
     }

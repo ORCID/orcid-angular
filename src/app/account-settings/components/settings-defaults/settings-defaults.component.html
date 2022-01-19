@@ -4,7 +4,18 @@
 <h2 class="orc-font-body col" i18n="@@account.defaults">Defaults</h2>
 
 <app-settings-panels
-  [loading]="loading"
+  [loading]="emailFrequencyLoading"
+  [(expandedContent)]="emailFrequencyExpanded"
   class="row"
   [title]="titleEmailFrequency"
-></app-settings-panels>
+>
+  <app-settings-defaults-email-frequency
+    *ngIf="emailFrequencyExpanded"
+    (loading)="emailFrequencyLoading = $event"
+  ></app-settings-defaults-email-frequency>
+</app-settings-panels>
+
+<app-settings-panels class="row" [title]="titleLanguage"> </app-settings-panels>
+
+<app-settings-panels class="row" [title]="titleVisibility">
+</app-settings-panels>
