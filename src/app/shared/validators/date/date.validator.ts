@@ -141,11 +141,19 @@ export function endDateValidator() {
     const endDateDay = c.get('endDateGroup.endDateDay').value
 
     const startDateYear = c.get('startDateGroup.startDateYear').value
-    const startDateMonth = c.get('startDateGroup.startDateMonth').value
-    const startDateDay = c.get('startDateGroup.startDateDay').value
+    let startDateMonth = c.get('startDateGroup.startDateMonth').value
+    let startDateDay = c.get('startDateGroup.startDateDay').value
 
     if (!endDateYear || !startDateYear) {
       return null
+    }
+
+    if (!startDateMonth) {
+      startDateMonth = 1
+    }
+
+    if (!startDateDay) {
+      startDateDay = 1
     }
 
     const dates = startAndEndDate(
