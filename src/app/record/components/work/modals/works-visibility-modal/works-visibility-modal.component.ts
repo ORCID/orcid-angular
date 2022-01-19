@@ -56,15 +56,12 @@ export class WorksVisibilityModalComponent implements OnInit, OnDestroy {
     })
 
     if (this.putCodes.length > 0) {
-      this.loadingWorks = true
-      this.putCodes.forEach((putCode) => {
-        this._recordWorksService
-          .getWorkInfo(putCode)
-          .subscribe((work: Work) => {
-            this.loadingWorks = false
-            this.works.push(work)
-          })
-      })
+      this._recordWorksService
+        .getWorksInfo(this.putCodes)
+        .subscribe((works: Work[]) => {
+          this.works = works
+          this.loadingWorks = false
+        })
     }
   }
 

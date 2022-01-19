@@ -14,9 +14,30 @@ export class DisplayExternalIdsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    if (this.externalIdentifier) {
-      this.externalIdentifiers = Array.of(this.externalIdentifier)
+  ngOnInit(): void {}
+
+  getExternalIdentifiers(): ExternalIdentifier[] {
+    const externalIdentifiersList: ExternalIdentifier[] = []
+    if (this.externalIdentifiers?.length > 0) {
+      const doi = this.externalIdentifiers.filter(
+        (external) => external.externalIdentifierType?.value === 'doi'
+      )
+      const source = this.externalIdentifiers.filter(
+        (external) =>
+          external.externalIdentifierType?.value === 'source-work-id'
+      )
+      const others = this.externalIdentifiers.filter(
+        (external) =>
+          external.externalIdentifierType?.value !== 'doi' &&
+          external.externalIdentifierType?.value !== 'source-work-id'
+      )
+
+      externalIdentifiersList.push(...doi, ...source, ...others)
+    } else {
+      if (this.externalIdentifier) {
+        this.externalIdentifiers = Array.of(this.externalIdentifier)
+      }
     }
+    return externalIdentifiersList
   }
 }

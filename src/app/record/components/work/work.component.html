@@ -13,7 +13,7 @@
       {{ work.workType.value | recordWorkTypeLabel }}
       <ng-container *ngIf="togglzWorksContributors && contributionRole"
         >|
-        {{ contributionRole }}
+        <i>{{ contributionRole }}</i>
       </ng-container>
     </div>
     <app-display-external-ids
@@ -223,7 +223,7 @@
   </app-display-attribute>
 
   <!-- CITATION-->
-  <app-display-attribute *ngIf="work.citation?.citationType?.value">
+  <app-display-attribute *ngIf="work.citation?.citation?.value?.length > 0">
     <h3 class="orc-font-body-small">
       <ng-container i18n="@@works.citation">Citation</ng-container>
       <span *ngIf="work.citation?.citationType?.value"
