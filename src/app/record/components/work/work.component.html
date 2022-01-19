@@ -165,7 +165,8 @@
         *ngIf="work.realNumberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>
-          + {{ work.realNumberOfContributors - maxNumberContributorsWorkDetails }}
+          +
+          {{ work.realNumberOfContributors - maxNumberContributorsWorkDetails }}
           <span i18n="@@works.more">more</span>
         </p>
         <p>----</p>
@@ -184,9 +185,10 @@
           <ng-container
             i18n="@@works.or"
             *ngIf="
-              !isPublicRecord &&
-              work.workExternalIdentifiers[0].normalizedUrl?.value ||
-              work.workExternalIdentifiers[0].url?.value"
+              (!isPublicRecord &&
+                work.workExternalIdentifiers[0].normalizedUrl?.value) ||
+              work.workExternalIdentifiers[0].url?.value
+            "
           >
             or
           </ng-container>
