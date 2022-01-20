@@ -1,0 +1,21 @@
+<app-settings-panels-data [formGroup]="form">
+  <p i18n="@@account.setYourPreferred">
+    Set your preferred language for display and ORCID automated notifications.
+  </p>
+
+  <div class="row">
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
+      <mat-select formControlName="locale">
+        <mat-option
+          *ngFor="let language of languageMenuOptions | keyvalue"
+          [value]="language.key"
+        >
+          {{ language.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</app-settings-panels-data>

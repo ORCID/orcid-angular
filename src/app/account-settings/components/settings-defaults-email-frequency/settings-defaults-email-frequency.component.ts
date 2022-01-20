@@ -1,10 +1,19 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { PlatformInfoService } from 'src/app/cdk/platform-info';
-import { EmailFrequenciesService } from 'src/app/core/email-frequencies/email-frequencies.service';
-import { EmailFrequencies, EmailFrequenciesValues } from 'src/app/types/email-frequencies.endpoint';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { EmailFrequenciesService } from 'src/app/core/email-frequencies/email-frequencies.service'
+import {
+  EmailFrequencies,
+  EmailFrequenciesValues,
+} from 'src/app/types/email-frequencies.endpoint'
 
 @Component({
   selector: 'app-settings-defaults-email-frequency',
@@ -38,10 +47,7 @@ export class SettingsDefaultsEmailFrequencyComponent
   ngOnInit(): void {
     this.loading.next(true)
     this._emailFrequency.get().subscribe((value) => {
-      console.log(value);
-      
       this.loading.next(false)
-
       this.form = this._fb.group({
         sendQuarterlyTips: [value.send_quarterly_tips === 'true'],
         sendMemberUpdateRequests: [value.send_member_update_requests],
@@ -51,36 +57,38 @@ export class SettingsDefaultsEmailFrequencyComponent
         ],
       })
 
-      this.form.controls.sendQuarterlyTips.valueChanges.subscribe((x) => {
-        this.loading.next(true)
-        this._emailFrequency
-          .updateMemberTipsUpdates(x)
-          .subscribe(() => this.loading.next(false))
-      })
-      this.form.controls.sendMemberUpdateRequests.valueChanges.subscribe(
-        (x) => {
+      this.form.controls.sendQuarterlyTips.valueChanges
+        .pipe(takeUntil(this.$destroy))
+        .subscribe((x) => {
+          this.loading.next(true)
+          this._emailFrequency
+            .updateMemberTipsUpdates(x)
+            .subscribe(() => this.loading.next(false))
+        })
+      this.form.controls.sendMemberUpdateRequests.valueChanges
+        .pipe(takeUntil(this.$destroy))
+        .subscribe((x) => {
           this.loading.next(true)
           this._emailFrequency
             .updateMemberNotifications(x)
             .subscribe(() => this.loading.next(false))
-        }
-      )
-      this.form.controls.sendChangeNotifications.valueChanges.subscribe(
-        (x) => {
+        })
+      this.form.controls.sendChangeNotifications.valueChanges
+        .pipe(takeUntil(this.$destroy))
+        .subscribe((x) => {
           this.loading.next(true)
           this._emailFrequency
             .updateAmendNotifications(x)
             .subscribe(() => this.loading.next(false))
-        }
-      )
-      this.form.controls.send_administrativeChangeNotifications.valueChanges.subscribe(
-        (x) => {
+        })
+      this.form.controls.sendAdministrativeChangeNotifications.valueChanges
+        .pipe(takeUntil(this.$destroy))
+        .subscribe((x) => {
           this.loading.next(true)
           this._emailFrequency
             .updateAdminNotifications(x)
             .subscribe(() => this.loading.next(false))
-        }
-      )
+        })
     })
 
     this._platform

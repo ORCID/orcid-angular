@@ -15,7 +15,15 @@
   ></app-settings-defaults-email-frequency>
 </app-settings-panels>
 
-<app-settings-panels class="row" [title]="titleLanguage"> </app-settings-panels>
+<app-settings-panels
+  class="row"
+  [title]="titleLanguage"
+  [loading]="languageFrequencyLoading"
+>
+  <app-settings-defaults-language
+    (loading)="languageFrequencyLoading = $event"
+  ></app-settings-defaults-language>
+</app-settings-panels>
 
 <app-settings-panels class="row" [title]="titleVisibility">
 </app-settings-panels>
