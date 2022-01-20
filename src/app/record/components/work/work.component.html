@@ -26,7 +26,7 @@
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
       {{ contributors.slice(0, maxNumberContributors).join('; ') }}
       <ng-container *ngIf="numberOfContributors > maxNumberContributors">
-        + {{ numberOfContributors - maxNumberContributors }}
+        + {{ work.realNumberOfContributors }}
         <span i18n="@@works.more">more</span>
       </ng-container>
     </div>
@@ -122,13 +122,13 @@
 
     <div *ngIf="togglzWorksContributors">
       <ng-container
-        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
+        *ngIf="work.realNumberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>
           <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
           <b>{{ maxNumberContributorsWorkDetails }}</b>
           <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
-          <b>{{ numberOfContributors }}</b>
+          <b>{{ work.realNumberOfContributors }}</b>
         </p>
         <p>----</p>
       </ng-container>
@@ -162,10 +162,11 @@
         </ng-container>
       </p>
       <ng-container
-        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
+        *ngIf="work.realNumberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>
-          + {{ numberOfContributors - maxNumberContributorsWorkDetails }}
+          +
+          {{ work.realNumberOfContributors - maxNumberContributorsWorkDetails }}
           <span i18n="@@works.more">more</span>
         </p>
         <p>----</p>
@@ -181,7 +182,14 @@
           >
             export this work as BibTeX
           </a>
-          <ng-container i18n="@@works.or" *ngIf="!isPublicRecord">
+          <ng-container
+            i18n="@@works.or"
+            *ngIf="
+              (!isPublicRecord &&
+                work.workExternalIdentifiers[0].normalizedUrl?.value) ||
+              work.workExternalIdentifiers[0].url?.value
+            "
+          >
             or
           </ng-container>
           <a

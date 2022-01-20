@@ -24,9 +24,9 @@ export class SettingsDefaultsVisibilityComponent implements OnInit, OnDestroy {
   visibilityOptions = VISIBILITY_OPTIONS
 
   constructor(
+    private _defaultVisibilityService: AccountDefaultVisibilityService,
     private _record: RecordService,
-    private _fb: FormBuilder,
-    private _defaultVisibilityService: AccountDefaultVisibilityService
+    private _fb: FormBuilder
   ) {}
 
   ngOnInit() {
