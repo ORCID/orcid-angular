@@ -100,19 +100,23 @@ export class WorkComponent implements OnInit {
     contributors.forEach((c) => {
       if (this.isPublicRecord) {
         if (c?.orcid?.value === this.isPublicRecord) {
-          this.contributionRole = c?.contributorRole?.value
+          this.addRole(c)
         }
       } else {
         if (c?.orcid?.value === this.id) {
-          if (this.contributionRole) {
-            this.contributionRole =
-              this.contributionRole + ', ' + c?.contributorRole?.value
-          } else {
-            this.contributionRole = c?.contributorRole?.value
-          }
+          this.addRole(c)
         }
       }
     })
+  }
+
+  addRole(contributor: Contributor) {
+    if (this.contributionRole) {
+      this.contributionRole =
+        this.contributionRole + ', ' + contributor?.contributorRole?.value
+    } else {
+      this.contributionRole = contributor?.contributorRole?.value
+    }
   }
 
   getContributorsDetails(contributors: Contributor[]) {
