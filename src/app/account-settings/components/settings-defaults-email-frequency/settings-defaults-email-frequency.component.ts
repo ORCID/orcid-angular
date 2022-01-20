@@ -1,19 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { EmailFrequenciesService } from 'src/app/core/email-frequencies/email-frequencies.service'
-import {
-  EmailFrequencies,
-  EmailFrequenciesValues,
-} from 'src/app/types/email-frequencies.endpoint'
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PlatformInfoService } from 'src/app/cdk/platform-info';
+import { EmailFrequenciesService } from 'src/app/core/email-frequencies/email-frequencies.service';
+import { EmailFrequencies, EmailFrequenciesValues } from 'src/app/types/email-frequencies.endpoint';
 
 @Component({
   selector: 'app-settings-defaults-email-frequency',
