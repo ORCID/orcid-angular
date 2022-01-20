@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing'
 import { TwoFactorSigninGuard } from './two-factor-signin.guard'
 
-describe('LinkAccountGuard', () => {
+describe('TwoFactorSigninGuard', () => {
   let guard: TwoFactorSigninGuard
 
   beforeEach(() => {
