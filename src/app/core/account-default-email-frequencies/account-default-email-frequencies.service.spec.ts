@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing'
 
-import { EmailFrequenciesService } from './email-frequencies.service'
+import { AccountDefaultEmailFrequenciesService } from './account-default-email-frequencies.service'
 
 describe('EmailFrequenciesService', () => {
-  let service: EmailFrequenciesService
+  let service: AccountDefaultEmailFrequenciesService
 
   beforeEach(() => {
     TestBed.configureTestingModule({})
-    service = TestBed.inject(EmailFrequenciesService)
+    service = TestBed.inject(AccountDefaultEmailFrequenciesService)
   })
 
   it('should be created', () => {

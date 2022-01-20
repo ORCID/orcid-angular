@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { EmailFrequenciesLabels } from 'src/app/types/email-frequencies.endpoint'
+import { EmailFrequenciesLabels } from 'src/app/types/account-default-visibility.endpoint'
 
 @Pipe({
   name: 'emailFrequencyLabel',

@@ -9,11 +9,11 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { EmailFrequenciesService } from 'src/app/core/email-frequencies/email-frequencies.service'
+import { AccountDefaultEmailFrequenciesService } from 'src/app/core/account-default-email-frequencies/account-default-email-frequencies.service'
 import {
   EmailFrequencies,
   EmailFrequenciesValues,
-} from 'src/app/types/email-frequencies.endpoint'
+} from 'src/app/types/account-default-visibility.endpoint'
 
 @Component({
   selector: 'app-settings-defaults-email-frequency',
@@ -41,7 +41,7 @@ export class SettingsDefaultsEmailFrequencyComponent
   constructor(
     private _platform: PlatformInfoService,
     private _fb: FormBuilder,
-    private _emailFrequency: EmailFrequenciesService
+    private _emailFrequency: AccountDefaultEmailFrequenciesService
   ) {}
 
   ngOnInit(): void {
