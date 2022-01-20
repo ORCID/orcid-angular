@@ -1,19 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { EmailFrequenciesService } from 'src/app/core/email-frequencies/email-frequencies.service'
-import {
-  EmailFrequencies,
-  EmailFrequenciesValues,
-} from 'src/app/types/email-frequencies.endpoint'
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { PlatformInfoService } from 'src/app/cdk/platform-info';
+import { EmailFrequenciesService } from 'src/app/core/email-frequencies/email-frequencies.service';
+import { EmailFrequencies, EmailFrequenciesValues } from 'src/app/types/email-frequencies.endpoint';
 
 @Component({
   selector: 'app-settings-defaults-email-frequency',
@@ -47,6 +38,8 @@ export class SettingsDefaultsEmailFrequencyComponent
   ngOnInit(): void {
     this.loading.next(true)
     this._emailFrequency.get().subscribe((value) => {
+      console.log(value);
+      
       this.loading.next(false)
 
       this.form = this._fb.group({
@@ -58,13 +51,13 @@ export class SettingsDefaultsEmailFrequencyComponent
         ],
       })
 
-      this.form.controls.send_quarterly_tips.valueChanges.subscribe((x) => {
+      this.form.controls.sendQuarterlyTips.valueChanges.subscribe((x) => {
         this.loading.next(true)
         this._emailFrequency
           .updateMemberTipsUpdates(x)
           .subscribe(() => this.loading.next(false))
       })
-      this.form.controls.send_member_update_requests.valueChanges.subscribe(
+      this.form.controls.sendMemberUpdateRequests.valueChanges.subscribe(
         (x) => {
           this.loading.next(true)
           this._emailFrequency
@@ -72,7 +65,7 @@ export class SettingsDefaultsEmailFrequencyComponent
             .subscribe(() => this.loading.next(false))
         }
       )
-      this.form.controls.send_change_notifications.valueChanges.subscribe(
+      this.form.controls.sendChangeNotifications.valueChanges.subscribe(
         (x) => {
           this.loading.next(true)
           this._emailFrequency
@@ -80,7 +73,7 @@ export class SettingsDefaultsEmailFrequencyComponent
             .subscribe(() => this.loading.next(false))
         }
       )
-      this.form.controls.send_administrative_change_notifications.valueChanges.subscribe(
+      this.form.controls.send_administrativeChangeNotifications.valueChanges.subscribe(
         (x) => {
           this.loading.next(true)
           this._emailFrequency
