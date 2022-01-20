@@ -50,10 +50,10 @@ export class SettingsDefaultsEmailFrequencyComponent
       this.loading.next(false)
 
       this.form = this._fb.group({
-        send_quarterly_tips: [value.send_quarterly_tips === 'true'],
-        send_member_update_requests: [value.send_member_update_requests],
-        send_change_notifications: [value.send_change_notifications],
-        send_administrative_change_notifications: [
+        sendQuarterlyTips: [value.send_quarterly_tips === 'true'],
+        sendMemberUpdateRequests: [value.send_member_update_requests],
+        sendChangeNotifications: [value.send_change_notifications],
+        sendAdministrativeChangeNotifications: [
           value.send_administrative_change_notifications,
         ],
       })

@@ -39,7 +39,7 @@
       appearance="outline"
       class="mat-form-field-min input-container"
     >
-      <mat-select formControlName="send_change_notifications">
+      <mat-select formControlName="sendChangeNotifications">
         <mat-option
           *ngFor="let frequency of frequencyOption"
           [value]="emailFrequenciesValues[frequency]"
@@ -60,7 +60,7 @@
       appearance="outline"
       class="mat-form-field-min input-container"
     >
-      <mat-select formControlName="send_administrative_change_notifications">
+      <mat-select formControlName="sendAdministrativeChangeNotifications">
         <mat-option
           *ngFor="let frequency of frequencyOption"
           [value]="emailFrequenciesValues[frequency]"
@@ -82,7 +82,7 @@
       appearance="outline"
       class="mat-form-field-min input-container"
     >
-      <mat-select formControlName="send_member_update_requests">
+      <mat-select formControlName="sendMemberUpdateRequests">
         <mat-option
           *ngFor="let frequency of frequencyOption"
           [value]="emailFrequenciesValues[frequency]"
@@ -100,7 +100,7 @@
     We occasionally send out an email with information on new features and tips
     for getting the best out of your ORCID record.
   </p>
-  <mat-checkbox formControlName="send_quarterly_tips" class="margin-bottom-16">
+  <mat-checkbox formControlName="sendQuarterlyTips" class="margin-bottom-16">
     <div class="mat-checkbox-content" i18n="@@account.idLikeToReceive">
       I’d like to receive the ORCID new features and tips newsletter
     </div>

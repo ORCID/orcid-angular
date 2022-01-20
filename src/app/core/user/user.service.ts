@@ -78,7 +78,7 @@ export class UserService {
   private ONE_MINUTE = 60 * 1000
   private FIVE_MINUTES = 5 * 60 * 1000
   private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(
-    10000
+    this.ONE_MINUTE
   )
   private reset$ = new Subject()
 
