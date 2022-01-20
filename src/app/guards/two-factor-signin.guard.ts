@@ -6,8 +6,8 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { Observable, of } from 'rxjs'
-import { map, catchError, take } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { map, take } from 'rxjs/operators'
 import { UserService } from '../core'
 import { PlatformInfoService } from '../cdk/platform-info'
 import { OauthService } from '../core/oauth/oauth.service'
