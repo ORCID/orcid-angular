@@ -1,0 +1,120 @@
+<app-settings-panels-data *ngIf="form" [formGroup]="form">
+  <p i18n="@@account.orcidKeeps">
+    ORCID keeps you up-to-date with activity on your record with notifications
+    sent to your ORCID inbox. You can also have these notifications sent to you
+    by email. You can choose which types of notifications you wish to get by
+    email and how often you would like to receive them.
+  </p>
+
+  <div
+    class="info margin-bottom-16"
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div>
+      <mat-icon class="large-material-icon">info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3" i18n="@@account.settingNotificationsAlert">
+      Setting notification frequency to Never may mean you miss out on useful or
+      important messages about your ORCID record.
+    </div>
+  </div>
+
+  <h3 class="orc-font-body" i18n="@@account.accountAndRecord">
+    Account and record notifications
+  </h3>
+  <p class="margin-bottom-16" i18n="@@account.howOftenWould">
+    How often would you like to receive summary emails about:
+  </p>
+
+  <div class="row">
+    <label class="row">
+      <strong i18n="@@account.itemsAddedOrEdited"
+        >Items added or edited in your record by a trusted party</strong
+      >
+    </label>
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
+      <mat-select formControlName="sendChangeNotifications">
+        <mat-option
+          *ngFor="let frequency of frequencyOption"
+          [value]="emailFrequenciesValues[frequency]"
+        >
+          {{ frequency | emailFrequencyLabel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <label class="row">
+      <strong i18n="@@account.administrativeChanges"
+        >Administrative changes, such as being made a trusted individual</strong
+      >
+    </label>
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
+      <mat-select formControlName="sendAdministrativeChangeNotifications">
+        <mat-option
+          *ngFor="let frequency of frequencyOption"
+          [value]="emailFrequenciesValues[frequency]"
+        >
+          {{ frequency | emailFrequencyLabel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <label class="row">
+      <strong i18n="@@account.orcidMembers"
+        >ORCID members wanting your permission to automatically update your
+        record</strong
+      >
+    </label>
+    <mat-form-field
+      appearance="outline"
+      class="mat-form-field-min input-container"
+    >
+      <mat-select formControlName="sendMemberUpdateRequests">
+        <mat-option
+          *ngFor="let frequency of frequencyOption"
+          [value]="emailFrequenciesValues[frequency]"
+        >
+          {{ frequency | emailFrequencyLabel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <h3 class="orc-font-body" i18n="@@account.newFeatures">
+    New features and tips
+  </h3>
+  <p i18n="@@account.weOccasionallySend">
+    We occasionally send out an email with information on new features and tips
+    for getting the best out of your ORCID record.
+  </p>
+  <mat-checkbox formControlName="sendQuarterlyTips" class="margin-bottom-16">
+    <div class="mat-checkbox-content" i18n="@@account.idLikeToReceive">
+      I’d like to receive the ORCID new features and tips newsletter
+    </div>
+  </mat-checkbox>
+  <p class="italic">
+    <ng-container i18n="@@account.inAddition">
+      In addition to the notifications selected above, we may occasionally send
+      you emails with service messages related to or affecting your ORCID
+      Account. As this information may affect your visibility (privacy) settings
+      and the functioning of your ORCID account, you may not opt-out of service
+      messages per our
+    </ng-container>
+    <a class="underline" i18n="@@footer.privacypolicy" href="/privacy-policy">
+      Privacy Policy
+    </a>
+  </p>
+</app-settings-panels-data>

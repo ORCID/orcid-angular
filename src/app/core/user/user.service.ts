@@ -149,6 +149,7 @@ export class UserService {
                 })
               )
             ),
+
             // Filter followup calls if the user status has no change
             //
             // Also turns on the flag loggingStateComesFromTheServer
@@ -158,6 +159,7 @@ export class UserService {
               this.loggingStateComesFromTheServer = true
               return this.userStatusHasChange(result)
             }),
+
             // At the very beginning assumes the user is logged in,
             // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
             startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
@@ -480,11 +482,11 @@ export class UserService {
     if (hiddenTab && !this.hiddenTab) {
       this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(this.FIVE_MINUTES)
+      this.interval$.next(this.ONE_MINUTE)
     } else if (!hiddenTab && this.hiddenTab) {
       this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(this.ONE_MINUTE)
+      this.interval$.next(this.FIVE_MINUTES)
     }
   }
 }

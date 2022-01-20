@@ -6,13 +6,14 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { catchError, first, map } from 'rxjs/operators'
+import { catchError, first, map, takeUntil } from 'rxjs/operators'
 import { isRedirectToTheAuthorizationPage } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { OauthParameters, RequestInfoForm } from 'src/app/types'
@@ -28,7 +29,7 @@ import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
-import { combineLatest } from 'rxjs'
+import { combineLatest, Subject } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
 
@@ -39,7 +40,7 @@ import { ERROR_REPORT } from 'src/app/errors'
   providers: [TwoFactorComponent],
   preserveWhitespaces: true,
 })
-export class FormSignInComponent implements OnInit, AfterViewInit {
+export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('firstInput') firstInput: ElementRef
   @Input() signInType: TypeSignIn
   @Input() signInData: SignInData
@@ -62,6 +63,8 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
   signInLocal = {} as SignInLocal
   authorizationForm: FormGroup
   platform: PlatformInfo
+  private readonly $destroy = new Subject()
+  authorizationFormSubmitted: boolean
 
   constructor(
     private _user: UserService,
@@ -131,6 +134,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       this.addUsernameValidation()
     }
     this.cd.detectChanges()
+    this.observeSessionUpdates()
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next(true)
+    this.$destroy.complete()
   }
 
   ngAfterViewInit(): void {
@@ -153,6 +162,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
         willNotNavigateOutOrcidAngular,
         true
       )
+      this.authorizationFormSubmitted = true
       $signIn.subscribe((data) => {
         this.printError = false
         if (data.success) {
@@ -175,10 +185,12 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
               )
           }
         } else if (data.verificationCodeRequired && !data.badVerificationCode) {
+          this.authorizationFormSubmitted = false
           this.loading.next(false)
           this.show2FA = true
           this.show2FAEmitter.emit()
         } else {
+          this.authorizationFormSubmitted = false
           this.loading.next(false)
           if (data.deprecated) {
             this.showDeprecatedError = true
@@ -295,6 +307,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
       .subscribe((requestInfoForm: RequestInfoForm) => {
         if (requestInfoForm.error === 'invalid_grant') {
           this.isOauthError.next(true)
+          this.authorizationFormSubmitted = false
           this.loading.next(false)
           this.errorDescription.next(requestInfoForm.errorDescription)
         }
@@ -356,5 +369,19 @@ export class FormSignInComponent implements OnInit, AfterViewInit {
     } else {
       this.window.location.href = val
     }
+  }
+
+  private observeSessionUpdates() {
+    this._userInfo
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((session) => {
+        if (
+          session?.userInfo?.REAL_USER_ORCID &&
+          !this.authorizationFormSubmitted
+        ) {
+          this.window.location.reload()
+        }
+      })
   }
 }

@@ -12,6 +12,7 @@ main#main {
   margin-bottom: $spacing-large;
   padding-top: 48px;
   padding-inline-start: 16px;
+  overflow: hidden;
 }
 
 app-side-bar {

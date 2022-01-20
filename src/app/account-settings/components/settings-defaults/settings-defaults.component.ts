@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./settings-defaults.component.scss'],
 })
 export class SettingsDefaultsComponent implements OnInit {
-  loading = false
+  emailFrequencyLoading = false
+  emailFrequencyExpanded = false
   titleEmailFrequency = $localize`:@@account.emailFrequency:Email frequency`
+  titleLanguage = $localize`:@@account.emailFrequency:Language`
+  titleVisibility = $localize`:@@account.emailFrequency:Visibility`
+
   constructor() {}
 
   ngOnInit(): void {}

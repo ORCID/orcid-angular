@@ -37,14 +37,7 @@ import {
 } from '../../../../../types/common.endpoint'
 import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { Observable } from 'rxjs/internal/Observable'
-import {
-  debounceTime,
-  first,
-  startWith,
-  switchMap,
-  takeUntil,
-} from 'rxjs/operators'
-import { UserSession } from '../../../../../types/session.local'
+import { debounceTime, first, startWith, switchMap } from 'rxjs/operators'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { UserService } from '../../../../../core'
 import { WINDOW } from '../../../../../cdk/window'
@@ -82,7 +75,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   languageMap = LanguageMap
   currencyCodeMap = CurrencyCodeMap
   userRecord: UserRecord
-  userSession: UserSession
   isMobile: boolean
   filteredOptions: Observable<Organization[]>
   loadingFunding = true
@@ -153,13 +145,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.platform = platform
       this.isMobile = platform.columns4 || platform.columns8
     })
-
-    this._userService
-      .getUserSession()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userSession) => {
-        this.userSession = userSession
-      })
   }
 
   ngOnInit(): void {

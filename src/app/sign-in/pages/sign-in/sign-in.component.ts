@@ -6,16 +6,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { first } from 'rxjs/operators'
-import { LanguageService } from 'src/app/core/language/language.service'
 import { UserSession } from 'src/app/types/session.local'
 
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { WINDOW } from '../../../cdk/window'
 import { UserService } from '../../../core'
-import { OauthService } from '../../../core/oauth/oauth.service'
 import { RequestInfoForm } from '../../../types/request-info-form.endpoint'
 import { TypeSignIn } from '../../../types/sign-in.local'
 import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.component'
@@ -49,14 +46,13 @@ export class SignInComponent implements OnInit {
   invalidVerifyUrl: boolean
 
   constructor(
-    _platformInfo: PlatformInfoService,
-    _userInfo: UserService,
-    _oauthService: OauthService,
-    @Inject(WINDOW) private window: Window,
-    private _route: ActivatedRoute,
-    private _languageService: LanguageService
-  ) {
-    combineLatest([_userInfo.getUserSession(), _platformInfo.get()])
+    private _platformInfo: PlatformInfoService,
+    private _userInfo: UserService,
+    @Inject(WINDOW) private window: Window
+  ) {}
+
+  ngOnInit() {
+    combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(first())
       .subscribe(([session, platform]) => {
         session = session as UserSession
@@ -88,8 +84,6 @@ export class SignInComponent implements OnInit {
         }
       })
   }
-
-  ngOnInit() {}
 
   show2FAEmitter($event) {
     this.show2FA = true
