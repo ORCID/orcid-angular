@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
-import { EmailFrequenciesEndpoint } from 'src/app/types/email-frequencies.endpoint'
+import { AccountDefaultEmailFrequenciesEndpoint } from 'src/app/types/account-default-visibility.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -10,7 +10,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 @Injectable({
   providedIn: 'root',
 })
-export class EmailFrequenciesService {
+export class AccountDefaultEmailFrequenciesService {
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',
@@ -20,9 +20,9 @@ export class EmailFrequenciesService {
     private _http: HttpClient
   ) {}
 
-  get(): Observable<EmailFrequenciesEndpoint> {
+  get(): Observable<AccountDefaultEmailFrequenciesEndpoint> {
     return this._http
-      .get<EmailFrequenciesEndpoint>(
+      .get<AccountDefaultEmailFrequenciesEndpoint>(
         environment.API_WEB + `notifications/frequencies/view`,
         { headers: this.headers }
       )

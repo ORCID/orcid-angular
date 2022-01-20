@@ -1,4 +1,4 @@
-export interface EmailFrequenciesEndpoint {
+export interface AccountDefaultEmailFrequenciesEndpoint {
   send_quarterly_tips: 'true' | 'false'
   send_member_update_requests: EmailFrequenciesTime
   send_change_notifications: EmailFrequenciesTime
