@@ -14,6 +14,7 @@ import { RegisterGuard } from './guards/register.guard'
 import { LinkAccountGuard } from './guards/link-account.guard'
 import { LanguageGuard } from './guards/language.guard'
 import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
+import { TwoFactorSigninGuard } from './guards/two-factor-signin.guard'
 
 const routes: Routes = [
   {
@@ -104,7 +105,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.twoFactor,
-    canActivateChild: [LinkAccountGuard],
+    canActivateChild: [TwoFactorSigninGuard],
     loadChildren: () =>
       import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
   },
