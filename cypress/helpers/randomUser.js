@@ -2,6 +2,17 @@ const date = require('../helpers/date')
 
 module.exports = function () {
   return {
+    email: 'k.madrigal' + '+' + date() + '@orcid.org',
+    password: '12345678Aa',
+    name: 'orcidqa' + '_' + date() + '_name',
+    familyName: 'orcidqa' + '_' + date()+ '_family',
+    id: undefined,
+  }
+}
+
+/*
+module.exports = function () {
+  return {
     email: 'cy-' + date() + '+' + userID() + '@gmail.com',
     password: '12345678Aa',
     name: 'cy-' + date() + '-' + userID(),
@@ -19,4 +30,4 @@ function userID() {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
 
   return text
-}
+}*/

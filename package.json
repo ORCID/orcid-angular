@@ -49,6 +49,7 @@
     "cypress": "yarn cypress:report:clean && yarn cypress:run && yarn cypress:report:merge  && yarn  cypress:report:html",
     "cypress:report:clean": "rimraf cypress/reports/temp",
     "cypress:run": "cypress run",
+    "cyp": "npx cypress open",
     "cypress:report:merge": "mochawesome-merge cypress/reports/temp/mochawesome-report/*.json > cypress/reports/temp/output.json",
     "cypress:report:html": "marge cypress/reports/temp/output.json -f report --reportDir ./cypress/reports --inline --autoOpen true --overwrite false"
   },
@@ -79,6 +80,7 @@
     "gulp-flatten": "^0.4.0",
     "lodash": "^4.17.20",
     "ngx-cookie-service": "^3.0.3",
+    "nodemailer": "^6.7.2",
     "properties-to-json": "^0.1.4",
     "puppeteer": "^2.0.0",
     "rxjs": "~6.5.2",
@@ -109,11 +111,12 @@
     "babel-loader": "^8.0.6",
     "codelyzer": "^6.0.0",
     "cross-env": "^5.2.1",
-    "cypress": "^5.4.0",
-    "cypress-axe": "^0.10.0",
+    "cypress": "^9.3.1",
+    "cypress-axe": "^0.14.0",
     "fs-extra": "^8.1.0",
     "git-repo-info": "^2.1.1",
     "glob": "^7.1.6",
+    "gmail-tester-extended": "^1.1.2",
     "gulp": "^4.0.2",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -123,10 +126,10 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "lighthouse": "^5.6.0",
-    "mocha": "^8.2.1",
-    "mochawesome": "^6.2.1",
-    "mochawesome-merge": "^4.2.0",
-    "mochawesome-report-generator": "^5.1.0",
+    "mocha": "^9.1.3",
+    "mochawesome": "^7.0.1",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "protractor": "^7.0.0",
@@ -177,5 +180,28 @@
         "propagate": true
       }
     }
+  },
+  "gmailLibrary": {
+    "name": "gmail-tester-extended",
+    "version": "1.1.2",
+    "description": "A simple NodeJS gmail client which checks the inbox for specific message existance",
+    "main": "gmail-tester-extended.js",
+    "scripts": {},
+    "keywords": [
+      "gmail",
+      "googleapis",
+      "email",
+      "client",
+      "automation",
+      "polling"
+    ],
+    "author": "Kate Yurasova (forked project by Lev Gelfenbuim)",
+    "license": "MIT",
+    "dependencies": {
+      "googleapis": "^47.0.0",
+      "js-base64": "^2.5.1",
+      "nodemailer": "^6.7.2"
+    },
+    "homepage": "https://github.com/kateyurasova/gmail-tester"
   }
 }

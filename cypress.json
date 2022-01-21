@@ -1,4 +1,12 @@
 {
+  "baseUrl": "https://qa.orcid.org/",
+  "ignoreTestFiles":["**/my-orcid/*",
+    "**/registry/01. Release QA.js",
+    "**/google-analytics.e2e.js",
+    "**/homepage.e2e.js",
+    "**/notifications.e2e.js",
+  "**/oauth-integrations-errors.e2e.js",
+"**/oauth-life-cycles.e2e.js"],
   "chromeWebSecurity": false,
   "failOnStatusCode": false,
   "experimentalNetworkStubbing": true,
@@ -9,8 +17,10 @@
   "reporterOptions": {
     "charts": true,
     "overwrite": false,
-    "html": false,
-    "json": true,
+    "html": true,
+    "json": false,
     "reportDir": "cypress/reports/temp/mochawesome-report"
   }
+  
+ 
 }
