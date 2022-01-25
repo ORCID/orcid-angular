@@ -197,9 +197,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
           if (platform.queryParameters.providerId) {
             this.window.location.href = response.url
           } else {
-            this._router.navigate(['/oauth/authorize'], {
-              queryParams: platform.queryParameters,
-            })
+            this._router
+              .navigate(['/oauth/authorize'], {
+                queryParams: platform.queryParameters,
+              })
+              .then(() => {
+                this.window.scrollTo(0, 0)
+              })
           }
         })
     } else {
@@ -207,9 +211,14 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         response.url.indexOf('orcid.org/my-orcid') > 0 &&
         response.url.indexOf('justRegistered') > 0
       ) {
-        this._router.navigate(['/my-orcid'], {
-          queryParams: { justRegistered: true },
-        })
+        this.window.scrollTo(0, 0)
+        this._router
+          .navigate(['/my-orcid'], {
+            queryParams: { justRegistered: true },
+          })
+          .then(() => {
+            this.window.scrollTo(0, 0)
+          })
       } else {
         this.window.location.href = response.url
       }
