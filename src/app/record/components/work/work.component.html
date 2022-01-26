@@ -185,9 +185,9 @@
           <ng-container
             i18n="@@works.or"
             *ngIf="
-              (!isPublicRecord &&
-                work.workExternalIdentifiers[0].normalizedUrl?.value) ||
-              work.workExternalIdentifiers[0].url?.value
+              !isPublicRecord &&
+              (work.workExternalIdentifiers[0].normalizedUrl?.value ||
+                work.workExternalIdentifiers[0].url?.value)
             "
           >
             or
