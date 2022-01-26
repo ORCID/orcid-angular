@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
+import { URL_REGEXP_BACKEND } from 'src/app/constants'
 import { OrgDisambiguated } from 'src/app/types'
+import { isRegularExpressionLiteral } from 'typescript'
 
 import { environment } from '../../../environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
@@ -13,6 +15,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 export class OrganizationsService {
   GRID_BASE_URL: string
   TEST_BASE_URL: string
+  ISNI_BASE_URL: string
 
   constructor(
     private _http: HttpClient,
@@ -20,6 +23,7 @@ export class OrganizationsService {
   ) {
     this.GRID_BASE_URL = 'https://www.grid.ac/institutes/'
     this.TEST_BASE_URL = 'https://orcid.org/'
+    this.ISNI_BASE_URL = 'https://isni.org/isni/'
   }
 
   getOrgDisambiguated(type, value): Observable<OrgDisambiguated> {
@@ -46,6 +50,10 @@ export class OrganizationsService {
         return value
       case 'GRID':
         return this.GRID_BASE_URL + value
+      case 'ISNI':
+        return this.ISNI_BASE_URL + value
+      case 'ROR':
+        return value
       default:
         return ''
     }
