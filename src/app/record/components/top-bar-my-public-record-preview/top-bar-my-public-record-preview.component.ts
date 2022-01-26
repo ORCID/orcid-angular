@@ -46,9 +46,11 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
       }
     })
 
-    this._trustedIndividuals.getTrustedIndividuals().subscribe((value) => {
-      this.trustedIndividuals = value
-    })
+    if (!this.isPublicRecord) {
+      this._trustedIndividuals.getTrustedIndividuals().subscribe((value) => {
+        this.trustedIndividuals = value
+      })
+    }
   }
   goToMyRecord() {
     this.router.navigate(['/my-orcid'])
