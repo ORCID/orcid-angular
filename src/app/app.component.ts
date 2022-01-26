@@ -62,7 +62,7 @@ export class AppComponent {
             this.currentlyDisplayingZendesk
           ) {
             _zendesk.hide()
-            
+
             this.currentlyDisplayingZendesk = false
           }
         })

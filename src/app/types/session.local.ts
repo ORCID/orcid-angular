@@ -1,6 +1,5 @@
 import { UserInfo, NameForm, RequestInfoForm } from '.'
 import { ThirdPartyAuthData } from './sign-in-data.endpoint'
-import { TrustedIndividuals } from './trusted-individuals.endpoint'
 
 export interface UserSession {
   userInfo: UserInfo

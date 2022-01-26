@@ -2,7 +2,6 @@ import { ComponentType } from '@angular/cdk/portal'
 import {
   Component,
   EventEmitter,
-  HostListener,
   Inject,
   Input,
   OnInit,

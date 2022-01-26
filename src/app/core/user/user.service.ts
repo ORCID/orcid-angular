@@ -279,7 +279,6 @@ export class UserService {
     oauthSession: RequestInfoForm
     thirdPartyAuthData: ThirdPartyAuthData
   }> {
-
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
