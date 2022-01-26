@@ -371,7 +371,7 @@ export class RecordWorksService {
   ): Observable<Work> {
     let url = 'works/resolve/doi?value='
     if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
-      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\d{5})/g)
+      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\/?\d{5})/g)
       const result = regex.exec(externalId)
       url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
     }
