@@ -129,8 +129,6 @@ export class UserService {
     if (this.sessionInitialized) {
       return this.$userSessionSubject
     } else {
-      console.log('ok init getUserSession')
-
       this.sessionInitialized = true
       // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or
       // on _recheck subject event
@@ -281,14 +279,12 @@ export class UserService {
     oauthSession: RequestInfoForm
     thirdPartyAuthData: ThirdPartyAuthData
   }> {
-    console.log('updateParameters', JSON.stringify(updateParameters))
 
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $oauthSession = this.getOauthSession(updateParameters)
     const $thirdPartyAuthData = this.getThirdPartySignInData()
-    console.log('updateParameters', updateParameters)
 
     return combineLatest([
       updateParameters.loggedIn ? $userInfo : of(undefined),
@@ -438,8 +434,6 @@ export class UserService {
           retryWhen((errors) => {
             return errors.pipe(delay(2000)).pipe(
               tap((x) => {
-                console.log('error here ', x)
-
                 if (
                   !(
                     this.currentlyLoggedIn &&
@@ -496,14 +490,12 @@ export class UserService {
   setTimerAsHiddenState(hiddenTab: boolean) {
     // only reset the timer when the visibility is changed
     if (hiddenTab && !this.hiddenTab) {
-      console.log('>>>>', hiddenTab)
       this.hiddenTab = hiddenTab
       this.reset$.next()
       this.interval$.next(
         this.START_IN_TWENTY_FIVE_MINUTES_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
       )
     } else if (!hiddenTab && this.hiddenTab) {
-      console.log('>>>>', hiddenTab)
       this.hiddenTab = hiddenTab
       this.reset$.next()
       this.interval$.next(

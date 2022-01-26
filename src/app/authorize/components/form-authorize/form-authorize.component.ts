@@ -207,7 +207,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   changeAccount(delegator: Delegator) {
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
-    console.log(delegator)
 
     this._user.switchAccount(delegator).subscribe(() => {
       this.window.location.reload()
