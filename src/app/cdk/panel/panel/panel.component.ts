@@ -289,9 +289,4 @@ export class PanelComponent implements OnInit {
         break
     }
   }
-
-  @HostListener('window:visibilitychange')
-  onVisibilityChange() {
-    this._userService.setTimerAsHiddenState(this._window.document.hidden)
-  }
 }

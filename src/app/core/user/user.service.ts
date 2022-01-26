@@ -38,17 +38,13 @@ import {
   UserSessionUpdateParameters,
 } from 'src/app/types/session.local'
 import { ThirdPartyAuthData } from 'src/app/types/sign-in-data.endpoint'
-import {
-  Delegator,
-  TrustedIndividuals,
-} from 'src/app/types/trusted-individuals.endpoint'
+import { Delegator } from 'src/app/types/trusted-individuals.endpoint'
 import { environment } from 'src/environments/environment'
 
 import { UserStatus } from '../../types/userStatus.endpoint'
 import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { OauthService } from '../oauth/oauth.service'
-import { TrustedIndividualsService } from '../trusted-individuals/trusted-individuals.service'
 import { UserInfoService } from '../user-info/user-info.service'
 
 @Injectable({
@@ -66,8 +62,7 @@ export class UserService {
     private _platform: PlatformInfoService,
     private _oauth: OauthService,
     private _disco: DiscoService,
-    private _userInfo: UserInfoService,
-    private _trustedIndividuals: TrustedIndividualsService
+    private _userInfo: UserInfoService
   ) {}
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
@@ -75,10 +70,19 @@ export class UserService {
   sessionInitialized = false
   keepRefreshingUserSession = true
   private hiddenTab = false
-  private ONE_MINUTE = 60 * 1000
-  private FIVE_MINUTES = 5 * 60 * 1000
-  private interval$: BehaviorSubject<number> = new BehaviorSubject<number>(
-    this.ONE_MINUTE
+  private START_IMMEDIATELY_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES = {
+    start: 0,
+    interval: 60 * 1000 * 25,
+  }
+  private START_IN_TWENTY_FIVE_MINUTES_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES = {
+    start: 60 * 1000 * 25,
+    interval: 60 * 1000 * 25,
+  }
+  private interval$: BehaviorSubject<{
+    start: number
+    interval: number
+  }> = new BehaviorSubject<{ start: number; interval: number }>(
+    this.START_IMMEDIATELY_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
   )
   private reset$ = new Subject()
 
@@ -125,12 +129,14 @@ export class UserService {
     if (this.sessionInitialized) {
       return this.$userSessionSubject
     } else {
+      console.log('ok init getUserSession')
+
       this.sessionInitialized = true
       // trigger every 60 seconds if tab active  or  every 5 minutes  if tab hidden or
       // on _recheck subject event
-      this.interval$.subscribe((duration) => {
+      this.interval$.subscribe((timerVars) => {
         merge(
-          timer(0, duration).pipe(
+          timer(timerVars.start, timerVars.interval).pipe(
             takeUntil(this.reset$),
             map((timerUpdate) => {
               return { timerUpdate }
@@ -149,7 +155,6 @@ export class UserService {
                 })
               )
             ),
-
             // Filter followup calls if the user status has no change
             //
             // Also turns on the flag loggingStateComesFromTheServer
@@ -160,12 +165,33 @@ export class UserService {
               return this.userStatusHasChange(result)
             }),
 
-            // At the very beginning assumes the user is logged in,
-            // this is to avoid waiting for userStatus.json before calling userInfo.json and nameForm.json on the first load
-            startWith({ loggedIn: true, checkTrigger: { timerUpdate: -1 } }),
-            switchMap((updateParameters) =>
-              this.handleUserDataUpdate(updateParameters)
+            // When the user lands on the Orcid app:
+            // Take a eager approach:
+            // create a trigger that just assumes the user es logging.
+            // So instead of waiting until `userStatus` responds, at the very beginning of the app initialization
+            // calling userInfo.json, nameForm.json
+            // (this avoid unnecessary extra waiting for logged in users)
+            //
+            // When the user change tabs:
+            // Take a lazy approach:
+            // and empty trigger will be created, to not call the any endpoint until the next `userStatus` call responds.
+
+            startWith(
+              !this.loggingStateComesFromTheServer
+                ? { loggedIn: true, checkTrigger: { timerUpdate: -1 } }
+                : {}
             ),
+            // Ignore empty triggers.
+            filter(
+              (trigger: UserSessionUpdateParameters) =>
+                trigger.checkTrigger !== undefined
+            ),
+
+            switchMap((updateParameters: UserSessionUpdateParameters) => {
+              if (updateParameters) {
+                return this.handleUserDataUpdate(updateParameters)
+              }
+            }),
             map((data) => this.computesUpdatedUserData(data)),
             // Debugger for the user session on development time
             tap((session) =>
@@ -253,39 +279,29 @@ export class UserService {
     userInfo: UserInfo
     nameForm: NameForm
     oauthSession: RequestInfoForm
-    trustedIndividuals: TrustedIndividuals
     thirdPartyAuthData: ThirdPartyAuthData
   }> {
+    console.log('updateParameters', JSON.stringify(updateParameters))
+
     this.currentlyLoggedIn = updateParameters.loggedIn
     const $userInfo = this._userInfo.getUserInfo().pipe(this.handleErrors)
-    const $trustedIndividuals = this._trustedIndividuals
-      .getTrustedIndividuals()
-      .pipe(this.handleErrors)
     const $nameForm = this.getNameForm().pipe(this.handleErrors)
     const $oauthSession = this.getOauthSession(updateParameters)
     const $thirdPartyAuthData = this.getThirdPartySignInData()
+    console.log('updateParameters', updateParameters)
+
     return combineLatest([
       updateParameters.loggedIn ? $userInfo : of(undefined),
       updateParameters.loggedIn ? $nameForm : of(undefined),
       $oauthSession,
-      $trustedIndividuals,
       !updateParameters.loggedIn ? $thirdPartyAuthData : of(undefined),
     ]).pipe(
-      map(
-        ([
-          userInfo,
-          nameForm,
-          oauthSession,
-          trustedIndividuals,
-          thirdPartyAuthData,
-        ]) => ({
-          userInfo,
-          nameForm,
-          oauthSession,
-          trustedIndividuals,
-          thirdPartyAuthData,
-        })
-      )
+      map(([userInfo, nameForm, oauthSession, thirdPartyAuthData]) => ({
+        userInfo,
+        nameForm,
+        oauthSession,
+        thirdPartyAuthData,
+      }))
     )
   }
   /**
@@ -411,9 +427,7 @@ export class UserService {
       return undefined
     }
   }
-  private handleErrors(
-    gerUserInfo: Observable<UserInfo | NameForm | TrustedIndividuals>
-  ) {
+  private handleErrors(gerUserInfo: Observable<UserInfo | NameForm>) {
     return (
       gerUserInfo
         .pipe(
@@ -421,9 +435,11 @@ export class UserService {
           //
           // This is necessary because in some cases when the userStatus.json responded with { logging = true }
           // and the userInfo.json is called immediately after it responds with an error
-          retryWhen((errors) =>
-            errors.pipe(delay(2000)).pipe(
+          retryWhen((errors) => {
+            return errors.pipe(delay(2000)).pipe(
               tap((x) => {
+                console.log('error here ', x)
+
                 if (
                   !(
                     this.currentlyLoggedIn &&
@@ -434,7 +450,7 @@ export class UserService {
                 }
               })
             )
-          )
+          })
         )
         // This is necessary since the backend responds with a CORS error when a
         // user is not logged in and userInfo.json is called
@@ -480,13 +496,19 @@ export class UserService {
   setTimerAsHiddenState(hiddenTab: boolean) {
     // only reset the timer when the visibility is changed
     if (hiddenTab && !this.hiddenTab) {
+      console.log('>>>>', hiddenTab)
       this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(this.ONE_MINUTE)
+      this.interval$.next(
+        this.START_IN_TWENTY_FIVE_MINUTES_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
+      )
     } else if (!hiddenTab && this.hiddenTab) {
+      console.log('>>>>', hiddenTab)
       this.hiddenTab = hiddenTab
       this.reset$.next()
-      this.interval$.next(this.FIVE_MINUTES)
+      this.interval$.next(
+        this.START_IMMEDIATELY_AND_CHECK_EVERY_TWENTY_FIVE_MINUTES
+      )
     }
   }
 }

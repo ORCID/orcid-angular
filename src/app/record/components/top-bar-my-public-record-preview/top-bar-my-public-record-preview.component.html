@@ -37,7 +37,7 @@
 <div
   *ngIf="
     iAmEditingThisRecord &&
-    (trustedIndividuals.delegators.length || trustedIndividuals.me) &&
+    (trustedIndividuals?.delegators?.length || trustedIndividuals?.me) &&
     !isPublicRecord
   "
   [ngClass]="{ 'yellow-bg': !isMyRecord }"
