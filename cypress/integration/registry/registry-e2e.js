@@ -68,25 +68,8 @@ describe('Register new user', async function() {
     })
 
 })
-/*describe("Email verification for registered user", async function() {
-    it("Register Form: Email is delievered", function() {
-      const test_id = new Date().getTime();
-      const incoming_mailbox = `orcidqa+${test_id}@gmail.com`;
-      cy
-        .task("gmail:check", {
-          from: "support@verify.orcid.org",
-          to: incoming_mailbox,
-          subject: "Welcome to ORCID - verify your email address"
-        })
-        .then(email => {
-          assert.isNotNull(email, `Verification email was found`);
-        });
-    });
-  });*/
-  
-/*
+
 //Register new user negative testing - verify error messages for the form
-it.skip('New user registers via Sign in button - invalid data', () => {   
+it.skip('New user registers via Sign in button - negative testing', () => {   
    
 })
-*/

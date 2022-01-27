@@ -1,66 +1,68 @@
 /// <reference types="cypress" />
 
-describe("Email assertion:", () => {
-    it("Look for an email with specific subject and link in email body", function() {
-      // debugger; //Uncomment for debugger to work...
-      cy
-         /*8 .task("readAllMessages", {
-          options: {
-            from: "s.paparisto@orcid.org",
-            subject: "Katrina's kudoboard",
-            include_body: true,
-            before: new Date(2022, 12, 30), // before dec 30, 2022
-            after: new Date(2022, 7, 17) // After july 17, 2022
-          }*/
-          .task("checkInbox_from_to_subject", {
+describe("Testing gmail api library", () => {
+
+    it.skip("Look for an email with specific subject", function() {
+      //const subjectToFind = "[ORCID] Welcome to ORCID - verify your email address";
+      const subjectToFind = "try sending a link";
+
+      cy.task("checkInbox_from_to_subject", {
             options: {
               from: "kprismm@gmail.com",
               to: "orcidqa+123@gmail.com",
-              subject: "testing inbox is working"
+              subject: subjectToFind,
             }
-        })
-        .then(email => {
-            assert(email.subject === 'testing inbox is working');
-            // assert.isAtLeast(
-            //   emails.length,
-            //   1,
-            //   "Expected to find at least one email, but none were found!"
-            // );
-            //['jfk@jfkl.com'].length,
-
-            // const body = emails[0].body.html;
-            //console.log(body);
-            /*assert.isTrue(
-              body.indexOf(
-                "https://www.kudoboard.com/boards/keDtuB0K"
+        }).then(email => {
+            assert(email.subject === subjectToFind ,"Subject found: "+ email.subject);
+            console.log(email.snippet);
+            const body = email.snippet;
+           /* console.log(body);
+            assert.isTrue(
+              body(
+                "https://www.cypress.io"
               ) >= 0,
               "Found the link!"
             );*/
           });
+    });
 
-     /* cy
-        .task("gmail:check", {
-          options: {
-            from: "s.paparisto@orcid.org",
-            subject: "Katrina's kudoboard",
-            include_body: true,
-            //before: new Date(2019, 8, 24, 12, 31, 13), // Before September 24rd, 2019 12:31:13
-            after: new Date(2022, 1, 17) // After August 23, 2019
-          }
-        })
-        .then(emails => {
-          assert.isAtLeast(
-            emails.length,
-            1,
-            "Expected to find at least one email, but none were found!"
-          );
-          const body = emails[0].body.html;
-          assert.isTrue(
-            body.indexOf(
-              "https://www.kudoboard.com/boards/keDtuB0K"
-            ) >= 0,
-            "Found the link!"
-          );
-        });*/
+    it("Look for an email with specific subject and link in the body", function() {
+      const subjectToFind = "[ORCID] Welcome to ORCID - verify your email address";
+      const linkToFind = "https://sandbox.orcid.org/verify-email/";
+      let emailBody;
+      let href;
+      cy
+      .task("readAllMessages", {
+        options: {
+          from: "support@verify.orcid.org",
+          to: "k.madrigal@orcid.org",
+          subject: subjectToFind,
+          include_body: true,
+          //before: new Date(2022, 12, 24, 12, 31, 13), // Before December 24rd, 2022 12:31:13
+          //after: new Date(2022, 1, 15, 12, 31, 13) // After Jan 15, 2022
+        }
+      })
+      .then(emails => {
+        //there may be multiple emails with same subject and sender
+        assert.isNotNull(emails.length);
+        
+        //grab most recent email
+        emailBody = emails[0].body.html;
+        cy.log(">>>>>>>>>Email body is: "+ JSON.stringify(emails[0].body));
+       
+        //convert string to DOM
+        const htmlDom = new DOMParser().parseFromString(emailBody, 'text/html');
+        cy.log(htmlDom.documentElement.innerHTML);
+        
+        //grab the anchor elements from the document
+        const linksCollection=htmlDom.getElementsByTagName("a");
+        href=linksCollection[0].href;//get first link
+        cy.log(">>>>>>>found the link: "+ href);
+      
+        // make an api request for this resource no browser needed
+        // drill into the response to check it was successful       
+        cy.request(href).its('status').should('eq', 200);
+
+      });      
     });
   });
