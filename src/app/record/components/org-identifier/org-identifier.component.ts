@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { OrgDisambiguated } from '../../../types'
 import { OrganizationsService } from '../../../core'
-import { URL_REGEXP } from '../../../constants'
+import { URL_REGEXP_BACKEND } from '../../../constants'
 
 @Component({
   selector: 'app-org-identifier',
@@ -17,13 +17,17 @@ export class OrgIdentifierComponent implements OnInit {
   ngOnInit(): void {}
 
   getLink(type: string, value: string) {
-    return this._organizationsService.getLink(type, value)
+    if (this.isUrl(String)) {
+      return value
+    } else {
+      return this._organizationsService.getLink(type, value)
+    }
   }
 
   /**
    * RegEx function to check if the elements contains a URL
    */
   isUrl(element) {
-    return RegExp(URL_REGEXP).test(element)
+    return RegExp(URL_REGEXP_BACKEND).test(element)
   }
 }
