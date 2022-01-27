@@ -10,6 +10,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RequestInfoForm, Scope } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
@@ -44,7 +45,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService,
     private _router: Router,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _trustedIndividuals: TrustedIndividualsService
   ) {
     this._user
       .getUserSession()
@@ -59,7 +61,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl
-          this.trustedIndividuals = userInfo.trustedIndividuals
         } else {
           // if the user logouts in the middle of a oauth section on another tab
           this._platformInfo
@@ -72,6 +73,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             )
         }
       })
+
+    this._trustedIndividuals.getTrustedIndividuals().subscribe((value) => {
+      this.trustedIndividuals = value
+    })
   }
 
   ngOnInit(): void {}
@@ -202,7 +207,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   changeAccount(delegator: Delegator) {
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
-    this._user.switchAccount(delegator)
+
+    this._user.switchAccount(delegator).subscribe(() => {
+      this.window.location.reload()
+    })
   }
   ngOnDestroy() {
     this.$destroy.next(true)
