@@ -85,17 +85,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     this.window.location.href = val
   }
 
-  signOut() {
-    this._signingService
-      .singOut()
-      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
-      .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin], {
-          queryParams: { ...platform.queryParameters },
-        })
-      })
-  }
-
   authorize(value = true) {
     this.loadingAuthorizeEndpoint = true
     this._oauth.authorize(value).subscribe((data) => {

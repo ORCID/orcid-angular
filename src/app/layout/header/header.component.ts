@@ -276,12 +276,4 @@ export class HeaderComponent implements OnInit {
     ;(this.window as any).outOfRouterNavigation(val)
   }
 
-  signOut() {
-    this._signingService
-      .singOut()
-      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
-      .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin])
-      })
-  }
 }

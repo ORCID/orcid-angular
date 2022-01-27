@@ -75,12 +75,7 @@ export class UserMenuComponent implements OnInit {
     }
   }
 
-  signOut() {
-    this._signingService
-      .singOut()
-      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
-      .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin])
-      })
+  navigateTo(val) {
+    this.window.location.href = val
   }
 }
