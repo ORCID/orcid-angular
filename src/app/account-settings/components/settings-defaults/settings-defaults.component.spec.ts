@@ -13,8 +13,6 @@ describe('SettingsDefaultsComponent', () => {
   })
 
   beforeEach(() => {
-
-
     fixture = TestBed.createComponent(SettingsDefaultsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()

@@ -16,9 +16,6 @@ jobs:
       - run: yarn
       - run: yarn format
       - run: yarn build:i18n:generate-testing
-      - name: Commit languages files changes
         uses: EndBug/add-and-commit@v4
-        with:
-          message: '🤖 GITHUB ACTIONS: testing languages 🤖'
         env:
           GITHUB_TOKEN: ${{ secrets.ORCID_MACHINE }}
