@@ -1,4 +1,11 @@
-on: [pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
 name: Code formatting and testing languages✍️
 
 jobs:

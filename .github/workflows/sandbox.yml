@@ -1,13 +1,19 @@
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 name: Build Sandbox 🛠️
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: 'v16.13.2'
-    - run: yarn
-    - run: yarn build:sandbox
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 'v16.13.2'
+      - run: yarn
+      - run: yarn build:sandbox
