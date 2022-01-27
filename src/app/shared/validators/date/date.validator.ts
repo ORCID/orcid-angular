@@ -157,11 +157,11 @@ export function endDateValidator() {
     }
 
     if (!endDateMonth) {
-      endDateMonth = 1
+      endDateMonth = 12
     }
 
     if (!endDateDay) {
-      endDateDay = 1
+      endDateDay = 31
     }
 
     const dates = startAndEndDate(
