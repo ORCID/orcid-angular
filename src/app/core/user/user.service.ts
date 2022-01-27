@@ -148,8 +148,6 @@ export class UserService {
             filter((value) => this.keepRefreshingUserSession),
             // Check for updates on userStatus.json
             switchMap((checkTrigger) => {
-              console.log('OK LETS CALL THE BACKEND USER STATUS');
-              
               this.$userStatusChecked.next(null)
               return this.getUserStatus().pipe(
                 map((loggedIn) => {
