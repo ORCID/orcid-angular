@@ -7,7 +7,6 @@ import { WINDOW } from 'src/app/cdk/window'
 import { Router } from '@angular/router'
 import { ApplicationRoutes } from 'src/app/constants'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
-import { switchMap, take } from 'rxjs/operators'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 
 @Component({
@@ -75,12 +74,7 @@ export class UserMenuComponent implements OnInit {
     }
   }
 
-  signOut() {
-    this._signingService
-      .singOut()
-      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
-      .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin])
-      })
+  navigateTo(val) {
+    this.window.location.href = val
   }
 }
