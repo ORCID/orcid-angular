@@ -139,7 +139,11 @@
           class="col no-gutters"
           *ngIf="checkMenuItemRequirements({ logging: true })"
         >
-          <button mat-stroked-button class="sign-in-button" (click)="navigateTo('/signout')">
+          <button
+            mat-stroked-button
+            class="sign-in-button"
+            (click)="navigateTo('/signout')"
+          >
             <ng-container i18n="#upperCase@@public-layout.sign_out"
               >SIGN OUT</ng-container
             >
