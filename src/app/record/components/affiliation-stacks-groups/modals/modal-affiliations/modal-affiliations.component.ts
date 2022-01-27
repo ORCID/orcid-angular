@@ -520,7 +520,10 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
         .subscribe((affiliation) => {
           if (affiliation?.errors?.length > 0) {
             this.loadingAffiliations = false
-            this._snackbar.showValidationError(affiliation?.errors[0], $localize`:@@shared.pleaseReview:Please review and fix the issue`)
+            this._snackbar.showValidationError(
+              affiliation?.errors[0],
+              $localize`:@@shared.pleaseReview:Please review and fix the issue`
+            )
           } else {
             this.closeEvent()
           }
