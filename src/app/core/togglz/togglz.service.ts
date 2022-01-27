@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { Config } from 'src/app/types/togglz.endpoint'
-import { Observable, timer } from 'rxjs'
+import { Observable } from 'rxjs'
 import { switchMapTo, shareReplay, map } from 'rxjs/operators'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
+import { UserService } from '..'
 
 @Injectable({
   providedIn: 'root',
 })
 export class TogglzService {
   togglz: Observable<Config>
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private userService: UserService) {}
 
   private getConfig() {
     return this._http.get<Config>(environment.API_WEB + 'config.json', {
@@ -22,10 +23,9 @@ export class TogglzService {
     if (this.togglz) {
       return this.togglz
     } else {
-      return (this.togglz = timer(0, 60 * 1000 * 10).pipe(
-        switchMapTo(this.getConfig()),
-        shareReplay(1)
-      ))
+      return (this.togglz = this.userService.$userStatusChecked
+        .asObservable()
+        .pipe(switchMapTo(this.getConfig()), shareReplay(1)))
     }
   }
 

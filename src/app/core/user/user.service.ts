@@ -64,6 +64,7 @@ export class UserService {
     private _disco: DiscoService,
     private _userInfo: UserInfoService
   ) {}
+  $userStatusChecked = new Subject()
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
   private $userSessionSubject = new ReplaySubject<UserSession>(1)
@@ -146,13 +147,14 @@ export class UserService {
             // Check user status only when needed
             filter((value) => this.keepRefreshingUserSession),
             // Check for updates on userStatus.json
-            switchMap((checkTrigger) =>
-              this.getUserStatus().pipe(
+            switchMap((checkTrigger) => {
+              this.$userStatusChecked.next(null)
+              return this.getUserStatus().pipe(
                 map((loggedIn) => {
                   return { loggedIn, checkTrigger }
                 })
               )
-            ),
+            }),
             // Filter followup calls if the user status has no change
             //
             // Also turns on the flag loggingStateComesFromTheServer
