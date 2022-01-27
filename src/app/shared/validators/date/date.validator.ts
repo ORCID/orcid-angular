@@ -137,8 +137,8 @@ export function endDateValidator() {
     }
 
     const endDateYear = c.get('endDateGroup.endDateYear').value
-    const endDateMonth = c.get('endDateGroup.endDateMonth').value
-    const endDateDay = c.get('endDateGroup.endDateDay').value
+    let endDateMonth = c.get('endDateGroup.endDateMonth').value
+    let endDateDay = c.get('endDateGroup.endDateDay').value
 
     const startDateYear = c.get('startDateGroup.startDateYear').value
     let startDateMonth = c.get('startDateGroup.startDateMonth').value
@@ -154,6 +154,14 @@ export function endDateValidator() {
 
     if (!startDateDay) {
       startDateDay = 1
+    }
+
+    if (!endDateMonth) {
+      endDateMonth = 1
+    }
+
+    if (!endDateDay) {
+      endDateDay = 1
     }
 
     const dates = startAndEndDate(
