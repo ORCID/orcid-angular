@@ -17,5 +17,7 @@ jobs:
       - run: yarn format
       - run: yarn build:i18n:generate-testing
       - uses: EndBug/add-and-commit@v4
+        with:
+          message: '🤖 GITHUB ACTIONS'
         env:
           GITHUB_TOKEN: ${{ secrets.ORCID_MACHINE }}
