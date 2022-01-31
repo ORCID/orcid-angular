@@ -44,7 +44,8 @@ export class WorkComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.contributors = this.work.contributorsGroupedByOrcid || this.contributors
+    this.contributors =
+      this.work.contributorsGroupedByOrcid || this.contributors
     this.numberOfContributorsGroupedByOrcid = this.work.numberOfContributorsGroupedByOrcid
     this.getContributionRole(this.work.contributorsGroupedByOrcid)
   }

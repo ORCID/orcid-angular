@@ -26,12 +26,15 @@
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
       <ng-container
         *ngFor="
-          let contributor of contributors
-            | slice: 0:maxNumberContributors;
-          let last = last">
+          let contributor of contributors | slice: 0:maxNumberContributors;
+          let last = last
+        "
+      >
         {{ contributor.creditName.content + (!last ? '; ' : '') }}
       </ng-container>
-      <ng-container *ngIf="numberOfContributorsGroupedByOrcid > maxNumberContributors">
+      <ng-container
+        *ngIf="numberOfContributorsGroupedByOrcid > maxNumberContributors"
+      >
         + {{ numberOfContributorsGroupedByOrcid - maxNumberContributors }}
         <span i18n="@@works.more">more</span>
       </ng-container>
@@ -128,7 +131,9 @@
 
     <div *ngIf="togglzWorksContributors">
       <ng-container
-        *ngIf="numberOfContributorsGroupedByOrcid > maxNumberContributorsWorkDetails"
+        *ngIf="
+          numberOfContributorsGroupedByOrcid > maxNumberContributorsWorkDetails
+        "
       >
         <p>
           <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
@@ -168,11 +173,16 @@
         </ng-container>
       </p>
       <ng-container
-        *ngIf="numberOfContributorsGroupedByOrcid > maxNumberContributorsWorkDetails"
+        *ngIf="
+          numberOfContributorsGroupedByOrcid > maxNumberContributorsWorkDetails
+        "
       >
         <p>
           +
-          {{ numberOfContributorsGroupedByOrcid - maxNumberContributorsWorkDetails }}
+          {{
+            numberOfContributorsGroupedByOrcid -
+              maxNumberContributorsWorkDetails
+          }}
           <span i18n="@@works.more">more</span>
         </p>
         <p>----</p>
