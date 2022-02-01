@@ -153,7 +153,7 @@ export interface Contributor {
   email?: Value
   orcid?: Value
   uri: Value
-  creditName?: Value | SourceName
+  creditName?: any
   contributorRole: Value
   rolesAndSequences: any[]
 }
