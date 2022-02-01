@@ -64,7 +64,7 @@ export class UserService {
     private _disco: DiscoService,
     private _userInfo: UserInfoService
   ) {}
-  $userStatusChecked = new Subject()
+  $userStatusChecked = new ReplaySubject()
   private currentlyLoggedIn: boolean
   private loggingStateComesFromTheServer = false
   private $userSessionSubject = new ReplaySubject<UserSession>(1)
