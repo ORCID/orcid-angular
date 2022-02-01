@@ -1,0 +1,25 @@
+<h2 class="orc-font-body col" i18n="@@account.defaults">Security</h2>
+
+<app-settings-panels
+  [(expandedContent)]="settingSecurityPasswordOpen"
+  class="row"
+  [title]="titleAccountPassword"
+>
+  <app-settings-security-password> </app-settings-security-password>
+</app-settings-panels>
+
+<app-settings-panels
+  [(expandedContent)]="settingSecurityTwoFactor"
+  class="row"
+  [title]="titleTwoFactor"
+>
+  <app-settings-security-two-factor-auth></app-settings-security-two-factor-auth>
+</app-settings-panels>
+
+<app-settings-panels
+  [(expandedContent)]="settingSecurityAlternateAccounts"
+  class="row"
+  [title]="titleAlternativeSignin"
+>
+  <app-settings-security-alternate-accounts></app-settings-security-alternate-accounts>
+</app-settings-panels>
