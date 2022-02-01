@@ -12,6 +12,7 @@ import { Contributor, OrgDisambiguated } from 'src/app/types'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { WINDOW } from '../../../cdk/window'
+import { UserInfoService } from '../../../core/user-info/user-info.service'
 
 @Component({
   selector: 'app-work',
@@ -39,6 +40,7 @@ export class WorkComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
+    private _userInfo: UserInfoService,
     private _recordWorksService: RecordWorksService,
     @Inject(WINDOW) private window: Window
   ) {}
@@ -47,7 +49,10 @@ export class WorkComponent implements OnInit {
     this.contributors =
       this.work.contributorsGroupedByOrcid || this.contributors
     this.numberOfContributorsGroupedByOrcid = this.work.numberOfContributorsGroupedByOrcid
-    this.getContributionRole(this.work.contributorsGroupedByOrcid)
+    this._userInfo.getUserInfo().subscribe((config) => {
+      this.id = config.EFFECTIVE_USER_ORCID
+      this.getContributionRole(this.contributors)
+    })
   }
 
   /**
@@ -88,8 +93,9 @@ export class WorkComponent implements OnInit {
   getContributionRole(contributors: Contributor[]) {
     contributors.forEach((c) => {
       if (
-        c?.orcid?.value === this.isPublicRecord ||
-        c?.orcid?.value === this.id
+        (this.isPublicRecord &&
+          c?.contributorOrcid?.path === this.isPublicRecord) ||
+        (this.id && c?.contributorOrcid?.path === this.id)
       ) {
         this.addRole(c)
       }
@@ -97,11 +103,13 @@ export class WorkComponent implements OnInit {
   }
 
   addRole(contributor: Contributor) {
-    if (this.contributionRole) {
-      this.contributionRole =
-        this.contributionRole + ', ' + contributor?.contributorRole?.value
-    } else {
-      this.contributionRole = contributor?.contributorRole?.value
-    }
+    contributor.rolesAndSequences.forEach((roleAndSequence) => {
+      if (this.contributionRole) {
+        this.contributionRole =
+          this.contributionRole + ', ' + roleAndSequence?.contributorRole
+      } else {
+        this.contributionRole = roleAndSequence?.contributorRole
+      }
+    })
   }
 }
