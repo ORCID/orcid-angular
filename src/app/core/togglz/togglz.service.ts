@@ -26,11 +26,6 @@ export class TogglzService {
         .asObservable()
         .pipe(switchMapTo(this.getConfig()))
         .subscribe((value) => {
-          console.log(
-            '_____> SETUP THE MOST RECENT UPDATE ',
-            this.togglzSubject
-          )
-
           this.togglzSubject.next(value)
         })
     }
@@ -39,12 +34,7 @@ export class TogglzService {
   }
 
   getStateOf(togglzFeatureName: string): Observable<boolean> {
-    console.log('CALL TO GET RECENT STATE ')
-
     return this.getTogglz().pipe(
-      tap((data) => {
-        console.log('GET DATA')
-      }),
       map((data) => data.messages[togglzFeatureName] === 'true')
     )
   }
