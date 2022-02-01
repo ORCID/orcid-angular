@@ -103,7 +103,7 @@ export class WorkComponent implements OnInit {
   }
 
   addRole(contributor: Contributor) {
-    contributor.rolesAndSequences.forEach(roleAndSequence => {
+    contributor.rolesAndSequences.forEach((roleAndSequence) => {
       if (this.contributionRole) {
         this.contributionRole =
           this.contributionRole + ', ' + roleAndSequence?.contributorRole
