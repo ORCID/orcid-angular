@@ -44,8 +44,6 @@ export class OrganizationsService {
     switch (type.toUpperCase()) {
       case 'TEST':
         return this.TEST_BASE_URL + value
-      case 'FUNDREF':
-        return value
       case 'GRID':
         return this.GRID_BASE_URL + value
       case 'ISNI':
