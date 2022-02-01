@@ -144,7 +144,9 @@
         <p>----</p>
       </ng-container>
       <p
-        [ngClass]="{ 'record-holder': contributor?.contributorOrcid?.path === id }"
+        [ngClass]="{
+          'record-holder': contributor?.contributorOrcid?.path === id
+        }"
         *ngFor="
           let contributor of contributors
             | slice: 0:maxNumberContributorsWorkDetails;

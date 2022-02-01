@@ -12,16 +12,14 @@ export class ContributorsPipe implements PipeTransform {
         contributor.rolesAndSequences !== undefined &&
         contributor.rolesAndSequences.length > 0
       ) {
-        contributor.rolesAndSequences.forEach(
-          (roleAndSequence, index) => {
-            value = this.addRoleAndSequence(
-              value,
-              roleAndSequence,
-              contributor.rolesAndSequences.length,
-              index
-            )
-          }
-        )
+        contributor.rolesAndSequences.forEach((roleAndSequence, index) => {
+          value = this.addRoleAndSequence(
+            value,
+            roleAndSequence,
+            contributor.rolesAndSequences.length,
+            index
+          )
+        })
       } else {
         if (contributor.contributorRole && contributor.contributorRole.value) {
           value = contributor.contributorRole.value
@@ -80,9 +78,7 @@ export class ContributorsPipe implements PipeTransform {
       return (
         value +
         this.addColon(roleAndSequence.contributorRole) +
-        (length - 1 === index
-          ? sequence
-          : this.addComma(sequence))
+        (length - 1 === index ? sequence : this.addComma(sequence))
       )
     } else if (sequence && !roleAndSequence.contributorRole) {
       return value + sequence
