@@ -154,7 +154,7 @@ export interface Contributor {
   orcid?: Value
   uri: Value
   creditName?: any
-  contributorRole: Value
+  contributorRole: any
   rolesAndSequences: any[]
 }
 
