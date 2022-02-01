@@ -153,7 +153,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         this._router.navigate(['/my-orcid'], {
           queryParams: {
             orcid: this.userInfo.EFFECTIVE_USER_ORCID,
-            justRegistered: '',
+            justRegistered: 'true',
           },
         })
       }
