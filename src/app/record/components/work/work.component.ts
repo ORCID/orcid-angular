@@ -93,8 +93,8 @@ export class WorkComponent implements OnInit {
   getContributionRole(contributors: Contributor[]) {
     contributors.forEach((c) => {
       if (
-        (this.isPublicRecord && c?.orcid?.value === this.isPublicRecord) ||
-        (this.id && c?.orcid?.value === this.id)
+        (this.isPublicRecord && c?.contributorOrcid?.path === this.isPublicRecord) ||
+        (this.id && c?.contributorOrcid?.path === this.id)
       ) {
         this.addRole(c)
       }
