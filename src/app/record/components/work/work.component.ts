@@ -33,9 +33,8 @@ export class WorkComponent implements OnInit {
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 5000
-  contributors: string[] = []
-  numberOfContributors: number
-  contributorsDetails: Contributor[] = []
+  contributors: Contributor[] = []
+  numberOfContributorsGroupedByOrcid: number
   contributionRole: string
 
   constructor(
@@ -45,9 +44,10 @@ export class WorkComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getContributors(this.work.contributors)
-    this.getContributionRole(this.work.contributors)
-    this.getContributorsDetails(this.work.contributors)
+    this.contributors =
+      this.work.contributorsGroupedByOrcid || this.contributors
+    this.numberOfContributorsGroupedByOrcid = this.work.numberOfContributorsGroupedByOrcid
+    this.getContributionRole(this.work.contributorsGroupedByOrcid)
   }
 
   /**
@@ -85,17 +85,6 @@ export class WorkComponent implements OnInit {
     }
   }
 
-  getContributors(contributor: Contributor[]) {
-    contributor.forEach((c) => {
-      if (c?.creditName?.value) {
-        if (!this.contributors.includes(c?.creditName?.value)) {
-          this.contributors.push(c?.creditName?.value)
-        }
-      }
-    })
-    this.numberOfContributors = this.contributors.length
-  }
-
   getContributionRole(contributors: Contributor[]) {
     contributors.forEach((c) => {
       if (
@@ -114,39 +103,5 @@ export class WorkComponent implements OnInit {
     } else {
       this.contributionRole = contributor?.contributorRole?.value
     }
-  }
-
-  getContributorsDetails(contributors: Contributor[]) {
-    contributors.forEach((c) => {
-      if (c?.orcid?.value) {
-        const contributor = this.contributorsDetails.some(
-          (cD) => cD?.orcid?.value === c?.orcid?.value
-        )
-        if (contributor) {
-          this.contributorsDetails.forEach((cD) => {
-            if (cD?.orcid?.value === c?.orcid?.value) {
-              if (c.contributorRole?.value || c.contributorSequence?.value) {
-                cD.contributorRolesAndSequence.push({
-                  role: c.contributorRole?.value,
-                  sequence: c.contributorSequence?.value,
-                })
-              }
-            }
-          })
-        } else {
-          if (c.contributorRole?.value || c.contributorSequence?.value) {
-            c.contributorRolesAndSequence = [
-              {
-                role: c.contributorRole?.value,
-                sequence: c.contributorSequence?.value,
-              },
-            ]
-          }
-          this.contributorsDetails.push(c)
-        }
-      } else {
-        this.contributorsDetails.push(c)
-      }
-    })
   }
 }

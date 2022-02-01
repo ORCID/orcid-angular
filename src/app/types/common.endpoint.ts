@@ -148,12 +148,19 @@ export interface ExternalIdentifierId {
 export interface Contributor {
   errors: any[]
   contributorSequence: Value
+  contributorEmail?: Value
+  contributorOrcid?: ContributorOrcid
   email?: Value
   orcid?: Value
   uri: Value
-  creditName?: Value
+  creditName?: any
   contributorRole: Value
-  contributorRolesAndSequence: any[]
+  rolesAndSequences: any[]
+}
+
+export interface ContributorOrcid {
+  path?: string
+  uri: string
 }
 
 export interface Title {
