@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 import { AccountPasswordEndpoint } from 'src/app/types/account-settings-password'
-import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { environment } from 'src/environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
@@ -21,9 +21,11 @@ export class AccountSecurityPasswordService {
     private _http: HttpClient
   ) {}
 
-  updatePassword(accountPassword: AccountPasswordEndpoint): Observable<void> {
+  updatePassword(
+    accountPassword: AccountPasswordEndpoint
+  ): Observable<AccountPasswordEndpoint> {
     return this._http
-      .post<void>(
+      .post<AccountPasswordEndpoint>(
         environment.API_WEB + `account/change-password.json`,
         accountPassword,
         { headers: this.headers }

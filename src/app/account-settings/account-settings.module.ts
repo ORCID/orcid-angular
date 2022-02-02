@@ -26,10 +26,10 @@ import { SettingsPanelsDataComponent } from './panels/settings-panels-data/setti
 import { PanelExpandButtonsComponent } from './panels/settings-panels-expand-buttons/settings-panels-expand-buttons.component'
 import { SettingsPanelsComponent } from './panels/settings-panels/settings-panels.component'
 import { SettingsDefaultsVisibilityComponent } from './components/settings-defaults-visibility/settings-defaults-visibility.component'
-import { MatRadioModule } from '@angular/material/radio';
-import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
-import { SettingsSecurityPasswordComponent } from './components/settings-security-password/settings-security-password.component';
-import { SettingsSecurityAlternateAccountsComponent } from './components/settings-security-alternate-accounts/settings-security-alternate-accounts.component';
+import { MatRadioModule } from '@angular/material/radio'
+import { SettingsSecurityComponent } from './components/settings-security/settings-security.component'
+import { SettingsSecurityPasswordComponent } from './components/settings-security-password/settings-security-password.component'
+import { SettingsSecurityAlternateAccountsComponent } from './components/settings-security-alternate-accounts/settings-security-alternate-accounts.component'
 import { SettingsSecurityTwoFactorAuthComponent } from './components/settings-security-two-factor-auth/settings-security-two-factor-auth.component'
 
 @NgModule({

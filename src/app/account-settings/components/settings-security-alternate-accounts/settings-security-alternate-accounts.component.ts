@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-settings-security-alternate-accounts',
   templateUrl: './settings-security-alternate-accounts.component.html',
-  styleUrls: ['./settings-security-alternate-accounts.component.scss']
+  styleUrls: ['./settings-security-alternate-accounts.component.scss'],
 })
 export class SettingsSecurityAlternateAccountsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

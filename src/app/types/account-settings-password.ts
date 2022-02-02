@@ -1,5 +1,6 @@
 export interface AccountPasswordEndpoint {
-  oldPassword: string
+  errors: string[]
   password: string
   retypedPassword: string
+  oldPassword: string
 }

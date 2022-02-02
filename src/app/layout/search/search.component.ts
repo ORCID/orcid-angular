@@ -7,7 +7,6 @@ import { PlatformInfoService, PlatformInfo } from 'src/app/cdk/platform-info'
 import { SearchService } from 'src/app/core/search/search.service'
 import { Location } from '@angular/common'
 import { ApplicationRoutes } from '../../constants'
-import { tap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-search',
