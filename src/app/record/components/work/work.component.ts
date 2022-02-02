@@ -12,6 +12,7 @@ import { Contributor, OrgDisambiguated } from 'src/app/types'
 import { Work } from 'src/app/types/record-works.endpoint'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { WINDOW } from '../../../cdk/window'
+import { UserInfoService } from '../../../core/user-info/user-info.service'
 
 @Component({
   selector: 'app-work',
@@ -33,21 +34,25 @@ export class WorkComponent implements OnInit {
   maxNumberContributors = 10
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 5000
-  contributors: string[] = []
-  numberOfContributors: number
-  contributorsDetails: Contributor[] = []
+  contributors: Contributor[] = []
+  numberOfContributorsGroupedByOrcid: number
   contributionRole: string
 
   constructor(
     private elementRef: ElementRef,
+    private _userInfo: UserInfoService,
     private _recordWorksService: RecordWorksService,
     @Inject(WINDOW) private window: Window
   ) {}
 
   ngOnInit(): void {
-    this.getContributors(this.work.contributors)
-    this.getContributionRole(this.work.contributors)
-    this.getContributorsDetails(this.work.contributors)
+    this.contributors =
+      this.work.contributorsGroupedByOrcid || this.contributors
+    this.numberOfContributorsGroupedByOrcid = this.work.numberOfContributorsGroupedByOrcid
+    this._userInfo.getUserInfo().subscribe((config) => {
+      this.id = config.EFFECTIVE_USER_ORCID
+      this.getContributionRole(this.contributors)
+    })
   }
 
   /**
@@ -85,22 +90,12 @@ export class WorkComponent implements OnInit {
     }
   }
 
-  getContributors(contributor: Contributor[]) {
-    contributor.forEach((c) => {
-      if (c?.creditName?.value) {
-        if (!this.contributors.includes(c?.creditName?.value)) {
-          this.contributors.push(c?.creditName?.value)
-        }
-      }
-    })
-    this.numberOfContributors = this.contributors.length
-  }
-
   getContributionRole(contributors: Contributor[]) {
     contributors.forEach((c) => {
       if (
-        c?.orcid?.value === this.isPublicRecord ||
-        c?.orcid?.value === this.id
+        (this.isPublicRecord &&
+          c?.contributorOrcid?.path === this.isPublicRecord) ||
+        (this.id && c?.contributorOrcid?.path === this.id)
       ) {
         this.addRole(c)
       }
@@ -108,44 +103,12 @@ export class WorkComponent implements OnInit {
   }
 
   addRole(contributor: Contributor) {
-    if (this.contributionRole) {
-      this.contributionRole =
-        this.contributionRole + ', ' + contributor?.contributorRole?.value
-    } else {
-      this.contributionRole = contributor?.contributorRole?.value
-    }
-  }
-
-  getContributorsDetails(contributors: Contributor[]) {
-    contributors.forEach((c) => {
-      if (c?.orcid?.value) {
-        const contributor = this.contributorsDetails.some(
-          (cD) => cD?.orcid?.value === c?.orcid?.value
-        )
-        if (contributor) {
-          this.contributorsDetails.forEach((cD) => {
-            if (cD?.orcid?.value === c?.orcid?.value) {
-              if (c.contributorRole?.value || c.contributorSequence?.value) {
-                cD.contributorRolesAndSequence.push({
-                  role: c.contributorRole?.value,
-                  sequence: c.contributorSequence?.value,
-                })
-              }
-            }
-          })
-        } else {
-          if (c.contributorRole?.value || c.contributorSequence?.value) {
-            c.contributorRolesAndSequence = [
-              {
-                role: c.contributorRole?.value,
-                sequence: c.contributorSequence?.value,
-              },
-            ]
-          }
-          this.contributorsDetails.push(c)
-        }
+    contributor.rolesAndSequences.forEach((roleAndSequence) => {
+      if (this.contributionRole) {
+        this.contributionRole =
+          this.contributionRole + ', ' + roleAndSequence?.contributorRole
       } else {
-        this.contributorsDetails.push(c)
+        this.contributionRole = roleAndSequence?.contributorRole
       }
     })
   }

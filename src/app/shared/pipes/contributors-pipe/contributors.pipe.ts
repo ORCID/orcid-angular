@@ -9,19 +9,17 @@ export class ContributorsPipe implements PipeTransform {
     let value = ''
     if (contributor) {
       if (
-        contributor.contributorRolesAndSequence !== undefined &&
-        contributor.contributorRolesAndSequence.length > 0
+        contributor.rolesAndSequences !== undefined &&
+        contributor.rolesAndSequences.length > 0
       ) {
-        contributor.contributorRolesAndSequence.forEach(
-          (roleAndSequence, index) => {
-            value = this.addRoleAndSequence(
-              value,
-              roleAndSequence,
-              contributor.contributorRolesAndSequence.length,
-              index
-            )
-          }
-        )
+        contributor.rolesAndSequences.forEach((roleAndSequence, index) => {
+          value = this.addRoleAndSequence(
+            value,
+            roleAndSequence,
+            contributor.rolesAndSequences.length,
+            index
+          )
+        })
       } else {
         if (contributor.contributorRole && contributor.contributorRole.value) {
           value = contributor.contributorRole.value
@@ -39,9 +37,13 @@ export class ContributorsPipe implements PipeTransform {
         value = this.addComma(value) + contributor.email.value
       }
 
+      if (contributor.contributorEmail && contributor.contributorEmail.value) {
+        value = this.addComma(value) + contributor.contributorEmail.value
+      }
+
       if (value.length > 0) {
         value = '(' + value
-        if (contributor?.orcid) {
+        if (contributor?.orcid || contributor?.contributorOrcid?.path) {
           value = value + ','
         } else {
           value = value + ')'
@@ -67,22 +69,21 @@ export class ContributorsPipe implements PipeTransform {
 
   addRoleAndSequence(
     value: string,
-    roleAndSequence: { role: string; sequence: string },
+    roleAndSequence: { contributorRole: string; contributorSequence: string },
     length: number,
     index: number
   ): string {
-    if (roleAndSequence.role && roleAndSequence.sequence) {
+    const sequence = roleAndSequence?.contributorSequence?.toLowerCase()
+    if (roleAndSequence.contributorRole && sequence) {
       return (
         value +
-        this.addColon(roleAndSequence.role) +
-        (length - 1 === index
-          ? roleAndSequence.sequence
-          : this.addComma(roleAndSequence.sequence))
+        this.addColon(roleAndSequence.contributorRole) +
+        (length - 1 === index ? sequence : this.addComma(sequence))
       )
-    } else if (roleAndSequence.sequence && !roleAndSequence.role) {
-      return value + roleAndSequence.sequence
-    } else if (roleAndSequence.role && !roleAndSequence.sequence) {
-      return value + roleAndSequence.role
+    } else if (sequence && !roleAndSequence.contributorRole) {
+      return value + sequence
+    } else if (roleAndSequence.contributorRole && !sequence) {
+      return value + roleAndSequence.contributorRole
     }
   }
 }
