@@ -49,10 +49,14 @@ export class WorkComponent implements OnInit {
     this.contributors =
       this.work.contributorsGroupedByOrcid || this.contributors
     this.numberOfContributorsGroupedByOrcid = this.work.numberOfContributorsGroupedByOrcid
-    this._userInfo.getUserInfo().subscribe((config) => {
-      this.id = config.EFFECTIVE_USER_ORCID
+    if (this.isPublicRecord) {
       this.getContributionRole(this.contributors)
-    })
+    } else {
+      this._userInfo.getUserInfo().subscribe((config) => {
+        this.id = config.EFFECTIVE_USER_ORCID
+        this.getContributionRole(this.contributors)
+      })
+    }
   }
 
   /**
