@@ -33,14 +33,6 @@ export class ContributorsPipe implements PipeTransform {
         }
       }
 
-      if (contributor.email && contributor.email.value) {
-        value = this.addComma(value) + contributor.email.value
-      }
-
-      if (contributor.contributorEmail && contributor.contributorEmail.value) {
-        value = this.addComma(value) + contributor.contributorEmail.value
-      }
-
       if (value.length > 0) {
         value = '(' + value
         if (contributor?.orcid || contributor?.contributorOrcid?.path) {
