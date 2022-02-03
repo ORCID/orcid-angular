@@ -30,7 +30,9 @@
           let last = last
         "
       >
-        {{ contributor.creditName.content + (!last ? '; ' : '') }}
+        <ng-container *ngIf="contributor.creditName?.content">
+          {{ contributor.creditName.content + (!last ? '; ' : '') }}
+        </ng-container>
       </ng-container>
       <ng-container
         *ngIf="numberOfContributorsGroupedByOrcid > maxNumberContributors"
