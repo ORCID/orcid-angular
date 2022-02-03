@@ -30,12 +30,17 @@
           let last = last
         "
       >
-        <ng-container *ngIf="contributor?.creditName && contributor?.creditName?.content !== ''">
+        <ng-container
+          *ngIf="
+            contributor?.creditName && contributor?.creditName?.content !== ''
+          "
+        >
           {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
         </ng-container>
         <ng-container
           *ngIf="
-            (!contributor?.creditName || contributor?.creditName?.content === '' ) &&
+            (!contributor?.creditName ||
+              contributor?.creditName?.content === '') &&
             contributor?.contributorOrcid?.uri
           "
         >
