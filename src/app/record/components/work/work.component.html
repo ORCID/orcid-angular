@@ -30,8 +30,24 @@
           let last = last
         "
       >
-        <ng-container *ngIf="contributor.creditName?.content">
+        <ng-container *ngIf="contributor.creditName?.content !== ''">
           {{ contributor.creditName.content + (!last ? '; ' : '') }}
+        </ng-container>
+        <ng-container
+          *ngIf="
+            contributor.creditName?.content === '' &&
+            contributor.contributorOrcid?.uri
+          "
+        >
+          <ng-container *ngIf="contributor?.contributorOrcid?.uri">
+            <a
+              class="underline"
+              target="_blank"
+              rel="noreferrer noopener"
+              href="{{ contributor?.contributorOrcid?.uri }}"
+            >{{ contributor?.contributorOrcid?.path }}</a
+            >{{(!last ? '; ' : '')}}
+          </ng-container>
         </ng-container>
       </ng-container>
       <ng-container
@@ -156,10 +172,7 @@
         "
       >
         <ng-container
-          *ngIf="
-            contributor?.creditName?.content &&
-            index < maxNumberContributorsWorkDetails
-          "
+          *ngIf="index < maxNumberContributorsWorkDetails"
         >
           <ng-container *ngIf="contributor?.creditName?.content">{{
             contributor.creditName.content
