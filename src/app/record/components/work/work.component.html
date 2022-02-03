@@ -30,13 +30,13 @@
           let last = last
         "
       >
-        <ng-container *ngIf="contributor.creditName?.content !== ''">
-          {{ contributor.creditName.content + (!last ? '; ' : '') }}
+        <ng-container *ngIf="contributor?.creditName && contributor?.creditName?.content !== ''">
+          {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
         </ng-container>
         <ng-container
           *ngIf="
-            contributor.creditName?.content === '' &&
-            contributor.contributorOrcid?.uri
+            (!contributor?.creditName || contributor?.creditName?.content === '' ) &&
+            contributor?.contributorOrcid?.uri
           "
         >
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
@@ -175,7 +175,7 @@
           *ngIf="index < maxNumberContributorsWorkDetails"
         >
           <ng-container *ngIf="contributor?.creditName?.content">{{
-            contributor.creditName.content
+            contributor?.creditName?.content
           }}</ng-container>
           {{ contributor | contributorsPipe }}
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
