@@ -4,7 +4,7 @@ This project uses [Puppeteer](https://github.com/puppeteer/puppeteer) and [Light
 
 #### How to run
 
-First make sure to have npm and yarn install
+First make sure to have npm and yarn
 
 Clone and install orcid-angular
 
