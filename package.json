@@ -66,7 +66,6 @@
     "@angular/platform-browser-dynamic": "^11.2.5",
     "@angular/router": "^11.2.5",
     "@angular/service-worker": "^11.2.5",
-    "@material-extended/mde": "^3.0.0",
     "@orcid/bibtex-parse-js": "0.0.25",
     "@types/gtag.js": "^0.0.3",
     "browserslist": "^4.16.5",

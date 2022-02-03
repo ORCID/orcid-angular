@@ -1500,11 +1500,6 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@material-extended/mde@^3.0.0":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@material-extended/mde/-/mde-3.0.3.tgz#aab50576e71c0b37945d7e583277774986bd51dc"
-  integrity sha512-sX/ND9JcYbgScQqH7PtfnCE1B2uZABk5XS9J/h5NY1Fqz3DuQCFnIQH/XMgP3J1iqncmCoImmOiTf/7NufsvGw==
-
 "@ngtools/webpack@11.2.4":
   version "11.2.4"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-11.2.4.tgz#3f90ebced62691aa889b442042191c20a8e7869f"
