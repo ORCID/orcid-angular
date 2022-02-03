@@ -9,6 +9,7 @@ export const environment = {
   BASE_URL: 'https://orcid.org/',
   BLOG_NEWS: 'https://orcid.org/about/news',
   INFO_SITE: 'http://orcidaboutdev.wpengine.com/',
+  GOOGLE_ANALYTICS_NAVIGATION_AND_PERFORMANCE: false,
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',

@@ -8,6 +8,7 @@ export const environment = {
   API_WEB: '//localhost/',
   BASE_URL: '//localhost/',
   BLOG_NEWS: 'https://localhost/about/news',
+  GOOGLE_ANALYTICS_NAVIGATION_AND_PERFORMANCE: false,
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',

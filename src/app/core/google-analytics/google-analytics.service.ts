@@ -16,18 +16,22 @@ export class GoogleAnalyticsService {
 
   reportPageView(url: string) {
     if (environment.debugger) {
-      console.debug(`GA - Navigation ${url}`)
+      console.debug(
+        `GA - Navigation ${url} , ga_reported ${environment.GOOGLE_ANALYTICS_NAVIGATION_AND_PERFORMANCE}`
+      )
     }
-    this.gtag('config', environment.GOOGLE_ANALYTICS, {
-      cookie_flags: 'SameSite=None;Secure',
-      page_path: url,
-      page_location: window.location.href,
-      anonymize_ip: true,
-      sample_rate: '100',
-      site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
-        ? '100'
-        : '1',
-    })
+    if (environment.GOOGLE_ANALYTICS_NAVIGATION_AND_PERFORMANCE) {
+      this.gtag('config', environment.GOOGLE_ANALYTICS, {
+        cookie_flags: 'SameSite=None;Secure',
+        page_path: url,
+        page_location: window.location.href,
+        anonymize_ip: true,
+        sample_rate: '100',
+        site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
+          ? '100'
+          : '1',
+      })
+    }
   }
 
   reportNavigationStart(url: string) {
@@ -38,14 +42,18 @@ export class GoogleAnalyticsService {
     const duration = this.finishPerformanceMeasurement(url)
     if (duration) {
       if (environment.debugger) {
-        console.debug(`GA - Took ${duration} to load ${url}`)
+        console.debug(
+          `GA - Took ${duration} to load ${url}, ga_reported: ${environment.GOOGLE_ANALYTICS_NAVIGATION_AND_PERFORMANCE}`
+        )
       }
-      this.gtag('event', 'timing_complete', {
-        name: this.removeUrlParameters(url),
-        value: Math.round(duration),
-        event_category: 'angular_navigation',
-        page_location: url,
-      })
+      if (environment.GOOGLE_ANALYTICS_NAVIGATION_AND_PERFORMANCE) {
+        this.gtag('event', 'timing_complete', {
+          name: this.removeUrlParameters(url),
+          value: Math.round(duration),
+          event_category: 'angular_navigation',
+          page_location: url,
+        })
+      }
     }
   }
 

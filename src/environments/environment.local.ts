@@ -7,6 +7,7 @@ export const environment = {
   API_WEB: '//dev.orcid.org/',
   BASE_URL: '//dev.orcid.org/',
   INFO_SITE: 'https://info.orcid.org/',
+  GOOGLE_ANALYTICS_NAVIGATION_AND_PERFORMANCE: false,
   GOOGLE_ANALYTICS_TESTING_MODE: true,
   GOOGLE_ANALYTICS: 'UA-0000000-00',
   GOOGLE_RECAPTCHA: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
