@@ -1,7 +1,7 @@
 import { Location } from '@angular/common'
 import { Component, Inject, Input, OnInit } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
-import { filter, switchMap, take } from 'rxjs/operators'
+import { filter } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
@@ -274,14 +274,5 @@ export class HeaderComponent implements OnInit {
 
   navigateTo(val) {
     ;(this.window as any).outOfRouterNavigation(val)
-  }
-
-  signOut() {
-    this._signingService
-      .singOut()
-      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
-      .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin])
-      })
   }
 }
