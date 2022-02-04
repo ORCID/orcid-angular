@@ -369,13 +369,6 @@
             "scripts": [],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "**/*.json", "src/app/profile/**"]
-          }
         }
       }
     },
@@ -393,13 +386,6 @@
             "production": {
               "devServerTarget": "ng-orcid:serve:production"
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
