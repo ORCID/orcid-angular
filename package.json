@@ -2,7 +2,7 @@
   "name": "ng-orcid",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve --disable-host-check ---aot=false",
+    "start": "ng serve --disable-host-check",
     "start:aot": "ng serve --configuration=local,en --disable-host-check",
     "start:fr": "ng serve --configuration=local,fr --disable-host-check",
     "start:ar": "ng serve --configuration=local,ar --disable-host-check",
