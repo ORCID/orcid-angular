@@ -1,0 +1,28 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header i18n="@@shared.emails"
+    >Delete alternate account</app-modal-header
+  >
+  <div>
+    <ng-container> After your</ng-container> {{ data.id.providerid }} ({{
+      data.email
+    }})
+    <ng-container>
+      account is unlinked, you will no longer be able to use it to access your
+      ORCID record.</ng-container
+    >
+  </div>
+  <app-modal-footer>
+    <button mat-raised-button color="warn" (click)="ok()">
+      Unlink account
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="cancel()"
+      i18n="@@shared.cancel"
+      id="cancel-emails-button"
+    >
+      Cancel
+    </button>
+  </app-modal-footer></app-modal
+>

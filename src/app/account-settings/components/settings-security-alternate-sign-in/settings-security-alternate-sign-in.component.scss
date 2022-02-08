@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

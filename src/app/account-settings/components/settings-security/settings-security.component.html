@@ -27,5 +27,7 @@
   class="row"
   [title]="titleAlternativeSignin"
 >
-  <app-settings-security-alternate-accounts></app-settings-security-alternate-accounts>
+  <app-settings-security-alternate-sign-in
+    *ngIf="settingSecurityAlternateAccounts"
+  ></app-settings-security-alternate-sign-in>
 </app-settings-panels>
