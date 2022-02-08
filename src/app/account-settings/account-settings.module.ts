@@ -26,7 +26,6 @@ import { SettingsDefaultsEmailFrequencyComponent } from './components/settings-d
 import { SettingsDefaultsLanguageComponent } from './components/settings-defaults-language/settings-defaults-language.component'
 import { SettingsDefaultsVisibilityComponent } from './components/settings-defaults-visibility/settings-defaults-visibility.component'
 import { SettingsDefaultsComponent } from './components/settings-defaults/settings-defaults.component'
-import { SettingsSecurityAlternateAccountsComponent } from './components/settings-security-alternate-accounts/settings-security-alternate-accounts.component'
 import { SettingsSecurityAlternateSignInComponent } from './components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component'
 import { SettingsSecurityPasswordComponent } from './components/settings-security-password/settings-security-password.component'
 import { SettingsSecurityTwoFactorAuthComponent } from './components/settings-security-two-factor-auth/settings-security-two-factor-auth.component'
@@ -53,7 +52,6 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     SettingsSecurityTwoFactorAuthComponent,
     SettingsSecurityAlternateSignInComponent,
     DialogSecurityAlternateAccountDeleteComponent,
-    SettingsSecurityAlternateAccountsComponent,
     SettingsSecurityTwoFactorAuthComponent,
   ],
   imports: [
