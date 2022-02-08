@@ -21,7 +21,7 @@ export interface SocialAccount {
 }
 export interface SocialAccountId {
   userid: string
-  providerid: string
+  providerid: ProviderIds
   provideruserid: string
 }
 
@@ -30,3 +30,9 @@ export interface SocialAccountDeleteResponse {
   password?: null
   idToManage: SocialAccountId
 }
+
+enum ProviderIds {
+  facebook = 'facebook',
+  google = 'google',
+}
+
