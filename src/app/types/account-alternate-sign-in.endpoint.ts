@@ -35,4 +35,3 @@ enum ProviderIds {
   facebook = 'facebook',
   google = 'google',
 }
-

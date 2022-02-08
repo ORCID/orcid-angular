@@ -1,15 +1,15 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+import { catchError, retry } from 'rxjs/operators'
 import {
   SocialAccount,
   SocialAccountDeleteResponse,
   SocialAccountId,
-} from 'src/app/types/account-alternate-sign-in.endpoint';
-import { environment } from 'src/environments/environment';
+} from 'src/app/types/account-alternate-sign-in.endpoint'
+import { environment } from 'src/environments/environment'
 
-import { ErrorHandlerService } from '../error-handler/error-handler.service';
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
