@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core'
-import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { Config } from 'src/app/types/togglz.endpoint'
+import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { switchMapTo, map } from 'rxjs/operators'
+import { map, switchMapTo } from 'rxjs/operators'
+import { Config } from 'src/app/types/togglz.endpoint'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
+import { environment } from 'src/environments/environment'
+
 import { UserService } from '..'
 
 @Injectable({
