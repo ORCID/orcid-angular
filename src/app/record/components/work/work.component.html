@@ -21,12 +21,15 @@
     ></app-display-external-ids>
     <div
       class="general-data"
-      *ngIf="togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0"
+      *ngIf="
+        togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0
+      "
     >
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
       <ng-container
         *ngFor="
-          let contributor of work?.contributorsGroupedByOrcid | slice: 0:maxNumberContributors;
+          let contributor of work?.contributorsGroupedByOrcid
+            | slice: 0:maxNumberContributors;
           let last = last
         "
       >
@@ -147,7 +150,12 @@
   </app-display-attribute>
 
   <!--  CONTRIBUTORS-->
-  <app-display-attribute *ngIf="work?.contributorsGroupedByOrcid?.length > 0 || work?.contributors?.length > 0">
+  <app-display-attribute
+    *ngIf="
+      work?.contributorsGroupedByOrcid?.length > 0 ||
+      work?.contributors?.length > 0
+    "
+  >
     <h3 class="orc-font-body-small" i18n="@@works.contributors">
       Contributors
     </h3>
