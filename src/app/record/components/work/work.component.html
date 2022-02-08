@@ -21,16 +21,42 @@
     ></app-display-external-ids>
     <div
       class="general-data"
-      *ngIf="togglzWorksContributors && contributors.length > 0"
+      *ngIf="
+        togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0
+      "
     >
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
       <ng-container
         *ngFor="
-          let contributor of contributors | slice: 0:maxNumberContributors;
+          let contributor of work?.contributorsGroupedByOrcid
+            | slice: 0:maxNumberContributors;
           let last = last
         "
       >
-        {{ contributor.creditName.content + (!last ? '; ' : '') }}
+        <ng-container
+          *ngIf="
+            contributor?.creditName && contributor?.creditName?.content !== ''
+          "
+        >
+          {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
+        </ng-container>
+        <ng-container
+          *ngIf="
+            (!contributor?.creditName ||
+              contributor?.creditName?.content === '') &&
+            contributor?.contributorOrcid?.uri
+          "
+        >
+          <ng-container *ngIf="contributor?.contributorOrcid?.uri">
+            <a
+              class="underline"
+              target="_blank"
+              rel="noreferrer noopener"
+              href="{{ contributor?.contributorOrcid?.uri }}"
+              >{{ contributor?.contributorOrcid?.path }}</a
+            >{{ !last ? '; ' : '' }}
+          </ng-container>
+        </ng-container>
       </ng-container>
       <ng-container
         *ngIf="numberOfContributorsGroupedByOrcid > maxNumberContributors"
@@ -124,7 +150,12 @@
   </app-display-attribute>
 
   <!--  CONTRIBUTORS-->
-  <app-display-attribute *ngIf="contributors?.length > 0">
+  <app-display-attribute
+    *ngIf="
+      work?.contributorsGroupedByOrcid?.length > 0 ||
+      work?.contributors?.length > 0
+    "
+  >
     <h3 class="orc-font-body-small" i18n="@@works.contributors">
       Contributors
     </h3>
@@ -153,14 +184,9 @@
           let index = index
         "
       >
-        <ng-container
-          *ngIf="
-            contributor?.creditName?.content &&
-            index < maxNumberContributorsWorkDetails
-          "
-        >
+        <ng-container *ngIf="index < maxNumberContributorsWorkDetails">
           <ng-container *ngIf="contributor?.creditName?.content">{{
-            contributor.creditName.content
+            contributor?.creditName?.content
           }}</ng-container>
           {{ contributor | contributorsPipe }}
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
@@ -292,7 +318,7 @@
           </a>
         </ng-container>
         <ng-container
-          *ngIf="work.citation.citation.value.length < maxBibtexCharacters"
+          *ngIf="work?.citation?.citation?.value?.length < maxBibtexCharacters"
         >
           {{ work.citation.citation.value }}
         </ng-container>

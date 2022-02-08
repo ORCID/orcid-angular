@@ -1,15 +1,11 @@
-# You can see what browsers were selected by your queries by running:	
-#   npx browserslist	
+# You can see what browsers were selected by your queries by running:
+#   npx browserslist
 
-last 2 Chrome versions, 	
-last 2 Firefox versions, 	
-last 2 Edge versions, 	
-last 2 Opera versions, 	
-last 3 Safari versions, 	
-last 3 IOS versions, 	
-last 1 ChromeAndroid versions,	
-last 1 FirefoxAndroid versions,	
-last 2 Opera versions,	
-IE 11,	
-Firefox ESR, 	
-not dead
+and_ff >= 87, 
+and_chr >= 80
+chrome >= 80, 
+edge >= 89, 
+firefox >= 78, 
+ios_saf >= 13.4, 
+opera >= 74, 
+safari >= 13.1, 

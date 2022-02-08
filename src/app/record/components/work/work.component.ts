@@ -47,12 +47,18 @@ export class WorkComponent implements OnInit {
 
   ngOnInit(): void {
     this.contributors =
-      this.work.contributorsGroupedByOrcid || this.contributors
+      this.work.contributorsGroupedByOrcid || this.work.contributors
     this.numberOfContributorsGroupedByOrcid = this.work.numberOfContributorsGroupedByOrcid
-    this._userInfo.getUserInfo().subscribe((config) => {
-      this.id = config.EFFECTIVE_USER_ORCID
-      this.getContributionRole(this.contributors)
-    })
+    if (this.contributors) {
+      if (this.isPublicRecord) {
+        this.getContributionRole(this.contributors)
+      } else {
+        this._userInfo.getUserInfo().subscribe((config) => {
+          this.id = config.EFFECTIVE_USER_ORCID
+          this.getContributionRole(this.contributors)
+        })
+      }
+    }
   }
 
   /**
