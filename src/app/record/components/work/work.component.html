@@ -22,13 +22,13 @@
     <div
       class="general-data"
       *ngIf="
-        togglzWorksContributors && work?.contributorsGroupedByOrcid?.length > 0
+        togglzWorksContributors && contributorsGroupedByOrcid?.length > 0
       "
     >
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
       <ng-container
         *ngFor="
-          let contributor of work?.contributorsGroupedByOrcid
+          let contributor of contributorsGroupedByOrcid
             | slice: 0:maxNumberContributors;
           let last = last
         "
@@ -179,7 +179,7 @@
           'record-holder': contributor?.contributorOrcid?.path === id
         }"
         *ngFor="
-          let contributor of contributors
+          let contributor of contributorsGroupedByOrcid
             | slice: 0:maxNumberContributorsWorkDetails;
           let index = index
         "
