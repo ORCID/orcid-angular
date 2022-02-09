@@ -6,15 +6,15 @@ export interface SocialAccount {
   displayname: string
   email: string
   expiretime: number
-  imageurl?: null
+  imageurl?: string
   lastLogin: number
   orcid: string
-  profileurl?: null
+  profileurl?: string
   rank: number
-  refreshtoken?: null
-  secret?: null
-  idType?: null
-  headersJson?: null
+  refreshtoken?: string
+  secret?: string
+  idType?: string
+  headersJson?: string
   connectionSatus: string
   accountIdForDisplay: string
   linked: boolean
@@ -26,8 +26,8 @@ export interface SocialAccountId {
 }
 
 export interface SocialAccountDeleteResponse {
-  errors?: null[] | null
-  password?: null
+  errors?: any[]
+  password?: string
   idToManage: SocialAccountId
 }
 

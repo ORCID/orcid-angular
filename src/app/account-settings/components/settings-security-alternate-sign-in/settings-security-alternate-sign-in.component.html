@@ -6,6 +6,7 @@
 
   <a
     rel="noopener noreferrer"
+    target="_blank"
     href="https://www.figma.com/exit?url=https%3A%2F%2Fsupport.orcid.org%2Fhc%2Fen-us%2Farticles%2F360006894354-Sign-into-ORCID-using-your-social-media-account"
     i18n="@@account.learnMoreAboutUsing"
   >
@@ -54,8 +55,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <div *ngIf="!accounts.length" class="emptyAccounts">
-    <mat-divider class="emptyAccounts"></mat-divider>
+  <div *ngIf="!accounts.length" class="topBottomMargin">
+    <mat-divider class="topBottomMargin"></mat-divider>
     <div i18n="@@account.youHaventAdded">
       You haven't added any alternate sign in accounts yet.
     </div>
