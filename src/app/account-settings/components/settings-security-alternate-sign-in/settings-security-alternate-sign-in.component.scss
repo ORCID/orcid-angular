@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.topBottomMargin {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
