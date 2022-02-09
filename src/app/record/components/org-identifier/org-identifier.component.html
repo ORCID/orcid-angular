@@ -66,16 +66,33 @@
       class="padding-level-3"
     >
       {{ org.identifierType }}:
-      <ng-container *ngIf="org.preferred && !isUrl(org.preferred)"> 
-        <ng-container *ngIf="getLink(org.identifierType, org.preferred) !== ''; else plainUrl">
-          <a class="underline" target="_blank" rel="noopener noreferrer" href="{{ getLink(org.identifierType, org.preferred) }}">
+      <ng-container *ngIf="org.preferred && !isUrl(org.preferred)">
+        <ng-container
+          *ngIf="
+            getLink(org.identifierType, org.preferred) !== '';
+            else plainUrl
+          "
+        >
+          <a
+            class="underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="{{ getLink(org.identifierType, org.preferred) }}"
+          >
             {{ org.preferred }}
           </a>
         </ng-container>
         <ng-template #plainUrl>
-          <a *ngIf="isUrl(org.preferred)" class="underline" target="_blank" rel="noopener noreferrer" href="{{ org.preferred }}">
-            {{ org.preferred}}
-          </a></ng-template>
+          <a
+            *ngIf="isUrl(org.preferred)"
+            class="underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="{{ org.preferred }}"
+          >
+            {{ org.preferred }}
+          </a></ng-template
+        >
       </ng-container>
       <ng-container *ngIf="org.preferred && isUrl(org.preferred)">
         <a
