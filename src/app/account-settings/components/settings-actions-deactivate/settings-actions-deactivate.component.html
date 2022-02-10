@@ -5,56 +5,64 @@
   </p>
 
   <label class="row">
-    <strong i18n="@@account.itemsAddedOrEdited">
+    <strong i18n="@@account.whatHappens">
       What happens when I deactivate my account?
     </strong>
   </label>
 
-  <p>
+  <p i18n="@@account.onceYouAccount">
     Once your account is deactivated your ORCID iD and record will be disabled.
     All data, apart from the primary email address, is deleted. The email
     address is cryptographically hashed and securely stored in a private data
     file.
   </p>
 
-  <p>
+  <p i18n="@@account.youWillNoLonger">
     You will no longer be able to use your iD to sign in or access other
     services. Your public record remains accessible but will only contain the iD
     and a ‘Deactivated record’ message.
   </p>
   <p>
-    <a> Learn more about deactivating an ORCID account </a>
+    <a i18n="@@account.learMoreAboutDeactivating">
+      Learn more about deactivating an ORCID account
+    </a>
   </p>
   <label class="row">
-    <strong i18n="@@account.itemsAddedOrEdited">
+    <strong i18n="@@account.deacctivateOrRemove">
       Deactivating or removing?
     </strong>
   </label>
 
   <p>
-    If you have accidentally created multiple ORCID accounts you can always
-    remove the duplicates instead of deactivating them.
+    <ng-container i18n="@@account.ifYouHaveAccidentally">
+      If you have accidentally created multiple ORCID accounts you can always
+      remove the duplicates instead of deactivating them.</ng-container
+    >
 
-    <a>Account settings > Remove duplicate record </a>
+    <a i18n="@@account.accountSettings"
+      >Account settings > Remove duplicate record
+    </a>
   </p>
   <p>
-    <a>Learn more about removing duplicate records</a>
+    <a i18n="@@account.learMoreAbout"
+      >Learn more about removing duplicate records</a
+    >
   </p>
   <label class="row">
-    <strong i18n="@@account.itemsAddedOrEdited">
+    <strong i18n="@@account.readtyToDeactivate">
       Ready to deactivate your account?
     </strong>
   </label>
   <ul>
-    <li>
+    <li i18n="@@account.deactivate1">
       1. Start the deactivation process by clicking on the "Deactivate ORCID
       account" button below
     </li>
-    <li>
+    <li i18n="@@account.deactivate2">
       2. ORCID will send a deactivation email to the primary email address
       associated with this account
     </li>
-    <li>
+    <li i18n="@@account.deactivate3">
       3. Click the confirmation link provided in the email to deactivate your
       ORCID account
     </li>
@@ -65,7 +73,7 @@
       (click)="deactivateOrcidAccount()"
       mat-raised-button
       color="warn"
-      i18n="@@account."
+      i18n="@@account.deactivateOrcidAcc"
       id="download"
     >
       Deactivate ORCID account
@@ -82,8 +90,10 @@
     <div>
       <mat-icon class="large-material-icon">info</mat-icon>
     </div>
-    <div class="col l11 m6 s3" i18n="@@account.settingNotificationsAlert">
-      An account deactivation email has been sent to {{ deactivatedEmail }}
+    <div class="col l11 m6 s3">
+      <ng-container i18n="@@account.andEmailDeactivateWasSend">
+        An account deactivation email has been sent to </ng-container
+      >{{ deactivatedEmail }}
     </div>
   </div>
 </app-settings-panels-data>
