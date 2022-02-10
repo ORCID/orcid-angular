@@ -31,6 +31,8 @@ import { SettingsSecurityComponent } from './components/settings-security/settin
 import { SettingsSecurityPasswordComponent } from './components/settings-security-password/settings-security-password.component'
 import { SettingsSecurityAlternateAccountsComponent } from './components/settings-security-alternate-accounts/settings-security-alternate-accounts.component'
 import { SettingsSecurityTwoFactorAuthComponent } from './components/settings-security-two-factor-auth/settings-security-two-factor-auth.component'
+import { SettingsActionsComponent } from './components/settings-actions/settings-actions.component'
+import { SettingsActionsDownloadComponent } from './components/settings-actions-download/settings-actions-download.component'
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { SettingsSecurityTwoFactorAuthComponent } from './components/settings-se
     SettingsSecurityPasswordComponent,
     SettingsSecurityAlternateAccountsComponent,
     SettingsSecurityTwoFactorAuthComponent,
+    SettingsActionsComponent,
+    SettingsActionsDownloadComponent,
   ],
   imports: [
     CommonModule,
