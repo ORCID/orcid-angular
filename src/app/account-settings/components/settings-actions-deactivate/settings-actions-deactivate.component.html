@@ -23,7 +23,12 @@
     and a ‘Deactivated record’ message.
   </p>
   <p>
-    <a i18n="@@account.learMoreAboutDeactivating">
+    <a
+      i18n="@@account.learMoreAboutDeactivating"
+      href="https://support.orcid.org/hc/en-us/articles/360006973813"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       Learn more about deactivating an ORCID account
     </a>
   </p>
@@ -38,13 +43,20 @@
       If you have accidentally created multiple ORCID accounts you can always
       remove the duplicates instead of deactivating them.</ng-container
     >
-
-    <a i18n="@@account.accountSettings"
+    
+    <a
+      i18n="@@account.accountSettings"
+      [routerLink]="removeDuplicateUrl"
+      [queryParams]="{ section: 'remove-duplicate' }"
       >Account settings > Remove duplicate record
     </a>
   </p>
   <p>
-    <a i18n="@@account.learMoreAbout"
+    <a
+      href="https://support.orcid.org/hc/en-us/articles/360006896634"
+      target="_blank"
+      rel="noopener noreferrer"
+      i18n="@@account.learMoreAbout"
       >Learn more about removing duplicate records</a
     >
   </p>
