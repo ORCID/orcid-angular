@@ -1,0 +1,89 @@
+<app-settings-panels-data>
+  <p i18n="@@account.orcidKeeps">
+    If you no longer want to continue using ORCID you can deactivate your
+    account at any time.
+  </p>
+
+  <label class="row">
+    <strong i18n="@@account.itemsAddedOrEdited">
+      What happens when I deactivate my account?
+    </strong>
+  </label>
+
+  <p>
+    Once your account is deactivated your ORCID iD and record will be disabled.
+    All data, apart from the primary email address, is deleted. The email
+    address is cryptographically hashed and securely stored in a private data
+    file.
+  </p>
+
+  <p>
+    You will no longer be able to use your iD to sign in or access other
+    services. Your public record remains accessible but will only contain the iD
+    and a ‘Deactivated record’ message.
+  </p>
+  <p>
+    <a> Learn more about deactivating an ORCID account </a>
+  </p>
+  <label class="row">
+    <strong i18n="@@account.itemsAddedOrEdited">
+      Deactivating or removing?
+    </strong>
+  </label>
+
+  <p>
+    If you have accidentally created multiple ORCID accounts you can always
+    remove the duplicates instead of deactivating them.
+
+    <a>Account settings > Remove duplicate record </a>
+  </p>
+  <p>
+    <a>Learn more about removing duplicate records</a>
+  </p>
+  <label class="row">
+    <strong i18n="@@account.itemsAddedOrEdited">
+      Ready to deactivate your account?
+    </strong>
+  </label>
+  <ul>
+    <li>
+      1. Start the deactivation process by clicking on the "Deactivate ORCID
+      account" button below
+    </li>
+    <li>
+      2. ORCID will send a deactivation email to the primary email address
+      associated with this account
+    </li>
+    <li>
+      3. Click the confirmation link provided in the email to deactivate your
+      ORCID account
+    </li>
+  </ul>
+
+  <div class="button-container">
+    <button
+      (click)="deactivateOrcidAccount()"
+      mat-raised-button
+      color="warn"
+      i18n="@@account."
+      id="download"
+    >
+      Deactivate ORCID account
+    </button>
+  </div>
+  <div
+    *ngIf="deactivatedEmail"
+    class="info margin-bottom-16"
+    [ngClass]="{
+      'orc-font-body-small': !isMobile,
+      'orc-font-small-print': isMobile
+    }"
+  >
+    <div>
+      <mat-icon class="large-material-icon">info</mat-icon>
+    </div>
+    <div class="col l11 m6 s3" i18n="@@account.settingNotificationsAlert">
+      An account deactivation email has been sent to {{ deactivatedEmail }}
+    </div>
+  </div>
+</app-settings-panels-data>
