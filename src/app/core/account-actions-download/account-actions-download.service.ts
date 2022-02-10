@@ -45,9 +45,9 @@ export class AccountActionsDownloadService {
           const link = this._window.document.createElement('a')
           link.href = this._window.window.URL.createObjectURL(blob)
           link.download = filename
-          document.body.appendChild(link)
+          this._window.document.body.appendChild(link)
           link.click()
-          document.body.removeChild(link)
+          this._window.document.body.removeChild(link)
         }),
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
