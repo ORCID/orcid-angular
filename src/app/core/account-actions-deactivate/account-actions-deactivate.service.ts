@@ -31,11 +31,7 @@ export class AccountActionsDeactivateService {
       )
       .pipe(
         retry(3),
-        catchError((error) => {
-          console.log(error)
-
-          return this._errorHandler.handleError(error)
-        })
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
 }
