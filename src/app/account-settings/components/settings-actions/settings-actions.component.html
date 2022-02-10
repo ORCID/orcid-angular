@@ -1,0 +1,14 @@
+<h2 class="orc-font-body col" i18n="@@account.defaults">Defaults</h2>
+
+<app-settings-panels
+  [loading]="settingDownloadLoading"
+  [(expandedContent)]="settingDownload"
+  class="row"
+  [title]="titleDownload"
+>
+  <app-settings-actions-download
+    *ngIf="titleDownload"
+    (loading)="settingDownloadLoading = $event"
+  >
+  </app-settings-actions-download>
+</app-settings-panels>
