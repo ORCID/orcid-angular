@@ -1,0 +1,65 @@
+<app-settings-panels-data *ngIf="accounts$ | async as accounts">
+  <div i18n="@@account.youCanSingIntoOrcid">
+    You can sign into ORCID using the personal and institutional accounts you
+    have linked to your ORCID record.
+  </div>
+
+  <a
+    class="row m-t-16 m-b-16"
+    rel="noopener noreferrer"
+    target="_blank"
+    href="https://support.orcid.org/hc/en-us/articles/360006894354-Sign-into-ORCID-using-your-social-media-account"
+    i18n="@@account.learnMoreAboutUsing"
+  >
+    Learn more about using alternate accounts to sign in to ORCID
+  </a>
+  <table
+    *ngIf="accounts.length"
+    mat-table
+    [dataSource]="accounts"
+    class="mat-elevation-z0"
+  >
+    <ng-container matColumnDef="provider">
+      <th mat-header-cell *matHeaderCellDef i18n="@@account.account">
+        Account
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.idpName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef i18n="@@account.alternateSignInID">
+        Alternate sign in ID
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="granted">
+      <th mat-header-cell *matHeaderCellDef i18n="@@account.accessGranted">
+        Access granted
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.dateCreated | monthDayYearDateToString }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="delete(element)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <div *ngIf="!accounts.length" class="topBottomMargin">
+    <mat-divider class="topBottomMargin"></mat-divider>
+    <div i18n="@@account.youHaventAdded">
+      You haven't added any alternate sign in accounts yet.
+    </div>
+  </div>
+</app-settings-panels-data>

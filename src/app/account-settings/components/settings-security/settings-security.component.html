@@ -1,0 +1,33 @@
+<h2 class="orc-font-body col" i18n="@@account.security">Security</h2>
+
+<app-settings-panels
+  [(expandedContent)]="settingSecurityPasswordOpen"
+  class="row"
+  [title]="titleAccountPassword"
+  [(expandedContent)]="settingSecurityPasswordOpen"
+  [loading]="settingSecurityPasswordLoading"
+>
+  <app-settings-security-password
+    *ngIf="settingSecurityPasswordOpen"
+    (loading)="settingSecurityPasswordLoading = $event"
+  >
+  </app-settings-security-password>
+</app-settings-panels>
+
+<app-settings-panels
+  [(expandedContent)]="settingSecurityTwoFactor"
+  class="row"
+  [title]="titleTwoFactor"
+>
+  <app-settings-security-two-factor-auth></app-settings-security-two-factor-auth>
+</app-settings-panels>
+
+<app-settings-panels
+  [(expandedContent)]="settingSecurityAlternateAccounts"
+  class="row"
+  [title]="titleAlternativeSignin"
+>
+  <app-settings-security-alternate-sign-in
+    *ngIf="settingSecurityAlternateAccounts"
+  ></app-settings-security-alternate-sign-in>
+</app-settings-panels>
