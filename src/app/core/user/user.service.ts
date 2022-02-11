@@ -355,31 +355,21 @@ export class UserService {
           return this._oauth.loadShibbolethSignInData().pipe(
             take(1),
             switchMap((signinData) =>
-              this.getInstitutionName(signinData.providerId).pipe(
-                map((entityDisplayName) => {
-                  return {
-                    entityDisplayName,
-                    signinData,
-                  }
-                })
-              )
+              this._disco
+                .getInstitutionNameBaseOnId(signinData.providerId)
+                .pipe(
+                  map((entityDisplayName) => {
+                    return {
+                      entityDisplayName,
+                      signinData,
+                    }
+                  })
+                )
             )
           )
         } else {
           return of(null)
         }
-      })
-    )
-  }
-
-  private getInstitutionName(entityId): Observable<string> {
-    return this._disco.getInstitutionBaseOnID(entityId).pipe(
-      map((institution) => {
-        return institution.DisplayNames.filter(
-          (subElement) => subElement.lang === 'en'
-        ).map((en) => {
-          return en.value
-        })[0]
       })
     )
   }

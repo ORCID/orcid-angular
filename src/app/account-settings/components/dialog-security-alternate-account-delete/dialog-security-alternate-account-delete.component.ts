@@ -25,13 +25,4 @@ export class DialogSecurityAlternateAccountDeleteComponent implements OnInit {
   cancel() {
     this.matRef.close(false)
   }
-  getDisplayEmail(account: SocialAccount): string {
-    if (account.email) {
-      return account.email
-    } else if (account.id?.userid && EMAIL_REGEXP.test(account.id?.userid)) {
-      return account.id?.userid
-    } else {
-      return account.displayname
-    }
-  }
 }
