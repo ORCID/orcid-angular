@@ -33,7 +33,6 @@ import {
   RequestInfoForm,
   UserInfo,
 } from 'src/app/types'
-import { Institutional } from 'src/app/types/institutional.endpoint'
 import {
   UserSession,
   UserSessionUpdateParameters,
