@@ -1,13 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { catchError, retry } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { catchError, map, retry, switchMap } from 'rxjs/operators'
 import {
   SocialAccount,
   SocialAccountDeleteResponse,
   SocialAccountId,
 } from 'src/app/types/account-alternate-sign-in.endpoint'
+import { Institutional } from 'src/app/types/institutional.endpoint'
 import { environment } from 'src/environments/environment'
+import { DiscoService } from '../disco/disco.service'
 
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
@@ -21,6 +23,7 @@ export class AccountSecurityAlternateSignInService {
   })
   constructor(
     private _errorHandler: ErrorHandlerService,
+    private _discoFeed: DiscoService,
     private _http: HttpClient
   ) {}
 
@@ -33,6 +36,14 @@ export class AccountSecurityAlternateSignInService {
         }
       )
       .pipe(
+        switchMap((socialAccounts) => {
+          return this._discoFeed.getDiscoFeed().pipe(
+            map((feed) => {
+              this.populateIdPNames({ socialAccounts, feed })
+              return socialAccounts
+            })
+          )
+        }),
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
@@ -50,5 +61,34 @@ export class AccountSecurityAlternateSignInService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+
+  populateIdPNames({
+    socialAccounts,
+    feed,
+  }: {
+    socialAccounts: SocialAccount[]
+    feed: Institutional[]
+  }): void {
+    socialAccounts.forEach((account) => {
+      if (
+        account.id.providerid === 'facebook' ||
+        account.id.providerid === 'google'
+      ) {
+        account.idpName =
+          account.id.providerid.charAt(0).toUpperCase() +
+          account.id.providerid.slice(1)
+      } else {
+        account.idpName = this._discoFeed.getInstitutionNameBaseOnIdFromObject(
+          this._discoFeed.getInstitutionBaseOnIDFromObject(
+            feed,
+            account.id.providerid
+          )
+        )
+      }
+      if (!account.idpName) {
+        account.idpName = account.id.providerid
+      }
+    })
   }
 }
