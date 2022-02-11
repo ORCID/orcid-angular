@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, map, retry, switchMap } from 'rxjs/operators'
+import { EMAIL_REGEXP } from 'src/app/constants'
 import {
   SocialAccount,
   SocialAccountDeleteResponse,
@@ -40,6 +41,7 @@ export class AccountSecurityAlternateSignInService {
           return this._discoFeed.getDiscoFeed().pipe(
             map((feed) => {
               this.populateIdPNames({ socialAccounts, feed })
+              this.populateEmails(socialAccounts)
               return socialAccounts
             })
           )
@@ -47,6 +49,23 @@ export class AccountSecurityAlternateSignInService {
         retry(3),
         catchError((error) => this._errorHandler.handleError(error))
       )
+  }
+  populateEmails(socialAccounts: SocialAccount[]) {
+    socialAccounts.forEach(
+      (account) => (account.email = this.getAccountDisplayEmail(account))
+    )
+  }
+  private getAccountDisplayEmail(account: SocialAccount): string {
+    if (account.email) {
+      return account.email
+    } else if (
+      account.id?.provideruserid &&
+      EMAIL_REGEXP.test(account.id?.provideruserid)
+    ) {
+      return account.id?.provideruserid
+    } else {
+      return account.displayname
+    }
   }
   delete(idToManage: SocialAccountId): Observable<SocialAccountDeleteResponse> {
     return this._http

@@ -9,7 +9,7 @@ export class MonthDayYearDateToStringPipe implements PipeTransform {
     if (typeof value === 'number') {
       const date = new Date(value)
       value = {
-        day: date.getUTCDate + '',
+        day: date.getUTCDate() + '',
         month: date.getUTCMonth() + 1 + '',
         year: date.getUTCFullYear() + '',
       }
