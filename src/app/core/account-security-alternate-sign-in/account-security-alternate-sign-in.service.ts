@@ -10,8 +10,8 @@ import {
 } from 'src/app/types/account-alternate-sign-in.endpoint'
 import { Institutional } from 'src/app/types/institutional.endpoint'
 import { environment } from 'src/environments/environment'
-import { DiscoService } from '../disco/disco.service'
 
+import { DiscoService } from '../disco/disco.service'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
