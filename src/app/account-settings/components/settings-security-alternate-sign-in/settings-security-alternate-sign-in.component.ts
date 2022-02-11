@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
+import { EMAIL_REGEXP } from 'src/app/constants'
 import { AccountSecurityAlternateSignInService } from 'src/app/core/account-security-alternate-sign-in/account-security-alternate-sign-in.service'
 import { SocialAccount } from 'src/app/types/account-alternate-sign-in.endpoint'
 import { DialogSecurityAlternateAccountDeleteComponent } from '../dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component'
@@ -35,5 +36,14 @@ export class SettingsSecurityAlternateSignInComponent implements OnInit {
           })
         }
       })
+  }
+  getDisplayEmail(account: SocialAccount): string {
+    if (account.email) {
+      return account.email
+    } else if (account.id?.userid && EMAIL_REGEXP.test(account.id?.userid)) {
+      return account.id?.userid
+    } else {
+      return account.displayname
+    }
   }
 }
