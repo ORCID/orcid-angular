@@ -70,7 +70,7 @@
         <ng-container
           *ngIf="
             getLink(org.identifierType, org.preferred) !== '';
-            else plainUrl
+            else plainText
           "
         >
           <a
@@ -82,7 +82,7 @@
             {{ org.preferred }}
           </a>
         </ng-container>
-        <ng-template #plainUrl>
+        <ng-template #plainText>
           {{ org.preferred }}
         </ng-template>
       </ng-container>
