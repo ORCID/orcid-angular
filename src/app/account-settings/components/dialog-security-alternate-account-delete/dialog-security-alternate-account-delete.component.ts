@@ -34,5 +34,4 @@ export class DialogSecurityAlternateAccountDeleteComponent implements OnInit {
       return account.displayname
     }
   }
-  
 }
