@@ -27,22 +27,25 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="row password" 
-    [ngClass]="{'two-line-hint': authorizationForm.controls.password.invalid }" 
+  <mat-form-field
+    appearance="outline"
+    class="row password"
+    [ngClass]="{ 'two-line-hint': authorizationForm.controls.password.invalid }"
   >
     <mat-label i18n="@@ngOrcid.signin.password">Password</mat-label>
-    <input matInput formControlName="password" [errorStateMatcher]="backendErrorsMatcher" type="password" id="password" />
-    <mat-error  
-      *ngIf="authorizationForm.get('password').hasError('maxlength')"
-    >
+    <input
+      matInput
+      formControlName="password"
+      [errorStateMatcher]="backendErrorsMatcher"
+      type="password"
+      id="password"
+    />
+    <mat-error *ngIf="authorizationForm.get('password').hasError('maxlength')">
       <ng-container i18n="@@ngOrcid.signin.passwordTooLong">
-        Passwords must be 256 characters or less. Please 
+        Passwords must be 256 characters or less. Please
       </ng-container>
-      <a
-        i18n="@@ngOrcid.signin.needToReset"
-        (click)="forgotPassword()"
-      >
-      reset your password
+      <a i18n="@@ngOrcid.signin.needToReset" (click)="forgotPassword()">
+        reset your password
       </a>
       <ng-container i18n="@@ngOrcid.signin.toSignIn">
         to sign in.

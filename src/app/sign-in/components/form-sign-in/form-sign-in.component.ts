@@ -97,7 +97,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
             }
           })
         }
-        
 
         if (platform.social) {
           this.signInLocal.type = TypeSignIn.social
@@ -124,7 +123,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.authorizationForm = new FormGroup({
       username: new FormControl(),
-      password: new FormControl('', { validators: [Validators.maxLength(256)] }),
+      password: new FormControl('', {
+        validators: [Validators.maxLength(256)],
+      }),
       recoveryCode: new FormControl(),
       verificationCode: new FormControl(),
     })
