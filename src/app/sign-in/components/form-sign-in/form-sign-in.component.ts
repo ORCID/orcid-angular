@@ -66,6 +66,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   platform: PlatformInfo
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
+  isMobile: boolean
   backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
 
   constructor(
@@ -89,6 +90,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
+        this.isMobile = platform.columns4 || platform.columns8
 
         if (session.oauthSession) {
           this.signInLocal.isOauth = true
@@ -124,7 +126,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.authorizationForm = new FormGroup({
       username: new FormControl(),
-      password: new FormControl('', { validators: [Validators.maxLength(64)] }),
+      password: new FormControl('', { validators: [Validators.maxLength(256)] }),
       recoveryCode: new FormControl(),
       verificationCode: new FormControl(),
     })
