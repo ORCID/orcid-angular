@@ -12,3 +12,16 @@
   >
   </app-settings-actions-download>
 </app-settings-panels>
+
+<app-settings-panels
+  [loading]="settingDeactivateLoading"
+  [(expandedContent)]="settingDeactivate"
+  class="row"
+  [title]="titleDeactivate"
+>
+  <app-settings-actions-deactivate
+    *ngIf="settingDeactivate"
+    (loading)="settingDeactivateLoading = $event"
+  >
+  </app-settings-actions-deactivate>
+</app-settings-panels>
