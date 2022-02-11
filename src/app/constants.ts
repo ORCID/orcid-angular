@@ -36,7 +36,7 @@ export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 export const REDIRECT_URI_REGEXP = /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
 // https://regex101.com/r/EP7uWn/1
 export const AMOUNT_REGEXP = /^[0-9.,]*$/
-//https://regex101.com/r/XvbCrA/1
+// https://regex101.com/r/XvbCrA/1
 export const WHITE_SPACE_REGEXP = /\s+/g
 
 export const ApplicationRoutes = {
