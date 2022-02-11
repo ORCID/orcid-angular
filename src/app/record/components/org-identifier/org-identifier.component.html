@@ -83,15 +83,8 @@
           </a>
         </ng-container>
         <ng-template #plainUrl>
-          <a
-            *ngIf="isUrl(org.preferred)"
-            class="underline"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="{{ org.preferred }}"
-          >
             {{ org.preferred }}
-          </a></ng-template
+        </ng-template
         >
       </ng-container>
       <ng-container *ngIf="org.preferred && isUrl(org.preferred)">

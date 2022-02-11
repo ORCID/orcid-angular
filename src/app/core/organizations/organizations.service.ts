@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
+import { WHITE_SPACE_REGEXP } from 'src/app/constants'
 import { OrgDisambiguated } from 'src/app/types'
 
 import { environment } from '../../../environments/environment'
@@ -51,7 +52,7 @@ export class OrganizationsService {
       case 'GRID':
         return this.GRID_BASE_URL + value
       case 'ISNI':
-        return this.ISNI_BASE_URL + value.replace(/\s+/g, '')
+        return this.ISNI_BASE_URL + value.replace(WHITE_SPACE_REGEXP, '')
       case 'LINKEDIN':
         return this.LINKEDIN_BASE_URL + value
       case 'WIKIDATA':
