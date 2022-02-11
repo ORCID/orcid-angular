@@ -36,6 +36,7 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
 import { SettingsPanelsDataComponent } from './panels/settings-panels-data/settings-panels-data.component'
 import { PanelExpandButtonsComponent } from './panels/settings-panels-expand-buttons/settings-panels-expand-buttons.component'
 import { SettingsPanelsComponent } from './panels/settings-panels/settings-panels.component'
+import { SettingsActionsDeactivateComponent } from './components/settings-actions-deactivate/settings-actions-deactivate.component'
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     SettingsSecurityTwoFactorAuthComponent,
     SettingsActionsComponent,
     SettingsActionsDownloadComponent,
+    SettingsActionsDeactivateComponent,
   ],
   imports: [
     CommonModule,
