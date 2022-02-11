@@ -174,7 +174,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(url) {
-    ; (this.window as any).outOfRouterNavigation(url)
+    ;(this.window as any).outOfRouterNavigation(url)
   }
 
   hasMoreNotificationsToLoad() {
