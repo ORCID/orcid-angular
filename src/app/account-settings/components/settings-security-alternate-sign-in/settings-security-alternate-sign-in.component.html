@@ -39,7 +39,7 @@
         Access granted
       </th>
       <td mat-cell *matCellDef="let element">
-        {{ element.dateCreated | date }}
+        {{ element.dateCreated | monthDayYearDateToString }}
       </td>
     </ng-container>
 
