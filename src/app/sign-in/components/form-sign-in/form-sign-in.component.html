@@ -28,8 +28,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="row password" 
-    [ngClass]="{'two-line-hint': authorizationForm.controls.password.invalid && !isMobile,
-     'three-line-hint': authorizationForm.controls.password.invalid && isMobile }" 
+    [ngClass]="{'two-line-hint': authorizationForm.controls.password.invalid }" 
   >
     <mat-label i18n="@@ngOrcid.signin.password">Password</mat-label>
     <input matInput formControlName="password" [errorStateMatcher]="backendErrorsMatcher" type="password" id="password" />

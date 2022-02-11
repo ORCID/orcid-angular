@@ -66,7 +66,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   platform: PlatformInfo
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
-  isMobile: boolean
   backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
 
   constructor(
@@ -90,8 +89,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
-        this.isMobile = platform.columns4 || platform.columns8
-
         if (session.oauthSession) {
           this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {
@@ -100,6 +97,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
             }
           })
         }
+        
 
         if (platform.social) {
           this.signInLocal.type = TypeSignIn.social
