@@ -37,11 +37,11 @@ export class AccountSecurityAlternateSignInService {
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
-  delete(deleteId: SocialAccountId): Observable<SocialAccountDeleteResponse> {
+  delete(idToManage: SocialAccountId): Observable<SocialAccountDeleteResponse> {
     return this._http
       .post<SocialAccountDeleteResponse>(
         environment.API_WEB + `account/revokeSocialAccount.json`,
-        deleteId,
+        { idToManage },
         {
           headers: this.headers,
         }
