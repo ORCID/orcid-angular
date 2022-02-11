@@ -32,6 +32,7 @@ import { OauthService } from '../../../core/oauth/oauth.service'
 import { combineLatest, Subject } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
+import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
 
 @Component({
   selector: 'app-form-sign-in',
@@ -65,6 +66,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   platform: PlatformInfo
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
+  backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
 
   constructor(
     private _user: UserService,
@@ -122,7 +124,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.authorizationForm = new FormGroup({
       username: new FormControl(),
-      password: new FormControl(),
+      password: new FormControl('', { validators: [Validators.maxLength(64)] }),
       recoveryCode: new FormControl(),
       verificationCode: new FormControl(),
     })
