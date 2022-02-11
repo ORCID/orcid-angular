@@ -18,6 +18,7 @@ export interface SocialAccount {
   connectionSatus: string
   accountIdForDisplay: string
   linked: boolean
+  idpName?: string // Computed on the frontend
 }
 export interface SocialAccountId {
   userid: string
