@@ -79,10 +79,10 @@ export class WorkComponent implements OnInit {
     if ((this.window.navigator as any)?.msSaveOrOpenBlob) {
       const fileData = [data]
       const blobObject = new Blob(fileData, { type: 'text/plain' })
-      ;(this.window.navigator as any).msSaveOrOpenBlob(blobObject, 'works.bib')
+      ; (this.window.navigator as any).msSaveOrOpenBlob(blobObject, 'works.bib')
     } else {
       const anchor = document.createElement('a')
-      anchor.setAttribute('css', "{display: 'none'}")
+      anchor.setAttribute('css', '{display: \'none\'}')
       this.elementRef.nativeElement.append(anchor)
       anchor.setAttribute(
         'href',

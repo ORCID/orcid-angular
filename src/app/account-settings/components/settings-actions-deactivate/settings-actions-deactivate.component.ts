@@ -10,7 +10,6 @@ import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountActionsDeactivateService } from 'src/app/core/account-actions-deactivate/account-actions-deactivate.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
-import { environment } from 'src/environments/environment.production'
 
 @Component({
   selector: 'app-settings-actions-deactivate',
