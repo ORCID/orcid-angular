@@ -149,7 +149,7 @@ export class ModalEmailComponent implements OnInit, OnDestroy {
     existingEmail?: AssertionVisibilityString,
     newEmail?: boolean
   ): void {
-    if (this.emailsForm.valid) {
+    if (existingEmail || newEmail && this.emailsForm.valid) {
       const newPutCode =
         (newEmail ? 'newEmailInput' : 'emailInput-') + this.addedEmailsCount
 
