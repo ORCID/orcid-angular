@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { AccountSecurityAlternateSignInService } from 'src/app/core/account-security-alternate-sign-in/account-security-alternate-sign-in.service'
 import { SocialAccount } from 'src/app/types/account-alternate-sign-in.endpoint'
+
 import { DialogSecurityAlternateAccountDeleteComponent } from '../dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component'
 
 @Component({
@@ -14,7 +15,7 @@ export class SettingsSecurityAlternateSignInComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()
   accounts$: Observable<SocialAccount[]>
 
-  displayedColumns = ['email', 'provider', 'granted', 'actions']
+  displayedColumns = ['provider', 'email', 'granted', 'actions']
 
   constructor(
     private _accountSettingAlternate: AccountSecurityAlternateSignInService,

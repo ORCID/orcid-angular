@@ -53,6 +53,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
           validators: [
             Validators.required,
             Validators.minLength(8),
+            Validators.maxLength(256),
             Validators.pattern(this.hasNumberPatter),
             Validators.pattern(this.hasLetterOrSymbolPatter),
             this.passwordDoesNotContainUserEmails(),
