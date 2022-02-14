@@ -21,11 +21,11 @@ export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // tslint:disable-next-line: max-line-length
 export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 /* NO PROTOCOL REQUIRED*/
-// https://regex101.com/r/MIqMVZ/1
+// https://regex101.com/r/DHDJXc/1
 export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.><]+$/i
 /* PROTOCOL REQUIRED*/
-// https://regex101.com/r/iEo5xi/1
-export const URL_REGEXP_BACKEND = /^(((https?):\/\/)(%[0-9A-Fa-f]{2}|[-()_.<>%#!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$/
+// https://regex101.com/r/5lscv4/1
+export const URL_REGEXP_BACKEND = /^((https?):\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.><]+$/i
 // https://www.regextester.com/96577
 export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 // https://regex101.com/r/aoHxNo/1
