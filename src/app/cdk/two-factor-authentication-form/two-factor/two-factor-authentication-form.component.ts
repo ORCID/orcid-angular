@@ -10,15 +10,15 @@ import {
   ViewChild,
 } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { WINDOW } from '../../../cdk/window'
+import { WINDOW } from '../../window'
 
 @Component({
-  selector: 'app-two-factor',
-  templateUrl: './two-factor.component.html',
-  styleUrls: ['./two-factor.component.scss'],
+  selector: 'app-two-factor-authentication-form',
+  templateUrl: './two-factor-authentication-form.component.html',
+  styleUrls: ['./two-factor-authentication-form.component.scss'],
   preserveWhitespaces: true,
 })
-export class TwoFactorComponent implements AfterViewInit {
+export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean
   @Input() showBadRecoveryCode: boolean
   @Output() authenticate = new EventEmitter<{

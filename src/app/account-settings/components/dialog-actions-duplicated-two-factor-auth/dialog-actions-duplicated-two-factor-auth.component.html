@@ -3,10 +3,10 @@
     >Two factor authentication</app-modal-header
   >
 
-  <app-two-factor
+  <app-two-factor-authentication-form
     [showBadVerificationCode]="showBadVerificationCode"
     [showBadRecoveryCode]="showBadRecoveryCode"
     (authenticate)="authenticate($event)"
   >
-  </app-two-factor>
+  </app-two-factor-authentication-form>
 </app-modal>
