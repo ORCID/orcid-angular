@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
+
 import { DialogActionsDuplicatedMergedConfirmedComponent } from '../dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
 
 @Component({
@@ -33,8 +34,6 @@ export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
         redirectUrl: null,
       })
       .subscribe((res) => {
-        console.log(res)
-
         this.loading = false
         if (res.errors && res.errors.length > 0) {
           if (res.errors[0].includes('verification')) {

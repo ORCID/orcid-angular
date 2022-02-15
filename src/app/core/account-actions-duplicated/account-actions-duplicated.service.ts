@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of } from 'rxjs'
+import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
 import { environment } from 'src/environments/environment'

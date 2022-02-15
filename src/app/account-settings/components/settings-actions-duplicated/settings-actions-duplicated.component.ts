@@ -1,11 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { DateAdapter } from '@angular/material/core'
 import { MatDialog } from '@angular/material/dialog'
-import { EMPTY, of, throwError } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
+import { of, throwError } from 'rxjs'
+import { switchMap, take, takeUntil } from 'rxjs/operators'
+import { UserService } from 'src/app/core'
 import { AccountActionsDuplicatedService } from 'src/app/core/account-actions-duplicated/account-actions-duplicated.service'
-import { OauthService } from 'src/app/core/oauth/oauth.service'
+import { UserInfoService } from 'src/app/core/user-info/user-info.service'
+import { UserInfo } from 'src/app/types'
+import { UserSession } from 'src/app/types/session.local'
 
 import { DialogActionsDuplicatedMergedConfirmedComponent } from '../dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
 import { DialogActionsDuplicatedTwoFactorAuthComponent } from '../dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component'
@@ -15,12 +17,15 @@ import { DialogActionsDuplicatedComponent } from '../dialog-actions-duplicated/d
   selector: 'app-settings-actions-duplicated',
   templateUrl: './settings-actions-duplicated.component.html',
   styleUrls: ['./settings-actions-duplicated.component.scss'],
+  preserveWhitespaces: true,
 })
 export class SettingsActionsDuplicatedComponent implements OnInit {
+  userSession: UserSession
   constructor(
     private _duplicateService: AccountActionsDuplicatedService,
     private _form: FormBuilder,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _user: UserService
   ) {}
   @Output() loading = new EventEmitter<boolean>()
 
@@ -35,6 +40,12 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
       deprecatingOrcidOrEmail: ['', Validators.required],
       deprecatingPassword: ['', Validators.required],
     })
+    this._user
+      .getUserSession()
+      .pipe(take(1))
+      .subscribe((userSession) => {
+        this.userSession = userSession
+      })
   }
 
   deprecatedAccount() {
@@ -76,6 +87,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
         }),
         switchMap((data) => {
           this.loading.next(false)
+          this.form.reset()
           return this._dialog
             .open(DialogActionsDuplicatedMergedConfirmedComponent, {
               data,

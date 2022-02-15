@@ -41,7 +41,7 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
 import { SettingsActionsDuplicatedComponent } from './components/settings-actions-duplicated/settings-actions-duplicated.component'
 import { DialogActionsDuplicatedComponent } from './components/dialog-actions-duplicated/dialog-actions-duplicated.component'
 import { DialogActionsDuplicatedMergedConfirmedComponent } from './components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
-import { SignInModule } from '../sign-in/sign-in.module';
+import { SignInModule } from '../sign-in/sign-in.module'
 import { DialogActionsDuplicatedTwoFactorAuthComponent } from './components/dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component'
 
 @NgModule({
