@@ -26,6 +26,7 @@
 
   <p>
     <a
+      id="learn-more-url"
       class="underline"
       href="https://support.orcid.org/hc/en-us/articles/360006896634-Removing-your-additional-or-duplicate-ORCID-iD"
       rel="noopener noreferrer"
@@ -40,7 +41,7 @@
     record.
   </p>
 
-  <label class="row form-title orc-font-body-large">
+  <label class="row form-title">
     <strong i18n="@@account.removeADuplicatedRecord">
       Remove a duplicate record
     </strong>
@@ -98,7 +99,7 @@
       mat-raised-button
       color="warn"
       i18n="@@account.removeDuplicatedRecord"
-      id="download"
+      id="remove-duplicated-record"
       [disabled]="!this.form.valid"
     >
       Remove duplicated record
