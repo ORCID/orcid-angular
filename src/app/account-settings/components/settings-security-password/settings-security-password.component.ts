@@ -44,6 +44,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
           validators: [
             Validators.required,
             Validators.minLength(8),
+            Validators.maxLength(256),
             Validators.pattern(this.hasNumberPatter),
             Validators.pattern(this.hasLetterOrSymbolPatter),
           ],
