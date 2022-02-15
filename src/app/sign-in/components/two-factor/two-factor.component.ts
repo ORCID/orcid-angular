@@ -21,7 +21,10 @@ import { WINDOW } from '../../../cdk/window'
 export class TwoFactorComponent implements AfterViewInit {
   @Input() showBadVerificationCode: boolean
   @Input() showBadRecoveryCode: boolean
-  @Output() authenticate = new EventEmitter<object>()
+  @Output() authenticate = new EventEmitter<{
+    verificationCode?: string
+    recoveryCode?: string
+  }>()
 
   @ViewChild('inputVerificationCode')
   inputVerificationCode: ElementRef

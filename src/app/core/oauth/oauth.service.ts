@@ -251,4 +251,17 @@ export class OauthService {
         )
       )
   }
+
+  submitCodeForAnotherAccount(code: TwoFactor) {
+    return this._http
+      .post<TwoFactor>(environment.BASE_URL + `2FA/submitCode.json`, code, {
+        headers: this.headers,
+      })
+      .pipe(
+        retry(3),
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
+      )
+  }
 }

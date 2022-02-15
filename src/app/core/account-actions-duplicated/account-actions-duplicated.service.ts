@@ -1,0 +1,52 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable, of } from 'rxjs'
+import { catchError, retry } from 'rxjs/operators'
+import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
+import { environment } from 'src/environments/environment'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AccountActionsDuplicatedService {
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
+  })
+  constructor(
+    private _errorHandler: ErrorHandlerService,
+    private _http: HttpClient
+  ) {}
+
+  confirmDeprecate(
+    account: DuplicateRemoveEndpoint
+  ): Observable<DuplicateRemoveEndpoint> {
+    return this._http
+      .post<DuplicateRemoveEndpoint>(
+        environment.API_WEB + `account/confirm-deprecate-profile.json`,
+        account,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  deprecate(
+    account: DuplicateRemoveEndpoint
+  ): Observable<DuplicateRemoveEndpoint> {
+    return this._http
+      .post<DuplicateRemoveEndpoint>(
+        environment.API_WEB + `account/validate-deprecate-profile.json`,
+        account,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+}

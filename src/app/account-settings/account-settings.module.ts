@@ -38,6 +38,11 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
 import { SettingsPanelsDataComponent } from './panels/settings-panels-data/settings-panels-data.component'
 import { PanelExpandButtonsComponent } from './panels/settings-panels-expand-buttons/settings-panels-expand-buttons.component'
 import { SettingsPanelsComponent } from './panels/settings-panels/settings-panels.component'
+import { SettingsActionsDuplicatedComponent } from './components/settings-actions-duplicated/settings-actions-duplicated.component'
+import { DialogActionsDuplicatedComponent } from './components/dialog-actions-duplicated/dialog-actions-duplicated.component'
+import { DialogActionsDuplicatedMergedConfirmedComponent } from './components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
+import { SignInModule } from '../sign-in/sign-in.module';
+import { DialogActionsDuplicatedTwoFactorAuthComponent } from './components/dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component'
 
 @NgModule({
   declarations: [
@@ -59,6 +64,10 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     SettingsActionsComponent,
     SettingsActionsDownloadComponent,
     SettingsActionsDeactivateComponent,
+    SettingsActionsDuplicatedComponent,
+    DialogActionsDuplicatedComponent,
+    DialogActionsDuplicatedMergedConfirmedComponent,
+    DialogActionsDuplicatedTwoFactorAuthComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +91,7 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     MatTableModule,
     ModalModule,
     MatDividerModule,
+    SignInModule,
   ],
   providers: [VerificationEmailModalService],
 })
