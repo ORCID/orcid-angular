@@ -25,7 +25,6 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
-import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
@@ -38,7 +37,6 @@ import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPas
   selector: 'app-form-sign-in',
   templateUrl: './form-sign-in.component.html',
   styleUrls: ['./form-sign-in.component.scss'],
-  providers: [TwoFactorComponent],
   preserveWhitespaces: true,
 })
 export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {

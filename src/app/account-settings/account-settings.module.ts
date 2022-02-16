@@ -18,12 +18,17 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 
 import { ModalModule } from '../cdk/modal/modal.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
+import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authentication-form/two-factor-authentication-form.module'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { SharedModule } from '../shared/shared.module'
 import { AccountSettingsRoutingModule } from './account-settings-routing.module'
+import { DialogActionsDuplicatedMergedConfirmedComponent } from './components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
+import { DialogActionsDuplicatedTwoFactorAuthComponent } from './components/dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component'
+import { DialogActionsDuplicatedComponent } from './components/dialog-actions-duplicated/dialog-actions-duplicated.component'
 import { DialogSecurityAlternateAccountDeleteComponent } from './components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component'
 import { SettingsActionsDeactivateComponent } from './components/settings-actions-deactivate/settings-actions-deactivate.component'
 import { SettingsActionsDownloadComponent } from './components/settings-actions-download/settings-actions-download.component'
+import { SettingsActionsDuplicatedComponent } from './components/settings-actions-duplicated/settings-actions-duplicated.component'
 import { SettingsActionsComponent } from './components/settings-actions/settings-actions.component'
 import { SettingsDefaultsEmailFrequencyComponent } from './components/settings-defaults-email-frequency/settings-defaults-email-frequency.component'
 import { SettingsDefaultsLanguageComponent } from './components/settings-defaults-language/settings-defaults-language.component'
@@ -59,6 +64,10 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     SettingsActionsComponent,
     SettingsActionsDownloadComponent,
     SettingsActionsDeactivateComponent,
+    SettingsActionsDuplicatedComponent,
+    DialogActionsDuplicatedComponent,
+    DialogActionsDuplicatedMergedConfirmedComponent,
+    DialogActionsDuplicatedTwoFactorAuthComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +91,7 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     MatTableModule,
     ModalModule,
     MatDividerModule,
+    TwoFactorAuthenticationFormModule,
   ],
   providers: [VerificationEmailModalService],
 })

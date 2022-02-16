@@ -65,13 +65,13 @@
   </app-print-errors>
   <app-deactivated *ngIf="showDeactivatedError" [email]="email">
   </app-deactivated>
-  <app-two-factor
+  <app-two-factor-authentication-form
     *ngIf="show2FA"
     [showBadVerificationCode]="showBadVerificationCode"
     [showBadRecoveryCode]="showBadRecoveryCode"
     (authenticate)="authenticate($event)"
   >
-  </app-two-factor>
+  </app-two-factor-authentication-form>
   <a
     class="row mat-button-font forgot"
     i18n="@@ngOrcid.signin.forgotYourPassword"
