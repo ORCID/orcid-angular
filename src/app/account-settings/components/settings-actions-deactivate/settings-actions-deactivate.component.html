@@ -87,6 +87,7 @@
       color="warn"
       i18n="@@account.deactivateOrcidAcc"
       id="download"
+      [disabled]="alreadySendedDeactivatedAccountRequest || (loading | async)"
     >
       Deactivate ORCID account
     </button>
@@ -103,9 +104,12 @@
       <mat-icon class="large-material-icon">info</mat-icon>
     </div>
     <div class="col l11 m6 s3">
-      <ng-container i18n="@@account.andEmailDeactivateWasSend">
-        An account deactivation email has been sent to </ng-container
-      >{{ deactivatedEmail }}
+      <div>
+        <ng-container i18n="@@account.andEmailDeactivateWasSend">
+          An account deactivation email has been sent to
+        </ng-container>
+        <strong> {{ deactivatedEmail }} </strong>
+      </div>
     </div>
   </div>
 </app-settings-panels-data>
