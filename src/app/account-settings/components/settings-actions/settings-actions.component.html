@@ -27,3 +27,16 @@
   >
   </app-settings-actions-deactivate>
 </app-settings-panels>
+
+<app-settings-panels
+  [loading]="settingDuplicatedRecordLoading"
+  [(expandedContent)]="settingDuplicatedRecord"
+  class="row"
+  [title]="titleDuplicatedRecord"
+>
+  <app-settings-actions-duplicated
+    *ngIf="settingDuplicatedRecord"
+    (loading)="settingDuplicatedRecordLoading = $event"
+  >
+  </app-settings-actions-duplicated>
+</app-settings-panels>
