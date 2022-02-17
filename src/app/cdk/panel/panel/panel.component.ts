@@ -214,9 +214,15 @@ export class PanelComponent implements OnInit {
     })
   }
 
-  toggle() {
-    this.openState = !this.openState
-    this.openStateChange.next(this.openState)
+  toggle(peerReview?: boolean) {
+    if (this.type === 'peer-review' && !peerReview) {
+      this.openStateChange.next(!this.openState)
+    } else if (this.type === 'peer-review' && peerReview) {
+      this.openState = !this.openState
+    } else if (this.type !== 'peer-review') {
+      this.openState = !this.openState
+      this.openStateChange.next(this.openState)
+    }
   }
 
   updateVisibility(visibility: VisibilityStrings) {

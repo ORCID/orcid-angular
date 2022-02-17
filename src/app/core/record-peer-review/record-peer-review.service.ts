@@ -9,6 +9,7 @@ import { RecordImportWizard } from '../../types/record-peer-review-import.endpoi
 import { retry, catchError, tap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { cloneDeep } from 'lodash'
+import { TogglzService } from '../togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +21,17 @@ export class RecordPeerReviewService {
     'Content-Type': 'application/json',
   })
   lastEmittedValue: PeerReview[]
+  togglzPeerReviews: boolean
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
-  ) {}
+    private _errorHandler: ErrorHandlerService,
+    private _togglz: TogglzService
+) {
+    _togglz
+      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
+      .subscribe((value) => (this.togglzPeerReviews = value))
+  }
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
     if (options?.publicRecordId) {
@@ -32,7 +39,7 @@ export class RecordPeerReviewService {
         .get<PeerReview[]>(
           environment.API_WEB +
             options.publicRecordId +
-            '/peer-reviews.json?sortAsc=' +
+            (this.togglzPeerReviews ? '/peer-reviews-minimized.json?sortAsc=' : '/peer-reviews.json?sortAsc=') +
             (options.sortAsc != null ? options.sortAsc : true)
         )
         .pipe(
@@ -60,7 +67,7 @@ export class RecordPeerReviewService {
       this._http
         .get<PeerReview[]>(
           environment.API_WEB +
-            'peer-reviews/peer-reviews.json?sortAsc=' +
+            (this.togglzPeerReviews ? 'peer-reviews/peer-reviews-minimized.json?sortAsc=' : 'peer-reviews/peer-reviews.json?sortAsc=') +
             (options.sortAsc != null ? options.sortAsc : true)
         )
         .pipe(
@@ -74,6 +81,37 @@ export class RecordPeerReviewService {
         )
         .subscribe()
       return this.$peer.asObservable()
+    }
+  }
+
+  getPeerReviewsByGroupId(options: UserRecordOptions, groupId): Observable<PeerReview[]> {
+    if (options?.publicRecordId) {
+      return this._http
+        .get<PeerReview[]>(
+          environment.API_WEB +
+          options.publicRecordId +
+          '/peer-reviews-by-group-id.json?sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : true) +
+          '&groupId=' + encodeURIComponent(groupId)
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of([]))
+        )
+    } else {
+      return this._http
+        .get<PeerReview[]>(
+          environment.API_WEB +
+          'peer-reviews/peer-reviews-by-group-id.json?sortAsc=' +
+          (options.sortAsc != null ? options.sortAsc : true) +
+          '&groupId=' + encodeURIComponent(groupId)
+        )
+        .pipe(
+          retry(3),
+          catchError((error) => this._errorHandler.handleError(error)),
+          catchError(() => of([]))
+        )
     }
   }
 

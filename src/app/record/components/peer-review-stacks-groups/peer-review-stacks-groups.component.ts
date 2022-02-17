@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserService } from '../../../core'
@@ -19,6 +19,8 @@ import {
 } from 'src/app/types/record.local'
 import { VisibilityStrings } from '../../../types/common.endpoint'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
+import { TogglzService } from '../../../core/togglz/togglz.service'
+import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -32,11 +34,13 @@ import { isQA } from 'src/app/shared/validators/environment-check/environment-ch
 export class PeerReviewStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
+  @ViewChild('peerReviewPanelComponent') peerReviewPanelComponent: PanelComponent
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
   @Input() expandedContent: MainPanelsState
   @Output() expandedContentChange = new EventEmitter<MainPanelsState>()
 
+  @Output() expandedPanelChange: EventEmitter<any> = new EventEmitter()
   @Output() total: EventEmitter<any> = new EventEmitter()
 
   modalPeerReviewComponent = ModalPeerReviewsComponent
@@ -65,8 +69,10 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   ngOrcidPeerReview = $localize`:@@peerReview.peerReview:Peer review`
   loading = true
+  togglzPeerReviews: boolean
 
   constructor(
+    _togglz: TogglzService,
     _platform: PlatformInfoService,
     private _user: UserService,
     private _record: RecordService,
@@ -79,6 +85,9 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
         this.platform = data
         this.isMobile = data.columns4 || data.columns8
       })
+    _togglz
+      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
+      .subscribe((value) => (this.togglzPeerReviews = value))
   }
 
   ngOnInit(): void {
@@ -176,18 +185,23 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   }
 
   getVisibility(peerReview: PeerReview): VisibilityStrings {
-    // Validate if there are not different types of visibilities between the Peer Reviews other wise display the error
-    const visibility =
-      peerReview.peerReviewDuplicateGroups[0].peerReviews[0].visibility
-        .visibility
-    peerReview.peerReviewDuplicateGroups.forEach((peerReviewDuplicateGroup) => {
-      const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(
-        (p) => p.visibility.visibility !== visibility
-      )
-      if (peerReviews.length > 0) {
-        peerReview.visibilityError = true
-      }
-    })
+    let visibility;
+    if (this.togglzPeerReviews) {
+      visibility = peerReview.visibility
+    } else {
+      // Validate if there are not different types of visibilities between the Peer Reviews other wise display the error
+      visibility =
+        peerReview.peerReviewDuplicateGroups[0].peerReviews[0].visibility
+          .visibility
+      peerReview.peerReviewDuplicateGroups.forEach((peerReviewDuplicateGroup) => {
+        const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(
+          (p) => p.visibility.visibility !== visibility
+        )
+        if (peerReviews.length > 0) {
+          peerReview.visibilityError = true
+        }
+      })
+    }
 
     return visibility
   }
@@ -198,14 +212,32 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   expandedClicked(expanded: boolean, peerReview?: PeerReview) {
     if (peerReview) {
-      if (expanded) {
-        if (!this.moreInfo.includes(peerReview.groupId)) {
-          this.moreInfo.push(peerReview.groupId)
-        }
+      if (this.togglzPeerReviews) {
+        this.getPeerReviewSummaryByGroupId(peerReview)
       } else {
-        this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
+        if (expanded) {
+          if (!this.moreInfo.includes(peerReview.groupId)) {
+            this.moreInfo.push(peerReview.groupId)
+          }
+        } else {
+          this.moreInfo = this.moreInfo.filter((p) => p !== peerReview.groupId)
+        }
       }
     }
+  }
+
+  getPeerReviewSummaryByGroupId(peerReview: PeerReview) {
+    this._recordPeerReviewService
+      .getPeerReviewsByGroupId({ publicRecordId: this.isPublicRecord }, peerReview.groupIdValue)
+      .pipe(first())
+      .subscribe((data) => {
+        this.peerReviews.forEach((pR, index) => {
+          if (pR.groupId === data[0]?.groupId) {
+            this.peerReviews[index] = data.filter((value) => value.groupId === pR.groupId)[0]
+            this.peerReviewPanelComponent.toggle(true)
+          }
+        })
+      })
   }
 
   isQA(): boolean {
