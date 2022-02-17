@@ -1,7 +1,8 @@
 <app-settings-panels-data>
   <div i18n="@@account.copyTheCodeBelow">
     Copy the code below and paste it into your personal website.
-  </div><mat-form-field appearance="outline" class="mat-form-field-min no-hint">
+  </div>
+  <mat-form-field appearance="outline" class="mat-form-field-min no-hint">
     <textarea
       id="description-input"
       matInput
@@ -19,7 +20,8 @@
         style="width: 1em; margin-inline-start: 0.5em"
         alt="ORCID iD icon"/>
      {{ userSession?.userInfo?.EFFECTIVE_USER_ORCID }}
-    </a></textarea>
+    </a></textarea
+    >
   </mat-form-field>
 
   <p>
