@@ -43,6 +43,10 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
 import { SettingsPanelsDataComponent } from './panels/settings-panels-data/settings-panels-data.component'
 import { PanelExpandButtonsComponent } from './panels/settings-panels-expand-buttons/settings-panels-expand-buttons.component'
 import { SettingsPanelsComponent } from './panels/settings-panels/settings-panels.component'
+import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component'
+import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr-code/settings-sharing-qr-code.component'
+import { SettingsSharingHtmlCodeComponent } from './components/settings-sharing-html-code/settings-sharing-html-code.component'
+import { TextFieldModule } from '@angular/cdk/text-field'
 
 @NgModule({
   declarations: [
@@ -68,6 +72,9 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     DialogActionsDuplicatedComponent,
     DialogActionsDuplicatedMergedConfirmedComponent,
     DialogActionsDuplicatedTwoFactorAuthComponent,
+    SettingsSharingComponent,
+    SettingsSharingQrCodeComponent,
+    SettingsSharingHtmlCodeComponent,
   ],
   imports: [
     CommonModule,
@@ -91,6 +98,7 @@ import { SettingsPanelsComponent } from './panels/settings-panels/settings-panel
     MatTableModule,
     ModalModule,
     MatDividerModule,
+    TextFieldModule,
     TwoFactorAuthenticationFormModule,
   ],
   providers: [VerificationEmailModalService],
