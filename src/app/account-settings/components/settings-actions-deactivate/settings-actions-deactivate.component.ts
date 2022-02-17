@@ -27,6 +27,7 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
   deactivatedEmail
   togglzOrcidAngularAccountSettings: boolean
   removeDuplicateUrl: string
+  alreadySendedDeactivatedAccountRequest: boolean
   constructor(
     private _platform: PlatformInfoService,
     private _deactivate: AccountActionsDeactivateService,
@@ -51,6 +52,7 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
       })
   }
   deactivateOrcidAccount() {
+    this.alreadySendedDeactivatedAccountRequest = true
     this.loading.next(true)
     this._deactivate.deactivateAccount().subscribe((email) => {
       this.deactivatedEmail = email
