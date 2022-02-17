@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserService } from '../../../core'
@@ -34,7 +41,8 @@ import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 export class PeerReviewStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
-  @ViewChild('peerReviewPanelComponent') peerReviewPanelComponent: PanelComponent
+  @ViewChild('peerReviewPanelComponent')
+  peerReviewPanelComponent: PanelComponent
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
   @Input() expandedContent: MainPanelsState
@@ -185,7 +193,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   }
 
   getVisibility(peerReview: PeerReview): VisibilityStrings {
-    let visibility;
+    let visibility
     if (this.togglzPeerReviews) {
       visibility = peerReview.visibility
     } else {
@@ -193,14 +201,16 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       visibility =
         peerReview.peerReviewDuplicateGroups[0].peerReviews[0].visibility
           .visibility
-      peerReview.peerReviewDuplicateGroups.forEach((peerReviewDuplicateGroup) => {
-        const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(
-          (p) => p.visibility.visibility !== visibility
-        )
-        if (peerReviews.length > 0) {
-          peerReview.visibilityError = true
+      peerReview.peerReviewDuplicateGroups.forEach(
+        (peerReviewDuplicateGroup) => {
+          const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(
+            (p) => p.visibility.visibility !== visibility
+          )
+          if (peerReviews.length > 0) {
+            peerReview.visibilityError = true
+          }
         }
-      })
+      )
     }
 
     return visibility
@@ -228,12 +238,17 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   getPeerReviewSummaryByGroupId(peerReview: PeerReview) {
     this._recordPeerReviewService
-      .getPeerReviewsByGroupId({ publicRecordId: this.isPublicRecord }, peerReview.groupIdValue)
+      .getPeerReviewsByGroupId(
+        { publicRecordId: this.isPublicRecord },
+        peerReview.groupIdValue
+      )
       .pipe(first())
       .subscribe((data) => {
         this.peerReviews.forEach((pR, index) => {
           if (pR.groupId === data[0]?.groupId) {
-            this.peerReviews[index] = data.filter((value) => value.groupId === pR.groupId)[0]
+            this.peerReviews[index] = data.filter(
+              (value) => value.groupId === pR.groupId
+            )[0]
             this.peerReviewPanelComponent.toggle(true)
           }
         })

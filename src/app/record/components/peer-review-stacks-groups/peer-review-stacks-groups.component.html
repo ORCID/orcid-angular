@@ -39,7 +39,10 @@
         <b>
           {{ peerReview.name }}
         </b>
-        ({{ peerReview?.peerReviewDuplicateGroups?.length || peerReview?.duplicated }})
+        ({{
+          peerReview?.peerReviewDuplicateGroups?.length ||
+            peerReview?.duplicated
+        }})
       </div>
       <app-panel-data class="orc-font-body-small">
         <app-panel-element [hideVisibility]="false">

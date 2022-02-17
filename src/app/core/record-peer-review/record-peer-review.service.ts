@@ -27,7 +27,7 @@ export class RecordPeerReviewService {
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
     private _togglz: TogglzService
-) {
+  ) {
     _togglz
       .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
       .subscribe((value) => (this.togglzPeerReviews = value))
@@ -39,7 +39,9 @@ export class RecordPeerReviewService {
         .get<PeerReview[]>(
           environment.API_WEB +
             options.publicRecordId +
-            (this.togglzPeerReviews ? '/peer-reviews-minimized.json?sortAsc=' : '/peer-reviews.json?sortAsc=') +
+            (this.togglzPeerReviews
+              ? '/peer-reviews-minimized.json?sortAsc='
+              : '/peer-reviews.json?sortAsc=') +
             (options.sortAsc != null ? options.sortAsc : true)
         )
         .pipe(
@@ -67,7 +69,9 @@ export class RecordPeerReviewService {
       this._http
         .get<PeerReview[]>(
           environment.API_WEB +
-            (this.togglzPeerReviews ? 'peer-reviews/peer-reviews-minimized.json?sortAsc=' : 'peer-reviews/peer-reviews.json?sortAsc=') +
+            (this.togglzPeerReviews
+              ? 'peer-reviews/peer-reviews-minimized.json?sortAsc='
+              : 'peer-reviews/peer-reviews.json?sortAsc=') +
             (options.sortAsc != null ? options.sortAsc : true)
         )
         .pipe(
@@ -84,15 +88,19 @@ export class RecordPeerReviewService {
     }
   }
 
-  getPeerReviewsByGroupId(options: UserRecordOptions, groupId): Observable<PeerReview[]> {
+  getPeerReviewsByGroupId(
+    options: UserRecordOptions,
+    groupId
+  ): Observable<PeerReview[]> {
     if (options?.publicRecordId) {
       return this._http
         .get<PeerReview[]>(
           environment.API_WEB +
-          options.publicRecordId +
-          '/peer-reviews-by-group-id.json?sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : true) +
-          '&groupId=' + encodeURIComponent(groupId)
+            options.publicRecordId +
+            '/peer-reviews-by-group-id.json?sortAsc=' +
+            (options.sortAsc != null ? options.sortAsc : true) +
+            '&groupId=' +
+            encodeURIComponent(groupId)
         )
         .pipe(
           retry(3),
@@ -103,9 +111,10 @@ export class RecordPeerReviewService {
       return this._http
         .get<PeerReview[]>(
           environment.API_WEB +
-          'peer-reviews/peer-reviews-by-group-id.json?sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : true) +
-          '&groupId=' + encodeURIComponent(groupId)
+            'peer-reviews/peer-reviews-by-group-id.json?sortAsc=' +
+            (options.sortAsc != null ? options.sortAsc : true) +
+            '&groupId=' +
+            encodeURIComponent(groupId)
         )
         .pipe(
           retry(3),
