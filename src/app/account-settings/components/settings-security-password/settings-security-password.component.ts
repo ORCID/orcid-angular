@@ -39,7 +39,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.form = this._fb.group(
       {
-        oldPassword: [Validators.required],
+        oldPassword: ['', Validators.required],
         password: new FormControl('', {
           validators: [
             Validators.required,
