@@ -4,7 +4,6 @@ import {
   Input,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
@@ -27,7 +26,6 @@ import {
 import { VisibilityStrings } from '../../../types/common.endpoint'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
 import { TogglzService } from '../../../core/togglz/togglz.service'
-import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 
 @Component({
   selector: 'app-peer-reviews',
