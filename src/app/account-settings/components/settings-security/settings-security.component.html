@@ -26,8 +26,10 @@
   [(expandedContent)]="settingSecurityAlternateAccounts"
   class="row"
   [title]="titleAlternativeSignin"
+  [loading]="settingSecurityAlternateAccountsLoading"
 >
   <app-settings-security-alternate-sign-in
+    (loading)="settingSecurityAlternateAccountsLoading = $event"
     *ngIf="settingSecurityAlternateAccounts"
   ></app-settings-security-alternate-sign-in>
 </app-settings-panels>
