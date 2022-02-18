@@ -29,7 +29,8 @@ export class RecordPeerReviewService {
     private _togglz: TogglzService
   ) {
     _togglz
-      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS').pipe(take(1))
+      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
+      .pipe(take(1))
       .subscribe((value) => (this.togglzPeerReviews = value))
   }
 
