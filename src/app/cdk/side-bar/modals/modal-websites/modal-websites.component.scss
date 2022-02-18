@@ -13,7 +13,8 @@
 
 .description {
   ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 8px !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 4px;
   }
 }
 
