@@ -22,6 +22,7 @@ import {
     './settings-defaults-email-frequency.component.scss',
     './settings-defaults-email-frequency.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class SettingsDefaultsEmailFrequencyComponent
   implements OnInit, OnDestroy {
