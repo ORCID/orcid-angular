@@ -10,7 +10,7 @@ import { retry, catchError, tap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { cloneDeep } from 'lodash'
 import { TogglzService } from '../togglz/togglz.service'
-
+import { take } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root',
 })
