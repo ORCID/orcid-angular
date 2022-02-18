@@ -41,8 +41,6 @@ import { PanelComponent } from '../../../cdk/panel/panel/panel.component'
 export class PeerReviewStacksGroupsComponent implements OnInit {
   labelAddButton = $localize`:@@shared.addPeerReviews:Add Peer Review`
   labelSortButton = $localize`:@@shared.sortPeerReviews:Sort Peer Reviews`
-  @ViewChild('peerReviewPanelComponent')
-  peerReviewPanelComponent: PanelComponent
   @Input() userInfo: UserInfo
   @Input() isPublicRecord: string
   @Input() expandedContent: MainPanelsState
@@ -246,10 +244,14 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       .subscribe((data) => {
         this.peerReviews.forEach((pR, index) => {
           if (pR.groupId === data[0]?.groupId) {
-            this.peerReviews[index] = data.filter(
-              (value) => value.groupId === pR.groupId
-            )[0]
-            this.peerReviewPanelComponent.toggle(true)
+            const groupedPeerReview = data.filter((value) => value.groupId === pR.groupId)[0]
+            this.peerReviews[index].type = groupedPeerReview.type
+            this.peerReviews[index].description = groupedPeerReview.description
+            this.peerReviews[index].groupType = groupedPeerReview.groupType
+            this.peerReviews[index].url = groupedPeerReview.url
+            this.peerReviews[index].groupIdValue = groupedPeerReview.groupIdValue
+            this.peerReviews[index].peerReviewDuplicateGroups = groupedPeerReview.peerReviewDuplicateGroups
+            this.peerReviews[index].visibilityError = groupedPeerReview.visibilityError
           }
         })
       })
