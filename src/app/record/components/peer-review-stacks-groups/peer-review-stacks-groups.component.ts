@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserService } from '../../../core'
@@ -242,14 +236,19 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
       .subscribe((data) => {
         this.peerReviews.forEach((pR, index) => {
           if (pR.groupId === data[0]?.groupId) {
-            const groupedPeerReview = data.filter((value) => value.groupId === pR.groupId)[0]
+            const groupedPeerReview = data.filter(
+              (value) => value.groupId === pR.groupId
+            )[0]
             this.peerReviews[index].type = groupedPeerReview.type
             this.peerReviews[index].description = groupedPeerReview.description
             this.peerReviews[index].groupType = groupedPeerReview.groupType
             this.peerReviews[index].url = groupedPeerReview.url
-            this.peerReviews[index].groupIdValue = groupedPeerReview.groupIdValue
-            this.peerReviews[index].peerReviewDuplicateGroups = groupedPeerReview.peerReviewDuplicateGroups
-            this.peerReviews[index].visibilityError = groupedPeerReview.visibilityError
+            this.peerReviews[index].groupIdValue =
+              groupedPeerReview.groupIdValue
+            this.peerReviews[index].peerReviewDuplicateGroups =
+              groupedPeerReview.peerReviewDuplicateGroups
+            this.peerReviews[index].visibilityError =
+              groupedPeerReview.visibilityError
           }
         })
       })

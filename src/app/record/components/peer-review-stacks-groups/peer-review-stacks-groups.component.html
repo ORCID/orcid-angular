@@ -46,18 +46,22 @@
       </div>
       <app-panel-data class="orc-font-body-small">
         <div class="row horizontal-center" *ngIf="!peerReview?.type">
-          <mat-progress-spinner color="primary" mode="indeterminate" class="col" >
+          <mat-progress-spinner
+            color="primary"
+            mode="indeterminate"
+            class="col"
+          >
           </mat-progress-spinner>
         </div>
         <ng-container *ngIf="peerReview?.type">
           <app-panel-element [hideVisibility]="false">
             <div class="description">
-                <p>
-                  <span class="capitalize">
-                    {{ peerReview.type + (peerReview.description ? ',' : '') }}
-                  </span>
-                  {{ peerReview.description }}
-                </p>
+              <p>
+                <span class="capitalize">
+                  {{ peerReview.type + (peerReview.description ? ',' : '') }}
+                </span>
+                {{ peerReview.description }}
+              </p>
               <ng-container *ngIf="peerReview.groupType">
                 <p>
                   {{ peerReview.groupType }}:

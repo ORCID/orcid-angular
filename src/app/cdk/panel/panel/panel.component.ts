@@ -215,8 +215,8 @@ export class PanelComponent implements OnInit {
   }
 
   toggle() {
-      this.openState = !this.openState
-      this.openStateChange.next(this.openState)
+    this.openState = !this.openState
+    this.openStateChange.next(this.openState)
   }
 
   updateVisibility(visibility: VisibilityStrings) {
