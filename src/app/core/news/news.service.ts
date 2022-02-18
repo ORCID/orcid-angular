@@ -5,7 +5,6 @@ import { catchError, flatMap, retry } from 'rxjs/operators'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { environment } from 'src/environments/environment'
 import { Parser } from 'xml2js'
-import { TogglzService } from '../togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +15,7 @@ export class NewsService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-    private _togglz: TogglzService
+    private _errorHandler: ErrorHandlerService
   ) {}
 
   getNews() {
