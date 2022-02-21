@@ -46,13 +46,13 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
       })
   }
 
-  deprecatedAccount() {
-    this.errors = []
+  onSubmit() {
     this.loading.next(true)
     this._duplicateService
       .deprecate(this.form.value)
       .pipe(
         switchMap((data) => {
+          this.errors = []
           this.loading.next(false)
           if (data.errors?.length) {
             this.errors = data.errors
@@ -93,8 +93,13 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
             .afterClosed()
         })
       )
-      .subscribe(() => {
-        this.loading.next(false)
-      })
+      .subscribe(
+        () => {
+          this.loading.next(false)
+        },
+        () => {
+          this.loading.next(false)
+        }
+      )
   }
 }

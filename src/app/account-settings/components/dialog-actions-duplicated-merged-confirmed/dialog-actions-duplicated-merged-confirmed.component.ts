@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment'
   selector: 'app-dialog-actions-duplicated-merged-confirmed',
   templateUrl: './dialog-actions-duplicated-merged-confirmed.component.html',
   styleUrls: ['./dialog-actions-duplicated-merged-confirmed.component.scss'],
+  preserveWhitespaces: true,
 })
 export class DialogActionsDuplicatedMergedConfirmedComponent implements OnInit {
   baseUrl = environment.BASE_URL

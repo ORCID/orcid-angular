@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { catchError, retry } from 'rxjs/operators'
+import { ERROR_REPORT } from 'src/app/errors'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
 import { environment } from 'src/environments/environment'
 
@@ -31,7 +32,9 @@ export class AccountActionsDuplicatedService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) =>
+          this._errorHandler.handleError(error, ERROR_REPORT.STANDARD_VERBOSE)
+        )
       )
   }
 

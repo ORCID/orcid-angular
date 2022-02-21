@@ -1,4 +1,4 @@
-<app-settings-panels-data>
+<app-settings-panels-data *ngIf="userSession">
   <div i18n="@@account.copyTheCodeBelow">
     Copy the code below and paste it into your personal website.
   </div>
@@ -19,7 +19,7 @@
         src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
         style="width: 1em; margin-inline-start: 0.5em"
         alt="ORCID iD icon"/>
-     {{ userSession?.userInfo?.EFFECTIVE_USER_ORCID }}
+      {{ userSession.effectiveOrcidUrl }}
     </a></textarea
     >
   </mat-form-field>
@@ -38,7 +38,7 @@
       style="width: 1em; margin-inline-start: 0.5em"
       alt="ORCID iD icon"
     />
-    {{ userSession?.userInfo?.EFFECTIVE_USER_ORCID }}
+    {{ userSession.effectiveOrcidUrl }}
   </a>
   <p>
     <i i18n="@@account.defaultStyleShown"
