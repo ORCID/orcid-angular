@@ -130,15 +130,18 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   private observeSessionUpdates() {
-    this._userSession.getUserSession().subscribe((value) => {
-      if (
-        value?.userInfo?.REAL_USER_ORCID !== this.userInfo.REAL_USER_ORCID ||
-        value?.userInfo?.EFFECTIVE_USER_ORCID !==
-          this.userInfo.EFFECTIVE_USER_ORCID
-      ) {
-        this.window.location.reload()
-      }
-    })
+    this._userSession
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((value) => {
+        if (
+          value?.userInfo?.REAL_USER_ORCID !== this.userInfo.REAL_USER_ORCID ||
+          value?.userInfo?.EFFECTIVE_USER_ORCID !==
+            this.userInfo.EFFECTIVE_USER_ORCID
+        ) {
+          this.window.location.reload()
+        }
+      })
   }
 
   private setMyOrcidIdQueryParameter() {
