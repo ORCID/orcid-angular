@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { of, throwError } from 'rxjs'
-import { switchMap, take } from 'rxjs/operators'
+import { catchError, switchMap, take } from 'rxjs/operators'
 import { UserService } from 'src/app/core'
 import { AccountActionsDuplicatedService } from 'src/app/core/account-actions-duplicated/account-actions-duplicated.service'
 import { UserSession } from 'src/app/types/session.local'
@@ -46,13 +46,13 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
       })
   }
 
-  deprecatedAccount() {
-    this.errors = []
+  onSubmit() {
     this.loading.next(true)
     this._duplicateService
       .deprecate(this.form.value)
       .pipe(
         switchMap((data) => {
+          this.errors = []
           this.loading.next(false)
           if (data.errors?.length) {
             this.errors = data.errors
@@ -93,8 +93,13 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
             .afterClosed()
         })
       )
-      .subscribe(() => {
-        this.loading.next(false)
-      })
+      .subscribe(
+        () => {
+          this.loading.next(false)
+        },
+        () => {
+          this.loading.next(false)
+        }
+      )
   }
 }

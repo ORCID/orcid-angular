@@ -29,6 +29,7 @@ import { FormSignInComponent } from '../../components/form-sign-in/form-sign-in.
 export class SignInComponent implements OnInit {
   @HostBinding('class.container') containerClass = true
   @ViewChild('formSignInComponent') formSignInComponent: FormSignInComponent
+  
   requestInfoForm: RequestInfoForm // deprecated
   params: HttpParams // deprecated
   loading = false // TODO @Daniel seems like some progress bars depend on this but is never true
@@ -52,6 +53,7 @@ export class SignInComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.formSignInComponent.onSubmit()
     combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(first())
       .subscribe(([session, platform]) => {
