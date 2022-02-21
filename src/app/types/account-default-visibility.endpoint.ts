@@ -34,5 +34,5 @@ export const EmailFrequenciesLabels = {
   [EmailFrequencies.daily]: $localize`:@@account.daily:Daily summary`,
   [EmailFrequencies.weekly]: $localize`:@@account.weekly:Weekly summary`,
   [EmailFrequencies.quarterly]: $localize`:@@account.quarterly:Quarterly summary`,
-  [EmailFrequencies.never]: $localize`:@@account.never:Never (no emails or inbox notifications)`,
+  [EmailFrequencies.never]: $localize`:@@account.never:Never`,
 }
