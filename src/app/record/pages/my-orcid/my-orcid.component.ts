@@ -9,9 +9,10 @@ import { MainPanelsState, UserRecord } from '../../../types/record.local'
 import { OpenGraphService } from 'src/app/core/open-graph/open-graph.service'
 import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta-tags.service'
 import { UserInfoService } from '../../../core/user-info/user-info.service'
-import { UserInfo } from '../../../types'
+import { AssertionVisibilityString, UserInfo } from '../../../types'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-my-orcid',
@@ -61,6 +62,18 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _userSession: UserService,
     @Inject(WINDOW) private window: Window
   ) {}
+
+  private static getNumberOfValidatedEmails(emails: AssertionVisibilityString[]):
+    { numberOfValidatedEmails: number, numberOfUnvalidatedEmails: number} {
+    return {
+      numberOfValidatedEmails: emails?.filter(email => {
+        return email.verified === true;
+      }).length,
+      numberOfUnvalidatedEmails: emails?.filter(email => {
+        return email.verified === false;
+      }).length
+    }
+  }
 
   private checkIfThisIsAPublicOrcid() {
     if (this.getRouteOrcidID()) {
@@ -124,6 +137,9 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             this._robotsMeta.disallowRobots()
           }
           this._openGraph.addOpenGraphData(userRecord, { force: true })
+          if (environment.APPCUES) {
+            this.initializeAppCues(this.userInfo, this.userRecord)
+          }
         })
       )
       .subscribe()
@@ -199,5 +215,15 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
       }
     })
     this.loadingUserRecord = !!missingValues.length
+  }
+
+  initializeAppCues(userInfo: UserInfo, userRecord: UserRecord) {
+    this.window['Appcues']?.identify(
+      userInfo?.EFFECTIVE_USER_ORCID,
+      {
+        numberOfValidatedEmails: MyOrcidComponent.getNumberOfValidatedEmails(userRecord?.emails?.emails).numberOfValidatedEmails,
+        numberOfUnvalidatedEmails: MyOrcidComponent.getNumberOfValidatedEmails(userRecord?.emails?.emails).numberOfUnvalidatedEmails
+      }
+    );
   }
 }
