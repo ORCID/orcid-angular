@@ -79,7 +79,7 @@ export class AppComponent {
         _googleAnalytics.reportNavigationEnd(event.url)
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
         if (environment.APPCUES) {
-            this._window['Appcues']?.page();
+          this._window['Appcues']?.page()
         }
       }
     })

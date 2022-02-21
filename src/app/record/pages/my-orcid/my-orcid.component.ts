@@ -63,15 +63,16 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     @Inject(WINDOW) private window: Window
   ) {}
 
-  private static getNumberOfValidatedEmails(emails: AssertionVisibilityString[]):
-    { numberOfValidatedEmails: number, numberOfUnvalidatedEmails: number} {
+  private static getNumberOfValidatedEmails(
+    emails: AssertionVisibilityString[]
+  ): { numberOfValidatedEmails: number; numberOfUnvalidatedEmails: number } {
     return {
-      numberOfValidatedEmails: emails?.filter(email => {
-        return email.verified === true;
+      numberOfValidatedEmails: emails?.filter((email) => {
+        return email.verified === true
       }).length,
-      numberOfUnvalidatedEmails: emails?.filter(email => {
-        return email.verified === false;
-      }).length
+      numberOfUnvalidatedEmails: emails?.filter((email) => {
+        return email.verified === false
+      }).length,
     }
   }
 
@@ -218,12 +219,13 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
   }
 
   initializeAppCues(userInfo: UserInfo, userRecord: UserRecord) {
-    this.window['Appcues']?.identify(
-      userInfo?.EFFECTIVE_USER_ORCID,
-      {
-        numberOfValidatedEmails: MyOrcidComponent.getNumberOfValidatedEmails(userRecord?.emails?.emails).numberOfValidatedEmails,
-        numberOfUnvalidatedEmails: MyOrcidComponent.getNumberOfValidatedEmails(userRecord?.emails?.emails).numberOfUnvalidatedEmails
-      }
-    );
+    this.window['Appcues']?.identify(userInfo?.EFFECTIVE_USER_ORCID, {
+      numberOfValidatedEmails: MyOrcidComponent.getNumberOfValidatedEmails(
+        userRecord?.emails?.emails
+      ).numberOfValidatedEmails,
+      numberOfUnvalidatedEmails: MyOrcidComponent.getNumberOfValidatedEmails(
+        userRecord?.emails?.emails
+      ).numberOfUnvalidatedEmails,
+    })
   }
 }
