@@ -2,10 +2,10 @@ const date = require('../helpers/date')
 
 module.exports = function () {
   return {
-    email: 'k.madrigal' + '+' + date() + '@orcid.org',
+    email: 'qa' + '+cy_' + date() + '@orcid.org',
     password: '12345678Aa',
-    name: 'orcidqa' + '_' + date() + '_name',
-    familyName: 'orcidqa' + '_' + date()+ '_family',
+    name: 'cy_'+ date() + '_name',
+    familyName: 'cy_'+ date()+ '_family',
     id: undefined,
   }
 }

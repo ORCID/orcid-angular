@@ -14,9 +14,9 @@
 /// <reference types="Cypress" />
 const debug = require("debug");
 const path = require("path");
-const gmail_tester = require("gmail-tester-extended");
-const tokenFileName = "token_kmadrigal.json";//credentials.json is inside plugins/ directory
-const credentialsFileName = "credentials.json";//token.json is inside plugins/ directory 
+const gmail_tester = require("gmail-tester-extended"); //node_modules library
+const tokenFileName = "token_qa.json";//token file is inside plugins/ directory
+const credentialsFileName = "credentials_qa.json";//credentials is inside plugins/ directory 
 
 module.exports = (on, config) => {
   on('before:browser:launch', (browser, launchOptions) => {
@@ -50,8 +50,8 @@ module.exports = (on, config) => {
         subject,
         from,
         to,
-        10,                                          // Poll interval (in seconds)
-        15                                           // Maximum poll interval (in seconds). If reached, return null, indicating the completion of the task().
+        10, // Poll interval (in seconds)
+        15 // Maximum poll interval (in seconds). If reached, return null, indicating the completion of the task().
       );
       console.log(`This is the email found: ${JSON.stringify(email.snippet)}`);
       return email; //this task returns one email (JSON object)
