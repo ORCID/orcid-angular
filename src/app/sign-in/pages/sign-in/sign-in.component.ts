@@ -53,7 +53,6 @@ export class SignInComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.formSignInComponent.onSubmit()
     combineLatest([this._userInfo.getUserSession(), this._platformInfo.get()])
       .pipe(first())
       .subscribe(([session, platform]) => {
