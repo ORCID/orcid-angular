@@ -206,13 +206,13 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work, bibtex?: boolean): Observable<Work | any> {
+  save(work: Work, bibtex?: boolean): Observable<WorksEndpoint | never> {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        switchMap(() =>
+        switchMap((data) =>
           bibtex === false ? EMPTY : this.getWorks({ forceReload: true })
         )
       )

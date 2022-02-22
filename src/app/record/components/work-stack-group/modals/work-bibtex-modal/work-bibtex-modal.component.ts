@@ -336,14 +336,10 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         this._recordWorksService
           .save(work, index === this.selectedWorks.length - 1)
           .subscribe((data) => {
-            if (data?.errors?.length > 0) {
-              this.displayBackendError(data?.errors[0])
-            } else {
-              if (index === this.selectedWorks.length - 1) {
-                this.loadingWorks = false
-                this.worksFromBibtex = []
-                this.closeEvent()
-              }
+            if (index === this.selectedWorks.length - 1) {
+              this.loadingWorks = false
+              this.worksFromBibtex = []
+              this.closeEvent()
             }
           })
       })
