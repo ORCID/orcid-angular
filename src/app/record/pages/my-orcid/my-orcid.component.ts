@@ -127,9 +127,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             this._robotsMeta.disallowRobots()
           }
           this._openGraph.addOpenGraphData(userRecord, { force: true })
-          if (environment.APPCUES) {
-            this._appcueService.initializeAppCues(this.userInfo, this.userRecord)
-          }
+          this._appcueService.initializeAppCues(this.userInfo, this.userRecord)
         })
       )
       .subscribe()
