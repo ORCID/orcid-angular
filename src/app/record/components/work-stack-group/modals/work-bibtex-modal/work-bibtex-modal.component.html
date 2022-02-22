@@ -92,7 +92,11 @@
       <div class="row">
         <div class="row">
           <p>
-            <mat-checkbox (change)="updateCheckAll()" [(ngModel)]="selectAll">
+            <mat-checkbox
+              (change)="updateCheckAll()"
+              [(ngModel)]="selectAll"
+              [disabled]="isAnInvalidWork"
+            >
               <ng-container
                 i18n="@@shared.selectAll"
                 *ngIf="selectedWorks.length === 0"
@@ -119,6 +123,7 @@
               <mat-checkbox
                 (change)="updateCheck(work)"
                 formControlName="checked"
+                [disabled]="work?.errors?.length > 0"
               >
                 <h2 class="orc-font-body" *ngIf="work?.title?.value">
                   {{ work?.title?.value }}
@@ -142,6 +147,13 @@
                 </p>
               </mat-checkbox>
             </div>
+            <mat-error
+              *ngIf="work?.errors"
+              class="bibtex-error mat-caption"
+              i18n="@@side-bar.alreadyAssociated"
+            >
+              {{ work.errors }}
+            </mat-error>
           </div>
           <mat-divider class="row"></mat-divider>
         </ng-container>
