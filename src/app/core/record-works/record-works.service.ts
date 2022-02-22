@@ -206,7 +206,7 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work, bibtex?: boolean): Observable<{ errors: string }> {
+  save(work: Work, bibtex?: boolean): Observable<Work | any> {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
