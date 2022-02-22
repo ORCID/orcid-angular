@@ -16,6 +16,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
+import { SortOrderType } from '../../types/sort'
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,9 @@ export class RecordWorksService {
   groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
   $workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
+  sortOrder: SortOrderType = 'date'
+  sortAsc = false
+  pageSize = DEFAULT_PAGE_SIZE
 
   userRecordOptions: UserRecordOptions = {}
 
@@ -68,6 +72,10 @@ export class RecordWorksService {
 
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
+    this.pageSize = options.pageSize
+    this.offset = options.offset
+    this.sortOrder = options.sort
+    this.sortAsc = options.sortAsc
 
     let url
     if (options.publicRecordId) {
@@ -168,6 +176,17 @@ export class RecordWorksService {
       )
   }
 
+  getWorksInfo(putCodes: string[], orcidId?: string): Observable<Work[]> {
+    return this._http
+      .get<Work[]>(
+        environment.API_WEB + `works/worksInfo/${putCodes.join(',')}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
   getWorksData(
     offset,
     sort,
@@ -218,6 +237,13 @@ export class RecordWorksService {
     putCode: string,
     visibility: VisibilityStrings
   ): Observable<any> {
+    const options = {
+      forceReload: true,
+      offset: this.offset,
+      sort: this.sortOrder,
+      sortAsc: this.sortAsc,
+    }
+
     return this._http
       .get(
         environment.API_WEB + 'works/' + putCode + '/visibility/' + visibility
@@ -225,7 +251,7 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks({ forceReload: true }))
+        tap(() => this.getWorks(options))
       )
   }
 
@@ -345,7 +371,7 @@ export class RecordWorksService {
   ): Observable<Work> {
     let url = 'works/resolve/doi?value='
     if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
-      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\d{5})/g)
+      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\/?\d{5})/g)
       const result = regex.exec(externalId)
       url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
     }

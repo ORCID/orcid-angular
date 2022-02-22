@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { forkJoin, Observable, Subject } from 'rxjs'
-import { switchMap, take, takeUntil, map, catchError } from 'rxjs/operators'
+import { catchError, map, take, takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { ApplicationRoutes } from 'src/app/constants'
@@ -10,14 +10,16 @@ import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.se
 import { GoogleAnalyticsService } from 'src/app/core/google-analytics/google-analytics.service'
 import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import { ERROR_REPORT } from 'src/app/errors'
 import { RequestInfoForm, Scope } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
 import {
-  TrustedIndividuals,
   Delegator,
+  TrustedIndividuals,
 } from 'src/app/types/trusted-individuals.endpoint'
 import { environment } from 'src/environments/environment'
+
 @Component({
   selector: 'app-form-authorize',
   templateUrl: './form-authorize.component.html',
@@ -43,7 +45,8 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     private _signingService: SignInService,
     private _platformInfo: PlatformInfoService,
     private _router: Router,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _trustedIndividuals: TrustedIndividualsService
   ) {
     this._user
       .getUserSession()
@@ -58,7 +61,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
         if (userInfo.loggedIn) {
           this.userName = userInfo.displayName
           this.orcidUrl = userInfo.effectiveOrcidUrl
-          this.trustedIndividuals = userInfo.trustedIndividuals
         } else {
           // if the user logouts in the middle of a oauth section on another tab
           this._platformInfo
@@ -71,23 +73,16 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
             )
         }
       })
+
+    this._trustedIndividuals.getTrustedIndividuals().subscribe((value) => {
+      this.trustedIndividuals = value
+    })
   }
 
   ngOnInit(): void {}
 
   navigateTo(val) {
     this.window.location.href = val
-  }
-
-  signOut() {
-    this._signingService
-      .singOut()
-      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
-      .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin], {
-          queryParams: { ...platform.queryParameters },
-        })
-      })
   }
 
   authorize(value = true) {
@@ -201,7 +196,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   changeAccount(delegator: Delegator) {
     this.loadingTrustedIndividuals = true
     this.loadingUserInfo = true
-    this._user.switchAccount(delegator)
+
+    this._user.switchAccount(delegator).subscribe(() => {
+      this.window.location.reload()
+    })
   }
   ngOnDestroy() {
     this.$destroy.next(true)

@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
+import { TrustedIndividualsService } from 'src/app/core/trusted-individuals/trusted-individuals.service'
 import {
   Delegator,
   TrustedIndividuals,
@@ -29,7 +30,8 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
     _platform: PlatformInfoService,
     private _user: UserService,
     private router: Router,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _trustedIndividuals: TrustedIndividualsService
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +43,14 @@ export class TopBarMyPublicRecordPreviewComponent implements OnInit {
         this.isMyRecord =
           value.userInfo.REAL_USER_ORCID === value.userInfo.EFFECTIVE_USER_ORCID
         this.effectiveRecord = value.userInfo.EFFECTIVE_USER_ORCID
-        this.trustedIndividuals = value.trustedIndividuals
       }
     })
+
+    if (!this.isPublicRecord) {
+      this._trustedIndividuals.getTrustedIndividuals().subscribe((value) => {
+        this.trustedIndividuals = value
+      })
+    }
   }
   goToMyRecord() {
     this.router.navigate(['/my-orcid'])

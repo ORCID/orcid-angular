@@ -1,0 +1,24 @@
+<div class="col s4 m8 l12 no-gutters">
+  <div class="header-container settings-header-container">
+    <div class="inline-initial-side">
+      <app-settings-panels-expand-buttons
+        (toggle)="collapse()"
+        [openState]="expandedContent"
+      ></app-settings-panels-expand-buttons>
+
+      <div class="text-container">
+        <div class="orc-font-body-large clickable" (click)="collapse()">
+          <strong> {{ title }} </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-progress-bar
+  mode="indeterminate"
+  color="accent"
+  *ngIf="loading"
+></mat-progress-bar>
+<div class="col s4 m8 l12 content no-gutters" *ngIf="expandedContent">
+  <ng-content></ng-content>
+</div>

@@ -83,7 +83,9 @@
       <label
         for="given-names-input"
         class="mat-caption"
-        [ngClass]="{ error: namesForm.hasError('required', 'givenNames') }"
+        [ngClass]="{
+          error: namesForm.hasError('required', 'givenNames')
+        }"
       >
         <strong i18n="@@topBar.givenNames">Given names</strong>
         <span class="required">*</span>

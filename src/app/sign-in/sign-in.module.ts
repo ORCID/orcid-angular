@@ -11,20 +11,19 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SocialComponent } from './components/social/social.component'
 import { DeactivatedComponent } from './components/errors/deactivated/deactivated.component'
-import { TwoFactorComponent } from './components/two-factor/two-factor.component'
 import { LoggedInComponent } from './components/logged-in/logged-in.component'
 import { PrintErrorsComponent } from './components/errors/print-errors/print-errors.component'
 import { FormSignInComponent } from './components/form-sign-in/form-sign-in.component'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { A11yLinkModule } from '../cdk/a11y-link/a11y-link.module'
 import { MyOrcidAlertsModule } from '../cdk/my-orcid-alerts/my-orcid-alerts.module'
+import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authentication-form/two-factor-authentication-form.module'
 
 @NgModule({
   declarations: [
     SignInComponent,
     SocialComponent,
     DeactivatedComponent,
-    TwoFactorComponent,
     LoggedInComponent,
     PrintErrorsComponent,
     FormSignInComponent,
@@ -43,7 +42,8 @@ import { MyOrcidAlertsModule } from '../cdk/my-orcid-alerts/my-orcid-alerts.modu
     FormDirectivesModule,
     A11yLinkModule,
     MyOrcidAlertsModule,
+    TwoFactorAuthenticationFormModule,
   ],
-  exports: [FormSignInComponent, TwoFactorComponent],
+  exports: [FormSignInComponent],
 })
 export class SignInModule {}

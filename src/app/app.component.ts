@@ -1,9 +1,10 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component, HostBinding, HostListener, Inject } from '@angular/core'
 import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import { tap } from 'rxjs/operators'
 
 import { PlatformInfo } from './cdk/platform-info'
 import { PlatformInfoService } from './cdk/platform-info/platform-info.service'
+import { WINDOW } from './cdk/window'
 import { HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
@@ -36,7 +37,8 @@ export class AppComponent {
     _router: Router,
     _googleAnalytics: GoogleAnalyticsService,
     _zendesk: ZendeskService,
-    _userService: UserService
+    private _userService: UserService,
+    @Inject(WINDOW) private _window: Window
   ) {
     _platformInfo
       .get()
@@ -60,6 +62,7 @@ export class AppComponent {
             this.currentlyDisplayingZendesk
           ) {
             _zendesk.hide()
+
             this.currentlyDisplayingZendesk = false
           }
         })
@@ -101,5 +104,10 @@ export class AppComponent {
     this.columns8 = platformInfo.columns8
     this.columns12 = platformInfo.columns12
     this.columns4 = platformInfo.columns4
+  }
+
+  @HostListener('window:visibilitychange')
+  onVisibilityChange(value) {
+    this._userService.setTimerAsHiddenState(this._window.document.hidden)
   }
 }

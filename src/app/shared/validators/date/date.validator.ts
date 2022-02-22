@@ -83,13 +83,21 @@ export function endDateMonthYearValidator() {
     }
 
     const endDateYear = c.get('endDateGroup.endDateYear').value
-    const endDateMonth = c.get('endDateGroup.endDateMonth').value
+    let endDateMonth = c.get('endDateGroup.endDateMonth').value
 
     const startDateYear = c.get('startDateGroup.startDateYear').value
-    const startDateMonth = c.get('startDateGroup.startDateMonth').value
+    let startDateMonth = c.get('startDateGroup.startDateMonth').value
 
     if (!endDateYear || !startDateYear) {
       return null
+    }
+
+    if (!startDateMonth) {
+      startDateMonth = 1
+    }
+
+    if (!endDateMonth) {
+      endDateMonth = 12
     }
 
     const dates = startAndEndDate(
@@ -137,15 +145,31 @@ export function endDateValidator() {
     }
 
     const endDateYear = c.get('endDateGroup.endDateYear').value
-    const endDateMonth = c.get('endDateGroup.endDateMonth').value
-    const endDateDay = c.get('endDateGroup.endDateDay').value
+    let endDateMonth = c.get('endDateGroup.endDateMonth').value
+    let endDateDay = c.get('endDateGroup.endDateDay').value
 
     const startDateYear = c.get('startDateGroup.startDateYear').value
-    const startDateMonth = c.get('startDateGroup.startDateMonth').value
-    const startDateDay = c.get('startDateGroup.startDateDay').value
+    let startDateMonth = c.get('startDateGroup.startDateMonth').value
+    let startDateDay = c.get('startDateGroup.startDateDay').value
 
     if (!endDateYear || !startDateYear) {
       return null
+    }
+
+    if (!startDateMonth) {
+      startDateMonth = 1
+    }
+
+    if (!startDateDay) {
+      startDateDay = 1
+    }
+
+    if (!endDateMonth) {
+      endDateMonth = 12
+    }
+
+    if (!endDateDay) {
+      endDateDay = 31
     }
 
     const dates = startAndEndDate(

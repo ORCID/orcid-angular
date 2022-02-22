@@ -1,0 +1,38 @@
+<h1 class="orc-font-heading-small col" i18n="@@account.settings">
+  Account settings
+</h1>
+<h2 class="orc-font-body col" i18n="@@account.defaults">Defaults</h2>
+
+<app-settings-panels
+  [loading]="emailFrequencyLoading"
+  [(expandedContent)]="emailFrequencyExpanded"
+  class="row"
+  [title]="titleEmailFrequency"
+>
+  <app-settings-defaults-email-frequency
+    *ngIf="emailFrequencyExpanded"
+    (loading)="emailFrequencyLoading = $event"
+  ></app-settings-defaults-email-frequency>
+</app-settings-panels>
+
+<app-settings-panels
+  class="row"
+  [title]="titleLanguage"
+  [loading]="languageFrequencyLoading"
+>
+  <app-settings-defaults-language
+    (loading)="languageFrequencyLoading = $event"
+  ></app-settings-defaults-language>
+</app-settings-panels>
+
+<app-settings-panels
+  class="row"
+  [title]="titleVisibility"
+  [loading]="visibilityFrequencyLoading"
+  [(expandedContent)]="visibilityExpanded"
+>
+  <app-settings-defaults-visibility
+    *ngIf="visibilityExpanded"
+    (loading)="visibilityFrequencyLoading = $event"
+  ></app-settings-defaults-visibility>
+</app-settings-panels>

@@ -1,0 +1,14 @@
+<div class="panel-data-container border-bottom">
+  <div class="data-content">
+    <ng-content></ng-content>
+  </div>
+  <div
+    class="align-end-content"
+    [ngClass]="{
+      'orc-font-small-print': isMobile,
+      'orc-font-body-small': !isMobile
+    }"
+  >
+    <ng-content select="[align-end]"></ng-content>
+  </div>
+</div>

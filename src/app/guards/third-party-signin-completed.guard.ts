@@ -1,13 +1,14 @@
 import { Inject, Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
   CanActivateChild,
   Router,
+  RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router'
 import { Observable } from 'rxjs'
 import { first, map } from 'rxjs/operators'
+
 import { WINDOW } from '../cdk/window'
 import { UserService } from '../core'
 import { GoogleAnalyticsService } from '../core/google-analytics/google-analytics.service'

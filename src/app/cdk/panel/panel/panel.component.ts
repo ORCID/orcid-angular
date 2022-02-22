@@ -2,7 +2,6 @@ import { ComponentType } from '@angular/cdk/portal'
 import {
   Component,
   EventEmitter,
-  HostListener,
   Inject,
   Input,
   OnInit,
@@ -288,10 +287,5 @@ export class PanelComponent implements OnInit {
           .subscribe()
         break
     }
-  }
-
-  @HostListener('window:visibilitychange')
-  onVisibilityChange() {
-    this._userService.setTimerAsHiddenState(this._window.document.hidden)
   }
 }

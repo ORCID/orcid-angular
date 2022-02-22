@@ -53,6 +53,14 @@
   </button>
   <button
     mat-menu-item
+    *ngIf="togglzOrcidAngularAccountSettings"
+    (click)="goto('trusted-parties')"
+  >
+    <mat-icon>key</mat-icon>
+    <span i18n="@@layout.trustedParties">Trusted parties</span>
+  </button>
+  <button
+    mat-menu-item
     *ngIf="
       userInfo &&
       (userInfo['IN_DELEGATION_MODE'] == 'false' ||
@@ -101,7 +109,7 @@
     <mat-icon>verified_user</mat-icon>
     <span i18n="@@ngOrcid.adminPage">Admin page</span>
   </button>
-  <button mat-menu-item (click)="signOut()">
+  <button mat-menu-item (click)="navigateTo('/signout')">
     <mat-icon>exit_to_app</mat-icon>
     <span i18n="@@ngOrcid.logout">Logout</span>
   </button>

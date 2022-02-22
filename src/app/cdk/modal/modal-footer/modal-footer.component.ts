@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { PlatformInfoService } from '../../platform-info'
@@ -11,7 +11,7 @@ import { PlatformInfoService } from '../../platform-info'
     './modal-footer.component.scss-theme.scss',
   ],
 })
-export class ModalFooterComponent implements OnInit {
+export class ModalFooterComponent implements OnInit, OnDestroy {
   handset: boolean
   screenDirection: string
   constructor(private _platform: PlatformInfoService) {}

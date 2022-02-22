@@ -7,7 +7,7 @@ Before the following steps make sure to have `npm` and `yarn` installed
 2- Run the following command
 
 ```
-yarn install
+yarn
 yarn run cypress:open
 ```
 

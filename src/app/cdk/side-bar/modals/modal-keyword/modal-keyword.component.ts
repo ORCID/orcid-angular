@@ -1,30 +1,31 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import {
   ChangeDetectorRef,
-  ElementRef,
   Component,
+  ElementRef,
   Inject,
   OnDestroy,
   OnInit,
   QueryList,
   ViewChildren,
 } from '@angular/core'
-import { Assertion } from '../../../../types'
-import { UserService } from '../../../../core'
-import { WINDOW } from '../../../window'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { cloneDeep } from 'lodash'
 import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
 import { ModalComponent } from 'src/app/cdk/modal/modal/modal.component'
-import { UserSession } from 'src/app/types/session.local'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordKeywordService } from 'src/app/core/record-keyword/record-keyword.service'
-import { UserRecord } from 'src/app/types/record.local'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import { KeywordEndPoint } from 'src/app/types/record-keyword.endpoint'
-import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { UserRecord } from 'src/app/types/record.local'
+import { UserSession } from 'src/app/types/session.local'
+
+import { UserService } from '../../../../core'
+import { Assertion } from '../../../../types'
+import { WINDOW } from '../../../window'
 
 @Component({
   selector: 'app-modal-keyword',

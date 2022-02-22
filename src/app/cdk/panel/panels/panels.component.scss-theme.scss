@@ -14,6 +14,11 @@
       color: mat-contrast($accent, 900);
     }
 
+    .white-header-container {
+      border-color: mat-color($background, ui-background) !important;
+      background-color: mat-color($background, ui-background-lightest);
+    }
+
     .sub-peer-review {
       border-color: mat-color($background, ui-background) !important;
       background-color: mat-color($background, ui-background) !important;
