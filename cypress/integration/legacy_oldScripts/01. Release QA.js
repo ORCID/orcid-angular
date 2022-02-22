@@ -1,4 +1,3 @@
-
 const date = require('../../helpers/date')
 let name
 
@@ -340,4 +339,3 @@ describe('"Manual" QA Tests', () => {
     })
   })
 })
-

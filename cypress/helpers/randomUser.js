@@ -3,7 +3,7 @@ const date = require('../helpers/date')
 module.exports = function () {
   var uniqueString = userID()
   return {
-    email: 'qa' + '+cy_' + date() + '_' + uniqueString +'@orcid.org',
+    email: 'qa' + '+cy_' + date() + '_' + uniqueString + '@orcid.org',
     password: '12345678Aa',
     name: 'cy_' + date() + '_' + uniqueString + '_name',
     familyName: 'cy_' + date() + '_' + uniqueString + '_family',
