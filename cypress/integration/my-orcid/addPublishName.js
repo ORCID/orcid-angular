@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-const randomUser = require('../../helpers/randomUser')
+
 import userData from '../../fixtures/testing_users.json'
 
 describe('My orcid - users are able to add content to their record', async function() {

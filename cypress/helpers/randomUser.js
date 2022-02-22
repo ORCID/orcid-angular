@@ -1,22 +1,12 @@
 const date = require('../helpers/date')
 
 module.exports = function () {
+  var uniqueString = userID()
   return {
-    email: 'qa' + '+cy_' + date() + '@orcid.org',
+    email: 'qa' + '+cy_' + date() + '_' + uniqueString +'@orcid.org',
     password: '12345678Aa',
-    name: 'cy_'+ date() + '_name',
-    familyName: 'cy_'+ date()+ '_family',
-    id: undefined,
-  }
-}
-
-/*
-module.exports = function () {
-  return {
-    email: 'cy-' + date() + '+' + userID() + '@gmail.com',
-    password: '12345678Aa',
-    name: 'cy-' + date() + '-' + userID(),
-    familyName: 'cy-' + date() + '-' + userID(),
+    name: 'cy_' + date() + '_' + uniqueString + '_name',
+    familyName: 'cy_' + date() + '_' + uniqueString + '_family',
     id: undefined,
   }
 }
@@ -30,4 +20,4 @@ function userID() {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
 
   return text
-}*/
+}

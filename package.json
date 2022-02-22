@@ -129,7 +129,7 @@
     "mocha": "^9.1.3",
     "mochawesome": "^7.0.1",
     "mochawesome-merge": "^4.2.1",
-    "mochawesome-report-generator": "^6.1.0",
+    "mochawesome-report-generator": "^6.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "protractor": "^7.0.0",
@@ -140,46 +140,6 @@
     "tslint": "~6.1.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "~4.0.3"
-  },
-  "bit": {
-    "env": {
-      "compiler": "bit.envs/compilers/angular@0.1.9"
-    },
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "yarn",
-    "resolveModules": {
-      "aliases": {
-        "src": "/src"
-      }
-    },
-    "overrides": {
-      "orcid.angular/*": {
-        "dependencies": {
-          "@angular/material": "-",
-          "@angular/core": "-",
-          "@angular/animations": "-",
-          "@angular/common": "-",
-          "@angular/cdk": "-",
-          "@angular/forms": "-",
-          "rxjs": "-"
-        },
-        "peerDependencies": {
-          "@angular/material": "^8.0.0",
-          "@angular/core": "^8.0.0",
-          "@angular/animations": "^8.0.0",
-          "@angular/common": "^8.0.0",
-          "@angular/cdk": "^8.0.0",
-          "@angular/forms": "^8.0.0",
-          "rxjs": "^6.0.0 "
-        }
-      },
-      "orcid.angular/orcid-theme": {
-        "env": {
-          "compiler": "-"
-        },
-        "propagate": true
-      }
-    }
   },
   "gmailLibrary": {
     "name": "gmail-tester-extended",

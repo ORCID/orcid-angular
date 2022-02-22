@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { exists } from 'fs'
+
 import userData from '../../fixtures/testing_users.json'
 
 describe('Primary account email verification reminders', async function() {
