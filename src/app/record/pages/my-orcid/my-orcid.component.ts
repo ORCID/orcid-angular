@@ -12,7 +12,6 @@ import { UserInfoService } from '../../../core/user-info/user-info.service'
 import { UserInfo } from '../../../types'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { environment } from '../../../../environments/environment'
 import { AppcueService } from '../../../core/appcue/appcue.service'
 
 @Component({
@@ -207,6 +206,4 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     })
     this.loadingUserRecord = !!missingValues.length
   }
-
-
 }

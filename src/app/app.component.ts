@@ -9,7 +9,6 @@ import { HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
-import { environment } from '../environments/environment'
 import { AppcueService } from './core/appcue/appcue.service'
 
 @Component({

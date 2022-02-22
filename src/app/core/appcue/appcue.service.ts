@@ -8,7 +8,6 @@ import { environment } from '../../../environments/environment'
   providedIn: 'root',
 })
 export class AppcueService {
-
   constructor(@Inject(WINDOW) private window: Window) {}
   appcueInitialized = false
 
@@ -32,7 +31,12 @@ export class AppcueService {
   }
 
   initializeAppCues(userInfo: UserInfo, userRecord: UserRecord) {
-    if (environment.APPCUES && userInfo?.EFFECTIVE_USER_ORCID && userRecord?.emails?.emails && !this.appcueInitialized) {
+    if (
+      environment.APPCUES &&
+      userInfo?.EFFECTIVE_USER_ORCID &&
+      userRecord?.emails?.emails &&
+      !this.appcueInitialized
+    ) {
       this.window['Appcues']?.identify(userInfo?.EFFECTIVE_USER_ORCID, {
         numberOfValidatedEmails: AppcueService.getNumberOfValidatedEmails(
           userRecord?.emails?.emails
