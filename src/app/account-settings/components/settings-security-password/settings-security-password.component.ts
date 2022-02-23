@@ -84,7 +84,4 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
     this.$destroy.next()
     this.$destroy.complete()
   }
-  cancel() {
-    this.form.reset()
-  }
 }
