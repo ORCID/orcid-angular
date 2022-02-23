@@ -7,7 +7,6 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
 import { HAS_LETTER_OR_SYMBOL, HAS_NUMBER } from 'src/app/constants'
 import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { RegisterService } from 'src/app/core/register/register.service'
