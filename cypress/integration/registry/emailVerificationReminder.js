@@ -51,7 +51,6 @@ describe('Primary account email verification reminders', async function () {
 
       //convert string to DOM
       const htmlDom = new DOMParser().parseFromString(emailBody, 'text/html')
-      // cy.log(htmlDom.documentElement.innerHTML)
 
       //href points to correct endpoint
       cy.get(htmlDom.querySelector('[id$="verificationButton"]'))
