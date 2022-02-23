@@ -56,9 +56,6 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
         validators: OrcidValidators.matchValues('password', 'retypedPassword'),
       }
     )
-    this.form.valueChanges.pipe(takeUntil(this.$destroy)).subscribe((value) => {
-      this.errors = []
-    })
   }
 
   save() {
@@ -70,12 +67,12 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
           this.loading.emit(false)
 
           if (!value.password) {
-            this.errors = []
             this.form.reset()
             this.success = true
           } else {
-            this.success = false
-            this.errors = value.errors
+            this.form.controls['oldPassword'].setErrors({
+              backendErrors: value.errors || null,
+            })
           }
         })
     }
