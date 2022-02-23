@@ -14,7 +14,7 @@
     "resetPasswEmailURL": "https://qa.orcid.org/reset-password-email/",
     "signInURL": "https://qa.orcid.org/signin"
   },
-  "ignoreTestFiles": ["**/legacy_Leo/*", "**/registry/gmail_check_test.js"],
+  "ignoreTestFiles": ["**/legacy_oldScripts/*", "**/registry/gmail_check_test.js"],
   "chromeWebSecurity": false,
   "failOnStatusCode": false,
   "experimentalNetworkStubbing": true,
