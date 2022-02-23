@@ -59,7 +59,6 @@ describe('Register new user', async function () {
         to: userToRegister.email,
         subject: Cypress.env('verifyEmailSubject'),
         include_body: true,
-        //before: new Date(2022, 12, 24, 12, 31, 13), // Before December 24rd, 2022 12:31:13
         //after: new Date(2022, 1, 15, 12, 31, 13) // After Jan 15, 2022
       },
     }).then((emails) => {
