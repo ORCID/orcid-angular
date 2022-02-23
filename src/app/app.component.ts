@@ -9,6 +9,7 @@ import { HeadlessOnOauthRoutes } from './constants'
 import { UserService } from './core'
 import { GoogleAnalyticsService } from './core/google-analytics/google-analytics.service'
 import { ZendeskService } from './core/zendesk/zendesk.service'
+import { AppcueService } from './core/appcue/appcue.service'
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,7 @@ export class AppComponent {
     _router: Router,
     _googleAnalytics: GoogleAnalyticsService,
     _zendesk: ZendeskService,
+    _appcue: AppcueService,
     private _userService: UserService,
     @Inject(WINDOW) private _window: Window
   ) {
@@ -77,6 +79,7 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         _googleAnalytics.reportNavigationEnd(event.url)
         _googleAnalytics.reportPageView(event.urlAfterRedirects)
+        _appcue.page()
       }
     })
   }

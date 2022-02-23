@@ -20,6 +20,10 @@ app-panel {
     margin-top: 0;
     margin-bottom: 5px;
   }
+
+  mat-progress-spinner {
+    margin: 10px;
+  }
 }
 
 p.empty {

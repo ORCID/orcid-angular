@@ -60,3 +60,7 @@ tx.exe
 /cypress/screenshots/*
 /cypress/reports/**
 cypress.env
+
+
+# Packages ignore package-lock to depend only on yarn
+package-lock.json

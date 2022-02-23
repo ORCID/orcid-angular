@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core'
-import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable, ReplaySubject } from 'rxjs'
+import { map, switchMapTo } from 'rxjs/operators'
 import { Config } from 'src/app/types/togglz.endpoint'
-import { Observable } from 'rxjs'
-import { switchMapTo, shareReplay, map } from 'rxjs/operators'
 import { MaintenanceMessage } from 'src/app/types/togglz.local'
+import { environment } from 'src/environments/environment'
+
 import { UserService } from '..'
 
 @Injectable({
   providedIn: 'root',
 })
 export class TogglzService {
-  togglz: Observable<Config>
+  togglzSubject: ReplaySubject<Config>
   constructor(private _http: HttpClient, private userService: UserService) {}
 
   private getConfig() {
@@ -20,25 +21,29 @@ export class TogglzService {
     })
   }
   getTogglz(): Observable<Config> {
-    if (this.togglz) {
-      return this.togglz
-    } else {
-      return (this.togglz = this.userService.$userStatusChecked
+    if (!this.togglzSubject) {
+      this.togglzSubject = new ReplaySubject(1)
+      this.userService.$userStatusChecked
         .asObservable()
-        .pipe(switchMapTo(this.getConfig()), shareReplay(1)))
+        .pipe(switchMapTo(this.getConfig()))
+        .subscribe((value) => {
+          this.togglzSubject.next(value)
+        })
     }
+
+    return this.togglzSubject.asObservable()
   }
 
   getStateOf(togglzFeatureName: string): Observable<boolean> {
-    this.getTogglz()
-    return this.togglz.pipe(
+    return this.getTogglz().pipe(
       map((data) => data.messages[togglzFeatureName] === 'true')
     )
   }
 
   getMessageOf(togglzFeatureName: string): Observable<string> {
-    this.getTogglz()
-    return this.togglz.pipe(map((data) => data.messages[togglzFeatureName]))
+    return this.getTogglz().pipe(
+      map((data) => data.messages[togglzFeatureName])
+    )
   }
 
   getMaintenanceMessages(): Observable<MaintenanceMessage> {

@@ -16,9 +16,17 @@
     <div>
       <mat-icon class="large-material-icon">info</mat-icon>
     </div>
-    <div class="col l11 m6 s3" i18n="@@account.settingNotificationsAlert">
-      Setting notification frequency to Never may mean you miss out on useful or
-      important messages about your ORCID record.
+    <div class="col l11 m6 s3">
+      <div>
+        <ng-container i18n="@@account.settingNotificationsAlert1"
+          >Setting notification frequency to</ng-container
+        >
+        <i i18n="@@account.settingNotificationsAlert2">Never</i>
+        <ng-container i18n="@@account.settingNotificationsAlert3">
+          may mean you miss out on useful or important messages about your ORCID
+          record.</ng-container
+        >
+      </div>
     </div>
   </div>
 
@@ -101,9 +109,9 @@
     for getting the best out of your ORCID record.
   </p>
   <mat-checkbox formControlName="sendQuarterlyTips" class="margin-bottom-16">
-    <div class="mat-checkbox-content" i18n="@@account.idLikeToReceive">
-      I’d like to receive the ORCID new features and tips newsletter
-    </div>
+    <!-- prettier-ignore -->
+    <div class="mat-checkbox-content" i18n="@@account.idLikeToReceive"
+    >I’d like to receive the ORCID new features and tips newsletter</div>
   </mat-checkbox>
   <p class="italic">
     <ng-container i18n="@@account.inAddition">
@@ -113,7 +121,13 @@
       and the functioning of your ORCID account, you may not opt-out of service
       messages per our
     </ng-container>
-    <a class="underline" i18n="@@footer.privacypolicy" href="/privacy-policy">
+    <a
+      class="underline"
+      i18n="@@footer.privacypolicy"
+      href="/privacy-policy"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       Privacy Policy
     </a>
   </p>

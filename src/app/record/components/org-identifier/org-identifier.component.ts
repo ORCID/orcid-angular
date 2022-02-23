@@ -17,7 +17,7 @@ export class OrgIdentifierComponent implements OnInit {
   ngOnInit(): void {}
 
   getLink(type: string, value: string) {
-    if (this.isUrl(String)) {
+    if (this.isUrl(value)) {
       return value
     } else {
       return this._organizationsService.getLink(type, value)
