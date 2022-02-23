@@ -147,11 +147,7 @@
                 </p>
               </mat-checkbox>
             </div>
-            <mat-error
-              *ngIf="work?.errors"
-              class="bibtex-error mat-caption"
-              i18n="@@side-bar.alreadyAssociated"
-            >
+            <mat-error *ngIf="work?.errors" class="bibtex-error mat-caption">
               {{ work.errors }}
             </mat-error>
           </div>
