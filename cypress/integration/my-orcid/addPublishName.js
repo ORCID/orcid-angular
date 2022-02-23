@@ -23,7 +23,6 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#publishedName').then(($content) => {
       let textFound = $content.text()
       cy.log(textFound)
-      // textFound = textFound.replace(/(\r\n|\n|\r)/gm,'')
       textFound = textFound.trim()
       cy.log(textFound)
       expect(textFound).equal(addPublishedName)
