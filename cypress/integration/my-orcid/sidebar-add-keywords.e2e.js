@@ -1,37 +1,37 @@
 /// <reference types="cypress" />
 
-import userData from '../../fixtures/testing_users.json'
+import userData from '../../fixtures/testing-users.fixture.json'
 
 describe('My orcid - users are able to add content to their record', async function () {
   before(() => {
     cy.visit(Cypress.env('signInURL'))
     //sign in
-    cy.signin(userData.cyUser_primaryEmaiVerified)
+    cy.signin(userData.cyUserPrimaryEmaiVerified)
     cy.wait(1000)
   })
 
-  it('User adds secondary Email to their record', function () {
-    const addSecondaryEmail = 'qa@orcid.org'
-    //click on edit pencil for Emails section
-    cy.get('#emails-panel').within(($myPanel) => {
+  it('User adds a keywords to their record', function () {
+    const addKeyword = 'Research'
+    //click on edit pencil for Keywords section
+    cy.get('#keywords-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
 
-    cy.get('#add-link').click()
+    cy.get('#add-keyword').click()
 
-    cy.get('#newEmailInput1').clear().type(addSecondaryEmail)
-    cy.get('#save-emails-button').click()
+    cy.get('#content-input').clear().type(addKeyword)
+    cy.get('#save-keywords-button').click()
     cy.wait(1000)
 
     //verify the keyword is displayed
-    cy.get('#emails-panel')
+    cy.get('#keywords-panel')
       .within(($section) => {
         cy.get('[class="line"]')
       })
-      .should('contain', addSecondaryEmail)
+      .should('contain', addKeyword)
 
     //clean up state
-    cy.cleanEmails()
+    cy.cleanKeywords()
 
     //sign out
     cy.get('app-user-menu').click()

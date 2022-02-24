@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import userData from '../../fixtures/testing_users.json'
+import userData from '../../fixtures/testing-users.fixture.json'
 
 describe('Primary account email verification reminders', async function () {
   beforeEach(() => {
@@ -16,14 +16,14 @@ describe('Primary account email verification reminders', async function () {
 
     //sign in with registered user
     cy.log(
-      'Signing in with user: ' + userData.cyUser_primaryEmailNotVerified.oid
+      'Signing in with user: ' + userData.cyUserPrimaryEmailNotVerified.oid
     )
     cy.get('#username')
       .clear()
-      .type(userData.cyUser_primaryEmailNotVerified.oid)
+      .type(userData.cyUserPrimaryEmailNotVerified.oid)
     cy.get('#password')
       .clear()
-      .type(userData.cyUser_primaryEmailNotVerified.password)
+      .type(userData.cyUserPrimaryEmailNotVerified.password)
     cy.get('#signin-button').click()
 
     //request to get reminder email to verify primary account email

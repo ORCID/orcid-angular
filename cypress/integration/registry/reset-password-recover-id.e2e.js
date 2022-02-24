@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import userData from '../../fixtures/testing_users.json'
+import userData from '../../fixtures/testing-users.fixture.json'
 
 describe('Password reset and OID recovery', () => {
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('Password reset and OID recovery', () => {
     //type email
     cy.get('[formcontrolname="email"]')
       .clear()
-      .type(userData.cyUser_primaryEmaiVerified.email)
+      .type(userData.cyUserPrimaryEmaiVerified.email)
     //click button to recover details
     cy.get('button').contains('RECOVER ACCOUNT DETAILS').click()
 
@@ -27,7 +27,7 @@ describe('Password reset and OID recovery', () => {
     cy.task('readAllMessages', {
       options: {
         from: Cypress.env('senderResetPassword'),
-        to: userData.cyUser_primaryEmaiVerified.email,
+        to: userData.cyUserPrimaryEmaiVerified.email,
         subject: Cypress.env('forgotPasswordSubject'),
         include_body: true,
       },
@@ -61,7 +61,7 @@ describe('Password reset and OID recovery', () => {
     cy.url().should('contain', Cypress.env(signInURL))
 
     //Verify user can sign in with new passw
-    cy.get('username').clear().type(userData.cyUser_primaryEmailNotVerified.oid)
+    cy.get('username').clear().type(userData.cyUserPrimaryEmailNotVerified.oid)
     cy.get('password').clear().type(newPassword)
     cy.get('#signin-button').click()
 
@@ -90,7 +90,7 @@ describe('Password reset and OID recovery', () => {
     //type email
     cy.get('[formcontrolname="email"]')
       .clear()
-      .type(userData.cyUser_primaryEmaiVerified.email)
+      .type(userData.cyUserPrimaryEmaiVerified.email)
     //click button to recover details
     cy.get('button').contains('RECOVER ACCOUNT DETAILS').click()
 
@@ -98,7 +98,7 @@ describe('Password reset and OID recovery', () => {
     cy.task('readAllMessages', {
       options: {
         from: Cypress.env('senderResetPassword'),
-        to: userData.cyUser_primaryEmaiVerified.email,
+        to: userData.cyUserPrimaryEmaiVerified.email,
         subject: Cypress.env('recoverOIDSubject'),
         include_body: true,
       },
@@ -107,18 +107,17 @@ describe('Password reset and OID recovery', () => {
       assert.isNotNull(emails.length)
       //grab most recent email
       const emailBody = emails[0].body.html
-      //cy.log(">>>>>>>>>Email body is: "+ JSON.stringify(emails[0].body))
       //convert string to DOM
       const htmlDom = new DOMParser().parseFromString(emailBody, 'text/html')
       //find the link that contains user OID
       const href = htmlDom.querySelector(
-        `a[href*='${userData.cyUser_primaryEmaiVerified.oid}']`
+        `a[href*='${userData.cyUserPrimaryEmaiVerified.oid}']`
       ).href
       cy.log('>>>>>>>found the link: ' + href)
       //follow the link from the email
       cy.visit(href)
     })
     //verify user is redirected to their public page
-    cy.url().should('contain', userData.cyUser_primaryEmaiVerified.oid)
+    cy.url().should('contain', userData.cyUserPrimaryEmaiVerified.oid)
   })
 })

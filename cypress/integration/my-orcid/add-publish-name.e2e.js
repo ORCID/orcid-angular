@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import userData from '../../fixtures/testing_users.json'
+import userData from '../../fixtures/testing-users.fixture.json'
 
 describe('My orcid - users are able to add content to their record', async function () {
   before(() => {
@@ -10,14 +10,13 @@ describe('My orcid - users are able to add content to their record', async funct
   it('User adds a published name', function () {
     const addPublishedName = 'QA Published Name'
     //sign in
-    cy.signin(userData.cyUser_primaryEmaiVerified)
+    cy.signin(userData.cyUserPrimaryEmaiVerified)
     cy.get('#names-panel').within(($namePanel) => {
       cy.get('#edit-button').click()
     })
     //clear and type new input
     cy.get('#published-names-input').clear().type(addPublishedName)
     cy.get('#save-names-button').click()
-    cy.wait(3000)
 
     //verify the name is displayed
     cy.get('#publishedName').then(($content) => {

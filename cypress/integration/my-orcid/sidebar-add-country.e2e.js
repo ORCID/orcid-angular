@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 
-import userData from '../../fixtures/testing_users.json'
+import userData from '../../fixtures/testing-users.fixture.json'
 
 describe('My orcid - users are able to add content to their record', async function () {
   before(() => {
     cy.visit(Cypress.env('signInURL'))
     //sign in
-    cy.signin(userData.cyUser_primaryEmaiVerified)
+    cy.signin(userData.cyUserPrimaryEmaiVerified)
     cy.wait(1000)
   })
 
@@ -28,7 +28,6 @@ describe('My orcid - users are able to add content to their record', async funct
       })
 
     cy.get('#save-countries-button').click()
-    cy.wait(3000)
 
     //verify the country is displayed
     cy.get('#countries-panel')
