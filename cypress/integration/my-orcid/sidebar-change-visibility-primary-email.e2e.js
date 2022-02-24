@@ -19,12 +19,13 @@ describe('My orcid - users are able to add content to their record', async funct
     //set visibility to public
     //TO DO: use id for public button instead of class
     cy.get('#modal-container').within(($myModal) => {
-    cy.get(
-      'button[class="mat-focus-indicator public-button mat-icon-button mat-button-base no-selected"]'
-    ).click()})
+      cy.get(
+        'button[class="mat-focus-indicator public-button mat-icon-button mat-button-base no-selected"]'
+      ).click()
+    })
     //save changes
     cy.get('#save-emails-button').click()
-    //verify change  
+    //verify change
     cy.get('app-panel-privacy').should('have.attr', 'aria-label', 'PUBLIC')
 
     //revert back to PRIVATE visibility
@@ -33,11 +34,13 @@ describe('My orcid - users are able to add content to their record', async funct
     })
     //TO DO: use id for private button instead of class
     cy.get('#modal-container').within(($myModal1) => {
-      cy.get('button[class="mat-focus-indicator private-button mat-icon-button mat-button-base no-selected"]'
-    ).click()})
+      cy.get(
+        'button[class="mat-focus-indicator private-button mat-icon-button mat-button-base no-selected"]'
+      ).click()
+    })
     //save changes
     cy.get('#save-emails-button').click()
-      //verify change
+    //verify change
     cy.get('app-panel-privacy').should('have.attr', 'aria-label', 'PRIVATE')
 
     //sign out
