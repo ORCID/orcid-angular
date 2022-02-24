@@ -37,6 +37,7 @@
   <app-settings-actions-duplicated
     *ngIf="settingDuplicatedRecord"
     (loading)="settingDuplicatedRecordLoading = $event"
+    (close)="settingDuplicatedRecord = false"
   >
   </app-settings-actions-duplicated>
 </app-settings-panels>
