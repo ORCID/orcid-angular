@@ -6,13 +6,16 @@ describe('Register new user', async function () {
     cy.visit('/')
   })
 
-  //Register new user with all valid data
   it('New user registers and verifies primary email', function () {
-    // Bypass the duplicated research call to avoid getting the "Is this you modal"
+    
+    //Bypass the duplicated research call to avoid getting the "Is this you modal"
     cy.intercept('GET', Cypress.env('duplicatedModalEndPoint'), [])
+    
     //generate a new (random) user
     const userToRegister = randomUser()
-
+    //convert email to lower case as gmail uses it this way
+    userToRegister.email=userToRegister.email.toLowerCase()
+    
     cy.get('#menu-signin-button').click()
     //verify user is redirected to the sign in page
     cy.url().should('include', '/signin')
@@ -42,32 +45,29 @@ describe('Register new user', async function () {
 
     //CAPTCHA    
     // Wrap iframe body into a cypress object and perform test within there
-     cy.getIframeBody('iframe[title="reCAPTCHA"]').within(() => {
+    cy.getIframeBody('iframe[title="reCAPTCHA"]').within(() => {
       cy.get('.recaptcha-checkbox-border').click()
       cy.get('#recaptcha-anchor', { timeout: 10000 }).should(
         'have.class',
         'recaptcha-checkbox-checked'
       )
     })
-
+    
     cy.get('#step-c-register-button').click()
-    cy.wait(10000) //TODO: fix to replace wait 10 secs before checking for the email
 
-    //use gmail api to check verification email was sent
-    cy.task('readAllMessages', {
+    //use Gmail API to check verification email was sent
+    //this task will poll the inbox every 15sec to check for the email
+    cy.task('checkInbox_from_to_subject', {
       options: {
         from: Cypress.env('senderVerifyEmail'),
         to: userToRegister.email,
         subject: Cypress.env('verifyEmailSubject'),
         include_body: true,
       },
-    }).then((emails) => {
-      //there may be multiple emails with same subject and sender
-      assert.isNotNull(emails.length)
-
-      //grab most recent email
-      const emailBody = emails[0].body.html
-      cy.log('>>>>>>>>>Email body is: ' + JSON.stringify(emails[0].body))
+    }).then((email) => {
+      assert.isNotNull(email)
+      const emailBody = email.body.html
+      cy.log('>>>>>>>>>Email body is: ' + JSON.stringify(email.body))
 
       //convert string to DOM
       const htmlDom = new DOMParser().parseFromString(emailBody, 'text/html')
@@ -101,9 +101,7 @@ describe('Register new user', async function () {
     cy.get('#cdk-overlay-2').within(($menu) => {
       cy.get('.mat-menu-item').contains('Logout').click()
     })
-  })
-})
 
-// //Register new user negative testing - verify error messages for the form
-// it.skip('New user registers via Sign in button - negative testing', () => {
-//    })
+  })
+
+})

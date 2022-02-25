@@ -46,9 +46,10 @@ module.exports = (on, config) => {
         subject,
         from,
         to,
-        10, // Poll interval (in seconds)
-        15 // Maximum poll interval (in seconds). If reached, return null, indicating the completion of the task().
-      )
+        15, // Poll interval (in seconds)
+        60, // Maximum poll interval (in seconds). If reached, return null, indicating the completion of the task().
+        args.options
+        )
       return email //this task returns one email (JSON object)
     },
   })

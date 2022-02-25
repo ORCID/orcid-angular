@@ -34,20 +34,17 @@ describe('Primary account email verification reminders', async function () {
       .click()
 
     //use gmail api to check verification email was sent
-    cy.task('readAllMessages', {
+    cy.task('checkInbox_from_to_subject', {
       options: {
         from: Cypress.env('senderVerifyEmail'),
-        to: userData.email,
+        to: userData.cyUserPrimaryEmailNotVerified.email,
         subject: Cypress.env('verifyEmailReminderSubject'),
         include_body: true,
       },
-    }).then((emails) => {
-      //there may be multiple emails with same subject and sender
-      assert.isNotNull(emails.length)
-
-      //grab most recent email
-      const emailBody = emails[0].body.html
-      cy.log('>>>>>>>>>Email body is: ' + JSON.stringify(emails[0].body))
+    }).then((email) => {
+      assert.isNotNull(email)
+      const emailBody = email.body.html
+      cy.log('>>>>>>>>>Email body is: ' + JSON.stringify(email.body))
 
       //convert string to DOM
       const htmlDom = new DOMParser().parseFromString(emailBody, 'text/html')

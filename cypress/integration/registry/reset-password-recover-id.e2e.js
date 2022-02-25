@@ -95,18 +95,16 @@ describe('Password reset and OID recovery', () => {
     cy.get('button').contains('RECOVER ACCOUNT DETAILS').click()
 
     //use gmail api to check recovery email was sent
-    cy.task('readAllMessages', {
+    cy.task('checkInbox_from_to_subject', {
       options: {
         from: Cypress.env('senderResetPassword'),
         to: userData.cyUserPrimaryEmaiVerified.email,
         subject: Cypress.env('recoverOIDSubject'),
         include_body: true,
       },
-    }).then((emails) => {
-      //there may be multiple emails with same subject and sender
-      assert.isNotNull(emails.length)
-      //grab most recent email
-      const emailBody = emails[0].body.html
+    }).then((email) => {
+      assert.isNotNull(email)
+      const emailBody = email.body.html
       //convert string to DOM
       const htmlDom = new DOMParser().parseFromString(emailBody, 'text/html')
       //find the link that contains user OID
