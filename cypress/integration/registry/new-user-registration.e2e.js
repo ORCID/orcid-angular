@@ -7,15 +7,14 @@ describe('Register new user', async function () {
   })
 
   it('New user registers and verifies primary email', function () {
-    
     //Bypass the duplicated research call to avoid getting the "Is this you modal"
     cy.intercept('GET', Cypress.env('duplicatedModalEndPoint'), [])
-    
+
     //generate a new (random) user
     const userToRegister = randomUser()
     //convert email to lower case as gmail uses it this way
-    userToRegister.email=userToRegister.email.toLowerCase()
-    
+    userToRegister.email = userToRegister.email.toLowerCase()
+
     cy.get('#menu-signin-button').click()
     //verify user is redirected to the sign in page
     cy.url().should('include', '/signin')
@@ -52,7 +51,7 @@ describe('Register new user', async function () {
         'recaptcha-checkbox-checked'
       )
     })
-    
+
     cy.get('#step-c-register-button').click()
 
     //use Gmail API to check verification email was sent
@@ -101,7 +100,5 @@ describe('Register new user', async function () {
     cy.get('#cdk-overlay-2').within(($menu) => {
       cy.get('.mat-menu-item').contains('Logout').click()
     })
-
   })
-
 })
