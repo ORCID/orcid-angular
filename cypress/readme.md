@@ -15,7 +15,7 @@ yarn run cypress:open
 
 # Test data
 
-Use testing-users.fixture-sample.json to create at least two type of users, one with Primary Email verified (set visibility PRIVATE) and another one with no primary email verified.
+Use `testing-users.fixture-sample.json` to create at least two types of users, one with Primary Email verified (set visibility PRIVATE) and another one with no primary email verified.
 
 # Gmail API library requirements
 
