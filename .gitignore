@@ -52,7 +52,6 @@ audits/*
 scripts/lighthouse/environment.ts
 tx.exe
 
-
 ## Cypress
 
 /cypres/cypress.env.js
@@ -60,6 +59,10 @@ tx.exe
 /cypress/screenshots/*
 /cypress/reports/**
 cypress.env
+cypress/fixtures/testing-users.fixture.json
+cypress/plugins/credentials_qa.json
+cypress/plugins/token_qa.json
+cypress/plugins/token.json
 
 
 # Packages ignore package-lock to depend only on yarn
