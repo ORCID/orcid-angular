@@ -1,14 +1,14 @@
 {
   "cyUserPrimaryEmailNotVerified": {
-  "username": "userNotVerified",
-  "email": "******@orcid.org",
-  "password": "**********",
-  "oid": "****-****-****-****"
-},
-"cyUserPrimaryEmaiVerified": {
-  "name": "userPrimaryEmailVerified",
-  "email": "******@orcid.org",
-  "password": "**********",
-  "oid": "****-****-****-****"
-}
+    "username": "userNotVerified",
+    "email": "******@orcid.org",
+    "password": "**********",
+    "oid": "****-****-****-****"
+  },
+  "cyUserPrimaryEmaiVerified": {
+    "name": "userPrimaryEmailVerified",
+    "email": "******@orcid.org",
+    "password": "**********",
+    "oid": "****-****-****-****"
+  }
 }

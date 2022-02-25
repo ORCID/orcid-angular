@@ -18,9 +18,7 @@ describe('Primary account email verification reminders', async function () {
     cy.log(
       'Signing in with user: ' + userData.cyUserPrimaryEmailNotVerified.oid
     )
-    cy.get('#username')
-      .clear()
-      .type(userData.cyUserPrimaryEmailNotVerified.oid)
+    cy.get('#username').clear().type(userData.cyUserPrimaryEmailNotVerified.oid)
     cy.get('#password')
       .clear()
       .type(userData.cyUserPrimaryEmailNotVerified.password)

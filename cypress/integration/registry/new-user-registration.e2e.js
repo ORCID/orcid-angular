@@ -43,7 +43,7 @@ describe('Register new user', async function () {
       .check({ force: true })
       .should('be.checked')
 
-    //CAPTCHA    
+    //CAPTCHA
     // Wrap iframe body into a cypress object and perform test within there
     cy.getIframeBody('iframe[title="reCAPTCHA"]').within(() => {
       cy.get('.recaptcha-checkbox-border').click()
