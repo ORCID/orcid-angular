@@ -20,7 +20,7 @@ Use testing-users.fixture-sample.json to create at least two type of users, one 
 # Gmail API library requirements
 
 In order to run gmail library tasks from plugins/index.js a credentials.json file needs to be generated in the API platform and then use this credentials file to generate a token.json to be able to access the gmail account where the notification emails will be sent.
-Follow instructions at https://www.npmjs.com/package/gmail-tester-extended
+Follow instructions at [gmail-tester-extended] (https://www.npmjs.com/package/gmail-tester-extended)
 
 # How to generate a sharable HTML report
 
