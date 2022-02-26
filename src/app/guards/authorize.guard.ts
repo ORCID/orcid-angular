@@ -38,7 +38,8 @@ export class AuthorizeGuard implements CanActivateChild {
         const oauthSession = session.oauthSession
         if (session.userInfo?.LOCKED === 'true') {
           return of(this._router.createUrlTree(['/my-orcid']))
-        } else if (oauthSession.error) {
+        }
+        if (oauthSession) {
           // Session errors are allow to be displayed
           if (oauthSession.error) {
             return of(true)

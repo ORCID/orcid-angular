@@ -1,6 +1,7 @@
 export interface TwoFactor {
-  recoveryCode: string
-  redirectUrl: string
+  orcid?: string
+  recoveryCode?: string
+  redirectUrl?: string
   verificationCode: string
-  errors: any[]
+  errors?: any[]
 }

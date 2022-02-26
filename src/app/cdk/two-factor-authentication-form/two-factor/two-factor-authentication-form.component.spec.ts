@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
-import { TwoFactorComponent } from './two-factor.component'
+import { TwoFactorAuthenticationFormComponent } from './two-factor.component'
 
 describe('TwoFactorComponent', () => {
-  let component: TwoFactorComponent
-  let fixture: ComponentFixture<TwoFactorComponent>
+  let component: TwoFactorAuthenticationFormComponent
+  let fixture: ComponentFixture<TwoFactorAuthenticationFormComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TwoFactorComponent],
+      declarations: [TwoFactorAuthenticationFormComponent],
     }).compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TwoFactorComponent)
+    fixture = TestBed.createComponent(TwoFactorAuthenticationFormComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

@@ -142,7 +142,9 @@ export class WorkStackGroupComponent implements OnInit {
           this.total.emit(userRecord.works.groups?.length || 0)
         }
       })
-    this.getGroupingSuggestions()
+    if (!this.isPublicRecord) {
+      this.getGroupingSuggestions()
+    }
 
     this._platform.get().subscribe((platform) => {
       this.platform = platform
