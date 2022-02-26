@@ -26,6 +26,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
     private _user: UserService
   ) {}
   @Output() loading = new EventEmitter<boolean>()
+  @Output() close = new EventEmitter()
 
   form: FormGroup
   errors: any[]
@@ -85,7 +86,6 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
         }),
         switchMap((data) => {
           this.loading.next(false)
-          this.form.reset()
           return this._dialog
             .open(DialogActionsDuplicatedMergedConfirmedComponent, {
               data,
@@ -96,9 +96,11 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
       .subscribe(
         () => {
           this.loading.next(false)
+          this.close.next()
         },
         () => {
           this.loading.next(false)
+          this.close.next()
         }
       )
   }
