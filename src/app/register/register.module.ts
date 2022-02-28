@@ -22,7 +22,6 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatRadioModule } from '@angular/material/radio'
-import { MdePopoverModule } from '@material-extended/mde'
 import { MatCardModule } from '@angular/material/card'
 import { RecaptchaModule } from '../cdk/recaptcha/recaptcha.module'
 import { FormAntiRobotsComponent } from './components/form-anti-robots/form-anti-robots.component'
@@ -32,6 +31,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { FormDirectivesModule } from '../cdk/form-directives/form-directives.module'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
 import { WarningMessageModule } from '../cdk/warning-message/warning-message.module'
+import { MdePopoverModule } from '../cdk/popover'
 @NgModule({
   declarations: [
     RegisterComponent,
