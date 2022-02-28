@@ -10,7 +10,7 @@ Cypress.Commands.add('expectPreFillSignin', (user) => {
   })
 })
 
-Cypress.Commands.add('signin', (user) => 
+Cypress.Commands.add('signin', (user) =>
   cy
     .location()
     .should((loc) => {
