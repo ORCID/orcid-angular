@@ -278,7 +278,7 @@
   <ng-container formGroupName="publicationDate">
     <div class="row">
       <label
-        for="url-input"
+        for="start-date-year-input"
         class="mat-caption"
         [ngClass]="{
           error: workForm.hasError('date', 'startDateGroup')
@@ -356,11 +356,11 @@
   <div>
     <div class="row">
       <label
-        for="given-names-input"
+        for="url-input"
         class="mat-caption"
         [ngClass]="{
           error:
-            workForm.hasError('required', 'url') && workForm.get('url').touched
+            workForm.hasError('pattern', 'url') && workForm.get('url').touched
         }"
       >
         <strong i18n="@@works.link">Link</strong>
@@ -368,13 +368,12 @@
     </div>
 
     <mat-form-field
-      class="input-container"
       appearance="outline"
       class="mat-form-field-min two-line-hint input-container"
     >
-      <input id="biography-input" matInput formControlName="url" />
+      <input id="url-input" matInput formControlName="url" />
       <mat-error
-        *ngIf="workForm.get('url').hasError('required')"
+        *ngIf="workForm.get('url').hasError('pattern')"
         i18n="@@works.invalidUrl"
       >
         Invalid url

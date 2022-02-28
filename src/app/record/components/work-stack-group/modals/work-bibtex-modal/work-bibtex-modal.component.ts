@@ -32,6 +32,7 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   selectAll: false
   group: { [key: string]: FormGroup } = {}
   addedWorkCount = 0
+  isAnInvalidWork = false
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -85,6 +86,10 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                   .subscribe((data) => {
                     data.forEach((work) => {
                       that.worksFromBibtex.push(work)
+                      if (work.errors.length > 0 && !that.isAnInvalidWork) {
+                        that.isAnInvalidWork = true
+                        that._snackBar.showValidationError()
+                      }
                     })
                     that.worksFromBibtex.forEach((w) => {
                       const newPutCode = 'new-' + that.addedWorkCount++
@@ -344,6 +349,13 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
         $localize`:@@shared.pleaseReview:Please review and fix the issue`
       )
     }
+  }
+
+  private displayBackendError(errorMessage: string) {
+    this._snackBar.showValidationError(
+      errorMessage,
+      $localize`:@@shared.pleaseReview:Please review and fix the issue`
+    )
   }
 
   closeEvent() {

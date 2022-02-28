@@ -25,19 +25,18 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
 import { UsernameValidator } from '../../../shared/validators/username/username.validator'
 import { SignInData } from '../../../types/sign-in-data.endpoint'
 import { SignInLocal, TypeSignIn } from '../../../types/sign-in.local'
-import { TwoFactorComponent } from '../two-factor/two-factor.component'
 import { ErrorHandlerService } from 'src/app/core/error-handler/error-handler.service'
 import { SignInGuard } from '../../../guards/sign-in.guard'
 import { OauthService } from '../../../core/oauth/oauth.service'
 import { combineLatest, Subject } from 'rxjs'
 import { UserSession } from 'src/app/types/session.local'
 import { ERROR_REPORT } from 'src/app/errors'
+import { ErrorStateMatcherForPasswordField } from '../../ErrorStateMatcherForPasswordField'
 
 @Component({
   selector: 'app-form-sign-in',
   templateUrl: './form-sign-in.component.html',
   styleUrls: ['./form-sign-in.component.scss'],
-  providers: [TwoFactorComponent],
   preserveWhitespaces: true,
 })
 export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -65,6 +64,7 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   platform: PlatformInfo
   private readonly $destroy = new Subject()
   authorizationFormSubmitted: boolean
+  backendErrorsMatcher = new ErrorStateMatcherForPasswordField()
 
   constructor(
     private _user: UserService,
@@ -87,7 +87,6 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
         session = session as UserSession
         platform = platform as PlatformInfo
         this.platform = platform
-
         if (session.oauthSession) {
           this.signInLocal.isOauth = true
           _route.queryParams.subscribe((params) => {
@@ -122,7 +121,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.authorizationForm = new FormGroup({
       username: new FormControl(),
-      password: new FormControl(),
+      password: new FormControl('', {
+        validators: [Validators.maxLength(256)],
+      }),
       recoveryCode: new FormControl(),
       verificationCode: new FormControl(),
     })

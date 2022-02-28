@@ -1,11 +1,11 @@
 # You can see what browsers were selected by your queries by running:
 #   npx browserslist
 
-and_ff > 87, 
-chrome > 80, 
-edge > 89, 
-firefox > 78, 
-ios_saf > 13, 
-opera > 74, 
-safari > 13, 
-and_chr > 80
+and_ff >= 87, 
+and_chr >= 80
+chrome >= 80, 
+edge >= 80, 
+firefox >= 78, 
+ios_saf >= 13.4, 
+opera >= 74, 
+safari >= 13.1, 

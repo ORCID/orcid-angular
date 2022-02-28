@@ -12,6 +12,7 @@ import { UserInfoService } from '../../../core/user-info/user-info.service'
 import { UserInfo } from '../../../types'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
+import { AppcueService } from '../../../core/appcue/appcue.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -57,6 +58,7 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _record: RecordService,
     private _openGraph: OpenGraphService,
     private _robotsMeta: RobotsMetaTagsService,
+    private _appcueService: AppcueService,
     private _router: Router,
     private _userSession: UserService,
     @Inject(WINDOW) private window: Window
@@ -124,21 +126,25 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             this._robotsMeta.disallowRobots()
           }
           this._openGraph.addOpenGraphData(userRecord, { force: true })
+          this._appcueService.initializeAppCues(this.userInfo, this.userRecord)
         })
       )
       .subscribe()
   }
 
   private observeSessionUpdates() {
-    this._userSession.getUserSession().subscribe((value) => {
-      if (
-        value?.userInfo?.REAL_USER_ORCID !== this.userInfo.REAL_USER_ORCID ||
-        value?.userInfo?.EFFECTIVE_USER_ORCID !==
-          this.userInfo.EFFECTIVE_USER_ORCID
-      ) {
-        this.window.location.reload()
-      }
-    })
+    this._userSession
+      .getUserSession()
+      .pipe(takeUntil(this.$destroy))
+      .subscribe((value) => {
+        if (
+          value?.userInfo?.REAL_USER_ORCID !== this.userInfo.REAL_USER_ORCID ||
+          value?.userInfo?.EFFECTIVE_USER_ORCID !==
+            this.userInfo.EFFECTIVE_USER_ORCID
+        ) {
+          this.window.location.reload()
+        }
+      })
   }
 
   private setMyOrcidIdQueryParameter() {

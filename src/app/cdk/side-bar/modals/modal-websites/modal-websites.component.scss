@@ -13,13 +13,8 @@
 
 .description {
   ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 8px !important;
-  }
-}
-
-.url {
-  ::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 18px !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 4px;
   }
 }
 
@@ -122,11 +117,6 @@
   p {
     margin: 0;
     padding-bottom: 6px;
-  }
-  ::ng-deep .mat-form-field-subscript-wrapper {
-    top: 0;
-    position: relative;
-    margin-top: 0;
   }
   .not-editable-url {
     display: flex;

@@ -21,12 +21,13 @@
     ></app-display-external-ids>
     <div
       class="general-data"
-      *ngIf="togglzWorksContributors && contributors.length > 0"
+      *ngIf="togglzWorksContributors && contributorsGroupedByOrcid?.length > 0"
     >
       <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
       <ng-container
         *ngFor="
-          let contributor of contributors | slice: 0:maxNumberContributors;
+          let contributor of contributorsGroupedByOrcid
+            | slice: 0:maxNumberContributors;
           let last = last
         "
       >
@@ -147,7 +148,12 @@
   </app-display-attribute>
 
   <!--  CONTRIBUTORS-->
-  <app-display-attribute *ngIf="contributors?.length > 0">
+  <app-display-attribute
+    *ngIf="
+      work?.contributorsGroupedByOrcid?.length > 0 ||
+      work?.contributors?.length > 0
+    "
+  >
     <h3 class="orc-font-body-small" i18n="@@works.contributors">
       Contributors
     </h3>
@@ -171,7 +177,7 @@
           'record-holder': contributor?.contributorOrcid?.path === id
         }"
         *ngFor="
-          let contributor of contributors
+          let contributor of contributorsGroupedByOrcid
             | slice: 0:maxNumberContributorsWorkDetails;
           let index = index
         "
@@ -310,7 +316,7 @@
           </a>
         </ng-container>
         <ng-container
-          *ngIf="work.citation.citation.value.length < maxBibtexCharacters"
+          *ngIf="work?.citation?.citation?.value?.length < maxBibtexCharacters"
         >
           {{ work.citation.citation.value }}
         </ng-container>
