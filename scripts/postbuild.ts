@@ -25,17 +25,14 @@ glob
     data = googleAnalytics(data, options)
     data = hotjarAnalytics(data, options)
     data = zendeskPlugin(data, options)
+    // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
     data = robotsMetadata(data, options)
     save(data, options)
   })
 
 // The following code is added to generate unique hash names for each language.
-//
-// for instance `runtime.<hash>-<language code>.js` and `polyfills.<hash>-<language code>.js
-// The function `addLanguageCodeToHashesOnToHTMLFiles` already run the update of the file references on the index.html file
-
-// Rename all .js files to concat the language code
+// For instance `runtime.<hash>.js` and `polyfills.<hash>.js will will become `runtime.<hash>-it.js` and `polyfills.<hash>-it.js for italian
 const hashRegExp = RegExp(/[a-z0-9]{16}/gm)
 const replacedHash = {}
 glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
