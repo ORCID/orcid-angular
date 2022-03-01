@@ -25,7 +25,7 @@ glob
     data = googleAnalytics(data, options)
     data = hotjarAnalytics(data, options)
     data = zendeskPlugin(data, options)
-    // Replace all the `*.js` references to match updated JS file names with the language code. 
+    // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
     data = robotsMetadata(data, options)
     save(data, options)
