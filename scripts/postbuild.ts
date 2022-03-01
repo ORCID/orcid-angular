@@ -41,7 +41,6 @@ glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   renameSync(file, file.replace('.js', '-' + options.languageCode + '.js'))
   // Save all the modified hash to update
   replacedHash[hash] = true
-  console.log(replacedHash)
 })
 
 // Replace all the `runtime*.js` references to match updated JS values with language code
