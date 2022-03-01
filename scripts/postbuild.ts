@@ -31,7 +31,7 @@ glob
   })
 
 // The following code is added to generate unique hash names for each language.
-// 
+//
 // for instance `runtime.<hash>-<language code>.js` and `polyfills.<hash>-<language code>.js
 // The function `addLanguageCodeToHashesOnToHTMLFiles` already run the update of the file references on the index.html file
 
@@ -44,11 +44,10 @@ glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   renameSync(file, file.replace('.js', '-' + options.languageCode + '.js'))
   // Save all the modified hash to update
   replacedHash[hash] = true
-  console.log(replacedHash);
-
+  console.log(replacedHash)
 })
 
-// Replace all the `runtime*.js` references to match updated JS values with language code 
+// Replace all the `runtime*.js` references to match updated JS values with language code
 glob
   .sync('./dist/*/runtime*.js', { ignore: './dist/storybook/*' })
   .forEach((file) => {
