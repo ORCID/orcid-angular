@@ -31,18 +31,12 @@ glob
   })
 
 // The following code is added to generate unique hash names for each language.
-// Currently Angular 9 localized builds use the same hashes for equivalent files across languages
-// this did not happened on Angular 8, and produce issues with the cache when the language is change
-//
-// More info
-// https://github.com/angular/angular-cli/issues/16526
-//
-// Because of this the following code will concat the language code to all generated .js files
-// for instance `10-es5.<hash>-<language code>.js` and `polyfills-es2015.<hash>-<language code>.js
-// and it also updates the references on the `index.html` file (see line 24) and `runtime*.js` files
+// 
+// for instance `runtime.<hash>-<language code>.js` and `polyfills.<hash>-<language code>.js
+// The function `addLanguageCodeToHashesOnToHTMLFiles` already run the update of the file references on the index.html file
 
 // Rename all .js files to concat the language code
-const hashRegExp = RegExp(/[a-z0-9]{20}/gm)
+const hashRegExp = RegExp(/[a-z0-9]{16}/gm)
 const replacedHash = {}
 glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   const options = getOptionsObjet(file)
@@ -50,11 +44,13 @@ glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   renameSync(file, file.replace('.js', '-' + options.languageCode + '.js'))
   // Save all the modified hash to update
   replacedHash[hash] = true
+  console.log(replacedHash);
+
 })
 
-// Replace all the `runtime*.js` references to match updated hash values
+// Replace all the `runtime*.js` references to match updated JS values with language code 
 glob
-  .sync('./dist/*/runtime-*.js', { ignore: './dist/storybook/*' })
+  .sync('./dist/*/runtime*.js', { ignore: './dist/storybook/*' })
   .forEach((file) => {
     const options = getOptionsObjet(file)
     let data = readFileSync(file, 'utf8')
