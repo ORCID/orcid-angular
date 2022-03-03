@@ -9,6 +9,9 @@ src/locale/messages.xlf
 # dependencies
 /node_modules
 
+# have a persistent yarn cache in a single 'code' volume in a docker container
+/yarn_cache
+
 # IDEs and editors
 /.idea
 .project
@@ -68,3 +71,4 @@ cypress/plugins/token.json
 
 # Packages ignore package-lock to depend only on yarn
 package-lock.json
+
