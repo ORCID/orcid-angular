@@ -31,7 +31,12 @@
   </button>
 </section>
 <mat-menu #menu="matMenu" class="user-menu" id="cy-user-menu">
-  <button class="main-button" (click)="goto('my-orcid')" mat-menu-item id="cy-my-orcid">
+  <button
+    class="main-button"
+    (click)="goto('my-orcid')"
+    mat-menu-item
+    id="cy-my-orcid"
+  >
     <div class="row main-button-container">
       <div class="col">
         <img src="./assets/vectors/profile-icon.svg" alt="" />
@@ -55,7 +60,8 @@
   <button
     mat-menu-item
     *ngIf="togglzOrcidAngularAccountSettings"
-    (click)="goto('trusted-parties')" id="cy-trusted-parties"
+    (click)="goto('trusted-parties')"
+    id="cy-trusted-parties"
   >
     <mat-icon>key</mat-icon>
     <span i18n="@@layout.trustedParties">Trusted parties</span>
@@ -68,7 +74,8 @@
         userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
       userInfo['MEMBER_MENU'] == 'true'
     "
-    (click)="goto('group/developer-tools')" id="cy-delegation-developer-tools"
+    (click)="goto('group/developer-tools')"
+    id="cy-delegation-developer-tools"
   >
     <mat-icon>code</mat-icon>
     <span i18n="@@workspace.developer_tools">Developer tools </span>
@@ -81,7 +88,8 @@
         userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
       userInfo['MEMBER_MENU'] != 'true'
     "
-    (click)="goto('developer-tools')" id="cy-developer-tools"
+    (click)="goto('developer-tools')"
+    id="cy-developer-tools"
   >
     <mat-icon>code</mat-icon>
     <span i18n="@@workspace.developer_tools">Developer tools </span>
@@ -89,7 +97,8 @@
   <button
     mat-menu-item
     *ngIf="userInfo && userInfo['SELF_SERVICE_MENU']"
-    (click)="goto('self-service')" id="cy-self-service"
+    (click)="goto('self-service')"
+    id="cy-self-service"
   >
     <mat-icon>build</mat-icon>
     <span i18n="@@ngOrcid.selfService">Member tools </span>
@@ -97,7 +106,8 @@
   <button
     mat-menu-item
     *ngIf="userInfo && userInfo['ADMIN_MENU']"
-    (click)="goto('manage-members')" id="cy-manage-members"
+    (click)="goto('manage-members')"
+    id="cy-manage-members"
   >
     <mat-icon>group</mat-icon>
     <span i18n="#sentenceCase@@ngOrcid.manageMembers">Manage members</span>
@@ -105,7 +115,8 @@
   <button
     mat-menu-item
     *ngIf="userInfo && userInfo['ADMIN_MENU']"
-    (click)="goto('admin-actions')" id="cy-admin-actions"
+    (click)="goto('admin-actions')"
+    id="cy-admin-actions"
   >
     <mat-icon>verified_user</mat-icon>
     <span i18n="@@ngOrcid.adminPage">Admin page</span>
