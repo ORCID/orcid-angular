@@ -74,8 +74,9 @@
                 appearance="outline"
                 class="mat-form-field-min"
                 [ngClass]="{ 'two-line-hint': isMobile }"
+                [attr.id]="'cy-country-'+i"
               >
-                <mat-select #countrySelect formControlName="country">
+                <mat-select #countrySelect id="cy-country-select-{{i}}" formControlName="country" >
                   <mat-option
                     *ngFor="let countryCode of countryCodes"
                     [value]="countryCode.key"

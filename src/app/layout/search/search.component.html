@@ -20,6 +20,7 @@
       [placeholder]="searchPlaceHolder"
       type="text"
       [attr.aria-label]="labelSearch"
+      id="cy-search"
     />
   </div>
   <button
@@ -28,6 +29,7 @@
     matRipple
     class="col middle search-icon"
     (click)="search(whereToSearchSelected, whatToSearch)"
+    id="cy-search-btn"
   >
     <mat-icon matSuffix>search</mat-icon>
   </button>
