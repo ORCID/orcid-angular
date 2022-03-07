@@ -10,7 +10,7 @@
   </div>
 </button>
 
-<mat-menu #languageMenu="matMenu">
+<mat-menu #languageMenu="matMenu" id="cy-language-menu">
   <div
     *ngFor="let language of languageMenuOptions | keyvalue"
     (click)="changeLanguage(language.key)"

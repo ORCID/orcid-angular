@@ -5,6 +5,7 @@
   <app-language
     role="navigation"
     [attr.aria-label]="labelSearch"
+    id="cy-language-comp"
   ></app-language>
 </div>
 <form role="search" class="row h-end search-box middle">
@@ -20,6 +21,7 @@
       [placeholder]="searchPlaceHolder"
       type="text"
       [attr.aria-label]="labelSearch"
+      id="cy-search"
     />
   </div>
   <button
@@ -28,6 +30,7 @@
     matRipple
     class="col middle search-icon"
     (click)="search(whereToSearchSelected, whatToSearch)"
+    id="cy-search-btn"
   >
     <mat-icon matSuffix>search</mat-icon>
   </button>
