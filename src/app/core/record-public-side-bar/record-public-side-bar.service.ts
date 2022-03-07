@@ -30,7 +30,7 @@ export class RecordPublicSideBarService {
     options: UserRecordOptions
   ): Observable<SideBarPublicUserRecord> {
     if (options.publicRecordId) {
-      if (!this.$SideBarPublicUserRecordSubject || options.forceReload) {
+      if (!this.$SideBarPublicUserRecordSubject) {
         this.$SideBarPublicUserRecordSubject = new ReplaySubject<SideBarPublicUserRecord>(
           1
         )
