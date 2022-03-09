@@ -3,3 +3,5 @@ package-lock.json
 dist
 .angulardoc.json
 .vscode/*
+cypress/reports/*
+.angular/*
