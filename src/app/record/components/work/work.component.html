@@ -56,7 +56,12 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <span *ngIf="numberOfContributors > maxNumberContributors"> ... </span>
+      <span
+        *ngIf="numberOfContributors > maxNumberContributors"
+        i18n="@@works.etAl"
+      >
+        et al.
+      </span>
     </div>
   </div>
 
@@ -158,9 +163,14 @@
         *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>
-          <ng-container i18n="@@works.showing">Showing the first</ng-container>
+          <span i18n="@@works.showing">Showing the first</span>
           <b>{{ maxNumberContributorsWorkDetails }}</b>
-          <ng-container i18n="@@works.contributors"></ng-container>
+          <span
+            class="lowercase"
+            i18n="@@works.contributors"
+          >
+            contributors
+          </span>
         </p>
         <p>----</p>
       </ng-container>
@@ -193,6 +203,12 @@
       <ng-container
         *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
       >
+        <span
+          *ngIf="numberOfContributors > maxNumberContributors"
+          i18n="@@works.etAl"
+        >
+          et al.
+        </span>
         <p>----</p>
         <p>
           <ng-container i18n="@@works.fullContributorList">
