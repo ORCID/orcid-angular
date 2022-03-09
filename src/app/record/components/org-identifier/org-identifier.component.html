@@ -101,7 +101,7 @@
         ><span>)</span></ng-container
       ><span *ngIf="org.preferred && org.all.length > 1">, </span
       ><ng-container *ngFor="let id of org.all; index as j"
-        ><ng-container *ngIf="id != org.preferred"
+        ><ng-container *ngIf="id !== org.preferred"
           ><ng-container
             *ngIf="!isUrl(id) && getLink(org.identifierType, id) === ''"
             >{{ id }}</ng-container
@@ -128,7 +128,7 @@
               {{ id }}
             </a></ng-template
           >
-          <span *ngIf="org.all[j + 1] && org.all[j + 1] != org.preferred"
+          <span *ngIf="org.all[j + 1] && org.all[j + 1] !== org.preferred"
             >,
           </span>
         </ng-container>
