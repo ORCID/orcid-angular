@@ -56,9 +56,7 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <span *ngIf="numberOfContributors > maxNumberContributors">
-        ...
-      </span>
+      <span *ngIf="numberOfContributors > maxNumberContributors"> ... </span>
     </div>
   </div>
 
@@ -157,9 +155,7 @@
 
     <div *ngIf="togglzWorksContributors">
       <ng-container
-        *ngIf="
-          numberOfContributors > maxNumberContributorsWorkDetails
-        "
+        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>
           <ng-container i18n="@@works.showing">Showing the first</ng-container>
@@ -195,9 +191,7 @@
         </ng-container>
       </p>
       <ng-container
-        *ngIf="
-          numberOfContributors > maxNumberContributorsWorkDetails
-        "
+        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>----</p>
         <p>
