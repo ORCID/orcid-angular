@@ -369,6 +369,12 @@
             "scripts": [],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     },
@@ -393,6 +399,7 @@
   },
   "defaultProject": "ng-orcid",
   "cli": {
-    "analytics": "5a5330f1-74b5-403d-bd97-0318d391a33a"
+    "analytics": "5a5330f1-74b5-403d-bd97-0318d391a33a",
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

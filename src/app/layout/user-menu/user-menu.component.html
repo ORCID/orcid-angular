@@ -70,9 +70,9 @@
     mat-menu-item
     *ngIf="
       userInfo &&
-      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
-        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
-      userInfo['MEMBER_MENU'] == 'true'
+      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] === 'true') &&
+      userInfo['MEMBER_MENU'] === 'true'
     "
     (click)="goto('group/developer-tools')"
     id="cy-delegation-developer-tools"
@@ -84,9 +84,9 @@
     mat-menu-item
     *ngIf="
       userInfo &&
-      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
-        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
-      userInfo['MEMBER_MENU'] != 'true'
+      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] === 'true') &&
+      userInfo['MEMBER_MENU'] !== 'true'
     "
     (click)="goto('developer-tools')"
     id="cy-developer-tools"
