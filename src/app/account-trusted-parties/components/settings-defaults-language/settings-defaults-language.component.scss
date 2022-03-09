@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  button {
+    padding: 0 7px 0 12px;
+    p {
+      margin: 0;
+      margin-right: 7px;
+    }
+    mat-icon {
+      height: auto;
+      width: auto;
+    }
+  }
+}
+
+mat-form-field {
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 16px;
+}

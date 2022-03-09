@@ -1,0 +1,24 @@
+ul {
+  padding-inline-start: 8px;
+  li {
+    list-style-type: none;
+  }
+}
+.button-container {
+  display: flex;
+  align-items: row;
+  margin-top: 16px;
+}
+
+.info {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}

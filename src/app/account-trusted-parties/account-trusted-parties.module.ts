@@ -16,8 +16,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
 import { AccountPanelModule } from '../cdk/account-panel/account-panel.module';
+
 import { ModalModule } from '../cdk/modal/modal.module';
 import { SideBarModule } from '../cdk/side-bar/side-bar.module';
 import {
@@ -25,7 +25,7 @@ import {
 } from '../cdk/two-factor-authentication-form/two-factor-authentication-form.module';
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service';
 import { SharedModule } from '../shared/shared.module';
-import { AccountSettingsRoutingModule } from './account-settings-routing.module';
+import { AccountTrustedPartiesRoutingModule } from './account-trusted-parties-routing.module';
 import {
   DialogActionsDuplicatedMergedConfirmedComponent,
 } from './components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component';
@@ -74,11 +74,11 @@ import {
 import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr-code/settings-sharing-qr-code.component';
 import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { AccountSettingsComponent } from './pages/account-settings/account-settings.component';
+import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component';
 
 @NgModule({
   declarations: [
-    AccountSettingsComponent,
+    AccountTrustedPartiesComponent,
     SettingsComponent,
     SettingsDefaultsComponent,
     SettingsDefaultsEmailFrequencyComponent,
@@ -92,7 +92,7 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
     SettingsSecurityTwoFactorAuthComponent,
     SettingsActionsComponent,
     SettingsActionsDownloadComponent,
-    SettingsActionsDeactivateComponent,
+    SettingsActionsDeactivateComponent, 
     SettingsActionsDuplicatedComponent,
     DialogActionsDuplicatedComponent,
     DialogActionsDuplicatedMergedConfirmedComponent,
@@ -100,10 +100,11 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
     SettingsSharingComponent,
     SettingsSharingQrCodeComponent,
     SettingsSharingHtmlCodeComponent,
+    AccountTrustedPartiesComponent,
   ],
   imports: [
     CommonModule,
-    AccountSettingsRoutingModule,
+    AccountTrustedPartiesRoutingModule,
     SideBarModule,
     MatDialogModule,
     MatProgressBarModule,
@@ -129,4 +130,4 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
   ],
   providers: [VerificationEmailModalService],
 })
-export class AccountSettingsModule {}
+export class AccountTrustedPartiesModule {}
