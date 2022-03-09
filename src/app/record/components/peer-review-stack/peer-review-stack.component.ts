@@ -23,7 +23,7 @@ import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
     './peer-review-stack.component.scss-theme.scss',
   ],
 })
-export class PeerReviewStackComponent implements OnInit {
+export class PeerReviewStackComponent  {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _peerReviewStack: PeerReviewDuplicateGroup
   visibility: VisibilityStrings
@@ -152,7 +152,6 @@ export class PeerReviewStackComponent implements OnInit {
     return item.putCode
   }
 
-  ngOnInit(): void {}
 
   getDetails(peerReview: PeerReview, putCode: number): void {
     if (this.isPublicRecord) {

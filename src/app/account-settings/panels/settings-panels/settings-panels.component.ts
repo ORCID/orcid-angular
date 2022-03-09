@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog'
     './settings-panels.component.scss-theme.scss',
   ],
 })
-export class SettingsPanelsComponent implements OnInit {
+export class SettingsPanelsComponent  {
   @Input() loading = false
   @Input() expandedContent = false
   @Output() expandedContentChange: EventEmitter<boolean> = new EventEmitter()
@@ -22,5 +22,4 @@ export class SettingsPanelsComponent implements OnInit {
     this.expandedContentChange.emit(this.expandedContent)
   }
 
-  ngOnInit(): void {}
 }

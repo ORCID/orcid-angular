@@ -11,7 +11,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
   animations: [enterAnimation],
   preserveWhitespaces: true,
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent  {
   platform
 
   constructor(
@@ -27,5 +27,4 @@ export class HomeComponent implements OnInit {
     this.window.location.href = environment.BASE_URL + url
   }
 
-  ngOnInit() {}
 }

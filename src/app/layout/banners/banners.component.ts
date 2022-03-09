@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./banners.component.scss'],
   preserveWhitespaces: true,
 })
-export class BannersComponent implements OnInit {
+export class BannersComponent {
   environment = environment
   maintenanceMessages: MaintenanceMessage
   showCookieBanner
@@ -67,6 +67,4 @@ export class BannersComponent implements OnInit {
     this._cookie.set(element.id, 'understood', 365)
     this.updateClosableMessage()
   }
-
-  ngOnInit() {}
 }

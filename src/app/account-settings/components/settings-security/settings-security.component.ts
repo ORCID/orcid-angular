@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './settings-security.component.html',
   styleUrls: ['./settings-security.component.scss'],
 })
-export class SettingsSecurityComponent implements OnInit {
+export class SettingsSecurityComponent  {
   titleAccountPassword = $localize`:@@account.accountPassword:Account password`
   titleTwoFactor = $localize`:@@account.twoPassword:Two-factor authentication`
   titleAlternativeSignin = $localize`:@@account.alternativeSignin:Alternate sign in accounts`
@@ -20,5 +20,4 @@ export class SettingsSecurityComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

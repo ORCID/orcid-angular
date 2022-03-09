@@ -6,7 +6,7 @@ import { FundingRelationships } from 'src/app/types/record-funding.endpoint'
   templateUrl: './funding-external-identifiers-view-only.component.html',
   styleUrls: ['./funding-external-identifiers-view-only.component.scss'],
 })
-export class FundingExternalIdentifiersViewOnlyComponent implements OnInit {
+export class FundingExternalIdentifiersViewOnlyComponent  {
   grantNumberLabel = $localize`:@@funding.grantNumberColon:Grant number:`
   grantUrlLabel = $localize`:@@funding.grantUrlColon:Grant URL:`
   fundingRelationshipLabel = $localize`:@@shared.relationshipColon:Relationship:`
@@ -22,5 +22,4 @@ export class FundingExternalIdentifiersViewOnlyComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

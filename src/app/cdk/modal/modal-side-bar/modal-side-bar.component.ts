@@ -8,8 +8,7 @@ import { Component, OnInit } from '@angular/core'
     './modal-side-bar.component.scss-theme.scss',
   ],
 })
-export class ModalSideBarComponent implements OnInit {
+export class ModalSideBarComponent  {
   constructor() {}
 
-  ngOnInit(): void {}
 }

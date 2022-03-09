@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators'
     './snackbar.component.scss',
   ],
 })
-export class SnackbarComponent implements OnInit {
+export class SnackbarComponent  {
   @HostBinding('attr.dir') _contentDirection: ScreenDirection = 'ltr'
   labelClose = $localize`:@@shared.ariaLabelClose:Close`
   isIE = false
@@ -33,5 +33,4 @@ export class SnackbarComponent implements OnInit {
       })
   }
 
-  ngOnInit() {}
 }

@@ -7,12 +7,11 @@ import { environment } from '../../../../environments/environment'
   templateUrl: './search-link-wizard.component.html',
   styleUrls: ['./search-link-wizard.component.scss'],
 })
-export class SearchLinkWizardComponent implements OnInit {
+export class SearchLinkWizardComponent  {
   @Input() recordImportWizards: RecordImportWizard[]
 
   constructor() {}
 
-  ngOnInit(): void {}
 
   openImportWizardUrlFilter(client: RecordImportWizard): string {
     if (client.status === 'RETIRED') {

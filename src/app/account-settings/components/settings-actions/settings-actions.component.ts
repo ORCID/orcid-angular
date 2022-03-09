@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './settings-actions.component.html',
   styleUrls: ['./settings-actions.component.scss'],
 })
-export class SettingsActionsComponent implements OnInit {
+export class SettingsActionsComponent  {
   titleDownload = $localize`:@@account.downloadYourOrcid:Download your ORCID data`
   titleDuplicatedRecord = $localize`:@@account.removeDuplicate:Remove a duplicate record`
   titleDeactivate = $localize`:@@account.deactivateYourOrcidAccount:Deactivate your ORCID account`
@@ -19,5 +19,4 @@ export class SettingsActionsComponent implements OnInit {
   settingDeactivateLoading = false
   constructor() {}
 
-  ngOnInit(): void {}
 }

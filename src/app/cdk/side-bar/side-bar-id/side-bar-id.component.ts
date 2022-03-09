@@ -12,7 +12,7 @@ import { environment } from '../../../../environments/environment'
     './side-bar-id.component-scss-theme.scss',
   ],
 })
-export class SideBarIdComponent implements OnInit, OnDestroy {
+export class SideBarIdComponent implements OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   environment = environment
@@ -29,7 +29,6 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
       })
   }
 
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.$destroy.next(true)

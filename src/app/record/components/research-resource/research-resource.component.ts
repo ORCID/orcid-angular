@@ -20,7 +20,7 @@ import { RecordResearchResourceService } from '../../../core/record-research-res
     './research-resource.component.scss-theme.scss',
   ],
 })
-export class ResearchResourceComponent implements OnInit {
+export class ResearchResourceComponent  {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @Input() isPublicRecord: string
@@ -56,7 +56,6 @@ export class ResearchResourceComponent implements OnInit {
       })
   }
 
-  ngOnInit(): void {}
 
   getResearchResource(putCode: string): ResearchResource {
     if (this.detailsResearchResources.length === 0) {

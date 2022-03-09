@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
   templateUrl: './panel-expand-buttons.component.html',
   styleUrls: ['./panel-expand-buttons.component.scss'],
 })
-export class PanelExpandButtonsComponent implements OnInit {
+export class PanelExpandButtonsComponent  {
   tooltipLabelShowDetails = $localize`:@@shared.showDetails:Show details`
   tooltipLabelHideDetails = $localize`:@@shared.hideDetails:Hide details`
 
@@ -14,5 +14,4 @@ export class PanelExpandButtonsComponent implements OnInit {
   @Output() toggle = new EventEmitter<void>()
   constructor() {}
 
-  ngOnInit(): void {}
 }

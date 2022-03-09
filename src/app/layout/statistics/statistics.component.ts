@@ -8,7 +8,7 @@ import { TogglzService } from 'src/app/core/togglz/togglz.service'
   styleUrls: ['./statistics.component.scss'],
   preserveWhitespaces: true,
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent {
   labelStatistics = $localize`:@@layout.ariaLabelStatistics:statistics`
   togglz: Config
   constructor(_togglz: TogglzService) {
@@ -16,6 +16,4 @@ export class StatisticsComponent implements OnInit {
       this.togglz = data
     })
   }
-
-  ngOnInit() {}
 }

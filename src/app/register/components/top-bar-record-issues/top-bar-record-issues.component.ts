@@ -5,8 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './top-bar-record-issues.component.html',
   styleUrls: ['./top-bar-record-issues.component.scss'],
 })
-export class TopBarRecordIssuesComponent implements OnInit {
+export class TopBarRecordIssuesComponent  {
   constructor() {}
 
-  ngOnInit(): void {}
 }

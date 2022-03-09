@@ -6,7 +6,7 @@ import { CookieService } from 'ngx-cookie-service'
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss'],
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent  {
   @Input() dismissCookie = 'cookieName'
   @Input() canDismiss = false
   @Input() dismissCookieTime = 365
@@ -15,7 +15,6 @@ export class BannerComponent implements OnInit {
 
   constructor(private _cookie: CookieService) {}
 
-  ngOnInit() {}
 
   onDismiss() {
     this._cookie.set(

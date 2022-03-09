@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './copy-on-click.component.html',
   styleUrls: ['./copy-on-click.component.scss'],
 })
-export class CopyOnClickComponent implements OnInit {
+export class CopyOnClickComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

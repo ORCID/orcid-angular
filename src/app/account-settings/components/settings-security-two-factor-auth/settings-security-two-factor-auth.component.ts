@@ -5,8 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './settings-security-two-factor-auth.component.html',
   styleUrls: ['./settings-security-two-factor-auth.component.scss'],
 })
-export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
+export class SettingsSecurityTwoFactorAuthComponent  {
   constructor() {}
 
-  ngOnInit(): void {}
 }

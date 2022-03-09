@@ -10,7 +10,7 @@ import { DialogActionsDuplicatedMergedConfirmedComponent } from '../dialog-actio
   templateUrl: './dialog-actions-duplicated-two-factor-auth.component.html',
   styleUrls: ['./dialog-actions-duplicated-two-factor-auth.component.scss'],
 })
-export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
+export class DialogActionsDuplicatedTwoFactorAuthComponent  {
   showBadVerificationCode: boolean
   showBadRecoveryCode: boolean
   loading: boolean
@@ -20,7 +20,6 @@ export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DuplicateRemoveEndpoint
   ) {}
 
-  ngOnInit(): void {}
   authenticate(code: { verificationCode?: string; recoveryCode?: string }) {
     this.showBadVerificationCode = false
     this.showBadRecoveryCode = false

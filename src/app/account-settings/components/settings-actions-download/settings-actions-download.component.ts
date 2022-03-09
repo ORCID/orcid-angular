@@ -6,12 +6,10 @@ import { AccountActionsDownloadService } from 'src/app/core/account-actions-down
   templateUrl: './settings-actions-download.component.html',
   styleUrls: ['./settings-actions-download.component.scss'],
 })
-export class SettingsActionsDownloadComponent implements OnInit {
+export class SettingsActionsDownloadComponent  {
   @Output() loading = new EventEmitter<boolean>()
 
   constructor(private _accountDownloadService: AccountActionsDownloadService) {}
-
-  ngOnInit(): void {}
 
   createDownload() {
     this.loading.emit(true)

@@ -17,7 +17,7 @@ import { UserRecord } from 'src/app/types/record.local'
     './funding-stack.component.scss-theme.scss',
   ],
 })
-export class FundingStackComponent implements OnInit {
+export class FundingStackComponent  {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _fundingStack: FundingGroup
   hasExternalIds: boolean
@@ -178,5 +178,4 @@ export class FundingStackComponent implements OnInit {
     return false
   }
 
-  ngOnInit(): void {}
 }

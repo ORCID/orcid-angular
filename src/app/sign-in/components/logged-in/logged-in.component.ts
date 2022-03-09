@@ -6,13 +6,12 @@ import { WINDOW } from '../../../cdk/window'
   templateUrl: './logged-in.component.html',
   styleUrls: ['./logged-in.component.scss'],
 })
-export class LoggedInComponent implements OnInit {
+export class LoggedInComponent {
   @Input() realUserOrcid: string
   @Input() displayName: string
 
   constructor(@Inject(WINDOW) private window: Window) {}
 
-  ngOnInit() {}
 
   navigateTo(val) {
     this.window.location.href = val

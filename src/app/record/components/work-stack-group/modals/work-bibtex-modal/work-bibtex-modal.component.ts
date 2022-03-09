@@ -19,7 +19,7 @@ import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
     './work-bibtex-modal.component.scss-theme.scss',
   ],
 })
-export class WorkBibtexModalComponent implements OnInit, OnDestroy {
+export class WorkBibtexModalComponent implements OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   importForm: FormGroup
@@ -41,7 +41,6 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {}
 
   bibTexInputChange($fileInputEvent: any) {
     this.bibtexErrorParsingText = undefined

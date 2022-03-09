@@ -8,11 +8,10 @@ import { Component, Input, OnInit } from '@angular/core'
     './my-orcid-alerts.component.scss-theme.scss',
   ],
 })
-export class MyOrcidAlertsComponent implements OnInit {
+export class MyOrcidAlertsComponent  {
   @Input() emailVerified: boolean
   @Input() invalidVerifyUrl: boolean
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

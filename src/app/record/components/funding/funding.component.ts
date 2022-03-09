@@ -8,7 +8,7 @@ import { Funding } from 'src/app/types/record-funding.endpoint'
   styleUrls: ['./funding.component.scss'],
   preserveWhitespaces: true,
 })
-export class FundingComponent implements OnInit {
+export class FundingComponent  {
   @Input() funding: Funding
   @Input() panelDetailsState: {
     state: boolean
@@ -19,5 +19,4 @@ export class FundingComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

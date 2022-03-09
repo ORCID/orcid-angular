@@ -6,7 +6,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
   templateUrl: './panel-element.component.html',
   styleUrls: ['./panel-element.component.scss'],
 })
-export class PanelElementComponent implements OnInit {
+export class PanelElementComponent  {
   @Input() visibility: VisibilityStrings | ''
   @Input() bold: Boolean
   @Input() hideVisibility: Boolean = true
@@ -14,5 +14,4 @@ export class PanelElementComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

@@ -31,7 +31,7 @@ import { TogglzService } from '../../../core/togglz/togglz.service'
     './work-stack.component.scss-theme.scss',
   ],
 })
-export class WorkStackComponent implements OnInit {
+export class WorkStackComponent  {
   @Input() userRecord: UserRecord
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _workStack: WorkGroup
@@ -181,5 +181,4 @@ export class WorkStackComponent implements OnInit {
     this.checkboxChangeWorkStackOutput.emit($event)
   }
 
-  ngOnInit(): void {}
 }

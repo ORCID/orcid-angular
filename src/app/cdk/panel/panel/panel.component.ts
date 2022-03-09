@@ -36,7 +36,7 @@ import { WINDOW } from 'src/app/cdk/window'
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss', 'panel.component.scss-theme.scss'],
 })
-export class PanelComponent implements OnInit {
+export class PanelComponent  {
   @Input() showVisibilityControl = false
   @Input() stackSiblings: any[]
   @Input() stackedHeader = false
@@ -133,7 +133,6 @@ export class PanelComponent implements OnInit {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {}
 
   isArrayAndIsNotEmpty(
     obj:

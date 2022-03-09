@@ -26,6 +26,7 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
     private _user: UserService
   ) {}
   @Output() loading = new EventEmitter<boolean>()
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() close = new EventEmitter()
 
   form: FormGroup

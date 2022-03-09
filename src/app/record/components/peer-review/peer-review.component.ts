@@ -6,7 +6,7 @@ import { PeerReview } from '../../../types/record-peer-review.endpoint'
   templateUrl: './peer-review.component.html',
   styleUrls: ['./peer-review.component.scss'],
 })
-export class PeerReviewComponent implements OnInit {
+export class PeerReviewComponent  {
   @Input() isPublicRecord: string
   @Input() subPeerReview: PeerReview
   @Input() detailsPeerReviews: any
@@ -15,7 +15,6 @@ export class PeerReviewComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 
   getPeerReview(putCode: number): PeerReview {
     if (this.detailsPeerReviews.length === 0) {

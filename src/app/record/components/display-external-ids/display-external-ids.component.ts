@@ -6,7 +6,7 @@ import { ExternalIdentifier } from 'src/app/types/common.endpoint'
   templateUrl: './display-external-ids.component.html',
   styleUrls: ['./display-external-ids.component.scss'],
 })
-export class DisplayExternalIdsComponent implements OnInit {
+export class DisplayExternalIdsComponent  {
   @Input() externalIdentifiers: ExternalIdentifier[]
   @Input() noBoldTitle = false
   @Input() externalIdentifier: ExternalIdentifier
@@ -14,7 +14,6 @@ export class DisplayExternalIdsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 
   getExternalIdentifiers(): ExternalIdentifier[] {
     const externalIdentifiersList: ExternalIdentifier[] = []

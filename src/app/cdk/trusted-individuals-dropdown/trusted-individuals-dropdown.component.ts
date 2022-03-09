@@ -13,7 +13,7 @@ import {
   ],
   preserveWhitespaces: true,
 })
-export class TrustedIndividualsDropdownComponent implements OnInit {
+export class TrustedIndividualsDropdownComponent  {
   _trustedIndividuals: TrustedIndividuals
   delegators: Delegator[]
   switchToMeAccount: Delegator
@@ -27,7 +27,6 @@ export class TrustedIndividualsDropdownComponent implements OnInit {
     return this._trustedIndividuals
   }
   @Output() changeUser = new EventEmitter<Delegator>()
-  ngOnInit(): void {}
 
   changeAccount(delegator: Delegator) {
     this.changeUser.next(delegator)

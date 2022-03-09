@@ -6,7 +6,7 @@ import { UserService } from 'src/app/core'
   styleUrls: ['./authorize.component.scss'],
   preserveWhitespaces: true,
 })
-export class AuthorizeComponent implements OnInit {
+export class AuthorizeComponent  {
   showAuthorizationComponent: boolean
   constructor(_user: UserService) {
     _user.getUserSession().subscribe((session) => {
@@ -18,5 +18,4 @@ export class AuthorizeComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {}
 }

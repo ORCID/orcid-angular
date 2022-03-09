@@ -26,7 +26,7 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./form-authorize.component.scss'],
   preserveWhitespaces: true,
 })
-export class FormAuthorizeComponent implements OnInit, OnDestroy {
+export class FormAuthorizeComponent implements OnDestroy {
   environment = environment
   $destroy: Subject<boolean> = new Subject<boolean>()
   orcidUrl: string
@@ -79,7 +79,6 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnInit(): void {}
 
   navigateTo(val) {
     this.window.location.href = val

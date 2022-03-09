@@ -15,7 +15,7 @@ import { RecordResearchResourceService } from '../../../core/record-research-res
     './research-resource-stack.component.scss-theme.scss',
   ],
 })
-export class ResearchResourceStackComponent implements OnInit {
+export class ResearchResourceStackComponent  {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _researchResourceStack: ResearchResourcesGroup
   visibility: VisibilityStrings
@@ -133,5 +133,4 @@ export class ResearchResourceStackComponent implements OnInit {
     return item.putCode
   }
 
-  ngOnInit(): void {}
 }

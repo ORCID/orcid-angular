@@ -7,10 +7,9 @@ import { Component, OnInit, NgModule } from '@angular/core'
   selector: 'app-i18n.pseudo',
   templateUrl: './i18n.pseudo.component.html',
 })
-export class I18nPseudoComponent implements OnInit {
+export class I18nPseudoComponent{
   constructor() {}
 
-  ngOnInit() {}
 }
 
 @NgModule({

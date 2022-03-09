@@ -16,7 +16,7 @@ import { VerificationEmailModalService } from 'src/app/core/verification-email-m
   styleUrls: ['./panel-source.component.scss'],
   preserveWhitespaces: true,
 })
-export class PanelSourceComponent implements OnInit {
+export class PanelSourceComponent  {
   @Input() isPublicRecord
   @Input() isPreferred = true
   @Input() sourceName
@@ -67,7 +67,6 @@ export class PanelSourceComponent implements OnInit {
       this.isHandset = person.handset
     })
   }
-  ngOnInit(): void {}
 
   toggleStackMode() {
     if (this.stackLength > 1) {

@@ -14,7 +14,7 @@ import { SignInService } from '../../../core/sign-in/sign-in.service'
   templateUrl: './social.component.html',
   styleUrls: ['./social.component.scss', './social.component.scss-theme.scss'],
 })
-export class SocialComponent implements OnInit {
+export class SocialComponent {
   platform: PlatformInfo
   baseUri: string
   csrf: string
@@ -48,8 +48,6 @@ export class SocialComponent implements OnInit {
         })
       })
   }
-
-  ngOnInit() {}
 
   navigateTo(val) {
     this.window.location.href = val

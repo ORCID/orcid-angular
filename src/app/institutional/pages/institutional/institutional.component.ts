@@ -29,7 +29,7 @@ import {
   styleUrls: ['./institutional.component.scss'],
   preserveWhitespaces: true,
 })
-export class InstitutionalComponent implements OnInit {
+export class InstitutionalComponent {
   @HostBinding('class.container') containerClass = true
   displayAutocompleteOptions = false
   loading = false
@@ -104,8 +104,6 @@ export class InstitutionalComponent implements OnInit {
         })
       })
   }
-
-  ngOnInit() {}
 
   onSubmit() {
     if (this.institutionalForm.valid || this.entityID) {

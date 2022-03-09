@@ -8,8 +8,7 @@ import { Component, OnInit } from '@angular/core'
     'alert-message.component.scss-theme.scss',
   ],
 })
-export class AlertMessageComponent implements OnInit {
+export class AlertMessageComponent  {
   constructor() {}
 
-  ngOnInit(): void {}
 }

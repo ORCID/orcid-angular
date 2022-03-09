@@ -15,8 +15,7 @@ import { ModalComponent } from '../../../../../cdk/modal/modal/modal.component'
   ],
   preserveWhitespaces: true,
 })
-export class TopBarVerificationEmailModalComponent
-  implements OnInit, OnDestroy {
+export class TopBarVerificationEmailModalComponent implements OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   primaryEmail: string
@@ -48,5 +47,4 @@ export class TopBarVerificationEmailModalComponent
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
-  ngOnInit(): void {}
 }

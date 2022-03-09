@@ -23,7 +23,7 @@ import { menu } from './menu'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss-theme.scss', './header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   hideMainMenu = false
   _currentRoute: string
   @Input() set currentRoute(value) {
@@ -78,7 +78,6 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
 
   mouseLeave() {
     if (this.platform.columns12) {

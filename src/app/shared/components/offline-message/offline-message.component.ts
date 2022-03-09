@@ -8,9 +8,7 @@ import { Component, Input, OnInit } from '@angular/core'
     './offline-message.component.scss',
   ],
 })
-export class OfflineMessageComponent implements OnInit {
+export class OfflineMessageComponent  {
   @Input() canBeRetry
   constructor() {}
-
-  ngOnInit() {}
 }

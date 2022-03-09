@@ -38,7 +38,7 @@
             ({{ currentAmount }})
           </span>
           <span
-            *ngIf="(!currentAmount && total == 0) || (!currentAmount && !total)"
+            *ngIf="(!currentAmount && total === 0) || (!currentAmount && !total)"
             >(0)</span
           >
           <span *ngIf="!currentAmount && currentAmount !== 0"></span>

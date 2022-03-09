@@ -8,7 +8,7 @@ import { LanguageService } from 'src/app/core/language/language.service'
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.scss'],
 })
-export class LanguageComponent implements OnInit {
+export class LanguageComponent{
   languageMenuOptions: { [key: string]: string }
   labelLanguage = $localize`:@@layout.ariaLabelLanguage:language`
 
@@ -28,5 +28,4 @@ export class LanguageComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
 }

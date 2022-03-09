@@ -1,3 +1,5 @@
+/* eslint-disable @angular-eslint/component-class-suffix */
+/* eslint-disable @angular-eslint/component-selector */
 import {
   Component,
   EventEmitter,
@@ -255,6 +257,7 @@ export class MdePopover implements MdePopoverPanel, OnDestroy {
    * to style the containing popover from outside the component.
    * @param classes list of class names
    */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('class')
   set panelClass(classes: string) {
     if (classes && classes.length) {
@@ -285,6 +288,7 @@ export class MdePopover implements MdePopoverPanel, OnDestroy {
   }
 
   /** Event emitted when the popover is closed. */
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() close = new EventEmitter<void>()
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any>

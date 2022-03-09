@@ -5,10 +5,9 @@ import { Component, Input, OnInit } from '@angular/core'
   templateUrl: './display-attribute.component.html',
   styleUrls: ['./display-attribute.component.scss'],
 })
-export class DisplayAttributeComponent implements OnInit {
+export class DisplayAttributeComponent  {
   @Input() title
   @Input() content
 
   constructor() {}
-  ngOnInit(): void {}
 }

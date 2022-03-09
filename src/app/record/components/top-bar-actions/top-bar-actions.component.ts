@@ -12,7 +12,7 @@ import { UserStatus } from '../../../types/userStatus.endpoint'
   templateUrl: './top-bar-actions.component.html',
   styleUrls: ['./top-bar-actions.component.scss'],
 })
-export class TopBarActionsComponent implements OnInit, OnDestroy {
+export class TopBarActionsComponent implements OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
   platform: PlatformInfo
   @Input() userRecord: UserRecord
@@ -31,7 +31,6 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
         this.platform = data
       })
   }
-  ngOnInit(): void {}
   ngOnDestroy(): void {
     this.$destroy.next()
   }

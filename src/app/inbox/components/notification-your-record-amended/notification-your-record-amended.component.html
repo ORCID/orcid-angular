@@ -19,26 +19,26 @@
       <ng-container>-</ng-container>
       <ng-container
         *ngIf="
-          item.additionalInfo && item.additionalInfo['org_name'] != undefined
+          item.additionalInfo && item.additionalInfo['org_name'] !== undefined
         "
       >
         <i>{{ item.additionalInfo['org_name'] }} </i>
       </ng-container>
 
-      <ng-container *ngIf="item.itemName != null">{{
+      <ng-container *ngIf="item.itemName !== null">{{
         item.itemName
       }}</ng-container>
 
       <ng-container *ngIf="item.additionalInfo">
         <ng-container
           *ngIf="
-            item.itemName == null &&
-            item.additionalInfo['group_name'] != undefined
+            item.itemName === null &&
+            item.additionalInfo['group_name'] !== undefined
           "
           >{{ item.additionalInfo['group_name'] }}</ng-container
         >
         <ng-container
-          *ngIf="item.additionalInfo['external_identifiers'] != undefined"
+          *ngIf="item.additionalInfo['external_identifiers'] !== undefined"
         >
           <ul>
             <li

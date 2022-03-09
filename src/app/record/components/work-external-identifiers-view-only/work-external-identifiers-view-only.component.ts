@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms'
   templateUrl: './work-external-identifiers-view-only.component.html',
   styleUrls: ['./work-external-identifiers-view-only.component.scss'],
 })
-export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
+export class WorkExternalIdentifiersViewOnlyComponent  {
   typeLabel = $localize`:@@works.typeColon:Type:`
   valueLabel = $localize`:@@works.value:Value:`
   urlLabel = $localize`:@@works.urlColon:URL:`
@@ -25,6 +25,4 @@ export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
   @Input() externalIdForm: FormGroup
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

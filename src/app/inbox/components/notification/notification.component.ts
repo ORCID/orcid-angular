@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   HostBinding,
   Input,
   Inject,
@@ -44,7 +43,7 @@ import {
   ],
 })
 export class NotificationComponent
-  implements OnInit, AfterViewInit, ControlValueAccessor {
+  implements AfterViewInit, ControlValueAccessor {
   state = 'close'
   @ViewChild('header') header: ElementRef<HTMLElement>
   @HostBinding('class.archived') _archived = false
@@ -191,8 +190,6 @@ export class NotificationComponent
   archive() {
     this._inbox.flagAsArchive(this.notification.putCode).subscribe()
   }
-
-  ngOnInit() {}
 
   ngAfterViewInit(): void {
     this._focusMonitor.monitor(this.header).subscribe((origin) =>

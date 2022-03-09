@@ -7,7 +7,7 @@ import { SocialAccount } from 'src/app/types/account-alternate-sign-in.endpoint'
   templateUrl: './dialog-security-alternate-account-delete.component.html',
   styleUrls: ['./dialog-security-alternate-account-delete.component.scss'],
 })
-export class DialogSecurityAlternateAccountDeleteComponent implements OnInit {
+export class DialogSecurityAlternateAccountDeleteComponent  {
   data: SocialAccount
   constructor(
     private matRef: MatDialogRef<DialogSecurityAlternateAccountDeleteComponent>,
@@ -16,7 +16,6 @@ export class DialogSecurityAlternateAccountDeleteComponent implements OnInit {
     this.data = data
   }
 
-  ngOnInit(): void {}
 
   ok() {
     this.matRef.close(true)

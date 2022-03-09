@@ -13,7 +13,7 @@ import {
   styleUrls: ['./panel-data-line.component.scss'],
   preserveWhitespaces: true,
 })
-export class PanelDataLineComponent implements OnInit {
+export class PanelDataLineComponent  {
   @Input() noBoldTitle = false
   @Input() url
   @Input() title
@@ -52,5 +52,4 @@ export class PanelDataLineComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
 }

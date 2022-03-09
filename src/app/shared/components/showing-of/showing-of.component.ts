@@ -6,11 +6,10 @@ import { Component, Input, OnInit } from '@angular/core'
   styleUrls: ['./showing-of.component.scss'],
   preserveWhitespaces: true,
 })
-export class ShowingOfComponent implements OnInit {
+export class ShowingOfComponent {
   @Input() displaying: number
   @Input() total: number
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

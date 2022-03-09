@@ -6,7 +6,7 @@ import { InboxNotificationHtml } from 'src/app/types/notifications.endpoint'
   templateUrl: './notification-html.component.html',
   styleUrls: ['./notification-html.component.scss'],
 })
-export class NotificationHtmlComponent implements OnInit {
+export class NotificationHtmlComponent  {
   _notification: InboxNotificationHtml
   messageBody: HTMLBodyElement
   @Input() set notification(notification: InboxNotificationHtml) {
@@ -24,5 +24,4 @@ export class NotificationHtmlComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

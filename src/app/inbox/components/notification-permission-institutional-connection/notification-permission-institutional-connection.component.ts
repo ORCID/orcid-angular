@@ -12,7 +12,7 @@ import { InboxNotificationInstitutional } from 'src/app/types/notifications.endp
   preserveWhitespaces: true,
 })
 export class NotificationPermissionInstitutionalConnectionComponent
-  implements OnInit {
+   {
   _notification: InboxNotificationInstitutional
   @Input()
   set notification(notification: InboxNotificationInstitutional) {
@@ -23,5 +23,4 @@ export class NotificationPermissionInstitutionalConnectionComponent
   }
   constructor(@Inject(WINDOW) private window: Window) {}
 
-  ngOnInit(): void {}
 }

@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment'
   styleUrls: ['./environment-banner.component.scss'],
   preserveWhitespaces: true,
 })
-export class EnvironmentBannerComponent implements OnInit {
+export class EnvironmentBannerComponent  {
   hostUrl
   canDismiss = environment['CAN_DISABLE_TEST_WARNING_BANNER']
   @HostBinding('style.display') display = 'none'
@@ -29,5 +29,4 @@ export class EnvironmentBannerComponent implements OnInit {
     this._cs.set('testWarningCookie', 'dont show message', 365)
   }
 
-  ngOnInit() {}
 }

@@ -27,7 +27,7 @@ import { SearchService } from 'src/app/core/search/search.service'
     './advance-search.component.scss',
   ],
 })
-export class AdvanceSearchComponent implements OnInit, OnChanges {
+export class AdvanceSearchComponent implements OnChanges {
   @Input() searchValues: SearchResults
   @ViewChild('searchForm') searchForm: ElementRef<HTMLElement>
   isAPhoneScreen = false
@@ -60,7 +60,6 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
       { validators: AtLeastOneInputHasValue() }
     )
   }
-  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     // it opens the advanced search with the search parameters

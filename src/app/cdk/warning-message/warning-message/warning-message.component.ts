@@ -12,7 +12,7 @@ import { PlatformInfoService } from '../../platform-info'
   ],
   preserveWhitespaces: false,
 })
-export class WarningMessageComponent implements OnInit, OnDestroy {
+export class WarningMessageComponent implements OnDestroy {
   @Input() icon = 'info'
   isMobile: boolean
   $destroy: Subject<boolean> = new Subject<boolean>()
@@ -30,5 +30,4 @@ export class WarningMessageComponent implements OnInit, OnDestroy {
     this.$destroy.next(true)
     this.$destroy.unsubscribe()
   }
-  ngOnInit(): void {}
 }

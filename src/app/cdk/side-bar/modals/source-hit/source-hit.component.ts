@@ -7,12 +7,11 @@ import { MonthDayYearDate } from 'src/app/types'
   styleUrls: ['./source-hit.component.scss'],
   preserveWhitespaces: true,
 })
-export class SourceHitComponent implements OnInit {
+export class SourceHitComponent  {
   @Input() createdDate: MonthDayYearDate
   @Input() source: string
   @Input() assertion: string
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment'
   styleUrls: ['./dialog-actions-duplicated-merged-confirmed.component.scss'],
   preserveWhitespaces: true,
 })
-export class DialogActionsDuplicatedMergedConfirmedComponent implements OnInit {
+export class DialogActionsDuplicatedMergedConfirmedComponent  {
   baseUrl = environment.BASE_URL
 
   constructor(
@@ -17,7 +17,6 @@ export class DialogActionsDuplicatedMergedConfirmedComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DuplicateRemoveEndpoint
   ) {}
 
-  ngOnInit(): void {}
 
   ok() {
     this.matRef.close(this.data)

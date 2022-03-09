@@ -14,7 +14,7 @@ import { RobotsMetaTagsService } from 'src/app/core/robots-meta-tags/robots-meta
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements  OnDestroy {
   searchResults: SearchResults
   searchParams
   pageIndex: number
@@ -70,5 +70,4 @@ export class SearchComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnInit() {}
 }

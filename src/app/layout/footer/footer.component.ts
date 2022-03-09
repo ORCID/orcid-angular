@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment'
   styleUrls: ['./footer.component.scss-theme.scss', './footer.component.scss'],
   preserveWhitespaces: true,
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   platform
   labelFooter = $localize`:@@layout.ariaLabelFooter:footer`
   infoSiteBaseUrl = environment.INFO_SITE
@@ -23,7 +23,6 @@ export class FooterComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
 
   goTo(url) {
     this.window.location.href = url

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './settings-defaults.component.html',
   styleUrls: ['./settings-defaults.component.scss'],
 })
-export class SettingsDefaultsComponent implements OnInit {
+export class SettingsDefaultsComponent  {
   emailFrequencyLoading = false
   emailFrequencyExpanded = false
   languageFrequencyLoading = false
@@ -17,5 +17,4 @@ export class SettingsDefaultsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

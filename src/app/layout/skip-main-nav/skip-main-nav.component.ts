@@ -8,7 +8,7 @@ import { filter } from 'rxjs/operators'
   templateUrl: './skip-main-nav.component.html',
   styleUrls: ['./skip-main-nav.component.scss'],
 })
-export class SkipMainNavComponent implements OnInit {
+export class SkipMainNavComponent {
   currentUrl: string
   constructor(
     private router: Router,
@@ -21,8 +21,6 @@ export class SkipMainNavComponent implements OnInit {
         this.currentUrl = url.urlAfterRedirects.replace('#main', '')
       })
   }
-
-  ngOnInit() {}
 
   skipMainMenu() {
     this.router.navigateByUrl(this.currentUrl + '#main')

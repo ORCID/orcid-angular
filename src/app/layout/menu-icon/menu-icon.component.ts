@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
     './menu-icon.component.scss-theme.scss',
   ],
 })
-export class MenuIconComponent implements OnInit {
+export class MenuIconComponent {
   isOpenValue = false
   labelMenu = $localize`:@@layout.ariaLabelMenu:main menu`
 
@@ -23,5 +23,4 @@ export class MenuIconComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
 }

@@ -19,7 +19,7 @@ import { UserService } from 'src/app/core'
   ],
   preserveWhitespaces: true,
 })
-export class LinkAccountComponent implements OnInit {
+export class LinkAccountComponent  {
   show2FA = false
   signInData: SignInData
   institution: Institutional
@@ -45,7 +45,6 @@ export class LinkAccountComponent implements OnInit {
       })
   }
 
-  ngOnInit(): void {}
 
   show2FAEmitter($event) {
     this.show2FA = true

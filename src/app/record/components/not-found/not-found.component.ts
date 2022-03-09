@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser'
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
 })
-export class NotFoundComponent implements OnInit, OnDestroy {
+export class NotFoundComponent implements OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   platform: PlatformInfo
@@ -30,8 +30,6 @@ export class NotFoundComponent implements OnInit, OnDestroy {
         this.platform = data
       })
   }
-
-  ngOnInit(): void {}
 
   goto(url) {
     this.router.navigate([url])

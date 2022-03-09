@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './settings-sharing.component.html',
   styleUrls: ['./settings-sharing.component.scss'],
 })
-export class SettingsSharingComponent implements OnInit {
+export class SettingsSharingComponent  {
   titleHtmlCode = $localize`:@@account.htmlCode:Display your ORCID iD on the web`
   titleQrCode = $localize`:@@account.qrCode:Get a QR code for your ORCID iD`
 
@@ -16,5 +16,4 @@ export class SettingsSharingComponent implements OnInit {
   qrCodeLoading = false
   constructor() {}
 
-  ngOnInit(): void {}
 }

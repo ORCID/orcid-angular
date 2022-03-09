@@ -9,7 +9,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
     './panel-privacy.component.scss-theme.scss',
   ],
 })
-export class PanelPrivacyComponent implements OnInit {
+export class PanelPrivacyComponent  {
   @HostBinding('attr.aria-label') label = ''
   _visibility: VisibilityStrings
 
@@ -22,5 +22,4 @@ export class PanelPrivacyComponent implements OnInit {
   }
   constructor() {}
 
-  ngOnInit(): void {}
 }

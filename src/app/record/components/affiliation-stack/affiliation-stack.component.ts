@@ -20,7 +20,7 @@ import { ModalAffiliationsComponent } from '../affiliation-stacks-groups/modals/
     './affiliation-stack.component.scss-theme.scss',
   ],
 })
-export class AffiliationStackComponent implements OnInit {
+export class AffiliationStackComponent  {
   @HostBinding('class.display-the-stack') displayTheStackClass = false
   _affiliationStack: AffiliationGroup
   @Input() userRecord: UserRecord
@@ -196,5 +196,4 @@ export class AffiliationStackComponent implements OnInit {
     return false
   }
 
-  ngOnInit(): void {}
 }

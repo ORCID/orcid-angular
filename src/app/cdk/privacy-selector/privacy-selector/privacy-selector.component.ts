@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  OnInit,
-} from '@angular/core'
+import { Component, EventEmitter, forwardRef, Input } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { VisibilityStrings } from 'src/app/types/common.endpoint'
 
@@ -23,7 +17,7 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
     },
   ],
 })
-export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
+export class PrivacySelectorComponent implements ControlValueAccessor {
   private onChange: (value: string) => void
   private onTouched: (value: string) => void
   @Input() whiteBackground = false
@@ -69,6 +63,4 @@ export class PrivacySelectorComponent implements OnInit, ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     throw new Error('Method not implemented.')
   }
-
-  ngOnInit(): void {}
 }

@@ -7,7 +7,7 @@ import { WINDOW } from '../../../../cdk/window'
   styleUrls: ['./print-errors.component.scss'],
   preserveWhitespaces: true,
 })
-export class PrintErrorsComponent implements OnInit {
+export class PrintErrorsComponent {
   @Input() badCredentials: boolean
   @Input() showDeprecatedError: boolean
   @Input() showUnclaimedError: boolean
@@ -16,8 +16,6 @@ export class PrintErrorsComponent implements OnInit {
   @Input() email: string
 
   constructor(@Inject(WINDOW) private window: Window) {}
-
-  ngOnInit() {}
 
   resendClaim() {
     this.navigateTo(`resend-claim?email=` + encodeURIComponent(this.email))

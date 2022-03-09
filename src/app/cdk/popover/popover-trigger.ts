@@ -1,3 +1,6 @@
+/* eslint-disable @angular-eslint/no-input-rename */
+// tslint:disable: no-input-rename
+
 import {
   AfterViewInit,
   Directive,

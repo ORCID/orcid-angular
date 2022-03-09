@@ -9,12 +9,11 @@ import { URL_REGEXP_BACKEND } from '../../../constants'
   styleUrls: ['./org-identifier.component.scss'],
   preserveWhitespaces: true,
 })
-export class OrgIdentifierComponent implements OnInit {
+export class OrgIdentifierComponent  {
   @Input() orgDisambiguated: OrgDisambiguated
 
   constructor(private _organizationsService: OrganizationsService) {}
 
-  ngOnInit(): void {}
 
   getLink(type: string, value: string) {
     if (this.isUrl(value)) {

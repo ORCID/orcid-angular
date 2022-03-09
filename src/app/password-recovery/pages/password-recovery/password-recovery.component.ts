@@ -23,7 +23,7 @@ import { PasswordRecovery } from 'src/app/types'
   animations: [matFormFieldAnimations.transitionMessages],
   preserveWhitespaces: true,
 })
-export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
+export class PasswordRecoveryComponent implements AfterViewInit {
   serverError = null
   status = false
   value = false
@@ -45,8 +45,6 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit {
     private _passwordRecovery: PasswordRecoveryService,
     @Inject(WINDOW) private window: Window
   ) {}
-
-  ngOnInit() {}
 
   ngAfterViewInit() {
     // Avoid animations on load.

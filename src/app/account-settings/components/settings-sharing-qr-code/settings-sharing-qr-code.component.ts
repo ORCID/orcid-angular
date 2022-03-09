@@ -5,10 +5,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
   templateUrl: './settings-sharing-qr-code.component.html',
   styleUrls: ['./settings-sharing-qr-code.component.scss'],
 })
-export class SettingsSharingQrCodeComponent implements OnInit {
+export class SettingsSharingQrCodeComponent  {
   @Output() loading = new EventEmitter<boolean>()
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

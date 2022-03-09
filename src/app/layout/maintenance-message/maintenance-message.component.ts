@@ -11,7 +11,7 @@ import { MaintenanceMessage } from 'src/app/types/togglz.local'
     './maintenance-message.component.scss',
   ],
 })
-export class MaintenanceMessageComponent implements OnInit {
+export class MaintenanceMessageComponent {
   maintenanceMessage: MaintenanceMessage
   closableElement: Element
   labelMaintenance = $localize`:@@layout.ariaLabelMaintenance:Maintenance message`
@@ -22,5 +22,4 @@ export class MaintenanceMessageComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
 }

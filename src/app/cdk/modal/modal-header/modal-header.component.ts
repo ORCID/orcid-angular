@@ -21,6 +21,7 @@ import { Subject } from 'rxjs'
 export class ModalHeaderComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() close = new EventEmitter<boolean>()
   platform: PlatformInfo
   closeLabel = $localize`:@@shared.ariaLabelClose:Close`

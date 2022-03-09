@@ -12,7 +12,7 @@ import { URL_REGEXP } from '../../../constants'
   styleUrls: ['./affiliation.component.scss'],
   preserveWhitespaces: true,
 })
-export class AffiliationComponent implements OnInit {
+export class AffiliationComponent  {
   affiliationValue: Affiliation
   @Input() set affiliation(value: Affiliation) {
     this.showEndDateRange = this.isAffiliationEndDateRangeShown(value)
@@ -32,7 +32,6 @@ export class AffiliationComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 
   /**
    * RegEx function to check if the elements contains a URL

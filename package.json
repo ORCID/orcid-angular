@@ -22,7 +22,7 @@
     "start:source": "ng serve --configuration=local,src --disable-host-check",
     "start:zh_TW": "ng serve --configuration=local,zh-TW --disable-host-check",
     "test": "ng test",
-    "lint": "echo 'temporally disable Angular linter to until eslint update'",
+    "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:qa": "cypress open --config baseUrl=https://qa.orcid.org",
     "prebuild": "rimraf dist && yarn build:i18n && yarn build:browserslist",

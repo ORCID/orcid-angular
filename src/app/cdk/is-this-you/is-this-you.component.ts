@@ -11,7 +11,7 @@ import { WINDOW } from '../window'
     './is-this-you.component.scss',
   ],
 })
-export class IsThisYouComponent implements OnInit {
+export class IsThisYouComponent  {
   titleLabel = 'Could this be you?'
   bodyLabel =
     // tslint:disable-next-line: max-line-length
@@ -44,8 +44,6 @@ export class IsThisYouComponent implements OnInit {
       this.setPlatformClasses(platformInfo)
     })
   }
-
-  ngOnInit() {}
 
   setPlatformClasses(platformInfo) {
     this.ie = platformInfo.ie
