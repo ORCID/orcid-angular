@@ -15,6 +15,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 })
 export class RecordPublicSideBarService {
   private $SideBarPublicUserRecordSubject: ReplaySubject<SideBarPublicUserRecord>
+  sleepForceReloads: boolean
 
   constructor(
     private _http: HttpClient,
@@ -30,10 +31,17 @@ export class RecordPublicSideBarService {
     options: UserRecordOptions
   ): Observable<SideBarPublicUserRecord> {
     if (options.publicRecordId) {
-      if (!this.$SideBarPublicUserRecordSubject || options.forceReload) {
+      if (
+        !this.$SideBarPublicUserRecordSubject ||
+        (options.forceReload && !this.sleepForceReloads)
+      ) {
+        this.sleepForceReloads = true
         this.$SideBarPublicUserRecordSubject = new ReplaySubject<SideBarPublicUserRecord>(
           1
         )
+        setTimeout(() => {
+          this.sleepForceReloads = false
+        }, 100)
       } else {
         return this.$SideBarPublicUserRecordSubject.asObservable()
       }
