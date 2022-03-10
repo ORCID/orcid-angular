@@ -39,11 +39,7 @@ export class RecordWorksService {
     _togglz: TogglzService,
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
-  ) {
-    _togglz
-      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
-      .subscribe((value) => (this.togglzWorksContributors = value))
-  }
+  ) {}
 
   /**
    * Return an observable with a list of Works
