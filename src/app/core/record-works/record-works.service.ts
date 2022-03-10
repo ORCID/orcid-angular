@@ -17,6 +17,7 @@ import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
 import { SortOrderType } from '../../types/sort'
+import { TogglzService } from '../togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -30,13 +31,19 @@ export class RecordWorksService {
   sortOrder: SortOrderType = 'date'
   sortAsc = false
   pageSize = DEFAULT_PAGE_SIZE
+  togglzWorksContributors: boolean
 
   userRecordOptions: UserRecordOptions = {}
 
   constructor(
+    _togglz: TogglzService,
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
-  ) {}
+  ) {
+    _togglz
+      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
+      .subscribe((value) => (this.togglzWorksContributors = value))
+  }
 
   /**
    * Return an observable with a list of Works
@@ -79,9 +86,15 @@ export class RecordWorksService {
 
     let url
     if (options.publicRecordId) {
-      url = options.publicRecordId + '/worksExtendedPage.json'
+      url =
+        options.publicRecordId +
+        (this.togglzWorksContributors
+          ? '/worksExtendedPage.json'
+          : '/worksPage.json')
     } else {
-      url = 'works/worksExtendedPage.json'
+      url = this.togglzWorksContributors
+        ? 'works/worksExtendedPage.json'
+        : 'works/worksPage.json'
     }
 
     this._http
