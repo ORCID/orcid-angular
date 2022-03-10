@@ -86,9 +86,15 @@ export class RecordWorksService {
 
     let url
     if (options.publicRecordId) {
-      url = options.publicRecordId + (this.togglzWorksContributors ? '/worksExtendedPage.json' : '/worksPage.json')
+      url =
+        options.publicRecordId +
+        (this.togglzWorksContributors
+          ? '/worksExtendedPage.json'
+          : '/worksPage.json')
     } else {
-      url = this.togglzWorksContributors ? 'works/worksExtendedPage.json' : 'works/worksPage.json'
+      url = this.togglzWorksContributors
+        ? 'works/worksExtendedPage.json'
+        : 'works/worksPage.json'
     }
 
     this._http
