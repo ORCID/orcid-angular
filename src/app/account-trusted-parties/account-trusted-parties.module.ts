@@ -75,6 +75,9 @@ import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr
 import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component';
+import { SettingsTrustedOrganizationsComponent } from './components/settings-trusted-organizations/settings-trusted-organizations.component';
+import { SettingsTrustedOrganizationComponent } from './components/settings-trusted-organization/settings-trusted-organization.component';
+import { DialogRevokeTrustedOrganizationComponent } from './components/dialog-revoke-trusted-organization/dialog-revoke-trusted-organization.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +104,9 @@ import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/
     SettingsSharingQrCodeComponent,
     SettingsSharingHtmlCodeComponent,
     AccountTrustedPartiesComponent,
+    SettingsTrustedOrganizationsComponent,
+    SettingsTrustedOrganizationComponent,
+    DialogRevokeTrustedOrganizationComponent,
   ],
   imports: [
     CommonModule,

@@ -104,6 +104,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.trustedPartiesQA,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./account-trusted-parties/account-trusted-parties.module').then(
+        (m) => m.AccountTrustedPartiesModule
+      ),
+  },
+  {
     path: ApplicationRoutes.twoFactor,
     canActivateChild: [TwoFactorSigninGuard],
     loadChildren: () =>

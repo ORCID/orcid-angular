@@ -1,0 +1,29 @@
+<h1 class="orc-font-heading-small col" i18n="@@account.settings">
+  Trusted parties
+</h1>
+<h2 class="orc-font-body col" i18n="@@account.defaults">
+  Trusted organizations
+</h2>
+
+<div>
+  <p>
+    Trusted organizations are those to which you have granted permission to
+    interact with your iD and record, e.g. when submitting a manuscript or grant
+    application. You decide whether to grant this access and you may revoke it
+    at any time.
+  </p>
+</div>
+<a>Learn more about trusted organizations</a>
+
+<app-settings-panels
+  [title]="trustedOrganization.name"
+  [accessGranted]="trustedOrganization.approvalDate"
+  [url]="trustedOrganization.websiteValue"
+  [revokeAccessButton]="true"
+  (revokeAccessButtonClickedEvent)="revokeAccess(trustedOrganization)"
+  *ngFor="let trustedOrganization of $trustedOrganization | async"
+>
+  <app-settings-trusted-organization
+    [trustedOrganization]="trustedOrganization"
+  ></app-settings-trusted-organization>
+</app-settings-panels>

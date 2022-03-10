@@ -20,12 +20,27 @@ export class AccountTrustedOrganizationsService {
     private _http: HttpClient
   ) {}
 
-  get(
-    account: AccountTrustedOrganization
-  ): Observable<AccountTrustedOrganization> {
+  get(): Observable<AccountTrustedOrganization[]> {
     return this._http
-      .get<AccountTrustedOrganization>(
+      .get<AccountTrustedOrganization[]>(
         environment.API_WEB + `account/get-trusted-orgs.json`,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
+  delete(
+    account: AccountTrustedOrganization
+  ): Observable<AccountTrustedOrganization[]> {
+    return this._http
+      .post<AccountTrustedOrganization[]>(
+        environment.API_WEB +
+          `account/revoke-application.json?clientId=` +
+          account.orcidPath,
+        undefined,
         { headers: this.headers }
       )
       .pipe(
