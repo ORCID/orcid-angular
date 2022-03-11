@@ -1,7 +1,15 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, switchMap, switchMapTo, take, tap } from 'rxjs/operators'
+import {
+  catchError,
+  map,
+  retry,
+  switchMap,
+  switchMapTo,
+  take,
+  tap,
+} from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
@@ -126,7 +134,10 @@ export class RecordWorksService {
             this.getWorksGroupingSuggestions({ force: true })
           }
         }),
-        switchMapTo(this._togglz.getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS'), (a, b) => this.togglzWorksContributors = b),
+        switchMapTo(
+          this._togglz.getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS'),
+          (a, b) => (this.togglzWorksContributors = b)
+        )
       )
       .subscribe()
     return this.$workSubject.asObservable()
