@@ -30,6 +30,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-panel',
@@ -113,6 +114,7 @@ export class PanelComponent implements OnInit {
   @Input() email = false
   @Input() names = false
   selected: boolean
+  togglzPeerReviews: boolean
 
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
@@ -121,6 +123,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
 
   constructor(
+    _togglz: TogglzService,
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _userService: UserService,
@@ -131,7 +134,11 @@ export class PanelComponent implements OnInit {
     private _worksService: RecordWorksService,
     private _verificationEmailModalService: VerificationEmailModalService,
     @Inject(WINDOW) private _window: Window
-  ) {}
+  ) {
+    _togglz
+      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
+      .subscribe((value) => (this.togglzPeerReviews = value))
+  }
 
   ngOnInit(): void {}
 
@@ -274,16 +281,22 @@ export class PanelComponent implements OnInit {
       case 'peer-review':
         const peerReviewPutCodes = []
         if (this.elements) {
-          this.elements.peerReviewDuplicateGroups.forEach(
-            (peerReviewDuplicateGroup) => {
-              peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
-                peerReviewPutCodes.push(peerReview.putCode.value)
-              })
-            }
-          )
+          if (this.togglzPeerReviews) {
+            this.elements.putCodes.forEach((putCode) => {
+              peerReviewPutCodes.push(putCode)
+            })
+          } else {
+            this.elements.peerReviewDuplicateGroups.forEach(
+              (peerReviewDuplicateGroup) => {
+                peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
+                  peerReviewPutCodes.push(peerReview.putCode.value)
+                })
+              }
+            )
+          }
         }
         this._peerReviewService
-          .updateVisibility(peerReviewPutCodes.join(), visibility)
+          .updateVisibility(peerReviewPutCodes.join(), visibility, this.elements?.groupId)
           .subscribe()
         break
     }
