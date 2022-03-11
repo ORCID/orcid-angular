@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import {
-  catchError, first,
+  catchError,
+  first,
   map,
   retry,
   switchMap,
