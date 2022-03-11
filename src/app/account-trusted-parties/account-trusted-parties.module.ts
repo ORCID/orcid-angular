@@ -16,8 +16,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AccountPanelModule } from '../cdk/account-panel/account-panel.module';
 
+import { AccountPanelModule } from '../cdk/account-panel/account-panel.module';
 import { ModalModule } from '../cdk/modal/modal.module';
 import { SideBarModule } from '../cdk/side-bar/side-bar.module';
 import {
@@ -27,82 +27,21 @@ import { VerificationEmailModalService } from '../core/verification-email-modal/
 import { SharedModule } from '../shared/shared.module';
 import { AccountTrustedPartiesRoutingModule } from './account-trusted-parties-routing.module';
 import {
-  DialogActionsDuplicatedMergedConfirmedComponent,
-} from './components/dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component';
+  DialogRevokeTrustedOrganizationComponent,
+} from './components/dialog-revoke-trusted-organization/dialog-revoke-trusted-organization.component';
 import {
-  DialogActionsDuplicatedTwoFactorAuthComponent,
-} from './components/dialog-actions-duplicated-two-factor-auth/dialog-actions-duplicated-two-factor-auth.component';
+  SettingsTrustedOrganizationComponent,
+} from './components/settings-trusted-organization/settings-trusted-organization.component';
 import {
-  DialogActionsDuplicatedComponent,
-} from './components/dialog-actions-duplicated/dialog-actions-duplicated.component';
-import {
-  DialogSecurityAlternateAccountDeleteComponent,
-} from './components/dialog-security-alternate-account-delete/dialog-security-alternate-account-delete.component';
-import {
-  SettingsActionsDeactivateComponent,
-} from './components/settings-actions-deactivate/settings-actions-deactivate.component';
-import {
-  SettingsActionsDownloadComponent,
-} from './components/settings-actions-download/settings-actions-download.component';
-import {
-  SettingsActionsDuplicatedComponent,
-} from './components/settings-actions-duplicated/settings-actions-duplicated.component';
-import { SettingsActionsComponent } from './components/settings-actions/settings-actions.component';
-import {
-  SettingsDefaultsEmailFrequencyComponent,
-} from './components/settings-defaults-email-frequency/settings-defaults-email-frequency.component';
-import {
-  SettingsDefaultsLanguageComponent,
-} from './components/settings-defaults-language/settings-defaults-language.component';
-import {
-  SettingsDefaultsVisibilityComponent,
-} from './components/settings-defaults-visibility/settings-defaults-visibility.component';
-import { SettingsDefaultsComponent } from './components/settings-defaults/settings-defaults.component';
-import {
-  SettingsSecurityAlternateSignInComponent,
-} from './components/settings-security-alternate-sign-in/settings-security-alternate-sign-in.component';
-import {
-  SettingsSecurityPasswordComponent,
-} from './components/settings-security-password/settings-security-password.component';
-import {
-  SettingsSecurityTwoFactorAuthComponent,
-} from './components/settings-security-two-factor-auth/settings-security-two-factor-auth.component';
-import { SettingsSecurityComponent } from './components/settings-security/settings-security.component';
-import {
-  SettingsSharingHtmlCodeComponent,
-} from './components/settings-sharing-html-code/settings-sharing-html-code.component';
-import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr-code/settings-sharing-qr-code.component';
-import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component';
+  SettingsTrustedOrganizationsComponent,
+} from './components/settings-trusted-organizations/settings-trusted-organizations.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component';
-import { SettingsTrustedOrganizationsComponent } from './components/settings-trusted-organizations/settings-trusted-organizations.component';
-import { SettingsTrustedOrganizationComponent } from './components/settings-trusted-organization/settings-trusted-organization.component';
-import { DialogRevokeTrustedOrganizationComponent } from './components/dialog-revoke-trusted-organization/dialog-revoke-trusted-organization.component';
 
 @NgModule({
   declarations: [
     AccountTrustedPartiesComponent,
     SettingsComponent,
-    SettingsDefaultsComponent,
-    SettingsDefaultsEmailFrequencyComponent,
-    SettingsDefaultsLanguageComponent,
-    SettingsDefaultsVisibilityComponent,
-    SettingsSecurityComponent,
-    SettingsSecurityPasswordComponent,
-    SettingsSecurityTwoFactorAuthComponent,
-    SettingsSecurityAlternateSignInComponent,
-    DialogSecurityAlternateAccountDeleteComponent,
-    SettingsSecurityTwoFactorAuthComponent,
-    SettingsActionsComponent,
-    SettingsActionsDownloadComponent,
-    SettingsActionsDeactivateComponent, 
-    SettingsActionsDuplicatedComponent,
-    DialogActionsDuplicatedComponent,
-    DialogActionsDuplicatedMergedConfirmedComponent,
-    DialogActionsDuplicatedTwoFactorAuthComponent,
-    SettingsSharingComponent,
-    SettingsSharingQrCodeComponent,
-    SettingsSharingHtmlCodeComponent,
     AccountTrustedPartiesComponent,
     SettingsTrustedOrganizationsComponent,
     SettingsTrustedOrganizationComponent,

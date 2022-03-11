@@ -3,17 +3,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
 
-import { DialogActionsDuplicatedComponent } from '../dialog-actions-duplicated/dialog-actions-duplicated.component'
-
 @Component({
   selector: 'app-dialog-revoke-trusted-organization',
   templateUrl: './dialog-revoke-trusted-organization.component.html',
-  styleUrls: ['./dialog-revoke-trusted-organization.component.scss'],
+  styleUrls: [
+    './dialog-revoke-trusted-organization.component.scss',
+    './dialog-revoke-trusted-organization.component.scss-theme.scss',
+  ],
 })
 export class DialogRevokeTrustedOrganizationComponent implements OnInit {
   isMobile: boolean
   constructor(
-    private matRef: MatDialogRef<DialogActionsDuplicatedComponent>,
+    private matRef: MatDialogRef<DialogRevokeTrustedOrganizationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AccountTrustedOrganization,
     private _platform: PlatformInfoService
   ) {}

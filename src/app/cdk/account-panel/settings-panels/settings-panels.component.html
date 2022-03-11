@@ -1,7 +1,7 @@
 <div class="col s4 m8 l12 no-gutters">
   <div class="header-container settings-header-container">
     <div class="inline-initial-side">
-      <div class="row">
+      <div class="row inline-initial-side">
         <app-settings-panels-expand-buttons
           (toggle)="collapse()"
           [openState]="expandedContent"
@@ -13,27 +13,34 @@
               'orc-font-body-small': url,
               'orc-font-body-large': !url
             }"
-            class="orc-font-body-large clickable"
+            class="orc-font-body-large clickable row title-container"
             (click)="collapse()"
           >
             <strong> {{ title }} </strong>
-            <a *ngIf="url" [href]="url"> {{ url }}</a>
+            <a class="underline" *ngIf="url" [href]="url"> {{ url }}</a>
           </div>
 
-          <div class="text-container" *ngIf="accessGranted">
-            <div class="orc-font-body-large clickable" (click)="collapse()">
+          <div class="text-container" *ngIf="accessGranted && !isMobile">
+            <div
+              class="orc-font-body-large orc-font-body-small clickable"
+              (click)="collapse()"
+            >
               <strong>
-                <ng-container>Access granted: </ng-container
-                >{{ accessGranted | monthDayYearDateToString }}
-              </strong>
+                <ng-container i18n="@@account.accessGrantedDate"
+                  >Access granted:
+                </ng-container> </strong
+              >{{ accessGranted | monthDayYearDateToString }}
             </div>
           </div>
         </div>
       </div>
-      <div class="actions-container" *ngIf="revokeAccessButton">
-        <a class="underline" (click)="revokeAccessButtonClicked()">
-          <mat-icon>block</mat-icon>
-          <ng-container>Revoke access</ng-container></a
+      <div
+        class="actions-container orc-font-body-small"
+        *ngIf="revokeAccessButton"
+      >
+        <mat-icon class="warn">block</mat-icon>
+        <a class="underline warn" (click)="revokeAccessButtonClicked()">
+          <div class="warn" i18n="@@account.revokeAccess">Revoke access</div></a
         >
       </div>
     </div>

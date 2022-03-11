@@ -1,10 +1,10 @@
 @import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
-@mixin settings-defaults-email-frequency($theme) {
+@mixin dialog-trusted-organizations($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
-  $warn: map-get($theme, accent);
+  $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
@@ -15,6 +15,12 @@
       color: mat-color($foreground, 'state-notice-dark') !important;
     }
   }
+  .permission-container {
+    mat-icon {
+      color: mat-color($warn, 700);
+    }
+    border-color: map-get($background, light-grey);
+  }
 }
 
-@include settings-defaults-email-frequency($orcid-app-theme);
+@include dialog-trusted-organizations($orcid-app-theme);

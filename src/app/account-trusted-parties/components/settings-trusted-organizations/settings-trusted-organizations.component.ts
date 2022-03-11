@@ -29,7 +29,9 @@ export class SettingsTrustedOrganizationsComponent implements OnInit {
       .afterClosed()
       .subscribe((value) => {
         if (value) {
-          this._trustedOrganizationService.delete(value)
+          this._trustedOrganizationService.delete(value).subscribe(() => {
+            this.$trustedOrganization = this._trustedOrganizationService.get()
+          })
         }
       })
   }

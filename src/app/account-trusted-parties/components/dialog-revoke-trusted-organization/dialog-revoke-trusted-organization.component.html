@@ -1,18 +1,25 @@
 <app-modal [noSidebar]="true">
-  <app-modal-header i18n="@@account.removeDuplicateRecord"
+  <app-modal-header i18n="@@account.revokeAccessTrustedOrganizations"
     >Revoke access - Trusted organization
   </app-modal-header>
 
-  <p>
+  <p i18n="@@account.revokingThisOrganizationAccess">
     Revoking this organization’s access permissions means they will no longer be
     able to interact with your ORCID record. This will not affect your other
     trusted organizations, nor will it block access to publicly accessible data
     in your record.
   </p>
-  <strong> DataCite</strong>
-  <p>will no longer be able to:</p>
-  <div *ngFor="let permissions of data.scopePaths | keyvalue">
-    {{ permissions.key }}
+  <strong> {{ data.name }}</strong>
+  <p class="title-detail" i18n="@@account.willNoLongerBeAble">
+    will no longer be able to:
+  </p>
+  <div
+    *ngFor="let permissions of data.scopePaths | keyvalue; let last = last"
+    class="permission-container"
+    [ngClass]="{ last: last }"
+  >
+    <mat-icon>block</mat-icon>
+    <div>{{ permissions.key }}</div>
   </div>
 
   <div
@@ -26,14 +33,15 @@
       <mat-icon class="large-material-icon">info</mat-icon>
     </div>
     <div class="col l11 m6 s3">
-      <p i18n="@@account.warningDuplicated">
-        <ng-container
+      <p>
+        <ng-container i18n="@@account.organizationsCanStillDelete"
           >Organizations can still delete items they added to your record even
           after their access permissions have been revoked. </ng-container
         ><a
           href="https://support.orcid.org/hc/en-us/articles/360006973893-Trusted-organizations"
           rel="noopener noreferrer"
           target="_blank"
+          i18n="@@account.findOutMoreAboutTrusted"
         >
           Find out more about Trusted Organizations and access permissions
         </a>
@@ -47,6 +55,7 @@
       color="warn"
       (click)="ok()"
       id="dialog-remove-duplicated-record"
+      i18n="@@account.revokeAccess"
     >
       Revoke access
     </button>
@@ -55,6 +64,8 @@
       color="primary"
       (click)="cancel()"
       id="dialog-cancel"
+      i18n="@@shared.cancel"
+
     >
       Cancel
     </button>

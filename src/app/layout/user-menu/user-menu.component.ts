@@ -64,10 +64,7 @@ export class UserMenuComponent implements OnInit {
       this._router.navigate([ApplicationRoutes.inbox])
     } else if (url === 'account' && this.togglzOrcidAngularAccountSettings) {
       this._router.navigate([ApplicationRoutes.accountQA])
-    } else if (
-      url === 'trustedParties' &&
-      this.togglzOrcidAngularAccountSettings
-    ) {
+    } else if (url === 'trusted-parties') {
       this._router.navigate([ApplicationRoutes.trustedPartiesQA])
     } else {
       this.window.location.href = environment.BASE_URL + url

@@ -35,6 +35,17 @@
       margin-bottom: 5px;
       margin-top: 5px;
     }
+    .title-container {
+      strong {
+        margin-inline-end: 3px;
+      }
+    }
+    .actions-container {
+      display: flex;
+      align-items: center;
+      min-width: 145px;
+      flex-direction: row;
+    }
   }
   .controls {
     display: flex;
