@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 
-import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component';
+import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component'
 
 const routes: Routes = [
   {
