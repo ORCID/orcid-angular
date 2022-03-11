@@ -88,7 +88,8 @@ export class RecordWorksService {
     this.sortOrder = options.sort
     this.sortAsc = options.sortAsc
 
-    this._togglz.getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
+    this._togglz
+      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
       .pipe(
         tap((togglzWorksContributors) => {
           let url
@@ -107,15 +108,15 @@ export class RecordWorksService {
           this._http
             .get<WorksEndpoint>(
               environment.API_WEB +
-              url +
-              '?offset=' +
-              options.offset +
-              '&sort=' +
-              (options.sort != null ? options.sort : 'date') +
-              '&sortAsc=' +
-              (options.sortAsc != null ? options.sortAsc : false) +
-              `&pageSize=` +
-              options.pageSize
+                url +
+                '?offset=' +
+                options.offset +
+                '&sort=' +
+                (options.sort != null ? options.sort : 'date') +
+                '&sortAsc=' +
+                (options.sortAsc != null ? options.sortAsc : false) +
+                `&pageSize=` +
+                options.pageSize
             )
             .pipe(
               retry(3),
@@ -140,7 +141,8 @@ export class RecordWorksService {
             )
             .subscribe()
         })
-      ).subscribe()
+      )
+      .subscribe()
     return this.$workSubject.asObservable()
   }
 
