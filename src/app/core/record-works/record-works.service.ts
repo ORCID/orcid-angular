@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
 import {
-  catchError,
+  catchError, first,
   map,
   retry,
   switchMap,
@@ -91,6 +91,7 @@ export class RecordWorksService {
     this._togglz
       .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
       .pipe(
+        first(),
         tap((togglzWorksContributors) => {
           let url
           if (options.publicRecordId) {
