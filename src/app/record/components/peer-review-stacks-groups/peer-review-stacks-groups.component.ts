@@ -250,8 +250,8 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
             this.peerReviews[index].peerReviewDuplicateGroups =
               groupedPeerReview.peerReviewDuplicateGroups
             const visibility =
-              groupedPeerReview.peerReviewDuplicateGroups[0].peerReviews[0].visibility
-                .visibility
+              groupedPeerReview.peerReviewDuplicateGroups[0].peerReviews[0]
+                .visibility.visibility
             groupedPeerReview.peerReviewDuplicateGroups.forEach(
               (peerReviewDuplicateGroup) => {
                 const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(

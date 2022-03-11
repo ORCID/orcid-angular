@@ -296,7 +296,11 @@ export class PanelComponent implements OnInit {
           }
         }
         this._peerReviewService
-          .updateVisibility(peerReviewPutCodes.join(), visibility, this.elements?.groupId)
+          .updateVisibility(
+            peerReviewPutCodes.join(),
+            visibility,
+            this.elements?.groupId
+          )
           .subscribe()
         break
     }
