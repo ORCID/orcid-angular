@@ -88,58 +88,59 @@ export class RecordWorksService {
     this.sortOrder = options.sort
     this.sortAsc = options.sortAsc
 
-    let url
-    if (options.publicRecordId) {
-      url =
-        options.publicRecordId +
-        (this.togglzWorksContributors
-          ? '/worksExtendedPage.json'
-          : '/worksPage.json')
-    } else {
-      url = this.togglzWorksContributors
-        ? 'works/worksExtendedPage.json'
-        : 'works/worksPage.json'
-    }
-
-    this._http
-      .get<WorksEndpoint>(
-        environment.API_WEB +
-          url +
-          '?offset=' +
-          options.offset +
-          '&sort=' +
-          (options.sort != null ? options.sort : 'date') +
-          '&sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : false) +
-          `&pageSize=` +
-          options.pageSize
-      )
+    this._togglz.getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
       .pipe(
-        retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        catchError(() => of({ groups: [] } as WorksEndpoint)),
-        map((data) => {
-          data.pageSize = options.pageSize
-          data.pageIndex = options.offset
-            ? Math.floor(options.offset / options.pageSize)
-            : 0
-          return data
-        }),
-        tap((data) => {
-          this.lastEmittedValue = data
-          this.$workSubject.next(data)
-        }),
-        tap(() => {
-          if (!options.publicRecordId) {
-            this.getWorksGroupingSuggestions({ force: true })
+        tap((togglzWorksContributors) => {
+          let url
+          if (options.publicRecordId) {
+            url =
+              options.publicRecordId +
+              (togglzWorksContributors
+                ? '/worksExtendedPage.json'
+                : '/worksPage.json')
+          } else {
+            url = togglzWorksContributors
+              ? 'works/worksExtendedPage.json'
+              : 'works/worksPage.json'
           }
-        }),
-        switchMapTo(
-          this._togglz.getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS'),
-          (a, b) => (this.togglzWorksContributors = b)
-        )
-      )
-      .subscribe()
+
+          this._http
+            .get<WorksEndpoint>(
+              environment.API_WEB +
+              url +
+              '?offset=' +
+              options.offset +
+              '&sort=' +
+              (options.sort != null ? options.sort : 'date') +
+              '&sortAsc=' +
+              (options.sortAsc != null ? options.sortAsc : false) +
+              `&pageSize=` +
+              options.pageSize
+            )
+            .pipe(
+              retry(3),
+              catchError((error) => this._errorHandler.handleError(error)),
+              catchError(() => of({ groups: [] } as WorksEndpoint)),
+              map((data) => {
+                data.pageSize = options.pageSize
+                data.pageIndex = options.offset
+                  ? Math.floor(options.offset / options.pageSize)
+                  : 0
+                return data
+              }),
+              tap((data) => {
+                this.lastEmittedValue = data
+                this.$workSubject.next(data)
+              }),
+              tap(() => {
+                if (!options.publicRecordId) {
+                  this.getWorksGroupingSuggestions({ force: true })
+                }
+              })
+            )
+            .subscribe()
+        })
+      ).subscribe()
     return this.$workSubject.asObservable()
   }
 
