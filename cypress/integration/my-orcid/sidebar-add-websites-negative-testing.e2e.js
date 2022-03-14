@@ -359,7 +359,6 @@ describe('App displays error messages when user inputs invalid data', async func
 
     //reload page to reflect changes
     cy.reload()
-
     //verify both entries are displayed with error message
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
