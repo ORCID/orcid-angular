@@ -9,7 +9,6 @@ describe('App displays error messages when user inputs invalid data', async func
     //sign in
     cy.signin(userData.cyUserPrimaryEmaiVerified)
   })
-
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
   })
@@ -20,11 +19,9 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear() //empty
-    cy.get('#url-input')
-      .clear()
-      .type(testingData.sidebarWebsitesURL.duplicateURL)
-    cy.get('#save-websites-button').click({ force: true })
+    cy.get('#description-input').clear()//empty
+    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#save-websites-button').click({force:true})
 
     //verify the URL becomes the link title displayed in my-orcid
     cy.get('#websites-panel')
