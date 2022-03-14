@@ -123,7 +123,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
 
   constructor(
-    _togglz: TogglzService,
+    private _togglz: TogglzService,
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _userService: UserService,
@@ -134,13 +134,13 @@ export class PanelComponent implements OnInit {
     private _worksService: RecordWorksService,
     private _verificationEmailModalService: VerificationEmailModalService,
     @Inject(WINDOW) private _window: Window
-  ) {
-    _togglz
+  ) {}
+
+  ngOnInit(): void {
+    this._togglz
       .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
       .subscribe((value) => (this.togglzPeerReviews = value))
   }
-
-  ngOnInit(): void {}
 
   isArrayAndIsNotEmpty(
     obj:
