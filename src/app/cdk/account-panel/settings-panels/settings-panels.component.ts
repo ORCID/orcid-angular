@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { PlatformInfoService } from '../../platform-info'
 
 @Component({
   selector: 'app-settings-panels',
@@ -8,19 +9,36 @@ import { MatDialog } from '@angular/material/dialog'
     './settings-panels.component.scss',
     './settings-panels.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class SettingsPanelsComponent implements OnInit {
   @Input() loading = false
   @Input() expandedContent = false
   @Output() expandedContentChange: EventEmitter<boolean> = new EventEmitter()
-  @Input() title
+  @Input() title: string
+  @Input() accessGranted: number
+  @Input() revokeAccessButton = false
+  @Output() revokeAccessButtonClickedEvent = new EventEmitter<boolean>()
 
-  constructor(private _dialog: MatDialog) {}
+  @Input() url: string
+  isMobile!: boolean
+
+  constructor(
+    private _dialog: MatDialog,
+    private _platform: PlatformInfoService
+  ) {}
 
   collapse() {
     this.expandedContent = !this.expandedContent
     this.expandedContentChange.emit(this.expandedContent)
   }
+  revokeAccessButtonClicked() {
+    this.revokeAccessButtonClickedEvent.next(true)
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._platform.get().subscribe((platform) => {
+      this.isMobile = platform.columns4 || platform.columns8
+    })
+  }
 }

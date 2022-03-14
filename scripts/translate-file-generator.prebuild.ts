@@ -117,7 +117,7 @@ function saveJsonAsXlf(json, name) {
           if (err) {
             reject(err)
           }
-          resolve()
+          resolve(undefined)
         }
       )
     })

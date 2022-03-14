@@ -149,7 +149,8 @@ export class RecordPeerReviewService {
 
   updateVisibility(
     putCode: any,
-    visibility: VisibilityStrings
+    visibility: VisibilityStrings,
+    groupId?: any
   ): Observable<any> {
     return this._http
       .get(
@@ -162,7 +163,13 @@ export class RecordPeerReviewService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getPeerReviewGroups({ forceReload: true }))
+        tap(() => {
+          if (groupId) {
+            this.getPeerReviewsByGroupId({ forceReload: true }, groupId)
+          } else {
+            this.getPeerReviewGroups({ forceReload: true })
+          }
+        })
       )
   }
 
