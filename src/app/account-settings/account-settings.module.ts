@@ -1,3 +1,4 @@
+import { TextFieldModule } from '@angular/cdk/text-field'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -16,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatTableModule } from '@angular/material/table'
 import { MatTooltipModule } from '@angular/material/tooltip'
 
+import { AccountPanelModule } from '../cdk/account-panel/account-panel.module'
 import { ModalModule } from '../cdk/modal/modal.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
 import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authentication-form/two-factor-authentication-form.module'
@@ -38,24 +40,17 @@ import { SettingsSecurityAlternateSignInComponent } from './components/settings-
 import { SettingsSecurityPasswordComponent } from './components/settings-security-password/settings-security-password.component'
 import { SettingsSecurityTwoFactorAuthComponent } from './components/settings-security-two-factor-auth/settings-security-two-factor-auth.component'
 import { SettingsSecurityComponent } from './components/settings-security/settings-security.component'
+import { SettingsSharingHtmlCodeComponent } from './components/settings-sharing-html-code/settings-sharing-html-code.component'
+import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr-code/settings-sharing-qr-code.component'
+import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component'
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountSettingsComponent } from './pages/account-settings/account-settings.component'
-import { SettingsPanelsDataComponent } from './panels/settings-panels-data/settings-panels-data.component'
-import { PanelExpandButtonsComponent } from './panels/settings-panels-expand-buttons/settings-panels-expand-buttons.component'
-import { SettingsPanelsComponent } from './panels/settings-panels/settings-panels.component'
-import { SettingsSharingComponent } from './components/settings-sharing/settings-sharing.component'
-import { SettingsSharingQrCodeComponent } from './components/settings-sharing-qr-code/settings-sharing-qr-code.component'
-import { SettingsSharingHtmlCodeComponent } from './components/settings-sharing-html-code/settings-sharing-html-code.component'
-import { TextFieldModule } from '@angular/cdk/text-field'
 
 @NgModule({
   declarations: [
     AccountSettingsComponent,
     SettingsComponent,
     SettingsDefaultsComponent,
-    SettingsPanelsComponent,
-    PanelExpandButtonsComponent,
-    SettingsPanelsDataComponent,
     SettingsDefaultsEmailFrequencyComponent,
     SettingsDefaultsLanguageComponent,
     SettingsDefaultsVisibilityComponent,
@@ -100,6 +95,7 @@ import { TextFieldModule } from '@angular/cdk/text-field'
     MatDividerModule,
     TextFieldModule,
     TwoFactorAuthenticationFormModule,
+    AccountPanelModule,
   ],
   providers: [VerificationEmailModalService],
 })

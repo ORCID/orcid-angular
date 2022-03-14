@@ -5,7 +5,7 @@
 @mixin settings-panels-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
-  $warn: map-get($theme, accent);
+  $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   :host {
@@ -13,6 +13,11 @@
     .header-container {
       border-color: mat-color($background, ui-background) !important;
       background-color: mat-color($background, ui-background-lightest);
+    }
+    border-color: map-get($background, light-grey);
+
+    .warn {
+      color: mat-color($warn, 700);
     }
   }
 }

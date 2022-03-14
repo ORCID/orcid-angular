@@ -15,6 +15,7 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 })
 export class RecordPublicSideBarService {
   private $SideBarPublicUserRecordSubject: ReplaySubject<SideBarPublicUserRecord>
+  lastForceReloadWasOverASecondsAgo: boolean = false
   sleepForceReloads: boolean
 
   constructor(
