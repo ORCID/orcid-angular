@@ -23,7 +23,10 @@ export class SettingsPanelsComponent implements OnInit {
   @Input() url: string
   isMobile!: boolean
 
-  constructor(private _dialog: MatDialog, private _platform : PlatformInfoService) {}
+  constructor(
+    private _dialog: MatDialog,
+    private _platform: PlatformInfoService
+  ) {}
 
   collapse() {
     this.expandedContent = !this.expandedContent
@@ -36,5 +39,6 @@ export class SettingsPanelsComponent implements OnInit {
   ngOnInit(): void {
     this._platform.get().subscribe((platform) => {
       this.isMobile = platform.columns4 || platform.columns8
-    })  }
+    })
+  }
 }
