@@ -39,8 +39,12 @@
         *ngIf="revokeAccessButton"
       >
         <mat-icon class="warn">block</mat-icon>
-        <a class="underline warn" (click)="revokeAccessButtonClicked()">
-          <div class="warn" i18n="@@account.revokeAccess">Revoke access</div></a
+        <a
+          class="underline warn"
+          (click)="revokeAccessButtonClicked()"
+          i18n="@@account.revokeAccess"
+        >
+          Revoke access</a
         >
       </div>
     </div>
