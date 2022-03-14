@@ -4202,10 +4202,10 @@ cypress-axe@^0.14.0:
   resolved "https://registry.yarnpkg.com/cypress-axe/-/cypress-axe-0.14.0.tgz#5f5e70fb36b8cb3ba73a8ba01e9262ff1268d5e2"
   integrity sha512-7Rdjnko0MjggCmndc1wECAkvQBIhuy+DRtjF7bd5YPZRFvubfMNvrxfqD8PWQmxm7MZE0ffS4Xr43V6ZmvLopg==
 
-cypress@^9.3.1:
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-9.3.1.tgz#8116f52d49d6daf90a91e88f3eafd940234d2958"
-  integrity sha512-BODdPesxX6bkVUnH8BVsV8I/jn57zQtO1FEOUTiuG2us3kslW7g0tcuwiny7CKCmJUZz8S/D587ppC+s58a+5Q==
+cypress@9.5.1:
+  version "9.5.1"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-9.5.1.tgz#51162f3688cedf5ffce311b914ef49a7c1ece076"
+  integrity sha512-H7lUWB3Svr44gz1rNnj941xmdsCljXoJa2cDneAltjI9leKLMQLm30x6jLlpQ730tiVtIbW5HdUmBzPzwzfUQg==
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -4244,10 +4244,10 @@ cypress@^9.3.1:
     pretty-bytes "^5.6.0"
     proxy-from-env "1.0.0"
     request-progress "^3.0.0"
+    semver "^7.3.2"
     supports-color "^8.1.1"
     tmp "~0.2.1"
     untildify "^4.0.0"
-    url "^0.11.0"
     yauzl "^2.10.0"
 
 d@1, d@^1.0.1:

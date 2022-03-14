@@ -1,0 +1,29 @@
+{
+    "sidebarWebsitesURL": {
+    "titleURL": "cy testing website",
+    "chineseTitle": "鏈接標題",
+    "russianTitle": "название ссылки",
+    "arabicTitle":"عنوان الارتباط",   
+    "duplicateURL": "http://www.orcid.org",
+    "duplicateTitle":"trying to add same url",
+    "duplicateAllCapsURL": "HTTP://WWW.ORCID.ORG",
+    "mixedCaseURL": "http://www.ORCid.org",
+    "noProtocolURL": "www.orcid.org",
+    "appendixedProtocolURL":"http://www.orcid.org",
+    "internationalURL1": "http://Bücher.de",
+    "internationalURL2": "http://스타벅스코리아.com",
+    "internationalURL3": "스타벅스코리아.com",
+    "internationalURL4": "http://faß.de",
+    "maxSize2000":"https://www.site.com/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page/page"  
+},
+"errorMessages":{
+    "displayLanguageSpanish": " Español ",
+    "displayLanguageEnglish": " English ",
+    "requiredURL": "An URL is required",
+    "requiredURLSpanish":"Se requiere una URL",
+    "invalidURL": "Invalid URL",
+    "duplicatedURL": "URL can not be duplicated"
+}
+
+
+}
