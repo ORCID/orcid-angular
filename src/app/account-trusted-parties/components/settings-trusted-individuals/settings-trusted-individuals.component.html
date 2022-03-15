@@ -26,9 +26,7 @@
     <div *ngFor="let trustedIndividual of trustedIndividuals">
       <div class="mobile-elements-container">
         <div class="mobile-ements-text-container">
-          <strong i18n="@@account.trustedIndividual"
-            >Trusted individual</strong
-          >
+          <strong i18n="@@account.trustedIndividual">Trusted individual</strong>
           <div>{{ trustedIndividual?.receiverName?.value }}</div>
           <strong i18n="@@account.orcidId">ORCID iD</strong>
           <div>
@@ -88,11 +86,7 @@
       </ng-container>
 
       <ng-container matColumnDef="orcid">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          i18n="@@account.orcidId"
-        >
+        <th mat-header-cell *matHeaderCellDef i18n="@@account.orcidId">
           ORCID iD
         </th>
         <td mat-cell *matCellDef="let element">
