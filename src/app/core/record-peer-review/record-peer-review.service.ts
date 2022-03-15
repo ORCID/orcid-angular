@@ -26,8 +26,8 @@ export class RecordPeerReviewService {
   constructor(
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService,
-    private _togglz: TogglzService,
-  ) { }
+    private _togglz: TogglzService
+  ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
     if (options.cleanCacheIfExist && this.$peer) {
@@ -54,12 +54,11 @@ export class RecordPeerReviewService {
           return url
         }),
         switchMap((url) =>
-          this._http
-            .get<PeerReview[]>(
-              environment.API_WEB +
+          this._http.get<PeerReview[]>(
+            environment.API_WEB +
               url +
-              (options.sortAsc != null ? options.sortAsc : true),
-            ),
+              (options.sortAsc != null ? options.sortAsc : true)
+          )
         ),
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -67,7 +66,7 @@ export class RecordPeerReviewService {
         tap((data) => {
           this.lastEmittedValue = data
           this.$peer.next(data)
-        }),
+        })
       )
       .subscribe()
     return this.$peer.asObservable()
