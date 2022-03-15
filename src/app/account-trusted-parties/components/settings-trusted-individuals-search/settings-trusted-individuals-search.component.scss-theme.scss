@@ -8,19 +8,10 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .info {
-    border-color: mat-color($foreground, 'state-notice-dark') !important;
+  .warn {
+    color: mat-color($warn, 700);
+  }
 
-    mat-icon {
-      color: mat-color($foreground, 'state-notice-dark') !important;
-    }
-  }
-  .permission-container {
-    mat-icon {
-      color: mat-color($warn, 700);
-    }
-    border-color: map-get($background, light-grey);
-  }
 }
 
 @include dialog-trusted-organizations($orcid-app-theme);

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { catchError } from 'rxjs/operators'
+import { catchError, delay } from 'rxjs/operators'
 import { DEFAULT_PAGE_SIZE, ORCID_REGEXP } from 'src/app/constants'
 
 @Injectable({
