@@ -7,6 +7,7 @@ import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { SearchService } from 'src/app/core/search/search.service'
 import { ExpandedSearchResultsContent, SearchResults } from 'src/app/types'
+import { environment } from 'src/environments/environment'
 import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-individuals/dialog-add-trusted-individuals.component'
 
 @Component({
@@ -29,6 +30,7 @@ export class SettingsTrustedIndividualsSearchComponent
   pageSize: number
   ariaLabelPaginator = $localize`:@@search.paginator:paginator`
   loading: boolean
+  baseUrl = environment.BASE_URL
 
   constructor(
     private _search: SearchService,

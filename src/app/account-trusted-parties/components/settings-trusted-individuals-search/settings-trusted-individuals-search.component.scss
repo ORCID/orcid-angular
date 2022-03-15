@@ -22,7 +22,7 @@ table {
   display: flex;
   padding-top: 16px;
   padding-bottom: 16px;
-  .mobile-ements-text-container {
+  .mat-form-field-min.desktop {
     padding: 6px;
   }
   > div {
@@ -37,6 +37,7 @@ table {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .search-title {
@@ -44,6 +45,14 @@ table {
   margin-bottom: 16px;
 }
 
-.search-button {
+.search-button.desktop {
   margin-inline-start: 16px;
+}
+
+mat-form-field.mobile {
+  width: 100%;
+}
+
+button.mobile {
+  width: 100%;
 }
