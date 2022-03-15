@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms'
-import { ORCID_REGEXP, ORCID_URI_REGEXP } from '../../../constants'
+import { ORCID_REGEXP_CASE_INSENSITIVE, ORCID_URI_REGEXP } from '../../../constants'
 import { OrcidValidators } from 'src/app/validators'
 
 export class UsernameValidator {
@@ -9,7 +9,7 @@ export class UsernameValidator {
     }
 
     const emailErrors = OrcidValidators.emailGeneric(control)
-    const orcidError = Validators.pattern(ORCID_REGEXP)(control)
+    const orcidError = Validators.pattern(ORCID_REGEXP_CASE_INSENSITIVE)(control)
     const orcidUriError = Validators.pattern(ORCID_URI_REGEXP)(control)
 
     return control.value.length > 19
