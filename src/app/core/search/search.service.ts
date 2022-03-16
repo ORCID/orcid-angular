@@ -49,7 +49,9 @@ export class SearchService {
   private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
     Object.keys(querryParam).map((key) => {
-      escapedParams[key] = this.escapeReservedChar(querryParam[key])
+      if (typeof escapedParams[key] === 'string') {
+        escapedParams[key] = this.escapeReservedChar(querryParam[key])
+      }
     })
 
     const orcidId =
