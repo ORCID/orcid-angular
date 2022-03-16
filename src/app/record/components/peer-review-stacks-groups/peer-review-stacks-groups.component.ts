@@ -184,8 +184,6 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   getVisibility(peerReview: PeerReview): VisibilityStrings {
     let visibility
-    // validate here
-    // if you open specific review you wont show the error
     if (this.togglzPeerReviews) {
       visibility = peerReview.visibility
     } else {
