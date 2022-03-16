@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator'
-import { Observable, Subject } from 'rxjs'
-import { takeUntil, tap } from 'rxjs/operators'
+import { Observable, of, Subject } from 'rxjs'
+import { switchMap, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { SearchService } from 'src/app/core/search/search.service'
@@ -49,7 +49,7 @@ export class SettingsTrustedIndividualsSearchComponent
       .search({
         searchQuery: value,
         pageIndex: this.pageIndex || 0,
-        pageSize: this.pageSize || 50,
+        pageSize: this.pageSize || 10,
       })
       .pipe(
         tap((trustedIndividuals) => {
@@ -69,6 +69,14 @@ export class SettingsTrustedIndividualsSearchComponent
         data: value,
       })
       .afterClosed()
+      .pipe(
+        switchMap((value) => {
+          if (value) {
+            return this.account.add(value)
+          }
+          return of(undefined)
+        })
+      )
       .subscribe()
   }
 

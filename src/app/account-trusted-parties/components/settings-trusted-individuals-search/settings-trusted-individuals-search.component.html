@@ -126,6 +126,7 @@
     *ngIf="trustedIndividuals['expanded-result'].length && !loading"
   >
     <mat-paginator
+    [pageSizeOptions]="[10, 20, 50]"
       [pageSize]="pageSize"
       [pageIndex]="pageIndex"
       [length]="trustedIndividuals['num-found']"
