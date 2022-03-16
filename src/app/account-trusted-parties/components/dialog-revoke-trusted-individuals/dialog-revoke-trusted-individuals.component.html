@@ -1,0 +1,41 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header i18n="@@account.revokeAccessTrustedIndividuals"
+    >Revoke access - Trusted individual
+  </app-modal-header>
+
+  <p i18n="@@account.revokingThisIndividualAccess">
+    Revoking this user’s access permissions means they will no longer be able to
+    interact with your ORCID record.
+  </p>
+  <p class="orcid-id-container">
+    <strong>{{ data.receiverName.value }}</strong>
+    <a
+      class="underline"
+      target="_blank"
+      rel="noreferrer noopener"
+      href="{{ baseUrl }}{{ data.receiverOrcid.path }}"
+      >https:{{ baseUrl }}{{ data.receiverOrcid.path }}</a
+    >
+  </p>
+
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="ok()"
+      id="dialog-remove-duplicated-record"
+      i18n="@@account.revokeAccess"
+    >
+      Revoke access
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="cancel()"
+      id="dialog-cancel"
+      i18n="@@shared.cancel"
+    >
+      Cancel
+    </button>
+  </app-modal-footer></app-modal
+>

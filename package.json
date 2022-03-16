@@ -39,7 +39,7 @@
     "build:int": "yarn prebuild && ng build --configuration=int --localize && yarn postbuild --env int",
     "build:local-tomcat": "yarn prebuild && ng build --configuration=local-tomcat --localize && ng run ng-orcid:build:local-tomcat-source",
     "build:local": "yarn run prebuild && ng build --localize",
-    "format": "ng lint --fix=true && prettier --write .",
+    "format": "npm run lint && prettier --write .",
     "build:report": "webpack-bundle-analyzer dist/en/stats.json",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook -o dist/storybook",

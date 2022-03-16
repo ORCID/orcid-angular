@@ -24,7 +24,11 @@ import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authenticat
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { SharedModule } from '../shared/shared.module'
 import { AccountTrustedPartiesRoutingModule } from './account-trusted-parties-routing.module'
+import { DialogAddTrustedIndividualsComponent } from './components/dialog-add-trusted-individuals/dialog-add-trusted-individuals.component'
+import { DialogRevokeTrustedIndividualsComponent } from './components/dialog-revoke-trusted-individuals/dialog-revoke-trusted-individuals.component'
 import { DialogRevokeTrustedOrganizationComponent } from './components/dialog-revoke-trusted-organization/dialog-revoke-trusted-organization.component'
+import { SettingsTrustedIndividualsSearchComponent } from './components/settings-trusted-individuals-search/settings-trusted-individuals-search.component'
+import { SettingsTrustedIndividualsComponent } from './components/settings-trusted-individuals/settings-trusted-individuals.component'
 import { SettingsTrustedOrganizationComponent } from './components/settings-trusted-organization/settings-trusted-organization.component'
 import { SettingsTrustedOrganizationsComponent } from './components/settings-trusted-organizations/settings-trusted-organizations.component'
 import { SettingsComponent } from './components/settings/settings.component'
@@ -38,6 +42,10 @@ import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/
     SettingsTrustedOrganizationsComponent,
     SettingsTrustedOrganizationComponent,
     DialogRevokeTrustedOrganizationComponent,
+    SettingsTrustedIndividualsComponent,
+    DialogRevokeTrustedIndividualsComponent,
+    SettingsTrustedIndividualsSearchComponent,
+    DialogAddTrustedIndividualsComponent,
   ],
   imports: [
     CommonModule,

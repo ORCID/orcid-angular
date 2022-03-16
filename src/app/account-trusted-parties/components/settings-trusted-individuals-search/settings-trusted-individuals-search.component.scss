@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.topBottomMargin {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  width: 100%;
+  overflow: auto;
+}
+
+.mobile-elements-container {
+  display: flex;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  .mat-form-field-min.desktop {
+    padding: 6px;
+  }
+  > div {
+    width: 50%;
+  }
+}
+.actions-container {
+  display: flex;
+  align-items: center;
+  min-width: 145px;
+  flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.search-title {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+.search-button.desktop {
+  margin-inline-start: 16px;
+}
+
+mat-form-field.mobile {
+  width: 100%;
+}
+
+button.mobile {
+  width: 100%;
+}

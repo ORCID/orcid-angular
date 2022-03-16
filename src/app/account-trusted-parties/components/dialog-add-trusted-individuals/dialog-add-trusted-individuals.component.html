@@ -1,0 +1,38 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header i18n="@@account.addAccessTrustedIndividuals"
+    >Add access - Trusted individual
+  </app-modal-header>
+
+  <div class="orcid-id-container">
+    <strong> {{ data['given-names'] }} {{ data['family-names'] }}</strong>
+
+    <a
+      class="underline"
+      target="_blank"
+      rel="noreferrer noopener"
+      href="{{ baseUrl }}{{ data?.['orcid-id'] }}"
+      >https:{{ baseUrl }}{{ data?.['orcid-id'] }}</a
+    >
+  </div>
+
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="ok()"
+      id="dialog-add-access"
+      i18n="@@account.addAccess"
+    >
+      Add access
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="cancel()"
+      id="dialog-cancel"
+      i18n="@@shared.cancel"
+    >
+      Cancel
+    </button>
+  </app-modal-footer></app-modal
+>

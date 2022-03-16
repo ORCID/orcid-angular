@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { catchError } from 'rxjs/operators'
+import { catchError, delay, map } from 'rxjs/operators'
 import { DEFAULT_PAGE_SIZE, ORCID_REGEXP } from 'src/app/constants'
 
 @Injectable({
@@ -30,13 +30,28 @@ export class SearchService {
           headers: { Accept: 'application/json' },
         }
       )
-      .pipe(catchError((error) => this._errorHandler.handleError(error)))
+      .pipe(
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((x) => {
+          x['expanded-result'] = x['expanded-result'].map((element) => {
+            if (!element['given-names'] && !element['family-names']) {
+              element[
+                'given-names'
+              ] = $localize`:@@account.nameIsPri:Name is private`
+            }
+            return element
+          })
+          return x
+        })
+      )
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
     Object.keys(querryParam).map((key) => {
-      escapedParams[key] = this.escapeReservedChar(querryParam[key])
+      if (typeof escapedParams[key] === 'string') {
+        escapedParams[key] = this.escapeReservedChar(querryParam[key])
+      }
     })
 
     const orcidId =
