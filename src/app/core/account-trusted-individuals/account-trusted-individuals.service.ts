@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of, Subject } from 'rxjs'
-import { catchError, retry, tap } from 'rxjs/operators'
+import { catchError, map, retry, tap } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
 import { ExpandedSearchResultsContent } from 'src/app/types'
 import {
@@ -35,7 +35,15 @@ export class AccountTrustedIndividualsService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((x) => {
+          return x.map((x) => {
+            x.receiverName.value =
+              x.receiverName.value ||
+              $localize`:@@account.nameIsPri:Name is private`
+            return x
+          })
+        })
       )
   }
 
