@@ -49,7 +49,7 @@ export class SearchService {
   private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
     Object.keys(querryParam).map((key) => {
-      if (typeof escapedParams[key] === 'string') {
+      if (typeof querryParam[key] === 'string') {
         escapedParams[key] = this.escapeReservedChar(querryParam[key])
       }
     })
