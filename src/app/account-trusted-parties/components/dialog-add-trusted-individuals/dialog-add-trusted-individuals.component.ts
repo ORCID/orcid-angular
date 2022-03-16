@@ -10,9 +10,7 @@ import { environment } from 'src/environments/environment'
 @Component({
   selector: 'app-dialog-add-trusted-individuals',
   templateUrl: './dialog-add-trusted-individuals.component.html',
-  styleUrls: [
-    './dialog-add-trusted-individuals.component.scss',
-  ],
+  styleUrls: ['./dialog-add-trusted-individuals.component.scss'],
 })
 export class DialogAddTrustedIndividualsComponent implements OnInit {
   isMobile: boolean
