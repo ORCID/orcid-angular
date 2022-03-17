@@ -27,7 +27,7 @@
 </div>
 <ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
   <ng-container
-    *ngIf="trustedIndividuals['expanded-result'].length && this.isMobile"
+    *ngIf="trustedIndividuals['expanded-result']?.length && this.isMobile"
   >
     <mat-divider></mat-divider>
     <div
@@ -72,7 +72,7 @@
   </ng-container>
   <div class="table-container">
     <table
-      *ngIf="trustedIndividuals?.['expanded-result'].length && !this.isMobile"
+      *ngIf="trustedIndividuals?.['expanded-result']?.length && !this.isMobile"
       mat-table
       [dataSource]="trustedIndividuals?.['expanded-result']"
       class="mat-elevation-z0"
@@ -123,7 +123,7 @@
 
   <div
     class="row h-baseline"
-    *ngIf="trustedIndividuals['expanded-result'].length && !loading"
+    *ngIf="trustedIndividuals['expanded-result']?.length && !loading"
   >
     <mat-paginator
       [pageSizeOptions]="[10, 20, 50]"
@@ -136,7 +136,7 @@
     ></mat-paginator>
   </div>
 
-  <p *ngIf="!trustedIndividuals['expanded-result'].length && !loading">
+  <p *ngIf="!trustedIndividuals['expanded-result']?.length && !loading">
     <i i18n="@@account.noResultFoundTrustedInd">
       No results found. Please edit your search terms.
     </i>

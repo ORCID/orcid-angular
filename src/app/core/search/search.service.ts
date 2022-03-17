@@ -33,7 +33,7 @@ export class SearchService {
       .pipe(
         catchError((error) => this._errorHandler.handleError(error)),
         map((x) => {
-          x['expanded-result'] = x['expanded-result'].map((element) => {
+          x['expanded-result'] = x['expanded-result']?.map((element) => {
             if (!element['given-names'] && !element['family-names']) {
               element[
                 'given-names'
