@@ -64,8 +64,8 @@ export class SettingsTrustedIndividualsSearchComponent
               (x) =>
                 x['orcid-id'] !== this.userSession.userInfo.EFFECTIVE_USER_ORCID
             )
-            return trustedIndividuals
           }
+          return trustedIndividuals
         }),
         tap((trustedIndividuals) => {
           if (trustedIndividuals['expanded-result']) {
