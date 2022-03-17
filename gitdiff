@@ -1,0 +1,151 @@
+diff --git a/src/locale/properties/account/account.en.properties b/src/locale/properties/account/account.en.properties
+index 70f7efaf..308667de 100644
+--- a/src/locale/properties/account/account.en.properties
++++ b/src/locale/properties/account/account.en.properties
+@@ -97,32 +97,3 @@ account.qrCode=Get a QR code for your ORCID iD
+ account.sharing=Sharing
+ account.confirmNewPassword=Confirm new password
+ account.newPassword=New password
+-account.accessType=Access type
+-account.trustedParties=Trusted parties
+-account.trustedOrganizations=Trusted organizations
+-account.trustedOrganizationsAreThose=Trusted organizations are those to which you have granted permission to interact with your iD and record, e.g. when submitting a manuscript or grant application. You decide whether to grant this access and you may revoke it at any time.
+-account.learnMoreAboutTrustedOrg=Learn more about trusted organizations
+-account.accessGrantedDate=Access granted:
+-account.revokeAccess=Revoke access
+-account.revokeAccessTrustedOrganizations=Revoke access - Trusted organization
+-account.revokingThisOrganizationAccess=Revoking this organization’s access permissions means they will no longer be able to interact with your ORCID record. This will not affect your other trusted organizations, nor will it block access to publicly accessible data in your record.
+-account.willNoLongerBeAble=will no longer be able to:
+-account.organizationsCanStillDelete=Organizations can still delete items they added to your record even after their access permissions have been revoked.
+-account.findOutMoreAboutTrusted=Find out more about Trusted Organizations and access permissions
+-account.youHavenAddAnyTrusted=You haven't added any trusted individuals yet.
+-account.trustedIndvidualstionsAreThose=Trusted individuals, also known as Account Delegates, are other ORCID iD holders to whom you have granted permission to update your ORCID record. You decide whether to grant access to them and can revoke this access at any time.
+-account.learnMoreAboutTrustedInd=Learn more about trusted individuals
+-account.trustedIndividuals=Trusted individuals
+-account.orcidID=ORCID iD
+-account.searchForOrcidUser=Search for ORCID users to add as trusted individuals
+-account.searchOrcidTrusted=Search ORCID for trusted individuals
+-account.name=Name
+-account.orcidId=ORCID iD
+-account.addTrustedIndividuals=Add trusted individuals
+-account.noResultFoundTrustedInd=No results found. Please edit your search terms.
+-account.revokeAccessTrustedIndividuals=Revoke access - Trusted individual
+-account.revokingThisIndividualAccess=Revoking this user’s access permissions means they will no longer be able to interact with your ORCID record.
+-account.addAccessTrustedIndividuals=Add access - Trusted individual
+-account.addAccess=Add access
+-account.trustedIndividual=Trusted individual
+-account.nameIsPri=Name is private
+diff --git a/src/locale/properties/account/account.lr.properties b/src/locale/properties/account/account.lr.properties
+index 391b8922..5679579c 100644
+--- a/src/locale/properties/account/account.lr.properties
++++ b/src/locale/properties/account/account.lr.properties
+@@ -98,33 +98,3 @@ account.oldPassword=LR
+ account.sharing=LR
+ account.confirmNewPassword=LR
+ account.newPassword=LR
+-account.accessType=LR
+-account.trustedParties=LR
+-account.trustedOrganizations=LR
+-account.trustedOrganizationsAreThose=LR
+-account.learnMoreAboutTrustedOrg=LR
+-account.accessGrantedDate=LR
+-account.revokeAccess=LR
+-account.revokeAccessTrustedOrganizations=LR
+-account.revokingThisOrganizationAccess=LR
+-account.willNoLongerBeAble=LR
+-account.organizationsCanStillDelete=LR
+-account.findOutMoreAboutTrusted=LR
+-account.youHavenAddAnyTrusted=LR
+-account.trustedIndvidualstionsAreThose=LR
+-account.learnMoreAboutTrustedInd=LR
+-account.trustedIndividuals=LR
+-account.orcidID=LR
+-account.searchForOrcidUser=LR
+-account.searchOrcidTrusted=LR
+-account.name=LR
+-account.orcidId=LR
+-account.addTrustedIndividuals=LR
+-account.noResultFoundTrustedInd=LR
+-account.revokeAccessTrustedIndividuals=LR
+-account.revokingThisIndividualAccess=LR
+-account.addAccessTrustedIndividuals=LR
+-account.addAccess=LR
+-account.trustedIndividual=LR
+-account.nameIsPrivate=LR
+-account.nameIsPri=LR
+diff --git a/src/locale/properties/account/account.rl.properties b/src/locale/properties/account/account.rl.properties
+index 2fdfa73b..b46332a0 100644
+--- a/src/locale/properties/account/account.rl.properties
++++ b/src/locale/properties/account/account.rl.properties
+@@ -98,33 +98,3 @@ account.copyTheCodeBelow=RL
+ account.sharing=RL
+ account.confirmNewPassword=RL
+ account.newPassword=RL
+-account.accessType=RL
+-account.trustedParties=RL
+-account.trustedOrganizations=RL
+-account.trustedOrganizationsAreThose=RL
+-account.learnMoreAboutTrustedOrg=RL
+-account.accessGrantedDate=RL
+-account.revokeAccess=RL
+-account.revokeAccessTrustedOrganizations=RL
+-account.revokingThisOrganizationAccess=RL
+-account.willNoLongerBeAble=RL
+-account.organizationsCanStillDelete=RL
+-account.findOutMoreAboutTrusted=RL
+-account.youHavenAddAnyTrusted=RL
+-account.trustedIndvidualstionsAreThose=RL
+-account.learnMoreAboutTrustedInd=RL
+-account.trustedIndividuals=RL
+-account.orcidID=RL
+-account.searchForOrcidUser=RL
+-account.searchOrcidTrusted=RL
+-account.name=RL
+-account.orcidId=RL
+-account.addTrustedIndividuals=RL
+-account.noResultFoundTrustedInd=RL
+-account.revokeAccessTrustedIndividuals=RL
+-account.revokingThisIndividualAccess=RL
+-account.addAccessTrustedIndividuals=RL
+-account.addAccess=RL
+-account.trustedIndividual=RL
+-account.nameIsPrivate=RL
+-account.nameIsPri=RL
+diff --git a/src/locale/properties/account/account.xx.properties b/src/locale/properties/account/account.xx.properties
+index 29e9cd6e..12064a18 100644
+--- a/src/locale/properties/account/account.xx.properties
++++ b/src/locale/properties/account/account.xx.properties
+@@ -98,33 +98,3 @@ account.qrCode=X
+ account.sharing=X
+ account.confirmNewPassword=X
+ account.newPassword=X
+-account.accessType=X
+-account.trustedParties=X
+-account.trustedOrganizations=X
+-account.trustedOrganizationsAreThose=X
+-account.learnMoreAboutTrustedOrg=X
+-account.accessGrantedDate=X
+-account.revokeAccess=X
+-account.revokeAccessTrustedOrganizations=X
+-account.revokingThisOrganizationAccess=X
+-account.willNoLongerBeAble=X
+-account.organizationsCanStillDelete=X
+-account.findOutMoreAboutTrusted=X
+-account.youHavenAddAnyTrusted=X
+-account.trustedIndvidualstionsAreThose=X
+-account.learnMoreAboutTrustedInd=X
+-account.trustedIndividuals=X
+-account.orcidID=X
+-account.searchForOrcidUser=X
+-account.searchOrcidTrusted=X
+-account.name=X
+-account.orcidId=X
+-account.addTrustedIndividuals=X
+-account.noResultFoundTrustedInd=X
+-account.revokeAccessTrustedIndividuals=X
+-account.revokingThisIndividualAccess=X
+-account.addAccessTrustedIndividuals=X
+-account.addAccess=X
+-account.trustedIndividual=X
+-account.nameIsPrivate=X
+-account.nameIsPri=X

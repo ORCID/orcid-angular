@@ -57,20 +57,24 @@ export class SettingsTrustedIndividualsSearchComponent
       })
       .pipe(
         map((trustedIndividuals) => {
-          trustedIndividuals['expanded-result'] = trustedIndividuals[
-            'expanded-result'
-          ].filter(
-            (x) =>
-              x['orcid-id'] !== this.userSession.userInfo.EFFECTIVE_USER_ORCID
-          )
-          return trustedIndividuals
+          if (trustedIndividuals['expanded-result']) {
+            trustedIndividuals['expanded-result'] = trustedIndividuals[
+              'expanded-result'
+            ].filter(
+              (x) =>
+                x['orcid-id'] !== this.userSession.userInfo.EFFECTIVE_USER_ORCID
+            )
+            return trustedIndividuals
+          }
         }),
         tap((trustedIndividuals) => {
-          trustedIndividuals['expanded-result'].forEach((ti) => {
-            if (ti['orcid-id'] === this.searchValue) {
-              this.add(ti)
-            }
-          })
+          if (trustedIndividuals['expanded-result']) {
+            trustedIndividuals['expanded-result'].forEach((ti) => {
+              if (ti['orcid-id'] === this.searchValue) {
+                this.add(ti)
+              }
+            })
+          }
           this.loading = false
         })
       )

@@ -9,6 +9,6 @@ export interface ExpandedSearchResultsContent {
 }
 
 export interface SearchResults {
-  'expanded-result': ExpandedSearchResultsContent[]
+  'expanded-result': ExpandedSearchResultsContent[] | null
   'num-found': number
 }
