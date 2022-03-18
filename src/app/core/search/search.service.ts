@@ -5,7 +5,10 @@ import { Observable, of } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError, delay, map } from 'rxjs/operators'
-import { DEFAULT_PAGE_SIZE, ORCID_REGEXP_CASE_INSENSITIVE } from 'src/app/constants'
+import {
+  DEFAULT_PAGE_SIZE,
+  ORCID_REGEXP_CASE_INSENSITIVE,
+} from 'src/app/constants'
 import { debug } from 'console'
 
 @Injectable({
