@@ -84,7 +84,7 @@ export function isValidOrcidFormat(id) {
 }
 
 export function getOrcidNumber(userId) {
-  const orcidPattern = ORCID_REGEXP
+  const orcidPattern = ORCID_REGEXP_CASE_INSENSITIVE
   const extId = orcidPattern.exec(userId)
   if (extId != null) {
     userId = extId[0].toString().replace(/ /g, '')
