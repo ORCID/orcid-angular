@@ -1,23 +1,24 @@
 import {
+  ChangeDetectorRef,
   Component,
-  OnInit,
-  LOCALE_ID,
+  ElementRef,
   Inject,
   Input,
-  Optional,
+  LOCALE_ID,
   OnChanges,
+  OnInit,
+  Optional,
   SimpleChanges,
   ViewChild,
-  ElementRef,
-  ChangeDetectorRef,
 } from '@angular/core'
-import { FormControl, Validators, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { ORCID_REGEXP } from 'src/app/constants'
-import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { SearchResults, ScreenDirection } from 'src/app/types'
+import { ORCID_REGEXP_CASE_INSENSITIVE } from 'src/app/constants'
 import { SearchService } from 'src/app/core/search/search.service'
+import { ScreenDirection, SearchResults } from 'src/app/types'
+
+import { AtLeastOneInputHasValue } from './at-least-one-input-has-value.validator'
 
 @Component({
   selector: 'app-advance-search',
@@ -55,7 +56,9 @@ export class AdvanceSearchComponent implements OnInit, OnChanges {
         institution: new FormControl('', []),
         keyword: new FormControl('', []),
         otherFields: new FormControl('', []),
-        orcid: new FormControl('', [Validators.pattern(ORCID_REGEXP)]),
+        orcid: new FormControl('', [
+          Validators.pattern(ORCID_REGEXP_CASE_INSENSITIVE),
+        ]),
       },
       { validators: AtLeastOneInputHasValue() }
     )
