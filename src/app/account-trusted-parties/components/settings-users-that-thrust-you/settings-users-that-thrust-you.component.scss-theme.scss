@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin users-that-thrust-you($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+}
+
+@include users-that-thrust-you($orcid-app-theme);
