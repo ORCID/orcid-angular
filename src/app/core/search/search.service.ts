@@ -97,6 +97,10 @@ export class SearchService {
           searchParameters.push(`ringgold-org-id:${escapedParams.institution}`)
         } else if (escapedParams.institution.startsWith('grid.')) {
           searchParameters.push(`grid-org-id:${escapedParams.institution}`)
+        }
+        //if starts with http, assume it's a ror id
+        else if (escapedParams.institution.startsWith('http')) {
+          searchParameters.push(`ror-org-id:${escapedParams.institution}`)
         } else {
           searchParameters.push(
             `affiliation-org-name:${escapedParams.institution}`
