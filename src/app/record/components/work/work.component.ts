@@ -35,7 +35,7 @@ export class WorkComponent implements OnInit {
   maxNumberContributorsWorkDetails = 50
   maxBibtexCharacters = 5000
   contributorsGroupedByOrcid: Contributor[] = []
-  numberOfContributorsGroupedByOrcid: number
+  numberOfContributors: number
   contributionRole: string
 
   constructor(
@@ -47,7 +47,7 @@ export class WorkComponent implements OnInit {
 
   ngOnInit(): void {
     this.contributorsGroupedByOrcid = this.work.contributorsGroupedByOrcid
-    this.numberOfContributorsGroupedByOrcid = this.work.numberOfContributorsGroupedByOrcid
+    this.numberOfContributors = this.work.numberOfContributors
     if (this.contributorsGroupedByOrcid) {
       if (this.isPublicRecord) {
         this.getContributionRole(this.contributorsGroupedByOrcid)
