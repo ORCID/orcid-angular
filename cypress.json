@@ -12,8 +12,8 @@
     "recoverOIDSubject": "[ORCID] Your ORCID iD",
     "resetPasswEmailURL": "https://qa.orcid.org/reset-password-email/",
     "signInURL": "https://qa.orcid.org/signin",
-    "membersAPI-URL":"https://api.qa.orcid.org/v3.0/",
-    "membersAPI-websitesEndPoint":"/researcher-urls"
+    "membersAPI-URL": "https://api.qa.orcid.org/v3.0/",
+    "membersAPI-websitesEndPoint": "/researcher-urls"
   },
   "ignoreTestFiles": [
     "**/legacy_oldScripts/*",

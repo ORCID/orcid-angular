@@ -3,7 +3,6 @@
 import userData from '../../fixtures/testing-users.fixture.json'
 import testingData from '../../fixtures/negative-testing-data.fixture.json'
 
-
 describe('My orcid - users are able to add content to their record', async function () {
   before(() => {
     cy.visit(Cypress.env('signInURL'))
@@ -11,7 +10,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.signin(userData.cyUserPrimaryEmaiVerified)
     cy.wait(1000)
   })
-  
+
   beforeEach(() => {
     Cypress.Cookies.preserveOnce('XSRF-TOKEN', 'JSESSIONID')
   })
@@ -40,77 +39,86 @@ describe('My orcid - users are able to add content to their record', async funct
       .should('contain', addDesc)
   })
 
-  it('Arabic characters in URL title field are allowed',function(){
+  it('Arabic characters in URL title field are allowed', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.arabicTitle)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.arabicTitle)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL)
     //try to save
     cy.get('#save-websites-button').click()
-  
-    //verify the title is displayed correctly 
+
+    //verify the title is displayed correctly
     cy.get('#websites-panel')
-    .within(($section) => {
-      cy.get('[class="line"]')
-    })
-    .should('contain', testingData.sidebarWebsitesURL.arabicTitle)
-  
+      .within(($section) => {
+        cy.get('[class="line"]')
+      })
+      .should('contain', testingData.sidebarWebsitesURL.arabicTitle)
   })
 
-  it('Russian characters in URL title field are allowed',function(){
+  it('Russian characters in URL title field are allowed', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.russianTitle)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.russianTitle)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL)
     //try to save
     cy.get('#save-websites-button').click()
 
-    //verify the title is displayed correctly 
+    //verify the title is displayed correctly
     cy.get('#websites-panel')
-    .within(($section) => {
-      cy.get('[class="line"]')
-    })
-    .should('contain', testingData.sidebarWebsitesURL.russianTitle)
-
+      .within(($section) => {
+        cy.get('[class="line"]')
+      })
+      .should('contain', testingData.sidebarWebsitesURL.russianTitle)
   })
 
-  it('Chinese characters in URL title field are allowed',function(){
+  it('Chinese characters in URL title field are allowed', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.chineseTitle)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.chineseTitle)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL)
     //try to save
     cy.get('#save-websites-button').click()
 
-    //verify the title is displayed correctly 
+    //verify the title is displayed correctly
     cy.get('#websites-panel')
-    .within(($section) => {
-      cy.get('[class="line"]')
-    })
-    .should('contain', testingData.sidebarWebsitesURL.chineseTitle)
+      .within(($section) => {
+        cy.get('[class="line"]')
+      })
+      .should('contain', testingData.sidebarWebsitesURL.chineseTitle)
   })
 
   afterEach(() => {
-  //clean up state
-  cy.cleanWebsites()
+    //clean up state
+    cy.cleanWebsites()
 
-  //reload page to reflect clean up
-  cy.reload()
+    //reload page to reflect clean up
+    cy.reload()
   })
 
   after(() => {
-   //log out
-   cy.get('#cy-user-info').click()
-   cy.get('#cy-signout').click({force:true})
+    //log out
+    cy.get('#cy-user-info').click()
+    cy.get('#cy-signout').click({ force: true })
   })
-
 })
