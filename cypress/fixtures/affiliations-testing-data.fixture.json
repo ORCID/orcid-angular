@@ -1,0 +1,37 @@
+{
+"affiliationNewOrg":{
+    "name": "UCR",
+    "city": "San Jose",
+    "region": "San Jose",
+    "country":"Albania",
+    "dept": "Engineering",
+    "role": "Professor",
+    "degree":"Msc",
+    "startDate_year":"2019",
+    "startDate_month":"01",
+    "startDate_day":"01",
+    "endDate_year":"2020",
+    "endDate_month":"01",
+    "endDate_day":"01",
+    "link":"ucr.ac.cr",
+    "visibility":"public"
+},
+"affiliationExistingOrg":{
+    "name": "Massachusetts Institute of Technology",
+    "city": "Cambridge",
+    "region": "MA",
+    "country":"United States",
+    "dept": "Engineering",
+    "role": "Professor",
+    "degree":"Msc",
+    "startDate_year":"2020",
+    "startDate_month":"01",
+    "startDate_day":"01",
+    "endDate_year":"2021",
+    "endDate_month":"01",
+    "endDate_day":"01",
+    "link":"https://www.mit.edu/",
+    "visibility":"public"
+}
+
+}
