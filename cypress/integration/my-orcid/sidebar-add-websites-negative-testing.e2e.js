@@ -4,7 +4,6 @@ import userData from '../../fixtures/testing-users.fixture.json'
 import testingData from '../../fixtures/negative-testing-data.fixture.json'
 
 describe('App displays error messages when user inputs invalid data', async function () {
-
   before(() => {
     cy.visit(Cypress.env('signInURL'))
     //sign in
@@ -21,9 +20,11 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear()//empty
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL)
-    cy.get('#save-websites-button').click({force:true})
+    cy.get('#description-input').clear() //empty
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#save-websites-button').click({ force: true })
 
     //verify the URL becomes the link title displayed in my-orcid
     cy.get('#websites-panel')
@@ -38,9 +39,11 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
-     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear()//empty
+    cy.get('#add-link').click()
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input').clear() //empty
     //try to save
     cy.get('#save-websites-button').click()
 
@@ -77,13 +80,14 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('#add-link').click()
     cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.titleURL)
     //type a valid url longer than 2000 characters
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.maxSize2000+'/test')
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.maxSize2000 + '/test')
     //try to save
     cy.get('#save-websites-button').click()
 
     //verify the link field was not added
-    cy.get('#websites-panel')
-    .within(($section) => {
+    cy.get('#websites-panel').within(($section) => {
       cy.get('[class="line"]').should('not.exist')
     })
   })
@@ -96,11 +100,15 @@ describe('App displays error messages when user inputs invalid data', async func
     })
     //add valid title and url
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL)
     cy.get('#save-websites-button').click()
-    
-   //reload page to reflect changes
+
+    //reload page to reflect changes
     cy.reload()
 
     //click edit pencil for websites section
@@ -110,14 +118,21 @@ describe('App displays error messages when user inputs invalid data', async func
     //try to add same url with all caps
     cy.get('#add-link').click()
     cy.get('#draggable-1').within(($row1) => {
-       cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.duplicateTitle)
-      cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateAllCapsURL)
+      cy.get('#description-input')
+        .clear()
+        .type(testingData.sidebarWebsitesURL.duplicateTitle)
+      cy.get('#url-input')
+        .clear()
+        .type(testingData.sidebarWebsitesURL.duplicateAllCapsURL)
     })
-    cy.get('#save-websites-button').trigger("click")
+    cy.get('#save-websites-button').trigger('click')
 
     //verify error message is displayed
-    cy.get('mat-error').should('have.text',testingData.errorMessages.duplicatedURL)
-  
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.duplicatedURL
+    )
+
     cy.get('#cancel-websites-button').click()
   })
 
@@ -127,7 +142,9 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.noProtocolURL)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.noProtocolURL)
     cy.get('#save-websites-button').click()
 
     //verify http is prefxed automatically
@@ -144,7 +161,9 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.mixedCaseURL)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.mixedCaseURL)
     cy.get('#save-websites-button').click()
 
     //verify URL case was not modified by the system in any way
@@ -162,29 +181,50 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.internationalURL1)
-    cy.get('#save-websites-button').click()
-   //verify error message is displayed
-    cy.get('mat-error').should('have.text',testingData.errorMessages.invalidURL)
-  
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.internationalURL2)
-    cy.get('#save-websites-button').click()
-    //verify error message is displayed
-    cy.get('mat-error').should('have.text',testingData.errorMessages.invalidURL)
- 
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.internationalURL3)
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.internationalURL1)
     cy.get('#save-websites-button').click()
     //verify error message is displayed
-    cy.get('mat-error').should('have.text',testingData.errorMessages.invalidURL)
- 
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.internationalURL4)
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
+
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.internationalURL2)
     cy.get('#save-websites-button').click()
     //verify error message is displayed
-    cy.get('mat-error').should('have.text',testingData.errorMessages.invalidURL)
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
+
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.internationalURL3)
+    cy.get('#save-websites-button').click()
+    //verify error message is displayed
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
+
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.internationalURL4)
+    cy.get('#save-websites-button').click()
+    //verify error message is displayed
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
 
     cy.get('#cancel-websites-button').click()
-
   })
 
   it('Error messages display according to the language selected', function () {
@@ -216,37 +256,51 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[lang="en"]')//wait for language to refresh before Log out
   })
 
-  it('Leading whitespace in URL are invalid',function(){
+  it('Leading whitespace in URL are invalid', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear().type('   '+testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input')
+      .clear()
+      .type('   ' + testingData.sidebarWebsitesURL.duplicateURL)
     //try to save
     cy.get('#save-websites-button').click()
 
     //verify the URL field is required
-    cy.get('mat-error').should('have.text',testingData.errorMessages.invalidURL)
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
 
     cy.get('#cancel-websites-button').click()
   })
 
-  it('Trailing whitespace in URL are invalid',function(){
+  it('Trailing whitespace in URL are invalid', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL+'     ')
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL + '     ')
     //try to save
     cy.get('#save-websites-button').click()
-  
+
     //verify the URL field is required
-    cy.get('mat-error').should('have.text',testingData.errorMessages.invalidURL)
-  
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
+
     cy.get('#cancel-websites-button').click()
   })
 
@@ -260,8 +314,12 @@ describe('App displays error messages when user inputs invalid data', async func
       cy.get('#edit-button').click()
     })
     cy.get('#add-link').click()
-    cy.get('#description-input').clear().type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input').clear().type(testingData.sidebarWebsitesURL.duplicateURL)
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL)
     cy.get('#save-websites-button').click()
 
     //add same URL via API
@@ -277,13 +335,17 @@ describe('App displays error messages when user inputs invalid data', async func
 
     //reload page to reflect changes
     cy.reload()
-  
+
     //verify both entries are displayed with error message
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
-    cy.get('mat-error').eq(0).should('have.text',testingData.errorMessages.duplicatedURL)
-    cy.get('mat-error').eq(1).should('have.text',testingData.errorMessages.duplicatedURL)
+    cy.get('mat-error')
+      .eq(0)
+      .should('have.text', testingData.errorMessages.duplicatedURL)
+    cy.get('mat-error')
+      .eq(1)
+      .should('have.text', testingData.errorMessages.duplicatedURL)
 
     cy.get('#cancel-websites-button').click()
 
@@ -297,7 +359,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.reload()
   })
 
-  after(() => {  
+  after(() => {
     //sign out
     cy.get('#cy-user-info').click()
     cy.get('#cy-signout').click({force:true})
