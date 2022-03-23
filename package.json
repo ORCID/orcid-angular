@@ -110,7 +110,7 @@
     "babel-loader": "^8.0.6",
     "codelyzer": "^6.0.0",
     "cross-env": "^5.2.1",
-    "cypress": "^9.3.1",
+    "cypress": "9.5.2",
     "cypress-axe": "^0.14.0",
     "fs-extra": "^8.1.0",
     "git-repo-info": "^2.1.1",
