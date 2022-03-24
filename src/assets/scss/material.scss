@@ -61,4 +61,4 @@
 @include mat-error-theme-overwrites($orcid-app-theme);
 @import './orcid/urls.scss';
 @include mat-drag-drop-theme($orcid-app-theme);
-@include urls-theme-overwrites($orcid-app-theme)
+@include urls-theme-overwrites($orcid-app-theme);

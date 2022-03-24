@@ -25,41 +25,16 @@ export class SearchService {
   ) {}
 
   search(querryParam: SearchParameters): Observable<SearchResults> {
-    return of({
-      'expanded-result': [
+    return this._http
+      .get<SearchResults>(
+        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
+          querryParam
+        )}`,
         {
-          'orcid-id': '0000-0002-9361-1905',
-          'given-names': null,
-          'family-names': null,
-          'credit-name': null,
-          'other-name': [],
-          email: ['testleoo@mailinator.com', 'l.mendoza@ost.orcid.org'],
-          'institution-name': ['123', 'ORCID', 'alpha XRT'],
-        },
-        {
-          'orcid-id': '0000-0002-6944-4115',
-          'given-names': 'Manuel',
-          'family-names': 'Calvo',
-          'credit-name': null,
-          'other-name': [],
-          email: ['m.calvo@ost.orcid.org'],
-          'institution-name': [
-            'National Taiwan University Language Training and Testing Center',
-          ],
-        },
-        {
-          'orcid-id': '0000-0003-3532-5836',
-          'given-names': 'Albert',
-          'family-names': 'Einstein',
-          'credit-name': null,
-          'other-name': [],
-          email: ['s.wada@ost.orcid.org'],
-          'institution-name': [],
-        },
-      ],
-      'num-found': 3,
-    }).pipe(
-      delay(100), 
+          headers: { Accept: 'application/json' },
+        }
+      ).pipe(
+      delay(100),
       catchError((error) => this._errorHandler.handleError(error)),
       map((x) => {
         x['expanded-result'] = x['expanded-result']?.map((element) => {
