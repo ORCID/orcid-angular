@@ -29,10 +29,7 @@
           </div>
 
           <div class="text-container" *ngIf="accessGranted && !isMobile">
-            <div
-              class="orc-font-body clickable"
-              (click)="collapse()"
-            >
+            <div class="orc-font-body clickable" (click)="collapse()">
               <strong>
                 <ng-container i18n="@@account.accessGrantedDate"
                   >Access granted:

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { TwoFactorEnableComponent } from './two-factor-enable.component';
+import { TwoFactorEnableComponent } from './two-factor-enable.component'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
@@ -13,14 +13,14 @@ import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { By } from 'protractor'
 
 describe('TwoFactorEnableComponent', () => {
-  let component: TwoFactorEnableComponent;
+  let component: TwoFactorEnableComponent
   let compiled: any
-  let fixture: ComponentFixture<TwoFactorEnableComponent>;
+  let fixture: ComponentFixture<TwoFactorEnableComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [ TwoFactorEnableComponent ],
+      declarations: [TwoFactorEnableComponent],
       providers: [
         WINDOW_PROVIDERS,
         TwoFactorAuthenticationService,
@@ -28,22 +28,21 @@ describe('TwoFactorEnableComponent', () => {
         ErrorHandlerService,
         SnackbarService,
         MatSnackBar,
-        Overlay
-      ]
-    })
-    .compileComponents();
-  });
+        Overlay,
+      ],
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TwoFactorEnableComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TwoFactorEnableComponent)
+    component = fixture.componentInstance
     compiled = fixture.debugElement.nativeElement
-    fixture.detectChanges();
-  });
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
 
   it('should include a qr code image', () => {
     expect(compiled.querySelector('img').textContent).not.toBeNull()
@@ -51,9 +50,9 @@ describe('TwoFactorEnableComponent', () => {
 
   it('should display a textarea with a textarea', () => {
     expect(compiled.querySelector('[data-cy="textCode"]')).toBeNull()
-    const textCodeLink = compiled.debugElement.query(By.css('#cy-text-code'));
-    textCodeLink.triggerEventHandler('click', null);
-    fixture.detectChanges();
+    const textCodeLink = compiled.debugElement.query(By.css('#cy-text-code'))
+    textCodeLink.triggerEventHandler('click', null)
+    fixture.detectChanges()
     // expect(compiled.querySelector('[data-cy="textCode"]').textContent).not.toBeNull()
   })
-});
+})

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './settings-security-two-factor-auth.component.html',
   styleUrls: [
     './settings-security-two-factor-auth.component.scss',
-    './settings-security-two-factor-auth.component.scss-theme.scss'
+    './settings-security-two-factor-auth.component.scss-theme.scss',
   ],
 })
 export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
@@ -14,7 +14,8 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
   ngOnInit(): void {}
 
   disable() {
-    this.twoFactorAuthenticationService.disable()
+    this.twoFactorAuthenticationService
+      .disable()
       .pipe(first())
       .subscribe((result) => {
         this.loading.next(false)
@@ -33,5 +34,4 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
       this.disable()
     }
   }
-
 }

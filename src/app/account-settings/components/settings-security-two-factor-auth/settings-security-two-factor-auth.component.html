@@ -1,10 +1,12 @@
 <app-settings-panels-data>
   <div class="intro">
     <p i18n="@@account.addExtraSecurity">
-      Add extra security to your ORCID account by enabling two-factor authentication (2FA).
+      Add extra security to your ORCID account by enabling two-factor
+      authentication (2FA).
     </p>
     <p i18n="@@account.eachTimeYouSignIn">
-      Each time you sign in to ORCID you’ll be prompted to enter a six-digit code we send to your preferred 2FA authentication application.
+      Each time you sign in to ORCID you’ll be prompted to enter a six-digit
+      code we send to your preferred 2FA authentication application.
     </p>
   </div>
   <div>
@@ -27,14 +29,10 @@
       id="two-factor"
       (click)="twoFactor()"
     >
-      <ng-container
-        *ngIf="!twoFactorState"
-        i18n="@@account.turnOnTwoFactor">
+      <ng-container *ngIf="!twoFactorState" i18n="@@account.turnOnTwoFactor">
         Turn on two-factor authentication
       </ng-container>
-      <ng-container
-        *ngIf="twoFactorState"
-        i18n="@@account.turnOffTwoFactor">
+      <ng-container *ngIf="twoFactorState" i18n="@@account.turnOffTwoFactor">
         Turn off two-factor authentication
       </ng-container>
     </button>

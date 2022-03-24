@@ -21,7 +21,12 @@ import { TwoFactorEnableComponent } from './components/two-factor-enable/two-fac
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 @NgModule({
-  declarations: [TwoFactorSetupComponent, TwoFactorRecoveryCodesComponent, TwoFactorEnableComponent, TwoFactorEnableComponent],
+  declarations: [
+    TwoFactorSetupComponent,
+    TwoFactorRecoveryCodesComponent,
+    TwoFactorEnableComponent,
+    TwoFactorEnableComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

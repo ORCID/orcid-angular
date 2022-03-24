@@ -1,14 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs/internal/Observable'
 import { environment } from '../../../environments/environment.local'
-import { QrCode, Status, TwoFactor, TwoFactorSetup } from '../../types/two-factor.endpoint'
+import {
+  QrCode,
+  Status,
+  TwoFactor,
+  TwoFactorSetup,
+} from '../../types/two-factor.endpoint'
 import { catchError, retry } from 'rxjs/operators'
 import { ERROR_REPORT } from '../../errors'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TwoFactorAuthenticationService {
   headers = new HttpHeaders({
@@ -18,19 +23,17 @@ export class TwoFactorAuthenticationService {
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService,
-  ) { }
+    private _errorHandler: ErrorHandlerService
+  ) {}
 
   checkState(): Observable<Status> {
-    return this._http.get<Status>(
-      environment.BASE_URL + '2FA/status.json'
-    )
+    return this._http.get<Status>(environment.BASE_URL + '2FA/status.json')
   }
 
   disable(): Observable<Status> {
     return this._http.post<Status>(
       environment.BASE_URL + '2FA/disable.json',
-      { },
+      {},
       { headers: this.headers }
     )
   }
@@ -42,9 +45,7 @@ export class TwoFactorAuthenticationService {
   }
 
   startSetup(): Observable<QrCode> {
-    return this._http.get<QrCode>(
-      environment.BASE_URL + '2FA/QRCode.json'
-    )
+    return this._http.get<QrCode>(environment.BASE_URL + '2FA/QRCode.json')
   }
 
   register(obj): Observable<TwoFactorSetup> {
@@ -55,7 +56,7 @@ export class TwoFactorAuthenticationService {
     )
   }
 
-  sendVerificationCode( obj ): Observable<TwoFactor> {
+  sendVerificationCode(obj): Observable<TwoFactor> {
     return this._http.post<TwoFactor>(
       environment.BASE_URL + '2FA/QRCode.json',
       JSON.stringify(obj),

@@ -8,8 +8,8 @@ import { FormControl, FormGroup } from '@angular/forms'
   templateUrl: './two-factor-recovery-codes.component.html',
   styleUrls: [
     './two-factor-recovery-codes.component.scss',
-    './two-factor-recovery-codes.component.scss-theme.scss'
-  ]
+    './two-factor-recovery-codes.component.scss-theme.scss',
+  ],
 })
 export class TwoFactorRecoveryCodesComponent implements OnInit {
   @Input() backupCodes: string
@@ -19,18 +19,19 @@ export class TwoFactorRecoveryCodesComponent implements OnInit {
 
   tooltipClipboard = $localize`:@@account.clipboard:Backup codes have been copied to the clipboard`
 
-  constructor(
-    @Inject(WINDOW) private window: Window,
-  ) { }
+  constructor(@Inject(WINDOW) private window: Window) {}
 
   ngOnInit(): void {
     this.twoFactorForm = new FormGroup({
-      backupCodes: new FormControl({ value: this.backupCodes, disabled: true }, [])
+      backupCodes: new FormControl(
+        { value: this.backupCodes, disabled: true },
+        []
+      ),
     })
   }
 
   downloadRecoveryCodes() {
-    const blob = new Blob([this.backupCodes], { type: 'text/plain' });
+    const blob = new Blob([this.backupCodes], { type: 'text/plain' })
     const link = this.window.document.createElement('a')
     link.href = this.window.window.URL.createObjectURL(blob)
     link.download = 'recovery-codes'

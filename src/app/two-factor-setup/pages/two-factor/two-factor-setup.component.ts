@@ -12,7 +12,7 @@ import { Router } from '@angular/router'
   templateUrl: './two-factor-setup.component.html',
   styleUrls: [
     './two-factor-setup.component.scss',
-    './two-factor-setup.component.scss-theme.scss'
+    './two-factor-setup.component.scss-theme.scss',
   ],
   preserveWhitespaces: true,
 })
@@ -34,11 +34,12 @@ export class TwoFactorSetupComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._twoFactorService.checkState()
+    this._twoFactorService
+      .checkState()
       .pipe(first())
       .subscribe((result) => {
         if (result.enabled) {
-          this.router.navigate([ '/' +  this.applicationRoutes.account ])
+          this.router.navigate(['/' + this.applicationRoutes.account])
         }
       })
 

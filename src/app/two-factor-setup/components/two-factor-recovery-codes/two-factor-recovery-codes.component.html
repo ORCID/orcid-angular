@@ -1,11 +1,10 @@
 <form [formGroup]="twoFactorForm">
   <div>
-    <b i18n="@@account.save2FACodes">
-      Save your 2FA recovery codes!
-    </b>
+    <b i18n="@@account.save2FACodes"> Save your 2FA recovery codes! </b>
     <p i18n="@@account.recoveryCodes">
-      Recovery codes can be used to access your account when you can’t receive 2FA codes (for example, if you
-      lose your device). Each code can only be used once.
+      Recovery codes can be used to access your account when you can’t receive
+      2FA codes (for example, if you lose your device). Each code can only be
+      used once.
     </p>
     <a
       class="underline"
@@ -18,11 +17,12 @@
     </a>
   </div>
   <div class="row">
-  <textarea
-    class="backup-codes orc-font-body-small"
-    formControlName="backupCodes"
-    rows="14">
-  </textarea>
+    <textarea
+      class="backup-codes orc-font-body-small"
+      formControlName="backupCodes"
+      rows="14"
+    >
+    </textarea>
   </div>
   <div>
     <p>
@@ -34,10 +34,7 @@
         Download 2FA recovery codes
       </a>
       |
-      <a
-        (click)="tooltip.toggle()"
-        [cdkCopyToClipboard]="backupCodesClipboard"
-      >
+      <a (click)="tooltip.toggle()" [cdkCopyToClipboard]="backupCodesClipboard">
         <button
           type="button"
           i18n="@@account.copy2FARecovery"
@@ -51,12 +48,13 @@
       </a>
     </p>
     <p i18n="@@account.downloadOrCopy">
-      Download or copy these codes and store them in a safe spot, such as a password manager.
+      Download or copy these codes and store them in a safe spot, such as a
+      password manager.
     </p>
     <p i18n="@@account.onlyTimeDownload">
-      This is the only time that you can download or copy these codes and ORCID does not store a backup. If
-      you lose access to both your device and these codes, you will need to contact us to restore your account
-      access.
+      This is the only time that you can download or copy these codes and ORCID
+      does not store a backup. If you lose access to both your device and these
+      codes, you will need to contact us to restore your account access.
     </p>
   </div>
   <div class="button-container">
