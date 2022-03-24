@@ -18,6 +18,8 @@
   [(expandedContent)]="settingSecurityTwoFactor"
   class="row"
   [title]="titleTwoFactor"
+  [type]="{value: 'two-factor', enabled: twoFactorState}"
+  [loading]="settingSecurityTwoFactorLoading"
 >
   <app-settings-security-two-factor-auth></app-settings-security-two-factor-auth>
 </app-settings-panels>

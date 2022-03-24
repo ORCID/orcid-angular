@@ -5,3 +5,17 @@ export interface TwoFactor {
   verificationCode: string
   errors?: any[]
 }
+
+export interface TwoFactorSetup {
+  verificationCode: string
+  valid?: boolean
+  backupCodes?: string[]
+}
+
+export interface QrCode {
+  url: string
+}
+
+export interface Status {
+  enabled: boolean
+}

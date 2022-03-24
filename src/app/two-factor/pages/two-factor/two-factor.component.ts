@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
-import { OauthService } from '../../../core/oauth/oauth.service'
 import { TwoFactor } from '../../../types/two-factor.endpoint'
 import { WINDOW } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { first } from 'rxjs/operators'
+import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
 @Component({
   selector: 'app-two-factor-module',
@@ -21,7 +21,7 @@ export class TwoFactorComponent implements OnInit {
 
   constructor(
     @Inject(WINDOW) private window: Window,
-    private _oauthService: OauthService,
+    private _twoFactorAuthenticationService: TwoFactorAuthenticationService,
     private _platformInfo: PlatformInfoService
   ) {}
 
@@ -68,7 +68,7 @@ export class TwoFactorComponent implements OnInit {
       .get()
       .pipe(first())
       .subscribe((platform) => {
-        this._oauthService
+        this._twoFactorAuthenticationService
           .submitCode(twoFactor, platform.queryParameters.social)
           .subscribe((res) => {
             this.loading = false

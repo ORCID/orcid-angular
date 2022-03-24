@@ -1,0 +1,45 @@
+div {
+  p {
+    margin-top: 4px;
+    margin-bottom: 24px;
+  }
+}
+
+textarea.text-code {
+  width: 100%;
+  line-height: 8px;
+  padding: 16px 8px 8px;
+  margin-bottom: 16px;
+}
+
+.row .col {
+  padding: 0;
+}
+
+mat-error {
+  p {
+    margin: 0 !important;
+  }
+}
+
+.error-message {
+  float: left;
+  margin: 0;
+  [dir='rtl'] :host & {
+    float: right;
+  }
+}
+
+.error-length {
+  float: right;
+  margin: 0;
+  [dir='rtl'] :host & {
+    float: left;
+  }
+}
+
+.button-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 16px;
+}
