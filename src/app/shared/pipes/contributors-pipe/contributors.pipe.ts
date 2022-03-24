@@ -29,7 +29,9 @@ export class ContributorsPipe implements PipeTransform {
           contributor.contributorSequence &&
           contributor.contributorSequence.value
         ) {
-          value = this.addColon(value) + contributor.contributorSequence.value.toLowerCase()
+          value =
+            this.addColon(value) +
+            contributor.contributorSequence.value.toLowerCase()
         }
       }
 

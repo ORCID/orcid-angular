@@ -111,7 +111,9 @@ export class WorkComponent implements OnInit {
     contributor.rolesAndSequences.forEach((roleAndSequence) => {
       if (this.contributionRole) {
         this.contributionRole =
-          this.contributionRole + ', ' + roleAndSequence?.contributorRole.toLowerCase()
+          this.contributionRole +
+          ', ' +
+          roleAndSequence?.contributorRole.toLowerCase()
       } else {
         this.contributionRole = roleAndSequence?.contributorRole.toLowerCase()
       }

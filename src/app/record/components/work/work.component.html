@@ -187,8 +187,7 @@
           }}</ng-container>
           {{ contributor | contributorsPipe }}
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
-            <span *ngIf="!(contributor | contributorsPipe)">
-              (</span
+            <span *ngIf="!(contributor | contributorsPipe)"> (</span
             ><a
               class="underline"
               target="_blank"
