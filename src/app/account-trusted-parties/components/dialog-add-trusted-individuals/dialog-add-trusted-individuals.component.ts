@@ -1,10 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { ExpandedSearchResultsContent } from 'src/app/types'
-import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
-import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
 import { environment } from 'src/environments/environment'
 
 @Component({

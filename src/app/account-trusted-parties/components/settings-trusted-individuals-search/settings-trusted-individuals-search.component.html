@@ -9,7 +9,7 @@
     class="mat-form-field-min no-hint"
     [ngClass]="{ mobile: isMobile, desktop: !isMobile }"
   >
-    <input matInput value="value" [(ngModel)]="searchValue" class="" />
+    <input matInput value="value" [(ngModel)]="searchValue" class="" placeholder="{{searchPlaceHolder}}"/>
   </mat-form-field>
   <button
     mat-raised-button

@@ -49,6 +49,10 @@ table {
   margin-inline-start: 16px;
 }
 
+.mat-form-field {
+  min-width: 320px;
+}
+
 mat-form-field.mobile {
   width: 100%;
 }
