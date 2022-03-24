@@ -73,7 +73,6 @@ export class SettingsTrustedIndividualsSearchComponent
         map((trustedIndividuals) => {
           const orcidPattern = ORCID_REGEXP_CASE_INSENSITIVE
           const orcidIdMatch = orcidPattern.test(value)
-          console.log(orcidIdMatch)
 
           if (orcidIdMatch && trustedIndividuals['expanded-result']) {
             const matchingOrcid = trustedIndividuals['expanded-result'].find(
