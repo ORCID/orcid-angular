@@ -22,14 +22,16 @@ export class ContributorsPipe implements PipeTransform {
         })
       } else {
         if (contributor.contributorRole && contributor.contributorRole.value) {
-          value = contributor.contributorRole.value
+          value = contributor.contributorRole.value.toLowerCase()
         }
 
         if (
           contributor.contributorSequence &&
           contributor.contributorSequence.value
         ) {
-          value = this.addColon(value) + contributor.contributorSequence.value
+          value =
+            this.addColon(value) +
+            contributor.contributorSequence.value.toLowerCase()
         }
       }
 
@@ -66,16 +68,17 @@ export class ContributorsPipe implements PipeTransform {
     index: number
   ): string {
     const sequence = roleAndSequence?.contributorSequence?.toLowerCase()
-    if (roleAndSequence.contributorRole && sequence) {
+    const role = roleAndSequence?.contributorRole?.toLowerCase()
+    if (role && sequence) {
       return (
         value +
-        this.addColon(roleAndSequence.contributorRole) +
+        this.addColon(role) +
         (length - 1 === index ? sequence : this.addComma(sequence))
       )
-    } else if (sequence && !roleAndSequence.contributorRole) {
+    } else if (sequence && !role) {
       return value + sequence
-    } else if (roleAndSequence.contributorRole && !sequence) {
-      return value + roleAndSequence.contributorRole
+    } else if (role && !sequence) {
+      return value + role
     }
   }
 }
