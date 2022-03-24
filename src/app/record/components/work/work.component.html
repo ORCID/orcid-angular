@@ -23,7 +23,7 @@
       class="general-data"
       *ngIf="togglzWorksContributors && contributorsGroupedByOrcid?.length > 0"
     >
-      <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
+      <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
       <ng-container
         *ngFor="
           let contributor of contributorsGroupedByOrcid
@@ -187,7 +187,9 @@
           }}</ng-container>
           {{ contributor | contributorsPipe }}
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
-            <a
+            <span *ngIf="!(contributor | contributorsPipe)">
+              (</span
+            ><a
               class="underline"
               target="_blank"
               rel="noreferrer noopener"
