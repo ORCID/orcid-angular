@@ -57,8 +57,8 @@
 @include mat-form-field-theme-overwrites($orcid-app-theme);
 @include mat-divider-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/divider.scss';
-@include mat-button-theme-overwrites($orcid-app-theme);
 @import './material.orcid.overwrites.scss/cdk-drag-drop.scss';
 @include mat-error-theme-overwrites($orcid-app-theme);
 @import './orcid/urls.scss';
 @include mat-drag-drop-theme($orcid-app-theme);
+@include urls-theme-overwrites($orcid-app-theme)
