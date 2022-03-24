@@ -33,22 +33,23 @@ export class SearchService {
         {
           headers: { Accept: 'application/json' },
         }
-      ).pipe(
-      delay(100),
-      catchError((error) => this._errorHandler.handleError(error)),
-      map((x) => {
-        x['expanded-result'] = x['expanded-result']?.map((element) => {
-          if (!element['given-names'] && !element['family-names']) {
-            element[
-              'given-names'
-            ] = $localize`:@@account.nameIsPri:Name is private`
-          }
+      )
+      .pipe(
+        delay(100),
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((x) => {
+          x['expanded-result'] = x['expanded-result']?.map((element) => {
+            if (!element['given-names'] && !element['family-names']) {
+              element[
+                'given-names'
+              ] = $localize`:@@account.nameIsPri:Name is private`
+            }
 
-          return element
+            return element
+          })
+          return x
         })
-        return x
-      })
-    )
+      )
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {
