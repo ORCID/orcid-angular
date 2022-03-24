@@ -45,6 +45,9 @@
       align-items: center;
       min-width: 145px;
       flex-direction: row;
+      a {
+        margin-inline-start: 4px;
+      }
     }
   }
   .controls {
@@ -81,4 +84,5 @@
 h3 {
   line-height: 1;
   margin: 0;
+  margin-inline-end: 8px;
 }
