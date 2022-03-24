@@ -13,7 +13,6 @@
       matInput
       value="value"
       [(ngModel)]="searchValue"
-      class=""
       placeholder="{{ searchPlaceHolder }}"
     />
   </mat-form-field>
@@ -66,8 +65,7 @@
             >
 
             <a
-              class="underline"
-              class="black-url"
+              class="black-url underline"
               (click)="add(foundTrustedIndividual)"
               i18n="@@account.addAsTrustedIndividuals"
             >
