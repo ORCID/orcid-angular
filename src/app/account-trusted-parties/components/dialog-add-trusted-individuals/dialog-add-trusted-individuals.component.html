@@ -3,6 +3,11 @@
     >Add access - Trusted individual
   </app-modal-header>
 
+  <p i18n="@@account.addThisUserAsTrusted">
+    Adding this user as a trusted individual will mean they are able to update
+    your ORCID record.
+  </p>
+
   <div class="orcid-id-container">
     <strong> {{ data['given-names'] }} {{ data['family-names'] }}</strong>
 
@@ -18,12 +23,12 @@
   <app-modal-footer>
     <button
       mat-raised-button
-      color="warn"
+      color="primary"
       (click)="ok()"
       id="dialog-add-access"
-      i18n="@@account.addAccess"
+      i18n="@@account.addAsTrustedIndividuals"
     >
-      Add access
+      Add as trusted individual
     </button>
     <button
       mat-stroked-button

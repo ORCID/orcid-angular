@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator'
 import { Observable, of, Subject } from 'rxjs'
 import { map, switchMap, take, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { ORCID_REGEXP_CASE_INSENSITIVE } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { SearchService } from 'src/app/core/search/search.service'
@@ -34,6 +35,7 @@ export class SettingsTrustedIndividualsSearchComponent
   loading: boolean
   baseUrl = environment.BASE_URL
   userSession: UserSession
+  searchPlaceHolder = $localize`:@@account.searchIndividualsPlaceHolder:ORCID iD, email address, or names`
 
   constructor(
     private _search: SearchService,
@@ -49,6 +51,7 @@ export class SettingsTrustedIndividualsSearchComponent
 
   search(value: string) {
     this.loading = true
+    value = value.trim()
     this.$trustedIndividuals = this._search
       .search({
         searchQuery: value,
@@ -67,14 +70,24 @@ export class SettingsTrustedIndividualsSearchComponent
           }
           return trustedIndividuals
         }),
-        tap((trustedIndividuals) => {
-          if (trustedIndividuals['expanded-result']) {
-            trustedIndividuals['expanded-result'].forEach((ti) => {
-              if (ti['orcid-id'] === this.searchValue) {
-                this.add(ti)
-              }
-            })
+        map((trustedIndividuals) => {
+          const orcidPattern = ORCID_REGEXP_CASE_INSENSITIVE
+          const orcidIdMatch = orcidPattern.test(value)
+
+          if (orcidIdMatch && trustedIndividuals['expanded-result']) {
+            const matchingOrcid = trustedIndividuals['expanded-result'].find(
+              (ti) => ti['orcid-id'] === this.searchValue
+            )
+            if (matchingOrcid) {
+              this.add(matchingOrcid)
+              return null
+            } else {
+              trustedIndividuals['expanded-result'] = []
+            }
           }
+          return trustedIndividuals
+        }),
+        tap(() => {
           this.loading = false
         })
       )
@@ -84,6 +97,7 @@ export class SettingsTrustedIndividualsSearchComponent
     this.dialog
       .open(DialogAddTrustedIndividualsComponent, {
         data: value,
+        width: '634px',
       })
       .afterClosed()
       .pipe(

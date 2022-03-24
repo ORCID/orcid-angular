@@ -43,6 +43,7 @@ export class SearchService {
                 'given-names'
               ] = $localize`:@@account.nameIsPri:Name is private`
             }
+
             return element
           })
           return x

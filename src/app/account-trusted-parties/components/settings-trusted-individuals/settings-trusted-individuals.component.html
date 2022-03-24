@@ -13,6 +13,7 @@
   </div>
   <p>
     <a
+      class="underline"
       i18n="@@account.learnMoreAboutTrustedInd"
       href="https://support.orcid.org/hc/en-us/articles/360006973613"
       rel="noopener noreferrer"
@@ -73,13 +74,7 @@
       class="mat-elevation-z0"
     >
       <ng-container matColumnDef="trustedIndividuals">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          i18n="@@account.trustedIndividual"
-        >
-          Trusted individual
-        </th>
+        <th mat-header-cell *matHeaderCellDef i18n="@@account.name">Name</th>
         <td mat-cell *matCellDef="let element">
           {{ element?.receiverName?.value }}
         </td>

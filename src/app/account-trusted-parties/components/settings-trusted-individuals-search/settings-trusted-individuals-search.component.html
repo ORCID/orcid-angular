@@ -9,7 +9,13 @@
     class="mat-form-field-min no-hint"
     [ngClass]="{ mobile: isMobile, desktop: !isMobile }"
   >
-    <input matInput value="value" [(ngModel)]="searchValue" class="" />
+    <input
+      matInput
+      value="value"
+      [(ngModel)]="searchValue"
+      class=""
+      placeholder="{{ searchPlaceHolder }}"
+    />
   </mat-form-field>
   <button
     mat-raised-button
@@ -38,7 +44,10 @@
       <div class="mobile-elements-container">
         <div class="mobile-ements-text-container">
           <strong i18n="@@account.name">Name</strong>
-          <div>{{ foundTrustedIndividual?.['given-names'] }}</div>
+          <div>
+            {{ foundTrustedIndividual?.['given-names'] }}
+            {{ foundTrustedIndividual?.['family-names'] }}
+          </div>
           <strong i18n="@@account.orcidId">ORCID iD</strong>
           <div>
             <a
@@ -57,11 +66,12 @@
             >
 
             <a
+              class="underline"
               class="black-url"
               (click)="add(foundTrustedIndividual)"
-              i18n="@@account.addTrustedIndividuals"
+              i18n="@@account.addAsTrustedIndividuals"
             >
-              Add trusted individuals</a
+              Add as trusted individual</a
             >
           </div>
         </div>
@@ -106,11 +116,11 @@
             <mat-icon class="pointer" (click)="add(element)">add</mat-icon>
 
             <a
-              class="black-url"
+              class="black-url underline"
               (click)="add(element)"
-              i18n="@@account.addTrustedIndividuals"
+              i18n="@@account.addAsTrustedIndividuals"
             >
-              Add trusted individuals</a
+              Add as trusted individual</a
             >
           </div>
         </td>

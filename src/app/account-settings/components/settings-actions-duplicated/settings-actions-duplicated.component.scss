@@ -46,3 +46,11 @@ label {
 .form-title {
   padding-bottom: 16px;
 }
+
+form > p:first-child {
+  margin-top: 0;
+}
+
+mat-caption {
+  margin-bottom: 4px;
+}

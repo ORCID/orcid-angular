@@ -1,7 +1,7 @@
 <app-settings-panels-data *ngIf="userSession">
-  <div i18n="@@account.copyTheCodeBelow">
+  <p i18n="@@account.copyTheCodeBelow">
     Copy the code below and paste it into your personal website.
-  </div>
+  </p>
   <mat-form-field appearance="outline" class="mat-form-field-min no-hint">
     <textarea
       id="description-input"
@@ -11,6 +11,7 @@
       [readonly]="true"
     >
     <a
+    class="underline"
      href="{{ userSession?.effectiveOrcidUrl }}"
      target="orcid.widget"
      rel="me noopener noreferrer"
