@@ -94,13 +94,12 @@ export class SettingsActionsDuplicatedComponent implements OnInit {
         })
       )
       .subscribe(
-        () => {
+        (value) => {
           this.loading.next(false)
           this.close.next()
         },
-        () => {
+        (error) => {
           this.loading.next(false)
-          this.close.next()
         }
       )
   }
