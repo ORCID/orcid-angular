@@ -38,7 +38,10 @@
       <div class="mobile-elements-container">
         <div class="mobile-ements-text-container">
           <strong i18n="@@account.name">Name</strong>
-          <div>{{ foundTrustedIndividual?.['given-names'] }}</div>
+          <div>
+            {{ foundTrustedIndividual?.['given-names'] }}
+            {{ foundTrustedIndividual?.['family-names'] }}
+          </div>
           <strong i18n="@@account.orcidId">ORCID iD</strong>
           <div>
             <a
@@ -60,9 +63,9 @@
               class="underline"
               class="black-url"
               (click)="add(foundTrustedIndividual)"
-              i18n="@@account.addTrustedIndividuals"
+              i18n="@@account.addAsTrustedIndividuals"
             >
-              Add trusted individuals</a
+              Add as trusted individual</a
             >
           </div>
         </div>
@@ -109,9 +112,9 @@
             <a
               class="black-url underline"
               (click)="add(element)"
-              i18n="@@account.addTrustedIndividuals"
+              i18n="@@account.addAsTrustedIndividuals"
             >
-              Add trusted individuals</a
+              Add as trusted individual</a
             >
           </div>
         </td>
