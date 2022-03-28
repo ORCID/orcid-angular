@@ -178,8 +178,9 @@
           autoActiveFirstOption
           #auto="matAutocomplete"
           [displayWith]="autoCompleteDisplayOrganization"
+          id="cy-org-dd"
         >
-          <ng-container *ngIf="filteredOptions">
+          <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
             <mat-option
               *ngFor="let option of filteredOptions | async"
               [value]="option"
@@ -429,7 +430,7 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <ng-container formGroupName="startDateGroup">
+    <ng-container formGroupName="startDateGroup" id="cy-affiliation-start-date-group">
       <div class="row">
         <label
           for="url-input"
@@ -507,7 +508,7 @@
         </mat-error>
       </div>
     </ng-container>
-    <ng-container formGroupName="endDateGroup" *ngIf="type !== 'distinction'">
+    <ng-container formGroupName="endDateGroup" *ngIf="type !== 'distinction'" id="cy-affiliation-end-date-group">
       <div class="row">
         <label
           for="url-input"

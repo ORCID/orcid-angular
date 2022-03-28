@@ -57,6 +57,7 @@ export class PanelsComponent implements OnInit {
     label: string
     modal?: ComponentType<any>
     type?: EXTERNAL_ID_TYPE_WORK
+    id?: string
   }[] = []
 
   @Input() labelAddButton = $localize`:@@shared.sortItems:Sort Items`
