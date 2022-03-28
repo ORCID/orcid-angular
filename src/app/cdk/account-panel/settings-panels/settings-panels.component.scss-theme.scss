@@ -14,10 +14,17 @@
       border-color: mat-color($background, ui-background) !important;
       background-color: mat-color($background, ui-background-lightest);
     }
-    border-color: map-get($background, light-grey);
 
     .warn {
       color: mat-color($warn, 700);
+    }
+
+    .off {
+      color: mat-color($foreground, 'state-warning-dark');
+    }
+
+    .on {
+      color: map-get($foreground, 'brand-primary-dark');
     }
   }
 }

@@ -1,0 +1,25 @@
+div {
+  p {
+    margin-top: 4px;
+    margin-bottom: 24px;
+  }
+}
+
+textarea.backup-codes {
+  width: 100%;
+  line-height: 21px;
+  margin: 32px 0;
+  padding: 8px;
+}
+
+a {
+  button {
+    text-decoration: underline;
+  }
+}
+
+.button-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 16px;
+}

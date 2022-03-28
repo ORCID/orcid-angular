@@ -18,9 +18,10 @@ export class SettingsPanelsComponent implements OnInit {
   @Input() title: string
   @Input() accessGranted: number
   @Input() revokeAccessButton = false
+  @Input() url: string
+  @Input() type: { value: 'two-factor'; enabled: boolean }
   @Output() revokeAccessButtonClickedEvent = new EventEmitter<boolean>()
 
-  @Input() url: string
   isMobile!: boolean
 
   constructor(

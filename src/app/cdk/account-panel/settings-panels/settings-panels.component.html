@@ -11,20 +11,25 @@
           <div
             [ngClass]="{
               'orc-font-body-small': url,
-              'orc-font-body-large': !url
+              'orc-font-body': !url
             }"
-            class="orc-font-body-large clickable row title-container"
+            class="orc-font-body clickable row title-container"
             (click)="collapse()"
           >
-            <h3 class="orc-font-body">{{ title }}</h3>
+            <h3>{{ title }}</h3>
+            <ng-container *ngIf="type?.value === 'two-factor'">
+              <b *ngIf="type?.enabled" class="on">
+                (<ng-container i18n="@@account.on">ON</ng-container>)
+              </b>
+              <b *ngIf="!type?.enabled" class="off">
+                (<ng-container i18n="@@account.off">OFF</ng-container>)
+              </b>
+            </ng-container>
             <a class="underline" *ngIf="url" [href]="url"> {{ url }}</a>
           </div>
 
           <div class="text-container" *ngIf="accessGranted && !isMobile">
-            <div
-              class="orc-font-body-large orc-font-body-small clickable"
-              (click)="collapse()"
-            >
+            <div class="orc-font-body clickable" (click)="collapse()">
               <strong>
                 <ng-container i18n="@@account.accessGrantedDate"
                   >Access granted:

@@ -118,6 +118,14 @@ const routes: Routes = [
       import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
   },
   {
+    path: ApplicationRoutes.twoFactorSetup,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./two-factor-setup/two-factor-setup.module').then(
+        (m) => m.TwoFactorSetupModule
+      ),
+  },
+  {
     matcher: routerThirdPartySignInMatch,
     canActivateChild: [ThirdPartySigninCompletedGuard],
     loadChildren: () =>
