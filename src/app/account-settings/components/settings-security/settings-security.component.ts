@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-settings-security',
@@ -18,7 +20,19 @@ export class SettingsSecurityComponent implements OnInit {
   settingSecurityTwoFactorLoading = false
   settingSecurityAlternateAccountsLoading = false
 
-  constructor() {}
+  twoFactorState = false
 
-  ngOnInit(): void {}
+  constructor(private twoFactorAuthenticationService: TwoFactorAuthenticationService) {}
+
+  ngOnInit(): void {
+    this.twoFactorAuthenticationService.checkState()
+      .pipe(first())
+      .subscribe((result) => {
+        this.twoFactorState = result.enabled
+      })
+  }
+
+  twoFactorStateChanges($event) {
+    this.twoFactorState = $event
+  }
 }

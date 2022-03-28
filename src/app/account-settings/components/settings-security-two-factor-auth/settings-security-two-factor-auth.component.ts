@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { ApplicationRoutes } from '../../../constants'
+import { Router } from '@angular/router'
+import { first } from 'rxjs/operators'
+import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
 @Component({
   selector: 'app-settings-security-two-factor-auth',
@@ -9,7 +13,14 @@ import { Component, OnInit } from '@angular/core'
   ],
 })
 export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
-  constructor() {}
+  @Input() twoFactorState: boolean
+  @Output() twoFactorStateOutput = new EventEmitter<any>()
+  @Output() loading = new EventEmitter<boolean>()
+
+  constructor(
+    private _router: Router,
+    private twoFactorAuthenticationService: TwoFactorAuthenticationService,
+    ) {}
 
   ngOnInit(): void {}
 
