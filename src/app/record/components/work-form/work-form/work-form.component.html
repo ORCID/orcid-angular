@@ -128,7 +128,11 @@
   </div>
 
   <!-- Work translations title -->
-  <div [hidden]="!showTranslationTitle" formGroupName="translatedTitleGroup" id="cy-translation-title-group">
+  <div
+    [hidden]="!showTranslationTitle"
+    formGroupName="translatedTitleGroup"
+    id="cy-translation-title-group"
+  >
     <div>
       <div class="row">
         <label
@@ -429,7 +433,11 @@
         appearance="outline"
         class="mat-form-field-min input-container"
       >
-        <mat-select placeholder="Placeholder" formControlName="citationType" id="cy-citation-type">
+        <mat-select
+          placeholder="Placeholder"
+          formControlName="citationType"
+          id="cy-citation-type"
+        >
           <mat-option [value]="''" i18n="@@works.selectACitationType">
             Select a citation type
           </mat-option>
@@ -556,7 +564,7 @@
           [workIdTypes]="workIdTypes"
           (cancelEvent)="cancelExternalIdEdit(i)"
           [index]="i"
-          id="{{ 'cy-external-ids-edit' + i}}"
+          id="{{ 'cy-external-ids-edit' + i }}"
         ></app-work-external-identifiers-edit>
       </ng-container>
       <ng-container *ngIf="!workIdentifiersFormArrayDisplayState[i]">
@@ -570,7 +578,11 @@
     </div>
     <!-- Add other identifier  -->
     <div class="row" *ngIf="workIdentifiersFormArray.length">
-      <a class="col add-more no-gutters" (click)="addOtherWorkId()" id="cy-add-another-work-external-id"> 
+      <a
+        class="col add-more no-gutters"
+        (click)="addOtherWorkId()"
+        id="cy-add-another-work-external-id"
+      >
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1" i18n="@@shared.addAnotherId">
           Add another identifier
@@ -578,7 +590,11 @@
       </a>
     </div>
     <div class="row" *ngIf="!workIdentifiersFormArray.length">
-      <a class="col add-more no-gutters" (click)="addOtherWorkId()" id="cy-add-an-work-external-id">
+      <a
+        class="col add-more no-gutters"
+        (click)="addOtherWorkId()"
+        id="cy-add-an-work-external-id"
+      >
         <mat-icon class="large-material-icon">add_circle_outline</mat-icon>
         <span class="mat-body-1" i18n="@@shared.addId">
           Add an identifier

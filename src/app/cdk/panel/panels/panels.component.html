@@ -54,7 +54,7 @@
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
         (click)="add(type)"
-        id="{{ 'cy-add-btn-' + type}}"
+        id="{{ 'cy-add-btn-' + type }}"
       >
         <mat-icon class="large-material-icon" id="add-button">
           add_circle_outline
@@ -71,7 +71,7 @@
         class="orc-font-body-small add"
         [attr.aria-label]="labelAddButton"
         [matMenuTriggerFor]="menuAdd"
-        id="{{ 'cy-menu-add-' + type}}"
+        id="{{ 'cy-menu-add-' + type }}"
       >
         <mat-icon class="large-material-icon" id="add-button-multiple">
           add_circle_outline
@@ -132,7 +132,7 @@
             mat-menu-item
             *ngFor="let option of addMenuOptions"
             (click)="add('works', option.action)"
-            id="{{ option.id}}"
+            id="{{ option.id }}"
           >
             {{ option.label }}
           </button>
