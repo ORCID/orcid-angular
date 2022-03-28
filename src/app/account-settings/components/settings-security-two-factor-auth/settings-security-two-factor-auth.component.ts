@@ -19,8 +19,8 @@ export class SettingsSecurityTwoFactorAuthComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private twoFactorAuthenticationService: TwoFactorAuthenticationService,
-    ) {}
+    private twoFactorAuthenticationService: TwoFactorAuthenticationService
+  ) {}
 
   ngOnInit(): void {}
 

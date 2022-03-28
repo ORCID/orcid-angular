@@ -16,25 +16,27 @@ import { By } from '@angular/platform-browser'
 describe('TwoFactorEnableComponent', () => {
   let component: TwoFactorEnableComponent
   let fixture: ComponentFixture<TwoFactorEnableComponent>
-  let fakeTwoFactorAuthenticationService: TwoFactorAuthenticationService;
+  let fakeTwoFactorAuthenticationService: TwoFactorAuthenticationService
   let debugElement: DebugElement
 
   beforeEach(async () => {
-
     fakeTwoFactorAuthenticationService = jasmine.createSpyObj<TwoFactorAuthenticationService>(
       'CounterService',
       {
         getTextCode: undefined,
         register: undefined,
       }
-    );
+    )
 
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
       declarations: [TwoFactorEnableComponent],
       providers: [
         WINDOW_PROVIDERS,
-        { provide: TwoFactorAuthenticationService, useValue: fakeTwoFactorAuthenticationService },
+        {
+          provide: TwoFactorAuthenticationService,
+          useValue: fakeTwoFactorAuthenticationService,
+        },
         PlatformInfoService,
         ErrorHandlerService,
         SnackbarService,
@@ -56,28 +58,34 @@ describe('TwoFactorEnableComponent', () => {
   })
 
   it('should include a qr code image', () => {
-    expect(debugElement.nativeElement.querySelector('img').textContent).not.toBeNull()
+    expect(
+      debugElement.nativeElement.querySelector('img').textContent
+    ).not.toBeNull()
   })
 
   it('should display a textarea with a textarea', () => {
-    expect(debugElement.nativeElement.querySelector('[data-cy="textCode"]')).toBeNull()
+    expect(
+      debugElement.nativeElement.querySelector('[data-cy="textCode"]')
+    ).toBeNull()
     const textCodeLink = debugElement.query(By.css('#cy-text-code'))
     textCodeLink.triggerEventHandler('click', null)
-    expect(fakeTwoFactorAuthenticationService.getTextCode).toHaveBeenCalled();
+    expect(fakeTwoFactorAuthenticationService.getTextCode).toHaveBeenCalled()
     component.showTextCode = true
     fixture.detectChanges()
-    expect(debugElement.nativeElement.querySelector('[data-cy="textCode"]').textContent).not.toBeNull()
+    expect(
+      debugElement.nativeElement.querySelector('[data-cy="textCode"]')
+        .textContent
+    ).not.toBeNull()
   })
-
 
   it('should call the method register when the input is filled and the button has been press', () => {
     const resetInput = debugElement.query(
       By.css('[data-cy="verification-code-input"]')
-    );
-    resetInput.nativeElement.value = '123456';
+    )
+    resetInput.nativeElement.value = '123456'
     const twoFactorButton = debugElement.query(By.css('#cy-continue'))
     twoFactorButton.triggerEventHandler('click', null)
     fixture.detectChanges()
-    expect(fakeTwoFactorAuthenticationService.register).toHaveBeenCalled();
+    expect(fakeTwoFactorAuthenticationService.register).toHaveBeenCalled()
   })
 })

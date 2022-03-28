@@ -10,7 +10,7 @@ describe('TwoFactorRecoveryCodesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TwoFactorRecoveryCodesComponent],
-      providers: [ WINDOW_PROVIDERS ]
+      providers: [WINDOW_PROVIDERS],
     }).compileComponents()
   })
 

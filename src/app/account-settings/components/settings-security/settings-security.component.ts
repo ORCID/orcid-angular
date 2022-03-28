@@ -22,10 +22,13 @@ export class SettingsSecurityComponent implements OnInit {
 
   twoFactorState = false
 
-  constructor(private twoFactorAuthenticationService: TwoFactorAuthenticationService) {}
+  constructor(
+    private twoFactorAuthenticationService: TwoFactorAuthenticationService
+  ) {}
 
   ngOnInit(): void {
-    this.twoFactorAuthenticationService.checkState()
+    this.twoFactorAuthenticationService
+      .checkState()
       .pipe(first())
       .subscribe((result) => {
         this.twoFactorState = result.enabled
