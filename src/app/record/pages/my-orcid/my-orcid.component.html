@@ -61,6 +61,7 @@
               [expandedContent]="expandedContent"
               (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event)"
+              id="cy-affiliations"
             ></app-affiliations>
             <app-fundings
               [userInfo]="userInfo"
@@ -68,12 +69,14 @@
               [expandedContent]="expandedContent"
               (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event)"
+              id="cy-fundings"
             ></app-fundings>
             <app-research-resources
               [isPublicRecord]="publicOrcid"
               [expandedContent]="expandedContent"
               (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event, 'RESEARCH_RESOURCE')"
+              id="cy-research-resources"
             ></app-research-resources>
             <app-work-stack-group
               [userInfo]="userInfo"
@@ -81,6 +84,7 @@
               [expandedContent]="expandedContent"
               (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event)"
+              id="cy-works"
             ></app-work-stack-group>
             <app-peer-reviews
               [userInfo]="userInfo"
@@ -88,6 +92,7 @@
               [expandedContent]="expandedContent"
               (expandedContentChange)="expandedContentUpdate($event)"
               (total)="affiliationsCount($event)"
+              id="cy-peer-reviews"
             ></app-peer-reviews>
           </ng-container>
           <ng-container *ngIf="!(recordWithIssues || loadingUserRecord)">

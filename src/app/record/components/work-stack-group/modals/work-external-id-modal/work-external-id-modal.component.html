@@ -15,17 +15,32 @@
   </app-modal-header>
   <app-modal-side-bar *ngIf="work && !loading">
     <ng-container id="side-bar-title">
-      <a class="side-bar" i18n="@@works.workDetails" (click)="toWorkDetails()">
+      <a
+        class="side-bar"
+        i18n="@@works.workDetails"
+        (click)="toWorkDetails()"
+        id="cy-external-id-to-work-details"
+      >
         Work Details
       </a>
     </ng-container>
     <ng-container id="side-bar-url-1">
-      <a class="side-bar" i18n="@@works.identifiers" (click)="toIdentifiers()">
+      <a
+        class="side-bar"
+        i18n="@@works.identifiers"
+        (click)="toIdentifiers()"
+        id="cy-external-id-to-identifiers"
+      >
         Identifiers
       </a>
     </ng-container>
     <ng-container id="side-bar-url-2">
-      <a class="side-bar" i18n="@@works.citation" (click)="toCitation()">
+      <a
+        class="side-bar"
+        i18n="@@works.citation"
+        (click)="toCitation()"
+        id="cy-external-id-to-citation"
+      >
         Citation
       </a>
     </ng-container>
@@ -34,6 +49,7 @@
         class="side-bar"
         i18n="@@works.otherInformation"
         (click)="toOtherInformation()"
+        id="cy-external-id-to-other-info"
       >
         Other information
       </a>
@@ -134,6 +150,7 @@
         color="primary"
         (click)="retrieveWork()"
         [disabled]="loading"
+        id="{{ 'cy-retrieve-work-details-from-' + type }}"
       >
         <ng-container
           i18n="@@works.retrieveWorkDOI"
