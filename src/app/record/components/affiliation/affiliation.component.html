@@ -24,7 +24,9 @@
           >present</ng-container
         >
       </ng-container>
-      <ng-container *ngIf="!affiliation?.startDate.year && affiliation?.endDate">
+      <ng-container
+        *ngIf="!affiliation?.startDate.year && affiliation?.endDate"
+      >
         <ng-container *ngIf="affiliation.endDate?.year">
           {{ affiliation.endDate | monthDayYearDateToString }}
         </ng-container>

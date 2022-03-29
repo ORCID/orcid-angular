@@ -29,7 +29,7 @@ describe('AccountSettingsComponent', () => {
         ErrorHandlerService,
         SnackbarService,
         MatSnackBar,
-        Overlay
+        Overlay,
       ],
     }).compileComponents()
   })

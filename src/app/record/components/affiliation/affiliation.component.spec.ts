@@ -10,10 +10,7 @@ describe('AffiliationComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [
-          AffiliationComponent,
-          AffiliationTypeLabelPipe
-        ],
+        declarations: [AffiliationComponent, AffiliationTypeLabelPipe],
       }).compileComponents()
     })
   )

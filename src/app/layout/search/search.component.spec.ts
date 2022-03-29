@@ -27,7 +27,7 @@ describe('SearchComponent', () => {
         ErrorHandlerService,
         SnackbarService,
         MatSnackBar,
-        Overlay
+        Overlay,
       ],
     }).compileComponents()
   })

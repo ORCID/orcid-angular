@@ -27,7 +27,7 @@ describe('TwoFactorComponent', () => {
         ErrorHandlerService,
         SnackbarService,
         MatSnackBar,
-        Overlay
+        Overlay,
       ],
     }).compileComponents()
   })

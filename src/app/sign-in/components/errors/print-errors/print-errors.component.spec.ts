@@ -10,7 +10,7 @@ describe('PrintErrorsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PrintErrorsComponent],
-      providers: [WINDOW_PROVIDERS]
+      providers: [WINDOW_PROVIDERS],
     }).compileComponents()
   })
 

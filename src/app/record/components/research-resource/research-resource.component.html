@@ -39,7 +39,9 @@
             </span>
           </span>
           <!--End date-->
-          <span *ngIf="!researchResource?.startDate && researchResource?.endDate">
+          <span
+            *ngIf="!researchResource?.startDate && researchResource?.endDate"
+          >
             <span>{{
               researchResource.endDate | monthDayYearDateToString
             }}</span>

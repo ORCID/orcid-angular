@@ -33,8 +33,8 @@ describe('PeerReviewStacksGroupsComponent', () => {
         ErrorHandlerService,
         SnackbarService,
         MatSnackBar,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   }))
 

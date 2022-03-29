@@ -33,7 +33,7 @@ describe('WorkFormComponent', () => {
         RecordCountriesService,
         SnackbarService,
         MatSnackBar,
-        Overlay
+        Overlay,
       ],
     }).compileComponents()
   })

@@ -30,8 +30,8 @@ describe('BannersComponent', () => {
         ErrorHandlerService,
         SnackbarService,
         MatSnackBar,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

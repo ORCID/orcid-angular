@@ -27,8 +27,8 @@ describe('HeaderComponent', () => {
         PlatformInfoService,
         SnackbarService,
         MatSnackBar,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

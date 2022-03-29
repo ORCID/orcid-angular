@@ -30,7 +30,7 @@ describe('ModalCombineWorksComponent', () => {
         RecordWorksService,
         SnackbarService,
         MatSnackBar,
-        Overlay
+        Overlay,
       ],
     }).compileComponents()
   })

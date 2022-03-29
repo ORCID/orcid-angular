@@ -28,8 +28,8 @@ describe('ResearchResourceComponent', () => {
         ErrorHandlerService,
         SnackbarService,
         MatSnackBar,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

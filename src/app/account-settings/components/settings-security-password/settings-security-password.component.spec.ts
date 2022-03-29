@@ -30,8 +30,8 @@ describe('SettingsSecurityPasswordComponent', () => {
         SnackbarService,
         MatSnackBar,
         Overlay,
-        AccountSecurityPasswordService
-      ]
+        AccountSecurityPasswordService,
+      ],
     }).compileComponents()
   })
 

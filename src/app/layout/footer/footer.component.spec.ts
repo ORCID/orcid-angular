@@ -18,10 +18,7 @@ describe('FooterComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FooterComponent],
       imports: [RouterTestingModule],
-      providers: [
-        WINDOW_PROVIDERS,
-        PlatformInfoService
-      ]
+      providers: [WINDOW_PROVIDERS, PlatformInfoService],
     }).compileComponents()
   })
 

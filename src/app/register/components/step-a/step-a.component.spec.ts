@@ -14,10 +14,7 @@ describe('StepAComponent', () => {
     TestBed.configureTestingModule({
       declarations: [StepAComponent],
       imports: [RouterTestingModule],
-      providers: [
-        WINDOW_PROVIDERS,
-        PlatformInfoService
-      ]
+      providers: [WINDOW_PROVIDERS, PlatformInfoService],
     }).compileComponents()
   })
 
