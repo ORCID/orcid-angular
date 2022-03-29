@@ -47,21 +47,21 @@ export class ContributorsPipe implements PipeTransform {
     return value
   }
 
-  addComma(str: string): string {
+  private addComma(str: string): string {
     if (str?.length > 0) {
       return str + ', '
     }
     return str
   }
 
-  addColon(str: string): string {
+  private addColon(str: string): string {
     if (str?.length > 0) {
       return str + ': '
     }
     return str
   }
 
-  addRoleAndSequence(
+  private addRoleAndSequence(
     value: string,
     roleAndSequence: { contributorRole: string; contributorSequence: string },
     length: number,
@@ -76,9 +76,19 @@ export class ContributorsPipe implements PipeTransform {
         (length - 1 === index ? sequence : this.addComma(sequence))
       )
     } else if (sequence && !role) {
-      return value + sequence
+      return this.addSingleValue(value, sequence)
     } else if (role && !sequence) {
-      return value + role
+      return this.addSingleValue(value, role)
+    }
+  }
+
+  private addSingleValue(value, roleSequence): string {
+    if (value?.length > 0) {
+      return value =
+        this.addComma(value) +
+        roleSequence
+    } else {
+      return value + roleSequence
     }
   }
 }
