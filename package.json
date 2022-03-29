@@ -99,7 +99,7 @@
     "@angular/compiler-cli": "^13.2.1",
     "@angular/language-service": "^13.2.1",
     "@babel/core": "^7.6.0",
-    "@schematics/angular": "^9.1.1",
+    "@schematics/angular": "^13.3.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/lodash": "^4.14.168",
