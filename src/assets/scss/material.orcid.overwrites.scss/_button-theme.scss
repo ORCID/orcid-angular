@@ -6,7 +6,10 @@
   $divider-color: mat.get-color-from-palette($foreground, divider);
 
   $background: map-get($theme, background);
-  $unselected-background: mat.get-color-from-palette($background, unselected-chip);
+  $unselected-background: mat.get-color-from-palette(
+    $background,
+    unselected-chip
+  );
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
   .mat-button.orcid-button-light-grey {
