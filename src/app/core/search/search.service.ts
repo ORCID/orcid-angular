@@ -25,228 +25,30 @@ export class SearchService {
   ) {}
 
   search(querryParam: SearchParameters): Observable<SearchResults> {
-    return of({
-      'expanded-result': [
+    return this._http
+      .get<SearchResults>(
+        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
+          querryParam
+        )}`,
         {
-          'orcid-id': '0000-0001-9180-7464',
-          'given-names': 'eleven',
-          'family-names': 'emails',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-6816-6002',
-          'given-names': 'Multi',
-          'family-names': 'emails',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-9229-5261',
-          'given-names': '30 emails',
-          'family-names': null,
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-1631-2346',
-          'given-names': 'with',
-          'family-names': 'marketing emails',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-1354-740X',
-          'given-names': 'Jane',
-          'family-names': 'Eyre',
-          'credit-name': null,
-          'other-name': ['no verify!'],
-          email: ['c.oyler+jane@Orcid.org'],
-          'institution-name': [
-            'MDL Information Systems Limited',
-            'New York Public Library',
-            'Not ORCID',
-          ],
-        },
-        {
-          'orcid-id': '0000-0003-4924-2142',
-          'given-names': 'cy_Feb-25-2022-01-50-PM-CST_9和_name',
-          'family-names': 'cy_Feb-25-2022-01-50-PM-CST_9和_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': ['UCR'],
-        },
-        {
-          'orcid-id': '0000-0003-0079-1108',
-          'given-names': 'qaUser',
-          'family-names': 'qaUserLastName',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-8264-0463',
-          'given-names': 'cy_Jan-31-2022-04-19-PM-CST_name',
-          'family-names': 'cy_Jan-31-2022-04-19-PM-CST_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-7069-6822',
-          'given-names': 'cy_Jan-31-2022-04-30-PM-CST_name',
-          'family-names': 'cy_Jan-31-2022-04-30-PM-CST_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-2120-0098',
-          'given-names': 'cy_Feb-02-2022-06-33-PM-CST_name',
-          'family-names': 'cy_Feb-02-2022-06-33-PM-CST_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-0483-6166',
-          'given-names': 'cy_Feb-01-2022-04-36-PM-CST_name',
-          'family-names': 'cy_Feb-01-2022-04-36-PM-CST_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-8097-0725',
-          'given-names': 'cy_Feb-22-2022-03-59-PM-CST_C航_name',
-          'family-names': 'cy_Feb-22-2022-03-59-PM-CST_C航_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-9300-5967',
-          'given-names': 'cy_Feb-22-2022-04-18-PM-CST_-I_name',
-          'family-names': 'cy_Feb-22-2022-04-18-PM-CST_-I_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-1549-9559',
-          'given-names': 'cy_Feb-22-2022-03-43-PM-CST_Qn_name',
-          'family-names': 'cy_Feb-22-2022-03-43-PM-CST_關注_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-2680-9786',
-          'given-names': 'cy_Feb-22-2022-05-45-PM-CST_name',
-          'family-names': 'cy_Feb-22-2022-05-45-PM-CST_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-5559-9992',
-          'given-names': 'cy_Feb-22-2022-05-38-PM-CST_name',
-          'family-names': 'cy_Feb-22-2022-05-38-PM-CST_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-4533-6443',
-          'given-names': 'cy_Feb-22-2022-05-44-PM-CST_name',
-          'family-names': 'cy_Feb-22-2022-05-44-PM-CST_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-2669-4605',
-          'given-names': 'cy_Feb-24-2022-11-21-AM-CST_注ó_name',
-          'family-names': 'cy_Feb-24-2022-11-21-AM-CST_注ó_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-2180-9522',
-          'given-names': 'cy_Feb-25-2022-11-24-AM-CST_q7_name',
-          'family-names': 'cy_Feb-25-2022-11-24-AM-CST_q7_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-5717-4245',
-          'given-names': 'cy_Feb-25-2022-11-20-AM-CST_注á_name',
-          'family-names': 'cy_Feb-25-2022-11-20-AM-CST_注á_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-8819-5505',
-          'given-names': 'cy_Feb-25-2022-03-30-PM-CST_了機_name',
-          'family-names': 'cy_Feb-25-2022-03-30-PM-CST_了機_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-7525-4919',
-          'given-names': 'cy_Mar-15-2022-09-24-AM-CDT_1d_name',
-          'family-names': 'cy_Mar-15-2022-09-24-AM-CDT_1d_family',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-      ],
-      'num-found': 22,
-    }).pipe(
-      delay(1000),
-      catchError((error) => this._errorHandler.handleError(error)),
-      map((x) => {
-        x['expanded-result'] = x['expanded-result']?.map((element) => {
-          if (!element['given-names'] && !element['family-names']) {
-            element[
-              'given-names'
-            ] = $localize`:@@account.nameIsPri:Name is private`
-          }
+          headers: { Accept: 'application/json' },
+        }
+      )
+      .pipe(
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((x) => {
+          x['expanded-result'] = x['expanded-result']?.map((element) => {
+            if (!element['given-names'] && !element['family-names']) {
+              element[
+                'given-names'
+              ] = $localize`:@@account.nameIsPri:Name is private`
+            }
 
-          return element
+            return element
+          })
+          return x
         })
-        return x
-      })
-    )
+      )
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {
