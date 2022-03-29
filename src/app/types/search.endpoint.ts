@@ -4,7 +4,7 @@ export interface ExpandedSearchResultsContent {
   'family-names': string
   creditName?: any
   'other-name': any[]
-  email?: any
+  email?: string[]
   'institution-name': any[]
 }
 

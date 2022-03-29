@@ -4,7 +4,11 @@ import { PageEvent } from '@angular/material/paginator'
 import { Observable, of, Subject } from 'rxjs'
 import { map, switchMap, take, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
-import { ORCID_REGEXP_CASE_INSENSITIVE } from 'src/app/constants'
+import {
+  EMAIL_REGEXP_GENERIC,
+  ORCID_REGEXP,
+  ORCID_REGEXP_CASE_INSENSITIVE,
+} from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { SearchService } from 'src/app/core/search/search.service'
@@ -51,7 +55,7 @@ export class SettingsTrustedIndividualsSearchComponent
 
   search(value: string) {
     this.loading = true
-    value = value.trim()
+    value = value.trim().toLowerCase()
     this.$trustedIndividuals = this._search
       .search({
         searchQuery: value,
@@ -71,14 +75,35 @@ export class SettingsTrustedIndividualsSearchComponent
           return trustedIndividuals
         }),
         map((trustedIndividuals) => {
-          const orcidPattern = ORCID_REGEXP_CASE_INSENSITIVE
-          const orcidIdMatch = orcidPattern.test(value)
+          const orcidIdMatch = this.extractOrcidId(value)
+          const emailMatch = EMAIL_REGEXP_GENERIC.test(value)
+          console.log('EMAIL MATCH', emailMatch)
 
-          if (orcidIdMatch && trustedIndividuals['expanded-result']) {
-            const matchingOrcid = trustedIndividuals['expanded-result'].find(
-              (ti) => ti['orcid-id'] === this.searchValue
+          if (emailMatch && trustedIndividuals['expanded-result']) {
+            console.log(emailMatch)
+            console.log(trustedIndividuals['expanded-result'])
+
+            const matchingResult = trustedIndividuals['expanded-result'].find(
+              (x) =>
+                !!x.email.find(
+                  (email) => !!(email.trim().toLowerCase() === value)
+                )
             )
-            if (matchingOrcid) {
+            if (matchingResult) {
+              this.add(matchingResult)
+              return null
+            } else {
+              trustedIndividuals['expanded-result'] = []
+            }
+          } else if (orcidIdMatch && trustedIndividuals['expanded-result']) {
+            const matchingOrcid = trustedIndividuals['expanded-result'].find(
+              (ti) => ti['orcid-id'].trim().toLowerCase() === orcidIdMatch
+            )
+            if (
+              matchingOrcid &&
+              (orcidIdMatch === value ||
+                value.indexOf(environment.BASE_URL + orcidIdMatch) >= 1)
+            ) {
               this.add(matchingOrcid)
               return null
             } else {
@@ -91,6 +116,17 @@ export class SettingsTrustedIndividualsSearchComponent
           this.loading = false
         })
       )
+  }
+
+  private extractOrcidId(input: string): string {
+    console.log(input)
+    const regexResult = ORCID_REGEXP.exec(input)
+    console.log(regexResult)
+
+    if (regexResult) {
+      return regexResult[0]
+    }
+    return null
   }
 
   add(value: ExpandedSearchResultsContent) {

@@ -25,7 +25,15 @@
                 (<ng-container i18n="@@account.off">OFF</ng-container>)
               </b>
             </ng-container>
-            <a class="underline" *ngIf="url" [href]="url"> {{ url }}</a>
+            <a
+              class="underline"
+              *ngIf="url"
+              [href]="url"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {{ url }}</a
+            >
           </div>
 
           <div class="text-container" *ngIf="accessGranted && !isMobile">
