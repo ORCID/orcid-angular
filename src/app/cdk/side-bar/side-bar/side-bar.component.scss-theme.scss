@@ -9,18 +9,12 @@
   $background: map-get($theme, background);
 
   :host {
-    background-color: mat.get-color-from-palette(
-      $background,
-      brand-primary-lightest
-    );
+    background-color: mat.get-color-from-palette($background, brand-primary-lightest);
   }
 
   .side-bar {
     border-color: mat.get-color-from-palette($accent, 200) !important;
-    background-color: mat.get-color-from-palette(
-      $background,
-      brand-primary-lightest
-    ) !important;
+    background-color: mat.get-color-from-palette($background, brand-primary-lightest) !important;
   }
 }
 

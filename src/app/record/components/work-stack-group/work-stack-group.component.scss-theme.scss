@@ -10,10 +10,7 @@
 
   .controls {
     button {
-      border-color: mat.get-color-from-palette(
-        $background,
-        ui-background
-      ) !important;
+      border-color: mat.get-color-from-palette($background, ui-background) !important;
     }
   }
 }

@@ -44,8 +44,7 @@
   }
 
   .externalIdBox {
-    border-bottom: dashed
-      mat.get-color-from-palette($background, ui-background-light) 1px;
+    border-bottom: dashed mat.get-color-from-palette($background, ui-background-light) 1px;
   }
 }
 @include work-modal-theme($orcid-app-theme);

@@ -9,10 +9,7 @@
   $background: map-get($theme, background);
 
   :host {
-    background-color: mat.get-color-from-palette(
-      $background,
-      ui-background-darkest
-    );
+    background-color: mat.get-color-from-palette($background, ui-background-darkest);
     color: mat.get-color-from-palette($foreground, text-light-high);
   }
 }

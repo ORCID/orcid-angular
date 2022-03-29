@@ -9,19 +9,10 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   :host {
-    border-color: mat.get-color-from-palette(
-      $background,
-      ui-background
-    ) !important;
+    border-color: mat.get-color-from-palette($background, ui-background) !important;
     .header-container {
-      border-color: mat.get-color-from-palette(
-        $background,
-        ui-background
-      ) !important;
-      background-color: mat.get-color-from-palette(
-        $background,
-        ui-background-lightest
-      );
+      border-color: mat.get-color-from-palette($background, ui-background) !important;
+      background-color: mat.get-color-from-palette($background, ui-background-lightest);
     }
 
     .warn {

@@ -2,16 +2,14 @@
 @use '@angular/material' as mat;
 // https://github.com/angular/components/blob/8.1.4/src/material/chips/_chips-theme.scss
 
+
 @mixin mat-chips-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
   $divider-color: mat.get-color-from-palette($foreground, divider);
 
   $background: map-get($theme, background);
-  $unselected-background: mat.get-color-from-palette(
-    $background,
-    unselected-chip
-  );
+  $unselected-background: mat.get-color-from-palette($background, unselected-chip);
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
   .mat-chip.mat-standard-chip.orcid-outline-chip {

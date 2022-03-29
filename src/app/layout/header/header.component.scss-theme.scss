@@ -81,15 +81,9 @@
               button {
                 color: mat.get-color-from-palette($primary, 500);
               }
-              background-color: mat.get-color-from-palette(
-                $background,
-                'light-grey'
-              );
+              background-color: mat.get-color-from-palette($background, 'light-grey');
               .row {
-                background-color: mat.get-color-from-palette(
-                  $background,
-                  'card'
-                );
+                background-color: mat.get-color-from-palette($background, 'card');
               }
             }
           }
@@ -127,15 +121,9 @@
                 background-color: mat.get-color-from-palette($accent, 200);
                 color: $orcid-dark-primary-text;
               }
-              background-color: mat.get-color-from-palette(
-                $background,
-                'light-grey'
-              );
+              background-color: mat.get-color-from-palette($background, 'light-grey');
               .row {
-                background-color: mat.get-color-from-palette(
-                  $background,
-                  'card'
-                );
+                background-color: mat.get-color-from-palette($background, 'card');
               }
             }
           }
@@ -152,9 +140,15 @@
   .top-bar,
   .top-bar-new-info {
     .menu-container > .row > .col > button {
-      @include mat.typography-level($orcid-custom-typography, title-alt);
+      @include mat.typography-level(
+        $orcid-custom-typography,
+        title-alt
+      );
       &.sign-in-button {
-        @include mat.typography-level($orcid-material-typography, button);
+        @include mat.typography-level(
+          $orcid-material-typography,
+          button
+        );
       }
     }
   }

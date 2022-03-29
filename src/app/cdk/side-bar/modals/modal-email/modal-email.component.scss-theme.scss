@@ -19,16 +19,10 @@
   }
 
   .info {
-    border-color: mat.get-color-from-palette(
-      $foreground,
-      'state-notice-dark'
-    ) !important;
+    border-color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
 
     mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-notice-dark'
-      ) !important;
+      color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
     }
   }
 }

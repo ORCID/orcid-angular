@@ -8,17 +8,11 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
   :host {
-    border-color: mat.get-color-from-palette(
-      $foreground,
-      'state-notice-dark'
-    ) !important;
+    border-color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
   }
   .container-text-and-icon {
     mat-icon {
-      color: mat.get-color-from-palette(
-        $foreground,
-        'state-notice-dark'
-      ) !important;
+      color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
     }
   }
 }

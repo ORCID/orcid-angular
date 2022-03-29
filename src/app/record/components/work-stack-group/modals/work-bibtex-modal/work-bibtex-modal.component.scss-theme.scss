@@ -10,10 +10,7 @@
   $config: mat.define-typography-config();
 
   code {
-    background-color: mat.get-color-from-palette(
-      $background,
-      ui-background-light
-    );
+    background-color: mat.get-color-from-palette($background, ui-background-light);
   }
 }
 @include work-bibtex-modal-theme($orcid-app-theme);

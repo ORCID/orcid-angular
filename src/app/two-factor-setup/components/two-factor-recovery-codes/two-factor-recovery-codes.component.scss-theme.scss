@@ -19,10 +19,7 @@
 
   textarea {
     border: 1px solid mat.get-color-from-palette($background, ui-background);
-    background-color: mat.get-color-from-palette(
-      $background,
-      ui-background-light
-    );
+    background-color: mat.get-color-from-palette($background, ui-background-light);
   }
 }
 @include two-factor-setup-theme($orcid-app-theme);
