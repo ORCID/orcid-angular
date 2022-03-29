@@ -84,9 +84,7 @@ export class ContributorsPipe implements PipeTransform {
 
   private addSingleValue(value, roleSequence): string {
     if (value?.length > 0) {
-      return value =
-        this.addComma(value) +
-        roleSequence
+      return (value = this.addComma(value) + roleSequence)
     } else {
       return value + roleSequence
     }
