@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin work-stack-theme($theme) {
@@ -9,12 +9,12 @@
   $background: map-get($theme, background);
 
   :host.display-the-stack {
-    border-color: mat-color($background, ui-background-darkest);
+    border-color: mat.get-color-from-palette($background, ui-background-darkest);
 
     app-panel:not(.last) {
-      -webkit-box-shadow: 0px 9px 5px 0px mat-color($background, panel-shadow);
-      -moz-box-shadow: 0px 9px 5px 0px mat-color($background, panel-shadow);
-      box-shadow: 0px 9px 5px 0px mat-color($background, panel-shadow);
+      -webkit-box-shadow: 0px 9px 5px 0px mat.get-color-from-palette($background, panel-shadow);
+      -moz-box-shadow: 0px 9px 5px 0px mat.get-color-from-palette($background, panel-shadow);
+      box-shadow: 0px 9px 5px 0px mat.get-color-from-palette($background, panel-shadow);
     }
   }
 }

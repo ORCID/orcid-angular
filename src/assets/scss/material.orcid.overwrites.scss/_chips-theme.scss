@@ -1,16 +1,16 @@
 // Overwrites for
+@use '~@angular/material' as mat;
 // https://github.com/angular/components/blob/8.1.4/src/material/chips/_chips-theme.scss
 
-@import '~@angular/material/_theming';
 
 @mixin mat-chips-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
-  $divider-color: mat-color($foreground, divider);
+  $divider-color: mat.get-color-from-palette($foreground, divider);
 
   $background: map-get($theme, background);
-  $unselected-background: mat-color($background, unselected-chip);
-  $unselected-foreground: mat-color($foreground, text);
+  $unselected-background: mat.get-color-from-palette($background, unselected-chip);
+  $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
   .mat-chip.mat-standard-chip.orcid-outline-chip {
     border-color: $divider-color;
@@ -49,11 +49,11 @@
     );
     &.mat-primary {
       &::after {
-        background: mat-color($primary, 700);
+        background: mat.get-color-from-palette($primary, 700);
         opacity: 0.12;
       }
-      color: mat-color($primary, 700);
-      border-color: mat-color($primary, 700);
+      color: mat.get-color-from-palette($primary, 700);
+      border-color: mat.get-color-from-palette($primary, 700);
     }
   }
 }
