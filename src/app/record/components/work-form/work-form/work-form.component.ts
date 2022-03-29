@@ -237,7 +237,7 @@ export class WorkFormComponent implements OnInit {
 
       visibility: [
         currentWork?.visibility?.visibility ||
-          currentWork.visibility.visibility,
+          currentWork?.visibility?.visibility,
         [],
       ],
     })

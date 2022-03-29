@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { FundingComponent } from './funding.component'
+import { RecordFundingTypeLabelPipe } from '../../../shared/pipes/record-funding-type-label/record-funding-type-label.pipe'
 
 describe('FundingComponent', () => {
   let component: FundingComponent
@@ -8,7 +9,7 @@ describe('FundingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FundingComponent],
+      declarations: [FundingComponent, RecordFundingTypeLabelPipe],
     }).compileComponents()
   }))
 

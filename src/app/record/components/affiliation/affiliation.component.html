@@ -24,7 +24,7 @@
           >present</ng-container
         >
       </ng-container>
-      <ng-container *ngIf="!affiliation.startDate.year && affiliation.endDate">
+      <ng-container *ngIf="!affiliation?.startDate.year && affiliation?.endDate">
         <ng-container *ngIf="affiliation.endDate?.year">
           {{ affiliation.endDate | monthDayYearDateToString }}
         </ng-container>
@@ -37,16 +37,16 @@
       >
         |
       </ng-container>
-      {{ affiliation.roleTitle.value }}
-      <ng-container *ngIf="affiliation.departmentName.value">
+      {{ affiliation?.roleTitle.value }}
+      <ng-container *ngIf="affiliation?.departmentName.value">
         ({{ affiliation.departmentName.value }})
       </ng-container>
     </div>
     <div class="type">
-      {{ affiliation.affiliationType.value | affiliationTypeLabel }}
+      {{ affiliation?.affiliationType.value | affiliationTypeLabel }}
     </div>
     <app-display-external-ids
-      [externalIdentifiers]="affiliation.affiliationExternalIdentifiers"
+      [externalIdentifiers]="affiliation?.affiliationExternalIdentifiers"
     ></app-display-external-ids>
   </div>
 
@@ -54,14 +54,14 @@
     <a
       class="underline"
       (click)="toggleDetails.next(affiliation)"
-      *ngIf="!panelDetailsState.state"
+      *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
       >Show more detail</a
     >
     <a
       class="underline"
       (click)="toggleDetails.next(affiliation)"
-      *ngIf="panelDetailsState.state"
+      *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
       >Show less detail</a
     >
@@ -69,7 +69,7 @@
 </app-panel-data>
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
+<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state">
   <!-- ORGANIZATION DISAMBIGUATED IDS-->
   <app-org-identifier
     [orgDisambiguated]="orgDisambiguated"

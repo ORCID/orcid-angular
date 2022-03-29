@@ -31,7 +31,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   $destroy: Subject<boolean> = new Subject<boolean>()
 
   @Input() isPublicRecord: string
-  @Input() onlyOrcidId = false
+  @Input() lyOrcidId = false
   @Input() hideOrcidId = false
 
   modalCountryComponent = ModalCountryComponent
@@ -92,8 +92,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
       })
       .pipe(takeUntil(this.$destroy))
       .subscribe((userRecord) => {
-        if (!this.onlyOrcidId && userRecord?.userInfo?.RECORD_WITH_ISSUES) {
-          this.onlyOrcidId = true
+        if (!this.lyOrcidId && userRecord?.userInfo?.RECORD_WITH_ISSUES) {
+          this.lyOrcidId = true
         }
         this.userRecord = userRecord
         this.userInfo = userRecord?.userInfo

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { PrintErrorsComponent } from './print-errors.component'
+import { WINDOW_PROVIDERS } from '../../../../cdk/window'
 
 describe('PrintErrorsComponent', () => {
   let component: PrintErrorsComponent
@@ -9,6 +10,7 @@ describe('PrintErrorsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PrintErrorsComponent],
+      providers: [WINDOW_PROVIDERS]
     }).compileComponents()
   })
 

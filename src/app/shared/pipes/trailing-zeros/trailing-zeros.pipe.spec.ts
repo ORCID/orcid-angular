@@ -1,4 +1,4 @@
-import { TrailingZerosPipe } from './trailing-zeros.pipe'
+import { TrailingZerosPipe } from './trailing-zeros/trailing-zeros.pipe'
 
 describe('TrailingZerosPipe', () => {
   it('create an instance', () => {

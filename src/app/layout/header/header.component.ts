@@ -50,7 +50,6 @@ export class HeaderComponent implements OnInit {
     _togglz: TogglzService,
     location: Location,
     private _signingService: SignInService,
-    private _platformInfo: PlatformInfoService
   ) {
     _router.events
       .pipe(filter((event: any) => event instanceof NavigationStart))

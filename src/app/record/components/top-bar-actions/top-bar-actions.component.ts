@@ -18,7 +18,7 @@ export class TopBarActionsComponent implements OnInit, OnDestroy {
   @Input() userRecord: UserRecord
   @Input() userStatus: UserStatus
   @Input() isPublicRecord: string
-  @Input() onlyShowPrintButton = false
+  @Input() lyShowPrintButton = false
   @Input() onlyShowIsThisYouButton = false
   constructor(
     @Inject(WINDOW) private window: Window,
