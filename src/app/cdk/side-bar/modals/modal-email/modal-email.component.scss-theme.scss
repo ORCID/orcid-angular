@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin modal-email-theme($theme) {
@@ -9,20 +9,20 @@
   $background: map-get($theme, background);
 
   :host ::ng-deep .verify-icon.email-activated mat-icon {
-    color: mat.get-color-from-palette($accent, 400);
+    color: mat-color($accent, 400);
   }
   :host ::ng-deep .verify-icon mat-icon {
     color: map-get($background, ui-background);
   }
   .add-more {
-    color: mat.get-color-from-palette($primary, 700);
+    color: mat-color($primary, 700);
   }
 
   .info {
-    border-color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+    border-color: mat-color($foreground, 'state-notice-dark') !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+      color: mat-color($foreground, 'state-notice-dark') !important;
     }
   }
 }

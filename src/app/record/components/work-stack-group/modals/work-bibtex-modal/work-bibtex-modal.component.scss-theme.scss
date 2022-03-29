@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin work-bibtex-modal-theme($theme) {
@@ -7,10 +7,10 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-typography-config();
+  $config: mat-typography-config();
 
   code {
-    background-color: mat.get-color-from-palette($background, ui-background-light);
+    background-color: mat-color($background, ui-background-light);
   }
 }
 @include work-bibtex-modal-theme($orcid-app-theme);

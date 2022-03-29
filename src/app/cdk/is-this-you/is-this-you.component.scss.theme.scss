@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/_theming';
 @import '../../../assets/scss/material.orcid-theme.scss';
 
 @mixin is-this-you($theme) {
@@ -7,10 +7,10 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $overlay-color: mat.get-color-from-palette($background, blue-overlay);
+  $overlay-color: mat-color($background, blue-overlay);
 
   .modal-title {
-    color: mat.get-color-from-palette($primary);
+    color: mat-color($primary);
   }
 }
 

@@ -1,4 +1,5 @@
-@use '~@angular/material' as mat;
+@import '~@angular/cdk/text-field/text-field';
+@import '~@angular/material/_theming';
 
 @mixin mat-form-field-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
@@ -24,14 +25,14 @@
   .mat-focused.mat-warn .mat-form-field-outline-thick,
   .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
     .mat-form-field-outline-thick {
-    color: mat.get-color-from-palette($warn, 700);
+    color: mat-color($warn, 700);
   }
   .mat-form-field.mat-warn .mat-input-element,
   .mat-form-field-invalid .mat-input-element {
-    color: mat.get-color-from-palette($warn, 700);
+    color: mat-color($warn, 700);
   }
   .mat-form-field.mat-form-field-invalid .mat-form-field-label {
-    color: mat.get-color-from-palette($warn, 700);
+    color: mat-color($warn, 700);
   }
 }
 
@@ -39,8 +40,8 @@
   .columns-4,
   .columns-8 {
     mat-form-field {
-      font-size: mat.font-size($config, body-2) !important;
-      font-weight: mat.font-weight($config, body-2);
+      font-size: mat-font-size($config, body-2) !important;
+      font-weight: mat-font-weight($config, body-2);
     }
   }
 }

@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin work-stack-group-theme($theme) {
@@ -10,7 +10,7 @@
 
   .controls {
     button {
-      border-color: mat.get-color-from-palette($background, ui-background) !important;
+      border-color: mat-color($background, ui-background) !important;
     }
   }
 }

@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin side-bar-id-theme($theme) {
@@ -12,8 +12,8 @@
     width: 100%;
   }
   .container {
-    background-color: mat.get-color-from-palette($background, card);
-    border-color: mat.get-color-from-palette($accent, 400);
+    background-color: mat-color($background, card);
+    border-color: mat-color($accent, 400);
   }
 }
 

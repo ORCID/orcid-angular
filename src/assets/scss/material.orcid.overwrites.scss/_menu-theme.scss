@@ -1,13 +1,13 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/_theming';
 
 @mixin mat-menu-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
-  $divider-color: mat.get-color-from-palette($foreground, divider);
+  $divider-color: mat-color($foreground, divider);
 
   $background: map-get($theme, background);
-  $unselected-background: mat.get-color-from-palette($background, unselected-chip);
-  $unselected-foreground: mat.get-color-from-palette($foreground, text);
+  $unselected-background: mat-color($background, unselected-chip);
+  $unselected-foreground: mat-color($foreground, text);
 
   .mat-menu-panel {
     .orcid-mat-menu-header {

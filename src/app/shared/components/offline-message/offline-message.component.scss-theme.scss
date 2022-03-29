@@ -1,4 +1,5 @@
 @import 'src/assets/scss/material.orcid-theme.scss';
+@import '~@angular/material/theming';
 
 @mixin offline-message-theme($theme) {
   $primary: map-get($theme, primary);

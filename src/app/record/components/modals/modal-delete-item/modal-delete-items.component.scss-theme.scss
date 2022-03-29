@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin delete-items-theme($theme) {
@@ -9,10 +9,10 @@
   $background: map-get($theme, background);
 
   .info {
-    border-color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+    border-color: mat-color($foreground, 'state-notice-dark') !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+      color: mat-color($foreground, 'state-notice-dark') !important;
     }
   }
 }

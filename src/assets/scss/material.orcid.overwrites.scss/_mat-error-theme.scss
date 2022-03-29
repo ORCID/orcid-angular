@@ -1,9 +1,10 @@
-@use '~@angular/material' as mat;
+@import '~@angular/cdk/text-field/text-field';
+@import '~@angular/material/_theming';
 
 @mixin mat-error-theme-overwrites($theme) {
   $warn: map-get($theme, warn);
 
   mat-error {
-    color: mat.get-color-from-palette($warn, 700) !important;
+    color: mat-color($warn, 700) !important;
   }
 }

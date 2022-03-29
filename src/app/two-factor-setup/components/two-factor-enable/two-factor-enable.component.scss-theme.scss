@@ -1,4 +1,5 @@
-@use '~@angular/material' as mat;
+@use '~@angular/cdk/text-field';
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin two-factor-setup-theme($theme) {
@@ -7,19 +8,19 @@
   $warn: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  $config: mat.define-typography-config();
+  $config: mat-typography-config();
 
   p {
-    font-size: mat.font-size($config, body-1) !important;
+    font-size: mat-font-size($config, body-1) !important;
   }
 
   a {
-    font-size: mat.font-size($config, body-1) !important;
+    font-size: mat-font-size($config, body-1) !important;
   }
 
   textarea {
-    border: 1px solid mat.get-color-from-palette($background, ui-background);
-    background-color: mat.get-color-from-palette($background, ui-background-light);
+    border: 1px solid mat-color($background, ui-background);
+    background-color: mat-color($background, ui-background-light);
   }
 }
 @include two-factor-setup-theme($orcid-app-theme);

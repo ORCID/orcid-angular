@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 @import 'src/assets/scss/material.typography.scss';
 
@@ -11,13 +11,13 @@
   /// GLOBAL APP CUSTOM STYLES
 
   a {
-    color: mat.get-color-from-palette($primary);
+    color: mat-color($primary);
   }
 }
 
 @mixin global-theme-typography($config) {
   input {
-    @include mat.typography-level($config, input);
+    @include mat-typography-level-to-styles($config, input);
   }
 }
 

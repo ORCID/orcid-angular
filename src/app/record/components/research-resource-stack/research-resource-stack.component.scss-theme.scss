@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin research-resources-stack-theme($theme) {
@@ -9,11 +9,11 @@
   $background: map-get($theme, background);
 
   :host.display-the-stack {
-    border-color: mat.get-color-from-palette($background, ui-background-darkest);
+    border-color: mat-color($background, ui-background-darkest);
   }
 
   app-panel-data {
-    border-color: mat.get-color-from-palette($background, ui-background) !important;
+    border-color: mat-color($background, ui-background) !important;
     background-color: map-get($background, card);
   }
 }

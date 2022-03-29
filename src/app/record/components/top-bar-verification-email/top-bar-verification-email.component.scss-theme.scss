@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin top-bar-verification-email-theme($theme) {
@@ -9,18 +9,18 @@
   $background: map-get($theme, background);
 
   .just-registered {
-    border-color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+    border-color: mat-color($foreground, 'state-notice-dark') !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($foreground, 'state-notice-dark') !important;
+      color: mat-color($foreground, 'state-notice-dark') !important;
     }
   }
 
   .email-verified {
-    border-color: mat.get-color-from-palette($accent, 400) !important;
+    border-color: mat-color($accent, 400) !important;
 
     mat-icon {
-      color: mat.get-color-from-palette($accent, 400);
+      color: mat-color($accent, 400);
     }
   }
 }

@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin panel-theme($theme) {
@@ -10,14 +10,14 @@
 
   :host,
   .side-bar {
-    border-color: mat.get-color-from-palette($accent, 200) !important;
-    background-color: mat.get-color-from-palette($background, brand-primary-lightest) !important;
+    border-color: mat-color($accent, 200) !important;
+    background-color: mat-color($background, brand-primary-lightest) !important;
   }
 
   :host,
   .top-bar-or-main {
-    border-color: mat.get-color-from-palette($background, ui-background) !important;
-    background-color: mat.get-color-from-palette($background, ui-background-light) !important;
+    border-color: mat-color($background, ui-background) !important;
+    background-color: mat-color($background, ui-background-light) !important;
   }
 
   .body {

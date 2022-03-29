@@ -1,12 +1,12 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 @import 'src/assets/scss/material.orcid-theme.scss';
 
 @mixin trusted-individuals-dropdown($theme) {
   $primary: map-get($theme, primary);
   $background: map-get($theme, background);
   .header {
-    background-color: mat.get-color-from-palette($primary, 700);
-    color: mat.get-contrast-color-from-palette($primary, 700);
+    background-color: mat-color($primary, 700);
+    color: mat-contrast($primary, 700);
   }
 }
 
