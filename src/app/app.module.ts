@@ -14,7 +14,7 @@ import { PseudoModule } from 'src/locale/i18n.pseudo.component'
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
