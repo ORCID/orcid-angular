@@ -3,6 +3,17 @@
 // https://github.com/angular/components/blob/8.1.4/src/material/chips/_chips-theme.scss
 
 
+@mixin _element-color($foreground, $background) {
+  background-color: $background;
+  color: $foreground;
+
+  .mat-chip-remove {
+    color: $foreground;
+    opacity: 0.4;
+  }
+}
+
+
 @mixin mat-chips-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
@@ -43,7 +54,7 @@
   .mat-chip.mat-standard-chip.mat-chip-selected.orcid-outline-chip {
     // Overwrites active states to follow material definitions
     // https://material.io/design/interaction/states.html#anatomy
-    @include _mat-chip-element-color(
+    @include _element-color(
       $unselected-foreground,
       $unselected-background
     );
