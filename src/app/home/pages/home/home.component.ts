@@ -24,7 +24,10 @@ export class HomeComponent implements OnInit {
   }
 
   goto(url) {
-    this.window.location.href = environment.BASE_URL + url
+    //TODO SSR
+    if (this.window?.location) {
+      this.window.location.href = environment.BASE_URL + url
+    }
   }
 
   ngOnInit() {}

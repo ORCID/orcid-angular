@@ -82,7 +82,10 @@ export class FormAuthorizeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   navigateTo(val) {
-    this.window.location.href = val
+    //TODO SSR
+   if (this.window?.location) {
+this.window.location.href = val
+    }
   }
 
   authorize(value = true) {

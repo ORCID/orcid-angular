@@ -60,7 +60,11 @@ export class IsThisYouComponent implements OnInit {
   }
 
   goto(url) {
-    this.window.location.href = url
+    //TODO SSR
+   //TODO SSR
+   if (this.window?.location) {
+        this.window.location.href = url
+      }
   }
 
   gotoNewTab(id) {

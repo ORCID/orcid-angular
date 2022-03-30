@@ -1,4 +1,4 @@
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http'
+import { HttpClientXsrfModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { CookieService } from 'ngx-cookie-service'
 import { TogglzDirective } from './togglz/togglz.directive'
@@ -10,7 +10,6 @@ import { SnackbarModule } from '../cdk/snackbar/snackbar.module'
 
 @NgModule({
   imports: [
-    HttpClientModule,
     PlatformInfoModule,
     HttpClientXsrfModule,
     WindowModule,

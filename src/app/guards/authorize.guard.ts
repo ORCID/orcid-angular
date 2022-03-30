@@ -66,7 +66,10 @@ export class AuthorizeGuard implements CanActivateChild {
   }
 
   sendUserToRedirectURL(oauthSession: RequestInfoForm) {
-    this.window.location.href = oauthSession.redirectUrl
+    //TODO SSR
+    if (this.window.location) {
+      this.window.location.href = oauthSession.redirectUrl
+    }
     return NEVER
   }
 

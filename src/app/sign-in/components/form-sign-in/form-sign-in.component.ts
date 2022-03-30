@@ -368,7 +368,10 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
     if (val.indexOf('orcid.org/my-orcid')) {
       this._router.navigate(['/my-orcid'])
     } else {
-      this.window.location.href = val
+      //TODO SSR
+   if (this.window?.location) {
+this.window.location.href = val
+    }
     }
   }
 

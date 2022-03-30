@@ -9,25 +9,34 @@ import { environment } from 'src/environments/environment'
   providedIn: 'root',
 })
 export class GoogleAnalyticsService {
-  gtag: Gtag.Gtag
+  gtag
   constructor(@Inject(WINDOW) private window: Window) {
-    this.gtag = (window as any).gtag
+    if ((this.window as any).gtag) {
+      this.gtag = (window as any).gtag
+    } else {
+      //TODO SSR support
+      this.gtag = function () {
+        return undefined
+      }
+    }
   }
 
   reportPageView(url: string) {
-    if (environment.debugger) {
-      console.debug(`GA - Navigation ${url}`)
+    if (this.window.location) {
+      if (environment.debugger) {
+        console.debug(`GA - Navigation ${url}`)
+      }
+      this.gtag('config', environment.GOOGLE_ANALYTICS, {
+        cookie_flags: 'SameSite=None;Secure',
+        page_path: url,
+        page_location: this.window.location.href,
+        anonymize_ip: true,
+        sample_rate: '100',
+        site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
+          ? '100'
+          : '1',
+      })
     }
-    this.gtag('config', environment.GOOGLE_ANALYTICS, {
-      cookie_flags: 'SameSite=None;Secure',
-      page_path: url,
-      page_location: window.location.href,
-      anonymize_ip: true,
-      sample_rate: '100',
-      site_speed_sample_rate: environment.GOOGLE_ANALYTICS_TESTING_MODE
-        ? '100'
-        : '1',
-    })
   }
 
   reportNavigationStart(url: string) {
@@ -120,10 +129,7 @@ fatal: "${fatal}"
   }
 
   // see https://medium.com/wizdm-genesys/using-gtag-in-angular-b99a10025fcd
-  private eventObservable(
-    action: string,
-    params?: Gtag.EventParams
-  ): Observable<void> {
+  private eventObservable(action: string, params?: any): Observable<void> {
     // Wraps the event call into a Promise
     return new Observable((observer) => {
       try {

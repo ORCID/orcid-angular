@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core'
 import { first, takeUntil } from 'rxjs/operators'
 import { PlatformInfo, PlatformInfoService } from '../../../cdk/platform-info'
 import { UserService } from '../../../core'
@@ -20,6 +20,7 @@ import {
 import { VisibilityStrings } from '../../../types/common.endpoint'
 import { isQA } from 'src/app/shared/validators/environment-check/environment-check'
 import { TogglzService } from '../../../core/togglz/togglz.service'
+import { WINDOW } from 'src/app/cdk/window/window.service'
 
 @Component({
   selector: 'app-peer-reviews',
@@ -74,7 +75,8 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
     _platform: PlatformInfoService,
     private _user: UserService,
     private _record: RecordService,
-    private _recordPeerReviewService: RecordPeerReviewService
+    private _recordPeerReviewService: RecordPeerReviewService,
+    @Inject(WINDOW) private window: Window
   ) {
     _platform
       .get()
@@ -90,7 +92,7 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecord()
-    this.IS_QA = isQA()
+    this.IS_QA = isQA(this.window)
   }
 
   trackByPeerReviewGroup(index, item: PeerReviewDuplicateGroup) {
@@ -266,6 +268,6 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
   }
 
   isQA(): boolean {
-    return isQA()
+    return isQA(this.window)
   }
 }

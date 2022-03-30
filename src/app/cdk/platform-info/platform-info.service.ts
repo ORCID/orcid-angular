@@ -51,7 +51,10 @@ export class PlatformInfoService {
     this.platform.ltr = !this.platform.rtl
     this.platform.screenDirection = this.platform.rtl ? 'rtl' : 'ltr'
 
-    if (!BROWSERLIST_REGEXP.test(navigator.userAgent)) {
+    if (
+      window.navigator &&
+      !BROWSERLIST_REGEXP.test(window.navigator.userAgent)
+    ) {
       this.platform.unsupportedBrowser = true
     }
 
@@ -179,9 +182,11 @@ export class PlatformInfoService {
       (queryParameters.hasOwnProperty('providerId') &&
         (queryParameters['providerId'] === 'facebook' ||
           queryParameters['providerId'] === 'google')) ||
-      this.window.location.pathname
-        .toLowerCase()
-        .indexOf(ApplicationRoutes.social) >= 0
+      // TODO SSR
+      (this.window.location &&
+        this.window.location.pathname
+          .toLowerCase()
+          .indexOf(ApplicationRoutes.social) >= 0)
     ) {
       this.platform.social = true
     } else {
@@ -219,18 +224,26 @@ export class PlatformInfoService {
       ...this.platform,
       hasOauthParameters: this.hasOauthParameters(),
       social:
+        //TODO SSR
+        this.window.location &&
         this.window.location.pathname.toLowerCase().indexOf('social-linking') >=
-        0,
+          0,
       institutional:
-        this.window.location.pathname
-          .toLowerCase()
-          .indexOf('institutional-linking') >= 0 ||
-        this.window.location.pathname
-          .toLowerCase()
-          .indexOf('institutional-signin') >= 0,
+        //TODO SSR
+        (this.window.location &&
+          this.window.location.pathname
+            .toLowerCase()
+            .indexOf('institutional-linking') >= 0) ||
+        //TODO SSR
+        (this.window.location &&
+          this.window.location.pathname
+            .toLowerCase()
+            .indexOf('institutional-signin') >= 0),
       reactivation:
+        //TODO SSR
+        this.window.location &&
         this.window.location.pathname.toLowerCase().indexOf('reactivation') >=
-        0,
+          0,
       reactivationCode: this.getReactivationCode(),
     }
     this.platformSubject.next(this.platform)
@@ -258,9 +271,12 @@ export class PlatformInfoService {
 
   public getQueryParams(): Params {
     const params: Params = {}
-    new URLSearchParams(this.window.location.search).forEach(
-      (value, key) => (params[key] = value)
-    )
+    // TODO SSR SUPPORT
+    if (this.window && this.window.location) {
+      new URLSearchParams(this.window.location.search).forEach(
+        (value, key) => (params[key] = value)
+      )
+    }
     return params
   }
 
@@ -269,7 +285,10 @@ export class PlatformInfoService {
   }
 
   getReactivationCode(): string {
-    const segments = window.location.href.split('/')
-    return segments[segments.length - 1]
+    // TODO SSR SUPPORT
+    if (this.window.location) {
+      const segments = this.window.location.href.split('/')
+      return segments[segments.length - 1]
+    }
   }
 }

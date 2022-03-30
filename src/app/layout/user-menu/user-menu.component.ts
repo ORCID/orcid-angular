@@ -67,11 +67,17 @@ export class UserMenuComponent implements OnInit {
     } else if (url === 'trusted-parties') {
       this._router.navigate([ApplicationRoutes.trustedPartiesQA])
     } else {
-      this.window.location.href = environment.BASE_URL + url
+      //TODO SSR
+      if (this.window?.location) {
+        this.window.location.href = environment.BASE_URL + url
+      }
     }
   }
 
   navigateTo(val) {
-    this.window.location.href = val
+    //TODO SSR
+    if (this.window?.location) {
+      this.window.location.href = val
+    }
   }
 }

@@ -18,9 +18,12 @@ export class EnvironmentBannerComponent implements OnInit {
     @Inject(WINDOW) private window: Window,
     private _cs: CookieService
   ) {
-    this.hostUrl = window.location.host
-    if (!this._cs.get('testWarningCookie') || !this.canDismiss) {
-      this.display = 'auto'
+    //TODO SSR
+    if (this.window.location) {
+      this.hostUrl = this.window.location.host
+      if (!this._cs.get('testWarningCookie') || !this.canDismiss) {
+        this.display = 'auto'
+      }
     }
   }
 

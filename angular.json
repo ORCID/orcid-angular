@@ -143,7 +143,6 @@
               "extractLicenses": false,
               "vendorChunk": true,
               "buildOptimizer": false,
-              "outputPath": "dist"
             },
             "local-tomcat": {
               "budgets": [
@@ -208,6 +207,8 @@
                   "maximumWarning": "6kb"
                 }
               ],
+
+              
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -392,43 +393,11 @@
               "sourceMap": true,
               "extractLicenses": false
             },
-            "local-tomcat": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.tomcat.ts"
-                }
-              ]
-            },
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
-                }
-              ]
-            },
             "qa": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.qa.ts"
-                }
-              ]
-            },
-            "sandbox": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.sandbox.ts"
-                }
-              ]
-            },
-            "int": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.int.ts"
                 }
               ]
             },
@@ -456,23 +425,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
-            "development": {
-              "browserTarget": "ng-orcid:build:development",
-              "serverTarget": "ng-orcid:server:development"
+            "local": {
+              "browserTarget": "ng-orcid:build:local",
+              "serverTarget": "ng-orcid:server:local"
             },
-            "production": {
-              "browserTarget": "ng-orcid:build:production",
-              "serverTarget": "ng-orcid:server:production"
+            "qa": {
+              "browserTarget": "ng-orcid:build:qa",
+              "serverTarget": "ng-orcid:server:qa"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "local"
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "routes": [
-              "/"
-            ]
+            "routes": ["/"]
           },
           "configurations": {
             "production": {

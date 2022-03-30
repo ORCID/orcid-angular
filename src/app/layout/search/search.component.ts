@@ -87,8 +87,11 @@ export class SearchComponent implements OnInit {
     ) {
       if (!this.togglzOrcidAngularSearch) {
         // navigate directly the window location
-        this.window.location.href =
-          '/orcid-search/quick-search/?searchQuery=' + whatToSearch
+        //TODO SSR
+        if (this.window?.location) {
+          this.window.location.href =
+            '/orcid-search/quick-search/?searchQuery=' + whatToSearch
+        }
       } else {
         // navigate using the angular router to never leave the Angular app
         this.router.navigate(['/orcid-search/search'], {
@@ -98,12 +101,19 @@ export class SearchComponent implements OnInit {
         })
       }
     } else {
-      this.window.location.href = '/search/node/' + whatToSearch
+      //TODO SSR
+      if (this.window?.location) {
+        this.window.location.href = '/search/node/' + whatToSearch
+      }
     }
   }
 
   goTo(url) {
-    this.window.location.href = url
+    //TODO SSR
+
+    if (this.window?.location) {
+      this.window.location.href = url
+    }
   }
 
   firstLetterUppercase(string) {

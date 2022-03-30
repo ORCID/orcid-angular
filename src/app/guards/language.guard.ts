@@ -51,12 +51,18 @@ export class LanguageGuard implements CanActivateChild {
         } else {
           // the browser needs to be reloaded to set the right cookie.
           return this._languageService.changeLanguage(langContext.param).pipe(
-            switchMap(() =>
+            switchMap(() => {
               // Redirect the user to the destiny LOCAL (without using the router)
-              of((this.window.location.href = state?.url || '/')).pipe(
-                switchMap(() => NEVER)
-              )
-            )
+              //TODO SSR
+              if (this.window.location) {
+                of((this.window.location.href = state?.url || '/')).pipe(
+                  switchMap(() => NEVER)
+                )
+              } else {
+                //TODO SSR
+                return of(undefined)
+              }
+            })
           )
         }
       }),
@@ -73,9 +79,11 @@ export class LanguageGuard implements CanActivateChild {
             // the browser needs to be reloaded to set the right cookie.
             this._cookies.set(GUARD_COOKIE_CHECK, langContext.cookie)
             // Redirect the user to the destiny LOCAL (without using the router)
-            return of((this.window.location.href = state?.url || '/')).pipe(
-              switchMap(() => NEVER)
-            )
+            //TODO SSR
+            if (this.window.location)
+              return of((this.window.location.href = state?.url || '/')).pipe(
+                switchMap(() => NEVER)
+              )
           } else {
             // Weird event where `GUARD_COOKIE_CHECK` was already set, the app was already reloaded
             // But the current app language do not match the cookie language

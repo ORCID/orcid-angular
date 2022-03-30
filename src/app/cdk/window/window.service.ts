@@ -21,11 +21,6 @@ export abstract class WindowRef {
 @Injectable()
 export class BrowserWindowRef extends WindowRef {
   constructor() {
-    if (!(window as any).outOfRouterNavigation) {
-      ;(window as any).outOfRouterNavigation = (value) => {
-        window.location.href = value
-      }
-    }
     super()
   }
 
@@ -34,12 +29,20 @@ export class BrowserWindowRef extends WindowRef {
   }
 }
 
+function declareOutOfRouterNavigation() {
+  if (!(window as any).outOfRouterNavigation) {
+    ;(window as any).outOfRouterNavigation = (value) => {
+      window.location.href = value
+    }
+  }
+}
 /* Create an factory function that returns the native window object. */
 export function windowFactory(
   browserWindowRef: BrowserWindowRef,
   platformId: Object
 ): Window | Object {
   if (isPlatformBrowser(platformId)) {
+    declareOutOfRouterNavigation()
     return browserWindowRef.nativeWindow
   }
   return new Object()

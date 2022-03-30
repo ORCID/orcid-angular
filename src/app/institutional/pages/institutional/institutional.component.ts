@@ -207,6 +207,9 @@ export class InstitutionalComponent implements OnInit {
   }
 
   navigateTo(val) {
-    this.window.location.href = val
+    //TODO SSR
+   if (this.window?.location) {
+this.window.location.href = val
+    }
   }
 }
