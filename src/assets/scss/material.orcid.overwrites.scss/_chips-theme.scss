@@ -2,7 +2,6 @@
 @use '@angular/material' as mat;
 // https://github.com/angular/components/blob/8.1.4/src/material/chips/_chips-theme.scss
 
-
 @mixin _element-color($foreground, $background) {
   background-color: $background;
   color: $foreground;
@@ -13,14 +12,16 @@
   }
 }
 
-
 @mixin mat-chips-theme-overwrites($theme) {
   $primary: map-get($theme, primary);
   $foreground: map-get($theme, foreground);
   $divider-color: mat.get-color-from-palette($foreground, divider);
 
   $background: map-get($theme, background);
-  $unselected-background: mat.get-color-from-palette($background, unselected-chip);
+  $unselected-background: mat.get-color-from-palette(
+    $background,
+    unselected-chip
+  );
   $unselected-foreground: mat.get-color-from-palette($foreground, text);
 
   .mat-chip.mat-standard-chip.orcid-outline-chip {
@@ -54,10 +55,7 @@
   .mat-chip.mat-standard-chip.mat-chip-selected.orcid-outline-chip {
     // Overwrites active states to follow material definitions
     // https://material.io/design/interaction/states.html#anatomy
-    @include _element-color(
-      $unselected-foreground,
-      $unselected-background
-    );
+    @include _element-color($unselected-foreground, $unselected-background);
     &.mat-primary {
       &::after {
         background: mat.get-color-from-palette($primary, 700);

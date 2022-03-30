@@ -3,3 +3,6 @@ package-lock.json
 dist
 .angulardoc.json
 .vscode/*
+.angular
+main.server.ts
+node_modules

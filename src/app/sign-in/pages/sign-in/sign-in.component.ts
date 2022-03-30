@@ -93,7 +93,7 @@ export class SignInComponent implements OnInit {
   navigateTo(val) {
     //TODO SSR
     if (this.window?.location) {
-this.window.location.href = val
+      this.window.location.href = val
     }
   }
 }

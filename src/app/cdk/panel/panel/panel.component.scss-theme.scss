@@ -11,13 +11,22 @@
   :host,
   .side-bar {
     border-color: mat.get-color-from-palette($accent, 200) !important;
-    background-color: mat.get-color-from-palette($background, brand-primary-lightest) !important;
+    background-color: mat.get-color-from-palette(
+      $background,
+      brand-primary-lightest
+    ) !important;
   }
 
   :host,
   .top-bar-or-main {
-    border-color: mat.get-color-from-palette($background, ui-background) !important;
-    background-color: mat.get-color-from-palette($background, ui-background-light) !important;
+    border-color: mat.get-color-from-palette(
+      $background,
+      ui-background
+    ) !important;
+    background-color: mat.get-color-from-palette(
+      $background,
+      ui-background-light
+    ) !important;
   }
 
   .body {

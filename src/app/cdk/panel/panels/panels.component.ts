@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { first } from 'rxjs/operators'
 import { ComponentType } from '@angular/cdk/portal'
 import { MatDialog } from '@angular/material/dialog'

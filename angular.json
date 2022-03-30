@@ -142,7 +142,7 @@
               "namedChunks": true,
               "extractLicenses": false,
               "vendorChunk": true,
-              "buildOptimizer": false,
+              "buildOptimizer": false
             },
             "local-tomcat": {
               "budgets": [
@@ -208,7 +208,6 @@
                 }
               ],
 
-              
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

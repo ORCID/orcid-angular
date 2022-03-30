@@ -25,8 +25,8 @@ export class PrintErrorsComponent implements OnInit {
 
   navigateTo(val) {
     //TODO SSR
-   if (this.window?.location) {
-this.window.location.href = val
+    if (this.window?.location) {
+      this.window.location.href = val
     }
   }
 }

@@ -196,9 +196,9 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         .subscribe((platform) => {
           if (platform.queryParameters.providerId) {
             //TODO SSR
-   if (this.window?.location) {
-this.window.location.href = response.url
-    }
+            if (this.window?.location) {
+              this.window.location.href = response.url
+            }
           } else {
             this._router
               .navigate(['/oauth/authorize'], {
@@ -224,10 +224,9 @@ this.window.location.href = response.url
           })
       } else {
         //TODO SSR
-   if (this.window?.location) {
-this.window.location.href = response.url
-
-    }
+        if (this.window?.location) {
+          this.window.location.href = response.url
+        }
       }
     }
   }

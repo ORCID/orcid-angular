@@ -110,8 +110,8 @@ export class TwoFactorAuthenticationFormComponent implements AfterViewInit {
 
   navigateTo(val) {
     //TODO SSR
-   if (this.window?.location) {
-this.window.location.href = val
+    if (this.window?.location) {
+      this.window.location.href = val
     }
   }
 }

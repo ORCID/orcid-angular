@@ -33,16 +33,17 @@ export class NewsComponent implements OnInit {
 
   navigate(url) {
     //TODO SSR
-   //TODO SSR
-   if (this.window?.location) {
-        this.window.location.href = url
-      }[0]
+    //TODO SSR
+    if (this.window?.location) {
+      this.window.location.href = url
+    }
+    ;[0]
   }
 
   moreNews() {
-   //TODO SSR
-   if (this.window?.location) {
-    this.window.location.href = environment.INFO_SITE
-  }
+    //TODO SSR
+    if (this.window?.location) {
+      this.window.location.href = environment.INFO_SITE
+    }
   }
 }
