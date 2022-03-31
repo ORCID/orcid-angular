@@ -6219,6 +6219,11 @@ he@1.2.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
+helphero@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/helphero/-/helphero-3.6.0.tgz#26f7efdb16a5e772b9104b7f84f19d30057d9ea5"
+  integrity sha512-AjWE1mi0IkoWLjE1OhBzfZNUayoah9bT5Ch8Kpid1SuIJXHN7sNJ8w56Gc+cVX4hwF9dL8S7fubValQwZ3j8xA==
+
 homedir-polyfill@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/homedir-polyfill/-/homedir-polyfill-1.0.3.tgz#743298cef4e5af3e194161fbadcc2151d3a058e8"

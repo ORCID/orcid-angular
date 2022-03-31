@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { ORCID_REGEXP } from 'src/app/constants'
-import { takeUntil, tap } from 'rxjs/operators'
+import { first, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { RecordService } from '../../../core/record/record.service'
 import { Subject } from 'rxjs'
 import { MainPanelsState, UserRecord } from '../../../types/record.local'
@@ -13,6 +13,8 @@ import { UserInfo } from '../../../types'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
 import { AppcueService } from '../../../core/appcue/appcue.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
+import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 
 @Component({
   selector: 'app-my-orcid',
@@ -59,9 +61,11 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _openGraph: OpenGraphService,
     private _robotsMeta: RobotsMetaTagsService,
     private _appcueService: AppcueService,
+    private _helpHeroService: HelpHeroService,
     private _router: Router,
     private _userSession: UserService,
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private _togglz: TogglzService
   ) {}
 
   private checkIfThisIsAPublicOrcid() {
@@ -126,7 +130,21 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
             this._robotsMeta.disallowRobots()
           }
           this._openGraph.addOpenGraphData(userRecord, { force: true })
-          this._appcueService.initializeAppCues(this.userInfo, this.userRecord)
+        }),
+        switchMap(() => this._togglz.getTogglz().pipe(first())),
+        tap((togglz) => {
+          if (togglz['ORCID_ANGULAR_HELP_HERO']) {
+            this._helpHeroService.initializeHelpHero(
+              this.userInfo,
+              this.userRecord
+            )
+          }
+          if (togglz['ORCID_ANGULAR_APP_CUES']) {
+            this._appcueService.initializeAppCues(
+              this.userInfo,
+              this.userRecord
+            )
+          }
         })
       )
       .subscribe()
