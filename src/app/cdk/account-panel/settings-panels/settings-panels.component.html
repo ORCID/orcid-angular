@@ -16,15 +16,17 @@
             class="orc-font-body clickable row title-container"
             (click)="collapse()"
           >
-            <h3>{{ title }}</h3>
-            <ng-container *ngIf="type?.value === 'two-factor'">
-              <b *ngIf="type?.enabled" class="on">
-                (<ng-container i18n="@@account.on">ON</ng-container>)
-              </b>
-              <b *ngIf="!type?.enabled" class="off">
-                (<ng-container i18n="@@account.off">OFF</ng-container>)
-              </b>
-            </ng-container>
+            <h3>
+              {{ title }}
+              <ng-container *ngIf="type?.value === 'two-factor'">
+                <span *ngIf="type?.enabled" class="on">
+                  (<ng-container i18n="@@account.on">ON</ng-container>)
+                </span>
+                <span *ngIf="!type?.enabled" class="off">
+                  (<ng-container i18n="@@account.off">OFF</ng-container>)
+                </span>
+              </ng-container>
+            </h3>
             <a
               class="underline"
               *ngIf="url"
