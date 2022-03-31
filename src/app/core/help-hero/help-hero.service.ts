@@ -1,15 +1,16 @@
 import { Inject, Injectable } from '@angular/core'
-
-import { WINDOW } from '../../cdk/window'
-import { AssertionVisibilityString, UserInfo } from '../../types'
-import { UserRecord } from '../../types/record.local'
+import initHelpHero, { HelpHero } from 'helphero'
+import { WINDOW } from 'src/app/cdk/window'
+import { AssertionVisibilityString } from 'src/app/types'
+import { UserRecord } from 'src/app/types/record.local'
+import { UserInfo } from 'src/app/types/userInfo.endpoint'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
 })
-export class AppcueService {
-  constructor(@Inject(WINDOW) private window: Window) {}
-  appcueInitialized = false
+export class HelpHeroService {
+  hlp: HelpHero
 
   private getNumberOfValidatedEmails(
     emails: AssertionVisibilityString[]
@@ -24,19 +25,15 @@ export class AppcueService {
     }
   }
 
-  page() {
-    if (this.window['Appcues'] && this.appcueInitialized) {
-      this.window['Appcues']?.page()
-    }
-  }
-
-  initializeAppCues(userInfo: UserInfo, userRecord: UserRecord) {
+  constructor(@Inject(WINDOW) private window: Window) {}
+  initializeHelpHero(userInfo: UserInfo, userRecord: UserRecord) {
     if (
       userInfo?.EFFECTIVE_USER_ORCID &&
       userRecord?.emails?.emails &&
-      !this.appcueInitialized
+      !this.hlp
     ) {
-      this.window['Appcues']?.identify(userInfo?.EFFECTIVE_USER_ORCID, {
+      this.hlp = initHelpHero(environment.HELP_HERO_ID)
+      this.hlp.identify(userInfo.EFFECTIVE_USER_ORCID, {
         numberOfValidatedEmails: this.getNumberOfValidatedEmails(
           userRecord?.emails?.emails
         ).numberOfValidatedEmails,
@@ -44,7 +41,6 @@ export class AppcueService {
           userRecord?.emails?.emails
         ).numberOfUnvalidatedEmails,
       })
-      this.appcueInitialized = true
     }
   }
 }
