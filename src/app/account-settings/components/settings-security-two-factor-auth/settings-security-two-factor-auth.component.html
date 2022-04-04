@@ -1,27 +1,21 @@
 <app-settings-panels-data>
-  <div class="intro">
-    <p i18n="@@account.addExtraSecurity">
-      Add extra security to your ORCID account by enabling two-factor
-      authentication (2FA).
-    </p>
-    <p i18n="@@account.eachTimeYouSignIn">
-      Each time you sign in to ORCID you’ll be prompted to enter a six-digit
-      code we send to your preferred 2FA authentication application.
-    </p>
-  </div>
-  <div>
-    <p>
-      <b class="orc-font-body" i18n="@@account.twoFactorIsCurrently">
-        Two-factor authentication is currently:
-      </b>
-    </p>
-  </div>
-  <div>
-    <p class="orc-font-heading-small">
-      <b *ngIf="twoFactorState" class="on" i18n="@@account.on">ON</b>
-      <b *ngIf="!twoFactorState" class="off" i18n="@@account.off">OFF</b>
-    </p>
-  </div>
+  <p i18n="@@account.addExtraSecurity">
+    Add extra security to your ORCID account by enabling two-factor
+    authentication (2FA).
+  </p>
+  <p i18n="@@account.eachTimeYouSignIn">
+    Each time you sign in to ORCID you’ll be prompted to enter a six-digit code
+    we send to your preferred 2FA authentication application.
+  </p>
+  <p>
+    <b class="orc-font-body" i18n="@@account.twoFactorIsCurrently">
+      Two-factor authentication is currently:
+    </b>
+  </p>
+  <p class="orc-font-heading-small">
+    <b *ngIf="twoFactorState" class="on" i18n="@@account.on">ON</b>
+    <b *ngIf="!twoFactorState" class="off" i18n="@@account.off">OFF</b>
+  </p>
   <div class="button-container">
     <button
       mat-raised-button
