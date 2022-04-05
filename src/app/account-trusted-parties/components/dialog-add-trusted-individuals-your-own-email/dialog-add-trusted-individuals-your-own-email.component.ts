@@ -9,28 +9,15 @@ import { environment } from 'src/environments/environment'
   templateUrl: './dialog-add-trusted-individuals-your-own-email.component.html',
   styleUrls: ['./dialog-add-trusted-individuals-your-own-email.component.scss'],
 })
-export class DialogAddTrustedIndividualsYourOwnEmailComponent implements OnInit {
-  isMobile: boolean
-  baseUrl = environment.BASE_URL
-  addByEmail: string
+export class DialogAddTrustedIndividualsYourOwnEmailComponent
+  implements OnInit {
   constructor(
     private matRef: MatDialogRef<DialogAddTrustedIndividualsYourOwnEmailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ExpandedSearchResultsContent | string,
-    private _platform: PlatformInfoService
+    @Inject(MAT_DIALOG_DATA) public data: ExpandedSearchResultsContent | string
   ) {}
 
-  ngOnInit(): void {
-    this._platform.get().subscribe((platform) => {
-      this.isMobile = platform.columns4 || platform.columns8
-    })
-    if (typeof this.data === 'string') {
-      this.addByEmail = this.data
-    }
-  }
+  ngOnInit(): void {}
   cancel() {
     this.matRef.close()
-  }
-  ok() {
-    this.matRef.close(this.data)
   }
 }
