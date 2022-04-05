@@ -133,3 +133,18 @@ mat-radio-group {
     margin-top: 0.2em;
   }
 }
+
+.mat-option {
+  min-height: 64px;
+  line-height: 32px;
+  height: auto;
+  margin-bottom: 8px;
+  white-space: normal;
+  line-height: 1.4;
+
+  .title {
+    display: flex;
+    width: 100%;
+    font-weight: 500;
+  }
+}
