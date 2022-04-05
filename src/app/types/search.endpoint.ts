@@ -14,6 +14,6 @@ export interface SearchResults {
 }
 
 export interface SearchResultsByEmail {
-  found: boolean;
-  isSelf: boolean;
+  found: boolean
+  isSelf: boolean
 }
