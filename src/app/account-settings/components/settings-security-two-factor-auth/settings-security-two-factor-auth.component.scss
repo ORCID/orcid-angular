@@ -1,8 +1,7 @@
-.intro {
-  p:first-child {
-    margin-bottom: 0;
-  }
-  p:last-child {
-    margin-top: 0;
-  }
+p:nth-child(1) {
+  margin-bottom: 0;
+}
+
+p:nth-child(2) {
+  margin-top: 0;
 }

@@ -12,9 +12,10 @@ import { environment } from 'src/environments/environment'
 export class DialogAddTrustedIndividualsComponent implements OnInit {
   isMobile: boolean
   baseUrl = environment.BASE_URL
+  addByEmail: string
   constructor(
     private matRef: MatDialogRef<DialogAddTrustedIndividualsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ExpandedSearchResultsContent,
+    @Inject(MAT_DIALOG_DATA) public data: ExpandedSearchResultsContent | string,
     private _platform: PlatformInfoService
   ) {}
 
@@ -22,6 +23,9 @@ export class DialogAddTrustedIndividualsComponent implements OnInit {
     this._platform.get().subscribe((platform) => {
       this.isMobile = platform.columns4 || platform.columns8
     })
+    if (typeof this.data === 'string') {
+      this.addByEmail = this.data
+    }
   }
   cancel() {
     this.matRef.close()

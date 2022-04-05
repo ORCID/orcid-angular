@@ -110,8 +110,11 @@
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="autoCompleteDisplayOrganization"
           id="cy-org-dd">
           <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              <div class="row orc-font-body-small">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              <div class="row orc-font-body-small title">
                 {{ option.value }}
               </div>
               <div class="row orc-font-small-print">
