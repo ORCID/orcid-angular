@@ -25,116 +25,30 @@ export class SearchService {
   ) {}
 
   search(querryParam: SearchParameters): Observable<SearchResults> {
-    return of({
-      'expanded-result': [
+    return this._http
+      .get<SearchResults>(
+        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
+          querryParam
+        )}`,
         {
-          'orcid-id': '0000-0002-8412-7337',
-          'given-names': 'Test1',
-          'family-names': 'Test2',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-0548-8845',
-          'given-names': 'Laura',
-          'family-names': 'test2',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-5444-389X',
-          'given-names': 'Test2',
-          'family-names': 'Testovich2',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-6374-4216',
-          'given-names': 'Address',
-          'family-names': 'Test2',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0002-2579-5562',
-          'given-names': 'test1',
-          'family-names': 'test2',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0001-9881-347X',
-          'given-names': 'ma_test',
-          'family-names': '24062016',
-          'credit-name': 'Published Name',
-          'other-name': ['aka'],
-          email: [],
-          'institution-name': ['Crossref', 'ORCID'],
-        },
-        {
-          'orcid-id': '0000-0001-6405-0646',
-          'given-names': null,
-          'family-names': null,
-          'credit-name': 'Test2',
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-0816-9356',
-          'given-names': 'Dec8a@mailinator.com',
-          'family-names': null,
-          'credit-name': null,
-          'other-name': ['test', 'test2'],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-1240-3627',
-          'given-names': 'Test',
-          'family-names': 'Group',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-        {
-          'orcid-id': '0000-0003-1767-4573',
-          'given-names': 'ocher102',
-          'family-names': 'ocher102',
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': [],
-        },
-      ],
-      'num-found': 10,
-    }).pipe(
-      delay(1000),
-      catchError((error) => this._errorHandler.handleError(error)),
-      map((x) => {
-        x['expanded-result'] = x['expanded-result']?.map((element) => {
-          if (!element['given-names'] && !element['family-names']) {
-            element[
-              'given-names'
-            ] = $localize`:@@account.nameIsPri:Name is private`
-          }
+          headers: { Accept: 'application/json' },
+        }
+      )
+      .pipe(
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((x) => {
+          x['expanded-result'] = x['expanded-result']?.map((element) => {
+            if (!element['given-names'] && !element['family-names']) {
+              element[
+                'given-names'
+              ] = $localize`:@@account.nameIsPri:Name is private`
+            }
 
-          return element
+            return element
+          })
+          return x
         })
-        return x
-      })
-    )
+      )
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {
