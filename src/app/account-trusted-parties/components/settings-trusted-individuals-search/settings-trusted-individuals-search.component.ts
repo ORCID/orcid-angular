@@ -15,6 +15,7 @@ import { SearchService } from 'src/app/core/search/search.service'
 import { ExpandedSearchResultsContent, SearchResults } from 'src/app/types'
 import { UserSession } from 'src/app/types/session.local'
 import { environment } from 'src/environments/environment'
+import { DialogAddTrustedIndividualsYourOwnEmailComponent } from '../dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component'
 import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-individuals/dialog-add-trusted-individuals.component'
 
 @Component({
@@ -56,73 +57,72 @@ export class SettingsTrustedIndividualsSearchComponent
   search(value: string) {
     this.loading = true
     value = value.trim().toLowerCase()
-    this.$trustedIndividuals = this._search
-      .search({
-        searchQuery: value,
-        pageIndex: this.pageIndex || 0,
-        pageSize: this.pageSize || 10,
-      })
-      .pipe(
-        map((trustedIndividuals) => {
-          if (trustedIndividuals['expanded-result']) {
-            trustedIndividuals['expanded-result'] = trustedIndividuals[
-              'expanded-result'
-            ].filter(
-              (x) =>
-                x['orcid-id'] !== this.userSession.userInfo.EFFECTIVE_USER_ORCID
-            )
-          }
-          return trustedIndividuals
-        }),
-        map((trustedIndividuals) => {
-          const orcidIdMatch = this.extractOrcidId(value)
-          const emailMatch = EMAIL_REGEXP_GENERIC.test(value)
-          console.log('EMAIL MATCH', emailMatch)
+    const orcidIdMatch = this.extractOrcidId(value)
+    const emailMatch = EMAIL_REGEXP_GENERIC.exec(value)?.[0]
 
-          if (emailMatch && trustedIndividuals['expanded-result']) {
-            console.log(emailMatch)
-            console.log(trustedIndividuals['expanded-result'])
-
-            const matchingResult = trustedIndividuals['expanded-result'].find(
-              (x) =>
-                !!x.email.find(
-                  (email) => !!(email.trim().toLowerCase() === value)
-                )
-            )
-            if (matchingResult) {
-              this.add(matchingResult)
-              return null
-            } else {
-              trustedIndividuals['expanded-result'] = []
-            }
-          } else if (orcidIdMatch && trustedIndividuals['expanded-result']) {
-            const matchingOrcid = trustedIndividuals['expanded-result'].find(
-              (ti) => ti['orcid-id'].trim().toLowerCase() === orcidIdMatch
-            )
-            if (
-              matchingOrcid &&
-              (orcidIdMatch === value ||
-                value.indexOf(environment.BASE_URL + orcidIdMatch) >= 1)
-            ) {
-              this.add(matchingOrcid)
-              return null
-            } else {
-              trustedIndividuals['expanded-result'] = []
-            }
+    if (emailMatch) {
+      this.$trustedIndividuals = this.account.searchByEmail(emailMatch).pipe(
+        map((response) => {
+          if (response.isSelf) {
+            this.announceThisIsYourOwnEmail()
+          } else if (response.found) {
+            this.addByEmail(emailMatch)
+            return null
+          } else {
+            return { 'expanded-result': [], 'num-found': 0 }
           }
-          return trustedIndividuals
         }),
         tap(() => {
           this.loading = false
         })
       )
+    } else {
+      this.$trustedIndividuals = this._search
+        .search({
+          searchQuery: value,
+          pageIndex: this.pageIndex || 0,
+          pageSize: this.pageSize || 10,
+        })
+        .pipe(
+          map((trustedIndividuals) => {
+            if (trustedIndividuals['expanded-result']) {
+              trustedIndividuals['expanded-result'] = trustedIndividuals[
+                'expanded-result'
+              ].filter(
+                (x) =>
+                  x['orcid-id'] !==
+                  this.userSession.userInfo.EFFECTIVE_USER_ORCID
+              )
+            }
+            return trustedIndividuals
+          }),
+          map((trustedIndividuals) => {
+            if (orcidIdMatch && trustedIndividuals['expanded-result']) {
+              const matchingOrcid = trustedIndividuals['expanded-result'].find(
+                (ti) => ti['orcid-id'].trim().toLowerCase() === orcidIdMatch
+              )
+              if (
+                matchingOrcid &&
+                (orcidIdMatch === value ||
+                  value.indexOf(environment.BASE_URL + orcidIdMatch) >= 1)
+              ) {
+                this.add(matchingOrcid)
+                return null
+              } else {
+                trustedIndividuals['expanded-result'] = []
+              }
+            }
+            return trustedIndividuals
+          }),
+          tap(() => {
+            this.loading = false
+          })
+        )
+    }
   }
 
   private extractOrcidId(input: string): string {
-    console.log(input)
-    const regexResult = ORCID_REGEXP.exec(input)
-    console.log(regexResult)
-
+    const regexResult = ORCID_REGEXP_CASE_INSENSITIVE.exec(input)
     if (regexResult) {
       return regexResult[0]
     }
@@ -145,6 +145,30 @@ export class SettingsTrustedIndividualsSearchComponent
         })
       )
       .subscribe()
+  }
+
+  addByEmail(value: string) {
+    this.dialog
+      .open(DialogAddTrustedIndividualsComponent, {
+        data: value,
+        width: '634px',
+      })
+      .afterClosed()
+      .pipe(
+        switchMap((value) => {
+          if (value) {
+            return this.account.addByEmail(value)
+          }
+          return of(undefined)
+        })
+      )
+      .subscribe()
+  }
+
+  announceThisIsYourOwnEmail() {
+    this.dialog.open(DialogAddTrustedIndividualsYourOwnEmailComponent, {
+      width: '634px',
+    })
   }
 
   changePage(event: PageEvent) {

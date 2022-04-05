@@ -12,3 +12,8 @@ export interface SearchResults {
   'expanded-result': ExpandedSearchResultsContent[] | null
   'num-found': number
 }
+
+export interface SearchResultsByEmail {
+  found: boolean
+  isSelf: boolean
+}
