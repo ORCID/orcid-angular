@@ -19,7 +19,7 @@
   </div>
   <hr />
   <!-- Work Types -->
-  <div id="cy-work-types-div"> 
+  <div id="cy-work-types-div">
     <label
       class="row mat-caption"
       [ngClass]="{
@@ -106,10 +106,16 @@
       (click)="showTranslationTitle = !showTranslationTitle"
       id="cy-translated-title-toggle-link"
     >
-      <mat-icon *ngIf="!showTranslationTitle" class="large-material-icon" id="cy-add-translated-title-icon"
+      <mat-icon
+        *ngIf="!showTranslationTitle"
+        class="large-material-icon"
+        id="cy-add-translated-title-icon"
         >add_circle_outline</mat-icon
       >
-      <mat-icon *ngIf="showTranslationTitle" class="large-material-icon" id="cy-hide-translated-title-icon"
+      <mat-icon
+        *ngIf="showTranslationTitle"
+        class="large-material-icon"
+        id="cy-hide-translated-title-icon"
         >remove_circle_outline</mat-icon
       >
       <span class="mat-body-1">
@@ -272,7 +278,7 @@
       appearance="outline"
       class="mat-form-field-min input-container"
     >
-      <input matInput formControlName="journalTitle"  id="cy-journal-title"/>
+      <input matInput formControlName="journalTitle" id="cy-journal-title" />
       <mat-error
         *ngIf="workForm.get('journalTitle').errors?.maxlength"
         i18n="@@works.titleMaxLength"
