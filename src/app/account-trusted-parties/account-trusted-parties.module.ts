@@ -34,6 +34,7 @@ import { SettingsTrustedOrganizationsComponent } from './components/settings-tru
 import { SettingsUsersThatThrustYouComponent } from './components/settings-users-that-thrust-you/settings-users-that-thrust-you.component'
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component'
+import { DialogAddTrustedIndividualsYourOwnEmailComponent } from './components/dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/
     SettingsTrustedIndividualsSearchComponent,
     DialogAddTrustedIndividualsComponent,
     SettingsUsersThatThrustYouComponent,
+    DialogAddTrustedIndividualsYourOwnEmailComponent,
   ],
   imports: [
     CommonModule,

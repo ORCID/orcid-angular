@@ -5,16 +5,16 @@ import { ExpandedSearchResultsContent } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 
 @Component({
-  selector: 'app-dialog-add-trusted-individuals',
-  templateUrl: './dialog-add-trusted-individuals.component.html',
-  styleUrls: ['./dialog-add-trusted-individuals.component.scss'],
+  selector: 'app-dialog-add-trusted-individuals-your-own-email',
+  templateUrl: './dialog-add-trusted-individuals-your-own-email.component.html',
+  styleUrls: ['./dialog-add-trusted-individuals-your-own-email.component.scss'],
 })
-export class DialogAddTrustedIndividualsComponent implements OnInit {
+export class DialogAddTrustedIndividualsYourOwnEmailComponent implements OnInit {
   isMobile: boolean
   baseUrl = environment.BASE_URL
   addByEmail: string
   constructor(
-    private matRef: MatDialogRef<DialogAddTrustedIndividualsComponent>,
+    private matRef: MatDialogRef<DialogAddTrustedIndividualsYourOwnEmailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ExpandedSearchResultsContent | string,
     private _platform: PlatformInfoService
   ) {}

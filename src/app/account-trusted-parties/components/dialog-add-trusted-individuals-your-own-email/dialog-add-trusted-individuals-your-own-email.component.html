@@ -1,0 +1,21 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header i18n="@@account.addAccessTrustedIndividuals"
+    >Add access - Trusted individual
+  </app-modal-header>
+
+  <p i18n="@@account.youCantAddYourSelf">
+    You can't add yourself as a trusted individual
+  </p>
+
+  <app-modal-footer>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="cancel()"
+      id="dialog-cancel"
+      i18n="@@shared.ariaLabelClose"
+    >
+      Close
+    </button>
+  </app-modal-footer></app-modal
+>

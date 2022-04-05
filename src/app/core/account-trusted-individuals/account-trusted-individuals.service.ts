@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core'
 import { Observable, of, Subject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
-import { ExpandedSearchResultsContent } from 'src/app/types'
+import {
+  ExpandedSearchResultsContent,
+  SearchResultsByEmail,
+} from 'src/app/types'
 import {
   AccountTrustedIndividual,
   PersonDetails,
@@ -75,6 +78,32 @@ export class AccountTrustedIndividualsService {
       .post<void>(
         environment.API_WEB + `account/addDelegate.json`,
         { delegateToManage: value['orcid-id'] },
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.addTrustedIndividualsSuccess.next())
+      )
+  }
+  searchByEmail(email: string): Observable<SearchResultsByEmail> {
+    return this._http
+      .get<SearchResultsByEmail>(
+        environment.API_WEB +
+          `manage/search-for-delegate-by-email/${encodeURIComponent(email)}/`,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.addTrustedIndividualsSuccess.next())
+      )
+  }
+  addByEmail(delegateEmail: string) {
+    return this._http
+      .post<void>(
+        environment.API_WEB + `account/addDelegateByEmail.json/`,
+        { delegateEmail },
         { headers: this.headers }
       )
       .pipe(
