@@ -180,158 +180,20 @@ export class RecordAffiliationService {
   }
 
   getOrganization(org: string): Observable<Organization[]> {
-    return of([
-      {
-        sourceId: '525183',
-        country: 'DE',
-        orgType: 'corporate/serv',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.DE',
-        disambiguatedAffiliationIdentifier: '2053426',
-        city: 'Hamburg',
-        sourceType: 'RINGGOLD',
-        region: 'Hamburg',
-        value: 'wordinc GmbH',
-        url: null,
-        affiliationKey: 'wordinc GmbH Hamburg Hamburg DE',
-      },
-      {
-        sourceId: '483612',
-        country: 'US',
-        orgType: 'academic/medsch',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.US',
-        disambiguatedAffiliationIdentifier: '563779',
-        city: 'San Antonio',
-        sourceType: 'RINGGOLD',
-        region: 'TX',
-        value:
-          'University of the Incarnate Word School of Osteopathic Medicine',
-        url: null,
-        affiliationKey:
-          'University of the Incarnate Word School of Osteopathic Medicine San Antonio TX US',
-      },
-      {
-        sourceId: '494073',
-        country: 'DE',
-        orgType: 'consortium/library',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.DE',
-        disambiguatedAffiliationIdentifier: '573879',
-        city: 'Berlin',
-        sourceType: 'RINGGOLD',
-        region: 'Berlin',
-        value:
-          'Fachinformationsverbund Internationale Beziehungen und Länderkunde World Affairs Online',
-        url: null,
-        affiliationKey:
-          'Fachinformationsverbund Internationale Beziehungen und Länderkunde World Affairs Online Berlin Berlin DE',
-      },
-      {
-        sourceId: '489390',
-        country: 'PH',
-        orgType: 'academic',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.PH',
-        disambiguatedAffiliationIdentifier: '569416',
-        city: 'Calapan City',
-        sourceType: 'RINGGOLD',
-        region: 'Oriental Mindoro',
-        value: 'Divine Word College of Calapan',
-        url: null,
-        affiliationKey:
-          'Divine Word College of Calapan Calapan City Oriental Mindoro PH',
-      },
-      {
-        sourceId: '116607',
-        country: 'US',
-        orgType: 'other/advocates',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.US',
-        disambiguatedAffiliationIdentifier: '111263',
-        city: 'Washington',
-        sourceType: 'RINGGOLD',
-        region: 'DC',
-        value: 'American Postal Workers Union',
-        url: null,
-        affiliationKey: 'American Postal Workers Union Washington DC US',
-      },
-      {
-        sourceId: '152795',
-        country: 'CA',
-        orgType: 'other/health',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.CA',
-        disambiguatedAffiliationIdentifier: '145845',
-        city: 'Whitehorse',
-        sourceType: 'RINGGOLD',
-        region: 'YT',
-        value: "Yukon Workers' Compensation Health and Safety Board",
-        url: null,
-        affiliationKey:
-          "Yukon Workers' Compensation Health and Safety Board Whitehorse YT CA",
-      },
-      {
-        sourceId: '422798',
-        country: 'AU',
-        orgType: 'corporate/serv',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.AU',
-        disambiguatedAffiliationIdentifier: '418276',
-        city: 'Oakleigh',
-        sourceType: 'RINGGOLD',
-        region: 'VIC',
-        value: "Wordsmiths' Ink",
-        url: null,
-        affiliationKey: "Wordsmiths' Ink Oakleigh VIC AU",
-      },
-      {
-        sourceId: '407273',
-        country: 'GB',
-        orgType: 'corporate/dissolved',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.GB',
-        disambiguatedAffiliationIdentifier: '407182',
-        city: 'Saffron Walden',
-        sourceType: 'RINGGOLD',
-        region: 'Essex',
-        value: 'World of Information Ltd',
-        url: null,
-        affiliationKey: 'World of Information Ltd Saffron Walden Essex GB',
-      },
-      {
-        sourceId: '53601',
-        country: 'US',
-        orgType: 'other/advocates',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.US',
-        disambiguatedAffiliationIdentifier: '51214',
-        city: 'Reston',
-        sourceType: 'RINGGOLD',
-        region: 'VA',
-        value: 'World Press Freedom Committee',
-        url: null,
-        affiliationKey: 'World Press Freedom Committee Reston VA US',
-      },
-      {
-        sourceId: '139134',
-        country: 'US',
-        orgType: 'other/religion',
-        countryForDisplay:
-          'org.orcid.persistence.jpa.entities.CountryIsoEntity.US',
-        disambiguatedAffiliationIdentifier: '132628',
-        city: 'New York',
-        sourceType: 'RINGGOLD',
-        region: 'NY',
-        value: 'World Federation of Methodist and Uniting Church Women',
-        url: null,
-        affiliationKey:
-          'World Federation of Methodist and Uniting Church Women New York NY US',
-      },
-    ]).pipe(
-      retry(3),
-      catchError((error) => this._errorHandler.handleError(error))
-    )
+    return this._http
+      .get<Organization[]>(
+        environment.API_WEB +
+          'affiliations/disambiguated/name/' +
+          org +
+          '?limit=100',
+        {
+          headers: this.headers,
+        }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
   }
 
   getOrganizationDisambiguated(
