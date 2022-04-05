@@ -19,7 +19,7 @@
   </div>
   <hr />
   <!-- Work Types -->
-  <div>
+  <div id="cy-work-types-div"> 
     <label
       class="row mat-caption"
       [ngClass]="{
@@ -34,6 +34,7 @@
     <mat-form-field
       appearance="outline"
       class="mat-form-field-min input-container"
+      id="cy-work-types-form-field"
     >
       <mat-select
         placeholder="Select a work type"
@@ -103,11 +104,12 @@
     <a
       class="col add-more no-gutters"
       (click)="showTranslationTitle = !showTranslationTitle"
+      id="cy-translated-title-toggle-link"
     >
-      <mat-icon *ngIf="!showTranslationTitle" class="large-material-icon"
+      <mat-icon *ngIf="!showTranslationTitle" class="large-material-icon" id="cy-add-translated-title-icon"
         >add_circle_outline</mat-icon
       >
-      <mat-icon *ngIf="showTranslationTitle" class="large-material-icon"
+      <mat-icon *ngIf="showTranslationTitle" class="large-material-icon" id="cy-hide-translated-title-icon"
         >remove_circle_outline</mat-icon
       >
       <span class="mat-body-1">
@@ -270,7 +272,7 @@
       appearance="outline"
       class="mat-form-field-min input-container"
     >
-      <input matInput formControlName="journalTitle" />
+      <input matInput formControlName="journalTitle"  id="cy-journal-title"/>
       <mat-error
         *ngIf="workForm.get('journalTitle').errors?.maxlength"
         i18n="@@works.titleMaxLength"
@@ -302,6 +304,7 @@
           <mat-select
             placeholder="{{ ngOrcidYear }}"
             formControlName="publicationYear"
+            id="cy-start-date-year-sel"
           >
             <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
             <mat-option *ngFor="let year of yearOptions" [value]="year">
@@ -320,6 +323,7 @@
           <mat-select
             placeholder="{{ ngOrcidMonth }}"
             formControlName="publicationMonth"
+            id="cy-start-date-month-sel"
           >
             <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
             <mat-option *ngFor="let month of monthOptions" [value]="month">
@@ -338,6 +342,7 @@
           <mat-select
             placeholder="{{ ngOrcidDay }}"
             formControlName="publicationDay"
+            id="cy-start-date-day-sel"
           >
             <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
             <mat-option *ngFor="let day of dayOptions" [value]="day">
