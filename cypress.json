@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://qa.orcid.org",
+  "baseUrl": "https://qa.orcid.org/",
   "env": {
     "infoSiteBaseUrl": "https://info.qa.orcid.org",
     "duplicatedModalEndPoint": "https://pub.qa.orcid.org/v3.0/expanded-search/**",
