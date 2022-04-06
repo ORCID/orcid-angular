@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { Observable, Subject } from 'rxjs'
-import { startWith, switchMap, takeUntil } from 'rxjs/operators'
+import { Observable, of, Subject } from 'rxjs'
+import { startWith, switchMap, takeUntil, tap } from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
@@ -44,7 +44,7 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   }
 
   private setupTrustedIndividualsObs() {
-    this.$trustedIndividuals = this._trustedIndividualsService.addTrustedIndividualsSuccess.pipe(
+    this.$trustedIndividuals = this._trustedIndividualsService.updateTrustedIndividualsSuccess.pipe(
       startWith(() => undefined),
       switchMap(() => this._trustedIndividualsService.get())
     )
@@ -56,12 +56,15 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
         data: accountTrustedOrganization,
       })
       .afterClosed()
-      .subscribe((value) => {
-        if (value) {
-          this._trustedIndividualsService.delete(value).subscribe(() => {
-            this.setupTrustedIndividualsObs()
-          })
-        }
-      })
+      .pipe(
+        switchMap((value) => {
+          if (value) {
+            return this._trustedIndividualsService.delete(value)
+          } else {
+            of(undefined)
+          }
+        })
+      )
+      .subscribe()
   }
 }

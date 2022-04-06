@@ -1,25 +1,24 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, of, Subject } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { catchError, map, retry, tap } from 'rxjs/operators'
-import { ERROR_REPORT } from 'src/app/errors'
 import {
   ExpandedSearchResultsContent,
-  SearchResultsByEmail,
+  SearchResultsByEmailOrOrcid,
 } from 'src/app/types'
 import {
   AccountTrustedIndividual,
   PersonDetails,
 } from 'src/app/types/account-trusted-individuals'
-import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organizations'
 import { environment } from 'src/environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountTrustedIndividualsService {
-  addTrustedIndividualsSuccess = new Subject<void>()
+  updateTrustedIndividualsSuccess = new Subject<void>()
 
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -59,7 +58,8 @@ export class AccountTrustedIndividualsService {
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error))
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.updateTrustedIndividualsSuccess.next())
       )
   }
 
@@ -83,20 +83,19 @@ export class AccountTrustedIndividualsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.addTrustedIndividualsSuccess.next())
+        tap(() => this.updateTrustedIndividualsSuccess.next())
       )
   }
-  searchByEmail(email: string): Observable<SearchResultsByEmail> {
+  searchByEmail(email: string): Observable<SearchResultsByEmailOrOrcid> {
     return this._http
-      .get<SearchResultsByEmail>(
+      .get<SearchResultsByEmailOrOrcid>(
         environment.API_WEB +
           `manage/search-for-delegate-by-email/${encodeURIComponent(email)}/`,
         { headers: this.headers }
       )
       .pipe(
         retry(3),
-        catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.addTrustedIndividualsSuccess.next())
+        catchError((error) => this._errorHandler.handleError(error))
       )
   }
   addByEmail(delegateEmail: string) {
@@ -109,7 +108,33 @@ export class AccountTrustedIndividualsService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.addTrustedIndividualsSuccess.next())
+        tap(() => this.updateTrustedIndividualsSuccess.next())
+      )
+  }
+
+  searchByOrcid(email: string): Observable<SearchResultsByEmailOrOrcid> {
+    return this._http
+      .get<SearchResultsByEmailOrOrcid>(
+        environment.API_WEB +
+          `manage/search-for-delegate-by-orcid/${encodeURIComponent(email)}/`,
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+  addByOrcid(delegateToManage: string) {
+    return this._http
+      .post<void>(
+        environment.API_WEB + `account/addDelegateByOrcid.json`,
+        { delegateToManage },
+        { headers: this.headers }
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        tap(() => this.updateTrustedIndividualsSuccess.next())
       )
   }
 }
