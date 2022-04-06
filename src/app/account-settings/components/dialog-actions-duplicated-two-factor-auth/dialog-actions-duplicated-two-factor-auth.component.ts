@@ -4,6 +4,7 @@ import { OauthService } from 'src/app/core/oauth/oauth.service'
 import { DuplicateRemoveEndpoint } from 'src/app/types/account-actions-duplicated'
 
 import { DialogActionsDuplicatedMergedConfirmedComponent } from '../dialog-actions-duplicated-merged-confirmed/dialog-actions-duplicated-merged-confirmed.component'
+import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 
 @Component({
   selector: 'app-dialog-actions-duplicated-two-factor-auth',
@@ -15,7 +16,7 @@ export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
   showBadRecoveryCode: boolean
   loading: boolean
   constructor(
-    private _oauth: OauthService,
+    private _twoFactorAuthenticationService: TwoFactorAuthenticationService,
     private matRef: MatDialogRef<DialogActionsDuplicatedMergedConfirmedComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DuplicateRemoveEndpoint
   ) {}
@@ -25,7 +26,7 @@ export class DialogActionsDuplicatedTwoFactorAuthComponent implements OnInit {
     this.showBadVerificationCode = false
     this.showBadRecoveryCode = false
     this.loading = true
-    this._oauth
+    this._twoFactorAuthenticationService
       .submitCodeForAnotherAccount({
         orcid: this.data.deprecatingOrcid,
         verificationCode: code.verificationCode || null,

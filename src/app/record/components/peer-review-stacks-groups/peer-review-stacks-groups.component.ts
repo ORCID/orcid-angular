@@ -247,8 +247,19 @@ export class PeerReviewStacksGroupsComponent implements OnInit {
               groupedPeerReview.groupIdValue
             this.peerReviews[index].peerReviewDuplicateGroups =
               groupedPeerReview.peerReviewDuplicateGroups
-            this.peerReviews[index].visibilityError =
-              groupedPeerReview.visibilityError
+            const visibility =
+              groupedPeerReview.peerReviewDuplicateGroups[0].peerReviews[0]
+                .visibility.visibility
+            groupedPeerReview.peerReviewDuplicateGroups.forEach(
+              (peerReviewDuplicateGroup) => {
+                const peerReviews = peerReviewDuplicateGroup.peerReviews.filter(
+                  (p) => p.visibility.visibility !== visibility
+                )
+                if (peerReviews.length > 0) {
+                  this.peerReviews[index].visibilityError = true
+                }
+              }
+            )
           }
         })
       })

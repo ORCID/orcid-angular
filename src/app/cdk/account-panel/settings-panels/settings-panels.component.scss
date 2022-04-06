@@ -19,9 +19,12 @@
   .text-container,
   .inline-initial-side {
     max-width: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: initial;
     span {
       margin-left: 3px;
     }
@@ -31,6 +34,20 @@
     .text-container {
       margin-bottom: 5px;
       margin-top: 5px;
+    }
+    .title-container {
+      strong {
+        margin-inline-end: 3px;
+      }
+    }
+    .actions-container {
+      display: flex;
+      align-items: center;
+      min-width: 145px;
+      flex-direction: row;
+      a {
+        margin-inline-start: 4px;
+      }
     }
   }
   .controls {
@@ -62,4 +79,10 @@
 
 .clickable {
   cursor: pointer;
+}
+
+h3 {
+  line-height: 1;
+  margin: 0;
+  margin-inline-end: 8px;
 }

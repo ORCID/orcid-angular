@@ -1,4 +1,4 @@
-<h2 class="orc-font-body col" i18n="@@account.security">Security</h2>
+<h2 class="orc-font-body-large col" i18n="@@account.security">Security</h2>
 
 <app-settings-panels
   [(expandedContent)]="settingSecurityPasswordOpen"
@@ -18,8 +18,15 @@
   [(expandedContent)]="settingSecurityTwoFactor"
   class="row"
   [title]="titleTwoFactor"
+  [type]="{ value: 'two-factor', enabled: twoFactorState }"
+  [loading]="settingSecurityTwoFactorLoading"
 >
-  <app-settings-security-two-factor-auth></app-settings-security-two-factor-auth>
+  <app-settings-security-two-factor-auth
+    [twoFactorState]="twoFactorState"
+    (twoFactorStateOutput)="twoFactorStateChanges($event)"
+    (loading)="settingSecurityTwoFactorLoading = $event"
+  >
+  </app-settings-security-two-factor-auth>
 </app-settings-panels>
 
 <app-settings-panels

@@ -7,6 +7,7 @@
     'staked-header': stackedHeader,
     'expand-button': !editable && !isPublicRecord && !customControls
   }"
+  id="cy-panel-component"
 >
   <!-- [EXPAND BUTTONS] FOR NESTED PANELS -->
   <ng-container
@@ -16,6 +17,7 @@
       <app-panel-expand-buttons
         (toggle)="toggle()"
         [openState]="openState"
+        id="cy-panel-component-expand-button"
       ></app-panel-expand-buttons>
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </div>
@@ -41,7 +43,7 @@
       <ng-container *ngTemplateOutlet="tempHeader"></ng-container>
     </ng-container>
   </div>
-  <div class="buttons-container">
+  <div class="buttons-container" id="cy-buttons-container">
     <!-- [PRIVACY display] FOR `AFFILIATIONS`, `WORKS`, `FUNDINGS`  -->
     <ng-container
       *ngIf="visibility && !isPublicRecord && showVisibilityControl"

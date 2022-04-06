@@ -256,7 +256,9 @@ export class WorkFormComponent implements OnInit {
         .validateWorkIdTypes(externalIdentifierType, control.value)
         .pipe(
           map((value) => {
-            if (value.generatedUrl) {
+            if (formGroup.controls.externalIdentifierUrl?.value?.length > 0) {
+              // do not overwrite the existing URL
+            } else if (value.generatedUrl) {
               formGroup.controls.externalIdentifierUrl.setValue(
                 decodeURI(value.generatedUrl)
               )

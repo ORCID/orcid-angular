@@ -1,0 +1,134 @@
+<ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
+  <h2 class="orc-font-body-large" i18n="@@account.trustedIndividuals">
+    Trusted individuals
+  </h2>
+
+  <div>
+    <p i18n="@@account.trustedIndvidualstionsAreThose">
+      Trusted individuals, also known as Account Delegates, are other ORCID iD
+      holders to whom you have granted permission to update your ORCID record.
+      You decide whether to grant access to them and can revoke this access at
+      any time.
+    </p>
+  </div>
+  <p>
+    <a
+      class="underline"
+      i18n="@@account.learnMoreAboutTrustedInd"
+      href="https://support.orcid.org/hc/en-us/articles/360006973613"
+      rel="noopener noreferrer"
+      target="_blank"
+      >Learn more about trusted individuals</a
+    >
+  </p>
+
+  <ng-container *ngIf="trustedIndividuals.length && this.isMobile">
+    <mat-divider></mat-divider>
+    <div *ngFor="let trustedIndividual of trustedIndividuals">
+      <div class="mobile-elements-container">
+        <div class="mobile-ements-text-container">
+          <strong i18n="@@account.trustedIndividual">Trusted individual</strong>
+          <div>{{ trustedIndividual?.receiverName?.value }}</div>
+          <strong i18n="@@account.orcidId">ORCID iD</strong>
+          <div>
+            <a
+              class="underline"
+              target="_blank"
+              rel="noreferrer noopener"
+              href="{{ baseUrl }}{{ trustedIndividual.receiverOrcid.path }}"
+              >{{ trustedIndividual.receiverOrcid.path }}</a
+            >
+          </div>
+          <strong i18n="@@account.accessGranted">Access granted</strong>
+          <div>
+            {{ trustedIndividual?.approvalDate | monthDayYearDateToString }}
+          </div>
+        </div>
+        <div>
+          <div class="actions-container orc-font-body-small">
+            <mat-icon
+              (click)="revokeAccess(trustedIndividual)"
+              class="warn pointer"
+              >block</mat-icon
+            >
+
+            <a
+              class="underline warn"
+              (click)="revokeAccess(trustedIndividual)"
+              i18n="@@account.revokeAccess"
+            >
+              Revoke access</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+    </div>
+  </ng-container>
+  <div class="table-container">
+    <table
+      *ngIf="trustedIndividuals.length && !this.isMobile"
+      mat-table
+      [dataSource]="trustedIndividuals"
+      class="mat-elevation-z0"
+    >
+      <ng-container matColumnDef="trustedIndividuals">
+        <th mat-header-cell *matHeaderCellDef i18n="@@account.name">Name</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.receiverName?.value }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="orcid">
+        <th mat-header-cell *matHeaderCellDef i18n="@@account.orcidId">
+          ORCID iD
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <a
+            class="underline"
+            target="_blank"
+            rel="noreferrer noopener"
+            href="{{ baseUrl }}{{ element.receiverOrcid.path }}"
+            >{{ element.receiverOrcid.path }}</a
+          >
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="granted">
+        <th mat-header-cell *matHeaderCellDef i18n="@@account.accessGranted">
+          Access granted
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.approvalDate | monthDayYearDateToString }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="actions-container orc-font-body-small">
+            <mat-icon class="warn pointer">block</mat-icon>
+
+            <a
+              class="underline warn pointer"
+              (click)="revokeAccess(element)"
+              i18n="@@account.revokeAccess"
+            >
+              Revoke access</a
+            >
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+
+  <p *ngIf="!trustedIndividuals.length">
+    <i i18n="@@account.youHavenAddAnyTrusted">
+      You haven't added any trusted individuals yet.
+    </i>
+  </p>
+</ng-container>

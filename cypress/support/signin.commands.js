@@ -10,8 +10,8 @@ Cypress.Commands.add('expectPreFillSignin', (user) => {
   })
 })
 
-Cypress.Commands.add('signin', (user) => {
-  return cy
+Cypress.Commands.add('signin', (user) =>
+  cy
     .location()
     .should((loc) => {
       expect(loc.pathname).to.eq('/signin')
@@ -23,7 +23,7 @@ Cypress.Commands.add('signin', (user) => {
     .type(user.password)
     .get('#signin-button')
     .click()
-})
+)
 
 Cypress.Commands.add('programmaticSignin', (user) => {
   cy.getCookie('XSRF-TOKEN').then((csrfCookie) => {

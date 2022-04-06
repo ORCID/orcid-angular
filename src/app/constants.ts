@@ -16,7 +16,8 @@ export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)
 
 export const EMAIL_REGEXP_GENERIC = /^\s*?(.+)@(.+?)\s*$/
 // https://regex101.com/r/9MXmdl/1
-export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
+export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/
+export const ORCID_REGEXP_CASE_INSENSITIVE = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://regex101.com/r/V95col/6
 // tslint:disable-next-line: max-line-length
 export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
@@ -42,6 +43,7 @@ export const WHITE_SPACE_REGEXP = /\s+/g
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
   twoFactor: '2fa-signin',
+  twoFactorSetup: 'qa/2FA/setup',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
   institutional: 'institutional-signin',
@@ -63,6 +65,7 @@ export const ApplicationRoutes = {
 
 export const HeadlessOnOauthRoutes = [
   ApplicationRoutes.twoFactor,
+  ApplicationRoutes.twoFactorSetup,
   ApplicationRoutes.social,
   ApplicationRoutes.institutionalLinking,
   ApplicationRoutes.institutional,
@@ -83,7 +86,7 @@ export function isValidOrcidFormat(id) {
 }
 
 export function getOrcidNumber(userId) {
-  const orcidPattern = ORCID_REGEXP
+  const orcidPattern = ORCID_REGEXP_CASE_INSENSITIVE
   const extId = orcidPattern.exec(userId)
   if (extId != null) {
     userId = extId[0].toString().replace(/ /g, '')

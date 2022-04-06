@@ -1,0 +1,36 @@
+.info {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+
+.permission-container.last {
+  border-bottom: 1px solid;
+}
+.permission-container {
+  border-top: 1px solid;
+
+  display: flex;
+  flex-direction: row;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  mat-icon {
+    margin-inline-end: 4px;
+  }
+}
+
+.title-detail {
+  margin-top: 0;
+}
+
+.orcid-id-container {
+  display: flex;
+  flex-direction: column;
+}

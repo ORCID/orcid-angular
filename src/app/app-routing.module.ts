@@ -104,10 +104,26 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.trustedPartiesQA,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./account-trusted-parties/account-trusted-parties.module').then(
+        (m) => m.AccountTrustedPartiesModule
+      ),
+  },
+  {
     path: ApplicationRoutes.twoFactor,
     canActivateChild: [TwoFactorSigninGuard],
     loadChildren: () =>
       import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
+  },
+  {
+    path: ApplicationRoutes.twoFactorSetup,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./two-factor-setup/two-factor-setup.module').then(
+        (m) => m.TwoFactorSetupModule
+      ),
   },
   {
     matcher: routerThirdPartySignInMatch,

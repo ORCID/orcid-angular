@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core'
+
+import { WINDOW } from '../../cdk/window'
 import { AssertionVisibilityString, UserInfo } from '../../types'
 import { UserRecord } from '../../types/record.local'
-import { WINDOW } from '../../cdk/window'
-import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class AppcueService {
   constructor(@Inject(WINDOW) private window: Window) {}
   appcueInitialized = false
 
-  private static getNumberOfValidatedEmails(
+  private getNumberOfValidatedEmails(
     emails: AssertionVisibilityString[]
   ): { numberOfValidatedEmails: number; numberOfUnvalidatedEmails: number } {
     return {
@@ -25,23 +25,22 @@ export class AppcueService {
   }
 
   page() {
-    if (environment.APPCUES) {
+    if (this.window['Appcues'] && this.appcueInitialized) {
       this.window['Appcues']?.page()
     }
   }
 
   initializeAppCues(userInfo: UserInfo, userRecord: UserRecord) {
     if (
-      environment.APPCUES &&
       userInfo?.EFFECTIVE_USER_ORCID &&
       userRecord?.emails?.emails &&
       !this.appcueInitialized
     ) {
       this.window['Appcues']?.identify(userInfo?.EFFECTIVE_USER_ORCID, {
-        numberOfValidatedEmails: AppcueService.getNumberOfValidatedEmails(
+        numberOfValidatedEmails: this.getNumberOfValidatedEmails(
           userRecord?.emails?.emails
         ).numberOfValidatedEmails,
-        numberOfUnvalidatedEmails: AppcueService.getNumberOfValidatedEmails(
+        numberOfUnvalidatedEmails: this.getNumberOfValidatedEmails(
           userRecord?.emails?.emails
         ).numberOfUnvalidatedEmails,
       })

@@ -1,0 +1,45 @@
+<ng-container *ngIf="$trustedOrganization | async as trustedOrganizations"
+  ><h1 class="orc-font-heading-small" i18n="@@account.trustedParties">
+    Trusted parties
+  </h1>
+  <h2 class="orc-font-body-large" i18n="@@account.trustedOrganizations">
+    Trusted organizations
+  </h2>
+
+  <div>
+    <p i18n="@@account.trustedOrganizationsAreThose">
+      Trusted organizations are those to which you have granted permission to
+      interact with your iD and record, e.g. when submitting a manuscript or
+      grant application. You decide whether to grant this access and you may
+      revoke it at any time.
+    </p>
+  </div>
+
+  <a
+    class="underline learn-more-url"
+    i18n="@@account.learnMoreAboutTrustedOrg"
+    href="https://support.orcid.org/hc/articles/360006973893"
+    rel="noopener noreferrer"
+    target="_blank"
+    >Learn more about trusted organizations</a
+  >
+
+  <app-settings-panels
+    [title]="trustedOrganization.name"
+    [accessGranted]="trustedOrganization.approvalDate"
+    [url]="trustedOrganization.websiteValue"
+    [revokeAccessButton]="true"
+    (revokeAccessButtonClickedEvent)="revokeAccess(trustedOrganization)"
+    *ngFor="let trustedOrganization of trustedOrganizations"
+  >
+    <app-settings-trusted-organization
+      [trustedOrganization]="trustedOrganization"
+    ></app-settings-trusted-organization>
+  </app-settings-panels>
+
+  <p *ngIf="!trustedOrganizations.length">
+    <i i18n="@@account.youHavenAddAnyOrg">
+      You haven't added any trusted organizations yet.
+    </i>
+  </p>
+</ng-container>

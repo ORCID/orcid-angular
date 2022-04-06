@@ -10,5 +10,12 @@
     "email": "******@orcid.org",
     "password": "**********",
     "oid": "****-****-****-****"
+  },
+  "cyUserMemmerAPI": {
+    "clientID": "APP-********",
+    "clientSecret": "*******-****-****-****-********",
+    "orcidMember": "****-****-****-****",
+    "bearer": "*******-****-****-****-********",
+    "curlPostWebsitePath": "@/Users/...../cypress/fixtures/researcher_url.json"
   }
 }

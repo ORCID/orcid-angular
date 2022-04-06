@@ -4,11 +4,16 @@ export interface ExpandedSearchResultsContent {
   'family-names': string
   creditName?: any
   'other-name': any[]
-  email?: any
+  email?: string[]
   'institution-name': any[]
 }
 
 export interface SearchResults {
-  'expanded-result': ExpandedSearchResultsContent[]
+  'expanded-result': ExpandedSearchResultsContent[] | null
   'num-found': number
+}
+
+export interface SearchResultsByEmailOrOrcid {
+  found: boolean
+  isSelf: boolean
 }

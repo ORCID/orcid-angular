@@ -23,7 +23,7 @@
       class="general-data"
       *ngIf="togglzWorksContributors && contributorsGroupedByOrcid?.length > 0"
     >
-      <span i18n="#upperCase@@works.contributors">CONTRIBUTORS</span>:
+      <span class="uppercase" i18n="@@works.contributors">Contributors</span>:
       <ng-container
         *ngFor="
           let contributor of contributorsGroupedByOrcid
@@ -56,12 +56,12 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <ng-container
-        *ngIf="numberOfContributorsGroupedByOrcid > maxNumberContributors"
+      <span
+        *ngIf="numberOfContributors > maxNumberContributors"
+        i18n="@@works.etAl"
       >
-        + {{ numberOfContributorsGroupedByOrcid - maxNumberContributors }}
-        <span i18n="@@works.more">more</span>
-      </ng-container>
+        et al.
+      </span>
     </div>
   </div>
 
@@ -160,15 +160,14 @@
 
     <div *ngIf="togglzWorksContributors">
       <ng-container
-        *ngIf="
-          numberOfContributorsGroupedByOrcid > maxNumberContributorsWorkDetails
-        "
+        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
       >
         <p>
-          <ng-container i18n="@@ngOrcid.search.showing">Showing</ng-container>
+          <span i18n="@@works.showing">Showing the first</span>
           <b>{{ maxNumberContributorsWorkDetails }}</b>
-          <ng-container i18n="@@ngOrcid.search.of">of</ng-container>
-          <b>{{ numberOfContributorsGroupedByOrcid }}</b>
+          <span class="lowercase" i18n="@@works.contributors">
+            contributors
+          </span>
         </p>
         <p>----</p>
       </ng-container>
@@ -188,7 +187,8 @@
           }}</ng-container>
           {{ contributor | contributorsPipe }}
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
-            <a
+            <span *ngIf="!(contributor | contributorsPipe)"> (</span
+            ><a
               class="underline"
               target="_blank"
               rel="noreferrer noopener"
@@ -199,18 +199,14 @@
         </ng-container>
       </p>
       <ng-container
-        *ngIf="
-          numberOfContributorsGroupedByOrcid > maxNumberContributorsWorkDetails
-        "
+        *ngIf="numberOfContributors > maxNumberContributorsWorkDetails"
       >
-        <p>
-          +
-          {{
-            numberOfContributorsGroupedByOrcid -
-              maxNumberContributorsWorkDetails
-          }}
-          <span i18n="@@works.more">more</span>
-        </p>
+        <span
+          *ngIf="numberOfContributors > maxNumberContributors"
+          i18n="@@works.etAl"
+        >
+          et al.
+        </span>
         <p>----</p>
         <p>
           <ng-container i18n="@@works.fullContributorList">

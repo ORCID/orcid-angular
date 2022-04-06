@@ -1,0 +1,51 @@
+<app-modal [noSidebar]="true">
+  <app-modal-header i18n="@@account.addAccessTrustedIndividuals"
+    >Add access - Trusted individual
+  </app-modal-header>
+
+  <p i18n="@@account.addThisUserAsTrusted">
+    Adding this user as a trusted individual will mean they are able to update
+    your ORCID record.
+  </p>
+
+  <div
+    class="orcid-id-container"
+    *ngIf="data['given-names'] || data['family-names']"
+  >
+    <strong> {{ data['given-names'] }} {{ data['family-names'] }}</strong>
+
+    <a
+      class="underline"
+      target="_blank"
+      rel="noreferrer noopener"
+      *ngIf="data?.['orcid-id']"
+      href="{{ baseUrl }}{{ data?.['orcid-id'] }}"
+      >https:{{ baseUrl }}{{ data?.['orcid-id'] }}</a
+    >
+  </div>
+
+  <div class="orcid-id-container" *ngIf="addByEmailOrOrcid">
+    <strong>{{ addByEmailOrOrcid }}</strong>
+  </div>
+
+  <app-modal-footer>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="ok()"
+      id="dialog-add-access"
+      i18n="@@account.addAsTrustedIndividuals"
+    >
+      Add as trusted individual
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="cancel()"
+      id="dialog-cancel"
+      i18n="@@shared.cancel"
+    >
+      Cancel
+    </button>
+  </app-modal-footer></app-modal
+>

@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+app-settings-defaults-visibility {
+  width: 100%;
+}
+
+h1 {
+  margin: 0;
+  padding-bottom: 32px;
+}
+
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.learn-more-url {
+  margin-bottom: 16px;
+}
