@@ -170,3 +170,10 @@ minimum_perc = 0
 source_file = src/locale/properties/works/works.en.properties
 source_lang = en
 type = UNICODEPROPERTIES
+
+[orcid-angular.src-locale-properties-account-account-en-properties--transifex]
+file_filter = src/locale/properties/account/account.<lang>.properties
+minimum_perc = 0
+source_file = src/locale/properties/account/account.en.properties
+source_lang = en
+type = UNICODEPROPERTIES
