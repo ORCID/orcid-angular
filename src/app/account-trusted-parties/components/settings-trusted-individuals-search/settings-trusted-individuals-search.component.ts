@@ -84,21 +84,23 @@ export class SettingsTrustedIndividualsSearchComponent
         })
       )
     } else if (orcidIdMatch) {
-      this.$search = this.account.searchByOrcid(orcidIdMatch).pipe(
-        map((response) => {
-          if (response.isSelf) {
-            this.announceThisIsYourOwnRecord()
-          } else if (response.found) {
-            this.addByOrcid(orcidIdMatch)
-            return null
-          } else {
-            return { 'expanded-result': [], 'num-found': 0 }
-          }
-        }),
-        tap(() => {
-          this.loading = false
-        })
-      )
+      this.$search = this.account
+        .searchByOrcid(orcidIdMatch.toUpperCase())
+        .pipe(
+          map((response) => {
+            if (response.isSelf) {
+              this.announceThisIsYourOwnRecord()
+            } else if (response.found) {
+              this.addByOrcid(orcidIdMatch.toUpperCase())
+              return null
+            } else {
+              return { 'expanded-result': [], 'num-found': 0 }
+            }
+          }),
+          tap(() => {
+            this.loading = false
+          })
+        )
     } else {
       this.$search = this.account.updateTrustedIndividualsSuccess.pipe(
         startWith({}),
