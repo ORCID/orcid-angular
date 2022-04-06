@@ -133,13 +133,13 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {
-          if (togglz['ORCID_ANGULAR_HELP_HERO']) {
+          if (togglz.messages['ORCID_ANGULAR_HELP_HERO']) {
             this._helpHeroService.initializeHelpHero(
               this.userInfo,
               this.userRecord
             )
           }
-          if (togglz['ORCID_ANGULAR_APP_CUES']) {
+          if (togglz.messages['ORCID_ANGULAR_APP_CUES']) {
             this._appcueService.initializeAppCues(
               this.userInfo,
               this.userRecord
