@@ -2,17 +2,25 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { PageEvent } from '@angular/material/paginator'
 import { Observable, of, Subject } from 'rxjs'
-import { map, switchMap, take, takeUntil, tap } from 'rxjs/operators'
+import {
+  map,
+  mergeMap,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs/operators'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import {
   EMAIL_REGEXP_GENERIC,
-  ORCID_REGEXP,
   ORCID_REGEXP_CASE_INSENSITIVE,
 } from 'src/app/constants'
 import { UserService } from 'src/app/core'
 import { AccountTrustedIndividualsService } from 'src/app/core/account-trusted-individuals/account-trusted-individuals.service'
 import { SearchService } from 'src/app/core/search/search.service'
 import { ExpandedSearchResultsContent, SearchResults } from 'src/app/types'
+import { AccountTrustedIndividual } from 'src/app/types/account-trusted-individuals'
 import { UserSession } from 'src/app/types/session.local'
 import { environment } from 'src/environments/environment'
 import { DialogAddTrustedIndividualsYourOwnEmailComponent } from '../dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component'
@@ -28,12 +36,12 @@ import { DialogAddTrustedIndividualsComponent } from '../dialog-add-trusted-indi
 })
 export class SettingsTrustedIndividualsSearchComponent
   implements OnInit, OnDestroy {
+  $destroy = new Subject()
   searchDone = false
   displayedColumns = ['trustedIndividuals', 'orcid', 'actions']
-  platformSubs = new Subject<void>()
   isMobile: boolean
   searchValue: string
-  $trustedIndividuals: Observable<SearchResults>
+  $search: Observable<SearchResults>
   pageIndex: number
   pageSize: number
   ariaLabelPaginator = $localize`:@@search.paginator:paginator`
@@ -41,6 +49,8 @@ export class SettingsTrustedIndividualsSearchComponent
   baseUrl = environment.BASE_URL
   userSession: UserSession
   searchPlaceHolder = $localize`:@@account.searchIndividualsPlaceHolder:ORCID iD, email address, or names`
+  trustedIndividuals: AccountTrustedIndividual[]
+  searchResultsByName: boolean
 
   constructor(
     private _search: SearchService,
@@ -49,22 +59,19 @@ export class SettingsTrustedIndividualsSearchComponent
     private account: AccountTrustedIndividualsService,
     private _user: UserService
   ) {}
-  ngOnDestroy(): void {
-    this.platformSubs.next()
-    this.platformSubs.complete()
-  }
 
   search(value: string) {
     this.loading = true
     value = value.trim().toLowerCase()
     const orcidIdMatch = this.extractOrcidId(value)
     const emailMatch = EMAIL_REGEXP_GENERIC.exec(value)?.[0]
+    this.searchResultsByName = !orcidIdMatch && !emailMatch
 
     if (emailMatch) {
-      this.$trustedIndividuals = this.account.searchByEmail(emailMatch).pipe(
+      this.$search = this.account.searchByEmail(emailMatch).pipe(
         map((response) => {
           if (response.isSelf) {
-            this.announceThisIsYourOwnEmail()
+            this.announceThisIsYourOwnRecord()
           } else if (response.found) {
             this.addByEmail(emailMatch)
             return null
@@ -76,49 +83,77 @@ export class SettingsTrustedIndividualsSearchComponent
           this.loading = false
         })
       )
-    } else {
-      this.$trustedIndividuals = this._search
-        .search({
-          searchQuery: value,
-          pageIndex: this.pageIndex || 0,
-          pageSize: this.pageSize || 10,
+    } else if (orcidIdMatch) {
+      this.$search = this.account.searchByOrcid(orcidIdMatch).pipe(
+        map((response) => {
+          if (response.isSelf) {
+            this.announceThisIsYourOwnRecord()
+          } else if (response.found) {
+            this.addByOrcid(orcidIdMatch)
+            return null
+          } else {
+            return { 'expanded-result': [], 'num-found': 0 }
+          }
+        }),
+        tap(() => {
+          this.loading = false
         })
-        .pipe(
-          map((trustedIndividuals) => {
-            if (trustedIndividuals['expanded-result']) {
-              trustedIndividuals['expanded-result'] = trustedIndividuals[
-                'expanded-result'
-              ].filter(
-                (x) =>
-                  x['orcid-id'] !==
-                  this.userSession.userInfo.EFFECTIVE_USER_ORCID
-              )
-            }
-            return trustedIndividuals
-          }),
-          map((trustedIndividuals) => {
-            if (orcidIdMatch && trustedIndividuals['expanded-result']) {
-              const matchingOrcid = trustedIndividuals['expanded-result'].find(
-                (ti) => ti['orcid-id'].trim().toLowerCase() === orcidIdMatch
-              )
-              if (
-                matchingOrcid &&
-                (orcidIdMatch === value ||
-                  value.indexOf(environment.BASE_URL + orcidIdMatch) >= 1)
-              ) {
-                this.add(matchingOrcid)
-                return null
-              } else {
-                trustedIndividuals['expanded-result'] = []
-              }
-            }
-            return trustedIndividuals
-          }),
-          tap(() => {
-            this.loading = false
-          })
-        )
+      )
+    } else {
+      this.$search = this.account.updateTrustedIndividualsSuccess.pipe(
+        startWith({}),
+        switchMap(() => this.account.get()),
+        switchMap((currentTrustedIndividuals) => {
+          return this._search
+            .search({
+              searchQuery: value,
+              pageIndex: this.pageIndex || 0,
+              pageSize: this.pageSize || 10,
+            })
+            .pipe(
+              map((searchResults) => {
+                return {
+                  currentTrustedIndividuals,
+                  searchResults,
+                }
+              })
+            )
+        }),
+
+        map((search) => {
+          if (search.searchResults['expanded-result']) {
+            search.searchResults['expanded-result'] = search.searchResults[
+              'expanded-result'
+            ].filter(
+              (searchResult) =>
+                !this.resultIsMyOnRecordOrIsAlreadyAdded(
+                  searchResult,
+                  search.currentTrustedIndividuals
+                )
+            )
+          }
+          return search.searchResults
+        }),
+        tap(() => {
+          this.loading = false
+        })
+      )
     }
+  }
+
+  private resultIsMyOnRecordOrIsAlreadyAdded(
+    searchResult: ExpandedSearchResultsContent,
+    existingTrusteds: AccountTrustedIndividual[]
+  ): unknown {
+    return (
+      searchResult['orcid-id'] ===
+        this.userSession.userInfo.EFFECTIVE_USER_ORCID ||
+      existingTrusteds.filter(
+        (existingTrusted) =>
+          existingTrusted.receiverOrcid.path.toLowerCase() ===
+          searchResult['orcid-id'].toLowerCase()
+      ).length
+    )
   }
 
   private extractOrcidId(input: string): string {
@@ -138,6 +173,7 @@ export class SettingsTrustedIndividualsSearchComponent
       .afterClosed()
       .pipe(
         switchMap((value) => {
+          this.loading = true
           if (value) {
             return this.account.add(value)
           }
@@ -165,7 +201,25 @@ export class SettingsTrustedIndividualsSearchComponent
       .subscribe()
   }
 
-  announceThisIsYourOwnEmail() {
+  addByOrcid(value: string) {
+    this.dialog
+      .open(DialogAddTrustedIndividualsComponent, {
+        data: value,
+        width: '634px',
+      })
+      .afterClosed()
+      .pipe(
+        switchMap((value) => {
+          if (value) {
+            return this.account.addByOrcid(value)
+          }
+          return of(undefined)
+        })
+      )
+      .subscribe()
+  }
+
+  announceThisIsYourOwnRecord() {
     this.dialog.open(DialogAddTrustedIndividualsYourOwnEmailComponent, {
       width: '634px',
     })
@@ -179,7 +233,7 @@ export class SettingsTrustedIndividualsSearchComponent
   ngOnInit(): void {
     this._platform
       .get()
-      .pipe(takeUntil(this.platformSubs))
+      .pipe(takeUntil(this.$destroy))
       .subscribe((platform) => {
         this.isMobile = platform.columns4 || platform.columns8
       })
@@ -189,5 +243,10 @@ export class SettingsTrustedIndividualsSearchComponent
       .subscribe((userSession) => {
         this.userSession = userSession
       })
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next()
+    this.$destroy.unsubscribe()
   }
 }

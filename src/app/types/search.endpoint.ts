@@ -13,7 +13,7 @@ export interface SearchResults {
   'num-found': number
 }
 
-export interface SearchResultsByEmail {
+export interface SearchResultsByEmailOrOrcid {
   found: boolean
   isSelf: boolean
 }

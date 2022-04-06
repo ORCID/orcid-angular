@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core'
-import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { SearchParameters, SearchResults } from 'src/app/types'
-import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { catchError, delay, map } from 'rxjs/operators'
 import {
   DEFAULT_PAGE_SIZE,
   ORCID_REGEXP_CASE_INSENSITIVE,
 } from 'src/app/constants'
-import { debug } from 'console'
+import { SearchParameters, SearchResults } from 'src/app/types'
+
+import { ErrorHandlerService } from '../error-handler/error-handler.service'
 
 @Injectable({
   providedIn: 'root',
@@ -25,30 +24,221 @@ export class SearchService {
   ) {}
 
   search(querryParam: SearchParameters): Observable<SearchResults> {
-    return this._http
-      .get<SearchResults>(
-        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
-          querryParam
-        )}`,
+    return of({
+      'expanded-result': [
         {
-          headers: { Accept: 'application/json' },
-        }
-      )
-      .pipe(
-        catchError((error) => this._errorHandler.handleError(error)),
-        map((x) => {
-          x['expanded-result'] = x['expanded-result']?.map((element) => {
-            if (!element['given-names'] && !element['family-names']) {
-              element[
-                'given-names'
-              ] = $localize`:@@account.nameIsPri:Name is private`
-            }
+          'orcid-id': '0000-0001-6860-7376',
+          'given-names': 'Pedro**',
+          'family-names': '18nov2020',
+          'credit-name': null,
+          'other-name': [
+            'Другое имя',
+            '其他名字',
+            'alia nomo',
+            'other names',
+            'andre navne',
+          ],
+          email: [],
+          'institution-name': [
+            'Massachusetts Institute of Technology',
+            "Ministry of Science and Technology of the People's Republic of China",
+            'NASA',
+            'NASA Education',
+            'ORCID',
+            'Royal College of Music',
+          ],
+        },
+        {
+          'orcid-id': '0000-0001-6444-0281',
+          'given-names': 'Pedro',
+          'family-names': '20nov2020',
+          'credit-name': null,
+          'other-name': [
+            'Другое имя',
+            '其他名字',
+            'alia nomo',
+            'other names',
+            'andre navne',
+          ],
+          email: [],
+          'institution-name': [
+            'Massachusetts Institute of Technology',
+            "Ministry of Science and Technology of the People's Republic of China",
+            'NASA',
+            'NASA Education',
+            'ORCID',
+            'Royal College of Music',
+          ],
+        },
+        {
+          'orcid-id': '0000-0002-9576-3507',
+          'given-names': 'Pedro',
+          'family-names': 'Costa',
+          'credit-name': null,
+          'other-name': [
+            'Другое имя',
+            '其他名字',
+            'alia nomo',
+            'other names',
+            'andre navne',
+          ],
+          email: [],
+          'institution-name': [
+            'Massachusetts Institute of Technology',
+            "Ministry of Science and Technology of the People's Republic of China",
+            'NASA',
+            'NASA Education',
+            'National Statistical Institute of Portugal',
+            'ORCID',
+          ],
+        },
+        {
+          'orcid-id': '0000-0003-4498-9335',
+          'given-names': 'Pedro',
+          'family-names': '2020dec14',
+          'credit-name': null,
+          'other-name': [
+            'Другое имя',
+            '其他名字',
+            'alia nomo',
+            'other names',
+            'andre navne',
+          ],
+          email: [
+            'pedro.2020dec14_1@mailinator.com',
+            'pedro.2020dec14@mailinator.com',
+          ],
+          'institution-name': [
+            'Massachusetts Institute of Technology',
+            "Ministry of Science and Technology of the People's Republic of China",
+            'NASA',
+            'NASA Education',
+            'ORCID',
+            'Royal College of Music',
+          ],
+        },
+        {
+          'orcid-id': '0000-0002-4586-0915',
+          'given-names': 'Pedro',
+          'family-names': '20210723',
+          'credit-name': null,
+          'other-name': [],
+          email: [],
+          'institution-name': ['Irish Research Council', 'Maynooth University'],
+        },
+        {
+          'orcid-id': '0000-0001-9091-4938',
+          'given-names': 'Pedro',
+          'family-names': 'Costa',
+          'credit-name': null,
+          'other-name': [],
+          email: [],
+          'institution-name': ['Irish Research Council', 'Maynooth University'],
+        },
+        {
+          'orcid-id': '0000-0001-7945-7676',
+          'given-names': 'Pedro',
+          'family-names': 'Costa',
+          'credit-name': null,
+          'other-name': [],
+          email: [],
+          'institution-name': [
+            'Example Organization Name',
+            'NASA',
+            'University of Wisconsin-Madison',
+            'common:name',
+            'org name',
+            'organization name',
+          ],
+        },
+        {
+          'orcid-id': '0000-0002-9578-7373',
+          'given-names': 'Pedro',
+          'family-names': 'Costa',
+          'credit-name': 'Pedro M. Costa',
+          'other-name': [
+            'duplicate name',
+            'PEDRO MIGUEL MACHADO DA COSTA',
+            'àáâãäåçèéêëìíîðñòôõöö',
+            '* ? / \\ | < > , . ( ) [ ] { } ; : ‘ “ ! @ # $ % ^ &',
+            'MyOtherName1',
+            'Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero',
+            'Carl',
+            'MyOtherName1',
+            'DUPLICATE NAME',
+            'duplicate name',
+            'Duplicate Name',
+          ],
+          email: [
+            'pedro.hello@mailinator.com',
+            'pedro.costa1@mailinator.com',
+            'pedro.hello1@mailinator.com',
+            'p.costa+b0OiAFfbQK16X21OFXsimJx9Sida4mDsGykClXorHjrqsK6kHg39LqdBYkVLsfVIkmKKLnpuh2mZqownu3NK7R76m6nmcGf1kcmdMVIHlQuoYnHJa9aY2mmXuNdEkjtiyxBO8a3HgBgowcF11nhaJVoWzOu3hKmhiBqVToG11a7CgJ3HHRtdlDhuH1AgEkW0EtbPcxWIwNIfXQKGUppcGHjYlAGwpiNfKXszWBD7tE4aiKIG7bAlewyHWKY99JBf00J3NtOtPCLYEX814swew3Qpyf5d4l3t1rkaKjcdmdHrFUb6UaJMepCXas1IyyRYguYQ7YFC9AlRSuNXsm0f7FT5dJaW21JPT1aPllFsYDjVCIRUVX5aIioLB2L4VIOAbhtroFWxLJR3oenc@orcid.org',
+          ],
+          'institution-name': [
+            'American Association for the Advancement of Science',
+            'Example Organization Name',
+            'Howard Hughes Medical Institute - Harvard Medical School',
+            'Molecular Cardiology and Neuromuscular Institute',
+            'NASA',
+            'National Science Foundation',
+            'ORCID',
+            'University of Wisconsin-Madison',
+            'common:name',
+            'org name',
+            'organization name',
+            'this is an organization name',
+          ],
+        },
+        {
+          'orcid-id': '0000-0002-6349-8243',
+          'given-names': 'Pedro',
+          'family-names': '2021-02-08',
+          'credit-name': null,
+          'other-name': [
+            'Другое имя',
+            '其他名字',
+            'alia nomo',
+            'other names',
+            'andre navne',
+          ],
+          email: [],
+          'institution-name': [
+            'Massachusetts Institute of Technology',
+            "Ministry of Science and Technology of the People's Republic of China",
+            'NASA',
+            'NASA Education',
+            'ORCID',
+            'Royal College of Music',
+          ],
+        },
+        {
+          'orcid-id': '0000-0003-1492-897X',
+          'given-names': 'Pedro',
+          'family-names': 'Costa',
+          'credit-name': 'Pedro Miguel Costa',
+          'other-name': [],
+          email: [],
+          'institution-name': ['ORCID'],
+        },
+      ],
+      'num-found': 157,
+    }).pipe(
+      delay(1000),
+      catchError((error) => this._errorHandler.handleError(error)),
+      map((x) => {
+        x['expanded-result'] = x['expanded-result']?.map((element) => {
+          if (!element['given-names'] && !element['family-names']) {
+            element[
+              'given-names'
+            ] = $localize`:@@account.nameIsPri:Name is private`
+          }
 
-            return element
-          })
-          return x
+          return element
         })
-      )
+        return x
+      })
+    )
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {

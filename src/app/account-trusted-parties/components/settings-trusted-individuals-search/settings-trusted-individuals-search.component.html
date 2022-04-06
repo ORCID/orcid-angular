@@ -30,15 +30,13 @@
 <div class="row h-baseline">
   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 </div>
-<ng-container *ngIf="$trustedIndividuals | async as trustedIndividuals">
+<ng-container *ngIf="$search | async as searchResults">
   <ng-container
-    *ngIf="trustedIndividuals['expanded-result']?.length && this.isMobile"
+    *ngIf="searchResults['expanded-result']?.length && this.isMobile"
   >
     <mat-divider></mat-divider>
     <div
-      *ngFor="
-        let foundTrustedIndividual of trustedIndividuals['expanded-result']
-      "
+      *ngFor="let foundTrustedIndividual of searchResults['expanded-result']"
     >
       <div class="mobile-elements-container">
         <div class="mobile-ements-text-container">
@@ -80,9 +78,9 @@
   </ng-container>
   <div class="table-container">
     <table
-      *ngIf="trustedIndividuals?.['expanded-result']?.length && !this.isMobile"
+      *ngIf="searchResults?.['expanded-result']?.length && !this.isMobile"
       mat-table
-      [dataSource]="trustedIndividuals?.['expanded-result']"
+      [dataSource]="searchResults?.['expanded-result']"
       class="mat-elevation-z0"
     >
       <ng-container matColumnDef="trustedIndividuals">
@@ -132,20 +130,20 @@
 
   <div
     class="row h-baseline"
-    *ngIf="trustedIndividuals['expanded-result']?.length && !loading"
+    *ngIf="searchResults['expanded-result']?.length && !loading"
   >
     <mat-paginator
       [pageSizeOptions]="[10, 20, 50]"
       [pageSize]="pageSize"
       [pageIndex]="pageIndex"
-      [length]="trustedIndividuals['num-found']"
+      [length]="searchResults['num-found']"
       (page)="changePage($event)"
       [attr.aria-label]="ariaLabelPaginator"
       role="navigation"
     ></mat-paginator>
   </div>
 
-  <p *ngIf="!trustedIndividuals['expanded-result']?.length && !loading">
+  <p *ngIf="!searchResults['expanded-result']?.length && !loading">
     <i i18n="@@account.noResultFoundTrustedInd">
       No results found. Please edit your search terms.
     </i>

@@ -10,6 +10,7 @@ import { AccountTrustedOrganization } from 'src/app/types/account-trusted-organi
     './dialog-revoke-trusted-organization.component.scss',
     './dialog-revoke-trusted-organization.component.scss-theme.scss',
   ],
+  preserveWhitespaces: true,
 })
 export class DialogRevokeTrustedOrganizationComponent implements OnInit {
   isMobile: boolean
