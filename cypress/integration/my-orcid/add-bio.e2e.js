@@ -10,7 +10,7 @@ describe('My orcid - users are able to add content to their record', async funct
   it('User adds a biography content', function () {
     const addBio = 'This is my new Bio.'
     //sign in
-    cy.signin(userData.cyUserPrimaryEmaiVerified)//send user key from fixture file
+    cy.signin(userData.cyUserPrimaryEmaiVerified) //send user key from fixture file
     cy.get('#biography-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
