@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
       this.hideMainMenu =
         ORCID_REGEXP.test(path) ||
         path === `/${ApplicationRoutes.myOrcid}` ||
-        path === `/${ApplicationRoutes.accountQA}`
+        path === `/${ApplicationRoutes.account}`
     })
   }
 
