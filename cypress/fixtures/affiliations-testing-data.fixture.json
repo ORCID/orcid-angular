@@ -46,12 +46,15 @@
     "manuallyCitationType":"APA",
     "manuallyCitation":"Test Citation",
     "manuallyCitationDesc":"Test citation desc",
-    "manuallyIdentifierType":"doi: Digital object identifier",
-    "manuallyIdentifierId":"https://doi.org/10.1087/20120404",
+    "manuallyIdentifierType":"agr: Agricola",
+    "manuallyIdentifierId":"123",
     "manuallyIdentifierLink":"orcid.org",
     "manuallyRelationship":"Self",
     "manuallyFormLanguage":"Albanian",
     "manuallyFormCountry":"Albania",
-    "manuallyVisibility":"private"
+    "manuallyVisibility":"private",
+    "manuallyYear":"2022",
+    "manuallyMonth":"01",
+    "manuallyDay":"01"
   }
 }

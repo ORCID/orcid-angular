@@ -5,28 +5,32 @@ import testData from '../../fixtures/affiliations-testing-data.fixture.json'
 describe('My orcid - users are able to edit work info in their record', async function () {
   before(() => {
     cy.programmaticallySignin('cyUserPrimaryEmaiVerified')//send user key from fixture file
-    cy.visit(Cypress.env('baseUrl')+`/my-orcid`)
-    cy.get('app-side-bar')//wait for page to load
+    cy.visit('/my-orcid')
+    cy.get('#cy-works')//wait for page to load
   })
 
   it('User adds work by DOI and without modifying manually', function () {
-    cy.get('app-work-stack-group').within(($myPanel) => {
-      cy.get('button[aria-label="Add Work"]').click() //TO DO: replace once element id is added
+    const testWorks=testData.affilliantionWorks
+
+    cy.get('#cy-works').within(($myPanel) => {
+      cy.get('#cy-menu-add-works').click() 
     })
-    cy.contains(' Add DOI ').click({force:true})//REPLACE with element id
-    cy.get('#external-id-input').clear().type(testData.affilliantionWorks.DOI)
-    cy.contains('Retrieve work details from DOI').click()//REPLACE with element id
+    cy.get('#cy-add-work-doi').click({force:true})
+    cy.get('#external-id-input').clear().type(testWorks.DOI)
+    cy.get(`[id^='cy-retrieve-work-details']`).click()
     cy.get('#save-work-button').should('be.visible')//wait for modal to display
     cy.get('#save-work-button').click()
     //Verify work was added
-    cy.get('app-work-stack').within(($myPanel) => {
-      expect($myPanel).to.contain(testData.affilliantionWorks.workTitleDOI)
-    })
+    cy.get('#cy-works').should('contain',testWorks.workTitleDOI)
   })
- 
+
   after(()=>{
     //log out
     cy.get('#cy-user-info').click()
     cy.get('#cy-signout').click({force:true})
   })
 })
+
+
+
+

@@ -1,7 +1,6 @@
 import { environment } from '../cypress.env'
 import userData from '../fixtures/testing-users.fixture.json'
 
-
 Cypress.Commands.add('expectPreFillSignin', (user) => {
   return cy.get('#username').then((x) => {
     if (user.username) {
