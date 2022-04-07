@@ -40,9 +40,7 @@ export class SettingsActionsDeactivateComponent implements OnInit, OnDestroy {
       .getStateOf('ORCID_ANGULAR_ACCOUNT_SETTINGS')
       .subscribe((value) => {
         this.togglzOrcidAngularAccountSettings = value
-        this.removeDuplicateUrl = this.togglzOrcidAngularAccountSettings
-          ? '/qa/account'
-          : '/account'
+        this.removeDuplicateUrl = '/account'
       })
     this._platform
       .get()

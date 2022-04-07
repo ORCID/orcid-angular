@@ -57,8 +57,6 @@ export const ApplicationRoutes = {
   register: 'register',
   thirdPartySignIn: 'third-party-signin-completed',
   account: 'account',
-  accountQA: 'qa/account',
-  trustedPartiesQA: 'qa/trusted-parties',
   trustedParties: 'trusted-parties',
   home: '',
 }
