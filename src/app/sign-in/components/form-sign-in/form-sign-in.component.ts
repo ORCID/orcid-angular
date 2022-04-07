@@ -381,7 +381,9 @@ export class FormSignInComponent implements OnInit, AfterViewInit, OnDestroy {
           session?.userInfo?.REAL_USER_ORCID &&
           !this.authorizationFormSubmitted
         ) {
-          this.window.location.reload()
+          if (!session?.oauthSession?.forceLogin) {
+            this.window.location.reload()
+          }
         }
       })
   }
