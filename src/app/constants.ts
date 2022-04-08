@@ -43,7 +43,7 @@ export const WHITE_SPACE_REGEXP = /\s+/g
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
   twoFactor: '2fa-signin',
-  twoFactorSetup: 'qa/2FA/setup',
+  twoFactorSetup: '2FA/setup',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
   institutional: 'institutional-signin',
