@@ -17,9 +17,9 @@
     "visibility": "public"
   },
   "affiliationExistingOrg": {
-    "name": "Massachusetts Institute of Technology",
-    "city": "Cambridge",
-    "region": "MA",
+    "name": "NASA Education",
+    "city": "Washington",
+    "region": "DC",
     "country": "United States",
     "dept": "Engineering",
     "role": "Professor",
@@ -32,5 +32,29 @@
     "endDate_day": "01",
     "link": "https://www.mit.edu/",
     "visibility": "public"
+  },
+  "affilliantionWorks": {
+    "DOI": "10.1087/20120404",
+    "workTitleDOI": "ORCID: a system to uniquely identify researchers",
+    "manuallyType": "Book",
+    "manuallyTitle": "Test Biology Research",
+    "manuallySubtitle": "Sub Biology",
+    "manuallyTranslatedTitle": "Prueba Investiga Biología",
+    "manuallyLanguage": "Albanian",
+    "manuallyJournalTitle": "Test Journal",
+    "manuallyLink": "orcid.org",
+    "manuallyCitationType": "APA",
+    "manuallyCitation": "Test Citation",
+    "manuallyCitationDesc": "Test citation desc",
+    "manuallyIdentifierType": "agr: Agricola",
+    "manuallyIdentifierId": "123",
+    "manuallyIdentifierLink": "orcid.org",
+    "manuallyRelationship": "Self",
+    "manuallyFormLanguage": "Albanian",
+    "manuallyFormCountry": "Albania",
+    "manuallyVisibility": "private",
+    "manuallyYear": "2022",
+    "manuallyMonth": "01",
+    "manuallyDay": "01"
   }
 }
