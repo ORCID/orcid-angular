@@ -435,4 +435,8 @@ export class RecordWorksService {
     }
     return this.groupingSuggestionsSubject.asObservable()
   }
+
+  search(keywords: string) {
+    return this._http.get('http://localhost:8081/contributors/search?keywords=' + keywords)
+  }
 }

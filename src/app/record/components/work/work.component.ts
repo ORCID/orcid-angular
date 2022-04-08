@@ -13,6 +13,9 @@ import { Work } from 'src/app/types/record-works.endpoint'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
 import { WINDOW } from '../../../cdk/window'
 import { UserInfoService } from '../../../core/user-info/user-info.service'
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { Observable } from 'rxjs'
+import { debounceTime, finalize, map, startWith, switchMap, tap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-work',
@@ -38,7 +41,12 @@ export class WorkComponent implements OnInit {
   numberOfContributors: number
   contributionRole: string
 
+  filteredUsers: any
+  contributorsForm: FormGroup
+  isLoading = false
+
   constructor(
+    private fb: FormBuilder,
     private elementRef: ElementRef,
     private _userInfo: UserInfoService,
     private _recordWorksService: RecordWorksService,
@@ -46,6 +54,24 @@ export class WorkComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.contributorsForm = this.fb.group({
+      userInput: null
+    })
+
+    this.contributorsForm
+      .get('userInput')
+      .valueChanges
+      .pipe(
+        debounceTime(300),
+        tap(() => this.isLoading = true),
+        switchMap(value => this._recordWorksService.search(value)
+          .pipe(
+            finalize(() => this.isLoading = false),
+          )
+        )
+      )
+      .subscribe(users => this.filteredUsers = users);
+
     this.contributorsGroupedByOrcid = this.work.contributorsGroupedByOrcid
     this.numberOfContributors = this.work.numberOfContributors
     if (this.contributorsGroupedByOrcid) {

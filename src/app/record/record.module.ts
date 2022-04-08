@@ -77,6 +77,7 @@ import { TopBarVerificationEmailComponent } from './components/top-bar-verificat
 import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { ModalCombineWorksWithSelectorComponent } from './components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 @NgModule({
   declarations: [
@@ -162,6 +163,7 @@ import { ModalCombineWorksWithSelectorComponent } from './components/work/modals
     MatCheckboxModule,
     TextFieldModule,
     WarningMessageModule,
+    MatProgressSpinnerModule,
   ],
   providers: [VerificationEmailModalService],
 })

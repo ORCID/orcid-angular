@@ -244,6 +244,34 @@
           </a>
         </p>
       </ng-container>
+      <div class="row">
+        <div class="row">
+          <label class="mat-caption">
+            <strong>Contributor</strong>
+          </label>
+        </div>
+        <form [formGroup]="contributorsForm" class="row">
+          <mat-form-field appearance="outline" class="row">
+          <input type="text"
+                 placeholder="Search"
+                 matInput
+                 formControlName='userInput'
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let option of filteredUsers" [value]="option">
+                <span>{{ option.creditName }}</span> - <span>{{ option.orcid }}</span> - <span>{{ option.email }}</span>
+                <br>
+                <ng-container *ngFor="let rs of option.rolesAndSequences">
+                  <span>{{ rs.role }}</span> - <span>{{ rs.sequence }}</span>
+                </ng-container>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+        </form>
+      </div>
     </div>
     <!--    todo @DanielPalafox Remove div once togglz is removed-->
     <div *ngIf="!togglzWorksContributors">
