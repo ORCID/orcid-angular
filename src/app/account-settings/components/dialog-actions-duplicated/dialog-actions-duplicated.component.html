@@ -40,12 +40,15 @@
     >
   </ng-container>
   <ng-container *ngIf="!data.deprecatingAccountName">
-    <a
-      class="underline"
-      href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
-      rel="noopener noreferrer"
-      target="_blank"
-      >{{ data.deprecatingOrcid }}</a
+    <strong
+      ><ng-container i18n="@@account.nameIsPri">Name is private</ng-container>
+      <a
+        class="underline"
+        href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
+        rel="noopener noreferrer"
+        target="_blank"
+        >{{ data.deprecatingOrcid }}</a
+      ></strong
     >
   </ng-container>
   <div *ngFor="let email of data.deprecatingEmails">{{ email }}</div>

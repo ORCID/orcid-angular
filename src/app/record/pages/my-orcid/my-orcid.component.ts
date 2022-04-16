@@ -12,7 +12,6 @@ import { UserInfoService } from '../../../core/user-info/user-info.service'
 import { UserInfo } from '../../../types'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
-import { AppcueService } from '../../../core/appcue/appcue.service'
 import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { HelpHeroService } from 'src/app/core/help-hero/help-hero.service'
 
@@ -60,7 +59,6 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
     private _record: RecordService,
     private _openGraph: OpenGraphService,
     private _robotsMeta: RobotsMetaTagsService,
-    private _appcueService: AppcueService,
     private _helpHeroService: HelpHeroService,
     private _router: Router,
     private _userSession: UserService,
@@ -133,14 +131,8 @@ export class MyOrcidComponent implements OnInit, OnDestroy {
         }),
         switchMap(() => this._togglz.getTogglz().pipe(first())),
         tap((togglz) => {
-          if (togglz['ORCID_ANGULAR_HELP_HERO']) {
+          if (togglz.messages['ORCID_ANGULAR_HELP_HERO'] === 'true') {
             this._helpHeroService.initializeHelpHero(
-              this.userInfo,
-              this.userRecord
-            )
-          }
-          if (togglz['ORCID_ANGULAR_APP_CUES']) {
-            this._appcueService.initializeAppCues(
               this.userInfo,
               this.userRecord
             )

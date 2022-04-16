@@ -1,11 +1,14 @@
 <app-settings-panels-data>
-  <p i18n="@@account.addExtraSecurity">
-    Add extra security to your ORCID account by enabling two-factor
-    authentication (2FA).
-  </p>
-  <p i18n="@@account.eachTimeYouSignIn">
-    Each time you sign in to ORCID you’ll be prompted to enter a six-digit code
-    we send to your preferred 2FA authentication application.
+  <p>
+    <ng-container i18n="@@account.addExtraSecurity">
+      Add extra security to your ORCID account by enabling two-factor
+      authentication (2FA).
+    </ng-container>
+    <br />
+    <ng-container i18n="@@account.eachTimeYouSignIn">
+      Each time you sign in to ORCID you’ll be prompted to enter a six-digit
+      code we send to your preferred 2FA authentication application.
+    </ng-container>
   </p>
   <p>
     <b class="orc-font-body" i18n="@@account.twoFactorIsCurrently">

@@ -96,7 +96,7 @@ const routes: Routes = [
       import('./record/record.module').then((m) => m.RecordModule),
   },
   {
-    path: ApplicationRoutes.accountQA,
+    path: ApplicationRoutes.account,
     canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>
       import('./account-settings/account-settings.module').then(
@@ -104,7 +104,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: ApplicationRoutes.trustedPartiesQA,
+    path: ApplicationRoutes.trustedParties,
     canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>
       import('./account-trusted-parties/account-trusted-parties.module').then(

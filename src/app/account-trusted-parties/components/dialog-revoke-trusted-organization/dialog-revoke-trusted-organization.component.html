@@ -36,16 +36,20 @@
       <p>
         <ng-container i18n="@@account.organizationsCanStillDelete"
           >Organizations can still delete items they added to your record even
-          after their access permissions have been revoked. </ng-container
-        ><a
-          href="https://support.orcid.org/hc/en-us/articles/360006973893-Trusted-organizations"
-          rel="noopener noreferrer"
-          target="_blank"
-          i18n="@@account.findOutMoreAboutTrusted"
-          class="underline"
-        >
-          Find out more about Trusted Organizations and access permissions
-        </a>
+          after their access permissions have been revoked.
+        </ng-container>
+
+        <ng-container>
+          <a
+            href="https://support.orcid.org/hc/en-us/articles/360006973893-Trusted-organizations"
+            rel="noopener noreferrer"
+            target="_blank"
+            i18n="@@account.findOutMoreAboutTrusted"
+            class="underline"
+          >
+            Find out more about Trusted Organizations and access permissions
+          </a>
+        </ng-container>
       </p>
     </div>
   </div>
@@ -56,9 +60,9 @@
       color="warn"
       (click)="ok()"
       id="dialog-remove-duplicated-record"
-      i18n="@@account.revokeAccess"
+      i18n="@@account.revokeAccessPermissions"
     >
-      Revoke access
+      Revoke access permissions
     </button>
     <button
       mat-stroked-button

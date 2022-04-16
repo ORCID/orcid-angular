@@ -1,4 +1,5 @@
 import { environment } from '../cypress.env'
+import userData from '../fixtures/testing-users.fixture.json'
 
 Cypress.Commands.add('expectPreFillSignin', (user) => {
   return cy.get('#username').then((x) => {
@@ -18,13 +19,13 @@ Cypress.Commands.add('signin', (user) =>
     })
     .get('#username')
     .clear()
-    .type(user.username || user.email)
+    .type(user.oid || user.email)
     .get('#password')
     .type(user.password)
     .get('#signin-button')
     .click()
 )
-
+//used for legacy scripts
 Cypress.Commands.add('programmaticSignin', (user) => {
   cy.getCookie('XSRF-TOKEN').then((csrfCookie) => {
     if (!csrfCookie) {
@@ -46,6 +47,37 @@ Cypress.Commands.add('programmaticSignin', (user) => {
         `userId=${encodeURIComponent(
           environment[user].id || environment[user].email
         )}&password=${environment[user].password}&oauthRequest=false`
+      )
+      return cy
+        .wrap(JSON.parse(request.response))
+        .its('success')
+        .should('be.true')
+    }
+  })
+})
+
+//login via web api reading user from fixture file
+Cypress.Commands.add('programmaticallySignin', (user) => {
+  cy.getCookie('XSRF-TOKEN').then((csrfCookie) => {
+    if (!csrfCookie) {
+      return cy
+        .visit(Cypress.config().baseUrl)
+        .getCookie('XSRF-TOKEN')
+        .then(() => cy.programmaticallySignin(user))
+    } else {
+      const fd = new FormData()
+      const url = Cypress.config().baseUrl + '/signin/auth.json'
+      const request = new XMLHttpRequest()
+      request.open('POST', url, false)
+      request.setRequestHeader('X-XSRF-TOKEN', csrfCookie.value)
+      request.setRequestHeader(
+        'Content-Type',
+        'application/x-www-form-urlencoded;charset=UTF-8'
+      )
+      request.send(
+        `userId=${encodeURIComponent(
+          userData[user].oid || userData[user].email
+        )}&password=${userData[user].password}&oauthRequest=false`
       )
       return cy
         .wrap(JSON.parse(request.response))
