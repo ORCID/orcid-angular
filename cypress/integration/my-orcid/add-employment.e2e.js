@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import testData from '../../fixtures/affiliations-testing-data.fixture.json'
-const uniqueId=require('../../helpers/uniqueEntry')
+const uniqueId = require('../../helpers/uniqueEntry')
 
 describe('My orcid - users are able to edit employment info in their record', async function () {
   before(() => {
@@ -12,7 +12,7 @@ describe('My orcid - users are able to edit employment info in their record', as
 
   it('User adds employment with new Organization', function () {
     const testNewOrg = testData.affiliationNewOrg
-    const uniqueRole=testNewOrg.role+`${uniqueId()}`
+    const uniqueRole = testNewOrg.role + `${uniqueId()}`
 
     cy.get('#cy-affiliation-employment').within(($myPanel) => {
       cy.get('#cy-add-btn-employment').click()
