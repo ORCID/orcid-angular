@@ -228,9 +228,9 @@
         <mat-error
           class="mat-caption"
           *ngIf="affiliationForm.hasError('required', 'organization')"
-          i18n="@@shared.organizationError"
+          i18n="@@shared.pleaseEnterAnOrganization"
         >
-          Please enter a organization
+          Please enter an organization
         </mat-error>
         <mat-error
           *ngIf="affiliationForm.get('organization').errors?.maxlength"
