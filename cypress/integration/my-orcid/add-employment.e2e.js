@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import testData from '../../fixtures/affiliations-testing-data.fixture.json'
+const uniqueId = require('../../helpers/uniqueEntry')
 
 describe('My orcid - users are able to edit employment info in their record', async function () {
   before(() => {
@@ -11,6 +12,7 @@ describe('My orcid - users are able to edit employment info in their record', as
 
   it('User adds employment with new Organization', function () {
     const testNewOrg = testData.affiliationNewOrg
+    const uniqueRole = testNewOrg.role + `${uniqueId()}`
 
     cy.get('#cy-affiliation-employment').within(($myPanel) => {
       cy.get('#cy-add-btn-employment').click()
@@ -26,7 +28,7 @@ describe('My orcid - users are able to edit employment info in their record', as
       cy.contains(testNewOrg.country).click()
     })
     cy.get('#department-input').clear().type(testNewOrg.dept)
-    cy.get('#title-input').clear().type(testNewOrg.role)
+    cy.get('#title-input').clear().type(uniqueRole)
     //set start date
     cy.get('#cy-start-date-year-sel').click()
     cy.get('#cy-start-date-year-sel-panel').within(($date) => {
@@ -57,7 +59,7 @@ describe('My orcid - users are able to edit employment info in their record', as
     cy.get('#save-affiliation-button').click()
 
     //Verify employment was added
-    cy.get('#cy-affiliation-employment').should('contain', testNewOrg.name)
+    cy.get('#cy-affiliation-employment').should('contain', uniqueRole)
   })
 
   /* THIS SCENARIO WILL BE INCLUDED LATER ON
