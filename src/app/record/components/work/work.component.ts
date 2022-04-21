@@ -37,6 +37,9 @@ export class WorkComponent implements OnInit {
   contributorsGroupedByOrcid: Contributor[] = []
   numberOfContributors: number
   contributionRole: string
+  showCitation = false
+  showExpandedFormatting = false
+ 
 
   constructor(
     private elementRef: ElementRef,
