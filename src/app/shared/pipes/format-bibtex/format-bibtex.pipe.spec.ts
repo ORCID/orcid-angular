@@ -1,4 +1,4 @@
-import { FormatBibtex} from './format-bibtex.pipe'
+import { FormatBibtex } from './format-bibtex.pipe'
 
 describe('FormatBibtexPipe', () => {
   it('create an instance', () => {

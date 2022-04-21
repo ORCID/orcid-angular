@@ -39,7 +39,6 @@ export class WorkComponent implements OnInit {
   contributionRole: string
   showCitation = false
   showExpandedFormatting = false
- 
 
   constructor(
     private elementRef: ElementRef,
