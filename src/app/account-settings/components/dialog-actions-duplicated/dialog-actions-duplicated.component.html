@@ -31,6 +31,7 @@
     <strong
       >{{ data.deprecatingAccountName }}
       <a
+        id="cy-deprecating-orcid"
         class="underline"
         href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
         rel="noopener noreferrer"
@@ -43,6 +44,7 @@
     <strong
       ><ng-container i18n="@@account.nameIsPri">Name is private</ng-container>
       <a
+        id="cy-deprecating-orcid"
         class="underline"
         href="{{ baseUrl }}{{ data.deprecatingOrcid }}"
         rel="noopener noreferrer"
@@ -63,6 +65,7 @@
     <strong
       >{{ data.primaryAccountName }}
       <a
+        id="cy-primary-orcid"
         class="underline"
         href="{{ baseUrl }}{{ data.primaryOrcid }}"
         rel="noopener noreferrer"
@@ -74,6 +77,7 @@
   <ng-container *ngIf="!data.primaryAccountName">
     <strong>
       <a
+        id="cy-primary-orcid"
         class="underline"
         href="{{ baseUrl }}{{ data.primaryOrcid }}"
         rel="noopener noreferrer"
@@ -90,7 +94,7 @@
       color="warn"
       (click)="ok()"
       i18n="@@account.removeDuplicatedRecord"
-      id="dialog-remove-duplicated-record"
+      id="cy-remove-duplicate-record"
     >
       Remove duplicate record
     </button>
@@ -99,7 +103,7 @@
       color="primary"
       (click)="cancel()"
       i18n="@@shared.cancel"
-      id="dialog-cancel"
+      id="cy-dialog-cancel"
     >
       Cancel
     </button>

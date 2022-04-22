@@ -3,6 +3,7 @@
     <div class="inline-initial-side">
       <div class="row inline-initial-side">
         <app-settings-panels-expand-buttons
+          [id]="id ? id + '-action' : ''"
           (toggle)="collapse()"
           [openState]="expandedContent"
         ></app-settings-panels-expand-buttons>

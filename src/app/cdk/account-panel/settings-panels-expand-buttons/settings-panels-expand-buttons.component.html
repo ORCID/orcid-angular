@@ -5,6 +5,7 @@
   *ngIf="!openState"
   [attr.aria-label]="tooltipLabelShowDetails"
   class="expand_more"
+  id="{{ id ? id + '-more' : '' }}"
 >
   <mat-icon>expand_less</mat-icon>
 </button>
@@ -15,6 +16,7 @@
   *ngIf="openState"
   [attr.aria-label]="tooltipLabelHideDetails"
   class="expand_less"
+  id="{{ id ? id + '-less' : '' }}"
 >
   <mat-icon>expand_more</mat-icon>
 </button>
