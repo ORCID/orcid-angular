@@ -53,13 +53,27 @@
     <mat-icon>inbox</mat-icon>
     <span i18n="@@workspace.notifications">Inbox</span>
   </button>
-  <button mat-menu-item (click)="goto('account')" id="cy-account-settings">
+  <button
+    mat-menu-item
+    (click)="goto('account')"
+    id="cy-account-settings"
+    *ngIf="
+      userInfo &&
+      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] === 'true')
+    "
+  >
     <mat-icon>settings</mat-icon>
     <span i18n="@@ngOrcid.accountSetting">Account settings </span>
   </button>
   <button
     mat-menu-item
-    *ngIf="togglzOrcidAngularAccountSettings"
+    *ngIf="
+      togglzOrcidAngularAccountSettings &&
+      userInfo &&
+      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] === 'true')
+    "
     (click)="goto('trusted-parties')"
     id="cy-trusted-parties"
   >
@@ -70,8 +84,8 @@
     mat-menu-item
     *ngIf="
       userInfo &&
-      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
-        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
+      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] === 'true') &&
       userInfo['MEMBER_MENU'] == 'true'
     "
     (click)="goto('group/developer-tools')"
@@ -84,8 +98,8 @@
     mat-menu-item
     *ngIf="
       userInfo &&
-      (userInfo['IN_DELEGATION_MODE'] == 'false' ||
-        userInfo['DELEGATED_BY_ADMIN'] == 'true') &&
+      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
+        userInfo['DELEGATED_BY_ADMIN'] === 'true') &&
       userInfo['MEMBER_MENU'] != 'true'
     "
     (click)="goto('developer-tools')"
