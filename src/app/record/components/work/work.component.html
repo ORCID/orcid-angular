@@ -276,13 +276,68 @@
         >({{ work.citation?.citationType?.value }})</span
       >
     </h3>
-
     <div>
+      <div>
+        <a
+          class="underline"
+          (click)="showCitation = !showCitation"
+          id="cy-citation-toggle-link"
+        >
+          <ng-container
+            i18n="@@works.showCitation"
+            *ngIf="!showCitation"
+            id="cy-show-citation"
+          >
+            Show citation
+          </ng-container>
+          <ng-container
+            i18n="@@works.hideCitation"
+            *ngIf="showCitation"
+            id="cy-hide-citation"
+          >
+            Hide citation
+          </ng-container>
+        </a>
+      </div>
+      <br />
       <ng-container *ngIf="togglzWorksContributors">
         <ng-container
-          *ngIf="work.citation?.citation?.value?.length > maxBibtexCharacters"
+          *ngIf="
+            work.citation?.citation?.value?.length > maxBibtexCharacters &&
+            showCitation
+          "
         >
-          {{ work.citation.citation.value.substr(0, maxBibtexCharacters) }}
+          <ng-container *ngIf="!showExpandedFormatting">
+            {{ work.citation.citation.value.substr(0, maxBibtexCharacters) }}
+          </ng-container>
+          <ng-container *ngIf="showExpandedFormatting">
+            <pre class="pre-bibtex"
+              >{{ work.citation.citation.value | formatBibtex }} </pre
+            >
+          </ng-container>
+          <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
+            <br />
+            <a
+              class="underline"
+              (click)="showExpandedFormatting = !showExpandedFormatting"
+              id="cy-expanded-citation-toggle-link"
+            >
+              <ng-container
+                i18n="@@works.expandedFormatBibtex"
+                *ngIf="!showExpandedFormatting"
+                id="cy-expanded-formatting"
+              >
+                Switch to expanded formatting
+              </ng-container>
+              <ng-container
+                i18n="@@works.compactFormatBibtex"
+                *ngIf="showExpandedFormatting"
+                id="cy-compact-formatting"
+              >
+                Switch to compact formatting
+              </ng-container>
+            </a>
+          </ng-container>
           <br />
           ----
           <br />
@@ -312,13 +367,76 @@
           </a>
         </ng-container>
         <ng-container
-          *ngIf="work?.citation?.citation?.value?.length < maxBibtexCharacters"
+          *ngIf="
+            work?.citation?.citation?.value?.length < maxBibtexCharacters &&
+            showCitation
+          "
         >
-          {{ work.citation.citation.value }}
+          <ng-container *ngIf="!showExpandedFormatting">
+            {{ work.citation.citation.value }}
+          </ng-container>
+          <ng-container *ngIf="showExpandedFormatting">
+            <pre class="pre-bibtex"
+              >{{ work.citation.citation.value | formatBibtex }} </pre
+            >
+          </ng-container>
+          <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
+            <a
+              class="underline"
+              (click)="showExpandedFormatting = !showExpandedFormatting"
+              id="cy-expanded-citation-toggle-link"
+            >
+              <ng-container
+                i18n="@@works.expandedFormatBibtex"
+                *ngIf="!showExpandedFormatting"
+                id="cy-expanded-formatting"
+              >
+                <br />
+                Switch to expanded formatting
+              </ng-container>
+              <ng-container
+                i18n="@@works.compactFormatBibtex"
+                *ngIf="showExpandedFormatting"
+                id="cy-compact-formatting"
+              >
+                Switch to compact formatting
+              </ng-container>
+            </a>
+          </ng-container>
         </ng-container>
       </ng-container>
-      <ng-container *ngIf="!togglzWorksContributors">
-        {{ work.citation.citation.value }}
+      <ng-container *ngIf="!togglzWorksContributors" && showCitation>
+        <ng-container *ngIf="!showExpandedFormatting">
+          {{ work.citation.citation.value }}
+        </ng-container>
+        <ng-container *ngIf="showExpandedFormatting">
+          <pre class="pre-bibtex"
+            >{{ work.citation.citation.value | formatBibtex }} </pre
+          >
+        </ng-container>
+        <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
+          <br />
+          <a
+            class="underline"
+            (click)="showExpandedFormatting = !showExpandedFormatting"
+            id="cy-expanded-citation-toggle-link"
+          >
+            <ng-container
+              i18n="@@works.expandedFormatBibtex"
+              *ngIf="!showExpandedFormatting"
+              id="cy-expanded-formatting"
+            >
+              Switch to expanded formatting
+            </ng-container>
+            <ng-container
+              i18n="@@works.compactFormatBibtex"
+              *ngIf="showExpandedFormatting"
+              id="cy-compact-formatting"
+            >
+              Switch to compact formatting
+            </ng-container>
+          </a>
+        </ng-container>
       </ng-container>
     </div>
   </app-display-attribute>
