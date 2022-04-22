@@ -4,6 +4,7 @@
 <h2 class="orc-font-body-large col" i18n="@@account.defaults">Defaults</h2>
 
 <app-settings-panels
+  id="cy-email-panel"
   [loading]="emailFrequencyLoading"
   [(expandedContent)]="emailFrequencyExpanded"
   class="row"
@@ -16,6 +17,7 @@
 </app-settings-panels>
 
 <app-settings-panels
+  id="cy-language-panel"
   class="row"
   [title]="titleLanguage"
   [loading]="languageFrequencyLoading"
@@ -26,6 +28,7 @@
 </app-settings-panels>
 
 <app-settings-panels
+  id="cy-visibility-panel"
   class="row"
   [title]="titleVisibility"
   [loading]="visibilityFrequencyLoading"

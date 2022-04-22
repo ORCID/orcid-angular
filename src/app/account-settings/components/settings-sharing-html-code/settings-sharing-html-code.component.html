@@ -4,13 +4,14 @@
   </p>
   <mat-form-field appearance="outline" class="mat-form-field-min no-hint">
     <textarea
-      id="description-input"
+      id="cy-description-input"
       matInput
       formControlName="description"
       cdkTextareaAutosize
       [readonly]="true"
     >
     <a
+    id="cy-effective-orcid-url"
     class="underline"
      href="{{ userSession?.effectiveOrcidUrl }}"
      target="orcid.widget"
@@ -33,6 +34,7 @@
     target="orcid.widget"
     rel="me noopener noreferrer"
     style="vertical-align: top"
+    id="cy-html-preview"
   >
     <img
       src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
