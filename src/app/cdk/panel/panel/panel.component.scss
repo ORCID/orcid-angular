@@ -10,7 +10,8 @@
   align-items: center;
   justify-content: space-between;
   min-height: 56px;
-  word-break: break-all;
+  word-break: normal;
+  overflow-wrap: anywhere;
   h2 {
     margin: 0;
   }
