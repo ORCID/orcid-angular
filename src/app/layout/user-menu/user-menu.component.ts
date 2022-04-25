@@ -25,6 +25,7 @@ export class UserMenuComponent implements OnInit {
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:sign in or register`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
   togglzOrcidAngularAccountSettings: boolean
+  isAccountDelegate: boolean
 
   constructor(
     private _router: Router,
@@ -39,6 +40,8 @@ export class UserMenuComponent implements OnInit {
       if (data.loggedIn) {
         this.userInfo = data.userInfo
         this.displayName = data.displayName
+        this.isAccountDelegate =
+          data.userInfo.REAL_USER_ORCID === data.userInfo.EFFECTIVE_USER_ORCID
       } else {
         this.userInfo = null
         this.displayName = null
