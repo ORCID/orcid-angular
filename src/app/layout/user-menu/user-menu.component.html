@@ -68,12 +68,7 @@
   </button>
   <button
     mat-menu-item
-    *ngIf="
-      togglzOrcidAngularAccountSettings &&
-      userInfo &&
-      (userInfo['IN_DELEGATION_MODE'] === 'false' ||
-        userInfo['DELEGATED_BY_ADMIN'] === 'true')
-    "
+    *ngIf="togglzOrcidAngularAccountSettings"
     (click)="goto('trusted-parties')"
     id="cy-trusted-parties"
   >
