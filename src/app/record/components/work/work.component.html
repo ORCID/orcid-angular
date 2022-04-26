@@ -272,7 +272,7 @@
   <app-display-attribute *ngIf="work.citation?.citation?.value?.length > 0">
     <h3 class="orc-font-body-small">
       <ng-container i18n="@@works.citation">Citation</ng-container>
-      <span *ngIf="work.citation?.citationType?.value"
+      <span *ngIf="work.citation?.citationType?.value" class="citation-type"
         >({{ work.citation?.citationType?.value }})</span
       >
     </h3>
@@ -317,6 +317,7 @@
           </ng-container>
           <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
             <br />
+            <br *ngIf="!showExpandedFormatting" />
             <a
               class="underline"
               (click)="showExpandedFormatting = !showExpandedFormatting"
@@ -381,6 +382,8 @@
             >
           </ng-container>
           <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
+            <br />
+            <br *ngIf="!showExpandedFormatting" />
             <a
               class="underline"
               (click)="showExpandedFormatting = !showExpandedFormatting"
@@ -391,9 +394,9 @@
                 *ngIf="!showExpandedFormatting"
                 id="cy-expanded-formatting"
               >
-                <br />
                 Switch to expanded formatting
               </ng-container>
+
               <ng-container
                 i18n="@@works.compactFormatBibtex"
                 *ngIf="showExpandedFormatting"
@@ -416,6 +419,7 @@
         </ng-container>
         <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
           <br />
+          <br *ngIf="!showExpandedFormatting" />
           <a
             class="underline"
             (click)="showExpandedFormatting = !showExpandedFormatting"
