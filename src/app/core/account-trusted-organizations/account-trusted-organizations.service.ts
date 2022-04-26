@@ -23,7 +23,7 @@ export class AccountTrustedOrganizationsService {
   get(): Observable<AccountTrustedOrganization[]> {
     return this._http
       .get<AccountTrustedOrganization[]>(
-        environment.API_WEB + `account/get-trusted-orgs`,
+        environment.API_WEB + `account/get-trusted-orgs.json`,
         { headers: this.headers }
       )
       .pipe(
