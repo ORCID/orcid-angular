@@ -383,7 +383,7 @@
           </ng-container>
           <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
             <br />
-            <br *ngIf="!showExpandedFormatting"/>
+            <br *ngIf="!showExpandedFormatting" />
             <a
               class="underline"
               (click)="showExpandedFormatting = !showExpandedFormatting"
@@ -396,7 +396,7 @@
               >
                 Switch to expanded formatting
               </ng-container>
-             
+
               <ng-container
                 i18n="@@works.compactFormatBibtex"
                 *ngIf="showExpandedFormatting"
