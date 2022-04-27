@@ -60,7 +60,8 @@
     *ngIf="
       userInfo &&
       (userInfo['IN_DELEGATION_MODE'] === 'false' ||
-        userInfo['DELEGATED_BY_ADMIN'] === 'true')
+        userInfo['DELEGATED_BY_ADMIN'] === 'true' ||
+        !restrictedDelegators)
     "
   >
     <mat-icon>settings</mat-icon>

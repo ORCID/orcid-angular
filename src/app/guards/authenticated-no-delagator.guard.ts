@@ -6,17 +6,22 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { Observable } from 'rxjs'
+import { combineLatest, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { ApplicationRoutes } from '../constants'
 import { UserService } from '../core'
+import { TogglzService } from '../core/togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticatedNoDelegatorGuard implements CanActivateChild {
-  constructor(private _userInfo: UserService, private _router: Router) {}
+  constructor(
+    private _userInfo: UserService,
+    private _router: Router,
+    private _togglz: TogglzService
+  ) {}
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -25,11 +30,18 @@ export class AuthenticatedNoDelegatorGuard implements CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this._userInfo.getUserSession().pipe(
+    return combineLatest([
+      this._togglz.getStateOf('RESTRICTED_DELEGATORS'),
+      this._userInfo.getUserSession(),
+    ]).pipe(
       map((value) => {
+        const restrictedDelegators = value[0]
+        const userSession = value[1]
         if (
-          (value.loggedIn && value.userInfo.IN_DELEGATION_MODE === 'false') ||
-          value.userInfo.DELEGATED_BY_ADMIN === 'true'
+          (userSession.loggedIn &&
+            userSession.userInfo.IN_DELEGATION_MODE === 'false') ||
+          userSession.userInfo.DELEGATED_BY_ADMIN === 'true' ||
+          !restrictedDelegators
         ) {
           return true
         } else {
