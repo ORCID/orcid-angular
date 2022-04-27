@@ -161,7 +161,7 @@ import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-reco
     MatCheckboxModule,
     TextFieldModule,
     WarningMessageModule,
-    TopBarMyPublicRecordPreviewModule
+    TopBarMyPublicRecordPreviewModule,
   ],
   providers: [VerificationEmailModalService],
 })
