@@ -106,7 +106,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.trustedParties,
-    canActivateChild: [AuthenticatedGuard, AuthenticatedNoDelegatorGuard],
+    canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>
       import('./account-trusted-parties/account-trusted-parties.module').then(
         (m) => m.AccountTrustedPartiesModule

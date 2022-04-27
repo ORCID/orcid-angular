@@ -20,10 +20,12 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { AccountPanelModule } from '../cdk/account-panel/account-panel.module'
 import { ModalModule } from '../cdk/modal/modal.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
+import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
 import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authentication-form/two-factor-authentication-form.module'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { SharedModule } from '../shared/shared.module'
 import { AccountTrustedPartiesRoutingModule } from './account-trusted-parties-routing.module'
+import { DialogAddTrustedIndividualsYourOwnEmailComponent } from './components/dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component'
 import { DialogAddTrustedIndividualsComponent } from './components/dialog-add-trusted-individuals/dialog-add-trusted-individuals.component'
 import { DialogRevokeTrustedIndividualsComponent } from './components/dialog-revoke-trusted-individuals/dialog-revoke-trusted-individuals.component'
 import { DialogRevokeTrustedOrganizationComponent } from './components/dialog-revoke-trusted-organization/dialog-revoke-trusted-organization.component'
@@ -34,7 +36,6 @@ import { SettingsTrustedOrganizationsComponent } from './components/settings-tru
 import { SettingsUsersThatThrustYouComponent } from './components/settings-users-that-thrust-you/settings-users-that-thrust-you.component'
 import { SettingsComponent } from './components/settings/settings.component'
 import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/account-trusted-parties.component'
-import { DialogAddTrustedIndividualsYourOwnEmailComponent } from './components/dialog-add-trusted-individuals-your-own-email/dialog-add-trusted-individuals-your-own-email.component'
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { DialogAddTrustedIndividualsYourOwnEmailComponent } from './components/d
     TextFieldModule,
     TwoFactorAuthenticationFormModule,
     AccountPanelModule,
+    TopBarMyPublicRecordPreviewModule,
   ],
   providers: [VerificationEmailModalService],
 })

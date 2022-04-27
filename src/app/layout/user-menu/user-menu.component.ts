@@ -26,6 +26,7 @@ export class UserMenuComponent implements OnInit {
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
   togglzOrcidAngularAccountSettings: boolean
   isAccountDelegate: boolean
+  restrictedDelegators: boolean
 
   constructor(
     private _router: Router,
@@ -56,6 +57,9 @@ export class UserMenuComponent implements OnInit {
     this._togglz
       .getStateOf('ORCID_ANGULAR_ACCOUNT_SETTINGS')
       .subscribe((value) => (this.togglzOrcidAngularAccountSettings = value))
+    this._togglz
+      .getStateOf('RESTRICTED_DELEGATORS')
+      .subscribe((value) => (this.restrictedDelegators = value))
   }
 
   goto(url) {

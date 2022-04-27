@@ -47,7 +47,6 @@ import { ResearchResourceStackComponent } from './components/research-resource-s
 import { ResearchResourceStacksGroupComponent } from './components/research-resource-stacks-group/research-resource-stacks-group.component'
 import { ResearchResourceComponent } from './components/research-resource/research-resource.component'
 import { TopBarActionsComponent } from './components/top-bar-actions/top-bar-actions.component'
-import { TopBarMyPublicRecordPreviewComponent } from './components/top-bar-my-public-record-preview/top-bar-my-public-record-preview.component'
 import { TopBarRecordIssuesComponent } from './components/top-bar-record-issues/top-bar-record-issues.component'
 import { ModalBiographyComponent } from './components/top-bar/modals/modal-biography/modal-biography.component'
 import { ModalNameComponent } from './components/top-bar/modals/modal-name/modal-name.component'
@@ -77,6 +76,7 @@ import { TopBarVerificationEmailComponent } from './components/top-bar-verificat
 import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { ModalCombineWorksWithSelectorComponent } from './components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
+import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
 
 @NgModule({
   declarations: [
@@ -100,7 +100,6 @@ import { ModalCombineWorksWithSelectorComponent } from './components/work/modals
     WorkStackComponent,
     WorkComponent,
     TopBarActionsComponent,
-    TopBarMyPublicRecordPreviewComponent,
     TopBarRecordIssuesComponent,
     NotFoundComponent,
     ModalAffiliationsComponent,
@@ -162,6 +161,7 @@ import { ModalCombineWorksWithSelectorComponent } from './components/work/modals
     MatCheckboxModule,
     TextFieldModule,
     WarningMessageModule,
+    TopBarMyPublicRecordPreviewModule,
   ],
   providers: [VerificationEmailModalService],
 })
