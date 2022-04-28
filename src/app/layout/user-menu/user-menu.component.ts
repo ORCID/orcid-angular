@@ -25,6 +25,8 @@ export class UserMenuComponent implements OnInit {
   labelSigninRegister = $localize`:@@layout.ariaLabelSigninRegister:sign in or register`
   labelUserMenu = $localize`:@@layout.ariaLabelUserMenu:User menu`
   togglzOrcidAngularAccountSettings: boolean
+  isAccountDelegate: boolean
+  restrictedDelegators: boolean
 
   constructor(
     private _router: Router,
@@ -39,6 +41,8 @@ export class UserMenuComponent implements OnInit {
       if (data.loggedIn) {
         this.userInfo = data.userInfo
         this.displayName = data.displayName
+        this.isAccountDelegate =
+          data.userInfo.REAL_USER_ORCID === data.userInfo.EFFECTIVE_USER_ORCID
       } else {
         this.userInfo = null
         this.displayName = null
@@ -53,6 +57,9 @@ export class UserMenuComponent implements OnInit {
     this._togglz
       .getStateOf('ORCID_ANGULAR_ACCOUNT_SETTINGS')
       .subscribe((value) => (this.togglzOrcidAngularAccountSettings = value))
+    this._togglz
+      .getStateOf('RESTRICTED_DELEGATORS')
+      .subscribe((value) => (this.restrictedDelegators = value))
   }
 
   goto(url) {

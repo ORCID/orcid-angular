@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { AccountPanelModule } from '../cdk/account-panel/account-panel.module'
 import { ModalModule } from '../cdk/modal/modal.module'
 import { SideBarModule } from '../cdk/side-bar/side-bar.module'
+import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
 import { TwoFactorAuthenticationFormModule } from '../cdk/two-factor-authentication-form/two-factor-authentication-form.module'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { SharedModule } from '../shared/shared.module'
@@ -96,6 +97,7 @@ import { AccountSettingsComponent } from './pages/account-settings/account-setti
     TextFieldModule,
     TwoFactorAuthenticationFormModule,
     AccountPanelModule,
+    TopBarMyPublicRecordPreviewModule,
   ],
   providers: [VerificationEmailModalService],
 })

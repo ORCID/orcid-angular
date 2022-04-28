@@ -21,3 +21,8 @@ app-modal {
     margin-inline-end: 4px;
   }
 }
+
+h2 {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}

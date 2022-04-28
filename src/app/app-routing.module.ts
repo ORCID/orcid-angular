@@ -15,6 +15,7 @@ import { LinkAccountGuard } from './guards/link-account.guard'
 import { LanguageGuard } from './guards/language.guard'
 import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
 import { TwoFactorSigninGuard } from './guards/two-factor-signin.guard'
+import { AuthenticatedNoDelegatorGuard } from './guards/authenticated-no-delagator.guard'
 
 const routes: Routes = [
   {
@@ -97,7 +98,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.account,
-    canActivateChild: [AuthenticatedGuard],
+    canActivateChild: [AuthenticatedGuard, AuthenticatedNoDelegatorGuard],
     loadChildren: () =>
       import('./account-settings/account-settings.module').then(
         (m) => m.AccountSettingsModule
