@@ -56,5 +56,26 @@
     "manuallyYear": "2022",
     "manuallyMonth": "01",
     "manuallyDay": "01"
+  },
+  "affilliantionFunding": {
+    "fundingType":"Award",
+    "fundingSubtype":"orcid award",
+    "fundedProjectTitle":"Researching Quality",
+    "translatedTitle":"Investingando la calidad",
+    "tranlationLanguage":"Afar",
+    "fundingLink":"google.com",
+    "description":"cypress funding manually added",
+    "amountCurrency":"AFA",
+    "amount":"1000",
+    "startYear": "2021",
+    "startMonth": "01",
+    "endYear": "2023",
+    "endMonth": "01",
+    "fundingAgency": "UCR",
+    "city": "San Jose",
+    "region": "San Jose",
+    "country": "Albania",
+    "grantNumber": "777",
+    "grantLink": "ucr.ac.cr"
   }
 }
