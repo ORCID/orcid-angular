@@ -127,6 +127,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: ApplicationRoutes.resetPasswordEmail + '/:key',
+    loadChildren: () =>
+      import('./reset-password/reset-password.module').then(
+        (m) => m.ResetPasswordModule
+      ),
+  },
+  {
     matcher: routerThirdPartySignInMatch,
     canActivateChild: [ThirdPartySigninCompletedGuard],
     loadChildren: () =>
