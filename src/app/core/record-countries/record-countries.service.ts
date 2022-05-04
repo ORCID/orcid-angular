@@ -10,6 +10,7 @@ import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { RecordPublicSideBarService } from '../record-public-side-bar/record-public-side-bar.service'
+import countryCodes from './countryCodes.json'
 
 @Injectable({
   providedIn: 'root',
@@ -29,25 +30,7 @@ export class RecordCountriesService {
   ) {}
 
   getCountryCodes() {
-    if (!this.$countryCodes) {
-      this.$countryCodes = new ReplaySubject(1)
-      this._http
-        .get<RecordCountryCodesEndpoint>(
-          environment.API_WEB + `countryNamesToCountryCodes.json`,
-          {
-            headers: this.headers,
-          }
-        )
-        .pipe(
-          retry(3),
-          catchError((error) => this._errorHandler.handleError(error)),
-          tap((value) => {
-            this.$countryCodes.next(value)
-          })
-        )
-        .subscribe()
-    }
-    return this.$countryCodes.asObservable()
+    return of(countryCodes)
   }
 
   getAddresses(
