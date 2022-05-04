@@ -1,5 +1,4 @@
-import { Value } from "./common.endpoint"
-
+import { Value } from './common.endpoint'
 
 export interface ResetPasswordEmailForm {
   password: Value
