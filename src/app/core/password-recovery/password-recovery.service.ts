@@ -55,7 +55,7 @@ export class PasswordRecoveryService {
   }
 
   resetPasswordEmail(resetPassword: ResetPasswordEmailForm) {
-    let encodedData = JSON.stringify(resetPassword);
+    let encodedData = JSON.stringify(resetPassword)
     return this._http
       .post<ResetPasswordEmailForm>(
         environment.API_WEB + `reset-password-email-v2.json`,
