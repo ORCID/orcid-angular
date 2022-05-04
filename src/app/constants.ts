@@ -58,6 +58,7 @@ export const ApplicationRoutes = {
   thirdPartySignIn: 'third-party-signin-completed',
   account: 'account',
   trustedParties: 'trusted-parties',
+  resetPasswordEmail: 'reset-password-email',
   home: '',
 }
 
