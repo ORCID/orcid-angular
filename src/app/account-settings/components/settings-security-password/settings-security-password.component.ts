@@ -23,7 +23,7 @@ import { OrcidValidators } from 'src/app/validators'
 export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
   form: FormGroup
   hasNumberPatter = HAS_NUMBER
-  hasLetterOrSymbolPatter = HAS_LETTER_OR_SYMBOL
+  hasLetterOrSymbolPatternn = HAS_LETTER_OR_SYMBOL
   @Output() loading = new EventEmitter<boolean>()
   errors: string[]
   success: boolean
@@ -45,7 +45,7 @@ export class SettingsSecurityPasswordComponent implements OnInit, OnDestroy {
             Validators.minLength(8),
             Validators.maxLength(256),
             Validators.pattern(this.hasNumberPatter),
-            Validators.pattern(this.hasLetterOrSymbolPatter),
+            Validators.pattern(this.hasLetterOrSymbolPatternn),
           ],
           asyncValidators: [this._register.backendValueValidate('password')],
         }),

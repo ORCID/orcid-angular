@@ -41,7 +41,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
   hasNumberPatter = HAS_NUMBER
-  hasLetterOrSymbolPatter = HAS_LETTER_OR_SYMBOL
+  hasLetterOrSymbolPatternn = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
   constructor(private _register: RegisterService) {
     super()
@@ -55,7 +55,7 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
             Validators.minLength(8),
             Validators.maxLength(256),
             Validators.pattern(this.hasNumberPatter),
-            Validators.pattern(this.hasLetterOrSymbolPatter),
+            Validators.pattern(this.hasLetterOrSymbolPatternn),
             this.passwordDoesNotContainUserEmails(),
           ],
           asyncValidators: [this._register.backendValueValidate('password')],

@@ -25,7 +25,7 @@ import { OrcidValidators } from 'src/app/validators'
 export class ResetPasswordComponent implements OnInit {
   form: FormGroup
   hasNumberPatter = HAS_NUMBER
-  hasLetterOrSymbolPatter = HAS_LETTER_OR_SYMBOL
+  hasLetterOrSymbolPatternn = HAS_LETTER_OR_SYMBOL
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
 
   @Output() loading = new EventEmitter<boolean>()
@@ -58,7 +58,7 @@ export class ResetPasswordComponent implements OnInit {
             Validators.minLength(8),
             Validators.maxLength(256),
             Validators.pattern(this.hasNumberPatter),
-            Validators.pattern(this.hasLetterOrSymbolPatter),
+            Validators.pattern(this.hasLetterOrSymbolPatternn),
           ],
           asyncValidators: [this._register.backendValueValidate('password')],
         }),
