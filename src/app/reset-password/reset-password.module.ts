@@ -26,7 +26,7 @@ import { MdePopoverModule } from '../cdk/popover'
     MatCardModule,
     MatProgressBarModule,
     MatButtonModule,
-    MdePopoverModule
+    MdePopoverModule,
   ],
 })
 export class ResetPasswordModule {}

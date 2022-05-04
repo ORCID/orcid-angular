@@ -55,11 +55,11 @@ export class PasswordRecoveryService {
   }
 
   resetPasswordEmail(resetPassword: ResetPasswordEmailForm) {
-    console.log('resetPasswordEmail');
-    let encodedData = JSON.stringify(resetPassword);
+    console.log('resetPasswordEmail')
+    let encodedData = JSON.stringify(resetPassword)
 
-    console.log(encodedData);
-    
+    console.log(encodedData)
+
     return this._http
       .post<ResetPasswordEmailForm>(
         environment.API_WEB + `reset-password-email-v2.json`,
