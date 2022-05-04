@@ -71,9 +71,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   save() {
-    console.log(this.form.valid)
-    console.log(this.form)
-
     if (this.form.valid) {
       this.loading.emit(true)
       this._accountRecoveryService
