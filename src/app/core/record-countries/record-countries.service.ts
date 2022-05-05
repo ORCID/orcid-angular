@@ -4,7 +4,6 @@ import { Observable, of, ReplaySubject } from 'rxjs'
 import { retry, catchError, tap, map } from 'rxjs/operators'
 import {
   CountriesEndpoint,
-  RecordCountryCodesEndpoint,
 } from 'src/app/types/record-country.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
@@ -16,7 +15,6 @@ import countryCodes from './countryCodes.json'
   providedIn: 'root',
 })
 export class RecordCountriesService {
-  $countryCodes: ReplaySubject<RecordCountryCodesEndpoint>
   $addresses: ReplaySubject<CountriesEndpoint>
   headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
@@ -29,7 +27,7 @@ export class RecordCountriesService {
     private _recordPublicSidebar: RecordPublicSideBarService
   ) {}
 
-  getCountryCodes() {
+  getCountryCodes(): Observable<{ key: string; value: string }[]> {
     return of(countryCodes)
   }
 

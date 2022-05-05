@@ -1,9 +1,5 @@
 import { MonthDayYearDate, Value, Visibility } from './common.endpoint'
 
-export interface RecordCountryCodesEndpoint {
-  [key: string]: string
-}
-
 export interface Address {
   visibility: Visibility
   errors: any[]

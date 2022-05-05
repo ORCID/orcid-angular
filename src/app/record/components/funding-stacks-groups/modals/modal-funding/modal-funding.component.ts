@@ -35,7 +35,6 @@ import {
   Organization,
   ExternalIdentifier,
 } from '../../../../../types/common.endpoint'
-import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { Observable } from 'rxjs/internal/Observable'
 import { debounceTime, first, startWith, switchMap } from 'rxjs/operators'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
@@ -81,7 +80,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   startDateValid: boolean
   endDateValid: boolean
   countryCodes: { key: string; value: string }[]
-  originalCountryCodes: RecordCountryCodesEndpoint
   loadingCountryCodes = true
   fundingType = ''
   fundingSubtype = ''
@@ -265,19 +263,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       .getCountryCodes()
       .pipe(first())
       .subscribe((codes) => {
-        this.originalCountryCodes = codes
-        this.countryCodes = Object.entries(codes).map((keyValue) => {
-          return { key: keyValue[0], value: keyValue[1] }
-        })
-        this.countryCodes.sort((a, b) => {
-          if (a.key < b.key) {
-            return -1
-          }
-          if (a.key > b.key) {
-            return 1
-          }
-          return 0
-        })
+        this.countryCodes = codes
         this.loadingCountryCodes = false
         if (this.funding) {
           this.fundingForm.patchValue({

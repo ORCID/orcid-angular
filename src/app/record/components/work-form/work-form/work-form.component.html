@@ -680,7 +680,7 @@
           formControlName="countryCode"
         >
           <mat-option
-            *ngFor="let item of originalCountryCodes | keyvalue"
+            *ngFor="let item of countryCodes"
             [value]="item.value"
           >
             {{ item.key }}

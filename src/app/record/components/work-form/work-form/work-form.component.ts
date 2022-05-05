@@ -25,7 +25,6 @@ import {
   WorksTitleName,
   WorkTypesTitle,
 } from '../../../../types/works.endpoint'
-import { RecordCountryCodesEndpoint } from '../../../../types'
 import { RecordWorksService } from '../../../../core/record-works/record-works.service'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ModalComponent } from '../../../../cdk/modal/modal/modal.component'
@@ -109,7 +108,7 @@ export class WorkFormComponent implements OnInit {
     },
     { category: WorkCategories.other_output, types: WorkOtherOutputTypes },
   ]
-  originalCountryCodes: RecordCountryCodesEndpoint
+  countryCodes: { key: string; value: string }[]
 
   constructor(
     private _fb: FormBuilder,
@@ -129,7 +128,7 @@ export class WorkFormComponent implements OnInit {
       .getCountryCodes()
       .pipe(first())
       .subscribe((codes) => {
-        this.originalCountryCodes = codes
+        this.countryCodes = codes
       })
 
     this._platform.get().subscribe((value) => {
