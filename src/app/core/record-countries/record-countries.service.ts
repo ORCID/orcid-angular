@@ -88,7 +88,7 @@ export class RecordCountriesService {
       { key: $localize`:@@share.CW:Curaçao`, value: 'CW' },
       { key: $localize`:@@share.CY:Cyprus`, value: 'CY' },
       { key: $localize`:@@share.CZ:Czech Republic`, value: 'CZ' },
-      { key: $localize`:@@share.CI:Côte d'Ivoire"`, value: 'CI' },
+      { key: $localize`:@@share.CI:Côte d'Ivoire`, value: 'CI' },
       { key: $localize`:@@share.DK:Denmark`, value: 'DK' },
       { key: $localize`:@@share.DJ:Djibouti`, value: 'DJ' },
       { key: $localize`:@@share.DM:Dominica`, value: 'DM' },
