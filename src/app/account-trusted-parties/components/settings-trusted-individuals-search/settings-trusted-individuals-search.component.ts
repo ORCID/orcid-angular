@@ -72,7 +72,7 @@ export class SettingsTrustedIndividualsSearchComponent
         map((response) => {
           if (response.isSelf) {
             this.announceThisIsYourOwnRecord()
-          } else if (response.found) {
+          } else if (response.found && !response.isAlreadyAdded) {
             this.addByEmail(emailMatch)
             return null
           } else {
@@ -90,7 +90,7 @@ export class SettingsTrustedIndividualsSearchComponent
           map((response) => {
             if (response.isSelf) {
               this.announceThisIsYourOwnRecord()
-            } else if (response.found) {
+            } else if (response.found && !response.isAlreadyAdded) {
               this.addByOrcid(orcidIdMatch.toUpperCase())
               return null
             } else {
