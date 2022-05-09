@@ -33,7 +33,9 @@
       >
         <ng-container
           *ngIf="
-            contributor?.creditName && contributor?.creditName?.content !== ''
+            contributor?.creditName &&
+            contributor?.creditName?.content !== '' &&
+            contributor?.creditName?.content !== privateName
           "
         >
           {{ contributor?.creditName?.content + (!last ? '; ' : '') }}
@@ -41,7 +43,9 @@
         <ng-container
           *ngIf="
             (!contributor?.creditName ||
-              contributor?.creditName?.content === '') &&
+              contributor?.creditName?.content === '' ||
+              contributor?.creditName?.content === privateName
+              ) &&
             contributor?.contributorOrcid?.uri
           "
         >
@@ -183,7 +187,7 @@
       >
         <ng-container *ngIf="index < maxNumberContributorsWorkDetails">
           <ng-container *ngIf="contributor?.creditName?.content">{{
-            contributor?.creditName?.content
+            isNamePrivate(contributor.creditName.content)
           }}</ng-container>
           {{ contributor | contributorsPipe }}
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
@@ -252,7 +256,7 @@
         class="padding-level-3"
       >
         <ng-container *ngIf="contributor.creditName">{{
-          contributor.creditName.value
+          isNamePrivate(contributor.creditName.value)
         }}</ng-container>
         {{ contributor | contributorsPipe }}
         <ng-container *ngIf="contributor?.orcid">

@@ -39,6 +39,7 @@ export class WorkComponent implements OnInit {
   contributionRole: string
   showCitation = false
   showExpandedFormatting = false
+  privateName = 'Name is private'
 
   constructor(
     private elementRef: ElementRef,
@@ -120,5 +121,12 @@ export class WorkComponent implements OnInit {
         this.contributionRole = roleAndSequence?.contributorRole?.toLowerCase()
       }
     })
+  }
+
+  isNamePrivate(value: string): string {
+    if (value === this.privateName) {
+      return $localize`:@@account.nameIsPri:Name is private`;
+    }
+    return value
   }
 }
