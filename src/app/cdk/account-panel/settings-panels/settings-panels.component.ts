@@ -32,6 +32,7 @@ export class SettingsPanelsComponent implements OnInit {
 
   collapse() {
     this.expandedContent = !this.expandedContent
+
     this.expandedContentChange.emit(this.expandedContent)
   }
   revokeAccessButtonClicked() {

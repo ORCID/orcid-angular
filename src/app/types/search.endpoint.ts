@@ -16,4 +16,5 @@ export interface SearchResults {
 export interface SearchResultsByEmailOrOrcid {
   found: boolean
   isSelf: boolean
+  isAlreadyAdded: boolean
 }
