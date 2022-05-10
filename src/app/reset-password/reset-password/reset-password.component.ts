@@ -3,6 +3,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subject } from 'rxjs'
+import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import {
   HAS_NUMBER,
   HAS_LETTER_OR_SYMBOL,
@@ -35,16 +37,22 @@ export class ResetPasswordComponent implements OnInit {
   emailKey: string
   expiredPasswordResetToken: boolean
   invalidPasswordResetToken: boolean
+  isMobile: boolean
 
   constructor(
     private _fb: FormBuilder,
     private _register: RegisterService,
     private _accountRecoveryService: PasswordRecoveryService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _snackBar: SnackbarService,
+    private _platform: PlatformInfoService
   ) {}
 
   ngOnInit(): void {
+    this._platform.get().subscribe((platform) => {
+      this.isMobile = platform.columns4 || platform.columns8
+    })
     if (!this._route.snapshot.params.key) {
       this._router.navigate([ApplicationRoutes.signin])
     } else {
@@ -104,6 +112,9 @@ export class ResetPasswordComponent implements OnInit {
             }
           }
         })
+    } else {
+      this.form.markAllAsTouched()
+      this._snackBar.showValidationError()
     }
   }
   ngOnDestroy(): void {
