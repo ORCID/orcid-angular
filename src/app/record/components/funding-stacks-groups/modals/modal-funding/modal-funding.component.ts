@@ -300,11 +300,13 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
     this.fundingForm.get('amount').valueChanges.subscribe((value) => {
       if (value) {
-        this.fundingForm.get('currencyCode').setValidators(
-          Validators.required
-        )
-        this.fundingForm.get('currencyCode').updateValueAndValidity({ emitEvent: true })
-        this.fundingForm.get('amount').updateValueAndValidity({ emitEvent: true })
+        this.fundingForm.get('currencyCode').setValidators(Validators.required)
+        this.fundingForm
+          .get('currencyCode')
+          .updateValueAndValidity({ emitEvent: true })
+        this.fundingForm
+          .get('amount')
+          .updateValueAndValidity({ emitEvent: true })
       }
     })
   }
