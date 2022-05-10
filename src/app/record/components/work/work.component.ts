@@ -125,7 +125,7 @@ export class WorkComponent implements OnInit {
 
   isNamePrivate(value: string): string {
     if (value === this.privateName) {
-      return $localize`:@@account.nameIsPri:Name is private`;
+      return $localize`:@@account.nameIsPri:Name is private`
     }
     return value
   }
