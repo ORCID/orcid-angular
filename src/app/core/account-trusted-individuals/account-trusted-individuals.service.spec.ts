@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
+import { AccountTrustedOrganizationsService } from '../account-trusted-organizations/account-trusted-organizations.service'
 
-import { AccountTrustedOrganizationsService } from './account-trusted-organizations.service'
 
 describe('AccountTrustedOrganizationsService', () => {
   let service: AccountTrustedOrganizationsService

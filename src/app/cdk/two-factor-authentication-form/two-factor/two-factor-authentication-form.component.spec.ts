@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { TwoFactorAuthenticationFormComponent } from './two-factor.component'
+import { TwoFactorAuthenticationFormComponent } from './two-factor-authentication-form.component'
 
 describe('TwoFactorComponent', () => {
   let component: TwoFactorAuthenticationFormComponent
