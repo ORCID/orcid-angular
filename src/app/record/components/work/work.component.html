@@ -34,7 +34,6 @@
         <ng-container
           *ngIf="
             contributor?.creditName &&
-            contributor?.creditName?.content !== '' &&
             contributor?.creditName?.content !== privateName
           "
         >
@@ -43,7 +42,6 @@
         <ng-container
           *ngIf="
             (!contributor?.creditName ||
-              contributor?.creditName?.content === '' ||
               contributor?.creditName?.content === privateName) &&
             contributor?.contributorOrcid?.uri
           "
@@ -185,9 +183,12 @@
         "
       >
         <ng-container *ngIf="index < maxNumberContributorsWorkDetails">
-          <ng-container *ngIf="contributor?.creditName?.content">{{
-            isNamePrivate(contributor.creditName.content)
-          }}</ng-container>
+          <ng-container *ngIf="contributor?.creditName?.content">
+            <ng-container *ngIf="contributor?.creditName?.content !== privateName; else elseBlock">
+              {{ contributor.creditName.content }}
+            </ng-container>
+            <ng-template #elseBlock>{{ privateNameTranslation }}</ng-template>
+          </ng-container>
           {{ contributor | contributorsPipe }}
           <ng-container *ngIf="contributor?.contributorOrcid?.uri">
             <span *ngIf="!(contributor | contributorsPipe)"> (</span
@@ -254,9 +255,12 @@
         *ngFor="let contributor of work.contributors"
         class="padding-level-3"
       >
-        <ng-container *ngIf="contributor.creditName">{{
-          isNamePrivate(contributor.creditName.value)
-        }}</ng-container>
+        <ng-container *ngIf="contributor.creditName">
+          <ng-container *ngIf="contributor?.creditName?.value !== privateName; else elseBlock">
+            {{ contributor.creditName.value }}
+          </ng-container>
+          <ng-template #elseBlock>{{ privateNameTranslation }}</ng-template>
+        </ng-container>
         {{ contributor | contributorsPipe }}
         <ng-container *ngIf="contributor?.orcid">
           <a
