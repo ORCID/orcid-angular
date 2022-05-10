@@ -679,10 +679,7 @@
           placeholder="{{ ngOrcidSelectACountry }}"
           formControlName="countryCode"
         >
-          <mat-option
-            *ngFor="let item of originalCountryCodes | keyvalue"
-            [value]="item.value"
-          >
+          <mat-option *ngFor="let item of countryCodes" [value]="item.value">
             {{ item.key }}
           </mat-option>
         </mat-select>

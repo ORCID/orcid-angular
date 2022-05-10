@@ -18,7 +18,6 @@ import { RecordAffiliationService } from '../../../../../core/record-affiliation
 import { VisibilityStrings } from '../../../../../types/common.endpoint'
 import { RecordCountriesService } from '../../../../../core/record-countries/record-countries.service'
 import { first, map, switchMap, tap } from 'rxjs/operators'
-import { RecordCountryCodesEndpoint } from '../../../../../types'
 import {
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_THOUSAND,
@@ -50,7 +49,6 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
   platform: PlatformInfo
   affiliationForm: FormGroup
   countryCodes: { key: string; value: string }[]
-  originalCountryCodes: RecordCountryCodesEndpoint
   loadingCountryCodes = true
   loadingAffiliations = true
   isMobile: boolean
@@ -267,19 +265,7 @@ export class ModalAffiliationsComponent implements OnInit, OnDestroy {
       .getCountryCodes()
       .pipe(first())
       .subscribe((codes) => {
-        this.originalCountryCodes = codes
-        this.countryCodes = Object.entries(codes).map((keyValue) => {
-          return { key: keyValue[0], value: keyValue[1] }
-        })
-        this.countryCodes.sort((a, b) => {
-          if (a.key < b.key) {
-            return -1
-          }
-          if (a.key > b.key) {
-            return 1
-          }
-          return 0
-        })
+        this.countryCodes = codes
         this.loadingCountryCodes = false
         if (this.affiliation) {
           this.affiliationForm.patchValue({
