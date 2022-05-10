@@ -184,7 +184,12 @@
       >
         <ng-container *ngIf="index < maxNumberContributorsWorkDetails">
           <ng-container *ngIf="contributor?.creditName?.content">
-            <ng-container *ngIf="contributor?.creditName?.content !== privateName; else elseBlock">
+            <ng-container
+              *ngIf="
+                contributor?.creditName?.content !== privateName;
+                else elseBlock
+              "
+            >
               {{ contributor.creditName.content }}
             </ng-container>
             <ng-template #elseBlock>{{ privateNameTranslation }}</ng-template>
@@ -256,7 +261,12 @@
         class="padding-level-3"
       >
         <ng-container *ngIf="contributor.creditName">
-          <ng-container *ngIf="contributor?.creditName?.value !== privateName; else elseBlock">
+          <ng-container
+            *ngIf="
+              contributor?.creditName?.value !== privateName;
+              else elseBlock
+            "
+          >
             {{ contributor.creditName.value }}
           </ng-container>
           <ng-template #elseBlock>{{ privateNameTranslation }}</ng-template>
