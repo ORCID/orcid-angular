@@ -1,69 +1,69 @@
 {
-   "type": "grant",
-   "organization-defined-type": "Funding sub-type",
-   "title": {
-     "title": "Funding added via API",
-     "translated-title": {
-       "language-code": "en",
-       "value": "Translated title"
-     }
-   },
-   "short-description": "Short description of the award",
-   "amount": {
-     "currency-code": "ADP",
-     "value": "1000"
-   },
-   "url": "https://alt-url.org",
-   "start-date": {
-     "year": 2000,
-     "month": 2,
-     "day": 2
-   },
-   "end-date": {
-     "year": 2020,
-     "month": 2,
-     "day": 2
-   },
-   "external-ids": {
-     "external-id": {
-       "external-id-type": "grant_number",
-       "external-id-value": "777aaazzz",
-       "external-id-url": "http://tempuri.org/12345",
-       "external-id-relationship": "self"
-     }
-   },
-   "contributors": {
-     "contributor": [
-       {
-         "credit-name": "name",
-         "contributor-email": "name@email.com",
-         "contributor-attributes": {
-           "contributor-role": "http://credit.niso.org/contributor-roles/conceptualization/"
-         }
-       },
-       {
-         "contributor-orcid": {
-           "uri": "https://qa.orcid.org/####-####-####-####",
-           "path": "####-####-####-####",
-           "host": "host"
-         },
-         "credit-name": "name",
-         "contributor-email": "name@email.com",
-         "contributor-attributes": {
-           "contributor-role": "http://credit.niso.org/contributor-roles/data-curation/"
-         }
-       }
-     ]
-   },
-   "organization": {
-     "name": "Wellcome Trust",
-     "address": {
-       "city": "London",
-       "country": "GB"
-     },
-     "disambiguated-organization": {
-       "disambiguated-organization-identifier": "http://dx.doi.org/....",
-       "disambiguation-source": "FUNDREF"
-     }
-   }
- }
+  "type": "grant",
+  "organization-defined-type": "Funding sub-type",
+  "title": {
+    "title": "Funding added via API",
+    "translated-title": {
+      "language-code": "en",
+      "value": "Translated title"
+    }
+  },
+  "short-description": "Short description of the award",
+  "amount": {
+    "currency-code": "ADP",
+    "value": "1000"
+  },
+  "url": "https://alt-url.org",
+  "start-date": {
+    "year": 2000,
+    "month": 2,
+    "day": 2
+  },
+  "end-date": {
+    "year": 2020,
+    "month": 2,
+    "day": 2
+  },
+  "external-ids": {
+    "external-id": {
+      "external-id-type": "grant_number",
+      "external-id-value": "777aaazzz",
+      "external-id-url": "http://tempuri.org/12345",
+      "external-id-relationship": "self"
+    }
+  },
+  "contributors": {
+    "contributor": [
+      {
+        "credit-name": "name",
+        "contributor-email": "name@email.com",
+        "contributor-attributes": {
+          "contributor-role": "http://credit.niso.org/contributor-roles/conceptualization/"
+        }
+      },
+      {
+        "contributor-orcid": {
+          "uri": "https://qa.orcid.org/####-####-####-####",
+          "path": "####-####-####-####",
+          "host": "host"
+        },
+        "credit-name": "name",
+        "contributor-email": "name@email.com",
+        "contributor-attributes": {
+          "contributor-role": "http://credit.niso.org/contributor-roles/data-curation/"
+        }
+      }
+    ]
+  },
+  "organization": {
+    "name": "Wellcome Trust",
+    "address": {
+      "city": "London",
+      "country": "GB"
+    },
+    "disambiguated-organization": {
+      "disambiguated-organization-identifier": "http://dx.doi.org/....",
+      "disambiguation-source": "FUNDREF"
+    }
+  }
+}

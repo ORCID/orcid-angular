@@ -1,50 +1,49 @@
 {
-
-      "title": {
-         "title": {
-               "value": "Work added via API"
-         },
-         "subtitle": null,
-         "translated-title": null
-      },
-      "journal-title": {
-         "value": "my journal title"
-      },
-      "short-description": null,
-      "type": "journal-article",
-      "external-ids": {
-         "external-id": [{
-               "external-id-type": "doi",
-               "external-id-value": "value",
-               "external-id-url": {
-                  "value": "http://dx.doi.org/value"
-               },
-               "external-id-relationship": "self"
-         }]
-      },
-      "contributors": {
-         "contributor": 
-         [
-            {
-               "credit-name": "name",
-               "contributor-email": "name@email.com",
-               "contributor-attributes": {
-                  "contributor-role": "http://credit.niso.org/contributor-roles/conceptualization/"
-               }
-            },
-            {
-               "contributor-orcid": {
-                  "uri": "https://host/####-####-####-####",
-                  "path": "####-####-####-####",
-                  "host": "host"
-               },
-               "credit-name": "name",
-               "contributor-email": "name@email.com",
-               "contributor-attributes": {
-                  "contributor-role": "http://credit.niso.org/contributor-roles/data-curation/"
-               }
-            }
-         ]
+  "title": {
+    "title": {
+      "value": "Work added via API"
+    },
+    "subtitle": null,
+    "translated-title": null
+  },
+  "journal-title": {
+    "value": "my journal title"
+  },
+  "short-description": null,
+  "type": "journal-article",
+  "external-ids": {
+    "external-id": [
+      {
+        "external-id-type": "doi",
+        "external-id-value": "value",
+        "external-id-url": {
+          "value": "http://dx.doi.org/value"
+        },
+        "external-id-relationship": "self"
       }
-   
+    ]
+  },
+  "contributors": {
+    "contributor": [
+      {
+        "credit-name": "name",
+        "contributor-email": "name@email.com",
+        "contributor-attributes": {
+          "contributor-role": "http://credit.niso.org/contributor-roles/conceptualization/"
+        }
+      },
+      {
+        "contributor-orcid": {
+          "uri": "https://host/####-####-####-####",
+          "path": "####-####-####-####",
+          "host": "host"
+        },
+        "credit-name": "name",
+        "contributor-email": "name@email.com",
+        "contributor-attributes": {
+          "contributor-role": "http://credit.niso.org/contributor-roles/data-curation/"
+        }
+      }
+    ]
+  }
 }
