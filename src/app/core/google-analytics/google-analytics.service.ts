@@ -4,12 +4,14 @@ import { WINDOW } from 'src/app/cdk/window'
 import { PerformanceMarks } from 'src/app/constants'
 import { RequestInfoForm } from 'src/app/types'
 import { environment } from 'src/environments/environment'
+// @ts-ignore
+import Gtag from 'gtag.js'
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoogleAnalyticsService {
-  gtag: Gtag.Gtag
+  gtag: Gtag
   constructor(@Inject(WINDOW) private window: Window) {
     this.gtag = (window as any).gtag
   }

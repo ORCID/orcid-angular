@@ -39,6 +39,8 @@ export class WorkComponent implements OnInit {
   contributionRole: string
   showCitation = false
   showExpandedFormatting = false
+  privateName = 'Name is private'
+  privateNameTranslation = $localize`:@@account.nameIsPri:Name is private`
 
   constructor(
     private elementRef: ElementRef,
