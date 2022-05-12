@@ -16,7 +16,7 @@
     "membersAPI-websitesEndPoint": "/researcher-urls",
     "membersAPI-fundingsEndpoint": "/funding",
     "membersAPI-workEndpoint": "/work",
-    "membersAPI-peerReviewEndpoint":"/peer-review"
+    "membersAPI-peerReviewEndpoint": "/peer-review"
   },
   "ignoreTestFiles": [
     "**/legacy_oldScripts/*",

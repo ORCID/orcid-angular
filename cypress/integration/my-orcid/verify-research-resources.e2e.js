@@ -9,11 +9,13 @@ describe('My orcid - users can have research resources data in their record', as
   })
 
   it('Research resources section is displayed IF user has data for that section', function () {
-   //Verify the title of one of the entries for the research resources for the user
+    //Verify the title of one of the entries for the research resources for the user
     cy.get('#cy-research-resources').within(($myPanel) => {
-      cy.get('#cy-panel-component').should('contain',userData.cyResearchResourcesUser.researchResourceTitle)
+      cy.get('#cy-panel-component').should(
+        'contain',
+        userData.cyResearchResourcesUser.researchResourceTitle
+      )
     })
-   
   })
 
   after(() => {

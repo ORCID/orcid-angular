@@ -28,9 +28,9 @@ describe('My orcid - via API members can add Peer reviews', async function () {
   })
 
   it('New Peer Review added via API is displayed correctly', function () {
-     //grab review group id number
-     const groupId = jsonfile['review-group-id']
-    
+    //grab review group id number
+    const groupId = jsonfile['review-group-id']
+
     //Login
     cy.programmaticallySignin('cyUserPrimaryEmaiVerified') //send user key from fixture file
     cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
@@ -40,7 +40,6 @@ describe('My orcid - via API members can add Peer reviews', async function () {
     cy.get('#cy-panel-component-expand-button').click()
     //check for the correct review group id
     cy.get('#cy-peer-reviews').should('contain', groupId.split(':')[1])
-
   })
 
   after(() => {
