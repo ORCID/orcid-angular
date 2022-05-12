@@ -64,6 +64,8 @@ tx.exe
 /cypress/reports/**
 cypress.env
 cypress/fixtures/testing-users.fixture.json
+cypress/fixtures/work-with-contributors.fixture.json
+cypress/fixtures/funding-with-contributors.fixture.json
 cypress/plugins/credentials_qa.json
 cypress/plugins/token_qa.json
 cypress/plugins/token.json
