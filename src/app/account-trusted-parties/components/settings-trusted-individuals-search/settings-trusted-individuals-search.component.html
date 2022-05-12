@@ -58,8 +58,16 @@
           </div>
         </div>
         <div>
-          <div class="actions-container orc-font-body-small">
-            <mat-icon (click)="add(foundTrustedIndividual)" class="pointer"
+          <div
+            class="actions-container orc-font-body-small"
+            [ngClass]="{ disabled: foundTrustedIndividual.alreadyOnRecord }"
+          >
+            <mat-icon
+              (click)="add(foundTrustedIndividual)"
+              class="pointer"
+              [matTooltip]="
+                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
+              "
               >add</mat-icon
             >
 
@@ -67,6 +75,9 @@
               class="black-url underline"
               (click)="add(foundTrustedIndividual)"
               i18n="@@account.addAsTrustedIndividuals"
+              [matTooltip]="
+                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
+              "
             >
               Add as trusted individual</a
             >
@@ -110,13 +121,22 @@
       <ng-container matColumnDef="actions" stickyEnd>
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <div class="actions-container orc-font-body-small">
-            <mat-icon class="pointer" (click)="add(element)">add</mat-icon>
+          <div
+            class="actions-container orc-font-body-small"
+            [ngClass]="{ disabled: element.alreadyOnRecord }"
+          >
+            <mat-icon
+              class="pointer"
+              (click)="add(element)"
+              [matTooltip]="element.alreadyOnRecord ? alreadyAddedLabel : ''"
+              >add</mat-icon
+            >
 
             <a
               class="black-url underline"
               (click)="add(element)"
               i18n="@@account.addAsTrustedIndividuals"
+              [matTooltip]="element.alreadyOnRecord ? alreadyAddedLabel : ''"
             >
               Add as trusted individual</a
             >

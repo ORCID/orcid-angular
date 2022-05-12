@@ -6,6 +6,7 @@ export interface ExpandedSearchResultsContent {
   'other-name': any[]
   email?: string[]
   'institution-name': any[]
+  alreadyOnRecord?: boolean
 }
 
 export interface SearchResults {
