@@ -94,9 +94,10 @@ export class ResetPasswordComponent implements OnInit {
           if (!value.errors.length && !value.password.errors.length) {
             this.form.reset()
             this.success = true
-            let tree: UrlTree
             if (
-              isRedirectToTheAuthorizationPage(value.successRedirectLocation)
+              isRedirectToTheAuthorizationPage({
+                url: value.successRedirectLocation,
+              })
             ) {
               this._window.location.href = value.successRedirectLocation
             } else {
