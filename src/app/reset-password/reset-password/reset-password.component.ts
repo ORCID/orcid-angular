@@ -1,16 +1,16 @@
-import { preserveWhitespacesDefault } from '@angular/compiler'
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router, UrlTree } from '@angular/router'
 import { Subject } from 'rxjs'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
+import { WINDOW } from 'src/app/cdk/window'
 import {
-  HAS_NUMBER,
-  HAS_LETTER_OR_SYMBOL,
   ApplicationRoutes,
+  HAS_LETTER_OR_SYMBOL,
+  HAS_NUMBER,
+  isRedirectToTheAuthorizationPage,
 } from 'src/app/constants'
-import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
@@ -46,7 +46,8 @@ export class ResetPasswordComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _snackBar: SnackbarService,
-    private _platform: PlatformInfoService
+    private _platform: PlatformInfoService,
+    @Inject(WINDOW) private _window: Window
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +94,14 @@ export class ResetPasswordComponent implements OnInit {
           if (!value.errors.length && !value.password.errors.length) {
             this.form.reset()
             this.success = true
-            this._router.navigate([ApplicationRoutes.signin])
+            let tree: UrlTree
+            if (
+              isRedirectToTheAuthorizationPage(value.successRedirectLocation)
+            ) {
+              this._window.location.href = value.successRedirectLocation
+            } else {
+              this._router.navigate([ApplicationRoutes.signin])
+            }
           } else {
             if (value.errors.find((x) => x === 'invalidPasswordResetToken')) {
               this.invalidPasswordResetToken = true
