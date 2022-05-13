@@ -1,18 +1,16 @@
-import { preserveWhitespacesDefault } from '@angular/compiler'
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, UrlTree } from '@angular/router'
 import { Subject } from 'rxjs'
 import { PlatformInfoService } from 'src/app/cdk/platform-info'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WINDOW } from 'src/app/cdk/window'
 import {
-  HAS_NUMBER,
-  HAS_LETTER_OR_SYMBOL,
   ApplicationRoutes,
+  HAS_LETTER_OR_SYMBOL,
+  HAS_NUMBER,
   isRedirectToTheAuthorizationPage,
 } from 'src/app/constants'
-import { AccountSecurityPasswordService } from 'src/app/core/account-security-password/account-security-password.service'
 import { PasswordRecoveryService } from 'src/app/core/password-recovery/password-recovery.service'
 import { RegisterService } from 'src/app/core/register/register.service'
 import { OrcidValidators } from 'src/app/validators'
