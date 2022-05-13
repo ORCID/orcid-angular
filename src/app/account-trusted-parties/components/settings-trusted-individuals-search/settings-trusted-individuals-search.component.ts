@@ -181,8 +181,8 @@ export class SettingsTrustedIndividualsSearchComponent
         .afterClosed()
         .pipe(
           switchMap((value) => {
-            this.loading = true
             if (value) {
+              this.loading = true
               return this.account.add(value)
             }
             return of(undefined)
