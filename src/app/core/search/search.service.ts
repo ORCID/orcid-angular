@@ -25,185 +25,30 @@ export class SearchService {
   ) {}
 
   search(querryParam: SearchParameters): Observable<SearchResults> {
-    return of({
-      'expanded-result': [
+    return this._http
+      .get<SearchResults>(
+        `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
+          querryParam
+        )}`,
         {
-          'orcid-id': '0000-0002-2386-9396',
-          'given-names': 'July31',
-          'family-names': '[test]',
-          'credit-name': null,
-          'other-name': ['Другое имя', '其他名字', 'other names'],
-          email: [],
-          'institution-name': [
-            'Dow Jones and Co Inc Washington',
-            'Green Events and Ink Distribution Ltd',
-            'Massachusetts Institute of Technology',
-            "Ministry of Science and Technology of the People's Republic of China",
-            'NASA',
-            'Not from the list',
-            'ORCID',
-            'Oberlin College',
-            'Ohio Education Association Department of Education Policy Research and Member Advocacy',
-            'Organisation of Eastern Caribbean States',
-            'Research Data Alliance',
-            'THE ALLEN-TREW FAMILY SETTLEMENT 2014',
-            'University of Michigan',
-          ],
-        },
-        {
-          'orcid-id': '0000-0003-3329-9793',
-          'given-names': 'ma test',
-          'family-names': '19aug2016',
-          'credit-name': null,
-          'other-name': ['AKA'],
-          email: [],
-          'institution-name': ['ORCID', 'Updated name'],
-        },
-        {
-          'orcid-id': '0000-0002-4927-0058',
-          'given-names': 'Nov 1',
-          'family-names': 'Test',
-          'credit-name': 'test',
-          'other-name': ['other name'],
-          email: ['nov1@mailinator.com'],
-          'institution-name': ['ORCID', 'Program 973'],
-        },
-        {
-          'orcid-id': '0000-0001-5794-2056',
-          'given-names': 'test-in',
-          'family-names': '01aug2019',
-          'credit-name': null,
-          'other-name': [
-            'Другое имя',
-            '其他名字',
-            'alia nomo',
-            'other names',
-            'andre navne',
-          ],
-          email: [],
-          'institution-name': [
-            'Massachusetts Institute of Technology',
-            "Ministry of Science and Technology of the People's Republic of China",
-            'NASA',
-            'NASA Education',
-            'ORCID',
-            'Royal College of Music',
-          ],
-        },
-        {
-          'orcid-id': '0000-0002-7307-2131',
-          'given-names': 'obo-test',
-          'family-names': 'reallylongnamefortestingifitstilllooksokwithobo',
-          'credit-name': null,
-          'other-name': [
-            'Другое имя',
-            '其他名字',
-            'alia nomo',
-            'other names',
-            'andre navne',
-          ],
-          email: [],
-          'institution-name': [
-            'Massachusetts Institute of Technology',
-            "Ministry of Science and Technology of the People's Republic of China",
-            'NASA',
-            'NASA Education',
-            'ORCID',
-            'Royal College of Music',
-          ],
-        },
-        {
-          'orcid-id': '0000-0001-9826-2524',
-          'given-names': 'rc3',
-          'family-names': 'First Test',
-          'credit-name': null,
-          'other-name': ['API 1.2 a', 'user added'],
-          email: [],
-          'institution-name': [
-            'Cherry Orchard Hospital',
-            'National Documentation Centre on Drug Use',
-            'University of Michigan',
-          ],
-        },
-        {
-          'orcid-id': '0000-0002-7361-1027',
-          'given-names': 'Independent Test',
-          'family-names': 'Record',
-          'credit-name': null,
-          'other-name': ['Other name'],
-          email: ['independent@mailiantor.com'],
-          'institution-name': [
-            'AARP',
-            'AFL-CIO Employees FCU',
-            'Massachusetts Institute of Technology',
-            'ORCID',
-            'Oberlin College',
-            'Swarthmore College',
-          ],
-        },
-        {
-          'orcid-id': '0000-0002-3874-7658',
-          'given-names': 'Everything Public',
-          'family-names': 'MA test',
-          'credit-name': 'Published Name',
-          'other-name': ['Also know As'],
-          email: ['public_ma@mailinator.com'],
-          'institution-name': [
-            'Alpena Community College',
-            'City of Austin',
-            'City of Boston',
-            'City of Madison Wisconsin',
-            'New York City Council',
-            'ORCID',
-            'San Francisco Foundation',
-          ],
-        },
-        {
-          'orcid-id': '0000-0002-8533-6659',
-          'given-names': 'Test',
-          'family-names': null,
-          'credit-name': null,
-          'other-name': [],
-          email: [],
-          'institution-name': ['Test  – –', 'Test Parent'],
-        },
-        {
-          'orcid-id': '0000-0001-5054-3861',
-          'given-names': 'July_17',
-          'family-names': 'Test',
-          'credit-name': null,
-          'other-name': ['Другое имя'],
-          email: [],
-          'institution-name': ['ORCID'],
-        },
-      ],
-      'num-found': 1040,
-    })
+          headers: { Accept: 'application/json' },
+        }
+      )
+      .pipe(
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((x) => {
+          x['expanded-result'] = x['expanded-result']?.map((element) => {
+            if (!element['given-names'] && !element['family-names']) {
+              element[
+                'given-names'
+              ] = $localize`:@@account.nameIsPri:Name is private`
+            }
 
-    // this._http
-    //   .get<SearchResults>(
-    //     `${environment.API_PUB}/expanded-search/${this.buildSearchUrl(
-    //       querryParam
-    //     )}`,
-    //     {
-    //       headers: { Accept: 'application/json' },
-    //     }
-    //   )
-    //   .pipe(
-    //     catchError((error) => this._errorHandler.handleError(error)),
-    //     map((x) => {
-    //       x['expanded-result'] = x['expanded-result']?.map((element) => {
-    //         if (!element['given-names'] && !element['family-names']) {
-    //           element[
-    //             'given-names'
-    //           ] = $localize`:@@account.nameIsPri:Name is private`
-    //         }
-
-    //         return element
-    //       })
-    //       return x
-    //     })
-    //   )
+            return element
+          })
+          return x
+        })
+      )
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {
