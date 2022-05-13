@@ -140,8 +140,6 @@ export class SettingsTrustedIndividualsSearchComponent
           return search.searchResults
         }),
         tap((search) => {
-          console.log(search)
-
           this.loading = false
         })
       )
