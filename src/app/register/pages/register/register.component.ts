@@ -190,22 +190,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
 
   afterRegisterRedirectionHandler(response: RegisterConfirmResponse) {
     if (isRedirectToTheAuthorizationPage(response)) {
-      this._platformInfo
-        .get()
-        .pipe(first())
-        .subscribe((platform) => {
-          if (platform.queryParameters.providerId) {
-            this.window.location.href = response.url
-          } else {
-            this._router
-              .navigate(['/oauth/authorize'], {
-                queryParams: platform.queryParameters,
-              })
-              .then(() => {
-                this.window.scrollTo(0, 0)
-              })
-          }
-        })
+      this.window.location.href = response.url
     } else {
       if (
         response.url.indexOf('orcid.org/my-orcid') > 0 &&

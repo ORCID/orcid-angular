@@ -4,6 +4,6 @@ export interface ResetPasswordEmailForm {
   password: Value
   retypedPassword: Value
   encryptedEmail: string
-  successRedirectLocation?: any
+  successRedirectLocation?: string
   errors?: any[]
 }
