@@ -78,7 +78,7 @@ import { AccountTrustedPartiesComponent } from './pages/account-trusted-parties/
     TwoFactorAuthenticationFormModule,
     AccountPanelModule,
     TopBarMyPublicRecordPreviewModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   providers: [VerificationEmailModalService],
 })
