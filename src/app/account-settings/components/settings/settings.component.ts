@@ -16,11 +16,8 @@ export class SettingsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (this._window.location.hash.length > 1) {
-        console.log(this._window.location.hash)
-
         const hash = this._window.location.hash.substr(1)
         this.viewportScroller.scrollToAnchor('cy-' + hash + '-panel')
-        console.log('cy-' + hash + '-panel')
       }
     }, 1000)
   }
