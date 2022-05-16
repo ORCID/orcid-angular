@@ -55,8 +55,7 @@
               href="{{ baseUrl }}{{ foundTrustedIndividual?.['orcid-id'] }}"
               routerLink=""
               >{{ foundTrustedIndividual?.['orcid-id'] }}
-              </a
-            >
+            </a>
           </div>
         </div>
         <div>
@@ -79,7 +78,8 @@
               i18n="@@account.addAsTrustedIndividuals"
               routerLink=""
               [matTooltip]="
-                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''"
+                foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
+              "
             >
               Add as trusted individual</a
             >
@@ -117,8 +117,7 @@
             href="{{ baseUrl }}{{ element?.['orcid-id'] }}"
             routerLink=""
             >{{ element?.['orcid-id'] }}
-            </a
-          >
+          </a>
         </td>
       </ng-container>
 
