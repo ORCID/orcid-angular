@@ -32,7 +32,6 @@ export class ResetPasswordComponent implements OnInit {
 
   @Output() loading = new EventEmitter<boolean>()
   errors: string[]
-  success: boolean
   $destroy = new Subject()
   emailKey: string
   expiredPasswordResetToken: boolean
@@ -107,7 +106,6 @@ export class ResetPasswordComponent implements OnInit {
           this.loading.emit(false)
           if (!value.errors.length && !value.password.errors.length) {
             this.form.reset()
-            this.success = true
             if (
               isRedirectToTheAuthorizationPage({
                 url: value.successRedirectLocation,
