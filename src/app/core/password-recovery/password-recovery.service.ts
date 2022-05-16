@@ -5,7 +5,10 @@ import { PasswordRecovery } from 'src/app/types'
 import { environment } from 'src/environments/environment'
 import { retry, catchError } from 'rxjs/operators'
 import { ERROR_REPORT } from 'src/app/errors'
-import { ResetPasswordEmailForm, ResetPasswordEmailFormValidate } from 'src/app/types/reset-password.endpoint'
+import {
+  ResetPasswordEmailForm,
+  ResetPasswordEmailFormValidate,
+} from 'src/app/types/reset-password.endpoint'
 
 @Injectable({
   providedIn: 'root',
@@ -70,7 +73,9 @@ export class PasswordRecoveryService {
         catchError((error) => this._errorHandler.handleError(error))
       )
   }
-  resetPasswordEmailValidateToken(resetPassword: ResetPasswordEmailFormValidate) {
+  resetPasswordEmailValidateToken(
+    resetPassword: ResetPasswordEmailFormValidate
+  ) {
     let encodedData = JSON.stringify(resetPassword)
     return this._http
       .post<ResetPasswordEmailForm>(
