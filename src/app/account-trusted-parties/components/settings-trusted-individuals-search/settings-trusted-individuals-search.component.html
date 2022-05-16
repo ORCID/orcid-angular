@@ -53,7 +53,9 @@
               target="_blank"
               rel="noreferrer noopener"
               href="{{ baseUrl }}{{ foundTrustedIndividual?.['orcid-id'] }}"
-              >{{ foundTrustedIndividual?.['orcid-id'] }}</a
+              routerLink=""
+              >{{ foundTrustedIndividual?.['orcid-id'] }}
+              </a
             >
           </div>
         </div>
@@ -67,6 +69,7 @@
               class="black-url underline"
               (click)="add(foundTrustedIndividual)"
               i18n="@@account.addAsTrustedIndividuals"
+              routerLink=""
             >
               Add as trusted individual</a
             >
@@ -102,7 +105,9 @@
             target="_blank"
             rel="noreferrer noopener"
             href="{{ baseUrl }}{{ element?.['orcid-id'] }}"
-            >{{ element?.['orcid-id'] }}</a
+            routerLink=""
+            >{{ element?.['orcid-id'] }}
+            </a
           >
         </td>
       </ng-container>
@@ -117,6 +122,7 @@
               class="black-url underline"
               (click)="add(element)"
               i18n="@@account.addAsTrustedIndividuals"
+              routerLink=""
             >
               Add as trusted individual</a
             >
