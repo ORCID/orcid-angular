@@ -58,6 +58,20 @@ export class ResetPasswordComponent implements OnInit {
     } else {
       this.emailKey = this._route.snapshot.params.key
     }
+
+    this._accountRecoveryService
+      .resetPasswordEmailValidateToken({
+        encryptedEmail: this.emailKey,
+      })
+      .subscribe((value) => {
+        if (value.errors.find((x) => x === 'invalidPasswordResetToken')) {
+          this.invalidPasswordResetToken = true
+        }
+        if (value.errors.find((x) => x === 'expiredPasswordResetToken')) {
+          this.expiredPasswordResetToken = true
+        }
+      })
+
     this.form = this._fb.group(
       {
         password: new FormControl('', {
