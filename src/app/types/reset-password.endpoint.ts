@@ -7,3 +7,7 @@ export interface ResetPasswordEmailForm {
   successRedirectLocation?: string
   errors?: any[]
 }
+export interface ResetPasswordEmailFormValidate {
+  encryptedEmail: string
+  errors?: any[]
+}
