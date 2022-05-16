@@ -60,3 +60,12 @@ mat-form-field.mobile {
 button.mobile {
   width: 100%;
 }
+
+.disabled a.mat-tooltip-trigger.black-url.underline {
+  cursor: default;
+}
+
+.disabled
+  mat-icon.mat-icon.mat-tooltip-trigger.pointer.material-icons.mat-icon-no-color {
+  cursor: default;
+}
