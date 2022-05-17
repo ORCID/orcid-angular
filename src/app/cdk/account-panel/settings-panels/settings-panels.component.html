@@ -52,16 +52,24 @@
       </div>
       <div
         class="actions-container orc-font-body-small"
-        *ngIf="revokeAccessButton"
+        *ngIf="revokeAccessButton && routeUrl !==null"
       >
         <mat-icon class="warn pointer">block</mat-icon>
+
         <a
           class="underline warn"
           (click)="revokeAccessButtonClicked()"
           i18n="@@account.revokeAccess"
+          [routerLink]="routeUrl"
         >
           Revoke access</a
         >
+      </div>
+      <div class="actions-container orc-font-body-small" *ngIf="revokeAccessButton && routeUrl ==null">
+              <mat-icon class="warn pointer">block</mat-icon>
+            
+              <a class="underline warn" (click)="revokeAccessButtonClicked()" i18n="@@account.revokeAccess">
+                Revoke access</a>
       </div>
     </div>
   </div>

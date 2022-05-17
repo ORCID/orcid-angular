@@ -12,6 +12,7 @@ import { DialogRevokeTrustedOrganizationComponent } from '../dialog-revoke-trust
 })
 export class SettingsTrustedOrganizationsComponent implements OnInit {
   $trustedOrganization: Observable<AccountTrustedOrganization[]>
+  trustedPartiesUrl = '/trusted-parties'
   constructor(
     private _trustedOrganizationService: AccountTrustedOrganizationsService,
     private dialog: MatDialog
