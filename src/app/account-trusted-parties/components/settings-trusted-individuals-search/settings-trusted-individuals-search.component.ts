@@ -52,6 +52,7 @@ export class SettingsTrustedIndividualsSearchComponent
   trustedIndividuals: AccountTrustedIndividual[]
   searchResultsByName: boolean
   alreadyAddedLabel = $localize`:@@account.alreadyAdded:You already added this user`
+  trustedPartiesUrl = '/trusted-parties'
 
   constructor(
     private _search: SearchService,
