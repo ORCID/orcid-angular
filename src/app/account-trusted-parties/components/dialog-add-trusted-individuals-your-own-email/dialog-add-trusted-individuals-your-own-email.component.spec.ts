@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
-import { DialogAddTrustedIndividualsComponent } from './dialog-add-trusted-individuals.component'
+import { DialogAddTrustedIndividualsYourOwnEmailComponent } from './dialog-add-trusted-individuals-your-own-email.component'
 
 describe('DialogAddTrustedIndividualsComponent', () => {
-  let component: DialogAddTrustedIndividualsComponent
-  let fixture: ComponentFixture<DialogAddTrustedIndividualsComponent>
+  let component: DialogAddTrustedIndividualsYourOwnEmailComponent
+  let fixture: ComponentFixture<DialogAddTrustedIndividualsYourOwnEmailComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DialogAddTrustedIndividualsComponent],
+      declarations: [DialogAddTrustedIndividualsYourOwnEmailComponent],
     }).compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogAddTrustedIndividualsComponent)
+    fixture = TestBed.createComponent(
+      DialogAddTrustedIndividualsYourOwnEmailComponent
+    )
     component = fixture.componentInstance
     fixture.detectChanges()
   })

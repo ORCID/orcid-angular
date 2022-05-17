@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-settings-actions',
@@ -17,7 +18,20 @@ export class SettingsActionsComponent implements OnInit {
   settingDownloadLoading = false
   settingDuplicatedRecordLoading = false
   settingDeactivateLoading = false
-  constructor() {}
+  constructor(@Inject(WINDOW) private _window: Window) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const hash = this._window.location.hash.substr(1)
+    switch (hash) {
+      case 'download-data':
+        this.settingDownload = true
+        break
+      case 'deactivate-account':
+        this.settingDeactivate = true
+        break
+      case 'remove-duplicate':
+        this.settingDuplicatedRecord = true
+        break
+    }
+  }
 }

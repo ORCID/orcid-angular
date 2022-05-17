@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
+import { WINDOW } from 'src/app/cdk/window'
 
 @Component({
   selector: 'app-settings-sharing',
@@ -14,7 +15,17 @@ export class SettingsSharingComponent implements OnInit {
 
   htmlCodeLoading = false
   qrCodeLoading = false
-  constructor() {}
+  constructor(@Inject(WINDOW) private _window: Window) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const hash = this._window.location.hash.substr(1)
+    switch (hash) {
+      case 'qr-code':
+        this.qrCode = true
+        break
+      case 'share':
+        this.htmlCode = true
+        break
+    }
+  }
 }

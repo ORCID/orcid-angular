@@ -4,7 +4,7 @@
 <h2 class="orc-font-body-large col" i18n="@@account.defaults">Defaults</h2>
 
 <app-settings-panels
-  id="cy-email-panel"
+  id="cy-email-frequency-panel"
   [loading]="emailFrequencyLoading"
   [(expandedContent)]="emailFrequencyExpanded"
   class="row"
@@ -21,8 +21,10 @@
   class="row"
   [title]="titleLanguage"
   [loading]="languageFrequencyLoading"
+  [(expandedContent)]="languageExpanded"
 >
   <app-settings-defaults-language
+    *ngIf="languageExpanded"
     (loading)="languageFrequencyLoading = $event"
   ></app-settings-defaults-language>
 </app-settings-panels>

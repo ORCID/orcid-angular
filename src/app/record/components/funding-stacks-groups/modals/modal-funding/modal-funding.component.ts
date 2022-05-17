@@ -15,7 +15,6 @@ import {
 import { translatedTitleValidator } from '../../../../../shared/validators/translated-title/translated-title.validator'
 
 import {
-  AMOUNT_REGEXP,
   MAX_LENGTH_LESS_THAN_FIVE_THOUSAND,
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE,
@@ -35,7 +34,6 @@ import {
   Organization,
   ExternalIdentifier,
 } from '../../../../../types/common.endpoint'
-import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { Observable } from 'rxjs/internal/Observable'
 import { debounceTime, first, startWith, switchMap } from 'rxjs/operators'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
@@ -53,6 +51,7 @@ import {
 import { Title } from '@angular/platform-browser'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
+import { validateFundingAmount } from 'src/app/shared/validators/funding-amount/funding-amount.validator'
 
 @Component({
   selector: 'app-modal-funding',
@@ -81,7 +80,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   startDateValid: boolean
   endDateValid: boolean
   countryCodes: { key: string; value: string }[]
-  originalCountryCodes: RecordCountryCodesEndpoint
   loadingCountryCodes = true
   fundingType = ''
   fundingSubtype = ''
@@ -193,7 +191,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           ],
         }),
         amount: new FormControl(this.amount, {
-          validators: [Validators.pattern(AMOUNT_REGEXP)],
+          validators: validateFundingAmount(),
         }),
         currencyCode: new FormControl(this.currencyCode, {}),
         startDateGroup: this._formBuilder.group(
@@ -265,19 +263,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       .getCountryCodes()
       .pipe(first())
       .subscribe((codes) => {
-        this.originalCountryCodes = codes
-        this.countryCodes = Object.entries(codes).map((keyValue) => {
-          return { key: keyValue[0], value: keyValue[1] }
-        })
-        this.countryCodes.sort((a, b) => {
-          if (a.key < b.key) {
-            return -1
-          }
-          if (a.key > b.key) {
-            return 1
-          }
-          return 0
-        })
+        this.countryCodes = codes
         this.loadingCountryCodes = false
         if (this.funding) {
           this.fundingForm.patchValue({
@@ -298,12 +284,15 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       })
     )
 
-    this.fundingForm.controls['amount'].valueChanges.subscribe((value) => {
+    this.fundingForm.get('amount').valueChanges.subscribe((value) => {
       if (value) {
-        this.fundingForm.controls['currencyCode'].setValidators(
-          Validators.required
-        )
-        this.fundingForm.controls['currencyCode'].updateValueAndValidity()
+        this.fundingForm.get('currencyCode').setValidators(Validators.required)
+        this.fundingForm
+          .get('currencyCode')
+          .updateValueAndValidity({ emitEvent: true })
+        this.fundingForm
+          .get('amount')
+          .updateValueAndValidity({ emitEvent: true })
       }
     })
   }

@@ -72,9 +72,7 @@ export class FundingStacksGroupsComponent implements OnInit {
                 .getCountryCodes()
                 .pipe(first())
                 .subscribe((codes) => {
-                  this.countryCodes = Object.entries(codes).map((keyValue) => {
-                    return { key: keyValue[0], value: keyValue[1] }
-                  })
+                  this.countryCodes = codes
                   this.fundings.map((value) => {
                     value.fundings.forEach((funding) => {
                       if (funding?.country?.value) {

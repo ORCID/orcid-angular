@@ -51,6 +51,7 @@ export class SettingsTrustedIndividualsSearchComponent
   searchPlaceHolder = $localize`:@@account.searchIndividualsPlaceHolder:ORCID iD, email address, or names`
   trustedIndividuals: AccountTrustedIndividual[]
   searchResultsByName: boolean
+  alreadyAddedLabel = $localize`:@@account.alreadyAdded:You already added this user`
 
   constructor(
     private _search: SearchService,
@@ -72,7 +73,7 @@ export class SettingsTrustedIndividualsSearchComponent
         map((response) => {
           if (response.isSelf) {
             this.announceThisIsYourOwnRecord()
-          } else if (response.found) {
+          } else if (response.found && !response.isAlreadyAdded) {
             this.addByEmail(emailMatch)
             return null
           } else {
@@ -90,7 +91,7 @@ export class SettingsTrustedIndividualsSearchComponent
           map((response) => {
             if (response.isSelf) {
               this.announceThisIsYourOwnRecord()
-            } else if (response.found) {
+            } else if (response.found && !response.isAlreadyAdded) {
               this.addByOrcid(orcidIdMatch.toUpperCase())
               return null
             } else {
@@ -126,17 +127,19 @@ export class SettingsTrustedIndividualsSearchComponent
           if (search.searchResults['expanded-result']) {
             search.searchResults['expanded-result'] = search.searchResults[
               'expanded-result'
-            ].filter(
-              (searchResult) =>
-                !this.resultIsMyOnRecordOrIsAlreadyAdded(
+            ].map((searchResult) => {
+              return {
+                ...searchResult,
+                alreadyOnRecord: this.resultIsMyOnRecordOrIsAlreadyAdded(
                   searchResult,
                   search.currentTrustedIndividuals
-                )
-            )
+                ),
+              }
+            })
           }
           return search.searchResults
         }),
-        tap(() => {
+        tap((search) => {
           this.loading = false
         })
       )
@@ -146,8 +149,8 @@ export class SettingsTrustedIndividualsSearchComponent
   private resultIsMyOnRecordOrIsAlreadyAdded(
     searchResult: ExpandedSearchResultsContent,
     existingTrusteds: AccountTrustedIndividual[]
-  ): unknown {
-    return (
+  ): boolean {
+    return !!(
       searchResult['orcid-id'] ===
         this.userSession.userInfo.EFFECTIVE_USER_ORCID ||
       existingTrusteds.filter(
@@ -167,22 +170,24 @@ export class SettingsTrustedIndividualsSearchComponent
   }
 
   add(value: ExpandedSearchResultsContent) {
-    this.dialog
-      .open(DialogAddTrustedIndividualsComponent, {
-        data: value,
-        width: '634px',
-      })
-      .afterClosed()
-      .pipe(
-        switchMap((value) => {
-          this.loading = true
-          if (value) {
-            return this.account.add(value)
-          }
-          return of(undefined)
+    if (!value.alreadyOnRecord) {
+      this.dialog
+        .open(DialogAddTrustedIndividualsComponent, {
+          data: value,
+          width: '634px',
         })
-      )
-      .subscribe()
+        .afterClosed()
+        .pipe(
+          switchMap((value) => {
+            if (value) {
+              this.loading = true
+              return this.account.add(value)
+            }
+            return of(undefined)
+          })
+        )
+        .subscribe()
+    }
   }
 
   addByEmail(value: string) {
