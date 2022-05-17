@@ -53,6 +53,7 @@
             <mat-icon
               (click)="revokeAccess(trustedIndividual)"
               class="warn pointer"
+              [routerLink]="trustedPartiesUrl"
               >block</mat-icon
             >
 
@@ -61,6 +62,7 @@
               (click)="revokeAccess(trustedIndividual)"
               i18n="@@account.revokeAccess"
               id="cy-revoke-access"
+              [routerLink]="trustedPartiesUrl"
             >
               Revoke access</a
             >
@@ -120,6 +122,7 @@
               (click)="revokeAccess(element)"
               i18n="@@account.revokeAccess"
               id="cy-revoke-access"
+              [routerLink]="trustedPartiesUrl"
             >
               Revoke access</a
             >

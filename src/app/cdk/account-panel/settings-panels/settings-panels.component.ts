@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
+import { RouterModule, Routes } from '@angular/router'
 
 @Component({
   selector: 'app-settings-panels',
@@ -22,7 +23,9 @@ export class SettingsPanelsComponent implements OnInit {
   @Input() type: { value: 'two-factor'; enabled: boolean }
   @Output() revokeAccessButtonClickedEvent = new EventEmitter<boolean>()
   @Input() id: string
+  @Input() routeUrl: string
 
+  trustedPartiesUrl = '/trusted-parties'
   isMobile!: boolean
 
   constructor(
