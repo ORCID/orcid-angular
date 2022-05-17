@@ -34,7 +34,7 @@
     [url]="trustedOrganization.websiteValue"
     [revokeAccessButton]="true"
     (revokeAccessButtonClickedEvent)="revokeAccess(trustedOrganization)"
-    [routeUrl] ="trustedPartiesUrl"
+    [routeUrl]="trustedPartiesUrl"
     *ngFor="let trustedOrganization of trustedOrganizations"
   >
     <app-settings-trusted-organization

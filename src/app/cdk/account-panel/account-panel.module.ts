@@ -9,7 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module'
 import { SettingsPanelsDataComponent } from './settings-panels-data/settings-panels-data.component'
 import { PanelExpandButtonsComponent } from './settings-panels-expand-buttons/settings-panels-expand-buttons.component'
 import { SettingsPanelsComponent } from './settings-panels/settings-panels.component'
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router'
 
 @NgModule({
   declarations: [
@@ -21,8 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
     SettingsPanelsComponent,
     SettingsPanelsDataComponent,
     PanelExpandButtonsComponent,
-    RouterModule
-    
+    RouterModule,
   ],
   imports: [
     CommonModule,

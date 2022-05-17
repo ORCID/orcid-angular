@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { PlatformInfoService } from '../../platform-info'
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router'
 
 @Component({
   selector: 'app-settings-panels',
