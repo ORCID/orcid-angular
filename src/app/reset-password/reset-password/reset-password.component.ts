@@ -30,6 +30,7 @@ export class ResetPasswordComponent implements OnInit {
   hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   labelInfo = $localize`:@@register.ariaLabelInfoPassword:info about password`
 
+  resetPasswordUrl = '/' + ApplicationRoutes.resetPassword
   @Output() loading = new EventEmitter<boolean>()
   errors: string[]
   $destroy = new Subject()
