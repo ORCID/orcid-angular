@@ -38,6 +38,7 @@ export enum WorkPublicationTypes {
   translation = 'translation',
   website = 'website',
   workingPaper = 'working-paper',
+  review ='review'
 }
 
 export enum WorkConferenceTypes {
@@ -106,6 +107,7 @@ export const WorkTypesLabels = {
     [WorkPublicationTypes.translation]: $localize`:@@works.translation:Translation`,
     [WorkPublicationTypes.website]: $localize`:@@works.website:Website`,
     [WorkPublicationTypes.workingPaper]: $localize`:@@works.working:Working paper`,
+    [WorkPublicationTypes.review]: $localize`:@@works.reviewPublication:Review`,
   },
 
   [WorkCategories.intellectual_property]: {
@@ -188,6 +190,7 @@ export const WorkTypesTitle = {
   [WorkIntellectualPropertyTypes.disclosure]: WorksTitleName.publisher,
   [WorkIntellectualPropertyTypes.license]: WorksTitleName.publisher,
   [WorkIntellectualPropertyTypes.patent]: WorksTitleName.publisher,
+  [WorkPublicationTypes.review]: WorksTitleName.publisher,
   [WorkIntellectualPropertyTypes.registeredCopyright]: WorksTitleName.publisher,
   [WorkIntellectualPropertyTypes.trademark]: WorksTitleName.journalTitle,
   [WorkOtherOutputTypes.annotation]: WorksTitleName.custodian,
