@@ -38,7 +38,7 @@ export enum WorkPublicationTypes {
   translation = 'translation',
   website = 'website',
   workingPaper = 'working-paper',
-  review ='review'
+  review = 'review',
 }
 
 export enum WorkConferenceTypes {
