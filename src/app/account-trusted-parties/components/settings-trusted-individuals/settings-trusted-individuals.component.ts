@@ -23,6 +23,7 @@ export class SettingsTrustedIndividualsComponent implements OnInit, OnDestroy {
   platformSubs = new Subject<void>()
   isMobile: boolean
   baseUrl = environment.BASE_URL
+  trustedPartiesUrl = '/trusted-parties'
   constructor(
     private _trustedIndividualsService: AccountTrustedIndividualsService,
     private dialog: MatDialog,

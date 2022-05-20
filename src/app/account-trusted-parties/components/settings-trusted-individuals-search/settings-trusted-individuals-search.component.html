@@ -53,7 +53,6 @@
               target="_blank"
               rel="noreferrer noopener"
               href="{{ baseUrl }}{{ foundTrustedIndividual?.['orcid-id'] }}"
-              routerLink=""
               >{{ foundTrustedIndividual?.['orcid-id'] }}
             </a>
           </div>
@@ -76,7 +75,7 @@
               class="black-url underline"
               (click)="add(foundTrustedIndividual)"
               i18n="@@account.addAsTrustedIndividuals"
-              routerLink=""
+              [routerLink]="trustedPartiesUrl"
               [matTooltip]="
                 foundTrustedIndividual.alreadyOnRecord ? alreadyAddedLabel : ''
               "
@@ -115,7 +114,6 @@
             target="_blank"
             rel="noreferrer noopener"
             href="{{ baseUrl }}{{ element?.['orcid-id'] }}"
-            routerLink=""
             >{{ element?.['orcid-id'] }}
           </a>
         </td>
@@ -139,7 +137,7 @@
               class="black-url underline"
               (click)="add(element)"
               i18n="@@account.addAsTrustedIndividuals"
-              routerLink=""
+              [routerLink]="trustedPartiesUrl"
               [matTooltip]="element.alreadyOnRecord ? alreadyAddedLabel : ''"
             >
               Add as trusted individual</a
