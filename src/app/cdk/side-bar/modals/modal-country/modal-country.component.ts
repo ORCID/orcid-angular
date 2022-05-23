@@ -20,7 +20,6 @@ import { VisibilityStrings } from 'src/app/types/common.endpoint'
 import {
   Address,
   CountriesEndpoint,
-  RecordCountryCodesEndpoint,
 } from 'src/app/types/record-country.endpoint'
 
 @Component({
@@ -47,7 +46,6 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
   countries: Address[]
   countriesMap: { [key: string]: Address }
   countryCodes: { key: string; value: string }[]
-  originalCountryCodes: RecordCountryCodesEndpoint
   originalBackendCountries: CountriesEndpoint
   defaultVisibility: VisibilityStrings
   isMobile: boolean
@@ -75,19 +73,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
       .getCountryCodes()
       .pipe(first())
       .subscribe((codes) => {
-        this.originalCountryCodes = codes
-        this.countryCodes = Object.entries(codes).map((keyValue) => {
-          return { key: keyValue[0], value: keyValue[1] }
-        })
-        this.countryCodes.sort((a, b) => {
-          if (a.key < b.key) {
-            return -1
-          }
-          if (a.key > b.key) {
-            return 1
-          }
-          return 0
-        })
+        this.countryCodes = codes
         this.loadingCountryCodes = false
       })
     this._platform
@@ -135,7 +121,7 @@ export class ModalCountryComponent implements OnInit, OnDestroy {
             putCode: key.indexOf('new-') === 0 ? null : key,
             countryName,
             iso2Country: {
-              value: this.originalCountryCodes[countryName],
+              value: this.countryCodes.find((x) => x.key === countryName).value,
             },
             displayIndex: i + 1,
             visibility: {

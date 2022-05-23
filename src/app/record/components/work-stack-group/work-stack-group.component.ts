@@ -75,29 +75,34 @@ export class WorkStackGroupComponent implements OnInit {
       label: $localize`:@@shared.searchLink:Search & Link`,
       action: ADD_EVENT_ACTION.searchAndLink,
       modal: ModalWorksSearchLinkComponent,
+      id: 'cy-add-work-search-link',
     },
     {
       label: $localize`:@@works.addDoi:Add DOI`,
       action: ADD_EVENT_ACTION.doi,
       modal: WorkExternalIdModalComponent,
       type: EXTERNAL_ID_TYPE_WORK.doi,
+      id: 'cy-add-work-doi',
     },
     {
       label: $localize`:@@works.addPubmed:Add PubMed ID`,
       action: ADD_EVENT_ACTION.pubMed,
       modal: WorkExternalIdModalComponent,
       type: EXTERNAL_ID_TYPE_WORK.pubMed,
+      id: 'cy-add-work-pubmed',
     },
     {
       label: $localize`:@@works.addBibtex:Add BibTeX`,
       action: ADD_EVENT_ACTION.bibText,
       modal: WorkBibtexModalComponent,
+      id: 'cy-add-work-bibtext',
     },
 
     {
       label: $localize`:@@shared.addManually:Add manually`,
       action: ADD_EVENT_ACTION.addManually,
       modal: WorkModalComponent,
+      id: 'cy-add-work-manually',
     },
   ]
 
@@ -142,7 +147,9 @@ export class WorkStackGroupComponent implements OnInit {
           this.total.emit(userRecord.works.groups?.length || 0)
         }
       })
-    this.getGroupingSuggestions()
+    if (!this.isPublicRecord) {
+      this.getGroupingSuggestions()
+    }
 
     this._platform.get().subscribe((platform) => {
       this.platform = platform
@@ -237,6 +244,7 @@ export class WorkStackGroupComponent implements OnInit {
         modalComponent.componentInstance.type = 'works'
         modalComponent.componentInstance.selectedAll = selectedAll
         modalComponent.componentInstance.totalWorks = this.workGroup.totalGroups
+        modalComponent.componentInstance.workGroups = this.workGroup.groups
       })
   }
 

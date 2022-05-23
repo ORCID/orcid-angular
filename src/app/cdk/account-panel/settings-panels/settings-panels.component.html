@@ -1,0 +1,92 @@
+<div class="col s4 m8 l12 no-gutters">
+  <div class="header-container settings-header-container">
+    <div class="inline-initial-side">
+      <div class="row inline-initial-side">
+        <app-settings-panels-expand-buttons
+          [id]="id ? id + '-action' : ''"
+          (toggle)="collapse()"
+          [openState]="expandedContent"
+        ></app-settings-panels-expand-buttons>
+
+        <div class="text-container">
+          <div
+            [ngClass]="{
+              'orc-font-body-small': url,
+              'orc-font-body': !url
+            }"
+            class="orc-font-body clickable row title-container"
+            (click)="collapse()"
+          >
+            <h3>
+              {{ title }}
+              <ng-container *ngIf="type?.value === 'two-factor'">
+                <span *ngIf="type?.enabled" class="on">
+                  (<ng-container i18n="@@account.on">ON</ng-container>)
+                </span>
+                <span *ngIf="!type?.enabled" class="off">
+                  (<ng-container i18n="@@account.off">OFF</ng-container>)
+                </span>
+              </ng-container>
+            </h3>
+            <a
+              class="underline"
+              *ngIf="url"
+              [href]="url"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {{ url }}</a
+            >
+          </div>
+
+          <div class="text-container" *ngIf="accessGranted && !isMobile">
+            <div class="orc-font-body clickable" (click)="collapse()">
+              <strong>
+                <ng-container i18n="@@account.accessGrantedDate"
+                  >Access granted:
+                </ng-container> </strong
+              >{{ accessGranted | monthDayYearDateToString }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="actions-container orc-font-body-small"
+        *ngIf="revokeAccessButton && routeUrl !== null"
+      >
+        <mat-icon class="warn pointer">block</mat-icon>
+
+        <a
+          class="underline warn"
+          (click)="revokeAccessButtonClicked()"
+          i18n="@@account.revokeAccess"
+          [routerLink]="routeUrl"
+        >
+          Revoke access</a
+        >
+      </div>
+      <div
+        class="actions-container orc-font-body-small"
+        *ngIf="revokeAccessButton && routeUrl == null"
+      >
+        <mat-icon class="warn pointer">block</mat-icon>
+
+        <a
+          class="underline warn"
+          (click)="revokeAccessButtonClicked()"
+          i18n="@@account.revokeAccess"
+        >
+          Revoke access</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<mat-progress-bar
+  mode="indeterminate"
+  color="accent"
+  *ngIf="loading"
+></mat-progress-bar>
+<div class="col s4 m8 l12 content no-gutters" *ngIf="expandedContent">
+  <ng-content></ng-content>
+</div>

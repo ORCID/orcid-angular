@@ -1,0 +1,37 @@
+<app-settings-panels-data>
+  <p>
+    <ng-container i18n="@@account.addExtraSecurity">
+      Add extra security to your ORCID account by enabling two-factor
+      authentication (2FA).
+    </ng-container>
+    <br />
+    <ng-container i18n="@@account.eachTimeYouSignIn">
+      Each time you sign in to ORCID you’ll be prompted to enter a six-digit
+      code we send to your preferred 2FA authentication application.
+    </ng-container>
+  </p>
+  <p>
+    <b class="orc-font-body" i18n="@@account.twoFactorIsCurrently">
+      Two-factor authentication is currently:
+    </b>
+  </p>
+  <p class="orc-font-heading-small">
+    <b *ngIf="twoFactorState" class="on" i18n="@@account.on">ON</b>
+    <b *ngIf="!twoFactorState" class="off" i18n="@@account.off">OFF</b>
+  </p>
+  <div class="button-container">
+    <button
+      mat-raised-button
+      color="primary"
+      id="cy-two-factor-switch"
+      (click)="twoFactor()"
+    >
+      <ng-container *ngIf="!twoFactorState" i18n="@@account.turnOnTwoFactor">
+        Turn on two-factor authentication
+      </ng-container>
+      <ng-container *ngIf="twoFactorState" i18n="@@account.turnOffTwoFactor">
+        Turn off two-factor authentication
+      </ng-container>
+    </button>
+  </div>
+</app-settings-panels-data>

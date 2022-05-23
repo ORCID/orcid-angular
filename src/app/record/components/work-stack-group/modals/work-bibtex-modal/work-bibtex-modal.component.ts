@@ -9,6 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 import bibtexParse from '@orcid/bibtex-parse-js'
 import latexParse from 'src/assets/scripts/latexParse.js'
 import { WINDOW } from 'src/app/cdk/window'
+import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 
 @Component({
   selector: 'app-work-doi-bibtex-modal',
@@ -31,9 +32,11 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   selectAll: false
   group: { [key: string]: FormGroup } = {}
   addedWorkCount = 0
+  isAnInvalidWork = false
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
+    private _snackBar: SnackbarService,
     private _recordWorksService: RecordWorksService,
     @Inject(WINDOW) private _window: Window
   ) {}
@@ -83,6 +86,10 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
                   .subscribe((data) => {
                     data.forEach((work) => {
                       that.worksFromBibtex.push(work)
+                      if (work.errors.length > 0 && !that.isAnInvalidWork) {
+                        that.isAnInvalidWork = true
+                        that._snackBar.showValidationError()
+                      }
                     })
                     that.worksFromBibtex.forEach((w) => {
                       const newPutCode = 'new-' + that.addedWorkCount++
@@ -296,16 +303,9 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   }
 
   updateCheckAll() {
+    this.selectedWorks = []
     this.worksFromBibtex.forEach((work) => {
-      if (
-        this.selectedWorks.some((w) => w.putCode.value === work.putCode.value)
-      ) {
-        if (!!this.selectAll === false) {
-          this.selectedWorks = this.selectedWorks.filter(
-            (w) => w.putCode.value !== work.putCode.value
-          )
-        }
-      } else {
+      if (this.selectAll) {
         this.selectedWorks.push(work)
       }
       this.importForm.patchValue({
@@ -329,8 +329,8 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
   }
 
   saveEvent() {
-    this.loadingWorks = true
     if (this.selectedWorks.length > 0) {
+      this.loadingWorks = true
       this.selectedWorks.forEach((work, index) => {
         work.putCode = null
         this._recordWorksService
@@ -343,7 +343,19 @@ export class WorkBibtexModalComponent implements OnInit, OnDestroy {
             }
           })
       })
+    } else {
+      this._snackBar.showValidationError(
+        $localize`:@@shared.youHaveNotSelectedImport:You haven’t selected any items to import.`,
+        $localize`:@@shared.pleaseReview:Please review and fix the issue`
+      )
     }
+  }
+
+  private displayBackendError(errorMessage: string) {
+    this._snackBar.showValidationError(
+      errorMessage,
+      $localize`:@@shared.pleaseReview:Please review and fix the issue`
+    )
   }
 
   closeEvent() {

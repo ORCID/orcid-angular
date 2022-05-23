@@ -8,6 +8,5 @@ import { MatButtonModule } from '@angular/material/button'
 @NgModule({
   declarations: [SnackbarComponent],
   imports: [CommonModule, MatIconModule, MatSnackBarModule, MatButtonModule],
-  entryComponents: [SnackbarComponent],
 })
 export class SnackbarModule {}

@@ -38,29 +38,13 @@ export class SearchComponent implements OnInit {
   constructor(
     @Inject(WINDOW) private window: Window,
     private _search: SearchService,
-    _platform: PlatformInfoService,
-    _togglz: TogglzService,
+    private _platform: PlatformInfoService,
+    private _togglz: TogglzService,
     private router: Router,
     private route: ActivatedRoute,
     public _changeDetection: ChangeDetectorRef,
-    location: Location
-  ) {
-    _platform.platformSubject.subscribe((data) => {
-      this.platform = data
-    })
-    _togglz
-      .getStateOf('ENABLE_USER_MENU')
-      .subscribe((value) => (this.togglzEnableUserMenu = value))
-    _togglz
-      .getStateOf('ORCID_ANGULAR_SEARCH')
-      .subscribe((value) => (this.togglzOrcidAngularSearch = value))
-
-    router.events.subscribe(
-      () =>
-        (this.signinRegisterButton =
-          location.path() !== `/${ApplicationRoutes.signin}`)
-    )
-  }
+    private location: Location
+  ) {}
 
   changeWhereToSearch(item) {
     this.whereToSearchSelected = item
@@ -76,7 +60,23 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._platform.platformSubject.subscribe((data) => {
+      this.platform = data
+    })
+    this._togglz
+      .getStateOf('ENABLE_USER_MENU')
+      .subscribe((value) => (this.togglzEnableUserMenu = value))
+    this._togglz
+      .getStateOf('ORCID_ANGULAR_SEARCH')
+      .subscribe((value) => (this.togglzOrcidAngularSearch = value))
+
+    this.router.events.subscribe(
+      () =>
+        (this.signinRegisterButton =
+          this.location.path() !== `/${ApplicationRoutes.signin}`)
+    )
+  }
 
   search(whereToSearch, whatToSearch) {
     if (

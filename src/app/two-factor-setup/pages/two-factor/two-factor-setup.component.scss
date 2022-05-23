@@ -1,0 +1,33 @@
+@import 'src/assets/scss/orcid.spacing.scss';
+
+:host {
+  width: 100%;
+}
+
+main#main {
+  flex-direction: column;
+  margin-bottom: $spacing-large;
+  padding-inline-start: 16px;
+}
+
+.container {
+  max-width: 664px;
+  padding: 0 !important;
+}
+
+.container,
+.mobile {
+  padding: 0 12px !important;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+img.orcid {
+  display: block;
+  height: 64px;
+  width: 64px;
+  margin: 64px auto 33px;
+}

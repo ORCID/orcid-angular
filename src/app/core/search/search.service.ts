@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core'
 import { environment } from 'src/environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { SearchParameters, SearchResults } from 'src/app/types'
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
-import { catchError } from 'rxjs/operators'
-import { DEFAULT_PAGE_SIZE, ORCID_REGEXP } from 'src/app/constants'
+import { catchError, delay, map } from 'rxjs/operators'
+import {
+  DEFAULT_PAGE_SIZE,
+  ORCID_REGEXP_CASE_INSENSITIVE,
+} from 'src/app/constants'
+import { debug } from 'console'
 
 @Injectable({
   providedIn: 'root',
@@ -30,13 +34,29 @@ export class SearchService {
           headers: { Accept: 'application/json' },
         }
       )
-      .pipe(catchError((error) => this._errorHandler.handleError(error)))
+      .pipe(
+        catchError((error) => this._errorHandler.handleError(error)),
+        map((x) => {
+          x['expanded-result'] = x['expanded-result']?.map((element) => {
+            if (!element['given-names'] && !element['family-names']) {
+              element[
+                'given-names'
+              ] = $localize`:@@account.nameIsPri:Name is private`
+            }
+
+            return element
+          })
+          return x
+        })
+      )
   }
 
   private buildSearchUrl(querryParam: SearchParameters): string {
     const escapedParams: SearchParameters = {}
     Object.keys(querryParam).map((key) => {
-      escapedParams[key] = this.escapeReservedChar(querryParam[key])
+      if (typeof querryParam[key] === 'string') {
+        escapedParams[key] = this.escapeReservedChar(querryParam[key])
+      }
     })
 
     const orcidId =
@@ -78,6 +98,10 @@ export class SearchService {
           searchParameters.push(`ringgold-org-id:${escapedParams.institution}`)
         } else if (escapedParams.institution.startsWith('grid.')) {
           searchParameters.push(`grid-org-id:${escapedParams.institution}`)
+        }
+        //if starts with http, assume it's a ror id
+        else if (escapedParams.institution.startsWith('http')) {
+          searchParameters.push(`ror-org-id:${escapedParams.institution}`)
         } else {
           searchParameters.push(
             `affiliation-org-name:${escapedParams.institution}`
@@ -99,7 +123,7 @@ export class SearchService {
   }
 
   private extractOrcidId(string: any) {
-    const regexResult = ORCID_REGEXP.exec(string)
+    const regexResult = ORCID_REGEXP_CASE_INSENSITIVE.exec(string)
     if (regexResult) {
       return regexResult[0].toUpperCase()
     }

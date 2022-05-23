@@ -1,0 +1,46 @@
+<h2 class="orc-font-body-large col" i18n="@@account.accountActions">
+  Account actions
+</h2>
+
+<app-settings-panels
+  id="cy-download-data-panel"
+  [loading]="settingDownloadLoading"
+  [(expandedContent)]="settingDownload"
+  class="row"
+  [title]="titleDownload"
+>
+  <app-settings-actions-download
+    *ngIf="titleDownload"
+    (loading)="settingDownloadLoading = $event"
+  >
+  </app-settings-actions-download>
+</app-settings-panels>
+
+<app-settings-panels
+  id="cy-deactivate-account-panel"
+  [loading]="settingDeactivateLoading"
+  [(expandedContent)]="settingDeactivate"
+  class="row"
+  [title]="titleDeactivate"
+>
+  <app-settings-actions-deactivate
+    *ngIf="settingDeactivate"
+    (loading)="settingDeactivateLoading = $event"
+  >
+  </app-settings-actions-deactivate>
+</app-settings-panels>
+
+<app-settings-panels
+  id="cy-remove-duplicate-panel"
+  [loading]="settingDuplicatedRecordLoading"
+  [(expandedContent)]="settingDuplicatedRecord"
+  class="row"
+  [title]="titleDuplicatedRecord"
+>
+  <app-settings-actions-duplicated
+    *ngIf="settingDuplicatedRecord"
+    (loading)="settingDuplicatedRecordLoading = $event"
+    (close)="settingDuplicatedRecord = false"
+  >
+  </app-settings-actions-duplicated>
+</app-settings-panels>

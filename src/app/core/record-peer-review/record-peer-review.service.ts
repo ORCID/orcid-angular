@@ -6,10 +6,11 @@ import { environment } from '../../../environments/environment'
 import { PeerReview } from '../../types/record-peer-review.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
-import { retry, catchError, tap } from 'rxjs/operators'
+import { retry, catchError, tap, first, map, switchMap } from 'rxjs/operators'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { cloneDeep } from 'lodash'
-
+import { TogglzService } from '../togglz/togglz.service'
+import { take } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root',
 })
@@ -20,60 +21,90 @@ export class RecordPeerReviewService {
     'Content-Type': 'application/json',
   })
   lastEmittedValue: PeerReview[]
+  togglzPeerReviews: boolean
 
   constructor(
     private _http: HttpClient,
-    private _errorHandler: ErrorHandlerService
+    private _errorHandler: ErrorHandlerService,
+    private _togglz: TogglzService
   ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
+    if (options.cleanCacheIfExist && this.$peer) {
+      this.$peer.next(<PeerReview[]>undefined)
+    }
+
+    this._togglz
+      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
+      .pipe(
+        first(),
+        map((togglzPeerReviews) => {
+          let url: string
+          if (options.publicRecordId) {
+            url =
+              options.publicRecordId +
+              (togglzPeerReviews
+                ? '/peer-reviews-minimized.json?sortAsc='
+                : '/peer-reviews.json?sortAsc=')
+          } else {
+            url = togglzPeerReviews
+              ? 'peer-reviews/peer-reviews-minimized.json?sortAsc='
+              : 'peer-reviews/peer-reviews.json?sortAsc='
+          }
+          return url
+        }),
+        switchMap((url) =>
+          this._http.get<PeerReview[]>(
+            environment.API_WEB +
+              url +
+              (options.sortAsc != null ? options.sortAsc : true)
+          )
+        ),
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error)),
+        catchError(() => of([])),
+        tap((data) => {
+          this.lastEmittedValue = data
+          this.$peer.next(data)
+        })
+      )
+      .subscribe()
+    return this.$peer.asObservable()
+  }
+
+  getPeerReviewsByGroupId(
+    options: UserRecordOptions,
+    groupId
+  ): Observable<PeerReview[]> {
     if (options?.publicRecordId) {
-      this._http
+      return this._http
         .get<PeerReview[]>(
           environment.API_WEB +
             options.publicRecordId +
-            '/peer-reviews.json?sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : true)
+            '/peer-reviews-by-group-id.json?sortAsc=' +
+            (options.sortAsc != null ? options.sortAsc : true) +
+            '&groupId=' +
+            encodeURIComponent(groupId)
         )
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
-          catchError(() => of([])),
-          tap((data) => {
-            this.lastEmittedValue = data
-            this.$peer.next(data)
-          })
+          catchError(() => of([]))
         )
-        .subscribe()
-      return this.$peer.asObservable()
     } else {
-      if (!this.$peer) {
-        this.$peer = new ReplaySubject(1)
-      } else if (!options.forceReload) {
-        return this.$peer
-      }
-
-      if (options.cleanCacheIfExist && this.$peer) {
-        this.$peer.next(undefined)
-      }
-
-      this._http
+      return this._http
         .get<PeerReview[]>(
           environment.API_WEB +
-            'peer-reviews/peer-reviews.json?sortAsc=' +
-            (options.sortAsc != null ? options.sortAsc : true)
+            'peer-reviews/peer-reviews-by-group-id.json?sortAsc=' +
+            (options.sortAsc != null ? options.sortAsc : true) +
+            '&groupId=' +
+            encodeURIComponent(groupId)
         )
         .pipe(
           retry(3),
           catchError((error) => this._errorHandler.handleError(error)),
-          catchError(() => of([])),
-          tap((value) => {
-            this.lastEmittedValue = cloneDeep(value)
-            this.$peer.next(value)
-          })
+          catchError(() => of([]))
         )
-        .subscribe()
-      return this.$peer.asObservable()
     }
   }
 
@@ -101,7 +132,8 @@ export class RecordPeerReviewService {
 
   updateVisibility(
     putCode: any,
-    visibility: VisibilityStrings
+    visibility: VisibilityStrings,
+    groupId?: any
   ): Observable<any> {
     return this._http
       .get(
@@ -114,7 +146,13 @@ export class RecordPeerReviewService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getPeerReviewGroups({ forceReload: true }))
+        tap(() => {
+          if (groupId) {
+            this.getPeerReviewsByGroupId({ forceReload: true }, groupId)
+          } else {
+            this.getPeerReviewGroups({ forceReload: true })
+          }
+        })
       )
   }
 

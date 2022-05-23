@@ -25,6 +25,7 @@
     [(displayTheStack)]="displayTheStack"
     [hasExternalIds]="hasExternalIdentifiers"
     *ngIf="isPreferred(affiliation) || displayTheStack"
+    id="{{ 'cy-affiliation-' + type + '-' + i }}"
   >
     <h2 header class="orc-font-body">
       {{ affiliation.affiliationName.value }}:

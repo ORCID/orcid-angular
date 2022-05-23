@@ -24,7 +24,7 @@ import { Subject } from 'rxjs'
 import { first, takeUntil } from 'rxjs/operators'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 
-import { URL_REGEXP, URL_REGEXP_BACKEND } from '../../../../constants'
+import { URL_REGEXP } from '../../../../constants'
 import { UserService } from '../../../../core'
 import { RecordWebsitesService } from '../../../../core/record-websites/record-websites.service'
 import { Assertion } from '../../../../types'
@@ -113,16 +113,16 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
     websites.forEach((website) => {
       group[website.putCode] = new FormGroup({
         description: new FormControl(
-          website.urlName == null ? '' : website.urlName.toLowerCase().trim(),
+          website.urlName == null ? '' : website.urlName.trim(),
           {
             validators: [Validators.maxLength(this.urlMaxLength)],
             updateOn: 'change',
           }
         ),
-        url: new FormControl(website.url.value.toLowerCase().trim(), {
+        url: new FormControl(website.url.value.trim(), {
           validators: [
             Validators.required,
-            Validators.pattern(URL_REGEXP_BACKEND),
+            Validators.pattern(URL_REGEXP),
             this.allUrlsAreUnique(website.putCode),
           ],
           updateOn: 'change',

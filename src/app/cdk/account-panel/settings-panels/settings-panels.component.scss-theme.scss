@@ -1,0 +1,32 @@
+@import '../../../../assets/scss/material.palettes';
+@import 'src/assets/scss/material.orcid-theme.scss';
+@import '~@angular/material/theming';
+
+@mixin settings-panels-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  :host {
+    border-color: mat-color($background, ui-background) !important;
+    .header-container {
+      border-color: mat-color($background, ui-background) !important;
+      background-color: mat-color($background, ui-background-lightest);
+    }
+
+    .warn {
+      color: mat-color($warn, 700);
+    }
+
+    .off {
+      color: mat-color($foreground, 'state-warning-dark');
+    }
+
+    .on {
+      color: map-get($foreground, 'brand-primary-dark');
+    }
+  }
+}
+
+@include settings-panels-theme($orcid-app-theme);

@@ -111,6 +111,7 @@ export class RecordService {
     // Un-subscribe from previous combineLatest subscriptions
     this.$destroy.next()
     // Subscribe to a new combineLatest http calls subscription
+
     combineLatest([
       this._recordEmailsService
         .getEmails(options)

@@ -22,6 +22,8 @@ export interface Work extends AssertionBase {
   citation?: Citation
   countryCode?: Value
   contributors?: Contributor[]
+  numberOfContributors?: number
+  contributorsGroupedByOrcid?: Contributor[]
   workExternalIdentifiers: ExternalIdentifier[]
   title: Value
   subtitle?: Value

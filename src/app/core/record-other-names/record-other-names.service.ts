@@ -32,13 +32,15 @@ export class RecordOtherNamesService {
   ): Observable<OtherNamesEndPoint> {
     if (options.publicRecordId) {
       return this._recordPublicSidebar.getPublicRecordSideBar(options).pipe(
-        map((value) => value.otherNames),
+        map((value) => value?.otherNames),
         map((value) => {
-          value.otherNames = flatMap(
-            groupBy(value.otherNames, (item) =>
-              item.content.toLowerCase().trim()
+          if (value?.otherNames) {
+            value.otherNames = flatMap(
+              groupBy(value?.otherNames, (item) =>
+                item?.content.toLowerCase().trim()
+              )
             )
-          )
+          }
           return value
         })
       )

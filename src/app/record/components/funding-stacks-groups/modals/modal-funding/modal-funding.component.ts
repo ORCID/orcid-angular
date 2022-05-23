@@ -7,7 +7,6 @@ import {
   FormGroup,
   Validators,
   FormArray,
-  AbstractControl,
 } from '@angular/forms'
 import {
   dateMonthYearValidator,
@@ -16,7 +15,6 @@ import {
 import { translatedTitleValidator } from '../../../../../shared/validators/translated-title/translated-title.validator'
 
 import {
-  AMOUNT_REGEXP,
   MAX_LENGTH_LESS_THAN_FIVE_THOUSAND,
   MAX_LENGTH_LESS_THAN_ONE_THOUSAND,
   MAX_LENGTH_LESS_THAN_TWO_HUNDRED_FIFTY_FIVE,
@@ -36,16 +34,8 @@ import {
   Organization,
   ExternalIdentifier,
 } from '../../../../../types/common.endpoint'
-import { RecordCountryCodesEndpoint } from '../../../../../types'
 import { Observable } from 'rxjs/internal/Observable'
-import {
-  debounceTime,
-  first,
-  startWith,
-  switchMap,
-  takeUntil,
-} from 'rxjs/operators'
-import { UserSession } from '../../../../../types/session.local'
+import { debounceTime, first, startWith, switchMap } from 'rxjs/operators'
 import { RecordFundingsService } from 'src/app/core/record-fundings/record-fundings.service'
 import { UserService } from '../../../../../core'
 import { WINDOW } from '../../../../../cdk/window'
@@ -61,6 +51,7 @@ import {
 import { Title } from '@angular/platform-browser'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { RecordService } from 'src/app/core/record/record.service'
+import { validateFundingAmount } from 'src/app/shared/validators/funding-amount/funding-amount.validator'
 
 @Component({
   selector: 'app-modal-funding',
@@ -83,14 +74,12 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   languageMap = LanguageMap
   currencyCodeMap = CurrencyCodeMap
   userRecord: UserRecord
-  userSession: UserSession
   isMobile: boolean
   filteredOptions: Observable<Organization[]>
   loadingFunding = true
   startDateValid: boolean
   endDateValid: boolean
   countryCodes: { key: string; value: string }[]
-  originalCountryCodes: RecordCountryCodesEndpoint
   loadingCountryCodes = true
   fundingType = ''
   fundingSubtype = ''
@@ -121,11 +110,11 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
 
   years = Array(110)
     .fill(0)
-    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .map((i, idx) => idx + new Date().getFullYear() - 108)
     .reverse()
   yearsEndDate = Array(120)
     .fill(0)
-    .map((i, idx) => idx + new Date().getFullYear() - 109)
+    .map((i, idx) => idx + new Date().getFullYear() - 108)
     .reverse()
   months = Array(12)
     .fill(0)
@@ -154,13 +143,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       this.platform = platform
       this.isMobile = platform.columns4 || platform.columns8
     })
-
-    this._userService
-      .getUserSession()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((userSession) => {
-        this.userSession = userSession
-      })
   }
 
   ngOnInit(): void {
@@ -209,7 +191,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
           ],
         }),
         amount: new FormControl(this.amount, {
-          validators: [Validators.pattern(AMOUNT_REGEXP)],
+          validators: validateFundingAmount(),
         }),
         currencyCode: new FormControl(this.currencyCode, {}),
         startDateGroup: this._formBuilder.group(
@@ -281,19 +263,7 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       .getCountryCodes()
       .pipe(first())
       .subscribe((codes) => {
-        this.originalCountryCodes = codes
-        this.countryCodes = Object.entries(codes).map((keyValue) => {
-          return { key: keyValue[0], value: keyValue[1] }
-        })
-        this.countryCodes.sort((a, b) => {
-          if (a.key < b.key) {
-            return -1
-          }
-          if (a.key > b.key) {
-            return 1
-          }
-          return 0
-        })
+        this.countryCodes = codes
         this.loadingCountryCodes = false
         if (this.funding) {
           this.fundingForm.patchValue({
@@ -306,16 +276,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
   }
 
   private listenFormChanges() {
-    this.fundingForm.controls['fundingProjectLink'].valueChanges.subscribe(
-      (value) => {
-        if (this.fundingForm.controls['fundingProjectLink'].valid) {
-          this.appendProtocolToTheURL(
-            this.fundingForm.controls['fundingProjectLink']
-          )
-        }
-      }
-    )
-
     this.filteredOptions = this.fundingForm.get('agencyName').valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -324,12 +284,15 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
       })
     )
 
-    this.fundingForm.controls['amount'].valueChanges.subscribe((value) => {
+    this.fundingForm.get('amount').valueChanges.subscribe((value) => {
       if (value) {
-        this.fundingForm.controls['currencyCode'].setValidators(
-          Validators.required
-        )
-        this.fundingForm.controls['currencyCode'].updateValueAndValidity()
+        this.fundingForm.get('currencyCode').setValidators(Validators.required)
+        this.fundingForm
+          .get('currencyCode')
+          .updateValueAndValidity({ emitEvent: true })
+        this.fundingForm
+          .get('amount')
+          .updateValueAndValidity({ emitEvent: true })
       }
     })
   }
@@ -634,9 +597,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         formGroup.controls.grantUrl.updateValueAndValidity({
           emitEvent: false,
         })
-        if (formGroup.controls.grantUrl.valid) {
-          this.appendProtocolToTheURL(formGroup.controls.grantUrl)
-        }
       } else {
         formGroup.controls.grantUrl.clearValidators()
         formGroup.controls.grantUrl.updateValueAndValidity({
@@ -657,15 +617,6 @@ export class ModalFundingComponent implements OnInit, OnDestroy {
         })
       }
     })
-  }
-  appendProtocolToTheURL(grantUrl: AbstractControl) {
-    if (
-      grantUrl.value &&
-      !(grantUrl.value as string).startsWith('http://') &&
-      !(grantUrl.value as string).startsWith('https://')
-    ) {
-      grantUrl.patchValue('http://' + grantUrl.value)
-    }
   }
 
   closeEvent() {

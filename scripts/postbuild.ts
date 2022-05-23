@@ -25,24 +25,15 @@ glob
     data = googleAnalytics(data, options)
     data = hotjarAnalytics(data, options)
     data = zendeskPlugin(data, options)
+    // Replace all the `*.js` references to match updated JS file names with the language code.
     data = addLanguageCodeToHashesOnToHTMLFiles(data, options)
     data = robotsMetadata(data, options)
     save(data, options)
   })
 
 // The following code is added to generate unique hash names for each language.
-// Currently Angular 9 localized builds use the same hashes for equivalent files across languages
-// this did not happened on Angular 8, and produce issues with the cache when the language is change
-//
-// More info
-// https://github.com/angular/angular-cli/issues/16526
-//
-// Because of this the following code will concat the language code to all generated .js files
-// for instance `10-es5.<hash>-<language code>.js` and `polyfills-es2015.<hash>-<language code>.js
-// and it also updates the references on the `index.html` file (see line 24) and `runtime*.js` files
-
-// Rename all .js files to concat the language code
-const hashRegExp = RegExp(/[a-z0-9]{20}/gm)
+// For instance `runtime.<hash>.js` and `polyfills.<hash>.js will will become `runtime.<hash>-it.js` and `polyfills.<hash>-it.js for italian
+const hashRegExp = RegExp(/[a-z0-9]{16}/gm)
 const replacedHash = {}
 glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   const options = getOptionsObjet(file)
@@ -52,9 +43,9 @@ glob.sync('./dist/*/*.js', { ignore: './dist/storybook/*' }).forEach((file) => {
   replacedHash[hash] = true
 })
 
-// Replace all the `runtime*.js` references to match updated hash values
+// Replace all the `runtime*.js` references to match updated JS values with language code
 glob
-  .sync('./dist/*/runtime-*.js', { ignore: './dist/storybook/*' })
+  .sync('./dist/*/runtime*.js', { ignore: './dist/storybook/*' })
   .forEach((file) => {
     const options = getOptionsObjet(file)
     let data = readFileSync(file, 'utf8')

@@ -14,6 +14,8 @@ import { RegisterGuard } from './guards/register.guard'
 import { LinkAccountGuard } from './guards/link-account.guard'
 import { LanguageGuard } from './guards/language.guard'
 import { ThirdPartySigninCompletedGuard } from './guards/third-party-signin-completed.guard'
+import { TwoFactorSigninGuard } from './guards/two-factor-signin.guard'
+import { AuthenticatedNoDelegatorGuard } from './guards/authenticated-no-delagator.guard'
 
 const routes: Routes = [
   {
@@ -95,10 +97,41 @@ const routes: Routes = [
       import('./record/record.module').then((m) => m.RecordModule),
   },
   {
+    path: ApplicationRoutes.account,
+    canActivateChild: [AuthenticatedGuard, AuthenticatedNoDelegatorGuard],
+    loadChildren: () =>
+      import('./account-settings/account-settings.module').then(
+        (m) => m.AccountSettingsModule
+      ),
+  },
+  {
+    path: ApplicationRoutes.trustedParties,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./account-trusted-parties/account-trusted-parties.module').then(
+        (m) => m.AccountTrustedPartiesModule
+      ),
+  },
+  {
     path: ApplicationRoutes.twoFactor,
-    canActivateChild: [LinkAccountGuard],
+    canActivateChild: [TwoFactorSigninGuard],
     loadChildren: () =>
       import('./two-factor/two-factor.module').then((m) => m.TwoFactorModule),
+  },
+  {
+    path: ApplicationRoutes.twoFactorSetup,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./two-factor-setup/two-factor-setup.module').then(
+        (m) => m.TwoFactorSetupModule
+      ),
+  },
+  {
+    path: ApplicationRoutes.resetPasswordEmail + '/:key',
+    loadChildren: () =>
+      import('./reset-password/reset-password.module').then(
+        (m) => m.ResetPasswordModule
+      ),
   },
   {
     matcher: routerThirdPartySignInMatch,

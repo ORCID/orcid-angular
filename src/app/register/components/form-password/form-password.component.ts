@@ -40,8 +40,8 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
   labelClose = $localize`:@@register.ariaLabelClose:close`
   @ViewChild(`#passwordPopover`) passwordPopover
   @ViewChild(`#passwordPopoverTrigger`) passwordPopoverTrigger
-  hasNumberPatter = HAS_NUMBER
-  hasLetterOrSymbolPatter = HAS_LETTER_OR_SYMBOL
+  hasNumberPattern = HAS_NUMBER
+  hasLetterOrSymbolPattern = HAS_LETTER_OR_SYMBOL
   @Input() personalData: RegisterForm
   constructor(private _register: RegisterService) {
     super()
@@ -53,8 +53,9 @@ export class FormPasswordComponent extends BaseForm implements OnInit {
           validators: [
             Validators.required,
             Validators.minLength(8),
-            Validators.pattern(this.hasNumberPatter),
-            Validators.pattern(this.hasLetterOrSymbolPatter),
+            Validators.maxLength(256),
+            Validators.pattern(this.hasNumberPattern),
+            Validators.pattern(this.hasLetterOrSymbolPattern),
             this.passwordDoesNotContainUserEmails(),
           ],
           asyncValidators: [this._register.backendValueValidate('password')],

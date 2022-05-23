@@ -1,0 +1,42 @@
+:host {
+  width: 100%;
+}
+.info {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+mat-form-field {
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.margin-bottom-16 {
+  margin-bottom: 32px;
+}
+
+mat-checkbox {
+  display: flex;
+  width: 100%;
+}
+
+.mat-checkbox-content {
+  white-space: break-spaces;
+  line-height: 1.4;
+}

@@ -1,11 +1,21 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { EMPTY, Observable, of, ReplaySubject } from 'rxjs'
-import { catchError, map, retry, switchMap, take, tap } from 'rxjs/operators'
+import {
+  catchError,
+  first,
+  map,
+  retry,
+  switchMap,
+  switchMapTo,
+  take,
+  tap,
+} from 'rxjs/operators'
 import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
   GroupingSuggestions,
+  WorkCombineEndpoint,
   WorkIdType,
   WorkIdTypeValidation,
 } from 'src/app/types/works.endpoint'
@@ -15,6 +25,8 @@ import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { VisibilityStrings } from '../../types/common.endpoint'
 import { DEFAULT_PAGE_SIZE, EXTERNAL_ID_TYPE_WORK } from 'src/app/constants'
 import { RecordImportWizard } from '../../types/record-peer-review-import.endpoint'
+import { SortOrderType } from '../../types/sort'
+import { TogglzService } from '../togglz/togglz.service'
 
 @Injectable({
   providedIn: 'root',
@@ -25,10 +37,15 @@ export class RecordWorksService {
   groupingSuggestionsSubject = new ReplaySubject<GroupingSuggestions>(1)
   $workSubject = new ReplaySubject<WorksEndpoint>(1)
   offset = 0
+  sortOrder: SortOrderType = 'date'
+  sortAsc = false
+  pageSize = DEFAULT_PAGE_SIZE
+  togglzWorksContributors: boolean
 
   userRecordOptions: UserRecordOptions = {}
 
   constructor(
+    private _togglz: TogglzService,
     private _http: HttpClient,
     private _errorHandler: ErrorHandlerService
   ) {}
@@ -67,28 +84,44 @@ export class RecordWorksService {
 
     options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
+    this.pageSize = options.pageSize
+    this.offset = options.offset
+    this.sortOrder = options.sort
+    this.sortAsc = options.sortAsc
 
-    let url
-    if (options.publicRecordId) {
-      url = options.publicRecordId + '/worksPage.json'
-    } else {
-      url = 'works/worksPage.json'
-    }
-
-    this._http
-      .get<WorksEndpoint>(
-        environment.API_WEB +
-          url +
-          '?offset=' +
-          options.offset +
-          '&sort=' +
-          (options.sort != null ? options.sort : 'date') +
-          '&sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : false) +
-          `&pageSize=` +
-          options.pageSize
-      )
+    this._togglz
+      .getStateOf('ORCID_ANGULAR_WORKS_CONTRIBUTORS')
       .pipe(
+        first(),
+        map((togglzWorksContributors) => {
+          let url: string
+          if (options.publicRecordId) {
+            url =
+              options.publicRecordId +
+              (togglzWorksContributors
+                ? '/worksExtendedPage.json'
+                : '/worksPage.json')
+          } else {
+            url = togglzWorksContributors
+              ? 'works/worksExtendedPage.json'
+              : 'works/worksPage.json'
+          }
+          return url
+        }),
+        switchMap((url) =>
+          this._http.get<WorksEndpoint>(
+            environment.API_WEB +
+              url +
+              '?offset=' +
+              options.offset +
+              '&sort=' +
+              (options.sort != null ? options.sort : 'date') +
+              '&sortAsc=' +
+              (options.sortAsc != null ? options.sortAsc : false) +
+              `&pageSize=` +
+              options.pageSize
+          )
+        ),
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
         catchError(() => of({ groups: [] } as WorksEndpoint)),
@@ -167,6 +200,17 @@ export class RecordWorksService {
       )
   }
 
+  getWorksInfo(putCodes: string[], orcidId?: string): Observable<Work[]> {
+    return this._http
+      .get<Work[]>(
+        environment.API_WEB + `works/worksInfo/${putCodes.join(',')}`
+      )
+      .pipe(
+        retry(3),
+        catchError((error) => this._errorHandler.handleError(error))
+      )
+  }
+
   getWorksData(
     offset,
     sort,
@@ -186,7 +230,7 @@ export class RecordWorksService {
       )
   }
 
-  save(work: Work, bibtex?: boolean) {
+  save(work: Work, bibtex?: boolean): Observable<WorksEndpoint | never> {
     return this._http
       .post<Work>(environment.API_WEB + `works/work.json`, work)
       .pipe(
@@ -217,6 +261,13 @@ export class RecordWorksService {
     putCode: string,
     visibility: VisibilityStrings
   ): Observable<any> {
+    const options = {
+      forceReload: true,
+      offset: this.offset,
+      sort: this.sortOrder,
+      sortAsc: this.sortAsc,
+    }
+
     return this._http
       .get(
         environment.API_WEB + 'works/' + putCode + '/visibility/' + visibility
@@ -224,7 +275,7 @@ export class RecordWorksService {
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
-        tap(() => this.getWorks({ forceReload: true }))
+        tap(() => this.getWorks(options))
       )
   }
 
@@ -279,13 +330,16 @@ export class RecordWorksService {
       )
   }
 
-  combine(putCodes: string[]): Observable<any> {
+  combine(putCodes: string[]): Observable<WorkCombineEndpoint> {
     return this.combinePutCodes(putCodes.join(','))
   }
 
-  combinePutCodes(putCodes: string): Observable<any> {
+  combinePutCodes(putCodes: string): Observable<WorkCombineEndpoint> {
     return this._http
-      .post(environment.API_WEB + 'works/group/' + putCodes, {})
+      .post<WorkCombineEndpoint>(
+        environment.API_WEB + 'works/group/' + putCodes,
+        {}
+      )
       .pipe(
         retry(3),
         catchError((error) => this._errorHandler.handleError(error)),
@@ -341,7 +395,7 @@ export class RecordWorksService {
   ): Observable<Work> {
     let url = 'works/resolve/doi?value='
     if (type === EXTERNAL_ID_TYPE_WORK.pubMed) {
-      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\d{5})/g)
+      const regex = new RegExp(/((.*[\/,\\](pmc))|(PMC)\/?\d{5})/g)
       const result = regex.exec(externalId)
       url = result ? 'works/resolve/pmc/?value=' : 'works/resolve/pmid?value='
     }

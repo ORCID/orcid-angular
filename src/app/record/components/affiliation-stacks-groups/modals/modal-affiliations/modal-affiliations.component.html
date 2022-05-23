@@ -166,8 +166,12 @@
         <span class="required">*</span>
       </label>
     </div>
-    <div class="input-container">
-      <mat-form-field appearance="outline" class="mat-form-field-min">
+    <div class="input-container" id="cy-org-dd-div">
+      <mat-form-field
+        appearance="outline"
+        class="mat-form-field-min"
+        id="cy-org-dd-mat-form"
+      >
         <input
           id="organization-input"
           matInput
@@ -178,13 +182,14 @@
           autoActiveFirstOption
           #auto="matAutocomplete"
           [displayWith]="autoCompleteDisplayOrganization"
+          id="cy-org-dd"
         >
-          <ng-container *ngIf="filteredOptions">
+          <ng-container *ngIf="filteredOptions" id="cy-org-filtered-options">
             <mat-option
               *ngFor="let option of filteredOptions | async"
               [value]="option"
             >
-              <div class="row orc-font-body-small">
+              <div class="row orc-font-body-small title">
                 {{ option.value }}
               </div>
               <div class="row orc-font-small-print">
@@ -223,9 +228,9 @@
         <mat-error
           class="mat-caption"
           *ngIf="affiliationForm.hasError('required', 'organization')"
-          i18n="@@shared.organizationError"
+          i18n="@@shared.pleaseEnterAnOrganization"
         >
-          Please enter a organization
+          Please enter an organization
         </mat-error>
         <mat-error
           *ngIf="affiliationForm.get('organization').errors?.maxlength"
@@ -429,7 +434,10 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <ng-container formGroupName="startDateGroup">
+    <ng-container
+      formGroupName="startDateGroup"
+      id="cy-affiliation-start-date-group"
+    >
       <div class="row">
         <label
           for="url-input"
@@ -446,7 +454,7 @@
           </ng-container>
         </label>
       </div>
-      <div class="row input-container date-group">
+      <div class="row input-container date-group" id="cy-start-date-group">
         <div class="col l4 date">
           <mat-form-field
             id="start-date-year-input"
@@ -456,6 +464,7 @@
             <mat-select
               placeholder="{{ ngOrcidYear }}"
               formControlName="startDateYear"
+              id="cy-start-date-year-sel"
             >
               <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
               <mat-option *ngFor="let year of years" [value]="year">
@@ -473,6 +482,7 @@
             <mat-select
               placeholder="{{ ngOrcidMonth }}"
               formControlName="startDateMonth"
+              id="cy-start-date-month-sel"
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option *ngFor="let month of months" [value]="month">
@@ -490,6 +500,7 @@
             <mat-select
               placeholder="{{ ngOrcidDay }}"
               formControlName="startDateDay"
+              id="cy-start-date-day-sel"
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
               <mat-option *ngFor="let day of days" [value]="day">
@@ -507,7 +518,11 @@
         </mat-error>
       </div>
     </ng-container>
-    <ng-container formGroupName="endDateGroup" *ngIf="type !== 'distinction'">
+    <ng-container
+      formGroupName="endDateGroup"
+      *ngIf="type !== 'distinction'"
+      id="cy-affiliation-end-date-group"
+    >
       <div class="row">
         <label
           for="url-input"
@@ -519,7 +534,7 @@
           <strong i18n="@@shared.endDate">End date</strong>
         </label>
       </div>
-      <div class="row input-container date-group">
+      <div class="row input-container date-group" id="cy-end-date-group">
         <div class="col l4 date">
           <mat-form-field
             id="end-date-year-input"
@@ -529,6 +544,7 @@
             <mat-select
               placeholder="{{ ngOrcidYear }}"
               formControlName="endDateYear"
+              id="cy-end-date-year-sel"
             >
               <mat-option i18n="@@shared.year" [value]="">Year</mat-option>
               <mat-option *ngFor="let year of yearsEndDate" [value]="year">
@@ -546,6 +562,7 @@
             <mat-select
               placeholder="{{ ngOrcidMonth }}"
               formControlName="endDateMonth"
+              id="cy-end-date-month-sel"
             >
               <mat-option i18n="@@shared.month" [value]="">Month</mat-option>
               <mat-option *ngFor="let month of months" [value]="month">
@@ -563,6 +580,7 @@
             <mat-select
               placeholder="{{ ngOrcidDay }}"
               formControlName="endDateDay"
+              id="cy-end-date-day-sel"
             >
               <mat-option i18n="@@shared.day" [value]="">Day</mat-option>
               <mat-option *ngFor="let day of days" [value]="day">

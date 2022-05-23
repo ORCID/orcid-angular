@@ -1,23 +1,23 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core'
-import { UserService } from 'src/app/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
+import { UserService } from 'src/app/core'
+import { RecordService } from 'src/app/core/record/record.service'
 import {
-  UserInfo,
+  Address,
+  Assertion,
   NameForm,
   RequestInfoForm,
-  Assertion,
-  Address,
+  UserInfo,
 } from 'src/app/types'
-import { takeUntil } from 'rxjs/operators'
-import { RecordService } from 'src/app/core/record/record.service'
 import { UserRecord } from 'src/app/types/record.local'
 
-import { ModalCountryComponent } from '../modals/modal-country/modal-country.component'
 import { PlatformInfo, PlatformInfoService } from '../../platform-info'
+import { ModalCountryComponent } from '../modals/modal-country/modal-country.component'
 import { ModalEmailComponent } from '../modals/modal-email/modal-email.component'
-import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
 import { ModalKeywordComponent } from '../modals/modal-keyword/modal-keyword.component'
 import { ModalPersonIdentifiersComponent } from '../modals/modal-person-identifiers/modal-person-identifiers.component'
+import { ModalWebsitesComponent } from '../modals/modal-websites/modal-websites.component'
 
 @Component({
   selector: 'app-side-bar',

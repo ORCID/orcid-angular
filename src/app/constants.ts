@@ -16,14 +16,17 @@ export const EMAIL_REGEXP = /^([^@\s]|(".+"))+@([^@\s\."'\(\)\[\]\{\}\\/,:;]+\.)
 
 export const EMAIL_REGEXP_GENERIC = /^\s*?(.+)@(.+?)\s*$/
 // https://regex101.com/r/9MXmdl/1
-export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
+export const ORCID_REGEXP = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/
+export const ORCID_REGEXP_CASE_INSENSITIVE = /(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
 // https://regex101.com/r/V95col/6
 // tslint:disable-next-line: max-line-length
 export const ORCID_URI_REGEXP = /(orcid\.org\/|qa\.orcid\.org\/|sandbox\.orcid\.org\/|dev\.orcid\.org\/|localhost.*)(\d{4}[- ]{0,}){3}\d{3}[\dX]$/i
-// https://regex101.com/r/xkIlf0/1
-export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.><]+$/
-// https://regex101.com/r/GEaSMo/2
-export const URL_REGEXP_BACKEND = /^(((https?):\/\/)(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$/
+/* NO PROTOCOL REQUIRED*/
+// https://regex101.com/r/DHDJXc/1
+export const URL_REGEXP = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.><]+$/i
+/* PROTOCOL REQUIRED*/
+// https://regex101.com/r/5lscv4/1
+export const URL_REGEXP_BACKEND = /^((https?):\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#%[\]@!\$&'\(\)\*\+\\,;=.><]+$/i
 // https://www.regextester.com/96577
 export const ILLEGAL_NAME_CHARACTERS_REGEXP = /([@\$!])/
 // https://regex101.com/r/aoHxNo/1
@@ -32,12 +35,19 @@ export const HAS_NUMBER = /(?=.*[0-9]).*/
 export const HAS_LETTER_OR_SYMBOL = /(?=.*[^\d\s]).*/
 // https://regex101.com/r/gznzc6/1 strips params for OJS links
 export const REDIRECT_URI_REGEXP = /(?=redirect_uri=)(.*?)(?=orcidapi)|(?=redirect_uri=)(.*?)$/
-// https://regex101.com/r/EP7uWn/1
-export const AMOUNT_REGEXP = /^[0-9.,]*$/
+//https://regex101.com/r/yjxqUa/1
+export const AMOUNT_FORMATTED_WITH_DECIMAL_REGEXP = /^(\d+(\.\d{1,2})?|\.?\d{1,2})$/
+//https://regex101.com/r/pIQDel/1
+export const AMOUNT_FULLY_FORMATTED_REGEX = /(?=.*\d)^(([1-9]\d{0,2}(,\d{3})*)|0)?(\.\d{1,2})?$/
+//https://regex101.com/r/EAlANV/1
+export const AMOUNT_DIGITS_ONLY_REGEX = /^\d+$/
+// https://regex101.com/r/XvbCrA/1
+export const WHITE_SPACE_REGEXP = /\s+/g
 
 export const ApplicationRoutes = {
   myOrcid: 'my-orcid',
   twoFactor: '2fa-signin',
+  twoFactorSetup: '2FA/setup',
   institutionalLinking: 'institutional-linking',
   social: 'social-linking',
   institutional: 'institutional-signin',
@@ -50,11 +60,15 @@ export const ApplicationRoutes = {
   resetPassword: 'reset-password',
   register: 'register',
   thirdPartySignIn: 'third-party-signin-completed',
+  account: 'account',
+  trustedParties: 'trusted-parties',
+  resetPasswordEmail: 'reset-password-email',
   home: '',
 }
 
 export const HeadlessOnOauthRoutes = [
   ApplicationRoutes.twoFactor,
+  ApplicationRoutes.twoFactorSetup,
   ApplicationRoutes.social,
   ApplicationRoutes.institutionalLinking,
   ApplicationRoutes.institutional,
@@ -75,7 +89,7 @@ export function isValidOrcidFormat(id) {
 }
 
 export function getOrcidNumber(userId) {
-  const orcidPattern = ORCID_REGEXP
+  const orcidPattern = ORCID_REGEXP_CASE_INSENSITIVE
   const extId = orcidPattern.exec(userId)
   if (extId != null) {
     userId = extId[0].toString().replace(/ /g, '')

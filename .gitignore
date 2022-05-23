@@ -9,6 +9,9 @@ src/locale/messages.xlf
 # dependencies
 /node_modules
 
+# have a persistent yarn cache in a single 'code' volume in a docker container
+/yarn_cache
+
 # IDEs and editors
 /.idea
 .project
@@ -27,6 +30,7 @@ src/locale/messages.xlf
 .angulardoc.json
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
@@ -52,11 +56,21 @@ audits/*
 scripts/lighthouse/environment.ts
 tx.exe
 
-
 ## Cypress
 
-/cypres/cypress.env.js
+/cypress/cypress.env.js
 /cypress/videos/*
 /cypress/screenshots/*
 /cypress/reports/**
 cypress.env
+cypress/fixtures/testing-users.fixture.json
+cypress/fixtures/work-with-contributors.fixture.json
+cypress/fixtures/funding-with-contributors.fixture.json
+cypress/plugins/credentials_qa.json
+cypress/plugins/token_qa.json
+cypress/plugins/token.json
+
+
+# Packages ignore package-lock to depend only on yarn
+package-lock.json
+

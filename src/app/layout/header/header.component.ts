@@ -1,21 +1,22 @@
-import { Component, OnInit, Inject, Input } from '@angular/core'
-import { Router, NavigationStart } from '@angular/router'
-import { filter, switchMap, take } from 'rxjs/operators'
+import { Location } from '@angular/common'
+import { Component, Inject, Input, OnInit } from '@angular/core'
+import { NavigationStart, Router } from '@angular/router'
+import { filter } from 'rxjs/operators'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
+import { WINDOW } from 'src/app/cdk/window'
 import { UserService } from 'src/app/core'
+import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { ApplicationMenuItem, UserInfo } from 'src/app/types'
-import { menu } from './menu'
 import {
   ApplicationMenuItemBasic,
   MenuItemRequirement,
 } from 'src/app/types/menu.local'
-import { TogglzService } from 'src/app/core/togglz/togglz.service'
 import { Config } from 'src/app/types/togglz.endpoint'
-import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
-import { WINDOW } from 'src/app/cdk/window'
+
 import { environment } from '../../../environments/environment'
-import { Location } from '@angular/common'
 import { ApplicationRoutes, ORCID_REGEXP } from '../../constants'
-import { SignInService } from 'src/app/core/sign-in/sign-in.service'
+import { menu } from './menu'
 
 @Component({
   selector: 'app-header',
@@ -71,7 +72,10 @@ export class HeaderComponent implements OnInit {
       const path = location.path()
       this.signinRegisterButton = path !== `/${ApplicationRoutes.signin}`
       this.hideMainMenu =
-        ORCID_REGEXP.test(path) || path === `/${ApplicationRoutes.myOrcid}`
+        ORCID_REGEXP.test(path) ||
+        path === `/${ApplicationRoutes.myOrcid}` ||
+        path === `/${ApplicationRoutes.account}` ||
+        path === `/${ApplicationRoutes.trustedParties}`
     })
   }
 
@@ -271,14 +275,5 @@ export class HeaderComponent implements OnInit {
 
   navigateTo(val) {
     ;(this.window as any).outOfRouterNavigation(val)
-  }
-
-  signOut() {
-    this._signingService
-      .singOut()
-      .pipe(switchMap(() => this._platformInfo.get().pipe(take(1))))
-      .subscribe((platform) => {
-        this._router.navigate([ApplicationRoutes.signin])
-      })
   }
 }

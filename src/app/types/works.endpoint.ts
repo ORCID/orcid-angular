@@ -159,60 +159,50 @@ export const WorksTitleNameLabel = {
 }
 
 export const WorkTypesTitle = {
-  [WorkCategories.conference]: {
-    [WorkConferenceTypes.conferenceAbstract]: WorksTitleName.conferenceTitle,
-    [WorkConferenceTypes.conferencePaper]: WorksTitleName.conferenceTitle,
-    [WorkConferenceTypes.conferencePoster]: WorksTitleName.conferenceTitle,
-  },
-  [WorkCategories.publication]: {
-    [WorkPublicationTypes.book]: WorksTitleName.publisher,
-    [WorkPublicationTypes.bookChapter]: WorksTitleName.bookTitle,
-    [WorkPublicationTypes.bookReview]: WorksTitleName.publisher,
-    [WorkPublicationTypes.dictionaryEntry]: WorksTitleName.publisher,
-    [WorkPublicationTypes.editedBook]: WorksTitleName.publisher,
-    [WorkPublicationTypes.dissertationThesis]: WorksTitleName.journalTitle,
-    [WorkPublicationTypes.encyclopediaEntry]: WorksTitleName.publisher,
-    [WorkPublicationTypes.journalArticle]: WorksTitleName.journalTitle,
-    [WorkPublicationTypes.journalIssue]: WorksTitleName.journalTitle,
-    [WorkPublicationTypes.magazineArticle]: WorksTitleName.magazineTitle,
-    [WorkPublicationTypes.manual]: WorksTitleName.publisher,
-    [WorkPublicationTypes.newsletterArticle]: WorksTitleName.newsletterTitle,
-    [WorkPublicationTypes.newspaperArticle]: WorksTitleName.newspaperTitle,
-    [WorkPublicationTypes.onlineResource]: WorksTitleName.publisher,
-    [WorkPublicationTypes.preprint]: WorksTitleName.journalTitle,
-    [WorkPublicationTypes.report]: WorksTitleName.institution,
-    [WorkPublicationTypes.researchTool]: WorksTitleName.institution,
-    [WorkPublicationTypes.supervisedStudentPublication]:
-      WorksTitleName.institution,
-    [WorkPublicationTypes.test]: WorksTitleName.institution,
-    [WorkPublicationTypes.translation]: WorksTitleName.publisher,
-    [WorkPublicationTypes.website]: WorksTitleName.publisher,
-    [WorkPublicationTypes.workingPaper]: WorksTitleName.institution,
-  },
-
-  [WorkCategories.intellectual_property]: {
-    [WorkIntellectualPropertyTypes.disclosure]: WorksTitleName.publisher,
-    [WorkIntellectualPropertyTypes.license]: WorksTitleName.publisher,
-    [WorkIntellectualPropertyTypes.patent]: WorksTitleName.publisher,
-    [WorkIntellectualPropertyTypes.registeredCopyright]:
-      WorksTitleName.publisher,
-    [WorkIntellectualPropertyTypes.trademark]: WorksTitleName.journalTitle,
-  },
-  [WorkCategories.other_output]: {
-    [WorkOtherOutputTypes.annotation]: WorksTitleName.custodian,
-    [WorkOtherOutputTypes.artisticPerformance]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.dataManagementPlan]: WorksTitleName.journalTitle,
-    [WorkOtherOutputTypes.dataSet]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.invention]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.lectureSpeech]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.physicalObject]: WorksTitleName.custodian,
-    [WorkOtherOutputTypes.researchTechnique]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.software]: WorksTitleName.journalTitle,
-    [WorkOtherOutputTypes.spinOffCompany]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.standardsAndPolicy]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.technicalStandard]: WorksTitleName.publisher,
-    [WorkOtherOutputTypes.other]: WorksTitleName.publisher,
-  },
+  [WorkConferenceTypes.conferenceAbstract]: WorksTitleName.conferenceTitle,
+  [WorkConferenceTypes.conferencePaper]: WorksTitleName.conferenceTitle,
+  [WorkConferenceTypes.conferencePoster]: WorksTitleName.conferenceTitle,
+  [WorkPublicationTypes.book]: WorksTitleName.publisher,
+  [WorkPublicationTypes.bookChapter]: WorksTitleName.bookTitle,
+  [WorkPublicationTypes.bookReview]: WorksTitleName.publisher,
+  [WorkPublicationTypes.dictionaryEntry]: WorksTitleName.publisher,
+  [WorkPublicationTypes.editedBook]: WorksTitleName.publisher,
+  [WorkPublicationTypes.dissertationThesis]: WorksTitleName.journalTitle,
+  [WorkPublicationTypes.encyclopediaEntry]: WorksTitleName.publisher,
+  [WorkPublicationTypes.journalArticle]: WorksTitleName.journalTitle,
+  [WorkPublicationTypes.journalIssue]: WorksTitleName.journalTitle,
+  [WorkPublicationTypes.magazineArticle]: WorksTitleName.magazineTitle,
+  [WorkPublicationTypes.manual]: WorksTitleName.publisher,
+  [WorkPublicationTypes.newsletterArticle]: WorksTitleName.newsletterTitle,
+  [WorkPublicationTypes.newspaperArticle]: WorksTitleName.newspaperTitle,
+  [WorkPublicationTypes.onlineResource]: WorksTitleName.publisher,
+  [WorkPublicationTypes.preprint]: WorksTitleName.journalTitle,
+  [WorkPublicationTypes.report]: WorksTitleName.institution,
+  [WorkPublicationTypes.researchTool]: WorksTitleName.institution,
+  [WorkPublicationTypes.supervisedStudentPublication]:
+    WorksTitleName.institution,
+  [WorkPublicationTypes.test]: WorksTitleName.institution,
+  [WorkPublicationTypes.translation]: WorksTitleName.publisher,
+  [WorkPublicationTypes.website]: WorksTitleName.publisher,
+  [WorkPublicationTypes.workingPaper]: WorksTitleName.institution,
+  [WorkIntellectualPropertyTypes.disclosure]: WorksTitleName.publisher,
+  [WorkIntellectualPropertyTypes.license]: WorksTitleName.publisher,
+  [WorkIntellectualPropertyTypes.patent]: WorksTitleName.publisher,
+  [WorkIntellectualPropertyTypes.registeredCopyright]: WorksTitleName.publisher,
+  [WorkIntellectualPropertyTypes.trademark]: WorksTitleName.journalTitle,
+  [WorkOtherOutputTypes.annotation]: WorksTitleName.custodian,
+  [WorkOtherOutputTypes.artisticPerformance]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.dataManagementPlan]: WorksTitleName.journalTitle,
+  [WorkOtherOutputTypes.dataSet]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.invention]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.lectureSpeech]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.physicalObject]: WorksTitleName.custodian,
+  [WorkOtherOutputTypes.researchTechnique]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.software]: WorksTitleName.journalTitle,
+  [WorkOtherOutputTypes.spinOffCompany]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.standardsAndPolicy]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.technicalStandard]: WorksTitleName.publisher,
+  [WorkOtherOutputTypes.other]: WorksTitleName.publisher,
 }
 
 export const WorkTypesByCategory = {
@@ -432,6 +422,11 @@ export interface WorkIdTypeValidation {
   attemptedResolution: boolean
   generatedUrl: string
   validFormat: boolean
+}
+
+export interface WorkCombineEndpoint {
+  errors: string[]
+  workIds: any
 }
 
 export enum WorkRelationships {

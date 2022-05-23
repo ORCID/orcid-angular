@@ -16,7 +16,9 @@ import { ShowingOfComponent } from './components/showing-of/showing-of.component
 import { CopyOnClickDirective } from './directives/copy-on-click/copy-on-click.directive'
 import { AffiliationTypeLabelPipe } from './pipes/affiliation-type-label.pipe'
 import { CityRegionCountry } from './pipes/city-region-country/city-region-country.pipe'
+import { FormatBibtex } from './pipes/format-bibtex/format-bibtex.pipe'
 import { ContributorsPipe } from './pipes/contributors-pipe/contributors.pipe'
+import { EmailFrequencyLabelPipe } from './pipes/email-frequency-label/email-frequency-label.pipe'
 import { MonthDayYearDateToStringPipe } from './pipes/month-day-year-date-to-string/month-day-year-date-to-string.pipe'
 import { RecordFundingRelationshipHintLabelPipe } from './pipes/record-funding-relationship-hint-label/record-funding-relationship-hint-label.pipe'
 import { RecordFundingRelationshipLabelPipe } from './pipes/record-funding-relationship-label/record-funding-relationship-label.pipe'
@@ -45,6 +47,7 @@ import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visib
     CopyOnClickComponent,
     CityRegionCountry,
     ContributorsPipe,
+    FormatBibtex,
     SafeHtmlPipe,
     ShowingOfComponent,
     RecordWorkCategoryLabelPipe,
@@ -58,6 +61,7 @@ import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visib
     AffiliationTypeLabelPipe,
     TrailingZerosPipe,
     VisibilityStringLabelPipe,
+    EmailFrequencyLabelPipe,
   ],
   exports: [
     CommonModule,
@@ -71,6 +75,7 @@ import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visib
     CopyOnClickDirective,
     MatSnackBarModule,
     CityRegionCountry,
+    FormatBibtex,
     ContributorsPipe,
     SafeHtmlPipe,
     ShowingOfComponent,
@@ -85,6 +90,7 @@ import { VisibilityStringLabelPipe } from './pipes/visibility-string-label/visib
     AffiliationTypeLabelPipe,
     TrailingZerosPipe,
     VisibilityStringLabelPipe,
+    EmailFrequencyLabelPipe,
   ],
   providers: [], // Should not provide anything
 })

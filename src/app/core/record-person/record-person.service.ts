@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
-import { catchError, first, map, switchMap, tap, retry } from 'rxjs/operators'
+import { catchError, first, map, retry, switchMap, tap } from 'rxjs/operators'
 import { Person } from 'src/app/types'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import { environment } from 'src/environments/environment'
+
 import { ErrorHandlerService } from '../error-handler/error-handler.service'
 import { UserService } from '../user/user.service'
 

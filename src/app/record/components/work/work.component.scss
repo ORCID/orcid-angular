@@ -1,3 +1,30 @@
+p {
+  margin: 6px 0;
+}
+
 .translated-title-label {
   font-weight: bold;
+}
+
+.record-holder {
+  font-style: italic;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.pre-bibtex {
+  font-size: inherit;
+  margin: 0px;
+  font-family: inherit;
+  white-space: pre-wrap;
+}
+
+.citation-type {
+  font-weight: normal !important;
 }

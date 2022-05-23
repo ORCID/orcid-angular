@@ -2,7 +2,6 @@ import { ComponentType } from '@angular/cdk/portal'
 import {
   Component,
   EventEmitter,
-  HostListener,
   Inject,
   Input,
   OnInit,
@@ -31,6 +30,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox'
 import { VerificationEmailModalService } from '../../../core/verification-email-modal/verification-email-modal.service'
 import { UserService } from 'src/app/core'
 import { WINDOW } from 'src/app/cdk/window'
+import { TogglzService } from '../../../core/togglz/togglz.service'
 
 @Component({
   selector: 'app-panel',
@@ -114,6 +114,7 @@ export class PanelComponent implements OnInit {
   @Input() email = false
   @Input() names = false
   selected: boolean
+  togglzPeerReviews: boolean
 
   tooltipLabelEdit = $localize`:@@shared.edit:Edit`
   tooltipLabelMakeCopy = $localize`:@@shared.makeCopy:Make a copy and edit`
@@ -122,6 +123,7 @@ export class PanelComponent implements OnInit {
   tooltipLabelVisibilityError = $localize`:@@peerReview.dataInconsistency:Data inconsistency found. Please click your preferred visibility setting to fix`
 
   constructor(
+    private _togglz: TogglzService,
     private _dialog: MatDialog,
     private _platform: PlatformInfoService,
     private _userService: UserService,
@@ -134,7 +136,11 @@ export class PanelComponent implements OnInit {
     @Inject(WINDOW) private _window: Window
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._togglz
+      .getStateOf('ORCID_ANGULAR_LAZY_LOAD_PEER_REVIEWS')
+      .subscribe((value) => (this.togglzPeerReviews = value))
+  }
 
   isArrayAndIsNotEmpty(
     obj:
@@ -275,23 +281,28 @@ export class PanelComponent implements OnInit {
       case 'peer-review':
         const peerReviewPutCodes = []
         if (this.elements) {
-          this.elements.peerReviewDuplicateGroups.forEach(
-            (peerReviewDuplicateGroup) => {
-              peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
-                peerReviewPutCodes.push(peerReview.putCode.value)
-              })
-            }
-          )
+          if (this.togglzPeerReviews) {
+            this.elements.putCodes.forEach((putCode) => {
+              peerReviewPutCodes.push(putCode)
+            })
+          } else {
+            this.elements.peerReviewDuplicateGroups.forEach(
+              (peerReviewDuplicateGroup) => {
+                peerReviewDuplicateGroup.peerReviews.forEach((peerReview) => {
+                  peerReviewPutCodes.push(peerReview.putCode.value)
+                })
+              }
+            )
+          }
         }
         this._peerReviewService
-          .updateVisibility(peerReviewPutCodes.join(), visibility)
+          .updateVisibility(
+            peerReviewPutCodes.join(),
+            visibility,
+            this.elements?.groupId
+          )
           .subscribe()
         break
     }
-  }
-
-  @HostListener('window:visibilitychange')
-  onVisibilityChange() {
-    this._userService.setTimerAsHiddenState(this._window.document.hidden)
   }
 }

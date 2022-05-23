@@ -1,6 +1,21 @@
 export interface TwoFactor {
-  recoveryCode: string
-  redirectUrl: string
+  orcid?: string
+  recoveryCode?: string
+  redirectUrl?: string
   verificationCode: string
-  errors: any[]
+  errors?: any[]
+}
+
+export interface TwoFactorSetup {
+  verificationCode: string
+  valid?: boolean
+  backupCodes?: string[]
+}
+
+export interface QrCode {
+  url: string
+}
+
+export interface Status {
+  enabled: boolean
 }

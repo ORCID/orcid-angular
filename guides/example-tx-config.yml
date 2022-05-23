@@ -184,3 +184,11 @@ filters:
     source_file: src/locale/properties/side-bar/side-bar.en.properties
     # path expression to translation files, must contain <lang> placeholder
     translation_files_expression: src/locale/properties/side-bar/side-bar.<lang>.properties
+
+  - filter_type: file
+    # all supported i18n types: https://docs.transifex.com/formats
+    file_format: UNICODEPROPERTIES
+    source_language: en
+    source_file: src/locale/properties/account/account.en.properties
+    # path expression to translation files, must contain <lang> placeholder
+    translation_files_expression: src/locale/properties/account/account.<lang>.properties

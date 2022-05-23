@@ -1,0 +1,29 @@
+<h2 class="orc-font-body-large col" i18n="@@account.sharing">Sharing</h2>
+
+<app-settings-panels
+  [(expandedContent)]="htmlCode"
+  class="row"
+  id="cy-share-panel"
+  [title]="titleHtmlCode"
+  [loading]="htmlCodeLoading"
+>
+  <app-settings-sharing-html-code
+    *ngIf="htmlCode"
+    (loading)="htmlCodeLoading = $event"
+  >
+  </app-settings-sharing-html-code>
+</app-settings-panels>
+
+<app-settings-panels
+  [(expandedContent)]="qrCode"
+  class="row"
+  id="cy-qr-code-panel"
+  [title]="titleQrCode"
+  [loading]="qrCodeLoading"
+>
+  <app-settings-sharing-qr-code
+    *ngIf="qrCode"
+    (loading)="qrCodeLoading = $event"
+  >
+  </app-settings-sharing-qr-code>
+</app-settings-panels>

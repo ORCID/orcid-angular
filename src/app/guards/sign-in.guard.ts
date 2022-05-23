@@ -10,8 +10,8 @@ import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { PlatformInfoService } from '../cdk/platform-info'
-import { UserService } from '../core'
 import { WINDOW } from '../cdk/window'
+import { UserService } from '../core'
 import { ErrorHandlerService } from '../core/error-handler/error-handler.service'
 
 @Injectable({

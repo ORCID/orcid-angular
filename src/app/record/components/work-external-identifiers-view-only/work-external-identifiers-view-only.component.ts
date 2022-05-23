@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { WorkRelationships } from 'src/app/types/works.endpoint'
+import { FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-work-external-identifiers-view-only',
@@ -21,6 +22,8 @@ export class WorkExternalIdentifiersViewOnlyComponent implements OnInit {
     externalIdentifierUrl: string
     externalRelationship: WorkRelationships
   }
+  @Input() externalIdForm: FormGroup
+
   constructor() {}
 
   ngOnInit(): void {}
