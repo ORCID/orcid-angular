@@ -6,49 +6,72 @@
     }"
   >
     <div class="row space-around">
-      <div
-        class="col l12 m6 s4">
-		<div class="title-container">
-           <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
-           <h1 class="orc-font-heading-small" i18n="@@selfService.heading">We're updating ORCID Self Service</h1>                    
-	    </div>
-          <div
-            class="info margin-bottom-16"
-            [ngClass]="{
-              'orc-font-body-small': !isMobile,
-              'orc-font-small-print': isMobile
-            }">
-            <div><mat-icon class="large-material-icon">info</mat-icon></div>
-            <div><ng-container i18n="@@selfService.p1.1">As of&nbsp;</ng-container><strong><ng-container i18n="@@selfService.p1.2">June 1, 2022</ng-container></strong><ng-container i18n="@@selfService.p1.3">, Self Service will no longer be available through the ORCID Registry.</ng-container></div>                        
+      <div class="col l12 m6 s4">
+        <div class="title-container">
+          <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+          <h1 class="orc-font-heading-small" i18n="@@selfService.heading">
+            We're updating ORCID Self Service
+          </h1>
+        </div>
+        <div
+          class="info margin-bottom-16"
+          [ngClass]="{
+            'orc-font-body-small': !isMobile,
+            'orc-font-small-print': isMobile
+          }"
+        >
+          <div><mat-icon class="large-material-icon">info</mat-icon></div>
+          <div>
+            <ng-container i18n="@@selfService.p1.1">As of&nbsp;</ng-container
+            ><strong
+              ><ng-container i18n="@@selfService.p1.2"
+                >June 1, 2022</ng-container
+              ></strong
+            ><ng-container i18n="@@selfService.p1.3"
+              >, Self Service will no longer be available through the ORCID
+              Registry.</ng-container
+            >
           </div>
-          <p>
-            <ng-container
-              i18n="@@selfService.p2.1"
-              >An enhanced version of Self Service will be added to the</ng-container>
-            <a class="underline"
-              i18n="@@selfService.p2.2"
-              href="https://member-portal.orcid.org/" rel="noopener noreferrer" target="_blank">ORCID Member portal</a>
-            <ng-container
-              i18n="@@selfService.p2.3"
-              >in the comming year. All current Self Service features will be transferred to the portal, along with additional new functionality.</ng-container>
-          </p>
-          <p>
-            <ng-container i18n="@@selfService.alert">While we build this improved version for the Member Portal, Self Service will be unavailable.</ng-container>
-          </p>
-          <h2 class="orc-font-body-large" i18n="@@selfService.next">
-            What to do next
-          </h2>
-          <p>
-            <ng-container
-              i18n="@@selfService.p3.1"
-              >Should you need any of the Self Service features during this time, please reach out to</ng-container>
-            <a class="underline"href="mailto:membership@orcid.org">membership@orcid.org</a>
-            <ng-container
-              i18n="@@selfService.p3.2"
-              >for assistance.</ng-container>
-          </p>
+        </div>
+        <p>
+          <ng-container i18n="@@selfService.p2.1"
+            >An enhanced version of Self Service will be added to
+            the</ng-container
+          >
+          <a
+            class="underline"
+            i18n="@@selfService.p2.2"
+            href="https://member-portal.orcid.org/"
+            rel="noopener noreferrer"
+            target="_blank"
+            >ORCID Member portal</a
+          >
+          <ng-container i18n="@@selfService.p2.3"
+            >in the comming year. All current Self Service features will be
+            transferred to the portal, along with additional new
+            functionality.</ng-container
+          >
+        </p>
+        <p>
+          <ng-container i18n="@@selfService.alert"
+            >While we build this improved version for the Member Portal, Self
+            Service will be unavailable.</ng-container
+          >
+        </p>
+        <h2 class="orc-font-body-large" i18n="@@selfService.next">
+          What to do next
+        </h2>
+        <p>
+          <ng-container i18n="@@selfService.p3.1"
+            >Should you need any of the Self Service features during this time,
+            please reach out to</ng-container
+          >
+          <a class="underline" href="mailto:membership@orcid.org"
+            >membership@orcid.org</a
+          >
+          <ng-container i18n="@@selfService.p3.2">for assistance.</ng-container>
+        </p>
       </div>
     </div>
   </div>
 </main>
-

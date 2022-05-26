@@ -3,9 +3,7 @@ import { ActivatedRoute, Router, UrlTree } from '@angular/router'
 import { Subject } from 'rxjs'
 import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
-import {
-  ApplicationRoutes
-} from 'src/app/constants'
+import { ApplicationRoutes } from 'src/app/constants'
 
 @Component({
   selector: 'app-self-service',
@@ -17,7 +15,6 @@ import {
   preserveWhitespaces: true,
 })
 export class SelfServiceComponent implements OnInit {
-  
   @Output() loading = new EventEmitter<boolean>()
   $destroy = new Subject()
   isMobile: boolean
@@ -32,9 +29,9 @@ export class SelfServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this._platform.get().subscribe((platform) => {
-	  this.platform = platform
+      this.platform = platform
       this.isMobile = platform.columns4 || platform.columns8
-    })  	
+    })
   }
 
   ngOnDestroy(): void {
