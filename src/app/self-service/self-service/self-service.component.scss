@@ -1,3 +1,7 @@
+:host {
+  width: 100%;
+}
+
 .container {
   max-width: 664px;
   padding: 0 !important;
@@ -15,12 +19,9 @@ img {
   margin: 64px auto 33px;
 }
 
-label {
-  margin-bottom: 8px;
-}
-
 h1 {
   margin: 0;
+  text-align: center;
 }
 
 h2 {
@@ -42,4 +43,11 @@ h2 {
   mat-icon {
     margin-inline-end: 16px;
   }
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 32px;
 }

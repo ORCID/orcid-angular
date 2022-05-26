@@ -2,17 +2,16 @@
   <div
     class="container"
     [ngClass]="{
-      mobile: !platform.columns12
+      mobile: !platform?.columns12
     }"
   >
     <div class="row space-around">
       <div
-        [ngClass]="{
-          'col l5 m6 s4': !platform.columns12
-        }"
-      >
-    <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
-    <h1 class="orc-font-heading-small" i18n="@@selfService.heading">We're updating ORCID Self Service</h1>                    
+        class="col l12 m6 s4">
+		<div class="title-container">
+           <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+           <h1 class="orc-font-heading-small" i18n="@@selfService.heading">We're updating ORCID Self Service</h1>                    
+	    </div>
           <div
             class="info margin-bottom-16"
             [ngClass]="{

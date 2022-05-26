@@ -32,8 +32,9 @@ export class SelfServiceComponent implements OnInit {
 
   ngOnInit(): void {
     this._platform.get().subscribe((platform) => {
+	  this.platform = platform
       this.isMobile = platform.columns4 || platform.columns8
-    })    
+    })  	
   }
 
   ngOnDestroy(): void {
