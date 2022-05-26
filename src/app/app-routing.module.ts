@@ -147,6 +147,7 @@ const routes: Routes = [
   },
   {
     path: ApplicationRoutes.selfService,
+    canActivateChild: [AuthenticatedGuard],
     loadChildren: () =>
       import('./self-service/self-service.module').then(
         (m) => m.SelfServiceModule

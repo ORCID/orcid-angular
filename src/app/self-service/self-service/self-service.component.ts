@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
 import { ActivatedRoute, Router, UrlTree } from '@angular/router'
 import { Subject } from 'rxjs'
-import { PlatformInfoService } from 'src/app/cdk/platform-info'
+import { PlatformInfo, PlatformInfoService } from 'src/app/cdk/platform-info'
 import { WINDOW } from 'src/app/cdk/window'
 import {
   ApplicationRoutes
@@ -21,6 +21,7 @@ export class SelfServiceComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>()
   $destroy = new Subject()
   isMobile: boolean
+  platform: PlatformInfo
 
   constructor(
     private _route: ActivatedRoute,
@@ -32,10 +33,7 @@ export class SelfServiceComponent implements OnInit {
   ngOnInit(): void {
     this._platform.get().subscribe((platform) => {
       this.isMobile = platform.columns4 || platform.columns8
-    })
-    if (!this._route.snapshot.params.key) {
-      this._router.navigate([ApplicationRoutes.signin])
-    }
+    })    
   }
 
   ngOnDestroy(): void {

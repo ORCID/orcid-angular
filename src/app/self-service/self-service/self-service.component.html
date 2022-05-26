@@ -1,84 +1,54 @@
 <main id="main">
-  <div class="container">
-    <div class="row horizontal-center">
-      <mat-card
-        class="orcid-wizard col l6 m6 s4"
-        [ngClass]="{ mobile: isMobile }"
+  <div
+    class="container"
+    [ngClass]="{
+      mobile: !platform.columns12
+    }"
+  >
+    <div class="row space-around">
+      <div
+        [ngClass]="{
+          'col l5 m6 s4': !platform.columns12
+        }"
       >
-        <mat-card-header>
-          <mat-card-title>
-            <img
-              class="logo mat-card-logo"
-              src="./assets/vectors/orcid.logo.icon.svg"
-              alt="orcid logo"
-              role="link"
-            />
-            <ng-container i18n="@@selfService.heading">
-              We're updating ORCID Self Service
-            </ng-container>
-          </mat-card-title>
-        </mat-card-header>        
-        <mat-card-content>          
-          
-          <p>
-            <ng-container
-              i18n="@@selfService.p1.1"
-              >As of</ng-container
-            >
-            <strong>
-              <ng-container
-              i18n="@@selfService.p1.2"
-              >June 1, 2022</ng-container
-              >
-            </strong>            
-            <ng-container i18n="@@selfService.p1.3"
-              >, Self Service will no longer be available through the ORCID Registry.</ng-container
-            >            
-          </p>
-          <p>
-            <ng-container
-              i18n="@@selfService.p2.1"
-              >An enhanced version of Self Service will be added to the</ng-container>
-            <a
-              i18n="@@selfService.p2.2"
-              (click)="
-                navigateTo('https://member-portal.orcid.org/')
-              "
-              >ORCID Member portal</a>
-            <ng-container
-              i18n="@@selfService.p2.3"
-              >in the comming year. All the features currently available will be transferred to the portal, along with additional new functionality</ng-container>
-          </p>                    
+    <img src="assets/vectors/orcid.logo.icon.svg" alt="orcid logo" />
+    <h1 class="orc-font-heading-small" i18n="@@selfService.heading">We're updating ORCID Self Service</h1>                    
           <div
             class="info margin-bottom-16"
             [ngClass]="{
               'orc-font-body-small': !isMobile,
               'orc-font-small-print': isMobile
             }">
-            <div>
-              <mat-icon class="large-material-icon">info</mat-icon>
-            </div>
-            <div class="col l11 m6 s3">              
-              <ng-container i18n="@@selfService.alert">While we build this improved version for the Member Portal, Self Service will be unavailable.</ng-container>            
+            <div><mat-icon class="large-material-icon">info</mat-icon></div>
+            <div><ng-container i18n="@@selfService.p1.1">As of&nbsp;</ng-container><strong><ng-container i18n="@@selfService.p1.2">June 1, 2022</ng-container></strong><ng-container i18n="@@selfService.p1.3">, Self Service will no longer be available through the ORCID Registry.</ng-container></div>                        
           </div>
-          <h3 class="orc-font-body" i18n="@@selfService.next">
+          <p>
+            <ng-container
+              i18n="@@selfService.p2.1"
+              >An enhanced version of Self Service will be added to the</ng-container>
+            <a class="underline"
+              i18n="@@selfService.p2.2"
+              href="https://member-portal.orcid.org/" rel="noopener noreferrer" target="_blank">ORCID Member portal</a>
+            <ng-container
+              i18n="@@selfService.p2.3"
+              >in the comming year. All current Self Service features will be transferred to the portal, along with additional new functionality.</ng-container>
+          </p>
+          <p>
+            <ng-container i18n="@@selfService.alert">While we build this improved version for the Member Portal, Self Service will be unavailable.</ng-container>
+          </p>
+          <h2 class="orc-font-body-large" i18n="@@selfService.next">
             What to do next
-          </h3>
+          </h2>
           <p>
             <ng-container
               i18n="@@selfService.p3.1"
               >Should you need any of the Self Service features during this time, please reach out to</ng-container>
-            <a href="mailto:membership@orcid.org">membership@orcid.org</a>
+            <a class="underline"href="mailto:membership@orcid.org">membership@orcid.org</a>
             <ng-container
               i18n="@@selfService.p3.2"
               >for assistance.</ng-container>
           </p>
-
-
-
-
-        </mat-card-content>
-      </mat-card>
+      </div>
     </div>
   </div>
 </main>
