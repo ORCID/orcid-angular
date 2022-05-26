@@ -3,6 +3,7 @@ import {
   ExternalIdentifier,
   MonthDayYearDate,
   Value,
+  Visibility,
   VisibilityStrings,
 } from './common.endpoint'
 import { AssertionBase } from './record.endpoint'
@@ -32,6 +33,7 @@ export interface Work extends AssertionBase {
   workType: WorkType
   dateSortString?: MonthDayYearDate
   userSource?: boolean
+  visibility?: Visibility
 }
 interface WorkType {
   errors?: any[]
@@ -65,6 +67,7 @@ export interface Citation {
 }
 
 export interface WorkGroup {
+  visibilityError?: boolean
   activePutCode: number
   defaultPutCode: number
   groupId: number

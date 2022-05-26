@@ -11,7 +11,7 @@ import {
   take,
   tap,
 } from 'rxjs/operators'
-import { Work, WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { Work, WorkGroup, WorksEndpoint } from 'src/app/types/record-works.endpoint'
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
   GroupingSuggestions,
@@ -130,6 +130,7 @@ export class RecordWorksService {
           data.pageIndex = options.offset
             ? Math.floor(options.offset / options.pageSize)
             : 0
+          data.groups = this.calculateVisibilityErrors(data.groups)
           return data
         }),
         tap((data) => {
@@ -144,6 +145,15 @@ export class RecordWorksService {
       )
       .subscribe()
     return this.$workSubject.asObservable()
+  }
+
+  private calculateVisibilityErrors(groups: WorkGroup[]): WorkGroup[] {
+    return groups.map((group) => {
+      group.visibilityError = !!group.works.find(
+        (x) => x.visibility.visibility !== group.activeVisibility
+      )
+      return group
+    })
   }
 
   changeUserRecordContext(
