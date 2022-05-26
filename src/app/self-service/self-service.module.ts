@@ -6,10 +6,6 @@ import { SelfServiceComponent } from './self-service/self-service.component'
 
 @NgModule({
   declarations: [SelfServiceComponent],
-  imports: [
-    CommonModule,
-    SelfServiceRoutingModule,
-    MatIconModule    
-  ],
+  imports: [CommonModule, SelfServiceRoutingModule, MatIconModule],
 })
 export class SelfServiceModule {}
