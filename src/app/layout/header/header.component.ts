@@ -75,7 +75,8 @@ export class HeaderComponent implements OnInit {
         ORCID_REGEXP.test(path) ||
         path === `/${ApplicationRoutes.myOrcid}` ||
         path === `/${ApplicationRoutes.account}` ||
-        path === `/${ApplicationRoutes.trustedParties}`
+        path === `/${ApplicationRoutes.trustedParties}` ||
+        path === `/${ApplicationRoutes.selfService}`
     })
   }
 

@@ -1,0 +1,53 @@
+:host {
+  width: 100%;
+}
+
+.container {
+  max-width: 664px;
+  padding: 0 !important;
+}
+
+.container,
+.mobile {
+  padding: 0 12px !important;
+}
+
+img {
+  display: block;
+  height: 64px;
+  width: 64px;
+  margin: 64px auto 33px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.info {
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: solid 2px;
+  border-radius: 4px;
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+
+  mat-icon {
+    margin-inline-end: 16px;
+  }
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 32px;
+}
