@@ -1,12 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
-import initHelpHero, { HelpHero } from 'helphero';
-import { WINDOW } from 'src/app/cdk/window';
-import { AssertionVisibilityString } from 'src/app/types';
-import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint';
-import { WorksEndpoint } from 'src/app/types/record-works.endpoint';
-import { UserRecord } from 'src/app/types/record.local';
-import { UserInfo } from 'src/app/types/userInfo.endpoint';
-import { environment } from 'src/environments/environment';
+import { Inject, Injectable } from '@angular/core'
+import initHelpHero, { HelpHero } from 'helphero'
+import { WINDOW } from 'src/app/cdk/window'
+import { AssertionVisibilityString } from 'src/app/types'
+import { AffiliationUIGroup } from 'src/app/types/record-affiliation.endpoint'
+import { WorksEndpoint } from 'src/app/types/record-works.endpoint'
+import { UserRecord } from 'src/app/types/record.local'
+import { UserInfo } from 'src/app/types/userInfo.endpoint'
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +33,7 @@ export class HelpHeroService {
       userInfo?.EFFECTIVE_USER_ORCID &&
       userRecord?.emails?.emails &&
       userRecord?.names &&
-      userRecord?.affiliations && 
+      userRecord?.affiliations &&
       userRecord?.works &&
       !this.hlp
     ) {
@@ -50,13 +50,13 @@ export class HelpHeroService {
         publishedName: userRecord.names.creditName.value,
         orcid: userInfo.EFFECTIVE_USER_ORCID,
         isDelegated: userInfo.EFFECTIVE_USER_ORCID !== userInfo.REAL_USER_ORCID,
-        hasAffiliations: !!(this.affiliationsCount(userRecord.affiliations)),
-        hasWorks: !!(this.worksCount(userRecord.works)),
+        hasAffiliations: !!this.affiliationsCount(userRecord.affiliations),
+        hasWorks: !!this.worksCount(userRecord.works),
       })
     }
   }
   affiliationsCount(affiliations: AffiliationUIGroup[]): number {
-    return affiliations.reduce((p,c) => p += c.affiliationGroup.length, 0)
+    return affiliations.reduce((p, c) => (p += c.affiliationGroup.length), 0)
   }
 
   worksCount(works: WorksEndpoint): number {
