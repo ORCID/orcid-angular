@@ -82,7 +82,14 @@ export class ContributorsPipe implements PipeTransform {
     }
   }
 
-  private addSingleValue(value: string, roleSequence: string, length: number, index: number): string {
-    return length - 1 === index ? value + roleSequence : value + this.addComma(roleSequence)
+  private addSingleValue(
+    value: string,
+    roleSequence: string,
+    length: number,
+    index: number
+  ): string {
+    return length - 1 === index
+      ? value + roleSequence
+      : value + this.addComma(roleSequence)
   }
 }
