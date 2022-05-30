@@ -14,10 +14,10 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
     Inconsistency icon is not displayed anymore
   */
 
-    before(() => {
+  before(() => {
     //Set default visibility for this record is set to Public
     cy.programmaticallySignin('cyWorkVisibilityUser') //send user key from fixture file
-    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)  
+    cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
     cy.get('#cy-user-info').click()
     cy.get('#cy-account-settings').click()
     cy.get('#cy-visibility-panel-action-more').click()
@@ -69,7 +69,8 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
     cy.get('#cy-work-types').click()
     const strTypeJson = jsonfile['type']
     //valkues in UI start with capital letter
-    const strTypeOption = strTypeJson.charAt(0).toUpperCase() + strTypeJson.slice(1) 
+    const strTypeOption =
+      strTypeJson.charAt(0).toUpperCase() + strTypeJson.slice(1)
     cy.get('#cy-work-types-panel').within(($myOptions) => {
       cy.contains(strTypeOption).click()
     })
@@ -77,38 +78,40 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
     //add identifier
     cy.get('#cy-add-an-work-external-id').click()
     cy.get('[formcontrolname="externalIdentifierType"]').click() //to do REPLACE with id for the element next sprint
-    cy.get('[role="listbox"]').within(($list) => {//to do REPLACE with id for the element next sprint
-      cy.contains(jsonfile['external-ids']['external-id']['external-id-type']).click()
+    cy.get('[role="listbox"]').within(($list) => {
+      //to do REPLACE with id for the element next sprint
+      cy.contains(
+        jsonfile['external-ids']['external-id']['external-id-type']
+      ).click()
     })
     cy.get('#external-identifier-id-input')
       .clear()
       .type(jsonfile['external-ids']['external-id']['external-id-value'])
-   
+
     //by default visibility is set to public, change it to Private
     cy.get('#modal-container').within(($modal) => {
-      cy.get('#cy-visibility-private').click() 
+      cy.get('#cy-visibility-private').click()
     })
     //save entry
-    cy.get('#save-work-button').click({force:true})
-    cy.wait(2000)//wait for change to take effect
+    cy.get('#save-work-button').click({ force: true })
+    cy.wait(2000) //wait for change to take effect
 
     //Verify work was added and grouped & inconsistency icon is displayed
     cy.get('#cy-works') //wait for page to load
     cy.contains('app-work-stack', externalId).within(() => {
-     cy.contains('a', 'of 2') //REPLACE locator with id
-     //verify icon is displayed
-     cy.get('#cy-buttons-container').within(()=>{
-      cy.get('#cy-inconsistency-issue').should('be.visible')
-     })
-     //select group visibility & verify icon is not displayed
-     cy.get('mat-checkbox').click()
-     cy.get('#cy-visibility-limited').click()
-     cy.wait(2000)//wait for change to take effect
-     cy.get('#cy-buttons-container').within(()=>{
-      cy.get('#cy-inconsistency-issue').should('not.exist')
-     })
+      cy.contains('a', 'of 2') //REPLACE locator with id
+      //verify icon is displayed
+      cy.get('#cy-buttons-container').within(() => {
+        cy.get('#cy-inconsistency-issue').should('be.visible')
+      })
+      //select group visibility & verify icon is not displayed
+      cy.get('mat-checkbox').click()
+      cy.get('#cy-visibility-limited').click()
+      cy.wait(2000) //wait for change to take effect
+      cy.get('#cy-buttons-container').within(() => {
+        cy.get('#cy-inconsistency-issue').should('not.exist')
+      })
     })
-
   })
 
   after(() => {
