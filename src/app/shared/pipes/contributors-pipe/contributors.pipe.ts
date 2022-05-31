@@ -80,6 +80,7 @@ export class ContributorsPipe implements PipeTransform {
     } else if (role && !sequence) {
       return this.addSingleValue(value, role, length, index)
     }
+    return value
   }
 
   private addSingleValue(
