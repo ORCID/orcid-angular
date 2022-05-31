@@ -1,0 +1,24 @@
+{
+  "title": {
+    "title": {
+      "value": "Work added via API"
+    },
+    "subtitle": null,
+    "translated-title": null
+  },
+  "journal-title": {
+    "value": "journal # 1"
+  },
+  "short-description": null,
+  "type": "book",
+  "external-ids": {
+    "external-id": {
+      "external-id-type": "doi",
+      "external-id-value": "10.1087/20120404",
+      "external-id-url": {
+        "value": "https://doi.org/doi:10.1087/20120404"
+      },
+      "external-id-relationship": "self"
+    }
+  }
+}
