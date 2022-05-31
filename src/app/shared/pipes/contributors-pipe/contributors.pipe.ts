@@ -76,17 +76,21 @@ export class ContributorsPipe implements PipeTransform {
         (length - 1 === index ? sequence : this.addComma(sequence))
       )
     } else if (sequence && !role) {
-      return this.addSingleValue(value, sequence)
+      return this.addSingleValue(value, sequence, length, index)
     } else if (role && !sequence) {
-      return this.addSingleValue(value, role)
+      return this.addSingleValue(value, role, length, index)
     }
+    return value
   }
 
-  private addSingleValue(value, roleSequence): string {
-    if (value?.length > 0) {
-      return (value = this.addComma(value) + roleSequence)
-    } else {
-      return value + roleSequence
-    }
+  private addSingleValue(
+    value: string,
+    roleSequence: string,
+    length: number,
+    index: number
+  ): string {
+    return length - 1 === index
+      ? value + roleSequence
+      : value + this.addComma(roleSequence)
   }
 }
