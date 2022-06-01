@@ -39,22 +39,23 @@ export class HelpHeroService {
       !this.hlp
     ) {
       this.hlp = initHelpHero(environment.HELP_HERO_ID)
-      this.hlp.identify(userInfo.EFFECTIVE_USER_ORCID, {
+      const helpHeroIdentifyObject = {
         numberOfValidatedEmails: this.getNumberOfValidatedEmails(
           userRecord?.emails?.emails
         ).numberOfValidatedEmails,
         numberOfUnvalidatedEmails: this.getNumberOfValidatedEmails(
           userRecord?.emails?.emails
         ).numberOfUnvalidatedEmails,
-        givenNames: userRecord.names.givenNames.value,
-        familyName: userRecord.names.familyName.value,
-        publishedName: userRecord.names.creditName.value,
+        givenNames: userRecord.names.givenNames?.value,
+        familyName: userRecord.names.familyName?.value,
+        publishedName: userRecord.names.creditName?.value,
         orcid: userInfo.EFFECTIVE_USER_ORCID,
         isDelegated: userInfo.EFFECTIVE_USER_ORCID !== userInfo.REAL_USER_ORCID,
         hasAffiliations: !!this.affiliationsCount(userRecord.affiliations),
         hasWorks: !!this.worksCount(userRecord.works),
         displayName: this.getDisplayNames(userRecord.names),
-      })
+      }
+      this.hlp.identify(userInfo.EFFECTIVE_USER_ORCID, helpHeroIdentifyObject)
     }
   }
   affiliationsCount(affiliations: AffiliationUIGroup[]): number {
