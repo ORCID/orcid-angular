@@ -54,7 +54,7 @@ export class HelpHeroService {
         hasAffiliations: !!this.affiliationsCount(userRecord.affiliations),
         hasWorks: !!this.worksCount(userRecord.works),
         displayName: this.getDisplayNames(userRecord.names),
-      }      
+      }
       this.hlp.identify(userInfo.EFFECTIVE_USER_ORCID, helpHeroIdentifyObject)
     }
   }
