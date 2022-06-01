@@ -274,53 +274,7 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[lang="en"]') //wait for language to refresh before Log out
   })
 
-  it('Leading whitespace in URL are invalid', function () {
-    //click on edit pencil for websites section
-    cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
-    })
-    cy.get('#add-link').click()
-    cy.get('#description-input')
-      .clear()
-      .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
-      .clear()
-      .type('   ' + testingData.sidebarWebsitesURL.duplicateURL)
-    //try to save
-    cy.get('#save-websites-button').click()
-
-    //verify the URL field is required
-    cy.get('mat-error').should(
-      'have.text',
-      testingData.errorMessages.invalidURL
-    )
-
-    cy.get('#cancel-websites-button').click()
-  })
-
-  it('Trailing whitespace in URL are invalid', function () {
-    //click on edit pencil for websites section
-    cy.get('#websites-panel').within(($myPanel) => {
-      cy.get('#edit-button').click()
-    })
-    cy.get('#add-link').click()
-    cy.get('#description-input')
-      .clear()
-      .type(testingData.sidebarWebsitesURL.titleURL)
-    cy.get('#url-input')
-      .clear()
-      .type(testingData.sidebarWebsitesURL.duplicateURL + '     ')
-    //try to save
-    cy.get('#save-websites-button').click()
-
-    //verify the URL field is required
-    cy.get('mat-error').should(
-      'have.text',
-      testingData.errorMessages.invalidURL
-    )
-
-    cy.get('#cancel-websites-button').click()
-  })
+ 
 
   it('Duplicates added via API show error message', function () {
     //  if a user creates a URL and then an API client posts the same URL,
