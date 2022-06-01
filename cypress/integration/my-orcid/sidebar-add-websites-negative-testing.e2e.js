@@ -274,8 +274,6 @@ describe('App displays error messages when user inputs invalid data', async func
     cy.get('[lang="en"]') //wait for language to refresh before Log out
   })
 
- 
-
   it('Duplicates added via API show error message', function () {
     //  if a user creates a URL and then an API client posts the same URL,
     //  or two different API clients add the same URL,

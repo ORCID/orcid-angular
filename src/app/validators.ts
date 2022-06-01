@@ -57,11 +57,9 @@ export class OrcidValidators {
     }
   }
 
-  static patternAfterTrimming(pattern:  RegExp): ValidatorFn {
+  static patternAfterTrimming(pattern: RegExp): ValidatorFn {
     return (control: AbstractControl) => {
-
-
-      if ( control.value.trim() === '' ||  (pattern.test(control.value.trim()))) {
+      if (control.value.trim() === '' || pattern.test(control.value.trim())) {
         return null
       } else {
         return { pattern: 'the pattern is valid' }
