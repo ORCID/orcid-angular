@@ -7,6 +7,11 @@ const routes: Routes = [
     path: '',
     component: SelfServiceComponent,
   },
+  {
+    path: '**',
+    redirectTo: ''
+  },
+
 ]
 
 @NgModule({
