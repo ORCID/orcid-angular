@@ -38,7 +38,9 @@ export class ContributorsPipe implements PipeTransform {
       if (value?.length > 0) {
         value = '(' + value
         if (contributor?.orcid || contributor?.contributorOrcid?.path) {
-          value = value + ','
+          if (!value.endsWith(', ')) {
+            value = value + ','
+          }
         } else {
           value = value + ')'
         }
