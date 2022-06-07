@@ -63,7 +63,7 @@ describe('OAuth cypress tests', async function () {
     cy.get('#access-through-your-institution-button').click()
     cy.get('input[aria-label="Institution"]').type("SAMLtest IdP") //REPLACE ID
     cy.wait(4000)
-    cy.get('button[type="submit"]').click()//REPLACE ID
+    cy.get('button').contains('CONTINUE').click()//REPLACE ID
    // cy.get('#username').clear().type(recordOwner.oid)
    // cy.get('#password').clear().type(recordOwner.password)
    // cy.get('#signin-button').click()
