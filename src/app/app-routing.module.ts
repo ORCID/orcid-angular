@@ -146,6 +146,14 @@ const routes: Routes = [
       import('./register/register.module').then((m) => m.RegisterModule),
   },
   {
+    path: ApplicationRoutes.selfService,
+    canActivateChild: [AuthenticatedGuard],
+    loadChildren: () =>
+      import('./self-service/self-service.module').then(
+        (m) => m.SelfServiceModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: '/',
   },

@@ -34,6 +34,7 @@ import { UserSession } from '../../../../types/session.local'
 import { ModalComponent } from '../../../modal/modal/modal.component'
 import { PlatformInfo, PlatformInfoService } from '../../../platform-info'
 import { WINDOW } from '../../../window'
+import { OrcidValidators } from 'src/app/validators'
 
 @Component({
   selector: 'app-modal-websites',
@@ -122,7 +123,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         url: new FormControl(website.url.value.trim(), {
           validators: [
             Validators.required,
-            Validators.pattern(URL_REGEXP),
+            OrcidValidators.patternAfterTrimming(URL_REGEXP),
             this.allUrlsAreUnique(website.putCode),
           ],
           updateOn: 'change',
@@ -204,7 +205,7 @@ export class ModalWebsitesComponent implements OnInit, OnDestroy {
         url: new FormControl('', {
           validators: [
             Validators.required,
-            Validators.pattern(URL_REGEXP),
+            OrcidValidators.patternAfterTrimming(URL_REGEXP),
             this.allUrlsAreUnique(newPutCode),
           ],
           updateOn: 'change',

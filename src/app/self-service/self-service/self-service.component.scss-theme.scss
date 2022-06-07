@@ -1,0 +1,27 @@
+@import '~@angular/material/theming';
+@import 'src/assets/scss/material.orcid-theme.scss';
+
+@mixin settings-self-service-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  ::ng-deep .valid {
+    color: mat-color($accent, 900);
+  }
+  .error {
+    color: map-get($foreground, 'state-warning-dark');
+  }
+
+  .info {
+    border-color: mat-color($foreground, 'state-notice-dark');
+
+    mat-icon {
+      color: mat-color($foreground, 'state-notice-dark') !important;
+    }
+  }
+}
+
+@include settings-self-service-theme($orcid-app-theme);
