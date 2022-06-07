@@ -108,6 +108,64 @@ describe('My orcid - users are able to add content to their record', async funct
       .should('contain', testingData.sidebarWebsitesURL.chineseTitle)
   })
 
+  it('Leading whitespace in URL are trimmed on save', function () {
+    //click on edit pencil for websites section
+    cy.get('#websites-panel').within(($myPanel) => {
+      cy.get('#edit-button').click()
+    })
+    cy.get('#add-link').click()
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input')
+      .clear()
+      .type('   ' + testingData.sidebarWebsitesURL.duplicateURL)
+    //try to save
+    cy.get('#save-websites-button').click()
+
+    //verify the URL field is required
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
+
+    //verify the title is displayed correctly
+    cy.get('#websites-panel')
+      .within(($section) => {
+        cy.get('[class="line"]')
+      })
+      .should('contain', testingData.sidebarWebsitesURL.titleURL)
+  })
+
+  it('Trailing whitespace in URL are trimmed on save', function () {
+    //click on edit pencil for websites section
+    cy.get('#websites-panel').within(($myPanel) => {
+      cy.get('#edit-button').click()
+    })
+    cy.get('#add-link').click()
+    cy.get('#description-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.titleURL)
+    cy.get('#url-input')
+      .clear()
+      .type(testingData.sidebarWebsitesURL.duplicateURL + '     ')
+    //try to save
+    cy.get('#save-websites-button').click()
+
+    //verify the URL field is required
+    cy.get('mat-error').should(
+      'have.text',
+      testingData.errorMessages.invalidURL
+    )
+
+    //verify the title is displayed correctly
+    cy.get('#websites-panel')
+      .within(($section) => {
+        cy.get('[class="line"]')
+      })
+      .should('contain', testingData.sidebarWebsitesURL.titleURL)
+  })
+
   afterEach(() => {
     //clean up state
     cy.cleanWebsites()
