@@ -120,7 +120,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#url-input')
       .clear()
       .type('   ' + testingData.sidebarWebsitesURL.duplicateURL)
-    
+
     //app should let you save, no errors displayed
     cy.get('#save-websites-button').click()
 
@@ -130,12 +130,12 @@ describe('My orcid - users are able to add content to their record', async funct
         cy.get('[class="line"]')
       })
       .should('contain', testingData.sidebarWebsitesURL.titleURL)
-    
+
     //verify url was trimmed
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
-    cy.get('#url-input').should('not.contain',' ')
+    cy.get('#url-input').should('not.contain', ' ')
   })
 
   it('Trailing whitespaces in URL are trimmed on save', function () {
@@ -150,7 +150,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL + '     ')
-    
+
     //app should let you save, no errors displayed
     cy.get('#save-websites-button').click()
 
@@ -165,8 +165,7 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
     })
-    cy.get('#url-input').should('not.contain',' ')
-
+    cy.get('#url-input').should('not.contain', ' ')
   })
 
   afterEach(() => {
