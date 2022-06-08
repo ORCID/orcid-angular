@@ -108,7 +108,7 @@ describe('My orcid - users are able to add content to their record', async funct
       .should('contain', testingData.sidebarWebsitesURL.chineseTitle)
   })
 
-  it('Leading whitespace in URL are trimmed on save', function () {
+  it('Leading whitespaces in URL are trimmed on save', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
@@ -120,24 +120,25 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#url-input')
       .clear()
       .type('   ' + testingData.sidebarWebsitesURL.duplicateURL)
-    //try to save
+    
+    //app should let you save, no errors displayed
     cy.get('#save-websites-button').click()
 
-    //verify the URL field is required
-    cy.get('mat-error').should(
-      'have.text',
-      testingData.errorMessages.invalidURL
-    )
-
-    //verify the title is displayed correctly
+    //verify the entry was added
     cy.get('#websites-panel')
       .within(($section) => {
         cy.get('[class="line"]')
       })
       .should('contain', testingData.sidebarWebsitesURL.titleURL)
+    
+    //verify url was trimmed
+    cy.get('#websites-panel').within(($myPanel) => {
+      cy.get('#edit-button').click()
+    })
+    cy.get('#url-input').should('not.contain',' ')
   })
 
-  it('Trailing whitespace in URL are trimmed on save', function () {
+  it('Trailing whitespaces in URL are trimmed on save', function () {
     //click on edit pencil for websites section
     cy.get('#websites-panel').within(($myPanel) => {
       cy.get('#edit-button').click()
@@ -149,21 +150,23 @@ describe('My orcid - users are able to add content to their record', async funct
     cy.get('#url-input')
       .clear()
       .type(testingData.sidebarWebsitesURL.duplicateURL + '     ')
-    //try to save
+    
+    //app should let you save, no errors displayed
     cy.get('#save-websites-button').click()
 
-    //verify the URL field is required
-    cy.get('mat-error').should(
-      'have.text',
-      testingData.errorMessages.invalidURL
-    )
-
-    //verify the title is displayed correctly
+    //verify the entry was added
     cy.get('#websites-panel')
       .within(($section) => {
         cy.get('[class="line"]')
       })
       .should('contain', testingData.sidebarWebsitesURL.titleURL)
+
+    //verify url was trimmed
+    cy.get('#websites-panel').within(($myPanel) => {
+      cy.get('#edit-button').click()
+    })
+    cy.get('#url-input').should('not.contain',' ')
+
   })
 
   afterEach(() => {
