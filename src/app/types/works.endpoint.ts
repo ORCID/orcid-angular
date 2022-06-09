@@ -481,12 +481,12 @@ export const ContributionRoles: Role[] = [
     translation: $localize`:@@works.visualization:Visualization`
   },
   {
-    key: 'writing – original draft',
+    key: 'writing - original draft',
     value: 'http://credit.niso.org/contributor-roles/writing-original-draft/',
     translation: $localize`:@@works.writingOriginalDraft:Writing - original draft`
   },
   {
-    key: 'writing – review & editing',
+    key: 'writing - review & editing',
     value: 'http://credit.niso.org/contributor-roles/writing-review-editing/',
     translation: $localize`:@@works.writingReviewEditing:Writing - review & editing`
   }
