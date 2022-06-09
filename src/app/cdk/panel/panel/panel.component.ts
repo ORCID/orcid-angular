@@ -194,6 +194,7 @@ export class PanelComponent implements OnInit {
           modalComponent.componentInstance.affiliation = this.elements
           modalComponent.componentInstance.funding = this.elements
           modalComponent.componentInstance.work = this.elements
+          modalComponent.componentInstance.userRecord = this.userRecord
         }
       })
   }

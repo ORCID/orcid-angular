@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  margin-bottom: 32px;
+
+  .title {
+    label {
+      display: block;
+      margin-bottom: 28px;
+    }
+  }
+}
+
+.contributor-wrapper {
+
+  p {
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  .icons-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    img.drag-icon {
+      height: 32px;
+      margin: 4px 0;
+      cursor: move;
+      margin-inline-start: 5px;
+      margin-inline-end: 7px;
+    }
+
+    img.orcid-logo {
+      width: 32px;
+      margin-inline-start: 8px;
+      margin-inline-end: 8px;
+    }
+  }
+
+  .record-holder-name-and-roles {
+    display: flex;
+    flex-direction: column;
+    font-style: italic;
+  }
+}
+
+::ng-deep .columns-4-or-8 .contributors-wrapper {
+  margin: 16px 0 16px 0;
+}

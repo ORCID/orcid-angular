@@ -1,0 +1,70 @@
+<div class="container no-padding">
+  <div class="row title">
+    <label class="orc-font-body">
+      <strong i18n="@@works.yourContributionsToThisWork">Your contributions to this work</strong>
+    </label>
+  </div>
+  <ng-container formArrayName="roles">
+    <ng-container *ngFor="let role of roles.controls; index as i" [formGroupName]="i">
+      <div class="row role">
+        <div class="col l9 m8 s4 no-gutters orc-font-body-small">
+          <ng-container *ngIf="role.disabled">
+            {{ role.get('role').value | roleTranslation: contributionRoles  }}
+          </ng-container>
+          <mat-form-field
+            *ngIf="!role.disabled"
+            appearance="outline"
+            class="mat-form-field-min"
+            [ngClass]="{
+            'no-hint': role.get('role').errors
+          }"
+          >
+            <mat-select
+              placeholder="{{ ngOrcidSelectRole }}"
+              formControlName="role"
+            >
+              <mat-option
+                *ngFor="let contributionRole of contributionRoles"
+                [value]="contributionRole.key"
+                [disabled]="contributionRole.key | disableRole: role"
+              >
+                {{ contributionRole.translation }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="role.get('role').errors?.unique"
+              i18n="@@works.roleNotDuplicated"
+            >
+              Role cannot be duplicated
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col l3 delete-button">
+          <button
+            (click)="deleteRole(i)"
+            mat-icon-button
+            class="delete-button"
+          >
+            <mat-icon
+              class="material-icons-outlined extra-large-material-icon"
+            >delete
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+      <hr class="dashed-line" *ngIf="role.disabled"/>
+    </ng-container>
+  </ng-container>
+
+  <div class="row">
+    <a
+      class="underline"
+      (click)="addRole()"
+      id="cy-add-another-role"
+    >
+    <span class="mat-body-1" i18n="@@works.addAnotherRole">
+      Add another role
+    </span>
+    </a>
+  </div>
+</div>

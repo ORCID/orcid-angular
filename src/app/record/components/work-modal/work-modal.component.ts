@@ -17,6 +17,7 @@ import { WorkFormComponent } from '../work-form/work-form/work-form.component'
 export class WorkModalComponent implements OnInit {
   @ViewChild('workFormComponent') workFormComponent: WorkFormComponent
   @Input() options: { createACopy: boolean }
+  @Input() userRecord: UserRecord
   loading = true
   platform: PlatformInfo
   work: Work
@@ -57,6 +58,10 @@ export class WorkModalComponent implements OnInit {
 
   toIdentifiers() {
     this._window.document.getElementById('identifiers').scrollIntoView()
+  }
+
+  toContributors() {
+    this._window.document.getElementById('contributors').scrollIntoView()
   }
 
   toCitation() {

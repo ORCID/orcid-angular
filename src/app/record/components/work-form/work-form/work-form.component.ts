@@ -1,16 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core'
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms'
-import {
-  PlatformInfo,
-  PlatformInfoService,
-} from '../../../../cdk/platform-info'
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { PlatformInfo, PlatformInfoService } from '../../../../cdk/platform-info'
 import { Work } from '../../../../types/record-works.endpoint'
 import {
   CitationTypes,
@@ -34,10 +24,7 @@ import { UserRecord } from '../../../../types/record.local'
 import { first, map, startWith } from 'rxjs/operators'
 import { dateValidator } from '../../../../shared/validators/date/date.validator'
 import { GetFormErrors, URL_REGEXP } from '../../../../constants'
-import {
-  ExternalIdentifier,
-  VisibilityStrings,
-} from '../../../../types/common.endpoint'
+import { Contributor, ExternalIdentifier, VisibilityStrings } from '../../../../types/common.endpoint'
 import { SnackbarService } from 'src/app/cdk/snackbar/snackbar.service'
 import { WorkIdentifiers } from 'src/app/shared/validators/work-identifiers/work-identifiers.validator'
 import { workCitationValidator } from 'src/app/shared/validators/citation/work-citation.validator'
@@ -55,6 +42,8 @@ import { RecordService } from 'src/app/core/record/record.service'
 })
 export class WorkFormComponent implements OnInit {
   @Input() work: Work
+  @Input() userRecord: UserRecord
+
   $workTypeUpdateEvent = new Subject<WorkIdType>()
 
   loading = true
@@ -502,6 +491,7 @@ export class WorkFormComponent implements OnInit {
         workType: {
           value: this.workForm.value.workType,
         },
+        contributorsGroupedByOrcid: this.getOrcidGroupedByOrcid()
       }
       if (this.work?.putCode) {
         work.putCode = this.work.putCode
@@ -595,6 +585,26 @@ export class WorkFormComponent implements OnInit {
     }
 
     return workRelationship
+  }
+
+  private getOrcidGroupedByOrcid(): Contributor[] {
+    const rolesFormArray = this.workForm.get('roles') as FormArray
+    const roles = rolesFormArray?.controls?.filter(fg => fg?.value?.role).map(formGroup => formGroup?.value?.role)
+    const recordHolderContribution = this.workForm.get('contributors')?.value[0]
+    return [{
+      creditName: {
+        value: recordHolderContribution?.creditName
+      },
+      contributorOrcid: {
+        uri: recordHolderContribution?.contributorOrcid?.uri,
+        path: recordHolderContribution?.contributorOrcid?.path
+      },
+      rolesAndSequences: [
+        ...roles.map(r => ({
+          contributorRole: this._workService.getContributionRoleByKey(r).value,
+        }))
+      ]
+    }]
   }
 
   closeEvent() {

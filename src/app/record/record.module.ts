@@ -76,7 +76,9 @@ import { TopBarVerificationEmailComponent } from './components/top-bar-verificat
 import { TopBarVerificationEmailModalComponent } from './components/top-bar-verification-email/modals/top-bar-verification-email-modal/top-bar-verification-email-modal.component'
 import { VerificationEmailModalService } from '../core/verification-email-modal/verification-email-modal.service'
 import { ModalCombineWorksWithSelectorComponent } from './components/work/modals/modal-combine-works-with-selector/modal-combine-works-with-selector.component'
-import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module'
+import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-record-preview/top-bar-my-public-record-preview.module';
+import { WorkContributorRolesComponent } from './components/work-contributor-role/work-contributor-roles.component';
+import { WorkContributorsComponent } from './components/work-contributors/work-contributors.component'
 
 @NgModule({
   declarations: [
@@ -128,6 +130,8 @@ import { TopBarMyPublicRecordPreviewModule } from '../cdk/top-bar-my-public-reco
     TopBarVerificationEmailComponent,
     TopBarVerificationEmailModalComponent,
     ModalCombineWorksWithSelectorComponent,
+    WorkContributorRolesComponent,
+    WorkContributorsComponent,
   ],
   imports: [
     CommonModule,

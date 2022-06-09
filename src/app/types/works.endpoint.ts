@@ -414,6 +414,84 @@ export const CitationTypes = {
   'formatted-vancouver': 'VANCOUVER',
 }
 
+export const ContributionRoles: Role[] = [
+  {
+    key: 'unspecified',
+    value: 'unspecified',
+    translation: $localize`:@@works.unspecified:Unspecified`
+  },
+  {
+    key: 'conceptualization',
+    value: 'http://credit.niso.org/contributor-roles/conceptualization/',
+    translation: $localize`:@@works.conceptualization:Conceptualization`
+  },
+  {
+    key: 'data curation',
+    value: 'http://credit.niso.org/contributor-roles/data-curation/',
+    translation: $localize`:@@works.dataCuration:Data curation`
+  },
+  {
+    key: 'formal analysis',
+    value: 'http://credit.niso.org/contributor-roles/formal-analysis/',
+    translation: $localize`:@@works.formalAnalysis:Formal analysis`
+  },
+  {
+    key: 'funding acquisition',
+    value: 'http://credit.niso.org/contributor-roles/funding-acquisition/',
+    translation: $localize`:@@works.fundingAcquisition:Funding acquisition`
+  },
+  {
+    key: 'investigation',
+    value: 'http://credit.niso.org/contributor-roles/investigation/',
+    translation: $localize`:@@works.investigation:Investigation`
+  },
+  {
+    key: 'methodology',
+    value: 'http://credit.niso.org/contributor-roles/methodology/',
+    translation: $localize`:@@works.methodology:Methodology`
+  },
+  {
+    key: 'project administration',
+    value: 'http://credit.niso.org/contributor-roles/project-administration/',
+    translation: $localize`:@@works.projectAdministration:Project administration`
+  },
+  {
+    key: 'resources',
+    value: 'http://credit.niso.org/contributor-roles/resources/',
+    translation: $localize`:@@works.resources:Resources`
+  },
+  {
+    key: 'software',
+    value: 'http://credit.niso.org/contributor-roles/software/',
+    translation: $localize`:@@works.software:Software`
+  },
+  {
+    key: 'supervision',
+    value: 'http://credit.niso.org/contributor-roles/supervision/',
+    translation: $localize`:@@works.supervision:Supervision`
+  },
+  {
+    key: 'validation',
+    value: 'http://credit.niso.org/contributor-roles/validation/',
+    translation: $localize`:@@works.validation:Validation`
+  },
+  {
+    key: 'visualization',
+    value: 'http://credit.niso.org/contributor-roles/visualization/',
+    translation: $localize`:@@works.visualization:Visualization`
+  },
+  {
+    key: 'writing – original draft',
+    value: 'http://credit.niso.org/contributor-roles/writing-original-draft/',
+    translation: $localize`:@@works.writingOriginalDraft:Writing - original draft`
+  },
+  {
+    key: 'writing – review & editing',
+    value: 'http://credit.niso.org/contributor-roles/writing-review-editing/',
+    translation: $localize`:@@works.writingReviewEditing:Writing - review & editing`
+  }
+]
+
 export interface WorkIdType {
   name: string
   description: string
@@ -452,6 +530,7 @@ export const WorkRelationshipsHintsLabels = {
   'version-of': $localize`:@@works.versionOfDescription:The identifier applies to an alternate version of the work. For example, an earlier draft of an article.`,
   'funded-by': $localize`:@@works.fundedByDescription:The identifier applies to the funding for the work.`,
 }
+
 export interface Work {
   visibility: any
   errors: any[] // TODO is this always empty?
@@ -490,4 +569,10 @@ export interface Suggestion {
 export interface GroupingSuggestions {
   suggestions: Suggestion[]
   moreAvailable: boolean
+}
+
+export interface Role {
+  key: string,
+  value: string,
+  translation: string
 }

@@ -14,11 +14,16 @@
       </a>
     </ng-container>
     <ng-container id="side-bar-url-2">
+      <a class="side-bar" i18n="@@works.contributors" (click)="toContributors()">
+        Contributors
+      </a>
+    </ng-container>
+    <ng-container id="side-bar-url-3">
       <a class="side-bar" i18n="@@works.citation" (click)="toCitation()">
         Citation
       </a>
     </ng-container>
-    <ng-container id="side-bar-url-3">
+    <ng-container id="side-bar-url-4">
       <a
         class="side-bar"
         i18n="@@works.otherInformation"
@@ -27,7 +32,7 @@
         Other information
       </a>
     </ng-container>
-    <ng-container id="side-bar-url-4">
+    <ng-container id="side-bar-url-5">
       <a class="side-bar" i18n="@@shared.visibility" (click)="toVisibility()">
         Visibility
       </a>
@@ -54,6 +59,11 @@
       Cancel
     </button>
   </app-modal-footer>
-  <app-work-form [work]="work" *ngIf="work && !loading" #workFormComponent>
+  <app-work-form
+    [work]="work"
+    [userRecord]="userRecord"
+    *ngIf="work && !loading"
+    #workFormComponent
+  >
   </app-work-form>
 </app-modal>
