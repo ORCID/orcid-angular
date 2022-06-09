@@ -11,10 +11,12 @@ describe('RoleTranslationPipe', () => {
   })
 
   it('create an instance', () => {
-    expect(pipe).toBeTruthy();
-  });
+    expect(pipe).toBeTruthy()
+  })
 
   it('should return translation of the role by key', () => {
-    expect(pipe.transform('writing – review & editing', roles)).toBe('Writing - review & editing');
-  });
-});
+    expect(pipe.transform('writing – review & editing', roles)).toBe(
+      'Writing - review & editing'
+    )
+  })
+})

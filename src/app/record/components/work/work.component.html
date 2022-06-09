@@ -12,7 +12,11 @@
       </ng-container>
       {{ work.workType.value | recordWorkTypeLabel }}
       <ng-container
-        *ngIf="togglzWorksContributors && (work.contributorsGroupedByOrcid | recordHolderRoles:isPublicRecord:id) as roles"
+        *ngIf="
+          togglzWorksContributors &&
+          (work.contributorsGroupedByOrcid
+            | recordHolderRoles: isPublicRecord:id) as roles
+        "
       >
         <ng-container *ngIf="roles">
           |

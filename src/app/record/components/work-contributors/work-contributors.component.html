@@ -1,14 +1,13 @@
 <div class="container no-padding">
   <div class="row title">
     <label class="orc-font-body">
-      <strong i18n="@@works.contributorsToThisWork">Contributors to this work</strong>
+      <strong i18n="@@works.contributorsToThisWork"
+        >Contributors to this work</strong
+      >
     </label>
   </div>
   <ng-container formArrayName="contributors">
-    <div
-      class="row contributors-list"
-      cdkDropList
-    >
+    <div class="row contributors-list" cdkDropList>
       <div
         cdkDrag
         class="row contributors-box"
@@ -18,17 +17,17 @@
         [attr.id]="'draggable-' + i"
       >
         <div class="row drag-placeholder" *cdkDragPlaceholder></div>
-        <div
-          class="row"
-          [ngClass]="{ 'no-wrap': !isMobile }"
-        >
-          <div class="col l12 m8 s4 middle no-wrap no-gutters contributor-wrapper">
+        <div class="row" [ngClass]="{ 'no-wrap': !isMobile }">
+          <div
+            class="col l12 m8 s4 middle no-wrap no-gutters contributor-wrapper"
+          >
             <div class="icons-wrapper">
               <img
                 class="drag-icon"
                 cdkDragHandle
                 src="assets/vectors/draggable.svg"
-                alt="drag handle"/>
+                alt="drag handle"
+              />
               <img
                 class="orcid-logo"
                 src="assets/vectors/orcid.logo.icon.svg"
@@ -36,15 +35,15 @@
               />
             </div>
             <p>
-              <span
-                class="record-holder-name-and-roles orc-font-body-small"
-              >{{contributor.get('creditName')?.value}}
+              <span class="record-holder-name-and-roles orc-font-body-small"
+                >{{ contributor.get('creditName')?.value }}
                 <ng-container *ngIf="roles">({{ roles }})</ng-container>
               </span>
               <span
                 class="affiliation orc-font-small-print"
                 *ngIf="affiliation"
-              >{{affiliation}}</span>
+                >{{ affiliation }}</span
+              >
             </p>
           </div>
         </div>

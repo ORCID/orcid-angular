@@ -3,7 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { WorkContributorsComponent } from './work-contributors.component'
 import { UserInfo } from '../../../types'
 import { UserRecord } from '../../../types/record.local'
-import { Affiliation, AffiliationGroup } from '../../../types/record-affiliation.endpoint'
+import {
+  Affiliation,
+  AffiliationGroup,
+} from '../../../types/record-affiliation.endpoint'
 import {
   ControlContainer,
   FormArray,
@@ -31,21 +34,21 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
 describe('WorkContributorsComponent', () => {
-  let component: WorkContributorsComponent;
-  let fixture: ComponentFixture<WorkContributorsComponent>;
+  let component: WorkContributorsComponent
+  let fixture: ComponentFixture<WorkContributorsComponent>
   let debugElement: DebugElement
   let formGroupDirective: FormControlDirective
   const formBuilder = new FormBuilder()
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorkContributorsComponent ],
+      declarations: [WorkContributorsComponent],
       imports: [
         FormsModule,
         HttpClientTestingModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       providers: [
         WINDOW_PROVIDERS,
@@ -59,66 +62,82 @@ describe('WorkContributorsComponent', () => {
         RecordWorksService,
         SnackbarService,
         TogglzService,
-        UserService
-      ]
-    })
-    .compileComponents();
-  });
+        UserService,
+      ],
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WorkContributorsComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(WorkContributorsComponent)
+    component = fixture.componentInstance
     debugElement = fixture.debugElement
     const mockFormGroup: FormGroup = new FormGroup({})
-    const formGroupDirective: FormGroupDirective = new FormGroupDirective([], [])
+    const formGroupDirective: FormGroupDirective = new FormGroupDirective(
+      [],
+      []
+    )
     component['parentForm'].form = mockFormGroup
-    component['parentForm'].control.setControl('roles', new FormArray([
-      formBuilder.group({
-        role: [{ value: 'conceptualization', disabled: true }]
-      }),
-      formBuilder.group({
-        role: [{ value: 'unspecified', disabled: true }]
-      })
-    ]))
+    component['parentForm'].control.setControl(
+      'roles',
+      new FormArray([
+        formBuilder.group({
+          role: [{ value: 'conceptualization', disabled: true }],
+        }),
+        formBuilder.group({
+          role: [{ value: 'unspecified', disabled: true }],
+        }),
+      ])
+    )
     component.userRecord = getUserRecord()
 
-    fixture.detectChanges();
-  });
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
 
   it('should display record holder name with roles and affiliation', async () => {
-    const rolesFormArray = component['parentForm'].control?.controls['roles'] as FormArray
+    const rolesFormArray = component['parentForm'].control?.controls[
+      'roles'
+    ] as FormArray
     rolesFormArray.push(formBuilder.group({ role: 'methodology' }))
 
     fixture.detectChanges()
 
-    const recordHolderData = fixture.debugElement.query(By.css('.record-holder-name-and-roles')).nativeElement;
-    const affiliation = fixture.debugElement.query(By.css('.affiliation')).nativeElement;
+    const recordHolderData = fixture.debugElement.query(
+      By.css('.record-holder-name-and-roles')
+    ).nativeElement
+    const affiliation = fixture.debugElement.query(By.css('.affiliation'))
+      .nativeElement
 
-    expect(recordHolderData.innerHTML).not.toBeNull();
-    expect(recordHolderData.textContent).toBe('Name Surname (Conceptualization, Unspecified, Methodology)');
-    expect(affiliation.innerHTML).not.toBeNull();
-    expect(affiliation.textContent).toBe('ORCID');
-  });
-});
+    expect(recordHolderData.innerHTML).not.toBeNull()
+    expect(recordHolderData.textContent).toBe(
+      'Name Surname (Conceptualization, Unspecified, Methodology)'
+    )
+    expect(affiliation.innerHTML).not.toBeNull()
+    expect(affiliation.textContent).toBe('ORCID')
+  })
+})
 
 function getUserRecord(): UserRecord {
   const userRecord: UserRecord = {} as UserRecord
   userRecord.userInfo = {
-    REAL_USER_ORCID: '0000-0000-0000-000X'
+    REAL_USER_ORCID: '0000-0000-0000-000X',
   } as UserInfo
   userRecord.names = {
-    givenNames: { value: 'Name'},
-    familyName: { value: 'Surname'}
+    givenNames: { value: 'Name' },
+    familyName: { value: 'Surname' },
   } as NamesEndPoint
   const affiliation = { affiliationName: { value: 'ORCID' } } as Affiliation
-  const affiliationUIGroup = { defaultAffiliation: affiliation } as AffiliationGroup
-  userRecord.affiliations = [{
-    type: 'EMPLOYMENT',
-    affiliationGroup: [affiliationUIGroup]
-  }]
+  const affiliationUIGroup = {
+    defaultAffiliation: affiliation,
+  } as AffiliationGroup
+  userRecord.affiliations = [
+    {
+      type: 'EMPLOYMENT',
+      affiliationGroup: [affiliationUIGroup],
+    },
+  ]
   return userRecord
 }

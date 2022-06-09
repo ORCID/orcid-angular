@@ -5,7 +5,6 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms'
   name: 'disableRole',
 })
 export class DisableRolePipe implements PipeTransform {
-
   transform(value: string, control: AbstractControl): boolean {
     const formArray: FormArray | FormGroup = control.parent
     if (formArray instanceof FormArray) {

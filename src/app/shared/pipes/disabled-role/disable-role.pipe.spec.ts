@@ -20,10 +20,14 @@ describe('DisableRolePipe', () => {
       }),
       formBuilder.group({
         role: ['unspecified'],
-      })
+      }),
     ])
 
-    expect(pipe.transform('conceptualization', rolesFormArray.controls[0])).toBe(true)
-    expect(pipe.transform('unspecified', rolesFormArray.controls[1])).toBe(false)
+    expect(
+      pipe.transform('conceptualization', rolesFormArray.controls[0])
+    ).toBe(true)
+    expect(pipe.transform('unspecified', rolesFormArray.controls[1])).toBe(
+      false
+    )
   })
 })

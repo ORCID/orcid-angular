@@ -19,7 +19,8 @@ import {
 import { UserRecordOptions } from 'src/app/types/record.local'
 import {
   ContributionRoles,
-  GroupingSuggestions, Role,
+  GroupingSuggestions,
+  Role,
   WorkCombineEndpoint,
   WorkIdType,
   WorkIdTypeValidation,
@@ -457,6 +458,6 @@ export class RecordWorksService {
   }
 
   getContributionRoleByKey(key: string): Role {
-    return this.contributionRoles.find(role => role.key === key)
+    return this.contributionRoles.find((role) => role.key === key)
   }
 }

@@ -86,7 +86,7 @@ describe('TwoFactorEnableComponent', () => {
     const twoFactorButton = debugElement.query(By.css('#cy-continue'))
     twoFactorButton.triggerEventHandler('click', null)
     fixture.detectChanges()
-    await fixture.whenStable();
+    await fixture.whenStable()
 
     expect(fakeTwoFactorAuthenticationService.register).toHaveBeenCalled()
   })
