@@ -7,9 +7,9 @@ describe('My orcid - via API members can add Peer reviews', async function () {
   before(() => {
     //add a new peer review via API
     const endpoint =
-      Cypress.env('membersAPI-URL') +
+      Cypress.env('membersAPI_URL') +
       userData.cyUserPrimaryEmaiVerified.oid +
-      Cypress.env('membersAPI-peerReviewEndpoint')
+      Cypress.env('membersAPI_peerReviewEndpoint')
 
     const curlStatement =
       "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +

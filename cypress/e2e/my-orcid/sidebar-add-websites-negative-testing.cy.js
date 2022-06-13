@@ -295,9 +295,9 @@ describe('App displays error messages when user inputs invalid data', async func
     //add same URL via API
     //const jsonFilePath=userData.cyUserMemmerAPI.curlPostWebsitePath
     const endpoint =
-      Cypress.env('membersAPI-URL') +
+      Cypress.env('membersAPI_URL') +
       userData.cyUserPrimaryEmaiVerified.oid +
-      Cypress.env('membersAPI-websitesEndPoint')
+      Cypress.env('membersAPI_websitesEndPoint')
     const curlStatement =
       "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
       userData.cyUserMemmerAPI.bearer +

@@ -34,9 +34,9 @@ describe('My orcid - works - visibility inconsistency notification scenario', as
 
     //add a new work with client A which will take PUBLIC default visibility for this record owner
     const endpoint =
-      Cypress.env('membersAPI-URL') +
+      Cypress.env('membersAPI_URL') +
       userData.cyWorkVisibilityUser.oid +
-      Cypress.env('membersAPI-workEndpoint')
+      Cypress.env('membersAPI_workEndpoint')
 
     const curlStatement =
       "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
