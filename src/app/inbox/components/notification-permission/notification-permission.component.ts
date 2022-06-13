@@ -58,7 +58,7 @@ export class NotificationPermissionComponent implements OnInit {
       case 'RESEARCH_RESOURCE':
         return $localize`:@@inbox.researchResource:Research Resource`
       case 'SERVICE':
-        return $localize`:@@inbox.researchResource:Service`
+        return $localize`:@@inbox.service:Service`
       case 'WORK':
         return $localize`:@@inbox.work:Work`
       default:
