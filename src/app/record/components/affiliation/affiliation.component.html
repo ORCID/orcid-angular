@@ -24,28 +24,26 @@
           >present</ng-container
         >
       </ng-container>
-      <ng-container
-        *ngIf="!affiliation?.startDate.year && affiliation?.endDate"
-      >
+      <ng-container *ngIf="!affiliation?.startDate?.year && affiliation?.endDate">
         <ng-container *ngIf="affiliation.endDate?.year">
           {{ affiliation.endDate | monthDayYearDateToString }}
         </ng-container>
       </ng-container>
       <ng-container
         *ngIf="
-          (affiliation?.startDate.year || affiliation?.endDate.year) &&
-          affiliation?.roleTitle.value
+          (affiliation?.startDate?.year || affiliation?.endDate?.year) &&
+          affiliation?.roleTitle?.value
         "
       >
         |
       </ng-container>
-      {{ affiliation?.roleTitle.value }}
-      <ng-container *ngIf="affiliation?.departmentName.value">
+      {{ affiliation?.roleTitle?.value }}
+      <ng-container *ngIf="affiliation?.departmentName?.value">
         ({{ affiliation.departmentName.value }})
       </ng-container>
     </div>
     <div class="type">
-      {{ affiliation?.affiliationType.value | affiliationTypeLabel }}
+      {{ affiliation?.affiliationType?.value | affiliationTypeLabel }}
     </div>
     <app-display-external-ids
       [externalIdentifiers]="affiliation?.affiliationExternalIdentifiers"
@@ -101,7 +99,7 @@
   <app-display-attribute>
     <h3 class="orc-font-body-small" i18n="@@shared.added">Added</h3>
     <div>
-      {{ affiliation.createdDate | monthDayYearDateToString }}
+      {{ affiliation?.createdDate | monthDayYearDateToString }}
     </div>
   </app-display-attribute>
 
@@ -110,6 +108,6 @@
     <h3 class="orc-font-body-small" i18n="@@shared.lastModified">
       Last modified
     </h3>
-    <div>{{ affiliation.lastModified | monthDayYearDateToString }}</div>
+    <div>{{ affiliation?.lastModified | monthDayYearDateToString }}</div>
   </app-display-attribute>
 </app-panel-data>

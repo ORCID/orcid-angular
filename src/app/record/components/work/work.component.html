@@ -2,19 +2,19 @@
 <!-- GENERAL DATA DISPLAY BY DEFAULT -->
 <app-panel-data [borderBottom]="true">
   <div>
-    <div class="general-data" *ngIf="work.journalTitle">
+    <div class="general-data" *ngIf="work?.journalTitle">
       {{ work.journalTitle.value }}
     </div>
     <div class="general-data">
-      <ng-container *ngIf="work.publicationDate?.year"
+      <ng-container *ngIf="work?.publicationDate?.year"
         >{{ work.publicationDate | monthDayYearDateToString }}
         |
       </ng-container>
-      {{ work.workType.value | recordWorkTypeLabel }}
+      {{ work?.workType.value | recordWorkTypeLabel }}
       <ng-container
         *ngIf="
           togglzWorksContributors &&
-          (work.contributorsGroupedByOrcid
+          (work?.contributorsGroupedByOrcid
             | recordHolderRoles: isPublicRecord:id) as roles
         "
       >
@@ -25,7 +25,7 @@
       </ng-container>
     </div>
     <app-display-external-ids
-      [externalIdentifiers]="work.workExternalIdentifiers"
+      [externalIdentifiers]="work?.workExternalIdentifiers"
     ></app-display-external-ids>
     <div
       class="general-data"
@@ -78,14 +78,14 @@
     <a
       class="underline"
       (click)="toggleDetails.next(work)"
-      *ngIf="!panelDetailsState.state"
+      *ngIf="!panelDetailsState?.state"
       i18n="@@shared.showMoreDetail"
       >Show more detail</a
     >
     <a
       class="underline"
       (click)="toggleDetails.next(work)"
-      *ngIf="panelDetailsState.state"
+      *ngIf="panelDetailsState?.state"
       i18n="@@shared.showLessDetail"
       >Show less detail</a
     >
@@ -94,15 +94,15 @@
 
 <!-- DATA DISPLAY WHEN "MORE DETAILS" IS CLICKED -->
 
-<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState.state">
+<app-panel-data [borderBottom]="true" *ngIf="panelDetailsState?.state">
   <!-- TRANSLATED TITLE -->
-  <app-display-attribute *ngIf="work.translatedTitle?.content">
+  <app-display-attribute *ngIf="work?.translatedTitle?.content">
     <div class="row">
       <span class="translated-title-label orc-font-body-small">
         <ng-container i18n="@@works.translatedTitle"
           >Translated title</ng-container
         >&nbsp;</span
-      ><ng-container *ngIf="work.translatedTitle?.languageName">
+      ><ng-container *ngIf="work?.translatedTitle?.languageName">
         ({{ work.translatedTitle.languageName }})
       </ng-container>
     </div>
@@ -113,44 +113,44 @@
   </app-display-attribute>
 
   <!-- LANGUAGE -->
-  <app-display-attribute *ngIf="work.languageName?.value">
+  <app-display-attribute *ngIf="work?.languageName?.value">
     <h3 class="orc-font-body-small">
       <ng-container i18n="@@works.language">Language</ng-container>
     </h3>
 
     <div>
-      {{ work.languageName.value }}
+      {{ work?.languageName.value }}
     </div>
   </app-display-attribute>
 
   <!-- SUBTITLE -->
-  <app-display-attribute *ngIf="work.subtitle?.value">
+  <app-display-attribute *ngIf="work?.subtitle?.value">
     <h3 class="orc-font-body-small">
       <ng-container i18n="@@works.subtitleLabel">Subtitle</ng-container>
     </h3>
 
     <div>
-      {{ work.subtitle.value }}
+      {{ work?.subtitle.value }}
     </div>
   </app-display-attribute>
 
   <!-- URL -->
 
-  <app-display-attribute *ngIf="work.url?.value">
+  <app-display-attribute *ngIf="work?.url?.value">
     <h3 class="orc-font-body-small" i18n="@@shared.url">URL</h3>
 
     <div>
       <a
         class="underline"
-        *ngIf="isUrl(work.url.value)"
+        *ngIf="isUrl(work?.url.value)"
         rel="noopener noreferrer"
         target="_blank"
-        href="{{ work.url.value }}"
+        href="{{ work?.url.value }}"
       >
         {{ work.url.value }}
       </a>
 
-      <ng-container *ngIf="!isUrl(work.url.value)">
+      <ng-container *ngIf="!isUrl(work?.url.value)">
         {{ work.url.value }}
       </ng-container>
     </div>
@@ -249,8 +249,8 @@
           </ng-container>
           <a
             href="{{
-              work.workExternalIdentifiers[0].normalizedUrl?.value ||
-                work.workExternalIdentifiers[0].url?.value
+              work?.workExternalIdentifiers[0].normalizedUrl?.value ||
+                work?.workExternalIdentifiers[0].url?.value
             }}"
             target="_blank"
             rel="noopener noreferrer"
@@ -265,10 +265,10 @@
     <!--    todo @DanielPalafox Remove div once togglz is removed-->
     <div *ngIf="!togglzWorksContributors">
       <div
-        *ngFor="let contributor of work.contributors"
+        *ngFor="let contributor of work?.contributors"
         class="padding-level-3"
       >
-        <ng-container *ngIf="contributor.creditName">
+        <ng-container *ngIf="contributor?.creditName">
           <ng-container
             *ngIf="
               contributor?.creditName?.value !== privateName;
@@ -340,7 +340,7 @@
               >{{ work.citation.citation.value | formatBibtex }} </pre
             >
           </ng-container>
-          <ng-container *ngIf="work.citation?.citationType?.value === 'bibtex'">
+          <ng-container *ngIf="work?.citation?.citationType?.value === 'bibtex'">
             <br />
             <br *ngIf="!showExpandedFormatting" />
             <a

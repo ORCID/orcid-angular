@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { EnvironmentBannerComponent } from './environment-banner.component'
+import { WINDOW_PROVIDERS } from '../../cdk/window'
+import { CookieService } from 'ngx-cookie-service'
 
 describe('EnvironmentBannerComponent', () => {
   let component: EnvironmentBannerComponent
@@ -9,6 +11,10 @@ describe('EnvironmentBannerComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EnvironmentBannerComponent],
+      providers: [
+        WINDOW_PROVIDERS,
+        CookieService
+      ]
     }).compileComponents()
   })
 

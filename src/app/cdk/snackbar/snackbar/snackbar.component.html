@@ -10,11 +10,11 @@
   </button>
 </div>
 <div class="box mat-body-1">
-  <div class="mat-subheading-2">{{ data.displayMessage.title }}</div>
+  <div class="mat-subheading-2">{{ data.displayMessage?.title }}</div>
   <div class="error-container">
-    {{ data.displayMessage.message }}
+    {{ data.displayMessage?.message }}
     <a
-      *ngIf="data.displayMessage.action && data.displayMessage.actionURL"
+      *ngIf="data.displayMessage?.action && data.displayMessage?.actionURL"
       [href]="data.displayMessage.actionURL"
       rel="noopener noreferrer"
       target="_blank"
@@ -23,5 +23,5 @@
       {{ data.displayMessage.action }}
     </a>
   </div>
-  <div class="mat-caption">{{ data.caption }}</div>
+  <div class="mat-caption">{{ data?.caption }}</div>
 </div>

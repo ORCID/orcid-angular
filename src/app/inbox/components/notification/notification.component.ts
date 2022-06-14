@@ -130,7 +130,7 @@ export class NotificationComponent
   }
 
   notificationTitle(notification: InboxNotification) {
-    switch (notification.notificationType) {
+    switch (notification?.notificationType) {
       case 'AMENDED':
         return `${
           notification.source.sourceName.content
@@ -145,12 +145,12 @@ export class NotificationComponent
         return `${notification.subject}`
       default:
         // any subject for HTML notifications define on the backend is define on the backend
-        return `${notification.subject}`
+        return `${notification?.subject}`
     }
   }
 
   notificationDate(notification: InboxNotification) {
-    const date = new Date(notification.createdDate)
+    const date = new Date(notification?.createdDate)
     return date.toLocaleDateString('en-ZA', {
       month: '2-digit',
       day: '2-digit',

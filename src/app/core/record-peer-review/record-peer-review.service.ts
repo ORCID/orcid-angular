@@ -30,7 +30,7 @@ export class RecordPeerReviewService {
   ) {}
 
   getPeerReviewGroups(options: UserRecordOptions): Observable<PeerReview[]> {
-    if (options.cleanCacheIfExist && this.$peer) {
+    if (options?.cleanCacheIfExist && this.$peer) {
       this.$peer.next(<PeerReview[]>undefined)
     }
 

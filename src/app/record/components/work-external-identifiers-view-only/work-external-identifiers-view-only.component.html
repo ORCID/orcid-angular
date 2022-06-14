@@ -30,7 +30,7 @@
   </app-panel-data-line>
   <mat-error
     class="mat-caption"
-    *ngIf="externalIdForm.get('externalIdentifierId').hasError('validFormat')"
+    *ngIf="externalIdForm?.get('externalIdentifierId').hasError('validFormat')"
   >
     <ng-container i18n="@@works.validFormat">
       Invalid id for the selected identifier type

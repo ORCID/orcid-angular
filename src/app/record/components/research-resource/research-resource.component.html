@@ -39,9 +39,7 @@
             </span>
           </span>
           <!--End date-->
-          <span
-            *ngIf="!researchResource?.startDate && researchResource?.endDate"
-          >
+          <span *ngIf="!researchResource?.startDate && researchResource?.endDate">
             <span>{{
               researchResource.endDate | monthDayYearDateToString
             }}</span>
@@ -88,7 +86,7 @@
       class="description"
       *ngIf="getResearchResource(researchResource.putCode) as researchDetail"
     >
-      <div class="host" *ngFor="let host of researchDetail?.hosts">
+      <div class="host" *ngFor="let host of researchDetail.hosts">
         <ng-container
           *ngIf="
             getOrganizationDisambiguated(host) as organizationDisambiguated
@@ -220,7 +218,7 @@
                   [noBoldTitle]="true"
                 ></app-display-external-ids>
 
-                <div *ngIf="item?.hosts && item.hosts[0] as itemHost">
+                <div *ngIf="item.hosts && item.hosts[0] as itemHost">
                   <span>{{ itemHost.name }}</span>
                   <span
                     *ngIf="itemHost.city || itemHost.region || itemHost.country"
@@ -252,7 +250,7 @@
                 </ng-container>
               </div>
               <div
-                *ngIf="item?.hosts && item.hosts[0] as itemHost"
+                *ngIf="item.hosts && item.hosts[0] as itemHost"
                 class="description"
               >
                 <ng-container

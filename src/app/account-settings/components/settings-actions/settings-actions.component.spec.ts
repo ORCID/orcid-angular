@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SettingsActionsComponent } from './settings-actions.component'
+import { WINDOW_PROVIDERS } from '../../../cdk/window'
 
 describe('SettingsActionsComponent', () => {
   let component: SettingsActionsComponent
@@ -9,6 +10,7 @@ describe('SettingsActionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SettingsActionsComponent],
+      providers: [WINDOW_PROVIDERS]
     }).compileComponents()
   })
 

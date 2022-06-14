@@ -244,7 +244,7 @@ export class WorkFormComponent implements OnInit {
     this.workIdentifiersFormArray = this.workForm.controls
       .workIdentifiers as FormArray
 
-    currentWork.workExternalIdentifiers.forEach((workExternalId) => {
+    currentWork?.workExternalIdentifiers.forEach((workExternalId) => {
       this.addOtherWorkId(workExternalId)
     })
   }

@@ -32,17 +32,20 @@ export class RecordResearchResourceService {
   getResearchResourcePage(
     options: UserRecordOptions
   ): Observable<ResearchResourcesEndpoint> {
-    options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
-    options.offset = options.offset || 0
+    if (!options) {
+      options = {}
+    }
+    options.pageSize = options?.pageSize || DEFAULT_PAGE_SIZE
+    options.offset = options?.offset || 0
 
     let url
-    if (options.publicRecordId) {
+    if (options?.publicRecordId) {
       url = options.publicRecordId + '/researchResourcePage.json'
     } else {
       url = 'research-resources/researchResourcePage.json'
     }
 
-    if (options.cleanCacheIfExist && this.$researchResourcesSubject) {
+    if (options?.cleanCacheIfExist && this.$researchResourcesSubject) {
       this.$researchResourcesSubject.next(<ResearchResourcesEndpoint>undefined)
     }
 

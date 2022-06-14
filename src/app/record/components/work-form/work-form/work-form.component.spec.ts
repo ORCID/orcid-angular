@@ -13,6 +13,7 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RecordService } from '../../../../core/record/record.service'
 import { RecordCountriesService } from '../../../../core/record-countries/record-countries.service'
 import { FormBuilder } from '@angular/forms'
+import { SharedModule } from '../../../../shared/shared.module'
 
 describe('WorkFormComponent', () => {
   let component: WorkFormComponent
@@ -20,7 +21,11 @@ describe('WorkFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        SharedModule
+      ],
       declarations: [WorkFormComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },

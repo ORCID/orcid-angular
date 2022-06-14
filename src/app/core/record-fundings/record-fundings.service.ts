@@ -28,7 +28,7 @@ export class RecordFundingsService {
   ) {}
 
   getFundings(options: UserRecordOptions): Observable<FundingGroup[]> {
-    if (options.publicRecordId) {
+    if (options?.publicRecordId) {
       this._http
         .get<FundingGroup[]>(
           environment.API_WEB +
@@ -101,9 +101,9 @@ export class RecordFundingsService {
         environment.API_WEB +
           `fundings/fundingGroups.json?` +
           '&sort=' +
-          (options.sort != null ? options.sort : 'date') +
+          (options?.sort != null ? options.sort : 'date') +
           '&sortAsc=' +
-          (options.sortAsc != null ? options.sortAsc : false)
+          (options?.sortAsc != null ? options.sortAsc : false)
       )
       .pipe(
         retry(3),

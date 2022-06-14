@@ -82,14 +82,18 @@ export class RecordWorksService {
    * Return an observable with a list of Works
    * For full work details getDetails(id, putCode) must be called
    *
-   * @param id user Orcid id
+   * @param options
    */
   getWorks(options: UserRecordOptions): Observable<WorksEndpoint> {
-    if (options.cleanCacheIfExist && this.$workSubject) {
+    if (!options) {
+      options = {}
+    }
+
+    if (options?.cleanCacheIfExist && this.$workSubject) {
       this.$workSubject.next(<WorksEndpoint>undefined)
     }
 
-    options.pageSize = options.pageSize || DEFAULT_PAGE_SIZE
+    options.pageSize = options?.pageSize || DEFAULT_PAGE_SIZE
     options.offset = options.offset || 0
     this.pageSize = options.pageSize
     this.offset = options.offset

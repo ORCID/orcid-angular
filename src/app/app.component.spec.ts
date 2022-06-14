@@ -1,29 +1,38 @@
 import { TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { AppComponent } from './app.component'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import { WINDOW_PROVIDERS } from './cdk/window'
+import { FormBuilder } from '@angular/forms'
+import { RecordWorksService } from './core/record-works/record-works.service'
+import { PlatformInfoService } from './cdk/platform-info'
+import { ErrorHandlerService } from './core/error-handler/error-handler.service'
+import { SnackbarService } from './cdk/snackbar/snackbar.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { Overlay } from '@angular/cdk/overlay'
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
       declarations: [AppComponent],
+      providers: [
+        WINDOW_PROVIDERS,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay
+      ]
     }).compileComponents()
   })
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent)
     const app = fixture.debugElement.componentInstance
     expect(app).toBeTruthy()
-  })
-  it(`should have as title 'ng-orcid'`, () => {
-    const fixture = TestBed.createComponent(AppComponent)
-    const app = fixture.debugElement.componentInstance
-    expect(app.title).toEqual('ng-orcid')
-  })
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent)
-    fixture.detectChanges()
-    const compiled = fixture.debugElement.nativeElement
-    expect(compiled.querySelector('h1').textContent).toContain(
-      'Welcome to ng-orcid!'
-    )
   })
 })

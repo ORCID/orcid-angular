@@ -11,6 +11,7 @@ import { Overlay } from '@angular/cdk/overlay'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { SearchService } from '../../core/search/search.service'
+import { MatMenuModule } from '@angular/material/menu'
 
 describe('SearchComponent', () => {
   let component: SearchComponent
@@ -18,8 +19,12 @@ describe('SearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        MatMenuModule,
+        RouterTestingModule
+      ],
       declarations: [SearchComponent],
-      imports: [RouterTestingModule, HttpClientTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         SearchService,

@@ -10,7 +10,7 @@ import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordBiographyService } from '../../../../../core/record-biography/record-biography.service'
-import { VisibilityStringLabelPipe } from '../../../../../shared/pipes/visibility-string-label/visibility-string-label.pipe'
+import { SharedModule } from '../../../../../shared/shared.module'
 
 describe('ModalBiographyComponent', () => {
   let component: ModalBiographyComponent
@@ -19,8 +19,12 @@ describe('ModalBiographyComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [RouterTestingModule, HttpClientTestingModule],
-        declarations: [ModalBiographyComponent, VisibilityStringLabelPipe],
+        imports: [
+          HttpClientTestingModule,
+          SharedModule,
+          RouterTestingModule,
+        ],
+        declarations: [ModalBiographyComponent],
         providers: [
           { provide: MAT_DIALOG_DATA, useValue: {} },
           { provide: MatDialogRef, useValue: {} },

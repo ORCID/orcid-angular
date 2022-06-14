@@ -1,6 +1,6 @@
 <ng-container
   *ngFor="
-    let work of workStack.works;
+    let work of workStack?.works;
     trackBy: trackByWorkStack;
     let i = index;
     let last = last

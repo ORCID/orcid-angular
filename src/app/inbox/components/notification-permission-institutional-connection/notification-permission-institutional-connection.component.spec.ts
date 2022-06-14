@@ -10,7 +10,7 @@ describe('NotificationPermissionINSTITUTIONALCONNECTIONComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [NotificationPermissionInstitutionalConnectionComponent],
-      providers: [WINDOW_PROVIDERS],
+      providers: [WINDOW_PROVIDERS]
     }).compileComponents()
   })
 

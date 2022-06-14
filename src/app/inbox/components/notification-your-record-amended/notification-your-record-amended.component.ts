@@ -31,7 +31,7 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   constructor(private _errorHandler: ErrorHandlerService) {}
 
   ngOnInit(): void {
-    this.itemGroupedByType = chain(this.notification.items.items)
+    this.itemGroupedByType = chain(this.notification?.items.items)
       .groupBy('actionType')
       .map((value, key) => ({ type: key, items: value }))
       .value()
@@ -54,7 +54,7 @@ export class NotificationYourRecordAmendedComponent implements OnInit {
   }
 
   getNotificationSectionUpdatedLabel(notification: InboxNotificationAmended) {
-    switch (notification.amendedSection) {
+    switch (notification?.amendedSection) {
       case 'AFFILIATION':
         return $localize`:@@inbox.affiliations:Affiliations`
       case 'BIO':

@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { SearchComponent } from './search.component'
-import { MatMenuModule } from '@angular/material/menu'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
-import { TwoFactorAuthenticationService } from '../../../core/two-factor-authentication/two-factor-authentication.service'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../cdk/snackbar/snackbar.service'
