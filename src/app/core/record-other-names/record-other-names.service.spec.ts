@@ -16,9 +16,7 @@ describe('RecordOtherNamesService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         PlatformInfoService,
@@ -26,8 +24,8 @@ describe('RecordOtherNamesService', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     })
     service = TestBed.inject(RecordOtherNamesService)
   })

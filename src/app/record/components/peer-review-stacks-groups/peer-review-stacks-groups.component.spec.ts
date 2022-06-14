@@ -17,10 +17,7 @@ describe('PeerReviewStacksGroupsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [PeerReviewStacksGroupsComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -29,8 +26,8 @@ describe('PeerReviewStacksGroupsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   }))
 

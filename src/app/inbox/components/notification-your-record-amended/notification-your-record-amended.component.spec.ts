@@ -17,10 +17,7 @@ describe('NotificationYourRecordAmendedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [NotificationYourRecordAmendedComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -29,8 +26,8 @@ describe('NotificationYourRecordAmendedComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

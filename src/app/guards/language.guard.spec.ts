@@ -16,10 +16,7 @@ describe('LanguageGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         PlatformInfoService,
@@ -27,8 +24,8 @@ describe('LanguageGuard', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     })
     guard = TestBed.inject(LanguageGuard)
   })

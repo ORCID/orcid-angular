@@ -19,11 +19,7 @@ describe('LanguageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatMenuModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatMenuModule, RouterTestingModule],
       declarations: [LanguageComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +29,8 @@ describe('LanguageComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

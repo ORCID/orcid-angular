@@ -16,10 +16,7 @@ describe('RecordWebsitesService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         PlatformInfoService,
@@ -27,8 +24,8 @@ describe('RecordWebsitesService', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     })
     service = TestBed.inject(RecordWebsitesService)
   })

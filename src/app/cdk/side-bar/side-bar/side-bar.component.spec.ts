@@ -20,10 +20,7 @@ describe('SideBarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SideBarComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -34,8 +31,8 @@ describe('SideBarComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

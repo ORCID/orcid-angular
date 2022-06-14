@@ -18,10 +18,7 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SettingsSecurityTwoFactorAuthComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -31,8 +28,8 @@ describe('SettingsSecurityTwoFactorAuthComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

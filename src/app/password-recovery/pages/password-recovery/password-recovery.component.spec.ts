@@ -19,11 +19,7 @@ describe('PasswordRecoveryComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatChipsModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatChipsModule, RouterTestingModule],
       declarations: [PasswordRecoveryComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +29,8 @@ describe('PasswordRecoveryComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

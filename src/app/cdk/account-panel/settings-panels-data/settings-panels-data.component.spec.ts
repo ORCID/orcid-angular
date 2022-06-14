@@ -17,10 +17,7 @@ describe('SettingsPanelsDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SettingsPanelsDataComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -29,8 +26,8 @@ describe('SettingsPanelsDataComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

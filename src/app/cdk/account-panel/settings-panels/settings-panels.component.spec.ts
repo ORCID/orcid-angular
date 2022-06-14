@@ -20,7 +20,7 @@ describe('SettingsPanelsComponent', () => {
         imports: [
           HttpClientTestingModule,
           MatDialogModule,
-          RouterTestingModule
+          RouterTestingModule,
         ],
         declarations: [SettingsPanelsComponent],
         providers: [
@@ -30,8 +30,8 @@ describe('SettingsPanelsComponent', () => {
           SnackbarService,
           MatSnackBar,
           MatDialog,
-          Overlay
-        ]
+          Overlay,
+        ],
       }).compileComponents()
     })
   )

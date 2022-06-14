@@ -20,10 +20,7 @@ describe('AffiliationStacksGroupsComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule
-        ],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         declarations: [AffiliationStacksGroupsComponent],
         providers: [
           WINDOW_PROVIDERS,
@@ -34,8 +31,8 @@ describe('AffiliationStacksGroupsComponent', () => {
           SnackbarService,
           MatSnackBar,
           MatDialog,
-          Overlay
-        ]
+          Overlay,
+        ],
       }).compileComponents()
     })
   )

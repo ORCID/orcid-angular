@@ -11,10 +11,7 @@ describe('EnvironmentBannerComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EnvironmentBannerComponent],
-      providers: [
-        WINDOW_PROVIDERS,
-        CookieService
-      ]
+      providers: [WINDOW_PROVIDERS, CookieService],
     }).compileComponents()
   })
 

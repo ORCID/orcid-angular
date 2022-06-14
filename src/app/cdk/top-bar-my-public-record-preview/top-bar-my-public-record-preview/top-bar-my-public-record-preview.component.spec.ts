@@ -19,10 +19,7 @@ describe('TopBarMyPublicRecordPreviewComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [TopBarMyPublicRecordPreviewComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +30,8 @@ describe('TopBarMyPublicRecordPreviewComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

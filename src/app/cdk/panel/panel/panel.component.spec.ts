@@ -24,11 +24,7 @@ describe('PanelComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
       declarations: [PanelComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -44,8 +40,8 @@ describe('PanelComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

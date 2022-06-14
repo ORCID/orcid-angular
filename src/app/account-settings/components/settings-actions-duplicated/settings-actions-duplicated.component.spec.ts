@@ -20,11 +20,7 @@ describe('SettingsActionsDuplicatedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
       declarations: [SettingsActionsDuplicatedComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -36,8 +32,8 @@ describe('SettingsActionsDuplicatedComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

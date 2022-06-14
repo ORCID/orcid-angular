@@ -15,10 +15,7 @@ describe('TwoFactorSigninGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         PlatformInfoService,
@@ -26,8 +23,8 @@ describe('TwoFactorSigninGuard', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     })
     guard = TestBed.inject(TwoFactorSigninGuard)
   })

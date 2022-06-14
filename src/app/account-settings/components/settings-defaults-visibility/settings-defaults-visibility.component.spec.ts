@@ -21,10 +21,7 @@ describe('SettingsDefaultsVisibilityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SettingsDefaultsVisibilityComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -36,8 +33,8 @@ describe('SettingsDefaultsVisibilityComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

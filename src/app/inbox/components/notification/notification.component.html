@@ -13,7 +13,10 @@
         {{ notificationTypeLabel(notificationType) }}
       </ng-container>
     </div>
-    <div class="title mat-body-1" [id]="'notification-' + notification?.putCode">
+    <div
+      class="title mat-body-1"
+      [id]="'notification-' + notification?.putCode"
+    >
       {{ notificationTitle(notification) }}
     </div>
     <div class="date-archive-container">

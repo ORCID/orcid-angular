@@ -18,11 +18,7 @@ describe('SettingsSecurityAlternateSignInComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
       declarations: [SettingsSecurityAlternateSignInComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -32,8 +28,8 @@ describe('SettingsSecurityAlternateSignInComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

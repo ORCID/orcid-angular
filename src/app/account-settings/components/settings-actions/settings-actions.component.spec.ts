@@ -10,7 +10,7 @@ describe('SettingsActionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SettingsActionsComponent],
-      providers: [WINDOW_PROVIDERS]
+      providers: [WINDOW_PROVIDERS],
     }).compileComponents()
   })
 

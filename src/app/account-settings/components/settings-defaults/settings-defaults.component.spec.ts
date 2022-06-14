@@ -10,7 +10,7 @@ describe('SettingsDefaultsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SettingsDefaultsComponent],
-      providers: [WINDOW_PROVIDERS]
+      providers: [WINDOW_PROVIDERS],
     }).compileComponents()
   })
 

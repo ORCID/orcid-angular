@@ -17,10 +17,7 @@ describe('LinkAccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [LinkAccountComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -29,8 +26,8 @@ describe('LinkAccountComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

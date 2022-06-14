@@ -12,21 +12,20 @@ import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
 describe('OrganizationsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-      RouterTestingModule
-    ],
-    providers: [
-      WINDOW_PROVIDERS,
-      PlatformInfoService,
-      ErrorHandlerService,
-      SnackbarService,
-      MatSnackBar,
-      MatDialog,
-      Overlay
-    ]
-  }))
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        WINDOW_PROVIDERS,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    })
+  )
 
   it('should be created', () => {
     const service: OauthService = TestBed.inject(OauthService)

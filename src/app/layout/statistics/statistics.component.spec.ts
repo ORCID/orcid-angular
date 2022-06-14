@@ -18,10 +18,7 @@ describe('StatisticsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [StatisticsComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -31,8 +28,8 @@ describe('StatisticsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

@@ -19,10 +19,7 @@ describe('FormAntiRobotsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [FormAntiRobotsComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +30,8 @@ describe('FormAntiRobotsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

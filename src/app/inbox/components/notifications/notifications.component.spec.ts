@@ -20,10 +20,7 @@ describe('NotificationsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [NotificationsComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -34,8 +31,8 @@ describe('NotificationsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

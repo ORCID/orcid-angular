@@ -18,10 +18,7 @@ describe('AuthorizeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [AuthorizeComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -31,8 +28,8 @@ describe('AuthorizeComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

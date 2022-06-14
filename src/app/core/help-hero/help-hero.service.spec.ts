@@ -7,7 +7,7 @@ describe('HelpheroService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WINDOW_PROVIDERS]
+      providers: [WINDOW_PROVIDERS],
     })
     service = TestBed.inject(HelpHeroService)
   })

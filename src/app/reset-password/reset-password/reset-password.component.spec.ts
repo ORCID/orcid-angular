@@ -21,11 +21,7 @@ describe('ResetPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MdePopoverModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MdePopoverModule, RouterTestingModule],
       declarations: [ResetPasswordComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -37,8 +33,8 @@ describe('ResetPasswordComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

@@ -8,7 +8,11 @@ import { PlatformInfoService } from '../../../platform-info'
 import { ErrorHandlerService } from '../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordPersonIdentifierService } from '../../../../core/record-personal-identifiers/record-person-identifier.service'
 
@@ -19,10 +23,7 @@ describe('ModalPersonIdentifiersComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule
-        ],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         declarations: [ModalPersonIdentifiersComponent],
         providers: [
           { provide: MatDialogRef, useValue: {} },
@@ -34,8 +35,8 @@ describe('ModalPersonIdentifiersComponent', () => {
           SnackbarService,
           MatSnackBar,
           MatDialog,
-          Overlay
-        ]
+          Overlay,
+        ],
       }).compileComponents()
     })
   )

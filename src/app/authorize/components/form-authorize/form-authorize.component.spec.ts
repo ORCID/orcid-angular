@@ -20,10 +20,7 @@ describe('FormAuthorizeComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule
-        ],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         declarations: [FormAuthorizeComponent],
         providers: [
           WINDOW_PROVIDERS,
@@ -34,8 +31,8 @@ describe('FormAuthorizeComponent', () => {
           SnackbarService,
           MatSnackBar,
           MatDialog,
-          Overlay
-        ]
+          Overlay,
+        ],
       }).compileComponents()
     })
   )

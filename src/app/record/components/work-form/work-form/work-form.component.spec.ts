@@ -21,11 +21,7 @@ describe('WorkFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        SharedModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule, SharedModule],
       declarations: [WorkFormComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },

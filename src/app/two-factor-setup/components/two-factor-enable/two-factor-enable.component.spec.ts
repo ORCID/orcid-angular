@@ -96,7 +96,7 @@ describe('TwoFactorEnableComponent', () => {
     await fixture.whenStable()
 
     const twoFactorButton = debugElement.query(By.css('#cy-continue'))
-    twoFactorButton.nativeElement.click();
+    twoFactorButton.nativeElement.click()
 
     fixture.detectChanges()
 

@@ -340,7 +340,9 @@
               >{{ work.citation.citation.value | formatBibtex }} </pre
             >
           </ng-container>
-          <ng-container *ngIf="work?.citation?.citationType?.value === 'bibtex'">
+          <ng-container
+            *ngIf="work?.citation?.citationType?.value === 'bibtex'"
+          >
             <br />
             <br *ngIf="!showExpandedFormatting" />
             <a

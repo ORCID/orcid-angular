@@ -20,10 +20,7 @@ describe('FormSignInComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [FormSignInComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -35,8 +32,8 @@ describe('FormSignInComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

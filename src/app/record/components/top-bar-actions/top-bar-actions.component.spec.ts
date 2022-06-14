@@ -18,10 +18,7 @@ describe('TopBarActionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [TopBarActionsComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -30,8 +27,8 @@ describe('TopBarActionsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

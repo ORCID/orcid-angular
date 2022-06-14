@@ -8,7 +8,11 @@ import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
 describe('ModalHeaderComponent', () => {
@@ -18,10 +22,7 @@ describe('ModalHeaderComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule
-        ],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         declarations: [ModalHeaderComponent],
         providers: [
           { provide: MatDialogRef, useValue: {} },
@@ -32,8 +33,8 @@ describe('ModalHeaderComponent', () => {
           SnackbarService,
           MatSnackBar,
           MatDialog,
-          Overlay
-        ]
+          Overlay,
+        ],
       }).compileComponents()
     })
   )

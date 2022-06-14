@@ -19,11 +19,7 @@ describe('TwoFactorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MdePopoverModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MdePopoverModule, RouterTestingModule],
       declarations: [TwoFactorComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +29,8 @@ describe('TwoFactorComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ModalWorksSearchLinkComponent } from './modal-works-search-link.component'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../../../../cdk/window'
 import { FormBuilder } from '@angular/forms'
 import { RecordWorksService } from '../../../../../core/record-works/record-works.service'
@@ -19,10 +23,7 @@ describe('ModalWorksSearchLink.Component.HtmlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [ModalWorksSearchLinkComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -34,8 +35,8 @@ describe('ModalWorksSearchLink.Component.HtmlComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

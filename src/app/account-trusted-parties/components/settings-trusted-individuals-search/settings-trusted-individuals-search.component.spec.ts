@@ -20,11 +20,7 @@ describe('SettingsTrustedIndividualsSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
       declarations: [SettingsTrustedIndividualsSearchComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -36,8 +32,8 @@ describe('SettingsTrustedIndividualsSearchComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

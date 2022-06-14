@@ -17,10 +17,7 @@ describe('AuthenticatedNoDelegatorGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         UserService,
@@ -29,8 +26,8 @@ describe('AuthenticatedNoDelegatorGuard', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     })
     guard = TestBed.inject(AuthenticatedNoDelegatorGuard)
   })

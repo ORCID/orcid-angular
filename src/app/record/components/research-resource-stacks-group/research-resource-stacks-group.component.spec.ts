@@ -21,10 +21,7 @@ describe('ResearchResourcesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [ResearchResourceStacksGroupComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -37,8 +34,8 @@ describe('ResearchResourcesComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

@@ -16,10 +16,8 @@ describe('ResearchResourceComponent', () => {
   let fixture: ComponentFixture<ResearchResourceComponent>
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({ imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [ResearchResourceComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -28,8 +26,8 @@ describe('ResearchResourceComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

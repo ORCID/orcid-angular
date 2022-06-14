@@ -12,7 +12,7 @@ describe('SkipMainNavComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [SkipMainNavComponent],
-      providers: [WINDOW_PROVIDERS]
+      providers: [WINDOW_PROVIDERS],
     }).compileComponents()
   })
 

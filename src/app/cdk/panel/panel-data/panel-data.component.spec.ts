@@ -18,10 +18,7 @@ describe('PanelDataComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule
-        ],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         declarations: [PanelDataComponent],
         providers: [
           WINDOW_PROVIDERS,
@@ -30,8 +27,8 @@ describe('PanelDataComponent', () => {
           SnackbarService,
           MatSnackBar,
           MatDialog,
-          Overlay
-        ]
+          Overlay,
+        ],
       }).compileComponents()
     })
   )

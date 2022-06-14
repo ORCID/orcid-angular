@@ -18,10 +18,7 @@ describe('ModalFundingSearchLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [ModalFundingSearchLinkComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -32,8 +29,8 @@ describe('ModalFundingSearchLinkComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

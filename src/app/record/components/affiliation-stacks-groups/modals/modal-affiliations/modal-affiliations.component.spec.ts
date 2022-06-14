@@ -8,7 +8,11 @@ import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { FormBuilder } from '@angular/forms'
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
@@ -24,7 +28,7 @@ describe('ModalAffiliationsComponent', () => {
         HttpClientTestingModule,
         MatAutocompleteModule,
         RouterTestingModule,
-        SharedModule
+        SharedModule,
       ],
       declarations: [ModalAffiliationsComponent],
       providers: [
@@ -37,8 +41,8 @@ describe('ModalAffiliationsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

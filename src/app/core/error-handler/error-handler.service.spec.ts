@@ -11,20 +11,19 @@ import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
 describe('ErrorHandlerService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-      RouterTestingModule
-    ],
-    providers: [
-      WINDOW_PROVIDERS,
-      PlatformInfoService,
-      SnackbarService,
-      MatSnackBar,
-      MatDialog,
-      Overlay
-    ]
-  }))
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        WINDOW_PROVIDERS,
+        PlatformInfoService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    })
+  )
 
   it('should be created', () => {
     const service: ErrorHandlerService = TestBed.inject(ErrorHandlerService)

@@ -17,11 +17,7 @@ describe('SettingsUsersThatThrustYouComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
       declarations: [SettingsUsersThatThrustYouComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -30,8 +26,8 @@ describe('SettingsUsersThatThrustYouComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

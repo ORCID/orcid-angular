@@ -19,10 +19,7 @@ describe('SettingsDefaultsLanguageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SettingsDefaultsLanguageComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +30,8 @@ describe('SettingsDefaultsLanguageComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

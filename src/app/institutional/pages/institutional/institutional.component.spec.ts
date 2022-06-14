@@ -21,7 +21,7 @@ describe('InstitutionalComponent', () => {
       imports: [
         HttpClientTestingModule,
         MatAutocompleteModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [InstitutionalComponent],
       providers: [
@@ -31,8 +31,8 @@ describe('InstitutionalComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

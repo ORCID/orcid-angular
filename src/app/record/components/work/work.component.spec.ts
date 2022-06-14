@@ -20,11 +20,7 @@ describe('WorkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        SharedModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule, SharedModule],
       declarations: [WorkComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -35,8 +31,8 @@ describe('WorkComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

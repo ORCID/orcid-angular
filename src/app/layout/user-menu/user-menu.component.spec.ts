@@ -19,11 +19,7 @@ describe('UserMenuComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatMenuModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatMenuModule, RouterTestingModule],
       declarations: [UserMenuComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +29,8 @@ describe('UserMenuComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

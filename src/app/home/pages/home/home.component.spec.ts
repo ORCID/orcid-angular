@@ -22,7 +22,7 @@ describe('HomeComponent', () => {
       imports: [
         HttpClientTestingModule,
         NoopAnimationsModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [HomeComponent],
       providers: [
@@ -32,8 +32,8 @@ describe('HomeComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

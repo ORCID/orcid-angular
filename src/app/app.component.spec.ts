@@ -2,7 +2,11 @@ import { TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { AppComponent } from './app.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from './cdk/window'
 import { FormBuilder } from '@angular/forms'
 import { RecordWorksService } from './core/record-works/record-works.service'
@@ -14,10 +18,7 @@ import { Overlay } from '@angular/cdk/overlay'
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [AppComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -26,8 +27,8 @@ describe('AppComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
   it('should create the app', () => {

@@ -11,21 +11,20 @@ import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
 describe('SnackbarService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-      RouterTestingModule
-    ],
-    providers: [
-      WINDOW_PROVIDERS,
-      PlatformInfoService,
-      ErrorHandlerService,
-      SnackbarService,
-      MatSnackBar,
-      MatDialog,
-      Overlay
-    ]
-  }))
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        WINDOW_PROVIDERS,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    })
+  )
 
   it('should be created', () => {
     const service: SnackbarService = TestBed.inject(SnackbarService)

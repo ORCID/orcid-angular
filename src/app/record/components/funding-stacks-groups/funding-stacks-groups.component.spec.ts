@@ -22,10 +22,7 @@ describe('FundingStacksGroupsComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule
-        ],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         declarations: [FundingStacksGroupsComponent],
         providers: [
           WINDOW_PROVIDERS,
@@ -38,8 +35,8 @@ describe('FundingStacksGroupsComponent', () => {
           SnackbarService,
           MatSnackBar,
           MatDialog,
-          Overlay
-        ]
+          Overlay,
+        ],
       }).compileComponents()
     })
   )

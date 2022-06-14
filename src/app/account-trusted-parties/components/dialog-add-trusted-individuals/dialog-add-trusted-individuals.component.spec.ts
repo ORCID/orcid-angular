@@ -3,7 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { DialogAddTrustedIndividualsComponent } from './dialog-add-trusted-individuals.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { FormBuilder } from '@angular/forms'
 import { RecordWorksService } from '../../../core/record-works/record-works.service'
@@ -19,10 +23,7 @@ describe('DialogAddTrustedIndividualsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [DialogAddTrustedIndividualsComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -33,8 +34,8 @@ describe('DialogAddTrustedIndividualsComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

@@ -13,8 +13,8 @@ describe('DialogAddTrustedIndividualsComponent', () => {
       declarations: [DialogAddTrustedIndividualsYourOwnEmailComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: {} }
-      ]
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+      ],
     }).compileComponents()
   })
 

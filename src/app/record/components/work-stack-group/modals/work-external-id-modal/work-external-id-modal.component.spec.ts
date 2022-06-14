@@ -19,10 +19,7 @@ describe('WorkDoiModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [WorkExternalIdModalComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -34,8 +31,8 @@ describe('WorkDoiModalComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

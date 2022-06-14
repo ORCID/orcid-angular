@@ -14,23 +14,22 @@ import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
 describe('LanguageService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-      RouterTestingModule
-    ],
-    providers: [
-      WINDOW_PROVIDERS,
-      AffiliationsSortService,
-      RecordAffiliationsGroupingService,
-      PlatformInfoService,
-      ErrorHandlerService,
-      SnackbarService,
-      MatSnackBar,
-      MatDialog,
-      Overlay
-    ]
-  }))
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        WINDOW_PROVIDERS,
+        AffiliationsSortService,
+        RecordAffiliationsGroupingService,
+        PlatformInfoService,
+        ErrorHandlerService,
+        SnackbarService,
+        MatSnackBar,
+        MatDialog,
+        Overlay,
+      ],
+    })
+  )
 
   it('should be created', () => {
     const service: LanguageService = TestBed.inject(LanguageService)

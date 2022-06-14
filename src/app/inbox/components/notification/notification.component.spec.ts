@@ -22,7 +22,7 @@ describe('NotificationComponent', () => {
       imports: [
         HttpClientTestingModule,
         NoopAnimationsModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [NotificationComponent],
       providers: [
@@ -33,8 +33,8 @@ describe('NotificationComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

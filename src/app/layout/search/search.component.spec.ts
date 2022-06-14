@@ -19,11 +19,7 @@ describe('SearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatMenuModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatMenuModule, RouterTestingModule],
       declarations: [SearchComponent],
       providers: [
         WINDOW_PROVIDERS,

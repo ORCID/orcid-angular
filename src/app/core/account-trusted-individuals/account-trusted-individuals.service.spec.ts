@@ -10,16 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { MatDialog } from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 
-
 describe('AccountTrustedIndividualsService', () => {
   let service: AccountTrustedIndividualsService
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
         WINDOW_PROVIDERS,
         ErrorHandlerService,
@@ -27,8 +23,8 @@ describe('AccountTrustedIndividualsService', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     })
     service = TestBed.inject(AccountTrustedIndividualsService)
   })

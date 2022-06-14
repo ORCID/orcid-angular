@@ -8,7 +8,11 @@ import { WINDOW_PROVIDERS } from '../../window'
 import { PlatformInfoService } from '../../platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../snackbar.service'
-import { MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar'
+import {
+  MAT_SNACK_BAR_DATA,
+  MatSnackBar,
+  MatSnackBarRef,
+} from '@angular/material/snack-bar'
 import { Overlay } from '@angular/cdk/overlay'
 
 describe('SnackbarComponent', () => {
@@ -17,10 +21,7 @@ describe('SnackbarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SnackbarComponent],
       providers: [
         { provide: MatSnackBarRef, useValue: {} },
@@ -31,8 +32,8 @@ describe('SnackbarComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

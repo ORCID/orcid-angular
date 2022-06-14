@@ -19,10 +19,7 @@ describe('OauthErrorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [OauthErrorComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -33,8 +30,8 @@ describe('OauthErrorComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

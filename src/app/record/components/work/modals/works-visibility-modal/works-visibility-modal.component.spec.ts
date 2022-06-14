@@ -9,7 +9,11 @@ import { PlatformInfoService } from '../../../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../../../cdk/snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { SharedModule } from '../../../../../shared/shared.module'
 
@@ -19,11 +23,7 @@ describe('WorksVisibilityModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        SharedModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule, SharedModule],
       declarations: [WorksVisibilityModalComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -35,8 +35,8 @@ describe('WorksVisibilityModalComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

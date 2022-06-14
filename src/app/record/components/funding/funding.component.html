@@ -104,19 +104,15 @@
     </app-display-attribute>
   </ng-container>
   <!-- AMOUNT -->
-  <ng-container
-    class="margin-top-1"
-    *ngIf="funding?.amount?.value"
-  >
+  <ng-container class="margin-top-1" *ngIf="funding?.amount?.value">
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@funding.amount">
         Total funding amount
       </h3>
       <div>
-        <ng-container
-          *ngIf="funding?.currencyCode?.value"
-          >{{ funding.currencyCode.value }}</ng-container
-        >
+        <ng-container *ngIf="funding?.currencyCode?.value">{{
+          funding.currencyCode.value
+        }}</ng-container>
         {{ funding.amount.value }}
       </div>
     </app-display-attribute>
@@ -145,10 +141,7 @@
     </app-display-attribute>
   </ng-container>
   <!-- DESCRIPTION -->
-  <ng-container
-    class="margin-top-1"
-    *ngIf="funding?.description?.value"
-  >
+  <ng-container class="margin-top-1" *ngIf="funding?.description?.value">
     <app-display-attribute>
       <h3 class="orc-font-body-small" i18n="@@funding.description">
         Description

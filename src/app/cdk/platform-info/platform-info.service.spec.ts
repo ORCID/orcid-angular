@@ -7,16 +7,12 @@ import { WINDOW_PROVIDERS } from '../window'
 import { Platform } from '@angular/cdk/platform'
 
 describe('PlatformInfoService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-      RouterTestingModule
-    ],
-    providers: [
-      WINDOW_PROVIDERS,
-      PlatformInfoService,
-    ]
-  }))
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [WINDOW_PROVIDERS, PlatformInfoService],
+    })
+  )
 
   it('should be created', () => {
     const service: PlatformInfoService = TestBed.inject(PlatformInfoService)

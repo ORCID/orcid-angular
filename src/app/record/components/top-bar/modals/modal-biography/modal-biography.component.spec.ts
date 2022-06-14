@@ -19,11 +19,7 @@ describe('ModalBiographyComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          SharedModule,
-          RouterTestingModule,
-        ],
+        imports: [HttpClientTestingModule, SharedModule, RouterTestingModule],
         declarations: [ModalBiographyComponent],
         providers: [
           { provide: MAT_DIALOG_DATA, useValue: {} },

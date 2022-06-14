@@ -19,11 +19,7 @@ describe('TopBarVerificationEmailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatDialogModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, MatDialogModule, RouterTestingModule],
       declarations: [TopBarVerificationEmailComponent],
       providers: [
         WINDOW_PROVIDERS,
@@ -34,8 +30,8 @@ describe('TopBarVerificationEmailComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 

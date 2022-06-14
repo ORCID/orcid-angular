@@ -3,7 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { SettingsActionsDeactivateComponent } from './settings-actions-deactivate.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { RouterTestingModule } from '@angular/router/testing'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { WINDOW_PROVIDERS } from '../../../cdk/window'
 import { PlatformInfoService } from '../../../cdk/platform-info'
 import { ErrorHandlerService } from '../../../core/error-handler/error-handler.service'
@@ -18,10 +22,7 @@ describe('SettingsActionsDeactivateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule
-      ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [SettingsActionsDeactivateComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
@@ -33,8 +34,8 @@ describe('SettingsActionsDeactivateComponent', () => {
         SnackbarService,
         MatSnackBar,
         MatDialog,
-        Overlay
-      ]
+        Overlay,
+      ],
     }).compileComponents()
   })
 
