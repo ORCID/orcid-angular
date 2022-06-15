@@ -19,7 +19,7 @@ export default defineConfig({
     membersAPI_fundingsEndpoint: '/funding',
     membersAPI_workEndpoint: '/work',
     membersAPI_peerReviewEndpoint: '/peer-review',
-    registrationPage:'https://qa.orcid.org/register'
+    registrationPage: 'https://qa.orcid.org/register',
   },
   chromeWebSecurity: false,
   viewportWidth: 1000,
