@@ -95,7 +95,8 @@ export class WorkFormComponent implements OnInit {
   ngOrcidMonth = $localize`:@@shared.month:Month`
   ngOrcidDay = $localize`:@@shared.day:Day`
   ngOrcidSelectLanguage = $localize`:@@shared.selectLanguage:Select a language`
-  ngOrcidSelectACountry = $localize`:@@shared.selectACountry:Select a country`
+  ngOrcidSelectACitationType = $localize`:@@works.selectACitationType:Select a citation type`
+  ngOrcidSelectACountryOrLocation = $localize`:@@shared.selectACountryOrLocation:Select a country or location`
   ngOrcidDefaultVisibilityLabel = $localize`:@@shared.visibilityDescription:Control who can see this information by setting the visibility. Your default visibility is`
   defaultVisibility: VisibilityStrings
 
@@ -118,10 +119,10 @@ export class WorkFormComponent implements OnInit {
     private _recordCountryService: RecordCountriesService,
     private _snackBar: SnackbarService,
     private _record: RecordService,
-
     @Inject(WINDOW) private _window: Window,
-    @Inject(MAT_DIALOG_DATA) public data: UserRecord
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: UserRecord,
+  ) {
+  }
 
   ngOnInit(): void {
     this._recordCountryService
@@ -157,14 +158,14 @@ export class WorkFormComponent implements OnInit {
             | WorkConferenceTypes
             | WorkPublicationTypes
             | WorkIntellectualPropertyTypes
-            | WorkOtherOutputTypes
+            | WorkOtherOutputTypes,
         ) => {
           if (value) {
             this.dynamicTitle = WorkTypesTitle[value]
           } else {
             this.dynamicTitle = WorksTitleName.journalTitle
           }
-        }
+        },
       )
   }
 
@@ -186,7 +187,7 @@ export class WorkFormComponent implements OnInit {
             [],
           ],
         },
-        { validator: translatedTitleValidator }
+        { validator: translatedTitleValidator },
       ),
       subtitle: [
         currentWork?.subtitle?.value || '',
@@ -208,7 +209,7 @@ export class WorkFormComponent implements OnInit {
             [],
           ],
         },
-        { validator: dateValidator('publication') }
+        { validator: dateValidator('publication') },
       ),
       url: [
         currentWork?.url?.value || '',
@@ -226,7 +227,7 @@ export class WorkFormComponent implements OnInit {
             [Validators.maxLength(this.MAX_LENGTH_DESCRIPTION)],
           ],
         },
-        { validator: workCitationValidator }
+        { validator: workCitationValidator },
       ),
       workIdentifiers: new FormArray([]),
       languageCode: [currentWork?.languageCode?.value || '', []],
@@ -234,7 +235,7 @@ export class WorkFormComponent implements OnInit {
 
       visibility: [
         currentWork?.visibility?.visibility ||
-          currentWork.visibility.visibility,
+        currentWork.visibility.visibility,
         [],
       ],
     })
@@ -248,7 +249,7 @@ export class WorkFormComponent implements OnInit {
 
   private externalIdentifierTypeAsyncValidator(
     formGroup: FormGroup,
-    externalIdentifierType: string
+    externalIdentifierType: string,
   ): AsyncValidatorFn {
     return (control: AbstractControl) => {
       return this._workService
@@ -259,7 +260,7 @@ export class WorkFormComponent implements OnInit {
               // do not overwrite the existing URL
             } else if (value.generatedUrl) {
               formGroup.controls.externalIdentifierUrl.setValue(
-                decodeURI(value.generatedUrl)
+                decodeURI(value.generatedUrl),
               )
             } else if (
               !value.validFormat ||
@@ -280,24 +281,24 @@ export class WorkFormComponent implements OnInit {
                 validFormat: true,
               }
             }
-          })
+          }),
         )
     }
   }
 
   private checkWorkIdentifiersChanges(
     index: number,
-    workIdentifiersArray: FormArray
+    workIdentifiersArray: FormArray,
   ) {
     const formGroup = this.workIdentifiersFormArray.controls[index] as FormGroup
     merge(
       this.$workTypeUpdateEvent,
-      formGroup.controls.externalIdentifierType.valueChanges
+      formGroup.controls.externalIdentifierType.valueChanges,
     )
       .pipe(
         startWith(formGroup.controls.externalIdentifierType.value),
         // Maps evert value to externalIdentifierTyp since $workTypeUpdateEvent trigger null events
-        map((x) => formGroup.controls.externalIdentifierType.value)
+        map((x) => formGroup.controls.externalIdentifierType.value),
       )
       .subscribe((externalIdentifierType) => {
         this.manageWorkIdentifierTypeUpdates(externalIdentifierType, formGroup)
@@ -310,14 +311,14 @@ export class WorkFormComponent implements OnInit {
     formGroup.controls.externalRelationship.valueChanges.subscribe(() => {
       this.manageWorkIdentyfiersRelationshipUpdates(
         workIdentifiersArray,
-        formGroup
+        formGroup,
       )
     })
   }
 
   private manageWorkIdentifierTypeUpdates(
     externalIdentifierType: any,
-    formGroup: FormGroup
+    formGroup: FormGroup,
   ) {
     if (externalIdentifierType !== '') {
       formGroup.controls.externalIdentifierId.setValidators([
@@ -326,12 +327,12 @@ export class WorkFormComponent implements OnInit {
       formGroup.controls.externalIdentifierId.setAsyncValidators(
         this.externalIdentifierTypeAsyncValidator(
           formGroup,
-          externalIdentifierType
-        )
+          externalIdentifierType,
+        ),
       )
       formGroup.controls.externalIdentifierId.updateValueAndValidity()
       const suggestedRelationship = this.getOrcidRecommendedRelationShip(
-        externalIdentifierType
+        externalIdentifierType,
       )
 
       if (suggestedRelationship) {
@@ -362,7 +363,7 @@ export class WorkFormComponent implements OnInit {
 
   private manageWorkIdentyfiersRelationshipUpdates(
     workIdentifiersArray: FormArray,
-    formGroup: FormGroup
+    formGroup: FormGroup,
   ) {
     workIdentifiersArray.controls.forEach((element: FormGroup) => {
       // Updates the value and validity of all the external identifier relationships on the array
@@ -370,7 +371,7 @@ export class WorkFormComponent implements OnInit {
       if (
         !Object.is(
           element.controls.externalRelationship,
-          formGroup.controls.externalRelationship
+          formGroup.controls.externalRelationship,
         )
       ) {
         element.controls.externalRelationship.updateValueAndValidity({
@@ -397,8 +398,8 @@ export class WorkFormComponent implements OnInit {
       ],
       externalIdentifierUrl: [
         existingExternalId?.normalizedUrl?.value ||
-          existingExternalId?.url?.value ||
-          '',
+        existingExternalId?.url?.value ||
+        '',
         [Validators.pattern(URL_REGEXP)],
       ],
       externalRelationship: [
@@ -409,16 +410,17 @@ export class WorkFormComponent implements OnInit {
     workIdentifierForm.setValidators([
       WorkIdentifiers.fundedByInvalidRelationship(),
       WorkIdentifiers.versionOfInvalidRelationship(
-        this.workIdentifiersFormArray
+        this.workIdentifiersFormArray,
       ),
     ])
     this.workIdentifiersFormArray.push(workIdentifierForm)
 
     this.checkWorkIdentifiersChanges(
       this.workIdentifiersFormArray.controls.length - 1,
-      this.workIdentifiersFormArray
+      this.workIdentifiersFormArray,
     )
   }
+
   deleteWorkId(id: number) {
     this.workIdentifiersFormArrayDisplayState.splice(id, 1)
     this.workIdentifiersFormArray.removeAt(id)
@@ -481,7 +483,7 @@ export class WorkFormComponent implements OnInit {
                 value: workExternalId.externalRelationship,
               },
             }
-          }
+          },
         ),
         title: {
           value: this.workForm.value.title,
@@ -491,10 +493,10 @@ export class WorkFormComponent implements OnInit {
         },
         translatedTitle: {
           content: this.workForm.get(
-            'translatedTitleGroup.translatedTitleContent'
+            'translatedTitleGroup.translatedTitleContent',
           ).value,
           languageCode: this.workForm.get(
-            'translatedTitleGroup.translatedTitleLanguage'
+            'translatedTitleGroup.translatedTitleLanguage',
           ).value,
           errors: [],
         },

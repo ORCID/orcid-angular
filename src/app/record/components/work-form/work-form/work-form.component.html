@@ -445,14 +445,10 @@
         class="mat-form-field-min input-container"
       >
         <mat-select
-          placeholder="Placeholder"
+          placeholder="{{ ngOrcidSelectACitationType }}"
           formControlName="citationType"
           id="cy-citation-type"
         >
-          <mat-option [value]="''" i18n="@@works.selectACitationType">
-            Select a citation type
-          </mat-option>
-
           <mat-option
             *ngFor="let item of citationTypes | keyvalue"
             [value]="item.key"
@@ -664,8 +660,8 @@
   <div>
     <div class="row">
       <label for="country-input" class="mat-caption">
-        <strong i18n="@@works.countryPublication"
-          >Country of publication</strong
+        <strong i18n="@@works.countryOrLocationOfPublication"
+          >Country/Location of publication</strong
         >
       </label>
     </div>
@@ -676,7 +672,7 @@
       >
         <mat-select
           id="country-input"
-          placeholder="{{ ngOrcidSelectACountry }}"
+          placeholder="{{ ngOrcidSelectACountryOrLocation }}"
           formControlName="countryCode"
         >
           <mat-option *ngFor="let item of countryCodes" [value]="item.value">
