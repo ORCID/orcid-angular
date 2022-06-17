@@ -1,21 +1,21 @@
 /// <reference types="cypress" />
 
 import userData from '../../fixtures/testing-users.fixture.json'
-const jsonfile = require('../../fixtures/funding-two-sources-grouping.fixture.json')
+const jsonfile = require('../../fixtures/funding-duplicate-grouping.fixture.json')
 
 describe('My orcid - funding duplicates grouping', async function () {
   before(() => {
+    //member adds existing funding
     const endpoint =
-      Cypress.env('membersAPI-URL') +
+      Cypress.env('membersAPI_URL') +
       userData.cyFundingDuplicatesUser.oid +
-      Cypress.env('membersAPI-fundingsEndpoint')
+      Cypress.env('membersAPI_fundingsEndpoint')
 
-    //add funding with source A
     const curlStatement =
       "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
       userData.cyFundingDuplicatesUser.bearer +
       "' -d '" +
-      userData.cyFundingDuplicatesUser.curlPostTwoSourcesPath +
+      userData.cyFundingDuplicatesUser.curlPostFundingPath +
       "' -X POST '" +
       endpoint +
       "'"
@@ -25,24 +25,9 @@ describe('My orcid - funding duplicates grouping', async function () {
       //verify http response status is successful: 201
       expect(response.stdout).to.contain('HTTP/2 201')
     })
-    //add funding with source B
-    const curlStatementB =
-      "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
-      userData.cyFundingDuplicatesUser.clientSource2bearer +
-      "' -d '" +
-      userData.cyFundingDuplicatesUser.curlPostTwoSourcesPath +
-      "' -X POST '" +
-      endpoint +
-      "'"
-    cy.exec(curlStatementB).then((response) => {
-      //verify curl was executed successfully
-      expect(response.code).to.eq(0)
-      //verify http response status is successful: 201
-      expect(response.stdout).to.contain('HTTP/2 201')
-    })
   })
 
-  it('Same funding added via API by different clients is grouped', function () {
+  it('Funding added via API is grouped if record owner already has same funding', function () {
     //grab grant number from funding json file
     const grantNumber =
       jsonfile['external-ids']['external-id']['external-id-value']

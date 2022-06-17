@@ -1,21 +1,21 @@
 /// <reference types="cypress" />
 
 import userData from '../../fixtures/testing-users.fixture.json'
-const jsonfile = require('../../fixtures/funding-with-contributors.fixture.json')
+const jsonfile = require('../../fixtures/work-with-contributors.fixture.json')
 
-describe('My orcid - via API members can add fundings', async function () {
+describe('My orcid - via API members can add works', async function () {
   before(() => {
     //add a new funding via API
     const endpoint =
-      Cypress.env('membersAPI-URL') +
-      userData.cyFundingContributorsUser.oid +
-      Cypress.env('membersAPI-fundingsEndpoint')
+      Cypress.env('membersAPI_URL') +
+      userData.cyWorkContributorsUser.oid +
+      Cypress.env('membersAPI_workEndpoint')
 
     const curlStatement =
       "curl -i -H 'Content-type: application/json' -H 'Authorization: Bearer " +
-      userData.cyFundingContributorsUser.bearer +
+      userData.cyWorkContributorsUser.bearer +
       "' -d '" +
-      userData.cyFundingContributorsUser.curlPostFundingPath +
+      userData.cyWorkContributorsUser.curlPostWorkPath +
       "' -X POST '" +
       endpoint +
       "'"
@@ -27,24 +27,24 @@ describe('My orcid - via API members can add fundings', async function () {
     })
   })
 
-  it('New funding with contributors added via API is displayed correctly', function () {
+  it('New work with contributors added via API is displayed correctly', function () {
     //grab grant number from funding json file
     const grantNumber =
       jsonfile['external-ids']['external-id']['external-id-value']
 
     //Login
-    cy.programmaticallySignin('cyFundingContributorsUser') //send user key from fixture file
+    cy.programmaticallySignin('cyWorkContributorsUser') //send user key from fixture file
     cy.visit(Cypress.env('baseUrl') + `/my-orcid`)
-    cy.get('#cy-fundings').should('be.visible') //wait for page to load
+    cy.get('#cy-works').should('be.visible') //wait for page to load
 
     //verify funding was added to the account
-    cy.get('#cy-fundings').should('contain', grantNumber)
+    cy.get('#cy-works').should('contain', grantNumber)
 
-    cy.get('#cy-fundings').within(() => {
+    cy.get('#cy-works').within(() => {
       cy.contains('Show more detail').click() //REPLACE locator with id
     })
     //verify contributors info is displayed
-    cy.get('#cy-fundings').should('contain', 'Contributors') //REPLACE locator with id
+    cy.get('#cy-works').should('contain', 'Contributors') //REPLACE locator with id
   })
 
   after(() => {
