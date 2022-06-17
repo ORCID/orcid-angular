@@ -41,6 +41,7 @@
         formControlName="workType"
         (selectionChange)="$workTypeUpdateEvent.next()"
         id="cy-work-types"
+        i18n-placeholder="@@works.selectWorkType"
       >
         <mat-optgroup
           *ngFor="let workType of workTypeByCategory"
