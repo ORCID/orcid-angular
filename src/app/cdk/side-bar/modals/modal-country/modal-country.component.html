@@ -31,15 +31,18 @@
           class="orc-font-body-small"
           i18n="@@side-bar.countriesOrLocationsDescription"
         >
-          Add countries or locations to your ORCID record to highlight where you conduct your
-          research or where your research is focused. You can add as many
-          countries or locations as you want.
+          Add countries or locations to your ORCID record to highlight where you
+          conduct your research or where your research is focused. You can add
+          as many countries or locations as you want.
         </p>
       </div>
     </div>
     <ng-container *ngIf="countries?.length > 0">
       <div class="row">
-        <h3 class="col no-gutters orc-font-body" i18n="@@side-bar.myCountriesAndLocations">
+        <h3
+          class="col no-gutters orc-font-body"
+          i18n="@@side-bar.myCountriesAndLocations"
+        >
           My countries/locations
         </h3>
       </div>
@@ -128,11 +131,13 @@
           <ng-container
             *ngIf="countries?.length === 0"
             i18n="@@side-bar.addCountryOrLocation"
-          >Add a country or location</ng-container>
+            >Add a country or location</ng-container
+          >
           <ng-container
             *ngIf="countries?.length !== 0"
             i18n="@@side-bar.addAnotherCountryOrLocation"
-          >Add another country or location</ng-container>
+            >Add another country or location</ng-container
+          >
         </span>
       </a>
     </div>

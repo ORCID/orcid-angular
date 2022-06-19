@@ -8,7 +8,11 @@ import { PlatformInfoService } from '../../../platform-info'
 import { ErrorHandlerService } from '../../../../core/error-handler/error-handler.service'
 import { SnackbarService } from '../../../snackbar/snackbar.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog'
 import { Overlay } from '@angular/cdk/overlay'
 import { RecordCountriesService } from '../../../../core/record-countries/record-countries.service'
 import { HarnessLoader, parallel } from '@angular/cdk/testing'
@@ -46,7 +50,7 @@ describe('ModalCountryComponent', () => {
         PrivacySelectorModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        SideBarModule
+        SideBarModule,
       ],
       declarations: [ModalCountryComponent],
       providers: [
@@ -69,11 +73,15 @@ describe('ModalCountryComponent', () => {
     fixture = TestBed.createComponent(ModalCountryComponent)
     component = fixture.componentInstance
 
-    recordCountriesService = TestBed.inject(RecordCountriesService);
+    recordCountriesService = TestBed.inject(RecordCountriesService)
     const adressesResponse: Observable<CountriesEndpoint> = of({
-      errors: [], addresses: [], visibility: { visibility: 'PUBLIC' }
+      errors: [],
+      addresses: [],
+      visibility: { visibility: 'PUBLIC' },
     })
-    spyOn(recordCountriesService, 'getAddresses').and.returnValue(adressesResponse);
+    spyOn(recordCountriesService, 'getAddresses').and.returnValue(
+      adressesResponse
+    )
     loader = TestbedHarnessEnvironment.loader(fixture)
 
     fixture.detectChanges()
@@ -81,8 +89,13 @@ describe('ModalCountryComponent', () => {
 
   it('should create country modal with title and button with text `Add a country or location`', () => {
     expect(component).toBeTruthy()
-    expect(fixture.debugElement.nativeElement.querySelector('p').textContent).not.toBeNull()
-    expect(fixture.debugElement.query(By.css('#add-link')).childNodes[1].nativeNode.textContent).toBe('Add a country or location')
+    expect(
+      fixture.debugElement.nativeElement.querySelector('p').textContent
+    ).not.toBeNull()
+    expect(
+      fixture.debugElement.query(By.css('#add-link')).childNodes[1].nativeNode
+        .textContent
+    ).toBe('Add a country or location')
   })
 
   it('should add a country and the button text must update', () => {
@@ -91,14 +104,21 @@ describe('ModalCountryComponent', () => {
 
     fixture.detectChanges()
 
-    expect(fixture.debugElement.query(By.css('#add-link')).childNodes[1].nativeNode.textContent).toBe('Add another country or location')
+    expect(
+      fixture.debugElement.query(By.css('#add-link')).childNodes[1].nativeNode
+        .textContent
+    ).toBe('Add another country or location')
   })
 
   it('should display three countries with the next status disabled (source is not user), enabled and enabled', async () => {
     const adressesResponse: Observable<CountriesEndpoint> = of({
-      errors: [], addresses: getAddresses(), visibility: { visibility: 'PUBLIC' }
+      errors: [],
+      addresses: getAddresses(),
+      visibility: { visibility: 'PUBLIC' },
     })
-    recordCountriesService.getAddresses = jasmine.createSpy().and.returnValue(adressesResponse);
+    recordCountriesService.getAddresses = jasmine
+      .createSpy()
+      .and.returnValue(adressesResponse)
 
     component.id = '0000-0000-0000-000X'
     component.ngOnInit()
@@ -133,8 +153,8 @@ function getAddresses(): Address[] {
       source: '0000-0000-0000-000X',
       sourceName: 'Test Record',
       visibility: {
-        visibility: 'PUBLIC'
-      }
+        visibility: 'PUBLIC',
+      },
     } as Address,
     {
       putCode: '2',
@@ -142,8 +162,8 @@ function getAddresses(): Address[] {
       source: '0000-0000-0000-000Z',
       sourceName: 'ORCID',
       visibility: {
-        visibility: 'PRIVATE'
-      }
+        visibility: 'PRIVATE',
+      },
     } as Address,
   ]
 }
