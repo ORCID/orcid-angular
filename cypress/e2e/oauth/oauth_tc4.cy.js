@@ -12,20 +12,23 @@ result: user is taken to my-orcid and not to authorization screen
 */
 
 describe('OAuth cypress tests', async function () {
-
-  const authorizationLink= "https://qa.orcid.org/oauth/authorize?client_id="+userData.cyOAuth_MemberUser.clientID+"&response_type=code&scope=/activities/update%20/person/update&redirect_uri="+userData.cyOAuth_MemberUser.redirect_uri
+  const authorizationLink =
+    'https://qa.orcid.org/oauth/authorize?client_id=' +
+    userData.cyOAuth_MemberUser.clientID +
+    '&response_type=code&scope=/activities/update%20/person/update&redirect_uri=' +
+    userData.cyOAuth_MemberUser.redirect_uri
 
   before(() => {
     cy.visit(authorizationLink)
   })
-  
+
   it('TC#4 Navigating to registration instead of registering from auth link', function () {
     //navigate directly to registration page
     cy.visit(Cypress.env('registrationPage'))
 
     //Bypass the duplicated research call to avoid getting the "Is this you modal"
     cy.intercept('GET', Cypress.env('duplicatedModalEndPoint'), [])
-   
+
     //verify user is redirected to the register page
     cy.url().should('include', '/register')
 
@@ -65,13 +68,12 @@ describe('OAuth cypress tests', async function () {
     })
 
     cy.get('#step-c-register-button').click()
-    cy.wait(2000)//wait for page to load
+    cy.wait(2000) //wait for page to load
     //verify user taken to my orcid instead of authorization screen
-    cy.url().then(urlString => { 
-      cy.url().should('include', 'my-orcid?orcid=')        
+    cy.url().then((urlString) => {
+      cy.url().should('include', 'my-orcid?orcid=')
     })
   })
 
-    after(() => {
-    })
+  after(() => {})
 })
