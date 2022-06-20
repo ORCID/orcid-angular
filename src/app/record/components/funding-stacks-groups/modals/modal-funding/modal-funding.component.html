@@ -721,7 +721,7 @@
             fundingForm.get('country').touched
         }"
       >
-        <strong i18n="@@shared.country">Country</strong>
+        <strong i18n="@@shared.countryOrLocation">Country/Location</strong>
         <span class="required">*</span>
       </label>
     </div>
@@ -732,7 +732,11 @@
         class="mat-form-field-min"
         [ngClass]="{ 'two-line-hint': isMobile }"
       >
-        <mat-select #countrySelect formControlName="country">
+        <mat-select
+          placeholder="{{ ngOrcidSelectACountryOrLocation }}"
+          #countrySelect
+          formControlName="country"
+        >
           <mat-option
             *ngFor="let countryCode of countryCodes"
             [value]="countryCode.key"
