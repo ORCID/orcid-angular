@@ -27,10 +27,11 @@ describe('OAuth cypress tests - TC#1', async function () {
     cy.get('#username').clear().type(recordOwner.oid)
     cy.get('#password').clear().type(recordOwner.password)
     cy.get('#signin-button').click()
+    cy.wait(2000)
 
     //grant access
     cy.get('#authorize-button').click()
-    cy.wait(4000)
+    cy.wait(2000)
     cy.url().should('include', userData.cyOAuth_MemberUser.redirect_uri)
 
     cy.url().then((urlString) => {
@@ -54,52 +55,5 @@ describe('OAuth cypress tests - TC#1', async function () {
     })
   })
 
-  it.skip('TC#5 user is taken to institutional account linking page', function () {
-    cy.log('hola')
-    console.log('hola')
-    //visit
-    cy.visit(authorizationLink)
-    cy.get('#access-through-your-institution-button').click()
-    cy.get('input[aria-label="Institution"]').type('SAMLtest IdP') //REPLACE ID
-    cy.wait(4000)
-    cy.get('button').contains('CONTINUE').click() //REPLACE ID
-    // cy.get('#username').clear().type(recordOwner.oid)
-    // cy.get('#password').clear().type(recordOwner.password)
-    // cy.get('#signin-button').click()
-
-    //grant access
-    // cy.get('#authorize-button').click()
-    // cy.get(location).should((loc) => {
-    //     expect(loc.pathname).to.contain('https://developers.google.com/oauthplayground/?code=')
-    // })
-    //  const redirect_uri=location.pathname
-    //  const codeToExchange= redirect_uri.split('=')[1]
-    // cy.log("redirect_uri: "+redirect_uri)
-    //  cy.log("codeToExchange: "+codeToExchange)
-
-    /*
-    const curlGetAccessToken =
-    "curl -i -L -H 'Accept: application/json' --data 'client_id=" +
-    clientAPP.clientID +
-    "&client_secret=" +
-    clientAPP.clientSecret+
-    "&grant_type=authorization_code&code=" +
-    codeToExchange +
-    "' 'https://qa.orcid.org/oauth/token'"
-
-    cy.log(curlGetAccessToken)
-    cy.exec(curlGetAccessToken).then((response) => {
-        expect(response.code).to.eq(200)
-    })
-*/
-  })
-  //exchange code for access token
-  //curl -i -L -H 'Accept: application/json' --data 'client_id=APP-6RTM54FDADENEKUK&client_secret=95533ab6-3594-40a7-98b8-c8db637f2514&grant_type=authorization_code&code=uiJUg0' 'https://qa.orcid.org/oauth/token'
-  //curl -i -L -H 'Accept: application/json' --data 'client_id=APP-6RTM54FDADENEKUK&client_secret=95533ab6-3594-40a7-98b8-c8db637f2514&grant_type=authorization_code&code=eNhVKz' 'https://qa.orcid.org/oauth/token'
-
-  after(() => {
-    //log out
-    cy.get('#cy-user-info').click()
-    cy.get('#cy-signout').click({ force: true })
-  })
+  after(() => {})
 })
