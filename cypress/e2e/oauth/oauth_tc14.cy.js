@@ -16,24 +16,27 @@ result: user is taken to redirect_uri appended with authorization code
  */
 
 describe('OAuth cypress tests', async function () {
-
-  const recordOwner=userData.cyOAuth_RecordOwnerTC14
-  const authorizationLink= "https://qa.orcid.org/oauth/authorize?client_id="+userData.cyOAuth_MemberUser.clientID+"&response_type=code&scope=/activities/update%20/person/update&redirect_uri="+userData.cyOAuth_MemberUser.redirect_uri
-  const newPassword = "test1234"
+  const recordOwner = userData.cyOAuth_RecordOwnerTC14
+  const authorizationLink =
+    'https://qa.orcid.org/oauth/authorize?client_id=' +
+    userData.cyOAuth_MemberUser.clientID +
+    '&response_type=code&scope=/activities/update%20/person/update&redirect_uri=' +
+    userData.cyOAuth_MemberUser.redirect_uri
+  const newPassword = 'test1234'
 
   before(() => {
     cy.visit(authorizationLink)
   })
-  
+
   it('TC#14 reset password from auth link', function () {
     cy.wait(2000) //intentional wait for page to fully load
     cy.get('#forgot-password-button').click()
     cy.get('[formcontrolname="email"]').clear().type(recordOwner.email)
     cy.get('#cy-recover-acc-details').click()
     cy.wait(2000) //intentional wait for page to fully load
-    
+
     //use gmail api to check recovery email was sent
-     cy.task('checkInbox_from_to_subject', {
+    cy.task('checkInbox_from_to_subject', {
       options: {
         from: Cypress.env('senderResetPassword'),
         to: recordOwner.email,
@@ -67,11 +70,10 @@ describe('OAuth cypress tests', async function () {
     cy.get('#signin-button').click()
 
     //verify user taken to my orcid instead of authorization screen
-    cy.url().then(urlString => { 
-      cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')        
+    cy.url().then((urlString) => {
+      cy.url().should('contain', 'qa.orcid.org/oauth/authorize?')
     })
   })
 
-    after(() => {
-    })
+  after(() => {})
 })
