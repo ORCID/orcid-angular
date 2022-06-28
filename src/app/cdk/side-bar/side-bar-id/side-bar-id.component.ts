@@ -38,12 +38,14 @@ export class SideBarIdComponent implements OnInit, OnDestroy {
   }
 
   clipboard() {
-    const source = document.querySelector('div.id');
+    const source = document.querySelector('div.id')
     source.addEventListener('copy', (event) => {
-      const selection = document.getSelection();
-      this.window.navigator.clipboard.writeText(selection.toString().replace(/\s+/g, ''))
-      event.preventDefault();
-    });
+      const selection = document.getSelection()
+      this.window.navigator.clipboard.writeText(
+        selection.toString().replace(/\s+/g, '')
+      )
+      event.preventDefault()
+    })
   }
 
   ngOnDestroy(): void {

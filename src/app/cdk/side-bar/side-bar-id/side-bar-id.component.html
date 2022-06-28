@@ -17,14 +17,15 @@
       }"
       dir="ltr"
     >
-      <span>{{'https:' + environment.BASE_URL}}</span>
+      <span>{{ 'https:' + environment.BASE_URL }}</span>
       <span>
         <strong
           [ngClass]="{
-          'orc-font-body-large': !platform.columns12,
-          'orc-font-heading-small': platform.columns12
+            'orc-font-body-large': !platform.columns12,
+            'orc-font-heading-small': platform.columns12
           }"
-        >{{id}}</strong>
+          >{{ id }}</strong
+        >
       </span>
     </div>
   </div>
